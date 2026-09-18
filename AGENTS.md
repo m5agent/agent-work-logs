@@ -45,8 +45,10 @@
 ./scripts/publish.sh
 ```
 
-脚本先推 GitLab（完整内容），再把公开子集重建为单个提交强制推送 GitHub。公开仓库是生成产物，
-**不要**直接往 GitHub 推内容，也不要手工修改公开仓库历史。
+脚本先推 GitLab（完整内容），再把公开子集同步到公开 GitHub 并**追加**一个提交。公开仓库保留线性
+历史，不要强推或重写它——对外引用依赖固定 commit permalink。
+
+**不要**直接往公开仓库推送或手工改它的内容，下次发布会覆盖。
 
 发布后确认：GitLab 侧 `HEAD...origin/main` 为 `0 0`；公开仓库只含 `records/`、`docs/`、`templates/`
 和根文件，且不含任何 `internal/` 内容。

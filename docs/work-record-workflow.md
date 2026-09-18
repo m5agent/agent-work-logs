@@ -122,7 +122,7 @@ records/<target-slug>/<YYYY-MM-DD>-<topic>/
 ./scripts/publish.sh
 ```
 
-脚本把完整内容推到内部 GitLab，再把公开子集重建为单个提交强制推送公开 GitHub。完成条件：
+脚本把完整内容推到内部 GitLab，再把公开子集同步到公开 GitHub 并追加提交（保留线性历史）。完成条件：
 
 - 本地工作区干净；
 - GitLab 侧 `HEAD...origin/main` 为 `0 0`；
