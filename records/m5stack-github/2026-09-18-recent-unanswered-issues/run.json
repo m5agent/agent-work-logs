@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "M5Stack GitHub 公开仓库近期未回复 Issue 盘点与可回复性评估",
+  "source": {
+    "issue": "multiple public GitHub issues in the m5stack organization",
+    "pull_request": "",
+    "repository": "github.com/m5stack public repositories",
+    "base_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "GitHub public API via gh CLI plus local read-only shallow clones",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "github_open_issue_snapshot",
+      "status": "PASS",
+      "evidence": "org:m5stack is:issue is:open returned 618 issues; 241 issues have zero comments; snapshot 2026-09-18 CST"
+    },
+    {
+      "name": "recent_zero_comment_triage",
+      "status": "PASS",
+      "evidence": "created in last 30 days: 10; 30-60 days: 9; 60-90 days: 4"
+    },
+    {
+      "name": "source_level_verification",
+      "status": "REVIEW",
+      "evidence": "9 issues checked against public repository HEAD; file/line references and commit SHAs recorded in report.md"
+    },
+    {
+      "name": "device_or_build_verification",
+      "status": "NOT RUN",
+      "evidence": "no hardware, ESP-IDF, Arduino or ESPHome build environment configured for this task"
+    },
+    {
+      "name": "issue_reply_publication",
+      "status": "NOT RUN",
+      "evidence": "no public comment posted; requires separate authorization and a permalink to this record"
+    },
+    {
+      "name": "m5unit_8encoder_runtime_reproduction",
+      "status": "PASS",
+      "evidence": "host harness on real UNIT_8ENCODER.cpp: upstream 160 Hz, fixed 100000 Hz; unchecked requestFrom yields -1"
+    },
+    {
+      "name": "stackchan_bsp_tsan_race_reproduction",
+      "status": "PASS",
+      "evidence": "real motion.cpp/servo.cpp under TSan: 6 races upstream, 0 with the two getters locked"
+    },
+    {
+      "name": "esphome_lp5562_compiler_warning_reproduction",
+      "status": "PASS",
+      "evidence": "real lp5562.cpp: -Wuninitialized at line 61; config_val = 0 removes the warning"
+    },
+    {
+      "name": "stackchan_dependency_fetch",
+      "status": "PASS",
+      "evidence": "fetch_repos.py fetched and pinned all six dependencies and applied the xiaozhi patch"
+    },
+    {
+      "name": "esp_idf_scan_method_header",
+      "status": "PASS",
+      "evidence": "ESP-IDF v5.5.4 header defines WIFI_FAST_SCAN = 0"
+    },
+    {
+      "name": "idf_build",
+      "status": "NOT RUN",
+      "evidence": "no ESP-IDF toolchain on this host"
+    },
+    {
+      "name": "arduino_toolchain_build",
+      "status": "NOT RUN",
+      "evidence": "Arduino toolchain build was not available in this environment"
+    },
+    {
+      "name": "hardware_reproduction",
+      "status": "NOT RUN",
+      "evidence": "no DUT configured for this task"
+    },
+    {
+      "name": "public_issue_replies",
+      "status": "PASS",
+      "evidence": "5 first-round comments and 5 verification follow-up comments posted and read back"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/summary.md",
+      "description": "query scope, snapshot counts, recent zero-comment issue list and source verification notes"
+    }
+  ],
+  "notes": [
+    "M5Unified issue 354 was excluded because m5agent already replied on 2026-09-17; the zero-comment definition in this record means no comments at all.",
+    "Private repositories were not inspected.",
+    "All source references point to public repositories and public commit SHAs only.",
+    "Published edition: this workspace copy was synchronised with the redacted public record after manual review, so re-running the publish step is idempotent."
+  ],
+  "publish": "public"
+}
