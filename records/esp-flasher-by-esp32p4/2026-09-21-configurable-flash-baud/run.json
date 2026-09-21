@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-21",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "ESP32-P4 Flasher configurable DUT flash baud",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "esp-flasher-by-esp32p4",
+    "base_commit": "e30c0988232cbba7cf45445811344a540ea04809",
+    "change_commit": "90c3add18542bb1679efe7d2b9815f3c8bad05ec"
+  },
+  "hardware": {
+    "target": "ESP32-P4 PoE flasher control plane; downstream DUT not exercised"
+  },
+  "firmware": {
+    "version": "0.2.10",
+    "build_idf": "v5.5.4",
+    "app_bin_size": 1211648,
+    "app_bin_sha256": "674f893cddb5ed7328eb97539c19c7a533201464457eccd94a8b5cd9d4b7f8dc"
+  },
+  "execution": {
+    "environment": "Apple Silicon macOS, ESP-IDF Docker v5.5.4",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "level": "build",
+      "status": "PASS",
+      "detail": "esp32p4 application build completed"
+    },
+    {
+      "level": "data_behavior",
+      "status": "PASS",
+      "detail": "default, override, target default, and invalid range tests passed"
+    },
+    {
+      "level": "transport",
+      "status": "NOT RUN",
+      "detail": "no real target was flashed at 1500000 baud"
+    },
+    {
+      "level": "device_response",
+      "status": "NOT RUN",
+      "detail": "no real DUT ROM loader response or post-flash boot was observed"
+    }
+  ],
+  "evidence": [
+    "evidence/build-summary.md",
+    "evidence/center-tests-summary.txt",
+    "evidence/behavior-contract.md",
+    "patches/0001-add-configurable-flash-baud.patch"
+  ],
+  "notes": [
+    "Default flash baud is 1500000 after 115200 ROM sync.",
+    "Fallback order is 1500000 -> 921600 -> 460800 -> 230400 -> 115200.",
+    "No credentials, internal endpoints, device IDs, or MAC addresses are included."
+  ]
+}

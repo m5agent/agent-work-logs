@@ -47,6 +47,7 @@
 ## 对外记录索引
 
 | 2026-09-18 | m5stack 公开仓库 | 公开仓库零评论 Issue 盘点与可回复性评估 | REVIEW（盘点）+ PARTIAL（5 条 host/编译级闭合验证） | [查看](records/m5stack-github/2026-09-18-recent-unanswered-issues/) |
+| 2026-09-21 | ESP32-P4 Flasher | 可配置 DUT 烧录波特率，默认 1.5 Mbaud | PARTIAL（构建/中心测试通过；实机烧录未执行） | [查看](records/esp-flasher-by-esp32p4/2026-09-21-configurable-flash-baud/) |
 
 ## 目录结构
 

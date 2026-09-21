@@ -1,0 +1,13 @@
+Center Server regression summary
+Date: 2026-09-21
+Command: center_server/.venv/bin/python -B -m unittest discover -s center_server/tests -t center_server -v
+Result: OK
+Tests run: 84
+Failures: 0
+Errors: 0
+
+Covered flash-baud behavior:
+- default flash task uses 1500000 baud
+- firmware.flash_baud overrides target default
+- explicit flash plan without baud uses target profile default
+- out-of-range firmware.flash_baud is rejected with HTTP 422

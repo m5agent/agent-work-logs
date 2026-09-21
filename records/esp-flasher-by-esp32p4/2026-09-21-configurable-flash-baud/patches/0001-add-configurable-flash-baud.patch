@@ -1,0 +1,418 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a87fe8b..8b20e47 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6 +6 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+-set(PROJECT_VER "0.2.9")
++set(PROJECT_VER "0.2.10")
+diff --git a/center_server/README.md b/center_server/README.md
+index 71f16bb..2a83e2b 100644
+--- a/center_server/README.md
++++ b/center_server/README.md
+@@ -116,0 +117,2 @@
++| `CENTER_FLASH_BAUD` | `1500000` | DUT 烧录默认速率；仅在 task 明确覆盖时改变 |
++| `CENTER_FLASH_BAUD_MIN` / `CENTER_FLASH_BAUD_MAX` | `9600` / `3000000` | 可接受的 DUT 烧录速率范围 |
+@@ -140 +142 @@ Web 使用 `#/overview`、`#/nodes/{id}`、`#/ota`、`#/admin` hash route。根
+-- 配置编辑：支持 PoE 显示名、target 名称、Profile、chip、flash 地址、串口波特率、可选接线/外设元数据、备注和扩展 JSON；切换节点时 flash 地址与串口波特率会成为任务控件默认值，有“待改区”，自动刷新不会覆盖未保存输入。
++- 配置编辑：支持 PoE 显示名、target 名称、Profile、chip、flash 地址、烧录波特率、Monitor 波特率、可选接线/外设元数据、备注和扩展 JSON；切换节点时 flash 地址与烧录波特率会成为任务控件默认值，有“待改区”，自动刷新不会覆盖未保存输入。烧录默认 1,500,000 baud，旧设备可在 target 或单次 task 中显式降到 115200/460800/921600。
+diff --git a/center_server/center_server/__init__.py b/center_server/center_server/__init__.py
+index 8e03855..4afb24d 100644
+--- a/center_server/center_server/__init__.py
++++ b/center_server/center_server/__init__.py
+@@ -5 +5 @@ __all__ = ["__version__"]
+-__version__ = "0.1.6"
++__version__ = "0.1.7"
+diff --git a/center_server/center_server/main.py b/center_server/center_server/main.py
+index f4867d8..6edfacf 100644
+--- a/center_server/center_server/main.py
++++ b/center_server/center_server/main.py
+@@ -87,0 +88,3 @@ AUTO_MONITOR_DEFAULT_BAUD = int(os.environ.get("CENTER_AUTO_MONITOR_BAUD", "1152
++FLASH_BAUD_DEFAULT = int(os.environ.get("CENTER_FLASH_BAUD", "1500000"))
++FLASH_BAUD_MIN = int(os.environ.get("CENTER_FLASH_BAUD_MIN", "9600"))
++FLASH_BAUD_MAX = int(os.environ.get("CENTER_FLASH_BAUD_MAX", "3000000"))
+@@ -667,0 +671,41 @@ def camera_preview_step_for_serial_evidence(
++def validate_flash_baud(value: Any, source: str) -> int:
++    if isinstance(value, bool):
++        raise HTTPException(status_code=422, detail=f"{source} must be an integer baud rate")
++    try:
++        baud = int(value)
++    except (TypeError, ValueError) as exc:
++        raise HTTPException(status_code=422, detail=f"{source} must be an integer baud rate") from exc
++    if baud != value and not (isinstance(value, float) and value.is_integer()):
++        raise HTTPException(status_code=422, detail=f"{source} must be an integer baud rate")
++    if baud < FLASH_BAUD_MIN or baud > FLASH_BAUD_MAX:
++        raise HTTPException(
++            status_code=422,
++            detail=f"{source} must be between {FLASH_BAUD_MIN} and {FLASH_BAUD_MAX}",
++        )
++    return baud
++
++
++def flash_baud_for_task(payload: dict[str, Any], node: dict[str, Any]) -> int:
++    firmware = payload.get("firmware") or {}
++    if isinstance(firmware, dict) and firmware.get("flash_baud") is not None:
++        return validate_flash_baud(firmware["flash_baud"], "firmware.flash_baud")
++    target = payload.get("target_override") or node.get("target") or {}
++    if isinstance(target, dict) and target.get("flash_baud") is not None:
++        return validate_flash_baud(target["flash_baud"], "target.flash_baud")
++    return validate_flash_baud(FLASH_BAUD_DEFAULT, "CENTER_FLASH_BAUD")
++
++
++def apply_flash_baud(plan: list[dict[str, Any]], payload: dict[str, Any], node: dict[str, Any]) -> list[dict[str, Any]]:
++    default_baud = flash_baud_for_task(payload, node)
++    for index, step in enumerate(plan):
++        if step.get("op") != "flash":
++            continue
++        args = dict(step.get("args") or {})
++        if args.get("baud") is None:
++            args["baud"] = default_baud
++        else:
++            args["baud"] = validate_flash_baud(args["baud"], f"plan[{index}].args.baud")
++        step["args"] = args
++    return plan
++
++
+@@ -717 +761 @@ def build_task_plan(payload: dict[str, Any], node: dict[str, Any], base_url: str
+-        plan = normalize_task_plan(payload["plan"])
++        plan = apply_flash_baud(normalize_task_plan(payload["plan"]), payload, node)
+@@ -757 +801,2 @@ def build_task_plan(payload: dict[str, Any], node: dict[str, Any], base_url: str
+-    plan = ensure_run_log_capture(normalize_task_plan(plan), payload, node)
++    plan = apply_flash_baud(normalize_task_plan(plan), payload, node)
++    plan = ensure_run_log_capture(plan, payload, node)
+diff --git a/center_server/center_server/schemas.py b/center_server/center_server/schemas.py
+index 729fa35..e62e5a3 100644
+--- a/center_server/center_server/schemas.py
++++ b/center_server/center_server/schemas.py
+@@ -65,0 +66,6 @@ class TargetProfile(BaseModel):
++    flash_baud: int = Field(
++        default=1500000,
++        ge=9600,
++        le=3000000,
++        description="DUT ROM-loader/flash baud after the 115200 sync. Lower it only for legacy-device stability.",
++    )
+diff --git a/center_server/tests/test_control_plane.py b/center_server/tests/test_control_plane.py
+index 3d6e42c..424f43a 100644
+--- a/center_server/tests/test_control_plane.py
++++ b/center_server/tests/test_control_plane.py
+@@ -95,0 +96 @@ class ControlPlaneTest(unittest.TestCase):
++        target = extra.pop("target", {"profile_name": "audit", "serial_baud": 115200})
+@@ -126 +127 @@ class ControlPlaneTest(unittest.TestCase):
+-                target={"profile_name": "audit", "serial_baud": 115200},
++                target=target,
+@@ -1020,0 +1022,61 @@ class ControlPlaneTest(unittest.TestCase):
++    def test_flash_task_defaults_to_1_5m_baud(self) -> None:
++        self.register("fast-flash")
++
++        task = self.create_flash_task("fast-flash", run_duration_ms=0)
++        flash = next(step for step in task.request["plan"] if step["op"] == "flash")
++        self.assertEqual(1500000, flash["args"]["baud"])
++
++    def test_firmware_flash_baud_overrides_target_default(self) -> None:
++        self.register_version(
++            "slow-flash",
++            None,
++            "boot-slow-flash",
++            target={"profile_name": "legacy", "flash_baud": 460800},
++        )
++
++        task = self.create_flash_task(
++            "slow-flash",
++            firmware={
++                "url": "http://example.invalid/fw.bin",
++                "reboot": True,
++                "flash_baud": 115200,
++            },
++            run_duration_ms=0,
++        )
++        flash = next(step for step in task.request["plan"] if step["op"] == "flash")
++        self.assertEqual(115200, flash["args"]["baud"])
++
++    def test_explicit_plan_uses_target_flash_baud_default(self) -> None:
++        self.register_version(
++            "legacy-plan",
++            None,
++            "boot-legacy-plan",
++            target={"profile_name": "legacy", "flash_baud": 230400},
++        )
++
++        task = self.create_flash_task(
++            "legacy-plan",
++            task_type="manual_plan",
++            plan=[
++                {"op": "flash", "args": {"url": "http://example.invalid/fw.bin"}},
++            ],
++            run_duration_ms=0,
++        )
++        flash = next(step for step in task.request["plan"] if step["op"] == "flash")
++        self.assertEqual(230400, flash["args"]["baud"])
++
++    def test_flash_baud_out_of_range_is_rejected(self) -> None:
++        self.register("bad-baud")
++
++        with self.assertRaises(HTTPException) as raised:
++            self.create_flash_task(
++                "bad-baud",
++                firmware={
++                    "url": "http://example.invalid/fw.bin",
++                    "reboot": True,
++                    "flash_baud": 4000000,
++                },
++                run_duration_ms=0,
++            )
++        self.assertEqual(422, raised.exception.status_code)
++
+diff --git a/center_server/web/app.js b/center_server/web/app.js
+index c8bb5a2..d25b4b9 100644
+--- a/center_server/web/app.js
++++ b/center_server/web/app.js
+@@ -647,0 +648 @@ function renderSelectedNode(node, task) {
++    $("flashBaud").value = target.flash_baud ?? 1500000;
+@@ -657 +658,2 @@ function renderSelectedNode(node, task) {
+-    ["波特率", escapeHtml(target.serial_baud ?? 115200)],
++    ["烧录波特率", escapeHtml(target.flash_baud ?? 1500000)],
++    ["Monitor 波特率", escapeHtml(target.serial_baud ?? 115200)],
+@@ -674,0 +677 @@ function formValuesFromNode(node) {
++    flash_baud: target.flash_baud ?? 1500000,
+@@ -691,0 +695 @@ function readConfigForm() {
++    flash_baud: form.flash_baud.value,
+@@ -881,0 +886 @@ async function startTaskWithArtifact(artifactId) {
++  const flashBaud = Number($("flashBaud").value || 1500000);
+@@ -892 +897 @@ async function startTaskWithArtifact(artifactId) {
+-      firmware: { address, reboot: true },
++      firmware: { address, reboot: true, flash_baud: flashBaud },
+@@ -1227,0 +1233 @@ function bindActions() {
++      flash_baud: Number(form.flash_baud.value || target.flash_baud || 1500000),
+diff --git a/center_server/web/index.html b/center_server/web/index.html
+index d28f5c6..c5145c3 100644
+--- a/center_server/web/index.html
++++ b/center_server/web/index.html
+@@ -334 +334 @@
+-                <label>串口波特率<input name="serial_baud" type="number" value="115200"></label>
++                <label>烧录波特率<input name="flash_baud" type="number" min="9600" max="3000000" value="1500000"></label>
+@@ -337,0 +338,3 @@
++                <label>Monitor 波特率<input name="serial_baud" type="number" value="115200"></label>
++              </div>
++              <div class="form-row">
+@@ -360 +363 @@
+-                <label>串口检查 pattern<input id="checkPattern" placeholder="Counter:"></label>
++                <label>烧录波特率<input id="flashBaud" type="number" min="9600" max="3000000" value="1500000"></label>
+@@ -362,0 +366 @@
++                <label>串口检查 pattern<input id="checkPattern" placeholder="Counter:"></label>
+@@ -364 +367,0 @@
+-                <span class="hint">任务完成烧录/检查后仍保持忙碌；0 表示立即释放。</span>
+diff --git a/docs/CENTER_SERVER_API.md b/docs/CENTER_SERVER_API.md
+index 9e9d186..3c0476e 100644
+--- a/docs/CENTER_SERVER_API.md
++++ b/docs/CENTER_SERVER_API.md
+@@ -82,0 +83 @@ flowchart LR
++  "flash_baud": 1500000,
+@@ -103 +104,2 @@ flowchart LR
+-- `serial_baud` 用于自动 monitor 和串口检查；`flash_address` 会作为 Web 切换到该节点后的烧录任务默认地址。
++- `flash_baud` 是 ROM loader 同步后的 DUT 烧录速率，默认 `1500000`。旧设备出现 `flash_baud_failed`、校验失败或烧录不稳定时，可按 `1500000 -> 921600 -> 460800 -> 230400 -> 115200` 逐级降低；`serial_baud` 只用于自动 monitor 和串口检查，不是烧录速率。
++- `flash_address` 会作为 Web 切换到该节点后的烧录任务默认地址。
+@@ -153 +155 @@ AI/脚本优先调用高层 API，不要直接拼底层 `monitor_*` / `flash` co
+-| 查看/更新被测设备信息 | `GET /api/v1/nodes/{node_id}/config` / `PUT /api/v1/nodes/{node_id}/config` | target 可包含 `display_name/chip/flash_address/serial_baud/connection/peripherals/notes`。 |
++| 查看/更新被测设备信息 | `GET /api/v1/nodes/{node_id}/config` / `PUT /api/v1/nodes/{node_id}/config` | target 可包含 `display_name/chip/flash_address/flash_baud/serial_baud/connection/peripherals/notes`。 |
+@@ -294,0 +297 @@ POST /api/v1/nodes/register
++    "flash_baud": 1500000,
+@@ -557,0 +561 @@ PUT /api/v1/nodes/{node_id}/config
++    "flash_baud": 1500000,
+@@ -1036 +1040,2 @@ POST /api/v1/tasks
+-    "reboot": true
++    "reboot": true,
++    "flash_baud": 1500000
+@@ -1053 +1058,2 @@ POST /api/v1/tasks
+-    "reboot": true
++    "reboot": true,
++    "flash_baud": 1500000
+@@ -1071 +1077 @@ POST /api/v1/tasks
+-烧录命令内部固定使用 G10/G11 控制目标进入 ROM 下载模式和烧录后的普通重启，loader 数据走 UART1 TX=G12/RX=G13。外部 Agent 不需要传入下载模式参数，也不需要操作 DTR/RTS。
++烧录命令内部固定使用 G10/G11 控制目标进入 ROM 下载模式和烧录后的普通重启，loader 数据走 UART1 TX=G12/RX=G13。外部 Agent 不需要传入下载模式参数，也不需要操作 DTR/RTS。ROM loader 先在 115200 同步，再切到 target 的 `flash_baud`（默认 1500000）传输镜像；单次任务可用 `firmware.flash_baud` 覆盖。旧设备不稳定时不要反复用高速率重试，按 `1500000 -> 921600 -> 460800 -> 230400 -> 115200` 逐级降低，并把最终稳定速率写回 target 备注。
+@@ -1116 +1122,2 @@ POST /api/v1/tasks
+-        "reboot": true
++        "reboot": true,
++        "baud": 1500000
+diff --git a/main/app_cmd.c b/main/app_cmd.c
+index f9427b7..2644f46 100644
+--- a/main/app_cmd.c
++++ b/main/app_cmd.c
+@@ -346,0 +347 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
++    cJSON *baud_n = cJSON_GetObjectItemCaseSensitive(args, "baud");
+@@ -360,0 +362,16 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
++    uint32_t    baud       = APP_FLASH_BAUD_DEFAULT;
++    if (cJSON_IsNumber(baud_n)) {
++        double raw_baud = baud_n->valuedouble;
++        if (raw_baud < (double)APP_FLASH_BAUD_MIN ||
++            raw_baud > (double)APP_FLASH_BAUD_MAX ||
++            (double)(uint32_t)raw_baud != raw_baud) {
++            *err_code = "bad_args";
++            *err_msg  = "baud must be an integer from 9600 to 3000000";
++            return NULL;
++        }
++        baud = (uint32_t)raw_baud;
++    } else if (baud_n && !cJSON_IsNull(baud_n)) {
++        *err_code = "bad_args";
++        *err_msg  = "baud must be a number";
++        return NULL;
++    }
+@@ -422 +439 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
+-    e = app_flasher_flash_buffer(address, buf, buf_len, reboot,
++    e = app_flasher_flash_buffer(address, buf, buf_len, baud, reboot,
+@@ -428,5 +445,8 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
+-        *err_code = (e == ESP_ERR_INVALID_CRC)   ? "flash_md5_mismatch"
+-                  : (e == ESP_ERR_INVALID_STATE) ? "connect_failed"
+-                  : (e == ESP_ERR_NOT_FOUND)     ? "connect_failed"
+-                  : (e == ESP_ERR_TIMEOUT)       ? "connect_failed"
+-                                                 : "flash_io";
++        *err_code = (e == ESP_ERR_INVALID_CRC)      ? "flash_md5_mismatch"
++                  : (e == ESP_ERR_INVALID_STATE)    ? "connect_failed"
++                  : (e == ESP_ERR_NOT_FOUND)        ? "connect_failed"
++                  : (e == ESP_ERR_TIMEOUT)          ? "connect_failed"
++                  : (e == ESP_ERR_NOT_SUPPORTED)    ? "flash_baud_unsupported"
++                  : (e == ESP_ERR_INVALID_ARG)      ? "flash_baud_invalid"
++                  : (e == ESP_ERR_INVALID_RESPONSE) ? "flash_baud_failed"
++                                                    : "flash_io";
+@@ -433,0 +454,2 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
++        ESP_LOGE(TAG, "[%s] failed with baud=%" PRIu32 ": %s",
++                 s_prog.id, baud, esp_err_to_name(e));
+@@ -437,2 +459,2 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
+-    ESP_LOGI(TAG, "[%s] done: %u B, download %.1fs, flash %.1fs, sha=%s",
+-             s_prog.id, (unsigned)buf_len,
++    ESP_LOGI(TAG, "[%s] done: %u B, baud=%" PRIu32 ", download %.1fs, flash %.1fs, sha=%s",
++             s_prog.id, (unsigned)buf_len, app_flasher_session_baud(),
+@@ -446,0 +469 @@ static cJSON *op_flash(cJSON *args, const char **err_code, const char **err_msg)
++    cJSON_AddNumberToObject(d, "baud",         (double)app_flasher_session_baud());
+diff --git a/main/app_flasher.c b/main/app_flasher.c
+index 14df958..3f31f4a 100644
+--- a/main/app_flasher.c
++++ b/main/app_flasher.c
+@@ -20,0 +21 @@ static bool         s_last_reboot_ok; /* result of the last requested target res
++static uint32_t     s_session_baud = 115200u; /* actual loader/host rate */
+@@ -213,0 +215 @@ esp_err_t app_flasher_session_begin(app_flasher_target_info_t *out)
++    s_session_baud = 115200u;
+@@ -217,0 +220 @@ esp_err_t app_flasher_session_begin(app_flasher_target_info_t *out)
++        out->baud = s_session_baud;
+@@ -254,0 +258,31 @@ static esp_err_t flasher_reboot_target(void)
++static bool flash_baud_valid(uint32_t baud)
++{
++    return baud >= APP_FLASH_BAUD_MIN && baud <= APP_FLASH_BAUD_MAX;
++}
++
++uint32_t app_flasher_session_baud(void)
++{
++    return s_session_baud;
++}
++
++esp_err_t app_flasher_session_set_baud(uint32_t baud)
++{
++    if (!flash_baud_valid(baud)) return ESP_ERR_INVALID_ARG;
++    if (!s_session_open || !s_io) return ESP_ERR_INVALID_STATE;
++    if (baud == s_session_baud) return ESP_OK;
++
++    esp_loader_t *loader = target_io_loader(s_io);
++    if (!loader) return ESP_ERR_INVALID_STATE;
++
++    ESP_LOGI(TAG, "changing loader rate: %" PRIu32 " -> %" PRIu32,
++             s_session_baud, baud);
++    esp_loader_error_t err = esp_loader_change_transmission_rate(loader, baud);
++    if (err != ESP_LOADER_SUCCESS) {
++        ESP_LOGE(TAG, "change loader rate to %" PRIu32 " failed: %d", baud, err);
++        return (err == ESP_LOADER_ERROR_UNSUPPORTED_FUNC) ? ESP_ERR_NOT_SUPPORTED
++                                                         : ESP_ERR_INVALID_RESPONSE;
++    }
++    s_session_baud = baud;
++    return ESP_OK;
++}
++
+@@ -267,0 +302 @@ esp_err_t app_flasher_session_end(bool reboot)
++    s_session_baud = 115200u;
+@@ -288 +323,2 @@ esp_err_t app_flasher_write_image(const uint8_t *data, size_t size,
+-                                  uint32_t address, bool reboot_after)
++                                  uint32_t address, uint32_t baud,
++                                  bool reboot_after)
+@@ -298 +334,6 @@ esp_err_t app_flasher_write_image(const uint8_t *data, size_t size,
+-    ESP_LOGI(TAG, "Flashing %u B at 0x%06" PRIx32, (unsigned)size, address);
++    if (baud == 0) baud = APP_FLASH_BAUD_DEFAULT;
++    esp_err_t baud_err = app_flasher_session_set_baud(baud);
++    if (baud_err != ESP_OK) return baud_err;
++
++    ESP_LOGI(TAG, "Flashing %u B at 0x%06" PRIx32 " (baud=%" PRIu32 ")",
++             (unsigned)size, address, s_session_baud);
+@@ -343,0 +385 @@ esp_err_t app_flasher_flash_buffer(uint32_t address,
++                                   uint32_t baud,
+@@ -360,2 +402,11 @@ esp_err_t app_flasher_flash_buffer(uint32_t address,
+-    ESP_LOGI(TAG, "Flashing %u B at 0x%06" PRIx32 " (target=%s)",
+-             (unsigned)size, address, app_flasher_chip_name(info.chip));
++    if (baud == 0) baud = APP_FLASH_BAUD_DEFAULT;
++    e = app_flasher_session_set_baud(baud);
++    if (e != ESP_OK) {
++        ESP_LOGE(TAG, "cannot use flash baud %" PRIu32 ": %s",
++                 baud, esp_err_to_name(e));
++        app_flasher_session_end(false);
++        return e;
++    }
++
++    ESP_LOGI(TAG, "Flashing %u B at 0x%06" PRIx32 " (target=%s, baud=%" PRIu32 ")",
++             (unsigned)size, address, app_flasher_chip_name(info.chip), s_session_baud);
+diff --git a/main/app_flasher.h b/main/app_flasher.h
+index 3c78126..f5a7ea5 100644
+--- a/main/app_flasher.h
++++ b/main/app_flasher.h
+@@ -9,0 +10,7 @@
++/* Fast path for factory images. ROM sync always starts at 115200; the
++ * requested rate is switched after connect so old targets can be retried
++ * explicitly at a lower rate. */
++#define APP_FLASH_BAUD_DEFAULT  1500000u
++#define APP_FLASH_BAUD_MIN         9600u
++#define APP_FLASH_BAUD_MAX      3000000u
++
+@@ -24,0 +32 @@ typedef struct {
++    uint32_t      baud;                /* actual session baud */
+@@ -49 +57,2 @@ esp_err_t app_flasher_write_image(const uint8_t *data, size_t size,
+-                                  uint32_t address, bool reboot_after);
++                                  uint32_t address, uint32_t baud,
++                                  bool reboot_after);
+@@ -67,0 +77 @@ esp_err_t app_flasher_flash_buffer(uint32_t address,
++                                   uint32_t baud,
+@@ -79,0 +90,5 @@ esp_err_t app_flasher_session_end(bool reboot);
++/** Change the active loader session rate after connect. 115200 is the ROM
++ *  sync/fallback rate; rates outside the supported range are rejected. */
++esp_err_t app_flasher_session_set_baud(uint32_t baud);
++uint32_t app_flasher_session_baud(void);
++
+diff --git a/skill/device-test-center/SKILL.md b/skill/device-test-center/SKILL.md
+index 62233fa..9a29380 100644
+--- a/skill/device-test-center/SKILL.md
++++ b/skill/device-test-center/SKILL.md
+@@ -203 +203,3 @@ Create a high-level task. Do not manually close the automatic serial monitor;
+-the task handles monitor and camera mutual exclusion.
++the task handles monitor and camera mutual exclusion. DUT flashing defaults to
++1,500,000 baud. The ROM loader still synchronises at 115200 first, then switches
++to the requested rate for the image transfer.
+@@ -217 +219 @@ Flash and check a serial marker:
+-  "firmware": {"address":0,"reboot":true},
++  "firmware": {"address":0,"reboot":true,"flash_baud":1500000},
+@@ -231,0 +234,18 @@ profile or the firmware packaging explicitly requires it.
++Use the selected node's `target.flash_baud` as the task default. Override it per
++task with `firmware.flash_baud` (number, 9600-3000000) when the target is known
++to be unstable at the default. An explicit `flash` plan uses
++`args.baud` instead:
++
++```json
++{"op":"flash","args":{"url":"http://center/api/v1/artifacts/fw-x/download","address":0,"reboot":true,"baud":115200}}
++```
++
++If the default rate fails, do not hammer the same speed. Preserve the failed
++task/command/error, then retry once at the next lower known rate:
++`1500000 -> 921600 -> 460800 -> 230400 -> 115200`. Use the lowest rate proven
++stable by a completed flash and verification/hash result. Reuse 115200 only as
++a compatibility fallback, not as the preferred default. When a target has been
++proven to need a lower rate, record that in the selected node's
++`target.flash_baud` or notes so future agents do not repeat the slow failing
++attempt.
++
+@@ -480,0 +501 @@ for the high-level task body, size limit, result fields, and large-read boundary
++| `flash_baud_failed` / `flash_baud_unsupported` | Retry at a lower `firmware.flash_baud` or explicit `flash.args.baud`; do not repeat the same failing speed. |
+@@ -489 +510 @@ Always report:
+-2. Artifact name, ID, SHA256, and flash address when flashing.
++2. Artifact name, ID, SHA256, flash address, and requested/actual flash baud when flashing.
