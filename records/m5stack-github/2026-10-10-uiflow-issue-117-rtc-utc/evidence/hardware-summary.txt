@@ -1,0 +1,40 @@
+Hardware verification on StopWatch (RX8130), TZ = JST+9 / UTC+9
+
+Baseline artifact:
+  fw-1b04a056a6a44d80
+  uiflow2-stopwatch-v2.5.3-uart-repl.bin
+  SHA256 61c3a52389fb0753a196fed189a2ac7dbae882ca88827106fdaf6317990d6868
+  Base d3277da229b914aa6a3707ab68730719fa1b75f0
+
+Baseline flash task: PASS
+Baseline REPL probe: PASS, stdout BASELINE_REPL_OK
+
+Baseline RTC result:
+  after machine.RTC().datetime((2026,10,9,0,11,15,0,0)):
+    system = 2026-10-09 11:15:00 UTC
+    RX8130 0x10..0x16 = 00 15 11 20 09 10 26
+  after M5.begin():
+    system = 2026-10-09 11:15:00 UTC
+    RX8130 0x10..0x16 = 00 15 20 20 09 10 26
+  Result: RTC hour changed from 0x11 (11 UTC) to 0x20 (20 local, UTC+9).
+
+Fixed app artifact:
+  fw-4b88c0f7fb884842
+  uiflow2-stopwatch-v2.5.3-gmtime-app.bin
+  Size 6427504
+  SHA256 5f08c183b91fe9ba88208717b30b8a62526d7952d97699916a794a1ac040c08f
+  Base 69846518
+
+Fixed app flash task: PASS
+
+Fixed RTC result:
+  after machine.RTC().datetime((2026,10,9,0,4,11,15,0)):
+    system = 2026-10-09 04:11:15 UTC
+    RX8130 0x10..0x16 = 15 11 04 20 09 10 26
+  after M5.begin():
+    system = 2026-10-09 04:11:15 UTC
+    RX8130 0x10..0x16 = 15 11 04 20 09 10 26
+  after a second M5.begin():
+    system = 2026-10-09 04:11:15 UTC
+    RX8130 0x10..0x16 = 15 11 04 20 09 10 26
+  Result: system time and RTC remain UTC across repeated M5.begin() calls.

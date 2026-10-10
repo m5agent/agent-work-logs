@@ -1,0 +1,17 @@
+Host model of the rtc_sync() time conversion, TZ = UTC+9
+
+Legacy localtime_r path:
+  boot 1: system=2026-10-09 17:11:15 UTC, rtc=2026-10-10 02:11:15 UTC
+  boot 2: system=2026-10-10 02:11:15 UTC, rtc=2026-10-10 11:11:15 UTC
+  boot 3: system=2026-10-10 11:11:15 UTC, rtc=2026-10-10 20:11:15 UTC
+  PASS: legacy localtime_r logic reproduces +9h drift on each reboot
+
+Fixed gmtime_r path:
+  boot 1: system=2026-10-09 17:11:15 UTC, rtc=2026-10-09 17:11:15 UTC
+  boot 2: system=2026-10-09 17:11:15 UTC, rtc=2026-10-09 17:11:15 UTC
+  boot 3: system=2026-10-09 17:11:15 UTC, rtc=2026-10-09 17:11:15 UTC
+  PASS: UTC RTC sync keeps the clock stable across reboots
+
+Source assertion:
+  mpy_m5unified.cpp: gmtime_r(&tv.tv_sec, &now)
+  mpy_m5unified.cpp: // get UTC time and sync to RTC IC

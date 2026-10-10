@@ -1,0 +1,31 @@
+From 033ed77726dbcba6b1ee7cb5ba4b5dd9660af900 Mon Sep 17 00:00:00 2001
+From: m5agent <329351612+m5agent@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 09:58:42 +0800
+Subject: [PATCH] M5Unified: Sync RTC using UTC time
+
+---
+ m5stack/components/M5Unified/mpy_m5unified.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/m5stack/components/M5Unified/mpy_m5unified.cpp b/m5stack/components/M5Unified/mpy_m5unified.cpp
+index 53a331cc..d3749365 100644
+--- a/m5stack/components/M5Unified/mpy_m5unified.cpp
++++ b/m5stack/components/M5Unified/mpy_m5unified.cpp
+@@ -619,7 +619,7 @@ void rtc_sync(struct timeval *tv_in) {
+         tv = *tv_in;
+     }
+     struct tm now;
+-    localtime_r(&tv.tv_sec, &now);
++    gmtime_r(&tv.tv_sec, &now);
+     M5.Rtc.setDateTime(&now);
+ }
+ 
+@@ -681,7 +681,7 @@ mp_obj_t m5_begin(size_t n_args, const mp_obj_t *args) {
+     M5.Display.setFont(&m5gfx::fonts::lvFontMontserrat12);
+     #endif
+ 
+-    // get local time and sync to RTC IC
++    // get UTC time and sync to RTC IC
+     rtc_sync(nullptr);
+ 
+     {

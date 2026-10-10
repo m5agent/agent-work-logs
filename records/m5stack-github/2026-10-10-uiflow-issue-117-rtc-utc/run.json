@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "M5Unified rtc_sync writes UTC so RTC time does not drift on reboot",
+  "source": {
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/117",
+    "pull_request": "https://github.com/m5stack/uiflow-micropython/pull/119",
+    "repository": "m5stack/uiflow-micropython",
+    "base_commit": "69846518a8b0893987ba0512558c4b01c9161454"
+  },
+  "hardware": {
+    "board": "M5STACK_StopWatch",
+    "rtc": "RX8130"
+  },
+  "firmware": {
+    "baseline_artifact": "fw-1b04a056a6a44d80",
+    "baseline_sha256": "61c3a52389fb0753a196fed189a2ac7dbae882ca88827106fdaf6317990d6868",
+    "fixed_app_artifact": "fw-4b88c0f7fb884842",
+    "fixed_app_sha256": "5f08c183b91fe9ba88208717b30b8a62526d7952d97699916a794a1ac040c08f",
+    "fixed_app_size": 6427504,
+    "restore_artifact": "fw-3ee527ab34b24a56",
+    "restore_sha256": "973f843ac11eedc439c0872bf38fe39d7da82fa1bd005751fe50879be9e9a780"
+  },
+  "execution": {
+    "environment": "macOS arm64 + uiflow-idf:v5.5.4; StopWatch bench node",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "baseline_hardware_repro",
+      "status": "PASS",
+      "evidence": "RTC hour changed from 0x11 UTC to 0x20 local (UTC+9) after M5.begin()"
+    },
+    {
+      "name": "fixed_hardware_behavior",
+      "status": "PASS",
+      "evidence": "system time and RX8130 stayed at 04:11:15 UTC across two M5.begin() calls"
+    },
+    {
+      "name": "firmware_build",
+      "status": "PASS",
+      "evidence": "StamPLC full image and StopWatch UART-REPL app built with ESP-IDF v5.5.4"
+    },
+    {
+      "name": "restore_stock_image",
+      "status": "PASS",
+      "evidence": "stock flash passed; app prefix SHA256 matched; REPL returned not_micropython"
+    },
+    {
+      "name": "stamplc_device_repro",
+      "status": "NOT RUN",
+      "evidence": "no StamPLC test slot; StopWatch uses the same RX8130 and M5.Rtc path"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/hardware-summary.txt",
+      "description": "baseline and fixed hardware RTC observations"
+    },
+    {
+      "path": "evidence/restore-summary.txt",
+      "description": "restore checks and hash comparison"
+    },
+    {
+      "path": "evidence/build-summary.txt",
+      "description": "firmware build results"
+    },
+    {
+      "path": "evidence/host-repro.txt",
+      "description": "host time-conversion model output"
+    }
+  ],
+  "notes": [
+    "Published evidence is sanitized: no bench identifier, internal endpoint, credential, or unique device identifier.",
+    "StopWatch was used because the bug is board-independent within the M5.Rtc path."
+  ]
+}

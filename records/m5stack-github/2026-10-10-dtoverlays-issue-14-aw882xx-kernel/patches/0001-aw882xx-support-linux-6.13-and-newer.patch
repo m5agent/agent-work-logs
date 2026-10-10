@@ -1,0 +1,135 @@
+From afe636b72c3d21a0f76192c02b5ff5e94f50b989 Mon Sep 17 00:00:00 2001
+From: m5agent <329351612+m5agent@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 09:58:53 +0800
+Subject: [PATCH] aw882xx: Support Linux 6.13 and newer
+
+---
+ modules/aw882xx/src/aw882xx.c           | 20 ++++++++++++++++----
+ modules/aw882xx/src/aw882xx.h           | 10 ++++++++++
+ modules/aw882xx/src/aw882xx_bin_parse.c |  2 +-
+ 3 files changed, 27 insertions(+), 5 deletions(-)
+
+diff --git a/modules/aw882xx/src/aw882xx.c b/modules/aw882xx/src/aw882xx.c
+index a91e7e8..9611f74 100755
+--- a/modules/aw882xx/src/aw882xx.c
++++ b/modules/aw882xx/src/aw882xx.c
+@@ -475,7 +475,7 @@ static int aw882xx_profile_info(struct snd_kcontrol *kcontrol,
+ 	count = uinfo->value.enumerated.item;
+ 	ret = aw88xx_dev_get_profile_name(aw882xx->aw_pa, name, count);
+ 	if (ret) {
+-		strlcpy(uinfo->value.enumerated.name, "null", strlen("null") + 1);
++		strscpy(uinfo->value.enumerated.name, "null", strlen("null") + 1);
+ 		return 0;
+ 	}
+ 
+@@ -550,7 +550,7 @@ static int aw882xx_switch_info(struct snd_kcontrol *kcontrol,
+ 	if (uinfo->value.enumerated.item >= count)
+ 		uinfo->value.enumerated.item = count - 1;
+ 
+-	strlcpy(uinfo->value.enumerated.name,
++	strscpy(uinfo->value.enumerated.name,
+ 		aw882xx_switch[uinfo->value.enumerated.item],
+ 		strlen(aw882xx_switch[uinfo->value.enumerated.item]) + 1);
+ 
+@@ -624,7 +624,7 @@ static int aw882xx_monitor_info(struct snd_kcontrol *kcontrol,
+ 	if (uinfo->value.enumerated.item >= count)
+ 		uinfo->value.enumerated.item = count - 1;
+ 
+-	strlcpy(uinfo->value.enumerated.name,
++	strscpy(uinfo->value.enumerated.name,
+ 		aw882xx_switch[uinfo->value.enumerated.item],
+ 		strlen(aw882xx_switch[uinfo->value.enumerated.item]) + 1);
+ 
+@@ -1597,7 +1597,7 @@ static int aw882xx_gpio_request(struct aw882xx *aw882xx)
+ 
+ 	if (gpio_is_valid(aw882xx->irq_gpio)) {
+ 		ret = devm_gpio_request_one(aw882xx->dev, aw882xx->irq_gpio,
+-			GPIOF_DIR_IN, "aw882xx_int");
++			AW882XX_GPIO_IN_FLAGS, "aw882xx_int");
+ 		if (ret) {
+ 			aw_dev_err(aw882xx->dev, "int request failed");
+ 			return ret;
+@@ -2220,8 +2220,12 @@ static struct attribute_group aw882xx_attribute_group = {
+ 	.attrs = aw882xx_attributes,
+ };
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
++static int aw882xx_i2c_probe(struct i2c_client *i2c)
++#else
+ static int aw882xx_i2c_probe(struct i2c_client *i2c,
+ 				const struct i2c_device_id *id)
++#endif
+ {
+ 	int ret;
+ 	struct aw882xx *aw882xx = NULL;
+@@ -2308,7 +2312,11 @@ err_sysfs:
+ 	return ret;
+ }
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
++static void aw882xx_i2c_remove(struct i2c_client *i2c)
++#else
+ static int aw882xx_i2c_remove(struct i2c_client *i2c)
++#endif
+ {
+ 	struct aw882xx *aw882xx = i2c_get_clientdata(i2c);
+ 
+@@ -2321,10 +2329,12 @@ static int aw882xx_i2c_remove(struct i2c_client *i2c)
+ 			aw882xx);
+ 
+ 	/*free gpio*/
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 0, 0)
+ 	if (gpio_is_valid(aw882xx->irq_gpio))
+ 		devm_gpio_free(&i2c->dev, aw882xx->irq_gpio);
+ 	if (gpio_is_valid(aw882xx->reset_gpio))
+ 		devm_gpio_free(&i2c->dev, aw882xx->reset_gpio);
++#endif
+ 
+ 	/*rm attr node*/
+ 	sysfs_remove_group(&i2c->dev.kobj, &aw882xx_attribute_group);
+@@ -2346,7 +2356,9 @@ static int aw882xx_i2c_remove(struct i2c_client *i2c)
+ 	}
+ 	mutex_unlock(&g_aw882xx_lock);
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 3, 0)
+ 	return 0;
++#endif
+ 
+ }
+ 
+diff --git a/modules/aw882xx/src/aw882xx.h b/modules/aw882xx/src/aw882xx.h
+index 38ea672..027bdb1 100755
+--- a/modules/aw882xx/src/aw882xx.h
++++ b/modules/aw882xx/src/aw882xx.h
+@@ -61,8 +61,18 @@ enum aw882xx_int_type {
+ 
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+ #define AW_KERNEL_VER_OVER_5_4_0
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 13, 0)
++MODULE_IMPORT_NS("VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver");
++#else
+ MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+ #endif
++#endif
++
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 12, 0)
++#define AW882XX_GPIO_IN_FLAGS GPIOF_IN
++#else
++#define AW882XX_GPIO_IN_FLAGS GPIOF_DIR_IN
++#endif
+ 
+ 
+ #ifdef AW_KERNEL_VER_OVER_4_19_1
+diff --git a/modules/aw882xx/src/aw882xx_bin_parse.c b/modules/aw882xx/src/aw882xx_bin_parse.c
+index 83f6183..0d7024d 100755
+--- a/modules/aw882xx/src/aw882xx_bin_parse.c
++++ b/modules/aw882xx/src/aw882xx_bin_parse.c
+@@ -1361,7 +1361,7 @@ int aw88xx_dev_get_profile_name(struct aw_device *aw_dev, char *name, int index)
+ 
+ 	dev_profile_id = prof_info->prof_desc[index].id;
+ 
+-	strlcpy(name, prof_info->prof_name_list[dev_profile_id],
++	strscpy(name, prof_info->prof_name_list[dev_profile_id],
+ 			strlen(prof_info->prof_name_list[dev_profile_id]) + 1);
+ 	return 0;
+ }

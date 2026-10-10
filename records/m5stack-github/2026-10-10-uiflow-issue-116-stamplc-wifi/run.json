@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "StamPLC boot_option=2 Wi-Fi startup skips PoE initialization",
+  "source": {
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/116",
+    "pull_request": "https://github.com/m5stack/uiflow-micropython/pull/118",
+    "repository": "m5stack/uiflow-micropython",
+    "base_commit": "69846518a8b0893987ba0512558c4b01c9161454"
+  },
+  "hardware": {},
+  "firmware": {
+    "board": "M5STACK_StamPLC",
+    "name": "uiflow-69846518-esp32s3-8mb-stamplc-v2.5.3-20261010.bin",
+    "sha256": "18579131e64ae20d8a291d3f9c120d1fd3d278067448b24776c0828a2c2572ec",
+    "size": 8384512
+  },
+  "execution": {
+    "environment": "macOS arm64 + uiflow-idf:v5.5.4 container, ESP-IDF v5.5.4",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "host_reproducer",
+      "status": "PASS",
+      "evidence": "unfixed aborts before connect_network; fixed skips PoEStamPLC and reaches connect_network"
+    },
+    {
+      "name": "stamplc_firmware_build",
+      "status": "PASS",
+      "evidence": "M5STACK_StamPLC pack_all completed; merged firmware SHA256 recorded"
+    },
+    {
+      "name": "device_boot_option_2_wifi",
+      "status": "NOT RUN",
+      "evidence": "no StamPLC test slot available"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/host-repro.txt",
+      "description": "real startup/__init__.py host reproducer output"
+    },
+    {
+      "path": "evidence/build-summary.txt",
+      "description": "ESP-IDF build result and firmware hash"
+    }
+  ],
+  "notes": [
+    "The ETH path is unchanged and was not hardware-regression-tested.",
+    "No internal endpoint, bench identifier, or credential is included."
+  ]
+}

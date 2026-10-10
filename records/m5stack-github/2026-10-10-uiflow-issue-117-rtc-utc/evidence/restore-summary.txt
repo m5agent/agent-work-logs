@@ -1,0 +1,20 @@
+StopWatch restoration after hardware verification
+
+Restore artifact:
+  fw-3ee527ab34b24a56
+  uiflow2-stopwatch-v2.5.3-wifi.bin
+  SHA256 973f843ac11eedc439c0872bf38fe39d7da82fa1bd005751fe50879be9e9a780
+
+Restore flash task: PASS
+Post-restore REPL probe:
+  op = repl_exec
+  state = failed
+  error = not_micropython / ESP_ERR_NOT_FOUND
+  Interpretation: expected for the stock image; UART REPL is disabled again.
+
+Post-restore read_flash prefix check at 0x10000, 160 bytes:
+  device read SHA256: 5c1e48af11aa109b1aeefdd2ecbce7db51b05658371d5114d207b77184646de5
+  stock artifact prefix SHA256: 5c1e48af11aa109b1aeefdd2ecbce7db51b05658371d5114d207b77184646de5
+  Match: true
+
+Reset task after restore: PASS

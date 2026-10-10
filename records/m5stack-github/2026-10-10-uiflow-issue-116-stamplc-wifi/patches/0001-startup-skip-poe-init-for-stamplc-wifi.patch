@@ -1,0 +1,22 @@
+From f4e9f598eab4a1515d4bfa78d5f70adf1ea4454f Mon Sep 17 00:00:00 2001
+From: m5agent <329351612+m5agent@users.noreply.github.com>
+Date: Sat, 10 Oct 2026 09:58:36 +0800
+Subject: [PATCH] startup: Skip PoE init for StamPLC Wi-Fi boot
+
+---
+ m5stack/modules/startup/__init__.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/m5stack/modules/startup/__init__.py b/m5stack/modules/startup/__init__.py
+index b9553c72..ba5f9fcc 100644
+--- a/m5stack/modules/startup/__init__.py
++++ b/m5stack/modules/startup/__init__.py
+@@ -237,7 +237,7 @@ def _connect_network_only(board_id, net_mode, ssid, pswd):
+         from driver.ip101gri import IP101GRI
+ 
+         lan_if = IP101GRI(mdc_pin=31, mdio_pin=52, power_pin=51)
+-    elif board_id == M5.BOARD.M5StamPLC:
++    elif board_id == M5.BOARD.M5StamPLC and net_mode == "ETH":
+         from stamplc import PoEStamPLC
+ 
+         lan_if = PoEStamPLC()

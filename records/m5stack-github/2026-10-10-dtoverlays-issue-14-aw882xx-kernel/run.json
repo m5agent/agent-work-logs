@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "aw882xx builds on Linux 6.12/6.14 after 6.13 API compatibility fixes",
+  "source": {
+    "issue": "https://github.com/m5stack/m5stack-linux-dtoverlays/issues/14",
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/15",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_commit": "75518549a2640486f5d13ea72ca4935b198d7c20"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Docker arm64; Debian 6.12.111 and Ubuntu 6.14.0 kernel headers",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "module_build_6_12",
+      "status": "PASS",
+      "evidence": "aw882xx_drv.ko linked with Debian 6.12.111 headers"
+    },
+    {
+      "name": "module_build_6_14",
+      "status": "PASS",
+      "evidence": "aw882xx_drv.ko linked with Ubuntu 6.14.0-37-generic headers"
+    },
+    {
+      "name": "runtime_insmod",
+      "status": "NOT RUN",
+      "evidence": "no target Linux device was available"
+    },
+    {
+      "name": "audio_runtime",
+      "status": "NOT RUN",
+      "evidence": "no codec hardware or loaded kernel module test was performed"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/build-summary.txt",
+      "description": "reproduction error and successful 6.12/6.14 build summary"
+    }
+  ],
+  "notes": [
+    "Linux 7.x still needs a separate of_gpio.h compatibility change and is not claimed here.",
+    "No credentials, internal endpoints, or device identifiers are included."
+  ]
+}

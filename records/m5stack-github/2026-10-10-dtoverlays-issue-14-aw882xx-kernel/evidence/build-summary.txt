@@ -1,0 +1,19 @@
+aw882xx Linux 6.13+ compatibility
+
+Reproduction (Ubuntu 25.04 headers, 6.14.0-37-generic):
+  aw882xx.h:64:18: error: expected ',' or ';' before
+    'VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver'
+  MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+
+Additional build blockers encountered after that first fix:
+  strlcpy implicit declaration
+  GPIOF_DIR_IN undeclared
+  devm_gpio_free implicit declaration
+  incompatible i2c probe/remove signatures
+
+After the patch:
+  Debian 6.12.111 arm64 headers: module build PASS
+  Ubuntu 6.14.0-37-generic arm64 headers: module build PASS
+  Output: aw882xx_drv.ko
+
+No insmod/runtime audio test was performed.

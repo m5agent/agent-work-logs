@@ -1,0 +1,14 @@
+Host reproducer against the real m5stack/modules/startup/__init__.py
+Scope: board_id = M5StamPLC, net_mode = WIFI, no PoE module
+
+Unfixed source:
+  Startup with network type: WIFI
+  WiFi initialized
+  FAIL: WIFI setup aborted before connect_network: esp_eth_driver_install failed
+  PoEStamPLC constructed: True
+  WiFi connected: False
+
+Patched source:
+  Startup with network type: WIFI
+  WiFi initialized
+  PASS: net_mode=WIFI skipped PoEStamPLC and reached connect_network
