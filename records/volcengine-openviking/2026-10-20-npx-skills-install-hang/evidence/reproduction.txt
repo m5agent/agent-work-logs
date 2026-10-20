@@ -1,0 +1,67 @@
+# Reproduction and measurements
+
+Date: 2026-10-20 (Asia/Shanghai)
+Host: macOS (Apple Silicon)
+Tool: npx skills 1.5.18
+Python: 3.13.15
+
+## 1. Official command
+
+```bash
+npx skills add https://github.com/volcengine/OpenViking/tree/main/examples/skills/ov-experience-memory
+```
+
+Observed output:
+
+```text
+● codex  Agent detected — installing non-interactively
+◇ Source: https://github.com/volcengine/OpenViking.git @ main (examples/skills/ov-experience-memory)
+◒ Cloning repository…   (repeated for 5+ minutes)
+```
+
+Result: no files installed; cancelled manually.
+
+## 2. Repository size
+
+```text
+GET https://api.github.com/repos/volcengine/OpenViking
+size = 383596 KB  (~374 MB)
+default_branch = main
+```
+
+Target skill directory contains exactly one file: `SKILL.md` (6891 bytes).
+
+## 3. Network control
+
+```text
+GET https://github.com -> HTTP 200 in ~3.7 s
+```
+
+So the stall is not a general network failure.
+
+## 4. Verified workaround: shallow + sparse
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/volcengine/OpenViking.git
+cd OpenViking
+git sparse-checkout set examples/skills/ov-experience-memory
+```
+
+Measurements:
+
+| Step | Time |
+| --- | --- |
+| shallow partial clone | 25 s |
+| sparse-checkout of target dir | 5 s |
+| resulting `.git` size | 1.6 MB |
+
+Result: `examples/skills/ov-experience-memory/SKILL.md` present and complete.
+
+## 5. Content check
+
+Installed `SKILL.md` (6891 bytes) is byte-identical to the copy bundled with the
+`openviking-memory` plugin (0.10.10).
+
+## 6. Publication
+
+Upstream issue: https://github.com/volcengine/OpenViking/issues/6328

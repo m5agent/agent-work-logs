@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-20",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "OpenViking npx skills add hangs cloning the full ~374 MB repo",
+  "source": {
+    "issue": "https://github.com/volcengine/OpenViking/issues/6328",
+    "pull_request": "",
+    "repository": "volcengine/OpenViking",
+    "base_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Apple Silicon; npx skills 1.5.18; Python 3.13.15; OpenViking 0.4.23 local",
+    "task_id": "",
+    "session_id": "01a0adf3-12ab-7ee2-8a8e-280ceced3621"
+  },
+  "checks": [
+    {"name": "reproduce_official_command", "status": "PASS",
+     "evidence": "npx skills add <tree url> detects codex then stays at Cloning repository for 5+ minutes; cancelled, nothing installed"},
+    {"name": "repo_size_measurement", "status": "PASS",
+     "evidence": "GitHub API size=383596 KB (~374 MB); target SKILL.md=6891 B"},
+    {"name": "network_control", "status": "PASS",
+     "evidence": "Direct GET https://github.com returns HTTP 200 in ~3.7 s"},
+    {"name": "sparse_workaround", "status": "PASS",
+     "evidence": "depth-1 blobless sparse clone: 25 s; sparse-checkout target: 5 s; .git=1.6 MB; SKILL.md present"},
+    {"name": "installed_content_identity", "status": "PASS",
+     "evidence": "Installed SKILL.md is byte-identical to the openviking-memory 0.10.10 bundled copy"},
+    {"name": "upstream_issue", "status": "PASS",
+     "evidence": "https://github.com/volcengine/OpenViking/issues/6328 created"},
+    {"name": "npx_skills_internals", "status": "NOT RUN",
+     "evidence": "source not inspected; behavior-based diagnosis only"},
+    {"name": "other_platforms", "status": "NOT RUN",
+     "evidence": "only macOS + Codex tested"},
+    {"name": "eventual_completion", "status": "NOT RUN",
+     "evidence": "cancelled after 5 minutes; did not confirm whether it would eventually finish"}
+  ],
+  "evidence": ["evidence/reproduction.txt"],
+  "notes": [
+    "Root cause is likely a full clone of a ~374 MB repository to install a 6.9 KB file.",
+    "Sparse shallow clone is a verified workaround (~30 s, 1.6 MB .git).",
+    "Issue labels could not be applied because the token lacks triage permission; maintainers can label it.",
+    "Record contains only public repository data and public issue links."
+  ]
+}
