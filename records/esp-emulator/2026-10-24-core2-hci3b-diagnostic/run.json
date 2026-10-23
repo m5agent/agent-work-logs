@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "diagnostic_test",
+  "overall_status": "FAIL",
+  "stage": "HCI-3b",
+  "title": "Reproduce and narrow the Core2 native HCI complete GATT failure",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9aa3fd71e9ad0b0002cd3e06f4e12038a833d703",
+    "result_commit": "32862edf3998cae4d4b62464c51af295761c330d",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "ea8ea3a121a8e069686e06c7c267264ec04511cbb34be0e485799dd925a99fb0"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU m5core2; stock UIFlow2; Bumble external controller/peer",
+    "runtime": "QEMU native HCI without GDB",
+    "changed_files": 9,
+    "insertions": 539,
+    "deletions": 15
+  },
+  "checks": [
+    {
+      "name": "native_hci_transport",
+      "status": "PASS",
+      "detail": "11/11 checks including bounded queue and clean shutdown"
+    },
+    {
+      "name": "hci_3a_single_c2h_callback",
+      "status": "PASS",
+      "detail": "Reset Complete delivered and next H2C observed"
+    },
+    {
+      "name": "bumble_advertisement",
+      "status": "PASS"
+    },
+    {
+      "name": "bumble_connection",
+      "status": "PASS"
+    },
+    {
+      "name": "first_att_request_response",
+      "status": "PASS"
+    },
+    {
+      "name": "gatt_service_discovery",
+      "status": "FAIL",
+      "detail": "Second ATT request followed by HCI process ack returned 12 and HCI Reset"
+    },
+    {
+      "name": "nus_subscribe_write_notify",
+      "status": "NOT RUN",
+      "detail": "Service discovery did not complete"
+    },
+    {
+      "name": "qemu_patch_reverse_check",
+      "status": "PASS",
+      "detail": "Temporary scheduler experiments removed; native HCI source matches repository patch"
+    },
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "253 tests; OK"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "253 tests; OK (skipped=2); both jobs success"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/32862edf3998cae4d4b62464c51af295761c330d/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci3b-diagnostic.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/32862edf3998cae4d4b62464c51af295761c330d/tests/uiflow2/core2_native_hci/run_full.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/32862edf3998cae4d4b62464c51af295761c330d",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490"
+  ],
+  "notes": [
+    "The H4 RX parser and single-packet callback are not the current failure.",
+    "The failure boundary is controller-response transaction and vCPU-safe callback context.",
+    "No QEMU runtime patch change was retained from the failed scheduler experiments.",
+    "Physical hardware and bit-exact Espressif BT controller behavior remain unverified."
+  ]
+}

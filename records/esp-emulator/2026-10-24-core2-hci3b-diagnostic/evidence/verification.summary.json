@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "result_commit": "32862edf3998cae4d4b62464c51af295761c330d",
+  "native_hci_transport": {
+    "status": "PASS",
+    "checks": 11,
+    "failed": 0
+  },
+  "hci_3a": {
+    "status": "PASS",
+    "callback_status": 0,
+    "reset_complete_delivered": true,
+    "next_h2c": "01011000"
+  },
+  "hci_3b": {
+    "status": "FAIL",
+    "advertisement_found": true,
+    "connected": true,
+    "first_att_request_response": true,
+    "second_att_request_received_by_qemu": true,
+    "gatt_service_discovery": false,
+    "terminal_serial": "NimBLE: HCI process ack returned 12",
+    "guest_reset": "01030c00",
+    "peer_terminal": "GATT timeout for ATT_READ_BY_GROUP_TYPE_REQUEST"
+  },
+  "counters": {
+    "h2c_packets": 53,
+    "c2h_delivered": 55,
+    "c2h_errors": 0,
+    "c2h_last_status": 0,
+    "rx_queue_depth": 0,
+    "tx_queue_depth": 0,
+    "malformed_packets": 73,
+    "dropped_packets": 2
+  },
+  "temporary_diagnostics": {
+    "malformed_rx_type": 0,
+    "malformed_rx_oversize": 0,
+    "malformed_rx_overflow": 0,
+    "partial_h2c_length_writes": 73,
+    "retained_in_runtime_patch": false
+  },
+  "rejected_experiments": [
+    "CPU0-idle-only callback",
+    "arbitrary CPU0 safe point",
+    "RX backpressure without controller transaction"
+  ],
+  "platform": {
+    "local": "253 tests; OK",
+    "github_actions": "253 tests; OK (skipped=2)",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS"
+  },
+  "not_claimed": [
+    "complete HCI/GATT",
+    "Device Service repeated lease",
+    "bit-exact BT controller/baseband",
+    "physical hardware"
+  ]
+}

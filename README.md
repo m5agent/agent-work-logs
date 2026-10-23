@@ -77,6 +77,7 @@
 | 2026-10-24 | ESP Emulator | Core2 QEMU native HCI 单包 C2H callback 交付 | PARTIAL（virtual-device：Reset Complete callback 后 guest 发出 `01011000`，targeted 5/5；完整 HCI/GATT、repeated lease、controller 与真机 NOT RUN/FAIL） | [查看](records/esp-emulator/2026-10-24-core2-c2h-callback-delivery/) |
 | 2026-10-24 | ESP Emulator | 固件可恢复上传可靠性、代码与文档总整理 | PASS（service/API/docs：失败 append 回滚、staging GC、249 tests 本机全绿、CI 247 pass/2 skip；WebBurner UI、HCI-3b/HCI-4 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-firmware-upload-docs-consolidation/) |
 | 2026-10-24 | ESP Emulator | WebBurner 流式固件导入、刷新恢复与取消 | PASS（browser/API：9.44 MiB / 3 chunks、manifest PASS、253 tests、Node 2/2；合成固件启动与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-webburner-browser-intake/) |
+| 2026-10-24 | ESP Emulator | Core2 native HCI 完整 sequence 诊断 | FAIL（HCI-3b：广播/连接/首个 ATT PASS；第二个 ATT 后 guest ACK 12 并 Reset；scheduler 实验已回退） | [查看](records/esp-emulator/2026-10-24-core2-hci3b-diagnostic/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |
