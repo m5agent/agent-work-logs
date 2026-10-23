@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Deliver the first Core2 C2H packet through the firmware VHCI callback",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "53cefc14e909519baebf12784597c3274f72f1e4",
+    "result_commit": "5217b50af60c7ac31f3051a6fef8b70fdb110fe4",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40019731626"
+  },
+  "hardware": {
+    "targets": ["virtual QEMU classic ESP32 Core2"],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "file": "uiflow2-ui-test.bin",
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "bytes": 16777216,
+    "qemu_sha256": "f5ec86620e29fa2854ecb0bff6c480a794757cb1e9fe62069352183434dfb15e"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU 9.2.2 M5Stack worktree; deterministic TCG/icount"
+  },
+  "checks": [
+    {
+      "name": "hci_1_transport",
+      "status": "PASS"
+    },
+    {
+      "name": "hci_2_first_h2c",
+      "status": "PASS",
+      "detail": "01030c00"
+    },
+    {
+      "name": "hci_3a_c2h_callback",
+      "status": "PASS",
+      "detail": "Reset Complete delivered; status=0; next H2C 01011000; 5/5"
+    },
+    {
+      "name": "hci_3b_complete_hci_gatt",
+      "status": "FAIL",
+      "detail": "Exploratory Bumble run reached connection but ATT service discovery timed out"
+    },
+    {
+      "name": "hci_4_repeated_lease",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "243 tests; local OK; CI OK (skipped=2)"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_patch_replay",
+      "status": "PASS"
+    },
+    {
+      "name": "bit_exact_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/5217b50af60c7ac31f3051a6fef8b70fdb110fe4",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/5217b50af60c7ac31f3051a6fef8b70fdb110fe4/tests/uiflow2/core2_native_hci/evidence-2026-10-24-c2h-delivery-5x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40019731626"
+  ],
+  "notes": [
+    "The registered notify_host_recv callback is used; vhci_send parameter guessing is abandoned.",
+    "The guest malloc buffer avoids overwriting classic ESP32 BT RAM.",
+    "Single-packet C2H is not a complete BLE or bit-exact controller implementation.",
+    "Physical hardware remains unverified."
+  ]
+}

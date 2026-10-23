@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "core2-c2h-callback-verification",
+  "status": "PARTIAL",
+  "source_commit": "5217b50af60c7ac31f3051a6fef8b70fdb110fe4",
+  "base_commit": "53cefc14e909519baebf12784597c3274f72f1e4",
+  "hci_1_transport": "PASS",
+  "hci_2_first_h2c": {
+    "status": "PASS",
+    "packet": "01030c00"
+  },
+  "hci_3a_c2h_callback": {
+    "status": "PASS",
+    "attempts": 5,
+    "passed_attempts": 5,
+    "controller_event": "040e0401030c00",
+    "next_h2c": "01011000",
+    "callback_status": 0,
+    "callback_errors": 0,
+    "send_available": true
+  },
+  "hci_3b_complete_sequence": {
+    "status": "FAIL",
+    "observed": "exploratory Bumble run reached advertisement and connection",
+    "blocker": "ATT service discovery timeout; complete HCI/GATT sequence is not stable"
+  },
+  "hci_4_repeated_device_service_lease": "NOT RUN",
+  "platform": {
+    "local_tests": 243,
+    "local_result": "OK",
+    "ci_tests": 243,
+    "ci_result": "OK (skipped=2)",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS"
+  },
+  "qemu_patch": {
+    "reverse_check": "PASS",
+    "forward_check": "PASS",
+    "build": "PASS"
+  },
+  "boundaries": {
+    "complete_ble_gatt": "NOT PASS",
+    "bit_exact_controller": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  }
+}
