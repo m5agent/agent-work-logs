@@ -39,6 +39,9 @@ bit-exact ESP32 BT controller。
 - `report.md`：实现、验证、失败实验和边界；
 - `run.json`：结构化记录；
 - `evidence/verification.summary.json`：脱敏聚合证据。
+- `followups/2026-10-24-service-repeat-stability/`：后续同 commit
+  Device Service repeated lease 为 `1/2`；BLE C2H callback 注入失败，
+  WiFi/公网仍 PASS。
 
 ## 未覆盖项
 

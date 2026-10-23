@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-service-repeat-summary",
+  "scope": "virtual-device validation",
+  "profile": "core2-native-vhci",
+  "source_commit": "455504dab038975a3deb601d48c3c3604fff5a1d",
+  "firmware_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "PASS",
+      "wifi": "PASS",
+      "controlled_http": "PASS",
+      "public_dns": "PASS",
+      "public_http": "PASS",
+      "ble_gatt": "PASS",
+      "notification": "PASS"
+    },
+    {
+      "attempt": 2,
+      "status": "FAIL",
+      "wifi": "PASS",
+      "controlled_http": "PASS",
+      "public_dns": "PASS",
+      "public_http": "PASS",
+      "ble_gatt": "FAIL",
+      "failure_stage": "C2H callback injection after LE Set Event Mask",
+      "callback_status": 2559356,
+      "gdb_state": "target-running",
+      "guest_fault": "InstrFetchProhibited",
+      "guest_rebooted": true
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 1,
+    "total": 2,
+    "stable": false
+  },
+  "not_claimed": [
+    "physical hardware",
+    "bit-exact BT controller",
+    "RF or coexistence",
+    "cache/PSRAM physical equivalence"
+  ]
+}

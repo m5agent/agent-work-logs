@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "service_debug",
+  "overall_status": "FAIL",
+  "title": "Core2 native-VHCI Device Service repeated lease remains unstable",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "455504dab038975a3deb601d48c3c3604fff5a1d",
+    "result_commit": "f4e1b43809be714f53387ec01ce6639b468e3eb6",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40009284990"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+    "bytes": 16777216
+  },
+  "execution": {
+    "environment": "Device Service /api/v1 on macOS Apple Silicon",
+    "profile": "core2-native-vhci",
+    "ci_status": "PASS",
+    "passed": 1,
+    "failed": 1,
+    "total": 2
+  },
+  "checks": [
+    {
+      "name": "lease_1",
+      "status": "PASS",
+      "detail": "board/WiFi/public network/BLE/GATT all passed"
+    },
+    {
+      "name": "lease_2",
+      "status": "FAIL",
+      "detail": "C2H callback returned 2559356, target-running, guest reset"
+    },
+    {
+      "name": "wifi_public_network",
+      "status": "PASS",
+      "detail": "PASS in both leases"
+    },
+    {
+      "name": "repeat_lease_gate",
+      "status": "FAIL",
+      "detail": "1/2 is not stable"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f4e1b43809be714f53387ec01ce6639b468e3eb6/tests/uiflow2/unified_core2/evidence-2026-10-24-native-vhci-service-stability.json"
+  ],
+  "notes": [
+    "The failed operation is C2H callback injection, not WiFi or public-network access.",
+    "An isolated pass remains useful implementation evidence but is not a stability result."
+  ]
+}
