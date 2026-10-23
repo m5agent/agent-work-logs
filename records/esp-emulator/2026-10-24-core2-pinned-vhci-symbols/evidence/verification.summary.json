@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "scope": "virtual-device validation and documentation consistency",
+  "source_commit": "455504dab038975a3deb601d48c3c3604fff5a1d",
+  "elf_symbols": {
+    "API_vhci_host_send_packet": "0x403064d8",
+    "vhci_env_p": "0x3ffcc0a4",
+    "esp_cpu_wait_for_intr": "0x40093578",
+    "matches_gdb": true
+  },
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "passed": 243,
+      "total": 243
+    },
+    "elf_parser_tests": {
+      "status": "PASS",
+      "passed": 3,
+      "total": 3
+    },
+    "standalone_pinned_symbol": {
+      "status": "PASS",
+      "passed": 5,
+      "total": 5
+    },
+    "unified_pinned_symbol": {
+      "status": "PASS",
+      "passed": 3,
+      "total": 3
+    },
+    "current_tree_standalone": {
+      "status": "PASS",
+      "passed": 1,
+      "total": 1
+    },
+    "runtime_coverage": {
+      "status": "PASS"
+    },
+    "peripheral_catalog": {
+      "status": "PASS"
+    },
+    "qemu_profiles": {
+      "status": "PASS"
+    },
+    "github_actions": {
+      "status": "PASS",
+      "run_id": "40003866186",
+      "jobs": {
+        "platform-contracts": "PASS",
+        "network-namespace-policy": "PASS"
+      }
+    },
+    "device_service_repeated_lease": {
+      "status": "PARTIAL",
+      "reason": "single lease passed; fixed-count repeated-lease gate remains open"
+    }
+  },
+  "discarded_experiment": {
+    "scope": "uncommitted single-packet idle callback injection variant",
+    "result": "FAIL",
+    "observed": [
+      "target-running GDB command error",
+      "guest instruction-fetch exception",
+      "reboot loop"
+    ],
+    "disposition": "not committed; stable evidence-backed injection behavior retained"
+  },
+  "not_claimed": [
+    "no-debugger VHCI backend",
+    "bit-exact Espressif BT baseband/controller",
+    "physical cache or PSRAM equivalence",
+    "RF, coexistence or throughput",
+    "physical hardware validation"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Pin Core2 native-VHCI symbol addresses from ELF and reconcile project documentation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "829d64e99ae318c6d78de0729bb6a75f8455373c",
+    "result_commit": "455504dab038975a3deb601d48c3c3604fff5a1d",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40003866186"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "standalone_sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "unified_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon with local Xtensa QEMU and Bumble",
+    "platform_tests": 243,
+    "ci_status": "PASS",
+    "standalone_core2": "PASS",
+    "unified_core2": "PASS"
+  },
+  "checks": [
+    {
+      "name": "elf_symbol_parser",
+      "status": "PASS",
+      "detail": "3/3 parser tests, including malformed oversized section rejection"
+    },
+    {
+      "name": "real_elf_symbol_match",
+      "status": "PASS",
+      "detail": "ELF and GDB agree on all three VHCI symbols"
+    },
+    {
+      "name": "pinned_standalone_gatt",
+      "status": "PASS",
+      "detail": "5/5 independent attempts"
+    },
+    {
+      "name": "pinned_unified_gatt",
+      "status": "PASS",
+      "detail": "3/3 attempts with board, WiFi, public network and BLE"
+    },
+    {
+      "name": "current_tree_standalone",
+      "status": "PASS",
+      "detail": "1/1 after final documentation and parser hardening"
+    },
+    {
+      "name": "device_service_single_lease",
+      "status": "PASS",
+      "detail": "one retained lease with native_vhci_symbols event"
+    },
+    {
+      "name": "device_service_repeated_lease_stability",
+      "status": "PARTIAL",
+      "detail": "not established; an intermediate uncommitted injection variant failed and was reverted"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "243/243"
+    },
+    {
+      "name": "documentation_consistency",
+      "status": "PASS",
+      "detail": "test count, links, tool inventory and task state reconciled"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "gdb_control_plane_removal",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/455504dab038975a3deb601d48c3c3604fff5a1d/tests/uiflow2/core2_native_vhci/evidence-2026-10-24-symbol-pinned.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/455504dab038975a3deb601d48c3c3604fff5a1d/tests/uiflow2/unified_core2/evidence-2026-10-24-native-vhci-pinned.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/455504dab038975a3deb601d48c3c3604fff5a1d/platform/tools/xtensa_elf_symbols.py"
+  ],
+  "notes": [
+    "ELF lookup is pinned; GDB still pauses the guest, invokes callbacks and performs synthetic return.",
+    "Repeated Device Service lease stability remains the next CORE2-01 acceptance gate.",
+    "Virtual radio and GATT behavior does not establish RF, security or physical equivalence."
+  ]
+}

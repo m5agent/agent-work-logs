@@ -71,6 +71,7 @@
 | 2026-10-24 | ESP Emulator | 当前基线、代码地图、网络方案与 Backlog 重整 | PASS（docs/catalog/profile：225/225 平台测试、链接/日期/旧状态契约 PASS；本次未重跑功能矩阵，物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-project-baseline-reconciliation/) |
 | 2026-10-24 | ESP Emulator | 工作流台账、代码工具清单与 Task ID 一致性 | PASS（docs：12 条工作流、24 个平台工具、全部 Backlog Task ID 与 236/236 测试 PASS；本次未重跑功能矩阵，物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-workstream-inventory-consolidation/) |
 | 2026-10-24 | ESP Emulator | P0 Linux policy CI、虚拟 radio 恢复与 eFuse 安全证据 | PASS（virtual/static：239/239、GitHub Actions namespace/egress、scan `1→0→1`、两次 DHCP/HTTP/pcap、脱敏 eFuse 解析与 capability 拒绝；Core2 无 GDB 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-p0-network-ci-efuse/) |
+| 2026-10-24 | ESP Emulator | Core2 native-VHCI ELF 固定符号、代码与文档对账 | PASS（virtual-device：ELF/GDB 地址一致、standalone 5/5、unified 3/3、当前树 1/1、243/243；GDB 控制面和重复 lease 稳定门禁仍开放） | [查看](records/esp-emulator/2026-10-24-core2-pinned-vhci-symbols/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |
