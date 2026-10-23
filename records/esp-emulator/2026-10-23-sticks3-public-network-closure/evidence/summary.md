@@ -20,6 +20,15 @@ status: PASS
 marker:1 through marker:5: true
 ```
 
+Follow-up session `0605cc843b63411ab2aeb7e7fca9c380`:
+
+```text
+live snapshot status: PASS
+DELETE response status: PASS
+persisted session.json network_result.status: PASS
+all five markers: true
+```
+
 ## Host-side comparison
 
 ```text

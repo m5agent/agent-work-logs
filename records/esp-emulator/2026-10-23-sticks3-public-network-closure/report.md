@@ -29,6 +29,19 @@ marker:4=true
 marker:5=true
 ```
 
+### Follow-up：最终网络结果未持久化
+
+首次闭环复测发现 `/network` 已返回 `PASS`，但停止响应仍使用启动阶段保存的
+空串口 `PARTIAL`。根因是 `network_result` 在 QEMU 启动后只采样一次，live
+snapshot 和 stop 没有重新计算。修复内容：
+
+- live snapshot 对非 PASS 的 `qemu-wifi` 会话重新采样；
+- `GET /network` 更新内存中的最新结果；
+- stop 在终止 guest 前重新采样并持久化最终结果。
+
+修复后 session `0605cc843b63411ab2aeb7e7fca9c380` 的停止响应和
+`session.json` 均为 `PASS`、5/5 markers true。源码修复为 `dc5ae76`。
+
 ### CYBER CLOCK NTP：应用等待窗口过短
 
 CYBER CLOCK 的代码顺序为：
@@ -71,6 +84,7 @@ Open-Meteo DNS、TCP 和 HTTP 请求仍然成功，因此该日志不能解释�
 | 业务 HTTP | PASS | 状态 200，实时 JSON 可解析 |
 | 实时数据 | PASS | 与宿主同端点结果一致 |
 | Device Service 闭环 | PASS | 5 个 expected markers 全部匹配 |
+| 停止后证据持久化 | PASS | stop 响应与 session.json 均为 5/5 PASS |
 | CYBER CLOCK NTP | FAIL | 应用 5 秒等待短于 SNTP 15 秒接收超时 |
 | 物理硬件 | NOT RUN | 本轮为 virtual-device validation |
 
