@@ -1,0 +1,20 @@
+Published image, QEMU virtual-device validation:
+- Device autodetected as M5StickS3.
+- Saved WiFi and app settings were not readable from NVS.
+- LittleFS mount failed with "Corrupted dir pair".
+- Firmware displayed the WiFi setup page.
+
+Source-built deterministic provisioning harness, esp-emu WiFi lane:
+- NVS read-back succeeded before and after M5 initialization.
+- Application reached ArduinoOTA startup, which is called only after WiFiConnect succeeds.
+- Open-Meteo geocoding did not complete on the guest-side HTTPS path.
+
+Host control:
+- Shenzhen geocoding returned HTTP 200.
+- Forecast returned HTTP 200 with temperature 31.3 C, humidity 40%, weather code 0.
+- Host values were not shown by the device under test.
+
+QEMU display:
+- KEY1 produced eight distinct frames.
+- Intended page titles are visible in the upper region.
+- Lower-screen content repeats or tiles, preventing a visual-layout PASS.

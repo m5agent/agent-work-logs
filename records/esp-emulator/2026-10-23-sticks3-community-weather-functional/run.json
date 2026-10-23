@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "virtual_device_test",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 校园天气机 v1.0.0 虚拟设备功能验证",
+  "source": {
+    "repository": "https://github.com/LamZaakDok/sticks3-weather-clock",
+    "issue": "",
+    "pull_request": "",
+    "base_commit": "cb437d240fc906b5540aec530dc4863019116ce9"
+  },
+  "hardware": {
+    "model": "M5Stack StickS3",
+    "validation_level": "virtual-device",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "firmware_id": "2108939572843147265",
+    "version_id": "2109509580358971393",
+    "version": "1.0.0",
+    "sha256": "8b7b47c8d601e1821817f8d0e6b55568829913e50333dbcc15de6ffdbad1997c",
+    "composed_sha256": "d291e77f782399e37fd5b464f9b206a00654b2c10556d730d1c45667156c603f",
+    "bytes": 8323072
+  },
+  "execution": {
+    "environment": "Local Device Service /api/v1; StickS3 QEMU and esp-emu; PlatformIO Core 6.2.0; Arduino-ESP32 2.0.17; M5GFX 0.2.32",
+    "task_id": "",
+    "session_id": "6d385f1deee14509804d66510c25cc56",
+    "additional_session_ids": [
+      "1d79d828d0694fe28286bab348fa0f38",
+      "a228804635ed445eb5f564edfe115676",
+      "218fac01dcf341f5b40dfc48449f6c45"
+    ]
+  },
+  "checks": [
+    {"name": "source_release_alignment", "status": "PASS", "evidence": "v1.0.0 tag differs from HEAD only by tools/make_release.ps1"},
+    {"name": "firmware_static_analysis", "status": "PASS", "evidence": "ESP32-S3, 8 MiB flash, valid partition table, app0, 207-entry LittleFS"},
+    {"name": "qemu_boot_original_image", "status": "PARTIAL", "evidence": "M5StickS3 detected and setup frame rendered; NVS/LittleFS reads failed"},
+    {"name": "nvs_persistence_esp_emu", "status": "PASS", "evidence": "seed read back before and after M5 init"},
+    {"name": "wifi_association_and_ota_esp_emu", "status": "PASS", "evidence": "WiFiConnect returned to setupOta; ArduinoOTA started"},
+    {"name": "device_open_meteo_https", "status": "FAIL", "evidence": "no geocoding/forecast/air-quality completion marker"},
+    {"name": "key1_eight_page_cycle", "status": "PASS", "evidence": "eight distinct frame hashes and labels"},
+    {"name": "key2_single_click_refresh", "status": "PASS", "evidence": "visible network-disconnected response"},
+    {"name": "key2_double_click_and_long_press", "status": "NOT RUN", "evidence": "no observable settings/reconfigure transition"},
+    {"name": "audio_and_speech", "status": "NOT RUN", "evidence": "LittleFS not mounted in the validated run"},
+    {"name": "visual_layout", "status": "PARTIAL", "evidence": "labels/frame transitions work; lower-screen tiling/repetition"},
+    {"name": "physical_hardware_rf_power_audio", "status": "NOT RUN", "evidence": "no online physical StickS3 slot"}
+  ],
+  "evidence": [
+    "evidence/firmware-metadata.json",
+    "evidence/ui/frame-hashes.json",
+    "evidence/ui/page-1.png",
+    "evidence/ui/page-7.png",
+    "evidence/ui/clock-landscape.png",
+    "evidence/ui/key2-refresh-response.png",
+    "evidence/network/esp-emu-wifi-nvs-ota.json",
+    "evidence/network/esp-emu-public-data-attempt.json",
+    "evidence/network/host-open-meteo-control.json",
+    "evidence/network/arduino-nvs-control-no-psram-serial.log",
+    "evidence/network/arduino-nvs-control-psram-serial.log"
+  ],
+  "notes": [
+    "No host weather values were injected into the device UI.",
+    "No physical hardware, RF, power or electrical measurements are claimed.",
+    "Original published firmware hash is unchanged.",
+    "Virtual display defects are not attributed to the user firmware without hardware comparison."
+  ]
+}
