@@ -84,7 +84,7 @@
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |
 | 2026-10-24 | ESP Emulator | 双 guest 私有 lab fabric、共享 WLAN patch 与全矩阵 | PASS（virtual-device：17/17 fabric gates、双侧 DHCP/TCP/pcap、宿主隔离、260/260 平台测试、67/67 矩阵零重试；worker/IPv6/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-two-guest-lab-fabric/) |
 | 2026-10-24 | ESP Emulator | 本地 worker identity、heartbeat、drain 与重启分类 | PASS（virtual-device worker control：17/17 lifecycle checks、真实 `qemu-wifi` drain、pcap availability、SIGKILL 后 generation 2 abandoned lease、264/264 平台测试；远程 worker/re-attach/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-local-worker-lifecycle/) |
-| 2026-10-24 | ESP Emulator | 当前状态、验证台账、Backlog 与代码地图分层 | PASS（docs/contracts：264/264 平台测试、runtime/catalog/profile 校验、Node 2/2、9 项文档契约与 evidence JSON；完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-current-status-validation-ledger/) |
+| 2026-10-24 | ESP Emulator | 当前状态、验证台账、Backlog 与代码地图分层 | PASS（docs/contracts：264/264 平台测试、GitHub Actions、runtime/catalog/profile 校验、Node 2/2、9 项文档契约与 evidence JSON；完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-current-status-validation-ledger/) |
 
 ## 目录结构
 

@@ -29,13 +29,15 @@ bit-exact controller 仍未完成。
 - Python compileall：`PASS`；
 - 文档契约：索引、链接、API 版本、设备计数、测试计数、旧状态、缺失完成日志
   和 evidence JSON 解析全部 `PASS`；
+- GitHub Actions：run `40038712285` 成功；
 - 物理硬件、RF、完整 QEMU 功能矩阵：本轮 `NOT RUN`。
 
 ## 文件
 
 - `report.md`：改动范围、验证命令和边界；
 - `run.json`：机器可读记录；
-- `evidence/verification.summary.json`：公开脱敏的验证摘要。
+- `evidence/verification.summary.json`：公开脱敏的本地验证摘要；
+- `evidence/github-actions.summary.json`：对应源码 commit 的 CI 回读。
 
 ## 未覆盖项
 

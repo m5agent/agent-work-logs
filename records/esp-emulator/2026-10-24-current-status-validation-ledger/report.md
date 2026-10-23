@@ -71,6 +71,7 @@ git diff --cached --check
 | documentation contract | PASS | 索引、链接、API 版本、计数、旧状态和 evidence JSON |
 | runtime catalog | PASS | runtime coverage、peripheral catalog、QEMU profiles |
 | browser upload client | PASS | Node SHA256/upload tests `2/2` |
+| GitHub Actions | PASS | run `40038712285`，head `aeb21e2` |
 | full peripheral matrix | NOT RUN | 本轮只整理文档和契约 |
 | physical hardware | NOT RUN | 未执行真机 |
 
