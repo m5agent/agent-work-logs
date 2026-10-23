@@ -62,6 +62,7 @@
 | 2026-10-23 | ESP Emulator | Core2 零重试确定性矩阵与 RTC 虚拟时钟 | PASS（virtual-device：67/67、274/274，全部首轮无重试；Core2 6/6、重复 5/5、UI flash/touch PASS；物理等价性与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-zero-retry-rtc/) |
 | 2026-10-23 | ESP Emulator | FirmwareManifest 脱敏静态审查与 SBOM | PASS（3/3 真实公开固件 round-trip；URL query、凭据、编码值和宿主路径未进入 manifest；文件系统策略与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-23-firmware-static-review/) |
 | 2026-10-23 | ESP Emulator | 文档、状态与执行任务板总整理 | PASS（当前事实/历史证据分层、Core2 状态纠偏、215/215 平台测试；7823bef 后全矩阵与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-documentation-reconciliation/) |
+| 2026-10-23 | ESP Emulator | Host allowlist fixture、TLS blocker 与文档二次对账 | PARTIAL（223/223 平台测试、契约与文档一致性 PASS；guest TLS 因 AES/GDMA FAIL；Linux namespace TLS 与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-network-docs-reconciliation/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |

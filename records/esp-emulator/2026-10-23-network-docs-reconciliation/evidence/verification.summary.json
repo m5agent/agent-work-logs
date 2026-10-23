@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "scope": "network-allowlist-and-documentation-reconciliation",
+  "timestamp": "2026-10-23T23:37:43+08:00",
+  "status": "PARTIAL",
+  "source_commit": "dd705e8b8dfdb3bab927e9f4d1a7561a684466bc",
+  "base_commit": "4dea5236b21d2165e70d34fc0bae70fd8a75a540",
+  "documentation": {
+    "index_and_links": "PASS",
+    "dynamic_test_count": "PASS",
+    "runtime_contract": "1.8.0",
+    "obsolete_claims": "PASS"
+  },
+  "platform": {
+    "tests": 223,
+    "status": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS"
+  },
+  "tls_guest_fixture": {
+    "status": "FAIL",
+    "isolation": "trusted-host",
+    "checks": {
+      "wifi_ready": true,
+      "dhcp": true,
+      "tls_context_ready": false,
+      "tls_allow": false,
+      "tls_deny": false,
+      "pcap_written": true
+    },
+    "blocker": "ssl_context_creation_stalls_after_esp32s3_aes_gdma_read_error",
+    "qemu_error": "[AES] Error reading from GDMA buffer"
+  },
+  "regression": {
+    "latest_retained_full_matrix": {
+      "cases": 67,
+      "checks": 274,
+      "status": "PASS"
+    },
+    "rerun_this_change": false,
+    "reason": "No shared QEMU board controller change"
+  },
+  "not_run": [
+    "Linux namespace TLS fixture",
+    "controlled resolver and generic destination allowlist",
+    "physical hardware",
+    "RF, power, acoustic, optical or mechanical equivalence"
+  ]
+}
