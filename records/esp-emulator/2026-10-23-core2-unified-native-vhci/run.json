@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Combine Core2 board, WiFi, public network and stock native-VHCI BLE in one guest",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "1546798de9db5df52e3045527281c2a8d01dcc4d",
+    "result_commit": "7823befc2cee622e6b086287f5ae903fda839885"
+  },
+  "hardware": {
+    "targets": [
+      "virtual QEMU ESP32 LX6 Core2",
+      "Bumble virtual controller and peer"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "f19597358e93279e8996f469aadf6e4a828c5e5285ef2f31212290c3df597ba2",
+    "scope": "stock UIFlow2 internal-controller build",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU m5core2; deterministic TCG/icount",
+    "command": "python3 tests/uiflow2/unified_core2/run_test.py --ble-transport native-vhci --attempts 3 --require-all-attempts"
+  },
+  "checks": [
+    {
+      "name": "unified_native_vhci",
+      "status": "PASS",
+      "detail": "3/3 attempts"
+    },
+    {
+      "name": "board_frame_touch",
+      "status": "PASS"
+    },
+    {
+      "name": "wifi_dhcp_controlled_http",
+      "status": "PASS"
+    },
+    {
+      "name": "public_dns_http",
+      "status": "PASS"
+    },
+    {
+      "name": "native_vhci_external_gatt",
+      "status": "PASS"
+    },
+    {
+      "name": "audio_qom",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "213 tests"
+    },
+    {
+      "name": "device_service_integration",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_esp32_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/7823befc2cee622e6b086287f5ae903fda839885/tests/uiflow2/unified_core2/evidence-2026-10-23-native-vhci.json"
+  ],
+  "notes": [
+    "The BB idle page now returns zero rather than all ones.",
+    "Bridge callbacks run with nested breakpoints temporarily disabled.",
+    "This is a standalone runner, not yet a Device Service lease."
+  ]
+}

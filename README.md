@@ -57,6 +57,7 @@
 | 2026-10-23 | ESP Emulator | 项目状态、设备档案与 Backlog 收敛 | PASS（182 tests + generated docs/link/API consistency；未改 QEMU 数据面） | [查看](records/esp-emulator/2026-10-23-project-status-docs-consolidation/) |
 | 2026-10-23 | ESP Emulator | P0 网络、固件入口与 Core2 稳定性/无线 | PARTIAL（virtual-device：namespace/pcap/reconnect、FirmwareManifest、Core2 10/10 与公网/HCI GATT；原生 BT 与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-p0-network-firmware-core2-closure/) |
 | 2026-10-23 | ESP Emulator | Core2 stock native-VHCI BLE GATT | PASS（virtual-device：外部 NUS GATT 5/5；生产化 VHCI、bit-exact controller 与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-stock-vhci-gatt/) |
+| 2026-10-23 | ESP Emulator | Core2 同 guest WiFi + stock native-VHCI BLE | PASS（virtual-device：board/WiFi/公网/frame/QOM/native-VHCI 3/3；Device Service 与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-unified-native-vhci/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |
