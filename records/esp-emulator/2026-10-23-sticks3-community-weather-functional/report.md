@@ -83,7 +83,7 @@ WiFiSTA: connect failed
 ```text
 stage=after-preseed ssid='<test SSID>'
 stage=after-m5begin ssid='<test SSID>'
-ArduinoOTA: OTA server at: sticks3-weather.local:3232
+ArduinoOTA: OTA server started (mDNS suffix redacted)
 ```
 
 应用只有 `wifiConnect()` 成功后才调用 `setupOta()`，所以这组证据闭环了 NVS 持久化、WiFi 关联和 OTA 初始化。
@@ -155,6 +155,119 @@ ArduinoOTA: OTA server at: sticks3-weather.local:3232
 - 需要在 ESP32-S3 QEMU 中修复 NVS/LittleFS/PSRAM 数据面，才能验证原发布镜像的配网页、语音和真实天气。
 - 需要设备侧公网 HTTPS 成功并记录响应，才能把数据层从 `FAIL` 提升。
 - 需要实体 StickS3 验证真实屏幕、音频、电池与无线行为。
+
+## 后续复测：S3 QIO 读阶段修复
+
+### 修正后的根因
+
+初始记录把问题归在 PSRAM/M5 初始化后的 Flash/NVS/LittleFS 组合路径，
+方向正确，但仍过于上层。后续用发布源码同版本的 Arduino 探针直接调用：
+
+```text
+esp_flash_erase_region(0x7F0000, 4096)
+esp_flash_write(pattern, 0x7F0000, 4096)
+esp_flash_read(readback, 0x7F0000, 4096)
+```
+
+修复前写入和擦除均返回 `ESP_OK`，PSRAM pattern 错误为 0，但 4096 个
+Flash 回读字节全错；关闭会话后，虚拟 Flash 后端确实保存了写入内容。因此
+问题不是 NVS、LittleFS、PSRAM 或后端持久化，而是 S3 的低层 Flash 读路径。
+
+QEMU trace 显示 `0xEB` QIO 命令进入 `m25p80` 时，控制器只发送了：
+
+```text
+0xEB + 3-byte address + 1 dummy byte
+```
+
+`m25p80` 的 QIO 状态机则需要：
+
+```text
+0xEB + 3-byte address + mode + 4 dummy bytes
+```
+
+因此每轮读都少了四个字节，前四个真实数据字节被当作头部吞掉，后续数据整体
+左移。NVS 空值、LittleFS 损坏和画面下半部重复都是同一个读偏移造成的。
+
+最小修复位于 QEMU `hw/ssi/esp32s3_spi.c`：只对 flash CS0 上的 `0xEB`
+QIO read 补足 `m25p80` 所需的五字节 post-address phase。patch 针对
+`espressif/qemu da100c909249926b9f4458f18e4f2d216d08f51a`，
+反向校验通过。
+
+### 修复后执行
+
+1. 重建 `qemu-system-xtensa`。
+2. 通过 Device Service 启动 raw Flash 探针：
+   `afbfc12762214d8aa30716e454ff74b5`。
+   - erase/write/read 均为 `0x0`；
+   - 4096-byte pattern 错误数为 0；
+   - NVS `write=6 readback=myssid`。
+3. 通过 Device Service 启动原始发布镜像 app0 与原始 LittleFS：
+   - app0 SHA256 `cd1b0d9868a9ff3f6fd7fb027075d5f0405a488a8bcd007dc806a599c6fb0811`；
+   - LittleFS SHA256 `c7b4574299ae97072449ff7d9be24aca816dd4ec6aff54446ae3dc438af5e45c`；
+   - 仅替换隔离 runtime NVS，SHA256 `22506441e305f857d5abd780bc743185678229b28d63f6d20b9680c9eaae9d48`；
+   - 发布文件 SHA256 保持
+     `8b7b47c8d601e1821817f8d0e6b55568829913e50333dbcc15de6ffdbad1997c`。
+4. weather session `c896d0840275404b92e6814a5788bc36`：
+   - M5GFX 识别 `board_M5StickS3`；
+   - ArduinoOTA 初始化证明 `WiFiConnect()` 已返回；
+   - 今日页显示深圳、31 C、体感 31 C、湿度 40-41%、风速 14.2 m/s；
+   - 空气质量页显示 AQI 104-105、PM2.5 39-40、PM10 39-40。
+5. 八页逐页截图后组成总览，所有页面完整，原有上下半屏重复消失。
+
+天气值来自设备侧 Open-Meteo 请求路径，没有向天气对象注入宿主值。网络模型
+曾经在一次会话中停在 geocoding 等待，因此网络稳定性仍应单独做重复压测；
+本次已明确取得设备侧实时数据，不再把数据层记为 `FAIL`。
+
+### KEY2 与配网页
+
+- 单击刷新：出现“正在更新天气... 深圳”，随后回到天气页，`PASS`。
+- 长按 3 秒：出现“重新配网 / 清除 WiFi 后重启”，`PASS`。
+- 双击：仍为 `FAIL`，但原因已确认在第三方应用，不是 QEMU。
+  [main.cpp L358-L368](https://github.com/LamZaakDok/sticks3-weather-clock/blob/cb437d240fc906b5540aec530dc4863019116ce9/src/main.cpp#L358-L368)
+  在 350 ms 时清除 `bPending`，而 M5Unified 的
+  `wasDoubleClicked()` 要等到其 500 ms click-count 决策窗口结束后才为真，
+  因此设置热点分支实际上不可达。
+- 长按后的首次 warm restart 在测试窗口内没有重新进入应用；把保留的虚拟
+  Flash 冷启动后能进入 AP 配网页。该 warm-restart 复测记为 `PARTIAL`。
+- 配网页 HTTP 未执行：AP 位于 guest-local netif，Device Service 当前没有到
+  guest-local AP 地址的主机路由或 host-forward。
+
+### 语音与回归
+
+KEY1 长按触发语音，session `489826b092bf49ffb8ee4ac269cdbcbf`
+输出 `68608` bytes PCM：
+
+```text
+2.144 s @ 16 kHz mono
+unique_samples=1339
+peak=1273
+rms=178.06
+```
+
+文件系统未挂载或音频文件缺失时不会产生这段有内容的波形。因此原始
+LittleFS 语音素材、解码和 I2S TX/GDMA 路径已经闭环。
+
+仓库回归：
+
+| 检查 | 状态 |
+| --- | --- |
+| `platform/tests` 单元测试 | `PASS`，171 tests |
+| runtime coverage | `PASS` |
+| peripheral catalog | `PASS` |
+| StickS3 外设矩阵 | `PASS`，5/5 cases |
+
+### 更新后的分层结果
+
+| 层级 | 状态 | 依据 |
+| --- | --- | --- |
+| build | `PASS` | QEMU 重建、patch reverse-check、平台检查 |
+| flash | `PASS` | 原始镜像经 Device Service 写入隔离虚拟 Flash |
+| transport | `PASS` | raw SPI Flash、NVS、WiFi association/DHCP/data path |
+| device_response | `PARTIAL` | 八页、刷新、长按、语音通过；双击由应用逻辑失败 |
+| data_behavior | `PASS` | 设备侧实时 Open-Meteo 天气和空气质量显示 |
+| visual | `PASS` | 八页完整，无切块或重复 |
+| portal | `PARTIAL` | AP 画面通过；网页 HTTP 与 warm-restart 未完整闭环 |
+| physical_hardware | `NOT RUN` | 无实体 StickS3、RF、功耗和电气测量 |
 
 ## 风险与回滚
 

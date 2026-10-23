@@ -33,6 +33,45 @@
       "218fac01dcf341f5b40dfc48449f6c45"
     ]
   },
+  "followup_execution": {
+    "date": "2026-10-23",
+    "validation_level": "virtual-device validation",
+    "qemu_patch": "patches/0001-esp32s3-qio-read-phase.patch",
+    "qemu_base_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "qemu_patch_base_check": "PASS",
+    "qemu_patch_reverse_check": "PASS",
+    "runtime_nvs_sha256": "22506441e305f857d5abd780bc743185678229b28d63f6d20b9680c9eaae9d48",
+    "app_partition_sha256": "cd1b0d9868a9ff3f6fd7fb027075d5f0405a488a8bcd007dc806a599c6fb0811",
+    "littlefs_sha256": "c7b4574299ae97072449ff7d9be24aca816dd4ec6aff54446ae3dc438af5e45c",
+    "session_ids": {
+      "raw_flash_probe": "afbfc12762214d8aa30716e454ff74b5",
+      "weather_ui": "c896d0840275404b92e6814a5788bc36",
+      "voice_pcm": "489826b092bf49ffb8ee4ac269cdbcbf",
+      "portal": "185e129b66ec4eceb7397410e250a727"
+    },
+    "checks": [
+      {"name": "raw_flash_erase_write_read", "status": "PASS", "detail": "4096-byte pattern errors=0; first bytes 07 3c 71"},
+      {"name": "nvs_write_read", "status": "PASS", "detail": "write=6 readback=myssid"},
+      {"name": "littlefs_voice_assets", "status": "PASS", "detail": "68608-byte non-silent PCM, 2.144 seconds at 16 kHz mono"},
+      {"name": "wifi_association_http", "status": "PASS", "detail": "ArduinoOTA initialized after WiFiConnect; QEMU data path reached Open-Meteo-backed UI"},
+      {"name": "live_weather_ui", "status": "PASS", "detail": "Shenzhen 31 C, humidity 40-41%, wind 14.2 m/s, AQI 104-105"},
+      {"name": "full_visual_layout", "status": "PASS", "detail": "eight complete pages without tiling or repeated lower-half fragments"},
+      {"name": "key1_eight_page_cycle", "status": "PASS"},
+      {"name": "key2_single_click_refresh", "status": "PASS", "detail": "visible updating-weather splash"},
+      {"name": "key2_double_click", "status": "FAIL", "detail": "third-party app clears pending state at 350 ms before M5Unified's 500 ms double-click decision"},
+      {"name": "key2_long_press", "status": "PASS", "detail": "visible reconfigure screen"},
+      {"name": "post_reconfigure_warm_restart", "status": "PARTIAL", "detail": "cold boot of retained flash entered portal; first warm-restart run did not complete in the test window"},
+      {"name": "portal_webpage_http", "status": "NOT RUN", "detail": "guest-local AP has no Device Service host route"},
+      {"name": "power_save_wake", "status": "PARTIAL", "detail": "framebuffer states examined; panel brightness is not exposed"},
+      {"name": "physical_hardware", "status": "NOT RUN"}
+    ],
+    "regression": {
+      "platform_unittest": "PASS (171 tests)",
+      "runtime_coverage": "PASS",
+      "peripheral_catalog": "PASS",
+      "sticks3_peripheral_matrix": "PASS (5/5 cases)"
+    }
+  },
   "checks": [
     {"name": "source_release_alignment", "status": "PASS", "evidence": "v1.0.0 tag differs from HEAD only by tools/make_release.ps1"},
     {"name": "firmware_static_analysis", "status": "PASS", "evidence": "ESP32-S3, 8 MiB flash, valid partition table, app0, 207-entry LittleFS"},
@@ -58,12 +97,20 @@
     "evidence/network/esp-emu-public-data-attempt.json",
     "evidence/network/host-open-meteo-control.json",
     "evidence/network/arduino-nvs-control-no-psram-serial.log",
-    "evidence/network/arduino-nvs-control-psram-serial.log"
+    "evidence/network/arduino-nvs-control-psram-serial.log",
+    "evidence/followup-2026-10-23-qio-read-fix/results.json",
+    "evidence/followup-2026-10-23-qio-read-fix/weather-page.png",
+    "evidence/followup-2026-10-23-qio-read-fix/pages-1-8.png",
+    "evidence/followup-2026-10-23-qio-read-fix/key2-refresh.png",
+    "evidence/followup-2026-10-23-qio-read-fix/key2-reconfigure.png",
+    "evidence/followup-2026-10-23-qio-read-fix/portal.png",
+    "patches/0001-esp32s3-qio-read-phase.patch"
   ],
   "notes": [
     "No host weather values were injected into the device UI.",
     "No physical hardware, RF, power or electrical measurements are claimed.",
     "Original published firmware hash is unchanged.",
-    "Virtual display defects are not attributed to the user firmware without hardware comparison."
+    "Virtual display defects are not attributed to the user firmware without hardware comparison.",
+    "Follow-up fixed the QIO read shift; remaining failures are isolated to application double-click timing, warm restart coverage and guest-local portal routing."
   ]
 }

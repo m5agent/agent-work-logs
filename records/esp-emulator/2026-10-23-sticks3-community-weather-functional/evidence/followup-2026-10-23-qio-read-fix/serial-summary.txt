@@ -1,0 +1,25 @@
+StickS3 QIO follow-up serial summary
+===================================
+
+Raw flash probe after the fix:
+
+  [nvsraw] flash erase=0x0 write=0x0 read=0x0 errors=0
+  psram=ok pattern_errors=0 write=6 readback=myssid
+
+Weather firmware with original app0 and LittleFS, plus isolated runtime NVS:
+
+  M5GFX: autodetect board_M5StickS3
+  ArduinoOTA: server initialized after WiFiConnect returned
+  UI: Shenzhen, Guangdong; 31 C; feels-like 31 C; humidity 40-41%;
+      wind 14.2 m/s; AQI 104
+
+KEY2 long hold:
+
+  visible screen: reconfigure Wi-Fi / clearing Wi-Fi and restarting
+
+Notes:
+
+- Raw serial files are not copied because they contain workstation paths,
+  synthetic MAC addresses and a local mDNS suffix.
+- The published image SHA256 is unchanged.
+- The runtime NVS overlay changes no application or LittleFS bytes.

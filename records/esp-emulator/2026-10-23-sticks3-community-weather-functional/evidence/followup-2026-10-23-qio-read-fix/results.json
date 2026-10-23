@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-23T16:20:00+08:00",
+  "validation_level": "virtual-device validation",
+  "qemu": {
+    "base_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "patch": "patches/0001-esp32s3-qio-read-phase.patch",
+    "patch_base_check": "PASS",
+    "patch_reverse_check": "PASS",
+    "root_cause": "ESP-IDF 4.4 programmed one dummy byte for 0xEB while m25p80 consumed eight post-command bytes, dropping the first four data bytes"
+  },
+  "firmware": {
+    "published_sha256": "8b7b47c8d601e1821817f8d0e6b55568829913e50333dbcc15de6ffdbad1997c",
+    "published_bytes": 8323072,
+    "app_partition_sha256": "cd1b0d9868a9ff3f6fd7fb027075d5f0405a488a8bcd007dc806a599c6fb0811",
+    "littlefs_sha256": "c7b4574299ae97072449ff7d9be24aca816dd4ec6aff54446ae3dc438af5e45c",
+    "runtime_nvs_overlay_sha256": "22506441e305f857d5abd780bc743185678229b28d63f6d20b9680c9eaae9d48",
+    "app_and_littlefs_changed": false
+  },
+  "sessions": {
+    "raw_flash_probe": "afbfc12762214d8aa30716e454ff74b5",
+    "weather_ui": "c896d0840275404b92e6814a5788bc36",
+    "voice_pcm": "489826b092bf49ffb8ee4ac269cdbcbf",
+    "portal": "185e129b66ec4eceb7397410e250a727"
+  },
+  "checks": [
+    {
+      "name": "raw_flash_erase_write_read",
+      "status": "PASS",
+      "detail": "4096-byte pattern errors=0; first bytes 07 3c 71"
+    },
+    {
+      "name": "nvs_write_read",
+      "status": "PASS",
+      "detail": "Preferences write=6 and readback=myssid"
+    },
+    {
+      "name": "littlefs_and_voice_assets",
+      "status": "PASS",
+      "detail": "KEY1 hold produced non-silent PCM evidence"
+    },
+    {
+      "name": "wifi_association_dhcp_and_http",
+      "status": "PASS",
+      "detail": "ArduinoOTA initialized after WiFiConnect; QEMU trace contained association, DHCP/data frames and Open-Meteo-backed UI values"
+    },
+    {
+      "name": "live_weather_ui",
+      "status": "PASS",
+      "detail": "深圳 广东, 31 C, feels-like 31 C, humidity 40-41%, wind 14.2 m/s, AQI 104-105"
+    },
+    {
+      "name": "full_visual_layout",
+      "status": "PASS",
+      "detail": "eight pages captured without tiling or repeated lower-half fragments"
+    },
+    {
+      "name": "key1_eight_page_cycle",
+      "status": "PASS",
+      "detail": "eight distinct pages and return to the clock"
+    },
+    {
+      "name": "key2_single_click_refresh",
+      "status": "PASS",
+      "detail": "visible updating-weather splash and return to the weather page"
+    },
+    {
+      "name": "key2_double_click",
+      "status": "FAIL",
+      "detail": "application clears its pending second-click state at 350 ms, before M5Unified emits wasDoubleClicked at the 500 ms decision deadline"
+    },
+    {
+      "name": "key2_long_press",
+      "status": "PASS",
+      "detail": "visible reconfigure screen shown before reset"
+    },
+    {
+      "name": "post_reconfigure_warm_restart",
+      "status": "PARTIAL",
+      "detail": "the first post-reset run did not reach application output in the test window; a cold boot of the retained virtual flash entered the AP portal"
+    },
+    {
+      "name": "portal_screen",
+      "status": "PASS",
+      "detail": "cold boot displayed AP setup screen"
+    },
+    {
+      "name": "portal_webpage_http",
+      "status": "NOT RUN",
+      "detail": "the portal AP is guest-local and the Device Service exposes no host route into that AP netif"
+    },
+    {
+      "name": "power_save_wake",
+      "status": "PARTIAL",
+      "detail": "framebuffer remains unchanged while backlight is off; service does not expose panel brightness state"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "detail": "no physical StickS3, RF, power or electrical measurement"
+    }
+  ],
+  "voice_pcm": {
+    "sha256": "25e1b4a0a83cc3332f460c43a8315638a95cca160e94e327504403381c0e9298",
+    "bytes": 68608,
+    "samples": 34304,
+    "seconds_at_16khz_mono": 2.144,
+    "unique_samples": 1339,
+    "peak": 1273,
+    "rms": 178.06
+  },
+  "page_sha256": [
+    "03bf08cc9ca428713c75f80ea01d10b3afa90342b4a0606fd020d643db0628dc"
+  ],
+  "regression": {
+    "platform_unittest": "PASS (171 tests)",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "sticks3_peripheral_matrix": "PASS (5/5 cases)"
+  }
+}
