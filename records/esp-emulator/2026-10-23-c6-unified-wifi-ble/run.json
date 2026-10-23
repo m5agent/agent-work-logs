@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Unified ESP32-S3/C6 board, WiFi and HCI BLE runtime",
+  "scope": "simulation-only-not-hardware-validation",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "f2be75f9f269eb7dc889b2d246d9666c27a61aeb",
+    "result_commit": "42edb77364eb609bd11a41887153647d75dd328b"
+  },
+  "hardware": {
+    "targets": ["NanoC6", "Nesso N1", "StickS3"],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "family": "UIFlow2",
+    "version": "v2.5.3",
+    "esp_idf": "v5.5.4",
+    "nanoc6_image_sha256": "c1c8bb84266fa1dcb337ddd6a629f95dccbe586452c77bcf894161dc238e0b05",
+    "nesso_image_sha256": "375fd6a33fe505bc7eda03bfda08e17baa5f259be8b13db596e5ed84ab35e64c",
+    "sticks3_image_sha256": "9c12fe83013c0e735b2af0f7f3ef28299cee43118404fed3bb08db005fa59bdf"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU ESP32-S3/C6; QEMU SLiRP; no physical DUT",
+    "nanoc6_session_id": "466a1dc7b631452b959d9bba34d102d3",
+    "nesso_session_id": "5efe5e38ba7f4e649970cf35cf0f1dba",
+    "sticks3_session_id": "6d7b7c554da44202adac9deb7c3d32f2",
+    "qemu_xtensa_sha256": "b050635a8a30ea815a2f9a063e193aeaf2c76d0099d2cfc2854a7132f2a0398d",
+    "qemu_riscv32_sha256": "944fe81df0f17031b2e2e0e48239d7d1674adb03643cc829ef80aca742041253"
+  },
+  "checks": [
+    {
+      "name": "nanoc6_board_wifi_ble",
+      "status": "PASS",
+      "evidence": "evidence/nanoc6-unified.summary.json"
+    },
+    {
+      "name": "nesso_board_wifi_ble",
+      "status": "PASS",
+      "evidence": "evidence/nesso-unified.summary.json"
+    },
+    {
+      "name": "device_service_single_lease",
+      "status": "PASS",
+      "evidence": "evidence/device-service.summary.json"
+    },
+    {
+      "name": "public_dns_http",
+      "status": "PASS",
+      "evidence": "evidence/public-network.summary.json"
+    },
+    {
+      "name": "nesso_public_dns_http_same_guest",
+      "status": "PASS",
+      "evidence": "evidence/nesso-unified.summary.json"
+    },
+    {
+      "name": "sticks3_public_dns_http_same_guest",
+      "status": "PASS",
+      "evidence": "evidence/sticks3-unified-public.summary.json"
+    },
+    {
+      "name": "sticks3_device_service_single_lease",
+      "status": "PASS",
+      "evidence": "evidence/sticks3-device-service.summary.json"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "evidence": "evidence/platform-tests.txt"
+    },
+    {
+      "name": "full_peripheral_matrix",
+      "status": "PASS",
+      "evidence": "evidence/full-matrix.summary.json"
+    },
+    {
+      "name": "real_hardware",
+      "status": "NOT RUN",
+      "evidence": "no physical DUT"
+    },
+    {
+      "name": "rf_or_phy_measurement",
+      "status": "NOT RUN",
+      "evidence": "QEMU exercises MAC/DMA and user networking only"
+    }
+  ],
+  "evidence": [
+    "evidence/nanoc6-unified.summary.json",
+    "evidence/nesso-unified.summary.json",
+    "evidence/device-service.summary.json",
+    "evidence/public-network.summary.json",
+    "evidence/sticks3-unified-public.summary.json",
+    "evidence/sticks3-device-service.summary.json",
+    "evidence/platform-tests.txt",
+    "evidence/full-matrix.summary.json"
+  ],
+  "patches": [
+    "patches/0025-esp32c6-wifi-mac.patch"
+  ],
+  "notes": [
+    "WiFi and BLE execute in the same QEMU guest as the board peripherals.",
+    "BLE uses UART1 H4 offload to an external Bumble controller.",
+    "The virtual AP is open and uses one fixed channel.",
+    "The final peripheral matrix uses the rebuilt QEMU binary containing the S3 QIO read-phase fix.",
+    "`qemu-unified` is the canonical runtime name; `qemu-ble` remains a legacy alias."
+  ]
+}

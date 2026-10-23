@@ -52,6 +52,7 @@
 | 2026-10-10 | UIFlow MicroPython | RTC 同步改用 UTC，修复重启时钟漂移 | PASS（StopWatch 实机 + 构建；StamPLC 未单独复测） | [查看](records/m5stack-github/2026-10-10-uiflow-issue-117-rtc-utc/) |
 | 2026-10-10 | m5stack-linux-dtoverlays | aw882xx 支持 Linux 6.13+ 头文件 | PARTIAL（6.12/6.14 构建 PASS；未做 insmod/音频） | [查看](records/m5stack-github/2026-10-10-dtoverlays-issue-14-aw882xx-kernel/) |
 | 2026-10-23 | ESP Emulator | Device Service 单实例 unified runtime 与 OpenAPI 契约统一 | PASS（API contract + 172 tests + live service；物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-unified-device-api-contract/) |
+| 2026-10-23 | ESP Emulator | ESP32-S3/C6 单 guest 公网 WiFi、BLE 与全外设矩阵 | PASS（virtual-device validation：67/67 matrix + Device Service lease；物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-c6-unified-wifi-ble/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |

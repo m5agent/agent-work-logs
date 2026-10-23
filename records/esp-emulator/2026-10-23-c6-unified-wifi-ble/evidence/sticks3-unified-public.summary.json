@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scope": "simulation-only-not-hardware-validation",
+  "status": "PASS",
+  "device_id": "sticks3",
+  "profile": "uiflow2-sticks3-unified",
+  "runtime": {
+    "name": "qemu",
+    "guest_process_count": 1,
+    "wifi_nic": "misc.esp32s3.wifi",
+    "hci_transport": "UART1 H4",
+    "ble_controller": "Bumble",
+    "public_network": "IPv4 DNS and HTTP"
+  },
+  "firmware": {
+    "bytes": 8388608,
+    "sha256": "9c12fe83013c0e735b2af0f7f3ef28299cee43118404fed3bb08db005fa59bdf"
+  },
+  "checks": {
+    "board": true,
+    "display": true,
+    "power": true,
+    "imu": true,
+    "speaker_pcm": true,
+    "button_redraw": true,
+    "wifi_association": true,
+    "dhcp": true,
+    "controlled_http": true,
+    "public_dns": true,
+    "public_http": true,
+    "ble_advertising": true,
+    "ble_connect": true,
+    "ble_nus_discovery": true,
+    "ble_nus_subscription": true,
+    "ble_nus_write": true,
+    "ble_guest_rx": true,
+    "ble_notify_ack": true
+  },
+  "frame": {
+    "size": [135, 240],
+    "before_nonblack": 8076,
+    "after_nonblack": 8054,
+    "changed_after_key": true
+  },
+  "audio": {
+    "bytes": 66560,
+    "nonzero_bytes": 64540,
+    "sha256": "731fa3d1f42a1fbde058957b95766bcb2c0bf134f3cb28a514f48be0bbead556"
+  },
+  "network": {
+    "ipv4": "SLiRP lease",
+    "public_dns": "PASS",
+    "public_http": "HTTP/1.1 200 OK",
+    "ble": "external Bumble GATT PASS"
+  },
+  "not_claimed": [
+    "real-hardware behavior",
+    "native ESP32-S3 Bluetooth controller/radio model",
+    "RF privacy, security, range or performance",
+    "public TLS certificate validation",
+    "stable public DNS or HTTP availability"
+  ]
+}

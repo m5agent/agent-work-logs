@@ -1,0 +1,17 @@
+2026-10-23 16:58 Asia/Shanghai
+
+$ PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'
+Ran 173 tests in 2.987s
+OK
+
+$ python3 platform/tools/runtime_coverage.py --check
+RUNTIME_COVERAGE_OK
+
+$ python3 platform/tools/peripheral_catalog.py --check
+PERIPHERAL_CATALOG_OK
+
+$ git apply --reverse --check patches/qemu-m5stack-peripherals/0024-esp32s3-qio-read-phase.patch
+PASS
+
+$ git apply --reverse --check patches/qemu-m5stack-peripherals/0025-esp32c6-wifi-mac.patch
+PASS
