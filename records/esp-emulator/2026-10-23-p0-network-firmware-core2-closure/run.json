@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Close P0 network and firmware foundations and stabilize Core2",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "67c0aa481e80b993b5445cf0bebf81d48ad65081",
+    "result_commit": "11bdf8fc3ed0588b4fb2ad7783d6b894489588fb"
+  },
+  "hardware": {
+    "targets": [
+      "virtual QEMU ESP32-S3",
+      "virtual QEMU ESP32-C6",
+      "virtual QEMU ESP32 LX6 Core2",
+      "Linux arm64 QEMU guest in private network namespace"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation_scope": "virtual-device",
+    "public_manifest_samples": 3,
+    "binaries_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon tests; Linux arm64 container for namespace proof",
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "PYTHONPATH=.work/py python3 tests/uiflow2/run_peripheral_matrix.py --out-dir /tmp/m5-final-p0-full"
+    ]
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "210 tests"
+    },
+    {
+      "name": "uiflow2_full_matrix",
+      "status": "PASS",
+      "detail": "67 cases, 274 checks"
+    },
+    {
+      "name": "core2_first_attempt_stability",
+      "status": "PASS",
+      "detail": "10/10 first attempts, no retries"
+    },
+    {
+      "name": "core2_unified_wifi_public_network",
+      "status": "PASS",
+      "detail": "WiFi DHCP, public IPv4 DNS/HTTP, board data planes"
+    },
+    {
+      "name": "core2_hci_offload_ble_gatt",
+      "status": "PASS",
+      "detail": "external Bumble peer scan/connect/NUS write/notify"
+    },
+    {
+      "name": "core2_native_bt_controller_peer",
+      "status": "NOT RUN",
+      "detail": "No external peer/connection/GATT observed"
+    },
+    {
+      "name": "linux_network_namespace_guest",
+      "status": "PASS",
+      "detail": "Private namespace, DHCP, controlled HTTP, DNS deny, pcap, ready marker"
+    },
+    {
+      "name": "incorrect_credential_negative_case",
+      "status": "PASS",
+      "detail": "Authentication rejection, retries, no DHCP/HTTP, terminal failure marker"
+    },
+    {
+      "name": "sticks3_reconnect",
+      "status": "PASS",
+      "detail": "Guest WLAN disconnect plus QMP link down/up, renewed DHCP and after HTTP"
+    },
+    {
+      "name": "firmware_manifest_round_trip",
+      "status": "PASS",
+      "detail": "Three public samples"
+    },
+    {
+      "name": "capability_mismatch",
+      "status": "PASS",
+      "detail": "HTTP 409 with structured issues and no session"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "openapi_and_schema_parse",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/11bdf8fc3ed0588b4fb2ad7783d6b894489588fb/tests/network/linux_isolation/evidence-2026-10-23-linux.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/11bdf8fc3ed0588b4fb2ad7783d6b894489588fb/tests/uiflow2/unified_core2/evidence-2026-10-23-icount-public.json"
+  ],
+  "notes": [
+    "Core2 cache panic was reclassified as virtual interrupt-WDT/timer starvation.",
+    "HCI-offload BLE is not native ESP32 BT controller evidence.",
+    "The Linux namespace runner is fail-closed but is not a complete malware sandbox.",
+    "The final status remains PARTIAL because native BT and real hardware are open."
+  ]
+}

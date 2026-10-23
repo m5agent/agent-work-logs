@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-23T20:12:39+08:00",
+  "scope": "virtual-device-validation",
+  "status": "PARTIAL",
+  "source_commit": "11bdf8fc3ed0588b4fb2ad7783d6b894489588fb",
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "tests": 210
+    },
+    "uiflow2_full_matrix": {
+      "status": "PASS",
+      "cases": 67,
+      "checks": 274,
+      "timestamp": "2026-10-23T19:31:50+08:00"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "openapi_schema_parse": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "physical_hardware": "NOT RUN"
+  },
+  "network": {
+    "linux_arm64_namespace": {
+      "status": "PASS",
+      "private_namespace": true,
+      "external_route": false,
+      "wifi_dhcp": true,
+      "controlled_http": true,
+      "public_dns_denied": true,
+      "guest_ready": true,
+      "pcap_packets": 65,
+      "external_destination_observed": false
+    },
+    "incorrect_credential": "PASS",
+    "sticks3_reconnect": {
+      "status": "PASS",
+      "dhcp_renewed": true,
+      "http_before": true,
+      "http_after": true
+    },
+    "formal_worker_ci": "NOT RUN",
+    "two_device_lab_fabric": "NOT RUN"
+  },
+  "core2": {
+    "deterministic_scheduling": {
+      "accel": "tcg,thread=single",
+      "icount": "shift=auto,align=off,sleep=off"
+    },
+    "first_attempt_runs": 10,
+    "first_attempt_passes": 10,
+    "retries_used": 0,
+    "unified_checks": {
+      "board": "PASS",
+      "display_nonblank": "PASS",
+      "touch_redraw": "PASS",
+      "wifi_dhcp": "PASS",
+      "public_dns": "PASS",
+      "public_http": "PASS",
+      "hci_offload_ble_gatt": "PASS",
+      "native_bt_controller_peer": "NOT RUN"
+    },
+    "physical_cache_psram_equivalence": "NOT RUN"
+  },
+  "firmware_manifest": {
+    "importer_formats": [
+      "M5Burner sidecar",
+      "WebBurner manifest",
+      "ESP-IDF flasher_args",
+      "merged",
+      "segmented",
+      "ZIP"
+    ],
+    "public_samples": 3,
+    "artifact_hash_size_check": "PASS",
+    "security_unknown_preserved": "PASS",
+    "capability_mismatch": "PASS",
+    "deep_static_review": "PARTIAL",
+    "production_security_key_flow": "NOT RUN"
+  },
+  "not_claimed": [
+    "physical hardware validation",
+    "native ESP32 Bluetooth controller/radio behavior",
+    "physical cache or PSRAM timing equivalence",
+    "RF, coexistence, range, throughput or power",
+    "malicious firmware safety",
+    "production secure boot or flash encryption key handling"
+  ]
+}
