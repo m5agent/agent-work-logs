@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "scope": "esp32s3-gdma-external-memory-and-tls-host-allowlist",
+  "timestamp": "2026-10-24T00:12:55+08:00",
+  "status": "PASS",
+  "source_commit": "f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb",
+  "base_commit": "dd705e8b8dfdb3bab927e9f4d1a7561a684466bc",
+  "tls_fixture": {
+    "status": "PASS",
+    "isolation": "trusted-host",
+    "wifi": "PASS",
+    "dhcp": "PASS",
+    "tls_context": "PASS",
+    "ca_load": "PASS",
+    "allow": {
+      "host": "allowed.lab.test",
+      "decision": "allow",
+      "status": 200
+    },
+    "deny": {
+      "host": "denied.lab.test",
+      "decision": "deny",
+      "status": 403
+    },
+    "pcap": "PASS"
+  },
+  "qemu": {
+    "sha256": "86ef63cc30df1d166f31912298f6b7a773479836c7681b462e38b5132656b057",
+    "patch": "0027-esp32s3-gdma-external-memory.patch",
+    "apply_checks": "PASS"
+  },
+  "full_matrix": {
+    "cases": 67,
+    "checks": 274,
+    "pass": 67,
+    "fail": 0,
+    "attempts_per_case": 1,
+    "retry_used": false,
+    "summary_sha256": "3097d84cbe43136256c9ba658e88ca43b1067c15279490d980247c150bc8efcd"
+  },
+  "platform": {
+    "tests": 223,
+    "status": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS"
+  },
+  "not_run": [
+    "Linux network namespace TLS",
+    "generic destination egress allowlist",
+    "physical hardware",
+    "RF, power, acoustic, optical or mechanical equivalence"
+  ]
+}

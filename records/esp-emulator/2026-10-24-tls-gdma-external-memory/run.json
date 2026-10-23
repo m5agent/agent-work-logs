@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Fix ESP32-S3 GDMA external-memory reads and pass TLS Host allowlisting",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "dd705e8b8dfdb3bab927e9f4d1a7561a684466bc",
+    "result_commit": "f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb"
+  },
+  "hardware": {
+    "targets": [
+      "virtual QEMU ESP32-S3"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation_scope": "virtual-device",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU 9.2.2 M5Stack worktree; UIFlow2 StickS3",
+    "commands": [
+      "ninja -C .work/M5StopWatch-QEMU/build/qemu/build qemu-system-xtensa",
+      "PYTHONPATH=.work/py python3 tests/network/tls_allowlist/run_test.py --timeout 45",
+      "PYTHONPATH=.work/py python3 tests/uiflow2/run_peripheral_matrix.py",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'"
+    ]
+  },
+  "checks": [
+    {
+      "name": "tls_host_allowlist",
+      "status": "PASS",
+      "detail": "WiFi, DHCP, CA load, TLS, allow 200, deny 403 and pcap"
+    },
+    {
+      "name": "qemu_patch_0027",
+      "status": "PASS",
+      "detail": "Reverse and forward apply checks"
+    },
+    {
+      "name": "uiflow2_full_matrix",
+      "status": "PASS",
+      "detail": "67/67 cases and 274/274 checks; all attempts=1 and retry_used=false"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "223/223"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "linux_namespace_tls",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb/patches/qemu-m5stack-peripherals/0027-esp32s3-gdma-external-memory.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb/tests/network/tls_allowlist/evidence-2026-10-23-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb/tests/uiflow2/evidence-2026-10-24-gdma-external-memory-matrix.json"
+  ],
+  "notes": [
+    "The fallback is used only after the normal internal-DRAM path returns MEMTX_ERROR.",
+    "The TLS fixture remains a Host allowlist, not arbitrary destination egress.",
+    "The Linux namespace TLS path and physical hardware remain unverified."
+  ]
+}
