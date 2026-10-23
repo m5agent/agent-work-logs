@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "documentation_and_maintenance",
+  "overall_status": "PASS",
+  "title": "Reconcile current simulator capabilities, status and backlog",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "6bcd6e88c485ec89fe70e8fa35d91282230929a0",
+    "result_commit": "67c0aa481e80b993b5445cf0bebf81d48ad65081"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Apple Silicon; repository tests and documentation validators",
+    "last_device_matrix": {
+      "cases": 67,
+      "checks": 274,
+      "status": "PASS",
+      "rerun_in_this_change": false
+    }
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "182 tests"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "generated_device_docs",
+      "status": "PASS",
+      "detail": "Generated catalog and device files match catalog.source.json"
+    },
+    {
+      "name": "markdown_links",
+      "status": "PASS"
+    },
+    {
+      "name": "api_version_alignment",
+      "status": "PASS",
+      "detail": "Device Service Markdown and OpenAPI both report 1.5.0"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json"
+  ],
+  "notes": [
+    "No QEMU or board data-plane code changed.",
+    "The canonical runtime is qemu-unified; qemu-ble remains a compatibility alias.",
+    "NanoC6 now uses the headless-ready catalog status."
+  ]
+}
