@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "ESP Emulator firmware SoftAP provisioning API",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "42edb77",
+    "fix_commit": "6bcd6e88c485ec89fe70e8fa35d91282230929a0"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "model": "M5Stack StickS3 profile",
+    "runtime": "esp-emu 0.50.0",
+    "physical_hardware": false
+  },
+  "firmware": {
+    "name": "ESP-IDF captive_portal example",
+    "source_version": "ESP-IDF v5.5.4",
+    "target": "esp32s3",
+    "merged_sha256": "0fb48462902ec70a886ae0db8d06bf08b35e3ca5646fc9d690f54e3d890d66c9",
+    "merged_bytes": 855360,
+    "device_flash_sha256": "35f383ffd03718c7a42e3faccdf9d97491d9286239d3b3cc462be327bf79ee9d",
+    "device_flash_bytes": 8388608
+  },
+  "execution": {
+    "environment": "macOS; Device Service OpenAPI 1.5.0; esp-emu 0.50.0; ESP-IDF v5.5.4",
+    "task_id": "",
+    "session_id": "01a44aefec3f4138a52b378021dbc6fa"
+  },
+  "checks": [
+    {
+      "name": "platform tests",
+      "status": "PASS",
+      "detail": "176 tests passed"
+    },
+    {
+      "name": "runtime coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "OpenAPI parse",
+      "status": "PASS",
+      "detail": "version 1.5.0; firmware_ap_password and hostfwd present"
+    },
+    {
+      "name": "virtual firmware build",
+      "status": "PASS",
+      "detail": "ESP32-S3 captive portal merged and padded to 8 MiB"
+    },
+    {
+      "name": "firmware AP association",
+      "status": "PASS"
+    },
+    {
+      "name": "firmware DHCP lease",
+      "status": "PASS"
+    },
+    {
+      "name": "provisioning portal GET",
+      "status": "PASS",
+      "detail": "HTTP 200; 259 bytes; response hash recorded"
+    },
+    {
+      "name": "stop evidence persistence",
+      "status": "PASS",
+      "detail": "stop_requested=true; timed_out=false; final evidence written"
+    },
+    {
+      "name": "secret redaction",
+      "status": "PASS",
+      "detail": "persisted WiFi and firmware AP credentials are redacted"
+    },
+    {
+      "name": "provisioning form and NVS transition",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "post-provisioning STA transition",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "visual and physical validation",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/test-summary.txt",
+    "evidence/api-session-summary.json",
+    "evidence/portal-response-summary.json",
+    "evidence/serial-markers-redacted.txt"
+  ],
+  "notes": [
+    "This is virtual-device validation, not physical hardware validation.",
+    "The API exposes loopback-only guest forwards.",
+    "network status remains PARTIAL because the automated end-to-end provisioning state machine was not executed."
+  ]
+}

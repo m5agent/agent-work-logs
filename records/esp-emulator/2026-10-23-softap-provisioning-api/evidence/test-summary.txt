@@ -1,0 +1,18 @@
+Recorded: 2026-10-23T17:05:31Z
+
+platform tests
+command: python3 -m unittest discover -s platform/tests -p 'test_*.py'
+result: 176 tests passed
+
+runtime coverage
+command: python3 platform/tools/runtime_coverage.py --check
+result: RUNTIME_COVERAGE_OK
+
+peripheral catalog
+command: python3 platform/tools/peripheral_catalog.py --check
+result: PERIPHERAL_CATALOG_OK
+
+OpenAPI
+version: 1.5.0
+new fields: firmware_ap_password, hostfwd
+parse result: PASS
