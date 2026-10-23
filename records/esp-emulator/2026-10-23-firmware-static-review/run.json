@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add redacted firmware static review and SBOM intake to manifests",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "1ef7f0a081cfdc968a816741ca0ed52e18e6b967",
+    "result_commit": "4dea5236b21d2165e70d34fc0bae70fd8a75a540"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "public_samples": 3,
+    "binary_committed": false,
+    "raw_secrets_committed": false
+  },
+  "execution": {
+    "environment": "Python 3; public firmware cache; virtual-device repository validation",
+    "platform_tests": 221,
+    "real_public_roundtrips": 3
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "221/221"
+    },
+    {
+      "name": "firmware_static_review_tests",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "name": "firmware_manifest_tests",
+      "status": "PASS",
+      "detail": "9/9"
+    },
+    {
+      "name": "public_roundtrips",
+      "status": "PASS",
+      "detail": "3/3 structural manifest import"
+    },
+    {
+      "name": "redaction",
+      "status": "PASS",
+      "detail": "No raw credentials, URL queries, encoded values or host paths"
+    },
+    {
+      "name": "legacy_manifest_without_review",
+      "status": "PASS"
+    },
+    {
+      "name": "spdx_sbom",
+      "status": "PASS"
+    },
+    {
+      "name": "cyclonedx_sbom",
+      "status": "PASS"
+    },
+    {
+      "name": "filesystem_resource_policy",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/4dea5236b21d2165e70d34fc0bae70fd8a75a540",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4dea5236b21d2165e70d34fc0bae70fd8a75a540/tests/firmware/evidence-2026-10-23-static-review.json"
+  ],
+  "notes": [
+    "REVIEW_REQUIRED is an advisory state and does not automatically reject a compatible manifest.",
+    "The review field is optional for legacy v1 manifests but always emitted by the importer.",
+    "A malformed URL port such as a format placeholder was found on a real public sample and is handled without aborting import."
+  ]
+}
