@@ -85,6 +85,7 @@
 | 2026-10-24 | ESP Emulator | 双 guest 私有 lab fabric、共享 WLAN patch 与全矩阵 | PASS（virtual-device：17/17 fabric gates、双侧 DHCP/TCP/pcap、宿主隔离、260/260 平台测试、67/67 矩阵零重试；worker/IPv6/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-two-guest-lab-fabric/) |
 | 2026-10-24 | ESP Emulator | 本地 worker identity、heartbeat、drain 与重启分类 | PASS（virtual-device worker control：17/17 lifecycle checks、真实 `qemu-wifi` drain、pcap availability、SIGKILL 后 generation 2 abandoned lease、264/264 平台测试；远程 worker/re-attach/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-local-worker-lifecycle/) |
 | 2026-10-24 | ESP Emulator | 当前状态、验证台账、Backlog 与代码地图分层 | PASS（docs/contracts：264/264 平台测试、GitHub Actions、runtime/catalog/profile 校验、Node 2/2、9 项文档契约与 evidence JSON；完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-current-status-validation-ledger/) |
+| 2026-10-24 | ESP Emulator | Core2 VHCI API-boundary 与 HCI-3b 事务审计 | PARTIAL（virtual-device：广播/连接/NUS discovery/subscription PASS；final write/notify 与完整 GATT FAIL；264/264 与 CI PASS；实验代码未保留） | [查看](records/esp-emulator/2026-10-24-core2-hci3b-api-boundary/) |
 
 ## 目录结构
 
