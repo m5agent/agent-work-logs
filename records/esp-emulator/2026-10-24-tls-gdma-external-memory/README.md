@@ -43,6 +43,7 @@
 - `run.json`：机器可读结果
 - `evidence/verification.summary.json`：脱敏聚合证据
 - `followups/2026-10-24-linux-namespace/`：Linux private namespace TLS 复测
+- `followups/2026-10-24-controlled-dns/`：controlled DNS 与后台域名拒绝复测
 
 ## 未覆盖项
 

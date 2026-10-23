@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "scope": "linux-namespace-controlled-dns-and-tls-allowlist",
+  "timestamp": "2026-10-24T00:25:24+08:00",
+  "status": "PASS",
+  "source_commit": "6de2f923735937aac19457ccb37469ae03cfb822",
+  "base_commit": "28a51f4b86abd39686214cedf94b2214810f6ca2",
+  "namespaces": {
+    "network": true,
+    "mount": true,
+    "external_route": false
+  },
+  "dns": {
+    "mode": "controlled",
+    "allowed_result": "A",
+    "denied_result": "NXDOMAIN",
+    "background_denied": true
+  },
+  "tls": {
+    "allow_status": 200,
+    "deny_status": 403,
+    "ca_load": "PASS",
+    "handshake": "PASS"
+  },
+  "pcap": {
+    "status": "PASS",
+    "dhcp": "PASS",
+    "dns_queries": 5
+  },
+  "platform": {
+    "tests": 223,
+    "status": "PASS"
+  },
+  "not_run": [
+    "generic destination egress allowlist",
+    "DHCP renewal",
+    "multi-device lab fabric",
+    "physical hardware"
+  ]
+}

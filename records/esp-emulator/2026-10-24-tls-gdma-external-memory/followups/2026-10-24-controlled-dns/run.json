@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "hardware_test",
+  "overall_status": "PASS",
+  "title": "Add controlled DNS to Linux namespace allowlist testing",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "28a51f4b86abd39686214cedf94b2214810f6ca2",
+    "result_commit": "6de2f923735937aac19457ccb37469ae03cfb822"
+  },
+  "hardware": {
+    "targets": [
+      "Linux arm64 container",
+      "virtual QEMU ESP32-S3",
+      "Linux private network and mount namespaces"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation_scope": "virtual-device",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "Linux arm64 container; QEMU 9.2.2; UIFlow2 StickS3",
+    "commands": [
+      "python3 tests/network/tls_allowlist/run_test.py --isolation namespace --timeout 45",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'"
+    ]
+  },
+  "checks": [
+    {
+      "name": "controlled_dns",
+      "status": "PASS",
+      "detail": "Temporary resolver config bound only inside private mount namespace"
+    },
+    {
+      "name": "dns_allow_deny",
+      "status": "PASS",
+      "detail": "Allowed A record and denied NXDOMAIN"
+    },
+    {
+      "name": "dns_background_denied",
+      "status": "PASS",
+      "detail": "UIFlow and NTP names denied"
+    },
+    {
+      "name": "tls_host_allowlist",
+      "status": "PASS",
+      "detail": "Allow 200 and deny 403"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "223/223"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6de2f923735937aac19457ccb37469ae03cfb822/tests/network/tls_allowlist/evidence-2026-10-24-controlled-dns-pass.json"
+  ],
+  "notes": [
+    "The host resolver configuration is not modified globally.",
+    "The resolver is an allowlist fixture, not arbitrary recursive internet DNS.",
+    "Generic destination-egress allowlisting remains open."
+  ]
+}
