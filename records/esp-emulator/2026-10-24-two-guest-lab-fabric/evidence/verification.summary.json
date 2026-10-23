@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "esp-emulator-two-guest-lab-fabric-summary",
+  "source_commit": "8e37781326e337d1d479b3dd432099f4734e8c16",
+  "ci_run": "40036279511",
+  "ci_status": "PASS",
+  "lab_fabric": {
+    "status": "PASS",
+    "checks": 17,
+    "runtime": "two StickS3 QEMU guests on a private QEMU socket L2 switch",
+    "dhcp": "both guests completed DORA",
+    "tcp": "guest A request and guest B response",
+    "pcap": "both captures contain both TCP directions and payload hashes",
+    "isolation": "host control plane, public IPv4, metadata and default route unreachable",
+    "cleanup": "namespace and helper sockets removed"
+  },
+  "tap_bridge_primitive": {
+    "status": "PASS",
+    "checks": [
+      "namespace_created",
+      "dhcp_ready",
+      "nft_input_drop",
+      "nft_tap_forwarding",
+      "namespace_cleaned"
+    ],
+    "scope": "host-fabric-only-not-qemu-or-hardware"
+  },
+  "peripheral_matrix": {
+    "status": "PASS",
+    "cases": 67,
+    "checks": 274,
+    "attempts_per_case": 1,
+    "retry_used": false,
+    "first_run": "66 PASS / 1 FAIL",
+    "final_run": "67 PASS / 0 FAIL"
+  },
+  "platform_tests": {
+    "status": "PASS",
+    "tests": 260,
+    "skipped": 0
+  },
+  "not_claimed": [
+    "physical hardware",
+    "RF or antenna behavior",
+    "WPA2 or WPA3",
+    "production worker lifecycle",
+    "multi-host scheduling",
+    "external IPv6",
+    "malware safety"
+  ]
+}

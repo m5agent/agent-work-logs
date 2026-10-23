@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Prove an isolated two-guest QEMU lab fabric and reconcile current work",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "72c2b8d59edc0f446fb35809d4c8e73c818dd9f5",
+    "result_commit": "8e37781326e337d1d479b3dd432099f4734e8c16"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validation_scope": "virtual-device",
+    "guest_a_sha256": "6e44f5f70ac31beaf85aae37d88184f2392f88d4bde7ef2d2ed208f7fb91a5c2",
+    "guest_b_sha256": "e9aa38793d9e71dddf6760629e9c7b2eacc3a23499c65d1a27c82dc4d6ab36ab",
+    "qemu_sha256": "16c6d6185781b7ddfaa3e646adcd3dea2ecd851b319dd35ce502496432a95fb5"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Linux fixture container; Ubuntu GitHub Actions",
+    "task_id": "40036279511",
+    "session_id": "",
+    "commands": [
+      "python3 tests/network/lab_fabric/run_test.py --qemu <qemu> --rom-dir <pc-bios> --image-a <guest-a> --image-b <guest-b> --out-dir <output>",
+      "PYTHONPATH=.work/py python3 tests/uiflow2/run_peripheral_matrix.py --out-dir <matrix-output>",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'"
+    ]
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "260/260"
+    },
+    {
+      "name": "two_guest_fixture",
+      "status": "PASS",
+      "detail": "17/17 gates"
+    },
+    {
+      "name": "guest_a_dhcp",
+      "status": "PASS"
+    },
+    {
+      "name": "guest_b_dhcp",
+      "status": "PASS"
+    },
+    {
+      "name": "switch_mac_binding",
+      "status": "PASS",
+      "detail": "Bounded client slots are assigned by Ethernet source MAC, not connection order."
+    },
+    {
+      "name": "guest_tcp_round_trip",
+      "status": "PASS",
+      "detail": "A-to-B request and B-to-A response."
+    },
+    {
+      "name": "two_sided_pcap",
+      "status": "PASS",
+      "detail": "Both captures contain both TCP directions and payload hashes."
+    },
+    {
+      "name": "host_public_metadata_isolation",
+      "status": "PASS"
+    },
+    {
+      "name": "namespace_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "uiflow2_full_matrix",
+      "status": "PASS",
+      "detail": "67/67 cases, 274/274 checks, attempts=1, retry_used=false"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "GitHub Actions run 40036279511"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "external_ipv6",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "production_worker",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8e37781326e337d1d479b3dd432099f4734e8c16/tests/network/lab_fabric/evidence-2026-10-24-two-guest-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8e37781326e337d1d479b3dd432099f4734e8c16/tests/uiflow2/evidence-2026-10-24-dual-guest-fabric-matrix.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40036279511"
+  ],
+  "notes": [
+    "The first full matrix was 66 PASS / 1 FAIL because the Cardputer-ADV keyboard frame stayed at keys: 0 inside a 6-second startup window.",
+    "The settle time was hardened to 10 seconds before input and 2 seconds after input; the targeted cases and final matrix passed without retry.",
+    "The QEMU path uses a socket L2 switch inside a private namespace; the TAP/bridge helper is a separate CI primitive.",
+    "This is virtual-device evidence only. RF, WPA2/WPA3, physical hardware, worker lifecycle and external IPv6 remain unverified."
+  ]
+}
