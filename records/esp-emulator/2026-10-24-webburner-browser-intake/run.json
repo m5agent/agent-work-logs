@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add resumable WebBurner package upload, manifest import, refresh recovery, and cancellation",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "0ffaf07b334a09690e2ad62b23078c04ea8b134c",
+    "result_commit": "9aa3fd71e9ad0b0002cd3e06f4e12038a833d703",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40022859936"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "source_package_bytes": 9441052,
+    "source_package_sha256": "39c02eae0969b8bd0876976413193d84b3554ff7bf8fce5bd402ad652b4e08c3",
+    "normalized_flash_bytes": 8388608,
+    "normalized_firmware_id": "819893edc0a3bb872d2e336f14e27dbcaad4a6216f3bfc2dbcdb9b2a4179819d",
+    "note": "The synthetic WebBurner package validates intake and manifest creation; it is not a production application boot test."
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Chromium Playwright; Python 3; GitHub Actions ubuntu-latest",
+    "changed_files": 28,
+    "insertions": 1856,
+    "deletions": 55,
+    "browser_upload_chunk_bytes": 4194304,
+    "browser_upload_chunks": 3
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "253 tests; OK"
+    },
+    {
+      "name": "github_actions_platform_tests",
+      "status": "PASS",
+      "detail": "253 tests; OK (skipped=2)"
+    },
+    {
+      "name": "browser_unit_tests",
+      "status": "PASS",
+      "detail": "SHA256_OK and FIRMWARE_UPLOAD_OK"
+    },
+    {
+      "name": "playwright_full_ui",
+      "status": "PASS",
+      "detail": "14 catalog cards, 13 creatable devices, firmware page and existing device/session surfaces"
+    },
+    {
+      "name": "webburner_large_package",
+      "status": "PASS",
+      "detail": "9441052 bytes; 3 chunks; web-manifest to normalized merged-flash; manifest PASS"
+    },
+    {
+      "name": "refresh_recovery",
+      "status": "PASS",
+      "detail": "Completed artifact survived forced import failure and page refresh; import resumed without re-upload"
+    },
+    {
+      "name": "cancel_cleanup",
+      "status": "PASS",
+      "detail": "Cancel after first chunk; upload lookup 404 and browser checkpoint cleared"
+    },
+    {
+      "name": "openapi",
+      "status": "PASS",
+      "detail": "3.1.0; API 1.13.0; 38 paths"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "synthetic_firmware_device_boot",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_vendor_corpus",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/9aa3fd71e9ad0b0002cd3e06f4e12038a833d703",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40022859936",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9aa3fd71e9ad0b0002cd3e06f4e12038a833d703/tests/firmware/evidence-2026-10-24-webburner-ui.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9aa3fd71e9ad0b0002cd3e06f4e12038a833d703/platform/web/firmware.html",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9aa3fd71e9ad0b0002cd3e06f4e12038a833d703/docs/device-service-api.md"
+  ],
+  "notes": [
+    "FW-04 browser intake is delivered; SPIFFS and runtime permission/license policy remain open.",
+    "The session creation UI contract was exercised with a mocked successful response; no synthetic firmware was booted as a device.",
+    "All runtime conclusions remain virtual-device or static evidence; physical hardware is NOT RUN."
+  ]
+}
