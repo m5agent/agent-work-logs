@@ -34,7 +34,7 @@
 - 平台测试：`223/223` PASS；
 - QEMU patch reverse/forward apply check：PASS；
 - 完整 UIFlow2 矩阵：67/67、274/274 PASS，全部首轮无重试；
-- Linux namespace TLS：`NOT RUN`；
+- Linux namespace TLS：初次记录为 `NOT RUN`；follow-up `PASS`；
 - 物理硬件：`NOT RUN`。
 
 ## 文件
@@ -42,10 +42,10 @@
 - `report.md`：根因、修复、复现过程和验证
 - `run.json`：机器可读结果
 - `evidence/verification.summary.json`：脱敏聚合证据
+- `followups/2026-10-24-linux-namespace/`：Linux private namespace TLS 复测
 
 ## 未覆盖项
 
-- Linux namespace 下的 TLS/VFS/网关回归；
 - 任意公网 destination allowlist、可控 resolver 和 DHCP renewal；
 - 真机 TLS、RF、功耗、声学和电气行为；
 - 本修复是数据面兼容路径，不等于完整 ESP32-S3 AES/GDMA 时序模型。

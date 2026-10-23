@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "scope": "linux-private-network-namespace-tls-host-allowlist",
+  "timestamp": "2026-10-24T00:16:30+08:00",
+  "status": "PASS",
+  "source_commit": "28a51f4b86abd39686214cedf94b2214810f6ca2",
+  "base_commit": "f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb",
+  "qemu": {
+    "platform": "linux-arm64",
+    "sha256": "abab392c14f9074b7787face2c616be7bf93bc3b53f945b97c9fd70e25a23670",
+    "patch": "0027-esp32s3-gdma-external-memory.patch"
+  },
+  "tls_fixture": {
+    "status": "PASS",
+    "isolation": "namespace",
+    "private_namespace": true,
+    "no_external_route": true,
+    "wifi": "PASS",
+    "dhcp": "PASS",
+    "tls_context": "PASS",
+    "ca_load": "PASS",
+    "allow": {
+      "host": "allowed.lab.test",
+      "status": 200
+    },
+    "deny": {
+      "host": "denied.lab.test",
+      "status": 403
+    },
+    "dns_responses": 0,
+    "pcap": "PASS"
+  },
+  "platform": {
+    "tests": 223,
+    "status": "PASS"
+  },
+  "not_run": [
+    "generic destination egress allowlist",
+    "controlled resolver",
+    "DHCP renewal",
+    "multi-device lab fabric",
+    "physical hardware"
+  ]
+}

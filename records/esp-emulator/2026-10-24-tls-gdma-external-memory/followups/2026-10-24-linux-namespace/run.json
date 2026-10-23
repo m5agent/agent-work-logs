@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "hardware_test",
+  "overall_status": "PASS",
+  "title": "Run TLS Host allowlisting in a Linux private network namespace",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "f0f7065b7ba42ba914a74b6d80ceb2c88c8e52eb",
+    "result_commit": "28a51f4b86abd39686214cedf94b2214810f6ca2"
+  },
+  "hardware": {
+    "targets": [
+      "Linux arm64 container",
+      "virtual QEMU ESP32-S3",
+      "Linux private network namespace"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation_scope": "virtual-device",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "Ubuntu Linux arm64 container; QEMU 9.2.2 rebuilt from the same source",
+    "commands": [
+      "ninja -C /build qemu-system-xtensa",
+      "python3 tests/network/tls_allowlist/run_test.py --isolation namespace --timeout 45",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'"
+    ]
+  },
+  "checks": [
+    {
+      "name": "private_network_namespace",
+      "status": "PASS"
+    },
+    {
+      "name": "no_external_route",
+      "status": "PASS"
+    },
+    {
+      "name": "wifi_dhcp",
+      "status": "PASS"
+    },
+    {
+      "name": "tls_ca_and_handshake",
+      "status": "PASS"
+    },
+    {
+      "name": "tls_host_allow_deny",
+      "status": "PASS",
+      "detail": "allow 200; deny 403"
+    },
+    {
+      "name": "pcap",
+      "status": "PASS",
+      "detail": "DHCP and TLS flow present; no DNS responses"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "223/223"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/28a51f4b86abd39686214cedf94b2214810f6ca2/tests/network/tls_allowlist/evidence-2026-10-24-linux-namespace-pass.json"
+  ],
+  "notes": [
+    "This is a validated virtual-device path, not physical hardware.",
+    "Host filtering is not a generic destination-egress allowlist.",
+    "Controlled resolver, DHCP renewal and multi-device fabric remain open."
+  ]
+}
