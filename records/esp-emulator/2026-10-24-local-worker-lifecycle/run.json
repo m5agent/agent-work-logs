@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Persist and validate the local simulator worker lifecycle",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "8e37781326e337d1d479b3dd432099f4734e8c16",
+    "result_commit": "689c49b77ff6595a97dc57d3b3e6b37bef7fde8d"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validation_scope": "virtual-device",
+    "guest": "StickS3 qemu-wifi",
+    "image_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec",
+    "image_size": 8388608
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; local Device Service; StickS3 QEMU; Ubuntu GitHub Actions",
+    "task_id": "40037664731",
+    "session_id": "",
+    "commands": [
+      "python3 tests/network/worker_lifecycle/run_test.py --out-dir <output>",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "worker_lifecycle_fixture",
+      "status": "PASS",
+      "detail": "17/17 checks"
+    },
+    {
+      "name": "worker_identity_heartbeat",
+      "status": "PASS"
+    },
+    {
+      "name": "active_lease_visibility",
+      "status": "PASS"
+    },
+    {
+      "name": "drain_blocks_new_leases",
+      "status": "PASS"
+    },
+    {
+      "name": "active_session_survives_drain",
+      "status": "PASS"
+    },
+    {
+      "name": "drained_after_last_lease",
+      "status": "PASS"
+    },
+    {
+      "name": "resume_admission",
+      "status": "PASS"
+    },
+    {
+      "name": "process_group_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "restart_abandoned_lease",
+      "status": "PASS",
+      "detail": "generation 1 to 2; abandoned count 1; active count 0"
+    },
+    {
+      "name": "interrupted_session_history",
+      "status": "PASS"
+    },
+    {
+      "name": "pcap_availability_recorded",
+      "status": "PASS",
+      "detail": "The same session network evidence remains PARTIAL and is not a network PASS."
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "264/264"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "GitHub Actions run 40037664731"
+    },
+    {
+      "name": "remote_worker",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "active_qemu_reattach",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/689c49b77ff6595a97dc57d3b3e6b37bef7fde8d/tests/network/worker_lifecycle/evidence-2026-10-24-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40037664731"
+  ],
+  "notes": [
+    "The worker state directory has a single-writer flock and a stable identity across process generations.",
+    "A forced process-group crash cannot be re-attached; the next generation records the old lease as abandoned and restores its session as interrupted failed.",
+    "The fixture uses an exact padded 8 MiB firmware image generated through the normal artifact and firmware APIs.",
+    "Remote registration, queueing, active QEMU re-attach, warm pools, multi-host scheduling and physical hardware remain unverified."
+  ]
+}

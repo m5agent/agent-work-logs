@@ -83,6 +83,7 @@
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |
 | 2026-10-24 | ESP Emulator | 双 guest 私有 lab fabric、共享 WLAN patch 与全矩阵 | PASS（virtual-device：17/17 fabric gates、双侧 DHCP/TCP/pcap、宿主隔离、260/260 平台测试、67/67 矩阵零重试；worker/IPv6/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-two-guest-lab-fabric/) |
+| 2026-10-24 | ESP Emulator | 本地 worker identity、heartbeat、drain 与重启分类 | PASS（virtual-device worker control：17/17 lifecycle checks、真实 `qemu-wifi` drain、pcap availability、SIGKILL 后 generation 2 abandoned lease、264/264 平台测试；远程 worker/re-attach/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-local-worker-lifecycle/) |
 
 ## 目录结构
 
