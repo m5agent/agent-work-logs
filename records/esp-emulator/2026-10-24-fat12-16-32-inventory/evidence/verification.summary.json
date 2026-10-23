@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-24T00:51:30+08:00",
+  "scope": "firmware-manifest-fat12-fat16-fat32-read-only-inventory",
+  "status": "PASS",
+  "source_commit": "97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d",
+  "base_commit": "26090ceb868c66a6b0c338c41f7d242d243f1be2",
+  "regression": {
+    "platform_tests": {
+      "passed": 230,
+      "total": 230,
+      "status": "PASS"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "ruff_changed_parser": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "synthetic_fixtures": {
+    "fat12": {
+      "status": "PASS",
+      "file_count": 4,
+      "directory_count": 3
+    },
+    "fat16": {
+      "status": "PASS",
+      "file_count": 4,
+      "directory_count": 3
+    },
+    "fat32": {
+      "status": "PASS",
+      "file_count": 4,
+      "directory_count": 3
+    },
+    "checks": [
+      "LFN checksum and long path",
+      "nested directories",
+      "multi-cluster SHA256",
+      "sensitive .key redaction",
+      "SPDX extraction",
+      "cluster loop rejection",
+      "malformed input rejection",
+      "erased partition UNFORMATTED classification",
+      "manifest integration"
+    ]
+  },
+  "real_sample": {
+    "device": "papercolor",
+    "firmware_id": "1897200000000000148",
+    "image_sha256": "a3f5ca4ae89dd724dd8f9b2d800fd9749af84bf0cf2fffbf99cdf822b285f419",
+    "image_size": 16777216,
+    "partition_label": "storage",
+    "partition_sha256": "37f07c05d95392d952203947d27df25163291b0d556c57162bb2d120fe1d9267",
+    "fat_type": "fat12",
+    "file_count": 11,
+    "total_file_bytes": 2880321,
+    "status": "PARTIAL",
+    "reason": "System Volume Information has no . and .. entries and was rejected"
+  },
+  "validation_boundaries": {
+    "qemu_full_matrix_rerun": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "runtime_permissions": "NOT RUN",
+    "license_compliance": "NOT RUN",
+    "spiffs_inventory": "UNSUPPORTED",
+    "deleted_file_recovery": "NOT RUN",
+    "file_slack_space": "NOT RUN"
+  }
+}

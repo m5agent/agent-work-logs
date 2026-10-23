@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Inventory FAT12, FAT16, and FAT32 resources in firmware manifests",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "26090ceb868c66a6b0c338c41f7d242d243f1be2",
+    "result_commit": "97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validation_scope": "static-image",
+    "real_sample": {
+      "device": "papercolor",
+      "firmware_id": "1897200000000000148",
+      "image_sha256": "a3f5ca4ae89dd724dd8f9b2d800fd9749af84bf0cf2fffbf99cdf822b285f419",
+      "fat_type": "fat12",
+      "file_count": 11,
+      "status": "PARTIAL"
+    }
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; static image analysis",
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "230/230"
+    },
+    {
+      "name": "fat12_synthetic",
+      "status": "PASS"
+    },
+    {
+      "name": "fat16_synthetic",
+      "status": "PASS"
+    },
+    {
+      "name": "fat32_synthetic",
+      "status": "PASS"
+    },
+    {
+      "name": "lfn_and_directory_walk",
+      "status": "PASS"
+    },
+    {
+      "name": "multi_cluster_sha256",
+      "status": "PASS"
+    },
+    {
+      "name": "sensitive_path_redaction",
+      "status": "PASS"
+    },
+    {
+      "name": "spdx_extraction",
+      "status": "PASS"
+    },
+    {
+      "name": "cluster_loop_rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed_input_rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "erased_partition_classification",
+      "status": "PASS",
+      "detail": "UNFORMATTED"
+    },
+    {
+      "name": "manifest_integration",
+      "status": "PASS"
+    },
+    {
+      "name": "real_papercolor_fat12",
+      "status": "PARTIAL",
+      "detail": "11 PNG hashed; uninitialized System Volume Information rejected"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_full_matrix_rerun",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d/tests/firmware/evidence-2026-10-24-fat-inventory.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d"
+  ],
+  "notes": [
+    "FAT parsing is read-only and never mounts or executes the image.",
+    "A malformed or uninitialized directory cannot produce a partial file list that is reported as a full PASS.",
+    "SPIFFS inventory remains unsupported.",
+    "No QEMU functional matrix was rerun because this change only affects static firmware-review Python code."
+  ]
+}
