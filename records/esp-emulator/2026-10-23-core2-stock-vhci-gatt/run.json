@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Validate stock Core2 native-VHCI BLE GATT with external Bumble peer",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "11bdf8fc3ed0588b4fb2ad7783d6b894489588fb",
+    "result_commit": "1546798de9db5df52e3045527281c2a8d01dcc4d"
+  },
+  "hardware": {
+    "targets": [
+      "virtual QEMU ESP32 LX6 Core2",
+      "Bumble virtual controller and peer"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "scope": "stock UIFlow2 built-in-controller build",
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU m5core2; deterministic TCG/icount",
+    "commands": [
+      "PYTHONPATH=.work/py python3 tests/uiflow2/core2_native_vhci/run_test.py --attempts 5 --out-dir /tmp/core2-native-vhci-5x",
+      "PYTHONPATH=.work/py python3 tests/uiflow2/run_peripheral_matrix.py --device core2 --out-dir /tmp/m5-core2-after-native-vhci",
+      "PYTHONPATH=.work/py python3 tests/uiflow2/run_device_matrix.py --device core2 --out-dir /tmp/m5-core2-device-after-native-vhci",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'"
+    ]
+  },
+  "checks": [
+    {
+      "name": "native_vhci_gatt",
+      "status": "PASS",
+      "detail": "5/5 attempts; external NUS discovery/subscription/write/notify"
+    },
+    {
+      "name": "stock_internal_controller_build",
+      "status": "PASS",
+      "detail": "No HCI-UART firmware rebuild"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "213 tests"
+    },
+    {
+      "name": "core2_peripheral_matrix",
+      "status": "PASS",
+      "detail": "6/6 cases"
+    },
+    {
+      "name": "core2_device_matrix",
+      "status": "PASS",
+      "detail": "1/1 frame/input case"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "bit_exact_esp32_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "device_service_unified_integration",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1546798de9db5df52e3045527281c2a8d01dcc4d/tests/uiflow2/core2_native_vhci/evidence-2026-10-23-vhci.json"
+  ],
+  "notes": [
+    "The stock firmware VHCI H2C/C2H path is bridged to Bumble through QEMU GDB.",
+    "The GDB bridge is a diagnostic implementation, not the final Device Service runtime.",
+    "Bumble supplies controller-side behavior; the Espressif baseband/controller is not bit-exact emulated."
+  ]
+}

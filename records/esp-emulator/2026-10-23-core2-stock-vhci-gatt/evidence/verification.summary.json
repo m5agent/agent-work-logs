@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "scope": "virtual-device-stock-core2-native-vhci-gatt",
+  "timestamp": "2026-10-23T20:47:17+08:00",
+  "status": "PASS",
+  "source_commit": "1546798de9db5df52e3045527281c2a8d01dcc4d",
+  "firmware": {
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "stock_internal_controller_build": true
+  },
+  "native_vhci": {
+    "attempts": 5,
+    "passes": 5,
+    "checks": {
+      "guest_rx": true,
+      "guest_ack": true,
+      "peer_found": true,
+      "peer_connected": true,
+      "gatt_discovered": true,
+      "subscribed": true,
+      "write": true,
+      "notification_ok": true,
+      "bridge_h2c": true,
+      "bridge_c2h": true,
+      "bridge_acl_h2c": true,
+      "bridge_acl_c2h": true
+    },
+    "gatt": {
+      "payload": "M5_CORE2_PROBE",
+      "notification": "ACK:M5_CORE2_PROBE"
+    }
+  },
+  "regression": {
+    "platform_tests": {
+      "status": "PASS",
+      "tests": 213
+    },
+    "core2_peripheral_matrix": {
+      "status": "PASS",
+      "cases": 6
+    },
+    "core2_device_matrix": {
+      "status": "PASS",
+      "cases": 1
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS"
+  },
+  "not_claimed": [
+    "bit-exact Espressif BT baseband/controller execution",
+    "Device Service unified-session integration",
+    "RF, coexistence, pairing, security, throughput or power",
+    "physical hardware validation"
+  ]
+}
