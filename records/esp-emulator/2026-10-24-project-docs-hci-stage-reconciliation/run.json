@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "docs_change",
+  "overall_status": "PASS",
+  "title": "Reconcile document freshness, current P0 status, and Core2 native-HCI stages",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7f8343d0b3c5e0ecfac90d24084e250c0ad5a5f9",
+    "result_commit": "53cefc14e909519baebf12784597c3274f72f1e4",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40012704195"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "note": "No firmware or runtime artifact changed in this documentation reconciliation."
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and GitHub Actions ubuntu-latest; Python 3",
+    "changed_files": 22,
+    "insertions": 261,
+    "deletions": 61,
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "python3 -m compileall -q platform/tools platform/tests tests/uiflow2/core2_native_hci",
+      "git diff --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "243 tests; OK"
+    },
+    {
+      "name": "github_actions_platform_tests",
+      "status": "PASS",
+      "detail": "243 tests; OK (skipped=2)"
+    },
+    {
+      "name": "document_freshness_inventory",
+      "status": "PASS",
+      "detail": "All 29 non-navigation Markdown documents are classified with review dates"
+    },
+    {
+      "name": "relative_markdown_links",
+      "status": "PASS",
+      "detail": "Includes docs/plans"
+    },
+    {
+      "name": "obsolete_claim_checks",
+      "status": "PASS",
+      "detail": "Rejects 243/243 PASS and guest VHCI not connected wording"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "compile_python_entry_points",
+      "status": "PASS"
+    },
+    {
+      "name": "core2_hci_1_transport",
+      "status": "PASS",
+      "detail": "Existing targeted evidence remains valid"
+    },
+    {
+      "name": "core2_hci_2_h2c",
+      "status": "PARTIAL",
+      "detail": "First stock Reset captured; complete command sequence not run"
+    },
+    {
+      "name": "core2_hci_3_c2h",
+      "status": "NOT RUN",
+      "detail": "No committed implementation; vhci_send parameter experiment rejected"
+    },
+    {
+      "name": "core2_hci_4_repeated_lease",
+      "status": "NOT RUN",
+      "detail": "No no-GDB Device Service 5/5 gate"
+    },
+    {
+      "name": "qemu_full_matrix_rerun",
+      "status": "NOT RUN",
+      "detail": "Existing 67/67 and 274/274 evidence is referenced"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/53cefc14e909519baebf12784597c3274f72f1e4",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40012704195",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/53cefc14e909519baebf12784597c3274f72f1e4/docs/core2-native-hci-backend.md"
+  ],
+  "notes": [
+    "The current work order is HCI-3, HCI-4, NET-03/NET-04, then FW-01.",
+    "Direct vhci_send injection made the guest function return but still timed out waiting for an ack.",
+    "No QEMU controller, firmware data plane, network policy, or Device Service runtime behavior changed.",
+    "Physical hardware remains unverified."
+  ]
+}
