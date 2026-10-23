@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Harden resumable firmware uploads and reconcile current code, evidence, and backlog",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5217b50af60c7ac31f3051a6fef8b70fdb110fe4",
+    "result_commit": "0ffaf07b334a09690e2ad62b23078c04ea8b134c",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40021209492"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "note": "No firmware binary changed; the upload API and evidence handling were tested with synthetic service fixtures."
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and GitHub Actions ubuntu-latest; Python 3",
+    "changed_files": 19,
+    "insertions": 1213,
+    "deletions": 72,
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "ruby OpenAPI YAML parse",
+      "python3 -m py_compile platform/tools/device_service.py platform/tools/serve.py",
+      "git diff --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "249 tests; OK; no skips in the local run"
+    },
+    {
+      "name": "github_actions_platform_tests",
+      "status": "PASS",
+      "detail": "249 tests; OK (skipped=2)"
+    },
+    {
+      "name": "resumable_upload_service_round_trip",
+      "status": "PASS",
+      "detail": "Contiguous chunks, resume metadata, final hash and normal artifact publication"
+    },
+    {
+      "name": "resumable_upload_http_round_trip",
+      "status": "PASS",
+      "detail": "202 create/chunk, 200 resume, 201 complete and 200 abort"
+    },
+    {
+      "name": "resumable_upload_failure_rollback",
+      "status": "PASS",
+      "detail": "Simulated fsync failure restored staging and metadata to the last committed offset"
+    },
+    {
+      "name": "abandoned_upload_gc",
+      "status": "PASS",
+      "detail": "Expired part and metadata files were removed by the storage janitor"
+    },
+    {
+      "name": "openapi",
+      "status": "PASS",
+      "detail": "OpenAPI 3.1.0; API 1.12.0; 37 paths"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "documentation_consistency",
+      "status": "PASS",
+      "detail": "Dynamic test count, links, freshness rows, API version and retired-claim checks"
+    },
+    {
+      "name": "qemu_full_matrix_rerun",
+      "status": "NOT RUN",
+      "detail": "No QEMU controller or device probe changed in this upload/docs slice"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/0ffaf07b334a09690e2ad62b23078c04ea8b134c",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40021209492",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/0ffaf07b334a09690e2ad62b23078c04ea8b134c/tests/firmware/evidence-2026-10-24-streaming-artifact-upload.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/0ffaf07b334a09690e2ad62b23078c04ea8b134c/docs/project-status.md"
+  ],
+  "notes": [
+    "The current byte-scan upload backend is complete at the service/API layer, but the WebBurner browser UI remains open.",
+    "Core2 HCI-3a remains PASS; HCI-3b complete HCI/GATT and HCI-4 repeated lease remain open.",
+    "Network Linux policy CI is delivered; dual-device fabric, a self-hosted QEMU worker and external IPv6 remain open.",
+    "All device and network conclusions remain virtual-device validation, not physical hardware measurements."
+  ]
+}
