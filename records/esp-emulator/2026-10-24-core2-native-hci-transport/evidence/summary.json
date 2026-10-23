@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-transport-verification-summary",
+  "scope": "virtual-device transport-only",
+  "source_commit": "f32ae621454a1fb52aaa3b8313db923622161a92",
+  "patch": {
+    "sha256": "6a7d06ba5580cc9b3146258cfeb1ac13274b71782d8513373a4ef546ce678f95",
+    "forward_apply": "PASS",
+    "reverse_apply": "PASS"
+  },
+  "test": {
+    "script_sha256": "65e78141249dc34bafcb5e877fee5e7b28066be91934e3a6ab27f955c9c2fc85",
+    "status": "PASS",
+    "checks": {
+      "peer_opened": true,
+      "h4_event": true,
+      "fragmented_acl": true,
+      "rx_bytes": 15,
+      "queue_depth_before_overflow": 32,
+      "accepted_packets_before_overflow": 32,
+      "dropped_packets": 1,
+      "last_error": 2,
+      "peer_closed": true,
+      "qemu_clean_exit": true
+    }
+  },
+  "platform": {
+    "tests": {
+      "status": "PASS",
+      "passed": 243,
+      "total": 243
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS"
+  },
+  "not_run": [
+    "guest H2C capture",
+    "guest C2H delivery",
+    "stock BLE discovery or GATT",
+    "repeated Device Service lease",
+    "bit-exact controller/baseband",
+    "physical hardware"
+  ]
+}

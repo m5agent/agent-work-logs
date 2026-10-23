@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add QEMU classic ESP32 HCI chardev transport",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b62cd3715bd1d3eca3b7550a12249585f5c8c6f6",
+    "result_commit": "f32ae621454a1fb52aaa3b8313db923622161a92",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40010243257"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "guest_firmware": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, QEMU 9.2.2 Xtensa, m5core2 paused guest",
+    "ci_status": "PASS",
+    "qemu_build": "PASS",
+    "transport_test": "PASS",
+    "platform_tests": 243
+  },
+  "checks": [
+    {
+      "name": "qemu_build",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_patch_forward_reverse",
+      "status": "PASS"
+    },
+    {
+      "name": "h4_event_and_fragmented_acl",
+      "status": "PASS",
+      "detail": "2 packets, 15 bytes"
+    },
+    {
+      "name": "bounded_queue_overflow",
+      "status": "PASS",
+      "detail": "32 accepted, 33rd dropped, last-error=2"
+    },
+    {
+      "name": "peer_lifecycle",
+      "status": "PASS"
+    },
+    {
+      "name": "clean_shutdown",
+      "status": "PASS",
+      "detail": "QEMU exit code 0"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "243/243"
+    },
+    {
+      "name": "guest_h2c",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "guest_c2h",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "native_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f32ae621454a1fb52aaa3b8313db923622161a92/patches/qemu-core2-native-hci/0001-esp32-native-hci-transport.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f32ae621454a1fb52aaa3b8313db923622161a92/tests/uiflow2/core2_native_hci/evidence-2026-10-24-transport-pass.json"
+  ],
+  "notes": [
+    "This is a host transport milestone only.",
+    "Guest VHCI integration and repeated Device Service stability remain open."
+  ]
+}
