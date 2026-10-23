@@ -135,6 +135,33 @@ patch reverse-check 通过。
 结论：即使补齐 common caller-saved 特殊寄存器，direct nested callback
 仍不具备 domain-valid controller-notification 语义。
 
+### Controller-entry audit follow-up
+
+ELF 反汇编和 ESP-IDF 源码确认正规 C2H 路径是：
+
+```text
+r_eif_send
+  -> vhci_send
+  -> notify_host_recv callback
+  -> VHCI flow state / send-available
+```
+
+实验从 QEMU idle safe point 调用 `r_eif_send(data, length,
+dummy_host_rcv_pkt, 0)`。结果：
+
+```text
+Guru Meditation Error: Cache disabled but cached memory region accessed
+PC 0x400934a6
+```
+
+QEMU 同时记录 C2H callback 未正常返回，运行在 100000 steps 后停住。证据见
+`evidence/followup-controller-entry-audit.json`，源码提交
+`07df1ffd6f3385a0dedf4c8e7bf663aa81785f73`，CI
+`40026818206`。实验再次回退。
+
+结论：controller 内部入口不是可重入 RPC。必须把它接入 QEMU device/IRQ
+事件上下文，或者实现 in-process controller。
+
 ## 当前判断
 
 失败余量集中在：
@@ -172,6 +199,10 @@ network-namespace-policy success
 GitHub Actions 40026060792
 platform-contracts success
 network-namespace-policy success
+
+GitHub Actions 40026818206
+platform-contracts success
+network-namespace-policy success
 ```
 
 ## 验证边界
@@ -190,8 +221,10 @@ network-namespace-policy success
 
 - 本次没有保留 QEMU scheduler 实验，也没有改变已发布 QEMU patch；
 - safe-point audit 同样已回退，只保留独立负向证据；
+- controller-entry audit 也已回退，只保留独立负向证据；
 - runner 只用于诊断，不会在 CI 中被误当成 release PASS；
 - 回滚源码提交 `32862edf3998cae4d4b62464c51af295761c330d` 和
   `b6aa8c8231111d1ef40cd31f40d103445ebb49d0` 可移除 diagnostic gate、
-  safe-point audit 和文档更新；
+  safe-point audit 和文档更新；`07df1ffd6f3385a0dedf4c8e7bf663aa81785f73`
+  移除 controller-entry audit；
 - 无物理烧录或设备状态变更。

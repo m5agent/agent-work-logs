@@ -7,8 +7,9 @@
 - 源码基线：`9aa3fd71e9ad0b0002cd3e06f4e12038a833d703`
 - 基线诊断提交：`32862edf3998cae4d4b62464c51af295761c330d`
 - safe-point follow-up：`b6aa8c8231111d1ef40cd31f40d103445ebb49d0`
+- controller-entry follow-up：`07df1ffd6f3385a0dedf4c8e7bf663aa81785f73`
 - baseline CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490>
-- follow-up CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026060792>
+- controller-entry CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026818206>
 - 环境：macOS Apple Silicon；QEMU m5core2；stock UIFlow2；Bumble controller/peer
 
 ## 结论
@@ -49,6 +50,21 @@ caller-saved 特殊寄存器仍未解决。guest 在 BLE 初始化阶段两次
 遗漏少量 CPU 寄存器，而是 direct nested callback 不具备通用
 controller-to-host 注入语义。
 
+### Controller-entry follow-up
+
+进一步定位到 firmware 的真实 C2H 路径：
+
+```text
+r_eif_send -> vhci_send -> registered notify_host_recv -> VHCI flow
+```
+
+把 `r_eif_send` 当作 nested guest RPC 调用时，即使提供真实 completion stub，
+guest 仍触发 `Cache disabled but cached memory region accessed`，callback
+没有正常返回。实验已回退。
+
+因此最终实现必须是设备/IRQ 事件或 in-process controller，不能从 QEMU device
+callback 同步调用 guest controller 内部函数。
+
 ## 关键证据
 
 - 新增 runner：`tests/uiflow2/core2_native_hci/run_full.py`；
@@ -70,6 +86,7 @@ controller-to-host 注入语义。
 - `run.json`：结构化失败记录；
 - `evidence/verification.summary.json`：transport、C2H、HCI-3b 和 CI 聚合；
 - `evidence/followup-safe-point-audit.json`：特殊寄存器 audit 和 guest crash；
+- `evidence/followup-controller-entry-audit.json`：真实 C2H 内部入口与 cache fault；
 
 ## 未覆盖项
 

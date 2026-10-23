@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "kind": "m5stack-core2-native-hci-controller-entry-audit",
+  "date": "2026-10-24",
+  "status": "FAIL",
+  "source_commit": "07df1ffd6f3385a0dedf4c8e7bf663aa81785f73",
+  "real_c2h_path": [
+    "r_eif_send",
+    "vhci_send",
+    "notify_host_recv",
+    "VHCI flow state",
+    "notify_host_send_available"
+  ],
+  "symbols": {
+    "r_eif_send": "0x402fbc28",
+    "vhci_send": "0x40306330",
+    "vhci_notify_host_send_available": "0x403062e8",
+    "dummy_host_rcv_pkt": "0x40329de8"
+  },
+  "result": {
+    "callback_returned": false,
+    "steps": 100000,
+    "guest_error": "Guru Meditation Error: Cache disabled but cached memory region accessed",
+    "pc": "0x400934a6"
+  },
+  "conclusion": "The real controller C2H entry cannot be invoked as a re-entrant nested guest RPC. It must run in a device/IRQ context or an in-process controller.",
+  "experiment_retained": false,
+  "qemu_patch_reverse_check": "PASS",
+  "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026818206"
+}
