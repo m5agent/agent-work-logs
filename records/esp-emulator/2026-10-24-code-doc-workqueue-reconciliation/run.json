@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "docs_change",
+  "overall_status": "PASS",
+  "title": "Reconcile code map, documentation, current workstreams, and backlog",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "07df1ffd6f3385a0dedf4c8e7bf663aa81785f73",
+    "result_commit": "72c2b8d59edc0f446fb35809d4c8e73c818dd9f5",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40027623120"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "note": "No firmware or runtime artifact changed in this documentation reconciliation."
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and GitHub Actions ubuntu-latest; Python 3; Node.js",
+    "changed_files": 18,
+    "insertions": 173,
+    "deletions": 64,
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "PYTHONPATH=platform/tools python3 platform/tests/test_docs_consistency.py -v",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "python3 -m compileall -q platform/tools platform/tests",
+      "git diff --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "253 tests; OK"
+    },
+    {
+      "name": "github_actions_platform_tests",
+      "status": "PASS",
+      "detail": "253 tests; OK (skipped=2)"
+    },
+    {
+      "name": "github_actions_browser_tests",
+      "status": "PASS",
+      "detail": "SHA256_OK and FIRMWARE_UPLOAD_OK"
+    },
+    {
+      "name": "github_actions_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "document_consistency",
+      "status": "PASS",
+      "detail": "9 tests"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "compile_python_entry_points",
+      "status": "PASS"
+    },
+    {
+      "name": "core2_hci_3b_diagnostic",
+      "status": "FAIL",
+      "detail": "Connect and first ATT exchange pass; the second ATT request is followed by ACK 12 and guest reset."
+    },
+    {
+      "name": "core2_safe_point_callback_route",
+      "status": "FAIL",
+      "detail": "Caller-saved register restoration was insufficient; the guest still raised ACK 12 and LoadProhibited. Experiment not retained."
+    },
+    {
+      "name": "core2_nested_controller_entry_route",
+      "status": "FAIL",
+      "detail": "Nested r_eif_send to vhci_send failed with a cache-disabled memory access. Experiment not retained."
+    },
+    {
+      "name": "core2_guest_visible_c2h_irq_queue",
+      "status": "NOT RUN",
+      "detail": "This is the next implementation boundary."
+    },
+    {
+      "name": "core2_hci_4_repeated_lease",
+      "status": "NOT RUN",
+      "detail": "No no-GDB Device Service 5/5 gate yet."
+    },
+    {
+      "name": "qemu_full_matrix_rerun",
+      "status": "NOT RUN",
+      "detail": "Existing 67/67 and 274/274 evidence is referenced only."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/72c2b8d59edc0f446fb35809d4c8e73c818dd9f5",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40027623120",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/72c2b8d59edc0f446fb35809d4c8e73c818dd9f5/docs/project-status.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/72c2b8d59edc0f446fb35809d4c8e73c818dd9f5/docs/workstreams.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/72c2b8d59edc0f446fb35809d4c8e73c818dd9f5/docs/code-map.md"
+  ],
+  "notes": [
+    "Current work order is HCI-3b IRQ/queue or in-process controller, HCI-4, NET-03/NET-04, then FW-01.",
+    "No QEMU controller, firmware data plane, network policy, or Device Service runtime behavior changed.",
+    "Physical hardware remains unverified."
+  ]
+}
