@@ -1,0 +1,47 @@
+GET /api/v1/health
+
+  api_version: v1
+  modes.qemu-wifi: enabled-sticks3
+  modes.qemu-ble: enabled-nanoc6-hci-nesso-hci
+  modes.qemu-unified:
+    enabled-sticks3-cores3-cardputer-adv-stopwatch-atoms3r-
+    papercolor-papermono-stackchan-stamplc-wifi-ble
+
+GET /api/v1/openapi.yaml
+
+  info.version: 1.4.0
+  RuntimeName:
+    qemu, network, qemu-wifi, qemu-ble, qemu-unified
+  Session.runtime:
+    $ref RuntimeName
+  /sessions/{session_id}/network summary:
+    Read machine-readable radio evidence for one session
+
+POST /api/v1/sessions
+
+  request:
+    device_id=sticks3
+    runtime=qemu-unified
+    network.profile=uiflow2-sticks3-wifi
+
+  response:
+    HTTP 400
+    code=qemu_unified_profile_required
+    message='uiflow2-sticks3-wifi' is a radio-specific profile;
+            runtime=qemu-unified requires a single-guest unified profile
+
+POST /api/v1/sessions
+
+  request:
+    device_id=sticks3
+    runtime=qemu-unified
+    network.profile=uiflow2-sticks3-unified
+
+  response:
+    HTTP 202
+    runtime=qemu-unified
+    state=flashing
+
+  The reference image used for the HTTP smoke check is not a complete 8 MiB
+  radio-lane image and therefore later failed exact-size Flash validation.
+  This does not affect the successful runtime/profile negotiation check.

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Device Service single-guest unified runtime contract",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "",
+    "pull_request": "",
+    "base_commit": "c6370f3ee70da984b1bba8de03d29576bcf201f1",
+    "commit": "f2ff7a75b473653ec1440e955c0f42c6b7f22203"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Local Device Service API v1; Python 3; OpenAPI 3.1; QEMU-backed virtual devices",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "openapi_runtime_schema",
+      "status": "PASS",
+      "detail": "OpenAPI 1.4.0 uses RuntimeName for CreateSession, Session and logs"
+    },
+    {
+      "name": "qemu_unified_accepts_single_guest_profile",
+      "status": "PASS",
+      "detail": "qemu-unified plus uiflow2-sticks3-unified enters session provisioning"
+    },
+    {
+      "name": "qemu_unified_rejects_radio_only_profile",
+      "status": "PASS",
+      "detail": "HTTP 400 qemu_unified_profile_required for uiflow2-sticks3-wifi"
+    },
+    {
+      "name": "legacy_qemu_ble_compatibility",
+      "status": "PASS",
+      "detail": "existing qemu-ble unified and radio-specific tests remain green"
+    },
+    {
+      "name": "platform_unit_tests",
+      "status": "PASS",
+      "detail": "172 tests"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/api-contract-check.txt",
+    "evidence/openapi-summary.json"
+  ],
+  "notes": [
+    "Virtual-device and API contract validation only.",
+    "No physical hardware, RF, power or electrical measurements are claimed.",
+    "qemu-ble remains accepted for compatibility; qemu-unified is the canonical new runtime."
+  ]
+}
