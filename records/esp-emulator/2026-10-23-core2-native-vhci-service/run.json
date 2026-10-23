@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Expose Core2 stock native-VHCI BLE through Device Service",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7823befc2cee622e6b086287f5ae903fda839885",
+    "result_commit": "bf500ec3a6287586bdb28713a0feedc7e19a9eaf"
+  },
+  "hardware": {
+    "targets": [
+      "virtual QEMU ESP32 LX6 Core2",
+      "Bumble virtual controller and peer"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "f19597358e93279e8996f469aadf6e4a828c5e5285ef2f31212290c3df597ba2",
+    "matching_elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; local Device Service; QEMU m5core2; Bumble",
+    "runtime": "qemu-unified",
+    "profile": "core2-native-vhci",
+    "attempts": 1,
+    "session_retention": "purge=0; retain_flash=0"
+  },
+  "checks": [
+    {
+      "name": "device_service_native_vhci",
+      "status": "PASS",
+      "detail": "18/18 network checks"
+    },
+    {
+      "name": "board_display_touch",
+      "status": "PASS"
+    },
+    {
+      "name": "qom_power_imu",
+      "status": "PASS",
+      "detail": "AXP2101 4000 mV; MPU6886 accel-x 0.25 g"
+    },
+    {
+      "name": "audio_pcm",
+      "status": "PASS"
+    },
+    {
+      "name": "wifi_dhcp_http",
+      "status": "PASS"
+    },
+    {
+      "name": "public_dns_http",
+      "status": "PASS"
+    },
+    {
+      "name": "native_vhci_external_gatt",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence_zip",
+      "status": "PASS",
+      "detail": "12 files; SHA256 ddcf4e23b03587aeb4e791089474b8f0cadce0d2c9db06ce4f2e52d8757a7857"
+    },
+    {
+      "name": "pcap_summary",
+      "status": "PASS",
+      "detail": "54 packets"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "213 tests"
+    },
+    {
+      "name": "bit_exact_esp32_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/bf500ec3a6287586bdb28713a0feedc7e19a9eaf/tests/uiflow2/unified_core2/evidence-2026-10-23-native-vhci-service.json"
+  ],
+  "notes": [
+    "The service validates and retains the matching ELF artifact.",
+    "QEMU uses -m 0 for the native-VHCI profile.",
+    "The bridge remains a GDB diagnostic backend rather than a bit-exact controller."
+  ]
+}
