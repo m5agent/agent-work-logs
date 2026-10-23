@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "firmware-manifest-littlefs-inventory",
+  "timestamp": "2026-10-24T00:31:13+08:00",
+  "status": "PASS",
+  "source_commit": "eca4120090ad46b12b64ff74b345c38def80804b",
+  "base_commit": "6de2f923735937aac19457ccb37469ae03cfb822",
+  "sample_image_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+  "filesystems": [
+    {
+      "label": "sys",
+      "type": "littlefs",
+      "status": "PASS",
+      "block_size": 4096,
+      "file_count": 39,
+      "directory_count": 5,
+      "total_file_bytes": 632603
+    },
+    {
+      "label": "vfs",
+      "type": "littlefs",
+      "status": "PASS",
+      "block_size": 4096,
+      "file_count": 17,
+      "directory_count": 7,
+      "total_file_bytes": 16306
+    }
+  ],
+  "checks": {
+    "file_sha256": "PASS",
+    "sensitive_path_redaction": "PASS",
+    "spdx_extraction": "PASS",
+    "manifest_round_trip": "PASS",
+    "manifest_schema": "PASS",
+    "platform_tests": {
+      "status": "PASS",
+      "passed": 225,
+      "total": 225
+    }
+  },
+  "not_run": [
+    "SPIFFS inventory",
+    "FAT inventory",
+    "runtime permissions",
+    "license compliance",
+    "physical hardware"
+  ]
+}

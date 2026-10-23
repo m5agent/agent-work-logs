@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Inventory LittleFS resources in normalized firmware manifests",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "6de2f923735937aac19457ccb37469ae03cfb822",
+    "result_commit": "eca4120090ad46b12b64ff74b345c38def80804b"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation_scope": "static-image-analysis",
+    "sample": "StickS3 UIFlow2",
+    "image_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; littlefs-python 0.19.0",
+    "commands": [
+      "PYTHONPATH=platform/tools python3 platform/tests/test_firmware_analysis.py",
+      "PYTHONPATH=platform/tools python3 platform/tests/test_firmware_manifest.py",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'"
+    ]
+  },
+  "checks": [
+    {
+      "name": "littlefs_mount",
+      "status": "PASS",
+      "detail": "Real StickS3 sys and vfs partitions"
+    },
+    {
+      "name": "file_hash_inventory",
+      "status": "PASS"
+    },
+    {
+      "name": "sensitive_path_redaction",
+      "status": "PASS"
+    },
+    {
+      "name": "spdx_extraction",
+      "status": "PASS"
+    },
+    {
+      "name": "manifest_round_trip",
+      "status": "PASS"
+    },
+    {
+      "name": "manifest_schema",
+      "status": "PASS",
+      "detail": "Optional target.filesystems remains schema v1 compatible"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "225/225"
+    },
+    {
+      "name": "spiffs_inventory",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "fat_inventory",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "runtime_permissions",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/eca4120090ad46b12b64ff74b345c38def80804b/tests/firmware/evidence-2026-10-24-filesystem-inventory.json"
+  ],
+  "notes": [
+    "File contents are not stored in the manifest.",
+    "Sensitive paths are replaced by a redacted marker and hashes.",
+    "SPDX declarations are evidence, not a compliance conclusion.",
+    "SPIFFS and FAT remain unsupported."
+  ]
+}
