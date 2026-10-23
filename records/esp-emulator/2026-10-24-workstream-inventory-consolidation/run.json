@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "docs_change",
+  "overall_status": "PASS",
+  "title": "Consolidate emulator workstreams, code inventory, and actionable task index",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "71ab6ef",
+    "result_commit": "3403287"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "note": "No firmware or runtime artifact changed in this documentation reconciliation."
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; existing QEMU/Tab5/Linux evidence",
+    "changed_files": 11,
+    "insertions": 228,
+    "deletions": 16
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "236/236"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "catalog_generation",
+      "status": "PASS",
+      "detail": "14 devices"
+    },
+    {
+      "name": "documentation_index_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tool_inventory",
+      "status": "PASS",
+      "detail": "Every platform/tools top-level Python module is indexed"
+    },
+    {
+      "name": "backlog_task_inventory",
+      "status": "PASS",
+      "detail": "Every table task ID is present in the workstream ledger"
+    },
+    {
+      "name": "obsolete_claim_checks",
+      "status": "PASS"
+    },
+    {
+      "name": "git_diff_check",
+      "status": "PASS"
+    },
+    {
+      "name": "full_matrix_rerun_for_this_docs_change",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/3403287"
+  ],
+  "notes": [
+    "The workstream ledger separates delivery status, evidence, and open task IDs.",
+    "Code map now inventories every top-level platform tool and records current maintenance hotspots.",
+    "SVC-03 records the Device Service decomposition plan without mixing a high-risk refactor into this documentation milestone.",
+    "No QEMU controller, firmware data plane, network policy, or Device Service behavior changed.",
+    "Physical hardware remains unverified."
+  ]
+}

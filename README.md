@@ -69,6 +69,7 @@
 | 2026-10-24 | ESP Emulator | 精确 IPv4 IP/端口 egress、veth/NAT 与清理 | PASS（Linux namespace：nftables 默认 drop、允许/拒绝 IP+端口、`1.1.1.1:80` 公网 NAT、TLS guest 200/403/pcap；外部 IPv6 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-ip-port-egress-allowlist/) |
 | 2026-10-24 | ESP Emulator | DHCP lease renewal through Device Service | PASS（virtual-device：ESP-IDF `netifapi_dhcp_renew`、DORA→REQUEST/ACK、renewal request/ack 各 1、地址保持、HTTP 200；真实 AP 丢失与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dhcp-renewal/) |
 | 2026-10-24 | ESP Emulator | 当前基线、代码地图、网络方案与 Backlog 重整 | PASS（docs/catalog/profile：225/225 平台测试、链接/日期/旧状态契约 PASS；本次未重跑功能矩阵，物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-project-baseline-reconciliation/) |
+| 2026-10-24 | ESP Emulator | 工作流台账、代码工具清单与 Task ID 一致性 | PASS（docs：12 条工作流、24 个平台工具、全部 Backlog Task ID 与 236/236 测试 PASS；本次未重跑功能矩阵，物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-workstream-inventory-consolidation/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |
 | 2026-10-23 | ESP Emulator | `.work/` 运行资产缺失的部署诊断与结构化错误 | PASS（fresh clone + virtual-device session；物理硬件未测） | [查看](records/esp-emulator/2026-10-23-runtime-assets-deployment/) |
