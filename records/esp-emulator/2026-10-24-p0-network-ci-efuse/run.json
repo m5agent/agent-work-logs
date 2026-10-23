@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Prove Linux policy CI, virtual radio recovery, and redacted eFuse security evidence",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "34032874250d93e01657dbe389a6a832648d172f",
+    "result_commit": "829d64e99ae318c6d78de0729bb6a75f8455373c",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/39998176148"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "radio_probe_sha256": "c033ac5c8fd022e14603db42f2d1e2178bbfd9c39a57725cfad7055a02aede1f",
+    "qemu_binary_sha256": "8342b75c8ab2ccfd23ff0303f85539fe93fe5e74fd476d4f0b902ab607061e60"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and GitHub Actions ubuntu-latest",
+    "platform_tests": 239,
+    "network_fixture": "PASS",
+    "efuse_fixture": "PASS"
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "239/239 locally and in GitHub Actions"
+    },
+    {
+      "name": "network_namespace_policy",
+      "status": "PASS",
+      "detail": "GitHub Actions Ubuntu"
+    },
+    {
+      "name": "radio_down_scan_empty",
+      "status": "PASS"
+    },
+    {
+      "name": "radio_restored_scan_nonempty",
+      "status": "PASS"
+    },
+    {
+      "name": "dhcp_before_after",
+      "status": "PASS",
+      "detail": "2 complete DORA transactions"
+    },
+    {
+      "name": "http_before_after",
+      "status": "PASS",
+      "detail": "both HTTP 200"
+    },
+    {
+      "name": "pcap",
+      "status": "PASS"
+    },
+    {
+      "name": "espefuse_json_parse",
+      "status": "PASS",
+      "detail": "espefuse v5.6.0 89-field virtual summary"
+    },
+    {
+      "name": "efuse_sensitive_value_redaction",
+      "status": "PASS"
+    },
+    {
+      "name": "security_capability_mismatch",
+      "status": "PASS",
+      "detail": "secure boot and Flash Encryption still rejected by QEMU preflight"
+    },
+    {
+      "name": "core2_native_controller",
+      "status": "NOT RUN",
+      "detail": "still uses QEMU GDB bridge"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/829d64e99ae318c6d78de0729bb6a75f8455373c/tests/network/reconnect_probe/evidence-2026-10-24-radio-loss-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/829d64e99ae318c6d78de0729bb6a75f8455373c/tests/firmware/evidence-2026-10-24-efuse-security.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/829d64e99ae318c6d78de0729bb6a75f8455373c/tests/network/egress_allowlist/evidence-2026-10-24-github-actions-pass.json"
+  ],
+  "notes": [
+    "Radio removal uses the emulated WiFi model's radio-enabled QOM state and does not restart the guest.",
+    "Package-provided eFuse JSON is treated as unverified evidence and is not copied into normalized output.",
+    "Core2 no-GDB native controller remains open."
+  ]
+}

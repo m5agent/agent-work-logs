@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-24T01:50:00+08:00",
+  "scope": "p0-network-ci-radio-recovery-and-efuse-security",
+  "status": "PASS",
+  "source_commit": "829d64e99ae318c6d78de0729bb6a75f8455373c",
+  "base_commit": "34032874250d93e01657dbe389a6a832648d172f",
+  "areas": {
+    "linux_ci": {
+      "workflow": "CI",
+      "run_id": 39998176148,
+      "platform_tests": {
+        "passed": 239,
+        "total": 239
+      },
+      "network_namespace_policy": "PASS"
+    },
+    "radio_recovery": {
+      "device_id": "sticks3",
+      "runtime": "qemu-wifi",
+      "fault_target": "radio",
+      "scan_before_down": 1,
+      "scan_while_down": 0,
+      "scan_after_restore": 1,
+      "dhcp_transactions": 2,
+      "http_before": 200,
+      "http_after": 200,
+      "pcap": "PASS"
+    },
+    "efuse_security": {
+      "real_espefuse_fields": 89,
+      "secure_boot": "v2",
+      "flash_encryption": "enabled",
+      "raw_key_or_value_retained": false,
+      "efuse_source_copied": false,
+      "capability_preflight": "REJECTED"
+    }
+  },
+  "validation_boundaries": {
+    "core2_native_controller": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "physical_rf": "NOT RUN",
+    "external_ipv6": "NOT RUN",
+    "multi_device_fabric": "NOT RUN"
+  }
+}
