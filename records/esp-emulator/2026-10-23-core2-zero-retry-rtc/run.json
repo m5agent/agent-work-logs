@@ -30,6 +30,23 @@
     "attempts_per_case": 1,
     "retry_used": false
   },
+  "followup_executions": [
+    {
+      "date": "2026-10-24",
+      "source_commit": "97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d",
+      "interface": "local Device Service /api/v1",
+      "device_id": "core2",
+      "firmware_sha256": "f4e1fde7b426ebff34a2b2ca849acbe776fde5f7544f53ca2bd58a07e829b6be",
+      "qemu_sha256": "86ef63cc30df1d166f31912298f6b7a773479836c7681b462e38b5132656b057",
+      "result": "PASS",
+      "sessions": 5,
+      "attempts_per_session": 1,
+      "retry_used": false,
+      "overlapping_sessions": true,
+      "frame_sha256": "feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c",
+      "evidence": "evidence/2026-10-24-device-service-followup.summary.json"
+    }
+  ],
   "checks": [
     {
       "name": "full_peripheral_matrix",
@@ -45,6 +62,11 @@
       "name": "core2_peripherals_repeat",
       "status": "PASS",
       "detail": "5/5, no retry"
+    },
+    {
+      "name": "core2_peripherals_device_service_repeat",
+      "status": "PASS",
+      "detail": "5/5 independent sessions, including two overlapping sessions; no retry"
     },
     {
       "name": "core2_ui_flash_and_input",
@@ -76,6 +98,7 @@
   ],
   "evidence": [
     "evidence/verification.summary.json",
+    "evidence/2026-10-24-device-service-followup.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/commit/1ef7f0a081cfdc968a816741ca0ed52e18e6b967",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/1ef7f0a081cfdc968a816741ca0ed52e18e6b967/patches/qemu-m5stack-peripherals/0026-m5stack-rtc-virtual-clock.patch",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/1ef7f0a081cfdc968a816741ca0ed52e18e6b967/tests/uiflow2/evidence-2026-10-23-zero-retry-matrix.json"
@@ -83,6 +106,7 @@
   "notes": [
     "A prior 67/67 result was rejected as clean evidence because core2-audio retried after a first-attempt panic.",
     "Peripheral and device matrices reject configured retries unless --allow-retries is explicit.",
-    "RX8130 and PCF8563 now advance on QEMU virtual time from a boot epoch."
+    "RX8130 and PCF8563 now advance on QEMU virtual time from a boot epoch.",
+    "The 2026-10-24 follow-up exercised the same firmware path through the Device Service rather than invoking the QEMU runner directly."
   ]
 }

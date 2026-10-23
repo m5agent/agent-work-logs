@@ -94,6 +94,34 @@ CORE2_TOUCH 219 189
 CORE2_PWR 1
 ```
 
+### 2026-10-24 Device Service 复核
+
+在 `97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d` 的源码基线上，通过本机
+Device Service `/api/v1` 重新执行 5 个独立 Core2 peripheral 会话。每个会话
+都先上传并组合同一份 merged firmware，再通过服务烧录、启动、注入
+`longpress:220,190,1.5` 和 `key:p`，最后读取 frame、串口和 QOM 证据后停止。
+
+结果：
+
+```text
+Core2 peripheral sessions  5/5 PASS
+attempts per session       1
+retry_used                 false
+frame SHA256               feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c
+frame size                 320x240
+frame marker               00ff00 at (310,230)
+CORE2_RTC                  2026-10-22 06:07:08
+CORE2_TOUCH                219 189
+CORE2_PWR                  1
+```
+
+其中第 2、3 个会话实际重叠运行，并都通过。一次额外并发预检没有在服务
+超时内暴露 QMP socket，随后两个重叠会话均正常；该预检只作为启动传输层
+异常记录，不用于对固件或 RTC 模型下结论。
+
+结构化 session ID、固件和 frame/serial SHA256 见
+`evidence/2026-10-24-device-service-followup.summary.json`。
+
 最终 matrix 日志扫描未发现 `Guru Meditation`、panic、Traceback、`FAIL` 或
 forbidden serial text。
 

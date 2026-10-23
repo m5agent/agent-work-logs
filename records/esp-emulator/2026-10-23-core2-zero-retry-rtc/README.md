@@ -25,6 +25,8 @@ realize 时捕获的 host epoch 起，按 `QEMU_CLOCK_VIRTUAL` 推进。guest
 - 每个 case：`attempts=1`、`retry_used=false`
 - Core2 peripheral group：`6/6 PASS`，全部首轮
 - Core2 touch/RTC/power 重复探针：`5/5 PASS`
+- 2026-10-24 Device Service `/api/v1` 复核：`5/5 PASS`，包含两个重叠会话，
+  全部 `attempts=1`、`retry_used=false`
 - Core2 UI：真实 `qemu-esptool` 写入 16 MiB flash，逐字节校验 `PASS`
 - Core2 UI frame：`320x240`，touch marker `0,255,0`
 - Platform tests：`216/216 PASS`
@@ -39,6 +41,7 @@ realize 时捕获的 host epoch 起，按 `QEMU_CLOCK_VIRTUAL` 推进。guest
 - `report.md`
 - `run.json`
 - `evidence/verification.summary.json`
+- `evidence/2026-10-24-device-service-followup.summary.json`
 
 ## 未覆盖项
 

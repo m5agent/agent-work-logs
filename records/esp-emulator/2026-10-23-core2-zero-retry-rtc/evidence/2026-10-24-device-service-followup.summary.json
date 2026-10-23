@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-followup",
+  "date": "2026-10-24",
+  "result": "PASS",
+  "source_commit": "97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d",
+  "target": {
+    "device_id": "core2",
+    "machine": "m5core2",
+    "firmware_family": "official UIFlow2 v2.5.3",
+    "probe": "Core2 touch, PCF8563 RTC, power key and UI marker"
+  },
+  "execution": {
+    "interface": "local Device Service /api/v1",
+    "firmware_sha256": "f4e1fde7b426ebff34a2b2ca849acbe776fde5f7544f53ca2bd58a07e829b6be",
+    "firmware_size": 16777216,
+    "qemu_sha256": "86ef63cc30df1d166f31912298f6b7a773479836c7681b462e38b5132656b057",
+    "inputs": [
+      "longpress:220,190,1.5",
+      "key:p"
+    ],
+    "frame_marker": {
+      "x": 310,
+      "y": 230,
+      "rgb": "00ff00"
+    },
+    "required_serial_markers": [
+      "CORE2_PERIPHERAL_MAIN",
+      "CORE2_RTC 2026-10-22 06:07:08",
+      "CORE2_TOUCH 219 189",
+      "CORE2_PWR 1"
+    ]
+  },
+  "runs": [
+    {
+      "ordinal": 1,
+      "session_id": "65dd3fe4aff44a20b77a730c09f19733",
+      "result": "PASS",
+      "frame_sha256": "feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c",
+      "serial_sha256": "627705eb6e68500e98b662915e96d45afa1e4a1e5670f957e040ef6adc1cb728",
+      "attempts": 1,
+      "retry_used": false
+    },
+    {
+      "ordinal": 2,
+      "session_id": "1e2ef1feb9fc49bc9bca27cdec557079",
+      "result": "PASS",
+      "frame_sha256": "feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c",
+      "serial_sha256": "4cbc1af3474db352387b8db10defcb3023ab163058fd004bd3328eafebd34cf8",
+      "attempts": 1,
+      "retry_used": false,
+      "overlapped_with_ordinal": 3
+    },
+    {
+      "ordinal": 3,
+      "session_id": "f5ad9b870d5847c6ae4ed3de772c8751",
+      "result": "PASS",
+      "frame_sha256": "feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c",
+      "serial_sha256": "de7287c86b1651b2346f535dc1df14c743d99cf2b4c9e7ea4fcbc345436c375f",
+      "attempts": 1,
+      "retry_used": false,
+      "overlapped_with_ordinal": 2
+    },
+    {
+      "ordinal": 4,
+      "session_id": "2a58186d68e248868f7524901ab80f2f",
+      "result": "PASS",
+      "frame_sha256": "feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c",
+      "serial_sha256": "f9189473cff8e39389fc2780adfde68f80708cd2cd5f22eb707ae74f5cea6fb7",
+      "attempts": 1,
+      "retry_used": false
+    },
+    {
+      "ordinal": 5,
+      "session_id": "f4c536ae161d4f34b7ee5f7ea4c67ce6",
+      "result": "PASS",
+      "frame_sha256": "feb3c871b808ed5100a74291b4f43ece159449865630081c1d2478ab986e620c",
+      "serial_sha256": "9790ca616ed68c1c575b1d6c8e2ad327b0aaefa45bfb69895877105017163b20",
+      "attempts": 1,
+      "retry_used": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "device_service_core2_peripherals_repeat",
+      "status": "PASS",
+      "detail": "5/5 independent sessions passed with one attempt each"
+    },
+    {
+      "name": "rtc_virtual_clock",
+      "status": "PASS",
+      "detail": "all five sessions reported the exact requested RTC value and advanced normally"
+    },
+    {
+      "name": "touch",
+      "status": "PASS",
+      "detail": "all five sessions reported CORE2_TOUCH 219 189"
+    },
+    {
+      "name": "power_key",
+      "status": "PASS",
+      "detail": "all five sessions reported CORE2_PWR 1"
+    },
+    {
+      "name": "green_frame_marker",
+      "status": "PASS",
+      "detail": "all five frames were byte-identical and green at the expected marker"
+    },
+    {
+      "name": "overlapping_service_sessions",
+      "status": "PASS",
+      "detail": "two overlapping Core2 sessions both passed"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "notes": [
+    "All test sessions were created, exercised and stopped through the Device Service API.",
+    "Stopped session history was retained; flash copies were released after evidence capture.",
+    "This is virtual-device validation, not physical ESP32 timing, electrical, RF or acoustic measurement.",
+    "One additional concurrent preflight session did not expose its QMP socket within the service timeout; later overlapping sessions passed. It is treated as a transport startup flake, not evidence about the firmware."
+  ]
+}
