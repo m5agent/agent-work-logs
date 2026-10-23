@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-24T01:10:28+08:00",
+  "scope": "linux-namespace-exact-ipv4-ip-protocol-port-egress",
+  "status": "PASS",
+  "source_commit": "e14169f4c49d8651444b987172b0ab0135a93e11",
+  "base_commit": "97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d",
+  "environment": {
+    "platform": "linux-arm64-container",
+    "root": true,
+    "capabilities": [
+      "NET_ADMIN",
+      "SYS_ADMIN"
+    ],
+    "helpers": [
+      "iproute2",
+      "nftables"
+    ],
+    "ipv4_forwarding": true
+  },
+  "policy_fixture": {
+    "status": "PASS",
+    "allowed_ip_port": {
+      "connected": true,
+      "http_status": 200
+    },
+    "denied_port_same_ip": {
+      "connected": false,
+      "error": "TimeoutError"
+    },
+    "denied_ip_same_port": {
+      "connected": false,
+      "error": "TimeoutError"
+    },
+    "public_ipv4_via_veth_nat": {
+      "connected": true,
+      "http_status": 301,
+      "endpoint": "1.1.1.1:80/tcp"
+    },
+    "nftables_default_drop": true,
+    "denied_server_requests": 0,
+    "namespace_cleaned": true,
+    "nat_table_cleaned": true
+  },
+  "sticks3_tls": {
+    "status": "PASS",
+    "image_sha256": "226f84dfdf9277243b313f49dd47ced79ac12a6e33df37d4356257abbaf3d355",
+    "base_image_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "allowed_endpoint": "10.0.2.2:18443/tcp",
+    "checks": {
+      "wifi_dhcp": true,
+      "dns_allow_a": true,
+      "dns_deny_nxdomain": true,
+      "tls_allowed_200": true,
+      "tls_denied_403": true,
+      "nftables_default_drop": true,
+      "pcap": true
+    },
+    "pcap_sha256": "f9666e39b3796950247c45386e6820542294af961b3f03ffdceff90bf7e1e5ba",
+    "pcap_packets": 77
+  },
+  "regression": {
+    "platform_tests": {
+      "passed": 234,
+      "total": 234,
+      "status": "PASS"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "ruff_changed_network_modules": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "validation_boundaries": {
+    "qemu_full_matrix_rerun": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "external_ipv6": "NOT RUN",
+    "cidr_or_multi_ip_domain": "UNSUPPORTED",
+    "dhcp_renewal": "NOT RUN",
+    "malware_sandbox": "NOT CLAIMED"
+  }
+}

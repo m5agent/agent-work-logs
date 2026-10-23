@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Enforce exact IPv4 IP and port egress allowlists in the Linux sandbox",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "97d9a80e1a1abe6a9870e79d2bc2ca81583e6f7d",
+    "result_commit": "e14169f4c49d8651444b987172b0ab0135a93e11"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validation_scope": "virtual-device",
+    "sticks3_tls_image_sha256": "226f84dfdf9277243b313f49dd47ced79ac12a6e33df37d4356257abbaf3d355"
+  },
+  "execution": {
+    "environment": "Linux arm64 worker container; root; NET_ADMIN and SYS_ADMIN; iproute2; nftables; IPv4 forwarding",
+    "commands": [
+      "python3 tests/network/egress_allowlist/run_test.py --out-dir <dir> --public",
+      "python3 tests/network/tls_allowlist/run_test.py --isolation namespace --timeout 90",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "234/234"
+    },
+    {
+      "name": "exact_allowed_ip_port",
+      "status": "PASS",
+      "detail": "worker-local target connected; HTTP 200"
+    },
+    {
+      "name": "denied_port",
+      "status": "PASS",
+      "detail": "same IP, different port timed out"
+    },
+    {
+      "name": "denied_ip",
+      "status": "PASS",
+      "detail": "same port, different IP timed out"
+    },
+    {
+      "name": "public_ipv4_via_veth_nat",
+      "status": "PASS",
+      "detail": "1.1.1.1:80 connected; HTTP 301"
+    },
+    {
+      "name": "nftables_default_drop",
+      "status": "PASS"
+    },
+    {
+      "name": "namespace_and_nat_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "sticks3_tls_under_ip_port_policy",
+      "status": "PASS",
+      "detail": "DHCP, DNS A/NXDOMAIN, TLS 200/403, pcap and allowed endpoint"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_full_matrix_rerun",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "external_ipv6",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e14169f4c49d8651444b987172b0ab0135a93e11/tests/network/egress_allowlist/evidence-2026-10-24-ip-port-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e14169f4c49d8651444b987172b0ab0135a93e11/tests/network/tls_allowlist/evidence-2026-10-24-ip-port-nftables-pass.json"
+  ],
+  "notes": [
+    "The policy is kernel-enforced inside the Linux namespace, not a Python-level URL filter.",
+    "External IPv4 uses a per-session veth and temporary NAT table.",
+    "External IPv6, CIDRs and domain-to-multiple-IP grants are rejected.",
+    "The TLS result is virtual-device validation; physical hardware remains unverified."
+  ]
+}
