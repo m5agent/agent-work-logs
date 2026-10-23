@@ -10,8 +10,10 @@
     "pull_request": "",
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "9aa3fd71e9ad0b0002cd3e06f4e12038a833d703",
-    "result_commit": "32862edf3998cae4d4b62464c51af295761c330d",
-    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490"
+    "baseline_diagnostic_commit": "32862edf3998cae4d4b62464c51af295761c330d",
+    "result_commit": "b6aa8c8231111d1ef40cd31f40d103445ebb49d0",
+    "baseline_ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026060792"
   },
   "hardware": {
     "targets": [],
@@ -69,6 +71,11 @@
       "detail": "Temporary scheduler experiments removed; native HCI source matches repository patch"
     },
     {
+      "name": "safe_point_register_audit",
+      "status": "FAIL",
+      "detail": "Common caller-saved Xtensa special registers were restored, but arbitrary CPU0 callback injection still caused ACK 12 and LoadProhibited"
+    },
+    {
       "name": "local_platform_tests",
       "status": "PASS",
       "detail": "253 tests; OK"
@@ -86,13 +93,16 @@
   "evidence": [
     "evidence/verification.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/32862edf3998cae4d4b62464c51af295761c330d/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci3b-diagnostic.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/b6aa8c8231111d1ef40cd31f40d103445ebb49d0/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci3b-safe-point-audit.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/32862edf3998cae4d4b62464c51af295761c330d/tests/uiflow2/core2_native_hci/run_full.py",
     "https://github.com/m5agent/m5stack-esp-emulator/commit/32862edf3998cae4d4b62464c51af295761c330d",
-    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490"
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/b6aa8c8231111d1ef40cd31f40d103445ebb49d0",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026060792"
   ],
   "notes": [
     "The H4 RX parser and single-packet callback are not the current failure.",
     "The failure boundary is controller-response transaction and vCPU-safe callback context.",
+    "Restoring common Xtensa special registers at arbitrary safe points is insufficient; direct nested callback is not a domain-valid notification context.",
     "No QEMU runtime patch change was retained from the failed scheduler experiments.",
     "Physical hardware and bit-exact Espressif BT controller behavior remain unverified."
   ]

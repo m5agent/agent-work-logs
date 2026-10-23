@@ -108,6 +108,33 @@ bounded-drop 契约。
 以上实验均已从 QEMU worktree 恢复；native-HCI source 与仓库 patch
 `git apply --reverse --check` 通过。没有把实验代码混入源码提交。
 
+### Safe-point register audit follow-up
+
+另一个实验尝试把 callback 提升到任意 CPU0 safe point，同时保存并恢复：
+
+```text
+LBEG, LEND, LCOUNT, SAR, BR, LITBASE, SCOMPARE1
+ACCLO, ACCHI, M0-M3, THREADPTR, ATOMCTL, CPENABLE
+```
+
+结果：
+
+```text
+NimBLE: HCI process ack returned 12
+NimBLE: HCI process ack returned 12
+Guru Meditation Error: Core 1 panic'ed (LoadProhibited)
+PC 0x402630cc
+Rebooting
+```
+
+该实验没有到达广播阶段。证据见
+`evidence/followup-safe-point-audit.json`，源码提交
+`b6aa8c8231111d1ef40cd31f40d103445ebb49d0`。QEMU worktree 再次恢复，
+patch reverse-check 通过。
+
+结论：即使补齐 common caller-saved 特殊寄存器，direct nested callback
+仍不具备 domain-valid controller-notification 语义。
+
 ## 当前判断
 
 失败余量集中在：
@@ -141,6 +168,10 @@ OK
 GitHub Actions 40025648490
 platform-contracts success
 network-namespace-policy success
+
+GitHub Actions 40026060792
+platform-contracts success
+network-namespace-policy success
 ```
 
 ## 验证边界
@@ -158,7 +189,9 @@ network-namespace-policy success
 ## 风险与回滚
 
 - 本次没有保留 QEMU scheduler 实验，也没有改变已发布 QEMU patch；
+- safe-point audit 同样已回退，只保留独立负向证据；
 - runner 只用于诊断，不会在 CI 中被误当成 release PASS；
-- 回滚源码提交 `32862edf3998cae4d4b62464c51af295761c330d` 可移除
-  diagnostic gate 和文档更新；
+- 回滚源码提交 `32862edf3998cae4d4b62464c51af295761c330d` 和
+  `b6aa8c8231111d1ef40cd31f40d103445ebb49d0` 可移除 diagnostic gate、
+  safe-point audit 和文档更新；
 - 无物理烧录或设备状态变更。

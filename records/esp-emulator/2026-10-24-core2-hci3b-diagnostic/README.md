@@ -5,8 +5,10 @@
 - 工作类型：`code_change` / diagnostic
 - 源码仓库：`m5agent/m5stack-esp-emulator`
 - 源码基线：`9aa3fd71e9ad0b0002cd3e06f4e12038a833d703`
-- 结果提交：`32862edf3998cae4d4b62464c51af295761c330d`
-- CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490>
+- 基线诊断提交：`32862edf3998cae4d4b62464c51af295761c330d`
+- safe-point follow-up：`b6aa8c8231111d1ef40cd31f40d103445ebb49d0`
+- baseline CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40025648490>
+- follow-up CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026060792>
 - 环境：macOS Apple Silicon；QEMU m5core2；stock UIFlow2；Bumble controller/peer
 
 ## 结论
@@ -38,6 +40,15 @@
 时使用的 vCPU safe point/context。下一步需要建立与真实 controller-to-host
 通知等价的事务生命周期，而不是继续加 sleep 或 retry。
 
+### Safe-point follow-up
+
+在任意 CPU0 safe point 调用 callback 前，额外保存/恢复 `SAR`、`LITBASE`、
+循环寄存器、`M0-M3`、`THREADPTR`、`ATOMCTL`、`CPENABLE` 等
+caller-saved 特殊寄存器仍未解决。guest 在 BLE 初始化阶段两次
+`ack returned 12`，随后 `LoadProhibited` 崩溃。实验已回退，说明问题不是
+遗漏少量 CPU 寄存器，而是 direct nested callback 不具备通用
+controller-to-host 注入语义。
+
 ## 关键证据
 
 - 新增 runner：`tests/uiflow2/core2_native_hci/run_full.py`；
@@ -58,6 +69,7 @@
 - `report.md`：完整实验、对照和结论；
 - `run.json`：结构化失败记录；
 - `evidence/verification.summary.json`：transport、C2H、HCI-3b 和 CI 聚合；
+- `evidence/followup-safe-point-audit.json`：特殊寄存器 audit 和 guest crash；
 
 ## 未覆盖项
 

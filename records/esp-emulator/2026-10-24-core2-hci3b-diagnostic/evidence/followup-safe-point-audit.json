@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "kind": "m5stack-core2-native-hci-safe-point-audit",
+  "date": "2026-10-24",
+  "status": "FAIL",
+  "source_commit": "b6aa8c8231111d1ef40cd31f40d103445ebb49d0",
+  "hypothesis": "Missing caller-saved Xtensa special-register restoration caused arbitrary CPU0 safe-point callback injection to fail.",
+  "registers_saved_and_restored": [
+    "LBEG",
+    "LEND",
+    "LCOUNT",
+    "SAR",
+    "BR",
+    "LITBASE",
+    "SCOMPARE1",
+    "ACCLO",
+    "ACCHI",
+    "M0-M3",
+    "THREADPTR",
+    "ATOMCTL",
+    "CPENABLE"
+  ],
+  "result": {
+    "advertisement_found": false,
+    "ble_connected": false,
+    "serial": [
+      "NimBLE: HCI process ack returned 12",
+      "NimBLE: HCI process ack returned 12",
+      "Guru Meditation Error: Core 1 panic'ed (LoadProhibited)",
+      "Rebooting"
+    ],
+    "pc": "0x402630cc"
+  },
+  "conclusion": "The missing-register hypothesis is rejected. Direct nested callbacks at arbitrary CPU0 safe points are not a valid controller notification context.",
+  "experiment_retained": false,
+  "qemu_patch_reverse_check": "PASS",
+  "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40026060792"
+}
