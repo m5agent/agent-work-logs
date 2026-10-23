@@ -59,6 +59,7 @@
 | 2026-10-23 | ESP Emulator | Core2 stock native-VHCI BLE GATT | PASS（virtual-device：外部 NUS GATT 5/5；生产化 VHCI、bit-exact controller 与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-stock-vhci-gatt/) |
 | 2026-10-23 | ESP Emulator | Core2 同 guest WiFi + stock native-VHCI BLE | PASS（virtual-device：board/WiFi/公网/frame/QOM/native-VHCI 3/3；Device Service 与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-unified-native-vhci/) |
 | 2026-10-23 | ESP Emulator | Core2 native-VHCI 接入 Device Service | PASS（virtual-device：单 lease 18/18 checks、frame/QOM/pcap/evidence PASS；GDB 后端与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-native-vhci-service/) |
+| 2026-10-23 | ESP Emulator | Core2 零重试确定性矩阵与 RTC 虚拟时钟 | PASS（virtual-device：67/67、274/274，全部首轮无重试；Core2 6/6、重复 5/5、UI flash/touch PASS；物理等价性与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-23-core2-zero-retry-rtc/) |
 | 2026-10-23 | ESP Emulator | 文档、状态与执行任务板总整理 | PASS（当前事实/历史证据分层、Core2 状态纠偏、215/215 平台测试；7823bef 后全矩阵与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-23-documentation-reconciliation/) |
 | 2026-10-23 | ESP Emulator | StickS3 公网 HTTP 闭环与第三方固件 NTP 超时定位 | PASS（virtual-device validation；NTP 应用层失败单列） | [查看](records/esp-emulator/2026-10-23-sticks3-public-network-closure/) |
 | 2026-10-23 | ESP Emulator | StickS3 社区天气固件网络、显示与按键验证 | PARTIAL（virtual-device follow-up：QIO/NVS/LittleFS/实时天气/完整八页/语音已闭环；双击固件缺陷与实体硬件未通过） | [查看](records/esp-emulator/2026-10-23-sticks3-community-weather-functional/) |

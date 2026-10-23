@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Require zero-retry deterministic Core2 matrices and virtual-clock RTCs",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "88c88ab46b23da09c9216bc603133d69bacfb250",
+    "result_commit": "1ef7f0a081cfdc968a816741ca0ed52e18e6b967"
+  },
+  "hardware": {
+    "targets": [
+      "virtual QEMU ESP32 LX6 Core2"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "family": "official UIFlow2 v2.5.3",
+    "binary_committed": false,
+    "matching_elf_used": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU 9.2.2; m5core2",
+    "accel": "tcg,thread=single",
+    "icount": "shift=auto,align=off,sleep=off",
+    "memory": "-m 0",
+    "qemu_sha256": "cb648115dcbc59184663eb15882d2f65960f48d397805f2605dff0a6a945050d",
+    "full_matrix": "67/67 cases, 274/274 checks",
+    "attempts_per_case": 1,
+    "retry_used": false
+  },
+  "checks": [
+    {
+      "name": "full_peripheral_matrix",
+      "status": "PASS",
+      "detail": "67/67 cases and 274/274 checks"
+    },
+    {
+      "name": "core2_peripheral_group",
+      "status": "PASS",
+      "detail": "6/6, all first attempts"
+    },
+    {
+      "name": "core2_peripherals_repeat",
+      "status": "PASS",
+      "detail": "5/5, no retry"
+    },
+    {
+      "name": "core2_ui_flash_and_input",
+      "status": "PASS",
+      "detail": "qemu-esptool verified; CORE2_TOUCH 159 182 1"
+    },
+    {
+      "name": "rtc_virtual_clock_patch",
+      "status": "PASS",
+      "detail": "reverse apply check"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "216/216"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/1ef7f0a081cfdc968a816741ca0ed52e18e6b967",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1ef7f0a081cfdc968a816741ca0ed52e18e6b967/patches/qemu-m5stack-peripherals/0026-m5stack-rtc-virtual-clock.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1ef7f0a081cfdc968a816741ca0ed52e18e6b967/tests/uiflow2/evidence-2026-10-23-zero-retry-matrix.json"
+  ],
+  "notes": [
+    "A prior 67/67 result was rejected as clean evidence because core2-audio retried after a first-attempt panic.",
+    "Peripheral and device matrices reject configured retries unless --allow-retries is explicit.",
+    "RX8130 and PCF8563 now advance on QEMU virtual time from a boot epoch."
+  ]
+}

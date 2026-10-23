@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-23T22:51:43+08:00",
+  "scope": "virtual-device-core2-zero-retry-and-rtc-virtual-clock",
+  "status": "PASS",
+  "source_commit": "1ef7f0a081cfdc968a816741ca0ed52e18e6b967",
+  "base_commit": "88c88ab46b23da09c9216bc603133d69bacfb250",
+  "qemu": {
+    "sha256": "cb648115dcbc59184663eb15882d2f65960f48d397805f2605dff0a6a945050d",
+    "accel": "tcg,thread=single",
+    "icount": "shift=auto,align=off,sleep=off"
+  },
+  "full_matrix": {
+    "generated_at": "2026-10-23T22:44:45.580304+08:00",
+    "summary_sha256": "6fc3e5473600399a559560398b3c665c3f17724c84db27c0239df775f2da3509",
+    "cases": 67,
+    "checks": 274,
+    "pass": 67,
+    "fail": 0,
+    "attempts_per_case": 1,
+    "retry_used": false,
+    "all_frames_present": true,
+    "panic_or_failure_markers": 0
+  },
+  "core2": {
+    "peripheral_group": {
+      "pass": 6,
+      "total": 6,
+      "attempts_per_case": 1
+    },
+    "peripherals_repeat": {
+      "pass": 5,
+      "total": 5,
+      "retry_used": false
+    },
+    "ui": {
+      "summary_sha256": "f68b452724ccb32329fdec8cf79a81ac0e85904d473da735deb67d1a106dbb9e",
+      "flash_transport": "qemu-esptool",
+      "flash_verified": true,
+      "attempts": 1,
+      "retry_used": false,
+      "virtual_flash_sha256": "64926d908455424c82edd2ec6878a05117ae088bcd441fd5ebf20415555291af",
+      "serial_sha256": "fb8794096f40f92edf9e50dbd4041aaf2e288b7271cd7ca02ed92b336a6850d9",
+      "after_png_sha256": "4204403e5fd1d16a2d39a39d07dae0bdc5bab4eda8e69ad607463d7f45b2e38f",
+      "marker_rgb": [0, 255, 0],
+      "touch_marker": "CORE2_TOUCH 159 182 1"
+    }
+  },
+  "rtc_patch": {
+    "path": "patches/qemu-m5stack-peripherals/0026-m5stack-rtc-virtual-clock.patch",
+    "reverse_check": "PASS",
+    "clock": "QEMU_CLOCK_VIRTUAL",
+    "models": ["RX8130", "PCF8563"]
+  },
+  "regression": {
+    "platform_tests": 216,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "openapi_parse": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "not_claimed": [
+    "physical cache/PSRAM timing",
+    "bit-exact Espressif Bluetooth controller/baseband",
+    "RF, coexistence, power, acoustic or optical equivalence",
+    "physical hardware"
+  ]
+}
