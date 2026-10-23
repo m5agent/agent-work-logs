@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "kind": "service_debug",
+  "overall_status": "PASS",
+  "title": "Close StickS3 virtual-device public network validation and isolate NTP failure",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5ab6251c18f06e7414701c494d406ed6071b2d33"
+  },
+  "hardware": {
+    "target": "M5StickS3",
+    "validation_kind": "virtual-device"
+  },
+  "firmware": {
+    "weather_app_sha256": "a17e7f1ef340832481d6c2c77621b9065ff45332d8ad4c1ddd25246ba6026aa0",
+    "cyber_clock_sha256": "0d7ca76db12905dbcfd4033316e91b46bc3fd71d281fa94c3bbea53b54aeab6b"
+  },
+  "execution": {
+    "environment": "QEMU StickS3 qemu-wifi Device Service session",
+    "task_id": "",
+    "session_id": "8ec31a7ea9fe43ff843e131372034ee0",
+    "supporting_ntp_session_id": "e474d41263c4425e983c848d63afb773"
+  },
+  "checks": [
+    {
+      "name": "wifi_dhcp",
+      "status": "PASS"
+    },
+    {
+      "name": "dns",
+      "status": "PASS",
+      "detail": "api.open-meteo.com resolved in guest"
+    },
+    {
+      "name": "public_http",
+      "status": "PASS",
+      "detail": "HTTP 200 from api.open-meteo.com"
+    },
+    {
+      "name": "live_weather",
+      "status": "PASS",
+      "detail": "guest 31.0 C / 39% / code 0 matched host 30.8 C / 39% / code 0"
+    },
+    {
+      "name": "device_service_network",
+      "status": "PASS",
+      "detail": "5 expected markers matched; status PARTIAL before markers was reporting-only"
+    },
+    {
+      "name": "cyber_clock_ntp",
+      "status": "FAIL",
+      "detail": "first SNTP servers timed out; app deadline was 5 s while LWIP receive timeout is 15 s"
+    },
+    {
+      "name": "uiflow_websocket_control_plane",
+      "status": "PARTIAL",
+      "detail": "server closed realtime websocket; business HTTP remained healthy"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.md",
+    "evidence/sticks3-weather.png",
+    "evidence/cyber-clock-timezone.png"
+  ],
+  "notes": [
+    "Virtual-device validation is accepted under the current external verification gate.",
+    "No internal endpoint or credential is included."
+  ]
+}
