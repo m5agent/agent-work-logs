@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add read-only SPIFFS inventory and reconcile current documentation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e5fbf39af5e69fb383249ab0a3b2fa88ac916c26",
+    "result_commit": "7d274bcf3b8f7759f4d0d721bd6b234f6a67a928"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validation_scope": "static-image",
+    "generator": "ESP-IDF v5.5.4 spiffsgen.py",
+    "canonical_image_sha256": "6951389cf0f200e011b5d4603a1e29405697b54e95f9291e7248a30c6d6b819c",
+    "multi_index_image_sha256": "8d01925bc717ab5813d5ec4193e4d4ac9676be6e9765f8dcecc16c612cba79c3"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; static image analysis",
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "node --test platform/tests/test_sha256.mjs platform/tests/test_firmware_upload.mjs",
+      "git diff --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "platform_tests_local",
+      "status": "PASS",
+      "detail": "267/267, skipped=0"
+    },
+    {
+      "name": "platform_tests_ci",
+      "status": "PASS",
+      "detail": "267 tests, skipped=2; run 40042218401"
+    },
+    {
+      "name": "spiffs_declared_configs",
+      "status": "PASS",
+      "detail": "8 configurations with self-contained fixtures"
+    },
+    {
+      "name": "spiffs_lut_validation",
+      "status": "PASS",
+      "detail": "LUT, object ID, span, flags and page ordering checked"
+    },
+    {
+      "name": "spiffs_multi_index",
+      "status": "PASS",
+      "detail": "all configured fixtures span multiple object-index pages"
+    },
+    {
+      "name": "spiffs_canonical_generator",
+      "status": "PASS",
+      "detail": "ESP-IDF v5.5.4 spiffsgen.py fixture"
+    },
+    {
+      "name": "spiffs_malformed_rejection",
+      "status": "PASS",
+      "detail": "LUT mismatch and random malformed inputs return INVALID"
+    },
+    {
+      "name": "spiffs_erased_classification",
+      "status": "PASS",
+      "detail": "UNFORMATTED"
+    },
+    {
+      "name": "manifest_integration",
+      "status": "PASS",
+      "detail": "sensitive paths remain redacted in serialized manifest"
+    },
+    {
+      "name": "docs_consistency",
+      "status": "PASS",
+      "detail": "current status, backlog, links, evidence and SPIFFS contract checks"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "browser_sha256_upload_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "qemu_full_matrix_rerun",
+      "status": "NOT RUN",
+      "detail": "static firmware-review Python and docs only"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/github-actions.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/7d274bcf3b8f7759f4d0d721bd6b234f6a67a928/tests/firmware/evidence-2026-10-24-spiffs-inventory.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/7d274bcf3b8f7759f4d0d721bd6b234f6a67a928/docs/firmware-manifest.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40042218401"
+  ],
+  "notes": [
+    "SPIFFS parsing is read-only and never mounts or executes the input image.",
+    "Multiple matching block geometries are ranked by complete objects and validated data pages.",
+    "Big-endian and aligned object-index table layouts are not claimed.",
+    "Runtime permissions, license compliance, QEMU matrix and physical hardware remain outside this result."
+  ]
+}
