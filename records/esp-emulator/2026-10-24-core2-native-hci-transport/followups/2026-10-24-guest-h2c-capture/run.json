@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Capture stock Core2 guest H2C without a GDB bridge",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "f32ae621454a1fb52aaa3b8313db923622161a92",
+    "result_commit": "7f8343d0b3c5e0ecfac90d24084e250c0ad5a5f9",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40010980506"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "bytes": 16777216
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, QEMU 9.2.2 Xtensa",
+    "ci_status": "PASS",
+    "gdb_bridge_started": false,
+    "captured_packet": "01030c00",
+    "decoded": "HCI Reset"
+  },
+  "checks": [
+    {
+      "name": "qemu_build",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_patch_forward_reverse",
+      "status": "PASS"
+    },
+    {
+      "name": "guest_h2c_reset_capture",
+      "status": "PASS",
+      "detail": "01030c00"
+    },
+    {
+      "name": "qom_h2c_counters",
+      "status": "PASS",
+      "detail": "1 packet / 4 bytes"
+    },
+    {
+      "name": "peer_received_packet",
+      "status": "PASS"
+    },
+    {
+      "name": "clean_shutdown",
+      "status": "PASS"
+    },
+    {
+      "name": "complete_h2c_sequence",
+      "status": "NOT RUN",
+      "detail": "requires C2H delivery"
+    },
+    {
+      "name": "guest_c2h",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/7f8343d0b3c5e0ecfac90d24084e250c0ad5a5f9/tests/uiflow2/core2_native_hci/evidence-2026-10-24-guest-h2c.json"
+  ],
+  "notes": [
+    "The QEMU device polls the real VHCI H2C buffer and length through the guest address space.",
+    "Only Reset is captured because the guest waits for a C2H response before sending the next command."
+  ]
+}

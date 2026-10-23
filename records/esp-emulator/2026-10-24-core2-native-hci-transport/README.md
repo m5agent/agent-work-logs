@@ -37,6 +37,8 @@ Device Service lease 仍为 `NOT RUN`。
 - `report.md`：实现、复用边界和验证；
 - `run.json`：结构化记录；
 - `evidence/summary.json`：脱敏聚合结果。
+- `followups/2026-10-24-guest-h2c-capture/`：后续无 GDB 捕获 stock
+  HCI Reset，完整 sequence 仍等待 C2H。
 
 ## 未覆盖项
 
