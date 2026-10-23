@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Prove DHCP lease renewal through the Device Service QEMU WiFi path",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e14169f4c49d8651444b987172b0ab0135a93e11",
+    "result_commit": "71ab6ef95094b9bfe89ab364035c940f9e14c893"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validation_scope": "virtual-device",
+    "source_format": "flasher-args",
+    "image_sha256": "5d990abc6d6b81c71b5e7d243f06171d8c6dd6c09c269e94549f51954957de46",
+    "manifest_id": "05eeea6cca27ad87441064313b0ecb0b52dbfb9a7c76423076ae810bae7734a0"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; ESP-IDF 5.5.4; ESP32-S3 QEMU; Device Service qemu-wifi",
+    "commands": [
+      "idf.py -C tests/network/idf_dhcp_renewal -B tests/network/idf_dhcp_renewal/build_esp32s3 -DIDF_TARGET=esp32s3 build",
+      "python3 tests/network/idf_dhcp_renewal/run_test.py --out-dir <dir>",
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "235/235"
+    },
+    {
+      "name": "idf_build",
+      "status": "PASS",
+      "detail": "ESP32-S3 ESP-IDF 5.5.4"
+    },
+    {
+      "name": "firmware_manifest",
+      "status": "PASS",
+      "detail": "flasher-args normalized to 8 MiB"
+    },
+    {
+      "name": "guest_initial_dhcp",
+      "status": "PASS"
+    },
+    {
+      "name": "dhcp_renew_api",
+      "status": "PASS",
+      "detail": "netifapi_dhcp_renew returned ERR_OK"
+    },
+    {
+      "name": "dhcp_renewal_request_in_pcap",
+      "status": "PASS"
+    },
+    {
+      "name": "dhcp_renewal_ack_in_pcap",
+      "status": "PASS"
+    },
+    {
+      "name": "renewal_transaction_request_ack",
+      "status": "PASS",
+      "detail": "DORA then REQUEST/ACK in bounded transaction"
+    },
+    {
+      "name": "dhcp_address_preserved",
+      "status": "PASS",
+      "detail": "10.0.2.15 after renewal"
+    },
+    {
+      "name": "controlled_http_after_renewal",
+      "status": "PASS",
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "pcap_written",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "real_ap_loss",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/71ab6ef95094b9bfe89ab364035c940f9e14c893/tests/network/idf_dhcp_renewal/evidence-2026-10-24-renewal-pass.json"
+  ],
+  "notes": [
+    "The pcap transaction contains initial DORA followed by a renewal REQUEST/ACK.",
+    "The assigned address remains unchanged and controlled HTTP succeeds after renewal.",
+    "This is virtual-device evidence; real AP removal and physical RF remain unverified."
+  ]
+}

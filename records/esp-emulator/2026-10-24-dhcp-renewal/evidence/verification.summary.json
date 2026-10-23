@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-24T01:18:01+08:00",
+  "scope": "virtual-device-dhcp-lease-renewal",
+  "status": "PASS",
+  "source_commit": "71ab6ef95094b9bfe89ab364035c940f9e14c893",
+  "base_commit": "e14169f4c49d8651444b987172b0ab0135a93e11",
+  "runtime": {
+    "device": "sticks3",
+    "runtime": "qemu-wifi",
+    "profile": "uiflow2-sticks3-wifi",
+    "idf_version": "5.5.4",
+    "api_contract": "1.11.0"
+  },
+  "firmware": {
+    "image_sha256": "5d990abc6d6b81c71b5e7d243f06171d8c6dd6c09c269e94549f51954957de46",
+    "manifest_id": "05eeea6cca27ad87441064313b0ecb0b52dbfb9a7c76423076ae810bae7734a0",
+    "source_format": "flasher-args"
+  },
+  "dhcp": {
+    "message_types": {
+      "ack": 2,
+      "discover": 1,
+      "offer": 1,
+      "request": 2
+    },
+    "message_sequence": [
+      "DISCOVER",
+      "OFFER",
+      "REQUEST",
+      "ACK",
+      "REQUEST",
+      "ACK"
+    ],
+    "selecting_requests": 1,
+    "renewal_requests": 1,
+    "renewal_acks": 1,
+    "lease_seconds": 86400,
+    "t1_seconds": 43200,
+    "t2_seconds": 75600,
+    "guest_address": "10.0.2.15",
+    "renewal_transaction": true
+  },
+  "application": {
+    "renew_api": "netifapi_dhcp_renew",
+    "renew_api_error": 0,
+    "supplied_after_renewal": true,
+    "controlled_http_status": 200,
+    "result_marker": "DHCP_RENEW_RESULT: PASSED"
+  },
+  "regression": {
+    "platform_tests": {
+      "passed": 235,
+      "total": 235,
+      "status": "PASS"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "pcap_decoder_tests": "PASS",
+    "changed_python_ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "validation_boundaries": {
+    "real_ap_loss": "NOT RUN",
+    "address_reassignment": "NOT RUN",
+    "wpa2_wpa3": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "qemu_full_matrix_rerun": "NOT RUN"
+  }
+}
