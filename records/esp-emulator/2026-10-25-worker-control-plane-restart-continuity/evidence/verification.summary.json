@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-25T07:04:00+08:00",
+  "scope": "virtual-device-control-plane-restart-not-hardware",
+  "source": {
+    "base_commit": "658b2d494bbd40fcb798ed4349a6304d46c0d917",
+    "capability_commit": "f85b8c9ef15f760c0c25fc7a70f3dbec53cbf050",
+    "result_commit": "cd0308025309fcb6dfd373502e87890449a1f98c",
+    "worker_agent_sha256": "7fa1b52dcb38acaee4a5681538fad29764fd407cd89552d8d8ad0905ab7c136f",
+    "worker_queue_sha256": "94452175d4314cbbdbe582f270b09a5e0ebb6fb6837b6a6fcaa0ce19dd32476a",
+    "pass_evidence_sha256": "14cdd841e7fad4e4e0d5d2f77c81db25c67c32e18aebf46c670cee39dc50bb8c",
+    "initial_failure_sha256": "22b2b63f95fa6d0c16d60bac0f06f2c68734154f5fb103a2445b67e7ed4044f7"
+  },
+  "initial_failure": {
+    "status": "FAIL",
+    "first_error": "cannot access local variable 'nic' where it is not associated with a value",
+    "runtime": "qemu",
+    "network_profile": null,
+    "session_state": "failed",
+    "control_retry_was_successful": true,
+    "root_cause": "nic was assigned only in qemu-wifi/unified branches but read unconditionally",
+    "fix": "initialize nic=None before conditional runtime construction"
+  },
+  "final_run": {
+    "control_plane_downtime_seconds": 2.2,
+    "same_state_dir_restart": true,
+    "job_claimed_before_restart": true,
+    "worker_reconnected": true,
+    "worker_exit_zero": true,
+    "terminal_completed": true,
+    "terminal_pass": true,
+    "same_lease": true,
+    "same_worker_instance_generation": true,
+    "worker_stopped_after_result": true,
+    "evidence_zip_present": true,
+    "evidence_bytes": 6696,
+    "evidence_sha256": "12713499ab0ce03087426d5adfedf3902658b799fed35f214d9d8c2c51385235",
+    "runtime_session_stopped": true,
+    "qemu_process_absent_after_cleanup": true,
+    "token_absent_from_worker_log": true
+  },
+  "verification": {
+    "platform_tests": {
+      "passed": 393,
+      "total": 393
+    },
+    "documentation_tests": {
+      "passed": 20,
+      "total": 20
+    },
+    "node_sha256_upload": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_fatal": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "capability_ci": "PASS",
+    "final_ci": "PASS"
+  },
+  "validation_boundaries": {
+    "claim_response_loss_recovery": "NOT RUN",
+    "runtime_service_restart": "NOT RUN",
+    "cross_host_qemu_migration": "NOT RUN",
+    "cross_host_reattach": "NOT RUN",
+    "companion_continuity": "NOT RUN",
+    "production_scheduler": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  }
+}

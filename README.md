@@ -131,6 +131,7 @@
 | 2026-10-25 | ESP Emulator | 代码、文档与当前工作/待办收口 | PASS（docs/contracts：377/377、20/20、snapshot/catalog/coverage、CI PASS；当前状态/Backlog/工作流/代码地图/API/网络/runtime gap 同源；IPv4/IPv6 与 WPA2 稳定边界纠偏；真机与完整矩阵 NOT RUN） | [查看](records/esp-emulator/2026-10-25-code-doc-current-state-consolidation/) |
 | 2026-10-25 | ESP Emulator | SHA-bound UI/headless/network-first 固件审查预期 | PASS（virtual-device：OpenAI BIN + isolated NVS 完成 guest marker、network PASS、DNS/TCP443、37-packet pcap；387/387、20/20、Node 与 CI PASS；真实 key/Realtime/RF/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-sha-bound-review-expectations/) |
 | 2026-10-25 | ESP Emulator | HMAC-authenticated worker multicast discovery | PASS（virtual control-plane：worker 无硬编码 URL 注册、错误/旧 token reject、SIGHUP 后新 token 重新发现；391/391、20/20、Node 与 CI PASS；NAT/跨子网/跨主机/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-authenticated-worker-discovery/) |
+| 2026-10-25 | ESP Emulator | Worker central control-plane restart 与同 lease/evidence continuity | PASS（virtual-device：central 2.2s 重启、重注册、原 identity/generation/lease、terminal PASS、evidence ZIP、runtime/QEMU cleanup；393/393、20/20、Node 与 CI PASS；runtime restart/cross-host/claim dedup 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-worker-control-plane-restart-continuity/) |
 | 2026-10-24 | m5stack-schematics-text | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | PASS（链接/索引/下载哈希一致；100 个 deb 链接无 404、无其他平台错配；PR #2 OPEN/MERGEABLE，待管理员审核） | [查看](records/m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
 
 ## 目录结构

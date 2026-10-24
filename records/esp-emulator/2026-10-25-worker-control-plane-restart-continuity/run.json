@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Preserve worker jobs across a central control-plane restart",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "658b2d494bbd40fcb798ed4349a6304d46c0d917",
+    "capability_commit": "f85b8c9ef15f760c0c25fc7a70f3dbec53cbf050",
+    "result_commit": "cd0308025309fcb6dfd373502e87890449a1f98c",
+    "capability_ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40141191663",
+    "final_ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40141285611",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "device": "sticks3",
+    "runtime": "qemu",
+    "firmware_source": "reference"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; central and worker-local Device Service; real StickS3 QEMU; WorkerAgent",
+    "control_plane_downtime_seconds": 2.2,
+    "same_state_dir_restart": true,
+    "worker_id": "restart-survivor",
+    "job_status": "completed",
+    "result_state": "PASS",
+    "evidence_bytes": 6696,
+    "evidence_sha256": "12713499ab0ce03087426d5adfedf3902658b799fed35f214d9d8c2c51385235",
+    "platform_tests": 393,
+    "documentation_tests": 20
+  },
+  "checks": [
+    {
+      "name": "transient_control_retry",
+      "status": "PASS"
+    },
+    {
+      "name": "idempotent_reregister",
+      "status": "PASS"
+    },
+    {
+      "name": "same_worker_identity_generation",
+      "status": "PASS"
+    },
+    {
+      "name": "same_lease_terminal_result",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal_completed_pass",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence_zip",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_session_and_qemu_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_qemu_nic_regression",
+      "status": "PASS",
+      "detail": "initial UnboundLocalError retained as FAIL evidence and fixed by nic=None initialization"
+    },
+    {
+      "name": "claim_blind_retry",
+      "status": "NOT RUN",
+      "detail": "requires a stable claim-request dedup token"
+    },
+    {
+      "name": "runtime_service_restart",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_qemu_migration",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "companion_continuity",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cd0308025309fcb6dfd373502e87890449a1f98c/tests/network/worker_control_restart/evidence-2026-10-25-central-restart-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cd0308025309fcb6dfd373502e87890449a1f98c/tests/network/worker_control_restart/evidence-2026-10-25-initial-runtime-qemu-failure.json"
+  ],
+  "notes": [
+    "The worker-local runtime and QEMU session remain active; only the central control plane restarts.",
+    "Claim requests are not blindly retried until the queue gains a stable dedup token.",
+    "The initial runtime=qemu failure was an emulator launch defect, not a control reconnect or firmware failure."
+  ]
+}
