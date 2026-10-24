@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add verified HTTPS and mutual-TLS transport for Device Service workers",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e9520bbca56da753cd4cd75cf30c8c5594866386",
+    "result_commit": "ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Apple Silicon; same-host loopback; real Device Service and worker processes; ephemeral test PKI",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "305/305"
+    },
+    {
+      "name": "browser_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40070863490; platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "tls_version",
+      "status": "PASS",
+      "detail": "minimum TLS 1.2; observed TLS 1.3"
+    },
+    {
+      "name": "server_certificate_verification",
+      "status": "PASS"
+    },
+    {
+      "name": "client_certificate_required",
+      "status": "PASS"
+    },
+    {
+      "name": "trusted_client_certificate",
+      "status": "PASS"
+    },
+    {
+      "name": "unsigned_worker_claim",
+      "status": "PASS",
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "worker_signed_lifecycle_over_mtls",
+      "status": "PASS",
+      "detail": "exit code 0"
+    },
+    {
+      "name": "plaintext_http_fallback",
+      "status": "PASS",
+      "detail": "rejected"
+    },
+    {
+      "name": "qemu_job_over_mtls",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_topology",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "certificate_and_worker_credential_rotation",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.transport.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070863490",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-pass.json"
+  ],
+  "notes": [
+    "TLS server and client contexts require TLS 1.2 or newer.",
+    "Client hostname verification is enabled and has no bypass option.",
+    "Worker HMAC remains mandatory for worker-only mutations.",
+    "The live transport test is loopback-only and did not execute a QEMU job."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "m5stack-worker-tls-mtls-transport",
+  "validation": "transport-security validation",
+  "scope": "same-host-loopback-real-tls-process",
+  "source_evidence_sha256": "9342e8f549129ab215a1bd08f7efa6d07ca03d97d0084ac8badb8c2e8dbbb114",
+  "tls": {
+    "minimum_version": "TLSv1.2",
+    "observed_version": "TLSv1.3",
+    "server_certificate_verification": "PASS",
+    "client_certificate_required": "PASS",
+    "ephemeral_test_pki": true
+  },
+  "worker_transport": {
+    "base_url_scheme": "https",
+    "bearer_and_worker_hmac_preserved": "PASS",
+    "unsigned_claim_http": 401,
+    "worker_agent_exit_code": 0
+  },
+  "checks": {
+    "https_server_ready": "PASS",
+    "server_certificate_verified": "PASS",
+    "client_certificate_required": "PASS",
+    "mtls_client_certificate_accepted": "PASS",
+    "unsigned_worker_claim_rejected": "PASS",
+    "worker_agent_signed_requests_over_mtls": "PASS",
+    "no_plaintext_http_fallback": "PASS"
+  },
+  "platform": {
+    "tests": 305,
+    "passed": 305,
+    "failed": 0,
+    "node_tests": "2/2 PASS",
+    "github_actions_run": 40070863490
+  },
+  "not_run": [
+    "cross-host network topology or latency",
+    "certificate or worker credential rotation",
+    "production CA and certificate lifecycle",
+    "real QEMU job execution over mTLS",
+    "multi-host scheduling or worker continuity",
+    "hardware validation"
+  ]
+}

@@ -103,6 +103,7 @@
 | 2026-10-24 | ESP Emulator | Core2 active BLE + WiFi/公网两分钟共存 | PASS（virtual-device：2/2×120s、peer 全程连接、HLI/TX queue 无错误、299/299 tests + CI PASS；同 guest reconnect、bit-exact controller、物理 cache/PSRAM、多小时 soak 与硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-active-ble-coexistence/) |
 | 2026-10-24 | ESP Emulator | 代码文档重整与 Core2 同 guest reconnect 边界 | PARTIAL（docs/contracts：299/299 tests、Node 2/2、catalog/profile/coverage PASS；stock 与重广告对照均在 disconnect 后 `ack 12`/HCI reset，第二轮连接 FAIL；bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-docs-reconciliation-core2-reconnect/) |
 | 2026-10-24 | ESP Emulator | Core2 同 guest BLE 重连 stale-ACK 修复 | PASS（virtual-device：3 个独立 lease 均完成两轮 NUS GATT，第二轮 guest RX/notify PASS；根因为 Bumble 对无响应 `0x0c35` 非法回复；300/300 tests；更多轮次、bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-same-guest-reconnect-fix/) |
+| 2026-10-24 | ESP Emulator | Device Service worker HTTPS/mTLS 传输 | PASS（transport-security：真实 loopback TLS 1.3、服务端证书验证、mTLS 客户端拒绝/通过、Bearer+HMAC、unsigned claim 401、signed worker 生命周期、305/305 tests + CI PASS；跨主机、rotation、QEMU job over mTLS 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-worker-https-mtls/) |
 
 ## 目录结构
 
