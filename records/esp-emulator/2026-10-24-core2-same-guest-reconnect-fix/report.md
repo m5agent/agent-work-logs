@@ -126,3 +126,40 @@ GATT 数据面。未操作物理设备。
 
 以下仍未执行：超过五轮重连、多小时 coexistence/soak、配对/安全/加密重连、
 bit-exact ESP32 BT controller/baseband、物理 cache/PSRAM 和真机。
+
+## Follow-up：十轮重连与 Device Service 等待修复
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ e9520bbca56da753cd4cd75cf30c8c5594866386`。
+
+同一固件、ELF 和 QEMU build 在 3 个独立 Device Service lease 中各自完成
+10 轮 scan/connect/NUS GATT/disconnect：
+
+- 每个 attempt 的 peer `BLE_BUMBLE_CYCLE_PASS`、guest
+  `UNIFIED_CORE2_BLE_RX` 和 `UNIFIED_CORE2_BLE_ACK_SENT` 都精确为 10；
+- 每个 lease 的 HLI posts/consumed 为 `297/297`，events `207`，ACLs `90`；
+- `hli-errors=0`，HLI/meta queue 深度为 0；
+- connection/L2CAP/GATT 池为 `3/9/3`，没有连接资源泄漏；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=10`；
+- frame/QOM、WiFi、公网 DNS/HTTP、pcap 和 evidence ZIP 全部 PASS。
+
+第一次十轮运行没有到达 guest panic：peer 已完成 5 轮并开始第 6 轮，但
+`DeviceSession._wait_hci_probe_result()` 将 session ready timeout 硬截断
+为 30 秒，导致 Device Service 判定 peer 未完成、终止 QEMU。修复后等待
+直接受 session ready timeout 限制，并增加
+`test_hci_probe_wait_allows_multi_cycle_completion_after_30_seconds`
+防止回归。
+
+本 follow-up 的验证：
+
+- 平台套件 `301/301 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向
+  syntax Ruff：`PASS`；
+- GitHub Actions CI run `40070310548`：两个 job 均 `PASS`；
+- 10 轮 PASS evidence、首次 10 轮 timeout failure 和所有历史 milestone
+  均独立保留。
+
+以下仍未执行：超过当前 1–10 API 上限的重连、多小时 coexistence/soak、
+配对/安全/加密重连、bit-exact ESP32 BT controller/baseband、物理
+cache/PSRAM 和真机。

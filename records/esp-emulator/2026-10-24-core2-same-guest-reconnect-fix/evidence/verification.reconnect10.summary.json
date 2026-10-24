@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "virtual-device validation",
+  "result_commit": "e9520bbca56da753cd4cd75cf30c8c5594866386",
+  "previous_follow_up_commit": "6956ebbe2c620c5840e04da8911a554fee7d7491",
+  "initial_fix_commit": "b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f",
+  "profile": "core2-native-hci",
+  "runtime": "qemu-unified",
+  "firmware_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+  "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+  "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1",
+  "reconnect_gate": {
+    "status": "PASS",
+    "attempts": 3,
+    "passed": 3,
+    "cycles_per_attempt": 10,
+    "peer_cycle_pass_markers_per_attempt": 10,
+    "guest_rx_markers_per_attempt": 10,
+    "guest_ack_markers_per_attempt": 10,
+    "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/e9520bbca56da753cd4cd75cf30c8c5594866386/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect10-3x.json",
+    "source_evidence_sha256": "2a3b2c77823bbc24d1adc5365652bd2a602ba4714fd908983b0fea9b75cfc3fb",
+    "each_attempt": {
+      "hli_posts": 297,
+      "hli_consumed": 297,
+      "hli_events": 207,
+      "hli_acls": 90,
+      "hli_errors": 0,
+      "hli_queue_depth": 0,
+      "meta_queue_depth": 0,
+      "trace_hs_sched_reset": 0,
+      "trace_gap_adv_start": 10,
+      "connection_pool_free": 3,
+      "l2cap_pool_free": 9,
+      "gatt_pool_free": 3,
+      "tx_queue_depth": 0,
+      "last_error": 0,
+      "peer_closed": 0
+    }
+  },
+  "first_ten_cycle_attempt": {
+    "status": "FAIL",
+    "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/e9520bbca56da753cd4cd75cf30c8c5594866386/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect10-timeout-fail.json",
+    "source_evidence_sha256": "34ddc99b536d7b9d3882097890a9ebb4a6f5df466d7a3fc8cead7b5f19fc2053",
+    "raw_aggregate_sha256": "7100baf93ac68aeecdb2371ef271fe8a98758c2b388bd126b61a022a0378c4b7",
+    "cycles_passed": 5,
+    "cycle_6_started": true,
+    "guest_panic": false,
+    "root_cause": "DeviceSession._wait_hci_probe_result() hard-capped ready_timeout at 30 seconds."
+  },
+  "platform": {
+    "tests": 301,
+    "passed": 301,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "browser_tests": "2/2 PASS",
+    "compileall": "PASS",
+    "targeted_syntax_ruff": "PASS"
+  },
+  "github_actions": {
+    "run_id": 40070310548,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "more than ten reconnect cycles without widening the current 1-10 API bound",
+    "pairing, security or encrypted reconnect",
+    "multi-hour coexistence or reconnect soak",
+    "bit-exact ESP32 BT controller/baseband",
+    "physical cache/PSRAM equivalence",
+    "physical hardware validation",
+    "RF behavior"
+  ]
+}

@@ -48,6 +48,37 @@
         "run_id": 40069447311,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "ten_cycle_reconnect_and_service_wait_fix",
+      "result_commit": "e9520bbca56da753cd4cd75cf30c8c5594866386",
+      "status": "PASS",
+      "evidence": "evidence/verification.reconnect10.summary.json",
+      "reconnect": {
+        "attempts": 3,
+        "passed": 3,
+        "cycles_per_attempt": 10,
+        "peer_cycle_markers_per_attempt": 10,
+        "guest_rx_markers_per_attempt": 10,
+        "hli_posts_consumed": "297/297",
+        "hli_events": 207,
+        "hli_acls": 90,
+        "hli_errors": 0,
+        "connection_l2cap_gatt_pool_free": "3/9/3"
+      },
+      "fixed_service_issue": {
+        "old_wait_cap_seconds": 30,
+        "failure_cycles_passed": 5,
+        "failure_cycle_6_started": true,
+        "guest_panic": false,
+        "regression_test": "platform/tests/test_device_service.py::DeviceServiceUnitTests.test_hci_probe_wait_allows_multi_cycle_completion_after_30_seconds"
+      },
+      "platform_tests": "301/301 PASS",
+      "github_actions": {
+        "run_id": 40070310548,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -122,8 +153,12 @@
   "evidence": [
     "evidence/verification.summary.json",
     "evidence/verification.reconnect5.summary.json",
+    "evidence/verification.reconnect10.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40068768706",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40069447311",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070310548",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e9520bbca56da753cd4cd75cf30c8c5594866386/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect10-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e9520bbca56da753cd4cd75cf30c8c5594866386/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect10-timeout-fail.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/6956ebbe2c620c5840e04da8911a554fee7d7491/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect5-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect2-3x.json"
   ],
@@ -132,6 +167,7 @@
     "The next LE Set Advertising Data command received BLE_HS_ECONTROLLER (12).",
     "The no-response behavior is covered by a unit test.",
     "At the original two-cycle milestone, more than two reconnect cycles and physical hardware remained open.",
-    "A five-cycle follow-up now passes in three independent leases; more than five cycles and physical hardware remain open."
+    "A five-cycle follow-up now passes in three independent leases; more than five cycles and physical hardware remain open.",
+    "A ten-cycle follow-up now passes in three independent leases after fixing a separate 30-second Device Service wait cap; more than ten cycles and physical hardware remain open."
   ]
 }
