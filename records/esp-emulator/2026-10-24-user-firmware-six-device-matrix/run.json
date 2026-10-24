@@ -6,7 +6,8 @@
   "title": "Six-device M5Burner user-firmware simulation matrix",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
-    "result_commit": "d0e7abe63bfbaacfc66641a1af0e376252a77f8c"
+    "result_commit": "e339a6299000656aabbd687b587b949432b642a6",
+    "initial_commit": "d0e7abe63bfbaacfc66641a1af0e376252a77f8c"
   },
   "hardware": {
     "targets": [
@@ -33,9 +34,10 @@
     "sessions_retained": true
   },
   "counts": {
-    "PASS": 11,
-    "PARTIAL": 6,
-    "FAIL": 1
+    "PASS": 10,
+    "PARTIAL": 8,
+    "FAIL": 0,
+    "runtime_model_gap": 2
   },
   "checks": [
     {
@@ -60,8 +62,13 @@
     },
     {
       "name": "ieee802154_zigbee",
-      "status": "FAIL",
-      "detail": "C6 QEMU has no IEEE 802.15.4 radio model; Zigbee task watchdog repeats"
+      "status": "PARTIAL",
+      "detail": "C6 QEMU has no IEEE 802.15.4 radio model; classified as runtime_model_gap"
+    },
+    {
+      "name": "c6_software_reset_chip_id",
+      "status": "PARTIAL",
+      "detail": "LP_SW_HPSYS reset reports chip id 12 instead of 13; classified as runtime_model_gap"
     },
     {
       "name": "physical_hardware",
@@ -70,11 +77,17 @@
   ],
   "evidence": [
     "evidence/verification.summary.json",
+    "evidence/verification.model-gaps.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e339a6299000656aabbd687b587b949432b642a6/tests/firmware/evidence-2026-10-24-cross-vendor-runtime-model-gaps.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40075079032",
     "https://github.com/m5agent/m5stack-esp-emulator/commit/d0e7abe63bfbaacfc66641a1af0e376252a77f8c"
   ],
   "notes": [
     "PASS requires a non-blank application frame, a live session, no fatal serial signature and an observable input response.",
     "Device Service startup failures are classified separately and are not attributed to firmware.",
+    "The original 30-second strict run counted 11 PASS, 6 PARTIAL and 1 FAIL.",
+    "The 45-second C6 revalidation and model-gap classifier produce the current merged result of 10 PASS, 8 PARTIAL and 0 FAIL.",
+    "runtime_model_gap keeps the original serial/error evidence and does not claim the firmware is defective or passing.",
     "The matrix covers virtual-device behavior only; no physical hardware measurements were performed."
   ]
 }

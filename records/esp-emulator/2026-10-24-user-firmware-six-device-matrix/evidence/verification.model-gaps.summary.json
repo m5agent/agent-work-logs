@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "virtual-device validation",
+  "result_commit": "e339a6299000656aabbd687b587b949432b642a6",
+  "initial_commit": "d0e7abe63bfbaacfc66641a1af0e376252a77f8c",
+  "scope": "six-device-public-non-baseline-firmware-runtime-matrix",
+  "selection": {
+    "source": "public M5Burner firmware repository",
+    "sort": "MOST_DOWNLOADED",
+    "devices": 6,
+    "samples": 18,
+    "official": 8,
+    "community": 10
+  },
+  "initial_result": {
+    "observe_seconds": 30,
+    "status_counts": {
+      "PASS": 11,
+      "PARTIAL": 6,
+      "FAIL": 1
+    }
+  },
+  "current_result": {
+    "observe_seconds": 45,
+    "status_counts": {
+      "PASS": 10,
+      "PARTIAL": 8,
+      "FAIL": 0
+    },
+    "runtime_model_gaps": 2,
+    "static_analysis_valid": true
+  },
+  "c6_revalidation": {
+    "devices": [
+      "nanoc6",
+      "nesso-n1"
+    ],
+    "samples": 6,
+    "status_counts": {
+      "PARTIAL": 6
+    },
+    "model_gaps": [
+      {
+        "device_id": "nanoc6",
+        "firmware_id": "1897200000000000271",
+        "name": "Zigbee HA On/Off light For NanoC6",
+        "code": "zigbee_runtime_not_modeled",
+        "detail": "Zigbee_main repeatedly blocked; the current C6 profile has no Zigbee radio/controller model"
+      },
+      {
+        "device_id": "nesso-n1",
+        "firmware_id": "1897200000000001757",
+        "name": "Meshtastic unofficial",
+        "code": "c6_chip_id_lost_after_software_reset",
+        "detail": "first boot entered the C6 ROM/application; a later LP_SW_HPSYS reset reported chip id 12 instead of 13"
+      }
+    ]
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/e339a6299000656aabbd687b587b949432b642a6/tests/firmware/evidence-2026-10-24-cross-vendor-runtime-model-gaps.json",
+  "source_evidence_sha256": "cadf297709f41088daf542927477127d7d70f3906f8edb84d8395f175b36a60c",
+  "platform": {
+    "tests": 316,
+    "passed": 316,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40075079032,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "full M5Stack device fleet coverage",
+    "ESP32 LX6 or ESP32-P4 public firmware runtime coverage",
+    "physical hardware, electrical or RF validation",
+    "secure boot or flash-encryption runtime state",
+    "license approval or legal review"
+  ]
+}

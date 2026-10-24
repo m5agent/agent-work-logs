@@ -37,6 +37,10 @@
 
 总计：`PASS 11`、`PARTIAL 6`、`FAIL 1`。
 
+该表是首次 30 秒严格判定基线。后续 45 秒重跑和模型缺口分类将其修正为
+当前 `PASS 10`、`PARTIAL 8`、`FAIL 0`；旧结果保留用于比较时序和分类器
+演进。
+
 ### 非 PASS 明细
 
 - `WiFi CSI Radar ADV + m5 launcher`：应用运行且显示 `No networks.`，但 3 次
@@ -47,10 +51,12 @@
   NanoC6 机型无显示屏，按验收契约保留 `PARTIAL`。
 - `Zigbee HA On/Off light For NanoC6`：`Zigbee_main` 未喂 task watchdog，
   每约 2.5 秒重复 WDT。固件包含 IEEE 802.15.4/Zigbee 栈，而当前 C6
-  QEMU 没有 802.15.4 radio 数据面，因此归类为模型缺口而非已证实的固件缺陷。
+  QEMU 没有 802.15.4 radio 数据面；当前分类为
+  `runtime_model_gap / PARTIAL`，不是固件 FAIL。
 - `Meshtastic unofficial`（Nesso N1）：先渲染 135×240 frame，随后重启并
-  报 `Invalid chip id. Expected 13 read 12`。需要在后续会话保留完整崩溃
-  栈和 QEMU 执行轨迹。
+  报 `Invalid chip id. Expected 13 read 12`。45 秒重跑确认首次已进入 C6
+  ROM/application，随后 `LP_SW_HPSYS` 软件复位读回 chip id 12；当前归类为
+  `c6_chip_id_lost_after_software_reset / PARTIAL`。
 - `Bruce For Arduino Nesso N1`：仅到 ROM/bootloader 早期日志，未形成应用
   画面，也未观察到输入响应。
 
@@ -65,6 +71,46 @@
 - 保存每次输入后的 frame hash。
 
 源码提交：`d0e7abe63bfbaacfc66641a1af0e376252a77f8c`。
+
+## Follow-up：45 秒重跑与 runtime model gap
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ e339a6299000656aabbd687b587b949432b642a6`。
+
+对 NanoC6 和 Nesso N1 的 6 个相同 SHA 样本重新执行 45 秒观察窗口：
+
+- 6 个样本全部保持 `PARTIAL`；
+- NanoC6 Factory Test / Evil-NanoC6：无屏，serial-only；
+- NanoC6 Zigbee：`zigbee_runtime_not_modeled`；
+- Nesso Meshtastic：`c6_chip_id_lost_after_software_reset`；
+- Nesso Launcher：应用 frame 后出现 `xTaskPriorityDisinherit` assert；
+- Nesso Bruce：没有非空应用 frame；
+- 原始 serial hash、bounded error lines 和 input 证据继续保留。
+
+分类器新增稳定签名检测：
+
+- `Zigbee_main` + task watchdog → unmodeled C6 Zigbee radio；
+- `LP_SW_HPSYS` + `Invalid chip id. Expected 13 read 12` → C6 software-reset
+  model defect；
+- 一般 `Invalid chip id` 不带软件复位上下文时不会被误归为模型缺口。
+
+合并 18 样本后的当前结果：
+
+- `PASS 10`
+- `PARTIAL 8`
+- `FAIL 0`
+- `runtime_model_gap 2`
+
+验证：
+
+- 平台套件 `316/316 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向
+  Ruff：`PASS`；
+- GitHub Actions CI run `40075079032`：两个 job 均 `PASS`。
+
+当前结论仍是 FW-03 `PARTIAL`：覆盖 6 台 S3/C6 设备，尚未覆盖全部设备、
+ESP32 LX6/P4 和更多 MicroPython/vendor framework。
 
 ## 证据
 
