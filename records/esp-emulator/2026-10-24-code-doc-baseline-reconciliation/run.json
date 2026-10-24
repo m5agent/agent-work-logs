@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "docs_change",
+  "overall_status": "PASS",
+  "title": "Reconcile the current baseline, code map, dynamic documentation, and validation metadata",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ca2030502b46c9cc67daab6c13919a4bf541fd84",
+    "result_commit": "730123da116ece1acbd97744de419e97596f0232",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40061751714"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "note": "No firmware or runtime artifact changed in this documentation and metadata reconciliation."
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and GitHub Actions ubuntu-latest; Python 3; Node.js",
+    "changed_files": 15,
+    "insertions": 102,
+    "deletions": 98,
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "node platform/tests/test_sha256.mjs",
+      "node platform/tests/test_firmware_upload.mjs",
+      "python3 -m compileall -q platform tests",
+      "ruff check platform/tools/generate_catalog.py platform/tests/test_qemu_profiles.py platform/tests/test_docs_consistency.py",
+      "git diff --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "297/297; 0 skipped"
+    },
+    {
+      "name": "documentation_contract",
+      "status": "PASS",
+      "detail": "Index, links, current facts, dynamic-count ownership, API and evidence contracts"
+    },
+    {
+      "name": "device_catalog_qemu_profile_cross_check",
+      "status": "PASS",
+      "detail": "Validation date/status now match for every QEMU/profile-backed device"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "node_sha256_and_upload",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "ruff_changed_files",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions_platform_contracts",
+      "status": "PASS",
+      "detail": "Run 40061751714"
+    },
+    {
+      "name": "github_actions_network_namespace_policy",
+      "status": "PASS",
+      "detail": "Run 40061751714"
+    },
+    {
+      "name": "core2_60_second_hold_reference",
+      "status": "PASS",
+      "detail": "Existing virtual-device evidence from the same push range; not rerun in this change"
+    },
+    {
+      "name": "full_peripheral_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "new_device_session",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/github-actions.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/730123da116ece1acbd97744de419e97596f0232",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40061751714",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/730123da116ece1acbd97744de419e97596f0232/docs/project-status.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/730123da116ece1acbd97744de419e97596f0232/docs/workstreams.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/730123da116ece1acbd97744de419e97596f0232/docs/project-backlog.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/730123da116ece1acbd97744de419e97596f0232/docs/validation-ledger.md"
+  ],
+  "notes": [
+    "Dynamic platform and matrix counts now belong only to docs/project-status.md; dated snapshots belong to docs/validation-ledger.md.",
+    "The new cross-check corrected stale AtomS3R and PaperMono validation metadata.",
+    "backend-required is documented as a firmware-family classification, not overall CardputerZero completion.",
+    "No QEMU controller, firmware data plane, network policy, or Device Service runtime behavior changed.",
+    "Full matrix, physical hardware, RF, electrical, power, acoustic, optical and mechanical validation remain outside this record."
+  ]
+}
