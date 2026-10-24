@@ -34,7 +34,7 @@ https://repo.llm.m5stack.com/m5stack-apt-repo/pool/jammy/ax650c/v1.12/llm-llm_1.
 本地提交：
 
 - 分支：`m5agent/ai-pyramid-llm-deb-link-2026-10-24`
-- commit：`2aab39e`
+- commit：`845e9d1`
 - base：`7ae3eab`
 
 ## 四、验证
