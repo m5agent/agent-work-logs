@@ -264,3 +264,57 @@ commit 上不证明任意固件、跨主机拓扑、凭据 rotation、多主机 
 回滚：revert
 `e1c18f6eb46fc172f5e2048f5b233cb5ca596765`。回滚后 `SIGHUP` 仍会立即
 切换配置，但不会等待活动请求完成。
+
+## Follow-up：A/B 有界重叠与 final cutover
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ 5dbc5aad1fadf8c4564147255a8be2b1e30c115b`。
+
+该 follow-up 增加：
+
+- `--api-token-previous-file` /
+  `M5_SERVICE_API_TOKEN_PREVIOUS_FILE`；
+- `--tls-client-ca-previous` /
+  `M5_SERVICE_TLS_CLIENT_CA_PREVIOUS`；
+- `WorkerAuthVerifier` 在重叠期接受 active/previous token；
+- HTTP Bearer 校验接受 active/previous token；
+- server TLS context 同时加载 active/previous client CA；
+- previous 文件缺失时关闭对应重叠；再次 `SIGHUP` 完成 final cutover。
+
+真实进程执行顺序：
+
+1. 以 A token/client CA 启动；
+2. 在途旧 token 上传跨越 `SIGHUP` 完成，证明 activity drain；
+3. 写入 A previous token/client CA，激活 B token/client CA；
+4. 第一次 `SIGHUP` 后，A/B client CA 和 A/B token 均被接受；
+5. worker reload 到 B client certificate/key、CA 和 token；
+6. 删除 previous token/client CA，发送第二次 `SIGHUP`；
+7. A client certificate 握手失败，A token 返回 `401`；
+8. B 凭据完成真实 StickS3 QEMU job，evidence SHA256 一致。
+
+结果：
+
+- 13 项 checks 全部 `PASS`；
+- firmware SHA256：
+  `a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec`；
+- evidence bytes / SHA256：`6847` /
+  `dc061cb2a848fb7971de7cac712cdf74681c6367ab7d7f436d8ceaed7c9c5e21`；
+- job：`completed / PASS / attempts=1`；
+- 平台测试：`309/309 PASS`；
+- Node：`2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向 Ruff
+  均 `PASS`；
+- GitHub Actions CI run `40073423924`：`platform-contracts` 与
+  `network-namespace-policy` 均成功。
+
+边界：
+
+- 同主机 loopback；
+- 客户端迁移由测试手工 staged，不证明自动发现或 fleet 编排；
+- 重叠窗口没有自动 TTL/超时撤权；final cutover 需要 operator 删除 previous
+  文件并发送 `SIGHUP`；
+- 不包含跨主机 continuity、生产 CA/secret-manager 生命周期、RF 或真机。
+
+回滚：revert
+`5dbc5aad1fadf8c4564147255a8be2b1e30c115b`。回滚后恢复单 active token/CA，
+但仍保留 activity drain。

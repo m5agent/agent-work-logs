@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "transport-security validation",
+  "scope": "same-host-loopback-bounded-overlap-final-cutover-with-drain",
+  "result_commit": "5dbc5aad1fadf8c4564147255a8be2b1e30c115b",
+  "previous_follow_up_commit": "e1c18f6eb46fc172f5e2048f5b233cb5ca596765",
+  "rotation": {
+    "server_certificate": "A-to-B",
+    "client_ca_overlap": "A-and-B",
+    "client_ca_final": "B",
+    "worker_client_certificate_and_key": "A-to-B",
+    "master_token_overlap": "A-and-B",
+    "master_token_final": "B",
+    "active_request_drain": "PASS",
+    "client_fleet_migration": "manual-staged",
+    "final_cutover_signal": "SIGHUP-after-removing-previous-files"
+  },
+  "checks": {
+    "initial_https_credentials": "PASS",
+    "worker_registered_before_rotation": "PASS",
+    "server_security_reload": "PASS",
+    "overlap_old_client_certificate_accepted": "PASS",
+    "overlap_old_master_token_accepted": "PASS",
+    "final_security_reload": "PASS",
+    "final_old_tls_identity_rejected": "PASS",
+    "final_old_master_token_rejected": "PASS",
+    "new_tls_identity_accepted": "PASS",
+    "worker_credentials_reload": "PASS",
+    "active_request_drained_across_rotation": "PASS",
+    "signed_job_after_rotation": "PASS",
+    "job_evidence_sha256": "PASS"
+  },
+  "live_job": {
+    "status": "completed",
+    "result_state": "PASS",
+    "attempts": 1,
+    "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec",
+    "evidence_bytes": 6847,
+    "evidence_sha256": "dc061cb2a848fb7971de7cac712cdf74681c6367ab7d7f436d8ceaed7c9c5e21"
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/5dbc5aad1fadf8c4564147255a8be2b1e30c115b/tests/network/worker_tls/evidence-2026-10-24-security-rotation-overlap-job-pass.json",
+  "source_evidence_sha256": "b13e871dfff090fb7e74ac9205a86e8a115945a261e5d449df30471e98c77f25",
+  "platform": {
+    "tests": 309,
+    "passed": 309,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40073423924,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "automated client fleet discovery or migration",
+    "cross-host network topology or continuity",
+    "production CA or secret-manager lifecycle",
+    "multi-host scheduling or worker continuity",
+    "hardware validation"
+  ]
+}

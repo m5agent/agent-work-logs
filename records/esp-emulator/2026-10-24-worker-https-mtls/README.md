@@ -1,4 +1,4 @@
-# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Drained Credential Rotation
+# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Overlap Credential Rotation
 
 - 日期：`2026-10-24`
 - 结果：`PASS`
@@ -8,6 +8,7 @@
 - unified job follow-up：`m5agent/m5stack-esp-emulator @ 48ff20c416221e20f76873c07d7473329318eb5c`
 - TLS/token rotation follow-up：`m5agent/m5stack-esp-emulator @ b01e95b22c163c270d1ef632c1abb75cbdd4c527`
 - activity-drain follow-up：`m5agent/m5stack-esp-emulator @ e1c18f6eb46fc172f5e2048f5b233cb5ca596765`
+- bounded-overlap follow-up：`m5agent/m5stack-esp-emulator @ 5dbc5aad1fadf8c4564147255a8be2b1e30c115b`
 - 基线版本：`e9520bbca56da753cd4cd75cf30c8c5594866386`
 - 环境：macOS Apple Silicon；Python 3；同一主机 loopback；真实 Device Service 与 worker 子进程；临时测试 PKI
 
@@ -40,6 +41,16 @@ StickS3 QEMU job。
 CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopback；旧/新
 凭据重叠窗口、客户端批量迁移、跨主机 continuity 和生产 secret manager
 仍未验证。
+
+第六次门禁加入有界凭据重叠：
+
+- 第一阶段同时信任 A/B client CA，Bearer 和 worker HMAC 同时接受 A/B token；
+- 旧客户端和旧 token 仍可访问，worker 随后切到 B；
+- 删除 previous token/CA 文件并再次 `SIGHUP`，旧 CA 握手和旧 token 最终失败；
+- 最终由新凭据完成真实 StickS3 QEMU job。
+
+客户端 trust bundle 迁移在本 fixture 中由测试手工 staged。自动化客户端发现、
+批量迁移和跨主机 continuity 仍未验证。
 
 ## 关键证据
 
@@ -79,6 +90,11 @@ CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopbac
   `c67f44265ecad925c8bd2069041fd4cfa65f9a3ac4dab2f1f03f2cb4403a1c0a`；
 - activity-drain follow-up：平台测试 `308/308 PASS`，GitHub Actions CI run
   `40072991528` 两个 job 均 `PASS`。
+- bounded-overlap checks：`13/13 PASS`；
+- bounded-overlap 后 evidence bytes / SHA256：`6847` /
+  `dc061cb2a848fb7971de7cac712cdf74681c6367ab7d7f436d8ceaed7c9c5e21`；
+- bounded-overlap follow-up：平台测试 `309/309 PASS`，GitHub Actions CI run
+  `40073423924` 两个 job 均 `PASS`。
 
 ## 文件
 
@@ -89,11 +105,12 @@ CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopbac
 - `evidence/verification.unified-job.summary.json`：unified board/WiFi/BLE job over mTLS 的 follow-up
 - `evidence/verification.rotation.summary.json`：TLS/token rotation 与轮换后 QEMU job 的 follow-up
 - `evidence/verification.rotation-drain.summary.json`：活动请求 drain、超时保留旧配置和轮换后 QEMU job 的 follow-up
+- `evidence/verification.rotation-overlap.summary.json`：A/B bounded overlap、final cutover 和轮换后 QEMU job 的 follow-up
 
 ## 未覆盖项
 
 - 跨主机网络拓扑、延迟和丢包；
-- 旧/新凭据重叠窗口和客户端批量迁移；
+- 自动化客户端发现与批量迁移；
 - 生产 CA/证书生命周期；
 - 生产 secret manager 集成；
 - 任意其他固件的 unified board/network/UI PASS；

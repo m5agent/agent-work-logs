@@ -3,7 +3,7 @@
   "date": "2026-10-24",
   "kind": "code_change",
   "overall_status": "PASS",
-  "title": "Add HTTPS/mTLS, signed jobs and drained TLS/token rotation for Device Service workers",
+  "title": "Add HTTPS/mTLS, signed jobs and overlap TLS/token rotation for Device Service workers",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "e9520bbca56da753cd4cd75cf30c8c5594866386",
@@ -123,6 +123,37 @@
         "run_id": 40072991528,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "same_host_sighup_bounded_overlap_final_cutover_qemu_job",
+      "result_commit": "5dbc5aad1fadf8c4564147255a8be2b1e30c115b",
+      "previous_follow_up_commit": "e1c18f6eb46fc172f5e2048f5b233cb5ca596765",
+      "status": "PASS",
+      "evidence": "evidence/verification.rotation-overlap.summary.json",
+      "scope": "same-host-loopback-bounded-overlap-final-cutover-with-drain",
+      "rotation": {
+        "client_ca_overlap": "A-and-B",
+        "client_ca_final": "B",
+        "master_token_overlap": "A-and-B",
+        "master_token_final": "B",
+        "active_request_drain": "PASS",
+        "client_fleet_migration": "manual-staged",
+        "final_cutover_signal": "SIGHUP-after-removing-previous-files"
+      },
+      "job": {
+        "status": "completed",
+        "result_state": "PASS",
+        "attempts": 1,
+        "evidence_bytes": 6847,
+        "evidence_sha256": "dc061cb2a848fb7971de7cac712cdf74681c6367ab7d7f436d8ceaed7c9c5e21",
+        "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec"
+      },
+      "platform_tests": "309/309 PASS",
+      "github_actions": {
+        "run_id": 40073423924,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -192,7 +223,12 @@
       "detail": "old-token artifact upload returned 201 before reload; timeout keeps old configuration"
     },
     {
-      "name": "credential_overlap_or_client_fleet_migration",
+      "name": "bounded_old_new_credential_overlap",
+      "status": "PASS",
+      "detail": "A/B client CAs and tokens accepted before final cutover"
+    },
+    {
+      "name": "automated_client_fleet_migration",
       "status": "NOT RUN"
     }
   ],
@@ -205,6 +241,8 @@
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071841654",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40072474174",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40072991528",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40073423924",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/5dbc5aad1fadf8c4564147255a8be2b1e30c115b/tests/network/worker_tls/evidence-2026-10-24-security-rotation-overlap-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/e1c18f6eb46fc172f5e2048f5b233cb5ca596765/tests/network/worker_tls/evidence-2026-10-24-security-rotation-drain-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/b01e95b22c163c270d1ef632c1abb75cbdd4c527/tests/network/worker_tls/evidence-2026-10-24-security-rotation-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/48ff20c416221e20f76873c07d7473329318eb5c/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-unified-job-pass.json",
@@ -221,6 +259,8 @@
     "The rotation follow-up atomically replaces server/client PKI files and the master token, then reloads both processes with SIGHUP.",
     "The rotation test proves rejection of the retired TLS identity and old token.",
     "The activity-drain follow-up keeps an old-token artifact upload active across SIGHUP and commits the new configuration only after it returns 201.",
-    "This drain does not provide an overlapping old/new credential window or automated client-fleet migration."
+    "This drain does not provide an overlapping old/new credential window.",
+    "The overlap follow-up accepts A/B client CAs and tokens, then removes previous files and sends a final SIGHUP to retire A.",
+    "Automated client fleet discovery and migration remain NOT RUN."
   ]
 }
