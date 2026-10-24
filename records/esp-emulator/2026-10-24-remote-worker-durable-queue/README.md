@@ -24,7 +24,9 @@ worker stale、stopped、missing 或 generation 被替换时，supervisor 会释
 当前 lease；attempts 未耗尽则重新排队，否则失败。状态在服务重启后仍可恢复。
 
 这不是完整 `NET-04`：独立 job executor、evidence bundle 回传、生产多机
-调度和活动 QEMU 进程 re-attach 仍为 `NOT RUN`。
+调度仍为 `NOT RUN`。后续
+[`2026-10-24-qemu-restart-reattach`](../2026-10-24-qemu-restart-reattach/)
+已补本地 QEMU/QMP 控制面 restart re-attach；companion/evidence 连续性仍开放。
 
 ## 关键证据
 
@@ -53,7 +55,8 @@ worker stale、stopped、missing 或 generation 被替换时，supervisor 会释
 
 - 独立 worker executor 和实际 firmware/session 执行；
 - evidence bundle 上传、校验和对象存储；
-- 活动 QEMU PID/start time 接管或明确 `interrupted_failed`；
+- 活动 QEMU PID/start time 接管已由后续记录闭合；companion/evidence
+  连续性和跨主机接管仍未覆盖；
 - 生产多机容量调度和 warm pool；
 - 重复服务/worker 崩溃 soak；
 - 物理硬件、RF、功耗、声学和电气验证。

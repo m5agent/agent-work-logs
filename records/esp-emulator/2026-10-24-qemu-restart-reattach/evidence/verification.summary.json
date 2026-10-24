@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-local-qemu-restart-reattach-summary",
+  "scope": "virtual-device-infrastructure",
+  "status": "PASS",
+  "source_commit": "b31c3ab6d827b7e2a7199e3e30e75952fe4eaa20",
+  "base_commit": "22c9564a3c55e543b40d964f4a8ea27e2074073b",
+  "ci": {
+    "run_id": 40056119661,
+    "conclusion": "success",
+    "platform_tests": {
+      "total": 289,
+      "status": "PASS",
+      "detail": "OK (skipped=2)"
+    },
+    "network_namespace_policy": "PASS"
+  },
+  "local": {
+    "platform_tests": "289/289 PASS",
+    "device_service_tests": "82/82 PASS",
+    "targeted_reattach": "1/1 PASS",
+    "live_service_restart": "1/1 PASS",
+    "openapi_yaml": "PASS",
+    "ruff_and_compile": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "live_reattach": {
+    "initial_guest_state": "running",
+    "service_kill": "SIGKILL to Device Service PID only",
+    "qemu_survived_service_kill": true,
+    "restarted_service_saw_running_session": true,
+    "same_pid_reattached": true,
+    "pid_value_redacted": true,
+    "worker_generation": 2,
+    "recovery_scope": "qemu-control-plane",
+    "stop_terminated_reattached_qemu": true
+  },
+  "negative_checks": {
+    "missing_process_identity": "interrupted_failed",
+    "stale_start_token": "interrupted_failed",
+    "pid_reuse_safe_termination": "PASS"
+  },
+  "hashes": {
+    "device_service_py_sha256": "a7d4663d16a6259bc54513dd4e7b7fbaed57e12796df402d17d73a76b6d0de1e",
+    "reattach_evidence_sha256": "2d7d70727fbf5502273fbac7008cb3863d5e87f41f80104246125ffdc1fa47c9"
+  },
+  "not_run": [
+    "companion HTTP/BLE helper continuity",
+    "pcap/evidence stream continuity",
+    "Tab5 and network-lane re-attach",
+    "paused QEMU adoption",
+    "cross-host re-attach",
+    "multi-host scheduling",
+    "physical hardware"
+  ],
+  "not_claimed": [
+    "complete session functionality after restart",
+    "evidence stream continuity",
+    "untrusted firmware sandboxing",
+    "physical hardware validation"
+  ]
+}
