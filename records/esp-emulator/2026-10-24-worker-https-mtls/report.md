@@ -198,9 +198,69 @@ commit 上不证明任意固件、跨主机拓扑、凭据 rotation、多主机 
 - 同主机 loopback，不是跨主机网络；
 - 新 TLS context 只影响后续握手，已有 TLS 会话保留协商状态；
 - 新 token 影响后续受保护请求，包括已有 keep-alive 连接；
-- 不证明轮换期间零中断 request draining；
+- 在该 commit 上不证明轮换期间的 active-request draining；该缺口由下一节
+  follow-up 闭合；
 - 不包含生产 CA/secret-manager 生命周期、多主机 continuity、RF 或真机。
 
 回滚：revert
 `b01e95b22c163c270d1ef632c1abb75cbdd4c527`。回滚后恢复启动时加载
 证书/token；不得把回滚状态用于需要凭据轮换的部署。
+
+## Follow-up：活动请求 drain 后轮换
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ e1c18f6eb46fc172f5e2048f5b233cb5ca596765`。
+
+该 follow-up 在 `ServiceHTTPServer` 增加请求门禁：
+
+- 每个请求进入和结束都更新 active count；
+- `SIGHUP` 先进入 draining 状态，阻止新的 handler 进入；
+- 已进入处理器的请求继续使用旧 token/TLS 完成；
+- active count 清零后才执行配置加载与 token/TLS 提交；
+- drain 默认等待 30 秒，可通过
+  `--security-reload-drain-timeout` 或
+  `M5_SECURITY_RELOAD_DRAIN_TIMEOUT` 调整；
+- 超时或配置加载失败时不提交新配置，并立即恢复请求接纳；
+- reload 期间新连接保留在 listener/backlog，不声明旧/新凭据重叠窗口。
+
+真实进程验证：
+
+1. 用旧 token 建立 `/api/v1/artifacts` 上传，只发送部分 body；
+2. 原子替换 A/B PKI 与 token，向服务和 worker 发送 `SIGHUP`；
+3. 服务输出 `security configuration drain started`，在上传未完成前不
+   输出 reload 完成；
+4. 发送剩余 body，旧 token 请求返回 `201`；
+5. 服务随后 reload，旧 TLS 身份/旧 token 拒绝；
+6. worker 用新凭据继续 claim，并完成真实 StickS3 QEMU job。
+
+额外平台单元测试覆盖：
+
+- active request 未完成时 reload callback 不执行；
+- request 完成后 reload 执行，响应保持 200；
+- drain 超时后 callback 不执行，旧配置保留并恢复接纳。
+
+结果：
+
+- activity-drain checks：`10/10 PASS`；
+- firmware SHA256：
+  `a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec`；
+- evidence bytes / SHA256：`6850` /
+  `c67f44265ecad925c8bd2069041fd4cfa65f9a3ac4dab2f1f03f2cb4403a1c0a`；
+- job：`completed / PASS / attempts=1`；
+- 平台测试：`308/308 PASS`；
+- Node：`2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向 Ruff
+  均 `PASS`；
+- GitHub Actions CI run `40072991528`：`platform-contracts` 与
+  `network-namespace-policy` 均成功。
+
+边界：
+
+- 同主机 loopback，不是跨主机网络；
+- 新请求在 drain 窗口内等待，不保证无限 backlog 或大规模并发下无重试；
+- 不提供旧/新 token 同时有效、双 CA 信任或客户端批量迁移；
+- 不包含生产 CA/secret-manager 生命周期、多主机 continuity、RF 或真机。
+
+回滚：revert
+`e1c18f6eb46fc172f5e2048f5b233cb5ca596765`。回滚后 `SIGHUP` 仍会立即
+切换配置，但不会等待活动请求完成。

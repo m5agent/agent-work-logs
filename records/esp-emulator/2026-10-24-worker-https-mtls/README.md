@@ -1,4 +1,4 @@
-# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Credential Rotation
+# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Drained Credential Rotation
 
 - 日期：`2026-10-24`
 - 结果：`PASS`
@@ -7,6 +7,7 @@
 - QEMU job follow-up：`m5agent/m5stack-esp-emulator @ 865e4f810263f3f388beeee3aa577de27f99d0b1`
 - unified job follow-up：`m5agent/m5stack-esp-emulator @ 48ff20c416221e20f76873c07d7473329318eb5c`
 - TLS/token rotation follow-up：`m5agent/m5stack-esp-emulator @ b01e95b22c163c270d1ef632c1abb75cbdd4c527`
+- activity-drain follow-up：`m5agent/m5stack-esp-emulator @ e1c18f6eb46fc172f5e2048f5b233cb5ca596765`
 - 基线版本：`e9520bbca56da753cd4cd75cf30c8c5594866386`
 - 环境：macOS Apple Silicon；Python 3；同一主机 loopback；真实 Device Service 与 worker 子进程；临时测试 PKI
 
@@ -31,8 +32,14 @@ pcap 和 PNG frame；所有文件均来自同一个下载的 evidence ZIP。
 第四次门禁加入 file-backed token 和 `SIGHUP` A/B rotation。服务端与 worker
 原子替换临时 PKI、客户端 CA、worker 客户证书/key 和 master token；旧 CA
 身份与旧 token 均被拒绝，新凭据继续注册/heartbeat/claim，并完成真实
-StickS3 QEMU job。该结果只覆盖同主机 loopback；零中断 request draining、
-跨主机 continuity 和生产 secret manager 未验证。
+StickS3 QEMU job。
+
+第五次门禁补上活动请求 drain。服务收到 `SIGHUP` 后停止接纳新 handler，
+等待一个旧 token 的未完成 artifact 上传返回 `201`，之后才提交 token/TLS
+配置；默认等待上限 30 秒，超时则取消 reload 并保留旧配置。随后仍验证旧
+CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopback；旧/新
+凭据重叠窗口、客户端批量迁移、跨主机 continuity 和生产 secret manager
+仍未验证。
 
 ## 关键证据
 
@@ -67,6 +74,11 @@ StickS3 QEMU job。该结果只覆盖同主机 loopback；零中断 request drai
 - rotation 后 job：`completed / PASS / attempts=1`；
 - rotation follow-up：平台测试 `306/306 PASS`，GitHub Actions CI run
   `40072474174` 两个 job 均 `PASS`。
+- activity-drain checks：`10/10 PASS`；
+- activity drain 后 evidence bytes / SHA256：`6850` /
+  `c67f44265ecad925c8bd2069041fd4cfa65f9a3ac4dab2f1f03f2cb4403a1c0a`；
+- activity-drain follow-up：平台测试 `308/308 PASS`，GitHub Actions CI run
+  `40072991528` 两个 job 均 `PASS`。
 
 ## 文件
 
@@ -76,11 +88,12 @@ StickS3 QEMU job。该结果只覆盖同主机 loopback；零中断 request drai
 - `evidence/verification.qemu-job.summary.json`：真实 QEMU job over mTLS 的 follow-up
 - `evidence/verification.unified-job.summary.json`：unified board/WiFi/BLE job over mTLS 的 follow-up
 - `evidence/verification.rotation.summary.json`：TLS/token rotation 与轮换后 QEMU job 的 follow-up
+- `evidence/verification.rotation-drain.summary.json`：活动请求 drain、超时保留旧配置和轮换后 QEMU job 的 follow-up
 
 ## 未覆盖项
 
 - 跨主机网络拓扑、延迟和丢包；
-- 轮换期间的零中断 request draining；
+- 旧/新凭据重叠窗口和客户端批量迁移；
 - 生产 CA/证书生命周期；
 - 生产 secret manager 集成；
 - 任意其他固件的 unified board/network/UI PASS；

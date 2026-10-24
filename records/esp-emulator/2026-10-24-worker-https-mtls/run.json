@@ -3,7 +3,7 @@
   "date": "2026-10-24",
   "kind": "code_change",
   "overall_status": "PASS",
-  "title": "Add HTTPS/mTLS, signed jobs and TLS/token rotation for Device Service workers",
+  "title": "Add HTTPS/mTLS, signed jobs and drained TLS/token rotation for Device Service workers",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "e9520bbca56da753cd4cd75cf30c8c5594866386",
@@ -91,6 +91,38 @@
         "run_id": 40072474174,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "same_host_sighup_drained_tls_token_rotation_qemu_job",
+      "result_commit": "e1c18f6eb46fc172f5e2048f5b233cb5ca596765",
+      "previous_follow_up_commit": "b01e95b22c163c270d1ef632c1abb75cbdd4c527",
+      "status": "PASS",
+      "evidence": "evidence/verification.rotation-drain.summary.json",
+      "scope": "same-host-loopback-sighup-drained-tls-token-rotation",
+      "rotation": {
+        "server_certificate": "A-to-B",
+        "client_ca": "A-to-B",
+        "worker_client_certificate_and_key": "A-to-B",
+        "master_token": "A-to-B",
+        "reload_signal": "SIGHUP",
+        "active_request_drain": "PASS",
+        "default_drain_timeout_seconds": 30,
+        "timeout_behavior": "cancel reload and retain old configuration"
+      },
+      "job": {
+        "status": "completed",
+        "result_state": "PASS",
+        "attempts": 1,
+        "evidence_bytes": 6850,
+        "evidence_sha256": "c67f44265ecad925c8bd2069041fd4cfa65f9a3ac4dab2f1f03f2cb4403a1c0a",
+        "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec"
+      },
+      "platform_tests": "308/308 PASS",
+      "github_actions": {
+        "run_id": 40072991528,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -155,7 +187,12 @@
       "detail": "SIGHUP; retired TLS identity and old token rejected; post-rotation QEMU job completed/PASS"
     },
     {
-      "name": "zero_downtime_request_draining_during_rotation",
+      "name": "active_request_draining_during_rotation",
+      "status": "PASS",
+      "detail": "old-token artifact upload returned 201 before reload; timeout keeps old configuration"
+    },
+    {
+      "name": "credential_overlap_or_client_fleet_migration",
       "status": "NOT RUN"
     }
   ],
@@ -167,6 +204,8 @@
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071518376",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071841654",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40072474174",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40072991528",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e1c18f6eb46fc172f5e2048f5b233cb5ca596765/tests/network/worker_tls/evidence-2026-10-24-security-rotation-drain-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/b01e95b22c163c270d1ef632c1abb75cbdd4c527/tests/network/worker_tls/evidence-2026-10-24-security-rotation-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/48ff20c416221e20f76873c07d7473329318eb5c/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-unified-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/865e4f810263f3f388beeee3aa577de27f99d0b1/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-qemu-job-pass.json",
@@ -180,6 +219,8 @@
     "A follow-up now executes a real runtime=qemu StickS3 job over mTLS with evidence SHA256 and terminal PASS.",
     "A further follow-up executes the unified StickS3 profile over mTLS and verifies board/WiFi/BLE markers, network evidence, pcap and frame from the same evidence ZIP.",
     "The rotation follow-up atomically replaces server/client PKI files and the master token, then reloads both processes with SIGHUP.",
-    "The rotation test proves rejection of the retired TLS identity and old token, but does not claim request draining or zero-downtime cutover."
+    "The rotation test proves rejection of the retired TLS identity and old token.",
+    "The activity-drain follow-up keeps an old-token artifact upload active across SIGHUP and commits the new configuration only after it returns 201.",
+    "This drain does not provide an overlapping old/new credential window or automated client-fleet migration."
   ]
 }

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "transport-security validation",
+  "scope": "same-host-loopback-sighup-drained-tls-token-rotation",
+  "result_commit": "e1c18f6eb46fc172f5e2048f5b233cb5ca596765",
+  "previous_follow_up_commit": "b01e95b22c163c270d1ef632c1abb75cbdd4c527",
+  "rotation": {
+    "server_certificate": "A-to-B",
+    "client_ca": "A-to-B",
+    "worker_client_certificate_and_key": "A-to-B",
+    "master_token": "A-to-B",
+    "reload_signal": "SIGHUP",
+    "active_request_drain": "PASS",
+    "default_drain_timeout_seconds": 30,
+    "timeout_behavior": "cancel reload and retain old configuration"
+  },
+  "checks": {
+    "initial_https_credentials": "PASS",
+    "worker_registered_before_rotation": "PASS",
+    "server_security_reload": "PASS",
+    "old_tls_identity_rejected": "PASS",
+    "new_tls_identity_accepted": "PASS",
+    "old_master_token_rejected": "PASS",
+    "worker_credentials_reload": "PASS",
+    "active_request_drained_across_rotation": "PASS",
+    "signed_job_after_rotation": "PASS",
+    "job_evidence_sha256": "PASS"
+  },
+  "live_job": {
+    "status": "completed",
+    "result_state": "PASS",
+    "attempts": 1,
+    "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec",
+    "evidence_bytes": 6850,
+    "evidence_sha256": "c67f44265ecad925c8bd2069041fd4cfa65f9a3ac4dab2f1f03f2cb4403a1c0a"
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/e1c18f6eb46fc172f5e2048f5b233cb5ca596765/tests/network/worker_tls/evidence-2026-10-24-security-rotation-drain-job-pass.json",
+  "source_evidence_sha256": "4ac1233a90ff2b1af9050ca40863abbcfc968222e9e15ee787614b584b01b570",
+  "platform": {
+    "tests": 308,
+    "passed": 308,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40072991528,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "overlapping old/new credential window or client-fleet migration",
+    "cross-host network topology or continuity",
+    "production CA or secret-manager lifecycle",
+    "multi-host scheduling or worker continuity",
+    "hardware validation"
+  ]
+}
