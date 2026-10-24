@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Run a real worker-local StickS3 QEMU job across network namespaces",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "f0fe0553546032fdf6c5219f8b7278af823d24b2",
+    "implementation_commit": "902034997afbf1f47949c08f129da101bb90582a",
+    "ci_fix_commit": "461d489f2c36825d4b4ce27421322b56231c34e1",
+    "result_commit": "ec63754f183c7b059fab2d4aa520ab43a307d426",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40129700779"
+    ]
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "device": "sticks3",
+    "source_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "normalized_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec"
+  },
+  "execution": {
+    "environment": "privileged Linux arm64 container with private network namespaces",
+    "runtime": "real Linux arm64 qemu-system-xtensa",
+    "qemu_sha256": "f024f034d20bd5b8e2c224ce69deed70984b0514f8a310d221b388b74c179ecb",
+    "scope": "worker-local-qemu-across-network-namespaces-not-physical-hardware",
+    "worker_local_qemu_checks": "18/18 PASS",
+    "platform_tests": "368/368 PASS",
+    "docs_tests": "19/19 PASS",
+    "node_tests": "2/2 PASS"
+  },
+  "checks": [
+    {
+      "name": "worker_exit_zero",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_service_started",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_route_uses_veth",
+      "status": "PASS"
+    },
+    {
+      "name": "registration_recorded",
+      "status": "PASS"
+    },
+    {
+      "name": "job_submitted",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_job_heartbeat",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_execution",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_qemu_started",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_device_session_created",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "firmware_source_sha256_bound",
+      "status": "PASS"
+    },
+    {
+      "name": "firmware_normalized_sha256_bound",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_sha256_bound",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal_completed_pass",
+      "status": "PASS"
+    },
+    {
+      "name": "token_not_logged",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_reaped",
+      "status": "PASS"
+    },
+    {
+      "name": "namespaces_cleaned",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "368 of 368 tests passed"
+    },
+    {
+      "name": "docs_contracts",
+      "status": "PASS",
+      "detail": "19 of 19 tests passed"
+    },
+    {
+      "name": "node_contracts",
+      "status": "PASS",
+      "detail": "2 of 2 tests passed"
+    },
+    {
+      "name": "cross_host_qemu_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "automatic_worker_host_discovery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_reattach",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "companion_evidence_continuity",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ec63754f183c7b059fab2d4aa520ab43a307d426/tests/network/worker_cross_netns/evidence-2026-10-25-worker-local-qemu-cross-netns-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ec63754f183c7b059fab2d4aa520ab43a307d426/tests/network/worker_cross_netns/run_test.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ec63754f183c7b059fab2d4aa520ab43a307d426/platform/tests/test_worker_cross_netns_paths.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ec63754f183c7b059fab2d4aa520ab43a307d426/platform/tests/test_docs_consistency.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ec63754f183c7b059fab2d4aa520ab43a307d426/docs/project-status.md"
+  ],
+  "notes": [
+    "The worker-local runtime is a virtual Linux arm64 QEMU, not physical hardware.",
+    "The two network namespaces are on one host; this is not a cross-host executor claim.",
+    "The QEMU reap check now matches argv[0] instead of arbitrary command-line text.",
+    "The control-plane and QEMU result shapes are both covered after a Linux CI-only failure.",
+    "All retained diagnostics are redacted for token and ephemeral identifiers."
+  ]
+}

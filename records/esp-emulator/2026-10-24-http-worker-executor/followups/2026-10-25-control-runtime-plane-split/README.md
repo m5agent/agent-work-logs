@@ -23,6 +23,13 @@ fixture 的 no-QEMU 兼容模式在拆分后再次 `13/13 PASS`。worker-local �
 QEMU fixture 已实现，但为避免干扰正在运行的 Core2 soak，本轮未执行，
 因此整体只记 `PARTIAL`。
 
+后续
+[`2026-10-25-worker-local-qemu`](followups/2026-10-25-worker-local-qemu/)
+已在 soak 结束后执行真实 Linux arm64 StickS3 QEMU job：central control
+plane 不接收 session API，worker-local runtime 独立完成 artifact/firmware、
+session、serial/frame/QOM evidence 和 cleanup，18/18 checks PASS。该 follow-up
+把整体执行门禁推进到 `PASS`，但 physical cross-host 仍不在声明范围内。
+
 ## 关键证据
 
 - 完整平台套件：`350/350 PASS`。
@@ -44,6 +51,6 @@ QEMU fixture 已实现，但为避免干扰正在运行的 Core2 soak，本轮�
 ## 未覆盖项
 
 - 真实 worker namespace Device Service 启动 QEMU、应用首帧/串口、
-  evidence ZIP 和 QEMU reap：`NOT RUN`。
+  evidence ZIP 和 QEMU reap：已由上述 follow-up 完成 `PASS`。
 - companion/evidence-stream continuity 和跨主机 process reattach。
 - 物理独立主机、生产多机调度和物理硬件。
