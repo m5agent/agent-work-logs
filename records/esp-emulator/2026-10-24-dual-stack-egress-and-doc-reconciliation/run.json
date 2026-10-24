@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Exact IPv6 egress and code/document reconciliation",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7d069594bd93d7a7d6165420f111f184eee95d0e",
+    "code_commit": "5db301ad1e0cea1e30c60d58fceaddf925144cf1",
+    "final_docs_commit": "9981460b46dad235eed5d8001d0df432faabd79e"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS test host, isolated privileged Linux container, GitHub Actions ubuntu-latest",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "336 of 336 tests passed"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "17 documentation consistency checks passed"
+    },
+    {
+      "name": "browser_upload_units",
+      "status": "PASS",
+      "detail": "2 of 2 Node tests passed"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "local_dual_stack_egress",
+      "status": "PASS",
+      "detail": "2 of 2 repeated runs passed in isolated privileged Linux container"
+    },
+    {
+      "name": "github_actions_network_policy",
+      "status": "PASS",
+      "detail": "runs 40098666896 and 40098772592"
+    },
+    {
+      "name": "ipv4_exact_allow_and_deny",
+      "status": "PASS"
+    },
+    {
+      "name": "ipv6_exact_allow_and_deny",
+      "status": "PASS"
+    },
+    {
+      "name": "ipv4_ipv6_masquerade_observed",
+      "status": "PASS"
+    },
+    {
+      "name": "namespace_and_nat_cleanup",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9981460b46dad235eed5d8001d0df432faabd79e/tests/network/egress_allowlist/evidence-2026-10-24-dual-stack-docker-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9981460b46dad235eed5d8001d0df432faabd79e/tests/network/egress_allowlist/evidence-2026-10-24-dual-stack-github-actions-pass.json"
+  ],
+  "notes": [
+    "Virtual-network policy validation only; no firmware guest or physical hardware claim.",
+    "CIDR, domain-set, and IPv6 DNS policy remain outside this record.",
+    "Core2 artifact-bound 7200-second soak remained in progress and is not claimed as PASS."
+  ]
+}
