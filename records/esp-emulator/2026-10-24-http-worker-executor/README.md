@@ -27,6 +27,12 @@
 创建真实 QEMU session，下载 6891-byte evidence ZIP，停止 session，提交
 attempt 1 / completed / PASS，agent exit 0。
 
+后续
+[`2026-10-24-worker-hmac-auth`](../2026-10-24-worker-hmac-auth/)
+已在启用 API token 的同一真实 job 路径上加入 worker/generation HMAC、
+timestamp、nonce replay 和 path/body identity binding；跨主机 TLS/mTLS
+和 credential rotation 仍开放。
+
 ## 关键证据
 
 - 平台测试：`292/292 PASS`；

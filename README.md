@@ -95,6 +95,7 @@
 | 2026-10-24 | ESP Emulator | 远程 worker durable job queue 与 lease supervisor | PASS（contract/API：幂等 submit、capability claim、identity-bound lease、expiry retry、cancel/result、worker stale/stop/generation 回收、restart recovery、289/289 tests；executor/evidence 回传/QEMU re-attach/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-remote-worker-durable-queue/) |
 | 2026-10-24 | ESP Emulator | 本地 QEMU/QMP restart re-attach | PASS（virtual-device infrastructure：仅 SIGKILL 服务时真实 StickS3 QEMU 存活；二代服务按 PID start-time+QMP ownership+running 状态接管同一 PID、重建 gen 2 lease 并可清理；companion/evidence/cross-host/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-qemu-restart-reattach/) |
 | 2026-10-24 | ESP Emulator | HTTP-only worker executor 与真实 durable job | PASS（virtual-device：独立 agent 注册/claim/heartbeat，创建真实 StickS3 QEMU session，下载 evidence ZIP/SHA256，停止 session 并提交 completed/PASS，292/292 tests；跨主机/auth/companion/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-http-worker-executor/) |
+| 2026-10-24 | ESP Emulator | Worker HMAC authentication 与签名真实 job | PASS（virtual-device：worker/generation key、timestamp/nonce/body HMAC、path/body identity binding；unsigned claim 401，签名 agent 完成真实 StickS3 job，296/296 tests；跨主机 TLS/mTLS、rotation、companion/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-worker-hmac-auth/) |
 
 ## 目录结构
 

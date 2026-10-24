@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-worker-hmac-auth-summary",
+  "scope": "same-host-authenticated-worker-job",
+  "status": "PASS",
+  "source_commit": "303e10744f3826763e355ee2c49e7715fe58a254",
+  "base_commit": "d200bada9e72593db21cdfb191cdb59e488439a4",
+  "ci": {
+    "run_id": 40056937192,
+    "conclusion": "success",
+    "platform_tests": {
+      "total": 296,
+      "status": "PASS",
+      "detail": "OK (skipped=2)"
+    },
+    "network_namespace_policy": "PASS"
+  },
+  "local": {
+    "platform_tests": "296/296 PASS",
+    "worker_auth_tests": "4/4 PASS",
+    "worker_agent_tests": "3/3 PASS",
+    "live_authenticated_executor": "1/1 PASS",
+    "openapi_yaml": "PASS",
+    "ruff_and_compile": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "authentication": {
+    "master_token_required": true,
+    "key_identity": ["worker_id", "instance_id", "generation"],
+    "signed_fields": ["method", "path", "timestamp", "nonce", "body_sha256"],
+    "timestamp_window_seconds": 90,
+    "nonce_replay_cache": true,
+    "path_identity_binding": true,
+    "body_identity_binding": true
+  },
+  "live_execution": {
+    "unsigned_claim_http": 401,
+    "job_status": "completed",
+    "result_state": "PASS",
+    "attempts": 1,
+    "evidence_bytes": 6882,
+    "evidence_sha256": "2df3fdc392b3f3b2e15f736465d766936ebd0fc5c1ec5d30e355c583ac3eec67",
+    "agent_exit": 0
+  },
+  "hashes": {
+    "worker_auth_py_sha256": "f03f151862a03892abf054e7f7ccd49e15de6d988659cbd1c7186e8e8179d8bc",
+    "worker_agent_py_sha256": "b780538644bc09923e1f83d83a292f88d3f85ff4a2e31438cb2ddf974969c504",
+    "auth_evidence_sha256": "aa260a52871a86f110298b1a438633719fab4a489b775df9311b4915039deec3"
+  },
+  "not_run": [
+    "cross-host TLS or mTLS",
+    "worker credential rotation or revocation",
+    "external side-effect exactly-once",
+    "companion continuity after service restart",
+    "multi-host scheduling",
+    "physical hardware"
+  ],
+  "not_claimed": [
+    "cross-host security",
+    "malicious firmware containment",
+    "exactly-once external side effects",
+    "hardware validation"
+  ]
+}

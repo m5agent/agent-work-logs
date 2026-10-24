@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Authenticate worker-only job mutations with worker-generation HMAC",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "d200bada9e72593db21cdfb191cdb59e488439a4",
+    "result_commit": "303e10744f3826763e355ee2c49e7715fe58a254",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40056937192"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "live_guest": "StickS3 reference QEMU session",
+    "physical_device": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, token-protected Device Service, real StickS3 QEMU job",
+    "platform_tests": "296/296 PASS",
+    "worker_auth_tests": "4/4 PASS",
+    "worker_agent_tests": "3/3 PASS",
+    "live_authenticated_executor": "1/1 PASS",
+    "github_actions": "296 tests, OK (skipped=2)",
+    "openapi_version": "1.19.0"
+  },
+  "checks": [
+    {
+      "name": "worker_key_derivation",
+      "status": "PASS"
+    },
+    {
+      "name": "method_path_timestamp_nonce_body_signature",
+      "status": "PASS"
+    },
+    {
+      "name": "path_and_body_identity_binding",
+      "status": "PASS"
+    },
+    {
+      "name": "unsigned_worker_claim_rejected",
+      "status": "PASS",
+      "detail": "HTTP 401"
+    },
+    {
+      "name": "body_tamper_rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "nonce_replay_rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "generation_key_binding",
+      "status": "PASS"
+    },
+    {
+      "name": "signed_live_executor_job",
+      "status": "PASS",
+      "detail": "completed / PASS / attempt 1"
+    },
+    {
+      "name": "cross_host_tls_mtls",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "credential_rotation",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "companion_evidence_continuity",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/303e10744f3826763e355ee2c49e7715fe58a254/tests/network/worker_executor/evidence-2026-10-24-executor-auth-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/303e10744f3826763e355ee2c49e7715fe58a254/platform/tools/worker_auth.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/303e10744f3826763e355ee2c49e7715fe58a254/platform/tests/test_worker_auth.py"
+  ],
+  "notes": [
+    "Bearer token remains required when configured; worker HMAC adds generation-specific proof.",
+    "Nonce cache is process-local and bounded.",
+    "The retained execution is same-host.",
+    "No raw credential, session ID or device identifier is committed."
+  ]
+}
