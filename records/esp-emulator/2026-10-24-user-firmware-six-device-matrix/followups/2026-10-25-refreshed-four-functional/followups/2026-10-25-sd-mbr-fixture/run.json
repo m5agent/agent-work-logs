@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Attach session-isolated FAT32 MBR SD media and close CrossPoint fixture gap",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "259533cef424ffa0418369e2767a38862dc1b7d4",
+    "service_commit": "5ff9d50113c61f5edbeed13e957ebd6c9829b7ea",
+    "matrix_commit": "7647940b8e890a91f0894ac65c62955bd9401303",
+    "docs_commit": "437d417a84794f861e40910422849113707c79a6",
+    "result_commit": "437d417a84794f861e40910422849113707c79a6"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_sd_media": "NOT RUN"
+  },
+  "firmware": {
+    "samples": 4,
+    "functional_summary": {
+      "pass": 3,
+      "partial": 1,
+      "fail": 0
+    },
+    "sd_fixture_sha256": "b720d6f7f932bb22accc8b9133f3016e5c060f5d292523f78b3c636c036a5139"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon with isolated Device Service and QEMU",
+    "storage_interface": "sdmmc",
+    "storage_layout": "FAT32+MBR",
+    "storage_bytes": 67108864,
+    "session_isolated_copy": true,
+    "source_artifact_mounted_directly": false
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "363/363"
+    },
+    {
+      "name": "user_firmware_matrix_tests",
+      "status": "PASS",
+      "detail": "18/18"
+    },
+    {
+      "name": "sd_image_tests",
+      "status": "PASS",
+      "detail": "4/4"
+    },
+    {
+      "name": "docs_contract",
+      "status": "PASS",
+      "detail": "19/19"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "fixture_is_sha256_result_identity",
+      "status": "PASS"
+    },
+    {
+      "name": "session_storage_isolated_copy",
+      "status": "PASS"
+    },
+    {
+      "name": "restored_session_storage",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence_bundle_storage_summary",
+      "status": "PASS"
+    },
+    {
+      "name": "crosspoint_menu_after_sd_mount",
+      "status": "PASS"
+    },
+    {
+      "name": "openai_first_boot_nvs",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40127676353; both jobs passed"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/437d417a84794f861e40910422849113707c79a6/tests/firmware/evidence-2026-10-25-refreshed-four-functional-sd-mbr/evidence.json"
+  ],
+  "notes": [
+    "CrossPoint previously showed an SD card error; FAT32+MBR storage allows it to reach the recent-books menu.",
+    "The source SD artifact is never mounted writable directly.",
+    "OpenAI Voice Assistant remains black because user data is absent from NVS.",
+    "No physical SD, electrical or hardware claim."
+  ]
+}

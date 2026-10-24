@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-25 | `esp-emulator` | Session-isolated FAT32+MBR SD fixture 与 CrossPoint closure | `PASS`（virtual-device：3 PASS / 1 PARTIAL / 0 FAIL；CrossPoint 主菜单、storage restore/evidence PASS；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-24-user-firmware-six-device-matrix/followups/2026-10-25-refreshed-four-functional/followups/2026-10-25-sd-mbr-fixture/) |
 | 2026-10-25 | `esp-emulator` | 四个当前公开固件的 Device Service 功能重跑 | `PARTIAL`（virtual-device：2 PASS / 2 PARTIAL / 0 FAIL；CrossPoint SD fixture gap；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-24-user-firmware-six-device-matrix/followups/2026-10-25-refreshed-four-functional/) |
 | 2026-10-25 | `esp-emulator` | Core2 三 lease 121 轮、guest IPv6 namespace 与当前 Backlog 重整 | `PASS`（virtual-device + docs/contracts；物理 cache/PSRAM、bit-exact controller、吞吐/teardown 与真机 NOT RUN） | [查看](esp-emulator/2026-10-24-core2-soak-ipv6-doc-reconciliation/followups/2026-10-25-three-lease-ipv6-current-state/) |
 | 2026-10-25 | `esp-emulator` | 当前工作/文档总整理与 Core2 单 lease 121 轮 reconnect | `PASS`（virtual-device + docs；3/3、物理与真机 NOT RUN） | [查看](esp-emulator/2026-10-24-core2-soak-ipv6-doc-reconciliation/followups/2026-10-25-reconnect121-doc-reconciliation/) |
