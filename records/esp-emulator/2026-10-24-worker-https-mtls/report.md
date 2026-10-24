@@ -318,3 +318,62 @@ commit 上不证明任意固件、跨主机拓扑、凭据 rotation、多主机 
 回滚：revert
 `5dbc5aad1fadf8c4564147255a8be2b1e30c115b`。回滚后恢复单 active token/CA，
 但仍保留 activity drain。
+
+## Follow-up：双 worker generation-pointer 自动迁移
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ ea910dff69f59c8a914c5eeeb24bf1f47af78d3c`。
+
+问题：服务端证书和多个 worker 凭据文件逐个原子替换时，worker 可能观察到
+混合代际，例如新的 server CA 配合旧的 client certificate/key。该中间态会
+导致 TLS 校验失败。旧 fixture 依赖停止 worker、手工更新文件和逐个发送
+`SIGHUP`，不适合批量迁移。
+
+实现：
+
+- `worker_agent.py` 新增 `--credential-generation-file`；
+- generation JSON 引用一个不可变目录中的 `token`、CA、client cert/key；
+- worker 在每次 API 请求前比较 pointer 文件指纹；
+- pointer 使用原子 rename 提交整个代际；加载失败时保留旧凭据；
+- `--credential-receipt-dir` 在成功 reload 后写 `0600` secret-free receipt，
+  包含 worker identity、generation、时间、文件代际 fingerprint；
+- 直接文件路径仍支持 `SIGHUP` reload，保持兼容；
+- 新增 `run_fleet_migration_test.py` 和对应 CI 回归步骤。
+
+执行顺序：
+
+1. 两个独立 worker 从 generation A 注册；
+2. 发布 A+B server-trust bridge，两个 worker 自动 reload 并写 receipt；
+3. 服务端切到 B server/client-CA，A 通过 previous 保留为 overlap；
+4. 两个 worker 通过 A client certificate/token 和 A+B trust bridge 继续 heartbeat；
+5. 原子替换 worker generation pointer 到 B，两个 worker 在下一请求自动 reload；
+6. 两份 receipt fingerprint 一致，两个 worker 以 B 身份 heartbeat；
+7. 删除 previous token/CA 并再次 `SIGHUP` 服务端；
+8. 旧 A TLS identity 最终被拒绝，B 身份继续工作。
+
+结果：
+
+- 12 项 checks 全部 `PASS`；
+- two-worker fleet：`2/2`；
+- receipt：`2/2`，fingerprint
+  `bc3e6eb359109af2c7753e4b7adc1dffb975b86320454d7ae149452425cba970`；
+- worker `SIGHUP`：未使用；
+- 平台测试：`321/321 PASS`；
+- Node：`2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向
+  syntax Ruff：`PASS`；
+- GitHub Actions CI run `40080570600`：两个 job 均 `PASS`；
+- 现有手工 rotation fixture 也重新通过，真实 QEMU job 仍为
+  `completed/PASS`、attempts=1。
+
+边界：
+
+- 同主机 loopback，不是跨主机；
+- 文件 generation 发布由测试驱动，不是自动发现 worker 主机；
+- 不包含生产 secret manager、对象存储分发或主机级 inventory；
+- final server cutover 仍需 operator 删除 previous 并发送 `SIGHUP`；
+- 不包含 worker/QEMU restart continuity、RF 或硬件。
+
+回滚：revert
+`ea910dff69f59c8a914c5eeeb24bf1f47af78d3c`。回滚后直接文件加 `SIGHUP`
+的 path 仍可保留，但 generation-pointer 自动迁移、receipts 和 CI 回归会移除。

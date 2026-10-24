@@ -1,4 +1,4 @@
-# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Overlap Credential Rotation
+# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Automated Credential Migration
 
 - 日期：`2026-10-24`
 - 结果：`PASS`
@@ -9,6 +9,7 @@
 - TLS/token rotation follow-up：`m5agent/m5stack-esp-emulator @ b01e95b22c163c270d1ef632c1abb75cbdd4c527`
 - activity-drain follow-up：`m5agent/m5stack-esp-emulator @ e1c18f6eb46fc172f5e2048f5b233cb5ca596765`
 - bounded-overlap follow-up：`m5agent/m5stack-esp-emulator @ 5dbc5aad1fadf8c4564147255a8be2b1e30c115b`
+- fleet-migration follow-up：`m5agent/m5stack-esp-emulator @ ea910dff69f59c8a914c5eeeb24bf1f47af78d3c`
 - 基线版本：`e9520bbca56da753cd4cd75cf30c8c5594866386`
 - 环境：macOS Apple Silicon；Python 3；同一主机 loopback；真实 Device Service 与 worker 子进程；临时测试 PKI
 
@@ -49,8 +50,23 @@ CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopbac
 - 删除 previous token/CA 文件并再次 `SIGHUP`，旧 CA 握手和旧 token 最终失败；
 - 最终由新凭据完成真实 StickS3 QEMU job。
 
-客户端 trust bundle 迁移在本 fixture 中由测试手工 staged。自动化客户端发现、
-批量迁移和跨主机 continuity 仍未验证。
+第六次门禁时，客户端 trust bundle 迁移仍由测试手工 staged；下一节记录后续
+同主机 generation-pointer 自动迁移。
+
+第七次门禁补上同主机双 worker 自动迁移：
+
+- worker 先从一个不可变 generation 加载 A；
+- 在服务端切换前，先原子发布 A+B server-trust bridge，两个 worker 自动
+  reload 并写 receipt；
+- 服务端切到 B，A 作为 previous 继续接受旧 client CA/token；
+- 只原子替换一个 generation pointer，两个 worker 在下一请求读取一致的
+  token/CA/client key 集合并切到 B；
+- 两个 receipt 的 fingerprint 一致，workers 随后用 B 身份 heartbeat；
+- 删除 previous 并 `SIGHUP` 服务端后，旧 TLS identity 被拒绝；
+- 全程没有向 worker 发送 `SIGHUP`。
+
+该结果关闭同主机批量迁移，但不包含 worker 主机自动发现、跨主机迁移或
+生产 secret-manager 分发。
 
 ## 关键证据
 
@@ -95,6 +111,10 @@ CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopbac
   `dc061cb2a848fb7971de7cac712cdf74681c6367ab7d7f436d8ceaed7c9c5e21`；
 - bounded-overlap follow-up：平台测试 `309/309 PASS`，GitHub Actions CI run
   `40073423924` 两个 job 均 `PASS`。
+- fleet-migration checks：`12/12 PASS`；
+- fleet-migration follow-up：平台测试 `321/321 PASS`，Node `2/2 PASS`，
+  GitHub Actions CI run `40080570600` 两个 job 均 `PASS`，其中
+  `platform-contracts` 新增自动 generation migration 回归步骤。
 
 ## 文件
 
@@ -106,11 +126,12 @@ CA/token 拒绝、新凭据真实 QEMU job。该结果只覆盖同主机 loopbac
 - `evidence/verification.rotation.summary.json`：TLS/token rotation 与轮换后 QEMU job 的 follow-up
 - `evidence/verification.rotation-drain.summary.json`：活动请求 drain、超时保留旧配置和轮换后 QEMU job 的 follow-up
 - `evidence/verification.rotation-overlap.summary.json`：A/B bounded overlap、final cutover 和轮换后 QEMU job 的 follow-up
+- `evidence/verification.fleet-migration.summary.json`：双 worker generation-pointer 自动迁移与 receipts 的 follow-up
 
 ## 未覆盖项
 
 - 跨主机网络拓扑、延迟和丢包；
-- 自动化客户端发现与批量迁移；
+- worker 主机自动发现与跨主机迁移；
 - 生产 CA/证书生命周期；
 - 生产 secret manager 集成；
 - 任意其他固件的 unified board/network/UI PASS；

@@ -154,6 +154,37 @@
         "run_id": 40073423924,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "same_host_generation_pointer_client_fleet_migration",
+      "result_commit": "ea910dff69f59c8a914c5eeeb24bf1f47af78d3c",
+      "previous_follow_up_commit": "42ac03683e2c00fdf5192d34e2decf19aafc0a63",
+      "status": "PASS",
+      "evidence": "evidence/verification.fleet-migration.summary.json",
+      "scope": "same-host-loopback-file-generation-client-fleet-migration",
+      "rotation": {
+        "worker_server_trust": "A-then-A+B-then-B",
+        "client_ca_overlap": "A-and-B",
+        "client_ca_final": "B",
+        "master_token_overlap": "A-and-B",
+        "master_token_final": "B",
+        "worker_credential_commit": "atomic-generation-pointer-replacement",
+        "worker_reload_signal": null,
+        "final_cutover_signal": "SIGHUP-after-removing-previous-files"
+      },
+      "fleet": {
+        "workers": 2,
+        "passed": 2,
+        "receipts": 2,
+        "credential_fingerprint": "bc3e6eb359109af2c7753e4b7adc1dffb975b86320454d7ae149452425cba970",
+        "receipts_are_secret_free": true
+      },
+      "platform_tests": "321/321 PASS",
+      "github_actions": {
+        "run_id": 40080570600,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -229,19 +260,23 @@
     },
     {
       "name": "automated_client_fleet_migration",
-      "status": "NOT RUN"
+      "status": "PASS",
+      "detail": "same-host two-worker A/A+B/B generation-pointer migration; secret-free receipts; no worker SIGHUP"
     }
   ],
   "evidence": [
     "evidence/verification.transport.json",
     "evidence/verification.qemu-job.summary.json",
     "evidence/verification.unified-job.summary.json",
+    "evidence/verification.fleet-migration.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070863490",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071518376",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071841654",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40072474174",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40072991528",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40073423924",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40080570600",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ea910dff69f59c8a914c5eeeb24bf1f47af78d3c/tests/network/worker_tls/evidence-2026-10-24-fleet-credential-migration-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/5dbc5aad1fadf8c4564147255a8be2b1e30c115b/tests/network/worker_tls/evidence-2026-10-24-security-rotation-overlap-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/e1c18f6eb46fc172f5e2048f5b233cb5ca596765/tests/network/worker_tls/evidence-2026-10-24-security-rotation-drain-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/b01e95b22c163c270d1ef632c1abb75cbdd4c527/tests/network/worker_tls/evidence-2026-10-24-security-rotation-job-pass.json",
@@ -261,6 +296,7 @@
     "The activity-drain follow-up keeps an old-token artifact upload active across SIGHUP and commits the new configuration only after it returns 201.",
     "This drain does not provide an overlapping old/new credential window.",
     "The overlap follow-up accepts A/B client CAs and tokens, then removes previous files and sends a final SIGHUP to retire A.",
-    "Automated client fleet discovery and migration remain NOT RUN."
+    "A two-worker follow-up now migrates A to A+B trust to B through one atomic generation pointer and secret-free receipts without worker SIGHUP.",
+    "Automatic worker-host discovery and cross-host migration remain NOT RUN."
   ]
 }
