@@ -223,3 +223,41 @@ ELF 和 QEMU 与十轮证据一致；unified 镜像由同一 UIFlow2 build 和 L
 回滚：revert
 `36e28d76b3c293975878d1980dbd5349d1a9efe4`。回滚后 API 恢复 `1..10`
 限制，但已提交的二十轮证据仍保留为历史。
+
+## Follow-up：三十轮重连
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ c2545835091a6fb321c73a517fe66655c8160686`。
+
+使用与二十轮 follow-up 相同的 unified Core2 镜像、ELF 和 QEMU SHA，运行
+3 个独立 `/api/v1` lease，每个要求 30 轮：
+
+- 每个 attempt 的 peer、guest RX 和 ACK marker 均为 30；
+- HLI posts/consumed 均为 `857/857`；
+- events 587、ACLs 270；
+- `hli-errors=0`，HLI/meta/TX queue 深度为 0；
+- connection/L2CAP/GATT 池均回到 `3/9/3`；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=30`；
+- frame/QOM、WiFi/公网、pcap、evidence 和 manifest binding 全部 PASS；
+- 无 panic、无 dropped packet。
+
+验证：
+
+- 平台套件 `318/318 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall：
+  `PASS`；
+- GitHub Actions CI run `40079740981`：两个 job 均 `PASS`；
+- 完整 UIFlow2 67-case 外设矩阵本轮未重跑。
+
+边界：
+
+- virtual-device validation，不是物理 RF、功耗或硬件；
+- 30 轮短时 reconnect 不等于超过三十轮或多小时 coexistence/soak；
+- 未证明 pairing、secure connection、encrypted reconnect；
+- 未证明 bit-exact BT controller/baseband；
+- 未证明物理 cache/PSRAM 时序。
+
+回滚：revert
+`c2545835091a6fb321c73a517fe66655c8160686`。三十轮 evidence 将回退，
+源码运行路径不变。
