@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "kind": "m5stack-openai-first-boot-nvs-precondition-redacted",
+  "date": "2026-10-25",
+  "status": "PASS",
+  "functional_status": "PARTIAL",
+  "scope": "virtual-device-validation-not-hardware",
+  "redaction": {
+    "removed": [
+      "synthetic/config value spellings",
+      "per-run human-readable marker keys"
+    ],
+    "retained": [
+      "firmware and fixture SHA256",
+      "partition geometry",
+      "network flow summary",
+      "session-isolation booleans",
+      "classification"
+    ],
+    "source_evidence_sha256": "62ae0668e4f411d5015828b7df880c2ef95b272f64146a6b52a0ea3fe39ea915"
+  },
+  "source": {
+    "firmware_id": "1897200000000000358",
+    "name": "OpenAI Voice Assistant For AtomS3R",
+    "version": "v1.0",
+    "sha256": "b3597fcabbff57c98618caa8754af84745e9eac35b2868ab3c4cb0935b7c59b3",
+    "bytes": 1382624
+  },
+  "nvs_partition": {
+    "label": "nvs",
+    "offset": 36864,
+    "size": 24576,
+    "public_binary_erased": true
+  },
+  "fixtures": {
+    "open_qemu_ap": {
+      "sha256": "14f0acc47e1e1bef7e19d29c90febd0fe3707599fd8fc42eeb14dd27cfc26e5d"
+    },
+    "wpa2_qemu_ap": {
+      "sha256": "ab16f2a1842e40addce0ba26209595fef98d1b3f31113512375d5cfad70fe2bd"
+    },
+    "values_are_synthetic": true
+  },
+  "open_run": {
+    "nvs_config_loaded": true,
+    "wifi_associated": true,
+    "dhcp": true,
+    "dns_query_api_openai_com": true,
+    "tcp_443_attempt": true,
+    "https_authentication_expected_to_fail": true,
+    "network_status": "PASS",
+    "serial_sha256": "ad315c1701e6ba05ace3a5b6d4e76228cec776abc5e9c170ff68e74b271bca88",
+    "pcap": {
+      "packets": 37,
+      "dns_queries": [
+        "api.openai.com."
+      ],
+      "tcp_443_flows": 1,
+      "capture_sha256": "ab8c5f61077634b7de136e91ea96539c9fb4503ee90a33821058af823edd4295"
+    },
+    "flash": {
+      "base_flash_sha256": "991b1cf328bec7677ed1335d567bfcb7b6c941c1bd6b658eb991b84940b3ce8d",
+      "effective_flash_sha256": "5ca4fb6dc20543a7e2484975cf0a4be9c51c810aa63d8c9105a37347d7220100"
+    }
+  },
+  "secure_run": {
+    "nvs_config_loaded": true,
+    "authmode_threshold_reached": true,
+    "wifi_associated_with_open_ap": false,
+    "dhcp": false,
+    "network_status": "PARTIAL",
+    "serial_sha256": "fac9e45c269a5ae27aecdbcf1e52a2a7ec5a78b8987d3e1e5c124865ae9bf46f",
+    "flash": {
+      "base_flash_sha256": "991b1cf328bec7677ed1335d567bfcb7b6c941c1bd6b658eb991b84940b3ce8d",
+      "effective_flash_sha256": "6daeec798bb0ff5b5951c529aa39ea0f3ffc0fd271f7199a38b2c3a217fe16f8"
+    }
+  },
+  "isolation": {
+    "session_isolated_overlay": true,
+    "source_artifact_modified": false,
+    "accepted_runtimes": [
+      "qemu",
+      "qemu-wifi",
+      "qemu-ble",
+      "qemu-unified"
+    ],
+    "rejected_runtime_network": "409 nvs_not_supported",
+    "rejected_tab5": "409 nvs_not_supported"
+  },
+  "classification": {
+    "nvs_precondition": "CONFIRMED_EXTERNAL_CONFIGURATION_REQUIRED",
+    "qemu_wifi_security": "RUNTIME-05: non-empty-password threshold cannot associate with the current Open-auth QEMU AP",
+    "cloud_function": "NOT RUN: no real OpenAI credential is used"
+  },
+  "not_claimed": [
+    "real OpenAI account or Realtime API session",
+    "voice audio input/output or WebRTC media behavior",
+    "WPA2/WPA3 association on physical hardware",
+    "an on-device UI requirement",
+    "physical hardware or RF validation"
+  ]
+}
