@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-25 | `esp-emulator` | ESP32-S3 WPA2-PSK 正确/错误密码数据面 | `PASS`（virtual-device：RSN/M1-M4/CCMP、正确密码 DHCP+DNS+TCP443、错误密码 deauth/无 DHCP、15/15 定向矩阵、CI PASS；WPA3/group multicast/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-25-s3-wpa2-psk-data-plane/) |
 | 2026-10-25 | `esp-emulator` | Worker-local StickS3 QEMU across network namespaces | `PASS`（virtual-device：18/18 checks、真实 QEMU、artifact/firmware/evidence/QEMU reap/namespace cleanup；physical cross-host/reattach/companion continuity/真机 NOT RUN） | [查看](esp-emulator/2026-10-24-http-worker-executor/followups/2026-10-25-control-runtime-plane-split/followups/2026-10-25-worker-local-qemu/) |
 | 2026-10-25 | `esp-emulator` | Session-isolated FAT32+MBR SD fixture 与 CrossPoint closure | `PASS`（virtual-device：3 PASS / 1 PARTIAL / 0 FAIL；CrossPoint 主菜单、storage restore/evidence PASS；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-24-user-firmware-six-device-matrix/followups/2026-10-25-refreshed-four-functional/followups/2026-10-25-sd-mbr-fixture/) |
 | 2026-10-25 | `esp-emulator` | 四个当前公开固件的 Device Service 功能重跑 | `PARTIAL`（virtual-device：2 PASS / 2 PARTIAL / 0 FAIL；CrossPoint SD fixture gap；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-24-user-firmware-six-device-matrix/followups/2026-10-25-refreshed-four-functional/) |

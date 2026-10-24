@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Complete the ESP32-S3 QEMU WPA2-PSK data plane",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3f4bf92b96d5854f0804d7f7014c4a9c244da99e",
+    "result_commit": "08d8a21bda173ff65dfb5343d0fa8082732eb872",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40138447697",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "name": "OpenAI Voice Assistant For AtomS3R",
+    "sha256": "b3597fcabbff57c98618caa8754af84745e9eac35b2868ab3c4cb0935b7c59b3",
+    "normalized_flash_sha256": "991b1cf328bec7677ed1335d567bfcb7b6c941c1bd6b658eb991b84940b3ce8d",
+    "nvs_overlay": "session-isolated"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU 9.2.2 da100c9 patched worktree; Device Service",
+    "qemu_binary_sha256": "67447172bef7dcd7d867e30e8fff0a0b2e4ad779d5d3925eeb5d6e023efd039a",
+    "qemu_patch_sha256": "e43d86a9fc2b3303258228210d3d74e9e7e1b69298322b067325a8e32c4bb383",
+    "qemu_patch_apply_scope": "predecessor-patched-worktree; not standalone on bare upstream",
+    "qemu_patch_roundtrip": "PASS",
+    "platform_tests": 377,
+    "documentation_tests": 20,
+    "node_tests": 2,
+    "openai_investigation_checks": 22,
+    "targeted_s3_matrix_cases": 15
+  },
+  "checks": [
+    {
+      "name": "qemu_patch_forward_apply",
+      "status": "PASS",
+      "detail": "predecessor-patched worktree"
+    },
+    {
+      "name": "qemu_patch_reverse_apply",
+      "status": "PASS",
+      "detail": "validated worktree"
+    },
+    {
+      "name": "wpa2_correct_password",
+      "status": "PASS",
+      "detail": "RSN, M1-M4, PTK/GTK, CCMP RX, association, DHCP, DNS and TCP/443"
+    },
+    {
+      "name": "wpa2_wrong_password",
+      "status": "PASS",
+      "detail": "M2 MIC rejection, deauthentication, retry, no DHCP and no HTTP"
+    },
+    {
+      "name": "open_auth_regression",
+      "status": "PASS",
+      "detail": "association, DHCP, DNS and TCP/443"
+    },
+    {
+      "name": "station_mac_binding",
+      "status": "PASS",
+      "detail": "session-derived synthetic MAC in eFuse fixture and QEMU NIC"
+    },
+    {
+      "name": "pcap",
+      "status": "PASS",
+      "detail": "correct path records DNS/TCP443; wrong path records no packets"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "377/377"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "20/20"
+    },
+    {
+      "name": "node_upload_sha",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "targeted_s3_matrix",
+      "status": "PASS",
+      "detail": "AtomS3R, StickS3, CoreS3: 15/15, no retry"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "wpa3_sae",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "wpa2_group_key_multicast",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "real_openai_service",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "patches/0029-esp32s3-wpa2-psk-data-plane.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/08d8a21bda173ff65dfb5343d0fa8082732eb872/tests/firmware/evidence-2026-10-25-openai-nvs-precondition.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/08d8a21bda173ff65dfb5343d0fa8082732eb872/tests/uiflow2/evidence-2026-10-25-s3-wpa2-regression.json"
+  ],
+  "notes": [
+    "The accepted scope is WPA2-PSK pairwise/unicast, not WPA3 or group-key multicast.",
+    "The guest DHCP, DNS and TCP stacks execute; the host does not inject a connected or leased state.",
+    "Physical RF and hardware validation remain NOT RUN."
+  ]
+}
