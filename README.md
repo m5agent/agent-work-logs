@@ -108,6 +108,7 @@
 | 2026-10-24 | ESP Emulator | C6 软件复位 Flash 写地址与 PMP 模型修复 | PASS（virtual-device：`RUNTIME-01` 关闭，offset 0 bootloader 头保持 chip ID 13，`runtime_model_gaps=[]`，Nesso 官方外设 5/5、NanoC6 PASS、317/317 tests + CI；Meshtastic 独立应用异常、Zigbee 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-user-firmware-six-device-matrix/followups/2026-10-24-c6-soft-reset-flash-fix/) |
 | 2026-10-24 | ESP Emulator | 运行时模型缺口登记、Core2 二十轮与旧文档结论总整理 | PARTIAL（历史快照：当时 `RUNTIME-01`/`RUNTIME-02` 均 OPEN；后续 C6 Flash/PMP 修复关闭 `RUNTIME-01`，Zigbee `RUNTIME-02` 继续跟踪） | [查看](records/esp-emulator/2026-10-24-runtime-model-gap-register-reconciliation/) |
 | 2026-10-24 | ESP Emulator | C6 Zigbee `thread-sim` 可行性分类 | PARTIAL（virtual-device：双 C6 switch/light 产生 21+17 个双向 802.15.4 帧，协调器组网与 steering 启动；join/On-Off 未完成，分类 `runtime_model_gap`，公开固件匹配 ELF 缺失，真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-c6-zigbee-thread-sim-feasibility/) |
+| 2026-10-24 | ESP Emulator | Core2 热门公开固件、PMIC I2C 与 AWS ATECC608 模型缺口 | PARTIAL（virtual-device：3 个 MOST_DOWNLOADED 官方固件均执行但黑帧；PMIC 2 个、ATECC608 1 个结构化 model gap，AXP192/2101 A/B 同错；323/323 tests + CI PASS，真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-public-firmware-model-gaps/) |
 
 ## 目录结构
 

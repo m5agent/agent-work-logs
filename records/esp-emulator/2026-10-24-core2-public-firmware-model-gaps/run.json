@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "runtime_model_gap",
+  "overall_status": "PARTIAL",
+  "title": "Classify hot public Core2 firmware into PMIC and ATECC608 runtime model gaps",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "result_commit": "33d5a28b7be2fb4bbfca6aa96315dcff816530d6"
+  },
+  "hardware": {
+    "targets": [
+      "Core2 virtual device"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "samples": 3,
+    "uiflow_core2_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "core2_factory_test_sha256": "4dbddb210d382ed3ca536fc07c962521b238c025016213c947fb4ff7a1bbd4ef",
+    "core2_for_aws_sha256": "22ee8c0f5d3c9640be370cb1a89496ed265b685d573b0e41d62320cf6288ff3a"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; QEMU m5core2; Device Service /api/v1",
+    "observe_seconds": 90,
+    "settle_seconds": 5,
+    "jobs": 1
+  },
+  "summary": {
+    "pass": 0,
+    "partial": 3,
+    "fail": 0,
+    "frame_nonblack": 0,
+    "runtime_model_gaps": [
+      "core2_pmic_i2c_model_gap",
+      "core2_aws_atecc608_model_gap"
+    ]
+  },
+  "checks": [
+    {
+      "name": "public_core2_image_import",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "name": "device_service_execution",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "name": "application_frame",
+      "status": "FAIL",
+      "detail": "3/3 black frames"
+    },
+    {
+      "name": "runtime_model_gap_classification",
+      "status": "PASS",
+      "detail": "2 PMIC, 1 ATECC608"
+    },
+    {
+      "name": "matrix_wait_timeout_fix",
+      "status": "PASS",
+      "detail": "client timeout = observe_seconds + 15"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "323/323"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40089720526; platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/33d5a28b7be2fb4bbfca6aa96315dcff816530d6/tests/firmware/evidence-2026-10-24-core2-public-firmware-model-gaps.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40089720526"
+  ],
+  "notes": [
+    "The Core2 public firmware samples are PARTIAL model gaps, not firmware FAIL.",
+    "AXP2101 and AXP192 both reproduce the same I2C register-read error.",
+    "Core2 for AWS aborts after the unmodeled ATECC608 secure element fails initialization.",
+    "The matrix client wait timeout was fixed after a 90-second observation window exposed the bug."
+  ]
+}

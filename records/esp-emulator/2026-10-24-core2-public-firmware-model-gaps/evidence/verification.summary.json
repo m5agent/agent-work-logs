@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "user-firmware-runtime-matrix",
+  "validation": "virtual-device validation",
+  "source_commit": "33d5a28b7be2fb4bbfca6aa96315dcff816530d6",
+  "device_id": "core2",
+  "execution": {
+    "observe_seconds": 90,
+    "settle_seconds": 5,
+    "jobs": 1,
+    "service_api": "/api/v1"
+  },
+  "summary": {
+    "samples": 3,
+    "pass": 0,
+    "partial": 3,
+    "fail": 0,
+    "frame_nonblack": 0
+  },
+  "samples": [
+    {
+      "firmware_id": "1897200000000002280",
+      "name": "UIFlow_Core2",
+      "sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+      "status": "PARTIAL",
+      "status_reason": "runtime_model_gap",
+      "runtime_model_gap": "core2_pmic_i2c_model_gap",
+      "serial_bytes": 14003
+    },
+    {
+      "firmware_id": "1897200000000000926",
+      "name": "Core2FactoryTest",
+      "sha256": "4dbddb210d382ed3ca536fc07c962521b238c025016213c947fb4ff7a1bbd4ef",
+      "status": "PARTIAL",
+      "status_reason": "runtime_model_gap",
+      "runtime_model_gap": "core2_pmic_i2c_model_gap",
+      "serial_bytes": 1912
+    },
+    {
+      "firmware_id": "1897200000000000568",
+      "name": "Core2_For_AWS",
+      "sha256": "22ee8c0f5d3c9640be370cb1a89496ed265b685d573b0e41d62320cf6288ff3a",
+      "status": "PARTIAL",
+      "status_reason": "runtime_model_gap",
+      "runtime_model_gap": "core2_aws_atecc608_model_gap",
+      "serial_bytes": 9121
+    }
+  ],
+  "pmic_variant_ab": {
+    "axp2101": {
+      "i2c_error": "OSError: I2C bus error (19)",
+      "frame_nonblack": 0
+    },
+    "axp192": {
+      "i2c_error": "OSError: I2C bus error (19)",
+      "frame_nonblack": 0,
+      "qom_model_present": "/machine/axp192"
+    }
+  },
+  "platform": {
+    "tests": 323,
+    "passed": 323,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40089720526,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/33d5a28b7be2fb4bbfca6aa96315dcff816530d6/tests/firmware/evidence-2026-10-24-core2-public-firmware-model-gaps.json",
+  "not_run": [
+    "physical Core2 PMIC or I2C timing",
+    "physical ATECC608 secure element",
+    "RF or electrical measurements",
+    "full device-family firmware coverage"
+  ]
+}
