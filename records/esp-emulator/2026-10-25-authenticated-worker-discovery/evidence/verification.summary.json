@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-25T06:56:00+08:00",
+  "scope": "virtual-control-plane-not-hardware",
+  "source": {
+    "base_commit": "351eb16d49f1ffbef562810668f3248e1cfc7f52",
+    "result_commit": "658b2d494bbd40fcb798ed4349a6304d46c0d917",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40140611924",
+    "ci_status": "PASS",
+    "worker_discovery_py_sha256": "873a3dd0c5d8d7b785a18403909ad3bef5e202bb0f98efa94f045b925b056362",
+    "source_evidence_sha256": "315d64b4c6ac28a6dae186e27e2a64e4b6fc0d045ea19eace1866f5e74a661de"
+  },
+  "contract": {
+    "schema_version": 1,
+    "transport": "IPv4 multicast UDP",
+    "group": "239.255.77.77",
+    "default_port": 8788,
+    "signature": "HMAC-SHA256(active master token)",
+    "beacon_fields": [
+      "service_url",
+      "group",
+      "port",
+      "issued_at",
+      "expires_at",
+      "nonce"
+    ],
+    "beacon_contains_token": false,
+    "max_packet_bytes": 4096,
+    "max_ttl_seconds": 300
+  },
+  "live_run": {
+    "service_healthy": true,
+    "worker_discovered_control_url": true,
+    "worker_registered": true,
+    "worker_stopped": true,
+    "wrong_token_worker_rejected": true,
+    "wrong_token_worker_registered": false,
+    "rotation_sighup": "PASS",
+    "rotated_worker_discovered": true,
+    "rotated_worker_registered": true,
+    "old_token_worker_rejected": true,
+    "old_token_worker_registered": false,
+    "token_absent_from_service_log": true,
+    "token_absent_from_worker_log": true,
+    "no_device_session_created": true,
+    "qemu_started": false
+  },
+  "verification": {
+    "platform_tests": {
+      "passed": 391,
+      "total": 391
+    },
+    "documentation_tests": {
+      "passed": 20,
+      "total": 20
+    },
+    "worker_discovery_tests": {
+      "passed": 4,
+      "total": 4
+    },
+    "node_sha256_upload": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_fatal": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "ci_platform_contracts": "PASS",
+    "ci_network_namespace_policy_discovery_step": "PASS"
+  },
+  "validation_boundaries": {
+    "nat_discovery": "NOT RUN",
+    "cross_subnet_discovery": "NOT RUN",
+    "cross_host_qemu_executor": "NOT RUN",
+    "cross_host_reattach": "NOT RUN",
+    "companion_continuity": "NOT RUN",
+    "production_scheduler": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  }
+}

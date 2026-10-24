@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add HMAC-authenticated multicast worker discovery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "351eb16d49f1ffbef562810668f3248e1cfc7f52",
+    "result_commit": "658b2d494bbd40fcb798ed4349a6304d46c0d917",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40140611924",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_network": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "qemu_started": false,
+    "device_session_created": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; real Device Service and WorkerAgent; IPv4 multicast; GitHub Actions Ubuntu",
+    "discovery_group": "239.255.77.77",
+    "discovery_port": "<ephemeral>",
+    "beacon_authenticated": "PASS",
+    "worker_registered": "PASS",
+    "token_rotation": "PASS",
+    "platform_tests": 391,
+    "documentation_tests": 20,
+    "discovery_tests": 4
+  },
+  "checks": [
+    {
+      "name": "beacon_secret_free",
+      "status": "PASS"
+    },
+    {
+      "name": "hmac_signature",
+      "status": "PASS"
+    },
+    {
+      "name": "ttl_and_clock_validation",
+      "status": "PASS"
+    },
+    {
+      "name": "service_url_bounds",
+      "status": "PASS"
+    },
+    {
+      "name": "discovered_control_url",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_registration",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong_token_rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "old_token_rejected_after_rotation",
+      "status": "PASS"
+    },
+    {
+      "name": "rotated_token_rediscovered",
+      "status": "PASS"
+    },
+    {
+      "name": "no_qemu_or_session",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "391/391"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "20/20"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "nat_or_cross_subnet_discovery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_qemu",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/658b2d494bbd40fcb798ed4349a6304d46c0d917/tests/network/worker_discovery/evidence-2026-10-25-discovery-rotation-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/658b2d494bbd40fcb798ed4349a6304d46c0d917/platform/tools/worker_discovery.py"
+  ],
+  "notes": [
+    "Discovery covers one IPv4 multicast domain, not arbitrary NAT or cross-subnet routing.",
+    "The beacon authenticates the control URL with the active API token but carries no token.",
+    "TLS/mTLS remains a separate transport trust boundary."
+  ]
+}

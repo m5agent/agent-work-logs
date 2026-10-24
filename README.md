@@ -130,6 +130,7 @@
 | 2026-10-25 | ESP Emulator | ESP32-S3 WPA2-PSK 正确/错误密码数据面 | PASS（virtual-device：RSN/M1-M4/CCMP RX、正确密码 DHCP+DNS+TCP 443、错误密码 M2 MIC/deauth/无 DHCP、15/15 定向矩阵、377/377 tests + CI PASS；WPA3/group multicast/物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-25-s3-wpa2-psk-data-plane/) |
 | 2026-10-25 | ESP Emulator | 代码、文档与当前工作/待办收口 | PASS（docs/contracts：377/377、20/20、snapshot/catalog/coverage、CI PASS；当前状态/Backlog/工作流/代码地图/API/网络/runtime gap 同源；IPv4/IPv6 与 WPA2 稳定边界纠偏；真机与完整矩阵 NOT RUN） | [查看](records/esp-emulator/2026-10-25-code-doc-current-state-consolidation/) |
 | 2026-10-25 | ESP Emulator | SHA-bound UI/headless/network-first 固件审查预期 | PASS（virtual-device：OpenAI BIN + isolated NVS 完成 guest marker、network PASS、DNS/TCP443、37-packet pcap；387/387、20/20、Node 与 CI PASS；真实 key/Realtime/RF/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-sha-bound-review-expectations/) |
+| 2026-10-25 | ESP Emulator | HMAC-authenticated worker multicast discovery | PASS（virtual control-plane：worker 无硬编码 URL 注册、错误/旧 token reject、SIGHUP 后新 token 重新发现；391/391、20/20、Node 与 CI PASS；NAT/跨子网/跨主机/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-authenticated-worker-discovery/) |
 | 2026-10-24 | m5stack-schematics-text | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | PASS（链接/索引/下载哈希一致；100 个 deb 链接无 404、无其他平台错配；PR #2 OPEN/MERGEABLE，待管理员审核） | [查看](records/m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
 
 ## 目录结构
