@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-remote-worker-durable-queue-summary",
+  "scope": "contract-and-http-api",
+  "status": "PASS",
+  "source_commit": "22c9564a3c55e543b40d964f4a8ea27e2074073b",
+  "base_commit": "de5a6c737548c88ade1e318d424da254e3d0778c",
+  "ci": {
+    "run_id": 40055533718,
+    "conclusion": "success",
+    "platform_tests": {
+      "total": 289,
+      "status": "PASS",
+      "detail": "OK (skipped=2)"
+    },
+    "network_namespace_policy": "PASS",
+    "node_sha256_upload": "2/2 PASS"
+  },
+  "local": {
+    "platform_tests": "289/289 PASS",
+    "worker_queue_tests": "6/6 PASS",
+    "device_service_tests": "82/82 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "openapi_yaml": "PASS",
+    "ruff_and_compile": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "queue_contract": {
+    "state_file": "jobs.json",
+    "state_mode": "0600",
+    "max_jobs": 1024,
+    "max_request_bytes": 65536,
+    "max_summary_bytes": 8192,
+    "max_attempts": 10,
+    "default_lease_seconds": 60,
+    "statuses": ["queued", "leased", "completed", "failed", "cancelled"]
+  },
+  "checks": {
+    "idempotent_submit_and_conflict": "PASS",
+    "capability_matching_fifo_claim": "PASS",
+    "identity_bound_heartbeat": "PASS",
+    "lease_expiry_retry_and_terminal_failure": "PASS",
+    "terminal_result_and_cancel": "PASS",
+    "worker_stale_stop_generation_reconcile": "PASS",
+    "restart_recovery": "PASS",
+    "http_jobs_contract": "PASS"
+  },
+  "hashes": {
+    "worker_queue_py_sha256": "2abaf1411af750bf33df164aeb4e6fb72c7e6124d53ad1b167f80c52b0d5161e",
+    "worker_queue_test_sha256": "fbab5523b885c154490779bbf058b9900a276dd4e2002b84fef58ad220054bee",
+    "queue_evidence_sha256": "0babbd315c7ebff4034eda498a340710716a5a1e8ca0ba34088017902dbbda44"
+  },
+  "not_run": [
+    "independent worker executor",
+    "firmware/session execution from a claimed job",
+    "evidence bundle upload and verification",
+    "active QEMU process re-attach",
+    "production multi-host scheduling",
+    "physical hardware"
+  ],
+  "not_claimed": [
+    "a claimed job ran on a device",
+    "a remote evidence bundle exists",
+    "a lost QEMU process was recovered",
+    "untrusted firmware was safely sandboxed"
+  ]
+}

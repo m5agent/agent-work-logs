@@ -19,6 +19,12 @@
 drain/stop、capability、active lease 清单和有界结果元数据。它仍不是任务
 队列、worker supervisor、调度器或活动 QEMU 进程接管实现。
 
+后续
+[`2026-10-24-remote-worker-durable-queue`](../2026-10-24-remote-worker-durable-queue/)
+已补 durable job queue、claim/lease、expiry retry 和 worker stale/stop/
+generation 回收。独立 executor、evidence 回传、生产调度和活动 QEMU
+re-attach 仍开放；本页的原始目录-only 结论保持不变。
+
 Follow-up 又把代码、当前状态、Backlog、工作流、代码地图、网络/统一运行时文档
 和 Core2 native-HCI 证据统一到 `187a7dc`。同时修正 QEMU profile 的陈旧
 设备计数，并把 Core2 HLI/API-boundary 诊断更新为可区分 notification

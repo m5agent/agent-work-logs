@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add a durable remote-worker job queue and lease supervisor",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "de5a6c737548c88ade1e318d424da254e3d0778c",
+    "result_commit": "22c9564a3c55e543b40d964f4a8ea27e2074073b",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40055533718"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "runtime_firmware_execution": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, Python 3, local HTTP contract tests, GitHub Actions",
+    "platform_tests": "289/289 PASS",
+    "worker_queue_tests": "6/6 PASS",
+    "device_service_tests": "82/82 PASS",
+    "github_actions": "289 tests, OK (skipped=2)",
+    "openapi_version": "1.17.0"
+  },
+  "checks": [
+    {
+      "name": "durable_state_file",
+      "status": "PASS",
+      "detail": "jobs.json atomic write, mode 0600"
+    },
+    {
+      "name": "idempotent_submit",
+      "status": "PASS",
+      "detail": "Canonical request digest and conflict detection"
+    },
+    {
+      "name": "capability_claim",
+      "status": "PASS",
+      "detail": "FIFO oldest compatible queued job"
+    },
+    {
+      "name": "identity_bound_lease",
+      "status": "PASS",
+      "detail": "Worker identity, generation and lease ID"
+    },
+    {
+      "name": "lease_heartbeat_expiry_retry",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_stale_stop_generation_reconcile",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal_result_and_cancel",
+      "status": "PASS"
+    },
+    {
+      "name": "restart_recovery",
+      "status": "PASS"
+    },
+    {
+      "name": "http_jobs_contract",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "job_executor",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "evidence_bundle_transfer",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "active_qemu_reattach",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "production_multi_host_scheduler",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/22c9564a3c55e543b40d964f4a8ea27e2074073b/tests/network/worker_queue/evidence-2026-10-24-queue-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/22c9564a3c55e543b40d964f4a8ea27e2074073b/platform/tools/worker_queue.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/22c9564a3c55e543b40d964f4a8ea27e2074073b/platform/tests/test_worker_queue.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/22c9564a3c55e543b40d964f4a8ea27e2074073b/docs/device-service.openapi.yaml"
+  ],
+  "notes": [
+    "The queue is durable and supervised but not an executor.",
+    "A claimed job is not evidence that a device session or evidence bundle exists.",
+    "Active QEMU re-attach remains open.",
+    "No firmware, credential, session ID or artifact ID is committed."
+  ]
+}
