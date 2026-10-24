@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "A and AAAA resolver, IPv6 preflight, and firmware capability intake",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9981460b46dad235eed5d8001d0df432faabd79e",
+    "commits": [
+      "fb16f26588d33c03adb97bc404c87f98aacc1bed",
+      "dadfc960d6ce176d0add95848e06969ae2fe8383",
+      "ee335da6b11c9dbd30c7342426c712e1885c43b8"
+    ]
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS test host and GitHub Actions ubuntu-latest",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "340 of 340 tests passed"
+    },
+    {
+      "name": "browser_upload_units",
+      "status": "PASS",
+      "detail": "2 of 2 Node tests passed"
+    },
+    {
+      "name": "ipv6_capability_preflight",
+      "status": "PASS"
+    },
+    {
+      "name": "controlled_dns_a_record",
+      "status": "PASS"
+    },
+    {
+      "name": "controlled_dns_aaaa_record",
+      "status": "PASS"
+    },
+    {
+      "name": "controlled_dns_invalid_record_rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "webburner_required_optional_capabilities",
+      "status": "PASS"
+    },
+    {
+      "name": "capability_http_400_409_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "sdkconfig_capability_detection",
+      "status": "PASS"
+    },
+    {
+      "name": "sdkconfig_detected_warning_not_rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_fb16f26",
+      "status": "PASS",
+      "run_id": 40099406977
+    },
+    {
+      "name": "ci_dadfc96",
+      "status": "PASS",
+      "run_id": 40099741923
+    },
+    {
+      "name": "ci_ee335da",
+      "status": "PASS",
+      "run_id": 40099959100
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/fb16f26588d33c03adb97bc404c87f98aacc1bed/tests/network/tls_allowlist/evidence-2026-10-24-controlled-dns-aaaa.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/dadfc960d6ce176d0add95848e06969ae2fe8383/tests/firmware/evidence-2026-10-24-webburner-capability-declarations.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ee335da6b11c9dbd30c7342426c712e1885c43b8/tests/firmware/evidence-2026-10-24-sdkconfig-capability-detection.json"
+  ],
+  "notes": [
+    "Resolver-level A/AAAA does not prove ESP firmware guest IPv6 DNS/HTTP.",
+    "Capability declarations are not proof of code-path usage.",
+    "Detected sdkconfig capabilities are warnings, not hard requirements.",
+    "The Core2 artifact-bound soak remains a separate in-progress task."
+  ]
+}

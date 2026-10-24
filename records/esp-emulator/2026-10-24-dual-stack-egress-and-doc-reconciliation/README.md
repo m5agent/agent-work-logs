@@ -38,6 +38,12 @@ masquerade 到达独立 upstream；允许的 IPv4/IPv6 地址和端口返回 HTT
 - `patches/`：不适用；完整改动已提交到源码仓库。
 - `code/`：不适用；可重建测试位于源码仓库 `tests/network/egress_allowlist/`。
 
+Follow-up：
+
+- [`2026-10-24-dns-aaaa-and-capability-intake`](followups/2026-10-24-dns-aaaa-and-capability-intake/)：
+  IPv6 preflight、A/AAAA resolver、WebBurner capability intake 和
+  sdkconfig detected capability。
+
 ## 未覆盖项
 
 - 未执行固件 guest 网络行为；本记录只验证 Linux 虚拟网络策略。

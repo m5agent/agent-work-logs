@@ -112,6 +112,7 @@
 | 2026-10-24 | ESP Emulator | 项目快照生成器与代码/文档结构收敛 | PASS（docs/contracts：自动快照、动态事实去重、早期 bring-up 标历史、FW-03 修正为 7 台/21 样本；324/324 tests、Ruff、catalog/profile/coverage PASS；QEMU 功能矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-project-snapshot-doc-consolidation/) |
 | 2026-10-24 | ESP Emulator | 文件权限、包内源码许可扫描与 Core2 AXP I2C 首错定位 | PASS（static/runtime diagnosis：FAT/LFS/SPIFFS permission policy、2 个源码 SPDX 声明与敏感路径脱敏、329/329 tests；AXP2101 chip-id `0x4a` PASS，后续读取未产生 address-0x34 事务，`RUNTIME-03` 仍未关闭；真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-firmware-permission-and-source-scan/) |
 | 2026-10-24 | ESP Emulator | exact IPv6 egress、双栈 NAT 与代码/文档重整 | PASS（virtual-network policy：IPv4/IPv6 allowed/denied endpoint、IPv6 neighbor control、双栈 masquerade 与全部 cleanup；本地 2/2、336/336 tests、Node 2/2、GitHub Actions PASS；固件、公网 IPv6、CIDR/domain、IPv6 DNS、Core2 两小时 soak 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dual-stack-egress-and-doc-reconciliation/) |
+| 2026-10-24 | ESP Emulator | A/AAAA resolver、IPv6 预检与 WebBurner capability intake | PASS（contract/static：A/AAAA resolver、IP/v6 preflight、required/optional capability API/Browser、`camera`-on-StickS3 409、sdkconfig WiFi/BT/PSRAM detected warning；340/340 tests、Node 2/2、三个 CI PASS；同 guest IPv6 DNS/HTTP、reported=actual code path 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dual-stack-egress-and-doc-reconciliation/followups/2026-10-24-dns-aaaa-and-capability-intake/) |
 
 ## 目录结构
 
