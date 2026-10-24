@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-25T07:20:00+08:00",
+  "scope": "virtual-device-session-create-idempotency",
+  "source": {
+    "base_commit": "cd3adc70b815a61f216286250676e0ef7aa8a77d",
+    "result_commit": "0e3a913207dd8772d497a8e4dfb5580ba597f5b3",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40142325443",
+    "ci_status": "PASS",
+    "device_service_sha256": "3bcf306af8cebc4e304742e5d814a31f56e0aa4d90f2471950d344b57a3cd7b7",
+    "worker_agent_sha256": "2c0c84456d0ae17fb11cfd9bae612d9b6406c4c99aad5e5c8d5da3de1663d486",
+    "source_evidence_sha256": "9013caf9b4272ed42eea7e27d26f9d8130693a5728e0fd2f4df72333b8586e0e"
+  },
+  "contract": {
+    "schema_version": 1,
+    "mapping_file": "session-idempotency.json",
+    "mapping_mode": "0600",
+    "max_entries": 4096,
+    "stored_fields": [
+      "key_sha256",
+      "canonical_request_sha256",
+      "session_id",
+      "created_at"
+    ],
+    "raw_key_stored": false,
+    "raw_request_stored": false,
+    "conflict_status": 409,
+    "conflict_code": "session_idempotency_conflict"
+  },
+  "live_run": {
+    "concurrent_requests": 2,
+    "session_count": 1,
+    "running_qemu_pid_observed": true,
+    "duplicate_response_session_ids_equal": true,
+    "idempotent_replay_flags_boolean": true,
+    "different_request_http_409": true,
+    "mapping_persisted": true,
+    "mapping_mode_0600": true,
+    "raw_key_absent": true,
+    "raw_device_absent": true,
+    "restart_replay_same_session": true,
+    "sessions_after_restart": 1,
+    "token_absent_from_service_log": true
+  },
+  "worker_retry": {
+    "create_request_retried": true,
+    "same_idempotency_key": true,
+    "result_state": "PASS"
+  },
+  "verification": {
+    "platform_tests": {
+      "passed": 395,
+      "total": 395
+    },
+    "documentation_tests": {
+      "passed": 20,
+      "total": 20
+    },
+    "node_sha256_upload": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_fatal": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "github_actions": "PASS"
+  },
+  "validation_boundaries": {
+    "cross_host_idempotency": "NOT RUN",
+    "cross_tenant_namespace": "NOT RUN",
+    "legacy_no_key_retry": "NOT RUN",
+    "companion_continuity": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  }
+}

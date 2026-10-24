@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Make Device Service session creation idempotent",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "cd3adc70b815a61f216286250676e0ef7aa8a77d",
+    "result_commit": "0e3a913207dd8772d497a8e4dfb5580ba597f5b3",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40142325443",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "device": "sticks3",
+    "runtime": "qemu",
+    "firmware_source": "reference"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; real Device Service and StickS3 QEMU; concurrent HTTP; WorkerAgent",
+    "concurrent_create_requests": 2,
+    "created_sessions": 1,
+    "running_qemu_pid_observed": true,
+    "conflict_status": 409,
+    "mapping_mode": "0600",
+    "service_restart_replay": "PASS",
+    "worker_response_loss_retry": "PASS",
+    "platform_tests": 395,
+    "documentation_tests": 20
+  },
+  "checks": [
+    {
+      "name": "concurrent_same_key_one_session",
+      "status": "PASS"
+    },
+    {
+      "name": "same_session_id_in_duplicate_responses",
+      "status": "PASS"
+    },
+    {
+      "name": "one_running_qemu_pid",
+      "status": "PASS"
+    },
+    {
+      "name": "different_request_conflict",
+      "status": "PASS",
+      "detail": "HTTP 409 session_idempotency_conflict"
+    },
+    {
+      "name": "mapping_persistence",
+      "status": "PASS"
+    },
+    {
+      "name": "mapping_redaction",
+      "status": "PASS",
+      "detail": "raw key and device ID absent"
+    },
+    {
+      "name": "service_restart_replay",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_create_response_loss_retry",
+      "status": "PASS"
+    },
+    {
+      "name": "cross_host_idempotency",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_tenant_namespace",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/0e3a913207dd8772d497a8e4dfb5580ba597f5b3/tests/network/session_idempotency/evidence-2026-10-25-session-create-idempotency-pass.json"
+  ],
+  "notes": [
+    "The mapping stores only SHA256(key), canonical request SHA256 and the session ID.",
+    "WorkerAgent uses job and lease to derive a stable create key.",
+    "Legacy requests without a key are not automatically safe to retry."
+  ]
+}
