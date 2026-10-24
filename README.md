@@ -116,6 +116,7 @@
 | 2026-10-24 | ESP Emulator | 跨 network namespace worker 控制面 | PASS（transport-control：真实 service/worker 经 veth、Bearer+HMAC 注册、submit/claim、双 heartbeat、terminal completed、token 不落日志与 cleanup；本地+CI PASS；QEMU executor/reattach、companion continuity、多机调度与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dual-stack-egress-and-doc-reconciliation/followups/2026-10-24-cross-netns-worker-control-plane/) |
 | 2026-10-24 | ESP Emulator | Core2 两小时功能 soak、同 guest IPv6 与当前文档重整 | PARTIAL（virtual-device：artifact-bound `7200s` 功能 PASS 但 host RSS `+458016 KiB` 为 REVIEW；测试构建完成同 guest IPv6 TCP/HTTP；controlled AAAA/denied-port、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-soak-ipv6-doc-reconciliation/) |
 | 2026-10-25 | ESP Emulator | 当前状态、代码边界与执行队列重整 | PASS（docs/contracts：349/349 tests、Node 2/2、catalog/profile/coverage/snapshot、Ruff fatal PASS；Core2 限容两小时、121 轮、IPv6 namespace 与刷新固件功能重跑、真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-soak-ipv6-doc-reconciliation/followups/2026-10-25-docs-code-handoff/) |
+| 2026-10-25 | ESP Emulator | Worker control/runtime API 平面拆分 | PARTIAL（control/runtime 双端点、session 请求路由单测、Linux namespace control-plane 13/13、350/350 tests；worker-local QEMU fixture 已准备但 NOT RUN） | [查看](records/esp-emulator/2026-10-24-http-worker-executor/followups/2026-10-25-control-runtime-plane-split/) |
 | 2026-10-24 | m5stack-schematics-text | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | PASS（链接/索引/下载哈希一致；100 个 deb 链接无 404、无其他平台错配；PR #2 OPEN/MERGEABLE，待管理员审核） | [查看](records/m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
 
 ## 目录结构

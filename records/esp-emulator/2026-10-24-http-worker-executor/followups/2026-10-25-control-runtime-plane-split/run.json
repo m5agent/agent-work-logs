@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Separate worker control and runtime API planes",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "1d3694eea6a4cf39ccfa56e53b8bbb9bfe28b575",
+    "result_commit": "261d31016aedd85974ad15a46e3b413c2a8f2bcf",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40111653526",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40111840723",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40111914507"
+    ]
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "worker_local_sticks3_runtime_firmware_execution": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS platform tests and privileged Linux container with private network namespaces",
+    "platform_tests": "350/350 PASS",
+    "cross_netns_control_plane": "13/13 PASS",
+    "cross_netns_worker_local_qemu": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "separate_runtime_api",
+      "status": "PASS"
+    },
+    {
+      "name": "control_plane_has_no_session_requests",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_plane_owns_session_evidence_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_service_url_cli",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "350 of 350 tests passed"
+    },
+    {
+      "name": "cross_netns_control_plane_smoke",
+      "status": "PASS",
+      "detail": "13 of 13 checks passed"
+    },
+    {
+      "name": "token_not_logged",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_qemu_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "companion_evidence_continuity",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_reattach",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/261d31016aedd85974ad15a46e3b413c2a8f2bcf/platform/tools/worker_agent.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/261d31016aedd85974ad15a46e3b413c2a8f2bcf/platform/tests/test_worker_agent.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/261d31016aedd85974ad15a46e3b413c2a8f2bcf/tests/network/worker_cross_netns/evidence-2026-10-25-control-runtime-split-smoke.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/261d31016aedd85974ad15a46e3b413c2a8f2bcf/tests/network/worker_cross_netns/run_test.py"
+  ],
+  "notes": [
+    "The implementation split is verified by unit and no-QEMU namespace tests.",
+    "The prepared worker-local QEMU fixture remains NOT RUN to avoid contaminating the active Core2 soak.",
+    "No physical hardware claim."
+  ]
+}
