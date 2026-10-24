@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Resume worker evidence after a runtime Device Service restart",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "cd0308025309fcb6dfd373502e87890449a1f98c",
+    "result_commit": "cd3adc70b815a61f216286250676e0ef7aa8a77d",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40141703399",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "device": "sticks3",
+    "runtime": "qemu",
+    "firmware_source": "reference"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; central and worker-local Device Service; real StickS3 QEMU; WorkerAgent",
+    "runtime_downtime_seconds": 2.2,
+    "same_state_dir": true,
+    "same_session": true,
+    "same_pid": true,
+    "reattached_process": true,
+    "job_status": "completed",
+    "result_state": "PASS",
+    "evidence_bytes": 2422,
+    "evidence_sha256": "72a85a6cea32950e8c0cec044dabfe5022f4f60e6dcd7370a99f7f7b8430dd9c",
+    "platform_tests": 394,
+    "documentation_tests": 20
+  },
+  "checks": [
+    {
+      "name": "same_runtime_session",
+      "status": "PASS"
+    },
+    {
+      "name": "same_qemu_pid",
+      "status": "PASS"
+    },
+    {
+      "name": "pid_start_time_and_qmp_ownership",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_runtime_status_evidence_retry",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal_completed_pass",
+      "status": "PASS"
+    },
+    {
+      "name": "same_lease_and_worker_identity",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence_manifest_and_serial",
+      "status": "PASS"
+    },
+    {
+      "name": "session_stop_pid_release_qemu_reap",
+      "status": "PASS"
+    },
+    {
+      "name": "session_create_response_loss_recovery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_qemu_migration",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "companion_continuity",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cd3adc70b815a61f216286250676e0ef7aa8a77d/tests/network/worker_runtime_restart/evidence-2026-10-25-runtime-restart-pass.json"
+  ],
+  "notes": [
+    "Only the runtime Device Service restarts; the QEMU process survives on the same host.",
+    "Known-session requests retry; session create does not until a stable dedup token exists.",
+    "Companion and cross-host continuity remain out of scope."
+  ]
+}
