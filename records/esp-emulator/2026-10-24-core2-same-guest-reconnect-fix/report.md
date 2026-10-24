@@ -163,3 +163,63 @@ bit-exact ESP32 BT controller/baseband、物理 cache/PSRAM 和真机。
 以下仍未执行：超过当前 1–10 API 上限的重连、多小时 coexistence/soak、
 配对/安全/加密重连、bit-exact ESP32 BT controller/baseband、物理
 cache/PSRAM 和真机。
+
+## Follow-up：二十轮重连与 API 上限扩展
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ 36e28d76b3c293975878d1980dbd5349d1a9efe4`。
+
+变更：
+
+- `platform/tools/device_service.py`：`ble_reconnect_cycles` 从 `1..10`
+  扩到 `1..30`；
+- `platform/tools/ble_probe.py`：Bumble peer 的
+  `--reconnect-cycles` 同步扩到 `1..30`；
+- `tests/uiflow2/core2_native_hci/run_service_5x.py`：服务测试 runner 同步；
+- `test_device_service.py` 增加 20 接受、31 拒绝的契约断言；
+- `test_docs_consistency.py` 固定 3 attempts × 20 cycles、HLI 577/577、
+  events 397、ACLs 180、池 `3/9/3` 和 `trace-gap-adv-start=20`。
+
+本轮使用重新构建的 unified Core2 镜像：
+
+- firmware SHA256：
+  `4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02`；
+- ELF SHA256：
+  `5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49`；
+- QEMU SHA256：
+  `e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1`。
+
+ELF 和 QEMU 与十轮证据一致；unified 镜像由同一 UIFlow2 build 和 LittleFS
+重新 compose，产物 SHA 因此单列，不能沿用旧镜像 hash。
+
+执行 3 个独立 `/api/v1` lease，每个要求 20 轮。结果 `3/3 PASS`：
+
+- 每个 attempt 的 peer、guest RX 和 ACK marker 均为 20；
+- HLI posts/consumed 均为 `577/577`；
+- events 397、ACLs 180；
+- `hli-errors=0`、HLI/meta queue 和 TX/RX 异常队列为零；
+- connection/L2CAP/GATT 池均回到 `3/9/3`；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=20`；
+- frame/QOM、WiFi/公网、pcap、evidence 和 manifest binding 全部 PASS；
+- 无 panic。
+
+验证：
+
+- 平台套件 `314/314 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向
+  Ruff：`PASS`；
+- GitHub Actions CI run `40074452179`：两个 job 均 `PASS`；
+- 完整 UIFlow2 67-case 外设矩阵本轮未重跑。
+
+边界：
+
+- virtual-device validation，不是物理 RF、功耗或硬件；
+- 20 轮短时 reconnect 不等于多小时 coexistence/soak；
+- 未证明 pairing、secure connection、encrypted reconnect；
+- 未证明 bit-exact BT controller/baseband；
+- 未证明物理 cache/PSRAM 时序。
+
+回滚：revert
+`36e28d76b3c293975878d1980dbd5349d1a9efe4`。回滚后 API 恢复 `1..10`
+限制，但已提交的二十轮证据仍保留为历史。

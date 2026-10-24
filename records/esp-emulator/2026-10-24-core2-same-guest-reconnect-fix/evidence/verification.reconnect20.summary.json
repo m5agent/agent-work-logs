@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "virtual-device validation",
+  "scope": "same-host-device-service-core2-native-hci-same-guest-reconnect",
+  "result_commit": "36e28d76b3c293975878d1980dbd5349d1a9efe4",
+  "profile": "core2-native-hci",
+  "runtime": "qemu-unified",
+  "api_limit": {
+    "previous": "1..10",
+    "current": "1..30",
+    "accepted_test_cycles": 20,
+    "rejected_test_cycles": 31
+  },
+  "artifacts": {
+    "firmware_sha256": "4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02",
+    "firmware_bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1"
+  },
+  "reconnect": {
+    "attempts_requested": 3,
+    "attempts_passed": 3,
+    "cycles_per_attempt": 20,
+    "peer_cycle_markers_per_attempt": 20,
+    "guest_rx_markers_per_attempt": 20,
+    "guest_ack_markers_per_attempt": 20,
+    "hli_posts_consumed": "577/577",
+    "hli_events": 397,
+    "hli_acls": 180,
+    "hli_errors": 0,
+    "hli_queue_depth": 0,
+    "meta_queue_depth": 0,
+    "connection_l2cap_gatt_pool_free": "3/9/3",
+    "trace_hs_sched_reset": 0,
+    "trace_gap_adv_start": 20,
+    "panics": 0,
+    "dropped_packets": 0,
+    "all_checks_pass": true
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/36e28d76b3c293975878d1980dbd5349d1a9efe4/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect20-3x.json",
+  "source_evidence_sha256": "2776504034a08603c8bffe6b1755ba41e1e07d1343514c9c91ab6c10e6d8463a",
+  "platform": {
+    "tests": 314,
+    "passed": 314,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40074452179,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "more than twenty reconnect cycles",
+    "multi-hour coexistence or soak",
+    "pairing, secure or encrypted reconnect",
+    "bit-exact Espressif BT controller/baseband",
+    "physical cache/PSRAM equivalence",
+    "hardware or RF validation",
+    "full UIFlow2 67-case matrix after this change"
+  ]
+}

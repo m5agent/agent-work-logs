@@ -3,7 +3,7 @@
   "date": "2026-10-24",
   "kind": "code_change",
   "overall_status": "PASS",
-  "title": "Fix Core2 same-guest BLE reconnect stale-ACK failure",
+  "title": "Fix Core2 same-guest BLE reconnect and extend validation to twenty cycles",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "e686838e38dc8ec46daa6dbc2830322806ca7355",
@@ -79,6 +79,42 @@
         "run_id": 40070310548,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "twenty_cycle_reconnect_and_api_limit_expansion",
+      "result_commit": "36e28d76b3c293975878d1980dbd5349d1a9efe4",
+      "status": "PASS",
+      "evidence": "evidence/verification.reconnect20.summary.json",
+      "reconnect": {
+        "attempts": 3,
+        "passed": 3,
+        "cycles_per_attempt": 20,
+        "peer_cycle_markers_per_attempt": 20,
+        "guest_rx_markers_per_attempt": 20,
+        "hli_posts_consumed": "577/577",
+        "hli_events": 397,
+        "hli_acls": 180,
+        "hli_errors": 0,
+        "connection_l2cap_gatt_pool_free": "3/9/3",
+        "trace_gap_adv_start": 20
+      },
+      "api_limit": {
+        "previous": "1..10",
+        "current": "1..30",
+        "accepted_test_cycles": 20,
+        "rejected_test_cycles": 31
+      },
+      "artifacts": {
+        "firmware_sha256": "4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02",
+        "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+        "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1"
+      },
+      "platform_tests": "314/314 PASS",
+      "github_actions": {
+        "run_id": 40074452179,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -146,7 +182,16 @@
       "status": "NOT RUN"
     },
     {
+      "name": "twenty_cycle_same_guest_reconnect",
+      "status": "PASS",
+      "detail": "3/3 independent leases; 20 cycles per lease"
+    },
+    {
       "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "more_than_twenty_cycles_or_multi_hour_soak",
       "status": "NOT RUN"
     }
   ],
@@ -154,9 +199,12 @@
     "evidence/verification.summary.json",
     "evidence/verification.reconnect5.summary.json",
     "evidence/verification.reconnect10.summary.json",
+    "evidence/verification.reconnect20.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40068768706",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40069447311",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070310548",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40074452179",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/36e28d76b3c293975878d1980dbd5349d1a9efe4/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect20-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/e9520bbca56da753cd4cd75cf30c8c5594866386/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect10-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/e9520bbca56da753cd4cd75cf30c8c5594866386/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect10-timeout-fail.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/6956ebbe2c620c5840e04da8911a554fee7d7491/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect5-3x.json",
@@ -168,6 +216,7 @@
     "The no-response behavior is covered by a unit test.",
     "At the original two-cycle milestone, more than two reconnect cycles and physical hardware remained open.",
     "A five-cycle follow-up now passes in three independent leases; more than five cycles and physical hardware remain open.",
-    "A ten-cycle follow-up now passes in three independent leases after fixing a separate 30-second Device Service wait cap; more than ten cycles and physical hardware remain open."
+    "A ten-cycle follow-up now passes in three independent leases after fixing a separate 30-second Device Service wait cap.",
+    "A twenty-cycle follow-up passes in three independent leases after expanding the common API limit to 30; more than twenty cycles, multi-hour soak and physical hardware remain open."
   ]
 }
