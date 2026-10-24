@@ -13,3 +13,9 @@
 - 只有同事才需要看的环境说明。
 
 判断标准：如果这条记录对一个只看公开仓库的外部读者毫无价值，它就不该出现在这里。
+
+## 记录索引
+
+| 日期 | 对象 | 主题 | 结果 | 记录 |
+| --- | --- | --- | --- | --- |
+| 2026-10-24 | `m5stack-schematics-text` | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | `PASS` / 上游推送 `PARTIAL` | [查看](m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
