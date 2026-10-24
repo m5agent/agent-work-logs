@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "c6-soft-reset-flash-pmp-followup",
+  "source_commit": "58b7c14538f9407e4ffaecccd98825619ddd0bd6",
+  "runtime_model_gap": {
+    "id": "RUNTIME-01",
+    "code": "c6_chip_id_lost_after_software_reset",
+    "previous_status": "OPEN",
+    "current_status": "FIXED"
+  },
+  "pre_fix": {
+    "serial_marker": "rst:0x3 (LP_SW_HPSYS),boot:0x8 (SPI_FAST_FLASH_BOOT)",
+    "error": "Invalid chip id. Expected 13 read 12. Bootloader for wrong chip?",
+    "flash_offset_zero": "e9010200100486406c0000000c000000"
+  },
+  "post_fix": {
+    "flash_offset_zero": "e903024010c48640ee0000000d000000",
+    "invalid_chip_id_observed": false,
+    "device_service_status": "PARTIAL",
+    "status_reason": "fatal_after_application_frame",
+    "runtime_model_gaps": [],
+    "session_id": "b405105224694aa68dc51159ffb085d8",
+    "serial_sha256": "f08a47b81806ebdf0eb9746ce0dfa00231afa1190b230b40e243540da9db2736"
+  },
+  "regressions": {
+    "nesso_official_peripherals": {
+      "status": "PASS",
+      "cases": 5,
+      "attempts": 5,
+      "retry_used": false
+    },
+    "nanoc6_board_probe": {
+      "status": "PASS"
+    },
+    "platform_tests": {
+      "status": "PASS",
+      "tests": 317
+    },
+    "node_tests": {
+      "status": "PASS",
+      "tests": 2
+    },
+    "github_actions": {
+      "run_id": 40078148754,
+      "status": "PASS"
+    }
+  },
+  "remaining_boundaries": [
+    "Meshtastic independent Instruction access fault",
+    "C6 Zigbee/802.15.4 RUNTIME-02",
+    "physical hardware and RF"
+  ]
+}

@@ -1,0 +1,36 @@
+C6 software-reset flash/PMP follow-up
+firmware SHA256=ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744
+qemu SHA256=25497c521ebd5838a56b066551dd5c33d6dd00df853ed4a256fcca79944de7db
+
+[pre-fix]
+rst:0x3 (LP_SW_HPSYS),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Invalid chip id. Expected 13 read 12. Bootloader for wrong chip?
+
+[pre-fix flash sample]
+00000000: e9 01 02 00 10 04 86 40 6c 00 00 00 0c 00 00 00
+
+[post-fix flash sample]
+00000000: e9 03 02 40 10 c4 86 40 ee 00 00 00 0d 00 00 00
+
+[post-fix Device Service]
+status=PARTIAL
+status_reason=fatal_after_application_frame
+runtime_model_gaps=[]
+invalid_chip_id_observed=false
+
+[post-fix bounded reboot markers]
+rst:0x3 (LP_SW_HPSYS),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x4086c410,len:0xbac
+load:0x4086e610,len:0x2244
+load:0x40875728,len:0xf8
+entry 0x4086c410
+
+[post-fix remaining application panic]
+Guru Meditation Error: Core 0 panic'ed (Instruction access fault)
+MEPC: 0x00000000
+
+[official regression]
+Nesso N1 peripheral cases=5 pass=5 fail=0 retry_used=false
+NanoC6 peripherals: PASS rgb_grb=00ff00 button=True
