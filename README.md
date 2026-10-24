@@ -87,6 +87,7 @@
 | 2026-10-24 | ESP Emulator | 当前状态、验证台账、Backlog 与代码地图分层 | PASS（docs/contracts：264/264 平台测试、GitHub Actions、runtime/catalog/profile 校验、Node 2/2、9 项文档契约与 evidence JSON；完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-current-status-validation-ledger/) |
 | 2026-10-24 | ESP Emulator | Core2 VHCI API-boundary 与 HCI-3b 事务审计 | PARTIAL（virtual-device：广播/连接/NUS discovery/subscription PASS；final write/notify 与完整 GATT FAIL；264/264 与 CI PASS；实验代码未保留） | [查看](records/esp-emulator/2026-10-24-core2-hci3b-api-boundary/) |
 | 2026-10-24 | ESP Emulator | SPIFFS 只读清单、LUT 校验与当前文档对账 | PASS（static-image：8 配置、多索引、canonical/malformed、Manifest 脱敏、267 tests、Node 2/2；QEMU 矩阵与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-spiffs-inventory/) |
+| 2026-10-24 | ESP Emulator | 工作流交接、代码卫生与 Core2 HLI 诊断 | PASS（docs/contracts：267 tests、Node 2/2、catalog/profile、文档契约与 Ruff PASS；HLI 仅 event-13 marker，HCI-3b/GATT/真机仍开放） | [查看](records/esp-emulator/2026-10-24-workstream-handoff-hli/) |
 
 ## 目录结构
 

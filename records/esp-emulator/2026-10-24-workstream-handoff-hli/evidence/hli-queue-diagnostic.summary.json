@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "source_commit": "543f900225457c6b7cbd03f30a3ef01844119359",
+  "stage": "HCI-3b",
+  "gate_result": "OPEN",
+  "diagnostic_status": "PASS",
+  "validation_level": "virtual-device validation",
+  "firmware": {
+    "family": "stock UIFlow2 v2.5.3",
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680"
+  },
+  "runtime": {
+    "machine": "m5core2",
+    "accel": "tcg,thread=single",
+    "icount": "shift=auto,align=off,sleep=off",
+    "gdb_bridge": false
+  },
+  "guest_configuration": {
+    "CONFIG_BTDM_CTRL_HLI": 1,
+    "nimble_cpu": 1,
+    "controller_cpu": 0,
+    "hli_software_interrupt": 29
+  },
+  "observations": {
+    "guest_hli_isr_consumed_work": true,
+    "guest_controller_task_ran_callback": true,
+    "hli_posts": 1,
+    "hli_errors": 0,
+    "hli_queue_depth_after": 0,
+    "meta_queue_depth_after": 0,
+    "real_hci_event_delivered": false,
+    "acl_delivered": false,
+    "complete_hci_gatt_sequence": false,
+    "hli_consumed_counter_usable": false
+  },
+  "serial_marker": "Fatal error in queue_signal: s_meta_queue full",
+  "conclusion": "The firmware HLI queue and INTSET[29] provide a valid guest task/IRQ delivery seam. The injected event-13 callback was a marker, not a controller packet.",
+  "experiment_retained": false,
+  "reproducible_from_result_commit": false,
+  "next_step": "Deliver a real Reset Complete using a guest-allocated event buffer and ble_transport_to_hs_evt_impl, then investigate ACL buffer ownership and combine API-boundary H2C with HLI C2H."
+}
