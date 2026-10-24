@@ -16,6 +16,29 @@
     "task_id": "",
     "session_id": ""
   },
+  "follow_ups": [
+    {
+      "date": "2026-10-24",
+      "kind": "real_qemu_job_over_mtls",
+      "result_commit": "865e4f810263f3f388beeee3aa577de27f99d0b1",
+      "status": "PASS",
+      "evidence": "evidence/verification.qemu-job.summary.json",
+      "scope": "same-host loopback; runtime=qemu; not unified board/network/UI",
+      "job": {
+        "status": "completed",
+        "result_state": "PASS",
+        "attempts": 1,
+        "evidence_bytes": 6852,
+        "evidence_sha256": "84cc4339184794536d36276e05be13d4e271274f6b8f5444bdd4831010f16065",
+        "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec"
+      },
+      "platform_tests": "305/305 PASS",
+      "github_actions": {
+        "run_id": 40071518376,
+        "status": "PASS"
+      }
+    }
+  ],
   "checks": [
     {
       "name": "platform_tests",
@@ -79,13 +102,17 @@
   ],
   "evidence": [
     "evidence/verification.transport.json",
+    "evidence/verification.qemu-job.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070863490",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071518376",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/865e4f810263f3f388beeee3aa577de27f99d0b1/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-qemu-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-pass.json"
   ],
   "notes": [
     "TLS server and client contexts require TLS 1.2 or newer.",
     "Client hostname verification is enabled and has no bypass option.",
     "Worker HMAC remains mandatory for worker-only mutations.",
-    "The live transport test is loopback-only and did not execute a QEMU job."
+    "The original live transport test was loopback-only and did not execute a QEMU job.",
+    "A follow-up now executes a real runtime=qemu StickS3 job over mTLS with evidence SHA256 and terminal PASS."
   ]
 }

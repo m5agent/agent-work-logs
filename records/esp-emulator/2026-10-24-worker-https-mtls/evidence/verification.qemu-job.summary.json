@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "transport-security validation",
+  "scope": "same-host-loopback-real-tls-qemu-job",
+  "result_commit": "865e4f810263f3f388beeee3aa577de27f99d0b1",
+  "previous_follow_up_commit": "ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd",
+  "tls": {
+    "minimum_version": "TLSv1.2",
+    "observed_version": "TLSv1.3",
+    "server_certificate_verification": "PASS",
+    "client_certificate_required": "PASS",
+    "ephemeral_test_pki": true
+  },
+  "worker_transport": {
+    "base_url_scheme": "https",
+    "bearer_and_worker_hmac_preserved": "PASS",
+    "unsigned_claim_http": 401,
+    "worker_agent_exit_code": 0
+  },
+  "live_job": {
+    "status": "completed",
+    "result_state": "PASS",
+    "attempts": 1,
+    "evidence_bytes": 6852,
+    "evidence_sha256": "84cc4339184794536d36276e05be13d4e271274f6b8f5444bdd4831010f16065",
+    "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec",
+    "full_sticks3_flash_upload_over_mtls": "PASS",
+    "firmware_compose_over_mtls": "PASS",
+    "real_qemu_session": "PASS",
+    "evidence_zip_manifest_and_serial": "PASS",
+    "evidence_sha256_verified": "PASS"
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/865e4f810263f3f388beeee3aa577de27f99d0b1/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-qemu-job-pass.json",
+  "source_evidence_sha256": "7b718b72d7ca5a2f244349294b6e1655fb6690cc63371599f202a40fd08c2b2c",
+  "platform": {
+    "tests": 305,
+    "passed": 305,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40071518376,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "cross-host network topology or latency",
+    "certificate or worker credential rotation",
+    "production CA and certificate lifecycle",
+    "unified board/network application PASS for this QEMU job",
+    "multi-host scheduling or worker continuity",
+    "hardware validation"
+  ]
+}

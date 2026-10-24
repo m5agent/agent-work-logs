@@ -78,3 +78,38 @@ python3 tests/network/worker_tls/run_test.py
 未使用生产证书、真实凭据或外部服务，也没有执行硬件写操作。回滚可 revert
 `ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd`。回滚后恢复明文 HTTP/Bearer +
 HMAC 的旧能力；不得把回滚状态用于跨主机不可信网络。
+
+## Follow-up：真实 QEMU job over mTLS
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ 865e4f810263f3f388beeee3aa577de27f99d0b1`。
+
+该 follow-up 不再停在无 job 的 worker 生命周期：
+
+1. 将 cached StickS3 源镜像补齐为完整 8 MiB flash；
+2. 通过 mTLS 上传 artifact；
+3. 通过 mTLS 调用 firmware compose；
+4. 提交 capability-constrained durable job；
+5. 带客户端证书和 worker/generation HMAC 的 agent claim job；
+6. 启动真实 StickS3 QEMU session；
+7. 下载 evidence ZIP，要求包含 manifest 和 serial；
+8. 本地重新计算 evidence SHA256，并与 job result 对照；
+9. 提交 `completed / PASS / attempts=1`，agent 退出码 0。
+
+结果：
+
+- TLS 1.3；
+- firmware SHA256：
+  `a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec`；
+- evidence bytes：`6852`；
+- evidence SHA256：
+  `84cc4339184794536d36276e05be13d4e271274f6b8f5444bdd4831010f16065`；
+- job terminal status：`completed`；
+- result：`PASS`；
+- attempts：`1`；
+- platform tests：`305/305 PASS`；
+- CI run `40071518376`：两个 job 均成功。
+
+该 QEMU job 使用 `runtime=qemu`，没有声明 unified board/network/UI PASS。
+跨主机网络、证书/worker 凭据热轮换、生产 CA 生命周期、多主机调度、
+companion continuity 和真机仍未验证。
