@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "result_commit": "b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f",
+  "validation": "virtual-device validation",
+  "root_cause": {
+    "component": "external Bumble compatibility layer",
+    "invalid_reply_opcode": "0x0c35",
+    "command_name": "HCI_Host_Number_of_Completed_Packets",
+    "next_affected_command": "0x2008",
+    "next_command_name": "LE_Set_Advertising_Data",
+    "nimble_error": 12,
+    "nimble_error_name": "BLE_HS_ECONTROLLER"
+  },
+  "platform": {
+    "tests": 300,
+    "passed": 300,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "browser_tests": "2/2 PASS",
+    "compileall": "PASS",
+    "targeted_ruff": "PASS",
+    "github_actions": {
+      "run_id": 40068768706,
+      "status": "PASS",
+      "jobs": [
+        "platform-contracts",
+        "network-namespace-policy"
+      ]
+    }
+  },
+  "reconnect_gate": {
+    "status": "PASS",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "attempts": 3,
+    "passed": 3,
+    "cycles_per_attempt": 2,
+    "firmware_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1",
+    "evidence_sha256": "d0aefdaf1688ea2fe8512737258cef1314fc9e4175af37336bfdde04089371b5",
+    "each_attempt": {
+      "hli_posts": 73,
+      "hli_consumed": 73,
+      "hli_errors": 0,
+      "hli_queue_depth": 0,
+      "meta_queue_depth": 0,
+      "trace_hs_sched_reset": 0,
+      "trace_gap_adv_start": 2,
+      "peer_closed": 0,
+      "last_error": 0,
+      "second_cycle_guest_rx": "PASS",
+      "second_cycle_notification": "ACK:M5_CORE2_UNIFIED"
+    }
+  },
+  "qemu_patch": {
+    "path": "patches/qemu-core2-native-hci/0006-esp32-native-hci-observability.patch",
+    "sha256": "c784e7c36459147aafc30c92e138d34a2921d51b3d69749a345f24714b4214c6",
+    "replay_check": "PASS",
+    "reverse_check": "PASS"
+  },
+  "not_run": [
+    "full UIFlow2 peripheral matrix",
+    "more than two reconnect cycles",
+    "pairing, security or encrypted reconnect",
+    "multi-hour coexistence or reconnect soak",
+    "bit-exact ESP32 BT controller/baseband",
+    "physical cache/PSRAM equivalence",
+    "physical hardware validation",
+    "RF behavior"
+  ]
+}

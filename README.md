@@ -102,6 +102,7 @@
 | 2026-10-24 | ESP Emulator | StickS3 自动 radio 断线、scan 1→0→1、双 DHCP 与前后 HTTP/pcap | PASS（virtual-device：同 session 16/16 checks、pcap 9,586 bytes、299/299 tests + CI PASS；物理 RF/不同 DHCP server/硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-sticks3-reconnect-runner/) |
 | 2026-10-24 | ESP Emulator | Core2 active BLE + WiFi/公网两分钟共存 | PASS（virtual-device：2/2×120s、peer 全程连接、HLI/TX queue 无错误、299/299 tests + CI PASS；同 guest reconnect、bit-exact controller、物理 cache/PSRAM、多小时 soak 与硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-active-ble-coexistence/) |
 | 2026-10-24 | ESP Emulator | 代码文档重整与 Core2 同 guest reconnect 边界 | PARTIAL（docs/contracts：299/299 tests、Node 2/2、catalog/profile/coverage PASS；stock 与重广告对照均在 disconnect 后 `ack 12`/HCI reset，第二轮连接 FAIL；bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-docs-reconciliation-core2-reconnect/) |
+| 2026-10-24 | ESP Emulator | Core2 同 guest BLE 重连 stale-ACK 修复 | PASS（virtual-device：3 个独立 lease 均完成两轮 NUS GATT，第二轮 guest RX/notify PASS；根因为 Bumble 对无响应 `0x0c35` 非法回复；300/300 tests；更多轮次、bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-same-guest-reconnect-fix/) |
 
 ## 目录结构
 
