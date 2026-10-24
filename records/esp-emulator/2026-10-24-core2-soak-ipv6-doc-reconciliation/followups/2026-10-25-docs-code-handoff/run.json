@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Reconcile ESP Emulator current status, code boundaries and execution queue",
+  "scope": "docs, generated device metadata, profile contracts and documentation tests",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "2cde43a466919a9d8eadb6c840fad31ca4b17d65",
+    "code_commit": "1d3694eea6a4cf39ccfa56e53b8bbb9bfe28b575"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Apple Silicon; Python platform tests and Node.js client tests",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "349 of 349 tests passed"
+    },
+    {
+      "name": "documentation_consistency",
+      "status": "PASS",
+      "detail": "19 of 19 tests passed"
+    },
+    {
+      "name": "node_units",
+      "status": "PASS",
+      "detail": "2 of 2 tests passed"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "python_compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "ruff_fatal_and_unused_imports",
+      "status": "PASS"
+    },
+    {
+      "name": "core2_bounded_7200s_final",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "core2_reconnect_121_three_leases",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "ipv6_namespace_same_guest_lifecycle",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "refreshed_public_firmware_device_service",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/1d3694eea6a4cf39ccfa56e53b8bbb9bfe28b575",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1d3694eea6a4cf39ccfa56e53b8bbb9bfe28b575/docs/project-status.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1d3694eea6a4cf39ccfa56e53b8bbb9bfe28b575/docs/project-backlog.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1d3694eea6a4cf39ccfa56e53b8bbb9bfe28b575/docs/validation-ledger.md"
+  ],
+  "notes": [
+    "The PASS applies only to documentation and contract reconciliation.",
+    "Public firmware IDs are mutable; refreshed bytes require a new Device Service run.",
+    "The final bounded Core2 soak, 121-cycle gate, IPv6 namespace lifecycle and refreshed firmware runs remain queued.",
+    "Virtual-device and contract validation only; no physical hardware claim."
+  ]
+}
