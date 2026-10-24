@@ -141,3 +141,67 @@ network-namespace-policy PASS
 
 回滚源码提交 `a1917eaf410d093d780128696819db7b081b9ae7` 可恢复
 `1.14.0` 契约和未注册的本地 worker-only 路径，不会修改物理设备或固件。
+
+## Follow-up：代码、文档与 Core2 诊断再对账
+
+### 背景
+
+用户要求把后续完成的代码和文档重新收口，因为部分状态页仍停留在较早的
+Core2 native-HCI 阶段。检查发现两个需要修正的事实：
+
+1. `platform/qemu/profiles.json` 的摘要写成 `13` 台 QEMU ESP32，实际是
+   `12` 台 QEMU-backed ESP32 加 Tab5 `esp-emu`；
+2. 文档只记录 HLI event，随后实验已通过 HLI 投递 event/ACL 到 NUS
+   discovery/subscription 和外部 NUS write，但 guest write/ACK/notification
+   仍未完成。
+
+### 改动
+
+- 同步根 README、当前状态、Backlog、工作流、代码地图、网络方案、统一运行时
+  和设备矩阵；
+- QEMU profile 摘要改为 `12 + Tab5`，`qemu_profiles.py --check` 改为按
+  catalog 动态校验计数文字；
+- `run_full.py --hli-c2h` 增加事件/ACL counters、BLE failure 快照、TX queue、
+  QOM 读取去重和 QEMU 早期退出错误摘要；
+- 明确 `--hli-c2h` 依赖 ignored QEMU worktree 的实验 hook，不属于已提交
+  `0001`/`0002` patch；
+- 新增 Core2 HLI/API-boundary 失败 evidence，并把文档一致性测试扩展到该
+  evidence 的关键字段。
+
+### 执行
+
+```text
+platform tests                 283/283 PASS
+docs contracts                 9/9 PASS
+runtime coverage               PASS
+peripheral catalog             PASS
+QEMU profiles                  PASS
+python compile                 PASS
+GitHub Actions 40051638039     PASS
+Core2 HLI/API repeat           2/2 notification timeout (expected FAIL)
+QEMU full matrix               NOT RUN
+physical hardware              NOT RUN
+```
+
+Core2 同一固件/ELF/QEMU build 两次都完成广播、连接、NUS discovery、
+subscription 和外部 NUS write；两次都没有 guest write/ACK marker 或
+notification。失败快照中已经各出现一次 H2C `EIO`，peer 断开后写失败累计到
+`15`。现有记录没有 packet ID 和单调时间戳，不能判定首个 `EIO` 与
+notification timeout 的先后，也不能把 `EIO` 当作唯一根因。
+
+### Follow-up 验证边界
+
+- 文档与 profile 改动没有触碰已提交的 QEMU 设备数据面，因此没有重跑
+  67-case 全矩阵；
+- Core2 结果是 `virtual-device validation`，不是 RF、controller firmware
+  或物理等价性验证；
+- 实验 QEMU 二进制 SHA256 已写入 evidence，但实验源码没有进入提交，
+  因此不是可发布后端；
+- 远程 worker supervisor、持久队列、活动 QEMU re-attach 和外部 IPv6 仍为
+  `NOT RUN`。
+
+### Follow-up 回滚
+
+回滚源码提交 `187a7dc9ad823b449b5a88be6e82d60816c753d7` 可恢复
+`a1917eaf410d093d780128696819db7b081b9ae7` 的文档与 profile 基线；
+不会修改设备、网络或固件产物。

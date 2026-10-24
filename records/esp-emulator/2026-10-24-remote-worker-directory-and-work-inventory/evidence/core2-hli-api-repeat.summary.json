@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "core2_native_hci_followup_summary",
+  "date": "2026-10-24",
+  "validation": "virtual-device validation",
+  "status": "FAIL",
+  "stage": "HCI-3b",
+  "gate_result": "OPEN",
+  "source_commit": "187a7dc9ad823b449b5a88be6e82d60816c753d7",
+  "firmware_sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+  "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+  "qemu_sha256": "9146ef38d2bedc68e019eae74aa8680660adf2c32c0ee716f296f93a87032816",
+  "same_build_runs": 2,
+  "stages": {
+    "controller_ready": "2/2",
+    "advertisement_found": "2/2",
+    "ble_connected": "2/2",
+    "gatt_discovered": "2/2",
+    "notification_subscribed": "2/2",
+    "nus_write_sent_by_peer": "2/2",
+    "guest_write_marker": "0/2",
+    "guest_ack_marker": "0/2",
+    "notification_observed": "0/2"
+  },
+  "failure_snapshot": {
+    "notification_timeout": "2/2",
+    "hli_errors": 1,
+    "api_h2c_errors": 1,
+    "tx_queue_depth": 1,
+    "last_tx_errno": 5
+  },
+  "final_counters": {
+    "hli_c2h_events": 38,
+    "hli_c2h_acls": 9,
+    "hli_queue_depth": 0,
+    "meta_queue_depth": 0,
+    "malformed_packets": 0,
+    "dropped_packets": 0,
+    "api_h2c_errors": 15,
+    "tx_queue_depth": 15
+  },
+  "conclusion": "HLI event and ACL traffic reaches NUS discovery, subscription and an external NUS write. The guest produces no write/ACK marker or notification. One H2C EIO is already present at the visible failure snapshot, so packet-level ordering against the notification timeout remains unresolved.",
+  "not_claimed": [
+    "complete HCI/GATT",
+    "HCI-4 repeated lease",
+    "bit-exact BT controller/baseband",
+    "physical hardware or RF"
+  ]
+}

@@ -8,7 +8,9 @@
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "21d26c93055a65b9952a3d5611838bcbb3f2dc10",
     "result_commit": "a1917eaf410d093d780128696819db7b081b9ae7",
-    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40047928762"
+    "latest_result_commit": "187a7dc9ad823b449b5a88be6e82d60816c753d7",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40047928762",
+    "latest_ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40051638039"
   },
   "hardware": {
     "targets": [],
@@ -84,14 +86,35 @@
   ],
   "evidence": [
     "evidence/verification.summary.json",
+    "evidence/verification.followup.summary.json",
+    "evidence/core2-hli-api-repeat.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/commit/a1917eaf410d093d780128696819db7b081b9ae7",
-    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40047928762"
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/187a7dc9ad823b449b5a88be6e82d60816c753d7",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40047928762",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40051638039"
+  ],
+  "follow_up_executions": [
+    {
+      "date": "2026-10-24",
+      "base_commit": "a1917eaf410d093d780128696819db7b081b9ae7",
+      "result_commit": "187a7dc9ad823b449b5a88be6e82d60816c753d7",
+      "platform_tests": "283/283 PASS",
+      "docs_contracts": "9/9 PASS",
+      "qemu_profiles": "PASS",
+      "github_actions": "40051638039 PASS",
+      "core2_hli_api_repeat": "FAIL: 2/2 notification timeout after NUS write; H2C EIO ordering unresolved",
+      "qemu_full_matrix": "NOT RUN",
+      "physical_hardware": "NOT RUN"
+    }
   ],
   "notes": [
     "The worker directory stores identity, generation, heartbeat, state, capabilities, active leases and bounded result metadata.",
     "The worker directory is not a supervisor, queue or active QEMU re-attach implementation.",
     "Current status, backlog, workstreams, code map and API contract now use the same capability boundary.",
     "No QEMU controller or device data plane changed in this work.",
-    "Physical hardware and RF-equivalence claims remain unverified."
+    "Physical hardware and RF-equivalence claims remain unverified.",
+    "Follow-up corrected the stale 13-QEMU summary to 12 QEMU-backed ESP32 plus Tab5 through esp-emu.",
+    "Core2 HLI/API-boundary reached NUS discovery, subscription and external NUS write in 2/2 runs, but notification remained 0/2.",
+    "One H2C EIO was present in each visible BLE failure snapshot; packet-level ordering against notification timeout is unresolved."
   ]
 }
