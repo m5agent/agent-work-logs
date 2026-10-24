@@ -99,6 +99,7 @@
 | 2026-10-24 | ESP Emulator | 当前代码/文档对账与 Core2 extended-run 失败固化 | PARTIAL（docs/contracts：296/296 tests、Node 2/2、CI PASS；Core2 `HCI-4` 功能基线仍 PASS，但 extended-run/soak 在 READY/联网/BLE 连接后 panic，根因未定；完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-extended-run-and-current-work-reconciliation/) |
 | 2026-10-24 | ESP Emulator | 当前基线、动态文档与 QEMU/设备验证元数据收口 | PASS（docs/contracts：297/297 tests、Node 2/2、CI 全部成功；动态计数单一事实源、catalog/profile 交叉校验、AtomS3R/PaperMono 旧元数据修正；全矩阵与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-code-doc-baseline-reconciliation/) |
 | 2026-10-24 | ESP Emulator | P0 网络错误密码、Core2 2×120s 与公开固件 Manifest/WebBurner | PARTIAL（virtual/static：wrong-password 7/7、DNS/UDP 5/5、Core2 2/2×120s、公开固件 merged/WebBurner 同 hash 且 camera mismatch REJECTED，299/299 + CI PASS；物理 cache/PSRAM、bit-exact controller、同 guest 重连、多小时 soak 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-p0-network-core2-firmware-progress/) |
+| 2026-10-24 | ESP Emulator | StickS3 自动 radio 断线、scan 1→0→1、双 DHCP 与前后 HTTP/pcap | PASS（virtual-device：同 session 16/16 checks、pcap 9,586 bytes、299/299 tests + CI PASS；物理 RF/不同 DHCP server/硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-sticks3-reconnect-runner/) |
 
 ## 目录结构
 
