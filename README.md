@@ -110,6 +110,7 @@
 | 2026-10-24 | ESP Emulator | C6 Zigbee `thread-sim` 可行性分类 | PARTIAL（virtual-device：双 C6 switch/light 产生 21+17 个双向 802.15.4 帧，协调器组网与 steering 启动；join/On-Off 未完成，分类 `runtime_model_gap`，公开固件匹配 ELF 缺失，真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-c6-zigbee-thread-sim-feasibility/) |
 | 2026-10-24 | ESP Emulator | Core2 热门公开固件、PMIC I2C 与 AWS ATECC608 模型缺口 | PARTIAL（virtual-device：3 个 MOST_DOWNLOADED 官方固件均执行但黑帧；PMIC 2 个、ATECC608 1 个结构化 model gap，AXP192/2101 A/B 同错；323/323 tests + CI PASS，真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-public-firmware-model-gaps/) |
 | 2026-10-24 | ESP Emulator | 项目快照生成器与代码/文档结构收敛 | PASS（docs/contracts：自动快照、动态事实去重、早期 bring-up 标历史、FW-03 修正为 7 台/21 样本；324/324 tests、Ruff、catalog/profile/coverage PASS；QEMU 功能矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-project-snapshot-doc-consolidation/) |
+| 2026-10-24 | ESP Emulator | 文件权限、包内源码许可扫描与 Core2 AXP I2C 首错定位 | PASS（static/runtime diagnosis：FAT/LFS/SPIFFS permission policy、2 个源码 SPDX 声明与敏感路径脱敏、329/329 tests；AXP2101 chip-id `0x4a` PASS，后续读取未产生 address-0x34 事务，`RUNTIME-03` 仍未关闭；真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-firmware-permission-and-source-scan/) |
 
 ## 目录结构
 

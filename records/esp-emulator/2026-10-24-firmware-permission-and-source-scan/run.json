@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Record filesystem permissions, bounded source license evidence and the first Core2 AXP I2C failure",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a79166b68524948ef18480313e3ff3da98031901",
+    "result_commit": "386cb8f520d93e9a44c12cf5897f419124e5ec30"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "core2_public_source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "core2_normalized_flash_sha256": "743c4ea49e8031ca1e293e9160c4b2af65035bfdbe1d93675779241858007ec4"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; littlefs-python; patched QEMU",
+    "changed_files": 17,
+    "insertions": 1146,
+    "deletions": 44
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "329/329; 0 skipped"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "targeted_ruff_e9_f",
+      "status": "PASS"
+    },
+    {
+      "name": "python_compile",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "CI run 40092069629 for 386cb8f520d93e9a44c12cf5897f419124e5ec30"
+    },
+    {
+      "name": "filesystem_permission_policy",
+      "status": "PASS",
+      "detail": "structured FAT attributes; LittleFS/SPIFFS without Unix mode; runtime NOT RUN"
+    },
+    {
+      "name": "source_license_scan",
+      "status": "PASS",
+      "detail": "2 synthetic source files; MIT/Apache-2.0; sensitive path redacted"
+    },
+    {
+      "name": "core2_axp_trace",
+      "status": "PASS",
+      "detail": "AXP2101 chip id 0x4a read; no subsequent address-0x34 transaction before failure"
+    },
+    {
+      "name": "runtime_03_fix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "full_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/386cb8f520d93e9a44c12cf5897f419124e5ec30/tests/firmware/evidence-2026-10-24-filesystem-permission-policy.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/386cb8f520d93e9a44c12cf5897f419124e5ec30/tests/firmware/evidence-2026-10-24-source-license-scan.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/386cb8f520d93e9a44c12cf5897f419124e5ec30/tests/firmware/evidence-2026-10-24-core2-axp-i2c-trace.json"
+  ],
+  "notes": [
+    "Runtime filesystem ACL enforcement remains unverified.",
+    "Source scanning is bounded and not a legal opinion.",
+    "RUNTIME-03 is still OPEN but its first verified cause is now classified as legacy I2C driver/bus handoff.",
+    "No physical hardware or RF behavior is claimed."
+  ]
+}

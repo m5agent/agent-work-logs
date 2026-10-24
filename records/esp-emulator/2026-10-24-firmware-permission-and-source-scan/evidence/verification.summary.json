@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "result_commit": "386cb8f520d93e9a44c12cf5897f419124e5ec30",
+  "validation": "static firmware analysis and runtime diagnosis",
+  "platform": {
+    "tests": 329,
+    "passed": 329,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "targeted_ruff_e9_f": "PASS",
+    "python_compile": "PASS",
+    "github_actions": {
+      "run_id": 40092069629,
+      "status": "PASS",
+      "jobs": [
+        "network-namespace-policy",
+        "platform-contracts"
+      ]
+    }
+  },
+  "artifacts": {
+    "tests/firmware/evidence-2026-10-24-filesystem-permission-policy.json": "1ea5d7e4fcf599dd0af74cab3e4c9c8229e30c865cb4184964e3a6a7a7df61ab",
+    "tests/firmware/evidence-2026-10-24-source-license-scan.json": "2706f2827efc4ae168852b5b98713c493fab694a6360532f594845bca7b2f944",
+    "tests/firmware/evidence-2026-10-24-core2-axp-i2c-trace.json": "d8aca62908019c998ff5077fbcf8e26616db780b0f92f1cb17b3c7b7272a343a",
+    "platform/tools/firmware_manifest.schema.json": "67d9e849672353e1c6acc54d86d9e3d01953b9250eff0af1c0cc52f85556df56"
+  },
+  "source_license_scan": {
+    "status": "PASS",
+    "method": "bounded-source-spdx-header-scan",
+    "files_scanned": 2,
+    "declared_licenses": [
+      "Apache-2.0",
+      "MIT"
+    ],
+    "sensitive_path_redacted": true,
+    "policy_status": "REVIEW_REQUIRED"
+  },
+  "filesystem_permissions": {
+    "fat_model": "fat-attributes",
+    "fat_read_only_attribute_observed": true,
+    "littlefs_unix_mode": "not-recorded",
+    "spiffs_unix_mode": "not-recorded",
+    "runtime_enforcement": "NOT RUN"
+  },
+  "core2_axp_trace": {
+    "pmic": "axp2101",
+    "address": "0x34",
+    "chip_id_value": "0x4a",
+    "successful_probe": true,
+    "subsequent_axp_bus_transaction_observed": false,
+    "serial_error": "OSError: I2C bus error (19)",
+    "classification": "i2c_driver_or_bus_handoff_gap",
+    "runtime_gap_status": "OPEN"
+  },
+  "not_run": [
+    "runtime filesystem ACL enforcement",
+    "generated or out-of-package source license coverage",
+    "legal review",
+    "full UIFlow2 peripheral matrix",
+    "physical hardware validation"
+  ]
+}
