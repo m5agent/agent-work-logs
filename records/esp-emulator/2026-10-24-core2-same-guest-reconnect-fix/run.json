@@ -3,7 +3,7 @@
   "date": "2026-10-24",
   "kind": "code_change",
   "overall_status": "PASS",
-  "title": "Fix Core2 same-guest BLE reconnect and extend validation to sixty cycles",
+  "title": "Fix Core2 same-guest BLE reconnect and extend validation to 120 cycles",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "e686838e38dc8ec46daa6dbc2830322806ca7355",
@@ -205,6 +205,50 @@
         "run_id": 40082707627,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "one_hundred_twenty_cycle_reconnect",
+      "result_commit": "17280101d494519cad464f5cb3a4fd8509a0afcf",
+      "status": "PASS",
+      "evidence": "evidence/verification.reconnect120.summary.json",
+      "reconnect": {
+        "attempts": 3,
+        "passed": 3,
+        "cycles_per_attempt": 120,
+        "total_complete_cycles": 360,
+        "peer_cycle_markers_per_attempt": 120,
+        "guest_rx_markers_per_attempt": 120,
+        "guest_ack_markers_per_attempt": 120,
+        "hli_posts_consumed": "3377/3377",
+        "hli_events": 2297,
+        "hli_acls": 1080,
+        "hli_errors": 0,
+        "connection_l2cap_gatt_pool_free": "3/9/3",
+        "trace_gap_adv_start": 120,
+        "panics": 0,
+        "dropped_packets": 0
+      },
+      "shared_limits": {
+        "module": "platform/tools/ble_runtime_limits.py",
+        "reconnect_cycles": "1..120",
+        "rejected_test_cycles": 121,
+        "hold_seconds_max": 120
+      },
+      "api_contract": {
+        "version": "1.23.0",
+        "ble_reconnect_cycles_maximum": 120
+      },
+      "artifacts": {
+        "firmware_sha256": "4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02",
+        "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+        "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1"
+      },
+      "platform_tests": "321/321 PASS",
+      "github_actions": {
+        "run_id": 40085809150,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -292,11 +336,16 @@
       "detail": "source catalog, generated catalog, QEMU profile and current-status documents agree on the sixty-cycle evidence"
     },
     {
+      "name": "one_hundred_twenty_cycle_same_guest_reconnect",
+      "status": "PASS",
+      "detail": "3/3 independent leases; 120 cycles per lease; HLI 3377/3377"
+    },
+    {
       "name": "physical_hardware",
       "status": "NOT RUN"
     },
     {
-      "name": "more_than_sixty_cycles_or_multi_hour_soak",
+      "name": "more_than_one_hundred_twenty_cycles_or_multi_hour_soak",
       "status": "NOT RUN"
     }
   ],
@@ -307,12 +356,15 @@
     "evidence/verification.reconnect20.summary.json",
     "evidence/verification.reconnect30.summary.json",
     "evidence/verification.reconnect60.summary.json",
+    "evidence/verification.reconnect120.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40068768706",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40069447311",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070310548",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40074452179",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40079740981",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40082707627",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40085809150",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/17280101d494519cad464f5cb3a4fd8509a0afcf/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect120-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/d9b4969acd91e39e672ab7d7f939e26f6e5a28e3/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect60-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/c2545835091a6fb321c73a517fe66655c8160686/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect30-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/36e28d76b3c293975878d1980dbd5349d1a9efe4/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect20-3x.json",
@@ -331,7 +383,8 @@
     "A twenty-cycle follow-up passes in three independent leases after expanding the common API limit to 30.",
     "A thirty-cycle follow-up passes in three independent leases with 857/857 HLI posts/consumption.",
     "A sixty-cycle follow-up passes in three independent leases with 1697/1697 HLI posts/consumption; the shared reconnect range is 1..60 and 61 is rejected.",
-    "The source catalog, generated catalog, QEMU profile and current-status documents now agree on the sixty-cycle evidence.",
-    "More than sixty cycles, multi-hour soak and physical hardware remain open."
+    "The source catalog, generated catalog, QEMU profile and current-status documents now agree on the 120-cycle evidence.",
+    "A one-hundred-twenty-cycle follow-up passes in three independent leases with 3377/3377 HLI posts/consumption; the shared reconnect range is 1..120 and 121 is rejected.",
+    "More than 120 cycles, multi-hour soak and physical hardware remain open."
   ]
 }

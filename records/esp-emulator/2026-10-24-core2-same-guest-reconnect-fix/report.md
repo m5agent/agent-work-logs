@@ -312,3 +312,52 @@ lease，每个要求 60 轮：
 回滚：revert
 `d9b4969acd91e39e672ab7d7f939e26f6e5a28e3`。回滚后 reconnect API 恢复
 `1..30`，60 轮 evidence 和历史 2/5/10/20/30 轮记录仍保留。
+
+## Follow-up：120 轮重连
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ 17280101d494519cad464f5cb3a4fd8509a0afcf`。
+
+变更：
+
+- `platform/tools/ble_runtime_limits.py` 的 reconnect 上限从 `60` 提升到
+  `120`；
+- Device Service、Bumble peer 和 runner 继续共享同一上限；
+- 契约测试接受 120、拒绝 121；
+- OpenAPI 升到 `1.23.0`，`ble_reconnect_cycles.maximum` 为 `120`；
+- 源 catalog、生成 catalog、QEMU profile、当前状态、Backlog、工作流台账、
+  网络专题和测试说明统一到 120 轮事实。
+
+使用同一 unified Core2 镜像、ELF 和 QEMU SHA，运行 3 个独立 `/api/v1`
+lease，每个要求 120 轮：
+
+- 每个 attempt 的 peer、guest RX 和 ACK marker 均为 120；
+- HLI posts/consumed 均为 `3377/3377`；
+- events `2297`、ACLs `1080`；
+- `hli-errors=0`，HLI/meta/TX queue 深度为 0；
+- connection/L2CAP/GATT 池均回到 `3/9/3`；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=120`；
+- frame/QOM、WiFi/公网、pcap、evidence 和 manifest binding 全部 PASS；
+- 三次 frame SHA256 一致，QOM 为 34 节点；
+- 无 panic、无 dropped packet。
+
+验证：
+
+- 平台套件 `321/321 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、`compileall` 和
+  `git diff --check`：`PASS`；
+- GitHub Actions CI run `40085809150`：两个 job 均 `PASS`；
+- 完整 UIFlow2 67-case 外设矩阵本轮未重跑。
+
+边界：
+
+- virtual-device validation，不是物理 RF、功耗或硬件；
+- 120 轮短时 reconnect 不等于超过一百二十轮或多小时 coexistence/soak；
+- 未证明 pairing、secure connection、encrypted reconnect；
+- 未证明 bit-exact BT controller/baseband；
+- 未证明物理 cache/PSRAM 时序。
+
+回滚：revert
+`17280101d494519cad464f5cb3a4fd8509a0afcf`。回滚后 reconnect API 恢复
+`1..60`，120 轮 evidence 和历史 2/5/10/20/30/60 轮记录仍保留。
