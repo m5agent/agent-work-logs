@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "transport-security validation",
+  "scope": "same-host-loopback-real-tls-unified-job",
+  "result_commit": "48ff20c416221e20f76873c07d7473329318eb5c",
+  "previous_follow_up_commit": "865e4f810263f3f388beeee3aa577de27f99d0b1",
+  "tls": {
+    "minimum_version": "TLSv1.2",
+    "observed_version": "TLSv1.3",
+    "server_certificate_verification": "PASS",
+    "client_certificate_required": "PASS"
+  },
+  "worker_transport": {
+    "base_url_scheme": "https",
+    "bearer_and_worker_hmac_preserved": "PASS",
+    "unsigned_claim_http": 401,
+    "worker_agent_exit_code": 0
+  },
+  "live_job": {
+    "profile": "uiflow2-sticks3-unified",
+    "runtime": "qemu-unified",
+    "status": "completed",
+    "result_state": "PASS",
+    "attempts": 1,
+    "firmware_sha256": "43429d475fea7ce8dfd24fe34c373e8cd0cb9196b1f64a1f60f42957547580c9",
+    "evidence_bytes": 42949,
+    "evidence_sha256": "87fb8d04f630833cbebcc2d0842a8dabe94b02a4f20c6c60a106341496a4f423",
+    "serial_markers": "PASS",
+    "network_evidence": "PASS",
+    "pcap_bytes": 9570,
+    "frame_bytes": 2885
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/48ff20c416221e20f76873c07d7473329318eb5c/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-unified-job-pass.json",
+  "source_evidence_sha256": "13cf2c6abef1ef1bda3fb60a96cd8e7b445892c2146364b5d6f3a74773326348",
+  "platform": {
+    "tests": 305,
+    "passed": 305,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40071841654,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "cross-host network topology or latency",
+    "certificate or worker credential rotation",
+    "production CA and certificate lifecycle",
+    "multi-host scheduling or worker continuity",
+    "hardware validation"
+  ]
+}

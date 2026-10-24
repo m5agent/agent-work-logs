@@ -37,6 +37,31 @@
         "run_id": 40071518376,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "unified_sticks3_job_over_mtls",
+      "result_commit": "48ff20c416221e20f76873c07d7473329318eb5c",
+      "status": "PASS",
+      "evidence": "evidence/verification.unified-job.summary.json",
+      "scope": "same-host loopback; qemu-unified/profile=uiflow2-sticks3-unified",
+      "job": {
+        "status": "completed",
+        "result_state": "PASS",
+        "attempts": 1,
+        "evidence_bytes": 42949,
+        "evidence_sha256": "87fb8d04f630833cbebcc2d0842a8dabe94b02a4f20c6c60a106341496a4f423",
+        "firmware_sha256": "43429d475fea7ce8dfd24fe34c373e8cd0cb9196b1f64a1f60f42957547580c9",
+        "serial_markers": "PASS",
+        "network_evidence": "PASS",
+        "pcap_bytes": 9570,
+        "frame_bytes": 2885
+      },
+      "platform_tests": "305/305 PASS",
+      "github_actions": {
+        "run_id": 40071841654,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -103,8 +128,11 @@
   "evidence": [
     "evidence/verification.transport.json",
     "evidence/verification.qemu-job.summary.json",
+    "evidence/verification.unified-job.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070863490",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071518376",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40071841654",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/48ff20c416221e20f76873c07d7473329318eb5c/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-unified-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/865e4f810263f3f388beeee3aa577de27f99d0b1/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-qemu-job-pass.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd/tests/network/worker_tls/evidence-2026-10-24-tls-mtls-pass.json"
   ],
@@ -113,6 +141,7 @@
     "Client hostname verification is enabled and has no bypass option.",
     "Worker HMAC remains mandatory for worker-only mutations.",
     "The original live transport test was loopback-only and did not execute a QEMU job.",
-    "A follow-up now executes a real runtime=qemu StickS3 job over mTLS with evidence SHA256 and terminal PASS."
+    "A follow-up now executes a real runtime=qemu StickS3 job over mTLS with evidence SHA256 and terminal PASS.",
+    "A further follow-up executes the unified StickS3 profile over mTLS and verifies board/WiFi/BLE markers, network evidence, pcap and frame from the same evidence ZIP."
   ]
 }

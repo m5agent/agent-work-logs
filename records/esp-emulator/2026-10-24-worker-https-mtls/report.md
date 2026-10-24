@@ -113,3 +113,33 @@ HMAC 的旧能力；不得把回滚状态用于跨主机不可信网络。
 该 QEMU job 使用 `runtime=qemu`，没有声明 unified board/network/UI PASS。
 跨主机网络、证书/worker 凭据热轮换、生产 CA 生命周期、多主机调度、
 companion continuity 和真机仍未验证。
+
+## Follow-up：unified StickS3 job over mTLS
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ 48ff20c416221e20f76873c07d7473329318eb5c`。
+
+该门禁通过 mTLS 上传 unified StickS3 flash，创建
+`qemu-unified/profile=uiflow2-sticks3-unified` durable job。带客户端证书
+和 worker HMAC 的 agent 完成 claim、真实 QEMU unified session、evidence
+下载和 terminal result。
+
+从同一个 evidence ZIP 独立验证：
+
+- `UNIFIED_STICKS3_BOOT/MAIN/READY`；
+- WiFi connected、HTTP PASS；
+- BLE ready、RX、ACK；
+- network evidence `PASS` 且全部 checks 为 true；
+- pcap `9570` bytes；
+- PNG frame `2885` bytes；
+- evidence ZIP `42949` bytes；
+- evidence SHA256
+  `87fb8d04f630833cbebcc2d0842a8dabe94b02a4f20c6c60a106341496a4f423`；
+- job `completed / PASS / attempts=1`；
+- firmware SHA256
+  `43429d475fea7ce8dfd24fe34c373e8cd0cb9196b1f64a1f60f42957547580c9`。
+
+平台测试 `305/305 PASS`，CI run `40071841654` 两个 job 成功。
+
+该结果证明 retained unified StickS3 路径可与 mTLS worker 控制面组合；不证明
+任意固件、跨主机拓扑、证书/凭据热轮换、多主机 continuity 或真机。
