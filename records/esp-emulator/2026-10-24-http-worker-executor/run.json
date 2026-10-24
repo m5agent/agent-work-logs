@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Execute durable simulator jobs with an HTTP-only worker agent",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b31c3ab6d827b7e2a7199e3e30e75952fe4eaa20",
+    "result_commit": "d200bada9e72593db21cdfb191cdb59e488439a4",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40056513345"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "live_guest": "StickS3 reference QEMU session",
+    "physical_device": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, same-host real StickS3 QEMU job, Python 3",
+    "platform_tests": "292/292 PASS",
+    "worker_agent_tests": "3/3 PASS",
+    "live_executor": "1/1 PASS",
+    "github_actions": "292 tests, OK (skipped=2)"
+  },
+  "checks": [
+    {
+      "name": "persistent_worker_generation",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_registration_and_heartbeat",
+      "status": "PASS"
+    },
+    {
+      "name": "durable_job_claim",
+      "status": "PASS"
+    },
+    {
+      "name": "job_lease_heartbeat",
+      "status": "PASS"
+    },
+    {
+      "name": "real_sticks3_qemu_session",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence_zip_download_and_sha256",
+      "status": "PASS"
+    },
+    {
+      "name": "session_stop_purge_zero",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal_job_result",
+      "status": "PASS",
+      "detail": "completed / PASS / attempt 1"
+    },
+    {
+      "name": "worker_stop_on_clean_exit",
+      "status": "PASS"
+    },
+    {
+      "name": "cross_host_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "worker_auth_and_lease_fencing_hardening",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "companion_evidence_continuity",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "production_multi_host_scheduler",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/d200bada9e72593db21cdfb191cdb59e488439a4/tests/network/worker_executor/evidence-2026-10-24-executor-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/d200bada9e72593db21cdfb191cdb59e488439a4/platform/tools/worker_agent.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/d200bada9e72593db21cdfb191cdb59e488439a4/platform/tests/test_worker_agent.py"
+  ],
+  "notes": [
+    "The retained execution is same-host and uses only public HTTP APIs.",
+    "Session running is a control-plane state, not an application UI PASS.",
+    "Cross-host transport and worker authorization hardening remain open.",
+    "No raw session ID, PID or device identifier is committed."
+  ]
+}

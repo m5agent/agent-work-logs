@@ -28,6 +28,12 @@ worker stale、stopped、missing 或 generation 被替换时，supervisor 会释
 [`2026-10-24-qemu-restart-reattach`](../2026-10-24-qemu-restart-reattach/)
 已补本地 QEMU/QMP 控制面 restart re-attach；companion/evidence 连续性仍开放。
 
+同一主机上的独立 HTTP executor 已由
+[`2026-10-24-http-worker-executor`](../2026-10-24-http-worker-executor/)
+补齐，并真实运行 StickS3 QEMU job、下载 evidence ZIP/SHA256 和提交
+completed/PASS；跨主机执行、worker auth 强化和 companion continuity
+仍开放。
+
 ## 关键证据
 
 - 平台测试：`289/289 PASS`；
