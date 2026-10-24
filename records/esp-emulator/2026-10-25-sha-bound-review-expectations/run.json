@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add SHA-bound UI, headless and network-first firmware review expectations",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e41bfd5b2e4dd0b582e1caa946d2245a67a37218",
+    "result_commit": "351eb16d49f1ffbef562810668f3248e1cfc7f52",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40139992678",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "name": "OpenAI Voice Assistant For AtomS3R",
+    "firmware_id": "1897200000000000358",
+    "sha256": "b3597fcabbff57c98618caa8754af84745e9eac35b2868ab3c4cb0935b7c59b3",
+    "normalized_flash_sha256": "991b1cf328bec7677ed1335d567bfcb7b6c941c1bd6b658eb991b84940b3ce8d",
+    "nvs_fixture_sha256": "14f0acc47e1e1bef7e19d29c90febd0fe3707599fd8fc42eeb14dd27cfc26e5d"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Device Service; QEMU ESP32-S3 WiFi; GitHub Actions Ubuntu",
+    "mode": "network-first",
+    "runtime": "qemu-wifi",
+    "profile": "generic-observe",
+    "session_id": "25d4808c15c14585b0e2fad3adf4ec19",
+    "expectation_sha256": "25c42d6ade2b946a6e1e597b2604dbcbf5627d20a2b8afa5e4a031519b952096",
+    "expectation_file_sha256": "82569c83aae4995d1dbe34af17686a64400eb738a624f73e0835c697dab32f8b",
+    "schema_sha256": "9e83276d42d4013109d03eddcebf3643e04ade83b4ac5e07ec5fcc466feb24e4",
+    "source_evidence_sha256": "2da3a2fffd09674ff42a3d0e68cee3fcad1c20779f0bfeab6672bec917aeb64c",
+    "platform_tests": 387,
+    "documentation_tests": 20
+  },
+  "checks": [
+    {
+      "name": "ui_interactive_default_preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "headless_serial_markers",
+      "status": "PASS"
+    },
+    {
+      "name": "network_first_guest_markers",
+      "status": "PASS",
+      "detail": "wifi:connected and got ip:"
+    },
+    {
+      "name": "network_status",
+      "status": "PASS"
+    },
+    {
+      "name": "pcap",
+      "status": "PASS",
+      "detail": "37 packets; api.openai.com DNS; TCP/443"
+    },
+    {
+      "name": "sha_bound_expectation",
+      "status": "PASS",
+      "detail": "stale firmware SHA fails closed"
+    },
+    {
+      "name": "fixture_binding",
+      "status": "PASS",
+      "detail": "NVS fixture SHA participates in expectation digest and result key"
+    },
+    {
+      "name": "secret_handling",
+      "status": "PASS",
+      "detail": "literal WiFi passwords rejected; environment reference only"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "387/387"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "20/20"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "real_openai_service",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/351eb16d49f1ffbef562810668f3248e1cfc7f52/tests/firmware/evidence-2026-10-25-network-first-review-expectation.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/351eb16d49f1ffbef562810668f3248e1cfc7f52/platform/tools/user_firmware_expectations.schema.json"
+  ],
+  "notes": [
+    "FirmwareManifest remains factual; operator review intent is external and SHA-bound.",
+    "The accepted scope is virtual-device network-first validation, not a real OpenAI or RF session.",
+    "UI defaults remain strict; headless/network modes require explicit markers and network evidence."
+  ]
+}

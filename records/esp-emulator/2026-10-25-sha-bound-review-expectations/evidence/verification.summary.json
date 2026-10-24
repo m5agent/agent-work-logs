@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-25T06:47:00+08:00",
+  "scope": "virtual-device-validation-not-hardware",
+  "source": {
+    "base_commit": "e41bfd5b2e4dd0b582e1caa946d2245a67a37218",
+    "result_commit": "351eb16d49f1ffbef562810668f3248e1cfc7f52",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40139992678",
+    "ci_status": "PASS"
+  },
+  "contract": {
+    "schema_version": 1,
+    "schema_sha256": "9e83276d42d4013109d03eddcebf3643e04ade83b4ac5e07ec5fcc466feb24e4",
+    "modes": [
+      "ui-interactive",
+      "headless-serial",
+      "network-first"
+    ],
+    "sha_bound_fields": [
+      "device_id",
+      "firmware_id",
+      "sha256"
+    ],
+    "result_key_inputs": [
+      "firmware_sha256",
+      "expectation_sha256",
+      "nvs_fixture_sha256",
+      "sd_fixture_sha256"
+    ],
+    "literal_wifi_password": "REJECTED",
+    "secret_reference": "wifi_password_env",
+    "ui_default_weakening": false
+  },
+  "firmware": {
+    "firmware_id": "1897200000000000358",
+    "name": "OpenAI Voice Assistant For AtomS3R",
+    "source_sha256": "b3597fcabbff57c98618caa8754af84745e9eac35b2868ab3c4cb0935b7c59b3",
+    "normalized_flash_sha256": "991b1cf328bec7677ed1335d567bfcb7b6c941c1bd6b658eb991b84940b3ce8d",
+    "nvs_fixture_sha256": "14f0acc47e1e1bef7e19d29c90febd0fe3707599fd8fc42eeb14dd27cfc26e5d",
+    "nvs_bytes": 24576,
+    "synthetic_values": true
+  },
+  "expectation": {
+    "mode": "network-first",
+    "runtime": "qemu-wifi",
+    "profile": "generic-observe",
+    "wifi_auth": "open",
+    "expectation_sha256": "25c42d6ade2b946a6e1e597b2604dbcbf5627d20a2b8afa5e4a031519b952096",
+    "expectation_file_sha256": "82569c83aae4995d1dbe34af17686a64400eb738a624f73e0835c697dab32f8b",
+    "required_markers": [
+      "wifi:connected with myssid",
+      "got ip:"
+    ],
+    "forbidden_markers": []
+  },
+  "execution": {
+    "session_id": "25d4808c15c14585b0e2fad3adf4ec19",
+    "status": "PASS",
+    "status_reason": "network-first_expectation_ok",
+    "application_ready": true,
+    "pre_stop_state": "running",
+    "stop_state": "stopped",
+    "required_markers_observed": true,
+    "forbidden_markers_observed": false,
+    "network_status": "PASS",
+    "pcap_required": true,
+    "pcap_observed": true,
+    "serial_bytes": 14256,
+    "serial_sha256": "14cffaa49aa83fcf3a38b2de721d55014a4dd3843e79c297675aa87aca607072",
+    "fatal_error_lines": []
+  },
+  "packet_capture": {
+    "status": "PASS",
+    "packets": 37,
+    "sha256": "2eb8c0b314013f1aaf2aaf9cfac4f1064e09d8ed384feb70b97271c0f6d4bf0e",
+    "dns_queries": [
+      "api.openai.com."
+    ],
+    "tcp_443_flows": 1,
+    "dhcp_message_sequence": [
+      "DISCOVER",
+      "OFFER",
+      "REQUEST",
+      "ACK"
+    ]
+  },
+  "verification": {
+    "platform_tests": {
+      "passed": 387,
+      "total": 387
+    },
+    "documentation_tests": {
+      "passed": 20,
+      "total": 20
+    },
+    "node_upload_sha": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_fatal": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "ci_platform_contracts": "PASS",
+    "ci_network_namespace_policy": "PASS"
+  },
+  "validation_boundaries": {
+    "real_openai_service": "NOT RUN",
+    "realtime_webrtc_audio": "NOT RUN",
+    "wpa3_sae": "NOT RUN",
+    "wpa2_group_key_multicast": "NOT RUN",
+    "physical_rf": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "full_peripheral_matrix": "NOT RUN"
+  }
+}

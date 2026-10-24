@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-25 | `esp-emulator` | SHA-bound UI/headless/network-first 固件审查预期 | `PASS`（virtual-device：OpenAI BIN+NVS fixture 完成 guest marker、network PASS、DNS/TCP443/37-packet pcap；387/387、20/20、CI PASS；真实 key/云服务/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-25-sha-bound-review-expectations/) |
 | 2026-10-25 | `esp-emulator` | 代码、文档与当前工作/待办收口 | `PASS`（docs/contracts：377/377、20/20、snapshot/catalog/coverage、CI PASS；IPv4/IPv6 与 WPA2 边界纠偏；真机与完整矩阵 NOT RUN） | [查看](esp-emulator/2026-10-25-code-doc-current-state-consolidation/) |
 | 2026-10-25 | `esp-emulator` | ESP32-S3 WPA2-PSK 正确/错误密码数据面 | `PASS`（virtual-device：RSN/M1-M4/CCMP、正确密码 DHCP+DNS+TCP443、错误密码 deauth/无 DHCP、15/15 定向矩阵、CI PASS；WPA3/group multicast/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-25-s3-wpa2-psk-data-plane/) |
 | 2026-10-25 | `esp-emulator` | Worker-local StickS3 QEMU across network namespaces | `PASS`（virtual-device：18/18 checks、真实 QEMU、artifact/firmware/evidence/QEMU reap/namespace cleanup；physical cross-host/reattach/companion continuity/真机 NOT RUN） | [查看](esp-emulator/2026-10-24-http-worker-executor/followups/2026-10-25-control-runtime-plane-split/followups/2026-10-25-worker-local-qemu/) |
