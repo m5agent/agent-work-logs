@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Authenticated worker control plane across network namespaces",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ee335da6b11c9dbd30c7342426c712e1885c43b8",
+    "commit": "ad6e96e69757eafd13993f0d45484c42d4476182"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "privileged Linux container and GitHub Actions ubuntu-latest",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "worker_exit",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_route_uses_veth",
+      "status": "PASS"
+    },
+    {
+      "name": "authenticated_worker_registration",
+      "status": "PASS"
+    },
+    {
+      "name": "job_submit_and_claim",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_and_job_heartbeat",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal_completed",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_stop",
+      "status": "PASS"
+    },
+    {
+      "name": "no_qemu_or_device_session",
+      "status": "PASS"
+    },
+    {
+      "name": "credential_not_logged",
+      "status": "PASS"
+    },
+    {
+      "name": "namespace_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "340 of 340 tests passed"
+    },
+    {
+      "name": "ci_network_policy",
+      "status": "PASS",
+      "run_id": 40100348076
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ad6e96e69757eafd13993f0d45484c42d4476182/tests/network/worker_cross_netns/evidence-2026-10-24-cross-namespace-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40100348076"
+  ],
+  "notes": [
+    "Control-plane transport only.",
+    "No QEMU process or device session was created.",
+    "Cross-host QEMU executor, re-attach and companion continuity remain NOT RUN."
+  ]
+}

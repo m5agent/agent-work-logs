@@ -43,6 +43,8 @@ Follow-up：
 - [`2026-10-24-dns-aaaa-and-capability-intake`](followups/2026-10-24-dns-aaaa-and-capability-intake/)：
   IPv6 preflight、A/AAAA resolver、WebBurner capability intake 和
   sdkconfig detected capability。
+- [`2026-10-24-cross-netns-worker-control-plane`](followups/2026-10-24-cross-netns-worker-control-plane/)：
+  真实 server/worker namespace 间 authenticated submit/claim/heartbeat/result。
 
 ## 未覆盖项
 
