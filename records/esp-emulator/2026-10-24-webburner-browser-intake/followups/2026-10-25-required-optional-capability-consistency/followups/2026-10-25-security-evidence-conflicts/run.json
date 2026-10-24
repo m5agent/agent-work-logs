@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Flag conflicting firmware security evidence",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "6e2e7693f8b5edf787d49ecb709bdc00acaaa7f0",
+    "result_commit": "57d65bcb5009831be8346332938631644cc98872",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40112470601"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "fixture": "synthetic-static-esp32s3-security-evidence",
+    "runtime_execution": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS Python platform tests",
+    "firmware_manifest_tests": "22/22 PASS",
+    "documentation_consistency": "19/19 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "config_enabled_efuse_disabled",
+      "status": "WARNING"
+    },
+    {
+      "name": "config_disabled_efuse_enabled",
+      "status": "WARNING"
+    },
+    {
+      "name": "secure_boot_mode_mismatch",
+      "status": "WARNING"
+    },
+    {
+      "name": "secure_boot_key_purpose_missing",
+      "status": "WARNING"
+    },
+    {
+      "name": "flash_encryption_key_purpose_missing",
+      "status": "WARNING"
+    },
+    {
+      "name": "efuse_summary_unverified",
+      "status": "PASS"
+    },
+    {
+      "name": "raw_key_material_absent",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_security_execution",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/57d65bcb5009831be8346332938631644cc98872/tests/firmware/evidence-2026-10-25-security-evidence-conflicts.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/57d65bcb5009831be8346332938631644cc98872/platform/tools/firmware_manifest.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/57d65bcb5009831be8346332938631644cc98872/platform/tests/test_firmware_manifest.py"
+  ],
+  "notes": [
+    "Security conflicts are warnings, not proof that package eFuse claims are authentic.",
+    "No secure boot or Flash Encryption runtime execution was performed.",
+    "No physical hardware claim."
+  ]
+}
