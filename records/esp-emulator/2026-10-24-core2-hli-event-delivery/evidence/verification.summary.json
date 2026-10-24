@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-24T09:05:00+08:00",
+  "scope": "core2-firmware-hli-real-hci-event-delivery",
+  "status": "PASS",
+  "source_commit": "acd5329c4fecb23d7ac2cb1e5dd6dcf370c673f5",
+  "base_commit": "543f900225457c6b7cbd03f30a3ef01844119359",
+  "firmware": {
+    "family": "stock UIFlow2 v2.5.3",
+    "sha256": "906ba16439f8f8b421adb9ba3817ebf91d677498b0096c38e851a63570a8b680",
+    "bytes": 16777216
+  },
+  "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+  "qemu_sha256": "e13c43976eac7abebd462e7ec31b6d18cbf43007d4a11eae57348a7f8e861a98",
+  "runtime": {
+    "machine": "m5core2",
+    "accel": "tcg,thread=single",
+    "icount": "shift=auto,align=off,sleep=off",
+    "hci_peer": "Bumble controller"
+  },
+  "patch": {
+    "file": "patches/qemu-core2-native-hci/0002-esp32-native-hci-hli-event.patch",
+    "sha256": "0525e5b8f3a81241de919e3cb4c092a3aa5a6ab395de5ee2b85d714cf8f7c518",
+    "forward_check": "PASS",
+    "reverse_check": "PASS"
+  },
+  "event": {
+    "h4": "040e0401030c00",
+    "host_buffer": "0e0401030c00",
+    "callback": "ble_transport_to_hs_evt_impl",
+    "allocation": "ble_transport_alloc_evt(0)",
+    "queue_event": 13
+  },
+  "repeated_runs": [
+    {
+      "run": 1,
+      "status": "PASS",
+      "first": "01030c00",
+      "next": "01011000",
+      "hli_posts": 1,
+      "hli_consumed": 1,
+      "hli_errors": 0,
+      "malformed_packets": 0,
+      "dropped_packets": 0
+    },
+    {
+      "run": 2,
+      "status": "PASS",
+      "first": "01030c00",
+      "next": "01011000",
+      "hli_posts": 1,
+      "hli_consumed": 1,
+      "hli_errors": 0,
+      "malformed_packets": 0,
+      "dropped_packets": 0
+    },
+    {
+      "run": 3,
+      "status": "PASS",
+      "first": "01030c00",
+      "next": "01011000",
+      "hli_posts": 1,
+      "hli_consumed": 1,
+      "hli_errors": 0,
+      "malformed_packets": 0,
+      "dropped_packets": 0
+    },
+    {
+      "run": 4,
+      "status": "PASS",
+      "first": "01030c00",
+      "next": "01011000",
+      "hli_posts": 1,
+      "hli_consumed": 1,
+      "hli_errors": 0,
+      "malformed_packets": 0,
+      "dropped_packets": 0
+    },
+    {
+      "run": 5,
+      "status": "PASS",
+      "first": "01030c00",
+      "next": "01011000",
+      "hli_posts": 1,
+      "hli_consumed": 1,
+      "hli_errors": 0,
+      "malformed_packets": 0,
+      "dropped_packets": 0
+    }
+  ],
+  "checks": {
+    "platform_tests": "267/267 PASS",
+    "github_actions_40044998540": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "complete_hci_gatt": "NOT RUN",
+    "device_service_repeated_lease": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "not_claimed": [
+    "controller ACL delivery",
+    "complete HCI command sequence",
+    "BLE advertisement, connection or GATT",
+    "bit-exact Espressif BT controller/baseband",
+    "physical hardware"
+  ]
+}
