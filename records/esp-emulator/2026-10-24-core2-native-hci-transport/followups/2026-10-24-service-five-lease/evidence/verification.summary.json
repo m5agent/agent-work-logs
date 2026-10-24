@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-core2-native-hci-service-five-lease-summary",
+  "scope": "virtual-device validation",
+  "source_commit": "de5a6c737548c88ade1e318d424da254e3d0778c",
+  "base_commit": "30022795b2ac0956d9bc2b3225398d406a17a27f",
+  "ci": {
+    "run_id": 40054836265,
+    "conclusion": "success",
+    "platform_tests": {
+      "total": 283,
+      "status": "PASS",
+      "detail": "OK (skipped=2)"
+    },
+    "network_namespace_policy": "PASS",
+    "node_sha256_upload": "2/2 PASS"
+  },
+  "local": {
+    "platform_tests": {
+      "total": 283,
+      "status": "PASS"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "openapi_yaml": "PASS",
+    "ruff_f_plus_ignored_existing_e402_e501": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "service_gate": {
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "attempts_requested": 5,
+    "attempts_passed": 5,
+    "gdb_bridge": false,
+    "frame": {
+      "status": "PASS",
+      "width": 320,
+      "height": 240,
+      "sha256": "5bfcdf8fc518a36385783a9b5bf09b3fbce9d8c07406326955569f6c7db8408b"
+    },
+    "qom_nodes": 27,
+    "wifi_dhcp_http": "PASS",
+    "public_dns_http": "PASS",
+    "external_nus_gatt": "PASS",
+    "pcap": "PASS",
+    "evidence_zip": "PASS",
+    "post_docs_runner_recheck": "1/1 PASS"
+  },
+  "hashes": {
+    "firmware_sha256": "65c27baf132db1e8d97207d812dd945c782adcfb5ffc1ec67a4eee5656782e5d",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "29b30d78d8634aad22877f3f893d8f35a8b10870c8b4870e26c7eaf3cfc4ccdf",
+    "evidence_sha256": "d71d8c239cea9f2d4c7f2829eeb8997e49eca0cb86f21ccfaa0226521e2a3b51",
+    "runner_sha256": "c049c979011be37cd951d4ee6bdd74517c9bace12d5521fe1353890536d71cde"
+  },
+  "documentation_reconciliation": {
+    "canonical_profile": "core2-native-hci",
+    "legacy_profile": "core2-native-vhci",
+    "backlog_completed_task_removed": "CORE2-01",
+    "remaining_core2_task": "CORE2-02",
+    "openapi_version": "1.16.0",
+    "unified_profile_count": 14
+  },
+  "not_run": [
+    "QEMU rebuild",
+    "bit-exact Espressif BT controller/baseband",
+    "physical cache/PSRAM equivalence",
+    "coexistence, throughput and long soak",
+    "physical hardware",
+    "malware sandbox",
+    "other Core2 firmware builds with different hook offsets"
+  ],
+  "not_claimed": [
+    "RF, antenna, WPA2/WPA3 or power behavior",
+    "physical hardware validation",
+    "bit-exact controller behavior",
+    "safe execution of untrusted firmware"
+  ]
+}

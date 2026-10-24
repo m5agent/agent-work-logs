@@ -91,6 +91,7 @@
 | 2026-10-24 | ESP Emulator | Core2 HLI 真实 Reset Complete 交付 | PASS（virtual-device narrow path：池化 HCI event 经 HLI queue/ISR/controller task 交付，`01030c00 → 01011000` 连续 5/5；ACL、完整 GATT、Device Service 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-hli-event-delivery/) |
 | 2026-10-24 | ESP Emulator | FirmwareManifest 声明级许可 allowlist/denylist | PASS（static policy：provenance/FS/SBOM 声明汇总、allow/deny/unknown 状态、schema 与 272 tests、CI PASS；完整源码扫描/法律结论/运行时权限 NOT RUN） | [查看](records/esp-emulator/2026-10-24-license-policy/) |
 | 2026-10-24 | ESP Emulator | 远程 worker 注册目录、文档再对账与 Core2 HLI/API 诊断 | PASS（code/API/docs follow-up：283/283 tests、12 QEMU-backed + Tab5 profile guard、Core2 NUS write 2/2 但 notification 0/2；supervisor/队列/re-attach 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-remote-worker-directory-and-work-inventory/) |
+| 2026-10-24 | ESP Emulator | Core2 native HCI Device Service 五 lease 与文档总整理 | PASS（virtual-device：`core2-native-hci` 5/5、frame/QOM/WiFi/公网/NUS GATT/pcap/evidence PASS、GDB bridge absent；bit-exact controller、物理等价性、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-native-hci-transport/followups/2026-10-24-service-five-lease/) |
 
 ## 目录结构
 

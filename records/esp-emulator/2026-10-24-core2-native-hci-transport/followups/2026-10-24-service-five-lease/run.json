@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Close the Core2 native HCI Device Service five-lease gate",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "30022795b2ac0956d9bc2b3225398d406a17a27f",
+    "result_commit": "de5a6c737548c88ade1e318d424da254e3d0778c",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40054836265"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "65c27baf132db1e8d97207d812dd945c782adcfb5ffc1ec67a4eee5656782e5d",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "29b30d78d8634aad22877f3f893d8f35a8b10870c8b4870e26c7eaf3cfc4ccdf"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, QEMU 9.2.2 Xtensa, m5core2 stock UIFlow2 v2.5.3",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "service_api": "/api/v1",
+    "gdb_bridge": false,
+    "attempts_requested": 5,
+    "attempts_passed": 5,
+    "post_docs_runner_recheck": "1/1 PASS",
+    "local_platform_tests": "283/283 PASS",
+    "github_actions_tests": "283 tests, OK (skipped=2)",
+    "node_tests": "2/2 PASS"
+  },
+  "checks": [
+    {
+      "name": "device_service_five_lease",
+      "status": "PASS",
+      "detail": "Five independent leases and QEMU processes"
+    },
+    {
+      "name": "frame",
+      "status": "PASS",
+      "detail": "320x240; stable SHA256 across all five leases"
+    },
+    {
+      "name": "qom",
+      "status": "PASS",
+      "detail": "27 nodes"
+    },
+    {
+      "name": "wifi_dhcp_http",
+      "status": "PASS"
+    },
+    {
+      "name": "public_dns_http",
+      "status": "PASS"
+    },
+    {
+      "name": "external_nus_gatt",
+      "status": "PASS",
+      "detail": "External discovery/subscription/write/notify and Bumble ACK"
+    },
+    {
+      "name": "pcap",
+      "status": "PASS",
+      "detail": "Non-empty capture present in every evidence ZIP"
+    },
+    {
+      "name": "evidence_bundle",
+      "status": "PASS",
+      "detail": "Serial, frame, QOM, network, peer and manifest all retained"
+    },
+    {
+      "name": "gdb_bridge_absent",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "openapi_yaml",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_rebuild",
+      "status": "NOT RUN",
+      "detail": "Reused the validated QEMU binary by SHA256"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "coexistence_soak",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/de5a6c737548c88ade1e318d424da254e3d0778c/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-service-5x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/de5a6c737548c88ade1e318d424da254e3d0778c/tests/uiflow2/core2_native_hci/run_service_5x.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/de5a6c737548c88ade1e318d424da254e3d0778c/platform/tools/device_service.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/de5a6c737548c88ade1e318d424da254e3d0778c/platform/tools/xtensa_elf_symbols.py"
+  ],
+  "notes": [
+    "core2-native-hci is now the canonical stock-firmware Device Service profile.",
+    "core2-native-vhci remains an explicit GDB diagnostic/compatibility path.",
+    "Hook offsets are pinned to the validated UIFlow2 v2.5.3 build.",
+    "No firmware, ELF, QEMU binary, credential, session ID or artifact ID is committed."
+  ]
+}

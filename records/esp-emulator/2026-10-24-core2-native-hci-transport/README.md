@@ -19,7 +19,13 @@ overflow drop、peer open/close counters 和 clean shutdown。QEMU patch
 
 该结果不表示 stock guest VHCI、C2H callback 或 native BT controller 已接通；
 H2C guest capture、vCPU-safe C2H commit、BLE discovery/GATT 和 repeated
-Device Service lease 仍为 `NOT RUN`。
+Device Service lease 在本记录当时仍为 `NOT RUN`。
+
+后续
+[`2026-10-24-service-five-lease`](followups/2026-10-24-service-five-lease/)
+已把完整 stock H2C/C2H/GATT 路径推进到五个独立 Device Service lease
+`5/5 PASS`，且不启动 GDB bridge。该 follow-up 不改变本页对 HCI-1
+transport-only 原始结论的记录。
 
 ## 关键证据
 
@@ -39,11 +45,14 @@ Device Service lease 仍为 `NOT RUN`。
 - `evidence/summary.json`：脱敏聚合结果。
 - `followups/2026-10-24-guest-h2c-capture/`：后续无 GDB 捕获 stock
   HCI Reset，完整 sequence 仍等待 C2H。
+- `followups/2026-10-24-service-five-lease/`：后续 HCI-4 五 lease
+  Device Service PASS，并完成文档/Backlog 对账。
 
 ## 未覆盖项
 
 - guest H2C 从 `vhci_env_p`/`API_vhci_host_send_packet` 进入 QEMU transport；
 - Bumble C2H 在 vCPU 安全点进入 firmware `notify_host_recv`；
 - stock BLE scan/connect/NUS；
-- repeated Device Service lease；
+- repeated Device Service lease（已由 `2026-10-24-service-five-lease`
+  follow-up 闭合）；
 - bit-exact controller/baseband、RF、coexistence 和物理硬件。
