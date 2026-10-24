@@ -361,3 +361,45 @@ lease，每个要求 120 轮：
 回滚：revert
 `17280101d494519cad464f5cb3a4fd8509a0afcf`。回滚后 reconnect API 恢复
 `1..60`，120 轮 evidence 和历史 2/5/10/20/30/60 轮记录仍保留。
+
+## Follow-up：active-BLE 600 秒 hold
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ 782dd73b723af34232b51ad3535aec69252c93c7`。
+
+变更：
+
+- 共享 `MAX_BLE_HOLD_SECONDS` 从 `120` 提升到 `7200`；
+- 新增 `MAX_BLE_LINGER_SECONDS=7260`，Device Service 与 OpenAPI 使用同一上限；
+- 契约测试接受 `7260s` linger、拒绝 `7261s`；
+- OpenAPI 升到 `1.24.0`；源 catalog、生成 catalog、QEMU profile 和当前状态
+  文档统一到 600 秒 active-BLE 结果。
+
+使用同一 unified Core2 镜像、ELF 和 QEMU SHA，2 个独立 `/api/v1` lease
+各完成一次 NUS GATT 后保持 peer 连接 600 秒：
+
+- `ble_linger_seconds=660`；
+- 每个 attempt 的 HLI posts/consumed 为 `45/45`；
+- events `36`、ACLs `9`；
+- HLI/meta/TX queue 深度为 0，`last-error=0`、`dropped-packets=0`；
+- connection/L2CAP/GATT 池为 `3/9/3`，无 panic；
+- hold 结束时 `peer-closed=0`，frame/QOM、WiFi、公网和 evidence 全部 PASS。
+
+验证：
+
+- 平台套件 `321/321 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和
+  `git diff --check`：`PASS`；
+- GitHub Actions CI run `40087552321`：两个 job 均 `PASS`；
+- 完整 UIFlow2 67-case 外设矩阵本轮未重跑。
+
+边界：
+
+- virtual-device validation，不是物理 cache/PSRAM、RF 或功耗测量；
+- 600 秒 hold 不是两小时 soak；
+- bit-exact BT controller/baseband 和真机仍未验证。
+
+回滚：revert
+`782dd73b723af34232b51ad3535aec69252c93c7`。回滚后 hold/linger 上限恢复
+`120s/600s`，600 秒 historical evidence 仍保留。

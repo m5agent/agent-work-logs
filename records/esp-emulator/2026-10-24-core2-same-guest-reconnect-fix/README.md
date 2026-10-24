@@ -10,6 +10,7 @@
 - 三十轮 follow-up：`m5agent/m5stack-esp-emulator @ c2545835091a6fb321c73a517fe66655c8160686`
 - 六十轮 follow-up 与文档对账：`m5agent/m5stack-esp-emulator @ d9b4969acd91e39e672ab7d7f939e26f6e5a28e3`
 - 120 轮 follow-up：`m5agent/m5stack-esp-emulator @ 17280101d494519cad464f5cb3a4fd8509a0afcf`
+- active-BLE 600 秒 hold：`m5agent/m5stack-esp-emulator @ 782dd73b723af34232b51ad3535aec69252c93c7`
 - 基线版本：`e686838e38dc8ec46daa6dbc2830322806ca7355`
 - 环境：macOS Apple Silicon；Python 3；patched QEMU；UIFlow2 v2.5.3 Core2 和匹配 ELF
 
@@ -131,6 +132,20 @@ Core2 镜像 SHA、ELF SHA 和 QEMU SHA，3 个独立 Device Service lease 各�
 同一提交把源 catalog、生成 catalog、QEMU profile、OpenAPI `1.23.0`、
 项目状态、Backlog、工作流台账、网络专题和测试说明统一到 120 轮事实。
 
+## active-BLE 600 秒 hold
+
+共享 hold 上限提高到 `7200s`，active-BLE linger 上限提高到 `7260s`。
+使用同一 unified Core2 镜像、ELF 和 QEMU SHA，2 个独立 Device Service
+lease 各完成一次 NUS GATT 交换后保持 BLE peer 连接 600 秒，`2/2 PASS`：
+
+- `ble_linger_seconds=660`，hold 结束时 `peer-closed=0`；
+- HLI `45/45`，events `36`，ACLs `9`；
+- HLI/meta/TX queue 深度为 0，`last-error=0`、`dropped-packets=0`；
+- connection/L2CAP/GATT 池回到 `3/9/3`，无 panic；
+- frame/QOM、WiFi、公网 DNS/HTTP、pcap 和 evidence ZIP 全部 PASS。
+
+OpenAPI 升到 `1.24.0`，active-BLE linger 最大值为 `7260s`。
+
 ## 关键证据
 
 - 平台测试：初始修复 `300/300 PASS`，十轮 follow-up `301/301 PASS`；
@@ -148,6 +163,7 @@ Core2 镜像 SHA、ELF SHA 和 QEMU SHA，3 个独立 Device Service lease 各�
 - 同 guest 三十轮 reconnect：3 个独立 lease `3/3 PASS`；
 - 同 guest 六十轮 reconnect：3 个独立 lease `3/3 PASS`；
 - 同 guest 120 轮 reconnect：3 个独立 lease `3/3 PASS`；
+- active-BLE 600 秒 hold：2 个独立 lease `2/2 PASS`；
 - 二十轮 follow-up：平台测试 `314/314 PASS`，Node `2/2 PASS`，CI run
   `40074452179` 两个 job 均 `PASS`；
 - 三十轮 follow-up：平台测试 `318/318 PASS`，Node `2/2 PASS`，CI run
@@ -156,6 +172,8 @@ Core2 镜像 SHA、ELF SHA 和 QEMU SHA，3 个独立 Device Service lease 各�
   `40082707627` 两个 job 均 `PASS`；
 - 120 轮 follow-up：平台测试 `321/321 PASS`，Node `2/2 PASS`，CI run
   `40085809150` 两个 job 均 `PASS`；
+- active-BLE 600 秒 follow-up：平台测试 `321/321 PASS`，Node `2/2 PASS`，
+  CI run `40087552321` 两个 job 均 `PASS`；
 - 完整 67-case UIFlow2 外设矩阵本轮未重跑：`NOT RUN`；
 - 物理硬件、RF、bit-exact BT baseband/controller：`NOT RUN`。
 
@@ -170,10 +188,11 @@ Core2 镜像 SHA、ELF SHA 和 QEMU SHA，3 个独立 Device Service lease 各�
 - `evidence/verification.reconnect30.summary.json`：三十轮 follow-up 和逐 lease health 摘要
 - `evidence/verification.reconnect60.summary.json`：六十轮 follow-up、共享上限和完整回归摘要
 - `evidence/verification.reconnect120.summary.json`：120 轮 follow-up、共享上限和完整回归摘要
+- `evidence/verification.active_ble_hold600.summary.json`：600 秒 active-BLE hold、linger 上限和完整回归摘要
 
 ## 未覆盖项
 
-- 未执行超过 120 轮连续重连或多小时 soak；
+- 未执行两小时 active-BLE soak 或超过 120 轮连续重连；
 - 未验证 pairing/security/encrypted reconnect；
 - 未验证 bit-exact Espressif BT controller/baseband；
 - 未执行物理 cache/PSRAM 等价性或真机同路径验证；

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "runtime_model_gap",
+  "overall_status": "PARTIAL",
+  "title": "C6 Zigbee thread-sim reaches bidirectional radio frames but not commissioning",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "result_commit": "321a2aa0c364c7c8e0fad2f926c236895faa8e52"
+  },
+  "hardware": {
+    "targets": [
+      "ESP32-C6 virtual device"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "switch_image_sha256": "9d09ad38e19985c387957caab32111fef7568e387d13e7836b0614e72be8dfcd",
+    "switch_elf_sha256": "9fc1000e80f8d482e42942db96fa0da4a0eeb1aa2fec8bc115e0f30428347f24",
+    "light_image_sha256": "de70918cdf45a4457ef6dc60e46c8903c44ccc1c0379ffb7aca29d9f9a5a1eef",
+    "light_elf_sha256": "6e54da13f1aaeb018b81491579a2c499efac4ca31e4a0951c0fdadc1cf4319ca"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; ESP-IDF v5.5.4; esp-emu 0.50.0; two ESP32-C6 guests; local UDP thread-sim relay",
+    "timeout_seconds": 35
+  },
+  "checks": [
+    {
+      "name": "bidirectional_802_15_4_frames",
+      "status": "PASS",
+      "detail": "switch->light 21 frames/685 bytes; light->switch 17 frames/198 bytes"
+    },
+    {
+      "name": "coordinator_network_formed",
+      "status": "PASS"
+    },
+    {
+      "name": "light_network_steering_started",
+      "status": "PASS"
+    },
+    {
+      "name": "light_joined_network",
+      "status": "FAIL"
+    },
+    {
+      "name": "on_off_command_received",
+      "status": "FAIL"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "321/321"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40087813659; platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "public_m5burner_zigbee_binary",
+      "status": "NOT RUN",
+      "detail": "matching ELF for descriptor SHA e7126f... is unavailable"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "classification": "zigbee_commissioning_or_mac_ack_not_completed",
+  "evidence": [
+    "evidence/feasibility.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/321a2aa0c364c7c8e0fad2f926c236895faa8e52/tests/firmware/evidence-2026-10-24-c6-zigbee-thread-sim-feasibility.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40087813659"
+  ],
+  "notes": [
+    "The result is a runtime model gap, not a firmware PASS or FAIL.",
+    "QEMU C6 still has no 802.15.4 controller model.",
+    "The public M5Burner Zigbee binary requires its matching ELF for this bridge."
+  ]
+}

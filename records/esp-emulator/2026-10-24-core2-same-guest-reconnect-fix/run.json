@@ -249,6 +249,46 @@
         "run_id": 40085809150,
         "status": "PASS"
       }
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "active_ble_hold600",
+      "result_commit": "782dd73b723af34232b51ad3535aec69252c93c7",
+      "status": "PASS",
+      "evidence": "evidence/verification.active_ble_hold600.summary.json",
+      "hold": {
+        "attempts": 2,
+        "passed": 2,
+        "hold_seconds_per_attempt": 600,
+        "ble_linger_seconds": 660,
+        "hli_posts_consumed": "45/45",
+        "hli_events": 36,
+        "hli_acls": 9,
+        "hli_errors": 0,
+        "connection_l2cap_gatt_pool_free": "3/9/3",
+        "peer_closed": 0,
+        "last_error": 0,
+        "panics": 0,
+        "dropped_packets": 0
+      },
+      "shared_limits": {
+        "max_hold_seconds": 7200,
+        "max_linger_seconds": 7260
+      },
+      "api_contract": {
+        "version": "1.24.0",
+        "ble_linger_seconds_maximum": 7260
+      },
+      "artifacts": {
+        "firmware_sha256": "4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02",
+        "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+        "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1"
+      },
+      "platform_tests": "321/321 PASS",
+      "github_actions": {
+        "run_id": 40087552321,
+        "status": "PASS"
+      }
     }
   ],
   "checks": [
@@ -341,6 +381,11 @@
       "detail": "3/3 independent leases; 120 cycles per lease; HLI 3377/3377"
     },
     {
+      "name": "active_ble_hold600",
+      "status": "PASS",
+      "detail": "2/2 independent leases; 600 seconds with peer connected; HLI 45/45"
+    },
+    {
       "name": "physical_hardware",
       "status": "NOT RUN"
     },
@@ -357,6 +402,7 @@
     "evidence/verification.reconnect30.summary.json",
     "evidence/verification.reconnect60.summary.json",
     "evidence/verification.reconnect120.summary.json",
+    "evidence/verification.active_ble_hold600.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40068768706",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40069447311",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40070310548",
@@ -364,6 +410,8 @@
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40079740981",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40082707627",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40085809150",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40087552321",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/782dd73b723af34232b51ad3535aec69252c93c7/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-active-ble-hold600-2x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/17280101d494519cad464f5cb3a4fd8509a0afcf/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect120-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/d9b4969acd91e39e672ab7d7f939e26f6e5a28e3/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect60-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/c2545835091a6fb321c73a517fe66655c8160686/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect30-3x.json",
@@ -385,6 +433,7 @@
     "A sixty-cycle follow-up passes in three independent leases with 1697/1697 HLI posts/consumption; the shared reconnect range is 1..60 and 61 is rejected.",
     "The source catalog, generated catalog, QEMU profile and current-status documents now agree on the 120-cycle evidence.",
     "A one-hundred-twenty-cycle follow-up passes in three independent leases with 3377/3377 HLI posts/consumption; the shared reconnect range is 1..120 and 121 is rejected.",
-    "More than 120 cycles, multi-hour soak and physical hardware remain open."
+    "An active-BLE 600-second follow-up passes in two independent leases with the peer connected, HLI 45/45 and zero queue/error counters.",
+    "More than 120 cycles, two-hour soak and physical hardware remain open."
   ]
 }
