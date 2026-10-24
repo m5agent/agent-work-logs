@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "network": {
+    "wrong_password": {
+      "status": "PASS",
+      "checks": 7,
+      "auth_attempts": 6,
+      "auth_rejections": 6,
+      "no_dhcp": true,
+      "no_http_progress": true,
+      "failure_marker": "HTTP_TPUT_RESULT: FAILED (no IP in 20s)"
+    },
+    "dns_udp": {
+      "status": "PASS",
+      "checks": 5,
+      "dns_mode": "host-forwarder",
+      "controlled_resolver": false,
+      "udp_payload": "M5_DNS_UDP_PROBE"
+    },
+    "namespace_egress_ci": "PASS"
+  },
+  "core2": {
+    "status": "PASS",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "attempts_passed": 2,
+    "attempts_requested": 2,
+    "hold_seconds_per_attempt": 120,
+    "gdb_bridge": false,
+    "checks": {
+      "frame": "PASS",
+      "qom_nodes": 34,
+      "wifi_dhcp_http": "PASS",
+      "public_dns_http": "PASS",
+      "external_nus_gatt": "PASS",
+      "pcap": "PASS",
+      "evidence_zip": "PASS",
+      "hli_health": "PASS"
+    },
+    "not_claimed": [
+      "physical cache/PSRAM equivalence",
+      "bit-exact BT controller/baseband",
+      "same-guest reconnect",
+      "multi-hour soak"
+    ]
+  },
+  "firmware": {
+    "status": "PASS",
+    "public_sample_id": "2108939572843147265",
+    "merged_import": "PASS",
+    "webburner_import": "PASS",
+    "same_normalized_artifact_sha256": "d291e77f782399e37fd5b464f9b206a00654b2c10556d730d1c45667156c603f",
+    "capability_mismatch": "REJECTED",
+    "capability_issue": "unsupported_capability",
+    "manifest_suite": "19/19 PASS",
+    "targeted_service_security": "6/6 PASS",
+    "not_claimed": [
+      "boot",
+      "network runtime",
+      "secure-boot execution",
+      "physical eFuse state",
+      "legal approval"
+    ]
+  }
+}

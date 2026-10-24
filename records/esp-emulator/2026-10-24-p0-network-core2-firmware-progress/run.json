@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_and_validation",
+  "overall_status": "PARTIAL",
+  "title": "Advance network, Core2, and FirmwareManifest P0 validation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "730123da116ece1acbd97744de419e97596f0232",
+    "result_commit": "e27a7c95ea2838fd2790ed10f0b95035025bf06a",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40063860563"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "core2_unified_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+    "public_sample_id": "2108939572843147265",
+    "public_source_sha256": "8b7b47c8d601e1821817f8d0e6b55568829913e50333dbcc15de6ffdbad1997c",
+    "public_manifest_artifact_sha256": "d291e77f782399e37fd5b464f9b206a00654b2c10556d730d1c45667156c603f"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and GitHub Actions ubuntu-latest; Python 3; Node.js; QEMU Core2; ESP-IDF fixtures; public StickS3 firmware",
+    "changed_files": 30,
+    "insertions": 950,
+    "deletions": 78
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "299/299; 0 skipped"
+    },
+    {
+      "name": "wrong_password_negative_gate",
+      "status": "PASS",
+      "detail": "6 auth/reject, no DHCP, no HTTP, firmware failure marker; 7/7 checks"
+    },
+    {
+      "name": "dns_udp_data_plane",
+      "status": "PASS",
+      "detail": "5/5; host-forwarder DNS, exact UDP request and reply"
+    },
+    {
+      "name": "namespace_egress_ci",
+      "status": "PASS",
+      "detail": "GitHub Actions network-namespace-policy"
+    },
+    {
+      "name": "core2_native_hci_120s_holds",
+      "status": "PASS",
+      "detail": "2/2 independent leases; 120s each; frame/QOM/WiFi/public/GATT/pcap/evidence/HLI PASS"
+    },
+    {
+      "name": "public_manifest_merged_import",
+      "status": "PASS"
+    },
+    {
+      "name": "public_manifest_webburner_import",
+      "status": "PASS"
+    },
+    {
+      "name": "public_manifest_capability_mismatch",
+      "status": "PASS",
+      "detail": "camera on StickS3 -> REJECTED unsupported_capability"
+    },
+    {
+      "name": "firmware_manifest_suite",
+      "status": "PASS",
+      "detail": "19/19"
+    },
+    {
+      "name": "targeted_manifest_service_security",
+      "status": "PASS",
+      "detail": "6/6"
+    },
+    {
+      "name": "node_sha256_and_upload",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40063860563; both jobs success"
+    },
+    {
+      "name": "physical_core2_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "same_guest_reconnect_and_multihour_soak",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "qemu_pcap_reconnect_full_chain",
+      "status": "NOT RUN",
+      "detail": "Existing historical evidence referenced; only namespace/egress CI rerun"
+    },
+    {
+      "name": "full_peripheral_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/p0-results.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/e27a7c95ea2838fd2790ed10f0b95035025bf06a",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40063860563",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e27a7c95ea2838fd2790ed10f0b95035025bf06a/tests/network/wrong_password/evidence-2026-10-24-wrong-password-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e27a7c95ea2838fd2790ed10f0b95035025bf06a/tests/network/idf_dns_udp/evidence-2026-10-24-dns-udp-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e27a7c95ea2838fd2790ed10f0b95035025bf06a/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-hold120-2x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e27a7c95ea2838fd2790ed10f0b95035025bf06a/tests/firmware/evidence-2026-10-24-public-manifest-web-conformance.json"
+  ],
+  "notes": [
+    "Core2-native-hci must use the stock internal-controller build-M5STACK_Core2 app.",
+    "The Core2 runner now distinguishes peer-close TX/RX queue-full tails from HLI errors.",
+    "No firmware binary, ELF, QEMU binary, credential, MAC address or internal endpoint is included.",
+    "Physical cache/PSRAM, bit-exact controller, same-guest reconnect, multi-hour soak and hardware remain open."
+  ]
+}
