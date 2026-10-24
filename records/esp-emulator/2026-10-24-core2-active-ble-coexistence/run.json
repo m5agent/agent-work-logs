@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_and_validation",
+  "overall_status": "PASS",
+  "title": "Hold an active Core2 BLE link with WiFi and public network for two minutes",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5b686a976e679af2638e5b65f83c75e143582977",
+    "result_commit": "4e055979c908d40d6c2ca31b78f3711599e90919",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40064909368"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+    "bytes": 16777216,
+    "validation_scope": "virtual-device"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; QEMU Core2; Bumble GATT peer; Device Service",
+    "changed_files": 19,
+    "insertions": 299,
+    "deletions": 22
+  },
+  "checks": [
+    {
+      "name": "active_ble_120s_holds",
+      "status": "PASS",
+      "detail": "2/2 independent leases; peer-closed=0"
+    },
+    {
+      "name": "frame_qom",
+      "status": "PASS",
+      "detail": "34 QOM nodes; identical frame hash"
+    },
+    {
+      "name": "wifi_public_network",
+      "status": "PASS"
+    },
+    {
+      "name": "external_nus_gatt",
+      "status": "PASS"
+    },
+    {
+      "name": "pcap_evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "hli_health",
+      "status": "PASS",
+      "detail": "47/47 posts/consumed; hli-errors=0; queues/tx queue zero"
+    },
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "299/299"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40064909368"
+    },
+    {
+      "name": "repeated_reconnect_within_guest",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_core2_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "multihour_soak",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/4e055979c908d40d6c2ca31b78f3711599e90919",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40064909368",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4e055979c908d40d6c2ca31b78f3711599e90919/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-active-ble-hold120-2x.json"
+  ],
+  "notes": [
+    "The BLE peer remains connected for the full hold; this is active coexistence, not post-teardown idling.",
+    "No firmware binary, credential, MAC address or internal endpoint is included.",
+    "Physical cache/PSRAM, bit-exact controller, same-guest reconnect, multi-hour soak and hardware remain open."
+  ]
+}
