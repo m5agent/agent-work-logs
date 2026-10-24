@@ -114,7 +114,7 @@
 | 2026-10-24 | ESP Emulator | exact IPv6 egress、双栈 NAT 与代码/文档重整 | PASS（virtual-network policy：IPv4/IPv6 allowed/denied endpoint、IPv6 neighbor control、双栈 masquerade 与全部 cleanup；本地 2/2、336/336 tests、Node 2/2、GitHub Actions PASS；固件、公网 IPv6、CIDR/domain、IPv6 DNS、Core2 两小时 soak 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dual-stack-egress-and-doc-reconciliation/) |
 | 2026-10-24 | ESP Emulator | A/AAAA resolver、IPv6 预检与 WebBurner capability intake | PASS（contract/static：A/AAAA resolver、IP/v6 preflight、required/optional capability API/Browser、`camera`-on-StickS3 409、sdkconfig WiFi/BT/PSRAM detected warning；340/340 tests、Node 2/2、三个 CI PASS；同 guest IPv6 DNS/HTTP、reported=actual code path 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dual-stack-egress-and-doc-reconciliation/followups/2026-10-24-dns-aaaa-and-capability-intake/) |
 | 2026-10-24 | ESP Emulator | 跨 network namespace worker 控制面 | PASS（transport-control：真实 service/worker 经 veth、Bearer+HMAC 注册、submit/claim、双 heartbeat、terminal completed、token 不落日志与 cleanup；本地+CI PASS；QEMU executor/reattach、companion continuity、多机调度与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-dual-stack-egress-and-doc-reconciliation/followups/2026-10-24-cross-netns-worker-control-plane/) |
-| 2026-10-24 | m5stack-schematics-text | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | PASS（链接/索引/下载哈希一致；100 个 deb 链接无 404、无其他平台错配；上游未推送） | [查看](records/m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
+| 2026-10-24 | m5stack-schematics-text | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | PASS（链接/索引/下载哈希一致；100 个 deb 链接无 404、无其他平台错配；PR #2 OPEN/MERGEABLE，待管理员审核） | [查看](records/m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
 
 ## 目录结构
 

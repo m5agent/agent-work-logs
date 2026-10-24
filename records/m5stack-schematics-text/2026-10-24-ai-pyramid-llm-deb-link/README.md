@@ -1,7 +1,7 @@
 # AI Pyramid 文档 llm-llm 下载链接修正与全量 deb 链接审计
 
 - 日期：`2026-10-24`
-- 结果：`PASS`（错误路径已定位、替代链接已下载校验）；`PARTIAL`（修复尚未推送上游）
+- 结果：`PASS`（错误路径已定位、替代链接已下载校验、修复 PR 已提交）
 - 工作类型：`code_change`
 - 问题来源：用户反馈 AI Pyramid 文档中的 `llm-llm` deb 文件链接错误，并要求检查类似问题
 - 源码版本：`yuyun2000/m5stack-schematics-text @ 7ae3eab`
@@ -37,12 +37,13 @@ https://repo.llm.m5stack.com/m5stack-apt-repo/pool/jammy/ax650c/v1.12/llm-llm_1.
 ## 文件
 
 - `report.md`：根因、修复、验证过程和边界
+- PR：https://github.com/yuyun2000/m5stack-schematics-text/pull/2
 - `run.json`：结构化记录
-- `evidence/`：HTTP/包索引/哈希与全量链接审计
+- `evidence/`：HTTP/包索引/哈希、全量链接审计与 PR 回读
 - `patches/`：可直接应用到 `7ae3eab` 的最小补丁
 - `code/`：全量 deb 链接审计脚本
 
 ## 未覆盖项
 
-- 未推送修改到 GitHub fork，也未创建 PR；按“外部行动先确认”的发布边界，等待用户确认。
+- PR #2 已提交并处于 `OPEN / MERGEABLE`，等待原项目管理员审核；本记录不代表已合并。
 - 未批量更新其余 26 个旧版本链接，因为文档可能有意固定特定版本，需逐页确认。

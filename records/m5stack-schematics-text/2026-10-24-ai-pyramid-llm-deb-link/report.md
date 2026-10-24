@@ -36,6 +36,7 @@ https://repo.llm.m5stack.com/m5stack-apt-repo/pool/jammy/ax650c/v1.12/llm-llm_1.
 - 分支：`m5agent/ai-pyramid-llm-deb-link-2026-10-24`
 - commit：`845e9d1`
 - base：`7ae3eab`
+- PR：https://github.com/yuyun2000/m5stack-schematics-text/pull/2
 
 ## 四、验证
 
@@ -95,7 +96,7 @@ file: Debian binary package (format 2.0)
 
 ## 六、未覆盖项与交付边界
 
-- 修改仅存在于本地分支，尚未推送到 GitHub fork 或创建 PR。
+- 修复已推送至 fork 并提交 PR #2；PR 当前为 `OPEN / MERGEABLE`，尚未合并。
 - 26 个旧版本链接可能是有意固定版本，未在本轮批量更新。
 - 未在 AI Pyramid 实机上执行 `dpkg -i`；本轮验收的是“文档中的下载路径是否指向正确的公开包”。
 
