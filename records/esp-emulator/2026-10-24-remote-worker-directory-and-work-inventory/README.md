@@ -1,0 +1,44 @@
+# ESP Emulator 远程 worker 注册目录与工作总整理
+
+- 日期：`2026-10-24`
+- 结果：`PASS`（代码、API 契约与文档一致性层）
+- 工作类型：`code_change`
+- 源码仓库：`m5agent/m5stack-esp-emulator`
+- 源码版本：`a1917eaf410d093d780128696819db7b081b9ae7`
+- 基线版本：`21d26c93055a65b9952a3d5611838bcbb3f2dc10`
+- 环境：macOS Apple Silicon；Python 3；本地 HTTP 契约测试；GitHub Actions
+
+## 结论
+
+把原本尚未提交的远程 worker 持久目录补成可调用、可鉴权、可测试的
+`/api/v1/workers` MVP，并将 `project-status`、`project-backlog`、
+`workstreams`、代码地图、API 文档和 OpenAPI 统一到同一份事实基线。
+
+当前已具备远程 worker 的 identity/generation 注册、heartbeat、
+drain/stop、capability、active lease 清单和有界结果元数据。它仍不是任务
+队列、worker supervisor、调度器或活动 QEMU 进程接管实现。
+
+## 关键证据
+
+- 平台测试：`283/283 PASS`；
+- 远程目录单元测试：`9/9 PASS`；
+- `/api/v1/workers` HTTP 契约及 Bearer token `401/201` 路径：`PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles：`PASS`；
+- OpenAPI YAML 解析和版本一致性：`1.15.0 PASS`；
+- GitHub Actions `40047928762`：`platform-contracts` 与
+  `network-namespace-policy` 两个 job 均成功；
+- 物理硬件：`NOT RUN`。
+
+## 文件
+
+- `report.md`：背景、实现、验证、边界和回滚；
+- `run.json`：结构化记录；
+- `evidence/verification.summary.json`：聚合验证结果。
+
+## 未覆盖项
+
+- 本次没有修改 QEMU 控制器、设备数据面或固件运行路径；
+- 没有重跑 67-case QEMU 全矩阵，继续引用既有 `67/67`、`274/274` evidence；
+- 远程 worker supervisor、持久任务队列、调度和活动 QEMU 进程 re-attach
+  仍开放；
+- 物理硬件、RF、功耗、声学、光学、机械和电气等价性仍为 `NOT RUN`。

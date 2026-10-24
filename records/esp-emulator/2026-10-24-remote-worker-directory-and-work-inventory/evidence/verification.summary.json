@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "source_commit": "a1917eaf410d093d780128696819db7b081b9ae7",
+  "base_commit": "21d26c93055a65b9952a3d5611838bcbb3f2dc10",
+  "status": "PASS",
+  "scope": [
+    "remote-worker-registration-directory",
+    "device-service-http-contract",
+    "openapi-1.15.0",
+    "project-status-and-backlog-reconciliation"
+  ],
+  "change_summary": {
+    "changed_files": 20,
+    "insertions": 1458,
+    "deletions": 57,
+    "runtime_device_data_plane_changed": false
+  },
+  "regression": {
+    "platform_tests": {
+      "passed": 283,
+      "total": 283,
+      "status": "PASS"
+    },
+    "worker_directory_tests": {
+      "passed": 9,
+      "total": 9,
+      "status": "PASS"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "openapi_yaml": "PASS",
+    "documentation_contracts": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "http_contract": {
+    "paths": [
+      "/api/v1/workers",
+      "/api/v1/workers/{worker_id}/heartbeat",
+      "/api/v1/workers/{worker_id}/drain",
+      "/api/v1/workers/{worker_id}/stop",
+      "/api/v1/workers/{worker_id}/results"
+    ],
+    "status": "PASS",
+    "bearer_auth": {
+      "without_token": 401,
+      "with_token": 201,
+      "status": "PASS"
+    }
+  },
+  "worker_directory": {
+    "persistence": "atomic JSON write with 0600 mode",
+    "identity_checks": "PASS",
+    "generation_replacement": "PASS",
+    "stale_transition": "PASS",
+    "drain_stop": "PASS",
+    "bounded_results": "PASS",
+    "endpoint_validation": "PASS"
+  },
+  "ci": {
+    "run_id": 40047928762,
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "validation_boundaries": {
+    "qemu_full_matrix_rerun": "NOT RUN",
+    "network_functional_rerun": "NOT RUN",
+    "remote_worker_supervisor": "NOT IMPLEMENTED",
+    "persistent_task_queue": "NOT IMPLEMENTED",
+    "active_qemu_reattach": "NOT IMPLEMENTED",
+    "physical_hardware": "NOT RUN"
+  },
+  "not_claimed": [
+    "remote worker scheduling",
+    "task queue durability",
+    "active QEMU process re-attach",
+    "new virtual-device functional validation from this code change",
+    "physical hardware, RF, power, acoustic, optical, mechanical or electrical equivalence"
+  ]
+}

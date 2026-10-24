@@ -90,6 +90,7 @@
 | 2026-10-24 | ESP Emulator | 工作流交接、代码卫生与 Core2 HLI 诊断 | PASS（docs/contracts：267 tests、Node 2/2、catalog/profile、文档契约与 Ruff PASS；HLI 仅 event-13 marker，HCI-3b/GATT/真机仍开放） | [查看](records/esp-emulator/2026-10-24-workstream-handoff-hli/) |
 | 2026-10-24 | ESP Emulator | Core2 HLI 真实 Reset Complete 交付 | PASS（virtual-device narrow path：池化 HCI event 经 HLI queue/ISR/controller task 交付，`01030c00 → 01011000` 连续 5/5；ACL、完整 GATT、Device Service 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-hli-event-delivery/) |
 | 2026-10-24 | ESP Emulator | FirmwareManifest 声明级许可 allowlist/denylist | PASS（static policy：provenance/FS/SBOM 声明汇总、allow/deny/unknown 状态、schema 与 272 tests、CI PASS；完整源码扫描/法律结论/运行时权限 NOT RUN） | [查看](records/esp-emulator/2026-10-24-license-policy/) |
+| 2026-10-24 | ESP Emulator | 远程 worker 注册目录、API 契约与工作总整理 | PASS（code/API/docs：283/283 tests、9/9 directory tests、Bearer 401/201、OpenAPI 1.15.0、CI 两 job PASS；supervisor/队列/re-attach 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-remote-worker-directory-and-work-inventory/) |
 
 ## 目录结构
 
