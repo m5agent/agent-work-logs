@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Reconcile code and docs; capture the Core2 same-guest reconnect failure boundary",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "4e055979c908d40d6c2ca31b78f3711599e90919",
+    "result_commit": "e686838e38dc8ec46daa6dbc2830322806ca7355"
+  },
+  "hardware": {
+    "targets": [
+      "Core2 virtual device"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "stock_firmware_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+    "reconnect_probe_firmware_sha256": "62693f5377264da0dda2bd9aaa0dc34aec624b88c51f13e3aa863622e090a198",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "667ec84c9e53ce73b0e63c7be69284837ff00b77a9194577ef757c164e8e31a1"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; patched QEMU; UIFlow2 Core2 v2.5.3",
+    "changed_files": 25,
+    "insertions": 591,
+    "deletions": 145
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "299/299"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "browser_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "targeted_ruff",
+      "status": "PASS",
+      "detail": "ble_probe.py, run_service_5x.py and test_docs_consistency.py"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40066005133; platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "first_ble_gatt_cycle",
+      "status": "PASS",
+      "detail": "Both firmware variants completed cycle 1"
+    },
+    {
+      "name": "same_guest_second_connection",
+      "status": "FAIL",
+      "detail": "ack 12/HCI reset after disconnect; cycle 2 advertisement timeout"
+    },
+    {
+      "name": "guest_panic",
+      "status": "NOT OBSERVED"
+    },
+    {
+      "name": "full_uiflow2_matrix_rerun",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40066005133",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e686838e38dc8ec46daa6dbc2830322806ca7355/tests/uiflow2/core2_native_hci/evidence-2026-10-24-reconnect2-fail.json"
+  ],
+  "notes": [
+    "The stock guest also fails, so the test-only re-advertise call is not the sole trigger.",
+    "The two-minute active-link hold remains PASS but is a different gate from reconnect.",
+    "No QEMU controller patch was changed in this turn.",
+    "Physical hardware and RF remain unverified."
+  ]
+}

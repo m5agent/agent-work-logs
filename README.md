@@ -101,6 +101,7 @@
 | 2026-10-24 | ESP Emulator | P0 网络错误密码、Core2 2×120s 与公开固件 Manifest/WebBurner | PARTIAL（virtual/static：wrong-password 7/7、DNS/UDP 5/5、Core2 2/2×120s、公开固件 merged/WebBurner 同 hash 且 camera mismatch REJECTED，299/299 + CI PASS；物理 cache/PSRAM、bit-exact controller、同 guest 重连、多小时 soak 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-p0-network-core2-firmware-progress/) |
 | 2026-10-24 | ESP Emulator | StickS3 自动 radio 断线、scan 1→0→1、双 DHCP 与前后 HTTP/pcap | PASS（virtual-device：同 session 16/16 checks、pcap 9,586 bytes、299/299 tests + CI PASS；物理 RF/不同 DHCP server/硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-sticks3-reconnect-runner/) |
 | 2026-10-24 | ESP Emulator | Core2 active BLE + WiFi/公网两分钟共存 | PASS（virtual-device：2/2×120s、peer 全程连接、HLI/TX queue 无错误、299/299 tests + CI PASS；同 guest reconnect、bit-exact controller、物理 cache/PSRAM、多小时 soak 与硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-active-ble-coexistence/) |
+| 2026-10-24 | ESP Emulator | 代码文档重整与 Core2 同 guest reconnect 边界 | PARTIAL（docs/contracts：299/299 tests、Node 2/2、catalog/profile/coverage PASS；stock 与重广告对照均在 disconnect 后 `ack 12`/HCI reset，第二轮连接 FAIL；bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-docs-reconciliation-core2-reconnect/) |
 
 ## 目录结构
 

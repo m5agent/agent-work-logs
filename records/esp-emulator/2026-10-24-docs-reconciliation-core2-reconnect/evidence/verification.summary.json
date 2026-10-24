@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "result_commit": "e686838e38dc8ec46daa6dbc2830322806ca7355",
+  "validation": "virtual-device validation",
+  "platform": {
+    "tests": 299,
+    "passed": 299,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "browser_tests": "2/2 PASS",
+    "compileall": "PASS",
+    "targeted_ruff": "PASS",
+    "github_actions": {
+      "run_id": 40066005133,
+      "status": "PASS",
+      "jobs": [
+        "platform-contracts",
+        "network-namespace-policy"
+      ]
+    }
+  },
+  "reconnect_gate": {
+    "status": "FAIL",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "requested_cycles": 2,
+    "variants": [
+      {
+        "name": "stock-advertising-lifecycle",
+        "firmware_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+        "cycle_1": "PASS",
+        "cycle_2": "TIMEOUT",
+        "serial_error_marker": "HCI process ack returned 12",
+        "serial_error_marker_count": 14969,
+        "serial_sha256": "dd61afb4a3dcac17cd5f0a529a967eb0a9864322d808e84b117179493a8053c1",
+        "peer_log_sha256": "98f07c54d96a60465a43870c19b850a6e1fd743eef5bca76473461ce9a20eac1",
+        "evidence_zip_sha256": "7531f3ca24426d3d42cf663d7388e2903cc4697d73ec2da444fd13503e0e97a3"
+      },
+      {
+        "name": "guest-scheduled-readvertise",
+        "firmware_sha256": "62693f5377264da0dda2bd9aaa0dc34aec624b88c51f13e3aa863622e090a198",
+        "cycle_1": "PASS",
+        "cycle_2": "TIMEOUT",
+        "readvertise_result": "OSError(-12,)",
+        "serial_error_marker": "HCI process ack returned 12",
+        "serial_error_marker_count": 17144,
+        "serial_sha256": "89a3dc7c35bb4db48820b0377160dede5567d2518b2e3cbc9e3f4e6d87844917",
+        "peer_log_sha256": "472877dd9ea8cfe90749004babd567f2e2cf45f2f6871901e6bfb10ce880d28d",
+        "evidence_zip_sha256": "d23710c4d9912ade2eeaa39125aa3756e1d43084f23d95a0e97056a6d648424d"
+      }
+    ],
+    "guest_panic": false,
+    "classification": "disconnect/HCI command lifecycle"
+  },
+  "not_run": [
+    "full UIFlow2 peripheral matrix",
+    "multi-hour BLE coexistence or reconnect soak",
+    "bit-exact ESP32 BT controller/baseband",
+    "physical cache/PSRAM equivalence",
+    "physical hardware validation",
+    "RF behavior"
+  ]
+}
