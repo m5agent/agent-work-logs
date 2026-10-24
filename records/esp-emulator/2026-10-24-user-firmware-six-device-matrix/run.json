@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "virtual-device-regression",
+  "overall_status": "PARTIAL",
+  "title": "Six-device M5Burner user-firmware simulation matrix",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "result_commit": "d0e7abe63bfbaacfc66641a1af0e376252a77f8c"
+  },
+  "hardware": {
+    "targets": [
+      "virtual ESP32-S3 StickS3",
+      "virtual ESP32-S3 CoreS3",
+      "virtual ESP32-S3 Cardputer ADV",
+      "virtual ESP32-S3R8 StopWatch",
+      "virtual ESP32-C6 Nesso N1",
+      "virtual ESP32-C6 NanoC6"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "source": "M5Burner public catalog",
+    "selection": "MOST_DOWNLOADED; baseline UIFlow2 excluded where possible",
+    "samples": 18,
+    "binary_committed": false
+  },
+  "execution": {
+    "interface": "local Device Service /api/v1",
+    "scope": "simulation-only-not-hardware-validation",
+    "jobs": 6,
+    "observe_seconds": 30,
+    "sessions_retained": true
+  },
+  "counts": {
+    "PASS": 11,
+    "PARTIAL": 6,
+    "FAIL": 1
+  },
+  "checks": [
+    {
+      "name": "virtual_flash_and_static_validation",
+      "status": "PASS",
+      "detail": "18/18 merged images uploaded, composed and structurally validated"
+    },
+    {
+      "name": "session_lifecycle",
+      "status": "PASS",
+      "detail": "18/18 sessions reached a terminal stopped state with history retained"
+    },
+    {
+      "name": "display_frame_and_input",
+      "status": "PARTIAL",
+      "detail": "11 PASS; two display samples lacked frame/input evidence"
+    },
+    {
+      "name": "serial_only_device",
+      "status": "PARTIAL",
+      "detail": "NanoC6 has no display; two samples passed serial/runtime checks"
+    },
+    {
+      "name": "ieee802154_zigbee",
+      "status": "FAIL",
+      "detail": "C6 QEMU has no IEEE 802.15.4 radio model; Zigbee task watchdog repeats"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/d0e7abe63bfbaacfc66641a1af0e376252a77f8c"
+  ],
+  "notes": [
+    "PASS requires a non-blank application frame, a live session, no fatal serial signature and an observable input response.",
+    "Device Service startup failures are classified separately and are not attributed to firmware.",
+    "The matrix covers virtual-device behavior only; no physical hardware measurements were performed."
+  ]
+}

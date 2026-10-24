@@ -104,6 +104,7 @@
 | 2026-10-24 | ESP Emulator | 代码文档重整与 Core2 同 guest reconnect 边界 | PARTIAL（docs/contracts：299/299 tests、Node 2/2、catalog/profile/coverage PASS；stock 与重广告对照均在 disconnect 后 `ack 12`/HCI reset，第二轮连接 FAIL；bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-docs-reconciliation-core2-reconnect/) |
 | 2026-10-24 | ESP Emulator | Core2 同 guest BLE 重连 stale-ACK 修复 | PASS（virtual-device：3 个独立 lease 均完成两轮 NUS GATT，第二轮 guest RX/notify PASS；根因为 Bumble 对无响应 `0x0c35` 非法回复；300/300 tests；更多轮次、bit-exact controller、长稳与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-same-guest-reconnect-fix/) |
 | 2026-10-24 | ESP Emulator | Device Service worker HTTPS/mTLS、真实 QEMU/unified job 与 overlap TLS/token rotation | PASS（transport-security：TLS 1.3、mTLS、Bearer+HMAC、真实 QEMU/unified job；SIGHUP rotation 先 active-request drain，再有界接受 A/B token/client CA，移除 previous 后 final cutover，309/309 tests + CI PASS；自动化客户端迁移、跨主机、secret manager 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-worker-https-mtls/) |
+| 2026-10-24 | ESP Emulator | 六机型 M5Burner 用户固件批量仿真回归 | PARTIAL（virtual-device：18 样本、11 PASS/6 PARTIAL/1 FAIL；StickS3 与 StopWatch 各 3/3、输入探针与 frame/serial 取证、6 并发会话；Nesso/NanoC6 模型缺口与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-user-firmware-six-device-matrix/) |
 
 ## 目录结构
 
