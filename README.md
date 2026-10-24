@@ -109,6 +109,7 @@
 | 2026-10-24 | ESP Emulator | 运行时模型缺口登记、Core2 二十轮与旧文档结论总整理 | PARTIAL（历史快照：当时 `RUNTIME-01`/`RUNTIME-02` 均 OPEN；后续 C6 Flash/PMP 修复关闭 `RUNTIME-01`，Zigbee `RUNTIME-02` 继续跟踪） | [查看](records/esp-emulator/2026-10-24-runtime-model-gap-register-reconciliation/) |
 | 2026-10-24 | ESP Emulator | C6 Zigbee `thread-sim` 可行性分类 | PARTIAL（virtual-device：双 C6 switch/light 产生 21+17 个双向 802.15.4 帧，协调器组网与 steering 启动；join/On-Off 未完成，分类 `runtime_model_gap`，公开固件匹配 ELF 缺失，真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-c6-zigbee-thread-sim-feasibility/) |
 | 2026-10-24 | ESP Emulator | Core2 热门公开固件、PMIC I2C 与 AWS ATECC608 模型缺口 | PARTIAL（virtual-device：3 个 MOST_DOWNLOADED 官方固件均执行但黑帧；PMIC 2 个、ATECC608 1 个结构化 model gap，AXP192/2101 A/B 同错；323/323 tests + CI PASS，真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-public-firmware-model-gaps/) |
+| 2026-10-24 | ESP Emulator | 项目快照生成器与代码/文档结构收敛 | PASS（docs/contracts：自动快照、动态事实去重、早期 bring-up 标历史、FW-03 修正为 7 台/21 样本；324/324 tests、Ruff、catalog/profile/coverage PASS；QEMU 功能矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-project-snapshot-doc-consolidation/) |
 
 ## 目录结构
 
