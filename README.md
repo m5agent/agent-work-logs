@@ -105,6 +105,7 @@
 | 2026-10-24 | ESP Emulator | Core2 同 guest BLE 重连修复与二十轮扩展 | PASS（virtual-device：3 个独立 lease 各完成 20 轮 NUS GATT，HLI 577/577、池 3/9/3、无 panic；API 上限扩到 30，314/314 tests + CI PASS；>20 轮、多小时 soak、bit-exact controller、物理 cache/PSRAM 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-same-guest-reconnect-fix/) |
 | 2026-10-24 | ESP Emulator | Device Service worker HTTPS/mTLS、真实 QEMU/unified job 与 overlap TLS/token rotation | PASS（transport-security：TLS 1.3、mTLS、Bearer+HMAC、真实 QEMU/unified job；SIGHUP rotation 先 active-request drain，再有界接受 A/B token/client CA，移除 previous 后 final cutover，309/309 tests + CI PASS；自动化客户端迁移、跨主机、secret manager 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-worker-https-mtls/) |
 | 2026-10-24 | ESP Emulator | 六机型 M5Burner 用户固件批量仿真与模型缺口分类 | PARTIAL（virtual-device：18 样本；45 秒重跑后 10 PASS/8 PARTIAL/0 FAIL，C6 Zigbee 与软件复位 chip-id 两类模型缺口结构化；StickS3 与 StopWatch 各 3/3；真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-user-firmware-six-device-matrix/) |
+| 2026-10-24 | ESP Emulator | 运行时模型缺口登记、Core2 二十轮与旧文档结论总整理 | PASS（code/docs/contracts：C6 `RUNTIME-01`/`RUNTIME-02` 保持 OPEN，317/317 平台测试、Node 2/2、catalog/profile/CI PASS；C6 修复、完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-runtime-model-gap-register-reconciliation/) |
 
 ## 目录结构
 
