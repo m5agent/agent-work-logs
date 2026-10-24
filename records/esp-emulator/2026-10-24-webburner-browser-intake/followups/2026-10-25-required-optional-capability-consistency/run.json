@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Validate required and optional firmware capabilities",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "92263b596eea3a895339436b38e99935d09118e7",
+    "result_commit": "6e2e7693f8b5edf787d49ecb709bdc00acaaa7f0",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40112248145"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "fixture": "synthetic-static-esp32s3-flash",
+    "runtime_execution": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS Python platform tests",
+    "firmware_manifest_tests": "22/22 PASS",
+    "documentation_consistency": "19/19 PASS",
+    "platform_tests": "350/350 PASS"
+  },
+  "checks": [
+    {
+      "name": "required_optional_overlap_rejected_on_import",
+      "status": "PASS"
+    },
+    {
+      "name": "required_optional_overlap_rejected_by_structure_validation",
+      "status": "PASS"
+    },
+    {
+      "name": "required_mismatch_rejects",
+      "status": "PASS"
+    },
+    {
+      "name": "optional_mismatch_is_warning",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_required_is_warning",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_optional_is_warning",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "350 of 350 tests passed"
+    },
+    {
+      "name": "runtime_code_path_proof",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6e2e7693f8b5edf787d49ecb709bdc00acaaa7f0/platform/tools/firmware_manifest.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6e2e7693f8b5edf787d49ecb709bdc00acaaa7f0/platform/tests/test_firmware_manifest.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6e2e7693f8b5edf787d49ecb709bdc00acaaa7f0/tests/firmware/evidence-2026-10-25-capability-required-optional-consistency.json"
+  ],
+  "notes": [
+    "Required/optional declarations are now disjoint.",
+    "Optional mismatch remains a warning and does not reject a candidate.",
+    "Declared capability does not prove the related code path is used at runtime."
+  ]
+}
