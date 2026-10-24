@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Reconcile current work and preserve the Core2 extended-run failure",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "303e10744f3826763e355ee2c49e7715fe58a254",
+    "result_commit": "83ad2492b1ea95f83071a599fc29490e729b7e13",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40058746740"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "65c27baf132db1e8d97207d812dd945c782adcfb5ffc1ec67a4eee5656782e5d",
+    "bytes": 16777216,
+    "validation_scope": "virtual-device"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; Node.js; patched QEMU Core2 runtime; Bumble peer",
+    "task_id": "",
+    "session_id": "",
+    "commands": [
+      "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "python3 platform/tools/runtime_coverage.py --check",
+      "python3 platform/tools/peripheral_catalog.py --check",
+      "python3 platform/tools/qemu_profiles.py --check",
+      "node --test platform/tests/test_sha256.mjs platform/tests/test_firmware_upload.mjs",
+      "python3 -m compileall -q platform/tools platform/tests tests/uiflow2/core2_native_hci",
+      "ruff check tests/uiflow2/core2_native_hci/run_service_5x.py platform/tests/test_docs_consistency.py",
+      "git diff --check"
+    ]
+  },
+  "checks": [
+    {
+      "name": "local_platform_tests",
+      "status": "PASS",
+      "detail": "296/296; 0 skipped"
+    },
+    {
+      "name": "documentation_contract",
+      "status": "PASS",
+      "detail": "9 tests; index, links, API version, current claims, evidence JSON and task snapshot"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "node_sha256_and_upload",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "ruff",
+      "status": "PASS"
+    },
+    {
+      "name": "markdown_tables",
+      "status": "PASS",
+      "detail": "0 column mismatches outside fenced code blocks"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40058746740; head 83ad2492b1ea95f83071a599fc29490e729b7e13"
+    },
+    {
+      "name": "core2_hci4_functional_baseline",
+      "status": "PASS",
+      "detail": "Historical five independent leases; not rerun as a new full gate in this change"
+    },
+    {
+      "name": "core2_extended_run",
+      "status": "FAIL",
+      "detail": "Panic after READY/network/BLE connection; first failure kinds include IllegalInstruction in semphr_give_wrapper and InstrFetchProhibited at PC=0"
+    },
+    {
+      "name": "full_peripheral_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/core2-extended-run.summary.json",
+    "evidence/github-actions.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/83ad2492b1ea95f83071a599fc29490e729b7e13",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40058746740",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/83ad2492b1ea95f83071a599fc29490e729b7e13/tests/uiflow2/core2_native_hci/evidence-2026-10-24-extended-run-fail.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/83ad2492b1ea95f83071a599fc29490e729b7e13/docs/project-status.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/83ad2492b1ea95f83071a599fc29490e729b7e13/docs/project-backlog.md"
+  ],
+  "notes": [
+    "HCI-4 remains a five-lease functional baseline; it is not a soak PASS.",
+    "The runner now retains partial evidence and an aggregate FAIL when READY, network or evidence collection fails.",
+    "Current open work prioritizes CORE2-02 root cause before bit-exact controller and physical-equivalence work.",
+    "Cross-host worker execution, companion continuity, TLS/mTLS, rotation, IPv6, firmware runtime permissions, Tab5 data paths, visual fidelity and hardware validation remain open.",
+    "No firmware binary, ELF, QEMU binary, session identifier, MAC address, credential or internal endpoint is included."
+  ]
+}

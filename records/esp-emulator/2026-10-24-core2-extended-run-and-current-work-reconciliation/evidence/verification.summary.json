@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-24T11:32:27+08:00",
+  "scope": "code-docs-current-work-and-core2-extended-run",
+  "status": "PARTIAL",
+  "source_commit": "83ad2492b1ea95f83071a599fc29490e729b7e13",
+  "base_commit": "303e10744f3826763e355ee2c49e7715fe58a254",
+  "changed_files": 27,
+  "change_summary": {
+    "insertions": 871,
+    "deletions": 207,
+    "runtime_data_plane_changed": false,
+    "runner_failure_capture_changed": true,
+    "documentation_contract_tests_changed": true
+  },
+  "local": {
+    "platform_tests": {
+      "total": 296,
+      "passed": 296,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "documentation_contract": {
+      "total": 9,
+      "status": "PASS"
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "node_sha256_and_upload": {
+      "total": 2,
+      "status": "PASS"
+    },
+    "compileall": "PASS",
+    "ruff": "PASS",
+    "markdown_tables": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "core2": {
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "hci4_functional_baseline": "PASS (historical five leases; not re-run as a new 5x gate)",
+    "extended_run": "FAIL",
+    "first_observed_panics": [
+      "IllegalInstruction at 0x40266960 in semphr_give_wrapper",
+      "InstrFetchProhibited at PC=0, EXCCAUSE=0x14"
+    ],
+    "network_before_failure": {
+      "wifi_dhcp_http": "PASS",
+      "public_dns_http": "PASS",
+      "external_nus_gatt": "FAIL"
+    }
+  },
+  "validation_boundaries": {
+    "qemu_full_matrix": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "rf_electrical_thermal_acoustic_optical_mechanical": "NOT RUN",
+    "bit_exact_bt_controller": "NOT RUN",
+    "physical_cache_psram_equivalence": "NOT RUN"
+  }
+}

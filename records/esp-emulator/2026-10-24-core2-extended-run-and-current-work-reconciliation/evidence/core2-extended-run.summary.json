@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "core2-extended-run-redacted-summary",
+  "source_commit": "83ad2492b1ea95f83071a599fc29490e729b7e13",
+  "status": "FAIL",
+  "validation": "virtual-device validation",
+  "profile": "core2-native-hci",
+  "runtime": "qemu-unified",
+  "firmware_sha256": "65c27baf132db1e8d97207d812dd945c782adcfb5ffc1ec67a4eee5656782e5d",
+  "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+  "qemu_sha256": "29b30d78d8634aad22877f3f893d8f35a8b10870c8b4870e26c7eaf3cfc4ccdf",
+  "observations": [
+    {
+      "attempts_requested": 10,
+      "attempts_completed": 4,
+      "attempts_passed": 3,
+      "hold_seconds": 10,
+      "failure": "InstrFetchProhibited; PC=0; EXCCAUSE=0x14"
+    },
+    {
+      "attempts_requested": 1,
+      "attempts_completed": 1,
+      "attempts_passed": 0,
+      "hold_seconds": 1,
+      "failure": "IllegalInstruction at 0x40266960 in semphr_give_wrapper, followed by an InstrFetchProhibited reboot loop"
+    },
+    {
+      "attempts_requested": 1,
+      "attempts_completed": 1,
+      "attempts_passed": 0,
+      "hold_seconds": 1,
+      "failure": "InstrFetchProhibited; PC=0; EXCCAUSE=0x14"
+    }
+  ],
+  "retained_before_failure": [
+    "UNIFIED_CORE2_BOOT",
+    "UNIFIED_CORE2_MAIN",
+    "UNIFIED_CORE2_DISPLAY",
+    "UNIFIED_CORE2_WIFI_CONNECTED",
+    "UNIFIED_CORE2_HTTP_PASS",
+    "UNIFIED_CORE2_PUBLIC_DNS",
+    "UNIFIED_CORE2_PUBLIC_HTTP_PASS",
+    "UNIFIED_CORE2_BLE_READY"
+  ],
+  "peer_state_before_failure": "BLE peer discovered and connected; then GATT discovery or notification timed out",
+  "classification": {
+    "root_cause": "NOT ESTABLISHED",
+    "not_claimed": [
+      "physical cache or PSRAM failure",
+      "bit-exact BT controller or baseband behavior",
+      "RF behavior",
+      "soak PASS"
+    ],
+    "next_checks": [
+      "fixed five-attempt no-retry run with ten-second holds",
+      "symbolize the first panic before reboot-loop failures",
+      "compare controller-task, HLI and ACL ownership state",
+      "separate Bumble teardown from process-stop timing"
+    ]
+  }
+}

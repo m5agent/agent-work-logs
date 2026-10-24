@@ -96,6 +96,7 @@
 | 2026-10-24 | ESP Emulator | 本地 QEMU/QMP restart re-attach | PASS（virtual-device infrastructure：仅 SIGKILL 服务时真实 StickS3 QEMU 存活；二代服务按 PID start-time+QMP ownership+running 状态接管同一 PID、重建 gen 2 lease 并可清理；companion/evidence/cross-host/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-qemu-restart-reattach/) |
 | 2026-10-24 | ESP Emulator | HTTP-only worker executor 与真实 durable job | PASS（virtual-device：独立 agent 注册/claim/heartbeat，创建真实 StickS3 QEMU session，下载 evidence ZIP/SHA256，停止 session 并提交 completed/PASS，292/292 tests；跨主机/auth/companion/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-http-worker-executor/) |
 | 2026-10-24 | ESP Emulator | Worker HMAC authentication 与签名真实 job | PASS（virtual-device：worker/generation key、timestamp/nonce/body HMAC、path/body identity binding；unsigned claim 401，签名 agent 完成真实 StickS3 job，296/296 tests；跨主机 TLS/mTLS、rotation、companion/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-worker-hmac-auth/) |
+| 2026-10-24 | ESP Emulator | 当前代码/文档对账与 Core2 extended-run 失败固化 | PARTIAL（docs/contracts：296/296 tests、Node 2/2、CI PASS；Core2 `HCI-4` 功能基线仍 PASS，但 extended-run/soak 在 READY/联网/BLE 连接后 panic，根因未定；完整矩阵与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-24-core2-extended-run-and-current-work-reconciliation/) |
 
 ## 目录结构
 
