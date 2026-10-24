@@ -16,6 +16,10 @@
 Service API、网络和用户固件文档已收敛到同一组事实源。文档不再把
 Open-only WiFi、未验证 IPv6 或尚未关闭的 `RUNTIME-05` 当作当前结论。
 
+后续在 `6120489` 上进一步补齐测试/补丁总索引、自动代码规模快照和一页式
+交接，见
+[Follow-up: code/document inventory and handoff](followups/2026-10-25-code-doc-inventory-and-handoff/)。
+
 本轮同时关闭了 accepted virtual-device scope 内的 S3 WPA2-PSK 数据面：
 正确密码完成 RSN/M1-M4/CCMP、DHCP、DNS 和 TCP/443；错误密码在 M2 MIC
 被拒绝且没有 DHCP。详细实现、证据和剩余边界见
