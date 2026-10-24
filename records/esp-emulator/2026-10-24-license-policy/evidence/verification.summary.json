@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "scope": "firmware-manifest-declared-license-policy",
+  "status": "PASS",
+  "source_commit": "21d26c93055a65b9952a3d5611838bcbb3f2dc10",
+  "base_commit": "acd5329c4fecb23d7ac2cb1e5dd6dcf370c673f5",
+  "manifest": {
+    "section": "license_policy",
+    "allowlist": true,
+    "denylist": true,
+    "sources": [
+      "provenance",
+      "filesystem SPDX",
+      "SPDX/CycloneDX SBOM"
+    ]
+  },
+  "cases": {
+    "allowlisted_mit_apache": "PASS",
+    "denied_gpl_3_0_only": "REJECTED",
+    "no_allowlist": "REVIEW_REQUIRED",
+    "no_declaration": "REVIEW_REQUIRED",
+    "unknown_expression": "REVIEW_REQUIRED",
+    "spiffs_bsd_3_clause_allowlist_import": "PASS"
+  },
+  "checks": {
+    "manifest_structure": "PASS",
+    "schema_json": "PASS",
+    "python_compileall": "PASS",
+    "selected_ruff_rules": "PASS",
+    "platform_tests": "272/272 PASS",
+    "github_actions_40047172520": "PASS",
+    "runtime_filesystem_permissions": "NOT RUN",
+    "complete_source_license_scan": "NOT RUN",
+    "legal_approval": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "not_claimed": [
+    "legal license compliance",
+    "copyright ownership",
+    "complete source-level dependency scan",
+    "runtime file permissions",
+    "physical hardware security state"
+  ]
+}
