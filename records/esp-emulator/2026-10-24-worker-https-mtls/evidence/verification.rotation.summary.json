@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "transport-security validation",
+  "scope": "same-host-loopback-sighup-tls-token-rotation",
+  "result_commit": "b01e95b22c163c270d1ef632c1abb75cbdd4c527",
+  "previous_follow_up_commit": "48ff20c416221e20f76873c07d7473329318eb5c",
+  "rotation": {
+    "server_certificate": "A-to-B",
+    "client_ca": "A-to-B",
+    "worker_client_certificate_and_key": "A-to-B",
+    "master_token": "A-to-B",
+    "reload_signal": "SIGHUP",
+    "token_file_validation": "UTF-8, 1-4096 bytes, non-empty, no NUL, trailing CR/LF ignored"
+  },
+  "checks": {
+    "initial_https_credentials": "PASS",
+    "worker_registered_before_rotation": "PASS",
+    "server_security_reload": "PASS",
+    "old_tls_identity_rejected": "PASS",
+    "new_tls_identity_accepted": "PASS",
+    "old_master_token_rejected": "PASS",
+    "worker_credentials_reload": "PASS",
+    "signed_job_after_rotation": "PASS",
+    "job_evidence_sha256": "PASS"
+  },
+  "live_job": {
+    "status": "completed",
+    "result_state": "PASS",
+    "attempts": 1,
+    "firmware_sha256": "a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec",
+    "evidence_bytes": 6853,
+    "evidence_sha256": "51899986348661abefb82d042ea85f3007e54e33f2c366bd218573b2450761e8"
+  },
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/b01e95b22c163c270d1ef632c1abb75cbdd4c527/tests/network/worker_tls/evidence-2026-10-24-security-rotation-job-pass.json",
+  "source_evidence_sha256": "c7c9d926cfbc2ac2859e378463a0c9b73e8426ae446836094ede55825487bcfa",
+  "platform": {
+    "tests": 306,
+    "passed": 306,
+    "failed": 0,
+    "node_tests": "2/2 PASS"
+  },
+  "github_actions": {
+    "run_id": 40072474174,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "not_run": [
+    "zero-downtime request draining during rotation",
+    "cross-host network topology or continuity",
+    "production CA or secret-manager lifecycle",
+    "multi-host scheduling or worker continuity",
+    "hardware validation"
+  ]
+}

@@ -1,4 +1,4 @@
-# ESP Emulator Worker HTTPS/mTLS Transport
+# ESP Emulator Worker HTTPS/mTLS, Signed Jobs and Credential Rotation
 
 - 日期：`2026-10-24`
 - 结果：`PASS`
@@ -6,6 +6,7 @@
 - 源码版本：`m5agent/m5stack-esp-emulator @ ea6e4cb37460f6ce20fc2f18f03224c8724ae0cd`
 - QEMU job follow-up：`m5agent/m5stack-esp-emulator @ 865e4f810263f3f388beeee3aa577de27f99d0b1`
 - unified job follow-up：`m5agent/m5stack-esp-emulator @ 48ff20c416221e20f76873c07d7473329318eb5c`
+- TLS/token rotation follow-up：`m5agent/m5stack-esp-emulator @ b01e95b22c163c270d1ef632c1abb75cbdd4c527`
 - 基线版本：`e9520bbca56da753cd4cd75cf30c8c5594866386`
 - 环境：macOS Apple Silicon；Python 3；同一主机 loopback；真实 Device Service 与 worker 子进程；临时测试 PKI
 
@@ -26,6 +27,12 @@ session，下载 evidence，核对 SHA256 并提交 terminal `completed/PASS`。
 第三次门禁使用 unified StickS3 镜像和 `qemu-unified` profile，在同一个
 mTLS worker job 中验证 board/WiFi/BLE serial markers、network evidence、
 pcap 和 PNG frame；所有文件均来自同一个下载的 evidence ZIP。
+
+第四次门禁加入 file-backed token 和 `SIGHUP` A/B rotation。服务端与 worker
+原子替换临时 PKI、客户端 CA、worker 客户证书/key 和 master token；旧 CA
+身份与旧 token 均被拒绝，新凭据继续注册/heartbeat/claim，并完成真实
+StickS3 QEMU job。该结果只覆盖同主机 loopback；零中断 request draining、
+跨主机 continuity 和生产 secret manager 未验证。
 
 ## 关键证据
 
@@ -50,6 +57,16 @@ pcap 和 PNG frame；所有文件均来自同一个下载的 evidence ZIP。
 - unified evidence SHA256：
   `87fb8d04f630833cbebcc2d0842a8dabe94b02a4f20c6c60a106341496a4f423`；
 - unified pcap / frame：`9570` / `2885` bytes。
+- rotation checks：`9/9 PASS`；
+- rotation scope：
+  `same-host-loopback-sighup-tls-token-rotation`；
+- rotation 后 firmware SHA256：
+  `a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec`；
+- rotation 后 evidence bytes / SHA256：`6853` /
+  `51899986348661abefb82d042ea85f3007e54e33f2c366bd218573b2450761e8`；
+- rotation 后 job：`completed / PASS / attempts=1`；
+- rotation follow-up：平台测试 `306/306 PASS`，GitHub Actions CI run
+  `40072474174` 两个 job 均 `PASS`。
 
 ## 文件
 
@@ -58,12 +75,14 @@ pcap 和 PNG frame；所有文件均来自同一个下载的 evidence ZIP。
 - `evidence/verification.transport.json`：传输安全证据摘要
 - `evidence/verification.qemu-job.summary.json`：真实 QEMU job over mTLS 的 follow-up
 - `evidence/verification.unified-job.summary.json`：unified board/WiFi/BLE job over mTLS 的 follow-up
+- `evidence/verification.rotation.summary.json`：TLS/token rotation 与轮换后 QEMU job 的 follow-up
 
 ## 未覆盖项
 
 - 跨主机网络拓扑、延迟和丢包；
-- 证书或 worker 凭据热轮换；
+- 轮换期间的零中断 request draining；
 - 生产 CA/证书生命周期；
+- 生产 secret manager 集成；
 - 任意其他固件的 unified board/network/UI PASS；
 - 多主机调度和 worker continuity；
 - 真机、RF 或硬件验证。

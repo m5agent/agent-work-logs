@@ -61,15 +61,15 @@ python3 tests/network/worker_tls/run_test.py
 | data_plane | `NOT RUN` | 本轮未执行真实 QEMU job over mTLS |
 | visual_or_physical | `NOT RUN` | 与本传输改动无关 |
 
-平台测试 `305/305`，Node `2/2`，GitHub Actions CI
+初始传输里程碑的平台测试 `305/305`，Node `2/2`，GitHub Actions CI
 `40070863490` 两个 job 成功。
 
 ## 验证边界
 
 - 真实进程是同一主机 loopback，不是跨主机网络；
 - 临时 PKI 只验证协议与配置，不代表生产 CA 生命周期；
-- TLS 证书在进程启动时加载，热轮换未实现；
-- worker token/generation 凭据热轮换未实现；
+- 在本记录最初 commit 中，TLS 证书和 worker token 只支持进程启动时加载；
+  后续 rotation follow-up 已补 `SIGHUP` 文件重载；
 - 本轮没有执行真实 QEMU job over mTLS；
 - 不包含 RF、硬件或设备功能验证。
 
@@ -111,8 +111,9 @@ HMAC 的旧能力；不得把回滚状态用于跨主机不可信网络。
 - CI run `40071518376`：两个 job 均成功。
 
 该 QEMU job 使用 `runtime=qemu`，没有声明 unified board/network/UI PASS。
-跨主机网络、证书/worker 凭据热轮换、生产 CA 生命周期、多主机调度、
-companion continuity 和真机仍未验证。
+在该 follow-up commit 上，跨主机网络、凭据 rotation、生产 CA 生命周期、
+多主机调度、companion continuity 和真机仍未验证；rotation 由后续 follow-up
+闭合，跨主机和零中断仍未覆盖。
 
 ## Follow-up：unified StickS3 job over mTLS
 
@@ -141,5 +142,65 @@ companion continuity 和真机仍未验证。
 
 平台测试 `305/305 PASS`，CI run `40071841654` 两个 job 成功。
 
-该结果证明 retained unified StickS3 路径可与 mTLS worker 控制面组合；不证明
-任意固件、跨主机拓扑、证书/凭据热轮换、多主机 continuity 或真机。
+该结果证明 retained unified StickS3 路径可与 mTLS worker 控制面组合；在该
+commit 上不证明任意固件、跨主机拓扑、凭据 rotation、多主机 continuity 或
+真机。凭据 rotation 由下一节 follow-up 闭合。
+
+## Follow-up：TLS/token rotation 与轮换后真实 job
+
+源码版本：
+`m5agent/m5stack-esp-emulator @ b01e95b22c163c270d1ef632c1abb75cbdd4c527`。
+
+该 follow-up 增加 token 文件、服务端动态 TLS context、worker 凭据快照和
+`SIGHUP` reload：
+
+- `serve.py` 为每个新 accept 的 socket 使用当前 TLS context；已有握手连接
+  不被主动迁移；
+- 服务端先加载并校验 token、server cert、client CA，再原子替换 live token
+  与 verifier；
+- worker 在每次请求前对 token 和 TLS context 做一致快照，避免并发 reload
+  产生 token/signature 混代；
+- token 文件限制为 UTF-8、1–4096 bytes、非空且无 NUL；
+- token 与 `--api-token`/`--token` 的 CLI 参数互斥；
+- 配置加载失败保留上一份安全配置。
+
+真实进程执行顺序：
+
+1. 用 A PKI 和 token A 启动服务端、worker；
+2. 等 worker 完成注册；
+3. `SIGSTOP` worker，原子替换为 B PKI/token；
+4. 向服务和 worker 发送 `SIGHUP`，随后恢复 worker；
+5. 用旧 CA 的身份发起 TLS health，握手失败；
+6. 用新 CA 的身份发起 TLS health，得到 200；
+7. 用新 TLS 身份携旧 token 和已注册 worker identity 生成合法 HMAC claim，
+   服务端返回 401；
+8. worker 记录 `worker credentials reloaded`，用新凭据继续 claim；
+9. 上传完整 8 MiB StickS3 flash、compose、提交真实 `runtime=qemu` job；
+10. 下载 evidence ZIP，独立核对 SHA256，job 终态 `completed/PASS`。
+
+结果：
+
+- 9 项 rotation checks 全部 `PASS`；
+- firmware SHA256：
+  `a5d027f6d2953edb9ece45cddea1490112d8e421ba563edc6e7c71cf7ac4f6ec`；
+- evidence bytes / SHA256：`6853` /
+  `51899986348661abefb82d042ea85f3007e54e33f2c366bd218573b2450761e8`；
+- job：`completed / PASS / attempts=1`；
+- 平台测试：`306/306 PASS`；
+- Node：`2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向 Ruff
+  均 `PASS`；
+- GitHub Actions CI run `40072474174`：`platform-contracts` 与
+  `network-namespace-policy` 均成功。
+
+边界：
+
+- 同主机 loopback，不是跨主机网络；
+- 新 TLS context 只影响后续握手，已有 TLS 会话保留协商状态；
+- 新 token 影响后续受保护请求，包括已有 keep-alive 连接；
+- 不证明轮换期间零中断 request draining；
+- 不包含生产 CA/secret-manager 生命周期、多主机 continuity、RF 或真机。
+
+回滚：revert
+`b01e95b22c163c270d1ef632c1abb75cbdd4c527`。回滚后恢复启动时加载
+证书/token；不得把回滚状态用于需要凭据轮换的部署。
