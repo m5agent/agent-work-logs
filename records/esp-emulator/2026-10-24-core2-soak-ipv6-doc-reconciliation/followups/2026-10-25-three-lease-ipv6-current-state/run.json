@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Close three-lease Core2 reconnect and guest IPv6 namespace gates; reconcile current docs and backlog",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "d9008a3c94582281cbedf079a95be2b5f02f74d5",
+    "network_commit": "64b00be532a416f90c6a69c661251d9bd895e6be",
+    "core2_commit": "97eb73a055b48336095c79b5473d8f6b9a6a6e7d",
+    "docs_commit": "fa66e1849756346946f3a6acf88757ac55d2c525",
+    "ci_validated_commit": "a4ef8b890a871b09c33133ebd6407d401be90ccf",
+    "result_commit": "fa66e1849756346946f3a6acf88757ac55d2c525"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_cache_psram": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "core2_sha256": "4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02",
+    "core2_elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "d970ddb54bf5fa070cf10d721f024f20a342a3837e3d19b564300f74f3f16fc1",
+    "sticks3_test_build_base_sha256": "e5361d9ef99bf878746aa293636594792ff5c0cb6c399ac1e1064514012c69ee",
+    "sticks3_test_build_probe_sha256": "27ee83a5de1d298ebf48ae447873c2356c67bf588c3d3c7843fd3ba11910dd8f",
+    "input_asset_drift": {}
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon and Linux arm64 namespace with patched QEMU; no physical hardware",
+    "core2_profile": "core2-native-hci",
+    "core2_runtime": "qemu-unified",
+    "core2_lease_count": 3,
+    "core2_cycles_per_lease": 121,
+    "ipv6_isolation": "private network namespace",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "355/355"
+    },
+    {
+      "name": "docs_contract",
+      "status": "PASS",
+      "detail": "19/19"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "run 40125359517 on a4ef8b8 and run 40125476618 on fa66e18; both jobs passed in each run"
+    },
+    {
+      "name": "core2_three_lease_121_cycles",
+      "status": "PASS",
+      "detail": "3/3 leases; each HLI 3405/3405, events 2316, ACLs 1089, zero errors/drops/peer-close/panic"
+    },
+    {
+      "name": "core2_asset_identity",
+      "status": "PASS",
+      "detail": "firmware, ELF, QEMU and tool hashes identical across runs; input drift empty"
+    },
+    {
+      "name": "guest_ipv6_namespace_lifecycle",
+      "status": "PASS",
+      "detail": "controlled AAAA, HTTP 200, denied port, pcap, cleanup and QEMU reap in one guest lifecycle"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "core2_throughput_concurrency_teardown",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "current_public_firmware_functional_rerun",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_worker_qemu",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/fa66e1849756346946f3a6acf88757ac55d2c525/tests/uiflow2/core2_native_hci/evidence-2026-10-25-hci4-reconnect121-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/fa66e1849756346946f3a6acf88757ac55d2c525/tests/network/ipv6_end_to_end/evidence-2026-10-25-ipv6-namespace-aaaa-http-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40125476618",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40125359517"
+  ],
+  "notes": [
+    "Virtual-device validation only; no physical hardware, RF, power or electrical claim.",
+    "Stock UIFlow2 does not create an IPv6 link-local address by default.",
+    "NET-06 is closed for accepted virtual-device scope; CIDR/domain-set and untrusted-firmware VM isolation remain separate work.",
+    "The 67-case full matrix was not rerun in this documentation/evidence reconciliation."
+  ]
+}

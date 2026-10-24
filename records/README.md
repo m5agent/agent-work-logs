@@ -18,5 +18,6 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-25 | `esp-emulator` | Core2 三 lease 121 轮、guest IPv6 namespace 与当前 Backlog 重整 | `PASS`（virtual-device + docs/contracts；物理 cache/PSRAM、bit-exact controller、吞吐/teardown 与真机 NOT RUN） | [查看](esp-emulator/2026-10-24-core2-soak-ipv6-doc-reconciliation/followups/2026-10-25-three-lease-ipv6-current-state/) |
 | 2026-10-25 | `esp-emulator` | 当前工作/文档总整理与 Core2 单 lease 121 轮 reconnect | `PASS`（virtual-device + docs；3/3、物理与真机 NOT RUN） | [查看](esp-emulator/2026-10-24-core2-soak-ipv6-doc-reconciliation/followups/2026-10-25-reconnect121-doc-reconciliation/) |
 | 2026-10-24 | `m5stack-schematics-text` | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | `PASS` / PR #2 待审核 | [查看](m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |

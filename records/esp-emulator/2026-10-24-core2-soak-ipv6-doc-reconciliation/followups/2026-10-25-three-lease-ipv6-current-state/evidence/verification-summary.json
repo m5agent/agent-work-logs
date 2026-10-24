@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "date": "2026-10-25",
+  "validation": "virtual-device validation",
+  "source_commit": "fa66e1849756346946f3a6acf88757ac55d2c525",
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "passed": 355,
+      "total": 355
+    },
+    "docs_contract": {
+      "status": "PASS",
+      "passed": 19,
+      "total": 19
+    },
+    "node_tests": {
+      "status": "PASS",
+      "passed": 2,
+      "total": 2
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "github_actions": {
+      "status": "PASS",
+      "runs": [
+        {
+          "id": 40125359517,
+          "validated_commit": "a4ef8b890a871b09c33133ebd6407d401be90ccf"
+        },
+        {
+          "id": 40125476618,
+          "validated_commit": "fa66e1849756346946f3a6acf88757ac55d2c525"
+        }
+      ]
+    }
+  },
+  "core2_reconnect": {
+    "status": "PASS",
+    "leases_passed": 3,
+    "lease_count": 3,
+    "ble_reconnect_cycles_per_lease": 121,
+    "ready_timeout_seconds_effective": 1028,
+    "qemu_accelerator": "tcg,thread=single,tb-size=128",
+    "frame_bytes": 3710,
+    "frame_sha256": "5bfcdf8fc518a36385783a9b5bf09b3fbce9d8c07406326955569f6c7db8408b",
+    "qom_nodes": 34,
+    "hli_posts_per_lease": 3405,
+    "hli_consumed_per_lease": 3405,
+    "hli_errors_per_lease": 0,
+    "events_per_lease": 2316,
+    "acls_per_lease": 1089,
+    "panic_count": 0,
+    "identity_checks": {
+      "firmware_equal_across_runs": true,
+      "elf_equal_across_runs": true,
+      "qemu_equal_across_runs": true,
+      "tool_hashes_equal_across_runs": true,
+      "input_asset_drift": {}
+    },
+    "raw_aggregate_sha256": "f4df55f2e139aad47b705974095b1879256ffbea2cb0c6e17fe6e5cba4dd063e"
+  },
+  "guest_ipv6": {
+    "status": "PASS",
+    "runtime": "linux-arm64 namespace",
+    "machine": "m5sticks3",
+    "isolation": "namespace",
+    "egress": "allowlist",
+    "dns": {
+      "allowlisted_name": "allowed.lab.test",
+      "query_type": "AAAA",
+      "aaaa_result": "FEC0::2",
+      "background_denied_queries": [
+        {
+          "name": "uiflow2.m5stack.com",
+          "status": "NXDOMAIN",
+          "observed_queries": 3
+        },
+        {
+          "name": "ntp.aliyun.com",
+          "status": "NXDOMAIN",
+          "observed_queries": 1
+        }
+      ]
+    },
+    "http": {
+      "path": "/ipv6",
+      "response": "HTTP/1.0 200 OK"
+    },
+    "pcap_destinations": [
+      {
+        "address": "fec0::2",
+        "port": 18095,
+        "protocol": "TCP",
+        "packets": 5
+      },
+      {
+        "address": "fec0::2",
+        "port": 18096,
+        "protocol": "TCP",
+        "packets": 2
+      }
+    ],
+    "cleanup": {
+      "private_namespace": true,
+      "namespace_cleanup": true,
+      "qemu_process_reaped": true,
+      "dns_closed": true,
+      "http_closed": true
+    },
+    "raw_aggregate_sha256": "06b7861895f3b0511c2c64b25da3229fac1bea060c2c845735a0d67d6918c7c1"
+  },
+  "not_claimed": [
+    "bit-exact Espressif BT controller/baseband",
+    "physical cache/PSRAM timing",
+    "RF, power or electrical measurements",
+    "long-run Core2 throughput, concurrency or teardown",
+    "physical hardware validation",
+    "CIDR or domain-set policy",
+    "untrusted firmware disposable VM isolation"
+  ]
+}
