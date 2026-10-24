@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "date": "2026-10-25",
+  "scope": "virtual-device-trusted-host-unified-companion-continuity",
+  "source": {
+    "base_commit": "61204890a1442ea6b88652fd5da53d678a8a826e",
+    "result_commit": "3bd0f6655fc6495bd1653eac2f39c1139f1fed64",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40144639644",
+    "ci_status": "PASS"
+  },
+  "firmware": {
+    "device": "sticks3",
+    "runtime": "qemu-unified",
+    "profile": "uiflow2-sticks3-unified",
+    "sha256": "04b008c60cf54d1e9fc52b8c9a1c2c4738a7ee046a64000779bebc8de9074c9d"
+  },
+  "runtime_restart": {
+    "downtime_seconds": 2.2,
+    "same_state_dir": true,
+    "same_session": true,
+    "same_qemu_pid": true,
+    "process_start_token_checked": true,
+    "qmp_ownership_checked": true,
+    "recovery_scope": "qemu-control-plane+companions"
+  },
+  "companion_continuity": {
+    "http_fixture": {
+      "before_state": "running",
+      "before_generation": 1,
+      "after_state": "recovered",
+      "after_generation": 2,
+      "requests": [
+        {"path": "/unified", "host": "qemu.test", "generation": 1},
+        {"path": "/unified", "host": "qemu.test", "generation": 2}
+      ]
+    },
+    "ble_probe": {
+      "before_state": "running",
+      "after_state": "adopted",
+      "pid_start_time_command_sha256_verified": true,
+      "post_restart_cycle": 2,
+      "continuity_pass": true
+    },
+    "guest_http_recheck": true,
+    "network_evidence_status": "PASS"
+  },
+  "job": {
+    "status": "completed",
+    "result_state": "PASS",
+    "same_lease": true,
+    "same_worker_identity": true,
+    "live_fixture_checks": {
+      "passed": 26,
+      "total": 26
+    }
+  },
+  "evidence_zip": {
+    "bytes": 42247,
+    "sha256": "8fe5e4c687e04db2d59bbdcddd75638dc82d4ff2c46674924945e04f588412ae",
+    "members": [
+      "audio/speaker.pcm",
+      "ble-probe.log",
+      "http-fixture.json",
+      "manifest.json",
+      "network/capture.pcap",
+      "network/evidence.json",
+      "qemu.stderr",
+      "qemu.stdout",
+      "serial.log"
+    ]
+  },
+  "verification": {
+    "platform_tests": {"passed": 402, "total": 402},
+    "documentation_tests": {"passed": 22, "total": 22},
+    "node_tests": {"passed": 2, "total": 2},
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_fatal": "PASS",
+    "openapi_yaml": "PASS",
+    "git_diff_check": "PASS",
+    "residual_processes": "NONE",
+    "github_actions": "PASS"
+  },
+  "not_claimed": [
+    "namespace-managed companion recovery",
+    "Tab5 companion recovery",
+    "cross-host companion recovery",
+    "cross-host QEMU process migration",
+    "production multi-host scheduler",
+    "physical hardware validation",
+    "RF, power, electrical, acoustic or optical measurements"
+  ]
+}

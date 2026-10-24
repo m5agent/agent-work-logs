@@ -35,6 +35,10 @@ same worker identity     PASS
 Evidence ZIP 来自重启后的 runtime service，包含 `manifest.json`、serial、
 QEMU stdout/stderr；会话随后 stopped、PID released，QEMU process reaped。
 
+后续在 trusted-host unified StickS3 上补齐 HTTP/BLE companion continuity，
+见
+[Follow-up: unified companion continuity](followups/2026-10-25-unified-companion-continuity/)。
+
 ## 关键证据
 
 - 平台测试：`394/394 PASS`；

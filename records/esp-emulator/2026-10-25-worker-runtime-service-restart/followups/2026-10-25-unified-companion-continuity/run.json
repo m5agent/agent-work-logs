@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Recover trusted-host unified HTTP and BLE companions after runtime restart",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "61204890a1442ea6b88652fd5da53d678a8a826e",
+    "result_commit": "3bd0f6655fc6495bd1653eac2f39c1139f1fed64",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40144639644",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "device": "sticks3",
+    "runtime": "qemu-unified",
+    "profile": "uiflow2-sticks3-unified",
+    "sha256": "04b008c60cf54d1e9fc52b8c9a1c2c4738a7ee046a64000779bebc8de9074c9d"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; central and worker-local Device Service; real StickS3 QEMU; Bumble BLE peer; WorkerAgent",
+    "runtime_downtime_seconds": 2.2,
+    "same_state_dir": true,
+    "same_session": true,
+    "same_qemu_pid": true,
+    "recovery_scope": "qemu-control-plane+companions",
+    "http_generations": [1, 2],
+    "ble_peer_state": ["running", "adopted"],
+    "ble_continuity_cycle": 2,
+    "guest_http_recheck": true,
+    "job_status": "completed",
+    "result_state": "PASS",
+    "evidence_bytes": 42247,
+    "evidence_sha256": "8fe5e4c687e04db2d59bbdcddd75638dc82d4ff2c46674924945e04f588412ae",
+    "live_fixture_checks": {
+      "passed": 26,
+      "total": 26
+    },
+    "platform_tests": {
+      "passed": 402,
+      "total": 402
+    },
+    "documentation_tests": {
+      "passed": 22,
+      "total": 22
+    },
+    "node_tests": {
+      "passed": 2,
+      "total": 2
+    }
+  },
+  "checks": [
+    {"name": "same_qemu_pid_and_session", "status": "PASS"},
+    {"name": "qmp_ownership_and_running", "status": "PASS"},
+    {"name": "http_request_log_durability", "status": "PASS"},
+    {"name": "http_fixture_generation_2_recovery", "status": "PASS"},
+    {"name": "ble_pid_start_time_command_sha_ownership", "status": "PASS"},
+    {"name": "ble_peer_adoption", "status": "PASS"},
+    {"name": "post_restart_gatt_cycle_2", "status": "PASS"},
+    {"name": "post_restart_guest_http_recheck", "status": "PASS"},
+    {"name": "network_evidence_with_two_http_requests", "status": "PASS"},
+    {"name": "same_job_lease_worker_identity", "status": "PASS"},
+    {"name": "evidence_zip_complete", "status": "PASS"},
+    {"name": "qemu_and_companion_cleanup", "status": "PASS"},
+    {"name": "github_actions", "status": "PASS"},
+    {"name": "namespace_managed_companion_recovery", "status": "NOT RUN"},
+    {"name": "tab5_companion_recovery", "status": "NOT RUN"},
+    {"name": "cross_host_companion_recovery", "status": "NOT RUN"},
+    {"name": "cross_host_qemu_migration", "status": "NOT RUN"},
+    {"name": "physical_hardware", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3bd0f6655fc6495bd1653eac2f39c1139f1fed64/tests/network/worker_runtime_restart/evidence-2026-10-25-runtime-companion-continuity-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40144639644"
+  ],
+  "notes": [
+    "Only trusted-host unified companion recovery is covered.",
+    "The HTTP fixture is recreated from durable request generations; the BLE peer is adopted only after exact process ownership checks.",
+    "No physical hardware, RF, power or electrical behavior is claimed."
+  ]
+}
