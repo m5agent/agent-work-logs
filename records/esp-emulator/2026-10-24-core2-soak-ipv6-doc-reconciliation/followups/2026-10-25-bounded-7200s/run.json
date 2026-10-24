@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Close Core2 bounded two-hour host-memory soak",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "387de4307e06c9a986397e2adbd0bbd789a69015",
+    "result_commit": "aa656c029697940f805442ab37f578edc73485b2"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "4e1012c419d04e7188bb8c45476f6f5eb4d509f227bc4e385a805ce011916e02",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "d970ddb54bf5fa070cf10d721f024f20a342a3837e3d19b564300f74f3f16fc1",
+    "input_asset_drift": {}
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon with patched QEMU and real Device Service lease",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "attempts": "1/1 PASS",
+    "hold_seconds": 7200
+  },
+  "checks": [
+    {
+      "name": "bounded_tcg_cache",
+      "status": "PASS"
+    },
+    {
+      "name": "input_and_tool_hash_binding",
+      "status": "PASS",
+      "detail": "before_first_lease; drift={}"
+    },
+    {
+      "name": "frame_qom",
+      "status": "PASS",
+      "detail": "3710-byte frame; 34 QOM nodes"
+    },
+    {
+      "name": "wifi_public_http",
+      "status": "PASS"
+    },
+    {
+      "name": "external_nus_gatt",
+      "status": "PASS"
+    },
+    {
+      "name": "active_ble_peer",
+      "status": "PASS"
+    },
+    {
+      "name": "pcap_evidence_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "hli_health",
+      "status": "PASS",
+      "detail": "45/45; errors, queues and peer close are zero"
+    },
+    {
+      "name": "rss_bound",
+      "status": "PASS",
+      "detail": "323536 to 252992 KiB over 240 samples"
+    },
+    {
+      "name": "phys_footprint_bound",
+      "status": "PASS",
+      "detail": "250880 to 188416 KiB over 240 samples"
+    },
+    {
+      "name": "reconnect_121",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/aa656c029697940f805442ab37f578edc73485b2/tests/uiflow2/core2_native_hci/evidence-2026-10-25-hci4-active-ble-hold7200-tb128-artifact-bound-1x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/aa656c029697940f805442ab37f578edc73485b2/platform/tools/qemu_accel.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/aa656c029697940f805442ab37f578edc73485b2/tests/uiflow2/core2_native_hci/run_service_5x.py"
+  ],
+  "notes": [
+    "The PASS is scoped to one firmware/profile/lease window.",
+    "This is virtual-device validation, not physical cache/PSRAM, RF or hardware validation.",
+    "No QEMU process remained after session stop."
+  ]
+}
