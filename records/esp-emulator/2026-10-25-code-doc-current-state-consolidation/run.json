@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "docs_change",
+  "overall_status": "PASS",
+  "title": "Reconcile ESP Emulator code, documentation, current work and backlog",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3f4bf92b96d5854f0804d7f7014c4a9c244da99e",
+    "capability_commit": "08d8a21bda173ff65dfb5343d0fa8082732eb872",
+    "documentation_commit": "e41bfd5b2e4dd0b582e1caa946d2245a67a37218",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40138787543",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "validated_sha256": "b3597fcabbff57c98618caa8754af84745e9eac35b2868ab3c4cb0935b7c59b3",
+    "scope": "The firmware SHA is bound in the separate S3 WPA2 record; this docs record does not add a new firmware run"
+  },
+  "execution": {
+    "platform_tests": 377,
+    "documentation_tests": 20,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS",
+    "full_peripheral_matrix": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "project_status_reconciliation",
+      "status": "PASS"
+    },
+    {
+      "name": "project_backlog_reconciliation",
+      "status": "PASS"
+    },
+    {
+      "name": "workstreams_and_code_map",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_gap_register",
+      "status": "PASS",
+      "detail": "RUNTIME-01 and accepted RUNTIME-05 scope are closed; RUNTIME-02/03/04 remain OPEN"
+    },
+    {
+      "name": "device_service_api_and_openapi",
+      "status": "PASS"
+    },
+    {
+      "name": "network_documentation",
+      "status": "PASS",
+      "detail": "IPv4 and IPv6 exact endpoint policy reflected in AGENTS and current docs"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "377/377"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "20/20"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "../2026-10-25-s3-wpa2-psk-data-plane/",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/e41bfd5b2e4dd0b582e1caa946d2245a67a37218"
+  ],
+  "notes": [
+    "This record inventories current documentation and backlog state; it does not replace the detailed per-milestone evidence ledger.",
+    "All functional conclusions remain virtual-device validation unless explicitly labeled hardware validation."
+  ]
+}
