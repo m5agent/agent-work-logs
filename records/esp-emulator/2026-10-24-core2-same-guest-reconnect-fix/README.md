@@ -1,4 +1,4 @@
-# ESP Emulator Core2 同 guest BLE 重连修复：2 到 30 轮
+# ESP Emulator Core2 同 guest BLE 重连修复：2 到 60 轮
 
 - 日期：`2026-10-24`
 - 结果：`PASS`
@@ -8,6 +8,7 @@
 - 十轮 follow-up 与 timeout 修复：`m5agent/m5stack-esp-emulator @ e9520bbca56da753cd4cd75cf30c8c5594866386`
 - 二十轮 follow-up：`m5agent/m5stack-esp-emulator @ 36e28d76b3c293975878d1980dbd5349d1a9efe4`
 - 三十轮 follow-up：`m5agent/m5stack-esp-emulator @ c2545835091a6fb321c73a517fe66655c8160686`
+- 六十轮 follow-up 与文档对账：`m5agent/m5stack-esp-emulator @ d9b4969acd91e39e672ab7d7f939e26f6e5a28e3`
 - 基线版本：`e686838e38dc8ec46daa6dbc2830322806ca7355`
 - 环境：macOS Apple Silicon；Python 3；patched QEMU；UIFlow2 v2.5.3 Core2 和匹配 ELF
 
@@ -88,6 +89,28 @@ Service lease 各自完成 30 轮 scan/connect/NUS GATT/disconnect，`3/3 PASS`�
 - frame/QOM、WiFi、公网 DNS/HTTP、pcap 和 evidence ZIP 全部 PASS；
 - 无 panic、无 dropped packet。
 
+## 六十轮 follow-up
+
+Device Service、Bumble peer 和 service runner 的 reconnect 上限已收敛到
+`platform/tools/ble_runtime_limits.py` 这一共享来源，范围提升到 `1..60`，
+并由契约测试拒绝 61。使用同一 unified Core2 镜像、ELF 和 QEMU SHA，3 个
+独立 Device Service lease 各自完成 60 轮
+scan/connect/NUS GATT/disconnect，`3/3 PASS`。每个 attempt：
+
+- peer `BLE_BUMBLE_CYCLE_PASS`、guest RX 和 ACK marker 均为 60；
+- HLI `1697/1697`，events `1157`，ACLs `540`；
+- `hli-errors=0`，HLI/meta/TX queue 深度为 0；
+- connection/L2CAP/GATT 池回到 `3/9/3`；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=60`；
+- frame/QOM、WiFi、公网 DNS/HTTP、pcap 和 evidence ZIP 全部 PASS；
+- 三次 frame SHA256 一致，QOM 为 34 节点；
+- 无 panic、无 dropped packet。
+
+同一提交还完成了代码/文档对账：设备源 catalog、生成 catalog、QEMU profile、
+项目状态、Backlog、工作流台账、网络专题和测试说明统一到 60 轮事实；
+`test_docs_consistency.py` 现在同时校验源清单、生成物、共享上限和 60 轮
+evidence，避免只更新 README 而让结构化元数据继续过期。
+
 ## 关键证据
 
 - 平台测试：初始修复 `300/300 PASS`，十轮 follow-up `301/301 PASS`；
@@ -103,10 +126,13 @@ Service lease 各自完成 30 轮 scan/connect/NUS GATT/disconnect，`3/3 PASS`�
 - 同 guest 十轮 reconnect：3 个独立 lease `3/3 PASS`；
 - 同 guest 二十轮 reconnect：3 个独立 lease `3/3 PASS`；
 - 同 guest 三十轮 reconnect：3 个独立 lease `3/3 PASS`；
+- 同 guest 六十轮 reconnect：3 个独立 lease `3/3 PASS`；
 - 二十轮 follow-up：平台测试 `314/314 PASS`，Node `2/2 PASS`，CI run
   `40074452179` 两个 job 均 `PASS`；
 - 三十轮 follow-up：平台测试 `318/318 PASS`，Node `2/2 PASS`，CI run
   `40079740981` 两个 job 均 `PASS`；
+- 六十轮 follow-up：平台测试 `321/321 PASS`，Node `2/2 PASS`，CI run
+  `40082707627` 两个 job 均 `PASS`；
 - 完整 67-case UIFlow2 外设矩阵本轮未重跑：`NOT RUN`；
 - 物理硬件、RF、bit-exact BT baseband/controller：`NOT RUN`。
 
@@ -119,10 +145,11 @@ Service lease 各自完成 30 轮 scan/connect/NUS GATT/disconnect，`3/3 PASS`�
 - `evidence/verification.reconnect10.summary.json`：十轮 follow-up、等待修复和失败历史的独立证据摘要
 - `evidence/verification.reconnect20.summary.json`：二十轮 follow-up、API 上限扩展和逐 lease health 摘要
 - `evidence/verification.reconnect30.summary.json`：三十轮 follow-up 和逐 lease health 摘要
+- `evidence/verification.reconnect60.summary.json`：六十轮 follow-up、共享上限和完整回归摘要
 
 ## 未覆盖项
 
-- 未执行超过 30 轮连续重连或多小时 soak；
+- 未执行超过 60 轮连续重连或多小时 soak；
 - 未验证 pairing/security/encrypted reconnect；
 - 未验证 bit-exact Espressif BT controller/baseband；
 - 未执行物理 cache/PSRAM 等价性或真机同路径验证；

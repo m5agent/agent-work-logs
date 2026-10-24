@@ -261,3 +261,54 @@ ELF 和 QEMU 与十轮证据一致；unified 镜像由同一 UIFlow2 build 和 L
 回滚：revert
 `c2545835091a6fb321c73a517fe66655c8160686`。三十轮 evidence 将回退，
 源码运行路径不变。
+
+## Follow-up：六十轮重连与代码/文档对账
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ d9b4969acd91e39e672ab7d7f939e26f6e5a28e3`。
+
+代码改动：
+
+- 新增 `platform/tools/ble_runtime_limits.py`，统一 reconnect cycles、
+  reconnect delay 和 hold seconds 上限，避免 Device Service、Bumble peer
+  与 runner 各自漂移；
+- reconnect cycles 从 `1..30` 提升到 `1..60`，契约测试接受 60、拒绝 61；
+- `test_docs_consistency.py` 同时校验 60 轮 evidence、共享上限、源 catalog、
+  生成 catalog 和 QEMU profile；
+- 修正文档测试中 `sixty_evidence` 放错作用域的问题；
+- 设备源清单、生成 catalog、QEMU profile、README、项目状态、Backlog、
+  工作流台账、网络专题、统一运行时契约和测试说明统一到当前 60 轮事实。
+
+使用同一 unified Core2 镜像、ELF 和 QEMU SHA，运行 3 个独立 `/api/v1`
+lease，每个要求 60 轮：
+
+- 每个 attempt 的 peer、guest RX 和 ACK marker 均为 60；
+- HLI posts/consumed 均为 `1697/1697`；
+- events `1157`、ACLs `540`；
+- `hli-errors=0`，HLI/meta/TX queue 深度为 0；
+- connection/L2CAP/GATT 池均回到 `3/9/3`；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=60`；
+- frame/QOM、WiFi/公网、pcap、evidence 和 manifest binding 全部 PASS；
+- 三次 frame SHA256 一致，QOM 为 34 节点；
+- 无 panic、无 dropped packet。
+
+验证：
+
+- 平台套件 `321/321 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、`compileall` 和
+  `git diff --check`：`PASS`；
+- GitHub Actions CI run `40082707627`：两个 job 均 `PASS`；
+- 完整 UIFlow2 67-case 外设矩阵本轮未重跑。
+
+边界：
+
+- virtual-device validation，不是物理 RF、功耗或硬件；
+- 60 轮短时 reconnect 不等于超过六十轮或多小时 coexistence/soak；
+- 未证明 pairing、secure connection、encrypted reconnect；
+- 未证明 bit-exact BT controller/baseband；
+- 未证明物理 cache/PSRAM 时序。
+
+回滚：revert
+`d9b4969acd91e39e672ab7d7f939e26f6e5a28e3`。回滚后 reconnect API 恢复
+`1..30`，60 轮 evidence 和历史 2/5/10/20/30 轮记录仍保留。
