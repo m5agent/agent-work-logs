@@ -82,7 +82,7 @@ network-namespace-policy 两个 job 均通过。
 
 ## 验证边界
 
-- 只验证两轮；更多连接轮次仍属于 Backlog；
+- 首次修复验证两轮；后续 follow-up 已扩大到每个 lease 五轮；
 - 未证明配对、安全连接或加密重连；
 - 未证明 bit-exact Espressif BT controller/baseband；
 - 未证明物理 cache/PSRAM 时序、RF、吞吐或硬件行为；
@@ -93,3 +93,36 @@ network-namespace-policy 两个 job 均通过。
 回滚可整体 revert `b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f`。
 QEMU observability 默认关闭，只在显式环境变量下输出 packet trace，不改变
 GATT 数据面。未操作物理设备。
+
+## Follow-up：五轮重连与文档收口
+
+源码收口版本：
+`m5agent/m5stack-esp-emulator @ 6956ebbe2c620c5840e04da8911a554fee7d7491`。
+
+同一固件、ELF 和 QEMU build 在 3 个独立 Device Service lease 中各自完成
+5 轮 scan/connect/NUS GATT/disconnect：
+
+- 每轮都保留 frame/QOM、WiFi、公网 DNS/HTTP、外部 NUS GATT、pcap 和
+  evidence；
+- 每个 lease 的 HLI posts/consumed 为 `157/157`，events `112`，ACLs `45`；
+- `hli-errors=0`，HLI/meta queue 深度为 0；
+- connection/L2CAP/GATT 池为 `3/9/3`，没有连接资源泄漏；
+- `trace-hs-sched-reset=0`、`trace-gap-adv-start=5`；
+- 外部 Bumble peer 在五轮中均重新发现、连接、写入并收到 notification。
+
+同时重新核对 README、项目状态、Backlog、工作流台账、设备矩阵、统一运行时
+契约、Device Service API、Core2 设计页、验证台账和 QEMU profile，使当前
+结论统一为五轮 PASS，并将双轮证据保留为较早里程碑。
+
+本 follow-up 的验证：
+
+- 平台套件 `300/300 PASS`；
+- Node `2/2 PASS`；
+- runtime coverage、peripheral catalog、QEMU profiles、compileall 和定向
+  Ruff：`PASS`；
+- GitHub Actions CI run `40069447311`：两个 job 均 `PASS`；
+- QEMU `0006` patch reverse-check：`PASS`；
+- QEMU SHA256 与五轮 evidence 记录一致。
+
+以下仍未执行：超过五轮重连、多小时 coexistence/soak、配对/安全/加密重连、
+bit-exact ESP32 BT controller/baseband、物理 cache/PSRAM 和真机。

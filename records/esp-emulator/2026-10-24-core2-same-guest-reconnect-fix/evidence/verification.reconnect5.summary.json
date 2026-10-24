@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "kind": "follow-up-execution",
+  "validation": "virtual-device validation",
+  "result_commit": "6956ebbe2c620c5840e04da8911a554fee7d7491",
+  "initial_fix_commit": "b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f",
+  "profile": "core2-native-hci",
+  "runtime": "qemu-unified",
+  "firmware_sha256": "b9c91c40e60867186717938e075da8b19271cc8e7a22323524be213beff81982",
+  "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+  "qemu_sha256": "e65c6f5cad2ee2c11efb1cf13ce81639c53666ac22c708fb81501cfb689614c1",
+  "reconnect_gate": {
+    "status": "PASS",
+    "attempts": 3,
+    "passed": 3,
+    "cycles_per_attempt": 5,
+    "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/6956ebbe2c620c5840e04da8911a554fee7d7491/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect5-3x.json",
+    "source_evidence_sha256": "2fb3bd3c121e040066893ddd1d23c694698ac841af187e3c51fef38f0f0613c2",
+    "each_attempt": {
+      "hli_posts": 157,
+      "hli_consumed": 157,
+      "hli_events": 112,
+      "hli_acls": 45,
+      "hli_errors": 0,
+      "hli_queue_depth": 0,
+      "meta_queue_depth": 0,
+      "trace_hs_sched_reset": 0,
+      "trace_gap_adv_start": 5,
+      "connection_pool_free": 3,
+      "l2cap_pool_free": 9,
+      "gatt_pool_free": 3,
+      "tx_queue_depth": 0,
+      "last_error": 0,
+      "peer_closed": 0
+    }
+  },
+  "platform": {
+    "tests": 300,
+    "passed": 300,
+    "failed": 0,
+    "skipped": 0,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "browser_tests": "2/2 PASS",
+    "compileall": "PASS",
+    "targeted_ruff": "PASS"
+  },
+  "github_actions": {
+    "run_id": 40069447311,
+    "status": "PASS",
+    "jobs": [
+      "platform-contracts",
+      "network-namespace-policy"
+    ]
+  },
+  "qemu_patch": {
+    "path": "patches/qemu-core2-native-hci/0006-esp32-native-hci-observability.patch",
+    "sha256": "c784e7c36459147aafc30c92e138d34a2921d51b3d69749a345f24714b4214c6",
+    "reverse_check": "PASS"
+  },
+  "not_run": [
+    "more than five reconnect cycles",
+    "pairing, security or encrypted reconnect",
+    "multi-hour coexistence or reconnect soak",
+    "bit-exact ESP32 BT controller/baseband",
+    "physical cache/PSRAM equivalence",
+    "physical hardware validation",
+    "RF behavior"
+  ]
+}

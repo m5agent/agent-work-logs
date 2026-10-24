@@ -3,7 +3,8 @@
 - 日期：`2026-10-24`
 - 结果：`PASS`
 - 工作类型：`code_change`
-- 源码版本：`m5agent/m5stack-esp-emulator @ b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f`
+- 首次修复版本：`m5agent/m5stack-esp-emulator @ b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f`
+- 五轮 follow-up 与文档基线：`m5agent/m5stack-esp-emulator @ 6956ebbe2c620c5840e04da8911a554fee7d7491`
 - 基线版本：`e686838e38dc8ec46daa6dbc2830322806ca7355`
 - 环境：macOS Apple Silicon；Python 3；patched QEMU；UIFlow2 v2.5.3 Core2 和匹配 ELF
 
@@ -27,15 +28,26 @@ Command Status。该 stale ACK 被下一条 `LE Set Advertising Data (0x2008)`
 - 第二轮 guest RX、notification、pcap 和 evidence 全部 PASS；
 - frame/QOM、WiFi、公网 DNS/HTTP 同时保持 PASS。
 
+## 五轮 follow-up
+
+同一 peer-process 路径随后从每个 lease 两轮扩大到五轮。3 个独立 Device
+Service lease 各自完成 5 轮 scan/connect/NUS GATT/disconnect，`3/3 PASS`。
+每个 lease 均为 HLI `157/157`、events `112`、ACLs `45`，HLI errors 和
+HLI/meta queue 深度为 0；connection/L2CAP/GATT 池回到 `3/9/3` 空闲基线，
+`trace-hs-sched-reset=0`、`trace-gap-adv-start=5`。同一固件 SHA、ELF 和
+QEMU 二进制继续与初始两轮证据保持一致。
+
 ## 关键证据
 
 - 平台测试：`300/300 PASS`；
 - Node：`2/2 PASS`；
-- GitHub Actions CI run `40068768706`：`PASS`；
+- GitHub Actions CI run `40068768706`（首次修复）：`PASS`；
+- GitHub Actions CI run `40069447311`（五轮 follow-up 与文档收口）：`PASS`；
 - runtime coverage、peripheral catalog、QEMU profiles：`PASS`；
 - QEMU observability patch 正向 replay check 和当前 worktree reverse check：
   `PASS`；
 - 同 guest 双轮 reconnect：3 个独立 lease `3/3 PASS`；
+- 同 guest 五轮 reconnect：3 个独立 lease `3/3 PASS`；
 - 完整 67-case UIFlow2 外设矩阵本轮未重跑：`NOT RUN`；
 - 物理硬件、RF、bit-exact BT baseband/controller：`NOT RUN`。
 
@@ -44,10 +56,11 @@ Command Status。该 stale ACK 被下一条 `LE Set Advertising Data (0x2008)`
 - `report.md`：根因、修复、执行和边界
 - `run.json`：机器可读记录
 - `evidence/verification.summary.json`：聚合验证和 artifact hash
+- `evidence/verification.reconnect5.summary.json`：五轮 follow-up 的独立证据摘要
 
 ## 未覆盖项
 
-- 未执行 5 轮以上连续重连或多小时 soak；
+- 未执行超过 5 轮连续重连或多小时 soak；
 - 未验证 pairing/security/encrypted reconnect；
 - 未验证 bit-exact Espressif BT controller/baseband；
 - 未执行物理 cache/PSRAM 等价性或真机同路径验证；

@@ -27,6 +27,29 @@
     "insertions": 1090,
     "deletions": 177
   },
+  "follow_ups": [
+    {
+      "date": "2026-10-24",
+      "kind": "five_cycle_reconnect_and_documentation_reconciliation",
+      "result_commit": "6956ebbe2c620c5840e04da8911a554fee7d7491",
+      "status": "PASS",
+      "evidence": "evidence/verification.reconnect5.summary.json",
+      "reconnect": {
+        "attempts": 3,
+        "passed": 3,
+        "cycles_per_attempt": 5,
+        "hli_posts_consumed": "157/157",
+        "hli_events": 112,
+        "hli_acls": 45,
+        "hli_errors": 0,
+        "connection_l2cap_gatt_pool_free": "3/9/3"
+      },
+      "github_actions": {
+        "run_id": 40069447311,
+        "status": "PASS"
+      }
+    }
+  ],
   "checks": [
     {
       "name": "platform_tests",
@@ -98,13 +121,17 @@
   ],
   "evidence": [
     "evidence/verification.summary.json",
+    "evidence/verification.reconnect5.summary.json",
     "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40068768706",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40069447311",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6956ebbe2c620c5840e04da8911a554fee7d7491/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect5-3x.json",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/b59605fcfaa5d6b319c8bef22fc02f7eee0bcb1f/tests/uiflow2/core2_native_hci/evidence-2026-10-24-hci4-reconnect2-3x.json"
   ],
   "notes": [
     "The stale ACK came from an invalid Bumble Command Status response to no-response opcode 0x0c35.",
     "The next LE Set Advertising Data command received BLE_HS_ECONTROLLER (12).",
     "The no-response behavior is covered by a unit test.",
-    "More than two reconnect cycles and physical hardware remain open."
+    "At the original two-cycle milestone, more than two reconnect cycles and physical hardware remained open.",
+    "A five-cycle follow-up now passes in three independent leases; more than five cycles and physical hardware remain open."
   ]
 }
