@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Verify five-instance Core2 staggered concurrency and retain the unstable zero-stagger control",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b8b48e46c79d65f151eca1a57431c3117fb95907",
+    "result_commit": "8c4349cd09a0c2cfd7362830df1825d76615ac9b",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40183597823",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_staggered_sha256": "6f505d4a5755254490beb8fc10131d4a9e0357db34c621c698ede05db48f25b1",
+    "qemu_no_stagger_sha256": "0e1165fb866ecb573cdaca2084bdf498b45432aaa1937674ca73d04eeaa7a7fc",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.13; Node 20; QEMU virtual-device",
+    "staggered_batches": 2,
+    "attempts_requested_per_staggered_batch": 5,
+    "staggered_attempts_passed": 10,
+    "staggered_attempts_failed": 0,
+    "maximum_concurrent_sessions": 5,
+    "stagger_seconds_for_pass": 30,
+    "hold_seconds_per_attempt": 120,
+    "zero_stagger_control": "one 5/5 PASS batch and one independent 3/5 FAIL batch",
+    "platform_tests": "470/470 PASS",
+    "docs_contracts": "37/37 PASS",
+    "node_units": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "runner_capacity_contract",
+      "status": "PASS",
+      "detail": "MAX_CONCURRENCY matches DEFAULT_MAX_PER_DEVICE at 8 and accepts 5"
+    },
+    {
+      "name": "five_instance_staggered_batch_a",
+      "status": "PASS",
+      "detail": "5/5 leases PASS with 30-second startup stagger"
+    },
+    {
+      "name": "five_instance_staggered_batch_b",
+      "status": "PASS",
+      "detail": "independent confirmation batch 5/5 PASS"
+    },
+    {
+      "name": "combined_five_instance_staggered_gate",
+      "status": "PASS",
+      "detail": "10/10 aggregate PASS at maximum concurrency 5"
+    },
+    {
+      "name": "five_instance_zero_stagger_cold_start",
+      "status": "FAIL",
+      "detail": "one 5/5 PASS batch and one independent 3/5 FAIL batch on identical inputs"
+    },
+    {
+      "name": "native_hci_health",
+      "status": "PASS",
+      "detail": "every passing lease records HLI 45/45, 36 events/9 ACLs, depth 8/4, zero errors/reset/panic"
+    },
+    {
+      "name": "wifi_public_http",
+      "status": "PASS",
+      "detail": "DHCP, controlled HTTP, public DNS and public HTTP PASS in every passing lease"
+    },
+    {
+      "name": "external_nus_gatt",
+      "status": "PASS",
+      "detail": "external BLE scan/connect/write/notify PASS in every passing lease"
+    },
+    {
+      "name": "psram_frame_qom_pcap_cleanup",
+      "status": "PASS",
+      "detail": "sustained PSRAM stress, frame, QOM, pcap, evidence and cleanup PASS"
+    },
+    {
+      "name": "more_than_five_instances",
+      "status": "NOT RUN",
+      "detail": "outside this five-instance record"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN",
+      "detail": "functional HCI path only"
+    },
+    {
+      "name": "physical_cache_psram_rf",
+      "status": "NOT RUN",
+      "detail": "virtual-device evidence only"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "detail": "no physical device or measurement"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/evidence-2026-10-25-core2-concurrent-5x120-stagger30-pass-a.json",
+    "evidence/evidence-2026-10-25-core2-concurrent-5x120-stagger30-confirm-pass-b.json",
+    "evidence/evidence-2026-10-25-core2-concurrent-5x120-no-stagger-pass-1.json",
+    "evidence/evidence-2026-10-25-core2-concurrent-5x120-no-stagger-fail-1.json"
+  ],
+  "notes": [
+    "The PASS scope is five-instance staggered steady state only.",
+    "The zero-stagger PASS and FAIL batches use the same firmware, ELF, QEMU and tool hashes.",
+    "No QEMU data-plane patch was added in this record.",
+    "The parent expanded four-instance PASS record remains unchanged."
+  ]
+}

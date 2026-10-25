@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "kind": "m5stack-core2-five-instance-staggered-concurrency-summary",
+  "date": "2026-10-25",
+  "validation": "virtual-device validation",
+  "source": {
+    "base_commit": "b8b48e46c79d65f151eca1a57431c3117fb95907",
+    "result_commit": "8c4349cd09a0c2cfd7362830df1825d76615ac9b",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40183597823",
+    "ci_status": "PASS"
+  },
+  "inputs": {
+    "firmware_sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "firmware_bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_staggered_sha256": "6f505d4a5755254490beb8fc10131d4a9e0357db34c621c698ede05db48f25b1",
+    "qemu_no_stagger_sha256": "0e1165fb866ecb573cdaca2084bdf498b45432aaa1937674ca73d04eeaa7a7fc",
+    "input_assets_unchanged_during_run": true,
+    "tool_hashes": {
+      "runner": "78385772a35aef27c3560f40cc47b44d34cbdedfc6864dbdb2078a20066d8f3a",
+      "device_service": "d00e287c8c0d37858322f3cdfbb60c1f9e5e1182661da23834a9f566c77fcb77",
+      "qemu_accel": "018aebbe1b127b1e34647a62739950e625a6395d504de0344733cb984482cd33",
+      "ble_runtime_limits": "38626a437aa578f8268130def448e8bdf7c30ea0019c633abad3498c08aa7c09",
+      "ble_probe": "2548151a414dc4ccc18d858d2d384c1a1ce0cb9d7f1d976646fb93f9c76d0757",
+      "network_policy": "f231fafa4888150d4a0d8d008ce4ae75fe444dbaf7db6d3b78abe32a3ef4cf9a",
+      "unified_http_guestfwd": "bdcfa9418108a717300e4546177e8c0b4db144489a1544d76bc22eb5f5a8977a"
+    }
+  },
+  "execution": {
+    "staggered_batches": 2,
+    "attempts_requested": 10,
+    "attempts_completed": 10,
+    "attempts_passed": 10,
+    "attempts_failed": 0,
+    "concurrency_requested": 5,
+    "maximum_concurrent_sessions": 5,
+    "concurrency_observed": true,
+    "stagger_seconds": 30,
+    "hold_seconds_per_attempt": 120,
+    "status": "PASS"
+  },
+  "batches": {
+    "stagger_pass_a": {
+      "status": "PASS",
+      "attempts_passed": 5,
+      "attempts_failed": 0,
+      "all_checks_pass": true,
+      "raw_evidence_sha256": "74944faed3fcdb80ebda678c221199245ae2e69eaa44cd2bec4075d37d50a60e"
+    },
+    "stagger_confirm_pass_b": {
+      "status": "PASS",
+      "attempts_passed": 5,
+      "attempts_failed": 0,
+      "all_checks_pass": true,
+      "raw_evidence_sha256": "9b3be49ddbc43e7e1801a820db34294aa07c75decd136267f6fbde749237ed02"
+    },
+    "no_stagger_pass": {
+      "status": "PASS",
+      "attempts_passed": 5,
+      "attempts_failed": 0,
+      "all_checks_pass": true,
+      "raw_evidence_sha256": "1607ace926ba6ba515b6331139742b400989455821c5b626b6f433f4ea5a1f12"
+    },
+    "no_stagger_fail": {
+      "status": "FAIL",
+      "attempts_passed": 3,
+      "attempts_failed": 2,
+      "all_checks_pass": false,
+      "raw_evidence_sha256": "ed1a2c1efc31778295f4e5009bf4f1abbba4089147d2948da8bd4214d02f1472"
+    }
+  },
+  "per_passing_lease": {
+    "frame_sha256": "cd2f2033fa92dabd8a60dd4e81bbefd3656b855123e762aef5080188ddf5192f",
+    "frame_bytes": 3731,
+    "qom_memory_bytes": 8388608,
+    "qom_nodes": 31,
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_errors": 0,
+    "c2h_events": 36,
+    "c2h_acls": 9,
+    "event_prealloc_depth": 8,
+    "acl_prealloc_depth": 4,
+    "scheduler_reset": 0,
+    "panic": 0,
+    "minimum_psram_sweeps_observed": 28
+  },
+  "zero_stagger_failures": [
+    {
+      "attempt": "attempt-1",
+      "failure_class": "panic_load_prohibited",
+      "first_panic": {
+        "kind": "LoadProhibited",
+        "pc": "0x402630cc",
+        "exccaue": "0x0000001c"
+      },
+      "panic_count": 88,
+      "hli_posts": 6,
+      "hli_consumed": 5,
+      "hli_errors": 0,
+      "hli_queue_depth": 1,
+      "meta_queue_depth": 1,
+      "scheduler_reset": 4
+    },
+    {
+      "attempt": "attempt-2",
+      "failure_class": "attempt_error",
+      "hold_error": "external BLE peer did not complete the GATT exchange",
+      "panic_count": 0,
+      "psram_sweeps": 15
+    }
+  ],
+  "checks": {
+    "runner_capacity_contract": "PASS",
+    "five_instance_stagger_batch_a": "PASS",
+    "five_instance_stagger_batch_b": "PASS",
+    "combined_ten_staggered_leases": "PASS",
+    "native_hci_health": "PASS",
+    "wifi_dhcp_http": "PASS",
+    "public_dns_http": "PASS",
+    "external_nus_gatt": "PASS",
+    "psram_guest_stress": "PASS",
+    "frame_qom_pcap_evidence_cleanup": "PASS",
+    "platform_tests": "PASS",
+    "docs_contracts": "PASS",
+    "node_units": "PASS",
+    "github_actions": "PASS",
+    "zero_stagger_five_instance_cold_start": "FAIL",
+    "more_than_five_instances": "NOT RUN",
+    "bit_exact_controller": "NOT RUN",
+    "physical_cache_psram": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "evidence": {
+    "stagger_pass_a": "evidence/evidence-2026-10-25-core2-concurrent-5x120-stagger30-pass-a.json",
+    "stagger_confirm_pass_b": "evidence/evidence-2026-10-25-core2-concurrent-5x120-stagger30-confirm-pass-b.json",
+    "no_stagger_pass": "evidence/evidence-2026-10-25-core2-concurrent-5x120-no-stagger-pass-1.json",
+    "no_stagger_fail": "evidence/evidence-2026-10-25-core2-concurrent-5x120-no-stagger-fail-1.json"
+  },
+  "not_claimed": [
+    "zero-stagger five-instance cold-start stability",
+    "more than five concurrent instances",
+    "sustained throughput or teardown modes beyond active-stop",
+    "bit-exact Espressif BT controller/baseband",
+    "physical 8 MiB PSRAM capacity or cache timing",
+    "RF, electrical, power or thermal behavior",
+    "physical hardware validation"
+  ]
+}

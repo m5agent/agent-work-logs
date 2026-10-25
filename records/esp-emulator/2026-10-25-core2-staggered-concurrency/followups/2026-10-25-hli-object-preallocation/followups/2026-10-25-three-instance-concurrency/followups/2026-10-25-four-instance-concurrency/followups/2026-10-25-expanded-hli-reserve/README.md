@@ -58,9 +58,17 @@ ELF SHA-256：
   六例外设组；
 - `patches/0009-esp32-native-hci-expand-hli-preallocation.patch`：最小修复。
 
+## Follow-up
+
+- [2026-10-25 five-instance concurrency](followups/2026-10-25-five-instance-concurrency/)：
+  `PASS`（virtual-device；仅限 30 秒错峰稳态）。两批独立 `5×120s`
+  合计 `10/10 PASS`，每 lease HLI `45/45`、36 events/9 ACLs、零
+  errors/reset/panic。零错峰五实例先 `5/5 PASS`、独立确认批
+  `3/5 FAIL`，因此同时冷启动仍 `OPEN / UNSTABLE`。
+
 ## 未覆盖项
 
-- 五实例及更高并发；
+- 零错峰五实例和大于五实例的并发稳定性；
 - 持续吞吐和其他 teardown 模式；
 - bit-exact Espressif BT controller/baseband；
 - 物理板载 PSRAM/cache timing；
