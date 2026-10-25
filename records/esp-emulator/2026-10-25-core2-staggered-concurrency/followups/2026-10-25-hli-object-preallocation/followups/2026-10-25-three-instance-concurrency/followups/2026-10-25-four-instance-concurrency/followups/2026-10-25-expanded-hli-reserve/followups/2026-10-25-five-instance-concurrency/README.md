@@ -60,6 +60,15 @@ failure。因此 `10/10` 错峰稳态不能继承给同时冷启动，更多实�
 - `evidence/evidence-2026-10-25-core2-concurrent-5x120-no-stagger-fail-1.json`：
   零错峰独立失败对照。
 
+## Follow-up
+
+- [2026-10-25 HLI ACK observability](followups/2026-10-25-hli-ack-observability/)：
+  `PARTIAL`（virtual-device）。`0010` 只增加默认关闭的 ACK-state trace；
+  诊断批保留 `3/5` 零错峰失败，并证明首条 Reset Complete 的 response→HLI
+  时间戳差为 `4.506306s` host trace time（不是 guest 虚拟时间）；旧 response
+  与新 command 交错，process-ack error `12` 后触发次级 `0x402630cc` panic。
+  默认 trace-off 单实例 `1/1 PASS`。
+
 ## 未覆盖项
 
 - 零错峰五实例冷启动稳定性；

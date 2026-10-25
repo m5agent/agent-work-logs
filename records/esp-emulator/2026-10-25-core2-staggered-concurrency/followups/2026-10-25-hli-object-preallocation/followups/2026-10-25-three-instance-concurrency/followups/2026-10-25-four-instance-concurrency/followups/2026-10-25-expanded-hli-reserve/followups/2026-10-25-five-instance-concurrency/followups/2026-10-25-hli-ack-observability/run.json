@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Narrow the Core2 five-instance HCI ACK failure to delayed HLI delivery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "8c4349cd09a0c2cfd7362830df1825d76615ac9b",
+    "result_commit": "3d1484c58ffc4c034bccd2095a47e1e9a2c1a167",
+    "runtime_implementation_commit": "473e613f99e9a3510c73fe306514749151e745a4",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40188735306",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "c1c7e448971c4f189784ff7bba00327a29807c24afd49f65cb4aa0cca2e6e9ce",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.13; Node 20; QEMU virtual-device",
+    "diagnostic_attempts": 5,
+    "diagnostic_passed": 3,
+    "diagnostic_failed": 2,
+    "maximum_concurrent_sessions": 5,
+    "stagger_seconds": 0,
+    "hold_seconds_per_attempt": 20,
+    "first_response_to_hli_delay_ns": 4506306000,
+    "default_path_attempts": 1,
+    "default_path_passed": 1,
+    "platform_tests": "479/479 PASS",
+    "docs_contracts": "37/37 PASS",
+    "node_units": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "ack_state_observability",
+      "status": "PASS",
+      "detail": "hci_ack pointer and semaphore-count branch are visible only with packet trace opt-in"
+    },
+    {
+      "name": "documentation_reconciliation",
+      "status": "PASS",
+      "detail": "catalog/profile metadata and current docs label 4.506306s as host trace time, not guest virtual time"
+    },
+    {
+      "name": "default_runtime_path",
+      "status": "PASS",
+      "detail": "trace-off single lease passes with HLI 45/45 and zero errors/reset/panic"
+    },
+    {
+      "name": "zero_stagger_five_instances",
+      "status": "FAIL",
+      "detail": "3/5 pass; first response reached HLI after a 4.506306s host-trace timestamp delta and late Reset Complete packets broke command/ACK pairing"
+    },
+    {
+      "name": "root_cause_scope",
+      "status": "PARTIAL",
+      "detail": "delayed HLI delivery and response ordering are demonstrated; exact QEMU/controller scheduling mechanism still needs a fix"
+    },
+    {
+      "name": "behavioral_fix",
+      "status": "NOT RUN",
+      "detail": "schedule-on-rx, pending observation, H2C ready gate and multi-flight posts were unstable and not merged"
+    },
+    {
+      "name": "physical_controller_psram_rf",
+      "status": "NOT RUN",
+      "detail": "virtual-device functional evidence only"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "detail": "no physical device or measurement"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/evidence-2026-10-25-core2-concurrent-5x20-ack-observability.json",
+    "evidence/evidence-2026-10-25-core2-ack-observability-default-1x.json",
+    "evidence/evidence-2026-10-25-core2-ack-observability-trace-summary.log",
+    "evidence/evidence-2026-10-25-core2-ack-observability-serial-summary.log",
+    "evidence/evidence-2026-10-25-core2-ack-observability-peer-summary.log",
+    "patches/0010-esp32-native-hci-ack-observability.patch"
+  ],
+  "notes": [
+    "The initial ACK pointer and semaphore count are empty, so stale ACK pointer/semaphore-state corruption is not the first failure.",
+    "The first Reset Complete returned by Bumble reached HLI 4.506306 seconds later in host trace time.",
+    "Late Reset Complete packets crossed a new 0x1001 command and caused process-ack error 12.",
+    "The final LoadProhibited at 0x402630cc is secondary to the reset loop.",
+    "No unstable behavioral workaround was merged."
+  ]
+}
