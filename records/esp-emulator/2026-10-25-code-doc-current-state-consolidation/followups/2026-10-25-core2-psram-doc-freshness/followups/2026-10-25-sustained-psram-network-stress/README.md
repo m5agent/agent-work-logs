@@ -42,6 +42,9 @@ dropped 和 panic 均为 0。
 - `run.json`：机器可读记录；
 - `evidence/verification.summary.json`：脱敏验证摘要。
 
+同一实现的 600 秒扩展运行见
+[Follow-up: 600-second PSRAM soak](followups/2026-10-25-psram-600s-soak/)。
+
 ## 未覆盖项
 
 - 物理板载 8 MiB PSRAM；
