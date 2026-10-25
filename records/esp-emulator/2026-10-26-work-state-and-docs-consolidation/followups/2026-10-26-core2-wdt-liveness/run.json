@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Reconcile Core2 bootloader stage-1 reset with live TG1 feeds",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e420570ebdfe89dae75612938fbe80281c5413ef",
+    "result_commit": "b07464052a915780e014a12fe6b3ad0f016d8162"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_watchdog_timing": "NOT RUN",
+    "rf_electrical_or_power_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "public_firmware": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "bytes": 16777216,
+    "runtime_result": "FAIL_BANNER_ONLY_TG0_STAGE1_RESET_BLACK_FRAME"
+  },
+  "execution": {
+    "validation_layer": "virtual-device validation",
+    "environment": "macOS 26.5.1 arm64, Python 3.13.15, QEMU 9.2.2 virtual Core2",
+    "qemu_binary_sha256": "f7ac5a0352eb4345f5c3b719a5dd656c5c0cdfb3d805cf258f144d1ae1fb6718",
+    "runner_sha256": "49e06c42f750935d4e468827f14ecf5872013581c552ddb39383627a626ba25a",
+    "evidence_sha256": "1061d950225c0fb3a4876b07b6c503a7f5dab9f00f3af8e347940358c68585cd",
+    "contract_sha256": "a8586bf915f776ab9b3f13696b61d865933a6c7d8c561b96077053c4bb52fe8f",
+    "attempts": 3,
+    "pc_trace": "NOT RUN",
+    "timg_verbose_trace": "ENABLED",
+    "platform_tests": "520/520 PASS",
+    "focused_tests": "59/59 PASS",
+    "node_tests": "2/2 PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS",
+    "full_uiflow2_matrix": "NOT RUN",
+    "ci_run": "40241669357",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40241669357",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "three_run_classification",
+      "status": "PASS",
+      "detail": "All runs classified BOOTLOADER_TG0_STAGE1_RESET_WITH_TG1_LIVE."
+    },
+    {
+      "name": "tg0_stage0_masked",
+      "status": "PASS",
+      "detail": "TG0 stage-0 timeout occurred near 5.91 seconds with WDT interrupt masked."
+    },
+    {
+      "name": "tg0_stage1_reset",
+      "status": "PASS",
+      "detail": "TG0 stage-1 produced the first reset near 15.91 seconds."
+    },
+    {
+      "name": "tg1_feed_liveness",
+      "status": "PASS",
+      "detail": "TG1 completed 6618-6807 feeds, with the last feed 1.779-4.271 ms before reset and zero timeouts."
+    },
+    {
+      "name": "historical_800ms_gap",
+      "status": "NOT_REPRODUCED",
+      "detail": "The early trace configuration remains historical evidence and is not the current default path."
+    },
+    {
+      "name": "startup_phase_attribution",
+      "status": "OPEN",
+      "detail": "The pre-stage-1 startup phase consuming the deadline is not yet named."
+    },
+    {
+      "name": "legacy_application",
+      "status": "FAIL",
+      "detail": "Banner-only serial, no REPL and the same 302-byte black frame remain."
+    },
+    {
+      "name": "full_uiflow2_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/core2-wdt-liveness-summary.json",
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/b07464052a915780e014a12fe6b3ad0f016d8162/tests/firmware/core2_handoff_trace/evidence-2026-10-26-core2-wdt-liveness-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40241669357"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "The executable runner, source evidence and contract are artifact-bound.",
+    "The full UIFlow2 matrix was not rerun after 0039/0040.",
+    "The retained dirty QEMU worktree must not be reset or cleaned.",
+    "All functional results are virtual-device validation."
+  ]
+}
