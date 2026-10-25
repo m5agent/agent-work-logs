@@ -67,3 +67,9 @@ Core2 `qemu-unified/core2-native-hci` 首次完成两个 artifact-bound lease �
   `PARTIAL`。GATT timeout 扩到 `30s`；`0007` valid-guest-queue gate 清除
   observed `hli-errors=3`，新实现首批 `4/4 PASS`；独立复核仍有
   `ble_hs_hci_process_ack` LoadProhibited，cold-start stability 保持开放。
+- [2026-10-25 HLI object preallocation](followups/2026-10-25-hli-object-preallocation/)：
+  `PASS`（virtual-device）。`0008` 在 CPU0 idle 时预分配真实 guest
+  event/ACL 对象，两批独立无错峰 `4×120s` 合计 `8/8 PASS`；每 lease
+  36 events/9 ACLs 走 fast path、HLI `45/45`、零 errors/reset/panic，
+  ACK 延迟约 `3.660s→0.328s`。完整矩阵 `67/67`；更高并发、物理 controller
+  和真机仍 `NOT RUN`。

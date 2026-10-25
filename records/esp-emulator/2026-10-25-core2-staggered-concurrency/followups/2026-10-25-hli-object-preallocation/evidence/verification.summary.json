@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "validation": "virtual-device validation",
+  "source_commit": "bf98ea8d00dd759da9db44100e239c692f6143ee",
+  "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40174318654",
+  "ci_status": "PASS",
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49"
+  },
+  "qemu": {
+    "sha256": "f2bc2b4d5e4a5a8a0a8b3b4cf3ccd36ea2a67f44a57413bc7c575b304e2159e5",
+    "accelerator": "tcg,thread=single,tb-size=128"
+  },
+  "no_stagger_batches": [
+    {
+      "attempts_completed": 4,
+      "attempts_passed": 4,
+      "attempts_failed": 0,
+      "maximum_concurrent_sessions": 2,
+      "stagger_seconds": 0,
+      "status": "PASS"
+    },
+    {
+      "attempts_completed": 4,
+      "attempts_passed": 4,
+      "attempts_failed": 0,
+      "maximum_concurrent_sessions": 2,
+      "stagger_seconds": 0,
+      "status": "PASS"
+    }
+  ],
+  "per_lease": {
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_errors": 0,
+    "fast_path_events": 36,
+    "fast_path_acls": 9,
+    "event_prealloc_depth": 2,
+    "acl_prealloc_depth": 2,
+    "prealloc_failures": 0,
+    "scheduler_reset": 0,
+    "panic": 0
+  },
+  "latency": {
+    "old_delivery_delay_ms_approx": 3660,
+    "new_delivery_delay_ms_approx": 328,
+    "nimble_hci_command_timeout_ms": 2000
+  },
+  "full_peripheral_matrix": {
+    "cases": 67,
+    "checks": 274,
+    "pass": 67,
+    "fail": 0,
+    "checks_pass": 274,
+    "attempts_per_case": 1,
+    "retry_used": false,
+    "core2_cases": 6,
+    "core2_checks": 24
+  },
+  "checks": {
+    "platform_tests": "463/463 PASS",
+    "documentation_tests": "36/36 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_e9_f": "PASS",
+    "compileall": "PASS",
+    "patch_reverse_check": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "open_boundaries": [
+    "higher concurrency and sustained throughput",
+    "teardown modes beyond active-stop",
+    "bit-exact Espressif BT controller/baseband",
+    "physical PSRAM/cache timing",
+    "RF, power, electrical and physical hardware validation"
+  ],
+  "redaction": {
+    "removed": [
+      "session identifiers",
+      "process identifiers",
+      "peer and device link-layer identifiers",
+      "local filesystem paths"
+    ]
+  }
+}
