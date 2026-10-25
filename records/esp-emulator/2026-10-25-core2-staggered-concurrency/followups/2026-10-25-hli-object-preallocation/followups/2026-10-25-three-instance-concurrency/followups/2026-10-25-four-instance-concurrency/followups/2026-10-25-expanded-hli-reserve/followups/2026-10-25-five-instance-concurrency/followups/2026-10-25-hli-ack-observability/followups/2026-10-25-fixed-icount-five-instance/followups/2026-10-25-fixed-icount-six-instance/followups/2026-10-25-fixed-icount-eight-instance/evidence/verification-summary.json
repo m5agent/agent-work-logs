@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "validation": "virtual-device validation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "c72ac2f",
+    "commit": "a181ac9",
+    "ci_run": "40196580736"
+  },
+  "calibration_control": {
+    "status": "FAIL",
+    "attempts_passed": 4,
+    "attempts_failed": 4,
+    "old_minimum_sweeps": 12,
+    "observed_sweeps": [11, 12, 11, 11, 12, 12, 11, 12],
+    "classification": "throughput_floor_calibration",
+    "all_other_co_resident_checks": "PASS"
+  },
+  "runtime": {
+    "runtime": "qemu-unified",
+    "profile": "core2-native-hci",
+    "accelerator": "tcg,thread=single,tb-size=128",
+    "icount": "shift=5,align=off,sleep=off",
+    "stagger_seconds": 0,
+    "hold_seconds": 120,
+    "instances_per_batch": 8,
+    "batches": 2,
+    "passed_leases": 16,
+    "minimum_sweeps": 10,
+    "total_psram_sweeps": 188
+  },
+  "per_lease": {
+    "wifi_dhcp_http": "PASS",
+    "public_dns_http": "PASS",
+    "external_nus_gatt": "PASS",
+    "frame": "PASS",
+    "qom_nodes": 31,
+    "qom_memory_bytes": 8388608,
+    "pcap": "PASS",
+    "psram_sweeps": "11-12",
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_c2h_events": 36,
+    "hli_c2h_acls": 9,
+    "hli_errors": 0,
+    "scheduler_reset": 0,
+    "panic": 0,
+    "dropped_packets": 0
+  },
+  "recoverable_anomalies": {
+    "prealloc_failures_total": 2,
+    "impact": "Both batches still completed all 36/9 packets on the fast path and HLI completed 45/45."
+  },
+  "project_checks": {
+    "platform_tests": "497/497 PASS",
+    "docs_contracts": "37/37 PASS",
+    "browser_unit_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "github_actions": "2/2 PASS"
+  },
+  "not_run": [
+    "clean source rebuild for the committed test image",
+    "more than eight simultaneous instances",
+    "sustained HCI/GATT throughput",
+    "teardown modes beyond active-stop",
+    "bit-exact Espressif BT controller/baseband",
+    "physical PSRAM/cache timing and RF",
+    "same-firmware physical hardware validation"
+  ]
+}

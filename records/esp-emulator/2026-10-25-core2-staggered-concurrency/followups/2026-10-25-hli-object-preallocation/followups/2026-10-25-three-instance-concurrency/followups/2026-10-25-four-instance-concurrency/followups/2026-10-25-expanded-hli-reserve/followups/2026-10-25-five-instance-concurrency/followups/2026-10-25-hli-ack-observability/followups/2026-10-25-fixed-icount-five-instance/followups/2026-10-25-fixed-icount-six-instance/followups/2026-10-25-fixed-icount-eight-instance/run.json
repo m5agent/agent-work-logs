@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 fixed-icount eight-instance cold start",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "c72ac2f",
+    "commit": "a181ac9"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "bytes": 16777216
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, Node.js, patched Xtensa QEMU",
+    "task_id": "",
+    "session_id": "",
+    "ci_run": "40196580736"
+  },
+  "checks": [
+    {
+      "name": "eight_instance_old_floor_control",
+      "status": "FAIL",
+      "attempts": "4/8",
+      "maximum_concurrency": 8,
+      "failure_class": "throughput_floor_calibration",
+      "note": "all co-resident HCI/network/GATT/frame/QOM/pcap checks passed; failed leases completed 11 contiguous sweeps"
+    },
+    {
+      "name": "fixed_icount_eight_instance_batch_a",
+      "status": "PASS",
+      "attempts": "8/8",
+      "hold_seconds": 120,
+      "maximum_concurrency": 8,
+      "minimum_sweeps": 10,
+      "psram_sweeps": "12,12,12,12,12,12,12,12",
+      "recoverable_prealloc_failures": 1
+    },
+    {
+      "name": "fixed_icount_eight_instance_batch_b",
+      "status": "PASS",
+      "attempts": "8/8",
+      "hold_seconds": 120,
+      "maximum_concurrency": 8,
+      "minimum_sweeps": 10,
+      "psram_sweeps": "11,12,11,11,12,11,12,12",
+      "recoverable_prealloc_failures": 1
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "result": "497/497"
+    },
+    {
+      "name": "docs_contracts",
+      "status": "PASS",
+      "result": "37/37"
+    },
+    {
+      "name": "browser_unit_tests",
+      "status": "PASS",
+      "result": "2/2"
+    },
+    {
+      "name": "github_actions_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "clean_source_rebuild",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/eight-instance-threshold-fail.json",
+      "sha256": "a1241057e0063de5cdf16564dc1c986291469ea60ff4f17461e3d55d488b2a0a"
+    },
+    {
+      "path": "evidence/eight-instance-fixed-icount-pass-a.json",
+      "sha256": "36d52c32d6156b6282c1208a72f12eac50b1d87eacbb85cc9caf2a47ce1f989c"
+    },
+    {
+      "path": "evidence/eight-instance-fixed-icount-pass-b.json",
+      "sha256": "96d12ff41e2def7ab48813b499590a914de6b6da3ed7805b69c1f26d7d971fe7"
+    }
+  ],
+  "notes": [
+    "virtual-device validation only",
+    "the old 4/8 control is retained as a pure throughput-floor calibration failure",
+    "two recoverable prealloc transients remain visible",
+    "more than eight instances, physical controller/cache timing and hardware remain open"
+  ]
+}
