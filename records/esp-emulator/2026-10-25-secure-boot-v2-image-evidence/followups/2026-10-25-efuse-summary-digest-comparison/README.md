@@ -55,3 +55,10 @@ SHA-256 与包内 `espefuse` summary 声明的 `SECURE_BOOT_DIGEST` 做结构化
 - ROM/bootloader 实际执行 Secure Boot；
 - Secure Boot v1 和 Flash Encryption runtime；
 - QEMU 设备会话、物理硬件、RF、功耗和电气测量。
+
+## Follow-up
+
+- [Application/eFuse secure-version comparison](followups/2026-10-25-anti-rollback-version-comparison/)：
+  application `secure_version` 与包内 `SECURE_VERSION` 的
+  below/satisfied/unavailable 对照；fixture 扩展到 `26/26` checks。
+  仍不执行 live eFuse read 或 bootloader anti-rollback。

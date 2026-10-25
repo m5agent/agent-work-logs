@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "secure-boot-anti-rollback-summary",
+  "validation": "static secure-boot image validation",
+  "status": "PASS",
+  "checks_total": 26,
+  "anti_rollback_checks": {
+    "anti_rollback_image_version_recorded": true,
+    "anti_rollback_below_compared": true,
+    "anti_rollback_below_warning_recorded": true,
+    "anti_rollback_satisfied_compared": true,
+    "anti_rollback_version_unavailable": true
+  },
+  "comparisons": {
+    "below": {
+      "status": "not-verified",
+      "comparison": "image-below-efuse-unverified-source",
+      "image_secure_version": 2,
+      "efuse_secure_version": 3
+    },
+    "satisfied": {
+      "status": "not-verified",
+      "comparison": "image-satisfies-efuse-unverified-source",
+      "image_secure_version": 3,
+      "efuse_secure_version": 2
+    },
+    "version_unavailable": {
+      "status": "not-verified",
+      "comparison": "efuse-secure-version-unavailable",
+      "image_secure_version": 0,
+      "efuse_secure_version": null
+    }
+  },
+  "not_claimed": [
+    "package-provided eFuse summary authenticity",
+    "live eFuse read from the target device",
+    "bootloader anti-rollback enforcement",
+    "Secure Boot ROM execution",
+    "physical hardware validation"
+  ]
+}

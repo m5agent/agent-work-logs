@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Compare application secure_version with package eFuse SECURE_VERSION",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "cb4267116d6cf9061f08484902be5a88864e7d99",
+    "result_commit": "a358780eb572a9642bdf5f180572ef689529cf9c",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40166765668",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "static-image",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "synthetic_secure_version_images": true,
+    "synthetic_efuse_summary": true,
+    "qemu_started": false,
+    "device_session_created": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; Node 20; synthetic 8 MiB flash layouts",
+    "platform_tests": "455/455 PASS",
+    "secure_boot_checks": 26,
+    "documentation_tests": "34/34 PASS",
+    "node_tests": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "image_secure_version_recorded",
+      "status": "PASS"
+    },
+    {
+      "name": "image_below_efuse_version",
+      "status": "PASS",
+      "detail": "image-below-efuse-unverified-source plus warning"
+    },
+    {
+      "name": "image_satisfies_efuse_version",
+      "status": "PASS"
+    },
+    {
+      "name": "efuse_secure_version_unavailable",
+      "status": "PASS"
+    },
+    {
+      "name": "secure_boot_disabled_warning_boundary",
+      "status": "PASS"
+    },
+    {
+      "name": "anti_rollback_status_schema_guard",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "455/455"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "34/34"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "live_efuse_read",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bootloader_anti_rollback",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "secure_boot_v1",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "flash_encryption_runtime",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/anti-rollback-26-checks.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/a358780eb572a9642bdf5f180572ef689529cf9c/platform/tools/firmware_manifest.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/a358780eb572a9642bdf5f180572ef689529cf9c/platform/tools/firmware_manifest.schema.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/a358780eb572a9642bdf5f180572ef689529cf9c/tests/firmware/evidence-2026-10-25-secure-boot-image.json"
+  ],
+  "notes": [
+    "The comparison uses application descriptor secure_version and a package-provided espefuse summary.",
+    "The summary is self-asserted, so anti_rollback.status remains not-verified.",
+    "No ROM, bootloader, QEMU or physical hardware execution is claimed."
+  ]
+}
