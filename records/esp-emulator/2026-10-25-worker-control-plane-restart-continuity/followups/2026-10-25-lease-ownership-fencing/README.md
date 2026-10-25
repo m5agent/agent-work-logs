@@ -62,4 +62,6 @@ side effect、物理跨主机迁移或真机。
   worker→central blackhole 后 bounded heartbeat、runtime DELETE、OS process
   ／真实 QEMU process reap、stale result suppression、lease expiry/requeue
   和 fresh retry PASS；process 与 worker-local QEMU lane 各
-  `3/3 × 18 checks`。QEMU 内 guest/device 与 unified companion 仍未覆盖。
+  `3/3 × 18 checks`；worker-local `qemu-unified` companion/pcap lane
+  为 `3/3 × 30 checks`。QEMU 内 guest/device-controller 与 worker 未拥有的
+  外部 side effect 仍未覆盖。

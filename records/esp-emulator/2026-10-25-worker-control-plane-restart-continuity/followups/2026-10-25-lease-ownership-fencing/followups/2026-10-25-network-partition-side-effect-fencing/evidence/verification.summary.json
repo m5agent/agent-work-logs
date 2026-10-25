@@ -4,8 +4,9 @@
   "scope": "virtual-control-plane-not-hardware",
   "source": {
     "base_commit": "667c3564208fcb69df7afea68091d6d3e34d3eb4",
-    "result_commit": "2dd44b2b78fb3463ff2be9cb36321b19e93f49d3",
-    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416",
+    "implementation_commit": "ff605757d20e0954cfcbbde4bc3bbd1381e8065d",
+    "result_commit": "9e88699199b8b473d1fb74b581931a398f4b68ca",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40163740320",
     "ci_status": "PASS"
   },
   "partition": {
@@ -43,14 +44,41 @@
     "input_firmware_and_qemu_hashes_stable": true,
     "runtime": "qemu"
   },
+  "reconciled_lanes": {
+    "process": {
+      "attempts": 3,
+      "checks_per_attempt": 18,
+      "status": "PASS"
+    },
+    "qemu": {
+      "attempts": 3,
+      "checks_per_attempt": 18,
+      "status": "PASS"
+    },
+    "unified": {
+      "attempts": 3,
+      "checks_per_attempt": 30,
+      "status": "PASS",
+      "http_request_before_partition": true,
+      "ble_pass_before_partition": true,
+      "nonempty_pcap_before_partition": true,
+      "http_fixture_terminated": true,
+      "ble_companion_terminated": true,
+      "ble_pid_reaped": true,
+      "pcap_summary_finalized": true,
+      "fresh_retry_completed": true
+    },
+    "source_revision": "d846c4b6bb5fb9ba3eb31e87bd764f9821ddb40d",
+    "source_worktree_clean": true
+  },
   "verification": {
     "platform_tests": {
-      "passed": 444,
-      "total": 444
+      "passed": 447,
+      "total": 447
     },
     "documentation_tests": {
-      "passed": 30,
-      "total": 30
+      "passed": 33,
+      "total": 33
     },
     "node_sha256_upload": {
       "passed": 2,
@@ -71,7 +99,7 @@
   "validation_boundaries": {
     "qemu_process_side_effect": "PASS",
     "qemu_guest_and_device_internal_side_effect": "NOT RUN",
-    "qemu_unified_companion_cleanup": "NOT RUN",
+    "qemu_unified_companion_cleanup": "PASS",
     "external_effects_not_owned_by_worker": "NOT RUN",
     "physical_cross_host": "NOT RUN",
     "production_scheduler": "NOT RUN",

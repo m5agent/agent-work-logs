@@ -7,8 +7,9 @@
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "667c3564208fcb69df7afea68091d6d3e34d3eb4",
-    "result_commit": "2dd44b2b78fb3463ff2be9cb36321b19e93f49d3",
-    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416",
+    "implementation_commit": "ff605757d20e0954cfcbbde4bc3bbd1381e8065d",
+    "result_commit": "9e88699199b8b473d1fb74b581931a398f4b68ca",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40163740320",
     "ci_status": "PASS"
   },
   "hardware": {
@@ -27,15 +28,17 @@
     "evidence_delay_seconds": 8,
     "attempts": 3,
     "qemu_attempts": 3,
+    "unified_attempts": 3,
     "checks_per_attempt": 18,
-    "platform_tests": "444/444 PASS",
-    "docs_tests": "30/30 PASS",
+    "unified_checks_per_attempt": 30,
+    "platform_tests": "447/447 PASS",
+    "docs_tests": "33/33 PASS",
     "node_tests": "2/2 PASS"
   },
   "artifacts": {
     "worker_agent_sha256": "bf250820f879ce232df2d8df95827908cd4a6ebe7335c257129d022e6bf102cb",
     "device_service_sha256": "6f9b526e936941ebeb2a05acb3442f619f296d4bba5479a9ef98be7839363662",
-    "partition_runner_sha256": "6672b3a1924d9133fcdcfefaadc19a66770587f75d1e184d38ce6868631ac3eb",
+    "partition_runner_sha256": "d5f572f8200c7bebd184e923228f868b1b08e5a11f45e60d43a170e5baf8cf3d",
     "runtime_fixture_sha256": "22d9aadac063caf22b5d40777860cb9345ba846eff00aa0a2a4cd1ba33df9592",
     "qemu_sha256": "f024f034d20bd5b8e2c224ce69deed70984b0514f8a310d221b388b74c179ecb",
     "firmware_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8"
@@ -92,12 +95,12 @@
     {
       "name": "platform_tests",
       "status": "PASS",
-      "detail": "444/444"
+      "detail": "447/447"
     },
     {
       "name": "documentation_tests",
       "status": "PASS",
-      "detail": "30/30"
+      "detail": "33/33"
     },
     {
       "name": "node_tests",
@@ -117,11 +120,35 @@
       "status": "PASS"
     },
     {
-      "name": "qemu_guest_and_device_internal_side_effect",
-      "status": "NOT RUN"
+      "name": "unified_http_request_before_partition",
+      "status": "PASS"
     },
     {
-      "name": "qemu_unified_companion_cleanup",
+      "name": "unified_ble_pass_before_partition",
+      "status": "PASS"
+    },
+    {
+      "name": "unified_pcap_nonempty_before_partition",
+      "status": "PASS"
+    },
+    {
+      "name": "unified_companions_terminated",
+      "status": "PASS"
+    },
+    {
+      "name": "unified_ble_pid_reaped",
+      "status": "PASS"
+    },
+    {
+      "name": "unified_pcap_finalized",
+      "status": "PASS"
+    },
+    {
+      "name": "unified_retry_recovered",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_guest_and_device_internal_side_effect",
       "status": "NOT RUN"
     },
     {
@@ -133,6 +160,11 @@
     "evidence/verification.summary.json",
     "evidence/partition-fencing-3x.json",
     "evidence/partition-fencing-qemu-3x.json",
+    "evidence/partition-fencing-reconciled-3x.json",
+    "evidence/partition-fencing-qemu-reconciled-3x.json",
+    "evidence/partition-fencing-unified-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ff605757d20e0954cfcbbde4bc3bbd1381e8065d/tests/network/worker_partition_fencing/evidence-2026-10-25-partition-fencing-unified-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ff605757d20e0954cfcbbde4bc3bbd1381e8065d/tests/network/worker_partition_fencing/run_test.py",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/run_test.py",
     "https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/platform/tools/worker_agent.py"
   ],
@@ -140,6 +172,7 @@
     "Control request timeout is capped by the remaining reconnect budget.",
     "The central lease is requeued after expiry and a second attempt completes the job.",
     "The process lane covers a worker-owned OS process; the QEMU lane covers a worker-owned QEMU process and fresh retry.",
-    "QEMU guest/device/controller-internal and qemu-unified companion side effects remain NOT RUN."
+    "The final qemu-unified lane fences the QEMU process, HTTP fixture, BLE peer and pcap writer.",
+    "QEMU guest/device/controller-internal and external effects not owned by the worker remain NOT RUN."
   ]
 }

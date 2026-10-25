@@ -56,6 +56,16 @@ durable queue/directory   <-> authenticated runtime API
 该 mode 的 side effect 是 worker-owned QEMU process，不是 child-process
 fixture。
 
+最终 runner 还支持同一 lease 的 `qemu-unified`：
+
+```text
+worker-local Device Service
+  ├─ qemu-system-xtensa
+  ├─ in-process HTTP fixture
+  ├─ external BLE peer + UART1 H4
+  └─ QEMU pcap
+```
+
 ## 执行
 
 每次 attempt：
@@ -81,6 +91,11 @@ QEMU mode 重复同样的 attempt 1 fence/requeue/attempt 2 流程，并额外�
 4. attempt 2 启动新的 QEMU，不再复活 attempt 1；
 5. attempt 2 取得 serial/frame/QOM evidence，terminal result PASS；
 6. 两代 QEMU 和 namespace 都回收，stale result 不上报。
+
+Unified mode 在 partition 前额外要求同一 session 产生 HTTP request、BLE
+`BLE_BUMBLE_PASS` 和非空 pcap。Partition 后要求 HTTP/BLE companion 变成
+`terminated`、BLE peer PID 消失、pcap summary 完成；attempt 2 再启动新
+unified session 并重复全部 HTTP/BLE/pcap evidence。
 
 ## 验证
 
@@ -111,11 +126,28 @@ attempt 2 evidence + terminal result      PASS
 input firmware/runtime hashes unchanged   true
 ```
 
+最终 runner 的三条 lane 均在干净 source worktree 上重新执行：
+
+```text
+process lane                 3/3 PASS x 18 checks
+plain QEMU lane              3/3 PASS x 18 checks
+qemu-unified lane            3/3 PASS x 30 checks
+source revision              d846c4b
+runner hash                  d5f572f...
+unified HTTP before fence    1 request
+unified BLE before fence     PASS
+unified pcap before fence    8249 B
+unified companion after      terminated
+unified BLE PID after        reaped
+unified pcap summary         PASS
+retry unified HTTP/BLE/pcap  PASS
+```
+
 平台验证：
 
 ```text
-platform unittest        444/444 PASS
-docs consistency         30/30 PASS
+platform unittest        447/447 PASS
+docs consistency         33/33 PASS
 Node SHA256/upload       2/2 PASS
 runtime coverage         PASS
 peripheral catalog       PASS
@@ -129,7 +161,7 @@ GitHub Actions           PASS
 ```
 
 CI：
-<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416>
+<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40163740320>
 
 ## 验证边界
 
@@ -137,8 +169,8 @@ CI：
 - process lane 证明 worker-owned child process；QEMU lane进一步证明
   worker-local QEMU **process** 被 stop/reap；
 - 不证明 QEMU 内 guest/device/controller-internal side effect；
-- QEMU lane 使用普通 `runtime=qemu`，不覆盖 `qemu-unified` HTTP
-  companion、BLE peer、pcap writer 或磁盘 side effect 的随停；
+- unified lane 证明 provider 管理的 HTTP/BLE/pcap 随 runtime 停止，但不观察
+  QEMU 退出后的 guest/controller 内部状态；
 - 不证明 worker 未拥有的外部网络 side effect；
 - 两个 namespace 位于同一 Docker daemon，不是物理跨主机；
 - 不证明跨主机进程迁移、reattach、生产 scheduler 或 hardware；
@@ -151,6 +183,7 @@ CI：
 - lease 至少 5 秒，避免测试或运维误配为不可恢复的零窗口。
 - 本地 fence 会在无法确认 ownership 时保守停止 runtime；central 仍可能暂时
   将此 job 视为 leased，直到 lease expiry。
-- 回滚 process/QEMU lane 为 revert `2dd44b2`；回滚请求 timeout 修复为
+- 回滚 process/QEMU/unified lane 为 revert `6866fbd`、`d846c4b` 和
+  `ff60575`；回滚请求 timeout 修复为
   revert `fa902c2`。`fa902c2` 的核心 bounded-budget 行为不应单独撤销，
   否则 blackhole 会重新被默认 60 秒 socket timeout 拖住。

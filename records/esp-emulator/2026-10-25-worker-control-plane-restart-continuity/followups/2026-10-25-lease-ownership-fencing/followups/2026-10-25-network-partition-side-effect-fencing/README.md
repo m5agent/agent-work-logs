@@ -5,8 +5,9 @@
 - 工作类型：`code_change`
 - 源码仓库：`m5agent/m5stack-esp-emulator`
 - 基线版本：`667c3564208fcb69df7afea68091d6d3e34d3eb4`
-- 结果版本：`2dd44b2b78fb3463ff2be9cb36321b19e93f49d3`
-- CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416>
+- 功能与证据提交：`ff605757d20e0954cfcbbde4bc3bbd1381e8065d`
+- 最终结果版本：`9e88699199b8b473d1fb74b581931a398f4b68ca`
+- CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40163740320>
 - 环境：Linux privileged Docker；两个独立 network namespace；GitHub Actions Ubuntu
 
 ## 结论
@@ -30,9 +31,14 @@ Worker 到 central control plane 的 traffic blackhole 现在不会再被单个�
 同一 runner 的真实 worker-local QEMU lane 也连续 `3/3 PASS`：worker
 namespace 内独立 Device Service 上传完整 StickS3 image、创建真实 QEMU
 session；断网后 attempt 1 被 fence，QEMU PID 被回收，attempt 2 启动新
-QEMU 并完成 job。该 lane 使用普通 `runtime=qemu`，QEMU 内
-guest/device-controller、`qemu-unified` companion/pcap/BLE 和 worker
-未拥有的外部 side effect 仍为 `NOT RUN`。
+QEMU 并完成 job。
+
+最终 runner 又把 lane 扩展到 `qemu-unified`。三个独立运行都在 partition
+前要求同一 session 出现 HTTP request、BLE PASS 和非空 pcap；断网后
+attempt 1 被 fence，HTTP/BLE companion 进入 `terminated`、BLE PID 消失、
+pcap summary 完成；attempt 2 启动新 unified session，再次完成 HTTP/BLE/pcap
+和 terminal PASS。每轮 `30/30` checks。QEMU 内 guest/device-controller
+内部状态、worker 未拥有的外部 side effect、物理跨主机和真机仍为 `NOT RUN`。
 
 ## 关键证据
 
@@ -43,8 +49,11 @@ guest/device-controller、`qemu-unified` companion/pcap/BLE 和 worker
 - attempt 2：terminal `PASS`；
 - QEMU lane：`3/3 PASS`，每轮 attempt 1 QEMU PID reap、attempt 2 新
   QEMU terminal `PASS`；
-- platform tests：`444/444 PASS`；
-- documentation contracts：`30/30 PASS`；
+- Unified lane：`3/3 PASS`，每轮 `30/30` checks；partition 前 HTTP request
+  1、BLE PASS、pcap 非空；fence 后 companion terminated、BLE PID 回收、
+  pcap summary `PASS`，retry 重新取得 unified evidence；
+- platform tests：`447/447 PASS`；
+- documentation contracts：`33/33 PASS`；
 - Node SHA256/upload：`2/2 PASS`；
 - GitHub Actions `platform-contracts` 与
   `network-namespace-policy`：`PASS`；
@@ -56,6 +65,8 @@ guest/device-controller、`qemu-unified` companion/pcap/BLE 和 worker
 - <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/evidence-2026-10-25-partition-fencing-qemu-3x.json>
 - <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/run_test.py>
 - <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/runtime_fixture.py>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/ff605757d20e0954cfcbbde4bc3bbd1381e8065d/tests/network/worker_partition_fencing/evidence-2026-10-25-partition-fencing-unified-3x.json>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/ff605757d20e0954cfcbbde4bc3bbd1381e8065d/tests/network/worker_partition_fencing/run_test.py>
 
 ## 文件
 
@@ -64,12 +75,17 @@ guest/device-controller、`qemu-unified` companion/pcap/BLE 和 worker
 - `evidence/verification.summary.json`：脱敏验证摘要；
 - `evidence/partition-fencing-3x.json`：三次独立 process-lane 运行汇总；
 - `evidence/partition-fencing-qemu-3x.json`：三次独立真实 QEMU lane 汇总。
+- `evidence/partition-fencing-reconciled-3x.json`：最终 runner 的 process
+  lane 复跑；
+- `evidence/partition-fencing-qemu-reconciled-3x.json`：最终 runner 的
+  plain-QEMU lane 复跑；
+- `evidence/partition-fencing-unified-3x.json`：最终 runner 的
+  `qemu-unified` companion/pcap lane。
 
 ## 未覆盖项
 
 - QEMU 内 guest/device-controller side-effect fencing；
-- `qemu-unified` HTTP companion、BLE peer、pcap writer 和磁盘 side effect
-  随 partition fence 一起停止；
+- QEMU 内 guest/controller 内部状态；
 - worker 未拥有的外部网络或宿主 side effect；
 - 物理跨主机 QEMU executor/reattach；
 - production scheduler、object storage 和 untrusted-firmware VM；
