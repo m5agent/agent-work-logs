@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Fix the Core2 equal-deadline Xtensa timer and refresh current code/document state",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "1b923f83d6906545879e16262aaa3b3e10cc7c74",
+    "result_commit": "c3193b92cc46b41a7dc8574089fc2b95df37caa4"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_timer": "NOT RUN",
+    "physical_psram_cache": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "build": "ESP-IDF 5.5.4",
+    "image_sha256": "c2762e5f34d513e34a47739174fd452567f2f3ec87164a4d421a1a7141c68359",
+    "elf_sha256": "7636c3e5aa182621f9998e12938a2e037adf99689f7d1b7e5c154a7892aaf88b",
+    "runtime_result": "PASS_MINIMAL_PROBE_LEGACY_UIFLOW_FAIL"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, ESP-IDF 5.5.4, QEMU virtual-device",
+    "patch_base_qemu_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "diagnostic_qemu_binary_sha256": "c41042e3d35b66d5967163749f49602a3b8efa466a733fa6244d5d4838e27bd2",
+    "artifact_bound_attempts": 40,
+    "artifact_bound_pass": 40,
+    "artifact_bound_interrupt_wdt": 0,
+    "artifact_bound_spinlock_assert": 0,
+    "runner_regression_attempts": 3,
+    "runner_regression_pass": 3,
+    "wrong_image_exit_status": 2,
+    "platform_tests": "500/500 PASS",
+    "project_snapshot": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40218210901",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40218210901",
+    "ci_status": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "equal_deadline_root_cause_observed",
+      "status": "PASS",
+      "detail": "The retained IRQ ring recorded CCOMPARE == CCOUNT with dcc=0x100000000 before interrupt-WDT."
+    },
+    {
+      "name": "business_patch_scope",
+      "status": "PASS",
+      "detail": "The patch arms an equal deadline for the next cycle and excludes ring, trace, timeout and retry changes."
+    },
+    {
+      "name": "patch_apply_and_reverse_check",
+      "status": "PASS"
+    },
+    {
+      "name": "minimal_probe_post_fix",
+      "status": "PASS",
+      "detail": "40/40 artifact-bound first boots completed all 1000 CPU1 partition reads with zero WDT, spinlock assertion or reboot."
+    },
+    {
+      "name": "runner_hash_fail_closed",
+      "status": "PASS",
+      "detail": "The known image passed 3/3; the old image was rejected with exit status 2 before upload."
+    },
+    {
+      "name": "documentation_authority_refresh",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy_uiflow_nonempty_frame",
+      "status": "FAIL",
+      "detail": "Seventeen sampled frames were the same black PNG; TG0/TG1 resets and reset PC 0 remained."
+    },
+    {
+      "name": "ci",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/equal-deadline-summary.json",
+    "patches/0001-xtensa-ccompare-equal-deadline.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c3193b92cc46b41a7dc8574089fc2b95df37caa4/tests/firmware/core2_flash_ipc/evidence-2026-10-26-core2-ccompare-equal-deadline.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c3193b92cc46b41a7dc8574089fc2b95df37caa4/patches/qemu-m5stack-peripherals/0034-xtensa-ccompare-equal-deadline.patch"
+  ],
+  "notes": [
+    "This follow-up supersedes the unresolved timer-delivery boundary in the corrected flash-IPC record for the minimal probe only.",
+    "RUNTIME-03 remains OPEN because legacy UIFlow still resets through TG0/TG1 watchdog and renders no non-empty frame.",
+    "The result is virtual-device validation, not physical timer, cache, PSRAM, RF, electrical or hardware validation.",
+    "All non-historical documentation pages were reconciled to the current fact date."
+  ]
+}

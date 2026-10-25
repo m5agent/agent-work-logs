@@ -1,5 +1,9 @@
 # ESP Emulator corrected Core2 flash-IPC and interrupt-WDT boundary
 
+> Superseded for the minimal probe by
+> [the equal-deadline timer follow-up](../../../2026-10-26-core2-equal-deadline-timer/README.md).
+> The remaining legacy UIFlow TG0/TG1 watchdog path is still open.
+
 - 日期：`2026-10-26`
 - 结果：`PARTIAL`
 - 工作类型：`code_change`

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "core2-equal-deadline-summary",
+  "date": "2026-10-26",
+  "validation": "virtual-device validation",
+  "source_commit": "c3193b92cc46b41a7dc8574089fc2b95df37caa4",
+  "pre_fix": {
+    "combined_first_boots": 20,
+    "pass": 14,
+    "interrupt_wdt": 6,
+    "spinlock_owner_assert": 0,
+    "read_start_observed": 20,
+    "irq_ring_record": "kind=wsr-ccompare a=<CCOMPARE> b=<CCOUNT> c=0000000100000000 where a == b"
+  },
+  "fix": {
+    "patch": "patches/0001-xtensa-ccompare-equal-deadline.patch",
+    "patch_base_qemu_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "source_file": "target/xtensa/op_helper.c",
+    "rule": "delta ? delta : 1",
+    "forward_apply_check": "PASS",
+    "reverse_apply_check": "PASS"
+  },
+  "post_fix": {
+    "attempts": 40,
+    "pass": 40,
+    "interrupt_wdt": 0,
+    "spinlock_owner_assert": 0,
+    "reboot": 0,
+    "accelerators": [
+      "icount shift=5",
+      "icount shift=auto"
+    ],
+    "trace_controls": [
+      "IRQ ring enabled",
+      "trace disabled"
+    ]
+  },
+  "current_runner_regression": {
+    "default_observation_seconds": 15,
+    "known_image_attempts": 3,
+    "known_image_pass": 3,
+    "old_image_sha256": "7e786a27678285d60c006fcb25226b98212672b34ec8b3b844833b5050a18da3",
+    "old_image_exit_status": 2,
+    "old_image_upload_attempted": false
+  },
+  "legacy_uiflow": {
+    "firmware": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "frames_observed": 17,
+    "unique_application_frame": false,
+    "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+    "reset_reasons": [
+      "TG0WDT_SYS_RESET",
+      "TG1WDT_SYS_RESET"
+    ],
+    "reset_cpu_pc": "0x0"
+  },
+  "verification": {
+    "platform_tests": "500/500 PASS",
+    "project_snapshot": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40218210901",
+    "ci_status": "PASS"
+  },
+  "not_proven": [
+    "legacy UIFlow TG0/TG1 watchdog root cause",
+    "physical timer, cache or PSRAM timing",
+    "all Core2 firmware compatibility",
+    "hardware validation"
+  ]
+}
