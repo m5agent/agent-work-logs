@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Verify a firmware guest CNAME-to-HTTP lifecycle in three independent Device Service leases",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "8710e41bf00d592ad0a5a7b9e5a3d5f32a333f9d",
+    "result_commit": "c2083ecddb553eaddbf69fabeb6abbb1218b22dc",
+    "api_version": "1.31.0"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "virtual StickS3",
+    "profile": "uiflow2-sticks3-wifi",
+    "probe_image_sha256": "53170651ccabc8fb16b5cf993d348693c12bcc643a6f0c60bf7a479d8a456c73",
+    "qemu_sha256": "f024f034d20bd5b8e2c224ce69deed70984b0514f8a310d221b388b74c179ecb"
+  },
+  "execution": {
+    "environment": "macOS arm64 build; Ubuntu 25.04 arm64 privileged container; Python 3.13",
+    "lease_count": 3,
+    "durations_seconds": [
+      17.817,
+      17.744,
+      17.937
+    ],
+    "platform_tests": "427/427 PASS",
+    "node_tests": "2/2 PASS",
+    "ci_run": "40153868339",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40153868339",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "wifi_ready",
+      "status": "PASS"
+    },
+    {
+      "name": "guest_cname_query",
+      "status": "PASS"
+    },
+    {
+      "name": "cname_terminal_a",
+      "status": "PASS"
+    },
+    {
+      "name": "guest_http_200",
+      "status": "PASS"
+    },
+    {
+      "name": "denied_name_nxdomain",
+      "status": "PASS"
+    },
+    {
+      "name": "denied_port_blocked",
+      "status": "PASS"
+    },
+    {
+      "name": "pcap_allowed_and_denied_flows",
+      "status": "PASS"
+    },
+    {
+      "name": "network_evidence_archive",
+      "status": "PASS"
+    },
+    {
+      "name": "private_namespace",
+      "status": "PASS"
+    },
+    {
+      "name": "cleanup_and_qemu_reap",
+      "status": "PASS"
+    },
+    {
+      "name": "three_independent_lease_reproduction",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/c2083ecddb553eaddbf69fabeb6abbb1218b22dc",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c2083ecddb553eaddbf69fabeb6abbb1218b22dc/tests/network/cname_guest_lifecycle/evidence-2026-10-25-cname-guest-lifecycle-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40153868339"
+  ],
+  "notes": [
+    "Two pre-guest startup failures are retained as service/QEMU diagnostics, not firmware failures.",
+    "The three passing leases bind identical probe, QEMU, runner, Device Service and sandbox hashes.",
+    "Public DNS, DNSSEC, rebinding resistance, RF and physical hardware are not claimed."
+  ]
+}

@@ -39,6 +39,8 @@ resolver-only 证据写成完整固件生命周期 PASS。
 - `run.json`：机器可读结果
 - `evidence/verification.summary.json`：CNAME checks、policy negatives 和
   CI 结果摘要
+- [`followups/2026-10-25-cname-guest-lifecycle/`](followups/2026-10-25-cname-guest-lifecycle/)：
+  三个独立 Device Service lease 的 CNAME guest 生命周期与 `NET-07` closure
 
 ## 未覆盖项
 

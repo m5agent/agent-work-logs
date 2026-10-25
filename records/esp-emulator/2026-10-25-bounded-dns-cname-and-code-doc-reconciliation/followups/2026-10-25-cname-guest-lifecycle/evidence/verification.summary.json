@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "generated_at": "2026-10-25T02:18:05Z",
+  "source_commit": "c2083ecddb553eaddbf69fabeb6abbb1218b22dc",
+  "base_commit": "8710e41bf00d592ad0a5a7b9e5a3d5f32a333f9d",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "runtime": {
+    "machine": "m5sticks3",
+    "runtime": "qemu-wifi",
+    "profile": "uiflow2-sticks3-wifi",
+    "isolation": "namespace",
+    "egress": "allowlist",
+    "dns": "controlled",
+    "lease_count": 3
+  },
+  "artifacts": {
+    "probe_image_sha256": "53170651ccabc8fb16b5cf993d348693c12bcc643a6f0c60bf7a479d8a456c73",
+    "qemu_sha256": "f024f034d20bd5b8e2c224ce69deed70984b0514f8a310d221b388b74c179ecb",
+    "runner_sha256": "c026238e6625de1f2ad1dc9c7a2c422591c0a6634bb30aabecdbbf8a327dc3fc",
+    "device_service_sha256": "38f84f5c156231f2435fc9b0a892cd06e5b6f8bf2717e626a576de959470d728",
+    "network_sandbox_sha256": "47761829a8b6fe9f71f181a44695156afca1556f17445e4c571d28de39e6d045"
+  },
+  "leases": [
+    {
+      "duration_seconds": 17.817,
+      "session_id_sha256": "bdfcb4b7a1b8c354c0091a0d06a04d963b7718f0ee9aba1351b1a622bcd3538d",
+      "evidence_zip_sha256": "c2ed2e083694c2f3e86fb242c76fc89d676429e36eb83ff70f756bd64d0c581b"
+    },
+    {
+      "duration_seconds": 17.744,
+      "session_id_sha256": "80f403110251cd2d344a038e94f799ed8b46ebd3a0a1249f66c9821ad1caef93",
+      "evidence_zip_sha256": "e53728bf985e4f6c893e1b463f66267f1b9f9e4b82823d97c374918fcc1f2f6b"
+    },
+    {
+      "duration_seconds": 17.937,
+      "session_id_sha256": "79a0ab749c525db84c9c61b4edf9a9dd23cf52153d475e3272a217cf9fb0f5f4",
+      "evidence_zip_sha256": "24f858ca008ab584918206ceace4d4cd6db4538de1c3352268ebb55f70ffeb3b"
+    }
+  ],
+  "checks": {
+    "wifi_ready": "PASS",
+    "guest_cname_query": "PASS",
+    "cname_terminal_a": "PASS",
+    "guest_http_200": "PASS",
+    "denied_name_nxdomain": "PASS",
+    "denied_port_blocked": "PASS",
+    "pcap_allowed_and_denied_flows": "PASS",
+    "network_evidence_archive": "PASS",
+    "private_namespace": "PASS",
+    "cleanup_and_qemu_reap": "PASS",
+    "three_independent_lease_reproduction": "PASS"
+  },
+  "diagnostic_failures": [
+    {
+      "stage": "sandbox_dns_record_renormalization",
+      "guest_serial_bytes": 0,
+      "classification": "pre-guest service failure"
+    },
+    {
+      "stage": "qemu_rom_directory_missing_machine_rom",
+      "guest_serial_bytes": 0,
+      "classification": "pre-guest runtime-asset failure"
+    }
+  ],
+  "contracts": {
+    "platform_tests": "427/427 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "openapi_yaml": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run_id": "40153868339",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "public DNS or DNSSEC",
+    "DNS rebinding resistance",
+    "arbitrary public domain resolution",
+    "RF or PHY behavior",
+    "physical hardware validation"
+  ]
+}
