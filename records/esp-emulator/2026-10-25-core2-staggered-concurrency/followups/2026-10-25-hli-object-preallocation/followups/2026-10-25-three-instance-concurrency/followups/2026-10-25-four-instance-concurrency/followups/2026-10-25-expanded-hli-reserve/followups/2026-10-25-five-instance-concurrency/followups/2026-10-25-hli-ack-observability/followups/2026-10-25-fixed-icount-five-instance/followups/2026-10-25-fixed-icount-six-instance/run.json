@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 fixed-icount six-instance cold start",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "39e6295",
+    "commit": "c72ac2f"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "bytes": 16777216
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, Node.js, patched Xtensa QEMU",
+    "task_id": "",
+    "session_id": "",
+    "ci_run": "40195028961"
+  },
+  "checks": [
+    {
+      "name": "fixed_icount_six_instance_batch_a",
+      "status": "PASS",
+      "attempts": "6/6",
+      "hold_seconds": 120,
+      "maximum_concurrency": 6,
+      "psram_sweeps": "13,12,13,13,13,12"
+    },
+    {
+      "name": "fixed_icount_six_instance_batch_b",
+      "status": "PASS",
+      "attempts": "6/6",
+      "hold_seconds": 120,
+      "maximum_concurrency": 6,
+      "psram_sweeps": "13,13,13,13,13,13",
+      "recoverable_prealloc_failures": 1
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "result": "491/491"
+    },
+    {
+      "name": "docs_contracts",
+      "status": "PASS",
+      "result": "37/37"
+    },
+    {
+      "name": "browser_unit_tests",
+      "status": "PASS",
+      "result": "2/2"
+    },
+    {
+      "name": "github_actions_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "clean_source_rebuild",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/six-instance-fixed-icount-pass-a.json",
+      "sha256": "ae49660be9ad1b67e8149bad46069e8c86e7c5892ca7148bac8828aca642751a"
+    },
+    {
+      "path": "evidence/six-instance-fixed-icount-pass-b.json",
+      "sha256": "6131b3c61a99bba93f45b50e34d0f114ea7142405cce4ef1352377ebf71d9b58"
+    }
+  ],
+  "notes": [
+    "virtual-device validation only",
+    "one recoverable hli-prealloc-failures=1 observation remains visible",
+    "more than six instances, physical controller/cache timing and hardware remain open"
+  ]
+}

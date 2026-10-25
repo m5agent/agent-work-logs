@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "validation": "virtual-device validation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "39e6295",
+    "commit": "c72ac2f",
+    "ci_run": "40195028961"
+  },
+  "runtime": {
+    "runtime": "qemu-unified",
+    "profile": "core2-native-hci",
+    "accelerator": "tcg,thread=single,tb-size=128",
+    "icount": "shift=5,align=off,sleep=off",
+    "stagger_seconds": 0,
+    "hold_seconds": 120,
+    "instances_per_batch": 6,
+    "batches": 2,
+    "passed_leases": 12,
+    "total_psram_sweeps": 154
+  },
+  "per_lease": {
+    "wifi_dhcp_http": "PASS",
+    "public_dns_http": "PASS",
+    "external_nus_gatt": "PASS",
+    "frame": "PASS",
+    "qom_nodes": 31,
+    "qom_memory_bytes": 8388608,
+    "pcap": "PASS",
+    "psram_sweeps": "12-13",
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_c2h_events": 36,
+    "hli_c2h_acls": 9,
+    "hli_errors": 0,
+    "scheduler_reset": 0,
+    "panic": 0,
+    "dropped_packets": 0
+  },
+  "recoverable_anomalies": {
+    "batch_b_prealloc_failures": 1,
+    "impact": "All 36/9 packets still used the fast path and HLI completed 45/45."
+  },
+  "project_checks": {
+    "platform_tests": "491/491 PASS",
+    "docs_contracts": "37/37 PASS",
+    "browser_unit_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "github_actions": "2/2 PASS"
+  },
+  "not_run": [
+    "clean source rebuild for the committed test image",
+    "more than six simultaneous instances",
+    "sustained HCI/GATT throughput",
+    "teardown modes beyond active-stop",
+    "bit-exact Espressif BT controller/baseband",
+    "physical PSRAM/cache timing and RF",
+    "same-firmware physical hardware validation"
+  ]
+}
