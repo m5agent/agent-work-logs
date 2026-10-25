@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Inspect Secure Boot v2 image signature sectors without overclaiming trust",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9e88699199b8b473d1fb74b581931a398f4b68ca",
+    "result_commit": "cc84be137f407bea97d7ec257786dc0e7c0bd1d1",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40164290554",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "static-image",
+    "physical_hardware": "NOT RUN",
+    "physical_cross_host": "NOT APPLICABLE",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "synthetic_signature_sectors": true,
+    "qemu_started": false,
+    "device_session_created": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; synthetic 8 MiB flash layouts",
+    "image_checks": 13,
+    "platform_tests": "451/451 PASS",
+    "docs_tests": "34/34 PASS",
+    "node_tests": "2/2 PASS"
+  },
+  "checks": [
+    {
+      "name": "signature_sector_magic_version_crc",
+      "status": "PASS"
+    },
+    {
+      "name": "bootloader_image_digest",
+      "status": "PASS"
+    },
+    {
+      "name": "application_image_digest",
+      "status": "PASS"
+    },
+    {
+      "name": "rsa_pss_rsa3072",
+      "status": "PASS"
+    },
+    {
+      "name": "ecdsa_p256_sha256",
+      "status": "PASS"
+    },
+    {
+      "name": "ecdsa_p384_sha384",
+      "status": "PASS"
+    },
+    {
+      "name": "tampered_image_rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unsigned_image_not_found",
+      "status": "PASS",
+      "detail": "expected security warning, not a claim that the device is unsigned"
+    },
+    {
+      "name": "manifest_structure",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "451/451"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "34/34"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "signature_math_verification",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "embedded_key_efuse_trust",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "secure_boot_rom_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/secure-boot-image.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cc84be137f407bea97d7ec257786dc0e7c0bd1d1/platform/tools/firmware_analysis.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cc84be137f407bea97d7ec257786dc0e7c0bd1d1/platform/tools/firmware_manifest.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cc84be137f407bea97d7ec257786dc0e7c0bd1d1/tests/firmware/evidence-2026-10-25-secure-boot-image.json"
+  ],
+  "notes": [
+    "The signature block image digest is recomputed from the bytes before the signature sector.",
+    "The embedded public key is represented only by a SHA-256 digest in the manifest.",
+    "Authenticity and trust root remain not-verified because no live eFuse comparison or boot ROM execution occurs.",
+    "Tampered and unsigned controls are expected negative cases, while the overall fixture status is PASS."
+  ]
+}
