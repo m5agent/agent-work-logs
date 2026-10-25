@@ -46,6 +46,9 @@ Node UI、coverage、catalog、profile 和 GitHub Actions 均通过。
 - `run.json`：机器可读记录；
 - `evidence/verification.summary.json`：脱敏验证摘要。
 
+后续把三次读回扩展到 `3×120s` 持续 PSRAM/周期联网压力，见
+[Follow-up: sustained PSRAM and network stress](followups/2026-10-25-sustained-psram-network-stress/)。
+
 ## 未覆盖项
 
 - 物理板载 `8 MiB` PSRAM，当前 QEMU 模型上限是 `4 MiB`；

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 sustained PSRAM and periodic network stress",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b4b793127dd3351ed4a7b398ab1e0de810d17ab0",
+    "result_commit": "2a3e8120c5548110fad032d0172a3f7dd7a15e13",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40150023648",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_8_mib_psram": "NOT RUN",
+    "physical_cache_psram_timing": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "67447172bef7dcd7d867e30e8fff0a0b2e4ad779d5d3925eeb5d6e023efd039a"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, Device Service /api/v1, QEMU",
+    "runtime": "qemu-unified",
+    "profile": "core2-native-hci",
+    "attempts": 3,
+    "hold_seconds": 120,
+    "session_id": "three independent leases; identifiers omitted"
+  },
+  "checks": [
+    {
+      "name": "psram_sustained_stress",
+      "status": "PASS",
+      "detail": "35/35/36 sweeps, 106 MiB total full-buffer verification"
+    },
+    {
+      "name": "controlled_http_rechecks",
+      "status": "PASS",
+      "detail": "10 per lease, 30 total"
+    },
+    {
+      "name": "public_http_rechecks",
+      "status": "PASS",
+      "detail": "4/3/3, 10 total"
+    },
+    {
+      "name": "active_ble",
+      "status": "PASS",
+      "detail": "external NUS GATT remains connected, HLI 45/45"
+    },
+    {
+      "name": "pcap",
+      "status": "PASS",
+      "detail": "222/205/211 packets, DHCP DORA and example.com DNS observed"
+    },
+    {
+      "name": "frame_qom_evidence_cleanup",
+      "status": "PASS",
+      "detail": "identical 3731-byte frame, 34 nodes, evidence ZIP and cleanup"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "418/418"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "23/23"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/2a3e8120c5548110fad032d0172a3f7dd7a15e13/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-psram-sustained-3x120.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/2a3e8120c5548110fad032d0172a3f7dd7a15e13/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-psram-sustained-3x120-pcap-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/2a3e8120c5548110fad032d0172a3f7dd7a15e13/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-psram-sustained-threshold-fail-1x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40150023648"
+  ],
+  "notes": [
+    "The first formal run exposed an over-optimistic hold/3 sweep threshold; the FAIL evidence is retained and the corrected hold/4 threshold passed 3/3.",
+    "The 120-second PSRAM data path is virtual-device validation, not physical SPI PSRAM or cache timing.",
+    "A separate two-hour virtual soak exists without continuous PSRAM verification; a future milestone may combine both."
+  ]
+}
