@@ -26,6 +26,11 @@ baseline 均 `PASS`，unknown required 均 `REJECTED` 且 exit `1`，unknown
 optional 保持 `PASS` 并 warning。两个不同目录名的 WebBurner 包得到相同
 manifest ID。
 
+后续 security audit 又发现 aggregate security 字段可以被
+sdkconfig/image/eFuse 的 enabled 证据 understate；该问题已由
+[security preflight follow-up](followups/2026-10-26-security-preflight-understatement/)
+关闭。该 follow-up 不修改本记录的 capability/identity evidence。
+
 ## 关键证据
 
 - capability：

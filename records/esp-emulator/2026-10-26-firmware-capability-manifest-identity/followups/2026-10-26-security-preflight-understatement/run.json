@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Reject understated firmware security evidence before session creation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "904d4ec7c6fb9516942625c86d619ebba5ae90a3",
+    "result_commit": "eb7d80a27166be41f82782e7c104bc82226b6b30"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "live_efuse": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "security_preflight_checks": "11/11 PASS",
+    "secure_boot_image_checks": "26/26 PASS",
+    "secure_boot_runtime": "NOT RUN",
+    "flash_encryption_runtime": "NOT RUN"
+  },
+  "execution": {
+    "validation_layer": "static manifest security compatibility",
+    "environment": "macOS arm64, Python 3.13, Node v22.14.0",
+    "platform_tests": "530/530 PASS",
+    "node_sha_upload_tests": "2/2 PASS",
+    "security_preflight_evidence_reproducible": true,
+    "secure_boot_evidence_reproducible": true,
+    "full_uiflow2_matrix": "NOT RUN",
+    "ci_run": "40246916115",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40246916115",
+    "ci_result": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "aggregate_security_understatement",
+      "status": "PASS",
+      "detail": "Setting aggregate secure-boot/Flash Encryption fields to unknown no longer hides enabled evidence in config, image or eFuse summary."
+    },
+    {
+      "name": "security_structure_required",
+      "status": "PASS",
+      "detail": "Core security fields and validation arrays are checked even without an external JSON Schema validator."
+    },
+    {
+      "name": "invalid_secure_boot_image",
+      "status": "PASS",
+      "detail": "Invalid Secure Boot v2 image evidence returns a structured rejection."
+    },
+    {
+      "name": "explicit_disabled_schema",
+      "status": "PASS",
+      "detail": "Schema now accepts explicit disabled secure-boot and Flash Encryption sdkconfig states."
+    },
+    {
+      "name": "secure_boot_tool_hash_rebind",
+      "status": "PASS",
+      "detail": "The Secure Boot image fixture was rerun against current firmware_manifest.py."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/eb7d80a27166be41f82782e7c104bc82226b6b30/tests/firmware/evidence-2026-10-26-firmware-security-preflight-fail-closed.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/eb7d80a27166be41f82782e7c104bc82226b6b30/tests/firmware/evidence-2026-10-26-secure-boot-image-security-preflight.json"
+  ],
+  "notes": [
+    "All results are static compatibility evidence; no QEMU session was created.",
+    "Package eFuse summaries remain unverified.",
+    "Live eFuse, ROM/bootloader trust-chain execution, Flash Encryption runtime and hardware remain NOT RUN."
+  ]
+}
