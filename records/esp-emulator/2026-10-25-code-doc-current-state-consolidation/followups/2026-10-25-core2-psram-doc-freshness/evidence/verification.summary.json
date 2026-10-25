@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "profile": "core2-native-hci",
+  "runtime": "qemu-unified",
+  "attempts": {
+    "requested": 3,
+    "passed": 3,
+    "failed": 0,
+    "hold_seconds": 20
+  },
+  "psram": {
+    "external_heap_total_bytes": 4194304,
+    "requested_bytes": 1048576,
+    "allocated_bytes_observed": 2228232,
+    "sweeps": [1, 2, 3],
+    "init_pass_count": 1,
+    "stress_pass_count": 1,
+    "error_markers": []
+  },
+  "co_resident_checks": {
+    "wifi_dhcp_http": "PASS",
+    "public_dns_http": "PASS",
+    "external_nus_gatt": "PASS",
+    "frame_png": "PASS",
+    "qom": "PASS",
+    "pcap": "PASS",
+    "evidence_zip": "PASS",
+    "cleanup": "PASS",
+    "manifest_session_binding": "PASS"
+  },
+  "frame": {
+    "bytes": 3731,
+    "sha256": "cd2f2033fa92dabd8a60dd4e81bbefd3656b855123e762aef5080188ddf5192f",
+    "all_attempts_identical": true,
+    "qom_nodes": 34
+  },
+  "native_hci_health": {
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_errors": 0,
+    "hli_queue_depth": 0,
+    "meta_queue_depth": 0,
+    "dropped_packets": 0,
+    "tx_queue_depth": 0,
+    "last_error": 0,
+    "peer_closed": 0
+  },
+  "input_hashes": {
+    "firmware_sha256": "9294ac61c4ccf64b346dfb02273c855fc0d63b6f7cede81e66919e1ee63290e6",
+    "firmware_bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "67447172bef7dcd7d867e30e8fff0a0b2e4ad779d5d3925eeb5d6e023efd039a",
+    "input_assets_unchanged_during_run": true
+  },
+  "platform": {
+    "tests_passed": 417,
+    "tests_total": 417,
+    "documentation_passed": 23,
+    "documentation_total": 23,
+    "node_passed": 3,
+    "node_total": 3,
+    "compileall": "PASS",
+    "selected_ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40148745338",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "physical board 8 MiB PSRAM capacity",
+    "physical cache or PSRAM timing",
+    "bit-exact Espressif BT controller or baseband",
+    "long-run concurrency or throughput",
+    "teardown modes beyond active-stop",
+    "physical RF, electrical measurements or hardware validation",
+    "full peripheral matrix rerun"
+  ]
+}

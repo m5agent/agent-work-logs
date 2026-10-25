@@ -140,6 +140,7 @@
 | 2026-10-25 | ESP Emulator | Core2 active-stop、companion cleanup 与连续 session 恢复 | PASS（virtual-device：3/3 连续 session、BLE/HTTP active-stop、QEMU/BLE PID reap、worker lease release、下一 session 完整功能恢复；物理 cache/PSRAM、bit-exact controller、长时并发与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-core2-active-stop-recovery/) |
 | 2026-10-25 | ESP Emulator | 镜像能力观察与 FirmwareManifest capability mismatch | PASS（static-manifest：公开 StickS3 Weather 观察 wifi/display、normal PASS、required camera 结构化拒绝；413/413 tests、22/22 docs、CI PASS；运行态、安全和真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-image-capability-observation/) |
 | 2026-10-25 | ESP Emulator | WebBurner capability 来源、扫描覆盖与 warning 展示 | PASS（browser-ui：真实页面显示 SDKConfig/Image observations/Image scan、逐条 warning；Node/413 tests/CI PASS；无 QEMU、运行态与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-webburner-capability-display/) |
+| 2026-10-25 | ESP Emulator | Core2 guest PSRAM 数据面与当前代码/文档重整 | PASS（virtual-device：3 个独立 lease 均从 4 MiB 虚拟堆分配 1 MiB 并完成三轮读回，同实例 WiFi/公网/NUS GATT/frame/QOM/pcap PASS；417 tests、23 docs、Node/CI PASS；物理 8 MiB/cache timing 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-code-doc-current-state-consolidation/followups/2026-10-25-core2-psram-doc-freshness/) |
 | 2026-10-24 | m5stack-schematics-text | AI Pyramid `llm-llm` deb 平台路径修正与全量链接审计 | PASS（链接/索引/下载哈希一致；100 个 deb 链接无 404、无其他平台错配；PR #2 OPEN/MERGEABLE，待管理员审核） | [查看](records/m5stack-schematics-text/2026-10-24-ai-pyramid-llm-deb-link/) |
 
 ## 目录结构

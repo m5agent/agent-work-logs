@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 guest PSRAM data-path validation and current code/document reconciliation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e679e303281496deb85a9ff09c8baef7cac7fdc0",
+    "capability_commit": "785101915939795f2fb91ed2d9871ff420fd7e84",
+    "documentation_commit": "b4b793127dd3351ed4a7b398ab1e0de810d17ab0",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40148745338",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_8_mib_psram": "NOT RUN",
+    "physical_cache_psram_timing": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "9294ac61c4ccf64b346dfb02273c855fc0d63b6f7cede81e66919e1ee63290e6",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "67447172bef7dcd7d867e30e8fff0a0b2e4ad779d5d3925eeb5d6e023efd039a"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, Python 3, Device Service /api/v1, QEMU",
+    "runtime": "qemu-unified",
+    "profile": "core2-native-hci",
+    "attempts": 3,
+    "hold_seconds": 20,
+    "task_id": "",
+    "session_id": "three independent leases; identifiers omitted"
+  },
+  "checks": [
+    {
+      "name": "guest_psram_allocation",
+      "status": "PASS",
+      "detail": "3/3 leases allocated 1048576 bytes from a 4194304-byte external heap"
+    },
+    {
+      "name": "guest_psram_readback",
+      "status": "PASS",
+      "detail": "address tags and deterministic pattern verified in sweeps 1, 2 and 3"
+    },
+    {
+      "name": "co_resident_wifi_http",
+      "status": "PASS",
+      "detail": "DHCP, controlled HTTP, public DNS/HTTP in the same guest"
+    },
+    {
+      "name": "co_resident_ble",
+      "status": "PASS",
+      "detail": "external NUS GATT and HLI 45/45"
+    },
+    {
+      "name": "frame_qom_pcap_evidence",
+      "status": "PASS",
+      "detail": "3731-byte identical frame, 34 QOM nodes, pcap and complete evidence ZIP"
+    },
+    {
+      "name": "documentation_reconciliation",
+      "status": "PASS",
+      "detail": "README, current status, backlog, workstreams, code map, topic pages and generated metadata use the same evidence boundary"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "417/417"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "23/23"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/785101915939795f2fb91ed2d9871ff420fd7e84/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-psram-guest-stress-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/785101915939795f2fb91ed2d9871ff420fd7e84",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/b4b793127dd3351ed4a7b398ab1e0de810d17ab0",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40148745338"
+  ],
+  "notes": [
+    "The guest exercises the QOM-effective 4 MiB virtual external heap; it does not model the board's physical 8 MiB PSRAM or cache timing.",
+    "Historical images remain valid without PSRAM markers because --require-psram is opt-in.",
+    "Full peripheral matrix and physical hardware validation were not rerun."
+  ]
+}

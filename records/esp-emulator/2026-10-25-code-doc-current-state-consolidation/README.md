@@ -20,6 +20,10 @@ Open-only WiFi、未验证 IPv6 或尚未关闭的 `RUNTIME-05` 当作当前结�
 交接，见
 [Follow-up: code/document inventory and handoff](followups/2026-10-25-code-doc-inventory-and-handoff/)。
 
+2026-10-25 后续又补齐 Core2 guest PSRAM 分配/三轮读回，并把当前状态、
+Backlog、代码地图和设备元数据改为只引用同一份证据，见
+[Follow-up: Core2 PSRAM and current-doc reconciliation](followups/2026-10-25-core2-psram-doc-freshness/)。
+
 本轮同时关闭了 accepted virtual-device scope 内的 S3 WPA2-PSK 数据面：
 正确密码完成 RSN/M1-M4/CCMP、DHCP、DNS 和 TCP/443；错误密码在 M2 MIC
 被拒绝且没有 DHCP。详细实现、证据和剩余边界见
