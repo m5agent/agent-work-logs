@@ -1,5 +1,12 @@
 # ESP Emulator Core2 flash-IPC diagnostic boundary
 
+> Corrected by
+> [the fixed flash/IPC follow-up](followups/2026-10-26-fixed-flash-ipc-wdt/README.md).
+> The earlier spinlock owner mismatch came from a 4096-byte local buffer
+> overflowing a 4096-byte CPU1 task stack. Do not reuse this page's spinlock
+> diagnosis as runtime-model evidence; the corrected probe reaches partition
+> reads and isolates an intermittent interrupt-WDT instead.
+
 - 日期：`2026-10-26`
 - 结果：`PARTIAL`
 - 工作类型：`code_change`

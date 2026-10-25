@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Correct the Core2 flash-IPC probe stack overflow and isolate the post-flash interrupt-WDT boundary",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e185b15b4a2d2bdbbe86f94e84de2217b40da55c",
+    "result_commit": "7bf311e67385552a6be5c2f610811421458e1e73",
+    "supersedes": "records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-flash-ipc-boundary/"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_timer": "NOT RUN",
+    "physical_psram_cache": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "build": "ESP-IDF 5.5.4",
+    "image_sha256": "c2762e5f34d513e34a47739174fd452567f2f3ec87164a4d421a1a7141c68359",
+    "elf_sha256": "7636c3e5aa182621f9998e12938a2e037adf99689f7d1b7e5c154a7892aaf88b"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, QEMU virtual-device",
+    "current_qemu_sha256": "7226de8c4a7292055b981ccbcb42ef865b883178b15e937e03da8767c409bf8d",
+    "portable_qemu_sha256": "4095fb1180f128f9d5fe8c240643dcc0fa99fca72981f6241b089667c0ca2fa8",
+    "current_attempts": 5,
+    "current_pass": 1,
+    "current_interrupt_wdt": 4,
+    "portable_attempts": 15,
+    "portable_pass": 13,
+    "portable_interrupt_wdt": 2,
+    "combined_attempts": 20,
+    "combined_pass": 14,
+    "combined_interrupt_wdt": 6,
+    "combined_spinlock_assert": 0,
+    "platform_tests": "500/500 PASS",
+    "docs_contract_tests": "40/40 PASS",
+    "ci_run": "40213908086",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40213908086",
+    "ci_status": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "old_spinlock_evidence_invalidated",
+      "status": "PASS",
+      "detail": "4096-byte local buffer overflowed a 4096-byte CPU1 task stack and corrupted a FreeRTOS queue lock."
+    },
+    {
+      "name": "flash_read_started",
+      "status": "PASS",
+      "detail": "20/20 combined first boots reached READ_START."
+    },
+    {
+      "name": "flash_read_data_plane",
+      "status": "PARTIAL",
+      "detail": "14/20 completed 1000 CPU1 4 KiB partition reads."
+    },
+    {
+      "name": "post_flash_interrupt_wdt",
+      "status": "FAIL",
+      "detail": "6/20 failed in interrupt-WDT after at least 250 reads; both CPUs sampled in idle waiti."
+    },
+    {
+      "name": "spinlock_owner_assert_absent",
+      "status": "PASS"
+    },
+    {
+      "name": "s32c1i_patch_reverse_check",
+      "status": "PASS"
+    },
+    {
+      "name": "ci",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_timing",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/core2-flash-ipc-wdt-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/7bf311e67385552a6be5c2f610811421458e1e73/tests/firmware/core2_flash_ipc/evidence-2026-10-26-core2-flash-ipc-wdt.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/7bf311e67385552a6be5c2f610811421458e1e73/patches/qemu-m5stack-peripherals/0033-esp32-s32c1i-trace.patch"
+  ],
+  "notes": [
+    "This record corrects the immediately preceding flash-IPC boundary record.",
+    "Partition reads execute; the remaining failure is intermittent post-flash interrupt-WDT.",
+    "S32C1I is retained as a default-off audit channel, not a confirmed root cause.",
+    "RUNTIME-03 remains OPEN."
+  ]
+}

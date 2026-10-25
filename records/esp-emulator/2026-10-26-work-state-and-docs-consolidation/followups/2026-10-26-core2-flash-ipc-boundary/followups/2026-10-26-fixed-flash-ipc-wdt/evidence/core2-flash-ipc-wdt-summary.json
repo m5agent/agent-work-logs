@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "validation": "virtual-device validation",
+  "result_commit": "7bf311e67385552a6be5c2f610811421458e1e73",
+  "firmware": {
+    "image_sha256": "c2762e5f34d513e34a47739174fd452567f2f3ec87164a4d421a1a7141c68359",
+    "elf_sha256": "7636c3e5aa182621f9998e12938a2e037adf99689f7d1b7e5c154a7892aaf88b",
+    "build": "ESP-IDF 5.5.4"
+  },
+  "probe": {
+    "read_buffer": "static aligned internal RAM",
+    "iterations": 1000,
+    "chunk_bytes": 4096,
+    "yield_every_iterations": 50
+  },
+  "current_runtime": {
+    "qemu_sha256": "7226de8c4a7292055b981ccbcb42ef865b883178b15e937e03da8767c409bf8d",
+    "attempts": 5,
+    "read_start": 5,
+    "pass": 1,
+    "interrupt_wdt": 4,
+    "spinlock_assert": 0
+  },
+  "portable_runtime": {
+    "qemu_sha256": "4095fb1180f128f9d5fe8c240643dcc0fa99fca72981f6241b089667c0ca2fa8",
+    "attempts": 15,
+    "read_start": 15,
+    "pass": 13,
+    "interrupt_wdt": 2,
+    "spinlock_assert": 0
+  },
+  "combined": {
+    "attempts": 20,
+    "read_start": 20,
+    "pass": 14,
+    "interrupt_wdt": 6,
+    "spinlock_assert": 0
+  },
+  "wdt_backtrace": [
+    "esp_cpu_wait_for_intr",
+    "esp_vApplicationIdleHook",
+    "prvIdleTask",
+    "vPortTaskWrapper"
+  ],
+  "invalidated_evidence": {
+    "image_sha256": "7e786a27678285d60c006fcb25226b98212672b34ec8b3b844833b5050a18da3",
+    "elf_sha256": "af6d765b5f17052d92bf582e9e3ab1ec05b12b3a43f61366f7da5f31eb5db648",
+    "reason": "4096-byte local read buffer overflowed the 4096-byte CPU1 task stack and corrupted a FreeRTOS queue spinlock."
+  },
+  "verification": {
+    "platform_tests": "500/500 PASS",
+    "docs_contract_tests": "40/40 PASS",
+    "project_snapshot": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "s32c1i_patch_reverse_check": "PASS",
+    "ci_run": 40213908086,
+    "ci_status": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "virtual timer/interrupt root cause",
+    "legacy UIFlow same-cause relationship",
+    "physical timer/cache/PSRAM timing",
+    "hardware validation"
+  ]
+}
