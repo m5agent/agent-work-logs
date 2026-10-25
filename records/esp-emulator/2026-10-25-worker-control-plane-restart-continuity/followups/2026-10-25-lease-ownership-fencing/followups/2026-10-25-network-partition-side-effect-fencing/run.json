@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Fence worker-owned runtime process during control-plane network blackhole",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "667c3564208fcb69df7afea68091d6d3e34d3eb4",
+    "result_commit": "fa902c2c3f67b560d4d7d64b8b1df302b4fa1067",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40160702972",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-control-plane",
+    "physical_hardware": "NOT RUN",
+    "physical_cross_host": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "qemu_started": false,
+    "device_session_created": false
+  },
+  "execution": {
+    "environment": "Linux privileged Docker; two network namespaces; GitHub Actions Ubuntu",
+    "job_lease_seconds": 5,
+    "evidence_delay_seconds": 8,
+    "attempts": 3,
+    "checks_per_attempt": 18,
+    "platform_tests": "444/444 PASS",
+    "docs_tests": "30/30 PASS",
+    "node_tests": "2/2 PASS"
+  },
+  "artifacts": {
+    "worker_agent_sha256": "bf250820f879ce232df2d8df95827908cd4a6ebe7335c257129d022e6bf102cb",
+    "device_service_sha256": "6f9b526e936941ebeb2a05acb3442f619f296d4bba5479a9ef98be7839363662",
+    "partition_runner_sha256": "020a9215db5e97fe2156e7674f49416ade230dbbaf304cf3bc00ba5e6a0b4d10",
+    "runtime_fixture_sha256": "22d9aadac063caf22b5d40777860cb9345ba846eff00aa0a2a4cd1ba33df9592"
+  },
+  "checks": [
+    {
+      "name": "network_partition_installed",
+      "status": "PASS"
+    },
+    {
+      "name": "first_worker_created_side_effect",
+      "status": "PASS"
+    },
+    {
+      "name": "heartbeat_failure_time_bounded",
+      "status": "PASS"
+    },
+    {
+      "name": "first_result_lease_fenced",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_session_stopped",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_side_effect_reaped",
+      "status": "PASS"
+    },
+    {
+      "name": "stale_result_not_reported",
+      "status": "PASS"
+    },
+    {
+      "name": "lease_expired_and_requeued",
+      "status": "PASS"
+    },
+    {
+      "name": "retry_worker_completed_job",
+      "status": "PASS"
+    },
+    {
+      "name": "retry_side_effect_reaped",
+      "status": "PASS"
+    },
+    {
+      "name": "tool_hashes_unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "namespaces_cleaned",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "444/444"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "30/30"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_device_side_effect",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/partition-fencing-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/tests/network/worker_partition_fencing/run_test.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/platform/tools/worker_agent.py"
+  ],
+  "notes": [
+    "Control request timeout is capped by the remaining reconnect budget.",
+    "The central lease is requeued after expiry and a second attempt completes the job.",
+    "The evidence covers a worker-owned OS process, not QEMU/device-side effects."
+  ]
+}

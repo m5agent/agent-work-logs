@@ -55,3 +55,10 @@ side effect、物理跨主机迁移或真机。
 - NAT/跨子网 worker discovery；
 - 生产多机调度和不可信固件 disposable VM；
 - physical hardware/RF/power validation。
+
+## Follow-up
+
+- [Network-partition side-effect fencing](followups/2026-10-25-network-partition-side-effect-fencing/)：
+  worker→central blackhole 后 bounded heartbeat、runtime DELETE、OS process
+  reap、stale result suppression、lease expiry/requeue 和 retry PASS，
+  独立运行 `3/3 × 18 checks`。
