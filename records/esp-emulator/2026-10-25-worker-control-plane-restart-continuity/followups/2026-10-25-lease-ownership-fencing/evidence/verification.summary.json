@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "generated_at": "2026-10-25T02:48:00Z",
+  "source_commit": "8ac85a474e8ad52eb3b4f5836e4344b6e1883c5c",
+  "base_commit": "e914b9f54f7d48c37e41180b29f4c3772100a394",
+  "status": "PASS",
+  "validation": "control-plane contract and worker-local cleanup",
+  "scope": "single-host durable lease fencing; not physical cross-host side-effect fencing",
+  "checks": {
+    "queue_reclaim_issues_new_lease": "PASS",
+    "stale_heartbeat_rejected_409": "PASS",
+    "stale_result_rejected_409": "PASS",
+    "new_lease_completes": "PASS",
+    "http_stale_result_rejected_409": "PASS",
+    "worker_ownership_loss_interrupts_wait": "PASS",
+    "worker_runtime_session_deleted": "PASS",
+    "worker_stale_result_suppressed": "PASS",
+    "local_lease_fenced_marker": "PASS",
+    "platform_tests": "433/433 PASS",
+    "docs_tests": "27/27 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "openapi_yaml": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run_id": "40155817145",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "termination of a physically disconnected remote QEMU or companion",
+    "external network or irreversible side effects already emitted by the stale worker",
+    "cross-host process migration or re-attach",
+    "NAT or cross-subnet worker discovery",
+    "production multi-host scheduling",
+    "physical hardware, RF, power, acoustic, optical, mechanical or electrical validation"
+  ]
+}

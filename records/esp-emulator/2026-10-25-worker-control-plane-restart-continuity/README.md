@@ -44,6 +44,12 @@ cannot access local variable 'nic' where it is not associated with a value
 修复为在条件分支前初始化 `nic=None`。失败证据和成功证据分别保留，未把
 初始 FAIL 归因成控制面重连失败或固件缺陷。
 
+后续在 same-host HTTP/worker contracts 上补齐 lease ownership fencing：
+re-claim 后旧 heartbeat/result 返回 `409 job_lease_mismatch`；
+WorkerAgent 在 ownership 丢失或恢复超时后停止可达的 worker-local runtime，
+并拒绝上报 stale result。见
+[Follow-up: lease ownership fencing](followups/2026-10-25-lease-ownership-fencing/)。
+
 ## 关键证据
 
 - 平台测试：`393/393 PASS`；

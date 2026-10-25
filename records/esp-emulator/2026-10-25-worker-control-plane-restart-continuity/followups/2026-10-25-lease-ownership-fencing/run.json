@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Fence stale durable job leases and stop worker-local runtime before stale result",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e914b9f54f7d48c37e41180b29f4c3772100a394",
+    "functional_commit": "207fe348ecd3d509e6f636fb915cb732b51a946d",
+    "final_commit": "8ac85a474e8ad52eb3b4f5836e4344b6e1883c5c",
+    "ci_run": "40155817145",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40155817145",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_cross_host": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Apple Silicon; real DeviceService HTTP; Python 3; GitHub Actions Ubuntu",
+    "platform_tests": "433/433 PASS",
+    "docs_tests": "27/27 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "openapi_yaml": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "qemu_session": "NOT RUN",
+    "full_peripheral_matrix": "NOT RUN"
+  },
+  "artifacts": {
+    "changed_files": 16,
+    "insertions": 422,
+    "deletions": 26,
+    "worker_agent_sha256": "4174ae872160aaf53ebd37dcc0a787e9147048c7aefc4ffda7b9e24cb42627d4",
+    "worker_agent_tests_sha256": "ae4a68cabbdd5c085e850481b9f588293db833fb9d492a32c9012ed503425a4f",
+    "worker_queue_tests_sha256": "c928aacb7495c9237610617f2c9a7b23e977a295da3c1ebb625773d4e6ce8b50",
+    "device_service_tests_sha256": "aac8b5b66310b3dae220fb04fc30e6eccc2ebee81d4aaafadca0806fe3ed5505",
+    "device_service_api_sha256": "c379219e128faf1c020fee1686792c30b6d79a5263212e91df91640158914bb1",
+    "openapi_sha256": "96b9c695c00cd18972edbc21253a5946862722aa133fbba1bed1c2fb5b533e33"
+  },
+  "checks": [
+    {
+      "name": "reclaim_issues_new_lease_id",
+      "status": "PASS"
+    },
+    {
+      "name": "stale_heartbeat_rejected",
+      "status": "PASS",
+      "detail": "409 job_lease_mismatch"
+    },
+    {
+      "name": "stale_result_rejected",
+      "status": "PASS",
+      "detail": "409 job_lease_mismatch"
+    },
+    {
+      "name": "new_lease_result_completes_job",
+      "status": "PASS"
+    },
+    {
+      "name": "device_service_http_stale_result_409",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_heartbeat_loss_interrupts_wait",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_runtime_session_stopped",
+      "status": "PASS"
+    },
+    {
+      "name": "stale_result_not_reported",
+      "status": "PASS"
+    },
+    {
+      "name": "local_result_marked_lease_fenced",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "433/433"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "27/27"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "disconnected_remote_process_termination",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "external_network_side_effects",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_cross_host",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/207fe348ecd3d509e6f636fb915cb732b51a946d",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/8ac85a474e8ad52eb3b4f5836e4344b6e1883c5c",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40155817145"
+  ],
+  "notes": [
+    "The queue lease ID is a fencing token for heartbeat and result mutations.",
+    "WorkerAgent fails closed after ownership loss or exhausted transient control recovery.",
+    "The result proves worker-local cleanup, not termination of a physically disconnected remote process."
+  ]
+}
