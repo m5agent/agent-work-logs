@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "status": "PASS",
+  "validation": "static-manifest validation",
+  "device_id": "sticks3",
+  "input": {
+    "synthetic_image_bytes": 73728,
+    "synthetic_image_sha256": "32464a772a4fbf184cc7088259fa2d0f83b458fba1b695601579e0347871ce51",
+    "synthetic_image_md5": "47fd57a3baf7f54753f1ffd324ba5207"
+  },
+  "positive": {
+    "status": "PASS",
+    "segments": 3,
+    "verified_segments": 3,
+    "declared_integrity": {
+      "status": "verified",
+      "algorithms": [
+        "size",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "weak_digest": true
+    }
+  },
+  "negative_cases": {
+    "sha256_mismatch": "REJECTED",
+    "size_mismatch": "REJECTED",
+    "invalid_sha256": "REJECTED",
+    "conflicting_sha256": "REJECTED",
+    "unknown_integrity_field": "REJECTED"
+  },
+  "implementation": {
+    "streaming": true,
+    "top_level_fields": [
+      "size",
+      "sha256",
+      "sha1",
+      "md5"
+    ],
+    "integrity_object": true,
+    "runtime_manifest_structure_validation": true,
+    "json_schema_validation_shape": true
+  },
+  "platform": {
+    "tests_passed": 419,
+    "tests_total": 419,
+    "documentation_passed": 23,
+    "documentation_total": 23,
+    "compileall": "PASS",
+    "selected_ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40151571675",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "publisher identity or source authenticity",
+    "digital signature or certificate validation",
+    "secure boot or Flash Encryption execution",
+    "boot or runtime behavior",
+    "network access",
+    "physical hardware validation"
+  ]
+}

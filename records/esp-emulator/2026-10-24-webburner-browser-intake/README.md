@@ -43,6 +43,9 @@ FirmwareManifest/capability PASS 和 session 前端契约验证。另有强制 i
 - `run.json`：结构化结果；
 - `evidence/verification.summary.json`：本机、CI 和浏览器探针摘要；
 
+后续 WebBurner `parts[]` 完整性校验见
+[Follow-up: WebBurner part integrity](followups/2026-10-25-webburner-part-integrity/)。
+
 ## 未覆盖项
 
 - 没有用合成测试镜像启动完整虚拟设备；session 创建按钮只验证了前端 API
