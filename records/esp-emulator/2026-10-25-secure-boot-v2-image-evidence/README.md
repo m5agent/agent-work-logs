@@ -79,3 +79,6 @@ trust_root             = not-verified
 - [RSA-PSS mathematical verification](followups/2026-10-25-rsa-pss-math-verification/)：
   使用 signature block 内 RSA modulus/exponent 验证 PSS/MGF1/SHA-256；
   `16/16` checks。ECDSA 数学验证、eFuse trust root 和 ROM 执行仍未覆盖。
+- [ECDSA P-256/P-384 mathematical verification](followups/2026-10-25-ecdsa-p256-p384-math-verification/)：
+  使用 block 内 public point/r/s 验证 ECDSA P-256/SHA-256 与
+  P-384/SHA-384；`16/16` checks。P-192、eFuse trust root 和 ROM 执行仍未覆盖。
