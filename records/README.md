@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-25 | `esp-emulator` | 镜像能力观察与 FirmwareManifest capability mismatch | `PASS`（static-manifest：公开 StickS3 Weather 观察 wifi/display、normal PASS、required camera 结构化拒绝；413/413 tests、22/22 docs、CI PASS；运行态、安全和真机 NOT RUN） | [查看](esp-emulator/2026-10-25-image-capability-observation/) |
 | 2026-10-25 | `esp-emulator` | Core2 active-stop、companion cleanup 与连续 session 恢复 | `PASS`（virtual-device：3/3 连续 session、BLE/HTTP active-stop、QEMU/BLE PID reap、worker lease release、下一 session 完整功能恢复；物理 cache/PSRAM、bit-exact controller、长时并发与真机 NOT RUN） | [查看](esp-emulator/2026-10-25-core2-active-stop-recovery/) |
 | 2026-10-25 | `esp-emulator` | 有界 CIDR、controlled domain suffix 与代码/文档重整 | `PASS`（linux-virtual-network-policy：22/22 checks、411/411 tests、22/22 docs、Node/OpenAPI/Ruff/CI PASS；任意公网域名、guest domain lifecycle、跨主机与真机 NOT RUN） | [查看](esp-emulator/2026-10-25-bounded-cidr-domain-policy/) |
 | 2026-10-25 | `esp-emulator` | Idempotent Device Service session creation | `PASS`（virtual-device：并发同 key 只建一个 session/QEMU、异请求 409、mapping SHA-only/0600、restart replay、worker response-loss retry；跨主机/跨 tenant/真机 NOT RUN） | [查看](esp-emulator/2026-10-25-session-create-idempotency/) |
