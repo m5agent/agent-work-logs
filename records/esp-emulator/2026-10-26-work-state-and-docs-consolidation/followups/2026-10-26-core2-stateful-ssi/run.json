@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Add Core2 stateful SSI batching and reconcile the legacy runtime boundary",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5a004b24053bf791203083be4dfa426f971525a8",
+    "result_commit": "3d75d30d3a745e9e58c1585e1fe75029015c67c4"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_spi_flash": "NOT RUN",
+    "physical_cache_psram": "NOT RUN",
+    "physical_timer_wdt": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "public_firmware": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "legacy_runtime_result": "FAIL"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, Node 22, QEMU 9.2.2 virtual Core2",
+    "qemu_source_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "qemu_binary_sha256": "832cf2a4298ddc55937052709bb1458496c96456f0761eb7fb9e22db23735418",
+    "patch_sha256": "9732be19f48d4b9e000686435df33c543c7926f68d93110bc002eccd6a184e05",
+    "product_evidence_sha256": "a44ad2c462e4c318f495f81fe5ed80869cfe590e196728854eeeff09a4f70cfc",
+    "core2_group": "6/6 cases, 24/24 checks, no retry",
+    "full_uiflow2_matrix": "67/67 cases, 274/274 checks, no retry",
+    "platform_tests": "501/501 PASS",
+    "docs_contract_tests": "41/41 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_tests": "PASS",
+    "worker_credential_migration": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS",
+    "patch_clean_base_forward_reverse_check": "PASS",
+    "ci_run": "40226918011",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40226918011",
+    "ci_status": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "ssi_batch_fallback_equivalence",
+      "status": "PASS",
+      "detail": "Devices without transfer_buf keep the original per-byte behavior."
+    },
+    {
+      "name": "m25p80_stateful_read_equivalence",
+      "status": "PASS",
+      "detail": "512 sampled 64-byte batches matched the original per-byte path with zero mismatches."
+    },
+    {
+      "name": "command_address_dummy_cs_state",
+      "status": "PASS",
+      "detail": "The fast path is limited to STATE_READ; existing phase handling remains authoritative."
+    },
+    {
+      "name": "receive_only_spi_data_phase",
+      "status": "PASS",
+      "detail": "ESP32 SPI uses transfer_buf only when the data phase has no transmitted bytes."
+    },
+    {
+      "name": "core2_uiflow2_device_group",
+      "status": "PASS",
+      "detail": "6/6 cases and 24/24 checks passed without retry."
+    },
+    {
+      "name": "shared_controller_full_uiflow2_matrix",
+      "status": "PASS",
+      "detail": "67/67 cases and 274/274 checks passed without retry."
+    },
+    {
+      "name": "legacy_normal_watchdog_boot",
+      "status": "FAIL",
+      "detail": "The same legacy UIFlow image still reset without a non-empty application frame."
+    },
+    {
+      "name": "legacy_watchdog_disabled_progress",
+      "status": "FAIL",
+      "detail": "The bounded WDT-disabled run did not reach setup text or REPL."
+    },
+    {
+      "name": "crosscore_handshake",
+      "status": "PASS",
+      "detail": "Flash-operation can-start/complete and cross-core reason flags completed repeatedly; a permanent deadlock is not supported."
+    },
+    {
+      "name": "direct_read_repl_reproduction",
+      "status": "NOT REPRODUCED",
+      "detail": "The earlier temporary BlockBackend REPL result did not reproduce in the current rebuild."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/core2-ssi-summary.json",
+    "patches/0001-ssi-transfer-buf.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/3d75d30d3a745e9e58c1585e1fe75029015c67c4",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3d75d30d3a745e9e58c1585e1fe75029015c67c4/tests/firmware/evidence-2026-10-26-core2-ssi-transfer-buf.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3d75d30d3a745e9e58c1585e1fe75029015c67c4/patches/qemu-m5stack-peripherals/0036-ssi-transfer-buf.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40226918011"
+  ],
+  "notes": [
+    "The stateful batch API is a controller-semantic optimization, not closure of RUNTIME-03.",
+    "A permanent cross-core deadlock hypothesis is retired; aggregate synchronous handoff throughput remains the leading hypothesis.",
+    "The direct BlockBackend path, WDT disable and accelerator overrides are diagnostics, not product behavior.",
+    "All results are virtual-device validation, not physical hardware validation.",
+    "The retained dirty QEMU worktree must not be reset or cleaned."
+  ]
+}

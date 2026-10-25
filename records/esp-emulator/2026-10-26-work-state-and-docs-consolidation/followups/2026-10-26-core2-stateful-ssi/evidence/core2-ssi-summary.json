@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "core2-stateful-ssi-batch-summary",
+  "validation": "virtual-device validation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5a004b24053bf791203083be4dfa426f971525a8",
+    "result_commit": "3d75d30d3a745e9e58c1585e1fe75029015c67c4"
+  },
+  "patch": {
+    "path": "patches/qemu-m5stack-peripherals/0036-ssi-transfer-buf.patch",
+    "sha256": "9732be19f48d4b9e000686435df33c543c7926f68d93110bc002eccd6a184e05",
+    "clean_base_forward_reverse_check": "PASS"
+  },
+  "runtime": {
+    "machine": "m5core2",
+    "qemu_source_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "qemu_binary_sha256": "832cf2a4298ddc55937052709bb1458496c96456f0761eb7fb9e22db23735418",
+    "artifact_bound": false
+  },
+  "data_plane_equivalence": {
+    "batches": 512,
+    "bytes_per_batch": 64,
+    "mismatch_count": 0,
+    "result": "PASS"
+  },
+  "core2_group": {
+    "cases_passed": 6,
+    "cases_failed": 0,
+    "checks_passed": 24,
+    "checks_failed": 0,
+    "retry_used": false,
+    "summary_sha256": "62d7d42568be7758f51f7b61d960b3cadcd02940f4746f960078625afa47f450"
+  },
+  "full_uiflow2_matrix": {
+    "cases_passed": 67,
+    "cases_failed": 0,
+    "checks_passed": 274,
+    "checks_failed": 0,
+    "retry_used": false,
+    "summary_sha256": "44b65976d60589662e04454c4680cec90c8137a5934cece9bb371099297b3455"
+  },
+  "legacy": {
+    "normal_watchdog": "FAIL",
+    "watchdog_disabled_setup_or_repl": "FAIL",
+    "nonempty_application_frame": "FAIL",
+    "direct_read_repl_reproduction": "NOT REPRODUCED"
+  },
+  "crosscore": {
+    "flash_op_can_start_observed": [
+      0,
+      1
+    ],
+    "flash_op_complete_observed": [
+      0,
+      1
+    ],
+    "classification": "A permanent handshake deadlock is not supported; aggregate synchronous Flash/cache/DPORT handoff throughput remains the leading hypothesis."
+  },
+  "platform_validation": {
+    "platform_unittest": "501/501 PASS",
+    "docs_contract": "41/41 PASS",
+    "qemu_profile_contract": "19/19 PASS",
+    "node_sha256_upload": "PASS",
+    "worker_credential_migration": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run_id": "40226918011",
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40226918011",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "legacy UIFlow application startup",
+    "permanent cross-core deadlock",
+    "complete Core2 controller or cache equivalence",
+    "physical SPI Flash, cache, PSRAM, timer or watchdog behavior",
+    "RF or electrical behavior",
+    "hardware validation"
+  ]
+}

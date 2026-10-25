@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-26 | ESP Emulator | Core2 stateful SSI 批量数据面与当前事实源重整 | PARTIAL（virtual-device：`512×64-byte` 批次零 mismatch、Core2 UIFlow2 `6/6` 与完整矩阵 `67/67`、平台 `501/501`、docs `41/41`、profile `19/19` 与 CI PASS；legacy WDT/黑帧、永久 deadlock 判断撤回、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-stateful-ssi/) |
 | 2026-10-26 | ESP Emulator | Core2 QIO、TIMG WDT-mask 与 cross-core/DPORT 边界整理 | PARTIAL（virtual-device：`0035` mask 语义修正、512 个 QIO 样本与 SSI 字节一致、平台 `501/501`、docs `41/41` 与 CI PASS；legacy TG0 WDT/reset PC 0/黑帧、cross-core handshake、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-qio-wdt-mask-crosscore/) |
 | 2026-10-26 | ESP Emulator | Core2 Xtensa equal-deadline timer 修复与当前代码/文档刷新 | PARTIAL（virtual-device：minimal probe `40/40 PASS`、新版 runner `3/3 PASS`、旧镜像 SHA fail-closed；平台 `500/500` 与 CI PASS；legacy TG0/TG1 WDT/黑帧、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-equal-deadline-timer/) |
 | 2026-10-26 | ESP Emulator | 当前工作、易漂移证据和生成 profile 口径再收敛 | PASS（docs/contracts：平台 `500/500`、docs `40/40`、QEMU profile `19/19`、compileall/Ruff/coverage/catalog/profile/snapshot/diff 与 CI PASS；firmware/QEMU rerun 和真机 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-evidence-ownership-reconciliation/) |
