@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-26 | `esp-emulator` | 当前工作、调查假设、Backlog 与文档职责总整理 | `PASS`（docs/contracts：平台 `499/499`、文档契约 `39/39`、Node、snapshot/coverage/catalog/profile、compileall、Ruff 与 CI PASS；firmware/QEMU functional rerun 与真机 NOT RUN） | [查看](esp-emulator/2026-10-26-work-state-and-docs-consolidation/) |
 | 2026-10-25 | `esp-emulator` | Core2 legacy shared board I2C 与当前文档对账 | `PARTIAL`（virtual-device：AXP/RTC/INA ACK、UIFlow2 `6/6`、平台 `498/498` 与 CI PASS；后续 interrupt WDT/black frame、修复后 FactoryTest 与真机 NOT RUN） | [查看](esp-emulator/2026-10-25-core2-shared-board-i2c/) |
 | 2026-10-25 | `esp-emulator` | Core2 legacy UIFlow WDT 时序与并发诊断 | `PARTIAL`（virtual-device：默认单会话 `285s` 无 WDT；两批四实例 `5/8` interrupt-WDT；thread/icount 对照未修复；平台 `499/499` 与 CI PASS；具体 guest 代码点、应用帧与真机 NOT RUN） | [查看](esp-emulator/2026-10-25-core2-shared-board-i2c/followups/2026-10-25-wdt-timing-diagnosis/) |
 | 2026-10-25 | `esp-emulator` | 当前状态、Backlog 与文档契约职责重整 | `PASS`（docs/contracts：平台 `497/497`、文档契约 `37/37`、Node UI smoke、snapshot/coverage/profile/Ruff、CI 两 job PASS；固件、QEMU 与真机 NOT RUN） | [查看](esp-emulator/2026-10-25-current-state-contract-ownership/) |

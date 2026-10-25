@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "documentation-and-contract-validation",
+  "result_commit": "ad1d878d73af0d8b99e2a47809414f671c432bf3",
+  "base_commit": "eff1561e9f0da700c843ed14d9019c81f1e27e55",
+  "ci": {
+    "run": 40210161366,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40210161366",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "commands": {
+    "platform_tests": "python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+    "docs_contracts": "python3 -m unittest discover -s platform/tests -p 'test_docs_*_contract.py'",
+    "node_sha256": "node platform/tests/test_sha256.mjs",
+    "node_upload": "node platform/tests/test_firmware_upload.mjs",
+    "node_ui": "node platform/tests/test_ui.mjs",
+    "runtime_coverage": "python3 platform/tools/runtime_coverage.py --check",
+    "peripheral_catalog": "python3 platform/tools/peripheral_catalog.py --check",
+    "qemu_profiles": "python3 platform/tools/qemu_profiles.py --check",
+    "project_snapshot": "python3 platform/tools/project_snapshot.py --check",
+    "compile": "python3 -m compileall -q platform tests",
+    "ruff": "ruff check --select E9,F platform/tests/test_docs_core2_runtime_contract.py platform/tests/test_docs_current_state_contract.py",
+    "diff": "git diff --check"
+  },
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "count": 499
+    },
+    "docs_contract_tests": {
+      "status": "PASS",
+      "count": 39
+    },
+    "node_sha256": "PASS",
+    "node_upload": "PASS",
+    "node_ui_smoke": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS",
+    "ci_platform_contracts": "PASS",
+    "ci_network_namespace_policy": "PASS"
+  },
+  "runtime_model": {
+    "RUNTIME-03": {
+      "status": "OPEN",
+      "working_hypothesis": "flash-cache disable, cross-core IPC and DPORT high-interrupt interaction",
+      "confirmed_root_cause": false,
+      "s32c1i_lock_primary_hypothesis": false,
+      "application_frame": "NOT RUN",
+      "physical_hardware": "NOT RUN"
+    }
+  },
+  "not_claimed": [
+    "firmware functional pass",
+    "QEMU runtime pass",
+    "Core2 watchdog root cause",
+    "physical PSRAM or cache timing",
+    "RF or electrical behavior",
+    "hardware validation"
+  ]
+}
