@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Route Core2 legacy I2C controllers to the shared physical board bus",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "2175ebbbc94a3de7cd1fc775641e01659cfc2b31",
+    "result_commit": "105ad247315644acccef96352a93269c27c67450"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "virtual_device": "PASS",
+    "physical_i2c_timing_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2",
+    "version": "v1.15.4",
+    "firmware_id": "1897200000000002280",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "binary_included": false
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, Node 20, QEMU virtual-device",
+    "qemu_sha256": "a8070d23866f514e33fd9b09c9223ee757c69b1a0bad48cc2bf8511d05fb5ca7",
+    "platform_tests": "498/498 PASS",
+    "docs_contracts": "38/38 PASS",
+    "node_ui_smoke": "PASS",
+    "ci_run": "40204089670",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40204089670",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "legacy_controller_identity",
+      "status": "PASS",
+      "detail": "All observed legacy transactions used controller 0 and /machine/soc/i2c0/i2c"
+    },
+    {
+      "name": "shared_physical_bus_model",
+      "status": "PASS",
+      "detail": "Both ESP32 I2C controller objects route to the single GPIO21/22 board bus; each slave is attached once"
+    },
+    {
+      "name": "axp_rtc_ina_ack",
+      "status": "PASS",
+      "detail": "AXP 0x34, RTC 0x51 and INA3221 0x40 obtain write/read ACK after the fix"
+    },
+    {
+      "name": "prior_i2c_bus_error_removed",
+      "status": "PASS",
+      "detail": "OSError I2C bus error 19 is absent on the same firmware SHA and AXP192 variant"
+    },
+    {
+      "name": "uiflow2_core2_regression",
+      "status": "PASS",
+      "detail": "6/6 cases and 24/24 checks pass without retry"
+    },
+    {
+      "name": "legacy_stable_application",
+      "status": "FAIL",
+      "detail": "The same legacy image enters an independent interrupt-WDT reset/panic loop"
+    },
+    {
+      "name": "nonempty_application_frame",
+      "status": "FAIL",
+      "detail": "The retained frame remains black with SHA256 57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43"
+    },
+    {
+      "name": "core2_factory_test_after_fix",
+      "status": "NOT RUN",
+      "detail": "The historical 2026-10-24 result is preserved, but the post-fix rerun was not executed"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/105ad247315644acccef96352a93269c27c67450",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/105ad247315644acccef96352a93269c27c67450/tests/firmware/evidence-2026-10-25-core2-shared-board-i2c.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/105ad247315644acccef96352a93269c27c67450/patches/qemu-m5stack-peripherals/0031-core2-shared-board-i2c.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40204089670"
+  ],
+  "notes": [
+    "The shared I2C routing is fixed; RUNTIME-03 remains open for the later interrupt-WDT and black frame.",
+    "The routing fix is validated through the real guest controller path rather than injected register values.",
+    "No physical RF, electrical, power or hardware result is claimed."
+  ]
+}

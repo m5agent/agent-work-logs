@@ -46,6 +46,7 @@
 
 ## 对外记录索引
 
+| 2026-10-25 | ESP Emulator | Core2 legacy shared board I2C 与当前文档对账 | PARTIAL（virtual-device：AXP/RTC/INA ACK、UIFlow2 `6/6`、498 tests + CI PASS；后续 interrupt WDT/black frame、修复后 FactoryTest、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-25-core2-shared-board-i2c/) |
 | 2026-09-18 | m5stack 公开仓库 | 公开仓库零评论 Issue 盘点与可回复性评估 | REVIEW（盘点）+ PARTIAL（5 条 host/编译级闭合验证） | [查看](records/m5stack-github/2026-09-18-recent-unanswered-issues/) |
 | 2026-09-21 | ESP32-P4 Flasher | 可配置 DUT 烧录波特率，默认 1.5 Mbaud | PARTIAL（构建/中心测试通过；实机烧录未执行） | [查看](records/esp-flasher-by-esp32p4/2026-09-21-configurable-flash-baud/) |
 | 2026-10-10 | UIFlow MicroPython | StamPLC `boot_option=2` Wi-Fi 启动跳过 PoE 初始化 | PARTIAL（host 复现 + 构建 PASS；无 StamPLC 实机） | [查看](records/m5stack-github/2026-10-10-uiflow-issue-116-stamplc-wifi/) |

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "verification-summary",
+  "date": "2026-10-25",
+  "source_commit": "105ad247315644acccef96352a93269c27c67450",
+  "base_commit": "2175ebbbc94a3de7cd1fc775641e01659cfc2b31",
+  "firmware": {
+    "name": "UIFlow_Core2",
+    "version": "v1.15.4",
+    "firmware_id": "1897200000000002280",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "flash_size": 16777216
+  },
+  "runtime": {
+    "machine": "m5core2",
+    "validation": "virtual-device validation",
+    "qemu_sha256": "a8070d23866f514e33fd9b09c9223ee757c69b1a0bad48cc2bf8511d05fb5ca7",
+    "trace_qemu_stderr_sha256": "579612a6a45254c311469b778a78569ebcd1fc09e3f2dc6772d103c9d75a9c15",
+    "trace_serial_log_sha256": "f1caec16208688022e9f6bd7d02685bbab26871aa7ef36f6ed7326b2c15ad13d"
+  },
+  "before_fix": {
+    "controller_path": "/machine/soc/i2c0",
+    "bus_path": "/machine/soc/i2c0/i2c",
+    "transaction_count": 123,
+    "axp_0x34_ack": true,
+    "rtc_0x51_start_rc": 1,
+    "serial_i2c_bus_error": true
+  },
+  "after_fix": {
+    "transaction_count": 480,
+    "axp_0x34_write_ack": 60,
+    "axp_0x34_read_ack": 25,
+    "rtc_0x51_write_ack": 15,
+    "rtc_0x51_read_ack": 4,
+    "ina3221_0x40_write_ack": 9,
+    "ina3221_0x40_read_ack": 4,
+    "serial_i2c_bus_error": false,
+    "axp192_variant_crossed_prior_error": true
+  },
+  "regression": {
+    "uiflow2_core2_cases_requested": 6,
+    "uiflow2_core2_cases_passed": 6,
+    "checks_passed": 24,
+    "retry_used": false
+  },
+  "remaining_failure": {
+    "classification": "interrupt_wdt_after_peripheral_initialization",
+    "cpu1_interrupt_wdt": true,
+    "cpu0_interrupt_wdt": true,
+    "reset_loop": true,
+    "nonempty_application_frame": false,
+    "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43"
+  },
+  "gates": {
+    "platform_tests": "498/498 PASS",
+    "docs_contracts": "38/38 PASS",
+    "node_ui_smoke": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_E9_F": "PASS",
+    "patch_reverse_check": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run_id": "40204089670",
+    "head_sha": "105ad247315644acccef96352a93269c27c67450",
+    "conclusion": "success",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "complete legacy UIFlow compatibility",
+    "application UI startup",
+    "post-fix Core2FactoryTest behavior",
+    "physical I2C timing or electrical behavior",
+    "physical RF, power or hardware validation",
+    "inheritance to another firmware SHA"
+  ],
+  "redaction": {
+    "raw_firmware_included": false,
+    "raw_logs_included": false,
+    "reason": "This public summary retains reproducible hashes and observations without firmware binaries or host-specific data."
+  }
+}
