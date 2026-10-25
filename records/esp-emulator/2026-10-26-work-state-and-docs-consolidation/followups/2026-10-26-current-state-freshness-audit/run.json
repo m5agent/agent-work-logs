@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Separate catalog and fact dates, make project snapshots idempotent, and reconcile stale documentation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "c9cd5a93c1ef2ac0046566299879ea69b6d478c9",
+    "result_commit": "5f68d70f51f39eef82113f6836843ef5b996ef23"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "runtime_validation": "NOT RUN",
+    "reason": "This change only updates documentation, snapshot generation and documentation contract tests."
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13.15",
+    "platform_tests": "510/510 PASS",
+    "docs_contract_tests": "43/43 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot_write_check_write_check": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS",
+    "local_node_tests": "NOT RUN",
+    "ci_run": "40237507431",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40237507431",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "snapshot": {
+    "catalog_date": "2026-10-25",
+    "fact_date": "2026-10-26",
+    "latest_evidence_date": "2026-10-26",
+    "markdown_files": 216,
+    "older_current": 0,
+    "older_delegated": 0
+  },
+  "checks": [
+    {
+      "name": "catalog_fact_date_separation",
+      "status": "PASS",
+      "detail": "Catalog generation date and the project fact date are persisted separately."
+    },
+    {
+      "name": "snapshot_idempotence",
+      "status": "PASS",
+      "detail": "The generated snapshot excludes its own line count and remains unchanged across write/check/write/check."
+    },
+    {
+      "name": "document_freshness_audit",
+      "status": "PASS",
+      "detail": "All registered authority and delegated documents are reviewed through 2026-10-26."
+    },
+    {
+      "name": "volatile_core2_detail_deduplication",
+      "status": "PASS",
+      "detail": "README retains stable conclusions while exact-time addresses and times remain in status and ledger authorities."
+    },
+    {
+      "name": "uiflow2_matrix_baseline",
+      "status": "PASS",
+      "detail": "The current full-matrix baseline is 0036; 0038 is documented as diagnostics plus a targeted Core2 regression."
+    },
+    {
+      "name": "core2_hci_current_boundaries",
+      "status": "PASS",
+      "detail": "The current reconnect maximum is 121 and the remaining concurrency boundary is more than eight instances."
+    },
+    {
+      "name": "firmware_qemu_runtime",
+      "status": "NOT RUN",
+      "detail": "No firmware or QEMU functional matrix was rerun for this documentation-only task."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/snapshot-facts.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/5f68d70f51f39eef82113f6836843ef5b996ef23",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40237507431"
+  ],
+  "notes": [
+    "This is documentation and contract validation, not firmware or hardware validation.",
+    "RUNTIME-03 remains OPEN.",
+    "The latest full UIFlow2 matrix remains the 0036-bound baseline.",
+    "No Device Service, QEMU, firmware, network or worker source was changed."
+  ]
+}

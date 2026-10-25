@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "documentation-and-contract-validation",
+  "result_commit": "5f68d70f51f39eef82113f6836843ef5b996ef23",
+  "base_commit": "c9cd5a93c1ef2ac0046566299879ea69b6d478c9",
+  "commands": {
+    "platform_tests": "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+    "runtime_coverage": "python3 platform/tools/runtime_coverage.py --check",
+    "peripheral_catalog": "python3 platform/tools/peripheral_catalog.py --check",
+    "qemu_profiles": "python3 platform/tools/qemu_profiles.py --check",
+    "project_snapshot": "python3 platform/tools/project_snapshot.py --check",
+    "compile": "python3 -m compileall -q platform/tools platform/tests tests",
+    "ruff": "ruff check --select E9,F platform/tools/project_snapshot.py platform/tests/test_docs_index_contract.py platform/tests/test_docs_core2_runtime_contract.py",
+    "diff": "git diff --check"
+  },
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "count": 510
+    },
+    "docs_contract_tests": {
+      "status": "PASS",
+      "count": 43
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot_idempotence": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "snapshot": {
+    "catalog_date": "2026-10-25",
+    "fact_date": "2026-10-26",
+    "latest_evidence_date": "2026-10-26",
+    "markdown_files": 216,
+    "older_current": 0,
+    "older_delegated": 0
+  },
+  "ci": {
+    "run": 40237507431,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40237507431",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "firmware functional pass",
+    "QEMU runtime rerun",
+    "RUNTIME-03 closure",
+    "physical PSRAM or cache timing",
+    "RF or electrical behavior",
+    "hardware validation"
+  ]
+}

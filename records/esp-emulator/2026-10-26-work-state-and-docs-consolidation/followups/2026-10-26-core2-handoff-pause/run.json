@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Freeze Core2 flash/cache handoff at exact virtual times and reject unbound PC symbols",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "839195866b9cbf82e4e6b0d1a4ed802ea5ce4b9e",
+    "result_commit": "c9cd5a93c1ef2ac0046566299879ea69b6d478c9"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_flash_cache_psram": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "public_firmware": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "local_elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "legacy_runtime_result": "FAIL"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13.15, QEMU 9.2.2 virtual Core2",
+    "qemu_binary_sha256": "076894c2944205c983f2e19784ac1f9d8ae7a0efda9aa65a8dd648076335cd37",
+    "pause_patch_sha256": "54a1f6ad5720723cb9c92bc05d60925db330f5977f3ef43477917821cec992b4",
+    "pause_evidence_sha256": "d93568865e79e4430368be866e0785c5c8082cab5e5c2ae6ba4c42155ded5bd2",
+    "mapping_audit_sha256": "1d1d3d063e528595b6d4c85a88b8acbd9d8e19d735ec32f2b21849ff8dbc54fe",
+    "core2_group": "6/6 cases, 24/24 checks, no retry",
+    "full_uiflow2_matrix": "NOT RUN",
+    "platform_tests": "508/508 PASS",
+    "docs_contract_tests": "41/41 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_tests": "PASS",
+    "worker_credential_migration": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40236725065",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40236725065",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "exact_time_pause",
+      "status": "PASS",
+      "detail": "SIGSTOP at requested virtual time preserved both vCPU states and controller registers."
+    },
+    {
+      "name": "early_window_classification",
+      "status": "PASS",
+      "detail": "The 14.800033 second freeze had no fixed PC cluster."
+    },
+    {
+      "name": "late_window_classification",
+      "status": "PARTIAL",
+      "detail": "The 15.301447 second freeze reached a Flash block/cache-handshake source-pattern candidate, but no matching ELF/MAP exists."
+    },
+    {
+      "name": "bin_elf_mapping",
+      "status": "REJECTED",
+      "detail": "All three CPU0 sampled VMAs mismatch between the public BIN and local UIFlow2 v2.5.3 ELF."
+    },
+    {
+      "name": "uart_storm",
+      "status": "REJECTED",
+      "detail": "The exact-time freeze and BIN byte audit do not support the prior UART ISR mapping."
+    },
+    {
+      "name": "guest_deadlock",
+      "status": "NOT PROVEN",
+      "detail": "A cache restore, SSI or DPORT operation remaining unreturned is still a candidate, not a proven deadlock."
+    },
+    {
+      "name": "legacy_application_frame",
+      "status": "FAIL",
+      "detail": "The same public firmware remained banner-only and reset without a non-empty application frame."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/core2-handoff-pause.json",
+    "evidence/core2-pc-mapping-audit.json",
+    "evidence/verification.summary.json",
+    "patches/0001-esp32-handoff-pause.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/c9cd5a93c1ef2ac0046566299879ea69b6d478c9",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40236725065"
+  ],
+  "notes": [
+    "The freeze closes the high-frequency-sampling ambiguity but does not close RUNTIME-03.",
+    "Source-pattern names are not ELF-bound symbols.",
+    "The full UIFlow2 peripheral matrix was not rerun after 0038.",
+    "All functional results are virtual-device validation.",
+    "The retained dirty QEMU tree must not be reset or cleaned."
+  ]
+}
