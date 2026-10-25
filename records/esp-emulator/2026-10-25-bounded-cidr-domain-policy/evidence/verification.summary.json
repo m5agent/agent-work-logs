@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "source_commits": {
+    "capability": "8c125fb580482cb25f38e3a45630654eb94e6dc9",
+    "evidence": "7da51aa"
+  },
+  "linux_policy_fixture": {
+    "status": "PASS",
+    "checks_passed": 22,
+    "checks_total": 22,
+    "environment": "privileged Linux Docker private network namespaces",
+    "verified": [
+      "allowed IPv4 CIDR destination",
+      "denied IPv4 port",
+      "denied IPv4 address outside CIDR",
+      "allowed exact IPv6 destination",
+      "denied IPv6 port",
+      "denied exact IPv6 address control",
+      "IPv4 and IPv6 worker NAT source rewrite",
+      "namespace and NAT cleanup"
+    ],
+    "source_evidence": "tests/network/egress_allowlist/evidence-2026-10-25-cidr-dual-stack-docker-pass.json"
+  },
+  "domain_policy_contract": {
+    "status": "PASS",
+    "verified": [
+      "IPv4 CIDR at least /16",
+      "IPv6 CIDR at least /48",
+      "broad, special-use, mapped and synthetic CIDR rejection",
+      "DNS label-boundary suffix matching",
+      "exact record priority",
+      "longest suffix priority",
+      "explicit suffix answer binding",
+      "answer coverage by allowed endpoint"
+    ],
+    "guest_firmware_lifecycle": "NOT RUN"
+  },
+  "platform": {
+    "tests_passed": 411,
+    "tests_total": 411,
+    "documentation_passed": 22,
+    "documentation_total": 22,
+    "node_passed": 2,
+    "node_total": 2,
+    "openapi_version": "1.29.0",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "selected_ruff_e9_f": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40145733947",
+    "head_commit": "8c125fb580482cb25f38e3a45630654eb94e6dc9",
+    "evidence_commit_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40145813958",
+    "evidence_commit": "7da51aa915567cb681e64eb1d0ffff451393bf7a",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "arbitrary public-domain resolution",
+    "dynamic DNS allowlisting",
+    "guest firmware domain-set lifecycle",
+    "physical RF or hardware validation",
+    "malware-safe disposable VM isolation",
+    "cross-host QEMU executor or reattach"
+  ]
+}

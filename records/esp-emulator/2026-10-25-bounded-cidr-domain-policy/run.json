@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Bounded CIDR, controlled domain suffix and code/document reconciliation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3bd0f6655fc6495bd1653eac2f39c1139f1fed64",
+    "capability_commit": "8c125fb580482cb25f38e3a45630654eb94e6dc9",
+    "evidence_commit": "7da51aa",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40145733947",
+    "ci_status": "PASS",
+    "ci_evidence_commit_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40145813958",
+    "ci_evidence_commit_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_rf": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "new_guest_lifecycle": "NOT RUN",
+    "scope": "Linux network-policy fixture and platform contracts only"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, privileged Linux Docker, GitHub Actions Ubuntu",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "linux_ipv4_cidr_dual_stack_fixture",
+      "status": "PASS",
+      "detail": "22/22 checks"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "411/411"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "22/22"
+    },
+    {
+      "name": "node_sha256_and_upload",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "openapi_yaml",
+      "status": "PASS",
+      "detail": "API version 1.29.0"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "selected_ruff_e9_f",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8c125fb580482cb25f38e3a45630654eb94e6dc9/tests/network/egress_allowlist/evidence-2026-10-25-cidr-dual-stack-docker-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/8c125fb580482cb25f38e3a45630654eb94e6dc9",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40145733947"
+  ],
+  "notes": [
+    "Domain answers are accepted only when covered by an allowed endpoint address or CIDR.",
+    "The Linux fixture validates policy and cleanup, not a firmware guest or malware VM boundary.",
+    "All results are virtual-device or host-policy validation unless explicitly labeled hardware validation."
+  ]
+}
