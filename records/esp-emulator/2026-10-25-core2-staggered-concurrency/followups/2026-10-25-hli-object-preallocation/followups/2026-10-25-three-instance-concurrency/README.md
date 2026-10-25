@@ -65,9 +65,17 @@ ELF SHA-256：
 原始 evidence 已提交在公开源码仓库结果版本：
 [`tests/uiflow2/`](https://github.com/m5agent/m5stack-esp-emulator/tree/db46335e7f71f035ce4a1461567ffb256b683669/tests/uiflow2)。
 
+## Follow-up
+
+- [2026-10-25 four-instance concurrency](followups/2026-10-25-four-instance-concurrency/)：
+  `FAIL`（virtual-device）。四实例最大并发真正达到 `4`，但首批
+  `4×120s` 为 `1 PASS / 3 FAIL`：一个 HLI/prealloc health failure，
+  两个在 NimBLE `ble_hs_hci_process_ack` (`0x402630cc`) panic。四实例及
+  更多实例并发保持开放；同轮完成代码/文档权威入口对账。
+
 ## 未覆盖项
 
-- 大于三实例的并发；
+- 四实例修复后的两批独立 aggregate PASS 和更高并发；
 - 持续吞吐和 active-stop 之外的其他 teardown；
 - bit-exact Espressif BT controller/baseband；
 - 物理板载 PSRAM/cache timing；

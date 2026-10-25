@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "m5stack-core2-four-instance-and-doc-reconciliation",
+  "date": "2026-10-25",
+  "validation": "virtual-device validation",
+  "scope": "core2-native-hci concurrent cold start plus static documentation verification",
+  "source": {
+    "base_commit": "db46335e7f71f035ce4a1461567ffb256b683669",
+    "result_commit": "4b6c379846a4b0c42d4d1639f5519664c93dafe5",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40178287662",
+    "ci_status": "PASS"
+  },
+  "inputs": {
+    "firmware_sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "b5b2d878132cb6a8a314cb0f9f9fd0a1843c67fad8558cba268837e9942d304b",
+    "input_assets_unchanged_during_run": true
+  },
+  "execution": {
+    "attempts_requested": 4,
+    "attempts_completed": 4,
+    "attempts_passed": 1,
+    "attempts_failed": 3,
+    "concurrency_requested": 4,
+    "maximum_concurrent_sessions": 4,
+    "concurrency_observed": true,
+    "stagger_seconds": 0,
+    "hold_seconds_per_attempt": 120,
+    "status": "FAIL"
+  },
+  "failure_analysis": {
+    "attempt_2": {
+      "visible_workload_completed": true,
+      "hli_errors": 1,
+      "hli_prealloc_failures": 2
+    },
+    "attempts_3_and_4": {
+      "failure_phase": "wait_ready",
+      "first_panic": "LoadProhibited",
+      "pc": "0x402630cc",
+      "symbol": "ble_hs_hci_process_ack",
+      "source": "components/bt/host/nimble/nimble/nimble/host/src/ble_hs_hci.c:495",
+      "secondary_panic_after_reboot": "InstrFetchProhibited at PC=0",
+      "root_cause_status": "NOT CLOSED"
+    }
+  },
+  "checks": {
+    "platform_tests": "465/465 PASS",
+    "documentation_tests": "36/36 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_sha256": "PASS",
+    "node_firmware_upload": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "worker_fleet_migration": "PASS",
+    "ruff_e9_f_platform_tools_and_tests": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "github_actions_platform_contracts": "PASS",
+    "github_actions_network_namespace_policy": "PASS",
+    "four_instance_concurrency": "FAIL",
+    "physical_hardware": "NOT RUN"
+  },
+  "evidence": {
+    "raw_aggregate": "evidence/core2-concurrent-4x120-prealloc-4way-fail.json",
+    "raw_aggregate_bytes": 23426,
+    "raw_aggregate_sha256": "697dac3bd657c3bad2b6829c1a2f3a1f8e457b0dd0ef9165e372122b535cdaa5"
+  },
+  "not_claimed": [
+    "bit-exact Espressif BT controller/baseband",
+    "physical PSRAM or cache timing",
+    "RF, electrical, power or thermal behavior",
+    "sustained throughput or teardown modes beyond active-stop",
+    "physical hardware validation",
+    "four-instance stability"
+  ]
+}

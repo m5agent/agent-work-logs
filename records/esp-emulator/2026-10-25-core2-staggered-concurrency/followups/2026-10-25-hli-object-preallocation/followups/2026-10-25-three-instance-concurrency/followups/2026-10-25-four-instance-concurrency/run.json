@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "FAIL",
+  "title": "Verify four-instance Core2 concurrency and reconcile current work documentation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "db46335e7f71f035ce4a1461567ffb256b683669",
+    "result_commit": "4b6c379846a4b0c42d4d1639f5519664c93dafe5",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40178287662",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "b5b2d878132cb6a8a314cb0f9f9fd0a1843c67fad8558cba268837e9942d304b",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.13; Node 20; QEMU virtual-device",
+    "attempts_requested": 4,
+    "attempts_completed": 4,
+    "attempts_passed": 1,
+    "attempts_failed": 3,
+    "concurrency_requested": 4,
+    "maximum_concurrent_sessions": 4,
+    "stagger_seconds": 0,
+    "hold_seconds_per_attempt": 120,
+    "platform_tests": "465/465 PASS",
+    "documentation_tests": "36/36 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_tests": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "four_instance_launch",
+      "status": "PASS",
+      "detail": "maximum concurrent sessions reached 4 with zero stagger"
+    },
+    {
+      "name": "aggregate_four_instance_gate",
+      "status": "FAIL",
+      "detail": "1 PASS / 3 FAIL"
+    },
+    {
+      "name": "attempt_2_hli_health",
+      "status": "FAIL",
+      "detail": "hli-errors=1 and hli-prealloc-failures=2 despite visible workload completion"
+    },
+    {
+      "name": "attempt_3_4_ready",
+      "status": "FAIL",
+      "detail": "LoadProhibited at 0x402630cc before UNIFIED_CORE2_READY"
+    },
+    {
+      "name": "nimble_ack_symbolization",
+      "status": "PASS",
+      "detail": "ble_hs_hci_process_ack at ble_hs_hci.c:495"
+    },
+    {
+      "name": "documentation_reconciliation",
+      "status": "PASS",
+      "detail": "four-instance FAIL propagated to current status, backlog, API, catalog, evidence ledger and tests"
+    },
+    {
+      "name": "four_or_more_instance_stability",
+      "status": "FAIL",
+      "detail": "first four-instance gate remains open"
+    },
+    {
+      "name": "sustained_throughput_and_other_teardown",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/core2-concurrent-4x120-prealloc-4way-fail.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4b6c379846a4b0c42d4d1639f5519664c93dafe5/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-concurrent-4x120-prealloc-4way-fail.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4b6c379846a4b0c42d4d1639f5519664c93dafe5/platform/tests/test_docs_consistency.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4b6c379846a4b0c42d4d1639f5519664c93dafe5/platform/tests/test_qemu_profiles.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4b6c379846a4b0c42d4d1639f5519664c93dafe5/docs/project-backlog.md"
+  ],
+  "notes": [
+    "The real concurrency-4 launch succeeded; the workload aggregate did not.",
+    "The first guest panic is NimBLE ble_hs_hci_process_ack at 0x402630cc; PC=0 after reboot is secondary.",
+    "The exact controller race is not yet closed and requires a follow-up fix plus two independent aggregate passes.",
+    "The three-instance 6/6 result is retained as a bounded predecessor and is not inherited by four instances."
+  ]
+}
