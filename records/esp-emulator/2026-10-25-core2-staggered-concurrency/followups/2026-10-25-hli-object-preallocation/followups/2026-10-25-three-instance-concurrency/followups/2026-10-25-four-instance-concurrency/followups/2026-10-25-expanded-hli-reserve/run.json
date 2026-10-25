@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Expand Core2 native-HCI reserve for four-instance cold start",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "4b6c379846a4b0c42d4d1639f5519664c93dafe5",
+    "result_commit": "35f5415ede3b635bccf5fac410faab49c0771dbf",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40179581935",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_concurrency_sha256": "139195d974fc23594c2508becd7d9a351315164f8b91d72e9793e8fa25a65e96",
+    "qemu_device_group_sha256": "0e1165fb866ecb573cdaca2084bdf498b45432aaa1937674ca73d04eeaa7a7fc",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.13; Node 20; QEMU virtual-device",
+    "attempt_batches": 2,
+    "attempts_requested_per_batch": 4,
+    "attempts_completed": 8,
+    "attempts_passed": 8,
+    "maximum_concurrent_sessions": 4,
+    "stagger_seconds": 0,
+    "hold_seconds_per_attempt": 120,
+    "core2_device_group": "6/6 cases and 24/24 checks PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "expanded_guest_hli_reserve",
+      "status": "PASS",
+      "detail": "real guest reserve increased to 8 event buffers and 4 ACL mbufs"
+    },
+    {
+      "name": "four_instance_batch_a",
+      "status": "PASS",
+      "detail": "4/4 leases PASS at concurrency 4 with zero stagger"
+    },
+    {
+      "name": "four_instance_batch_b",
+      "status": "PASS",
+      "detail": "independent confirmation batch 4/4 PASS"
+    },
+    {
+      "name": "combined_four_instance_gate",
+      "status": "PASS",
+      "detail": "8/8 aggregate PASS"
+    },
+    {
+      "name": "native_hci_health",
+      "status": "PASS",
+      "detail": "HLI 45/45, 36 events/9 ACLs, depth 8/4, zero errors/reset/panic"
+    },
+    {
+      "name": "core2_device_group",
+      "status": "PASS",
+      "detail": "6/6 cases and 24/24 checks with no retry"
+    },
+    {
+      "name": "five_or_more_instances",
+      "status": "NOT RUN",
+      "detail": "outside the closed four-instance boundary"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN",
+      "detail": "functional HCI path only"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN",
+      "detail": "virtual-device evidence only"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "detail": "no physical device or measurement"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/core2-concurrent-4x120-prealloc8x4-pass-a.json",
+    "evidence/core2-concurrent-4x120-prealloc8x4-confirm-pass-b.json",
+    "evidence/core2-0009-device-group.json",
+    "patches/0009-esp32-native-hci-expand-hli-preallocation.patch"
+  ],
+  "notes": [
+    "The parent four-instance FAIL record remains unchanged as history.",
+    "The first passing batch recorded two transient refill failures before recovery.",
+    "The independent confirmation batch recorded no refill failures.",
+    "The concurrency evidence uses a pre-comment QEMU build; the final source build was separately validated by the Core2 device group."
+  ]
+}

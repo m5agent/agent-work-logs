@@ -63,9 +63,19 @@ QEMU SHA-256：
 结果版本中的源码、文档和 evidence：
 [`m5stack-esp-emulator@4b6c379`](https://github.com/m5agent/m5stack-esp-emulator/commit/4b6c379846a4b0c42d4d1639f5519664c93dafe5)。
 
-## 未覆盖项
+## 后续修复
 
-- 四实例修复后的两批独立 aggregate PASS；
+- [2026-10-25 expanded HLI reserve](followups/2026-10-25-expanded-hli-reserve/)：
+  `0009` 把真实 guest event/ACL reserve 从 `2/2` 扩到 `8/4`；两批独立
+  `4×120s` 合计 `8/8 PASS`，Core2 六例外设组 `6/6`、`24/24` checks
+  PASS。
+
+本节的 PASS 是独立 follow-up；上面的四实例 `1/4` FAIL 和当时的根因边界
+仍保留，不回写成首次即通过。
+
+## 首次记录时未覆盖项
+
+- 四实例修复后的两批独立 aggregate PASS（已由上方 follow-up 覆盖）；
 - 五实例及更高并发、持续吞吐和其他 teardown；
 - bit-exact Espressif BT controller/baseband；
 - 物理板载 PSRAM/cache timing、RF、功耗和电气；
