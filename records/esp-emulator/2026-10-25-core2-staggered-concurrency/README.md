@@ -60,3 +60,10 @@ Core2 `qemu-unified/core2-native-hci` 首次完成两个 artifact-bound lease �
 - bit-exact Espressif BT controller/baseband；
 - 物理 PSRAM/cache timing、RF、功耗和电气；
 - physical hardware validation。
+
+## Follow-up
+
+- [2026-10-25 simultaneous HCI delivery](followups/2026-10-25-simultaneous-hci-valid-queue/)：
+  `PARTIAL`。GATT timeout 扩到 `30s`；`0007` valid-guest-queue gate 清除
+  observed `hli-errors=3`，新实现首批 `4/4 PASS`；独立复核仍有
+  `ble_hs_hci_process_ack` LoadProhibited，cold-start stability 保持开放。

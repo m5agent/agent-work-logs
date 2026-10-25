@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Harden Core2 simultaneous HCI delivery and reconcile current docs",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e3c5d089c33397c1948fb611e776d75cb3c20bd8",
+    "result_commit": "8243850b27fbff420560fcba67c06fae913e83bc",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40170434652",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_timeout_build_sha256": "80d3c50d1cc1d24a9686492bcb064891d43b7058c4e829ba2dc5879fbfee8881",
+    "qemu_valid_queue_build_sha256": "d69dcfa1ebb48cd8ed32361648226a96b036f93f1262f72811e6e1d30ec655c9",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.13; Node 20; QEMU virtual-device",
+    "hold_seconds_per_attempt": 120,
+    "concurrency": 2,
+    "stagger_seconds": 0,
+    "platform_tests": "462/462 PASS",
+    "documentation_tests": "36/36 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_tests": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "extended_gatt_request_and_notification_timeout",
+      "status": "PASS",
+      "detail": "30 seconds for extended exchange"
+    },
+    {
+      "name": "timeout_only_no_stagger_pair",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "timeout_only_no_stagger_extended_run",
+      "status": "FAIL",
+      "detail": "3 PASS / 1 FAIL; failing run hli-errors=3"
+    },
+    {
+      "name": "hli_valid_guest_queue_gate",
+      "status": "PASS",
+      "detail": "QEMU patch 0007; packet remains pending until queue observation is valid"
+    },
+    {
+      "name": "valid_queue_no_stagger_first_run",
+      "status": "PASS",
+      "detail": "4/4; each run HLI 45/45 and hli-errors=0"
+    },
+    {
+      "name": "valid_queue_independent_confirmation",
+      "status": "FAIL",
+      "detail": "1 PASS / 1 FAIL; second guest LoadProhibited at ble_hs_hci_process_ack"
+    },
+    {
+      "name": "no_stagger_cold_start_stability",
+      "status": "FAIL",
+      "detail": "remains OPEN despite one 4/4 run"
+    },
+    {
+      "name": "documentation_and_catalog_reconciliation",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "patches/0007-esp32-native-hci-require-valid-guest-queue.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8243850b27fbff420560fcba67c06fae913e83bc/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-concurrent-2x120-simultaneous-timeout30-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8243850b27fbff420560fcba67c06fae913e83bc/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-concurrent-4x120-hli-errors-fail.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8243850b27fbff420560fcba67c06fae913e83bc/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-concurrent-4x120-simultaneous-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8243850b27fbff420560fcba67c06fae913e83bc/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-concurrent-4x120-simultaneous-confirm-fail.json"
+  ],
+  "notes": [
+    "The 4/4 PASS is retained as a required positive checkpoint but does not override the independent confirmation failure.",
+    "The HLI valid-queue gate changes scheduling behavior rather than suppressing hli-errors.",
+    "No physical hardware or RF evidence is claimed."
+  ]
+}

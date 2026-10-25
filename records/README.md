@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-25 | `esp-emulator` | Core2 no-stagger HLI valid-queue gate 与代码/文档收口 | `PARTIAL`（virtual-device：timeout-only 3/4 FAIL、gate 后首轮 4/4 PASS、独立复核 1/2 FAIL；462/462 tests、CI PASS；cold-start/物理/真机 NOT RUN） | [查看](esp-emulator/2026-10-25-core2-staggered-concurrency/followups/2026-10-25-simultaneous-hci-valid-queue/) |
 | 2026-10-25 | `esp-emulator` | Core2 native-HCI 30 秒错峰双 lease 并发 | `PASS`（virtual-device：2×120s、最大并发 2、WiFi/公网/BLE/PSRAM/frame/QOM/pcap/evidence PASS；共享端口与无错峰冷启动失败保留；物理/controller/真机 NOT RUN） | [查看](esp-emulator/2026-10-25-core2-staggered-concurrency/) |
 | 2026-10-25 | `esp-emulator` | WebBurner capability 来源、扫描覆盖与 warning 展示 | `PASS`（browser-ui：真实页面显示 SDKConfig/Image observations/Image scan、逐条 warning；Node/413 tests/CI PASS；无 QEMU、运行态与真机 NOT RUN） | [查看](esp-emulator/2026-10-25-webburner-capability-display/) |
 | 2026-10-25 | `esp-emulator` | 镜像能力观察与 FirmwareManifest capability mismatch | `PASS`（static-manifest：公开 StickS3 Weather 观察 wifi/display、normal PASS、required camera 结构化拒绝；413/413 tests、22/22 docs、CI PASS；运行态、安全和真机 NOT RUN） | [查看](esp-emulator/2026-10-25-image-capability-observation/) |
