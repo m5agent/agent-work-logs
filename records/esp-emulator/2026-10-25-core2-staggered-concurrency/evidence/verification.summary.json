@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-10-25T14:16:31+08:00",
+  "scope": "core2-native-hci-staggered-concurrent-unified",
+  "source": {
+    "base_commit": "a358780eb572a9642bdf5f180572ef689529cf9c",
+    "result_commit": "e3c5d089c33397c1948fb611e776d75cb3c20bd8",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40168564543",
+    "ci_status": "PASS"
+  },
+  "final_gate": {
+    "status": "PASS",
+    "attempts_passed": 2,
+    "attempts_requested": 2,
+    "maximum_concurrent_sessions": 2,
+    "stagger_seconds": 30,
+    "hold_seconds_per_attempt": 120,
+    "psram_gate": "PASS"
+  },
+  "negative_controls": {
+    "shared_http_port_collision": "FAIL retained",
+    "simultaneous_cold_start_hci_panic": "FAIL retained",
+    "panic_pc": "0x402630cc",
+    "panic_symbol": "ble_hs_hci_process_ack"
+  },
+  "verification": {
+    "platform_tests": {
+      "passed": 460,
+      "total": 460
+    },
+    "documentation_tests": {
+      "passed": 35,
+      "total": 35
+    },
+    "node_sha256_upload": {
+      "passed": 2,
+      "total": 2
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_fatal": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "ci_platform_contracts": "PASS",
+    "ci_network_namespace_policy": "PASS"
+  },
+  "validation_boundaries": {
+    "simultaneous_cold_start": "FAIL",
+    "sustained_throughput": "NOT RUN",
+    "bit_exact_bt_controller": "NOT RUN",
+    "physical_cache_psram": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  }
+}

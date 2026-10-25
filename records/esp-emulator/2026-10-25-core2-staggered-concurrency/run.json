@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Verify two staggered concurrent Core2 native-HCI unified leases",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a358780eb572a9642bdf5f180572ef689529cf9c",
+    "result_commit": "e3c5d089c33397c1948fb611e776d75cb3c20bd8",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40168564543",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-device",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "80d3c50d1cc1d24a9686492bcb064891d43b7058c4e829ba2dc5879fbfee8881",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; Node 20; QEMU virtual-device",
+    "attempts_requested": 2,
+    "attempts_passed": 2,
+    "concurrency_requested": 2,
+    "maximum_concurrent_sessions": 2,
+    "stagger_seconds": 30,
+    "hold_seconds_per_attempt": 120,
+    "platform_tests": "460/460 PASS",
+    "documentation_tests": "35/35 PASS",
+    "node_tests": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "shared_http_port_collision_reproduced",
+      "status": "PASS",
+      "detail": "negative control retained"
+    },
+    {
+      "name": "per_session_qemu_guestfwd_http",
+      "status": "PASS"
+    },
+    {
+      "name": "simultaneous_cold_start_failure_reproduced",
+      "status": "PASS",
+      "detail": "negative control retained; second guest LoadProhibited"
+    },
+    {
+      "name": "staggered_concurrent_2x120s",
+      "status": "PASS"
+    },
+    {
+      "name": "wifi_public_ble_psram_frame_qom_pcap",
+      "status": "PASS"
+    },
+    {
+      "name": "maximum_concurrent_sessions",
+      "status": "PASS",
+      "detail": "2"
+    },
+    {
+      "name": "simultaneous_cold_start",
+      "status": "FAIL",
+      "detail": "retained control; not claimed as supported"
+    },
+    {
+      "name": "sustained_throughput",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "bit_exact_bt_controller",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_cache_psram",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/core2-concurrent-2x120-stagger30.json",
+    "evidence/core2-concurrency-http-port-collision-fail.json",
+    "evidence/core2-concurrency-simultaneous-start-fail.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e3c5d089c33397c1948fb611e776d75cb3c20bd8/platform/tools/unified_http_guestfwd.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e3c5d089c33397c1948fb611e776d75cb3c20bd8/platform/tools/device_service.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e3c5d089c33397c1948fb611e776d75cb3c20bd8/tests/uiflow2/core2_native_hci/run_service_5x.py"
+  ],
+  "notes": [
+    "A QEMU guestfwd helper replaced the shared host 18089 fixture for Core2 native-HCI.",
+    "The 30-second stagger is an evidence-bound supported pilot condition, not a universal scheduler claim.",
+    "The no-stagger cold-start failure is intentionally retained."
+  ]
+}
