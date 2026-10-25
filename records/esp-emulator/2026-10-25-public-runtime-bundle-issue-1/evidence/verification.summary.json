@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "public-runtime-bundle-validation",
+  "date": "2026-10-25",
+  "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/1",
+  "source_commit": "10df26ece0b605a3a8bb36a3661b53494fdae9a0",
+  "release": {
+    "tag": "runtime-macos-arm64-2026.10.25",
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/runtime-macos-arm64-2026.10.25",
+    "asset": "m5stack-esp-emulator-runtime-macos-arm64-2026.10.25.tar.gz",
+    "sha256": "735464198c5f7f3ffa930307c0e4cedb973ac48934b73d0092a3a4659831c7a9",
+    "bytes": 74636188
+  },
+  "reproduced_findings": {
+    "invalid_base_commit": {
+      "sha": "da100c909249926b9f4458f18e4f2d216d08f51a",
+      "github_api_status": 422,
+      "result": "REPRODUCED"
+    },
+    "shared_file_patch_conflict": {
+      "result": "REPRODUCED",
+      "files": [
+        "hw/gpio/esp32_gpio.c",
+        "hw/m5stopwatch/co5300.c",
+        "hw/m5stopwatch/esp32s3_gpspi.c",
+        "hw/m5stopwatch/m5sw_i2c_devs.c",
+        "hw/xtensa/meson.build"
+      ]
+    },
+    "c6_commit_public": {
+      "sha": "febae182e132e4055529be423a818225ebddaa3a",
+      "github_api_status": 200,
+      "result": "NOT REPRODUCED"
+    },
+    "no_release_before_fix": {
+      "release_count": 0,
+      "result": "REPRODUCED"
+    }
+  },
+  "clean_clone": {
+    "commit": "10df26ece0b605a3a8bb36a3661b53494fdae9a0",
+    "backend_ready": [
+      "sticks3",
+      "nesso-n1"
+    ],
+    "sessions": [
+      {
+        "device_id": "sticks3",
+        "session_id": "1ceea149e4e04790aef1802b829b1459",
+        "firmware_sha256": "f1ed15f3cb29dbe9274f6f09c8c7772514dcda800b3fe1d067b2e2cd2ec468d2",
+        "frame": "135x240",
+        "frame_sha256": "b7c4ffd92cde08e0455596fa125492f721a834d886992659a161bfad80aa3ab6",
+        "input": "key:a",
+        "input_accepted": true
+      },
+      {
+        "device_id": "nesso-n1",
+        "session_id": "dd9b305e58cd4819882c80a755c26b15",
+        "firmware_sha256": "53a01cdde00de8763767d6eefb48965a5d95326b4e88df0f26ad08fe1c00816d",
+        "frame": "135x240",
+        "nonblack_pixels": 4411,
+        "frame_sha256": "a2736261cf6264f197490803809d35b12b3fe413b0566bc17ccc22ff0a845334",
+        "input": "touch:67,120",
+        "input_accepted": true
+      }
+    ],
+    "residual_qmp_timeout": {
+      "device_id": "sticks3",
+      "session_id": "b20c0805ab9e4e5ea2c33abddc1bd54c",
+      "classification": "service startup flake; immediate retry passed"
+    }
+  },
+  "limits": [
+    "macOS arm64 only",
+    "Python 3.13 only",
+    "reference firmware not bundled",
+    "clean-room source rebuild remains NOT RUN",
+    "physical hardware remains NOT RUN"
+  ]
+}

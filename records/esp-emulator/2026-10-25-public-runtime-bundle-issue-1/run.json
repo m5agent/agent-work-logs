@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Verify issue #1 and publish a runnable macOS runtime bundle",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/1",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "10df26ece0b605a3a8bb36a3661b53494fdae9a0",
+    "result_docs_commit": "2a2c792"
+  },
+  "hardware": {
+    "targets": [
+      "macOS arm64 host",
+      "virtual ESP32-S3 StickS3",
+      "virtual ESP32-C6 Nesso N1"
+    ],
+    "real_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "stickS3_sha256": "f1ed15f3cb29dbe9274f6f09c8c7772514dcda800b3fe1d067b2e2cd2ec468d2",
+    "nesso_n1_sha256": "53a01cdde00de8763767d6eefb48965a5d95326b4e88df0f26ad08fe1c00816d",
+    "reference_firmware_bundled": false
+  },
+  "execution": {
+    "interface": "Device Service /api/v1",
+    "release": "runtime-macos-arm64-2026.10.25",
+    "release_url": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/runtime-macos-arm64-2026.10.25",
+    "asset_sha256": "735464198c5f7f3ffa930307c0e4cedb973ac48934b73d0092a3a4659831c7a9",
+    "python": "3.13"
+  },
+  "checks": [
+    {
+      "name": "invalid_public_base_commit",
+      "status": "REPRODUCED",
+      "detail": "GitHub API returned 422 for da100c9092..."
+    },
+    {
+      "name": "patch_series_linear_rebuild",
+      "status": "FAIL",
+      "detail": "multiboard and peripherals snapshots conflict on shared-file preimages"
+    },
+    {
+      "name": "c6_base_commit_public",
+      "status": "PASS",
+      "detail": "febae182e132e4055529be423a818225ebddaa3a is reachable"
+    },
+    {
+      "name": "runtime_release",
+      "status": "PASS",
+      "detail": "published 74,636,188-byte macOS arm64 bundle"
+    },
+    {
+      "name": "clean_clone_service_backend",
+      "status": "PASS",
+      "detail": "sticks3 and nesso-n1 backend_ready/creatable"
+    },
+    {
+      "name": "stickS3_frame_and_key",
+      "status": "PASS",
+      "detail": "135x240 frame and accepted key input after one QMP retry"
+    },
+    {
+      "name": "nesso_frame_and_touch",
+      "status": "PASS",
+      "detail": "135x240 frame and accepted touch input"
+    },
+    {
+      "name": "clean_room_source_rebuild",
+      "status": "NOT RUN",
+      "detail": "release path is implemented; a one-command source replay is still open"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/2a2c792",
+    "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/runtime-macos-arm64-2026.10.25"
+  ],
+  "notes": [
+    "The release fixes executable runtime availability, not source-tree reproducibility.",
+    "One intermittent QMP startup timeout remains as a separate service-startup risk.",
+    "The bundle is macOS arm64 and Python 3.13 only."
+  ]
+}
