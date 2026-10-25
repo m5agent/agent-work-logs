@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 fixed-icount five-instance cold start",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3d1484c",
+    "commit": "39e6295"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "bytes": 16777216
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, Node.js, patched Xtensa QEMU",
+    "task_id": "",
+    "session_id": "",
+    "ci_run": "40193742174"
+  },
+  "checks": [
+    {
+      "name": "fixed_icount_five_instance_batch_a",
+      "status": "PASS",
+      "attempts": "5/5",
+      "hold_seconds": 120,
+      "maximum_concurrency": 5
+    },
+    {
+      "name": "fixed_icount_five_instance_batch_b",
+      "status": "PASS",
+      "attempts": "5/5",
+      "hold_seconds": 120,
+      "maximum_concurrency": 5
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "result": "487/487"
+    },
+    {
+      "name": "docs_contracts",
+      "status": "PASS",
+      "result": "37/37"
+    },
+    {
+      "name": "browser_unit_tests",
+      "status": "PASS",
+      "result": "2/2"
+    },
+    {
+      "name": "github_actions_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "clean_source_rebuild",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/five-instance-fixed-icount-pass-a.json",
+      "sha256": "87dd71664fe4a9a7035051572a934254505608ce28313b7d5f0ff45fa857670a"
+    },
+    {
+      "path": "evidence/five-instance-fixed-icount-pass-b.json",
+      "sha256": "8f9a913af3af0b4c43326a363dec0d5766df10379f7bdd8f27d1bf6a48508e9f"
+    }
+  ],
+  "notes": [
+    "virtual-device validation only",
+    "fixed icount is deterministic virtual time, not real-time or physical timing",
+    "the historical shift=auto 5/5 PASS and independent 3/5 FAIL evidence remains retained"
+  ]
+}
