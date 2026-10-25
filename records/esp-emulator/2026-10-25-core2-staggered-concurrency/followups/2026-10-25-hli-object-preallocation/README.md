@@ -70,6 +70,12 @@ QEMU SHA-256：
 原始 session evidence 与完整矩阵脱敏汇总已提交在公开源码仓库结果版本：
 [`tests/uiflow2/core2_native_hci/`](https://github.com/m5agent/m5stack-esp-emulator/tree/bf98ea8d00dd759da9db44100e239c692f6143ee/tests/uiflow2/core2_native_hci)。
 
+## Follow-up
+
+- [2026-10-25 three-instance concurrency](followups/2026-10-25-three-instance-concurrency/)：
+  `PASS`（virtual-device）。两批三实例 `3×120s` 合计 `6/6`；修正固定
+  `40s` peer scan 预算和三实例 sweep 阈值，并保留两阶段失败证据。
+
 ## 未覆盖项
 
 - 两个以上实例的更高并发和持续吞吐；

@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "validation": "virtual-device validation",
+  "source_commit": "db46335e7f71f035ce4a1461567ffb256b683669",
+  "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40176816140",
+  "ci_status": "PASS",
+  "firmware": {
+    "sha256": "5ed4fcfad22c50d10d9a1af48bdb8e7b7e125a6fa278d3f8e30e53bd03aa43db",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49"
+  },
+  "qemu": {
+    "sha256": "b5b2d878132cb6a8a314cb0f9f9fd0a1843c67fad8558cba268837e9942d304b",
+    "accelerator": "tcg,thread=single,tb-size=128"
+  },
+  "three_instance_runs": [
+    {
+      "attempts_completed": 3,
+      "attempts_passed": 3,
+      "attempts_failed": 0,
+      "maximum_concurrent_sessions": 3,
+      "stagger_seconds": 0,
+      "status": "PASS",
+      "psram_sweeps_per_lease": [29, 29, 29]
+    },
+    {
+      "attempts_completed": 3,
+      "attempts_passed": 3,
+      "attempts_failed": 0,
+      "maximum_concurrent_sessions": 3,
+      "stagger_seconds": 0,
+      "status": "PASS",
+      "psram_sweeps_per_lease": [30, 29, 29]
+    }
+  ],
+  "failure_stages": [
+    {
+      "name": "fixed_40_second_peer_scan",
+      "status": "FAIL",
+      "detail": "3/3 leases failed before advertisement; guest BLE init about 55 seconds"
+    },
+    {
+      "name": "thirty_sweep_floor",
+      "status": "FAIL",
+      "detail": "1 PASS / 2 FAIL; two guests completed 29 sweeps"
+    }
+  ],
+  "per_lease": {
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_errors": 0,
+    "fast_path_events": 36,
+    "fast_path_acls": 9,
+    "event_prealloc_depth": 2,
+    "acl_prealloc_depth": 2,
+    "scheduler_reset": 0,
+    "panic": 0
+  },
+  "core2_device_group": {
+    "cases": 6,
+    "checks": 24,
+    "pass": 6,
+    "fail": 0,
+    "attempts_per_case": 1,
+    "retry_used": false
+  },
+  "checks": {
+    "platform_tests": "465/465 PASS",
+    "documentation_tests": "36/36 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_e9_f": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "open_boundaries": [
+    "more than three concurrent instances",
+    "sustained throughput and teardown modes beyond active-stop",
+    "bit-exact Espressif BT controller/baseband",
+    "physical PSRAM/cache timing",
+    "RF, power, electrical and physical hardware validation"
+  ],
+  "redaction": {
+    "removed": [
+      "session identifiers",
+      "process identifiers",
+      "peer and device link-layer identifiers",
+      "local filesystem paths"
+    ]
+  }
+}
