@@ -85,3 +85,7 @@ trust_root             = not-verified
 - [ECDSA P-192 mathematical verification](followups/2026-10-25-ecdsa-p192-math-verification/)：
   补齐 P-192/SHA-256；最终 fixture `17/17` checks。eFuse trust root 和
   ROM 执行仍未覆盖。
+- [eFuse summary digest comparison](followups/2026-10-25-efuse-summary-digest-comparison/)：
+  把 signature block 的公钥 SHA-256 与包内 `SECURE_BOOT_DIGEST` 做
+  match/mismatch/unavailable 对照；fixture `21/21` checks。
+  `trust_root.status` 仍为 `not-verified`，未执行 live eFuse read。

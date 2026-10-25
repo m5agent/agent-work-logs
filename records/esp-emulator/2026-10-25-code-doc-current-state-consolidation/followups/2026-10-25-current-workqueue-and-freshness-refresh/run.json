@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "docs_change",
+  "overall_status": "PASS",
+  "title": "Refresh current work queue and non-historical documentation freshness",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "79a23213167365b60653d23d14e78cd1bd41c46a",
+    "feature_commit": "ee4ad8f33ffa9083b41ddcbc8419189cd6fcbac1",
+    "result_commit": "cb4267116d6cf9061f08484902be5a88864e7d99",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40166166903",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "functional_matrix": "NOT RUN",
+    "secure_boot_fixture_checks": 21
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; Node 20; no physical hardware",
+    "platform_tests_passed": 454,
+    "platform_tests_total": 454,
+    "documentation_tests_passed": 34,
+    "documentation_tests_total": 34,
+    "node_tests_passed": 2,
+    "node_tests_total": 2,
+    "secure_boot_checks_passed": 21,
+    "secure_boot_checks_total": 21,
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "ruff_fatal": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "non_historical_document_freshness",
+      "status": "PASS",
+      "detail": "all non-historical review dates match the current fact date"
+    },
+    {
+      "name": "current_capability_and_backlog_alignment",
+      "status": "PASS"
+    },
+    {
+      "name": "secure_boot_efuse_evidence_layering",
+      "status": "PASS"
+    },
+    {
+      "name": "docs_freshness_contract_without_stale_pages",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "454/454"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "34/34"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "secure_boot_fixture",
+      "status": "PASS",
+      "detail": "21/21"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "full_uiflow2_peripheral_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "new_network_worker_qemu_session",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "../../../2026-10-25-secure-boot-v2-image-evidence/followups/2026-10-25-efuse-summary-digest-comparison/",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/cb4267116d6cf9061f08484902be5a88864e7d99",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cb4267116d6cf9061f08484902be5a88864e7d99/docs/project-status.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cb4267116d6cf9061f08484902be5a88864e7d99/docs/project-backlog.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/cb4267116d6cf9061f08484902be5a88864e7d99/docs/project-snapshot.md"
+  ],
+  "notes": [
+    "All current documentation pages now carry the same review date as the current fact date.",
+    "The four re-reviewed specialist pages retain their original capability evidence dates.",
+    "Documentation freshness PASS does not imply a new QEMU functional run or hardware validation."
+  ]
+}

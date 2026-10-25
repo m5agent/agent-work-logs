@@ -44,6 +44,11 @@ Backlog、代码地图和设备元数据改为只引用同一份证据，见
 side effect 分开，见
 [Follow-up: current-code and documentation freshness audit](followups/2026-10-25-work-doc-freshness-audit/)。
 
+Secure Boot v2 signer/eFuse 对照完成后，当前工作队列和所有非历史文档又做
+了一次收口；四页专项文档重新核对但保留原能力基线，自动快照现在明确显示
+所有非历史页复核日期一致，见
+[Follow-up: current work queue and documentation freshness refresh](followups/2026-10-25-current-workqueue-and-freshness-refresh/)。
+
 ## 当前结论
 
 - 当前实现：共登记 14 台设备；13 台达到登记外设的 `simulated`，Tab5

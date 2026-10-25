@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Compare Secure Boot v2 public-key digests with package eFuse summaries",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "79a23213167365b60653d23d14e78cd1bd41c46a",
+    "implementation_commit": "ee4ad8f33ffa9083b41ddcbc8419189cd6fcbac1",
+    "result_commit": "cb4267116d6cf9061f08484902be5a88864e7d99",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40166166903",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "static-image",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "synthetic_signature_sectors": true,
+    "synthetic_efuse_summary": true,
+    "qemu_started": false,
+    "device_session_created": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; Node 20; synthetic 8 MiB flash layouts",
+    "secure_boot_checks": 21,
+    "platform_tests": "454/454 PASS",
+    "documentation_tests": "34/34 PASS",
+    "node_tests": "2/2 PASS",
+    "github_actions": "PASS"
+  },
+  "checks": [
+    {
+      "name": "secure_boot_fixture",
+      "status": "PASS",
+      "detail": "21/21"
+    },
+    {
+      "name": "rsa_pss_and_ecdsa_regression",
+      "status": "PASS"
+    },
+    {
+      "name": "efuse_digest_match",
+      "status": "PASS",
+      "detail": "match-unverified-source"
+    },
+    {
+      "name": "efuse_digest_mismatch",
+      "status": "PASS",
+      "detail": "mismatch-unverified-source plus warning"
+    },
+    {
+      "name": "efuse_digest_unavailable",
+      "status": "PASS"
+    },
+    {
+      "name": "trust_status_schema_guard",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "454/454"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "34/34"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "live_efuse_read",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "secure_boot_rom_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "secure_boot_v1",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "flash_encryption_runtime",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/secure-boot-efuse-comparison-21-checks.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ee4ad8f33ffa9083b41ddcbc8419189cd6fcbac1/platform/tools/firmware_manifest.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ee4ad8f33ffa9083b41ddcbc8419189cd6fcbac1/platform/tools/firmware_manifest.schema.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ee4ad8f33ffa9083b41ddcbc8419189cd6fcbac1/tests/firmware/evidence-2026-10-25-secure-boot-image.json"
+  ],
+  "notes": [
+    "A digest match is evidence only against a package-provided eFuse summary.",
+    "The summary is self-asserted, so trust_root.status remains not-verified.",
+    "The implementation does not execute ROM, QEMU or physical hardware."
+  ]
+}

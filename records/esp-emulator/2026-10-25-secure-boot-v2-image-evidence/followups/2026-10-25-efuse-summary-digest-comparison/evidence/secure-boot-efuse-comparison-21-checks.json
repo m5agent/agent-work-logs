@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "secure-boot-efuse-comparison-summary",
+  "validation": "static secure-boot image validation",
+  "status": "PASS",
+  "checks_total": 21,
+  "checks": {
+    "signed_image_observed": true,
+    "bootloader_digest_match": true,
+    "application_digest_match": true,
+    "public_key_digest_recorded": true,
+    "rsa_signature_math_valid": true,
+    "authenticity_not_verified": true,
+    "efuse_digest_match_compared": true,
+    "efuse_digest_mismatch_compared": true,
+    "efuse_digest_mismatch_warning_recorded": true,
+    "efuse_digest_unavailable": true,
+    "tampered_digest_rejected": true,
+    "tampered_warning_recorded": true,
+    "unsigned_image_not_found": true,
+    "ecdsa_p256_observed": true,
+    "ecdsa_p192_observed": true,
+    "ecdsa_p384_observed": true,
+    "bad_signature_math_rejected": true,
+    "bad_ecdsa_signature_math_rejected": true,
+    "missing_signature_warning_recorded": true,
+    "authenticity_warning_recorded": true,
+    "manifest_structure_valid": true
+  },
+  "trust_root": {
+    "status": "not-verified",
+    "match_comparison": "match-unverified-source",
+    "mismatch_comparison": "mismatch-unverified-source",
+    "unavailable_comparison": "efuse-key-digest-unavailable",
+    "source": "package-espefuse-json-unverified"
+  },
+  "not_claimed": [
+    "package-provided eFuse summary authenticity",
+    "live eFuse read from the target device",
+    "hardware secure-boot execution",
+    "QEMU execution",
+    "physical hardware validation"
+  ]
+}
