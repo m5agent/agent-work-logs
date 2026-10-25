@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Add bounded controlled-DNS CNAME chains and reconcile current project documentation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "2a2c7920039d38dec92c93c14a69caec6fbfd4fa",
+    "result_commit": "8710e41bf00d592ad0a5a7b9e5a3d5f32a333f9d",
+    "api_version": "1.30.0"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "guest_runtime_validation": "NOT RUN",
+    "reason": "The committed gate exercises the controlled resolver and Device Service policy, not a guest CNAME-to-TCP/HTTP lifecycle."
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13.15, Node 20",
+    "platform_tests": "425/425 PASS",
+    "node_tests": "2/2 PASS",
+    "ci_run": "40152639444",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40152639444",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "exact_terminal_cname_chain",
+      "status": "PASS",
+      "detail": "Two CNAME links plus the terminal A record are returned"
+    },
+    {
+      "name": "domain_suffix_terminal",
+      "status": "PASS",
+      "detail": "A CNAME alias resolves through a policy-bound suffix answer"
+    },
+    {
+      "name": "cname_query",
+      "status": "PASS",
+      "detail": "CNAME query returns the chain without inventing an address"
+    },
+    {
+      "name": "negative_graphs",
+      "status": "PASS",
+      "detail": "Cycle, uncontrolled terminal, unauthorized alias, exact/domain owner conflict and overlong chain are rejected"
+    },
+    {
+      "name": "device_service_policy",
+      "status": "PASS",
+      "detail": "Valid CNAME config is accepted; invalid policy and graph data return invalid_network"
+    },
+    {
+      "name": "documentation_consistency",
+      "status": "PASS",
+      "detail": "Dynamic counts are snapshot-driven and NET-07 preserves the guest-lifecycle boundary"
+    },
+    {
+      "name": "guest_cname_tcp_http_lifecycle",
+      "status": "NOT RUN",
+      "detail": "Tracked by NET-07"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/8710e41bf00d592ad0a5a7b9e5a3d5f32a333f9d",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8710e41bf00d592ad0a5a7b9e5a3d5f32a333f9d/tests/network/dns_cname_chain/evidence-2026-10-25-controlled-cname-chain.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40152639444"
+  ],
+  "notes": [
+    "This is resolver-data-plane and contract validation, not guest firmware lifecycle validation.",
+    "NET-07 is the remaining same-guest CNAME through TCP/HTTP gate.",
+    "Public DNS, DNSSEC, rebinding resistance, RF and physical hardware are not claimed."
+  ]
+}

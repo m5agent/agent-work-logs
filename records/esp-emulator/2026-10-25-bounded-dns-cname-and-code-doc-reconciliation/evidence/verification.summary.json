@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "generated_at": "2026-10-25T01:59:09Z",
+  "source_commit": "8710e41bf00d592ad0a5a7b9e5a3d5f32a333f9d",
+  "validation": "resolver-data-plane validation",
+  "api_version": "1.30.0",
+  "resolver": {
+    "exact_record": "origin.example.test",
+    "exact_address": "203.0.113.10",
+    "domain_suffix": "service.example.test",
+    "domain_suffix_address": "198.51.100.20",
+    "checks": {
+      "exact_terminal_two_hop_chain": "PASS",
+      "domain_suffix_terminal": "PASS",
+      "cname_query_returns_chain": "PASS",
+      "unknown_name_nxdomain": "PASS",
+      "cycle_rejected": "PASS",
+      "uncontrolled_terminal_rejected": "PASS",
+      "unauthorized_alias_rejected": "PASS",
+      "exact_owner_conflict_rejected": "PASS",
+      "domain_owner_conflict_rejected": "PASS",
+      "eight_hop_inclusive_boundary": "PASS",
+      "nine_hop_rejected": "PASS"
+    }
+  },
+  "device_service": {
+    "valid_cname_config": "PASS",
+    "requires_allowlist_and_controlled_dns": "PASS",
+    "outside_policy_alias_rejected": "PASS",
+    "uncontrolled_terminal_rejected": "PASS"
+  },
+  "contracts": {
+    "platform_tests": "425/425 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "openapi_yaml": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run_id": "40152639444",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "guest firmware CNAME-to-TCP/HTTP lifecycle",
+    "CNAME inside a full Linux namespace guest lifecycle",
+    "public DNS or DNSSEC",
+    "DNS rebinding resistance",
+    "RF or PHY behavior",
+    "physical hardware validation"
+  ]
+}
