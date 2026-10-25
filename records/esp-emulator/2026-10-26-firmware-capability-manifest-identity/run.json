@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Fail closed unknown required firmware capabilities and stabilize manifest identity",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "8d7122b79bd6afe43f035e59697f91f8a3e3abc3",
+    "result_commit": "904d4ec7c6fb9516942625c86d619ebba5ae90a3"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_electrical_power_or_thermal_validation": "NOT RUN",
+    "physical_cache_psram_timing": "NOT RUN"
+  },
+  "firmware": {
+    "public_sample": "StickS3 Weather",
+    "source_sha256": "8b7b47c8d601e1821817f8d0e6b55568829913e50333dbcc15de6ffdbad1997c",
+    "normalized_flash_sha256": "d291e77f782399e37fd5b464f9b206a00654b2c10556d730d1c45667156c603f",
+    "known_required": "PASS",
+    "unknown_required": "REJECTED",
+    "unknown_optional": "PASS_WITH_WARNING",
+    "runtime_capability_call_path": "NOT RUN"
+  },
+  "execution": {
+    "validation_layer": "static firmware contracts plus virtual-device Core2 regression",
+    "environment": "macOS arm64, Python 3.13, Node v22.14.0, patched Xtensa QEMU",
+    "platform_tests": "525/525 PASS",
+    "node_sha_upload_tests": "2/2 PASS",
+    "capability_evidence_reproducible": true,
+    "secure_boot_evidence_reproducible": true,
+    "secure_boot_checks": "26/26 PASS",
+    "core2_simultaneous_8x120": "16/16 PASS",
+    "maximum_core2_concurrency": 8,
+    "full_uiflow2_matrix": "NOT RUN",
+    "ci_run": "40246432149",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40246432149",
+    "ci_result": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "unknown_required_capability_fail_closed",
+      "status": "PASS",
+      "detail": "Merged and WebBurner imports reject unknown required capabilities with exit code 1 and no other validation error."
+    },
+    {
+      "name": "unknown_optional_capability_warning",
+      "status": "PASS",
+      "detail": "An unknown optional capability remains a candidate and records a structured warning."
+    },
+    {
+      "name": "device_service_capability_rejection",
+      "status": "PASS",
+      "detail": "Device Service returns unsupported_firmware_capability for unknown required capability without creating a firmware/session."
+    },
+    {
+      "name": "manifest_identity_stable",
+      "status": "PASS",
+      "detail": "Two identical WebBurner packages under different directory names produce the same artifact SHA and manifest_id."
+    },
+    {
+      "name": "secure_boot_tool_hash_rebind",
+      "status": "PASS",
+      "detail": "Current firmware_manifest.py hash is bound by a new 26/26 Secure Boot static evidence run."
+    },
+    {
+      "name": "core2_tool_hash_rebind",
+      "status": "PASS",
+      "detail": "Two independent 8x120-second runs pass 8/8 each with current device_service.py hash."
+    },
+    {
+      "name": "full_uiflow2_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/904d4ec7c6fb9516942625c86d619ebba5ae90a3/tests/firmware/evidence-2026-10-26-unknown-required-capability-fail-closed.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/904d4ec7c6fb9516942625c86d619ebba5ae90a3/tests/firmware/evidence-2026-10-26-secure-boot-image.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/904d4ec7c6fb9516942625c86d619ebba5ae90a3/tests/uiflow2/core2_native_hci/evidence-2026-10-26-core2-concurrent-8x120-fixed-icount-pass-a.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/904d4ec7c6fb9516942625c86d619ebba5ae90a3/tests/uiflow2/core2_native_hci/evidence-2026-10-26-core2-concurrent-8x120-fixed-icount-pass-b.json"
+  ],
+  "notes": [
+    "All functional results are virtual-device validation.",
+    "Unknown required capabilities now fail closed; unknown optional capabilities remain warnings.",
+    "Manifest identity is content-stable and excludes artifact output filename.",
+    "The initial Core2 run without M5_CORE2_RADIO_QEMU was an infrastructure control and was not counted.",
+    "Full UIFlow2 matrix and physical hardware remain NOT RUN."
+  ]
+}
