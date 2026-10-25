@@ -46,6 +46,7 @@
 
 ## 对外记录索引
 
+| 2026-10-26 | ESP Emulator | Core2 flash 前 spinlock 复现与诊断边界纠偏 | PARTIAL（virtual-device：ESP-IDF probe 主 QEMU 3/3 owner assertion before `READ_START`；portable control 2/3 assertion + 1/3 WDT；平台 500/500、docs 40/40 与 CI PASS；S32C1I/lock owner、legacy 黑帧与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-flash-ipc-boundary/) |
 | 2026-10-26 | ESP Emulator | 当前工作、调查假设、Backlog 与文档职责总整理 | PASS（docs/contracts：平台 `499/499`、文档契约 `39/39`、Node、snapshot/coverage/catalog/profile、compileall、Ruff 与 CI PASS；firmware/QEMU functional rerun 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/) |
 | 2026-10-25 | ESP Emulator | Core2 legacy shared board I2C 与当前文档对账 | PARTIAL（virtual-device：AXP/RTC/INA ACK、UIFlow2 `6/6`、498 tests + CI PASS；后续 interrupt WDT/black frame、修复后 FactoryTest、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-25-core2-shared-board-i2c/) |
 | 2026-10-25 | ESP Emulator | Core2 legacy UIFlow WDT 时序与并发诊断 | PARTIAL（virtual-device：默认单会话 285s 无 WDT；两批四实例 `5/8` interrupt-WDT；thread/icount 对照未修复；499 tests + CI PASS；具体 guest 代码点、应用帧与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-25-core2-shared-board-i2c/followups/2026-10-25-wdt-timing-diagnosis/) |

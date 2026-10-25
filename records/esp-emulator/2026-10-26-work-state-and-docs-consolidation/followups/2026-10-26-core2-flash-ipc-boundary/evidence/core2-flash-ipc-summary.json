@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "validation": "virtual-device validation",
+  "result_commit": "e185b15b4a2d2bdbbe86f94e84de2217b40da55c",
+  "firmware": {
+    "image_sha256": "7e786a27678285d60c006fcb25226b98212672b34ec8b3b844833b5050a18da3",
+    "elf_sha256": "af6d765b5f17052d92bf582e9e3ab1ec05b12b3a43f61366f7da5f31eb5db648",
+    "build": "ESP-IDF 5.5.4"
+  },
+  "primary_runtime": {
+    "qemu_sha256": "a40455957b68453df63586829f5f843239572ebbd98edf7c84fab506f9b4fd23",
+    "attempts": 3,
+    "first_boot_spinlock_owner_assert": 3,
+    "first_boot_interrupt_wdt": 0,
+    "read_start_observed": 0,
+    "main_prid": "0x0000cdcd",
+    "worker_prid": "0x0000abab",
+    "session_id_sha256": [
+      "90db1c3b0d9bac2c5f243fa14eb8bd7bc5fc29d268d89857a3456906f8b301a3",
+      "f43aeb2b0d16e6af8efa0c3cc2065bd42384cfbc0a3df4173c8d2742410a3b06",
+      "8cb8601b6b806f459ed6fd5cab187f88e14a8f3f22f96792fa6eb21c56ccde8d"
+    ]
+  },
+  "portable_runtime_control": {
+    "qemu_sha256": "4095fb1180f128f9d5fe8c240643dcc0fa99fca72981f6241b089667c0ca2fa8",
+    "attempts": 3,
+    "first_boot_spinlock_owner_assert": 2,
+    "first_boot_interrupt_wdt": 1,
+    "read_start_observed": 0,
+    "session_id_sha256": [
+      "1370303a68bbb0fe74e33dd029d008b34662511be55a385bd7979c49d832f895",
+      "18797013f07b927734ba27cc748feaf758a49fc9f1a12ed7613611c099153d51",
+      "9e1f91a92c75424650203a47878de39b33a15125dcaa5471bb5b9a066d1671e8"
+    ]
+  },
+  "backtrace": [
+    {
+      "pc": "0x400851c1",
+      "symbol": "panic_abort"
+    },
+    {
+      "pc": "0x40085189",
+      "symbol": "esp_system_abort"
+    },
+    {
+      "pc": "0x4008b20d",
+      "symbol": "__assert_func"
+    },
+    {
+      "pc": "0x40085e87",
+      "symbol": "spinlock_release <- vPortExitCritical"
+    },
+    {
+      "pc": "0x40085a7e",
+      "symbol": "xQueueSemaphoreTake"
+    },
+    {
+      "pc": "0x400d6696",
+      "symbol": "app_main"
+    },
+    {
+      "pc": "0x400deeb5",
+      "symbol": "main_task"
+    },
+    {
+      "pc": "0x40085b91",
+      "symbol": "vPortTaskWrapper"
+    }
+  ],
+  "verification": {
+    "platform_tests": "500/500 PASS",
+    "docs_contract_tests": "40/40 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "ci": {
+      "run": 40212483911,
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40212483911",
+      "status": "PASS",
+      "jobs": {
+        "platform-contracts": "PASS",
+        "network-namespace-policy": "PASS"
+      }
+    }
+  },
+  "not_claimed": [
+    "S32C1I root cause",
+    "specific spinlock address or owner",
+    "legacy UIFlow non-empty frame",
+    "legacy interrupt-WDT closure",
+    "physical cache or PSRAM timing",
+    "RF, electrical or hardware validation"
+  ]
+}
