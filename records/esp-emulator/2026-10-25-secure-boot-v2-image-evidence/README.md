@@ -81,4 +81,7 @@ trust_root             = not-verified
   `16/16` checks。ECDSA 数学验证、eFuse trust root 和 ROM 执行仍未覆盖。
 - [ECDSA P-256/P-384 mathematical verification](followups/2026-10-25-ecdsa-p256-p384-math-verification/)：
   使用 block 内 public point/r/s 验证 ECDSA P-256/SHA-256 与
-  P-384/SHA-384；`16/16` checks。P-192、eFuse trust root 和 ROM 执行仍未覆盖。
+  P-384/SHA-384；`16/16` checks。
+- [ECDSA P-192 mathematical verification](followups/2026-10-25-ecdsa-p192-math-verification/)：
+  补齐 P-192/SHA-256；最终 fixture `17/17` checks。eFuse trust root 和
+  ROM 执行仍未覆盖。
