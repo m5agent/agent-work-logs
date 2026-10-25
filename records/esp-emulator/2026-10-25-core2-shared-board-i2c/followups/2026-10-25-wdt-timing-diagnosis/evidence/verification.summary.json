@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "verification-summary",
+  "date": "2026-10-25",
+  "source_commit": "eff1561e9f0da700c843ed14d9019c81f1e27e55",
+  "base_commit": "105ad247315644acccef96352a93269c27c67450",
+  "firmware": {
+    "name": "UIFlow_Core2",
+    "version": "v1.15.4",
+    "firmware_id": "1897200000000002280",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "build": {
+      "micropython": "a3bd196ef-dirty",
+      "micropython_version": "1.12.0",
+      "esp_idf": "3.4.0",
+      "compiled": "2026-07-28T16:15:09"
+    }
+  },
+  "runtime": {
+    "machine": "m5core2",
+    "qemu_version": "9.2.2",
+    "qemu_sha256": "85fab9c048a31ba37bed930fe67a0e245e81f53ee6fbeb1749b4d4228116b505",
+    "validation": "virtual-device validation"
+  },
+  "default_single_session": {
+    "observation_seconds": 285,
+    "interrupt_wdt": false,
+    "hardware_tg_wdt": false,
+    "serial_bytes": 507,
+    "serial_sha256": "e996276519b4f8882739ff1c494dcecba313c99278857a53a984c1c9986a1b62"
+  },
+  "default_four_session_batches": {
+    "attempts": 8,
+    "interrupt_wdt_failures": 5,
+    "no_wdt": 3,
+    "batch_a": {
+      "interrupt_wdt": 3,
+      "no_wdt": 1
+    },
+    "batch_b": {
+      "interrupt_wdt": 2,
+      "no_wdt": 2
+    },
+    "failure_pcs": [
+      "0x40087980",
+      "0x400938af",
+      "0x4026306e",
+      "0x40084494",
+      "0x4009637f",
+      "0x4017477c",
+      "0x40087a85",
+      "0x400e4575",
+      "0x4000bff0"
+    ],
+    "representative_failure_serial_sha256": "58520c05e0bcdff05ed8f6119f28c6aef49845f7a4c383d710008c044c691858",
+    "representative_stable_serial_sha256": "e996276519b4f8882739ff1c494dcecba313c99278857a53a984c1c9986a1b62"
+  },
+  "accelerator_controls": {
+    "tcg,thread=single,tb-size=128": {
+      "attempts": 4,
+      "hardware_tg_wdt": 4,
+      "interrupt_wdt": 0
+    },
+    "tcg,thread=multi,tb-size=128": {
+      "attempts": 4,
+      "hardware_tg_wdt": 0,
+      "interrupt_wdt": 2
+    },
+    "icount shift=5,align=off,sleep=off": {
+      "attempts": 4,
+      "hardware_tg_wdt": 4,
+      "interrupt_wdt": 2
+    },
+    "icount shift=0,align=off,sleep=off": {
+      "attempts": 4,
+      "hardware_tg_wdt": 4,
+      "interrupt_wdt": 0
+    }
+  },
+  "icount_shift0_trace": {
+    "last_tg1_feed_virtual_ns": 13782001927,
+    "tg1_interrupt_stage_virtual_ns": 14582001927,
+    "tg1_system_reset_virtual_ns": 16182001927,
+    "feed_to_interrupt_ns": 800000000,
+    "interrupt_to_reset_ns": 1600000000,
+    "result": "TG1WDT_SYS_RESET"
+  },
+  "gates": {
+    "platform_tests": "499/499 PASS",
+    "docs_contracts": "39/39 PASS",
+    "core2_uiflow2_device_group": "6/6 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_E9_F": "PASS"
+  },
+  "ci": {
+    "run_id": "40207023102",
+    "head_sha": "eff1561e9f0da700c843ed14d9019c81f1e27e55",
+    "conclusion": "success",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "a working accelerator configuration",
+    "the exact stalled guest source function",
+    "complete legacy UIFlow compatibility",
+    "nonempty application startup",
+    "physical watchdog, timing or hardware validation",
+    "inheritance to another firmware SHA"
+  ],
+  "redaction": {
+    "raw_firmware_included": false,
+    "raw_logs_included": false,
+    "reason": "This public summary keeps reproducible counts, hashes and timing without firmware binaries or host-specific data."
+  }
+}

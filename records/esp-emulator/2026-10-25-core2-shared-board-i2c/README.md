@@ -25,6 +25,11 @@ address `0x51` 无 ACK，随后返回 `OSError: I2C bus error (19)`。
 进入独立的 interrupt-WDT reset/panic，frame 仍为 black，因此完整 legacy
 firmware、`RUNTIME-03` 和物理硬件都不能标记为 PASS。
 
+后续 WDT timing diagnosis 进一步确认：默认单会话可持续 feed 超过 285 秒，
+而多个并发 lease 和显式 accelerator 对照会在不同 CPU/PC 触发 WDT。详细
+follow-up 见
+[`followups/2026-10-25-wdt-timing-diagnosis/`](followups/2026-10-25-wdt-timing-diagnosis/)。
+
 ## 关键证据
 
 - 公开 `UIFlow_Core2 v1.15.4`，firmware ID `1897200000000002280`，source
@@ -46,10 +51,13 @@ firmware、`RUNTIME-03` 和物理硬件都不能标记为 PASS。
 - `report.md`：根因、修复、执行证据、验证层级和边界；
 - `run.json`：机器可读记录；
 - `evidence/verification.summary.json`：修复前后 trace、回归、CI 与剩余失败摘要。
+- `followups/2026-10-25-wdt-timing-diagnosis/`：TIMG watchdog trace、
+  单实例/并发/accelerator 对照和后续 `RUNTIME-03` 边界。
 
 ## 未覆盖项
 
 - legacy UIFlow 的非空应用帧与稳定运行；
+- WDT 前最后一次 feed 对应的具体 guest 代码点，以及稳定 accelerator 配置；
 - `Core2FactoryTest` 修复后的重跑；
 - 物理 I2C timing、电气特性和真机；
 - bit-exact ESP32 radio/controller、物理 PSRAM/cache timing；

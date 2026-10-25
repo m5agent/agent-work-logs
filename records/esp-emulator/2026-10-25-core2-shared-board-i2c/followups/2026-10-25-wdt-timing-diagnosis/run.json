@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Trace Core2 legacy UIFlow watchdog timing and accelerator sensitivity",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "105ad247315644acccef96352a93269c27c67450",
+    "result_commit": "eff1561e9f0da700c843ed14d9019c81f1e27e55"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "virtual_device": "PARTIAL",
+    "physical_watchdog_or_timing_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2",
+    "version": "v1.15.4",
+    "firmware_id": "1897200000000002280",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "embedded_micropython": "a3bd196ef-dirty",
+    "micropython_version": "1.12.0",
+    "esp_idf": "3.4.0",
+    "binary_included": false
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, QEMU 9.2.2 virtual-device",
+    "qemu_sha256": "85fab9c048a31ba37bed930fe67a0e245e81f53ee6fbeb1749b4d4228116b505",
+    "platform_tests": "499/499 PASS",
+    "docs_contracts": "39/39 PASS",
+    "core2_uiflow2_device_group": "6/6 PASS",
+    "ci_run": "40207023102",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40207023102",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "timer_group_trace",
+      "status": "PASS",
+      "detail": "Default-off M5SW_TIMG_TRACE records reset, config, feed, arm and timeout stages without changing watchdog behavior"
+    },
+    {
+      "name": "default_single_session",
+      "status": "PASS",
+      "detail": "285 seconds with continuous TG0/TG1 feed and no interrupt-WDT or system reset"
+    },
+    {
+      "name": "default_four_session_stability",
+      "status": "FAIL",
+      "detail": "5/8 leases produced interrupt-WDT across two batches at varying CPUs and PCs"
+    },
+    {
+      "name": "accelerator_override_fix",
+      "status": "FAIL",
+      "detail": "thread=single, thread=multi, icount shift=5 and icount shift=0 did not remove failures"
+    },
+    {
+      "name": "watchdog_timer_state",
+      "status": "PASS",
+      "detail": "icount shift=0 trace follows the configured 0.8s interrupt and 1.6s reset stages after the last feed"
+    },
+    {
+      "name": "exact_stalled_guest_code_point",
+      "status": "NOT RUN",
+      "detail": "The last feed time is known, but the matching guest source/function remains unidentified"
+    },
+    {
+      "name": "nonempty_application_frame",
+      "status": "FAIL"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/eff1561e9f0da700c843ed14d9019c81f1e27e55",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/eff1561e9f0da700c843ed14d9019c81f1e27e55/tests/firmware/evidence-2026-10-25-core2-wdt-timing.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/eff1561e9f0da700c843ed14d9019c81f1e27e55/patches/qemu-m5stack-peripherals/0032-esp32-timg-wdt-trace.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40207023102"
+  ],
+  "notes": [
+    "The failure is timing/concurrency-sensitive rather than a fixed missing I2C/PMIC device.",
+    "No accelerator override from the diagnostic matrix is enabled in production.",
+    "RUNTIME-03 remains open and no hardware or RF claim is made."
+  ]
+}
