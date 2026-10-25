@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Execute a real worker-local StickS3 QEMU job across two Docker containers",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "c2083ecddb553eaddbf69fabeb6abbb1218b22dc",
+    "result_commit": "c4408b4937881a97b802b383ad9c5a9bf70b3685"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_cross_host": "NOT RUN"
+  },
+  "firmware": {
+    "device": "sticks3",
+    "source_sha256": "53170651ccabc8fb16b5cf993d348693c12bcc643a6f0c60bf7a479d8a456c73",
+    "normalized_sha256": "53170651ccabc8fb16b5cf993d348693c12bcc643a6f0c60bf7a479d8a456c73"
+  },
+  "execution": {
+    "environment": "macOS arm64 host; Docker linux/arm64 29.8; pinned Ubuntu 25.04 image",
+    "runtime": "two independent Docker containers on one user-defined bridge",
+    "lease_count": 3,
+    "durations_seconds": [
+      11.708,
+      11.68,
+      11.589
+    ],
+    "fixture_checks": "21/21 PASS",
+    "platform_tests": "428/428 PASS",
+    "docs_tests": "25/25 PASS",
+    "node_tests": "2/2 PASS",
+    "ci_run": "40154787407",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40154787407",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "central_api_reachable_across_bridge",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_registration",
+      "status": "PASS"
+    },
+    {
+      "name": "durable_job_terminal_completed",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_execution_plane",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_local_qemu_session",
+      "status": "PASS"
+    },
+    {
+      "name": "firmware_source_hash",
+      "status": "PASS"
+    },
+    {
+      "name": "firmware_normalized_hash",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_hash",
+      "status": "PASS"
+    },
+    {
+      "name": "manifest_serial_qom_evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "token_redaction",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_reap",
+      "status": "PASS"
+    },
+    {
+      "name": "container_and_bridge_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "three_run_reproduction",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_cross_host",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "cross_host_reattach",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/c4408b4937881a97b802b383ad9c5a9bf70b3685",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c4408b4937881a97b802b383ad9c5a9bf70b3685/tests/network/worker_cross_container/evidence-2026-10-25-cross-container-qemu-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40154787407"
+  ],
+  "notes": [
+    "The central and worker containers use distinct container IDs and a user-defined bridge.",
+    "The worker-owned runtime starts the real QEMU session and retains evidence.",
+    "Two early failures are preserved as proxy-routing and host-path harness diagnostics.",
+    "This is not physical cross-host execution or hardware validation."
+  ]
+}

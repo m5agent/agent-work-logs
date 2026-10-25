@@ -35,6 +35,10 @@ Backlog、代码地图和设备元数据改为只引用同一份证据，见
 - virtual S3 WPA2-PSK 的证明范围已明确为 RSN/EAPOL/pairwise CCMP 和 guest
   DHCP/DNS/TCP，不再与 WPA3-SAE、group multicast 或物理 RF 混算。
 
+2026-10-25 后续新增面向接手人的工程交接页，统一代码阅读顺序、成熟度、
+当前工作流和 P0 下一步，并修正 UIFlow2 全矩阵页的相对时间措辞，见
+[Follow-up: engineering handoff and documentation freshness](followups/2026-10-25-engineering-handoff-and-freshness/)。
+
 ## 当前结论
 
 - 当前实现：共登记 14 台设备；13 台达到登记外设的 `simulated`，Tab5

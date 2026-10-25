@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-verification-summary",
+  "generated_at": "2026-10-25T02:32:00Z",
+  "source_commit": "c4408b4937881a97b802b383ad9c5a9bf70b3685",
+  "base_commit": "c2083ecddb553eaddbf69fabeb6abbb1218b22dc",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "scope": "two-independent-containers-one-docker-daemon-not-physical-hosts",
+  "environment": {
+    "docker_os": "linux",
+    "docker_arch": "aarch64",
+    "docker_version": "29.8.0",
+    "image_base": "ubuntu:25.04@sha256:27771fb7b40a58237c98e8d3e6b9ecdd9289cec69a857fccfb85ff36294dac20",
+    "lease_count": 3
+  },
+  "artifacts": {
+    "firmware_source_sha256": "53170651ccabc8fb16b5cf993d348693c12bcc643a6f0c60bf7a479d8a456c73",
+    "firmware_normalized_sha256": "53170651ccabc8fb16b5cf993d348693c12bcc643a6f0c60bf7a479d8a456c73",
+    "qemu_sha256": "f024f034d20bd5b8e2c224ce69deed70984b0514f8a310d221b388b74c179ecb",
+    "runner_sha256": "2c3842051d62ac946c1e4f0d05ab3ed9025b93eafcc0de1263d30fecfe56832e",
+    "worker_fixture_sha256": "119d6407469ce602cc9016debef08a7bb18790db4823ae3c9bc0cd9be219697b",
+    "device_service_sha256": "38f84f5c156231f2435fc9b0a892cd06e5b6f8bf2717e626a576de959470d728",
+    "worker_agent_sha256": "dad3d8f0ab07db5f8c538c88954654db5010d49053e78f5b6a3d6b2e42ba86ac",
+    "dockerfile_sha256": "65c6055a2cce78bba2ddbf92a30e35c1a20dc57880d2748d4ad5b98c94827806"
+  },
+  "runs": [
+    {
+      "duration_seconds": 11.708,
+      "image_id_sha256": "687d88ea96af05ff6c51102cc7e23d994f7487738a15bdbb0582bf3e9875333e",
+      "worker_result_sha256": "76db59eb86fad302cecca0f0b28398be5c3a9b911b46750744f6ab285e15aaf6"
+    },
+    {
+      "duration_seconds": 11.68,
+      "image_id_sha256": "687d88ea96af05ff6c51102cc7e23d994f7487738a15bdbb0582bf3e9875333e",
+      "worker_result_sha256": "ae86577f2555a1c22cc539984509c497e1a013f1f0d6031c89c34f294d2f780d"
+    },
+    {
+      "duration_seconds": 11.589,
+      "image_id_sha256": "687d88ea96af05ff6c51102cc7e23d994f7487738a15bdbb0582bf3e9875333e",
+      "worker_result_sha256": "f4727cd0be8cc110e74736204f7131b62ebc6574fa953808317438a6c504dcbc"
+    }
+  ],
+  "checks": {
+    "central_api_reachable_across_bridge": "PASS",
+    "worker_registration": "PASS",
+    "durable_job_terminal_completed": "PASS",
+    "worker_local_execution_plane": "PASS",
+    "worker_local_qemu_session": "PASS",
+    "firmware_source_hash": "PASS",
+    "firmware_normalized_hash": "PASS",
+    "qemu_hash": "PASS",
+    "manifest_serial_qom_evidence": "PASS",
+    "token_redaction": "PASS",
+    "qemu_reap": "PASS",
+    "container_and_bridge_cleanup": "PASS",
+    "three_run_reproduction": "PASS"
+  },
+  "diagnostic_failures": [
+    {
+      "stage": "central_service_unreachable_from_worker_container",
+      "classification": "container proxy environment"
+    },
+    {
+      "stage": "host_absolute_qemu_path_used_inside_container",
+      "classification": "container runtime-asset path binding"
+    }
+  ],
+  "contracts": {
+    "platform_tests": "428/428 PASS",
+    "docs_tests": "25/25 PASS",
+    "node_tests": "2/2 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "openapi_yaml": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "run_id": "40154787407",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "physically separate hosts",
+    "cross-host process migration or re-attach",
+    "NAT or cross-subnet discovery",
+    "companion HTTP/BLE continuity",
+    "production multi-host scheduling",
+    "physical RF or hardware validation"
+  ]
+}

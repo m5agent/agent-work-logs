@@ -59,6 +59,8 @@ continuity 和生产多机调度仍为 `NOT RUN`。
 - `report.md`：背景、修复、执行、证据和边界；
 - `run.json`：机器可读记录；
 - `evidence/verification-summary.json`：脱敏验证摘要；
+- [`followups/2026-10-25-cross-container-qemu/`](followups/2026-10-25-cross-container-qemu/)：
+  两个独立 Docker 容器中的 worker-local QEMU、三哈希 evidence 和 cleanup；
 - `patches/`、`code/`：不适用；实现位于公开源码仓库。
 
 ## 未覆盖项
