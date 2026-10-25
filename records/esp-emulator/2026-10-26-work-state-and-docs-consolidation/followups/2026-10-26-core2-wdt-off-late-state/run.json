@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Capture Core2 WDT-off late state and reconcile project documentation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b07464052a915780e014a12fe6b3ad0f016d8162",
+    "result_commit": "8d7122b79bd6afe43f035e59697f91f8a3e3abc3"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_cache_psram_timing": "NOT RUN",
+    "rf_electrical_power_or_optical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "public_firmware": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "bytes": 16777216,
+    "normal_wdt_application": "FAIL_BANNER_ONLY_TG0_STAGE1_RESET_BLACK_FRAME",
+    "wdt_off_diagnostic": "FLASH_WORK_COMPLETED_LATE_LOOP"
+  },
+  "execution": {
+    "validation_layer": "virtual-device validation",
+    "environment": "macOS arm64, Python 3.13, Node v22.14.0, QEMU virtual Core2",
+    "qemu_binary_sha256": "b7ed19e7502e2a04ef48287c3622061ee640077bacc469e571ece5b6f802c1ea",
+    "source_evidence_sha256": "0d65913aeeb22bda878d22f4d8fc37f737744670987593393966156e14f648bc",
+    "patch_sha256": "bd5f36641c5f93eab882d7ab90c6f843b98efddceba754176d92044d95f06824",
+    "pause_runner_sha256": "ac432311e40ef49cfcc68d438fc08ba4e3d9a763ccbc9dd1fe128fec91279ea1",
+    "late_state_contract_sha256": "ed7c5746288fe109b07bfacf9a1fab6426ab4ca05568bb491e20b4d7d8f88269",
+    "platform_tests": "522/522 PASS",
+    "focused_docs_core2_tests": "36/36 PASS",
+    "node_ui_smoke": "1/1 PASS",
+    "node_sha_upload_units": "2/2 PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "patch_reverse_apply": "PASS",
+    "git_diff_check": "PASS",
+    "new_qemu_45_120_rerun": "NOT RUN",
+    "full_uiflow2_matrix": "NOT RUN",
+    "ci_run": "40244649705",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40244649705",
+    "ci_result": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "artifact_binding",
+      "status": "PASS",
+      "detail": "Current QEMU binary SHA matches the committed late-state evidence."
+    },
+    {
+      "name": "late_state_repeatability",
+      "status": "PASS",
+      "detail": "45-second and 120-second WDT-off snapshots have the same CPU state and frozen Flash/SSI counters."
+    },
+    {
+      "name": "flash_scan_terminal_state",
+      "status": "PASS",
+      "detail": "Flash/SSI activity ends around 44 seconds; cross-core writes continue, then CPU1 remains in the same late loop."
+    },
+    {
+      "name": "normal_wdt_product_path",
+      "status": "FAIL",
+      "detail": "The same firmware still resets at TG0 stage-1 without REPL or a non-empty application frame."
+    },
+    {
+      "name": "stale_claim_guard",
+      "status": "PASS",
+      "detail": "Retired startup-time and aggregate-Flash-throughput claims are rejected by current-document contracts."
+    },
+    {
+      "name": "backlog_ownership",
+      "status": "PASS",
+      "detail": "Backlog keeps one replayable baseline, current blockers and next steps; diagnostic IDs and run history remain in status/evidence documents."
+    },
+    {
+      "name": "new_qemu_45_120_rerun",
+      "status": "NOT RUN",
+      "detail": "This consolidation did not launch another long WDT-off control."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8d7122b79bd6afe43f035e59697f91f8a3e3abc3/tests/firmware/core2_handoff_trace/evidence-2026-10-26-core2-wdt-off-late-state.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/8d7122b79bd6afe43f035e59697f91f8a3e3abc3/patches/qemu-m5stack-peripherals/0041-esp32-handoff-register-stack-dump.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40244649705"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "WDT disabled is a diagnostic control, not a product fix.",
+    "The late CPU1 flag/object has no matching ELF symbol.",
+    "The late-state evidence is committed, but no new 45/120-second QEMU run was launched during consolidation.",
+    "All functional results are virtual-device validation."
+  ]
+}

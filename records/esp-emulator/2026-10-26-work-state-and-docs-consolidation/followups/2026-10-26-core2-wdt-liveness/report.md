@@ -52,7 +52,9 @@ Serial 均只有 MicroPython banner、无 REPL。frame 均为 302-byte PNG，SHA
 无 PC trace 对照中标记 `NOT_REPRODUCED`。
 
 下一门禁：按启动 phase 拆分 TG0 stage-1 前的 guest/controller 工作，解释
-应用初始化为什么没有在约 15 秒 deadline 前完成。
+该检查点当时看到的启动进度问题。后续 45/120 秒 WDT-off late-state 将边界
+推进到约 44 秒后的 CPU1 `0x40100049` flag/object wait；该 follow-up 取代
+本条中的下一门禁描述，但不修改三次 liveness 的原始结果。
 
 ## 验证
 

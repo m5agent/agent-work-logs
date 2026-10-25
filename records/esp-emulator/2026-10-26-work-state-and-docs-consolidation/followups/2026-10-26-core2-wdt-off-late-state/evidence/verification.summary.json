@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "Core2 WDT-off late-state capture and current documentation reconciliation",
+  "result_commit": "8d7122b79bd6afe43f035e59697f91f8a3e3abc3",
+  "base_commit": "b07464052a915780e014a12fe6b3ad0f016d8162",
+  "artifacts": {
+    "normalized_firmware_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "qemu_binary_sha256": "b7ed19e7502e2a04ef48287c3622061ee640077bacc469e571ece5b6f802c1ea",
+    "source_evidence_sha256": "0d65913aeeb22bda878d22f4d8fc37f737744670987593393966156e14f648bc",
+    "patch_sha256": "bd5f36641c5f93eab882d7ab90c6f843b98efddceba754176d92044d95f06824"
+  },
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "passed": 522,
+      "failed": 0
+    },
+    "focused_docs_core2_tests": {
+      "status": "PASS",
+      "passed": 36,
+      "failed": 0
+    },
+    "node_ui_smoke": {
+      "status": "PASS",
+      "passed": 1,
+      "failed": 0
+    },
+    "node_sha_upload_units": {
+      "status": "PASS",
+      "passed": 2,
+      "failed": 0
+    },
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "patch_reverse_apply": "PASS",
+    "git_diff_check": "PASS",
+    "new_qemu_45_120_rerun": "NOT RUN",
+    "full_uiflow2_matrix": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "late_state": {
+    "snapshot_seconds": [
+      45,
+      120
+    ],
+    "cpu0": "HALTED_WAITI_0x4026306e",
+    "cpu1": "SPIN_WAIT_FLAG_0x40100049",
+    "flash_activity_end_seconds_approx": 44,
+    "cache_sync_calls": 49848,
+    "changed_pages": 45847,
+    "ssi_transactions": 22554,
+    "crosscore_writes_45s": 123476,
+    "crosscore_writes_120s": 139094,
+    "normal_wdt_application": "FAIL",
+    "runtime_03": "OPEN"
+  },
+  "ci": {
+    "run": 40244649705,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40244649705",
+    "status": "PASS",
+    "conclusion": "success",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  }
+}

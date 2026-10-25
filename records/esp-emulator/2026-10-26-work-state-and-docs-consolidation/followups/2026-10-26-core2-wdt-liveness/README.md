@@ -31,6 +31,12 @@ legacy 应用初始化为什么没有在 TG0 stage-1 deadline 前完成。
 同一固件仍只有 MicroPython banner、无 REPL、302-byte black frame，所以
 `RUNTIME-03` 继续为 `OPEN`。
 
+后续 45/120 秒 WDT-off late-state 对照进一步把边界收敛到约 44 秒后的
+CPU1 `0x40100049` flag/object wait，并替代本条中的“应用初始化为何未在
+stage-1 deadline 前完成”作为当前下一步。见
+[后续记录](../2026-10-26-core2-wdt-off-late-state/)；本条三次 liveness
+evidence 保持不改写。
+
 ## 关键证据
 
 - runner SHA256：
