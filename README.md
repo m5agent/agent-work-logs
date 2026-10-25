@@ -46,6 +46,9 @@
 
 ## 对外记录索引
 
+| 日期 | 对象 | 主题 | 结果 | 链接 |
+| --- | --- | --- | --- | --- |
+| 2026-10-26 | ESP Emulator | 当前工作、易漂移证据和生成 profile 口径再收敛 | PASS（docs/contracts：平台 `500/500`、docs `40/40`、QEMU profile `19/19`、compileall/Ruff/coverage/catalog/profile/snapshot/diff 与 CI PASS；firmware/QEMU rerun 和真机 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-evidence-ownership-reconciliation/) |
 | 2026-10-26 | ESP Emulator | Core2 flash-IPC 栈溢出纠偏与后段 interrupt-WDT 复现 | PARTIAL（virtual-device：修正 probe `20/20` 到达 `READ_START`、`14 PASS / 6 interrupt-WDT / 0 spinlock assert`；旧 spinlock 结论由 4 KiB task-stack 溢出撤销；平台 500/500、docs 40/40、CI 与 patch reverse-check PASS；timer 根因、legacy 黑帧与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-flash-ipc-boundary/followups/2026-10-26-fixed-flash-ipc-wdt/) |
 | 2026-10-26 | ESP Emulator | Core2 flash 前 spinlock 诊断（已被后续更正） | SUPERSEDED（早期 probe 将 4 KiB 局部 array 放在 4 KiB CPU1 task stack；owner mismatch 来自栈溢出，不是模型证据。保留作纠偏历史） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-flash-ipc-boundary/) |
 | 2026-10-26 | ESP Emulator | 当前工作、调查假设、Backlog 与文档职责总整理 | PASS（docs/contracts：平台 `499/499`、文档契约 `39/39`、Node、snapshot/coverage/catalog/profile、compileall、Ruff 与 CI PASS；firmware/QEMU functional rerun 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-26-work-state-and-docs-consolidation/) |

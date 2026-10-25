@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Reconcile current work, generated descriptions and volatile evidence ownership",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7bf311e67385552a6be5c2f610811421458e1e73",
+    "result_commit": "1b923f83d6906545879e16262aaa3b3e10cc7c74"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "runtime_validation": "NOT RUN",
+    "reason": "Documentation, generated-profile text and contract tests only."
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13.15",
+    "platform_tests": "500/500 PASS",
+    "docs_contract_tests": "40/40 PASS",
+    "qemu_profile_tests": "19/19 PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40214948602",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40214948602",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "volatile_probe_counts_removed_from_upper_entries",
+      "status": "PASS",
+      "detail": "README, project status, backlog, handoff, workstreams, QEMU matrix and code map now link to dated evidence instead of copying the probe ratio."
+    },
+    {
+      "name": "profile_blocker_is_capacity_boundary",
+      "status": "PASS",
+      "detail": "Generated device snapshots no longer embed the complete Core2 concurrency run ledger in blockers."
+    },
+    {
+      "name": "code_map_is_an_entry_index",
+      "status": "PASS",
+      "detail": "The verification table distinguishes code/evidence routing from current validation state."
+    },
+    {
+      "name": "documentation_regression_guard",
+      "status": "PASS",
+      "detail": "Core2 docs contract rejects reintroduction of the probe ratio into volatile upper-entry pages."
+    },
+    {
+      "name": "firmware_qemu_runtime",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/1b923f83d6906545879e16262aaa3b3e10cc7c74",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40214948602"
+  ],
+  "notes": [
+    "This is documentation and contract validation, not firmware or hardware validation.",
+    "RUNTIME-03 remains OPEN.",
+    "No runtime source, QEMU patch or firmware artifact changed.",
+    "The corrected Core2 probe remains evidence that partition reads execute and a post-flash interrupt-WDT remains reproducible."
+  ]
+}
