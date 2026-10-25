@@ -39,6 +39,11 @@ Backlog、代码地图和设备元数据改为只引用同一份证据，见
 当前工作流和 P0 下一步，并修正 UIFlow2 全矩阵页的相对时间措辞，见
 [Follow-up: engineering handoff and documentation freshness](followups/2026-10-25-engineering-handoff-and-freshness/)。
 
+网络 partition QEMU 里程碑之后，代码、当前状态、Backlog、网络专题和自动
+新鲜度审计再次统一，并把 QEMU process fence 与 guest/companion 内部
+side effect 分开，见
+[Follow-up: current-code and documentation freshness audit](followups/2026-10-25-work-doc-freshness-audit/)。
+
 ## 当前结论
 
 - 当前实现：共登记 14 台设备；13 台达到登记外设的 `simulated`，Tab5

@@ -34,7 +34,7 @@ session。
 
 ```text
 server namespace              worker namespace
-10.214.0.1/24        <->      10.214.0.2/24
+<control-fixture-subnet> <-> <worker-fixture-subnet>
 central Device Service        WorkerAgent
 durable job queue             authenticated runtime fixture
                               child process side effect
@@ -42,6 +42,19 @@ durable job queue             authenticated runtime fixture
 
 分区规则只丢弃 worker→central 的 control TCP。Worker-local loopback
 runtime 仍可达，因此 worker 有能力执行 DELETE/cleanup。
+
+真实 QEMU mode 使用相同 namespace 和 control-plane 规则，但 worker
+namespace 内运行独立 Device Service：
+
+```text
+central Device Service        worker-local Device Service
+durable queue/directory   <-> authenticated runtime API
+                              full StickS3 flash upload
+                              qemu-system-xtensa + session evidence
+```
+
+该 mode 的 side effect 是 worker-owned QEMU process，不是 child-process
+fixture。
 
 ## 执行
 
@@ -60,6 +73,15 @@ runtime 仍可达，因此 worker 有能力执行 DELETE/cleanup。
 11. attempt 2 claim，runtime 完成 evidence ZIP，terminal result PASS；
 12. 第二个 runtime session/process 也被正常停止和回收。
 
+QEMU mode 重复同样的 attempt 1 fence/requeue/attempt 2 流程，并额外要求：
+
+1. worker 上传完整源固件并生成 normalized artifact；
+2. attempt 1 启动真实 `qemu-system-xtensa`；
+3. partition 后 device session stop，QEMU PID 消失；
+4. attempt 2 启动新的 QEMU，不再复活 attempt 1；
+5. attempt 2 取得 serial/frame/QOM evidence，terminal result PASS；
+6. 两代 QEMU 和 namespace 都回收，stale result 不上报。
+
 ## 验证
 
 三个独立运行：
@@ -76,6 +98,17 @@ attempt 2 result                 PASS
 attempt 2 process reaped         true
 namespaces/service cleanup       PASS
 tool hashes unchanged            true
+```
+
+真实 QEMU lane 同样为 `3/3 PASS`、每轮 `18/18` checks：
+
+```text
+attempt 1 QEMU started                    PASS
+attempt 1 lease fenced                    PASS
+attempt 1 QEMU PID reaped                 PASS
+attempt 2 fresh QEMU started              PASS
+attempt 2 evidence + terminal result      PASS
+input firmware/runtime hashes unchanged   true
 ```
 
 平台验证：
@@ -96,13 +129,17 @@ GitHub Actions           PASS
 ```
 
 CI：
-<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40160702972>
+<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416>
 
 ## 验证边界
 
 - runtime fixture 是 authenticated HTTP session + OS child process，不是 QEMU；
-- 证明 worker-owned process side effect，不证明 QEMU/device/controller
-  side effect 或 worker 未拥有的外部网络 side effect；
+- process lane 证明 worker-owned child process；QEMU lane进一步证明
+  worker-local QEMU **process** 被 stop/reap；
+- 不证明 QEMU 内 guest/device/controller-internal side effect；
+- QEMU lane 使用普通 `runtime=qemu`，不覆盖 `qemu-unified` HTTP
+  companion、BLE peer、pcap writer 或磁盘 side effect 的随停；
+- 不证明 worker 未拥有的外部网络 side effect；
 - 两个 namespace 位于同一 Docker daemon，不是物理跨主机；
 - 不证明跨主机进程迁移、reattach、生产 scheduler 或 hardware；
 - control-plane authenticity、TLS/mTLS 和 worker HMAC 仍由既有路径负责。
@@ -114,5 +151,6 @@ CI：
 - lease 至少 5 秒，避免测试或运维误配为不可恢复的零窗口。
 - 本地 fence 会在无法确认 ownership 时保守停止 runtime；central 仍可能暂时
   将此 job 视为 leased，直到 lease expiry。
-- 回滚为 revert `fa902c2`，恢复旧请求 timeout 行为并移除 partition fixture；
-  不影响已有 `409` fencing。
+- 回滚 process/QEMU lane 为 revert `2dd44b2`；回滚请求 timeout 修复为
+  revert `fa902c2`。`fa902c2` 的核心 bounded-budget 行为不应单独撤销，
+  否则 blackhole 会重新被默认 60 秒 socket timeout 拖住。

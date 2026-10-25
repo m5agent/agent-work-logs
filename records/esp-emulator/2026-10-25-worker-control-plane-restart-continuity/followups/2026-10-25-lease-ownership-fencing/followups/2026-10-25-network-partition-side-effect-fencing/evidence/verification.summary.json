@@ -4,13 +4,13 @@
   "scope": "virtual-control-plane-not-hardware",
   "source": {
     "base_commit": "667c3564208fcb69df7afea68091d6d3e34d3eb4",
-    "result_commit": "fa902c2c3f67b560d4d7d64b8b1df302b4fa1067",
-    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40160702972",
+    "result_commit": "2dd44b2b78fb3463ff2be9cb36321b19e93f49d3",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416",
     "ci_status": "PASS"
   },
   "partition": {
-    "control_subnet": "10.214.0.1/24 synthetic fixture",
-    "worker_subnet": "10.214.0.2/24 synthetic fixture",
+    "control_subnet": "synthetic fixture subnet (redacted)",
+    "worker_subnet": "synthetic fixture subnet (redacted)",
     "drop_scope": "worker-to-central TCP only",
     "job_lease_seconds": 5,
     "evidence_delay_seconds": 8,
@@ -29,6 +29,19 @@
     "retry_process_reaped": true,
     "tool_hashes_stable": true,
     "namespaces_cleaned": true
+  },
+  "qemu_lane": {
+    "attempts": 3,
+    "passed": 3,
+    "checks_per_attempt": 18,
+    "attempt_1_qemu_started": true,
+    "attempt_1_lease_fenced": true,
+    "attempt_1_qemu_pid_reaped": true,
+    "attempt_2_started_fresh_qemu": true,
+    "attempt_2_completed_pass": true,
+    "retry_qemu_reaped": true,
+    "input_firmware_and_qemu_hashes_stable": true,
+    "runtime": "qemu"
   },
   "verification": {
     "platform_tests": {
@@ -56,7 +69,9 @@
     "ci_network_namespace_partition_step": "PASS"
   },
   "validation_boundaries": {
-    "qemu_device_side_effect": "NOT RUN",
+    "qemu_process_side_effect": "PASS",
+    "qemu_guest_and_device_internal_side_effect": "NOT RUN",
+    "qemu_unified_companion_cleanup": "NOT RUN",
     "external_effects_not_owned_by_worker": "NOT RUN",
     "physical_cross_host": "NOT RUN",
     "production_scheduler": "NOT RUN",

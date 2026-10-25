@@ -60,5 +60,6 @@ side effect、物理跨主机迁移或真机。
 
 - [Network-partition side-effect fencing](followups/2026-10-25-network-partition-side-effect-fencing/)：
   worker→central blackhole 后 bounded heartbeat、runtime DELETE、OS process
-  reap、stale result suppression、lease expiry/requeue 和 retry PASS，
-  独立运行 `3/3 × 18 checks`。
+  ／真实 QEMU process reap、stale result suppression、lease expiry/requeue
+  和 fresh retry PASS；process 与 worker-local QEMU lane 各
+  `3/3 × 18 checks`。QEMU 内 guest/device 与 unified companion 仍未覆盖。

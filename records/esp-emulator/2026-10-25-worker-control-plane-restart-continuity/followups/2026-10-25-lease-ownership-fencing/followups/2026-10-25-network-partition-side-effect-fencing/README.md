@@ -5,8 +5,8 @@
 - 工作类型：`code_change`
 - 源码仓库：`m5agent/m5stack-esp-emulator`
 - 基线版本：`667c3564208fcb69df7afea68091d6d3e34d3eb4`
-- 结果版本：`fa902c2c3f67b560d4d7d64b8b1df302b4fa1067`
-- CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40160702972>
+- 结果版本：`2dd44b2b78fb3463ff2be9cb36321b19e93f49d3`
+- CI：<https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416>
 - 环境：Linux privileged Docker；两个独立 network namespace；GitHub Actions Ubuntu
 
 ## 结论
@@ -27,6 +27,13 @@ Worker 到 central control plane 的 traffic blackhole 现在不会再被单个�
 
 三个独立运行均通过，每轮 `18/18` checks，工具哈希无漂移。
 
+同一 runner 的真实 worker-local QEMU lane 也连续 `3/3 PASS`：worker
+namespace 内独立 Device Service 上传完整 StickS3 image、创建真实 QEMU
+session；断网后 attempt 1 被 fence，QEMU PID 被回收，attempt 2 启动新
+QEMU 并完成 job。该 lane 使用普通 `runtime=qemu`，QEMU 内
+guest/device-controller、`qemu-unified` companion/pcap/BLE 和 worker
+未拥有的外部 side effect 仍为 `NOT RUN`。
+
 ## 关键证据
 
 - 独立运行：`3/3 PASS`；
@@ -34,6 +41,8 @@ Worker 到 central control plane 的 traffic blackhole 现在不会再被单个�
 - attempt 数：每轮 `2`；
 - attempt 1：local FAIL / `lease_fenced=true` / runtime process reaped；
 - attempt 2：terminal `PASS`；
+- QEMU lane：`3/3 PASS`，每轮 attempt 1 QEMU PID reap、attempt 2 新
+  QEMU terminal `PASS`；
 - platform tests：`444/444 PASS`；
 - documentation contracts：`30/30 PASS`；
 - Node SHA256/upload：`2/2 PASS`；
@@ -43,20 +52,24 @@ Worker 到 central control plane 的 traffic blackhole 现在不会再被单个�
 
 源码 evidence：
 
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/tests/network/worker_partition_fencing/evidence-2026-10-25-partition-fencing-3x.json>
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/tests/network/worker_partition_fencing/run_test.py>
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/tests/network/worker_partition_fencing/runtime_fixture.py>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/evidence-2026-10-25-partition-fencing-3x.json>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/evidence-2026-10-25-partition-fencing-qemu-3x.json>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/run_test.py>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/runtime_fixture.py>
 
 ## 文件
 
 - `report.md`：根因、实现、topology、执行和回滚；
 - `run.json`：机器可读记录；
 - `evidence/verification.summary.json`：脱敏验证摘要；
-- `evidence/partition-fencing-3x.json`：三次独立运行汇总。
+- `evidence/partition-fencing-3x.json`：三次独立 process-lane 运行汇总；
+- `evidence/partition-fencing-qemu-3x.json`：三次独立真实 QEMU lane 汇总。
 
 ## 未覆盖项
 
-- QEMU/device-specific side-effect fencing；
+- QEMU 内 guest/device-controller side-effect fencing；
+- `qemu-unified` HTTP companion、BLE peer、pcap writer 和磁盘 side effect
+  随 partition fence 一起停止；
 - worker 未拥有的外部网络或宿主 side effect；
 - 物理跨主机 QEMU executor/reattach；
 - production scheduler、object storage 和 untrusted-firmware VM；

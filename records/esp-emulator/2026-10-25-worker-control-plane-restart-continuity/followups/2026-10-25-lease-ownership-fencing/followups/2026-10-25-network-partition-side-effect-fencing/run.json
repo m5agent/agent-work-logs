@@ -7,8 +7,8 @@
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "667c3564208fcb69df7afea68091d6d3e34d3eb4",
-    "result_commit": "fa902c2c3f67b560d4d7d64b8b1df302b4fa1067",
-    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40160702972",
+    "result_commit": "2dd44b2b78fb3463ff2be9cb36321b19e93f49d3",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40161944416",
     "ci_status": "PASS"
   },
   "hardware": {
@@ -18,14 +18,15 @@
   },
   "firmware": {
     "binary_committed": false,
-    "qemu_started": false,
-    "device_session_created": false
+    "qemu_started": true,
+    "device_session_created": true
   },
   "execution": {
     "environment": "Linux privileged Docker; two network namespaces; GitHub Actions Ubuntu",
     "job_lease_seconds": 5,
     "evidence_delay_seconds": 8,
     "attempts": 3,
+    "qemu_attempts": 3,
     "checks_per_attempt": 18,
     "platform_tests": "444/444 PASS",
     "docs_tests": "30/30 PASS",
@@ -34,8 +35,10 @@
   "artifacts": {
     "worker_agent_sha256": "bf250820f879ce232df2d8df95827908cd4a6ebe7335c257129d022e6bf102cb",
     "device_service_sha256": "6f9b526e936941ebeb2a05acb3442f619f296d4bba5479a9ef98be7839363662",
-    "partition_runner_sha256": "020a9215db5e97fe2156e7674f49416ade230dbbaf304cf3bc00ba5e6a0b4d10",
-    "runtime_fixture_sha256": "22d9aadac063caf22b5d40777860cb9345ba846eff00aa0a2a4cd1ba33df9592"
+    "partition_runner_sha256": "6672b3a1924d9133fcdcfefaadc19a66770587f75d1e184d38ce6868631ac3eb",
+    "runtime_fixture_sha256": "22d9aadac063caf22b5d40777860cb9345ba846eff00aa0a2a4cd1ba33df9592",
+    "qemu_sha256": "f024f034d20bd5b8e2c224ce69deed70984b0514f8a310d221b388b74c179ecb",
+    "firmware_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8"
   },
   "checks": [
     {
@@ -106,7 +109,19 @@
       "status": "PASS"
     },
     {
-      "name": "qemu_device_side_effect",
+      "name": "qemu_process_started_and_fenced",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_retry_started_fresh_process",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_guest_and_device_internal_side_effect",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "qemu_unified_companion_cleanup",
       "status": "NOT RUN"
     },
     {
@@ -117,12 +132,14 @@
   "evidence": [
     "evidence/verification.summary.json",
     "evidence/partition-fencing-3x.json",
-    "https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/tests/network/worker_partition_fencing/run_test.py",
-    "https://github.com/m5agent/m5stack-esp-emulator/blob/fa902c2c3f67b560d4d7d64b8b1df302b4fa1067/platform/tools/worker_agent.py"
+    "evidence/partition-fencing-qemu-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/tests/network/worker_partition_fencing/run_test.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/2dd44b2b78fb3463ff2be9cb36321b19e93f49d3/platform/tools/worker_agent.py"
   ],
   "notes": [
     "Control request timeout is capped by the remaining reconnect budget.",
     "The central lease is requeued after expiry and a second attempt completes the job.",
-    "The evidence covers a worker-owned OS process, not QEMU/device-side effects."
+    "The process lane covers a worker-owned OS process; the QEMU lane covers a worker-owned QEMU process and fresh retry.",
+    "QEMU guest/device/controller-internal and qemu-unified companion side effects remain NOT RUN."
   ]
 }
