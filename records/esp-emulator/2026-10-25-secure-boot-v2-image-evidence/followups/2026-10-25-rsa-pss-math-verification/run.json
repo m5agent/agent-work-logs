@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Verify Secure Boot v2 RSA-PSS signature mathematics without claiming eFuse trust",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "cc84be137f407bea97d7ec257786dc0e7c0bd1d1",
+    "result_commit": "e37270edc92d15e408cf9d5d1de9761f3379b787",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40164683427",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "static-image",
+    "physical_hardware": "NOT RUN",
+    "rf_power_electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "rsa_public_test_vector": true,
+    "private_key_committed": false,
+    "qemu_started": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3; deterministic public-only RSA-3072 test vector",
+    "secure_boot_checks": 16,
+    "platform_tests": "452/452 PASS",
+    "docs_tests": "34/34 PASS",
+    "node_tests": "2/2 PASS"
+  },
+  "checks": [
+    {
+      "name": "rsa_public_operation",
+      "status": "PASS"
+    },
+    {
+      "name": "pss_mgf1_sha256",
+      "status": "PASS"
+    },
+    {
+      "name": "pss_salt_and_recovered_hash",
+      "status": "PASS"
+    },
+    {
+      "name": "valid_bootloader_signature",
+      "status": "PASS"
+    },
+    {
+      "name": "valid_application_signature",
+      "status": "PASS"
+    },
+    {
+      "name": "bad_signature_with_valid_crc_and_digest",
+      "status": "PASS",
+      "detail": "categorized signature-math-mismatch"
+    },
+    {
+      "name": "ecdsa_math_not_implemented",
+      "status": "PASS",
+      "detail": "parser remains explicit rather than claiming verification"
+    },
+    {
+      "name": "manifest_structure",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "452/452"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "34/34"
+    },
+    {
+      "name": "node_tests",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "embedded_key_efuse_trust",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "ecdsa_math_verification",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "secure_boot_rom_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/secure-boot-rsa-pss-16-checks.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e37270edc92d15e408cf9d5d1de9761f3379b787/platform/tools/firmware_analysis.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e37270edc92d15e408cf9d5d1de9761f3379b787/platform/tests/fixtures/secure_boot_rsa3072_test_vector.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/e37270edc92d15e408cf9d5d1de9761f3379b787/tests/firmware/evidence-2026-10-25-secure-boot-image.json"
+  ],
+  "notes": [
+    "RSA-PSS verifies the image digest against the modulus and exponent embedded in the signature block.",
+    "A bad signature with valid CRC and matching image digest is classified as signature-math-mismatch.",
+    "ECDSA block parsing remains supported, but ECDSA mathematical verification is not implemented.",
+    "The embedded public key is not compared with a live eFuse trust root."
+  ]
+}

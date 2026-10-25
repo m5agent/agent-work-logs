@@ -73,3 +73,9 @@ trust_root             = not-verified
 - 生产 key、secure version/anti-rollback 真机状态；
 - physical hardware/RF/power；
 - live eFuse authenticity。
+
+## Follow-up
+
+- [RSA-PSS mathematical verification](followups/2026-10-25-rsa-pss-math-verification/)：
+  使用 signature block 内 RSA modulus/exponent 验证 PSS/MGF1/SHA-256；
+  `16/16` checks。ECDSA 数学验证、eFuse trust root 和 ROM 执行仍未覆盖。
