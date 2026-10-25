@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "core2-handoff-state-sweep-summary",
+  "validation": "virtual-device validation",
+  "overall_status": "PASS_DIAGNOSTIC",
+  "source_evidence_sha256": "a52cd42709849e4ef25e5ad34f8dd534f437c277ae7cc3d87f061beb5cc0784c",
+  "source_evidence_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/e420570ebdfe89dae75612938fbe80281c5413ef/tests/firmware/core2_handoff_trace/evidence-2026-10-26-core2-handoff-state-sweep.json",
+  "firmware": {
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "bytes": 16777216
+  },
+  "runtime": {
+    "machine": "m5core2",
+    "qemu_binary_sha256": "f7ac5a0352eb4345f5c3b719a5dd656c5c0cdfb3d805cf258f144d1ae1fb6718",
+    "pc_sampling": "NOT RUN",
+    "trace_sample": 1024,
+    "pause_action": "exit",
+    "attempts_per_target": 1
+  },
+  "snapshots": [
+    {
+      "target_ns": 14800000000,
+      "cpu0_pc": "0x40087980",
+      "cpu1_pc": "0x40084487",
+      "cache_sync_calls": 16144,
+      "changed_pages": 6679,
+      "ssi_transactions": 6984,
+      "ssi_rx_bytes": 236116,
+      "cross_core_writes": 40274
+    },
+    {
+      "target_ns": 15300000000,
+      "cpu0_pc": "0x40087980",
+      "cpu1_pc": "0x40084487",
+      "cache_sync_calls": 16180,
+      "changed_pages": 6679,
+      "ssi_transactions": 6998,
+      "ssi_rx_bytes": 236571,
+      "cross_core_writes": 40566
+    },
+    {
+      "target_ns": 15900000000,
+      "cpu0_pc": "0x40095733",
+      "cpu1_pc": "0x4019622f",
+      "cache_sync_calls": 17444,
+      "changed_pages": 6679,
+      "ssi_transactions": 7506,
+      "ssi_rx_bytes": 253081,
+      "cross_core_writes": 43584
+    }
+  ],
+  "classification": {
+    "two_core_permanent_stop": "REJECTED",
+    "cpu1_forward_progress": "PASS",
+    "uart_storm": "REJECTED",
+    "guest_deadlock": "NOT PROVEN",
+    "legacy_boot": "FAIL"
+  }
+}
