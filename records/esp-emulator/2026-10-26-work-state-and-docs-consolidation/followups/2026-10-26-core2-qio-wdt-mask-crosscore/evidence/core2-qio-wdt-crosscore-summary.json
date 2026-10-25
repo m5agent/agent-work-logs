@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "core2-qio-wdt-crosscore-summary",
+  "validation": "virtual-device validation",
+  "status": "PARTIAL",
+  "redaction": {
+    "raw_logs_retained_locally": true,
+    "session_ids_replaced_with_sha256": true,
+    "contains_credentials": false,
+    "contains_internal_endpoints": false
+  },
+  "firmware": {
+    "name": "UIFlow_Core2",
+    "version": "v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc"
+  },
+  "qio_bulk_read_diagnostic": {
+    "sample_transactions": 512,
+    "bytes_per_transaction": 64,
+    "mismatch_count": 0,
+    "stderr_bytes": 39014,
+    "stderr_sha256": "d50806d9bad23665c3fd2106f104b5854e3ee00e61870cc1323572ee41345994",
+    "separate_progress_control_serial_bytes": 2705,
+    "separate_progress_control_serial_sha256": "8f016e089ba1a07260a67ac0cb3a3a7c8633eec46f7c432fb92201546e331afa",
+    "classification": "diagnostic-only; bypasses SSI command/dummy/data phases"
+  },
+  "timg_wdt_mask": {
+    "observed_int_ena": "0x00000000",
+    "observed_int_raw": "0x00000004",
+    "masked_status": "0x00000000",
+    "masked_timeout_events_control_a": 4,
+    "controls": [
+      {
+        "label": "control-a",
+        "session_ref_sha256": "e8b2c423a183bfbe5ba4a1ebeb3a52ea45f915b98224a1492534816c96d306b0",
+        "tg0_system_resets": 6,
+        "reset_pc_zero_observations": 3,
+        "qemu_stderr_sha256": "7cea6d04c655c43ce89ebd7e262ae6e55328ed035bebb81cd23428172cb091ac",
+        "serial_sha256": "102839ce1d83f1ce3dd03643ad8b332942539e80c3127450757c8b08073b815b"
+      },
+      {
+        "label": "control-b",
+        "session_ref_sha256": "d1d1a4c94bd0fe1f66f53583b2a13e3bb9ca8c03d6fb835929126d3b9d8308c5",
+        "tg0_system_resets": 10,
+        "reset_pc_zero_observations": 5,
+        "qemu_stderr_sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+        "serial_sha256": "7da630e3892e7eef7c64e7b6a119e0245488f4cea00bcc49bac9a8911cf052af"
+      }
+    ],
+    "classification": "0035 fixes the mask semantics but does not close the legacy reset"
+  },
+  "crosscore_stall": {
+    "temporary_wdt_disabled": true,
+    "cpu0_wait_pc": "0x4008798b",
+    "cpu0_wait_address": "0x3ffc7ec8",
+    "cpu1_pc_samples": [
+      "0x40093932",
+      "0x400843af"
+    ],
+    "crosscore_trace_lines": 97150,
+    "qemu_stderr_bytes": 5051902,
+    "qemu_stderr_sha256": "f874e02a27325f4d728f0101d600d342b43e1e3bc473d853a1cb22e628de6391",
+    "classification": "flash-cache/cross-core handshake did not complete; single root cause not proven"
+  },
+  "verification": {
+    "platform_tests": "501/501 PASS",
+    "docs_contract_tests": "41/41 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "patch_clean_base_forward_reverse_check": "PASS",
+    "ci_run": "40221727154",
+    "ci_status": "PASS"
+  },
+  "not_claimed": [
+    "temporary QIO direct reads are a product implementation",
+    "disabling WDT is a fix",
+    "the cross-core trace proves a single root cause",
+    "legacy UIFlow compatibility",
+    "physical hardware validation"
+  ]
+}

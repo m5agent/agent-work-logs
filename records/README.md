@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-26 | `esp-emulator` | Core2 QIO、TIMG WDT-mask 与 cross-core/DPORT 边界整理 | `PARTIAL`（virtual-device：`0035` mask 语义修正、512 个 QIO 样本与 SSI 字节一致、平台 `501/501`、docs `41/41` 与 CI PASS；legacy TG0 WDT/reset PC 0/黑帧、cross-core handshake、物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-qio-wdt-mask-crosscore/) |
 | 2026-10-26 | `esp-emulator` | Core2 Xtensa equal-deadline timer 修复与当前代码/文档刷新 | `PARTIAL`（virtual-device：minimal probe `40/40 PASS`、新版 runner `3/3 PASS`、旧镜像 SHA fail-closed；平台 `500/500` 与 CI PASS；legacy TG0/TG1 WDT/黑帧、物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-core2-equal-deadline-timer/) |
 | 2026-10-26 | `esp-emulator` | 当前工作、易漂移证据和 profile blocker 再收敛 | `PASS`（docs/contracts：平台 `500/500`、docs `40/40`、QEMU profile `19/19`、生成器和 CI PASS；firmware/QEMU rerun 与真机 NOT RUN） | [查看](esp-emulator/2026-10-26-work-state-and-docs-consolidation/followups/2026-10-26-evidence-ownership-reconciliation/) |
 | 2026-10-26 | `esp-emulator` | 当前工作、调查假设、Backlog 与文档职责总整理 | `PASS`（docs/contracts：平台 `499/499`、文档契约 `39/39`、Node、snapshot/coverage/catalog/profile、compileall、Ruff 与 CI PASS；firmware/QEMU functional rerun 与真机 NOT RUN） | [查看](esp-emulator/2026-10-26-work-state-and-docs-consolidation/) |

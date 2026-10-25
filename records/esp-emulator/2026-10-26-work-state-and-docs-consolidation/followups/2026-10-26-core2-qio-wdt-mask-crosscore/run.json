@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Correct Core2 TIMG WDT masking and document the QIO/cross-core boundary",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "c3193b92cc46b41a7dc8574089fc2b95df37caa4",
+    "result_commit": "5a004b24053bf791203083be4dfa426f971525a8"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "physical_spi_flash": "NOT RUN",
+    "physical_cache_psram": "NOT RUN",
+    "physical_timer_wdt": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2",
+    "target": "esp32",
+    "public_firmware": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "runtime_result": "DIAGNOSTIC_ONLY_LEGACY_FAIL"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, QEMU 9.2.2 virtual Core2",
+    "qemu_source_commit": "da100c909249926b9f4458f18e4f2d216d08f51a",
+    "qemu_worktree_state": "dirty diagnostic tree retained locally",
+    "qemu_diagnostic_binary_sha256": "cbe9b1f20de6a1e0a9d196ee74a56a6c5243ba28fc5f9bdde10fd3b1867e2bd0",
+    "patch_sha256": "655e74544b484f068e05abe5f3c42d6239504515d172526cf167f8442dfd6f7d",
+    "product_evidence_sha256": "aa2d0e76e171b06bb094d3eebe3319724cb6eb905ce64b56a01badaf194f8555",
+    "platform_tests": "501/501 PASS",
+    "docs_contract_tests": "41/41 PASS",
+    "project_snapshot": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "compileall": "PASS",
+    "ruff_e9_f": "PASS",
+    "git_diff_check": "PASS",
+    "patch_clean_base_forward_reverse_check": "PASS",
+    "ci_run": "40221727154",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40221727154",
+    "ci_status": "PASS",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "timg_wdt_level_mask_semantics",
+      "status": "PASS",
+      "detail": "INT_ENA=0, INT_RAW=4 and masked status 0 no longer raise the level IRQ."
+    },
+    {
+      "name": "legacy_after_wdt_mask_fix",
+      "status": "FAIL",
+      "detail": "Two controls still produced 6 and 10 TG0WDT_SYS_RESET observations."
+    },
+    {
+      "name": "qio_backing_store_vs_ssi_bytes",
+      "status": "PASS",
+      "detail": "512 sampled 64-byte transactions matched; this is diagnostic-only because the path bypasses SSI phases."
+    },
+    {
+      "name": "crosscore_handshake",
+      "status": "NOT OBSERVED",
+      "detail": "With WDT reset disabled, cross-core IRQ transitions continued while CPU0/CPU1 remained in the flash-operation/cache handoff paths."
+    },
+    {
+      "name": "nonempty_application_frame",
+      "status": "FAIL"
+    },
+    {
+      "name": "documentation_authority_refresh",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/core2-qio-wdt-crosscore-summary.json",
+    "patches/0001-esp32-timg-wdt-int-ena.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/5a004b24053bf791203083be4dfa426f971525a8/tests/firmware/evidence-2026-10-26-core2-qio-crosscore-diagnostic.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/5a004b24053bf791203083be4dfa426f971525a8/patches/qemu-m5stack-peripherals/0035-esp32-timg-wdt-int-ena.patch"
+  ],
+  "notes": [
+    "Patch 0035 is an independent TIMG model correction and does not close RUNTIME-03.",
+    "The temporary QIO blk_pread path and M5SW_DISABLE_WDT are diagnostic controls, not product behavior.",
+    "The retained dirty QEMU worktree must not be reset or cleaned.",
+    "All results are virtual-device validation, not physical hardware validation."
+  ]
+}
