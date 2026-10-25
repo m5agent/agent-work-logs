@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "profile": "core2-native-hci",
+  "runtime": "qemu-unified",
+  "attempts": {
+    "requested": 3,
+    "passed": 3,
+    "failed": 0,
+    "ble_linger_seconds": 120,
+    "stop_seconds": [0.359, 0.222, 0.154],
+    "final_state": ["stopped", "stopped", "stopped"],
+    "error": [null, null, null]
+  },
+  "functional_assertions": {
+    "pre_stop_session_running": "PASS",
+    "pre_stop_http_companion_running": "PASS",
+    "pre_stop_ble_companion_running": "PASS",
+    "pre_stop_network_pass": "PASS",
+    "pre_stop_public_dns_http": "PASS",
+    "pre_stop_external_nus_gatt": "PASS",
+    "pre_stop_native_hci_health": "PASS",
+    "pre_stop_peer_open": "PASS",
+    "frame_png": "PASS",
+    "pcap_file_in_evidence_zip": "PASS",
+    "manifest_session_binding": "PASS",
+    "stop_http_companion_terminated": "PASS",
+    "stop_ble_companion_terminated": "PASS",
+    "qemu_process_reaped": "PASS",
+    "ble_peer_process_reaped": "PASS",
+    "worker_lease_released": "PASS"
+  },
+  "input_hashes": {
+    "firmware_sha256": "002d1e74a72fbd63fee0c220a7ee2ab17801af983def5981b3ffc70ea3dd88e7",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "67447172bef7dcd7d867e30e8fff0a0b2e4ad779d5d3925eeb5d6e023efd039a",
+    "input_assets_unchanged_during_run": true
+  },
+  "platform": {
+    "tests_passed": 411,
+    "tests_total": 411,
+    "documentation_passed": 22,
+    "documentation_total": 22,
+    "compileall": "PASS",
+    "selected_ruff_e9_f": "PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "ci": {
+    "capability_commit_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40146597625",
+    "capability_commit": "3621301bef264447f79812530e157d3090826e5f",
+    "evidence_commit_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40146679013",
+    "evidence_commit": "c36b7907b929363374fe3d2e0ba5d486a6d4fdc8",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "bit-exact Espressif BT controller or baseband",
+    "physical cache/PSRAM timing",
+    "long-run concurrency or throughput",
+    "teardown modes beyond active-stop",
+    "cross-host QEMU migration",
+    "physical RF or hardware validation"
+  ]
+}

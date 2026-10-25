@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 active BLE stop, companion cleanup and consecutive session recovery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7da51aa915567cb681e64eb1d0ffff451393bf7a",
+    "capability_commit": "3621301bef264447f79812530e157d3090826e5f",
+    "evidence_commit": "c36b7907b929363374fe3d2e0ba5d486a6d4fdc8",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40146597625",
+    "ci_status": "PASS",
+    "ci_evidence_commit_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40146679013",
+    "ci_evidence_commit_status": "PASS"
+  },
+  "hardware": {
+    "targets": [],
+    "real_hardware": "NOT RUN",
+    "physical_rf": "NOT RUN",
+    "physical_cache_psram": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "sha256": "002d1e74a72fbd63fee0c220a7ee2ab17801af983def5981b3ffc70ea3dd88e7",
+    "bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "67447172bef7dcd7d867e30e8fff0a0b2e4ad779d5d3925eeb5d6e023efd039a"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon, Python 3, Device Service /api/v1, QEMU",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "active_stop_recovery",
+      "status": "PASS",
+      "detail": "3/3 consecutive sessions"
+    },
+    {
+      "name": "pre_stop_network",
+      "status": "PASS",
+      "detail": "DHCP, controlled/public DNS/HTTP, external NUS GATT, pcap"
+    },
+    {
+      "name": "companion_termination",
+      "status": "PASS",
+      "detail": "HTTP and BLE companions terminated in every attempt"
+    },
+    {
+      "name": "pid_reaping",
+      "status": "PASS",
+      "detail": "BLE peer and QEMU PIDs absent after every stop"
+    },
+    {
+      "name": "worker_lease_release",
+      "status": "PASS",
+      "detail": "active lease count returned to zero"
+    },
+    {
+      "name": "consecutive_recovery",
+      "status": "PASS",
+      "detail": "each stop was followed by a new ready session"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "411/411"
+    },
+    {
+      "name": "documentation_contracts",
+      "status": "PASS",
+      "detail": "22/22"
+    },
+    {
+      "name": "ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3621301bef264447f79812530e157d3090826e5f/tests/uiflow2/core2_native_hci/evidence-2026-10-25-core2-active-stop-recovery-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/3621301bef264447f79812530e157d3090826e5f",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40146597625"
+  ],
+  "notes": [
+    "No production cleanup defect was found; the existing stop path passed the new active-stop contract.",
+    "The gate covers trusted-host virtual devices only.",
+    "Physical cache/PSRAM, RF, controller/baseband equivalence and long-run concurrency/throughput remain NOT RUN."
+  ]
+}
