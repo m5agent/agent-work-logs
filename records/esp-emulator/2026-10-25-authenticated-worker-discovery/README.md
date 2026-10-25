@@ -52,6 +52,12 @@ control plane、验证 beacons、注册、heartbeat 并停止。
 - `run.json`：机器可读结果；
 - `evidence/verification.summary.json`：脱敏聚合证据。
 
+## Follow-up
+
+- [Cross-subnet/NAT unicast discovery seed](followups/2026-10-25-cross-subnet-nat-seed/)：
+  两个 routed/masqueraded subnet、multicast 不跨 router、seed bootstrap、
+  错误/旧 token、rotation 和 cleanup `3/3 PASS`。
+
 ## 未覆盖项
 
 - NAT、路由不转发 multicast 的跨子网发现；

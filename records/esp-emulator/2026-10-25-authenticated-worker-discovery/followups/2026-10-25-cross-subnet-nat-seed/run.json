@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Authenticated unicast worker discovery across NAT and separate subnets",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "feb42b6e0ddcd35ab4dcd6dfc297111861cfcd14",
+    "feature_commit": "d8791032f03227b1fabbd5a349cb4382774ca115",
+    "result_commit": "667c3564208fcb69df7afea68091d6d3e34d3eb4",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40159761453",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "kind": "virtual-control-plane",
+    "physical_hardware": "NOT RUN",
+    "cross_host_qemu": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "qemu_started": false,
+    "device_session_created": false
+  },
+  "execution": {
+    "environment": "Linux privileged Docker; GitHub Actions Ubuntu; three independent runs",
+    "topology": "two /24 subnets, veth, IPv4 forwarding and masquerade",
+    "tool_hashes": {
+      "runner": "032dd306f04e329f79edde3cd4ed5853de4ecd18da0e76361e6c52f3d3eff170",
+      "worker_agent": "60c1e8f6d21323e9e62d03dcaa048396715fcdac8ac7291cff9a5312cb5a14a7",
+      "worker_discovery": "396ef5ef26b946a74ab0ec5df11428b459cc5dd3d3600df3bc8a0a0fc221873f",
+      "worker_discovery_seed": "f0b4d49f51a78430c02b7d98d695087152869409f9dce7f688afe1cdafaa5403",
+      "serve": "e747704d92f205ea2952c8a0954c4272fb0374c429faa7925352e6ad6a8f8c07"
+    },
+    "input_assets_unchanged": true,
+    "attempts": 3,
+    "checks_per_attempt": 23
+  },
+  "checks": [
+    {
+      "name": "independent_attempts",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "name": "routed_separate_subnets",
+      "status": "PASS"
+    },
+    {
+      "name": "nftables_masquerade",
+      "status": "PASS"
+    },
+    {
+      "name": "multicast_did_not_cross",
+      "status": "PASS"
+    },
+    {
+      "name": "unicast_seed_discovery",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_registration_and_stop",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong_token_rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "old_token_rejected_after_rotation",
+      "status": "PASS"
+    },
+    {
+      "name": "rotated_token_rediscovered",
+      "status": "PASS"
+    },
+    {
+      "name": "nat_router_source_observed",
+      "status": "PASS"
+    },
+    {
+      "name": "secrets_absent",
+      "status": "PASS"
+    },
+    {
+      "name": "tool_hashes_stable",
+      "status": "PASS"
+    },
+    {
+      "name": "namespaces_and_nftables_cleaned",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "442/442"
+    },
+    {
+      "name": "documentation_tests",
+      "status": "PASS",
+      "detail": "29/29"
+    },
+    {
+      "name": "node_sha256_upload",
+      "status": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS"
+    },
+    {
+      "name": "cross_host_qemu",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/seed-nat-3x.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/667c3564208fcb69df7afea68091d6d3e34d3eb4/platform/tools/worker_discovery_seed.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/667c3564208fcb69df7afea68091d6d3e34d3eb4/platform/tools/worker_discovery.py"
+  ],
+  "notes": [
+    "The seed path requires a reachable unicast rendezvous endpoint.",
+    "HMAC authenticates the beacon but does not provide confidentiality.",
+    "No QEMU or physical hardware was used."
+  ]
+}
