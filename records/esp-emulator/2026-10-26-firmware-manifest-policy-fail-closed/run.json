@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Fail closed manifest capability omission and security evidence understatement",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c",
+    "result_commit": "c00fd2eeed4d180931e9390ed80f3e140359ae74",
+    "api_version": "1.34.0"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "live_efuse": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "runtime_validation": "NOT RUN",
+    "secure_boot_image_fixture": "26/26 PASS",
+    "secure_boot_runtime": "NOT RUN",
+    "flash_encryption_runtime": "NOT RUN"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13",
+    "platform_tests": "537/537 PASS",
+    "manifest_tests": "32/32 PASS",
+    "manifest_policy_fixture": "PASS",
+    "secure_boot_image_fixture": "26/26 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40250487931",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40250487931",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "capabilities_required",
+      "status": "PASS",
+      "detail": "The root capabilities object and required/optional arrays are mandatory in schema, structure checks and runtime validation."
+    },
+    {
+      "name": "capability_array_bounds",
+      "status": "PASS",
+      "detail": "Required and optional capability arrays are bounded to 64 entries of 1-64 characters."
+    },
+    {
+      "name": "signed_image_status_understatement",
+      "status": "PASS",
+      "detail": "A not-found status cannot hide signed image blocks or trust-root evidence."
+    },
+    {
+      "name": "efuse_summary_enums",
+      "status": "PASS",
+      "detail": "Package eFuse security values are strict enums and invalid enabled-like strings are rejected."
+    },
+    {
+      "name": "secure_boot_key_mismatch",
+      "status": "PASS",
+      "detail": "Image key digest mismatch against package eFuse summary is rejected."
+    },
+    {
+      "name": "secure_version_rollback",
+      "status": "PASS",
+      "detail": "Image secure version below the package eFuse version is rejected."
+    },
+    {
+      "name": "secure_boot_image_fixture_rebind",
+      "status": "PASS",
+      "detail": "The static Secure Boot v2 image fixture passes all 26 checks against the new manifest/schema hashes."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/c00fd2eeed4d180931e9390ed80f3e140359ae74",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40250487931",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c00fd2eeed4d180931e9390ed80f3e140359ae74/tests/firmware/evidence-2026-10-26-manifest-policy-fail-closed.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c00fd2eeed4d180931e9390ed80f3e140359ae74/tests/firmware/evidence-2026-10-26-secure-boot-image-manifest-policy-v2.json"
+  ],
+  "notes": [
+    "This is static manifest policy validation, not firmware runtime or hardware validation.",
+    "Package-provided eFuse summary authenticity remains unverified.",
+    "Live eFuse, bootloader trust-chain execution, anti-rollback enforcement and Flash Encryption runtime remain NOT RUN."
+  ]
+}

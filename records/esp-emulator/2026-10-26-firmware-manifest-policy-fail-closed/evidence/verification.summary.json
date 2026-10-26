@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "static-firmware-manifest-policy",
+  "base_commit": "6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c",
+  "result_commit": "c00fd2eeed4d180931e9390ed80f3e140359ae74",
+  "api_version": "1.34.0",
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "count": 537
+    },
+    "manifest_unit_tests": {
+      "status": "PASS",
+      "count": 32
+    },
+    "manifest_policy_fixture": "PASS",
+    "secure_boot_image_fixture": {
+      "status": "PASS",
+      "count": 26
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "pre_fix_counterexamples": {
+    "capabilities_omitted_structure_errors": [],
+    "capabilities_omitted_validation": "PASS",
+    "secure_boot_image_status_understated_validation": "PASS",
+    "invalid_efuse_security_validation": "PASS"
+  },
+  "post_fix_cases": {
+    "capabilities_omitted": "REJECTED/capabilities_required",
+    "capability_arrays_omitted": "REJECTED/invalid_capability_declarations",
+    "signed_image_status_understated": "REJECTED/secure_boot_image_status_understated",
+    "invalid_efuse_enums": "REJECTED/invalid_efuse_security_evidence",
+    "secure_boot_key_mismatch": "REJECTED/secure_boot_efuse_key_mismatch",
+    "secure_version_below_efuse": "REJECTED/firmware_secure_version_below_efuse"
+  },
+  "evidence_sha256": {
+    "manifest_policy": "b7935b7920e93fe859f1b83bb5cf2d74e58a0c079194d31220792a43f0c036d0",
+    "secure_boot_image_rebind": "5cedb3cd9a7c7857389798b0cc0e2bb8e1e6f2c0d3ab800cae559ec11a3b0aed"
+  },
+  "tool_sha256": {
+    "firmware_manifest": "dd94c866b7d2376bfaa15fbf2458eabddd8cdc193b82ade501a21658b157ec54",
+    "manifest_schema": "252c734bc97f37b2d29703c09ba25dc6016fff84479d3a0bd97ee107b6d30170"
+  },
+  "ci": {
+    "run": 40250487931,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40250487931",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "package-provided eFuse summary authenticity",
+    "live eFuse state",
+    "bootloader trust-chain or anti-rollback execution",
+    "Flash Encryption runtime state",
+    "physical hardware validation"
+  ]
+}
