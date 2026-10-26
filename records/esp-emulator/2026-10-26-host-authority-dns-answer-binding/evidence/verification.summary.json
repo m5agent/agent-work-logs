@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "linux-virtual-network-and-core2-virtual-device",
+  "base_commit": "e6c40e13d4cc3a3aea81ca5f28ff542f7fa44438",
+  "result_commit": "6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c",
+  "api_version": "1.34.0",
+  "platform_tests": {
+    "status": "PASS",
+    "count": 534
+  },
+  "network_tests": {
+    "status": "PASS",
+    "count": 73
+  },
+  "qemu_profile_tests": {
+    "status": "PASS",
+    "count": 20
+  },
+  "pre_fix_counterexamples": {
+    "allowed.lab.test:not-a-port": 200,
+    "allowed.lab.test:443,evil": 200
+  },
+  "post_fix_controls": {
+    "invalid_port": 403,
+    "port_zero": 403,
+    "port_65536": 403,
+    "comma_suffix": 403,
+    "userinfo": 403,
+    "multi_colon": 403,
+    "duplicate_host": 403,
+    "absolute_form": 403
+  },
+  "linux_namespace": {
+    "status": "PASS",
+    "checks": {
+      "wifi": true,
+      "dhcp": true,
+      "dns_allow_and_deny": true,
+      "dns_background_denied": true,
+      "tls_allow_and_deny": true,
+      "pcap_written": true,
+      "private_namespace": true,
+      "no_external_route": true,
+      "nftables_default_drop": true,
+      "cleanup_completed": true
+    },
+    "evidence_sha256": "397e85db15b65be49d193afae3790d24d9d56860bb6b5f22b42a4da4b3aef26a"
+  },
+  "core2": {
+    "firmware_sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "b7ed19e7502e2a04ef48287c3622061ee640077bacc469e571ece5b6f802c1ea",
+    "tool_hashes": {
+      "device_service": "6bab95ad3a565b4666a3bcb93196fdc0aad286485a5915f847da5d2b6dcaa1c8",
+      "network_policy": "45cdba291b9351d69d326cc0adfaa84d107141023d9c1a7d9fdc5ba8ab00cd67"
+    },
+    "batch_a": {
+      "status": "PASS",
+      "attempts_passed": 8,
+      "attempts_requested": 8
+    },
+    "batch_b": {
+      "status": "PASS",
+      "attempts_passed": 8,
+      "attempts_requested": 8
+    },
+    "total": "16/16 PASS"
+  },
+  "ci": {
+    "run": 40249694316,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40249694316",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "not_claimed": [
+    "physical multi-host worker",
+    "arbitrary NAT without reachable seed",
+    "external side-effect ownership fence",
+    "arbitrary public DNS or DNSSEC",
+    "external resolver rebinding safety",
+    "physical PSRAM or cache timing",
+    "bit-exact Espressif BT controller or RF",
+    "hardware validation"
+  ]
+}

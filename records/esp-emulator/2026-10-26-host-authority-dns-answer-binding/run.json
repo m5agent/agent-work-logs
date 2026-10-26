@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Harden HTTP Host authority and bind exact DNS answers to allowed endpoints",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e6c40e13d4cc3a3aea81ca5f28ff542f7fa44438",
+    "result_commit": "6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c",
+    "api_version": "1.34.0"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "core2_firmware_sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "core2_elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "core2_concurrency": "16/16 PASS",
+    "legacy_uiflow": "OPEN"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, Linux arm64 Docker namespace, Core2 QEMU",
+    "platform_tests": "534/534 PASS",
+    "network_tests": "73/73 PASS",
+    "qemu_profile_tests": "20/20 PASS",
+    "dns_cname_resolver": "PASS",
+    "linux_namespace_tls_dns": "PASS",
+    "core2_batch_a": "8/8 PASS",
+    "core2_batch_b": "8/8 PASS",
+    "core2_total": "16/16 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40249694316",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40249694316",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "http_host_authority_pre_fix_counterexample",
+      "status": "PASS",
+      "detail": "Invalid port and comma suffix previously returned 200 despite Host allowlist."
+    },
+    {
+      "name": "http_host_authority_fix",
+      "status": "PASS",
+      "detail": "Single Host header, numeric optional port and origin-form target pass; userinfo, comma/multi-colon, invalid port, duplicate Host and absolute-form are denied."
+    },
+    {
+      "name": "exact_dns_answer_binding",
+      "status": "PASS",
+      "detail": "Exact A/AAAA records and CNAME terminal answers must be covered by an allowed endpoint."
+    },
+    {
+      "name": "ipv4_mapped_ipv6_dns",
+      "status": "PASS",
+      "detail": "IPv4-mapped IPv6 DNS records are rejected before serving."
+    },
+    {
+      "name": "controlled_dns_requires_endpoint",
+      "status": "PASS",
+      "detail": "Device Service rejects controlled DNS without an explicit or implicit allowed endpoint."
+    },
+    {
+      "name": "linux_namespace_lifecycle",
+      "status": "PASS",
+      "detail": "One StickS3 guest completed WiFi, DHCP, DNS allow/NXDOMAIN, TLS 200/403, pcap and cleanup."
+    },
+    {
+      "name": "core2_tool_hash_rebind",
+      "status": "PASS",
+      "detail": "Two independent eight-instance 120-second batches passed against the new service and policy hashes."
+    },
+    {
+      "name": "physical_multi_host",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40249694316",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c/tests/network/tls_allowlist/evidence-2026-10-26-host-authority-exact-dns-namespace-pass.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c/tests/uiflow2/core2_native_hci/evidence-2026-10-26-core2-concurrent-8x120-network-hardening-pass-a.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/6ecaef5ddc4323f3c3919edf4ad25670a64c8c8c/tests/uiflow2/core2_native_hci/evidence-2026-10-26-core2-concurrent-8x120-network-hardening-pass-b.json"
+  ],
+  "notes": [
+    "All network and Core2 results are virtual-device validation.",
+    "Physical cross-host scheduling, arbitrary NAT and external side-effect ownership remain OPEN.",
+    "Physical PSRAM/cache, bit-exact BT controller/RF and hardware remain NOT RUN."
+  ]
+}
