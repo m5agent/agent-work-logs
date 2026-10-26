@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Bind Core2 legacy late wait to LVGL and add a partial SPI transaction-done IRQ model",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7f9f248544fea950fc1b13050f604634ed02637e",
+    "result_commit": "f2061759897955e6017d4aa2a41bd5ba962c35b6",
+    "api_version": "1.34.0"
+  },
+  "hardware": {
+    "target_class": "M5Stack Core2",
+    "real_hardware": "NOT RUN",
+    "physical_psram_or_cache_timing": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "flash_bytes": 16777216,
+    "runtime_validation": "PARTIAL",
+    "legacy_boot": "FAIL",
+    "nonempty_application_frame": "FAIL",
+    "matching_elf_or_map": "NOT RUN",
+    "reason": "The virtual device reached the LVGL flush wait and observed the flush callback, but not the SPI completion callback or lv_disp_flush_ready."
+  },
+  "execution": {
+    "environment": "macOS 25.5.0 arm64, Python 3.13.15, retained Core2 QEMU tree",
+    "qemu_binary_sha256": "59ee022723974aa4ff7d2305f4e46ac049d3eb59632f292d5de8600bf9ede052",
+    "patch": "0042-esp32-spi-trans-done-irq-diagnostic.patch",
+    "patch_sha256": "bc520f7983ea1061d065201d4960b633daf4c0c189258fc96ef397c3c9104c5a",
+    "patch_reverse_check": "PASS",
+    "platform_tests": "544/544 PASS",
+    "core2_docs_contract_tests": "12/12 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS",
+    "ci_run": "40254086653",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40254086653",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "bin_bound_lvgl_mapping",
+      "status": "PASS",
+      "detail": "0x40100010 is bound to lv_refr_vdb_flush; 0x40174884 is the display flush completion callback and 0x402605ec is lv_disp_flush_ready."
+    },
+    {
+      "name": "late_state_object_binding",
+      "status": "PASS",
+      "detail": "A2 is lv_disp_buf_t with two valid buffers and flushing=1; A10 is the display driver with flush_cb=0x40174758 and wait_cb=null."
+    },
+    {
+      "name": "display_flush_callback",
+      "status": "PASS",
+      "detail": "The flush callback was observed once in the WDT-off trace before and after the SPI IRQ model change."
+    },
+    {
+      "name": "display_completion_callback",
+      "status": "FAIL",
+      "detail": "Neither the completion callback nor lv_disp_flush_ready was observed in the 50-second WDT-off windows."
+    },
+    {
+      "name": "spi_transaction_done_irq_level",
+      "status": "PARTIAL",
+      "detail": "TRANS_DONE and TRANS_INTEN are stateful and produce IRQ level 1, but the guest completion path still does not run."
+    },
+    {
+      "name": "normal_wdt_boot",
+      "status": "FAIL",
+      "detail": "TG0 stage-1 reset occurred at about 15.9157 seconds; TG1 remained live, serial had no REPL and the frame remained a 302-byte black image."
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "All 544 platform tests and the Core2 documentation contract passed."
+    },
+    {
+      "name": "generated_registries",
+      "status": "PASS",
+      "detail": "Runtime coverage, peripheral catalog, QEMU profiles and project snapshot checks passed."
+    },
+    {
+      "name": "patch_replay",
+      "status": "PASS",
+      "detail": "The 0042 patch passed reverse apply checking in the matching retained QEMU tree."
+    },
+    {
+      "name": "ci",
+      "status": "PASS",
+      "detail": "Product CI run 40254086653 passed both jobs on result commit f206175."
+    },
+    {
+      "name": "full_peripheral_matrix",
+      "status": "NOT RUN",
+      "detail": "This diagnostic did not rerun the full 67-case matrix."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/f2061759897955e6017d4aa2a41bd5ba962c35b6",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40254086653",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f2061759897955e6017d4aa2a41bd5ba962c35b6/tests/firmware/core2_handoff_trace/evidence-2026-10-26-core2-lvgl-spi-wait.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f2061759897955e6017d4aa2a41bd5ba962c35b6/patches/qemu-m5stack-peripherals/0042-esp32-spi-trans-done-irq-diagnostic.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f2061759897955e6017d4aa2a41bd5ba962c35b6/platform/tests/test_core2_wdt_off_late_state.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f2061759897955e6017d4aa2a41bd5ba962c35b6/docs/runtime-model-gap-register.md"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "This is virtual-device and BIN-bound static evidence, not hardware validation.",
+    "The flush callback is not equivalent to a completed frame.",
+    "An IRQ level of 1 does not prove guest interrupt delivery, ISR execution or queue completion.",
+    "No restricted firmware or device artifacts were added."
+  ]
+}

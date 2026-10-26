@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "core2-lvgl-flush-wait-and-spi-transaction-done-diagnostic",
+  "base_commit": "7f9f248544fea950fc1b13050f604634ed02637e",
+  "result_commit": "f2061759897955e6017d4aa2a41bd5ba962c35b6",
+  "validation_class": "virtual-device validation with BIN-bound static analysis",
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "152127c808b9212e3a5b55dd9e0a2d24e71b902e225452b67db381c76caba1cc",
+    "flash_bytes": 16777216
+  },
+  "artifacts": {
+    "qemu_binary_sha256": "59ee022723974aa4ff7d2305f4e46ac049d3eb59632f292d5de8600bf9ede052",
+    "patch": "0042-esp32-spi-trans-done-irq-diagnostic.patch",
+    "patch_sha256": "bc520f7983ea1061d065201d4960b633daf4c0c189258fc96ef397c3c9104c5a",
+    "lvgl_spi_wait_evidence_sha256": "e0f8fc2356d6d8937d123f2a9db3fbc3dedeb22d0dab6eb0f18a691ac9d445cc",
+    "wdt_off_late_state_evidence_sha256": "0d65913aeeb22bda878d22f4d8fc37f737744670987593393966156e14f648bc",
+    "qemu_profiles_sha256": "4d8d9e8e50882e46adbb1e31549654ced6ae37c74250b70fa7f3629e95ba7438"
+  },
+  "bin_bound_functions": {
+    "0x40100010": "lv_refr_vdb_flush",
+    "0x401002b2": "lv_refr_area_part",
+    "0x40174758": "display driver flush_cb",
+    "0x40174884": "display flush completion callback",
+    "0x402605ec": "lv_disp_flush_ready"
+  },
+  "late_state_object": {
+    "lv_disp_buf_t": {
+      "address": "0x3f953a40",
+      "buf1": "0x3ffe436c",
+      "buf2": "0x3ffe8e70",
+      "buf_act": "0x3ffe8e70",
+      "size_pixels": 9600,
+      "flushing": 1,
+      "flushing_last": 0
+    },
+    "display_driver": {
+      "address": "0x3f953c60",
+      "horizontal_resolution": 320,
+      "vertical_resolution": 240,
+      "buffer": "0x3f953a40",
+      "flush_cb": "0x40174758",
+      "wait_cb": "0x00000000"
+    }
+  },
+  "runtime_observations": {
+    "pre_spi_irq_model": {
+      "wdt_disabled": true,
+      "observe_seconds": 50,
+      "flush_cb_calls": 1,
+      "flush_cb_first_ns": 44198632000,
+      "completion_callback_calls": 0,
+      "flush_ready_calls": 0,
+      "frame_bytes": 302,
+      "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43"
+    },
+    "spi_trans_done_irq_model": {
+      "wdt_disabled": true,
+      "observe_seconds": 50,
+      "flush_cb_calls": 1,
+      "flush_cb_first_ns": 47893660000,
+      "completion_callback_calls": 0,
+      "flush_ready_calls": 0,
+      "irq_trace_saw_trans_done_and_inten": true,
+      "frame_bytes": 302,
+      "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43"
+    },
+    "normal_wdt_spi_irq_model": {
+      "observe_seconds": 60,
+      "stage0_timeout_ns": 5914197000,
+      "stage1_timeout_ns": 15915653000,
+      "first_reset_ns": 15915713000,
+      "tg1_feed_count_before_reset": 7248,
+      "tg1_last_feed_gap_to_reset_ns": 1928000,
+      "tg1_timeout_count_before_reset": 0,
+      "serial_has_repl_prompt": false,
+      "frame_bytes": 302,
+      "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+      "classification": "BOOTLOADER_TG0_STAGE1_RESET_WITH_TG1_LIVE"
+    }
+  },
+  "commands": {
+    "targeted_docs_contract": "PYTHONPATH=platform/tools:platform/tests python3 -m unittest test_docs_core2_runtime_contract -v",
+    "platform_tests": "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+    "runtime_coverage": "python3 platform/tools/runtime_coverage.py --check",
+    "peripheral_catalog": "python3 platform/tools/peripheral_catalog.py --check",
+    "qemu_profiles": "python3 platform/tools/qemu_profiles.py --check",
+    "project_snapshot": "python3 platform/tools/project_snapshot.py --check",
+    "compile": "python3 -m compileall -q platform/tools platform/tests tests",
+    "ruff": "ruff check --select E9,F platform/tests/test_core2_wdt_off_late_state.py",
+    "diff": "git diff --check",
+    "patch_reverse_check": "git apply --reverse --check <0042 patch>"
+  },
+  "checks": {
+    "bin_bound_lvgl_mapping": "PASS",
+    "late_state_object_binding": "PASS",
+    "display_flush_callback": "PASS",
+    "display_completion_callback": "FAIL",
+    "spi_irq_level_state": "PARTIAL",
+    "spi_guest_completion_path": "FAIL",
+    "normal_wdt_legacy_boot": "FAIL",
+    "repl": "FAIL",
+    "nonempty_application_frame": "FAIL",
+    "core2_docs_contract": {
+      "status": "PASS",
+      "count": 12
+    },
+    "platform_tests": {
+      "status": "PASS",
+      "count": 544
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "PASS",
+    "git_diff_check": "PASS",
+    "patch_reverse_check": "PASS"
+  },
+  "ci": {
+    "run": 40254086653,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40254086653",
+    "head_sha": "f2061759897955e6017d4aa2a41bd5ba962c35b6",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "boundaries": {
+    "matching_elf_or_map": "NOT RUN",
+    "guest_interrupt_matrix_or_queue_completion": "NOT RUN",
+    "normal_wdt_nonempty_application_frame": "NOT RUN",
+    "full_67_case_matrix": "NOT RUN",
+    "physical_psram_or_cache_timing": "NOT RUN",
+    "rf": "NOT RUN",
+    "electrical": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "not_claimed": [
+    "legacy firmware boot success",
+    "RUNTIME-03 closure",
+    "SPI interrupt delivery or guest ISR completion",
+    "LVGL frame completion",
+    "physical PSRAM or cache timing",
+    "RF or electrical behavior",
+    "hardware validation"
+  ],
+  "redaction": {
+    "raw_device_identifiers_included": false,
+    "private_endpoints_included": false,
+    "credentials_included": false,
+    "firmware_binary_included": false
+  }
+}
