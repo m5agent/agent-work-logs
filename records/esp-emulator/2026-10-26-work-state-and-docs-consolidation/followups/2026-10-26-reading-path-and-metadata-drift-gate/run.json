@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Clarify the current-work reading path and enforce device validation metadata parity",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "eb7d80a27166be41f82782e7c104bc82226b6b30",
+    "result_commit": "e6c40e13d4cc3a3aea81ca5f28ff542f7fa44438"
+  },
+  "hardware": {
+    "real_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "runtime_validation": "NOT RUN",
+    "reason": "This change reconciles documentation and validation metadata and does not start a guest."
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13",
+    "platform_tests": "531/531 PASS",
+    "qemu_profile_tests": "20/20 PASS",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "NOT RUN",
+    "selected_ruff_detail": "The current Python environment does not have the ruff module installed.",
+    "git_diff_check": "PASS",
+    "ci_run": "40247778027",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40247778027",
+    "ci_jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "name": "document_reading_layers",
+      "status": "PASS",
+      "detail": "Current facts, backlog, generated snapshot, contracts, topic pages and historical evidence now have an explicit reading order and authority boundary."
+    },
+    {
+      "name": "goal_aligned_work_summary",
+      "status": "PASS",
+      "detail": "Engineering handoff and project status summarize completed and remaining work for network, Core2 and FirmwareManifest without copying run histories."
+    },
+    {
+      "name": "completed_milestones_are_not_backlog",
+      "status": "PASS",
+      "detail": "The backlog records completed milestones as dependencies and explicitly prevents partial completion from expanding into physical, RF or trust-root claims."
+    },
+    {
+      "name": "device_validation_metadata_reconciled",
+      "status": "PASS",
+      "detail": "Core2 is dated 2026-10-26; AtomS3R, CoreS3 and StickS3 include the later WPA2 correct/wrong-password path; generated catalog artifacts were rebuilt."
+    },
+    {
+      "name": "catalog_profile_drift_gate",
+      "status": "PASS",
+      "detail": "qemu_profiles.py --check now rejects generated_at, validation date and validation status drift between profile and catalog."
+    },
+    {
+      "name": "catalog_profile_drift_negative_test",
+      "status": "PASS",
+      "detail": "The new test mutates generated_at and Core2 validation date and observes both structured errors."
+    },
+    {
+      "name": "firmware_qemu_runtime",
+      "status": "NOT RUN",
+      "detail": "No guest, firmware matrix or QEMU runtime was started."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/commit/e6c40e13d4cc3a3aea81ca5f28ff542f7fa44438",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40247778027"
+  ],
+  "notes": [
+    "This is documentation and contract validation, not firmware or hardware validation.",
+    "RUNTIME-03, CORE2-02, NET-04, runtime firmware security and hardware validation remain open.",
+    "Ruff E9/F was not run because the module is unavailable in the current Python environment."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "documentation-and-contract-validation",
+  "base_commit": "eb7d80a27166be41f82782e7c104bc82226b6b30",
+  "result_commit": "e6c40e13d4cc3a3aea81ca5f28ff542f7fa44438",
+  "commands": {
+    "platform_tests": "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+    "runtime_coverage": "python3 platform/tools/runtime_coverage.py --check",
+    "peripheral_catalog": "python3 platform/tools/peripheral_catalog.py --check",
+    "qemu_profiles": "python3 platform/tools/qemu_profiles.py --check",
+    "project_snapshot": "python3 platform/tools/project_snapshot.py --check",
+    "compileall": "python3 -m compileall -q platform/tools platform/tests tests",
+    "ruff": "python3 -m ruff check --select E9,F platform/tools platform/tests tests",
+    "diff": "git diff --check"
+  },
+  "checks": {
+    "platform_tests": {
+      "status": "PASS",
+      "count": 531
+    },
+    "qemu_profile_tests": {
+      "status": "PASS",
+      "count": 20
+    },
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "selected_ruff": "NOT RUN",
+    "selected_ruff_detail": "No module named ruff",
+    "git_diff_check": "PASS"
+  },
+  "catalog_dates": {
+    "devices_catalog": "2026-10-26",
+    "qemu_profiles": "2026-10-26"
+  },
+  "ci": {
+    "run": 40247778027,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40247778027",
+    "status": "PASS",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "updated_device_validation_dates": {
+    "core2": "2026-10-26",
+    "atoms3r": "2026-10-25",
+    "cores3": "2026-10-25",
+    "sticks3": "2026-10-25"
+  },
+  "file_sha256": {
+    "devices/catalog.source.json": "1d493af75507781003a41b5255b5cb0c325f6b63b70e2598ded170d95896f2de",
+    "platform/qemu/profiles.json": "8f7b779f7cae75b815811944d3c44e660002a0100b6c135ac6862565d5900aa2",
+    "platform/tools/qemu_profiles.py": "780a511442de2c9ff77b803fd0a1b6920935cf7de929770495401900fca1b235",
+    "platform/tests/test_qemu_profiles.py": "aebfadb6d5437f4935b75d97782b07e510cb0e64c36c150d4de794f26829dbdd",
+    "docs/README.md": "648fb56aa684eaab78895e1941ff9a424dd0eda15858cd810ce8003ac3ec1b9b",
+    "docs/project-status.md": "8585137ba6f6abc5c82d7790c953d8c26602e560357bc91d22f5e30f21914160",
+    "docs/project-backlog.md": "236289a70affd882ace4f958a32b8afee734e5aaf92c9854f6558707eb6c48a3",
+    "docs/engineering-handoff.md": "a191bfc843dbd3acae5c9fabb3142985483146732959113374bb450d122b8f9c",
+    "docs/qemu-device-adaptation-matrix.md": "c433cc14c0adebec662626a376f3fc1f0982c5dcaf195b1ba9c7813d1a0d794b",
+    "docs/validation-ledger.md": "6a0f1e9c26752e228d3c969e97352a2643e66dc2c51b291ef6d0ceb187d27d9a"
+  },
+  "not_claimed": [
+    "firmware functional pass",
+    "QEMU runtime rerun",
+    "RUNTIME-03 closure",
+    "CORE2-02 physical or controller equivalence",
+    "NET-04 physical multi-host completion",
+    "live eFuse or production key validation",
+    "RF or electrical behavior",
+    "hardware validation"
+  ]
+}
