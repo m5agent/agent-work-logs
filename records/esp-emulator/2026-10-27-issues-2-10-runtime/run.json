@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "ESP Emulator GitHub issues #2-#10 runtime revalidation and Unit fixes",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/2; issues/3; issues/4; issues/5; issues/6; issues/7; issues/8; issues/9; issues/10",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/13",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "8a0d99a03e3205564011bb123e0ee981587bebe7",
+    "implementation_head_commit": "0257064fbb7faf9bb5c4238d74b2e588c92c1f4d",
+    "merge_commit": "a0ad8150b112afe1273100514c7ef0808bd4477b"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "All issue execution used the project-approved virtual-device path."
+  },
+  "firmware": {
+    "issue2_sha256": "2b1cb7d57ec40fb3f142d951801ec1741e00db55b5629f08f230caa42f2aa6cd",
+    "issue3_sha256": "591dfd5e21d438a925c2ef497b37202b4366dcc7adfb1d890446296baf365c72",
+    "issue4_sha256": "93a547011be37a2b5f062ad7a56da108a95600119d360481adef10c634ed8d76",
+    "issue5_sha256": "93a547011be37a2b5f062ad7a56da108a95600119d360481adef10c634ed8d76",
+    "issue6_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+    "issue7_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+    "issue8_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+    "issue9_sha256": "3522f71a614fdf505191403b576379eda39baec03fcb2d4e4c758c975fd50580",
+    "issue10_sha256": "2225b3b468b1494ed2b6189f80bcef71c71c7bd2bc392635c998d062ca90d484"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12.14; final Xtensa cold-built QEMU runtime; visible Device Service /api/v1 sessions",
+    "runtime_sha256": "9aca9a8db5143ad133510795cd228ed8ac23c388ea197267d7b2b4750e58eb82",
+    "source_receipt_sha256": "1219a45d8ad495509e01088f87af5fe7e41719bb4661e6e60afc42fdce035b26",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "issue2_session_id": "ae3d913d352248a7b03419082736a349",
+    "issue3_session_id": "2d59cedb0bc746d79bacaec64832d47a",
+    "issue4_session_id": "87104dffe4854012b54136318c916409",
+    "issue5_session_id": "afde8580679649f4956a990f1a387f1f",
+    "issue6_session_id": "97e3ec05059547bb90092a18f0bf8332",
+    "issue7_session_id": "aeddd9b4f67345909174da28769b3f8a",
+    "issue8_session_id": "a4f65ddd7ade49c2ba464e4382ebd142",
+    "issue9_session_id": "087fc3390f5949ceb83de0551d7f8b14",
+    "issue10_session_id": "099513ad37cf495eb0a6d921ae21ceb3"
+  },
+  "checks": [
+    {
+      "name": "issue2",
+      "status": "FAIL",
+      "reason": "WDT/reset reproduced; 302-byte black frame; issue remains open"
+    },
+    {
+      "name": "issue3",
+      "status": "FAIL",
+      "reason": "WDT/reset reproduced; 302-byte black frame; issue remains open"
+    },
+    {
+      "name": "issue4",
+      "status": "PASS",
+      "values": "23.5 C, 47.0 %, 1002.5 hPa",
+      "transactions": 22,
+      "read_bytes": 46,
+      "written_bytes": 15
+    },
+    {
+      "name": "issue5",
+      "status": "PASS",
+      "scan": [54],
+      "angle": 90,
+      "power_state": 1
+    },
+    {
+      "name": "issue6",
+      "status": "PASS",
+      "port_a": [64],
+      "port_b": [37],
+      "mode": 3,
+      "angle": 90
+    },
+    {
+      "name": "issue7",
+      "status": "PASS",
+      "scan": [99, 100],
+      "a_position": [0, 0],
+      "b_position": [1200, -800],
+      "button_pressed": true
+    },
+    {
+      "name": "issue8",
+      "status": "PASS",
+      "scan": [80],
+      "tag_uid": "DEADBEEF",
+      "transactions": 275,
+      "read_bytes": 74,
+      "written_bytes": 235
+    },
+    {
+      "name": "issue9",
+      "status": "PASS",
+      "adc_calibration": "applied",
+      "frame_nonblack": true
+    },
+    {
+      "name": "issue10",
+      "status": "PASS",
+      "scope": "setup path and first successful frame",
+      "visual_marker": "ALL SETUP OK"
+    },
+    {
+      "name": "platform_unittest",
+      "status": "PASS",
+      "tests": 1241,
+      "skipped": 1
+    },
+    {
+      "name": "offline_unit_fault_controls",
+      "status": "PASS"
+    },
+    {
+      "name": "generated_contract_checks",
+      "status": "PASS"
+    },
+    {
+      "name": "github_ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "github_ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "full_uiflow2_matrix",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/frames/issue2.png",
+    "evidence/frames/issue3.png",
+    "evidence/frames/issue4.png",
+    "evidence/frames/issue5.png",
+    "evidence/frames/issue6.png",
+    "evidence/frames/issue7.png",
+    "evidence/frames/issue8.png",
+    "evidence/frames/issue9.png",
+    "evidence/frames/issue10.png",
+    "code/issue4.py",
+    "code/issue5.py",
+    "code/issue6.py",
+    "code/issue7.py",
+    "code/issue8.py"
+  ],
+  "notes": [
+    "Issue #4 was already fixed on the base main branch.",
+    "Issues #5-#8 required the Unit controller patch and scoped dedicated-port admission.",
+    "Issues #9-#10 use app-bound synthetic ADC calibration; no identity or security eFuse fields are changed.",
+    "Issue #10 original complete Tetris source was unavailable, so game logic is not claimed.",
+    "Raw evidence ZIP manifests were not published because they contain unique device codes; derived summaries and metadata-free PNGs are included."
+  ]
+}

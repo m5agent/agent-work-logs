@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-27 | `esp-emulator` | GitHub issues #2–#10 顺序复测、Unit 控制器与 Cardputer ADC 修复 | `PARTIAL`（#2/#3 仍 FAIL；#4–#10 virtual PASS；platform `1241` + offline Unit + CI PASS；PR #13 合并 `a0ad8150`；完整矩阵/真机 NOT RUN） | [查看](esp-emulator/2026-10-27-issues-2-10-runtime/) |
 | 2026-10-27 | `esp-emulator` | PR #12 替代合并复评与合并 | `PASS`（3 个线性提交；新增 `1,479` blobs/约 `112 MB`、raw evidence 0、单文件 `<10 MiB`；独立 clone 平台 `1237` 项 `1234P + 3S`、离线 Unit `194` 项 `191P + 3S`、Node/Chromium `8/8`、generated checks 与 PR scope PASS；fork CI 两 job PASS；合并 `8a0d99a0`；QEMU/完整矩阵/真机 NOT RUN） | [查看](esp-emulator/2026-10-27-pr-11-merge-review/followups/2026-10-27-pr-12-replacement-merge/) |
 | 2026-10-27 | `esp-emulator` | PR #11 合并前审查：仓库体积、脱敏与 CI 门禁 | `FAIL`（新增 `84,586` 文件/约 `2.27 GB`；`511` 个文件含主机绝对路径、`203` 个含私网 IPv4；平台 `1226` 项中 `19F + 1E + 3S`；Node bridge 缺 `playwright`；未合并，QEMU/完整矩阵/真机 NOT RUN） | [查看](esp-emulator/2026-10-27-pr-11-merge-review/) |
 | 2026-10-26 | `esp-emulator` | Core2 legacy LVGL flush wait 与 SPI transaction-done 诊断 | `PARTIAL`（virtual-device + BIN-bound：`0x40100049` 绑定到 `lv_refr_vdb_flush`，VDB `flushing=1`、`wait_cb=null`；flush callback 已执行，但 completion/`lv_disp_flush_ready` 未出现；`0042` IRQ level 可达 1 仍未闭环；平台 `544/544`、patch replay 与 CI 两 job PASS；normal-WDT reset、非空帧、full matrix、物理与真机 NOT RUN） | [查看](esp-emulator/2026-10-26-core2-lvgl-spi-flush-wait/) |
