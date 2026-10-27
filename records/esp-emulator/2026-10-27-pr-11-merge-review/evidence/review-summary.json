@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "repository": "m5agent/m5stack-esp-emulator",
+  "pull_request": 11,
+  "base_commit": "f2061759897955e6017d4aa2a41bd5ba962c35b6",
+  "head_commit": "a37342f61c05964c060719a6e35c2d568c828e84",
+  "diff": {
+    "files_changed": 84586,
+    "files_added": 84540,
+    "files_modified": 46,
+    "text_insertions": 26008003,
+    "text_deletions": 656,
+    "text_files": 78570,
+    "binary_files": 6016,
+    "branch_blob_bytes": 2271719924,
+    "base_blob_bytes": 27065574,
+    "docs_evidence_paths": 83096,
+    "zip_files": 380,
+    "png_files": 4280,
+    "files_over_10_mib": 10
+  },
+  "redaction_scan": {
+    "added_files_with_host_absolute_paths": 511,
+    "added_files_with_private_ipv4": 203,
+    "confirmed_credential_signature_matches": 0
+  },
+  "execution": {
+    "python": {
+      "version": "3.13.15",
+      "command": "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+      "tests": 1226,
+      "failures": 19,
+      "errors": 1,
+      "skipped": 3,
+      "duration_seconds": 78.708,
+      "failure_groups": {
+        "missing_local_work_baseline": 18,
+        "missing_relative_doc_target": 1
+      },
+      "error_groups": {
+        "missing_local_work_directory": 1
+      }
+    },
+    "node": {
+      "version": "22.14.0",
+      "status": "PARTIAL",
+      "reason": "playwright unavailable in a clean checkout; the CI workflow does not install Node dependencies",
+      "passed_checks": [
+        "test_sha256.mjs",
+        "test_firmware_upload.mjs",
+        "test_unit_visual_mappings.mjs",
+        "test_frontend_recovery.mjs",
+        "test_unit_annotation_contract.mjs"
+      ],
+      "blocked_checks": [
+        "test_unit_annotation_bridge.mjs",
+        "test_unit_audio.mjs"
+      ]
+    },
+    "generated_checks": {
+      "qemu_profiles": "PASS",
+      "peripheral_catalog": "PASS",
+      "runtime_coverage": "PASS",
+      "compileall": "PASS"
+    }
+  },
+  "merge_gate": {
+    "status": "FAIL",
+    "reasons": [
+      "source repository bloat and raw evidence placement",
+      "public-content redaction violations",
+      "non-reproducible CI and failing clean-checkout tests"
+    ]
+  }
+}

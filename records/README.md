@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-27 | `esp-emulator` | PR #11 合并前审查：仓库体积、脱敏与 CI 门禁 | `FAIL`（新增 `84,586` 文件/约 `2.27 GB`；`511` 个文件含主机绝对路径、`203` 个含私网 IPv4；平台 `1226` 项中 `19F + 1E + 3S`；Node bridge 缺 `playwright`；未合并，QEMU/完整矩阵/真机 NOT RUN） | [查看](esp-emulator/2026-10-27-pr-11-merge-review/) |
 | 2026-10-26 | `esp-emulator` | Core2 legacy LVGL flush wait 与 SPI transaction-done 诊断 | `PARTIAL`（virtual-device + BIN-bound：`0x40100049` 绑定到 `lv_refr_vdb_flush`，VDB `flushing=1`、`wait_cb=null`；flush callback 已执行，但 completion/`lv_disp_flush_ready` 未出现；`0042` IRQ level 可达 1 仍未闭环；平台 `544/544`、patch replay 与 CI 两 job PASS；normal-WDT reset、非空帧、full matrix、物理与真机 NOT RUN） | [查看](esp-emulator/2026-10-26-core2-lvgl-spi-flush-wait/) |
 | 2026-10-26 | `esp-emulator` | WebBurner 导入选择、ZIP 路径与当前文档基线收口 | `PASS`（static import/docs：WebBurner `16/16`、manifest `36/36`、policy `14/14`、Secure Boot v2 `26/26`、平台 `543/543`、CI 两 job PASS；flash/boot/runtime/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-26-webburner-import-policy-and-doc-audit/) |
 | 2026-10-26 | `esp-emulator` | FirmwareManifest capability policy 与 security evidence fail-closed | `PASS`（static manifest policy：capabilities 整对象/required/optional 缺失、signed-image status understatement、eFuse 非法枚举、key mismatch、secure-version rollback 均拒绝；平台 `537/537`、manifest `32/32`、Secure Boot v2 `26/26`；live eFuse/ROM/Flash Encryption/真机 NOT RUN） | [查看](esp-emulator/2026-10-26-firmware-manifest-policy-fail-closed/) |
