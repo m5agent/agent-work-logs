@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "PR #14 merge and post-merge Core2 issue #2/#3 startup verification",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/2; https://github.com/m5agent/m5stack-esp-emulator/issues/3",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/14",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "a0ad8150b112afe1273100514c7ef0808bd4477b",
+    "pr_head_commit": "d0bdd33fc34945ddf424401ed45dc4feccb6e11a",
+    "merge_commit": "47af9e76f89912028db6d9dee0b0bcc5425c852"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "All post-merge issue validation used an approved virtual device."
+  },
+  "firmware": {
+    "stock_base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "stock_application_sha256": "c02171cfdde7a51e19c40dbe3e1e1b95033a0087591d34c69f88ebbfdd49de47",
+    "version": "UIFlow2 V2.5.3",
+    "device": "core2"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12.14; fresh merged-main QEMU clone; visible Device Service /api/v1 sessions",
+    "runtime_sha256": "bcd439bc57bae37834b784933585c697e3e5d9e7226955159fc7cd2272931dbc",
+    "source_receipt_sha256": "bc9b3986b7622740bfe8a892abb0ae81e30fee75c4b7ef21220a5dbae380fdcd",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "patch_count": 17,
+    "source_file_count": 109
+  },
+  "checks": [
+    {
+      "name": "pr_14_ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "pr_14_ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "bootstrap_source_receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "startup_display",
+      "status": "PASS",
+      "session_id": "663a03a419fe401abdd58ba6e710e128",
+      "frame_sha256": "b42b50d76903ec39921324feaa6e139089edf9a691a1dead1d9c3d0f815f5221"
+    },
+    {
+      "name": "startup_widgets",
+      "status": "PASS",
+      "session_id": "60fee63cb7d645dc921f9b2dd5ffa1dc",
+      "frame_sha256": "114719e15e227099b389cc2e2761e9f374dd3296506def1eb42faa11e0f2a1cb"
+    },
+    {
+      "name": "startup_lvgl",
+      "status": "PASS",
+      "session_id": "60706ac5dcce449fad51dc97257d6b7a",
+      "frame_sha256": "591fae89f1088a228dd401caaaf17c5c20baf78367f4faf6310e459330f314d2",
+      "foreground_bbox": [12, 27, 217, 40],
+      "maximum_horizontal_run": 16
+    },
+    {
+      "name": "startup_offline_network",
+      "status": "PASS",
+      "session_id": "90abdefdb3af488ca03051bebde1b4c5",
+      "active_elapsed_ms": 181,
+      "ntp_error_elapsed_ms": 1,
+      "frame_sha256": "479ae992aa030fa2e581e82cb3c85a6cafcf16ca5304dca94ed6ae2776d42fb1"
+    },
+    {
+      "name": "explicit_wifi_session_1",
+      "status": "PASS",
+      "session_id": "994adbdcf6d244dda1199d32347ab1b4",
+      "pcap_packets": 35,
+      "tcp_flows": 2,
+      "dhcp_dora": true
+    },
+    {
+      "name": "explicit_wifi_session_2",
+      "status": "PASS",
+      "session_id": "838cfdac40474a7b8f58a3daf4115da9",
+      "pcap_packets": 35,
+      "tcp_flows": 2,
+      "dhcp_dora": true
+    },
+    {
+      "name": "history_cleanup",
+      "status": "PASS",
+      "sessions": 6,
+      "flash_released": true,
+      "qemu_pid_gone": true
+    },
+    {
+      "name": "private_complete_apps",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "full_matrix_independent_rerun",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/frames/display.png",
+    "evidence/frames/widgets.png",
+    "evidence/frames/lvgl.png",
+    "evidence/frames/network.png"
+  ],
+  "notes": [
+    "Approval was limited to merging PR #14 and verifying the public issue paths; no physical hardware was used.",
+    "The radio headless probe framebuffer remains black and is not counted as visual display evidence.",
+    "Issue #2/#3 may be closed for the simulator startup boundary while private complete business apps remain unverified."
+  ]
+}

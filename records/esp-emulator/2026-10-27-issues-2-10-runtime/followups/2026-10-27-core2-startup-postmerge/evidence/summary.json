@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "source": {
+    "base_commit": "a0ad8150b112afe1273100514c7ef0808bd4477b",
+    "pr_head_commit": "d0bdd33fc34945ddf424401ed45dc4feccb6e11a",
+    "merge_commit": "47af9e76f89912028db6d9dee0b0bcc5425c852"
+  },
+  "runtime": {
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "binary_sha256": "bcd439bc57bae37834b784933585c697e3e5d9e7226955159fc7cd2272931dbc",
+    "source_receipt_sha256": "bc9b3986b7622740bfe8a892abb0ae81e30fee75c4b7ef21220a5dbae380fdcd",
+    "patch_count": 17,
+    "source_file_count": 109
+  },
+  "startup": {
+    "status": "PASS",
+    "cases": {
+      "display": {
+        "session_id": "663a03a419fe401abdd58ba6e710e128",
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "bytes": 1170,
+          "unique_colors": 16,
+          "nonblack_pixels": 76800,
+          "sha256": "b42b50d76903ec39921324feaa6e139089edf9a691a1dead1d9c3d0f815f5221"
+        },
+        "radio_enabled": false,
+        "checks": "all PASS"
+      },
+      "widgets": {
+        "session_id": "60fee63cb7d645dc921f9b2dd5ffa1dc",
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "bytes": 3150,
+          "unique_colors": 30,
+          "nonblack_pixels": 76800,
+          "sha256": "114719e15e227099b389cc2e2761e9f374dd3296506def1eb42faa11e0f2a1cb"
+        },
+        "radio_enabled": false,
+        "checks": "all PASS"
+      },
+      "lvgl": {
+        "session_id": "60706ac5dcce449fad51dc97257d6b7a",
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "bytes": 1690,
+          "unique_colors": 16,
+          "nonblack_pixels": 76800,
+          "foreground_pixels": 1121,
+          "foreground_bbox": [12, 27, 217, 40],
+          "foreground_rows": 14,
+          "maximum_horizontal_run": 16,
+          "sha256": "591fae89f1088a228dd401caaaf17c5c20baf78367f4faf6310e459330f314d2"
+        },
+        "visual_review": "Core2 LVGL first frame is readable",
+        "checks": "all PASS"
+      },
+      "offline_network": {
+        "session_id": "90abdefdb3af488ca03051bebde1b4c5",
+        "serial_markers": {
+          "active_true_elapsed_ms": 181,
+          "connected": false,
+          "ntp_error": "OSError(118,)",
+          "ntp_error_elapsed_ms": 1,
+          "ready": true,
+          "done": true
+        },
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "bytes": 938,
+          "unique_colors": 16,
+          "nonblack_pixels": 76800,
+          "sha256": "479ae992aa030fa2e581e82cb3c85a6cafcf16ca5304dca94ed6ae2776d42fb1"
+        },
+        "radio_enabled": false,
+        "checks": "all PASS"
+      }
+    }
+  },
+  "explicit_wifi": {
+    "status": "PASS",
+    "runs": [
+      {
+        "session_id": "994adbdcf6d244dda1199d32347ab1b4",
+        "pcap_sha256": "7a090203ef7b20f64798c6ae84c0b88fb12d2a021b22f0be25ed1b3971f44cbc",
+        "pcap_packets": 35,
+        "dhcp_message_types": {
+          "discover": 1,
+          "offer": 1,
+          "request": 1,
+          "ack": 1
+        },
+        "tcp_flows": 2,
+        "checks": "all PASS"
+      },
+      {
+        "session_id": "838cfdac40474a7b8f58a3daf4115da9",
+        "pcap_sha256": "ebc86f75166f8a3c6381987d7d2a54c9fc2c480ea8f285314c87df09bba7767f",
+        "pcap_packets": 35,
+        "dhcp_message_types": {
+          "discover": 1,
+          "offer": 1,
+          "request": 1,
+          "ack": 1
+        },
+        "tcp_flows": 2,
+        "checks": "all PASS"
+      }
+    ],
+    "different_sessions": true,
+    "different_processes": true,
+    "same_firmware": true,
+    "sequential_cleanup": true
+  },
+  "limitations": [
+    "Original private complete application archives were unavailable.",
+    "The radio headless probe black framebuffer is not used as display evidence.",
+    "A full 67-case matrix was not independently rerun after merge.",
+    "Legacy UIFlow1 LVGL7 RUNTIME-03 remains open.",
+    "Physical hardware, RF, power and electrical behavior are NOT RUN."
+  ]
+}
