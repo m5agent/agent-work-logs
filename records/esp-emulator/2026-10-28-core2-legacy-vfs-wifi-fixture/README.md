@@ -4,7 +4,7 @@
 - 结果：`PARTIAL`
 - 工作类型：`code_change`
 - 问题来源：Core2 legacy UIFlow `RUNTIME-03` 复测
-- 源码版本：`m5agent/m5stack-esp-emulator @ 0f357b7eccfc642c6efd31141af5d816f590a2ae`
+- 源码版本：`m5agent/m5stack-esp-emulator @ a22638ec7528390c90bdfca96b7a8e98c8a668e8`
 - 环境：Core2 `UIFlow_Core2 v1.15.4`，QEMU `m5core2`，Device Service
   `runtime=qemu-wifi` / `profile=core2-openmac`
 
@@ -28,6 +28,8 @@ normal-WDT 仍 reset，因此本记录只关闭 fixture 校正，不关闭
 - Frame：`320x240`，`0` nonblack pixels，SHA256 `57580743…`。
 - Session ID SHA256：`9002382d…`。
 - 平台测试：`1362` 项通过，`1` skip；四个生成器检查通过。
+- CI：[`40693004977`](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40693004977)
+  的 `platform-contracts` 与 `network-namespace-policy` 均通过。
 
 ## 文件
 

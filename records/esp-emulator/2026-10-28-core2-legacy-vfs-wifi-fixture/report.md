@@ -38,6 +38,9 @@ Runtime:         Device Service /api/v1, qemu-wifi, core2-openmac
 - 在 `120.000000030 s` 获取两核 state 和 frame。
 - 同一 corrected fixture 的 normal-WDT control 仍出现
   `TG0WDT_SYS_RESET` / `TG1WDT_SYS_RESET`。
+- 最终源码提交的 GitHub Actions
+  [`40693004977`](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40693004977)
+  两个 job 均通过。
 
 ## 验证结果
 

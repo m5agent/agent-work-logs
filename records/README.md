@@ -18,7 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
-| 2026-10-28 | `esp-emulator` | Core2 legacy VFS 与 WiFi fixture 校正 | `PARTIAL`（virtual-device：matching LittleFS2 + `runtime=qemu-wifi` 120 秒执行注入的 `CORE2_LEGACY_VFS_BOOT`；setup/main、非空帧和 normal-WDT 仍 FAIL/OPEN；platform `1362` 项 `OK`；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-28-core2-legacy-vfs-wifi-fixture/) |
+| 2026-10-28 | `esp-emulator` | Core2 legacy VFS 与 WiFi fixture 校正 | `PARTIAL`（virtual-device：matching LittleFS2 + `runtime=qemu-wifi` 120 秒执行注入的 `CORE2_LEGACY_VFS_BOOT`；setup/main、非空帧和 normal-WDT 仍 FAIL/OPEN；platform `1362` 项与 CI 两 job PASS；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-28-core2-legacy-vfs-wifi-fixture/) |
 | 2026-10-28 | `esp-emulator` | Core2 DPORT/RMT 修复与三设备 UIFlow2 最终回归 | `PARTIAL`（virtual-device：`0065` 五轮 DPORT IRQ 首启动 `5/5`；`0066` classic RMT 后 legacy 到 `APIKEY`；三设备 system 各 51 项、shared 各 7/7、设备组 17/17；platform 1359 项与 CI 两 job PASS；normal-WDT reset、黑帧、display completion/setup 与真机仍 OPEN/NOT RUN） | [查看](esp-emulator/2026-10-28-core2-dport-rmt-three-board/) |
 | 2026-10-28 | `esp-emulator` | UIFlow2 三设备音频与 Core2 A/B/C/PWR 输入收尾 | `PASS`（限定 virtual-device：六会话并发 Mic/Speaker `6/6`、三台 raw PASS；Core2 四回调与 remove PASS；`0062`/`0063`；platform `1352` 项与 CI 两 job PASS；物理、ESP-NOW payload、完整 M5UI 矩阵 NOT RUN/REVIEW） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-audio-and-core2-input/) |
 | 2026-10-28 | `esp-emulator` | Display.drawPixel framebuffer transaction 三设备复验 | `PASS`（virtual-device：StopWatch preimage standalone 像素失败；三台候选 standalone 奇/偶像素、相邻像素保留和显式嵌套事务 PASS；platform `1347` 项 `OK`；冷构建、真机和 DMA soak NOT RUN） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-drawpixel-transaction/) |
