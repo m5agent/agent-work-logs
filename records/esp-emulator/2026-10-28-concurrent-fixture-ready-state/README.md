@@ -60,6 +60,9 @@ BtnA/WAS_HOLD 和 Core2 顺序设备 case 均通过。
 
 ## 后续
 
+- [StopWatch / StickS3 / Core2 UIFlow2 全接口复测](followups/2026-10-29-three-board-uiflow2-full-retest/)：
+  完成 505 方法 M5UI 矩阵、完整通信/ESP-NOW/音频/已选外设复测，并修复
+  M5UI 尺寸/旋转、Core2 预算、BLE identity 和 blocker 文案。
 - [三设备 UIFlow2 接口矩阵与 RMT API 夹具](followups/2026-10-28-rmt-api-and-interface-matrix/)：
   完成其余协议组、StickS3 IR TX/RX、三台 UI/输入验证，并补齐
   trusted-local RMT 文件接口白名单。

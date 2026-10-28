@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "StopWatch, StickS3 and Core2 UIFlow2 full interface retest",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "92dfb1e826d690b87c77850b8d7efdd10ac8ef3b",
+    "result_commit": "bc0f4609795fd995ffae6211c5997d21be9f5f80"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "family": "M5Burner UIFlow2 v2.5.3",
+    "stopwatch_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+    "sticks3_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "core2_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+  },
+  "execution": {
+    "environment": "macOS arm64; three isolated Device Service instances; QEMU TCG",
+    "qemu_sha256": "fccfa931c032f8cae6b90e97ba5f98b1770fbf6856446c4db5f7950241e1fe90",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {"name": "system_runtime", "status": "PASS", "value": "each device 50 PASS + 1 STATE_PASS"},
+    {"name": "shared_corrections", "status": "PASS", "value": "7/7 on each device"},
+    {"name": "sockets", "status": "PASS", "value": "23/23"},
+    {"name": "mqtt", "status": "PASS", "value": "42/42"},
+    {"name": "network", "status": "PASS", "value": "14/14"},
+    {"name": "ezdata", "status": "PASS", "value": "17/17"},
+    {"name": "easysocket", "status": "PASS", "value": "57 PASS + 1 NOT_APPLICABLE_LISTENER"},
+    {"name": "stock_http_failure_control", "status": "FAIL", "value": "15 PASS + 1 FAIL on each device"},
+    {"name": "stock_modbus_failure_control", "status": "FAIL", "value": "42 PASS + 8 ERROR on each device"},
+    {"name": "stock_tls_failure_control", "status": "FAIL", "value": "3 STATE_PASS + 2 ERROR on each device"},
+    {"name": "requests_candidate", "status": "PASS", "value": "2/2 on each device"},
+    {"name": "modbus_candidate", "status": "PASS", "value": "50/50 on each device"},
+    {"name": "tls_candidate", "status": "PASS", "value": "5/5 on each device"},
+    {"name": "audio_player", "status": "PASS", "value": "StopWatch 15/15; StickS3 15/15; Core2 NOT_EXPORTED"},
+    {"name": "audio_recorder", "status": "PASS", "value": "StopWatch 12/12; StickS3 12/12 after isolated rerun; Core2 NOT_EXPORTED"},
+    {"name": "espnow_loopback", "status": "PASS", "value": "12 PASS + 5 STATE_PASS + 1 CONFIGURED_UNVERIFIED on each device"},
+    {"name": "espnow_native_loopback", "status": "PASS", "value": "21 PASS + 21 STATE_PASS + 3 CONFIGURED_UNVERIFIED on each device"},
+    {"name": "m5ui_stock_matrix", "status": "FAIL", "value": "28 classes and 505 methods on StopWatch/Core2; same 3 stock failures"},
+    {"name": "m5ui_stopwatch_candidate", "status": "PASS", "value": "4/4 state and 2/2 frame oracles"},
+    {"name": "m5ui_core2_candidate", "status": "FAIL", "value": "4/4 state but 0/2 frame oracles; striping/coordinate mismatch remains"},
+    {"name": "stock_ble", "status": "FAIL", "value": "StopWatch/StickS3 no matching advertisement; Core2 timeout before board I/O readiness"},
+    {"name": "m5ui_dimension_contracts", "status": "PASS", "value": "3 tests"},
+    {"name": "ble_identity_contracts", "status": "PASS", "value": "3 tests"},
+    {"name": "platform_tests", "status": "PASS", "value": "1406 tests, OK, 1 skipped"},
+    {"name": "github_ci", "status": "PASS", "value": "platform-contracts and network-namespace-policy", "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40750443386"}
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "Virtual-device validation only; physical hardware, RF, acoustic, optical and electrical validation are NOT RUN.",
+    "Core2 legacy UIFlow RUNTIME-03 remains OPEN.",
+    "Stock internal-controller BLE cannot inherit explicit-HCI test-firmware results."
+  ]
+}

@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | StopWatch / StickS3 / Core2 UIFlow2 全接口复测与 runner 修复 | `PARTIAL`（virtual-device：三台 system/shared、通信、音频、ESP-NOW 和已选外设通过；StopWatch/Core2 M5UI 各 505 方法全量审计；修复尺寸/旋转、Core2 预算、BLE identity 与 blocker 文案；stock 三缺陷、Core2 frame routing、stock BLE 和真机边界保留；platform `1406` 项与 CI 两 job PASS） | [查看](records/esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-29-three-board-uiflow2-full-retest/) |
 | 2026-10-29 | ESP Emulator | Core2 legacy UART 与虚拟时钟对齐 | `PARTIAL`（virtual-device：`0070` 时间戳/runner/contracts PASS；WDT-off 到 BOARD/APIKEY `55.00 s`、boot.py `77.11 s`；normal WDT `17.25 s` reset、shift=2 仍 reset；platform `1398` 项与 CI 两 job PASS；`RUNTIME-03`/物理硬件 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-29-core2-legacy-uart-clock/) |
 | 2026-10-28 | ESP Emulator | Protected WDTFEED 语义修复与最新 runtime 三设备复测 | `PARTIAL`（virtual-device：`0069` 合同/reverse/build PASS；三台 system/shared/17 设备组、协议、ESP-NOW、audio、candidate 和 API 通过；platform `1393` 项、CI 两 job PASS；legacy normal-WDT 仍 reset、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-28-protected-wdt-feed-and-latest-runtime/) |
 | 2026-10-29 | ESP Emulator | 正式 GitHub Pages 上线与公开 CoreS3 验收 | `PASS`（原仓库 Actions 构建 `13m53s`、部署 `14s`；正式 HTTPS 真实 CoreS3 C/QEMU `21/21`、manifest 1922 资产、无固件打包；默认墙钟/长期稳定性/持久化/物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-29-github-pages-production/) |
