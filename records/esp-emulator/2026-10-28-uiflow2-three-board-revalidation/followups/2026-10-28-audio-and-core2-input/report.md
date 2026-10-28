@@ -63,9 +63,9 @@ sha256 03d74d53ff8187c4f0a3b22d34c4e898bdd93b61cfc98432dbbeecd1beb12419
 
 | 设备 | record | WAV | 结果 |
 | --- | ---: | ---: | --- |
-| StopWatch | 440.070 Hz | 440.088 Hz | PASS |
+| StopWatch | 440.081 Hz | 440.089 Hz | PASS |
 | StickS3 | 440.070 Hz | 440.088 Hz | PASS |
-| Core2 | 443.829 Hz | 443.792 Hz | PASS（0.86%） |
+| Core2 | 443.829 Hz | 443.828 Hz | PASS（0.87%） |
 
 Speaker WAV/file：StopWatch 662.146 Hz、StickS3 659.454 Hz、Core2
 662.109 Hz。三台 raw 同频 PASS。每台 guest recording state 为 `1 → 0`，
@@ -88,10 +88,14 @@ Core2 输入：
 | data_behavior | `PASS` | Mic/Speaker PCM 与独立频谱/oracle |
 | visual_or_physical | `NOT RUN` | 没有物理触控、声学或 PMIC 电气测量 |
 
+六音频会话以显式 `--ready-timeout 180` 并发，`6/6` 一次完成。首轮旧
+60 秒固定 READY 预算下的 StopWatch Mic 启动超时只作为 runner 资源边界，
+不是固件失败。
+
 平台回归：
 
 ```text
-Ran 1351 tests in 112.451s
+Ran 1352 tests in 113.682s
 OK (skipped=1)
 ```
 
@@ -109,7 +113,8 @@ PROJECT_SNAPSHOT_OK
 - ESP-NOW TX/RX/IRQ 仍被 OpenMAC peer routing 缺口阻塞。
 - Core2 全部 28 类文档方法矩阵仍为 `REVIEW`。
 - 物理触控、扬声器/麦克风声学、PMIC 电气和真机为 `NOT RUN`。
-- 六音频会话并发时 StopWatch Mic 在 guest READY 前超时，单会话补跑 PASS。
+- 六音频会话需要为当前 machine 显式设置 `--ready-timeout 180`；默认
+  60 秒适合普通单会话。
 
 ## 风险与回滚
 
