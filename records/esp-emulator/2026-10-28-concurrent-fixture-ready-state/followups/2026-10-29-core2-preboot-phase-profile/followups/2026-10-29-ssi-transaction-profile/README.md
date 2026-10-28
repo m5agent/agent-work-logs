@@ -68,3 +68,9 @@ driver/IRQ 路径，也尚未关闭 startup UI/应用帧。
 - matching `UIFlow_Core2 v1.15.4` source/ELF/MAP；
 - startup UI、setup/REPL、非空应用帧；
 - 物理 Flash/cache、RF、电气和硬件时序。
+
+## 后续
+
+- [SSI command correlation](followups/2026-10-29-ssi-command-correlation/)：
+  `0072` 确认 `0xBB/64 -> 0x05/1 -> 0xBB/64` 主循环，并将 `82.4%`
+  gap 定位到下一次 status read 前；具体 guest driver/IRQ 路径仍开放。

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy SSI command correlation",
+  "source": {
+    "issue": "RUNTIME-03 SSI command cadence",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "80b2ae1575ffd8cc66404edb96c3e4342be02225",
+    "result_commit": "19651bf0cb521ab1e1dbb102895c3bb2578b4f5d"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4"
+  },
+  "execution": {
+    "environment": "macOS arm64; isolated Device Service /api/v1; Core2 QEMU TCG",
+    "runtime": "qemu-wifi",
+    "icount_shift": 5,
+    "qemu_sha256": "4aa418e6cba1a6d7104906ff88991c62c85e02661fa6ba4e256743f13b6753ba",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "ssi_command_correlation_patch",
+      "status": "PASS",
+      "value": "patch reverse-check and 2 contracts"
+    },
+    {
+      "name": "joint_distribution",
+      "status": "PASS",
+      "value": "0x05/1=50071; 0xBB/64=49882; overflow=0"
+    },
+    {
+      "name": "command_transitions",
+      "status": "PASS",
+      "value": "0xBB->0x05=49582; 0x05->0xBB=49600; overflow=0"
+    },
+    {
+      "name": "per_command_gap",
+      "status": "PASS",
+      "value": "0x05 share=82.398%, avg=1.3115489 ms; 0xBB avg=3.05 us"
+    },
+    {
+      "name": "normal_wdt_rebind",
+      "status": "PASS",
+      "value": "reset_ns=17249440926; tg1_timeouts=0"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "value": "1411 tests, OK, 1 skipped"
+    },
+    {
+      "name": "github_ci",
+      "status": "PASS",
+      "value": "platform-contracts and network-namespace-policy",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40757438108"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/19651bf0cb521ab1e1dbb102895c3bb2578b4f5d/docs/evidence/2026-10-29-core2-ssi-command-correlation/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40757438108"
+  ],
+  "notes": [
+    "The guest alternates 0xBB/64 and 0x05/1 at the controller boundary.",
+    "Most gap time precedes the next 0x05 status read; the concrete guest driver/IRQ path remains OPEN.",
+    "RUNTIME-03 remains OPEN because normal-WDT still resets before BOARD/APIKEY.",
+    "Physical Flash/cache, RF, electrical and hardware timing remain NOT RUN."
+  ]
+}

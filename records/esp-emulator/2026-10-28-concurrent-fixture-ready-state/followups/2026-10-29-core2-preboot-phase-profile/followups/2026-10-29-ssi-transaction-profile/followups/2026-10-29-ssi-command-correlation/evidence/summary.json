@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "firmware_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+  "runtime_sha256": "4aa418e6cba1a6d7104906ff88991c62c85e02661fa6ba4e256743f13b6753ba",
+  "patch": {
+    "name": "0072-esp32-ssi-command-correlation.patch",
+    "sha256": "107cc478b2a4157d391d6d3331a141683ee61ed37d06ba81244afb92324fa024"
+  },
+  "wdt_off_80s": {
+    "transactions": 105346,
+    "gap_count": 105345,
+    "gap_total_ns": 79699282877,
+    "gap_max_ns": 2687751164,
+    "command_lengths": {
+      "0x05/1": 50071,
+      "0xbb/64": 49882,
+      "0x00/0": 1561,
+      "0x00/1": 3567
+    },
+    "command_gaps": {
+      "0x00": {"count": 5133, "total_gap_ns": 13849241407, "max_gap_ns": 361339488},
+      "0x05": {"count": 50071, "total_gap_ns": 65670563678, "max_gap_ns": 2687751164},
+      "0xbb": {"count": 49882, "total_gap_ns": 152263360, "max_gap_ns": 633248}
+    },
+    "command_transitions": {
+      "0xbb->0x05": 49582,
+      "0x05->0xbb": 49600,
+      "0x00->0x00": 5113,
+      "0xbb->0xbb": 282,
+      "0x05->0x05": 212
+    },
+    "pair_overflow": 0,
+    "command_gap_overflow": 0,
+    "transition_overflow": 0,
+    "evidence_sha256": "eb99b870d2bb60cf01bd1e5864345c853ffa267b45fffbf72945721a70d635e9"
+  },
+  "normal_wdt": {
+    "stage0_timeout_ns": 7249439872,
+    "stage1_timeout_ns": 17249439902,
+    "first_reset_ns": 17249440926,
+    "tg1_feed_count": 14999,
+    "tg1_max_feed_interval_ns": 3926688,
+    "tg1_timeout_count": 0,
+    "classification": "BOOTLOADER_TG0_STAGE1_RESET_WITH_TG1_LIVE",
+    "evidence_sha256": "d69e8a4b90aeecc13174024e6fd9dfe0d7337d4e3f45e5a611fcc9dbf9c6f007"
+  },
+  "platform_tests": {
+    "run": 1411,
+    "status": "PASS",
+    "skipped": 1
+  },
+  "ci": {
+    "run": "40757438108",
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40757438108",
+    "status": "PASS"
+  }
+}
