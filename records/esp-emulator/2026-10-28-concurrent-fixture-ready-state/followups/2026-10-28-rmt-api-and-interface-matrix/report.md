@@ -75,6 +75,17 @@ Core2 1 秒抓帧 control 仍只有蓝色边框/灰阶文字，5 秒后绿色成
 - 以上项目均有独立 candidate lane；本轮只重新执行 requests2 与 Modbus async
   candidate，TLS candidate 为 `NOT RERUN`。
 
+### 当前 QEMU `7855…`
+
+QEMU 后续加入 protected `WDTFEED` 语义修复并变为
+`78555183d53318fc25bc8413300e928d35bbbc1305f9d9648e97a73d34ce63b1`。
+在此 binary 上重新执行三台 system runtime、shared corrections 和全部
+17 个设备组：三台 system 均为 `50 PASS + 1 STATE_PASS`，shared 均为
+`7/7`，设备组分别为 `6/6`、`5/5`、`6/6`。StickS3 IR TX/RX 仍为
+`2/2 PASS`。
+
+通信协议矩阵未在 `7855…` 上整套重跑，只保留在 `6ff2…` 的独立结果中。
+
 ## 验证结果
 
 | 层级 | 状态 | 依据 |

@@ -43,6 +43,20 @@ candidate 本轮重新通过。它们不由模拟器 PASS 覆盖。
 - RMT IR TX/RX：两个独立 `/api/v1` session PASS
 - 全平台测试：`1364` 项 `OK`，`1` skip
 
+### 当前 QEMU `7855…` 回绑
+
+在另一条并行修复将当前 QEMU 推进到
+`78555183d53318fc25bc8413300e928d35bbbc1305f9d9648e97a73d34ce63b1`
+后，重新执行：
+
+- 三台 system runtime：各 `50 PASS + 1 STATE_PASS`；
+- 三台 shared corrections：各 `7/7`；
+- 设备组：StopWatch `6/6`、StickS3 `5/5`、Core2 `6/6`；
+- StickS3 IR TX/RX 在当前 runtime 上仍为 `2/2`。
+
+完整通信协议组没有在此 binary 上重复整套；其结果继续绑定前一个
+`6ff2…` runtime。
+
 ## 文件
 
 - [report.md](report.md)：执行矩阵、失败分类、修复和边界
