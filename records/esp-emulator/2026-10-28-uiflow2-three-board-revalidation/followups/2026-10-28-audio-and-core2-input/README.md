@@ -30,6 +30,7 @@
 - A/B/C/PWR 回调均收到状态 `[2]`，remove 后无新事件；
 - 六音频会话并发 `6/6` PASS，没有 retry；
 - 平台回归 `1352` 项 `OK`，`1` 项既有 skip；
+- GitHub CI `platform-contracts` 与 `network-namespace-policy` 两个 job PASS；
 - 四个生成器检查与 `git diff --check` PASS；
 - 当前 GitHub open issue 为 `0`，没有关闭任何 issue。
 

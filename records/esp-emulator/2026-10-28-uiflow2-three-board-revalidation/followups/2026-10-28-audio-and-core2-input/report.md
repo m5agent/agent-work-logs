@@ -108,6 +108,14 @@ QEMU_PROFILES_OK
 PROJECT_SNAPSHOT_OK
 ```
 
+GitHub CI：
+
+```text
+run 40649556506
+platform-contracts PASS
+network-namespace-policy PASS
+```
+
 ## 未覆盖项
 
 - ESP-NOW TX/RX/IRQ 仍被 OpenMAC peer routing 缺口阻塞。
