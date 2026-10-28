@@ -1,0 +1,27 @@
+Date: 2026-10-28
+Validation: virtual-device validation
+Physical hardware: NOT RUN
+
+Platform regression:
+  command: PYTHONPATH=platform/tools:.work/py python3 -m unittest discover -s platform/tests -p 'test_*.py'
+  result: Ran 1344 tests, OK, skipped=1
+
+Generated checks:
+  runtime_coverage.py --check: RUNTIME_COVERAGE_OK
+  peripheral_catalog.py --check: PERIPHERAL_CATALOG_OK
+  qemu_profiles.py --check: QEMU_PROFILES_OK
+  project_snapshot.py --check: PROJECT_SNAPSHOT_OK
+
+Docs contracts:
+  test_docs_index_contract: PASS
+  test_docs_current_state_contract: PASS
+  total: 20/20
+
+Source hygiene:
+  git diff --check: PASS
+
+Lifecycle:
+  evidence requested before stop: PASS
+  stop purge=0: PASS
+  final qemu-system processes: 0
+  independent test services after cleanup: 0

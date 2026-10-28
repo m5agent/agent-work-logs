@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "devices": {
+    "stopwatch": {
+      "system_runtime": {"pass": 50, "state_pass": 1},
+      "shared_candidates": {"pass": 7},
+      "sockets": {"pass": 23},
+      "mqtt": {"pass": 42},
+      "network": {"pass": 14},
+      "http_stock": {"pass": 15, "fail": 1},
+      "http_candidate": {"pass": 2},
+      "easysocket": {"pass": 57, "not_applicable": 1},
+      "modbus_stock": {"pass": 42, "error": 8},
+      "modbus_candidate": {"pass": 50},
+      "ezdata": {"pass": 17},
+      "m5ui_final_corrections": {"state_pass": 4, "frame_pass": 2}
+    },
+    "sticks3": {
+      "system_runtime": {"pass": 50, "state_pass": 1},
+      "shared_candidates": {"pass": 7},
+      "sockets": {"pass": 23},
+      "mqtt": {"pass": 42},
+      "network": {"pass": 14},
+      "http_stock": {"pass": 15, "fail": 1},
+      "http_candidate": {"pass": 2},
+      "easysocket": {"pass": 57, "not_applicable": 1},
+      "modbus_stock": {"pass": 42, "error": 8},
+      "modbus_candidate": {"pass": 50},
+      "ezdata": {"pass": 17},
+      "m5ui": "NOT_EXPORTED"
+    },
+    "core2": {
+      "system_runtime": {"pass": 50, "state_pass": 1},
+      "shared_candidates": {"pass": 7},
+      "sockets": {"pass": 23},
+      "mqtt": {"pass": 42},
+      "network": {"pass": 14},
+      "http_stock": {"pass": 15, "fail": 1},
+      "http_candidate": {"pass": 2},
+      "easysocket": {"pass": 57, "not_applicable": 1},
+      "modbus_stock": {"pass": 42, "error": 8},
+      "modbus_candidate": {"pass": 50},
+      "ezdata": {"pass": 17},
+      "m5ui_constructors": {"ready": 28, "total": 28},
+      "m5ui_documented_sample": {
+        "state_pass": 73,
+        "pending": 15,
+        "expected_unsupported": 1,
+        "fail": 1
+      }
+    }
+  },
+  "candidate_fixes": [
+    "0001-m5ui-native-marshalling",
+    "0002-requests2-form-encoding",
+    "0021-ble-advertising-uuid32",
+    "0022-modbus-transform-frame",
+    "0023-modbus-async-socket"
+  ],
+  "blocked_or_review": [
+    "StopWatch drawPixel sends no one-pixel payload to CO5300",
+    "QRCode.setText candidate firmware not rebuilt",
+    "TLS epoch candidate firmware not rebuilt",
+    "StopWatch/StickS3 playWavFile path hangs",
+    "Mic input has no nonzero PCM fixture",
+    "ESP-NOW TX/RX/IRQ lacks OpenMAC peer routing",
+    "Core2 host-key callback delivery is not stable",
+    "Core2 full 28-class documented M5UI matrix is incomplete",
+    "Text glyph OCR and physical hardware validation are NOT RUN"
+  ]
+}

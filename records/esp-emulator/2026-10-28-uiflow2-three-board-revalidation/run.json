@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "virtual_device_validation_and_code_change",
+  "overall_status": "PARTIAL",
+  "title": "StopWatch / StickS3 / Core2 UIFlow2 三设备接口复测",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "f311c7e0ede2ab98bf05ca8c89c64607575734e3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": [
+      "stopwatch",
+      "sticks3",
+      "core2"
+    ]
+  },
+  "firmware": {
+    "uiflow2": "v2.5.3",
+    "stopwatch_sha256": "ef5e81b6da17ba04a0356b3bde782e9f0f8f93b217701a4414a52a8d8d8532c0",
+    "sticks3_sha256": "c45d4514e21d94a6c069185e08f05851c75b4747d354c1423decdefa625e1dd3",
+    "core2_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "runtime_sha256": "21b7e34cc96560b4c8185131791008ae49fb1c6975a8428e4e344188a8236394",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "patch_count": 28
+  },
+  "execution": {
+    "environment": "macOS arm64; UIFlow2 QEMU; Python 3.13 for orchestration; Python 3.12 source composition",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform regression",
+      "status": "PASS",
+      "detail": "1344 tests OK, 1 skipped"
+    },
+    {
+      "name": "generated project checks",
+      "status": "PASS",
+      "detail": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "three-board stable protocol domains",
+      "status": "PASS",
+      "detail": "system runtime, sockets, MQTT, network, EasySocket, EzData"
+    },
+    {
+      "name": "shared stock failures and candidates",
+      "status": "PASS",
+      "detail": "requests2, BLE UUID32, Modbus transform/async, M5UI marshalling"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "virtual-device result only"
+    }
+  ],
+  "evidence": [
+    "evidence/results-summary.json",
+    "evidence/regression-summary.txt",
+    "patches/0021-ble-advertising-uuid32.patch",
+    "patches/0022-modbus-transform-frame.patch",
+    "patches/0023-modbus-async-socket.patch"
+  ],
+  "notes": [
+    "StopWatch drawPixel one-pixel CO5300 window remains unresolved.",
+    "QRCode.setText and TLS epoch need candidate-firmware rebuild.",
+    "StopWatch/StickS3 playWavFile and PCM input evidence remain incomplete.",
+    "ESP-NOW TX/RX/IRQ is blocked by missing OpenMAC peer routing.",
+    "Core2 host-key callback stability and full documented M5UI matrix remain REVIEW.",
+    "No physical hardware, RF, acoustic, optical or electrical validation was performed."
+  ]
+}

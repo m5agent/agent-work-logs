@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | ESP Emulator | StopWatch / StickS3 / Core2 UIFlow2 三设备接口复测 | `PARTIAL`（虚拟设备核心协议与五个共享候选修复 PASS；platform `1344` 项 `OK`；drawPixel、QR/TLS 重建、WAV/mic、ESP-NOW payload、Core2 callback/UI 与真机仍保留） | [查看](records/esp-emulator/2026-10-28-uiflow2-three-board-revalidation/) |
 | 2026-10-28 | ESP Emulator | PR #15 UIFlow2 controller/API sweep 合并审阅 | `PASS`（300 blobs/约 8.38 MB、evidence 610 KB；本地平台 `1335P + 3S`、四个 generated checks、最终 CI 两 job PASS；追加两个 test-only GCC portability commits；独立 runtime/matrix 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-28-pr-15-uiflow2-api-sweep/) |
 | 2026-10-27 | ESP Emulator | PR #14 合并与 Core2 issue #2/#3 post-merge 复验 | `PASS`（fresh merged-main cold build；4 startup + 2 explicit WiFi visible sessions PASS；runtime `bcd439bc…`、17 patches/109 sources、CI 两 job、历史/Flash/PID cleanup PASS；私有完整 app、完整矩阵复跑、物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-27-issues-2-10-runtime/followups/2026-10-27-core2-startup-postmerge/) |
 | 2026-10-27 | ESP Emulator | GitHub issues #2–#10 顺序复测、Unit 控制器与 Cardputer ADC 修复 | `PARTIAL`（#2/#3 仍 FAIL 并保持 open；#4–#10 virtual-device PASS；platform `1241` + offline Unit + 两 GitHub CI jobs PASS；PR #13 合并 `a0ad8150`；完整矩阵/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-27-issues-2-10-runtime/) |
