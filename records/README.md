@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | 正式 GitHub Pages 上线与公开 CoreS3 验收 | `PASS`（原仓库 GitHub Actions 固定源码构建、真实 guest 验收和 Pages 部署成功；正式 HTTPS 独立 `21/21` PASS；浏览器虚拟设备结果，默认墙钟/长期稳定性/持久化/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-github-pages-production/) |
 | 2026-10-29 | `esp-emulator` | Core2 legacy UART 与虚拟时钟对齐 | `PARTIAL`（virtual-device：`0070` 与 runner 串口行合同 PASS；WDT-off BOARD/APIKEY `55.00 s`、boot.py `77.11 s`，normal WDT `17.25 s` reset，shift=2 仍 reset；platform `1398` 项与 CI 两 job PASS；startup UI/REPL/非空帧和物理硬件 OPEN/NOT RUN） | [查看](esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-29-core2-legacy-uart-clock/) |
 | 2026-10-28 | `esp-emulator` | Protected WDTFEED 语义修复与最新 runtime 三设备复测 | `PARTIAL`（virtual-device：`0069` C 合同/reverse/build PASS；三台 system/shared/17 设备组、协议、ESP-NOW、audio、candidate、API `81/95` 与 TLS `5/5` 通过；platform `1393` 项、CI 两 job PASS；legacy normal-WDT 仍 reset、物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-28-protected-wdt-feed-and-latest-runtime/) |
 | 2026-10-28 | `esp-emulator` | PR #16 CoreS3 C/QEMU 浏览器工作台合并 | `PASS`（公开 Pages 实际 CoreS3 客体 `21/21`、静态工作台 `16/16`、Node 契约与 PR CI PASS；merge commit `ef5f6d79`；浏览器虚拟设备结果，物理硬件/默认时钟/长期稳定性/持久化 NOT RUN） | [查看](esp-emulator/2026-10-28-pr-16-public-simulator-merge/) |

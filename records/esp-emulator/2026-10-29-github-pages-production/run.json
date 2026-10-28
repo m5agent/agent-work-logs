@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Production GitHub Pages deployment for the public simulator",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/16",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ef5f6d79c0529eb6aa72a2212d8c951438d039b8",
+    "source_commit": "8e47c6ba83c042398d767a8d56ff47c16b927181",
+    "result_commit": "e5a94bbba93bfa1785a72a0140a9f4de9be53bbf"
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "CoreS3",
+    "firmware_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "wasm_sha256": "716f3b6a8750335613da2897be0933d1497965962d0dc1b3f2754ebf76316c89"
+  },
+  "execution": {
+    "validation": "browser virtual-device validation",
+    "environment": "GitHub Actions Ubuntu, GitHub Pages, public HTTPS, Chromium",
+    "task_id": "40719197233",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "pull_request_16_merged",
+      "status": "PASS",
+      "value": "CoreS3 C/QEMU WASM workbench"
+    },
+    {
+      "name": "timing_fix_merged",
+      "status": "PASS",
+      "value": "a07f49b7a8b5e680a24faf08541c7329e7ced760"
+    },
+    {
+      "name": "pages_build",
+      "status": "PASS",
+      "value": "13m53s"
+    },
+    {
+      "name": "pages_deploy",
+      "status": "PASS",
+      "value": "14s"
+    },
+    {
+      "name": "public_https_cores3_qemu",
+      "status": "PASS",
+      "value": "21/21 checks"
+    },
+    {
+      "name": "public_manifest",
+      "status": "PASS",
+      "value": "1922 assets; firmware_bundled=false"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "value": "browser virtual-device validation only"
+    }
+  ],
+  "evidence": [
+    "evidence/public-qemu-browser-summary.json",
+    "evidence/public-site-1440.png",
+    "https://m5agent.github.io/m5stack-esp-emulator/",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40719197233"
+  ],
+  "notes": [
+    "Default wall-clock scheduling, long-term stability, persistence, network, audio, other devices and physical hardware remain outside this result.",
+    "The source repository does not bundle ROM, firmware, WASM or dependency archives."
+  ]
+}
