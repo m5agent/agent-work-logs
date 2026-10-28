@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy pre-boot phase profile",
+  "source": {
+    "issue": "RUNTIME-03 pre-boot work exceeds normal-WDT deadline",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "419235e91d9a8e687e63fc9c422b91d1b0cc76ea"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4"
+  },
+  "execution": {
+    "environment": "macOS arm64, isolated Device Service /api/v1, Core2 QEMU",
+    "runtime": "qemu-wifi",
+    "icount_shift": 5,
+    "pc_sample_ns": 50000000,
+    "uart_trace": true,
+    "qemu_sha256": "fccfa931c032f8cae6b90e97ba5f98b1770fbf6856446c4db5f7950241e1fe90",
+    "task_id": "",
+    "session_id": "",
+    "session_id_sha256": "6bd75e3973ec8e3ff0df03f82ef177720db56f37ea5847c0c49ea04bb651c626"
+  },
+  "checks": [
+    {
+      "name": "pc_sampling",
+      "status": "PASS",
+      "samples": 1599,
+      "interval_ns": 50000000
+    },
+    {
+      "name": "uart_virtual_timeline",
+      "status": "PASS",
+      "board_name_ns": 54992441664,
+      "api_key_ns": 54997104352
+    },
+    {
+      "name": "ssi_phase_profile",
+      "status": "PASS",
+      "transactions": 103058,
+      "rx_bytes": 3181984,
+      "last_payload_bytes": 64
+    },
+    {
+      "name": "normal_wdt_rebind",
+      "status": "PASS",
+      "stage0_timeout_ns": 7253606591,
+      "stage1_timeout_ns": 17253606622,
+      "first_reset_ns": 17253685886,
+      "tg1_timeout_count": 0
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "tests": 1400,
+      "skipped": 1
+    },
+    {
+      "name": "validators",
+      "status": "PASS",
+      "scope": [
+        "runtime_coverage",
+        "peripheral_catalog",
+        "qemu_profiles",
+        "project_snapshot"
+      ]
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/419235e91d9a8e687e63fc9c422b91d1b0cc76ea/docs/evidence/2026-10-29-core2-preboot-phase-profile/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40732335677"
+  ],
+  "notes": [
+    "The runner now records explicit PC sampling and UART trace controls.",
+    "Four immediate-yield QEMU controls were rejected and are not product changes.",
+    "RUNTIME-03 remains OPEN because normal-WDT still resets before BOARD/APIKEY.",
+    "Physical Flash/cache, RF, electrical and hardware timing remain NOT RUN."
+  ]
+}
