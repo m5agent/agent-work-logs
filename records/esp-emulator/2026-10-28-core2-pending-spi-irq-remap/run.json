@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 pending SPI IRQ remap",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7de35695554d3ac8d93c9329a892cc7ee0241ea9",
+    "commit": "f3bab9c0dfcb8a1928fc3f2e064d973a9ac252c9"
+  },
+  "hardware": {},
+  "firmware": {
+    "probe_firmware_sha256": "1f4d1b405425f093c40459e31e3e3c643e4ac49ccd529b9018a7dc346470faf9",
+    "probe_elf_sha256": "00d946fe3f6ca6a5bf431a609afa32beb8c71fc4ea753baa9e6920cb4ed3387d",
+    "fixed_qemu_sha256": "22bf9dba026ccb8a2d5f483de5917eb56433610d97709abe29122c49358d3d67",
+    "pre_fix_qemu_sha256": "03ae86b5ce2d2029bf68a1b0e9c89153447217a02938a556ea292066b222afaf"
+  },
+  "execution": {
+    "environment": "macOS arm64, ESP-IDF 5.5.4, QEMU m5core2",
+    "validation": "virtual-device validation",
+    "fixed_attempts": 3,
+    "fixed_passed": 3,
+    "pre_fix_attempts": 1,
+    "pre_fix_passed": 0,
+    "core2_uiflow2_cases": 6,
+    "core2_uiflow2_passed": 6,
+    "retry_used": false
+  },
+  "checks": [
+    {
+      "name": "pre_fix_control",
+      "status": "FAIL",
+      "detail": "guest SPI callback timeout"
+    },
+    {
+      "name": "fixed_spi_irq_remap",
+      "status": "PASS",
+      "detail": "3/3 guest post callback and queued result"
+    },
+    {
+      "name": "core2_uiflow2_device_group",
+      "status": "PASS",
+      "detail": "6/6 cases, attempt 1, no retry"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "1354 tests OK, skipped=1"
+    },
+    {
+      "name": "docs_contracts",
+      "status": "PASS",
+      "detail": "48/48"
+    },
+    {
+      "name": "legacy_uiflow_runtime_03",
+      "status": "NOT RUN",
+      "detail": "still blocked before display completion; no non-empty frame"
+    },
+    {
+      "name": "physical_validation",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f3bab9c0dfcb8a1928fc3f2e064d973a9ac252c9/tests/firmware/core2_spi_irq_remap/evidence-2026-10-28-core2-spi-irq-remap.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f3bab9c0dfcb8a1928fc3f2e064d973a9ac252c9/tests/firmware/core2_spi_irq_remap/evidence-2026-10-28-core2-spi-irq-remap-control.json"
+  ],
+  "notes": [
+    "PASS is scoped to the independent SPI pending-remap defect.",
+    "This record does not close RUNTIME-03 or establish a legacy UIFlow application frame.",
+    "Hardware and electrical validation were not run."
+  ]
+}
