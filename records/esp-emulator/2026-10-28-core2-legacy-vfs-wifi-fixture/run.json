@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy VFS and WiFi fixture correction",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "0f357b7eccfc642c6efd31141af5d816f590a2ae"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "test_image_sha256": "893d353527e15ddda041a3977c48065325141fe6c4cba7508aa280c80e064d8e"
+  },
+  "execution": {
+    "environment": "Core2 m5core2 QEMU, Device Service /api/v1, runtime=qemu-wifi, profile=core2-openmac, icount shift=5",
+    "task_id": "",
+    "session_id": "sha256:9002382dcb325ff8aa2421594283c1373fc0276a5e09677ad8a91a747e75277c"
+  },
+  "checks": [
+    {
+      "name": "matching_littlefs2_vfs_mount",
+      "status": "PASS",
+      "evidence": "serial contains CORE2_LEGACY_VFS_BOOT"
+    },
+    {
+      "name": "wifi_backed_device_service_to_injected_boot",
+      "status": "PASS",
+      "evidence": "120s virtual-time session, qemu-wifi, serial 575 bytes"
+    },
+    {
+      "name": "system_setup_and_application_frame",
+      "status": "FAIL",
+      "evidence": "setup/main absent; 320x240 frame has 0 nonblack pixels"
+    },
+    {
+      "name": "normal_wdt_boot",
+      "status": "FAIL",
+      "evidence": "TG0/TG1 system reset observed"
+    },
+    {
+      "name": "platform_regression",
+      "status": "PASS",
+      "evidence": "1362 tests OK, 1 skipped; generated checks PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "QEMU binary sha256: 3b56b49a6b8e9444ca6a22e236bad92caf50f24460985fa907c8d32ac689fcd9",
+    "VFS payload sha256: 805e1acd12039e235bf2da7f1507275b3e1a83f9f0df0e53098c201b1f09aa7c",
+    "Frame sha256: 57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+    "Only virtual-device validation; physical hardware NOT RUN",
+    "RUNTIME-03 remains OPEN"
+  ]
+}

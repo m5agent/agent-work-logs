@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | ESP Emulator | Core2 legacy VFS 与 WiFi fixture 校正 | `PARTIAL`（virtual-device：matching LittleFS2 + `runtime=qemu-wifi` 120 秒执行注入 boot marker；setup/main、非空帧、normal-WDT 与真机仍 OPEN/NOT RUN；platform `1362` 项 `OK`） | [查看](records/esp-emulator/2026-10-28-core2-legacy-vfs-wifi-fixture/) |
 | 2026-10-28 | ESP Emulator | ESP-NOW controller loopback 与三设备 UIFlow2 接口最终复测 | `PARTIAL`（virtual-device：`0067` 三台 unicast/broadcast/receive/IRQ PASS；system/shared/17 设备组、通信、audio wrapper、requests/Modbus/TLS candidate 同 runtime 重绑；platform `1362` 项 `OK`；外部/加密 ESP-NOW、Core2 legacy 与真机 NOT RUN/OPEN） | [查看](records/esp-emulator/2026-10-28-espnow-loopback-three-board/) |
 | 2026-10-28 | ESP Emulator | Core2 DPORT/RMT 修复与三设备 UIFlow2 最终回归 | `PARTIAL`（virtual-device：`0065` 五轮 DPORT IRQ 首启动 `5/5`；`0066` classic RMT 后 legacy 到 `APIKEY`；三设备 system 各 51 项、shared 各 7/7、设备组 17/17；platform 1359 项与 CI 两 job PASS；normal-WDT reset、黑帧、display completion/setup 与真机仍 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-28-core2-dport-rmt-three-board/) |
 | 2026-10-28 | ESP Emulator | Core2 pending SPI IRQ remap | `PASS`（限定 virtual-device：pending INTMATRIX mapping 修复；同固件/ELF pre-fix timeout、fixed `3/3`；Core2 UIFlow2 `6/6`；platform `1354` 项、docs `48/48`、CI 两 job PASS；legacy `RUNTIME-03`、非空帧与真机仍 `OPEN/NOT RUN`） | [查看](records/esp-emulator/2026-10-28-core2-pending-spi-irq-remap/) |
