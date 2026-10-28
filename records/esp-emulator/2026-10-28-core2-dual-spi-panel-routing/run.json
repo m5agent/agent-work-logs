@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy dual-SPI panel routing",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5abfeac88029f549ff496a6397b6dc2baffa3e69"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "test_image_sha256": "49b7f8840ee1cfaf75ecb1a41743b428f2aa86204c86ccddcf660694a9ae8ae6"
+  },
+  "execution": {
+    "environment": "Core2 m5core2 QEMU, Device Service /api/v1, runtime=qemu-wifi, core2-openmac, icount shift=5, WDT disabled diagnostic",
+    "task_id": "",
+    "session_id": "sha256:92683e855c955328f9b7762529e8fd6c3c85d2737905cc852b158df4eab866aa"
+  },
+  "checks": [
+    {
+      "name": "spi3_only_negative_control",
+      "status": "FAIL",
+      "evidence": "panel DMA writes=0, other controller DMA writes=412"
+    },
+    {
+      "name": "legacy_hspi_panel_routing",
+      "status": "PASS",
+      "evidence": "patch 0068 attaches one panel object to SPI2 and SPI3"
+    },
+    {
+      "name": "legacy_lcd_nonblack_frame",
+      "status": "PASS",
+      "evidence": "320x240, 1422 nonblack pixels, 2 colors"
+    },
+    {
+      "name": "original_startup_ui",
+      "status": "FAIL",
+      "evidence": "original UI does not complete a meaningful frame"
+    },
+    {
+      "name": "normal_wdt_boot",
+      "status": "FAIL",
+      "evidence": "TG0 system reset remains"
+    },
+    {
+      "name": "platform_regression",
+      "status": "PASS",
+      "evidence": "1363 tests OK, 1 skipped; CI two jobs PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "QEMU binary sha256: 6ff2aca091909ea078e5b9805b420cb04c11e3f9928b52c2fac199e33e45b2ef",
+    "Frame sha256: 55249d07a37cf4b3f00825a4834c3ec99bf7aab466de8296a5ac11a9011f787b",
+    "Serial sha256: 8c0dc77796df56f6a5c22f8237e63793980c5bc3050f7c6222caa18179d24f1e",
+    "Only virtual-device validation; physical hardware NOT RUN",
+    "RUNTIME-03 remains OPEN"
+  ]
+}
