@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "pr_review",
+  "overall_status": "PASS",
+  "title": "ESP Emulator PR #15 UIFlow2 API sweep merge review",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/15",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "47af9e76f89912028db6d9dee0b0bcc5425c852",
+    "original_head_commit": "3b5c913bc2bf20a05477648bb5d0315b229adaea",
+    "maintainer_fix_commits": [
+      "8091f99df87bc40dbe4580d61f507d7bae5bb348",
+      "a030d1395636cae5a7064c439295a2153e0a7a89"
+    ],
+    "final_head_commit": "a030d1395636cae5a7064c439295a2153e0a7a89",
+    "merge_commit": "f311c7e0ede2ab98bf05ca8c89c64607575734e3"
+  },
+  "hardware": {
+    "status": "NOT RUN"
+  },
+  "firmware": {
+    "status": "REVIEW",
+    "reason": "Contributor-provided source-pinned firmware and runtime evidence was reviewed but not independently replayed."
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12.14; GitHub Linux CI",
+    "local_qemu_sessions": 0,
+    "local_device_service_started": false
+  },
+  "checks": [
+    {
+      "name": "pr_scope",
+      "status": "PASS",
+      "new_blobs": 300,
+      "new_blob_bytes": 8379261,
+      "new_evidence_bytes": 610190
+    },
+    {
+      "name": "platform_unittest",
+      "status": "PASS",
+      "tests": 1335,
+      "skipped": 3
+    },
+    {
+      "name": "runtime_coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral_catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "qemu_profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "first_ci_platform_contracts",
+      "status": "FAIL",
+      "reason": "Two cross-compiler C harness errors"
+    },
+    {
+      "name": "second_ci_platform_contracts",
+      "status": "FAIL",
+      "reason": "GCC dangling-pointer warning in test fixture"
+    },
+    {
+      "name": "final_github_ci_platform_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "final_github_ci_network_namespace_policy",
+      "status": "PASS"
+    },
+    {
+      "name": "independent_runtime_replay",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "The contributor history was preserved; two maintainer test-only commits were appended.",
+    "The PR includes a 28-patch runtime and 68/68 matrix claim, but this review did not independently rerun them.",
+    "No local Device Service session or QEMU process was started.",
+    "No open repository issue was closed by this review."
+  ]
+}
