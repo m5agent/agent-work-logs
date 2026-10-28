@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Core2 M5UI panel DMA dedup and legacy SSI issuer PC",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "19651bf0cb521ab1e1dbb102895c3bb2578b4f5d",
+    "result_commit": "38760a0f968136119fe435b99d031bff611d1406",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40766337332"
+  },
+  "hardware": {},
+  "firmware": {
+    "stopwatch_base_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+    "sticks3_base_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "core2_base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "core2_m5ui_base_sha256": "2a91964f4ef1b4823adc4b7b13fa08ddb2166ead3b96c74fe2088a71c4e3ea2a",
+    "core2_m5ui_candidate_sha256": "cd9bbacd97884708d2264baf87fa541519000fe674c58867f8371e1adfd785d9",
+    "legacy_core2_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU virtual devices; isolated Device Service sessions",
+    "qemu_sha256": "9bf74439ddbe7225a64eb437290043729fb032525756adb834565ec412f8c197",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "Core2 M5UI candidate state oracles",
+      "status": "PASS",
+      "count": "4/4"
+    },
+    {
+      "name": "Core2 M5UI triangle/image frame oracles",
+      "status": "PASS",
+      "count": "2/2"
+    },
+    {
+      "name": "Core2 M5UI RAMWR exact windows",
+      "status": "PASS",
+      "count": "54/54"
+    },
+    {
+      "name": "Three-board system runtime smoke",
+      "status": "PASS",
+      "details": "StopWatch, StickS3 and Core2 each 50 PASS + 1 STATE_PASS"
+    },
+    {
+      "name": "Three-board shared corrections smoke",
+      "status": "PASS",
+      "details": "StopWatch, StickS3 and Core2 each 7/7 PASS"
+    },
+    {
+      "name": "Legacy SSI command PC table",
+      "status": "PASS",
+      "details": "105161/105161 transactions; overflow 0"
+    },
+    {
+      "name": "Legacy normal-WDT startup",
+      "status": "OPEN",
+      "details": "first reset at 17.253607230 s; TG1 live"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "details": "1418 tests, OK, 1 skip"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "network-namespace-policy and platform-contracts"
+    },
+    {
+      "name": "Physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/frame-pre-fix.png",
+    "evidence/frame-post-fix.png",
+    "evidence/m5ui-dma-summary.json",
+    "evidence/ssi-command-pc-summary.json",
+    "evidence/three-board-smoke.json",
+    "patches/0001-esp32-ssi-command-pc.patch",
+    "patches/0002-esp32-spi-panel-dma-dedup.patch"
+  ],
+  "notes": [
+    "M5UI frame oracle is fixed in the virtual panel model.",
+    "RUNTIME-03 remains OPEN because normal-WDT startup completion is not solved.",
+    "Physical panel DMA/SPI timing, RF, electrical behavior and real hardware remain NOT RUN."
+  ]
+}
