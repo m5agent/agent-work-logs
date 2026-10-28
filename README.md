@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | ESP Emulator | 三设备并发 UIFlow2 复测与 runner 竞态修复 | `PARTIAL`（virtual-device：system/shared/协议/音频通过；固定 HTTP fixture 端口竞争与 READY/`running` 409 已修；Core2 18 秒窗口顺序帧 PASS；platform `1364` 项；stock 固件与真机边界保留） | [查看](records/esp-emulator/2026-10-28-concurrent-fixture-ready-state/) |
 | 2026-10-28 | ESP Emulator | Core2 legacy dual-SPI panel routing | `PARTIAL`（virtual-device：legacy HSPI/SPI2 与 UIFlow2 VSPI/SPI3 共用同一 panel；probe frame `1422` nonblack pixels；原厂 startup UI、normal-WDT 和真机仍 OPEN/NOT RUN；platform `1363` 项与 CI 两 job PASS） | [查看](records/esp-emulator/2026-10-28-core2-dual-spi-panel-routing/) |
 | 2026-10-28 | ESP Emulator | Core2 legacy VFS 与 WiFi fixture 校正 | `PARTIAL`（virtual-device：matching LittleFS2 + `runtime=qemu-wifi` 120 秒执行注入 boot marker；setup/main、非空帧、normal-WDT 与真机仍 OPEN/NOT RUN；platform `1362` 项与 CI 两 job PASS） | [查看](records/esp-emulator/2026-10-28-core2-legacy-vfs-wifi-fixture/) |
 | 2026-10-28 | ESP Emulator | ESP-NOW controller loopback 与三设备 UIFlow2 接口最终复测 | `PARTIAL`（virtual-device：`0067` 三台 unicast/broadcast/receive/IRQ PASS；system/shared/17 设备组、通信、audio wrapper、requests/Modbus/TLS candidate 同 runtime 重绑；platform `1362` 项 `OK`；外部/加密 ESP-NOW、Core2 legacy 与真机 NOT RUN/OPEN） | [查看](records/esp-emulator/2026-10-28-espnow-loopback-three-board/) |

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Concurrent three-board UIFlow2 retest and runner race fixes",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5abfeac88029f549ff496a6397b6dc2baffa3e69",
+    "result_commit": "90f556387560a47230141946e96f6f0166266721"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "uiflow2_version": "v2.5.3",
+    "stopwatch_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+    "sticks3_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "core2_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+  },
+  "execution": {
+    "environment": "macOS arm64; Device Service /api/v1; QEMU virtual device",
+    "qemu_sha256": "6ff2aca091909ea078e5b9805b420cb04c11e3f9928b52c2fac199e33e45b2ef",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {"name": "system_runtime", "status": "PASS", "value": "50 PASS + 1 STATE_PASS each"},
+    {"name": "shared_corrections", "status": "PASS", "value": "7/7 each"},
+    {"name": "concurrent_sockets", "status": "PASS", "value": "StickS3 23/23"},
+    {"name": "concurrent_network", "status": "PASS", "value": "StickS3 14/14"},
+    {"name": "concurrent_unified_espnow", "status": "PASS", "value": "two sessions; 12 PASS + 5 STATE_PASS + 1 configured each"},
+    {"name": "input_callbacks", "status": "PASS", "value": "StopWatch/StickS3 BtnA hold; Core2 PWR hold and touch"},
+    {"name": "core2_sequential", "status": "PASS", "value": "peripherals 6612, IMU 3766, AXP192 3917 nonblack pixels"},
+    {"name": "device_service_api", "status": "PASS", "value": "81 operations, 95 cases"},
+    {"name": "platform_tests", "status": "PASS", "value": "1364 tests, OK, 1 skipped"},
+    {"name": "generated_checks", "status": "PASS", "value": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"},
+    {"name": "github_ci", "status": "PASS", "value": "platform-contracts and network-namespace-policy", "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40710818649"}
+  ],
+  "evidence": [
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/90f556387560a47230141946e96f6f0166266721/docs/evidence/2026-10-28-concurrent-fixture-and-ready-state/README.md",
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "Physical hardware, RF, acoustic, optical and electrical validation are NOT RUN.",
+    "RUNTIME-03 legacy Core2 remains OPEN.",
+    "External/encrypted ESP-NOW and complete M5UI documentation matrix remain NOT RUN/OPEN."
+  ]
+}
