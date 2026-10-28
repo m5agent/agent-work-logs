@@ -96,6 +96,8 @@ BLE 16/32-bit UUID 和 Modbus RTU request/response/error bytes。
 - 三设备组共 17/17 PASS；
 - runtime coverage、peripheral catalog、QEMU profiles、project snapshot PASS；
 - `git diff --check`、Ruff `E9/F`、core2/xtensa/RMT 定向测试 PASS。
+- GitHub CI run `40671894357` 的 `network-namespace-policy` 和
+  `platform-contracts` 两个 job PASS。
 
 ## 验证边界
 

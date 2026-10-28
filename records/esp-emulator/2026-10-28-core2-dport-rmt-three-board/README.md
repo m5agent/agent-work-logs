@@ -41,6 +41,9 @@ PASS、无 retry。
 - legacy late frame：`evidence/core2-black-frame.png`；
 - 三设备与运行时摘要：`evidence/runtime-and-regression-summary.json`；
 - 设备组哈希和计数：`evidence/three-board-results.json`；
+- GitHub CI
+  [`40671894357`](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40671894357)
+  的 `network-namespace-policy` 与 `platform-contracts` 两个 job PASS；
 - 主仓证据：
   [`2026-10-28-cooperative-highint-rmt`](https://github.com/m5agent/m5stack-esp-emulator/blob/805925d8336fac28652d5bddfa1df0ec4b1606b8/docs/evidence/2026-10-28-cooperative-highint-rmt/README.md)。
 
