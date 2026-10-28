@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 stock UIFlow2 BLE via native HCI",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "38760a0f968136119fe435b99d031bff611d1406",
+    "result_commit": "2e2f4076292ca9ed0bc55cf680e48e0ce91f5987",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40768653826"
+  },
+  "hardware": {},
+  "firmware": {
+    "base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "elf_bytes": 50143184
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU virtual device; isolated Device Service sessions",
+    "qemu_sha256": "9bf74439ddbe7225a64eb437290043729fb032525756adb834565ec412f8c197",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "Core2 ble-nus run 1",
+      "status": "PASS",
+      "details": "8/8 checks"
+    },
+    {
+      "name": "Core2 ble-nus run 2",
+      "status": "PASS",
+      "details": "8/8 checks"
+    },
+    {
+      "name": "Core2 ble-nus run 3",
+      "status": "PASS",
+      "details": "8/8 checks"
+    },
+    {
+      "name": "Core2 m5ble-server",
+      "status": "PARTIAL",
+      "details": "21 PASS + 1 stock SDK ERROR in Server.get_client"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "details": "1420 tests, OK, 1 skip"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "network-namespace-policy and platform-contracts"
+    },
+    {
+      "name": "Physical hardware/RF",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/peer-exchange-summary.txt",
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "The Core2 result is limited to the listed stock base, matching ELF, QEMU and core2-native-hci profile.",
+    "StopWatch and StickS3 stock internal-controller BLE do not inherit this result.",
+    "BLE security, RF, coexistence and physical hardware remain NOT RUN."
+  ]
+}
