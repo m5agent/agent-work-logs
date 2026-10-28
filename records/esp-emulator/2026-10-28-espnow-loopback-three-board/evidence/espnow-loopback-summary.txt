@@ -1,0 +1,20 @@
+ESP-NOW controlled peer loopback summary
+
+Runtime patch: 0067-esp32-espnow-controlled-peer-loopback.patch
+Runtime environment gate: M5SW_ESPNOW_LOOPBACK=1
+Fixture peer: fixed locally-administered test address
+
+Guest path:
+  stock espnow/m5espnow -> TX DMA action frame -> controller echo ->
+  RX DMA -> stock recv/recvinto and IRQ callback
+
+Observed on StopWatch, StickS3 and Core2:
+  m5espnow send_data                 PASS
+  m5espnow broadcast_data            PASS
+  m5espnow recv_data                 PASS
+  m5espnow set_irq_callback          PASS
+  native send/recvinto/irq           PASS for ESPNow, ESPNowBase, M5ESPNow
+
+Boundary:
+  This is a same-guest virtual peer. External peer, PMK-encrypted payload,
+  cross-device fabric, loss/retry, RF and timing were not validated.
