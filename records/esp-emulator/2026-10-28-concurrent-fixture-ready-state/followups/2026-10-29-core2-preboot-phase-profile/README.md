@@ -69,3 +69,10 @@ BOARD/APIKEY 或 normal-WDT 启动预算。
 - matching `UIFlow_Core2 v1.15.4` ELF/MAP；
 - legacy startup UI、setup/REPL、非空应用帧；
 - 物理 Flash/cache、PSRAM、RF、电气和硬件时序。
+
+## 后续
+
+- [SSI transaction profile](followups/2026-10-29-ssi-transaction-profile/)：
+  `0071` 增加完整 command、RX-length 和 command gap 聚合，确认约五万组
+  `0x05` 与约五万组 `0xBB/64B`，并把主要预算定位到 guest 两次 command
+  之间。
