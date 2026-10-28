@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "virtual_device_diagnostic",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy status/CAS correlation",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "490539ce4aea7628154af56a2acd7c304ecc0e95",
+    "delivery_commit": "66af02cc6061bded00659ee13632f5e3a9a397dc"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "target": "virtual M5Stack Core2"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "normalized_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.12, Device Service, qemu-system-xtensa",
+    "runtime": "qemu-wifi",
+    "accelerator": "tcg,thread=single,tb-size=128",
+    "icount": "shift=5,align=off,sleep=off",
+    "qemu_sha256": "d60e6fb0e24e025ff19a521b34debbb9c16d9e5e427d35c8d22596ad98de42fa",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "0075 forward and reverse patch apply",
+      "status": "PASS"
+    },
+    {
+      "name": "platform tests",
+      "status": "PASS",
+      "detail": "1432 OK, 1 skip"
+    },
+    {
+      "name": "generated checks",
+      "status": "PASS",
+      "detail": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "RDSR WIP/BUSY",
+      "status": "PASS",
+      "detail": "bit0 was never set in 12093 status reads"
+    },
+    {
+      "name": "s32c1i table totals",
+      "status": "PASS",
+      "detail": "6288123 CAS, 5737336 cross-core contentions, overflow 0"
+    },
+    {
+      "name": "normal WDT startup",
+      "status": "FAIL",
+      "detail": "TG0 stage-1 reset at 17.248490561 s"
+    },
+    {
+      "name": "failed-CAS TCG-slice-yield control",
+      "status": "FAIL",
+      "detail": "Did not move TG0 stage-1 reset"
+    },
+    {
+      "name": "CI 40783815160",
+      "status": "PASS",
+      "detail": "platform-contracts and network-namespace-policy"
+    }
+  ],
+  "evidence": [
+    {
+      "name": "repository evidence",
+      "path": "docs/evidence/2026-10-29-core2-legacy-status-cas/README.md"
+    },
+    {
+      "name": "machine summary",
+      "path": "evidence/summary.json",
+      "sha256": "4846a2e1248092a9bd77df285423623fca47b08a02e1dfa327cc95573f95b1bb"
+    },
+    {
+      "name": "diagnostic patch",
+      "path": "patches/0001-esp32-legacy-status-cas-correlation.patch",
+      "sha256": "7be9f75c6d65250c80f30b4580569d7c7bc804d087f688f917f396104e35ca55"
+    }
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "Flash WIP and malformed s32c1i old-owner hypotheses are rejected.",
+    "Scheduler/list cross-core lock contention remains the current bound.",
+    "Physical hardware, RF, electrical and physical cache/PSRAM timing were not run."
+  ]
+}
