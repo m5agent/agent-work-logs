@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | `esp-emulator` | Core2 DPORT/RMT 修复与三设备 UIFlow2 最终回归 | `PARTIAL`（virtual-device：`0065` 五轮 DPORT IRQ 首启动 `5/5`；`0066` classic RMT 后 legacy 到 `APIKEY`；三设备 system 各 51 项、shared 各 7/7、设备组 17/17；platform 1359 项 PASS；normal-WDT reset、黑帧、display completion/setup 与真机仍 OPEN/NOT RUN） | [查看](esp-emulator/2026-10-28-core2-dport-rmt-three-board/) |
 | 2026-10-28 | `esp-emulator` | UIFlow2 三设备音频与 Core2 A/B/C/PWR 输入收尾 | `PASS`（限定 virtual-device：六会话并发 Mic/Speaker `6/6`、三台 raw PASS；Core2 四回调与 remove PASS；`0062`/`0063`；platform `1352` 项与 CI 两 job PASS；物理、ESP-NOW payload、完整 M5UI 矩阵 NOT RUN/REVIEW） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-audio-and-core2-input/) |
 | 2026-10-28 | `esp-emulator` | Display.drawPixel framebuffer transaction 三设备复验 | `PASS`（virtual-device：StopWatch preimage standalone 像素失败；三台候选 standalone 奇/偶像素、相邻像素保留和显式嵌套事务 PASS；platform `1347` 项 `OK`；冷构建、真机和 DMA soak NOT RUN） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-drawpixel-transaction/) |
 | 2026-10-28 | `esp-emulator` | QRCode.setText 与 TLS epoch 三设备候选固件复验 | `PASS`（virtual-device：三台 QR `ORACLE_MISMATCH → FRAME_PASS`；三台 TLS `2 ERROR + 3 STATE_PASS → 5 PASS`；incremental relink，platform `1346` 项 `OK`；冷构建、公网 PKI、证书持久化和真机 NOT RUN） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-qrcode-tls-candidate/) |

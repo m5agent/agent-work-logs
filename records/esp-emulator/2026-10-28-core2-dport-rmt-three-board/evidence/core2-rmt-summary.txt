@@ -1,0 +1,14 @@
+Classic ESP32 RMT diagnostic summary
+
+Before patch:
+- conf0.mem_size read as zero
+- E (...) rmt: RMT translator buffer create fail
+- OSError: Error initializing Neopixel interface
+
+After patch:
+- four channel-7 TX events
+- 49 captured symbols per TX event
+- serial reached BOARD NAME / APIKEY markers
+
+This proves the legacy controller memory-TX initialization path only.
+GPIO waveform, optical output and electrical timing were not modeled.
