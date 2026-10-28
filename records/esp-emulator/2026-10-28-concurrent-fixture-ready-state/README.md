@@ -57,3 +57,9 @@ BtnA/WAS_HOLD 和 Core2 顺序设备 case 均通过。
 - 外部/加密 ESP-NOW peer、RF、timing 和跨设备 fabric；
 - Core2 完整二十八类 M5UI 文档矩阵；
 - 物理硬件、触控压力、显示时序、声学、光学和电气验证。
+
+## 后续
+
+- [三设备 UIFlow2 接口矩阵与 RMT API 夹具](followups/2026-10-28-rmt-api-and-interface-matrix/)：
+  完成其余协议组、StickS3 IR TX/RX、三台 UI/输入验证，并补齐
+  trusted-local RMT 文件接口白名单。

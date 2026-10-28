@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "runtime_sha256": "6ff2aca091909ea078e5b9805b420cb04c11e3f9928b52c2fac199e33e45b2ef",
+  "devices": {
+    "stopwatch": {
+      "firmware_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+      "system_runtime": {"PASS": 50, "STATE_PASS": 1},
+      "shared_corrections": {"PASS": 7},
+      "device_group": {"PASS": 6, "FAIL": 0},
+      "protocols": {
+        "sockets": {"PASS": 23},
+        "easysocket": {"PASS": 57, "NOT_APPLICABLE_LISTENER": 1},
+        "mqtt": {"PASS": 42},
+        "network": {"PASS": 14},
+        "ezdata": {"PASS": 17},
+        "requests_candidate": {"PASS": 2},
+        "modbus_candidate": {"PASS": 50},
+        "audio_player": {"PASS": 15},
+        "audio_recorder": {"PASS": 12}
+      },
+      "ui": {"frame": "466x466", "marker": "STOPWATCH_TOUCH", "success_pixel": [233, 233], "rgb": [0, 255, 0]}
+    },
+    "sticks3": {
+      "firmware_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+      "system_runtime": {"PASS": 50, "STATE_PASS": 1},
+      "shared_corrections": {"PASS": 7},
+      "device_group": {"PASS": 5, "FAIL": 0},
+      "ir": {"tx": "PASS", "rx": "PASS", "nec_address": "0x56", "nec_command": "0xA3"},
+      "protocols": {
+        "sockets": {"PASS": 23},
+        "easysocket": {"PASS": 57, "NOT_APPLICABLE_LISTENER": 1},
+        "mqtt": {"PASS": 42},
+        "network": {"PASS": 14},
+        "ezdata": {"PASS": 17},
+        "requests_candidate": {"PASS": 2},
+        "modbus_candidate": {"PASS": 50},
+        "audio_player": {"PASS": 15},
+        "audio_recorder": {"PASS": 12}
+      },
+      "ui": {"frame": "135x240", "marker": "STICKS3_BTN_A 1", "success_pixel": [3, 3], "rgb": [0, 255, 0]}
+    },
+    "core2": {
+      "firmware_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+      "system_runtime": {"PASS": 50, "STATE_PASS": 1},
+      "shared_corrections": {"PASS": 7},
+      "device_group": {"PASS": 6, "FAIL": 0},
+      "imu_independent_first_attempts": {"PASS": 3, "FAIL": 0},
+      "protocols": {
+        "sockets": {"PASS": 23},
+        "easysocket": {"PASS": 57, "NOT_APPLICABLE_LISTENER": 1},
+        "mqtt": {"PASS": 42},
+        "network": {"PASS": 14},
+        "ezdata": {"PASS": 17},
+        "requests_candidate": {"PASS": 2},
+        "modbus_candidate": {"PASS": 50},
+        "audio": "NOT_EXPORTED"
+      },
+      "ui": {"frame": "320x240", "marker": "CORE2_TOUCH", "success_pixel": [2, 2], "rgb": [0, 255, 0]}
+    }
+  },
+  "espnow": {
+    "m5espnow": {"PASS": 12, "STATE_PASS": 5, "CONFIGURED_UNVERIFIED": 1},
+    "native_api": {"PASS": 21, "STATE_PASS": 21, "CONFIGURED_UNVERIFIED": 3},
+    "scope": "same-guest controller DMA loopback; not external, encrypted or RF"
+  },
+  "stock_boundaries": {
+    "http": {"PASS": 15, "FAIL": 1, "failure": "requests2.urlencode"},
+    "modbus": {"PASS": 42, "ERROR": 8, "failure": "Loop.sock_recv"},
+    "tls": {"STATE_PASS": 3, "ERROR": 2, "failure": "certificate validity expired"}
+  },
+  "retained_controls": [
+    "Core2 initial 10-second action limit produced black/no-marker controls; corrected bounded-driver timing passed.",
+    "Core2 1-second post-touch UI capture showed no green success area; 5-second settle produced the expected pixel."
+  ],
+  "platform_tests": {"run": 1364, "status": "PASS", "skipped": 1}
+}

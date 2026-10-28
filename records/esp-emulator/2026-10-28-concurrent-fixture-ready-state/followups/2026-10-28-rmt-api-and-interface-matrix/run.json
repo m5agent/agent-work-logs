@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Three-board UIFlow2 interface matrix and RMT API fixture",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "90f556387560a47230141946e96f6f0166266721",
+    "result_commit": "014eb6dcb2be2588f19a94c4257e37e5583a5c21"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "uiflow2_version": "v2.5.3",
+    "stopwatch_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+    "sticks3_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "core2_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+  },
+  "execution": {
+    "environment": "macOS arm64; isolated Device Service /api/v1; QEMU TCG",
+    "qemu_sha256": "6ff2aca091909ea078e5b9805b420cb04c11e3f9928b52c2fac199e33e45b2ef",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {"name": "system_runtime", "status": "PASS", "value": "50 PASS + 1 STATE_PASS each"},
+    {"name": "shared_corrections", "status": "PASS", "value": "7/7 each"},
+    {"name": "device_groups", "status": "PASS", "value": "StopWatch 6/6, StickS3 5/5, Core2 6/6"},
+    {"name": "core2_imu_repeats", "status": "PASS", "value": "3/3 independent first attempts plus 1/1 group attempt"},
+    {"name": "ui_input_frame", "status": "PASS", "value": "all three boards produced input markers and green success pixels"},
+    {"name": "rmt_api_fixture", "status": "PASS", "value": "trusted-local TX/RX files and trace allowlisted; StickS3 IR 2/2"},
+    {"name": "protocol_matrix", "status": "PASS", "value": "sockets, EasySocket, MQTT, network, EzData, requests/Modbus candidates and ESP-NOW completed"},
+    {"name": "platform_tests", "status": "PASS", "value": "1364 tests, OK, 1 skipped"}
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "Physical hardware, display optics, touch pressure, RF, acoustic and electrical validation are NOT RUN.",
+    "Stock requests2, Modbus async and TLS epoch remain firmware-source boundaries.",
+    "Core2 audio wrapper is NOT_EXPORTED; official Speaker/Mic device groups pass.",
+    "RUNTIME-03 and the complete Core2 M5UI documentation matrix remain open."
+  ]
+}
