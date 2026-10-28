@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "qemu_sha256": "9bf74439ddbe7225a64eb437290043729fb032525756adb834565ec412f8c197",
+  "devices": {
+    "stopwatch": {
+      "base_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+      "system": {"PASS": 50, "STATE_PASS": 1},
+      "shared": {"PASS": 7},
+      "m5ui": {"STATE_PASS": 409, "PENDING_FRAME_OR_INPUT": 80, "PENDING_FRAME_OBJECT_REMOVAL": 3, "DOCUMENTATION_MISMATCH": 11, "EXPECTED_UNSUPPORTED": 1, "FAIL": 3, "results": 507, "frames": 29, "unobserved": 0}
+    },
+    "sticks3": {
+      "base_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+      "system": {"PASS": 50, "STATE_PASS": 1},
+      "shared": {"PASS": 7},
+      "m5ui": null
+    },
+    "core2": {
+      "base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+      "system": {"PASS": 50, "STATE_PASS": 1},
+      "shared": {"PASS": 7},
+      "m5ui": {"STATE_PASS": 409, "PENDING_FRAME_OR_INPUT": 80, "PENDING_FRAME_OBJECT_REMOVAL": 3, "DOCUMENTATION_MISMATCH": 11, "EXPECTED_UNSUPPORTED": 1, "FAIL": 3, "results": 507, "frames": 29, "unobserved": 0},
+      "ble_nus": {"status": "PASS", "counts": {"PASS": 8}, "settle_milliseconds": 2000}
+    }
+  },
+  "protocol": {
+    "sockets": {"PASS": 23},
+    "easysocket": {"PASS": 57, "NOT_APPLICABLE_LISTENER": 1},
+    "mqtt": {"PASS": 42},
+    "network": {"PASS": 14},
+    "ezdata": {"PASS": 17},
+    "espnow": {"PASS": 12, "STATE_PASS": 5, "CONFIGURED_UNVERIFIED": 1},
+    "espnow_native": {"PASS": 21, "STATE_PASS": 21, "CONFIGURED_UNVERIFIED": 3},
+    "audio_player": {"stopwatch": 15, "sticks3": 15, "core2": "NOT_EXPORTED"},
+    "audio_recorder": {"stopwatch": 12, "sticks3": 12, "core2": "NOT_EXPORTED"}
+  },
+  "stock_failures": {
+    "requests2_urlencode": {"PASS": 15, "FAIL": 1},
+    "modbus_async": {"PASS": 42, "ERROR": 8, "error": "Loop.sock_recv missing"},
+    "tls_epoch": {"STATE_PASS": 3, "ERROR": 2},
+    "core2_m5ble_get_client": {"PASS": 21, "ERROR": 1, "error": "TypeError('set' object isn't subscriptable)"},
+    "m5ui": ["draw_triangle", "Image.set_scale", "Spinbox.set_step"]
+  },
+  "candidate": {
+    "requests2_sha256": "40d1a98d2413b379e14c1732b329004feb8b6675655ae2548931ef2dd16ba052",
+    "requests2": {"stopwatch": 2, "sticks3": 2, "core2": 2},
+    "modbus_async_sha256": "86125ad2cff3929849709a6670750847835f8e8fa3f9d0c493d37fe0042ed37a",
+    "modbus_async": {"stopwatch": 50, "sticks3": 50, "core2": 50},
+    "tls": {"stopwatch": 5, "sticks3": 5, "core2": 5},
+    "m5ui": {"stopwatch": "4 STATE_PASS + 2 FRAME_PASS", "core2": "4 STATE_PASS + 2 FRAME_PASS"},
+    "m5ble_sha256": "d82c1aec593de997d2d63f6bc409f6786a3b90e8b4b793c722cb9c61b8c82703",
+    "m5ble": {"core2": 22}
+  },
+  "hardware_matrix": {
+    "CALL_OK": 115,
+    "API_ASSERTION_PASS": 66,
+    "OBSERVED": 1
+  },
+  "not_run": [
+    "StopWatch and StickS3 stock internal-controller GATT",
+    "BLE pairing/security, RF, coexistence and bit-exact controller",
+    "external or encrypted ESP-NOW and cross-device fabric",
+    "Core2 legacy UIFlow normal-WDT startup and application frame",
+    "physical hardware, acoustic, optical, electrical and physical memory timing"
+  ]
+}

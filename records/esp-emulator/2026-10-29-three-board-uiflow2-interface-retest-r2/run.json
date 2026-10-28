@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "StopWatch / StickS3 / Core2 UIFlow2 interface retest",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "2e2f4076292ca9ed0bc55cf680e48e0ce91f5987",
+    "result_commit": "490539ce4aea7628154af56a2acd7c304ecc0e95",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40777175035"
+  },
+  "hardware": {},
+  "firmware": {
+    "stock": {
+      "stopwatch": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+      "sticks3": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+      "core2": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+    },
+    "qemu_sha256": "9bf74439ddbe7225a64eb437290043729fb032525756adb834565ec412f8c197"
+  },
+  "execution": {
+    "environment": "macOS arm64; three isolated Device Service ports/state directories; QEMU virtual device",
+    "validation": "virtual-device validation",
+    "hardware_validation": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "System runtime",
+      "status": "PASS",
+      "details": "50 PASS + 1 STATE_PASS on each of StopWatch, StickS3 and Core2"
+    },
+    {
+      "name": "Shared correction fixtures",
+      "status": "PASS",
+      "details": "7/7 on each device"
+    },
+    {
+      "name": "Protocol and owned peers",
+      "status": "PARTIAL",
+      "details": "sockets, EasySocket, MQTT, network, EzData and ESP-NOW pass; stock requests2, Modbus async and TLS retain their SDK errors"
+    },
+    {
+      "name": "M5UI full matrix",
+      "status": "PARTIAL",
+      "details": "507 observable results, 29 READY frames and zero unobserved methods per StopWatch/Core2; three stock failures retained"
+    },
+    {
+      "name": "M5UI candidate overrides",
+      "status": "PASS",
+      "details": "4/4 STATE_PASS and 2/2 FRAME_PASS on StopWatch/Core2"
+    },
+    {
+      "name": "Core2 BLE NUS",
+      "status": "PASS",
+      "details": "two settle-corrected sessions at 8/8; one pre-settle deinit timeout retained as timing control"
+    },
+    {
+      "name": "Core2 m5ble candidate",
+      "status": "PASS",
+      "details": "stacked 0021 + 0025 candidate at 22/22"
+    },
+    {
+      "name": "Board hardware probes",
+      "status": "PASS",
+      "details": "115 CALL_OK + 66 API_ASSERTION_PASS + 1 OBSERVED per device; device-local AXP192/IR/IOE/PM1 groups executed"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "details": "1428 tests, OK, 1 existing skip"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "Physical hardware, RF and electrical",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "patches/0001-m5ble-server-client-index.patch"
+  ],
+  "notes": [
+    "All conclusions are limited to the listed stock firmware, QEMU and virtual runtime profiles.",
+    "StopWatch and StickS3 stock internal-controller BLE do not inherit the Core2 native-HCI result.",
+    "The BLE 2-second settle addresses a probe race with the stock post-disconnect advertising restart; it does not prove arbitrary active(False) calls always complete promptly.",
+    "No open GitHub issue or pull request was present at task completion."
+  ]
+}
