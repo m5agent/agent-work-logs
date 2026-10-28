@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "virtual_device_validation",
+  "overall_status": "PASS",
+  "title": "Display.drawPixel framebuffer transaction on StopWatch, StickS3 and Core2",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "37d304d1"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": ["stopwatch", "sticks3", "core2"]
+  },
+  "firmware": {
+    "runtime_sha256": "21b7e34cc96560b4c8185131791008ae49fb1c6975a8428e4e344188a8236394",
+    "patch_sha256": "18d55fc29f92bc701e6a9019aebe10d147e662488bbb8276198fc769589895e3",
+    "compiled_source_sha256": "d66d11b7748cf80714f59a0c7943aa2c4bbb15488acedd9d7df69af64e8fbca9"
+  },
+  "execution": {
+    "environment": "macOS arm64; visible Device Service sessions",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {"name": "StopWatch preimage drawPixel", "status": "FAIL", "detail": "explicit transaction pixels rendered; standalone pixels did not"},
+    {"name": "StopWatch candidate", "status": "FRAME_PASS"},
+    {"name": "StickS3 candidate", "status": "FRAME_PASS"},
+    {"name": "Core2 candidate", "status": "FRAME_PASS"},
+    {"name": "platform regression", "status": "PASS", "detail": "1347 tests OK, 1 skipped"},
+    {"name": "physical hardware", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/results.json",
+    "evidence/regression-summary.txt"
+  ],
+  "notes": [
+    "Root cause was a missing Python display transaction, not the CO5300 odd-window restriction",
+    "Incremental application relink, not a cold build",
+    "Physical display and long-running framebuffer DMA soak were not tested"
+  ]
+}

@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | `esp-emulator` | Display.drawPixel framebuffer transaction 三设备复验 | `PASS`（virtual-device：StopWatch preimage standalone 像素失败；三台候选 standalone 奇/偶像素、相邻像素保留和显式嵌套事务 PASS；platform `1347` 项 `OK`；冷构建、真机和 DMA soak NOT RUN） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-drawpixel-transaction/) |
 | 2026-10-28 | `esp-emulator` | QRCode.setText 与 TLS epoch 三设备候选固件复验 | `PASS`（virtual-device：三台 QR `ORACLE_MISMATCH → FRAME_PASS`；三台 TLS `2 ERROR + 3 STATE_PASS → 5 PASS`；incremental relink，platform `1346` 项 `OK`；冷构建、公网 PKI、证书持久化和真机 NOT RUN） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-qrcode-tls-candidate/) |
 | 2026-10-28 | `esp-emulator` | StopWatch / StickS3 / Core2 UIFlow2 三设备接口复测 | `PARTIAL`（虚拟设备核心协议域 PASS；确认并修复 requests2、BLE UUID32、Modbus transform/async、M5UI marshalling；platform `1344` 项 `OK`；drawPixel、QR/TLS 重建、WAV/mic、ESP-NOW payload、Core2 callback/UI 与真机仍保留） | [查看](esp-emulator/2026-10-28-uiflow2-three-board-revalidation/) |
 | 2026-10-28 | `esp-emulator` | PR #15 UIFlow2 controller/API sweep 合并审阅 | `PASS`（scope、1335 platform tests、四 generated checks、最终 CI 两 job；两个 test-only portability fixes；独立 runtime/matrix/真机 NOT RUN） | [查看](esp-emulator/2026-10-28-pr-15-uiflow2-api-sweep/) |
