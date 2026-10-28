@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "virtual_device_validation_and_code_change",
+  "overall_status": "PARTIAL",
+  "title": "UIFlow2 audio paths and Core2 A/B/C/PWR input closure",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "37d304d1",
+    "result_commit": "0d4f53a32e67c830c4c01e756f9f034f596eb345",
+    "open_issue_count": 0,
+    "issues_closed": 0
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": ["stopwatch", "sticks3", "core2"]
+  },
+  "firmware": {
+    "uiflow2": "v2.5.3",
+    "stopwatch_sha256": "ef5e81b6da17ba04a0356b3bde782e9f0f8f93b217701a4414a52a8d8d8532c0",
+    "sticks3_sha256": "c45d4514e21d94a6c069185e08f05851c75b4747d354c1423decdefa625e1dd3",
+    "core2_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "runtime_sha256": "03d74d53ff8187c4f0a3b22d34c4e898bdd93b61cfc98432dbbeecd1beb12419",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566"
+  },
+  "execution": {
+    "environment": "macOS arm64; UIFlow2 QEMU; visible Device Service sessions",
+    "task_id": "",
+    "session_id": "",
+    "sessions": {
+      "stopwatch_mic": "0f4c3a935b164e4199641b686b3c4748",
+      "sticks3_mic": "a63d2607b915467a9ead685a75e12c8a",
+      "core2_mic": "5782e171b5c949e6b68af47f759133e8",
+      "stopwatch_speaker": "809f5a5c688d458c9b1d5c96986b4c92",
+      "sticks3_speaker": "9817bee24bce4b14b8934d2544895f09",
+      "core2_speaker": "d661c75afad440fc908650650542393c",
+      "stopwatch_raw": "d57ca131e2d24a6793925fa5a5c5b857",
+      "sticks3_raw": "37ef6c12dfd04c4eb54e7df24998421e",
+      "core2_raw": "134f0df29b6d4a31bde7ffd4d24863b7",
+      "core2_button_a": "acf00a9a021b422cbf146bd9028beeb6",
+      "core2_button_b": "c9d6d6d63ae543d59220309a575bca9b",
+      "core2_button_c": "b7e83b010d684ea98d43030291506d46",
+      "core2_button_pwr": "48db772a52334eeb8a80711b2db233a3"
+    }
+  },
+  "checks": [
+    {"name": "stopwatch_mic_record_and_wav", "status": "PASS"},
+    {"name": "sticks3_mic_record_and_wav", "status": "PASS"},
+    {"name": "core2_mic_record_and_wav", "status": "PASS", "relative_error": 0.008617},
+    {"name": "three_board_speaker_wav_file", "status": "PASS"},
+    {"name": "three_board_speaker_raw", "status": "PASS"},
+    {"name": "core2_button_a_callback", "status": "PASS", "coordinates": [53, 260]},
+    {"name": "core2_button_b_callback", "status": "PASS", "coordinates": [160, 260]},
+    {"name": "core2_button_c_callback", "status": "PASS", "coordinates": [266, 260]},
+    {"name": "core2_pwr_callback", "status": "PASS", "events": [2]},
+    {"name": "platform_regression", "status": "PASS", "detail": "1351 tests OK, 1 skipped"},
+    {"name": "generated_checks", "status": "PASS"},
+    {"name": "physical_hardware", "status": "NOT RUN"},
+    {"name": "espnow_payload", "status": "BLOCKED_MODEL"},
+    {"name": "core2_full_documented_m5ui_matrix", "status": "REVIEW"}
+  ],
+  "evidence": [
+    "evidence/results.json",
+    "evidence/regression-summary.txt",
+    "patches/0062-esp32s3-i2s-continuous-dma-completion.patch",
+    "patches/0063-core2-touch-buttons.patch"
+  ],
+  "notes": [
+    "The scoped audio and Core2 input fixes pass; the complete tri-board API surface remains PARTIAL.",
+    "No GitHub issue was open, so none was closed.",
+    "Physical audio, touch pressure, PMIC electrical behavior and hardware were not tested.",
+    "A StopWatch Mic concurrent readiness timeout was rerun alone and passed."
+  ]
+}

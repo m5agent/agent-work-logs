@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | ESP Emulator | UIFlow2 三设备音频与 Core2 A/B/C/PWR 输入收尾 | `PASS`（限定 virtual-device：三台 Mic/WAV/raw/WAV-file PASS；Core2 四回调/remove PASS；`0062`/`0063` 修复；platform `1351` 项 `OK`；真机、ESP-NOW payload 与完整 28 类 M5UI 矩阵 NOT RUN/REVIEW） | [查看](records/esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-audio-and-core2-input/) |
 | 2026-10-28 | ESP Emulator | Display.drawPixel framebuffer transaction 三设备复验 | `PASS`（virtual-device：旧 CO5300 单像素判断退役；三台 standalone 奇偶像素、相邻像素保留和嵌套事务 PASS；platform `1347` 项 `OK`；真机与 DMA soak NOT RUN） | [查看](records/esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-drawpixel-transaction/) |
 | 2026-10-28 | ESP Emulator | QRCode.setText 与 TLS epoch 三设备候选固件复验 | `PASS`（virtual-device：QR 三台旧文本失败转新文本 PASS；TLS 三台证书过期转 `5/5` mTLS PASS；incremental relink、platform `1346` 项 `OK`；冷构建、公网 PKI 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-28-uiflow2-three-board-revalidation/followups/2026-10-28-qrcode-tls-candidate/) |
 | 2026-10-28 | ESP Emulator | StopWatch / StickS3 / Core2 UIFlow2 三设备接口复测 | `PARTIAL`（虚拟设备核心协议与五个共享候选修复 PASS；platform `1344` 项 `OK`；drawPixel、QR/TLS 重建、WAV/mic、ESP-NOW payload、Core2 callback/UI 与真机仍保留） | [查看](records/esp-emulator/2026-10-28-uiflow2-three-board-revalidation/) |

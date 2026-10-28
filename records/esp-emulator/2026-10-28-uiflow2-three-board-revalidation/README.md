@@ -21,6 +21,12 @@
 候选源码在同一虚拟设备路径上通过，但原厂冻结固件没有被替换。物理硬件、RF、声学、光学和电气测量均为
 `NOT RUN`。
 
+后续 follow-up：
+
+- [Display.drawPixel transaction](followups/2026-10-28-drawpixel-transaction/)
+- [QRCode.setText 与 TLS epoch 候选固件](followups/2026-10-28-qrcode-tls-candidate/)
+- [音频与 Core2 A/B/C/PWR 输入收尾](followups/2026-10-28-audio-and-core2-input/)
+
 ## 关键证据
 
 - 稳定通过：每台 system runtime `50 PASS + 1 STATE_PASS`、sockets `23/23`、MQTT `42/42`、
