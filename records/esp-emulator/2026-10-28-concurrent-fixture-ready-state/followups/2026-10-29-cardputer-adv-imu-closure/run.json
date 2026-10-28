@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Cardputer-ADV current reference BMI270 closure",
+  "source": {
+    "issue": "FW-03 Cardputer-ADV current reference IMU returned zero",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "af4c6ea6162f2c4480137dccc1060c39e71c1b1c"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "cardputer-adv",
+    "machine": "m5cardputeradv",
+    "base_sha256": "a3961c8eda7358771c8e06c9160648e87ada973d23c6f71c9939b76fa973bed9",
+    "device_service_composed_sha256": "ea9fb400cdcb64f8020b4a43fca24c06f88097d7805b8dc2292185281d48c077",
+    "source_sha256": "619f7d493161de5d1e94a282f4e60af932bbbe805125a37b4f14fda098b027c9"
+  },
+  "execution": {
+    "environment": "macOS arm64, isolated Device Service /api/v1, QEMU ESP32-S3",
+    "task_id": "",
+    "session_id": "",
+    "session_id_sha256": "6fa2dfe8d613e89ab376a21c63e844bfe2d83a524cf6571233db53e09945ee7b",
+    "runtime": "qemu",
+    "qemu_sha256": "f0eb5f6c26f82ce99d6dad4006fcd0748991ba1a8d1ce780092d57d01d8e798e"
+  },
+  "checks": [
+    {
+      "name": "bmi270_chip_id",
+      "status": "PASS",
+      "evidence": "I2C register 0x00 returned 0x24"
+    },
+    {
+      "name": "bmi270_init",
+      "status": "PASS",
+      "evidence": "soft reset, INIT_DATA/INIT_CTRL and data-ready path observed"
+    },
+    {
+      "name": "imu_accel",
+      "status": "PASS",
+      "observed": [0.25, -0.5, 0.75],
+      "unit": "g"
+    },
+    {
+      "name": "imu_gyro",
+      "status": "PASS",
+      "observed": [10.009766, -20.019532, 30.029296],
+      "unit": "dps"
+    },
+    {
+      "name": "frame",
+      "status": "PASS",
+      "sha256": "a05b389509396e9c6d878b5f783a599c55a96074ef69f9418ca73338112d2b72",
+      "size": [240, 135],
+      "nonblack_pixels": 5519,
+      "green_pixels": 1920
+    },
+    {
+      "name": "direct_peripheral_matrix",
+      "status": "PASS",
+      "case": "cardputer-adv-imu",
+      "attempts": 1,
+      "retry_used": false,
+      "checks": 4
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "tests": 1398,
+      "skipped": 1
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/af4c6ea6162f2c4480137dccc1060c39e71c1b1c/docs/evidence/2026-10-29-cardputer-adv-imu/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40726881242"
+  ],
+  "notes": [
+    "No QEMU or firmware code change was required on current main.",
+    "The historical 66/67 failure remains valid for its older runtime and commit.",
+    "Physical IMU accuracy, electrical behavior and other firmware SHAs are NOT RUN."
+  ]
+}
