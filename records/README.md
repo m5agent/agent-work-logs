@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | `esp-emulator` | PR #16 CoreS3 C/QEMU 浏览器工作台合并 | `PASS`（公开 Pages 实际 CoreS3 客体 `21/21`、静态工作台 `16/16`、Node 契约与 PR CI PASS；merge commit `ef5f6d79`；浏览器虚拟设备结果，物理硬件/默认时钟/长期稳定性/持久化 NOT RUN） | [查看](esp-emulator/2026-10-28-pr-16-public-simulator-merge/) |
 | 2026-10-28 | `esp-emulator` | Core2 legacy dual-SPI panel routing | `PARTIAL`（virtual-device：`0068` 将同一 panel 接到 HSPI/SPI2 与 VSPI/SPI3；SPI3-only 负控 panel DMA `0`、非面板 `412`；legacy probe frame `1422` nonblack pixels；原厂 startup UI、normal-WDT 与真机仍 OPEN/NOT RUN；platform `1363` 项与 CI 两 job PASS） | [查看](esp-emulator/2026-10-28-core2-dual-spi-panel-routing/) |
 | 2026-10-28 | `esp-emulator` | Core2 legacy VFS 与 WiFi fixture 校正 | `PARTIAL`（virtual-device：matching LittleFS2 + `runtime=qemu-wifi` 120 秒执行注入的 `CORE2_LEGACY_VFS_BOOT`；setup/main、非空帧和 normal-WDT 仍 FAIL/OPEN；platform `1362` 项与 CI 两 job PASS；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-28-core2-legacy-vfs-wifi-fixture/) |
 | 2026-10-28 | `esp-emulator` | Core2 DPORT/RMT 修复与三设备 UIFlow2 最终回归 | `PARTIAL`（virtual-device：`0065` 五轮 DPORT IRQ 首启动 `5/5`；`0066` classic RMT 后 legacy 到 `APIKEY`；三设备 system 各 51 项、shared 各 7/7、设备组 17/17；platform 1359 项与 CI 两 job PASS；normal-WDT reset、黑帧、display completion/setup 与真机仍 OPEN/NOT RUN） | [查看](esp-emulator/2026-10-28-core2-dport-rmt-three-board/) |
