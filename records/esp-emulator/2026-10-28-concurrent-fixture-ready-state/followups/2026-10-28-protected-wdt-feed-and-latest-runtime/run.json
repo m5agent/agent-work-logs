@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Protected ESP32 WDTFEED semantics and latest-runtime UIFlow2 retest",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ef5f6d79c0529eb6aa72a2212d8c951438d039b8",
+    "result_commit": "8e47c6ba83c042398d767a8d56ff47c16b927181",
+    "implementation_commit": "a07f49b7a8b5e680a24faf08541c7329e7ced760"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "uiflow2_version": "v2.5.3",
+    "stopwatch_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+    "sticks3_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "core2_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "legacy_core2_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU TCG; isolated Device Service /api/v1",
+    "qemu_sha256": "78555183d53318fc25bc8413300e928d35bbbc1305f9d9648e97a73d34ce63b1",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {"name": "protected_wdtfeed_c_contract", "status": "PASS", "value": "2/2"},
+    {"name": "patch_reverse_apply", "status": "PASS"},
+    {"name": "normal_wdt_legacy_startup", "status": "FAIL", "value": "TG0 stage-1 reset at 17.252907520 s"},
+    {"name": "system_runtime", "status": "PASS", "value": "50 PASS + 1 STATE_PASS each"},
+    {"name": "shared_corrections", "status": "PASS", "value": "7/7 each"},
+    {"name": "device_groups", "status": "PASS", "value": "StopWatch 6/6, StickS3 5/5, Core2 6/6"},
+    {"name": "protocol_common", "status": "PASS", "value": "sockets 23/23, MQTT 42/42, network 14/14, EzData 17/17 each"},
+    {"name": "espnow_loopback", "status": "PASS", "value": "12 PASS + 5 STATE_PASS + 1 configured each"},
+    {"name": "candidate_http_modbus", "status": "PASS", "value": "requests 2/2 and Modbus 50/50 each"},
+    {"name": "candidate_tls", "status": "PASS", "value": "5/5 each"},
+    {"name": "device_service_api", "status": "PASS", "value": "81 operations, 95 cases"},
+    {"name": "platform_tests", "status": "PASS", "value": "1393 tests, OK, 1 skipped"},
+    {"name": "github_ci", "status": "PASS", "value": "platform-contracts and network-namespace-policy", "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40718871624"}
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "Physical hardware, RF, acoustic, optical and electrical validation are NOT RUN.",
+    "Stock requests2, Modbus async and TLS epoch defects remain; only candidate paths pass.",
+    "RUNTIME-03 legacy startup, external/encrypted ESP-NOW and complete Core2 M5UI matrix remain open."
+  ]
+}

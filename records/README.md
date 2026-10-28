@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-28 | `esp-emulator` | Protected WDTFEED 语义修复与最新 runtime 三设备复测 | `PARTIAL`（virtual-device：`0069` C 合同/reverse/build PASS；三台 system/shared/17 设备组、协议、ESP-NOW、audio、candidate、API `81/95` 与 TLS `5/5` 通过；platform `1393` 项、CI 两 job PASS；legacy normal-WDT 仍 reset、物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-28-protected-wdt-feed-and-latest-runtime/) |
 | 2026-10-28 | `esp-emulator` | PR #16 CoreS3 C/QEMU 浏览器工作台合并 | `PASS`（公开 Pages 实际 CoreS3 客体 `21/21`、静态工作台 `16/16`、Node 契约与 PR CI PASS；merge commit `ef5f6d79`；浏览器虚拟设备结果，物理硬件/默认时钟/长期稳定性/持久化 NOT RUN） | [查看](esp-emulator/2026-10-28-pr-16-public-simulator-merge/) |
 | 2026-10-28 | `esp-emulator` | Core2 legacy dual-SPI panel routing | `PARTIAL`（virtual-device：`0068` 将同一 panel 接到 HSPI/SPI2 与 VSPI/SPI3；SPI3-only 负控 panel DMA `0`、非面板 `412`；legacy probe frame `1422` nonblack pixels；原厂 startup UI、normal-WDT 与真机仍 OPEN/NOT RUN；platform `1363` 项与 CI 两 job PASS） | [查看](esp-emulator/2026-10-28-core2-dual-spi-panel-routing/) |
 | 2026-10-28 | `esp-emulator` | Core2 legacy VFS 与 WiFi fixture 校正 | `PARTIAL`（virtual-device：matching LittleFS2 + `runtime=qemu-wifi` 120 秒执行注入的 `CORE2_LEGACY_VFS_BOOT`；setup/main、非空帧和 normal-WDT 仍 FAIL/OPEN；platform `1362` 项与 CI 两 job PASS；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-28-core2-legacy-vfs-wifi-fixture/) |

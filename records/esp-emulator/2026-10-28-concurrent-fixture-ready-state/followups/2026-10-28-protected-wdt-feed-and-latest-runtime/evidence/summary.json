@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "runtime_sha256": "78555183d53318fc25bc8413300e928d35bbbc1305f9d9648e97a73d34ce63b1",
+  "patch": {
+    "name": "0069-esp32-timg-wdt-feed-unprotected.patch",
+    "sha256": "53b6557f0db174d8b0a280f354fbba42152f8c2918edfaf27b71de65c9cd04a8"
+  },
+  "normal_wdt": {
+    "stage0_timeout_ns": 7252822559,
+    "stage1_timeout_ns": 17252822560,
+    "first_reset_ns": 17252907520,
+    "tg1_feeds_before_reset": 14993,
+    "tg1_max_interval_ns": 5181212,
+    "serial_has_repl": false,
+    "frame_nonblack_pixels": 49
+  },
+  "devices": {
+    "stopwatch": {
+      "system_runtime": {"PASS": 50, "STATE_PASS": 1},
+      "shared_corrections": {"PASS": 7},
+      "device_group": {"PASS": 6, "FAIL": 0}
+    },
+    "sticks3": {
+      "system_runtime": {"PASS": 50, "STATE_PASS": 1},
+      "shared_corrections": {"PASS": 7},
+      "device_group": {"PASS": 5, "FAIL": 0}
+    },
+    "core2": {
+      "system_runtime": {"PASS": 50, "STATE_PASS": 1},
+      "shared_corrections": {"PASS": 7},
+      "device_group": {"PASS": 6, "FAIL": 0}
+    }
+  },
+  "protocols": {
+    "sockets": 23,
+    "easysocket": 57,
+    "easysocket_not_applicable": 1,
+    "mqtt": 42,
+    "network": 14,
+    "ezdata": 17,
+    "requests_candidate": 2,
+    "modbus_candidate": 50,
+    "tls_candidate": 5,
+    "espnow": {"PASS": 12, "STATE_PASS": 5, "CONFIGURED_UNVERIFIED": 1},
+    "espnow_native": {"PASS": 21, "STATE_PASS": 21, "CONFIGURED_UNVERIFIED": 3}
+  },
+  "stock_boundaries": {
+    "http": {"PASS": 15, "FAIL": 1, "failure": "requests2.urlencode"},
+    "modbus": {"PASS": 42, "ERROR": 8, "failure": "Loop.sock_recv"},
+    "tls": {"STATE_PASS": 3, "ERROR": 2, "failure": "certificate validity expired"}
+  },
+  "checks": {
+    "device_api": {"operations": 81, "cases": 95, "status": "PASS"},
+    "platform_tests": {"run": 1393, "status": "PASS", "skipped": 1},
+    "github_ci": "PASS"
+  }
+}
