@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "kind": "virtual_device_validation",
+  "overall_status": "PASS",
+  "title": "QRCode.setText and TLS epoch candidate firmware on three boards",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "007b93d5"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": ["stopwatch", "sticks3", "core2"]
+  },
+  "firmware": {
+    "runtime_sha256": "21b7e34cc96560b4c8185131791008ae49fb1c6975a8428e4e344188a8236394",
+    "cold_build": false,
+    "incremental_application_relink": true
+  },
+  "execution": {
+    "environment": "macOS arm64; matching UIFlow2 source builds; visible Device Service sessions",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {"name": "QRCode preimage and candidate", "status": "PASS", "detail": "three preimages ORACLE_MISMATCH; three candidates FRAME_PASS"},
+    {"name": "TLS epoch preimage and candidate", "status": "PASS", "detail": "three preimages 2 ERROR + 3 STATE_PASS; three candidates 5 PASS"},
+    {"name": "platform regression", "status": "PASS", "detail": "1346 tests OK, 1 skipped"},
+    {"name": "physical hardware", "status": "NOT RUN", "detail": "virtual-device result only"}
+  ],
+  "evidence": [
+    "evidence/results.json",
+    "evidence/regression-summary.txt"
+  ],
+  "notes": [
+    "Incremental relink, not a cold build",
+    "Public PKI, certificate persistence, secure element and physical hardware were not tested",
+    "Stock CDN firmware remains unfixed; results apply only to hash-pinned candidates"
+  ]
+}
