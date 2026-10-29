@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Operator-owned Device Service runtime ACL",
+  "source": {
+    "issue": "FW-01",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/28",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "39544effb0e266d0463da33d80f347a708c07423",
+    "implementation_commit": "7bf978e9265e44d43595aeb29ea9a15bf9128247",
+    "result_commit": "ad4bce62a6750aa67eb8269c401b5aebc5b16982",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40841685928",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40841710209",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40842083370"
+    ],
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "rf_validation": "NOT RUN",
+    "electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "validation": "NOT RUN",
+    "reason": "The validation exercises Device Service API policy, not a QEMU guest."
+  },
+  "execution": {
+    "environment": "macOS arm64; real Device Service HTTP; no QEMU guest",
+    "api_version": "1.51.0",
+    "host_runtime_checks": 23,
+    "platform_tests": "1550 OK + 10 skipped",
+    "policy_id": "cca8710adf1a3e9914da389bcfb9e6346dcb9a4b51002417db6f7174411aa044",
+    "openapi_sha256": "a9bdbe8a8339a847b7e08244d39304423e005ed902c1979443d72340cbc3e921",
+    "evidence_sha256": "05e3be3ceab4ba2382293d08a93443815fceee2d6c7bd11c99c84dcf6b25bbda"
+  },
+  "checks": [
+    {"name": "External policy file and semantic hash", "status": "PASS"},
+    {"name": "Per-device fail-closed allowlist", "status": "PASS"},
+    {"name": "Program entrypoint and package path ACL", "status": "PASS"},
+    {"name": "Denied operations stop before console/QMP/flash I/O", "status": "PASS"},
+    {"name": "Session and capacity expose effective policy", "status": "PASS"},
+    {"name": "Denied events are bounded and policy-bound", "status": "PASS"},
+    {"name": "Snapshot and evidence redact denied data", "status": "PASS"},
+    {"name": "Invalid startup policy fails before listener", "status": "PASS"},
+    {"name": "Valid SIGHUP publishes replacement policy", "status": "PASS"},
+    {"name": "Invalid SIGHUP preserves active policy", "status": "PASS"},
+    {"name": "Platform and generated validators", "status": "PASS"},
+    {"name": "PR and main CI", "status": "PASS"},
+    {"name": "Guest filesystem ACL", "status": "NOT RUN"},
+    {"name": "Native firmware sandbox", "status": "NOT RUN"},
+    {"name": "QEMU guest", "status": "NOT RUN"},
+    {"name": "Physical hardware", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ad4bce62a6750aa67eb8269c401b5aebc5b16982/docs/evidence/2026-10-29-runtime-acl/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ad4bce62a6750aa67eb8269c401b5aebc5b16982/tests/firmware/evidence-2026-10-29-runtime-acl.json"
+  ],
+  "notes": [
+    "Unconfigured ACL retains prior local-control compatibility and reports NOT_CONFIGURED.",
+    "The ACL is operator-owned and is never inferred from firmware metadata.",
+    "This record does not claim firmware-authored filesystem permissions or native-code sandboxing.",
+    "No internal endpoint, token or stable device identifier is retained in this public record."
+  ]
+}
