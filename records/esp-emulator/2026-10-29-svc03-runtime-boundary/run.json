@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Extract the Device Service runtime boundary and stabilize Core2 unified service sessions",
+  "source": {
+    "issue": "SVC-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/46",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ed612f3b1589221dfdbad9e067cebafc7d231d8a",
+    "result_commit": "fa5610bd2f1e880f46fc2cbaf56d4c2ceb20617c",
+    "merge_commit": "20ae4413ed577159db98782a2f4419e504e5b76f"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "virtual_device": "Core2",
+    "profile": "core2-native-hci",
+    "firmware_sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "568079f3b9e818ef1cc29b9e7cd1c5c036af19196668a12174ed79ec96c262ed",
+    "comparison_qemu_sha256": "54e7a7f7cd0ff6f5a1d6343c06563388f49c2b0abbca4cafb850876e57ed1255"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "platform_tests": "1581 OK, 1 skipped",
+    "device_service_tests": "142/142 PASS",
+    "runtime_boundary_tests": "6/6 PASS",
+    "core2_service_runs": "3/3 PASS on final QEMU; 3/3 PASS on comparison QEMU",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40900277011",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40900306145"
+    ]
+  },
+  "checks": [
+    {
+      "name": "runtime_symbol_identity",
+      "status": "PASS",
+      "detail": "device_service re-exports the same runtime helper objects"
+    },
+    {
+      "name": "psram_policy",
+      "status": "PASS",
+      "detail": "Core2 native profile retains the validated 8 MiB QOM effective policy"
+    },
+    {
+      "name": "runtime_env_redaction",
+      "status": "PASS",
+      "detail": "private values are redacted without mutating the source mapping"
+    },
+    {
+      "name": "profile_qom_timeout",
+      "status": "PASS",
+      "detail": "profile QOM setup follows session readiness"
+    },
+    {
+      "name": "core2_unified_frame_qom",
+      "status": "PASS",
+      "detail": "3,888-byte frame and 32-node QOM with 8 MiB effective PSRAM on every lease"
+    },
+    {
+      "name": "core2_unified_network_ble",
+      "status": "PASS",
+      "detail": "WiFi, controlled/public HTTP and ACK:M5_CORE2_UNIFIED notification"
+    },
+    {
+      "name": "core2_native_hli",
+      "status": "PASS",
+      "detail": "HLI 45/45, 36 events, 9 ACLs, zero errors/queues/drops"
+    },
+    {
+      "name": "evidence_cleanup",
+      "status": "PASS",
+      "detail": "pcap, manifest, ZIP, stop and companion/QEMU cleanup"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "1581 tests OK, one intentional skip"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "four PR checks passed"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/20ae4413ed577159db98782a2f4419e504e5b76f/docs/evidence/2026-10-29-svc03-runtime-boundary/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/20ae4413ed577159db98782a2f4419e504e5b76f/platform/tools/device_service_runtime.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/20ae4413ed577159db98782a2f4419e504e5b76f/platform/tests/test_device_service_runtime.py"
+  ],
+  "notes": [
+    "SVC-03 remains in progress for store, adapter, evidence, history and HTTP boundaries.",
+    "Core2 legacy UIFlow RUNTIME-03 remains open.",
+    "Physical hardware, RF, electrical, cache/PSRAM timing and BLE security are NOT RUN."
+  ]
+}

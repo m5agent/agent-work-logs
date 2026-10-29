@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | Device Service runtime boundary and Core2 unified stability | `PASS`（virtual-device：runtime helper same-object re-export；Core2 unified 默认 180 秒 readiness、10 秒 BLE write settle；最终与对照 QEMU 各 `3/3 PASS`；frame/QOM、WiFi/公网、NUS ACK、HLI、pcap、ZIP 和清理完整；`SVC-03` 仍进行中，物理/RF/legacy `RUNTIME-03` NOT RUN/OPEN） | [查看](esp-emulator/2026-10-29-svc03-runtime-boundary/) |
 | 2026-10-29 | `esp-emulator` | Cardputer-ADV user firmware display, clock and input | `PASS`（virtual-device：ADC 错误 `0`、完整 240×135 原生帧、135×240 自动竖屏与 3D 同步旋转、时钟比 `0.999856`、Enter 后帧差 `23`；旧固件 board 14 兼容路径严格门控；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-cardputer-adv-user-firmware/) |
 | 2026-10-29 | `esp-emulator` | Core2 contended-CAS scheduler attribution | `PARTIAL`（virtual-device：同 binary A/B 证明 `100 ms` RR 放大跨核 spin；CAS/contended 大幅下降而 SSI 工作近似不变；normal-WDT 仍 TG0 stage-1 reset，`RUNTIME-03`/物理硬件 OPEN/NOT RUN） | [查看](esp-emulator/2026-10-29-core2-contended-cas-scheduler/) |
 | 2026-10-29 | `esp-emulator` | FlashLight cold-route four-host validation | `PASS`（virtual-device：CoreS3/AtomS3R/StickS3/StopWatch 原厂 constructor、`100%/220ms` Flash、off 与同 PID Run 替换；四台 `ready-low → flash-active → ready-low`；actual-QOM Web replay；实时 Web/S1/PWM/OEN/IOMUX/光电热/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-flashlight-cold-route-four-hosts/) |
