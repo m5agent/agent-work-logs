@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Extract the first stateless Device Service parsing boundary",
+  "source": {
+    "issue": "SVC-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/43",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "37480e9fc7a3f53db0fa8dbbdc9438d37ef1d5af",
+    "result_commit": "b978dd793c21230883944f02c8962a37903db9da",
+    "merge_commit": "206b7960d82fb318420065792e649ccec69bc162"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.12; Device Service platform contracts",
+    "platform_tests": "1569 OK, 10 skipped",
+    "device_service_tests": "124/124 PASS",
+    "parsing_boundary_tests": "7/7 PASS",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40878197577",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40878208891"
+    ]
+  },
+  "checks": [
+    {
+      "name": "service_error_payload",
+      "status": "PASS",
+      "detail": "code/message/status/extra payload unchanged"
+    },
+    {
+      "name": "parser_behavior",
+      "status": "PASS",
+      "detail": "integer, size, pcap and SHA256 contracts preserved"
+    },
+    {
+      "name": "public_reexport_identity",
+      "status": "PASS",
+      "detail": "device_service imports the same function/class objects"
+    },
+    {
+      "name": "device_service_contracts",
+      "status": "PASS",
+      "detail": "124 tests passed"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "1569 tests OK, 10 skipped"
+    },
+    {
+      "name": "generated_checks",
+      "status": "PASS",
+      "detail": "runtime coverage, catalog, QEMU profiles and project snapshot"
+    },
+    {
+      "name": "new_module_ruff",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "two PR check runs passed"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/206b7960d82fb318420065792e649ccec69bc162/platform/tools/device_service_errors.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/206b7960d82fb318420065792e649ccec69bc162/platform/tools/device_service_parsing.py",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/206b7960d82fb318420065792e649ccec69bc162/platform/tests/test_device_service_parsing.py"
+  ],
+  "notes": [
+    "No API, state machine, evidence schema, store, adapter or QEMU path changed.",
+    "SVC-03 remains in progress for the remaining orchestration boundaries."
+  ]
+}
