@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Rebase Relay and Relay2 derived output state across GPIO hard reset",
+  "source": {
+    "issue": "UNIT-HOST-36",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/36",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3dac40dd1cae8eef44a80190431f7c51ccfe5e06",
+    "result_commit": "228283907ff6067e17a0cf8823c76f3fb97200a3",
+    "merge_commit": "16580f97228908c3d0f11dcbec71f7f9a530a747"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "relay_contact_or_coil": "NOT RUN",
+    "electrical_or_load": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "device": "atoms3r",
+    "runtime": "qemu",
+    "firmware_sha256": "ab4dd742a342f85037c3c0cb2c67c037bf5eef7cf429bee131d2227d4a404e3d"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; AtomS3R UIFlow2 QEMU; local Device Service API",
+    "validation": "virtual-device validation",
+    "pre_fix_qemu_sha256": "9aca9a8db5143ad133510795cd228ed8ac23c388ea197267d7b2b4750e58eb82",
+    "fixed_qemu_sha256": "e318b2b748d6e982cd2e592a1b991ec930a8e9501cf02a0c19925022a656b373",
+    "patched_source_files": 119,
+    "patch_count": 38,
+    "platform_tests": "1558 OK, 10 skipped",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40859057362",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40859079095",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40859526055"
+    ]
+  },
+  "checks": [
+    {
+      "name": "source_receipt",
+      "status": "PASS",
+      "detail": "QEMU 40edccac415693c5130f91c01d84176ae6008566 plus 38 owned patches"
+    },
+    {
+      "name": "cold_build",
+      "status": "PASS",
+      "detail": "fresh xtensa-softmmu build"
+    },
+    {
+      "name": "prefix_2relay_stale_counter",
+      "status": "FAIL",
+      "detail": "expected negative control: reset left transitions at 1/1"
+    },
+    {
+      "name": "prefix_relay_stale_counter",
+      "status": "FAIL",
+      "detail": "expected negative control: reset left transition count at 2"
+    },
+    {
+      "name": "fixed_2relay_reset_zero",
+      "status": "PASS",
+      "detail": "levels 0/0, counters 0/0 after hard reset"
+    },
+    {
+      "name": "fixed_2relay_independent_transitions",
+      "status": "PASS",
+      "detail": "gpio-1 1/0 then gpio-2 1/1"
+    },
+    {
+      "name": "fixed_relay_reset_zero",
+      "status": "PASS",
+      "detail": "immediately after reset counter was 0"
+    },
+    {
+      "name": "fixed_relay_post_reset_transition",
+      "status": "PASS",
+      "detail": "warm-low baseline 1, gpio-2 high 2"
+    },
+    {
+      "name": "evidence_before_stop",
+      "status": "PASS",
+      "detail": "all sessions requested evidence and stopped with purge=0"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "1558 OK, 10 skipped"
+    },
+    {
+      "name": "coverage_catalog_profiles_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "6/6 jobs across two PR runs and one main run"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/fixed-2relay.serial.log",
+    "evidence/fixed-relay.serial.log",
+    "evidence/prefix-2relay.summary.json",
+    "evidence/prefix-relay.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/228283907ff6067e17a0cf8823c76f3fb97200a3/docs/evidence/2026-10-29-unit-hard-reset-output-boundary/README.md"
+  ],
+  "notes": [
+    "Virtual-device digital GPIO observation only; not mechanical relay contact state.",
+    "Unit bootstrap uses forward ports 0003-0006; historical Core2 diagnostic patches remain unchanged.",
+    "Preview reset remains disabled; other hosts, Units and FlashLight reset semantics do not inherit."
+  ]
+}

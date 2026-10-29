@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | Relay/Relay2 hard-reset output boundary | `PASS`（virtual-device：AtomS3R 同固件 pre-fix 单 Relay/Relay2 计数跨 reset 泄漏；fixed reset 清零后分别观测独立 transition；冷构建 `e318b2b7…`、platform `1558 OK + 10 skip`、PR #36 已合并且 CI `6/6`；机械触点/负载/电气/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-unit-relay-hard-reset/) |
 | 2026-10-29 | StackChan | Auto-dance firmware with expressions, 12 RGB LEDs and dual servos | `PASS`（virtual-device：38 cues、6 expressions、19/19 unique 320×240 frames、1006 SCSCL sync-writes、1367 RGB refreshes、5 loops/96s；物理机械/电流/光学/声学 NOT RUN） | [查看](records/stackchan/2026-10-29-auto-dance-firmware/) |
 | 2026-10-29 | ESP Emulator | Core2 for AWS ATECC608 initialization and DMA command phase | `PASS`（virtual-device：锁定测试 config、ATECC wake/Read/Info/CRC、三次 `/api/v1` nonempty frame、PR #33 merge/CI PASS；生产 key/ECDSA/电气/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-core2-atecc608/) |
 | 2026-10-29 | ESP Emulator | Operator-owned Device Service runtime ACL | `PASS`（host-runtime：API/OpenAPI `1.51.0`；设备级 serial/input/reset/program/flash ACL 与 package path/entrypoint 在 I/O 前 fail closed；真实 HTTP `23/23`、SIGHUP 替换/回滚、snapshot/evidence 脱敏、平台 `1550 OK + 10 skip`、PR/main CI PASS；guest filesystem ACL/QEMU/物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-29-runtime-acl/) |
