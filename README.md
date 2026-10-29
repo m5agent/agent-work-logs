@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | ESP-NOW external CCMP replay rejection | `PASS`（限定单 peer virtual-device：`0078` 仅让 MIC 成功的帧推进 PN；UDP replay proxy 双向各转发 `58` 帧后重复一帧，receiver 恰好一次 replay drop、正常 payload 不重复；wrong-LMK/Core2 encrypted 回归、platform `1475 OK + 1 skip`、CI PASS；多 peer/乱序窗口、key rotation、RF 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-espnow-external-ccmp/followups/2026-10-29-ccmp-replay/) |
 | 2026-10-29 | ESP Emulator | ESP-NOW external peer key-bound CCMP | `PASS`（限定 virtual-device：`0077` 在 external bridge 执行 PMK-wrapped LMK、AES-CCMP/MIC 和 drop-before-DMA；StopWatch/StickS3/Core2 的明文/加密/错误 LMK/wrong-PMK-same-LMK 组合 PASS；platform `1470 OK + 1 skip`、CI 两 job PASS；guest key-state、replay、lifecycle、RF 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-espnow-external-ccmp/) |
 | 2026-10-29 | ESP Emulator | PR #19 browser QEMU performance and device profiles merge | `PASS`（merge review/delivery：`79` files、`+7164/-243`、`MERGEABLE/CLEAN`、无致命问题；PR CI 与 merge commit CI PASS；独立性能复测、长期稳定性与物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-29-pr-19-browser-qemu-performance-devices/) |
 | 2026-10-29 | ESP Emulator | ESP-NOW external plaintext peers | `PASS`（限定 virtual-device：StopWatch↔StickS3 与 Core2↔StopWatch 两个独立 guest 对经正常 controller TX/RX DMA 双向收到 action-frame payload；四个 session evidence/清理完整；platform `1440 OK + 10 skip`、CI 两 job PASS；PMK/LMK/CCMP、lifecycle、RF 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-espnow-external-peer/) |

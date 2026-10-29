@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "ESP-NOW external CCMP replay rejection",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "82118424bca82266041015480ef32b5920c205da",
+    "result_commit": "cb68989193768573238dc53afb026ef14ac7c229",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40809207085"
+  },
+  "hardware": {},
+  "firmware": {
+    "family": "UIFlow2 v2.5.3",
+    "replay_left_firmware_sha256": "b6baab9fa89d706a1e97da9302306c19f6f3f45abf171fa3c4dcab5e35dddb08",
+    "replay_right_firmware_sha256": "a36fdff4efaee90b1b9bc1eed265b660d7e009b2fd391552a0d8205ed508ee6c"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU virtual device; transparent UDP replay proxy",
+    "validation": "virtual-device validation",
+    "runtime": "qemu-wifi",
+    "qemu_sha256": "be7c376550829427b0fc72ada75f9d06e2246feaa64b2c222904d5a17a3c4076",
+    "patch_sha256": "b30c56272dba2fd6e4000ee8b12f82a08e57ccadf8bc8e0d0d42488b5baa1adc",
+    "runner_sha256": "9778e0d8a10e05e839c6f6aff542077ff8c7da5bb5e943aab71d427240992ac9",
+    "session_paths": 6
+  },
+  "checks": [
+    {
+      "name": "Replay proxy bidirectional forwarding",
+      "status": "PASS",
+      "details": "58 left-to-right and 58 right-to-left frames"
+    },
+    {
+      "name": "One duplicate replay",
+      "status": "PASS",
+      "details": "replay_sent=true with no proxy errors"
+    },
+    {
+      "name": "Receiver replay rejection",
+      "status": "PASS",
+      "details": "TX/RX 58/59 and exactly one CCMP PN replay drop"
+    },
+    {
+      "name": "Normal payload remains intact",
+      "status": "PASS",
+      "details": "57 and 58 source/payload matches"
+    },
+    {
+      "name": "Wrong-LMK regression",
+      "status": "PASS",
+      "details": "both directions EXPECTED_DROP with rx_packets=0"
+    },
+    {
+      "name": "Core2 encrypted regression",
+      "status": "PASS",
+      "details": "15 and 44 source/payload matches"
+    },
+    {
+      "name": "Session evidence and cleanup",
+      "status": "PASS",
+      "details": "6/6 terminal stopped, runtime PID gone, history retained, purge=0"
+    },
+    {
+      "name": "Patch replay",
+      "status": "PASS",
+      "details": "forward, source equality, and reverse checks"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "details": "1475 tests, OK, 1 skipped"
+    },
+    {
+      "name": "Generated contract checks",
+      "status": "PASS",
+      "details": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "Multi-peer or reordering replay window",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/patch-check.txt",
+    "patches/README.md",
+    "patches/0001-esp32-espnow-external-ccmp-replay.patch"
+  ],
+  "notes": [
+    "The single-peer monotonic replay lane is PASS; RUNTIME-06 remains PARTIAL overall.",
+    "Only MIC-authenticated packets can advance the replay counter.",
+    "The replay proxy duplicates one forwarded datagram only after both directions are active.",
+    "No guest payload or callback is synthesized by the Python host."
+  ]
+}

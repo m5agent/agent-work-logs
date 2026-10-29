@@ -48,6 +48,8 @@ peer lifecycle、replay、loss/retry、RF 和真机尚未完成。
 - `evidence/patch-check.txt`：patch forward/current/reverse 验证
 - `patches/0001-esp32-espnow-external-ccmp.patch`：`0077` 原样 patch
 - `patches/README.md`：preimage 与 patch 校验说明
+- [follow-up：single-peer CCMP replay drop](followups/2026-10-29-ccmp-replay/)：
+  `0078` authenticated PN guard 与真实 UDP replay proxy 负控
 
 ## 未覆盖项
 
