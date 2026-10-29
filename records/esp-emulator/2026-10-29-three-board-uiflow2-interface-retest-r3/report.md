@@ -76,7 +76,7 @@ StopWatch/Core2 部分板级 probe 在完成显示/QOM oracle 后使用无限空
 
 | 层级 | 状态 | 依据 |
 | --- | --- | --- |
-| build/static | PASS | `1432` platform tests、四个生成器检查、JSON、UTF-8、diff |
+| build/static | PASS | `1432` platform tests、四个生成器检查、JSON、UTF-8、diff、CI 两 job |
 | transport | PASS（限定） | 实际 HTTP/TCP/UDP/MQTT/Modbus/TLS peers、BLE HCI peer、I2C/IR fixtures |
 | device_response | PASS（限定） | guest 原库/API、serial marker、QOM、frame、PCM |
 | data_behavior | PASS（限定） | 精确协议 payload、sensor readback、frame pixels |
@@ -101,3 +101,5 @@ StopWatch/Core2 部分板级 probe 在完成显示/QOM oracle 后使用无限空
 本轮未执行不可逆硬件操作，也未改变默认参考固件或设备配置。源码仓库可回滚
 文档提交 `0769ae7c`；测试运行态和完整 raw evidence 位于 ignored `.work/`，
 不会进入 Git。
+
+CI：[40791396267](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40791396267)。

@@ -38,6 +38,8 @@ control。StickS3 TLS candidate 首轮缺少 native UART-REPL bootstrap，
 - hardware matrix：三台各
   `115 CALL_OK + 66 API_ASSERTION_PASS + 1 OBSERVED`；
 - platform：`1432` tests，`OK`，`1` existing skip；
+- CI：[40791396267](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40791396267)，
+  `platform-contracts` 与 `network-namespace-policy` 均 PASS；
 - 三个隔离服务、QEMU、BLE peer 和 companion 全部清理。
 
 ## 文件
