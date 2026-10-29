@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Attribute Core2 handoff expenses to issuer classes and the IPC phase",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/44",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "206b7960d82fb318420065792e649ccec69bc162",
+    "result_commit": "efb74d6f06692e4dc274d144d91c18ced2ac9300",
+    "merge_commit": "3788aeaedc7de9566ac45a15092f133122f82d8a"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "rf": "NOT RUN",
+    "electrical": "NOT RUN",
+    "physical_cache_or_flash_timing": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Core2 UIFlow1 QEMU; local Device Service API",
+    "validation": "virtual-device validation",
+    "runtime": "qemu-wifi",
+    "icount_shift": "5",
+    "wdt_disabled": false,
+    "issuer_correlation_qemu_sha256": "7d9b1f43ecc5a9b842c370dd52981ae7eab1c71e996f5dbf26a61bb3b2c0f353",
+    "phase_split_qemu_sha256": "d14e31e1270e2f42be44a46af2b3bc3c84ffa342ce83edcb424e123769922b27"
+  },
+  "checks": [
+    {
+      "name": "issuer_correlation",
+      "status": "PASS",
+      "detail": "8,234 episodes; no-command episodes still average 888.354 us"
+    },
+    {
+      "name": "initiator_phase_split",
+      "status": "PASS",
+      "detail": "IPC round trip averages 615.595 us across 1,974 episodes"
+    },
+    {
+      "name": "100us_rr_control",
+      "status": "NO_IMPROVEMENT"
+    },
+    {
+      "name": "immediate_can_start_yield_control",
+      "status": "NO_IMPROVEMENT"
+    },
+    {
+      "name": "normal_wdt_startup",
+      "status": "FAIL",
+      "detail": "startup still resets before BOARD/APIKEY or REPL"
+    },
+    {
+      "name": "docs_contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "two PR check runs passed"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/issuer-groups.txt",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3788aeaedc7de9566ac45a15092f133122f82d8a/docs/evidence/2026-10-29-core2-handoff-issuer-phases/README.md"
+  ],
+  "notes": [
+    "The dominant fixed cost is the initiator cross-core IPC round trip.",
+    "The 64-byte Flash data length and individual Flash command are rejected as primary cost drivers.",
+    "RUNTIME-03 remains OPEN."
+  ]
+}
