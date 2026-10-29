@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 for AWS ATECC608 initialization and DMA command phase",
+  "source": {
+    "issue": "RUNTIME-04",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/33",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "0eb8f8fa53f1089d61455796fd1aea8b38de2990",
+    "implementation_commit": "7f4324cc9e8ea54bc97acd5361ce60aa800814e7",
+    "result_commit": "622b144619b45cec2a3c90f869e4cc416e32f386",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40847908680",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40847936196",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40848316687"
+    ],
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "electrical_validation": "NOT RUN",
+    "side_channel_validation": "NOT RUN"
+  },
+  "firmware": {
+    "device": "Core2 for AWS",
+    "source_artifact_sha256": "22ee8c0f5d3c9640be370cb1a89496ed265b685d573b0e41d62320cf6288ff3a",
+    "normalized_sha256": "104062aa0e6f52470f0c7f409d202af5d2dad5c3e5ee8f7e65815508a512ef3c",
+    "validation": "virtual-device validation"
+  },
+  "execution": {
+    "environment": "macOS arm64; isolated QEMU 9.2.2 Xtensa; real Device Service HTTP; virtual Core2",
+    "attempts": 3,
+    "qemu_sha256": "a802d6a358b6bccb1e9d856b6179ca7245101751a627b7b6f3ddadc3a73fb5b0",
+    "qemu_patch_sha256": "797420fcb1b487f06e8e5fa1cec746ec0fd47a2316f18d10fd28e928c0872059",
+    "runner_sha256": "6ff1dacee453bda12e6c47803bb9270c7e39709a30113cc9d379b56bff35b936",
+    "platform_tests": "1555 OK + 10 skipped",
+    "atecc_i2c_address_7bit": "0x35",
+    "serial_marker": "atecc608: ok: 60 02",
+    "frame_png_sha256": "f373994099403fea3b0e42d0dbf9b0486d2d9306cbb9c6cb27455794b602eb10"
+  },
+  "checks": [
+    {
+      "name": "ATECC608 init and identity marker",
+      "status": "PASS"
+    },
+    {
+      "name": "32-byte config read, lock word and Info revision",
+      "status": "PASS"
+    },
+    {
+      "name": "No atcab failure or abort marker",
+      "status": "PASS"
+    },
+    {
+      "name": "DMA link start and DC command phase",
+      "status": "PASS"
+    },
+    {
+      "name": "Nonempty 320x240 virtual frame",
+      "status": "PASS"
+    },
+    {
+      "name": "Evidence ZIP and history retention",
+      "status": "PASS"
+    },
+    {
+      "name": "PID and lease cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "Platform and generated validators",
+      "status": "PASS"
+    },
+    {
+      "name": "PR and main CI",
+      "status": "PASS"
+    },
+    {
+      "name": "Production key, ECDSA signing and live trust root",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Electrical, side-channel and physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/622b144619b45cec2a3c90f869e4cc416e32f386/docs/evidence/2026-10-29-core2-atecc608/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/622b144619b45cec2a3c90f869e4cc416e32f386/docs/evidence/2026-10-29-core2-atecc608/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/622b144619b45cec2a3c90f869e4cc416e32f386/patches/qemu-m5stack-peripherals/0085-core2-atecc608.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/622b144619b45cec2a3c90f869e4cc416e32f386/tests/firmware/core2_atecc608/run_service.py"
+  ],
+  "notes": [
+    "The deterministic test config is locked and contains no production private key.",
+    "The public firmware remains PARTIAL because independent BMI270 and later-tab behavior is not fully validated.",
+    "Core2 legacy UIFlow RUNTIME-03 is not changed by this record.",
+    "All session identifiers and internal endpoints are omitted from this public record."
+  ]
+}

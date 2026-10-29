@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | Core2 for AWS ATECC608 initialization and DMA command phase | `PASS`（virtual-device：锁定测试 config、ATECC wake/Read/Info/CRC、三次 `/api/v1` nonempty frame、PR #33 merge/CI PASS；生产 key/ECDSA/电气/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-core2-atecc608/) |
 | 2026-10-29 | ESP Emulator | Operator-owned Device Service runtime ACL | `PASS`（host-runtime：API/OpenAPI `1.51.0`；设备级 serial/input/reset/program/flash ACL 与 package path/entrypoint 在 I/O 前 fail closed；真实 HTTP `23/23`、SIGHUP 替换/回滚、snapshot/evidence 脱敏、平台 `1550 OK + 10 skip`、PR/main CI PASS；guest filesystem ACL/QEMU/物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-29-runtime-acl/) |
 | 2026-10-29 | ESP Emulator | Core2 post-reset teardown and lease recovery | `PASS`（virtual-device：`after-reset` 在 guest reboot-in-flight 时停止同一 session；3/3 lease、每轮 `23/23` checks，HTTP/BLE companion、BLE/QEMU PID、worker lease 与下一 session 全部回收/恢复；平台 `1535 OK + 10 skip`、PR/main CI PASS；物理硬件、RF、bit-exact controller、物理 PSRAM/cache 与 cross-host NOT RUN） | [查看](records/esp-emulator/2026-10-29-core2-post-reset-teardown/) |
 | 2026-10-29 | ESP Emulator | Lease-bound worker evidence persistence | `PASS`（PR #23 merge；真实 HTTP/WorkerAgent：约 2 MiB ZIP 在上传响应丢失后幂等重试；同 evidence ID、live job/lease/generation 绑定；restart 后内容可读；异 bytes 与错误 result 409；平台 `1535 OK + 10 skip`、PR/main CI PASS；物理跨主机/对象存储/QEMU/硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-29-lease-bound-worker-evidence/) |
