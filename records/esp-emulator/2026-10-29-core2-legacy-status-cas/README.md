@@ -43,6 +43,11 @@ BIN-bound PC 命名成精确函数。
 - `patches/0001-esp32-legacy-status-cas-correlation.patch`：`0075` patch
 - `code/README.md`：复现入口和源码位置
 
+后续 episode profiling 见
+[2026-10-29 CAS hold intervals](followups/2026-10-29-cas-hold-episodes/)；
+该 follow-up 量化了正常 WDT 与 WDT-off 的长持有区间，但仍未关闭
+`RUNTIME-03`。
+
 ## 未覆盖项
 
 物理硬件、RF、电气、物理 cache/PSRAM timing 和真机行为均 `NOT RUN`。

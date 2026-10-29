@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "virtual_device_diagnostic",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy failed-CAS hold intervals and scheduler mutex mapping",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/37",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "16580f97228908c3d0f11dcbec71f7f9a530a747",
+    "result_commit": "23a081ea5615bec2c36f3ef95237433bbb6b9a07",
+    "merge_commit": "12df2b9b40aa6160237fb00366b727dd7e4c9a32"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "target": "virtual M5Stack Core2"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4"
+  },
+  "execution": {
+    "environment": "macOS arm64; Device Service; runtime=qemu-wifi; exact-time freeze",
+    "qemu_sha256": "0a63c37f62752a3020988bb6b087b5eb11f4a6af323255f978ccb7012cb8be73",
+    "patch_reverse_apply": "PASS",
+    "platform_tests": "1559 OK, 10 skipped",
+    "pr_ci": "4/4 PASS",
+    "main_ci": "2/2 PASS",
+    "main_ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40860945564"
+  },
+  "checks": [
+    {
+      "name": "normal_wdt_episode_profile",
+      "status": "PASS",
+      "detail": "238 episodes, 9.316534114s total, 631ms max"
+    },
+    {
+      "name": "wdt_off_episode_profile",
+      "status": "PASS",
+      "detail": "253 episodes, 7.825981502s total, 581ms max"
+    },
+    {
+      "name": "xTaskQueueMutex_mapping",
+      "status": "PARTIAL",
+      "detail": "BIN/control-flow match to public legacy IDF v3.3.5; no matching application ELF/MAP"
+    },
+    {
+      "name": "failed_cas_slice_yield",
+      "status": "FAIL",
+      "detail": "redistributed task-queue wait to queue mux without changing reset boundary"
+    },
+    {
+      "name": "normal_wdt_startup",
+      "status": "FAIL",
+      "detail": "TG0 stage-1 reset remains"
+    },
+    {
+      "name": "application_frame",
+      "status": "NOT RUN",
+      "detail": "legacy startup UI and non-empty application frame remain open"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "PR 4/4 and main CI 2/2"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "patches/0001-esp32-legacy-cas-episode-profile.patch",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/23a081ea5615bec2c36f3ef95237433bbb6b9a07/docs/evidence/2026-10-29-core2-legacy-cas-episodes/README.md"
+  ],
+  "notes": [
+    "This is diagnostic instrumentation, not a RUNTIME-03 fix.",
+    "The lock symbol mapping is BIN/control-flow based, not matching ELF identity.",
+    "Normal-WDT reset and non-empty application frame remain OPEN."
+  ]
+}
