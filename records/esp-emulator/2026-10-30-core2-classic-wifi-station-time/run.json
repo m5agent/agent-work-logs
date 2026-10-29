@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Make classic Core2 WiFi station timing deterministic",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/54",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "0e788b7ac8795ab4d037c55e1abd379afd0f126c",
+    "source_commit": "7965a01c93af1f633231e5ba1d3f2986fa080cb8",
+    "merge_commit": "1497c0601f405a2fe078aa061fd1b165c724962a"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "virtual_device": "Core2",
+    "stock_base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+    "stock_generated_sha256": "b57b196fada9cbfd7e41bd1a4e742e8c63935c25dfcc2c0c51b71f1fd5257220",
+    "legacy_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "qemu_sha256": "3e61aa644074598e7b37e2cd9d4e7c1e194d2073b453f4fd9fdc5ffce62738f8"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU 9.2.2; Device Service and repository regression runners",
+    "runtime": "qemu-wifi",
+    "profile": "core2-openmac",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "stock Core2 WiFi scan/association/DHCP/HTTP",
+      "status": "PASS",
+      "result": "5/5 first attempts"
+    },
+    {
+      "name": "Core2 UIFlow2 device group",
+      "status": "PASS",
+      "result": "6/6; attempts 1; retry false"
+    },
+    {
+      "name": "virtual station data behavior",
+      "status": "PASS",
+      "result": "host-tx/host-rx; STA_ASSOCIATED; IPv4 10.0.2.15; HTTP 200"
+    },
+    {
+      "name": "legacy WDT-disabled diagnostic",
+      "status": "PASS",
+      "result": "stable through 457.794095092 s virtual; API Key page"
+    },
+    {
+      "name": "legacy normal-WDT stable startup",
+      "status": "FAIL",
+      "result": "TG0WDT_SYS_RESET"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1609 run; 1608 PASS + 1 skip"
+    },
+    {
+      "name": "PR and merge CI",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1497c0601f405a2fe078aa061fd1b165c724962a/docs/evidence/2026-10-30-core2-classic-wifi-station-time/README.md"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "Classic WiFi timers and generated timestamps now use virtual time.",
+    "Station DHCP and host data use the normal Ethernet/slirp path.",
+    "WDT-disabled is only a diagnostic control.",
+    "Physical hardware, RF, electrical and physical cache/PSRAM timing are NOT RUN."
+  ]
+}
