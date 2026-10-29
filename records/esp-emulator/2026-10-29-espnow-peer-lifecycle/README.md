@@ -46,6 +46,8 @@ RF 和真机仍开放，因此 `RUNTIME-06` 保持 `PARTIAL`。
 - `run.json`：机器可读记录
 - `evidence/summary.json`：脱敏 machine summary
 - `patches/`、`code/`：不适用；runner 已随主仓提交
+- [follow-up：M5ESPNow wrapper lifecycle](followups/2026-10-29-m5espnow-lifecycle/)：
+  wrapper peer-list add/delete/re-add 与 post-resume delivery
 
 ## 未覆盖项
 
