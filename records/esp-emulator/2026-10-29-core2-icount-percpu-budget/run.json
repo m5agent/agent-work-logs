@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Bound Core2 per-vCPU icount scheduling slices",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/45",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3788aeaedc7de9566ac45a15092f133122f82d8a",
+    "result_commit": "5817ce8b",
+    "merge_commit": "ed612f3b1589221dfdbad9e067cebafc7d231d8a"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "rf": "NOT RUN",
+    "electrical": "NOT RUN",
+    "physical_cache_or_flash_timing": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Core2 QEMU; Device Service API",
+    "validation": "virtual-device validation",
+    "runtime": "qemu-wifi",
+    "icount_shift": "5",
+    "icount_max_percpu_ns": 10000,
+    "wdt_disabled": false,
+    "qemu_binary_sha256": "568079f3b9e818ef1cc29b9e7cd1c5c036af19196668a12174ed79ec96c262ed"
+  },
+  "checks": [
+    {
+      "name": "ipc_return_latency",
+      "status": "PASS",
+      "detail": "563.667 us uncapped to 56.249 us capped"
+    },
+    {
+      "name": "peer_block_wait",
+      "status": "PASS",
+      "detail": "728.443 us uncapped to 184.689 us capped"
+    },
+    {
+      "name": "core2_uiflow2_device_group",
+      "status": "PASS",
+      "detail": "6/6 PASS with no retry"
+    },
+    {
+      "name": "platform_tests",
+      "status": "PASS",
+      "detail": "1574 OK, 1 skipped"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "4/4 checks passed"
+    },
+    {
+      "name": "legacy_normal_wdt",
+      "status": "FAIL",
+      "detail": "TG0 stage-1 reset at 17.242875841 s"
+    },
+    {
+      "name": "startup_ui_repl_and_frame",
+      "status": "FAIL",
+      "detail": "no BOARD NAME/APIKEY/REPL; 302-byte black frame"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ed612f3b1589221dfdbad9e067cebafc7d231d8a/docs/evidence/2026-10-29-core2-icount-percpu-budget/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ed612f3b1589221dfdbad9e067cebafc7d231d8a/patches/qemu-m5stack-peripherals/0090-icount-percpu-fairness-cap.patch"
+  ],
+  "notes": [
+    "The fix closes the measured multi-vCPU icount scheduling amplification, not RUNTIME-03.",
+    "M5_CORE2_ICOUNT_MAX_PERCPU_NS=0 restores the uncapped control.",
+    "memw-wide yield, cross-core forced yield, 100 us, and 1 us controls were rejected."
+  ]
+}
