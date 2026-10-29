@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | Cardputer-ADV user firmware display, clock and input | `PASS`（virtual-device：同一完整 Flash `470aabe2…872f0a`；ADC 错误 `0`、完整 240×135 原生帧、135×240 自动竖屏与 3D 同步旋转、5 秒墙钟/虚拟时间 `0.999856`、Enter 后帧差 `23`；该旧固件仍报 board 14，兼容路径严格门控；物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-29-cardputer-adv-user-firmware/) |
 | 2026-10-29 | ESP Emulator | Core2 contended-CAS scheduler attribution | `PARTIAL`（virtual-device：同 binary 5 秒 A/B 将 CAS/contended 从 `1,070,625/984,964` 降到 `91,465/2,702`、episode time `2.240→1.018 s`；SSI 工作近似不变；normal-WDT control/candidate 仍在约 `17.248 s` TG0 stage-1 reset；PR #40/main CI PASS；`RUNTIME-03` 与物理硬件仍 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-29-core2-contended-cas-scheduler/) |
 | 2026-10-29 | ESP Emulator | FlashLight cold-route four-host validation | `PASS`（virtual-device：CoreS3/AtomS3R/StickS3/StopWatch 原厂 constructor、`100%/220ms` Flash、off 与同 PID Run 替换；四台 `ready-low → flash-active → ready-low`；actual-QOM Web replay PASS；platform `1559 OK + 10 skip`、PR/main CI PASS；实时 Web/S1/PWM/OEN/IOMUX/光电热/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-flashlight-cold-route-four-hosts/) |
 | 2026-10-29 | ESP Emulator | Relay/Relay2 hard-reset output boundary | `PASS`（virtual-device：AtomS3R 同固件 pre-fix 单 Relay/Relay2 计数跨 reset 泄漏；fixed reset 清零后分别观测独立 transition；冷构建 `e318b2b7…`、platform `1558 OK + 10 skip`、PR #36 已合并且 CI `6/6`；机械触点/负载/电气/真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-unit-relay-hard-reset/) |

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Cardputer-ADV user firmware display, clock and input compatibility",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/39",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "8b4d857bb8a6ebadb32d4a05a1d0ec90fd5adfa8"
+  },
+  "hardware": {
+    "device": "Cardputer-ADV",
+    "validation": "virtual-device",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "GAME Piano Tiles ADV",
+    "version": "2.0 (13.06.2026)",
+    "bytes": 4194304,
+    "sha256": "470aabe22c27a764ac0226058a94e856fcb14d767abfb66c41582fa2ac872f0a"
+  },
+  "execution": {
+    "environment": "Chromium browser with QEMU WASM",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "adc-calibration",
+      "status": "PASS",
+      "detail": "serial errors: 0"
+    },
+    {
+      "name": "complete-native-frame",
+      "status": "PASS",
+      "detail": "240x135, colored pixels 28628, bounds 0,0-239,134"
+    },
+    {
+      "name": "portrait-presentation",
+      "status": "PASS",
+      "detail": "135x240 upright planar frame; device rotation -90 degrees"
+    },
+    {
+      "name": "clock-ratio",
+      "status": "PASS",
+      "detail": "virtual/wall = 0.9998563707530143"
+    },
+    {
+      "name": "legacy-matrix-input",
+      "status": "PASS",
+      "detail": "Enter held 500 ms; frame delta 23"
+    },
+    {
+      "name": "patched-source-lock",
+      "status": "PASS",
+      "detail": "49 patches; 147 patched-file hashes matched"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://m5agent.github.io/m5stack-esp-emulator/"
+  ],
+  "notes": [
+    "The firmware predates M5GFX 5f8a783f and still reports board 14.",
+    "The gated legacy matrix path is a compatibility behavior, not native legacy Cardputer wiring on ADV.",
+    "Physical display, electrical, optical and timing validation was not run."
+  ]
+}

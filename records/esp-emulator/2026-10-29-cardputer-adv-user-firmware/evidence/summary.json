@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "cardputer-adv-user-firmware-browser-validation",
+  "validation": "virtual-device",
+  "hardware_validation": "NOT RUN",
+  "firmware_sha256": "470aabe22c27a764ac0226058a94e856fcb14d767abfb66c41582fa2ac872f0a",
+  "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+  "wasm_sha256": "71860e8dc882e3cf4d8e99a33984f5bc972fceaac6b8c97a459bf490358e9569",
+  "results": {
+    "adc_calibration_errors": 0,
+    "native_frame": {
+      "width": 240,
+      "height": 135,
+      "colored_pixels": 28628,
+      "bounds": [0, 0, 239, 134]
+    },
+    "planar_frame": [135, 240],
+    "orientation": {
+      "logical": "portrait",
+      "device_rotation_deg": -90
+    },
+    "clock": {
+      "wall_elapsed_ns": 5012634999.990463,
+      "virtual_elapsed_ns": 5011915039,
+      "ratio": 0.9998563707530143
+    },
+    "input": {
+      "key": "Enter",
+      "hold_ms": 500,
+      "frame_delta": 23,
+      "before_canvas_sha256": "fce2241a341b9b2038cca2ad32adeb7ae3a047789dd5bdf38dafc472b84d91fd",
+      "after_canvas_sha256": "a594d838c14d0408d651478828f13e810753fae564708562a6a859ac638906c7"
+    }
+  },
+  "checks": [
+    "test_public_qemu_profiles.mjs",
+    "test_public_qemu_instance.mjs",
+    "test_public_qemu_runtime.mjs",
+    "test_public_qemu_entry.mjs",
+    "test_model_shell.mjs --case controller:cardputer-adv",
+    "test_public_qemu_cardputer_legacy_user.mjs",
+    "bootstrap_qemu_browser_runtime.py --check",
+    "runtime_coverage.py --check",
+    "peripheral_catalog.py --check",
+    "qemu_profiles.py --check",
+    "project_snapshot.py --check"
+  ],
+  "limits": [
+    "No physical LCD, optical, electrical or keyboard measurement.",
+    "Legacy matrix compatibility is gated by the guest's actual legacy scan mode.",
+    "Other S3 boards do not inherit this device-specific display and input result."
+  ]
+}
