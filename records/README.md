@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | Worker claim response-loss idempotency | `PASS`（real HTTP WorkerAgent retry；same live job/lease across restart；request conflict/stale fail closed；raw key 不落盘；platform `1529 OK + 1 skip`；物理/QEMU/外部 side effect NOT RUN） | [查看](esp-emulator/2026-10-29-worker-claim-idempotency/) |
 | 2026-10-29 | `esp-emulator` | ESP-NOW loss/retry, channel/rate and 60-second soak | `PASS`（virtual-device：loss proxy、channel mismatch、rate metadata、60 秒 soak、fabric/cross-wire/PN 回归；platform `1526 OK + 1 skip`、CI PASS；RF/物理 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-loss-channel-rate/) |
 | 2026-10-29 | `esp-emulator` | PR #20 browser QEMU six-device merge | `PASS`（10 板/11 例/313 Chrome checks；CI 与 merge-tree PASS；正式 Pages/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-pr-20-browser-qemu-six-devices/) |
 | 2026-10-29 | `esp-emulator` | External ESP-NOW guest controller key-state | `PASS`（virtual-device：stock guest LMK 从 controller key slot 24 进入 bridge；正控、wrong-LMK、rotation、12 session cleanup、platform `1494 OK + 1 skip`、CI PASS；multi-peer/PN wrap/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-ccmp/followups/2026-10-29-guest-key-state/) |

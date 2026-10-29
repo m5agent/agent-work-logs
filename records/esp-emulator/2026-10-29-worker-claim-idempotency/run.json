@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Worker claim response-loss idempotency",
+  "source": {
+    "issue": "NET-04/SVC-01",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "6c72ea74ebfe4fd64770ced888012900d3bb2cde",
+    "result_commit": "468eeebcd6e62e352761a19f552d5a102f8e3de3",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40828778684",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation": "NOT RUN",
+    "reason": "This control-plane task does not execute a QEMU guest."
+  },
+  "execution": {
+    "environment": "macOS arm64; real Device Service HTTP; WorkerAgent",
+    "api_version": "1.49.0",
+    "validation": "HTTP control-plane and data behavior",
+    "platform_tests": "1529 OK + 1 skipped",
+    "worker_queue_tests": 9,
+    "worker_agent_tests": 11,
+    "device_service_tests": 123
+  },
+  "checks": [
+    {"name": "WorkerAgent lost claim response retry", "status": "PASS"},
+    {"name": "Claim key reuse on retry", "status": "PASS"},
+    {"name": "Same job after service restart", "status": "PASS"},
+    {"name": "Same lease after service restart", "status": "PASS"},
+    {"name": "Replay flag", "status": "PASS"},
+    {"name": "Second job remains queued", "status": "PASS"},
+    {"name": "Different request conflict", "status": "PASS"},
+    {"name": "New key claims second job", "status": "PASS"},
+    {"name": "Raw claim key not persisted", "status": "PASS"},
+    {"name": "Queue mode 0600", "status": "PASS"},
+    {"name": "Token absent from service log", "status": "PASS"},
+    {"name": "Platform and generated validators", "status": "PASS"},
+    {"name": "Node and compile checks", "status": "PASS"},
+    {"name": "CI", "status": "PASS"},
+    {"name": "Physical cross-host execution", "status": "NOT RUN"},
+    {"name": "QEMU guest", "status": "NOT RUN"},
+    {"name": "External side-effect fence", "status": "NOT RUN"},
+    {"name": "Physical hardware", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/468eeebcd6e62e352761a19f552d5a102f8e3de3/docs/evidence/2026-10-29-worker-claim-idempotency/README.md"
+  ],
+  "notes": [
+    "The claim key is optional for compatibility.",
+    "Old jobs.json state is migrated in memory and persisted on the next write.",
+    "No internal endpoint, token, worker credential or QEMU session ID is retained in this public record."
+  ]
+}

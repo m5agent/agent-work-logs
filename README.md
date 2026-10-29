@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | Worker claim response-loss idempotency | `PASS`（真实 HTTP/WorkerAgent：首个 committed claim response 被丢弃后复用同 key 重试；restart 前后同 job/lease，第二个 job 保持 queued；异请求 409、expired lease fail closed、raw key 不落盘；平台 `1529 OK + 1 skip`；物理跨主机/QEMU/外部 side effect NOT RUN） | [查看](records/esp-emulator/2026-10-29-worker-claim-idempotency/) |
 | 2026-10-29 | ESP Emulator | ESP-NOW loss/retry, channel/rate and 60-second soak | `PASS`（限定 virtual-device：受控丢两帧后重试恢复；channel 6 正控、1↔6 各 40 次 drop；11/24 Mbps metadata 互见；60 秒双向 soak 超千次 TX/RX 且无重复/错误；shared/pairwise/cross-wire/PN 回归、平台 `1526 OK + 1 skip` 与 CI PASS；RF、bit-exact controller 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-espnow-loss-channel-rate/) |
 | 2026-10-29 | ESP Emulator | PR #20 browser QEMU six-device enablement merge | `PASS`（merge review/delivery：10 板/11 例/313 Chrome checks、固定 WASM/source hashes、52 文件 `+5656/-371`；PR 与 merge CI PASS；merge-tree platform `1521 OK + 10 skip`；正式 Pages 部署、物理硬件与长期稳定性 NOT RUN） | [查看](records/esp-emulator/2026-10-29-pr-20-browser-qemu-six-devices/) |
 | 2026-10-29 | ESP Emulator | ESP-NOW CCMP PN exhaustion and rekey | `PASS`（限定 48-bit virtual PN lifecycle：`0083` 在 `0xffffffffffff` fail closed；新 LMK 后恢复双向 payload，same-LMK 重写保持 PN/replay 并继续 drop；shared-LMK/pairwise/cross-wire 回归 PASS；platform `1510 OK + 1 skip`、CI PASS；loss/retry、RF 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-espnow-external-ccmp/followups/2026-10-29-pn-exhaustion/) |
