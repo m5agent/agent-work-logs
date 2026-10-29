@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | 最新 QEMU 三设备 UIFlow2 接口复测 | `PARTIAL`（virtual-device：system/shared、协议、audio、ESP-NOW、BLE、M5UI 和板级接口重跑；stock SDK 与 candidate 结果稳定；Core2 network 首轮并发毛刺经隔离及重复控制；真机/RF/legacy 边界保留；platform `1432` 项） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r3/) |
 | 2026-10-29 | `esp-emulator` | StopWatch / StickS3 / Core2 UIFlow2 接口再次复测 | `PARTIAL`（virtual-device：system/shared、协议、ESP-NOW、audio、硬件与 M5UI 重测；candidate repos/TLS/M5UI/M5BLE 通过；stock SDK、S3 BLE、legacy 与真机边界保留；platform `1428` 项） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r2/) |
 | 2026-10-29 | `esp-emulator` | 正式 GitHub Pages 上线与公开 CoreS3 验收 | `PASS`（原仓库 GitHub Actions 固定源码构建、真实 guest 验收和 Pages 部署成功；正式 HTTPS 独立 `21/21` PASS；浏览器虚拟设备结果，默认墙钟/长期稳定性/持久化/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-github-pages-production/) |
 | 2026-10-29 | `esp-emulator` | Core2 legacy UART 与虚拟时钟对齐 | `PARTIAL`（virtual-device：`0070` 与 runner 串口行合同 PASS；WDT-off BOARD/APIKEY `55.00 s`、boot.py `77.11 s`，normal WDT `17.25 s` reset，shift=2 仍 reset；platform `1398` 项与 CI 两 job PASS；startup UI/REPL/非空帧和物理硬件 OPEN/NOT RUN） | [查看](esp-emulator/2026-10-28-concurrent-fixture-ready-state/followups/2026-10-29-core2-legacy-uart-clock/) |
