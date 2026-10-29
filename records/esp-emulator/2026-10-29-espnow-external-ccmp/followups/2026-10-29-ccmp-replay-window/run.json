@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "External ESP-NOW CCMP replay window",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "398509e9492a1e95825e6d546f11462f6364b0e8",
+    "result_commit": "1a90d3e6b50a6906a52081611240b289335ff9b0",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40812108173"
+  },
+  "hardware": {},
+  "firmware": {
+    "family": "UIFlow2 v2.5.3",
+    "stopwatch_firmware_sha256": "b6baab9fa89d706a1e97da9302306c19f6f3f45abf171fa3c4dcab5e35dddb08",
+    "sticks3_firmware_sha256": "a36fdff4efaee90b1b9bc1eed265b660d7e009b2fd391552a0d8205ed508ee6c",
+    "core2_firmware_sha256": "b39ced5db5e6f5896baac4b2d59fc5a7d809d10798a2adafa0db461811238750"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU virtual device; transparent UDP reorder/replay proxy",
+    "validation": "virtual-device validation",
+    "runtime": "qemu-wifi",
+    "qemu_sha256": "ef88746915960fe26a275cccfefcbb506cbc0f7d322747faad81a4a0916661cd",
+    "patch_sha256": "c4f40a614412db0b0c642f448820bb1acb8cf9bbe980df4e20e15d5c74556e0c",
+    "runner_sha256": "264f475e9c1d1725fde16112025219e8933e5fb7678b361e9f131692f1211708",
+    "window_frames": 64,
+    "session_paths": 6
+  },
+  "checks": [
+    {
+      "name": "Authenticated ordering window",
+      "status": "PASS",
+      "details": "64-frame bitmap, unseen older PN accepted once"
+    },
+    {
+      "name": "Real reorder proxy",
+      "status": "PASS",
+      "details": "58/58 forwarded, reordered=true, no replay drops"
+    },
+    {
+      "name": "Duplicate replay negative",
+      "status": "PASS",
+      "details": "receiver RX 59 and exactly one replay drop"
+    },
+    {
+      "name": "Core2 encrypted regression",
+      "status": "PASS",
+      "details": "14/44 source/payload matches"
+    },
+    {
+      "name": "Patch replay",
+      "status": "PASS",
+      "details": "forward, source equality, reverse checks"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "details": "1487 tests, OK, 1 skipped"
+    },
+    {
+      "name": "Generated contract checks",
+      "status": "PASS",
+      "details": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "Multi-peer replay window",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/patch-check.txt",
+    "patches/README.md",
+    "patches/0001-esp32-espnow-external-ccmp-window.patch"
+  ],
+  "notes": [
+    "The single-peer replay window is PASS; RUNTIME-06 remains PARTIAL overall.",
+    "The 64-frame size is an explicit model policy, not a datasheet-derived production parameter.",
+    "Duplicate replay remains rejected."
+  ]
+}
