@@ -1,0 +1,8 @@
+command:
+  git apply --check patches/0001-esp32-espnow-guest-key-state.patch
+  git apply patches/0001-esp32-espnow-guest-key-state.patch
+  cmp applied-files recorded-qemu-source-files
+  git apply --reverse --check patches/0001-esp32-espnow-guest-key-state.patch
+
+result:
+  PATCH_FORWARD_CURRENT_MATCH_REVERSE_OK

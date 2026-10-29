@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "runtime_binary_sha256": "d2f25608dce3d4b4ff8951b1b89a778d52a57286bfb460f7959ddec696e48796",
+  "patch_sha256": "c827a3e6e76f591b319379342e099a5cd4ffd086029fb514cb99c61a72e2babc",
+  "runner_sha256": "23791688c70ca6c1c7c3ac171d021bb8c1c9b82d38ecad2602d92da6ae06472a",
+  "controller_key": {
+    "slot": 24,
+    "valid_mask": "0x01000000",
+    "length": 16,
+    "stride": 40,
+    "data_offset": 8
+  },
+  "scenarios": [
+    {
+      "name": "guest-key",
+      "left": "stopwatch",
+      "right": "sticks3",
+      "status": "PASS",
+      "guest_key_ready": [1, 1],
+      "payload_matches": [57, 58],
+      "summary_sha256": "f7980744270c1c81b131d94dece35d07909facb63393d18cd0a098cb53aab0cf"
+    },
+    {
+      "name": "guest-key-wrong-lmk",
+      "left": "stopwatch",
+      "right": "sticks3",
+      "status": "PASS",
+      "guest_key_ready": [1, 1],
+      "rx_packets": [0, 0],
+      "summary_sha256": "9fdc527c7d0b14bc35d646c4d53a6d899ba263d079a74c56491e2321fbc75f57"
+    },
+    {
+      "name": "guest-key",
+      "left": "core2",
+      "right": "stopwatch",
+      "status": "PASS",
+      "guest_key_ready": [1, 1],
+      "payload_matches": [15, 44],
+      "summary_sha256": "c0b9058b21d5cb5215d2d91bc50c066658cda469406ae177f063df771edb2a05"
+    },
+    {
+      "name": "guest-key-wrong-lmk",
+      "left": "core2",
+      "right": "stopwatch",
+      "status": "PASS",
+      "guest_key_ready": [1, 1],
+      "rx_packets": [0, 0],
+      "summary_sha256": "a55e087954152b855c8bf49187b2b82952e19a68c25de789408d9fb1b2b3dd04"
+    },
+    {
+      "name": "guest-key-rotation",
+      "left": "stopwatch",
+      "right": "sticks3",
+      "status": "PASS",
+      "guest_key_ready": [4, 4],
+      "pre_synced": [true, true],
+      "post_resumed": [true, true],
+      "summary_sha256": "26f2f01a57229ad9b0c3a14e50bca40a73c21ef88b57eb7f7d31e688761e6b09"
+    },
+    {
+      "name": "guest-key-rotation",
+      "left": "core2",
+      "right": "stopwatch",
+      "status": "PASS",
+      "guest_key_ready": [4, 4],
+      "pre_synced": [true, true],
+      "post_resumed": [true, true],
+      "summary_sha256": "287463dbdb29cc3e5fefa3427402dff15552554949fbead3582a0498e3a0b86e"
+    }
+  ],
+  "cleanup": {
+    "sessions": 12,
+    "terminal_state": "stopped",
+    "runtime_pid_gone": true,
+    "history_preserved": true,
+    "purge": 0
+  },
+  "not_run": [
+    "multi-peer key routing",
+    "multi-peer replay windows",
+    "PN wrap",
+    "loss and retry",
+    "channel and rate",
+    "RF and physical hardware"
+  ]
+}

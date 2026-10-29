@@ -52,6 +52,8 @@ peer lifecycle、replay、loss/retry、RF 和真机尚未完成。
   `0078` authenticated PN guard 与真实 UDP replay proxy 负控
 - [follow-up：64-frame CCMP replay window](followups/2026-10-29-ccmp-replay-window/)：
   `0079` bounded reorder window、duplicate 负控和 Core2 回归
+- [follow-up：stock guest key-state](followups/2026-10-29-guest-key-state/)：
+  `0080` classic/S3 controller key store、wrong-LMK 和 key rotation
 
 ## 未覆盖项
 
