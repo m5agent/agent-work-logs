@@ -1,0 +1,10 @@
+command:
+  git apply --check patches/0001-esp32-espnow-per-peer-key-routing.patch
+  git apply patches/0001-esp32-espnow-per-peer-key-routing.patch
+  cmp applied-files recorded-qemu-source-files
+  git apply --reverse --check patches/0001-esp32-espnow-per-peer-key-routing.patch
+
+result:
+  PATCH_FORWARD_OK
+  PATCH_CURRENT_MATCH_OK
+  PATCH_REVERSE_OK
