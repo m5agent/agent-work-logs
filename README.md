@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | ESP Emulator | ESP-NOW external plaintext peers | `PASS`（限定 virtual-device：StopWatch↔StickS3 与 Core2↔StopWatch 两个独立 guest 对经正常 controller TX/RX DMA 双向收到 action-frame payload；四个 session evidence/清理完整；platform `1440 OK + 10 skip`、CI 两 job PASS；PMK/LMK/CCMP、lifecycle、RF 与真机 NOT RUN） | [查看](records/esp-emulator/2026-10-29-espnow-external-peer/) |
 | 2026-10-29 | ESP Emulator | 当前 QEMU 三设备 UIFlow2 接口复测 r4 | `PARTIAL`（virtual-device：三台 system/shared、协议、audio、ESP-NOW、BLE、M5UI 和板级接口重跑；Core2 network 首轮 `14/14`；stock SDK/BLE/legacy/真机边界保留；三台协议 candidate 和两台 M5UI candidate PASS；platform `1432 OK + 1 skip`） | [查看](records/esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r4/) |
 | 2026-10-29 | ESP Emulator | Core2 legacy RDSR 与 CAS 关联诊断 | `PARTIAL`（virtual-device：`0075` 证明 WIP/BUSY 始终为 0；真实跨核 scheduler/list 锁竞争被定位；failed-CAS TCG-slice yield 与原 normal-WDT 都在约 `17.249s` reset；platform `1432 OK + 1 skip`、CI 两 job PASS；RUNTIME-03、startup UI/应用帧和真机仍 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-29-core2-legacy-status-cas/) |
 | 2026-10-29 | ESP Emulator | StopWatch / StickS3 / Core2 UIFlow2 接口再次复测 | `PARTIAL`（virtual-device：三台 system/shared、通信、音频、ESP-NOW、板级接口和 M5UI 重测；requests2/Modbus/TLS/M5UI/M5BLE candidate 通过；stock SDK、StopWatch/StickS3 BLE、Core2 legacy 与真机边界保留；platform `1428` 项） | [查看](records/esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r2/) |

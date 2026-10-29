@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "ESP-NOW external plaintext peers",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "322130288ea4fb2c2aab49b689e232bb2beef7f7",
+    "result_commit": "38a7e8be606aa0d0ca8d8b75aae62773dc520710",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40804667393"
+  },
+  "hardware": {},
+  "firmware": {
+    "family": "UIFlow2 v2.5.3",
+    "stopwatch_base_sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d",
+    "sticks3_base_sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8",
+    "core2_base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU virtual device; isolated Device Service sessions",
+    "validation": "virtual-device validation",
+    "runtime": "qemu-wifi",
+    "qemu_sha256": "df0e20f176494a9de8e32361dbc865688c5e72791207793d0bdb0b5a947b616a",
+    "patch_sha256": "de39dd922d15bc2ad3827a13293d86dc2a2f0dafcfe2036783730dfab8037c62",
+    "runner_sha256": "a5bfcb7a7a1a88a64c3464a1ac7437a0b78080b887b0d86e5305918faedd780a",
+    "scenario": "plaintext",
+    "encryption": false,
+    "exchange_window_ms": 12000
+  },
+  "checks": [
+    {
+      "name": "StopWatch to StickS3 external plaintext",
+      "status": "PASS",
+      "details": "StopWatch 57/57 and StickS3 58/58 source/payload matches"
+    },
+    {
+      "name": "Core2 to StopWatch external plaintext",
+      "status": "PASS",
+      "details": "Core2 14/14 and StopWatch 44/44 source/payload matches"
+    },
+    {
+      "name": "Session evidence and cleanup",
+      "status": "PASS",
+      "details": "4/4 terminal stopped, runtime PID gone, history retained, purge=0"
+    },
+    {
+      "name": "ESP-NOW external peer contracts",
+      "status": "PASS",
+      "details": "6/6"
+    },
+    {
+      "name": "Device Service unit suite",
+      "status": "PASS",
+      "details": "123/123"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "details": "1440 tests, OK, 10 skipped"
+    },
+    {
+      "name": "Generated contract checks",
+      "status": "PASS",
+      "details": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "Encrypted ESP-NOW and RF",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/patch-check.txt",
+    "patches/README.md",
+    "patches/0001-esp32-external-espnow-peer-bridge.patch"
+  ],
+  "notes": [
+    "The scoped external plaintext exchange is PASS; RUNTIME-06 remains PARTIAL overall.",
+    "The bridge is default-off and cannot be combined with the same-guest loopback fixture.",
+    "No payload or callback is synthesized by the Python host.",
+    "PMK/LMK/CCMP, wrong-key behavior, peer lifecycle, RF, timing, and physical hardware remain outside this result."
+  ]
+}
