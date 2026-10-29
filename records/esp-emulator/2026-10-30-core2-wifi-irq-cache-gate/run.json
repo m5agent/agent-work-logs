@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Defer WiFi IRQ during ESP32 cache handoff",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/52",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9f200d0c288eeee6e4160fa9a521b2c9470f86e6",
+    "source_commit": "4b99fa0a16de5232337ebd0c01a7dc232d5ead60",
+    "merge_commit": "0563a0a01772403d563463398a3607462e0ffe87"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "virtual_device": "Core2",
+    "firmware": "UIFlow_Core2 v1.15.4",
+    "original_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "effective_flash_sha256": "b30f3014b75f762f50be3284010502e047b3bd0494b0f0b72a673c2756baffd7",
+    "pre_fix_qemu_sha256": "54d31e90e2eff273b17f11388015e9bf16a1cf6877fbf7681c207eb73b68286f",
+    "post_fix_qemu_sha256": "a4cfa2b8c3aa7e62b11423fa456c57ec01da7c7e43086a90bdded0eec6241249",
+    "frame_sha256": "737df08a0c5d21fe23a46e38f79b7a580508f8dfa7c63c9bc552be19a3106c96"
+  },
+  "execution": {
+    "environment": "macOS arm64; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-wifi",
+    "profile": "core2-openmac",
+    "icount_shift": 2,
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "patch contracts",
+      "status": "PASS",
+      "result": "3/3"
+    },
+    {
+      "name": "Core2 UIFlow2 device group",
+      "status": "PASS",
+      "result": "6/6; attempts 1; retry false"
+    },
+    {
+      "name": "default-budget normal-WDT cache panic",
+      "status": "PASS",
+      "result": "NOT OBSERVED"
+    },
+    {
+      "name": "legacy boot markers",
+      "status": "PASS",
+      "result": "BOARD/APIKEY/boot start/boot done"
+    },
+    {
+      "name": "virtual setup page",
+      "status": "PASS",
+      "result": "320x240; 75559 nonblack pixels; 512 colors"
+    },
+    {
+      "name": "normal-WDT stable startup",
+      "status": "FAIL",
+      "result": "TG0WDT_SYS_RESET after the setup page"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1599 run; 1598 PASS + 1 skip"
+    },
+    {
+      "name": "documentation contracts",
+      "status": "PASS",
+      "result": "50/50"
+    },
+    {
+      "name": "generators and static checks",
+      "status": "PASS",
+      "result": "runtime coverage/catalog/profiles/snapshot; compileall; Ruff; diff"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "evidence/frame-api-key-summary.png",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/0563a0a01772403d563463398a3607462e0ffe87/docs/evidence/2026-10-30-core2-wifi-irq-cache-gate/README.md"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "The WiFi MAC level is retained, not discarded, while the cache is disabled.",
+    "Cross-core, timer and cache-illegal sources remain ungated.",
+    "Normal-WDT startup still later resets. Physical hardware, RF and electrical measurements are NOT RUN."
+  ]
+}
