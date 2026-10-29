@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Verify FlashLight cold constructor and original API on four S3 hosts",
+  "source": {
+    "issue": "UNIT-HOST-37",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/38",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "12df2b9b40aa6160237fb00366b727dd7e4c9a32",
+    "result_commit": "2bf81aa2814887cdbfa390c9be9a5d23d7e7b96d",
+    "merge_commit": "610248e3cc070c6abcf72defc4b3db3048ec77b4"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "photometry": "NOT RUN",
+    "thermal": "NOT RUN",
+    "electrical": "NOT RUN"
+  },
+  "firmware": {
+    "binary_committed": false,
+    "device_firmware_sha256": {
+      "cores3": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+      "atoms3r": "0c70da2a56102dc812f380ac24fcb0a75bd3cb0c70e5380d97c11baeca935323",
+      "sticks3": "93a547011be37a2b5f062ad7a56da108a95600119d360481adef10c634ed8d76",
+      "stopwatch": "869f8a192cbc0392c8905cf69cfa7244482e97221cce977a04e9dc191f46ff21"
+    }
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; four S3 UIFlow2 QEMU hosts; local Device Service API",
+    "validation": "virtual-device validation",
+    "qemu_sha256": "e318b2b748d6e982cd2e592a1b991ec930a8e9501cf02a0c19925022a656b373",
+    "platform_tests": "1559 OK, 10 skipped",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40863164668",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40863185049",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40863661928"
+    ]
+  },
+  "checks": [
+    {
+      "name": "cores3_cold_constructor",
+      "status": "PASS",
+      "detail": "ready-low with output-known, pad-synchronized and route-supported"
+    },
+    {
+      "name": "atoms3r_cold_constructor",
+      "status": "PASS",
+      "detail": "ready-low with output-known, pad-synchronized and route-supported"
+    },
+    {
+      "name": "sticks3_cold_constructor",
+      "status": "PASS",
+      "detail": "ready-low with output-known, pad-synchronized and route-supported"
+    },
+    {
+      "name": "stopwatch_cold_constructor",
+      "status": "PASS",
+      "detail": "ready-low with output-known, pad-synchronized and route-supported"
+    },
+    {
+      "name": "original_flash_api",
+      "status": "PASS",
+      "detail": "one decoded program at 100 percent and 220 ms on all four hosts"
+    },
+    {
+      "name": "off_run_and_same_guest",
+      "status": "PASS",
+      "detail": "all hosts returned to ready-low with the same PID and no reboot banner"
+    },
+    {
+      "name": "mounted_web_actual_qom_replay",
+      "status": "PASS",
+      "detail": "actual CoreS3 initial/active/off snapshots through the mounted UnitPanel"
+    },
+    {
+      "name": "evidence_before_stop",
+      "status": "PASS",
+      "detail": "all four sessions requested evidence and stopped with purge=0"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "1559 OK, 10 skipped"
+    },
+    {
+      "name": "coverage_catalog_profiles_snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "two PR runs plus merge-commit main run"
+    },
+    {
+      "name": "live_mounted_web_polling",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/web-replay.txt",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/610248e3cc070c6abcf72defc4b3db3048ec77b4/docs/evidence/2026-10-29-flashlight-cold-route-four-host/README.md"
+  ],
+  "notes": [
+    "The relative Flash code is a digital model value, not photometry.",
+    "Dynamic S1, EN PWM, full OEN/IOMUX and bit-exact timing remain NOT RUN.",
+    "Live mounted Web polling is NOT RUN; the vetted path is an actual-QOM snapshot replay.",
+    "The controller mechanism may serve other routed Units, but this validation does not grant them PASS."
+  ]
+}

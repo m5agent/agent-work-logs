@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | FlashLight cold-route four-host validation | `PASS`（virtual-device：CoreS3/AtomS3R/StickS3/StopWatch 原厂 constructor、`100%/220ms` Flash、off 与同 PID Run 替换；四台 `ready-low → flash-active → ready-low`；actual-QOM Web replay；实时 Web/S1/PWM/OEN/IOMUX/光电热/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-flashlight-cold-route-four-hosts/) |
 | 2026-10-29 | `stackchan` | Auto-dance firmware with expressions, 12 RGB LEDs and dual servos | `PASS`（virtual-device：38 cues/6 expressions、19 个唯一 320×240 帧、1006 SCSCL sync-write、1367 次 RGB 刷新、5 个循环/96 秒；实体机械/电气/光学/声学 NOT RUN） | [查看](stackchan/2026-10-29-auto-dance-firmware/) |
 | 2026-10-29 | `esp-emulator` | Core2 for AWS ATECC608 initialization and DMA command phase | `PASS`（virtual-device：ATECC608 wake/Read/Info/CRC 与锁定测试 config；三个 `/api/v1` session 均到 `atecc608: ok: 60 02` 和 `320x240` nonempty frame；PR #33 合并；生产 key/ECDSA/电气/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-core2-atecc608/) |
 | 2026-10-29 | `esp-emulator` | Operator-owned Device Service runtime ACL | `PASS`（host-runtime：API/OpenAPI `1.51.0`；真实 HTTP `23/23`；serial/input/reset/program/flash、package path/entrypoint fail closed；policy hash/redaction/SIGHUP 与 PR/main CI PASS；guest filesystem ACL/QEMU/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-runtime-acl/) |
