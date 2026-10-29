@@ -1,0 +1,34 @@
+Runtime
+  Device Service /api/v1
+  runtime=qemu
+  machine=m5stackchan
+  firmware sha256=c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542
+
+Boot and loop
+  UART marker: StackChan auto-dance started
+  servo init: SERVO ready zeroX=460 zeroY=620 torque=1
+  DANCE cue lines: 125
+  DANCE restart lines: 5
+  observed duration: 96 seconds
+
+SCS servo data plane
+  packets matching:
+    [scs] packet id=254 inst=83 len=18 addr=42
+  count: 1006
+  meaning: broadcast SYNC_WRITE to the goal-position memory address for IDs 1 and 2
+
+M5IOE1 RGB data plane
+  RGB buffer refresh starts at register 0x30: 1367
+  RGB register writes in 0x30..0x47: 32808
+
+Stability
+  fatal assert/panic/core-dump/backtrace markers: 0
+
+Frame evidence
+  320x240 PNG samples: 19
+  unique SHA-256 hashes: 19
+  contact sheet: evidence/contact-sheet.png
+
+Boundary
+  virtual-device validation only
+  physical mechanical, electrical, optical and acoustic behavior: NOT RUN

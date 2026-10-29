@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "StackChan auto-dance firmware with expressions, RGB lighting and servo motion",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5stack/StackChan-BSP",
+    "base_commit": "fb5e9f5697803ca64e45fe7ad8eaea3e4100f766",
+    "source_delivery": "standalone Arduino sketch in this record"
+  },
+  "hardware": {
+    "device": "StackChan / M5Stack CoreS3 + A180 body",
+    "validation": "virtual-device",
+    "runtime": "qemu",
+    "machine": "m5stackchan",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "name": "stackchan_dance_merged.bin",
+    "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+    "bytes": 16777216,
+    "flash_offset": "0x000000",
+    "app_sha256": "7a4b303e9410e1c859e9abeceb8a9fc18a0376a3adadb49a31ad3a3954e060b6",
+    "app_bytes": 570928,
+    "chip": "esp32s3",
+    "flash_size": 16777216,
+    "app_checksum": "0x05",
+    "app_validation_hash": "2b95385f4afa4e33579bb173415140dde41b9377a026fecf1799950e928445db"
+  },
+  "execution": {
+    "environment": "macOS arm64, Arduino CLI 1.5.1, m5stack:esp32 3.3.10",
+    "task_id": "",
+    "session_id": "redacted",
+    "started_at": "2026-10-29T10:23:29Z",
+    "stopped_at": "2026-10-29T10:25:05Z",
+    "duration_seconds": 96,
+    "hardware_validation": false
+  },
+  "checks": [
+    {
+      "name": "arduino_build",
+      "status": "PASS",
+      "detail": "570783 program bytes (18%), 30744 static RAM bytes (9%)"
+    },
+    {
+      "name": "merged_image_layout",
+      "status": "PASS",
+      "detail": "0x0/0x8000/0xE000/0x10000 byte comparison passed"
+    },
+    {
+      "name": "virtual_flash",
+      "status": "PASS",
+      "detail": "esp-emu-esptool, verified=true, isolated 16 MiB flash"
+    },
+    {
+      "name": "boot_marker",
+      "status": "PASS",
+      "detail": "StackChan auto-dance started observed on UART0"
+    },
+    {
+      "name": "auto_loop",
+      "status": "PASS",
+      "detail": "125 cue logs and 5 restart logs"
+    },
+    {
+      "name": "expression_frames",
+      "status": "PASS",
+      "detail": "19/19 one-second frames differ; all are 320x240"
+    },
+    {
+      "name": "servo_sync_write",
+      "status": "PASS",
+      "detail": "1006 SCSCL SYNC_WRITE packets to position address 42"
+    },
+    {
+      "name": "rgb_lighting",
+      "status": "PASS",
+      "detail": "1367 RGB buffer refreshes and 32808 M5IOE1 RGB register writes"
+    },
+    {
+      "name": "stability",
+      "status": "PASS",
+      "detail": "over 90 seconds and 5 loops; no fatal trace markers"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "detail": "no physical StackChan was connected or operated"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "evidence/contact-sheet.png",
+    "evidence/build-summary.txt",
+    "evidence/protocol-trace-summary.txt"
+  ],
+  "notes": [
+    "The first candidate exposed a UART spinlock assertion under continuous acknowledged servo writes.",
+    "The final firmware uses broadcast SCSCL SYNC_WRITE and does not wait for per-servo acknowledgements.",
+    "Virtual-device PASS does not establish physical torque, current, brightness, acoustics or optics.",
+    "The recorded source was rebuilt successfully, but the full BIN SHA-256 is not bit-reproducible across source paths because Arduino/ESP-IDF embed build metadata."
+  ]
+}
