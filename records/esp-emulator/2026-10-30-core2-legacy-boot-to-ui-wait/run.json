@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Attribute Core2 legacy boot.py success to the WiFi/UI startup wait",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/47",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "20ae4413ed577159db98782a2f4419e504e5b76f",
+    "result_commit": "d69e8998",
+    "merge_commit": "f1cc974bd6922551141b9d478d6dc8ec7a13f06c"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "virtual_device": "Core2",
+    "firmware": "UIFlow_Core2 v1.15.4",
+    "normalized_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "qemu_sha256": "568079f3b9e818ef1cc29b9e7cd1c5c036af19196668a12174ed79ec96c262ed",
+    "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-wifi",
+    "profile": "core2-openmac",
+    "platform_tests": "1581 OK, 1 skipped",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40916059524",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40916086250"
+    ]
+  },
+  "checks": [
+    {
+      "name": "normal_wdt_boot",
+      "status": "PASS",
+      "detail": "shift=2 and 1 us cap reached BOARD/APIKEY and completed boot.py"
+    },
+    {
+      "name": "factory_ui",
+      "status": "FAIL",
+      "detail": "302-byte black frame; REPL and application frame not reached"
+    },
+    {
+      "name": "post_boot_wait",
+      "status": "PARTIAL",
+      "detail": "both CPUs waiti; Flash/cache activity stops near 9.36 s"
+    },
+    {
+      "name": "uart_stack",
+      "status": "PARTIAL",
+      "detail": "existing wait sampled at wifiWebCfg/menu-wifi/m5stack_ui"
+    },
+    {
+      "name": "frc_timer",
+      "status": "PASS",
+      "detail": "timer callbacks continue after boot.py"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "1581 tests OK with one intentional skip"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "four pull-request checks passed"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/f1cc974bd6922551141b9d478d6dc8ec7a13f06c/docs/evidence/2026-10-30-core2-legacy-boot-to-ui-wait/README.md"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "The timing controls are diagnostic and are not the default product configuration.",
+    "Physical hardware, RF, electrical and cache/PSRAM timing are NOT RUN."
+  ]
+}
