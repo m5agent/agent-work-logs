@@ -54,12 +54,15 @@ peer lifecycle、replay、loss/retry、RF 和真机尚未完成。
   `0079` bounded reorder window、duplicate 负控和 Core2 回归
 - [follow-up：stock guest key-state](followups/2026-10-29-guest-key-state/)：
   `0080` classic/S3 controller key store、wrong-LMK 和 key rotation
+- [follow-up：three-guest shared-LMK fabric](followups/2026-10-29-peer-fabric/)：
+  `0081` 三 guest source-peer routing、8×64 replay state 和精确 replay 负控
 
 ## 未覆盖项
 
-- guest key-state 写入 controller、key rotation；
-- peer add/update/delete、replay protection、loss/retry；
-- 双 peer 以上 fabric、channel/rate、bit-exact controller；
+- guest key-state、peer lifecycle、replay 和三 guest shared-LMK fabric
+  已由上述 follow-up 分别覆盖，本记录不反填这些结果；
+- per-peer LMK routing、PN wrap、loss/retry、channel/rate、
+  bit-exact controller；
 - RF、antenna、AP coexistence、电气、timing 和 physical hardware。
 
 以上均不继承本次 virtual-device PASS。

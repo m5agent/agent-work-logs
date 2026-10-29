@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Three-guest shared-LMK ESP-NOW fabric",
+  "source": {
+    "issue": "RUNTIME-06",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "96ee9f33a55a565f45a72315d29a91993f69cd46",
+    "result_commit": "75d66458a4e658abbdba945fc24da0fea2c4eb64",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40817584295"
+  },
+  "hardware": {},
+  "firmware": {
+    "family": "UIFlow2 v2.5.3",
+    "positive_stopwatch_sha256": "c55e91542e144b40be3c51a27ad9295b9019894c193cbb74090b0058306b4b52",
+    "positive_sticks3_sha256": "e61b31f097134e79ba44b543e68f912b47ce14e550af08afd8b08ce03f087798",
+    "positive_core2_sha256": "4e1689548d5c9afb3d64bcaa66ebf0bbfcc9412fdba15816ca68cf4a60541f45",
+    "replay_stopwatch_sha256": "aef8e63bff46191afacba21bd16a21a0f34a3793a8fe146bdff0ad210f40a3c1",
+    "replay_sticks3_sha256": "936dc9b31af0a4dbffc2db0a9e12a49708ed0e90d66da864071d7ce57d142355",
+    "replay_core2_sha256": "88e2b9cb0eed491015175e413884a9a3f8464b6b94e1f26e6e4978564a488979"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "macOS arm64; QEMU virtual device",
+    "runtime": "qemu-wifi",
+    "qemu_sha256": "de8d5b07a31861bf3aae0731ad21da772753cb1bd1388f5b678bdcf23a0ef9b1",
+    "patch_sha256": "b86d3561d503139a4ae8dbda6c4699534b478113ff681784012e562d4d8cf7ca",
+    "runner_sha256": "74429e26440c7bbce6c2ad47ef99b03939c1ab62db5daf21da9350dc07e24d97",
+    "session_count": 6
+  },
+  "checks": [
+    {
+      "name": "Three-guest shared-LMK fabric",
+      "status": "PASS",
+      "details": "StopWatch, StickS3 and Core2 each receive the other two peers; peer_count is [2,2]"
+    },
+    {
+      "name": "Per-source replay negative",
+      "status": "PASS",
+      "details": "One real forwarded frame duplicated; target B replay_drops=1 and A/C=0"
+    },
+    {
+      "name": "Cleanup",
+      "status": "PASS",
+      "details": "Six sessions stopped, PID gone, history retained, purge=0"
+    },
+    {
+      "name": "ESP-NOW contracts",
+      "status": "PASS",
+      "details": "42 tests OK"
+    },
+    {
+      "name": "Device Service",
+      "status": "PASS",
+      "details": "123 tests OK"
+    },
+    {
+      "name": "Platform",
+      "status": "PASS",
+      "details": "1501 tests OK, 1 skipped"
+    },
+    {
+      "name": "Patch replay",
+      "status": "PASS",
+      "details": "forward, applied-source equality and reverse checks"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "Per-peer LMK routing",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/patch-check.txt"
+  ]
+}
