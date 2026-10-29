@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | 当前 QEMU 三设备 UIFlow2 接口复测 r4 | `PARTIAL`（virtual-device：三台 system/shared、协议、audio、ESP-NOW、BLE、M5UI 和板级接口重跑；Core2 network 首轮 `14/14`；stock SDK/BLE/legacy/真机边界保留；三台协议 candidate 和两台 M5UI candidate PASS；platform `1432 OK + 1 skip`） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r4/) |
 | 2026-10-29 | `esp-emulator` | 最新 QEMU 三设备 UIFlow2 接口复测 | `PARTIAL`（virtual-device：system/shared、协议、audio、ESP-NOW、BLE、M5UI 和板级接口重跑；stock SDK 与 candidate 结果稳定；Core2 network 首轮并发毛刺经隔离及重复控制；真机/RF/legacy 边界保留；platform `1432` 项） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r3/) |
 | 2026-10-29 | `esp-emulator` | StopWatch / StickS3 / Core2 UIFlow2 接口再次复测 | `PARTIAL`（virtual-device：system/shared、协议、ESP-NOW、audio、硬件与 M5UI 重测；candidate repos/TLS/M5UI/M5BLE 通过；stock SDK、S3 BLE、legacy 与真机边界保留；platform `1428` 项） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r2/) |
 | 2026-10-29 | `esp-emulator` | 正式 GitHub Pages 上线与公开 CoreS3 验收 | `PASS`（原仓库 GitHub Actions 固定源码构建、真实 guest 验收和 Pages 部署成功；正式 HTTPS 独立 `21/21` PASS；浏览器虚拟设备结果，默认墙钟/长期稳定性/持久化/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-github-pages-production/) |
