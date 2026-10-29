@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 post-reset teardown and lease recovery",
+  "source": {
+    "issue": "CORE2-02",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/25",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "d31da27e8c4677e197ff1363f63e82043f651577",
+    "implementation_commit": "86454588beef9180f207dc4eafd52acfe764b4f4",
+    "result_commit": "741005a93e16950292ceba24c06fd5062d00e2b5",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40837477524",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "rf_validation": "NOT RUN",
+    "electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "validation": "virtual-device validation",
+    "profile": "core2-native-hci",
+    "runtime": "qemu-unified",
+    "image_sha256": "c3eaa35b9c41204cc6337e30b1d81f60bf06eab2d747f3547af5d8b8ba0ea99f",
+    "image_bytes": 16777216,
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "54e7a7f7cd0ff6f5a1d6343c06563388f49c2b0abbca4cafb850876e57ed1254"
+  },
+  "execution": {
+    "environment": "macOS arm64; Device Service /api/v1; trusted-host",
+    "stop_mode": "after-reset",
+    "attempts_requested": 3,
+    "attempts_completed": 3,
+    "attempts_passed": 3,
+    "attempts_failed": 0,
+    "checks_per_attempt": 23,
+    "native_hci_health": "45/45",
+    "platform_tests": "1535 OK + 10 skipped",
+    "teardown_runner_sha256": "586a8195db5a61c8ace06ad4fe07b95b371cab6915dcc5cfaaf38720145c2395",
+    "source_evidence_sha256": "ea540bdac28249c2a52578d8e582a17885886ee0f6db9009a43c788a61234fb6"
+  },
+  "checks": [
+    {"name": "Ready session evidence capture", "status": "PASS"},
+    {"name": "Guest system_reset before stop", "status": "PASS"},
+    {"name": "Same QEMU PID retained during reboot-in-flight", "status": "PASS"},
+    {"name": "Session remains running until stop", "status": "PASS"},
+    {"name": "Final session state stopped without error", "status": "PASS"},
+    {"name": "HTTP companion terminated", "status": "PASS"},
+    {"name": "BLE companion terminated", "status": "PASS"},
+    {"name": "QEMU process reaped", "status": "PASS"},
+    {"name": "BLE peer process reaped", "status": "PASS"},
+    {"name": "Worker lease released", "status": "PASS"},
+    {"name": "Next session created successfully", "status": "PASS"},
+    {"name": "Frame, QOM, network, GATT, pcap and evidence captured", "status": "PASS"},
+    {"name": "Three consecutive attempts", "status": "PASS"},
+    {"name": "Platform and generated validators", "status": "PASS"},
+    {"name": "PR and main CI", "status": "PASS"},
+    {"name": "Physical hardware", "status": "NOT RUN"},
+    {"name": "Bit-exact controller/baseband", "status": "NOT RUN"},
+    {"name": "Physical PSRAM/cache timing", "status": "NOT RUN"},
+    {"name": "Cross-host migration", "status": "NOT RUN"},
+    {"name": "Guest internal quiescence", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/741005a93e16950292ceba24c06fd5062d00e2b5/docs/evidence/2026-10-29-core2-post-reset-teardown/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/741005a93e16950292ceba24c06fd5062d00e2b5/tests/uiflow2/core2_native_hci/evidence-2026-10-29-core2-post-reset-stop-recovery-3x.json"
+  ],
+  "notes": [
+    "active remains the default stop mode.",
+    "Each attempt captured ready evidence before issuing guest system_reset.",
+    "The result covers trusted-host virtual-device lifecycle only.",
+    "No internal endpoint, credential, stable device identifier or session ID is retained in this public record."
+  ]
+}
