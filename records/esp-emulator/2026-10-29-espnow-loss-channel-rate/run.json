@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "ESP-NOW loss/retry, channel/rate and 60-second soak",
+  "source": {
+    "issue": "RUNTIME-06",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7449da2af2ea4c7a77735e79cf4a541fd64e9967",
+    "result_commit": "6c72ea74ebfe4fd64770ced888012900d3bb2cde",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40826797395",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "rf_or_electrical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "family": "UIFlow2 v2.5.3",
+    "validation": "virtual-device",
+    "devices": ["stopwatch", "sticks3", "core2"],
+    "loss_retry_stopwatch_sha256": "d6aa776011143f6a435f95140e64db49f3f6714da43af3a5d2a3947d4df3bb01",
+    "loss_retry_sticks3_sha256": "810c08895b0a5876a426134b3ce463405af35d3c4bd88c536a1d08f361235a74",
+    "soak_stopwatch_sha256": "c4097d42d71185b3c6aecb83d27999aaa48b94af59059ec33a7521acf90dd61b",
+    "soak_sticks3_sha256": "eb825182bfd84dfb66c8937de9b44b7003a1d41bf13340f1ad43a21f94697c21"
+  },
+  "execution": {
+    "environment": "macOS arm64; QEMU virtual device; stock UIFlow2",
+    "runtime": "qemu-wifi",
+    "qemu_sha256": "54e7a7f7cd0ff6f5a1d6343c06563388f49c2b0abbca4cafb850876e57ed1254",
+    "patch_sha256": "91ef766541a9802336d5a3efaefc38fd28f5d7ea55107e605e2ec37fdf2594fc",
+    "runner_sha256": "f0416d4d2acc396a49a830d507530145af07111563cc8e0184623c4d2c535ef2",
+    "session_count": 27,
+    "platform_tests": "1526 OK + 1 skipped"
+  },
+  "checks": [
+    {"name": "Controlled loss and application retry", "status": "PASS", "details": "two frames dropped, later retries delivered"},
+    {"name": "Same-channel delivery", "status": "PASS", "details": "channel 6 end-to-end"},
+    {"name": "Channel mismatch rejection", "status": "PASS", "details": "40 drops on each side, no normal RX"},
+    {"name": "Mixed rate metadata", "status": "PASS", "details": "11 and 24 Mbps observed reciprocally"},
+    {"name": "60-second bidirectional soak", "status": "PASS", "details": "over 1000 total TX/RX, zero duplicate/source/error"},
+    {"name": "Replay and reorder regressions", "status": "PASS"},
+    {"name": "Shared and pairwise fabric regressions", "status": "PASS"},
+    {"name": "Cross-wire negative", "status": "PASS", "details": "only A-B path zero"},
+    {"name": "PN exhaustion and rekey", "status": "PASS", "details": "65 exhaustions per endpoint"},
+    {"name": "Cleanup", "status": "PASS", "details": "27 sessions stopped, PID gone, history retained, purge=0"},
+    {"name": "Patch replay", "status": "PASS"},
+    {"name": "Platform and generated validators", "status": "PASS"},
+    {"name": "CI", "status": "PASS", "details": "platform-contracts and network-namespace-policy"},
+    {"name": "Bit-exact controller, RF and physical hardware", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/patch-check.txt",
+    "patches/0001-esp32-espnow-loss-channel-rate.patch"
+  ],
+  "notes": [
+    "The channel/rate envelope is trusted test-fixture metadata outside CCMP.",
+    "The initial peer-channel/home-channel test precondition is preserved as a failed control.",
+    "Virtual-device closure does not claim physical controller or RF equivalence."
+  ]
+}

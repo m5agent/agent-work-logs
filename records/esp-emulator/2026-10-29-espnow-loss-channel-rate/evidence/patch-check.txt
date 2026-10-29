@@ -1,0 +1,13 @@
+command:
+  git apply --check patches/0001-esp32-espnow-loss-channel-rate.patch
+  git apply --reverse --check patches/0001-esp32-espnow-loss-channel-rate.patch
+
+scope:
+  include/hw/misc/esp32_wifi.h
+  hw/misc/esp32_wifi.c
+  hw/misc/esp32s3_wifi.c
+
+result:
+  PATCH_FORWARD_OK
+  PATCH_REVERSE_OK
+  CURRENT_SOURCE_MATCH_OK

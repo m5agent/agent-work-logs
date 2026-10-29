@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | ESP-NOW loss/retry, channel/rate and 60-second soak | `PASS`（virtual-device：loss proxy、channel mismatch、rate metadata、60 秒 soak、fabric/cross-wire/PN 回归；platform `1526 OK + 1 skip`、CI PASS；RF/物理 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-loss-channel-rate/) |
+| 2026-10-29 | `esp-emulator` | PR #20 browser QEMU six-device merge | `PASS`（10 板/11 例/313 Chrome checks；CI 与 merge-tree PASS；正式 Pages/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-pr-20-browser-qemu-six-devices/) |
 | 2026-10-29 | `esp-emulator` | External ESP-NOW guest controller key-state | `PASS`（virtual-device：stock guest LMK 从 controller key slot 24 进入 bridge；正控、wrong-LMK、rotation、12 session cleanup、platform `1494 OK + 1 skip`、CI PASS；multi-peer/PN wrap/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-ccmp/followups/2026-10-29-guest-key-state/) |
 | 2026-10-29 | `esp-emulator` | External ESP-NOW CCMP replay window | `PASS`（virtual-device：64-frame authenticated bitmap；Real UDP reorder 后 replay drop `0`、duplicate 仍 drop、Core2 regression；platform `1487 OK + 1 skip`、CI PASS；multi-peer/key rotation/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-ccmp/followups/2026-10-29-ccmp-replay-window/) |
 | 2026-10-29 | `esp-emulator` | M5ESPNow wrapper peer lifecycle | `PASS`（virtual-device：wrapper add/delete/re-add；peer list `[1,1]`→`[]`→恢复；delete 后 send no-op；双设备对 post-resume、platform `1481 OK + 1 skip`、CI PASS；guest key-state/key rotation/多 peer replay/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-peer-lifecycle/followups/2026-10-29-m5espnow-lifecycle/) |

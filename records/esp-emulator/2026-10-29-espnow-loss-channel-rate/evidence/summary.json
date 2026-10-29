@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "runtime_binary_sha256": "54e7a7f7cd0ff6f5a1d6343c06563388f49c2b0abbca4cafb850876e57ed1254",
+  "patch": {
+    "path": "patches/0001-esp32-espnow-loss-channel-rate.patch",
+    "sha256": "91ef766541a9802336d5a3efaefc38fd28f5d7ea55107e605e2ec37fdf2594fc"
+  },
+  "runner_sha256": "f0416d4d2acc396a49a830d507530145af07111563cc8e0184623c4d2c535ef2",
+  "envelope": {
+    "bytes": 8,
+    "trusted_fixture": true,
+    "ccmp_authenticated_security_field": false
+  },
+  "scenarios": {
+    "loss-retry": {
+      "status": "PASS",
+      "dropped": 2,
+      "forwarded": {"left_to_right": 56, "right_to_left": 58},
+      "payload_matches": {"stopwatch": 57, "sticks3": 56}
+    },
+    "channel-match": {
+      "status": "PASS",
+      "channel": 6,
+      "tx_rx": {"stopwatch": [58, 58], "sticks3": [58, 58]}
+    },
+    "channel-mismatch": {
+      "status": "PASS",
+      "channels": {"stopwatch": 1, "sticks3": 6},
+      "channel_drops": {"stopwatch": 40, "sticks3": 40},
+      "rx_packets": {"stopwatch": 0, "sticks3": 0}
+    },
+    "rate-mixed": {
+      "status": "PASS",
+      "rates_mbps": {"stopwatch": 11, "sticks3": 24},
+      "payload_matches": {"stopwatch": 58, "sticks3": 59}
+    },
+    "soak": {
+      "status": "PASS",
+      "duration_seconds": 60,
+      "tx_rx": {"stopwatch": [528, 527], "sticks3": [527, 528]},
+      "payload_matches": {"stopwatch": 526, "sticks3": 527},
+      "duplicate_payloads": 0,
+      "unexpected_sources": 0,
+      "tx_errors": 0
+    }
+  },
+  "regressions": {
+    "encrypted": "PASS",
+    "replay_drop": 1,
+    "reorder_replay_drop": 0,
+    "shared_lmk_fabric": "PASS",
+    "pairwise_lmk_fabric": "PASS",
+    "cross_wire_negative": "PASS",
+    "pn_exhaustion_per_endpoint": 65,
+    "pn_post_payload": [166, 164]
+  },
+  "checks": {
+    "platform_tests": "1526 OK + 1 skipped",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "node_contracts": "PASS",
+    "patch_forward_current_reverse": "PASS",
+    "ci": "PASS"
+  },
+  "cleanup": {
+    "sessions": 27,
+    "terminal_state": "stopped",
+    "runtime_pid_gone": true,
+    "history_preserved": true,
+    "purge": 0
+  },
+  "not_run": [
+    "bit-exact controller and baseband",
+    "RF propagation, antenna and measured channel/rate",
+    "electrical timing",
+    "physical hardware"
+  ]
+}
