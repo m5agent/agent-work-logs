@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | Native ESP-NOW peer lifecycle | `PASS`（virtual-device：stock native encrypted add/delete/modify/re-add；删除后 `[0,0]` + GET/SEND NOT_FOUND，重加后 `[1,1]` + post-resume；双设备对、platform `1479 OK + 1 skip`、CI PASS；guest key-state/key rotation/m5espnow/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-peer-lifecycle/) |
 | 2026-10-29 | `esp-emulator` | ESP-NOW external CCMP replay rejection | `PASS`（virtual-device：`0078` authenticated PN guard；真实 UDP replay proxy 重复一帧后 receiver `TX/RX=58/59`、replay drop `1`、peer payload 不重复；wrong-LMK/Core2 回归、platform `1475 OK + 1 skip`、CI PASS；多 peer/乱序窗口/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-ccmp/followups/2026-10-29-ccmp-replay/) |
 | 2026-10-29 | `esp-emulator` | ESP-NOW external peer key-bound CCMP | `PASS`（virtual-device：`0077` AES-CCMP/MIC、wrong-LMK drop、wrong-PMK/same-LMK；12 session paths；patch replay、platform `1470 OK + 1 skip`、CI 两 job PASS；guest key-state/replay/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-ccmp/) |
 | 2026-10-29 | `esp-emulator` | PR #19 browser QEMU performance and device profiles merge | `PASS`（merge review/delivery；`79` files、`+7164/-243`、`MERGEABLE/CLEAN`；PR 与 merge commit CI PASS；独立 browser performance/长期稳定性/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-pr-19-browser-qemu-performance-devices/) |
