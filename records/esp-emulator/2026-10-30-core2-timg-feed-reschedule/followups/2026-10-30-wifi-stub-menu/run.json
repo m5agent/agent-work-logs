@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Reach the complete Core2 legacy menu with a WiFi configuration stub",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "f4e47624ca47ae83d9756066fe32a7f57012e620",
+    "result_commit": "1b2a376e"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "virtual_device": "Core2",
+    "firmware": "UIFlow_Core2 v1.15.4",
+    "original_normalized_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "wifi_stub_normalized_sha256": "f4966a4a2a3983cc15f5752a28e9a04ef990f63ef868c3ce7ce8de3349871c1b",
+    "qemu_sha256": "7d03bb183a34cbbf8960a75e95703f92c2fec7fe6e14dad98707e9431caf83a4",
+    "frame_sha256": "a4f683468cfb9edc70468efaabd23c226abbed7a3cdeaf6a397cab09c52a6078"
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-wifi",
+    "profile": "core2-openmac",
+    "icount_shift": 2,
+    "per_cpu_cap": "disabled",
+    "diagnostic_wdt_disabled": true,
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "boot_markers",
+      "status": "PASS",
+      "detail": "BOARD/APIKEY, boot.py and WiFi stub markers observed"
+    },
+    {
+      "name": "complete_virtual_menu",
+      "status": "PASS",
+      "detail": "320x240 App/Flow/Setup frame with 76760 nonblack pixels and 417 colors"
+    },
+    {
+      "name": "original_wifi_configuration",
+      "status": "NOT RUN",
+      "detail": "dedicated wifi partition is erased; diagnostic stub bypasses it"
+    },
+    {
+      "name": "normal_wdt_startup",
+      "status": "NOT RUN",
+      "detail": "this diagnostic lane disabled WDT and uses a modified VFS"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "detail": "no physical display, RF, electrical or cache/PSRAM measurement"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1b2a376e/docs/evidence/2026-10-30-core2-wifi-stub-menu/README.md"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "The stub bypasses the real wifiWebCfg lifecycle.",
+    "The complete menu frame is virtual-device validation, not hardware validation."
+  ]
+}
