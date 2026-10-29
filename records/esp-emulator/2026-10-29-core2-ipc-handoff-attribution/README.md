@@ -47,6 +47,7 @@ startup UI、setup/REPL、非空应用帧和物理硬件仍未通过。
 - `evidence/verification.summary.json`：机器摘要
 - `evidence/three-freeze-stacks.txt`：三次 CPU/frame/serial 摘要
 - `evidence/full-trace-control.txt`：trace-sample 对照摘要
+- [`followups/2026-10-29-handoff-episode-budget/`](followups/2026-10-29-handoff-episode-budget/)：`0089` icount-safe trace 与两次 50 秒 handoff 预算
 
 ## 未覆盖项
 
