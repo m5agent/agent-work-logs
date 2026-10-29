@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-29 | `esp-emulator` | ESP-NOW external peer key-bound CCMP | `PASS`（virtual-device：`0077` AES-CCMP/MIC、wrong-LMK drop、wrong-PMK/same-LMK；12 session paths；patch replay、platform `1470 OK + 1 skip`、CI 两 job PASS；guest key-state/replay/RF/真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-ccmp/) |
+| 2026-10-29 | `esp-emulator` | PR #19 browser QEMU performance and device profiles merge | `PASS`（merge review/delivery；`79` files、`+7164/-243`、`MERGEABLE/CLEAN`；PR 与 merge commit CI PASS；独立 browser performance/长期稳定性/物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-29-pr-19-browser-qemu-performance-devices/) |
 | 2026-10-29 | `esp-emulator` | ESP-NOW 两个独立 guest 的 external plaintext peer | `PASS`（限定 virtual-device：两对独立 guest 经正常 controller TX/RX DMA 双向收到 action-frame payload；四个 session evidence/清理完整；platform `1440 OK + 10 skip`、CI 两 job PASS；PMK/LMK/CCMP、lifecycle、RF 与真机 NOT RUN） | [查看](esp-emulator/2026-10-29-espnow-external-peer/) |
 | 2026-10-29 | `esp-emulator` | 当前 QEMU 三设备 UIFlow2 接口复测 r4 | `PARTIAL`（virtual-device：三台 system/shared、协议、audio、ESP-NOW、BLE、M5UI 和板级接口重跑；Core2 network 首轮 `14/14`；stock SDK/BLE/legacy/真机边界保留；三台协议 candidate 和两台 M5UI candidate PASS；platform `1432 OK + 1 skip`） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r4/) |
 | 2026-10-29 | `esp-emulator` | 最新 QEMU 三设备 UIFlow2 接口复测 | `PARTIAL`（virtual-device：system/shared、协议、audio、ESP-NOW、BLE、M5UI 和板级接口重跑；stock SDK 与 candidate 结果稳定；Core2 network 首轮并发毛刺经隔离及重复控制；真机/RF/legacy 边界保留；platform `1432` 项） | [查看](esp-emulator/2026-10-29-three-board-uiflow2-interface-retest-r3/) |
