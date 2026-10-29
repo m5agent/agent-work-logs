@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Lease-bound worker evidence persistence",
+  "source": {
+    "issue": "NET-04/SVC-01",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "69902baf7b1f8fde5487628d0bb8217e69bc8e6d",
+    "implementation_commit": "139e5cbf13014b6167de706d7f227188c1c5e8f4",
+    "result_commit": "621b58e678e034c4b4bd54342ea709657fbbed2d",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40834148271",
+    "ci_status": "PASS"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "validation": "NOT RUN",
+    "reason": "This control-plane task does not execute a QEMU guest."
+  },
+  "execution": {
+    "environment": "macOS arm64; real Device Service HTTP; WorkerAgent",
+    "api_version": "1.50.0",
+    "validation": "HTTP control-plane and evidence data persistence",
+    "platform_tests": "1535 OK + 10 skipped",
+    "evidence_store_tests": 4,
+    "worker_queue_tests": 9,
+    "worker_agent_tests": 12
+  },
+  "checks": [
+    {"name": "WorkerAgent lost evidence response", "status": "PASS"},
+    {"name": "Same evidence ID on retry", "status": "PASS"},
+    {"name": "Job and lease binding", "status": "PASS"},
+    {"name": "Content digest", "status": "PASS"},
+    {"name": "Multi-megabyte ZIP", "status": "PASS"},
+    {"name": "Metadata survives service restart", "status": "PASS"},
+    {"name": "Content survives service restart", "status": "PASS"},
+    {"name": "Different bytes conflict", "status": "PASS"},
+    {"name": "Wrong result evidence ID rejected", "status": "PASS"},
+    {"name": "Result records evidence ID and SHA256", "status": "PASS"},
+    {"name": "Raw evidence absent from queue metadata", "status": "PASS"},
+    {"name": "Metadata and blob mode 0600", "status": "PASS"},
+    {"name": "Token absent from service log", "status": "PASS"},
+    {"name": "Platform, Node and generated validators", "status": "PASS"},
+    {"name": "CI", "status": "PASS"},
+    {"name": "Physical cross-host execution", "status": "NOT RUN"},
+    {"name": "QEMU guest", "status": "NOT RUN"},
+    {"name": "Object-store replication", "status": "NOT RUN"},
+    {"name": "External side-effect fence", "status": "NOT RUN"},
+    {"name": "Physical hardware", "status": "NOT RUN"}
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/621b58e678e034c4b4bd54342ea709657fbbed2d/docs/evidence/2026-10-29-lease-bound-evidence-store/README.md"
+  ],
+  "notes": [
+    "Evidence content and metadata use atomic mode-0600 files.",
+    "The result evidence_id field is optional for backward compatibility.",
+    "No internal endpoint, token, worker credential, job ID or lease ID is retained in this public record."
+  ]
+}
