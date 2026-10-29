@@ -1,0 +1,17 @@
+QEMU sha256: 75e7fa97424c859c6e1fe918dda203aa2c6509e9c81937893a15d2a4a46b6714
+Firmware source sha256: 18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a
+Runtime: m5core2 / qemu-wifi / icount shift 5 / WDT disabled / freeze 5 s
+
+control:
+  S32C1I total=1070625 contended=984964 episodes=212
+  episode_duration_ns=2239772672 episode_max_ns=378000032
+  task_queue_mutex_episodes=138 task_queue_mutex_ns=1861772640
+  cpu0_pc=0x40087986 cpu1_pc=0x4000bff0
+  ssi_0x05=2078 ssi_0xbb64=2386
+
+candidate M5SW_XTENSA_CONTENDED_CAS_FAIR_YIELD=1:
+  S32C1I total=91465 contended=2702 episodes=16
+  episode_duration_ns=1017736288 episode_max_ns=246999968
+  task_queue_mutex_episodes=16 task_queue_mutex_ns=1017736288
+  cpu0_pc=0x400951fe cpu1_pc=0x40095c2e
+  ssi_0x05=2086 ssi_0xbb64=2394

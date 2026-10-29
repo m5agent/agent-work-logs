@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Attribute Core2 contended-CAS stalls to the single-threaded TCG RR quantum",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/40",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "610248e3cc070c6abcf72defc4b3db3048ec77b4",
+    "result_commit": "fe7770b4ea86a0faae8a40458df8a0dcd6a4fbff",
+    "merge_commit": "c0aeb619fa3fe1fe8e12a43c49ac22d7f2135eca"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "rf": "NOT RUN",
+    "electrical": "NOT RUN",
+    "physical_cache_or_psram_timing": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "source_sha256": "18d77e28adfacf7e719a167bd0c3450b78357d13cb1d2f2a8b7bccc2248a909a",
+    "binary_committed": false
+  },
+  "execution": {
+    "environment": "macOS Apple Silicon; Core2 UIFlow2 QEMU; local Device Service API",
+    "validation": "virtual-device validation",
+    "qemu_sha256": "75e7fa97424c859c6e1fe918dda203aa2c6509e9c81937893a15d2a4a46b6714",
+    "patch": "0088-xtensa-contended-cas-fair-yield.patch",
+    "patch_sha256": "f3fbb89c9aa86922f27d236915cc268a65832df4e0c25e85b0fa451beae9aa48",
+    "platform_tests": "1560 OK, 10 skipped",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40868213035",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40868239142",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40868604156"
+    ]
+  },
+  "checks": [
+    {
+      "name": "build",
+      "status": "PASS",
+      "detail": "incremental QEMU build with the 38-patch source snapshot and 0088"
+    },
+    {
+      "name": "same_binary_5s_control",
+      "status": "PASS",
+      "detail": "1,070,625 S32C1I operations; 984,964 contended; 2.239772672 s episodes; CPU0 handoff-spin PC"
+    },
+    {
+      "name": "same_binary_5s_candidate",
+      "status": "PASS",
+      "detail": "91,465 S32C1I operations; 2,702 contended; 1.017736288 s episodes; CPU0 left handoff-spin cluster"
+    },
+    {
+      "name": "ssi_work_equivalence_20s",
+      "status": "PASS",
+      "detail": "both lanes recorded 12,897 RDSR and 11,845 64-byte fast reads"
+    },
+    {
+      "name": "100us_quantum_probe",
+      "status": "PARTIAL",
+      "detail": "fewer episodes but no better CPU0 progress; not retained"
+    },
+    {
+      "name": "normal_wdt_startup",
+      "status": "FAIL",
+      "detail": "both lanes ended in TG0WDT_SYS_RESET before BOARD/APIKEY"
+    },
+    {
+      "name": "platform_contracts",
+      "status": "PASS",
+      "detail": "1560 OK, 10 skipped"
+    },
+    {
+      "name": "generated_checks",
+      "status": "PASS",
+      "detail": "runtime coverage, peripheral catalog, QEMU profiles and project snapshot"
+    },
+    {
+      "name": "github_actions",
+      "status": "PASS",
+      "detail": "two PR runs and one merge-commit main run"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification.summary.json",
+    "evidence/same-binary-ab.txt",
+    "evidence/normal-wdt.txt",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/c0aeb619fa3fe1fe8e12a43c49ac22d7f2135eca/docs/evidence/2026-10-29-core2-contended-cas-scheduler/README.md"
+  ],
+  "notes": [
+    "The scheduler lane is default-off and changes only the next RR quantum after real cross-core contention.",
+    "Guest CAS, lock ownership, icount conversion and watchdog deadlines are unchanged.",
+    "RUNTIME-03 remains OPEN because normal-WDT startup still resets and no application frame is produced."
+  ]
+}
