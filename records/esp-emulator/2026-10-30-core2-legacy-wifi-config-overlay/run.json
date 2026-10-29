@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Core2 legacy WiFi deviceCfg overlay",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/51",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "09b2b598d4e63d109a44c85724f726e96d0fce86",
+    "source_commit": "6094890cc5a615fcbad1a2fd378202bcbf7b2d03",
+    "merge_commit": "9f200d0c288eeee6e4160fa9a521b2c9470f86e6"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "virtual_device": "Core2",
+    "firmware": "UIFlow_Core2 v1.15.4",
+    "original_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "effective_flash_sha256": "b30f3014b75f762f50be3284010502e047b3bd0494b0f0b72a673c2756baffd7",
+    "config_sha256": "6d5f7fb3eca7fb7823f32053f8efd2c7885645a524cc71d10b1b67a0c22d108d",
+    "diagnostic_frame_sha256": "df9ba1849edb7742f7b5672ff14fdfc97a2f351cd5a96b0f429ef9e22dfbf4c3"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-wifi",
+    "profile": "core2-openmac",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "legacy config tests",
+      "status": "PASS",
+      "result": "7/7"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1596 run; 1595 PASS + 1 skip"
+    },
+    {
+      "name": "documentation contracts",
+      "status": "PASS",
+      "result": "50/50"
+    },
+    {
+      "name": "runtime coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "QEMU profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "PR scope",
+      "status": "PASS"
+    },
+    {
+      "name": "service overlay event",
+      "status": "PASS",
+      "result": "legacy_wifi_config_applied with base/effective Flash hashes"
+    },
+    {
+      "name": "diagnostic legacy WiFi UI",
+      "status": "PASS",
+      "result": "320x240; 75373 nonblack pixels; 305 colors"
+    },
+    {
+      "name": "normal-WDT startup",
+      "status": "FAIL",
+      "result": "Cache disabled but cached memory region accessed after boot markers"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "evidence/frame-connecting-summary.png",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9f200d0c288eeee6e4160fa9a521b2c9470f86e6/docs/evidence/2026-10-30-core2-legacy-wifi-config-overlay/README.md"
+  ],
+  "notes": [
+    "RUNTIME-03 remains OPEN.",
+    "The service overlay proves configuration and evidence boundaries, not guest WiFi connectivity.",
+    "The WiFi visual is from a WDT-disabled diagnostic control.",
+    "Physical hardware, RF, electrical and physical cache/PSRAM timing are NOT RUN."
+  ]
+}
