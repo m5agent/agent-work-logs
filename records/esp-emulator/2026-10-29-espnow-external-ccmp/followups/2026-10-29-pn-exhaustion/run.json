@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "ESP-NOW CCMP PN exhaustion and rekey",
+  "source": {
+    "issue": "RUNTIME-06",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "be09ca89f2fe9a415568ee572557ce50fc193796",
+    "result_commit": "b6b3c603",
+    "snapshot_commit": "8f9f7439",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40823585571"
+  },
+  "hardware": {},
+  "firmware": {
+    "family": "UIFlow2 v2.5.3",
+    "new_lmk_stopwatch_sha256": "90526c075e1ad0f7dd41a1cfe14cee78bf6d4fc3c009a5afa4d1e1807489e937",
+    "new_lmk_sticks3_sha256": "748db55c2af96a2cf1778f4b20602f5879fc1e827d294ca2f03db7aeac9b315d",
+    "same_lmk_stopwatch_sha256": "93e2e8d9a7b6ada10d096d7775034cc12209dc4562957b79ce88987a7d989b3c",
+    "same_lmk_sticks3_sha256": "8b3168b28f513c90106ad1fa4b3b352a9f8fd1b3e40dff9c8aaae006a3c1f043"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "macOS arm64; QEMU virtual device",
+    "runtime": "qemu-wifi",
+    "qemu_sha256": "1f3bb7dbbf4b2b32f29e065c02dbe20f08188518c01bd39ec5eb00c724574262",
+    "patch_sha256": "3e9d54b16b0ec3429347bb9d36efe96755935e2cff3d045cf3af3b0b82adcfa9",
+    "runner_sha256": "1105cf71e09c3ba2ae69f77fdcdba2a53eea6ba1dfb09cf3ad608e32f513d9db",
+    "session_count": 13
+  },
+  "checks": [
+    {
+      "name": "PN exhaustion fail-closed",
+      "status": "PASS",
+      "details": "Both endpoints exhaust 48-bit PN without wrapping to zero"
+    },
+    {
+      "name": "New LMK recovery",
+      "status": "PASS",
+      "details": "Post-rekey payload matches are 164 and 163"
+    },
+    {
+      "name": "Same-LMK negative",
+      "status": "PASS",
+      "details": "Both endpoints keep exhausted PN state and post payload remains zero"
+    },
+    {
+      "name": "Shared/pairwise/cross-wire regressions",
+      "status": "PASS",
+      "details": "Three final-QEMU fabric lanes retain expected results"
+    },
+    {
+      "name": "Cleanup",
+      "status": "PASS",
+      "details": "13 sessions stopped, PID gone, history retained, purge=0"
+    },
+    {
+      "name": "ESP-NOW contracts",
+      "status": "PASS",
+      "details": "51 tests OK"
+    },
+    {
+      "name": "Platform",
+      "status": "PASS",
+      "details": "1510 tests OK, 1 skipped"
+    },
+    {
+      "name": "Patch replay",
+      "status": "PASS",
+      "details": "forward, current-source equality and reverse checks"
+    },
+    {
+      "name": "CI",
+      "status": "PASS",
+      "details": "platform-contracts and network-namespace-policy"
+    },
+    {
+      "name": "Loss/retry and physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/patch-check.txt"
+  ]
+}

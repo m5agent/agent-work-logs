@@ -58,12 +58,15 @@ peer lifecycle、replay、loss/retry、RF 和真机尚未完成。
   `0081` 三 guest source-peer routing、8×64 replay state 和精确 replay 负控
 - [follow-up：per-peer LMK routing](followups/2026-10-29-per-peer-key-routing/)：
   `0082` stock key-entry peer metadata、pairwise LMK 选择和 cross-wire 负控
+- [follow-up：CCMP PN exhaustion](followups/2026-10-29-pn-exhaustion/)：
+  `0083` 48-bit PN fail-closed、new-LMK recovery 和 same-LMK 负控
 
 ## 未覆盖项
 
 - guest key-state、peer lifecycle、replay、shared-LMK fabric 和 per-peer
   LMK routing 已由上述 follow-up 分别覆盖，本记录不反填这些结果；
-- PN wrap、loss/retry、channel/rate、bit-exact controller；
+- PN exhaustion/rekey 已由 follow-up 覆盖；
+- loss/retry、channel/rate、bit-exact controller；
 - RF、antenna、AP coexistence、电气、timing 和 physical hardware。
 
 以上均不继承本次 virtual-device PASS。
