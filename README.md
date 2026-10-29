@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-30 | ESP Emulator | Core2 TIMG watchdog feed rescheduling | `PARTIAL`（virtual-device：`0091` 用 `timer_mod_ns()` 替换 watchdog stage deadline；短窗 live frame `3,651` nonblack pixels，但 TG0 stage-1 仍 reset；patch/契约与 platform `1583 OK + 1 skip` PASS；factory UI/REPL 与物理硬件 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-30-core2-timg-feed-reschedule/) |
 | 2026-10-30 | ESP Emulator | Core2 legacy boot-to-WiFi/UI wait attribution | PARTIAL（virtual-device：normal WDT 下 BOARD/APIKEY 与 boot.py 已通过，但 factory UI/REPL 仍失败；WDT-off 双核 Waiti 且 UART 栈定位到 WiFi/UI 初始化；platform `1581 OK + 1 skip`；物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-10-30-core2-legacy-boot-to-ui-wait/) |
 | 2026-10-29 | ESP Emulator | Device Service runtime boundary and Core2 unified stability | `PASS`（virtual-device：runtime helper same-object re-export；Core2 unified 默认 180 秒 readiness、10 秒 BLE write settle；最终与对照 QEMU 各 `3/3 PASS`；frame/QOM、WiFi/公网、NUS ACK、HLI、pcap、ZIP 和清理完整；`SVC-03` 仍进行中，物理/RF/legacy `RUNTIME-03` NOT RUN/OPEN） | [查看](records/esp-emulator/2026-10-29-svc03-runtime-boundary/) |
 | 2026-10-29 | ESP Emulator | Core2 per-vCPU icount fairness budget | `PARTIAL`（virtual-device：`0090` 默认 10us cap；同 trace 将 initiator `can_start→IPC return` 从 `563.7us` 降到 `56.2us`、peer wait 从 `728.4us` 降到 `184.7us`；Core2 UIFlow2 `6/6 PASS`、platform `1574 OK + 1 skip`、PR #45/main CI PASS；normal-WDT 仍 `17.2429s` reset，startup/REPL/应用帧与真机 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-29-core2-icount-percpu-budget/) |
