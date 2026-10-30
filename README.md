@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-30 | ESP Emulator | SVC-03 QEMU WiFi semantic boundary | `PASS`（platform-contract：PR #61 四项 CI PASS 并合并 `3fc436e4`；QEMU WiFi security parser 与 runtime-env projection 移至独立模块，原模块 same-object re-export；专向 `4/4`、Device Service `126/126`、platform `1,677 PASS + 1 skip`；QEMU/RF/物理行为不变/NOT RUN） | [查看](records/esp-emulator/2026-10-30-svc03-qemu-wifi/) |
 | 2026-10-30 | ESP Emulator | SVC-03 network execution parsing boundary | `PASS`（platform-contract：PR #59 四项 CI PASS 并合并 `9c1652df`；`parse_network_execution` 移至独立无状态模块，原模块 same-object re-export；专向 `4/4`、Device Service `126/126`、platform `1,673 PASS + 1 skip`；HTTP/network runtime/QEMU/物理行为不变/NOT RUN） | [查看](records/esp-emulator/2026-10-30-svc03-network-execution/) |
 | 2026-10-30 | ESP Emulator | SVC-03 storage/NVS parsing boundary | `PASS`（platform-contract：PR #58 四项 CI PASS 并合并 `0c26759d`；storage/NVS execution request parser 移至独立无状态模块，原模块 same-object re-export；专向 `5/5`、Device Service `126/126`、platform `1,669 PASS + 1 skip`；HTTP/QEMU/物理行为不变/NOT RUN） | [查看](records/esp-emulator/2026-10-30-svc03-execution-parsing/) |
 | 2026-10-30 | ESP Emulator | Core2 concurrent capacity boundary | `PARTIAL`（virtual-device：PR #57 四项 CI PASS 并合并 `ccbfa71c`；三次九实例尝试两次通过、一次 `8/9` 并在 `ble_hs_hci_process_ack @ 0x402630cc` panic，因此默认容量保持 8；当前工具哈希两批 `2x60s` 为 `4/4 PASS`；八实例 cold-start 重绑、物理 controller/RF/电气/真机 OPEN/NOT RUN） | [查看](records/esp-emulator/2026-10-30-core2-concurrent-capacity-boundary/) |

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "SVC-03 QEMU WiFi semantic boundary",
+  "source": {
+    "issue": "SVC-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/61",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9c1652dfd9a57307fb1834f4d135b818126b749f",
+    "source_commit": "b799807b177948f5409adbe7d5a39f50ffc019cd",
+    "merge_commit": "3fc436e4aa99176ef3a4f7a2d35d25c973659219"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Python 3.12",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "QEMU WiFi boundary tests",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "Device Service tests",
+      "status": "PASS",
+      "result": "126/126"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1678 run; 1677 PASS + 1 skip"
+    },
+    {
+      "name": "generated validators",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "scoped Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "diff check",
+      "status": "PASS"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "QEMU network / device behavior",
+      "status": "NOT RUN",
+      "result": "no behavior change in this boundary"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3fc436e4aa99176ef3a4f7a2d35d25c973659219/docs/evidence/2026-10-30-svc03-qemu-wifi/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/3fc436e4aa99176ef3a4f7a2d35d25c973659219/docs/evidence/2026-10-30-svc03-qemu-wifi/summary.json"
+  ],
+  "notes": [
+    "The two functions retain same-object re-exports through device_service.py.",
+    "No HTTP/API, network configuration, QEMU, session, evidence or hardware behavior is changed."
+  ]
+}
