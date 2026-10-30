@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "SVC-03 storage and NVS parsing boundary",
+  "source": {
+    "issue": "SVC-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/58",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ccbfa71c60f62df2682fd6c449ce8abdaedfd871",
+    "source_commit": "947a1ecf24b2338ab0f2901439e97264a26de292",
+    "merge_commit": "0c26759d9b34daa88e7e3457e88f4c0af9b16668"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Python 3.12",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "execution parser tests",
+      "status": "PASS",
+      "result": "5/5"
+    },
+    {
+      "name": "Device Service tests",
+      "status": "PASS",
+      "result": "126/126"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1670 run; 1669 PASS + 1 skip"
+    },
+    {
+      "name": "runtime coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "QEMU profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "scoped Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "diff check",
+      "status": "PASS"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "QEMU/network/device behavior",
+      "status": "NOT RUN",
+      "result": "no behavior change in this boundary"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/0c26759d9b34daa88e7e3457e88f4c0af9b16668/docs/evidence/2026-10-30-svc03-execution-parsing/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/0c26759d9b34daa88e7e3457e88f4c0af9b16668/docs/evidence/2026-10-30-svc03-execution-parsing/summary.json"
+  ],
+  "notes": [
+    "The two parser functions retain same-object re-exports through device_service.py.",
+    "No HTTP/API, session, runtime, evidence or hardware behavior is changed."
+  ]
+}
