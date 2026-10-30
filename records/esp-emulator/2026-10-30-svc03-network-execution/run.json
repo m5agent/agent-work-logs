@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "SVC-03 network execution parsing boundary",
+  "source": {
+    "issue": "SVC-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/59",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "0c26759d9b34daa88e7e3457e88f4c0af9b16668",
+    "source_commit": "cbc33dbddfa26202a07d9c4adfa7dc042123639e",
+    "merge_commit": "9c1652dfd9a57307fb1834f4d135b818126b749f"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Python 3.12",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "network execution parser tests",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "Device Service tests",
+      "status": "PASS",
+      "result": "126/126"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1674 run; 1673 PASS + 1 skip"
+    },
+    {
+      "name": "generated validators",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "scoped Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "diff check",
+      "status": "PASS"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "network transport / QEMU / device behavior",
+      "status": "NOT RUN",
+      "result": "no behavior change in this boundary"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9c1652dfd9a57307fb1834f4d135b818126b749f/docs/evidence/2026-10-30-svc03-network-execution/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/9c1652dfd9a57307fb1834f4d135b818126b749f/docs/evidence/2026-10-30-svc03-network-execution/summary.json"
+  ],
+  "notes": [
+    "parse_network_execution retains same-object re-export through device_service.py.",
+    "No HTTP/API, network runtime, session, evidence or hardware behavior is changed."
+  ]
+}
