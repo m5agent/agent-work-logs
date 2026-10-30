@@ -1,7 +1,7 @@
 # StackChan 开机自动跳舞固件
 
 - 日期：`2026-10-29`
-- 结果：`PASS`（virtual-device）；实体硬件 `NOT RUN`
+- 结果：`PARTIAL`（virtual-device；旧 SCS 包计数未独立复核）；实体硬件 `NOT RUN`
 - 工作类型：`code_change`
 - 问题来源：用户要求为 StackChan 编写包含表情、12 路灯效和开机自动舞蹈的固件
 - 源码基线：`m5stack/StackChan-BSP@fb5e9f5697803ca64e45fe7ad8eaea3e4100f766`（tag `1.1.1`）
@@ -14,9 +14,11 @@
 RGB 灯的同步效果。轻触机身顶部触控区域可重新开始。
 
 同一 16 MiB merged 镜像在虚拟 StackChan 中成功烧录、启动并稳定运行超过
-90 秒，完成 5 个自动循环。串口记录 125 个舞步事件；QEMU 数据面记录
-1006 个 SCSCL `SYNC_WRITE` 位置包和 1367 次 12 灯 RGB 缓冲刷新。19 张
-1 秒间隔、320×240 的虚拟机帧全部不同，未发现致命断言或重启。
+90 秒，完成 5 个自动循环。串口记录 125 个舞步事件；当时派生的 QEMU 摘要
+记录 `1006` 个 SCSCL `SYNC_WRITE` 位置包和 1367 次 12 灯 RGB 缓冲刷新。
+该舵机包计数没有保留可重算的原始 trace，2026-10-30 复核后降级为“历史上报
+值，未独立复核”。19 张 1 秒间隔、320×240 的虚拟机帧全部不同，未发现致命
+断言或重启。
 
 首版候选固件在持续舵机应答路径中触发 UART spinlock 断言。最终版本改为
 广播同步位置写入（舵机 ID `0xFE`），只读取 BSP 已保存的零位，不再为每个
@@ -31,7 +33,8 @@ RGB 灯的同步效果。轻触机身顶部触控区域可重新开始。
   `c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542`。
 - 启动：串口出现 `StackChan auto-dance started`，并完成 5 次循环重启。
 - 表情：19/19 个间隔帧哈希不同；总览见 `evidence/contact-sheet.png`。
-- 舵机：1006 个 SCSCL `SYNC_WRITE` 包，目标内存地址 `42`（目标位置）。
+- 舵机：派生摘要曾上报 1006 个 SCSCL `SYNC_WRITE` 包，目标内存地址 `42`；
+  原始 trace 未保留，因此该计数当前为 `PARTIAL`，不作为已验证事实。
 - 灯带：1367 次 RGB 缓冲刷新，共 32,808 个 M5IOE1 RGB 寄存器写。
 - 稳定性：超过 90 秒运行，QEMU stderr 的断言/panic/core-dump 标记为 0。
 
@@ -52,3 +55,13 @@ RGB 灯的同步效果。轻触机身顶部触控区域可重新开始。
   `HomeCalibration` 示例更新 BSP 的零位。
 - 相机、NFC、IR、无线、扬声器和声学效果不在本固件目标内。
 - 超过 90 秒的实体长期稳定性 `NOT RUN`。
+
+## 2026-10-30 复核修正
+
+后续 exact-SHA browser QEMU 测试直接观测到同一完整 Flash 的 30 个有效 SCS
+包、`rejected_packets=0`，以及左右 `307..613`、抬头 `677..850` 的 present/goal
+位置变化。它证明当前浏览器路径能够消费并展示舵机位置，但运行窗口不同，不能
+用于反推或替换旧 native 96 秒记录的 `1006`。
+
+独立复核记录：
+[ESP Emulator StackChan 跳舞固件舵机与 Cardputer-ADV 全键复核](../../esp-emulator/2026-10-30-stackchan-dance-cardputer-adv-all-keys/)。

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Restore StackChan dance servo motion and verify every Cardputer-ADV physical key",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/65",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "f6bcab037c813892626f61edb2900920dcf9199e",
+    "head_commit": "6db2b817506fade96fde45e5984aa46b1c7876ed"
+  },
+  "hardware": {
+    "validation": "virtual-device",
+    "physical_validation": "NOT RUN",
+    "devices": [
+      "StackChan",
+      "Cardputer-ADV"
+    ],
+    "runtime": "browser-qemu-wasm"
+  },
+  "firmware": {
+    "stackchan": {
+      "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+      "source_sha256": "7ee22ca570acd7f105d8205b3bc67ecc19e60ce11b1533f3481fc1288081bb9e",
+      "profile": "stackchan-wasm-dance-div6",
+      "clock_divisor": 6
+    },
+    "cardputer_adv": {
+      "sha256": "4faaccde28367c257f7f140c139c434cf223be47de41ad853a168d9c25c2bd7b",
+      "m5cardputer_commit": "bf64d3178ab43928fa02365fbe3937cec99716ad",
+      "m5unified": "0.2.28",
+      "m5gfx": "0.2.35"
+    },
+    "wasm_sha256": "5d6c36bdafc1129c2652b5ba9422f3deb5ab170475748cea96fdc4cf9520a993",
+    "site_manifest_sha256": "c27de9d6cc7230829d368b82fbf23a9f0cc39146dc716cab1e1eefd05f17b985"
+  },
+  "execution": {
+    "environment": "macOS arm64; Chromium 156.0.8078.74; browser QEMU WASM; source-built runtime",
+    "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "ci_runs": [
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41039534961",
+      "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41039285653"
+    ],
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform-regression",
+      "status": "PASS",
+      "detail": "1725 tests; OK with 10 skipped"
+    },
+    {
+      "name": "generated-contracts",
+      "status": "PASS",
+      "detail": "runtime coverage, peripheral catalog, QEMU profiles and project snapshot"
+    },
+    {
+      "name": "pull-request-ci",
+      "status": "PASS",
+      "detail": "two runs on the same head SHA; each platform and network namespace job passed"
+    },
+    {
+      "name": "stackchan-exact-image-transport",
+      "status": "PASS",
+      "detail": "30 accepted SCS packets, zero rejected, live UART and torque"
+    },
+    {
+      "name": "stackchan-servo-motion",
+      "status": "PASS",
+      "detail": "yaw 307..613 and pitch 677..850 for both present and goal positions"
+    },
+    {
+      "name": "stackchan-model-and-ui-snapshot",
+      "status": "PASS",
+      "detail": "23 samples; 3D joints, DOM ticks and labels consume present position"
+    },
+    {
+      "name": "stackchan-frames-and-cleanup",
+      "status": "PASS",
+      "detail": "1056 frames; normal stop closed engine and five nested pthread targets"
+    },
+    {
+      "name": "cardputer-all-physical-keys",
+      "status": "PASS",
+      "detail": "56/56 key press position and release through the official IRQ reader"
+    },
+    {
+      "name": "cardputer-direct-pc-codes",
+      "status": "PASS",
+      "detail": "55 direct PC codes reach their real physical switches"
+    },
+    {
+      "name": "cardputer-modifier-and-special-keys",
+      "status": "PASS",
+      "detail": "left/right modifier aliases, Escape, Delete and four arrow Fn chords"
+    },
+    {
+      "name": "cardputer-display-and-cleanup",
+      "status": "PASS",
+      "detail": "36/36 checks across four rotations, local pixels, texture binding and normal stop"
+    },
+    {
+      "name": "physical-hardware",
+      "status": "NOT RUN",
+      "detail": "no physical servo, mechanical, keyboard, LCD or electrical measurement"
+    },
+    {
+      "name": "delivery-pull-request",
+      "status": "PARTIAL",
+      "detail": "PR #65 is mergeable with all checks green but remains open and unmerged"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/pull/65",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41039534961",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41039285653"
+  ],
+  "notes": [
+    "The user StackChan firmware was not modified.",
+    "The StackChan div6 profile is app-bound by the full Flash SHA and is only a slow virtual-device compatibility path.",
+    "The previous StackChan work-log count of 1006 SCS packets is retained only as a historical reported value because its raw trace was not retained for independent recount."
+  ]
+}

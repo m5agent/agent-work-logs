@@ -97,7 +97,7 @@ Love、Cool 和 Finale 的不同构图。
 
 ### 舵机数据面
 
-QEMU SCSCL trace 共记录 `1006` 个：
+2026-10-29 的派生摘要当时上报 `1006` 个：
 
 ```text
 [scs] packet id=254 inst=83 len=18 addr=42
@@ -105,6 +105,11 @@ QEMU SCSCL trace 共记录 `1006` 个：
 
 `id=254` 为广播地址，`inst=83` 为 `SYNC_WRITE`，`addr=42` 为目标位置
 内存表地址。每帧同时携带 ID 1/2 的位置、时间和速度字段。
+
+该文件是派生摘要，不是原始 SCS trace。2026-10-30 复核未能在本记录中找到
+可重算 `1006` 的原始数据，因此将此计数降级为“历史上报值，未独立复核”。
+后续同一完整 Flash 的 browser QEMU 运行在不同窗口直接观测 30 个有效 SCS
+包，并证明 present/goal 位置变化；该结果不能用于反推旧 native 运行计数。
 
 ### 灯带数据面
 
@@ -122,7 +127,7 @@ QEMU M5IOE1 I2C trace 共记录：
 | --- | --- | --- |
 | build | PASS | Arduino 实际交叉编译；应用镜像 header/checksum/hash 有效 |
 | flash | PASS | 16 MiB merged image 经 Device Service 烧录，`verified=true` |
-| transport | PASS | UART 启动日志；SCSCL sync-write trace；M5IOE1 I2C RGB trace |
+| transport | PARTIAL | 启动与派生摘要存在；SCSCL `1006` 计数缺少可重算原始 trace |
 | data_behavior | PASS | 125 个舞步事件、5 次循环、表情帧变化、持续 RGB 写 |
 | visual_or_physical | PASS（virtual） / NOT RUN（physical） | 19 个真实虚拟机帧；物理机械、电气、光学和声学未测试 |
 
