@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change_and_deployment",
+  "overall_status": "PARTIAL",
+  "title": "Deploy StackChan dance and Cardputer-ADV key fixes and retain the hosted macOS publication boundary",
+  "source": {
+    "issue": "",
+    "pull_requests": [
+      "https://github.com/m5agent/m5stack-esp-emulator/pull/65",
+      "https://github.com/m5agent/m5stack-esp-emulator/pull/66",
+      "https://github.com/m5agent/m5stack-esp-emulator/pull/67",
+      "https://github.com/m5agent/m5stack-esp-emulator/pull/68",
+      "https://github.com/m5agent/m5stack-esp-emulator/pull/69",
+      "https://github.com/m5agent/m5stack-esp-emulator/pull/70"
+    ],
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "initial_head": "6db2b817506fade96fde45e5984aa46b1c7876ed",
+    "final_product_merge": "11e5480526c52886dad85cd3d631cf115b279511"
+  },
+  "hardware": {
+    "validation": "virtual-device",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "stackchan": {
+      "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+      "profile": "stackchan-wasm-dance-div6"
+    },
+    "cardputer_adv": {
+      "sha256": "4faaccde28367c257f7f140c139c434cf223be47de41ad853a168d9c25c2bd7b"
+    },
+    "wasm_sha256": "5d6c36bdafc1129c2652b5ba9422f3deb5ab170475748cea96fdc4cf9520a993"
+  },
+  "deployment": {
+    "url": "https://m5agent.github.io/m5stack-esp-emulator/",
+    "run_id": 41058959787,
+    "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41058959787",
+    "release_tag": "pages-preview-20261030-stackchan-dance",
+    "release_url": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-preview-20261030-stackchan-dance",
+    "asset_sha256": "ad0607f01cac1b7d313b21a1cd339341156f36535bfc5cbca0e21e5206757026",
+    "asset_bytes": 151909857,
+    "manifest_sha256": "3c3cdb2f3ea71b458d48c9b6203282ee14bc205e9edad257cb955094c24a958b"
+  },
+  "execution": {
+    "environment": "macOS M4; Chrome 156.0.8078.74; hardware ANGLE Metal; GitHub Actions Pages",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "pr65-merge",
+      "status": "PASS",
+      "detail": "merged as c7cb7f29"
+    },
+    {
+      "name": "engine-finalize-fix",
+      "status": "PASS",
+      "detail": "PR 69 normal owner finalization merged as 11e54805"
+    },
+    {
+      "name": "stopwatch-local-real-browser",
+      "status": "PASS",
+      "detail": "24/24 checks; zero worker targets before iframe removal"
+    },
+    {
+      "name": "sticks3-local-real-browser",
+      "status": "PASS",
+      "detail": "25/25 checks; zero worker targets before iframe removal"
+    },
+    {
+      "name": "stackchan-exact-firmware",
+      "status": "PASS",
+      "detail": "11/11 checks; yaw 307..613 and pitch 677..850"
+    },
+    {
+      "name": "cardputer-exact-firmware",
+      "status": "PASS",
+      "detail": "36/36 checks; 56/56 physical keys and 55/55 direct PC codes"
+    },
+    {
+      "name": "prepared-pages-deployment",
+      "status": "PASS",
+      "detail": "run 41058959787 prepare and deploy jobs succeeded"
+    },
+    {
+      "name": "live-byte-readback",
+      "status": "PASS",
+      "detail": "manifest, wrapper, keymap, WASM and StackChan profile match"
+    },
+    {
+      "name": "regular-all-admitted",
+      "status": "FAIL",
+      "detail": "run 41056051554 retained a Sticks3 engine CDP target after acknowledged worker termination"
+    },
+    {
+      "name": "live-cores3-guest",
+      "status": "NOT RUN",
+      "detail": "upstream M5Burner composer returned HTTP 503"
+    },
+    {
+      "name": "physical-hardware",
+      "status": "NOT RUN",
+      "detail": "no servo, keyboard, mechanical, electrical, optical or RF measurement"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://m5agent.github.io/m5stack-esp-emulator/",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41058959787",
+    "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-preview-20261030-stackchan-dance",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41056051554"
+  ],
+  "notes": [
+    "The public page is deployed, but the regular remote all-admitted publication gate remains PARTIAL.",
+    "The hosted macOS failure is retained rather than converted to PASS.",
+    "No firmware, ROM, credential, private endpoint or raw execution artifact is committed."
+  ]
+}

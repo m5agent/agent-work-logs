@@ -1,7 +1,7 @@
 # ESP Emulator StackChan 跳舞固件舵机与 Cardputer-ADV 全键复核
 
 - 日期：`2026-10-30`
-- 结果：`PASS`（virtual-device）；交付 `PARTIAL`（PR #65 OPEN，未合并）；物理硬件 `NOT RUN`
+- 结果：`PASS`（virtual-device）；交付 `PARTIAL`（PR #65 已合并；后续页面与门禁见 follow-up）；物理硬件 `NOT RUN`
 - 工作类型：`code_change`
 - 问题来源：[PR #65](https://github.com/m5agent/m5stack-esp-emulator/pull/65)
 - 源码版本：`m5agent/m5stack-esp-emulator@6db2b817506fade96fde45e5984aa46b1c7876ed`
@@ -58,4 +58,5 @@ reader 验证了 `56/56` 个物理键的按下、位置和松开；55 个可直�
 - 物理 Cardputer-ADV 键盘、键帽手感、LCD 光学方向和电气时序 `NOT RUN`。
 - `stackchan-wasm-dance-div6` 是慢速兼容路径，不是物理实时性能或等价时序证明。
 - 结果只覆盖记录的 firmware、WASM、manifest 和 profile；其他 SHA 不继承 PASS。
-- PR #65 仍为 OPEN，尚未合并到 `main`。
+- PR #65 已合并；正式页面更新与 regular all-admitted 剩余边界见
+  [`followups/2026-10-30-pages-production`](followups/2026-10-30-pages-production/)。
