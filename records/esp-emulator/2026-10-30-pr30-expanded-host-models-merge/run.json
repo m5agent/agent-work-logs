@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Merge PR #39 and PR #30 expanded browser hosts and StackChan motion",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/30",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "02e6eb1f58f13346a6f4e8059ce401d3336d4c74",
+    "head_commit": "349b778ab2d57e39e2da84f634fc8f232bca129a",
+    "merge_commit": "2f95ff23101b0b70f484eb8176a9a4c206a8e866",
+    "final_main_commit": "e3f149c1ffad45ac923e677dea1af599a78c35a6",
+    "additional_pull_requests": [
+      {
+        "number": 39,
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/pull/39",
+        "merge_commit": "02e6eb1f58f13346a6f4e8059ce401d3336d4c74"
+      }
+    ]
+  },
+  "hardware": {
+    "validation": "virtual-device",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "scope": "PR-supplied fixed official browser profiles",
+    "physical_flash": "NOT RUN"
+  },
+  "execution": {
+    "environment": "GitHub Actions; Python 3.12; Node.js 20; Chromium; QEMU WASM",
+    "ci_run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40985661773",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform-tests",
+      "status": "PASS",
+      "detail": "1658 tests; OK with 10 skipped"
+    },
+    {
+      "name": "generated-contracts",
+      "status": "PASS",
+      "detail": "QEMU profiles, peripheral catalog, runtime coverage and project snapshot"
+    },
+    {
+      "name": "browser-contracts",
+      "status": "PASS",
+      "detail": "admission, image layout, ROM/eFuse, frame, input and preview contracts"
+    },
+    {
+      "name": "offline-unit-evidence",
+      "status": "PASS",
+      "detail": "all CI commands passed"
+    },
+    {
+      "name": "network-namespace-policy",
+      "status": "PASS",
+      "detail": "all fail-closed and cleanup cases passed"
+    },
+    {
+      "name": "browser-runtime-lock",
+      "status": "PASS",
+      "detail": "65 patches; 47 native patches; 158 patched files; clean replay"
+    },
+    {
+      "name": "native-peripheral-regression",
+      "status": "PASS",
+      "detail": "68/68 cases and 278 checks from PR virtual-device validation"
+    },
+    {
+      "name": "stackchan-browser-strict",
+      "status": "PASS",
+      "detail": "5/5 from PR virtual-device validation"
+    },
+    {
+      "name": "physical-devices",
+      "status": "NOT RUN",
+      "detail": "No physical hardware execution or electrical/mechanical measurement"
+    },
+    {
+      "name": "preview-pages-deployment",
+      "status": "PASS",
+      "detail": "Prepared preview deployed; live runtime reports 20 compiled and 19 public profiles"
+    },
+    {
+      "name": "preview-hardware-renderer-gate",
+      "status": "FAIL",
+      "detail": "GitHub macOS runner selected software WebGL; the gate stopped before guest execution"
+    },
+    {
+      "name": "stickc-plus-readiness-and-pwr-cleanup",
+      "status": "PARTIAL",
+      "detail": "First 240 s ready timeout and natural PWR cleanup remain partial"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/pull/30",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40985661773",
+    "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-preview-20261030",
+    "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/40988933566",
+    "https://m5agent.github.io/m5stack-esp-emulator/"
+  ],
+  "notes": [
+    "PR #30 was integrated with current main by renumbering conflicting QEMU patches.",
+    "Physical results are not inherited from virtual-device or browser results.",
+    "The Pages artifact is a visual preview because the runner software-WebGL gate did not pass."
+  ]
+}
