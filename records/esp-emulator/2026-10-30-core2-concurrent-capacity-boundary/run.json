@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Core2 concurrent capacity boundary",
+  "source": {
+    "issue": "CORE2-02",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/57",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e3f149c1ffad45ac923e677dea1af599a78c35a6",
+    "source_commit": "66e5b8071622b6bf7727811f5327d9d8fb248e15",
+    "merge_commit": "ccbfa71c60f62df2682fd6c449ce8abdaedfd871"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_device": "Core2"
+  },
+  "firmware": {
+    "nine_instance_sha256": "b228ae0f224098e5a256ab87cbfdad5e3671eeea51766f4727cf7ef2070d5093",
+    "current_two_instance_sha256": "ae094f4824d15499a5770018393660d1051866743dec52265552b6fc23eb2a23",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "54e7a7f7cd0ff6f5a1d6343c06563388f49c2b0abbca4cafb850876e57ed1254"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-unified",
+    "profile": "core2-native-hci",
+    "accelerator": "tcg,thread=single,tb-size=128",
+    "icount": "shift=5,align=off,sleep=off",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "nine-instance attempts",
+      "status": "FAIL",
+      "result": "3 attempts: 9/9 PASS, 9/9 PASS, 8/9 FAIL"
+    },
+    {
+      "name": "nine-instance failure",
+      "status": "FAIL",
+      "result": "LoadProhibited at ble_hs_hci_process_ack PC 0x402630cc; no GATT timeout"
+    },
+    {
+      "name": "current two-instance A",
+      "status": "PASS",
+      "result": "2/2 PASS; maximum concurrency 2; stagger 0; hold 60s"
+    },
+    {
+      "name": "current two-instance B",
+      "status": "PASS",
+      "result": "2/2 PASS; maximum concurrency 2; stagger 0; hold 60s"
+    },
+    {
+      "name": "network recheck recovery",
+      "status": "PASS",
+      "result": "bounded 3 attempts; PSRAM and network error fields separated"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1665 run; 1664 PASS + 1 skip"
+    },
+    {
+      "name": "generated validators",
+      "status": "PASS",
+      "result": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "scoped Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "PR scope",
+      "status": "PASS"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "current-load eight-instance cold-start rebind",
+      "status": "NOT RUN",
+      "result": "host contention invalidated exploratory batches; not counted as PASS or product FAIL"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ccbfa71c60f62df2682fd6c449ce8abdaedfd871/docs/evidence/2026-10-30-core2-concurrent-capacity-boundary/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/ccbfa71c60f62df2682fd6c449ce8abdaedfd871/docs/evidence/2026-10-30-core2-concurrent-capacity-boundary/summary.json"
+  ],
+  "notes": [
+    "Default per-device capacity remains eight.",
+    "Nine-instance capacity is rejected after one reproducible guest panic.",
+    "No physical PSRAM/cache, controller, RF, electrical or hardware result is claimed."
+  ]
+}

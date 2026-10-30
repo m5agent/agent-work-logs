@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "core2-concurrent-capacity-boundary-evidence-summary",
+  "date": "2026-10-30",
+  "validation": "virtual-device validation",
+  "status": "BOUNDARY_CONFIRMED",
+  "raw_evidence_sha256": {
+    "nine_pass_a": "67f755e6d7aebe0174f453b3fc991fb046f88e707e2ac4162ce846dc4755dd25",
+    "nine_pass_b": "70926d8cd1f8fdc1ae5241f9b8c9fc62abeb11e1da826a06add1e760ba2581f2",
+    "nine_failure": "24c4d62aac73ff5a048f4104de514a6e9714be8aa1f6063745753e5adedf71b1",
+    "two_pass_a": "dfd80cead1f73cdd94f8ccee8f79322e3c55105945637e08c01bece47b2ba146",
+    "two_pass_b": "1a65e9612473ffa79c7df4c76fa5900168271293721c77cd1387aac269d0e382"
+  },
+  "nine_instance": {
+    "attempts": 3,
+    "passes": 2,
+    "failures": 1,
+    "maximum_concurrent_sessions": 9,
+    "stagger_seconds": 0,
+    "hold_seconds": 120,
+    "failure_attempt": "attempt-8",
+    "panic_pc": "0x402630cc",
+    "panic_symbol": "ble_hs_hci_process_ack",
+    "peer_gatt_timeout": false
+  },
+  "current_two_instance": {
+    "batches": 2,
+    "attempts_per_batch": 2,
+    "passes": 4,
+    "failures": 0,
+    "maximum_concurrent_sessions": 2,
+    "stagger_seconds": 0,
+    "hold_seconds": 60,
+    "psram_sweeps_per_run": 3,
+    "http_rechecks_per_run": 2,
+    "public_rechecks_per_run": 2,
+    "hli_posts": 45,
+    "hli_consumed": 45,
+    "hli_errors": 0,
+    "hli_prealloc_failures": 0,
+    "qom_memory_bytes": 8388608,
+    "panic_count": 0,
+    "gatt_timeouts": 0,
+    "cleanup_errors": 0
+  },
+  "checks": {
+    "platform_tests": "1665 run; 1664 PASS + 1 skip",
+    "runtime_coverage": "PASS",
+    "peripheral_catalog": "PASS",
+    "qemu_profiles": "PASS",
+    "project_snapshot": "PASS",
+    "compileall": "PASS",
+    "scoped_ruff_e9_f": "PASS",
+    "pr_scope": "PASS",
+    "pr_ci": "4/4 PASS"
+  },
+  "not_claimed": [
+    "nine-instance capacity",
+    "current-load eight-instance cold-start rebind",
+    "physical PSRAM capacity or timing",
+    "bit-exact BT controller or baseband",
+    "RF, electrical or hardware validation"
+  ]
+}
