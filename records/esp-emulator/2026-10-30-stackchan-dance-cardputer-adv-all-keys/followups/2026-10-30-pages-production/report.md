@@ -26,6 +26,8 @@
    仍在 normal finalize 后残留 CDP target graph 条目，regular 发布保持失败。
 9. 使用当前导出站走 prepared-site 流程：
    run `41058959787` prepare/deploy 均 PASS。
+10. Web/API/coverage/snapshot 与部署证据通过 PR #70 合并到 `main`，
+    merge commit `0f7f6fc635f91aef6215f08de01961e50fc5d1a7`，CI 2/2 jobs PASS。
 
 ## 部署产物
 

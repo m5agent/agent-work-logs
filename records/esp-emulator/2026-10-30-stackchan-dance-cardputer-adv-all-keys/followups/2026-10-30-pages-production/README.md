@@ -41,6 +41,8 @@ target graph 条目并阻止部署。为避免把浏览器 bookkeeping 缺陷写
 - regular 失败保留：
   [run 41056051554](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41056051554)，
   Sticks3 `engine-and-created-pthreads-close-after-iframe-finalization`。
+- 源码部署证据 PR #70 已合并为
+  `0f7f6fc635f91aef6215f08de01961e50fc5d1a7`，CI 2/2 jobs PASS。
 
 ## 文件
 
