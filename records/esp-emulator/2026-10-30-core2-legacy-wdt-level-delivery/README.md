@@ -6,6 +6,7 @@
 - 问题来源：`RUNTIME-03` Core2 legacy normal-WDT reset
 - 源码版本：`m5stack-esp-emulator @ f15fcd7fd3f644c618a79446d115e0f4690ce97c`
 - 交付：PR #55 已合并为 `14f21d309b6b53015e5188c9a4beb0f88a1e7324`
+- 状态关闭：PR #56 已合并为 `1d16d7c1d06a107e46f000644c9df84517ee534f`
 - 环境：macOS arm64、Python 3.12、Device Service `/api/v1`、QEMU virtual Core2
 
 ## 结论
@@ -42,6 +43,7 @@ independent normal-WDT Device Service runs 均越过原 stage-1 reset，
 - `report.md`：根因、改动、运行证据、边界和回滚
 - `run.json`：机器可读记录
 - `evidence/verification-summary.json`：脱敏运行摘要
+- `followups/2026-10-30-runtime03-closure/`：RUNTIME-03 stock startup scope 关闭记录
 - `patches/`：不适用；patch 与源码 evidence 已在主仓库交付
 - `code/`：不适用；contract test 位于主仓库
 

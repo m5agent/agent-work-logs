@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "pr_review",
+  "overall_status": "PASS",
+  "title": "RUNTIME-03 Core2 stock startup closure",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/56",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "14f21d309b6b53015e5188c9a4beb0f88a1e7324",
+    "source_commit": "970f79d224f5aab4188c88e45dca067630f525c4",
+    "merge_commit": "1d16d7c1d06a107e46f000644c9df84517ee534f"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Python 3.12; documentation and contract verification",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1614 run; 1613 PASS + 1 skip"
+    },
+    {
+      "name": "documentation contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "QEMU profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "result": "4/4"
+    }
+  ],
+  "evidence": [
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/1d16d7c1d06a107e46f000644c9df84517ee534f/docs/runtime-model-gap-register.md"
+  ],
+  "notes": [
+    "RUNTIME-03 is fixed for virtual-device stock startup.",
+    "Setup/REPL and arbitrary legacy application coverage remain in API-01.",
+    "Physical hardware and timing validation remain NOT RUN."
+  ]
+}
