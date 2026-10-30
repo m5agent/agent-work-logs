@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Core2 current tool-hash rebind",
+  "source": {
+    "issue": "CORE2-02",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3fc436e4aa99176ef3a4f7a2d35d25c973659219",
+    "source_commit": "4af1e9f5cdc3cbfcd1fca7d11fd707454c36f357",
+    "merge_commit": ""
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_device": "Core2"
+  },
+  "firmware": {
+    "sha256": "ae094f4824d15499a5770018393660d1051866743dec52265552b6fc23eb2a23",
+    "elf_sha256": "5bec056bb775bcc94bc020e4fa411def097ea17b108dcd597d9cdab3c347db49",
+    "qemu_sha256": "54e7a7f7cd0ff6f5a1d6343c06563388f49c2b0abbca4cafb850876e57ed1254"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-unified",
+    "profile": "core2-native-hci",
+    "accelerator": "tcg,thread=single,tb-size=128",
+    "icount": "shift=5,align=off,sleep=off",
+    "task_id": "",
+    "session_id": ""
+  },
+  "tool_hashes": {
+    "previous_device_service": "5b4ed0f576dae7a23151049f753acdfd6bf1ddce2d44e3c3389413b2b6349acb",
+    "current_device_service": "a96b15061d104aa79e7af74b513e5881481acf62a847d5ba1e27c5997aa1bbbb",
+    "runner": "a9d1f678f2509e794bb4d98e4e4bd5540531df512adec8479543ca73be1da013",
+    "qemu_accel": "6ae04d310fd68c99e6200813689af4fbcb75d0a890c8e5882027a16ea35d1dc9",
+    "ble_runtime_limits": "30148f7f3df98fd930a8ee35ed61ec0f6fe6baed3b7a026cea757e34072ea385",
+    "ble_probe": "09b0b354a6010cdb639e65609f7aed42664990451509da34f1550017ddfc8ffd",
+    "network_policy": "45cdba291b9351d69d326cc0adfaa84d107141023d9c1a7d9fdc5ba8ab00cd67",
+    "unified_http_guestfwd": "bdcfa9418108a717300e4546177e8c0b4db144489a1544d76bc22eb5f5a8977a"
+  },
+  "checks": [
+    {
+      "name": "input asset freeze",
+      "status": "PASS",
+      "result": "bound before first lease; no drift during run"
+    },
+    {
+      "name": "zero-stagger two-instance batch A",
+      "status": "PASS",
+      "result": "2/2 PASS at concurrency 2 for 60 seconds"
+    },
+    {
+      "name": "zero-stagger two-instance batch B",
+      "status": "PASS",
+      "result": "2/2 PASS at concurrency 2 for 60 seconds"
+    },
+    {
+      "name": "PSRAM data plane",
+      "status": "PASS",
+      "result": "three contiguous 1 MiB sweeps per lease; QOM 8 MiB"
+    },
+    {
+      "name": "network and GATT",
+      "status": "PASS",
+      "result": "WiFi DHCP/HTTP, public DNS/HTTP, external NUS GATT"
+    },
+    {
+      "name": "HLI health",
+      "status": "PASS",
+      "result": "45/45 posts/consumed; 36 events; 9 ACLs; zero errors"
+    },
+    {
+      "name": "frame/QOM/pcap/evidence",
+      "status": "PASS",
+      "result": "nonempty PNG, 32 QOM nodes, pcap and evidence ZIP"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1678 run; 1677 PASS + 1 skip"
+    },
+    {
+      "name": "generated validators",
+      "status": "PASS",
+      "result": "runtime coverage, peripheral catalog, QEMU profiles, project snapshot"
+    },
+    {
+      "name": "PR scope and formatting",
+      "status": "PASS",
+      "result": "check_pr_scope, JSON, UTF-8 and git diff check"
+    },
+    {
+      "name": "PR CI",
+      "status": "NOT RUN",
+      "result": "PR has not been created yet"
+    },
+    {
+      "name": "eight-instance current-load cold-start rebind",
+      "status": "NOT RUN",
+      "result": "not inferred from the two-instance regression"
+    },
+    {
+      "name": "nine-instance capacity",
+      "status": "FAIL",
+      "result": "remains rejected after historical ble_hs_hci_process_ack panic"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4af1e9f5cdc3cbfcd1fca7d11fd707454c36f357/docs/evidence/2026-10-30-core2-toolhash-rebind/README.md",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/4af1e9f5cdc3cbfcd1fca7d11fd707454c36f357/docs/evidence/2026-10-30-core2-toolhash-rebind/summary.json"
+  ],
+  "notes": [
+    "This record rebinds the two-instance regression to the current main tool hash.",
+    "The default per-device capacity remains eight.",
+    "No physical PSRAM/cache, controller, RF, electrical or hardware result is claimed."
+  ]
+}

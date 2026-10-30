@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-10-30 | `esp-emulator` | Core2 current tool-hash rebind | `PASS`（virtual-device：SVC-03 拆分后 `device_service` hash 更新；最新 main 两批独立零错峰双实例合计 `4/4 PASS`，HLI `45/45`、PSRAM/网络/GATT/frame/QOM/pcap/evidence/cleanup 全通过；八实例 cold-start、九实例容量、物理 controller/RF/电气/真机 NOT RUN/OPEN） | [查看](esp-emulator/2026-10-30-core2-current-toolhash-rebind/) |
 | 2026-10-30 | `esp-emulator` | SVC-03 QEMU WiFi semantic boundary | `PASS`（platform-contract：PR #61 四项 CI PASS 并合并 `3fc436e4`；QEMU WiFi security parser 与 env projection 移至独立模块，`device_service.py` 保持 same-object re-export；专向 `4/4`、Device Service `126/126`、platform `1,678` 项为 `1,677 PASS + 1 skip`；QEMU/RF/物理行为不变/NOT RUN） | [查看](esp-emulator/2026-10-30-svc03-qemu-wifi/) |
 | 2026-10-30 | `esp-emulator` | SVC-03 network execution parsing boundary | `PASS`（platform-contract：PR #59 四项 CI PASS 并合并 `9c1652df`；`parse_network_execution` 移至无状态模块，`device_service.py` 保持 same-object re-export；专向 `4/4`、Device Service `126/126`、platform `1,674` 项为 `1,673 PASS + 1 skip`；HTTP/network runtime/QEMU/物理行为不变/NOT RUN） | [查看](esp-emulator/2026-10-30-svc03-network-execution/) |
 | 2026-10-30 | `esp-emulator` | SVC-03 storage/NVS parsing boundary | `PASS`（platform-contract：PR #58 四项 CI PASS 并合并 `0c26759d`；storage/NVS execution parser 移至无状态模块，`device_service.py` 保持 same-object re-export；专向 `5/5`、Device Service `126/126`、platform `1,670` 项为 `1,669 PASS + 1 skip`；HTTP/QEMU/物理行为不变/NOT RUN） | [查看](esp-emulator/2026-10-30-svc03-execution-parsing/) |
