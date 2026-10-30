@@ -7,7 +7,7 @@
 - 源码版本：`m5stack-esp-emulator @ 8ebc34109879f6cfd39ba02bbeab74fcd523e84c`
 - 验证对象：`origin/main @ 3fc436e4aa99176ef3a4f7a2d35d25c973659219`
 - 交付分支基线：`origin/main @ 867ce788b3b42e0b9c55429cd9272781ffd15cb0`
-- 交付：源码提交已创建；PR 指引本记录，合并 SHA 在交付后回填
+- 交付：PR #62 已合并为 `674665ea008e65f26aae105ac927e4b1e2909746`
 - 环境：macOS arm64、Python 3.12、Device Service `/api/v1`、QEMU unified Core2
 
 ## 结论
@@ -44,11 +44,12 @@ session read error 和 cleanup error 均为 `0`。输入资产在首个 lease �
 - Runtime coverage、peripheral catalog、QEMU profiles、project snapshot：
   `PASS`
 - Source PR scope、JSON、UTF-8 与 `git diff --check`：`PASS`
+- PR CI：`4/4 PASS`
 
 源码固定链接：
 
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/8ebc34109879f6cfd39ba02bbeab74fcd523e84c/docs/evidence/2026-10-30-core2-toolhash-rebind/README.md>
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/8ebc34109879f6cfd39ba02bbeab74fcd523e84c/docs/evidence/2026-10-30-core2-toolhash-rebind/summary.json>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/674665ea008e65f26aae105ac927e4b1e2909746/docs/evidence/2026-10-30-core2-toolhash-rebind/README.md>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/674665ea008e65f26aae105ac927e4b1e2909746/docs/evidence/2026-10-30-core2-toolhash-rebind/summary.json>
 
 ## 文件
 
