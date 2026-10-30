@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Reconcile current project state and historical documentation claims",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/64",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "345c879c5a69bc1e0c03bbca66738592176c732e",
+    "head_commit": "8c8883da8026c8d5cc09ad53064b606f8d4ef3a2",
+    "merge_commit": "ab0091670b932796f5d04a5cac80d728cfada742"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "isolated worktree; Python 3.12 documentation contracts; GitHub Actions",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "layer": "review",
+      "name": "runtime, task, date and historical status reconciliation",
+      "status": "PASS"
+    },
+    {
+      "layer": "review",
+      "name": "documentation contracts",
+      "status": "PASS",
+      "count": 50
+    },
+    {
+      "layer": "build",
+      "name": "runtime coverage, peripheral catalog, QEMU profiles and project snapshot",
+      "status": "PASS"
+    },
+    {
+      "layer": "delivery",
+      "name": "PR #64 checks",
+      "status": "PASS",
+      "count": 4
+    },
+    {
+      "layer": "delivery",
+      "name": "post-merge main CI",
+      "status": "PASS",
+      "run_id": "41014601243"
+    },
+    {
+      "layer": "transport",
+      "name": "guest or Device Service execution",
+      "status": "NOT RUN",
+      "reason": "documentation-only change"
+    },
+    {
+      "layer": "device_response",
+      "name": "device behavior",
+      "status": "NOT RUN",
+      "reason": "documentation-only change"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "hardware, RF, electrical, optical and mechanical observations",
+      "status": "NOT RUN",
+      "reason": "documentation-only change"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.txt"
+  ],
+  "notes": [
+    "Historical FAIL and PARTIAL evidence was preserved; later closure was added as a dated follow-up.",
+    "The shared checkout and unrelated uncommitted work were not modified.",
+    "No guest, firmware build, hardware, RF, electrical or performance claim is made."
+  ]
+}

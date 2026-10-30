@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-10-30 | ESP Emulator | PR #64 current-state and documentation contradiction reconciliation | `PASS`（documentation/contracts：PR #64 四项检查 PASS 并合并 `ab009167`；50 项文档契约与四个生成器检查 PASS；`RUNTIME-03`/`RUNTIME-06`、Core2 历史边界、Task 状态和日期口径统一；guest、硬件、RF、电气与性能 NOT RUN） | [查看](records/esp-emulator/2026-10-30-pr-64-state-doc-reconciliation/) |
 | 2026-10-30 | ESP Emulator | Core2 current tool-hash rebind | `PASS`（virtual-device：PR #62 四项 CI PASS 并合并 `674665ea`；SVC-03 拆分后 `device_service` hash 更新，最新 main 两批独立零错峰双实例合计 `4/4 PASS`，HLI `45/45`、PSRAM/网络/GATT/frame/QOM/pcap/evidence/cleanup 全通过；八实例 cold-start、九实例容量、物理 controller/RF/电气/真机 NOT RUN/OPEN） | [查看](records/esp-emulator/2026-10-30-core2-current-toolhash-rebind/) |
 | 2026-10-30 | ESP Emulator | SVC-03 QEMU WiFi semantic boundary | `PASS`（platform-contract：PR #61 四项 CI PASS 并合并 `3fc436e4`；QEMU WiFi security parser 与 runtime-env projection 移至独立模块，原模块 same-object re-export；专向 `4/4`、Device Service `126/126`、platform `1,677 PASS + 1 skip`；QEMU/RF/物理行为不变/NOT RUN） | [查看](records/esp-emulator/2026-10-30-svc03-qemu-wifi/) |
 | 2026-10-30 | ESP Emulator | SVC-03 network execution parsing boundary | `PASS`（platform-contract：PR #59 四项 CI PASS 并合并 `9c1652df`；`parse_network_execution` 移至独立无状态模块，原模块 same-object re-export；专向 `4/4`、Device Service `126/126`、platform `1,673 PASS + 1 skip`；HTTP/network runtime/QEMU/物理行为不变/NOT RUN） | [查看](records/esp-emulator/2026-10-30-svc03-network-execution/) |
