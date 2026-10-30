@@ -4,8 +4,9 @@
 - 结果：`PASS`（virtual-device validation）
 - 工作类型：`code_change`
 - 问题来源：`CORE2-02` 当前 main 工具哈希回归
-- 源码版本：`m5stack-esp-emulator @ 4af1e9f5cdc3cbfcd1fca7d11fd707454c36f357`
-- 基线与验证对象：`origin/main @ 3fc436e4aa99176ef3a4f7a2d35d25c973659219`
+- 源码版本：`m5stack-esp-emulator @ 8ebc34109879f6cfd39ba02bbeab74fcd523e84c`
+- 验证对象：`origin/main @ 3fc436e4aa99176ef3a4f7a2d35d25c973659219`
+- 交付分支基线：`origin/main @ 867ce788b3b42e0b9c55429cd9272781ffd15cb0`
 - 交付：源码提交已创建；PR 指引本记录，合并 SHA 在交付后回填
 - 环境：macOS arm64、Python 3.12、Device Service `/api/v1`、QEMU unified Core2
 
@@ -39,15 +40,15 @@ session read error 和 cleanup error 均为 `0`。输入资产在首个 lease �
   `c0e4ad6d7fe3c4d07c922c0cb7df2072baaf058fa774f00dd72f4e213bed935a`
 - Batch B raw evidence SHA256：
   `4409b748203c6ab4ddcc1c2b70c639fce7c8f7c85047f6ad58a8bbf0b8813dce`
-- Platform full suite：`1,678` tests，`1,677 PASS + 1 skip`
+- Platform full suite：`1,680` tests，`1,679 PASS + 1 skip`
 - Runtime coverage、peripheral catalog、QEMU profiles、project snapshot：
   `PASS`
 - Source PR scope、JSON、UTF-8 与 `git diff --check`：`PASS`
 
 源码固定链接：
 
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/4af1e9f5cdc3cbfcd1fca7d11fd707454c36f357/docs/evidence/2026-10-30-core2-toolhash-rebind/README.md>
-- <https://github.com/m5agent/m5stack-esp-emulator/blob/4af1e9f5cdc3cbfcd1fca7d11fd707454c36f357/docs/evidence/2026-10-30-core2-toolhash-rebind/summary.json>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/8ebc34109879f6cfd39ba02bbeab74fcd523e84c/docs/evidence/2026-10-30-core2-toolhash-rebind/README.md>
+- <https://github.com/m5agent/m5stack-esp-emulator/blob/8ebc34109879f6cfd39ba02bbeab74fcd523e84c/docs/evidence/2026-10-30-core2-toolhash-rebind/summary.json>
 
 ## 文件
 

@@ -22,7 +22,8 @@
 ### 代码或配置
 
 ```text
-source base: 3fc436e4aa99176ef3a4f7a2d35d25c973659219
+validation target: 3fc436e4aa99176ef3a4f7a2d35d25c973659219
+delivery base: 867ce788b3b42e0b9c55429cd9272781ffd15cb0
 configuration:
   runtime=qemu-unified
   profile=core2-native-hci
@@ -82,7 +83,7 @@ qemu_accel:
 
 | 层级 | 状态 | 依据 |
 | --- | --- | --- |
-| build | `PASS` | Current service starts; platform suite 1,678 with 1 skip |
+| build | `PASS` | Current service starts; platform suite 1,680 with 1 skip |
 | transport | `PASS` | WiFi DHCP/HTTP, public DNS/HTTP and external NUS GATT |
 | device_response | `PASS` | 8 MiB PSRAM QOM and three 1 MiB guest readback sweeps |
 | data_behavior | `PASS` | 4/4 independent leases with no HLI/panic/GATT/cleanup failure |
