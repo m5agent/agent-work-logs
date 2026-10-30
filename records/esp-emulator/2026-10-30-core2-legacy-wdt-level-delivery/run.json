@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "scope": "Core2 legacy normal-WDT startup",
+  "title": "Core2 legacy WDT level delivery",
+  "source": {
+    "issue": "RUNTIME-03",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/55",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "1497c0601f405a2fe078aa061fd1b165c724962a",
+    "source_commit": "f15fcd7fd3f644c618a79446d115e0f4690ce97c",
+    "merge_commit": "14f21d309b6b53015e5188c9a4beb0f88a1e7324"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_device": "Core2"
+  },
+  "firmware": {
+    "name": "UIFlow_Core2 v1.15.4",
+    "original_flash_sha256": "4d2d648bd8707a1789d540366015a1b90dc816b66a04163048626ea29e333ed4",
+    "effective_flash_sha256": "b30f3014b75f762f50be3284010502e047b3bd0494b0f0b72a673c2756baffd7",
+    "qemu_sha256": "001a938503e7b1d813f388022d849c24bab4f5298602211f70042a5184fcb62d"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.12; Device Service /api/v1; QEMU virtual Core2",
+    "runtime": "qemu-wifi",
+    "profile": "core2-openmac",
+    "accelerator": "tcg,thread=single,tb-size=128",
+    "icount_shift": 2,
+    "per_vcpu_budget_ns": 10000,
+    "watchdog": "normal",
+    "task_id": "",
+    "session_id": ""
+  },
+  "patch": {
+    "path": "patches/qemu-m5stack-peripherals/0095-esp32-legacy-wdt-level-delivery.patch",
+    "sha256": "df008a1f34324c1b4b0d7bc4640f03bb5f9b42b109cfedadfee0b31631411894"
+  },
+  "checks": [
+    {
+      "name": "normal-WDT startup",
+      "status": "PASS",
+      "result": "3/3 independent runs beyond 300 seconds guest virtual time"
+    },
+    {
+      "name": "WDT trace",
+      "status": "PASS",
+      "result": "int_ena=2; int_raw=4; int_st=0; WDTFEED; INT_CLR=4; no stage-1 reset"
+    },
+    {
+      "name": "Core2 UIFlow2 device group",
+      "status": "PASS",
+      "result": "6/6; one attempt per case; no retry"
+    },
+    {
+      "name": "platform full suite",
+      "status": "PASS",
+      "result": "1614 run; 1613 PASS + 1 skip"
+    },
+    {
+      "name": "runtime coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "peripheral catalog",
+      "status": "PASS"
+    },
+    {
+      "name": "QEMU profiles",
+      "status": "PASS"
+    },
+    {
+      "name": "project snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "Ruff E9/F",
+      "status": "PASS"
+    },
+    {
+      "name": "patch forward/reverse",
+      "status": "PASS"
+    },
+    {
+      "name": "PR scope",
+      "status": "PASS"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "result": "4/4"
+    },
+    {
+      "name": "setup/REPL",
+      "status": "NOT RUN",
+      "result": "Ctrl-C attempt did not produce a REPL prompt"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json",
+    "https://github.com/m5agent/m5stack-esp-emulator/blob/14f21d309b6b53015e5188c9a4beb0f88a1e7324/docs/evidence/2026-10-30-core2-legacy-wdt-level-delivery/README.md"
+  ],
+  "notes": [
+    "Normal-WDT startup subissue is fixed in virtual-device validation.",
+    "REPL and complete factory application remain separate checks.",
+    "No physical WDT, reset timing, RF or electrical result is claimed."
+  ]
+}
