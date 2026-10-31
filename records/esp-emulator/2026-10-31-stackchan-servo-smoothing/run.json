@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "StackChan sparse servo presentation smoothing and Pages deployment",
+  "source": {
+    "issue": "user report",
+    "pull_request": "#71, #72",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "8244de73128d05e53b0242ae9fc3008ddb741c99",
+    "change_commit": "948ca8b533a47307050940af54536d601f8e05ce",
+    "merge_commit": "68afbd7c13669c1fb652b976b68c48364c7f0d6c"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+    "browser_wasm_sha256": "5d6c36bdafc1129c2652b5ba9422f3deb5ab170475748cea96fdc4cf9520a993"
+  },
+  "execution": {
+    "environment": "macOS M4, Chrome 156, ANGLE Metal, browser-QEMU and native Device Service",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "platform tests",
+      "status": "PASS",
+      "detail": "1,725 tests, OK (skipped=10)"
+    },
+    {
+      "name": "browser contracts",
+      "status": "PASS",
+      "detail": "npm test:contracts plus dedicated servo/StackChan checks"
+    },
+    {
+      "name": "StackChan same-firmware runs",
+      "status": "PASS",
+      "detail": "two independent runs, each 12/12; 23 states and 30 SCS packets"
+    },
+    {
+      "name": "presentation interpolation",
+      "status": "PASS",
+      "detail": "15/14 intermediate poses in 2-second windows; max visual step 9.03/9.34 degrees"
+    },
+    {
+      "name": "browser cleanup",
+      "status": "PASS",
+      "detail": "engine and five pthread targets closed before context teardown in both runs"
+    },
+    {
+      "name": "Pages public CoreS3 guest",
+      "status": "PASS",
+      "detail": "30/30 checks from the deployed HTTPS site"
+    }
+  ],
+  "evidence": [
+    "evidence/browser-smoothing.md",
+    "evidence/cleanup.md",
+    "evidence/pages-deployment.md",
+    "evidence/native-service.md"
+  ],
+  "notes": [
+    "Presentation interpolation does not add guest samples.",
+    "The regular source-build Pages workflow failed twice on upstream dependency TLS handshake; prepared-site deployment succeeded separately.",
+    "Physical servo mechanics, speed, torque, electrical behavior, optics and RF are NOT RUN."
+  ]
+}
