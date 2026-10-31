@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Sync centered StackChan model into the ESP emulator",
+  "source": {
+    "issue": "user request",
+    "pull_request": "#74",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "a8b61e2b46334bf3e4f8d1f44249fe56388b3dec",
+    "change_commit": "5bc0428f33e2327ec488251b25f607930d31b84b",
+    "merge_commit": "929723b0b542283c6f44ea6fe6b94b6edebaa072",
+    "vendor_repository": "yuyun2000/m5stack-models",
+    "vendor_commit": "1373680d29667f99438a5412b87b955a3ba7702f"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+    "browser_wasm_sha256": "5d6c36bdafc1129c2652b5ba9422f3deb5ab170475748cea96fdc4cf9520a993"
+  },
+  "execution": {
+    "environment": "macOS M4, Chrome, ANGLE Metal, browser-QEMU, GitHub Pages",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "vendor snapshot",
+      "status": "PASS",
+      "detail": "1,925 source files plus pinned Three addon; reviewed runtime files only"
+    },
+    {
+      "name": "model shell",
+      "status": "PASS",
+      "detail": "controller:stackchan and controller:cores3"
+    },
+    {
+      "name": "browser/public contracts",
+      "status": "PASS",
+      "detail": "npm test:contracts"
+    },
+    {
+      "name": "platform suite",
+      "status": "PASS",
+      "detail": "1,725 tests, OK (skipped=10)"
+    },
+    {
+      "name": "exact StackChan dance firmware",
+      "status": "PASS",
+      "detail": "12/12; 23 states, 30 SCS packets, 577 frames, clean worker teardown"
+    },
+    {
+      "name": "Pages deployment",
+      "status": "PASS",
+      "detail": "run 41163764773; prepare and deploy succeeded"
+    },
+    {
+      "name": "live model readback",
+      "status": "PASS",
+      "detail": "manifest/vendor/WASM match; LCD local y=0, world y=8.25; zero page errors"
+    }
+  ],
+  "evidence": [
+    "evidence/sync-and-contracts.json",
+    "evidence/stackchan-browser-validation.json",
+    "evidence/pages-deployment.md",
+    "evidence/stackchan-live.png"
+  ],
+  "notes": [
+    "The upstream runtime change centers the StackChan LCD in the square head face.",
+    "Upstream demo, Pages workflow, plans and evidence images were not vendored.",
+    "Physical StackChan, LCD optics, mechanics, electrical behavior and RF are NOT RUN."
+  ]
+}
