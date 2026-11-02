@@ -3,14 +3,17 @@
 - 日期：`2026-11-02`
 - 结果：`PASS`（virtual-device validation；物理硬件 `NOT RUN`）
 - 工作类型：`code_change`
-- 问题来源：[PR #76](https://github.com/m5agent/m5stack-esp-emulator/pull/76)
-- 源码版本：`m5agent/m5stack-esp-emulator@111cb472c0ed9eb50a9dbd419709f6c527955658`
+- 问题来源：[PR #76](https://github.com/m5agent/m5stack-esp-emulator/pull/76)、
+  [PR #77](https://github.com/m5agent/m5stack-esp-emulator/pull/77)
+- 源码版本：`m5agent/m5stack-esp-emulator@b4d066cfe45da81655bbbc912fad825234d8c7f8`
 - 环境：macOS arm64、Python 3.12、Chromium、隔离的 QEMU Device Service
 
 ## 结论
 
-本地同源网页现在会自动连接由同一 Device Service 提供的 `/api/v1`，并在
-设备目录加载后显示“服务可运行”；公开 HTTPS Pages 不会被隐式授予服务连接。
+Device Service 在 `site-config.json` 中声明自己的真实 origin；本地网页只在看到
+该服务广告后连接 `/api/v1`，并在设备目录加载后显示“服务可运行”。静态 Pages
+导出的 `service_url` 仍为空，不会探测服务，因此 browser-local 验收可保持
+`no-device-service-requests`。
 
 另一个失败并非舵机或应用代码把目标锁死：上传镜像的 bootloader header 声明
 4 MiB SPI Flash，但其有效分区表结束于 8 MiB。服务现在会在分配 QEMU session
@@ -24,9 +27,9 @@ flash-size 配置改为 8 MiB 后，分区验证通过并创建了 running sessi
 - 原分区表最高结束地址：`0x800000`
 - 修复后的服务错误：`409 bootloader_flash_size_too_small`
 - 8 MiB header 修正镜像创建 session 后状态：`running`，partition-table 错误未再出现
-- 本地网页：服务状态为“已连接 · 23 个可运行设备”，设备行显示“服务可运行”
+- 本地网页：正式本地服务状态为“已连接 · 22 个可运行设备”，设备行显示“服务可运行”
 - PR CI：4/4 checks PASS
-- 本地平台套件：1727 tests PASS，10 skipped
+- 本地平台套件：1729 tests PASS，1 skipped
 
 ## 文件
 

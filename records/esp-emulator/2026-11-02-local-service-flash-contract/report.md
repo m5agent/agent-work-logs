@@ -2,7 +2,8 @@
 
 ## 背景
 
-- 来源：[PR #76](https://github.com/m5agent/m5stack-esp-emulator/pull/76)
+- 来源：[PR #76](https://github.com/m5agent/m5stack-esp-emulator/pull/76)、
+  [PR #77](https://github.com/m5agent/m5stack-esp-emulator/pull/77)
 - 现象：
   1. 从本机启动 Device Service 后打开同源网页，页面仍提示设备需要“连接服务”。
   2. Cardputer-ADV 固件 job 以 application readiness 超时失败，串口同时反复报告
@@ -15,7 +16,9 @@
 - Skill helper 使用的主要 `/api/v1` discover/upload/compose/create/status/observe/stop
   契约仍兼容；最新服务 OpenAPI 为 `1.51.0`，33 个 Skill/package 测试通过。
 - 网页同源自动连接最初确实缺失；连接成功后设备行仍读取旧静态标签，是第二个 UI
-  bug。两处均已修复。
+  bug。最初用 loopback host 启发式修复后，正式 Pages 验收以
+  `no-device-service-requests` 拒绝，因为普通静态服务器也可能位于 loopback。
+  最终改为由 `serve.py` 动态声明真实服务 origin；静态导出仍为空。
 - bootloader header 字节为 `0x2f`：低半字节 `0xf` 表示 80 MHz，高半字节 `0x2`
   表示 4 MiB。分区表要求到 `0x800000`，因此 guest bootloader 使用 4 MiB 上限是
   正确行为。将上传文件补齐到 8 MiB 不会改变镜像内 bootloader 的容量声明。
@@ -24,7 +27,8 @@
 
 ## 改动范围
 
-- 仅在 HTTP loopback 同源页面自动填入并连接当前 Device Service origin。
+- Device Service 在 `site-config.json` 中声明由已验证 Host header 派生的同源
+  origin；静态导出不声明服务。
 - 显式 `mode=browser` / `mode=model` 链接仍不建立服务连接。
 - Device Service 目录连接后，设备行显示“服务可运行”。
 - `analyze_esp_image` 输出 flash mode/speed/size code 和 declared size。
@@ -61,10 +65,10 @@ uv run --python 3.12 --with pillow \
 
 结果：
 
-- 平台套件：`1727 tests`, `OK`, `10 skipped`
+- 平台套件：`1729 tests`, `OK`, `1 skipped`
 - Skill/package：`33 tests`, `OK`
 - PR CI：`4/4 PASS`
-- 隔离 HTTP 页面：自动连接，23 个可运行设备
+- 正式本地 HTTP 页面：服务广告后自动连接，22 个可运行设备
 - 原始 artifact compose：`409 bootloader_flash_size_too_small`
 - 修正 bootloader header 的同一 artifact：composition `201`，session `running`
 
@@ -89,5 +93,6 @@ application 来自同一构建配置。
 
 ## 风险与回滚
 
-自动连接只限 HTTP loopback 同源，避免公开 Pages 隐式信任服务。若需回滚，可撤销
-PR #76 的单个 merge commit；它不修改 Flash、设备状态或外部用户数据。
+只有实际 Device Service 会通过动态 `site-config.json` 声明自身 origin，普通静态
+站点和公开 Pages 都不会探测 `/api/v1`。若需回滚，可撤销 PR #76/#77 对应的 merge
+commit；它们不修改 Flash、设备状态或外部用户数据。
