@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-02 | M5Stack documentation | 全库文档审查与12组人工工单证据 | `REVIEW`（资料/API/HTTP；硬件和虚拟设备 NOT RUN；本批例外发布，工单待创建） | [查看](records/nuxt-m5-docs/2026-11-02-documentation-audit/) |
 | 2026-11-02 | ESP Emulator | PR #80 AtomS3U / Atom VoiceS3R host integration | `PASS`（delivery：merge `930d7183`；head 4/4、main 2/2 CI；platform 1,719 PASS + 10 skip；既有 virtual-device 镜像/串口/PCM 回核；设备 partial/candidate，新 guest/物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-11-02-pr80-visual-hosts-merge/) |
 | 2026-11-02 | ESP Emulator | Virtual-device-first validation policy | `PASS`（documentation/contracts：removed Tab5 real-hardware prerequisite and project `HW-01`; validated virtual device is the default functional/publication path; hardware is claim-scoped to physical properties; `50/50` docs tests; PR #79 merged `8dd390ff`; QEMU/firmware/hardware `NOT RUN`） | [查看](records/esp-emulator/2026-11-02-virtual-device-primary-policy/) |
 | 2026-11-02 | ESP Emulator | Core2 interactive blank-start readiness | `PASS`（virtual-device：public firmware `fb69fa3c…`; valid black PNG before input; center touch and drag accepted and changed frames; final `320x240`, `76,800/76,800` nonblack pixels; matrix `28/28`; PR #78 merged `b6b8d6fe`; physical hardware `NOT RUN`） | [查看](records/esp-emulator/2026-11-02-core2-interactive-frame-readiness/) |
