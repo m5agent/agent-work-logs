@@ -28,6 +28,10 @@
 | DOC-11 | [文档审查] EXT.IO2 数字输入例程未配置输入通道，且三段例程的 printf 参数类型错误 | [详情](issues/11-02-extio2-example.md) |
 | DOC-12 | [文档审查跟踪] 修正 INA226、DoF10 与 AIN4-20mA 示例的测量结果来源、更新标志和单位语义 | [详情](issues/12-03-measurement-semantics.md) |
 
+## 工单交付
+
+12/12已发表并逐条回读，编号#2–#13全部opened，正文仍标REVIEW与设备NOT RUN。详见[独立交付记录](followups/2026-11-02-issue-delivery.md)及[脱敏交付摘要](evidence/issue-delivery-summary.json)。
+
 ## 关键证据与导航
 
 - [report.md](report.md)：范围、方法、发布边界、复查和修复验收要求。
