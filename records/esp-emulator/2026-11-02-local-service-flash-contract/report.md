@@ -71,6 +71,8 @@ uv run --python 3.12 --with pillow \
 - 正式本地 HTTP 页面：服务广告后自动连接，22 个可运行设备
 - 原始 artifact compose：`409 bootloader_flash_size_too_small`
 - 修正 bootloader header 的同一 artifact：composition `201`，session `running`
+- 正式 Pages 发布：QEMU WASM `PASS`、静态导出 `PASS`；浏览器逐板清理门禁
+  `FAIL`，deploy `NOT RUN`
 
 ## 验证结果
 
@@ -90,6 +92,10 @@ bootloader size header 并重算镜像 hash，用于证明模拟器容量路径�
 application 来自同一构建配置。
 
 本记录不把 QEMU 结果写成物理硬件、RF、电气或机械结果。
+
+正式 Pages 工作流可以重新构建 QEMU WASM 和站点，但逐板验收反复停在 iframe
+移除后的 CDP Worker-target 回收窗口；应用、输入、帧和正常 stop 检查均已通过。
+该长门禁不阻塞本地 `8787` 服务验证，但在 workflow 通过前不能宣称线上已更新。
 
 ## 风险与回滚
 

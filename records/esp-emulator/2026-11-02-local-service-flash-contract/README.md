@@ -1,7 +1,7 @@
 # ESP Emulator 本地服务发现与 bootloader Flash 契约
 
 - 日期：`2026-11-02`
-- 结果：`PASS`（virtual-device validation；物理硬件 `NOT RUN`）
+- 结果：`PARTIAL`（virtual-device validation `PASS`；正式 Pages 发布被既有 CDP cleanup 门禁阻断，物理硬件 `NOT RUN`）
 - 工作类型：`code_change`
 - 问题来源：[PR #76](https://github.com/m5agent/m5stack-esp-emulator/pull/76)、
   [PR #77](https://github.com/m5agent/m5stack-esp-emulator/pull/77)
@@ -39,6 +39,8 @@ flash-size 配置改为 8 MiB 后，分区验证通过并创建了 running sessi
 
 ## 未覆盖项
 
+- 正式 Pages 发布：`FAIL`。QEMU WASM 构建和静态导出成功，浏览器逐板门禁在
+  `engine-and-created-pthreads-close-after-iframe-finalization` 超时；deploy 未执行。
 - 物理 Cardputer-ADV 上的同镜像启动与舵机运动：`NOT RUN`
 - 用户最终重新构建的 bootloader/partition image：`REVIEW`；本轮验证的是同一
   原始 artifact 的静态错误，以及仅修正 bootloader flash-size header 后的虚拟设备路径
