@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-02 | `esp-emulator` | Core2 交互应用空白首帧就绪判定 | `PASS`（virtual-device：公开固件 `fb69fa3c…` 输入前为有效黑屏 PNG；中心触摸与拖动均被接受并改变 frame；最终 `320x240`、`76,800/76,800` 非黑像素；矩阵 `28/28`；PR #78 合并 `b6b8d6fe`；物理硬件 NOT RUN） | [查看](esp-emulator/2026-11-02-core2-interactive-frame-readiness/) |
 | 2026-10-31 | `esp-emulator` | 同步 StackChan 居中显示模型与 Pages 发布 | `PASS`（virtual-device/browser-WASM：模型 pin `1373680d`；PR #74 合并 `929723b0`；完整 StackChan 舞蹈固件 `12/12`、23 个状态、30 个 SCS packet、577 帧与 Worker 清理通过；正式 Pages 回读 manifest/WASM/模型一致，LCD 本地 y=0、世界 y=8.25；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-31-stackchan-centered-model/) |
 | 2026-10-31 | `esp-emulator` | StackChan 稀疏舵机状态展示平滑与 Pages 发布 | `PASS`（virtual-device/browser-WASM：PR #71/#72；两次精确固件 `12/12`，2 秒窗口 15/14 个中间姿态，最大视觉步进约 `9°`；正式 HTTPS CoreS3 guest `30/30`、两代 Worker 清理通过；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-31-stackchan-servo-smoothing/) |
 | 2026-10-30 | `esp-emulator` | PR #63 双语首页、截图与维护指南 | `PASS`（docs/contracts + 远端交付：普通 merge `345c879c`；35 文件 `+1,882/-830`，两张核对过的 PNG 共 278,299 bytes；GitHub GFM 桌面窄屏、图片与语言切换 PASS；merge CI 两 job PASS，platform `1,680` 项 `1,670 PASS + 10 skip`；无运行时改动、无新虚拟/物理 PASS；本地 main worktree 因 6 个原有改动未覆盖） | [查看](esp-emulator/2026-10-30-pr63-docs-homepage-refresh/) |

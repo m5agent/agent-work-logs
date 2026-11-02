@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Accept decoded nonblack pixels for interactive Core2 first frame",
+  "source": {
+    "issue": "user-requested m5core2_voronoi v1.0.3 simulator diagnosis",
+    "pull_request": "#78",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "b4d066cfe45da81655bbbc912fad825234d8c7f8",
+    "change_commit": "6b45ec86608293728474affa7043404d06eaf500",
+    "merge_commit": "b6b8d6fe667ec4605be1bedac7498a78343f9abb",
+    "consumer_change_commit": "0877867b3da78df63a9856fbc3d45c35066aef69"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "m5core2_voronoi",
+    "version": "v1.0.3",
+    "source": "https://github.com/cubic9com/m5core2_voronoi/tree/v1.0.3",
+    "sha256": "fb69fa3c7d97ef3db8175de426f3d262be83cc89a7b921fb13bec4e74cf93546",
+    "bytes": 16777216,
+    "device": "Core2",
+    "chip": "ESP32-D0WDQ6-V3"
+  },
+  "execution": {
+    "environment": "macOS, Core2 QEMU m5core2, virtual 320x240 ILI9342 framebuffer and touch input",
+    "task_id": "job-049c56b5b6d9",
+    "session_id": "2c6291d2358c4dcdbd9563ef432d58ad",
+    "validation_class": "virtual-device",
+    "physical_hardware": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "pre-input frame",
+      "status": "PASS",
+      "detail": "valid PNG; 0 of 76800 pixels nonblack; expected blank-start state"
+    },
+    {
+      "name": "center touch",
+      "status": "PASS",
+      "detail": "accepted; frame 57580743... changed to 94d84a52..."
+    },
+    {
+      "name": "drag input",
+      "status": "PASS",
+      "detail": "accepted; frame 94d84a52... changed to a52cbcac..."
+    },
+    {
+      "name": "final frame metrics",
+      "status": "PASS",
+      "detail": "320x240; 76800 of 76800 pixels nonblack; 2 colors; PNG 615 bytes"
+    },
+    {
+      "name": "application readiness",
+      "status": "PASS",
+      "detail": "initial_ready=false; input_unlocked_frame=true; ready_after_execution=true"
+    },
+    {
+      "name": "user firmware matrix tests",
+      "status": "PASS",
+      "detail": "28/28"
+    },
+    {
+      "name": "pull request CI",
+      "status": "PASS",
+      "detail": "4/4 checks on head 6b45ec86"
+    },
+    {
+      "name": "merge main CI",
+      "status": "PASS",
+      "detail": "run 41385483902; platform-contracts and network-namespace-policy succeeded"
+    },
+    {
+      "name": "security malware detection",
+      "status": "NOT RUN",
+      "detail": "static string review is not malware or trojan detection"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/frame-after-touch.png",
+    "evidence/frame-after-drag.png"
+  ],
+  "notes": [
+    "The app intentionally starts with a black canvas and renders after the first touch.",
+    "A low-color 320x240 PNG can be smaller than 1024 bytes even when every pixel is nonblack.",
+    "The repair retains the decoded nonblack-pixel requirement and only removes the misleading transport-size gate."
+  ]
+}
