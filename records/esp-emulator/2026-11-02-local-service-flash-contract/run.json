@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Local Device Service discovery and bootloader flash-capacity validation",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/76",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "6c9e17e1",
+    "merge_commit": "111cb472c0ed9eb50a9dbd419709f6c527955658"
+  },
+  "hardware": {},
+  "firmware": {
+    "original_sha256": "1df26101dcc9d4ad20146c06472eea2b9b2b674ab7a9ee32310ac34fbef1fd29",
+    "original_artifact_sha256": "052d7ef7046fa08f0b13422e761309928ef1989a97a6893b9a56c3580f0b0444",
+    "normalized_size": 8388608,
+    "bootloader_header_byte": "0x2f",
+    "bootloader_declared_flash_size": 4194304,
+    "partition_table_end": 8388608,
+    "corrected_bootloader_header_byte": "0x3f",
+    "corrected_artifact_sha256": "6811f6ece69fd212622f00bb68c19d33fb4b7f5aa92bd16ba86c757290ef9527",
+    "corrected_firmware_sha256": "dcc077318256cd390ddf19c21af87f6fc95e6bb27d61cdb89beda2fbdd8dd7fe"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.12, Chromium, isolated QEMU Device Service",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "full platform suite",
+      "status": "PASS",
+      "detail": "1727 tests passed, 10 skipped"
+    },
+    {
+      "name": "PR CI",
+      "status": "PASS",
+      "detail": "4/4 checks passed"
+    },
+    {
+      "name": "loopback same-origin auto-connect",
+      "status": "PASS",
+      "detail": "23 creatable devices; service status and device labels updated"
+    },
+    {
+      "name": "original firmware compose",
+      "status": "PASS",
+      "detail": "Rejected with 409 bootloader_flash_size_too_small before session allocation"
+    },
+    {
+      "name": "corrected bootloader virtual-device session",
+      "status": "PASS",
+      "detail": "Composition 201; QEMU session reached running without the partition-table error"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "No physical Cardputer-ADV execution in this task"
+    }
+  ],
+  "evidence": [
+    "evidence/validation-summary.json"
+  ],
+  "notes": [
+    "The original artifact is not repaired by padding; bootloader, partition table and application must be rebuilt for 8 MiB.",
+    "No physical-hardware, RF, electrical or mechanical equivalence is claimed."
+  ]
+}
