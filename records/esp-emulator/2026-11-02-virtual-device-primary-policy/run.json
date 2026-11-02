@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Make validated virtual devices the default validation gate",
+  "source": {
+    "issue": "user requested removal of Tab5 real-hardware prerequisites",
+    "pull_request": "#79",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "b6b8d6fe667ec4605be1bedac7498a78343f9abb",
+    "change_commit": "1dc1fe1be72e51254727241fa6751df4ac0163a5",
+    "merge_commit": "8dd390ff810032b3cbdf7c2d18fda4e97dade8bd"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "documentation and generated snapshot checks",
+    "task_id": "",
+    "session_id": "",
+    "validation_class": "documentation-contract",
+    "physical_hardware": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "global AGENTS audit",
+      "status": "PASS",
+      "detail": "no Tab5-specific hardware prerequisite; virtual devices already accepted"
+    },
+    {
+      "name": "Tab5 prerequisite removal",
+      "status": "PASS",
+      "detail": "real-hardware production-ready condition removed from deferred backlog"
+    },
+    {
+      "name": "project HW-01 removal",
+      "status": "PASS",
+      "detail": "removed from backlog, status, workstreams, engineering handoff and generated snapshot"
+    },
+    {
+      "name": "documentation contracts",
+      "status": "PASS",
+      "detail": "50/50"
+    },
+    {
+      "name": "project snapshot",
+      "status": "PASS",
+      "detail": "PROJECT_SNAPSHOT_OK"
+    },
+    {
+      "name": "diff check",
+      "status": "PASS",
+      "detail": "git diff --check"
+    },
+    {
+      "name": "PR checks",
+      "status": "PASS",
+      "detail": "4/4 on head 1dc1fe1b"
+    },
+    {
+      "name": "merge main CI",
+      "status": "PASS",
+      "detail": "run 41396758444; platform-contracts and network-namespace-policy succeeded"
+    },
+    {
+      "name": "QEMU/firmware execution",
+      "status": "NOT RUN",
+      "detail": "documentation-only change"
+    }
+  ],
+  "evidence": [
+    "evidence/validation-summary.json"
+  ],
+  "notes": [
+    "Validated virtual-device evidence is now the default functional/publication path.",
+    "Physical validation remains required only when the claim explicitly concerns physical properties.",
+    "Tab5's missing CSI, I2S/PCM, USB Host, SDIO, dynamic I2C and controller touch model gaps remain partial."
+  ]
+}

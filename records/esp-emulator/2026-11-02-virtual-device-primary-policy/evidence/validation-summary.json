@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "source_pull_request": 79,
+  "change_commit": "1dc1fe1be72e51254727241fa6751df4ac0163a5",
+  "merge_commit": "8dd390ff810032b3cbdf7c2d18fda4e97dade8bd",
+  "policy": {
+    "default_validation": "virtual-device validation",
+    "physical_validation": "claim-scoped",
+    "physical_properties_requiring_hardware": [
+      "RF",
+      "power",
+      "acoustics",
+      "optics",
+      "mechanics",
+      "electrical behavior"
+    ]
+  },
+  "removed_requirements": [
+    "Tab5 real-hardware validation before production-ready external claim",
+    "HW-01 representative-device same-firmware hardware test as a project P0"
+  ],
+  "global_agents": {
+    "path": "~/.codex/AGENTS.md",
+    "changed": false,
+    "already_accepts_validated_virtual_devices": true,
+    "has_tab5_specific_hardware_requirement": false
+  },
+  "checks": {
+    "docs_contracts": {
+      "tests": 50,
+      "passed": 50,
+      "status": "PASS"
+    },
+    "project_snapshot": "PASS",
+    "git_diff_check": "PASS",
+    "pull_request_checks": {
+      "passed": 4,
+      "total": 4,
+      "status": "PASS"
+    },
+    "merge_main_ci": {
+      "run_id": 41396758444,
+      "jobs_passed": 2,
+      "jobs_total": 2,
+      "status": "PASS"
+    },
+    "qemu": "NOT RUN",
+    "firmware": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "unchanged_boundaries": {
+    "tab5_peripheral_status": "partial",
+    "virtual_pass_is_not_physical_measurement": true,
+    "rf_power_optics_mechanics_acoustics_electrical_require_hardware_when_claimed": true
+  }
+}
