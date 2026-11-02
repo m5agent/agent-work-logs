@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "evidence_type": "derived summary",
+  "source_commit": "34c176f07812630ddfac3e8879208f35f00a0f1d",
+  "provenance": "Existing PR virtual-device regression evidence, rechecked during merge; this record does not claim a fresh guest run.",
+  "redaction": "No raw logs, host paths, endpoints, credentials or unique physical-device identifiers included.",
+  "devices": [
+    {
+      "schema_version": 1,
+      "date": "2026-11-02",
+      "scope": "virtual-device",
+      "hardware_validation": "NOT RUN",
+      "device": "atoms3u",
+      "machine": "m5atoms3u",
+      "firmware": {
+        "name": "UIFlow2.0 AtomS3U",
+        "version": "v2.5.4",
+        "firmware_id": "2099000000000000005",
+        "bytes": 8384512,
+        "sha256": "7b8742931a2f88015a3419ba7aee22dfa56abd2c17c742426289a890f715ce1a"
+      },
+      "runtime": {
+        "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+        "native_layers": "scripts/qemu-wasm-build/sources.lock.json through 0109 plus 0110-atoms3u-board",
+        "binary_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d"
+      },
+      "case": {
+        "runner": "tests/uiflow2/run_device_matrix.py --device atoms3u --flash-transport direct",
+        "status": "PASS",
+        "test_image_sha256": "f25500c3b8c5cfa130084c669e7542653f4fe4e383dec384b2e849fd4090d0c3",
+        "serial_markers": [
+          "ATOMS3U_BOOT_FLAG",
+          "ATOMS3U_MAIN_START",
+          "ATOMS3U_M5_BEGIN_OK",
+          "ATOMS3U_BOARD 138",
+          "ATOMS3U_RGB 0x204060"
+        ],
+        "board_id": 138
+      },
+      "qom_observations": {
+        "/machine/onboard_io": {
+          "led-frames": 4,
+          "led-rgb": 255,
+          "pressed": "false->true->false",
+          "input-events": 1
+        },
+        "/machine/rmt0": {
+          "tx-completions": 4,
+          "tx-symbols": 96,
+          "tx-errors": 0
+        }
+      },
+      "not_run": [
+        "IR GPIO12 data plane",
+        "SPM1423 PDM microphone capture",
+        "Grove G2/G1 Unit data planes",
+        "USB Type-A/CDC console",
+        "arbitrary third-party firmware",
+        "physical optics, acoustics and electrical behavior"
+      ],
+      "source_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/34c176f07812630ddfac3e8879208f35f00a0f1d/docs/evidence/2026-11-02-atoms3u-host/summary.json",
+      "evidence_origin": "Existing PR regression execution; no guest execution rerun by the merge task.",
+      "device_contract_status": "partial",
+      "runtime_group": "candidate"
+    },
+    {
+      "schema_version": 1,
+      "date": "2026-11-02",
+      "scope": "virtual-device",
+      "hardware_validation": "NOT RUN",
+      "device": "atom-echos3r",
+      "machine": "m5atomvoices3r",
+      "firmware": {
+        "name": "UIFlow2.0 Atom VoiceS3R",
+        "version": "v2.5.4",
+        "firmware_id": "1897200000000000775",
+        "bytes": 8384512,
+        "sha256": "9348083af8a30e23bd832822eb81c8af86de8ef0e3f683fbc6c801d78bd6cd7b"
+      },
+      "runtime": {
+        "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+        "native_layers": "scripts/qemu-wasm-build/sources.lock.json through 0109 plus 0110 and 0111",
+        "binary_sha256": "492e7e809a7600b0dcdbeb46eb8893e2a0958da288366e70d9b12e0efd9f4ffd"
+      },
+      "case": {
+        "runner": "tests/uiflow2/run_device_matrix.py --device atom-echos3r --flash-transport direct",
+        "status": "PASS",
+        "test_image_sha256": "079a72e36eae2f2a33541d683d3a65a65c0dfb8c8de109e8926478871fa631bc",
+        "serial_markers": [
+          "VOICES3R_BOOT_FLAG",
+          "VOICES3R_MAIN_START",
+          "VOICES3R_M5_BEGIN_OK",
+          "VOICES3R_BOARD 145",
+          "VOICES3R_SPEAKER_RUNNING 1",
+          "VOICES3R_STATUS ok",
+          "VOICES3R_AUDIO_WINDOW_DONE"
+        ],
+        "board_id": 145
+      },
+      "audio": {
+        "path": "official Speaker.begin()/tone(440,900) -> I2S1 TX DMA -> M5SW_I2S_PCM_FILE",
+        "pcm_bytes": 53248,
+        "pcm_nonzero_bytes": 52293,
+        "pcm_sha256": "7dccc5267cb862382178ef6526951e27350307ef605028ef3819a196ccd30c3b"
+      },
+      "not_run": [
+        "NS4150B amplifier enable GPIO18 and acoustic output",
+        "Voice Base IR GPIO47",
+        "MEMS microphone capture",
+        "Grove G2/G1 Unit data planes",
+        "USB Type-C/CDC console",
+        "arbitrary third-party firmware",
+        "physical acoustics, optics and electrical behavior"
+      ],
+      "source_url": "https://github.com/m5agent/m5stack-esp-emulator/blob/34c176f07812630ddfac3e8879208f35f00a0f1d/docs/evidence/2026-11-02-atom-echos3r-host/summary.json",
+      "evidence_origin": "Existing PR regression execution; no guest execution rerun by the merge task.",
+      "device_contract_status": "partial",
+      "runtime_group": "candidate"
+    }
+  ],
+  "head_ci": {
+    "status": "PASS",
+    "runs": [
+      {
+        "conclusion": "success",
+        "databaseId": 41403408938,
+        "event": "pull_request",
+        "headSha": "34c176f07812630ddfac3e8879208f35f00a0f1d",
+        "jobs": [
+          {
+            "databaseId": 125139995933,
+            "name": "network-namespace-policy",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "databaseId": 125139996205,
+            "name": "platform-contracts",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "status": "completed",
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41403408938",
+        "test_summaries": [
+          "2026-11-02T07:02:30.3740022Z Ran 1729 tests in 131.213s",
+          "2026-11-02T07:02:30.3740248Z OK (skipped=10)",
+          "2026-11-02T07:02:30.4899433Z QEMU_PROFILES_OK",
+          "2026-11-02T07:02:30.5247853Z PERIPHERAL_CATALOG_OK",
+          "2026-11-02T07:02:30.5823333Z RUNTIME_COVERAGE_OK",
+          "2026-11-02T07:02:31.0348537Z PROJECT_SNAPSHOT_OK",
+          "2026-11-02T07:02:40.8185051Z Ran 43 tests in 0.335s",
+          "2026-11-02T07:02:40.9618252Z Ran 10 tests in 0.031s",
+          "2026-11-02T07:02:41.0599357Z Ran 9 tests in 0.008s",
+          "2026-11-02T07:02:43.5202035Z Ran 22 tests in 2.350s",
+          "2026-11-02T07:02:43.5202300Z OK (skipped=1)",
+          "2026-11-02T07:02:46.6766735Z Ran 29 tests in 3.039s",
+          "2026-11-02T07:02:46.6767019Z OK (skipped=1)",
+          "2026-11-02T07:02:46.7988809Z Ran 8 tests in 0.004s",
+          "2026-11-02T07:02:49.7314276Z Ran 11 tests in 2.823s",
+          "2026-11-02T07:02:49.8658885Z Ran 11 tests in 0.016s",
+          "2026-11-02T07:02:49.9897497Z Ran 35 tests in 0.017s",
+          "2026-11-02T07:02:50.1275939Z Ran 16 tests in 0.030s",
+          "2026-11-02T07:02:50.1276276Z OK (skipped=1)"
+        ]
+      },
+      {
+        "conclusion": "success",
+        "databaseId": 41403398446,
+        "event": "push",
+        "headSha": "34c176f07812630ddfac3e8879208f35f00a0f1d",
+        "jobs": [
+          {
+            "databaseId": 125139962063,
+            "name": "platform-contracts",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "databaseId": 125139962278,
+            "name": "network-namespace-policy",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "status": "completed",
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41403398446",
+        "test_summaries": [
+          "2026-11-02T07:01:57.8744861Z Ran 1729 tests in 109.747s",
+          "2026-11-02T07:01:57.8745026Z OK (skipped=10)",
+          "2026-11-02T07:01:57.9722901Z QEMU_PROFILES_OK",
+          "2026-11-02T07:01:57.9982917Z PERIPHERAL_CATALOG_OK",
+          "2026-11-02T07:01:58.0395139Z RUNTIME_COVERAGE_OK",
+          "2026-11-02T07:01:58.3773682Z PROJECT_SNAPSHOT_OK",
+          "2026-11-02T07:02:05.9329586Z Ran 43 tests in 0.269s",
+          "2026-11-02T07:02:06.0574361Z Ran 10 tests in 0.031s",
+          "2026-11-02T07:02:06.1771296Z Ran 9 tests in 0.009s",
+          "2026-11-02T07:02:08.2096016Z Ran 22 tests in 1.935s",
+          "2026-11-02T07:02:08.2096244Z OK (skipped=1)",
+          "2026-11-02T07:02:10.7038103Z Ran 29 tests in 2.402s",
+          "2026-11-02T07:02:10.7038338Z OK (skipped=1)",
+          "2026-11-02T07:02:10.8035017Z Ran 8 tests in 0.003s",
+          "2026-11-02T07:02:13.2210003Z Ran 11 tests in 2.323s",
+          "2026-11-02T07:02:13.3326142Z Ran 11 tests in 0.012s",
+          "2026-11-02T07:02:13.4424158Z Ran 35 tests in 0.014s",
+          "2026-11-02T07:02:13.5602200Z Ran 16 tests in 0.025s",
+          "2026-11-02T07:02:13.5602398Z OK (skipped=1)"
+        ]
+      }
+    ],
+    "platform_test_counts": {
+      "total": 1729,
+      "passed": 1719,
+      "skipped": 10
+    },
+    "jobs_passed": 4
+  },
+  "merge": {
+    "commit": "930d7183e68f2e6abdca6803b10b42d3b82626d1",
+    "merged_at": "2026-11-02T07:03:13Z",
+    "strategy": "merge",
+    "tree": "744cbccec280e2f18a987eb505d1d9215bf2cb9b",
+    "head_tree": "744cbccec280e2f18a987eb505d1d9215bf2cb9b",
+    "head_merge_tree_equal": true,
+    "ci_status": "PASS",
+    "ci_run": 41403793498
+  },
+  "new_guest_execution": "NOT RUN",
+  "physical_hardware": "NOT RUN",
+  "artifact_consistency_recheck": {
+    "status": "PASS",
+    "observations": [
+      {
+        "device": "atoms3u",
+        "image_sha256": "f25500c3b8c5cfa130084c669e7542653f4fe4e383dec384b2e849fd4090d0c3",
+        "image_matches": true,
+        "markers": {
+          "ATOMS3U_BOOT_FLAG": true,
+          "ATOMS3U_MAIN_START": true,
+          "ATOMS3U_M5_BEGIN_OK": true,
+          "ATOMS3U_BOARD 138": true,
+          "ATOMS3U_RGB 0x204060": true
+        },
+        "serial_sha256": "af15d3359c5322dcaac743a24d9f396ef1e04d61260bf8d8afafca746195076c",
+        "serial_bytes": 410
+      },
+      {
+        "device": "atom-echos3r",
+        "image_sha256": "079a72e36eae2f2a33541d683d3a65a65c0dfb8c8de109e8926478871fa631bc",
+        "image_matches": true,
+        "markers": {
+          "VOICES3R_BOOT_FLAG": true,
+          "VOICES3R_MAIN_START": true,
+          "VOICES3R_M5_BEGIN_OK": true,
+          "VOICES3R_BOARD 145": true,
+          "VOICES3R_SPEAKER_RUNNING 1": true,
+          "VOICES3R_STATUS ok": true,
+          "VOICES3R_AUDIO_WINDOW_DONE": true
+        },
+        "serial_sha256": "724e53107a60f1ec71982fe203962af32b16989de6860c4e0cf4321248b4b633",
+        "serial_bytes": 999
+      },
+      {
+        "pcm_bytes": 53248,
+        "pcm_nonzero_bytes": 52293,
+        "pcm_sha256": "7dccc5267cb862382178ef6526951e27350307ef605028ef3819a196ccd30c3b"
+      },
+      {
+        "current_runtime_sha256": "4ca3e17d5c9317e7ccbd121a815e02c603790f4a9ce5f94bafe420a3e973f727"
+      }
+    ],
+    "runtime_boundary": "Current runtime binary differs from both recorded historical binaries. Historical runtime binaries were replaced; no rebuild or guest rerun occurred. Current binary is not substituted as the source of the historical execution."
+  },
+  "local_worktree": {
+    "fast_forward": "NOT RUN",
+    "reason": "Local main contains six pre-existing uncommitted files; all user changes preserved."
+  },
+  "merge_ci_metadata": {
+    "conclusion": "success",
+    "databaseId": 41403793498,
+    "event": "push",
+    "headSha": "930d7183e68f2e6abdca6803b10b42d3b82626d1",
+    "jobs": [
+      {
+        "databaseId": 125141171635,
+        "name": "network-namespace-policy",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "databaseId": 125141171999,
+        "name": "platform-contracts",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41403793498",
+    "test_summaries": [
+      "2026-11-02T07:06:03.9728948Z Ran 1729 tests in 138.351s",
+      "2026-11-02T07:06:03.9729336Z OK (skipped=10)",
+      "2026-11-02T07:06:04.0817362Z QEMU_PROFILES_OK",
+      "2026-11-02T07:06:04.1203136Z PERIPHERAL_CATALOG_OK",
+      "2026-11-02T07:06:04.1820282Z RUNTIME_COVERAGE_OK",
+      "2026-11-02T07:06:04.7466919Z PROJECT_SNAPSHOT_OK",
+      "2026-11-02T07:06:15.9394433Z Ran 43 tests in 0.466s",
+      "2026-11-02T07:06:16.0990068Z Ran 10 tests in 0.038s",
+      "2026-11-02T07:06:16.2046051Z Ran 9 tests in 0.010s",
+      "2026-11-02T07:06:19.2024269Z Ran 22 tests in 2.872s",
+      "2026-11-02T07:06:19.2024679Z OK (skipped=1)",
+      "2026-11-02T07:06:23.1192653Z Ran 29 tests in 3.786s",
+      "2026-11-02T07:06:23.1193012Z OK (skipped=1)",
+      "2026-11-02T07:06:23.2589824Z Ran 8 tests in 0.006s",
+      "2026-11-02T07:06:26.9657802Z Ran 11 tests in 3.581s",
+      "2026-11-02T07:06:27.1198048Z Ran 11 tests in 0.021s",
+      "2026-11-02T07:06:27.2726567Z Ran 35 tests in 0.024s",
+      "2026-11-02T07:06:27.4363392Z Ran 16 tests in 0.036s",
+      "2026-11-02T07:06:27.4363823Z OK (skipped=1)"
+    ]
+  }
+}

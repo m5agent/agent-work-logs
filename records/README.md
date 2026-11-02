@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-02 | `esp-emulator` | PR #80 AtomS3U / Atom VoiceS3R host integration | `PASS`（delivery：merge `930d7183`；head 4/4、main 2/2 CI；platform 1,719 PASS + 10 skip；既有 virtual-device 镜像/串口/PCM 回核；设备 partial/candidate，新 guest/物理硬件 NOT RUN） | [查看](esp-emulator/2026-11-02-pr80-visual-hosts-merge/) |
 | 2026-11-02 | `esp-emulator` | Virtual-device-first validation policy | `PASS`（documentation/contracts：删除 Tab5 real-hardware production prerequisite 和项目 `HW-01` P0；validated virtual device 成为默认功能/发布门禁；物理属性声明才按需使用 hardware validation；`50/50` docs tests、snapshot/diff PASS；PR #79 合并 `8dd390ff`；QEMU/firmware/hardware NOT RUN） | [查看](esp-emulator/2026-11-02-virtual-device-primary-policy/) |
 | 2026-11-02 | `esp-emulator` | Core2 交互应用空白首帧就绪判定 | `PASS`（virtual-device：公开固件 `fb69fa3c…` 输入前为有效黑屏 PNG；中心触摸与拖动均被接受并改变 frame；最终 `320x240`、`76,800/76,800` 非黑像素；矩阵 `28/28`；PR #78 合并 `b6b8d6fe`；物理硬件 NOT RUN） | [查看](esp-emulator/2026-11-02-core2-interactive-frame-readiness/) |
 | 2026-10-31 | `esp-emulator` | 同步 StackChan 居中显示模型与 Pages 发布 | `PASS`（virtual-device/browser-WASM：模型 pin `1373680d`；PR #74 合并 `929723b0`；完整 StackChan 舞蹈固件 `12/12`、23 个状态、30 个 SCS packet、577 帧与 Worker 清理通过；正式 Pages 回读 manifest/WASM/模型一致，LCD 本地 y=0、世界 y=8.25；物理硬件 NOT RUN） | [查看](esp-emulator/2026-10-31-stackchan-centered-model/) |

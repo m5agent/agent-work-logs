@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-02",
+  "kind": "pr_review",
+  "overall_status": "PASS",
+  "title": "PR #80 AtomS3U and Atom VoiceS3R host integration merge",
+  "source": {
+    "issue": "user requested merge",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/80",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "8dd390ff810032b3cbdf7c2d18fda4e97dade8bd",
+    "head_commit": "34c176f07812630ddfac3e8879208f35f00a0f1d",
+    "merge_commit": "930d7183e68f2e6abdca6803b10b42d3b82626d1",
+    "merged_at": "2026-11-02T07:03:13Z",
+    "head_tree": "744cbccec280e2f18a987eb505d1d9215bf2cb9b",
+    "merge_tree": "744cbccec280e2f18a987eb505d1d9215bf2cb9b"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "evidence_origin": "existing PR runs",
+    "devices": [
+      {
+        "device": "atoms3u",
+        "firmware": {
+          "name": "UIFlow2.0 AtomS3U",
+          "version": "v2.5.4",
+          "firmware_id": "2099000000000000005",
+          "bytes": 8384512,
+          "sha256": "7b8742931a2f88015a3419ba7aee22dfa56abd2c17c742426289a890f715ce1a"
+        },
+        "test_image_sha256": "f25500c3b8c5cfa130084c669e7542653f4fe4e383dec384b2e849fd4090d0c3"
+      },
+      {
+        "device": "atom-echos3r",
+        "firmware": {
+          "name": "UIFlow2.0 Atom VoiceS3R",
+          "version": "v2.5.4",
+          "firmware_id": "1897200000000000775",
+          "bytes": 8384512,
+          "sha256": "9348083af8a30e23bd832822eb81c8af86de8ef0e3f683fbc6c801d78bd6cd7b"
+        },
+        "test_image_sha256": "079a72e36eae2f2a33541d683d3a65a65c0dfb8c8de109e8926478871fa631bc"
+      }
+    ]
+  },
+  "execution": {
+    "environment": "GitHub pull-request merge and existing native-QEMU regression evidence recheck",
+    "validation_class": "virtual-device evidence recheck + delivery",
+    "task_id": "",
+    "session_id": "",
+    "new_guest_execution": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "existing virtual-device evidence review",
+      "status": "REVIEW",
+      "detail": "Device-local serial markers, RMT/GPIO and I2S TX DMA evidence exist for the exact official firmware and test-image hashes; direct regression runner results are attributed to the PR."
+    },
+    {
+      "name": "local original artifact consistency recheck",
+      "status": "PASS",
+      "detail": "Both test-image SHA-256 values and all 12 serial markers match; PCM matches 53,248 bytes / 52,293 nonzero bytes and its recorded SHA-256."
+    },
+    {
+      "name": "head CI",
+      "status": "PASS",
+      "runs": [
+        41403408938,
+        41403398446
+      ],
+      "detail": "Both runs completed successfully; 4/4 jobs. Platform suite: 1,729 total = 1,719 passed + 10 skipped."
+    },
+    {
+      "name": "remote merge",
+      "status": "PASS",
+      "detail": "Normal merge; head and merge trees identical."
+    },
+    {
+      "name": "merge main CI",
+      "status": "PASS",
+      "run": 41403793498,
+      "detail": "Both jobs succeeded; platform 1729 total = 1719 passed + 10 skipped; all four generator checks passed."
+    },
+    {
+      "name": "new guest execution",
+      "status": "NOT RUN",
+      "detail": "Merge task; existing unchanged PR execution evidence reused."
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "head and merge tree identity",
+      "status": "PASS",
+      "detail": "744cbccec280e2f18a987eb505d1d9215bf2cb9b"
+    }
+  ],
+  "evidence": [
+    "evidence/validation-summary.json"
+  ],
+  "notes": [
+    "Both host contracts remain partial and runtime coverage remains candidate.",
+    "No new patch or test firmware was created by the merge task.",
+    "No capability transfer to other hosts, firmware images or physical properties.",
+    "Historical runtime binaries were replaced. Current runtime hash differs; no guest rerun/rebuild and no runtime equivalence claim.",
+    "Local main was not fast-forwarded because it contains six pre-existing uncommitted files; user changes were not touched."
+  ]
+}
