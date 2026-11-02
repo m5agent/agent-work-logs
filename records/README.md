@@ -18,7 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
-| 2026-11-02 | nuxt-m5-docs | 13个开放Issue的源码修订与人工MR准备 | `REVIEW`（4提交/120文件；110页格式、8项新增测试PASS；设备/生产部署NOT RUN） | [查看](nuxt-m5-docs/2026-11-02-documentation-audit/followups/2026-11-02-source-fixes/) |
+| 2026-11-02 | nuxt-m5-docs | 13个开放Issue修订与人工MR !76交付 | `REVIEW`（4提交/120文件；MR !76 opened/mergeable；110页格式、8项新增测试PASS；设备/生产部署NOT RUN） | [查看](nuxt-m5-docs/2026-11-02-documentation-audit/followups/2026-11-02-source-fixes/) |
 | 2026-11-02 | nuxt-m5-docs | 全库文档审查与12组人工工单证据 | `REVIEW`（资料/API/HTTP；硬件和虚拟设备 NOT RUN；本批例外发布，12/12工单opened并回读） | [查看](nuxt-m5-docs/2026-11-02-documentation-audit/) |
 | 2026-11-02 | `esp-emulator` | PR #80 AtomS3U / Atom VoiceS3R host integration | `PASS`（delivery：merge `930d7183`；head 4/4、main 2/2 CI；platform 1,719 PASS + 10 skip；既有 virtual-device 镜像/串口/PCM 回核；设备 partial/candidate，新 guest/物理硬件 NOT RUN） | [查看](esp-emulator/2026-11-02-pr80-visual-hosts-merge/) |
 | 2026-11-02 | `esp-emulator` | Virtual-device-first validation policy | `PASS`（documentation/contracts：删除 Tab5 real-hardware production prerequisite 和项目 `HW-01` P0；validated virtual device 成为默认功能/发布门禁；物理属性声明才按需使用 hardware validation；`50/50` docs tests、snapshot/diff PASS；PR #79 合并 `8dd390ff`；QEMU/firmware/hardware NOT RUN） | [查看](esp-emulator/2026-11-02-virtual-device-primary-policy/) |

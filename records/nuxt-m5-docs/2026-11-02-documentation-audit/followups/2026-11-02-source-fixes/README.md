@@ -21,4 +21,8 @@
 
 ## 验证边界
 
-hardware validation与virtual-device validation均NOT RUN。完整Arduino/Nuxt构建、生产部署、知识库同步和线上问答复测未执行。全套知识库测试存在一个与原基线相同的旧PDF排除断言失败，详见报告。充电截止/BOM/档位映射和温度摄氏转换不填猜测值。MR交付将在后续记录回填；本记录不宣称所有issue已关闭。
+hardware validation与virtual-device validation均NOT RUN。完整Arduino/Nuxt构建、生产部署、知识库同步和线上问答复测未执行。全套知识库测试存在一个与原基线相同的旧PDF排除断言失败，详见报告。充电截止/BOM/档位映射和温度摄氏转换不填猜测值。MR !76 已创建并回读，120个文件diff完整、状态opened/mergeable；pipeline为skipped，未合并。本记录不宣称所有issue已关闭。
+
+## MR交付
+
+[脱敏交付摘要](evidence/mr-delivery-summary.json)记录源码SHA、完整文件数、描述哈希和可合并状态；内部跟踪链接不进入公开副本。

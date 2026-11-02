@@ -47,3 +47,7 @@
 ## 风险与回滚
 
 知识输入规则只影响两份特定摘要；列布局改变会明确失败，不猜列或静默改坏其他表。源文档只做人工审阅修订，未操作设备。可按4个逻辑提交分别回退；不自动关闭issue、不合并MR、不上线。公开记录省略内部跟踪地址、主机路径和凭据，只保留安全摘要、公开来源以及提交哈希。
+
+## MR交付后续
+
+MR !76 已创建，source为 `m5agent/fix-open-documentation-issues`，target为master，head为 `00eee6d573af4259e4fb9052b77ebef1dbe7b47e`。已回读标题/正文及120个文件diff，未截断，状态opened、mergeable；分支pipeline为skipped。没有合并或自动关闭issue。[交付摘要](evidence/mr-delivery-summary.json)保留此层PASS证据，设备/生产验收仍NOT RUN。
