@@ -1,0 +1,1711 @@
+{
+  "schema_version": 1,
+  "kind": "public-safe derived summary",
+  "date": "2026-11-04",
+  "validation": "virtual-device validation",
+  "campaign_status": "PARTIAL / in progress",
+  "scope": "Five selected board firmware system-runtime probe runs; observed invocation rows only.",
+  "source_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+  "independent_audit_identity": {
+    "bytes": 62610,
+    "sha256": "dafa42b3d57fc7cb2133f88959959f885f98ca0a0f9e3f90013ed1c1873e553b"
+  },
+  "counts": {
+    "PASS": 250,
+    "STATE_PASS": 5
+  },
+  "observed_rows_total": 255,
+  "count_rule": "Rows are observed assertions/invocations, not 255 unique APIs or full module/API coverage. Each run contains 49 distinct API names and includes repeated filesystem mount operations. STATE_PASS is separate from PASS.",
+  "row_template_rule": "One-based observed_rows indices refer to the exact common row template below; all five original serial streams were independently parsed and reconciled with it.",
+  "row_templates": [
+    {
+      "index": 1,
+      "api": "os.VfsFat.getcwd",
+      "oracle": "native RAM-backed filesystem directory state"
+    },
+    {
+      "index": 2,
+      "api": "os.VfsFat.mkdir",
+      "oracle": "new directory appears in independent native iterator"
+    },
+    {
+      "index": 3,
+      "api": "os.VfsFat.chdir",
+      "oracle": "subsequent relative I/O resolves inside selected directory"
+    },
+    {
+      "index": 4,
+      "api": "os.VfsFat",
+      "oracle": "original native filesystem formats/mounts and persists exact binary bytes through ordinary block protocol"
+    },
+    {
+      "index": 5,
+      "api": "os.VfsFat.mkfs",
+      "oracle": "original native filesystem formats/mounts and persists exact binary bytes through ordinary block protocol"
+    },
+    {
+      "index": 6,
+      "api": "os.VfsFat.open",
+      "oracle": "original native filesystem formats/mounts and persists exact binary bytes through ordinary block protocol"
+    },
+    {
+      "index": 7,
+      "api": "os.VfsFat.ilistdir",
+      "oracle": "native inode iterator sees actual written file"
+    },
+    {
+      "index": 8,
+      "api": "os.VfsFat.stat",
+      "oracle": "native file size equals independent fixture byte count"
+    },
+    {
+      "index": 9,
+      "api": "os.VfsFat.statvfs",
+      "oracle": "native filesystem capacity metadata"
+    },
+    {
+      "index": 10,
+      "api": "os.VfsFat.rename",
+      "oracle": "native renamed inode remains reachable"
+    },
+    {
+      "index": 11,
+      "api": "os.VfsFat.mount",
+      "oracle": "real remount preserves native filesystem bytes in independent RAM block storage"
+    },
+    {
+      "index": 12,
+      "api": "os.VfsFat.umount",
+      "oracle": "real remount preserves native filesystem bytes in independent RAM block storage"
+    },
+    {
+      "index": 13,
+      "api": "os.VfsFat.remove",
+      "oracle": "written native inode removed"
+    },
+    {
+      "index": 14,
+      "api": "os.VfsFat.rmdir",
+      "oracle": "empty native directory removed"
+    },
+    {
+      "index": 15,
+      "api": "os.mount",
+      "oracle": "global namespace routes actual file I/O into native RAM-backed VFS"
+    },
+    {
+      "index": 16,
+      "api": "os.umount",
+      "oracle": "unmounted filesystem disappears from global namespace"
+    },
+    {
+      "index": 17,
+      "api": "os.VfsLfs2.getcwd",
+      "oracle": "native RAM-backed filesystem directory state"
+    },
+    {
+      "index": 18,
+      "api": "os.VfsLfs2.mkdir",
+      "oracle": "new directory appears in independent native iterator"
+    },
+    {
+      "index": 19,
+      "api": "os.VfsLfs2.chdir",
+      "oracle": "subsequent relative I/O resolves inside selected directory"
+    },
+    {
+      "index": 20,
+      "api": "os.VfsLfs2",
+      "oracle": "original native filesystem formats/mounts and persists exact binary bytes through ordinary block protocol"
+    },
+    {
+      "index": 21,
+      "api": "os.VfsLfs2.mkfs",
+      "oracle": "original native filesystem formats/mounts and persists exact binary bytes through ordinary block protocol"
+    },
+    {
+      "index": 22,
+      "api": "os.VfsLfs2.open",
+      "oracle": "original native filesystem formats/mounts and persists exact binary bytes through ordinary block protocol"
+    },
+    {
+      "index": 23,
+      "api": "os.VfsLfs2.ilistdir",
+      "oracle": "native inode iterator sees actual written file"
+    },
+    {
+      "index": 24,
+      "api": "os.VfsLfs2.stat",
+      "oracle": "native file size equals independent fixture byte count"
+    },
+    {
+      "index": 25,
+      "api": "os.VfsLfs2.statvfs",
+      "oracle": "native filesystem capacity metadata"
+    },
+    {
+      "index": 26,
+      "api": "os.VfsLfs2.rename",
+      "oracle": "native renamed inode remains reachable"
+    },
+    {
+      "index": 27,
+      "api": "os.VfsLfs2.mount",
+      "oracle": "real remount preserves native filesystem bytes in independent RAM block storage"
+    },
+    {
+      "index": 28,
+      "api": "os.VfsLfs2.umount",
+      "oracle": "real remount preserves native filesystem bytes in independent RAM block storage"
+    },
+    {
+      "index": 29,
+      "api": "os.VfsLfs2.remove",
+      "oracle": "written native inode removed"
+    },
+    {
+      "index": 30,
+      "api": "os.VfsLfs2.rmdir",
+      "oracle": "empty native directory removed"
+    },
+    {
+      "index": 31,
+      "api": "os.mount",
+      "oracle": "global namespace routes actual file I/O into native RAM-backed VFS"
+    },
+    {
+      "index": 32,
+      "api": "os.umount",
+      "oracle": "unmounted filesystem disappears from global namespace"
+    },
+    {
+      "index": 33,
+      "api": "os.mkdir",
+      "oracle": "new persistent filesystem directory appears"
+    },
+    {
+      "index": 34,
+      "api": "os.chdir",
+      "oracle": "subsequent relative file I/O is rooted at requested directory"
+    },
+    {
+      "index": 35,
+      "api": "os.ilistdir",
+      "oracle": "actual flash file listed by native iterator"
+    },
+    {
+      "index": 36,
+      "api": "os.unlink",
+      "oracle": "actual flash inode removed through unlink alias"
+    },
+    {
+      "index": 37,
+      "api": "os.sync",
+      "oracle": "native filesystem flush returns after actual flash writes"
+    },
+    {
+      "index": 38,
+      "api": "os.rmdir",
+      "oracle": "native flash directory removed"
+    },
+    {
+      "index": 39,
+      "api": "os.uname",
+      "oracle": "runtime-provided machine identity names the selected board family"
+    },
+    {
+      "index": 40,
+      "api": "os.urandom",
+      "oracle": "independent native entropy calls have requested length and differing bytes; no cryptographic-quality claim"
+    },
+    {
+      "index": 41,
+      "api": "os.dupterm",
+      "oracle": "UART stream roundtrip or Core2 native-UART0 EPERM boundary is explicit; full reattach remains separate"
+    },
+    {
+      "index": 42,
+      "api": "select.select",
+      "oracle": "actual guest TCP payload makes receiver readable"
+    },
+    {
+      "index": 43,
+      "api": "select.poll",
+      "oracle": "native poll object detects actual guest TCP data"
+    },
+    {
+      "index": 44,
+      "api": "select.poll.register",
+      "oracle": "registered socket receives actual readiness event"
+    },
+    {
+      "index": 45,
+      "api": "select.poll.modify",
+      "oracle": "modified event mask retains actual pending payload readability"
+    },
+    {
+      "index": 46,
+      "api": "select.poll.poll",
+      "oracle": "actual TCP endpoint readiness reported"
+    },
+    {
+      "index": 47,
+      "api": "select.poll.ipoll",
+      "oracle": "iterator yields actual TCP readiness event"
+    },
+    {
+      "index": 48,
+      "api": "select.poll.unregister",
+      "oracle": "removed socket no longer appears despite unread actual bytes"
+    },
+    {
+      "index": 49,
+      "api": "sys.exit",
+      "oracle": "native exit control flow raises documented SystemExit code"
+    },
+    {
+      "index": 50,
+      "api": "sys.print_exception",
+      "oracle": "native traceback formatter writes exact exception into independent StringIO"
+    },
+    {
+      "index": 51,
+      "api": "bluetooth.UUID",
+      "oracle": "standard independent little-endian Bluetooth16-bit UUID vector"
+    }
+  ],
+  "runs": [
+    {
+      "case_alias": "system-runtime-01",
+      "board_model": "CoreS3",
+      "session_alias": "system-runtime-session-01",
+      "session_identity_sha256": "9562a3f6dded66e0c751d8f1c21d0e270db2ed9ecad2ef05de6abc40356c4f67",
+      "process_alias": "system-runtime-process-01",
+      "runtime": "qemu",
+      "validation": "virtual-device validation",
+      "receipt_integrity_status": "PASS",
+      "functional_scope": "PASS_OBSERVED_ROWS_ONLY",
+      "counts": {
+        "PASS": 50,
+        "STATE_PASS": 1
+      },
+      "observed_row_count": 51,
+      "unique_api_names_within_this_run": 49,
+      "observed_rows": [
+        [
+          1,
+          "PASS"
+        ],
+        [
+          2,
+          "PASS"
+        ],
+        [
+          3,
+          "PASS"
+        ],
+        [
+          4,
+          "PASS"
+        ],
+        [
+          5,
+          "PASS"
+        ],
+        [
+          6,
+          "PASS"
+        ],
+        [
+          7,
+          "PASS"
+        ],
+        [
+          8,
+          "PASS"
+        ],
+        [
+          9,
+          "PASS"
+        ],
+        [
+          10,
+          "PASS"
+        ],
+        [
+          11,
+          "PASS"
+        ],
+        [
+          12,
+          "PASS"
+        ],
+        [
+          13,
+          "PASS"
+        ],
+        [
+          14,
+          "PASS"
+        ],
+        [
+          15,
+          "PASS"
+        ],
+        [
+          16,
+          "PASS"
+        ],
+        [
+          17,
+          "PASS"
+        ],
+        [
+          18,
+          "PASS"
+        ],
+        [
+          19,
+          "PASS"
+        ],
+        [
+          20,
+          "PASS"
+        ],
+        [
+          21,
+          "PASS"
+        ],
+        [
+          22,
+          "PASS"
+        ],
+        [
+          23,
+          "PASS"
+        ],
+        [
+          24,
+          "PASS"
+        ],
+        [
+          25,
+          "PASS"
+        ],
+        [
+          26,
+          "PASS"
+        ],
+        [
+          27,
+          "PASS"
+        ],
+        [
+          28,
+          "PASS"
+        ],
+        [
+          29,
+          "PASS"
+        ],
+        [
+          30,
+          "PASS"
+        ],
+        [
+          31,
+          "PASS"
+        ],
+        [
+          32,
+          "PASS"
+        ],
+        [
+          33,
+          "PASS"
+        ],
+        [
+          34,
+          "PASS"
+        ],
+        [
+          35,
+          "PASS"
+        ],
+        [
+          36,
+          "PASS"
+        ],
+        [
+          37,
+          "PASS"
+        ],
+        [
+          38,
+          "PASS"
+        ],
+        [
+          39,
+          "PASS"
+        ],
+        [
+          40,
+          "PASS"
+        ],
+        [
+          41,
+          "STATE_PASS"
+        ],
+        [
+          42,
+          "PASS"
+        ],
+        [
+          43,
+          "PASS"
+        ],
+        [
+          44,
+          "PASS"
+        ],
+        [
+          45,
+          "PASS"
+        ],
+        [
+          46,
+          "PASS"
+        ],
+        [
+          47,
+          "PASS"
+        ],
+        [
+          48,
+          "PASS"
+        ],
+        [
+          49,
+          "PASS"
+        ],
+        [
+          50,
+          "PASS"
+        ],
+        [
+          51,
+          "PASS"
+        ]
+      ],
+      "state_only_contract": {
+        "api": "os.dupterm",
+        "status": "STATE_PASS",
+        "observed_value": "supported",
+        "limit": "Stream ownership/state observation only; full UART detach/reattach and every argument domain remain separate."
+      },
+      "source": {
+        "effective_probe_sha256": "d12b8ddc075b9bd1732a731393fdb1f71a884793a0b00de432afd0ce1f956332",
+        "report_source_sha256": "d12b8ddc075b9bd1732a731393fdb1f71a884793a0b00de432afd0ce1f956332",
+        "composed_main_sha256": "ac84824bc39d928d3070613e63bcd94002a39a01a398372d779b337b817ec605",
+        "composed_main_bytes": 9441,
+        "current_future_probe_sha256": "68c6e575d9a94478dc5c381ec693bba07a16dd1a080d9c1167106fea0a351a7c"
+      },
+      "reference_firmware": {
+        "bytes": 16121856,
+        "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264"
+      },
+      "effective_firmware": {
+        "bytes": 16777216,
+        "sha256": "faaad6d3400fe9ad4ecca4b4f5f16bb315123b5bb4dbbccd57d390655e13b72a"
+      },
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "evidence_zip": {
+        "bytes": 10947,
+        "sha256": "1b3a8047b77f58af186ff583b4d65bf7e4ae7be5c4891fedba3d6a3aa1c560d9"
+      },
+      "artifact_identities": {
+        "report": {
+          "bytes": 1541,
+          "sha256": "266b65b9d1c2ddd9b87012429c7f8d4f167d876538e618e300fa0800521fa1d5"
+        },
+        "selected_receipt": {
+          "bytes": 23561,
+          "sha256": "6213207b9f7bfa553314f8fd28a4d8a83984d8958d1511b5904343f18b6c61c1"
+        },
+        "created": {
+          "bytes": 2370,
+          "sha256": "066d216eb03e46401197affbc5df5a20811b2608d5106d4d975fcc227c630cb6"
+        },
+        "stopped": {
+          "bytes": 2577,
+          "sha256": "1a53fa556f7cb23a65cd0afc3f15450a7df1dbcf80044892ea0622d69b254216"
+        },
+        "serial": {
+          "bytes": 9398,
+          "sha256": "e3a58ab307ace02fb8d5dca6d1a77fcbe4560d9d214b1f9377c25e7c9a8ced63"
+        },
+        "request_timeline": {
+          "bytes": 53885,
+          "sha256": "61437db0bdafc6ab9f1dfb0422ee966fdc82fc4797f0368fafc843b0acaaf458"
+        }
+      },
+      "all_zip_member_sizes_and_hashes_verified": true,
+      "zip_file_set_exact": true,
+      "capture_completed_before_evidence": true,
+      "evidence_completed_before_stop": true,
+      "retained_terminal_identity_matches": true,
+      "bound_process_exit_verified": true,
+      "historical_recipe_caveat": {
+        "original_effective_source_sha256": "d12b8ddc075b9bd1732a731393fdb1f71a884793a0b00de432afd0ce1f956332",
+        "description": "This pilot changed both the board-name predicate and a Core2-only dupterm OSError predicate. The observed dupterm result was supported, so the extra exception branch was not executed. This exact source is retained and is not relabeled as the corrected future recipe.",
+        "actual_state_row": {
+          "api": "os.dupterm",
+          "status": "STATE_PASS",
+          "observed_value": "supported"
+        },
+        "original_failure_receipt": {
+          "bytes": 21534,
+          "sha256": "918b1b7ea5d38a9d705f6196c93e984cf2f191fe1a4976eb01823b4ce7feec41"
+        },
+        "preserved_failure_copy": {
+          "bytes": 21534,
+          "sha256": "918b1b7ea5d38a9d705f6196c93e984cf2f191fe1a4976eb01823b4ce7feec41"
+        },
+        "original_and_failure_copy_byte_identical": true,
+        "corrected_receipt_is_post_run_parser_only": true
+      }
+    },
+    {
+      "case_alias": "system-runtime-02",
+      "board_model": "Cardputer ADV",
+      "session_alias": "system-runtime-session-02",
+      "session_identity_sha256": "c75649b050498f651a837d6dbc3873f1277094c7c9d39458b47d89c2078013df",
+      "process_alias": "system-runtime-process-02",
+      "runtime": "qemu",
+      "validation": "virtual-device validation",
+      "receipt_integrity_status": "PASS",
+      "functional_scope": "PASS_OBSERVED_ROWS_ONLY",
+      "counts": {
+        "PASS": 50,
+        "STATE_PASS": 1
+      },
+      "observed_row_count": 51,
+      "unique_api_names_within_this_run": 49,
+      "observed_rows": [
+        [
+          1,
+          "PASS"
+        ],
+        [
+          2,
+          "PASS"
+        ],
+        [
+          3,
+          "PASS"
+        ],
+        [
+          4,
+          "PASS"
+        ],
+        [
+          5,
+          "PASS"
+        ],
+        [
+          6,
+          "PASS"
+        ],
+        [
+          7,
+          "PASS"
+        ],
+        [
+          8,
+          "PASS"
+        ],
+        [
+          9,
+          "PASS"
+        ],
+        [
+          10,
+          "PASS"
+        ],
+        [
+          11,
+          "PASS"
+        ],
+        [
+          12,
+          "PASS"
+        ],
+        [
+          13,
+          "PASS"
+        ],
+        [
+          14,
+          "PASS"
+        ],
+        [
+          15,
+          "PASS"
+        ],
+        [
+          16,
+          "PASS"
+        ],
+        [
+          17,
+          "PASS"
+        ],
+        [
+          18,
+          "PASS"
+        ],
+        [
+          19,
+          "PASS"
+        ],
+        [
+          20,
+          "PASS"
+        ],
+        [
+          21,
+          "PASS"
+        ],
+        [
+          22,
+          "PASS"
+        ],
+        [
+          23,
+          "PASS"
+        ],
+        [
+          24,
+          "PASS"
+        ],
+        [
+          25,
+          "PASS"
+        ],
+        [
+          26,
+          "PASS"
+        ],
+        [
+          27,
+          "PASS"
+        ],
+        [
+          28,
+          "PASS"
+        ],
+        [
+          29,
+          "PASS"
+        ],
+        [
+          30,
+          "PASS"
+        ],
+        [
+          31,
+          "PASS"
+        ],
+        [
+          32,
+          "PASS"
+        ],
+        [
+          33,
+          "PASS"
+        ],
+        [
+          34,
+          "PASS"
+        ],
+        [
+          35,
+          "PASS"
+        ],
+        [
+          36,
+          "PASS"
+        ],
+        [
+          37,
+          "PASS"
+        ],
+        [
+          38,
+          "PASS"
+        ],
+        [
+          39,
+          "PASS"
+        ],
+        [
+          40,
+          "PASS"
+        ],
+        [
+          41,
+          "STATE_PASS"
+        ],
+        [
+          42,
+          "PASS"
+        ],
+        [
+          43,
+          "PASS"
+        ],
+        [
+          44,
+          "PASS"
+        ],
+        [
+          45,
+          "PASS"
+        ],
+        [
+          46,
+          "PASS"
+        ],
+        [
+          47,
+          "PASS"
+        ],
+        [
+          48,
+          "PASS"
+        ],
+        [
+          49,
+          "PASS"
+        ],
+        [
+          50,
+          "PASS"
+        ],
+        [
+          51,
+          "PASS"
+        ]
+      ],
+      "state_only_contract": {
+        "api": "os.dupterm",
+        "status": "STATE_PASS",
+        "observed_value": "supported",
+        "limit": "Stream ownership/state observation only; full UART detach/reattach and every argument domain remain separate."
+      },
+      "source": {
+        "effective_probe_sha256": "1fef750b11ec4179b68fb676eec18b7912af7a368248a79ae847c0f0d1f6cc41",
+        "report_source_sha256": "1fef750b11ec4179b68fb676eec18b7912af7a368248a79ae847c0f0d1f6cc41",
+        "composed_main_sha256": "e5b8cac2b76c10e482c6dacb31e5e1baaa9c05530c4df9ba054a00ef45bcd473",
+        "composed_main_bytes": 9434,
+        "current_future_probe_sha256": "1fef750b11ec4179b68fb676eec18b7912af7a368248a79ae847c0f0d1f6cc41"
+      },
+      "reference_firmware": {
+        "bytes": 8384512,
+        "sha256": "a3961c8eda7358771c8e06c9160648e87ada973d23c6f71c9939b76fa973bed9"
+      },
+      "effective_firmware": {
+        "bytes": 8388608,
+        "sha256": "b00265b51d7efcb94c2e209550cbf52ddf657cdf62d4f6fd906811c0631890b7"
+      },
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "evidence_zip": {
+        "bytes": 11276,
+        "sha256": "4906e6288a743adc2039a57ca8fcce4f04cf1584ef5be2849288ec4b9f3ee45c"
+      },
+      "artifact_identities": {
+        "report": {
+          "bytes": 1548,
+          "sha256": "581604383e9e1a6d4ef32179415020c113e089d4c8c5943788cd16cc7612f19f"
+        },
+        "selected_receipt": {
+          "bytes": 22626,
+          "sha256": "6a3dc2c176ed1191ccc3f0ac3c4d29bc871a963c40f2ed76c4ca9246b92958a0"
+        },
+        "created": {
+          "bytes": 2374,
+          "sha256": "84c540548a5b41401116d2f80c7643f41110ed4d485d7e35fe795464aecace41"
+        },
+        "stopped": {
+          "bytes": 2580,
+          "sha256": "2abec4630abd36f431a92e1e419aed7b59e81a553b1a8bcb759ad11dd3105b77"
+        },
+        "serial": {
+          "bytes": 9414,
+          "sha256": "d2c62c3b627443a31043c8f362e3083458f681556545d6ad4f3c922f4b511e51"
+        },
+        "request_timeline": {
+          "bytes": 55454,
+          "sha256": "16e1879ab64e631093c8d73244e1504621a2054f9947c717cca3d61212694f10"
+        }
+      },
+      "all_zip_member_sizes_and_hashes_verified": true,
+      "zip_file_set_exact": true,
+      "capture_completed_before_evidence": true,
+      "evidence_completed_before_stop": true,
+      "retained_terminal_identity_matches": true,
+      "bound_process_exit_verified": true
+    },
+    {
+      "case_alias": "system-runtime-03",
+      "board_model": "StopWatch",
+      "session_alias": "system-runtime-session-03",
+      "session_identity_sha256": "6bce58a7caf4a2f6624b3c1e80f0a4c77914d70f5babc6e62feb4ae433739b7c",
+      "process_alias": "system-runtime-process-03",
+      "runtime": "qemu",
+      "validation": "virtual-device validation",
+      "receipt_integrity_status": "PASS",
+      "functional_scope": "PASS_OBSERVED_ROWS_ONLY",
+      "counts": {
+        "PASS": 50,
+        "STATE_PASS": 1
+      },
+      "observed_row_count": 51,
+      "unique_api_names_within_this_run": 49,
+      "observed_rows": [
+        [
+          1,
+          "PASS"
+        ],
+        [
+          2,
+          "PASS"
+        ],
+        [
+          3,
+          "PASS"
+        ],
+        [
+          4,
+          "PASS"
+        ],
+        [
+          5,
+          "PASS"
+        ],
+        [
+          6,
+          "PASS"
+        ],
+        [
+          7,
+          "PASS"
+        ],
+        [
+          8,
+          "PASS"
+        ],
+        [
+          9,
+          "PASS"
+        ],
+        [
+          10,
+          "PASS"
+        ],
+        [
+          11,
+          "PASS"
+        ],
+        [
+          12,
+          "PASS"
+        ],
+        [
+          13,
+          "PASS"
+        ],
+        [
+          14,
+          "PASS"
+        ],
+        [
+          15,
+          "PASS"
+        ],
+        [
+          16,
+          "PASS"
+        ],
+        [
+          17,
+          "PASS"
+        ],
+        [
+          18,
+          "PASS"
+        ],
+        [
+          19,
+          "PASS"
+        ],
+        [
+          20,
+          "PASS"
+        ],
+        [
+          21,
+          "PASS"
+        ],
+        [
+          22,
+          "PASS"
+        ],
+        [
+          23,
+          "PASS"
+        ],
+        [
+          24,
+          "PASS"
+        ],
+        [
+          25,
+          "PASS"
+        ],
+        [
+          26,
+          "PASS"
+        ],
+        [
+          27,
+          "PASS"
+        ],
+        [
+          28,
+          "PASS"
+        ],
+        [
+          29,
+          "PASS"
+        ],
+        [
+          30,
+          "PASS"
+        ],
+        [
+          31,
+          "PASS"
+        ],
+        [
+          32,
+          "PASS"
+        ],
+        [
+          33,
+          "PASS"
+        ],
+        [
+          34,
+          "PASS"
+        ],
+        [
+          35,
+          "PASS"
+        ],
+        [
+          36,
+          "PASS"
+        ],
+        [
+          37,
+          "PASS"
+        ],
+        [
+          38,
+          "PASS"
+        ],
+        [
+          39,
+          "PASS"
+        ],
+        [
+          40,
+          "PASS"
+        ],
+        [
+          41,
+          "STATE_PASS"
+        ],
+        [
+          42,
+          "PASS"
+        ],
+        [
+          43,
+          "PASS"
+        ],
+        [
+          44,
+          "PASS"
+        ],
+        [
+          45,
+          "PASS"
+        ],
+        [
+          46,
+          "PASS"
+        ],
+        [
+          47,
+          "PASS"
+        ],
+        [
+          48,
+          "PASS"
+        ],
+        [
+          49,
+          "PASS"
+        ],
+        [
+          50,
+          "PASS"
+        ],
+        [
+          51,
+          "PASS"
+        ]
+      ],
+      "state_only_contract": {
+        "api": "os.dupterm",
+        "status": "STATE_PASS",
+        "observed_value": "supported",
+        "limit": "Stream ownership/state observation only; full UART detach/reattach and every argument domain remain separate."
+      },
+      "source": {
+        "effective_probe_sha256": "7198310e4eb6f3b173abbc95fbfa574c736bf478dfbdb4b86cc46ad632547582",
+        "report_source_sha256": "7198310e4eb6f3b173abbc95fbfa574c736bf478dfbdb4b86cc46ad632547582",
+        "composed_main_sha256": "73066b462eafb5c9aed4e085b1c4bdab7490deee0aeae8bd2513d10cd3b04ac0",
+        "composed_main_bytes": 9434,
+        "current_future_probe_sha256": "7198310e4eb6f3b173abbc95fbfa574c736bf478dfbdb4b86cc46ad632547582"
+      },
+      "reference_firmware": {
+        "bytes": 16773120,
+        "sha256": "99d6482befe094de47bf68ce43618d3868bd62fb1fc72f0b55c0d0c2ea4e7f8d"
+      },
+      "effective_firmware": {
+        "bytes": 16777216,
+        "sha256": "dfc2b710b959e36678a22cd3dd4eb4071505d5139e433a070b3ee78d5a3e9651"
+      },
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "evidence_zip": {
+        "bytes": 10486,
+        "sha256": "a30e410f5054fa0293835b8bbfb5f057fbf0343a5f56cada9da40379cae4e314"
+      },
+      "artifact_identities": {
+        "report": {
+          "bytes": 1544,
+          "sha256": "1db91e442212ecba0478c539475f00ccd5bb9f53643cc14e77298461fa84378f"
+        },
+        "selected_receipt": {
+          "bytes": 22521,
+          "sha256": "ec5f95f18a0991fa340598ae76e91d6e6c54399315714c7a4246ffecfb76be48"
+        },
+        "created": {
+          "bytes": 2365,
+          "sha256": "9206311be280f99eb7b0785c68b56c625aaf388c22a38a8f420d6c58c3944257"
+        },
+        "stopped": {
+          "bytes": 2572,
+          "sha256": "ce6ecd74abefbac81ad90b8f0e1a784f235fe68837a12160f51fe082f2c8a1ed"
+        },
+        "serial": {
+          "bytes": 9410,
+          "sha256": "462b851b9268ab5890fbe97dc9bfd81bede1dbad93aeabfa38296e613c1678c6"
+        },
+        "request_timeline": {
+          "bytes": 63349,
+          "sha256": "9f5f01f0b2346318dbedf742ac1ffc169fc60a4c420056d5bad9bcc8e2e3f0ab"
+        }
+      },
+      "all_zip_member_sizes_and_hashes_verified": true,
+      "zip_file_set_exact": true,
+      "capture_completed_before_evidence": true,
+      "evidence_completed_before_stop": true,
+      "retained_terminal_identity_matches": true,
+      "bound_process_exit_verified": true
+    },
+    {
+      "case_alias": "system-runtime-04",
+      "board_model": "StickS3",
+      "session_alias": "system-runtime-session-04",
+      "session_identity_sha256": "08aae7a9e4c4e7ea65d7fd749efbf2dda4370b5cb70814547e4882b31b8a4734",
+      "process_alias": "system-runtime-process-04",
+      "runtime": "qemu",
+      "validation": "virtual-device validation",
+      "receipt_integrity_status": "PASS",
+      "functional_scope": "PASS_OBSERVED_ROWS_ONLY",
+      "counts": {
+        "PASS": 50,
+        "STATE_PASS": 1
+      },
+      "observed_row_count": 51,
+      "unique_api_names_within_this_run": 49,
+      "observed_rows": [
+        [
+          1,
+          "PASS"
+        ],
+        [
+          2,
+          "PASS"
+        ],
+        [
+          3,
+          "PASS"
+        ],
+        [
+          4,
+          "PASS"
+        ],
+        [
+          5,
+          "PASS"
+        ],
+        [
+          6,
+          "PASS"
+        ],
+        [
+          7,
+          "PASS"
+        ],
+        [
+          8,
+          "PASS"
+        ],
+        [
+          9,
+          "PASS"
+        ],
+        [
+          10,
+          "PASS"
+        ],
+        [
+          11,
+          "PASS"
+        ],
+        [
+          12,
+          "PASS"
+        ],
+        [
+          13,
+          "PASS"
+        ],
+        [
+          14,
+          "PASS"
+        ],
+        [
+          15,
+          "PASS"
+        ],
+        [
+          16,
+          "PASS"
+        ],
+        [
+          17,
+          "PASS"
+        ],
+        [
+          18,
+          "PASS"
+        ],
+        [
+          19,
+          "PASS"
+        ],
+        [
+          20,
+          "PASS"
+        ],
+        [
+          21,
+          "PASS"
+        ],
+        [
+          22,
+          "PASS"
+        ],
+        [
+          23,
+          "PASS"
+        ],
+        [
+          24,
+          "PASS"
+        ],
+        [
+          25,
+          "PASS"
+        ],
+        [
+          26,
+          "PASS"
+        ],
+        [
+          27,
+          "PASS"
+        ],
+        [
+          28,
+          "PASS"
+        ],
+        [
+          29,
+          "PASS"
+        ],
+        [
+          30,
+          "PASS"
+        ],
+        [
+          31,
+          "PASS"
+        ],
+        [
+          32,
+          "PASS"
+        ],
+        [
+          33,
+          "PASS"
+        ],
+        [
+          34,
+          "PASS"
+        ],
+        [
+          35,
+          "PASS"
+        ],
+        [
+          36,
+          "PASS"
+        ],
+        [
+          37,
+          "PASS"
+        ],
+        [
+          38,
+          "PASS"
+        ],
+        [
+          39,
+          "PASS"
+        ],
+        [
+          40,
+          "PASS"
+        ],
+        [
+          41,
+          "STATE_PASS"
+        ],
+        [
+          42,
+          "PASS"
+        ],
+        [
+          43,
+          "PASS"
+        ],
+        [
+          44,
+          "PASS"
+        ],
+        [
+          45,
+          "PASS"
+        ],
+        [
+          46,
+          "PASS"
+        ],
+        [
+          47,
+          "PASS"
+        ],
+        [
+          48,
+          "PASS"
+        ],
+        [
+          49,
+          "PASS"
+        ],
+        [
+          50,
+          "PASS"
+        ],
+        [
+          51,
+          "PASS"
+        ]
+      ],
+      "state_only_contract": {
+        "api": "os.dupterm",
+        "status": "STATE_PASS",
+        "observed_value": "supported",
+        "limit": "Stream ownership/state observation only; full UART detach/reattach and every argument domain remain separate."
+      },
+      "source": {
+        "effective_probe_sha256": "0fa15179054dae966974decc71d4f1852769f6e4f7f68a7fccfdffa8de937f98",
+        "report_source_sha256": "0fa15179054dae966974decc71d4f1852769f6e4f7f68a7fccfdffa8de937f98",
+        "composed_main_sha256": "e0e9cba35b3cd3559f28f28fb4b9e009ea58917490b5377ef11edd8bb16b5d03",
+        "composed_main_bytes": 9432,
+        "current_future_probe_sha256": "0fa15179054dae966974decc71d4f1852769f6e4f7f68a7fccfdffa8de937f98"
+      },
+      "reference_firmware": {
+        "bytes": 8384512,
+        "sha256": "c08196024019273ccadee9b4b3da303567f7ab206fa14edd1af283f04f6e98d8"
+      },
+      "effective_firmware": {
+        "bytes": 8388608,
+        "sha256": "eb324dc1437e44fd405b43cfaad3cd67d3f03899a860eaae576e1ee20eda07bd"
+      },
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "evidence_zip": {
+        "bytes": 10605,
+        "sha256": "6ea0b8f6d5587cee19c7e44a2a2d3bd783302a13e3c9b3b579564f2ea5d41fe5"
+      },
+      "artifact_identities": {
+        "report": {
+          "bytes": 1541,
+          "sha256": "4a59028f8150db2130e6957adac259e60ef57f6945b9941a2c421fe0f48170c9"
+        },
+        "selected_receipt": {
+          "bytes": 22487,
+          "sha256": "2fcac62e6a482a9cb0489bdeb696cb96e595b4af107abcb5d6fca415c24b6b2c"
+        },
+        "created": {
+          "bytes": 2362,
+          "sha256": "4aea710d8a9711d0d2596b65800e372bc46a7d38f1019cf860f9d41346d2ee81"
+        },
+        "stopped": {
+          "bytes": 2568,
+          "sha256": "bac14c45ae0edf47f6c6ea2c0eb53ea7d053e35c3a890150f6bb2f8d3ab43466"
+        },
+        "serial": {
+          "bytes": 9416,
+          "sha256": "daa870244b04270f2e221b6a01e0a4edc928f4a1ffe7e3da3b63f3283ab36eac"
+        },
+        "request_timeline": {
+          "bytes": 61241,
+          "sha256": "3dda0dd39ed0d6912c52d8206497b70a8c881393041cbfd5c5dcba5029b30156"
+        }
+      },
+      "all_zip_member_sizes_and_hashes_verified": true,
+      "zip_file_set_exact": true,
+      "capture_completed_before_evidence": true,
+      "evidence_completed_before_stop": true,
+      "retained_terminal_identity_matches": true,
+      "bound_process_exit_verified": true
+    },
+    {
+      "case_alias": "system-runtime-05",
+      "board_model": "Core2",
+      "session_alias": "system-runtime-session-05",
+      "session_identity_sha256": "9b6df398419cfe60f728e4f1c632d3c34cd5c67fc0beab567f7669af715b7e8a",
+      "process_alias": "system-runtime-process-05",
+      "runtime": "qemu",
+      "validation": "virtual-device validation",
+      "receipt_integrity_status": "PASS",
+      "functional_scope": "PASS_OBSERVED_ROWS_ONLY",
+      "counts": {
+        "PASS": 50,
+        "STATE_PASS": 1
+      },
+      "observed_row_count": 51,
+      "unique_api_names_within_this_run": 49,
+      "observed_rows": [
+        [
+          1,
+          "PASS"
+        ],
+        [
+          2,
+          "PASS"
+        ],
+        [
+          3,
+          "PASS"
+        ],
+        [
+          4,
+          "PASS"
+        ],
+        [
+          5,
+          "PASS"
+        ],
+        [
+          6,
+          "PASS"
+        ],
+        [
+          7,
+          "PASS"
+        ],
+        [
+          8,
+          "PASS"
+        ],
+        [
+          9,
+          "PASS"
+        ],
+        [
+          10,
+          "PASS"
+        ],
+        [
+          11,
+          "PASS"
+        ],
+        [
+          12,
+          "PASS"
+        ],
+        [
+          13,
+          "PASS"
+        ],
+        [
+          14,
+          "PASS"
+        ],
+        [
+          15,
+          "PASS"
+        ],
+        [
+          16,
+          "PASS"
+        ],
+        [
+          17,
+          "PASS"
+        ],
+        [
+          18,
+          "PASS"
+        ],
+        [
+          19,
+          "PASS"
+        ],
+        [
+          20,
+          "PASS"
+        ],
+        [
+          21,
+          "PASS"
+        ],
+        [
+          22,
+          "PASS"
+        ],
+        [
+          23,
+          "PASS"
+        ],
+        [
+          24,
+          "PASS"
+        ],
+        [
+          25,
+          "PASS"
+        ],
+        [
+          26,
+          "PASS"
+        ],
+        [
+          27,
+          "PASS"
+        ],
+        [
+          28,
+          "PASS"
+        ],
+        [
+          29,
+          "PASS"
+        ],
+        [
+          30,
+          "PASS"
+        ],
+        [
+          31,
+          "PASS"
+        ],
+        [
+          32,
+          "PASS"
+        ],
+        [
+          33,
+          "PASS"
+        ],
+        [
+          34,
+          "PASS"
+        ],
+        [
+          35,
+          "PASS"
+        ],
+        [
+          36,
+          "PASS"
+        ],
+        [
+          37,
+          "PASS"
+        ],
+        [
+          38,
+          "PASS"
+        ],
+        [
+          39,
+          "PASS"
+        ],
+        [
+          40,
+          "PASS"
+        ],
+        [
+          41,
+          "STATE_PASS"
+        ],
+        [
+          42,
+          "PASS"
+        ],
+        [
+          43,
+          "PASS"
+        ],
+        [
+          44,
+          "PASS"
+        ],
+        [
+          45,
+          "PASS"
+        ],
+        [
+          46,
+          "PASS"
+        ],
+        [
+          47,
+          "PASS"
+        ],
+        [
+          48,
+          "PASS"
+        ],
+        [
+          49,
+          "PASS"
+        ],
+        [
+          50,
+          "PASS"
+        ],
+        [
+          51,
+          "PASS"
+        ]
+      ],
+      "state_only_contract": {
+        "api": "os.dupterm",
+        "status": "STATE_PASS",
+        "observed_value": "supported",
+        "limit": "Stream ownership/state observation only; full UART detach/reattach and every argument domain remain separate."
+      },
+      "source": {
+        "effective_probe_sha256": "f33da43ff32879398266af66ad2b7228ae78ee292b5a044d4a5b690c7179d092",
+        "report_source_sha256": "f33da43ff32879398266af66ad2b7228ae78ee292b5a044d4a5b690c7179d092",
+        "composed_main_sha256": "b2c119e1fafb7806497944a0f78b68ef7e26a76ba29eaab6d67bd228f100d3e0",
+        "composed_main_bytes": 9430,
+        "current_future_probe_sha256": "f33da43ff32879398266af66ad2b7228ae78ee292b5a044d4a5b690c7179d092"
+      },
+      "reference_firmware": {
+        "bytes": 16773120,
+        "sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+      },
+      "effective_firmware": {
+        "bytes": 16777216,
+        "sha256": "22272d52b525f8d269dd4c0cad63ce439f043c720c5a2bf2c1ba1a5df22e301a"
+      },
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "evidence_zip": {
+        "bytes": 11333,
+        "sha256": "4c4d7f46be9e5bb4f41d7640f15713e9ad6e23ca9a637a68ea20488376188c07"
+      },
+      "artifact_identities": {
+        "report": {
+          "bytes": 1540,
+          "sha256": "03b694b43c285cefb5675765bdfad69316ceb9a9988ecff2403562d91eb342d8"
+        },
+        "selected_receipt": {
+          "bytes": 22579,
+          "sha256": "74cf7b69f9a38efc6ec5228b5a27b01008cacf61f6c183938d6bf8c4b617c601"
+        },
+        "created": {
+          "bytes": 2364,
+          "sha256": "daf27528e9deb591a528d856c8b56001c03703a75b35338d62d4cab6c452aeb3"
+        },
+        "stopped": {
+          "bytes": 2634,
+          "sha256": "f8a42ba9a54b8a7959c166f5d3878b5d9478351a61af14e02ececbd3a554101e"
+        },
+        "serial": {
+          "bytes": 9653,
+          "sha256": "b725ea1301c2b3cc9090b9251e01bbd3c65a288f7d3fac8d710ab06a3aca3d38"
+        },
+        "request_timeline": {
+          "bytes": 59547,
+          "sha256": "c2ab23600f1a8b0a8f42940933b9340cbee1341a4129ea0d134eaabc102221b0"
+        }
+      },
+      "all_zip_member_sizes_and_hashes_verified": true,
+      "zip_file_set_exact": true,
+      "capture_completed_before_evidence": true,
+      "evidence_completed_before_stop": true,
+      "retained_terminal_identity_matches": true,
+      "bound_process_exit_verified": true
+    }
+  ],
+  "semantic_limits": [
+    "RAM-backed FAT/LittleFS probes verify native filesystem algorithms through ordinary block interfaces, not a physical SD controller.",
+    "Flash file I/O, TCP readiness, UUID vector, exception formatting and requested-length/different-byte entropy checks cover only their explicit recipe domains.",
+    "Entropy variation does not establish cryptographic quality; UUID construction does not establish BLE controller/radio operation.",
+    "The five os.dupterm observations remain STATE_PASS; they do not close full UART lifecycle or reattachment.",
+    "No display/input or physical-property PASS is inferred from a frame or from this system-only probe.",
+    "All host endpoints, host paths, process numbers and raw session/device identifiers are omitted."
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "kind": "public-safe derived summary",
+  "date": "2026-11-04",
+  "validation": "virtual-device validation",
+  "campaign_status": "PARTIAL / in progress",
+  "case_alias": "http-protocol-01",
+  "board_model": "CoreS3",
+  "session_alias": "http-protocol-session-01",
+  "session_identity_sha256": "a45163ec18e3ea361b8f889b6bbc29a310b743a5acc29ba38a5ec09514192cf9",
+  "process_alias": "http-protocol-process-01",
+  "runtime": "qemu-wifi",
+  "library_lane": "stock-frozen",
+  "firmware_lane": "stock-frozen",
+  "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+  "source": {
+    "effective_probe_sha256": "220dad62058390e02d9fd72a12b72f3bb02fc64c8ee61f149675d4e77829faea",
+    "composed_main_sha256": "e1985f48afb3dcb4e8203523c8f1cf7e0f9db01fb6464e16f8a5e3aafdfb34b7",
+    "composed_main_bytes": 4120
+  },
+  "reference_firmware": {
+    "bytes": 16121856,
+    "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264"
+  },
+  "effective_firmware": {
+    "bytes": 16777216,
+    "sha256": "875bf8835f3e7e6a92794fa8832de36ba0a2ccf6a7455a5f4495a353ae568ad0"
+  },
+  "evidence_zip": {
+    "bytes": 15732,
+    "sha256": "aef5d5767ef6de3b6f91aab87dee2face659df47a3b1993b6409f7071ddff9ec"
+  },
+  "independent_audit_identity": {
+    "bytes": 62610,
+    "sha256": "dafa42b3d57fc7cb2133f88959959f885f98ca0a0f9e3f90013ed1c1873e553b"
+  },
+  "actual_protocol_results_identity": {
+    "bytes": 18810,
+    "sha256": "85d7a002bd8f5a3416f582b443534ac3b7f30a732d4af39d5085b17f547982e5"
+  },
+  "actual_row_counts": {
+    "PASS": 15,
+    "FAIL": 1
+  },
+  "actual_protocol_functional_status": "FAIL",
+  "actual_row_count": 16,
+  "rows": [
+    {
+      "ordinal": 1,
+      "api": "requests2.get",
+      "status": "PASS",
+      "oracle": "controlled peer received actual HTTP method and returned matching JSON",
+      "observed_value": "GET",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 2,
+      "api": "requests2.head",
+      "status": "PASS",
+      "oracle": "controlled peer received actual HTTP method and returned matching JSON",
+      "observed_value": "HEAD",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 3,
+      "api": "requests2.post",
+      "status": "PASS",
+      "oracle": "controlled peer received actual HTTP method and returned matching JSON",
+      "observed_value": "POST",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 4,
+      "api": "requests2.put",
+      "status": "PASS",
+      "oracle": "controlled peer received actual HTTP method and returned matching JSON",
+      "observed_value": "PUT",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 5,
+      "api": "requests2.patch",
+      "status": "PASS",
+      "oracle": "controlled peer received actual HTTP method and returned matching JSON",
+      "observed_value": "PATCH",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 6,
+      "api": "requests2.delete",
+      "status": "PASS",
+      "oracle": "controlled peer received actual HTTP method and returned matching JSON",
+      "observed_value": "DELETE",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 7,
+      "api": "requests2.request",
+      "status": "PASS",
+      "oracle": "actual request JSON bytes parsed by controlled peer",
+      "observed_value": "POST",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 8,
+      "api": "requests2.Response",
+      "status": "PASS",
+      "oracle": "instance created from actual socket HTTP response",
+      "observed_value": "Response",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 9,
+      "api": "requests2.Response.status_code",
+      "status": "PASS",
+      "oracle": "wire HTTP status line",
+      "observed_value": 200,
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 10,
+      "api": "requests2.Response.headers",
+      "status": "PASS",
+      "oracle": "actual peer response header",
+      "observed_value": "yes",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 11,
+      "api": "requests2.Response.content",
+      "status": "PASS",
+      "oracle": "actual body bytes cached after socket read",
+      "observed_value": 29,
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 12,
+      "api": "requests2.Response.text",
+      "status": "PASS",
+      "oracle": "UTF8 decode of actual HTTP body",
+      "observed_value": "{\"method\": \"GET\", \"body\": \"\"}",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 13,
+      "api": "requests2.Response.json",
+      "status": "PASS",
+      "oracle": "JSON decode of actual HTTP body",
+      "observed_value": "GET",
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 14,
+      "api": "requests2.Response.close",
+      "status": "PASS",
+      "oracle": "socket closed and next request remains usable",
+      "observed_value": true,
+      "required_evidence_met": true
+    },
+    {
+      "ordinal": 15,
+      "api": "requests2.urlencode",
+      "status": "FAIL",
+      "oracle": "reserved and UTF8 form fields roundtrip through standard peer form decoder",
+      "observed_value": false,
+      "required_evidence_met": false
+    },
+    {
+      "ordinal": 16,
+      "api": "requests2.request.data_file",
+      "status": "PASS",
+      "oracle": "official file-object upload path sends complete bytes to peer",
+      "observed_value": "file-stream-bytes",
+      "required_evidence_met": true
+    }
+  ],
+  "common_evidence_hashes": {
+    "execution_report_sha256": "83f166fc2247bdfa3119f7e3d74739db3819fb973a44653893a486f0404c7ab1",
+    "evidence_zip_sha256": "aef5d5767ef6de3b6f91aab87dee2face659df47a3b1993b6409f7071ddff9ec",
+    "serial_sha256": "141233cf753edc73a657c371ba864728ab073a89ee178c25363d96fe6e7ad8c1",
+    "firmware_sha256": "875bf8835f3e7e6a92794fa8832de36ba0a2ccf6a7455a5f4495a353ae568ad0",
+    "runtime_binary_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+    "peer_requests_sha256": "9794d5ffd4b56b0fda1f8764ed9064f15805433eb975a4ac7c658a0930231552",
+    "network_files": {
+      "network/evidence.json": "727b5a657cf649c4905085cdc78b7c6fde6fe94b4d8335e5808c4b0d8138746e",
+      "network/capture.pcap": "81210f670203fbf1ed20b66d934a1afe75859ed090182708b86a90189ba94664"
+    },
+    "audio_files": {}
+  },
+  "independently_verified": {
+    "zip_crc": true,
+    "zip_all_member_hashes_sizes": true,
+    "zip_file_set_exact": true,
+    "capture_completed_before_evidence": true,
+    "evidence_response_completed_before_stop": true,
+    "retained_terminal_identity": true,
+    "bound_process_exit": true
+  },
+  "outer_receipt_preserved": {
+    "identity": {
+      "bytes": 33005,
+      "sha256": "de612d618f271ce410f5221e8b5c02e8f9ac3dbbdb064247414e3189f1642e84"
+    },
+    "receipt_integrity_status": "FAIL",
+    "functional_method_status": "NOT_RUN_EMPTY",
+    "exit_code": 1,
+    "parser_errors": [
+      "manifest keys missing: audio_fixture,device_data"
+    ],
+    "caveat": "Outer receipt reported NOT_RUN_EMPTY despite sixteen actual protocol rows, and rejected optional audio_fixture/device_data sections. Its original FAIL is preserved. Independent ZIP/identity/order checks and actual method rows are recorded separately; exit code alone is not a firmware or library verdict."
+  },
+  "observed_failure": {
+    "api": "requests2.urlencode",
+    "oracle": "Reserved-character and UTF-8 form fields roundtrip through a standard peer form decoder.",
+    "observed_value": false,
+    "status": "FAIL",
+    "limit": "This fixed stock-frozen source/firmware argument domain only; no source repair or candidate result included."
+  },
+  "limits": [
+    "Only this exact CoreS3 HTTP recipe is described; other boards/protocols and full requests2 compatibility remain outside scope.",
+    "PASS rows describe their actual controlled peer/socket/file transfer observations; the failing urlencode row remains FAIL.",
+    "The original outer receipt parser failure and original method failure are not overwritten by this summary.",
+    "Host endpoints, host paths, process numbers and raw session/device identifiers are omitted."
+  ]
+}

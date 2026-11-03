@@ -106,7 +106,10 @@
     "evidence/source-identity-summary.json",
     "evidence/inventory-scope-summary.json",
     "evidence/public-recipe.md",
-    "evidence/cores3-canary-summary.json"
+    "evidence/cores3-canary-summary.json",
+    "evidence/five-case-unit-pilot-summary.json",
+    "evidence/five-board-system-runtime-summary.json",
+    "evidence/cores3-http-protocol-summary.json"
   ],
   "notes": [
     "Build/source PASS is not firmware/application PASS.",
@@ -115,5 +118,96 @@
     "Two planned/DEFER Units and official-driver-vs-raw-protocol boundaries remain.",
     "Source inventories are provisional and overlapping; do not sum into a functional denominator.",
     "All evidence is public-safe derived summary; private operational data and raw artifacts excluded."
+  ],
+  "follow_up_executions": [
+    {
+      "id": "2026-11-04-five-unit-pilot-system-http",
+      "recorded_at": "2026-11-03T18:29:01.426581+00:00",
+      "validation": "virtual-device validation",
+      "overall_status": "PARTIAL",
+      "scope": "Five additional exact Unit pilot recipes, five system-runtime board probes, and separate CoreS3 HTTP method results; comprehensive campaign remains in progress.",
+      "source_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "identity_policy": "Stable aliases and content hashes only; original host endpoints, paths, process numbers and unique session/device identifiers excluded.",
+      "executions": [
+        {
+          "alias": "additional-five-unit-pilot",
+          "status": "PASS",
+          "count": 5,
+          "scope": "Exact original runner assertion domains only; SSR stock frozen API plus four unchanged official-source overlays",
+          "source_file_comparisons": 67,
+          "principal_runner_hashes_checked": 22,
+          "source_mismatches": 0,
+          "evidence": "evidence/five-case-unit-pilot-summary.json"
+        },
+        {
+          "alias": "five-board-system-runtime",
+          "status": "PASS_OBSERVED_ROWS_ONLY",
+          "counts": {
+            "PASS": 250,
+            "STATE_PASS": 5
+          },
+          "observed_rows": 255,
+          "not_unique_api_count": true,
+          "state_contract": "Five os.dupterm supported observations remain STATE_PASS, not full UART lifecycle.",
+          "evidence": "evidence/five-board-system-runtime-summary.json"
+        },
+        {
+          "alias": "cores3-http-protocol",
+          "status": "FAIL",
+          "counts": {
+            "PASS": 15,
+            "FAIL": 1
+          },
+          "scope": "Sixteen actual protocol oracle rows; requests2.urlencode reserved/UTF-8 form roundtrip FAIL retained.",
+          "outer_receipt_status": "FAIL",
+          "outer_receipt_parser_caveat": "Original NOT_RUN_EMPTY and optional manifest-section parsing failure preserved separately; outer exit 1 is not used as a firmware verdict.",
+          "evidence": "evidence/cores3-http-protocol-summary.json"
+        }
+      ],
+      "independent_audit_sources": {
+        "five_unit_audit": {
+          "bytes": 120188,
+          "sha256": "40ebaf62459351f6f591c916430c4437839c0b415deb6b9f6ff62a4dff7cabce"
+        },
+        "system_http_audit": {
+          "bytes": 62610,
+          "sha256": "dafa42b3d57fc7cb2133f88959959f885f98ca0a0f9e3f90013ed1c1873e553b"
+        }
+      },
+      "checks": [
+        {
+          "name": "five-pilot-exact-identity-sources-and-lifecycle",
+          "layer": "data_behavior",
+          "status": "PASS",
+          "scope": "Five bounded recipes only"
+        },
+        {
+          "name": "system-runtime-observed-row-reconciliation",
+          "layer": "data_behavior",
+          "status": "PASS",
+          "pass_rows": 250,
+          "state_only_rows": 5
+        },
+        {
+          "name": "http-urlencode-roundtrip",
+          "layer": "data_behavior",
+          "status": "FAIL",
+          "scope": "One exact stock-frozen CoreS3 argument domain"
+        },
+        {
+          "name": "outer-http-receipt-parser",
+          "layer": "review",
+          "status": "FAIL",
+          "reason": "Original parser rejected conditional sections and reported empty rows; actual protocol method result is retained separately."
+        },
+        {
+          "name": "full-uiflow-unit-firmware-acceptance",
+          "layer": "data_behavior",
+          "status": "PARTIAL",
+          "reason": "Full campaign and remaining harness guard review continue."
+        }
+      ]
+    }
   ]
 }

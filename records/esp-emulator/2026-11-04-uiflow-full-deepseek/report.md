@@ -67,3 +67,48 @@ API source inventory 包含 system 4,613 项、hardware 460 项、UI 36 surfaces
 此次以独立新产物供服务显式绑定，旧 runtime、源树和证据保留；需要回退时由操作者恢复原 runtime 绑定，不删除会话历史。功能测试全部经 Device Service 会话执行，先导出 evidence 再停止并保留历史。主 agent 后续核对 DeepSeek 实际回执、失败归因及所有分母，另追加受限功能结果；在此之前不宣称全量验收或任务完成。
 
 本记录不包含二进制、ROM、固件、Flash、构建机路径、端点或唯一设备/会话标识；所有 JSON evidence 均为派生 summary。
+
+
+## 2026-11-04 后续里程碑：五例 Unit pilot、五板 system 与 HTTP 行为复测
+
+本节追加独立执行与验收，不覆盖前述三项 CoreS3 canary、首次 harness 失败或原始 receipt。全量战役仍为 **PARTIAL / in progress**，并未宣布所有 Unit 或 UIFlow 接口可用。以下均为 **virtual-device validation**；使用相同 `0e16a9bc…12068` 原生 runtime，实际固件、探针和证据包分别绑定完整 SHA。
+
+### 五例追加 Unit pilot
+
+独立复核 SSR、PIR、Ultrasonic-I2C、RGB、Angle 五例的实际输入/输出断言、完整 ZIP 成员哈希/大小、固件与执行身份、先取证后停止、保留历史及同一已绑定进程退出。22 个主要 runner 字节与固定 inventory 一致；五例生成 guest 与原始 probe 共 **67 次文件比较、零差异**。摘要见 [five-case-unit-pilot-summary.json](evidence/five-case-unit-pilot-summary.json)。
+
+| 产品 | 执行 lane | 本次通过的准确范围 |
+| --- | --- | --- |
+| SSR | stock frozen Unit API | 原驱动 GPIO 输出、两值与转换；无虚构 I2C 事务 |
+| PIR | unchanged official-source overlay | 两个 GPIO 边沿、IRQ 禁用和重新启用 |
+| Ultrasonic-I2C | unchanged official-source overlay | 初始值和两组变化读回；转换准备、未知命令与 uint24 单位负控 |
+| RGB | unchanged official-source overlay | 三灯实际 RMT/GRB 捕获及短帧负控 |
+| Angle | unchanged official-source overlay | 原 IDF 曲线拟合微伏、单调性及选定 12-bit ADC transfer |
+
+四例 overlay 保留官方源文件，不能合并为 stock frozen 模块可用性的结论；五例均只授予原 recipe 参数域。没有声称实物 SSR 负载、红外感应、声学距离、LED 光学或 ADC 电气精度。通用 harness 的剩余守卫另保留 REVIEW；五份具体回执已被独立核对，没有用泛化 auditor 的自报 PASS 代替这次核对。
+
+### 五板 system-runtime：250 PASS + 5 STATE_PASS
+
+从五份实际串口逐行重新解析，每板 **50 PASS + 1 STATE_PASS**，合计 **255 个观测行**。这些是已执行断言/调用行，**不是 255 个独立 API**；每次运行有 49 个不同 API 名称，包含重复的文件系统挂载操作，亦不表示全模块或全部参数域覆盖。板型与逐行 recipe/状态见 [five-board-system-runtime-summary.json](evidence/five-board-system-runtime-summary.json)。
+
+| 板型 | PASS 行 | STATE_PASS 行 |
+| --- | ---: | ---: |
+| CoreS3 | 50 | 1 |
+| Cardputer ADV | 50 | 1 |
+| StopWatch | 50 | 1 |
+| StickS3 | 50 | 1 |
+| Core2 | 50 | 1 |
+
+原生 FAT/LittleFS 使用普通 RAM block 接口完成格式化、二进制写读、重挂载、枚举和删除；另有 Flash 文件操作、实际 guest TCP readiness、异常格式化和 UUID 向量等观测。RAM 文件系统不授予 SD 控制器 PASS；随机字节变化不证明密码学质量；UUID 构造不证明 BLE 控制器/RF。五个 `os.dupterm` 均只记 **STATE_PASS（supported）**，不升级为完整 UART detach/reattach 生命周期验证。
+
+CoreS3 首场探针曾额外修改一个仅针对 Core2 的 dupterm 异常判定；实际返回 supported，没有进入该额外异常分支。摘要保留该次真实 source SHA、原始 FAIL receipt 与只读 parser 修正的独立身份，**没有将旧探针换名为后续修正配方，也没有把 receipt 修正当作新固件执行**。
+
+### CoreS3 HTTP：15 PASS + 1 FAIL，保留外层解析缺口
+
+本次实际 `protocol-results` 有 16 行：**15 PASS，1 FAIL**。受控 peer 验证 HTTP 方法、JSON、响应状态/头/正文及文件对象上传；`requests2.urlencode` 的保留字符/UTF-8 form roundtrip 原样失败（观测值 false）。这是准确冻结库、固件和参数域下的行为反例，不由外层退出码推断。证据见 [cores3-http-protocol-summary.json](evidence/cores3-http-protocol-summary.json)。
+
+外层 receipt 原先误报 `NOT_RUN_EMPTY`，并把条件性的 `audio_fixture` / `device_data` 缺省当成 manifest 错误，原始 receipt 的 **FAIL 与 exit 1 原样保留**。独立 ZIP 成员、执行身份、网络证据、取证顺序和进程退出检查与实际 16 行结果分开记录；不能把外层 parser 缺陷写成另一项库缺陷，也不能用后续解析修正覆盖真实 urlencode FAIL。
+
+### 后续边界
+
+本里程碑只追加上述准确结果；先前三例范围、Button 公共读/callback 补测要求、160 catalog 与 245 声明组合的完整分母均保留。其余 Unit、主机组合、系统/网络/UI/硬件 API、候选修复、长期运行与通用 harness 守卫继续独立跟进；原始失败、raw/overlay/stock lane 和未执行项不得互相抵消。公开摘要只保留产品型号、会话/进程别名及内容哈希，删除端点、本机路径、进程编号和原始唯一标识。

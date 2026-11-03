@@ -5,11 +5,15 @@
 - 工作类型：`report`、`build_validation`、`firmware_validation`（本记录未新增产品代码）。
 - 问题来源：用户要求先更新模拟器，再由 DeepSeek 执行 UIFlow API 与全部 Unit 复验；无独立公开 issue。
 - 源码版本：[m5stack-esp-emulator @ b41eba70eb61f7ddc5c41e0b981341064f9d1d1f](https://github.com/m5agent/m5stack-esp-emulator/commit/b41eba70eb61f7ddc5c41e0b981341064f9d1d1f)。
-- 环境：macOS arm64、原生 Xtensa QEMU、固定 UIFlow API/Unit source inventory；功能执行计划使用可观察且保留历史的 Device Service 会话。物理硬件未执行。
+- 环境：macOS arm64、原生 Xtensa QEMU、固定 UIFlow API/Unit source inventory；功能执行使用可观察且保留历史的 Device Service 会话。物理硬件未执行。
 
 ## 结论
 
 已从完整 canonical Unit 链重新构建原生 Xtensa runtime，产物 SHA-256 为 `0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068`。公开上游加 reviewed source-lock 与 board 层可重建其 canonical 基线，逐文件比较零差异。UI/API 源码基线和控制器资源身份已核对。原始驱动与控制器路径的三项 CoreS3 canary 已经主 agent 独立验收；Button 仅授予 constructor/GPIO input 路径，Relay 与 ENV III 授予已执行方法的限定 **virtual-device validation PASS**。完整 UIFlow API 与 Unit 功能结果尚未在本里程碑汇齐并独立验收，**不能写成全量 PASS 或目标完成**。
+
+## 已追加的独立验收
+
+五例追加 Unit pilot 已限定通过：SSR 使用固件自带驱动，PIR、Ultrasonic-I2C、RGB、Angle 使用原样官方源码 overlay。五板系统探针共 250 PASS + 5 STATE_PASS，是观测检查行而非独立 API 数。CoreS3 HTTP 的 16 项实际结果为 15 PASS + 1 `requests2.urlencode` form roundtrip FAIL；外层解析错误与真实库行为分开保留。详见 [追加报告](report.md#2026-11-04-后续里程碑五例-unit-pilot五板-system-与-http-行为复测)及三份新增 evidence summary。全量战役仍在执行。
 
 ## 关键证据
 

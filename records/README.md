@@ -18,7 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
-| 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：构建与三项 canary 里程碑 | `PARTIAL`（完整 41 层原生构建/公开来源及 CoreS3 三项限定 virtual-device canary 通过；Button 回调、全量 Unit/API/跨主机仍在执行） | [查看](esp-emulator/2026-11-04-uiflow-full-deepseek/) |
+| 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：阶段记录 | `PARTIAL`（完整 41 层构建、8 个限定 Unit 案例、五板 250 PASS+5 STATE_PASS；HTTP 15 PASS+1 urlencode FAIL；全量继续） | [查看](esp-emulator/2026-11-04-uiflow-full-deepseek/) |
 | 2026-11-03 | WeCom GPT bridge | GPT 自动回复与业务授权恢复 | `PARTIAL`（真实短文本自动回复 PASS，23s；旧历史压缩 FAIL，server recall 重写超时后回退） | [查看](infra/2026-11-03-wecom-gpt-channel-recovery/) |
 | 2026-11-03 | SVG animation | 全新鹈鹕骑行与同步踩踏 | `PASS`（Chrome 浏览器：9相位、3宽度；其他浏览器 NOT RUN） | [查看](svg-animation/2026-11-03-pelican-cycling/) |
 | 2026-11-02 | nuxt-m5-docs | 13个开放Issue修订与人工MR !76交付 | `REVIEW`（4提交/120文件；MR !76 opened/mergeable；110页格式、8项新增测试PASS；设备/生产部署NOT RUN） | [查看](nuxt-m5-docs/2026-11-02-documentation-audit/followups/2026-11-02-source-fixes/) |
