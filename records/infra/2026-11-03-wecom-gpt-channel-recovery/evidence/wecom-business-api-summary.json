@@ -1,0 +1,41 @@
+{
+  "classification": "redacted summary",
+  "collected_date": "2026-11-03",
+  "time_zone": "Asia/Shanghai",
+  "redaction": "Removed credentials, identity context, personal names, conversation identifiers, endpoint details and local paths. This is a derived summary, not a raw capture.",
+  "sources": [
+    {
+      "source_label": "wecom-sessions-renewed.json",
+      "bytes": 1893,
+      "sha256": "b2dae8d69d070c73962a85616c62bc91cbe5961aa8da831b9aa1c65a3be688cb"
+    },
+    {
+      "source_label": "wecom-outbound-test.json",
+      "bytes": 1010,
+      "sha256": "f912903981f6a04e2f261003403e82710dd2511cb896648bdc5889f1dda2a063"
+    }
+  ],
+  "observations": [
+    {
+      "stage": "before renewal",
+      "operation": "list recent conversations",
+      "result": "FAIL",
+      "error_code": 850003,
+      "error_summary": "authorization expired"
+    },
+    {
+      "stage": "after user renewal",
+      "operation": "list recent conversations",
+      "result": "PASS",
+      "conversation_count": 5,
+      "claim_scope": "Business API access was restored; this does not prove automatic replies."
+    },
+    {
+      "stage": "after user renewal",
+      "operation": "send a diagnostic message to the authorizing user",
+      "result": "PASS",
+      "platform_success": true,
+      "claim_scope": "The send API accepted the message. Recipient visibility and automatic replies are separate checks."
+    }
+  ]
+}

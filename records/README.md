@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-03 | WeCom GPT bridge | GPT 自动回复与业务授权恢复 | `PARTIAL`（真实短文本自动回复 PASS，23s；旧历史压缩 FAIL，server recall 重写超时后回退） | [查看](infra/2026-11-03-wecom-gpt-channel-recovery/) |
 | 2026-11-03 | SVG animation | 全新鹈鹕骑行与同步踩踏 | `PASS`（Chrome 浏览器：9相位、3宽度；其他浏览器 NOT RUN） | [查看](svg-animation/2026-11-03-pelican-cycling/) |
 | 2026-11-02 | nuxt-m5-docs | 13个开放Issue修订与人工MR !76交付 | `REVIEW`（4提交/120文件；MR !76 opened/mergeable；110页格式、8项新增测试PASS；设备/生产部署NOT RUN） | [查看](nuxt-m5-docs/2026-11-02-documentation-audit/followups/2026-11-02-source-fixes/) |
 | 2026-11-02 | nuxt-m5-docs | 全库文档审查与12组人工工单证据 | `REVIEW`（资料/API/HTTP；硬件和虚拟设备 NOT RUN；本批例外发布，12/12工单opened并回读） | [查看](nuxt-m5-docs/2026-11-02-documentation-audit/) |

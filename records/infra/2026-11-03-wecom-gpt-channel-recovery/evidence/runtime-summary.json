@@ -1,0 +1,107 @@
+{
+  "classification": "redacted summary",
+  "collected_date": "2026-11-03",
+  "time_zone": "Asia/Shanghai",
+  "redaction": "Removed host paths, credentials, identity context, personal names, conversation identifiers and endpoint details. This summary preserves observed markers and errors; it is not a raw capture.",
+  "runtime": {
+    "legacy_codex_cli": "0.154.0",
+    "desktop_bundled_codex_cli": "0.164.0-alpha.11.1",
+    "model": "gpt-6.1-sol",
+    "model_provider": "openai",
+    "auth_mode": "chatgpt"
+  },
+  "new_session_direct": {
+    "source": {
+      "source_label": "model-bundled-direct.jsonl",
+      "bytes": 358,
+      "sha256": "bd1fda199b1ed6f9bd3eaaab196d2e6555c92e3cd59827df2101dc39e09c8dd1"
+    },
+    "answer_markers": [
+      "BRIDGE_MODEL_OK"
+    ],
+    "turn_completed": true,
+    "usage": {
+      "input_tokens": 27104,
+      "cached_input_tokens": 13184,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8,
+      "reasoning_output_tokens": 0
+    },
+    "errors": []
+  },
+  "new_session_server_recall": {
+    "source": {
+      "source_label": "model-bundled-server-recall.jsonl",
+      "bytes": 367,
+      "sha256": "e216caf75edab5d92270a63e71c6a07243260f69fd1ea75ffa24df9874022c28"
+    },
+    "answer_markers": [
+      "BRIDGE_SERVER_RECALL_OK"
+    ],
+    "turn_completed": true,
+    "usage": {
+      "input_tokens": 27670,
+      "cached_input_tokens": 13184,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 10,
+      "reasoning_output_tokens": 0
+    },
+    "errors": []
+  },
+  "automatic_recall": {
+    "status": "PARTIAL",
+    "earlier_probe_injected_characters": 2712,
+    "independent_hook_probe_injected_characters": 2120,
+    "server_statistics": {
+      "entries": 8,
+      "usedTokens": 1267,
+      "rewrite": "timeout"
+    },
+    "fallback_completed": true,
+    "claim_scope": "Server recall assembled context and fallback completed; successful rewrite/compression is not claimed."
+  },
+  "legacy_history_compaction": {
+    "source": {
+      "source_label": "old-session-compact-summary.json",
+      "bytes": 879,
+      "sha256": "a06822f4b7b2fccefde69a170d13c2870dc29e4f4117bb4afba480a7ab4a6ec7"
+    },
+    "time": "2026-11-03T14:18:29.440986+08:00",
+    "exit": 1,
+    "answer_markers": [],
+    "errors": [
+      "Error running remote compact task: {\"type\":\"error\",\"error\":{\"message\":\"Invalid 'input[99].content': array too long. Expected an array with maximum length 0, but got an array with length 1 instead.\",\"type\":\"invalid_request_error\",\"param\":\"input[99].content\",\"code\":\"array_above_max_length\"},\"status\":400}",
+      {
+        "message": "Error running remote compact task: {\"type\":\"error\",\"error\":{\"message\":\"Invalid 'input[99].content': array too long. Expected an array with maximum length 0, but got an array with length 1 instead.\",\"type\":\"invalid_request_error\",\"param\":\"input[99].content\",\"code\":\"array_above_max_length\"},\"status\":400}"
+      }
+    ],
+    "original_rollout_unchanged": true,
+    "bridge_state_unchanged_during_isolated_test": true,
+    "result": "FAIL",
+    "claim_scope": "The previous model_not_found failure disappeared, but remote compaction of the existing mixed-provider history still failed with array_above_max_length. This path was not repaired."
+  },
+  "deployment": {
+    "status": "PASS",
+    "configuration": {
+      "model": "gpt-6.1-sol",
+      "modelProvider": "openai",
+      "codexPath": "desktop-bundled CLI (host path redacted)",
+      "recallCompression": "server"
+    },
+    "changes": [
+      "Pass explicit model provider as a direct CLI argument",
+      "Use optional explicit CLI executable",
+      "Prepend that executable directory to child PATH",
+      "Set bridge-specific recall compression environment mode"
+    ],
+    "global_configuration_changed": false,
+    "global_plugin_configuration_changed": false,
+    "old_mapping_backup_count": 6,
+    "old_conversation_files_preserved": true,
+    "state_migration": "Back up six old conversation mappings, then atomically replace current mapping with an empty object so new GPT sessions can be created. This avoids reusing incompatible history.",
+    "state_migration_time": "2026-11-03T14:19:31+08:00",
+    "restarted_when_no_active_child_tasks": true,
+    "authenticated_at": "2026-11-03T06:19:31.751Z",
+    "claim_scope": "Restart, WebSocket authentication and a real short-text inbound-to-reply operation succeeded. Receiver read state and visual rendering were not checked."
+  }
+}

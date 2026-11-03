@@ -1,0 +1,48 @@
+{
+  "classification": "redacted summary",
+  "collected_at": "2026-11-03T06:23:51.239925+00:00",
+  "redaction": "Removed conversation and sender identifiers, original message and response text, personal names, host paths, credentials and endpoint details. Source fingerprints describe the collected snapshots; this is not a raw capture.",
+  "sources": [
+    {
+      "source_label": "bridge.log snapshot",
+      "bytes": 113740,
+      "sha256": "b1106869f817eb8d65f4588f55c19da1c966a61bba636c8d5952c8a996b3c1bf"
+    },
+    {
+      "source_label": "active GPT session rollout (filename redacted)",
+      "bytes": 192840,
+      "sha256": "9dadd200b787c874a2f23605747c17262d6bf174d5a4fee8da9a21b8640568b0",
+      "contexts": [
+        {
+          "model": "gpt-6.1-sol",
+          "effort": "ultra"
+        }
+      ],
+      "task_complete_observed": true
+    }
+  ],
+  "input_observation": {
+    "time": "2026-11-03T06:20:16.561Z",
+    "event": "recv task",
+    "text_characters": 2,
+    "images": 0,
+    "running_tasks_before_acceptance": 0
+  },
+  "model_execution": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "ultra",
+    "task_complete_observed": true
+  },
+  "reply_observation": {
+    "time": "2026-11-03T06:20:39.163Z",
+    "event": "reply sent",
+    "via": "stream",
+    "response_characters": 3,
+    "elapsed_seconds_rounded": 23,
+    "sdk_reply_operation_completed": true,
+    "handler_failure_observed_in_test_window": false,
+    "failure_delivery_error_observed_in_test_window": false
+  },
+  "result": "PASS",
+  "claim_scope": "Real user inbound text reached the deployed bridge, GPT completed the task, and the awaited streaming-reply operation completed without an error. This validates protocol-accepted automatic reply for this short text case. It does not prove recipient read status or visual rendering."
+}

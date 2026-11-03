@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "WeCom GPT bridge model and authorization recovery",
+  "source": {
+    "issue": "User-reported missing automatic reply",
+    "pull_request": "",
+    "repository": "Not applicable: local bridge service",
+    "base_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS host service; WeCom CLI 1.3.0; bot SDK 1.0.7; legacy Codex CLI 0.154.0; desktop-bundled Codex CLI 0.164.0-alpha.11.1",
+    "task_id": "redacted",
+    "session_id": "redacted",
+    "validation_type": "Live host service and protocol execution; no embedded-device validation claimed"
+  },
+  "checks": [
+    {
+      "name": "legacy_model_generation",
+      "status": "FAIL",
+      "evidence": "gpt-6.1-sol with ChatGPT authentication returned HTTP 400 model_not_found"
+    },
+    {
+      "name": "legacy_history_compaction",
+      "status": "FAIL",
+      "evidence": "The failed automatic task returned the same unsupported-model error during remote compaction"
+    },
+    {
+      "name": "business_authorization_before_renewal",
+      "status": "FAIL",
+      "evidence": "Conversation-list API returned 850003 authorization expired"
+    },
+    {
+      "name": "business_authorization_after_renewal",
+      "status": "PASS",
+      "evidence": "Conversation-list API returned five recent conversations"
+    },
+    {
+      "name": "outbound_message_submission",
+      "status": "PASS",
+      "evidence": "Send API returned success=true"
+    },
+    {
+      "name": "bridge_model_provider_configuration",
+      "status": "PASS",
+      "evidence": "Explicit gpt-6.1-sol/openai with desktop-bundled CLI and bridge-only server recall setting deployed; service restarted and authenticated"
+    },
+    {
+      "name": "desktop_bundled_model_generation",
+      "status": "PASS",
+      "evidence": "Independent new session returned BRIDGE_MODEL_OK and turn.completed with usage"
+    },
+    {
+      "name": "old_history_compaction_after_change",
+      "status": "FAIL",
+      "evidence": "Isolated fork of legacy history failed with 400 array_above_max_length; original rollout and live mapping unchanged during the test"
+    },
+    {
+      "name": "bridge_restart_and_authentication",
+      "status": "PASS",
+      "evidence": "After empty-map migration, restarted service authenticated at 2026-11-03T06:19:31.751Z"
+    },
+    {
+      "name": "automatic_inbound_to_reply",
+      "status": "PASS",
+      "evidence": "Real user input at 06:20:16.561Z reached GPT gpt-6.1-sol/ultra; task_complete observed; awaited stream reply completed at 06:20:39.163Z (23 seconds)"
+    },
+    {
+      "name": "recipient_visible_delivery",
+      "status": "NOT RUN",
+      "evidence": "User confirmed sending test input; recipient read status and visual rendering were not inspected"
+    },
+    {
+      "name": "long_task_and_media_regression",
+      "status": "NOT RUN",
+      "evidence": "Outside current short text connectivity check"
+    },
+    {
+      "name": "new_session_with_server_recall",
+      "status": "PASS",
+      "evidence": "BRIDGE_SERVER_RECALL_OK and turn.completed with usage; recalled context block of 2712 characters was injected"
+    },
+    {
+      "name": "server_recall_compression_execution",
+      "status": "PARTIAL",
+      "evidence": "Actual server hook assembled 8 entries / 1267 usedTokens and returned 2120 characters; rewrite=timeout, assembled-context fallback completed"
+    },
+    {
+      "name": "legacy_history_preservation_and_migration",
+      "status": "PASS",
+      "evidence": "Six mappings backed up and original conversation files preserved; active mapping atomically reset for fresh GPT sessions"
+    },
+    {
+      "name": "deployed_script_syntax",
+      "status": "PASS",
+      "evidence": "node --check accepted the deployed bridge script; this does not validate runtime behavior"
+    },
+    {
+      "name": "new_gpt_history_fork_request",
+      "status": "PASS",
+      "evidence": "Ephemeral fork with 4096 compact threshold returned WECOM_NATIVE_COMPACT_OK and turn.completed; input 52639 / output 70; source rollout and bridge state unchanged"
+    },
+    {
+      "name": "new_gpt_remote_compaction_execution",
+      "status": "NOT RUN",
+      "evidence": "No explicit compact event was observed. The request completed, but actual remote compaction execution was not verified"
+    }
+  ],
+  "evidence": [
+    "evidence/wecom-business-api-summary.json",
+    "evidence/runtime-summary.json",
+    "evidence/automatic-reply-summary.json",
+    "evidence/server-recall-summary.json",
+    "evidence/bridge-change-summary.md",
+    "evidence/new-gpt-history-fork-summary.json"
+  ],
+  "notes": [
+    "Core short-text inbound-to-GPT-to-protocol-accepted reply is PASS.",
+    "Legacy mixed-provider history compaction remains FAIL; backed-up mappings and fresh sessions bypass this incompatibility.",
+    "Server recall rewrite timed out; ordinary assembled-context fallback returned usable context.",
+    "Recipient read status, visual rendering, long tasks and media regressions were NOT RUN.",
+    "Global Codex and plugin configuration remained unchanged.",
+    "No credentials or full conversation identifiers are included.",
+    "No hardware or virtual-device firmware result is claimed.",
+    "New GPT history fork/request regression passed; no explicit compaction event was observed, so remote compaction success is not claimed."
+  ]
+}
