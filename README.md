@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-03 | SVG animation | 全新鹈鹕骑行与同步踩踏 | `PASS`（Chrome 浏览器：9相位、3宽度；其他浏览器 NOT RUN） | [查看](records/svg-animation/2026-11-03-pelican-cycling/) |
 | 2026-11-02 | nuxt-m5-docs | 13个开放Issue修订与人工MR !76交付 | `REVIEW`（4提交/120文件；MR !76 opened/mergeable；110页格式、8项新增测试PASS；设备/生产部署NOT RUN） | [查看](records/nuxt-m5-docs/2026-11-02-documentation-audit/followups/2026-11-02-source-fixes/) |
 | 2026-11-02 | M5Stack documentation | 全库文档审查与12组人工工单证据 | `REVIEW`（资料/API/HTTP；硬件和虚拟设备 NOT RUN；本批例外发布，12/12工单opened并回读） | [查看](records/nuxt-m5-docs/2026-11-02-documentation-audit/) |
 | 2026-11-02 | ESP Emulator | PR #80 AtomS3U / Atom VoiceS3R host integration | `PASS`（delivery：merge `930d7183`；head 4/4、main 2/2 CI；platform 1,719 PASS + 10 skip；既有 virtual-device 镜像/串口/PCM 回核；设备 partial/candidate，新 guest/物理硬件 NOT RUN） | [查看](records/esp-emulator/2026-11-02-pr80-visual-hosts-merge/) |
