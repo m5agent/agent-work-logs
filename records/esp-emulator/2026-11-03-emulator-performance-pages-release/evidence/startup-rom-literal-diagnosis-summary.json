@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "kind": "actual-HTTPS-c854-startup-ROM-literal-failure-audit",
+  "status": "UNRESOLVED — failed startup, read-only localization only",
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "raw_report_sha256": "5975563a8689fc427ccaede5c9a18a2d695fab6118470b9edcbaff6894918650",
+  "examined_failure_summary_sha256": "fb91169887cca2d83ce2101436eb3b31e5a87efbb8c249efe41db03253a95615",
+  "artifact": {
+    "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+    "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+    "wasm_sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+    "firmware_sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+    "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b",
+    "clock_divisor": 1,
+    "required_patch": {
+      "path": "patches/qemu-wasm-probe/0027-gpio-bounded-transactions.patch",
+      "sha256": "43685da86d9b959b2e769cd9cda5785a5c4039b5076f73f3b9d6033d1d161bdf"
+    }
+  },
+  "startup_observation": {
+    "report_result": "FAIL",
+    "completed_sample_runs": 0,
+    "application_ready": false,
+    "ready_ms": null,
+    "frames": 0,
+    "states": 0,
+    "render_poses": 0,
+    "input_events": 0,
+    "complete_panic_line_observed_after_start_ms": 3728.8700000047684,
+    "ready_wait_timeout_ms": 120000,
+    "touch_response": "NOT RUN",
+    "response_derivation": "NOT RUN"
+  },
+  "fault": {
+    "cpu": 1,
+    "exception": "LoadStorePIFAddrError",
+    "pc": "0x40001c38",
+    "exccause": "0x0000000f",
+    "excvaddr": "0x40001c34",
+    "PS": "0x00060033"
+  },
+  "reset_observations": {
+    "runtime_RESET_events": 2,
+    "visible_serial_Rebooting_lines": 1,
+    "visible_ROM_boot_headers": 2,
+    "scope": "Event count and serial reboot count are distinct; these are not two independently observed reboot episodes."
+  },
+  "ROM_identity": {
+    "bytes": 393216,
+    "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "upstream_source": "https://github.com/espressif/qemu/blob/40edccac415693c5130f91c01d84176ae6008566/pc-bios/esp32s3_rev0_rom.bin",
+    "symbol_ELF_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+    "symbol_ELF_tool_version": "esp-rom-elfs/20241011",
+    "matched_code_span": {
+      "start": "0x40001c20",
+      "bytes": 36,
+      "sha256": "cd3540bd5cb5a271b021679f3f35194b70f01ea9523973e08f83b462fe110de1",
+      "actual_ROM_equals_ELF_code_bytes": true
+    },
+    "whole_ELF_mutable_data_initializer_equality": "NOT CLAIMED; prior audit records initializer differences outside this code span.",
+    "ROM_bytes_or_ELF_redistributed": false
+  },
+  "instruction_localization": {
+    "function": "__call__xtos_set_intlevel",
+    "faulting_instruction": "l32r a9, 0x40001c34",
+    "following_instruction": "jx a9",
+    "literal_address": "0x40001c34",
+    "literal_target_value": "0x400559cc",
+    "target_function": "_xtos_set_intlevel",
+    "instruction_inferred_load_size_bytes": 4,
+    "literal_inside_declared_CPU1_IROM_bounds": true,
+    "interpretation": "This is the literal read used by the normal ROM interrupt-level trampoline; the recorded EXCVADDR is exactly that literal address."
+  },
+  "matching_application": {
+    "ELF_sha256": "80980c71d3fc4ce023d1093b46cf352097d54d5c5f35c2dbeebedbd9deaf4bc4",
+    "panic_reported_ELF_sha_prefix": "80980c71d",
+    "existing_full_image_to_ELF_audit_sha256": "81f0be7de1d541268cca63882d58e0cd8c5ef4aba2fd4928c756a49a1c17332b",
+    "caller": "vPortExitCritical",
+    "caller_call_pc": "0x4037ccc7",
+    "caller_indirect_call": "callx8 a8",
+    "caller_target_literal_address": "0x40374d5c",
+    "caller_target_literal_value": "0x40001c38",
+    "pending_call_return": "0x4037ccca",
+    "reported_A8": "0x8037ccca",
+    "scope": "The matched code and return register are consistent with an interrupt-level restore while leaving a FreeRTOS critical section. This does not prove all guest/host state was intact."
+  },
+  "raw_first_backtrace_pc": "0x40001c35",
+  "first_frame_mapping_limit": "The panic backtrace first PC is three bytes before the reported fault PC and falls in the preceding literal slot. The faulting instruction is mapped from the actual exception PC 0x40001c38, not from that adjusted backtrace value.",
+  "backtrace_mapping": [
+    {
+      "pc": "0x40001c38",
+      "function": "__call__xtos_set_intlevel",
+      "source": null
+    },
+    {
+      "pc": "0x4037f36d",
+      "function": "xTaskIncrementTickOtherCores",
+      "source": "components/freertos/esp_additions/freertos_tasks_c_additions.h:121"
+    },
+    {
+      "pc": "0x4037d22c",
+      "function": "xPortSysTickHandler",
+      "source": "components/freertos/port_systick.c:226"
+    },
+    {
+      "pc": "0x4037d29c",
+      "function": "SysTickIsrHandler",
+      "source": "components/freertos/port_systick.c:148"
+    },
+    {
+      "pc": "0x40377881",
+      "function": "_xt_lowint1",
+      "source": "components/xtensa/xtensa_vectors.S:1240"
+    },
+    {
+      "pc": "0x40378fcb",
+      "function": "xt_utils_wait_for_intr / esp_cpu_wait_for_intr",
+      "source": "components/xtensa/include/xt_utils.h:82; components/esp_hw_support/cpu.c:55"
+    },
+    {
+      "pc": "0x4204f7f5",
+      "function": "esp_vApplicationIdleHook",
+      "source": "components/esp_system/freertos_hooks.c:58"
+    },
+    {
+      "pc": "0x4037db83",
+      "function": "prvIdleTask",
+      "source": "components/freertos/FreeRTOS-Kernel/tasks.c:4350"
+    },
+    {
+      "pc": "0x4037ca2d",
+      "function": "vPortTaskWrapper",
+      "source": "components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139"
+    }
+  ],
+  "source_review": {
+    "upstream_QEMU_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "corresponding_source_archive_sha256": "3bf6ee4fe907aff960ace53ae4622356345960055e0cb1cc1dee964ff6fc09b0",
+    "files_sha256": {
+      "hw/xtensa/esp32s3.c": "a957eb0f441d85839cc2ebbe616080d58b17b644ca55fef3eb23d73e57161ca6",
+      "target/xtensa/helper.c": "34e68186b1f055f4d57dc5f4d010c49a0318ec9f62a9d45b829b963621910684",
+      "accel/tcg/cputlb.c": "01def80771821fd29f941ea25b00942e6ca3beffac37038b4a590af1fedd83c1",
+      "hw/misc/esp32s3_cache.c": "4db4329a453f99444add015bb8b8cf90b6232897e71e9c15078db51c68397e8a",
+      "include/hw/misc/esp32s3_cache.h": "2e55f486f5fd9b214fffff7e67c7f10202475478ce7a1be3a1b09782ba03ce60",
+      "hw/misc/ssi_psram.c": "92af5690d4259f7d0fe24686c3415d4ffbf21c42234d4599f757d61fbf6e5d7b"
+    },
+    "locations": [
+      {
+        "path": "hw/xtensa/esp32s3.c",
+        "line": 100,
+        "finding": "IROM is declared at 0x40000000 with size 0x60000; this literal is inside it."
+      },
+      {
+        "path": "hw/xtensa/esp32s3.c",
+        "line": 417,
+        "finding": "Each CPU has its own ROM MemoryRegion and per-CPU container; the official ROM is loaded into both address spaces."
+      },
+      {
+        "path": "hw/xtensa/esp32s3.c",
+        "line": 574,
+        "finding": "Each CPU address-space index 0 is its CPU-specific container with a shared-system-memory alias."
+      },
+      {
+        "path": "target/xtensa/helper.c",
+        "line": 302,
+        "finding": "do_transaction_failed restores the PC and maps non-instruction memory transaction failures to LOAD_STORE_PIF_ADDR_ERROR; it does not preserve the detailed response in the serial panic."
+      },
+      {
+        "path": "accel/tcg/cputlb.c",
+        "line": 1281,
+        "finding": "io_failed has physaddr derived from full->phys_addr, virtual addr, size, access type, mmu index, attributes and response, which the saved panic does not expose."
+      },
+      {
+        "path": "accel/tcg/cputlb.c",
+        "line": 1949,
+        "finding": "The MMIO dispatcher has the selected MemoryRegion and region offset at the actual failed read."
+      }
+    ],
+    "cache_and_PSRAM_boundary": "The configured external-cache aliases begin at 0x3c000000 and 0x42000000 with size 0x02000000; the faulting virtual literal address is not in either cache window. Current diagnostics contain no PSRAM/OOB marker, but missing diagnostic coverage cannot exclude an earlier corruption or translation problem."
+  },
+  "cleanup": {
+    "guest_exit_code": 0,
+    "nested_pthreads_at_exit": 0,
+    "owner_normal_terminations": 1,
+    "owner_fallback_terminations": 0,
+    "actual_CDP_targets_observed": 6,
+    "actual_CDP_targets_live_before_context_teardown": 0,
+    "meaning": "Cleanup PASS is separate from the failed application boot."
+  },
+  "unresolved": [
+    "The failing physical address, detailed MemTxResult, MMU index, TLB entry, selected MemoryRegion and address-space resolution were not captured.",
+    "The static SoC ROM map covers this access; it does not prove the runtime mapping or TLB state at the failure.",
+    "A previous PSRAM/OOB boot observation is not evidence that this fault has the same root cause or that this runtime is free of regression.",
+    "Two preceding c854 dance runs passed their own windows, but do not replace this failed independent attempt or prove startup stability.",
+    "No safe corrective C change is established by these reads."
+  ],
+  "next_minimal_diagnostic_if_separately_authorized": {
+    "scope": "One-shot first transaction failure only; no ordinary retry or model/clock/WDT/firmware change proposed.",
+    "trace_point_1": "Record existing arguments in xtensa_cpu_do_transaction_failed or io_failed after restoring the guest PC: CPU index, virtual/physical address, size, access type, mmu index and MemTxResult.",
+    "trace_point_2": "At the already-failing int_ld_mmio_beN dispatch, record its existing MemoryRegion name and mr_offset, without performing any extra guest or MMIO read.",
+    "evidence_goal": "Distinguish wrong physical translation, wrong address-space/region selection and a region-level rejection before selecting any fix.",
+    "not_executed": true
+  },
+  "tooling_limit": "The old local objdump crashed in raw-binary disassembly mode; normal disassembly and addr2line against the hash-matched official ELF succeeded. No failure was hidden and no guest was run.",
+  "script_sha256": "eb3f118e6b17924d3d82c03664ff93829f14998f5314fc300990bc28b400819f",
+  "actions": {
+    "source_modified": false,
+    "guest_run": false,
+    "build_run": false,
+    "firmware_or_clock_modified": false,
+    "retry_run": false
+  }
+}

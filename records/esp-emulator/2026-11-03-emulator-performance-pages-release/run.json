@@ -1,0 +1,984 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "record_state": "FINAL_PARTIAL_DELIVERY_COMPLETE_VALIDATION_SCOPED",
+  "title": "QEMU performance and producer fixes merged; prepared Pages deployed with scoped online PASS and retained startup FAIL",
+  "source": {
+    "issue": null,
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/163",
+    "producer_pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/164",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3691870c27b028dde76202e42ecddba31d1547c1",
+    "main_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "performance": {
+      "head_commit": "d1d31db717fd62a5dae666131600f17ea218fbab",
+      "merge_commit": "189dc01a5ee42a23ac7e246f8390c2acfe471ffa",
+      "head_and_merge_tree": "bfb7179432afab97ef296ed61e996d77f7cbf970",
+      "trees_match": true
+    },
+    "producer": {
+      "head_commit": "1b86ed6f7edcc36deafc4834b45a28c6a6017c79",
+      "merge_commit": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+      "merged_at": "2026-11-03T11:24:12Z",
+      "head_and_merge_tree": "9158da43530d82d0eaf5472eff15f831e82666e8",
+      "trees_match": true,
+      "qemu_c_and_lock_unchanged": true
+    },
+    "historical_performance_report": "https://github.com/m5agent/agent-work-logs/blob/73cf198d7d3808e9f66e9cce8faa1349f9a0a9e4/records/esp-emulator/2026-11-03-emulator-performance/report.md",
+    "producer_record": "https://github.com/m5agent/agent-work-logs/blob/2c4f5fcf9469ac8f6935a29359489003705cc76e/records/esp-emulator/2026-11-03-qemu-producer-paths/report.md",
+    "final_documentation_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "final_documentation_ci": {
+      "run_id": 41631441210,
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41631441210",
+      "head_sha": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+      "status": "PASS",
+      "state": "COMPLETED",
+      "jobs": {
+        "platform-contracts": "PASS",
+        "network-namespace-policy": "PASS"
+      },
+      "platform_tests": 1949,
+      "skipped": 10,
+      "elapsed_seconds": 151.535,
+      "platform_log": {
+        "bytes": 298916,
+        "sha256": "5f5e945785a8c6148f5e3393d46a961f213590627543a6454c63c76b672d2286"
+      },
+      "scope": "host CI, not a replacement for virtual-device functional outcomes"
+    },
+    "main_tree": "3ad85b0202f959d500157b6c0113d3006dccf809",
+    "deployed_product_merge_commit": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+    "documentation_only_followup": {
+      "base_commit": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+      "changed_files": 17,
+      "non_documentation_changes": 0,
+      "all_22_product_web_and_build_recipe_lock_bytes_unchanged": true,
+      "all_non_docs_source_unchanged": true,
+      "full_tree_equals_producer_main107": false,
+      "redeployed_for_docs_commit": false,
+      "summary": "evidence/docs-source-delivery-summary.json"
+    }
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "virtual_device": "browser C/QEMU/TCI",
+    "host_renderer": "ANGLE Metal Apple M4"
+  },
+  "firmware": {
+    "cores3_stock_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+    "stackchan_default_sha256": "407f6260400da1b0d10d2374917c7eabd43e6b3bed614afcb97a8d09a7f4af18",
+    "stackchan_dance_sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+    "local_reference_set": "Exact per-case firmware identities remain in evidence/full-browser-gate-summary.json"
+  },
+  "execution": {
+    "environment": "Single QEMU/TCI source-built WASM; full local reference gate PASS; prepared-preview deployment and listed actual HTTPS bytes PASS; actual online stages 1\u20133 scoped PASS, stage4 startup FAIL/touch protocol NOT RUN.",
+    "task_id": null,
+    "session_id": null,
+    "source_delivery": {
+      "status": "PASS",
+      "both_prs_merged": true,
+      "local_main_synced": true,
+      "recoverable_edits_retained": true
+    },
+    "ci": {
+      "performance_initial": {
+        "head_commit": "69b26f3b72e7a3246048d58f6b77d649155790a7",
+        "run_ids": [
+          41615354666,
+          41615345654
+        ],
+        "platform_status": "FAIL",
+        "platform_tests": 1942,
+        "platform_skipped": 10,
+        "failure_subcases": 3,
+        "cause": "glibc assertion stderr used different real executable argv[0] identities",
+        "raw_log": {
+          "sha256": "1795a5e10795ebe63e9c5abf84224adbe014268927b79cc1063783a0b55d6621",
+          "bytes": 36191,
+          "capture": "local raw log retained; not copied into this public record"
+        }
+      },
+      "performance_head": {
+        "head_commit": "d1d31db717fd62a5dae666131600f17ea218fbab",
+        "run_ids": [
+          41616464176,
+          41616455584
+        ],
+        "status": "PASS",
+        "checks_passed": 4,
+        "platform_tests": 1943,
+        "platform_skipped": 10,
+        "platform_elapsed_seconds": 146.744,
+        "raw_log": {
+          "sha256": "5d46326c0f457fe522740eee34022d89aea77592b806e004e85b405dba6fd93e",
+          "bytes": 305360,
+          "capture": "local raw log retained; not copied into this public record"
+        }
+      },
+      "performance_main": {
+        "head_commit": "189dc01a5ee42a23ac7e246f8390c2acfe471ffa",
+        "run_id": 41617122831,
+        "status": "PASS",
+        "checks": {
+          "platform-contracts": "PASS",
+          "network-namespace-policy": "PASS"
+        },
+        "observation_source": "root confirmed actual GitHub run query"
+      },
+      "producer_pr": {
+        "head_commit": "1b86ed6f7edcc36deafc4834b45a28c6a6017c79",
+        "run_ids": [
+          41625517780,
+          41626388927
+        ],
+        "events": [
+          "push",
+          "pull_request"
+        ],
+        "checks_passed": 4,
+        "status": "PASS",
+        "jobs_per_run": {
+          "platform-contracts": "PASS",
+          "network-namespace-policy": "PASS"
+        },
+        "source": "root-confirmed actual Actions queries"
+      },
+      "current_main": {
+        "run_id": 41631441210,
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41631441210",
+        "head_sha": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+        "status": "PASS",
+        "state": "COMPLETED",
+        "jobs": {
+          "platform-contracts": "PASS",
+          "network-namespace-policy": "PASS"
+        },
+        "platform_tests": 1949,
+        "skipped": 10,
+        "elapsed_seconds": 151.535,
+        "platform_log": {
+          "bytes": 298916,
+          "sha256": "5f5e945785a8c6148f5e3393d46a961f213590627543a6454c63c76b672d2286"
+        },
+        "scope": "host CI, not a replacement for virtual-device functional outcomes"
+      },
+      "producer_main": {
+        "head_commit": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+        "run_id": 41627233963,
+        "status": "PASS",
+        "jobs": {
+          "platform-contracts": "PASS",
+          "network-namespace-policy": "PASS"
+        },
+        "platform_tests": 1949,
+        "platform_skipped": 10,
+        "platform_elapsed_seconds": 152.154,
+        "platform_log": {
+          "sha256": "897fc99ee92be4c3bf07fc2d13cdd585647fda512a68e45289ad233efd0602e4",
+          "bytes": 299112,
+          "platform_tests": 1949,
+          "skipped": 10,
+          "elapsed_seconds": 152.154
+        },
+        "summary": "evidence/producer-main-ci-summary.json"
+      }
+    },
+    "retained_executions": {
+      "regular_pages": {
+        "workflow": "public-site.yml",
+        "run_id": 41617152984,
+        "source_commit": "189dc01a5ee42a23ac7e246f8390c2acfe471ffa",
+        "status": "FAIL",
+        "source_build_abi_and_canvas_controls": "PASS",
+        "failed_case": "third e950 CoreS3 case: engine Worker target remained after stop",
+        "nested_pthreads_destroyed": 5,
+        "guest_exit_code": 0,
+        "owner_normal_terminations": 1,
+        "owner_fallback_terminations": 0,
+        "engine_target_disappeared_only_at_context_teardown": true,
+        "engine_cleanup_pass": false,
+        "wasm_sha256": "e9d10ae8f2d56c5bd2f3ba38fe45f50e5e835fe60f8df697a4e7fb2e8d2aea58",
+        "deployment": "SKIPPED",
+        "root_cause": "UNRESOLVED"
+      },
+      "withdrawn_old_local": {
+        "wasm_sha256": "0bd9478743d640484cad4762b9d7f7ae57a222f83ebf12a2114eb764a05194ea",
+        "status": "WITHDRAWN",
+        "reason": "private producer paths in executable",
+        "prefix_occurrences": 164,
+        "source_location_macro_occurrences": 162,
+        "configured_install_path_occurrences": 2,
+        "actual_prefix_values_published": false,
+        "completed_partial_cases_before_withdrawal": 4,
+        "release_acceptance_granted": false
+      }
+    },
+    "prepared_release": {
+      "source_commit": "1b86ed6f7edcc36deafc4834b45a28c6a6017c79",
+      "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+      "wasm_sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+      "source_archive_sha256": "3bf6ee4fe907aff960ace53ae4622356345960055e0cb1cc1dee964ff6fc09b0",
+      "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b",
+      "recipe_sha256": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc",
+      "runtime_files": {
+        "runtime.json": {
+          "bytes": 33622,
+          "sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c"
+        },
+        "qemu-system-xtensa.js": {
+          "bytes": 157200,
+          "sha256": "5d306019d5ecc8eab9aa2d582f2e1f3c34a9bcc1d24dd6a463391eac94564a4e"
+        },
+        "qemu-system-xtensa.wasm": {
+          "bytes": 12745460,
+          "sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567"
+        },
+        "qemu-system-xtensa.worker.js": {
+          "bytes": 2776,
+          "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+        },
+        "corresponding-source.tar.xz": {
+          "bytes": 35241880,
+          "sha256": "3bf6ee4fe907aff960ace53ae4622356345960055e0cb1cc1dee964ff6fc09b0"
+        },
+        "NOTICE": {
+          "bytes": 968,
+          "sha256": "290273f3bf903aa43510e68a735810e0e6c54d43accc5dc16b00ffd5a0399f76"
+        }
+      },
+      "fresh_dependencies": 8,
+      "all_objects_rebuilt": true,
+      "qemu_ninja_steps": 1446,
+      "ordered_patches": 72,
+      "source_postimages": 160,
+      "emscripten": "3.1.50",
+      "emsdk_commit": "e2627e265d940db5ea58dffa63e490375bfc92e5",
+      "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+      "base_path": "/m5stack-esp-emulator/",
+      "asset_count": 2127,
+      "asset_bytes": 251120243,
+      "privacy_and_export_status": "PASS \u2014 scoped artifact audits",
+      "cardputer_adv": {
+        "status": "PASS",
+        "checks_passed": 69,
+        "checks_total": 69,
+        "raw_report_sha256": "7f9f5f7fc53eebcf4a1fea63f38f673f67cbdbc6a652ede6c2c579951e30192f",
+        "actual_worker_targets_closed": 6,
+        "guest_exit_code": 0,
+        "owner_fallback_terminations": 0,
+        "record": "https://github.com/m5agent/agent-work-logs/blob/2c4f5fcf9469ac8f6935a29359489003705cc76e/records/esp-emulator/2026-11-03-qemu-producer-paths/report.md"
+      },
+      "full_gate": {
+        "status": "PASS",
+        "boards": 19,
+        "cases_expected": 20,
+        "cases_passed": 20,
+        "checks_total": 552,
+        "checks_passed": 552,
+        "gate_started_at": "2026-11-03T11:09:31.166Z",
+        "gate_finished_at": "2026-11-03T11:34:07.853Z",
+        "raw_report_sha256": "8281af8207f2b036eb33f0269e28adc880a5a650d7968e592c974c1a47617d95",
+        "safe_summary": {
+          "path": "evidence/full-browser-gate-summary.json",
+          "sha256": "947ae11865a4659e7bd6453ba2ba7e6e130f5f766501a9139efca484d625f054",
+          "bytes": 58307
+        },
+        "cleanup_totals": {
+          "virtual_machines": 22,
+          "pthreads_created": 102,
+          "engine_normal_terminations": 22,
+          "engine_fallback_terminations": 0,
+          "distinct_context_observed_targets": 124,
+          "live_targets_after_finalization": 0
+        },
+        "performance_comparison": "NOT RUN by this functional gate"
+      },
+      "deployment": {
+        "workflow": "public-site-prepared-preview.yml",
+        "channel": "prepared-preview emergency path; not regular publication CI",
+        "status": "PASS",
+        "release_tag": "pages-performance-20261103-10788607",
+        "package_sha256": "d4be918692aa7d63cdf6f6360da2cfc2c3337b2f07ad96fce011f1d3bfe2fe4a",
+        "package_bytes": 146747803,
+        "run_id": 41629045946,
+        "head_sha": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+        "created_at": "2026-11-03T11:37:39Z",
+        "updated_at": "2026-11-03T11:38:17Z",
+        "jobs": [
+          {
+            "name": "prepare",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-03T11:37:42Z",
+            "completedAt": "2026-11-03T11:37:55Z",
+            "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41629045946/job/125893620931"
+          },
+          {
+            "name": "deploy",
+            "status": "completed",
+            "conclusion": "success",
+            "startedAt": "2026-11-03T11:38:00Z",
+            "completedAt": "2026-11-03T11:38:16Z",
+            "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41629045946/job/125893736639"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": 13226524508,
+            "name": "github-pages",
+            "size_in_bytes": 147277136,
+            "digest": "sha256:94279190a0431edeb0d7eec5a091f0b0169414fa8bd2d5d3e9a599a48281708d",
+            "created_at": "2026-11-03T11:37:54Z",
+            "expired": false
+          }
+        ],
+        "url": "https://m5agent.github.io/m5stack-esp-emulator/",
+        "summary": "evidence/prepared-deployment-summary.json",
+        "online_actual_guest_status": "PARTIAL \u2014 three stages scoped PASS, first touch startup FAIL/input NOT RUN"
+      },
+      "online": {
+        "status": "PARTIAL",
+        "state": "STAGES_1_TO_3_PASS_STAGE4_STARTUP_FAIL_TOUCH_NOT_RUN",
+        "manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+        "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+        "assets_match_prepared_release": {
+          "status": "PASS",
+          "scope": "48 listed GET URLs only, not all 2127 declared online assets",
+          "actual_gets": 48,
+          "actual_bytes": 49173223,
+          "all_http_200": true,
+          "redirects": false,
+          "bytes_equal_frozen_export": true
+        },
+        "actual_guest": {
+          "status": "PARTIAL",
+          "stage_count": 4,
+          "stages_passed": 3,
+          "stages_failed": 1,
+          "stages": [
+            {
+              "stage": 1,
+              "kind": "actual-HTTPS-CoreS3-original-stock-acceptance",
+              "result": "PASS",
+              "firmware_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+              "raw_report_sha256": "0bfefa1ba079c968f9da50eed24599b05ff6472f5f208232f0b20e89cd1483b7",
+              "summary": {
+                "path": "evidence/online-cores3-stock-summary.json",
+                "sha256": "74bfb1870598a1fc335430449c283d446f20ff2c0c47e7e9c095b663ee9edc59",
+                "bytes": 6230
+              },
+              "release_binding": {
+                "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+                "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+                "wasm_sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+                "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+              },
+              "checks_passed": 49,
+              "virtual_machines": 2,
+              "actual_worker_targets_closed": 12,
+              "actual_runner_kind": "Tracked test_public_qemu_guest.mjs; the ignored remote adapter did not execute this stage",
+              "actual_runner_sha256": "60dd91681b8cc85b10468becd028faa2a1702e180590ab23344613429372dbe9",
+              "suite_preflight_adapter_identity_sha256": "ecc887184178b99656bdada419502355940ee6cec7ec45a405c2259a822efa87",
+              "ready_timing": "NOT MEASURED by this functional gate; no startup-duration claim",
+              "gesture_protocol_hold_ms": 650
+            },
+            {
+              "stage": 2,
+              "kind": "actual-HTTPS-StackChan-default-reference-acceptance",
+              "result": "PASS",
+              "firmware_sha256": "407f6260400da1b0d10d2374917c7eabd43e6b3bed614afcb97a8d09a7f4af18",
+              "raw_report_sha256": "765dfae7aebf92183c2d5c335722b4d6e5c857f094ef42ea22bc029d92d14c53",
+              "summary": {
+                "path": "evidence/online-stackchan-reference-summary.json",
+                "sha256": "94ad6efa929bf2fa882eaa78fd645d8230f86c7815b9587df4b7946c532cfcdb",
+                "bytes": 2268
+              },
+              "release_binding": {
+                "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+                "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+                "wasm_sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+                "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+              },
+              "checks_passed": 24,
+              "virtual_machines": 1,
+              "actual_worker_targets_closed": 6,
+              "harness_sha256": "aa828dab6c8148720be1b68c97328eef51d59cb829b310f9fb09b7789b325bdd",
+              "adapter_identity_sha256": "ecc887184178b99656bdada419502355940ee6cec7ec45a405c2259a822efa87",
+              "ready_timing": "NOT MEASURED by this functional gate; no startup-duration claim"
+            },
+            {
+              "stage": 3,
+              "kind": "actual-HTTPS-same-c854-dance-performance",
+              "result": "PASS",
+              "firmware_sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+              "raw_report_sha256": "f97d908b4a81f080cc51fc65a39d7af38b6ca09528ca53409cdae288f428faf2",
+              "summary": {
+                "path": "evidence/online-dance-summary.json",
+                "sha256": "3968e814ce8d6d8e7ab71e6d32cee40d7a02d7491f79a70cd38efc076186285b",
+                "bytes": 11216
+              },
+              "release_binding": {
+                "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+                "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+                "wasm_sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+                "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+              },
+              "virtual_machines": 2,
+              "actual_worker_targets_closed": 12,
+              "harness_sha256": "8128326134725687e799e7b2639233b75b648eba24ab0edf4f816a26f1c4d5b6",
+              "metric_algorithm_sha256": "9849f95183ba64bbcf6395dea4e5e85054058e6584ee56d6ef72b07e626144de",
+              "adapter_identity_sha256": "ecc887184178b99656bdada419502355940ee6cec7ec45a405c2259a822efa87",
+              "runs": [
+                {
+                  "run": 1,
+                  "startup_ms": {
+                    "first_serial": 2748.3400000333786,
+                    "ready_marker": 5320.070000052452,
+                    "first_nonblack_frame": 5337.945000052452,
+                    "runtime_preparation": 65.63499999046326
+                  },
+                  "pixel_change_observations_per_second": 26.696175772807816,
+                  "packet_delta": 169,
+                  "position_change_observations": 163,
+                  "dance_cue_count": 30,
+                  "maximum_frame_gap_ms": 1280.1749999523163,
+                  "maximum_state_gap_ms": 2855.274999976158,
+                  "rendered_motion_validation": {
+                    "result": "PASS",
+                    "source": "actual-workbench-viewer-render",
+                    "observations": 907,
+                    "actual_angle_changes": 697,
+                    "intermediate_observations": 624,
+                    "controller_bindings_checked": 164,
+                    "session_and_firmware_bound": true,
+                    "meaning": "Observed 3D presentation follows real QOM positions. This is virtual-device visual evidence, not physical servo behavior."
+                  },
+                  "maximum_render_gap_ms": 1245.6399999856949,
+                  "normal_cleanup": true
+                },
+                {
+                  "run": 2,
+                  "startup_ms": {
+                    "first_serial": 1477.5500000715256,
+                    "ready_marker": 3982.515000104904,
+                    "first_nonblack_frame": 3998.710000038147,
+                    "runtime_preparation": 63.125
+                  },
+                  "pixel_change_observations_per_second": 26.347747267715402,
+                  "packet_delta": 166,
+                  "position_change_observations": 161,
+                  "dance_cue_count": 30,
+                  "maximum_frame_gap_ms": 1263.8050000667572,
+                  "maximum_state_gap_ms": 2845.929999947548,
+                  "rendered_motion_validation": {
+                    "result": "PASS",
+                    "source": "actual-workbench-viewer-render",
+                    "observations": 892,
+                    "actual_angle_changes": 682,
+                    "intermediate_observations": 613,
+                    "controller_bindings_checked": 162,
+                    "session_and_firmware_bound": true,
+                    "meaning": "Observed 3D presentation follows real QOM positions. This is virtual-device visual evidence, not physical servo behavior."
+                  },
+                  "maximum_render_gap_ms": 1244.5099999904633,
+                  "normal_cleanup": true
+                }
+              ],
+              "target_count_scope": "Per-run counts are cumulative within this browser context, not additive; final unique total is12.",
+              "limits": [
+                "First means fresh browser/guest/module, not cold network. Artifact preflight warms CDN edge.",
+                "HTTPS delivery timing is not the same network condition as the local R6 static site.",
+                "All original maximum frame/render/state intervals are retained. The matching source specifies1250ms boot-card hold and1500ms initial cue delay; causal attribution of each observed maximum has not been independently established.",
+                "Pixel-change callbacks and observed QOM/3D positions are virtual observations, not physical screen/servo measurements."
+              ]
+            },
+            {
+              "stage": 4,
+              "kind": "actual-HTTPS-first-attempt-touch-startup-failure",
+              "result": "FAIL",
+              "firmware_sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+              "raw_report_sha256": "5975563a8689fc427ccaede5c9a18a2d695fab6118470b9edcbaff6894918650",
+              "summary": {
+                "path": "evidence/online-touch-startup-failure-summary.json",
+                "sha256": "fb91169887cca2d83ce2101436eb3b31e5a87efbb8c249efe41db03253a95615",
+                "bytes": 3036
+              },
+              "release_binding": {
+                "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+                "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+                "wasm_sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+                "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+              },
+              "virtual_machines": 1,
+              "actual_worker_targets_closed": 6,
+              "harness_sha256": "8128326134725687e799e7b2639233b75b648eba24ab0edf4f816a26f1c4d5b6",
+              "metric_algorithm_sha256": "9849f95183ba64bbcf6395dea4e5e85054058e6584ee56d6ef72b07e626144de",
+              "adapter_identity_sha256": "ecc887184178b99656bdada419502355940ee6cec7ec45a405c2259a822efa87",
+              "startup_observation": {
+                "application_ready": false,
+                "ready_ms": null,
+                "observed_frames": 0,
+                "input_events": 0,
+                "touch_validation": "NOT RUN: startup fault preceded the8s sampling window and every input",
+                "wait_timeout_ms": 120000,
+                "runtime_status": "booting"
+              },
+              "observed_fault": {
+                "cpu": 1,
+                "exception": "LoadStorePIFAddrError",
+                "pc": "0x40001c38",
+                "exccause": "0x0000000f",
+                "excvaddr": "0x40001c34",
+                "guest_reset_events": 2
+              },
+              "cleanup": {
+                "graceful_exit": true,
+                "exit_code": 0,
+                "nested_pthreads_at_exit": 0,
+                "owner_fallback_terminations": 0,
+                "all_observed_targets": 6,
+                "actual_targets_live_before_context_close": 0
+              },
+              "touch_validation": "NOT RUN",
+              "touch_response_derivation": "NOT RUN",
+              "ordinary_retry_used": false,
+              "root_cause": "NOT ESTABLISHED",
+              "limits": [
+                "No ordinary retry replaced this failed first attempt.",
+                "Two preceding same-firmware20s dance samples passed; they do not prove startup stability or replace the missing independent touch response.",
+                "Local R6 touch results remain under their original runtime identity and are not copied into this result.",
+                "Runtime reset event count is retained exactly as observed; serial shows one reboot and the event count must not be equated to independent reboot count.",
+                "Root cause is not established; no firmware/clock/WDT change was made."
+              ]
+            }
+          ],
+          "cleanup": {
+            "status": "PASS",
+            "virtual_machines": 6,
+            "actual_worker_targets_closed": 36,
+            "live_before_context_teardown": 0,
+            "guest_exit_code": 0,
+            "owner_fallback_terminations": 0,
+            "scope": "Cleanup remains independent from stage4 functional startup failure."
+          },
+          "touch_response": "NOT RUN; startup failed before every input",
+          "root_cause": "NOT ESTABLISHED",
+          "first_failure_preserved": true,
+          "ordinary_retry_replaced_failure": false,
+          "previous_R6_touch_inherited": false,
+          "four_stage_audit": {
+            "path": "evidence/online-four-stage-summary.json",
+            "sha256": "394a4f86f95ccb85aaafe0427a7fa3ba7d639ef1c277afe71c63d531abae7d15",
+            "bytes": 41458
+          }
+        },
+        "http_readback": {
+          "status": "PASS",
+          "started_at": "2026-11-03T11:38:49.776Z",
+          "finished_at": "2026-11-03T11:39:14.253Z",
+          "summary": {
+            "path": "evidence/live-https-assets-summary.json",
+            "sha256": "a58659a37ab2f3b6f27dcbb9f8b160f0e954926401fcf5e123f5354533600c24",
+            "bytes": 25864
+          },
+          "canonical_manifest": {
+            "path": "evidence/canonical-online-manifest-summary.json",
+            "sha256": "187e36d041bdac16e221dfe95ddf2f22877cf4504de90ca365e3ed1a08283548",
+            "bytes": 209
+          },
+          "closure": {
+            "executed_web_paths": 22,
+            "qemu_runtime_files": 6,
+            "littlefs_files": 13,
+            "manifest": 1,
+            "extra_entry_isolation_and_config_paths": 6,
+            "all_actual_HTTP_bytes_equal_frozen_export": true,
+            "redirects_allowed": false,
+            "public_boards": 19,
+            "explicit_candidate_boards": [],
+            "service_url": ""
+          },
+          "source_and_license": {
+            "actual_downloaded_corresponding_source_sha256": "3bf6ee4fe907aff960ace53ae4622356345960055e0cb1cc1dee964ff6fc09b0",
+            "actual_downloaded_notice_sha256": "290273f3bf903aa43510e68a735810e0e6c54d43accc5dc16b00ffd5a0399f76",
+            "actual_HTTP_archive_bytes_equal_independently_audited_archive": true,
+            "independent_archive_audit_sha256": "4f30155b321d909e3c3ba556a26cec505f79ad105bf0a2965b80e4540936c88a",
+            "reused_audit_scope": {
+              "source_postimages": 160,
+              "ordered_qemu_patches": 72,
+              "dependency_patches": 2,
+              "recipe_and_lock": 2,
+              "official_dependency_input_archives": 9
+            },
+            "archive_rebuilt_or_reextracted_by_HTTP_check": false,
+            "independent_recipe_sha256": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc",
+            "independent_source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+          },
+          "expected_hashes": {
+            "manifest": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+            "runtime": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+            "wasm": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+            "source": "3bf6ee4fe907aff960ace53ae4622356345960055e0cb1cc1dee964ff6fc09b0",
+            "lock": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b",
+            "recipe": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc",
+            "runtimeAudit": "4f30155b321d909e3c3ba556a26cec505f79ad105bf0a2965b80e4540936c88a",
+            "fullGate": "947ae11865a4659e7bd6453ba2ba7e6e130f5f766501a9139efca484d625f054"
+          }
+        }
+      },
+      "package": {
+        "status": "PASS",
+        "validation_category": "artifact packaging and closure audit",
+        "filename": "public-site-preview-live.tar.gz",
+        "bytes": 146747803,
+        "sha256": "d4be918692aa7d63cdf6f6360da2cfc2c3337b2f07ad96fce011f1d3bfe2fe4a",
+        "members": 2128,
+        "asset_members": 2127,
+        "summary": "evidence/prepared-package-summary.json",
+        "independent_audit": "evidence/prepared-tar-independent-summary.json"
+      },
+      "upload": {
+        "status": "PASS",
+        "validation_category": "artifact transport verification",
+        "release_tag": "pages-performance-20261103-10788607",
+        "release_url": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-performance-20261103-10788607",
+        "source_commit": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+        "published_at": "2026-11-03T11:36:57Z",
+        "assets": [
+          {
+            "name": "public-site-preview-live.tar.gz",
+            "bytes": 146747803,
+            "sha256": "d4be918692aa7d63cdf6f6360da2cfc2c3337b2f07ad96fce011f1d3bfe2fe4a",
+            "downloaded_bytes_equal": true
+          },
+          {
+            "name": "public-site-validation-summary.json",
+            "bytes": 58307,
+            "sha256": "947ae11865a4659e7bd6453ba2ba7e6e130f5f766501a9139efca484d625f054",
+            "downloaded_bytes_equal": true
+          },
+          {
+            "name": "prepared-package-summary.json",
+            "bytes": 1105,
+            "sha256": "e45f708fa6d4e9869142e6b119930c470e1e223dca4ebb07d982fb585106c463",
+            "downloaded_bytes_equal": true
+          }
+        ],
+        "summary": "evidence/release-readback-summary.json"
+      },
+      "same_tree_as_product_merge107": true,
+      "deployed_product_merge_commit": "10788607feefb9e532c2dd1fe4679adcd6aa0fc2",
+      "product_bytes_equivalent_at_documentation_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+      "all_non_docs_unchanged_since_product_merge": true
+    },
+    "before_online": {
+      "purpose": "pre-deployment baseline, not a new-release PASS",
+      "manifest_sha256": "ec8a24d80aca1731079c34fa2d796699ae30d3bd5f7508aa6c10c4dd70bbe279",
+      "manifest_bytes": 427653,
+      "http_status": 200
+    },
+    "documentation_delivery": {
+      "status": "PASS",
+      "source_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+      "local_main_synced_clean": true,
+      "docs_tests": {
+        "tests": 50,
+        "elapsed_seconds": 12.36,
+        "status": "PASS"
+      },
+      "generators": [
+        {
+          "name": "runtime_coverage",
+          "status": "PASS",
+          "log_sha256": "ae22dc70eea81ac4f6d6918c0d694fc72cbc72cb589a13d93dac5b5c453d9311",
+          "bytes": 20
+        },
+        {
+          "name": "peripheral_catalog",
+          "status": "PASS",
+          "log_sha256": "6e3c49ec0c80a56051031a4bf3ba0fe16aa118f2b31f8863c09ef0bc4cc89633",
+          "bytes": 22
+        },
+        {
+          "name": "qemu_profiles",
+          "status": "PASS",
+          "log_sha256": "04a26a35d775027ee0ce627c0888eeb20272591f8801dbd6e2f0dfb2e499281e",
+          "bytes": 17
+        },
+        {
+          "name": "project_snapshot",
+          "status": "PASS",
+          "log_sha256": "05110c70ad2d40d6a4943005ed5d00f2780cb44d5288bcee45128d62b19d6f1d",
+          "bytes": 20
+        }
+      ],
+      "scope": {
+        "new_blobs": 17,
+        "new_blob_bytes": 1032656,
+        "new_evidence_bytes": 192880,
+        "errors": []
+      },
+      "non_docs_changes": 0,
+      "site_redeployed": false,
+      "summary": "evidence/docs-source-delivery-summary.json"
+    }
+  },
+  "checks": [
+    {
+      "layer": "delivery",
+      "subject": "PR163 and PR164 merge",
+      "status": "PASS"
+    },
+    {
+      "layer": "host CI",
+      "subject": "final PR heads",
+      "status": "PASS"
+    },
+    {
+      "layer": "build/privacy",
+      "subject": "new producer runtime and prepared export",
+      "status": "PASS"
+    },
+    {
+      "layer": "virtual-device validation",
+      "subject": "exact new Cardputer-ADV case",
+      "status": "PASS"
+    },
+    {
+      "layer": "full reference regression",
+      "subject": "new nineteen-board twenty-case gate",
+      "status": "PASS",
+      "details": "19 boards, 20 cases, 552 checks; 124 actual targets closed"
+    },
+    {
+      "layer": "regular Pages gate",
+      "subject": "run41617152984 e950 engine cleanup",
+      "status": "FAIL"
+    },
+    {
+      "layer": "delivery",
+      "subject": "prepared-preview deployment",
+      "status": "PASS",
+      "details": "package/upload readback and prepare/deploy terminal success; online actual guest separate"
+    },
+    {
+      "layer": "hardware validation",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "long-duration stability",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "transport/source bytes",
+      "subject": "48 listed actual HTTPS URLs",
+      "status": "PASS",
+      "scope": "not all 2127 declared assets; no browser/guest started by this readback"
+    },
+    {
+      "layer": "device_response/data_behavior/virtual visual",
+      "subject": "actual HTTPS CoreS3 and StackChan reference",
+      "status": "PASS",
+      "scope": "Exact independent reference firmwares, not arbitrary applications"
+    },
+    {
+      "layer": "performance and rendered motion observations",
+      "subject": "actual HTTPS c854 dance two20s windows",
+      "status": "PASS",
+      "scope": "Same firmware in the two observed VMs; maxima retained, not a startup-stability claim"
+    },
+    {
+      "layer": "startup",
+      "subject": "first independent c854 touch VM",
+      "status": "FAIL",
+      "reason": "ROM LoadStorePIFAddrError before app ready"
+    },
+    {
+      "layer": "device input and response derivation",
+      "subject": "independent c8548s touch",
+      "status": "NOT RUN",
+      "reason": "No app ready, frames or inputs"
+    },
+    {
+      "layer": "cleanup",
+      "subject": "all six actual online VMs",
+      "status": "PASS",
+      "scope": "36 actual targets closed; does not negate functional failure"
+    },
+    {
+      "layer": "documentation delivery",
+      "subject": "docs-only b41 pushed and local main synced",
+      "status": "PASS",
+      "scope": "50docs tests+4generators+scope; no product change or redeployment"
+    },
+    {
+      "layer": "host CI",
+      "subject": "current b41main",
+      "status": "PASS",
+      "state": "COMPLETED",
+      "run_id": 41631441210
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "fixed historical report",
+      "url": "https://github.com/m5agent/agent-work-logs/blob/73cf198d7d3808e9f66e9cce8faa1349f9a0a9e4/records/esp-emulator/2026-11-03-emulator-performance/report.md",
+      "scope": "historical performance/native/browser evidence only"
+    },
+    {
+      "kind": "fixed producer report",
+      "url": "https://github.com/m5agent/agent-work-logs/blob/2c4f5fcf9469ac8f6935a29359489003705cc76e/records/esp-emulator/2026-11-03-qemu-producer-paths/report.md",
+      "scope": "fresh build/privacy/export and exact Cardputer-ADV virtual-device subresult"
+    },
+    {
+      "kind": "public Actions run",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41617152984",
+      "scope": "retained failed regular gate; deployment skipped"
+    },
+    {
+      "kind": "public PR CI",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41625517780",
+      "scope": "producer push checks"
+    },
+    {
+      "kind": "public PR CI",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41626388927",
+      "scope": "producer pull_request checks"
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/full-browser-gate-summary.json",
+      "sha256": "947ae11865a4659e7bd6453ba2ba7e6e130f5f766501a9139efca484d625f054",
+      "bytes": 58307
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/producer-main-ci-summary.json",
+      "sha256": "7e5e928d83faae30c6b33ded57cb7a7d2fcec58bcf254b70dd20370f633c3054",
+      "bytes": 3658
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/prepared-package-summary.json",
+      "sha256": "e45f708fa6d4e9869142e6b119930c470e1e223dca4ebb07d982fb585106c463",
+      "bytes": 1105
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/prepared-tar-independent-summary.json",
+      "sha256": "e84fc2ba799e47be2484f5aa3fbf7474dc36cdbc7a80c2183c4682708997cdce",
+      "bytes": 2134
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/release-readback-summary.json",
+      "sha256": "1ea4d00e8e3e142d37407f669d18094890bc31a61f066609b3217f7a18b73a7f",
+      "bytes": 1136
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/prepared-deployment-summary.json",
+      "sha256": "c3c35dcc9bcdfa31233116a0604a8a0209b2ccfb837c56df928f2d546b35d84d",
+      "bytes": 1604
+    },
+    {
+      "kind": "frozen adapter source restoration metadata",
+      "path": "code/adapter-source-manifest.json",
+      "sha256": "2748813ebba1afa902bc8ad4204da24ac6bb725d93934820c7326b04cecaf268",
+      "bytes": 8234
+    },
+    {
+      "kind": "frozen adapter source restoration metadata",
+      "path": "code/restoration-proof-summary.json",
+      "sha256": "d59d9d4327019b1c9c30f86877d99575a1b9f478fbed2abaa658d0526a19f56a",
+      "bytes": 2586
+    },
+    {
+      "kind": "reviewed public-safe actual HTTP summary",
+      "path": "evidence/live-https-assets-summary.json",
+      "sha256": "a58659a37ab2f3b6f27dcbb9f8b160f0e954926401fcf5e123f5354533600c24",
+      "bytes": 25864
+    },
+    {
+      "kind": "reviewed public-safe actual HTTP summary",
+      "path": "evidence/canonical-online-manifest-summary.json",
+      "sha256": "187e36d041bdac16e221dfe95ddf2f22877cf4504de90ca365e3ed1a08283548",
+      "bytes": 209
+    },
+    {
+      "kind": "reviewed public-safe actual HTTPS guest summary",
+      "path": "evidence/online-cores3-stock-summary.json",
+      "sha256": "74bfb1870598a1fc335430449c283d446f20ff2c0c47e7e9c095b663ee9edc59",
+      "bytes": 6230
+    },
+    {
+      "kind": "reviewed public-safe actual HTTPS guest summary",
+      "path": "evidence/online-stackchan-reference-summary.json",
+      "sha256": "94ad6efa929bf2fa882eaa78fd645d8230f86c7815b9587df4b7946c532cfcdb",
+      "bytes": 2268
+    },
+    {
+      "kind": "reviewed public-safe actual HTTPS guest summary",
+      "path": "evidence/online-dance-summary.json",
+      "sha256": "3968e814ce8d6d8e7ab71e6d32cee40d7a02d7491f79a70cd38efc076186285b",
+      "bytes": 11216
+    },
+    {
+      "kind": "reviewed public-safe actual HTTPS guest summary",
+      "path": "evidence/online-touch-startup-failure-summary.json",
+      "sha256": "fb91169887cca2d83ce2101436eb3b31e5a87efbb8c249efe41db03253a95615",
+      "bytes": 3036
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/docs-source-delivery-summary.json",
+      "sha256": "b700d4569962108277e353167c2bb816cf98fc836c22e4882a83f02871593281",
+      "bytes": 3496
+    },
+    {
+      "kind": "reviewed public-safe summary",
+      "path": "evidence/online-four-stage-summary.json",
+      "sha256": "394a4f86f95ccb85aaafe0427a7fa3ba7d639ef1c277afe71c63d531abae7d15",
+      "bytes": 41458
+    },
+    {
+      "kind": "reviewed summary",
+      "path": "evidence/current-main-ci-summary.json",
+      "bytes": 585,
+      "sha256": "82f688c130a27b33d2eaa4e8a672c11789872853410bd7a0fb79c82933c21cff"
+    },
+    {
+      "kind": "reviewed summary",
+      "path": "evidence/online-independent-review.json",
+      "bytes": 8960,
+      "sha256": "9b1dc68113421f6ef920e93fc2f48422eb14396b3a5048f862384ebc061b21dc"
+    },
+    {
+      "kind": "reviewed summary",
+      "path": "evidence/startup-rom-literal-diagnosis-summary.json",
+      "bytes": 10470,
+      "sha256": "13adb63b3c3c1a62767b32ca5906f3a89a7550b58f44c1f1016c4ef40124b775"
+    }
+  ],
+  "pending_root_fields": [],
+  "notes": [
+    "Reviewed summaries and portable source only; raw logs, frames, runtime and firmware binaries remain outside this record.",
+    "Prepared-preview deployment is distinct from regular source-build publication CI. Do not relabel either lane.",
+    "Prepared-preview deployment, actual HTTPS bytes and online guest stages have separate evidence; the first touch startup FAIL remains retained.",
+    "Historical nineteen-board functional coverage is not a nineteen-board speedup claim.",
+    "Single QEMU/TCI remains; no experimental JIT or second SoC backend is integrated.",
+    "Factory gap and unresolved regular CI engine cleanup remain open.",
+    "No ROM/firmware/mutable Flash/private path/endpoint/raw session or Worker identifier is copied.",
+    "Existing recoverable edits are retained without publishing their storage or stash identifiers.",
+    "Actual HTTPS source archive bytes equal the independently audited archive; the HTTP readback does not claim a new rebuild or re-extraction/source audit.",
+    "Stage1 executed the tracked CoreS3 runner, not the ignored remote board adapter. The suite preflight adapter identity is not relabeled as the executed runner identity.",
+    "Online startup FAIL and successful cleanup are separate outcomes. No R6 touch result or ordinary retry replaces this failed first attempt.",
+    "Documentation-only b41 has a different full tree from1b/main107. All non-docs source bytes are unchanged; the site was not redeployed for this commit.",
+    "Online results are final scoped evidence: stages1\u20133 PASS, stage4 startup FAIL and independent touch/response NOT RUN, overall PARTIAL. Unresolved causes are stated as not established, not fabricated pending results.",
+    "The matched ROM literal read and Core1 interrupt backtrace are localized by immutable inputs; the cause of the failed transaction is still unresolved. No PSRAM root cause or absence of regression is inferred."
+  ],
+  "validation_category": "Virtual-device validation: complete local reference gate PASS; actual HTTPS functional/performance stages scoped PASS plus a retained startup FAIL; physical hardware NOT RUN",
+  "record_path": "records/esp-emulator/2026-11-03-emulator-performance-pages-release/"
+}

@@ -1,0 +1,91 @@
+--- old/pages_remote_release.mjs
++++ prepared/pages_remote_release.mjs
+@@ -11,0 +12,7 @@
++// This labels the reviewed producer artifact, not a successful regular-CI run.
++export const REVIEWED_ARTIFACT=Object.freeze({
++  kind:'reviewed-artifact-HTTPS-release-preflight',
++  artifact_provenance:'prepared-preview-export',
++  runtime_origin:'fresh-full-source-build-public-path-policy-v1',
++  source_commit:'1b86ed6f7edcc36deafc4834b45a28c6a6017c79',
++});
+@@ -19 +26 @@
+-  for(const [key,name] of Object.entries(rows)){assert.match(env[name]||'',SHA,'Explicit CI artifact pin is required: '+name);expected[key]=env[name];}
++  for(const [key,name] of Object.entries(rows)){assert.match(env[name]||'',SHA,'Explicit reviewed artifact pin is required: '+name);expected[key]=env[name];}
+@@ -28 +35 @@
+-  assert.equal(sha(lockBytes),expected.lock,'Checked-out release source lock differs from explicit CI pin');
++  assert.equal(sha(lockBytes),expected.lock,'Checked-out release source lock differs from explicit reviewed artifact pin');
+@@ -36 +43 @@
+-  assert.equal(runtime.assets.wasm.sha256,expected.wasm,'Actual remote WASM differs from explicit CI artifact pin');
++  assert.equal(runtime.assets.wasm.sha256,expected.wasm,'Actual remote WASM differs from explicit reviewed artifact pin');
+@@ -54 +61 @@
+-  const manifestBytes=await get('public-site-manifest.json');assert.equal(sha(manifestBytes),expected.manifest,'Actual remote site manifest differs from explicit CI artifact pin');
++  const manifestBytes=await get('public-site-manifest.json');assert.equal(sha(manifestBytes),expected.manifest,'Actual remote site manifest differs from explicit reviewed artifact pin');
+@@ -63 +70 @@
+-  const runtimeBytes=await getAsset('platform/runtime/qemu/runtime.json');assert.equal(sha(runtimeBytes),expected.runtime,'Actual remote runtime manifest differs from explicit CI artifact pin');
++  const runtimeBytes=await getAsset('platform/runtime/qemu/runtime.json');assert.equal(sha(runtimeBytes),expected.runtime,'Actual remote runtime manifest differs from explicit reviewed artifact pin');
+@@ -86 +93 @@
+-  const proof={kind:'explicit-CI-artifact-HTTPS-release-preflight',location:'remote-static-host',url:PAGES_URL,expected:release.expected,
++  const proof={...REVIEWED_ARTIFACT,location:'remote-static-host',url:PAGES_URL,expected:release.expected,
+--- old/test_remote_release.mjs
++++ prepared/test_remote_release.mjs
+@@ -7 +7 @@
+-import {PAGES_URL,expectedRelease,readRemoteRelease,assertReleaseReceipt} from './pages_remote_release.mjs';
++import {PAGES_URL,REVIEWED_ARTIFACT,expectedRelease,readRemoteRelease,assertReleaseReceipt} from './pages_remote_release.mjs';
+@@ -37,2 +37,2 @@
+-await check('mandatory explicit CI pins and exact HTTPS project root',async()=>{
+-  assert.throws(()=>expectedRelease({M5_BENCH_URL:PAGES_URL},'M5_BENCH_URL'),/Explicit CI artifact pin/);
++await check('mandatory explicit reviewed artifact pins and exact HTTPS project root',async()=>{
++  assert.throws(()=>expectedRelease({M5_BENCH_URL:PAGES_URL},'M5_BENCH_URL'),/Explicit reviewed artifact pin/);
+@@ -43,0 +44,2 @@
++  assert.deepEqual(REVIEWED_ARTIFACT,{kind:'reviewed-artifact-HTTPS-release-preflight',artifact_provenance:'prepared-preview-export',runtime_origin:'fresh-full-source-build-public-path-policy-v1',source_commit:'1b86ed6f7edcc36deafc4834b45a28c6a6017c79'});
++  assert.equal(Object.isFrozen(REVIEWED_ARTIFACT),true);
+@@ -59 +61 @@
+-await check('wrong CI site/runtime/WASM/lock pins rejected',async()=>{
++await check('wrong reviewed site/runtime/WASM/lock pins rejected',async()=>{
+--- old/prepare.py
++++ prepared/prepare.py
+@@ -49 +49,3 @@
+-identity={'kind':'ignored-HTTPS-test-adapter-source-identity','parents':parents,'actual_files':{}}
++identity={'kind':'ignored-HTTPS-test-adapter-source-identity',
++ 'artifact_provenance':'prepared-preview-export','runtime_origin':'fresh-full-source-build-public-path-policy-v1',
++ 'source_commit':'1b86ed6f7edcc36deafc4834b45a28c6a6017c79','parents':parents,'actual_files':{}}
+--- old/README.md
++++ prepared/README.md
+@@ -27 +27 @@
+-the exact CI WASM/glue/worker.
++the exact reviewed-artifact WASM/glue/worker.
+@@ -30 +30 @@
+-come from this actual CI artifact; there is no default local R6 WASM or
++come from the independently audited prepared-preview artifact; there is no default local R6 WASM or
+@@ -31,0 +32,11 @@
++
++The preflight provenance is `prepared-preview-export`, with runtime origin
++`fresh-full-source-build-public-path-policy-v1` and reviewed producer commit
++`1b86ed6f7edcc36deafc4834b45a28c6a6017c79`. That commit identifies the artifact
++producer; it is distinct from the QEMU upstream source commit and a later
++main merge SHA. Regenerate this adapter identity when reviewing another source
++artifact. Four mandatory hash pins and all source/archive/receipt checks remain
++unchanged. Regular workflow run 41617152984 failed its Worker cleanup gate and
++is not reclassified as PASS by this prepared-preview provenance. Online checks
++remain NOT RUN until full local acceptance, actual publication and root's
++explicit start instruction.
+@@ -37,4 +48,4 @@
+-    export M5_PAGES_MANIFEST_SHA256="$CI_PUBLIC_SITE_MANIFEST_SHA256"
+-    export M5_PAGES_RUNTIME_SHA256="$CI_RUNTIME_MANIFEST_SHA256"
+-    export M5_PAGES_WASM_SHA256="$CI_WASM_SHA256"
+-    export M5_PAGES_SOURCE_LOCK_SHA256="$CI_SOURCE_LOCK_SHA256"
++    export M5_PAGES_MANIFEST_SHA256="$REVIEWED_PUBLIC_SITE_MANIFEST_SHA256"
++    export M5_PAGES_RUNTIME_SHA256="$REVIEWED_RUNTIME_MANIFEST_SHA256"
++    export M5_PAGES_WASM_SHA256="$REVIEWED_WASM_SHA256"
++    export M5_PAGES_SOURCE_LOCK_SHA256="$REVIEWED_SOURCE_LOCK_SHA256"
+@@ -49,2 +60,2 @@
+-All CI_* values above are supplied by root after inspecting the real CI
+-artifact. Never substitute the /perf/ manifest identity or a guessed build
++All REVIEWED_* values above are supplied by root after inspecting the real
++prepared-preview export and its fresh source build. Never substitute the /perf/ manifest identity or a guessed build
+@@ -100 +111 @@
+-CI/R6 identity; these commands establish the real hosted delivery path.
++own exact prepared-artifact identity; these commands establish the real hosted delivery path.
+@@ -114 +125 @@
+-deployed CI runtime's verification or a new guest result.
++deployed reviewed runtime's verification or a new guest result.

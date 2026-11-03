@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-03 | ESP Emulator | 性能合 main 与正式 Pages 预构建更新 | PARTIAL（源码/部署/48路径回读完成；19板20例552检查PASS；线上前三阶段PASS，独立触摸轮启动FAIL、输入NOT RUN；正式CI清理缺口保留） | [查看](records/esp-emulator/2026-11-03-emulator-performance-pages-release/) |
 | 2026-11-03 | ESP Emulator | QEMU producer 路径规范化与新 runtime 同路径验证 | `PASS`（限定producer/build/privacy与Cardputer-ADV69项；full20仍运行，Pages未发布） | [查看](records/esp-emulator/2026-11-03-qemu-producer-paths/) |
 | 2026-11-03 | ESP Emulator | 单 QEMU 性能修复与同固件对照 | `PARTIAL`（virtual-device：19板20例/552检查PASS；舞蹈ready3.56/2.75s；Factory浏览器故障保留，未部署） | [查看](records/esp-emulator/2026-11-03-emulator-performance/) |
 | 2026-11-03 | WeCom GPT bridge | GPT 自动回复与业务授权恢复 | `PARTIAL`（真实短文本自动回复 PASS，23s；旧历史压缩 FAIL，server recall 重写超时后回退） | [查看](records/infra/2026-11-03-wecom-gpt-channel-recovery/) |
