@@ -3,17 +3,28 @@
   "date": "2026-11-03",
   "kind": "code_change",
   "overall_status": "PARTIAL",
-  "record_state": "unpublished draft",
-  "title": "ESP Emulator performance repair and same-firmware comparison",
-  "validation_category": "virtual-device validation",
+  "record_state": "final reviewed follow-up",
+  "title": "ESP Emulator 单一 QEMU 性能修复与分层验收",
+  "validation_category": "virtual-device validation; physical hardware NOT RUN",
   "source": {
     "issue": null,
     "pull_request": null,
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "3691870c27b028dde76202e42ecddba31d1547c1",
-    "final_commit": null,
+    "final_commit": "69b26f3b72e7a3246048d58f6b77d649155790a7",
     "qemu_repository": "https://github.com/espressif/qemu",
-    "qemu_base_commit": "40edccac415693c5130f91c01d84176ae6008566"
+    "qemu_base_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "measured_browser_source_commit": "8dd39cac835f6325a3f0aa815ca0d8471b025e6b",
+    "delivery": "Local review branch and complete applicable source patch; no source remote push, merge or production deployment.",
+    "patch": {
+      "path": "patches/0001-qemu-performance-repair.patch",
+      "sha256": "59d4a75fb79d6e2f077c332f939605d5779928d4d5bcc9c3e5a9d229d2f8ccf9",
+      "bytes": 1151968,
+      "base_commit": "3691870c27b028dde76202e42ecddba31d1547c1",
+      "final_commit": "69b26f3b72e7a3246048d58f6b77d649155790a7",
+      "application": "git apply --index --unidiff-zero",
+      "tree_verified": "c681f56aeb328bb46294d10a53885391fbc898a5"
+    }
   },
   "hardware": {},
   "firmware": {
@@ -21,12 +32,32 @@
       {
         "device": "StackChan",
         "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
-        "family": "Arduino user dance"
+        "source_sha256": "7ee22ca570acd7f105d8205b3bc67ecc19e60ce11b1533f3481fc1288081bb9e",
+        "scope": "user dance source identity"
+      },
+      {
+        "device": "CoreS3",
+        "sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+        "source_sha256": "7672397edc3bff5256015c5d857fa3b4c53cba814bac6a982fb7eeb521cef3cb",
+        "scope": "unchanged fixed stock-reference main.py"
       },
       {
         "device": "CoreS3",
         "sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
-        "family": "Explicit LVGL elapsed-time candidate"
+        "scope": "separate SDK scheduler candidate; not substituted for original stock reference"
+      },
+      {
+        "device": "StopWatch",
+        "sha256": "d231d8523c8b448e8b920777d298c575989dbafc57fc3f432851bcaeb61b1898",
+        "source_kind": "published-firmware-binary",
+        "original_publisher_sha256": "6395799089341e0ae96072c2a3418d469d6797b2ab8ee0cab1c9ed24a42acbbe",
+        "scope": "FF-pad16MiB, no application-ready marker"
+      },
+      {
+        "device": "StackChan Factory",
+        "sha256": "39910815a732530b95a0fc3a7cd251b26cc818b2a94e6a6a9b2abd94c75e97da",
+        "original_publisher_sha256": "411578a2ebca2cfe3541fdc32aeddbc4703cf912a5daa7e1253f69306d6e1d87",
+        "scope": "known failing browser vendor path; not admitted as a fast variant"
       }
     ],
     "binaries_included": false
@@ -46,74 +77,406 @@
     "identifiers": "Raw task/session/device identifiers and endpoints omitted",
     "flash_capacity_bytes": 16777216
   },
+  "execution_note": "Retained byte-for-byte JSON value of the original archived native execution. Historical pending browser fields inside it describe that earlier record only; current follow-up results are below.",
+  "follow_up_execution": {
+    "browser_r6": {
+      "status": "PASS",
+      "scope": "exact c854 dance cold/warm20s plus separate8s trusted-touch response",
+      "runtime_wasm_sha256": "0bd9478743d640484cad4762b9d7f7ae57a222f83ebf12a2114eb764a05194ea",
+      "runtime_manifest_sha256": "c441473d53dbdd47450c14ae5eafbc04f995f8a210eebdc0447b38a5d844bd9c",
+      "site_manifest_sha256": "d716a3de85713baf46acae91113781895817c9377d48578ee70a9dd0a4f068ff",
+      "source_commit": "8dd39cac835f6325a3f0aa815ca0d8471b025e6b",
+      "public_js_sha256": "0d4fd744477c2221853416ade231a84800ae75b229202a1ea039b79069e8277c",
+      "raw_dance_report_sha256": "73579b7d07edf6e6e09078cf7187b77036d35756e21ed74ea622d9d79b302724",
+      "raw_touch_report_sha256": "b426f4e748a56966ee0fd3feccd25f8ca741d684cf5d00fe38fd2038d0b53b10",
+      "touch_proof_sha256": "447ae5d581a6a474a08052593e87abc2e326163f777bb7f7ab71baa2001fa06e",
+      "ready_ms": [
+        3558.9650000333786,
+        2745.9599999189377
+      ],
+      "packet_delta": [
+        168,
+        166
+      ],
+      "position_change_observations": [
+        165,
+        163
+      ],
+      "max_render_gap_ms": [
+        1262.3799999952316,
+        70.74500000476837
+      ],
+      "gap_scope": "Untrimmed demand-driven render observations; startup bootcard/initial delay context is separate. Warm full raw includes an early gap excluded by the selected window boundary."
+    },
+    "admitted_browser_r6": {
+      "status": "PASS",
+      "boards": 19,
+      "cases": 20,
+      "checks_passed": 552,
+      "checks_total": 552,
+      "summary_sha256": "94210ce132b0265e9ca473e784d8fd4e3c78ab266728e389507f3a6f61895c7a",
+      "scope": "fixed admitted fixtures; not arbitrary firmware or Factory vendor acceptance"
+    },
+    "cores3_stock_r5": {
+      "status": "PASS",
+      "scope": "original789612 main767239, clock1+oneInsn, two20s composer windows; timing round R5 remains distinct from R6 gate",
+      "raw_report_sha256": "100855d8f77ba5cfb16a18e9162db49545b7747ec210e4fd0faf4ef18da0a176",
+      "site_manifest_sha256": "b1d1c6ca8dee3943edd9136c5f39da24f23a8ec444d5e410a6e6fccc9090e58c",
+      "preserved_harness_failure_sha256": "5ffaa6436e8f9c4160b5566c52c4a5dab1362bc8bd4352b49a1bcd0f87316b6d"
+    },
+    "stopwatch_r4": {
+      "status": "PASS",
+      "scope": "publisher binary padded d231, first nonblack and trusted A+B complete menu ROI evidence; no application-ready marker",
+      "raw_report_sha256": "f453a52281a2f847ce5a37e98267fcbc610a37f37af9e436ee56bf4da28df9df"
+    },
+    "native_final_r6_equivalence": {
+      "status": "REVIEW",
+      "guest_rerun": "NOT RUN",
+      "scope": "bounded served-source/data equivalence to retained native r4 execution, not a new native timing/guest PASS"
+    },
+    "host_qa": {
+      "status": "PASS",
+      "evidence": "evidence/host-production-checks-summary.json",
+      "scope": "Python 3.12.14: 1942 tests, 10 skips, all remaining passed; Node contracts and required generated/source/diff checks passed.",
+      "summary_sha256": "b2eafdc25d6e5f0c34b25af60cf86e6b8ceba6ff31cc053c237bb04758139eba"
+    },
+    "deployment": {
+      "status": "NOT RUN",
+      "scope": "No production deployment or source merge; this record archives the verified follow-up."
+    }
+  },
   "checks": [
     {
       "layer": "build",
-      "status": "NOT RUN",
-      "scope": "Final r2 build evidence pending; candidate-r1 is excluded"
+      "status": "PASS",
+      "scope": "72-patch/160-postimage full fresh source build;8 rebuilt libraries, C objects O2/final link O3; independent replay leaves original outputs unchanged"
     },
     {
       "layer": "transport",
       "status": "PASS",
-      "scope": "Native serial/frame/QOM/evidence for four retained virtual-device executions"
+      "scope": "R6 actual browser frame/QOM/serial plus retained native r4 protocol evidence; lanes are separate"
     },
     {
       "layer": "device_response",
       "status": "PASS",
-      "scope": "Native SCS readback and CoreS3 controller input reaches guest callback"
+      "scope": "R6 actual c854 controller touch bits48→0 and causal same-guest marker; native CoreS3 callback retained in original execution"
     },
     {
       "layer": "data_behavior",
       "status": "PASS",
-      "scope": "Native raw positions/DOM/rendered joints, firmware/session binding and auto-route"
+      "scope": "R6 same-session/fw QOM→DOM/targets/real rendered poses and source-bound provenance"
     },
     {
       "layer": "visual_or_physical",
       "status": "PARTIAL",
-      "scope": "Actual native rendered motion; completed-frame fidelity REVIEW; physical behavior NOT RUN"
+      "scope": "new20-case pixel/input gate and Cardputer retained-frame repaint verified; physical behavior/complete scanout fidelity/long soak NOT RUN"
     },
     {
-      "layer": "browser_final_r2",
-      "status": "NOT RUN",
-      "scope": "Final normal-product-path browser runtime acceptance pending"
+      "layer": "browser_admitted_regression",
+      "status": "PASS",
+      "scope": "R6 all19 boards20 cases,552/552 checks; discarded false-positive and interrupted earlier gates are not counted"
     },
     {
-      "layer": "all_admitted_regression",
-      "status": "NOT RUN",
-      "scope": "Existing admitted-board browser regression pending"
+      "layer": "factory_vendor_browser",
+      "status": "FAIL",
+      "scope": "retained real WDT/Double failures; root cause unresolved and no JIT/oneInsn workaround admitted for399108"
+    },
+    {
+      "layer": "native_served_source_followup",
+      "status": "REVIEW",
+      "scope": "bounded source/data proof only; original native4run46-check evidence unchanged"
+    },
+    {
+      "layer": "final_host_qa",
+      "status": "PASS",
+      "scope": "Python 3.12.14: 1942 tests, 10 skips, all remaining passed; Node contracts and required generated/source/diff checks passed."
     },
     {
       "layer": "delivery",
-      "status": "NOT RUN",
-      "scope": "Local draft only; no commit/publication/index change"
+      "status": "PASS",
+      "scope": "Reviewable source commits, independently applicable patch and this archived follow-up; merge/deployment NOT RUN."
     }
   ],
   "evidence": [
     {
-      "path": "evidence/native-summary.json",
-      "kind": "public-safe derived virtual-device summary",
-      "sha256": "64c20bf78140177de789f9b257452bce68eae0d4a844da2b193b3ed75c7286f6",
-      "bytes": 26192,
-      "source_document": "docs/evidence/2026-11-03-emulator-performance/native-summary.json",
-      "copied_without_changes": true
+      "path": "evidence/admitted-browser-summary.json",
+      "bytes": 54404,
+      "sha256": "94210ce132b0265e9ca473e784d8fd4e3c78ab266728e389507f3a6f61895c7a",
+      "kind": "reviewed derived summary"
     },
     {
-      "path": "evidence/native-validation.md",
-      "kind": "public-safe derived virtual-device summary",
-      "sha256": "58cc637efb3dbb46f14fe352e07457ac32d7fbb8adbced808c04b4dced06b1eb",
-      "bytes": 5628,
-      "source_document": "docs/evidence/2026-11-03-emulator-performance/native-validation.md",
-      "copied_without_changes": true
+      "path": "evidence/admitted-old-false-negative-control-summary.json",
+      "bytes": 2675,
+      "sha256": "29aae0c6fd3d355799f2d47a83577246554cead59c980e30708271630cefd6af",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/browser-final-stackchan-summary.json",
+      "bytes": 42654,
+      "sha256": "6cd35f6996813a3e8c2068401f4e1ff30c1fe7370aebc771f6c9c0ae67980c55",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/browser-r4-summary.json",
+      "bytes": 56216,
+      "sha256": "68fde64c9a968fa18883f8166f2c68f61877b2b6d58b8c6a9ebaa8d0384f9a7e",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/browser-stock-compose-summary.json",
+      "bytes": 30039,
+      "sha256": "7d78b7a341de7f0fdcea1669e84cd78d9f857d547a9b79c0f20142905a7684c6",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/build-candidate-r1-summary.json",
+      "bytes": 4797,
+      "sha256": "4c0a589a683e2595378245189b02e768be836bd1eb7345ad3d03614cd2a145d3",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/build-r4-summary.json",
+      "bytes": 11148,
+      "sha256": "965b2bb09b3dd8f241b4f32e467a082a22c7b9988dad05d7c502c4a8bf110771",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/build-summary.json",
+      "bytes": 5004,
+      "sha256": "fc52aa6abe5488213b5b5ac2b0cc6a4e775ea6dfad13a2544317e6942d17d4cb",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/candidate-r1-summary.json",
+      "bytes": 28825,
+      "sha256": "8eb59705da2315793dc7389ed41f301bee9f774301aa2a020f6c6404e490d8e6",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/cores3-stock-candidate-summary.json",
+      "bytes": 15935,
+      "sha256": "56cd5444c95e73c7f4547a421b957a50c05995368f5313f82fdef6bb48bd8357",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/cstack-diagnostics-summary.json",
+      "bytes": 6382,
+      "sha256": "abfb9f51926ee9a69ad9af7fe07a7b9ceb85e388d5a8b83b8beb8def1a7b1999",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/cstack-opt-in-host-contract-summary.json",
+      "bytes": 6791,
+      "sha256": "7d7a4137aa6d00e452a4c8ec2789fb726b6e8f8dcb65287b458ebc7019bbd3fa",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-double-origin-summary.json",
+      "bytes": 9124,
+      "sha256": "40e96e6b6990afaed2814885a46a27578bee8153da47c225d54fe5a2ea8c4b12",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-libffi-control-summary.json",
+      "bytes": 8427,
+      "sha256": "8679eeae01b05432d35593f378c487d0ca0316b9d1625ada5bb7144c797a1070",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-nochain-control-summary.json",
+      "bytes": 11861,
+      "sha256": "0dd993ed0b93e29394f49b85f57093fc2795e0d7b3bddf2d1d4cdeb793bafab2",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-panic-diagnosis-summary.json",
+      "bytes": 8199,
+      "sha256": "1bf8669eb3663041831f8fa6db4c535c1625ff965caad2cb1100258db69b2658",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-profile-acquisition-summary.json",
+      "bytes": 8013,
+      "sha256": "5ba63ef1ac9f5fd83fabbc838c4012e1ce19d8133dc8203fc362c50e86e66067",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-profile-summary.json",
+      "bytes": 37213,
+      "sha256": "13af358f3696c75dfe4ba2a0f3731cfe0540a3095ebdc93c9714f2d1fcb2e4c4",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-traceoff-control-summary.json",
+      "bytes": 9570,
+      "sha256": "cfd17e6ee1351f605243ef6bd61aa4ee9bee3f097aaad5f573d2a0b4ec65b763",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/factory-warm-cache-audit-summary.json",
+      "bytes": 6013,
+      "sha256": "413eb07ff48287e90026e0e0e636045e2f12c8091d6e68fe75375f027ba2f516",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/gpio-reset-summary.json",
+      "bytes": 6042,
+      "sha256": "9cee801a27251ab7e124309f11b1c27abedb8dcfd5b37e3d4b54ad67add5a26b",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/host-production-checks-summary.json",
+      "bytes": 3833,
+      "sha256": "b2eafdc25d6e5f0c34b25af60cf86e6b8ceba6ff31cc053c237bb04758139eba",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/host-r4-checks-summary.json",
+      "bytes": 2895,
+      "sha256": "8a15c92c3c909ca8406378eaaeaa7665728148446be107233542db6d677ca302",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/input-artifacts-summary.json",
+      "bytes": 1476,
+      "sha256": "e9746f79dfa42535501b94d6d44e2e77f0a3cb7958b63aa08cf0fafbce58e199",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/intermediate-summary.json",
+      "bytes": 48630,
+      "sha256": "5c33f2bbba4df1726fa976d7eb8eb04f3d29cf7c1daef13b1e9cf5375b251aae",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/jit-four-lane-summary.json",
+      "bytes": 36615,
+      "sha256": "a8e59ece2263ae1e7e0d8491b2176166f406b88a6a6997c70af428c8ce177360",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/jit-host-backend-review-summary.json",
+      "bytes": 15829,
+      "sha256": "6bf0f4ad5a1dacf1b37719224f766c2f0b066d7ccfb577b66b48a185e52b25f9",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/jit-integration-cost-summary.json",
+      "bytes": 10178,
+      "sha256": "e4243fca0064fb4d39a93f65afcfc04e36aba6b484c3c587fdf0eed5de6a902d",
+      "kind": "reviewed derived summary"
     },
     {
       "path": "evidence/manifest.summary.json",
-      "kind": "derived evidence identity and exclusion manifest"
+      "bytes": 7190,
+      "sha256": "a3678ba53db31583cc00402385f5622bdc3950e95ff24b2fbbf34bc2b8e20216",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-factory-control-summary.json",
+      "bytes": 8123,
+      "sha256": "00e27c5c2b1cc392669142d1b301f85d0e7ca37a24e9a9198b6205d9a5601360",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-factory-source-summary.json",
+      "bytes": 9517,
+      "sha256": "8b841b4cda8cbb504d86d749b6d2bc166c2f1cf750b4a9bae8cbd0b73504a7fe",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-final-path-summary.json",
+      "bytes": 12575,
+      "sha256": "185ab808060079aa37acf170297e13f1601c7bd7c85f37ff9ed5430f96199d66",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-r4-served-path-summary.json",
+      "bytes": 7480,
+      "sha256": "d41a0db115b485e1b395beea316bdef3c48795178f908640f09c088e91a31728",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-shared-path-final-summary.json",
+      "bytes": 6793,
+      "sha256": "3f1b1df6e2d80f8108c658563d7f6b0b551f0720150ec1d70bae1f1d0c302051",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-shared-path-summary.json",
+      "bytes": 4673,
+      "sha256": "b5ce649cbf301d7396307835e5bf4e7d9cf972dd002d23df16597dcdcf5d4916",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-summary.json",
+      "bytes": 26192,
+      "sha256": "64c20bf78140177de789f9b257452bce68eae0d4a844da2b193b3ed75c7286f6",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/native-validation.md",
+      "bytes": 5628,
+      "sha256": "58cc637efb3dbb46f14fe352e07457ac32d7fbb8adbced808c04b4dced06b1eb",
+      "kind": "public reproduction and validation boundaries"
+    },
+    {
+      "path": "evidence/oracle-correction-summary.json",
+      "bytes": 5442,
+      "sha256": "360233d3ef14d7a382282c234103427f5a5305806ea7bcb516cc70f1ebf4c31b",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/orientation-repaint-summary.json",
+      "bytes": 9904,
+      "sha256": "0a9d8168af63e0d66bda3479851aeb54d4feacf77033093394bd29afa9518275",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/patch-apply-summary.json",
+      "bytes": 1258,
+      "sha256": "dedae5d670e1fe5676772ba278c751f0f039a67069308333e0ff45215ad544a8",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/stackchan-final-independent-summary.json",
+      "bytes": 2525,
+      "sha256": "67a9d9b88c97f5d912a1bb7622a69a41f3ff91f299a915041d1b8f3ae5e73ed2",
+      "kind": "reviewed derived summary"
+    },
+    {
+      "path": "evidence/startup-gap-summary.json",
+      "bytes": 9710,
+      "sha256": "c1b8f1c6e1fc571386586ef5da286e59dbd800abcc8808fb55ef3cbbd6c7b1c8",
+      "kind": "reviewed derived summary"
+    }
+  ],
+  "history": [
+    {
+      "kind": "original-native-record",
+      "archive_commit_prefix": "f820a8b",
+      "run_json_sha256": "9d66ce40b910a8a3eab97fa59c389ad54ea08aa2f7201849bfd2d0ecaa10c669",
+      "scope": "Original native-only PARTIAL record retained in Git history; execution copied unchanged."
+    },
+    {
+      "kind": "rejected-pixel-oracle",
+      "scope": "Playwright async predicate accepted Promise truthiness and actual false; oldPASS/partial5cases rejected, not combined into final gate."
+    },
+    {
+      "kind": "orientation-correction",
+      "scope": "Earlier Cardputer rotated-size failure preserved; same retained real frame/sequence repainted under active browser owner, followed by independent virtual-device proof and new full gate."
+    },
+    {
+      "kind": "withdrawn-jit-and-tbcap",
+      "scope": "Private host-backend/TBcap controls retained as failed diagnostics; no new SoC or JIT backend delivered."
     }
   ],
   "notes": [
-    "Prototype and failed-round history does not establish final browser PASS.",
-    "No physical hardware, completed-frame pixel oracle, long-soak or multi-device performance claim.",
-    "Root task must add final source commit, final r2 evidence and admitted-board scope before publication.",
-    "No commit, push or README index update performed by this draft."
+    "Overall remains PARTIAL because Factory vendor browser failures remain unresolved.",
+    "Performance PASS is exact-image/profile/site/host scoped; callback/pixel updates are not full-frame physical FPS.",
+    "Cold/warm preparation and differing clock/TB settings prevent a pure CPU attribution.",
+    "Native execution and R4 StopWatch/R5 stock-reference/R6 StackChan identities stay separate.",
+    "No ROM/firmware binary, raw session/Worker ID, credential or private endpoint is included.",
+    "This follow-up supersedes preliminary browser-pending metadata while preserving original native execution; source merge and production deployment NOT RUN."
   ]
 }
