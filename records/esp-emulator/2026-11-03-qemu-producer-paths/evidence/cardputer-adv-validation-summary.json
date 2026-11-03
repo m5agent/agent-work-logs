@@ -1,0 +1,1141 @@
+{
+  "schema_version": 1,
+  "kind": "cardputer-adv-public-paths-same-implementation-validation-summary",
+  "status": "PASS",
+  "scope": "One exact Cardputer-ADV public reference firmware through the newly source-built QEMU WASM and exported public UI. This is not a full twenty-case or production deployment result.",
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "started_at": "2026-11-03T11:09:31.333Z",
+  "finished_at": "2026-11-03T11:10:07.498Z",
+  "raw_artifacts": {
+    "report.json": {
+      "sha256": "7f9f5f7fc53eebcf4a1fea63f38f673f67cbdbc6a652ede6c2c579951e30192f",
+      "bytes": 101255
+    },
+    "running-before-input.json": {
+      "sha256": "afac15befffab56f80eca3bdcac95e1037cebbcdca650600d05c9ce3a16b5d8f",
+      "bytes": 622336
+    },
+    "running-after-input.json": {
+      "sha256": "f6de0c2c3dade3c27e5c1159c99b84bede75142b210504f753a24f0e540324d7",
+      "bytes": 632005
+    },
+    "stopped.json": {
+      "sha256": "69c5f04599164920e5a4398ff667c24f054f1dd0e89db912d4eee56d62553b1c",
+      "bytes": 632941
+    },
+    "guest-progress.json": {
+      "sha256": "c1f9924f558cbcb50e9985417b12985bb447635ae21185993fc0c3e3dafa987d",
+      "bytes": 6587
+    },
+    "native-frame.png": {
+      "sha256": "5639dce4b4b0545c529dd40dde76a406e1b513601163f019a5ed07c5c8446ce9",
+      "bytes": 330201
+    }
+  },
+  "source_commit": "1b86ed6f7edcc36deafc4834b45a28c6a6017c79",
+  "site_manifest_sha256": "c5991d737d4b20c4b1ae96b71587cec907a1e72f3c57fe2fee63c08e23daf323",
+  "runtime_manifest_sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+  "runtime": {
+    "engine": "qemu-wasm",
+    "deviceId": "cardputer-adv",
+    "board": "m5cardputeradv",
+    "profile": "cardputer-adv-wasm-wallclock",
+    "clockDivisor": 1,
+    "clockOverride": null,
+    "accelerator": null,
+    "oneInsnPerTb": false,
+    "requiredRuntimePatch": null,
+    "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+    "javascriptSha256": "5d306019d5ecc8eab9aa2d582f2e1f3c34a9bcc1d24dd6a463391eac94564a4e",
+    "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+    "wasmSha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+    "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "firmwareSha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+    "frameTransport": "shared-rgb565-v1",
+    "outputTransport": null,
+    "controller": "same-origin-iframe-message-channel",
+    "persistentFlash": false,
+    "wasmCompilation": "compiled",
+    "memoryBytes": 268435456,
+    "relocatedGlueSha256": "e56f3a88d3ac87feebaabec82ef61611fca4913fbf0b20b0fd9250767f017957",
+    "actualArguments": [
+      "./this.program",
+      "-M",
+      "m5cardputeradv",
+      "-drive",
+      "file=/flash.bin,if=mtd,format=raw",
+      "-L",
+      "/rom",
+      "-display",
+      "none",
+      "-serial",
+      "file:/bridge/uart.out",
+      "-serial",
+      "file:/bridge/serial1",
+      "-qmp",
+      "stdio",
+      "-drive",
+      "if=none,id=efuse,file=/efuse.bin,format=raw",
+      "-global",
+      "driver=nvram.esp32s3.efuse,property=drive,value=efuse"
+    ]
+  },
+  "runtime_build": {
+    "all_objects_rebuilt": true,
+    "commands_sha256": "8a8ab7d36b78b7499aea20c5ed6592039e49284b6147478333e87bc44858377a",
+    "emscripten": "3.1.50",
+    "guest_execution": "NOT RUN by builder",
+    "kind": "source-build",
+    "link_audit": {
+      "argv_sha256": "d02481da1724016b13dc408b23158633c4f73ff1c60c56a771e83c8523d8e62e",
+      "effective": {
+        "DEFAULT_PTHREAD_STACK_SIZE": "64KB",
+        "STACK_OVERFLOW_CHECK": "2",
+        "STACK_SIZE": "64KB",
+        "optimization": "O3"
+      },
+      "required_flags": [
+        "-O3",
+        "-sSTACK_SIZE=64KB",
+        "-sDEFAULT_PTHREAD_STACK_SIZE=64KB",
+        "-sSTACK_OVERFLOW_CHECK=2"
+      ],
+      "source": "ninja-link-command",
+      "verified": true
+    },
+    "lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b",
+    "path_policy": {
+      "glib_prefix": "/usr",
+      "public_source_roots": {
+        "cache": "/m5stack-build/cache",
+        "dependencies": "/m5stack-build/dependencies",
+        "project": "/m5stack-build/project",
+        "sdk": "/m5stack-build/sdk"
+      },
+      "version": 1
+    },
+    "recipe_sha256": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc"
+  },
+  "session_id_sha256": "b5b725599a8482062ecd6c9b82aa493c1f55fddaef1b840b2b1b22019ea95b52",
+  "session_binding_all_snapshots_match": true,
+  "checks": {
+    "passed": 69,
+    "total": 69,
+    "items": [
+      {
+        "name": "pages-service-worker-isolation",
+        "ok": true
+      },
+      {
+        "name": "public-ui-selected-board-reference",
+        "ok": true
+      },
+      {
+        "name": "same-guest-ready-and-display",
+        "ok": true
+      },
+      {
+        "name": "model-rendering-paused-until-guest-ready",
+        "ok": true
+      },
+      {
+        "name": "complete-native-red-marker",
+        "ok": true
+      },
+      {
+        "name": "cardputer-presentation-converges-to-guest-logical-orientation",
+        "ok": true
+      },
+      {
+        "name": "public-ui-3d-and-visible-native-frame",
+        "ok": true
+      },
+      {
+        "name": "public-ui-native-to-rendered-model-texture-before-input",
+        "ok": true
+      },
+      {
+        "name": "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "ok": true
+      },
+      {
+        "name": "hash-pinned-composed-firmware",
+        "ok": true
+      },
+      {
+        "name": "exported-default-clock-profile",
+        "ok": true
+      },
+      {
+        "name": "actual-physical-frame-dimensions",
+        "ok": true
+      },
+      {
+        "name": "guest-button-counter",
+        "ok": true
+      },
+      {
+        "name": "keyboard-original-driver-first-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-first-press-counter-and-state-pixels",
+        "ok": true
+      },
+      {
+        "name": "guest-button-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-first-release-state-pixels",
+        "ok": true
+      },
+      {
+        "name": "controller-input-changes-native-frame-marker",
+        "ok": true
+      },
+      {
+        "name": "keyboard-z-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-z-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-z-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-z-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-q-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-q-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-q-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-q-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-b-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-b-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-b-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-b-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-n-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-n-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-n-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-n-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-m-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-m-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-m-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-m-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-1-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-1-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-1-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-1-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-0-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-0-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-0-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-0-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-ret-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-ret-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-ret-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-ret-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-spc-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-spc-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-spc-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-spc-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-backspace-real-fifo-press",
+        "ok": true
+      },
+      {
+        "name": "keyboard-backspace-counter-and-press-pixels",
+        "ok": true
+      },
+      {
+        "name": "keyboard-backspace-original-driver-release",
+        "ok": true
+      },
+      {
+        "name": "keyboard-backspace-release-pixels",
+        "ok": true
+      },
+      {
+        "name": "public-ui-native-to-rendered-model-texture-after-input",
+        "ok": true
+      },
+      {
+        "name": "unsupported-button-fails-closed",
+        "ok": true
+      },
+      {
+        "name": "qmp-pause-freezes-guest",
+        "ok": true
+      },
+      {
+        "name": "qmp-resume-fresh-guest-heartbeat",
+        "ok": true
+      },
+      {
+        "name": "guest-remains-free-of-panic-or-python-traceback",
+        "ok": true
+      },
+      {
+        "name": "clean-guest-stop-and-worker-disposal",
+        "ok": true
+      },
+      {
+        "name": "created-pthreads-close-before-iframe-finalization",
+        "ok": true
+      },
+      {
+        "name": "engine-and-created-pthreads-close-after-iframe-finalization",
+        "ok": true
+      },
+      {
+        "name": "no-leftover-guest-iframe",
+        "ok": true
+      },
+      {
+        "name": "no-page-errors",
+        "ok": true
+      },
+      {
+        "name": "no-device-service-requests",
+        "ok": true
+      }
+    ]
+  },
+  "serial": {
+    "utf8_sha256": "b413180adb9f86d622652e73e81c70ff279a43ba4ef81f303a94ce9aca3665c3",
+    "utf8_bytes": 6119,
+    "ready": {
+      "board": 24,
+      "kind": "ready",
+      "seq": 2,
+      "device": "cardputer-adv",
+      "controller": "tca8418",
+      "input": "keyboard",
+      "height": 135,
+      "address": 52,
+      "receive_mode": "official-driver-fifo-poll",
+      "width": 240
+    },
+    "parsed_probe_events": 40,
+    "pressed_events": 11,
+    "count_events": 11,
+    "released_events": 11,
+    "count_sequence": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "fault_marker_counts": {
+      "panic": 0,
+      "watchdog": 0,
+      "python_traceback": 0,
+      "double_exception": 0
+    },
+    "initialization_diagnostics": [
+      {
+        "class": "I2C driver reports an uninitialized port",
+        "occurrences": 1,
+        "scope": "Observed during boot before the ready event; retained rather than claiming no error-level text."
+      }
+    ]
+  },
+  "frames": {
+    "before_input": {
+      "width": 240,
+      "height": 135,
+      "sequence": 1,
+      "format": "rgb565le",
+      "source": "qemu-display-surface-shared",
+      "source_sequence": 100,
+      "source_updates": 50,
+      "sha256": "7e3cb9a173bda3d4260f39a067aa8067d3179f9eaecdec7840ac53a211b04b6e"
+    },
+    "after_input": {
+      "width": 240,
+      "height": 135,
+      "sequence": 118,
+      "format": "rgb565le",
+      "source": "qemu-display-surface-shared",
+      "source_sequence": 686,
+      "source_updates": 343,
+      "sha256": "57562843fad92927cdf520e8e58638332bcf942c9a15ca7e39047827748cd75c"
+    },
+    "stopped": {
+      "width": 240,
+      "height": 135,
+      "sequence": 118,
+      "format": "rgb565le",
+      "source": "qemu-display-surface-shared",
+      "source_sequence": 686,
+      "source_updates": 343,
+      "sha256": "57562843fad92927cdf520e8e58638332bcf942c9a15ca7e39047827748cd75c"
+    }
+  },
+  "pixel_hashes_independently_recomputed": true,
+  "native_frame_changes_with_real_input": true,
+  "display": {
+    "ready_width": 240,
+    "ready_height": 135,
+    "marker": {
+      "x1": 2,
+      "y1": 2,
+      "x2": 9,
+      "y2": 9,
+      "count": 64,
+      "source": "qemu-display-surface-shared",
+      "sourceSequence": 100,
+      "sourceUpdates": 50
+    },
+    "coordinate_observation": {
+      "guest_marker": {
+        "x": 2,
+        "y": 2,
+        "width": 8,
+        "height": 8
+      },
+      "frame_marker": {
+        "x1": 2,
+        "y1": 2,
+        "x2": 9,
+        "y2": 9,
+        "count": 64,
+        "source": "qemu-display-surface-shared",
+        "sourceSequence": 100,
+        "sourceUpdates": 50
+      },
+      "logical_display": {
+        "coordinateSpace": "qemu-physical-frame",
+        "height": 135,
+        "hostRotation": 0,
+        "width": 240
+      },
+      "physical_display": {
+        "coordinateSpace": "qemu-physical-frame",
+        "height": 135,
+        "hostRotation": 0,
+        "width": 240
+      },
+      "offset_x": 0,
+      "offset_y": 0,
+      "exact_guest_coordinates": true,
+      "scope": "Observed firmware/model calibration only; a nonzero offset remains a separate display-model boundary."
+    },
+    "presentation_sync": [
+      {
+        "begin_ms": 16898.300000071526,
+        "end_ms": 16914.915000081062,
+        "fresh": {
+          "orientation": "landscape",
+          "deviceRotationDeg": 0
+        },
+        "cached_before": {
+          "orientation": "portrait",
+          "deviceRotationDeg": -90
+        },
+        "cached_after": {
+          "orientation": "portrait",
+          "deviceRotationDeg": -90
+        },
+        "native": {
+          "width": 240,
+          "height": 135,
+          "sequence": 1,
+          "sourceSequence": 100
+        },
+        "canvas": {
+          "width": 135,
+          "height": 240
+        },
+        "model_rotation": 270
+      },
+      {
+        "begin_ms": 17017.99500000477,
+        "end_ms": 17027.430000066757,
+        "fresh": {
+          "orientation": "landscape",
+          "deviceRotationDeg": 0
+        },
+        "cached_before": {
+          "orientation": "landscape",
+          "deviceRotationDeg": 0
+        },
+        "cached_after": {
+          "orientation": "landscape",
+          "deviceRotationDeg": 0
+        },
+        "native": {
+          "width": 240,
+          "height": 135,
+          "sequence": 1,
+          "sourceSequence": 100
+        },
+        "canvas": {
+          "width": 240,
+          "height": 135
+        },
+        "model_rotation": 0
+      }
+    ],
+    "texture_before": {
+      "frame_sequence": 1,
+      "rendered_sequence": 1,
+      "pixels_compared": 32400,
+      "model_rotation": 0,
+      "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+    },
+    "texture_after": {
+      "frame_sequence": 118,
+      "rendered_sequence": 118,
+      "pixels_compared": 32400,
+      "model_rotation": 0,
+      "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+    }
+  },
+  "input": {
+    "mode": "official-driver-fifo-poll",
+    "controller": "tca8418",
+    "successful_controller_receipts": 22,
+    "ui_events": 23,
+    "unmapped_control": "PASS — fails closed",
+    "keyboard_cases": [
+      {
+        "domKey": "KeyA",
+        "keycode": 97,
+        "qcode": "a",
+        "row": 2,
+        "col": 2,
+        "count": {
+          "keycode": 97,
+          "row": 2,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 4,
+          "device": "cardputer-adv",
+          "count": 1,
+          "col": 2
+        },
+        "release": {
+          "keycode": 97,
+          "row": 2,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 5,
+          "device": "cardputer-adv",
+          "count": 1,
+          "col": 2
+        },
+        "counter_sha256": "58e99c8856455a8820a130b91bb8a5c31f28776caccd664622e5c534f380b9e9"
+      },
+      {
+        "domKey": "KeyZ",
+        "keycode": 122,
+        "qcode": "z",
+        "row": 3,
+        "col": 3,
+        "count": {
+          "keycode": 122,
+          "row": 3,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 7,
+          "device": "cardputer-adv",
+          "count": 2,
+          "col": 3
+        },
+        "release": {
+          "keycode": 122,
+          "row": 3,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 8,
+          "device": "cardputer-adv",
+          "count": 2,
+          "col": 3
+        },
+        "counter_sha256": "2813382728679da02e380bf47de69b840c4cc178ba9025ce4493913c49a8c44b"
+      },
+      {
+        "domKey": "KeyQ",
+        "keycode": 113,
+        "qcode": "q",
+        "row": 1,
+        "col": 1,
+        "count": {
+          "keycode": 113,
+          "row": 1,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 11,
+          "device": "cardputer-adv",
+          "count": 3,
+          "col": 1
+        },
+        "release": {
+          "keycode": 113,
+          "row": 1,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 12,
+          "device": "cardputer-adv",
+          "count": 3,
+          "col": 1
+        },
+        "counter_sha256": "56eed25eee484d35123a9c27c53754fbc66d571afc4a6a328d7f6fc27fdb6eb0"
+      },
+      {
+        "domKey": "KeyB",
+        "keycode": 98,
+        "qcode": "b",
+        "row": 3,
+        "col": 7,
+        "count": {
+          "keycode": 98,
+          "row": 3,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 14,
+          "device": "cardputer-adv",
+          "count": 4,
+          "col": 7
+        },
+        "release": {
+          "keycode": 98,
+          "row": 3,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 15,
+          "device": "cardputer-adv",
+          "count": 4,
+          "col": 7
+        },
+        "counter_sha256": "afe61d128af97ba364af8873879f83ee3e4358ce0d5a756b2f3d0eb34e9bf0a5"
+      },
+      {
+        "domKey": "KeyN",
+        "keycode": 110,
+        "qcode": "n",
+        "row": 3,
+        "col": 8,
+        "count": {
+          "keycode": 110,
+          "row": 3,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 17,
+          "device": "cardputer-adv",
+          "count": 5,
+          "col": 8
+        },
+        "release": {
+          "keycode": 110,
+          "row": 3,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 18,
+          "device": "cardputer-adv",
+          "count": 5,
+          "col": 8
+        },
+        "counter_sha256": "4b9bf2768235bbbea5cd4d2a064406d49771a9eb402fbad6f672c4f04cab213e"
+      },
+      {
+        "domKey": "KeyM",
+        "keycode": 109,
+        "qcode": "m",
+        "row": 3,
+        "col": 9,
+        "count": {
+          "keycode": 109,
+          "row": 3,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 21,
+          "device": "cardputer-adv",
+          "count": 6,
+          "col": 9
+        },
+        "release": {
+          "keycode": 109,
+          "row": 3,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 22,
+          "device": "cardputer-adv",
+          "count": 6,
+          "col": 9
+        },
+        "counter_sha256": "aff2997b643cacfcfa5c9eb2d51fe5666f20cd30d6ce4ce7268755306fe7c32f"
+      },
+      {
+        "domKey": "Digit1",
+        "keycode": 49,
+        "qcode": "1",
+        "row": 0,
+        "col": 1,
+        "count": {
+          "keycode": 49,
+          "row": 0,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 24,
+          "device": "cardputer-adv",
+          "count": 7,
+          "col": 1
+        },
+        "release": {
+          "keycode": 49,
+          "row": 0,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 25,
+          "device": "cardputer-adv",
+          "count": 7,
+          "col": 1
+        },
+        "counter_sha256": "9b4aec97a1defc972bb2aff39cd92d01905ac2d3598061137e265e4ca9e738ad"
+      },
+      {
+        "domKey": "Digit0",
+        "keycode": 48,
+        "qcode": "0",
+        "row": 0,
+        "col": 10,
+        "count": {
+          "keycode": 48,
+          "row": 0,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 27,
+          "device": "cardputer-adv",
+          "count": 8,
+          "col": 10
+        },
+        "release": {
+          "keycode": 48,
+          "row": 0,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 28,
+          "device": "cardputer-adv",
+          "count": 8,
+          "col": 10
+        },
+        "counter_sha256": "124b0d366cff835646bcb1db01860091c1c02582dfe08c5b550041b2f3b0135e"
+      },
+      {
+        "domKey": "Enter",
+        "keycode": 10,
+        "qcode": "ret",
+        "row": 2,
+        "col": 13,
+        "count": {
+          "keycode": 10,
+          "row": 2,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 31,
+          "device": "cardputer-adv",
+          "count": 9,
+          "col": 13
+        },
+        "release": {
+          "keycode": 10,
+          "row": 2,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 32,
+          "device": "cardputer-adv",
+          "count": 9,
+          "col": 13
+        },
+        "counter_sha256": "df50e01f197f2dbffcaf8250630567571bf5071efc16c3771cf99d3ae8fe4bd4"
+      },
+      {
+        "domKey": "Space",
+        "keycode": 32,
+        "qcode": "spc",
+        "row": 3,
+        "col": 13,
+        "count": {
+          "keycode": 32,
+          "row": 3,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 34,
+          "device": "cardputer-adv",
+          "count": 10,
+          "col": 13
+        },
+        "release": {
+          "keycode": 32,
+          "row": 3,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 35,
+          "device": "cardputer-adv",
+          "count": 10,
+          "col": 13
+        },
+        "counter_sha256": "e69b52ef278168638615e47ca0172e63f2e04eb5699485446b164d3188f4ac6f"
+      },
+      {
+        "domKey": "Backspace",
+        "keycode": 8,
+        "qcode": "backspace",
+        "row": 0,
+        "col": 13,
+        "count": {
+          "keycode": 8,
+          "row": 0,
+          "kind": "count",
+          "driver_state": true,
+          "seq": 37,
+          "device": "cardputer-adv",
+          "count": 11,
+          "col": 13
+        },
+        "release": {
+          "keycode": 8,
+          "row": 0,
+          "driver_pressed": false,
+          "kind": "released",
+          "seq": 38,
+          "device": "cardputer-adv",
+          "count": 11,
+          "col": 13
+        },
+        "counter_sha256": "ae1363fee2cc441a3691453d3187eca6eddd14735bb5430d12bf248422960b20"
+      }
+    ],
+    "same_serial_key_row_column_and_count_verified": true
+  },
+  "machine_events": [
+    {
+      "event": "STOP",
+      "reason": null,
+      "guest": false,
+      "at": "2026-11-03T11:10:01.156Z"
+    },
+    {
+      "event": "RESUME",
+      "reason": null,
+      "guest": false,
+      "at": "2026-11-03T11:10:03.122Z"
+    },
+    {
+      "event": "SHUTDOWN",
+      "reason": "host-qmp-quit",
+      "guest": false,
+      "at": "2026-11-03T11:10:05.239Z"
+    }
+  ],
+  "cleanup": {
+    "runtime": {
+      "gracefulExit": true,
+      "exitCode": 0,
+      "workersCreated": 5,
+      "workersAtExit": 0,
+      "disposal": {
+        "workersRemaining": 0,
+        "workersTerminatedByDispose": 0,
+        "workerCountScope": "nested-pthreads",
+        "enginePlacement": "dedicated-worker-v1",
+        "engineWorkersAtAcknowledgement": 1,
+        "selfCloseAfterAcknowledgement": true
+      },
+      "engineOwnership": {
+        "engineWorkersCreated": 1,
+        "engineOwnerLive": false,
+        "engineCloseNotificationReceived": true,
+        "engineSelfCloseNotifications": 1,
+        "engineNormalTerminations": 1,
+        "engineFallbackTerminations": 0,
+        "enginePortTransferred": true
+      },
+      "engineOwnershipStage": "before-iframe-removal",
+      "explicitWorkerDisposal": true,
+      "iframeRemoved": true
+    },
+    "iframe_removal_control": {
+      "iframe_present": true,
+      "removal_requests": 1,
+      "iframe_count": 1,
+      "removal_deferred_by_harness": true,
+      "scope": "Real UI stop/quit/dispose; nested pthread targets are checked before iframe DOM removal, then all targets after it."
+    },
+    "actual_cdp_targets": {
+      "before_removal": {
+        "status": "PASS",
+        "observed_count": 6,
+        "live_count": 0,
+        "destroyed_count": 6,
+        "source": "Chrome DevTools Target.getTargets",
+        "observed": [
+          {
+            "ordinal": 1,
+            "target_id_sha256": "b9934545a352038ee36b1ccdd27455c60e690f946c6140a78a5558875abee98c",
+            "kind": "engine",
+            "created_at": "2026-11-03T11:09:38.811Z",
+            "destroyed_at": "2026-11-03T11:10:07.244Z"
+          },
+          {
+            "ordinal": 2,
+            "target_id_sha256": "6d02fbee637363d193030be153cdc5ad38c4a3948886de9a2b503be3b0db15c8",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.825Z",
+            "destroyed_at": "2026-11-03T11:10:07.243Z"
+          },
+          {
+            "ordinal": 3,
+            "target_id_sha256": "eee8e568cb056f57e1614151e53182cad3dc24cc9ecc3f9451107a95034e52b8",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.826Z",
+            "destroyed_at": "2026-11-03T11:10:07.242Z"
+          },
+          {
+            "ordinal": 4,
+            "target_id_sha256": "7560674251b4a8565f0326b7c6320bad357185a1b2ebf84fd295774758b146b3",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.826Z",
+            "destroyed_at": "2026-11-03T11:10:05.228Z"
+          },
+          {
+            "ordinal": 5,
+            "target_id_sha256": "85ad2ff26fb231e0ea2c65036a870163a2650035346c19f38a0957d7ee849510",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.826Z",
+            "destroyed_at": "2026-11-03T11:10:07.242Z"
+          },
+          {
+            "ordinal": 6,
+            "target_id_sha256": "2cc92ec6d27cb2faa617a881f359935477697cf039668cb40f1452d6209f2bc1",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.893Z",
+            "destroyed_at": "2026-11-03T11:10:05.228Z"
+          }
+        ]
+      },
+      "after_removal": {
+        "status": "PASS",
+        "observed_count": 6,
+        "live_count": 0,
+        "destroyed_count": 6,
+        "source": "Chrome DevTools Target.getTargets",
+        "observed": [
+          {
+            "ordinal": 1,
+            "target_id_sha256": "b9934545a352038ee36b1ccdd27455c60e690f946c6140a78a5558875abee98c",
+            "kind": "engine",
+            "created_at": "2026-11-03T11:09:38.811Z",
+            "destroyed_at": "2026-11-03T11:10:07.244Z"
+          },
+          {
+            "ordinal": 2,
+            "target_id_sha256": "6d02fbee637363d193030be153cdc5ad38c4a3948886de9a2b503be3b0db15c8",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.825Z",
+            "destroyed_at": "2026-11-03T11:10:07.243Z"
+          },
+          {
+            "ordinal": 3,
+            "target_id_sha256": "eee8e568cb056f57e1614151e53182cad3dc24cc9ecc3f9451107a95034e52b8",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.826Z",
+            "destroyed_at": "2026-11-03T11:10:07.242Z"
+          },
+          {
+            "ordinal": 4,
+            "target_id_sha256": "7560674251b4a8565f0326b7c6320bad357185a1b2ebf84fd295774758b146b3",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.826Z",
+            "destroyed_at": "2026-11-03T11:10:05.228Z"
+          },
+          {
+            "ordinal": 5,
+            "target_id_sha256": "85ad2ff26fb231e0ea2c65036a870163a2650035346c19f38a0957d7ee849510",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.826Z",
+            "destroyed_at": "2026-11-03T11:10:07.242Z"
+          },
+          {
+            "ordinal": 6,
+            "target_id_sha256": "2cc92ec6d27cb2faa617a881f359935477697cf039668cb40f1452d6209f2bc1",
+            "kind": "nested-pthread",
+            "created_at": "2026-11-03T11:09:38.893Z",
+            "destroyed_at": "2026-11-03T11:10:05.228Z"
+          }
+        ]
+      }
+    },
+    "playwright_worker_events": [
+      {
+        "ordinal": 1,
+        "kind": "engine",
+        "created_at": "2026-11-03T11:09:38.813Z",
+        "closed_at": "2026-11-03T11:10:07.244Z"
+      },
+      {
+        "ordinal": 2,
+        "kind": "nested-pthread",
+        "created_at": "2026-11-03T11:09:38.841Z",
+        "closed_at": "2026-11-03T11:10:07.243Z"
+      },
+      {
+        "ordinal": 3,
+        "kind": "nested-pthread",
+        "created_at": "2026-11-03T11:09:38.843Z",
+        "closed_at": "2026-11-03T11:10:07.242Z"
+      },
+      {
+        "ordinal": 4,
+        "kind": "nested-pthread",
+        "created_at": "2026-11-03T11:09:38.843Z",
+        "closed_at": "2026-11-03T11:10:05.228Z"
+      },
+      {
+        "ordinal": 5,
+        "kind": "nested-pthread",
+        "created_at": "2026-11-03T11:09:38.843Z",
+        "closed_at": "2026-11-03T11:10:07.242Z"
+      },
+      {
+        "ordinal": 6,
+        "kind": "nested-pthread",
+        "created_at": "2026-11-03T11:09:38.894Z",
+        "closed_at": "2026-11-03T11:10:05.228Z"
+      }
+    ]
+  },
+  "host": {
+    "chrome": "156.0.8078.80",
+    "hardware_gpu": true,
+    "webgl_renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "model_shell": {
+      "model_shell": true,
+      "renderer_fallback": false
+    }
+  },
+  "harness": {
+    "test_script": {
+      "path": "platform/tests/test_public_qemu_board_guest.mjs",
+      "sha256": "eb9841b3cbcaab37b2f49e487c077d96b8020db5621f277eb15b32b0b96d5a91"
+    },
+    "helper_sha256": "7a8d75a2bf4d8ce51c611530f0c69403e1b0930385f786397dcc105a12d67935"
+  },
+  "limits": [
+    "Exact reference firmware only; no arbitrary-firmware or physical-keyboard claim.",
+    "No throughput or startup performance comparison is made in this functional case.",
+    "Transient portrait/landscape presentation converged; final native RGB565/model texture equality is a buffer/render observation, not an optical measurement.",
+    "The separate regular CI e950 engine target cleanup failure is not resolved or overwritten by this run.",
+    "Full twenty-case gate remained in progress when this scoped record was prepared.",
+    "No source firmware, ROM, mutable Flash, raw endpoint or unique session/Worker identifier is copied."
+  ]
+}

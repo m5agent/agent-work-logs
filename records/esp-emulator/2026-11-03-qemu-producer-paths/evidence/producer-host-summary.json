@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "qemu-producer-path-host-contract-summary",
+  "status": "PASS — scoped producer and host controls only",
+  "source_parent_commit": "189dc01a5ee42a23ac7e246f8390c2acfe471ffa",
+  "files": {
+    "scripts/qemu-wasm-build/build.py": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc",
+    "scripts/qemu-wasm-build/README.md": "96ae4412548ae181775b6a1f1ac945ae449de30e81f00ff440a5a0e957640dde",
+    "platform/tests/test_bootstrap_qemu_browser_runtime.py": "969d58346049d9889adc0408ecda2d528cb76456e572dd464202004aefa15081",
+    "scripts/qemu-wasm-build/sources.lock.json": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+  },
+  "scope": {
+    "qemu_c_patches_changed": false,
+    "source_lock_changed": false,
+    "qemu_postimages": 160,
+    "ordered_patches": 72,
+    "native_layers": 47,
+    "cpu_clock_assertion_policy_changed": false,
+    "wasm_postprocessing_used": false,
+    "new_wasm_built": false,
+    "guest_execution": "NOT RUN"
+  },
+  "controls": {
+    "python": "3.13.15",
+    "bootstrap_methods_pass": 17,
+    "bootstrap_elapsed_s": 1.782,
+    "public_site_methods_pass": 10,
+    "public_site_elapsed_s": 0.151,
+    "native_c_and_cpp": {
+      "unmapped_source_prefix_negative_rejected": true,
+      "mapped_each_of_project_cache_sdk_reused_dependencies": true,
+      "nested_specific_root_overrides_parent": true,
+      "source_paths_with_spaces": true,
+      "assert_expression_and_file_retained": true,
+      "assert_abort_retained": true,
+      "darwin_assert_file_basename_boundary": "Darwin assert.h uses __FILE_NAME__; the file and expression are checked, while actual __FILE__ mapping is checked separately in emitted native output and binary bytes."
+    },
+    "glib_staging": {
+      "actual_filesystem_payload_preserved": true,
+      "staging_original_pc_unmodified": true,
+      "only_target_pc_prefix_relocated": true,
+      "pkg_config_tool_available": true,
+      "actual_pkg_config_libdir_and_includedir_checked_when_available": true,
+      "invalid_pc_prefix_and_incomplete_install_negative_rejected": true,
+      "actual_builder_dependency_plan_exercised_with_mock_processes": true,
+      "logical_prefix": "/usr",
+      "logical_libdir": "lib",
+      "destdir_is_owned_local_staging": true
+    },
+    "metadata_and_archive": {
+      "old_dependency_policy_rejected_before_reuse": true,
+      "changed_dependency_policy_rejected": true,
+      "public_source_package_positive": true,
+      "private_source_package_negative_rejected": true,
+      "private_binary_prefix_negative_rejected": true,
+      "errors_omit_private_value": true,
+      "public_roots_and_usr_literal_positive": true
+    },
+    "bootstrap_lock_check": "PASS",
+    "diff_check": "PASS"
+  },
+  "retained_attempts": {
+    "r1": "New fixture errors: macOS temporary-path alias was not canonical and a mocked configure argv retained Path objects. No production runtime was built.",
+    "r2": "New fixture expected a full assertion path, while Darwin assert.h reports only its basename.",
+    "r3_r4": "New mocked dependency-plan fixture omitted its PCRE2 source-download bytes.",
+    "r5": "All 17 methods passed after fixture corrections; producer logic stayed within the reviewed three-file change.",
+    "log_hashes": {
+      "qemu-producer-path-contracts-r1.log": {
+        "sha256": "a2f3af3e9b51037a0c6e7f60bdb9fb9adc463784738c5cbf641bd2cdb6657625"
+      },
+      "qemu-producer-path-contracts-r2.log": {
+        "sha256": "1904c5074617d28a00b883a4b70d13be38ef986fb9029069d099f36256823e0a"
+      },
+      "qemu-producer-path-contracts-r3.log": {
+        "sha256": "e7751f08219ea479e9452589f94dc9cdcf8fbbc232a46079a8960e307117c9b2"
+      },
+      "qemu-producer-path-contracts-r4.log": {
+        "sha256": "295a3459f374be574e867b49b5e35814797fb69e64b1f7b82924ef45222c5c73"
+      },
+      "qemu-producer-path-contracts-r5.log": {
+        "sha256": "3d329ad97d566e0a9844e298a48d16fd855a5d087c586b3e9cb77c3256eae060"
+      },
+      "qemu-producer-public-site-contracts.log": {
+        "sha256": "4594f80385dcc668a5fb5c068a4b9c5f7cc1b1790a81fceeb850cf2ba981aa1d"
+      }
+    }
+  },
+  "limits": [
+    "The host C/C++ controls do not prove final WebAssembly output is free of private paths.",
+    "A new owned source build including dependencies must complete; no pre-policy dependency cache may be reused.",
+    "The final WASM, all exported runtime files, uncompressed source-package members and runtime metadata must be checked before publication.",
+    "The new exact runtime requires full browser guest acceptance; the failed regular CI run and earlier runtime results remain separate evidence."
+  ]
+}

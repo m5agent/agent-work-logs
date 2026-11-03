@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-03 | ESP Emulator | QEMU producer 路径规范化与新 runtime 同路径验证 | `PASS`（限定producer/build/privacy与Cardputer-ADV69项；full20仍运行，Pages未发布） | [查看](records/esp-emulator/2026-11-03-qemu-producer-paths/) |
 | 2026-11-03 | ESP Emulator | 单 QEMU 性能修复与同固件对照 | `PARTIAL`（virtual-device：19板20例/552检查PASS；舞蹈ready3.56/2.75s；Factory浏览器故障保留，未部署） | [查看](records/esp-emulator/2026-11-03-emulator-performance/) |
 | 2026-11-03 | WeCom GPT bridge | GPT 自动回复与业务授权恢复 | `PARTIAL`（真实短文本自动回复 PASS，23s；旧历史压缩 FAIL，server recall 重写超时后回退） | [查看](records/infra/2026-11-03-wecom-gpt-channel-recovery/) |
 | 2026-11-03 | SVG animation | 全新鹈鹕骑行与同步踩踏 | `PASS`（Chrome 浏览器：9相位、3宽度；其他浏览器 NOT RUN） | [查看](records/svg-animation/2026-11-03-pelican-cycling/) |

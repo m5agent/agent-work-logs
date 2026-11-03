@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "record_state": "DRAFT_READY_FOR_ROOT_REVIEW",
+  "title": "QEMU producer public paths: fresh build and scoped Cardputer-ADV validation",
+  "scope": "Producer privacy/build and one same-path Cardputer-ADV virtual-device case only; not a complete release.",
+  "source": {
+    "issue": null,
+    "pull_request": null,
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "189dc01a5ee42a23ac7e246f8390c2acfe471ffa",
+    "final_commit": "1b86ed6f7edcc36deafc4834b45a28c6a6017c79",
+    "patch": {
+      "path": "patches/0001-qemu-public-producer-paths.patch",
+      "sha256": "7c41a5baf9193277f7159d4c014b50a09b44de5d2e0ee0a17e69678b975f9cb4",
+      "bytes": 37629
+    },
+    "qemu_base_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "source_lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b",
+    "recipe_sha256": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc",
+    "qemu_c_and_source_lock_unchanged": true
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "cardputer-adv",
+    "sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+    "image_kind": "composed full flash reference",
+    "binary_bundled": false,
+    "rom_bundled": false
+  },
+  "execution": {
+    "environment": "Fresh Emscripten3.1.50/QEMU TCI build; Chrome156 and Apple M4 Metal public model canvas",
+    "task_id": null,
+    "session_id": null,
+    "session_id_sha256": "b5b725599a8482062ecd6c9b82aa493c1f55fddaef1b840b2b1b22019ea95b52",
+    "validation_category": "virtual-device validation",
+    "fresh_build": {
+      "schema_version": 1,
+      "kind": "public-paths-fresh-build-identity-summary",
+      "status": "PASS",
+      "scope": "Fresh producer build and executable/source privacy identities; guest proof is separate.",
+      "source_commit": "1b86ed6f7edcc36deafc4834b45a28c6a6017c79",
+      "base_commit": "189dc01a5ee42a23ac7e246f8390c2acfe471ffa",
+      "recipe_sha256": "f69cd135c8d5bb6c1efe920eb2ec54070798267b304c1333b9397fbde18770fc",
+      "lock_sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b",
+      "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+      "ordered_patches": 72,
+      "postimages": 160,
+      "emscripten": {
+        "version": "3.1.50",
+        "emsdk_commit": "e2627e265d940db5ea58dffa63e490375bfc92e5"
+      },
+      "fresh_dependencies": {
+        "count": 8,
+        "no_reuse": true,
+        "receipt_sha256": "ad2a3d12712a9bafc310e7a1e8655f4e4b826f846d64daa14b56faac255855d7"
+      },
+      "qemu_build_steps": 1446,
+      "qemu_ninja_log": {
+        "sha256": "95ae7ee6db75965dc8989d6fa5ef7dbbe8f6f171b3b374c950578b10f8314297",
+        "bytes": 139024
+      },
+      "runtime_files": {
+        "runtime.json": {
+          "sha256": "897114f09d5e0c695e44e665611fec4fa98aa62856cddce6eb1cbb906d21071c",
+          "bytes": 33622
+        },
+        "qemu-system-xtensa.js": {
+          "sha256": "5d306019d5ecc8eab9aa2d582f2e1f3c34a9bcc1d24dd6a463391eac94564a4e",
+          "bytes": 157200
+        },
+        "qemu-system-xtensa.wasm": {
+          "sha256": "3c6b249002d83118e0ddcbd82e4ee6336223293b98566fc7709d5087d9df4567",
+          "bytes": 12745460
+        },
+        "qemu-system-xtensa.worker.js": {
+          "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+          "bytes": 2776
+        },
+        "corresponding-source.tar.xz": {
+          "sha256": "3bf6ee4fe907aff960ace53ae4622356345960055e0cb1cc1dee964ff6fc09b0",
+          "bytes": 35241880
+        },
+        "NOTICE": {
+          "sha256": "290273f3bf903aa43510e68a735810e0e6c54d43accc5dc16b00ffd5a0399f76",
+          "bytes": 968
+        }
+      },
+      "actual_wasm_sections": 14,
+      "all_actual_producer_prefix_counts": 0,
+      "old_local_wasm_withdrawal": {
+        "sha256": "0bd9478743d640484cad4762b9d7f7ae57a222f83ebf12a2114eb764a05194ea",
+        "actual_producer_prefix_occurrences": 164,
+        "source_location_macro_occurrences": 162,
+        "configured_install_path_occurrences": 2,
+        "actual_prefix_values_published": false
+      },
+      "same_runtime_cardputer_adv": "evidence/cardputer-adv-validation-summary.json",
+      "complete_twenty_case_gate": "RUNNING — not granted by this record",
+      "pages_deployment": "NOT RUN — prepared preview not published",
+      "regular_ci_retained": "FAIL — engine Worker cleanup gate; deployment skipped",
+      "limits": [
+        "Only declared actual producer prefixes and classified public virtual-filesystem literals are distinguished; generic illustrative upstream documentation examples are not claimed to be private.",
+        "Fresh executable hashes require new guest validation; the scoped Cardputer-ADV proof does not qualify every device or a release."
+      ]
+    },
+    "cardputer_adv": {
+      "status": "PASS",
+      "checks_passed": 69,
+      "checks_total": 69,
+      "raw_report": {
+        "sha256": "7f9f5f7fc53eebcf4a1fea63f38f673f67cbdbc6a652ede6c2c579951e30192f",
+        "bytes": 101255
+      },
+      "summary": "evidence/cardputer-adv-validation-summary.json",
+      "actual_worker_targets_closed": 6,
+      "normal_exit_code": 0,
+      "owner_fallback_terminations": 0
+    },
+    "full_twenty_case_gate": {
+      "status": "PARTIAL",
+      "observed_state": "RUNNING_AT_DRAFT_CUTOFF",
+      "not_accepted_by_this_record": true
+    },
+    "pages": {
+      "status": "NOT RUN",
+      "prepared_preview_published": false
+    },
+    "regular_ci": {
+      "run_id": 41617152984,
+      "status": "FAIL",
+      "deployment": "SKIPPED",
+      "reason": "e950 CoreS3 engine Worker target remained at cleanup gate; unresolved, separately retained",
+      "runtime_wasm_sha256": "e9d10ae8f2d56c5bd2f3ba38fe45f50e5e835fe60f8df697a4e7fb2e8d2aea58"
+    }
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "scope": "fresh eight libraries and QEMU"
+    },
+    {
+      "layer": "privacy",
+      "status": "PASS",
+      "scope": "actual producer prefixes in compiled runtime/source package/exported assets"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "Cardputer-ADV exact reference firmware"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "original driver FIFO press/count/release"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "same-guest keys, count, native frame state"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "scope": "virtual native pixels/model texture; no physical measurement"
+    },
+    {
+      "layer": "cleanup",
+      "status": "PASS",
+      "scope": "six actual CDP Worker targets"
+    },
+    {
+      "layer": "full twenty-case regression",
+      "status": "PARTIAL",
+      "scope": "RUNNING; not included in this acceptance"
+    },
+    {
+      "layer": "delivery",
+      "status": "NOT RUN",
+      "scope": "prepared preview not deployed"
+    },
+    {
+      "layer": "hardware validation",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "long-duration stability",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/allasset-prefix-summary.json",
+      "sha256": "5ce8693a8a6a98e805de77aa7331c4252005bc57b559343c91bddf406b05ea15",
+      "bytes": 1048
+    },
+    {
+      "path": "evidence/cardputer-adv-validation-summary.json",
+      "sha256": "2dedb8049c92ab92384630a51efd4f44c697d9c3c4e4cd2fd769e6f469252020",
+      "bytes": 31756
+    },
+    {
+      "path": "evidence/fresh-build-summary.json",
+      "sha256": "0e9db0fae72d1413834160427bceb28e8bb47f817cc26ccc7412b8480d6606c2",
+      "bytes": 2945
+    },
+    {
+      "path": "evidence/prepared-export-summary.json",
+      "sha256": "2f1173a1604dceecb76227b8ffe8fd15d362e2b83effe19db15c273f98de9f25",
+      "bytes": 24273
+    },
+    {
+      "path": "evidence/producer-host-summary.json",
+      "sha256": "0282acf56416485e8f2881641b7ca54298ce446c64a78cc9f0cbeef9ff30a8ed",
+      "bytes": 4669
+    },
+    {
+      "path": "evidence/repair-patch-summary.json",
+      "sha256": "e79816237b2e67b84cd46821b5902d14c770e45ad70b137e80801f667f13e961",
+      "bytes": 985
+    },
+    {
+      "path": "evidence/runtime-independent-summary.json",
+      "sha256": "4f30155b321d909e3c3ba556a26cec505f79ad105bf0a2965b80e4540936c88a",
+      "bytes": 19624
+    }
+  ],
+  "notes": [
+    "Safe summaries only; original artifacts remain outside source/archive Git.",
+    "Source, ROM, full Flash, raw session/target IDs and private builder prefixes are not published.",
+    "Old local executable with 164 producer-prefix occurrences was withdrawn; old functional results remain independent history.",
+    "No JIT/new SoC backend, assertion suppression, CPU clock change or WASM rewriting is included.",
+    "Cardputer-ADV PASS does not resolve regular CI engine cleanup failure or qualify all twenty cases.",
+    "Factory gap and physical properties remain separate."
+  ],
+  "validation_category": "virtual-device validation; host-only controls labeled separately; physical hardware NOT RUN"
+}
