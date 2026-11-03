@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "record_state": "unpublished draft",
+  "title": "ESP Emulator performance repair and same-firmware comparison",
+  "validation_category": "virtual-device validation",
+  "source": {
+    "issue": null,
+    "pull_request": null,
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3691870c27b028dde76202e42ecddba31d1547c1",
+    "final_commit": null,
+    "qemu_repository": "https://github.com/espressif/qemu",
+    "qemu_base_commit": "40edccac415693c5130f91c01d84176ae6008566"
+  },
+  "hardware": {},
+  "firmware": {
+    "images": [
+      {
+        "device": "StackChan",
+        "sha256": "c854d3ac6b958439ad30c5277266575d8765f228febf75de243da5d011904542",
+        "family": "Arduino user dance"
+      },
+      {
+        "device": "CoreS3",
+        "sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+        "family": "Explicit LVGL elapsed-time candidate"
+      }
+    ],
+    "binaries_included": false
+  },
+  "execution": {
+    "environment": "Native QEMU through dedicated Device Service and actual public workbench; independent from browser-WASM",
+    "browser": "156.0.8078.80",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+    "native_round": "r4",
+    "raw_report_sha256": "63b0c51cd86066ccba707fef59ea9598425c84b51afcd807c494789409b66b35",
+    "native_runs": 4,
+    "scoped_checks_passed": 46,
+    "scoped_checks_total": 46,
+    "startup_comparison": "NOT RUN: cold/warm Flash-cache asymmetry",
+    "browser_final_r2": "pending; no candidate-r1 artifact included",
+    "identifiers": "Raw task/session/device identifiers and endpoints omitted",
+    "flash_capacity_bytes": 16777216
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "NOT RUN",
+      "scope": "Final r2 build evidence pending; candidate-r1 is excluded"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "Native serial/frame/QOM/evidence for four retained virtual-device executions"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "Native SCS readback and CoreS3 controller input reaches guest callback"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "Native raw positions/DOM/rendered joints, firmware/session binding and auto-route"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "scope": "Actual native rendered motion; completed-frame fidelity REVIEW; physical behavior NOT RUN"
+    },
+    {
+      "layer": "browser_final_r2",
+      "status": "NOT RUN",
+      "scope": "Final normal-product-path browser runtime acceptance pending"
+    },
+    {
+      "layer": "all_admitted_regression",
+      "status": "NOT RUN",
+      "scope": "Existing admitted-board browser regression pending"
+    },
+    {
+      "layer": "delivery",
+      "status": "NOT RUN",
+      "scope": "Local draft only; no commit/publication/index change"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/native-summary.json",
+      "kind": "public-safe derived virtual-device summary",
+      "sha256": "64c20bf78140177de789f9b257452bce68eae0d4a844da2b193b3ed75c7286f6",
+      "bytes": 26192,
+      "source_document": "docs/evidence/2026-11-03-emulator-performance/native-summary.json",
+      "copied_without_changes": true
+    },
+    {
+      "path": "evidence/native-validation.md",
+      "kind": "public-safe derived virtual-device summary",
+      "sha256": "58cc637efb3dbb46f14fe352e07457ac32d7fbb8adbced808c04b4dced06b1eb",
+      "bytes": 5628,
+      "source_document": "docs/evidence/2026-11-03-emulator-performance/native-validation.md",
+      "copied_without_changes": true
+    },
+    {
+      "path": "evidence/manifest.summary.json",
+      "kind": "derived evidence identity and exclusion manifest"
+    }
+  ],
+  "notes": [
+    "Prototype and failed-round history does not establish final browser PASS.",
+    "No physical hardware, completed-frame pixel oracle, long-soak or multi-device performance claim.",
+    "Root task must add final source commit, final r2 evidence and admitted-board scope before publication.",
+    "No commit, push or README index update performed by this draft."
+  ]
+}
