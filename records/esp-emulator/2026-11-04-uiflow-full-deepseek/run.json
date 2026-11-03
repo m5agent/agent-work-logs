@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "UIFlow comprehensive revalidation: native build and source provenance milestone",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "issue": "Not applicable: user-requested validation campaign",
+    "pull_request": "Not applicable: no new source patch in this milestone"
+  },
+  "hardware": {},
+  "firmware": {
+    "classification": "Three separate CoreS3 canary reference applications; original Unit drivers preserved",
+    "images": [
+      {
+        "unit_id": "button",
+        "sha256": "8f2614cc852f5eaca4f72b824d499d27cbe5914edc6ef5b8b1b3c239b6fdbdf1",
+        "bytes": 16777216
+      },
+      {
+        "unit_id": "relay",
+        "sha256": "67a68945395da60b604e45209b46e5b38071a464edab86044193321b09444600",
+        "bytes": 16777216
+      },
+      {
+        "unit_id": "env-iii",
+        "sha256": "8f1aa047a82ec2553de01508683f101130a72071a0b9e0ead62a5739ec24290f",
+        "bytes": 16777216
+      }
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; isolated native Xtensa build; three functional canaries executed through observable retained Device Service sessions",
+    "scope": "Build/source identity and three independently accepted CoreS3 canaries only; comprehensive firmware campaign in progress",
+    "executor_roles": {
+      "primary_agent": "plan, diagnose, fix, independently accept and publish",
+      "DeepSeek": "execute tests"
+    },
+    "task_id": "Not included; three canary receipts linked in evidence",
+    "session_id": "Aliases and session identifier SHA-256 in evidence/cores3-canary-summary.json",
+    "started_at": "2026-11-03T17:57:09.103300+00:00",
+    "completed_at": "2026-11-03T18:02:56.268211+00:00",
+    "canary_audited_at": "2026-11-03T18:02:56.268211+00:00",
+    "build_completed_at": "2026-11-03T17:57:50.501369+00:00"
+  },
+  "checks": [
+    {
+      "name": "canonical-unit-layer-replay",
+      "layer": "build",
+      "status": "PASS",
+      "count": 41
+    },
+    {
+      "name": "fresh-xtensa-qemu-object-build",
+      "layer": "build",
+      "status": "PASS",
+      "artifact_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "artifact_bytes": 22207696
+    },
+    {
+      "name": "codesign-verification",
+      "layer": "build",
+      "status": "PASS"
+    },
+    {
+      "name": "public-canonical-source-reconstruction",
+      "layer": "source",
+      "status": "PASS",
+      "exact_compared_files": 10443,
+      "mismatches": 0,
+      "neutral_normalizations_explicit": true
+    },
+    {
+      "name": "source-controller-asset-identity",
+      "layer": "source",
+      "status": "PASS",
+      "sha256": "8e845070de279746a3930adec7ca0a58c77bad308d2470f465494e7e1d15b250"
+    },
+    {
+      "name": "three-cores3-canaries",
+      "layer": "data_behavior",
+      "status": "PASS",
+      "count": 3,
+      "validation": "virtual-device validation",
+      "scope": "Button constructor/GPIO input, Relay on/off/status, ENV III read methods only"
+    },
+    {
+      "name": "full-uiflow-unit-firmware-acceptance",
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "reason": "Campaign in progress; no full independent root-accepted receipt set attached."
+    },
+    {
+      "name": "milestone-record-review",
+      "layer": "delivery",
+      "status": "PASS",
+      "reason": "Primary agent independently reviewed artifact-bound canary receipts and this bounded milestone; full campaign remains in progress."
+    }
+  ],
+  "evidence": [
+    "evidence/native-build-summary.json",
+    "evidence/source-provenance-summary.json",
+    "evidence/source-identity-summary.json",
+    "evidence/inventory-scope-summary.json",
+    "evidence/public-recipe.md",
+    "evidence/cores3-canary-summary.json"
+  ],
+  "notes": [
+    "Build/source PASS is not firmware/application PASS.",
+    "Only three exact CoreS3 canary paths have functional PASS; full campaign/goal completion is not claimed.",
+    "Native C6/P4 and browser-WASM are separate lanes.",
+    "Two planned/DEFER Units and official-driver-vs-raw-protocol boundaries remain.",
+    "Source inventories are provisional and overlapping; do not sum into a functional denominator.",
+    "All evidence is public-safe derived summary; private operational data and raw artifacts excluded."
+  ]
+}

@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：构建与三项 canary 里程碑 | `PARTIAL`（完整 41 层原生构建/公开来源及 CoreS3 三项限定 virtual-device canary 通过；Button 回调、全量 Unit/API/跨主机仍在执行） | [查看](records/esp-emulator/2026-11-04-uiflow-full-deepseek/) |
 | 2026-11-03 | ESP Emulator | 性能合 main 与正式 Pages 预构建更新 | PARTIAL（源码/部署/48路径回读完成；19板20例552检查PASS；线上前三阶段PASS，独立触摸轮启动FAIL、输入NOT RUN；正式CI清理缺口保留） | [查看](records/esp-emulator/2026-11-03-emulator-performance-pages-release/) |
 | 2026-11-03 | ESP Emulator | QEMU producer 路径规范化与新 runtime 同路径验证 | `PASS`（限定producer/build/privacy与Cardputer-ADV69项；full20仍运行，Pages未发布） | [查看](records/esp-emulator/2026-11-03-qemu-producer-paths/) |
 | 2026-11-03 | ESP Emulator | 单 QEMU 性能修复与同固件对照 | `PARTIAL`（virtual-device：19板20例/552检查PASS；舞蹈ready3.56/2.75s；Factory浏览器故障保留，未部署） | [查看](records/esp-emulator/2026-11-03-emulator-performance/) |

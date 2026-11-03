@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-cores3-canary-summary",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "scope": "Only these exact CoreS3 Button constructor/GPIO, Relay method and ENV III sensor paths; not comprehensive API or Unit acceptance",
+  "audited_at": "2026-11-03T18:02:56.268211+00:00",
+  "root_audit_receipt": {
+    "sha256": "3355d1bdc739cc29bc407056a5489be1f8512f36056e4ca70a2505c05ffeae2f",
+    "bytes": 2125
+  },
+  "units": [
+    {
+      "unit_id": "button",
+      "status": "PASS",
+      "validation": "virtual-device validation",
+      "device_id": "cores3",
+      "runtime": "qemu",
+      "session_alias": "canary-01",
+      "session_id_sha256": "46a237dbba6d323c242360af47884444cff4d933336f68bfd395637c8a8b3168",
+      "runtime_process_alias": "guest-process-01",
+      "recorded_at": "2026-11-04T02:01:07.452250+08:00",
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "firmware_sha256": "8f2614cc852f5eaca4f72b824d499d27cbe5914edc6ef5b8b1b3c239b6fdbdf1",
+      "firmware_bytes": 16777216,
+      "probe_sha256": {
+        "boot.py": "b69ee8814a8188b541bcb90f78d987ae9ed554e7109db0849600fb40b7ea6ca9",
+        "probe_config.py": "d6e1decb12b503aac8c59e9f8bfe0185a9d6d940647171d7874ce3acecdb4d9b",
+        "main.py": "08c843c093250c50ccaf5459a7bca6704b0671a9be826337e5091518903ee303"
+      },
+      "probe_source": {
+        "repository_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+        "path": "tests/units/probe/main.py",
+        "scope": {
+          "import": "from unit import ButtonUnit",
+          "constructor": "ButtonUnit((WHITE, YELLOW), True, type=2)",
+          "observed_method": "machine.Pin(WHITE, Pin.IN, Pin.PULL_UP).value()",
+          "scope": "Official ButtonUnit constructor/ready plus separate machine.Pin GPIO input path; no ButtonUnit read/callback method usability claim",
+          "input": [
+            {
+              "pressed": true,
+              "expected_marker": "UNIT_BUTTON 0"
+            },
+            {
+              "pressed": false,
+              "expected_marker": "UNIT_BUTTON 1"
+            },
+            {
+              "pressed": true,
+              "expected_marker": "UNIT_BUTTON 0"
+            },
+            {
+              "pressed": false,
+              "expected_marker": "UNIT_BUTTON 1"
+            }
+          ]
+        }
+      },
+      "checks": {
+        "official_driver_ready": true,
+        "web_input_reaches_guest_gpio": true,
+        "live_controller_state": true,
+        "nonempty_application_frame": true,
+        "evidence_complete": true,
+        "stopped_with_history": true
+      },
+      "serial": {
+        "sha256": "492559f01e287c51f1b8a1147d58b6dc7f600f2cdba367033c4647f41a69c98a",
+        "bytes": 427,
+        "safe_marker_lines": [
+          "UNIT_PROBE_START button",
+          "UNIT_PROBE_READY button",
+          "UNIT_BUTTON 1",
+          "UNIT_BUTTON 0",
+          "UNIT_BUTTON 1",
+          "UNIT_BUTTON 0",
+          "UNIT_BUTTON 1"
+        ]
+      },
+      "frame": {
+        "sha256": "4e23f47688af8ec9986413576e48cf442cafff25f8657635cf42ab479c008a17",
+        "bytes": 1280,
+        "metrics": {
+          "width": 320,
+          "height": 240,
+          "nonblack_pixels": 76800,
+          "unique_colors": 16
+        }
+      },
+      "live_controller_properties": {
+        "pressed": false,
+        "transactions": 0,
+        "read-bytes": 0,
+        "written-bytes": 0,
+        "input-events": 4,
+        "output-transitions": 0,
+        "input-level": true
+      },
+      "evidence_zip": {
+        "sha256": "ccf2c70c5628d557bbfb6fbf1721df36ac683e8c3a41ec9bf4d42a4aac8b09b3",
+        "bytes": 21752,
+        "member_hashes_and_sizes": [
+          {
+            "path": "units/contract.json",
+            "bytes": 12958,
+            "sha256": "e949c16d641f2c42701f01732276d97887c0988f98591aa41124542a1c106d5b"
+          },
+          {
+            "path": "units/runtime.json",
+            "bytes": 256,
+            "sha256": "415c9717b932c7b3d8529c2fc4f7654cb3b48e49d29dcdaf25bd53af6bd592ce"
+          },
+          {
+            "path": "units/state.json",
+            "bytes": 13905,
+            "sha256": "5a336685e99b6a86adf530e47051556f84d9ed2080b5c3e2f49c63c3ff295de0"
+          },
+          {
+            "path": "serial.log",
+            "bytes": 427,
+            "sha256": "492559f01e287c51f1b8a1147d58b6dc7f600f2cdba367033c4647f41a69c98a"
+          },
+          {
+            "path": "serial1.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "qemu.stdout",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "qemu.stderr",
+            "bytes": 24,
+            "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+          },
+          {
+            "path": "frames/current.png",
+            "bytes": 1280,
+            "sha256": "4e23f47688af8ec9986413576e48cf442cafff25f8657635cf42ab479c008a17"
+          },
+          {
+            "path": "audio/microphone-source.pcm",
+            "bytes": 64000,
+            "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb"
+          },
+          {
+            "path": "qom/snapshot.json",
+            "bytes": 60927,
+            "sha256": "8126c05d5f445a5fc014576179957f2eae4b684f62eae8dc360a49f82d269b63"
+          },
+          {
+            "path": "manifest.json",
+            "bytes": 24006,
+            "sha256": "be18ff1910b60aabcc21684c40117bed43913a3b28e1ee75ad24ba8c5fc9a052"
+          }
+        ]
+      },
+      "source_result": {
+        "sha256": "6f50323dec9cb4ed90876e63240ee214ba470a07f6a21ee6edcf9417bb9bb254",
+        "bytes": 15667
+      },
+      "independent_root_audit": {
+        "source_result_pass": true,
+        "zip_members_verified": true,
+        "zip_session_match": true,
+        "runtime_pid_match": true,
+        "runtime_sha_match": true,
+        "firmware_match": true,
+        "evidence_captured_running": true,
+        "history_retained_terminal": true,
+        "runtime_pid_exited": true
+      },
+      "cleanup": {
+        "evidence_captured_while_running": true,
+        "terminal_history_retained": true,
+        "owned_runtime_process_exited": true
+      }
+    },
+    {
+      "unit_id": "relay",
+      "status": "PASS",
+      "validation": "virtual-device validation",
+      "device_id": "cores3",
+      "runtime": "qemu",
+      "session_alias": "canary-02",
+      "session_id_sha256": "2d287b362a7ce0e42fc0839ccdffbb38557ef7b72504163ad720d39a959b2247",
+      "runtime_process_alias": "guest-process-02",
+      "recorded_at": "2026-11-04T02:01:35.073680+08:00",
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "firmware_sha256": "67a68945395da60b604e45209b46e5b38071a464edab86044193321b09444600",
+      "firmware_bytes": 16777216,
+      "probe_sha256": {
+        "boot.py": "b69ee8814a8188b541bcb90f78d987ae9ed554e7109db0849600fb40b7ea6ca9",
+        "probe_config.py": "9141e8c0d1202183509c0b925524533b4a2862ee842b72982e9ff10eb59f808a",
+        "main.py": "08c843c093250c50ccaf5459a7bca6704b0671a9be826337e5091518903ee303"
+      },
+      "probe_source": {
+        "repository_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+        "path": "tests/units/probe/main.py",
+        "scope": {
+          "import": "from unit import RelayUnit",
+          "constructor": "RelayUnit((WHITE, YELLOW))",
+          "observed_methods": [
+            "on()",
+            "off()",
+            "get_status()"
+          ],
+          "scope": "Original RelayUnit on/off/status through GPIO controller and live output-level observations",
+          "input": "Guest alternates on/off; service reads current GPIO-backed output state"
+        }
+      },
+      "checks": {
+        "official_driver_ready": true,
+        "guest_gpio_output_readback": true,
+        "live_controller_state": true,
+        "nonempty_application_frame": true,
+        "evidence_complete": true,
+        "stopped_with_history": true
+      },
+      "serial": {
+        "sha256": "833af8abcc21c6a2871c59b3c769be3150a8b506ba985b35cbe8b81d9504a353",
+        "bytes": 446,
+        "safe_marker_lines": [
+          "UNIT_PROBE_START relay",
+          "UNIT_PROBE_READY relay",
+          "UNIT_RELAY 1",
+          "UNIT_RELAY 0",
+          "UNIT_RELAY 1",
+          "UNIT_RELAY 0",
+          "UNIT_RELAY 1",
+          "UNIT_RELAY 0",
+          "UNIT_RELAY 1"
+        ]
+      },
+      "frame": {
+        "sha256": "4f04fa35863b798c99ca34c48f418ff950227a949b400d5bd3f10eebdbee722e",
+        "bytes": 1367,
+        "metrics": {
+          "width": 320,
+          "height": 240,
+          "nonblack_pixels": 76800,
+          "unique_colors": 16
+        }
+      },
+      "live_controller_properties": {
+        "output-level": true,
+        "transactions": 0,
+        "read-bytes": 0,
+        "written-bytes": 0,
+        "input-events": 0,
+        "output-transitions": 8
+      },
+      "evidence_zip": {
+        "sha256": "93ab87ed34e4238f6442f08a0c14a00450dcc55f4e9138ce6f5ee7cffccdbb13",
+        "bytes": 21797,
+        "member_hashes_and_sizes": [
+          {
+            "path": "units/contract.json",
+            "bytes": 12722,
+            "sha256": "2b731dcbe1aed5169f3a429e1a348d9e8436a0c2f61b84c140012c4aa93e9789"
+          },
+          {
+            "path": "units/runtime.json",
+            "bytes": 255,
+            "sha256": "a3058567178a851e80d2534ad38e6252fa1e798a0f29f34bb78ae863d44d1421"
+          },
+          {
+            "path": "units/state.json",
+            "bytes": 13622,
+            "sha256": "7d07f537fe31dc4e18113c81b8fae4a73d5aecb4f0a30d3883fd278550ee6680"
+          },
+          {
+            "path": "serial.log",
+            "bytes": 446,
+            "sha256": "833af8abcc21c6a2871c59b3c769be3150a8b506ba985b35cbe8b81d9504a353"
+          },
+          {
+            "path": "serial1.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "qemu.stdout",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "qemu.stderr",
+            "bytes": 24,
+            "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+          },
+          {
+            "path": "frames/current.png",
+            "bytes": 1367,
+            "sha256": "4f04fa35863b798c99ca34c48f418ff950227a949b400d5bd3f10eebdbee722e"
+          },
+          {
+            "path": "audio/microphone-source.pcm",
+            "bytes": 64000,
+            "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb"
+          },
+          {
+            "path": "qom/snapshot.json",
+            "bytes": 60927,
+            "sha256": "67ed00e6a3c512e760dd4b56bf40275952740683522db801dc52c885712d124c"
+          },
+          {
+            "path": "manifest.json",
+            "bytes": 22861,
+            "sha256": "5abde2e5f55898cf8c1477a5d1a86ca6646e3a8a64aade11ed155532c6b387f9"
+          }
+        ]
+      },
+      "source_result": {
+        "sha256": "02bcade2c022cf81330ad66dcbc6631be383346f4035321f68af0e320a8afc17",
+        "bytes": 15351
+      },
+      "independent_root_audit": {
+        "source_result_pass": true,
+        "zip_members_verified": true,
+        "zip_session_match": true,
+        "runtime_pid_match": true,
+        "runtime_sha_match": true,
+        "firmware_match": true,
+        "evidence_captured_running": true,
+        "history_retained_terminal": true,
+        "runtime_pid_exited": true
+      },
+      "cleanup": {
+        "evidence_captured_while_running": true,
+        "terminal_history_retained": true,
+        "owned_runtime_process_exited": true
+      }
+    },
+    {
+      "unit_id": "env-iii",
+      "status": "PASS",
+      "validation": "virtual-device validation",
+      "device_id": "cores3",
+      "runtime": "qemu",
+      "session_alias": "canary-03",
+      "session_id_sha256": "21baa703ce69e852ad0534c13cc532059f1267ac746a046b8cbc45adeff17acf",
+      "runtime_process_alias": "guest-process-03",
+      "recorded_at": "2026-11-04T02:02:06.639363+08:00",
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "firmware_sha256": "8f1aa047a82ec2553de01508683f101130a72071a0b9e0ead62a5739ec24290f",
+      "firmware_bytes": 16777216,
+      "probe_sha256": {
+        "boot.py": "b69ee8814a8188b541bcb90f78d987ae9ed554e7109db0849600fb40b7ea6ca9",
+        "probe_config.py": "e0e73b3abd0cfac51c486f0767de986bf7fcb167476f63a3e90a47d3c80095f2",
+        "main.py": "08c843c093250c50ccaf5459a7bca6704b0671a9be826337e5091518903ee303"
+      },
+      "probe_source": {
+        "repository_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+        "path": "tests/units/probe/main.py",
+        "scope": {
+          "import": "from unit import ENVUnit",
+          "constructor": "ENVUnit(i2c=I2C(0, scl=Pin(WHITE), sda=Pin(YELLOW), freq=100000), type=3)",
+          "observed_methods": [
+            "read_temperature()",
+            "read_humidity()",
+            "read_pressure()"
+          ],
+          "scope": "Original ENVUnit SHT30/QMP6988 compensation through modeled I2C transaction path; read_pressure result converted hPa to Pa by probe",
+          "input": {
+            "temperature-c": 31.5,
+            "humidity-pct": 67.0,
+            "pressure-pa": 98765.0
+          },
+          "tolerances": {
+            "temperature-c": 0.2,
+            "humidity-pct": 0.2,
+            "pressure-pa": 1.0
+          }
+        }
+      },
+      "checks": {
+        "official_driver_ready": true,
+        "official_sensor_compensation_matches_input": true,
+        "live_controller_state": true,
+        "nonempty_application_frame": true,
+        "evidence_complete": true,
+        "stopped_with_history": true
+      },
+      "serial": {
+        "sha256": "66f9562ea39001390acbdc1584fb492b6f97352c070bbda0f9a00e5a9fe8027c",
+        "bytes": 511,
+        "safe_marker_lines": [
+          "UNIT_PROBE_START env-iii",
+          "UNIT_PROBE_READY env-iii",
+          "UNIT_ENV 25.000 50.000 101325.000",
+          "UNIT_ENV 31.500 67.000 98765.000"
+        ]
+      },
+      "frame": {
+        "sha256": "e59281b155d3c6fcc6b3e51987f8de1195611499694ca36ed6fe0776c1db2156",
+        "bytes": 1056,
+        "metrics": {
+          "width": 320,
+          "height": 240,
+          "nonblack_pixels": 76800,
+          "unique_colors": 16
+        }
+      },
+      "live_controller_properties": {
+        "temperature-c": 31.5,
+        "humidity-pct": 67,
+        "pressure-pa": 98765,
+        "transactions": 32,
+        "read-bytes": 66,
+        "written-bytes": 22,
+        "input-events": 3,
+        "output-transitions": 0
+      },
+      "evidence_zip": {
+        "sha256": "890f0580b215d457e6eeec21693e87f43da8faa647dc7700c7d23c5304c7e9be",
+        "bytes": 24520,
+        "member_hashes_and_sizes": [
+          {
+            "path": "units/contract.json",
+            "bytes": 17111,
+            "sha256": "13b3705dc7e5eefbad8cce9f04dee8ce1e8adce152a1c35924628bce061053a9"
+          },
+          {
+            "path": "units/runtime.json",
+            "bytes": 257,
+            "sha256": "02b5b5a47ba85b3ce7d16d76b593def8536ad01d4aa0a7a3c636236c167cdefe"
+          },
+          {
+            "path": "units/state.json",
+            "bytes": 17794,
+            "sha256": "4cab4fd1248ca6eb810ff323d4a5d56610bb5301add39b9c167d201d388c2e3e"
+          },
+          {
+            "path": "serial.log",
+            "bytes": 511,
+            "sha256": "66f9562ea39001390acbdc1584fb492b6f97352c070bbda0f9a00e5a9fe8027c"
+          },
+          {
+            "path": "serial1.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "qemu.stdout",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "qemu.stderr",
+            "bytes": 24,
+            "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+          },
+          {
+            "path": "frames/current.png",
+            "bytes": 1401,
+            "sha256": "fd2f59f4f2a76f628aa125b3e45a375294440823c52e092fed6a282d59c75632"
+          },
+          {
+            "path": "audio/microphone-source.pcm",
+            "bytes": 64000,
+            "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb"
+          },
+          {
+            "path": "qom/snapshot.json",
+            "bytes": 60927,
+            "sha256": "aaf804d819881473109447647f9b553ece6476e9acdebb4b2bc0b05b2cc8e72f"
+          },
+          {
+            "path": "manifest.json",
+            "bytes": 27514,
+            "sha256": "3af927eb52056683db14fa8ab9188a8132e4c8df96aa343e2dfee5458839b3c2"
+          }
+        ]
+      },
+      "source_result": {
+        "sha256": "4ad62c2fcffec3fb89c30cd5f98e229651bf3b3b3e74a13d372c15ce7157528e",
+        "bytes": 19745
+      },
+      "independent_root_audit": {
+        "source_result_pass": true,
+        "zip_members_verified": true,
+        "zip_session_match": true,
+        "runtime_pid_match": true,
+        "runtime_sha_match": true,
+        "firmware_match": true,
+        "evidence_captured_running": true,
+        "history_retained_terminal": true,
+        "runtime_pid_exited": true
+      },
+      "cleanup": {
+        "evidence_captured_while_running": true,
+        "terminal_history_retained": true,
+        "owned_runtime_process_exited": true
+      }
+    }
+  ],
+  "redaction": "Raw session/process identifiers are replaced by aliases; only session identifier SHA-256 is retained. No endpoints, private paths, credentials, firmware or raw ZIP contents are published.",
+  "limits": [
+    "Three canaries do not establish all160 Unit rows or245 declared host/Unit pairs.",
+    "No browser UI or physical device/RF/electrical/optical/acoustic/mechanical PASS.",
+    "ButtonUnit was constructed; input state was sampled with machine.Pin.value, not ButtonUnit callbacks/read methods.",
+    "Complete UIFlow/API and cross-host campaigns remain in progress."
+  ],
+  "remaining_tests": [
+    {
+      "unit_id": "button",
+      "status": "NOT RUN",
+      "required_coverage": "Actual ButtonUnit public read/query methods and callback/press-release/event behavior on the original firmware; constructor plus raw Pin input must not be deduplicated as complete Button API coverage."
+    }
+  ],
+  "unit_api_completion": "NOT CLAIMED; exact exercised methods only"
+}

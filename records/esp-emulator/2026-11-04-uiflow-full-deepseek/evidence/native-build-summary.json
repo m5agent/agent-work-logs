@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-native-build-summary",
+  "status": "PASS",
+  "acceptance_layer": "build only; no firmware/application PASS",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "qemu_upstream": {
+      "commit": "40edccac415693c5130f91c01d84176ae6008566",
+      "repository": "https://github.com/espressif/qemu.git",
+      "tag": "esp-develop-9.2.2-20260417"
+    },
+    "source_lock": {
+      "path": "scripts/qemu-wasm-build/sources.lock.json",
+      "sha256": "b9b137e52e77078cc67cb5b25433622f62d70cc3cbed8f92ee6699eed3389a1b"
+    },
+    "native_lock_layers": 47,
+    "additional_board_layers": 10,
+    "additional_unit_layers": 41,
+    "local_canonical_tree_identity": "75f1d244d0cf6272b27bb3b3091f3aff71c5f0e1",
+    "public_reconstruction_required": true
+  },
+  "execution": {
+    "started_at": "2026-11-03T17:57:09.103300+00:00",
+    "completed_at": "2026-11-03T17:57:50.501369+00:00",
+    "target": "xtensa-softmmu",
+    "fresh_qemu_objects": true,
+    "dependency_policy": "Existing dedicated libgcrypt/libgpg-error and host GLib/pixman/slirp reused read-only; not a full fresh dependency build",
+    "guest_execution": "NOT RUN by build task"
+  },
+  "artifact": {
+    "name": "qemu-system-xtensa",
+    "sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+    "bytes": 22207696,
+    "ad_hoc_signature_verification": "PASS"
+  },
+  "host_tools": {
+    "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "python": "Python 3.13.15",
+    "ninja": "1.13.2",
+    "meson": "1.12.1"
+  },
+  "dependency_versions": {
+    "glib": "2.90.1",
+    "pixman": "0.46.4",
+    "slirp": "4.9.5",
+    "libgcrypt": "1.11.0",
+    "libgpg_error": "1.51"
+  },
+  "reused_static_libraries": [
+    {
+      "name": "libgcrypt.a",
+      "sha256": "ad5cbb35346182c8d3eeff9a2751b0713d73a090f59af4be6d82898f59b918eb"
+    },
+    {
+      "name": "libgpg-error.a",
+      "sha256": "2cb731c40a08d9c352d9cd86caefa98dbf9bd77799b49faed0f80581c8f3830b"
+    }
+  ],
+  "source_inventory": {
+    "sha256": "3a8e3a172a1df1d1a6c576c54a73a58ebc1c33007848451c07691da92155d792",
+    "entries": 10447
+  },
+  "patch_replay": {
+    "status": "PASS",
+    "count": 41,
+    "checks": "Forward check and reverse check at each immediate applied layer",
+    "patches": [
+      {
+        "order": 1,
+        "path": "patches/qemu-m5stack-peripherals/0120-unit-i2c-dlight-command-mask.patch",
+        "sha256": "13a2a3bab0cefc3be94098c88aad5d2b97837bab54a17d9e6ac3df4fad38fc21",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 2,
+        "path": "patches/qemu-m5stack-peripherals/0121-m5stick-board.patch",
+        "sha256": "e5f2e7b82219773eea361316de35f8be43c4f7bb92d0112a5fb803be296bc28c",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 3,
+        "path": "patches/qemu-m5stack-peripherals/0122-atoms3r-m12-board.patch",
+        "sha256": "216ce4490d206e5aba4e88d3af50ce403fae4ace940c38019c10fa962487ebe4",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 4,
+        "path": "patches/qemu-m5stack-peripherals/0123-unit-i2c-batch3.patch",
+        "sha256": "66cc76351a21ec555f74bbca70d4ed023b7fd8b4a3802636568e1c9c7ad48ba7",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 5,
+        "path": "patches/qemu-m5stack-peripherals/0124-stickt2-board.patch",
+        "sha256": "203bdfee4f8daee7cac0e23c64f63a341a164ae9d4a8965234e11034f3774a05",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 6,
+        "path": "patches/qemu-m5stack-peripherals/0125-unit-batch2.patch",
+        "sha256": "0b3ae419f4a83a59dd8c15ff1d47dcc68ab64f5d8af703f16aee23f89239fbc5",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 7,
+        "path": "patches/qemu-m5stack-peripherals/0126-unit-batch2b.patch",
+        "sha256": "81ed8341a045aad0b7d2467be23a64c5a4dd404fcc685004d6725b297911303d",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 8,
+        "path": "patches/qemu-m5stack-peripherals/0127-unit-dac-fast-mode-write.patch",
+        "sha256": "18e9bde76f45141f57fe48a4367198ac9a6b9e7c5154d41f5bce545799a1dedc",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 9,
+        "path": "patches/qemu-m5stack-peripherals/0128-unit-ameter-eeprom-layout.patch",
+        "sha256": "a26acacb751f627fd844f8b21dfccc097977acee5c7026c14c39fb0604946778",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 10,
+        "path": "patches/qemu-m5stack-peripherals/0129-unit-batch2b-write-offset.patch",
+        "sha256": "c17d2d2c063c4614cb692f5aadaa8b71ea2208e70643a16b9c62eb9fc7028ed0",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 11,
+        "path": "patches/qemu-m5stack-peripherals/0131-unit-batch3c.patch",
+        "sha256": "322e2139808b19af650050499825f221a9f1158dbd0988023aabba2cf4d115e7",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 12,
+        "path": "patches/qemu-m5stack-peripherals/0134-unit-batch4ab.patch",
+        "sha256": "367ce228862324852b87cc1c179d37850e7d07541d915a8223d639eb68405d20",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 13,
+        "path": "patches/qemu-m5stack-peripherals/0136-unit-batch4c.patch",
+        "sha256": "06b11899e2919b6ec30b37ee71a190051a572e76196902294162d44855382c68",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 14,
+        "path": "patches/qemu-m5stack-peripherals/0130-unit-batch3ab.patch",
+        "sha256": "cbdc75eb0673ab0779acc05e36a60b72302c0c3f68efdcf6460c90add53cf9b5",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 15,
+        "path": "patches/qemu-m5stack-peripherals/0133-unit-vmeter-default-config.patch",
+        "sha256": "2e4568b6149ec9ad1967cc3bcd26bbd9a31c084eb69645421e51063eb4ccd82b",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 16,
+        "path": "patches/qemu-m5stack-peripherals/0135-unit-batch3ab-fixes.patch",
+        "sha256": "caaf446f326e3bc2369b0536f4ce18c0524cad60e8325805229e2e2c1f54001e",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 17,
+        "path": "patches/qemu-m5stack-peripherals/0132-unit-batch3c-fixes.patch",
+        "sha256": "003f8a49e332dc1cfd4d1f3e15432e5fbe86370d24e3560a0b831ccc6d383162",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 18,
+        "path": "patches/qemu-m5stack-peripherals/0137-unit-batch5a.patch",
+        "sha256": "05698a1a7d149eb4b022a32dbf84f7e1bdb8b781c4e46c183f7809b81c8fd8ea",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 19,
+        "path": "patches/qemu-m5stack-peripherals/0138-unit-batch4-evidence-fixes.patch",
+        "sha256": "dc20597878d4de29db94a8679fc6a3958c72bbd06859d8061786655d7099bf7c",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 20,
+        "path": "patches/qemu-m5stack-peripherals/0139-unit-batch5b.patch",
+        "sha256": "16becec05fba46e05c92b053db62a813787acefbbdf2a8c3239607f2a63d29a5",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 21,
+        "path": "patches/qemu-m5stack-peripherals/0140-unit-batch6a.patch",
+        "sha256": "b977ba73ecf97d427284cfd6ba9bff74ac7446d128af160463de13b2e9b831e7",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 22,
+        "path": "patches/qemu-m5stack-peripherals/0141-unit-batch5-evidence-fixes.patch",
+        "sha256": "42bf76f88a6539ca6a1d3498125c8d5e59a0ea6eb080ca83def0ba5b708d0912",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 23,
+        "path": "patches/qemu-m5stack-peripherals/0142-unit-batch6b.patch",
+        "sha256": "025ab6f922eeb8011519f7b2479a3d1743144ed93ca442dc1050cd6e9a5f123f",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 24,
+        "path": "patches/qemu-m5stack-peripherals/0143-unit-batch7a.patch",
+        "sha256": "352b8305d687b8db088a59bb635cde4095f6396014ed4db08bbde726116bcabf",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 25,
+        "path": "patches/qemu-m5stack-peripherals/0144-unit-batch6-evidence-fixes.patch",
+        "sha256": "5fb0c6d68bf969f7fdd84218a0205cabcc8cec7451196159932edd2145246a93",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 26,
+        "path": "patches/qemu-m5stack-peripherals/0145-unit-batch7b.patch",
+        "sha256": "f2f4c341f70f844fe6264fe1b81df5d9994a8a183a1e845113e77bb15b7ff32b",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 27,
+        "path": "patches/qemu-m5stack-peripherals/0146-unit-batch8a.patch",
+        "sha256": "d64e0c1bb3ced94802c409999eb47413cb84fec9948ac7306c88ad410c8c1c5b",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 28,
+        "path": "patches/qemu-m5stack-peripherals/0147-unit-batch6b-evidence-fixes.patch",
+        "sha256": "ea8293a0a858666d630d0ce30419fa3af399ea959ef54f9d61a5cd1097728e0b",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 29,
+        "path": "patches/qemu-m5stack-peripherals/0148-unit-batch8b.patch",
+        "sha256": "be7c4e8e484d3c611a914aa1f8444dc0a2afcabee17af50595b9af508f4c72a9",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 30,
+        "path": "patches/qemu-m5stack-peripherals/0149-unit-batch9a.patch",
+        "sha256": "d0a2f3ee05e32be85e064d3909790d465b1cb4789cb6cfdf21433790fb1a88aa",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 31,
+        "path": "patches/qemu-m5stack-peripherals/0150-unit-batch7-evidence-fixes.patch",
+        "sha256": "92ef365e9a2388beafa7595f5ee48692890896ceea1bba2cc0a69a840f56e9f0",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 32,
+        "path": "patches/qemu-m5stack-peripherals/0151-unit-batch9b.patch",
+        "sha256": "d3e4ea28a4dab3f37394bc5bb86d830873293e4118f76694efb27e764c5ad5b5",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 33,
+        "path": "patches/qemu-m5stack-peripherals/0152-unit-batch10ab.patch",
+        "sha256": "c4492dbb9bd5beb775649bd680161d045958111b80861cc8a5f053b07aaba2e9",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 34,
+        "path": "patches/qemu-m5stack-peripherals/0153-unit-batch8-evidence-lcd-read.patch",
+        "sha256": "17ac7045102919a211cc53322391b1ceec718761d75dc88406216e05098060fd",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 35,
+        "path": "patches/qemu-m5stack-peripherals/0154-unit-batch10-evidence-fixes.patch",
+        "sha256": "acc2bca2634c3cbc21a796b5c32a6842dcb5136914957b50bc04fe696065708f",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 36,
+        "path": "patches/qemu-m5stack-peripherals/0156-unit-id-atecc-wake.patch",
+        "sha256": "c8e88bd4b5f000b72f6fbd7ee9ac961e2ad1c86e260a583b42c3ead7224fae2d",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 37,
+        "path": "patches/qemu-m5stack-peripherals/0157-unit-glass-m5gfx-protocol.patch",
+        "sha256": "a4d6d58ff95e3bd85f4eefe8190443417c2d386c4063375cb026c8e35232cb0d",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 38,
+        "path": "patches/qemu-m5stack-peripherals/0158-unit-batch12a.patch",
+        "sha256": "7c80d946add5226d90ccc212131ed0c3719109443f7b42803c0c7569a57f88e6",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 39,
+        "path": "patches/qemu-m5stack-peripherals/0159-unit-batch12b.patch",
+        "sha256": "084f34e20cf3ffdb94935e165ed5cd4462e28dbb3490f29a1853e692a1a0f547",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 40,
+        "path": "patches/qemu-m5stack-peripherals/0160-unit-batch12a-evidence-fixes.patch",
+        "sha256": "a54a178785824096158a9b89a6c7f787a97a6cee8e9c8aed310d02abe89ba923",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      },
+      {
+        "order": 41,
+        "path": "patches/qemu-m5stack-peripherals/0161-unit-batch12c-chain-frames.patch",
+        "sha256": "b9d07d03619781a1df957622944f235b4ab29be741f65363e4f0cd2f5d86ecce",
+        "forward_check": "PASS",
+        "reverse_check_at_layer": "PASS"
+      }
+    ]
+  },
+  "retained_private_evidence": {
+    "build_manifest": {
+      "sha256": "d70af5cdcba348af28e8954b6d064b4aa9deb1c14e40aa7910f90562b0091b14",
+      "bytes": 17758
+    },
+    "configure_log_sha256": "de31c1925bfe3458fc1f48e2cac680d58aa8edbf07dc3a8ca3d6f94f9392fd28",
+    "build_log_sha256": "3f709b0ff3b03d90735c22c0e8f548ac5e05db07d786405e40eaac8081ed35f3",
+    "base_archive_sha256": "f3583ed342021295b50225b7e61a6472152180dddc186161ac673e7a7c6c0710"
+  },
+  "limits": [
+    "This is a native Xtensa build, not a C6, P4 or browser-WASM build.",
+    "The canonical source has no ESP32-C6 machine; the separately configured C6 backend does not inherit this result.",
+    "Debug paths, host dependencies and signing may change a rebuilt binary hash.",
+    "No binaries, ROM, firmware, mutable Flash, private paths, endpoints or unique device/session identifiers are included.",
+    "Functional campaign is in progress; three exact CoreS3 canaries accepted separately in cores3-canary-summary.json do not establish full acceptance."
+  ]
+}
