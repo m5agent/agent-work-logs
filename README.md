@@ -49,7 +49,7 @@
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
 | 2026-11-04 | ESP Emulator | 中文科技感介绍视频与 CoreS3 运行实录 | `PASS`（74秒1080p成片与限定native虚拟验证；hardware/browser-WASM NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video/) |
-| 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（virtual-device 60例/2564检查/200输入；平台1957 PASS+10 skip；源码CI四检查PASS；PR #165 OPEN；合并/部署NOT RUN） | [查看](records/esp-emulator/2026-11-04-uiflow-browser-workbench/) |
+| 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（virtual-device 60例/2564检查/200输入；平台1957 PASS+10 skip；PR #165 MERGED；main CI PASS；Pages尝试1下载TLS FAIL、尝试2进行中） | [查看](records/esp-emulator/2026-11-04-uiflow-browser-workbench/) |
 | 2026-11-04 | ESP Emulator | Atom Matrix / StickC Plus 当前发布包启动调查 | PARTIAL（109.458s/90.687s基线；候选未采用；新19板工作台验收继续） | [查看](records/esp-emulator/2026-11-04-browser-startup-investigation/) |
 | 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：阶段记录 | `PARTIAL`（完整 41 层构建、8 个限定 Unit 案例、五板 250 PASS+5 STATE_PASS；HTTP 15 PASS+1 urlencode FAIL；全量继续） | [查看](records/esp-emulator/2026-11-04-uiflow-full-deepseek/) |
 | 2026-11-03 | ESP Emulator | 性能合 main 与正式 Pages 预构建更新 | PARTIAL（源码/部署/48路径回读完成；19板20例552检查PASS；线上前三阶段PASS，独立触摸轮启动FAIL、输入NOT RUN；正式CI清理缺口保留） | [查看](records/esp-emulator/2026-11-03-emulator-performance-pages-release/) |

@@ -145,3 +145,9 @@ Flash/main/fixture/ready/required-patch绑定一起回退，并保留原失败�
 2026-11-04T08:24:25Z：PR已创建，精确head为c3db，push/PR两轮普通CI四检查均通过。
 [交付与边界记录](followups/2026-11-04-pr165-handoff/report.md)保留实际回读及此前功能证据的复用范围。
 合并、Pages和在线验收仍未执行；首次归档状态保留在原固定提交。
+
+## 合并与首次正式发布尝试
+
+PR #165已按授权合并为23d38d8d，文件树与原c3db验证版本一致，普通main CI通过。
+[发布检查点](followups/2026-11-04-pr165-merge-publish-attempt1/report.md)固定首次下载TLS失败及其后一次同源码恢复尝试。
+截至该检查点，尝试2仍在正式构建中，尚未授予新站点或线上验收通过。

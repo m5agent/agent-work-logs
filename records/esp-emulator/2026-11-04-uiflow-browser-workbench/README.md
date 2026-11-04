@@ -1,7 +1,7 @@
 # ESP Emulator UIFlow browser workbench：限定验收记录
 
 - 日期：2026-11-04
-- 结果：PARTIAL（工程功能与host验证PASS；模型根因及性能边界保留，PR已交付审核，合并/部署未执行）。
+- 结果：PARTIAL（工程功能与host验证PASS；模型根因及性能边界保留，PR已合并，正式发布尚未完成）。
 - 工作类型：code_change、report。
 - 来源：用户要求全部19款已准入浏览器设备提供默认UIFlow代码工作台，并核验启动、输入、编辑器及限定性能；无公开Issue编号。
 - 源码：[公开提交](https://github.com/m5agent/m5stack-esp-emulator/commit/c3db057d2ee99c022a4116ae72d661c4d39888c6)，base b41eba70eb61f7ddc5c41e0b981341064f9d1d1f；源码推送与commit回读已通过。
@@ -58,3 +58,9 @@ NOT CAPTURED。SDK pthread cancellation未建立，物理/线上性能均无新�
 2026-11-04T08:24:25Z：PR已创建，精确head为c3db，push/PR两轮普通CI四检查均通过。
 [交付与边界记录](followups/2026-11-04-pr165-handoff/report.md)保留实际回读及此前功能证据的复用范围。
 合并、Pages和在线验收仍未执行；首次归档状态保留在原固定提交。
+
+## 合并与首次正式发布尝试
+
+PR #165已按授权合并为23d38d8d，文件树与原c3db验证版本一致，普通main CI通过。
+[发布检查点](followups/2026-11-04-pr165-merge-publish-attempt1/report.md)固定首次下载TLS失败及其后一次同源码恢复尝试。
+截至该检查点，尝试2仍在正式构建中，尚未授予新站点或线上验收通过。

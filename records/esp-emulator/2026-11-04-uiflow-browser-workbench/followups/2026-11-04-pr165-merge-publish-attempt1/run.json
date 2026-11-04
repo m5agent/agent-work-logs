@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "PR165 merge and first Pages publication attempt",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/165",
+    "tested_commit": "c3db057d2ee99c022a4116ae72d661c4d39888c6",
+    "merge_commit": "23d38d8dbe91488185dc53eb4cd47dee687df019"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "validation": "Prior exact-image virtual-device evidence reused; no new firmware/guest run."
+  },
+  "execution": {
+    "environment": "GitHub merge/main CI/workflow metadata and existing public failed log; one read-only snapshot, no polling loop.",
+    "task_id": null,
+    "session_id": null,
+    "workflow_URL": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41799916700/attempts/1"
+  },
+  "checks": [
+    {
+      "name": "authorized-merge",
+      "status": "PASS"
+    },
+    {
+      "name": "tested-and-merged-tree-equality",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinary-main-CI",
+      "status": "PASS",
+      "scope": "SourceCI only"
+    },
+    {
+      "name": "publication-source-fetch",
+      "status": "FAIL",
+      "scope": "TLS transport, before QEMU/WASM compile"
+    },
+    {
+      "name": "new-compile-guest-export-deploy",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "online-same-path-acceptance",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/summary.json",
+      "bytes": 3818,
+      "sha256": "8c9bdfdbe6f423aee4661957b1423f2f12237921e8197792910af8572be6c631",
+      "kind": "derived-summary",
+      "raw": false
+    },
+    {
+      "path": "evidence/source-probe-summary.json",
+      "bytes": 5685,
+      "sha256": "e0890e91c93dcd22df43c4e8fd5698a2973f52cae0af047a61108ec65e766f5d",
+      "kind": "derived-summary",
+      "raw": false
+    }
+  ],
+  "notes": [
+    "Prior executable validation remains bound by identical source trees.",
+    "No code/WASM regression inferred from source-fetch failure; no new deployment claim."
+  ],
+  "draft": false,
+  "publishable": true
+}
