@@ -136,6 +136,12 @@ guest导出/组合/逐lane命令与原FW/runtime/profile身份见公开源码的
 
 未写物理Flash。源码、默认组合与profile可按逻辑提交回退，exact variant必须连同
 Flash/main/fixture/ready/required-patch绑定一起回退，并保留原失败证据。
-PR尚未创建；main合并、Pages发布和在线同路径NOT RUN，等待授权。
+首次归档时PR尚未创建；交付后续见下节。main合并、Pages发布和在线同路径NOT RUN，等待授权。
 物理RF/电气/功耗/声学/光学/机械、未知固件、未建模外围与长期稳定性无新增证明。
 后续PR与发布结果应追加独立记录；本次未执行部署。
+
+## PR #165 交付后续
+
+2026-11-04T08:24:25Z：PR已创建，精确head为c3db，push/PR两轮普通CI四检查均通过。
+[交付与边界记录](followups/2026-11-04-pr165-handoff/report.md)保留实际回读及此前功能证据的复用范围。
+合并、Pages和在线验收仍未执行；首次归档状态保留在原固定提交。

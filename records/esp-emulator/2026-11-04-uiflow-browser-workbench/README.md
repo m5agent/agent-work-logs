@@ -1,7 +1,7 @@
 # ESP Emulator UIFlow browser workbench：限定验收记录
 
 - 日期：2026-11-04
-- 结果：PARTIAL（工程功能与host验证PASS；模型根因及性能边界保留，PR/合并/部署未执行）。
+- 结果：PARTIAL（工程功能与host验证PASS；模型根因及性能边界保留，PR已交付审核，合并/部署未执行）。
 - 工作类型：code_change、report。
 - 来源：用户要求全部19款已准入浏览器设备提供默认UIFlow代码工作台，并核验启动、输入、编辑器及限定性能；无公开Issue编号。
 - 源码：[公开提交](https://github.com/m5agent/m5stack-esp-emulator/commit/c3db057d2ee99c022a4116ae72d661c4d39888c6)，base b41eba70eb61f7ddc5c41e0b981341064f9d1d1f；源码推送与commit回读已通过。
@@ -50,5 +50,11 @@ NOT CAPTURED。SDK pthread cancellation未建立，物理/线上性能均无新�
 ## 交付范围
 
 [普通源码CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41796558326)两个job完成SUCCESS；它不是regular Pages60guest job。
-PR尚未创建。main合并、Pages发布及在线同路径验收均NOT RUN，等待授权。
+首次归档时PR尚未创建；交付后续见下节。main合并、Pages发布及在线同路径验收均NOT RUN，等待授权。
 本记录分别保留实现、验证与尚未执行的交付状态。
+
+## PR #165 交付后续
+
+2026-11-04T08:24:25Z：PR已创建，精确head为c3db，push/PR两轮普通CI四检查均通过。
+[交付与边界记录](followups/2026-11-04-pr165-handoff/report.md)保留实际回读及此前功能证据的复用范围。
+合并、Pages和在线验收仍未执行；首次归档状态保留在原固定提交。
