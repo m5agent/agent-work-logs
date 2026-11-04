@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-04 | ESP Emulator | Atom Matrix / StickC Plus 当前发布包启动调查 | PARTIAL（109.458s/90.687s基线；候选未采用；新19板工作台验收继续） | [查看](records/esp-emulator/2026-11-04-browser-startup-investigation/) |
 | 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：阶段记录 | `PARTIAL`（完整 41 层构建、8 个限定 Unit 案例、五板 250 PASS+5 STATE_PASS；HTTP 15 PASS+1 urlencode FAIL；全量继续） | [查看](records/esp-emulator/2026-11-04-uiflow-full-deepseek/) |
 | 2026-11-03 | ESP Emulator | 性能合 main 与正式 Pages 预构建更新 | PARTIAL（源码/部署/48路径回读完成；19板20例552检查PASS；线上前三阶段PASS，独立触摸轮启动FAIL、输入NOT RUN；正式CI清理缺口保留） | [查看](records/esp-emulator/2026-11-03-emulator-performance-pages-release/) |
 | 2026-11-03 | ESP Emulator | QEMU producer 路径规范化与新 runtime 同路径验证 | `PASS`（限定producer/build/privacy与Cardputer-ADV69项；full20仍运行，Pages未发布） | [查看](records/esp-emulator/2026-11-03-qemu-producer-paths/) |

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Browser startup investigation before UIFlow workbench release",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "issue": "user-reported browser startup and input behavior",
+    "pull_request": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "identity_source": "evidence/browser-startup-summary.json",
+    "scope": "original fixed UIFlow2 examples; no arbitrary firmware claim"
+  },
+  "execution": {
+    "environment": "Apple M4 / system Chrome Metal ANGLE / isolated browser virtual device",
+    "status": "PARTIAL",
+    "physical_hardware": "NOT RUN",
+    "new_runtime_guest": "NOT RUN by this record",
+    "new_deployment": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "two exact published examples"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "Matrix USER/RMT and Plus BtnA/frame"
+    },
+    {
+      "layer": "performance_improvement",
+      "status": "FAIL",
+      "scope": "tested candidates not adopted"
+    },
+    {
+      "layer": "all_devices_and_buttons",
+      "status": "NOT RUN",
+      "scope": "complete goal remains active"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/browser-startup-summary.json",
+      "sha256": "728e64a78fbc24e0774e0c8fc300af6945a0692d2ba62a39cc018c4f26271a4d"
+    }
+  ],
+  "notes": [
+    "Profile sample fractions are not CPU utilization.",
+    "First failures remain; observer timing and cleanup evidence gaps stay explicit."
+  ]
+}
