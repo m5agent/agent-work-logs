@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "kind": "bounded-final-host-verification-and-source-binding",
+  "status": "PASS",
+  "draft": false,
+  "publishable": true,
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "final_commit": "c3db057d2ee99c022a4116ae72d661c4d39888c6",
+    "public_commit_URL": "https://github.com/m5agent/m5stack-esp-emulator/commit/c3db057d2ee99c022a4116ae72d661c4d39888c6",
+    "public_commit_readback": "PASS, confirmed by root",
+    "merged_to_main": "NOT RUN; awaiting approval"
+  },
+  "execution_layer": "Host validation only; guest acceptance is the separate R8 summary.",
+  "versions": {
+    "Python": "3.12.14",
+    "Pillow": "13.0.0",
+    "littlefs-python": "0.19.0",
+    "Node": "22.14.0",
+    "npm": "10.9.2"
+  },
+  "common_reproduction_environment": {
+    "working_directory": "repository root at final_commit",
+    "PYTHONPATH": "platform/tools",
+    "python_executable": ".work/venv-platform/bin/python (Python3.12.14 with pinned dependencies)"
+  },
+  "R1": {
+    "status": "FAIL",
+    "source_commit": "7b0161d2d8f829c1c4232e3a0b7f420d23d3d88a",
+    "finished_at_UTC": "2026-11-04T07:53:18.829937+00:00",
+    "raw_report": {
+      "bytes": 642,
+      "sha256": "8364c33c97d771ae9c96737516c046f84d8c364f60fd6caf67f48b639fd7d5be"
+    },
+    "platform_log": {
+      "bytes": 427640,
+      "sha256": "22edcff5f888337f734373859a3581d49f10d8c14e62e6f11f8332d78c6aae2c"
+    },
+    "tests_ran": 1967,
+    "failures": 3,
+    "skipped": 10,
+    "unittest_elapsed_seconds": 155.239,
+    "later_steps_NOT_RUN": 8,
+    "failure_summary": {
+      "path": "evidence/final-host-r1-failure-summary.json",
+      "bytes": 2616,
+      "sha256": "b6f8acdbabf530ef8f01652df327d939d4c2dc0774935409d16684b3b72d0893"
+    },
+    "classification": "Documentation IDs/date/Markdown-only table parsing, not guest/controller/runtime failure."
+  },
+  "targeted_repair": {
+    "status": "PASS",
+    "raw_report": {
+      "bytes": 816,
+      "sha256": "e6b89e03e7c99b78f5e09e710646b66c81dd3a1de64890d72f871581c136e651"
+    },
+    "log": {
+      "bytes": 3513,
+      "sha256": "d6d7c7017ff2979ca766f27935a9a07a2a29f01b4eb0efd387440cba73b4ce52"
+    },
+    "modules": [
+      "test_docs_current_state_contract",
+      "test_docs_index_contract"
+    ],
+    "tests_ran": 21,
+    "unittest_elapsed_seconds": 6.052,
+    "snapshot_write_then_check": "PASS using samePython3.12.14 environment",
+    "prior_non_guest_setup_attempt": "GlobalPython3.13 lackedPIL and refused before writing; actual snapshot operation used the pinned environment.",
+    "guest_execution": "NOT RUN by targeted host checks"
+  },
+  "R2": {
+    "status": "PASS",
+    "source_commit": "c3db057d2ee99c022a4116ae72d661c4d39888c6",
+    "finished_at_UTC": "2026-11-04T08:02:30.221933+00:00",
+    "raw_report": {
+      "bytes": 3876,
+      "sha256": "2e4461d68fc0b04975bc0c66f4200c9d210401b3ca3d3bbcdaaeee7346e0664b"
+    },
+    "step_count": 9,
+    "all_step_exit_codes": 0,
+    "steps": [
+      {
+        "name": "platform",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "platform/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 154.778,
+        "log": {
+          "bytes": 339609,
+          "sha256": "0afbc65c8bd9e2d1098e62679941a2dd5802a4b54cc55df78418a5988f8f8012"
+        }
+      },
+      {
+        "name": "runtime-coverage",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "platform/tools/runtime_coverage.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.031,
+        "log": {
+          "bytes": 20,
+          "sha256": "ae22dc70eea81ac4f6d6918c0d694fc72cbc72cb589a13d93dac5b5c453d9311"
+        }
+      },
+      {
+        "name": "peripheral-catalog",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "platform/tools/peripheral_catalog.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.02,
+        "log": {
+          "bytes": 22,
+          "sha256": "6e3c49ec0c80a56051031a4bf3ba0fe16aa118f2b31f8863c09ef0bc4cc89633"
+        }
+      },
+      {
+        "name": "qemu-profiles",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "platform/tools/qemu_profiles.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.019,
+        "log": {
+          "bytes": 17,
+          "sha256": "04a26a35d775027ee0ce627c0888eeb20272591f8801dbd6e2f0dfb2e499281e"
+        }
+      },
+      {
+        "name": "project-snapshot",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "platform/tools/project_snapshot.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.899,
+        "log": {
+          "bytes": 20,
+          "sha256": "05110c70ad2d40d6a4943005ed5d00f2780cb44d5288bcee45128d62b19d6f1d"
+        }
+      },
+      {
+        "name": "node-contracts",
+        "argv_from_repository_root": [
+          "npm",
+          "run",
+          "--prefix",
+          "platform/tests",
+          "test:contracts"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 9.795,
+        "log": {
+          "bytes": 18952,
+          "sha256": "0af728392deec9a18023196d6a044bc62d211723e342bf120867db21d3c45c91"
+        }
+      },
+      {
+        "name": "startup-collector-controls",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "tests/browser-qemu/startup_timing/test_prepare.py"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.059,
+        "log": {
+          "bytes": 107,
+          "sha256": "f9fd52ad1ff09651c49285b6e7e5150e81914830dccc08a31e4bc415681bbcbb"
+        }
+      },
+      {
+        "name": "diff-check",
+        "argv_from_repository_root": [
+          "git",
+          "diff",
+          "--check",
+          "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.017,
+        "log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "name": "scope",
+        "argv_from_repository_root": [
+          ".work/venv-platform/bin/python",
+          "platform/tools/check_pr_scope.py",
+          "--base",
+          "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+          "--head",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "step_wall_seconds": 0.569,
+        "log": {
+          "bytes": 228,
+          "sha256": "a3977e15829b02ddd2f937f638912e823a5d0b70a7cb27af695dc873a82846ed"
+        }
+      }
+    ],
+    "platform_unittest": {
+      "tests_ran": 1967,
+      "passed": 1957,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 10,
+      "unittest_elapsed_seconds": 154.528,
+      "skip_reasons": [
+        {
+          "test": "test_littlefs_inventory_hashes_files_and_redacts_sensitive_paths (test_firmware_analysis.FirmwareAnalysisTests.test_littlefs_inventory_hashes_files_and_redacts_sensitive_paths)",
+          "reason": "littlefs-python test runtime is unavailable"
+        },
+        {
+          "test": "test_manifest_includes_littlefs_inventory_and_sensitive_warning (test_firmware_manifest.FirmwareManifestTests.test_manifest_includes_littlefs_inventory_and_sensitive_warning)",
+          "reason": "littlefs-python test runtime is unavailable"
+        },
+        {
+          "test": "test_available_pinned_official_compiler_reproduces_exact_canary_bytes (test_uiflow_main_loader.MainLoaderTests.test_available_pinned_official_compiler_reproduces_exact_canary_bytes)",
+          "reason": "optional pinned local compiler unavailable; fixed bytes still parsed separately"
+        },
+        {
+          "test": "test_ble_uuid32_candidate (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_ble_uuid32_candidate)",
+          "reason": "pinned UIFlow source checkout is not available"
+        },
+        {
+          "test": "test_draw_pixel_candidate_is_transactionally_bound (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_draw_pixel_candidate_is_transactionally_bound)",
+          "reason": "pinned UIFlow source checkout is not available"
+        },
+        {
+          "test": "test_m5ble_server_client_index_candidate (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_m5ble_server_client_index_candidate)",
+          "reason": "pinned UIFlow source checkout is not available"
+        },
+        {
+          "test": "test_m5ui_candidate_accepts_later_commit_only_with_reviewed_preimages (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_m5ui_candidate_accepts_later_commit_only_with_reviewed_preimages)",
+          "reason": "pinned UIFlow source checkout is not available"
+        },
+        {
+          "test": "test_modbus_async_candidate_uses_socket_receive (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_modbus_async_candidate_uses_socket_receive)",
+          "reason": "pinned UIFlow source checkout is not available"
+        },
+        {
+          "test": "test_modbus_transform_candidate (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_modbus_transform_candidate)",
+          "reason": "pinned UIFlow source checkout is not available"
+        },
+        {
+          "test": "test_tls_epoch_patch_is_rebound_to_the_current_release_source (test_uiflow_shared_library_candidates.SharedLibraryCandidateTests.test_tls_epoch_patch_is_rebound_to_the_current_release_source)",
+          "reason": "pinned UIFlow source checkout is not available"
+        }
+      ],
+      "skip_categories": {
+        "optional_littlefs_test_runtime": 2,
+        "optional_pinned_compiler": 1,
+        "pinned_UIFlow_source_checkout": 7
+      },
+      "littlefs_package_installed": "littlefs-python0.19.0 is installed. The two skip messages describe an optional test runtime, not package absence."
+    },
+    "Node_contract_commands": 28,
+    "Node_SKIP_tokens": 0,
+    "startup_collector_controls": 9,
+    "four_validators": [
+      "runtime-coverage",
+      "peripheral-catalog",
+      "qemu-profiles",
+      "project-snapshot"
+    ],
+    "documentation_contracts": "PASS within full platform suite",
+    "diff_and_PR_scope": "PASS",
+    "branch_history_scope": {
+      "status": "PASS",
+      "base": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+      "head": "c3db057d2ee99c022a4116ae72d661c4d39888c6",
+      "new_blobs": 218,
+      "new_blob_bytes": 9469208,
+      "new_evidence_bytes": 671526,
+      "errors": []
+    }
+  },
+  "R8_final_source_binding": {
+    "status": "PASS",
+    "review_artifact": {
+      "bytes": 412,
+      "sha256": "de48b1452ee9d7bfc558846370e1e74120b8b986a058899b7c1778c23fac1044"
+    },
+    "tested_source_files_unchanged": 49,
+    "strict_acceptance_summary_sha256": "9703b94a23025b75be4c8464e32ac835cc75fffa10f5fcc9d88bc144de841151",
+    "scope": "Content hashes of all source-vector paths from actual R8 still match the final documentation/contract repair head. This is a content binding, not a new guest run."
+  },
+  "warm_artifact_review": {
+    "status": "PASS",
+    "reviewer": "Root independent byte/SHA/status review",
+    "groups": 4,
+    "raw_artifacts_checked": 16,
+    "source_summary_sha256": "cbcf7bb35655ebe9646fdadb6c76eeaba8d29106199f971fc18c76ed2662f7c3",
+    "performance_conclusion": "PARTIAL; mixed observations, not pure-cache/statistical/all-device proof"
+  },
+  "remote_CI": {
+    "status": "SUCCESS",
+    "URL": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41796558326",
+    "source_commit": "c3db057d2ee99c022a4116ae72d661c4d39888c6",
+    "jobs": {
+      "platform-contracts": "completed/success",
+      "network-namespace-policy": "completed/success"
+    },
+    "readback": "Confirmed by root",
+    "scope": "Ordinary source CI only; regular Pages60guest job NOT RUN."
+  },
+  "delivery": {
+    "PR": "NOT RUN; not created at record preparation",
+    "main_merge": "NOT RUN; awaiting approval",
+    "Pages_publication": "NOT RUN; awaiting approval",
+    "online_same_path_acceptance": "NOT RUN; awaits publication and approval"
+  },
+  "redaction": "Derived bounded metadata only; raw reports/logs retain original byte/SHA. Machine paths, endpoints and session/device identities omitted."
+}

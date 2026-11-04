@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "bounded-first-final-host-verification-failure",
+  "status": "FAIL",
+  "source_commit": "7b0161d2d8f829c1c4232e3a0b7f420d23d3d88a",
+  "source_publication": "Historical attempt before source publication; final published source is c3db057d2ee99c022a4116ae72d661c4d39888c6",
+  "verification_layer": "Host Python platform suite; no new guest execution",
+  "actual": {
+    "tests_ran": 1967,
+    "elapsed_seconds": 155.239,
+    "failures": 3,
+    "skips": 10,
+    "failure_class": "Three documentation contracts; no missing actual Markdown file, runtime defect or code-inventory count bug.",
+    "later_steps_NOT_RUN": 8,
+    "stop_policy": "Script stopped after failed Python step.",
+    "exact_failed_tests": [
+      "test_engineering_handoff_stays_a_current_navigation_summary (test_docs_current_state_contract.DocsCurrentStateContractTests.test_engineering_handoff_stays_a_current_navigation_summary)",
+      "test_workstreams_and_platform_tool_inventory_are_current (test_docs_current_state_contract.DocsCurrentStateContractTests.test_workstreams_and_platform_tool_inventory_are_current)",
+      "test_project_snapshot_exposes_document_freshness_audit (test_docs_index_contract.DocsIndexContractTests.test_project_snapshot_exposes_document_freshness_audit)"
+    ],
+    "unittest_elapsed_seconds": 155.239,
+    "runner_step_wall_seconds": 155.46
+  },
+  "raw_log": {
+    "bytes": 427640,
+    "sha256": "22edcff5f888337f734373859a3581d49f10d8c14e62e6f11f8332d78c6aae2c"
+  },
+  "fact_source": "Root terminal metadata; raw log not copied.",
+  "followup": "Targeted21 documentation tests then fullR2 passed; see final-host-summary.json. OriginalR1 remainsFAIL.",
+  "history_policy": "Keep firstFAIL as separate evidence; laterPASS must not overwrite it.",
+  "proved_causes": [
+    {
+      "kind": "gap-ID textual contract",
+      "cause": "Expected exact backticked RUNTIME-07/08/09 identifiers in current status prose."
+    },
+    {
+      "kind": "stale date expectation",
+      "cause": "Contract still expected the old October30 status date."
+    },
+    {
+      "kind": "Markdown freshness table parser",
+      "cause": "Coverage authority223 versus freshness rows224, while coverage.total/inventory both613: a new DOM QA JSON had been added as a row to a Markdown-only freshness table and parsed as a fake page.",
+      "targeted_fix": "Remove only the non-Markdown freshness row; retain DOM QA links in realMarkdown/README. No blind count change."
+    }
+  ],
+  "raw_report": {
+    "bytes": 642,
+    "sha256": "8364c33c97d771ae9c96737516c046f84d8c364f60fd6caf67f48b639fd7d5be"
+  }
+}
