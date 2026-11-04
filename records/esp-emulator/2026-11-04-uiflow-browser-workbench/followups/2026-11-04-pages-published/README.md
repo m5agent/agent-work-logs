@@ -13,3 +13,8 @@
 - [结构化执行](run.json)
 - [部署与已知问题摘要](evidence/deployment-summary.json)
 - [HTTPS首6例有界证据](evidence/https-first6-summary.json)
+
+## 文档收尾
+
+[PR #166](https://github.com/m5agent/m5stack-esp-emulator/pull/166)已合并为3e8f76b836009438b7d9312e1e7b8f822b7d64f5，50项文档合同与push/PR四项CI通过；合并树与已验head相同。
+[收尾摘要](evidence/documentation-closeout-summary.json)保留校验身份；最终HTTPS manifest仍为685e…，运行时资产未变，原故障继续开放。

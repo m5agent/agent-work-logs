@@ -23,3 +23,8 @@ release标签pages-uiflow-workbench-20261104-23d38d8d绑定上述提交。public
 本次交付为携已知问题部署，完整门禁未授PASS。此前V6/R8本地全19结果保持其原身份；本记录没有新增物理、RF、电气或性能证明。无需回退本次已授权部署来等待以上故障定位；后续按缺口登记分别处理。
 
 原始大报告、像素数组和浏览器标识保留在忽略的执行存储中，仅归档有界去标识摘要与原字节/SHA，不称为raw。
+
+## 文档收尾
+
+[PR #166](https://github.com/m5agent/m5stack-esp-emulator/pull/166)已合并为3e8f76b836009438b7d9312e1e7b8f822b7d64f5，50项文档合同与push/PR四项CI通过；合并树与已验head相同。
+[收尾摘要](evidence/documentation-closeout-summary.json)保留校验身份；最终HTTPS manifest仍为685e…，运行时资产未变，原故障继续开放。
