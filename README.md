@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-04 | ESP Emulator | V2 快剪介绍视频、3D 运镜与多场景运行实录 | `PASS`（60秒1080p成片及媒体QA；三组native、工作台与独立browser-WASM ready/frame；browser输入/hardware NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video-v2/) |
 | 2026-11-04 | ESP Emulator | 中文科技感介绍视频与 CoreS3 运行实录 | `PASS`（74秒1080p成片与限定native虚拟验证；hardware/browser-WASM NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video/) |
 | 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（历史local60 PASS；PR #165 MERGED/main CI PASS；正式及新本地发布资格FAIL；新站点/HTTPS NOT RUN） | [查看](records/esp-emulator/2026-11-04-uiflow-browser-workbench/) |
 | 2026-11-04 | ESP Emulator | Atom Matrix / StickC Plus 当前发布包启动调查 | PARTIAL（109.458s/90.687s基线；候选未采用；新19板工作台验收继续） | [查看](records/esp-emulator/2026-11-04-browser-startup-investigation/) |

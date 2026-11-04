@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "M5Stack emulator introduction video V2: fast edit, 3D camera and separately verified native/browser captures",
+  "source": {
+    "issue": null,
+    "pull_request": null,
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+    "previous_record": "../2026-11-04-emulator-introduction-video/"
+  },
+  "hardware": {
+    "models": [
+      "CoreS3 virtual device",
+      "Cardputer ADV virtual device"
+    ],
+    "hardware_validation": "NOT RUN"
+  },
+  "firmware": {
+    "native": {
+      "arcade": {
+        "effective_sha256": "e4b9d8cf7d6217a4c68de1dd40c6eb3ee7c9994c09fe38c849906e49d4603fd1",
+        "application_sha256": "7b43fe332ea9085baffa3c4ca5254b803d0816513b3a4365088b6b34fc88ba61"
+      },
+      "paint": {
+        "effective_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+        "application_sha256": "61a5163afe70c03a24ed88ac38b1c802bcec87949e946f2767e339a072965f2f"
+      },
+      "pelican": {
+        "effective_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+        "application_sha256": "a6624eacf21fce45d1caaed4f470f9690b33b7625a875c7654eb40bf7452fc30"
+      }
+    },
+    "browser_wasm_sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+    "browser_wasm_runtime_sha256": "0bd9478743d640484cad4762b9d7f7ae57a222f83ebf12a2114eb764a05194ea",
+    "native_workbench": {
+      "uploaded_firmware_sha256": "432d7845a1418b7d9078f581d493ca31390827bef37f944db9c860b674d23027",
+      "live_code_firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8"
+    }
+  },
+  "execution": {
+    "environment": "Three separately captured native Device Service demonstrations plus an independent browser-WASM fixture; cinematic rendering is a separate visual production step.",
+    "validation": "virtual-device validation",
+    "task_id": "not applicable",
+    "session_id": "omitted from public summary",
+    "native_cleanup": "PASS: all owned sessions stopped, runtimes reaped, active session list empty and owned service stopped",
+    "browser_cleanup": "PASS: graceful exit, no live workers, iframe removed"
+  },
+  "media": {
+    "status": "PASS",
+    "final_media_hash": "a9162b0737e98a20eebe80b0c29378a5d414e9209431f4a103c0aa7bd155d143",
+    "final_bytes": 22627515,
+    "target_duration_seconds": 60,
+    "target_resolution": [
+      1920,
+      1080
+    ],
+    "target_fps": 30,
+    "qa": "PASS on final artifact: 1800-frame full-stream decode, actual Chromium playback advancing 0.612069s and 17 seeks without errors, final decoded keyframe and independent visual review; encoded AAC measurements retained.",
+    "duration_seconds": 60.0,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "fps": 30,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "encoded_audio_loudness": {
+      "integrated_lufs": -16.08,
+      "true_peak_dbtp": -0.39,
+      "range_lu": 2.8
+    },
+    "filename": "M5Stack-Emulator-Intro-V2-1080p.mp4",
+    "frame_count": 1800,
+    "pixel_format": "yuv420p",
+    "color_range": "limited",
+    "color_space": "BT.709",
+    "audio_sample_rate": 48000,
+    "audio_channels": 2
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "NOT RUN",
+      "detail": "Used existing hash-bound runtime and firmware; no fresh runtime/firmware build in this media task."
+    },
+    {
+      "layer": "native_virtual_device",
+      "status": "PASS",
+      "detail": "Three separately bound applications executed and responded through native virtual controllers; actual markers/frames, evidence ZIP before stop and complete owned cleanup retained."
+    },
+    {
+      "layer": "native_web_workbench",
+      "status": "PASS",
+      "detail": "Actual artifact upload/session creation, live display/input and code-editor run with guest marker; separate firmware identities retained."
+    },
+    {
+      "layer": "browser_wasm_readiness_and_frame",
+      "status": "PASS",
+      "detail": "Independent fixed CoreS3 fixture printed ready, produced actual framebuffer and cleaned workers/iframe. See browser summary."
+    },
+    {
+      "layer": "browser_wasm_input",
+      "status": "NOT RUN",
+      "detail": "This browser capture claims ready and frame only; native input results are not transferred."
+    },
+    {
+      "layer": "cinematic_3d_render",
+      "status": "PASS",
+      "detail": "Real repository model geometry, camera/light animation and captured framebuffer textures; no firmware execution validation in renderer."
+    },
+    {
+      "layer": "audio_source",
+      "status": "PASS",
+      "detail": "60-second original 140 BPM music/SFX, nine short Mandarin narration sections, duration/decode/loudness checked before video encoding."
+    },
+    {
+      "layer": "hardware_validation",
+      "status": "NOT RUN",
+      "detail": "No physical device or physical-property measurement."
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "Final 60-second 1080p30 MP4 exported and bound to exact SHA256/byte size, with same-artifact decode, playback, seek, visual and encoded audio QA. Large media delivered separately from the record."
+    },
+    {
+      "layer": "final_media_qa",
+      "status": "PASS",
+      "detail": "Final H.264/AAC 60s, 1920x1080, 30fps; 1800-frame full decode exit0; Chromium playback advanced 0.612069s and 17 seeks had no errors; final 7.3s/44s title crops reviewed; encoded AAC -16.08 LUFS / -0.39 dBTP / LRA 2.80."
+    }
+  ],
+  "evidence": [
+    "evidence/native-summary.json",
+    "evidence/browser-wasm-summary.json",
+    "evidence/cinema-summary.json",
+    "evidence/media-summary.json",
+    "evidence/code-summary.json",
+    "code/README.md",
+    "evidence/arcade-summary.json",
+    "evidence/paint-summary.json",
+    "evidence/pelican-summary.json",
+    "evidence/workbench-summary.json",
+    "evidence/archive-integrity-summary.json"
+  ],
+  "notes": [
+    "V1 remains a separate historical record; V2 does not overwrite its media or results.",
+    "Piano candidate boot failure is retained and excluded from the successful Arcade claim.",
+    "Synthetic IMU injection demonstrates controller-to-guest behavior, not physical sensor accuracy.",
+    "No source patch, service reconfiguration, raw media or private endpoints are included."
+  ]
+}

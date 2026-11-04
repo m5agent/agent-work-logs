@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "kind": "native-demonstrations-summary",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "execution_lane": "native QEMU through dedicated Device Service /api/v1",
+  "source_git_head": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+  "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+  "demonstrations": {
+    "arcade": {
+      "device": "cardputer-adv",
+      "firmware_sha256": "e4b9d8cf7d6217a4c68de1dd40c6eb3ee7c9994c09fe38c849906e49d4603fd1",
+      "application_sha256": "7b43fe332ea9085baffa3c4ca5254b803d0816513b3a4365088b6b34fc88ba61",
+      "display": [
+        240,
+        135
+      ],
+      "frames": {
+        "count": 79,
+        "unique": 75,
+        "start_seconds": 0.014905416988767684,
+        "end_seconds": 12.922627125051804,
+        "first_sha256": "43978cd5cc69f37bc331acf95777ebb8147ad87036e3e4d8aab53253432ad83f",
+        "last_sha256": "b211ff4c9c91159f6ca9f2c63f7c6a60cf44f9f19968c2a04714d67cb6b23347"
+      },
+      "claim": "MatrixKeyboard guest receives A/D events, moves paddle; real game logic updates ball, blocks and score.",
+      "evidence": "arcade-summary.json",
+      "cleanup": {
+        "stopped": true,
+        "runtime_reaped": true
+      }
+    },
+    "paint": {
+      "device": "cores3",
+      "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+      "application_sha256": "61a5163afe70c03a24ed88ac38b1c802bcec87949e946f2767e339a072965f2f",
+      "display": [
+        320,
+        240
+      ],
+      "frames": {
+        "count": 48,
+        "unique": 15,
+        "start_seconds": 0.01574516692198813,
+        "end_seconds": 12.957452207920142,
+        "first_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "last_sha256": "8614c85dc8161d597b66a5a5aefe0726753faf00614a2ce81d16a66f06a89aee"
+      },
+      "claim": "Guest touch coordinates and palette selection produce visible drawn M5 strokes.",
+      "evidence": "paint-summary.json",
+      "cleanup": {
+        "stopped": true,
+        "runtime_reaped": true
+      }
+    },
+    "pelican": {
+      "device": "cores3",
+      "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+      "application_sha256": "a6624eacf21fce45d1caaed4f470f9690b33b7625a875c7654eb40bf7452fc30",
+      "display": [
+        320,
+        240
+      ],
+      "frames": {
+        "count": 95,
+        "unique": 90,
+        "start_seconds": 0.020991874975152314,
+        "end_seconds": 12.898556832922623,
+        "first_sha256": "89a4ba8e0471f3ddaa5cb10842ceb90d8e80a9e036f860e1a22c0314c00f0bb1",
+        "last_sha256": "843f7323c1fb411f831a055d38529b4054f77aa93385c622a3dc1c79e09005cb"
+      },
+      "claim": "Guest Canvas animation responds to touch speed/pause and reads injected BMI270 accel/gyro through its I2C and firmware IMU API.",
+      "evidence": "pelican-summary.json",
+      "cleanup": {
+        "stopped": true,
+        "runtime_reaped": true
+      }
+    }
+  },
+  "workbench": {
+    "status": "PASS",
+    "evidence": "workbench-summary.json",
+    "uploaded_firmware_sha256": "432d7845a1418b7d9078f581d493ca31390827bef37f944db9c860b674d23027",
+    "live_code_firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+    "note": "Real upload/session UI and same-guest code execution are independent captures; no browser-WASM claim."
+  },
+  "all_owned_sessions_stopped": true,
+  "all_owned_runtimes_reaped": true,
+  "owned_service_stopped": true,
+  "active_session_list_empty": true,
+  "hardware_validation": "NOT RUN",
+  "browser_wasm": "NOT RUN in these native executions; see independent browser summary",
+  "prior_attempts": [
+    {
+      "name": "cached Piano candidate",
+      "status": "FAIL",
+      "reason": "Cached candidate is not bootable: segment overlaps bootloader stack. Excluded from successful-game and media claims."
+    }
+  ],
+  "limits": [
+    "BMI270 values are simulated controller inputs; no physical sensor accuracy claim.",
+    "Pelican speaker initialization was false; this run establishes no audio output.",
+    "Capture counts and duration are sampling metadata, not an application-FPS benchmark."
+  ],
+  "redaction": "Bounded derived summary; local service addresses, credentials, identifiers and raw ZIP/video/frame series are not included."
+}

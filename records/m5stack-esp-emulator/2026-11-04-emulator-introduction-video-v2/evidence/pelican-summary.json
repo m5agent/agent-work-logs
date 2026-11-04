@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "execution_lane": "native QEMU via dedicated Device Service /api/v1",
+  "device": "cores3",
+  "runtime": {
+    "name": "qemu-system-xtensa",
+    "sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d"
+  },
+  "source_git_head": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+  "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+  "base_firmware_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+  "application_sha256": "a6624eacf21fce45d1caaed4f470f9690b33b7625a875c7654eb40bf7452fc30",
+  "application_source": "tests/uiflow2/cores3_pelican_bike/main.py",
+  "program_mode": "uiflow-live",
+  "display": [
+    320,
+    240
+  ],
+  "serial_markers": [
+    "PELICAN_MAIN_START",
+    "PELICAN_BOARD 10",
+    "PELICAN_DISPLAY 320 240",
+    "PELICAN_SPEAKER_READY False",
+    "PELICAN_IMU_READY True",
+    "PELICAN_CANVAS_OK 320 240",
+    "PELICAN_FIRST_FRAME 0"
+  ],
+  "actions": [
+    {
+      "at": 1.0996260829269886,
+      "kind": "input",
+      "body": {
+        "kind": "drag",
+        "x1": 60,
+        "y1": 220,
+        "x2": 280,
+        "y2": 220,
+        "settle_seconds": 0.05
+      }
+    },
+    {
+      "at": 3.048265790916048,
+      "kind": "qom",
+      "body": {
+        "path": "/machine/bmi270",
+        "property": "accel-x",
+        "value": 0.75
+      }
+    },
+    {
+      "at": 3.171044540940784,
+      "kind": "qom",
+      "body": {
+        "path": "/machine/bmi270",
+        "property": "gyro-z",
+        "value": 65
+      }
+    },
+    {
+      "at": 5.00616687501315,
+      "kind": "qom",
+      "body": {
+        "path": "/machine/bmi270",
+        "property": "accel-x",
+        "value": -0.75
+      }
+    },
+    {
+      "at": 5.129041165928356,
+      "kind": "qom",
+      "body": {
+        "path": "/machine/bmi270",
+        "property": "gyro-z",
+        "value": -65
+      }
+    },
+    {
+      "at": 7.086780666024424,
+      "kind": "qom",
+      "body": {
+        "path": "/machine/bmi270",
+        "property": "accel-x",
+        "value": 0
+      }
+    },
+    {
+      "at": 7.209242540993728,
+      "kind": "qom",
+      "body": {
+        "path": "/machine/bmi270",
+        "property": "gyro-z",
+        "value": 0
+      }
+    },
+    {
+      "at": 8.061848958022892,
+      "kind": "input",
+      "body": {
+        "kind": "touch",
+        "x": 280,
+        "y": 25,
+        "settle_seconds": 0.05
+      }
+    },
+    {
+      "at": 9.063466500025243,
+      "kind": "input",
+      "body": {
+        "kind": "touch",
+        "x": 280,
+        "y": 25,
+        "settle_seconds": 0.05
+      }
+    }
+  ],
+  "frames": {
+    "count": 95,
+    "unique": 90,
+    "start_seconds": 0.020991874975152314,
+    "end_seconds": 12.898556832922623,
+    "first_sha256": "89a4ba8e0471f3ddaa5cb10842ceb90d8e80a9e036f860e1a22c0314c00f0bb1",
+    "last_sha256": "843f7323c1fb411f831a055d38529b4054f77aa93385c622a3dc1c79e09005cb"
+  },
+  "evidence_zip_sha256": "b8b6d8f458cfc009bcd5a3a692218aefbf2a87d2a847fb5afba123e7a9213bf9",
+  "zip_integrity_pass": true,
+  "evidence_before_stop": true,
+  "physical_hardware": "NOT RUN",
+  "browser_wasm": "NOT RUN",
+  "claims": "Guest Canvas animation responds to touch speed/pause and reads injected BMI270 accel/gyro through its I2C and firmware IMU API.",
+  "limits": [
+    "No physical IMU accuracy, mechanical movement or acoustic claim.",
+    "Speaker not initialized in this captured scenario; no audio output claim.",
+    "Injected controller values are stimuli; displayed firmware observations respond with sign changes, not calibrated hardware accuracy."
+  ],
+  "cleanup": {
+    "stopped": true,
+    "runtime_reaped": true
+  },
+  "owned_service_stopped": true,
+  "source_summary_identity": {
+    "bytes": 3795,
+    "sha256": "aff4835824ae48292d95b9dec5b4de499d62cec68d2c4162c5e3e3a89dbc7ed2"
+  },
+  "redaction": "Derived public summary. Original service addresses, local paths, credentials, execution identifiers and complete responses are excluded."
+}
