@@ -18,7 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
-| 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（virtual-device 60例/2564检查/200输入；平台1957 PASS+10 skip；PR #165 MERGED；main CI PASS；Pages尝试1下载TLS FAIL、尝试2进行中） | [查看](esp-emulator/2026-11-04-uiflow-browser-workbench/) |
+| 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（历史local60 PASS；PR #165 MERGED/main CI PASS；正式及新本地发布资格FAIL；新站点/HTTPS NOT RUN） | [查看](esp-emulator/2026-11-04-uiflow-browser-workbench/) |
 | 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：阶段记录 | `PARTIAL`（完整 41 层构建、8 个限定 Unit 案例、五板 250 PASS+5 STATE_PASS；HTTP 15 PASS+1 urlencode FAIL；全量继续） | [查看](esp-emulator/2026-11-04-uiflow-full-deepseek/) |
 | 2026-11-03 | WeCom GPT bridge | GPT 自动回复与业务授权恢复 | `PARTIAL`（真实短文本自动回复 PASS，23s；旧历史压缩 FAIL，server recall 重写超时后回退） | [查看](infra/2026-11-03-wecom-gpt-channel-recovery/) |
 | 2026-11-03 | SVG animation | 全新鹈鹕骑行与同步踩踏 | `PASS`（Chrome 浏览器：9相位、3宽度；其他浏览器 NOT RUN） | [查看](svg-animation/2026-11-03-pelican-cycling/) |
