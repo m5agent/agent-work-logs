@@ -1,0 +1,115 @@
+{
+  "kind": "pr165-user-approved-prepared-preview-deployment-final-v2",
+  "status": "DEPLOYED_WITH_KNOWN_FAILURES",
+  "publication_scope": "Approved prepared-preview, desktop functional scope; no regular-hosted qualification PASS",
+  "authorization": "User explicitly directed merge/deploy first and record known issues; current full-gate failure waived only as release blocker.",
+  "source_commit": "23d38d8dbe91488185dc53eb4cd47dee687df019",
+  "source_tree": "f892649011246b88cb76e3b2ad2973fe76ec99ee",
+  "live_url": "https://m5agent.github.io/m5stack-esp-emulator/",
+  "deployment": {
+    "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41816252534",
+    "run_status": "success",
+    "deployed_at": "2026-11-04T10:45:44Z",
+    "evidence_source": "Actual workflow API terminal state."
+  },
+  "archive": {
+    "name": "public-site-preview-live.tar.gz",
+    "bytes": 149451828,
+    "sha256": "09a7c91cb4fab05d886528d81bb43fe701a32bad24f3619340571be22e011f13"
+  },
+  "release_readback": {
+    "bytes": 149451828,
+    "sha256": "09a7c91cb4fab05d886528d81bb43fe701a32bad24f3619340571be22e011f13",
+    "same_as_local_package": true
+  },
+  "release_url": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-uiflow-workbench-20261104-23d38d8d",
+  "asset_url": "https://github.com/m5agent/m5stack-esp-emulator/releases/download/pages-uiflow-workbench-20261104-23d38d8d/public-site-preview-live.tar.gz",
+  "provenance_receipts": {
+    "package": {
+      "bytes": 872,
+      "sha256": "bf8e67d0154e3873ea80cd15730b9a8fdab9541cab657c9608ce9d62d8b5872a"
+    },
+    "upload_readback": {
+      "bytes": 1320,
+      "sha256": "9058e8d2d55117cda99cdf138c27148c104c9f894e59613d738f8ff189996910"
+    },
+    "acquisition": {
+      "bytes": 1018,
+      "sha256": "53b79098fae8410ce482b0387cb1d7fbb99dec12a9eb3633a704515faba3f5bf"
+    }
+  },
+  "identity": {
+    "site_manifest_sha256": "685e134cbaa09bf44edf45218843d387b26cf9e775b75cdf21b8ce3024539e7d",
+    "runtime_manifest_sha256": "fa6b56048ec91d100cb4f2a15088ce77e313bd2e6e8ba083229826b258297c51",
+    "wasm_sha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+    "https_manifest": {
+      "http_status": 200,
+      "bytes": 429908,
+      "sha256": "685e134cbaa09bf44edf45218843d387b26cf9e775b75cdf21b8ce3024539e7d",
+      "evidence_source": "Actual HTTPS manifest fetched after deployment."
+    },
+    "all_https_assets": {
+      "verified_assets": 2130,
+      "verified_bytes": 251196202,
+      "sha256_vector": "90ebdb820deeded74cc3495066c5cda13a028239e1bb61e700f20d16f6031a94",
+      "scope": "Every declared HTTPS asset length/SHA matches the reviewed exact-main export, including licenses/runtime source archive."
+    },
+    "frozen_readback": {
+      "bytes": 23717,
+      "sha256": "2a7987efc75de3914ba2853a6f5a3804f8dee04e94e7cd70e0e23b5081c6c5d2"
+    }
+  },
+  "known_issues": [
+    {
+      "scope": "Exact-main local full60",
+      "status": "FAIL_PRESERVED",
+      "raw_parent": {
+        "bytes": 21186,
+        "sha256": "2dc15180d8a1048aa09cc4dc2987a6643fce8edad273c16b07f112f99b56cac4"
+      },
+      "completed_cases": 17,
+      "not_run_cases": 43,
+      "device": "atoms3-lite",
+      "stage": "Editor after hardware reset",
+      "failure": "Core1 LoadStorePIFAddrError PC0x403864c3 EXCVADDR0x6002306c; 48 pre-failure checks true.",
+      "closure": "OPEN; diagnostic PASS does not establish original-runtime fix."
+    },
+    {
+      "scope": "Regular hosted full gate",
+      "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/41799916700/attempts/2",
+      "status": "FAIL_PRESERVED",
+      "failure": "MatrixPV readiness600s first failure; no hosted functional PASS claimed."
+    }
+  ],
+  "https_functional_execution": {
+    "first6": {
+      "status": "SUBSET_PASS",
+      "summary": {
+        "bytes": 20638,
+        "sha256": "f2bc0a9750d272c4e562b0696f20d371d6e983a57a0ba2a0817e56bfd53d649d"
+      },
+      "totals": {
+        "cases": 6,
+        "checks": 222,
+        "editor_programs": 35,
+        "untouched_default_runs": 6,
+        "subject_trials": 10,
+        "normal_qmp_exits": 6,
+        "forced_disposals": 0,
+        "cdp_workers_closed": 32,
+        "held_iframe_fence_cases": 3,
+        "held_iframe_not_captured_cases": 3
+      }
+    },
+    "remaining34": {
+      "status": "NOT RUN",
+      "devices": 16,
+      "reason": "Outside the selected deployment smoke-check subset."
+    }
+  },
+  "limits": [
+    "Deployment and all2130 HTTPS asset readback passed; first6 actual HTTPS functional cases passed only as a subset.",
+    "Current local-full60 and regular-hosted failures remain open; user approval waived the release blocker without claiming those gates passed.",
+    "No result is transferred to the remaining16 boards/34 HTTPS cases or physical/performance properties."
+  ]
+}

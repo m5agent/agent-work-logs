@@ -157,3 +157,8 @@ PR #165已按授权合并为23d38d8d，文件树与原c3db验证版本一致，�
 正式尝试2完成源码构建后，Matrix首例在600秒内未达到应用ready；同版本CfT本机单例通过不能转授托管结果。
 新的main精确导出复验为16PASS、AtomS3 Lite复位1FAIL、43NOT RUN；现有公开站点尚未替换。
 [独立失败与控制记录](followups/2026-11-04-pr165-release-qualification-failures/report.md)保留三条路径及各自身份、清场和未执行边界，原因仍待定位。
+
+## Pages已上线与HTTPS子集
+
+按维护者要求先发布并保留已知问题，prepared-preview部署41816252534成功；2,130个HTTPS资产一致，Matrix/Plus/CoreS3编辑器与按键6例通过。
+[发布与证据](followups/2026-11-04-pages-published/report.md)明确其余34个HTTPS用例未运行，完整资格FAIL及原缺口继续保留。
