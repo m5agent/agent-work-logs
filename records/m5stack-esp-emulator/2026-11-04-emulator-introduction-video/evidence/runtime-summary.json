@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "validation": "virtual-device validation",
+  "status": "PASS",
+  "device": "CoreS3",
+  "runtime": "native QEMU via dedicated Device Service /api/v1",
+  "hardware_validation": "NOT RUN",
+  "scope": "UIFlow2 demo program submission, actual framebuffer animation, touch injection through virtual controller, guest touch marker and visual color change, evidence-before-stop and owned guest cleanup",
+  "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+  "firmware_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+  "runtime_name": "qemu-system-xtensa",
+  "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+  "machine": "m5cores3",
+  "source_git_head": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+  "source_files": {
+    "platform/tools/serve.py": "77a55c03c8ac1045018c9e255f52b849ff71159b7f117b6719f4d3be8d28f4e4",
+    "platform/tools/device_service.py": "857eb0d046815d80d63f45a95a69bfd92a7dd54e9c0efd58ae8a7d9512b55998",
+    "platform/tools/uiflow_runtime.py": "92495b8782f8cb7d6800f2ca774fc81af5bd7702a0c44b76b03071b4e1698fcb",
+    "platform/tools/qemu_profiles.py": "780a511442de2c9ff77b803fd0a1b6920935cf7de929770495401900fca1b235"
+  },
+  "guest_application_sha256": "f4dfef69d5272a8bbebce849acbfdbbd459c4a73fb38742d3a962e452435e776",
+  "runtime_configuration": {
+    "machine": "m5cores3",
+    "display": "none",
+    "serial_transport": "uart-repl socket",
+    "accelerator": "QEMU default for invocation",
+    "icount": "not specified",
+    "runtime_env": {}
+  },
+  "program_mode": "uiflow-live",
+  "display": [
+    320,
+    240
+  ],
+  "guest_display_rotation": 1,
+  "input": {
+    "kind": "longpress",
+    "x": 160,
+    "y": 214,
+    "hold_seconds": 1.0,
+    "settle_seconds": 0.2,
+    "capture_time_seconds": 10.151431584032252
+  },
+  "serial_markers": [
+    "M5_VIDEO_READY 320 240",
+    "M5_VIDEO_TOUCH 160 214 MODE 1"
+  ],
+  "frames": {
+    "count": 138,
+    "unique_sha256": 137,
+    "capture_seconds": 23.85744287504349,
+    "first_sha256": "0330cad732566292dd984428b7d65356893be1ddf5e5d60e409a44289bca7f1d",
+    "last_sha256": "241e2e1ba7a18082b48add12fbf5d9ce598975a0c60ce4914a561401dea130bd"
+  },
+  "evidence_zip_sha256": "5a65d4f8fda1cf5b153e7042b308b75f19c3ed790d18e7c29ac33c8f0535fb19",
+  "evidence_zip_verified": true,
+  "evidence_requested_before_stop": true,
+  "session_stopped": true,
+  "runtime_reaped": true,
+  "retained_history": true,
+  "mutable_flash_retained": false,
+  "prior_attempts": [
+    {
+      "status": "REVIEW",
+      "finding": "Current cached CoreS3 firmware rotation 0 reports 240x320. Application now checks size and selects rotation 1, verified 320x240. Initial frames retained separately."
+    },
+    {
+      "status": "REJECTED",
+      "finding": "Initial source request timeout 60 rejected by API max30; retry with30 succeeded."
+    }
+  ],
+  "boundaries": [
+    "This is a purpose-built UIFlow2 visual demonstration using synthetic display data, not measured sensors.",
+    "Native-service validation does not establish browser-WASM results or physical hardware properties.",
+    "No broad firmware, board, networking, or peripheral coverage claim is made."
+  ],
+  "owned_service_stopped": true
+}

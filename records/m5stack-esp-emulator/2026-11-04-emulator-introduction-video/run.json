@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "M5Stack emulator introduction video and CoreS3 virtual-device capture",
+  "source": {
+    "issue": null,
+    "pull_request": null,
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f"
+  },
+  "hardware": {
+    "model": "CoreS3 virtual device",
+    "machine": "m5cores3",
+    "hardware_validation": "NOT RUN"
+  },
+  "firmware": {
+    "family": "UIFlow2 composed base plus same-VM live Python program",
+    "base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+    "effective_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+    "demo_sha256": "f4dfef69d5272a8bbebce849acbfdbbd459c4a73fb38742d3a962e452435e776",
+    "workbench_uploaded_firmware_sha256": "a31ba1df11e7e2e0309fd71a8e58765ea26449c32b80f02f366a5d952fecf9ea",
+    "variant_note": "UART live capture and web upload capture use distinct composed firmware images; neither identity is transferred to the other."
+  },
+  "execution": {
+    "environment": "native QEMU through dedicated Device Service /api/v1; agent-owned session",
+    "validation": "virtual-device validation",
+    "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+    "program_submitted_at": "2026-11-04T08:36:03.677810+00:00",
+    "task_id": "not applicable",
+    "session_id": "omitted from public summary",
+    "mode": "uiflow-live; same guest UART REPL",
+    "input": {
+      "kind": "longpress",
+      "x": 160,
+      "y": 214,
+      "hold_seconds": 1.0,
+      "settle_seconds": 0.2,
+      "capture_time_seconds": 10.151431584032252
+    },
+    "cleanup": {
+      "evidence_before_stop": true,
+      "session_stopped": true,
+      "runtime_reaped": true,
+      "service_stopped": true,
+      "history_retained": true,
+      "mutable_flash_retained": false
+    }
+  },
+  "media": {
+    "status": "PASS",
+    "final_sha256": "504eec4151b63cff0ded05b1312127ea98573546d05784471616516ccc5b7e5c",
+    "final_bytes": 9225412,
+    "duration_seconds": 74,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "fps": 30,
+    "language": "zh-CN",
+    "qa": "Full decode, real Chromium playback and 9 seeks, decoded-frame review, input before/after pixel check, encoded AAC loudness. See evidence/media-summary.json."
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "NOT RUN",
+      "detail": "Used existing hash-bound runtime and firmware; no fresh runtime or firmware build."
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "Same guest program acknowledged by UART REPL; ready and touch serial markers observed."
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "detail": "Longpress (160,214), hold 1.0 s, settle 0.2 s; guest reports MODE 1."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "138 captured PNGs, 137 unique hashes; guest demonstration changes state after input."
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "detail": "Virtual 320x240 framebuffer changes blue READY to green TOUCH ACTIVE; no physical measurements."
+    },
+    {
+      "layer": "browser_wasm",
+      "status": "NOT RUN",
+      "detail": "This capture uses native Device Service; browser execution is not inferred."
+    },
+    {
+      "layer": "hardware_validation",
+      "status": "NOT RUN",
+      "detail": "No physical device was used."
+    },
+    {
+      "layer": "web_native_workbench",
+      "status": "PASS",
+      "detail": "Separate a31ba1df firmware uploaded via current workbench; actual guest display visible and longpress changes READY to TOUCH ACTIVE; two owned sessions and service cleaned up."
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "Final MP4 produced and verified; media identity and scoped execution evidence archived. Publication performed after commit."
+    }
+  ],
+  "evidence": [
+    "evidence/runtime-summary.json",
+    "evidence/archive-integrity-summary.json",
+    "evidence/before-touch.png",
+    "evidence/after-touch.png",
+    "code/demo.py",
+    "evidence/workbench-summary.json",
+    "evidence/workbench-integrity-summary.json",
+    "evidence/media-summary.json"
+  ],
+  "notes": [
+    "Purpose-built visual demonstration; displayed wave is synthetic and not a measured sensor.",
+    "Product reference images and workflow graphics must be labeled as presentation material.",
+    "Only this CoreS3 firmware/runtime/program path is validated; no general compatibility or performance claim.",
+    "The film uses a crop of the actual workbench screenshot for seconds 35-46; guest framebuffer pixels are not replaced. Browser UI usage is not browser-WASM execution.",
+    "Media pixel-probe failures and correction are retained in media-summary.json; the MP4 binary was unchanged."
+  ],
+  "follow_up_executions": [
+    {
+      "name": "public workbench with local firmware upload",
+      "validation": "virtual-device validation",
+      "lane": "browser UI -> native Device Service -> QEMU, not browser-WASM",
+      "firmware_sha256": "a31ba1df11e7e2e0309fd71a8e58765ea26449c32b80f02f366a5d952fecf9ea",
+      "application_sha256": "f4dfef69d5272a8bbebce849acbfdbbd459c4a73fb38742d3a962e452435e776",
+      "source_git_head": "b41eba70eb61f7ddc5c41e0b981341064f9d1d1f",
+      "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+      "machine": "m5cores3",
+      "readiness": "Actual guest framebuffer and current workbench running state; application UART marker is not present on this console.",
+      "input_after_screenshot": {
+        "kind": "longpress",
+        "x": 160,
+        "y": 214,
+        "hold_seconds": 1,
+        "display_changed": true
+      },
+      "evidence_zip_sha256": "1699e615fc1e24df65ad0113c0b3ad867cd71aa61f8b9cc23c5eb1659a715e43",
+      "evidence_requested_before_stop": true,
+      "cleanup": {
+        "owned_sessions_stopped_and_runtime_reaped": 2,
+        "owned_service_stopped": true
+      },
+      "first_attempt": "Automation wait for application UART marker timed out; guest was active and later separately stopped.",
+      "limits": [
+        "Physical hardware NOT RUN",
+        "browser-WASM NOT RUN",
+        "Catalog counts do not establish functional support",
+        "Boot serial contains an I2C initialization diagnostic; no clean-serial claim"
+      ]
+    }
+  ]
+}
