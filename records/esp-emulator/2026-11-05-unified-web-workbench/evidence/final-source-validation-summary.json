@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "final-source-validation-summary",
+  "status": "PASS",
+  "source_commit": "e31c2b4aed07c98fddea19018589f0f8751667c2",
+  "source_base_commit": "3e8f76b836009438b7d9312e1e7b8f822b7d64f5",
+  "python": {
+    "status": "PASS",
+    "command": "PYTHONPATH=platform/tools python3 -m unittest discover -s platform/tests -p 'test_*.py'",
+    "ran": 1973,
+    "passed": 1963,
+    "failures": 0,
+    "skipped": 10,
+    "seconds": 145.507,
+    "log": {
+      "bytes": 14036,
+      "sha256": "e2411bd08ca97f42278dab35ad32780a5df27b4eb4bbaafb5dd9784814375d06"
+    }
+  },
+  "node": {
+    "status": "PASS",
+    "command": "npm run --prefix platform/tests test:contracts",
+    "scripts": 30,
+    "exit_code": 0,
+    "log": {
+      "bytes": 20313,
+      "sha256": "f80f763c42c818f89a102a1bddfa7ac4b8e14b2385366f1ee5a3864a296a1a8f"
+    }
+  },
+  "validators": [
+    {
+      "command": "python3 platform/tools/runtime_coverage.py --check",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 platform/tools/peripheral_catalog.py --check",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 platform/tools/qemu_profiles.py --check",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 platform/tools/project_snapshot.py --check",
+      "status": "PASS"
+    }
+  ],
+  "scope": {
+    "status": "PASS",
+    "blobs": 34,
+    "bytes": 1404889,
+    "new_evidence_bytes": 26157,
+    "errors": [],
+    "evidence_origin": "Completed source-workstream check result; no separate raw report is bundled."
+  },
+  "diff_check": {
+    "command": "git diff --check",
+    "status": "PASS"
+  },
+  "guest_source_binding": {
+    "status": "PASS",
+    "method": "Read committed bytes for all native source identities and browser selected source/export pairs.",
+    "files": 20,
+    "mismatches": []
+  },
+  "prior_python_attempts": [
+    {
+      "attempt": "first",
+      "status": "FAIL",
+      "ran": 1973,
+      "failures": 2,
+      "skipped": 10,
+      "classification": "DOCUMENTATION_METADATA_CONTRACT",
+      "scope": "Old navigation and document freshness registration assertions.",
+      "log": {
+        "bytes": 43973,
+        "sha256": "a570deceac43302ad1d43e8b0a08fb44b179c7408f8d975c5eed8175d1856107"
+      },
+      "failed_tests": [
+        "test_webburner_browser_surface_is_wired (test_docs_firmware_security_contract.DocsFirmwareSecurityContractTests.test_webburner_browser_surface_is_wired)",
+        "test_documentation_index_covers_every_document (test_docs_index_contract.DocsIndexContractTests.test_documentation_index_covers_every_document)"
+      ],
+      "preserved": true,
+      "guest_failure": false
+    },
+    {
+      "attempt": "second",
+      "status": "FAIL",
+      "ran": 1973,
+      "failures": 2,
+      "skipped": 10,
+      "classification": "DOCUMENTATION_METADATA_CONTRACT",
+      "scope": "Current metadata date/line counts and generated snapshot consistency assertions.",
+      "log": {
+        "bytes": 15580,
+        "sha256": "19b11492eb4b0c9b054712828cab3041c88d4a70857850ad943cefd33cf7474d"
+      },
+      "failed_tests": [
+        "test_current_status_snapshot_matches_contract (test_docs_current_state_contract.DocsCurrentStateContractTests.test_current_status_snapshot_matches_contract)",
+        "test_project_snapshot_is_current (test_docs_index_contract.DocsIndexContractTests.test_project_snapshot_is_current)"
+      ],
+      "preserved": true,
+      "guest_failure": false
+    }
+  ],
+  "limits": [
+    "Host contracts and validators are separate from the two scoped virtual-device results.",
+    "No new PR/merge/Pages/HTTPS result is established by these checks.",
+    "Runtime was not rebuilt by this frontend change."
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "kind": "host-contract-summary",
+  "status": "PASS",
+  "validation": "HOST_ONLY_NOT_GUEST",
+  "adapter": {
+    "status": "PASS",
+    "count": 15,
+    "command": "node platform/tests/test_public_service_program.mjs",
+    "test_source_sha256": "ab8c9436181f7b068f4b17863ffe32f91cc8d768d0a69673d5cf175a1dc196d4",
+    "controls": [
+      "Backend capability gating before allocation",
+      "Exact same-session source revision and output",
+      "Concurrent cancellation targets only its captured Run",
+      "Wrong revision rejected before Run",
+      "Late create cleaned after controller cancellation",
+      "Ambiguous allocation recovery preserves body and request identity",
+      "Only initial source-proven pre-allocation rejections retire intent",
+      "Other server errors and wrong status/code combinations retain intent",
+      "Recovery rejection cannot erase earlier ambiguity",
+      "Attached managed session never closes another Preview",
+      "Changed controller ownership fences mutation",
+      "Ordinary UART program uses execution CAS and offers no invented interrupt",
+      "Ordinary running program replacement invalidates old observation only",
+      "Managed input routing and nonowning detach",
+      "Run frame header and byte-hash validation without session fallback"
+    ]
+  },
+  "other_observed_host_passes": [
+    {
+      "command": "node platform/tests/test_public_session_controller.mjs",
+      "status": "PASS"
+    },
+    {
+      "command": "node platform/tests/test_preview_client.mjs",
+      "status": "PASS",
+      "count": 25
+    },
+    {
+      "command": "node platform/tests/test_public_micropython_ui.mjs",
+      "status": "PASS"
+    },
+    {
+      "command": "node platform/tests/test_public_micropython.mjs",
+      "status": "PASS"
+    },
+    {
+      "command": "node platform/tests/test_public_config.mjs",
+      "status": "PASS"
+    }
+  ],
+  "Unit_assembly": {
+    "status": "PASS",
+    "count": 19,
+    "command": "node platform/tests/test_public_unit_assembly.mjs",
+    "source": "Final Node contracts log; host configuration/ownership only."
+  },
+  "page_race_controls": {
+    "status": "PASS",
+    "source": "Final Chrome host18 report includes existing-session reselection and delayed device-selection controls."
+  },
+  "final_aggregate": {
+    "status": "PASS",
+    "source_commit": "e31c2b4aed07c98fddea19018589f0f8751667c2",
+    "python_ran": 1973,
+    "python_passed": 1963,
+    "python_skipped": 10,
+    "python_seconds": 145.507,
+    "python_log": {
+      "bytes": 14036,
+      "sha256": "e2411bd08ca97f42278dab35ad32780a5df27b4eb4bbaafb5dd9784814375d06"
+    },
+    "node_log": {
+      "bytes": 20313,
+      "sha256": "f80f763c42c818f89a102a1bddfa7ac4b8e14b2385366f1ee5a3864a296a1a8f"
+    },
+    "evidence": "final-source-validation-summary.json"
+  },
+  "limits": [
+    "Host DOM/protocol fixtures do not establish guest behavior; native and browser results are separately bound.",
+    "Earlier observer and metadata failures remain preserved."
+  ],
+  "scope": "Completed affected host controls and final full-source validation; guest results remain in their own summaries.",
+  "browser_host": {
+    "status": "PASS",
+    "checks": 18,
+    "browser": "157.0.8103.38",
+    "guest_execution": "NOT RUN",
+    "hardware_execution": "NOT RUN",
+    "wasm_requests": 0,
+    "runtime_workers_observed": [],
+    "raw_report_bytes": 3768,
+    "raw_report_sha256": "e11b91740bac29c25b1368a42acd9be355b5a1daba76be010390563fc4eda6fd",
+    "bounded_summary_bytes": 2760,
+    "bounded_summary_sha256": "dd9be2f3270d57760ec4bc501581c40a3df964e2c0126bfa96954fc8ce61050a",
+    "evidence": "workbench-host-copy-final-summary.json",
+    "historical": false,
+    "product_public_js_sha256": "e0f60211ab05f9c558833a825430d489a9900db672c62eb47c464d97ab323bcc"
+  },
+  "node_contracts": {
+    "status": "PASS",
+    "scripts": 30,
+    "log_bytes": 20313,
+    "log_sha256": "f80f763c42c818f89a102a1bddfa7ac4b8e14b2385366f1ee5a3864a296a1a8f",
+    "command": "npm run --prefix platform/tests test:contracts"
+  },
+  "preceding_browser_host": {
+    "status": "PASS",
+    "checks": 18,
+    "browser": "157.0.8103.38",
+    "guest_execution": "NOT RUN",
+    "hardware_execution": "NOT RUN",
+    "wasm_requests": 0,
+    "runtime_workers_observed": [],
+    "raw_report_bytes": 3768,
+    "raw_report_sha256": "e9f9c7f6748916a290e5f66a92c50e3c6cbd31b75460a0378ed65f9ae7e89bb5",
+    "bounded_summary_bytes": 4095,
+    "bounded_summary_sha256": "817152e4621a6f83b4ad6a567a699a960072b8887734cf4ac4cb15a114791488",
+    "evidence": "workbench-host-summary.json",
+    "historical": true
+  },
+  "node_contracts_history": {
+    "status": "PASS",
+    "scripts": 30,
+    "log_bytes": 20313,
+    "log_sha256": "a0f7f85f729f5485a3d1fdc7fb351348e2a6ef916b429eb51ede6d4b0b47db2e",
+    "command": "npm run --prefix platform/tests test:contracts"
+  }
+}

@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-05 | ESP Emulator | 统一 Web 工作台：原生编程与 Unit 装配 | `PARTIAL`（源码e31c2b4a；native CoreS3+PIR13、browser CoreS3 63及最终host通过；PR/Pages待交付） | [查看](esp-emulator/2026-11-05-unified-web-workbench/) |
 | 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（PR #165 MERGED、Pages已上线；2130资产一致、HTTPS首6例PASS；完整资格FAIL/其余34线上例NOT RUN） | [查看](esp-emulator/2026-11-04-uiflow-browser-workbench/) |
 | 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：阶段记录 | `PARTIAL`（完整 41 层构建、8 个限定 Unit 案例、五板 250 PASS+5 STATE_PASS；HTTP 15 PASS+1 urlencode FAIL；全量继续） | [查看](esp-emulator/2026-11-04-uiflow-full-deepseek/) |
 | 2026-11-03 | WeCom GPT bridge | GPT 自动回复与业务授权恢复 | `PARTIAL`（真实短文本自动回复 PASS，23s；旧历史压缩 FAIL，server recall 重写超时后回退） | [查看](infra/2026-11-03-wecom-gpt-channel-recovery/) |

@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation-timeline-summary",
+  "status": "PARTIAL",
+  "final_guest_receipts": "BOUND_FINAL_SCOPED_PASS",
+  "first_native_attempt": {
+    "status": "FAIL",
+    "classification": "PREREQUISITE",
+    "raw_report_bytes": 4220,
+    "raw_report_sha256": "92b8b19abcfdfa37bd6f5fbd524ba2079c584a94d0d8b7e2e42694a6003e0939",
+    "observation": "CoreS3 creatable/program_modes precondition did not pass before program or input checks.",
+    "completed_checks": 0,
+    "guest_outcome": "NOT ESTABLISHED"
+  },
+  "second_native_attempt": {
+    "status": "FAIL",
+    "classification": "OBSERVER_PRECONDITION",
+    "raw_report_bytes": 5003,
+    "raw_report_sha256": "749cb0b5cfbaa80cf7713e3f532fbf808038fdad2399e945d3c1140ff0308f83",
+    "observation": "The runtime-mode selector was hidden; selectOption timed out before program or input checks.",
+    "completed_checks": 0,
+    "guest_outcome": "NOT ESTABLISHED"
+  },
+  "final_native": {
+    "status": "PASS",
+    "checks": 13,
+    "raw_report_sha256": "1067fa9f00ae997cf10a26e8e99418b67e0803d4216d795524e03629d5713df4",
+    "raw_report_bytes": 143658,
+    "scope": "New canonical homepage with one owned native managedPreview/CoreS3+PIR; virtual-device validation only.",
+    "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+    "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+    "cleanup": {
+      "via_UI_stop": true,
+      "history_retained": true,
+      "session_state": "stopped",
+      "owned_pid_gone": true,
+      "lease_active": false,
+      "active_sessions": 0,
+      "active_lease_count": 0,
+      "mutable_flash_retained": false,
+      "owned_browser_disconnected": true
+    },
+    "prestop_zip": {
+      "source": "Actual product run.python.lastEvidence Blob fetched during UIstop before Preview close; read afterwards through retained read-only run handle.",
+      "bytes": 33819,
+      "sha256": "cfe05805fba2a2fc4957e957486260e9c040a4e48799cfe71ed2821803f3680f",
+      "type": "application/zip",
+      "http_content_length": 33819,
+      "zip_session_state": "running",
+      "members": 25,
+      "crc": "PASS",
+      "manifest_all_member_size_sha": "PASS",
+      "session_pid_firmware_all3program_identity": "PASS",
+      "network_body_observer": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scope": "Playwright body observer returned0B despite valid product Blob/Content-Length; kept as observer limitation, not product export failure."
+      }
+    },
+    "bounded_summary_sha256": "41be4508c57588df1ba8f2b743b9b4ff60d78afb87289763297cf0757314d450",
+    "bounded_summary_bytes": 9504,
+    "evidence": "native-summary.json"
+  },
+  "final_browser": {
+    "status": "PASS",
+    "checks": 63,
+    "raw_report_sha256": "a7558be7f0307adebae82b2c2f92a24b768b5f02e8b2c48f51f579803573ebcc",
+    "raw_report_bytes": 5171512,
+    "scope": "CoreS3 complete browser-WASM editor on the current local production-prefix export; no native/HTTPS/added-Unit acceptance is inherited.",
+    "firmware_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+    "runtime_sha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+    "site_manifest_sha256": "23e3fc8515b0f02b585bce0eb36e4e9f6579113d03ba96c6aafc12680f61844c",
+    "completed_raw_paste": 12,
+    "untouched_default_runs": 2,
+    "cleanup": {
+      "normal_qmp_exit_code": 0,
+      "graceful_exit": true,
+      "pthreads_created": 5,
+      "pthreads_at_exit": 0,
+      "forced_disposals": 0,
+      "workers_remaining": 0,
+      "engine": {
+        "engineWorkersCreated": 1,
+        "engineOwnerLive": false,
+        "engineCloseNotificationReceived": true,
+        "engineSelfCloseNotifications": 1,
+        "engineNormalTerminations": 1,
+        "engineFallbackTerminations": 0,
+        "enginePortTransferred": true
+      },
+      "explicit_worker_disposal": true,
+      "iframe_removed": true,
+      "nested_before_held_iframe_removal": {
+        "status": "CAPTURED",
+        "actual_targets_observed": 6,
+        "live_targets": 0
+      },
+      "all_before_context_close": {
+        "status": "CAPTURED",
+        "actual_targets_observed": 6,
+        "live_targets": 0
+      },
+      "runner_exit_code": 0,
+      "browser_and_server_finally_completed": true
+    },
+    "bounded_summary_sha256": "1c109aa047923ef5a9c2e79de394c06242aaea0a7e06a82ec02c14eeedef9997",
+    "bounded_summary_bytes": 10035,
+    "evidence": "browser-summary.json"
+  },
+  "redaction": "Derived summary only. Environment addresses, host paths, credentials, unique identifiers, and complete error stacks omitted.",
+  "limits": [
+    "Earlier failures remain even if a separately identified follow-up passes.",
+    "Do not substitute host fixtures for guest input/output/frame and cleanup.",
+    "No all-board, all-Unit, physical-hardware or online result is granted here."
+  ],
+  "third_native_attempt": {
+    "status": "FAIL",
+    "classification": "PREREQUISITE",
+    "raw_report_bytes": 13048,
+    "raw_report_sha256": "4abbe7eaa7d4c6c89f15db8383d7054cb5f65296ff5a988a692eb94775a6b4d5",
+    "observation": "Required firmware tooling was unavailable; QEMU guest did not boot.",
+    "guest_outcome": "NOT ESTABLISHED",
+    "qemu_guest_boot": false,
+    "cleanup": "CONFIRMED",
+    "product_source_failure": false
+  },
+  "fourth_native_attempt": {
+    "status": "FAIL",
+    "classification": "PREREQUISITE_TOOL_CLI_COMPATIBILITY",
+    "raw_report_bytes": 13683,
+    "raw_report_sha256": "67c4c6959a15f388e9e303bed1bfd7bfbcf747d121ce65136e8e18dd6efb96cd",
+    "observation": "Firmware tooling version4 CLI did not match the service version5 CLI requirement; environment corrected to version5.1.0 for a separate follow-up.",
+    "qemu_guest_boot": false,
+    "cleanup": "CONFIRMED",
+    "product_source_failure": false,
+    "guest_outcome": "NOT ESTABLISHED"
+  },
+  "fifth_native_attempt": {
+    "status": "FAIL",
+    "classification": "OBSERVER_BUDGET_FAIL",
+    "raw_report_bytes": 164452,
+    "raw_report_sha256": "897bfc72385b4c5d09b3f72fae2677f6b96962aea870ff27f489d09822814fc8",
+    "recorded_checks": 0,
+    "observation": "Observer used30s for software-device Flash readiness instead of approved120s; QEMU never started; cleanup pending at report, later root confirmed stopped.",
+    "preserved": true
+  },
+  "sixth_native_attempt": {
+    "status": "FAIL",
+    "classification": "PARTIAL_OBSERVER_FAIL",
+    "raw_report_bytes": 130966,
+    "raw_report_sha256": "fa091d039f7c934761b832cb21ea05d1dfd06ea11435341b78b5d14c05f691ea",
+    "recorded_checks": 11,
+    "observation": "11 actual functional checks passed; Playwright network-body ZIP observer returned0B. Product pre-stop Blob was NOT CAPTURED in this run; post-stop API ZIP is diagnostic only.",
+    "preserved": true
+  }
+}

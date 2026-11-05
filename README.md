@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-05 | ESP Emulator | 统一 Web 工作台：原生编程与 Unit 装配 | `PARTIAL`（源码e31c2b4a；native CoreS3+PIR13、browser CoreS3 63及最终host通过；PR/Pages待交付） | [查看](records/esp-emulator/2026-11-05-unified-web-workbench/) |
 | 2026-11-04 | ESP Emulator | V2 快剪介绍视频、3D 运镜与多场景运行实录 | `PASS`（60秒1080p成片及媒体QA；三组native、工作台与独立browser-WASM ready/frame；browser输入/hardware NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video-v2/) |
 | 2026-11-04 | ESP Emulator | 中文科技感介绍视频与 CoreS3 运行实录 | `PASS`（74秒1080p成片与限定native虚拟验证；hardware/browser-WASM NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video/) |
 | 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（PR #165 MERGED、Pages已上线；2130资产一致、HTTPS首6例PASS；完整资格FAIL/其余34线上例NOT RUN） | [查看](records/esp-emulator/2026-11-04-uiflow-browser-workbench/) |

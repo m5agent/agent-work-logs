@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "source-review-summary",
+  "status": "REVIEW",
+  "source_base_commit": "3e8f76b836009438b7d9312e1e7b8f822b7d64f5",
+  "final_source_commit": "e31c2b4aed07c98fddea19018589f0f8751667c2",
+  "findings": [
+    {
+      "id": "different-startup-source",
+      "observation": "Old service entry used b41eba70; current task starts from 3e8f76b8.",
+      "status": "CONFIRMED_SOURCE"
+    },
+    {
+      "id": "same-source-different-execution-lane",
+      "observation": "Auto service connection selects native execution, while old editor explicitly allowed browser QEMU only.",
+      "status": "CONFIRMED_SOURCE"
+    },
+    {
+      "id": "separate-Unit-model-and-session-assembly",
+      "observation": "Model exploration is separate from session-frozen Unit topology and guest-backed input/readback.",
+      "status": "CONFIRMED_SOURCE"
+    }
+  ],
+  "review_fixes": [
+    {
+      "id": "reopen-current-session-invalidates-pending-open",
+      "status": "FINAL_HOST_PASS"
+    },
+    {
+      "id": "device-selection-after-async-assembly-generation-fence",
+      "status": "FINAL_HOST_PASS"
+    },
+    {
+      "id": "explicit-first-preallocation-rejection",
+      "status": "HOST_CONTROL_PASS",
+      "scope": "Only status401/unauthorized and status503/preview_auth_unavailable on the first nonambiguous attempt; later recovery and other failures retain original intent."
+    }
+  ],
+  "source_snapshots_at_preparation": [
+    {
+      "path": "platform/web/public.js",
+      "bytes": 71704,
+      "sha256": "dabf140deb292574ce9072d1b1146daae4ddcdd9cfe997b6d9c0de552c7465fd"
+    },
+    {
+      "path": "platform/web/public-service-program.js",
+      "bytes": 22731,
+      "sha256": "b8c9efec6c27d043f1b467d1109d831e9a67ab616a98f4b224724397c9ebe9bd"
+    },
+    {
+      "path": "platform/web/public-session-controller.js",
+      "bytes": 27158,
+      "sha256": "e958db8f7fe0a602016ada081776fa0746d9108f469ec630798520f332de1de0"
+    },
+    {
+      "path": "platform/web/public-unit-assembly.js",
+      "bytes": 16916,
+      "sha256": "6fcaf311bfdebb3bdce9e3368cf2c88c024827981434cd478a682a6f168c8af6"
+    }
+  ],
+  "limits": [
+    "Historical preparation snapshots are retained; final committed identity is separately bound.",
+    "Capability declarations are not all-board firmware qualification.",
+    "New UI does not close preexisting runtime faults."
+  ],
+  "final_frontend_copy_host_binding": {
+    "status": "HOST_AND_SCOPED_GUEST_SOURCE_BINDING_PASS",
+    "public_js_sha256": "e0f60211ab05f9c558833a825430d489a9900db672c62eb47c464d97ab323bcc",
+    "adapter_sha256": "b8c9efec6c27d043f1b467d1109d831e9a67ab616a98f4b224724397c9ebe9bd",
+    "manifest_source": "workbench-host-copy-final-summary.json",
+    "final_commit": "e31c2b4aed07c98fddea19018589f0f8751667c2",
+    "limit": "Final frontend copy host check; no native/browser guest result inferred."
+  }
+}
