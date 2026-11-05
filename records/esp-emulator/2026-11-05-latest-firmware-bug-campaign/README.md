@@ -36,7 +36,7 @@ Tab5 的二次 VFS 注入损坏和旧 ELF 误用已修，但最新官方应用�
 - [矩阵与 Flash 传输](evidence/matrix-transport-summary.json)、[服务与 ADC](evidence/service-adc-summary.json)、[启动与 Tab5](evidence/startup-tab5-summary.json)：各组脱敏派生证据和首次失败。
 - [冻结设备矩阵](evidence/root-integration-summary.json)、[外设首轮第一部分](evidence/root-peripheral-summary.json)、[第二部分及独立 Mic 后续](evidence/root-peripheral-more-summary.json)：实际 base/派生镜像、runtime/ROM、串口和帧身份。
 - [Tab5 0.51 后续](evidence/tab5-v051-followup-summary.json)、[最终构建/缓存清理](evidence/storage-final-summary.json)：最新 DSI PHY 卡点与额外保留回读。
-- `patches/`：不附重复 patch；源码见 [3f24fa6b](https://github.com/m5agent/m5stack-esp-emulator/tree/3f24fa6b5a056991c37018cedb41c42d6df19b1e)。
+- `patches/`：不附重复 patch；源码见 [ea6a553b](https://github.com/m5agent/m5stack-esp-emulator/tree/ea6a553b702c636b10692665c475341b178cb662)。
 - `code/`：不复制测试工程；使用最终源码中的 checked-in 回归入口。
 
 ## 未覆盖项
@@ -47,3 +47,5 @@ Tab5 的二次 VFS 注入损坏和旧 ELF 误用已修，但最新官方应用�
 [最终本地主机检查](evidence/host-gates-summary.json)、[native 依赖冻结审计](evidence/native-freeze-audit-summary.json)。
 
 最终交付：[delivery-summary.json](evidence/delivery-summary.json)。16个issue已关闭；#188仍OPEN。CI后续Unit为303 PASS+1skip（304 total），早期300+1记录保留。
+
+Linux合并后CI的平台计数为2011 PASS+10skip（2021 total），与本地2020+1skip分开；离线控制为197 PASS+3skip（200 total），新增12+3均实际通过。
