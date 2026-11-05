@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Latest UIFlow2 round 2: all-device firmware, all-Unit coverage and control-loop completion",
+  "source": {
+    "issue": "none: direct user follow-up (did you test all devices/all Unit code/control loops? run full again, file issues, improve parallelism)",
+    "pull_request": "none",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "73ed554f"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "All execution used QEMU/Device Service virtual devices; no physical hardware validation."
+  },
+  "firmware": {
+    "source": "M5Burner public API / pinned official GitHub releases fetched 2026-11-05",
+    "devices": 30,
+    "versions": {"v2.5.5": ["cores3", "stackchan", "sticks3", "stopwatch"], "v2.5.4": 23, "v2.5.4-4MB": ["basic-v27"], "pinned": ["atom-echo", "atomu"]},
+    "sha256_verified": true
+  },
+  "execution": {
+    "environment": "macOS arm64; 7 isolated Device Service instances (canonical 43-machine Unit-capable QEMU runtime sha256 0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068); parallel scopes R2-D/U1/U2/U3/CL-A/CL-B",
+    "task_ids": ["task-8", "task-9", "task-10", "task-11", "task-12", "task-13"],
+    "session_ids": "per-case session ids in ignored .work/uiflow-latest-20261105/round2/*/results.json"
+  },
+  "checks": [
+    {"name": "all_devices_latest_firmware", "status": "PARTIAL", "values": "30/30 UIFlow2 devices executed: 20 PASS, 10 FAIL (8 simulator with issues, 2 INFRA-LOAD quiet-retry PASS); 3 no-build devices NOT RUN"},
+    {"name": "unit_catalog_coverage", "status": "PASS", "values": "160/160 catalog Units have execution evidence (round1 104 + round2 56); U2 2 known-blocker, U3 2 DEFER blocked"},
+    {"name": "closed_loop_input", "status": "PARTIAL", "values": "112 input Units: 107 COVERED + 5 field-level PARTIAL + 0 missing; 16 fresh round-2 injection sessions incl ENV 2 vectors"},
+    {"name": "closed_loop_output", "status": "PASS", "values": "115 output Units: 115/115 COVERED; 16 fresh round-2 write/observe sessions; 0 mismatch"},
+    {"name": "new_issues_filed", "status": "PASS", "values": "GitHub #186 Angle ADC eFuse, #187 AtomS3 Lite boot hang, #188 Tab5 latest binary lane; comment on #183 with round-2 non-reproduction"},
+    {"name": "physical_hardware", "status": "NOT RUN", "reason": "no physical devices"}
+  ],
+  "evidence": [
+    "evidence/coverage-summary.json",
+    "evidence/issue-index.json",
+    "evidence/device-round2-summary.md",
+    "evidence/units-U1-summary.md",
+    "evidence/units-U2-summary.md",
+    "evidence/units-U3-summary.md",
+    "evidence/closedloop-input-summary.md",
+    "evidence/closedloop-input-coverage.md",
+    "evidence/closedloop-output-coverage.md"
+  ],
+  "notes": [
+    "Round-2 improved parallelism by splitting remaining Unit batches across U1/U2/U3, separating runner-less Units and input/output closed-loop scopes; no single long-tail scope.",
+    "INFRA-LOAD observations for core2/stickc-plus2 are retained alongside quiet-host PASS (not product failures).",
+    "tab5 PASS is the old merged-image lane only; latest M5Burner v2.5.4 binary lane is NOT RUN and tracked by #188.",
+    "No tracked repo edits; all derived matrices/runners/probes live in ignored .work."
+  ]
+}
