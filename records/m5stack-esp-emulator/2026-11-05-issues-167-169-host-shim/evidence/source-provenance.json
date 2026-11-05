@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-05T11:45:00+08:00",
+  "reference": {
+    "uiflow2_pinned_commit": "50e440780492aa847378c7d3477ab912f7063bac",
+    "uiflow2_pinned_commit_subject": "version.txt: Update to V2.5.3.",
+    "uiflow2_release_tag": "release/2.5.3",
+    "note": "release/2.5.3 and commit 50e4407 carry identical hashes for the cited docs/source, binding and test files",
+    "m5gfx_submodule_commit": "9bcedf4e19d4cab7a0793de0598ae5390b4689fe",
+    "repository": "m5stack/uiflow-micropython (official UIFlow2 source, internal GitLab mirror)"
+  },
+  "uiflow2_source": [
+    {
+      "path": "m5stack/cmodules/m5unified/m5unified_gfx.c",
+      "lines": "313-335 (EPDMode type), 346 (M5.Display member table), 427 (M5.UserDisplay member table)",
+      "sha256": "9e869e68eb99706e46855858e72a213db66e65e0e83a56ad155ab5238bac9a4e",
+      "fact": "EPD_QUALITY=1, EPD_TEXT=2, EPD_FAST=3, EPD_FASTEST=4"
+    },
+    {
+      "path": "m5stack/components/M5Unified/mpy_m5gfx.cpp",
+      "lines": "65-68 (getEpdMode), 121-135 (setEpdMode, MP_ARG_INT|REQUIRED, keyword epd_mode), 137-140 (isEPD)",
+      "sha256": "b13f252dbfd05eaa9135169acb13c65766af7529973debdc45690e4e9ae853f7",
+      "fact": "one required integer argument; non-int raises TypeError; returns None"
+    },
+    {
+      "path": "m5stack/components/M5Unified/M5GFX/src/lgfx/v1/misc/enum.hpp",
+      "lines": "42-52",
+      "sha256": "0e8aac59280b599f9274193008ac5d4ed874dbe7c6556ff2348d475590d44c9b",
+      "fact": "epd_mode_t values 1..4 match the binding"
+    },
+    {
+      "path": "m5stack/components/M5Unified/M5GFX/src/lgfx/v1/Panel.hpp",
+      "lines": "79 (_epd_mode default 0 = non-EPD), 97-99 (getEpdMode/setEpdMode/isEpd)",
+      "sha256": "fc3850f675f6fb09c9b1aafc45ad5903c1fc0a1d10a60ab39e288d7968a3d4a3",
+      "fact": "setEpdMode ignores zero and is a no-op on non-EPD panels"
+    },
+    {
+      "path": "m5stack/components/M5Unified/M5GFX/src/lgfx/v1/panel/Panel_SSD1677.cpp",
+      "lines": "188",
+      "sha256": "c87a4c6a95a24d50d4d2750fe99215c655d673b040337523e3ace13fba093f58",
+      "fact": "EPD panel init writes _epd_mode = epd_quality (1) before user calls"
+    },
+    {
+      "path": "m5stack/components/M5Unified/M5GFX/src/lgfx/v1/panel/Panel_ED2208.cpp",
+      "lines": "242",
+      "sha256": "095d17534f2b78c37bfb044e6fcba517c63bc3c43ce279386923ee8c49078472",
+      "fact": "same EPD initial mode on PaperColor-class panel"
+    },
+    {
+      "path": "tests/display/test_papermono_startup.py",
+      "lines": "27",
+      "sha256": "892234069cb45e87defe9d1deb4a2853f2ef48a6f75bc86797e98ec922c45049",
+      "fact": "official upstream test uses M5.Display.setEpdMode(M5.Display.EPDMode.EPD_FASTEST)"
+    },
+    {
+      "path": "m5stack/libs/umqtt/simple.py",
+      "lines": "10 (MQTTException), 14 (MQTTClient), 69 connect, 148 disconnect, 152 ping, 155 isconnected, 161 publish, 196 subscribe, 215 unsubscribe, 232 wait_msg, 268 check_msg",
+      "sha256": "26da6475ac1f167ce24b6233944f7423fd7028b012e10bcd7adb6f13717c3dce"
+    },
+    {
+      "path": "m5stack/libs/umqtt/robust.py",
+      "lines": "9 (MQTTClient), 13 delay, 16 log, 23 reconnect, 33 publish, 41 wait_msg, 49 check_msg(attempts=2)",
+      "sha256": "5651475d570979ed27941b5f2f0904a1465fae2576a21c526f1d614bca1c37ad"
+    },
+    {
+      "path": "m5stack/libs/umqtt/__init__.py",
+      "lines": "9 (M5 wrapper MQTTClient), 24-36 callback dispatch, 38 subscribe(topic, handler, qos=0), 42 unsubscribe",
+      "sha256": "5e2eeb760329b248c34133005d83c76130046a48c74cf86fa23e4596c5933a7c"
+    },
+    {
+      "path": "m5stack/libs/umqtt/manifest.py",
+      "lines": "package manifest for the three modules",
+      "sha256": "c109d13a0650b029702a59401207fe3fa00271551a6fb237501c84ad408b46e7"
+    },
+    {
+      "path": "docs/source/software/umqtt.rst",
+      "lines": "70-79",
+      "sha256": "283be8f698ebe9f85c8bb633e453ca526f8cea7df38ba82fe41cb131d8cb1616",
+      "fact": "documents 'from umqtt import MQTTClient' as the UIFlow2 default form"
+    },
+    {
+      "path": "examples/software/mqtt/cores3_mqtt_basic_example.py",
+      "lines": "10",
+      "sha256": "0884e95d21d198ab9f48f3c785ebd4502d4eb4add6d73c544db680f00cd6327c",
+      "fact": "official example uses 'from umqtt import MQTTClient'"
+    }
+  ],
+  "uiflow2_docs_mismatch": [
+    {
+      "path": "docs/source/hardware/display.rst",
+      "lines": "318-328 (list), 338 (example)",
+      "sha256": "cf4164de813f68ed026c7f9f4dfba117a280a240a3ec28b08b1e8ee0bc54130c",
+      "defect": "lists 0..3 for EPD_QUALITY..EPD_FASTEST; actual constants are 1..4; example Display.setEpdMode(2) resolves to EPD_TEXT, not EPD_FAST"
+    },
+    {
+      "path": "tools/knowledge-base/uiflow2-coder/docs/hardware/display.md",
+      "lines": "278-291 (list 283-286, example 291)",
+      "sha256": "be5588b0ee7fe0d8cf3193e4e4fd7921441b61d0baefd1774b5c143f20c3f2d1",
+      "defect": "same 0..3 mapping tracked in the knowledge-base copy"
+    }
+  ],
+  "emulator_repo_evidence": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "head_commit": "082fffafd124800564d11c82b56cc4ecbb2c503d",
+    "inventory_ui_sha256": "d39931531238b7db52bd11d74de1f3c0ecdecc747b37f1941596ec134ed0d3fa",
+    "inventory_system_sha256": "d1fb8a5dfbbc8da60ee4dbd724345648d4c30a1ca1931ddcb5358db56b874b96",
+    "inventory_ui": "candidate_source surfaces[33] records m5unified_gfx.c 9e869e68... and EPDMode/setEpdMode/getEpdMode/isEPD; 31 umqtt.* entries in inventory_system under scope=system-communication",
+    "browser_epd_fixture_test_script_sha256": "8f9dad6414db348a315acdaceab73f4e95abdbe10440056edb7eed42356c93c2",
+    "browser_epd_fixtures": {
+      "tests/browser-qemu/board_display/papercolor_main.py": "c18b09c5290562fcea2071faf5b9e7984f2b36b8a347fa76a85d4fdb2997448a",
+      "tests/browser-qemu/board_display/papermono_main.py": "9ec71a31dfe6ad2d359e48a9bc1bdd9ce5eccb0080271fe819e3cfce109d403e",
+      "platform/tests/fixtures/browser_epd_quality_oracles.json": "2957661990130249d17b2250e6962f0cfd86210c09fad54f637d85af3db4e3aa"
+    },
+    "r8_all19_acceptance": {
+      "summary_sha256": "9703b94a23025b75be4c8464e32ac835cc75fffa10f5fcc9d88bc144de841151",
+      "summary_cases": 60,
+      "summary_checks": 2564,
+      "papermono_workbench_firmware_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0"
+    }
+  }
+}

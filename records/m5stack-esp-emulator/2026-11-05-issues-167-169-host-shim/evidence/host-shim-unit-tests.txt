@@ -1,0 +1,26 @@
+== host-shim unit tests, 2026-11-05, CPython 3.12.14/3.13, no network ===
+
+## umqtt_host_stub.py
+PASS test_constructor_defaults
+PASS test_import_surface
+PASS test_m5_wrapper_handler_dispatch_variants
+PASS test_m5_wrapper_lifecycle_recorded_sequence
+PASS test_no_network_guard
+PASS test_recorder_hook_and_module_table
+PASS test_robust_client_surface
+PASS test_simple_client_surface
+PASS test_uiflow2_program_start_pattern
+UMQTT_HOST_STUB_TESTS_DONE 9
+
+## epd_shim_patch.py
+EPD_HOST_SHIM_PATCH_PASS 10 3
+
+## epdmode_shim_regression_test.py
+PASS str-raises-TypeError  [TypeError: can't convert str to int]
+PASS float-raises-TypeError  [TypeError: can't convert float to int]
+PASS none-raises-TypeError  [TypeError: can't convert NoneType to int]
+PASS missing-arg-TypeError  [TypeError: Screen.setEpdMode() missing 1 required positional argument: 'epd_mode']
+PASS extra-arg-TypeError  [TypeError: Screen.setEpdMode() takes 2 positional arguments but 3 were given]
+PASS fallback-preserved  [someUnimplementedApi]
+
+26/26 checks passed

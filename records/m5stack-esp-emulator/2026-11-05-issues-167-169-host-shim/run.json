@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5Stack emulator GitHub issues #167/#169: UIFlow2 host-shim module coverage revalidation",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/167; https://github.com/m5agent/m5stack-esp-emulator/issues/169",
+    "pull_request": "none: external AIFlow eval repository fix is out of this workspace",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "082fffafd124800564d11c82b56cc4ecbb2c503d"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "All execution used the project-approved virtual-device lane (QEMU Xtensa official UIFlow2 firmware through an isolated local Device Service)."
+  },
+  "firmware": {
+    "issue169_device": "papermono",
+    "issue169_base_sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05",
+    "issue169_composed_firmware_sha256": "274ec1576a6513720347048750061c68552f294f474c27b56a1869c2897e8991",
+    "issue167_device": "cores3",
+    "issue167_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+    "issue167_composed_firmware_sha256": "907f77255a7d5c88ddaa30d6c85410be15e496398d0006d28c3f15e155844d0b",
+    "uiflow2_reference_commit": "50e440780492aa847378c7d3477ab912f7063bac",
+    "m5gfx_submodule_commit": "9bcedf4e19d4cab7a0793de0598ae5390b4689fe"
+  },
+  "execution": {
+    "environment": "macOS arm64; isolated local Device Service (agent-owned port/state/token); QEMU Xtensa guest; official UIFlow2 device-matrix firmware; no physical hardware",
+    "runtime_binary_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+    "runtime_executable_name": "qemu-system-xtensa",
+    "issue169_session_id": "22df6206f0ab4bafa4fbc85c4cbd9b50",
+    "issue167_session_id": "fcd5bc0ab22b44468b04cc5238ef8dec",
+    "cleanup": "both sessions stopped with purge=0 after evidence ZIP; runtime PIDs gone; history preserved"
+  },
+  "checks": [
+    {
+      "name": "issue169_api_scope",
+      "status": "PASS",
+      "reason": "Official UIFlow2 source registers Display.EPDMode and the four constants 1..4; upstream test uses the named-constant form."
+    },
+    {
+      "name": "issue169_guest_execution",
+      "status": "PASS",
+      "values": "ISSUE169_ENUM 1 2 3 4; ISEPD True; MODE_AFTER_BEGIN 1; AFTER_QUALITY 1; AFTER_FASTEST 4; AFTER_ZERO 4",
+      "evidence": "virtual-device validation; PaperMono; session 22df6206f0ab4bafa4fbc85c4cbd9b50"
+    },
+    {
+      "name": "issue167_api_scope",
+      "status": "PASS",
+      "reason": "Official UIFlow2 source ships umqtt/simple/robust; docs and examples use 'from umqtt import MQTTClient'; repo inventory has 31 umqtt entries."
+    },
+    {
+      "name": "issue167_guest_execution",
+      "status": "PASS",
+      "values": "ISSUE167_CLIENT MQTTClient True; ISSUE167_SURFACE connect,publish,subscribe,unsubscribe,check_msg,wait_msg,disconnect,ping,isconnected,reconnect,delay,log,set_callback,set_last_will; ISSUE167_EXCEPTION_ARGS 5",
+      "evidence": "virtual-device validation; CoreS3; session fcd5bc0ab22b44468b04cc5238ef8dec"
+    },
+    {
+      "name": "issue169_host_shim_patch",
+      "status": "PASS",
+      "values": "EPD host-shim unit tests 26/26 passed",
+      "reason": "Reference implementation for the external aiflow_eval/sim_runtime.py; not guest evidence"
+    },
+    {
+      "name": "issue167_host_shim_patch",
+      "status": "PASS",
+      "values": "umqtt host-shim unit tests 9/9 passed",
+      "reason": "Reference three-module stub for the external aiflow_eval/sim_runtime.py; not guest evidence"
+    },
+    {
+      "name": "host_shim_failure_reproduction",
+      "status": "NOT RUN",
+      "reason": "aiflow_eval/sim_runtime.py and the run-171839 artifacts are not in this workspace or repository."
+    },
+    {
+      "name": "external_eval_integration",
+      "status": "NOT RUN",
+      "reason": "External AIFlow eval repository is not accessible here; both GitHub issues remain open pending that repo's fix."
+    },
+    {
+      "name": "uiflow2_docs_mismatch",
+      "status": "PASS",
+      "reason": "docs/source/hardware/display.rst lists 0..3 while source constants are 1..4; same error in the tracked knowledge-base copy; reported to the internal UIFlow2 tracker."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "reason": "No physical device, RF, power, optical, electrical or mechanical measurement."
+    }
+  ],
+  "evidence": [
+    "evidence/validation-summary.json",
+    "evidence/serial-issue169-papermono.txt",
+    "evidence/serial-issue167-cores3.txt",
+    "evidence/source-provenance.json",
+    "evidence/host-shim-unit-tests.txt"
+  ],
+  "notes": [
+    "The failing component is an external host shim (engine=uiflow_micropython-host-shim); this repository executes UIFlow2 applications only in the guest MicroPython VM.",
+    "The reference patches in code/ are meant to be ported into the external eval repository; this record does not claim the eval is fixed.",
+    "GitHub issues #167 and #169 stay open until the external repository applies the fix and re-runs the live evaluation."
+  ]
+}
