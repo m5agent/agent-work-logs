@@ -26,11 +26,13 @@
       188
     ],
     "base_commit": "73ed554fba02a2397dad81e39e12b5b4b92d0500",
-    "integration_commit": "3f24fa6b5a056991c37018cedb41c42d6df19b1e",
-    "pull_request": null,
-    "merge_commit": null,
+    "integration_commit": "87330d6afe6df2c66db4611be1b4c963e04d8173",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/189",
+    "merge_commit": "ea6a553b702c636b10692665c475341b178cb662",
     "published_record_commit": null,
-    "source_permalink": "https://github.com/m5agent/m5stack-esp-emulator/tree/3f24fa6b5a056991c37018cedb41c42d6df19b1e"
+    "source_permalink": "https://github.com/m5agent/m5stack-esp-emulator/tree/ea6a553b702c636b10692665c475341b178cb662",
+    "initial_integration_commit": "3f24fa6b5a056991c37018cedb41c42d6df19b1e",
+    "initial_public_record_commit": "a38ef967fbfbe432de5f3585c7cdd50f4c444190"
   },
   "hardware": {
     "validation": "NOT RUN"
@@ -50,7 +52,7 @@
       "name": "per-issue targeted investigations",
       "status": "PARTIAL",
       "evidence": "evidence/validation-summary.json",
-      "detail": "16 closure candidates pending final host/CI/delivery; issue 188 remains open."
+      "detail": "16 issues closed by merged PR189;188 remains OPEN/PARTIAL with actual DSI PHY wait evidence."
     },
     {
       "name": "final native device matrix",
@@ -92,15 +94,15 @@
     },
     {
       "name": "final full platform suite, snapshot and CI delivery",
-      "status": "PARTIAL",
-      "detail": "Local full platform gate passed; remote CI/delivery tracked separately.",
+      "status": "PASS",
+      "detail": "Exact head and merge CI terminal success; identical source trees; clean local main fast-forwarded.",
       "platform_status": "PASS",
       "tests": 2021,
       "passed": 2020,
       "skipped": 1,
       "snapshot": "PASS",
-      "ci": "PENDING",
-      "evidence": "evidence/host-gates-summary.json"
+      "ci": "head4/4 and merge2/2 PASS",
+      "evidence": "evidence/delivery-summary.json"
     },
     {
       "name": "storage exact-whitelist cleanup and immutable dedup",
@@ -111,6 +113,14 @@
     {
       "name": "physical hardware",
       "status": "NOT RUN"
+    },
+    {
+      "name": "CI portability fix and Unit followup",
+      "status": "PASS",
+      "total": 304,
+      "passed": 303,
+      "skipped": 1,
+      "evidence": "evidence/ci-followup-summary.json"
     }
   ],
   "evidence": [
@@ -124,7 +134,9 @@
     "evidence/tab5-v051-followup-summary.json",
     "evidence/validation-summary.json",
     "evidence/host-gates-summary.json",
-    "evidence/native-freeze-audit-summary.json"
+    "evidence/native-freeze-audit-summary.json",
+    "evidence/ci-followup-summary.json",
+    "evidence/delivery-summary.json"
   ],
   "notes": [
     "The first failed observations remain in the record.",

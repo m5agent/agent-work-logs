@@ -158,9 +158,9 @@ PYTHONPATH=platform/tools python3 tests/uiflow2/tab5_ui_test/make_image.py --bas
 Unit batch 使用专用 Device Service 会话，先 evidence ZIP 后 stop，保留 history。
 本记录没有把这些 native/service 结果拼接成 browser-WASM PASS。
 
-最终本地平台：**2020 PASS + 1 skip**（2021 total，155.584s）；Unit：300 PASS+1skip；Node：30组PASS。catalog/profile/coverage、snapshot、bootstrap112和compileall均PASS。CI与远端交付追加独立记录。
+最终本地平台：**2020 PASS + 1 skip**（2021 total，155.584s）；Unit：300 PASS+1skip；Node：30组PASS。catalog/profile/coverage、snapshot、bootstrap112和compileall均PASS。CI与远端交付已在[独立交付摘要](evidence/delivery-summary.json)完成。
 已执行的冻结设备矩阵、首轮外设及独立后续、三个 validator 和 Unit/Node 结果
-见分组摘要；源码集成提交 `3f24fa6b5a056991c37018cedb41c42d6df19b1e`；PR/merge 身份待远端交付追加。
+见分组摘要；源码集成提交 `3f24fa6b5a056991c37018cedb41c42d6df19b1e`；最终head `87330d6afe6df2c66db4611be1b4c963e04d8173`、merge `ea6a553b702c636b10692665c475341b178cb662`，PR189已合并。
 最终 issue 回复须先发布记录，并使用公开记录的完整 commit SHA permalink。
 #188 未满足官方应用的 UI/touch 验收，不应随其余候选关闭。
 
@@ -172,3 +172,7 @@ source/history 或重新格式化已有 VFS 作为回滚。清理缓存须按保
 
 物理硬件、RF、声学、光学、电气、机械/存储时序及 browser-WASM 功能复验
 `NOT RUN`；同一 firmware/runtime/controller 路径的 PASS 不外推到其他设备。
+
+## 最终交付后续
+
+PR189已合并，16项issue关闭、188保持OPEN。精确head4/4与merge2/2 CI通过；source tree完全一致，本地main仅快进且干净。首次Linux CI负控使用真实macOS系统库的失败保留，修后Unit304 total=303 PASS+1skip；两个head-run均实际执行新版12项provenance和3项VFS负控。详见[CI修复](evidence/ci-followup-summary.json)与[交付身份](evidence/delivery-summary.json)。

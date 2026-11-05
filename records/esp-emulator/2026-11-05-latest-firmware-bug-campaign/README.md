@@ -24,7 +24,7 @@ Tab5 的二次 VFS 注入损坏和旧 ELF 误用已修，但最新官方应用�
 ## 关键证据
 
 - 构建或运行：受影响设备/Unit 有独立 guest、输入、串口/帧/数据面摘要；完整身份集中在证据 JSON。
-- 产物或部署：冻结 native 设备新矩阵 18/18；外设首轮 67 PASS / 1 FAIL 与独立 Mic 后续 PASS 分开。完整平台 2020 PASS + 1 skip、Unit 300 PASS + 1 skip、30 Node 脚本及 validators/snapshot 均通过；远端交付另记。
+- 产物或部署：冻结 native 设备新矩阵 18/18；外设首轮 67 PASS / 1 FAIL 与独立 Mic 后续 PASS 分开。完整平台 2020 PASS + 1 skip、Unit 300 PASS + 1 skip、30 Node 脚本及 validators/snapshot 均通过；[PR189](https://github.com/m5agent/m5stack-esp-emulator/pull/189)已合并，head4/4与merge2/2 CI通过。
 - 实机或服务执行：物理硬件 `NOT RUN`；native、P4 和 browser-WASM 不相互转授。
 - 日志、测量或协议：真实 UART/Flash readback、EPD AUTO、RMT、ADC 数值、保留的失败和 cleanup 证明均按层记录。
 
@@ -41,7 +41,9 @@ Tab5 的二次 VFS 注入损坏和旧 ELF 误用已修，但最新官方应用�
 
 ## 未覆盖项
 
-最新官方 Tab5 Python/UI/touch 和既有 Buzzer 默认路径失败仍开放；远端 CI/交付另记。
+最新官方 Tab5 Python/UI/touch 和既有 Buzzer 默认路径失败仍开放；远端CI与交付均完成，见[最终交付](evidence/delivery-summary.json)。
 物理硬件、RF、光学、声学、电气以及 browser-WASM 功能复验 `NOT RUN`。
 
 [最终本地主机检查](evidence/host-gates-summary.json)、[native 依赖冻结审计](evidence/native-freeze-audit-summary.json)。
+
+最终交付：[delivery-summary.json](evidence/delivery-summary.json)。16个issue已关闭；#188仍OPEN。CI后续Unit为303 PASS+1skip（304 total），早期300+1记录保留。
