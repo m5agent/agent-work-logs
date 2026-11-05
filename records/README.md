@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-05 | ESP Emulator | Unit独立模型预览与本机Preview控制 | `PARTIAL`（host20/native14/browser65及最终检查通过；PR/Pages/现有进程更新待交付） | [查看](esp-emulator/2026-11-05-unit-preview-local-control/) |
 | 2026-11-05 | ESP Emulator | 统一 Web 工作台：原生编程与 Unit 装配 | `PARTIAL`（PR168已合并/Pages已上线；native CoreS3+PIR13、本地browser63和独立HTTPS CoreS3 63通过；其它板/Unit本轮未线上重跑） | [查看](esp-emulator/2026-11-05-unified-web-workbench/) |
 | 2026-11-04 | ESP Emulator | 全19板UIFlow网页编程与输入验收 | `PARTIAL`（PR #165 MERGED、Pages已上线；2130资产一致、HTTPS首6例PASS；完整资格FAIL/其余34线上例NOT RUN） | [查看](esp-emulator/2026-11-04-uiflow-browser-workbench/) |
 | 2026-11-04 | ESP Emulator | DeepSeek UIFlow 全量复验：阶段记录 | `PARTIAL`（完整 41 层构建、8 个限定 Unit 案例、五板 250 PASS+5 STATE_PASS；HTTP 15 PASS+1 urlencode FAIL；全量继续） | [查看](esp-emulator/2026-11-04-uiflow-full-deepseek/) |

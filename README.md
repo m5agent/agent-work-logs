@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-05 | ESP Emulator | Unit独立模型预览与本机Preview控制 | `PARTIAL`（host20/native14/browser65及最终检查通过；PR/Pages/现有进程更新待交付） | [查看](records/esp-emulator/2026-11-05-unit-preview-local-control/) |
 | 2026-11-05 | ESP Emulator | 统一 Web 工作台：原生编程与 Unit 装配 | `PARTIAL`（PR168已合并/Pages已上线；native CoreS3+PIR13、本地browser63和独立HTTPS CoreS3 63通过；其它板/Unit本轮未线上重跑） | [查看](records/esp-emulator/2026-11-05-unified-web-workbench/) |
 | 2026-11-04 | ESP Emulator | V2 快剪介绍视频、3D 运镜与多场景运行实录 | `PASS`（60秒1080p成片及媒体QA；三组native、工作台与独立browser-WASM ready/frame；browser输入/hardware NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video-v2/) |
 | 2026-11-04 | ESP Emulator | 中文科技感介绍视频与 CoreS3 运行实录 | `PASS`（74秒1080p成片与限定native虚拟验证；hardware/browser-WASM NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video/) |

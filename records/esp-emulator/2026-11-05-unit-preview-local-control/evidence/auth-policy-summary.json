@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "preview-local-control-host-policy-summary",
+  "status": "PASS",
+  "validation": "HOST_ONLY_NOT_GUEST",
+  "auth_methods": 28,
+  "command": "PYTHONPATH=platform/tools:platform/tests python3 -m unittest test_preview_request_context test_preview_http",
+  "seconds": 0.374,
+  "source_at_validation": {
+    "platform/tools/serve.py": "0a1e41d50eb4acc25d43938f90af5f5085c095ed5f78ce5ac84153aa8cc504ea",
+    "platform/tools/preview_request_context.py": "f5b40acdc2f7e3e8fea232106c1a321ca96c3fa89abd3ca57c3c13651a40eb0b",
+    "platform/tests/test_preview_http.py": "5e32d1e6f22be2a3f522bc975d6b01be7db77be9e0e79cefda55131c22444607",
+    "platform/tests/test_preview_request_context.py": "401635f7ed10783474d0116fe6e320d6ab9d7091c99734d76baba9766889af98"
+  },
+  "capability_scope": "Preview fallback only, not other existing API routes.",
+  "configured_credentials": "Original current/previous authentication remains required even on loopback.",
+  "no_credentials": "Actual listener and peer loopback; single literal loopback Host and actual port; exact Origin when present; no contradictory browser Fetch Metadata.",
+  "cli": "Only absent Origin and absent Fetch Metadata with valid listener/peer/Host context.",
+  "negative_controls": [
+    "Wildcard listener and remote peer denied",
+    "DNS or forwarded headers do not supply local authority",
+    "Wrong/missing/duplicate Host denied",
+    "Opaque/cross-origin/duplicate Origin denied",
+    "Cross-site/same-site/unsafe none metadata denied",
+    "Node-fetch mode-only GET/POST denied without coordinator call",
+    "Configured current/previous authentication unchanged",
+    "Rejected context precedes body parsing and Preview allocation",
+    "Allowed local request retains duplicate/malformed JSON rejection"
+  ],
+  "api": {
+    "version": "1.51",
+    "payload_schema_changed": false,
+    "owner_changed": false,
+    "no_config_rejection_code": "preview_auth_unavailable",
+    "no_config_rejection_status": 503,
+    "configured_unauthorized_status": 401
+  },
+  "full_validation": {
+    "python": "PASS: 1986 run,1976 passed,10 skipped",
+    "node": "PASS:30 scripts",
+    "source_commit": "22001fe1cb6bb44eb2737872e4cc578605e57921"
+  },
+  "standards": [
+    "https://fetch.spec.whatwg.org/#append-a-request-origin-header",
+    "https://w3c.github.io/webappsec-fetch-metadata/#sec-fetch-site-header"
+  ]
+}
