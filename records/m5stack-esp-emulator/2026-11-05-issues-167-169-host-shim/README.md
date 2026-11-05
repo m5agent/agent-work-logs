@@ -51,6 +51,9 @@ GitHub issue 保持 open，等待外部仓库落地修复；本记录作为公�
 - 源码与仓库证据：官方 UIFlow2 `50e44078…`（内容与 `release/2.5.3` 一致）及
   M5GFX `9bcedf4e…` 的逐文件 SHA256、本仓库 API 清单与 R8 全 19 板验收身份见
   [source-provenance.json](evidence/source-provenance.json)。
+- issue 回复（2026-11-05，均含本记录固定提交链接）：
+  [#167 comment](https://github.com/m5agent/m5stack-esp-emulator/issues/167#issuecomment-6649047956)、
+  [#169 comment](https://github.com/m5agent/m5stack-esp-emulator/issues/169#issuecomment-6649047482)。
 - 参考补丁：EPD 26/26 项、umqtt 9/9 项宿主单元测试通过，见
   [host-shim-unit-tests.txt](evidence/host-shim-unit-tests.txt)；代码见
   [code/](code/README.md)。
