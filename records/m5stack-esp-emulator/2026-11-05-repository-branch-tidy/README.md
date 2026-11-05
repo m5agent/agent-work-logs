@@ -45,3 +45,4 @@
 ## 后续收口
 
 - [唯一 main 与 Chrome 兼容提交](followups/2026-11-05-main-only-closeout/)：`PARTIAL`，Chrome49/平台检查、离线保全与23工作树detach通过；源码PR与最终引用清理待执行。
+- [PR171交付与唯一main终态](followups/2026-11-05-main-only-closeout/executions/2026-11-05-pr171-delivery/)：`PASS`，本地/远端均仅main；原目录、tag、stash和历史备份保留。
