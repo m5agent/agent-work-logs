@@ -102,7 +102,7 @@ divisor1、无override、实际 TCG multi/one-insn-per-tb，精确0027绑定。
 | device_response | PASS | native官方PIR读回、Run/取消；browser真实MicroPython结果 |
 | data_behavior | PASS | native PIR true/false及三程序身份；browser12程序与reset恢复 |
 | visual_or_physical | PARTIAL | native红/绿帧与browser全红帧来自guest；物理性质NOT RUN |
-| delivery | PARTIAL | 源码与准备包已固定；PR/合并/Pages仍PENDING |
+| delivery | PASS | PR168合并/Pages发布/独立HTTPS CoreS3 63通过；范围见后续 |
 
 ## 验证边界
 
@@ -114,4 +114,4 @@ divisor1、无override、实际 TCG multi/one-insn-per-tb，精确0027绑定。
 
 本次修改使用既有服务端编程机制，不涉及物理设备写入或运行时重新链接。
 回滚应恢复最终源码提交中的前端适配与入口变更，并保留原生会话历史；不能把页面关闭当成 guest 已停止。
-guest 镜像/runtime、逐文件SHA、最终源码与完整检查均已固定；PR、合并、Pages及新HTTPS结果须以独立后续记录追加。
+guest 镜像/runtime、逐文件SHA、最终源码与完整检查均已固定；PR、合并、Pages及独立HTTPS CoreS3结果见[交付后续](followups/2026-11-05-pr168-delivery/README.md)，不扩大其它板/Unit范围。

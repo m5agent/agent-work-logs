@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "draft": false,
+  "publishable": true,
+  "title": "PR168 unified workbench delivery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/168",
+    "base_commit": "3e8f76b836009438b7d9312e1e7b8f822b7d64f5",
+    "final_commit": "e31c2b4aed07c98fddea19018589f0f8751667c2",
+    "merge_commit": "082fffafd124800564d11c82b56cc4ecbb2c503d",
+    "head_and_merge_tree": "a9bd746d78ac2a31a560a4b4436e63f126504aae"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "online": {
+      "device": "cores3",
+      "firmware_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+      "wasm_sha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+      "runtime_manifest_sha256": "fa6b56048ec91d100cb4f2a15088ce77e313bd2e6e8ba083229826b258297c51",
+      "site_manifest_sha256": "23e3fc8515b0f02b585bce0eb36e4e9f6579113d03ba96c6aafc12680f61844c"
+    },
+    "scope": "Independent online CoreS3 only; native/added-Unit/full-matrix results not inherited."
+  },
+  "execution": {
+    "environment": "Published artifact full-readback, merged main deployment, complete HTTPS static identity and one independent CoreS3 editor guest.",
+    "task_id": null,
+    "session_id": null
+  },
+  "checks": [
+    {
+      "name": "source-push-CI",
+      "status": "PASS",
+      "jobs": 2
+    },
+    {
+      "name": "release-full-readback",
+      "status": "PASS",
+      "scope": "Exact bytes/SHA only, not Pages guest qualification."
+    },
+    {
+      "name": "PR-merge",
+      "status": "PASS"
+    },
+    {
+      "name": "Pages-deployment",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTPS-guest63",
+      "status": "PASS"
+    },
+    {
+      "name": "PR-CI-and-main-CI",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTPS-static-closed-set",
+      "status": "PASS",
+      "assets": 2134,
+      "bytes": 251977755
+    }
+  ],
+  "evidence": [
+    "evidence/delivery-summary.json",
+    "evidence/https-static-summary.json",
+    "evidence/https-browser-summary.json"
+  ],
+  "notes": [
+    "Delivery complete for exact merged source/package and scoped online CoreS3 acceptance.",
+    "Other boards/Units were not independently rerun online; original failures remain preserved."
+  ],
+  "delivery_status": "COMPLETE_SCOPED"
+}
