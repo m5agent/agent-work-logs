@@ -1,0 +1,123 @@
+{
+  "kind": "main-only-closeout-validation-summary",
+  "status": "PARTIAL",
+  "validation_status": "PASS",
+  "delivery_status": "PENDING",
+  "base_commit": "84b4f4932a402b77c9688aff7b51a1932ff12be6",
+  "integration_commit": "ef60f88168b60bc8da685cd007f6658ce0bc0361",
+  "integration_parents": [
+    "84b4f4932a402b77c9688aff7b51a1932ff12be6",
+    "0569b2391e599012d566c61be76cc38c23afb387"
+  ],
+  "integration_diff": "2 files changed, 4 insertions(+), 1 deletion(-)",
+  "final_goal": {
+    "local_branches": [
+      "main"
+    ],
+    "remote_branches": [
+      "main"
+    ],
+    "attic_branch_refs": 0,
+    "history_preservation": "Verified private self-contained Git bundle and independent bare restore before reference removal"
+  },
+  "baseline": {
+    "original_local_branches": 26,
+    "worktrees": 25,
+    "remote_branches": 1,
+    "tags": 12,
+    "stashes": 1,
+    "precleanup_heads_including_owned_integration": 27
+  },
+  "backup": {
+    "status": "PASS",
+    "summary": "history-backup-summary.json",
+    "bundle_bytes": 126719820,
+    "bundle_sha256": "32bae6cc4cdb78b4d3b902a0b590ed859736da8ae513dd2a9b1c2b992a85980f",
+    "reference_objects_verified": 49,
+    "independent_restore": "PASS"
+  },
+  "checks": {
+    "public_site_tests": {
+      "status": "PASS",
+      "tests": 10
+    },
+    "browser_virtual_device": {
+      "status": "PASS",
+      "checks_passed": 49,
+      "checks_failed": 0,
+      "summary": "chrome-guest-summary.json",
+      "summary_bytes": 11157,
+      "summary_sha256": "cc27733d9dfce6e0dd98c49049da8357312fc539c133d7a2fbdb699f1accc815"
+    },
+    "full_platform": {
+      "status": "PASS",
+      "tests_run": 1986,
+      "skipped": 10,
+      "seconds": 148.2,
+      "unittest_outcome": "OK"
+    },
+    "node_contracts": {
+      "status": "PASS",
+      "scripts": 30
+    },
+    "validators": {
+      "project_snapshot": "PASS",
+      "runtime_coverage": "PASS",
+      "peripheral_catalog": "PASS",
+      "qemu_profiles": "PASS"
+    },
+    "git_diff_check": "PASS",
+    "pr_scope_check": {
+      "status": "PASS",
+      "new_blobs": 4,
+      "new_blob_bytes": 70339,
+      "new_evidence_bytes": 0
+    }
+  },
+  "host_precleanup": {
+    "status": "PASS",
+    "operator_authorized_idle_service_stop": true,
+    "idle_service_workers_stopped_normally": 2,
+    "active_sessions_before_stop": 0,
+    "active_leases_before_stop": 0,
+    "other_protected_listener_observed": "absent",
+    "protected_local_files": "untouched at this precleanup boundary",
+    "functional_guest_claim": "NOT RUN on native services; browser virtual-device evidence is separate"
+  },
+  "retained_initial_failures": [
+    {
+      "stage": "node_contract_launch",
+      "status": "FAIL",
+      "effect": "Existing locked Playwright dependency link was missing; observer launch failed.",
+      "recovery": "Used the existing locked dependencies; second attempt passed, without dependency installation."
+    },
+    {
+      "stage": "service_stop_precheck",
+      "status": "FAIL",
+      "effect": "The listener PID parser treated a file-descriptor output row as a PID; failed before any action.",
+      "recovery": "Corrected PID parsing, rechecked idle state, then observed normal authorized process exits."
+    }
+  ],
+  "cleanup": {
+    "status": "PARTIAL",
+    "reason": "23 old branch-bound working trees detached at exact original HEAD with files/status preserved; final ref deletion awaits PR merge",
+    "local_branches_after": null,
+    "worktrees_after": null,
+    "deleted_branch_names": [],
+    "detached_worktrees": 23,
+    "detachment_summary": "detachment-summary.json",
+    "directory_removal": "NOT RUN"
+  },
+  "delivery": {
+    "status": "PENDING",
+    "pull_request": null,
+    "local_main": null,
+    "remote_main": null
+  },
+  "limits": [
+    "Exact configured Chrome direct-runner/CoreS3 stock-reference browser-WASM validation only.",
+    "No web/runtime/firmware changes, no deployment claim and no other-board or physical hardware inheritance.",
+    "Reference preservation, source publication and workspace retirement are independently reported stages.",
+    "No host paths, service endpoints, ports or process identifiers are copied into this derived summary."
+  ]
+}

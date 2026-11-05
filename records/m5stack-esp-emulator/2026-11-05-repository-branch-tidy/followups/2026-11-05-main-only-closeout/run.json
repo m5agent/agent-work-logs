@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Main-only consolidation: configured Chrome validation and Git history preservation",
+  "source": {
+    "issue": "none: explicit user maintenance request",
+    "pull_request": "NOT RUN - pending creation",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "84b4f4932a402b77c9688aff7b51a1932ff12be6",
+    "integration_commit": "ef60f88168b60bc8da685cd007f6658ce0bc0361"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+    "profile": "cores3-wasm-stock-wallclock",
+    "evidence_level": "virtual-device validation"
+  },
+  "execution": {
+    "environment": "macOS arm64; actual hardware ANGLE/Metal configured Chrome, browser-WASM direct tracked runner",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "configured_chrome_actual_guest",
+      "status": "PASS",
+      "checks": 49
+    },
+    {
+      "name": "full_platform",
+      "status": "PASS",
+      "tests_run": 1986,
+      "skipped": 10,
+      "seconds": 148.2
+    },
+    {
+      "name": "node_contracts",
+      "status": "PASS",
+      "scripts": 30
+    },
+    {
+      "name": "four_validators",
+      "status": "PASS"
+    },
+    {
+      "name": "git_diff_and_pr_scope",
+      "status": "PASS"
+    },
+    {
+      "name": "private_history_backup_independent_restore",
+      "status": "PASS",
+      "objects_verified": 49
+    },
+    {
+      "name": "old_worktrees_detached_at_same_head",
+      "status": "PASS",
+      "count": 23,
+      "files_status_and_dependencies_preserved": true
+    },
+    {
+      "name": "source_pr_delivery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "final_branch_reference_deletion_and_directory_retirement",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/chrome-guest-summary.json",
+      "bytes": 11157,
+      "sha256": "cc27733d9dfce6e0dd98c49049da8357312fc539c133d7a2fbdb699f1accc815"
+    },
+    {
+      "path": "evidence/history-backup-summary.json",
+      "kind": "derived_summary"
+    },
+    {
+      "path": "evidence/summary.json",
+      "kind": "derived_summary"
+    },
+    {
+      "path": "evidence/checks-summary.json",
+      "kind": "bounded_summary"
+    },
+    {
+      "path": "evidence/detachment-summary.json",
+      "kind": "derived_summary"
+    }
+  ],
+  "notes": [
+    "Prepublication validation stage only; PR, final branch and worktree retirement are explicitly pending.",
+    "Later explicit one-main instruction supersedes prior active attic branch retention; offline history remains verified.",
+    "Retained initial Node dependency-link launch failure and pre-action service observer parse failure.",
+    "Raw logs, bundle and local endpoints/paths/process identifiers are not committed."
+  ]
+}

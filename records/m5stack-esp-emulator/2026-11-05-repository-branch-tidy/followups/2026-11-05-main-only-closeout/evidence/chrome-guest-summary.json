@@ -1,0 +1,285 @@
+{
+  "kind": "configured-chrome-direct-runner-merge-validation",
+  "status": "PASS",
+  "validation_type": "virtual-device validation",
+  "scope": "Current tracked CoreS3 stock-reference direct guest runner; M5_WASM_CHROME selected even with invalid M5_CHROME fallback. No web/runtime/firmware changes.",
+  "source": {
+    "base_commit": "84b4f4932a402b77c9688aff7b51a1932ff12be6",
+    "legacy_commit": "0569b2391e599012d566c61be76cc38c23afb387",
+    "merge_commit": "ef60f88168b60bc8da685cd007f6658ce0bc0361",
+    "legacy_is_true_ancestor": true,
+    "files": {
+      "platform/tests/test_public_qemu_guest.mjs": "2dfcbf59266d8e4f8722d7a8ffb66652f7242e3bab89b75e26869b5cde56bfdc",
+      "platform/tests/test_public_site.py": "62a8e4f8f46a32061135aa3a4d3eebbb08f56a8e7fbfb1e2dd51ef5864ee3cce"
+    },
+    "diff": "2 files changed, 4 insertions(+), 1 deletion(-)"
+  },
+  "host_validation": {
+    "public_site_tests": 10,
+    "public_site_tests_passed": 10,
+    "node_syntax": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "browser_guest": {
+    "started_at": "2026-11-05T07:33:47.485Z",
+    "finished_at": "2026-11-05T07:35:13.424Z",
+    "checks_passed": 49,
+    "checks_failed": 0,
+    "check_names": [
+      "pages-service-worker-shared-memory",
+      "explicit-public-reference-example",
+      "actual-cores3-lvgl-ready",
+      "c-qemu-runtime-and-exact-fixture",
+      "real-frame-pixels",
+      "cold-before-input-actual-clicks-and-count-pixels",
+      "actual-raw-canvas-input-target-visible",
+      "actual-trusted-native-pointer-down-up",
+      "negative-touch-does-not-click",
+      "actual-raw-canvas-input-target-visible",
+      "actual-trusted-native-pointer-down-up",
+      "actual-dom-touch-lvgl-callback",
+      "cold-stock-same-fixture-receipt",
+      "cold-stock-controller-down-up",
+      "cold-stock-controller-hold",
+      "cold-stock-guest-clicks1",
+      "cold-clicks1-actual-clicks-and-count-pixels",
+      "pir-qom-readback",
+      "pir-guest-both-transitions",
+      "qmp-pause-stops-guest-progress",
+      "qmp-resume",
+      "layout-1440",
+      "layout-1024",
+      "layout-768",
+      "layout-390",
+      "quit-and-container-cleanup",
+      "first-engine-and-five-pthreads-close-before-iframe-removal-pthreads-before-iframe-finalization",
+      "first-engine-and-five-pthreads-close-before-iframe-removal-all-targets-after-iframe-finalization",
+      "no-instance-frame-after-stop",
+      "dedicated-engine-closing-notification-without-owner-fallback",
+      "local-history-retains-hash",
+      "shared-reference-restores-example",
+      "fresh-guest-reopen-from-shared-reference",
+      "shared-reference-exact-runtime-variant",
+      "reopened-before-input-actual-clicks-and-count-pixels",
+      "actual-raw-canvas-input-target-visible",
+      "actual-trusted-native-pointer-down-up",
+      "reopened-real-touch-clicks1",
+      "reopened-stock-same-fixture-receipt",
+      "reopened-stock-controller-down-up",
+      "reopened-stock-controller-hold",
+      "reopened-stock-guest-clicks1",
+      "reopened-clicks1-actual-clicks-and-count-pixels",
+      "reopen-cleanup",
+      "both-engines-and-ten-pthreads-close-before-iframe-removal-pthreads-before-iframe-finalization",
+      "both-engines-and-ten-pthreads-close-before-iframe-removal-all-targets-after-iframe-finalization",
+      "reopened-engine-notification-without-owner-fallback",
+      "no-service-or-local-emulator-requests",
+      "no-javascript-errors"
+    ],
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "configured_chrome_priority": "M5_WASM_CHROME=actual configured Chrome; M5_CHROME=deliberately nonexistent fallback; direct tracked runner launched and completed both guests",
+    "execution": {
+      "engine": "qemu-wasm",
+      "deviceId": "cores3",
+      "board": "m5cores3",
+      "profile": "cores3-wasm-stock-wallclock",
+      "clockDivisor": 1,
+      "clockOverride": null,
+      "accelerator": null,
+      "oneInsnPerTb": true,
+      "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+      "javascriptSha256": "30bd87652a1938146d7d9dfd3cd96bc582c85eee756801fe177f1a74f79fdcb0",
+      "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+      "wasmSha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+      "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "firmwareSha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+      "actualArguments": [
+        "./this.program",
+        "-M",
+        "m5cores3",
+        "-drive",
+        "file=/flash.bin,if=mtd,format=raw",
+        "-L",
+        "/rom",
+        "-display",
+        "none",
+        "-serial",
+        "pipe:/bridge/uart",
+        "-serial",
+        "file:/bridge/serial1",
+        "-qmp",
+        "stdio",
+        "-drive",
+        "if=none,id=efuse,file=/efuse.bin,format=raw",
+        "-global",
+        "driver=nvram.esp32s3.efuse,property=drive,value=efuse",
+        "-accel",
+        "tcg,thread=multi,one-insn-per-tb=on"
+      ],
+      "requiredRuntimePatch": {
+        "path": "patches/qemu-wasm-probe/0027-gpio-bounded-transactions.patch",
+        "sha256": "43685da86d9b959b2e769cd9cda5785a5c4039b5076f73f3b9d6033d1d161bdf"
+      }
+    },
+    "site_manifest_sha256": "23ee838732c99369d2b0b852b4430c46eee48236ed768a88d9374a5969cc8b2c",
+    "runtime_manifest_sha256": "fa6b56048ec91d100cb4f2a15088ce77e313bd2e6e8ba083229826b258297c51",
+    "runtime_assets": {
+      "qemu-system-xtensa.js": {
+        "bytes": 157200,
+        "sha256": "30bd87652a1938146d7d9dfd3cd96bc582c85eee756801fe177f1a74f79fdcb0"
+      },
+      "NOTICE": {
+        "bytes": 968,
+        "sha256": "290273f3bf903aa43510e68a735810e0e6c54d43accc5dc16b00ffd5a0399f76"
+      },
+      "corresponding-source.tar.xz": {
+        "bytes": 35244932,
+        "sha256": "1de631cd82597f6477ebc1bb700274e44aeb2f1c093e8122dae07dcbb88683c6"
+      },
+      "qemu-system-xtensa.wasm": {
+        "bytes": 12746345,
+        "sha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1"
+      },
+      "qemu-system-xtensa.worker.js": {
+        "bytes": 2776,
+        "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+      }
+    },
+    "no_service_requests": true,
+    "javascript_errors": [],
+    "runner_exit_code": 0,
+    "browser_and_server_finally_closed": true,
+    "worker_fences": [
+      {
+        "name": "first-engine-and-five-pthreads-close-before-iframe-removal",
+        "nested_before_removal": {
+          "ok": true,
+          "minimum_observed": 6,
+          "observed": 6,
+          "live": 0,
+          "source": "Chrome DevTools Target.getTargets"
+        },
+        "all_after_removal": {
+          "ok": true,
+          "minimum_observed": 6,
+          "observed": 6,
+          "live": 0,
+          "source": "Chrome DevTools Target.getTargets"
+        }
+      },
+      {
+        "name": "both-engines-and-ten-pthreads-close-before-iframe-removal",
+        "nested_before_removal": {
+          "ok": true,
+          "minimum_observed": 12,
+          "observed": 12,
+          "live": 0,
+          "source": "Chrome DevTools Target.getTargets"
+        },
+        "all_after_removal": {
+          "ok": true,
+          "minimum_observed": 12,
+          "observed": 12,
+          "live": 0,
+          "source": "Chrome DevTools Target.getTargets"
+        }
+      }
+    ],
+    "normal_guest_cleanup": {
+      "quit-and-container-cleanup": {
+        "gracefulExit": true,
+        "exitCode": 0,
+        "workersCreated": 5,
+        "workersAtExit": 0,
+        "disposal": {
+          "workersRemaining": 0,
+          "workersTerminatedByDispose": 0,
+          "workerCountScope": "nested-pthreads",
+          "enginePlacement": "dedicated-worker-v1",
+          "engineWorkersAtAcknowledgement": 1,
+          "selfCloseAfterAcknowledgement": true
+        },
+        "engineOwnership": {
+          "engineWorkersCreated": 1,
+          "engineOwnerLive": false,
+          "engineCloseNotificationReceived": true,
+          "engineSelfCloseNotifications": 1,
+          "engineNormalTerminations": 1,
+          "engineFallbackTerminations": 0,
+          "enginePortTransferred": true
+        },
+        "engineOwnershipStage": "before-iframe-removal",
+        "explicitWorkerDisposal": true,
+        "iframeRemoved": true
+      },
+      "dedicated-engine-closing-notification-without-owner-fallback": {
+        "engineWorkersCreated": 1,
+        "engineOwnerLive": false,
+        "engineCloseNotificationReceived": true,
+        "engineSelfCloseNotifications": 1,
+        "engineNormalTerminations": 1,
+        "engineFallbackTerminations": 0,
+        "enginePortTransferred": true
+      },
+      "reopen-cleanup": {
+        "gracefulExit": true,
+        "exitCode": 0,
+        "workersCreated": 5,
+        "workersAtExit": 0,
+        "disposal": {
+          "workersRemaining": 0,
+          "workersTerminatedByDispose": 0,
+          "workerCountScope": "nested-pthreads",
+          "enginePlacement": "dedicated-worker-v1",
+          "engineWorkersAtAcknowledgement": 1,
+          "selfCloseAfterAcknowledgement": true
+        },
+        "engineOwnership": {
+          "engineWorkersCreated": 1,
+          "engineOwnerLive": false,
+          "engineCloseNotificationReceived": true,
+          "engineSelfCloseNotifications": 1,
+          "engineNormalTerminations": 1,
+          "engineFallbackTerminations": 0,
+          "enginePortTransferred": true
+        },
+        "engineOwnershipStage": "before-iframe-removal",
+        "explicitWorkerDisposal": true,
+        "iframeRemoved": true
+      },
+      "reopened-engine-notification-without-owner-fallback": {
+        "engineWorkersCreated": 1,
+        "engineOwnerLive": false,
+        "engineCloseNotificationReceived": true,
+        "engineSelfCloseNotifications": 1,
+        "engineNormalTerminations": 1,
+        "engineFallbackTerminations": 0,
+        "enginePortTransferred": true
+      }
+    }
+  },
+  "raw_report": {
+    "bytes": 164077,
+    "sha256": "67a1842496fb1963590dd3eb3846c09d856e8950cc250a09bd038f31ca295eff",
+    "committed": false
+  },
+  "reproduction": {
+    "entry": "platform/tests/test_public_qemu_guest.mjs",
+    "environment": {
+      "M5_PUBLIC_SITE": "<qualified exported site>",
+      "M5_PUBLIC_BASE_PATH": "/m5stack-esp-emulator/",
+      "M5_PUBLIC_QEMU_OUT": "<new owned output directory>",
+      "M5_QEMU_EXAMPLE": "stock-reference",
+      "M5_WASM_GPU": "hardware",
+      "M5_WASM_CHROME": "<configured Chrome executable>",
+      "M5_CHROME": "<deliberately nonexistent fallback>",
+      "NODE_PATH": "<repository-locked Playwright dependencies>"
+    }
+  },
+  "limits": [
+    "Exact-image/profile browser-WASM acceptance only; no full19 or physical hardware claim.",
+    "Original fallback-only behavior retained by the unchanged M5_CHROME fallback expression; actual guest run exercises priority and M5_WASM_CHROME direct invocation.",
+    "No API calls, Device Service lease or native runtime used; user services not accessed.",
+    "No new deployment or Pages publication asserted by this local exported-site run."
+  ]
+}

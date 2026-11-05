@@ -41,3 +41,7 @@
 - 1 个 stash 未丢弃：2026-11-03 的性能/页面 WIP 快照已不能直接 apply 到当前 `main`，保留以便人工判断，不做破坏性处理。
 - 未执行 `git gc`：仓库对象包约 516 MiB 且多为 `main` 可达历史，回收收益有限，且多工作树共享对象库；留待用户要求时再评估。
 - `.work/` 运行时缓存、`platform/.cache/`、`config-temp/`、`config.log` 未删除：属于本地运行/调试资产，可能有其他 agent 或服务在用。
+
+## 后续收口
+
+- [唯一 main 与 Chrome 兼容提交](followups/2026-11-05-main-only-closeout/)：`PARTIAL`，Chrome49/平台检查、离线保全与23工作树detach通过；源码PR与最终引用清理待执行。

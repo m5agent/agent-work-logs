@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-05 | ESP Emulator | 唯一 main 收口与 Chrome 兼容提交 | `PARTIAL`（Chrome49/平台检查、历史保全与23工作树detach通过；PR/最终引用清理待执行） | [查看](records/m5stack-esp-emulator/2026-11-05-repository-branch-tidy/followups/2026-11-05-main-only-closeout/) |
 | 2026-11-05 | ESP Emulator | Unit独立模型预览与本机Preview控制 | `PARTIAL`（源码及限定交付完成；HTTPS65/实际本机只读13通过，其它型号未重测） | [查看](records/esp-emulator/2026-11-05-unit-preview-local-control/) |
 | 2026-11-05 | ESP Emulator | 统一 Web 工作台：原生编程与 Unit 装配 | `PARTIAL`（PR168已合并/Pages已上线；native CoreS3+PIR13、本地browser63和独立HTTPS CoreS3 63通过；其它板/Unit本轮未线上重跑） | [查看](records/esp-emulator/2026-11-05-unified-web-workbench/) |
 | 2026-11-04 | ESP Emulator | V2 快剪介绍视频、3D 运镜与多场景运行实录 | `PASS`（60秒1080p成片及媒体QA；三组native、工作台与独立browser-WASM ready/frame；browser输入/hardware NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-04-emulator-introduction-video-v2/) |
