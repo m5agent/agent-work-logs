@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-05 | ESP Emulator | 最新固件问题修复、原生回归与存储清理 | `PARTIAL`（16项修复已验证；Tab5最新官方应用仍受DSI PHY锁定阻塞；交付门禁另记） | [查看](esp-emulator/2026-11-05-latest-firmware-bug-campaign/) |
 | 2026-11-05 | ESP Emulator | 唯一 main 收口与 Chrome 兼容提交 | `PASS`（PR171已合并；本地/远端仅main；Chrome49、CI及历史/资产保全通过） | [查看](m5stack-esp-emulator/2026-11-05-repository-branch-tidy/followups/2026-11-05-main-only-closeout/executions/2026-11-05-pr171-delivery/) |
 | 2026-11-05 | ESP Emulator | Unit独立模型预览与本机Preview控制 | `PARTIAL`（源码及限定交付完成；HTTPS65/实际本机只读13通过，其它型号未重测） | [查看](esp-emulator/2026-11-05-unit-preview-local-control/) |
 | 2026-11-05 | ESP Emulator | 统一 Web 工作台：原生编程与 Unit 装配 | `PARTIAL`（PR168已合并/Pages已上线；native CoreS3+PIR13、本地browser63和独立HTTPS CoreS3 63通过；其它板/Unit本轮未线上重跑） | [查看](esp-emulator/2026-11-05-unified-web-workbench/) |

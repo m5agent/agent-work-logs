@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Latest firmware bug campaign and safe engineering-storage cleanup",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issues": [
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188
+    ],
+    "base_commit": "73ed554fba02a2397dad81e39e12b5b4b92d0500",
+    "integration_commit": "3f24fa6b5a056991c37018cedb41c42d6df19b1e",
+    "pull_request": null,
+    "merge_commit": null,
+    "published_record_commit": null,
+    "source_permalink": "https://github.com/m5agent/m5stack-esp-emulator/tree/3f24fa6b5a056991c37018cedb41c42d6df19b1e"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "identities": "evidence/validation-summary.json"
+  },
+  "execution": {
+    "validation_class": "virtual-device validation",
+    "environment": "macOS arm64; native QEMU and separate P4 esp-emu lanes; dedicated owned Device Service sessions for Unit cases; checked-in direct regression runners",
+    "runtime_identities": "evidence/validation-summary.json",
+    "physical_hardware": "NOT RUN",
+    "browser_WASM": "NOT RUN in this campaign"
+  },
+  "checks": [
+    {
+      "name": "per-issue targeted investigations",
+      "status": "PARTIAL",
+      "evidence": "evidence/validation-summary.json",
+      "detail": "16 closure candidates pending final host/CI/delivery; issue 188 remains open."
+    },
+    {
+      "name": "final native device matrix",
+      "status": "PASS",
+      "total": 18,
+      "passed": 18,
+      "evidence": "evidence/root-integration-summary.json",
+      "detail": "Separate new full run; initial 17 PASS / Basic FAIL retained."
+    },
+    {
+      "name": "first native peripheral matrix and targeted followup",
+      "status": "PARTIAL",
+      "total": 68,
+      "passed": 67,
+      "failed": 1,
+      "evidence": "evidence/root-peripheral-summary.json",
+      "followup": "evidence/root-peripheral-more-summary.json",
+      "detail": "Original Core2 Mic FAIL retained; separate draw-fenced followup PASS. No new full 68-case run claimed."
+    },
+    {
+      "name": "Unit host suite",
+      "status": "PASS",
+      "total": 301,
+      "passed": 300,
+      "skipped": 1,
+      "detail": "First 298-test run with six stock-whitelist failures retained. Includes three synthetic negative controls; commit 56bb04fbd10a22f3e7651008d3b35132d8162bb1."
+    },
+    {
+      "name": "Node scripts",
+      "status": "PASS",
+      "total": 30,
+      "passed": 30,
+      "detail": "Initial dependency failure retained; matching locked existing dependencies resolved."
+    },
+    {
+      "name": "catalog/profile/coverage, bootstrap112 and compileall",
+      "status": "PASS",
+      "detail": "Final integrated full platform/snapshot gate is separate and pending."
+    },
+    {
+      "name": "final full platform suite, snapshot and CI delivery",
+      "status": "PARTIAL",
+      "detail": "Local full platform gate passed; remote CI/delivery tracked separately.",
+      "platform_status": "PASS",
+      "tests": 2021,
+      "passed": 2020,
+      "skipped": 1,
+      "snapshot": "PASS",
+      "ci": "PENDING",
+      "evidence": "evidence/host-gates-summary.json"
+    },
+    {
+      "name": "storage exact-whitelist cleanup and immutable dedup",
+      "status": "PASS",
+      "allocated_bytes": 46361821184,
+      "evidence": "evidence/validation-summary.json"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/matrix-transport-summary.json",
+    "evidence/root-integration-summary.json",
+    "evidence/root-peripheral-more-summary.json",
+    "evidence/root-peripheral-summary.json",
+    "evidence/service-adc-summary.json",
+    "evidence/startup-tab5-summary.json",
+    "evidence/storage-final-summary.json",
+    "evidence/tab5-v051-followup-summary.json",
+    "evidence/validation-summary.json",
+    "evidence/host-gates-summary.json",
+    "evidence/native-freeze-audit-summary.json"
+  ],
+  "notes": [
+    "The first failed observations remain in the record.",
+    "Issue 188 packing is fixed but official-app Python/UI/touch remains unproven.",
+    "Early Tab5 seed save-back has no before hash; final owned-copy checks prove input bytes and mtime unchanged.",
+    "Code rollback uses the final published integration commit; deleted caches regenerate from preserved sources, not from this report.",
+    "Issue 183 reproduced in the first frozen full matrix; real guest redraw fence fixed input sequencing with unchanged 450 ms pulse, and both historical standalone PASS and fresh FAIL are retained.",
+    "Issue 188 independent official esp-emu 0.51 followup observes real latest-app DSI PHY PLL lock wait with timers advancing; no PHY-ready or application bypass. Latest readiness remains PARTIAL."
+  ]
+}
