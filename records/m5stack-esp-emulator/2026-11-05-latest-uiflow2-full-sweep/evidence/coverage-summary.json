@@ -102,14 +102,22 @@
       "fail_class": "2 QEMU model gaps (ED2208 partial window, AXP2101 charge-state bits) + 2 stale matrix expectations (PaperColor charging, StickS3 BMI270 axis)"
     },
     "units": {
-      "battery_cases": 51,
+      "battery_cases": 104,
       "case_results": {
-        "PASS": 42,
-        "FAIL": 9
+        "PASS": 93,
+        "PASS_AFTER_RERUN": 9,
+        "BLOCKED": 2
       },
-      "catalog_units_covered": 51,
+      "catalog_units_covered": 104,
       "catalog_units_total": 160,
-      "note": "partial coverage in time-box; remaining 109 have no runnable batch runner in this pass"
+      "blocked": [
+        "batch8 mini-can",
+        "batch8 lorawan-us915 (tracked EXPECTED_BLOCKED / known-blocker)"
+      ],
+      "round2": "9/9 round1 FAIL rerun PASS; root cause was agent harness derived-copy path regression (infra), not simulator/unit gap",
+      "not_run_cases": 46,
+      "not_run_reason": "time box; main queue stopped at 104 cases (batch12a 6, batch12b 7, batch12c 4, can_lorawan 3, io 12, control 5, sensor 7, batch11 2)",
+      "note": "9 catalog units have no batch runner (2relay/scroll/flashlight/servo8-hat/8servos/joystick2/nfc + DEFER mini-bps-v11/mini-pdm)"
     },
     "docs": {
       "cases": 25,
@@ -138,7 +146,8 @@
       181,
       182,
       183,
-      184
+      184,
+      185
     ],
     "internal_uiflow_gitlab_new": [
       17,

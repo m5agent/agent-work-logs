@@ -32,12 +32,12 @@
 | boot/flash（29 设备 ×2 轮） | 58 | 38 | 20 | — | 10 台 classic qemu-esptool known-blocker |
 | device UI（31 设备） | 33 | 11 | 15 | 4 BLOCKED + 3 NOT RUN | 9 simulator（2 QEMU 模型/输入/启动、4 matrix 契约、tab5 lane 说明），5 infra（flash/machine 环境） |
 | peripheral matrix | 68 | 60 | 8 | — | 5 ED2208 partial-window、1 AXP2101 电荷状态、2 stale expectation |
-| Unit battery | 51（覆盖 51/160） | 42 | 9 | 109 NOT RUN | round2 中；见 candidate 卡 |
+| Unit battery | 104（覆盖 104/160） | 93 + 9 round2-PASS | 0 | 2 BLOCKED + 46 NOT RUN | 2 个 tracked EXPECTED_BLOCKED（mini-can/lorawan-us915）；round1 9 个 FAIL 为 agent 派生脚本路径回归（infra），round2 全 PASS |
 | docs-driven | 25 | 19 | 0 | 6 BLOCKED(infra) | 12 个 `uiflow-docs` mismatch 已确认 |
 
 ### GitHub issues（本仓库，13 个）
 
-工具/matrix 缺陷（4）：#172 eFuse 5/6 argparse、#173 4 台 console fixture 缺 make_image、#174 VFS 布局漂移导致假 FAIL、#184 StickC 系列 frame 断言与 fixture 自相矛盾。
+工具/matrix 缺陷（5）：#172 eFuse 5/6 argparse、#173 4 台 console fixture 缺 make_image、#174 VFS 布局漂移导致假 FAIL、#184 StickC 系列 frame 断言与 fixture 自相矛盾、#185 Unit batch runner 硬编码 pre-Unit runtime/证据 SHA 不一致。
 
 QEMU 模型/输入缺口（5）：#175 PaperColor ED2208 partial-window、#176 CoreS3 AXP2101 充电状态机、#179 AtomS3 面板方向/反色、#180 PaperColor v2.5.4 启动卡住、#181 Dial v2.5.4 启动卡住。
 
