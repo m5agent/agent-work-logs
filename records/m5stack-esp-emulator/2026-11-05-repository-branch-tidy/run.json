@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "M5Stack emulator repository tidy: branch, worktree, tag and stash inventory",
+  "source": {
+    "issue": "none: direct user request to tidy the repository branches",
+    "pull_request": "none",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "84b4f493"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; git and GitHub CLI; no guest runtime, browser or physical hardware",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "local_merged_branch_cleanup",
+      "status": "PASS",
+      "values": "70 merged branches deleted with git branch -d; 89 branches were merged into main before cleanup"
+    },
+    {
+      "name": "local_obsolete_unmerged_cleanup",
+      "status": "PASS",
+      "values": "9 branches deleted with -D after git cherry equivalence, superseding commit (786a4e4d), or merged PR #80/#166 evidence"
+    },
+    {
+      "name": "remote_branch_cleanup",
+      "status": "PASS",
+      "values": "25 non-main remote branches deleted; git ls-remote --heads origin shows only main"
+    },
+    {
+      "name": "worktree_prune",
+      "status": "PASS",
+      "values": "4 stale gitdir records pruned; 2 old clean detached worktrees under the temp directory removed; 31 -> 25 worktree entries"
+    },
+    {
+      "name": "attic_archive",
+      "status": "PASS",
+      "values": "attic/local-history (21 commits) and attic/units26-fix2 (1 commit) retained as local archival refs"
+    },
+    {
+      "name": "tags_and_stash",
+      "status": "PASS",
+      "values": "12 tags kept; 1 WIP stash retained without destructive handling"
+    },
+    {
+      "name": "generated_contract_checks",
+      "status": "PASS",
+      "values": "PROJECT_SNAPSHOT_OK, RUNTIME_COVERAGE_OK, PERIPHERAL_CATALOG_OK, QEMU_PROFILES_OK"
+    },
+    {
+      "name": "tracked_tree",
+      "status": "PASS",
+      "values": "git status clean; main still 84b4f493"
+    },
+    {
+      "name": "external_worktree_branch_cleanup",
+      "status": "NOT RUN",
+      "reason": "23 remaining local branches are checked out in external codex/sibling workspaces; retiring those workspaces is out of scope for this pass."
+    },
+    {
+      "name": "git_gc_and_stash_drop",
+      "status": "NOT RUN",
+      "reason": "Object packages are shared by many worktrees and mostly reachable from main; WIP stash kept for human review."
+    }
+  ],
+  "evidence": [
+    "evidence/audit-summary.json",
+    "evidence/remote_after.txt",
+    "evidence/local_after.txt",
+    "evidence/deleted_local_merged.txt",
+    "evidence/deleted_local_obsolete.txt",
+    "evidence/deleted_remote.txt",
+    "evidence/kept_worktree_branches.txt",
+    "evidence/worktree-summary.json",
+    "evidence/tags_after.txt"
+  ],
+  "notes": [
+    "No tracked file, service port (8787/8792) or working-tree content was modified.",
+    "Two stale unbound QOM debug sockets from 2026-10-21 were removed; config-temp and config.log were preserved.",
+    "The repository main history retains every merged commit removed at ref level; no commit content was discarded."
+  ]
+}
