@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Latest UIFlow2 firmware full-device / full-peripheral multi-angle validation and issue triage",
+  "source": {
+    "issue": "none: direct user request (pull latest UIFlow2 firmware, test every device/peripheral from latest docs, file issues first)",
+    "pull_request": "none",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "73ed554f"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "All execution used QEMU/Device Service virtual devices; no physical hardware, RF, power, optical, electrical or mechanical validation."
+  },
+  "firmware": {
+    "source": "M5Burner public API and pinned official GitHub releases, fetched 2026-11-05",
+    "devices": 30,
+    "versions": {
+      "v2.5.5": ["cores3", "stackchan", "sticks3", "stopwatch"],
+      "v2.5.4": ["atom-echos3r", "atom-lite", "atom-matrix", "atom-matrix-v11", "atoms3", "atoms3-lite", "atoms3r", "atoms3r-cam", "atoms3r-m12", "atoms3u", "cardputer-adv", "core2", "dial", "nanoc6", "nesso-n1", "papercolor", "papermono", "stamplc", "stickc", "stickc-plus", "stickc-plus-se", "stickc-plus2", "tab5"],
+      "v2.5.4-4MB": ["basic-v27"],
+      "v2.5.4-pinned": ["atom-echo", "atomu"]
+    },
+    "sha256_verified": true
+  },
+  "execution": {
+    "environment": "macOS arm64; agent-owned isolated Device Service instances (multiple ports/state dirs); QEMU Xtensa/C6 canonical runtime sha256 0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068 (some early boot cases on 6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d)",
+    "uiflow_docs": "internal UIFlow2 GitLab project 163 @ 509a67aadb66b16f6c0e684f87fed178982c4686 (v2.5.4, 2026-10-30), read-only",
+    "task_ids": ["task-3", "task-4", "task-5", "task-6", "task-7"],
+    "session_ids": "per-case session ids recorded in ignored .work/uiflow-latest-20261105/*/results.json"
+  },
+  "checks": [
+    {"name": "firmware_fetch_and_sha256", "status": "PASS", "values": "30/30 uiflow2.bin sha256 == sidecar"},
+    {"name": "boot_flash_device_service", "status": "PARTIAL", "values": "19/29 devices PASS in 2 cold rounds; 20 FAIL cases = 10 classic devices known-blocker (qemu-esptool)"},
+    {"name": "device_ui_matrix", "status": "PARTIAL", "values": "11 PASS / 15 FAIL / 4 BLOCKED / 3 NOT RUN; all 15 failures reproduced twice"},
+    {"name": "peripheral_matrix", "status": "PARTIAL", "values": "60 PASS / 8 FAIL out of 68; 8/8 reproduced twice; root causes: ED2208 partial window, AXP2101 charge state, 2 stale expectations"},
+    {"name": "unit_battery", "status": "PARTIAL", "values": "51 catalog Units covered; 42 PASS / 9 FAIL (round2 in progress at record time); 109 NOT RUN (no runnable batch runner/time-box)"},
+    {"name": "docs_driven_tests", "status": "PARTIAL", "values": "25 cases / 135 checks; 19 PASS / 6 BLOCKED(infra); 12 confirmed uiflow-docs mismatches reproduced twice"},
+    {"name": "github_issues_filed", "status": "PASS", "values": "13 issues (#172-#184) with firmware/runtime identities and repro evidence"},
+    {"name": "internal_uiflow_issues_filed", "status": "PASS", "values": "10 new internal UIFlow2 doc issues + 2 evidence comments on existing issues"},
+    {"name": "physical_hardware", "status": "NOT RUN", "reason": "no physical devices; virtual-device results cannot establish RF/power/acoustics/optics/electrics/mechanics"}
+  ],
+  "evidence": [
+    "evidence/coverage-summary.json",
+    "evidence/issue-index.json"
+  ],
+  "notes": [
+    "Latest firmware cache is ignored platform/.cache/firmware; derived VFS-layout adapters and all raw serial/frame/evidence stay in ignored .work/uiflow-latest-20261105/.",
+    "Tracked repo tree untouched; all simulator/tool defects are tracked by GitHub issues #172-#184 for follow-up agents.",
+    "tab5 PASS comes from its checked-in emulator-merged lane, not from the fetched M5Burner v2.5.4 binary; do not transfer it.",
+    "classic ESP32 esptool flashing failed in this environment (esptool 5.6.0, no tracked pin); host-image lane proved guest usable but does not replace flashing acceptance."
+  ]
+}

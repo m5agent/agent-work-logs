@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "validation": "virtual-device validation",
+  "hardware_validation": "NOT RUN",
+  "firmware": {
+    "source": "M5Burner API / official GitHub release, fetched 2026-11-05",
+    "device_count": 30,
+    "versions": {
+      "v2.5.4 (pinned official-github-release)": [
+        "atom-echo",
+        "atomu"
+      ],
+      "v2.5.4": [
+        "atom-echos3r",
+        "atom-lite",
+        "atom-matrix",
+        "atom-matrix-v11",
+        "atoms3",
+        "atoms3-lite",
+        "atoms3r",
+        "atoms3r-cam",
+        "atoms3r-m12",
+        "atoms3u",
+        "cardputer-adv",
+        "core2",
+        "dial",
+        "nanoc6",
+        "nesso-n1",
+        "papercolor",
+        "papermono",
+        "stamplc",
+        "stickc",
+        "stickc-plus",
+        "stickc-plus-se",
+        "stickc-plus2",
+        "tab5"
+      ],
+      "v2.5.4-4MB": [
+        "basic-v27"
+      ],
+      "v2.5.5": [
+        "cores3",
+        "stackchan",
+        "sticks3",
+        "stopwatch"
+      ]
+    },
+    "sha256_verified": true,
+    "matching_manifest": "platform/.cache/firmware/<device>/uiflow2.json resolved_version"
+  },
+  "uiflow_docs": {
+    "repository": "internal UIFlow2 GitLab (project 163)",
+    "commit": "509a67aadb66b16f6c0e684f87fed178982c4686",
+    "version": "v2.5.4 (2026-10-30)"
+  },
+  "scopes": {
+    "boot": {
+      "attempted_devices": 29,
+      "rounds_per_device": 2,
+      "device_PASS": 19,
+      "device_FAIL": 10,
+      "case_results": {
+        "PASS": 38,
+        "FAIL": 20
+      },
+      "not_run": [
+        "tab5 (native lane; M5Burner v2.5.4 not executed)",
+        "m5stick (no latest UIFlow2 build)",
+        "stickt2 (no UIFlow2 build)",
+        "cardputer-zero (Linux image, not UIFlow2)"
+      ],
+      "fail_class": "classic LX6 qemu-esptool ROM-download handshake (known-blocker)"
+    },
+    "device_ui": {
+      "attempted_devices": 31,
+      "case_results": {
+        "FAIL": 15,
+        "BLOCKED": 4,
+        "PASS": 11,
+        "NOT RUN": 3
+      },
+      "blocked": [
+        "atoms3-lite",
+        "atom-lite",
+        "atom-matrix",
+        "atom-matrix-v11 (matrix mode/fixture inconsistency)"
+      ],
+      "not_run": [
+        "m5stick",
+        "stickt2",
+        "cardputer-zero"
+      ],
+      "pass_notes": "tab5 PASS only in its own emulator-merged lane; does not transfer to M5Burner v2.5.4"
+    },
+    "peripherals": {
+      "cases": 68,
+      "case_results": {
+        "FAIL": 8,
+        "PASS": 60
+      },
+      "fail_class": "2 QEMU model gaps (ED2208 partial window, AXP2101 charge-state bits) + 2 stale matrix expectations (PaperColor charging, StickS3 BMI270 axis)"
+    },
+    "units": {
+      "battery_cases": 51,
+      "case_results": {
+        "PASS": 42,
+        "FAIL": 9
+      },
+      "catalog_units_covered": 51,
+      "catalog_units_total": 160,
+      "note": "partial coverage in time-box; remaining 109 have no runnable batch runner in this pass"
+    },
+    "docs": {
+      "cases": 25,
+      "case_results": {
+        "PASS": 19,
+        "BLOCKED": 6
+      },
+      "checks": 135,
+      "mismatches": 14,
+      "confirmed_uiflow_docs": 12,
+      "blocked_infra": 2,
+      "note": "12 doc mismatches all reproduced twice and filed to internal UIFlow2 tracker"
+    }
+  },
+  "filed_issues": {
+    "github": [
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184
+    ],
+    "internal_uiflow_gitlab_new": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "internal_uiflow_gitlab_updates": [
+      15,
+      16
+    ]
+  },
+  "limits": [
+    "virtual-device only; no physical hardware, RF, power, optical, electrical or mechanical validation",
+    "boot NOT RUN 4 devices; matrix BLOCKED 4; units 109/160 not covered in this time-box",
+    "tab5 PASS lane uses .work emulator merged image/ELF, not the M5Burner v2.5.4 binary",
+    "host-side stale QEMU cache (matrix-pinned build) was substituted by canonical goals build for some console machines; recorded per case"
+  ]
+}
