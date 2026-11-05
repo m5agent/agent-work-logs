@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "draft": false,
+  "publishable": true,
+  "title": "PR170 Unit preview and local Preview access delivery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/170",
+    "head_commit": "22001fe1cb6bb44eb2737872e4cc578605e57921",
+    "merge_commit": "84b4f4932a402b77c9688aff7b51a1932ff12be6",
+    "head_and_merge_tree": "3b4b073ee1fe9f2ade55ec64141adf2799e1e7d6",
+    "first_public_validation_record": "https://github.com/m5agent/agent-work-logs/blob/a06e3499f61173db7949c9ff68700b423bbcc3e3/records/esp-emulator/2026-11-05-unit-preview-local-control/report.md"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "online": {
+      "device": "cores3",
+      "firmware_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+      "wasm_sha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+      "site_manifest_sha256": "23ee838732c99369d2b0b852b4430c46eee48236ed768a88d9374a5969cc8b2c",
+      "runtime_manifest_sha256": "fa6b56048ec91d100cb4f2a15088ce77e313bd2e6e8ba083229826b258297c51"
+    },
+    "scope": "One independent online CoreS3 acceptance; native and added-Unit execution remain separate."
+  },
+  "execution": {
+    "environment": "Merged source, published artifact readback, Pages HTTPS and authorized existing-service reload.",
+    "task_id": null,
+    "session_id": null,
+    "delivery_status": "COMPLETE_SCOPED"
+  },
+  "checks": [
+    {
+      "name": "PR-merge",
+      "status": "PASS"
+    },
+    {
+      "name": "four-CI-checks",
+      "status": "PASS"
+    },
+    {
+      "name": "release-full-download-readback",
+      "status": "PASS"
+    },
+    {
+      "name": "Pages-deployment",
+      "status": "PASS"
+    },
+    {
+      "name": "actual-HTTPS-manifest",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTPS-static-all-assets",
+      "status": "PASS",
+      "assets": 2134,
+      "bytes": 251980691
+    },
+    {
+      "name": "actual-local-page-readback",
+      "status": "PASS",
+      "checks": 13,
+      "scope": "Read-only host UI/HTTP; no user-service guest."
+    },
+    {
+      "name": "HTTPS-CoreS3-guest",
+      "status": "PASS",
+      "checks": 65
+    },
+    {
+      "name": "postmerge-main-CI",
+      "status": "PASS"
+    },
+    {
+      "name": "actual-local-HTTP-static-bytes",
+      "status": "PASS",
+      "scope": "Three served static files match merged source; no guest."
+    }
+  ],
+  "evidence": [
+    "evidence/delivery-summary.json",
+    "evidence/https-static-summary.json",
+    "evidence/https-browser-summary.json",
+    "evidence/actual-local-host-ui-summary.json"
+  ],
+  "notes": [
+    "No physical hardware, RF, electrical or performance claim.",
+    "No new all-device matrix or other Unit runtime acceptance.",
+    "The existing service HTTP/UI readback will not substitute for a guest execution there.",
+    "Earlier native observer failures and first inventory metadata failure remain in the original record."
+  ],
+  "delivery_status": "COMPLETE_SCOPED"
+}

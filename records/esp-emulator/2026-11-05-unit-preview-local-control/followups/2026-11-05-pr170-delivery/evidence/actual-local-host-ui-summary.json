@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "derived-redacted-actual-local-service-host-UI-observation",
+  "status": "PASS",
+  "evidence_level": "host HTTP/UI observation; no guest validation",
+  "source_commit": "84b4f4932a402b77c9688aff7b51a1932ff12be6",
+  "original_summary": {
+    "bytes": 3762,
+    "sha256": "bbdd09f0b8fd244f49b35229d80c2bf4c02480b2407c17f031242264deac3b07",
+    "original_committed": false
+  },
+  "redaction": "Derived necessary HTTP, source identity and UI facts from a private local observation; omit endpoint, service configuration, process identifiers and screenshots.",
+  "checks": [
+    {
+      "name": "exact-user-source-url-http200",
+      "ok": true
+    },
+    {
+      "name": "unified-workbench-heading",
+      "ok": true
+    },
+    {
+      "name": "served-byte-equality-platform/web/index.html",
+      "ok": true
+    },
+    {
+      "name": "served-byte-equality-platform/web/public.js",
+      "ok": true
+    },
+    {
+      "name": "served-byte-equality-platform/web/public.css",
+      "ok": true
+    },
+    {
+      "name": "pir-independent-real-model-canvas",
+      "ok": true
+    },
+    {
+      "name": "add-to-current-device-still-visible",
+      "ok": true
+    },
+    {
+      "name": "token-help-local-and-configured-service-boundary",
+      "ok": true
+    },
+    {
+      "name": "token-field-empty",
+      "ok": true
+    },
+    {
+      "name": "real-browser-preview-get-no-bearer-http200",
+      "ok": true
+    },
+    {
+      "name": "service-remains-with-zero-sessions-leases",
+      "ok": true
+    },
+    {
+      "name": "read-only-no-mutation-no-guest-runtime",
+      "ok": true
+    },
+    {
+      "name": "no-browser-page-errors",
+      "ok": true
+    }
+  ],
+  "checks_passed": 13,
+  "served_static_bytes": {
+    "platform/web/index.html": {
+      "status": 200,
+      "bytes": 17432,
+      "sha256": "e1b26f20a954a315a761b5d17317fa48949e262e5ffd51d02c43da4709a1aac6"
+    },
+    "platform/web/public.js": {
+      "status": 200,
+      "bytes": 73534,
+      "sha256": "41dda90f74fa3a944eb31d573733d8b39859f9e50fedb04b9a9960c5956b927f"
+    },
+    "platform/web/public.css": {
+      "status": 200,
+      "bytes": 25509,
+      "sha256": "b0649645211f00623f3698b8ec862228130c189502b3c74d0d129bb4c1e924a9"
+    }
+  },
+  "title": "M5Stack Simulator · 设备编程工作台",
+  "heading": "连接、编程、运行，在一个工作台。",
+  "independent_preview": {
+    "unit": "pir",
+    "real_model_source": "m5stack-models",
+    "visual_only": true,
+    "visible_canvas": true,
+    "canvas_width": 836,
+    "canvas_height": 278,
+    "add_button_visible_enabled": true,
+    "add_button_clicked": false
+  },
+  "authentication_copy": "本机同源连接无需 Token；服务已配置 Token 时请填写。远程连接使用服务提供的 Token。",
+  "actual_browser_preview_GET": {
+    "status": 200,
+    "authorization_present": false,
+    "previews": 0
+  },
+  "read_only": {
+    "API_writes": 0,
+    "guest_created": 0,
+    "active_sessions": 0,
+    "active_leases": 0,
+    "WASM_requests": 0,
+    "Workers": 0,
+    "iframes": 0,
+    "page_errors": []
+  },
+  "cleanup": {
+    "browser_closed": true
+  },
+  "limits": [
+    "Only host HTTP, UI and independent visual preview were observed on the actual service.",
+    "No Run, Start or Add mutation and no guest were executed here.",
+    "The separate isolated native14 evidence remains the actual guest proof for the tokenless Preview programming path."
+  ]
+}
