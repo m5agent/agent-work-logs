@@ -1,5 +1,7 @@
 # 存储保留与普通完整 clone 审计
 
+> 可用性更新（2026-11-06）：后续按用户要求，本文所述24个已结案全量冷包已删除，仅保留经校验的小证据及原索引/证明；这24包的完整原始材料现在无法恢复。此前完整恢复PASS是当时的执行结果。独立work-image冷包仍保留，详见[后续清理记录](../2026-11-06-completed-raw-retirement/)和[当前可用性摘要](evidence/current-raw-availability-summary.json)。
+
 - 日期：`2026-11-06`
 - 结果：`PASS`（主机存储与 clone 审计）；24个目录及旧磁盘的冷归档已完成。
 - 工作类型：`infra_baseline` / `report`。

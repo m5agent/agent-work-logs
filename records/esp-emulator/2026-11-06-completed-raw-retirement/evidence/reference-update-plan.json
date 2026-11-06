@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "reference-availability-update-plan",
+  "status": "APPLIED: dated availability notices in the current record entry points; immutable historical execution proof unchanged.",
+  "method": "Append a dated availability followup in a new commit. Keep prior full-restore PASS, counts and fixed commit links as historical facts; distinguish them from present raw availability.",
+  "must_update": [
+    {
+      "location": "prior storage record README.md, conclusion and final recovery sentence",
+      "reason": "Current wording says key bytes remain fully cold-recoverable.",
+      "action": "Prepend/append dated notice linking this followup by full public commit SHA: 24 bulk payloads retired; complete raw audit unavailable; selected samples/hash/proofs retained; work-image exception stays recoverable."
+    },
+    {
+      "location": "prior storage report.md, recovery section and final result",
+      "reason": "Generic restore instructions can be read as applying to the now-retired 24 packages.",
+      "action": "Add dated scope note; retain original command/results as past evidence. Current restore remains applicable only to the explicitly kept work image or other independently available material."
+    },
+    {
+      "location": "prior storage run.json and archive-batches summary current availability",
+      "reason": "Prior PASS is execution integrity, not an indefinite storage guarantee.",
+      "action": "Prefer a new availability/tombstone sidecar and link it from README rather than overwrite hashed execution proofs. Add raw_retired/as_of/full_raw_audit fields in new followup; do not change prior PASS to FAIL."
+    },
+    {
+      "location": "work-log root README.md and records/README.md indexes",
+      "reason": "Readers need the newest retention state from the entry index.",
+      "action": "Add this followup row and a short forward pointer on the old row; do not alter historical reclaimed totals."
+    },
+    {
+      "location": "private restore guides and 24 scope placeholders",
+      "reason": "They currently instruct restoration from payloads that will no longer exist.",
+      "action": "Add RAW_RETIRED tombstone/notice with archive SHA, retirement time and retained sample mapping. Preserve original indexes/manifests/proofs; do not leave a current full-restore promise."
+    },
+    {
+      "location": "earlier latest-firmware full-sweep/round2 work-log references to ignored service raw material",
+      "reason": "Some references include the 14 service stores; other run outputs may remain independently available.",
+      "action": "Append narrowly scoped availability notice for the 14 retired service packages. Do not say all latest-run evidence is gone or all historical audit unavailable."
+    }
+  ],
+  "source_guidance_read_only": [
+    {
+      "location": "docs/evidence-retention.md",
+      "finding": "Allows external raw retention periods and requires missing attachments/source blobs to fail opt-in audit; ordinary checkout CI is independent of private raw.",
+      "action": "No source edit in this task. A future generic availability note may link the followup, but no test relaxation."
+    },
+    {
+      "location": "platform/units/runtime-profiles.json and historical evidence verifiers",
+      "finding": "Fixed external history/commit indexes can refer to independent material such as the older public historical commit.",
+      "action": "Do not mass-rewrite archive_url/evidence_commit or convert absent retired local raw into PASS; availability must be scoped by exact matching archive SHA."
+    }
+  ],
+  "public_notice_template": "后续可用性更新（2026-11-06）：此前完整恢复验证是当时执行结果。按后续最小保留决策，这24个已结案本地bulk raw包已退役；完整历史raw审计/恢复为NOT AVAILABLE，摘要、SHA、manifest/proof及已核对关键样本保留。当前#188、进行中目标、源码/canonical及独立五probe work image不在此退役范围。详情见新的完整commit记录链接。",
+  "notes": "Private24-scope placeholders and current restore guides updated; prior record README/report plus current availability sidecar and campaign notice are included in the new commit. Full public commit is the delivered record permalink."
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "infra_baseline",
+  "title": "Minimal retained evidence and completed bulk raw retirement",
+  "overall_status": "PASS",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ea6a553b702c636b10692665c475341b178cb662",
+    "product_source_changed": false,
+    "previous_public_record_commit": "9f8dd7eaba6bd621b74416cb8b20047cccc17d6d",
+    "record_path": "records/esp-emulator/2026-11-06-completed-raw-retirement/"
+  },
+  "hardware": {
+    "status": "NOT RUN"
+  },
+  "firmware": {
+    "guest_execution": "NOT RUN",
+    "protected_inputs": "Current issue188, original firmware/canonical runtime, and independent five-probe work-image archive retained."
+  },
+  "execution": {
+    "status": "COMPLETE",
+    "validation_class": "Host retention/accounting and sample-byte validation, not a new firmware test",
+    "retention_transition": "24 complete local bulk payloads retired; complete historical raw audit for those packages NOT AVAILABLE, selected samples and metadata retained.",
+    "authorization": "User requested further cleanup while preserving the previously selected ongoing task.",
+    "conservative_net_reclaimed_bytes": 16312905728,
+    "conservative_net_reclaimed_GiB": 15.192577362060547
+  },
+  "checks": [
+    {
+      "name": "retention policy/reference inspection",
+      "status": "REVIEW",
+      "evidence": "evidence/reference-update-plan.json"
+    },
+    {
+      "name": "24 bulk payload retirement and actual reclaimed bytes",
+      "status": "PASS",
+      "detail": "24/24 production completion, zero validation failures; fresh last-link allocated accounting, with all new persistent costs deducted.",
+      "evidence": "evidence/retirement-summary.json"
+    },
+    {
+      "name": "minimal keeper extraction and hashes",
+      "status": "PASS",
+      "detail": "36958 selected paths fully rehashed; 25980 unique content objects; eleven examples additionally rehashed by reviewer.",
+      "evidence": "evidence/retained-samples-summary.json"
+    },
+    {
+      "name": "protected work-image/current source/goal preservation",
+      "status": "REVIEW",
+      "detail": "Exact unlink whitelist excludes these; work-image archive existence/mode/size checked, full protected image/source tree rehash not repeated in this review."
+    },
+    {
+      "name": "complete historical raw audit after retirement",
+      "status": "NOT RUN",
+      "availability_after_retirement": "NOT AVAILABLE for the complete retired 24 packages; no synthetic replacement from summaries."
+    },
+    {
+      "name": "guest/browser/hardware",
+      "status": "NOT RUN",
+      "reason": "No product behavior change or guest execution in retention task."
+    },
+    {
+      "name": "generated build caches and protected source/artifact preservation",
+      "status": "PASS",
+      "evidence": "evidence/build-cache-summary.json"
+    },
+    {
+      "name": "project footprint, clean source and unchanged refs/worktree metadata",
+      "status": "PASS",
+      "evidence": "evidence/final-space-summary.json"
+    }
+  ],
+  "evidence": [
+    "evidence/retirement-summary.json",
+    "evidence/retained-samples-summary.json",
+    "evidence/reference-update-plan.json",
+    "evidence/public-retirement-summary.json",
+    "evidence/build-cache-summary.json",
+    "evidence/final-space-summary.json"
+  ],
+  "notes": [
+    "Prior full restoration verification remains a historical PASS; future availability changes via append-only followup.",
+    "Actual archive-delete bytes must not reuse former expanded-data bytes or old cleanup totals.",
+    "The 2.27 GiB work-image archive is explicitly kept because it is input to five probes.",
+    "Additional total conservative net recovery16,312,905,728 B (15.192577362060547GiB), including24-bulk retirement and proven build caches; prior round not counted again."
+  ]
+}
