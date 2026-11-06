@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-06 | OpenViking | v0.5.3 会话记忆抽取恢复与幂等重放 | `PARTIAL`（单归档10条/5项抽取及重跑PASS；全历史/独立召回延迟NOT RUN） | [查看](records/volcengine-openviking/2026-11-06-session-extraction-recovery/) |
 | 2026-11-06 | ESP Emulator | 本地虚拟设备实时展示空间 | `PASS`（自动native31项/12真实并发、64逻辑稳定、宿主2035及重启通过；物理/WASM/性能NOT RUN） | [查看](records/esp-emulator/2026-11-06-local-observatory/) |
 | 2026-11-06 | ESP Emulator | 实验数据清理、快照共享与删除条件 | `PASS`（24旧包删除；卷空闲实测+30.64GiB；目录87.56GiB；旧任务保留） | [查看](records/esp-emulator/2026-11-06-completed-raw-retirement/) |
 | 2026-11-06 | ESP Emulator | 冷归档清理与普通clone实测 | `PASS`（本轮约41.34GiB回收；完整clone371.55MiB；进行中任务保留） | [查看](records/esp-emulator/2026-11-06-storage-and-clone-audit/) |

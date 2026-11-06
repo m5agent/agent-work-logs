@@ -1,0 +1,34 @@
+{
+  "classification": "summary",
+  "health": {
+    "http_status": 200,
+    "body": {
+      "status": "ok",
+      "healthy": true,
+      "version": "0.5.3",
+      "auth_mode": "api_key"
+    }
+  },
+  "readiness": {
+    "http_status": 200,
+    "body": {
+      "status": "ready",
+      "checks": {
+        "agfs": {
+          "status": "ok",
+          "checks": {
+            "filesystem": "ok"
+          }
+        },
+        "vectordb": "ok",
+        "api_key_manager": "ok",
+        "embedding": "ok",
+        "ollama": "not_configured"
+      }
+    }
+  },
+  "authenticated_system_status_http": 200,
+  "authenticated_memory_listing_http": 200,
+  "mcp_discovered_tools": 24,
+  "vlm_doctor_boundary": "The VLM doctor check is configuration-only. Health/readiness, actual model tool/result round-trip, session extraction, and canonical target readback have separate runtime evidence. Registered semantic find checked previously known memories; exact recovered targets were read back separately."
+}

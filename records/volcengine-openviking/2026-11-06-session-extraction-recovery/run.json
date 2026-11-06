@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "timezone": "Asia/Shanghai",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "OpenViking v0.5.3 scoped session extraction recovery",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/volcengine/OpenViking",
+    "base_commit": "",
+    "version": "v0.5.3",
+    "install_requirement": "openviking[bot]==0.5.3"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Pinned OpenViking release; isolated and live software service execution",
+    "task_id": "task-A (alias)",
+    "session_id": "recovery-session-A (alias)",
+    "validated_at": "2026-11-06T07:51:09.534418+00:00",
+    "scope": "One selected failed ten-message archive",
+    "source_sha256": "f896ffb3f8a0edaf459765bb638d10f5dec059f4d3ec2312d5e87d2e2e41cb2d"
+  },
+  "checks": [
+    {
+      "name": "optional_supersedes_protocol",
+      "status": "PASS",
+      "variants": 3,
+      "evidence": "evidence/extraction-protocol-regression-summary.json"
+    },
+    {
+      "name": "required_field_controls",
+      "status": "PASS",
+      "variants": 2,
+      "evidence": "evidence/extraction-protocol-regression-summary.json"
+    },
+    {
+      "name": "working_memory_policy",
+      "status": "PASS",
+      "variants": 4,
+      "evidence": "evidence/extraction-protocol-regression-summary.json"
+    },
+    {
+      "name": "codex_vlm_function_call_result_roundtrip",
+      "status": "PASS",
+      "requests": 2,
+      "elapsed_seconds": 2.026,
+      "evidence": "evidence/codex-vlm-roundtrip-summary.json"
+    },
+    {
+      "name": "isolated_session_extraction",
+      "status": "PASS",
+      "messages": 10,
+      "memory_write": 1,
+      "memory_edit": 2,
+      "evidence": "evidence/isolated-recovery-summary.json"
+    },
+    {
+      "name": "live_session_extraction",
+      "status": "PASS",
+      "messages": 10,
+      "memory_write": 3,
+      "memory_edit": 2,
+      "commit_count": 1,
+      "evidence": "evidence/replay-completion-summary.json"
+    },
+    {
+      "name": "live_recovery_idempotence",
+      "status": "PASS",
+      "messages": 10,
+      "commit_count": 1,
+      "evidence": "evidence/replay-idempotence-summary.json"
+    },
+    {
+      "name": "exact_canonical_target_readback",
+      "status": "PASS",
+      "added_project_peer_files": 3,
+      "updated_global_user_memory_files": 2,
+      "all_five_api_content_matches_local_sha256": true,
+      "all_five_post_change_values_match": true,
+      "evidence": "evidence/canonical-readback-summary.json"
+    },
+    {
+      "name": "pre_recovery_migration_data_integrity",
+      "status": "PASS",
+      "original_markdown_files": 7582,
+      "missing": 0,
+      "changed": 0,
+      "evidence": "evidence/baseline-data-integrity-summary.json"
+    },
+    {
+      "name": "authenticated_readiness_and_mcp_discovery",
+      "status": "PASS",
+      "tools": 24,
+      "evidence": "evidence/service-readiness-summary.json"
+    },
+    {
+      "name": "registered_mcp_health_and_find",
+      "status": "PASS",
+      "find_returned_items": 2,
+      "evidence": "evidence/mcp-execution-summary.json"
+    },
+    {
+      "name": "final_successful_run_error_log",
+      "status": "PASS",
+      "error_level_lines": 0,
+      "evidence": "evidence/final-runtime-log-summary.json",
+      "boundary": "Excludes earlier missing-extra startup failure"
+    },
+    {
+      "name": "bulk_historical_recovery",
+      "status": "NOT RUN",
+      "reason": "One selected failed archive only"
+    },
+    {
+      "name": "recall_startup_latency",
+      "status": "NOT RUN",
+      "reason": "Separate recall-compression path unchanged"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "reason": "Actual software-service path tested"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "reason": "Actual software-service path tested"
+    }
+  ],
+  "evidence": [
+    "evidence/baseline-data-integrity-summary.json",
+    "evidence/canonical-readback-summary.json",
+    "evidence/codex-vlm-roundtrip-summary.json",
+    "evidence/extraction-protocol-regression-summary.json",
+    "evidence/final-runtime-log-summary.json",
+    "evidence/isolated-recovery-summary.json",
+    "evidence/mcp-execution-summary.json",
+    "evidence/provenance-summary.json",
+    "evidence/replay-completion-summary.json",
+    "evidence/replay-idempotence-summary.json",
+    "evidence/runtime-recovery-summary.json",
+    "evidence/service-readiness-summary.json"
+  ],
+  "notes": [
+    "No custom upstream source patch.",
+    "Preserved existing provider connection, embedding, and unrelated server settings.",
+    "Initial installation omitted bot optional extra; corrected by exact final requirement.",
+    "The active conversation was excluded from recovery; no capture-loss conclusion is implied.",
+    "The data-integrity baseline precedes intended extraction writes.",
+    "Registered MCP find checked known memories and is not evidence that the recovered write targets were read back.",
+    "Write/edit counters were independently checked against canonical files: three added project-peer files, two updated global user-memory files.",
+    "The 7,582-file integrity baseline covers the global user-memory subtree only, before recovery writes."
+  ]
+}
