@@ -1,0 +1,52 @@
+{
+  "review_status": "PASS",
+  "must_fix_findings": [],
+  "review_scope": [
+    "tools/knowledge/extract_pdf-csv.py",
+    "tools/knowledge/tests/test_pdf_incremental.py",
+    "tools/knowledge/index_link_rules.json"
+  ],
+  "normalization": {
+    "scope": "exact m5stack/M5-Schematic master/Core/IIC_IP5306_REG_V1.4.pdf alias after GitHub blob-to-raw transformation",
+    "canonical_pdf_byte_identity_evidence": "duplicate-and-link-summary.json",
+    "pdf_bytes": 659220,
+    "pdf_sha256": "38f0f94adb2af36ea33242337ffe4e1bb0f51035fb201396a0d60f367b5bb06b",
+    "corpus_pdf_urls": 1098,
+    "corpus_unique_urls_with_changed_normalization": 1,
+    "corpus_idempotence": true,
+    "different_owner_ref_filename_preserved": true,
+    "dead_url_test_correction": "I2C was already the excluded misspelling; IIC exists and is now canonicalized"
+  },
+  "tests": {
+    "pdf_incremental": "8/8 PASS; offline; no cloud update"
+  },
+  "index": {
+    "prior_mappings_preserved": true,
+    "exclusion_list_preserved": true,
+    "added_overrides": [
+      {
+        "object_key": "m5stack-doc/github/uiflow-micropython/2.5-base-library.md",
+        "url": "https://uiflow-micropython.readthedocs.io/en/latest/base/index.html",
+        "status": 200,
+        "bytes": 12132,
+        "sha256": "b44bc4c2318f94fc40f7872303fcf90162eeb0f2e9e4b11a4a6e61651448d56d",
+        "title": "Base &mdash; UIFlow2 Programming Guide master documentation"
+      },
+      {
+        "object_key": "m5stack-doc/schematic/CoreMatrix.md",
+        "url": "https://docs.m5stack.com/zh_CN/core/CoreMatrix",
+        "status": 200,
+        "bytes": 148245,
+        "sha256": "08baf26a1a3f75e060581ce9a8c5dc2b45a9581d15b18ca7d34340847f15c0ff",
+        "title": "m5-docs"
+      }
+    ],
+    "base_library_fallback": "official Base API index is a relevant topic-level destination; DeepWiki page itself returned 429, so it is not asserted available",
+    "corematrix_fallback": "validated Chinese product page for the matching product schematic"
+  },
+  "boundaries": [
+    "No registry/cache modifications or cloud-update execution.",
+    "PDF equality uses root collected HTTP/hash evidence; reviewer independently checked code, corpus differential, offline tests, mapping resolution and live public index-link targets.",
+    "This review verifies normalization and index behavior, not device behavior or final knowledge-base retrieval quality."
+  ]
+}

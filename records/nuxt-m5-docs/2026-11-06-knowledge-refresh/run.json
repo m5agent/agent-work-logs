@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "service_debug",
+  "overall_status": "PASS",
+  "title": "Incremental documentation-source and dual knowledge-base refresh",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "c06d36fcf45e30c99d89c19dca991a41b975e216",
+    "commit": "8513fb4e80226ccc5bb0fc03dd6e05d2cf225129"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "finished_at": "2026-11-06T16:22:09.111396+08:00",
+    "environment": "Python virtual environment; existing ingestion clients; private endpoints omitted",
+    "validation_type": "service-path validation"
+  },
+  "checks": [
+    {
+      "name": "all_source_refresh",
+      "status": "PASS"
+    },
+    {
+      "name": "huoshan_remote_coverage_and_readiness",
+      "status": "PASS",
+      "csv": 3231,
+      "pdf_references": 467
+    },
+    {
+      "name": "csv_source_readback",
+      "status": "PASS",
+      "checked": 212
+    },
+    {
+      "name": "esp_changed_objects_and_index_readback",
+      "status": "PASS",
+      "checked": 198,
+      "index_entries": 2920
+    },
+    {
+      "name": "incremental_convergence",
+      "status": "PASS"
+    },
+    {
+      "name": "knowledge_tools_tests",
+      "status": "PASS",
+      "passed": 16
+    },
+    {
+      "name": "schematic_tests",
+      "status": "PASS",
+      "passed": 22
+    },
+    {
+      "name": "historical_schematic_full_revalidation",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "online_chatbot_answers",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "source_delivery",
+      "status": "PASS",
+      "commit": "8513fb4e80226ccc5bb0fc03dd6e05d2cf225129"
+    },
+    {
+      "name": "archive_format_redaction_and_independent_review",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/sources-summary.json",
+    "evidence/huoshan-summary.json",
+    "evidence/esp-summary.json",
+    "evidence/checks-summary.json",
+    "evidence/execution-log-digests-summary.json"
+  ],
+  "notes": [
+    "Public summaries omit credentials, private endpoints, host paths, service request/document identifiers and raw document bodies.",
+    "The successful upload counter alone failed the first readback. Recovery completed and final independent coverage is complete.",
+    "No upstream source-repository push or online answer acceptance is claimed."
+  ]
+}

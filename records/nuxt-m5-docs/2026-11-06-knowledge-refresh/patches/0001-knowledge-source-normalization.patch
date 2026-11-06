@@ -1,0 +1,57 @@
+diff --git a/tools/knowledge/extract_pdf-csv.py b/tools/knowledge/extract_pdf-csv.py
+index 0195d203d..3918884b9 100644
+--- a/tools/knowledge/extract_pdf-csv.py
++++ b/tools/knowledge/extract_pdf-csv.py
+@@ -20,7 +20,12 @@ def normalize_pdf_url(url):
+     )
+     if github_blob:
+         owner, repo, ref, path = github_blob.groups()
+-        return f"https://raw.githubusercontent.com/{owner}/{repo}/{ref}/{path}"
++        url = f"https://raw.githubusercontent.com/{owner}/{repo}/{ref}/{path}"
++
++    # These published copies are byte-identical. Keep one URL so references
++    # merge before registration instead of hitting the service's content dedup.
++    if url == "https://raw.githubusercontent.com/m5stack/M5-Schematic/master/Core/IIC_IP5306_REG_V1.4.pdf":
++        return "https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/datasheet/core/IIC_IP5306_REG_V1.4_cn.pdf"
+ 
+     return url.replace("/UIFlow1-Book-zh_cn.pdf", "/UIFlow-Book-zh_cn.pdf")
+ 
+diff --git a/tools/knowledge/index_link_rules.json b/tools/knowledge/index_link_rules.json
+index 7f741c6db..531cfce58 100644
+--- a/tools/knowledge/index_link_rules.json
++++ b/tools/knowledge/index_link_rules.json
+@@ -646,6 +646,8 @@
+     "m5stack-doc/schematic/Unit BMM350.md": "https://docs.m5stack.com/en/unit/Unit_BMM350",
+     "m5stack-doc/schematic/Unit DoF10.md": "https://docs.m5stack.com/en/unit/Unit_DoF10",
+     "m5stack-doc/schematic/Unit DoF6.md": "https://docs.m5stack.com/en/unit/Unit_DoF6",
+-    "m5stack-doc/schematic/Unit DoF9.md": "https://docs.m5stack.com/en/unit/Unit_DoF9"
++    "m5stack-doc/schematic/Unit DoF9.md": "https://docs.m5stack.com/en/unit/Unit_DoF9",
++    "m5stack-doc/github/uiflow-micropython/2.5-base-library.md": "https://uiflow-micropython.readthedocs.io/en/latest/base/index.html",
++    "m5stack-doc/schematic/CoreMatrix.md": "https://docs.m5stack.com/zh_CN/core/CoreMatrix"
+   }
+ }
+diff --git a/tools/knowledge/tests/test_pdf_incremental.py b/tools/knowledge/tests/test_pdf_incremental.py
+index 5a4054a0b..f8b04b974 100644
+--- a/tools/knowledge/tests/test_pdf_incremental.py
++++ b/tools/knowledge/tests/test_pdf_incremental.py
+@@ -40,9 +40,19 @@ class PdfUrlNormalizationTests(unittest.TestCase):
+         )
+ 
+     def test_known_dead_pdf_is_excluded(self):
+-        url = "https://github.com/m5stack/M5-Schematic/blob/master/Core/IIC_IP5306_REG_V1.4.pdf"
++        url = "https://github.com/m5stack/M5-Schematic/blob/master/Core/I2C_IP5306_REG_V1.4.pdf"
+         self.assertIsNone(extract_module.normalize_pdf_url(url))
+ 
++    def test_identical_ip5306_copies_use_the_registered_canonical_url(self):
++        canonical = "https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/docs/datasheet/core/IIC_IP5306_REG_V1.4_cn.pdf"
++        for url in (
++            "https://github.com/m5stack/M5-Schematic/blob/master/Core/IIC_IP5306_REG_V1.4.pdf",
++            "https://raw.githubusercontent.com/m5stack/M5-Schematic/master/Core/IIC_IP5306_REG_V1.4.pdf",
++            canonical,
++        ):
++            with self.subTest(url=url):
++                self.assertEqual(extract_module.normalize_pdf_url(url), canonical)
++
+     def test_transformed_uiflow_book_name_is_restored(self):
+         url = "https://example.com/docs/UIFlow1-Book-zh_cn.pdf"
+         self.assertEqual(
