@@ -24,7 +24,11 @@
     "retention_transition": "24 complete local bulk payloads retired; complete historical raw audit for those packages NOT AVAILABLE, selected samples and metadata retained.",
     "authorization": "User requested further cleanup while preserving the previously selected ongoing task.",
     "conservative_net_reclaimed_bytes": 16312905728,
-    "conservative_net_reclaimed_GiB": 15.192577362060547
+    "conservative_net_reclaimed_GiB": 15.192577362060547,
+    "additional_weather_net_reclaimed_bytes": 2684911616,
+    "verified_unlink_net_through_weather_bytes": 18997817344,
+    "cow_volume_available_observed_increase_bytes": 12545949696,
+    "cow_accounting_limit": "Separate observed whole-volume available delta, includes new COW reports and concurrent small unrelated writes; not per-inode exclusive allocation. Do not add a logical duplicate upper bound."
   },
   "checks": [
     {
@@ -68,6 +72,16 @@
       "name": "project footprint, clean source and unchanged refs/worktree metadata",
       "status": "PASS",
       "evidence": "evidence/final-space-summary.json"
+    },
+    {
+      "name": "duplicate weather toolchain payload and download caches",
+      "status": "PASS",
+      "evidence": "evidence/weather-cache-summary.json"
+    },
+    {
+      "name": "unchanged goal snapshot paths/content with isolated COW sharing",
+      "status": "PASS",
+      "evidence": "evidence/cow-snapshot-summary.json"
     }
   ],
   "evidence": [
@@ -78,7 +92,10 @@
     "evidence/build-cache-summary.json",
     "evidence/final-space-summary.json",
     "evidence/deletion-conditions-summary.json",
-    "evidence/unfinished-goal-state-summary.json"
+    "evidence/unfinished-goal-state-summary.json",
+    "evidence/weather-cache-summary.json",
+    "evidence/remaining-allocation-conditions-summary.json",
+    "evidence/cow-snapshot-summary.json"
   ],
   "notes": [
     "Prior full restoration verification remains a historical PASS; future availability changes via append-only followup.",
