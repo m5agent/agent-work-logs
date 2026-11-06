@@ -2,7 +2,7 @@
   "schema_version": 1,
   "date": "2026-11-06",
   "kind": "infra_baseline",
-  "title": "Minimal retained evidence and completed bulk raw retirement",
+  "title": "Experiment retirement, cache reduction, lossless snapshot sharing and deletion exit conditions",
   "overall_status": "PASS",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
@@ -28,7 +28,13 @@
     "additional_weather_net_reclaimed_bytes": 2684911616,
     "verified_unlink_net_through_weather_bytes": 18997817344,
     "cow_volume_available_observed_increase_bytes": 12545949696,
-    "cow_accounting_limit": "Separate observed whole-volume available delta, includes new COW reports and concurrent small unrelated writes; not per-inode exclusive allocation. Do not add a logical duplicate upper bound."
+    "cow_accounting_limit": "Separate observed whole-volume available delta, includes new COW reports and concurrent small unrelated writes; not per-inode exclusive allocation. Do not add a logical duplicate upper bound.",
+    "conservative_unlink_net_reclaimed_bytes": 20402159616,
+    "conservative_unlink_net_reclaimed_GiB": 19.000991821289062,
+    "combined_scope_unlink_net_plus_separate_COW_observation_bytes": 32948109312,
+    "combined_scope_metric_limit": "Sum of accounted unlink net and separate serial COW whole-volume observation; no exclusive physical attribution. Aggregate whole-volume baseline/readback is independently reported.",
+    "whole_volume_available_observed_increase_bytes": 32899719168,
+    "main_directory_du_latest_GiB": 87.55672073364258
   },
   "checks": [
     {
@@ -82,6 +88,16 @@
       "name": "unchanged goal snapshot paths/content with isolated COW sharing",
       "status": "PASS",
       "evidence": "evidence/cow-snapshot-summary.json"
+    },
+    {
+      "name": "default browser SDK alias real compile/link/Node execution and unchanged canonical SDK",
+      "status": "PASS",
+      "evidence": "evidence/browser-sdk-alias-summary.json"
+    },
+    {
+      "name": "followup directory/volume measurements and preserved parallel source edits",
+      "status": "PASS",
+      "evidence": "evidence/followup-final-space-summary.json"
     }
   ],
   "evidence": [
@@ -95,12 +111,14 @@
     "evidence/unfinished-goal-state-summary.json",
     "evidence/weather-cache-summary.json",
     "evidence/remaining-allocation-conditions-summary.json",
-    "evidence/cow-snapshot-summary.json"
+    "evidence/cow-snapshot-summary.json",
+    "evidence/browser-sdk-alias-summary.json",
+    "evidence/followup-final-space-summary.json"
   ],
   "notes": [
     "Prior full restoration verification remains a historical PASS; future availability changes via append-only followup.",
     "Actual archive-delete bytes must not reuse former expanded-data bytes or old cleanup totals.",
     "The 2.27 GiB work-image archive is explicitly kept because it is input to five probes.",
-    "Additional total conservative net recovery16,312,905,728 B (15.192577362060547GiB), including24-bulk retirement and proven build caches; prior round not counted again."
+    "Initial phase net16,312,905,728B; weather net2,684,911,616B; SDK net1,404,342,272B. All unlink net20,402,159,616B (19.000991821289062GiB); COW separate observed12,545,949,696B (11.684326171875GiB). Do not count old expanded bytes, du reductions or candidate maxima again."
   ]
 }

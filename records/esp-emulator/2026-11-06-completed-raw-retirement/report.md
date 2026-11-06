@@ -111,3 +111,21 @@ post-check和journal完成；注入post-check/journal失败均恢复原inode和�
 新增本地审计成本，不重复扣除。并行源码小写入意味着该值是全卷观察，不能声称绝对
 独占归因。goal的du由28,752,596降为28,751,624KiB，仍会把共享extent按路径重复
 计费；不能将27.42GiB路径合计视为独占物理存储，更不能把候选重复上限当实际释放。
+
+## 最后SDK去重与全程终态
+
+保留Emscripten3.1.50、Git pin e2627e265d940db5ea58dffa63e490375bfc92e5 的current SDK。
+确认旧SDK清洁、匹配payload且无活动使用者后，删除18,499个唯一非目录inode，把旧默认
+入口替换为指向current的相对symlink。canonical、临时alias、生产默认alias、最终canonical
+均实际执行emcc编译object、同SDK wasm-ld链接及Node调用，seven()==7。首次reactor/裸链接
+配方缺runtime符号的FAIL保留，两入口同样失败，未伪称SDK回归；修正为不依赖标准runtime
+的小探针后通过。current全部20,442节点hash/stat/link target及159份保护输出不变。
+
+旧SDK释放1,406,853,120B，扣除全部新增2,510,848B审计/脚本成本，净1,404,342,272B
+（1.307896GiB）。临时alias、owned compiler cache和编译中间物已清，未新建大归档。
+
+全部unlink阶段净20,402,159,616B（19.000992GiB）；COW独立卷观察12,545,949,696B
+（11.684326GiB）。两者合计口径为30.685318GiB，绝不再叠加du差额或候选上限。
+独立全程卷baseline/readback空闲增加32,899,719,168B（30.640251GiB），当前153.651203GiB
+可用；目录du106.337440→87.556721GiB。两组数字不同源于共享extent、metadata、并行
+源码小写入与测量时间；不虚构完全独占归因。并行源码编辑保留，HEAD未改变。
