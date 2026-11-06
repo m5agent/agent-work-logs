@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-virtual-device-acceptance-summary",
+  "run": "run-1",
+  "status": "FAIL",
+  "started_at": "2026-11-06T03:21:51.250Z",
+  "completed_at": "2026-11-06T03:23:56.681Z",
+  "evidence_level": "virtual-device validation",
+  "physical_hardware": "NOT RUN",
+  "browser_version": "157.0.8103.38",
+  "source_report": {
+    "sha256": "2b92758651227b017ddd2319409210eef515327ab98e373042e91bffeb177498",
+    "bytes": 104380
+  },
+  "redaction": "Derived allowlist summary. Service endpoints, machine paths, credentials, guest nonce values, raw session/execution/worker/process identifiers, HTTP bodies and screenshots are omitted. This is not raw evidence.",
+  "checks": [
+    {
+      "name": "dedicated-service-starts-empty",
+      "status": "PASS"
+    },
+    {
+      "name": "native-reference-backends-ready",
+      "status": "PASS"
+    }
+  ],
+  "guests": [
+    {
+      "alias": "live-relay",
+      "device_id": "cores3",
+      "runtime": "qemu",
+      "state_at_capture": "running",
+      "firmware_sha256": "700d243ade543627100c76e8b68a2740d2701d6b0801b1262f2642f0512861f7",
+      "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d"
+    },
+    {
+      "alias": "same-model-0",
+      "device_id": "cores3",
+      "runtime": "qemu",
+      "state_at_capture": "running",
+      "firmware_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+      "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d"
+    },
+    {
+      "alias": "same-model-1",
+      "device_id": "cores3",
+      "runtime": "qemu",
+      "state_at_capture": "running",
+      "firmware_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+      "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d"
+    },
+    {
+      "alias": "different-model",
+      "device_id": "atoms3r",
+      "runtime": "qemu",
+      "state_at_capture": "running",
+      "firmware_sha256": "c289f7df74919b0b544e524d0117661e81429e0c3a4bb42623ccdf42200b952e",
+      "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d"
+    }
+  ],
+  "program_source_sha256": "fba03c2a65e1ae4564cfeab30aacb0602d10ba5eb0b21e271496cd6b0b8713d2",
+  "program_marker": "Per-run guest serial nonce; value omitted.",
+  "frames": [],
+  "viewport_observations": [],
+  "model_observations": null,
+  "page_error_count": 0,
+  "display_pressure": {
+    "status": "NOT RUN",
+    "scope": "Logical display fixture only; no 64-guest execution claim."
+  },
+  "source_sha256": {
+    "platform/web/observatory.html": "0f98cfba5a162b5658002fa91485aa6b345d7f0b5aa00658e927d4da8f995ddb",
+    "platform/web/observatory.css": "72939d0ec8e66dee417164572b71fa43115618ec316ad0257cf10622665b61c6",
+    "platform/web/observatory.js": "4997382af44a8d33e871c3dc138cd0fcf6b02b302cf190ec8bf6459a1e5bcc4f",
+    "platform/web/observatory-scene.js": "f4cb1f3f38b5485df90a0ec4865a6c11b52eccf223a909d78a06e0e79547958e",
+    "platform/tools/device_service.py": "6c889fa02852764c3f968877f231c8b6b554216663274ff0a2c86217f60f10ae",
+    "platform/tools/serve.py": "d78110e9498f1c5f3eb9dc0c3cba216f903850ab9cd55a4b61e57f38aad3d1ab",
+    "platform/tools/observation_store.py": "7d45ebc64251afc9c82947512a374954b9d9ae061114715613efa0e7a6de3b05",
+    "platform/tests/test_observatory_browser.mjs": "67f406c2a1324859289de647187a9cb12b6e0bcb660794105b6e995a7fbb4dd6"
+  },
+  "cleanup": [
+    {
+      "alias": "live-relay",
+      "state": "stopped",
+      "mutable_flash_retained": false,
+      "owned_process_gone": true
+    },
+    {
+      "alias": "same-model-0",
+      "state": "stopped",
+      "mutable_flash_retained": false,
+      "owned_process_gone": true
+    },
+    {
+      "alias": "same-model-1",
+      "state": "stopped",
+      "mutable_flash_retained": false,
+      "owned_process_gone": true
+    },
+    {
+      "alias": "different-model",
+      "state": "stopped",
+      "mutable_flash_retained": false,
+      "owned_process_gone": true
+    }
+  ],
+  "failure": {
+    "stage": "native browser observation deadline",
+    "status": "FAIL",
+    "summary": "Observation deadline exceeded before mixed-session discovery was accepted.",
+    "attribution": "Observer transport diagnosis/fix is recorded separately from guest firmware behavior."
+  }
+}

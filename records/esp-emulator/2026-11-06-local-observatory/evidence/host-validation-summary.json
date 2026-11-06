@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-host-validation-summary",
+  "draft": false,
+  "redaction": "Only allowlisted totals, error categories and source-log hashes/lengths are retained; no command output, endpoints, paths or process identifiers.",
+  "attempts": [
+    {
+      "name": "platform-suite-initial",
+      "status": "FAIL",
+      "run": 1968,
+      "failures": 96,
+      "errors": 21,
+      "skipped": 1,
+      "seconds": 188.856,
+      "source_log": {
+        "sha256": "30819355ff2c59cbe30411cd63e1ba0dda4e3b9d7ded782caea5569159c397a1",
+        "bytes": 289735
+      },
+      "attribution": "New observation shutdown/purge callbacks assumed fields absent from existing bare service fixtures. Cleanup failures and mock contamination caused cascading host failures; these totals do not count guest firmware regressions."
+    },
+    {
+      "name": "platform-suite-second",
+      "status": "FAIL",
+      "run": 2035,
+      "failures": 3,
+      "errors": 2,
+      "skipped": 1,
+      "seconds": 231.244,
+      "source_log": {
+        "sha256": "c5e40bab019aee1d7e47678d3de88f6ab6732aef68d930627df70404b5685a0b",
+        "bytes": 70135
+      },
+      "attribution": "API inventory omitted the new operations, document review freshness and generated snapshot were stale, and an existing HTTP test fixture used the default service state directory. These were fixed before the final rerun."
+    },
+    {
+      "name": "observation-contracts",
+      "status": "PASS",
+      "run": 14,
+      "scope": "Host-only journal/lifecycle/auth contracts; overlaps later narrow suites."
+    },
+    {
+      "name": "backend-combination",
+      "status": "PASS",
+      "run": 168,
+      "scope": "Earlier overlapping observation/service/ACL/documentation contracts."
+    },
+    {
+      "name": "shutdown-and-bare-fixtures-after-fix",
+      "status": "PASS",
+      "run": 177,
+      "seconds": 14.792,
+      "source_log": {
+        "sha256": "c2f68b2ab79552cbcdb26bf098bd1a2804fcbf55b00d259060cf1a2f43536900",
+        "bytes": 32803
+      },
+      "scope": "Seven affected host modules, including cancellation, worker ownership, Preview and purge fences."
+    },
+    {
+      "name": "platform-suite-third",
+      "status": "PASS",
+      "run": 2035,
+      "passed": 2034,
+      "skipped": 1,
+      "seconds": 238.674,
+      "source_log": {
+        "sha256": "ed70908bfa6953741b78ad137937853cc07dca79ebcd3cf0f99f6723764ae8f5",
+        "bytes": 51929
+      },
+      "scope": "Pre automatic-tour iteration. The initial compatibility and second metadata/fixture failures were fixed; this is host validation, not additional firmware coverage."
+    }
+  ],
+  "notes": [
+    "Overlapping test totals must not be summed as unique coverage.",
+    "Full backend platform, final automatic Node contracts, final 50 documentation tests, affected validators and exact source identity passed."
+  ],
+  "node_contracts": {
+    "status": "PASS",
+    "command": "npm run --prefix platform/tests test:contracts",
+    "script_count": 32,
+    "source_log": {
+      "sha256": "2da520dfdb9a39d2ea4500c76cb4b68edaa69fe5ea99de0647c0c54267ee38b1",
+      "bytes": 20390
+    },
+    "scope": "Host contracts on the pre automatic-tour iteration; final affected contracts must be reconciled after controller changes."
+  },
+  "automatic_node_contracts": {
+    "status": "PASS",
+    "command": "npm run --prefix platform/tests test:contracts",
+    "script_count": 33,
+    "source_log": {
+      "sha256": "57b053b967617020d134951c270fc04831aead365692c83454cf8205f275534b",
+      "bytes": 20519
+    },
+    "scope": "Final automatic-tour host contracts; firmware evidence remains separate."
+  },
+  "final_documentation": {
+    "first_attempt": {
+      "status": "FAIL",
+      "run": 50,
+      "failures": 1,
+      "seconds": 83.501,
+      "source_log": {
+        "sha256": "205b195d6798c73741264c88f776507515f35bc26eafd3169483452499ed69a7",
+        "bytes": 836
+      },
+      "reason": "Project status exceeded the declared 450-line page budget (458).",
+      "targeted_after_compression": "PASS"
+    },
+    "second_attempt": {
+      "status": "FAIL",
+      "run": 50,
+      "failures": 1,
+      "seconds": 84.911,
+      "source_log": {
+        "sha256": "326d2b951f41c9ed173b014598597c94c91262d746f0ed0b034b675282eeae0e",
+        "bytes": 1258
+      },
+      "reason": "Generated project snapshot was stale after the line-budget edit; refreshed in final delivery commit.",
+      "targeted_after_refresh": "PASS"
+    },
+    "third_attempt": {
+      "status": "PASS",
+      "run": 50,
+      "seconds": 86.783,
+      "source_log": {
+        "sha256": "b2fdd8b08ad384e99bb57ecff8f45e5c1a34cac314c185183ec1798d96f3e63c",
+        "bytes": 150
+      },
+      "scope": "Final complete documentation rerun after both earlier failed attempts."
+    }
+  },
+  "final_source_checks": {
+    "site_tests": {
+      "status": "PASS",
+      "run": 10
+    },
+    "api_inventory": {
+      "status": "PASS",
+      "run": 1
+    },
+    "validators": {
+      "status": "PASS",
+      "count": 3
+    },
+    "scope": {
+      "status": "PASS",
+      "blob_count": 36,
+      "new_evidence_bytes": 66837
+    }
+  }
+}
