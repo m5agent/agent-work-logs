@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "evidence-and-cache-retention-exit-conditions-summary",
+  "policy_source": "Source repository docs/evidence-retention.md; current user preserves the unfinished old verification task.",
+  "completed_experiment_full_raw": {
+    "condition": "Selected conclusions, exact firmware/runtime/source identities, reproduction entry points and relevant first-failure/key samples have been readback-verified; no active consumer requires full raw. User authorizes the loss of full raw recoverability.",
+    "action": "Delete full Flash/source/frame/trace copies; preserve bounded summaries and declared availability status. No indefinite full-raw retention is necessary."
+  },
+  "rebuildable_download_or_build_cache": {
+    "condition": "Exact outputs or identical canonical copies are established; no active open file/producer/consumer; source and unique final artifacts are protected.",
+    "action": "Delete; future use rebuilds or downloads as recorded."
+  },
+  "unfinished_task": {
+    "condition": "Task is explicitly ended/cancelled before deleting unique inputs, queued prepared work or progress. A live observer does not establish active guest execution.",
+    "action": "Protect the current user decision. Byte-preserving COW optimization can retain all original paths and content without cancelling task."
+  },
+  "dirty_source": {
+    "condition": "Changes are committed/pushed or a verified patch and full required untracked assets are safely preserved; working copy is not used.",
+    "action": "Only then retire the redundant checkout; do not delete a dirty SDK just because it is large."
+  },
+  "canonical_runtime_and_disk_chain": {
+    "condition": "No live or planned consumer requires the version/model, or an actually verified equivalent copy exists; all qcow2/backing dependencies accounted for.",
+    "action": "Keep one needed copy, remove proven duplicates; do not unlink a unique backing image in isolation."
+  },
+  "automatic_expiry": "This task does not install a periodic deletion automation. A retention-condition decision is distinct from scheduling destructive cleanup."
+}

@@ -28,6 +28,7 @@
 - [报告](report.md)、[结构化记录](run.json)。
 - [退役汇总](evidence/public-retirement-summary.json)、[24包身份与时间线](evidence/retirement-summary.json)。
 - [选定小样本与哈希](evidence/retained-samples-summary.json)、[引用可用性核查](evidence/reference-update-plan.json)。
+- [删除条件](evidence/deletion-conditions-summary.json)。
 - [构建缓存清理](evidence/build-cache-summary.json)、[最终目录占用与源码保护](evidence/final-space-summary.json)。
 - `patches/`、`code/`：不适用；无产品代码变更。
 
