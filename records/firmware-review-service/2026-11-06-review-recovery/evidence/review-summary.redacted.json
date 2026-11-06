@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "review_id": "<redacted>",
+  "source": {
+    "mode": "saved_snapshot",
+    "firmware_id": "<redacted>",
+    "version_id": "<redacted>",
+    "firmware_name": "Grok Bot MultiFace · StopWatch",
+    "version_name": "0.3.0",
+    "file_name": "saved-firmware.bin",
+    "declared_size": 647664,
+    "actual_size": 647664,
+    "declared_sha256": "0b207ba2d2ba11907bb4a3bc58fb6cd2ecc0a8f0db8e847ac50969fded0d720a",
+    "actual_sha256": "0b207ba2d2ba11907bb4a3bc58fb6cd2ecc0a8f0db8e847ac50969fded0d720a",
+    "hash_and_size_match": true
+  },
+  "review_policy": {
+    "validation": {
+      "input_assertions": {
+        "key_a": {
+          "type": "frame_foreground_change",
+          "region": [
+            60,
+            40,
+            350,
+            330
+          ],
+          "background_colors": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              9,
+              10,
+              9
+            ]
+          ],
+          "minimum_changed_fraction": 0.08,
+          "min_foreground_pixels": 1000
+        },
+        "key_b": {
+          "type": "frame_palette_change",
+          "background_colors": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              9,
+              10,
+              9
+            ]
+          ],
+          "min_foreground_pixels": 1000
+        }
+      }
+    },
+    "content_review_required": true,
+    "execution_required": true,
+    "execution_scope": "virtual-device validation",
+    "network_claim_required": false,
+    "touch_claim_required": true,
+    "button_claim_required": true,
+    "ab_navigation_claim_required": false,
+    "submit_enabled": false
+  },
+  "execution": {
+    "runtime": "qemu",
+    "profile": null,
+    "whole_device": true,
+    "session_id": "<redacted>",
+    "session_id_sha256": "<redacted>",
+    "device_id": "stopwatch",
+    "sku": "C152",
+    "device_code": [
+      "STOPWATCH"
+    ],
+    "features": {
+      "flash": true,
+      "serial": true,
+      "screenshot": true,
+      "input": true,
+      "qom": true,
+      "device_state": true,
+      "storage": false,
+      "network": true,
+      "network_capture": true
+    },
+    "warnings": []
+  },
+  "composed_firmware": {
+    "firmware_id": "<redacted>",
+    "sha256": "f708ad5e7f2b54ed2eb4ae9984cfa893a07088b051993e350f7e2c184baee2b8",
+    "size": 16777216,
+    "source_artifact_sha256": "0b207ba2d2ba11907bb4a3bc58fb6cd2ecc0a8f0db8e847ac50969fded0d720a"
+  },
+  "checks": {
+    "content": {
+      "status": "PASS",
+      "rules_status": "PASS",
+      "reason": "标题、版本、描述、分类和设备字段已检查，未发现违规内容",
+      "codex_status": "PASS",
+      "manual_reason": null,
+      "service_error": null,
+      "attempts": [
+        {
+          "attempt": 1,
+          "ok": true,
+          "error_code": null,
+          "returncode": 0,
+          "model": "gpt-6.1-sol",
+          "provider": "openai",
+          "thread_id": "<redacted>"
+        }
+      ]
+    },
+    "static_firmware": {
+      "status": "PASS",
+      "valid_app_slots": [
+        "factory"
+      ],
+      "empty_app_slots": [],
+      "errors": []
+    },
+    "virtual_flash": {
+      "status": "PASS",
+      "flash_sha256": "f708ad5e7f2b54ed2eb4ae9984cfa893a07088b051993e350f7e2c184baee2b8"
+    },
+    "boot_and_ui": {
+      "status": "PASS",
+      "ready": true,
+      "initial_ready": true,
+      "input_unlocked_frame": false,
+      "ready_reason": [
+        "frame_nonblank"
+      ],
+      "frame_bytes": 3383,
+      "frame_metrics": {
+        "width": 466,
+        "height": 466,
+        "png_bytes": 3779,
+        "source": "live",
+        "captured_at": "2026-11-06T08:26:29.032615+00:00",
+        "execution_id": null,
+        "revision_id": null,
+        "program_state": null,
+        "nonblack_pixels": 170499,
+        "unique_colors": 2
+      },
+      "frame_sha256": "6c8b2e92e462b2950a686eb24335e28981902d5a1a20b8671c0110307efbe60d",
+      "serial_sha256": "00970f37d76d53e48b75e1ebc9a29ce7c54a5c3fb76675d068a675d008db3b67"
+    },
+    "input_and_function": {
+      "status": "PASS",
+      "accepted": 4,
+      "changed": 4,
+      "changed_inputs": [
+        "touch_center",
+        "drag_left",
+        "key_a",
+        "key_b"
+      ],
+      "ab_navigation_verified": null,
+      "touch_status": "PASS",
+      "button_status": "PASS",
+      "required_buttons_observed": {
+        "a": true,
+        "b": true
+      },
+      "semantic_verification": "PASS",
+      "verification_scope": "explicit_state_or_frame_assertions"
+    },
+    "device_state": {
+      "status": "PASS",
+      "available": true,
+      "source": "live"
+    },
+    "network": {
+      "status": "NOT APPLICABLE",
+      "data_plane": "NOT APPLICABLE",
+      "profile": null,
+      "same_guest": false,
+      "diagnostic_only": false
+    },
+    "ap_provisioning": {
+      "status": "NOT RUN",
+      "scope": "NOT RUN",
+      "same_guest_as_board": false,
+      "checks": {},
+      "observations": []
+    },
+    "security": {
+      "static_strings": "REVIEW",
+      "malware_or_trojan_detection": "NOT RUN"
+    }
+  },
+  "failure_attribution": {
+    "emulator_or_transport": [],
+    "firmware": [],
+    "unknown": [],
+    "evidence_collection": []
+  },
+  "retries": {
+    "download": 0,
+    "session_create": 1,
+    "network_attempts": null
+  },
+  "evidence_errors": [],
+  "timestamps": {
+    "started_at": "2026-11-06T08:26:17.592989+00:00",
+    "finished_at": "2026-11-06T08:26:39.523894+00:00"
+  },
+  "final": {
+    "status": "done",
+    "lane": "SIM_VERIFIED",
+    "passed": true,
+    "conclusion": "内容与静态检查通过；源 BIN SHA-256/大小匹配；stopwatch 使用 qemu 完成虚拟烧录、启动、画面与所需输入响应观察（触摸 PASS，按键 PASS）；交互语义验证 PASS。网络 NOT APPLICABLE；安全静态扫描 REVIEW，恶意软件/木马检测 NOT RUN；未提交 Burner。 本次使用已保存描述和同哈希 BIN 快照复审，未核对上游当前待审状态。",
+    "error_code": null,
+    "submission": "NOT SUBMITTED",
+    "ap_provisioning_status": "NOT RUN"
+  },
+  "finished_at": "2026-11-06T08:26:39.523949+00:00",
+  "evidence_files": [
+    {
+      "path": "analysis.json",
+      "bytes": 5102,
+      "sha256": "e52d64de4943c63393469f136e74ed4438fd033f63aaed6765c0f7f518ae45ef"
+    },
+    {
+      "path": "codex-result.json",
+      "bytes": 668,
+      "sha256": "9a26ff81008895b58960afcfdb1a1e7e5c19c0bd66ecf27e98b29f653a8973a5"
+    },
+    {
+      "path": "device-state.json",
+      "bytes": 885,
+      "sha256": "4d9f7552fbfd3c437109904f695347c2ffaf97838d601794780c83a7ba652e36"
+    },
+    {
+      "path": "events.json",
+      "bytes": 3561,
+      "sha256": "8a92726cffeaaf8246eaa3029fdbe765929acab03f47bc06df4486ac59af69c9"
+    },
+    {
+      "path": "evidence.zip",
+      "bytes": 391148,
+      "sha256": "16e4256bd74290bc7105bae39ab5f5b0b09e1fe9ea68999539360cc47c0bedc1"
+    },
+    {
+      "path": "flash-after.json",
+      "bytes": 259,
+      "sha256": "879e20eef80455928688a01d9d9d1ae997fc9413ea3770467518ce548d335bdb"
+    },
+    {
+      "path": "flash-before.json",
+      "bytes": 259,
+      "sha256": "31e1c3b5cab8aa0337357ccba31cb1c031fde6ea2427184f1309d8ac3aeb0ae7"
+    },
+    {
+      "path": "flash-diff.json",
+      "bytes": 236,
+      "sha256": "6d792fac541dc394cfcf3da1405c16b69e2b2091a540a31a4d5ffb0c8c6dc158"
+    },
+    {
+      "path": "flash.json",
+      "bytes": 176,
+      "sha256": "2021d442e44d44163655dee0e71a354ee08ed2c87fbd28a90810a3c9638a1d41"
+    },
+    {
+      "path": "frame.png",
+      "bytes": 3383,
+      "sha256": "6c8b2e92e462b2950a686eb24335e28981902d5a1a20b8671c0110307efbe60d"
+    },
+    {
+      "path": "interaction-drag_left.png",
+      "bytes": 2768,
+      "sha256": "c295b7fbd4103c937eaeb8373249cfa3cc60e422ec18fd69254efbd85f3632f0"
+    },
+    {
+      "path": "interaction-key_a.png",
+      "bytes": 3384,
+      "sha256": "ab933cece58308b0eb8fa0d675bdcef1c3c2a087cc2ba8ca8d99e32ebff96587"
+    },
+    {
+      "path": "interaction-key_b.png",
+      "bytes": 3383,
+      "sha256": "6c8b2e92e462b2950a686eb24335e28981902d5a1a20b8671c0110307efbe60d"
+    },
+    {
+      "path": "interaction-touch_center.png",
+      "bytes": 3354,
+      "sha256": "8c5d7c75316ddb9a0f3a8552228c1163aced9b6b5fd3705166d037dd8bbf29ab"
+    },
+    {
+      "path": "interactions.json",
+      "bytes": 3612,
+      "sha256": "47589a44a58c15f6075c57aef30c651a99ed0d9cf73d88b26f4d79996d60f9be"
+    },
+    {
+      "path": "qom-after.json",
+      "bytes": 65654,
+      "sha256": "f8420038002d445e4304026c2eb2daa00a4d37af379b5d3df3a9b0aaa09aeee2"
+    },
+    {
+      "path": "qom-before.json",
+      "bytes": 65654,
+      "sha256": "7fb7b064fb3ccf8ca22cc3dea3d4ebf0e5142176f0bda214e1b466bf8cf1d3c6"
+    },
+    {
+      "path": "qom-diff.json",
+      "bytes": 302,
+      "sha256": "08d8e42de3820e476d85371b826dd02a98a62337b04b4bcc34f16a6bea24a53c"
+    },
+    {
+      "path": "qom-list.json",
+      "bytes": 2383,
+      "sha256": "69ef2b67ffa70f89c8affb83ae4537a648628b40efa7370e9791e2aebb4e3328"
+    },
+    {
+      "path": "security-static.json",
+      "bytes": 160,
+      "sha256": "7e2352fb5d17bb26937fb3db2f6a88921f19449c0036657814ac3139555f4521"
+    },
+    {
+      "path": "serial.log",
+      "bytes": 226,
+      "sha256": "00970f37d76d53e48b75e1ebc9a29ce7c54a5c3fb76675d068a675d008db3b67"
+    },
+    {
+      "path": "session.json",
+      "bytes": 2597,
+      "sha256": "ab9794dda27a70c5e0a11cecdb015cc2b2731d2208645a84fede60686a287ce2"
+    },
+    {
+      "path": "wait.json",
+      "bytes": 3054,
+      "sha256": "6d51b36d3dfeb490afc52d88f7eac523271bca0aeed69075162e43c46a4efc84"
+    }
+  ]
+}

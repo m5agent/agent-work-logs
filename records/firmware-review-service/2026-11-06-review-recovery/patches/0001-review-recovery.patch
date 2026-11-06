@@ -1,0 +1,1833 @@
+diff --git a/service/app.py b/service/app.py
+index b2d2b5f..68f35d6 100644
+--- a/service/app.py
++++ b/service/app.py
+@@ -12,8 +12,10 @@ import argparse
+ import hashlib
+ import html
+ import json
++import math
+ import os
+ import re
++import signal
+ import shutil
+ import sqlite3
+ import subprocess
+@@ -30,6 +32,11 @@ from pathlib import Path
+ from typing import Any, Dict, List, Optional
+ from urllib.parse import parse_qs, urlencode, urlparse
+ 
++try:
++    from frame_assertions import evaluate_frame_assertion
++except ModuleNotFoundError:
++    from service.frame_assertions import evaluate_frame_assertion
++
+ ROOT = Path(__file__).resolve().parent
+ DEFAULT_CONFIG = ROOT / "config.json"
+ DEFAULT_RUNTIME = Path.home() / "Library/Application Support/m5agent/firmware-review-service"
+@@ -61,14 +68,14 @@ NETWORK_PROFILES = {
+ QEMU_UNIFIED_RUNTIME = "qemu-unified"
+ DIAGNOSTIC_NETWORK_RUNTIME = "network"
+ NETWORK_CLAIM_TERMS = (
+-    "wifi", "wi-fi", "network", "局域网", "联网", "http://", "https://",
++    "wifi", "wi-fi", "network", "networking", "网络", "局域网", "联网", "http", "https",
+     "mqtt", "tcp", "udp", "dns", "curl", "push", "推送", "远程", "cloud",
+     "云端", "api", "server", "服务器", "local console", "本地控制台",
+ )
+ TOUCH_CLAIM_TERMS = ("touch", "触摸", "屏幕手势", "tap", "swipe")
+-BUTTON_CLAIM_TERMS = ("button", "按键", "a、b", "a/b", "a 和 b", "key")
+-AB_NAVIGATION_TERMS = ("a、b 两个键翻页", "a/b", "a、b", "按键翻页",
+-                       "buttons to page", "page through", "上一页", "下一页")
++BUTTON_CLAIM_TERMS = ("button", "buttons", "按键", "按钮", "key", "keys")
++AB_NAVIGATION_TERMS = ("翻页", "buttons to page", "page through", "上一页", "下一页",
++                       "previous page", "next page", "page navigation")
+ AMBIGUOUS_CONTENT_TERMS = ("adult", "18+", "nsfw", "mature", "成人", "成人模式")
+ BANNED = ("暴力", "色情", "赌博", "毒品", "破解", "盗版", "仇恨")
+ PLACEHOLDERS = {"1", "11", "111", "123", "ceshi", "test", "测试"}
+@@ -135,18 +142,89 @@ def sanitize_config(value: Any) -> Any:
+     return value
+ 
+ 
+-def review_claims(content: Dict[str, Any]) -> Dict[str, bool]:
+-    """Extract only claims that can be tested from the submitted text."""
++def claim_term_present(text: str, term: str) -> bool:
++    """Match Latin words, not fragments such as API in 'rapid' or key in 'monkey'."""
++    if term.isascii():
++        return bool(re.search(r"(?<![a-z0-9_])%s(?![a-z0-9_])" % re.escape(term), text))
++    return term in text
++
++
++def network_claim_present(text: str) -> bool:
++    """Keep positive clauses even when another clause explicitly says offline."""
++    clauses = re.split(r"[。！？!?;；，,\n]|\b(?:but|however|yet)\b|但是|不过|然而|但", text)
++    for clause in clauses:
++        for term in NETWORK_CLAIM_TERMS:
++            pattern = (r"(?<![a-z0-9_])%s(?![a-z0-9_])" % re.escape(term)
++                       if term.isascii() else re.escape(term))
++            for hit in re.finditer(pattern, clause):
++                prefix = clause[:hit.start()]
++                # Scope negation to this clause and stop at a new positive predicate.
++                negations = list(re.finditer(
++                    r"不(?:再)?(?:含|包括|支持|提供|需要|使用|具备|涉及)|无需|无须|没有|无(?!线)", prefix
++                ))
++                if negations:
++                    tail = prefix[negations[-1].end():]
++                    negative_list = bool(re.search(r"、|或|和|与|及", tail))
++                    direct_qualifier = bool(re.fullmatch(r"[\s:：]*(?:(?:任何|其他|额外|外部|在线|互联网|无线|移动|的)[\s]*)*", tail))
++                    if len(tail) <= 80 and (negative_list or direct_qualifier) and not re.search(
++                        r"即可|仍|也可|却|支持|提供|启用|连接|获取|发送|接收|访问|通过|可以|来|以便", tail
++                    ):
++                        continue
++                # English negation only covers network vocabulary, not e.g.
++                # 'no account required to connect to WiFi'.
++                english_negation = re.search(
++                    r"\b(?:no|without|(?:does\s+not|doesn't|do\s+not|not)\s+"
++                    r"(?:support|provide|include|require|use|need|have))\s+([^;.!?\n]{0,80})$", prefix
++                )
++                if english_negation:
++                    tail = english_negation.group(1)
++                    allowed = {
++                        "any", "a", "an", "the", "external", "internet", "online", "wireless",
++                        "or", "and", "wifi", "wi", "fi", "network", "networking", "cloud",
++                        "http", "https", "mqtt", "tcp", "udp", "dns", "api", "server",
++                    }
++                    if all(word in allowed for word in re.findall(r"[a-z]+", tail)):
++                        continue
++                suffix = clause[hit.end():]
++                if re.match(r"\s+(?:is\s+)?not\s+(?:supported|provided|included|used)\b", suffix):
++                    continue
++                return True
++    return False
++
++
++def review_claims(content: Dict[str, Any]) -> Dict[str, Any]:
++    """Extract executable claims without treating references as network features."""
+ 
+     text = "\n".join(str(content.get(k) or "") for k in (
+         "firmware_description", "version_description", "firmware_name",
+         "version_name",
+     )).lower()
++    text = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", text)
++    text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
++    text = re.sub(r"https?://[^\s<>\[\])]+", " ", text)
++    required_buttons = set()
++    for pattern in (
++        r"(?:左键|右键|按键|按钮|键|\bbuttons?|\bkeys?)\s*[:：_-]?\s*([ab])(?![a-z0-9])",
++        r"(?<![a-z0-9])([ab])\s*(?:键|按钮|\bbutton\b|\bkey\b)",
++        r"(?:单击|双击|点击|按住|长按|\bpress|\btap|\bhold|\bdouble[ -]?(?:click|press))\s*([ab])(?![a-z0-9])",
++    ):
++        required_buttons.update(re.findall(pattern, text))
++    if re.search(r"(?<![a-z0-9])a\s*(?:\+|/|、|和|与|&|\band\b)\s*b(?![a-z0-9])", text):
++        required_buttons.update(("a", "b"))
++    button_required = bool(required_buttons) or any(
++        claim_term_present(text, term) for term in BUTTON_CLAIM_TERMS
++    )
++    ab_navigation_required = button_required and any(
++        claim_term_present(text, term) for term in AB_NAVIGATION_TERMS
++    )
++    if button_required and not required_buttons:
++        required_buttons.update(("a", "b"))
+     return {
+-        "network_required": any(term in text for term in NETWORK_CLAIM_TERMS),
+-        "touch_required": any(term in text for term in TOUCH_CLAIM_TERMS),
+-        "button_required": any(term in text for term in BUTTON_CLAIM_TERMS),
+-        "ab_navigation_required": any(term in text for term in AB_NAVIGATION_TERMS),
++        "network_required": network_claim_present(text),
++        "touch_required": any(claim_term_present(text, term) for term in TOUCH_CLAIM_TERMS),
++        "button_required": button_required,
++        "required_buttons": sorted(required_buttons),
++        "ab_navigation_required": ab_navigation_required,
+     }
+ 
+ 
+@@ -158,6 +236,25 @@ def contains_redacted(value: Any) -> bool:
+     return value == "<redacted>"
+ 
+ 
++def validate_review_options(value: Any) -> Dict[str, Any]:
++    if value is None:
++        return {}
++    if not isinstance(value, dict):
++        raise ValueError("validation 必须是对象")
++    for section in ("input_options", "input_assertions"):
++        entries = value.get(section, {})
++        if not isinstance(entries, dict) or any(not isinstance(entry, dict) for entry in entries.values()):
++            raise ValueError("validation.%s 及每个输入配置必须是对象" % section)
++        for entry in entries.values():
++            for field in ("hold_seconds", "settle_seconds", "timeout_seconds"):
++                if field in entry:
++                    duration = entry[field]
++                    if (isinstance(duration, bool) or not isinstance(duration, (int, float))
++                            or not math.isfinite(duration) or not 0 <= duration <= 15):
++                        raise ValueError("输入验证时长必须为 0 到 15 秒的有限数值")
++    return value
++
++
+ class Store:
+     def __init__(self, path: Path):
+         self.path = path
+@@ -208,6 +305,10 @@ class Store:
+                 c.execute("ALTER TABLE jobs ADD COLUMN use_codex INTEGER NOT NULL DEFAULT 0")
+             if "network_json" not in cols:
+                 c.execute("ALTER TABLE jobs ADD COLUMN network_json TEXT")
++            if "validation_json" not in cols:
++                c.execute("ALTER TABLE jobs ADD COLUMN validation_json TEXT")
++            if "source_mode" not in cols:
++                c.execute("ALTER TABLE jobs ADD COLUMN source_mode TEXT NOT NULL DEFAULT 'live_pending'")
+ 
+     def create_batch(self, source: str, filter_json: Dict[str, Any], total: int) -> str:
+         bid = "batch-" + uuid.uuid4().hex[:12]
+@@ -233,7 +334,8 @@ class Store:
+             manual = sum(r["n"] for r in rows if r["status"] == "manual_review")
+             passed = sum(r["n"] for r in rows if r["lane"] == "SIM_VERIFIED")
+             total = sum(r["n"] for r in rows)
+-            status = "running" if queued else ("partial" if (failed or manual) else "done")
++            service_errors = sum(r["n"] for r in rows if r["status"] == "service_error")
++            status = "running" if queued else ("partial" if (failed or manual or service_errors) else "done")
+             c.execute("UPDATE batches SET status=?,total=?,queued=?,passed=?,failed=?,manual_review=? WHERE id=?",
+                       (status, total, queued, passed, failed, manual, bid))
+ 
+@@ -373,8 +475,35 @@ class SimApi(Api):
+ 
+ 
+ class CodexRunner:
+-    def __init__(self, command: str):
++    def __init__(self, command: str, config: Optional[Dict[str, Any]] = None):
+         self.command = command
++        self.config = config or {}
++
++    def run_command(self, command: List[str], *, input: str, timeout: int) -> Any:
++        # The CLI may be a Node wrapper. Kill its native child too before retrying.
++        proc = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
++                                stderr=subprocess.PIPE, text=True, start_new_session=True)
++        try:
++            stdout, stderr = proc.communicate(input, timeout=timeout)
++        except subprocess.TimeoutExpired:
++            try:
++                os.killpg(proc.pid, signal.SIGKILL)
++            except ProcessLookupError:
++                pass
++            stdout, stderr = proc.communicate()
++            raise subprocess.TimeoutExpired(command, timeout, output=stdout, stderr=stderr)
++        return subprocess.CompletedProcess(command, proc.returncode, stdout, stderr)
++
++    @staticmethod
++    def failure_kind(output: str, timed_out: bool = False) -> str:
++        text = output.lower()
++        if timed_out:
++            return "E_CODEX_TIMEOUT"
++        if any(term in text for term in ("model_not_found", "model is not supported", "unsupported model")):
++            return "E_CODEX_MODEL_CONFIG"
++        if any(term in text for term in ("unauthorized", "authentication", "invalid_api_key", '"status":401', '"status": 401')):
++            return "E_CODEX_AUTH"
++        return "E_CODEX_EXECUTION"
+ 
+     def content_review(self, workspace: Path, item: Dict[str, Any], content: Dict[str, Any]) -> Dict[str, Any]:
+         workspace.mkdir(parents=True, exist_ok=True)
+@@ -403,34 +532,90 @@ class CodexRunner:
+         }
+         (workspace / "content-schema.json").write_text(json.dumps(schema, ensure_ascii=False))
+         (workspace / "content-prompt.txt").write_text(prompt)
++        # A previous successful result must never survive a failed retry.
+         last = workspace / "content-last.json"
+-        cmd = [self.command, "exec", "--json", "--skip-git-repo-check", "-C", str(workspace),
+-               "-s", "read-only", "-c", 'approval_policy="never"',
+-               "--output-schema", str(workspace / "content-schema.json"),
+-               "-o", str(last), "-"]
+-        proc = subprocess.run(cmd, input=prompt, text=True, capture_output=True, timeout=180)
+-        (workspace / "codex.stdout.jsonl").write_text(proc.stdout)
+-        (workspace / "codex.stderr.log").write_text(proc.stderr)
+-        thread_id = None
+-        usage = {}
+-        for line in proc.stdout.splitlines():
++        last.unlink(missing_ok=True)
++        attempts = []
++        result: Dict[str, Any] = {}
++        routes = [dict(model=self.config.get("codex_model"),
++                       provider=self.config.get("codex_model_provider"))]
++        routes.extend(self.config.get("codex_fallback_routes") or [])
++        route_index = 0
++        limit = max(1, min(int(self.config.get("codex_max_attempts", 3)), 3))
++        for attempt in range(1, limit + 1):
++            route = routes[route_index]
++            attempt_dir = workspace / "codex-attempts" / ("%s-%s" % (attempt, uuid.uuid4().hex[:8]))
++            attempt_dir.mkdir(parents=True)
++            attempt_last = attempt_dir / "content-last.json"
++            cmd = [self.command, "exec", "--json", "--skip-git-repo-check", "-C", str(workspace),
++                   "-s", "read-only", "-c", 'approval_policy="never"',
++                   "-c", "model_reasoning_effort=" + json.dumps(self.config.get("codex_reasoning_effort", "medium")),
++                   "--output-schema", str(workspace / "content-schema.json"),
++                   "-o", str(attempt_last)]
++            if self.config.get("codex_ignore_user_config"):
++                cmd.append("--ignore-user-config")
++                cmd.extend(["-c", "features.hooks=false", "-c", "features.plugin_hooks=false",
++                            "-c", "features.memories=false"])
++            if route.get("model"):
++                cmd.extend(["-m", str(route["model"])])
++            if route.get("provider"):
++                cmd.extend(["-c", "model_provider=" + json.dumps(route["provider"])])
++            cmd.append("-")
++            timed_out = False
+             try:
+-                ev = json.loads(line)
+-            except Exception:
+-                continue
+-            if ev.get("type") == "thread.started":
+-                thread_id = ev.get("thread_id")
+-            if ev.get("type") == "turn.completed":
+-                usage = ev.get("usage") or {}
+-        result = {"ok": proc.returncode == 0 and last.is_file(), "thread_id": thread_id,
+-                  "usage": usage, "verdict": "MANUAL", "reason": "Codex review failed"}
+-        if last.is_file():
+-            try:
+-                data = json.loads(last.read_text())
+-                result.update(data)
+-                result["ok"] = proc.returncode == 0
+-            except Exception as exc:
+-                result["reason"] = "invalid Codex JSON: %s" % exc
++                proc = self.run_command(cmd, input=prompt,
++                                        timeout=int(self.config.get("codex_timeout_seconds", 180)))
++                stdout, stderr, returncode = proc.stdout, proc.stderr, proc.returncode
++            except subprocess.TimeoutExpired as exc:
++                timed_out = True
++                stdout, stderr, returncode = exc.stdout or "", exc.stderr or "", None
++            except OSError:
++                stdout, stderr, returncode = "", "CLI executable unavailable", None
++            stdout = stdout.decode("utf-8", "replace") if isinstance(stdout, bytes) else stdout
++            stderr = stderr.decode("utf-8", "replace") if isinstance(stderr, bytes) else stderr
++            for name, value in (("codex.stdout.jsonl", stdout), ("codex.stderr.log", stderr)):
++                (attempt_dir / name).write_text(value)
++                (workspace / name).write_text(value)
++            thread_id, usage, completed, failed = None, {}, False, False
++            for line in stdout.splitlines():
++                try:
++                    ev = json.loads(line)
++                except (ValueError, TypeError):
++                    continue
++                if ev.get("type") == "thread.started":
++                    thread_id = ev.get("thread_id")
++                elif ev.get("type") == "turn.completed":
++                    completed, usage = True, ev.get("usage") or {}
++                elif ev.get("type") == "turn.failed":
++                    failed = True
++            data = None
++            if attempt_last.is_file():
++                try:
++                    candidate = json.loads(attempt_last.read_text())
++                    if (isinstance(candidate, dict) and candidate.get("verdict") in {"PASS", "FAIL", "MANUAL"}
++                            and isinstance(candidate.get("reason"), str) and candidate["reason"].strip()):
++                        data = candidate
++                except (ValueError, OSError):
++                    pass
++            ok = bool(returncode == 0 and completed and not failed and data)
++            error_code = None if ok else self.failure_kind(stdout + "\n" + stderr, timed_out)
++            attempts.append({"attempt": attempt, "ok": ok, "error_code": error_code,
++                             "returncode": returncode, "model": route.get("model"),
++                             "provider": route.get("provider"), "thread_id": thread_id})
++            result = {"ok": ok, "thread_id": thread_id, "usage": usage,
++                      "verdict": data["verdict"] if ok else "ERROR",
++                      "reason": data["reason"] if ok else "AI 审查服务执行失败，未产生内容判定",
++                      "error_code": error_code, "attempts": list(attempts)}
++            if ok:
++                last.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
++                break
++            if error_code in {"E_CODEX_MODEL_CONFIG", "E_CODEX_AUTH"}:
++                if route_index + 1 >= len(routes):
++                    break
++                route_index += 1
++            if attempt < limit:
++                time.sleep(min(attempt, 2))
++        (workspace / "codex-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+         return result
+ 
+ 
+@@ -441,7 +626,7 @@ class Reviewer:
+         self.runtime = runtime
+         self.burner = Api(config["burner_base_url"], config.get("burner_token", ""))
+         self.sim = SimApi(config["sim_base_url"], config.get("sim_token", ""))
+-        self.codex = CodexRunner(config.get("codex_command", "codex"))
++        self.codex = CodexRunner(config.get("codex_command", "codex"), config)
+ 
+     def public_source_context(self, content: Dict[str, Any]) -> List[Dict[str, str]]:
+         """Fetch public same-site pages only when they can clarify metadata."""
+@@ -741,9 +926,9 @@ class Reviewer:
+         self.store.event(jid, "security_static", result["note"], result)
+         return result
+ 
+-    def interaction_test(self, jid: str, sid: str, frame: bytes, display: Dict[str, Any],
+-                         features: Dict[str, Any], claims: Dict[str, bool],
+-                         jobdir: Path) -> Dict[str, Any]:
++    @staticmethod
++    def input_plan(display: Dict[str, Any], features: Dict[str, Any],
++                   claims: Dict[str, Any]) -> List[Any]:
+         width = int(display.get("width") or 320)
+         height = int(display.get("height") or 240)
+         cx, cy = width // 2, height // 2
+@@ -756,52 +941,219 @@ class Reviewer:
+             ])
+         if features.get("input") and (claims.get("button_required") or
+                                       claims.get("ab_navigation_required") or not plan):
+-            plan.extend([
+-                ("key_a", {"kind": "key", "key": "a", "settle_seconds": 1.0}),
+-                ("key_b", {"kind": "key", "key": "b", "settle_seconds": 1.0}),
+-            ])
++            buttons = claims.get("required_buttons") or ["a", "b"]
++            for button in buttons:
++                if button in {"a", "b"}:
++                    plan.append(("key_" + button, {
++                        "kind": "key", "key": button, "action": "tap", "settle_seconds": 1.0,
++                    }))
++        return plan
++
++    @staticmethod
++    def interaction_summary(results: List[Dict[str, Any]],
++                            claims: Dict[str, Any]) -> Dict[str, Any]:
++        by_name = {item["name"]: item for item in results}
++
++        def responded(item: Dict[str, Any]) -> bool:
++            return bool(item.get("accepted") and (
++                item.get("frame_changed") or
++                (item.get("semantic_assertion") or {}).get("status") == "PASS"
++            ))
++
++        def surface_status(items: List[Dict[str, Any]], require_all: bool = False) -> str:
++            if not items:
++                return "NOT RUN"
++            if not any(item.get("accepted") for item in items):
++                return "FAIL"
++            if (all(responded(item) for item in items) if require_all else
++                    any(responded(item) for item in items)):
++                return "PASS"
++            return "PARTIAL"
++
++        buttons = claims.get("required_buttons") or (
++            ["a", "b"] if claims.get("button_required") or claims.get("ab_navigation_required") else []
++        )
++        required_button_items = [by_name.get("key_" + key, {"name": "key_" + key}) for key in buttons]
++        touch_items = [item for item in results if item["name"] in {"touch_center", "drag_left"}]
++        touch_status = surface_status(touch_items)
++        button_status = surface_status(required_button_items, require_all=True)
++        semantic_items = [item for item in results if item.get("semantic_assertion")]
++        semantic_status = "NOT RUN" if not semantic_items else (
++            "PASS" if all((item["semantic_assertion"]).get("status") == "PASS"
++                          for item in semantic_items) else "PARTIAL"
++        )
++        ab_navigation_verified = None
++        if claims.get("ab_navigation_required"):
++            ab_navigation_verified = all(
++                by_name.get("key_" + key, {}).get("accepted") and
++                (by_name.get("key_" + key, {}).get("semantic_assertion") or {}).get("status") == "PASS"
++                for key in ("a", "b")
++            )
++        required_statuses = []
++        if claims.get("touch_required"):
++            required_statuses.append(touch_status)
++        if buttons:
++            required_statuses.append(button_status)
++        status = surface_status(results)
++        if status == "PASS" and (
++            any(value != "PASS" for value in required_statuses) or
++            semantic_status == "PARTIAL" or ab_navigation_verified is False
++        ):
++            status = "PARTIAL"
++        changed_inputs = [item["name"] for item in results
++                          if item.get("accepted") and item.get("frame_changed")]
++        return {
++            "accepted": sum(1 for item in results if item.get("accepted")),
++            "changed": len(changed_inputs), "changed_inputs": changed_inputs,
++            "touch_status": touch_status, "button_status": button_status,
++            "required_buttons": buttons,
++            "required_buttons_observed": {
++                key: responded(by_name.get("key_" + key, {})) for key in buttons
++            },
++            "ab_navigation_verified": ab_navigation_verified,
++            "semantic_verification": semantic_status,
++            "verification_scope": (
++                "explicit_state_or_frame_assertions" if semantic_status == "PASS"
++                else "input_acceptance_and_frame_change"
++            ),
++            "status": status,
++        }
++
++    def interaction_test(self, jid: str, sid: str, frame: bytes, display: Dict[str, Any],
++                         features: Dict[str, Any], claims: Dict[str, Any],
++                         jobdir: Path, validation: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
++        """Collect smoke responses, optionally verified by explicit serial state assertions."""
++        assertions = (validation or {}).get("input_assertions") or {}
++        input_options = (validation or {}).get("input_options") or {}
+         results = []
+         current = frame
+-        for name, spec in plan:
++        evidence = jobdir / "evidence"
++
++        def serial_since(offset: int = 0) -> Any:
++            data = ""
++            # Drain to the current checkpoint so old log pages cannot satisfy a
++            # post-input assertion. Retain a bounded tail for the baseline.
++            for _ in range(16):
++                row = self.sim.json(
++                    "/sessions/%s/serial?offset=%d&limit=65536" % (sid, offset), timeout=20
++                )
++                chunk = str(row.get("data") or "")
++                data = (data + chunk)[-65536:]
++                next_offset = int(row.get("next_offset", offset + len(chunk.encode("utf-8"))))
++                if next_offset <= offset or int(row.get("bytes", len(chunk.encode("utf-8")))) < 65536:
++                    return data, next_offset
++                offset = next_offset
++            raise RuntimeError("serial checkpoint exceeded bounded read window")
++
++        for name, spec in self.input_plan(display, features, claims):
+             item = {"name": name, "input": spec, "accepted": False, "frame_changed": False}
++            assertion = assertions.get(name) if isinstance(assertions, dict) else None
++            compiled = None
++            before_text = ""
++            offset = 0
++            baseline = None
++            semantic = None
++            frame_assertion = (isinstance(assertion, dict) and
++                               str(assertion.get("type", "")).startswith("frame_"))
++            if frame_assertion:
++                item["semantic_assertion"] = {"status": "PARTIAL", "scope": assertion["type"]}
++            elif isinstance(assertion, dict):
++                semantic = {"status": "PARTIAL", "comparison": assertion.get("comparison", "changed"),
++                            "group": assertion.get("group", 1), "scope": "serial_state_change"}
++                item["semantic_assertion"] = semantic
++                try:
++                    pattern = str(assertion.get("serial_pattern") or "")
++                    if not pattern or len(pattern) > 1000:
++                        raise ValueError("serial_pattern must contain 1..1000 characters")
++                    compiled = re.compile(pattern)
++                    timeout = max(0.0, min(float(assertion.get("timeout_seconds", 8)), 15.0))
++                    deadline = time.monotonic() + timeout
++                    before_text, offset = serial_since()
++                    matches = list(compiled.finditer(before_text))
++                    while not matches and time.monotonic() < deadline:
++                        time.sleep(min(0.5, max(0.0, deadline - time.monotonic())))
++                        chunk, offset = serial_since(offset)
++                        before_text = (before_text + chunk)[-65536:]
++                        matches = list(compiled.finditer(before_text))
++                    baseline = matches[-1] if matches else None
++                    semantic["before"] = baseline.group(semantic["group"]) if baseline else None
++                    semantic["serial_offset_before"] = offset
++                    (evidence / ("interaction-%s-serial-before.log" % name)).write_text(before_text)
++                    semantic["before_sha256"] = hashlib.sha256(before_text.encode()).hexdigest()
++                except Exception as exc:
++                    semantic["error"] = str(exc)
++                    compiled = None
+             try:
+-                response = self.sim.json("/sessions/%s/input" % sid, "POST", spec, timeout=20)
+-                item["accepted"] = bool(response.get("accepted"))
++                before_frame = current
++                options = input_options.get(name) if isinstance(input_options, dict) else None
++                if spec.get("kind") == "key" and isinstance(options, dict) and "hold_seconds" in options:
++                    hold = max(0.0, min(float(options["hold_seconds"]), 5.0))
++                    settle = max(0.0, min(float(options.get("settle_seconds", 0.05)), 5.0))
++                    down = {**spec, "action": "down", "settle_seconds": min(hold, 0.1)}
++                    up = {**spec, "action": "up", "settle_seconds": min(settle, 0.1)}
++                    item["input_sequence"] = [down, up]
++                    try:
++                        pressed = self.sim.json("/sessions/%s/input" % sid, "POST", down, timeout=20)
++                        if hold > 0.1:
++                            time.sleep(hold - 0.1)
++                    finally:
++                        # Send release even if the press response was lost after
++                        # delivery; later frame/assertion errors cannot leave it held.
++                        released = self.sim.json("/sessions/%s/input" % sid, "POST", up, timeout=20)
++                    if settle > 0.1:
++                        time.sleep(settle - 0.1)
++                    item["accepted"] = bool(pressed.get("accepted") and released.get("accepted"))
++                else:
++                    response = self.sim.json("/sessions/%s/input" % sid, "POST", spec, timeout=20)
++                    item["accepted"] = bool(response.get("accepted"))
+                 after = self.sim.binary("/sessions/%s/frame.png" % sid, timeout=30)
+                 item["frame_before_sha256"] = hashlib.sha256(current).hexdigest()
+                 item["frame_after_sha256"] = hashlib.sha256(after).hexdigest()
+                 item["frame_changed"] = after != current
+-                (jobdir / "evidence" / ("interaction-%s.png" % name)).write_bytes(after)
++                if frame_assertion:
++                    item["semantic_assertion"] = evaluate_frame_assertion(before_frame, after, assertion)
++                (evidence / ("interaction-%s.png" % name)).write_bytes(after)
+                 current = after
++                if compiled and semantic is not None and item["accepted"]:
++                    after_text = ""
++                    deadline = time.monotonic() + timeout
++                    while True:
++                        chunk, offset = serial_since(offset)
++                        after_text = (after_text + chunk)[-65536:]
++                        for observed in compiled.finditer(after_text):
++                            value = observed.group(semantic["group"])
++                            semantic["after"] = value
++                            comparison = semantic["comparison"]
++                            if comparison not in {"changed", "unchanged", "equals"}:
++                                raise ValueError("unsupported serial comparison")
++                            valid = baseline is not None and (
++                                (comparison == "changed" and value != semantic["before"]) or
++                                (comparison == "unchanged" and value == semantic["before"]) or
++                                (comparison == "equals" and value == str(assertion.get("expected")))
++                            )
++                            stable_groups = assertion.get("unchanged_groups") or []
++                            valid = valid and all(
++                                observed.group(group) == baseline.group(group) for group in stable_groups
++                            )
++                            if valid:
++                                semantic["status"] = "PASS"
++                                semantic["matched_state"] = observed.group(0)
++                                break
++                        if semantic["status"] == "PASS" or time.monotonic() >= deadline:
++                            break
++                        time.sleep(min(0.5, max(0.0, deadline - time.monotonic())))
++                    semantic["serial_offset_after"] = offset
++                    if baseline is None:
++                        semantic["error"] = "no serial baseline before input"
++                    (evidence / ("interaction-%s-serial-after.log" % name)).write_text(after_text)
++                    semantic["after_sha256"] = hashlib.sha256(after_text.encode()).hexdigest()
+             except Exception as exc:
+                 item["error"] = str(exc)
+             results.append(item)
+-        by_name = {x["name"]: x for x in results}
+-        changed_inputs = [x["name"] for x in results
+-                          if x.get("accepted") and x.get("frame_changed")]
+-        ab_navigation_verified = None
+-        if claims.get("ab_navigation_required"):
+-            ab_navigation_verified = bool(
+-                by_name.get("key_a", {}).get("frame_changed") and
+-                by_name.get("key_b", {}).get("frame_changed")
+-            )
+-        if not results:
+-            status = "NOT RUN"
+-        elif not any(x.get("accepted") for x in results):
+-            status = "FAIL"
+-        elif ab_navigation_verified is False:
+-            status = "PARTIAL"
+-        elif changed_inputs:
+-            status = "PASS"
+-        else:
+-            status = "PARTIAL"
+         return {
+-            "width": width, "height": height, "results": results,
+-            "accepted": sum(1 for x in results if x.get("accepted")),
+-            "changed": len(changed_inputs),
+-            "changed_inputs": changed_inputs,
+-            "ab_navigation_verified": ab_navigation_verified,
+-            "status": status,
++            "width": int(display.get("width") or 320),
++            "height": int(display.get("height") or 240),
++            "results": results, **self.interaction_summary(results, claims),
+             "final_frame": current,
+         }
+ 
+@@ -1181,16 +1533,54 @@ class Reviewer:
+         self.store.refresh_batch(job.get("batch_id") or "")
+         jobdir = self.runtime / "jobs" / jid
+         jobdir.mkdir(parents=True, exist_ok=True)
++        snapshot_item = None
++        if job.get("source_mode") == "saved_snapshot":
++            saved = json.loads((jobdir / "content.json").read_text())
++            snapshot_item = {
++                "versionId": job["version_id"], "firmwareId": job["firmware_id"],
++                "firmwareName": saved.get("firmware_name"), "versionName": saved.get("version_name"),
++                "firmwareDescription": saved.get("firmware_description"),
++                "versionDescription": saved.get("version_description"),
++                "deviceNames": saved.get("device_names"), "deviceCodes": saved.get("device_codes"),
++                "categories": [{"categoryName": value} for value in saved.get("categories") or []],
++                "sourceUrl": saved.get("source_url"), "coverUrl": saved.get("cover_url"),
++                "binFile": {"sha256": job["declared_sha256"], "fileSize": job["declared_size"],
++                            "fileName": "saved-firmware.bin"},
++            }
+         evidence = jobdir / "evidence"
+-        if evidence.is_dir() and any(evidence.iterdir()):
++        if evidence.is_dir() and (
++                any(evidence.iterdir()) or
++                any(path.is_file() and path.name != "firmware.bin" for path in jobdir.iterdir())):
+             archive = jobdir / "attempts" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+             archive.parent.mkdir(parents=True, exist_ok=True)
+             shutil.move(str(evidence), str(archive))
++            # Preserve the entire previous attempt, including AI failures.
++            for previous in list(jobdir.iterdir()):
++                if previous.is_file() and previous.name != "firmware.bin":
++                    shutil.move(str(previous), str(archive / previous.name))
+         evidence.mkdir(exist_ok=True)
++        content_service_error: Optional[str] = None
++
++        def finish_current(review_id: str, review_started: float, status: str, lane: str,
++                           passed: bool, conclusion: str, error_code: Optional[str],
++                           evidence_path: Path) -> None:
++            if content_service_error and status == "manual_review":
++                status, passed = "service_error", False
++                conclusion = "AI 审查服务未完成，待自动恢复后重试；执行证据：" + conclusion
++                error_code = content_service_error
++            self.finish(review_id, review_started, status, lane, passed, conclusion,
++                        error_code, evidence_path)
++
+         try:
+             self.store.event(jid, "state", "running")
+-            pending = self.burner.json("/api/v1/integrations/firmwares/agent-review/firmware-reviews/pending?pageNum=1&pageSize=100")
+-            item = next((x for x in pending.get("rows", []) if x.get("versionId") == job.get("version_id")), None)
++            if snapshot_item:
++                item = snapshot_item
++                self.store.event(jid, "source", "使用已保存描述快照及原 BIN 复审；结果仅供本地验证，不能提交上架", {
++                    "source_mode": "saved_snapshot", "sha256": job.get("declared_sha256"),
++                })
++            else:
++                pending = self.burner.json("/api/v1/integrations/firmwares/agent-review/firmware-reviews/pending?pageNum=1&pageSize=100")
++                item = next((x for x in pending.get("rows", []) if x.get("versionId") == job.get("version_id")), None)
+             if not item:
+                 raise RuntimeError("pending item disappeared before review")
+             content = {
+@@ -1207,6 +1597,7 @@ class Reviewer:
+             use_codex = bool(job.get("use_codex") or self.config.get("codex_enabled"))
+             codex_result: Dict[str, Any] = {}
+             content_manual_reason: Optional[str] = None
++            content_service_error: Optional[str] = None
+             if use_codex:
+                 review_content = dict(content)
+                 text_for_source = "\n".join(str(content.get(k) or "") for k in (
+@@ -1227,12 +1618,21 @@ class Reviewer:
+                     codex_output_tokens=(codex_result.get("usage") or {}).get("output_tokens"),
+                 )
+                 self.store.event(jid, "codex", codex_result.get("reason", ""), codex_result)
++                (evidence / "codex-result.json").write_text(
++                    json.dumps(codex_result, ensure_ascii=False, indent=2) + "\n"
++                )
++                if not codex_result.get("ok"):
++                    content_service_error = codex_result.get("error_code") or "E_CODEX_EXECUTION"
++                    self.store.event(jid, "service_error", "AI 审查服务自动恢复后仍未完成；继续采集虚拟设备证据", {
++                        "error_code": content_service_error,
++                        "attempts": codex_result.get("attempts"),
++                    })
+                 if codex_result.get("verdict") == "FAIL":
+-                    self.finish(jid, started, "failed", "FAIL", False,
++                    finish_current(jid, started, "failed", "FAIL", False,
+                                 codex_result.get("reason", "AI 内容审查未通过"),
+                                 "E_CONTENT_CODEX", evidence)
+                     return
+-                if codex_result.get("verdict") == "MANUAL":
++                if codex_result.get("ok") and codex_result.get("verdict") == "MANUAL":
+                     content_manual_reason = codex_result.get(
+                         "reason", "AI 内容审查要求人工复核"
+                     )
+@@ -1242,12 +1642,12 @@ class Reviewer:
+                         codex_result,
+                     )
+             if content_result["verdict"] == "FAIL":
+-                self.finish(jid, started, "failed", "FAIL", False, content_result["reason"], "E_CONTENT", evidence)
++                finish_current(jid, started, "failed", "FAIL", False, content_result["reason"], "E_CONTENT", evidence)
+                 return
+             codes = item.get("deviceCodes") or []
+             profile = next((DEVICE_MAP.get(str(c).upper()) for c in codes if DEVICE_MAP.get(str(c).upper())), None)
+             if not profile:
+-                self.finish(jid, started, "manual_review", "SIM_PARTIAL", False,
++                finish_current(jid, started, "manual_review", "SIM_PARTIAL", False,
+                             "no emulator profile for deviceCodes=%s" % codes, "E_NO_SIM_PROFILE", evidence)
+                 return
+             job_network = network_config or {}
+@@ -1258,7 +1658,7 @@ class Reviewer:
+                 except Exception:
+                     job_network = {}
+             if not network_config and contains_redacted(job_network):
+-                self.finish(
++                finish_current(
+                     jid, started, "manual_review", "SIM_PARTIAL", False,
+                     "历史任务中的 AP/Wi-Fi 凭据已被安全脱敏；重跑 AP 配网必须重新提供隔离测试凭据。",
+                     "E_AP_CREDENTIAL_REQUIRED", evidence,
+@@ -1268,7 +1668,7 @@ class Reviewer:
+             try:
+                 execution = self.execution_plan(profile, job_network, claims)
+             except Exception as plan_exc:
+-                self.finish(jid, started, "manual_review", "SIM_PARTIAL", False,
++                finish_current(jid, started, "manual_review", "SIM_PARTIAL", False,
+                             "虚拟设备能力匹配失败：%s" % plan_exc,
+                             "E_SIM_COVERAGE", evidence)
+                 return
+@@ -1299,10 +1699,10 @@ class Reviewer:
+                 })
+             bf = item.get("binFile") or {}
+             fw_path = jobdir / "firmware.bin"
+-            data = self.sim.bytes(bf["downloadUrl"])
++            data = fw_path.read_bytes() if snapshot_item else self.sim.bytes(bf["downloadUrl"])
+             actual = hashlib.sha256(data).hexdigest()
+             if len(data) != bf.get("fileSize") or actual != bf.get("sha256"):
+-                self.finish(jid, started, "failed", "FAIL", False, "固件 SHA-256 或大小与服务端声明不一致。", "E_HASH_MISMATCH", evidence)
++                finish_current(jid, started, "failed", "FAIL", False, "固件 SHA-256 或大小与服务端声明不一致。", "E_HASH_MISMATCH", evidence)
+                 return
+             fw_path.write_bytes(data)
+             self.store.event(jid, "hash", "sha256 and size match", {"sha256": actual, "size": len(data)})
+@@ -1316,7 +1716,7 @@ class Reviewer:
+             with urllib.request.urlopen(req, timeout=180) as r:
+                 art = json.loads(r.read().decode())
+             if art.get("sha256") != actual or art.get("size") != len(data):
+-                self.finish(
++                finish_current(
+                     jid, started, "failed", "FAIL", False,
+                     "设备中心 artifact SHA-256/大小与源 BIN 不一致，禁止烧录。",
+                     "E_ARTIFACT_MISMATCH", evidence,
+@@ -1325,7 +1725,7 @@ class Reviewer:
+             fw = self.sim.json("/firmware", "POST", {"device_id": profile, "kind": "merged", "artifact_id": art["artifact_id"]})
+             source_artifact = (fw.get("source") or {}).get("artifact_id")
+             if source_artifact and source_artifact != actual:
+-                self.finish(
++                finish_current(
+                     jid, started, "failed", "FAIL", False,
+                     "组合固件的 source artifact 与待审 BIN 不一致，禁止烧录。",
+                     "E_ARTIFACT_MISMATCH", evidence,
+@@ -1346,7 +1746,7 @@ class Reviewer:
+                 "errors": analysis.get("errors") or [],
+             })
+             if not static["ok"]:
+-                self.finish(jid, started, "failed", "FAIL", False,
++                finish_current(jid, started, "failed", "FAIL", False,
+                             "静态固件分析失败：%s" % "；".join(analysis.get("errors") or []),
+                             "E_STATIC", evidence)
+                 return
+@@ -1494,7 +1894,7 @@ class Reviewer:
+                             jid, "emulator_failure",
+                             failure["detail"], failure,
+                         )
+-                        self.finish(
++                        finish_current(
+                             jid, started, "manual_review", "SIM_PARTIAL", False,
+                             "设备中心缺少 %s 的 QEMU machine，模拟器尚未启动；"
+                             "本轮不对固件作失败判断，需先修复模拟器运行时。" %
+@@ -1535,7 +1935,7 @@ class Reviewer:
+                             crash
+                             and device_row.get("peripheral_status") == "partial"
+                         ):
+-                            self.finish(
++                            finish_current(
+                                 jid, started, "manual_review", "SIM_PARTIAL", False,
+                                 "%s 虚拟后端仅部分覆盖，固件在应用日志/首帧前触发崩溃"
+                                 "（%s）；当前无法区分固件缺陷与已知模型缺口，"
+@@ -1545,7 +1945,7 @@ class Reviewer:
+                             )
+                             return
+                         if not crash and not continue_execution:
+-                            self.finish(
++                            finish_current(
+                                 jid, started, "manual_review", "SIM_PARTIAL", False,
+                                 "模拟器在产生可用串口/画面证据前退出（%s）；"
+                                 "当前无法区分固件失败与模拟器运行时缺陷，"
+@@ -1555,7 +1955,7 @@ class Reviewer:
+                             )
+                             return
+                         if not continue_execution:
+-                            self.finish(
++                            finish_current(
+                                 jid, started, "failed", "FAIL", False,
+                                 "模拟器捕获到应用崩溃标记：%s；串口尾部=%s" %
+                                 (crash, tail),
+@@ -1632,6 +2032,7 @@ class Reviewer:
+                     interaction = self.interaction_test(
+                         jid, sid, frame, session.get("display") or {},
+                         features, claims, jobdir,
++                        json.loads(job.get("validation_json") or "{}"),
+                     )
+                     frame = interaction.get("final_frame") or frame
+                     if (
+@@ -1807,6 +2208,8 @@ class Reviewer:
+                 ((network_result or {}).get("diagnosis") or {}).get("network_data_plane")
+                 or "NOT RUN"
+             )
++            if not claims.get("network_required") and not network_result:
++                network_status, network_data_plane = "NOT APPLICABLE", "NOT APPLICABLE"
+             same_guest_network = bool(
+                 execution.get("runtime") in {QEMU_UNIFIED_RUNTIME, "qemu-wifi"} and
+                 network_result
+@@ -1843,6 +2246,7 @@ class Reviewer:
+                 "schema_version": 1,
+                 "review_id": jid,
+                 "source": {
++                    "mode": job.get("source_mode") or "live_pending",
+                     "firmware_id": item.get("firmwareId"),
+                     "version_id": item.get("versionId"),
+                     "firmware_name": item.get("firmwareName"),
+@@ -1855,6 +2259,7 @@ class Reviewer:
+                     "hash_and_size_match": True,
+                 },
+                 "review_policy": {
++                    "validation": sanitize_config(json.loads(job.get("validation_json") or "{}")),
+                     "content_review_required": True,
+                     "execution_required": True,
+                     "execution_scope": "virtual-device validation",
+@@ -1884,10 +2289,14 @@ class Reviewer:
+                 },
+                 "checks": {
+                     "content": {
+-                        "status": content_result.get("verdict"),
++                        "status": ("ERROR" if content_service_error else
++                                   codex_result.get("verdict") or content_result.get("verdict")),
++                        "rules_status": content_result.get("verdict"),
+                         "reason": content_result.get("reason"),
+                         "codex_status": codex_result.get("verdict") or "NOT RUN",
+                         "manual_reason": content_manual_reason,
++                        "service_error": content_service_error,
++                        "attempts": codex_result.get("attempts") or [],
+                     },
+                     "static_firmware": {
+                         "status": "PASS" if static.get("ok") else "FAIL",
+@@ -1919,6 +2328,11 @@ class Reviewer:
+                         "changed": interaction.get("changed", 0),
+                         "changed_inputs": interaction.get("changed_inputs") or [],
+                         "ab_navigation_verified": interaction.get("ab_navigation_verified"),
++                        "touch_status": interaction.get("touch_status"),
++                        "button_status": interaction.get("button_status"),
++                        "required_buttons_observed": interaction.get("required_buttons_observed"),
++                        "semantic_verification": interaction.get("semantic_verification"),
++                        "verification_scope": interaction.get("verification_scope"),
+                     },
+                     "device_state": {
+                         "status": "PASS" if device_state.get("available") else (
+@@ -1982,6 +2396,10 @@ class Reviewer:
+ 
+             def finish_review(status: str, lane: str, passed: bool, conclusion: str,
+                               error_code: Optional[str]) -> None:
++                if content_service_error and status == "manual_review":
++                    status, passed = "service_error", False
++                    conclusion = "AI 审查服务未完成，待自动恢复后重试；执行证据：" + conclusion
++                    error_code = content_service_error
+                 report["finished_at"] = utcnow()
+                 report["final"] = {
+                     "status": status,
+@@ -1992,8 +2410,11 @@ class Reviewer:
+                     "submission": "NOT SUBMITTED",
+                     "ap_provisioning_status": ap_status,
+                 }
++                if snapshot_item:
++                    report["final"]["conclusion"] += " 本次使用已保存描述和同哈希 BIN 快照复审，未核对上游当前待审状态。"
++                    conclusion = report["final"]["conclusion"]
+                 self.write_review_report(jobdir, report)
+-                self.finish(jid, started, status, lane, passed, conclusion,
++                finish_current(jid, started, status, lane, passed, conclusion,
+                             error_code, evidence)
+ 
+             device_row = execution.get("device") or {}
+@@ -2066,29 +2487,41 @@ class Reviewer:
+                         )
+                         error_code = error_code or "E_AP_PROVISIONING_PARTIAL"
+                 elif claims.get("network_required") and not (
+-                        same_guest_network and network_status == "PASS"):
++                        same_guest_network and network_status == "PASS" and network_data_plane == "PASS"):
+                     reasons.append(
+                         "描述声明的网络功能未获得同一虚拟设备上的数据面 PASS（%s）" %
+                         network_status
+                     )
+                     error_code = error_code or "E_NETWORK_PARTIAL"
+-                if reasons:
++                if content_service_error:
++                    finish_review(
++                        "service_error", "SIM_PARTIAL", False,
++                        "静态检查及虚拟设备取证已完成；AI 审查服务自动恢复后仍未完成（%s），"
++                        "本次未产生内容判定，待服务恢复后重试。%s" % (
++                            content_service_error, "；".join(reasons)),
++                        content_service_error,
++                    )
++                elif reasons:
+                     finish_review(
+                         "manual_review", "SIM_PARTIAL", False,
+-                        "内容与静态检查通过；虚拟设备已启动并采集证据，但%s，需人工复核。" %
++                        "规则检查与静态检查通过；虚拟设备已启动并采集证据，但%s，需补充验证。" %
+                         "；".join(reasons),
+                         error_code,
+                     )
+                 else:
+                     finish_review(
+                         "done", "SIM_VERIFIED", True,
+-                        "内容与静态检查通过；源 BIN SHA-256/大小匹配；%s 使用 %s 完成虚拟烧录、启动、画面与已声明交互验证；网络安全静态扫描为 REVIEW，恶意软件/木马检测 NOT RUN；未提交 Burner。" %
+-                        (profile, execution.get("profile") or execution.get("runtime")),
++                        "内容与静态检查通过；源 BIN SHA-256/大小匹配；%s 使用 %s 完成虚拟烧录、启动、画面与所需输入响应观察（触摸 %s，按键 %s）；交互语义验证 %s。网络 %s；安全静态扫描 REVIEW，恶意软件/木马检测 NOT RUN；未提交 Burner。" %
++                        (profile, execution.get("profile") or execution.get("runtime"),
++                         interaction.get("touch_status") or "NOT RUN",
++                         interaction.get("button_status") or "NOT RUN",
++                         interaction.get("semantic_verification") or "NOT RUN", network_status),
+                         None,
+                     )
+         except Exception as exc:
+             self.store.event(jid, "error", str(exc), {"trace": traceback.format_exc()[-4000:]})
+-            self.finish(jid, started, "failed", "FAIL", False, "审查执行异常：%s" % str(exc), "E_INTERNAL", evidence)
++            finish_current(jid, started, "service_error", "SIM_PARTIAL", False,
++                        "审查服务执行异常，待恢复后重试；未产生固件判定", "E_INTERNAL", evidence)
+ 
+     def finish(self, jid: str, started: float, status: str, lane: str, passed: bool,
+                conclusion: str, error_code: Optional[str], evidence: Path) -> None:
+@@ -2108,12 +2541,24 @@ class Runtime:
+         self.runtime_dir = Path(config.get("runtime_dir", DEFAULT_RUNTIME)).expanduser()
+         self.runtime_dir.mkdir(parents=True, exist_ok=True)
+         self.store = Store(self.runtime_dir / "state.db")
++        # Only one resident process owns this database. Its old worker threads
++        # cannot survive a restart; leave interrupted jobs retryable, not manual.
++        for interrupted in self.store.jobs(10000):
++            if interrupted.get("status") in {"queued", "running"}:
++                self.store.update_job(
++                    interrupted["id"], status="service_error", passed=0,
++                    lane="SIM_PARTIAL", error_code="E_SERVICE_RESTART",
++                    conclusion="审查服务重启中断了执行，待恢复后重试；未产生新固件判定",
++                    finished_at=utcnow(),
++                )
++                self.store.event(interrupted["id"], "service_error", "服务重启中断，任务可重试")
+         self.store.refresh_all_batches()
+         self.reviewer = Reviewer(config, self.store, self.runtime_dir)
+         self.pool = ThreadPoolExecutor(max_workers=int(config.get("max_workers", 2)))
+         self.lock = threading.Lock()
+ 
+     def submit_jobs(self, items: List[Dict[str, Any]], source: str, filter_json: Dict[str, Any], submit: bool) -> Dict[str, Any]:
++        validate_review_options(filter_json.get("validation"))
+         bid = self.store.create_batch(source, sanitize_config(filter_json), len(items))
+         use_codex = bool(filter_json.get("useCodex")) or bool(filter_json.get("use_codex"))
+         network_config = filter_json.get("network") if isinstance(filter_json.get("network"), dict) else None
+@@ -2121,15 +2566,22 @@ class Runtime:
+         for item in items:
+             existing = self.store.job_by_version(item.get("versionId"))
+             if existing:
+-                retryable = existing.get("status") in {"fail", "failed", "manual_review", "cancelled"}
++                retryable = (existing.get("status") in {"fail", "failed", "manual_review", "service_error", "cancelled"}
++                             or existing.get("source_mode") == "saved_snapshot"
++                             and existing.get("status") not in {"queued", "running"})
+                 if not retryable:
+                     ids.append(existing["id"])
+                     continue
+                 self.store.update_job(
+                     existing["id"],
+                     status="queued", lane=None, passed=None, conclusion=None,
++                    source_mode="live_pending",
++                    declared_sha256=(item.get("binFile") or {}).get("sha256"),
++                    declared_size=(item.get("binFile") or {}).get("fileSize"),
+                     error_code=None, error_detail=None, started_at=None,
+                     finished_at=None, duration_ms=None, use_codex=1 if use_codex else 0,
++                    codex_thread_id=None, codex_input_tokens=None, codex_output_tokens=None,
++                    validation_json=json.dumps(filter_json.get("validation") or {}, ensure_ascii=False),
+                     network_json=json.dumps(sanitize_config(filter_json.get("network")), ensure_ascii=False)
+                     if isinstance(filter_json.get("network"), dict) else existing.get("network_json"),
+                 )
+@@ -2140,6 +2592,7 @@ class Runtime:
+                 )
+                 continue
+             jid = self.store.create_job(bid, item, submit, use_codex, sanitize_config(network_config) if network_config else None)
++            self.store.update_job(jid, validation_json=json.dumps(filter_json.get("validation") or {}, ensure_ascii=False))
+             if jid not in ids:
+                 ids.append(jid)
+                 self.store.event(jid, "queued", "job queued from %s" % source)
+@@ -2147,6 +2600,32 @@ class Runtime:
+         self.store.update_batch(bid, queued=len(ids))
+         return {"batchId": bid, "queued": len(ids), "jobIds": ids}
+ 
++    def retry_saved_job(self, jid: str, body: Dict[str, Any]) -> Dict[str, Any]:
++        """Reproduce a historical local review without inventing a live pending item."""
++        with self.lock:
++            job = self.store.job(jid)
++            if not job or job.get("status") in {"queued", "running"}:
++                raise ValueError("任务不存在或正在执行")
++            jobdir = self.runtime_dir / "jobs" / jid
++            data = (jobdir / "firmware.bin").read_bytes()
++            if (len(data) != job.get("declared_size") or
++                    hashlib.sha256(data).hexdigest() != job.get("declared_sha256")):
++                raise ValueError("保存的 BIN 与原审核哈希/大小不符，禁止复审")
++            json.loads((jobdir / "content.json").read_text())
++            validation = body.get("validation", json.loads(job.get("validation_json") or "{}"))
++            validate_review_options(validation)
++            self.store.update_job(
++                jid, status="queued", lane=None, passed=None, conclusion=None,
++                error_code=None, error_detail=None, started_at=None, finished_at=None,
++                duration_ms=None, source_mode="saved_snapshot", submit_requested=0,
++                use_codex=1 if body.get("useCodex", True) else 0,
++                codex_thread_id=None, codex_input_tokens=None, codex_output_tokens=None,
++                validation_json=json.dumps(validation, ensure_ascii=False),
++            )
++            self.store.event(jid, "retry", "已保存快照复审入队，保持本地验证")
++            self.pool.submit(self.safe_run_review, jid)
++        return {"jobIds": [jid], "queued": 1, "sourceMode": "saved_snapshot"}
++
+     def safe_run_review(
+         self, jid: str, network_config: Optional[Dict[str, Any]] = None
+     ) -> None:
+@@ -2165,10 +2644,10 @@ class Runtime:
+         finally:
+             job = self.store.job(jid)
+             if job and job.get("status") in {"queued", "running"}:
+-                message = "审查 worker 未正常收口，已转为人工复核"
++                message = "审查 worker 执行异常，待服务恢复后重试；未产生固件内容判定"
+                 self.store.update_job(
+                     jid,
+-                    status="manual_review",
++                    status="service_error",
+                     lane="SIM_PARTIAL",
+                     passed=0,
+                     conclusion=message,
+@@ -2180,7 +2659,7 @@ class Runtime:
+                     "done",
+                     message,
+                     {
+-                        "status": "manual_review",
++                        "status": "service_error",
+                         "lane": "SIM_PARTIAL",
+                         "passed": False,
+                     },
+@@ -2193,6 +2672,10 @@ class Runtime:
+         job = self.store.job(jid)
+         if not job:
+             raise RuntimeError("任务不存在")
++        if job.get("source_mode") == "saved_snapshot":
++            raise RuntimeError("历史快照复审仅供本地验证，必须重新核对 live pending 后才能提交")
++        if job.get("status") == "service_error":
++            raise RuntimeError("审查服务执行失败，没有可提交的固件结论")
+         if job.get("status") in ("queued", "running"):
+             raise RuntimeError("任务尚未完成，不能提交")
+         if not job.get("conclusion"):
+@@ -2425,6 +2908,21 @@ class Handler(BaseHTTPRequestHandler):
+         path = p.path
+         try:
+             body = self._body()
++            try:
++                validate_review_options(body.get("validation"))
++            except ValueError as exc:
++                self._json(400, {"error": str(exc)})
++                return
++            if path.startswith("/api/reviews/") and path.endswith("/retry"):
++                if body.get("sourceMode") != "saved_snapshot":
++                    self._json(400, {"error": "历史复审必须明确 sourceMode=saved_snapshot"})
++                    return
++                jid = path.split("/")[3]
++                try:
++                    self._json(202, self.runtime.retry_saved_job(jid, body))
++                except (ValueError, OSError) as exc:
++                    self._json(409, {"error": str(exc)})
++                return
+             if path.startswith("/api/reviews/") and path.endswith("/submit"):
+                 parts = [x for x in path.split("/") if x]
+                 jid = parts[2]
+diff --git a/service/frame_assertions.py b/service/frame_assertions.py
+new file mode 100644
+index 0000000..b276dcf
+--- /dev/null
++++ b/service/frame_assertions.py
+@@ -0,0 +1,148 @@
++"""Bounded PNG decoding and explicit framebuffer assertions, without image libraries."""
++from collections import Counter
++import hashlib
++import math
++import struct
++import zlib
++
++
++def decode_png(data):
++    """Return (width, height, RGB[A] bytes, channels); support PNG filters 0..4."""
++    if data[:8] != b"\x89PNG\r\n\x1a\n":
++        raise ValueError("invalid PNG signature")
++    position, header, compressed, ended = 8, None, bytearray(), False
++    while position < len(data):
++        if position + 12 > len(data):
++            raise ValueError("truncated PNG chunk")
++        length, kind = struct.unpack(">I4s", data[position:position + 8])
++        end = position + 12 + length
++        if end > len(data):
++            raise ValueError("truncated PNG payload")
++        payload = data[position + 8:end - 4]
++        crc = struct.unpack(">I", data[end - 4:end])[0]
++        if zlib.crc32(kind + payload) & 0xffffffff != crc:
++            raise ValueError("PNG CRC mismatch")
++        if header is None and kind != b"IHDR":
++            raise ValueError("PNG header must be first")
++        if kind == b"IHDR":
++            if header is not None or length != 13:
++                raise ValueError("invalid PNG header")
++            header = struct.unpack(">IIBBBBB", payload)
++        elif kind == b"IDAT":
++            compressed.extend(payload)
++        elif kind == b"IEND":
++            if length:
++                raise ValueError("invalid PNG end chunk")
++            ended = True
++            position = end
++            break
++        elif kind in {b"tRNS", b"acTL", b"fcTL", b"fdAT"}:
++            raise ValueError("PNG transparency keys and animation are unsupported")
++        elif kind != b"PLTE" and not kind[0] & 32:
++            raise ValueError("unsupported critical PNG chunk")
++        position = end
++    if not header or not ended or position != len(data):
++        raise ValueError("incomplete PNG")
++    width, height, depth, color, compression, filtering, interlace = header
++    if not (0 < width and 0 < height and width * height <= 16777216):
++        raise ValueError("PNG dimensions exceed supported bounds")
++    if depth != 8 or color not in (2, 6) or compression or filtering or interlace:
++        raise ValueError("only noninterlaced 8-bit RGB/RGBA PNG is supported")
++    channels = 3 if color == 2 else 4
++    stride = width * channels
++    expected = (stride + 1) * height
++    decoder = zlib.decompressobj()
++    raw = decoder.decompress(bytes(compressed), expected + 1)
++    if len(raw) != expected or not decoder.eof or decoder.unused_data:
++        raise ValueError("invalid PNG decompressed size")
++    pixels, previous = bytearray(), bytearray(stride)
++    for y in range(height):
++        row = bytearray(raw[y * (stride + 1) + 1:(y + 1) * (stride + 1)])
++        filter_kind = raw[y * (stride + 1)]
++        if filter_kind > 4:
++            raise ValueError("unsupported PNG row filter")
++        for x in range(stride):
++            left = row[x - channels] if x >= channels else 0
++            above = previous[x]
++            upper_left = previous[x - channels] if x >= channels else 0
++            if filter_kind == 1:
++                predictor = left
++            elif filter_kind == 2:
++                predictor = above
++            elif filter_kind == 3:
++                predictor = (left + above) // 2
++            elif filter_kind == 4:
++                estimate = left + above - upper_left
++                distances = (abs(estimate - left), abs(estimate - above), abs(estimate - upper_left))
++                predictor = (left, above, upper_left)[distances.index(min(distances))]
++            else:
++                predictor = 0
++            row[x] = (row[x] + predictor) & 255
++        pixels.extend(row)
++        previous = row
++    return width, height, bytes(pixels), channels
++
++
++def evaluate_frame_assertion(before: bytes, after: bytes, config: dict) -> dict:
++    result = {"status": "PARTIAL", "scope": "framebuffer_assertion",
++              "before_sha256": hashlib.sha256(before).hexdigest(),
++              "after_sha256": hashlib.sha256(after).hexdigest()}
++    try:
++        kind = config.get("type")
++        if kind not in {"frame_palette_change", "frame_foreground_change"}:
++            raise ValueError("unsupported framebuffer assertion type")
++        result["scope"] = kind
++        width, height, old, old_channels = decode_png(before)
++        new_width, new_height, new, new_channels = decode_png(after)
++        if (width, height) != (new_width, new_height):
++            raise ValueError("framebuffer dimensions differ")
++        region = config.get("region", [0, 0, width, height])
++        if len(region) != 4 or any(type(value) is not int for value in region):
++            raise ValueError("region must contain four integers")
++        x, y, region_width, region_height = region
++        if min(x, y) < 0 or min(region_width, region_height) <= 0 or x + region_width > width or y + region_height > height:
++            raise ValueError("region falls outside framebuffer")
++        backgrounds = {tuple(value) for value in config.get("background_colors", [[0, 0, 0]])}
++        if any(len(value) != 3 or any(type(channel) is not int or not 0 <= channel <= 255 for channel in value)
++               for value in backgrounds):
++            raise ValueError("background_colors must contain RGB triples")
++        palettes, masks = [], []
++        for pixels, channels in ((old, old_channels), (new, new_channels)):
++            palette, mask = Counter(), bytearray()
++            for row in range(y, y + region_height):
++                for column in range(x, x + region_width):
++                    offset = (row * width + column) * channels
++                    rgb = tuple(pixels[offset:offset + 3])
++                    foreground = rgb not in backgrounds and (channels != 4 or pixels[offset + 3] != 0)
++                    mask.append(foreground)
++                    if foreground:
++                        palette[rgb] += 1
++            palettes.append(palette)
++            masks.append(mask)
++        counts = [sum(mask) for mask in masks]
++        result.update(region=list(region), foreground_pixels_before=counts[0], foreground_pixels_after=counts[1])
++        minimum = config.get("min_foreground_pixels", 16)
++        if type(minimum) is not int or minimum < 1:
++            raise ValueError("min_foreground_pixels must be a positive integer")
++        if min(counts) < minimum:
++            raise ValueError("insufficient foreground pixels")
++        if kind == "frame_palette_change":
++            colors = [palette.most_common(1)[0][0] for palette in palettes]
++            result.update(before_color=list(colors[0]), after_color=list(colors[1]))
++            passed = colors[0] != colors[1]
++        else:
++            changed = sum(a != b for a, b in zip(*masks))
++            union = sum(bool(a or b) for a, b in zip(*masks))
++            fraction = changed / len(masks[0])
++            threshold = float(config.get("minimum_changed_fraction", 0.08))
++            if not math.isfinite(threshold) or not 0 < threshold <= 1:
++                raise ValueError("minimum_changed_fraction must lie in (0, 1]")
++            result.update(changed_pixels=changed, region_pixels=len(masks[0]), changed_fraction=fraction,
++                          foreground_union_pixels=union, changed_foreground_fraction=changed / union,
++                          minimum_changed_fraction=threshold)
++            passed = fraction >= threshold
++        result["status"] = "PASS" if passed else "PARTIAL"
++        result["reason"] = "configured framebuffer change observed" if passed else "configured framebuffer change not observed"
++    except (ValueError, TypeError, KeyError, IndexError, struct.error, zlib.error) as exc:
++        result["reason"] = str(exc)
++    return result
+diff --git a/tests/test_codex_runner.py b/tests/test_codex_runner.py
+new file mode 100644
+index 0000000..27ec98f
+--- /dev/null
++++ b/tests/test_codex_runner.py
+@@ -0,0 +1,133 @@
++import importlib.util
++import json
++import subprocess
++import sys
++import tempfile
++import unittest
++from pathlib import Path
++from unittest.mock import Mock, patch
++
++
++spec = importlib.util.spec_from_file_location("review_service", Path(__file__).parents[1] / "service/app.py")
++app = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(app)
++
++
++class CodexRecoveryTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.workspace = Path(self.temp.name)
++        self.addCleanup(self.temp.cleanup)
++
++    def success(self, command, **kwargs):
++        output = Path(command[command.index("-o") + 1])
++        output.write_text(json.dumps({"verdict": "PASS", "reason": "内容合规"}))
++        return subprocess.CompletedProcess(command, 0, '\n'.join([
++            json.dumps({"type": "thread.started", "thread_id": "test-thread"}),
++            json.dumps({"type": "turn.completed", "usage": {"input_tokens": 10, "output_tokens": 4}}),
++        ]), "")
++
++    def test_explicit_route_and_recovery_after_transport_failure(self):
++        runner = app.CodexRunner("codex", {"codex_model": "review-model", "codex_model_provider": "configured",
++                                           "codex_ignore_user_config": True})
++        calls = []
++        def execute(command, **kwargs):
++            calls.append(command)
++            if len(calls) == 1:
++                return subprocess.CompletedProcess(command, 1, '{"type":"turn.failed","error":{"message":"connection reset"}}', "")
++            return self.success(command, **kwargs)
++        with patch.object(app.CodexRunner, "run_command", side_effect=execute), patch.object(app.time, "sleep"):
++            result = runner.content_review(self.workspace, {}, {})
++        self.assertTrue(result["ok"])
++        self.assertEqual(len(result["attempts"]), 2)
++        self.assertIn('model_provider="configured"', calls[1])
++        self.assertIn("--ignore-user-config", calls[1])
++        self.assertEqual(calls[1][calls[1].index("-m") + 1], "review-model")
++        self.assertEqual(result["usage"]["input_tokens"], 10)
++
++    def test_stale_pass_cannot_hide_failed_model_or_route(self):
++        (self.workspace / "content-last.json").write_text('{"verdict":"PASS","reason":"old"}')
++        failure = subprocess.CompletedProcess([], 1, '{"type":"turn.failed","error":{"message":"model_not_found"}}', "")
++        with patch.object(app.CodexRunner, "run_command", return_value=failure) as invoke:
++            result = app.CodexRunner("codex").content_review(self.workspace, {}, {})
++        self.assertFalse(result["ok"])
++        self.assertEqual(result["verdict"], "ERROR")
++        self.assertEqual(result["error_code"], "E_CODEX_MODEL_CONFIG")
++        self.assertEqual(invoke.call_count, 1)
++        self.assertFalse((self.workspace / "content-last.json").exists())
++
++    def test_only_configured_fallback_route_is_used(self):
++        calls = []
++        def execute(command, **kwargs):
++            calls.append(command)
++            if len(calls) == 1:
++                return subprocess.CompletedProcess(command, 1, '{"type":"turn.failed","error":{"message":"model_not_found"}}', "")
++            return self.success(command, **kwargs)
++        runner = app.CodexRunner("codex", {"codex_fallback_routes": [{"model": "backup", "provider": "configured"}]})
++        with patch.object(app.CodexRunner, "run_command", side_effect=execute), patch.object(app.time, "sleep"):
++            result = runner.content_review(self.workspace, {}, {})
++        self.assertTrue(result["ok"])
++        self.assertIn("backup", calls[1])
++
++    def test_timeout_retries_are_bounded_and_never_content_manual(self):
++        with patch.object(app.CodexRunner, "run_command", side_effect=subprocess.TimeoutExpired("codex", 1)) as invoke, patch.object(app.time, "sleep"):
++            result = app.CodexRunner("codex").content_review(self.workspace, {}, {})
++        self.assertEqual(invoke.call_count, 3)
++        self.assertEqual(result["verdict"], "ERROR")
++        self.assertEqual(result["error_code"], "E_CODEX_TIMEOUT")
++        self.assertEqual(len(list((self.workspace / "codex-attempts").iterdir())), 3)
++
++    def test_real_manual_judgment_is_preserved_without_retries(self):
++        def execute(command, **kwargs):
++            completed = self.success(command, **kwargs)
++            Path(command[command.index("-o") + 1]).write_text('{"verdict":"MANUAL","reason":"用途含义不明"}')
++            return completed
++        with patch.object(app.CodexRunner, "run_command", side_effect=execute) as invoke:
++            result = app.CodexRunner("codex").content_review(self.workspace, {}, {})
++        self.assertTrue(result["ok"])
++        self.assertEqual(result["verdict"], "MANUAL")
++        self.assertEqual(invoke.call_count, 1)
++
++    def test_valid_json_without_completed_turn_does_not_pass(self):
++        def execute(command, **kwargs):
++            self.success(command, **kwargs)
++            return subprocess.CompletedProcess(command, 0, '{"type":"turn.failed"}', "")
++        with patch.object(app.CodexRunner, "run_command", side_effect=execute), patch.object(app.time, "sleep"):
++            result = app.CodexRunner("codex").content_review(self.workspace, {}, {})
++        self.assertFalse(result["ok"])
++        self.assertEqual(result["verdict"], "ERROR")
++
++    def test_incomplete_worker_is_service_error_and_job_can_be_retried(self):
++        runtime = app.Runtime.__new__(app.Runtime)
++        runtime.store = Mock()
++        job_id = "test-job"
++        job = {"status": "queued", "batch_id": "test-batch"}
++        runtime.store.job.return_value = job
++        runtime.store.update_job.side_effect = lambda _, **fields: job.update(fields)
++        class IncompleteReviewer:
++            def run(self, *_):
++                return None
++        runtime.reviewer = IncompleteReviewer()
++        runtime.safe_run_review(job_id)
++        self.assertEqual(job["status"], "service_error")
++        self.assertEqual(job["error_code"], "E_INTERNAL_INCOMPLETE")
++        self.assertFalse(job["passed"])
++
++    def test_timeout_terminates_wrapper_and_native_child_group(self):
++        pid_file = self.workspace / "child.pid"
++        program = (
++            "import subprocess,sys,time,pathlib; "
++            "p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)']); "
++            "pathlib.Path(sys.argv[1]).write_text(str(p.pid)); time.sleep(60)"
++        )
++        with self.assertRaises(subprocess.TimeoutExpired):
++            app.CodexRunner("unused").run_command(
++                [sys.executable, "-c", program, str(pid_file)], input="", timeout=0.5,
++            )
++        pid = pid_file.read_text()
++        state = subprocess.run(["ps", "-p", pid, "-o", "stat="], capture_output=True, text=True).stdout.strip()
++        self.assertTrue(not state or state.startswith("Z"), "native child is still running")
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_frame_assertions.py b/tests/test_frame_assertions.py
+new file mode 100644
+index 0000000..c14bf5d
+--- /dev/null
++++ b/tests/test_frame_assertions.py
+@@ -0,0 +1,151 @@
++"""Synthetic pixel oracles verify PNG decoding and bounded framebuffer assertions."""
++import importlib.util
++from pathlib import Path
++import struct
++import unittest
++import zlib
++
++
++SPEC = importlib.util.spec_from_file_location(
++    "frame_assertions", Path(__file__).resolve().parents[1] / "service/frame_assertions.py"
++)
++frames = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(frames)
++
++
++def chunk(kind, payload):
++    return (struct.pack(">I", len(payload)) + kind + payload +
++            struct.pack(">I", zlib.crc32(kind + payload) & 0xffffffff))
++
++
++def png(width, height, pixels, channels=3, row_filter=0, color_type=None, extra_raw=b""):
++    raw = bytearray()
++    previous = bytes(width * channels)
++    for y in range(height):
++        row = bytes(pixels[y * width * channels:(y + 1) * width * channels])
++        encoded = bytearray()
++        for x, value in enumerate(row):
++            left = row[x - channels] if x >= channels else 0
++            above = previous[x]
++            upper_left = previous[x - channels] if x >= channels else 0
++            if row_filter == 1:
++                predictor = left
++            elif row_filter == 2:
++                predictor = above
++            elif row_filter == 3:
++                predictor = (left + above) // 2
++            elif row_filter == 4:
++                estimate = left + above - upper_left
++                distances = [abs(estimate - candidate) for candidate in (left, above, upper_left)]
++                predictor = (left, above, upper_left)[distances.index(min(distances))]
++            else:
++                predictor = 0
++            encoded.append((value - predictor) & 255)
++        raw.append(row_filter)
++        raw.extend(encoded)
++        previous = row
++    header = struct.pack(">IIBBBBB", width, height, 8,
++                         color_type if color_type is not None else (2 if channels == 3 else 6), 0, 0, 0)
++    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", header) +
++            chunk(b"IDAT", zlib.compress(bytes(raw) + extra_raw)) + chunk(b"IEND", b""))
++
++
++def picture(color=(255, 0, 0), points=None, background=(0, 0, 0)):
++    points = points if points is not None else {(x, y) for x in range(2, 6) for y in range(2, 6)}
++    return png(8, 8, bytes(channel for y in range(8) for x in range(8)
++                           for channel in (color if (x, y) in points else background)))
++
++
++class FrameAssertionTests(unittest.TestCase):
++    def test_all_png_filters_decode_exact_rgb_and_rgba_pixels(self):
++        for channels in (3, 4):
++            pixels = bytes((index * 37 + index // 7) % 256 for index in range(7 * 5 * channels))
++            for filter_kind in range(5):
++                with self.subTest(channels=channels, filter=filter_kind):
++                    self.assertEqual(frames.decode_png(png(7, 5, pixels, channels, filter_kind)),
++                                     (7, 5, pixels, channels))
++
++    def test_palette_change_passes_without_claiming_silhouette_change(self):
++        before, after = picture(), picture((0, 255, 0))
++        config = {"type": "frame_palette_change", "min_foreground_pixels": 16}
++        result = frames.evaluate_frame_assertion(before, after, config)
++        self.assertEqual(result["status"], "PASS")
++        self.assertEqual(result["before_color"], [255, 0, 0])
++        self.assertEqual(result["after_color"], [0, 255, 0])
++        self.assertEqual(result["foreground_pixels_before"], 16)
++        result = frames.evaluate_frame_assertion(before, after, {"type": "frame_foreground_change"})
++        self.assertEqual(result["status"], "PARTIAL")
++        self.assertEqual(result["changed_fraction"], 0)
++
++    def test_mask_change_uses_exact_region_hamming_fraction(self):
++        old_points = {(x, y) for x in range(2, 6) for y in range(2, 6)}
++        new_points = {(x, y) for x in range(3, 7) for y in range(2, 6)}
++        result = frames.evaluate_frame_assertion(picture(points=old_points), picture(points=new_points), {
++            "type": "frame_foreground_change", "minimum_changed_fraction": 0.125,
++        })
++        self.assertEqual(result["status"], "PASS")
++        self.assertEqual(result["changed_pixels"], 8)
++        self.assertEqual(result["changed_fraction"], 8 / 64)
++        self.assertEqual(result["changed_foreground_fraction"], 8 / 20)
++
++    def test_small_eye_animation_does_not_meet_shape_threshold(self):
++        old_points = {(x, y) for x in range(2, 6) for y in range(2, 6)}
++        new_points = old_points - {(3, 3)}
++        config = {"type": "frame_foreground_change", "minimum_changed_fraction": 0.08,
++                  "min_foreground_pixels": 10}
++        result = frames.evaluate_frame_assertion(picture(points=old_points), picture(points=new_points), config)
++        self.assertEqual(result["status"], "PARTIAL")
++        self.assertEqual(result["changed_pixels"], 1)
++        self.assertEqual(frames.evaluate_frame_assertion(picture(), picture(), {
++            "type": "frame_palette_change",
++        })["status"], "PARTIAL")
++
++    def test_explicit_backgrounds_and_region_exclude_irrelevant_pixels(self):
++        before, after = picture(background=(7, 9, 8)), picture((0, 255, 0), background=(7, 9, 8))
++        result = frames.evaluate_frame_assertion(before, after, {
++            "type": "frame_palette_change", "background_colors": [[0, 0, 0], [7, 9, 8]],
++            "region": [2, 2, 4, 4],
++        })
++        self.assertEqual(result["status"], "PASS")
++        self.assertEqual(result["foreground_pixels_after"], 16)
++
++    def test_transparent_rgba_pixels_are_not_foreground(self):
++        before = png(2, 2, bytes([255, 0, 0, 0] * 4), channels=4)
++        after = png(2, 2, bytes([0, 255, 0, 0] * 4), channels=4)
++        result = frames.evaluate_frame_assertion(before, after, {
++            "type": "frame_palette_change", "min_foreground_pixels": 1,
++        })
++        self.assertEqual(result["status"], "PARTIAL")
++        self.assertEqual(result["foreground_pixels_before"], 0)
++
++    def test_corrupt_unsupported_or_inconsistent_png_never_passes(self):
++        valid = picture()
++        bad_crc = bytearray(valid)
++        bad_crc[-1] ^= 1
++        for malformed in (
++            b"not-png", valid[:-3], bytes(bad_crc),
++            valid[:33] + chunk(b"tRNS", bytes(6)) + valid[33:],
++            valid[:33] + chunk(b"acTL", struct.pack(">II", 1, 0)) + valid[33:],
++            png(8, 8, bytes(8 * 8 * 3), color_type=0),
++            png(8, 8, bytes(8 * 8 * 3), row_filter=5),
++            png(8, 8, bytes(8 * 8 * 3), extra_raw=b"unbounded trailing output"),
++            png(1, 1, bytes([255, 0, 0])),
++        ):
++            with self.subTest(length=len(malformed)):
++                result = frames.evaluate_frame_assertion(valid, malformed, {"type": "frame_palette_change"})
++                self.assertEqual(result["status"], "PARTIAL")
++
++    def test_invalid_configuration_never_passes(self):
++        for config in (
++            {"type": "unknown"},
++            {"type": "frame_palette_change", "region": [0, 0, 100, 100]},
++            {"type": "frame_palette_change", "background_colors": [[-1, 0, 0]]},
++            {"type": "frame_foreground_change", "minimum_changed_fraction": float("nan")},
++            {"type": "frame_foreground_change", "minimum_changed_fraction": 0},
++        ):
++            self.assertEqual(frames.evaluate_frame_assertion(picture(), picture((0, 255, 0)), config)["status"],
++                             "PARTIAL")
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_review_claims.py b/tests/test_review_claims.py
+new file mode 100644
+index 0000000..6dd251e
+--- /dev/null
++++ b/tests/test_review_claims.py
+@@ -0,0 +1,193 @@
++"""Regression coverage for review requirements and evidence attribution."""
++import importlib.util
++from pathlib import Path
++import tempfile
++import unittest
++
++
++SPEC = importlib.util.spec_from_file_location(
++    "firmware_review_app", Path(__file__).resolve().parents[1] / "service/app.py"
++)
++app = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(app)
++
++
++def claims(description):
++    return app.review_claims({"firmware_description": description})
++
++
++class ReviewClaimTests(unittest.TestCase):
++    def test_actual_grok_description_has_no_network_requirement_and_both_buttons(self):
++        # Exact relevant submitted wording from the 0.3.0 job, kept independent
++        # of the local task database and its private paths.
++        content = {
++            "firmware_name": "Grok Bot MultiFace · StopWatch",
++            "version_name": "0.3.0",
++            "firmware_description": (
++                "13 种角色、11 种颜色、12 种随机轮换表情的独立离线演示。"
++                "触摸控制头部和视线，IMU 支持相对姿态跟随，无需网络或账号。\n"
++                "- 左键 A 单击：切换角色（约 320 ms 延迟，用于区分双击）。\n"
++                "- 右键 B 单击：切换颜色。\n"
++                "- 双击 A：将当前姿态设为 IMU 中立位置，提示期间保持片刻静止。\n"
++                "- 同时按住 A+B 一秒：也可重新校准。\n"
++                "- 触摸或拖动：头和眼睛跟随手指，触摸优先于 IMU。\n"
++                "这是纯表情演示，说话和聆听是动画状态，不含语音识别、TTS 或联网功能。\n"
++                "感谢 [Grok Bot 网页参考实现](https://grokbot.yin.wiki/index.html) "
++                "提供的交互与视觉参考，感谢 [xAI Grok Bot](https://x.ai/bot) 的角色设计启发。\n"
++                "Special thanks to https://grokbot.yin.wiki/index.html for the visual reference."
++            ),
++        }
++        result = app.review_claims(content)
++        self.assertFalse(result["network_required"])
++        self.assertTrue(result["touch_required"])
++        self.assertTrue(result["button_required"])
++        self.assertEqual(result["required_buttons"], ["a", "b"])
++        self.assertFalse(result["ab_navigation_required"])
++
++    def test_negation_is_scoped_and_cannot_hide_positive_network_features(self):
++        for description in (
++            "离线演示，但支持联网获取天气。",
++            "无需网络即可启动；支持 MQTT 推送。",
++            "不支持 WiFi，但支持 Ethernet network。",
++            "Offline demo, with optional WiFi cloud synchronization.",
++            "No account required to use WiFi.",
++            "无需账号即可联网。",
++            "无需账号联网。",
++            "支持无线网络。",
++        ):
++            with self.subTest(description=description):
++                self.assertTrue(claims(description)["network_required"])
++
++    def test_negative_network_claims_and_reference_urls_do_not_require_network(self):
++        for description in (
++            "无需网络或账号。",
++            "不含语音识别、TTS 或联网功能。",
++            "No WiFi or cloud features.",
++            "Does not support network connectivity.",
++            "WiFi is not supported.",
++            "[Source](https://example.org/network/api) ![network](https://example.org/a.png)",
++            "参考 https://example.org/firmware 的本地绘图。",
++        ):
++            with self.subTest(description=description):
++                self.assertFalse(claims(description)["network_required"])
++
++    def test_word_fragments_do_not_invent_requirements(self):
++        result = claims("Rapid graphics and monkey artwork with a pushbuttonless enclosure.")
++        self.assertFalse(result["network_required"])
++        self.assertFalse(result["button_required"])
++
++    def test_explicit_button_forms_and_navigation(self):
++        for description in ("左键 A / 右键 B", "双击 A，长按 B", "同时按住 A+B", "Press A and B"):
++            with self.subTest(description=description):
++                result = claims(description)
++                self.assertTrue(result["button_required"])
++                self.assertEqual(result["required_buttons"], ["a", "b"])
++        self.assertTrue(claims("按键 A/B 用于上一页和下一页。")["ab_navigation_required"])
++        self.assertEqual(claims("Press A to select.")["required_buttons"], ["a"])
++
++
++class InteractionEvidenceTests(unittest.TestCase):
++    def setUp(self):
++        self.requirements = claims("触摸控制；左键 A 切换角色，右键 B 切换颜色。")
++
++    def test_touch_plan_does_not_suppress_claimed_buttons(self):
++        plan = app.Reviewer.input_plan({"touch": True, "width": 466, "height": 466},
++                                      {"input": True}, self.requirements)
++        self.assertEqual([name for name, _ in plan], ["touch_center", "drag_left", "key_a", "key_b"])
++
++    def test_touch_pass_does_not_mask_missing_or_rejected_button(self):
++        for key_b in (None, {"name": "key_b", "accepted": False, "frame_changed": True}):
++            results = [
++                {"name": "touch_center", "accepted": True, "frame_changed": True},
++                {"name": "key_a", "accepted": True, "frame_changed": True},
++            ]
++            if key_b:
++                results.append(key_b)
++            summary = app.Reviewer.interaction_summary(results, self.requirements)
++            self.assertEqual(summary["touch_status"], "PASS")
++            self.assertNotEqual(summary["button_status"], "PASS")
++            self.assertEqual(summary["status"], "PARTIAL")
++
++    def test_animated_frame_changes_cannot_prove_navigation_semantics(self):
++        results = [{"name": "key_" + key, "accepted": True, "frame_changed": True}
++                   for key in ("a", "b")]
++        summary = app.Reviewer.interaction_summary(results, claims("按键 A/B 翻页。"))
++        self.assertFalse(summary["ab_navigation_verified"])
++        self.assertEqual(summary["semantic_verification"], "NOT RUN")
++        self.assertEqual(summary["status"], "PARTIAL")
++
++    def run_serial_case(self, *, emit=True, change=True, options=None, baseline=True):
++        class FakeSim:
++            def __init__(self):
++                self.log = "shape=1 color=2\n" if baseline else "booted\n"
++                self.inputs = []
++                self.shape, self.color = 1, 2
++
++            def json(self, path, method="GET", payload=None, timeout=20):
++                if "/input" in path:
++                    self.inputs.append(dict(payload))
++                    if payload.get("action") in {None, "tap", "up"}:
++                        if change:
++                            if payload["key"] == "a":
++                                self.shape += 1
++                            else:
++                                self.color += 1
++                        if emit:
++                            self.log += "shape=%d color=%d\n" % (self.shape, self.color)
++                    return {"accepted": True}
++                from urllib.parse import parse_qs, urlparse
++                offset = int(parse_qs(urlparse(path).query)["offset"][0])
++                data = self.log.encode()[offset:]
++                return {"data": data.decode(), "bytes": len(data), "next_offset": offset + len(data)}
++
++            def binary(self, path, timeout=30):
++                return ("animated-frame-%d" % len(self.inputs)).encode()
++
++        sim = FakeSim()
++        reviewer = object.__new__(app.Reviewer)
++        reviewer.sim = sim
++        validation = {"input_assertions": {
++            "key_a": {"serial_pattern": r"shape=(?P<shape>\d+) color=(?P<color>\d+)",
++                      "group": "shape", "comparison": "changed", "unchanged_groups": ["color"],
++                      "timeout_seconds": 0},
++            "key_b": {"serial_pattern": r"shape=(?P<shape>\d+) color=(?P<color>\d+)",
++                      "group": "color", "comparison": "changed", "unchanged_groups": ["shape"],
++                      "timeout_seconds": 0},
++        }, "input_options": options or {}}
++        with tempfile.TemporaryDirectory() as directory:
++            jobdir = Path(directory)
++            (jobdir / "evidence").mkdir()
++            result = reviewer.interaction_test("test", "session", b"before", {"touch": False},
++                                              {"input": True}, claims("左键 A，右键 B。"),
++                                              jobdir, validation)
++            artifacts = sorted(path.name for path in (jobdir / "evidence").iterdir())
++        return result, sim.inputs, artifacts
++
++    def test_serial_assertions_verify_each_button_with_new_state_and_stable_other_field(self):
++        result, _, artifacts = self.run_serial_case()
++        self.assertEqual(result["status"], "PASS")
++        self.assertEqual(result["semantic_verification"], "PASS")
++        self.assertEqual(result["results"][0]["semantic_assertion"]["before"], "1")
++        self.assertEqual(result["results"][0]["semantic_assertion"]["after"], "2")
++        self.assertIn("interaction-key_b-serial-after.log", artifacts)
++
++    def test_missing_new_serial_or_unchanged_state_cannot_be_masked_by_animation(self):
++        for settings in ({"emit": False}, {"change": False}, {"baseline": False}):
++            result, _, _ = self.run_serial_case(**settings)
++            self.assertEqual(result["semantic_verification"], "PARTIAL")
++            self.assertEqual(result["status"], "PARTIAL")
++
++    def test_short_button_pulse_is_explicit_press_and_release(self):
++        result, requests, _ = self.run_serial_case(options={
++            "key_a": {"hold_seconds": 0.05, "settle_seconds": 0.05},
++            "key_b": {"hold_seconds": 0.05, "settle_seconds": 0.05},
++        })
++        self.assertEqual(result["semantic_verification"], "PASS")
++        self.assertEqual([(request["key"], request["action"], request["settle_seconds"])
++                          for request in requests],
++                         [("a", "down", 0.05), ("a", "up", 0.05),
++                          ("b", "down", 0.05), ("b", "up", 0.05)])
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/test_review_replay.py b/tests/test_review_replay.py
+new file mode 100644
+index 0000000..f37276e
+--- /dev/null
++++ b/tests/test_review_replay.py
+@@ -0,0 +1,83 @@
++import hashlib
++import importlib.util
++import json
++import sqlite3
++import tempfile
++import threading
++import unittest
++from pathlib import Path
++from unittest.mock import Mock, patch
++
++spec = importlib.util.spec_from_file_location("review_replay_app", Path(__file__).parents[1] / "service/app.py")
++app = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(app)
++
++
++class SavedReviewTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        self.connections = []
++        original_connect = sqlite3.connect
++        def connect(*args, **kwargs):
++            connection = original_connect(*args, **kwargs)
++            self.connections.append(connection)
++            return connection
++        self.patcher = patch.object(app.sqlite3, "connect", side_effect=connect)
++        self.patcher.start()
++        self.addCleanup(self.patcher.stop)
++        self.addCleanup(lambda: [connection.close() for connection in self.connections])
++        self.runtime = app.Runtime.__new__(app.Runtime)
++        self.runtime.runtime_dir = Path(self.temp.name)
++        self.runtime.store = app.Store(Path(self.temp.name) / "state.db")
++        self.runtime.lock = threading.Lock()
++        self.runtime.pool = Mock()
++        self.runtime.config = {"submit_enabled": True}
++        self.runtime.reviewer = Mock()
++        self.data = b"same historical binary"
++        self.item = {"versionId": "v1", "firmwareId": "f1", "binFile": {
++            "sha256": hashlib.sha256(self.data).hexdigest(), "fileSize": len(self.data),
++        }}
++        self.jid = self.runtime.store.create_job("", self.item, False)
++        self.runtime.store.update_job(self.jid, status="manual_review")
++        self.jobdir = Path(self.temp.name) / "jobs" / self.jid
++        self.jobdir.mkdir(parents=True)
++        (self.jobdir / "firmware.bin").write_bytes(self.data)
++        (self.jobdir / "content.json").write_text('{"firmware_name":"saved"}')
++
++    def test_snapshot_retest_checks_hash_and_blocks_publishing(self):
++        result = self.runtime.retry_saved_job(self.jid, {"useCodex": True})
++        self.assertEqual(result["sourceMode"], "saved_snapshot")
++        self.assertEqual(self.runtime.store.job(self.jid)["source_mode"], "saved_snapshot")
++        with self.assertRaisesRegex(RuntimeError, "历史快照"):
++            self.runtime.submit_job(self.jid)
++        self.runtime.reviewer.burner.json.assert_not_called()
++        with self.assertRaises(ValueError):
++            self.runtime.retry_saved_job(self.jid, {})
++
++    def test_corrupt_cached_binary_is_never_queued(self):
++        (self.jobdir / "firmware.bin").write_bytes(b"changed")
++        with self.assertRaisesRegex(ValueError, "哈希"):
++            self.runtime.retry_saved_job(self.jid, {})
++        self.runtime.pool.submit.assert_not_called()
++
++    def test_completed_snapshot_can_be_replaced_by_live_pending_review(self):
++        self.runtime.store.update_job(self.jid, status="done", source_mode="saved_snapshot")
++        result = self.runtime.submit_jobs([self.item], "test", {"useCodex": True}, False)
++        self.assertEqual(result["jobIds"], [self.jid])
++        self.assertEqual(self.runtime.store.job(self.jid)["source_mode"], "live_pending")
++        self.assertEqual(self.runtime.store.job(self.jid)["status"], "queued")
++        self.runtime.pool.submit.assert_called_once()
++
++    def test_invalid_validation_rejected_before_queue_or_state_change(self):
++        for invalid in ["text", [1], {"input_options": []}, {"input_assertions": {"key_a": "wrong"}},
++                        {"input_options": {"key_a": {"hold_seconds": float("nan")}}}]:
++            with self.subTest(invalid=invalid):
++                with self.assertRaises(ValueError):
++                    self.runtime.retry_saved_job(self.jid, {"validation": invalid})
++                self.assertEqual(self.runtime.store.job(self.jid)["status"], "manual_review")
++        self.runtime.pool.submit.assert_not_called()
++
++
++if __name__ == "__main__":
++    unittest.main()

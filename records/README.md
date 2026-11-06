@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-06 | Firmware Review Service | Codex 恢复、离线声明识别与 A/B 独立复审 | `PASS`（31项回归；同 BIN virtual-device + A轮廓/B切色断言；快照复审、未提交） | [查看](firmware-review-service/2026-11-06-review-recovery/) |
 | 2026-11-06 | ESP Emulator | 实验数据清理、快照共享与删除条件 | `PASS`（24旧包删除；卷空闲实测+30.64GiB；目录87.56GiB；旧任务保留） | [查看](esp-emulator/2026-11-06-completed-raw-retirement/) |
 | 2026-11-06 | ESP Emulator | 冷归档清理与普通clone实测 | `PASS`（本轮约41.34GiB回收；完整clone371.55MiB；进行中任务保留） | [查看](esp-emulator/2026-11-06-storage-and-clone-audit/) |
 | 2026-11-05 | ESP Emulator | 最新固件问题修复、原生回归与存储清理 | `PARTIAL`（PR189已合并/16项关闭；Tab5 DSI缺口开放；43.178GiB清理） | [查看](esp-emulator/2026-11-05-latest-firmware-bug-campaign/) |

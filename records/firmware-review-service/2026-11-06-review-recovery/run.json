@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Firmware review service recovery and independent input verification",
+  "source": {
+    "issue": "User-requested review-service repair and same-BIN re-review",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": "56bbe9f02efc38fe132bd844adae0199ac18dbc9",
+    "fix_commit": "85e6d485644776ef49687a9871050a0fd1c853af",
+    "source_mode": "saved_snapshot",
+    "upstream_context": "https://github.com/zhuzhe1983/grok-bot-esp32-stopwatch/blob/9eeafc200f8f590a80dc70850a4f0a6da9a012dc/release/manifest.json"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "This round uses a validated virtual-device execution path."
+  },
+  "firmware": {
+    "name": "Grok Bot MultiFace · StopWatch",
+    "version": "0.3.0",
+    "source_size": 647664,
+    "source_sha256": "0b207ba2d2ba11907bb4a3bc58fb6cd2ecc0a8f0db8e847ac50969fded0d720a",
+    "padded_flash_size": 16777216,
+    "padded_flash_sha256": "f708ad5e7f2b54ed2eb4ae9984cfa893a07088b051993e350f7e2c184baee2b8"
+  },
+  "execution": {
+    "environment": "Python review control plane, independent Codex CLI, native QEMU StopWatch guest",
+    "scope": "virtual-device validation; saved source snapshot; A/B framebuffer assertions",
+    "source_mode": "saved_snapshot",
+    "task_id": "redacted",
+    "session_id": "redacted",
+    "started_at": "2026-11-06T08:26:17.592989+00:00",
+    "finished_at": "2026-11-06T08:26:39.523894+00:00",
+    "submission": "NOT SUBMITTED",
+    "ai_attempts": 1,
+    "ai_usage": {
+      "input_tokens": 20934,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 82,
+      "reasoning_output_tokens": 29
+    }
+  },
+  "checks": [
+    {
+      "name": "targeted_regression",
+      "status": "PASS",
+      "detail": "31 tests under Python 3.9.6; compile, JS syntax and patch apply checks PASS"
+    },
+    {
+      "name": "real_ai_content_review",
+      "status": "PASS",
+      "detail": "内容为离线表情演示，无违规或明显广告；设备适配与实测范围说明清楚，标题、版本及描述完整。"
+    },
+    {
+      "name": "source_integrity",
+      "status": "PASS",
+      "detail": "647664 bytes; original source SHA-256 matched again"
+    },
+    {
+      "name": "virtual_flash",
+      "status": "PASS",
+      "detail": "Same source artifact composed to 16 MiB and verified in StopWatch QEMU"
+    },
+    {
+      "name": "boot_and_ui",
+      "status": "PASS",
+      "detail": "466x466 nonblank framebuffer in same guest"
+    },
+    {
+      "name": "touch",
+      "status": "PASS",
+      "detail": "Center touch and drag accepted with frame response"
+    },
+    {
+      "name": "key_a",
+      "status": "PASS",
+      "detail": "Foreground silhouette changed 21.8537% of ROI, above configured 8% threshold"
+    },
+    {
+      "name": "key_b",
+      "status": "PASS",
+      "detail": "Foreground palette changed [58, 34, 100] to [100, 18, 61]"
+    },
+    {
+      "name": "button_semantics",
+      "status": "PASS",
+      "detail": "Explicit framebuffer predicates for single A shape change and single B color change; does not cover double A/hold A+B calibration"
+    },
+    {
+      "name": "network_claim_classification",
+      "status": "PASS",
+      "detail": "Offline negatives and attribution URLs no longer create network requirement; network NOT APPLICABLE"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "detail": "Physical IMU direction, feel, RF, electrical and frame-rate measurements excluded"
+    },
+    {
+      "name": "malware_or_trojan_detection",
+      "status": "NOT RUN",
+      "detail": "Static string scan REVIEW only"
+    },
+    {
+      "name": "delivery",
+      "status": "PASS",
+      "detail": "Source fix committed and pushed to main; archival publication accompanies this record"
+    }
+  ],
+  "evidence": [
+    "evidence/README.md",
+    "evidence/codex-summary.redacted.json",
+    "evidence/interaction-drag_left.png",
+    "evidence/interaction-key_a.png",
+    "evidence/interaction-key_b.png",
+    "evidence/interaction-summary.json",
+    "evidence/patch-check.summary.json",
+    "evidence/raw-manifest.summary.json",
+    "evidence/review-summary.redacted.json",
+    "evidence/test-summary.json",
+    "evidence/validation-request.summary.json",
+    "patches/0001-review-recovery.patch"
+  ],
+  "notes": [
+    "The upstream pending queue was empty; this run uses saved metadata and the original hash-matched BIN.",
+    "Historical snapshot review cannot be submitted as live approval; the submission endpoint rejects it.",
+    "AI runtime/configuration failures are service_error rather than content MANUAL; transient calls have bounded recovery.",
+    "A short-pulse exploratory run produced frame response without shape/color proof; final standard tap plus explicit predicates passed.",
+    "UART evidence contains ROM output; USB Serial/JTAG app logs are not used as a semantic oracle.",
+    "No hardware, RF, electrical, physical IMU or performance claims are made."
+  ]
+}
