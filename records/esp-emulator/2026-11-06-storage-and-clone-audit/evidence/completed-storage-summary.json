@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "public-derived-storage-validation-summary",
+  "validation_class": "host filesystem, build-rule and image-byte validation; no guest execution",
+  "overall_status": "PASS for completed three-item scope; larger batches pending",
+  "completed_scope_accounting": {
+    "generated_qstr_cache_allocated_bytes_removed": 3440599040,
+    "duplicate_boot_copy_allocated_bytes_removed": 536870912,
+    "work_image_net_bytes_reclaimed_including_reports": 4529401856,
+    "net_bytes_reclaimed_including_current_reports": 8506871808,
+    "net_GiB_reclaimed_including_current_reports": 7.922641754150391,
+    "formula": "3,440,599,040 + 536,870,912 + 4,529,401,856 = 8,506,871,808 B",
+    "excludes": [
+      "the earlier campaign cleanup",
+      "both pending larger archive batches",
+      "owned temporary probe cleanup",
+      "APFS hypothetical compression saving"
+    ],
+    "volume_free_space_note": "Allocated blocks are counted once per removed inode; archive and persistent report cost is subtracted for the work image. Concurrent activity and APFS shared extents/snapshots can change df independently."
+  },
+  "qstr_generated_intermediate": {
+    "schema_version": 1,
+    "date": "2026-11-06",
+    "kind": "explicit-generated-qstr-cache-cleanup",
+    "deleted_file_count": 34,
+    "unique_deleted_inodes": 34,
+    "all_deleted_inodes_had_single_link": true,
+    "logical_bytes_removed": 3440546009,
+    "allocated_bytes_removed_counted_once_per_inode": 3440599040,
+    "allocated_GiB_removed": 3.2043075561523438,
+    "free_bytes_observed_immediate_delta": 3440820224,
+    "space_limit": "Filesystem allocated-byte accounting is reported once per inode. APFS shared extents/snapshots and concurrent unrelated archive work can make volume free-space delta differ.",
+    "remaining_qstr_i_last_count_in_audited_build_roots": 0,
+    "critical_files_retained_and_SHA_identical": 1450,
+    "retained_critical_manifest_SHA_before": "3d772b7db8a05b53eba6d22be78ee22bba4cca21f47a4d9efc9ad8d61a0eaf15",
+    "retained_critical_manifest_SHA_after": "3d772b7db8a05b53eba6d22be78ee22bba4cca21f47a4d9efc9ad8d61a0eaf15",
+    "source_git_heads_status_and_tracked_diffs_identical": true,
+    "audited_source_repositories": 19,
+    "source_rules_proof": {
+      "mkrules_make": "micropython/py/mkrules.mk:129-169",
+      "mkrules_cmake": "micropython/py/mkrules.cmake:120-140",
+      "generator": "micropython/py/makeqstrdefs.py:41-82",
+      "meaning": "The C/C++ compiler preprocessor -E creates qstr.i.last, then qstr/module/root-pointer/compressed-string generators read it. It is a rebuildable intermediate, not a runtime input. Existing final ELF/bin/config/source remain retained. Future incremental build regenerates it."
+    },
+    "candidate_manifest_SHA256": "a8f600b6692a88653e33af2856c183acc894d2f1df8c349457c4576dde5dab53",
+    "fresh_lsof_target_open_file_count": 0,
+    "mutation_scope": "Only the 34 qstr.i.last paths; no source, ELF/bin, configuration, other .last, virtual disk, backing chain or service touched.",
+    "future_build": "Re-run the existing CMake/Ninja or Make recipe; its declared generator recreates missing C preprocessor output. No firmware rerun is necessary for removing an inactive build intermediate."
+  },
+  "duplicate_boot_partition_copy": {
+    "schema_version": 1,
+    "date": "2026-11-06",
+    "kind": "verified-reextractable-boot-vfat-copy-cleanup",
+    "deleted_file_count": 1,
+    "deleted_basename": "boot.vfat",
+    "allocated_bytes_removed": 536870912,
+    "allocated_GiB_removed": 0.5,
+    "unique_inode_count": 1,
+    "nlink_before": 1,
+    "volume_free_bytes_immediate_delta": 536862720,
+    "space_limit": "APFS accounting and concurrent unrelated archival can affect volume free-space delta.",
+    "duplicate_proof": {
+      "original_file_SHA256": "a7470b1b6714839ee715c96ac5b5a866c26fc14627cc15a8777488e5051fe2df",
+      "retained_base_partition_SHA256": "a7470b1b6714839ee715c96ac5b5a866c26fc14627cc15a8777488e5051fe2df",
+      "offset": 8388608,
+      "length": 536870912,
+      "full_bytes_match": true
+    },
+    "retained_base_SHA256_before_and_after": "cc95c131e8f77d96d016fac22579fd0a08009e4b821fc4c543fa122fdda84f0f",
+    "retained_XZ_SHA256_before_and_after": "b37a702aea8b5d75015b48c99b8c969efc2636b82757282fb27cf03056788c91",
+    "retained_QCOW2_SHA256_before_and_after": "be5fa16f6886902079419e944d607379920d091846bc8c213f212f561b9346b1",
+    "retained_work_img_size_mtime_ctime_inode_unchanged": true,
+    "active_open_path_count_before": 0,
+    "mounted_cardputerzero_image_count_before": 0,
+    "manifest_SHA256": "684a7121755739684cdcc71097b2d8692f87872d4ea7664224de71e69e8a6f51",
+    "reextract_command": "dd if=cardputerzero-trixie-arm64-stable.img of=boot.vfat bs=1048576 skip=8 count=512; shasum -a 256 boot.vfat",
+    "remaining_scope": "stable.img, stable.img.xz, work.img, qcow2, extracted boot directory, all sources/runtimes/ELF/config retained; backing chain unchanged.",
+    "services_touched": false
+  },
+  "work_image_cold_archive": {
+    "schema_version": 1,
+    "date": "2026-11-06",
+    "kind": "single-raw-work-image-cold-archive",
+    "source_deleted_after_verified_archive": true,
+    "source_basename": "cardputerzero-work.img",
+    "source_logical_bytes": 8589934592,
+    "source_allocated_bytes_released_once": 6968049664,
+    "source_unique_deleted_inode_count": 1,
+    "source_nlink_before": 1,
+    "source_and_full_actual_restoration_SHA256": "5a9bb73044d29c50254cb6bd685a772e8167ab9b3b4e1c991a89a32ba8a7fe81",
+    "archive_basename": "cardputerzero-work-image.tar.zst",
+    "archive_logical_bytes": 2425279046,
+    "archive_allocated_bytes": 2438598656,
+    "archive_mode": "0600",
+    "archive_sha256": "88ed05eee8f451a9ac159ef8553fc48e990344bb05b99789c50913a613e7f892",
+    "net_bytes_reclaimed_excluding_small_reports": 4529451008,
+    "net_GiB_reclaimed_excluding_small_reports": 4.218379974365234,
+    "validation": "Full actual decompression to owned scratch: SHA, logical size, mode, uid/gid, nanosecond mtime, flags and all xattrs identical; qemu-img raw compare exit0; archive zstd integrity PASS.",
+    "OS_provenance_event": null,
+    "protected_stable_XZ_overlay_all_bytes_and_metadata_unchanged": true,
+    "protected_sha256": {
+      "cardputerzero-trixie-arm64-stable.img": "cc95c131e8f77d96d016fac22579fd0a08009e4b821fc4c543fa122fdda84f0f",
+      "cardputerzero-trixie-arm64-stable.img.xz": "b37a702aea8b5d75015b48c99b8c969efc2636b82757282fb27cf03056788c91",
+      "cardputerzero-trixie-arm64-8g.qcow2": "be5fa16f6886902079419e944d607379920d091846bc8c213f212f561b9346b1"
+    },
+    "source_stat_unchanged_until_unlink": true,
+    "fresh_open_and_mount_guard_before_unlink": {
+      "open_path_count": 0,
+      "mounted_image_count": 0
+    },
+    "backing_chain_changed": false,
+    "scratch_removed": true,
+    "restore_instructions": "Private restore guide retained beside the local archive; generic procedure in report.md.",
+    "cold_storage_limit": "Five direct probe defaults need the exact raw image restored before running.",
+    "services_touched": false,
+    "elapsed_seconds": 45.28619694709778,
+    "persistent_report_and_restore_instructions_allocated_bytes": 49152,
+    "net_bytes_reclaimed_including_current_small_reports": 4529401856,
+    "net_GiB_reclaimed_including_current_small_reports": 4.218334197998047,
+    "postcheck": "Archive exists0600; source expanded image absent; full validation scratch absent; restore instructions exist beside original path and archive."
+  },
+  "apfs_probe_preserved_negative_control": {
+    "schema_version": 1,
+    "date": "2026-11-06",
+    "kind": "owned-temporary-APFS-compressed-raw-image-probe",
+    "result": "NO SAVING: ditto exited zero but did not apply APFS compression to this large raw file. Do not replace the sparse original.",
+    "original_replaced": false,
+    "logical_SHA256_source_and_copy": "cc95c131e8f77d96d016fac22579fd0a08009e4b821fc4c543fa122fdda84f0f",
+    "logical_size_identical": true,
+    "mode_identical": true,
+    "mtime_identical": true,
+    "original_noncompression_xattrs_preserved": true,
+    "compression_flag_set": false,
+    "potential_allocated_bytes_saved_if_replaced": -469024768,
+    "potential_GiB_saved_if_replaced": -0.4368133544921875,
+    "qemu_img_binary_SHA256": "78441b2e015293bacd50c5ba85b70ccd6c921aff9e5aa944eb69b7f3070a8459",
+    "qemu_readonly_checks": [
+      {
+        "name": "raw-compare",
+        "exit_code": 0,
+        "stdout_sha256": "45c4d472e996560294f5829abf4e511b3f3d3a7a319e0f4f0fb8c7f2dea8fc26",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "original-backing-chain",
+        "exit_code": 0,
+        "stdout_sha256": "defa1176880a3ba607f6c5ab060c107335a5d2f7aafcec787dfd96032959c919",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "compressed-raw-info",
+        "exit_code": 0,
+        "stdout_sha256": "bc922d1bed3f8a92611fcbb59c182b82a9e08505f0cf1c9dbeb7e851f69bad9c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "backing_overlay_SHA256_unchanged": "be5fa16f6886902079419e944d607379920d091846bc8c213f212f561b9346b1",
+    "compatibility_boundary": "qemu-img raw compare and original backing-chain metadata reads PASS for an ordinary uncompressed copy. Because UF_COMPRESSED stayed clear, compressed raw-image compatibility is NOT PROVEN. No guest boot/write test was performed; original stable.img and overlay remained unchanged.",
+    "temp_retained_for_parent_review": false,
+    "original_allocated_bytes": 6946504704,
+    "temporary_allocated_bytes": 7415529472,
+    "temp_cleanup": "Agent-owned noncompressed probe copy removed; original preserved."
+  },
+  "source_preservation": {
+    "audited_repositories": 19,
+    "heads_status_tracked_diffs_identical": true,
+    "critical_files_retained_SHA_identical": 1450,
+    "existing_uncommitted_changes_preserved": true,
+    "active_goals_and_current_runtime_protected": true,
+    "no_source_or_history_change_claim": "No product source change, Git history rewrite or object pruning in this scope."
+  },
+  "private_material_policy": "Raw manifests, original request/serial/session data, disk images and service archives remain private local files. Only hashes/counts and derived summaries are published. No raw archive or access endpoint is attached.",
+  "redaction": "Omitted host paths, open/mount path arrays, raw identifiers and local restore locations; source digest/size references retained below.",
+  "source_summary_integrity": [
+    {
+      "group": "qstr",
+      "sha256": "ff2e8e17995c33fde4a66f8bfaf4bf73f9dd59bfbafc56d11c12743bcaa6170d",
+      "bytes": 2033
+    },
+    {
+      "group": "boot_copy",
+      "sha256": "7d80d0a9da0a6ba7f41bd1f05203b154c9097755b84c56572590c16bc60aaefb",
+      "bytes": 1650
+    },
+    {
+      "group": "work_image",
+      "sha256": "3f87d574a81a8b0b80d44e0379e65da5c799571b5dd458314f6bca9735b0ead2",
+      "bytes": 2422
+    },
+    {
+      "group": "apfs_probe",
+      "sha256": "aa551aec645beb1bd5e566b3457defe8b0c278c35c9124d83fea9bd6c0003774",
+      "bytes": 2191
+    }
+  ]
+}

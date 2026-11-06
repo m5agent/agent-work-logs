@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-06 | ESP Emulator | 冷归档清理与普通clone实测 | `PASS`（本轮约41.34GiB回收；完整clone371.55MiB；进行中任务保留） | [查看](records/esp-emulator/2026-11-06-storage-and-clone-audit/) |
 | 2026-11-05 | ESP Emulator | 最新固件问题修复、原生回归与存储清理 | `PARTIAL`（PR189已合并/16项关闭；Tab5 DSI缺口开放；43.178GiB清理） | [查看](records/esp-emulator/2026-11-05-latest-firmware-bug-campaign/) |
 | 2026-11-05 | ESP Emulator | 唯一 main 收口与 Chrome 兼容提交 | `PASS`（PR171已合并；本地/远端仅main；Chrome49、CI及历史/资产保全通过） | [查看](records/m5stack-esp-emulator/2026-11-05-repository-branch-tidy/followups/2026-11-05-main-only-closeout/executions/2026-11-05-pr171-delivery/) |
 | 2026-11-05 | ESP Emulator | Unit独立模型预览与本机Preview控制 | `PARTIAL`（源码及限定交付完成；HTTPS65/实际本机只读13通过，其它型号未重测） | [查看](records/esp-emulator/2026-11-05-unit-preview-local-control/) |

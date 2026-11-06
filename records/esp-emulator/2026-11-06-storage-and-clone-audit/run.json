@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "infra_baseline",
+  "overall_status": "PASS",
+  "title": "Storage retention and ordinary full-clone audit",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ea6a553b702c636b10692665c475341b178cb662",
+    "product_source_changed": false,
+    "intended_record_path": "records/esp-emulator/2026-11-06-storage-and-clone-audit/",
+    "published_record_commit": null
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "Host filesystem/clone audit; no hardware operation."
+  },
+  "firmware": {
+    "guest_execution": "NOT RUN",
+    "identities": "Image/archive SHA values in evidence/completed-storage-summary.json; no firmware binary attached."
+  },
+  "execution": {
+    "environment": "macOS arm64; ordinary Git network clone; native filesystem tools; QEMU image read-only byte comparison; PAX/zstd complete restore verification",
+    "active_goals_protected": true,
+    "raw_archive_visibility": "Private local only, mode0600; no endpoint or archive payload published.",
+    "tracked_product_checkout_unchanged": true,
+    "user_retained_ongoing_validation_task": true
+  },
+  "checks": [
+    {
+      "name": "ordinary full clone",
+      "status": "PASS",
+      "evidence": "evidence/clone-summary.json"
+    },
+    {
+      "name": "generated qstr cache",
+      "status": "PASS",
+      "files": 34,
+      "evidence": "evidence/completed-storage-summary.json"
+    },
+    {
+      "name": "duplicate boot partition copy",
+      "status": "PASS",
+      "files": 1,
+      "evidence": "evidence/completed-storage-summary.json"
+    },
+    {
+      "name": "work image cold archive and full byte/metadata restoration",
+      "status": "PASS",
+      "evidence": "evidence/completed-storage-summary.json"
+    },
+    {
+      "name": "APFS large-image compression objective",
+      "status": "FAIL",
+      "detail": "Compression flag not set; original not replaced, temporary copy removed; no saving counted."
+    },
+    {
+      "name": "initial group-preserving restore",
+      "status": "FAIL",
+      "detail": "Strict group mismatch stopped before original unlink; independent explicit same-owner format followup PASS."
+    },
+    {
+      "name": "ten older scopes cold archive",
+      "status": "PASS",
+      "evidence": "evidence/archive-batches-summary.json"
+    },
+    {
+      "name": "fourteen completed service scopes cold archive",
+      "status": "PASS",
+      "evidence": "evidence/archive-batches-summary.json"
+    },
+    {
+      "name": "product source and existing dirty-source states",
+      "status": "PASS",
+      "detail": "Original checkout untouched; 19 audited source repositories retain HEAD/status/tracked diff."
+    },
+    {
+      "name": "firmware guest/browser/hardware behavior",
+      "status": "NOT RUN",
+      "reason": "No source or guest behavior change in this audit."
+    },
+    {
+      "name": "record validation",
+      "status": "PASS",
+      "reason": "JSON/UTF8/links/privacy/diff checks; publication verified by fixed commit permalink and remote readback."
+    },
+    {
+      "name": "final project footprint and preservation",
+      "status": "PASS",
+      "evidence": "evidence/final-space-summary.json"
+    }
+  ],
+  "evidence": [
+    "evidence/clone-summary.json",
+    "evidence/completed-storage-summary.json",
+    "evidence/archive-batches-summary.json",
+    "evidence/final-space-summary.json"
+  ],
+  "notes": [
+    "Additional scope-level net recovery is44,390,604,800B (41.341972GiB); project du independently moved147.808456→106.466908GiB.",
+    "Original evidence can remain valuable; cold archive retains key bytes, first failures and provenance.",
+    "Five direct work-image probe defaults require restoration before use.",
+    "No Git history rewrite, ref deletion or object pruning."
+  ]
+}
