@@ -1,0 +1,155 @@
+{
+  "D1_boot": {
+    "devices": 30,
+    "rounds": "2 cold rounds/device",
+    "verdict": "19 PASS + 10 PASS-flaky, 0 hard FAIL, 1 NOT RUN (tab5 #188)",
+    "repair_verified": [
+      "180",
+      "181",
+      "182",
+      "187"
+    ],
+    "regression": [
+      "178"
+    ],
+    "note": "classic LX6 stock-stub cold flash intermittent: 39 attempts, 16 ok, 23 failed (0107 checksum x13, serial stream stopped x10); every classic device eventually passed a later round"
+  },
+  "D2_device_matrix": {
+    "matrix_devices": 33,
+    "primary": "PASS 20 / FAIL 12 / EXCLUDED 1",
+    "after_reruns": "30 PASS (20 primary + 6 retry + 4 host-image diagnostic), 2 NOT RUN (m5stick/stickt2 pinned artifacts absent), 1 EXCLUDED (cardputer-zero)",
+    "repair_verified": [
+      "172",
+      "173",
+      "174",
+      "179",
+      "183",
+      "184",
+      "187"
+    ],
+    "failures": "all 10 classic-LX6 primary failures are flash-transport (infra); no assertion/firmware regression"
+  },
+  "P1_peripheral": {
+    "cases": 68,
+    "main": "66 PASS / 2 FAIL",
+    "reruns": "core2-axp192 PASS on rerun (INFRA-LOAD recovered); stackchan-peripherals FAIL 3/3 under load, diagnostic --wait 10 before-frame byte-identical to repair PASS frame -> fixture settle timing",
+    "repair_verified": [
+      "175",
+      "176",
+      "177",
+      "185"
+    ],
+    "not_covered": [
+      "186"
+    ]
+  },
+  "DOC1_uiflow_api": {
+    "unit_pages": 101,
+    "documented_methods": 1303,
+    "hw_members": 185,
+    "code_blocks": 1105,
+    "compiled": 1101,
+    "executed": 60,
+    "findings": [
+      "9 unit class names not importable (+RGB dup)",
+      "method name typos/case/nonexistent (byteswitch, vibrator, dac2, ir, op90, tmos, co2/co2l private CRC, acssr factory)",
+      "4 official code blocks invalid Python (+m5espnow new block)",
+      "hardware members missing: UART.IRQ_TXIDLE, PORT.HAT, PORT.ALL",
+      "stability: display rotation round-trip, speaker volume, rgb QOM, joystick2 invert/swap, ENV III units all PASS"
+    ],
+    "issues_filed": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "comments": [
+      9,
+      15,
+      17
+    ]
+  },
+  "DOC2_uiflow_ergonomics": {
+    "pages_scored": 84,
+    "first_call_experiment": "10 APIs: 9/10 first attempt PASS; ADC failed first attempt due missing import path (doc gap)",
+    "static_audit": "1113 code blocks (5 compile failures), 437 literalinclude (1 dangling unit/extio)",
+    "candidates": 8,
+    "issues_filed": [
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "comments": [
+      9,
+      15,
+      17
+    ]
+  },
+  "DOC3_product_units": {
+    "units": 32,
+    "pages": 64,
+    "findings": 5,
+    "issues_filed_121": [
+      17,
+      18,
+      19
+    ],
+    "issues_filed_github": [
+      191
+    ],
+    "not_run": "8905 example execution (pages have external links only; unit behavior needs fixture)"
+  },
+  "DOC4_product_devices": {
+    "pages": 36,
+    "findings": 2,
+    "issues_filed_121": [
+      15,
+      16
+    ],
+    "issues_filed_github": [
+      190
+    ],
+    "fixed_since": [
+      "#3 ADC ranges",
+      "#4 SPK2",
+      "#5 relay/DAC2/charger",
+      "IMU axes + link fixes at master"
+    ],
+    "not_run": "executable examples; live #1-#14 read (no gitlab creds in teammate) -> Lead deduped"
+  },
+  "U1_units": {
+    "executed": 144,
+    "planned": 153,
+    "results": {
+      "PASS": 128,
+      "PARTIAL": 7,
+      "FAIL": 7,
+      "BLOCKED": 2
+    },
+    "catalog_coverage": "142/160",
+    "provenance_verified": 116,
+    "repair_verified": [
+      "186"
+    ],
+    "gaps": [
+      "#185 partial: batch12b/control/sensor provenance not wired -> #193",
+      "io/buzzer UNIT-HOST-17 known-blocker (unpatched)",
+      "6 batch3 infra harness argv failures (redo not run, time-box)",
+      "18 catalog units not run: 9 no batch runner + 9 time-box cases"
+    ],
+    "not_run": [
+      "batch11 glass/rf433r/fingerprint2/audioplayer",
+      "batch12a 8servos2-i2c/mq/cardkb2",
+      "gpio ssr",
+      "i2c 4relay",
+      "2relay/scroll/flashlight/servo8-hat/8servos/joystick2/nfc/mini-bps-v11/mini-pdm"
+    ]
+  }
+}

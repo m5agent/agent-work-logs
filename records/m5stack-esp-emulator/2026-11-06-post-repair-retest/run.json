@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Post-repair retest: full simulator lanes, UIFlow2 docs stability/ergonomics, and product docs audit",
+  "source": {
+    "issue": "none: direct user request after simulator repairs (#172-#187 closed; #188 open)",
+    "pull_request": "none",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "dd2eb35d"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "All execution was QEMU/Device Service/browserless virtual devices; no physical hardware."
+  },
+  "firmware": {
+    "source": "M5Burner API/GitHub releases re-fetched 2026-11-06",
+    "devices": 30,
+    "sha256_verified": true,
+    "note": "upstream version label differs from manifest label for same sha in fetch log; identity by sha"
+  },
+  "execution": {
+    "environment": "macOS arm64; 7 isolated Device Service instances; repaired native runtime sha256 27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e; C6 25497c521ebd5838a56b066551dd5c33d6dd00df853ed4a256fcca79944de7db",
+    "task_ids": [
+      "task-14",
+      "task-15",
+      "task-16",
+      "task-17",
+      "task-18",
+      "task-19",
+      "task-20",
+      "task-21"
+    ],
+    "session_ids": "per-case session ids in ignored .work/retest-20261106/*/results.json"
+  },
+  "checks": [
+    {
+      "name": "issue_172_187_repair_verification",
+      "status": "PARTIAL",
+      "values": "#172/173/174/175/176/177/179/180/181/182/183/184/186/187 VERIFIED; #178 NOT ROBUST (reopened); #185 PARTIAL (19 cases provenance gap -> #193)"
+    },
+    {
+      "name": "boot_cold_sweep",
+      "status": "PARTIAL",
+      "values": "29/30 devices, 2 rounds: 19 PASS + 10 PASS-flaky; tab5 NOT RUN (#188); 39 classic flash attempts: 16 ok/23 failed"
+    },
+    {
+      "name": "device_matrix",
+      "status": "PARTIAL",
+      "values": "33 devices: primary 20 PASS/12 FAIL/1 EXCLUDED; after retry+host-image: 30 PASS, 2 NOT RUN, 1 EXCLUDED"
+    },
+    {
+      "name": "peripheral_matrix",
+      "status": "PASS_WITH_INFRA",
+      "values": "68/68 executed: 66 PASS/2 FAIL; core2-axp192 recovered; stackchan settle load-timing (#192)"
+    },
+    {
+      "name": "unit_battery",
+      "status": "PARTIAL",
+      "values": "144/153 cases: 128 PASS (116 provenance VERIFIED), 7 PARTIAL, 7 FAIL (6 infra+1 known-blocker), 2 BLOCKED; catalog 142/160"
+    },
+    {
+      "name": "uiflow_docs_api",
+      "status": "PASS_AUDIT",
+      "values": "101 unit pages/1303 methods; 185 hw members; 1105 code blocks (1101 compile, 60 executed); 9 new issues #27-#35 + 3 evidence comments"
+    },
+    {
+      "name": "uiflow_docs_ergonomics",
+      "status": "PASS_AUDIT",
+      "values": "84 pages scored; first-call 9/10; 1113 blocks compile; 437 literalinclude (1 dangling); 8 candidates"
+    },
+    {
+      "name": "product_docs_units",
+      "status": "PASS_AUDIT",
+      "values": "32 units/64 pages; 5 findings -> 121 #17-19 + GitHub #191"
+    },
+    {
+      "name": "product_docs_devices",
+      "status": "PASS_AUDIT",
+      "values": "36 pages; 2 findings -> 121 #15-16 + GitHub #190"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN",
+      "reason": "no physical devices"
+    }
+  ],
+  "issues": {
+    "github_new": [
+      190,
+      191,
+      192,
+      193
+    ],
+    "github_reopened": [
+      178
+    ],
+    "github_open_after": [
+      178,
+      188,
+      190,
+      191,
+      192,
+      193
+    ],
+    "gitlab163_new": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "gitlab163_comments_on": [
+      9,
+      15,
+      17
+    ],
+    "gitlab121_new": [
+      15,
+      16,
+      17,
+      18,
+      19
+    ]
+  },
+  "evidence": [
+    "evidence/scope-results.json",
+    "evidence/repair-verification.json",
+    "evidence/issue-index.json",
+    "evidence/boot-summary.md",
+    "evidence/device-matrix-summary.md",
+    "evidence/peripheral-matrix-summary.md",
+    "evidence/units-summary.md",
+    "evidence/docs-api-summary.md",
+    "evidence/docs-ergonomics-summary.md",
+    "evidence/product-docs-devices-summary.md",
+    "evidence/product-docs-units-summary.md"
+  ],
+  "notes": [
+    "All simulator failures in this round are either repaired-issue verifications, tab5 #188, or documented INFRA-LOAD/known blockers; no new model regression was found.",
+    "UIFlow2 docs and product docs were audited against pinned commits; issues filed in their original repositories with file:line evidence and proposed fixes.",
+    "No tracked repo edits; raw evidence stays in ignored .work/retest-20261106/."
+  ]
+}
