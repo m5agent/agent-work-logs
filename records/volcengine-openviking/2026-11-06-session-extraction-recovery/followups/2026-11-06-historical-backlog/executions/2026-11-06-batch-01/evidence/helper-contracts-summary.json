@@ -1,0 +1,44 @@
+{
+  "classification": "summary",
+  "contract_tests_passed": 7,
+  "contracts": [
+    "test_changed_source_is_rejected_before_api_write",
+    "test_failed_extraction_does_not_retry_by_default",
+    "test_lost_write_responses_resume_without_duplicate_posts",
+    "test_modified_snapshot_is_rejected_before_api_write",
+    "test_only_long_term_or_done_certifies_lineage",
+    "test_partial_transient_failure_retries_only_uncompleted_ids",
+    "test_unicode_jsonl_is_split_only_on_lf"
+  ],
+  "wrapper_stop_control": {
+    "control_test": "PASS",
+    "lost_success_claims": 0,
+    "stopped_chunks": 1,
+    "unattempted_chunks": 1,
+    "live_writes": 0
+  },
+  "full_run_source_hashes": [
+    {
+      "source_alias": "recover_backlog.py",
+      "sha256": "9cf5bdd1246e19537a04c1e2ac77a1e5055a6d4498763d9a52116794beb1a578",
+      "bytes": 30593,
+      "source_published": false
+    },
+    {
+      "source_alias": "run_batch.py",
+      "sha256": "7e82d9f2aae51624f3acd5a4b31e60e7e2e821d30a3bf7131bfccd4bc6cc9848",
+      "bytes": 11571,
+      "source_published": false
+    },
+    {
+      "source_alias": "test_recover_backlog.py",
+      "sha256": "b652a6cf5351c7c952304a75587091df7d94f3cac856a6d264469b94bc05e8fd",
+      "bytes": 8965,
+      "source_published": false
+    }
+  ],
+  "canary_recovery_helper_sha256": "e742411571fa209c715524760f02c72e74f27bb0c371cfedc3d312901661445c",
+  "pre_full_run_change": "Atomic ledger temporary filenames gained a unique process identifier before the full run; no recovery selection or source payload changed.",
+  "live_writes_during_contract_tests": 0,
+  "source_publication_boundary": "Helpers include environment-specific plumbing and are not published; hashes identify the verified versions."
+}

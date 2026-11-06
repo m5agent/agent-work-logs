@@ -1,0 +1,55 @@
+{
+  "classification": "summary",
+  "observed_at": "2026-11-06T08:07:02.306722+00:00",
+  "purpose": "Historical backlog recovery starting observation; no service or configuration changes.",
+  "log_baseline": {
+    "cutoff_bytes": 3846399,
+    "prefix_sha256": "44c696e661085445eece587ca9b8f5fd3b60c62e70f0a7964be57635c6521011",
+    "raw_log_archived": false
+  },
+  "service": {
+    "/health": {
+      "http_status": 200,
+      "elapsed_seconds": 0.011,
+      "body": {
+        "status": "ok",
+        "healthy": true,
+        "version": "0.5.3",
+        "auth_mode": "api_key"
+      }
+    },
+    "/ready": {
+      "http_status": 200,
+      "elapsed_seconds": 0.002,
+      "body": {
+        "status": "ready",
+        "checks": {
+          "agfs": "ok",
+          "vectordb": "ok",
+          "api_key_manager": "ok",
+          "embedding": "ok",
+          "ollama": "not_configured"
+        }
+      }
+    }
+  },
+  "resources": {
+    "logical_cpu_count": 10,
+    "load_average": [
+      5.79638671875,
+      4.57666015625,
+      5.1416015625
+    ],
+    "physical_memory_bytes": 34359738368,
+    "free_memory_bytes": 4473946112,
+    "inactive_memory_bytes": 10965237760,
+    "wired_memory_bytes": 2574385152,
+    "compressed_memory_physical_bytes": 3221815296,
+    "storage_volume_total_bytes": 494384795648,
+    "storage_volume_free_bytes": 149605294080,
+    "server_listener_processes": 1,
+    "server_resident_memory_bytes": 997638144,
+    "server_cpu_percent_snapshot": 0.2
+  },
+  "completed_at": "2026-11-06T08:07:02.333527+00:00"
+}

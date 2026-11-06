@@ -50,7 +50,7 @@
 | --- | --- | --- | --- | --- |
 | 2026-11-06 | Firmware Review Service | Codex 恢复、离线声明识别与 A/B 独立复审 | `PASS`（31项回归；同 BIN virtual-device + A轮廓/B切色断言；快照复审、未提交） | [查看](records/firmware-review-service/2026-11-06-review-recovery/) |
 | 2026-11-06 | nuxt-m5-docs | 全部知识源与双知识库同步 | `PASS`（3231 CSV/467 PDF覆盖就绪；ESP 198对象及索引回读、零变更复跑；历史全目录复验PARTIAL） | [查看](records/nuxt-m5-docs/2026-11-06-knowledge-refresh/) |
-| 2026-11-06 | OpenViking | v0.5.3 会话记忆抽取恢复与幂等重放 | `PARTIAL`（单归档10条/5项抽取及重跑PASS；全历史/独立召回延迟NOT RUN） | [查看](records/volcengine-openviking/2026-11-06-session-extraction-recovery/) |
+| 2026-11-06 | OpenViking | v0.5.3 历史会话记忆抽取与保真恢复 | `PASS`（49,420条新恢复；85,245条历史全覆盖；786外部结果保真纠正；独立启动压缩未改） | [查看](records/volcengine-openviking/2026-11-06-session-extraction-recovery/followups/2026-11-06-historical-backlog/executions/2026-11-06-batch-01/) |
 | 2026-11-06 | ESP Emulator | 本地虚拟设备实时展示空间 | `PASS`（自动native31项/12真实并发、64逻辑稳定、宿主2035及重启通过；物理/WASM/性能NOT RUN） | [查看](records/esp-emulator/2026-11-06-local-observatory/) |
 | 2026-11-06 | ESP Emulator | 实验数据清理、快照共享与删除条件 | `PASS`（24旧包删除；卷空闲实测+30.64GiB；目录87.56GiB；旧任务保留） | [查看](records/esp-emulator/2026-11-06-completed-raw-retirement/) |
 | 2026-11-06 | ESP Emulator | 冷归档清理与普通clone实测 | `PASS`（本轮约41.34GiB回收；完整clone371.55MiB；进行中任务保留） | [查看](records/esp-emulator/2026-11-06-storage-and-clone-audit/) |

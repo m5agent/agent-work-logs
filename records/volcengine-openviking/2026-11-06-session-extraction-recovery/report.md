@@ -1,5 +1,7 @@
 # OpenViking session extraction recovery report
 
+> Follow-up: [complete historical backlog and fidelity audit — PASS](followups/2026-11-06-historical-backlog/executions/2026-11-06-batch-01/report.md). This later execution supersedes the original all-history NOT RUN boundary while retaining this scoped report and its evidence. The separate startup recall compressor was unchanged.
+
 ## Background and target behavior
 
 The target behavior is a session commit that completes long-term extraction, with a safe way to recover one previously failed archive without duplicating messages or commits. Readback of the exact write targets was validated independently from task completion. This public record documents reusable OpenViking `v0.5.3` adapter, protocol, and recovery behavior. It excludes private conversations, machine paths, connection values, credentials, operational backups, and account identities.

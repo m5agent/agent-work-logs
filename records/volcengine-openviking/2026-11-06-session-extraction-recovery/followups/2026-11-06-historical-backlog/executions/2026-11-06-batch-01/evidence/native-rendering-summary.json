@@ -1,0 +1,75 @@
+{
+  "classification": "summary",
+  "version": "0.5.3",
+  "inspection_only": true,
+  "live_model_requests": 0,
+  "live_writes": 0,
+  "findings": {
+    "history_wire_representation": "Conversation History is one user text message; archived historical ToolParts are not emitted as Responses function-call/result input items.",
+    "user_stage_tool_history": "omitted",
+    "agent_stage_tool_output_max_characters": 500,
+    "agent_stage_tool_input": "unbounded textual repr",
+    "text_parts": "unbounded; native extraction sentence chunks are range addressing, not input truncation",
+    "batch_policy_absent": "one full archive batch",
+    "batch_policy_present_default_token_threshold": 150000,
+    "batch_policy_present_default_message_threshold": 100,
+    "individual_oversize_message": "passed intact with oversized flag; not automatically split",
+    "tool_output_externalization": "fully hydrated before extraction; renderer then applies stage-specific omission/500-character tool-output cap",
+    "model_input_context_cap": "no universal cap enforced by extraction loop or adapter",
+    "internal_default_output_token_cap": 32768,
+    "codex_adapter_forwards_output_cap": false,
+    "streaming": "response events are streamed; input history is still one request, not incremental extraction chunks"
+  },
+  "synthetic_probe": {
+    "tool_output_chars": 200000,
+    "user_stage_render_chars": 38,
+    "agent_stage_render_chars": 627,
+    "native_tool_message_estimated_tokens": 50007,
+    "input_text_chars": 202000,
+    "derived_text_chunks": 2000,
+    "render_chars_after_text_chunking": 242889
+  },
+  "source_files": [
+    {
+      "path": "openviking/session/memory/session_extract_context_provider.py",
+      "sha256": "a94977c144dee64de86dc29b60fd92a3dc85472658eab474bf3ed4e62675816c",
+      "bytes": 27520
+    },
+    {
+      "path": "openviking/session/memory/memory_updater.py",
+      "sha256": "6b9cbfc0814c83b9901c6d7c6671132feee1bf1eed8a09113db39e0d3e330f03",
+      "bytes": 86854
+    },
+    {
+      "path": "openviking/session/extraction_batch.py",
+      "sha256": "aff96ad83d909e74f7e037c16cb7634abf136fa28bf66b49ac9824400b2bf850",
+      "bytes": 4933
+    },
+    {
+      "path": "openviking/session/auto_commit_policy.py",
+      "sha256": "53b1d3154e167b50cb617e30e783c251b4d5aec2923066cfb7f5b5db955d241c",
+      "bytes": 5074
+    },
+    {
+      "path": "openviking/session/tool_output_externalizer.py",
+      "sha256": "4df38d26b82550fe63e62658d2544221c7baa5e550d79c51c25579488d4f7c1d",
+      "bytes": 17424
+    },
+    {
+      "path": "openviking/session/memory/extract_loop.py",
+      "sha256": "2f42f1a3721e6d9adeea4810c671b59bd5a031d3cc1ad142b7d4950a85daaaa8",
+      "bytes": 66032
+    },
+    {
+      "path": "openviking/models/vlm/backends/codex_responses_adapter.py",
+      "sha256": "cbabaafda792cce68e9dae7abae892cdbcba5e012f3f925a1dd7071693e8b54e",
+      "bytes": 12664
+    }
+  ],
+  "operational_guidance": [
+    "Budget a derived native visible render without modifying archived source messages.",
+    "Unmatched historical tool call IDs are not by themselves a Responses wire-protocol exclusion.",
+    "Raw ToolPart output size and Message.estimated_tokens can overstate visible prompt content; do not automatically exclude large output-only messages.",
+    "No provider maximum context was proven here; any selected input budget is an operational bound and must retain room for schema, prefetch, tools and output."
+  ]
+}

@@ -1,5 +1,7 @@
 # OpenViking session extraction recovery
 
+> Latest follow-up (2026-11-06): [historical backlog recovery — PASS](followups/2026-11-06-historical-backlog/executions/2026-11-06-batch-01/). It certifies 49,420 newly recovered messages and complete 85,245-ID historical coverage with faithful auxiliary-artifact handling. The original scoped results below remain unchanged; startup recall-compressor latency is a separate unmodified path.
+
 - Date: `2026-11-06` (`Asia/Shanghai`)
 - Overall result: `PARTIAL` — the scoped extraction and recovery path passed; bulk historical recovery and separate recall startup latency were not tested or changed.
 - Work type: `service_debug`

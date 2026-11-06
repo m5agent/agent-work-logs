@@ -1,0 +1,24 @@
+{
+  "classification": "decision_pending_execution",
+  "recorded_at": "2026-11-06T09:27:59.743805+00:00",
+  "stage": "corrective_experience_merge_failed_after_trajectory_writes",
+  "affected_source_messages": 195,
+  "already_certified_corrective_messages_not_to_repeat": 591,
+  "partial_trajectory_files": 5,
+  "failure": "Native experience merge optimizer rejected malformed generated Python with an unterminated triple-quoted string.",
+  "native_http_stage_resume_available": false,
+  "planned_scope": [
+    "Keep the failed task, source archive, failed output evidence and existing audit history intact.",
+    "Before any move, freshly verify each of the five intermediate files against the failed task ownership, version/birth/hash, source metadata links, initial snapshot absence and case/inbound-reference checks.",
+    "Use supported native filesystem move to a separate failed-attempt artifact namespace, with a reversible journal and destination content readback; do not delete the files.",
+    "Run only the remaining 195 source messages in four successor chunks of at most 50 messages. Do not repeat the 591 already certified corrective messages.",
+    "Require genuine native terminal completion, exact target readback and full source-ID successor coverage; do not synthesize completion markers."
+  ],
+  "service_or_package_change_planned": false,
+  "global_backend_patch_planned": false,
+  "daemon_restart_planned": false,
+  "quarantine_status": "PASS — exact five artifacts moved through native filesystem API and raw hashes read back; shared case unchanged",
+  "successor_extraction_status": "Provisional PASS — four genuine native successors completed 50/50/50/45; final independent lineage/readback audit pending",
+  "overall_fidelity_complete": false,
+  "causal_limit": "The optimizer reported an unterminated triple-quoted string. Output truncation or an output-limit cause was not proven by a reliable finish reason."
+}

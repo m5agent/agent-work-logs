@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "timezone": "Asia/Shanghai",
+  "kind": "service_debug",
+  "overall_status": "PASS",
+  "title": "Historical OpenViking extraction backlog — complete coverage and fidelity",
+  "source": {
+    "repository": "https://github.com/volcengine/OpenViking",
+    "version": "v0.5.3",
+    "base_commit": "",
+    "issue": "",
+    "pull_request": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Actual OpenViking 0.5.3 software service; immutable main, supplemental, corrective and successor plans",
+    "phase": "completed_and_independently_audited",
+    "task_id": "123 task attempts (private IDs omitted)",
+    "session_id": "18 primary historical sources (private IDs omitted)",
+    "validated_at": "2026-11-06T09:35:42.367664+00:00",
+    "unique_primary_recovery_messages": 49420,
+    "total_original_failed_archive_ids_covered": 85245,
+    "pending_original_ids": 0,
+    "original_source_archives": 184,
+    "task_attempts": 123,
+    "completed_task_attempts": 122,
+    "retained_historical_failed_attempts": 1,
+    "fully_superseded_historical_failures": 1
+  },
+  "checks": [
+    {
+      "name": "original_history_coverage",
+      "status": "PASS",
+      "covered_ids": 85245,
+      "pending_ids": 0,
+      "native_prior_ids": 35815,
+      "prior_recovery_ids": 10,
+      "new_primary_ids": 49420,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "source_archive_integrity",
+      "status": "PASS",
+      "archives": 184,
+      "changed_hashes": 0,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "protected_retained_live_boundary",
+      "status": "PASS",
+      "protected_ids": 28,
+      "recovery_overlap": 0,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "main_import_context_and_tasks",
+      "status": "PASS",
+      "messages": 49353,
+      "chunks": 104,
+      "evidence": "evidence/main-import-coverage-summary.json"
+    },
+    {
+      "name": "sealed_supplement",
+      "status": "PASS",
+      "messages": 67,
+      "native_external_refs_visible_before_first_commit": 13,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "auxiliary_artifact_copy_and_visibility",
+      "status": "PASS",
+      "native_contexts": 786,
+      "artifact_api_hash_matches": 3476,
+      "unrepaired": 0,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "corrective_successor_coverage",
+      "status": "PASS",
+      "successor_chunks": 4,
+      "source_ids": 195,
+      "historical_failed_attempts_retained": 1,
+      "historical_failures_fully_superseded": 1,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "quarantined_partial_artifact_integrity",
+      "status": "PASS",
+      "artifacts": 5,
+      "inbound_references": 0,
+      "shared_cases_unchanged": 1,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "current_corrective_supplement_target_readback",
+      "status": "PASS",
+      "distinct_targets": 42,
+      "api_matches": 42,
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "main_snapshot_pair_independent_review",
+      "status": "PASS",
+      "pair_before_identical": true,
+      "pair_after_identical": true,
+      "both_complete_after_snapshots_present": true,
+      "added_lines_preserved": 7,
+      "snapshot_delta_ms": 2.853,
+      "evidence": "evidence/main-diff-chain-independent-review-summary.json",
+      "limit": "Overlapping captures consistent with observations; exact scheduler/merge cause not isolated; bounded pair only"
+    },
+    {
+      "name": "native_managed_relation_reconciliation",
+      "status": "PASS",
+      "managed_relations": 14,
+      "evidence": "evidence/managed-link-independent-review-summary.json"
+    },
+    {
+      "name": "semantic_retrieval_samples",
+      "status": "PASS",
+      "targets": 2,
+      "scopes": [
+        "global",
+        "project"
+      ],
+      "evidence": "evidence/semantic-retrieval-summary.json",
+      "limit": "Exact-target scoped samples, not corpus-wide ranking benchmark"
+    },
+    {
+      "name": "post_audit_service_health",
+      "status": "PASS",
+      "http_status": 200,
+      "healthy": true,
+      "version": "0.5.3",
+      "evidence": "evidence/final-health-summary.json"
+    },
+    {
+      "name": "helper_contracts",
+      "status": "PASS",
+      "tests": 7,
+      "evidence": "evidence/helper-contracts-summary.json"
+    },
+    {
+      "name": "wrapper_stop_control",
+      "status": "PASS",
+      "evidence": "evidence/helper-contracts-summary.json"
+    },
+    {
+      "name": "initial_auxiliary_fidelity_failure",
+      "status": "FAIL",
+      "historical": true,
+      "superseded": true,
+      "current_status": "corrected",
+      "evidence": "evidence/initial-auxiliary-artifact-fidelity-summary.json"
+    },
+    {
+      "name": "initial195_corrective_task_failure",
+      "status": "FAIL",
+      "historical": true,
+      "superseded": true,
+      "current_status": "fully covered by four genuine completed successors",
+      "evidence": "evidence/final-combined-fidelity-audit-summary.json"
+    },
+    {
+      "name": "startup_recall_compressor_latency",
+      "status": "NOT RUN",
+      "reason": "Separate path unchanged; outside historical backlog recovery scope"
+    },
+    {
+      "name": "post_run_readiness_retest",
+      "status": "NOT RUN",
+      "reason": "Final HTTP health and MCP retrieval checked; readiness not rerun"
+    }
+  ],
+  "evidence": [
+    "evidence/auxiliary-copy-native-probe-summary.json",
+    "evidence/failed-corrective-recovery-decision-summary.json",
+    "evidence/fidelity-partial-audit-summary.json",
+    "evidence/final-combined-fidelity-audit-summary.json",
+    "evidence/final-health-summary.json",
+    "evidence/frozen-inventory-plan-summary.json",
+    "evidence/helper-contracts-summary.json",
+    "evidence/initial-auxiliary-artifact-fidelity-summary.json",
+    "evidence/main-diff-chain-independent-review-summary.json",
+    "evidence/main-import-coverage-summary.json",
+    "evidence/managed-link-independent-review-summary.json",
+    "evidence/native-rendering-summary.json",
+    "evidence/progress-checkpoint-summary.json",
+    "evidence/provenance-summary.json",
+    "evidence/rendering-inventory-summary.json",
+    "evidence/sealed-supplement-decision-summary.json",
+    "evidence/semantic-retrieval-summary.json",
+    "evidence/stage-completion-observation-summary.json",
+    "evidence/status-baseline-summary.json",
+    "evidence/successor-195-progress-summary.json",
+    "evidence/verified-partial-artifact-quarantine-summary.json"
+  ],
+  "notes": [
+    "The 786 corrective contexts do not add unique primary recovery IDs beyond 49,420.",
+    "Historical operation counts are not unique net memory growth; 27 corrective/supplement adds include five quarantined intermediates.",
+    "Audit errors: 0; retained historical task failures: 1. These are separate counters.",
+    "All prior partial/failure evidence is retained; no completion marker was fabricated.",
+    "Environment-specific helper source is not published; versions are identified by hashes."
+  ]
+}
