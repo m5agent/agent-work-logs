@@ -1,0 +1,966 @@
+{
+  "schema_version": 1,
+  "kind": "redacted virtual-device execution summary",
+  "captured_at": "2026-11-08T15:51:06.287539+00:00",
+  "variant": "candidate",
+  "source_variant": "maintainer-original-source-overlay",
+  "redaction": "Removed synthetic value text, complete frames, serial contents, all task/session/process identifiers, host locations and service configuration. Original byte counts and SHA256 receipts remain.",
+  "subjects": 9,
+  "subject_pass": 6,
+  "subject_fail": 3,
+  "test_acceptance_pass": 6,
+  "test_acceptance_fail": 3,
+  "results": [
+    {
+      "case": "bad-checksum",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "FAIL",
+      "test_acceptance_status": "FAIL",
+      "functional_classification": "NOT_ESTABLISHED",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "exception",
+          "elapsed_ms": 8,
+          "exception_type": "TypeError",
+          "exception_message": "'bytearray' object doesn't support item deletion",
+          "trace_sha256": "851400ddd46347bc04f8daf5abe05ddf0c559b54fbcdd0c8e065e108ebecd922"
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 3,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": false,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 48,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "cd4127c821f8edcec219b1c8eb8d8bd32fb0136e54914396de6c073c4d296872",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:31:50.155836+00:00",
+      "probe": {
+        "case": "bad-checksum",
+        "variant": "candidate",
+        "file": "bad-checksum-candidate.py",
+        "executed_source": {
+          "bytes": 2299,
+          "sha256": "69f50887c6bb99dfa66b3ed8cfb32dd6998d641d0374de8770d74772799c8bdd"
+        },
+        "prepared_source": {
+          "bytes": 2268,
+          "sha256": "eaa27dcaa7f998913726886614f9f0ed059b6425becc1c35e1ddc58405f79d38"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3908,
+          "sha256": "f654dbc4835db7e6506ecb14d32272dcd294eb63b95f86890815ddc3664adc05"
+        },
+        "controller_observations": {
+          "bytes": 195818,
+          "sha256": "3f554c9b1521eac06251d28734dc1056b865c353833f48e599ac6dff1a6f36b1"
+        },
+        "serial": {
+          "bytes": 1940,
+          "sha256": "004534c9ca282426f86472ce869f8cab381f5e52f91ce8f9782e955ffab5983c"
+        },
+        "evidence_archive": {
+          "bytes": 22621,
+          "sha256": "c391483683c81145360599b6098bb67e83d588b212a4c8186985a8a44c0ab9e8"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "embedded-7e-crc",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "PASS",
+      "test_acceptance_status": "PASS",
+      "functional_classification": "EXPECTED_BEHAVIOR",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 24,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "d7d436158bea3e9feaa47f348fe6b26a8b4f6d55122593f9a310e4fa6b7bc90b",
+            "generation_rule": "repeat(byte 85, 10) + first big-endian u16 suffix whose CRC-16/GENIBUS over big-endian PC 12288 plus synthetic value has high byte 126, excluding values containing byte 126"
+          },
+          "matches_declared_synthetic_value": true
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 2,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 48,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "81286c05c9ad4f5faf22aa0bd20764a18721cabdce52b98f8081be87fc8699fa",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:28:33.593129+00:00",
+      "probe": {
+        "case": "embedded-7e-crc",
+        "variant": "candidate",
+        "file": "embedded-7e-crc-candidate.py",
+        "executed_source": {
+          "bytes": 2302,
+          "sha256": "2bcd3fd993435d488deaba10fc80a4ae7e1112a7f2e5ce5d7049d22352f956a2"
+        },
+        "prepared_source": {
+          "bytes": 2271,
+          "sha256": "83dcecd7065579465a67f34cb75ed2cd8135757d95018ac13e79b9df3d6ee1f9"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3431,
+          "sha256": "10dc014bb57a91b3d3496d82afaf0c731b06e28e715623b9c5f3b4750024466b"
+        },
+        "controller_observations": {
+          "bytes": 182770,
+          "sha256": "bab786f7e71835466b5c751ae71af62339fcf5bd8219cb52ad3278bbc9aa1f4d"
+        },
+        "serial": {
+          "bytes": 1515,
+          "sha256": "bda800dddc9f41d47f35e71110b750bf81ba753f04592cf5bb1d8d5adf290d00"
+        },
+        "evidence_archive": {
+          "bytes": 22509,
+          "sha256": "4084023f65085511b9e35b08d110617121dbe9b117477e27aa207a8614988d36"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "embedded-7e-epc",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "PASS",
+      "test_acceptance_status": "PASS",
+      "functional_classification": "EXPECTED_BEHAVIOR",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 26,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "5da99d39082858bb7fa05a890dde7ac08a74b6cb5c77e516c873319428fa20dd",
+            "generation_rule": "repeat(byte 51, 5) + byte 126 + repeat(byte 51, 6)"
+          },
+          "matches_declared_synthetic_value": true
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 4,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 48,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "a472930e62b8e6907c2ad8586b63b1d6b828ec36126d6fe33c879ea255991949",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:27:29.713545+00:00",
+      "probe": {
+        "case": "embedded-7e-epc",
+        "variant": "candidate",
+        "file": "embedded-7e-epc-candidate.py",
+        "executed_source": {
+          "bytes": 2302,
+          "sha256": "06b3931dd3e1bace345fc403746a971d4b3aa5cfff89d1ab0bc214be46262669"
+        },
+        "prepared_source": {
+          "bytes": 2271,
+          "sha256": "41a1a61e0e763bffe97ce56a9806960d7890776538bfa17865aaf13b37326513"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3431,
+          "sha256": "93ca4d733b628e0f877916ee9b19026c93b4f98d0c4e70d33528124f5a8ccb35"
+        },
+        "controller_observations": {
+          "bytes": 169709,
+          "sha256": "ed440764b723016fa5976b104e07719455806e88dcbf36e76117881bd0918523"
+        },
+        "serial": {
+          "bytes": 1512,
+          "sha256": "5c27d8ac5e72756332011a8d4218a425a6150b786726fb49325ad14391c9519b"
+        },
+        "evidence_archive": {
+          "bytes": 22512,
+          "sha256": "6ce47204e1df92fc32d1dbe6be7f752ca04da731ee2fcb711b26ab806606101e"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "module-error-response",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "PASS",
+      "test_acceptance_status": "PASS",
+      "functional_classification": "EXPECTED_BEHAVIOR",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 22,
+          "returned_value": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "generation_rule": "empty return"
+          },
+          "matches_declared_synthetic_value": true
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 5,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 32,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "341752e2f8fc12106fb1b9c8ec03f390565387a56a1f3ca22e27a27bb847946b",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:33:10.239083+00:00",
+      "probe": {
+        "case": "module-error-response",
+        "variant": "candidate",
+        "file": "module-error-response-candidate.py",
+        "executed_source": {
+          "bytes": 2308,
+          "sha256": "5accb643e2b4fcedec551763afc16fd9be25b8010174320a5aef46840c367a21"
+        },
+        "prepared_source": {
+          "bytes": 2277,
+          "sha256": "eccc8350094c91c3212335be43175a796d528fa9013433b27f6f99c3c10b1acb"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3349,
+          "sha256": "e51ac3c9c3681a7a8043bfa90c3fc97382fec4f09cc76248fd4d402aaa65f3e8"
+        },
+        "controller_observations": {
+          "bytes": 194378,
+          "sha256": "56f389a410780ff7c0107b36c4a401d3b4d7f745d8321d1aacefbb16401f315f"
+        },
+        "serial": {
+          "bytes": 1390,
+          "sha256": "08e404d45029f849efe97e6871bcbbcf09a4a6d17c90290e089d01bdf405d727"
+        },
+        "evidence_archive": {
+          "bytes": 22473,
+          "sha256": "a1c81f3a129803cae5c922a48ddb98e3610c6fa74e78e14546066070fc979b5c"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "noise-before-valid",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "FAIL",
+      "test_acceptance_status": "FAIL",
+      "functional_classification": "NOT_ESTABLISHED",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "exception",
+          "elapsed_ms": 22,
+          "exception_type": "TypeError",
+          "exception_message": "'bytearray' object doesn't support item deletion",
+          "trace_sha256": "22cf5cb9ece95f5d650f7cf8bf45e7bf403bdb69585ec8b66dc40228e6a73297"
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 9,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": false,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 51,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "9a50ad271bcbecf596faa9c302099cd3f7c5a79d2c1fa08f4e794c795d1de090",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:34:14.405054+00:00",
+      "probe": {
+        "case": "noise-before-valid",
+        "variant": "candidate",
+        "file": "noise-before-valid-candidate.py",
+        "executed_source": {
+          "bytes": 2305,
+          "sha256": "2377a6b683a1d1cd3d82b6dfb62f80291314b3446f1e8ba67b482a8c607e5d5f"
+        },
+        "prepared_source": {
+          "bytes": 2274,
+          "sha256": "04f96bf43491b351edc5de00c68e0b19f842934d017d64fe996ba9626b51e617"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3927,
+          "sha256": "af9d6358196a2012606746ea8b5e03735d07bd825449f78dd636f9f1b6f29caf"
+        },
+        "controller_observations": {
+          "bytes": 183023,
+          "sha256": "3db7abf513b06b4636926083ff071eaddece120a1edc442573e6738444db3c68"
+        },
+        "serial": {
+          "bytes": 1843,
+          "sha256": "bd3e30d4e0a3ac18b07eaaaa621ca23ca1df16d2170cefca57bfc75da056db0a"
+        },
+        "evidence_archive": {
+          "bytes": 22622,
+          "sha256": "6a97ef9883954679652d2b164dd3e593f3cc2f70e507daf6f1701febe489e754"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "normal-inventory",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "PASS",
+      "test_acceptance_status": "PASS",
+      "functional_classification": "EXPECTED_BEHAVIOR",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 9,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 3,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 48,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "4e9946ea2ae662e6c3b06f7b7ff1cd8b3f6309cf639896db6a4e0478ad5b4375",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:25:56.307511+00:00",
+      "probe": {
+        "case": "normal-inventory",
+        "variant": "candidate",
+        "file": "normal-inventory-candidate.py",
+        "executed_source": {
+          "bytes": 2303,
+          "sha256": "879c03f7893f5098f26d8134798b802108771fa92fe49babc1814a613ae83d01"
+        },
+        "prepared_source": {
+          "bytes": 2272,
+          "sha256": "aa3d7ebf4f99c0633f952ddabe9d0337662c9f4d3eabbd779cdd651ed00ba4d2"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3431,
+          "sha256": "00dccc6ecf594cf4f89a70a384a8c9d40bfaf6fb230a8f6e7e497d969d5a41e8"
+        },
+        "controller_observations": {
+          "bytes": 195818,
+          "sha256": "c00e6a24859da456ac67ddefa995c4cd827abe70d9df275aec7afbfba59048c4"
+        },
+        "serial": {
+          "bytes": 1548,
+          "sha256": "57df524a2dd9028a685acf1f146ba97476d8e8c1dcd10ee6b3e75823d91830b9"
+        },
+        "evidence_archive": {
+          "bytes": 22433,
+          "sha256": "b2bf7c7a4691e2d206eab3a8d8189e4877975fa13f46376066196dec0f07204c"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "queued-complete-frames",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "FAIL",
+      "test_acceptance_status": "FAIL",
+      "functional_classification": "NOT_ESTABLISHED",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 24,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "65cd5619b9c7051bde6c9104e7a9565a0082dfabaaea6a6f2e36561075417af3",
+            "generation_rule": "repeat(byte 68, 12); queued symbol A"
+          },
+          "matches_declared_synthetic_value": true,
+          "matches_new_second_query_injection": false
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 3,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "aada78153eebcd57a5f2bb70064da66636df01e521e427a0af3183ae33024044",
+            "generation_rule": "repeat(byte 102, 12); queued symbol C"
+          },
+          "matches_declared_synthetic_value": false,
+          "matches_new_second_query_injection": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": false,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "unread_next_frame_preserved": false,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 72,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "71d9ef2fae9779144a2687ff0750fe2bd2092c3cfff16c6f13baaa764cf5b464",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:43:13.294167+00:00",
+      "probe": {
+        "case": "queued-complete-frames",
+        "variant": "candidate",
+        "file": "queued-complete-frames-candidate.py",
+        "executed_source": {
+          "bytes": 2378,
+          "sha256": "42c3fbd962c26075ebfe52a461523cf7566f97e76c440f096d172e229999aa93"
+        },
+        "prepared_source": {
+          "bytes": 2347,
+          "sha256": "acfd6b38b89eeab1f6e55d9b9afe90345ef6abcc54c13c16723869a201253501"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3575,
+          "sha256": "64a5bdf51ef8284f0a6efbb463f2696f67a7946e4baaf8ff1ebae9307d95fab7"
+        },
+        "controller_observations": {
+          "bytes": 211168,
+          "sha256": "960916c16712774ac22402cc6c71c66b3590b5794caf5c0502a56a45ccce1640"
+        },
+        "serial": {
+          "bytes": 1559,
+          "sha256": "6c4cc02dd9d8ca7eb5cb3b35ed947b3a96c4ac361107a12bc0a9fc03956dfb35"
+        },
+        "evidence_archive": {
+          "bytes": 22553,
+          "sha256": "eeaa8c95f1f4377fa14cb8c50709b56defe8ebffc61b032cc65f47cabc488d8e"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "short-valid-payload",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "PASS",
+      "test_acceptance_status": "PASS",
+      "functional_classification": "EXPECTED_BEHAVIOR",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 19,
+          "returned_value": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "generation_rule": "empty return"
+          },
+          "matches_declared_synthetic_value": true
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 4,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 35,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "0d1b75e7cef37f15e89552deb75d6923c567c74abc41dedc1de9986e6c683b76",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:30:46.337638+00:00",
+      "probe": {
+        "case": "short-valid-payload",
+        "variant": "candidate",
+        "file": "short-valid-payload-candidate.py",
+        "executed_source": {
+          "bytes": 2306,
+          "sha256": "5cf2f7f6fba1b1e8d829c689596c0b7c3100b6a7dff44c2bb59e23bb08f22607"
+        },
+        "prepared_source": {
+          "bytes": 2275,
+          "sha256": "69a5c75111a507e607e04db6bd1bd011b339b227741221ff276b64e77d88e394"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3359,
+          "sha256": "bd97e7fba231d12807052a49581e66990fc6d30210183d53cf4b4389309b00e7"
+        },
+        "controller_observations": {
+          "bytes": 181678,
+          "sha256": "300e2b6c9509eff96bc0cfaa574623117f2279c24484c33725339e9165e4a815"
+        },
+        "serial": {
+          "bytes": 1397,
+          "sha256": "6fd069618e628743a5e44d98bd71f53add99d934ad31489b2c62f1b02cbd7378"
+        },
+        "evidence_archive": {
+          "bytes": 22473,
+          "sha256": "7d925e1e6628b4edcf0137fe009944c734604d2925a8e60ff7a5ba1deb8cd8db"
+        }
+      },
+      "raw_runner_exit_code": 0
+    },
+    {
+      "case": "synthetic-truncated-prefix",
+      "variant": "candidate",
+      "source_variant": "maintainer-original-source-overlay",
+      "subject_status": "PASS",
+      "test_acceptance_status": "PASS",
+      "functional_classification": "EXPECTED_BEHAVIOR",
+      "first_result_classification": "RETURN_OBSERVED",
+      "execution_completed": true,
+      "calls": [
+        {
+          "index": 0,
+          "kind": "return",
+          "elapsed_ms": 5011,
+          "returned_value": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "generation_rule": "empty return"
+          },
+          "matches_declared_synthetic_value": true
+        },
+        {
+          "index": 1,
+          "kind": "return",
+          "elapsed_ms": 3,
+          "returned_value": {
+            "bytes": 12,
+            "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+            "generation_rule": "repeat(byte 17, 12)"
+          },
+          "matches_declared_synthetic_value": true
+        }
+      ],
+      "checks": {
+        "runner_executed": true,
+        "original_source_selected": true,
+        "two_ordered_public_calls": true,
+        "first_result_matches_declared_oracle": true,
+        "normal_recovery": true,
+        "constructor_zero_commands_observed": true,
+        "exact_attachment": true,
+        "two_inventory_frames": true,
+        "two_injected_responses": true,
+        "configured_fixture_preserved": true,
+        "actual_runtime_identity": true,
+        "required_zip_members": true,
+        "zip_identity": true,
+        "archive_running_process_identity_matches": true,
+        "serial_retained_prefix": true,
+        "native_non_vfs_unchanged": true,
+        "effective_flash_hash": true,
+        "actual_vfs_source_readback": true,
+        "actual_main_readback": true,
+        "retained_terminal_history": true,
+        "bound_process_exit_verified": true,
+        "archive_completed_before_owned_stop": true
+      },
+      "controller": {
+        "commands_observed": 2,
+        "response_chunks_injected": 2,
+        "expected_injected_bytes": 38,
+        "response_mirror_is_independent_capture": false
+      },
+      "source_readback": [
+        {
+          "role": "candidate",
+          "sha256": "8e86f1e884a9619673d75a98b8dc9efec638cd3b7c9a6819f8762c5abcbc0620"
+        }
+      ],
+      "effective_firmware_sha256": "cb41c05bfd3635499924c8d0b57faad01528c7bd61a390e17e0ffbb55b4c4d6d",
+      "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "observed_at": "2026-11-08T15:29:37.416225+00:00",
+      "probe": {
+        "case": "synthetic-truncated-prefix",
+        "variant": "candidate",
+        "file": "synthetic-truncated-prefix-candidate.py",
+        "executed_source": {
+          "bytes": 2313,
+          "sha256": "4daa23dc8f15017caf1e18ff669bd3ebf3573d2c081470a09c66e2fa82e2e542"
+        },
+        "prepared_source": {
+          "bytes": 2282,
+          "sha256": "77fbe16c1a0bf348b92c22624e8e31883931fc54cf7d71dead49124f81f8a124"
+        },
+        "prefix_relation_verified": true
+      },
+      "receipts": {
+        "result": {
+          "bytes": 3380,
+          "sha256": "1c549f51552ebf21f06aad2f5d3a23b758831e6581d14465a1fd68ad997b292a"
+        },
+        "controller_observations": {
+          "bytes": 428930,
+          "sha256": "1b0aa317370e025a56749958231a92f6a4ef464826b78b5a343dcbcedc3ee425"
+        },
+        "serial": {
+          "bytes": 1397,
+          "sha256": "7b8d9c6fefd9a6482876df24806a234f8f96f40aa20e3390889426a42cd8faea"
+        },
+        "evidence_archive": {
+          "bytes": 22479,
+          "sha256": "98e2438a8364a7ecff4c30dd61fe9b5c93c4f85fc06d7083b6381f02418120bf"
+        }
+      },
+      "raw_runner_exit_code": 0
+    }
+  ]
+}

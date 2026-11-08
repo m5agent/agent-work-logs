@@ -1,0 +1,46 @@
+--- maintainer-candidate.py
++++ fixed-overlay-files/maintainer_candidate.py
+@@ -471,7 +471,7 @@
+             if pending == 0:
+                 time.sleep_ms(1)
+                 continue
+-            chunk = self._uart.read(pending)
++            chunk = self._uart.read(1)
+             if chunk:
+                 buf.extend(chunk)
+ 
+@@ -481,14 +481,14 @@
+                     buf = bytearray()
+                     break
+                 if start > 0:
+-                    del buf[:start]
++                    buf = buf[start:]
+                 if len(buf) < 5:
+                     break
+ 
+                 payload_len = (buf[3] << 8) | buf[4]
+                 if payload_len > 512:
+                     # Invalid header, resync from the next byte.
+-                    del buf[0]
++                    buf = buf[1:]
+                     continue
+ 
+                 frame_len = payload_len + 7
+@@ -497,7 +497,7 @@
+ 
+                 frame = buf[:frame_len]
+                 if frame[-1] != self._END:
+-                    del buf[0]
++                    buf = buf[1:]
+                     continue
+ 
+                 if (
+@@ -511,7 +511,7 @@
+                             " ".join(f"{byte:02x}" for byte in frame),
+                         )
+                     )
+-                    del buf[0]
++                    buf = buf[1:]
+                     continue
+ 
+                 self._verbose and print(

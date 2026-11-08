@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "kind": "redacted synthetic fixture summary",
+  "source_receipt": {
+    "bytes": 9579,
+    "sha256": "0feb20a753dea1e3b9ca0483a81033b9cb66c55f8470349e862e99e922f22dc0"
+  },
+  "synthetic_data_only": true,
+  "redaction": "Synthetic values and complete response bytes are omitted. Only lengths, generation rules, hashes and protocol metadata are retained.",
+  "transport_semantics": "Each semicolon-separated queue entry is injected atomically for the next complete UART command. It is not timed fragmentation within a command.",
+  "tag_crc_scope": "CRC-16/GENIBUS generation validates synthetic fixture construction; the driver does not independently validate tag CRC.",
+  "cases": [
+    {
+      "case": "normal-inventory",
+      "description": "normal inventory",
+      "first_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "EPC_MATCH",
+      "maintainer_first_oracle": "EPC_MATCH"
+    },
+    {
+      "case": "embedded-7e-epc",
+      "description": "embedded 7e epc",
+      "first_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "5da99d39082858bb7fa05a890dde7ac08a74b6cb5c77e516c873319428fa20dd",
+        "generation_rule": "repeat(byte 51, 5) + byte 126 + repeat(byte 51, 6)"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 24,
+          "sha256": "60c5feffc5531e84b7303aac014b99dfecb9b50f6cc26d7b875f087d8ef401a6",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "ValueError buffer too small predicted from source, must observe",
+      "maintainer_first_oracle": "EPC_MATCH"
+    },
+    {
+      "case": "embedded-7e-crc",
+      "description": "embedded 7e crc",
+      "first_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "d7d436158bea3e9feaa47f348fe6b26a8b4f6d55122593f9a310e4fa6b7bc90b",
+        "generation_rule": "repeat(byte 85, 10) + first big-endian u16 suffix whose CRC-16/GENIBUS over big-endian PC 12288 plus synthetic value has high byte 126, excluding values containing byte 126"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 24,
+          "sha256": "ab248e6f948208c7f290445c631c40d03888eb97a3a0b6d496116b6c9761d663",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "ValueError buffer too small predicted from source, must observe",
+      "maintainer_first_oracle": "EPC_MATCH"
+    },
+    {
+      "case": "synthetic-truncated-prefix",
+      "description": "synthetic truncated prefix",
+      "first_expected_synthetic_value": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "generation_rule": "empty return"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 14,
+          "sha256": "d4f6fc2e20b9761a6602c296821999ea3eec7329b39819d31cbe7e1bceb27e0b",
+          "complete_frame_candidates": []
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "ValueError buffer too small predicted from source, must observe",
+      "maintainer_first_oracle": "EMPTY_TIMEOUT"
+    },
+    {
+      "case": "short-valid-payload",
+      "description": "short valid payload",
+      "first_expected_synthetic_value": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "generation_rule": "empty return"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 11,
+          "sha256": "fe5a557b9433b077662d89259a84ee979d9ba727e453928bdeea6adafb2375fd",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 4,
+              "frame_bytes": 11,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "ValueError invalid format or buffer size predicted from source, must observe",
+      "maintainer_first_oracle": "EMPTY_NO_EXCEPTION"
+    },
+    {
+      "case": "bad-checksum",
+      "description": "bad checksum",
+      "first_expected_synthetic_value": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "generation_rule": "empty return"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 24,
+          "sha256": "ae471539392ccb0f329f5bf667776249722a9d7a4c2077c28e2ade4f61694032",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": false
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "EMPTY_NO_EXCEPTION",
+      "maintainer_first_oracle": "EMPTY_TIMEOUT"
+    },
+    {
+      "case": "module-error-response",
+      "description": "module error response",
+      "first_expected_synthetic_value": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "generation_rule": "empty return"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 8,
+          "sha256": "de0a2d73261a3809e86a78d40c0a6b605078ab5fbad3335e6f486867d32fb983",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 1,
+              "command": 255,
+              "payload_bytes": 1,
+              "frame_bytes": 8,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "EMPTY_NO_EXCEPTION",
+      "maintainer_first_oracle": "EMPTY_NO_EXCEPTION"
+    },
+    {
+      "case": "noise-before-valid",
+      "description": "noise before valid",
+      "first_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "7ba05afadcedc44aaa1f2511f3adcdc6466728c816265e34ec259c9b02392f8f",
+        "generation_rule": "repeat(byte 17, 12)"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 27,
+          "sha256": "6993cbb40f819365882a0e2ee06a8d9e77df9b382dbb954e74b73f09e2592e9f",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "79173f8ac2997d9b6625fbb15de11d170c4ade4eba0f4adc7a2ca85762772af3",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": null,
+      "baseline_first_oracle": "EPC_MATCH",
+      "maintainer_first_oracle": "EPC_MATCH"
+    },
+    {
+      "case": "queued-complete-frames",
+      "description": "Two complete synthetic responses A+B enter the first UART RX chunk. Reading one response preserves B for the next call. New command injects C. Read-only UART.any observes the FIFO without consuming bytes.",
+      "first_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "65cd5619b9c7051bde6c9104e7a9565a0082dfabaaea6a6f2e36561075417af3",
+        "generation_rule": "repeat(byte 68, 12); queued symbol A"
+      },
+      "second_expected_synthetic_value": {
+        "bytes": 12,
+        "sha256": "3aac9295c25f8a4fccd97e90e43e87b17b18e29b815fd11f701e5160a5a82b03",
+        "generation_rule": "repeat(byte 85, 12); queued symbol B"
+      },
+      "controller_response_chunks": [
+        {
+          "bytes": 48,
+          "sha256": "869cdadc074634d8c8998d69bf84eab3b1178e2635ab90f9cc41e2174180d6a8",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            },
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        },
+        {
+          "bytes": 24,
+          "sha256": "0cd115c4d6620fa8c96897e3f94a9a6d52af29d86e52a4078ddcc0e1eab3a132",
+          "complete_frame_candidates": [
+            {
+              "frame_type": 2,
+              "command": 34,
+              "payload_bytes": 17,
+              "frame_bytes": 24,
+              "checksum_matches": true
+            }
+          ]
+        }
+      ],
+      "queries": 2,
+      "driver_wait_limit_ms": 5000,
+      "expected_uart_pending_after_first": 24,
+      "baseline_first_oracle": "EPC_MATCH",
+      "maintainer_first_oracle": "EPC_MATCH"
+    }
+  ],
+  "unavailable_test": {
+    "case": "timed_same_query_fragmentation",
+    "status": "NOT RUN",
+    "reason": "BLOCKED_FIXTURE: the Unit response contract provides one atomic response entry per complete command, without delayed same-command chunks."
+  }
+}

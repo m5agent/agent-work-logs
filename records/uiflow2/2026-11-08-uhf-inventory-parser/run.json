@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "UIFlow UHF inventory parser: reproduction and final source-overlay validation",
+  "source": {
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/89",
+    "pull_request": "",
+    "repository": "https://github.com/m5stack/uiflow-micropython",
+    "base_commit": "f20d5a00e8c9106aae1d944f3d6f1128839f59cb",
+    "fix_commit": "8006dd8a2b0c39b8cac99e21f56ce80a65a837d8",
+    "commit": "8006dd8a2b0c39b8cac99e21f56ce80a65a837d8"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "requested_model": "Core2",
+    "substitute_model": "CoreS3",
+    "transport": "guest machine.UART(1), PORT.A RX1/TX2, attached simulated UHF unit",
+    "physical_hardware_status": "NOT RUN"
+  },
+  "firmware": {
+    "base_version": "UIFlow2 CoreS3 v2.5.5 preview",
+    "base_raw_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+    "base_raw_bytes": 16121856,
+    "base_normalized_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+    "base_normalized_bytes": 16777216,
+    "metadata_sha256": "3ae79b7326f16fa5a5b5f9273b4d10a7ea4595cd15be7d9ebeed6bc4b49f1a05",
+    "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+    "source_delivery": "VFS source overlay; per-case effective hashes in evidence summaries"
+  },
+  "execution": {
+    "environment": "local Device Service session API with validated virtual-device UART controller",
+    "captured_at": "2026-11-08T15:51:06.287539+00:00",
+    "executor": "DSH DeepSeek; source planning and evidence audit coordinated by m5agent",
+    "executor_completion": "PASS, completed turn and process exit 0 independently verified",
+    "observed_case_results": 35,
+    "variants": {
+      "baseline": {
+        "subjects": 9,
+        "subject_pass": 5,
+        "subject_fail": 4,
+        "test_acceptance_pass": 9,
+        "test_acceptance_fail": 0
+      },
+      "candidate": {
+        "subjects": 9,
+        "subject_pass": 6,
+        "subject_fail": 3,
+        "test_acceptance_pass": 6,
+        "test_acceptance_fail": 3
+      },
+      "compatible": {
+        "subjects": 8,
+        "subject_pass": 8,
+        "subject_fail": 0,
+        "test_acceptance_pass": 8,
+        "test_acceptance_fail": 0
+      },
+      "fixed": {
+        "subjects": 9,
+        "subject_pass": 9,
+        "subject_fail": 0,
+        "test_acceptance_pass": 9,
+        "test_acceptance_fail": 0
+      }
+    },
+    "independent_receipts_pass": 35,
+    "independent_zip_members_verified": 350,
+    "histories_retained": 35
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "NOT RUN",
+      "scope": "No official firmware rebuild. Syntax, compile and changed-file style checks PASS."
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "35 executed guest cases, real simulated UART commands and response injection counters."
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "Final source overlay only: all nine declared vector oracles match."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "Final source overlay only: nine vectors including next-call recovery and queued A/B preservation."
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "No RF or electrical claim."
+    },
+    {
+      "layer": "delivery",
+      "status": "PARTIAL",
+      "scope": "Source commit pushed to personal fork. Maintainer review and merge pending."
+    }
+  ],
+  "evidence": [
+    "evidence/baseline.summary.json",
+    "evidence/candidate.summary.json",
+    "evidence/compatible.summary.json",
+    "evidence/fixed.summary.json",
+    "evidence/fixtures.summary.json",
+    "evidence/probe-inventory.summary.json",
+    "evidence/source-contracts.summary.json",
+    "evidence/independent-receipts.summary.json",
+    "evidence/executor-completion.summary.json",
+    "evidence/fixture-generator.summary.json"
+  ],
+  "notes": [
+    "Virtual-device validation only. Physical RF, antenna, electrical properties, range, power, and real tag behavior were NOT RUN.",
+    "Original Core2 binary and whole-device execution were NOT RUN: Unit-model admission was unavailable. CoreS3 PORT.A UART1 RX1/TX2 exercised the identical public JRD4035 and UHFRFIDUnit source path under UIFlow2 CoreS3 v2.5.5 preview.",
+    "Timed same-query fragmentation was NOT RUN / BLOCKED_FIXTURE. Queue separators select the next command response; they do not represent delayed chunks.",
+    "The response-byte mirror represents configured data, not an independent wire capture. Application results, actual controller command/injection counters, VFS source readback and serial markers are separate observations.",
+    "The actual Unit-state contract exposes no read-byte counter; no expected read count was substituted for an observation.",
+    "Only inventory and its immediate recovery/queued FIFO behavior were tested. The 35 shared command callers, continuous inventory, other response decoders, arbitrary timing and long-duration reliability are not certified.",
+    "The maintained parser keeps a fixed 512-byte payload cap and absolute ticks deadline. Compatibility of other command lengths is a review boundary.",
+    "The source overlay was composed into the VFS of the admitted official base image. Native/non-VFS bytes and source readback were checked. Stock frozen-source behavior and an official firmware rebuild were NOT RUN."
+  ]
+}
