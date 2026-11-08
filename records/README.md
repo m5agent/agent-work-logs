@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-08 | UIFlow2 StickS3 | TLS 时间校验与预期拒绝复核 | `PARTIAL`（公开2.5.5 preview三输入PASS；首轮串口观测FAIL保留；AWS/原2.5.3未测） | [查看](uiflow2/2026-11-08-sticks3-tls-validity/) |
 | 2026-11-06 | Firmware Review Service | Codex 恢复、离线声明识别与 A/B 独立复审 | `PASS`（31项回归；同 BIN virtual-device + A轮廓/B切色断言；快照复审、未提交） | [查看](firmware-review-service/2026-11-06-review-recovery/) |
 | 2026-11-06 | ESP Emulator | 实验数据清理、快照共享与删除条件 | `PASS`（24旧包删除；卷空闲实测+30.64GiB；目录87.56GiB；旧任务保留） | [查看](esp-emulator/2026-11-06-completed-raw-retirement/) |
 | 2026-11-06 | ESP Emulator | 冷归档清理与普通clone实测 | `PASS`（本轮约41.34GiB回收；完整clone371.55MiB；进行中任务保留） | [查看](esp-emulator/2026-11-06-storage-and-clone-audit/) |

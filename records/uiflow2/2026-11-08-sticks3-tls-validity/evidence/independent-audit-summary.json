@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-08T14:52:30.544517+00:00",
+  "status": "SCOPED_TLS_PASS_DSH_COMPLETION_PENDING_WITH_PROVENANCE_LIMITS",
+  "source_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92",
+  "tracked_clean_now": true,
+  "source_commit_matches_expected": true,
+  "original_files_unchanged_during_audit": true,
+  "original_audit_sha256": "7aaa5ae85900b212418cf810c116370c93feab605f50f12eaa16d4a776457872",
+  "runs": [
+    {
+      "alias": "2026",
+      "status": "NOT_ESTABLISHED_CONSOLE_OBSERVATION_FAILURE",
+      "raw_execution_status": "FAIL",
+      "raw_protocol_status": "FAIL",
+      "raw_exit_code": 1,
+      "authenticated_http_count": 2,
+      "failed_checks": [
+        "zip_snapshot_precedes_stop_completion"
+      ],
+      "zip_member_records": {
+        "serial.log": {
+          "size": 3775,
+          "sha256": "2539c5be759dfdf1df8b0ced7364e92915876df53500429124b52a90f50e4a59",
+          "matches_manifest": true
+        },
+        "serial1.log": {
+          "size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matches_manifest": true
+        },
+        "qemu.stdout": {
+          "size": 1575,
+          "sha256": "c9b41b67e45bdbca92c63e114eca94cb32ece154f19f2496d9f51a57d813afef",
+          "matches_manifest": true
+        },
+        "qemu.stderr": {
+          "size": 104,
+          "sha256": "6921e47d89fe5c730deac48827a733b9bc5618ac6589e148895c1ba328a1e7f0",
+          "matches_manifest": true
+        },
+        "network/evidence.json": {
+          "size": 36566,
+          "sha256": "edcf44e5ea800b5ba2f574dc51694bcf9d38435abb609a8d604b99ce8ab77e78",
+          "matches_manifest": true
+        },
+        "network/capture.pcap": {
+          "size": 41848,
+          "sha256": "f3e387446c05c151c876c6fd0b8a0ed72e2928e0d7c06fcd374c319c983837ab",
+          "matches_manifest": true
+        },
+        "network/pcap-summary.json": {
+          "size": 33098,
+          "sha256": "2900337f91e2a8badec331bf1652760299afc02312032f885b57d816c38b43e3",
+          "matches_manifest": true
+        }
+      },
+      "vfs_actual_changed_files": [
+        "boot.py",
+        "main.py"
+      ],
+      "vfs_actual_new_files": [
+        "rtc_probe.py"
+      ],
+      "source_checks": {
+        "probe_matches_original_generator": true,
+        "report_source_hash": true,
+        "main_has_only_ready_prefix": true,
+        "boot_matches_original_bootstrap": true,
+        "all_three_source_files_read_back": true,
+        "composition_source_rows_match_actual_files": true,
+        "base_file_preservation": true,
+        "outside_vfs_unchanged": true,
+        "application_image_unchanged": true,
+        "entire_application_partition_unchanged": true,
+        "effective_flash_hash": true,
+        "original_lane_labels_retained": true,
+        "cert_der_hash": true,
+        "fixture_clock_input": true,
+        "certificate_dates": true
+      },
+      "zip_checks": {
+        "crc_valid": true,
+        "no_duplicates_or_unsafe_paths": true,
+        "manifest_membership_exact": true,
+        "all_member_sizes_hashes_valid": true,
+        "same_runtime_session_firmware_pid": true,
+        "zip_hash": true,
+        "retained_local_serial_matches_raw_zip": true
+      },
+      "functional_checks": {
+        "real_tls_http_observed": true,
+        "console_acceptance_not_established": true,
+        "raw_failure_preserved": true
+      },
+      "observer_checks": {
+        "same_bound_pid_live_observed": true,
+        "independent_live_runtime_hash_matches": true,
+        "same_start_identity": true,
+        "actual_bound_pid_now_absent": true
+      },
+      "lifecycle_checks": {
+        "history_retained": true,
+        "zip_serial_retained_as_history_prefix": true,
+        "flash_released": true,
+        "actual_pid_absent": true,
+        "owned_tcp_peer_ports_now_closed": true
+      },
+      "timing_checks": {
+        "source_serial_order": true,
+        "service_zip_get_precedes_delete": true,
+        "complete_zip_file_precedes_pre_stop_worker_read": true,
+        "zip_snapshot_precedes_stop_completion": false
+      }
+    },
+    {
+      "alias": "2026-dupterm",
+      "status": "PASS",
+      "raw_execution_status": "EXECUTED",
+      "raw_protocol_status": "PASS",
+      "raw_exit_code": 0,
+      "authenticated_http_count": 2,
+      "failed_checks": [],
+      "zip_member_records": {
+        "serial.log": {
+          "size": 2073,
+          "sha256": "9d0e7692909ec38c0d316a66738e8f75cd5f540634a058f7bc23287136420518",
+          "matches_manifest": true
+        },
+        "serial1.log": {
+          "size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matches_manifest": true
+        },
+        "qemu.stdout": {
+          "size": 1574,
+          "sha256": "f8ee3ab184b5e80d12b2cbcaac9d776055be3b0d7538ee5edc90b8c993783651",
+          "matches_manifest": true
+        },
+        "qemu.stderr": {
+          "size": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "matches_manifest": true
+        },
+        "frames/current.png": {
+          "size": 174,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+          "matches_manifest": true
+        },
+        "qom/snapshot.json": {
+          "size": 67765,
+          "sha256": "be0d42f4d5f487fd68e595488c90e2796b798500b94824c7b45f3a4aef20ca85",
+          "matches_manifest": true
+        },
+        "network/evidence.json": {
+          "size": 1316,
+          "sha256": "a1d7517c6b7a92bc845347630e4c8cf88081af037cc1deac9d3cf17d457ebc60",
+          "matches_manifest": true
+        },
+        "network/capture.pcap": {
+          "size": 19139,
+          "sha256": "c14ca1435da776c6dbd0e3c3392f58d53f5409048dc68191a8f967232328c3a7",
+          "matches_manifest": true
+        }
+      },
+      "vfs_actual_changed_files": [
+        "boot.py",
+        "main.py"
+      ],
+      "vfs_actual_new_files": [
+        "rtc_probe.py"
+      ],
+      "source_checks": {
+        "probe_matches_original_generator": true,
+        "report_source_hash": true,
+        "main_has_only_ready_prefix": true,
+        "boot_matches_original_bootstrap": true,
+        "all_three_source_files_read_back": true,
+        "composition_source_rows_match_actual_files": true,
+        "base_file_preservation": true,
+        "outside_vfs_unchanged": true,
+        "application_image_unchanged": true,
+        "entire_application_partition_unchanged": true,
+        "effective_flash_hash": true,
+        "original_lane_labels_retained": true,
+        "cert_der_hash": true,
+        "fixture_clock_input": true,
+        "certificate_dates": true
+      },
+      "zip_checks": {
+        "crc_valid": true,
+        "no_duplicates_or_unsafe_paths": true,
+        "manifest_membership_exact": true,
+        "all_member_sizes_hashes_valid": true,
+        "same_runtime_session_firmware_pid": true,
+        "zip_hash": true,
+        "retained_local_serial_matches_raw_zip": true,
+        "running_capture": true,
+        "frame_and_qom_present": true,
+        "frame_hash": true
+      },
+      "functional_checks": {
+        "both_wrapper_calls_logged": true,
+        "five_unique_api_rows": true,
+        "group_done": true,
+        "rtc_and_epoch_match_input": true,
+        "two_wrapper_pass": true,
+        "five_pass_rows": true,
+        "two_independent_authenticated_http": true,
+        "original_protocol_pass": true
+      },
+      "observer_checks": {
+        "same_bound_pid_live_observed": true,
+        "independent_live_runtime_hash_matches": true,
+        "same_start_identity": true,
+        "actual_bound_pid_now_absent": true
+      },
+      "lifecycle_checks": {
+        "history_retained": true,
+        "zip_serial_retained_as_history_prefix": true,
+        "flash_released": true,
+        "actual_pid_absent": true,
+        "owned_tcp_peer_ports_now_closed": true
+      },
+      "timing_checks": {
+        "source_serial_order": true,
+        "service_zip_get_precedes_delete": true,
+        "complete_zip_file_precedes_pre_stop_worker_read": true,
+        "zip_snapshot_precedes_stop_completion": true
+      }
+    },
+    {
+      "alias": "2010-dupterm",
+      "status": "PASS",
+      "raw_execution_status": "EXECUTED",
+      "raw_protocol_status": "FAIL",
+      "raw_exit_code": 1,
+      "authenticated_http_count": 0,
+      "failed_checks": [],
+      "zip_member_records": {
+        "serial.log": {
+          "size": 2007,
+          "sha256": "0893b111eea2cf450060f1bd4f8e8c961c2dc6bd535406e80e70c9a3e9c21c01",
+          "matches_manifest": true
+        },
+        "serial1.log": {
+          "size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matches_manifest": true
+        },
+        "qemu.stdout": {
+          "size": 1611,
+          "sha256": "b214f08b3bb12a4af9cb9be0f2e2d4672ae317d1640f31ffa1e3c2a0d7a80c26",
+          "matches_manifest": true
+        },
+        "qemu.stderr": {
+          "size": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "matches_manifest": true
+        },
+        "frames/current.png": {
+          "size": 174,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+          "matches_manifest": true
+        },
+        "qom/snapshot.json": {
+          "size": 67765,
+          "sha256": "cbb5cc6a918409b96e3b1e7940f940e061f1d744b201839e2651fba126469265",
+          "matches_manifest": true
+        },
+        "network/evidence.json": {
+          "size": 1315,
+          "sha256": "44fd9f77abf75d7299facfb6f704db93a1cc8a3b1b6f7355eaa433c91a72a2f8",
+          "matches_manifest": true
+        },
+        "network/capture.pcap": {
+          "size": 8107,
+          "sha256": "9ecc58c1b17a8c7b3a81d29508da8d5d82fdfdf52bacbbc82261c6125fcdab9c",
+          "matches_manifest": true
+        }
+      },
+      "vfs_actual_changed_files": [
+        "boot.py",
+        "main.py"
+      ],
+      "vfs_actual_new_files": [
+        "rtc_probe.py"
+      ],
+      "source_checks": {
+        "probe_matches_original_generator": true,
+        "report_source_hash": true,
+        "main_has_only_ready_prefix": true,
+        "boot_matches_original_bootstrap": true,
+        "all_three_source_files_read_back": true,
+        "composition_source_rows_match_actual_files": true,
+        "base_file_preservation": true,
+        "outside_vfs_unchanged": true,
+        "application_image_unchanged": true,
+        "entire_application_partition_unchanged": true,
+        "effective_flash_hash": true,
+        "original_lane_labels_retained": true,
+        "cert_der_hash": true,
+        "fixture_clock_input": true,
+        "certificate_dates": true
+      },
+      "zip_checks": {
+        "crc_valid": true,
+        "no_duplicates_or_unsafe_paths": true,
+        "manifest_membership_exact": true,
+        "all_member_sizes_hashes_valid": true,
+        "same_runtime_session_firmware_pid": true,
+        "zip_hash": true,
+        "retained_local_serial_matches_raw_zip": true,
+        "running_capture": true,
+        "frame_and_qom_present": true,
+        "frame_hash": true
+      },
+      "functional_checks": {
+        "both_wrapper_calls_logged": true,
+        "five_unique_api_rows": true,
+        "group_done": true,
+        "rtc_and_epoch_match_input": true,
+        "two_specific_certificate_time_rejections": true,
+        "expected_raw_counts": true,
+        "no_authenticated_http": true,
+        "original_protocol_failure_preserved": true,
+        "peer_observed_two_handshake_rejections": true
+      },
+      "observer_checks": {
+        "same_bound_pid_live_observed": true,
+        "independent_live_runtime_hash_matches": true,
+        "same_start_identity": true,
+        "actual_bound_pid_now_absent": true
+      },
+      "lifecycle_checks": {
+        "history_retained": true,
+        "zip_serial_retained_as_history_prefix": true,
+        "flash_released": true,
+        "actual_pid_absent": true,
+        "owned_tcp_peer_ports_now_closed": true
+      },
+      "timing_checks": {
+        "source_serial_order": true,
+        "service_zip_get_precedes_delete": true,
+        "complete_zip_file_precedes_pre_stop_worker_read": true,
+        "zip_snapshot_precedes_stop_completion": true
+      }
+    },
+    {
+      "alias": "2040-dupterm",
+      "status": "PASS",
+      "raw_execution_status": "EXECUTED",
+      "raw_protocol_status": "FAIL",
+      "raw_exit_code": 1,
+      "authenticated_http_count": 0,
+      "failed_checks": [],
+      "zip_member_records": {
+        "serial.log": {
+          "size": 2233,
+          "sha256": "3950fd4c6680623ec9a74827663b2933fea538d03c53caedb7a9c1ade8e0ba33",
+          "matches_manifest": true
+        },
+        "serial1.log": {
+          "size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matches_manifest": true
+        },
+        "qemu.stdout": {
+          "size": 1576,
+          "sha256": "a132ebc94d563485cd06d51f558cc41d04ad915093ca54e7793894a7879f6d26",
+          "matches_manifest": true
+        },
+        "qemu.stderr": {
+          "size": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "matches_manifest": true
+        },
+        "frames/current.png": {
+          "size": 174,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+          "matches_manifest": true
+        },
+        "qom/snapshot.json": {
+          "size": 67765,
+          "sha256": "29705cca57971dc721edaf1f2c54c417dd796fb63b431d2fffe960914a56deb9",
+          "matches_manifest": true
+        },
+        "network/evidence.json": {
+          "size": 1315,
+          "sha256": "ad4379ef43b0753d416375d56a2d80c17e05002cea281274c626cb8c10b19337",
+          "matches_manifest": true
+        },
+        "network/capture.pcap": {
+          "size": 9097,
+          "sha256": "3e5b60a05ffa2f2980a363c0aafc66cb764e3119113534d14aa9db1ef0b1ffd4",
+          "matches_manifest": true
+        }
+      },
+      "vfs_actual_changed_files": [
+        "boot.py",
+        "main.py"
+      ],
+      "vfs_actual_new_files": [
+        "rtc_probe.py"
+      ],
+      "source_checks": {
+        "probe_matches_original_generator": true,
+        "report_source_hash": true,
+        "main_has_only_ready_prefix": true,
+        "boot_matches_original_bootstrap": true,
+        "all_three_source_files_read_back": true,
+        "composition_source_rows_match_actual_files": true,
+        "base_file_preservation": true,
+        "outside_vfs_unchanged": true,
+        "application_image_unchanged": true,
+        "entire_application_partition_unchanged": true,
+        "effective_flash_hash": true,
+        "original_lane_labels_retained": true,
+        "cert_der_hash": true,
+        "fixture_clock_input": true,
+        "certificate_dates": true
+      },
+      "zip_checks": {
+        "crc_valid": true,
+        "no_duplicates_or_unsafe_paths": true,
+        "manifest_membership_exact": true,
+        "all_member_sizes_hashes_valid": true,
+        "same_runtime_session_firmware_pid": true,
+        "zip_hash": true,
+        "retained_local_serial_matches_raw_zip": true,
+        "running_capture": true,
+        "frame_and_qom_present": true,
+        "frame_hash": true
+      },
+      "functional_checks": {
+        "both_wrapper_calls_logged": true,
+        "five_unique_api_rows": true,
+        "group_done": true,
+        "rtc_and_epoch_match_input": true,
+        "two_specific_certificate_time_rejections": true,
+        "expected_raw_counts": true,
+        "no_authenticated_http": true,
+        "original_protocol_failure_preserved": true,
+        "peer_observed_two_handshake_rejections": true
+      },
+      "observer_checks": {
+        "same_bound_pid_live_observed": true,
+        "independent_live_runtime_hash_matches": true,
+        "same_start_identity": true,
+        "actual_bound_pid_now_absent": true
+      },
+      "lifecycle_checks": {
+        "history_retained": true,
+        "zip_serial_retained_as_history_prefix": true,
+        "flash_released": true,
+        "actual_pid_absent": true,
+        "owned_tcp_peer_ports_now_closed": true
+      },
+      "timing_checks": {
+        "source_serial_order": true,
+        "service_zip_get_precedes_delete": true,
+        "complete_zip_file_precedes_pre_stop_worker_read": true,
+        "zip_snapshot_precedes_stop_completion": true
+      }
+    }
+  ],
+  "evidence_limits": [
+    "All six checked source files match pinned dd2eb35d. DSH tool-call logs show execution but resumed turn has no terminal completed event at this audit snapshot. Root must verify final process/turn completion before claiming the tester finished.",
+    "No independent per-request HTTP client download-completion timestamp was captured. Original synchronous response.read -> ZIP file close -> worker GET -> DELETE code order, filesystem nanosecond mtimes, service access order, running ZIP snapshot, and terminal observer/history agree on pre-stop ZIP completion.",
+    "Runtime identity/hash was independently observed during booting/running, with the same PID/start token and current binary hash. No independent executable rehash immediately before DELETE was captured. Runtime PID is now absent.",
+    "Original issue2.5.3 image, AWS IoT endpoint, NTP acquisition, physical Wi-Fi/RF and hardware were not tested. This is official2.5.5 preview application code with VFS probe/bootstrap composition on a pinned virtual runtime.",
+    "Wrong-hostname and unrelated-CA negative controls were not run. Supplied server name and CA plus positive mTLS/HTTP and exact certificate time rejection are verified within this test scope.",
+    "Initial native bootstrap attempt had two authenticated mTLS HTTP peer requests but no captured ready/clock/API serial rows. Its raw failure is preserved and its full acceptance is not established. LittleFS2.0->2.1 metadata is not treated as the failure cause."
+  ],
+  "redaction": "Endpoints, local paths, process/session/device identifiers and source/test key material omitted. This is a derived summary.",
+  "executor_normal_completion": {
+    "dsh_normal_turn_end": true,
+    "dsh_exit_code": 0,
+    "headless_log_fd_owner_absent": true,
+    "source_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92",
+    "retained_sessions": 4,
+    "active_sessions": 0,
+    "runs": [
+      {
+        "alias": "2026",
+        "retained_terminal": true,
+        "state": "failed",
+        "runtime_pid_gone": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "2026-dupterm",
+        "retained_terminal": true,
+        "state": "stopped",
+        "runtime_pid_gone": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "2010-dupterm",
+        "retained_terminal": true,
+        "state": "stopped",
+        "runtime_pid_gone": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "2040-dupterm",
+        "retained_terminal": true,
+        "state": "stopped",
+        "runtime_pid_gone": true,
+        "firmware_matches": true
+      }
+    ],
+    "independent_audit_sha256": "7aaa5ae85900b212418cf810c116370c93feab605f50f12eaa16d4a776457872",
+    "dsh_events_sha256": "f1fd1cc4a2101d9a065ec00afec8597ed640356b1ff21be86718dd3d0ece7c31",
+    "status": "PASS"
+  }
+}

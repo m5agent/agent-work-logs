@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "kind": "issue_validation",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 UIFlow2 v2.5.5 preview TLS certificate validity verification",
+  "source": {
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/120",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92"
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "StickS3",
+    "version": "v2.5.5 preview",
+    "base_sha256": "fd85648dfa1fd9656448aa45e86ee63be537a4534e959e422c0be4d45b3466c7",
+    "native_app_sha256": "2c4aec55288901846e5b63da096f8975492db6677c2d0478c7aedd4572cc595f"
+  },
+  "execution": {
+    "environment": "owned Device Service /api/v1 sessions, qemu-wifi, actual DeepSeek tester",
+    "validation": "virtual-device validation",
+    "runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+    "session_aliases": [
+      "2026",
+      "2026-dupterm",
+      "2010-dupterm",
+      "2040-dupterm"
+    ]
+  },
+  "checks": [
+    {
+      "check": "correct RTC2026, two authenticated TLS HTTP exchanges",
+      "status": "PASS"
+    },
+    {
+      "check": "RTC2010, both APIs reject not-yet-valid certificate",
+      "status": "PASS"
+    },
+    {
+      "check": "RTC2040, both APIs reject expired certificate",
+      "status": "PASS"
+    },
+    {
+      "check": "initial native-console observation",
+      "status": "FAIL",
+      "note": "Raw receipt retained; peer observed two real TLS HTTP exchanges, serial clock unavailable."
+    },
+    {
+      "check": "native app and non-VFS identity",
+      "status": "PASS"
+    },
+    {
+      "check": "original v2.5.3, AWS IoT and physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/tls-validity-summary.json",
+    "evidence/independent-audit-summary.json"
+  ],
+  "notes": [
+    "Public source is the official v2.5.5 preview release.",
+    "Raw caller-pinned-candidate composition labels remain intact.",
+    "Two negative protocol reports retain FAIL/exit 1; separate behavior oracles verify expected rejection.",
+    "Original issue remains open and external reply has not been posted.",
+    "Independent timing evidence uses synchronous original code order, filesystem mtimes and service request order; no separate client completion timestamp or immediate pre-DELETE runtime rehash was captured."
+  ]
+}
