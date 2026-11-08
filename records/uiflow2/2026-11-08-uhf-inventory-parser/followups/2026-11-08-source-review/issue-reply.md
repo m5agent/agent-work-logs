@@ -9,4 +9,3 @@ https://github.com/m5stack/uiflow-micropython/pull/124
 This is **virtual-device validation** with CoreS3/public v2.5.5 preview as the substitute. The driver and wrapper used for the baseline are byte-identical to the public 2.4.3 source. The original Core2 runtime, physical RF, timed same-response fragmentation and other UHF commands remain **NOT RUN**. Maintainer review and merge are pending.
 
 https://github.com/m5agent/agent-work-logs/blob/79a4ec1b0220939e94c22b517018fb4911779990/records/uiflow2/2026-11-08-uhf-inventory-parser/report.md
-
