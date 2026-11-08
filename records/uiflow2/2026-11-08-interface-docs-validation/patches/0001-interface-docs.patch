@@ -1,0 +1,1009 @@
+diff --git a/docs/locales/zh_CN/LC_MESSAGES/hardware/adc.po b/docs/locales/zh_CN/LC_MESSAGES/hardware/adc.po
+index 1f36811..154978b 100644
+--- a/docs/locales/zh_CN/LC_MESSAGES/hardware/adc.po
++++ b/docs/locales/zh_CN/LC_MESSAGES/hardware/adc.po
+@@ -228,3 +228,32 @@ msgstr ""
+ msgid "width.png"
+ msgstr ""
+ 
++#: ../../source/hardware/adc.rst
++msgid ""
++"Import the ADC and pin classes explicitly. The ``hardware`` namespace "
++"exports the same classes as ``machine``."
++msgstr "请显式导入 ADC 和引脚类。``hardware`` 命名空间导出的类与 ``machine`` 相同。"
++
++#: ../../source/hardware/adc.rst
++msgid ""
++"The ``atten`` keyword is optional and defaults to ``ADC.ATTN_11DB`` on the "
++"ESP32 port. Pass an attenuation constant explicitly to choose another "
++"setting."
++msgstr ""
++"``atten`` 关键字为可选参数，在 ESP32 移植中默认为 ``ADC.ATTN_11DB``。需要其它衰减设置时，请显式传入对应常量。"
++
++#: ../../source/hardware/adc.rst
++msgid "Raw ADC reading."
++msgstr "ADC 原始读数。"
++
++#: ../../source/hardware/adc.rst
++msgid "Raw ADC reading scaled to 0-65535."
++msgstr "缩放到 0-65535 范围的 ADC 原始读数。"
++
++#: ../../source/hardware/adc.rst
++msgid "Calibrated input voltage in microvolts."
++msgstr "校准后的输入电压，单位为微伏。"
++
++#: ../../source/hardware/adc.rst
++msgid "If calibrated readings are unavailable on the port or chip."
++msgstr "移植或芯片无法提供校准读数时抛出此异常。"
+diff --git a/docs/locales/zh_CN/LC_MESSAGES/hardware/display.po b/docs/locales/zh_CN/LC_MESSAGES/hardware/display.po
+index 1a7d578..749a2f2 100644
+--- a/docs/locales/zh_CN/LC_MESSAGES/hardware/display.po
++++ b/docs/locales/zh_CN/LC_MESSAGES/hardware/display.po
+@@ -1744,3 +1744,257 @@ msgstr ""
+ #~ "实际显示方向取决于主机型号和 M5GFX 版本，同一个旋转值并不总是表示横屏或竖屏。更新 M5GFX"
+ #~ " 后，Core/Basic/Fire、Core2 和 CoreS3 的正常横屏方向使用 "
+ #~ "0。迁移示例时，应同时更新 Python 文件和对应 .m5f2 的屏幕配置或旋转积木。"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"Parameters marked required must be supplied. Optional values are shown in "
++"the method signatures. Shape drawing methods and ``fillScreen()`` reuse the "
++"current drawing color when ``color`` is omitted or set to ``-1``. The "
++"``clear()`` method uses the current base color."
++msgstr ""
++"必须提供标为必填的参数。方法签名中列出了可选参数的默认值。绘制图元和调用 ``fillScreen()`` 时，省略 ``color`` 或传入 "
++"``-1`` 会复用当前绘图颜色。``clear()`` 使用当前底色。"
++
++#: ../../source/hardware/display.rst
++msgid "text color in RGB888 format (required)"
++msgstr "文本颜色，RGB888 格式（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "True to enable text scrolling, False to disable (required)"
++msgstr "设置为 True 启用文本滚动，设置为 False 禁用文本滚动（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "horizontal position of the cursor (required)"
++msgstr "光标的水平位置（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "vertical position of the cursor (required)"
++msgstr "光标的垂直位置（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"fill color in RGB888 format (optional, reuses the current color when omitted"
++" or set to -1)"
++msgstr "填充颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "horizontal coordinate of the pixel (required)"
++msgstr "像素的水平坐标（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "vertical coordinate of the pixel (required)"
++msgstr "像素的垂直坐标（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"pixel color in RGB888 format (optional, reuses the current color when "
++"omitted or set to -1)"
++msgstr "像素颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "x-coordinate of circle center (required)"
++msgstr "圆心的 x 坐标（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "y-coordinate of circle center (required)"
++msgstr "圆心的 y 坐标（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "radius of the circle (required)"
++msgstr "圆的半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"circle color in RGB888 format (optional, reuses the current color when "
++"omitted or set to -1)"
++msgstr "圆的颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "x-coordinate of ellipse center (required)"
++msgstr "椭圆中心的 x 坐标（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "y-coordinate of ellipse center (required)"
++msgstr "椭圆中心的 y 坐标（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "horizontal radius (required)"
++msgstr "椭圆的水平半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "vertical radius (required)"
++msgstr "椭圆的垂直半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"ellipse color in RGB888 format (optional, reuses the current color when "
++"omitted or set to -1)"
++msgstr "椭圆颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "starting x-coordinate (required)"
++msgstr "直线起点坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "starting y-coordinate (required)"
++msgstr "直线起点坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "ending x-coordinate (required)"
++msgstr "直线终点坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "ending y-coordinate (required)"
++msgstr "直线终点坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"line color in RGB888 format (optional, reuses the current color when omitted"
++" or set to -1)"
++msgstr "线条颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "top-left x-coordinate (required)"
++msgstr "形左上角坐标 x\"（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "top-left y-coordinate (required)"
++msgstr "矩形左上角坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "width of rectangle (required)"
++msgstr "矩形的宽度（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "height of rectangle (required)"
++msgstr "矩形的高度（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"rectangle color in RGB888 format (optional, reuses the current color when "
++"omitted or set to -1)"
++msgstr "矩形颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "corner radius (required)"
++msgstr "圆角半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "first vertex x-coordinate (required)"
++msgstr "第一个顶点的坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "first vertex y-coordinate (required)"
++msgstr "第一个顶点的坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "second vertex x-coordinate (required)"
++msgstr "第二个顶点的坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "second vertex y-coordinate (required)"
++msgstr "第二个顶点的坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "third vertex x-coordinate (required)"
++msgstr "第三个顶点的坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "third vertex y-coordinate (required)"
++msgstr "第三个顶点的坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"triangle color in RGB888 format (optional, reuses the current color when "
++"omitted or set to -1)"
++msgstr "三角形颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "center x-coordinate (required)"
++msgstr "弧线的中心坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "center y-coordinate (required)"
++msgstr "弧线的中心坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "first radius (required)"
++msgstr "第一个半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "second radius (required)"
++msgstr "第二个半价（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "starting angle in degrees (required)"
++msgstr "弧线的起始角度（单位：度）（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "ending angle in degrees (required)"
++msgstr "椭圆弧线的终止角度（单位：度）（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"arc color in RGB888 format (optional, reuses the current color when omitted "
++"or set to -1)"
++msgstr "圆弧颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前绘图颜色）"
++
++#: ../../source/hardware/display.rst
++msgid "first horizontal radius (required)"
++msgstr "第一个水平半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "second horizontal radius (required)"
++msgstr "第二个水平半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "first vertical radius (required)"
++msgstr "第一个垂直半径（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "second vertical radius (required)"
++msgstr "二个垂直半径\"（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "x-coordinate to display (required)"
++msgstr "二维码显示的起始坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "y-coordinate to display (required)"
++msgstr "二维码显示的起始坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "QR code width (required)"
++msgstr "二维码的宽度（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "display x-coordinate (required)"
++msgstr "图片显示的起始坐标 x（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "display y-coordinate (required)"
++msgstr "图片显示的起始坐标 y（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "image width (required)"
++msgstr "图像宽（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "image height (required)"
++msgstr "图像高（必填）"
++
++#: ../../source/hardware/display.rst
++msgid "length of image data (required)"
++msgstr "图像大小（必填）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"color in RGB888 format (optional, keeps the current text color when omitted "
++"or set to -1)"
++msgstr "文字颜色，使用 RGB888 格式（可选，省略或设为 -1 时保留当前文字颜色）"
++
++#: ../../source/hardware/display.rst
++msgid ""
++"fill color in RGB888 format (optional, reuses the current base color when "
++"omitted or set to -1)"
++msgstr "填充颜色，使用 RGB888 格式（可选，省略或设为 -1 时复用当前底色）"
+diff --git a/docs/locales/zh_CN/LC_MESSAGES/m5ui/index.po b/docs/locales/zh_CN/LC_MESSAGES/m5ui/index.po
+index 516a6b9..b792eb3 100644
+--- a/docs/locales/zh_CN/LC_MESSAGES/m5ui/index.po
++++ b/docs/locales/zh_CN/LC_MESSAGES/m5ui/index.po
+@@ -541,3 +541,27 @@ msgid ""
+ msgstr ""
+ "请在调用 ``m5ui.init()`` 前设置屏幕旋转方向。更新 M5GFX 后，Core2、CoreS3 和 StackChan 的正常 320 "
+ "× 240 横屏布局使用 ``0``。其他主机及旧工程的迁移方法见 :ref:`display-rotation`。"
++
++#: ../../source/m5ui/index.rst
++msgid ""
++"On M5Stack devices, ``m5ui.init()`` initializes the board, the display and "
++"LVGL."
++msgstr "在 M5Stack 设备上，``m5ui.init()`` 会初始化主机、显示屏和 LVGL。"
++
++#: ../../source/m5ui/index.rst
++msgid ""
++"To configure the display before LVGL is initialized, call ``M5.begin()``, "
++"set the desired rotation, and then call ``m5ui.init()``. With the updated "
++"M5GFX, Core2, CoreS3 and StackChan use ``0`` for their normal 320 × 240 "
++"landscape layout. See :ref:`display-rotation` for other controllers and "
++"migration instructions."
++msgstr ""
++"如需在 LVGL 初始化前配置显示屏，请先调用 ``M5.begin()``，设置所需旋转方向，再调用 ``m5ui.init()``。在更新后的 "
++"M5GFX 中，Core2、CoreS3 和 StackChan 的正常 320 × 240 横屏布局使用 ``0``。其它主机和迁移说明见 "
++":ref:`display-rotation`。"
++
++#: ../../source/m5ui/index.rst
++msgid ""
++"Initialize the M5UI library. On M5Stack devices this also initializes the "
++"board and display. Call this function before creating M5UI widgets."
++msgstr "初始化 M5UI 库。在 M5Stack 设备上，此函数还会初始化主机和显示屏。请在创建 M5UI 控件前调用此函数。"
+diff --git a/docs/source/hardware/adc.rst b/docs/source/hardware/adc.rst
+index 891a38c..6dc2d00 100644
+--- a/docs/source/hardware/adc.rst
++++ b/docs/source/hardware/adc.rst
+@@ -32,12 +32,25 @@ UIFLOW2 Example:
+ class ADC
+ ---------
+ 
+-.. class:: ADC(pin, *, atten)
++Import the ADC and pin classes explicitly. The ``hardware`` namespace exports the same
++classes as ``machine``.
++
++.. code-block:: python
++
++    from hardware import ADC, Pin
++
++    adc = ADC(Pin(6))
++    adc_with_attenuation = ADC(Pin(6), atten=ADC.ATTN_11DB)
++
++.. class:: ADC(pin, *, atten=ADC.ATTN_11DB)
+ 
+     Return the ADC object for the specified pin. ESP32 does not support
+     different timings for ADC sampling and so the ``sample_ns`` keyword argument
+     is not supported.
+ 
++    The ``atten`` keyword is optional and defaults to ``ADC.ATTN_11DB`` on the ESP32
++    port. Pass an attenuation constant explicitly to choose another setting.
++
+     To read voltages above the reference voltage, apply input attenuation with
+     the ``atten`` keyword argument. Valid values (and approximate linear
+     measurement ranges) are:
+@@ -62,15 +75,21 @@ Methods
+     This method returns the raw ADC value ranged according to the resolution of
+     the block, e.g., 0-4095 for 12-bit resolution.
+ 
++    :return: Raw ADC reading.
++    :rtype: int
++
+     UIFLOW2:
+ 
+         |read.png|
+ 
+ .. method:: ADC.read_u16()
+ 
+-   Take an analog reading and return an integer in the range 0-65535.
+-   The return value represents the raw reading taken by the ADC, scaled
+-   such that the minimum value is 0 and the maximum value is 65535.
++    Take an analog reading and return an integer in the range 0-65535.
++    The return value represents the raw reading taken by the ADC, scaled
++    such that the minimum value is 0 and the maximum value is 65535.
++
++    :return: Raw ADC reading scaled to 0-65535.
++    :rtype: int
+ 
+     UIFLOW2:
+ 
+@@ -88,6 +107,10 @@ Methods
+     Within the linear range, however, more accurate and consistent results will
+     be obtained than using `read_u16()` and scaling the result with a constant.
+ 
++    :return: Calibrated input voltage in microvolts.
++    :rtype: int
++    :raises OSError: If calibrated readings are unavailable on the port or chip.
++
+     UIFLOW2:
+ 
+         |read_uv.png|
+diff --git a/docs/source/hardware/display.rst b/docs/source/hardware/display.rst
+index 071016c..9b236ec 100644
+--- a/docs/source/hardware/display.rst
++++ b/docs/source/hardware/display.rst
+@@ -244,6 +244,11 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+ .. class:: M5.Display
+ 
++    Parameters marked required must be supplied. Optional values are shown in the method
++    signatures. Shape drawing methods and ``fillScreen()`` reuse the current drawing
++    color when ``color`` is omitted or set to ``-1``. The ``clear()`` method uses the
++    current base color.
++
+     .. method:: width()
+ 
+         Get the horizontal resolution of the display.
+@@ -479,11 +484,11 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.setFont(M5.Lcd.FONTS.DejaVu18)
+ 
+-    .. method:: setTextColor(fgcolor, bgcolor)
++    .. method:: setTextColor(fgcolor, bgcolor=0x000000)
+ 
+         Set the text color and background color.
+ 
+-        :param int fgcolor: text color in RGB888 format (default 0, black)
++        :param int fgcolor: text color in RGB888 format (required)
+         :param int bgcolor: background color in RGB888 format (default 0, black)
+ 
+         UiFlow2 Code Block:
+@@ -500,7 +505,7 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+         Enable or disable text scrolling.
+ 
+-        :param bool scroll: True to enable text scrolling, False to disable (default False)
++        :param bool scroll: True to enable text scrolling, False to disable (required)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -532,8 +537,8 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+         Set the cursor position.
+ 
+-        :param int x: horizontal position of the cursor (default 0)
+-        :param int y: vertical position of the cursor (default 0)
++        :param int x: horizontal position of the cursor (required)
++        :param int y: vertical position of the cursor (required)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -545,11 +550,11 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.setCursor(10, 20)
+ 
+-    .. method:: clear(color)
++    .. method:: clear(color=-1)
+ 
+         Clear the display with a specific color.
+ 
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int color: fill color in RGB888 format (optional, reuses the current base color when omitted or set to -1)
+ 
+         .. warning::
+ 
+@@ -568,11 +573,11 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.clear(0xFFFFFF)
+ 
+-    .. method:: fillScreen(color)
++    .. method:: fillScreen(color=-1)
+ 
+         Fill the entire screen with a specified color.
+ 
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         .. warning::
+ 
+@@ -591,13 +596,13 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillScreen(0xFF0000)
+ 
+-    .. method:: drawPixel(x, y, color)
++    .. method:: drawPixel(x, y, color=-1)
+ 
+         Draw a single pixel on the screen.
+ 
+-        :param int x: horizontal coordinate of the pixel (default -1)
+-        :param int y: vertical coordinate of the pixel (default -1)
+-        :param int color: pixel color in RGB888 format (default 0)
++        :param int x: horizontal coordinate of the pixel (required)
++        :param int y: vertical coordinate of the pixel (required)
++        :param int color: pixel color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -609,14 +614,14 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawPixel(50, 50, 0x00FF00)
+ 
+-    .. method:: drawCircle(x, y, r, color)
++    .. method:: drawCircle(x, y, r, color=-1)
+ 
+         Draw an outline of a circle.
+ 
+-        :param int x: x-coordinate of circle center (default -1)
+-        :param int y: y-coordinate of circle center (default -1)
+-        :param int r: radius of the circle (default -1)
+-        :param int color: circle color in RGB888 format (default 0)
++        :param int x: x-coordinate of circle center (required)
++        :param int y: y-coordinate of circle center (required)
++        :param int r: radius of the circle (required)
++        :param int color: circle color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -628,14 +633,14 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawCircle(60, 60, 20, 0x0000FF)
+ 
+-    .. method:: fillCircle(x, y, r, color)
++    .. method:: fillCircle(x, y, r, color=-1)
+ 
+         Draw a filled circle.
+ 
+-        :param int x: x-coordinate of circle center (default -1)
+-        :param int y: y-coordinate of circle center (default -1)
+-        :param int r: radius of the circle (default -1)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x: x-coordinate of circle center (required)
++        :param int y: y-coordinate of circle center (required)
++        :param int r: radius of the circle (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -647,15 +652,15 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillCircle(60, 60, 20, 0x00FFFF)
+ 
+-    .. method:: drawEllipse(x, y, rx, ry, color)
++    .. method:: drawEllipse(x, y, rx, ry, color=-1)
+ 
+         Draw an outline of an ellipse.
+ 
+-        :param int x: x-coordinate of ellipse center (default -1)
+-        :param int y: y-coordinate of ellipse center (default -1)
+-        :param int rx: horizontal radius (default -1)
+-        :param int ry: vertical radius (default -1)
+-        :param int color: ellipse color in RGB888 format (default 0)
++        :param int x: x-coordinate of ellipse center (required)
++        :param int y: y-coordinate of ellipse center (required)
++        :param int rx: horizontal radius (required)
++        :param int ry: vertical radius (required)
++        :param int color: ellipse color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -667,15 +672,15 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawEllipse(80, 40, 30, 20, 0xFF00FF)
+ 
+-    .. method:: fillEllipse(x, y, rx, ry, color)
++    .. method:: fillEllipse(x, y, rx, ry, color=-1)
+ 
+         Draw a filled ellipse.
+ 
+-        :param int x: x-coordinate of ellipse center (default -1)
+-        :param int y: y-coordinate of ellipse center (default -1)
+-        :param int rx: horizontal radius (default -1)
+-        :param int ry: vertical radius (default -1)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x: x-coordinate of ellipse center (required)
++        :param int y: y-coordinate of ellipse center (required)
++        :param int rx: horizontal radius (required)
++        :param int ry: vertical radius (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -687,15 +692,15 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillEllipse(80, 40, 30, 20, 0x00FF00)
+ 
+-    .. method:: drawLine(x0, y0, x1, y1, color)
++    .. method:: drawLine(x0, y0, x1, y1, color=-1)
+ 
+         Draw a line.
+ 
+-        :param int x0: starting x-coordinate (default -1)
+-        :param int y0: starting y-coordinate (default -1)
+-        :param int x1: ending x-coordinate (default -1)
+-        :param int y1: ending y-coordinate (default -1)
+-        :param int color: line color in RGB888 format (default 0)
++        :param int x0: starting x-coordinate (required)
++        :param int y0: starting y-coordinate (required)
++        :param int x1: ending x-coordinate (required)
++        :param int y1: ending y-coordinate (required)
++        :param int color: line color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -707,15 +712,15 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawLine(10, 10, 100, 100, 0xFF0000)
+ 
+-    .. method:: drawRect(x, y, w, h, color)
++    .. method:: drawRect(x, y, w, h, color=-1)
+ 
+         Draw a rectangle.
+ 
+-        :param int x: top-left x-coordinate (default -1)
+-        :param int y: top-left y-coordinate (default -1)
+-        :param int w: width of rectangle (default -1)
+-        :param int h: height of rectangle (default -1)
+-        :param int color: rectangle color in RGB888 format (default 0)
++        :param int x: top-left x-coordinate (required)
++        :param int y: top-left y-coordinate (required)
++        :param int w: width of rectangle (required)
++        :param int h: height of rectangle (required)
++        :param int color: rectangle color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -727,15 +732,15 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 display.drawRect(20, 20, 80, 50, 0x00FF00)
+ 
+-    .. method:: fillRect(x, y, w, h, color)
++    .. method:: fillRect(x, y, w, h, color=-1)
+ 
+         Draw a filled rectangle.
+ 
+-        :param int x: top-left x-coordinate (default -1)
+-        :param int y: top-left y-coordinate (default -1)
+-        :param int w: width of rectangle (default -1)
+-        :param int h: height of rectangle (default -1)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x: top-left x-coordinate (required)
++        :param int y: top-left y-coordinate (required)
++        :param int w: width of rectangle (required)
++        :param int h: height of rectangle (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -747,16 +752,16 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillRect(20, 20, 80, 50, 0x0000FF)
+ 
+-    .. method:: drawRoundRect(x, y, w, h, r, color)
++    .. method:: drawRoundRect(x, y, w, h, r, color=-1)
+ 
+         Draw a rounded rectangle.
+ 
+-        :param int x: top-left x-coordinate (default -1)
+-        :param int y: top-left y-coordinate (default -1)
+-        :param int w: width of rectangle (default -1)
+-        :param int h: height of rectangle (default -1)
+-        :param int r: corner radius (default -1)
+-        :param int color: rectangle color in RGB888 format (default 0)
++        :param int x: top-left x-coordinate (required)
++        :param int y: top-left y-coordinate (required)
++        :param int w: width of rectangle (required)
++        :param int h: height of rectangle (required)
++        :param int r: corner radius (required)
++        :param int color: rectangle color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -768,16 +773,16 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawRoundRect(30, 30, 60, 40, 10, 0xFF00FF)
+ 
+-    .. method:: fillRoundRect(x, y, w, h, r, color)
++    .. method:: fillRoundRect(x, y, w, h, r, color=-1)
+ 
+         Draw a filled rounded rectangle.
+ 
+-        :param int x: top-left x-coordinate (default -1)
+-        :param int y: top-left y-coordinate (default -1)
+-        :param int w: width of rectangle (default -1)
+-        :param int h: height of rectangle (default -1)
+-        :param int r: corner radius (default -1)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x: top-left x-coordinate (required)
++        :param int y: top-left y-coordinate (required)
++        :param int w: width of rectangle (required)
++        :param int h: height of rectangle (required)
++        :param int r: corner radius (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -789,17 +794,17 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillRoundRect(30, 30, 60, 40, 10, 0x00FFFF)
+ 
+-    .. method:: drawTriangle(x0, y0, x1, y1, x2, y2, color)
++    .. method:: drawTriangle(x0, y0, x1, y1, x2, y2, color=-1)
+ 
+         Draw a triangle.
+ 
+-        :param int x0: first vertex x-coordinate (default -1)
+-        :param int y0: first vertex y-coordinate (default -1)
+-        :param int x1: second vertex x-coordinate (default -1)
+-        :param int y1: second vertex y-coordinate (default -1)
+-        :param int x2: third vertex x-coordinate (default -1)
+-        :param int y2: third vertex y-coordinate (default -1)
+-        :param int color: triangle color in RGB888 format (default 0)
++        :param int x0: first vertex x-coordinate (required)
++        :param int y0: first vertex y-coordinate (required)
++        :param int x1: second vertex x-coordinate (required)
++        :param int y1: second vertex y-coordinate (required)
++        :param int x2: third vertex x-coordinate (required)
++        :param int y2: third vertex y-coordinate (required)
++        :param int color: triangle color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -811,17 +816,17 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawTriangle(10, 10, 50, 80, 90, 10, 0xFF0000)
+ 
+-    .. method:: fillTriangle(x0, y0, x1, y1, x2, y2, color)
++    .. method:: fillTriangle(x0, y0, x1, y1, x2, y2, color=-1)
+ 
+         Draw a filled triangle.
+ 
+-        :param int x0: first vertex x-coordinate (default -1)
+-        :param int y0: first vertex y-coordinate (default -1)
+-        :param int x1: second vertex x-coordinate (default -1)
+-        :param int y1: second vertex y-coordinate (default -1)
+-        :param int x2: third vertex x-coordinate (default -1)
+-        :param int y2: third vertex y-coordinate (default -1)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x0: first vertex x-coordinate (required)
++        :param int y0: first vertex y-coordinate (required)
++        :param int x1: second vertex x-coordinate (required)
++        :param int y1: second vertex y-coordinate (required)
++        :param int x2: third vertex x-coordinate (required)
++        :param int y2: third vertex y-coordinate (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -833,17 +838,17 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillTriangle(10, 10, 50, 80, 90, 10, 0x00FF00)
+ 
+-    .. method:: drawArc(x, y, r0, r1, angle0, angle1, color)
++    .. method:: drawArc(x, y, r0, r1, angle0, angle1, color=-1)
+ 
+         Draw an arc.
+ 
+-        :param int x: center x-coordinate (default -1)
+-        :param int y: center y-coordinate (default -1)
+-        :param int r0: first radius (default -1)
+-        :param int r1: second radius (default -1)
+-        :param int angle0: starting angle in degrees (default -1)
+-        :param int angle1: ending angle in degrees (default -1)
+-        :param int color: arc color in RGB888 format (default 0)
++        :param int x: center x-coordinate (required)
++        :param int y: center y-coordinate (required)
++        :param int r0: first radius (required)
++        :param int r1: second radius (required)
++        :param int angle0: starting angle in degrees (required)
++        :param int angle1: ending angle in degrees (required)
++        :param int color: arc color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -855,17 +860,17 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawArc(50, 50, 20, 30, 0, 180, 0xFF0000)
+ 
+-    .. method:: fillArc(x, y, r0, r1, angle0, angle1, color)
++    .. method:: fillArc(x, y, r0, r1, angle0, angle1, color=-1)
+ 
+         Draw a filled arc.
+ 
+-        :param int x: center x-coordinate (default -1)
+-        :param int y: center y-coordinate (default -1)
+-        :param int r0: first radius (default -1)
+-        :param int r1: second radius (default -1)
+-        :param int angle0: starting angle in degrees (default -1)
+-        :param int angle1: ending angle in degrees (default -1)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x: center x-coordinate (required)
++        :param int y: center y-coordinate (required)
++        :param int r0: first radius (required)
++        :param int r1: second radius (required)
++        :param int angle0: starting angle in degrees (required)
++        :param int angle1: ending angle in degrees (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -877,19 +882,19 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillArc(50, 50, 20, 30, 0, 180, 0x00FF00)
+ 
+-    .. method:: drawEllipseArc(x, y, r0x, r1x, r0y, r1y, angle0, angle1, color)
++    .. method:: drawEllipseArc(x, y, r0x, r1x, r0y, r1y, angle0, angle1, color=-1)
+ 
+         Draw an elliptical arc.
+ 
+-        :param int x: center x-coordinate (default -1)
+-        :param int y: center y-coordinate (default -1)
+-        :param int r0x: first horizontal radius (default -1)
+-        :param int r1x: second horizontal radius (default -1)
+-        :param int r0y: first vertical radius (default -1)
+-        :param int r1y: second vertical radius (default -1)
+-        :param int angle0: starting angle in degrees (default -1)
+-        :param int angle1: ending angle in degrees (default 0)
+-        :param int color: arc color in RGB888 format (default 0)
++        :param int x: center x-coordinate (required)
++        :param int y: center y-coordinate (required)
++        :param int r0x: first horizontal radius (required)
++        :param int r1x: second horizontal radius (required)
++        :param int r0y: first vertical radius (required)
++        :param int r1y: second vertical radius (required)
++        :param int angle0: starting angle in degrees (required)
++        :param int angle1: ending angle in degrees (required)
++        :param int color: arc color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -901,19 +906,19 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawEllipseArc(50, 50, 20, 40, 10, 30, 0, 180, 0xFF00FF)
+ 
+-    .. method:: fillEllipseArc(x, y, r0x, r1x, r0y, r1y, angle0, angle1, color)
++    .. method:: fillEllipseArc(x, y, r0x, r1x, r0y, r1y, angle0, angle1, color=-1)
+ 
+         Draw a filled elliptical arc.
+ 
+-        :param int x: center x-coordinate (default -1)
+-        :param int y: center y-coordinate (default -1)
+-        :param int r0x: first horizontal radius (default -1)
+-        :param int r1x: second horizontal radius (default -1)
+-        :param int r0y: first vertical radius (default -1)
+-        :param int r1y: second vertical radius (default -1)
+-        :param int angle0: starting angle in degrees (default -1)
+-        :param int angle1: ending angle in degrees (default 0)
+-        :param int color: fill color in RGB888 format (default 0)
++        :param int x: center x-coordinate (required)
++        :param int y: center y-coordinate (required)
++        :param int r0x: first horizontal radius (required)
++        :param int r1x: second horizontal radius (required)
++        :param int r0y: first vertical radius (required)
++        :param int r1y: second vertical radius (required)
++        :param int angle0: starting angle in degrees (required)
++        :param int angle1: ending angle in degrees (required)
++        :param int color: fill color in RGB888 format (optional, reuses the current color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -925,14 +930,14 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.fillEllipseArc(50, 50, 20, 40, 10, 30, 0, 180, 0x00FFFF)
+ 
+-    .. method:: drawQR(text, x, y, w, version)
++    .. method:: drawQR(text, x, y, w, version=1)
+ 
+         Draw a QR code.
+ 
+         :param str text: QR code content
+-        :param int x: x-coordinate to display (default 0)
+-        :param int y: y-coordinate to display (default 0)
+-        :param int w: QR code width (default 0)
++        :param int x: x-coordinate to display (required)
++        :param int y: y-coordinate to display (required)
++        :param int w: QR code width (required)
+         :param int version: QR code version (default 1, range: 0~38)
+ 
+         UiFlow2 Code Block:
+@@ -945,7 +950,7 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.drawQR("Hello", 0, 0, 200)
+ 
+-    .. method:: drawPng(img, x, y, maxW, maxH, offX, offY, scaleX, scaleY)
++    .. method:: drawPng(img, x=0, y=0, maxW=0, maxH=0, offX=0, offY=0, scaleX=True, scaleY=False)
+ 
+         Draw a PNG image.
+ 
+@@ -979,7 +984,7 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+                 Display.drawPng(img.read(), 0, 100)
+                 img.close()
+ 
+-    .. method:: drawJpg(img, x, y, maxW, maxH, offX, offY)
++    .. method:: drawJpg(img, x=0, y=0, maxW=0, maxH=0, offX=0, offY=0)
+ 
+         Draw a JPG image.
+ 
+@@ -1011,7 +1016,7 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+                 Display.drawJpg(img.read(), 0, 100)
+                 img.close()
+ 
+-    .. method:: drawBmp(img, x, y, maxW, maxH, offX, offY)
++    .. method:: drawBmp(img, x=0, y=0, maxW=0, maxH=0, offX=0, offY=0)
+ 
+         Draw a BMP image.
+ 
+@@ -1043,7 +1048,7 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+                 Display.drawBmp(img.read(), 0, 100)
+                 img.close()
+ 
+-    .. method:: drawImage(img, x, y, maxW, maxH, offX, offY)
++    .. method:: drawImage(img, x=0, y=0, maxW=0, maxH=0, offX=0, offY=0)
+ 
+         Draw an image.
+ 
+@@ -1074,16 +1079,16 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+                 Display.drawImage(img.read(), 0, 0)
+                 img.close()
+ 
+-    .. method:: drawRawBuf(buf, x, y, w, h, len, swap)
++    .. method:: drawRawBuf(buf, x, y, w, h, len, swap=False)
+ 
+         Draw an image from raw buffer data.
+ 
+         :param buf: image buffer
+-        :param int x: display x-coordinate (default 0)
+-        :param int y: display y-coordinate (default 0)
+-        :param int w: image width (default 0)
+-        :param int h: image height (default 0)
+-        :param int len: length of image data (default 0)
++        :param int x: display x-coordinate (required)
++        :param int y: display y-coordinate (required)
++        :param int w: image width (required)
++        :param int h: image height (required)
++        :param int len: length of image data (required)
+         :param bool swap: inverted display (default False)
+ 
+         UiFlow2 Code Block:
+@@ -1108,12 +1113,12 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+                     raw_buf[2*i+1] = green565 & 0xFF
+                 Display.drawRawBuf(raw_buf, 100, 100, width, height, len(raw_buf), swap=False)
+ 
+-    .. method:: print(text, color)
++    .. method:: print(text, color=-1)
+ 
+         Display a string (no formatting support).
+ 
+         :param str text: text to display
+-        :param int color: color in RGB888 format (default 0)
++        :param int color: color in RGB888 format (optional, keeps the current text color when omitted or set to -1)
+ 
+         UiFlow2 Code Block:
+ 
+@@ -1141,7 +1146,7 @@ sprites, gauges, or animation frames, prefer the canvas-and-single-``push()`` pa
+ 
+                 Display.printf("Value: %d" % 100)
+ 
+-    .. method:: newCanvas(w, h, bpp, psram)
++    .. method:: newCanvas(w, h, bpp=-1, psram=False)
+ 
+         Create an off-screen canvas. Use it to compose a complete animation frame before
+         presenting the frame with a single ``push(x, y)`` call. Reuse the returned object
+diff --git a/docs/source/m5ui/index.rst b/docs/source/m5ui/index.rst
+index 56e7489..a0cefa7 100644
+--- a/docs/source/m5ui/index.rst
++++ b/docs/source/m5ui/index.rst
+@@ -6,11 +6,14 @@ M5UI
+ 
+ M5UI is a UI library based on LVGL v9.3. It provides a set of widgets and functions to create user interfaces for M5Stack devices.
+ 
+-It has been adapted for M5Stack devices and you only need to call ``m5ui.init()`` to start using it.
++On M5Stack devices, ``m5ui.init()`` initializes the board, the display and LVGL.
+ 
+ .. note::
+ 
+-    Set the display rotation before calling ``m5ui.init()``. With the updated M5GFX, Core2, CoreS3 and StackChan use ``0`` for their normal 320 × 240 landscape layout. See :ref:`display-rotation` for other controllers and migration instructions.
++    To configure the display before LVGL is initialized, call ``M5.begin()``, set the
++    desired rotation, and then call ``m5ui.init()``. With the updated M5GFX, Core2,
++    CoreS3 and StackChan use ``0`` for their normal 320 × 240 landscape layout. See
++    :ref:`display-rotation` for other controllers and migration instructions.
+ 
+ Supported Controllers
+ ---------------------
+@@ -132,9 +135,12 @@ For drawing text with ``M5.Lcd`` or widgets based on ``M5.Widgets``, use
+ 
+ .. code-block:: python
+ 
++    import M5
+     import m5ui
+     import lvgl as lv
+ 
++    M5.begin()
++    M5.Lcd.setRotation(0)
+     m5ui.init()
+     page0 = m5ui.M5Page(bg_c=0xFFFFFF)
+ 
+@@ -143,6 +149,7 @@ For drawing text with ``M5.Lcd`` or widgets based on ``M5.Widgets``, use
+ 
+     optional_font = lv.font_montserrat_20 if hasattr(lv, "font_montserrat_20") else lv.font_montserrat_18
+     value = m5ui.M5Label("123", x=10, y=80, font=optional_font, parent=page0)
++    page0.screen_load()
+ 
+ 
+ Functions
+@@ -150,7 +157,7 @@ Functions
+ 
+ .. function:: m5ui.init()
+ 
+-    Initialize the M5UI library. This function must be called before using any other M5UI functions.
++    Initialize the M5UI library. On M5Stack devices this also initializes the board and display. Call this function before creating M5UI widgets.
+ 
+     :return: None
+ 

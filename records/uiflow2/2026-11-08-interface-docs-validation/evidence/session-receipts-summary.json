@@ -1,0 +1,637 @@
+{
+  "schema_version": 1,
+  "evidence_type": "bounded allowlist summary, not raw logs",
+  "redaction": "Session and process identifiers, endpoints, authentication material, private repository names and host paths are omitted; ordered run aliases retain the mapping in private evidence.",
+  "collection": "2026-11-08, five fresh CoreS3 virtual-device sessions",
+  "independent_snapshot_observed_at": "2026-11-08T15:26:03.970155+00:00",
+  "raw_independent_snapshot": {
+    "bytes": 57751,
+    "sha256": "b99130a17420450646a2433f36fd97afbfbfc623ae133af1ab3d7fe8e46aaf87"
+  },
+  "raw_observer_stream": {
+    "bytes": 246010,
+    "sha256": "6baf78af3466d9f523d3b781e598c99064a9a67afcad4f3fe53c05ab4615845f"
+  },
+  "executor": "dsh DeepSeek, coordinator-planned; independent reviewer performed no guest execution",
+  "runtime": {
+    "source_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92",
+    "binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+    "profile_sha256": "3e88ec4dd64da5f5dc4a5bc2b8c79fe19e047ee23dd075709a97798c28e6347e",
+    "device_alias": "CoreS3-VM",
+    "execution_interface": "Device Service /api/v1 session API"
+  },
+  "firmware": {
+    "name": "UIFlow2.0 CoreS3",
+    "version": "v2.5.5 preview",
+    "source": "official public release",
+    "base": {
+      "bytes": 16121856,
+      "sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded"
+    },
+    "declared_flash_bytes": 16777216,
+    "padding_for_comparison": "0xff to declared flash size",
+    "overlay": "Only VFS caller code, dupterm boot bridge and explicit fixture inputs; native application bytes unchanged",
+    "vfs_offset": 11141120,
+    "vfs_bytes": 4980736,
+    "after_run_full_mutable_flash_readback": "NOT RUN; receipts verify retained composed input images"
+  },
+  "runs": [
+    {
+      "alias": "display",
+      "validation": "virtual-device validation",
+      "receipt_status": "RECEIPTS_PASS",
+      "raw_runner_status": "EXECUTED",
+      "raw_runner_return_code": 0,
+      "source": {
+        "path": "code/display.py",
+        "bytes": 6150,
+        "sha256": "7443d6c2827fa164b726b79832f883f882d33e018c00ee02e3f85f0be923ce1e"
+      },
+      "composed_firmware_sha256": "bddc58dba8bedca105002a67dda150f562e0f3bd89f855f4628f6aefb510cf1a",
+      "runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "run_seconds": 28.22,
+      "frame_capture_count": 1,
+      "observed_row_count": 159,
+      "observed_status_counts": {
+        "OBSERVED": 2,
+        "EXPECTED_TYPEERROR": 99,
+        "CALL_RETURNED": 58
+      },
+      "serial_bytes_observed": 19853,
+      "serial_pages_observed": 121,
+      "checks": {
+        "raw_execution_executed": true,
+        "caller_pinned_candidate_label_retained": true,
+        "base_hash_expected": true,
+        "probe_hash_and_actual_main": true,
+        "actual_boot_matches_dupterm": true,
+        "native_app_partition_identity": true,
+        "non_vfs_byte_identity": true,
+        "vfs_unrelated_files_preserved": true,
+        "vfs_new_files_all_explicit": true,
+        "firmware_hash_matches": true,
+        "all_zip_members_match_manifest": true,
+        "zip_hash_matches_report": true,
+        "zip_frame_same_pixels_as_api": true,
+        "zip_serial_decoded_same_prefix_as_api": true,
+        "post_owned_zip_then_purge0_delete": true,
+        "retained_terminal_history": true,
+        "history_firmware_matches": true,
+        "actual_pid_gone": true,
+        "independent_live_pid_start_binary_bound": true
+      },
+      "live_identity_observation_count": 2,
+      "raw_artifacts": {
+        "report.json": {
+          "bytes": 1829,
+          "sha256": "78db4aa6f030562d9b0c4380543135b95516c06c09c63d87cb55045a3633bcfc"
+        },
+        "wrapper.json": {
+          "bytes": 950,
+          "sha256": "4c8d8dffe9039e7b176178ace64116cb7b4222cfefad4c54c4e80d021466b060"
+        },
+        "composition.json": {
+          "bytes": 2489,
+          "sha256": "1d23389e9abb8952220cb1e5b3edf7e57197dd02db0cdb13805ff27addce387e"
+        },
+        "serial.txt": {
+          "bytes": 19853,
+          "sha256": "9eaf3ca16b32e94eb5f8249d518cc3dba8ae4a837e9f4df0efe9ffded78a0524"
+        },
+        "http-timeline.jsonl": {
+          "bytes": 76362,
+          "sha256": "a63b7589f86ca08a6cfd2a1c7929cae5d8201ae0c275974d918e11f5ee53ee51"
+        },
+        "evidence.zip": {
+          "bytes": 11153,
+          "sha256": "f5a3d68731cdf6cb91a36f7061cf5e0ae4c4e98ded9a2d17eb511f1bdbbd2556"
+        },
+        "frame.png": {
+          "bytes": 1082,
+          "sha256": "5a8a4b1f7945a4c2e89ef00135ccc19183dd9b0f2e295af4a2d0133d93f40e23"
+        }
+      },
+      "zip_members": {
+        "serial.log": {
+          "bytes": 19853,
+          "sha256": "9eaf3ca16b32e94eb5f8249d518cc3dba8ae4a837e9f4df0efe9ffded78a0524",
+          "manifest_match": true
+        },
+        "serial1.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stderr": {
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "manifest_match": true
+        },
+        "frames/current.png": {
+          "bytes": 1082,
+          "sha256": "5a8a4b1f7945a4c2e89ef00135ccc19183dd9b0f2e295af4a2d0133d93f40e23",
+          "manifest_match": true
+        },
+        "audio/microphone-source.pcm": {
+          "bytes": 64000,
+          "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb",
+          "manifest_match": true
+        },
+        "qom/snapshot.json": {
+          "bytes": 60928,
+          "sha256": "feb831e65013bf0aaec8814c03d412f49aefed6f33ce33c9feed8bd2fc5aaed8",
+          "manifest_match": true
+        }
+      },
+      "history": "terminal history retained; no purge"
+    },
+    {
+      "alias": "adc",
+      "validation": "virtual-device validation",
+      "receipt_status": "RECEIPTS_PASS",
+      "raw_runner_status": "EXECUTED",
+      "raw_runner_return_code": 0,
+      "source": {
+        "path": "code/adc.py",
+        "bytes": 1963,
+        "sha256": "b369b69aca7f56ee84493af20b1b6ea4826181afde20865952d9e8ffc05b2b0e"
+      },
+      "composed_firmware_sha256": "af0dc004bc2c94173fd6b942624a7798d35ebbb0907a323301867d687b9aea22",
+      "runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "run_seconds": 27.149,
+      "frame_capture_count": 1,
+      "observed_row_count": 45,
+      "observed_status_counts": {
+        "OBSERVED": 39,
+        "ERROR": 6
+      },
+      "serial_bytes_observed": 5588,
+      "serial_pages_observed": 110,
+      "checks": {
+        "raw_execution_executed": true,
+        "caller_pinned_candidate_label_retained": true,
+        "base_hash_expected": true,
+        "probe_hash_and_actual_main": true,
+        "actual_boot_matches_dupterm": true,
+        "native_app_partition_identity": true,
+        "non_vfs_byte_identity": true,
+        "vfs_unrelated_files_preserved": true,
+        "vfs_new_files_all_explicit": true,
+        "firmware_hash_matches": true,
+        "all_zip_members_match_manifest": true,
+        "zip_hash_matches_report": true,
+        "zip_frame_same_pixels_as_api": true,
+        "zip_serial_decoded_same_prefix_as_api": true,
+        "post_owned_zip_then_purge0_delete": true,
+        "retained_terminal_history": true,
+        "history_firmware_matches": true,
+        "actual_pid_gone": true,
+        "independent_live_pid_start_binary_bound": true
+      },
+      "live_identity_observation_count": 2,
+      "raw_artifacts": {
+        "report.json": {
+          "bytes": 1552,
+          "sha256": "d90dd06fea0ad4572c6c2eacd629564b47d4f6ba03d1b7513bbe13f142fd5fca"
+        },
+        "wrapper.json": {
+          "bytes": 862,
+          "sha256": "d8c52b622fab4951921f5850a4e42ef696c40455b887c32a6affd15dc27933d0"
+        },
+        "composition.json": {
+          "bytes": 2489,
+          "sha256": "f29560ea089b387e810fac06d36cfdc936291e7047570b25bc17c56ea581470d"
+        },
+        "serial.txt": {
+          "bytes": 5588,
+          "sha256": "bb873760b778960e038252bf0357ca908fd7d275a5b7f7f5cc4229b3a84587af"
+        },
+        "http-timeline.jsonl": {
+          "bytes": 72049,
+          "sha256": "d2c798bd7809a5e4dadd426dff9ea681591adba19a109ca1934542ff06473135"
+        },
+        "evidence.zip": {
+          "bytes": 9801,
+          "sha256": "7b47ed7ffc45cdb1e2259da8a0b345d310ad2d643e07cf65de8c9cd70fca93b7"
+        },
+        "frame.png": {
+          "bytes": 302,
+          "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43"
+        }
+      },
+      "zip_members": {
+        "serial.log": {
+          "bytes": 5588,
+          "sha256": "bb873760b778960e038252bf0357ca908fd7d275a5b7f7f5cc4229b3a84587af",
+          "manifest_match": true
+        },
+        "serial1.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stderr": {
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "manifest_match": true
+        },
+        "frames/current.png": {
+          "bytes": 302,
+          "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+          "manifest_match": true
+        },
+        "audio/microphone-source.pcm": {
+          "bytes": 64000,
+          "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb",
+          "manifest_match": true
+        },
+        "qom/snapshot.json": {
+          "bytes": 60928,
+          "sha256": "c460a692ca2f320e5a1b31c24fae9271aaaa3eccad5db54d2283b1da90eb5c83",
+          "manifest_match": true
+        }
+      },
+      "history": "terminal history retained; no purge"
+    },
+    {
+      "alias": "m5ui-auto",
+      "validation": "virtual-device validation",
+      "receipt_status": "RECEIPTS_PASS",
+      "raw_runner_status": "EXECUTED",
+      "raw_runner_return_code": 0,
+      "source": {
+        "path": "code/m5ui-auto.py",
+        "bytes": 1447,
+        "sha256": "36ee294ec05d362b39aab35290be0603dc30ee1b80b07f18533bfe05163b5302"
+      },
+      "composed_firmware_sha256": "f07c2cf0aa8d7696b91ed315046f406a23df15afa3a912114bc7b7873c37214d",
+      "runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "run_seconds": 29.076,
+      "frame_capture_count": 4,
+      "observed_row_count": 3,
+      "observed_status_counts": {
+        "OBSERVED": 3
+      },
+      "serial_bytes_observed": 674,
+      "serial_pages_observed": 116,
+      "checks": {
+        "raw_execution_executed": true,
+        "caller_pinned_candidate_label_retained": true,
+        "base_hash_expected": true,
+        "probe_hash_and_actual_main": true,
+        "actual_boot_matches_dupterm": true,
+        "native_app_partition_identity": true,
+        "non_vfs_byte_identity": true,
+        "vfs_unrelated_files_preserved": true,
+        "vfs_new_files_all_explicit": true,
+        "firmware_hash_matches": true,
+        "all_zip_members_match_manifest": true,
+        "zip_hash_matches_report": true,
+        "zip_frame_same_pixels_as_api": true,
+        "zip_serial_decoded_same_prefix_as_api": true,
+        "post_owned_zip_then_purge0_delete": true,
+        "retained_terminal_history": true,
+        "history_firmware_matches": true,
+        "actual_pid_gone": true,
+        "independent_live_pid_start_binary_bound": true
+      },
+      "live_identity_observation_count": 2,
+      "raw_artifacts": {
+        "report.json": {
+          "bytes": 1552,
+          "sha256": "ec345ea3aa3ba2666c0c707bea1f595071a04ddbec82621f41fc0daf93d1788e"
+        },
+        "wrapper.json": {
+          "bytes": 860,
+          "sha256": "e8b6285ec9012eb8d04013f7e5595c4193376af61747cf8b56d637d5c24cb193"
+        },
+        "composition.json": {
+          "bytes": 2489,
+          "sha256": "08f510d6680b70f3763a0980f6301ca9741bc6b40a60d8f74822c19a16403364"
+        },
+        "serial.txt": {
+          "bytes": 674,
+          "sha256": "df90790ceaa9030c054c9b3652f021d794aa09e5a45c39452db52a44de20b584"
+        },
+        "http-timeline.jsonl": {
+          "bytes": 76536,
+          "sha256": "b7807201d9a2e2b00eacea5e0dadf445a68271d757b8bbaadbcf12cf10ec9040"
+        },
+        "evidence.zip": {
+          "bytes": 10456,
+          "sha256": "4333dd1b7b19397d4b17595b2603d49d0f243831761c8e8510852a64b4d18c19"
+        },
+        "frame.png": {
+          "bytes": 1373,
+          "sha256": "4dc83c35b734aeeb2f043fe4cb6ece82b5ba6f7c80fe5d0d56e0c41210c40f1b"
+        }
+      },
+      "zip_members": {
+        "serial.log": {
+          "bytes": 674,
+          "sha256": "df90790ceaa9030c054c9b3652f021d794aa09e5a45c39452db52a44de20b584",
+          "manifest_match": true
+        },
+        "serial1.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stderr": {
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "manifest_match": true
+        },
+        "frames/current.png": {
+          "bytes": 1373,
+          "sha256": "4dc83c35b734aeeb2f043fe4cb6ece82b5ba6f7c80fe5d0d56e0c41210c40f1b",
+          "manifest_match": true
+        },
+        "audio/microphone-source.pcm": {
+          "bytes": 64000,
+          "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb",
+          "manifest_match": true
+        },
+        "qom/snapshot.json": {
+          "bytes": 60928,
+          "sha256": "5d1b6050e9bef55eb02fda3b2f6e1acab6307f98851fc75fba0655d2bf3f9371",
+          "manifest_match": true
+        }
+      },
+      "history": "terminal history retained; no purge"
+    },
+    {
+      "alias": "m5ui-explicit",
+      "validation": "virtual-device validation",
+      "receipt_status": "RECEIPTS_PASS",
+      "raw_runner_status": "EXECUTED",
+      "raw_runner_return_code": 0,
+      "source": {
+        "path": "code/m5ui-explicit.py",
+        "bytes": 1587,
+        "sha256": "f71c24c5619f9f1833dc80df5b696c7482fecc1952b09963f03203c0d5e025cb"
+      },
+      "composed_firmware_sha256": "6f4ebdef6c15a71faa81ba52b289d0f98f9a294b88c5620e234a7aed6f094157",
+      "runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "run_seconds": 29.055,
+      "frame_capture_count": 4,
+      "observed_row_count": 4,
+      "observed_status_counts": {
+        "OBSERVED": 4
+      },
+      "serial_bytes_observed": 763,
+      "serial_pages_observed": 115,
+      "checks": {
+        "raw_execution_executed": true,
+        "caller_pinned_candidate_label_retained": true,
+        "base_hash_expected": true,
+        "probe_hash_and_actual_main": true,
+        "actual_boot_matches_dupterm": true,
+        "native_app_partition_identity": true,
+        "non_vfs_byte_identity": true,
+        "vfs_unrelated_files_preserved": true,
+        "vfs_new_files_all_explicit": true,
+        "firmware_hash_matches": true,
+        "all_zip_members_match_manifest": true,
+        "zip_hash_matches_report": true,
+        "zip_frame_same_pixels_as_api": true,
+        "zip_serial_decoded_same_prefix_as_api": true,
+        "post_owned_zip_then_purge0_delete": true,
+        "retained_terminal_history": true,
+        "history_firmware_matches": true,
+        "actual_pid_gone": true,
+        "independent_live_pid_start_binary_bound": true
+      },
+      "live_identity_observation_count": 2,
+      "raw_artifacts": {
+        "report.json": {
+          "bytes": 1552,
+          "sha256": "1843a64809e2924c0601edfa8ccdf4b428dbcc1019a4193e6b4c523f46c006da"
+        },
+        "wrapper.json": {
+          "bytes": 872,
+          "sha256": "3bfb0486c3e0518cb1c4858f4c775a4cf8ee77a4e0c69a89b3b0a78a66306ee2"
+        },
+        "composition.json": {
+          "bytes": 2489,
+          "sha256": "1453c61fb92a05bcd3093ce7f099c24bab4a632f6cfbdbd934b4c1e6a0636ea8"
+        },
+        "serial.txt": {
+          "bytes": 763,
+          "sha256": "790fef11828e085e084663d09b02bfc53a75ce6541351dde8eb416b2a977a9aa"
+        },
+        "http-timeline.jsonl": {
+          "bytes": 75900,
+          "sha256": "63162ff9ef9fc5aea413344b05d2b7d9e986bee74ad01776983b4090b67cb2ee"
+        },
+        "evidence.zip": {
+          "bytes": 10521,
+          "sha256": "213a839edb5e4b2573bb0cdd129dfbdaacd8a6d3cc989dedeafd1d8a2e9121c0"
+        },
+        "frame.png": {
+          "bytes": 1613,
+          "sha256": "f444241eb6965df2806f79e15eca1b94b77a0b96eb81e71ed4ab0c302bd837b2"
+        }
+      },
+      "zip_members": {
+        "serial.log": {
+          "bytes": 763,
+          "sha256": "790fef11828e085e084663d09b02bfc53a75ce6541351dde8eb416b2a977a9aa",
+          "manifest_match": true
+        },
+        "serial1.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stderr": {
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "manifest_match": true
+        },
+        "frames/current.png": {
+          "bytes": 1613,
+          "sha256": "f444241eb6965df2806f79e15eca1b94b77a0b96eb81e71ed4ab0c302bd837b2",
+          "manifest_match": true
+        },
+        "audio/microphone-source.pcm": {
+          "bytes": 64000,
+          "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb",
+          "manifest_match": true
+        },
+        "qom/snapshot.json": {
+          "bytes": 60928,
+          "sha256": "2a4424a3c751a6190608a87d7f159c51936fca4c93a92b8228f4704e56907b4f",
+          "manifest_match": true
+        }
+      },
+      "history": "terminal history retained; no purge"
+    },
+    {
+      "alias": "m5ui-example",
+      "validation": "virtual-device validation",
+      "receipt_status": "RECEIPTS_PASS",
+      "raw_runner_status": "EXECUTED",
+      "raw_runner_return_code": 0,
+      "source": {
+        "path": "code/m5ui-example.py",
+        "bytes": 1429,
+        "sha256": "825596920e01a0d9f0c27ec6bae955ba1291f02909e826da3c4563d4b8a38f93"
+      },
+      "composed_firmware_sha256": "748434acbd051b78078cdbb4d013a92ccbd3dfb4951337e86b3a1f6b0f0dc91a",
+      "runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "run_seconds": 29.794,
+      "frame_capture_count": 5,
+      "observed_row_count": 3,
+      "observed_status_counts": {
+        "OBSERVED": 3
+      },
+      "serial_bytes_observed": 665,
+      "serial_pages_observed": 118,
+      "checks": {
+        "raw_execution_executed": true,
+        "caller_pinned_candidate_label_retained": true,
+        "base_hash_expected": true,
+        "probe_hash_and_actual_main": true,
+        "actual_boot_matches_dupterm": true,
+        "native_app_partition_identity": true,
+        "non_vfs_byte_identity": true,
+        "vfs_unrelated_files_preserved": true,
+        "vfs_new_files_all_explicit": true,
+        "firmware_hash_matches": true,
+        "all_zip_members_match_manifest": true,
+        "zip_hash_matches_report": true,
+        "zip_frame_same_pixels_as_api": true,
+        "zip_serial_decoded_same_prefix_as_api": true,
+        "post_owned_zip_then_purge0_delete": true,
+        "retained_terminal_history": true,
+        "history_firmware_matches": true,
+        "actual_pid_gone": true,
+        "independent_live_pid_start_binary_bound": true
+      },
+      "live_identity_observation_count": 2,
+      "raw_artifacts": {
+        "report.json": {
+          "bytes": 1552,
+          "sha256": "d411af34b131a8096a1f6abddc6b958a406bec7a0257e713e7828efc9ebfa17b"
+        },
+        "wrapper.json": {
+          "bytes": 868,
+          "sha256": "ac44cf8016e89abd969e2b5ab17f0d8708ccad905c1103947e5d0af2298f1467"
+        },
+        "composition.json": {
+          "bytes": 2489,
+          "sha256": "60e0a0f7649b2fc26bdf09b98561b0e7527a114987025ccfc6482f03d444e815"
+        },
+        "serial.txt": {
+          "bytes": 665,
+          "sha256": "4264926109bfc8c4e8a00daf1a76f9148ec3107d642049d7c4191df558d99106"
+        },
+        "http-timeline.jsonl": {
+          "bytes": 78439,
+          "sha256": "89b3cc1fd26eb0c12b93405fec6df3502d162245828b860c5717b702406c6178"
+        },
+        "evidence.zip": {
+          "bytes": 10442,
+          "sha256": "1325d49a5c9117741246fcf5746fc908dab8183d86e201b49f64b85f269104b7"
+        },
+        "frame.png": {
+          "bytes": 1373,
+          "sha256": "4dc83c35b734aeeb2f043fe4cb6ece82b5ba6f7c80fe5d0d56e0c41210c40f1b"
+        }
+      },
+      "zip_members": {
+        "serial.log": {
+          "bytes": 665,
+          "sha256": "4264926109bfc8c4e8a00daf1a76f9148ec3107d642049d7c4191df558d99106",
+          "manifest_match": true
+        },
+        "serial1.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "manifest_match": true
+        },
+        "qemu.stderr": {
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "manifest_match": true
+        },
+        "frames/current.png": {
+          "bytes": 1373,
+          "sha256": "4dc83c35b734aeeb2f043fe4cb6ece82b5ba6f7c80fe5d0d56e0c41210c40f1b",
+          "manifest_match": true
+        },
+        "audio/microphone-source.pcm": {
+          "bytes": 64000,
+          "sha256": "9834bb6df76bb56a6e7dafe9ca20488830609c598f69a24c46e82a1a83a95acb",
+          "manifest_match": true
+        },
+        "qom/snapshot.json": {
+          "bytes": 60928,
+          "sha256": "dc7c8aff38a741fe8bea330008720ed9fd0b2995f97c3bed8d8e32e4698d8823",
+          "manifest_match": true
+        }
+      },
+      "history": "terminal history retained; no purge"
+    }
+  ],
+  "excluded_from_execution": {
+    "extra_display_methods": {
+      "count": 14,
+      "status": "PREPARED_NOT_RUN"
+    },
+    "first_wrapper": {
+      "kind": "host import error",
+      "error": "ModuleNotFoundError: No module named 'run_guest'",
+      "sessions_created": 0,
+      "service_posts_attempted": 0,
+      "repair": "Host wrapper import search path corrected before actual session creation"
+    }
+  },
+  "executor_final_completion": "Separate coordinator proof to be appended before publication; this immutable independent snapshot preceded the final executor turn.",
+  "candidate_example": {
+    "path": "code/m5ui-example-candidate.py",
+    "bytes": 486,
+    "sha256": "aedb8cc5b4963015c8a4a424538c98c7ece324bb20ef7db2e5bd5e79af21a387",
+    "validation": "Exact candidate bytes prefix the executed m5ui-example.py; only finite observation code was appended"
+  },
+  "fixtures": {
+    "doc-fixture.bmp": {
+      "bytes": 246,
+      "sha256": "00aa06727d34d92bd726d347a37c4ebb6a2fc2724390ce5342645aeefbb8fd4f"
+    },
+    "doc-fixture.jpg": {
+      "bytes": 634,
+      "sha256": "4da117037dc17439100e82f9058caaf833308437d3333bade5ef8d8e1141d10a"
+    },
+    "doc-fixture.png": {
+      "bytes": 75,
+      "sha256": "9fa0f2ae2b655c877690c6ed5649dad9f248147f7e21d0f8011636c20d627162"
+    }
+  }
+}

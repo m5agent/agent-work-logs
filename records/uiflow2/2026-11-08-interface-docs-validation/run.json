@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "UIFlow2 Display/ADC/m5ui documentation contract correction and virtual-device validation",
+  "source": {
+    "repository": "https://github.com/m5stack/uiflow-micropython",
+    "base_commit": "f20d5a00e8c9106aae1d944f3d6f1128839f59cb",
+    "issue": "Display/ADC/m5ui documentation reports; tracker identifiers omitted",
+    "pull_request": null,
+    "patch": {
+      "path": "patches/0001-interface-docs.patch",
+      "bytes": 42541,
+      "sha256": "189798430297d06c8cf16e3019a6ba3ddb241bbd5d9861578c99fb75176160a0"
+    },
+    "source_equivalence": "Whitespace-normalized equality for the29 listed native Display C functions between the validation snapshot and public base."
+  },
+  "hardware": {
+    "validation_type": "virtual-device validation",
+    "model": "CoreS3",
+    "fresh_guest_count": 5,
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "name": "UIFlow2.0 CoreS3",
+    "version": "v2.5.5 preview",
+    "source": "official public release",
+    "base": {
+      "bytes": 16121856,
+      "sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded"
+    },
+    "declared_flash_bytes": 16777216,
+    "padding_for_comparison": "0xff to declared flash size",
+    "overlay": "Only VFS caller code, dupterm boot bridge and explicit fixture inputs; native application bytes unchanged",
+    "vfs_offset": 11141120,
+    "vfs_bytes": 4980736,
+    "after_run_full_mutable_flash_readback": "NOT RUN; receipts verify retained composed input images"
+  },
+  "execution": {
+    "environment": "Device Service /api/v1; native runtime binary and profile pinned by SHA256",
+    "runtime": {
+      "source_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92",
+      "binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+      "profile_sha256": "3e88ec4dd64da5f5dc4a5bc2b8c79fe19e047ee23dd075709a97798c28e6347e",
+      "device_alias": "CoreS3-VM",
+      "execution_interface": "Device Service /api/v1 session API"
+    },
+    "session_aliases": [
+      "display",
+      "adc",
+      "m5ui-auto",
+      "m5ui-explicit",
+      "m5ui-example"
+    ],
+    "history_retained": true,
+    "independent_receipt_checks_per_run": 19,
+    "indexed_zip_members_verified": 35,
+    "runner_reports_executed": 5,
+    "runner_return_code_zero": 5,
+    "final_actor_completion": "PASS; coordinator verified completed turn, process exit0, retained histories and bound runtime exits",
+    "pre_session_host_error": "One import failure, no guest created",
+    "scratch_extra14": "PREPARED_NOT_RUN"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "scope": "Documentation only:54 snippets compile; final English/Chinese Sphinx exit0;66 new translated entries; existing8 initial Chinese warning files unchanged"
+    },
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "scope": "Five composed input images; actual LittleFS readback of source and boot; all non-VFS/native-application bytes preserved; not an after-run mutable-flash dump"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "Same owned Device Service sessions; UART JSON markers/API frames/ZIP evidence checked; no direct runtime bypass"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "Display99 exact expectedTypeError omissions and58 normal returns, ADC independent methods, m5ui label/state readback"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "scope": "ADC raw/u16 and atten semantics verified for current controller input; read_uv errors95; calibratedUV support/cause unresolved; no multivoltage test"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "scope": "Four selected Display frame groups and rotation0 m5ui labels PASS; rotation1 logical state PASS but full portrait frame not established; no physical claims"
+    },
+    {
+      "layer": "delivery",
+      "status": "PARTIAL",
+      "scope": "Record, public-base patch and executor completion proof included. Upstream review is a separate pending delivery step."
+    }
+  ],
+  "evidence": [
+    "evidence/adc-and-m5ui-results-summary.json",
+    "evidence/display-contract-results-summary.json",
+    "evidence/display-frame-summary.png",
+    "evidence/documentation-checks-summary.json",
+    "evidence/image-derivation-summary.json",
+    "evidence/m5ui-example-frame-summary.png",
+    "evidence/public-contract-equivalence-summary.json",
+    "evidence/public-patch-application-summary.json",
+    "evidence/session-receipts-summary.json",
+    "evidence/executor-completion-summary.json"
+  ],
+  "notes": [
+    "Raw evidence is retained privately. Public files are bounded allowlist summaries with aliases and hashes.",
+    "Behavior verdicts combine serial outcomes, original source identity, controller observations and frames.",
+    "The change covers documentation and example code. Native application bytes are preserved."
+  ],
+  "executor_completion": {
+    "schema_version": 1,
+    "observed_at": "2026-11-08T15:38:16.693388+00:00",
+    "dsh_cli_version": "0.2.2-rc.1",
+    "dsh_turn_reason": "completed",
+    "dsh_process_exit_code": 0,
+    "events_sha256": "81e55c49e7bf92ab5183bcf8319130126a81b93c211f68c52159d0a5ae170b08",
+    "event_log_fd_owner_absent": true,
+    "owned_runs": [
+      {
+        "alias": "display",
+        "history_terminal": true,
+        "bound_runtime_exited": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "adc",
+        "history_terminal": true,
+        "bound_runtime_exited": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "m5ui-auto",
+        "history_terminal": true,
+        "bound_runtime_exited": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "m5ui-explicit",
+        "history_terminal": true,
+        "bound_runtime_exited": true,
+        "firmware_matches": true
+      },
+      {
+        "alias": "m5ui-example",
+        "history_terminal": true,
+        "bound_runtime_exited": true,
+        "firmware_matches": true
+      }
+    ],
+    "other_cohorts": "Concurrent UHF validation is outside this completion receipt.",
+    "status": "PASS"
+  },
+  "delivery": {
+    "public_record": "record and public-base patch included",
+    "review": "pending separate upstream review"
+  }
+}
