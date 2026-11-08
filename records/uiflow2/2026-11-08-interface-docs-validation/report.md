@@ -2,7 +2,7 @@
 
 ## Target and source boundaries
 
-The target is accurate, executable documentation for Display parameter requirements, the ESP32 ADC API and the m5ui homepage example. The public patch applies to [f20d5a00e8c9106aae1d944f3d6f1128839f59cb](https://github.com/m5stack/uiflow-micropython/tree/f20d5a00e8c9106aae1d944f3d6f1128839f59cb) and changes six English RST/Chinese PO files, +484/-144 lines. It changes documentation and example code only.
+The target is accurate, executable documentation for Display parameter requirements, the ESP32 ADC API and the m5ui homepage example. The public patch applies to [f20d5a00e8c9106aae1d944f3d6f1128839f59cb](https://github.com/m5stack/uiflow-micropython/tree/f20d5a00e8c9106aae1d944f3d6f1128839f59cb) and changes six English RST/Chinese PO files, +485/-143 lines. It changes documentation and example code only.
 
 The validation source snapshot is referred to as `validation-source-A`. Its relevant 29 native Display C functions match the pinned public source after whitespace normalization. [The bounded equivalence summary](evidence/public-contract-equivalence-summary.json) records that scope. The equality proof covers the listed functions and files. The public source anchors are [Display binding](https://github.com/m5stack/uiflow-micropython/blob/f20d5a00e8c9106aae1d944f3d6f1128839f59cb/m5stack/components/M5Unified/mpy_m5gfx.cpp), [hardware import namespace](https://github.com/m5stack/uiflow-micropython/blob/f20d5a00e8c9106aae1d944f3d6f1128839f59cb/m5stack/libs/hardware/__init__.py), and [m5ui port](https://github.com/m5stack/uiflow-micropython/blob/f20d5a00e8c9106aae1d944f3d6f1128839f59cb/m5stack/libs/m5ui/port.py).
 
@@ -69,3 +69,7 @@ The client creates visible sessions through the service API. Substitute each pro
 ## Limits, delivery and rollback
 
 Coverage marked `NOT RUN` includes other14 keyword bindings, full29-method graphics functionality, multi-voltage response, calibrated analog accuracy and physical properties. Coverage marked `PARTIAL` includes calibrated UV capability and full portrait-frame capture. The patch is a documentation correction and rollback reverses the six-file patch. The coordinator completion evidence accompanies this record. Upstream review remains a separate delivery step.
+
+## Record correction
+
+The public patch line count is +485/-143 according to `git apply --numstat`. The earlier record used the review-snapshot totals of +484/-144. Public patch SHA256 is `189798430297d06c8cf16e3019a6ba3ddb241bbd5d9861578c99fb75176160a0`.
