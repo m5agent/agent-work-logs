@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Core2 periodic panel refresh and touch regression",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "70ca46258598294eb5e5852115b1dfce386d8754",
+    "patch": "patches/qemu-m5stack-peripherals/0167-core2-panel-refresh.patch",
+    "qemu_upstream_base": "40edccac415693c5130f91c01d84176ae6008566",
+    "patch_sha256": "b1b7e6762182665f21978a18f91dc9c5f40c16810ab5fa6a731ca25d95bc9a70",
+    "main_commit": "9c2fe5f22189ba5cb90485230b905bb17c625984"
+  },
+  "hardware": {
+    "profile": "core2",
+    "lane": "virtual-device validation",
+    "transport": "SPI LCD and FT5x06 I2C"
+  },
+  "firmware": {
+    "version": "v2.5.4",
+    "base_sha256": "57868df3d1bb0cbd03fdca3eac0db8a9c6578a70195e4479822147b29ef691ae",
+    "source_sha256": "39b2a0248e9b396cd31f4a34a4c586796c2c6ccc6ce6544e24f95a62ef32b81b",
+    "composed_sha256": "4f83d8e0f3740dc7ab398bbdd7a55983fe7bf29898230742f78a85eca2f1763f"
+  },
+  "execution": {
+    "environment": "macOS arm64 native QEMU through Device Service",
+    "baseline_qemu_sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+    "candidate_qemu_sha256": "75e61d00b29bc2c8fa631d1fe396de66ba6b12b64057adc09cb2bec32185b42e",
+    "rom_sha256": {
+      "esp32-v3-rom.bin": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+      "esp32-v3-rom-app.bin": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+    },
+    "session_id": "omitted from public record",
+    "native_replay": {
+      "layers": 115,
+      "matching_files": 138,
+      "forward": "PASS",
+      "reverse": "PASS"
+    },
+    "platform_tests": {
+      "total": 2041,
+      "passed": 2031,
+      "skipped": 10
+    }
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "detail": "Native candidate binary built and booted the stock control"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "FT5x06 I2C point reads matched all held inputs on both binaries"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "Tap and four drags produced exact raw and logical coordinates plus release"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "detail": "Identical 320x240 probe image in both virtual runs"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "Physical Core2 and browser WASM not exercised"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "detail": "General display performance benchmarking not exercised by this public control"
+    }
+  ],
+  "evidence": [
+    "evidence/stock-control.summary.json",
+    "evidence/probe-screen.png",
+    "code/main.py"
+  ],
+  "notes": [
+    "Raw archives are retained separately. Public evidence omits session IDs and local configuration."
+  ]
+}

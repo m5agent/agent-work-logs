@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-09 | ESP Emulator | Core2 原生面板刷新 | `PARTIAL`（原生修复和同固件触摸回归通过，真机与浏览器未运行） | [查看](esp-emulator/2026-11-09-core2-panel-refresh/) |
 | 2026-11-09 | Firmware Review Service | EMBER 2.1 独立应用镜像审核 | `PARTIAL`（虚拟烧录回读、SD 读卡和 PCM 验证通过，真机未运行，未提交 Burner） | [查看](firmware-review-service/2026-11-09-ember-app-only-intake/) |
 | 2026-11-09 | ESP Emulator | 设备预览中的 UIFlow 就绪提示 | `PASS`（本地 CoreS3 browser 12/24 与 native 10/15，Pages 与真机未运行） | [查看](esp-emulator/2026-11-09-uiflow-workbench-ready/) |
 | 2026-11-09 | ESP Emulator | 设备目录、基线帧、Unit provenance 与 Classic 烧录 | `PARTIAL`（PR194 已交付，#190/#191/#193 已关闭，#178/#192 完整负载仍开放） | [查看](esp-emulator/2026-11-09-issue-fixes-178-190-193/followups/2026-11-09-pr194-delivery/) |
