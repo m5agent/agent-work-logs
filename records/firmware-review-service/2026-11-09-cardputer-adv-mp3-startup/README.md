@@ -26,3 +26,7 @@
 ## 未覆盖项
 
 Cardputer ADV 真机及其物理 SD、声音与电气行为为 `NOT RUN`。现有测试中心没有匹配的真机夹具。
+
+## 后续修复
+
+[裸板接线与 SPI SD 修复复验](followups/2026-11-09-cardputer-adv-model-fidelity/) 使用同一原版固件独立验证，保留上面的原始黑屏结果。

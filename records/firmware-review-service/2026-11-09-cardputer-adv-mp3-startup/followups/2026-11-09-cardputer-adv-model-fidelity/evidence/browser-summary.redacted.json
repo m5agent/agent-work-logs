@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "scope": "browser-local / no SD / original merged release",
+  "publication": "local export only",
+  "started_at": "2026-11-09T01:58:55.756Z",
+  "finished_at": "2026-11-09T01:59:14.470Z",
+  "raw_report_sha256": "abe6fac4cce18e1dcd3017df021024af81f57adb74f6ffb5ee4c56e318e8abe5",
+  "raw_report_bytes": 47124,
+  "runtime_manifest_sha256": "e6f1ff6cdcaf7bdd2a60239c60ca9026d037ec0171b2f8735ad69ceef5a01f7a",
+  "source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+  "wasm_sha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+  "build": {
+    "all_objects_rebuilt": true,
+    "lock_sha256": "847dfa7703473640bbfd9664680616d6bc5ff644573cb2350c2561d5e5a8c382",
+    "recipe_sha256": "e1bc8875a591e03f656db09d93fec7eba56b51dabff99aca63664ddbcce8291d",
+    "compiler": "3.1.50",
+    "source_archive": {
+      "bytes": 35247360,
+      "path": "corresponding-source.tar.xz",
+      "sha256": "6f2463ff428c1b59a6d51558f5b16753ef6812d2dde039a293e376d955d50c7a"
+    }
+  },
+  "guest_receipt": {
+    "engine": "qemu-wasm",
+    "deviceId": "cardputer-adv",
+    "board": "m5cardputeradv",
+    "profile": "cardputer-adv-wasm-wallclock",
+    "clockDivisor": 1,
+    "frameTransport": "shared-rgb565-v1",
+    "actualArguments": [
+      "./this.program",
+      "-M",
+      "m5cardputeradv",
+      "-drive",
+      "file=/flash.bin,if=mtd,format=raw",
+      "-L",
+      "/rom",
+      "-display",
+      "none",
+      "-serial",
+      "pipe:/bridge/uart",
+      "-serial",
+      "file:/bridge/serial1",
+      "-qmp",
+      "stdio",
+      "-drive",
+      "if=none,id=efuse,file=/efuse.bin,format=raw",
+      "-global",
+      "driver=nvram.esp32s3.efuse,property=drive,value=efuse"
+    ],
+    "firmwareSha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "wasmSha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+    "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "last_frame": {
+    "sequence": 8,
+    "sha256": "71ad40df1220ef4114ffd205d16d8addec95b875e71f08df6bbcf4a15e95e786",
+    "ocr": "Cardputer MP3\nNo microSD card\nInsert a FAT32 card with MP33",
+    "dimensions": [
+      240,
+      135
+    ]
+  },
+  "app_no_media_screen": true,
+  "page_errors": [],
+  "cleanup": {
+    "gracefulExit": true,
+    "exitCode": 0,
+    "workersCreated": 5,
+    "workersAtExit": 0,
+    "disposal": {
+      "workersRemaining": 0,
+      "workersTerminatedByDispose": 0,
+      "workerCountScope": "nested-pthreads",
+      "enginePlacement": "dedicated-worker-v1",
+      "engineWorkersAtAcknowledgement": 1,
+      "selfCloseAfterAcknowledgement": true
+    },
+    "engineOwnership": {
+      "engineWorkersCreated": 1,
+      "engineOwnerLive": false,
+      "engineCloseNotificationReceived": true,
+      "engineSelfCloseNotifications": 1,
+      "engineNormalTerminations": 1,
+      "engineFallbackTerminations": 0,
+      "enginePortTransferred": true
+    },
+    "engineOwnershipStage": "before-iframe-removal",
+    "explicitWorkerDisposal": true,
+    "iframeRemoved": true,
+    "worker_targets_observed": 6,
+    "worker_targets_live": 0,
+    "iframe_count": 0,
+    "measured_before_context_close": true
+  },
+  "limits": {
+    "browser_sd_and_audio": "NOT RUN",
+    "physical_cardputer_adv": "NOT RUN"
+  },
+  "fixed_uiflow2_11_key_regression": {
+    "status": "PASS",
+    "firmware_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+    "wasm_sha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+    "checks_passed": 69,
+    "keyboard_cases_passed": 11,
+    "runner": "platform/tests/test_public_qemu_board_guest.mjs",
+    "raw_report_sha256": "4348b7a57fac2a9c01522656318996893ad04e22496bf9c2967d3a9b57e9e601",
+    "raw_report_bytes": 106124,
+    "normal_exit_code": 0,
+    "observed_worker_targets": 6,
+    "observed_live_targets_after_stop": 0
+  }
+}

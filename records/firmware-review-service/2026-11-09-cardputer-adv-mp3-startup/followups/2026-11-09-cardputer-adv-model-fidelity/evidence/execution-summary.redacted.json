@@ -1,0 +1,690 @@
+{
+  "schema_version": 1,
+  "scope": "virtual-device validation",
+  "firmware": {
+    "name": "Cardputer ADV MP3 Player v1.0.0",
+    "release": "https://github.com/TurbulentGoat/cardputer-adv-mp3-player/releases/tag/v1.0.0",
+    "upstream_commit": "fa967592011e9e8495ef3f540422eac4d6169adc",
+    "source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "source_bytes": 885600,
+    "flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "flash_bytes": 8388608
+  },
+  "runtime": {
+    "project_base_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "project_source_commit": "340d80cf2e54bbe867f5dbade422ac0907251607",
+    "qemu_base_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "patched_source_receipt": {
+      "sha256": "0899a50bf0023ecb4ae5e72ac703dea51466a4f7a5856e5bcadae8323b6ba98b",
+      "bytes": 16278
+    },
+    "native_executable": {
+      "sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+      "bytes": 22327720
+    },
+    "esp32s3_rom": {
+      "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "bytes": 393216
+    },
+    "patch_sha256": {
+      "0165-cardputer-adv-explicit-caps.patch": "994b286fe515fc394520867be6c56ff5e68b5ed592bdb26f264e31e8affcfdb8",
+      "0166-spi-sd-card-init-state.patch": "736ca37581919242fc150f6e5c5cdeac6d2affa508f7da8fc101e66cc6fef8b5"
+    }
+  },
+  "sd_fixture": {
+    "card": {
+      "sha256": "6e7c003e532f2912b5a6841ea24b6ffbe1ca113caf0dd83b26d750d0cbd7f4a0",
+      "bytes": 67108864
+    },
+    "layout": "FAT32 with MBR",
+    "track_name": "TEST.MP3",
+    "track": {
+      "sha256": "30ffce5202e6926566a920c2b236ac74c6077752642b34b85193f67931ae8fc4",
+      "bytes": 36362
+    },
+    "tone_hz_from_decoded_file": 524
+  },
+  "native_device_service": {
+    "bare_board_no_media": {
+      "status": "PASS",
+      "checks": {
+        "no_media_screen": true
+      },
+      "profile": "qemu",
+      "before_bundle": {
+        "zip_sha256": "2066d117e53e07ecd88210e97231bff8c8b6a3cee2c1c4d9ea14b40932c0405c",
+        "zip_bytes": 10289
+      },
+      "serial_bytes": 914,
+      "serial_sha256": "051b5dcb0b522fed4168f15c76e2a66f27ec155484e040ccad2a43a4442a5600",
+      "final_bundle": {
+        "zip_sha256": "2066d117e53e07ecd88210e97231bff8c8b6a3cee2c1c4d9ea14b40932c0405c",
+        "zip_bytes": 10289
+      },
+      "cleanup": {
+        "state": "stopped",
+        "flash_retained": false
+      },
+      "history_retained": true,
+      "raw_summary": {
+        "sha256": "4e6ab3dac6db55023ccfd38596aad512f5dc7d8d8ab20cb2eed6fb857d181756",
+        "bytes": 1793
+      },
+      "pre_input_frame_sha256": [
+        "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "21454f3b08046627e904b552d91a5149d5969b4794ba6c54365cee7d6102d023",
+        "90ba9ab23f53fdf5c423707a2f0f5408751b83e942f31dc013781ea5adab0663"
+      ]
+    },
+    "mounted_card_first_ocr_observation": {
+      "status": "FAIL",
+      "checks": {
+        "library_lists_fixture_track": false,
+        "fat_mount_and_sectors": true,
+        "track_sectors_after_enter": false,
+        "fixture_tone_after_enter": false
+      },
+      "profile": "qemu",
+      "before_bundle": {
+        "zip_sha256": "4095a1821dc1a3a135827b29e74036e94e4ff2c4f04d90a274d261c92ad8263e",
+        "zip_bytes": 11854
+      },
+      "serial_bytes": 1888,
+      "serial_sha256": "32c93e8e726b20365e90ed7e1afb8bbf2392a96ba7b7add8520ff669433abcd4",
+      "final_bundle": {
+        "zip_sha256": "8e34c831542b46259bd78ee16eaa39073ac9ef685152f3ecde99ab6c22941442",
+        "zip_bytes": 11939
+      },
+      "cleanup": {
+        "state": "stopped",
+        "flash_retained": false
+      },
+      "history_retained": true,
+      "raw_summary": {
+        "sha256": "764880a478427fbec3cde357e9e19c26b13067a87fe74bf1334bc0cb6a46317e",
+        "bytes": 12059
+      },
+      "pre_input_frame_sha256": [
+        "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "21454f3b08046627e904b552d91a5149d5969b4794ba6c54365cee7d6102d023",
+        "370b4236939c088e11013efe20609e33e927a03f1e9da07b3d68fc230ed28d7d"
+      ],
+      "sd": {
+        "geometry": {
+          "mbr_lba": 0,
+          "boot_lba": 2048,
+          "root_lba": 4066,
+          "track_lba_first": 4067,
+          "track_lba_last": 4138,
+          "track_bytes": 36362
+        },
+        "observed_commands_cmd_and_app_flag": [
+          [
+            0,
+            0
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            9,
+            0
+          ],
+          [
+            13,
+            0
+          ],
+          [
+            16,
+            0
+          ],
+          [
+            17,
+            0
+          ],
+          [
+            41,
+            1
+          ],
+          [
+            42,
+            1
+          ],
+          [
+            55,
+            0
+          ],
+          [
+            58,
+            0
+          ],
+          [
+            59,
+            0
+          ]
+        ],
+        "command_count": 22,
+        "commands_before_enter": 22,
+        "mount_and_fat_reads": true,
+        "file_data_read_after_enter": false,
+        "file_lbas_after_enter": []
+      },
+      "application_visual_observation": "The independent frame SHA matched the later visually confirmed library image. The OCR text did not match the automated criterion, so this run recorded FAIL and never injected Enter.",
+      "sample_ocr_excerpt": [
+        "LIBRART",
+        "L TESTIMPз"
+      ]
+    },
+    "mounted_card_playback": {
+      "status": "PASS",
+      "checks": {
+        "library_lists_fixture_track": true,
+        "enter_accepted": true,
+        "enter_redraw": true,
+        "fat_mount_and_sectors": true,
+        "track_sectors_after_enter": true,
+        "fixture_tone_after_enter": true
+      },
+      "profile": "qemu",
+      "before_bundle": {
+        "zip_sha256": "ae367396112c5365e1195996c73b38781b4de65675468e0585729a1e35ba8a77",
+        "zip_bytes": 11771
+      },
+      "serial_bytes": 701,
+      "serial_sha256": "e8662cff6280c414b658cac43fc5c07278d9c0244487a1d7a3130d3b427e025d",
+      "final_bundle": {
+        "zip_sha256": "39f3cf09a0012919d756c5ad3faa11e8e888ae1e0fcad0e1940ddc0c12777517",
+        "zip_bytes": 135040
+      },
+      "cleanup": {
+        "state": "stopped",
+        "flash_retained": false
+      },
+      "history_retained": true,
+      "raw_summary": {
+        "sha256": "7a655745306a23cf0d5c083fed282bc2d568dde4eb89d061a596e5ab9774b248",
+        "bytes": 5765
+      },
+      "pre_input_frame_sha256": [
+        "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "370b4236939c088e11013efe20609e33e927a03f1e9da07b3d68fc230ed28d7d"
+      ],
+      "sd": {
+        "geometry": {
+          "mbr_lba": 0,
+          "boot_lba": 2048,
+          "root_lba": 4066,
+          "track_lba_first": 4067,
+          "track_lba_last": 4138,
+          "track_bytes": 36362
+        },
+        "observed_commands_cmd_and_app_flag": [
+          [
+            0,
+            0
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            9,
+            0
+          ],
+          [
+            13,
+            0
+          ],
+          [
+            16,
+            0
+          ],
+          [
+            17,
+            0
+          ],
+          [
+            41,
+            1
+          ],
+          [
+            42,
+            1
+          ],
+          [
+            55,
+            0
+          ],
+          [
+            58,
+            0
+          ],
+          [
+            59,
+            0
+          ]
+        ],
+        "command_count": 103,
+        "commands_before_enter": 22,
+        "mount_and_fat_reads": true,
+        "file_data_read_after_enter": true,
+        "file_lbas_after_enter": [
+          4067,
+          4068,
+          4069,
+          4070,
+          4071,
+          4072,
+          4073,
+          4074,
+          4075,
+          4076,
+          4077,
+          4078,
+          4079,
+          4080,
+          4081,
+          4082,
+          4083,
+          4084,
+          4085,
+          4086,
+          4087,
+          4088,
+          4089,
+          4090,
+          4091,
+          4092,
+          4093,
+          4094,
+          4095,
+          4096,
+          4097,
+          4098,
+          4137,
+          4138
+        ]
+      },
+      "input": {
+        "type": "keyboard",
+        "button": "Enter"
+      },
+      "post_input_frame_sha256": [
+        "172491cf642aaaa9c3dfd083e4e7ba18cafdd18002cff7a5160326e3a9ec688c",
+        "0f502542144c36085502bbc51511c1bed3aef6524071ac17395ae6dc247ea59c",
+        "f23bc8b53b9f5c7de5fe330a5ff8f6deb49906e5e8dcbb6d3329006f2aa1d8cf",
+        "081ba8b95d19d3761844b677486e59352dbaaad1b274f7e1a7d492519c9c1570",
+        "1c13a36d05457e39e4d3bc751cb16bbca1a455980f44c8998fc6325eb49e9a93"
+      ],
+      "audio": {
+        "pcm_bytes_before_enter": 0,
+        "pcm_bytes_after_enter": 108032,
+        "pcm_sha256": "4c5fb29e55e45891cd8dc16e8e9a84f79b77bb6f8bfabe38fce97d909e1c530a",
+        "nonzero_s16_samples": 53600,
+        "peak_abs": 1353,
+        "verified_matches": [
+          {
+            "channels": 1,
+            "sample_rate_hz": 48000,
+            "peak_tone_energy_fraction": 0.9835,
+            "matching_windows": 11
+          }
+        ],
+        "expected_tone_hz_from_decoded_source": 524
+      }
+    }
+  },
+  "native_sd_matrix": {
+    "observed_at": "2026-11-09T09:54:32.070401+08:00",
+    "raw_summary": {
+      "sha256": "c8d4d12080c094c584cd69d4fa644b24e82ab3f6b45b4607e2a5a176bea1ed5d",
+      "bytes": 12214
+    },
+    "cases": {
+      "cardputer-adv-sd": {
+        "status": "PASS",
+        "stock_base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+        "composed_flash_sha256": "b1276cb61e890bac06d98939ad8a7f5a102aeeee7270d09a66a920eb10fdec29",
+        "checks": [
+          {
+            "name": "sdspi_init",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sdspi_write_block",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sdspi_readback",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sd_ui_marker",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          }
+        ],
+        "after_frame_sha256": "83418599e01826531f036c7f45df8fb7b8f4a1ca1408ce939803b9c4bd13c083",
+        "raw_sector_100": {
+          "status": "PASS",
+          "bytes": 512,
+          "sha256": "d22f283a006ac29d8a7e01aed730427af33d2c33daab0cf878a3887294d72bee"
+        }
+      },
+      "cores3-sd": {
+        "status": "PASS",
+        "stock_base_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+        "composed_flash_sha256": "121a8d625d66c83e55e272ed0b8629d734d599ef1eebb0b019b463861527e206",
+        "checks": [
+          {
+            "name": "sdspi_init",
+            "status": "PASS",
+            "evidence": [
+              "serial.log",
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sdspi_write_block",
+            "status": "PASS",
+            "evidence": [
+              "serial.log",
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sdspi_readback",
+            "status": "PASS",
+            "evidence": [
+              "serial.log",
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sd_ui_marker",
+            "status": "PASS",
+            "evidence": [
+              "serial.log",
+              "disk",
+              "frame-marker"
+            ]
+          }
+        ],
+        "after_frame_sha256": "286e34be22f6f839a8e3bf6d1866698efcc317e5e56931a03aaf28a64dec718c",
+        "raw_sector_100": {
+          "status": "PASS",
+          "bytes": 512,
+          "sha256": "d22f283a006ac29d8a7e01aed730427af33d2c33daab0cf878a3887294d72bee"
+        }
+      },
+      "papercolor-sd": {
+        "status": "PASS",
+        "stock_base_sha256": "ccffe79f9703c7c88da0ac9a1dd6ca0d9ced9c2aef1b5bb34ebdd2ddf8ed9a4d",
+        "composed_flash_sha256": "4cdcdd58aded253e6d64f5f4b712cb043d7edeaf4899e6028515ce755af0108b",
+        "checks": [
+          {
+            "name": "sdspi_init",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sdspi_write_block",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sdspi_readback",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          },
+          {
+            "name": "sd_ui_marker",
+            "status": "PASS",
+            "evidence": [
+              "disk",
+              "frame-marker"
+            ]
+          }
+        ],
+        "after_frame_sha256": "5a8df719e70133efa46b05d4e751a27053ebaebb2087470ba31450214647470f",
+        "raw_sector_100": {
+          "status": "PASS",
+          "bytes": 512,
+          "sha256": "d22f283a006ac29d8a7e01aed730427af33d2c33daab0cf878a3887294d72bee"
+        }
+      }
+    }
+  },
+  "native_topology_matrix": {
+    "runtime": {
+      "sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+      "bytes": 22327720
+    },
+    "runtime_scope": "Same integrated native Xtensa QEMU as Device Service and the SD matrix. Positive test commands name this executable. The absent-Cap runner reuses these commands with a separate output directory and the Cap attachment environment setting removed.",
+    "bare_board": {
+      "observed_at": "2026-11-09T09:53:41.671470+08:00",
+      "raw_summary": {
+        "sha256": "7ef3f6040e0d7ae2cee0e5daa20049c752461d3065dee51a83131b396af26c2f",
+        "bytes": 7225
+      },
+      "cases": {
+        "cardputer-adv-keyboard": {
+          "status": "PASS",
+          "stock_base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+          "composed_flash_sha256": "61ea11c211c2c7d6ca54c6e3ddf2d5106ca9454a4d4a4bac23528d4ee4112665",
+          "checks": [
+            {
+              "name": "tca8418_matrix_event",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "keyboard_i2c_decode",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "keyboard_ui_marker",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            }
+          ],
+          "after_frame_sha256": "b9323721391b39d341570db53baa11bae2ff8bbc477414264459c1869cd7685b"
+        },
+        "cardputer-adv-audio": {
+          "status": "PASS",
+          "stock_base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+          "composed_flash_sha256": "70ae1cc7cac045843997d2b49716337705138cd0c7e4b8808ab1090c88b3bed8",
+          "checks": [
+            {
+              "name": "es8311_configure",
+              "status": "PASS",
+              "evidence": [
+                "pcm",
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "speaker_tone",
+              "status": "PASS",
+              "evidence": [
+                "pcm",
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "i2s_gdma_capture",
+              "status": "PASS",
+              "evidence": [
+                "pcm",
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "speaker_ui_marker",
+              "status": "PASS",
+              "evidence": [
+                "pcm",
+                "frame-marker"
+              ]
+            }
+          ],
+          "after_frame_sha256": "c9fa3799f7f5d852754948634b151c7ee230857e861782cf2d6f3f35a043e256"
+        }
+      }
+    },
+    "cap_explicitly_mounted": {
+      "observed_at": "2026-11-09T09:53:49.652451+08:00",
+      "raw_summary": {
+        "sha256": "6d697de3a52726d60765ce162042ea77129e9fceb3a646f2bc83abfca7e0bd30",
+        "bytes": 7277
+      },
+      "cases": {
+        "cardputer-adv-nfc": {
+          "status": "PASS",
+          "stock_base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+          "composed_flash_sha256": "9dc898068f8f0ed09e47c8e58c108b10935308211c53cf658e1e0d49ae30f03c",
+          "checks": [
+            {
+              "name": "cardputer_nfc_spi_detect",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "cardputer_nfc_page_read",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "cardputer_nfc_page_write_verify",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "cardputer_nfc_ui_marker",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            }
+          ],
+          "after_frame_sha256": "449a2e2eccb489db97d2070c4f3b6ceea939e472a244bedb6f62ca041d1f0aa1"
+        },
+        "cardputer-adv-cc1101": {
+          "status": "PASS",
+          "stock_base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+          "composed_flash_sha256": "e50eee32d024534d92feed5771e71a6b22082121e7fe480445d57bde8ad9020e",
+          "checks": [
+            {
+              "name": "cardputer_cc1101_spi_configure",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "cardputer_cc1101_tx",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "cardputer_cc1101_rx_loopback",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            },
+            {
+              "name": "cardputer_cc1101_ui_marker",
+              "status": "PASS",
+              "evidence": [
+                "frame-marker"
+              ]
+            }
+          ],
+          "after_frame_sha256": "a502f92ce8e5be494bbbd62cbb4eb5b9b08617f83fbca22ae373e86c96f8c5ae"
+        }
+      }
+    },
+    "cap_absent_negative": [
+      {
+        "device": "m5cardputeradv",
+        "case": "cardputer-adv-nfc",
+        "cap_attached": false,
+        "firmware_sha256": "9dc898068f8f0ed09e47c8e58c108b10935308211c53cf658e1e0d49ae30f03c",
+        "guest_marker_rgb": [
+          0,
+          0,
+          0
+        ],
+        "guest_visible_text": "RuntimeError('chip begin failed 00'); FAIL",
+        "negative_frame_sha256": "733695127b051c879e62633f231c2c8973f8e5ac371b9133aa60917653a56813"
+      },
+      {
+        "device": "m5cardputeradv",
+        "case": "cardputer-adv-cc1101",
+        "cap_attached": false,
+        "firmware_sha256": "e50eee32d024534d92feed5771e71a6b22082121e7fe480445d57bde8ad9020e",
+        "guest_marker_rgb": [
+          255,
+          0,
+          0
+        ],
+        "guest_visible_text": "RuntimeError('tx failed'); FAIL",
+        "negative_frame_sha256": "a08276621deddd36abe39d13ce5df8483c663bc8a8a1c3cb177b6bccf4d0b52a"
+      }
+    ],
+    "cap_absent_negative_raw_summary": {
+      "sha256": "e611a023f81890cbb95deb4a2fdbc5ebfe9219f54615c2110fedaa97f43f02dd",
+      "bytes": 835
+    }
+  },
+  "browser_wasm": {
+    "status": "PASS",
+    "summary": "browser-summary.redacted.json",
+    "sha256": "b49841da566ed016eef70a49f297a71a748b563eb2d0d122be1f88661c6e491f"
+  },
+  "redaction": "Unique session identifiers, host paths, unfiltered traces and binary payloads are held locally. Raw identities refer to the locally retained inputs and summaries."
+}

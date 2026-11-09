@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer ADV 裸板接线与 SPI SD 状态建模修复",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "delivered_commit": "340d80cf2e54bbe867f5dbade422ac0907251607",
+    "previous_report": "https://github.com/m5agent/agent-work-logs/blob/0a4969c549561efcf5423a592ca567a86d838e0b/records/firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/report.md",
+    "qemu_base_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "patch_sha256": {
+      "0165-cardputer-adv-explicit-caps.patch": "994b286fe515fc394520867be6c56ff5e68b5ed592bdb26f264e31e8affcfdb8",
+      "0166-spi-sd-card-init-state.patch": "736ca37581919242fc150f6e5c5cdeac6d2affa508f7da8fc101e66cc6fef8b5"
+    },
+    "delivery_scope": "local branch, replayable QEMU patches attached"
+  },
+  "hardware": {
+    "model": "M5Stack Cardputer ADV",
+    "soc": "ESP32-S3",
+    "hardware_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Cardputer ADV MP3 Player v1.0.0",
+    "release": "https://github.com/TurbulentGoat/cardputer-adv-mp3-player/releases/tag/v1.0.0",
+    "upstream_commit": "fa967592011e9e8495ef3f540422eac4d6169adc",
+    "source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "source_bytes": 885600,
+    "flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "flash_bytes": 8388608
+  },
+  "execution": {
+    "environment": "Native Xtensa QEMU via Device Service and dedicated checked-in regression fixtures",
+    "scope": "virtual-device validation",
+    "profile": "m5cardputeradv",
+    "session_id": "redacted",
+    "runtime_sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "browser_wasm": {
+      "source_replay": {
+        "status": "PASS",
+        "patches": 77,
+        "postimages": 162
+      },
+      "no_media": {
+        "status": "PASS",
+        "scope": "local public-site export, same original merged BIN, no card",
+        "wasm_sha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+        "runtime_manifest_sha256": "e6f1ff6cdcaf7bdd2a60239c60ca9026d037ec0171b2f8735ad69ceef5a01f7a",
+        "frame_sha256": "71ad40df1220ef4114ffd205d16d8addec95b875e71f08df6bbcf4a15e95e786",
+        "frame_dimensions": [
+          240,
+          135
+        ],
+        "screen": "Cardputer MP3 / No microSD card",
+        "iframe_count_after_stop": 0,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0,
+        "page_error_count": 0,
+        "browser_report_sha256": "abe6fac4cce18e1dcd3017df021024af81f57adb74f6ffb5ee4c56e318e8abe5"
+      },
+      "keyboard_regression": {
+        "status": "PASS",
+        "checked_keys": 11,
+        "assertions": 69,
+        "firmware_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+        "browser_report_sha256": "4348b7a57fac2a9c01522656318996893ad04e22496bf9c2967d3a9b57e9e601"
+      }
+    }
+  },
+  "checks": [
+    {
+      "level": "build",
+      "name": "native_xtensa_candidate",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "default_bare_board_no_media_notice",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "mounted_card_first_ocr_observation",
+      "status": "FAIL"
+    },
+    {
+      "level": "transport",
+      "name": "mounted_card_spi_init_and_fat",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "enter_redraw",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "enter_mp3_sector_reads_and_pcm",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "ui_flow2_raw_spi_sector_matrix_3_cases_12_checks",
+      "status": "PASS"
+    },
+    {
+      "level": "device_response",
+      "name": "default_and_explicit_cap_topology_4_cases_15_checks",
+      "status": "PASS"
+    },
+    {
+      "level": "device_response",
+      "name": "bare_board_cap_absence_2_negative_controls",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "hardware_and_physical_acoustics",
+      "status": "NOT RUN"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "browser_same_original_no_media",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "browser_uiflow2_keyboard_11_keys_69_assertions",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "browser_sd_and_playback",
+      "status": "NOT RUN"
+    },
+    {
+      "level": "delivery",
+      "name": "platform_gate_2033_pass_8_skipped",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/execution-summary.redacted.json"
+  ],
+  "notes": [
+    "The earlier review and original failure evidence are preserved separately.",
+    "The OCR-only failure is retained. The final playback run used an independently inspected pre-input frame and the same runtime and firmware.",
+    "The guest firmware is the unmodified public release image. Firmware packaging padding is applied as in the original review."
+  ]
+}
