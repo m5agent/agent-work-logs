@@ -11,3 +11,7 @@
 ## PM1 最后一次打印
 
 在默认和单线程 TCG 的两次原版失败中，guest 均完成 RUN 后的 I²C 探测、进入最终打印并返回。随后读到 I²C 空闲、USB EP1 可写且 SOF 持续变化，证据流缺完成字节。通过运行也可短暂进入 HWCDC 的断开分支并恢复，无法据此判定失败根因。以虚拟时间补齐 SOF 的候选在三次 Device Service 复跑中两次通过，一次仍缺完成日志。该实验未随原始帧夹具交付。 [PM1 指令及控制器复测](evidence/hwcdc-postrun-summary.json)
+
+## 合并与验证
+
+本地平台套件执行 2,064 项，无失败，10 项跳过。最终 PR head 7819aec8534503cdba46b44f328f4bfcde0bbdce 保留同一原生补丁和 API 源码，合并提交为 02c046679fd7c7dbb008afd3c4c29e3cfca517df。PR 和合并提交的远端平台及网络隔离检查均通过。#204 保留开放，等待原版 Evil 混杂模式与扩展捕获验收。 [PR #212](https://github.com/m5agent/m5stack-esp-emulator/pull/212) · [PR CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42594949609) · [main CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42595383751)
