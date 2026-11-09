@@ -1,0 +1,1023 @@
+{
+  "scope": "StickS3 PM1 IAP post-RUN USB Serial/JTAG CDC diagnosis on exact stock firmware",
+  "issue": 201,
+  "result": "PARTIAL",
+  "stock_firmware_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+  "initial_virtual_flash_sha256": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+  "release_runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+  "elapsed_sof_candidate_runtime_sha256": "976d2994858b81c04197f3ce78c4774449a8af19b63a941f1fb5829ee738d68d",
+  "esp32s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "profile": "m5sticks3",
+  "lane": "native direct QEMU diagnostic, stock firmware bytes unchanged",
+  "host_input": "QMP send-key a, hold-time 160 ms, 4 s after startup",
+  "marker": "=== Firmware upgrade completed ===",
+  "successful_iap_observed_even_in_post_run_cdc_failure": {
+    "iap_upgrades": 1,
+    "iap_bytes_written": 20480,
+    "iap_app_sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+    "pm1_address_after_run": "0x6e"
+  },
+  "runs": {
+    "post_run_mmio": {
+      "diagnostic_result_sha256": "ea5fb0c79ea75dc6e44f542b4eccc1bd712b0c06ff1bb61e6fdfee6db30486f1",
+      "runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+      "cases": [
+        {
+          "case": "default-1",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8195,
+          "cdc_sha256": "2e76d31ac88642cdc8b052956bcb9e75ee8ad5d61cca732edb35a2ad8dc1bf94",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "default-2",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "9ec06329259f5d83ec0dda87e4a9fa50622ae52191742f18d27d8c3c8242c19e",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-1",
+          "tcg": "single-thread",
+          "result": "FAIL_POST_RUN_CDC_MARKER",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": false,
+          "cdc_bytes": 8134,
+          "cdc_sha256": "484714413d60cfdac63753efc62f30df18563b4d774d4df37c711a0a27fb840f",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-2",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8260,
+          "cdc_sha256": "353eca71071ad7c322300cbcfa5e0f070cb5808757666dae91317adbbd1d041f",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-3",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "e00c7ef804b40de7bbca4fb616c22726efbf2dd1d09e6c354d86dbf0cb8aa0c3",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        }
+      ]
+    },
+    "stock_instruction_trace": {
+      "diagnostic_result_sha256": "8cb2a3d537032f0088c9e77e219b3f694ce7f1295c3519ea0896f7b047755054",
+      "runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+      "cases": [
+        {
+          "case": "default-1",
+          "tcg": "default",
+          "result": "FAIL_POST_RUN_CDC_MARKER",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": false,
+          "cdc_bytes": 8134,
+          "cdc_sha256": "a9b39c177cfdc02bbdb73f9a97a8660c2addbb2f650449134442dbc28bb8d958",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "default-2",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "fd23191ff7983d1c946a9755d000f1d60134ed67db0d60a3035292b36147652e",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-1",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8260,
+          "cdc_sha256": "f3cee2ab5f1b88a9fada58c13b65ed37e04b208d232aa963f4632f0bc71c53ac",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-2",
+          "tcg": "single-thread",
+          "result": "FAIL_POST_RUN_CDC_MARKER",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": false,
+          "cdc_bytes": 8134,
+          "cdc_sha256": "77908cade523af5ae2d243daae209350e9736ec3fd03b1e997f55649928a5cba",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-3",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "a5d0d83294db91b4d3f5b56cbf584eaa1172e3bfdec06de645287e1ee0dd3dd2",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        }
+      ]
+    },
+    "baseline_hwcdc_state_and_write_trace": {
+      "diagnostic_result_sha256": "432c9cdb3a40e66a37d3efcf158125a0a3b343a71e887746ab5f7b942cc816eb",
+      "runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+      "cases": [
+        {
+          "case": "default-1",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "0e71ca7f515700c3447d47116e143c5c8576063f8ad135e2cc8203c3d8774b31",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "default-2",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8162,
+          "cdc_sha256": "58bcc9af6623bf3cccd0f0b85e5f353c83bc916bfbdd41d51d2134b85307783f",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-1",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8260,
+          "cdc_sha256": "d9d5e9bc5717aee57414fd9908e7a5c4ee7c301df988799229d2e045f259a5a0",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        }
+      ]
+    },
+    "elapsed_sof_candidate_direct_trace": {
+      "diagnostic_result_sha256": "c60d95f3ad6625d21b24aab4de078af69e87260e176b88067525f3b5d4ea866d",
+      "runtime_sha256": "976d2994858b81c04197f3ce78c4774449a8af19b63a941f1fb5829ee738d68d",
+      "cases": [
+        {
+          "case": "default-1",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "41ee0de8638b5feeab9b1a9960625ee84a6768c8aaf18e39c3422438d9112d19",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "default-2",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "e9ed29f6658c5626a745c94ab1705bbe2e5b46484d7c9eabaac63c7d1c297c54",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-1",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8211,
+          "cdc_sha256": "0db88253028b9ff62b5c5a40a817686f500d0d2dbb860dfb550ecf48dcbfd55b",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        }
+      ]
+    },
+    "baseline_light_hwcdc_state_trace": {
+      "diagnostic_result_sha256": "d9859757e7a5cc1bc514bf8528dc390058f1f6208b9449614de71b2be2748786",
+      "runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+      "cases": [
+        {
+          "case": "default-1",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8260,
+          "cdc_sha256": "ccad994db3c7a3fac6df6ad4278465246ca33340b6cd462bb1fb84d006276334",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "default-2",
+          "tcg": "default",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8184,
+          "cdc_sha256": "e3ff29a9f307264f17f70125a642401c8522bb7da9d6320c3f84a392313348c9",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-1",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8196,
+          "cdc_sha256": "5ee868085fe53727968f8b34366386a7fe8ad093f530d9e857b02d0fa30aae68",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-2",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8198,
+          "cdc_sha256": "eb88c0b8c8dbea249b5831a746aac31a5f5659dfa4f2d7d7d941e99a8e1185ad",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-3",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8108,
+          "cdc_sha256": "f2006dc74b8ffeac1d7f7614ef1df87080343e987a664d1758dcd944880cd245",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        }
+      ]
+    },
+    "baseline_readonly_mmio_and_dram": {
+      "diagnostic_result_sha256": "727c6c1d490b654846703548d7b6500bbb7e885d8a1960f22e704d5ab073085a",
+      "runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+      "cases": [
+        {
+          "case": "default-1",
+          "tcg": "default",
+          "result": "INCONCLUSIVE_BEFORE_VALID_IAP",
+          "valid_iap": {
+            "iap-upgrades": 0,
+            "iap-bytes-written": 0,
+            "iap-app-sha256": ""
+          },
+          "completion_marker_present": false,
+          "cdc_bytes": 895,
+          "cdc_sha256": "581230f29af24386d304d6516c87e3ff4b30699b933a83638768c5ff6a2006e7",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "default-2",
+          "tcg": "default",
+          "result": "INCONCLUSIVE_BEFORE_VALID_IAP",
+          "valid_iap": null,
+          "completion_marker_present": false,
+          "cdc_bytes": 345,
+          "cdc_sha256": "886015073b58eb0e816a6f27fad6ad2654a42dc3b70b6c197f29f29ac0417fd3",
+          "qemu_exit_before_owned_cleanup": -11,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-1",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8260,
+          "cdc_sha256": "7f2acb617fbf25650825988aba61363bc26bb77606ef1bac8e3ca3eb02df757c",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-2",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8240,
+          "cdc_sha256": "7f2f08ef654ba29ad45d5a27eccc9fd108daf38011b6a2279f5f9cb8f27165f9",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        },
+        {
+          "case": "single-3",
+          "tcg": "single-thread",
+          "result": "PASS",
+          "valid_iap": {
+            "iap-upgrades": 1,
+            "iap-bytes-written": 20480,
+            "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7"
+          },
+          "completion_marker_present": true,
+          "cdc_bytes": 8230,
+          "cdc_sha256": "e334e7948619dceaaff77a1c6b479bd0213f17b4af0ec55e8b3c7c1f803e2ff6",
+          "qemu_exit_before_owned_cleanup": null,
+          "virtual_cpu_indices": [
+            0,
+            1
+          ],
+          "owned_qemu_reaped": true
+        }
+      ]
+    }
+  },
+  "mmio_failed_single_thread_two_timepoints": {
+    "case": "single-1",
+    "completion_marker_present": false,
+    "mmio_samples": [
+      {
+        "elapsed_seconds": 9.203,
+        "phase": "valid RUN commit first seen; marker absent",
+        "i2c0": {
+          "base": "0x60013000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000000",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80003000",
+            "0x80000901",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "i2c1": {
+          "base": "0x60027000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000080",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80001100",
+            "0x00002000",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "usb_serial_jtag": {
+          "ep1_conf": "0x00000002",
+          "raw": "0x0000000a",
+          "st": "0x00000000",
+          "ena": "0x00000000",
+          "conf0": "0x00004200",
+          "frame": "0x000000c2"
+        },
+        "cdc_tx_bytes": 8134,
+        "iap_active": false,
+        "pm1_addr": 110
+      },
+      {
+        "elapsed_seconds": 11.733,
+        "phase": "marker still absent after RUN",
+        "i2c0": {
+          "base": "0x60013000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000000",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80003000",
+            "0x80000901",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "i2c1": {
+          "base": "0x60027000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000080",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80001100",
+            "0x00002000",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "usb_serial_jtag": {
+          "ep1_conf": "0x00000002",
+          "raw": "0x0000000a",
+          "st": "0x00000000",
+          "ena": "0x00000000",
+          "conf0": "0x00004200",
+          "frame": "0x000000a9"
+        },
+        "cdc_tx_bytes": 8134,
+        "iap_active": false,
+        "pm1_addr": 110
+      }
+    ]
+  },
+  "mmio_passing_single_thread_two_timepoints": {
+    "case": "single-2",
+    "completion_marker_present": true,
+    "mmio_samples": [
+      {
+        "elapsed_seconds": 9.083,
+        "phase": "completion marker present",
+        "i2c0": {
+          "base": "0x60013000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000000",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80003000",
+            "0x80000901",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "i2c1": {
+          "base": "0x60027000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000080",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80001100",
+            "0x00002000",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "usb_serial_jtag": {
+          "ep1_conf": "0x00000002",
+          "raw": "0x0000000a",
+          "st": "0x00000000",
+          "ena": "0x00000000",
+          "conf0": "0x00004200",
+          "frame": "0x00000063"
+        },
+        "cdc_tx_bytes": 8260,
+        "iap_active": false,
+        "pm1_addr": 110
+      },
+      {
+        "elapsed_seconds": 10.087,
+        "phase": "one second after completion",
+        "i2c0": {
+          "base": "0x60013000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000000",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80003000",
+            "0x80000901",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "i2c1": {
+          "base": "0x60027000",
+          "ctr": "0x00000113",
+          "sr": "0x00000000",
+          "raw": "0x00000080",
+          "ena": "0x00000000",
+          "st": "0x00000000",
+          "commands": [
+            "0x80001100",
+            "0x00002000",
+            "0x80002000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000",
+            "0x00000000"
+          ]
+        },
+        "usb_serial_jtag": {
+          "ep1_conf": "0x00000002",
+          "raw": "0x0000000a",
+          "st": "0x00000000",
+          "ena": "0x00000000",
+          "conf0": "0x00004200",
+          "frame": "0x0000038d"
+        },
+        "cdc_tx_bytes": 8260,
+        "iap_active": false,
+        "pm1_addr": 110
+      }
+    ]
+  },
+  "actual_stock_instruction_path": {
+    "observed": [
+      {
+        "case": "default-1",
+        "completion_marker_present": false,
+        "guest_pc_events": [
+          "0 0x42003070",
+          "0 0x420030a0",
+          "0 0x420030a3",
+          "0 0x420030ac",
+          "0 0x420030af",
+          "0 0x42003101",
+          "0 0x42003106",
+          "0 0x42003109"
+        ]
+      },
+      {
+        "case": "default-2",
+        "completion_marker_present": true,
+        "guest_pc_events": [
+          "1 0x42003070",
+          "1 0x420030a0",
+          "1 0x420030a3",
+          "1 0x420030ac",
+          "1 0x420030af",
+          "1 0x42003101",
+          "1 0x42003106",
+          "1 0x42003109"
+        ]
+      },
+      {
+        "case": "single-2",
+        "completion_marker_present": false,
+        "guest_pc_events": [
+          "0 0x42003070",
+          "0 0x420030a0",
+          "0 0x420030a3",
+          "0 0x420030ac",
+          "0 0x420030af",
+          "0 0x42003101",
+          "0 0x42003106",
+          "0 0x42003109"
+        ]
+      }
+    ],
+    "post_run_wire_probe_call_return": [
+      "0x420030ac",
+      "0x420030af"
+    ],
+    "completion_string_load": "0x42003101",
+    "completion_print_call_return": [
+      "0x42003106",
+      "0x42003109"
+    ],
+    "observation": "The exact stock completion print call executed and returned in both missing-marker cases."
+  },
+  "hwcdc_state_at_print_in_passing_controls": {
+    "light_release_runtime": [
+      {
+        "case": "default-1",
+        "guest_state_at_final_print": [
+          "P 1 0x42003106 sof=1 ticks=4 connected=1 queued=0",
+          "P 1 0x4200a8cc sof=1 ticks=4 connected=1 queued=0",
+          "P 1 0x4200a8cc sof=1 ticks=4 connected=1 queued=34",
+          "P 1 0x42003109 sof=1 ticks=4 connected=1 queued=36"
+        ],
+        "post_marker_dram": [
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 2,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          },
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 0,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          }
+        ]
+      },
+      {
+        "case": "default-2",
+        "guest_state_at_final_print": [
+          "P 0 0x42003106 sof=0 ticks=0 connected=1 queued=0",
+          "P 0 0x4200a8af sof=0 ticks=0 connected=0 queued=0",
+          "P 0 0x4200a8af sof=0 ticks=0 connected=0 queued=34",
+          "P 0 0x42003109 sof=0 ticks=0 connected=0 queued=36"
+        ],
+        "post_marker_dram": [
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 4,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          },
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 3,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          }
+        ]
+      },
+      {
+        "case": "single-1",
+        "guest_state_at_final_print": [
+          "P 0 0x42003106 sof=1 ticks=5 connected=0 queued=159",
+          "P 0 0x4200a8af sof=1 ticks=5 connected=0 queued=159",
+          "P 0 0x4200a8af sof=1 ticks=5 connected=0 queued=193",
+          "P 0 0x42003109 sof=1 ticks=5 connected=0 queued=195"
+        ],
+        "post_marker_dram": [
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 3,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          },
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 5,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          }
+        ]
+      },
+      {
+        "case": "single-2",
+        "guest_state_at_final_print": [
+          "P 0 0x42003106 sof=1 ticks=5 connected=0 queued=16",
+          "P 0 0x4200a8af sof=1 ticks=5 connected=0 queued=16",
+          "P 0 0x4200a8af sof=1 ticks=5 connected=0 queued=50",
+          "P 0 0x42003109 sof=1 ticks=5 connected=0 queued=52"
+        ],
+        "post_marker_dram": [
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 2,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          },
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 5,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          }
+        ]
+      },
+      {
+        "case": "single-3",
+        "guest_state_at_final_print": [
+          "P 0 0x42003106 sof=1 ticks=4 connected=1 queued=0",
+          "P 0 0x4200a8cc sof=1 ticks=4 connected=1 queued=0",
+          "P 0 0x4200a8cc sof=1 ticks=4 connected=1 queued=34",
+          "P 0 0x42003109 sof=1 ticks=4 connected=1 queued=36"
+        ],
+        "post_marker_dram": [
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 1,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          },
+          {
+            "sof_connected": 1,
+            "remaining_sof_miss_budget": 2,
+            "driver_connected": 1,
+            "ring_bytes_waiting": 0
+          }
+        ]
+      }
+    ],
+    "elapsed_sof_candidate": [
+      {
+        "case": "default-1",
+        "guest_state_at_final_print": [
+          "P 0 0x42003106 sof=1 ticks=0 connected=1 queued=0",
+          "P 0 0x4200a8cc sof=1 ticks=0 connected=1 queued=0",
+          "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+          "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+          "P 0 0x4200a8cc sof=1 ticks=0 connected=1 queued=34",
+          "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+          "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+          "P 0 0x42003109 sof=1 ticks=0 connected=1 queued=36"
+        ],
+        "post_marker_dram": []
+      },
+      {
+        "case": "default-2",
+        "guest_state_at_final_print": [
+          "P 1 0x42003106 sof=1 ticks=3 connected=1 queued=0",
+          "P 1 0x4200a8cc sof=1 ticks=3 connected=1 queued=0",
+          "W 1 0x4200a90a addr=0x60038004 value=0x00000001",
+          "W 1 0x4200a47d addr=0x60038010 value=0x00000008",
+          "P 1 0x4200a8cc sof=1 ticks=3 connected=1 queued=34",
+          "W 1 0x4200a90a addr=0x60038004 value=0x00000001",
+          "W 1 0x4200a47d addr=0x60038010 value=0x00000008",
+          "P 1 0x42003109 sof=1 ticks=3 connected=1 queued=36"
+        ],
+        "post_marker_dram": []
+      },
+      {
+        "case": "single-1",
+        "guest_state_at_final_print": [
+          "P 0 0x42003106 sof=1 ticks=1 connected=1 queued=0",
+          "P 0 0x4200a8cc sof=1 ticks=1 connected=1 queued=0",
+          "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+          "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+          "P 0 0x4200a8cc sof=1 ticks=1 connected=1 queued=34",
+          "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+          "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+          "P 0 0x42003109 sof=1 ticks=1 connected=1 queued=36"
+        ],
+        "post_marker_dram": []
+      }
+    ],
+    "sample_real_candidate_fifo_and_interrupt_writes": {
+      "case": "default-1",
+      "ep1_data_writes_after_print_entry": 64,
+      "first_inta_or_ep1_conf_writes_after_print_entry": [
+        "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+        "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+        "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+        "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+        "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+        "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+        "W 0 0x4200a90a addr=0x60038004 value=0x00000001",
+        "W 0 0x4200a47d addr=0x60038010 value=0x00000008",
+        "W 1 0x4200a6ab addr=0x60038010 value=0x00000000",
+        "W 1 0x4200a74b addr=0x60038004 value=0x00000001"
+      ]
+    },
+    "interpretation": "Some stock passing controls entered the disconnected HWCDC fallback while printing and temporarily queued the full 36 bytes (34-byte line plus CRLF). Queue later drained. A sampled SOF-disconnected, zero-budget case later recovered. The same branch and queue were not captured in a missing-marker run."
+  },
+  "exact_stock_guest_addresses": {
+    "hwcdc_tick_hook": "0x4037538b",
+    "sof_connected_byte": "0x3fc97dfc",
+    "remaining_sof_miss_budget": "0x3fc97df8",
+    "driver_connected_byte": "0x3fc97e04",
+    "tx_ring_handle": "0x3fc97e50",
+    "tx_ring_waiting_bytes_offset": 56,
+    "disconnected_write_branch": "0x4200a8af",
+    "connected_write_branch": "0x4200a8cc"
+  },
+  "conclusion": {
+    "confirmed": "Native completion marker loss occurs after the exact guest print call has executed and returned. Both sampled I2C controllers were idle after valid RUN. EP1 remained writable with SOF/frame activity and no enabled pending IRQ. Missing output reproduced with default and single-thread TCG.",
+    "unresolved": "The actual HWCDC branch, ring count and numeric write return in a missing-marker run remain unavailable. The observed transient disconnect in passing controls does not prove causality.",
+    "candidate_boundary": "Instrumented direct control passed 3/3. Separate exact Device Service default-TCG runs reported 2/3 PASS and one identical post-IAP marker failure. The candidate does not meet closure.",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "source_change_for_diagnosis": false,
+    "cleanup": "Every owned direct guest reaped; only virtual Flash and eFuse copies used."
+  },
+  "source_cross_checks": [
+    "https://github.com/espressif/arduino-esp32/blob/2.0.17/cores/esp32/HWCDC.cpp",
+    "https://github.com/espressif/esp-idf/blob/v4.4.7/components/esp_ringbuf/ringbuf.c"
+  ]
+}

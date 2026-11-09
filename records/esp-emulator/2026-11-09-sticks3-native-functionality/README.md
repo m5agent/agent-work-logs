@@ -17,3 +17,5 @@
 [完整报告](report.md)记录首次 PM1 主机退出和 guest spinlock reset，后续成功运行另列。 [结构化结果](run.json) · [公开证据摘要](evidence/validation-summary.json)
 
 源码改动由项目 PR 提供。工作记录保留源固件、规范化 Flash、运行时、帧和证据 SHA-256。证据摘要已省略本机路径、私有端点和执行标识，未附原始固件或运行日志。
+
+[原始 Wi-Fi 帧与 PM1 输出复测](raw-wifi-followup.md)
