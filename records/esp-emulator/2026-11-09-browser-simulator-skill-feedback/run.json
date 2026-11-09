@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Issue 211 browser simulator Skill and workbench evidence",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/211",
+    "base_commit": "f4f076c2e07f727ce9ae23ddfa6ba7211f1b967e",
+    "commit": "6d02f46685e4b60d4553fcb312e2c81a4b45c2e8"
+  },
+  "hardware": {
+    "model": "CoreS3 K128",
+    "kind": "virtual-device",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "stock": {
+      "source": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+      "source_bytes": 16121856,
+      "normalized": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+      "normalized_bytes": 16777216
+    },
+    "fixed_example_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+    "programming_fixture_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d"
+  },
+  "execution": {
+    "environment": "desktop Chromium, public HTTPS baseline and isolated static export",
+    "package_sha256": "88a0e05264e95ab8e4de33afc53ee92ce8ab530b511d8443e8abc3b29181d0d0"
+  },
+  "checks": [
+    {
+      "level": "build",
+      "status": "PASS",
+      "scope": "2051 platform tests, 10 skipped; browser contracts, Skill package and export"
+    },
+    {
+      "level": "data_behavior",
+      "status": "PASS",
+      "scope": "published baseline, exact fixed example held touch and independent PIR"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "PASS",
+      "scope": "exported CoreS3 stock Develop screen and dual SHA"
+    },
+    {
+      "level": "transport",
+      "status": "PASS",
+      "scope": "exported built-in UIFlow2 editor and guest output"
+    },
+    {
+      "level": "transport",
+      "status": "PARTIAL",
+      "scope": "stock REPL handshake timed out; display remains independently verified"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "physical hardware and other boards"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/production-touch-summary.json",
+      "sha256": "55865639391dc72452f87973c2b7594ec737d6f585cff1f0fcb4afb765e5c049"
+    },
+    {
+      "path": "evidence/exported-stock-summary.json",
+      "sha256": "4f02439ce56679d4c7ef8c90e002c72e1cec98c3188fdf3a5ce1ff5e17a016d3"
+    },
+    {
+      "path": "evidence/exported-uiflow-summary.json",
+      "sha256": "9324da85bbc2820d3db9bd40e74b19d0416997d9feb7c1a4f491427b028728f6"
+    },
+    {
+      "path": "evidence/firmware-identity.png",
+      "sha256": "c78419088a863e616fef3d11085f5bab6c0456d6e7e93ef1a241153e389807e9"
+    }
+  ],
+  "notes": [
+    "Raw reports include private test paths and unique browser session IDs. Archive includes only whitelisted fields and hashes.",
+    "The deployed runtime and the isolated export are distinct execution identities."
+  ]
+}
