@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer ADV MP3 Player v1.0.0 startup recheck",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/TurbulentGoat/cardputer-adv-mp3-player",
+    "base_commit": "fa967592011e9e8495ef3f540422eac4d6169adc",
+    "release": "https://github.com/TurbulentGoat/cardputer-adv-mp3-player/releases/tag/v1.0.0",
+    "emulator_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92"
+  },
+  "hardware": {
+    "device": "Cardputer ADV",
+    "soc": "ESP32-S3",
+    "status": "NOT RUN",
+    "reason": "No matching Cardputer ADV fixture was configured in the available device test center."
+  },
+  "firmware": {
+    "name": "Cardputer ADV MP3 Player",
+    "version": "v1.0.0",
+    "kind": "merged",
+    "source_size_bytes": 885600,
+    "source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "virtual_flash_size_bytes": 8388608,
+    "virtual_flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d"
+  },
+  "execution": {
+    "environment": "Device Service / native QEMU / ESP32-S3 / Cardputer ADV",
+    "profile": "m5cardputeradv",
+    "scope": "virtual-device validation",
+    "runtime_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+    "task_id": "redacted",
+    "session_id": "redacted",
+    "experiments": [
+      "target-no-media",
+      "target-mp3-media",
+      "reference-uiflow2",
+      "target-application-register-sampling",
+      "target-alternate",
+      "control-alternate",
+      "target-panel",
+      "control-panel",
+      "target-memory",
+      "target-i2c",
+      "target-lock-confirm",
+      "stock-withsd-match",
+      "bare-withsd",
+      "bare-nosd"
+    ],
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "alternate_runtime_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+    "diagnostic_board_runtime_sha256": "167aaabc6513e0b9703e3ad7512020be52f0136aff1039c531dfb5bf64160702"
+  },
+  "checks": [
+    {
+      "name": "public_merged_image_identity",
+      "status": "PASS",
+      "detail": "Public tagged binary and release asset matched the evaluated source bytes."
+    },
+    {
+      "name": "baseline_rom_flash_boot",
+      "status": "PASS",
+      "detail": "ROM read the SPI Flash segments and jumped to the second-stage bootloader entry."
+    },
+    {
+      "name": "baseline_application_ready_frame",
+      "status": "FAIL",
+      "detail": "No nonblack pixels in the observed framebuffer."
+    },
+    {
+      "name": "physical_cardputer_adv",
+      "status": "NOT RUN",
+      "detail": "No matching configured fixture."
+    },
+    {
+      "name": "target_extended_ready_frame_without_media",
+      "status": "FAIL",
+      "detail": "At 5, 15, 35 and 65 seconds after running, all frames were black, serial held at 225 bytes, and readiness timed out."
+    },
+    {
+      "name": "target_extended_ready_frame_with_media",
+      "status": "FAIL",
+      "detail": "FAT32/MBR media with synthetic MP3 was attached. All four target frames remained black and readiness timed out. Guest mount was not observed."
+    },
+    {
+      "name": "same_board_reference_frame",
+      "status": "PASS",
+      "detail": "UIFlow2 v2.5.3 showed its Offline interface by the 5-second sample and passed the same readiness predicate."
+    },
+    {
+      "name": "target_application_image_execution",
+      "status": "PASS",
+      "detail": "Both CPU PCs and VECBASE were within the exact target app0 executable segments in the isolated QMP diagnostic."
+    },
+    {
+      "name": "mp3_function",
+      "status": "NOT RUN",
+      "detail": "The diagnostic build rendered the UI but SD mount failed; selection, decoding and playback were not reached."
+    },
+    {
+      "name": "root_cause",
+      "status": "PASS",
+      "detail": "Exact guest stack and memory prove the I2C1 HAL self-deadlock, while a controlled runtime A/B proves the virtual board's default Cap attachment triggers the black-screen path."
+    },
+    {
+      "name": "retained_session_cleanup",
+      "status": "PASS",
+      "detail": "All 20 owned sessions were stopped with history retained, mutable Flash released and no guest process left. All four owned services were stopped."
+    },
+    {
+      "name": "alternate_native_runtime_comparison",
+      "status": "PARTIAL",
+      "detail": "The target remained black after 18 seconds, while the reference passed readiness using the same ROM, alternate runtime and FAT32/MBR image."
+    },
+    {
+      "name": "target_panel_and_storage_traffic",
+      "status": "PARTIAL",
+      "detail": "Target issued panel read-ID command 0x04; no panel init, pixel-write or SPI SD commands were observed. Reference issued 0x11, 0x29, 0x2a, 0x2b and 0x2c and rendered a UI."
+    },
+    {
+      "name": "target_i2c1_self_deadlock",
+      "status": "PASS",
+      "detail": "loopTask TCB 0x3fcefa98 was both holder and waiter of the same ordinary mutex 0x3fcec7b4, with portMAX_DELAY."
+    },
+    {
+      "name": "virtual_board_gpio_trigger",
+      "status": "PASS",
+      "detail": "Removing only the four default virtual SPI Cap attachments on GPIO5/6 restored application UI in the same firmware, ROM, and SD configuration."
+    },
+    {
+      "name": "target_application_screen_diagnostic_wiring",
+      "status": "PASS",
+      "detail": "At 5, 12 and 20 seconds the same public firmware showed the no-card screen with and without attached media, with identical framebuffer SHA-256."
+    },
+    {
+      "name": "target_sd_mount_diagnostic_wiring",
+      "status": "FAIL",
+      "detail": "The verified FAT32 fixture was attached but the guest reported FR_NOT_READY. Trace reached CMD0/CMD59, then no CMD8 or CMD17."
+    }
+  ],
+  "evidence": [
+    "evidence/execution-summary.redacted.json"
+  ],
+  "notes": [
+    "The service running state is a process milestone. Application readiness was evaluated separately.",
+    "Raw API responses and exact internal session identities remain in local evidence; this record contains derived observations and source hashes."
+  ]
+}

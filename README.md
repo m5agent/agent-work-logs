@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-09 | Firmware Review Service | Cardputer ADV MP3 Player v1.0.0 启动复核 | `PARTIAL`（虚拟板默认扩展触发 I2C1 自锁，板级 A/B 恢复画面；SD 初始化另有限制，真机与播放未验证） | [查看](records/firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/) |
 | 2026-11-08 | UIFlow2 UHF | Inventory 帧解析修复与 35 会话回归 | `PARTIAL`（最终9/9通过，原始4失败与候选3失败保留，Core2/RF/时序分片未测） | [查看](records/uiflow2/2026-11-08-uhf-inventory-parser/) |
 | 2026-11-08 | UIFlow2 | Display、ADC 与 M5UI 接口文档修订及虚拟设备验证 | `PARTIAL`（29方法99缺参/58调用与五会话验收；UV/portrait边界保留；公开补丁可复现） | [查看](records/uiflow2/2026-11-08-interface-docs-validation/) |
 | 2026-11-08 | UIFlow2 StickS3 | TLS 时间校验与预期拒绝复核 | `PARTIAL`（公开2.5.5 preview三输入PASS；首轮串口观测FAIL保留；AWS/原2.5.3未测） | [查看](records/uiflow2/2026-11-08-sticks3-tls-validity/) |
