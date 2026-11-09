@@ -17,3 +17,7 @@
 - [Native 脱敏摘要](evidence/native-cores3-summary.json)
 
 Pages、物理硬件和其它型号属于 `NOT RUN`。
+
+## 后续发布
+
+- [正式 Pages 发布尝试](followups/2026-11-09-formal-pages-publication/)保留 hosted 门槛失败和部署跳过结果。

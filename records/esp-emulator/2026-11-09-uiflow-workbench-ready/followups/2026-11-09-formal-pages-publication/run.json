@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "FAIL",
+  "title": "Formal Pages publication of the UIFlow workbench ready cue",
+  "source": {
+    "issue": "User-authorized formal GitHub Pages publication",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/195",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "27fcebd438b6c412b272fe90d0f71a1ab7914735",
+    "deployment_commit": "70ca46258598294eb5e5852115b1dfce386d8754"
+  },
+  "hardware": {},
+  "firmware": {
+    "deviceId": "atoms3-lite",
+    "board": "m5atoms3lite",
+    "profile": "atoms3-lite-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+    "firmwareSha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+    "wasmSha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+    "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+    "clockDivisor": 1,
+    "oneInsnPerTb": true
+  },
+  "execution": {
+    "environment": "GitHub Actions macOS ARM64 build and formal Pages gate",
+    "task_id": "",
+    "session_id": "",
+    "observed_at": "2026-11-09T03:35:43.005194+00:00",
+    "terminal_observed_at": "2026-11-09T04:15:07.959158+00:00"
+  },
+  "checks": [
+    {
+      "name": "first_dispatch_runner_allocation",
+      "status": "FAIL",
+      "run": 42556851376,
+      "detail": "Unsupported macos-14 ARM64 runner before any job steps. Deploy skipped."
+    },
+    {
+      "name": "runner_label_only_workflow_change",
+      "status": "PASS",
+      "paths": [
+        ".github/workflows/public-site.yml",
+        "docs/pages-deployment.md",
+        "platform/tests/test_public_site.py"
+      ]
+    },
+    {
+      "name": "targeted_public_site_tests",
+      "status": "PASS",
+      "tests": 10
+    },
+    {
+      "name": "project_snapshot_and_pr_scope",
+      "status": "PASS"
+    },
+    {
+      "name": "second_dispatch_runner_allocation",
+      "status": "PASS",
+      "run": 42557006648,
+      "runner": "macos-15"
+    },
+    {
+      "name": "formal_build_and_admitted_guest_gate",
+      "status": "FAIL",
+      "detail": "Build and export PASS. Hosted gate: 15 PASS, 1 FAIL, 44 NOT RUN."
+    },
+    {
+      "name": "formal_pages_deployment",
+      "status": "NOT RUN",
+      "detail": "Deploy job skipped after gate failure."
+    },
+    {
+      "name": "live_artifact_and_workbench_readback",
+      "status": "NOT RUN",
+      "detail": "Deploy job skipped after gate failure."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "hosted_pinned_build_and_export",
+      "status": "PASS"
+    },
+    {
+      "name": "local_atom_s3_lite_comparison",
+      "status": "PASS",
+      "checks": 58
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/dispatch-summary.json",
+      "kind": "derived_summary"
+    },
+    {
+      "path": "evidence/hosted-gate-summary.json",
+      "kind": "derived_summary"
+    },
+    {
+      "url": "https://github.com/m5agent/agent-work-logs/blob/17651d171c0774c70b466b326b01413f478cfd76/records/esp-emulator/2026-11-09-uiflow-workbench-ready/report.md",
+      "kind": "immutable_local_virtual_device_validation"
+    }
+  ],
+  "notes": [
+    "Hosted gate failed and deployment was skipped.",
+    "Independent local comparison passed. Recovery will be a separate execution."
+  ]
+}

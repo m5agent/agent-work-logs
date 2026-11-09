@@ -1,0 +1,132 @@
+{
+  "kind": "uiflow-ready-formal-pages-publication-attempt",
+  "status": "FAIL",
+  "observed_at": "2026-11-09T03:35:43.005194+00:00",
+  "source": {
+    "original_uiflow_commit": "d111addaf1ff4919951b40cd2926f6b90517cf46",
+    "uiflow_merge_commit": "27fcebd438b6c412b272fe90d0f71a1ab7914735",
+    "runner_migration_commit": "70ca46258598294eb5e5852115b1dfce386d8754",
+    "runner_migration_parent": "27fcebd438b6c412b272fe90d0f71a1ab7914735",
+    "workflow_before_sha256": "6f753d3fd97033a2ddde4e5cbc173f114fb1f32c699dd28c15d24b548fb18c23",
+    "workflow_after_sha256": "a1f594bf1bdfd127fcedf663f6d37b42804f88a2177d803e89b2e95ffd69b7d1",
+    "workflow_only_runner_label_changed": true,
+    "changed_paths": [
+      ".github/workflows/public-site.yml",
+      "docs/pages-deployment.md",
+      "platform/tests/test_public_site.py"
+    ],
+    "workbench_assets_sha256": {
+      "platform/web/index.html": "6073ea76bc7ea530f6b77206ec4d7de0d65eb4ff35be02e808cb145782ad1b2c",
+      "platform/web/public.css": "1f9eeda0b6c435a3b45c6b807ef001c40caa987b3b32d03673a21dfecab9ab4a",
+      "platform/web/public.js": "3aff72322078855cab38d2967982fed134e60e611408e295d9456da033ad6243"
+    }
+  },
+  "official_runner_retirement": {
+    "date": "2026-11-02",
+    "source": "https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement/"
+  },
+  "first_dispatch": {
+    "id": 42556851376,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42556851376",
+    "head": "27fcebd438b6c412b272fe90d0f71a1ab7914735",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "build_started_steps": 0,
+    "deploy_conclusion": "skipped",
+    "allocation_annotation": "The configuration 'macos-14-arm64-us-default' is not supported"
+  },
+  "production_dispatch": {
+    "id": 42557006648,
+    "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42557006648",
+    "head": "70ca46258598294eb5e5852115b1dfce386d8754",
+    "status_at_draft": "in_progress",
+    "runner": "macos-15",
+    "job_setup": "PASS",
+    "terminal_status": "FAIL",
+    "ended_at": "2026-11-09T04:06:29Z",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "failure",
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42557006648/job/128964887591"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "skipped",
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42557006648/job/128973920925"
+      }
+    ],
+    "build_and_export": "PASS",
+    "guest_gate": "FAIL",
+    "pages_artifact_upload": "SKIPPED"
+  },
+  "live": {
+    "status": "NOT RUN",
+    "manifest_sha256": null,
+    "actual_public_js_sha256": null,
+    "ui_readback": null,
+    "detail": "Deployment skipped following the hosted gate failure."
+  },
+  "checks": [
+    {
+      "name": "first_dispatch_runner_allocation",
+      "status": "FAIL",
+      "run": 42556851376,
+      "detail": "Unsupported macos-14 ARM64 runner before any job steps. Deploy skipped."
+    },
+    {
+      "name": "runner_label_only_workflow_change",
+      "status": "PASS",
+      "paths": [
+        ".github/workflows/public-site.yml",
+        "docs/pages-deployment.md",
+        "platform/tests/test_public_site.py"
+      ]
+    },
+    {
+      "name": "targeted_public_site_tests",
+      "status": "PASS",
+      "tests": 10
+    },
+    {
+      "name": "project_snapshot_and_pr_scope",
+      "status": "PASS"
+    },
+    {
+      "name": "second_dispatch_runner_allocation",
+      "status": "PASS",
+      "run": 42557006648,
+      "runner": "macos-15"
+    },
+    {
+      "name": "formal_build_and_admitted_guest_gate",
+      "status": "FAIL",
+      "detail": "Build and export PASS. Hosted gate: 15 PASS, 1 FAIL, 44 NOT RUN."
+    },
+    {
+      "name": "formal_pages_deployment",
+      "status": "NOT RUN",
+      "detail": "Deploy job skipped after gate failure."
+    },
+    {
+      "name": "live_artifact_and_workbench_readback",
+      "status": "NOT RUN",
+      "detail": "Deploy job skipped after gate failure."
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "hosted_pinned_build_and_export",
+      "status": "PASS"
+    },
+    {
+      "name": "local_atom_s3_lite_comparison",
+      "status": "PASS",
+      "checks": 58
+    }
+  ],
+  "immutable_local_virtual_device_evidence": "https://github.com/m5agent/agent-work-logs/blob/17651d171c0774c70b466b326b01413f478cfd76/records/esp-emulator/2026-11-09-uiflow-workbench-ready/report.md",
+  "terminal_observed_at": "2026-11-09T04:15:07.959158+00:00"
+}
