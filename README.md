@@ -56,6 +56,7 @@
 | 2026-11-08 | UIFlow2 UHF | Inventory 帧解析修复与 35 会话回归 | `PARTIAL`（最终9/9通过，原始4失败与候选3失败保留，Core2/RF/时序分片未测） | [查看](records/uiflow2/2026-11-08-uhf-inventory-parser/) |
 | 2026-11-08 | UIFlow2 | Display、ADC 与 M5UI 接口文档修订及虚拟设备验证 | `PARTIAL`（29方法99缺参/58调用与五会话验收；UV/portrait边界保留；公开补丁可复现） | [查看](records/uiflow2/2026-11-08-interface-docs-validation/) |
 | 2026-11-08 | UIFlow2 StickS3 | TLS 时间校验与预期拒绝复核 | `PARTIAL`（公开2.5.5 preview三输入PASS；首轮串口观测FAIL保留；AWS/原2.5.3未测） | [查看](records/uiflow2/2026-11-08-sticks3-tls-validity/) |
+| 2026-11-09 | Firmware Review Service | StackChan 和 StickC Plus2 设备映射 | 映射 PASS，虚拟会话就绪 PARTIAL | [查看](records/firmware-review-service/2026-11-09-device-code-mapping/) |
 | 2026-11-06 | Firmware Review Service | Codex 恢复、离线声明识别与 A/B 独立复审 | `PASS`（31项回归；同 BIN virtual-device + A轮廓/B切色断言；快照复审、未提交） | [查看](records/firmware-review-service/2026-11-06-review-recovery/) |
 | 2026-11-06 | nuxt-m5-docs | 全部知识源与双知识库同步 | `PASS`（3231 CSV/467 PDF覆盖就绪；ESP 198对象及索引回读、零变更复跑；历史全目录复验PARTIAL） | [查看](records/nuxt-m5-docs/2026-11-06-knowledge-refresh/) |
 | 2026-11-06 | OpenViking | v0.5.3 历史会话记忆抽取与保真恢复 | `PASS`（49,420条新恢复；85,245条历史全覆盖；786外部结果保真纠正；独立启动压缩未改） | [查看](records/volcengine-openviking/2026-11-06-session-extraction-recovery/followups/2026-11-06-historical-backlog/executions/2026-11-06-batch-01/) |
