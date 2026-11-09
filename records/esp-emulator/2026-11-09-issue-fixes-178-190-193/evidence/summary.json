@@ -1,0 +1,165 @@
+{
+  "kind": "issue-repair-pre-pr-validation",
+  "status": "PARTIAL",
+  "observed_at": "2026-11-09T01:44:10.570094+00:00",
+  "base_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92",
+  "integration_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7",
+  "runtime_binary_sha256": "27df1b40de946c694b8c193ad850668118eea8656f0308e6e77b322f0b2c695e",
+  "issues": {
+    "178": "PARTIAL, named recovery and regressions PASS, repeated load open",
+    "190": "PASS static",
+    "191": "PASS static",
+    "192": "PARTIAL, targeted and timeout PASS, full load open",
+    "193": "PASS 19 VERIFIED plus expected FAIL negative",
+    "188": "REVIEW, v0.51.0 and existing DSI PHY blocker"
+  },
+  "checks": [
+    {
+      "name": "metadata_190_191",
+      "status": "PASS",
+      "device_fields": 3,
+      "public_driver_doc_hashes": 8,
+      "text_only_blockers": 5
+    },
+    {
+      "name": "classic_178_scoped",
+      "status": "PASS",
+      "cases": [
+        "AtomLite direct recovery",
+        "Core2 direct",
+        "StickC direct",
+        "AtomLite cold qemu-esptool Device Service",
+        "AtomLite separate host-image control"
+      ]
+    },
+    {
+      "name": "classic_178_full_repeated_load",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "peripheral_192_scoped",
+      "status": "PASS",
+      "positive_cases": 2,
+      "expected_timeout_failure": true,
+      "load_range": [
+        6.727,
+        8.68
+      ]
+    },
+    {
+      "name": "peripheral_192_full_load",
+      "status": "NOT RUN",
+      "detail": "The last warmup peaked at 7.688 below gate 10.0 and started no guest. Two complete rounds of 68 remain outstanding."
+    },
+    {
+      "name": "unit_193_provenance",
+      "status": "PASS",
+      "positive_cases": 19,
+      "verified": 19,
+      "negative_control": "FAIL rc1 as expected on wrong required SHA"
+    },
+    {
+      "name": "tab5_188",
+      "status": "REVIEW",
+      "upstream_formal_release": "v0.51.0",
+      "dsi_phy_blocker_retained": true,
+      "new_guest": "NOT RUN"
+    },
+    {
+      "name": "full_platform_r1",
+      "status": "FAIL",
+      "tests_run": 2039,
+      "seconds": 146.212,
+      "skipped": 10,
+      "failure_count": 1,
+      "reason": "New dated evidence had no matching freshness-index row before the documentation correction."
+    },
+    {
+      "name": "full_platform_r2",
+      "status": "PASS",
+      "source_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7",
+      "tests_run": 2039,
+      "passed": 2029,
+      "skipped": 10,
+      "seconds": 129.987
+    },
+    {
+      "name": "corrected_docs_contracts",
+      "status": "PASS",
+      "tests": 50
+    },
+    {
+      "name": "node_contracts",
+      "status": "PASS",
+      "scripts": 30
+    },
+    {
+      "name": "offline_unit_evidence",
+      "status": "PASS",
+      "tests": 68
+    },
+    {
+      "name": "four_validators",
+      "status": "PASS",
+      "markers": [
+        "PROJECT_SNAPSHOT_OK",
+        "RUNTIME_COVERAGE_OK",
+        "PERIPHERAL_CATALOG_OK",
+        "QEMU_PROFILES_OK"
+      ]
+    },
+    {
+      "name": "pr_scope",
+      "status": "PASS",
+      "new_blobs": 37,
+      "new_blob_bytes": 3479320,
+      "new_evidence_bytes": 126271
+    },
+    {
+      "name": "source_pr_delivery",
+      "status": "NOT RUN",
+      "detail": "Pre-PR validation snapshot."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/catalog-summary.json",
+      "bytes": 7816,
+      "sha256": "e47eb7b7c50cf61d19bc280062b49ae423b5ce2700dedaf836c459bc69be9550",
+      "kind": "bounded_summary",
+      "source_path": "docs/evidence/2026-11-09-issue-fixes/catalog-summary.json",
+      "source_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7"
+    },
+    {
+      "path": "evidence/classic-flash-summary.json",
+      "bytes": 13988,
+      "sha256": "31183f0d424c467a1e5a0722e3ae4572897e197c6a53ad399235d27aab8e93a9",
+      "kind": "bounded_summary",
+      "source_path": "docs/evidence/2026-11-09-issue-fixes/classic-flash-summary.json",
+      "source_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7"
+    },
+    {
+      "path": "evidence/peripheral-readiness-summary.json",
+      "bytes": 37013,
+      "sha256": "2ca13a5340ab1857b712ee6b1fbf8a8342dba0c04f2dd30f5c151f70a5cfbddb",
+      "kind": "bounded_summary",
+      "source_path": "docs/evidence/2026-11-09-issue-fixes/peripheral-readiness-summary.json",
+      "source_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7"
+    },
+    {
+      "path": "evidence/unit-runtime-summary.json",
+      "bytes": 64566,
+      "sha256": "837cdfdda2d95de59abe10d8287d1a56560c33646c44ecf1849977b0d4f02e21",
+      "kind": "bounded_summary",
+      "source_path": "docs/evidence/2026-11-09-issue-fixes/unit-runtime-summary.json",
+      "source_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7"
+    },
+    {
+      "path": "evidence/unit-runtime-source-binding-summary.json",
+      "bytes": 1249,
+      "sha256": "20654f9cd0981a414bccf4ba8b9e3b5c41b090241e6ac0eba677455df4f80572",
+      "kind": "derived_summary"
+    }
+  ],
+  "delivery": "NOT RUN - source PR pending"
+}
