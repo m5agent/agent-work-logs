@@ -19,3 +19,5 @@
 真机、物理无线和本次浏览器部署均 `NOT RUN`。公开记录仅含受限摘要、哈希与必要标记。
 
 [PR 合并与远端回读](followups/2026-11-09-pr209-delivery/)
+
+[模型 issue 状态更正](model-issues-status-followup.md)
