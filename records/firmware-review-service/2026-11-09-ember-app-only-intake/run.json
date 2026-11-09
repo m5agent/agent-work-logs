@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "EMBER 2.1 独立应用镜像虚拟审核复验",
+  "source": {
+    "repository": "https://github.com/HorseyofCoursey/EMBER/tree/d34949441e77430239a27248bbbcc47601558431"
+  },
+  "hardware": {
+    "device": "Cardputer ADV",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "source_sha256": "f4261dbbabdaac5825838455ac553cc21ef9c5c6d308cb2c82941bd8ccc1cb5e",
+    "composed_sha256": "6b32f98b3ab469ec817a658ee8a370072e5cf4cc5728fb67e9a8b28d461a02b7",
+    "segments": [
+      {
+        "role": "bootloader",
+        "offset": "0x0000",
+        "bytes": 14032,
+        "sha256": "876f58f4c5e2b2a3eae9e025b29096f034af99f6617edae3676817306d306dcf"
+      },
+      {
+        "role": "partition_table",
+        "offset": "0x8000",
+        "bytes": 3072,
+        "sha256": "1d9cca96de0fe07ad7fc0648b9878ddecd9ce565e38b589ad20fea698ed4c80c"
+      },
+      {
+        "role": "boot_app0",
+        "offset": "0xE000",
+        "bytes": 8192,
+        "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0"
+      },
+      {
+        "role": "application",
+        "offset": "0x10000",
+        "bytes": 1187056,
+        "sha256": "f4261dbbabdaac5825838455ac553cc21ef9c5c6d308cb2c82941bd8ccc1cb5e"
+      }
+    ]
+  },
+  "execution": {
+    "environment": "Device Service / native QEMU virtual-device validation",
+    "review_job_id": "redacted",
+    "session_id": "redacted",
+    "runtime": {
+      "profile": "cardputer-adv",
+      "backend": "native QEMU via Device Service",
+      "qemu_sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+    },
+    "started_at": "2026-11-09T03:49:30.729084+00:00",
+    "finished_at": "2026-11-09T03:49:46.137655+00:00",
+    "source_mode": "saved_snapshot",
+    "result": {
+      "status": "done",
+      "review_lane": "SIM_VERIFIED",
+      "submission": "NOT SUBMITTED"
+    }
+  },
+  "checks": [
+    {
+      "level": "review",
+      "name": "original_failure_preserved",
+      "status": "PASS"
+    },
+    {
+      "level": "build",
+      "name": "app_only_recipe_and_image_bytes",
+      "status": "PASS"
+    },
+    {
+      "level": "delivery",
+      "name": "service_tests_and_deployment",
+      "status": "PASS"
+    },
+    {
+      "level": "flash",
+      "name": "exact_composed_virtual_boot",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "application_function",
+      "status": "PARTIAL"
+    },
+    {
+      "level": "data_behavior",
+      "name": "sd_library_and_pcm_spectral_match",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "physical_device",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/execution-summary.redacted.json"
+  ],
+  "notes": [
+    "通用音频幅值门槛未通过。",
+    "实物和浏览器验证未执行。"
+  ]
+}
