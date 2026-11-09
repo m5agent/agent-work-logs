@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer ADV MP3 Player 主线交付与 dry-run",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "candidate_commit": "340d80cf2e54bbe867f5dbade422ac0907251607",
+    "delivered_commit": "340d80cf2e54bbe867f5dbade422ac0907251607",
+    "ci": {
+      "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42548926018",
+      "head_sha": "340d80cf2e54bbe867f5dbade422ac0907251607",
+      "conclusion": "success",
+      "jobs": {
+        "platform-contracts": "success",
+        "network-namespace-policy": "success"
+      },
+      "platform_tests": {
+        "run": 2041,
+        "passed": 2031,
+        "skipped": 10
+      },
+      "started_at": "2026-11-09T02:04:55Z",
+      "updated_at": "2026-11-09T02:08:37Z"
+    },
+    "previous_report": "https://github.com/m5agent/agent-work-logs/blob/db7c1d8b4e876b665aaa3267ae04a7de4709e20a/records/firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/followups/2026-11-09-cardputer-adv-model-fidelity/report.md"
+  },
+  "hardware": {
+    "model": "M5Stack Cardputer ADV",
+    "soc": "ESP32-S3",
+    "hardware_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Cardputer ADV MP3 Player v1.0.0",
+    "release": "https://github.com/TurbulentGoat/cardputer-adv-mp3-player/releases/tag/v1.0.0",
+    "upstream_commit": "fa967592011e9e8495ef3f540422eac4d6169adc",
+    "expected_source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "expected_source_bytes": 885600,
+    "expected_flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "expected_flash_bytes": 8388608
+  },
+  "execution": {
+    "environment": "Firmware-review dry-run through Device Service and native Xtensa QEMU",
+    "scope": "virtual-device validation",
+    "profile": "m5cardputeradv",
+    "source_mode": "saved_snapshot",
+    "runtime_sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+    "review_status": "done",
+    "submit_requested": false,
+    "submitted": false,
+    "review_lane": "SIM_VERIFIED",
+    "cleanup": {
+      "state": "stopped",
+      "frame_retained": true,
+      "device_state_retained": true,
+      "mutable_flash_retained": false,
+      "guest_process_remaining": false
+    }
+  },
+  "checks": [
+    {
+      "level": "delivery",
+      "name": "exact_main_commit_and_ci",
+      "status": "PASS"
+    },
+    {
+      "level": "transport",
+      "name": "review_route_and_execution_identity",
+      "status": "PASS"
+    },
+    {
+      "level": "device_response",
+      "name": "spi_sd_initialized_and_mounted",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "library_and_playback_frames",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "track_sector_reads_and_matched_pcm",
+      "status": "PASS"
+    },
+    {
+      "level": "delivery",
+      "name": "dry_run_boundary_and_session_cleanup",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "physical_device_and_acoustics",
+      "status": "NOT RUN"
+    },
+    {
+      "level": "data_behavior",
+      "name": "browser_sd_and_playback",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/execution-summary.redacted.json"
+  ],
+  "notes": [
+    "Use the actual review terminal verdict as a separate field from functional device evidence.",
+    "The prior no-frame review and first offline input-receipt parser error remain separately recorded. The observer was corrected and reapplied to the exact same retained bundles."
+  ]
+}

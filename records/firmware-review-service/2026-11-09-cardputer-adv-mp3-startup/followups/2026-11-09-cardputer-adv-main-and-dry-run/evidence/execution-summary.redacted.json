@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "firmware_review_delivery",
+  "validation": "virtual-device validation",
+  "status": "PASS",
+  "source": {
+    "base_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "candidate_commit": "340d80cf2e54bbe867f5dbade422ac0907251607",
+    "delivered_commit": "340d80cf2e54bbe867f5dbade422ac0907251607",
+    "ci": {
+      "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42548926018",
+      "head_sha": "340d80cf2e54bbe867f5dbade422ac0907251607",
+      "conclusion": "success",
+      "jobs": {
+        "platform-contracts": "success",
+        "network-namespace-policy": "success"
+      },
+      "platform_tests": {
+        "run": 2041,
+        "passed": 2031,
+        "skipped": 10
+      },
+      "started_at": "2026-11-09T02:04:55Z",
+      "updated_at": "2026-11-09T02:08:37Z"
+    }
+  },
+  "runtime": {
+    "device": "Cardputer ADV",
+    "engine": "native Xtensa QEMU",
+    "profile": "m5cardputeradv",
+    "qemu_sha256": "d150c645291e66202d73eb6bdc98900980c2dcb4e851b41d9386dfa6a1ae4b7d",
+    "api_device_id": "cardputer-adv"
+  },
+  "firmware": {
+    "release": "v1.0.0",
+    "source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "source_bytes": 885600,
+    "flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "flash_bytes": 8388608
+  },
+  "media": {
+    "filesystem": "FAT32/MBR",
+    "fixture_sha256": "6e7c003e532f2912b5a6841ea24b6ffbe1ca113caf0dd83b26d750d0cbd7f4a0",
+    "fixture_bytes": 67108864,
+    "track_filename": "TEST.MP3",
+    "track_sha256": "30ffce5202e6926566a920c2b236ac74c6077752642b34b85193f67931ae8fc4",
+    "track_bytes": 36362
+  },
+  "review": {
+    "source_mode": "saved_snapshot",
+    "terminal_status": "done",
+    "submit_requested": false,
+    "submitted": false,
+    "lane": "SIM_VERIFIED",
+    "started_at": "2026-11-09T02:08:20.498581+00:00",
+    "finished_at": "2026-11-09T02:08:32.231333+00:00",
+    "duration_ms": 11734
+  },
+  "same_session": {
+    "library_frame": {
+      "sha256": "370b4236939c088e11013efe20609e33e927a03f1e9da07b3d68fc230ed28d7d",
+      "dimensions": [
+        240,
+        135
+      ],
+      "text": "LIBRARY / TEST.MP3"
+    },
+    "input": {
+      "name": "key_ret",
+      "action_sequence": [
+        "down",
+        "up"
+      ],
+      "accepted": true,
+      "frame_changed": true
+    },
+    "playing_frame": {
+      "sha256": "a2ec82f9aa5d8f41aab6117c9379fcf469f66750d0327cfe7ecc731feec6585d",
+      "dimensions": [
+        240,
+        135
+      ],
+      "text": "NOW PLAYING / TEST"
+    },
+    "spi_sd": {
+      "init_responses": {
+        "CMD59": "0x01",
+        "ACMD41": "0x00"
+      },
+      "track_read_lbas": [
+        4067,
+        4068,
+        4069,
+        4070,
+        4071,
+        4072,
+        4073,
+        4074,
+        4075,
+        4076,
+        4077,
+        4078,
+        4079,
+        4080,
+        4081,
+        4082,
+        4137,
+        4138
+      ],
+      "commands_before_input": 22,
+      "commands_total": 85,
+      "fixture_geometry": {
+        "mbr_lba": 0,
+        "boot_lba": 2048,
+        "root_lba": 4066,
+        "track_lba_first": 4067,
+        "track_lba_last": 4138,
+        "track_bytes": 36362
+      }
+    },
+    "speaker_pcm": {
+      "bytes_before_input": 0,
+      "bytes_after_input": 43520,
+      "sha256": "43b87b6bffdd4d4cc13b1fca8af00c02948b12ded22f3e878fc711bd172997cc",
+      "matched_frequency_hz": 524,
+      "channels": 1,
+      "sample_rate_hz": 48000,
+      "peak_tone_energy_fraction": 0.9833,
+      "matching_windows": 3
+    },
+    "evidence_package": {
+      "pre_input": {
+        "sha256": "cf62787e15ff2a5a70ca0484405f87dad502307a16e0b1d1768a8c75892112bc",
+        "bytes": 7479
+      },
+      "post_input": {
+        "sha256": "7644ecf1b1b503d6e3b0df2612f0d9521ccdfd1fb95862751f248728540dc503",
+        "bytes": 598603
+      }
+    },
+    "cleanup": {
+      "state": "stopped",
+      "frame_retained": true,
+      "device_state_retained": true,
+      "mutable_flash_retained": false,
+      "guest_process_remaining": false
+    }
+  },
+  "not_run": [
+    "physical hardware",
+    "physical acoustics",
+    "browser SD playback"
+  ],
+  "redaction": "Only public source identities, derived observations and digests belong in this summary. Execution identifiers and raw evidence remain in local retained state.",
+  "previous_control": {
+    "status": "manual_review",
+    "lane": "SIM_PARTIAL",
+    "error_code": "E_NO_FRAME",
+    "source_mode": "live_pending",
+    "declared_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "archived_evidence_zip_sha256": "10519833a807ae9194334464458476089eba827091031705c79301881781994d"
+  },
+  "offline_observer_retry": {
+    "initial_status": "FAIL",
+    "issue": "incorrect nesting of input receipt in observer",
+    "final_status": "PASS",
+    "reused_exact_evidence_archives": true,
+    "replayed_guest_again": false
+  },
+  "local_source_digests": {
+    "job-dry-run.json": {
+      "sha256": "2cc146ddae2647b04a4a52017e5098b7458916b64bd9bc0464e259181b0754b0",
+      "bytes": 30726
+    },
+    "summary.json": {
+      "sha256": "93839b0a136cdfd7f0f21c2160f912b75bf631b8f8712933d020d8f274b74148",
+      "bytes": 3728
+    }
+  }
+}
