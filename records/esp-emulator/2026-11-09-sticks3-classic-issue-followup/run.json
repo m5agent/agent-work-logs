@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "issue",
+  "date": "2026-11-09",
+  "source": {
+    "repo": "m5agent/m5stack-esp-emulator",
+    "base": "dfd2f0fc539a87c68771e93dc3b06a758acebf71",
+    "candidate": "4b1dbc8bea1b79a7e1cf5ce3e26a67a3c0982e61"
+  },
+  "hardware": {
+    "status": "NOT RUN"
+  },
+  "firmware": {
+    "identity": "Per original firmware and composed Flash hashes in evidence."
+  },
+  "execution": {
+    "classification": "virtual-device validation",
+    "scope": "Native QEMU and isolated Device Service. Tab5 uses dedicated esp-emu runs."
+  },
+  "checks": {
+    "platform": {
+      "status": "PASS",
+      "run": 2052,
+      "skipped": 8
+    },
+    "generated_validators": "PASS",
+    "pr_scope": "PASS",
+    "classic_flashing": {
+      "before": {
+        "PASS": 23,
+        "FAIL": 10
+      },
+      "after": {
+        "PASS": 33
+      },
+      "complete_readback": 33
+    },
+    "stick_s3": "PASS for the matrix oracle corrections and the full Flash replay. Unsupported controller capabilities remain PARTIAL.",
+    "tab5_188": "PARTIAL / OPEN",
+    "peripheral_192": "PARTIAL / OPEN",
+    "frame_orientation_205": "REVIEW / OPEN"
+  },
+  "evidence": [
+    "evidence/classic-uart-canonical118-summary.json",
+    "evidence/classic-uart-summary.json",
+    "evidence/flash-replay-summary.json",
+    "evidence/peripheral-192-summary.json",
+    "evidence/sticks3-gap-summary.json",
+    "evidence/sticks3-input-and-readiness-summary.json",
+    "evidence/tab5-188-summary.json"
+  ]
+}

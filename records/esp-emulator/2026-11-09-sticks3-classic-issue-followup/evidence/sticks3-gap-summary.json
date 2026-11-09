@@ -1,0 +1,681 @@
+{
+  "schema_version": 1,
+  "classification": "virtual-device validation",
+  "device": "sticks3",
+  "machine": "m5sticks3",
+  "runtime": "qemu",
+  "qemu_sha256": "6d9af027e2f744208fc2503128f1772f436d7ca7358f9e53be597bc76800f39d",
+  "tested_matrix_checkpoints": {
+    "baseline": "3c47006212a6ad08623e7bc34cba707b347be753",
+    "model_gap_only": "40312b72",
+    "integrated_run": "4179a1f5",
+    "integrated_isolated_repeat": "fcf0315d"
+  },
+  "method": "Original public firmware uploaded to an isolated Device Service, then the tracked matrix executor captured frames and injected panel controls. Evidence was retrieved before stop with purge=0.",
+  "phases": {
+    "baseline": [
+      {
+        "name": "M5Gotchi - the pwnagotchi for M5StickS3",
+        "burner_firmware_id": "1897200000000001034",
+        "input_sha256": "50425b34eb8b4f2b3dea7c85753e37f649c995bfae72b6189e4454077d686246",
+        "composed_flash_sha256": "324d65e0bfccd88652afa3242175ad24e550fea5d0e9916b04d15718901c528c",
+        "serial_sha256": "5c82bdf0ac77e2ce2de85305c0de32d14a61e1d7470add63605a4db7cd592a0e",
+        "after_frame_sha256": "03182e39ecc48d77318a30040c15be8aaaa052e42f37df8590b327a4a8e8c145",
+        "after_frame_nonblack_pixels": 28507,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "a501a612971438256b91ac68cbba15fdcb80ab90869b0ab17ba3e1116ffa4ebd"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "03182e39ecc48d77318a30040c15be8aaaa052e42f37df8590b327a4a8e8c145"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "475d72f89ff85720966e021beb4151c5af76526a9c1de47f08489a1ca2ca8b0e",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "AirMouseS3",
+        "burner_firmware_id": "1897200000000001628",
+        "input_sha256": "bdb567de990ef5c2a0fd113c033b259acd17e49717c9fdb5e9cc9d3776b208d8",
+        "composed_flash_sha256": "08d4806570618bc41ab73a481d6a9d7f1e95833af735dc075344427950d8a03a",
+        "serial_sha256": "95769ac1b39d85a3876240c2b4453e164e2b363248e6a6e5d41064e45853fe69",
+        "after_frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241",
+        "after_frame_nonblack_pixels": 3857,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "40377fc2603b2cfcbbc968cdde1fc5785bf7b9d747533401299d2b0ca45c252d",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "StickS3 PMIC Upgrade",
+        "burner_firmware_id": "1897200000000001767",
+        "input_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "composed_flash_sha256": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "serial_sha256": "05ebf6007f7915815ae2d89c386c0113254e3d237daedf3b6fbbd36d2f1c616b",
+        "after_frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14",
+        "after_frame_nonblack_pixels": 293,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "49160fed19ccdb9054d6e643b58191c96116a18370e84cc6a62552875cfef6f0",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "Bit Pirate for M5StickS3",
+        "burner_firmware_id": "1897200000000001800",
+        "input_sha256": "a93557398b87a50ac1bbd99ff98e93fb842bff0f0f3634d463d4d53497f8747e",
+        "composed_flash_sha256": "b892cfb72ef2c9f895da9cb2ddb3eb489a194f990decc95fad8092518c1cdf6e",
+        "serial_sha256": "e677216d91427a06914c9c079ee0ea9e82d98ca52ec536abd6a1f83dce7df84f",
+        "after_frame_sha256": "93d00bb47faee5fca0c5ca6713278ca62ef45ac98177e95eb011c5e974e33e79",
+        "after_frame_nonblack_pixels": 9769,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "93d00bb47faee5fca0c5ca6713278ca62ef45ac98177e95eb011c5e974e33e79"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "93d00bb47faee5fca0c5ca6713278ca62ef45ac98177e95eb011c5e974e33e79"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "1a57a9e58109d172d32348c7bef0eb6341f4cf53ebae8649fa19ebac5c0b6263",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "PulseOS for M5Stick S3",
+        "burner_firmware_id": "1897200000000003154",
+        "input_sha256": "d5d6f3edc42ba1fe53fa3b857039cea788aad4ee74b0ca182a7f68cf742cefa4",
+        "composed_flash_sha256": "d5d6f3edc42ba1fe53fa3b857039cea788aad4ee74b0ca182a7f68cf742cefa4",
+        "serial_sha256": "751d81f3129bfa28062fcb63bd90c8710af575432bd80d6d0ad8b7004aa5e948",
+        "after_frame_sha256": "b1e0f980b332cee561a9af0fc322aaeb7c609ea4329eb9129f92e6c242106b40",
+        "after_frame_nonblack_pixels": 2528,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "b1e0f980b332cee561a9af0fc322aaeb7c609ea4329eb9129f92e6c242106b40"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "b1e0f980b332cee561a9af0fc322aaeb7c609ea4329eb9129f92e6c242106b40"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "921467974bdefcaedadd859a944695b0b2441bebd7fa402d2d2203baef2e0e3d",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "Evil-StickS3",
+        "burner_firmware_id": "1897200000000003468",
+        "input_sha256": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653",
+        "composed_flash_sha256": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653",
+        "serial_sha256": "84fab20c8031458b32157369c94e24d315f959b543d7b3643ade7485c67802c2",
+        "after_frame_sha256": "7fc263b134c871a68299437fce59769232d52e00c2db42ea71baf8a39b68d744",
+        "after_frame_nonblack_pixels": 8211,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "9d1a6a8752d583674de2cde1b6a9c19346c129d643413b126c2a82d69fc9b080"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "7fc263b134c871a68299437fce59769232d52e00c2db42ea71baf8a39b68d744"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "7ef35781ad7839ccddb6871771328e1d13735a0f7724e3c05a21347ffd8dbc2c",
+        "terminal_state": "stopped"
+      }
+    ],
+    "candidate": [
+      {
+        "name": "M5Gotchi - the pwnagotchi for M5StickS3",
+        "burner_firmware_id": "1897200000000001034",
+        "input_sha256": "50425b34eb8b4f2b3dea7c85753e37f649c995bfae72b6189e4454077d686246",
+        "composed_flash_sha256": "324d65e0bfccd88652afa3242175ad24e550fea5d0e9916b04d15718901c528c",
+        "serial_sha256": "3f673a9d26e1c524fcbba1b13db6e6df1078263521499ed98fc5cb9aa7c1dbba",
+        "after_frame_sha256": "03182e39ecc48d77318a30040c15be8aaaa052e42f37df8590b327a4a8e8c145",
+        "after_frame_nonblack_pixels": 28507,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "a501a612971438256b91ac68cbba15fdcb80ab90869b0ab17ba3e1116ffa4ebd"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "03182e39ecc48d77318a30040c15be8aaaa052e42f37df8590b327a4a8e8c145"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_wifi_monitor_not_modeled"
+        ],
+        "evidence_zip_sha256": "46320a66f477f21473b794f3d32a30c09a8b77eb2fc914f9e24132f3acb38132",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "AirMouseS3",
+        "burner_firmware_id": "1897200000000001628",
+        "input_sha256": "bdb567de990ef5c2a0fd113c033b259acd17e49717c9fdb5e9cc9d3776b208d8",
+        "composed_flash_sha256": "08d4806570618bc41ab73a481d6a9d7f1e95833af735dc075344427950d8a03a",
+        "serial_sha256": "95769ac1b39d85a3876240c2b4453e164e2b363248e6a6e5d41064e45853fe69",
+        "after_frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241",
+        "after_frame_nonblack_pixels": 3857,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_ble_hid_host_unavailable"
+        ],
+        "evidence_zip_sha256": "e178846fa6de2b9e978d75be7b2dde34b4a2c674611aad80b2bb96cff858dad0",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "StickS3 PMIC Upgrade",
+        "burner_firmware_id": "1897200000000001767",
+        "input_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "composed_flash_sha256": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "serial_sha256": "009fbbd3a69b00063957eb192c9593602efa9001e1b22a55e0e203f907b1bd6a",
+        "after_frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14",
+        "after_frame_nonblack_pixels": 293,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_pm1_iap_not_modeled"
+        ],
+        "evidence_zip_sha256": "aac00770f529f0644138276cb3e862d72d96a785910082083125d64ab77b1bf9",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "Bit Pirate for M5StickS3",
+        "burner_firmware_id": "1897200000000001800",
+        "input_sha256": "a93557398b87a50ac1bbd99ff98e93fb842bff0f0f3634d463d4d53497f8747e",
+        "composed_flash_sha256": "b892cfb72ef2c9f895da9cb2ddb3eb489a194f990decc95fad8092518c1cdf6e",
+        "serial_sha256": "7f6171871c6e50712c7ec6f569de0bfe2351ced66d1333b326d86aa44d28c3ba",
+        "after_frame_sha256": "93d00bb47faee5fca0c5ca6713278ca62ef45ac98177e95eb011c5e974e33e79",
+        "after_frame_nonblack_pixels": 9769,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "93d00bb47faee5fca0c5ca6713278ca62ef45ac98177e95eb011c5e974e33e79"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "93d00bb47faee5fca0c5ca6713278ca62ef45ac98177e95eb011c5e974e33e79"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "esp32s3_usb_otg_not_modeled"
+        ],
+        "evidence_zip_sha256": "a03eee312dbcf3bb56b80d4f53b270d56cf7d8243131f9f79330a273b590b248",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "PulseOS for M5Stick S3",
+        "burner_firmware_id": "1897200000000003154",
+        "input_sha256": "d5d6f3edc42ba1fe53fa3b857039cea788aad4ee74b0ca182a7f68cf742cefa4",
+        "composed_flash_sha256": "d5d6f3edc42ba1fe53fa3b857039cea788aad4ee74b0ca182a7f68cf742cefa4",
+        "serial_sha256": "751d81f3129bfa28062fcb63bd90c8710af575432bd80d6d0ad8b7004aa5e948",
+        "after_frame_sha256": "b1e0f980b332cee561a9af0fc322aaeb7c609ea4329eb9129f92e6c242106b40",
+        "after_frame_nonblack_pixels": 2528,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "b1e0f980b332cee561a9af0fc322aaeb7c609ea4329eb9129f92e6c242106b40"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "b1e0f980b332cee561a9af0fc322aaeb7c609ea4329eb9129f92e6c242106b40"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "7d1864dac624915c3fdf4ff2879ac84a69586f550d89ebac90c2f01c7bfbb312",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "Evil-StickS3",
+        "burner_firmware_id": "1897200000000003468",
+        "input_sha256": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653",
+        "composed_flash_sha256": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653",
+        "serial_sha256": "7d90b5b0b5ae22f176c10c1ba157831cc14ed05dfbf771bf92746491f5092c2c",
+        "after_frame_sha256": "7fc263b134c871a68299437fce59769232d52e00c2db42ea71baf8a39b68d744",
+        "after_frame_nonblack_pixels": 8211,
+        "application_ready": true,
+        "frame_settled": null,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "98413191fe3a75a397fc6a441549d33b8346670ed82fb22e812981cec8e6e988"
+          },
+          {
+            "key": "ret",
+            "accepted": true,
+            "observed": null,
+            "frame_response": null,
+            "frame_sha256": "7fc263b134c871a68299437fce59769232d52e00c2db42ea71baf8a39b68d744"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_wifi_monitor_not_modeled"
+        ],
+        "evidence_zip_sha256": "aad8c6f676b5a7bad98a087a13cb0d2c3b0811b6eda01cb2759be091256e9ff5",
+        "terminal_state": "stopped"
+      }
+    ],
+    "integrated": [
+      {
+        "name": "M5Gotchi - the pwnagotchi for M5StickS3",
+        "burner_firmware_id": "1897200000000001034",
+        "input_sha256": "50425b34eb8b4f2b3dea7c85753e37f649c995bfae72b6189e4454077d686246",
+        "composed_flash_sha256": "324d65e0bfccd88652afa3242175ad24e550fea5d0e9916b04d15718901c528c",
+        "serial_sha256": "165d350a80ea90bed0402ee7380e1167c5a21d339b62a1fe539dfdbd455bc081",
+        "after_frame_sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+        "after_frame_nonblack_pixels": 0,
+        "application_ready": false,
+        "frame_settled": false,
+        "input_probes": [],
+        "status": "PARTIAL",
+        "reason": "device_service_startup_failed",
+        "model_gap_codes": [
+          "sticks3_wifi_monitor_not_modeled"
+        ],
+        "evidence_zip_sha256": "7da8291cf50c31d3bb3b38a1769cbda166de463da35998b28c7f5dd25e0fdaf3",
+        "terminal_state": "failed"
+      },
+      {
+        "name": "AirMouseS3",
+        "burner_firmware_id": "1897200000000001628",
+        "input_sha256": "bdb567de990ef5c2a0fd113c033b259acd17e49717c9fdb5e9cc9d3776b208d8",
+        "composed_flash_sha256": "08d4806570618bc41ab73a481d6a9d7f1e95833af735dc075344427950d8a03a",
+        "serial_sha256": "95769ac1b39d85a3876240c2b4453e164e2b363248e6a6e5d41064e45853fe69",
+        "after_frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241",
+        "after_frame_nonblack_pixels": 3857,
+        "application_ready": false,
+        "frame_settled": true,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "cf2dc5f129235e4fec6fc765aca2b108b2330b62d600b5da810841f04c5c0241"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_ble_hid_host_unavailable"
+        ],
+        "evidence_zip_sha256": "cddad3106690f0d4be474cf827d332f7f154193b77bf73699edb30070fc04506",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "StickS3 PMIC Upgrade",
+        "burner_firmware_id": "1897200000000001767",
+        "input_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "composed_flash_sha256": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "serial_sha256": "e0e48f6143b22493fcca38b3c2cff38906f7bf9850534ee9dc6e7011bf5dabf4",
+        "after_frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14",
+        "after_frame_nonblack_pixels": 293,
+        "application_ready": false,
+        "frame_settled": true,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "ce8d256d42ffef74e870f42bdc6acb84a68bd2594783ba2b988dfa0ecb6ecd14"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_pm1_iap_not_modeled"
+        ],
+        "evidence_zip_sha256": "47b14a776445a52f30a97312609bae20c97524f0207dbfe6940f9593328f3b50",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "Bit Pirate for M5StickS3",
+        "burner_firmware_id": "1897200000000001800",
+        "input_sha256": "a93557398b87a50ac1bbd99ff98e93fb842bff0f0f3634d463d4d53497f8747e",
+        "composed_flash_sha256": "b892cfb72ef2c9f895da9cb2ddb3eb489a194f990decc95fad8092518c1cdf6e",
+        "serial_sha256": "e2a1df0932a03f59faa0aec67406de29f6b659642b7ec50273a2a2a49d9d52e8",
+        "after_frame_sha256": "ba9b46bdbdbfc47ab138f78a1825d9844fa3f9f8ec72f29eda6c0d59deaf2aa1",
+        "after_frame_nonblack_pixels": 9836,
+        "application_ready": false,
+        "frame_settled": true,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "ed97642854243beba56057afc5e69458cc0ce9f9676fb473a320d016e44ff2b7"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "ba9b46bdbdbfc47ab138f78a1825d9844fa3f9f8ec72f29eda6c0d59deaf2aa1"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "esp32s3_usb_otg_not_modeled"
+        ],
+        "evidence_zip_sha256": "c5780a6f0596ee2cbb89529860966ee9653f87e3d4b7a02db02bd7a58f0fce86",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "M5Launcher M5StickS3",
+        "burner_firmware_id": "1897200000000002608",
+        "input_sha256": "5eb4e04bcef3b4dbe799a8d6800dccdc583e206da163cc3acfdf898ad0ae960f",
+        "composed_flash_sha256": "864f0e4fff680309c4e4007bb6e1f1bb510e890f5183fbb0d1c40a05bf46d8d7",
+        "serial_sha256": "4b250989f6a2f2fcf0a6eaed82ae9c98cd71fa14af40398606eb4181d4b1f421",
+        "after_frame_sha256": "1999e0afa4689289a5c2fb3dfe4fdfc682b3f717cf4c64f43c677154f938deb1",
+        "after_frame_nonblack_pixels": 5823,
+        "application_ready": false,
+        "frame_settled": true,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "205b2a4da02a09c0e17918f85a33c6d4f33d01ae96dd518f82d878b8c9056a94"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "1999e0afa4689289a5c2fb3dfe4fdfc682b3f717cf4c64f43c677154f938deb1"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "341db486f2f7008bf402762a5548ee82ef39d74829d19fbff365c07169a6aaf3",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "PulseOS for M5Stick S3",
+        "burner_firmware_id": "1897200000000003154",
+        "input_sha256": "d5d6f3edc42ba1fe53fa3b857039cea788aad4ee74b0ca182a7f68cf742cefa4",
+        "composed_flash_sha256": "d5d6f3edc42ba1fe53fa3b857039cea788aad4ee74b0ca182a7f68cf742cefa4",
+        "serial_sha256": "751d81f3129bfa28062fcb63bd90c8710af575432bd80d6d0ad8b7004aa5e948",
+        "after_frame_sha256": "48705ea403220914336a912da8b83cb376f9dc71b3490b1b4b5a5b984c04de50",
+        "after_frame_nonblack_pixels": 2373,
+        "application_ready": false,
+        "frame_settled": true,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "50ee0afb59c930274e2dc7f375c0a4b314874b1a4120f452bec6587fdce73fee"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "48705ea403220914336a912da8b83cb376f9dc71b3490b1b4b5a5b984c04de50"
+          }
+        ],
+        "status": "PASS",
+        "reason": "application_frame_and_runtime_ok",
+        "model_gap_codes": [],
+        "evidence_zip_sha256": "69f42c60c1acbabf89621ae5938f1dff73ef382951ec164f8f1935c8f9993636",
+        "terminal_state": "stopped"
+      },
+      {
+        "name": "Evil-StickS3",
+        "burner_firmware_id": "1897200000000003468",
+        "input_sha256": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653",
+        "composed_flash_sha256": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653",
+        "serial_sha256": "f62befb0f77f1355115b9aa42f9bdeabe15d82523a9b355a73725b73223a4030",
+        "after_frame_sha256": "317b921f965e0fab2de9e0c50aba8a9038eeb9dd6e0325d7510096d2464013a6",
+        "after_frame_nonblack_pixels": 8272,
+        "application_ready": false,
+        "frame_settled": true,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": true,
+            "frame_response": true,
+            "frame_sha256": "7b758d134deb71b07e2ad3345a3a66a00671d0a837ab3c0f0e897cf0182bcc92"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "317b921f965e0fab2de9e0c50aba8a9038eeb9dd6e0325d7510096d2464013a6"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_wifi_monitor_not_modeled"
+        ],
+        "evidence_zip_sha256": "c65df0f9948d59c434e400d464fcfd77d3267f1906040af0647bd8f3c21c0a5e",
+        "terminal_state": "stopped"
+      }
+    ],
+    "integrated-repeat": [
+      {
+        "name": "M5Gotchi - the pwnagotchi for M5StickS3",
+        "burner_firmware_id": "1897200000000001034",
+        "input_sha256": "50425b34eb8b4f2b3dea7c85753e37f649c995bfae72b6189e4454077d686246",
+        "composed_flash_sha256": "324d65e0bfccd88652afa3242175ad24e550fea5d0e9916b04d15718901c528c",
+        "serial_sha256": "340d8af2a78208a83e1d62617871535aeee64b1672bc3578c985a7962f95ad16",
+        "after_frame_sha256": "d6733291232f9259cb75c321dd32bd1b263e28ea2c0060c1e831dadbc780c887",
+        "after_frame_nonblack_pixels": 29378,
+        "application_ready": false,
+        "frame_settled": false,
+        "input_probes": [
+          {
+            "key": "a",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "d1cb9cee5b8b3a3f9edbcc62f680ea8a8aa48e57ae9c2d3761bc3eb3ba85de9a"
+          },
+          {
+            "key": "b",
+            "accepted": true,
+            "observed": false,
+            "frame_response": false,
+            "frame_sha256": "d6733291232f9259cb75c321dd32bd1b263e28ea2c0060c1e831dadbc780c887"
+          }
+        ],
+        "status": "PARTIAL",
+        "reason": "runtime_model_gap",
+        "model_gap_codes": [
+          "sticks3_wifi_monitor_not_modeled"
+        ],
+        "evidence_zip_sha256": "bcd7a7f546aa9912b3eb51d1c3f0c43b2f3a4624875e72adee40ea289e73d3a7",
+        "terminal_state": "stopped"
+      }
+    ]
+  },
+  "pmic": {
+    "guest_button_marker": true,
+    "modeled_i2c_fd_request": true,
+    "upgrade_completed": false,
+    "qom_download_requests": 0,
+    "qom_download_requested": false
+  },
+  "isolated_retry_note": "One integrated M5Gotchi trial exited before collecting application evidence. The independent integrated repeat reached the intended monitor-gap classification.",
+  "physical_hardware": "NOT RUN"
+}

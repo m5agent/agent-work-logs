@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "issue": 188,
+  "classification": "virtual-device validation",
+  "result": "PARTIAL",
+  "issue_url": "https://github.com/m5agent/m5stack-esp-emulator/issues/188",
+  "remote_issue_state": "OPEN",
+  "source_read_only": {
+    "upstream_main": "3c47006212a6ad08623e7bc34cba707b347be753",
+    "prior_local_dedicated_worktree_head": "14427d51d1a3e1c4adc3c86fcedf52858e1827c9",
+    "existing_fix_PR": "https://github.com/m5agent/m5stack-esp-emulator/pull/189",
+    "project_pin": "0.50.0",
+    "project_pin_binary_sha256": "a4c3468a4abf3f2e55ca0912fa7cdfbe5e101ecb6ab74a9ec35182d70ba6a771",
+    "source_change_or_new_commit": false
+  },
+  "runtime": {
+    "stable": {
+      "version": "0.51.0",
+      "sha256": "162761d52bcee36fe8be5fd039202fed5873ca550a83a12229038311a4bbc18c",
+      "release": "https://github.com/espressif/esp-emulator/releases/tag/v0.51.0"
+    },
+    "prerelease": {
+      "version": "1.0.0-rc2",
+      "sha256": "fc07ca633a7451cc8038b3cd24540ee811a1a4cc159042930705038f53dfdb08",
+      "release": "https://github.com/espressif/esp-emulator/releases/tag/v1.0.0-rc2",
+      "release_tag_commit": "f77b06d76ec1c8323c21d3543ec86bf426567f22",
+      "archive_sha256": "2ad91043180152a50046f148654fd61fa47f3bc9bdc82a2b3a23bcb9c2f57618",
+      "published_SHA256SUMS_sha256": "d19b8e66a67667de0fe11fd68a45c472988f73c8ff795a983db6e88eeb17282e",
+      "published_asset_and_sums_sha256_agree": true,
+      "platform": "aarch64-apple-darwin"
+    },
+    "upstream_extension_boundary": "https://github.com/espressif/esp-emulator/issues/5"
+  },
+  "target": {
+    "device": "M5Stack Tab5",
+    "firmware": "UIFlow2 V2.5.4",
+    "stock_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "factory_partition": "0x10000/0x990000",
+    "factory_partition_sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5",
+    "both_probe_images_have_byte_identical_stock_factory_partition": true,
+    "app_descriptor_ELF_sha256": "0bb5647cd2dd4136c3b0ef41ce1e84f50d87d98dfdac621768cfeb606f194fbb",
+    "historical_app_load_segments_sha256": "5682f3c0e7b802dcbcd07bfcfafd3ed3f40b4054a78a398a35ae3293df7222f7",
+    "exact_probe_sha256": "f238ab142a8337166eaa045402ff8c691e5ee296999f3df937167298b7bbf841",
+    "uart_route_probe_sha256": "3dc852f7c758250374d7c5a9ebf0f410030fb3ae6a1837c5242f6639a077c053",
+    "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "virtual_efuse_seed_sha256": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_companion_sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+  },
+  "reproduction": {
+    "C6": "esp-emu --chip esp32c6 --firmware <owned-c6-copy> --hosted bridge:slave:<owned-socket> --net user",
+    "P4": "esp-emu --chip esp32p4 --firmware <owned-flash-copy> --rom <rev0-rom-elf> --efuse <owned-rev1-seed-copy> --hosted bridge:host:<owned-socket> --hosted-reset-gpio 15 --hosted-reset-active-high --psram-size 32M --console auto --uart-tcp <owned-uart-listener> --timeout 13s",
+    "read_only_GDB_lanes": "Add --gdb <owned-gdb-port>. At 4s and 8s read DSI PWR_UP 0x500a0004, PHY_RSTZ 0x500a00a0, PHY_STATUS 0x500a00b0, target loop bytes at 0x4825c672, and the main saved context. Detach each time.",
+    "stock_rc2_control": "Original stock BIN, no VFS injection, GDB server disabled.",
+    "app_ELF": null,
+    "boot": "supplied ROM and original bootloader; no skips"
+  },
+  "observations": {
+    "rc2-exact": {
+      "runtime_sha256": "fc07ca633a7451cc8038b3cd24540ee811a1a4cc159042930705038f53dfdb08",
+      "log_hashes": {
+        "uart.log": "10f28d7a4deb16db6db19b4284f7b526396b94cc2b13c6a515d65bd95940510d",
+        "p4.log": "4d933d45d8c1d0fc6e34681b841f401c4342c6e964faccf36a05b07bd45fb41f",
+        "c6.log": "c0836f7156edb6a0a9597e441568a13cde28321a588ba03081b19d7313fb5b76"
+      },
+      "image_sha256": "f238ab142a8337166eaa045402ff8c691e5ee296999f3df937167298b7bbf841",
+      "tab5_probe_marker_seen": false,
+      "gdb_snapshots": 2,
+      "outcome": "GUEST_ILLEGAL_INSTRUCTION_AND_REBOOT",
+      "panic_occurrences": 13,
+      "dsi_wait_proven": false,
+      "guest_app_descriptor_prefix": "0bb5647cd"
+    },
+    "rc2-uart": {
+      "runtime_sha256": "fc07ca633a7451cc8038b3cd24540ee811a1a4cc159042930705038f53dfdb08",
+      "log_hashes": {
+        "uart.log": "524a8d24eb6f525994561893f44e12bd5d534a4c825955db2cb4d2eadd1b2c39",
+        "p4.log": "92fd129ad0506d0fe508cbf21f7d3407b523cae21ff1fb60f7beb01ac50931c3",
+        "c6.log": "c0836f7156edb6a0a9597e441568a13cde28321a588ba03081b19d7313fb5b76"
+      },
+      "image_sha256": "3dc852f7c758250374d7c5a9ebf0f410030fb3ae6a1837c5242f6639a077c053",
+      "tab5_probe_marker_seen": false,
+      "gdb_snapshots": 2,
+      "outcome": "GUEST_ILLEGAL_INSTRUCTION_AND_REBOOT",
+      "panic_occurrences": 12,
+      "dsi_wait_proven": false,
+      "guest_app_descriptor_prefix": "0bb5647cd"
+    },
+    "stable-uart": {
+      "runtime_sha256": "162761d52bcee36fe8be5fd039202fed5873ca550a83a12229038311a4bbc18c",
+      "log_hashes": {
+        "uart.log": "1966bf626fdc0051fd5ccb9099537b6a65ab20567e266632bddaa7a580f2b0c3",
+        "p4.log": "2460ade92d36a033355a6ac8bd4d11021045f554f5882a85418b89fe2fb536f4",
+        "c6.log": "41e7381c8c84904e4a1037028ef100b05b232032e4c6d388b1d850a9237932a6"
+      },
+      "image_sha256": "3dc852f7c758250374d7c5a9ebf0f410030fb3ae6a1837c5242f6639a077c053",
+      "tab5_probe_marker_seen": false,
+      "gdb_snapshots": 2,
+      "outcome": "DSI_PHY_PLL_LOCK_WAIT",
+      "register_snapshots": [
+        {
+          "pwr_up": "0x00000001",
+          "phy_rstz": "0x0000000f",
+          "phy_status": "0x00000000"
+        },
+        {
+          "pwr_up": "0x00000001",
+          "phy_rstz": "0x0000000f",
+          "phy_status": "0x00000000"
+        }
+      ],
+      "target_loop_bytes_match": true,
+      "saved_return_0x4825c686_in_both": true
+    },
+    "rc2-stock": {
+      "runtime_sha256": "fc07ca633a7451cc8038b3cd24540ee811a1a4cc159042930705038f53dfdb08",
+      "log_hashes": {
+        "uart.log": "d43fb54ed51c2dca6340eadc0cade627584f029c136507ce202e5ecf7b75b150",
+        "p4.log": "5b26c9c32647e74aec2dd99d912637c6f9bf23959deac23b0a406113a95e1eb0",
+        "c6.log": "c0836f7156edb6a0a9597e441568a13cde28321a588ba03081b19d7313fb5b76"
+      },
+      "image_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "tab5_probe_marker_seen": false,
+      "gdb_snapshots": 0,
+      "outcome": "GUEST_ILLEGAL_INSTRUCTION_AND_REBOOT",
+      "panic_occurrences": 9,
+      "dsi_wait_proven": false,
+      "guest_app_descriptor_prefix": "0bb5647cd"
+    },
+    "stable-stock": {
+      "runtime_sha256": "162761d52bcee36fe8be5fd039202fed5873ca550a83a12229038311a4bbc18c",
+      "log_hashes": {
+        "uart.log": "1966bf626fdc0051fd5ccb9099537b6a65ab20567e266632bddaa7a580f2b0c3",
+        "p4.log": "ebfeee0d8b601d7efe98db6dc5fd63d6553f77c54734ee6d0b4b6df59e0477df",
+        "c6.log": "41e7381c8c84904e4a1037028ef100b05b232032e4c6d388b1d850a9237932a6"
+      },
+      "image_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "tab5_probe_marker_seen": false,
+      "gdb_snapshots": 2,
+      "outcome": "DSI_PHY_PLL_LOCK_WAIT",
+      "register_snapshots": [
+        {
+          "pwr_up": "0x00000001",
+          "phy_rstz": "0x0000000f",
+          "phy_status": "0x00000000"
+        },
+        {
+          "pwr_up": "0x00000001",
+          "phy_rstz": "0x0000000f",
+          "phy_status": "0x00000000"
+        }
+      ],
+      "target_loop_bytes_match": true,
+      "saved_return_0x4825c686_in_both": true
+    }
+  },
+  "rc2_illegal_instruction": {
+    "MEPC": "0x4ff0255c",
+    "MCAUSE": "0x00000002",
+    "MTVAL": "0x34602773",
+    "stock_flash_offset": "0x4141dc",
+    "stock_flash_bytes_le": "73276034",
+    "decode": "csrrs a4, 0x346, zero",
+    "limit": "Measured illegal-instruction trap on this stock instruction; backend cause within the CPU model is not source-proven."
+  },
+  "stable_dsi": {
+    "host_base": "0x500a0000",
+    "main_saved_return": "0x4825c686",
+    "actual_loop": "Target app instructions read host + 0xb0, test bit 0, and delay/retry while clear.",
+    "stock_and_uart_variant_confirmed": true,
+    "idf_reference": "https://github.com/espressif/esp-idf/blob/b774170ff46c393eeb5e495ea37936038d3f4f4f/components/esp_lcd/dsi/esp_lcd_mipi_dsi_bus.c#L97-L102"
+  },
+  "cleanup": {
+    "all_owned_processes_reaped_uart_readers_joined_and_sockets_removed": true,
+    "all_input_bytes_inode_and_mtime_unchanged": true,
+    "all_owned_p4_flash_bytes_unchanged": true
+  },
+  "boundary": {
+    "prior_factory_app_rejection_reproduced": false,
+    "stock_latest_python_ui_touch": "NOT PROVEN",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "closure": "Needs a P4 backend with functional DSI PHY/host and supported display/input data plane on the exact original application. No project-side launcher or VFS fix demonstrated closure."
+  }
+}

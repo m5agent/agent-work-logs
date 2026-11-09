@@ -1,0 +1,84 @@
+{
+  "issue": 178,
+  "validation": "virtual-device validation",
+  "status": "PASS",
+  "source_commit": "77ab22302e6c93f80b2f1477cd96b81d0f2af792",
+  "canonical_runtime": {
+    "source_repo_commit": "3c47006212a6ad08623e7bc34cba707b347be753",
+    "ordered_patch_layers": 118,
+    "binary_sha256": "ad3b3b7cc55a2ba4c0a1d79f45472320efa852ad38b8723c6388d6646539999e",
+    "bootstrap_receipt_sha256": "94594c7b468df17b77aec3ae29707e0ed11fc22ea9663d52ae3a5c921bc0c9fe",
+    "classic_rom_sha256": {
+      "esp32-v3-rom.bin": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+      "esp32-v3-rom-app.bin": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+    }
+  },
+  "device": "Atom Lite",
+  "machine": "m5atomlite",
+  "base_firmware_version": "UIFlow2 v2.5.4",
+  "base_firmware_sha256": "ae47e82cfe2ab22af1895f17fcc328506cf3ebace8114310a49ed7a02f77505f",
+  "download_configuration": {
+    "accel": "tcg,thread=single",
+    "icount": "shift=4,align=off,sleep=off",
+    "UART": "server=on,wait=on,nodelay=on",
+    "baud_scale": 16,
+    "esptool_version": "5.6.0",
+    "loader": "stock-esptool-stub",
+    "attempts": 1
+  },
+  "protocol": {
+    "uart_boot_banner_seen": true,
+    "rom_banner_sha256": "01d991656659f986267c7785c83ece4d6b38c998036f4dba033150927ce7bf2a",
+    "real_stub_ohai": true,
+    "uart_download_sha256": "7079351f3cc88c7b86c4fbd904054a6700855c8b04a9db8073c7004c743612de",
+    "reply_opcodes": {
+      "0x08": 24,
+      "0x0a": 46,
+      "0x05": 2,
+      "0x07": 3,
+      "0x06": 1,
+      "0x09": 44,
+      "0x0b": 1,
+      "0x10": 1,
+      "0x11": 132,
+      "0x12": 1,
+      "0x13": 1,
+      "0x02": 1,
+      "0x04": 1
+    }
+  },
+  "flash": {
+    "bytes": 4194304,
+    "composed_image_sha256": "45daa932641e35a5fef15d6ce22a69539606a12baadde77223d64f909a6ba7d3",
+    "complete_readback_sha256": "45daa932641e35a5fef15d6ce22a69539606a12baadde77223d64f909a6ba7d3",
+    "byte_compare": "equal"
+  },
+  "application_vm": {
+    "booted_from_downloaded_flash": true,
+    "guest_serial_markers": [
+      "ATOM_LITE_MAIN_START",
+      "CLASSIC_RGB 1 204060"
+    ],
+    "guest_serial_sha256": "5e3d7410aec6bd8c0407f788e8a7682afbf325a784e51df51f42ce27421d001e",
+    "post_guest_flash_sha256": "45daa932641e35a5fef15d6ce22a69539606a12baadde77223d64f909a6ba7d3"
+  },
+  "workload": {
+    "owned_matrix_workers": 1,
+    "owned_attempt_wall_span_seconds_approx": 47,
+    "post_run_host_load_average_1_5_15min": [
+      12.46,
+      18.03,
+      15.32
+    ],
+    "load_scope": "Post-run snapshot. The single-case result is not a stress test or in-run host load measurement."
+  },
+  "cleanup": {
+    "owned_qemu_processes_remaining": 0
+  },
+  "source_checks": {
+    "targeted_protocol_tests_passed": 5,
+    "pr_scope": "PASS",
+    "diff_check": "PASS"
+  },
+  "boundary": "One Atom Lite exact-runtime run. No StickC or Core2 inference for this binary. The host-image, ROM-only diagnostic and application-VM launch commands are outside the code change."
+}
