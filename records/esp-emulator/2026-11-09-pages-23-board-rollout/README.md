@@ -14,3 +14,5 @@
 当前源码的静态导出含 23 款准入设备。上一次托管失败的 StickC Plus 在该本机导出完成 63 项编辑器、显示、硬复位与 Worker 清场检查。它是本机独立结果，托管全板型门禁仍未通过，未更新实际 HTTPS 站点。
 
 [详细报告](report.md) · [运行摘要](run.json) · [回退验证](evidence/archive-recovery-summary.json)
+
+最新托管任务完成构建和 CoreMatrix 原版镜像验证，随后在 Atom Matrix 复位就绪超时及失败清场的引擎目标残留处受阻。部署任务跳过，公开站点仍是先前 19 板版本。 [第三轮验证摘要](evidence/hosted-self-close-reset-summary.json)

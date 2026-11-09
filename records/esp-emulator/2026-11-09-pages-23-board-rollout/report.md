@@ -29,3 +29,9 @@
 ## 引擎关闭候选
 
 针对两次托管端残留引擎 Worker，提交 f23ecfe8 改用引擎在释放回执、端口关闭和 owner 通知后调用 self.close()。初始化失败和异常仍保留强制回收兜底。验收继续要求独立 CDP 观察到目标实际消失。本地最终导出的 Atom Matrix 58/58 与 StickC Plus 63/63 均通过，两轮各五个 Worker 目标全部退出，兜底终止为零。此前并行诊断在 StickC Plus2 也有自关闭后目标残留的失败，故托管修复效果仍须由串行完整门禁证明。 [本地摘要](evidence/engine-self-close-summary.json) · [正式重跑](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42603482039)
+
+## 第三轮托管门禁及本地触摸复验
+
+工作流 42603482039 两套运行时、导出和 CoreMatrix 原版均通过。Atom Matrix 完成冷启动和复位前代码检查，QMP 硬复位进入新控制台周期。新客体串口到 bootloader 入口与 I²C 初始化报错后停滞，600 秒内未发出第二次就绪标记。I²C 是最后观察到的日志，尚不足以定位复位根因。失败清场有正常退出码和自关闭通知，Chrome CDP 仍记录一个引擎 Worker。正式部署跳过。 [托管重跑](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42603482039) · [运行摘要](evidence/hosted-self-close-reset-summary.json)
+
+本地完整门禁另在 PaperS3 触摸失败。同镜像独立重跑复现，等待客体出现稳定轮询后，同样 250 毫秒输入得到实际按下、松开、坐标和清场通过。该验证为定向诊断，未代替正式全量门禁。 [PaperS3 摘要](evidence/local-papers3-touch-cadence-summary.json)
