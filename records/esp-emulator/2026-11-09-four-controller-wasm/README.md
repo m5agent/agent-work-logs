@@ -18,5 +18,6 @@ CoreMatrix C158 使用未改动的官方 UIFlow2 v2.5.4。修复计数器、PHY 
 - [实现与边界](report.md)
 - [结构化执行](run.json)
 - [发布门禁与下载故障复测](followups/2026-11-09-pages-qualification/)
+- [PaperMono 编辑器回归](followups/2026-11-09-papermono-regression/)
 
 实体硬件、CoreMatrix 8 MiB Quad PSRAM、Wi-Fi 数据面及浏览器硬件复位仍待验收。
