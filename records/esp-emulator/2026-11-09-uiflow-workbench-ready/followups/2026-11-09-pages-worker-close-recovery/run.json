@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Pages browser QEMU Worker shutdown recovery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "70ca46258598294eb5e5852115b1dfce386d8754",
+    "candidate_commit": "fda5858e64462d67917fee885aa6ad429fdf39f6",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/196",
+    "compatibility_commit": "71c011d87690b46217e197b69bc8d8580dd2d103",
+    "merge_commit": "5f15d1f824958829f7d62648a5efbfe5fcee2edb",
+    "merge_tree": "6d40e994f33b7af24abcaef80448818de4bada81",
+    "merged_at": "2026-11-09T04:24:28Z"
+  },
+  "hardware": {},
+  "firmware": {
+    "atoms3-lite": {
+      "deviceId": "atoms3-lite",
+      "board": "m5atoms3lite",
+      "profile": "atoms3-lite-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "clockDivisor": 1,
+      "oneInsnPerTb": true,
+      "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+      "firmwareSha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+      "wasmSha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+      "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "javascriptSha256": "19d8102e2b405bb9aa1d1933141f263c8f15b45c0654a21a64a4985e8774f3b9",
+      "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+    },
+    "cores3": {
+      "deviceId": "cores3",
+      "board": "m5cores3",
+      "profile": "cores3-wasm-uiflow-workbench-wallclock-candidate",
+      "clockDivisor": 1,
+      "oneInsnPerTb": true,
+      "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+      "firmwareSha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+      "wasmSha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+      "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "javascriptSha256": "19d8102e2b405bb9aa1d1933141f263c8f15b45c0654a21a64a4985e8774f3b9",
+      "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+    }
+  },
+  "execution": {
+    "environment": "Local browser-WASM virtual-device validation on system Chrome and Apple M4 GPU",
+    "local_runs_completed_at": "2026-11-09T04:12:53.589Z",
+    "hosted_release": {
+      "run": 42561655744,
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42561655744",
+      "terminal_observed_at": "2026-11-09T04:51:48Z"
+    },
+    "merged_local_full_gate": {
+      "source_commit": "5f15d1f824958829f7d62648a5efbfe5fcee2edb",
+      "finished_at": "2026-11-09T05:44:25.174Z"
+    },
+    "prepared_release": {
+      "workflow_run": 42569300648,
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42569300648",
+      "release_url": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-uiflow-ready-20261109-5f15d1f",
+      "source_commit": "5f15d1f824958829f7d62648a5efbfe5fcee2edb",
+      "finished_at": "2026-11-09T05:48:07Z"
+    },
+    "public_https_readback": {
+      "url": "https://m5agent.github.io/m5stack-esp-emulator/",
+      "device": "cores3",
+      "finished_at": "2026-11-09T05:48:58.829Z"
+    }
+  },
+  "checks": [
+    {
+      "name": "prior_hosted_atom_s3_lite_gate",
+      "status": "FAIL",
+      "run": 42557006648
+    },
+    {
+      "name": "local_atom_s3_lite_baseline",
+      "status": "PASS",
+      "checks": 58
+    },
+    {
+      "name": "local_atom_s3_lite_candidate_first",
+      "status": "FAIL",
+      "checks_before_failure": 48
+    },
+    {
+      "name": "local_atom_s3_lite_candidate_first_failure_cleanup",
+      "status": "PASS",
+      "closed_targets": 6
+    },
+    {
+      "name": "local_core_s3_candidate",
+      "status": "PASS",
+      "checks": 24
+    },
+    {
+      "name": "local_atom_s3_lite_candidate_controlled_retry",
+      "status": "PASS",
+      "checks": 58
+    },
+    {
+      "name": "fda5858e_platform_python_suite",
+      "status": "PASS",
+      "discovered": 2041,
+      "skipped": 10
+    },
+    {
+      "name": "fda5858e_node_contracts_validators_scope_and_diff",
+      "status": "PASS"
+    },
+    {
+      "name": "fda5858e_hosted_ci_historical_startup_fixture",
+      "status": "FAIL",
+      "runs": [
+        42560814074,
+        42560658764
+      ]
+    },
+    {
+      "name": "71c011d8_historical_startup_and_static_checks",
+      "status": "PASS",
+      "startup_checks": 9
+    },
+    {
+      "name": "71c011d8_local_core_s3_compatibility",
+      "status": "PASS",
+      "checks": 24
+    },
+    {
+      "name": "pr_196_compatibility_ci",
+      "status": "PASS",
+      "checks": 4,
+      "runs": [
+        42561230752,
+        42561225854
+      ]
+    },
+    {
+      "name": "42561655744_hosted_build_and_export",
+      "status": "PASS"
+    },
+    {
+      "name": "42561655744_hosted_browser_gate",
+      "status": "FAIL",
+      "pass": 1,
+      "fail": 1,
+      "not_run": 58
+    },
+    {
+      "name": "42561655744_matrix_editor",
+      "status": "PASS",
+      "checks": 58,
+      "cdp_targets_closed": 5
+    },
+    {
+      "name": "42561655744_matrix_first_button_keyboard_press",
+      "status": "FAIL",
+      "detail": "No pressed state observed after the first keyboard press."
+    },
+    {
+      "name": "42561655744_matrix_buttons_failure_cleanup",
+      "status": "FAIL",
+      "detail": "QMP exited 0 and four pthread targets cleared. One engine CDP target was still visible before context closure."
+    },
+    {
+      "name": "42561655744_pages_deployment_and_online_readback",
+      "status": "NOT RUN",
+      "detail": "Deployment skipped after hosted gate failure."
+    },
+    {
+      "name": "5f15d1f_merged_local_full_browser_gate",
+      "status": "PASS",
+      "pass": 60,
+      "fail": 0,
+      "not_run": 0
+    },
+    {
+      "name": "5f15d1f_prepared_candidate_package_integrity",
+      "status": "PASS",
+      "assets": 2135
+    },
+    {
+      "name": "prepared_candidate_release_roundtrip",
+      "status": "PASS",
+      "release_tag": "pages-uiflow-ready-20261109-5f15d1f"
+    },
+    {
+      "name": "42569300648_prepared_site_pages_deployment",
+      "status": "PASS"
+    },
+    {
+      "name": "public_https_core_s3_readback",
+      "status": "PASS",
+      "checks": 31
+    },
+    {
+      "name": "other_boards_on_public_https",
+      "status": "NOT RUN",
+      "detail": "Online acceptance was scoped to CoreS3. Full 60-case coverage was local."
+    },
+    {
+      "name": "physical_hardware_and_native_device_service",
+      "status": "NOT RUN",
+      "detail": "This recovery exercises browser-WASM."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/local-candidate-summary.json",
+      "kind": "derived_summary"
+    },
+    {
+      "url": "https://github.com/m5agent/agent-work-logs/blob/ed77b7a73039f811b03ad4881a7707446451c54a/records/esp-emulator/2026-11-09-uiflow-workbench-ready/followups/2026-11-09-formal-pages-publication/report.md",
+      "kind": "immutable_failed_hosted_attempt"
+    },
+    {
+      "path": "evidence/hosted-42561655744-summary.json",
+      "kind": "derived_hosted_summary"
+    },
+    {
+      "path": "evidence/merged-local-gate-summary.json",
+      "kind": "derived_local_full_gate_summary"
+    },
+    {
+      "path": "evidence/prepared-release-42569300648-summary.json",
+      "kind": "derived_prepared_release_and_live_summary"
+    }
+  ],
+  "notes": [
+    "The first local candidate reset failure remains distinct from the controlled retry.",
+    "Source and delivery evidence are separated by tested commit."
+  ],
+  "scope": "Prepared Pages delivery and CoreS3 public HTTPS readback. Earlier regular Hosted gate failures are retained."
+}

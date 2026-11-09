@@ -21,3 +21,4 @@ Pages、物理硬件和其它型号属于 `NOT RUN`。
 ## 后续发布
 
 - [正式 Pages 发布尝试](followups/2026-11-09-formal-pages-publication/)保留 hosted 门槛失败和部署跳过结果。
+- [Pages Worker 关闭恢复与预构建发布](followups/2026-11-09-pages-worker-close-recovery/)保留 Hosted 失败、本机 60/60 和公开 HTTPS CoreS3 31/31。

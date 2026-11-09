@@ -21,7 +21,7 @@
 | 2026-11-09 | M5Stack Models | 四款主机模型与 GitHub Pages | `PASS`（4 款线上 WebGL 复验、28 份资源字节一致） | [查看](m5stack-models/2026-11-09-priority-controllers/) |
 | 2026-11-09 | ESP Emulator | Core2 原生面板刷新 | `PARTIAL`（原生修复和同固件触摸回归通过，真机与浏览器未运行） | [查看](esp-emulator/2026-11-09-core2-panel-refresh/) |
 | 2026-11-09 | Firmware Review Service | EMBER 2.1 独立应用镜像审核 | `PARTIAL`（虚拟烧录回读、SD 读卡和 PCM 验证通过，真机未运行，未提交 Burner） | [查看](firmware-review-service/2026-11-09-ember-app-only-intake/) |
-| 2026-11-09 | ESP Emulator | 设备预览中的 UIFlow 就绪提示 | `PARTIAL`（本地 CoreS3 通过，正式 Pages 门槛失败，部署跳过） | [查看](esp-emulator/2026-11-09-uiflow-workbench-ready/followups/2026-11-09-formal-pages-publication/) |
+| 2026-11-09 | ESP Emulator | 设备预览中的 UIFlow 就绪提示 | `PASS`（预构建部署，公开 HTTPS CoreS3 31/31，常规 Hosted 门槛 FAIL） | [查看](esp-emulator/2026-11-09-uiflow-workbench-ready/followups/2026-11-09-pages-worker-close-recovery/) |
 | 2026-11-09 | ESP Emulator | 设备目录、基线帧、Unit provenance 与 Classic 烧录 | `PARTIAL`（PR194 已交付，#190/#191/#193 已关闭，#178/#192 完整负载仍开放） | [查看](esp-emulator/2026-11-09-issue-fixes-178-190-193/followups/2026-11-09-pr194-delivery/) |
 | 2026-11-09 | Firmware Review Service | Cardputer ADV MP3 Player v1.0.0 启动复核 | `PARTIAL`（虚拟板默认扩展触发 I2C1 自锁，板级 A/B 恢复画面；SD 初始化另有限制，真机与播放未验证） | [查看](firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/) |
 | 2026-11-09 | ESP Emulator | Cardputer ADV 裸板与 SPI SD 修复 | `PARTIAL`（原版虚拟播放和浏览器无卡启动通过，真机未测） | [查看](firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/followups/2026-11-09-cardputer-adv-model-fidelity/) |
