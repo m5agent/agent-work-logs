@@ -19,3 +19,5 @@
 源码改动由项目 PR 提供。工作记录保留源固件、规范化 Flash、运行时、帧和证据 SHA-256。证据摘要已省略本机路径、私有端点和执行标识，未附原始固件或运行日志。
 
 [原始 Wi-Fi 帧与 PM1 输出复测](raw-wifi-followup.md)
+
+[原版 Evil 混杂收包及有序发送捕获复验](monitor-stream-followup.md)
