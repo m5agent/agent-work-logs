@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Browser simulator Skill and public CoreS3 firmware display smoke",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "8131c4682e4ef89b7a28ec6a47ab09f38a2636f1",
+    "local_skill_commit": "67a2bf6b7511e3344eae2b04cf904fd70d64a79c",
+    "pages_source_commit": "5f15d1f824958829f7d62648a5efbfe5fcee2edb",
+    "deployed_index_sha256": "16585268376aeaced39afa16f6e7e630d7ca278ba7123ddf212ca5f65eee57cc"
+  },
+  "hardware": {
+    "model": "CoreS3 K128",
+    "kind": "virtual-device",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Official CoreS3 UIFlow2 v2.5.3",
+    "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin",
+    "source_bytes": 16121856,
+    "source_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+    "flash_bytes": 16777216,
+    "flash_sha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73"
+  },
+  "execution": {
+    "environment": "desktop Chromium on public GitHub Pages",
+    "pages_url": "https://m5agent.github.io/m5stack-esp-emulator/",
+    "engine": "qemu-wasm",
+    "profile": "cores3-wasm-vm-div8",
+    "clock_divisor": 8,
+    "runtime_wasm_sha256": "684ee05cb3f136ca3b214706006d96faa4685c45149973a342b3e536a0cdc55a",
+    "runtime_glue_sha256": "19d8102e2b405bb9aa1d1933141f263c8f15b45c0654a21a64a4985e8774f3b9",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "runs": [
+      {
+        "id": "public-url-run",
+        "firmware_source": "public-https-direct-url",
+        "started_at": "2026-11-09T08:30:57.946Z",
+        "stopped_at": "2026-11-09T08:31:38.483Z",
+        "guest_inputs": [],
+        "serial_markers": [
+          "ESP-ROM:esp32s3-20210327",
+          "SPI_FLASH_BOOT",
+          "entry 0x403c8890"
+        ],
+        "serial_bytes": 395,
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "sequence": 94,
+          "format": "rgb565le",
+          "source": "qemu-display-surface-shared",
+          "source_sequence": 238,
+          "sha256": "55638ef27b0ab355f83239d9b4bfea6563508c2b66dd6c1ffb455d1dd478d540"
+        },
+        "observed_screen": "UIFlow2 Develop menu",
+        "cleanup": {
+          "gracefulExit": true,
+          "exitCode": 0,
+          "workersCreated": 5,
+          "workersAtExit": 0,
+          "disposal": {
+            "workersRemaining": 0,
+            "workersTerminatedByDispose": 0,
+            "workerCountScope": "nested-pthreads",
+            "enginePlacement": "dedicated-worker-v1",
+            "engineWorkersAtAcknowledgement": 1,
+            "ownerTerminatesAfterAcknowledgement": true
+          },
+          "engineOwnership": {
+            "engineWorkersCreated": 1,
+            "engineOwnerLive": false,
+            "engineCloseNotificationReceived": true,
+            "engineCloseNotifications": 1,
+            "engineNormalTerminations": 1,
+            "engineFallbackTerminations": 0,
+            "enginePortTransferred": true,
+            "engineSelfCloseNotifications": 1
+          },
+          "engineOwnershipStage": "before-iframe-removal",
+          "explicitWorkerDisposal": true,
+          "iframeRemoved": true
+        },
+        "original_receipt_sha256": "5b2cf3c1af2ebf449a12c52ba797d79d89955a2f2761b0c85def40a1aa580d00",
+        "original_receipt_bytes": 1625121
+      },
+      {
+        "id": "browser-local-bin-run",
+        "firmware_source": "local-file-picker",
+        "browser": "157.0.8103.38",
+        "started_at": "2026-11-09T08:34:52.841Z",
+        "stopped_at": "2026-11-09T08:35:33.670Z",
+        "guest_inputs": [],
+        "serial_markers": [
+          "ESP-ROM:esp32s3-20210327",
+          "SPI_FLASH_BOOT",
+          "entry 0x403c8890"
+        ],
+        "serial_bytes": 310,
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "sequence": 128,
+          "format": "rgb565le",
+          "source": "qemu-display-surface-shared",
+          "source_sequence": 332,
+          "sha256": "77f2aa3d88298ebf3ed98fa8740adc10a827f62e53450bd989e2a07ae9d459f2"
+        },
+        "observed_screen": "UIFlow2 startup splash",
+        "cleanup": {
+          "gracefulExit": true,
+          "exitCode": 0,
+          "workersCreated": 5,
+          "workersAtExit": 0,
+          "disposal": {
+            "workersRemaining": 0,
+            "workersTerminatedByDispose": 0,
+            "workerCountScope": "nested-pthreads",
+            "enginePlacement": "dedicated-worker-v1",
+            "engineWorkersAtAcknowledgement": 1,
+            "ownerTerminatesAfterAcknowledgement": true
+          },
+          "engineOwnership": {
+            "engineWorkersCreated": 1,
+            "engineOwnerLive": false,
+            "engineCloseNotificationReceived": true,
+            "engineCloseNotifications": 1,
+            "engineNormalTerminations": 1,
+            "engineFallbackTerminations": 0,
+            "enginePortTransferred": true,
+            "engineSelfCloseNotifications": 1
+          },
+          "engineOwnershipStage": "before-iframe-removal",
+          "explicitWorkerDisposal": true,
+          "iframeRemoved": true
+        },
+        "worker_targets": {
+          "observed": 6,
+          "remaining": 0,
+          "wall_ms": 2071
+        },
+        "native_service_or_firmware_cdn_requests": 0,
+        "original_stopped_receipt_sha256": "0605cfae7c21904ef448a60e0ec410e40185ab7122bd21e9de6bba23d6019540",
+        "original_stopped_receipt_bytes": 1397223
+      }
+    ],
+    "skill_zip_sha256": "2069554003cc975131af548b0713094f9371a386af57dd18fe2ffb9de358afa0"
+  },
+  "checks": [
+    {
+      "level": "build",
+      "status": "PASS",
+      "scope": "Skill validator and deterministic standalone archive"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "PASS",
+      "scope": "public URL firmware intake, CoreS3 boot, guest frame and Stop"
+    },
+    {
+      "level": "data_behavior",
+      "status": "NOT RUN",
+      "scope": "application interaction and network functions"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "physical hardware and other firmware/models"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "PASS",
+      "scope": "local BIN intake and real CoreS3 guest splash"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "local BIN Stop with six CDP Worker targets reclaimed"
+    },
+    {
+      "level": "build",
+      "status": "PASS",
+      "scope": "2052 platform tests, 2042 passed, 10 skipped, plus snapshot, coverage, peripheral, profile and packaging validators"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cores3-develop-frame-crop.png",
+      "kind": "derived-frame-crop",
+      "source": "public-url-run RGB565 frame 94",
+      "sha256": "48a3b376b5afd514eaee3a6492db47c43612705f17f00ed1a8d7bf5c7517c061"
+    },
+    {
+      "path": "evidence/cores3-local-bin-splash.png",
+      "kind": "guest-canvas-screenshot",
+      "source": "browser-local-bin-run raw screen",
+      "sha256": "e57346c97625c09a9191dd2ab7c1474329dc01751cc98d3bed3f3b3c6724f22a"
+    }
+  ],
+  "notes": [
+    "The original receipt contains the browser session identifier and raw framebuffer. This summary retains its hash, size and selected measurements.",
+    "The guest emitted two I2C initialization warnings. The verification covers boot, display and stop.",
+    "An initial local-file test used an application serial marker that this stock firmware does not emit. That attempt was canceled as a test-harness issue. The completed run used the ROM boot marker plus same-run framebuffer."
+  ]
+}

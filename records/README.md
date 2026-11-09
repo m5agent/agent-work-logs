@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-09 | ESP Emulator | 轻量浏览器 Skill 与线上固件画面 | `PASS`（CoreS3 本地 BIN 与 HTTPS 直链、真实客体帧及停止） | [查看](esp-emulator/2026-11-09-browser-simulator-skill/) |
 | 2026-11-09 | ESP Emulator | Classic 串口烧录与 StickS3 审查修复 | `PARTIAL`（PR209 已合并，Classic 33 次完整烧录，#201–#204 模型 issue 已重新开放） | [查看](esp-emulator/2026-11-09-sticks3-classic-issue-followup/) |
 | 2026-11-09 | ESP Emulator | CoreMatrix 官方启动与四款 WASM | `PARTIAL`（四款虚拟设备固件通过限定验收，Pages 单独跟踪） | [查看](esp-emulator/2026-11-09-four-controller-wasm/) |
 | 2026-11-09 | ESP Emulator | 四款主机接入与固件复测 | `PARTIAL`（三款原生原厂固件通过限定交互，CoreMatrix C61 诊断通过，官方 UIFlow2 仅启动） | [查看](esp-emulator/2026-11-09-four-controller-integration/) |
