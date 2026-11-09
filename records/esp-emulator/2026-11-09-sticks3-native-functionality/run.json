@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 PM1、USB、BLE HID 和 Wi-Fi 控制器验证",
+  "source": {
+    "issue": [
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/201",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/202",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/203",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/204"
+    ],
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "67a2bf6b7511e3344eae2b04cf904fd70d64a79c",
+    "final_commit": "560005a20dc3e29d826561856ab58e21b10f2d79",
+    "pull_request": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "StickS3_PMIC_Upgrade": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+    "Bit_Pirate_v1_6": "a93557398b87a50ac1bbd99ff98e93fb842bff0f0f3634d463d4d53497f8747e",
+    "AirMouseS3_v1_0": "bdb567de990ef5c2a0fd113c033b259acd17e49717c9fdb5e9cc9d3776b208d8",
+    "M5Gotchi_v0_7": "50425b34eb8b4f2b3dea7c85753e37f649c995bfae72b6189e4454077d686246",
+    "Evil_StickS3": "84582c9b4179b11a6d7fc1e918731e44b066f24ea7fbbfe6f9516a910c44b653"
+  },
+  "execution": {
+    "environment": "macOS arm64 native QEMU m5sticks3, isolated Device Service and an independent H4 regression runner",
+    "final_integrated_runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+    "final_integrated_execution": "122 层原生运行时通过官方 PM1 升级、坏 CRC 拒绝、ROM strap、Bit Pirate CDC 和 USB 复位控制。平台 2061 项，10 项跳过，无失败。"
+  },
+  "checks": [
+    {
+      "scope": "PM1 IAP controller, invalid CRC rejection and ROM download/Flash return",
+      "status": "PASS"
+    },
+    {
+      "scope": "Original PM1 completion over USB Serial/JTAG on its independently hashed runtime",
+      "status": "PASS"
+    },
+    {
+      "scope": "Earlier PM1 host QEMU -11",
+      "status": "FAIL"
+    },
+    {
+      "scope": "Earlier PM1 strap return with spinlock assertion and additional guest reset",
+      "status": "FAIL"
+    },
+    {
+      "scope": "Original Bit Pirate USB OTG enumeration and CDC bulk I/O",
+      "status": "PASS"
+    },
+    {
+      "scope": "H4 HID host pairing and two real StickS3 fixture reports",
+      "status": "PASS"
+    },
+    {
+      "scope": "Existing StickS3 NUS exchange",
+      "status": "PASS"
+    },
+    {
+      "scope": "Exact AirMouseS3 native BLE controller transport",
+      "status": "PARTIAL"
+    },
+    {
+      "scope": "Bounded Wi-Fi monitor RX, benign TX metadata and original M5Gotchi scan",
+      "status": "PASS"
+    },
+    {
+      "scope": "Original Evil-StickS3 monitor workflow and arbitrary TX byte capture",
+      "status": "NOT RUN"
+    },
+    {
+      "scope": "Physical hardware, RF, electrical and security effects",
+      "status": "NOT RUN"
+    },
+    {
+      "scope": "Original Evil-StickS3 scan list with the virtual radio on and off",
+      "status": "PASS"
+    },
+    {
+      "scope": "Earlier original PM1 wrote 20480 bytes without observing final CDC marker",
+      "status": "FAIL"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/validation-summary.json",
+      "sha256": "79e19a651b97fc0a87cb808583f11468a1933068705fc834e300a1c07edbef01",
+      "kind": "redacted summary"
+    },
+    {
+      "path": "evidence/evil-stock-summary.json",
+      "sha256": "230d5dc8067ceeb49a7651f74d87e3a3f7affeb4439cba7dd4808bdff50098b6"
+    },
+    {
+      "path": "evidence/pm1-release-summary.json",
+      "sha256": "dc400f780eef76f8f16a45eb65e8ea584d8be4a159f14cc2b131bbc92d665563"
+    },
+    {
+      "path": "evidence/usb-release-summary.json",
+      "sha256": "561457dcd7faaeefc7b9d6e1a9420535b6d3e92c72f702f0c0fc87994db56702"
+    }
+  ],
+  "notes": [
+    "Per-run runtime identities and historical failures are retained.",
+    "Fill final integration fields from the completed integrated rerun before publishing."
+  ]
+}
