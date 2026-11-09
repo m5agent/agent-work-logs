@@ -13,3 +13,7 @@
 | hardware validation | NOT RUN | 本次针对浏览器 WASM |
 
 在源码树中以 `publish=true`、项目默认前缀和空服务地址触发 `public-site.yml`。本机复验采用 `build_public_site.py` 的正式导出和 `test_public_uiflow_guest.mjs`，选择 `M5_QEMU_DEVICE=stickc-plus` 及系统 Chrome。托管失败记录与本地通过各自绑定不同执行环境。回滚传输改动可撤销本次工作流提交；当前线上部署由 GitHub Actions 管理。
+
+## 本地全量门禁及独立复验
+
+本地同版全量串行门禁在 AtomS3 编辑器硬复位后失败。复位前执行代码、真实画面和旧控制台取消已通过。新 guest 在访问 SYSTIMER 0x60023008 时出现 Core 1 LoadStorePIFAddrError，未取得新启动就绪标记。同一固件和 WASM 的独立复验通过 63 项，回收全部 Worker。首次失败保留，本地全量结果不作为发布通过依据。 [复验摘要](evidence/local-atoms3-reset-summary.json)
