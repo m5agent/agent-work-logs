@@ -18,5 +18,6 @@
 - [既有 PaperMono 与 Cardputer-ADV 官方固件](evidence/existing-board-regression-summary.json)
 - [CoreMatrix C61 探针与官方固件对照](evidence/corematrix-c61-summary.json)
 - [复现方法、范围及回滚](report.md)
+- [合并与追加工作台复测](followups/2026-11-09-delivery/)
 
 真机、完整原生设备矩阵和新增机型的正式 QEMU-WASM 验收为 `NOT RUN`。Paper 的 EPD 结论只覆盖数字扫描图像。

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/197",
+    "base_commit": "5f15d1f824958829f7d62648a5efbfe5fcee2edb",
+    "candidate_commit": "7dcfa0679719dfb221205220afc7be56ab75e954",
+    "main_commit": "e9bb9f2efa5201e024715dedd5152b54086f6a59",
+    "main_tree_matches_candidate": true
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "virtual": [
+      "m5papers3",
+      "m5paperdiy",
+      "m5papermono"
+    ]
+  },
+  "firmware": {
+    "PaperS3": "official Factory V0.5",
+    "PaperDIY": "official Factory V1.0 source build with second-start NVS",
+    "PaperMono": "official factory demo v1.2"
+  },
+  "execution": {
+    "environment": "Chromium 157.0.8103.38, combined native Xtensa QEMU, isolated Device Service",
+    "merged_at": "2026-11-09T06:24:53Z",
+    "virtual_device_validation": true,
+    "platform_tests": {
+      "passed": 2035,
+      "skipped": 10,
+      "failed": 0
+    },
+    "ci": [
+      {
+        "event": "push candidate",
+        "run_id": 42572291336,
+        "status": "PASS"
+      },
+      {
+        "event": "pull_request",
+        "run_id": 42572473869,
+        "status": "PASS"
+      },
+      {
+        "event": "push main",
+        "run_id": 42572877824,
+        "status": "PASS"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "PaperS3 official firmware upload, GT911 pointer and EPD icon",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperDIY same-session A/B hold and release from the browser",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperMono official factory display",
+      "status": "PARTIAL",
+      "note": "identical white frame on pre-change and merged QEMU"
+    },
+    {
+      "name": "main delivery",
+      "status": "PASS"
+    },
+    {
+      "name": "production QEMU-WASM for new devices and physical devices",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/paperdiy-native-workbench-summary.json",
+    "evidence/papermono-factory-baseline-summary.json",
+    "evidence/papers3-native-workbench-summary.json"
+  ]
+}
