@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "PR194 delivery for catalog and native regression repairs",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "178, 190, 191, 192, 193",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/194",
+    "base_commit": "dd2eb35d2e6a909992268089ddc37e27970d4a92",
+    "head_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7",
+    "tested_head_tree": "b0dd8ca219646c64474de456234937231f51bc7d",
+    "merge_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "merge_tree": "b0dd8ca219646c64474de456234937231f51bc7d",
+    "merged_at": "2026-11-09T01:48:46Z"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Git/GitHub delivery, exact source and issue readback",
+    "task_id": "",
+    "session_id": "",
+    "observed_at": "2026-11-09T01:51:51.153494+00:00",
+    "completed_at": "2026-11-09T01:53:50.006277+00:00"
+  },
+  "checks": [
+    {
+      "name": "published_pre_pr_validation",
+      "status": "PASS",
+      "source_commit": "42bb6b53dae18265a0e64c4c6775d87c564a07e7",
+      "link": "https://github.com/m5agent/agent-work-logs/blob/29f70a77c6e566752c6d22cee2bcd30f80071501/records/esp-emulator/2026-11-09-issue-fixes-178-190-193/report.md",
+      "full_platform": {
+        "tests_run": 2039,
+        "passed": 2029,
+        "skipped": 10,
+        "seconds": 129.987
+      }
+    },
+    {
+      "name": "scope_closing_references",
+      "status": "PASS",
+      "issues": [
+        190,
+        191,
+        193
+      ]
+    },
+    {
+      "name": "premerge_ci",
+      "status": "PASS",
+      "detail": "Four terminal premerge checks on the exact head succeeded.",
+      "pr_run": 42547165408,
+      "push_run": 42547097821,
+      "expected_jobs": 4,
+      "jobs": 4
+    },
+    {
+      "name": "source_merge_and_tree_equivalence",
+      "status": "PASS",
+      "detail": "Normal merge; tested head and merge tree identical.",
+      "merge_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+      "tree": "b0dd8ca219646c64474de456234937231f51bc7d"
+    },
+    {
+      "name": "issue_state_readback",
+      "status": "PASS",
+      "detail": "Actual GitHub state readback recorded.",
+      "states": {
+        "178": "OPEN",
+        "188": "OPEN",
+        "190": "CLOSED",
+        "191": "CLOSED",
+        "192": "OPEN",
+        "193": "CLOSED"
+      }
+    },
+    {
+      "name": "postmerge_main_ci",
+      "status": "PASS",
+      "detail": "Both jobs completed successfully at the exact merge commit.",
+      "run": 42547519502,
+      "head": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+      "jobs": 2,
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42547519502"
+    },
+    {
+      "name": "owned_branch_retirement",
+      "status": "PASS",
+      "detail": "Four round-owned refs removed; one owned empty worktree removed and three detached at exact old HEAD; preexisting refs preserved.",
+      "branches": 4
+    },
+    {
+      "name": "new_guest_execution_or_service_deployment",
+      "status": "NOT RUN",
+      "detail": "Delivery uses the already measured source evidence and concerns code integration."
+    },
+    {
+      "name": "postmerge_local_validators",
+      "status": "PASS",
+      "markers": [
+        "PROJECT_SNAPSHOT_OK",
+        "RUNTIME_COVERAGE_OK",
+        "PERIPHERAL_CATALOG_OK",
+        "QEMU_PROFILES_OK"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/branch-cleanup-summary.json",
+      "kind": "derived_summary",
+      "bytes": 1023,
+      "sha256": "82f4f950501f0b419fdff26d36a396063a355bc603ad94989c8ab493483d2e77"
+    },
+    {
+      "path": "evidence/history-backup-summary.json",
+      "kind": "derived_summary",
+      "bytes": 348,
+      "sha256": "2125242b2ad24ec088448c584921abe79ecba88ba74cee0b8e11f7bebb66d22a"
+    },
+    {
+      "path": "evidence/issue-state-summary.json",
+      "kind": "derived_summary",
+      "bytes": 1446,
+      "sha256": "a16f0e09981d14bf9bd6313a4fb338d03104d55dd517045007309fc76da5074e"
+    },
+    {
+      "path": "evidence/pr-merge-summary.json",
+      "kind": "derived_summary",
+      "bytes": 2535,
+      "sha256": "2595b5df49ae8283c2a848bdd636d5d191117dded74956290b9cf57288dcd939"
+    },
+    {
+      "path": "evidence/main-ci-summary.json",
+      "kind": "derived_summary",
+      "bytes": 1156,
+      "sha256": "64eb9a442a5154df83e285f36fd54ffa599e715603c201c5a2e67e87ed3263d5"
+    },
+    {
+      "path": "evidence/delivery-summary.json",
+      "kind": "derived_summary",
+      "bytes": 4786,
+      "sha256": "0857996622fc29e6fc8666af6c342cb2368c016a5eb10f6a27de46d01bb71808"
+    },
+    {
+      "url": "https://github.com/m5agent/agent-work-logs/blob/29f70a77c6e566752c6d22cee2bcd30f80071501/records/esp-emulator/2026-11-09-issue-fixes-178-190-193/report.md",
+      "kind": "immutable_pre_pr_validation"
+    }
+  ],
+  "notes": [
+    "This execution records completed source delivery and cleanup.",
+    "Prior validation and R1 failure are preserved in the original record.",
+    "The full #178/#192 load gates and #188 diagnosis remain open."
+  ]
+}
