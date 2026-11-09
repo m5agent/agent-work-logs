@@ -21,3 +21,7 @@
 ## 新机型定向验证
 
 同一独立导出上，初代 Cardputer、PaperS3、PaperDIY 的固定例程各通过 26 项，CoreMatrix 通过 28 项。另用未修改的 CoreMatrix 官方 UIFlow2 v2.5.4 镜像验证真实 C61 启动、USB REPL、矩阵显示和停止，五个 CDP Worker 目标全部退出。这些是本地定向结果。 [运行摘要](evidence/four-board-fixed-and-c61-stock-summary.json)
+
+## 托管门禁失败
+
+工作流 42597576699 成功构建并导出两套 WASM，CoreMatrix 原版通过。Atom Matrix 编辑器用例在正常 QMP 退出、四个 pthread 全部消失和 iframe 移除后，CDP 仍观察到一个引擎 Worker。72 个计划用例中首个失败，71 个未执行，部署跳过。失败层级为浏览器清场；复位后的真实代码执行已经通过。 [托管工作流](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42597576699) · [脱敏摘要](evidence/hosted-atom-matrix-worker-summary.json)
