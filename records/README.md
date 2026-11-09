@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-09 | ESP Emulator | 四款主机接入与固件复测 | `PARTIAL`（三款原生原厂固件通过限定交互，CoreMatrix C61 诊断通过，官方 UIFlow2 仅启动） | [查看](esp-emulator/2026-11-09-four-controller-integration/) |
 | 2026-11-09 | M5Stack Models | 四款主机模型与 GitHub Pages | `PASS`（4 款线上 WebGL 复验、28 份资源字节一致） | [查看](m5stack-models/2026-11-09-priority-controllers/) |
 | 2026-11-09 | ESP Emulator | Core2 原生面板刷新 | `PARTIAL`（原生修复和同固件触摸回归通过，真机与浏览器未运行） | [查看](esp-emulator/2026-11-09-core2-panel-refresh/) |
 | 2026-11-09 | Firmware Review Service | EMBER 2.1 独立应用镜像审核 | `PARTIAL`（虚拟烧录回读、SD 读卡和 PCM 验证通过，真机未运行，未提交 Burner） | [查看](firmware-review-service/2026-11-09-ember-app-only-intake/) |

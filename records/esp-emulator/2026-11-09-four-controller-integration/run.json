@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "PaperDIY, PaperS3, original Cardputer and CoreMatrix integration",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5f15d1f824958829f7d62648a5efbfe5fcee2edb",
+    "candidate_commit": "7dcfa0679719dfb221205220afc7be56ab75e954",
+    "model_repository": "https://github.com/yuyun2000/m5stack-models",
+    "model_commit": "de6cddc065674ecb53bba29c7fe90d9ab4ee32f7"
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "virtual_boards": [
+      "m5paperdiy",
+      "m5papers3",
+      "m5cardputer",
+      "esp32c61,m5corematrix=on"
+    ]
+  },
+  "firmware": {
+    "PaperDIY": [
+      "factory V1.0 source build with NVS second-start state",
+      "official UIFlow2 v2.5.4",
+      "composed UIFlow2 input probe"
+    ],
+    "PaperS3": [
+      "Factory V0.5",
+      "official UIFlow2 v2.5.4",
+      "composed UIFlow2 input probe"
+    ],
+    "Cardputer K132": [
+      "Factory V0.8",
+      "Factory V0.9",
+      "official UIFlow2 v2.5.4"
+    ],
+    "CoreMatrix C158": [
+      "ESP-IDF v5.5.4 reference I2C probe",
+      "official UIFlow2 v2.5.4"
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; dedicated Device Service; native Xtensa QEMU and separate C61 diagnostic; Chromium 157",
+    "xtensa_runtime_sha256": "07c3b7a48fabff2052f6023400e2356d6fb4be2e5a8719c11d33a68cd9d8069c",
+    "c61_runtime_sha256": "0261ab3269fb746794c9b32603238354f5f45fafcfc5cc01d45071f1bef8dab5",
+    "qualification": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "native PaperS3 GT911 to factory EPD icon",
+      "status": "PASS"
+    },
+    {
+      "name": "native PaperDIY independent A/B hold and release to factory EPD",
+      "status": "PASS"
+    },
+    {
+      "name": "official Paper UIFlow2 boot/display plus separate composed input checks",
+      "status": "PASS"
+    },
+    {
+      "name": "correct Paper firmware import and cross-model factory rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "native K132 stock firmware selection and real workbench upload/A/LCD",
+      "status": "PASS"
+    },
+    {
+      "name": "K132 replacement LittleFS overlay",
+      "status": "FAIL"
+    },
+    {
+      "name": "C158 diagnostic HP I2C, PM1 and 16x16 TM1680",
+      "status": "PASS"
+    },
+    {
+      "name": "C158 official UIFlow2 operational display",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "local CoreMatrix 3D workbench input, display texture and probe-only access",
+      "status": "PASS"
+    },
+    {
+      "name": "existing board firmware on the combined Xtensa runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "local static WebGL and PaperS3 experimental browser guest",
+      "status": "PASS"
+    },
+    {
+      "name": "new production WASM, full native matrix and physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputer-native-workbench-summary.json",
+    "evidence/cardputer-stock-summary.json",
+    "evidence/corematrix-c61-summary.json",
+    "evidence/corematrix-workbench-summary.json",
+    "evidence/existing-board-regression-summary.json",
+    "evidence/paper-board-admission-summary.json",
+    "evidence/paper-native-combined-summary.json",
+    "evidence/paper-stock-uiflow2-summary.json",
+    "evidence/papers3-browser-prototype-summary.json",
+    "evidence/workbench-browser-regression-summary.json"
+  ]
+}
