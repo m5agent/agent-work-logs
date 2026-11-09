@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "native-core-s3-uiflow-stage-readiness",
+  "validation": "virtual-device validation",
+  "status": "PASS",
+  "execution_scope": "Canonical source workbench via isolated same-origin tokenless Device Service; CoreS3, no Unit attached.",
+  "baseline": {
+    "status": "PASS",
+    "checked_out_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "source_hashes": {
+      "platform/web/index.html": "9d638a5e9b732140a66e0efeba3ac7f9bf89632c1eba83e87b17bbcad3228cd6",
+      "platform/web/public.js": "6c6b39c134680838e5b127bedcc9e33a039c980ba19ab1a49acdf95d6241598d",
+      "platform/web/public.css": "b0649645211f00623f3698b8ec862228130c189502b3c74d0d129bb4c1e924a9",
+      "platform/web/public-service-program.js": "b8c9efec6c27d043f1b467d1109d831e9a67ab616a98f4b224724397c9ebe9bd",
+      "platform/web/public-session-controller.js": "e958db8f7fe0a602016ada081776fa0746d9108f469ec630798520f332de1de0",
+      "platform/tools/serve.py": "d78110e9498f1c5f3eb9dc0c3cba216f903850ab9cd55a4b61e57f38aad3d1ab",
+      "platform/tools/preview_service.py": "0ff612a6675982cc1e899ca1d01964ce32c33eb5c92b27316ad753c6c9124d98",
+      "platform/tools/uiflow_runtime.py": "92495b8782f8cb7d6800f2ca774fc81af5bd7702a0c44b76b03071b4e1698fcb"
+    },
+    "raw_report": {
+      "bytes": 3747,
+      "sha256": "efd414f7efa631b83429859c82781e76d94f286338f490ffdbdff0e28f9209ae"
+    },
+    "harness": {
+      "bytes": 16617,
+      "sha256": "d47bc5ec8a4f08b605a4920663bbff4bd5f2ea5c03af4117789fb59eab19c849"
+    },
+    "started_at": "2026-11-09T02:07:37.724Z",
+    "finished_at": "2026-11-09T02:07:42.966Z",
+    "checks": [
+      {
+        "name": "isolated-service-backend-ready",
+        "ok": true
+      },
+      {
+        "name": "canonical-served-source",
+        "ok": true
+      },
+      {
+        "name": "same-session-uart-ready-before-program",
+        "ok": true
+      },
+      {
+        "name": "no-guest-program-and-no-browser-frame-get-at-idle",
+        "ok": true
+      },
+      {
+        "name": "idle-model-black-and-no-applied-frame",
+        "ok": true
+      },
+      {
+        "name": "baseline-has-no-stage-readiness-notice",
+        "ok": true
+      },
+      {
+        "name": "independent-qmp-frame-is-true-black",
+        "ok": true
+      },
+      {
+        "name": "owned-ui-stop-zip-and-cleanup",
+        "ok": true
+      },
+      {
+        "name": "actual-browser-preview-posts-tokenless-same-origin",
+        "ok": true
+      },
+      {
+        "name": "source-stable-and-no-page-errors",
+        "ok": true
+      }
+    ],
+    "identity": {
+      "firmware_sha256": "700d243ade543627100c76e8b68a2740d2701d6b0801b1262f2642f0512861f7",
+      "base_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+      "source_boot_main": [
+        {
+          "path": "boot.py",
+          "size": 245,
+          "sha256": "ea081ccfa793e43b59f3aa558fdcee42ef62047650730f8a526d0ceaa9ed95a6",
+          "origin": "caller"
+        },
+        {
+          "path": "main.py",
+          "size": 5,
+          "sha256": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+          "origin": "caller"
+        }
+      ],
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "flash_transport": "host-image",
+      "isolated_flash": true
+    },
+    "idle": {
+      "same_vm_uart_ready": true,
+      "program_started": false,
+      "browser_frame_requested": false,
+      "ui": {
+        "frame_ready": false,
+        "model_pixel": [
+          0,
+          0,
+          0
+        ],
+        "frame_text": "等待应用显示帧",
+        "python_text": "UIFlow 已就绪"
+      },
+      "independent_screendump": {
+        "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "width": 320,
+        "height": 240,
+        "corner": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "nonblack_pixels": 0
+      }
+    },
+    "screenshots": [
+      {
+        "name": "idle-ready",
+        "bytes": 81219,
+        "sha256": "e0a08faa71f2399deaf48d1d63fcea3cf62e881343ec45eafca1e9a235414ead"
+      }
+    ],
+    "actual_browser_posts": [
+      {
+        "kind": "create",
+        "authorization_present": false,
+        "same_origin": true
+      },
+      {
+        "kind": "close",
+        "authorization_present": false,
+        "same_origin": true
+      }
+    ],
+    "prestop_product_evidence": {
+      "bytes": 13643,
+      "sha256": "793359fdfb2e97ca03f01dcd5c6b26dc81af5a386bae79c84d71e957c9cb9c7a",
+      "member_count": 10,
+      "crc_membership_sha_and_identity": "PASS",
+      "captured_session_state": "running"
+    },
+    "cleanup": {
+      "ui_stop": true,
+      "preview_closed": true,
+      "session_stopped_history_retained": true,
+      "pid_gone": true,
+      "active_sessions": 0,
+      "active_leases": 0,
+      "mutable_flash_released": true,
+      "browser_disconnected": true,
+      "owned_service_exit_code": 0
+    }
+  },
+  "candidate": {
+    "status": "PASS",
+    "checked_out_commit": "d111addaf1ff4919951b40cd2926f6b90517cf46",
+    "source_hashes": {
+      "platform/web/index.html": "6073ea76bc7ea530f6b77206ec4d7de0d65eb4ff35be02e808cb145782ad1b2c",
+      "platform/web/public.js": "3aff72322078855cab38d2967982fed134e60e611408e295d9456da033ad6243",
+      "platform/web/public.css": "1f9eeda0b6c435a3b45c6b807ef001c40caa987b3b32d03673a21dfecab9ab4a",
+      "platform/web/public-service-program.js": "b8c9efec6c27d043f1b467d1109d831e9a67ab616a98f4b224724397c9ebe9bd",
+      "platform/web/public-session-controller.js": "e958db8f7fe0a602016ada081776fa0746d9108f469ec630798520f332de1de0",
+      "platform/tools/serve.py": "d78110e9498f1c5f3eb9dc0c3cba216f903850ab9cd55a4b61e57f38aad3d1ab",
+      "platform/tools/preview_service.py": "0ff612a6675982cc1e899ca1d01964ce32c33eb5c92b27316ad753c6c9124d98",
+      "platform/tools/uiflow_runtime.py": "92495b8782f8cb7d6800f2ca774fc81af5bd7702a0c44b76b03071b4e1698fcb"
+    },
+    "raw_report": {
+      "bytes": 5084,
+      "sha256": "d06154bfd79130c68c0427bdab34e64d1915c4f167d5ca45d7c83ad416b70d7e"
+    },
+    "harness": {
+      "bytes": 16765,
+      "sha256": "46651b6601ff0d1522c60bc6cb714bff80a6011197397678a7d137a346b23617"
+    },
+    "started_at": "2026-11-09T02:09:00.533Z",
+    "finished_at": "2026-11-09T02:09:07.890Z",
+    "checks": [
+      {
+        "name": "isolated-service-backend-ready",
+        "ok": true
+      },
+      {
+        "name": "canonical-served-source",
+        "ok": true
+      },
+      {
+        "name": "starting-visible-run-disabled",
+        "ok": true
+      },
+      {
+        "name": "same-session-uart-ready-before-program",
+        "ok": true
+      },
+      {
+        "name": "no-guest-program-and-no-browser-frame-get-at-idle",
+        "ok": true
+      },
+      {
+        "name": "idle-model-black-and-no-applied-frame",
+        "ok": true
+      },
+      {
+        "name": "ready-notice-visible-with-run-enabled",
+        "ok": true
+      },
+      {
+        "name": "independent-qmp-frame-is-true-black",
+        "ok": true
+      },
+      {
+        "name": "drawing-program-keeps-same-vm-and-identifies-frame",
+        "ok": true
+      },
+      {
+        "name": "actual-guest-red-frame",
+        "ok": true
+      },
+      {
+        "name": "ready-notice-gives-way-to-actual-model-frame",
+        "ok": true
+      },
+      {
+        "name": "owned-ui-stop-zip-and-cleanup",
+        "ok": true
+      },
+      {
+        "name": "notice-hidden-after-stop",
+        "ok": true
+      },
+      {
+        "name": "actual-browser-preview-posts-tokenless-same-origin",
+        "ok": true
+      },
+      {
+        "name": "source-stable-and-no-page-errors",
+        "ok": true
+      }
+    ],
+    "identity": {
+      "firmware_sha256": "700d243ade543627100c76e8b68a2740d2701d6b0801b1262f2642f0512861f7",
+      "base_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+      "source_boot_main": [
+        {
+          "path": "boot.py",
+          "size": 245,
+          "sha256": "ea081ccfa793e43b59f3aa558fdcee42ef62047650730f8a526d0ceaa9ed95a6",
+          "origin": "caller"
+        },
+        {
+          "path": "main.py",
+          "size": 5,
+          "sha256": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+          "origin": "caller"
+        }
+      ],
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068",
+      "flash_transport": "cache",
+      "isolated_flash": true
+    },
+    "idle": {
+      "same_vm_uart_ready": true,
+      "program_started": false,
+      "browser_frame_requested": false,
+      "ui": {
+        "frame_ready": false,
+        "model_pixel": [
+          0,
+          0,
+          0
+        ],
+        "frame_text": "等待应用显示帧",
+        "python_text": "UIFlow 已就绪",
+        "notice": "UIFlow 已就绪\n现在可以运行 MicroPython。程序绘图后，设备屏幕会更新。\n编辑代码"
+      },
+      "independent_screendump": {
+        "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "width": 320,
+        "height": 240,
+        "corner": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "nonblack_pixels": 0
+      }
+    },
+    "screenshots": [
+      {
+        "name": "starting",
+        "bytes": 89204,
+        "sha256": "09d57fc255493844b4a563bd363e4ae27a109aa28b0725ae8d3c4a3ddb9f6463"
+      },
+      {
+        "name": "idle-ready",
+        "bytes": 92330,
+        "sha256": "8bd389fa8e0dc979a19f49c03a5bb9a15b50c5531b07857c8ab640293d2a3549"
+      },
+      {
+        "name": "drawn-frame",
+        "bytes": 93111,
+        "sha256": "26df1e8abb5eee09e61263e421f2d61719997043da80eb87a8f2d1efde43c3e8"
+      }
+    ],
+    "actual_browser_posts": [
+      {
+        "kind": "create",
+        "authorization_present": false,
+        "same_origin": true
+      },
+      {
+        "kind": "run",
+        "authorization_present": false,
+        "same_origin": true
+      },
+      {
+        "kind": "close",
+        "authorization_present": false,
+        "same_origin": true
+      }
+    ],
+    "prestop_product_evidence": {
+      "bytes": 17566,
+      "sha256": "a79cd1cc8225d2e688ac92057f2df11962a21ffcbac81b4c63f48bac542ee941",
+      "member_count": 14,
+      "crc_membership_sha_and_identity": "PASS",
+      "captured_session_state": "running"
+    },
+    "cleanup": {
+      "ui_stop": true,
+      "preview_closed": true,
+      "session_stopped_history_retained": true,
+      "pid_gone": true,
+      "active_sessions": 0,
+      "active_leases": 0,
+      "mutable_flash_released": true,
+      "browser_disconnected": true,
+      "owned_service_exit_code": 0
+    },
+    "draw": {
+      "source_sha256": "faafed0cf4f271f174338cd6fda1314f9cd145f67f69b2f874ff46c70b0337cd",
+      "frame_sha256": "e2e7475ca7604826ce461e26f6c36dde6066aac093a9296e3dece5423c1febd3",
+      "width": 320,
+      "height": 240,
+      "corner": [
+        255,
+        0,
+        0,
+        255
+      ],
+      "nonblack_pixels": 76800,
+      "stdout_nonce_confirmed": true,
+      "real_guest_frame_accepted_by_model": true,
+      "same_session_pid_firmware": true,
+      "frame_run_execution_revision_identity_confirmed": true,
+      "stage_notice_hidden": true
+    }
+  },
+  "identity_comparison": {
+    "same_native_runtime_base_composed_firmware_and_boot_files": true,
+    "idle_raw_frame_bytes_equal": true,
+    "service_flash_mode": "host-image",
+    "baseline_flash_transport": "host-image",
+    "candidate_flash_transport": "cache; isolated verified Flash copy"
+  },
+  "reproduction": {
+    "service": "Run platform/tools/serve.py on an isolated loopback port and private state, with pinned QEMU/ROM and matching Python LittleFS dependencies.",
+    "baseline": "node \"$IDLE_BASELINE_HARNESS\" baseline \"$BASELINE_SOURCE\" \"$NEW_BASELINE_OUT\"",
+    "candidate": "node \"$IDLE_CANDIDATE_HARNESS\" candidate \"$CANDIDATE_SOURCE\" \"$NEW_CANDIDATE_OUT\"",
+    "source_observation": "The harness verifies served index/public.js source bytes, then exposes read-only UI state by appending one Playwright observation binding."
+  },
+  "limits": [
+    "Local virtual CoreS3 managed Preview only.",
+    "Browser WASM, uploaded BIN ordinary Start, other models and physical hardware not exercised by these two runs.",
+    "Flash transport here is host-image/cache; esptool serial transport not tested.",
+    "UI readiness is based on the same guest UART state; the overlay itself is not a guest framebuffer."
+  ],
+  "redaction": {
+    "removed": "A private harness port number in the reproduction note. Measurements and checks are unchanged.",
+    "original_summary_bytes": 12581,
+    "original_summary_sha256": "54d898d1a2cb30ab3d267554dfa61c2c74c9702b79482e90487e6bf242dc9d24"
+  }
+}

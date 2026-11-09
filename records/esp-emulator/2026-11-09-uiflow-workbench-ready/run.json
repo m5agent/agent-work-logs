@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "UIFlow ready cue beside the shared device preview",
+  "source": {
+    "issue": "Direct workbench feedback request",
+    "pull_request": "NOT RUN - pre-PR validation",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+    "tested_commit": "d111addaf1ff4919951b40cd2926f6b90517cf46",
+    "tested_tree": "2f4f14af308d07367d1f181e677032be3621a959",
+    "files_sha256": {
+      "platform/tests/test_public_micropython_ui.mjs": "a4773f8530b1e0e71a627dc2b42500a7f6dc6c2ff5cced6885224efd80ae16b7",
+      "platform/tests/test_public_qemu_entry.mjs": "6d7f61cc446cfd0ae535443dc146231488888ae28d0ed7a0b5b682b4f4b88464",
+      "platform/web/index.html": "6073ea76bc7ea530f6b77206ec4d7de0d65eb4ff35be02e808cb145782ad1b2c",
+      "platform/web/public.css": "1f9eeda0b6c435a3b45c6b807ef001c40caa987b3b32d03673a21dfecab9ab4a",
+      "platform/web/public.js": "3aff72322078855cab38d2967982fed134e60e611408e295d9456da033ad6243"
+    },
+    "parallel_main_observation": "340d80cf; validation identities are the pinned base and candidate above"
+  },
+  "hardware": {},
+  "firmware": {
+    "browser_cores3": {
+      "profile": "cores3-wasm-uiflow-workbench-wallclock-candidate",
+      "firmware_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+      "wasm_sha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+      "runtime_manifest_sha256": "fa6b56048ec91d100cb4f2a15088ce77e313bd2e6e8ba083229826b258297c51"
+    },
+    "native_cores3": {
+      "firmware_sha256": "700d243ade543627100c76e8b68a2740d2701d6b0801b1262f2642f0512861f7",
+      "runtime_sha256": "0e16a9bcd86b588dae6b3e3b523dfb8610a9eca37c50c141cce5f2ceb4612068"
+    }
+  },
+  "execution": {
+    "environment": "Local Chrome browser-WASM export and isolated native CoreS3 Device Service",
+    "task_id": "",
+    "session_id": "",
+    "recorded_at": "2026-11-09T02:15:14.550160+00:00"
+  },
+  "checks": [
+    {
+      "name": "browser_cores3",
+      "status": "PASS",
+      "baseline": 12,
+      "candidate": 24
+    },
+    {
+      "name": "native_cores3",
+      "status": "PASS",
+      "baseline": 10,
+      "candidate": 15
+    },
+    {
+      "name": "python_full_platform",
+      "status": "PASS",
+      "discovered": 2039,
+      "passed": 2029,
+      "skipped": 10,
+      "seconds": 136.705,
+      "original_log": {
+        "bytes": 14893,
+        "sha256": "ba64ee581c393184e1fa993de2e7a7498461ac9c24b6f9d61ec7c77a32a3ed02"
+      }
+    },
+    {
+      "name": "initial_node_launch",
+      "status": "FAIL",
+      "detail": "Dependency link absent. Reused existing locked dependencies and reran."
+    },
+    {
+      "name": "node_contracts_r2",
+      "status": "PASS",
+      "scripts": 33,
+      "original_log": {
+        "bytes": 20495,
+        "sha256": "a86d0b7fc5096de52406667e9269469134b5327e8630db70243968a978df71e8"
+      }
+    },
+    {
+      "name": "four_validators_and_pr_scope_diff",
+      "status": "PASS"
+    },
+    {
+      "name": "pages_deployment",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "source_pr_delivery",
+      "status": "NOT RUN",
+      "detail": "Pre-PR validation snapshot."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/browser-cores3-summary.json",
+      "kind": "bounded_summary",
+      "bytes": 15292,
+      "sha256": "3bacb73b5fe8378bddf968bfe14756a9ec1c1f21ba16235baa3b2095ab2fc45e"
+    },
+    {
+      "path": "evidence/native-cores3-summary.json",
+      "kind": "redacted_summary",
+      "bytes": 12814,
+      "sha256": "b9e99b0fed47d4bc83f09fbe37098e19438c0d07d9f324bc0e3371ba8995d073"
+    }
+  ],
+  "notes": [
+    "Measured local virtual-device paths. Browser post-stop evidence is a DOM snapshot. Native baseline used host-image and candidate an isolated verified cache copy."
+  ]
+}

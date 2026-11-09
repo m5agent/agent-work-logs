@@ -1,0 +1,419 @@
+{
+  "kind": "browser-wasm-cores3-uiflow-startup-feedback-comparison",
+  "status": "PASS",
+  "evidence_level": "virtual-device validation",
+  "scope": "Actual CoreS3 browser-WASM baseline and candidate on separate agent-owned local static exports, with identical execution artifacts and actual user interface controls.",
+  "baseline_commit": "80d1879a014a55bc598fbc1474445c1f6773ff34",
+  "candidate_source_binding": {
+    "commit_verified_after_export": "d111addaf1ff4919951b40cd2926f6b90517cf46",
+    "current_head_at_readback": "d111addaf1ff4919951b40cd2926f6b90517cf46",
+    "tested_web_sources_matching_commit": 33,
+    "export_manifest_binding": "Asset bytes and SHA256 values. Commit binding established separately by exact comparison of executed source closure with Git blobs.",
+    "only_changed_export_assets": [
+      "index.html",
+      "platform/web/index.html",
+      "platform/web/public.css",
+      "platform/web/public.js"
+    ],
+    "production_source": {
+      "platform/web/index.html": {
+        "source_sha256": "6073ea76bc7ea530f6b77206ec4d7de0d65eb4ff35be02e808cb145782ad1b2c",
+        "exported_sha256": "16585268376aeaced39afa16f6e7e630d7ca278ba7123ddf212ca5f65eee57cc"
+      },
+      "platform/web/public.css": {
+        "source_sha256": "1f9eeda0b6c435a3b45c6b807ef001c40caa987b3b32d03673a21dfecab9ab4a",
+        "exported_sha256": "1f9eeda0b6c435a3b45c6b807ef001c40caa987b3b32d03673a21dfecab9ab4a"
+      },
+      "platform/web/public.js": {
+        "source_sha256": "3aff72322078855cab38d2967982fed134e60e611408e295d9456da033ad6243",
+        "exported_sha256": "3aff72322078855cab38d2967982fed134e60e611408e295d9456da033ad6243"
+      }
+    }
+  },
+  "shared_execution": {
+    "deviceId": "cores3",
+    "board": "m5cores3",
+    "profile": "cores3-wasm-uiflow-workbench-wallclock-candidate",
+    "firmwareSha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+    "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "javascriptSha256": "30bd87652a1938146d7d9dfd3cd96bc582c85eee756801fe177f1a74f79fdcb0",
+    "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+    "wasmSha256": "96ea9f91956aa80926182ed174ea426f3f4c84e96ca58754fa249063fdda5ca1",
+    "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+    "clockDivisor": 1,
+    "clockOverride": null,
+    "oneInsnPerTb": true,
+    "actualArguments": [
+      "./this.program",
+      "-M",
+      "m5cores3",
+      "-drive",
+      "file=/flash.bin,if=mtd,format=raw",
+      "-L",
+      "/rom",
+      "-display",
+      "none",
+      "-serial",
+      "pipe:/bridge/uart",
+      "-serial",
+      "file:/bridge/serial1",
+      "-qmp",
+      "stdio",
+      "-drive",
+      "if=none,id=efuse,file=/efuse.bin,format=raw",
+      "-global",
+      "driver=nvram.esp32s3.efuse,property=drive,value=efuse",
+      "-accel",
+      "tcg,thread=multi,one-insn-per-tb=on"
+    ],
+    "runtime_manifest_sha256": "fa6b56048ec91d100cb4f2a15088ce77e313bd2e6e8ba083229826b258297c51",
+    "base_path": "/m5stack-esp-emulator/",
+    "observer": {
+      "path": ".work/flash-feedback-validation-20261109/observe.mjs",
+      "sha256": "04613b39464b0c37992d30f5174952d581ba296f1e791d52fb4cc70605b06176"
+    },
+    "helper_sha256": "1c845e5f060f04dc47ecd3926f0d7f87e31036ecf33603f0fbaf250be76c7a1f",
+    "same_runtime_assets": true
+  },
+  "baseline": {
+    "status": "PASS",
+    "started_at": "2026-11-09T02:06:15.163Z",
+    "finished_at": "2026-11-09T02:06:28.957Z",
+    "checks_passed": 12,
+    "checks_failed": 0,
+    "check_names": [
+      "pages-service-worker-isolation",
+      "hardware-angle-renderer",
+      "uiflow-is-default-firmware",
+      "programming-startup-described-accurately",
+      "actual-programming-startup-marker",
+      "exact-uiflow-firmware-and-ready-binding",
+      "ready-with-original-editor-and-zero-code-runs",
+      "normal-guest-exit-no-forced-termination",
+      "pthreads-closed-before-iframe-removal",
+      "all-cdp-workers-closed-before-context",
+      "no-device-service-requests",
+      "no-page-errors"
+    ],
+    "raw_report": {
+      "bytes": 5123928,
+      "sha256": "dcafb68509251b2998466078b9db39fb3cca1b46ff7e822529240176b3dd99aa"
+    },
+    "site_manifest": {
+      "bytes": 430756,
+      "sha256": "c2b345b17ae7e35ee35ba7e0c239ed339859538122973cc0661c416640af3556"
+    },
+    "browser": "157.0.8103.38",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "boot_serial": {
+      "bytes": 448,
+      "sha256": "1ac2cf1ad2bb3d6e94858cb496894f4a65c8f4c3ab9ccb0a9fd4260112dae251",
+      "ready_marker": "M5_UIFLOW_WORKBENCH_READY",
+      "marker_count": 1
+    },
+    "default_editor_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+    "idle": {
+      "runtime_status": "running",
+      "ready": true,
+      "console_epoch": 0,
+      "run_executions": 0,
+      "frame_status": "实际屏幕 · 320 × 240 · 帧 1",
+      "python_status": "UIFlow 已就绪",
+      "model_sequence": 1,
+      "model_black_pixels": 76800,
+      "model_red_pixels": 0,
+      "raw_frame_sequence": "1",
+      "model_frame_sequence": "1",
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sequence": 1,
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 20,
+        "black_pixels": 76800,
+        "red_pixels": 0,
+        "pixel_count": 76800,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+      },
+      "feedback": null,
+      "no_frame_within_6000ms_sample": false
+    },
+    "screenshots": {
+      "ready-without-code.png": {
+        "bytes": 95702,
+        "sha256": "a6a207a2bc1fe99fd7671f6a1bc9dd28bda365c10fbdae16ae8c226724069a49"
+      },
+      "workbench.png": {
+        "bytes": 253449,
+        "sha256": "668ec7830fce43ff54645d8ac6558f63a49827ce5b091c80095a019825676eb6"
+      }
+    },
+    "cleanup": {
+      "qmp_exit_code": 0,
+      "normal_exit": true,
+      "pthreads_created": 5,
+      "pthreads_at_exit": 0,
+      "forced_disposals": 0,
+      "engine_fallbacks": 0,
+      "iframe_removed": true,
+      "actual_cdp_fences": {
+        "before_held_iframe_removal": {
+          "observed": 6,
+          "live": 0
+        },
+        "before_context_close": {
+          "observed": 6,
+          "live": 0
+        }
+      },
+      "runner_exit_code": 0,
+      "browser_and_owned_server_closed": true
+    }
+  },
+  "candidate": {
+    "status": "PASS",
+    "started_at": "2026-11-09T02:07:14.744Z",
+    "finished_at": "2026-11-09T02:07:28.299Z",
+    "checks_passed": 24,
+    "checks_failed": 0,
+    "check_names": [
+      "pages-service-worker-isolation",
+      "hardware-angle-renderer",
+      "uiflow-is-default-firmware",
+      "programming-startup-described-accurately",
+      "actual-programming-startup-marker",
+      "exact-uiflow-firmware-and-ready-binding",
+      "ready-with-original-editor-and-zero-code-runs",
+      "starting-feedback-observed-before-ready",
+      "ready-feedback-visible-before-code",
+      "ready-layout-1440",
+      "ready-layout-390",
+      "ready-editor-link-focuses-real-source",
+      "draw-real-red-screen-source-reached-same-guest",
+      "draw-real-red-screen-stdout",
+      "draw-real-red-screen-no-stderr",
+      "draw-real-red-screen-run-reenabled",
+      "guest-frame-reaches-model-buffer",
+      "waiting-feedback-clears-after-real-draw",
+      "normal-guest-exit-no-forced-termination",
+      "pthreads-closed-before-iframe-removal",
+      "all-cdp-workers-closed-before-context",
+      "waiting-feedback-clears-on-stop",
+      "no-device-service-requests",
+      "no-page-errors"
+    ],
+    "raw_report": {
+      "bytes": 5439829,
+      "sha256": "a754769ed1f4fde2fed341df846b541ffb1cc400a1dedeae95d1da8bc1230856"
+    },
+    "site_manifest": {
+      "bytes": 430756,
+      "sha256": "4f34b0526784f567074386d3ec14159532eb2bb8bb9537f98f5b98ddfe856dc8"
+    },
+    "browser": "157.0.8103.38",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+    "boot_serial": {
+      "bytes": 448,
+      "sha256": "c4c37514ff5a857fbef158a53b80319cbbe6109f0a43cbb7a1462e217f69d6c2",
+      "ready_marker": "M5_UIFLOW_WORKBENCH_READY",
+      "marker_count": 1
+    },
+    "default_editor_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+    "idle": {
+      "runtime_status": "running",
+      "ready": true,
+      "console_epoch": 0,
+      "run_executions": 0,
+      "frame_status": "实际屏幕 · 320 × 240 · 帧 1",
+      "python_status": "UIFlow 已就绪",
+      "model_sequence": 1,
+      "model_black_pixels": 76800,
+      "model_red_pixels": 0,
+      "raw_frame_sequence": "1",
+      "model_frame_sequence": "1",
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sequence": 1,
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 14,
+        "black_pixels": 76800,
+        "red_pixels": 0,
+        "pixel_count": 76800,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+      },
+      "feedback": {
+        "text": "UIFlow 已就绪\n              现在可以运行 MicroPython。程序绘图后，设备屏幕会更新。\n            \n            编辑代码",
+        "visible": true,
+        "state": "ready"
+      },
+      "no_frame_within_6000ms_sample": false
+    },
+    "screenshots": {
+      "drawn-real-frame.png": {
+        "bytes": 97581,
+        "sha256": "a25e6b23b03cafe22c02515235e0634cacfc3fd5e7c2fe9b64b8e1c0063fdaef"
+      },
+      "ready-without-code-1440.png": {
+        "bytes": 107014,
+        "sha256": "fb5384dc848dba25eb5516ae8cd209c4eb66dee185fdaa1b720fee40ca28a439"
+      },
+      "ready-without-code-390.png": {
+        "bytes": 86652,
+        "sha256": "ecb23cb8dfe932f171808c56d457f52c39669eafff5579975defc0eb87f49e94"
+      },
+      "ready-without-code.png": {
+        "bytes": 107014,
+        "sha256": "fb5384dc848dba25eb5516ae8cd209c4eb66dee185fdaa1b720fee40ca28a439"
+      },
+      "workbench.png": {
+        "bytes": 258070,
+        "sha256": "71d0cba69ca41797ff0b15fe79cf3637b4bb674a1e3399ddb73eb6fdf5fce8da"
+      }
+    },
+    "cleanup": {
+      "qmp_exit_code": 0,
+      "normal_exit": true,
+      "pthreads_created": 5,
+      "pthreads_at_exit": 0,
+      "forced_disposals": 0,
+      "engine_fallbacks": 0,
+      "iframe_removed": true,
+      "actual_cdp_fences": {
+        "before_held_iframe_removal": {
+          "observed": 6,
+          "live": 0
+        },
+        "before_context_close": {
+          "observed": 6,
+          "live": 0
+        }
+      },
+      "runner_exit_code": 0,
+      "browser_and_owned_server_closed": true
+    },
+    "phases": [
+      {
+        "phase": null,
+        "hidden": true,
+        "text": "编辑代码"
+      },
+      {
+        "phase": "starting",
+        "hidden": false,
+        "text": "正在启动固件\n              正在准备设备，请稍候。\n            \n            编辑代码"
+      },
+      {
+        "phase": "ready",
+        "hidden": false,
+        "text": "UIFlow 已就绪\n              现在可以运行 MicroPython。程序绘图后，设备屏幕会更新。\n            \n            编辑代码"
+      }
+    ],
+    "layouts": [
+      {
+        "viewport": 1440,
+        "document_width": 1440,
+        "notice_width": 798,
+        "notice_in_viewport": true
+      },
+      {
+        "viewport": 390,
+        "document_width": 390,
+        "notice_width": 324,
+        "notice_in_viewport": true
+      }
+    ],
+    "drawn": {
+      "runtime_status": "running",
+      "ready": true,
+      "console_epoch": 0,
+      "run_executions": 1,
+      "frame_status": "实际屏幕 · 320 × 240 · 帧 2",
+      "python_status": "运行完成",
+      "model_sequence": 2,
+      "model_black_pixels": 0,
+      "model_red_pixels": 76800,
+      "raw_frame_sequence": "2",
+      "model_frame_sequence": "2",
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sequence": 2,
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 16,
+        "black_pixels": 0,
+        "red_pixels": 76800,
+        "pixel_count": 76800,
+        "sha256": "6c3c796f317b1dedac4e04e377080d92154b3f28f4e8d5252a3f2d083245cc86"
+      },
+      "feedback": {
+        "text": "编辑代码",
+        "visible": false,
+        "state": null
+      }
+    },
+    "stopped": {
+      "runtime_status": "stopped",
+      "ready": true,
+      "console_epoch": 0,
+      "run_executions": 1,
+      "frame_status": "保留最后显示帧",
+      "python_status": "启动浏览器中的 UIFlow 后即可运行",
+      "model_sequence": 2,
+      "model_black_pixels": 0,
+      "model_red_pixels": 76800,
+      "raw_frame_sequence": "2",
+      "model_frame_sequence": "2",
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sequence": 2,
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 16,
+        "black_pixels": 0,
+        "red_pixels": 76800,
+        "pixel_count": 76800,
+        "sha256": "6c3c796f317b1dedac4e04e377080d92154b3f28f4e8d5252a3f2d083245cc86"
+      },
+      "feedback": {
+        "text": "编辑代码",
+        "visible": false,
+        "state": null
+      }
+    },
+    "editor_link_focused_actual_source": true,
+    "program": {
+      "name": "draw-real-red-screen",
+      "source_sha256": "4c6f4958720835ba390ef62991641e4ad94a3c720db993e111cb88f3b5134b4d",
+      "transfer": "raw-paste",
+      "stdout_marker": "M5_FEEDBACK_DRAW_READY"
+    }
+  },
+  "reproduction": {
+    "export": "python platform/tools/build_public_site.py --output <fresh-work-output> --base-path /m5stack-esp-emulator/ --qemu-runtime <frozen-runtime75> --littlefs-runtime <frozen-littlefs>",
+    "runner": "node .work/flash-feedback-validation-20261109/observe.mjs",
+    "common_environment": {
+      "M5_QEMU_DEVICE": "cores3",
+      "M5_PUBLIC_BASE_PATH": "/m5stack-esp-emulator/",
+      "M5_QEMU_READY_TIMEOUT_MS": "600000"
+    },
+    "baseline_environment": {
+      "M5_FLASH_FEEDBACK_PHASE": "baseline",
+      "M5_PUBLIC_SITE": ".work/flash-feedback-validation-20261109/site-main",
+      "M5_PUBLIC_QEMU_OUT": ".work/flash-feedback-validation-20261109/baseline-first"
+    },
+    "candidate_environment": {
+      "M5_FLASH_FEEDBACK_PHASE": "candidate",
+      "M5_FLASH_FEEDBACK_SELECTOR": "#stageFirmwareNotice",
+      "M5_FLASH_FEEDBACK_READY_TEXT": "程序绘图后，设备屏幕会更新。",
+      "M5_PUBLIC_SITE": ".work/flash-feedback-validation-20261109/site-candidate",
+      "M5_PUBLIC_QEMU_OUT": ".work/flash-feedback-validation-20261109/candidate-first"
+    },
+    "host_setup": "Set M5_WASM_CHROME to the configured hardware Chrome executable and M5_WASM_NODE_MODULES to the locked Playwright dependencies. Use a new output directory per execution."
+  },
+  "limits": [
+    "Both runs demonstrate the exact CoreS3 firmware/runtime path. Native service, independent HTTPS deployment, other boards and physical hardware require their own evidence.",
+    "The post-stop DOM observation verifies the notice is hidden after stopping following a successful drawing program.",
+    "Only bounded frame statistics and asset identities are included. Raw reports, boot serial text and screenshots remain in ignored evidence storage."
+  ]
+}

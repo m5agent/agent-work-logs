@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-09 | ESP Emulator | 设备预览中的 UIFlow 就绪提示 | `PASS`（本地 CoreS3 browser 12/24 与 native 10/15，Pages 与真机未运行） | [查看](records/esp-emulator/2026-11-09-uiflow-workbench-ready/) |
 | 2026-11-09 | ESP Emulator | 设备目录、基线帧、Unit provenance 与 Classic 烧录 | `PARTIAL`（PR194 已交付，#190/#191/#193 已关闭，#178/#192 完整负载仍开放） | [查看](records/esp-emulator/2026-11-09-issue-fixes-178-190-193/followups/2026-11-09-pr194-delivery/) |
 | 2026-11-09 | Firmware Review Service | Cardputer ADV MP3 Player v1.0.0 启动复核 | `PARTIAL`（虚拟板默认扩展触发 I2C1 自锁，板级 A/B 恢复画面；SD 初始化另有限制，真机与播放未验证） | [查看](records/firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/) |
 | 2026-11-09 | ESP Emulator | Cardputer ADV 裸板与 SPI SD 修复 | `PARTIAL`（原版虚拟播放和浏览器无卡启动通过，真机未测） | [查看](records/firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/followups/2026-11-09-cardputer-adv-model-fidelity/) |
