@@ -17,7 +17,7 @@
 
 - Skill 校验和打包契约通过。平台回归 2,042 项通过，10 项跳过。独立 ZIP 包含说明、MIT 许可证和校验清单。
 - ZIP 的 SHA-256 为 `2069554003cc975131af548b0713094f9371a386af57dd18fe2ffb9de358afa0`。公开工作台直接复用当前部署。
-- CoreS3 使用官方 UIFlow2 v2.5.3 完整镜像，分别经公开 HTTPS BIN 链接和本地 BIN 导入运行。两次均取得 320×240 客体帧。直链试验显示 UIFlow2 Develop，本地文件试验保留了启动画面。两次均正常停止，本地文件试验的 6 个 CDP Worker target 全部消失。
+- CoreS3 使用官方 UIFlow2 v2.5.3 完整镜像，分别经公开 HTTPS BIN 链接和本地 BIN 导入运行。两次均取得 320×240 客体帧。直链试验显示 UIFlow2 Develop，本地文件首轮保留了启动画面。独立复测中，本地 BIN 也进入 Develop，两个显示区域与直链样本的 SHA-256 一致。本地文件运行停止后各有 6 个 CDP Worker target 全部消失。 [复测摘要](evidence/local-bin-develop-summary.json)
 - 裁切保留状态栏和菜单，原始 RGB565 帧的 SHA-256 在运行摘要中。 [运行摘要](run.json) · [客体帧裁切](evidence/cores3-develop-frame-crop.png)
 
 ## 文件与边界

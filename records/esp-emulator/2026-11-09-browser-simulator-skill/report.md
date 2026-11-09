@@ -28,3 +28,7 @@
 URL 试验的运行时 profile 为 `cores3-wasm-vm-div8`。输入只有工作台的文件配置、运行、展开屏幕和停止，未向客体发送按键或触摸。停止回执记录退出码 0、嵌套 Worker 计数归零和 iframe 已移除。运行摘要保留镜像与运行时哈希，排除原始会话标识及完整像素。
 
 独立 ZIP 可由仓库的 `python3 platform/tools/agent_skills.py --out-dir dist/agent-skills` 重建。恢复本地 Skill 安装可移除新 Skill 目录。工作台本身复用原部署，浏览器 Flash 属于当次运行。
+
+## 本地 BIN 进入 Develop 的复测
+
+另建一轮浏览器会话加载同一份本地文件。原始屏幕第 378 帧的 Develop 选中标签和 WEB IDE 标题区域 SHA-256 均与直链样本一致。串口保留同一固件的 ROM 启动和应用入口标记。停止后回执记录退出码 0、iframe 移除，独立 CDP 再次确认 6 个 Worker target 全部消失。复测过程中修正了第一次取图判定过早的问题，首轮启动画面证据仍保留。 [复测摘要](evidence/local-bin-develop-summary.json)
