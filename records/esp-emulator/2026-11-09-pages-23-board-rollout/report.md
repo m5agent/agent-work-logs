@@ -17,3 +17,7 @@
 ## 本地全量门禁及独立复验
 
 本地同版全量串行门禁在 AtomS3 编辑器硬复位后失败。复位前执行代码、真实画面和旧控制台取消已通过。新 guest 在访问 SYSTIMER 0x60023008 时出现 Core 1 LoadStorePIFAddrError，未取得新启动就绪标记。同一固件和 WASM 的独立复验通过 63 项，回收全部 Worker。首次失败保留，本地全量结果不作为发布通过依据。 [复验摘要](evidence/local-atoms3-reset-summary.json)
+
+## 新机型定向验证
+
+同一独立导出上，初代 Cardputer、PaperS3、PaperDIY 的固定例程各通过 26 项，CoreMatrix 通过 28 项。另用未修改的 CoreMatrix 官方 UIFlow2 v2.5.4 镜像验证真实 C61 启动、USB REPL、矩阵显示和停止，五个 CDP Worker 目标全部退出。这些是本地定向结果。 [运行摘要](evidence/four-board-fixed-and-c61-stock-summary.json)
