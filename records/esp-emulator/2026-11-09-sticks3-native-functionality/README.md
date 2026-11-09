@@ -21,3 +21,5 @@
 [原始 Wi-Fi 帧与 PM1 输出复测](raw-wifi-followup.md)
 
 [原版 Evil 混杂收包及有序发送捕获复验](monitor-stream-followup.md)
+
+[PM1 输出稳定性、原版 AirMouse HID 和最终组合回归](terminal-cdc-native-hid-followup.md)

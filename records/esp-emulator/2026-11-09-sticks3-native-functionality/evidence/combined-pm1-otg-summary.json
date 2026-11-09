@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "validation": "virtual-device validation",
+  "status": "PASS for the recorded native Device Service cases",
+  "machine": "m5sticks3",
+  "service_source_commit": "f67218b6b018c238a7b33c0b6a431057d4620512",
+  "service_source_file_sha256": {
+    "platform/tools/device_service.py": "622fd2f1db75d4b26ffd6cc233d857dc36087f79687f903458f74f15f561b0ca",
+    "platform/tools/serve.py": "d78110e9498f1c5f3eb9dc0c3cba216f903850ab9cd55a4b61e57f38aad3d1ab",
+    "tests/firmware/sticks3_pm1/run.py": "b84877c02d9406bf924ea553cbfdec7afd2b516f59cf4d31ca89e2b63f47af49",
+    "tests/firmware/sticks3_pm1/check_cdc_mmio.py": "8bf0e4130dc3c3cff2192420eeaf0078a5707f8f8d55b755b5146a322e402ac3",
+    "tests/firmware/sticks3_usb_otg/run_test.py": "af6ba08fb69c328c23a18a93fd9984478d3a82c94c82bda6d6d5cbdf881040ab",
+    "patches/qemu-m5stack-peripherals/0177-sticks3-usb-serial-jtag-host-timing.patch": "914703539f612a23153a7be62a786ad46a962619b2fda1eaaab97b012ca19a43"
+  },
+  "runtime_sha256": "d8f6b447ecd93eab02237d00296704f747da2d8908eb39b6e1c9e76159c755a5",
+  "esp32s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "flash_transport": "host-image",
+  "pm1": {
+    "stock_firmware_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+    "expected_payload_sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+    "capture_runtime_env": {
+      "M5SW_USB_SERIAL_JTAG_CAPTURE": "1"
+    },
+    "capture_clock_args": [
+      "-accel",
+      "tcg,thread=single",
+      "-icount",
+      "shift=5,align=off,sleep=off"
+    ],
+    "button_a_tap_virtual_ms": 450,
+    "terminal_marker": "=== Firmware upgrade completed ===",
+    "stock_iap_passed": 3,
+    "bad_crc_passed": 1,
+    "no_capture_strap_passed": 1,
+    "parallel_session_limit": 2,
+    "cases": [
+      {
+        "case": "01-iap",
+        "mode": "iap",
+        "status": "PASS",
+        "firmware_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "virtual_flash_sha256_at_capture": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "evidence_zip_sha256": "00a802025d4b2268b56704a92ea13d37d6739ed320b15f42581e004dd7d177da",
+        "uart0_sha256": "702d6fc751f0dafd99b38810607e942bd67ebb014f4efdad258c922c74b84ce5",
+        "uart0_button_a": true,
+        "uart0_completion_marker": false,
+        "cdc_member_present": true,
+        "cdc_bytes": 8355,
+        "cdc_sha256": "a84f0f663810a3a4de806a508fd42eacb68405460d39fc4c0a85a9cf6af7c0a4",
+        "cdc_completion_marker": true,
+        "before_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff",
+        "after_frame_sha256": "dd9efd952ad2b5132ce9e8ebbf3a5ea9bf55f98f89ed7fe0294b97950e3a64b1",
+        "pm1_qom": {
+          "address": 110,
+          "iap-active": false,
+          "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+          "iap-bytes-written": 20480,
+          "iap-run-rejections": 0,
+          "iap-upgrades": 1
+        },
+        "stopped_after_evidence": true
+      },
+      {
+        "case": "02-iap",
+        "mode": "iap",
+        "status": "PASS",
+        "firmware_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "virtual_flash_sha256_at_capture": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "evidence_zip_sha256": "333de425d18091b6e01bdb189da1a7420604f48666e5dfaeb63608a1ede9c5f9",
+        "uart0_sha256": "702d6fc751f0dafd99b38810607e942bd67ebb014f4efdad258c922c74b84ce5",
+        "uart0_button_a": true,
+        "uart0_completion_marker": false,
+        "cdc_member_present": true,
+        "cdc_bytes": 8355,
+        "cdc_sha256": "a84f0f663810a3a4de806a508fd42eacb68405460d39fc4c0a85a9cf6af7c0a4",
+        "cdc_completion_marker": true,
+        "before_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff",
+        "after_frame_sha256": "dd9efd952ad2b5132ce9e8ebbf3a5ea9bf55f98f89ed7fe0294b97950e3a64b1",
+        "pm1_qom": {
+          "address": 110,
+          "iap-active": false,
+          "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+          "iap-bytes-written": 20480,
+          "iap-run-rejections": 0,
+          "iap-upgrades": 1
+        },
+        "stopped_after_evidence": true
+      },
+      {
+        "case": "03-iap",
+        "mode": "iap",
+        "status": "PASS",
+        "firmware_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "virtual_flash_sha256_at_capture": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "evidence_zip_sha256": "475702f199740fb43b402fd461f5517c79330051f2d040ea3921dfc171f1bd62",
+        "uart0_sha256": "702d6fc751f0dafd99b38810607e942bd67ebb014f4efdad258c922c74b84ce5",
+        "uart0_button_a": true,
+        "uart0_completion_marker": false,
+        "cdc_member_present": true,
+        "cdc_bytes": 8355,
+        "cdc_sha256": "a84f0f663810a3a4de806a508fd42eacb68405460d39fc4c0a85a9cf6af7c0a4",
+        "cdc_completion_marker": true,
+        "before_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff",
+        "after_frame_sha256": "dd9efd952ad2b5132ce9e8ebbf3a5ea9bf55f98f89ed7fe0294b97950e3a64b1",
+        "pm1_qom": {
+          "address": 110,
+          "iap-active": false,
+          "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+          "iap-bytes-written": 20480,
+          "iap-run-rejections": 0,
+          "iap-upgrades": 1
+        },
+        "stopped_after_evidence": true
+      },
+      {
+        "case": "04-bad-crc",
+        "mode": "bad-crc",
+        "status": "PASS",
+        "firmware_sha256": "3b6247e161f038355516c1cd1bb320146d145a32c5d5b5d69cc5e139bd5ec88e",
+        "virtual_flash_sha256_at_capture": "9f370584246696832a939d321c9e2792c0ef7d653518ca524d8ddc016c9190c3",
+        "evidence_zip_sha256": "b1b1d657da6b9d59784940d186a88674333e5f07954964a758b7106edf3b30cd",
+        "uart0_sha256": "702d6fc751f0dafd99b38810607e942bd67ebb014f4efdad258c922c74b84ce5",
+        "uart0_button_a": true,
+        "uart0_completion_marker": false,
+        "cdc_member_present": true,
+        "cdc_bytes": 10592,
+        "cdc_sha256": "8c19311b6c55a6f04d62c0959890c09798c0a46599a0f260c1b08713ce00fa14",
+        "cdc_completion_marker": false,
+        "before_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff",
+        "after_frame_sha256": "6a8d54b90c57ecc7fe1332f53296e05564029a6bc30af622ec803c171d504911",
+        "pm1_qom": {
+          "address": 84,
+          "iap-active": true,
+          "iap-app-sha256": "",
+          "iap-bytes-written": 20480,
+          "iap-run-rejections": 52,
+          "iap-upgrades": 0
+        },
+        "stopped_after_evidence": true
+      },
+      {
+        "case": "05-strap",
+        "mode": "strap",
+        "status": "PASS",
+        "firmware_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+        "virtual_flash_sha256_at_capture": "0e2d0c8fbb185606f344696f2f89a8a7b156c631b7474a5c57a3128cb8fa5a7c",
+        "evidence_zip_sha256": "bbd1df68f80d52542593bde1653100f760fcff308681497857eca90641d096c3",
+        "uart0_sha256": "563ba52c6e82b5d52997f433aceb0befd0dc2c9b668822d36f36dbcf9ea359fe",
+        "uart0_button_a": false,
+        "uart0_completion_marker": false,
+        "cdc_member_present": false,
+        "cdc_bytes": null,
+        "cdc_sha256": null,
+        "cdc_completion_marker": false,
+        "before_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff",
+        "after_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff",
+        "pm1_qom": {
+          "address": 110,
+          "iap-active": false,
+          "iap-app-sha256": "",
+          "iap-bytes-written": 0,
+          "iap-run-rejections": 0,
+          "iap-upgrades": 0
+        },
+        "stopped_after_evidence": true,
+        "uart0_rom_download": true,
+        "uart0_flash_boot_count": 2,
+        "download_frame_sha256": "daca2518a57113e49b8c8e478554b0779cd0cd23b7a84056fcf7bea2e764fdff"
+      }
+    ]
+  },
+  "stock_bit_pirate_usb_otg": {
+    "status": "PASS",
+    "firmware_sha256": "a93557398b87a50ac1bbd99ff98e93fb842bff0f0f3634d463d4d53497f8747e",
+    "capture_opt_in": true,
+    "stopped_after_evidence": true,
+    "evidence_zip_sha256": "40793c3e395eb86342f54c2d4fdf5879f9f0c12f8daeceace930b2dd8d0fe68f",
+    "device_descriptor_sha256": "54f97f2f1795cfdc69ff8dee50c8db255ae4f8e2b77b4498876205e4075cccfe",
+    "configuration_descriptor_sha256": "d1eb820925f74d2cc6fe93ea883c69a588c331bdc770b9b21799b84d78b6ddbc",
+    "hid_report_descriptor_sha256": "642c0e84764a8c0563abff1005af3cff31a7e36bdb7722f81c297cb614957fe6",
+    "cdc_line_coding": [
+      115200,
+      57600,
+      115200
+    ],
+    "bulk_out_ep3": "CRLF ACK",
+    "bulk_in_ep4_bytes": 406,
+    "bulk_in_ep4_sha256": "de91db3028ada53fa64c2007d12f9ff4981f8d507b2a43fa37aa90825df4931c",
+    "guest_markers": [
+      "Press any key to start",
+      "HIZ>"
+    ],
+    "serial_sha256": "4924ab3fa3ab0455bcf9d6e5dd2fadf3e98b6d58f12e10fd2852536a12434dce",
+    "transaction_sha256": "bd5ba7b696bba59d21158a082cc95f314b7a843220ddfe6c1eb861d8ae705bd3"
+  },
+  "fixed_usb_serial_jtag_qtest": {
+    "status": "PASS",
+    "qemu_sha256": "d8f6b447ecd93eab02237d00296704f747da2d8908eb39b6e1c9e76159c755a5",
+    "cdc_sha256": "df88150ecc9a22ed046c39c36a40dac70bc1f690884d81015096af57613ad753",
+    "cdc_bytes": 65
+  },
+  "cleanup": {
+    "sessions_stopped_after_evidence": 6,
+    "owned_services": [
+      {
+        "batch": "pm1",
+        "listener_closed": true,
+        "worker_has_tcp_listener": false
+      },
+      {
+        "batch": "otg",
+        "listener_closed": true,
+        "worker_has_tcp_listener": false
+      }
+    ],
+    "owned_runtime_processes_remaining": 0
+  },
+  "boundaries": {
+    "default_wallclock_cdc_stability": "NOT RUN in this shared-runtime retest",
+    "native_other_firmware_or_long_duration": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN"
+  }
+}
