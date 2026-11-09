@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "validation": "virtual-device validation",
+  "runtime_sha256": "da00ee628a238429d0e1c84057bf1974350daacdc26fa03c6b7f38378c545611",
+  "stock_sha256": "35e5acdb0f6e503e0ddb65fc81b91d44ef0e10550aca87a945e9d3f0300582a4",
+  "candidate_service_source_commit": "912ce548",
+  "profile": "StickS3 native Device Service USB Serial/JTAG with one host TCG thread and two virtual CPUs",
+  "sessions": {
+    "standalone_iap": {
+      "status": "PASS",
+      "cdc_sha256": "e9daaf5d6316b3827af173922e59eda415d1994c7e7ba07b78cb88c32acf97f2",
+      "cdc_bytes": 8198,
+      "retained_stop": "stopped",
+      "evidence_zip_sha256": "f5ca542650c21dda3a31eba18fefff7f0bf6b86fc8c7b005e02e14ecf8db2c75"
+    },
+    "bad_crc": {
+      "status": "PASS",
+      "cdc_sha256": "e1d4304c6405e5363bcf8729053dc0826dabe08dda455308490177c0fc554f6b",
+      "cdc_bytes": 8539,
+      "retained_stop": "stopped",
+      "evidence_zip_sha256": "3b90d0af0cd706f0164cd556ad68d92ccf1e2517fdae150b4c39c98daba82e67"
+    },
+    "parallel_iap_1": {
+      "status": "FAIL",
+      "cdc_sha256": "b1bcb35aa8cff8e43c99a6db03c80339fda1dd8388d36e7e8438988fdb0f6fcf",
+      "cdc_bytes": 8196,
+      "retained_stop": "stopped",
+      "evidence_zip_sha256": "4d8bed1259195bd76a73eebb36e4c22c2a7d09dd8149bc31d10fa7c8dbafc9c6"
+    },
+    "parallel_iap_2": {
+      "status": "PASS",
+      "cdc_sha256": "f9ea25916b5fcf41701c86f8b5ef2a23c3b561d20dbffd2d5b52707d679d58a9",
+      "cdc_bytes": 8260,
+      "retained_stop": "stopped",
+      "evidence_zip_sha256": "02829706a8130d1a0b04820417cdfcf258d4f97be7ffabcfefaad1a973811f5f"
+    },
+    "parallel_iap_3": {
+      "status": "PASS",
+      "cdc_sha256": "7b501ff693ccb38835892fde31e6b04948a0a9122f1d43c702a3285c311ab996",
+      "cdc_bytes": 8227,
+      "retained_stop": "stopped",
+      "evidence_zip_sha256": "0882aef3308fc2c66b73169cea6e58ed941248432d58a54adfd41ec3dd55552e"
+    }
+  },
+  "multithreaded_matrix": {
+    "status": "PARTIAL",
+    "reason": "runtime_model_gap",
+    "pm1": {
+      "iap-upgrades": 1,
+      "iap-active": false,
+      "address": 110,
+      "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+      "hwcdc-completed": false,
+      "hwcdc-sha256": "5a6a848cef53c515031b5e3e1e5d008c489421ca9078a0460e05d2206997b761"
+    },
+    "evidence_zip_sha256": "1ab90a3bfcf92ab42627ebe14c1edea5802913bce82481002ebe8a371f0cd470"
+  },
+  "single_thread_matrix": {
+    "status": "PASS",
+    "reason": "application_frame_and_runtime_ok",
+    "pm1": {
+      "iap-upgrades": 1,
+      "iap-active": false,
+      "address": 110,
+      "iap-app-sha256": "e3c8e94171384af2b8f946e430617b71848efc385d63041206b1a5f3f9024ec7",
+      "hwcdc-completed": true,
+      "hwcdc-sha256": "c3c93e3bbe7ee1d3e602b7ac03b7ed4883044c7dccee5428fd66f52aece3223c"
+    },
+    "evidence_zip_sha256": "f669dc075290ebcb611c5a4d339dfb8f512a829dfba279ac81fa35d20ffcf6b4"
+  },
+  "note": "Single-thread scheduling was tested as a mitigation. One of three concurrent IAP sessions still lacked the final guest marker after writing and validating the payload."
+}
