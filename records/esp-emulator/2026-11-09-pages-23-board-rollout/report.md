@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | transport | PASS | 三个官方归档匹配 Xtensa 与 C61 锁，错误内容和 403 回退负控通过 |
 | build | PARTIAL | 静态导出和发布契约 10 项通过，托管源构建未完成 |
-| virtual-device validation | PASS | 独立导出上 StickC Plus 编辑器 63/63，通过应用显示、硬复位和六个 Worker 回收 |
+| virtual-device validation | PASS | 独立导出上 StickC Plus 编辑器 63/63，通过应用显示、硬复位和五个 Worker 回收 |
 | delivery | PARTIAL | 正式站点仍是 19 板旧部署，新任务已启动 |
 | hardware validation | NOT RUN | 本次针对浏览器 WASM |
 
@@ -25,3 +25,7 @@
 ## 托管门禁失败
 
 工作流 42597576699 成功构建并导出两套 WASM，CoreMatrix 原版通过。Atom Matrix 编辑器用例在正常 QMP 退出、四个 pthread 全部消失和 iframe 移除后，CDP 仍观察到一个引擎 Worker。72 个计划用例中首个失败，71 个未执行，部署跳过。失败层级为浏览器清场；复位后的真实代码执行已经通过。 [托管工作流](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42597576699) · [脱敏摘要](evidence/hosted-atom-matrix-worker-summary.json)
+
+## 引擎关闭候选
+
+针对两次托管端残留引擎 Worker，提交 f23ecfe8 改用引擎在释放回执、端口关闭和 owner 通知后调用 self.close()。初始化失败和异常仍保留强制回收兜底。验收继续要求独立 CDP 观察到目标实际消失。本地最终导出的 Atom Matrix 58/58 与 StickC Plus 63/63 均通过，两轮各五个 Worker 目标全部退出，兜底终止为零。此前并行诊断在 StickC Plus2 也有自关闭后目标残留的失败，故托管修复效果仍须由串行完整门禁证明。 [本地摘要](evidence/engine-self-close-summary.json) · [正式重跑](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42603482039)
