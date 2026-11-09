@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "CoreMatrix stock recovery and four-board browser WASM",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "e9bb9f2efa5201e024715dedd5152b54086f6a59",
+    "local_browser_qualification_commit": "2fb99024dba87106e75fc5ddd8c65e74139b8419",
+    "admission_commit": "02496c70"
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "virtual_boards": [
+      "m5paperdiy",
+      "m5papers3",
+      "m5cardputer",
+      "esp32c61,m5corematrix=on"
+    ]
+  },
+  "firmware": {
+    "CoreMatrix": "Official UIFlow2 v2.5.4 original merged image and LittleFS workbench/fixed compositions",
+    "Cardputer K132": "Factory V0.9 and official UIFlow2 v2.5.4 original merged images",
+    "PaperS3": "Factory V0.5 and UIFlow2 v2.5.4 compositions",
+    "PaperDIY": "Factory V1.0 source build and UIFlow2 v2.5.4 compositions"
+  },
+  "execution": {
+    "environment": "Isolated native QEMU Device Service and real Chromium C/QEMU WASM",
+    "xtensa_wasm_sha256": "ea97003bedcb3225493e0e62a9b60b9b63b4b169c94f3d7fface50a6a9d81fd8",
+    "riscv_wasm_sha256": "aeac6dba6bc0fe3ad0351fa43298068ee4c227e4d2d99f6256f638b00ca43c57",
+    "local_public_export_manifest_sha256": "333fa52370436e01053c1c68e50afda068b06bcf22923c8a5ad5118a35d58bc1",
+    "local_public_export_assets_verified": 2175
+  },
+  "checks": [
+    {
+      "scope": "CoreMatrix native original stock offline boot, USB, PM1 and matrix",
+      "status": "PASS"
+    },
+    {
+      "scope": "CoreMatrix browser original stock, editor, button and fixed panel",
+      "status": "PASS"
+    },
+    {
+      "scope": "Cardputer K132 browser original Factory V0.9 and official UIFlow2 v2.5.4",
+      "status": "PASS"
+    },
+    {
+      "scope": "PaperS3 Factory V0.5 300 ms browser tap with exact buzzer icon oracle",
+      "status": "FAIL"
+    },
+    {
+      "scope": "PaperS3 Factory V0.5 500 ms native-parity browser gesture",
+      "status": "PASS"
+    },
+    {
+      "scope": "PaperS3 UIFlow2 editor, post-poll 250 ms GT911 and fixed example",
+      "status": "PASS"
+    },
+    {
+      "scope": "PaperDIY Factory V1.0, UIFlow2 editor, four 250 ms A/B operations and fixed example",
+      "status": "PASS"
+    },
+    {
+      "scope": "GitHub Pages final deployment",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputer-browser-qualification-summary.json",
+    "evidence/corematrix-browser-qualification-summary.json",
+    "evidence/corematrix-native-stock-summary.json",
+    "evidence/corematrix-provisional-browser-summary.json",
+    "evidence/paper-browser-qualification-summary.json",
+    "evidence/papers3-factory-short-touch-summary.json"
+  ],
+  "notes": [
+    "Virtual-device validation only. Candidate asset manifests and published website are tracked separately."
+  ]
+}

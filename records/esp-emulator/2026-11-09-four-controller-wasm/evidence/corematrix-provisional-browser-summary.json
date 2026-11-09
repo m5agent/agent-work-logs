@@ -1,0 +1,178 @@
+{
+  "scope": "virtual-device validation; local Chromium, provisional incremental C61 QEMU",
+  "status": "PASS",
+  "browser": "157.0.8103.38",
+  "source_firmware_sha256": "0bfbe5a4acb467d93a7ded2186a4f73adea37511869328b563c15ab73163a018",
+  "runtime": {
+    "sourceCommit": "8fd40d7f1a5151c1747375b920c3e2d5cff0b0dc",
+    "board": "esp32c61,m5corematrix=on",
+    "profile": "corematrix-wasm-diagnostic",
+    "firmwareSha256": "5562f685a8f3ed07d04ec7d7f58fa4435be8438fbf135c6fd61ff6e906783c07",
+    "wasmSha256": "a947e99c4619869be6dd35bce8636f49eeae6d17dc5ce3f9a53af57c4d1788ef",
+    "romSha256": "ba93108d967771826a8ba024da8c7002cf3c2c4346d600246b2fa882d95b30ec",
+    "clockDivisor": 1,
+    "actualArguments": [
+      "./this.program",
+      "-M",
+      "esp32c61,m5corematrix=on",
+      "-drive",
+      "file=/flash.bin,if=mtd,format=raw",
+      "-L",
+      "/rom",
+      "-display",
+      "none",
+      "-serial",
+      "file:/bridge/uart.out",
+      "-serial",
+      "file:/bridge/serial1",
+      "-serial",
+      "null",
+      "-serial",
+      "pipe:/bridge/usb",
+      "-qmp",
+      "stdio"
+    ],
+    "frameTransport": "shared-rgb565-v1"
+  },
+  "cases": [
+    {
+      "marker": "SSID: Not Found",
+      "source": "qemu-display-surface-shared",
+      "sequence": 11,
+      "litIndices": [
+        51,
+        52,
+        59,
+        60,
+        67,
+        68,
+        75,
+        76,
+        85,
+        86,
+        89,
+        90,
+        101,
+        102,
+        105,
+        106,
+        119,
+        120,
+        135,
+        136,
+        149,
+        150,
+        153,
+        154,
+        165,
+        166,
+        169,
+        170,
+        179,
+        180,
+        187,
+        188,
+        195,
+        196,
+        203,
+        204
+      ],
+      "sha256": "af95bab4e8c242863fe41f184dfb77b4ccee4cdc1f1ebf0b2521635c72425365"
+    },
+    {
+      "marker": "CM_DRAW_OK 152",
+      "source": "qemu-display-surface-shared",
+      "sequence": 13,
+      "litIndices": [
+        33,
+        34,
+        35,
+        36,
+        49,
+        50,
+        51,
+        52,
+        65,
+        66,
+        67,
+        68
+      ],
+      "sha256": "434d21fbadc7c7d91ffd80f566097fbd693dbad42455055d26d6290b5636d8ee"
+    },
+    {
+      "input": "a",
+      "down": true,
+      "marker": "CM_KEY_A_1 True False False"
+    },
+    {
+      "input": "a",
+      "down": false,
+      "marker": "CM_KEY_A_0 False False False"
+    },
+    {
+      "input": "b",
+      "down": true,
+      "marker": "CM_KEY_B_1 False True False"
+    },
+    {
+      "input": "b",
+      "down": false,
+      "marker": "CM_KEY_B_0 False False False"
+    },
+    {
+      "input": "c",
+      "down": true,
+      "marker": "CM_KEY_C_1 False False True"
+    },
+    {
+      "input": "c",
+      "down": false,
+      "marker": "CM_KEY_C_0 False False False"
+    }
+  ],
+  "cleanup": {
+    "gracefulExit": true,
+    "exitCode": 0,
+    "workersCreated": 4,
+    "workersAtExit": 0,
+    "disposal": {
+      "workersRemaining": 0,
+      "workersTerminatedByDispose": 0,
+      "workerCountScope": "nested-pthreads",
+      "enginePlacement": "dedicated-worker-v1",
+      "engineWorkersAtAcknowledgement": 1,
+      "ownerTerminatesAfterAcknowledgement": true
+    },
+    "engineOwnership": {
+      "engineWorkersCreated": 1,
+      "engineOwnerLive": false,
+      "engineCloseNotificationReceived": true,
+      "engineCloseNotifications": 1,
+      "engineNormalTerminations": 1,
+      "engineFallbackTerminations": 0,
+      "enginePortTransferred": true,
+      "engineSelfCloseNotifications": 1
+    },
+    "engineOwnershipStage": "before-iframe-removal",
+    "explicitWorkerDisposal": true,
+    "iframeRemoved": true
+  },
+  "worker_targets": {
+    "observed": 5,
+    "live": 0
+  },
+  "raw_report_sha256": "be4338fa0911066fb102ecd4dd096ea1f91a2c053a535481cdc855bcd06f2712",
+  "raw_report_bytes": 28935,
+  "earlier_attempts": [
+    {
+      "status": "FAIL",
+      "wasm_sha256": "2dd738b2d3cf9bb99cb223f3f50d8afbdaac020c427af61cbd55e8e305008b9f",
+      "diagnostic": "missing is25lp128 flash device"
+    },
+    {
+      "status": "FAIL",
+      "wasm_sha256": "30c10ba59b78f8e69bb8265c909b7c87224af583b314c28eb0ab8c80ec097192",
+      "diagnostic": "WASM indirect function signature mismatch"
+    }
+  ]
+}
