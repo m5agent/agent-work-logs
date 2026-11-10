@@ -200,3 +200,13 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 Atom Matrix 在硬复位后的新控制台执行实际编辑器源码，严格 CDP 清场 5 到 0。AtomS3 Lite 的真实键盘和鼠标均完成原厂按键按下、松开。Cardputer ADV 的 112 次实际输入和 517 项检查通过，右方括号两种输入均在原厂回调后观察到松开。PaperS3 和 PaperDIY 的真实黑白帧均为 540×960，各自在新控制台完成实际复位后源码验证。上述 AtomS3 Lite、Cardputer ADV 和两块 Paper 的所列会话均正常 QMP 退出，严格 CDP 清场 6 到 0。 [完整验收摘要及 72 份原始报告摘要](evidence/local-exact-7ed-full-72-pass-summary.json)
 
 本条仅记录本地正式产物验收。此前正式托管 Cardputer 失败和第一次本地 AtomS3 Lite 启动失败均独立保留，公开部署另行验证。 [正式托管失败](evidence/formal-cardputer-right-bracket-release-summary.json) · [第一次本地失败](evidence/local-exact-7ed-atoms3-lite-boot-pif-summary.json)
+
+## 2026-11-10 Pages 已部署并完成独立 HTTPS 复验
+
+[预构建发布任务 42807204507](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42807204507) 将 `7edc2d11` 发布到 [线上模拟器](https://m5agent.github.io/m5stack-esp-emulator/)，Pages 部署 ID 为 `7680759420`。实际部署使用固定 tag 的预构建包，远端下载字节与本地资格回执的 SHA-256 一致。发布依据是同一产物的完整本地串行 72/72、Canvas 和 CoreMatrix 原版固件通过。先前正式托管任务的 Cardputer 失败单独保留。 [本地完整验收](evidence/local-exact-7ed-full-72-pass-summary.json) · [预构建发布包](https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-20261110-7edc2d11)
+
+独立 HTTPS 第一次读取匹配 2,175 个声明文件，ASR 模型的一个 JavaScript 请求返回 503。对同一清单中的该文件再次请求后，2,176 个声明文件和清单均按长度及 SHA-256 通过，线上公开配置为 23 个。资产校验独立于浏览器客体验证。
+
+线上选取浏览器本地 BIN 验证。PaperS3 与 PaperDIY 各通过 29 项检查，均有真实 540×960 客体帧及模型纹理逐像素回读，分别观察到 GT911 触控和按键的按下、松开。CoreMatrix 固定探针通过 31 项，验证了 ESP32-C61 客体的按键与真实 16×16 矩阵帧。原版 Cardputer K132 的固定探针首次在就绪前出现 Core1 `LoadStorePIFAddrError`，串口记录 SYSTIMER `EXCVADDR=0x60023008`，当次无客体帧或输入。相同 BIN 重试通过 29 项，取得 240×135 客体帧和 F12 按下、松开。首次故障独立保留，间歇性启动问题仍未关闭。
+
+[#211 的原版 CoreS3 BIN](https://github.com/m5agent/m5stack-esp-emulator/issues/211) 通过 16 个标记。页面分别显示源 BIN 与运行 Flash 摘要，取得同一客体串口与 320×240 非黑帧。原版固件未响应网页 REPL 握手，应用就绪保持未知，实测客体仍在运行。所列客体均正常 QMP 退出，严格 CDP 对 Xtensa 会话清场 6 到 0，对 CoreMatrix 清场 5 到 0。 [部署、资产和线上客体证据](evidence/pages-7ed-prepared-deployment-https-summary.json)
