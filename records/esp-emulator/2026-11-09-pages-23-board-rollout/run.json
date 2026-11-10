@@ -55,6 +55,21 @@
       "standard_editor_checks": "64/64 in both modes, independent strict CDP 6/0",
       "repeated_reset": "FAIL on second host reset, Core1 LoadStorePIFAddrError at 0x3fceb0b8",
       "disposition": "candidate rejected, not merged or deployed"
+    },
+    "formal_cardputer_bracket_right": {
+      "workflow": 42791936544,
+      "source": "7edc2d1171634a8975a946625349aa37ce9343a7",
+      "outcome": "FAIL, 6 PASS / 1 FAIL / 65 NOT RUN",
+      "keyboard": "52 passes, physical right bracket press observed and release missing through recorded window",
+      "strict_cdp": "6 observed, 0 live",
+      "deployment": "SKIPPED"
+    },
+    "cardputer_qmp_ordering_ab": {
+      "workflow": 42791179208,
+      "source": "0cd49ea699d56dbb5d782d4dde4051831ad2da64",
+      "baseline": "7/7, 112/112 keyboard trials",
+      "suppression": "Atom Matrix button observation timed out before Cardputer",
+      "differential": "NOT RUN"
     }
   },
   "checks": [
@@ -437,6 +452,26 @@
       "level": "device_response",
       "status": "PASS",
       "scope": "Nonpublishing PaperS3 baseline guest-errors diagnostic: four real host resets, 82 checks, actual sibling Workers cleared; prior PIF failures remain"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "42791936544 actual Cardputer right bracket release was not observed after callback [93] and press"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "Same formal failed guest retained correct sibling topology and strict raw CDP six observed, zero live"
+    },
+    {
+      "level": "device_response",
+      "status": "PARTIAL",
+      "scope": "42791179208 QMP ordering baseline passed 112 keyboard trials. Suppression stopped before Cardputer on Atom Matrix button timeout"
+    },
+    {
+      "level": "delivery",
+      "status": "NOT RUN",
+      "scope": "Both workflows did not deploy"
     }
   ],
   "evidence": [
@@ -579,6 +614,14 @@
     {
       "path": "evidence/local-papers3-baseline-four-reset-guest-errors-summary.json",
       "sha256": "989488b85739b7fad4189607383d5d25a7ef9ee43392c0854ea7673f8e8b8c0b"
+    },
+    {
+      "path": "evidence/formal-cardputer-right-bracket-release-summary.json",
+      "sha256": "c34902673e2677ffc12d68c3d3fb8d48503d5e8d18f7054f4859fffda422d084"
+    },
+    {
+      "path": "evidence/hosted-cardputer-qmp-ordering-inconclusive-summary.json",
+      "sha256": "237a6e41d0ffeb993206142f0fca7f4da58f85d064b932614fa953a2d11f692e"
     }
   ]
 }

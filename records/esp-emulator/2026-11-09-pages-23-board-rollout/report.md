@@ -167,3 +167,12 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：PaperS3 原策略连续复位诊断
 
 原固件与原 WASM 保持不变，只在独立导出启用 QEMU `guest_errors`。四次实际宿主硬复位均返回新控制台并执行新源码，82 项检查通过，显示为真实 540×960 黑白帧，QMP 退出为 0，关闭浏览器上下文前实际 6 个 Worker 均退出。未复现 PIF；日志已达到上限，也不能据此推断失败时会保留哪条内存事务。这轮诊断不符合发布资格，两次既有异常照常保留。 [脱敏摘要](evidence/local-papers3-baseline-four-reset-guest-errors-summary.json)
+
+
+## 2026-11-10 正式 Cardputer 右方括号松开失败
+
+[正式任务 42791936544](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42791936544) 的固定构建回读、Canvas 与 CoreMatrix 原版固件通过。完整串行门禁 6 例通过、1 例失败、65 例未运行。Cardputer 键盘先过 52 个手势，第 53 个实际右方括号键的按下和松开命令均获确认。原厂回调返回 `[93]`，公开状态记录按下，随后 30 条心跳持续报告按下，观察窗内未记录松开。该会话同层 Worker 拓扑、正常 QMP 退出及严格 CDP 6 到 0 均通过。部署跳过。 [脱敏证据](evidence/formal-cardputer-right-bracket-release-summary.json)
+
+## 2026-11-10 Cardputer QMP 排序对照未完成
+
+[诊断任务 42791179208](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42791179208) 使用同一 runner 与相同固件和 WASM。基线通过前七例及全部 112 个 Cardputer 键盘手势。仅在 Cardputer 启用的方向查询抑制组，在前置 Atom Matrix 按键用例等待原厂按下状态时超时，未到达 Cardputer，无法比较两种 QMP 排序。 [脱敏证据](evidence/hosted-cardputer-qmp-ordering-inconclusive-summary.json)
