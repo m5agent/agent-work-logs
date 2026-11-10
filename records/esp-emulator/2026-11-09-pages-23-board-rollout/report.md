@@ -71,3 +71,5 @@
 ## 2026-11-10：Canvas 前置控制失败
 
 [工作流 42765369676](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42765369676) 的两套 WASM 和静态导出通过。合成 Canvas 前置检查只通过第一条异步谓词负控，随后 1000 ms 内未取得首份像素读回；没有发现错误像素或页面异常，也未记录浏览器内是哪一步延迟。本轮真实客体、发布和现网验收均未执行。 [独立证据](evidence/hosted-canvas-first-read-timeout-summary.json)
+
+Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。对照人为延迟首次真实像素读回 1.2 秒：旧版复现托管超时，新版正常与同等延迟均通过五项，三个原有计时不变。正式工作流改为两个独立的 macOS 源构建作业，以同一次尝试的产物进入原完整串行门禁，不复用旧构建。 [候选摘要](evidence/canvas-setup-and-parallel-build-candidate-summary.json) · [后续正式工作流](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42770355747)

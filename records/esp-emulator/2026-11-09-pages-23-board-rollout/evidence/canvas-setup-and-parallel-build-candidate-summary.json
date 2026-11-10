@@ -1,0 +1,75 @@
+{
+  "source_commit": "1979809883489d92ffe7e5461fa17b26f06a89ed",
+  "virtual_device_validation": "NOT RUN by Canvas test",
+  "mechanism_test": "Only the scratch browser delays its first real readback by 1200 ms.",
+  "guest_and_hardware_thresholds_unchanged": true,
+  "original_timed_controls_ms": [
+    1000,
+    1000,
+    120
+  ],
+  "hosted_followup_workflow": 42770355747,
+  "hosted_parallel_build_start": "2026-11-10T06:42:54Z",
+  "canvas_controls": [
+    {
+      "case": "baseline-normal",
+      "status": "PASS",
+      "checks": [
+        "old-async-predicate-resolved-with-actual-false",
+        "delayed-actual-canvas-zero-to-one",
+        "async-hash-live-frame-race-single-snapshot",
+        "real-wrong-hashes-timeout"
+      ],
+      "script_sha256": "959863d2b17a5ef41763af2259cd0a71222302c1a5017a2724c879637ca008be",
+      "helper_sha256": "9cf552f4034eeeb5c2d94663ddba7383df973d3035518ad8665e1673e816abc1",
+      "report_sha256": "4cee3b115291af2b1333cfd3aa3583859c263e376fdb37a16deceeb127c9802a",
+      "report_bytes": 2861,
+      "browser_closed": true
+    },
+    {
+      "case": "baseline-delayed-read",
+      "status": "FAIL",
+      "checks": [
+        "old-async-predicate-resolved-with-actual-false"
+      ],
+      "script_sha256": "b925cea5eace8a249efa404d23aa2c83fc1a053cb275215aead0870c723399f2",
+      "helper_sha256": "9cf552f4034eeeb5c2d94663ddba7383df973d3035518ad8665e1673e816abc1",
+      "report_sha256": "ca35241c7e80550abf1ae8a132a2a79528e67aab741b7847ec033417fb9ba29c",
+      "report_bytes": 1351,
+      "browser_closed": true
+    },
+    {
+      "case": "candidate-normal",
+      "status": "PASS",
+      "checks": [
+        "old-async-predicate-resolved-with-actual-false",
+        "initial-black-frame-readback",
+        "delayed-actual-canvas-zero-to-one",
+        "async-hash-live-frame-race-single-snapshot",
+        "real-wrong-hashes-timeout"
+      ],
+      "script_sha256": "5d2df5bb77bf873b5fbf962e6cdddd91d1bf0e172735c363e5371b6458fa68ce",
+      "helper_sha256": "9cf552f4034eeeb5c2d94663ddba7383df973d3035518ad8665e1673e816abc1",
+      "report_sha256": "99c20d1e1ab502f3cd26b22f6af3b59f3cbcd5c84c7ed19ad8083ddf3f12b081",
+      "report_bytes": 3541,
+      "browser_closed": true
+    },
+    {
+      "case": "candidate-delayed-read",
+      "status": "PASS",
+      "checks": [
+        "old-async-predicate-resolved-with-actual-false",
+        "initial-black-frame-readback",
+        "delayed-actual-canvas-zero-to-one",
+        "async-hash-live-frame-race-single-snapshot",
+        "real-wrong-hashes-timeout"
+      ],
+      "script_sha256": "fcc7cbae8c1b1ab6dea8ec0a8c7e2270e3cfb62e440262f9c30a549f64519683",
+      "helper_sha256": "9cf552f4034eeeb5c2d94663ddba7383df973d3035518ad8665e1673e816abc1",
+      "report_sha256": "c4ed0a1f8e0a60cf1fff5b721316e62c1a0c5d3de19fc9877c24cd5fa36938dc",
+      "report_bytes": 3542,
+      "browser_closed": true
+    }
+  ],
+  "limits": "First-read delay can cause the recorded hosted symptom; actual hosted substep delay was not measured. New hosted gate/deployment in progress."
+}
