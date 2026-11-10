@@ -29,7 +29,9 @@
     "cardputer_followup_workflow": 42765369676,
     "cardputer_followup_workflow_outcome": "failure",
     "canvas_followup_workflow": 42770355747,
-    "canvas_followup_workflow_outcome": "failure"
+    "canvas_followup_workflow_outcome": "failure",
+    "worker_production_candidate": "b4e280d5dcd9b07b4efa59dd96dc914f4f82e6ce",
+    "latest_formal_attempt": 42777985298
   },
   "checks": [
     {
@@ -221,6 +223,31 @@
       "level": "device_response",
       "status": "PASS",
       "scope": "42775514548 Cardputer: one matched later-task owner termination, six actual workers closed"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "Worker alternating repeat: later-task self-close failed two of three actual Chrome cleanup trials"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "Worker alternating repeat: later-task explicit top owner closed all Chrome targets in three of three trials"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "Hosted exact b4e280d5 candidate: full Atom Matrix reset, Cardputer ADV all 112 and original CoreMatrix"
+    },
+    {
+      "level": "build",
+      "status": "PASS",
+      "scope": "Same-source 2070 platform tests (11 skipped), validators, Node and policy CI"
+    },
+    {
+      "level": "delivery",
+      "status": "PARTIAL",
+      "scope": "b4e280d5 promoted; formal 42777985298 fresh runtime builds and full 72-case gate started; not deployed"
     }
   ],
   "evidence": [
@@ -307,6 +334,14 @@
     {
       "path": "evidence/hosted-cardputer-worker-differential-summary.json",
       "sha256": "ddd0dfc8ffa9dd3115b21d157832414282613e98d54d0c556fdd29c8d65c0c78"
+    },
+    {
+      "path": "evidence/hosted-cardputer-worker-repeated-summary.json",
+      "sha256": "20476ae3596e9ca945505b7d963f77ba4169c7047c41307f2649e345cb3a670e"
+    },
+    {
+      "path": "evidence/hosted-worker-production-candidate-summary.json",
+      "sha256": "3746064d774d76f8b1aec7f5e756423e47d96e2e540a25adf1f967caee1f677d"
     }
   ]
 }

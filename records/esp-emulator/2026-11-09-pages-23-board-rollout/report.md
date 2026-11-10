@@ -97,3 +97,11 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：同一托管 runner 的 Worker 退出对照
 
 [诊断工作流 42775514548](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42775514548) 在同一 macOS runner 上，用同一 Cardputer ADV 固件和 WASM 对照三条退出路径。三组各通过六次实际键盘/鼠标手势，停止时探针仍在运行，QMP 退出均为 0。原版自行关闭本轮通过；确认跨过一个新的 Worker 任务再自行关闭的模式仍留下一个主 Worker，五个内部线程已消失。相同握手后由顶层 owner 回收的模式 6 个目标全部消失，未用异常兜底。该对照证明丢键不是残留的必要条件；单次候选通过不足以确认可靠性。 [脱敏证据](evidence/hosted-cardputer-worker-differential-summary.json)
+
+## 2026-11-10：重复对照、候选与正式任务
+
+[六轮对照 42776531090](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42776531090) 在同一 runner 上交替执行两种退出路径，各轮真实输入和客体退出均通过。握手后自行关闭 1/3 通过，两轮在 120 秒后仍有一个引擎；握手后由顶层回收 3/3 通过，兜底为零。 [重复摘要](evidence/hosted-cardputer-worker-repeated-summary.json)
+
+候选 b4e280d5 的[独立托管验证](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777412965) 全部通过：Atom Matrix 硬复位周期 0→1 并执行新代码，Chrome 6/0；Cardputer ADV 112 个实际动作，Chrome 6/0；CoreMatrix 原版 USB、按键和点阵，Chrome 5/0。各例确认一次正常 owner 回收，退出码 0、兜底 0。[常规 CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777412610) 2070 项，11 项跳过，其余通过。 [候选摘要](evidence/hosted-worker-production-candidate-summary.json)
+
+候选已推送主线，[正式任务 42777985298](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777985298) 已开始重新构建。正式部署仍要求全量 72 例、Canvas 和原版 CoreMatrix 门禁，本段不作为已部署证据。
