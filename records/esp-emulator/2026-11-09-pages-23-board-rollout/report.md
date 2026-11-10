@@ -131,3 +131,9 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：正式任务仍在 AtomS3 清场失败
 
 [正式任务 42777985298](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777985298) 完成两套源码构建、静态导出、Canvas 控制和 CoreMatrix 原版。72 例串行门禁前 13 例通过，其中 Atom Matrix、StickC Plus、Cardputer ADV 编辑器和全部 112 个键盘动作均通过。第 14 例 AtomS3 硬复位后进入新控制台并执行新代码，QMP 退出 0，五个 pthread 目标已退出；顶层收到跨任务确认并执行一次正常回收，未用兜底。但独立 Chrome 在最终期限仍列出一个已附加的主引擎 Worker，故失败，剩余 58 例未执行。部署跳过，线上仍为此前版本。 [脱敏证据](evidence/formal-atoms3-engine-residue-summary.json)
+
+## 2026-11-10：同层 Worker 托管定向
+
+[定向任务 42784540906](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42784540906) 在已核验的同一正式 WASM 上验证候选 f61c99f7。此前失败的 AtomS3 与 Atom Matrix 均完成真实复位及新控制台代码，Cardputer ADV 全部 112 个原厂驱动手势通过，CoreMatrix 原版完成 USB、输入和点阵画面。四轮实际 Chrome 均确认引擎和 pthread 同归属顶层页面，关闭上下文前 Worker 清零，兜底为零。此为定向客体验证。
+
+同期常规 CI 的 Node 模拟环境缺少浏览器原生 EventTarget；补齐模拟环境后，定向 Node 入口通过，最终提交继续走常规 CI 及完整串行门禁。正式网页尚未更新。 [定向证据](evidence/hosted-sibling-worker-candidate-summary.json)
