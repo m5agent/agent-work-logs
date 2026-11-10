@@ -137,3 +137,5 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 [定向任务 42784540906](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42784540906) 在已核验的同一正式 WASM 上验证候选 f61c99f7。此前失败的 AtomS3 与 Atom Matrix 均完成真实复位及新控制台代码，Cardputer ADV 全部 112 个原厂驱动手势通过，CoreMatrix 原版完成 USB、输入和点阵画面。四轮实际 Chrome 均确认引擎和 pthread 同归属顶层页面，关闭上下文前 Worker 清零，兜底为零。此为定向客体验证。
 
 同期常规 CI 的 Node 模拟环境缺少浏览器原生 EventTarget；补齐模拟环境后，定向 Node 入口通过，最终提交继续走常规 CI 及完整串行门禁。正式网页尚未更新。 [定向证据](evidence/hosted-sibling-worker-candidate-summary.json)
+
+[最终提交 CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42785207613) 2070 项，11 项跳过，其余通过，浏览器契约和网络策略通过。最终源码 7edc2d11 已推主线；[正式任务 42785667793](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42785667793) 显式使用上一轮的两份已验证源码构建产物，要求构建输入、来源和 ZIP 摘要一致。仍执行原 Canvas、未改 CoreMatrix 和 72 例串行验收。任务启动不等于已部署。
