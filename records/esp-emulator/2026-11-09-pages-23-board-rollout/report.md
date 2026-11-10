@@ -121,3 +121,9 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 [候选顺序诊断 42779119871](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42779119871) 的前六例通过，Cardputer 第 36 次动作（鼠标 E）失败。原厂驱动第一次读取计数为 1 后，约 249.61 ms 后才再次读取，已见计数为 2。真实 QMP 与面板输入均到达，C 层按下到松开 270.83 ms；TCA8418 FIFO 在同一批被原厂驱动读出 0x90 和 0x10，清除后 GPIO11 正确恢复高电平。公开回调得到 E（101），之后均为空闲状态，未观察到公开按下和松开。这次没有控制器丢边沿，不能推论早前 L 键的松开为什么未被观察。
 
 本轮 QMP 正常退出，跨任务 ACK、顶层正常回收一次、无兜底均成立，但独立 Chrome 仍观察一个引擎 Worker。新路径并未彻底消除残留。追踪为独立诊断，不能部署。 [脱敏证据](evidence/hosted-cardputer-e-batch-and-owner-residue-summary.json)
+
+## 2026-11-10：两个隔离原型
+
+正式候选不含这两项原型。更低分配的 Cardputer 观察器保留原厂回调前状态检查、按键状态和释放断言；基线与候选在相同发布构建的独立导出上各通过 112 个手势、516 项检查和严格 Worker 清零。一对本地结果不足以证明解决托管的延迟。 [观察器对照](evidence/local-cardputer-observer-cadence-ab-summary.json)
+
+在另一个原型中，浏览器顶层创建实际 Emscripten pthread，使之与引擎处于同一父层；原私有客体通道仍保持。真实 Cardputer 六次 IRQ 输入、原版 CoreMatrix 的启动、USB 和九次点阵画面通过，Chrome 分别确认 6/0 和 5/0，均有同一父层的实际目标图。这个本地原型未接受全量托管或发布门禁。 [线程所有权原型](evidence/local-worker-sibling-prototype-summary.json)
