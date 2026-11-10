@@ -186,3 +186,9 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 [托管诊断 42795498452](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42795498452) 的 20 个定向手势通过 19 个。最后一次真实鼠标手势的按下和松开都获确认，原厂回调报告 `[93]`。追踪显示固件最后一次读 FIFO 计数为零后，实际松开先到达 QEMU，再发生驱动 W1C。当前 `INT_CFG=0`，清中断后 GPIO11 仍为低电平，与 TI 芯片文档约定一致。追踪中此后没有 TCA8418 读取，原厂状态的 30 条后续心跳持续报告按下。QMP 正常退出，实际同层引擎和五个 pthread 严格清场为 6 到 0。这个诊断单独复现了失效时序。 [脱敏证据](evidence/hosted-cardputer-fifo-release-race-summary.json) · [TI TCA8418 数据手册](https://www.ti.com/lit/ds/symlink/tca8418.pdf)
 
 另一个诊断 job 的 Canvas 与 CoreMatrix 原版固件通过，但串行前缀启动器因输出目录缺失提前退出，没有启动首个前缀子用例。诊断不具备发布资格。
+
+## 2026-11-10 PIF 日志重链接诊断
+
+从正式 WASM 重编一个 TCG 源文件并重链接，在失败读取分支加入有上限的日志。AtomS3 Lite 三次独立冷启动均通过，每次用真实键盘和鼠标各验证一次原厂按键驱动的按下、松开与心跳。PaperS3 原执行策略在同一浏览器会话中执行四次实际宿主硬复位，四个新控制台都返回实际编辑器源码回显，82 项检查通过，真实黑白帧为 540×960。四个会话均正常 QMP 退出，并用独立 CDP 验证 6 个 Worker 清到 0。
+
+四个会话均未复现 PIF，也未取得失败读取的译址或总线观测。诊断 WASM 和浏览器侧诊断覆盖均隔离，结果无法确定根因或修复，且不具备发布资格。既有正式异常继续保留。 [脱敏证据](evidence/local-pif-relink-atoms3-lite-papers3-summary.json)

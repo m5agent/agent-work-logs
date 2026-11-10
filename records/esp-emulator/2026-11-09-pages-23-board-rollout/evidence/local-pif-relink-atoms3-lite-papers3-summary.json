@@ -1,0 +1,297 @@
+{
+  "kind": "browser-WASM virtual-device validation",
+  "status": "PASS",
+  "scope": "Local instrumentation only, three independent AtomS3 Lite cold button boots and one PaperS3 editor stress session.",
+  "publication_eligible": false,
+  "source": {
+    "base_commit": "7edc2d1171634a8975a946625349aa37ce9343a7",
+    "diagnostic_host_diff": {
+      "bytes": 4209,
+      "sha256": "ef2a6b15b5c4a35022ae6e68276074ed8948aab752c6c6407749c3706b7e0d8f"
+    },
+    "diagnostic_host_files": {
+      "platform/tests/public_qemu_artifacts.mjs": {
+        "bytes": 9549,
+        "sha256": "9295c1cb186930f7483eb698fcc643dbd5a1c1ad764d213911562b5639908c0e"
+      },
+      "platform/tests/test_public_qemu_buttons_guest.mjs": {
+        "bytes": 20740,
+        "sha256": "af01c31d30dcee1501e710f709f734f7c14e2872e251b1fdf0433cd300ef6a77"
+      },
+      "platform/web/public-qemu-engine.js": {
+        "bytes": 21125,
+        "sha256": "5828b2c62d5b5373d8b2c90aed8d3d63994b43b007aeb6521a06e5e9a77839b8"
+      }
+    }
+  },
+  "relink": {
+    "kind": "local-diagnostic-relink",
+    "publication_eligible": false,
+    "all_objects_rebuilt": false,
+    "base_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+    "diagnostic_patch_sha256": "712483c371f2afc2386cc95f8a2c200ef0547c541305a68cacd77ff427393502",
+    "recompiled_source_sha256": "234e77311c6409602da6ce47ff7ad419b608ac9c5faed2d9a899cdb9eb95e870",
+    "assets": {
+      "qemu-system-xtensa.js": {
+        "bytes": 157200,
+        "sha256": "4792f1ca398b1d02a66626e98d2b8428846fe6fa9d50277096c18e39497bc1fd"
+      },
+      "qemu-system-xtensa.js.symbols": {
+        "bytes": 546570,
+        "sha256": "0127560ba3531fa112e00d4044c8e3883afe0a5ed3239f1acc774a4c1fca6e6f"
+      },
+      "qemu-system-xtensa.wasm": {
+        "bytes": 12766878,
+        "sha256": "8591991cc1b738b203413e13823b06ffd0f9f0d4c85c32dcf4f3c374ed54de04"
+      },
+      "qemu-system-xtensa.worker.js": {
+        "bytes": 2776,
+        "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+      }
+    }
+  },
+  "relink_receipt": {
+    "bytes": 1046,
+    "sha256": "84638f935a7202719d2175d597e916c8faaa5f9e1db97ace74f53070aaae100a"
+  },
+  "site": {
+    "site_manifest_sha256": "e403ccc73488afc29220f96d723846b3e0a63edaef03c2a3f5fe8d67011547b1",
+    "runtime_manifest_sha256": "049e1a3fb46ccaeb4c13fe01b62d7f0e0e90da5e21c6d1a4ff94f6f52be53f72",
+    "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "diagnostic_corresponding_source": {
+      "bytes": 39354876,
+      "sha256": "ab0639d5b2f52b43cbc9210734495ff8cde494434e6ff859b4d842d5bd9f0daf"
+    }
+  },
+  "instrumentation": {
+    "translation_unit": "accel/tcg/cputlb.c",
+    "scope": "Bounded logging at failed TCG I/O read dispatch, after MEMTX error and before existing failure handling. Logs failed virtual and translated physical address, access metadata and MemoryRegion.",
+    "maximum_lines": 16,
+    "captured_pif_diagnostic_lines": 0
+  },
+  "atoms3_lite": {
+    "device": "atoms3-lite",
+    "browser": "157.0.8103.39",
+    "status": "PASS",
+    "guest_runner": {
+      "path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+      "sha256": "af01c31d30dcee1501e710f709f734f7c14e2872e251b1fdf0433cd300ef6a77"
+    },
+    "helper_sha256": "9295c1cb186930f7483eb698fcc643dbd5a1c1ad764d213911562b5639908c0e",
+    "profile": "atoms3-lite-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+    "controller": "same-origin-iframe-message-channel",
+    "clock_divisor": 1,
+    "one_instruction_per_tb": true,
+    "firmware_runtime_sha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+    "official_base_firmware_sha256": "338baf7f16703b26fff78619d32e593d8ca4f1934bdad63e3c95eef862f3133c",
+    "qemu_logging_flags": [
+      "-d",
+      "guest_errors",
+      "-dfilter",
+      "0x3fca3000+0x1000"
+    ],
+    "cold_trials": [
+      {
+        "trial": 1,
+        "started_at": "2026-11-10T10:04:26.414Z",
+        "finished_at": "2026-11-10T10:04:43.319Z",
+        "raw_report": {
+          "bytes": 71014,
+          "sha256": "996f7366c5af6d8d5b2c0fad6375c4466a581cbf4f320a46e7d3f3075b14c98b"
+        },
+        "checks_passed": 10,
+        "actual_button_trials": [
+          {
+            "method": "keyboard",
+            "model_gpio": 41,
+            "requested_hold_ms": 250,
+            "observed_browser_hold_ms": 254.444,
+            "original_driver_pressed_seq": 2,
+            "original_driver_released_seq": 4,
+            "released_heartbeat_seq": 7
+          },
+          {
+            "method": "pointer",
+            "model_gpio": 41,
+            "requested_hold_ms": 250,
+            "observed_browser_hold_ms": 255.323,
+            "original_driver_pressed_seq": 8,
+            "original_driver_released_seq": 10,
+            "released_heartbeat_seq": 13
+          }
+        ],
+        "cleanup": {
+          "qmp_exit_code": 0,
+          "graceful": true,
+          "iframe_removed": true,
+          "owner_fallback_terminations": 0,
+          "cdp_source": "Chrome DevTools Target.getTargets",
+          "actual_workers_observed": 6,
+          "actual_workers_live_before_context_close": 0
+        }
+      },
+      {
+        "trial": 2,
+        "started_at": "2026-11-10T10:06:29.849Z",
+        "finished_at": "2026-11-10T10:06:46.482Z",
+        "raw_report": {
+          "bytes": 71118,
+          "sha256": "6c8e751a2f6bbb15c29508822950e61200af9807e62af0fddf22db8b9ee4ff34"
+        },
+        "checks_passed": 10,
+        "actual_button_trials": [
+          {
+            "method": "keyboard",
+            "model_gpio": 41,
+            "requested_hold_ms": 250,
+            "observed_browser_hold_ms": 254.589,
+            "original_driver_pressed_seq": 2,
+            "original_driver_released_seq": 4,
+            "released_heartbeat_seq": 7
+          },
+          {
+            "method": "pointer",
+            "model_gpio": 41,
+            "requested_hold_ms": 250,
+            "observed_browser_hold_ms": 254.243,
+            "original_driver_pressed_seq": 8,
+            "original_driver_released_seq": 10,
+            "released_heartbeat_seq": 13
+          }
+        ],
+        "cleanup": {
+          "qmp_exit_code": 0,
+          "graceful": true,
+          "iframe_removed": true,
+          "owner_fallback_terminations": 0,
+          "cdp_source": "Chrome DevTools Target.getTargets",
+          "actual_workers_observed": 6,
+          "actual_workers_live_before_context_close": 0
+        }
+      },
+      {
+        "trial": 3,
+        "started_at": "2026-11-10T10:06:46.832Z",
+        "finished_at": "2026-11-10T10:07:02.857Z",
+        "raw_report": {
+          "bytes": 71076,
+          "sha256": "25c044d860cee76f2861476a02024771c18b6502aa2e12db31c9146cfdd3a902"
+        },
+        "checks_passed": 10,
+        "actual_button_trials": [
+          {
+            "method": "keyboard",
+            "model_gpio": 41,
+            "requested_hold_ms": 250,
+            "observed_browser_hold_ms": 252.525,
+            "original_driver_pressed_seq": 2,
+            "original_driver_released_seq": 4,
+            "released_heartbeat_seq": 7
+          },
+          {
+            "method": "pointer",
+            "model_gpio": 41,
+            "requested_hold_ms": 250,
+            "observed_browser_hold_ms": 254.952,
+            "original_driver_pressed_seq": 8,
+            "original_driver_released_seq": 10,
+            "released_heartbeat_seq": 13
+          }
+        ],
+        "cleanup": {
+          "qmp_exit_code": 0,
+          "graceful": true,
+          "iframe_removed": true,
+          "owner_fallback_terminations": 0,
+          "cdp_source": "Chrome DevTools Target.getTargets",
+          "actual_workers_observed": 6,
+          "actual_workers_live_before_context_close": 0
+        }
+      }
+    ]
+  },
+  "papers3": {
+    "device": "papers3",
+    "browser": "157.0.8103.39",
+    "status": "PASS",
+    "guest_runner": {
+      "path": ".work/papers3-reset-stress.mjs",
+      "sha256": "c4c4f3f1df0cd3b23658b1da068039ff013ee76c4d27c060f6d0793f00c74fd6"
+    },
+    "helper_sha256": "9295c1cb186930f7483eb698fcc643dbd5a1c1ad764d213911562b5639908c0e",
+    "profile": "papers3-wasm-uiflow-workbench-wallclock",
+    "controller": "same-origin-iframe-message-channel",
+    "clock_divisor": 1,
+    "one_instruction_per_tb": false,
+    "firmware_runtime_sha256": "4eb25cbc42d72a644d1b6c06971cf5c7d9bc3c2951024d1c122bda9bf3cb39aa",
+    "official_base_firmware_sha256": "87567896973fa61c281fdf3f0e2031f280de1df8d59ac0942302de288096a1fb",
+    "qemu_logging_flags": [
+      "-d",
+      "guest_errors",
+      "-dfilter",
+      "0x60023008+4,0x3fceb000+0x1000"
+    ],
+    "started_at": "2026-11-10T10:07:03.213Z",
+    "finished_at": "2026-11-10T10:14:02.931Z",
+    "raw_report": {
+      "bytes": 40570738,
+      "sha256": "6c656428e90f36fe27e3982d2e642c2d2937e75bd6fb531b85f6dd9ca70a0dad"
+    },
+    "checks_passed": 82,
+    "actual_host_hard_resets": [
+      {
+        "before_console_epoch": 0,
+        "after_console_epoch": 1,
+        "interrupted_source_sha256": "52d99757877b1ce4e5cfed0c153d5247c4e378f1e5386cb63b710ffd26855ff4",
+        "new_console_editor_source_sha256": "40abe2f71d26ade0da5b85d85ef7db2d9a9fe0a80aa8b8f2c36bbe8f0b8a1d1c",
+        "actual_new_console_stdout_marker": "M5_REBOOT_RECOVERED_"
+      },
+      {
+        "before_console_epoch": 1,
+        "after_console_epoch": 2,
+        "interrupted_source_sha256": "55767919d4ecd8f440e123a60d14d711389a3a69607fefc2b7debe32ef78872a",
+        "new_console_editor_source_sha256": "f47021cd1b50d49fdc0dfc234dd87f14706fc0129c8a5daa80551a262d556486",
+        "actual_new_console_stdout_marker": "M5_REBOOT_RECOVERED_"
+      },
+      {
+        "before_console_epoch": 2,
+        "after_console_epoch": 3,
+        "interrupted_source_sha256": "50c9b765e195ae482c6117272951a23c9c3ec40e56aa775d0f7eed5f7f9e6fc4",
+        "new_console_editor_source_sha256": "9850253b58147eaf321c190c597753396984c836322a19a792184dc0b76dd06f",
+        "actual_new_console_stdout_marker": "M5_REBOOT_RECOVERED_"
+      },
+      {
+        "before_console_epoch": 3,
+        "after_console_epoch": 4,
+        "interrupted_source_sha256": "2eb252dd7198aee9c5cdea13fb4e86c99992300f64475bee4c60e376590d143b",
+        "new_console_editor_source_sha256": "1b392540582cae407629bdb8429a5185ecf505077615621094318cc80495c8b4",
+        "actual_new_console_stdout_marker": "M5_REBOOT_RECOVERED_"
+      }
+    ],
+    "frame": {
+      "width": 540,
+      "height": 960,
+      "sequence": 218,
+      "pixels": 518400,
+      "black_pixels": 259200,
+      "white_pixels": 259200,
+      "red_pixels": 0,
+      "sha256": "bbb81a74cbe04feaa5ab602ef879af3286c44de0213d1f83fc0e4ac4535f7405"
+    },
+    "cleanup": {
+      "qmp_exit_code": 0,
+      "graceful": true,
+      "iframe_removed": true,
+      "owner_fallback_terminations": 0,
+      "cdp_source": "Chrome DevTools Target.getTargets",
+      "actual_workers_observed": 6,
+      "actual_workers_live_before_context_close": 0,
+      "actual_same_parent_topology": "one engine plus five pthreads"
+    }
+  },
+  "limits": [
+    "No observed PIF recurrence or failed-read telemetry in these four sessions.",
+    "The relink and diagnostic host overlay change the tested artifact, so these runs do not establish a root cause or a fix.",
+    "No deployment, release gate or physical hardware claim."
+  ]
+}
