@@ -73,3 +73,9 @@
 [工作流 42765369676](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42765369676) 的两套 WASM 和静态导出通过。合成 Canvas 前置检查只通过第一条异步谓词负控，随后 1000 ms 内未取得首份像素读回；没有发现错误像素或页面异常，也未记录浏览器内是哪一步延迟。本轮真实客体、发布和现网验收均未执行。 [独立证据](evidence/hosted-canvas-first-read-timeout-summary.json)
 
 Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。对照人为延迟首次真实像素读回 1.2 秒：旧版复现托管超时，新版正常与同等延迟均通过五项，三个原有计时不变。正式工作流改为两个独立的 macOS 源构建作业，以同一次尝试的产物进入原完整串行门禁，不复用旧构建。 [候选摘要](evidence/canvas-setup-and-parallel-build-candidate-summary.json) · [后续正式工作流](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42770355747)
+
+## 2026-11-10：并行构建版本的完整门禁终态
+
+[工作流 42770355747](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42770355747) 完成两套源构建，Canvas 前置控制与 CoreMatrix 官方原版通过。串行完整门禁 72 例中 6 通过、1 失败、65 未运行；部署跳过。
+
+第 77 个键盘动作是实际浏览器 L 键，模型按住 256.435 ms，按下和松开的 QMP 回复都返回。原厂固件的按下回调与公开状态为真均存在；随后近 30 个客体秒的心跳继续报告 L 按下，没有松开。这与前一轮句号键缺少两种状态不同，故不能归因于同一采样问题。正常 QMP 退出码为 0，五个 pthread 目标都已退出，收到了引擎自关闭通知，未触发强制回收。独立 Chrome CDP 仍在 120 秒期限结束时观测到一个引擎 Worker，构成第二项失败。未确定具体丢失位置及 Worker 残留原因。 [脱敏证据](evidence/hosted-cardputer-release-and-worker-residue-summary.json)

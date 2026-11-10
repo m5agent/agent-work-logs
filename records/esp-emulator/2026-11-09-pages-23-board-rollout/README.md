@@ -20,3 +20,5 @@
 11 月 10 日本机同一浏览器会话九次硬复位并取得新代码回显，清场检查通过。原托管失败保留。 [复位基线](evidence/local-atom-matrix-reset-stress-summary.json)
 
 后续候选通过 Atom Matrix 定向编辑器和按键验证，独立生产 Worker 版通过 StickC Plus。 [当前正式门禁](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42736158712) 正在运行，尚未部署。
+
+并行构建版 42770355747 已结束。Canvas、原版 CoreMatrix 与前 6 个串行用例通过；Cardputer ADV 的 L 键松开未被原厂固件观察到，清场另有一个引擎 Worker 残留。65 例未运行，部署跳过。 [终态证据](evidence/hosted-cardputer-release-and-worker-residue-summary.json)

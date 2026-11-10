@@ -28,7 +28,8 @@
     "next_hosted_outcome": "failure",
     "cardputer_followup_workflow": 42765369676,
     "cardputer_followup_workflow_outcome": "failure",
-    "canvas_followup_workflow": 42770355747
+    "canvas_followup_workflow": 42770355747,
+    "canvas_followup_workflow_outcome": "failure"
   },
   "checks": [
     {
@@ -160,6 +161,26 @@
       "level": "transport",
       "status": "PASS",
       "scope": "Actual synthetic Canvas warmup and delayed first-read controls; no firmware guest"
+    },
+    {
+      "level": "transport",
+      "status": "PASS",
+      "scope": "42770355747 hosted Canvas readiness and pixel controls"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "42770355747 original CoreMatrix plus six full gate cases, including Atom Matrix reset and actual CDP cleanup"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "42770355747 Cardputer-ADV L release missing in original firmware and independent main Worker residue"
+    },
+    {
+      "level": "delivery",
+      "status": "NOT RUN",
+      "scope": "42770355747 full gate failed; deploy skipped"
     }
   ],
   "evidence": [
@@ -226,6 +247,10 @@
     {
       "path": "evidence/canvas-setup-and-parallel-build-candidate-summary.json",
       "sha256": "733c141969118949b102fe1ccdcbb3631e0aa7eaa0a4b4ec9118a355cc69523c"
+    },
+    {
+      "path": "evidence/hosted-cardputer-release-and-worker-residue-summary.json",
+      "sha256": "9b9e1a70391904a1387b7afced6d685d7f4bf38d2be3619e42fb1231424528ff"
     }
   ]
 }
