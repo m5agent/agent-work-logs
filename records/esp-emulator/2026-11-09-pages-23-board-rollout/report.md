@@ -35,3 +35,9 @@
 工作流 42603482039 两套运行时、导出和 CoreMatrix 原版均通过。Atom Matrix 完成冷启动和复位前代码检查，QMP 硬复位进入新控制台周期。新客体串口到 bootloader 入口与 I²C 初始化报错后停滞，600 秒内未发出第二次就绪标记。I²C 是最后观察到的日志，尚不足以定位复位根因。失败清场有正常退出码和自关闭通知，Chrome CDP 仍记录一个引擎 Worker。正式部署跳过。 [托管重跑](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42603482039) · [运行摘要](evidence/hosted-self-close-reset-summary.json)
 
 本地完整门禁另在 PaperS3 触摸失败。同镜像独立重跑复现，等待客体出现稳定轮询后，同样 250 毫秒输入得到实际按下、松开、坐标和清场通过。该验证为定向诊断，未代替正式全量门禁。 [PaperS3 摘要](evidence/local-papers3-touch-cadence-summary.json)
+
+## 2026-11-10：Atom Matrix 同会话复位基线
+
+在未改动的 f23ecfe8 浏览器运行时上，用 Chrome 157.0.8103.39、本地独立静态导出和同一固件执行标准编辑器用例，追加八次交替的运行中与空闲硬复位。九次均取得 QMP RESET、新控制台周期、新的 UIFlow 就绪标记和该周期独立的串口输出；共 102 项通过。额外八次从硬复位到新代码回显为 40.25–41.67 秒。正常退出码 0，五个 CDP Worker 目标均消失，强制回收为零。 [脱敏摘要](evidence/local-atom-matrix-reset-stress-summary.json)
+
+本机结果保留原托管失败。托管失败曾于复位约 39.6 秒后额外创建一个嵌套 pthread，此现象未出现在本机九次复位中；尚无证据把它确定为固件复位或引擎目标残留的根因。正式 Pages 仍未更新；未运行真机。

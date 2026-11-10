@@ -1,0 +1,79 @@
+{
+  "kind": "virtual-device reset stress summary",
+  "source_commit": "f23ecfe8e454c294d2f948a4fe5361a1f5f39943",
+  "site_manifest_sha256": "d47a8a448a2956a06e69e5afb62a6bae66f10de7718ba01e81d9ea0c4bbb7c98",
+  "browser": "157.0.8103.39",
+  "device": "atom-matrix",
+  "firmware_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+  "wasm_sha256": "ea97003bedcb3225493e0e62a9b60b9b63b4b169c94f3d7fface50a6a9d81fd8",
+  "rom_sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+  "profile": "atom-matrix-wasm-deterministic-icount",
+  "accelerator": {
+    "icountShift": 5,
+    "kind": "tcg-icount",
+    "tbSizeMb": 128,
+    "thread": "single"
+  },
+  "start": "2026-11-10T01:05:38.935Z",
+  "end": "2026-11-10T01:12:45.312Z",
+  "raw_report_bytes": 149091,
+  "raw_report_sha256": "a880752ade4b0c93337107dfda3caedce12aeba5b1133402d3d1797c5bafe5d4",
+  "runner": {
+    "base": "platform/tests/test_public_uiflow_guest.mjs",
+    "variant_sha256": "9716361c4bcea671951531d2fcf3140e72d25659cacee574b2291b5a2fa988a3",
+    "delta": "After the original editor and active reset assertions, apply eight further QMP hardware resets, alternating a live sleep loop and an idle REPL. Confirm incremented console epoch, unchanged session/generation and an independent UART nonce in the new epoch. Keep the original normal QMP exit and strict CDP gates."
+  },
+  "result": {
+    "status": "PASS",
+    "checks": 102,
+    "reset_count": 9,
+    "ready_marker_count": 10,
+    "extra_resets": [
+      {
+        "active": true,
+        "epoch": 2,
+        "milliseconds": 40483
+      },
+      {
+        "active": false,
+        "epoch": 3,
+        "milliseconds": 40802
+      },
+      {
+        "active": true,
+        "epoch": 4,
+        "milliseconds": 41670
+      },
+      {
+        "active": false,
+        "epoch": 5,
+        "milliseconds": 40425
+      },
+      {
+        "active": true,
+        "epoch": 6,
+        "milliseconds": 40547
+      },
+      {
+        "active": false,
+        "epoch": 7,
+        "milliseconds": 40250
+      },
+      {
+        "active": true,
+        "epoch": 8,
+        "milliseconds": 40604
+      },
+      {
+        "active": false,
+        "epoch": 9,
+        "milliseconds": 40747
+      }
+    ],
+    "worker_targets_observed": 5,
+    "worker_targets_live": 0,
+    "qmp_exit_code": 0,
+    "engine_fallback_terminations": 0
+  },
+  "limits": "Local targeted diagnostic, not a fix, hosted full gate, or physical hardware validation. Omitted session identifiers, raw UART, local URLs/paths and renderer sample."
+}

@@ -16,3 +16,5 @@
 [详细报告](report.md) · [运行摘要](run.json) · [回退验证](evidence/archive-recovery-summary.json)
 
 最新托管任务完成构建和 CoreMatrix 原版镜像验证，随后在 Atom Matrix 复位就绪超时及失败清场的引擎目标残留处受阻。部署任务跳过，公开站点仍是先前 19 板版本。 [第三轮验证摘要](evidence/hosted-self-close-reset-summary.json)
+
+11 月 10 日本机同一浏览器会话九次硬复位并取得新代码回显，清场检查通过。原托管失败保留。 [复位基线](evidence/local-atom-matrix-reset-stress-summary.json)
