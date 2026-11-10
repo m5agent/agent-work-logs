@@ -45,3 +45,11 @@
 ## 2026-11-10：PaperS3 稳定轮询复验
 
 实际客体的一组心跳相隔 1002 客体毫秒，在宿主侧仅相隔 475 毫秒。验证保留原 250 毫秒触摸长度，等待两个独立的客体和宿主心跳间隔均约 1 秒后再送输入。模型实际按住 253.97 毫秒，GT911 客体报告 (270,400) 按下与松开；10 项检查通过，6 个 CDP Worker 目标均退出。该改动只触及 PaperS3 测试前置观察，PaperDIY 不继承。 [脱敏摘要](evidence/local-papers3-fresh-polling-summary.json)
+
+## 2026-11-10：调度和 Worker 修复候选
+
+`0038` 给完全匹配的 Atom Matrix UIFlow 工作台镜像启用每核 10 µs 调度上限，让副核更早参与 Flash IPC 交接。相同浏览器、固件、WASM 和导出下的开关对照各通过 58 项；复位到新代码开始执行从 40.391 秒降至 28.972 秒。来宾时钟、看门狗和就绪判据保留。两个对照未重现托管 600 秒停滞，不能确定该极端失败的根因。 [开关对照摘要](evidence/atom-matrix-cap-ab-summary.json)
+
+浏览器把引擎 Worker 的创建、监听和释放统一放到顶层页面，保留 iframe 的来源、同源、会话及单端口握手。正常退出后解除监听并让引擎自己关闭；仍以独立 CDP 清零为准。合并候选的 Atom Matrix 编辑器 58 项、按键 10 项通过，含新控制台周期、实际代码输出与正常回收；独立生产 Worker 版的 StickC Plus 编辑器 63 项通过，五个目标全部回收。Chrome 157 和 Chromium 156 的纯浏览器对照未复现残留，托管结果仍是必要验证。 [候选客体摘要](evidence/browser-candidate-guests-summary.json)
+
+主线提交 `ec3deaaaae0c6d9af3f1adf8e6d86db88923b729` 的平台套件执行 2069 项，11 项跳过，其余通过；Node 契约、配置验证、快照和变更范围检查通过。已触发[正式工作流 42736158712](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42736158712)，仅在全部 72 个串行客体用例及官方 CoreMatrix 镜像等门禁通过后部署。触发后回读仍是旧的 19 板部署 7647968330；本记录不把运行中的工作流当成发布完成。
