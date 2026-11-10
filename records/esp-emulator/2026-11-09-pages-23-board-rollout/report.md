@@ -192,3 +192,11 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 从正式 WASM 重编一个 TCG 源文件并重链接，在失败读取分支加入有上限的日志。AtomS3 Lite 三次独立冷启动均通过，每次用真实键盘和鼠标各验证一次原厂按键驱动的按下、松开与心跳。PaperS3 原执行策略在同一浏览器会话中执行四次实际宿主硬复位，四个新控制台都返回实际编辑器源码回显，82 项检查通过，真实黑白帧为 540×960。四个会话均正常 QMP 退出，并用独立 CDP 验证 6 个 Worker 清到 0。
 
 四个会话均未复现 PIF，也未取得失败读取的译址或总线观测。诊断 WASM 和浏览器侧诊断覆盖均隔离，结果无法确定根因或修复，且不具备发布资格。既有正式异常继续保留。 [脱敏证据](evidence/local-pif-relink-atoms3-lite-papers3-summary.json)
+
+## 2026-11-10 本地正式产物完整串行门禁 72/72
+
+固定主线 `7edc2d11` 第二次本地完整验收通过。Canvas 五项浏览器对照和 CoreMatrix 原版 UIFlow2 固件通过。单 worker 按正式计划完成 72 例，包含 23 例 UIFlow 编辑器、23 例 UIFlow 按键、Cardputer 键盘、StackChan 身体触摸和 24 例固定示例，零失败、零未运行。独立重算用例计划，并逐份核对原始报告长度、哈希与客体验证。
+
+Atom Matrix 在硬复位后的新控制台执行实际编辑器源码，严格 CDP 清场 5 到 0。AtomS3 Lite 的真实键盘和鼠标均完成原厂按键按下、松开。Cardputer ADV 的 112 次实际输入和 517 项检查通过，右方括号两种输入均在原厂回调后观察到松开。PaperS3 和 PaperDIY 的真实黑白帧均为 540×960，各自在新控制台完成实际复位后源码验证。上述 AtomS3 Lite、Cardputer ADV 和两块 Paper 的所列会话均正常 QMP 退出，严格 CDP 清场 6 到 0。 [完整验收摘要及 72 份原始报告摘要](evidence/local-exact-7ed-full-72-pass-summary.json)
+
+本条仅记录本地正式产物验收。此前正式托管 Cardputer 失败和第一次本地 AtomS3 Lite 启动失败均独立保留，公开部署另行验证。 [正式托管失败](evidence/formal-cardputer-right-bracket-release-summary.json) · [第一次本地失败](evidence/local-exact-7ed-atoms3-lite-boot-pif-summary.json)
