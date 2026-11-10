@@ -139,3 +139,9 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 同期常规 CI 的 Node 模拟环境缺少浏览器原生 EventTarget；补齐模拟环境后，定向 Node 入口通过，最终提交继续走常规 CI 及完整串行门禁。正式网页尚未更新。 [定向证据](evidence/hosted-sibling-worker-candidate-summary.json)
 
 [最终提交 CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42785207613) 2070 项，11 项跳过，其余通过，浏览器契约和网络策略通过。最终源码 7edc2d11 已推主线；[正式任务 42785667793](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42785667793) 显式使用上一轮的两份已验证源码构建产物，要求构建输入、来源和 ZIP 摘要一致。仍执行原 Canvas、未改 CoreMatrix 和 72 例串行验收。任务启动不等于已部署。
+
+## 2026-11-10：同层 Worker 正式任务及独立按键失败
+
+[正式任务 42785667793](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42785667793) 核验并导入上一轮两份完整源码构建，导出、Canvas 和 CoreMatrix 原版通过。完整串行门禁先过 6 例，随后 Cardputer ADV 第 16 个键盘动作（鼠标 7）未观察到按下/松开。原厂回调返回 ASCII 55，浏览器手势 267.03 ms，模型 257.59 ms，两次 QMP 回执间隔 127 ms。回执并非 C 层实际发出时间，原始失败仍不足以定位原因。
+
+这次失败会话同层目标检查通过，正常 QMP/owner 回收均通过，Chrome 在关闭上下文前确认全部 6 个目标退出，兜底为零。65 例未运行，部署跳过。 [证据](evidence/formal-cardputer-pointer7-and-sibling-cleanup-summary.json)

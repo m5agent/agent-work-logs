@@ -38,7 +38,8 @@
     "release_ci_run": 42785207613,
     "sibling_formal_run": 42785667793,
     "sibling_release_commit": "7edc2d1171634a8975a946625349aa37ce9343a7",
-    "sibling_release_ci_outcome": "success"
+    "sibling_release_ci_outcome": "success",
+    "sibling_formal_run_outcome": "failure"
   },
   "checks": [
     {
@@ -345,6 +346,26 @@
       "level": "delivery",
       "status": "PARTIAL",
       "scope": "Official 42785667793 dispatched; exact prior verified runtime import, unchanged full serial gate pending"
+    },
+    {
+      "level": "build",
+      "status": "PASS",
+      "scope": "42785667793 verified previous runtime imports, reviewed static export, Canvas and stock guest"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "42785667793 untraced pointer 7 callback received original code, no public states after 15 passing gestures"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "42785667793 failed keyboard session still had true same-parent graph and six actual Worker targets closed"
+    },
+    {
+      "level": "delivery",
+      "status": "NOT RUN",
+      "scope": "42785667793 full gate failed case 7; deploy skipped"
     }
   ],
   "evidence": [
@@ -467,6 +488,10 @@
     {
       "path": "evidence/hosted-sibling-worker-candidate-summary.json",
       "sha256": "7c123b64debfd7b7ceef874e9e9d5ff0c875ecbb089ad53d5c714d89edcfd579"
+    },
+    {
+      "path": "evidence/formal-cardputer-pointer7-and-sibling-cleanup-summary.json",
+      "sha256": "23500c9b7af1be4ff42b5177aba73989a506db9d9aa146f0f7fb491231044778"
     }
   ]
 }
