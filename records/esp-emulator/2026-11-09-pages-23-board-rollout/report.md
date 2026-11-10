@@ -53,3 +53,9 @@
 浏览器把引擎 Worker 的创建、监听和释放统一放到顶层页面，保留 iframe 的来源、同源、会话及单端口握手。正常退出后解除监听并让引擎自己关闭；仍以独立 CDP 清零为准。合并候选的 Atom Matrix 编辑器 58 项、按键 10 项通过，含新控制台周期、实际代码输出与正常回收；独立生产 Worker 版的 StickC Plus 编辑器 63 项通过，五个目标全部回收。Chrome 157 和 Chromium 156 的纯浏览器对照未复现残留，托管结果仍是必要验证。 [候选客体摘要](evidence/browser-candidate-guests-summary.json)
 
 主线提交 `ec3deaaaae0c6d9af3f1adf8e6d86db88923b729` 的平台套件执行 2069 项，11 项跳过，其余通过；Node 契约、配置验证、快照和变更范围检查通过。已触发[正式工作流 42736158712](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42736158712)，仅在全部 72 个串行客体用例及官方 CoreMatrix 镜像等门禁通过后部署。触发后回读仍是旧的 19 板部署 7647968330；本记录不把运行中的工作流当成发布完成。
+
+## 2026-11-10：正式门禁进度与上线验收预检
+
+工作流 42736158712 已通过 Xtensa/C61 构建、导出、Canvas 控制与官方 CoreMatrix 固件用例。完整浏览器串行验收于 02:04:43 UTC 启动；02:06:57 UTC 仍运行，没有新的部署。新站点不能用旧部署的证据替代。
+
+四款新机型使用已锁定的完整演示 BIN；另保留 #211 的原版 CoreS3 固件与两种 SHA。候选导出的真实文件选择器在独立 Chrome 中接受全部五个文件，文件名和大小匹配。本次预检未启动客体。正式验证会先将 HTTPS 清单与成功部署的产物逐字节比较，再由网页文件选择器加载，核对真实 guest 的串口、画面和清理。 [进度与预检摘要](evidence/hosted-progress-and-online-chooser-summary.json)
