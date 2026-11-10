@@ -85,3 +85,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 本地全量预检 45 例通过后，在第 46 例 PaperDIY 的首个 A 键失败；其编辑器硬复位已通过。未修改的独立复跑在同一输入失败。两轮实际 QMP 按下和松开间隔均约 251 ms，客体从就绪到第一条轮询心跳分别为 4,207 和 4,037 客体毫秒，原厂 M5 Button 没有报告按下。两轮均正常回收 Worker。
 
 限定候选在首个输入前先取得两段连续、宿主和客体时间均约 1 秒的空闲轮询区间，原 250 ms 手势、两种真实输入、按下/松开断言均保留。原厂 A/B 的键盘和鼠标共四个手势通过，15 项检查通过，6 个 Worker 目标全部消失。此项是本地虚拟验证，不改变之前完整预检失败和 26 例未执行的记录。 [脱敏证据](evidence/local-paperdiy-gpio-polling-summary.json)
+
+## 2026-11-10：托管 Cardputer ADV FIFO 对照
+
+[诊断工作流 42775250168](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42775250168) 在独立 macOS runner 上使用与正式失败相同的固定固件和 WASM。普通版和启用 FIFO 追踪版均通过 112 个真实手势、516 项检查，6 个 Worker 目标全部退出。追踪实际覆盖 QMP 输入、QEMU 按键分发、TCA8418 读写和 GPIO11；SHIFT 观测到一次松开与先前上升沿 ISR 的清除写交错，GPIO11 保留实际下降沿，原厂固件随后读到 FIFO 松开。未复现此前 L 键松开缺失，不能用本轮通过覆盖正式失败。 [脱敏证据](evidence/hosted-cardputer-fifo-paired-diagnostic-summary.json)
