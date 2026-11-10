@@ -26,7 +26,8 @@
     "next_hosted_attempt": 42736158712,
     "next_hosted_head": "ec3deaaaae0c6d9af3f1adf8e6d86db88923b729",
     "next_hosted_outcome": "failure",
-    "cardputer_followup_workflow": 42765369676
+    "cardputer_followup_workflow": 42765369676,
+    "cardputer_followup_workflow_outcome": "failure"
   },
   "checks": [
     {
@@ -138,6 +139,21 @@
       "level": "device_response",
       "status": "PASS",
       "scope": "Buffered observer: 112 exact Cardputer-ADV public input actions and cleanup, local browser"
+    },
+    {
+      "level": "transport",
+      "status": "FAIL",
+      "scope": "Hosted first synthetic Canvas readback deadline, zero observations"
+    },
+    {
+      "level": "device_response",
+      "status": "NOT RUN",
+      "scope": "42765369676 hosted browser guest gate, skipped by failed synthetic control"
+    },
+    {
+      "level": "delivery",
+      "status": "NOT RUN",
+      "scope": "42765369676 did not deploy"
     }
   ],
   "evidence": [
@@ -196,6 +212,10 @@
     {
       "path": "evidence/local-cardputer-adv-keyboard-buffered-summary.json",
       "sha256": "10fc309b186dc37ceca3318009020138f462d7b728b8b4e0ac0896acce159a22"
+    },
+    {
+      "path": "evidence/hosted-canvas-first-read-timeout-summary.json",
+      "sha256": "7669c0f2d602b09a66862e26710bedb7bff7c2aeff2b7f1b37df5a9d75aebbb0"
     }
   ]
 }
