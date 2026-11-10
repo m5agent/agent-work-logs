@@ -89,3 +89,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：托管 Cardputer ADV FIFO 对照
 
 [诊断工作流 42775250168](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42775250168) 在独立 macOS runner 上使用与正式失败相同的固定固件和 WASM。普通版和启用 FIFO 追踪版均通过 112 个真实手势、516 项检查，6 个 Worker 目标全部退出。追踪实际覆盖 QMP 输入、QEMU 按键分发、TCA8418 读写和 GPIO11；SHIFT 观测到一次松开与先前上升沿 ISR 的清除写交错，GPIO11 保留实际下降沿，原厂固件随后读到 FIFO 松开。未复现此前 L 键松开缺失，不能用本轮通过覆盖正式失败。 [脱敏证据](evidence/hosted-cardputer-fifo-paired-diagnostic-summary.json)
+
+## 2026-11-10：CoreMatrix 原版的托管清场复现
+
+[诊断工作流 42776130682](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42776130682) 的 Canvas 通过。未改动 CoreMatrix 原版固件已启动，完成 USB、真实按键及九次点阵像素比对，QMP 退出码 0。内部六个 pthread 在退出时计数为零，已有引擎自关闭通知且无兜底。Chrome CDP 实际观察 7 个目标，其中 1 个残留，故本轮失败；原报告只有数量，无法辨认残留目标类型。后续七个用例跳过。 [脱敏证据](evidence/hosted-corematrix-stock-worker-residue-summary.json)
