@@ -105,3 +105,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 候选 b4e280d5 的[独立托管验证](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777412965) 全部通过：Atom Matrix 硬复位周期 0→1 并执行新代码，Chrome 6/0；Cardputer ADV 112 个实际动作，Chrome 6/0；CoreMatrix 原版 USB、按键和点阵，Chrome 5/0。各例确认一次正常 owner 回收，退出码 0、兜底 0。[常规 CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777412610) 2070 项，11 项跳过，其余通过。 [候选摘要](evidence/hosted-worker-production-candidate-summary.json)
 
 候选已推送主线，[正式任务 42777985298](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777985298) 已开始重新构建。正式部署仍要求全量 72 例、Canvas 和原版 CoreMatrix 门禁，本段不作为已部署证据。
+
+## 2026-11-10：本地剩余用例
+
+本地早前完整预检仍是第 46 例失败。独立后续在相同本地导出以单客体执行剩下的 CoreMatrix 编辑器/按键 2 例，以及所有固定固件 24 例，均通过；其中四款新增机型有真实客体帧和独立 CDP 清零记录。这个分段诊断不改变早前完整运行结论，也不是正式发布。其 C61 WASM 使用实际本地摘要，不与托管构建混用。 [脱敏摘要](evidence/local-remaining-corematrix-and-fixed-summary.json)
