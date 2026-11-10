@@ -115,3 +115,9 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 [旧版顺序诊断](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42776981254) 的原版 CoreMatrix 和 StickC Plus 编辑器均未通过 CDP 清场；StickC Plus 可识别的残留是主引擎。顺序任务因此未运行 Cardputer FIFO，不能从这轮定位丢键。
 
 正式候选 b4e280d5 独立本地导出上，PaperDIY 4 次 250 ms 级真实 GPIO 手势与 PaperS3 触摸坐标、松开均通过。两次正常 owner 回收，Chrome 各自 6 个目标全部消失。 [脱敏证据](evidence/old-ordered-worker-failure-and-candidate-paper-buttons-summary.json)
+
+## 2026-11-10：实际 Cardputer FIFO 批次及候选清场残留
+
+[候选顺序诊断 42779119871](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42779119871) 的前六例通过，Cardputer 第 36 次动作（鼠标 E）失败。原厂驱动第一次读取计数为 1 后，约 249.61 ms 后才再次读取，已见计数为 2。真实 QMP 与面板输入均到达，C 层按下到松开 270.83 ms；TCA8418 FIFO 在同一批被原厂驱动读出 0x90 和 0x10，清除后 GPIO11 正确恢复高电平。公开回调得到 E（101），之后均为空闲状态，未观察到公开按下和松开。这次没有控制器丢边沿，不能推论早前 L 键的松开为什么未被观察。
+
+本轮 QMP 正常退出，跨任务 ACK、顶层正常回收一次、无兜底均成立，但独立 Chrome 仍观察一个引擎 Worker。新路径并未彻底消除残留。追踪为独立诊断，不能部署。 [脱敏证据](evidence/hosted-cardputer-e-batch-and-owner-residue-summary.json)

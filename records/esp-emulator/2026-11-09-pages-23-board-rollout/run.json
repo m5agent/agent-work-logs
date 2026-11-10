@@ -268,6 +268,21 @@
       "level": "device_response",
       "status": "PASS",
       "scope": "Local exact b4e280d5 candidate PaperDIY A/B and PaperS3 touch plus actual CDP zero"
+    },
+    {
+      "level": "transport",
+      "status": "PASS",
+      "scope": "42779119871 traced E: actual QMP, C panel, GPIO and both TCA8418 FIFO edges"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "42779119871 original Cardputer E driver batches both edges after ~250 ms between count reads; public state transition absent"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "42779119871 actual engine target remains after successful normal owner ACK and termination"
     }
   ],
   "evidence": [
@@ -370,6 +385,10 @@
     {
       "path": "evidence/old-ordered-worker-failure-and-candidate-paper-buttons-summary.json",
       "sha256": "8fe4328c061a401646db6ce73c7b724bf976dd0b5d50591a4a249209d950dbce"
+    },
+    {
+      "path": "evidence/hosted-cardputer-e-batch-and-owner-residue-summary.json",
+      "sha256": "928ba41ea38b387145d7df6adedc972f44c71dfa09fcdb7d0d88e10310022929"
     }
   ]
 }
