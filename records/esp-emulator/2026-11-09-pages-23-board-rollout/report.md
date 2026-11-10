@@ -176,3 +176,13 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10 Cardputer QMP 排序对照未完成
 
 [诊断任务 42791179208](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42791179208) 使用同一 runner 与相同固件和 WASM。基线通过前七例及全部 112 个 Cardputer 键盘手势。仅在 Cardputer 启用的方向查询抑制组，在前置 Atom Matrix 按键用例等待原厂按下状态时超时，未到达 Cardputer，无法比较两种 QMP 排序。 [脱敏证据](evidence/hosted-cardputer-qmp-ordering-inconclusive-summary.json)
+
+## 2026-11-10 AtomS3 Lite 本地正式产物启动失败
+
+固定主线 `7edc2d11` 的精确导出通过 Canvas 五项检查和 CoreMatrix 原版固件，完整串行门禁 16 例通过、1 例失败、55 例未运行。第 17 例 AtomS3 Lite 的 UIFlow 按键观察器启动时遇到 Core1 `LoadStorePIFAddrError`，尚无应用帧或输入。串口记录 PC `0x40384fbe` 和 A7 `0x3fca3ef8`。原版固件该处为 `l32i.n a8,a7,0`，据此推导的有效地址位于对应源码的 DRAM 映射范围。串口在寄存器转储中截断，未观测到 EXCVADDR 或失败的内存事务。QMP 正常退出，严格 CDP 清场为 6 到 0。本次结果未达到备用发布门禁。 [脱敏证据](evidence/local-exact-7ed-atoms3-lite-boot-pif-summary.json)
+
+## 2026-11-10 Cardputer 右方括号 FIFO 松开复现
+
+[托管诊断 42795498452](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42795498452) 的 20 个定向手势通过 19 个。最后一次真实鼠标手势的按下和松开都获确认，原厂回调报告 `[93]`。追踪显示固件最后一次读 FIFO 计数为零后，实际松开先到达 QEMU，再发生驱动 W1C。当前 `INT_CFG=0`，清中断后 GPIO11 仍为低电平，与 TI 芯片文档约定一致。追踪中此后没有 TCA8418 读取，原厂状态的 30 条后续心跳持续报告按下。QMP 正常退出，实际同层引擎和五个 pthread 严格清场为 6 到 0。这个诊断单独复现了失效时序。 [脱敏证据](evidence/hosted-cardputer-fifo-release-race-summary.json) · [TI TCA8418 数据手册](https://www.ti.com/lit/ds/symlink/tca8418.pdf)
+
+另一个诊断 job 的 Canvas 与 CoreMatrix 原版固件通过，但串行前缀启动器因输出目录缺失提前退出，没有启动首个前缀子用例。诊断不具备发布资格。

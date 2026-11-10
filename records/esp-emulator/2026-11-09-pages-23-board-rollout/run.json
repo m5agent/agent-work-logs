@@ -70,6 +70,22 @@
       "baseline": "7/7, 112/112 keyboard trials",
       "suppression": "Atom Matrix button observation timed out before Cardputer",
       "differential": "NOT RUN"
+    },
+    "local_7ed_atoms3_lite_boot_pif": {
+      "source": "7edc2d1171634a8975a946625349aa37ce9343a7",
+      "outcome": "FAIL, 16 PASS / 1 FAIL / 55 NOT RUN",
+      "case": "17, AtomS3 Lite UIFlow buttons, before input",
+      "canvas_and_official_corematrix_stock": "PASS",
+      "strict_cdp": "6 observed, 0 live",
+      "prepared_release_eligible": false
+    },
+    "cardputer_fifo_release_race": {
+      "workflow": 42795498452,
+      "source": "9dc54f9503a41f0fba087d392ffff6d34b2a8f26",
+      "outcome": "FAIL, 19/20 focused trials",
+      "observation": "Native pointer release between last FIFO-empty read and W1C, low GPIO11, no further TCA reads and guest stays pressed",
+      "strict_cdp": "6 observed, 0 live",
+      "ordered_prefix": "Canvas and CoreMatrix stock PASS, serial prefix NOT RUN"
     }
   },
   "checks": [
@@ -622,6 +638,14 @@
     {
       "path": "evidence/hosted-cardputer-qmp-ordering-inconclusive-summary.json",
       "sha256": "237a6e41d0ffeb993206142f0fca7f4da58f85d064b932614fa953a2d11f692e"
+    },
+    {
+      "path": "evidence/local-exact-7ed-atoms3-lite-boot-pif-summary.json",
+      "sha256": "b8db40cf1c93b92661d892d309fceaa8e0761b5a8831173ec7334d856661fcf9"
+    },
+    {
+      "path": "evidence/hosted-cardputer-fifo-release-race-summary.json",
+      "sha256": "f90d4313fde567364c94f0968493d13caa7201e6f5df3d4016cf059b1ed4d5c2"
     }
   ]
 }

@@ -1,0 +1,171 @@
+{
+  "kind": "browser-WASM virtual-device validation",
+  "status": "FAIL",
+  "source_commit": "7edc2d1171634a8975a946625349aa37ce9343a7",
+  "scope": "Exact production static export and full release harness, one serial guest at a time.",
+  "publication_eligible": false,
+  "prechecks": {
+    "synthetic_browser_canvas": {
+      "status": "PASS",
+      "bytes": 3541,
+      "sha256": "9276c6dfa25cea88ffa5949a84380090f67a005fe69ac29022af74da9f7dc3b5",
+      "checks": 5,
+      "guest_execution": "NOT RUN"
+    },
+    "official_corematrix_stock_guest": {
+      "status": "PASS",
+      "bytes": 28204,
+      "sha256": "5a5eb08d3462707411eebdbc529e195b950b5303aff483685479d69dd0d27238",
+      "firmware": {
+        "version": "UIFlow2 v2.5.4",
+        "bytes": 16773120,
+        "sha256": "0bfbe5a4acb467d93a7ded2186a4f73adea37511869328b563c15ab73163a018",
+        "flashSha256": "5562f685a8f3ed07d04ec7d7f58fa4435be8438fbf135c6fd61ff6e906783c07"
+      },
+      "wasm_sha256": "83ed57e0ac517ba2c83d40c640995050df33217138c59366c089962b399ba163"
+    }
+  },
+  "full_gate": {
+    "status": "FAIL",
+    "phase": "all",
+    "workers": 1,
+    "planned": 72,
+    "passed": 16,
+    "failed": 1,
+    "not_run": 55,
+    "case_plan_sha256": "5c642eca4a76a17f1064d8a0413aa54637b6ab289d57d8cd12ddcebfafeeb1f1",
+    "runner_sha256": "b8fe5bc36cd5af9d04df56362a397668e4aca13cd88a198424f74d5c05efc994",
+    "c61_wasm_sha256": "83ed57e0ac517ba2c83d40c640995050df33217138c59366c089962b399ba163",
+    "site_asset_identities": {
+      "public-site-manifest.json": {
+        "bytes": 439027,
+        "sha256": "9b9985c36d6511c3018762fcdbdf1b29c368f00896f422528a6237893b0877d0"
+      },
+      "platform/web/site-config.json": {
+        "bytes": 305,
+        "sha256": "cce1ffa762bce51f65bb921d3a211b2d8428b0322432e6edbb67f814dcd6d8df"
+      },
+      "platform/web/qemu-browser-profiles.json": {
+        "bytes": 111338,
+        "sha256": "aa5c1a915ae9293d54cd6a3d53f3d4c26c3b8ceccd2f62c701719143c5d4ad09"
+      },
+      "platform/runtime/qemu/runtime.json": {
+        "bytes": 35907,
+        "sha256": "17cdc825f87c7549e946e477cb4fc4561245cca0793115075d2a8d93d719636c"
+      },
+      "platform/runtime/qemu-c61/runtime.json": {
+        "bytes": 11527,
+        "sha256": "87d077e09fdd72ed440a4ff502d1eab1daf1f7d7e7e25e92be5691bf3e02746e"
+      },
+      "platform/web/uiflow-workbench-profiles.json": {
+        "bytes": 29525,
+        "sha256": "53cad70c87aa14682b422f66ba0acaeb63f3bd1c7532c69234648cf997cc43a3"
+      }
+    },
+    "started_at": "2026-11-10T09:46:31.799Z",
+    "finished_at": "2026-11-10T09:56:01.678Z",
+    "first_failure": {
+      "ordinal": 17,
+      "device": "atoms3-lite",
+      "lane": "uiflow-buttons"
+    },
+    "report": {
+      "bytes": 24032,
+      "sha256": "92a0125c2147e1a48a829d85cbca3aef5cbe865dc623b6f256af97bf6599fcd3"
+    }
+  },
+  "failed_guest": {
+    "site_manifest_sha256": "9b9985c36d6511c3018762fcdbdf1b29c368f00896f422528a6237893b0877d0",
+    "runtime_manifest_sha256": "17cdc825f87c7549e946e477cb4fc4561245cca0793115075d2a8d93d719636c",
+    "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "runtime_assets": {
+      "qemu-system-xtensa.js": {
+        "bytes": 157200,
+        "sha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb"
+      },
+      "NOTICE": {
+        "bytes": 968,
+        "sha256": "290273f3bf903aa43510e68a735810e0e6c54d43accc5dc16b00ffd5a0399f76"
+      },
+      "corresponding-source.tar.xz": {
+        "bytes": 35258560,
+        "sha256": "8fa2ca6b54194e900042c41aae89314cad57121676adf3d5f8dff40369b98389"
+      },
+      "qemu-system-xtensa.wasm": {
+        "bytes": 12765921,
+        "sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8"
+      },
+      "qemu-system-xtensa.worker.js": {
+        "bytes": 2776,
+        "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+      }
+    },
+    "guest_runner": {
+      "path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+      "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+    },
+    "helper_sha256": "944f0f00dab6e1c0df81a9adbf26455c47308b4026c22bf928f655eb13825230",
+    "board": "m5atoms3lite",
+    "profile": "atoms3-lite-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+    "controller": "same-origin-iframe-message-channel",
+    "clock_divisor": 1,
+    "one_instruction_per_tb": true,
+    "firmware_sha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+    "browser": "157.0.8103.39",
+    "report": {
+      "bytes": 36773,
+      "sha256": "b7409414c2f1050626674e10d74a8cf92e0fe2f8ba9e2763b8c81fd1933f2364"
+    },
+    "inputs": 0,
+    "assertions_before_failure": 0,
+    "failure": "Guest panic while booting the UIFlow input observer",
+    "boot": {
+      "assetsReady": true,
+      "guestStarted": true,
+      "firstFrameSequence": null,
+      "applicationReady": "waiting"
+    },
+    "serial_observed": {
+      "core": 1,
+      "exception": "LoadStorePIFAddrError",
+      "pc": "0x40384fbe",
+      "a7": "0x3fca3ef8",
+      "excvaddr": "NOT OBSERVED, serial ends mid-register dump"
+    },
+    "cleanup": {
+      "qmp_exit_code": 0,
+      "graceful": true,
+      "owner_fallback_terminations": 0,
+      "source": "Chrome DevTools Target.getTargets",
+      "observed": 6,
+      "live_before_browser_context_close": 0
+    }
+  },
+  "offline_instruction_analysis": {
+    "official_base_image": {
+      "bytes": 8384512,
+      "sha256": "338baf7f16703b26fff78619d32e593d8ca4f1934bdad63e3c95eef862f3133c"
+    },
+    "iram_app_segment": {
+      "bytes": 109028,
+      "sha256": "d4e871d37a8fd21eb2bf4eca7a675e4d3650969836087302dfc6c532d7f7953e",
+      "vma": "0x40374000"
+    },
+    "reproduction": "xtensa-esp32s3-elf-objdump -D -b binary -m xtensa --adjust-vma=0x40374000 --start-address=0x40384fbe --stop-address=0x40384fd3 <app-IRAM-segment>",
+    "instruction_file_bytes": "8807",
+    "instruction": "l32i.n a8,a7,0",
+    "derived_effective_address": "0x3fca3ef8",
+    "corresponding_source_dram_mapping": {
+      "base": "0x3fc80000",
+      "size": "0x170000",
+      "evidence": "local-papers3-one-insn-reset-ab-rejected-summary.json"
+    },
+    "limit": "The derived effective address lies in the mapped DRAM aperture. Neither EXCVADDR nor a failing memory transaction was captured."
+  },
+  "reproduction": "With the exact exported site and repository's Playwright/Chrome setup, run M5_QEMU_GATE_REQUIRE_ALL=1 M5_QEMU_GATE_WORKERS=1 M5_QEMU_GATE_PHASE=all node platform/tests/test_public_qemu_admitted_boards.mjs.",
+  "limits": [
+    "The 55 later cases did not start.",
+    "This run does not qualify a prepared Pages package.",
+    "No physical hardware measurement."
+  ]
+}
