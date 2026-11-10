@@ -127,3 +127,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 正式候选不含这两项原型。更低分配的 Cardputer 观察器保留原厂回调前状态检查、按键状态和释放断言；基线与候选在相同发布构建的独立导出上各通过 112 个手势、516 项检查和严格 Worker 清零。一对本地结果不足以证明解决托管的延迟。 [观察器对照](evidence/local-cardputer-observer-cadence-ab-summary.json)
 
 在另一个原型中，浏览器顶层创建实际 Emscripten pthread，使之与引擎处于同一父层；原私有客体通道仍保持。真实 Cardputer 六次 IRQ 输入、原版 CoreMatrix 的启动、USB 和九次点阵画面通过，Chrome 分别确认 6/0 和 5/0，均有同一父层的实际目标图。这个本地原型未接受全量托管或发布门禁。 [线程所有权原型](evidence/local-worker-sibling-prototype-summary.json)
+
+## 2026-11-10：正式任务仍在 AtomS3 清场失败
+
+[正式任务 42777985298](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42777985298) 完成两套源码构建、静态导出、Canvas 控制和 CoreMatrix 原版。72 例串行门禁前 13 例通过，其中 Atom Matrix、StickC Plus、Cardputer ADV 编辑器和全部 112 个键盘动作均通过。第 14 例 AtomS3 硬复位后进入新控制台并执行新代码，QMP 退出 0，五个 pthread 目标已退出；顶层收到跨任务确认并执行一次正常回收，未用兜底。但独立 Chrome 在最终期限仍列出一个已附加的主引擎 Worker，故失败，剩余 58 例未执行。部署跳过，线上仍为此前版本。 [脱敏证据](evidence/formal-atoms3-engine-residue-summary.json)

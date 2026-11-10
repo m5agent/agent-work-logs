@@ -31,7 +31,8 @@
     "canvas_followup_workflow": 42770355747,
     "canvas_followup_workflow_outcome": "failure",
     "worker_production_candidate": "b4e280d5dcd9b07b4efa59dd96dc914f4f82e6ce",
-    "latest_formal_attempt": 42777985298
+    "latest_formal_attempt": 42777985298,
+    "latest_formal_attempt_outcome": "failure"
   },
   "checks": [
     {
@@ -298,6 +299,26 @@
       "level": "delivery",
       "status": "NOT RUN",
       "scope": "Sibling topology and lower-allocation observer are scratch-only, outside current formal candidate"
+    },
+    {
+      "level": "build",
+      "status": "PASS",
+      "scope": "42777985298 both fresh official WASM source builds, source/export and Canvas"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "42777985298 original CoreMatrix and first 13 gate cases; 112 Cardputer keyboard and raw CDP zero"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "42777985298 AtomS3 actual engine CDP target retained after valid reset and normal owner release"
+    },
+    {
+      "level": "delivery",
+      "status": "NOT RUN",
+      "scope": "42777985298 gate stopped at 14; deployment skipped"
     }
   ],
   "evidence": [
@@ -412,6 +433,10 @@
     {
       "path": "evidence/local-cardputer-observer-cadence-ab-summary.json",
       "sha256": "1fd71ce440072dce65ac0c959037802b24e05c5247f9f5631e612025ae70c809"
+    },
+    {
+      "path": "evidence/formal-atoms3-engine-residue-summary.json",
+      "sha256": "a979956f22acc6945dc6bb5325e5b932ee36ba1d9d09e109f2af128014df9267"
     }
   ]
 }
