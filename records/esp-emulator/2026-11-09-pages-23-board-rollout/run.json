@@ -39,7 +39,16 @@
     "sibling_formal_run": 42785667793,
     "sibling_release_commit": "7edc2d1171634a8975a946625349aa37ce9343a7",
     "sibling_release_ci_outcome": "success",
-    "sibling_formal_run_outcome": "failure"
+    "sibling_formal_run_outcome": "failure",
+    "cardputer_hosted_observer_ab": {
+      "workflow": 42788831662,
+      "attempt": 1,
+      "outcome": "failure",
+      "baseline": "7/7 scoped, 112/112 inputs, 517 checks, strict CDP 6/0",
+      "candidate": "6/7 scoped, QMP qom-get timed out during raw-paste upload, zero keyboard trials",
+      "differential": "NOT RUN",
+      "deployment": "NOT RUN"
+    }
   },
   "checks": [
     {
@@ -381,6 +390,21 @@
       "level": "delivery",
       "status": "NOT RUN",
       "scope": "Prepared fallback not eligible after failed local serial gate"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "42788831662 baseline, 112 real Cardputer keyboard and mouse trials, 517 assertions, same-parent topology, raw CDP 6/0"
+    },
+    {
+      "level": "transport",
+      "status": "FAIL",
+      "scope": "42788831662 candidate QMP qom-get timed out during raw-paste upload before keyboard input"
+    },
+    {
+      "level": "device_response",
+      "status": "NOT RUN",
+      "scope": "Candidate keyboard differential and strict terminal raw CDP fence"
     }
   ],
   "evidence": [
@@ -511,6 +535,10 @@
     {
       "path": "evidence/local-papers3-reset-pif-failure-summary.json",
       "sha256": "59d2d8ab6580b890b199505c049c0fc4b16a41c7efd74539d5b8ff63ba6b0dbc"
+    },
+    {
+      "path": "evidence/hosted-cardputer-observer-ab-pre-input-timeout-summary.json",
+      "sha256": "5ddeb13895ca174b0583b89eabe7175fca5409b480b04cc4cf175b7cf3491000"
     }
   ]
 }

@@ -149,3 +149,10 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：本地完整门禁的 PaperS3 复位失败
 
 同层 Worker 候选的独立本地完整门禁前 42 例通过，第 43 例 PaperS3 在硬复位后的新固件启动出现 Core1 LoadStorePIFAddrError，SYSTIMER 地址 0x60023008，随后有两个客体复位。复位前原厂实际代码和黑白画面通过。QMP 退出正常，6 个 Chrome Worker 目标均退出。旧版独立导出同固件和 WASM 曾通过，不覆盖本轮失败；同地址 StamPLC 历史证据不证明相同根因。完整门禁失败，备选发布不得使用本轮。 [证据](evidence/local-papers3-reset-pif-failure-summary.json)
+
+
+## 2026-11-10 Cardputer 观察器托管对照
+
+[诊断工作流 42788831662](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42788831662) 的两组使用相同的静态导出、WASM 和工作台 Flash。两组 Canvas 与 CoreMatrix 原版固件通过。基线完成前七例，Cardputer 的 112 个真实键盘及鼠标输入、517 项检查均通过。引擎与五个 pthread 的同层拓扑通过，正常退出后 Chrome CDP 从 6 个目标清到 0。
+
+候选通过前六例，第七例在 raw-paste 上传阶段遇到后台 QMP `qom-get` 超时。原厂观察器就绪未取得，键盘输入为 0。正常退出断言失败，未取得严格的终态 CDP 样本。键盘差异与候选终态 Worker 清场均为 `NOT RUN`，本轮无部署结果。 [脱敏摘要](evidence/hosted-cardputer-observer-ab-pre-input-timeout-summary.json)
