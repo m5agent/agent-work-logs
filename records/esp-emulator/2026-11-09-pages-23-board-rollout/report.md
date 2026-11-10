@@ -93,3 +93,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：CoreMatrix 原版的托管清场复现
 
 [诊断工作流 42776130682](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42776130682) 的 Canvas 通过。未改动 CoreMatrix 原版固件已启动，完成 USB、真实按键及九次点阵像素比对，QMP 退出码 0。内部六个 pthread 在退出时计数为零，已有引擎自关闭通知且无兜底。Chrome CDP 实际观察 7 个目标，其中 1 个残留，故本轮失败；原报告只有数量，无法辨认残留目标类型。后续七个用例跳过。 [脱敏证据](evidence/hosted-corematrix-stock-worker-residue-summary.json)
+
+## 2026-11-10：同一托管 runner 的 Worker 退出对照
+
+[诊断工作流 42775514548](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42775514548) 在同一 macOS runner 上，用同一 Cardputer ADV 固件和 WASM 对照三条退出路径。三组各通过六次实际键盘/鼠标手势，停止时探针仍在运行，QMP 退出均为 0。原版自行关闭本轮通过；确认跨过一个新的 Worker 任务再自行关闭的模式仍留下一个主 Worker，五个内部线程已消失。相同握手后由顶层 owner 回收的模式 6 个目标全部消失，未用异常兜底。该对照证明丢键不是残留的必要条件；单次候选通过不足以确认可靠性。 [脱敏证据](evidence/hosted-cardputer-worker-differential-summary.json)
