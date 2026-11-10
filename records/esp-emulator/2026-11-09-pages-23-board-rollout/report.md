@@ -59,3 +59,9 @@
 工作流 42736158712 已通过 Xtensa/C61 构建、导出、Canvas 控制与官方 CoreMatrix 固件用例。完整浏览器串行验收于 02:04:43 UTC 启动；02:06:57 UTC 仍运行，没有新的部署。新站点不能用旧部署的证据替代。
 
 四款新机型使用已锁定的完整演示 BIN；另保留 #211 的原版 CoreS3 固件与两种 SHA。候选导出的真实文件选择器在独立 Chrome 中接受全部五个文件，文件名和大小匹配。本次预检未启动客体。正式验证会先将 HTTPS 清单与成功部署的产物逐字节比较，再由网页文件选择器加载，核对真实 guest 的串口、画面和清理。 [进度与预检摘要](evidence/hosted-progress-and-online-chooser-summary.json)
+
+## 2026-11-10：本轮发布终态
+
+[工作流 42736158712](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42736158712) 用时约 46 分 49 秒。串行构建 Xtensa/C61 WASM 分别耗时 17 分 10 秒和 15 分 28 秒；官方 CoreMatrix 固件通过，逐板浏览器门禁运行 11 分 37 秒后失败。72 例中 6 通过、1 失败、65 未运行。Atom Matrix 和 StickC Plus 编辑器均通过真实硬复位、新代码及独立 CDP 清场。
+
+首个失败是 Cardputer-ADV 的第 108 个键盘验收动作，鼠标操作句号键。模型实际按住约 256.93 ms，两个控制器命令获确认，原厂 KeyboardI2C 回调返回 46，原厂公开状态 API 的按下及松开记录未观察到。QMP 正常退出，6 个 Worker 全部消失。缺少状态记录的具体原因仍待验证，失败保持，部署跳过。 [终态摘要](evidence/hosted-cardputer-adv-irq-failure-summary.json)
