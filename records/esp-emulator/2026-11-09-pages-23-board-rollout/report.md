@@ -163,3 +163,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 相同 PaperS3 工作台 Flash 和 WASM 的标准编辑器入口各跑一次。基线与单指令 TCI 候选均通过 64 项检查，硬复位后都在新控制台取得代码回显和实际帧，QMP 正常退出且 Chrome CDP 从 6 个目标清到 0。两套导出只差 PaperS3 执行配置所在的配置文件。这两次通过未复现差异，无法据此定位根因。
 
 随后单指令候选的独立重复复位诊断完成第一次宿主硬复位，在第二次启动遇到 Core1 `LoadStorePIFAddrError`。报告地址 `0x3fceb0b8` 落在运行时源码的 DRAM 映射范围，PC 为 `0x42077d59`。失败会话 QMP 退出码为 0，严格 CDP 验证 6 个目标全部消失。较早完整门禁第一次复位时的 SYSTIMER `0x60023008` 失败继续单独保留。候选已排除，未合入、未部署。 [本轮脱敏证据](evidence/local-papers3-one-insn-reset-ab-rejected-summary.json) · [原完整门禁失败](evidence/local-papers3-reset-pif-failure-summary.json)
+
+## 2026-11-10：PaperS3 原策略连续复位诊断
+
+原固件与原 WASM 保持不变，只在独立导出启用 QEMU `guest_errors`。四次实际宿主硬复位均返回新控制台并执行新源码，82 项检查通过，显示为真实 540×960 黑白帧，QMP 退出为 0，关闭浏览器上下文前实际 6 个 Worker 均退出。未复现 PIF；日志已达到上限，也不能据此推断失败时会保留哪条内存事务。这轮诊断不符合发布资格，两次既有异常照常保留。 [脱敏摘要](evidence/local-papers3-baseline-four-reset-guest-errors-summary.json)
