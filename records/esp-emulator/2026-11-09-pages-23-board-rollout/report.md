@@ -65,3 +65,5 @@
 [工作流 42736158712](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42736158712) 用时约 46 分 49 秒。串行构建 Xtensa/C61 WASM 分别耗时 17 分 10 秒和 15 分 28 秒；官方 CoreMatrix 固件通过，逐板浏览器门禁运行 11 分 37 秒后失败。72 例中 6 通过、1 失败、65 未运行。Atom Matrix 和 StickC Plus 编辑器均通过真实硬复位、新代码及独立 CDP 清场。
 
 首个失败是 Cardputer-ADV 的第 108 个键盘验收动作，鼠标操作句号键。模型实际按住约 256.93 ms，两个控制器命令获确认，原厂 KeyboardI2C 回调返回 46，原厂公开状态 API 的按下及松开记录未观察到。QMP 正常退出，6 个 Worker 全部消失。缺少状态记录的具体原因仍待验证，失败保持，部署跳过。 [终态摘要](evidence/hosted-cardputer-adv-irq-failure-summary.json)
+
+修复候选仅调整键盘验收采样：原厂回调先读公开状态并缓冲，再由主循环输出 UART。相同固件与 WASM、250 ms 输入、全部状态与清场断言保持。最终版 112 个动作、516 项检查通过，鼠标句号键的原厂回调、按下、松开均观测到，正常退出后 6 个 Worker 全部消失。旧脚本本机也曾全过，因此这不是托管根因定论。修复已推主线，启动[新一轮完整门禁](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42765369676)。 [限定结果](evidence/local-cardputer-adv-keyboard-buffered-summary.json)
