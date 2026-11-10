@@ -145,3 +145,7 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 [正式任务 42785667793](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42785667793) 核验并导入上一轮两份完整源码构建，导出、Canvas 和 CoreMatrix 原版通过。完整串行门禁先过 6 例，随后 Cardputer ADV 第 16 个键盘动作（鼠标 7）未观察到按下/松开。原厂回调返回 ASCII 55，浏览器手势 267.03 ms，模型 257.59 ms，两次 QMP 回执间隔 127 ms。回执并非 C 层实际发出时间，原始失败仍不足以定位原因。
 
 这次失败会话同层目标检查通过，正常 QMP/owner 回收均通过，Chrome 在关闭上下文前确认全部 6 个目标退出，兜底为零。65 例未运行，部署跳过。 [证据](evidence/formal-cardputer-pointer7-and-sibling-cleanup-summary.json)
+
+## 2026-11-10：本地完整门禁的 PaperS3 复位失败
+
+同层 Worker 候选的独立本地完整门禁前 42 例通过，第 43 例 PaperS3 在硬复位后的新固件启动出现 Core1 LoadStorePIFAddrError，SYSTIMER 地址 0x60023008，随后有两个客体复位。复位前原厂实际代码和黑白画面通过。QMP 退出正常，6 个 Chrome Worker 目标均退出。旧版独立导出同固件和 WASM 曾通过，不覆盖本轮失败；同地址 StamPLC 历史证据不证明相同根因。完整门禁失败，备选发布不得使用本轮。 [证据](evidence/local-papers3-reset-pif-failure-summary.json)

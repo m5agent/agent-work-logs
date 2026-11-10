@@ -1,0 +1,113 @@
+{
+  "kind": "redacted virtual-device validation summary",
+  "redaction": "Omitted guest/session/target identifiers, local URLs and filesystem paths, full serial/framebuffer, probe nonce.",
+  "status": "FAIL",
+  "source_commit": "f61c99f7c2e44989802d1436509737af830882de",
+  "gate": {
+    "report": {
+      "sha256": "c98b11ef34641f234be03edd613b49b143df9a91f8291f8546182e0893ca4cd1",
+      "bytes": 32764
+    },
+    "planned": 72,
+    "passed": 42,
+    "failed": 1,
+    "not_run": 29,
+    "first_failed_device": "papers3"
+  },
+  "device": "papers3",
+  "firmware_sha256": "4eb25cbc42d72a644d1b6c06971cf5c7d9bc3c2951024d1c122bda9bf3cb39aa",
+  "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+  "clock_divisor": 1,
+  "profile": "papers3-wasm-uiflow-workbench-wallclock",
+  "one_instruction_per_tb": false,
+  "site_manifest_sha256": "9b9985c36d6511c3018762fcdbdf1b29c368f00896f422528a6237893b0877d0",
+  "child_report": {
+    "sha256": "920568ac87fffdd52ec9cdc42c697105e5c18aae6e9c2053ded23af99af0a826",
+    "bytes": 26426499
+  },
+  "browser": "157.0.8103.39",
+  "guest_failure": "Core1 LoadStorePIFAddrError after requested QMP hardware reset",
+  "pre_reset_checks": [
+    "source-drew-actual-guest-framebuffer",
+    "same-console-through-pre-reset-programs",
+    "hardware-reset-cancels-old-console-program"
+  ],
+  "actual_reset_events": [
+    {
+      "event": "RESET",
+      "reason": "host-qmp-system-reset",
+      "guest": false,
+      "consoleEpoch": 1
+    },
+    {
+      "event": "RESET",
+      "reason": "guest-reset",
+      "guest": true,
+      "consoleEpoch": 2
+    },
+    {
+      "event": "RESET",
+      "reason": "guest-reset",
+      "guest": true,
+      "consoleEpoch": 3
+    }
+  ],
+  "serial_panic_excerpt": [
+    "Guru Meditation Error: Core  1 panic'ed (LoadStorePIFAddrError). Exception was unhandled.",
+    "Core  1 register dump:",
+    "PC      : 0x4038945d  PS      : 0x00060031  A0      : 0x80386b09  A1      : 0x3fca0cc0  ",
+    "EXCVADDR: 0x60023008  LBEG    : 0x4219b740  LEND    : 0x4219b779  LCOUNT  : 0x00000000  ",
+    "Backtrace: 0x4038945a:0x3fca0cc0 0x40386b06:0x3fca0cf0 0x4037f806:0x3fca0d10 0x4038676c:0x3fceb030 0x42077ae3:0x3fceb050 0x42077e0f:0x3fceb070",
+    "ELF file SHA256: 019766cac"
+  ],
+  "cleanup": {
+    "gracefulExit": true,
+    "exitCode": 0,
+    "workersCreated": 5,
+    "workersAtExit": 0,
+    "disposal": {
+      "workersRemaining": 0,
+      "workersTerminatedByDispose": 0,
+      "workerCountScope": "engine-pthreads",
+      "enginePlacement": "dedicated-worker-v1",
+      "engineWorkersAtAcknowledgement": 1,
+      "ownerTerminatesAfterAcknowledgement": true,
+      "engineSelfClosesAfterAcknowledgement": false
+    },
+    "engineOwnership": {
+      "engineWorkersCreated": 1,
+      "engineOwnerLive": false,
+      "engineCloseNotificationReceived": true,
+      "engineCloseNotifications": 1,
+      "engineNormalTerminations": 1,
+      "engineFallbackTerminations": 0,
+      "enginePortTransferred": true,
+      "engineFinalizationAcknowledged": true,
+      "engineSelfCloseNotifications": 0,
+      "pthreadBroker": {
+        "created": 5,
+        "live": 0,
+        "terminations": 5,
+        "fallbackTerminations": 0
+      }
+    },
+    "engineOwnershipStage": "before-iframe-removal",
+    "explicitWorkerDisposal": true,
+    "iframeRemoved": true
+  },
+  "cdp_observed": 6,
+  "cdp_live": 0,
+  "prior_independent_pass": {
+    "report": {
+      "sha256": "e804214b9638516545b484e8c284ee9ac5e9038577d3f92a35313952631931d0",
+      "bytes": 40541578
+    },
+    "site_manifest_sha256": "734103eb798b148896515f452abd0c292b14d140bb054a345285ea12c4a3f51a",
+    "same_flash_wasm_profile": true,
+    "checks": 63
+  },
+  "limits": [
+    "Actual guest fault at the mapped SYSTIMER address, not a clean-up failure. The existing StamPLC exact-policy precedent has the same address class but does not prove one common root.",
+    "Earlier independent same-firmware and WASM pass is retained; it used a different browser export. This failed full run is ineligible for either deployment route."
+  ]
+}
