@@ -1,0 +1,219 @@
+{
+  "kind": "redacted local virtual-device validation summary",
+  "hardware_validation": "NOT RUN",
+  "publication_eligible": false,
+  "candidate_merge": "NOT RUN",
+  "deployment": "NOT RUN",
+  "source": {
+    "baseline_commit": "f61c99f7c2e44989802d1436509737af830882de",
+    "candidate_commit": "4ccbc57ecbb914f8e6e9588df4d4baf34b54126e",
+    "changed_export_assets": [
+      "platform/web/qemu-browser-profiles.json"
+    ],
+    "baseline_export": {
+      "bytes": 439027,
+      "sha256": "9b9985c36d6511c3018762fcdbdf1b29c368f00896f422528a6237893b0877d0"
+    },
+    "candidate_export": {
+      "bytes": 439027,
+      "sha256": "1bf60b4c28c15316e03de4c18325f94d9d4e630b1814459b86ab5dd905d941d6"
+    },
+    "candidate_accelerator": "tcg,thread=multi,one-insn-per-tb=on"
+  },
+  "browser": "157.0.8103.39",
+  "shared_artifact_identity": {
+    "firmwareSha256": "4eb25cbc42d72a644d1b6c06971cf5c7d9bc3c2951024d1c122bda9bf3cb39aa",
+    "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+    "clockDivisor": 1,
+    "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "runtime_manifest_sha256": "17cdc825f87c7549e946e477cb4fc4561245cca0793115075d2a8d93d719636c",
+    "runtime_build_recipe_sha256": "848810f1151d5fe916ba7c2220075d88bd71172c949b802d1b10be49f649d80e",
+    "runtime_build_lock_sha256": "682d7aa82d55b0026b43acbd41448b7335e27392357a1bc16e6a52aecae6e309",
+    "runtime_assets": {
+      "qemu-system-xtensa.js": {
+        "bytes": 157200,
+        "sha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb"
+      },
+      "qemu-system-xtensa.worker.js": {
+        "bytes": 2776,
+        "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+      },
+      "corresponding-source.tar.xz": {
+        "bytes": 35258560,
+        "sha256": "8fa2ca6b54194e900042c41aae89314cad57121676adf3d5f8dff40369b98389"
+      }
+    }
+  },
+  "sanitized_input_summary": {
+    "bytes": 11080,
+    "sha256": "13e8b50ca090de01c1849c798c3aea4732a9f938b6e17df5a1ef431173c38e2b"
+  },
+  "runs": {
+    "original_full_gate_failure": {
+      "status": "FAIL",
+      "raw_report": {
+        "bytes": 26426499,
+        "sha256": "920568ac87fffdd52ec9cdc42c697105e5c18aae6e9c2053ded23af99af0a826"
+      },
+      "started_at": "2026-11-10T09:16:32.287Z",
+      "finished_at": "2026-11-10T09:19:13.111Z",
+      "site_manifest_sha256": "9b9985c36d6511c3018762fcdbdf1b29c368f00896f422528a6237893b0877d0",
+      "runner": {
+        "path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "profile": "papers3-wasm-uiflow-workbench-wallclock",
+      "one_instruction_per_tb": false,
+      "checks_recorded": 53,
+      "checks_passed": 53,
+      "failure": {
+        "phase": "first host hard reset boot in full ordered gate",
+        "exception": "Core1 LoadStorePIFAddrError",
+        "pc": "0x4038945d",
+        "excvaddr": "0x60023008",
+        "mapped_region": "SYSTIMER_UNIT1_OP"
+      },
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "strict_cdp_observed": 6,
+        "strict_cdp_live": 0
+      }
+    },
+    "standalone_baseline": {
+      "status": "PASS",
+      "raw_report": {
+        "bytes": 38474615,
+        "sha256": "49e08500b016d1b91acb403eea6b98600ece9379349e4c9edbc7036935b76077"
+      },
+      "started_at": "2026-11-10T09:20:51.481Z",
+      "finished_at": "2026-11-10T09:24:04.385Z",
+      "site_manifest_sha256": "9b9985c36d6511c3018762fcdbdf1b29c368f00896f422528a6237893b0877d0",
+      "runner": {
+        "path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "profile": "papers3-wasm-uiflow-workbench-wallclock",
+      "one_instruction_per_tb": false,
+      "checks_recorded": 64,
+      "checks_passed": 64,
+      "completed_hardware_resets": 1,
+      "recovered_raw_paste_stdout": true,
+      "frame": {
+        "width": 540,
+        "height": 960,
+        "pattern": "mono-half-black-white-v1",
+        "sha256": "bbb81a74cbe04feaa5ab602ef879af3286c44de0213d1f83fc0e4ac4535f7405"
+      },
+      "post_reset_frame_sha256": "c99f399ab6e3e701b2c062079611a5475a4b2d4d389b88526e9eb27c2309c41f",
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "strict_cdp_observed": 6,
+        "strict_cdp_live": 0
+      }
+    },
+    "standalone_single_instruction": {
+      "status": "PASS",
+      "raw_report": {
+        "bytes": 38849199,
+        "sha256": "f7127119115be8f3503d6b950a48d6dd2c07632077a4e251921f07e16e8da084"
+      },
+      "started_at": "2026-11-10T09:24:15.472Z",
+      "finished_at": "2026-11-10T09:27:38.394Z",
+      "site_manifest_sha256": "1bf60b4c28c15316e03de4c18325f94d9d4e630b1814459b86ab5dd905d941d6",
+      "runner": {
+        "path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "profile": "papers3-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "one_instruction_per_tb": true,
+      "checks_recorded": 64,
+      "checks_passed": 64,
+      "completed_hardware_resets": 1,
+      "recovered_raw_paste_stdout": true,
+      "frame": {
+        "width": 540,
+        "height": 960,
+        "pattern": "mono-half-black-white-v1",
+        "sha256": "bbb81a74cbe04feaa5ab602ef879af3286c44de0213d1f83fc0e4ac4535f7405"
+      },
+      "post_reset_frame_sha256": "c99f399ab6e3e701b2c062079611a5475a4b2d4d389b88526e9eb27c2309c41f",
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "strict_cdp_observed": 6,
+        "strict_cdp_live": 0
+      }
+    },
+    "single_instruction_repeated_reset": {
+      "status": "FAIL",
+      "raw_report": {
+        "bytes": 27068413,
+        "sha256": "ed429b5f595440702eca8e72805e5472dcd21199d7d21afdff712bcdc4867285"
+      },
+      "started_at": "2026-11-10T09:28:04.706Z",
+      "finished_at": "2026-11-10T09:31:58.214Z",
+      "site_manifest_sha256": "1bf60b4c28c15316e03de4c18325f94d9d4e630b1814459b86ab5dd905d941d6",
+      "runner": {
+        "path": ".work/papers3-reset-stress.mjs",
+        "sha256": "c4c4f3f1df0cd3b23658b1da068039ff013ee76c4d27c060f6d0793f00c74fd6"
+      },
+      "profile": "papers3-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "one_instruction_per_tb": true,
+      "checks_recorded": 59,
+      "checks_passed": 59,
+      "publication_eligible": false,
+      "completed_hardware_resets": 1,
+      "required_runtime_patch": {
+        "path": "patches/qemu-wasm-probe/0027-gpio-bounded-transactions.patch",
+        "sha256": "43685da86d9b959b2e769cd9cda5785a5c4039b5076f73f3b9d6033d1d161bdf"
+      },
+      "reset_events": [
+        {
+          "reason": "host-qmp-system-reset",
+          "guest": false
+        },
+        {
+          "reason": "host-qmp-system-reset",
+          "guest": false
+        },
+        {
+          "reason": "guest-reset",
+          "guest": true
+        },
+        {
+          "reason": "guest-reset",
+          "guest": true
+        }
+      ],
+      "failure": {
+        "phase": "boot after second host QMP hardware reset",
+        "exception": "Core1 LoadStorePIFAddrError",
+        "pc": "0x42077d59",
+        "excvaddr": "0x3fceb0b8",
+        "mapped_region": "esp32s3.dram"
+      },
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "strict_cdp_observed": 6,
+        "strict_cdp_live": 0
+      }
+    }
+  },
+  "dram_mapping": {
+    "source_bundle_member": "qemu/hw/xtensa/esp32s3.c",
+    "member_sha256": "8ef1b850972e06c5ed18a5fefcac9b37302d9e29c745b2b779c0a0f0228fd2d1",
+    "region": "esp32s3.dram",
+    "mapped_base": "0x3fc80000",
+    "mapped_size": "0x170000",
+    "contains_exception_virtual_address": true
+  },
+  "conclusion": {
+    "single_reset_comparison": "Both exact standard editor lanes passed 64/64. No failure differential.",
+    "repeated_reset_candidate": "FAIL. The workaround was rejected.",
+    "root_cause": "Unresolved. EXCVADDR identifies the reported virtual address, not a measured physical transaction. Earlier full-gate SYSTIMER failure remains separate."
+  },
+  "redaction": "Derived summary. Raw frames, serial logs, host paths and session or target identifiers omitted."
+}

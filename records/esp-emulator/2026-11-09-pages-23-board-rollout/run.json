@@ -48,6 +48,13 @@
       "candidate": "6/7 scoped, QMP qom-get timed out during raw-paste upload, zero keyboard trials",
       "differential": "NOT RUN",
       "deployment": "NOT RUN"
+    },
+    "papers3_exact_workbench_one_insn_ab": {
+      "baseline": "f61c99f7c2e44989802d1436509737af830882de",
+      "candidate": "4ccbc57ecbb914f8e6e9588df4d4baf34b54126e",
+      "standard_editor_checks": "64/64 in both modes, independent strict CDP 6/0",
+      "repeated_reset": "FAIL on second host reset, Core1 LoadStorePIFAddrError at 0x3fceb0b8",
+      "disposition": "candidate rejected, not merged or deployed"
     }
   },
   "checks": [
@@ -405,6 +412,26 @@
       "level": "device_response",
       "status": "NOT RUN",
       "scope": "Candidate keyboard differential and strict terminal raw CDP fence"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "Exact PaperS3 standard baseline and one-instruction editor paths, 64/64 each and independent CDP 6/0"
+    },
+    {
+      "level": "device_response",
+      "status": "FAIL",
+      "scope": "Nonpublishing one-instruction repeated-reset diagnostic failed on second host reset at mapped DRAM address 0x3fceb0b8"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "scope": "QMP exit and strict raw CDP 6/0 in the failed repeated-reset session"
+    },
+    {
+      "level": "delivery",
+      "status": "NOT RUN",
+      "scope": "One-instruction workaround rejected, no candidate merge or deployment"
     }
   ],
   "evidence": [
@@ -539,6 +566,10 @@
     {
       "path": "evidence/hosted-cardputer-observer-ab-pre-input-timeout-summary.json",
       "sha256": "5ddeb13895ca174b0583b89eabe7175fca5409b480b04cc4cf175b7cf3491000"
+    },
+    {
+      "path": "evidence/local-papers3-one-insn-reset-ab-rejected-summary.json",
+      "sha256": "10b7f54442fd3ee0b27227c9c6b80993f6277a82f7af374d5584363160d0ad50"
     }
   ]
 }
