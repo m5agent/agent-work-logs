@@ -109,3 +109,9 @@ Canvas 候选先确认实际第 0 帧双区哈希，再进行原计时控制。�
 ## 2026-11-10：本地剩余用例
 
 本地早前完整预检仍是第 46 例失败。独立后续在相同本地导出以单客体执行剩下的 CoreMatrix 编辑器/按键 2 例，以及所有固定固件 24 例，均通过；其中四款新增机型有真实客体帧和独立 CDP 清零记录。这个分段诊断不改变早前完整运行结论，也不是正式发布。其 C61 WASM 使用实际本地摘要，不与托管构建混用。 [脱敏摘要](evidence/local-remaining-corematrix-and-fixed-summary.json)
+
+## 2026-11-10：旧路径顺序复现及新版纸屏输入
+
+[旧版顺序诊断](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/42776981254) 的原版 CoreMatrix 和 StickC Plus 编辑器均未通过 CDP 清场；StickC Plus 可识别的残留是主引擎。顺序任务因此未运行 Cardputer FIFO，不能从这轮定位丢键。
+
+正式候选 b4e280d5 独立本地导出上，PaperDIY 4 次 250 ms 级真实 GPIO 手势与 PaperS3 触摸坐标、松开均通过。两次正常 owner 回收，Chrome 各自 6 个目标全部消失。 [脱敏证据](evidence/old-ordered-worker-failure-and-candidate-paper-buttons-summary.json)
