@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-11 | Firmware Review Service | Cardputer ADV 固件复审与 60 秒运行观察 | `PARTIAL`（门槛与 EMBER 对照通过，LukewarmCard 应用界面未验证） | [查看](records/firmware-review-service/2026-11-11-virtual-observation/) |
 | 2026-11-09 | ESP Emulator | 23 板正式 Pages 发布 | `PARTIAL`（下载恢复，托管门禁未通过） | [查看](records/esp-emulator/2026-11-09-pages-23-board-rollout/) |
 | 2026-11-09 | ESP Emulator | #211 浏览器 Skill 与运行证据 | `PASS`（CoreS3 原厂 BIN、双 SHA、独立编程与触摸/PIR 验证） | [查看](records/esp-emulator/2026-11-09-browser-simulator-skill-feedback/) |
 | 2026-11-09 | ESP Emulator | 轻量浏览器 Skill 与线上固件画面 | `PASS`（CoreS3 本地 BIN 与 HTTPS 直链、真实客体帧及停止） | [查看](records/esp-emulator/2026-11-09-browser-simulator-skill/) |

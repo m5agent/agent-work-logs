@@ -1,0 +1,856 @@
+diff --git a/service/README.md b/service/README.md
+index 92c10f3..9d408af 100644
+--- a/service/README.md
++++ b/service/README.md
+@@ -220,6 +220,9 @@ SD 原始镜像，再将返回的 artifact SHA-256 放到 `validation.storage`
+ ```
+ 
+ `input_keys` 按给定顺序执行，替代通用 A/B 探测。描述明确声明的 A/B 键仍纳入检查。
++自动规划会从 `Keys:` 按键说明提取确认和导航键。Cardputer ADV 的标点与方向映射和物理布局一致时，
++使用原生 QEMU 的 `up`、`down`、`left`、`right` qcode，通过 Fn 与对应标点键进入键盘矩阵。
++显式 `input_keys` 按配置的 qcode 执行。
+ 当会话附加 SD 镜像时，审核保存 `before-input.zip`、`frame-before-input.png` 和最终
+ `evidence.zip`，两份 ZIP 都包含存储与音频证据（以设备支持的采集项为准）。
+ 实际 SD 读卡和播放需要核对同一会话的存储命令与 PCM。审核的输入响应判定以按键和画面为准。
+@@ -232,8 +235,11 @@ SD 原始镜像，再将返回的 artifact SHA-256 放到 `validation.storage`
+ - 若来源明确说明是默认关闭、被动 BLE 成人用品候选检测，且没有色情媒体、性行为描写、
+   未成年或非自愿内容，可判内容 `PASS` 并提示补充描述；名称本身不自动等同于色情；
+ - 详情页展示标题、版本、描述、分类、设备、AI 中文结论和有效静态分析；
+-- 模拟器任务按设备真实 `features` 执行可用输入（触摸设备才测触摸/拖动，按键设备测
+-  `a/b`），并比较输入前后 framebuffer；
++- 有启动画面时先执行交互，再在同一虚拟设备上继续观察至少 60 秒，每 5 秒采集运行状态、可用的串口增量和画面。
++  首帧迟到时等待画面并补做交互。`observation.json` 保存实际时长、输入时序和采样证据。
++  会话提前退出时保留已采集结果，交互和就绪仍分别验证；
++- 模拟器任务按设备能力和固件声明选择输入。触摸设备测试触摸或拖动，明确的键盘说明优先使用
++  对应确认键和导航键，A/B 声明使用 A/B。报告记录输入接受情况和前后画面；
+ - 对“输入前保持黑屏、收到触摸/按键后才绘制”的交互应用，wait timeout 会先保留为
+   `initial_ready=false`，再在同一 session 执行输入；只有输入被接受且 frame 从有效空白
+   PNG 变为非空时才记录 `input_unlocked_frame=true`，不会把原始 timeout 改写成成功；
+diff --git a/service/app.py b/service/app.py
+index 66a1802..f447855 100644
+--- a/service/app.py
++++ b/service/app.py
+@@ -74,6 +74,8 @@ NETWORK_PROFILES = {
+ }
+ QEMU_UNIFIED_RUNTIME = "qemu-unified"
+ DIAGNOSTIC_NETWORK_RUNTIME = "network"
++MIN_VIRTUAL_OBSERVATION_SECONDS = 60
++VIRTUAL_OBSERVATION_INTERVAL_SECONDS = 5
+ NETWORK_CLAIM_TERMS = (
+     "wifi", "wi-fi", "network", "networking", "网络", "局域网", "联网", "http", "https",
+     "mqtt", "tcp", "udp", "dns", "curl", "push", "推送", "远程", "cloud",
+@@ -83,6 +85,11 @@ TOUCH_CLAIM_TERMS = ("touch", "触摸", "屏幕手势", "tap", "swipe")
+ BUTTON_CLAIM_TERMS = ("button", "buttons", "按键", "按钮", "key", "keys")
+ AB_NAVIGATION_TERMS = ("翻页", "buttons to page", "page through", "上一页", "下一页",
+                        "previous page", "next page", "page navigation")
++KEYBOARD_NAVIGATION_QCODES = {
++    ";": "semicolon", ".": "dot", ",": "comma", "/": "slash",
++    "up": "up", "down": "down", "left": "left", "right": "right",
++}
++CARDPUTER_ADV_NAVIGATION_KEYS = {";": "up", ".": "down", ",": "left", "/": "right"}
+ AMBIGUOUS_CONTENT_TERMS = ("adult", "18+", "nsfw", "mature", "成人", "成人模式")
+ BANNED = ("暴力", "色情", "赌博", "毒品", "破解", "盗版", "仇恨")
+ PLACEHOLDERS = {"1", "11", "111", "123", "ceshi", "test", "测试"}
+@@ -199,7 +206,35 @@ def network_claim_present(text: str) -> bool:
+     return False
+ 
+ 
+-def review_claims(content: Dict[str, Any], input_keys: Optional[List[str]] = None) -> Dict[str, Any]:
++def keyboard_probe_keys(text: str, device_profile: Optional[str]) -> List[str]:
++    """Use explicit navigation and confirmation bindings from a keyboard legend."""
++    keys = []
++    legends = re.findall(r"^[ \t]*(?:[-*][ \t]+)?(?:\*\*)?keys[ \t]*:[ \t]*(?:\*\*)?([^\n]+)", text, re.M)
++    for legend in legends:
++        for binding in legend.split("·"):
++            names, separator, actions = binding.partition("=")
++            if not separator:
++                continue
++            names = names.split()
++            actions = [action.strip(" \t`*") for action in actions.split("/")]
++            if len(names) != len(actions):
++                continue
++            for name, action in zip(names, actions):
++                name = name.strip("`*")
++                if name in {"enter", "return"} and action in {"ok", "confirm", "select"}:
++                    keys.append("ret")
++                elif action in {"up", "down", "left", "right"} and name in KEYBOARD_NAVIGATION_QCODES:
++                    # Native Cardputer ADV QEMU generates its Fn+punctuation
++                    # matrix events from the corresponding arrow qcodes.
++                    if device_profile == "cardputer-adv" and CARDPUTER_ADV_NAVIGATION_KEYS.get(name) == action:
++                        keys.append(action)
++                    else:
++                        keys.append(KEYBOARD_NAVIGATION_QCODES[name])
++    return list(dict.fromkeys(keys))
++
++
++def review_claims(content: Dict[str, Any], input_keys: Optional[List[str]] = None, *,
++                  device_profile: Optional[str] = None) -> Dict[str, Any]:
+     """Extract executable claims without treating references as network features."""
+ 
+     text = "\n".join(str(content.get(k) or "") for k in (
+@@ -209,6 +244,7 @@ def review_claims(content: Dict[str, Any], input_keys: Optional[List[str]] = Non
+     text = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", text)
+     text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
+     text = re.sub(r"https?://[^\s<>\[\])]+", " ", text)
++    keyboard_keys = keyboard_probe_keys(text, device_profile)
+     required_buttons = set()
+     for pattern in (
+         r"(?:左键|右键|按键|按钮|键|\bbuttons?|\bkeys?)\s*[:：_-]?\s*([ab])(?![a-z0-9])",
+@@ -218,19 +254,19 @@ def review_claims(content: Dict[str, Any], input_keys: Optional[List[str]] = Non
+         required_buttons.update(re.findall(pattern, text))
+     if re.search(r"(?<![a-z0-9])a\s*(?:\+|/|、|和|与|&|\band\b)\s*b(?![a-z0-9])", text):
+         required_buttons.update(("a", "b"))
+-    button_required = bool(required_buttons or input_keys) or any(
++    button_required = bool(required_buttons or input_keys or keyboard_keys) or any(
+         claim_term_present(text, term) for term in BUTTON_CLAIM_TERMS
+     )
+-    ab_navigation_required = button_required and any(
++    ab_navigation_required = button_required and bool(required_buttons or not keyboard_keys) and any(
+         claim_term_present(text, term) for term in AB_NAVIGATION_TERMS
+     )
+-    if button_required and not required_buttons and (not input_keys or ab_navigation_required):
++    if button_required and not (required_buttons or keyboard_keys) and (not input_keys or ab_navigation_required):
+         required_buttons.update(("a", "b"))
+     return {
+         "network_required": network_claim_present(text),
+         "touch_required": any(claim_term_present(text, term) for term in TOUCH_CLAIM_TERMS),
+         "button_required": button_required,
+-        "required_buttons": list(dict.fromkeys([*(input_keys or []), *sorted(required_buttons)])),
++        "required_buttons": list(dict.fromkeys([*(input_keys or keyboard_keys), *sorted(required_buttons)])),
+         "ab_navigation_required": ab_navigation_required,
+     }
+ 
+@@ -1294,13 +1330,109 @@ class Reviewer:
+             state = last.get("state")
+             if state == "running":
+                 return last
+-            if state == "failed":
+-                raise RuntimeError("session failed during radio provisioning: %s" %
+-                                   (last.get("error") or "unknown"))
++            if state in {"failed", "stopped", "stopping", "expired", "interrupted"}:
++                raise RuntimeError("session became %s before observation: %s" %
++                                   (state, last.get("error") or "no further detail"))
+             time.sleep(1)
+         raise RuntimeError("session did not reach running within %.0fs (last=%s)" %
+                            (timeout, last.get("state") or "unknown"))
+ 
++    def observe_session(self, sid: str, features: Dict[str, Any], evidence: Path
++                        ) -> tuple[Dict[str, Any], bytes, str, Dict[str, Any]]:
++        """Sample a running board for the minimum wall-clock observation window."""
++        observation: Dict[str, Any] = {
++            "status": "PARTIAL", "scope": "running_virtual_device",
++            "required_seconds": MIN_VIRTUAL_OBSERVATION_SECONDS,
++            "elapsed_seconds": 0.0, "samples": [],
++        }
++        samples = observation["samples"]
++        first_sample = None
++        first_running = None
++        serial_offset = 0
++        serial_tail = ""
++        frame = b""
++        session: Dict[str, Any] = {}
++        endpoint = "/sessions/%s" % sid
++        captures = evidence / "observation"
++        captures.mkdir(parents=True, exist_ok=True)
++        try:
++            if not (features.get("screenshot") or features.get("serial")):
++                raise RuntimeError("device advertises neither framebuffer nor serial evidence")
++            while True:
++                session = self.sim.json(endpoint, timeout=5)
++                if session.get("state") != "running":
++                    raise RuntimeError("session state is %s" % (session.get("state") or "unknown"))
++                if first_running is None:
++                    first_running = time.monotonic()
++                sample: Dict[str, Any] = {"state": "running"}
++                if features.get("serial"):
++                    serial = self.sim.json(
++                        "%s/serial?offset=%d&limit=65536" % (endpoint, serial_offset), timeout=5,
++                    )
++                    chunk, next_offset = serial.get("data"), serial.get("next_offset")
++                    if not isinstance(chunk, str) or type(next_offset) is not int or next_offset < serial_offset:
++                        raise RuntimeError("invalid or reset serial stream cursor")
++                    sample["serial_offset"] = serial_offset
++                    sample["serial_next_offset"] = next_offset
++                    if chunk:
++                        serial_bytes = chunk.encode("utf-8")
++                        sample["serial_sha256"] = hashlib.sha256(serial_bytes).hexdigest()
++                        serial_path = captures / ("serial-%06d.log" % len(samples))
++                        serial_path.write_bytes(serial_bytes)
++                        sample["serial_file"] = str(serial_path.relative_to(evidence))
++                        serial_tail = (serial_tail + chunk)[-65536:]
++                    serial_offset = next_offset
++                    crash = self.crash_reason(serial_tail)
++                    if crash:
++                        observation["crash_marker"] = crash
++                        samples.append({**sample, "captured_at": utcnow(),
++                                        "elapsed_seconds": observation["elapsed_seconds"]})
++                        raise RuntimeError(crash)
++                if features.get("screenshot"):
++                    try:
++                        candidate = self.sim.binary(endpoint + "/frame.png", timeout=5)
++                    except urllib.error.HTTPError as exc:
++                        if exc.code != 404 or first_sample is not None:
++                            raise
++                        elapsed_running = time.monotonic() - first_running
++                        samples.append({**sample, "captured_at": utcnow(),
++                                        "running_elapsed_seconds": elapsed_running,
++                                        "frame_status": "NOT AVAILABLE"})
++                        if elapsed_running >= MIN_VIRTUAL_OBSERVATION_SECONDS:
++                            raise RuntimeError("running guest did not produce a framebuffer during startup observation")
++                        time.sleep(min(VIRTUAL_OBSERVATION_INTERVAL_SECONDS,
++                                       MIN_VIRTUAL_OBSERVATION_SECONDS - elapsed_running))
++                        continue
++                    if not candidate.startswith(b"\x89PNG\r\n\x1a\n"):
++                        raise RuntimeError("framebuffer did not return PNG data")
++                    frame = candidate
++                    digest = hashlib.sha256(frame).hexdigest()
++                    frame_path = captures / (digest + ".png")
++                    if not frame_path.exists():
++                        frame_path.write_bytes(frame)
++                    sample.update(frame_sha256=digest, frame_bytes=len(frame),
++                                  frame_file=str(frame_path.relative_to(evidence)))
++                now = time.monotonic()
++                if first_sample is None:
++                    first_sample = now
++                elapsed = now - first_sample
++                observation["elapsed_seconds"] = elapsed
++                samples.append({**sample, "captured_at": utcnow(), "elapsed_seconds": elapsed})
++                if elapsed >= MIN_VIRTUAL_OBSERVATION_SECONDS:
++                    # Confirm the guest stayed live while collecting the final sample.
++                    session = self.sim.json(endpoint, timeout=5)
++                    if session.get("state") != "running":
++                        raise RuntimeError("session ended while collecting the final observation sample")
++                    observation["status"] = "PASS"
++                    break
++                time.sleep(min(VIRTUAL_OBSERVATION_INTERVAL_SECONDS,
++                               MIN_VIRTUAL_OBSERVATION_SECONDS - elapsed))
++        except Exception as exc:
++            observation["error"] = str(exc)
++        observation["final_session_state"] = session.get("state")
++        observation["serial_next_offset"] = serial_offset
++        return observation, frame, serial_tail, session
++
+     def write_review_report(self, jobdir: Path, report: Dict[str, Any]) -> None:
+         """Persist a stable, machine-readable review manifest next to evidence."""
+ 
+@@ -1778,7 +1910,7 @@ class Reviewer:
+                 json.loads(job.get("validation_json") or "{}"), saved_snapshot=bool(snapshot_item),
+             )
+             storage = validation.get("storage")
+-            claims = review_claims(content, validation.get("input_keys"))
++            claims = review_claims(content, validation.get("input_keys"), device_profile=profile)
+             try:
+                 execution = self.execution_plan(profile, job_network, claims)
+             except Exception as plan_exc:
+@@ -1908,7 +2040,7 @@ class Reviewer:
+             session_payload: Dict[str, Any] = {
+                 "device_id": profile,
+                 "firmware_id": fw["firmware_id"],
+-                "ttl_seconds": 240,
++                "ttl_seconds": 360,
+             }
+             if execution.get("runtime") in {QEMU_UNIFIED_RUNTIME, "qemu-wifi"}:
+                 session_payload.update({
+@@ -1930,6 +2062,11 @@ class Reviewer:
+                 "results": [], "accepted": 0, "changed": 0,
+                 "status": "NOT RUN", "final_frame": b"",
+             }
++            observation: Dict[str, Any] = {
++                "status": "NOT RUN", "required_seconds": MIN_VIRTUAL_OBSERVATION_SECONDS,
++                "elapsed_seconds": 0.0, "samples": [],
++            }
++            observation_ready: Dict[str, Any] = {}
+             qsnap_before: Dict[str, Any] = {}
+             qsnap_after: Dict[str, Any] = {}
+             qdiff: Dict[str, Any] = {}
+@@ -2065,27 +2202,18 @@ class Reviewer:
+                         detail = str(boot_exc)
+                         tail = serial_text[-800:]
+                         crash = self.crash_reason(serial_text)
+-                        interactive_blank_start = bool(
+-                            features.get("screenshot")
+-                            and features.get("input")
+-                            and frame.startswith(b"\x89PNG\r\n\x1a\n")
+-                            and snap.get("state") == "running"
+-                            and not crash
+-                        )
+-                        if interactive_blank_start:
++                        continue_execution = snap.get("state") == "running" and not crash
++                        if continue_execution:
+                             wait_info["readiness_deferred"] = {
+-                                "reason": "pre_input_frame_blank",
++                                "reason": "running_without_readiness_evidence",
+                                 "frame_bytes": len(frame),
+                                 "serial_bytes": len(serial_text),
+                             }
+                             self.store.event(
+                                 jid, "readiness_deferred",
+-                                "pre-input frame is valid but blank; probing input before attribution",
++                                "guest is running; continue sampling while readiness is unresolved",
+                                 wait_info["readiness_deferred"],
+                             )
+-                            continue_execution = True
+-                        else:
+-                            continue_execution = False
+                         device_row = execution.get("device") or {}
+                         if (
+                             crash
+@@ -2129,63 +2257,14 @@ class Reviewer:
+                         json.dumps(session, ensure_ascii=False, indent=2) + "\n"
+                     )
+                 except Exception as state_exc:
++                    observation["error"] = str(state_exc)
+                     evidence_errors.append("session_running: %s" % state_exc)
+                     self.store.event(
+                         jid, "session_state",
+                         "session did not reach running before evidence collection",
+                         {"error": str(state_exc)},
+                     )
+-                time.sleep(2)
+-                if features.get("device_state"):
+-                    try:
+-                        device_state = self.sim.json("/sessions/%s/device-state" % sid, timeout=20)
+-                        (evidence / "device-state.json").write_text(
+-                            json.dumps(device_state, ensure_ascii=False, indent=2) + "\n"
+-                        )
+-                        self.store.event(jid, "device_state", "device state collected", {
+-                            "supported": device_state.get("supported"),
+-                            "available": device_state.get("available"),
+-                            "source": device_state.get("source"),
+-                        })
+-                    except Exception as state_exc:
+-                        device_state = {"supported": True, "available": False,
+-                                        "error": str(state_exc)}
+-                else:
+-                    device_state = {"supported": False, "available": False,
+-                                    "source": "not-advertised"}
+-                for attempt in range(3):
+-                    try:
+-                        frame = self.sim.binary("/sessions/%s/frame.png" % sid, timeout=30)
+-                        if len(frame) >= 1024:
+-                            break
+-                    except Exception:
+-                        time.sleep(3)
+-                serial = self.sim.json("/sessions/%s/serial?offset=0&limit=65536" % sid)
+-                serial_text = serial.get("data") or ""
+-                if features.get("qom"):
+-                    try:
+-                        qsnap_before = self.sim.json(
+-                            "/sessions/%s/qom-snapshot" % sid, "POST",
+-                            {"path": "/machine", "depth": 2, "max_nodes": 500},
+-                            timeout=60,
+-                        )
+-                        qlist = self.sim.json("/sessions/%s/qom/list?path=/machine" % sid)
+-                    except Exception as qom_exc:
+-                        evidence_errors.append("qom_before: %s" % qom_exc)
+-                        qsnap_before = {"supported": True, "error": str(qom_exc)}
+-                        qlist = {"supported": True, "error": str(qom_exc)}
+-                else:
+-                    qsnap_before = {"supported": False, "reason": "device does not advertise qom"}
+-                    qlist = {"supported": False, "reason": "device does not advertise qom"}
+-                try:
+-                    flash_before = self.sim.json(
+-                        "/sessions/%s/flash-snapshot" % sid, "POST", {}, timeout=60
+-                    )
+-                except Exception as flash_exc:
+-                    evidence_errors.append("flash_before: %s" % flash_exc)
+-                    flash_before = {"error": str(flash_exc)}
+-                if (frame and (features.get("input") or validation.get("drag_plan") is not None)
+-                        and session.get("state") == "running"):
++                def probe_input(frame: bytes, session: Dict[str, Any]) -> tuple[Dict[str, Any], bytes]:
+                     if storage:
+                         (evidence / "frame-before-input.png").write_bytes(frame)
+                         try:
+@@ -2196,15 +2275,16 @@ class Reviewer:
+                             (evidence / "before-input.zip").write_bytes(before_input_zip)
+                         except Exception as before_input_exc:
+                             evidence_errors.append("before_input_zip: %s" % before_input_exc)
+-                    interaction = self.interaction_test(
++                    result = self.interaction_test(
+                         jid, sid, frame, session.get("display") or {},
+                         features, claims, jobdir, validation,
+                     )
+-                    frame = interaction.get("final_frame") or frame
++                    frame = result.get("final_frame") or frame
+                     if (
+                         not wait_info.get("ready")
+-                        and interaction.get("status") == "PASS"
+-                        and interaction.get("changed", 0) > 0
++                        and not observation_ready.get("ready")
++                        and result.get("status") == "PASS"
++                        and result.get("changed", 0) > 0
+                     ):
+                         try:
+                             post_input_wait = self.sim.json(
+@@ -2238,7 +2318,128 @@ class Reviewer:
+                                 "input_unlocked_frame_error",
+                                 str(unlock_exc),
+                             )
+-                if features.get("qom"):
++                    return result, frame
++
++                session_running = session.get("state") == "running"
++                can_probe_input = bool(features.get("input") or validation.get("drag_plan") is not None)
++                if session_running and features.get("screenshot"):
++                    # Preserve the startup interaction window for firmware that
++                    # changes screens on its own shortly after the first frame.
++                    time.sleep(2)
++                    try:
++                        frame = self.sim.binary("/sessions/%s/frame.png" % sid, timeout=10)
++                    except urllib.error.HTTPError as frame_exc:
++                        if frame_exc.code != 404:
++                            evidence_errors.append("startup_frame: %s" % frame_exc)
++                    except Exception as frame_exc:
++                        evidence_errors.append("startup_frame: %s" % frame_exc)
++
++                if features.get("device_state") and session_running:
++                    try:
++                        device_state = self.sim.json("/sessions/%s/device-state" % sid, timeout=20)
++                        (evidence / "device-state.json").write_text(
++                            json.dumps(device_state, ensure_ascii=False, indent=2) + "\n"
++                        )
++                        self.store.event(jid, "device_state", "device state collected", {
++                            "supported": device_state.get("supported"),
++                            "available": device_state.get("available"),
++                            "source": device_state.get("source"),
++                        })
++                    except Exception as state_exc:
++                        device_state = {"supported": True, "available": False,
++                                        "error": str(state_exc)}
++                else:
++                    device_state = {"supported": bool(features.get("device_state")), "available": False,
++                                    "source": "not-advertised" if session_running else "session-not-running"}
++                if features.get("qom") and session_running:
++                    try:
++                        qsnap_before = self.sim.json(
++                            "/sessions/%s/qom-snapshot" % sid, "POST",
++                            {"path": "/machine", "depth": 2, "max_nodes": 500},
++                            timeout=60,
++                        )
++                        qlist = self.sim.json("/sessions/%s/qom/list?path=/machine" % sid)
++                    except Exception as qom_exc:
++                        evidence_errors.append("qom_before: %s" % qom_exc)
++                        qsnap_before = {"supported": True, "error": str(qom_exc)}
++                        qlist = {"supported": True, "error": str(qom_exc)}
++                else:
++                    qsnap_before = {"supported": False, "reason": "device does not advertise qom"}
++                    qlist = {"supported": False, "reason": "device does not advertise qom"}
++                if session_running:
++                    try:
++                        flash_before = self.sim.json(
++                            "/sessions/%s/flash-snapshot" % sid, "POST", {}, timeout=60
++                        )
++                    except Exception as flash_exc:
++                        evidence_errors.append("flash_before: %s" % flash_exc)
++                        flash_before = {"error": str(flash_exc)}
++                input_probed_early = (
++                    session_running and can_probe_input and frame.startswith(b"\x89PNG\r\n\x1a\n")
++                )
++                if input_probed_early:
++                    interaction, frame = probe_input(frame, session)
++                if session.get("state") == "running":
++                    self.store.event(jid, "observation_started", "sampling running virtual device", {
++                        "required_seconds": MIN_VIRTUAL_OBSERVATION_SECONDS,
++                    })
++                    observation, observed_frame, observed_serial, observed_session = self.observe_session(
++                        sid, features, evidence,
++                    )
++                    frame = observed_frame or frame
++                    serial_text = observed_serial or serial_text
++                    session = observed_session or session
++                observation_complete = observation["status"] == "PASS"
++                if observation_complete and ready and not wait_info.get("ready"):
++                    try:
++                        result = self.sim.json(
++                            "/sessions/%s/wait" % sid, "POST",
++                            {"timeout_seconds": 3, "ready": ready}, timeout=10,
++                        )
++                        observation_ready = {
++                            key: result.get(key) for key in ("ready", "ready_reason", "frame")
++                        }
++                    except Exception as readiness_exc:
++                        observation_ready = {"ready": False, "error": str(readiness_exc)}
++                    observation["readiness_after_window"] = observation_ready
++                if (observation_complete and can_probe_input and not input_probed_early
++                        and frame.startswith(b"\x89PNG\r\n\x1a\n")):
++                    interaction, frame = probe_input(frame, session)
++                observation["input_probe_timing"] = (
++                    "before_window" if input_probed_early else
++                    "after_window" if interaction["status"] != "NOT RUN" else "not_run"
++                )
++                if observation_complete:
++                    try:
++                        final_session = self.sim.json("/sessions/%s" % sid, timeout=5)
++                        if final_session.get("state") != "running":
++                            raise RuntimeError("session state is %s after input checks" % final_session.get("state"))
++                        if features.get("serial"):
++                            offset = observation["serial_next_offset"]
++                            serial = self.sim.json(
++                                "/sessions/%s/serial?offset=%d&limit=65536" % (sid, offset), timeout=5,
++                            )
++                            chunk = serial.get("data")
++                            if not isinstance(chunk, str):
++                                raise RuntimeError("invalid serial data after input checks")
++                            serial_text = (serial_text + chunk)[-65536:]
++                            crash_marker = self.crash_reason(serial_text)
++                            if crash_marker:
++                                raise RuntimeError(crash_marker)
++                    except Exception as final_state_exc:
++                        observation_complete = False
++                        observation["status"] = "PARTIAL"
++                        observation["post_observation_error"] = str(final_state_exc)
++                observation.update(review_id=jid, source_sha256=actual,
++                                   session_id_sha256=hashlib.sha256(sid.encode()).hexdigest())
++                (evidence / "observation.json").write_text(
++                    json.dumps(observation, ensure_ascii=False, indent=2) + "\n"
++                )
++                self.store.event(jid, "observation", "virtual device observation %s" % observation["status"], {
++                    "status": observation["status"], "required_seconds": observation["required_seconds"],
++                    "elapsed_seconds": observation["elapsed_seconds"], "sample_count": len(observation["samples"]),
++                })
++                if features.get("qom") and observation_complete:
+                     try:
+                         qsnap_after = self.sim.json(
+                             "/sessions/%s/qom-snapshot" % sid, "POST",
+@@ -2258,23 +2459,24 @@ class Reviewer:
+                 else:
+                     qsnap_after = {"supported": False, "reason": "device does not advertise qom"}
+                     qdiff = {"supported": False, "reason": "device does not advertise qom"}
+-                try:
+-                    flash_after = self.sim.json(
+-                        "/sessions/%s/flash-snapshot" % sid, "POST", {}, timeout=60
+-                    )
+-                    flashdiff = self.sim.json(
+-                        "/sessions/%s/flash/diff?before=%s&after=%s" % (
+-                            sid, flash_before.get("snapshot_id"),
+-                            flash_after.get("snapshot_id")),
+-                        timeout=30,
+-                    )
+-                    flash = self.sim.json("/sessions/%s/flash?format=sha256" % sid)
+-                except Exception as flash_exc:
+-                    evidence_errors.append("flash_after: %s" % flash_exc)
+-                    flash_after = {"error": str(flash_exc)}
+-                    flashdiff = {"error": str(flash_exc)}
+-                    flash = {"error": str(flash_exc)}
+-                if execution.get("runtime") in {QEMU_UNIFIED_RUNTIME, "qemu-wifi"}:
++                if observation_complete:
++                    try:
++                        flash_after = self.sim.json(
++                            "/sessions/%s/flash-snapshot" % sid, "POST", {}, timeout=60
++                        )
++                        flashdiff = self.sim.json(
++                            "/sessions/%s/flash/diff?before=%s&after=%s" % (
++                                sid, flash_before.get("snapshot_id"),
++                                flash_after.get("snapshot_id")),
++                            timeout=30,
++                        )
++                        flash = self.sim.json("/sessions/%s/flash?format=sha256" % sid)
++                    except Exception as flash_exc:
++                        evidence_errors.append("flash_after: %s" % flash_exc)
++                        flash_after = {"error": str(flash_exc)}
++                        flashdiff = {"error": str(flash_exc)}
++                        flash = {"error": str(flash_exc)}
++                if observation_complete and execution.get("runtime") in {QEMU_UNIFIED_RUNTIME, "qemu-wifi"}:
+                     try:
+                         network_result = self.network_evidence(sid)
+                         (evidence / "network.json").write_text(
+@@ -2290,7 +2492,7 @@ class Reviewer:
+                         evidence_errors.append("network: %s" % network_exc)
+                         network_result = {"status": "ERROR", "error": str(network_exc)}
+                 try:
+-                    events = self.sim.json("/sessions/%s/events" % sid)
++                    events = self.sim.json("/sessions/%s/events" % sid, timeout=60 if observation_complete else 5)
+                 except Exception as events_exc:
+                     evidence_errors.append("events: %s" % events_exc)
+                     events = {"error": str(events_exc)}
+@@ -2302,7 +2504,7 @@ class Reviewer:
+                 try:
+                     evzip = self.sim.binary(
+                         "/sessions/%s/evidence?include=%s" % (sid, include),
+-                        timeout=180,
++                        timeout=180 if observation_complete else 20,
+                     )
+                 except Exception as zip_exc:
+                     evidence_errors.append("evidence_zip: %s" % zip_exc)
+@@ -2391,7 +2593,7 @@ class Reviewer:
+                 and wait_info.get("input_unlocked_frame")
+             )
+             initial_ready = bool(wait_info.get("ready"))
+-            ready_after_execution = bool(initial_ready or input_unlocked_frame)
++            ready_after_execution = bool(initial_ready or observation_ready.get("ready") or input_unlocked_frame)
+             serial_runtime_ready = bool(
+                 serial_text
+                 and ready_markers
+@@ -2485,13 +2687,21 @@ class Reviewer:
+                         "input_unlocked_frame": input_unlocked_frame,
+                         "ready_reason": (
+                             wait_info.get("ready_reason")
++                            or observation_ready.get("ready_reason")
+                             or (["input_unlocked_frame"] if input_unlocked_frame else [])
+                         ),
+                         "frame_bytes": len(frame),
+-                        "frame_metrics": wait_info.get("frame"),
++                        "frame_metrics": observation_ready.get("frame") or wait_info.get("frame"),
+                         "frame_sha256": hashlib.sha256(frame).hexdigest() if frame else None,
+                         "serial_sha256": hashlib.sha256(serial_text.encode()).hexdigest(),
+                     },
++                    "virtual_observation": {
++                        "status": observation["status"],
++                        "required_seconds": observation["required_seconds"],
++                        "elapsed_seconds": observation["elapsed_seconds"],
++                        "sample_count": len(observation["samples"]),
++                        "evidence_file": "observation.json",
++                    },
+                     "input_and_function": {
+                         "status": input_status,
+                         "accepted": interaction.get("accepted", 0),
+@@ -2623,6 +2833,15 @@ class Reviewer:
+                     "模拟器记录到启动崩溃标记（%s）；串口和运行证据已保留，需人工复核。" % crash,
+                     "E_SIM_APP_CRASH",
+                 )
++            elif not observation_complete:
++                finish_review(
++                    "manual_review", "SIM_PARTIAL", False,
++                    "虚拟设备观察未完成。已采集 %.1f 秒有效运行证据，要求至少 %d 秒。"
++                    "请查看 observation.json 中的采样状态后复审。" % (
++                        observation["elapsed_seconds"], MIN_VIRTUAL_OBSERVATION_SECONDS,
++                    ),
++                    "E_SIM_OBSERVATION_INCOMPLETE",
++                )
+             elif features.get("screenshot") and not ready_after_execution:
+                 finish_review(
+                     "manual_review", "SIM_PARTIAL", False,
+@@ -2689,8 +2908,9 @@ class Reviewer:
+                 else:
+                     finish_review(
+                         "done", "SIM_VERIFIED", True,
+-                        "内容与静态检查通过；源 BIN SHA-256/大小匹配；%s 使用 %s 完成虚拟烧录、启动、画面与所需输入响应观察（触摸 %s，按键 %s）；交互语义验证 %s。网络 %s；安全静态扫描 REVIEW，恶意软件/木马检测 NOT RUN；未提交 Burner。" %
++                        "内容与静态检查通过；源 BIN SHA-256/大小匹配；%s 使用 %s 完成虚拟烧录、启动和 %.1f 秒运行观察，并采集所需输入响应（触摸 %s，按键 %s）；交互语义验证 %s。网络 %s；安全静态扫描 REVIEW，恶意软件/木马检测 NOT RUN；未提交 Burner。" %
+                         (profile, execution.get("profile") or execution.get("runtime"),
++                         observation["elapsed_seconds"],
+                          interaction.get("touch_status") or "NOT RUN",
+                          interaction.get("button_status") or "NOT RUN",
+                          interaction.get("semantic_verification") or "NOT RUN", network_status),
+@@ -2872,6 +3092,22 @@ class Runtime:
+             raise RuntimeError(
+                 "SUBMIT_UNKNOWN：上次提交已发出但结果未落盘；请人工对账，禁止自动重复提交"
+             )
++        if job.get("passed"):
++            try:
++                observation = json.loads((evidence_dir / "observation.json").read_text())
++            except (OSError, ValueError):
++                observation = {}
++            if not isinstance(observation, dict):
++                observation = {}
++            duration = observation.get("elapsed_seconds")
++            samples = observation.get("samples")
++            if (observation.get("status") != "PASS" or observation.get("review_id") != jid
++                    or observation.get("source_sha256") != job.get("declared_sha256")
++                    or type(duration) not in (int, float) or not math.isfinite(duration)
++                    or duration < MIN_VIRTUAL_OBSERVATION_SECONDS
++                    or not isinstance(samples, list) or len(samples) < 2):
++                raise RuntimeError("通过结果缺少同一 BIN 的至少 %d 秒虚拟设备观察证据，请重新审查后提交" %
++                                   MIN_VIRTUAL_OBSERVATION_SECONDS)
+         version_id = job.get("version_id")
+         pending = self.reviewer.burner.json(
+             "/api/v1/integrations/firmwares/agent-review/firmware-reviews/pending"
+diff --git a/tests/test_review_claims.py b/tests/test_review_claims.py
+index 572f36f..c8a55c8 100644
+--- a/tests/test_review_claims.py
++++ b/tests/test_review_claims.py
+@@ -87,6 +87,32 @@ class ReviewClaimTests(unittest.TestCase):
+         self.assertTrue(claims("按键 A/B 用于上一页和下一页。")["ab_navigation_required"])
+         self.assertEqual(claims("Press A to select.")["required_buttons"], ["a"])
+ 
++    def test_cardputer_keyboard_legend_plans_confirmation_and_navigation_qcodes(self):
++        content = {"firmware_description": "Keys: 0-9 · Enter = OK · esc/del = X · ; . , / = up/down/left/right"}
++        result = app.review_claims(content, device_profile="cardputer-adv")
++        expected = ["ret", "up", "down", "left", "right"]
++        self.assertTrue(result["button_required"])
++        self.assertFalse(result["ab_navigation_required"])
++        self.assertEqual(result["required_buttons"], expected)
++        plan = app.Reviewer.input_plan({"width": 240, "height": 135}, {"input": True}, result)
++        self.assertEqual([(name, spec["key"]) for name, spec in plan],
++                         [("key_" + key, key) for key in expected])
++        self.assertEqual(app.review_claims(content, device_profile="stopwatch")["required_buttons"],
++                         ["ret", "semicolon", "dot", "comma", "slash"])
++
++    def test_cardputer_remapped_punctuation_preserves_declared_physical_key(self):
++        content = {"firmware_description": "Keys: ; . = down/up"}
++        result = app.review_claims(content, device_profile="cardputer-adv")
++        self.assertEqual(result["required_buttons"], ["semicolon", "dot"])
++
++    def test_saved_key_order_overrides_legend_and_retains_explicit_buttons(self):
++        content = {"firmware_description": (
++            "Keys: 0-9 · Enter = OK · esc/del = X · ; . , / = up/down/left/right\n"
++            "Page navigation uses the keyboard. Press A or press B for device shortcuts."
++        )}
++        result = app.review_claims(content, ["dot", "ret"], device_profile="cardputer-adv")
++        self.assertEqual(result["required_buttons"], ["dot", "ret", "a", "b"])
++
+ 
+ class InteractionEvidenceTests(unittest.TestCase):
+     def setUp(self):
+diff --git a/tests/test_virtual_observation.py b/tests/test_virtual_observation.py
+new file mode 100644
+index 0000000..eab6afe
+--- /dev/null
++++ b/tests/test_virtual_observation.py
+@@ -0,0 +1,157 @@
++import hashlib
++import importlib.util
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import Mock, patch
++from urllib.error import HTTPError
++from urllib.parse import parse_qs, urlparse
++
++
++SPEC = importlib.util.spec_from_file_location("review_observation_app", Path(__file__).parents[1] / "service/app.py")
++app = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(app)
++FRAME = b"\x89PNG\r\n\x1a\nframe fixture"
++
++
++class ObservationTests(unittest.TestCase):
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.evidence = Path(temporary.name)
++        self.reviewer = app.Reviewer.__new__(app.Reviewer)
++        self.reviewer.sim = Mock()
++        self.clock = 5000.0
++        self.calls = []
++        self.stop_at = float("inf")
++        self.frame_at = 0
++        self.serial_fault_at = float("inf")
++        self.crash_at = float("inf")
++        self.reviewer.sim.json.side_effect = self.sample_json
++        self.reviewer.sim.binary.side_effect = self.sample_frame
++
++    @property
++    def running_time(self):
++        return self.clock - 5000
++
++    def sleep(self, duration):
++        self.clock += duration
++
++    def sample_json(self, endpoint, timeout):
++        if "/serial?" in endpoint:
++            self.calls.append((self.running_time, "serial"))
++            if self.running_time >= self.serial_fault_at:
++                raise TimeoutError("serial transport timeout")
++            offset = int(parse_qs(urlparse(endpoint).query)["offset"][0])
++            serial = "APP_READY\n"
++            if self.running_time >= self.crash_at:
++                serial += "assert failed during observation\n"
++            return {"data": serial[offset:], "next_offset": len(serial)}
++        self.calls.append((self.running_time, "state"))
++        return {"state": "failed" if self.running_time >= self.stop_at else "running"}
++
++    def sample_frame(self, endpoint, timeout):
++        self.calls.append((self.running_time, "frame"))
++        if self.running_time < self.frame_at:
++            raise HTTPError(endpoint, 404, "frame unavailable", None, None)
++        return FRAME
++
++    def observe(self, features=None):
++        with (patch.object(app.time, "monotonic", side_effect=lambda: self.clock),
++              patch.object(app.time, "sleep", side_effect=self.sleep)):
++            return self.reviewer.observe_session("session", features or {"screenshot": True, "serial": True}, self.evidence)
++
++    def test_observes_full_window_with_fresh_reads_and_deduplicates_evidence(self):
++        record, frame, serial, session = self.observe()
++        self.assertEqual(record["status"], "PASS")
++        self.assertEqual(record["elapsed_seconds"], 60)
++        expected_times = list(range(0, 61, 5))
++        self.assertEqual([sample["elapsed_seconds"] for sample in record["samples"]], expected_times)
++        for key in ("frame", "serial"):
++            self.assertEqual([when for when, surface in self.calls if surface == key], expected_times)
++        self.assertEqual((frame, serial, session["state"]), (FRAME, "APP_READY\n", "running"))
++        self.assertEqual(record["serial_next_offset"], len(serial))
++        self.assertEqual(len(list(self.evidence.rglob("*.png"))), 1)
++        self.assertEqual((self.evidence / record["samples"][0]["frame_file"]).read_bytes(), FRAME)
++        self.assertEqual((self.evidence / record["samples"][0]["serial_file"]).read_text(), serial)
++
++    def test_aborts_early_on_session_exit_or_serial_transport_failure(self):
++        self.stop_at = 20
++        record, _, _, session = self.observe()
++        self.assertEqual((record["status"], record["elapsed_seconds"], self.running_time), ("PARTIAL", 15, 20))
++        self.assertEqual(session["state"], "failed")
++        self.assertNotIn((20, "frame"), self.calls)
++        self.clock, self.stop_at, self.serial_fault_at = 5000.0, float("inf"), 10
++        record, _, _, _ = self.observe()
++        self.assertEqual((record["status"], record["elapsed_seconds"], self.running_time), ("PARTIAL", 5, 10))
++        self.assertIn("transport timeout", record["error"])
++
++    def test_late_frame_does_not_shorten_observation_window(self):
++        self.frame_at = 15
++        record, _, _, _ = self.observe()
++        self.assertEqual((record["status"], record["elapsed_seconds"], self.running_time), ("PASS", 60, 75))
++        self.assertEqual([x["running_elapsed_seconds"] for x in record["samples"][:3]], [0, 5, 10])
++
++    def test_running_guest_without_frame_is_sampled_but_cannot_pass(self):
++        self.frame_at = float("inf")
++        record, _, serial, _ = self.observe()
++        self.assertEqual((record["status"], record["elapsed_seconds"], self.running_time), ("PARTIAL", 0, 60))
++        self.assertEqual(serial, "APP_READY\n")
++        self.assertEqual(len(record["samples"]), 13)
++        self.assertIn("did not produce a framebuffer", record["error"])
++
++    def test_serial_only_lane_and_crash_marker(self):
++        record, frame, serial, _ = self.observe({"serial": True})
++        self.assertEqual((record["status"], record["elapsed_seconds"], frame, serial),
++                         ("PASS", 60, b"", "APP_READY\n"))
++        self.clock, self.crash_at = 5000.0, 10
++        record, _, serial, _ = self.observe({"serial": True})
++        self.assertEqual((record["status"], self.running_time), ("PARTIAL", 10))
++        self.assertIn("assert failed", serial)
++        self.assertIn("assert failed", record["crash_marker"])
++
++
++class SubmissionObservationTests(unittest.TestCase):
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.evidence = Path(temporary.name)
++        self.runtime = app.Runtime.__new__(app.Runtime)
++        self.runtime.config = {"submit_enabled": True}
++        self.runtime.store, self.runtime.reviewer = Mock(), Mock()
++        self.job = {"status": "done", "passed": 1, "conclusion": "已通过", "version_id": "v",
++                    "evidence_dir": str(self.evidence), "declared_sha256": hashlib.sha256(b"image").hexdigest(),
++                    "declared_size": 5, "source_mode": "live_pending"}
++        self.runtime.store.job.return_value = self.job
++        self.runtime.reviewer.burner.json.side_effect = [
++            {"rows": [{"versionId": "v", "binFile": {"sha256": self.job["declared_sha256"], "fileSize": 5}}]},
++            {"msg": "submitted"},
++        ]
++
++    def test_positive_submission_requires_same_binary_and_sixty_seconds(self):
++        with self.assertRaisesRegex(RuntimeError, "至少 60 秒"):
++            self.runtime.submit_job("job")
++        record = {"status": "PASS", "review_id": "job", "source_sha256": "another-bin",
++                  "elapsed_seconds": 60, "samples": [{"elapsed_seconds": 0}, {"elapsed_seconds": 60}]}
++        path = self.evidence / "observation.json"
++        path.write_text(json.dumps(record))
++        with self.assertRaisesRegex(RuntimeError, "同一 BIN"):
++            self.runtime.submit_job("job")
++        record.update(source_sha256=self.job["declared_sha256"], elapsed_seconds=59.99)
++        path.write_text(json.dumps(record))
++        with self.assertRaisesRegex(RuntimeError, "至少 60 秒"):
++            self.runtime.submit_job("job")
++        self.runtime.reviewer.burner.json.assert_not_called()
++        record["elapsed_seconds"] = 60
++        path.write_text(json.dumps(record))
++        self.assertEqual(self.runtime.submit_job("job")["msg"], "submitted")
++
++    def test_negative_submission_keeps_existing_behavior_without_observation(self):
++        self.job.update(status="failed", passed=0, conclusion="固件未通过")
++        self.assertEqual(self.runtime.submit_job("job")["msg"], "submitted")
++        self.assertIs(self.runtime.reviewer.burner.json.call_args.args[2]["passed"], False)
++
++
++if __name__ == "__main__":
++    unittest.main()

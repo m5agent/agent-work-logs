@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-11",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Firmware Review Service minimum runtime observation and Cardputer ADV retest",
+  "source": {
+    "repository": "firmware-review-service",
+    "base_commit": "21e2e3ccb908d4e57b0deca86c1c90d60e5dc2fd",
+    "commit": "ab168a29e1dfc4b10aa478e5c1cb48c699a2cb7b"
+  },
+  "hardware": {
+    "model": "Cardputer ADV",
+    "chip": "ESP32-S3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "lukewarmcard_source_sha256": "5a9bfdfa0bca74b02a274d945a343e93793c2cd3e5a6768cacf3d3a4256dbf68",
+    "ember_source_sha256": "f4261dbbabdaac5825838455ac553cc21ef9c5c6d308cb2c82941bd8ccc1cb5e"
+  },
+  "execution": {
+    "scope": "virtual-device validation",
+    "source_mode": "saved_snapshot",
+    "dry_run": true,
+    "review_app_sha256": "99740481aef9b226d5d5210a8cfd6b05b325afc2abd86a83de5cba984366d254",
+    "review_qemu_sha256": "75e61d00b29bc2c8fa631d1fe396de66ba6b12b64057adc09cb2bec32185b42e"
+  },
+  "checks": {
+    "unit_tests": {
+      "status": "PASS",
+      "count": 56
+    },
+    "minimum_observation": "PASS",
+    "keypad_probe_selection": "PASS",
+    "ember_input_smoke": "PASS",
+    "lukewarmcard_input_function": "PARTIAL",
+    "lukewarmcard_exact_stall_location": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  },
+  "evidence": [
+    "evidence/virtual-device-summary.json",
+    "patches/0001-virtual-observation.patch"
+  ]
+}
