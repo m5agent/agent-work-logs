@@ -89,6 +89,7 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 | [#221](https://github.com/m5agent/m5stack-esp-emulator/issues/221) | Atom-Lite / Atom-Matrix 厂测固件 IDLE watchdog | 12.5–28.6 s `task_wdt ... IDLE (CPU 0)`、`main` 占用、abort 重启循环 |
 | [#222](https://github.com/m5agent/m5stack-esp-emulator/issues/222) | Core2 显示写入未到达面板模型 | 失败固件 `m5-panel` GDDRAM 仅 15/230415 非零；对照固件 229551 非零 |
 | [#223](https://github.com/m5agent/m5stack-esp-emulator/issues/223) | StackChan 约 39 s 崩溃 | BREAK instr PC=0x403783c0；InstrFetchProhibited PC=0x00385cde、A0=0x80385cec 高位截断形态 |
+| [#224](https://github.com/m5agent/m5stack-esp-emulator/issues/224) | efuse MAC 全 0 | 6 个样本 `phy_init ... MAC check failed: expected 00:00:...`；efuse.bin 全零 |
 
 ## 7. 未定位 / 未开 issue
 
