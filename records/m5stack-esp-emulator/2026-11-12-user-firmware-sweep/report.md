@@ -146,3 +146,11 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 - **#221 Atom-Lite Factory Test**：新运行时下连续 100 s 无 watchdog（旧运行时 28.6 s 触发），启动早期问题被修复；
 - **#221 Atom-Matrix Factory Test**：能进入 `Atom Matrix Factory test`，但 13 s 时在 CPU0 的 wifi 任务上触发 watchdog（旧运行时是 main 早期卡住），属于后续 WiFi 路径问题；
 - 平台门禁（2058 用例）在 HEAD 上仍是 21 个既有失败/错误（docs/snapshot/PIL/HTTP 环境类），与本轮补丁无关，清单与修复前一致。
+
+### 2026-11-13 C6 运行时排查
+
+- `scripts/bootstrap-unit-runtime.py` 只构建 xtensa-softmmu，不含 C6/riscv32；
+- C6 源码在 `.work/M5StopWatch-QEMU/build/qemu-c6`（独立补丁线），最新二进制为 2026-10-24；
+- unit-runtime 源码 configure `riscv32-softmmu` 可通过，但缺 `esp32c6` machine，无法复测 Nesso。
+
+结论：#216 的复测必须先移植 C6 补丁线或保留独立 C6 运行时，不能靠当前 bootstrap。
