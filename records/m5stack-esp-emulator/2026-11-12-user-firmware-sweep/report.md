@@ -87,6 +87,8 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 | [#219](https://github.com/m5agent/m5stack-esp-emulator/issues/219) | AtomS3 UserDemo / Snake Game 启动卡死 | 串口 225 B 停在 ROM `entry`；QMP 观测 PC 固定 `0x4208804e`、CCOUNT 前进、宿主 CPU 6%（UserDemo）vs 102%（Snake）；同机 StampFly 正常 |
 | [#220](https://github.com/m5agent/m5stack-esp-emulator/issues/220) | PaperColor TinyUSB 初始化失败 | `check_dwc2 183: ASSERT FAILED`、`dwc2_core_init 221: ASSERT FAILED`，每次会话必现 |
 | [#221](https://github.com/m5agent/m5stack-esp-emulator/issues/221) | Atom-Lite / Atom-Matrix 厂测固件 IDLE watchdog | 12.5–28.6 s `task_wdt ... IDLE (CPU 0)`、`main` 占用、abort 重启循环 |
+| [#222](https://github.com/m5agent/m5stack-esp-emulator/issues/222) | Core2 显示写入未到达面板模型 | 失败固件 `m5-panel` GDDRAM 仅 15/230415 非零；对照固件 229551 非零 |
+| [#223](https://github.com/m5agent/m5stack-esp-emulator/issues/223) | StackChan 约 39 s 崩溃 | BREAK instr PC=0x403783c0；InstrFetchProhibited PC=0x00385cde、A0=0x80385cec 高位截断形态 |
 
 ## 7. 未定位 / 未开 issue
 
