@@ -13,7 +13,7 @@
 
 - **59 个样本出现可用 UI 帧且无致命错误**；13 个样本通过矩阵严格判定（UI + 输入响应）。
 - **30 个样本在启动期或首帧后崩溃**（guest panic / watchdog / 重启循环），集中在 C6（Nesso N1、NanoC6）、经典 LX6 厂测固件和 Tab5。
-- 已提交 3 个 issue：[#216](https://github.com/m5agent/m5stack-esp-emulator/issues/216)（Nesso N1 C6 启动崩溃循环）、[#217](https://github.com/m5agent/m5stack-esp-emulator/issues/217)（PaperColor 触发 QEMU `atomic_mmu_lookup` 断言、进程 SIGABRT）、[#218](https://github.com/m5agent/m5stack-esp-emulator/issues/218)（PM1 主动关机被记为启动失败）。
+- 已提交 6 个 issue：[#216](https://github.com/m5agent/m5stack-esp-emulator/issues/216)（Nesso N1 C6 启动崩溃循环）、[#217](https://github.com/m5agent/m5stack-esp-emulator/issues/217)（PaperColor 触发 QEMU `atomic_mmu_lookup` 断言、进程 SIGABRT）、[#218](https://github.com/m5agent/m5stack-esp-emulator/issues/218)（PM1 主动关机被记为启动失败）、[#219](https://github.com/m5agent/m5stack-esp-emulator/issues/219)（AtomS3 两款固件启动卡死）、[#220](https://github.com/m5agent/m5stack-esp-emulator/issues/220)（PaperColor TinyUSB 未建模）、[#221](https://github.com/m5agent/m5stack-esp-emulator/issues/221)（Atom-Lite/Matrix 厂测 watchdog）。
 - 10 台设备因没有专属公开固件未进入矩阵（CardputerZero、M5Stick、StickT2 不可创建；AtomS3U、Atom Echo、Atom VoiceS3R、AtomS3R-CAM/M12、AtomU、StickC Plus SE 无独立 M5Burner 机型）。
 
 本记录只覆盖 **virtual-device 启动/显示层**；不涉及真机、射频、功耗、电气或光学结论。
@@ -35,4 +35,4 @@
 - 10 台无专属公开固件的设备没有样本；其模拟器可用性不在本轮结论内。
 - 未做真机对照；未见网络协议、音频、射频、功耗与电气行为验证。
 - 输入响应只按矩阵默认探针判定；无响应不等于固件不可用。
-- AtomS3 的 ATOMS3 UserDemo/Snake Game 静默无输出、Tab5 多固件无首帧等个例尚未定位到模型或固件侧，未开 issue。
+- Tab5 多固件无首帧（既有 #188）、stackchan 首帧后 Guru Meditation、Core2 空白帧等仍未闭环。

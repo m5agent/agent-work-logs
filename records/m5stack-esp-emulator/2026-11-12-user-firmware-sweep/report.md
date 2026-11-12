@@ -78,7 +78,17 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 | [#217](https://github.com/m5agent/m5stack-esp-emulator/issues/217) | PaperColor 厂测固件触发 QEMU TCG `atomic_mmu_lookup` 断言，进程 SIGABRT | `qemu.stderr`、会话 8.7 s 退出码 -6，6 次中 1 次 |
 | [#218](https://github.com/m5agent/m5stack-esp-emulator/issues/218) | PM1 主动关机被记为启动失败（PaperColor / PaperDIY UserDemo） | `M5PM1_PWR: Shutdown requested`、退出码 0、全白末帧 |
 
-## 6. 未定位 / 未开 issue
+## 6. 追加定位（2026-11-12 晚）
+
+按“固件大概率正常、优先归因模拟器”的假设补查后新增 3 个 issue：
+
+| issue | 主题 | 关键证据 |
+| --- | --- | --- |
+| [#219](https://github.com/m5agent/m5stack-esp-emulator/issues/219) | AtomS3 UserDemo / Snake Game 启动卡死 | 串口 225 B 停在 ROM `entry`；QMP 观测 PC 固定 `0x4208804e`、CCOUNT 前进、宿主 CPU 6%（UserDemo）vs 102%（Snake）；同机 StampFly 正常 |
+| [#220](https://github.com/m5agent/m5stack-esp-emulator/issues/220) | PaperColor TinyUSB 初始化失败 | `check_dwc2 183: ASSERT FAILED`、`dwc2_core_init 221: ASSERT FAILED`，每次会话必现 |
+| [#221](https://github.com/m5agent/m5stack-esp-emulator/issues/221) | Atom-Lite / Atom-Matrix 厂测固件 IDLE watchdog | 12.5–28.6 s `task_wdt ... IDLE (CPU 0)`、`main` 占用、abort 重启循环 |
+
+## 7. 未定位 / 未开 issue
 
 - **AtomS3**：ATOMS3 UserDemo 与 Snake Game 启动后串口停在 bootloader `entry`（225 B），60 s 内无应用输出、帧全黑；另有 HAL9000 载入 MJPEG 但无帧。尚未确认是模型侧还是固件侧，未开 issue。
 - **Tab5**：4/5 无首帧，1/5 watchdog；与既有 [#188](https://github.com/m5agent/m5stack-esp-emulator/issues/188) Tab5 启动问题一致，本轮不重复开。
@@ -86,14 +96,14 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 - **经典 LX6 厂测固件**（Atom-Lite/Atom-Matrix Factory Test、Atom Printer）：`IDLE` task watchdog，可能与缺失外设或调度模型相关，未定位。
 - **core2**：5 个社区固件中 0 个完整 UI（1 个 UI 后崩溃、3 个空白、1 个崩溃），与历史 Core2 legacy 边界一致，未开新 issue。
 
-## 7. 边界与风险
+## 8. 边界与风险
 
 - 结果只代表 virtual-device 启动/显示层；不涉及真机、射频、音频、功耗、电气、光学。
 - 矩阵“PASS”要求 UI + 输入响应；大量 `PARTIAL` 是输入无响应或帧未就绪，不等于固件不可用。
 - 42 个样本在 40 s 窗口内未见首帧，部分慢启动固件可能需要更长观察。
 - 未修改仓库代码；设备服务与 QEMU 会话为 agent 自有实例，结束后已清理。
 
-## 8. 回滚
+## 9. 回滚
 
 - 无仓库改动，无需回滚。
 - 证据与缓存位于 ignored 的 `.work/agent-sweep-20261112/` 与 `platform/.cache/user-firmware/`。
