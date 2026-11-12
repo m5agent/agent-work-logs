@@ -179,3 +179,7 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 崩溃形态固定：`BREAK instr`、PC=0x403783c0、A1=0x3c3d0420（PSRAM）、A0=0x40000000；另一固件为 `InstrFetchProhibited`、PC 高位丢失。单线程不能消除，疑似 PSRAM 上的栈/指针被写坏，需 PSRAM/cache trace 定位。
 
 另：Snake Game（AtomS3）在 GC9107 与 ST7735S 两种面板下都只有 2 条面板命令（00/04 交替）后停止，串口 225 B，全黑，属独立问题。
+
+### 2026-11-13 S3 soak 对照
+
+CoreS3 UserDemo ×4 + StickS3 Bruce ×4 并发 7 分钟（同 8 MiB PSRAM、同构建）：0 崩溃，串口字节完全一致。StackChan 同条件 18 分钟崩 5 次。说明不是全 S3/PSRAM 平台问题，而是 StackChan 路径（PSRAM 栈 + 动画/舵机/显示）特有，后续应在该路径加写保护/trace。
