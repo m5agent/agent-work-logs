@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "M5Stack 模拟器 26 设备 × 5 个公开 M5Burner 固件扫描",
+  "source": {
+    "issue": "#216,#217,#218",
+    "pull_request": "",
+    "repository": "m5stack-esp-emulator",
+    "base_commit": "1506de25bedd4c0ac77ad195ed159cea409e0287"
+  },
+  "hardware": {},
+  "firmware": {
+    "source": "M5Burner public API (MOST_DOWNLOADED)",
+    "per_device": 5,
+    "planned_samples": 130,
+    "completed_samples": 127
+  },
+  "execution": {
+    "environment": "macOS arm64; agent-owned Device Service /api/v1 on 18787; QEMU 9.2.2 xtensa + riscv32 C6 runtime; runtime=qemu",
+    "task_id": "",
+    "session_id": "matrix-a/b/c; 101 retained sessions"
+  },
+  "checks": [
+    {
+      "name": "26-device firmware matrix",
+      "status": "PARTIAL",
+      "detail": "127/130 samples completed; 26 devices with dedicated M5Burner models; 10 devices excluded (no dedicated public firmware)"
+    },
+    {
+      "name": "UI frame observed",
+      "status": "PASS",
+      "detail": "59 samples produced a non-blank application frame without fatal serial signature"
+    },
+    {
+      "name": "strict matrix PASS (UI + input response)",
+      "status": "PASS",
+      "detail": "13 samples passed the tool's UI + input criterion"
+    },
+    {
+      "name": "startup crashes",
+      "status": "FAIL",
+      "detail": "30 samples crashed before or after first frame; clusters on C6, classic LX6 factory tests and Tab5"
+    },
+    {
+      "name": "issue #216 Nesso N1 C6 crash loop",
+      "status": "PASS",
+      "detail": "filed with two independent reproduction sessions"
+    },
+    {
+      "name": "issue #217 PaperColor QEMU atomic_mmu_lookup abort",
+      "status": "PASS",
+      "detail": "filed; intermittent 1/6 runs, host SIGABRT evidence attached"
+    },
+    {
+      "name": "issue #218 PM1 guest poweroff treated as startup failure",
+      "status": "PASS",
+      "detail": "filed; PaperColor and PaperDIY UserDemo evidence attached"
+    },
+    {
+      "name": "physical hardware / RF / power",
+      "status": "NOT RUN",
+      "detail": "out of scope for this virtual-device sweep"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.txt",
+    "evidence/triage-summary.txt",
+    "evidence/device-table.md",
+    "evidence/papercolor-qemu-abort.stderr",
+    "evidence/issues/issue-nesso.md",
+    "evidence/issues/issue-papercolor-qemu.md",
+    "evidence/issues/issue-pm1-poweroff.md"
+  ],
+  "notes": [
+    "Raw serial logs and frames stay in the ignored esp-emulator .work/agent-sweep-20261112 tree.",
+    "No repository code was changed; the agent-owned Device Service was stopped after the sweep."
+  ]
+}
