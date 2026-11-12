@@ -158,3 +158,11 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 ### 2026-11-13 AtomS3 兼容入口
 
 `676ae67c` + patch `0181-atoms3-gc9107-runtime-override.patch`：默认 atoms3（ST7735S）不变，新增 `runtime_env: {"M5SW_ATOMS3_GC9107":"1"}`（仅 atoms3 + qemu 可用），让老固件按 GC9107 初始化。Device Service 实测 UserDemo 从全黑变为 4993 非黑像素；Snake Game 在 GC9107 下仍全黑，另行跟踪。
+
+### 2026-11-13 StackChan 崩溃复现尝试
+
+- 单实例离线运行 110 s：无崩溃；
+- 3 实例并发各 75 s：无崩溃；
+- 经 Device Service 注入 touch 后再观察 90 s：无崩溃。
+
+结论：#223 的 Guru Meditation 是低频、时序相关的，常规单/并发运行难以稳定复现，需要更长 soak 或带 trace 的复现环境；暂时无法据此定位模型改动。
