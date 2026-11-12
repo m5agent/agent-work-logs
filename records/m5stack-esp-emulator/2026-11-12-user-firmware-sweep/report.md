@@ -121,3 +121,9 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 ### 已定位但未修复
 
 - **#222 Core2 面板**：失败固件使用 SPI DMA（18 s 内 39.9 万行 DMA 寄存器 trace），但面板模型收到 0 条命令；对照 Core2FactoryTest 走 PIO 路径，产生 2030 行 window/ramwr trace。当前运行时二进制缺少 `0085` 的 DMA 描述符处理代码（`strings` 无 `desc=%08x words`），需要用 0050/0085 语义重建 Xtensa 运行时再验证。
+
+
+### 2026-11-13 后续修复
+
+- **#220 PaperColor USB（已修复）**：`6b52ee33` + patch `0180-papercolor-usb-otg.patch`。根因是 S3 机器只在 `M5_BOARD_STICKS3` 下创建 OTG 控制器，PaperColor 看到半初始化控制器；修复后 TinyUSB 正常安装并枚举描述符，PaperColor Frame 画面不变。
+- **复测结论**：用 fresh bootstrap（0001–0180）运行时复测，AtomS3 UserDemo/Snake 仍停在 ROM entry，StackChan UserDemo 仍出现一次 Guru Meditation，说明这两个问题不是旧运行时缺失补丁导致。
