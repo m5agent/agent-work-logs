@@ -127,3 +127,9 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 
 - **#220 PaperColor USB（已修复）**：`6b52ee33` + patch `0180-papercolor-usb-otg.patch`。根因是 S3 机器只在 `M5_BOARD_STICKS3` 下创建 OTG 控制器，PaperColor 看到半初始化控制器；修复后 TinyUSB 正常安装并枚举描述符，PaperColor Frame 画面不变。
 - **复测结论**：用 fresh bootstrap（0001–0180）运行时复测，AtomS3 UserDemo/Snake 仍停在 ROM entry，StackChan UserDemo 仍出现一次 Guru Meditation，说明这两个问题不是旧运行时缺失补丁导致。
+
+### 2026-11-13 深夜进展（新一轮）
+
+- #219 AtomS3：fresh 运行时下仍是 225 B 串口。QMP 显示 PC 固定在 `waiti 0; retw.n`，CCOUNT 前进，`INTENABLE=0x1300120c`、`INTERRUPT=0x00000200`；INTMATRIX trace 只看到 source 22（SPI3）在 line 6 上 1/0 翻转。即 pending 位（bit9）与实际 IRQ 线不一致，waiti 无法唤醒。根因待定位。
+- #223 StackChan：fresh 运行时仍出现一次 Guru Meditation（未退出）。
+- 已确认 #220 的修复在 fresh 运行时下仍生效（TinyUSB 枚举正常）。
