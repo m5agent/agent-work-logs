@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "M5Stack Web Design Skill 官网设计规则升级",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "",
+    "base_commit": "",
+    "description": "M5Stack 官网前端源码快照与既有 Skill 使用反馈"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Playwright 1.63.0，Chromium 和 Chrome，桌面与移动仿真视口",
+    "task_id": "",
+    "session_id": "",
+    "validation_kind": "browser virtual-device web validation",
+    "release": {
+      "version": "2.0.1",
+      "file_count": 23,
+      "update_count": 3,
+      "updated_at": "2026-11-12T03:37:40Z",
+      "archive_sha256": "56153a5479fe125856f11e42c01e0cc378e06b1e88682682d9b13edd256c77bc",
+      "catalog_detail_download_installed_match": true
+    }
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "details": "营销与文档测试加载本地 HTTP 页面及资源"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "details": "设备控制台示例数据筛选、刷新、错误和重试"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "details": "三份网页在五种视口完成浏览器运行，导航和文档目标焦点通过，营销展台手动和显式播放、减少动效、媒体失败回退通过"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "details": "2.0.1，Hub 下载包、发布包和本机安装逐字节匹配全部 23 个文件；从下载包复验手机端三条路径"
+    },
+    {
+      "layer": "model_transfer",
+      "status": "PARTIAL",
+      "details": "GPT-5.6 Luna low 按同一提示词进行单个控制台任务。2.0.1 生成物保留同步焦点和筛选，三版均重建列表行"
+    }
+  ],
+  "evidence": [
+    "evidence/browser-summary.json",
+    "evidence/model-transfer-summary.json"
+  ],
+  "notes": [
+    "控制台使用示例数据",
+    "Firefox、Safari 和实体手机未执行"
+  ]
+}

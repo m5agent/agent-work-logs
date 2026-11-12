@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-12 | M5Stack Web Design | 官网源码驱动的 Skill 升级 | `PARTIAL`（三份浏览器示例及发布回读通过，轻量模型仍重建列表行） | [查看](records/m5stack-web-design/2026-11-12-source-guided-skill-upgrade/) |
 | 2026-11-11 | Firmware Review Service | Cardputer ADV 固件复审与 60 秒运行观察 | `PARTIAL`（门槛与 EMBER 对照通过，LukewarmCard 应用界面未验证） | [查看](records/firmware-review-service/2026-11-11-virtual-observation/) |
 | 2026-11-09 | ESP Emulator | 23 板正式 Pages 发布 | `PARTIAL`（下载恢复，托管门禁未通过） | [查看](records/esp-emulator/2026-11-09-pages-23-board-rollout/) |
 | 2026-11-09 | ESP Emulator | #211 浏览器 Skill 与运行证据 | `PASS`（CoreS3 原厂 BIN、双 SHA、独立编程与触摸/PIR 验证） | [查看](records/esp-emulator/2026-11-09-browser-simulator-skill-feedback/) |
