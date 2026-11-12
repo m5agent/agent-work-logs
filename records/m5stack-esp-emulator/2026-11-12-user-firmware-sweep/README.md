@@ -42,4 +42,5 @@
 
 - **#224 efuse MAC 已修复并推送**：`m5stack-esp-emulator@c5cda7a0`，所有 ESP32-S3 会话 eFuse 镜像写入由 session id 派生的本地管理 MAC（02:xx）。四个 S3 会话冒烟通过，既有通过样本画面不变。
 - **#222 Core2 面板**：定位到失败固件走 SPI DMA 路径，45 s 内面板模型收到 0 条命令；对照固件走 PIO，2030 条 trace。当前运行时二进制不含 `0085` 的 DMA 描述符处理，需重建运行时后再验证，未修复。
+- **#222 Core2 面板已修复并推送**：`m5stack-esp-emulator@778717a6`（patch 0179）。根因是 SPI OUT_LINK 的 latch 被只带 start 位的第二次写覆盖；Core2_For_AWS 修复后服务帧 76294 非黑像素（修复前 0），对照固件与 StickS3 不变。
 - 其余 #216/#217/#219/#220/#221/#223 仍在开放状态。
