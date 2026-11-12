@@ -154,3 +154,7 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 - unit-runtime 源码 configure `riscv32-softmmu` 可通过，但缺 `esp32c6` machine，无法复测 Nesso。
 
 结论：#216 的复测必须先移植 C6 补丁线或保留独立 C6 运行时，不能靠当前 bootstrap。
+
+### 2026-11-13 AtomS3 兼容入口
+
+`676ae67c` + patch `0181-atoms3-gc9107-runtime-override.patch`：默认 atoms3（ST7735S）不变，新增 `runtime_env: {"M5SW_ATOMS3_GC9107":"1"}`（仅 atoms3 + qemu 可用），让老固件按 GC9107 初始化。Device Service 实测 UserDemo 从全黑变为 4993 非黑像素；Snake Game 在 GC9107 下仍全黑，另行跟踪。
