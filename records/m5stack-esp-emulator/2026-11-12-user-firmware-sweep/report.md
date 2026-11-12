@@ -133,3 +133,10 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 - #219 AtomS3：fresh 运行时下仍是 225 B 串口。QMP 显示 PC 固定在 `waiti 0; retw.n`，CCOUNT 前进，`INTENABLE=0x1300120c`、`INTERRUPT=0x00000200`；INTMATRIX trace 只看到 source 22（SPI3）在 line 6 上 1/0 翻转。即 pending 位（bit9）与实际 IRQ 线不一致，waiti 无法唤醒。根因待定位。
 - #223 StackChan：fresh 运行时仍出现一次 Guru Meditation（未退出）。
 - 已确认 #220 的修复在 fresh 运行时下仍生效（TinyUSB 枚举正常）。
+
+### 2026-11-13 AtomS3 根因更正
+
+之前的 waiti 结论不成立：`-d int` 显示 CPU 正常进中断，是在 FreeRTOS idle 里等待。真正问题是显示初始化失败——
+`m5atoms3`（GC9107）上 ATOMS3 UserDemo 有完整初始化序列并出 4993 非黑像素；当前的 `m5atoms3-st7735` profile 上只反复读 0x04、无后续命令、全黑。该 2022 固件只认 GC9107 的 read-id。
+
+即根因是 **AtomS3 面板变体与设备默认 profile 不匹配**，不是固件挂死。需要决定默认变体或暴露两个 profile。Snake Game 在 GC9107 上仍全黑，属另一个问题。
