@@ -110,3 +110,14 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 
 - 无仓库改动，无需回滚。
 - 证据与缓存位于 ignored 的 `.work/agent-sweep-20261112/` 与 `platform/.cache/user-firmware/`。
+
+
+## 10. 2026-11-13 修复尝试
+
+### 已修复并推送
+
+- **#224 eFuse MAC**：`m5stack-esp-emulator@c5cda7a0`。Device Service 为每个 ESP32-S3 会话生成确定性本地管理 MAC（02:xx，session id 派生）。验证：sticks3/atoms3r/cardputer/cores3 四个会话 eFuse MAC 非零，出画面样本帧不变；`tests.test_device_service` 通过（site-config HTTP 用例在干净 HEAD 上同样失败，属本机环境问题）。
+
+### 已定位但未修复
+
+- **#222 Core2 面板**：失败固件使用 SPI DMA（18 s 内 39.9 万行 DMA 寄存器 trace），但面板模型收到 0 条命令；对照 Core2FactoryTest 走 PIO 路径，产生 2030 行 window/ramwr trace。当前运行时二进制缺少 `0085` 的 DMA 描述符处理代码（`strings` 无 `desc=%08x words`），需要用 0050/0085 语义重建 Xtensa 运行时再验证。
