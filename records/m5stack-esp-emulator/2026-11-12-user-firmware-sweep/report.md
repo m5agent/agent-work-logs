@@ -183,3 +183,8 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 ### 2026-11-13 S3 soak 对照
 
 CoreS3 UserDemo ×4 + StickS3 Bruce ×4 并发 7 分钟（同 8 MiB PSRAM、同构建）：0 崩溃，串口字节完全一致。StackChan 同条件 18 分钟崩 5 次。说明不是全 S3/PSRAM 平台问题，而是 StackChan 路径（PSRAM 栈 + 动画/舵机/显示）特有，后续应在该路径加写保护/trace。
+
+### 2026-11-13 PSRAM trace 尝试与最终门禁
+
+- 在 `ssi_psram.c::psram_write_data` 加 `M5SW_PSRAM_WATCH=start:end` 围栏；StackChan 6 实例 soak（区间 0x3d0000–0x3e0000）7 分钟内 2 次崩溃，但围栏 0 命中——PSRAM 栈访问走 S3 cache 直连，不经过 SPI 设备模型，需把 trace 放进 cache 路径。
+- 最终平台门禁：2058 用例，失败/错误清单与基线**逐条一致（diff 为 0）**，本轮全部改动无新增回归。
