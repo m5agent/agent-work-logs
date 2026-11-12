@@ -166,3 +166,16 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 - 经 Device Service 注入 touch 后再观察 90 s：无崩溃。
 
 结论：#223 的 Guru Meditation 是低频、时序相关的，常规单/并发运行难以稳定复现，需要更长 soak 或带 trace 的复现环境；暂时无法据此定位模型改动。
+
+### 2026-11-13 StackChan soak 复现
+
+同一 `m5stackchan` 镜像（StackChan-UserDemo）起多实例 soak：
+
+| 配置 | 实例 | 时长 | 崩溃 |
+| --- | ---: | ---: | ---: |
+| 默认 MTTCG | 6 + 4 | 约 18 分钟 | 5 |
+| `-accel tcg,thread=single` | 6 | 约 18 分钟 | 3 |
+
+崩溃形态固定：`BREAK instr`、PC=0x403783c0、A1=0x3c3d0420（PSRAM）、A0=0x40000000；另一固件为 `InstrFetchProhibited`、PC 高位丢失。单线程不能消除，疑似 PSRAM 上的栈/指针被写坏，需 PSRAM/cache trace 定位。
+
+另：Snake Game（AtomS3）在 GC9107 与 ST7735S 两种面板下都只有 2 条面板命令（00/04 交替）后停止，串口 225 B，全黑，属独立问题。
