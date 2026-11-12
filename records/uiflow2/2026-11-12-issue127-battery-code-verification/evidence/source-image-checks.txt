@@ -1,0 +1,93 @@
+# Source and image checks (2026-11-12)
+
+## Commit range 2.4.3..2.4.4
+3da7e576 version.text: Update to V2.4.4.
+88500411 third-party/cmodules/m5unified: Fix font symbol linkage errors.
+199254e1 libs/unit: Fix run error on tab5.
+d2bb628a lib/unit: Add Unit CardKB2 support.
+3985db13 cmodules/m5unified: Fix missing Montserrat font extern declarations.
+bbbc67a8 lib/module: Add Module LoRaWAN-EU868 support.
+7676667d docs: Update docs for font support.
+323db41f cmodules/m5unified: Add LVGL Font support.
+bc0f874a patches: Fix i2c probe flag not taking effect.
+a7dd48d7 unit: Add NFC Unit support.
+46ec70bd docs: Add hardware.PWRCAN docs and exmaples.
+cc5ce129 .github/workflows: Set IDF version to 5.5.1.
+0c2681b6 base: Add Atomic Audio-3.5 Base support.
+4aa3dca0 docs: Fix some error.
+5802fb4b cmodule/rmt_it: Fix ir rx failed.
+ba070e49 docs: Add hardware touch document.
+
+## Submodule M5Unified
+160000 commit a852f204aa937b4e62d8700201809dbd10e83fa0	m5stack/components/M5Unified/M5Unified
+160000 commit 60875b040bbbc0939a80a14280839f48475d3f6f	m5stack/components/M5Unified/M5Unified
+
+## dev.py diff (font-only battery UI change)
+-            font=Widgets.FONTS.DejaVu18,
++            font=Widgets.FONTS.Montserrat18,
+-            font=Widgets.FONTS.DejaVu18,
++            font=Widgets.FONTS.Montserrat18,
+-            font=Widgets.FONTS.DejaVu9,
++            font=Widgets.FONTS.Montserrat12,
+
+## Partition tables (parsed from official 4 MB images)
+== 2.4.3 image_bytes 4186112
+  nvs        0x9000 0x6000
+  phy_init   0xf000 0x1000
+  factory    0x10000 0x360000
+  vfs        0x370000 0x8e000
+== 2.4.4 image_bytes 4186112
+  nvs        0x9000 0x6000
+  phy_init   0xf000 0x1000
+  factory    0x10000 0x360000
+  vfs        0x370000 0x8e000
+
+## VFS region SHA256 (0x370000, 0x8e000 bytes)
+2.4.3 009c69e9ab838eda6a794d2f751cd6fb9c83d95cb4a83974c735a0e284f4e2a7 bytes 581632 jpeg_soi 54
+2.4.4 009c69e9ab838eda6a794d2f751cd6fb9c83d95cb4a83974c735a0e284f4e2a7 bytes 581632 jpeg_soi 54
+
+## Differing 4 KiB blocks between images
+same_length True diff_blocks 833 first 0x1000 last 0x352000
+
+## Embedded IDF version strings
+2.4.3: v5.5.1-dirty
+2.4.4: v5.5.1-dirty
+
+## Firmware asset SHA256
+93a15f7133f7b2f3a536f63ad3e5fda2ffcc9b6ef0570df8a1b4b901f6f9cb38  basic-2.4.3.bin
+bb9ad9899453932a954f65ee909b9b633e0f1ba594468c8ac00084e0672d0131  basic-2.4.4.bin
+
+## Virtual-device boot attempt (Basic v2.7 model)
+
+Both official images booted on the Basic v2.7 QEMU model through the Device Service
+session API. Both reached the UIFlow2 banner and then stopped; the captured frame
+stayed blank and the serial log did not advance past the banner. Timestamps differ
+by milliseconds; the version banner is the only other difference.
+
+Common serial excerpt (2.4.3 shown; 2.4.4 identical apart from `V2.4.4`):
+
+ets Jul 29 2019 12:21:46
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:1
+load:0x3fff0030,len:4440
+load:0x40078000,len:16136
+load:0x40080400,len:3660
+entry 0x400805c0
+auto detect board:1
+E (4884) i2c.master: this port has not been initialized, please initialize it first
+E (4887) i2c.master: this port has not been initialized, please initialize it first
+E (4889) i2c.master: this port has not been initialized, please initialize it first
+E (4922) i2c.master: this port has not been initialized, please initialize it first
+
+       _  __ _
+ _   _(_)/ _| | _____      __
+| | | | | |_| |/ _ \ \ /\ / /
+| |_| | |  _| | (_) \ V  V /
+ \__,_|_|_| |_|\___/ \_/\_/  V2.4.3
+
+Limit: this model does not advance through the Wi-Fi/launcher path for this
+device, so the DEV screen and its battery indicator could not be observed.
+Injecting `/machine/ip5306 battery-mv=3900` produced `battery-code=8` on the QOM
+side, but no guest read was possible.

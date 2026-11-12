@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "kind": "report",
+  "overall_status": "REVIEW",
+  "title": "UIFlow2 #127 battery indicator source and image comparison",
+  "source": {
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/127",
+    "repository": "https://github.com/m5stack/uiflow-micropython",
+    "base_commit": "d30cac849afb76cfa144febdc73fbc55c8c796c0",
+    "compare_commit": "3da7e5766f866ab4eaa3d96ea02a2a0c6cb51a96"
+  },
+  "hardware": {
+    "validation_type": "none",
+    "target_model": "M5Stack Core Gray (K001, IP5306)",
+    "physical_hardware": "NOT RUN",
+    "virtual_device_attempt": "basic-v27 QEMU model; both official images boot to the UIFlow2 banner, UI not reached"
+  },
+  "firmware": {
+    "v2.4.3": {
+      "tag": "2.4.3",
+      "commit": "d30cac849afb76cfa144febdc73fbc55c8c796c0",
+      "asset_sha256": "93a15f7133f7b2f3a536f63ad3e5fda2ffcc9b6ef0570df8a1b4b901f6f9cb38",
+      "bytes": 4186112,
+      "idf": "v5.5.1"
+    },
+    "v2.4.4": {
+      "tag": "2.4.4",
+      "commit": "3da7e5766f866ab4eaa3d96ea02a2a0c6cb51a96",
+      "asset_sha256": "bb9ad9899453932a954f65ee909b9b633e0f1ba594468c8ac00084e0672d0131",
+      "bytes": 4186112,
+      "idf": "v5.5.1"
+    },
+    "partition_table": {
+      "nvs": "0x9000/0x6000",
+      "phy_init": "0xf000/0x1000",
+      "factory": "0x10000/0x360000",
+      "vfs": "0x370000/0x8e000"
+    },
+    "vfs_sha256": "009c69e9ab838eda6a794d2f751cd6fb9c83d95cb4a83974c735a0e284f4e2a7"
+  },
+  "execution": {
+    "environment": "local UIFlow2 source checkout, official 4 MB release images, Basic v2.7 virtual device",
+    "commands": [
+      "git log --oneline 2.4.3..2.4.4",
+      "git diff 2.4.3 2.4.4 -- m5stack/modules/startup/basic/apps/dev.py",
+      "git ls-tree 2.4.3 m5stack/components/M5Unified/M5Unified",
+      "partition table parse at 0x8000",
+      "sha256 of vfs region 0x370000/0x8e000",
+      "virtual-device boot of both images on basic-v27"
+    ]
+  },
+  "checks": [
+    {"name": "dev.py battery UI logic", "status": "PASS", "detail": "diff limited to DejaVu to Montserrat font selection"},
+    {"name": "M5Unified IP5306 path", "status": "PASS", "detail": "Power_Class changes limited to StampS3Bat and StickS3 PM1; IP5306_Class unchanged"},
+    {"name": "partition table", "status": "PASS", "detail": "identical offsets and sizes"},
+    {"name": "VFS region", "status": "PASS", "detail": "byte-identical, SHA256 starts 009c69e9"},
+    {"name": "embedded IDF version", "status": "PASS", "detail": "both images report v5.5.1"},
+    {"name": "virtual-device UI observation", "status": "NOT RUN", "detail": "both images stop at the UIFlow2 banner in the model; frame is blank"},
+    {"name": "physical battery reading", "status": "NOT RUN", "detail": "no Core Gray hardware available"}
+  ],
+  "evidence": [
+    "evidence/source-image-checks.txt"
+  ],
+  "notes": [
+    "Root cause not located.",
+    "Only the claimed onset v2.4.3 to v2.4.4 was compared; v2.4.5 to v2.5.4 were not compared.",
+    "Runtime readings from the reporting device are needed to continue (getBatteryLevel: 0 vs -1)."
+  ]
+}
