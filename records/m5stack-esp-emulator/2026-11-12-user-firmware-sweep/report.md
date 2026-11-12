@@ -140,3 +140,9 @@ python3 .work/agent-sweep-20261112/run_matrix.py \
 `m5atoms3`（GC9107）上 ATOMS3 UserDemo 有完整初始化序列并出 4993 非黑像素；当前的 `m5atoms3-st7735` profile 上只反复读 0x04、无后续命令、全黑。该 2022 固件只认 GC9107 的 read-id。
 
 即根因是 **AtomS3 面板变体与设备默认 profile 不匹配**，不是固件挂死。需要决定默认变体或暴露两个 profile。Snake Game 在 GC9107 上仍全黑，属另一个问题。
+
+### 2026-11-13 fresh 运行时复测
+
+- **#221 Atom-Lite Factory Test**：新运行时下连续 100 s 无 watchdog（旧运行时 28.6 s 触发），启动早期问题被修复；
+- **#221 Atom-Matrix Factory Test**：能进入 `Atom Matrix Factory test`，但 13 s 时在 CPU0 的 wifi 任务上触发 watchdog（旧运行时是 main 早期卡住），属于后续 WiFi 路径问题；
+- 平台门禁（2058 用例）在 HEAD 上仍是 21 个既有失败/错误（docs/snapshot/PIL/HTTP 环境类），与本轮补丁无关，清单与修复前一致。
