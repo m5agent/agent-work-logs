@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Browser firmware validation and evidence acceptance",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/211",
+    "base_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+    "commit": "34d495245204af82f6c3df847d43ea9eebc6d884",
+    "existing_implementation_commit": "6d02f46685e4b60d4553fcb312e2c81a4b45c2e8"
+  },
+  "hardware": {
+    "status": "NOT RUN"
+  },
+  "firmware": {
+    "demo": {
+      "engine": "qemu-wasm",
+      "deviceId": "cores3",
+      "board": "m5cores3",
+      "profile": "cores3-wasm-stock-wallclock",
+      "clockDivisor": 1,
+      "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+      "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+      "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+      "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "firmwareInputSha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+      "firmwareRuntimeSha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+      "normalization": {
+        "kind": "none",
+        "inputBytes": 16777216,
+        "runtimeBytes": 16777216
+      }
+    },
+    "stock": {
+      "engine": "qemu-wasm",
+      "deviceId": "cores3",
+      "board": "m5cores3",
+      "profile": "cores3-wasm-vm-div8",
+      "clockDivisor": 8,
+      "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+      "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+      "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+      "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "firmwareInputSha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+      "firmwareRuntimeSha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+      "normalization": {
+        "kind": "pad-ff",
+        "inputBytes": 16121856,
+        "runtimeBytes": 16777216
+      }
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation (browser WASM)",
+    "environment": "Isolated static export in Chrome; no Device Service requests",
+    "site_manifest_sha256": "48d868d88ce2ac5e615e6812a9295427b8c6b90ea1049537fd74569d384422da",
+    "pages_deployment": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "demo_guest",
+      "status": "PASS",
+      "checks": 49
+    },
+    {
+      "name": "original_stock_guest",
+      "status": "PASS",
+      "checks": 13
+    },
+    {
+      "name": "static_server_first_attempt",
+      "status": "FAIL",
+      "scope": "host harness, retained independently"
+    },
+    {
+      "name": "extension_permission_fallback_reproduction",
+      "status": "NOT RUN",
+      "scope": "documented native picker fallback; local browser file input passed"
+    },
+    {
+      "name": "platform",
+      "status": "PASS",
+      "duration_seconds": 306.739,
+      "log_sha256": "7b0c8ed3c4bc938173fd4c4beb8b68554e0f746e041702e477ec1cc72770aeb8",
+      "diagnostics": [
+        "Ran 2098 tests in 306.159s\n",
+        "OK (skipped=1)\n"
+      ]
+    },
+    {
+      "name": "node",
+      "status": "PASS",
+      "duration_seconds": 13.393,
+      "log_sha256": "2b5c2be6a56016f18bbb939c6f0515c77232a6a75fc5805a37e82e807a76ad97",
+      "diagnostics": []
+    },
+    {
+      "name": "runtime-coverage",
+      "status": "PASS",
+      "duration_seconds": 0.067,
+      "log_sha256": "ae22dc70eea81ac4f6d6918c0d694fc72cbc72cb589a13d93dac5b5c453d9311",
+      "diagnostics": []
+    },
+    {
+      "name": "peripheral-catalog",
+      "status": "PASS",
+      "duration_seconds": 0.045,
+      "log_sha256": "6e3c49ec0c80a56051031a4bf3ba0fe16aa118f2b31f8863c09ef0bc4cc89633",
+      "diagnostics": []
+    },
+    {
+      "name": "qemu-profiles",
+      "status": "PASS",
+      "duration_seconds": 0.033,
+      "log_sha256": "04a26a35d775027ee0ce627c0888eeb20272591f8801dbd6e2f0dfb2e499281e",
+      "diagnostics": []
+    },
+    {
+      "name": "snapshot",
+      "status": "PASS",
+      "duration_seconds": 18.433,
+      "log_sha256": "05110c70ad2d40d6a4943005ed5d00f2780cb44d5288bcee45128d62b19d6f1d",
+      "diagnostics": []
+    },
+    {
+      "name": "scope",
+      "status": "PASS",
+      "duration_seconds": 0.227,
+      "log_sha256": "a9d7c51631542342b78810b0376067ebbe0c892ee574003e94ab844660a0c564",
+      "diagnostics": []
+    },
+    {
+      "name": "main_ci",
+      "status": "PASS",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43361564503"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/summary.json",
+      "bytes": 10007,
+      "sha256": "e706b430b6c24630ee990767e09cf75841eb76664e60d31d177f62d9c6b7d86b"
+    }
+  ],
+  "notes": [
+    "No credentials, device/session identifiers, private endpoints, raw images, original serial or raw worker records published.",
+    "Actual application readiness and first framebuffer remain separate.",
+    "No Burner submission."
+  ]
+}
