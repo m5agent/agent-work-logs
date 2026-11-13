@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "原生模拟器时钟、USB 串口和当前原版固件身份补充验证",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issues": [
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/216",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/223",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/225"
+    ],
+    "executed_service_commits": {
+      "jiggler": "1be1e1464a49e7e36d849a4610cac6eacfc91ac4",
+      "classic_input_controls": "a8c9b222c6af0081fd48bc7facafa7cd12b6e5c3",
+      "c6_and_serial_pages": "10c826b832b78c9bc42e9f788bd3e595584978ae"
+    },
+    "ci_source_commit": "bb9475b163b108bb807959628b5bb7cb0e65768f",
+    "serial_evidence_commit": "f33b96ad021adcc7bd9a3d1c0e7e87f4a84c32d7",
+    "serial_evidence_original_commit": "87b7faae733a54792b383462dd8f214c2e1154db",
+    "c6_pre_irq_evidence_commit": "6f9d3afaa5f1710ee2229d3d2b2c28a97660a45d",
+    "later_shared_irq_source_candidate": "c9bc6ac8b584a2f8cf8a1f37a3fcf4cfefa39da0",
+    "final_delivery_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+    "c6_final_v3_executed_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+    "final_v3_ui_evidence_commit": "224a6e796d2da842ed4952e715a28fd844394262",
+    "c6_final_v3_evidence_commit": "2157a147855b6af63f3aaabe856c0aa37d06c039",
+    "integrated_document_reference_commits": {
+      "final_v3_ui": "27a1706ba1500cde7cd0e77beb479515b0beb164",
+      "c6_final_v3": "a83bb8149983759a2b95a59860d5760331f52f4d",
+      "shared_pad": "f3c10994dd7ae406542ef91123ec2e54aae653fb"
+    },
+    "final_main_ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43453074487",
+    "ambient_matrix_evidence_commit": "175921b40dfe1976cdba6ce5ec3f887024e7c663",
+    "final_documentation_main_commit": "ffa621cdcf8422005b7fdf66afdee1be7c5fbba7"
+  },
+  "hardware": {
+    "classification": "virtual-device validation",
+    "virtual_models": [
+      "StickC Plus2",
+      "Core2",
+      "NanoC6",
+      "Nesso N1",
+      "Cardputer ADV",
+      "CoreS3",
+      "AtomS3R"
+    ],
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "jiggler_original_sha256": "c5ce5ad2e1a1f33bf99bbc1e29574562e1f2dbe661b9aca554c052cdb6b6e401",
+    "honeypot_original_sha256": "4184ffc6b56f1742a926845d782f3b65c37246490cc6d3e1bfa067bff7b0c381",
+    "current_public_artifact_audit": [
+      {
+        "name": "StackChan-UserDemo",
+        "version": "V1.6.0",
+        "sha256": "245bc9af0a5dff0388017073d7f571fdd03268a0df71bc62c8de7567f8e32866",
+        "bytes": 12783789,
+        "same_artifact_as_previously_tested": true
+      },
+      {
+        "name": "StackChan-GPT",
+        "version": "1.8.11",
+        "sha256": "e680215dd1858dfcff5daff312ef13d1467ee72b77d9cb4a0caba2fd23e7cdc0",
+        "bytes": 12857054,
+        "same_artifact_as_previously_tested": true
+      },
+      {
+        "name": "Meshtastic RFID Demo",
+        "version": "2.7.21 Landscape PN532/PN532Killer",
+        "sha256": "1ea35725b85cf66745724daaaf8005ba1dcac522b2b10005671b7f7cf2cf86c8",
+        "bytes": 2028592,
+        "same_artifact_as_previously_tested": true
+      }
+    ],
+    "application_bytes": "Verified unchanged only in the named execution summaries with original and Flash-region evidence; post9 app-byte comparison is NOT RUN because those bundles omit Flash; separate probes have independent firmware identities"
+  },
+  "execution": {
+    "environment": "Apple arm64 native QEMU through dedicated Device Service acceptance sessions: earlier isolated instances and final authorized resident services; browser pages attach to native guests",
+    "jiggler": [
+      {
+        "name": "release-original-bounded-auto-round1",
+        "status": "PASS",
+        "icount": "shift=auto,align=off,sleep=on,max-shift=5",
+        "evidence_zip_sha256": "0567eedb804b95c0c5f54ae3e7200275ef11bb2cab32b4f1ad23d4718370a686",
+        "virtual_clock_lower_bound_seconds_after_home": 300.377564,
+        "virtual_clock_lower_bound_seconds_after_settings": 280.820599,
+        "timing_method": "Minimum of conservative virtual-microsecond and firmware-latched LACT intervals after fresh post-frame shadow update; a lower bound, not exact elapsed time"
+      },
+      {
+        "name": "release-original-bounded-auto-round2",
+        "status": "PASS",
+        "icount": "shift=auto,align=off,sleep=on,max-shift=5",
+        "evidence_zip_sha256": "01c04004286d2e79a1f1f6de0d39d37e486e2a413aba9d84b5c727c7d5795894",
+        "virtual_clock_lower_bound_seconds_after_home": 300.308091,
+        "virtual_clock_lower_bound_seconds_after_settings": 277.567543,
+        "timing_method": "Minimum of conservative virtual-microsecond and firmware-latched LACT intervals after fresh post-frame shadow update; a lower bound, not exact elapsed time"
+      },
+      {
+        "name": "release-original-bounded-default",
+        "status": "PASS",
+        "icount": "shift=5,align=off,sleep=off",
+        "evidence_zip_sha256": "8bc6c898586a75909fa10c78b0f0c898cfa729bc24b20dbbdb6680af32e1a279",
+        "virtual_clock_lower_bound_seconds_after_home": 92.554006,
+        "virtual_clock_lower_bound_seconds_after_settings": 15.866,
+        "timing_method": "Minimum of conservative virtual-microsecond and firmware-latched LACT intervals after fresh post-frame shadow update; a lower bound, not exact elapsed time"
+      }
+    ],
+    "serial_api_and_pages": {
+      "status": "PASS",
+      "firmware_application_status": "PARTIAL",
+      "same_guest_page_attempts": 2,
+      "initial_observer_attempt": "INFRA_FAILED",
+      "followup": "Only Observatory repeated on the same guest; public and Sessions evidence reused from the first attempt",
+      "observed_host_seconds": 180.0079998751171,
+      "api_responses": 18,
+      "page_responses": 13,
+      "independently_reviewed_screenshots": 9,
+      "evidence_zip_sha256": "1373b8b08fec6f85dcfb5b35ec11ae8e2d6fb38c113356cd1b0c985b7d8833ed"
+    },
+    "c6_pre_shared_irq": {
+      "status": "PARTIAL",
+      "portable_probes_passed": 5,
+      "original_honeypot_configuration": "PASS",
+      "original_honeypot_complete_application": "PARTIAL",
+      "nesso_original_scoped_cases": [
+        {
+          "case": "meshtastic",
+          "status": "PASS",
+          "observed_host_seconds": 45.431
+        },
+        {
+          "case": "bruce",
+          "status": "PASS",
+          "observed_host_seconds": 150.347
+        }
+      ],
+      "mesh_prior_B_change_expectation": "FAIL retained; separate original A-input path validated",
+      "later_shared_irq_runtime": "Historical 8df result; separate 80d validation recorded below"
+    },
+    "current_artifact_audit": "Read-only current catalog and fresh download hashes; no new guest execution",
+    "c6_final_v3_serial_api_and_pages": {
+      "status": "PASS",
+      "runtime_sha256": "80d92a6c6c68137a7813b8b7c519725aac350258078d9b244098eaabf82f63bf",
+      "source_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+      "new_guest_distinct_from_previous_180_second_window": true,
+      "observed_host_seconds": 90.01247145910747,
+      "browser_seconds": 14.602316125063226,
+      "api_responses": 18,
+      "page_responses": 13,
+      "independently_reviewed_screenshots": 9,
+      "evidence_zip_sha256": "3d8b5a2e15b34ce2de66c3da60010dbf205c8d3ccd33886926de6ff0f16fd751",
+      "cleanup_verified": true,
+      "complete_firmware_application": "PARTIAL",
+      "previous_window_ended_attempt": "INFRA_FAILED; no browser started; page result NOT RUN"
+    },
+    "c6_final_v3_affected_acceptance": {
+      "status": "PARTIAL",
+      "runtime_sha256": "80d92a6c6c68137a7813b8b7c519725aac350258078d9b244098eaabf82f63bf",
+      "source_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+      "originals": [
+        {
+          "case": "meshtastic",
+          "status": "PASS",
+          "observed_host_seconds": 150.382
+        },
+        {
+          "case": "bruce",
+          "status": "PASS",
+          "observed_host_seconds": 150.393
+        },
+        {
+          "case": "nanoc6-honeypot-final-v3",
+          "status": "PARTIAL",
+          "observed_host_seconds": 180.01130658295006
+        }
+      ],
+      "portable_probes": 5,
+      "checked_in_regressions": {
+        "nesso-peripherals": "PASS",
+        "nesso-lora": "PASS"
+      },
+      "scope": "Controller/pad, console and original UI/input/reset/sleep paths; not full wireless applications"
+    },
+    "historical_runtime_sha256": {
+      "xtensa": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+      "c6": "8df537142dd8e8231f7d201772176f6460fdbe46a80b812e7796d213373b8b8d"
+    },
+    "delivered_runtime_sha256": {
+      "xtensa": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+      "c6": "80d92a6c6c68137a7813b8b7c519725aac350258078d9b244098eaabf82f63bf"
+    },
+    "combined_native_ambient_matrix": {
+      "status": "PASS",
+      "cases": 69,
+      "attempts_per_case": 1,
+      "explicit_load_workers": 0,
+      "wall_seconds": 964.7,
+      "source_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+      "runtime_sha256": {
+        "xtensa": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+        "c6": "80d92a6c6c68137a7813b8b7c519725aac350258078d9b244098eaabf82f63bf"
+      },
+      "cleanup": "PASS",
+      "high_load_qualification": "NOT RUN"
+    },
+    "post_delivery": {
+      "status": "PASS",
+      "source_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+      "independent_first_post_cases": 9,
+      "reused_cloud_cases": 0,
+      "original_saved_snapshot_dryruns": 2,
+      "owned_sessions_cleaned": 11,
+      "retained_original_preflight": "INFRA_FAILED before queue or guest creation",
+      "retained_read_only_auditor_failures": 2,
+      "burner_submitted": false,
+      "evidence": "evidence/post-delivery-summary.json"
+    }
+  },
+  "checks": {
+    "local_platform_at_10c826": "PASS: 2177 tests run, 8 skipped, exit 0",
+    "initial_linux_ci_at_10c826": "FAIL: three GCC harness compilation diagnostics retained",
+    "linux_ci_at_bb9475": "PASS: run 43444553975 completed success",
+    "jiggler_two_bounded_adaptive_and_one_fixed": "PASS in the stated virtual-time windows",
+    "classic_four_input_paths": "PASS",
+    "c6_8df_controller_and_selected_originals": "PARTIAL with individually scoped PASS controls",
+    "serial_API_and_three_native_pages": "PASS",
+    "current_public_artifact_identity": "PASS: three downloaded artifacts match the earlier original hashes",
+    "0023_fresh_runtime_acceptance": "PASS for listed affected controller/UI/console paths; whole applications remain PARTIAL",
+    "final_69_case_matrix": "PASS: one ambient 69-case matrix, no retries; not high-load qualification",
+    "main_delivery": "PASS: exact 4a commit and main CI 43453074487 success",
+    "resident_delivery": "PASS: both authorized services on 5ce/80d; existing history/configuration preserved",
+    "post_delivery_acceptance": "PASS: nine independent first cases plus two original dry-runs and eleven cleaned sessions",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner_submission": "NOT RUN",
+    "final_v3_serial_API_and_three_pages": "PASS in a new original guest",
+    "local_platform_at_4a5d": "PASS: 2178 tests run, 8 skipped, 209.054 seconds",
+    "linux_ci_at_4a5d": "PASS: run 43446583704 completed success",
+    "linux_main_ci_at_4a5d": "PASS: run 43453074487 completed success",
+    "live_rollback": "NOT RUN",
+    "state_migration": "NOT RUN",
+    "pre_cutover_token_byte_equality": "NOT RUN: no prior content hash baseline",
+    "documentation_only_followup": "PASS: final main documentation commit differs from deployed 4a only in Markdown and JSON evidence; resident remains 4a"
+  },
+  "evidence": [
+    "evidence/jiggler-bounded-adaptive-summary.json",
+    "evidence/classic-input-regression-summary.json",
+    "evidence/serial-channel-ui-summary.json",
+    "evidence/c6-pre-shared-irq-runtime-summary.json",
+    "evidence/current-artifact-summary.json",
+    "evidence/host-and-ci-summary.json",
+    "evidence/runtime-pins-summary.json",
+    "evidence/serial-final-v3-ui-summary.json",
+    "evidence/host-and-ci-4a5d-summary.json",
+    "evidence/c6-final-v3-runtime-summary.json",
+    "evidence/mesh-exact-bin-button-summary.json",
+    "evidence/pre-delivery-gates-history.json",
+    "evidence/source-link-equivalence-summary.json",
+    "evidence/ambient-matrix-summary.json",
+    "evidence/post-delivery-summary.json",
+    "evidence/delivery-acceptance-summary.json",
+    "evidence/final-documentation-main-summary.json",
+    "evidence/source-evidence-manifest.json"
+  ],
+  "notes": [
+    "This is a private draft; no archive publication or external issue reply is claimed.",
+    "Later evidence must append a new runtime/source identity rather than relabel the 8df runs.",
+    "Raw screenshot, log, session, endpoint and configuration values remain omitted.",
+    "Native-service UI validation is distinct from browser-WASM execution.",
+    "One original-review preflight import failure and two read-only auditor errors remain separate from accepted guest results; this was not a failure-free end-to-end tooling execution.",
+    "Final main documentation commit does not relabel the executable service source or runtime identities."
+  ],
+  "record_status": "FINAL_VERIFIED"
+}

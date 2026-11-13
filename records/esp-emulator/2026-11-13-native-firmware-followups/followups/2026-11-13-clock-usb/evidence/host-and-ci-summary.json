@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "scope": "Host contracts and public CI only; not guest or deployment acceptance",
+  "local_platform": {
+    "status": "PASS",
+    "tests_run": 2177,
+    "skipped": 8,
+    "wall_seconds": 205.603,
+    "source_commit": "10c826b832b78c9bc42e9f788bd3e595584978ae",
+    "execution_type": "host contract suite",
+    "log_sha256": "7868725915fb3c009558ebf426902dadf771a8883f981342857d48e4a83ad57f"
+  },
+  "ci_history": [
+    {
+      "databaseId": 43442928989,
+      "headSha": "10c826b832b78c9bc42e9f788bd3e595584978ae",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43442928989",
+      "createdAt": "2026-11-13T14:27:46Z",
+      "updatedAt": "2026-11-13T14:31:04Z",
+      "observation_sha256": "decc28cd6af9af6b694259a89d504789ced0d98ca1a58a32b7c72dfe195077ee",
+      "jobs": [
+        {
+          "name": "platform-contracts",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "network-namespace-policy",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 43444553975,
+      "headSha": "bb9475b163b108bb807959628b5bb7cb0e65768f",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43444553975",
+      "createdAt": "2026-11-13T14:37:51Z",
+      "updatedAt": "2026-11-13T14:41:46Z",
+      "observation_sha256": "17767b6132348e33fe5b385bb70ad06528e792c8c21785af38eebb41d0360b7a",
+      "jobs": [
+        {
+          "name": "platform-contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "network-namespace-policy",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "repair": {
+    "original_commit": "69aac24140c5cdda8bdfc4b20552dea289fea740",
+    "integrated_commit": "b33fc45c436ce3cfdab2cfc34983d8a6b64304ba",
+    "diff_bytes_equal": true,
+    "diff_sha256": "809d07ea9b6577b55cbdf8b4cf726b67cf517c9fcf95d45c942e33ea3d8d07bc",
+    "changed_files": [
+      "platform/tests/test_c6_usb_host_timing_patch.py",
+      "platform/tests/test_c6_usb_serial_jtag_patch.py",
+      "platform/tests/test_c6_wifi_tsf_patch.py"
+    ],
+    "cause": "GCC misleading-indentation diagnostics in three generated C test harnesses",
+    "change": "Expand ambiguous single-line control flow; no native controller change"
+  },
+  "limits": [
+    "The first Linux CI failure is retained.",
+    "The local suite at 10c826 and successful Linux CI at bb9475 are different source identities.",
+    "Neither result grants acceptance to the later 0023 runtime or the final combined matrix."
+  ]
+}

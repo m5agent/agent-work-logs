@@ -45,3 +45,7 @@ I2C 因果对照的准确范围：只有 UserDemo 具有未修源码重建负控
 ## Publication readback
 
 [Documentation CI and nine issue replies](followups/2026-11-13-publication-readback/README.md) records the actual published comments and closure states.
+
+## 经典时钟与 C6 USB 后续
+
+[2026-11-13 固定运行时、联合回归和原版复验](followups/2026-11-13-clock-usb/README.md)追加最终 5ce/80d 运行时、69 项环境负载回归、main 与两服务交付、九条配对/编程和原版 MP3/2048 dry-run。JIGGLER 正常看门狗及 C6 输入/USB 子路径通过；旧失败和剩余完整应用/无线边界保留。

@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-13 | ESP Emulator | 经典时钟、C6 USB 与原版后续复验 | `PARTIAL`（69/69、9 条配对/编程和原版 MP3/2048 通过；其余固件及模型边界保留） | [查看](esp-emulator/2026-11-13-native-firmware-followups/followups/2026-11-13-clock-usb/) |
 | 2026-11-13 | ESP Emulator | 原生修复 main、回归与原版操作验收 | `PARTIAL`（138 次矩阵、9 条配对/编程、5 份方向及 MP3/2048 通过；剩余后端/应用范围开放） | [查看](esp-emulator/2026-11-13-native-firmware-followups/followups/2026-11-13-main-and-resident/) |
 | 2026-11-13 | M5GFX / Nesso N1 | 独立 I2C 触摸错误释放显示 SPI mutex | `PASS`（源码三组对照；原发布 BIN 仍 FAIL） | [查看](m5gfx/2026-11-13-nesso-independent-touch/followups/2026-11-13-upstream-pr/) |
 | 2026-11-13 | ESP Emulator | JIGGLER 蓝牙时钟初始化 | `PARTIAL`（原 BIN 复现，经典 ESP32 DPORT 缺口已定位） | [查看](esp-emulator/2026-11-13-jiggler-bt-low-power-clock/) |

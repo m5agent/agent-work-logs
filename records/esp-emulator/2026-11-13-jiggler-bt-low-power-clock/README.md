@@ -10,3 +10,7 @@
 - [诊断和复现方法](report.md)
 - [结构化运行记录](run.json)
 - [脱敏串口与采样摘要](evidence/virtual-startup-summary.json)
+
+## 后续验收
+
+[最终原版与主线交付证据](../2026-11-13-native-firmware-followups/followups/2026-11-13-clock-usb/README.md)已补默认和有界自适应的正常看门狗、实际按键及设置页验证。旧无界自适应失败、BLE HID 与物理验证边界保留。
