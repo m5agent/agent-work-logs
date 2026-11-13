@@ -42,3 +42,7 @@
 Honeypot 的 AP 关联与 HTTP、BLE HID 空中传输、物理时序和浏览器 WASM 不在通过范围内。现场回滚、状态迁移及部署前令牌字节相等性没有执行或没有基线；57 项隔离宿主控制不等于现场回滚。本记录保留各执行阶段的独立身份和结果。
 
 后续文档主线已更新到 [ffa621cdcf8422005b7fdf66afdee1be7c5fbba7](https://github.com/m5agent/m5stack-esp-emulator/commit/ffa621cdcf8422005b7fdf66afdee1be7c5fbba7)。从执行版本 4a 起只追加或更正文档与有界 JSON 证据，常驻服务仍固定在 4a；[差异核对](evidence/final-documentation-main-summary.json)没有把新文档 SHA 当作重新执行结果。
+
+## 发布回读
+
+最终文档 main 的 CI 已通过。工作记录首批 21 份文件已从公开固定提交逐字节回读；#225 已关闭，#216/#223 已补充新证据并保持开放，#188/#226 的既有 P4 边界继续开放。[发布、评论与状态回读](evidence/publication-readback-summary.json)记录完整提交和评论链接。
