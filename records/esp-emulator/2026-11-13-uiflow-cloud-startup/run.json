@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Original UIFlow2 cloud startup and pairing through the native device path",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "98287067eaf558576d1120f213d676630d66c2bd",
+    "snapshot_commit": "29a1372f1fade467721ec63a7a753407f990fc2e",
+    "final_commit": null,
+    "snapshot_status": "local candidate committed; main integration and publication pending",
+    "published_to_main": false,
+    "issue": null,
+    "pull_request": null,
+    "permalinks": {
+      "platform/tools/uiflow_cloud_startup.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/platform/tools/uiflow_cloud_startup.py",
+      "platform/tools/device_service.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/platform/tools/device_service.py",
+      "platform/tests/test_uiflow_cloud_startup.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/platform/tests/test_uiflow_cloud_startup.py",
+      "docs/evidence/2026-11-13-uiflow-cloud-startup/README.md": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/docs/evidence/2026-11-13-uiflow-cloud-startup/README.md",
+      "tests/firmware/esp32_efuse_identity/evidence-2026-11-13-core2.json": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/tests/firmware/esp32_efuse_identity/evidence-2026-11-13-core2.json"
+    },
+    "logical_commits": [
+      {
+        "commit": "d4a879c55b14871b5767103652e5d5f87f1b2f44",
+        "scope": "Core2 real eFuse drive attachment"
+      },
+      {
+        "commit": "29a1372f1fade467721ec63a7a753407f990fc2e",
+        "scope": "stock UIFlow2 cloud startup, frontend paths, contracts and evidence"
+      }
+    ]
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "scope": "No physical device, RF, electrical, power, optics, acoustics or hardware-security claims."
+  },
+  "firmware": {
+    "original_reference_images_modified": false,
+    "application_and_stock_boot_preserved": true,
+    "normalization": "trailing-ff-padding only",
+    "configuration": "isolated NVS overlay; typed u8 boot_option=1",
+    "identity_evidence": "evidence/validation-summary.json",
+    "devices": [
+      "cores3",
+      "sticks3",
+      "core2",
+      "atoms3r",
+      "stopwatch",
+      "cardputer-adv"
+    ]
+  },
+  "execution": {
+    "environment": "Native QEMU virtual devices through Device Service; actual browser frontend controls native guests. No browser-WASM networking claim.",
+    "validation": "virtual-device validation",
+    "snapshot_time_utc": "2026-11-13T03:19:22.321219+00:00",
+    "runtime_sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+    "raw_artifacts_published": false,
+    "burner_submission": "NOT RUN",
+    "delivery_followup": "NOT RUN; await separately recorded final delivery and repeated user path."
+  },
+  "checks": [
+    {
+      "name": "six_original_stock_cloud_api_paths",
+      "level": "device_response",
+      "status": "PASS",
+      "cases": 6,
+      "evidence": "evidence/validation-summary.json",
+      "acceptance": "actual MQTT access-code response plus manually confirmed official framebuffer; evidence before stop and lease release"
+    },
+    {
+      "name": "actual_browser_frontend_cloud_paths",
+      "level": "visual_or_physical",
+      "status": "PASS",
+      "cases": 2,
+      "devices": [
+        "cores3",
+        "sticks3"
+      ],
+      "evidence": "evidence/validation-summary.json"
+    },
+    {
+      "name": "local_programming_control",
+      "level": "data_behavior",
+      "status": "PASS",
+      "scope": "actual guest serial output and M5 drawing before final artifact-helper adjustment; programming path unchanged",
+      "evidence": "evidence/validation-summary.json"
+    },
+    {
+      "name": "initial_unpadded_reference_failures",
+      "level": "flash",
+      "status": "FAIL",
+      "cases": 3,
+      "retained": true,
+      "evidence": "evidence/validation-summary.json"
+    },
+    {
+      "name": "narrow_backend_contracts",
+      "status": "PASS",
+      "tests": 34,
+      "scope": "NVS, cloud startup, qemu-wifi, network execution and API inventory"
+    },
+    {
+      "name": "node_contracts",
+      "status": "PASS",
+      "elapsed_seconds": 13.107,
+      "source": "integration-owner result"
+    },
+    {
+      "name": "full_platform_suite",
+      "status": "NOT RUN",
+      "reason": "Final committed-source run pending; no inference from narrow checks."
+    },
+    {
+      "name": "pr_scope",
+      "status": "PASS",
+      "new_evidence_bytes": 36245,
+      "source": "integration-owner result"
+    },
+    {
+      "name": "diff_check",
+      "status": "PASS"
+    },
+    {
+      "name": "source_delivery",
+      "level": "delivery",
+      "status": "NOT RUN",
+      "reason": "Candidate commits exist; main merge/push not yet performed."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/validation-summary.json",
+      "sha256": "8a75448e647f55a7f4675247ebcdc90b72a69662e2855e3af067c93cc137be01",
+      "bytes": 30320,
+      "classification": "reviewed whitelist summary; no raw payload or identity values"
+    }
+  ],
+  "followups": [],
+  "notes": [
+    "Final source links are pinned to the local candidate commit and are not a claim that it has been published.",
+    "Full checks and delivery follow-up are intentionally pending.",
+    "Original baseline and initial failures remain in the immutable evidence summary.",
+    "No internal service topology, private endpoint, access code, device identity, session identifier or raw framebuffer is included."
+  ]
+}
