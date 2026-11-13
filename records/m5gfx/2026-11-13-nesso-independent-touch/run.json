@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Nesso independent I2C touch must not release display SPI mutex",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/216",
+    "repository": "https://github.com/m5stack/M5GFX",
+    "base_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "pins": "code/source-pins.json",
+    "candidate_commit": "7d3d0342b9453a78db14451575c40d8fe564b659"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "Functional acceptance used the matching modeled virtual device."
+  },
+  "firmware": {
+    "original_sha256": "58892afba6693f5316ace6610659e9386134b6ed714527713f0a820f35eb4e91",
+    "original_status": "FAIL",
+    "controls": "evidence/controls-summary.json",
+    "binaries_included": false
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device": "nesso-n1",
+    "runtime_sha256": "e4c9bb8de6dba1395ab22712ec8dce58d4c2f701799598d289e1ffb9d5b4e7ec",
+    "service_source_commit": "943373891a76fbc07d6d4a3dfc62ec2b38d1a20a",
+    "identifiers": "Omitted from public summaries; exact artifact hashes retained."
+  },
+  "checks": [
+    {
+      "name": "source build before and after",
+      "status": "PASS"
+    },
+    {
+      "name": "original release behavior",
+      "status": "FAIL"
+    },
+    {
+      "name": "real SPI owner and I2C touch path",
+      "status": "PASS"
+    },
+    {
+      "name": "three source controls after fix",
+      "status": "PASS"
+    },
+    {
+      "name": "full Launcher menu touch return settings",
+      "status": "PASS"
+    },
+    {
+      "name": "application partition byte identity and cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "physical hardware and RF",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "upstream delivery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "final ZIP runner fatal controls and accepted serial recheck",
+      "status": "PASS",
+      "details": "2 host unittest methods with 15 helper checks and 5 actual CLI late-fault controls; 4 accepted probe raw serial logs rechecked. No new guest execution."
+    }
+  ],
+  "evidence": [
+    {
+      "file": "README.md",
+      "bytes": 2304,
+      "sha256": "2a9fdd14737c4aa9c5bd3baf86a09648a175c3ffcce311ca0fe0f81852d043dc"
+    },
+    {
+      "file": "code/README.md",
+      "bytes": 6432,
+      "sha256": "ac4a956153e9027058f0cb4951ead2e978f2fe3b79351c03c95abe77b191b637"
+    },
+    {
+      "file": "code/evidence-summary.json",
+      "bytes": 21131,
+      "sha256": "767ac6872ea2f53a1ed4ce48122af54278bef7906ba15f3bb97d423751cc5cd5"
+    },
+    {
+      "file": "code/m5gfx-0.2.31.patch",
+      "bytes": 346,
+      "sha256": "3f524dd89011a2b022c84c919f287d658fbdd61ebc24472a277e0d5793f6dd97"
+    },
+    {
+      "file": "code/m5gfx-master.patch",
+      "bytes": 656,
+      "sha256": "1c205a0b4d69937525c6159a8a629dd0fb626fe5222414b48a82f05fb3290acd"
+    },
+    {
+      "file": "code/main.cpp",
+      "bytes": 2655,
+      "sha256": "2fe080a79f69afa1014b672d80248777ab8e081bad2b59fc74e5f4aa5418101c"
+    },
+    {
+      "file": "code/partitions.csv",
+      "bytes": 104,
+      "sha256": "4683856d7dfbfb273a9113511db2596d8fed3e28e46bbebc4eb7e6c3f5ae2e69"
+    },
+    {
+      "file": "code/prepare.py",
+      "bytes": 5883,
+      "sha256": "b961fd3bbafa02eb0b86b3b000f71a9fd195c3e187e7672304081d57c4f4126c"
+    },
+    {
+      "file": "code/run_probe.py",
+      "bytes": 8467,
+      "sha256": "f771ebb2599f7a5541d87f1f5fda29f5577e36d7e35a8243301ff8fe7c45e77e"
+    },
+    {
+      "file": "code/source-pins.json",
+      "bytes": 660,
+      "sha256": "ee36524c6bc300e83b50fcf80e85379aeff3fd9f929fb55b8f5d8d505ce40d89"
+    },
+    {
+      "file": "evidence/controls-summary.json",
+      "bytes": 21131,
+      "sha256": "767ac6872ea2f53a1ed4ce48122af54278bef7906ba15f3bb97d423751cc5cd5"
+    },
+    {
+      "file": "evidence/original-mutex-trace-summary.json",
+      "bytes": 15219,
+      "sha256": "554f0087d4cf3caa61a73cda244c95a2e91b0c0b06a00dc36a003fb036b4ea21"
+    },
+    {
+      "file": "report.md",
+      "bytes": 3640,
+      "sha256": "b7bfeecf6214b211e4a8bb24899600c5e91a21572f834a94358e36b225776edc"
+    }
+  ],
+  "notes": [
+    "Same-path functional results only; original release BIN is unchanged and remains FAIL.",
+    "No Burner submission.",
+    "Earlier invalid controls retained in the control summary."
+  ]
+}
