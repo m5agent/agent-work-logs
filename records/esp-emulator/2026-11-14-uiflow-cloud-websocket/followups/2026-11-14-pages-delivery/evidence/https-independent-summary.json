@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "scope": "Independent offline audit of two actual HTTPS CoreS3 examples and outer browser provenance",
+  "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+  "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+  "actual_https_subset": {
+    "cases": 2,
+    "checks": 83,
+    "rows": [
+      {
+        "example": "stock-reference",
+        "status": "PASS",
+        "checks": 49,
+        "report_sha256": "dc86150121a378c4d0e74774cdb89e05bc57e847d01f76fe59b55f603d821846",
+        "firmware_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+        "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "raw_snapshots": 6,
+        "raw_frame_hashes": 6,
+        "guest_lifecycles": 2,
+        "cold_input_events": 6,
+        "reopened_input_events": 2,
+        "actual_touch_pir_serial": true,
+        "no_local_service_requests": true,
+        "normal_worker_cleanup": true,
+        "child_browser_version": "NOT_RECORDED"
+      },
+      {
+        "example": "wallclock-candidate",
+        "status": "PASS",
+        "checks": 34,
+        "report_sha256": "48e5b3ec6442ec03c18c7772753b82460918c7bc14c6af5ef827d692c1f06e4d",
+        "firmware_sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+        "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "raw_snapshots": 4,
+        "raw_frame_hashes": 4,
+        "guest_lifecycles": 2,
+        "cold_input_events": 6,
+        "reopened_input_events": 0,
+        "actual_touch_pir_serial": true,
+        "no_local_service_requests": true,
+        "normal_worker_cleanup": true,
+        "child_browser_version": "NOT_RECORDED"
+      }
+    ]
+  },
+  "browser": {
+    "version": "157.0.8103.52",
+    "executable_sha256": "5441ca699b9eff7763f2f10765e2e8409a4b05f38917826b5247f6f6bb3b0c6b",
+    "before_after_identical": true,
+    "samples": 20,
+    "all_samples_match": true,
+    "child_versions_not_recorded": 2
+  },
+  "https_asset_readback": {
+    "rows": 2179,
+    "all_actual_bytes_match": true,
+    "retry_rows": 0,
+    "original_receipt_sha256": "fcfc1d2fa6e63fa0a5b1b5c3085c4134a5509b2a122fa47f6323eee8cd0a2b67"
+  },
+  "process_cleanup": {
+    "recorded_terminal": "PASS",
+    "current_stage_node_guest_count": 0,
+    "current_headless_desktop_chrome_count": 0
+  },
+  "evidence_sha256": {
+    "original_summary": "a66ce9ba0a48284f14f5be603cb655ffbf99d1345709d3b7dc7c2e506f7b963c",
+    "outer_qualification": "f1f9e80fb5091c2b0b579772e230edf1dda75ffdc4e7ae05919aa48aa515ad99",
+    "before": "6c3a9fef343db79d6e1ee6e0361c6d806bebf5eecb4c294e8f0e4e5a38135ab8",
+    "after": "6c3a9fef343db79d6e1ee6e0361c6d806bebf5eecb4c294e8f0e4e5a38135ab8",
+    "monitor": "786617774b776271d0c398e1b0ad603e94a89f6c0ad0f25c0011e4ee8d7dfd44",
+    "terminal_cleanup": "2694cad9ba8765a468a5d7c2df86790a836f38140be00c9f3249594c3301bd94",
+    "workflow": "557d254d1f457ee70ecab2d0660295eb5fea5a00bd11334a4f0ca5d0b3462a75",
+    "auditor": "c67b917ac9a0fe328dfe5a5dd5e8fcb91d938836b4043dab15636d2bb9ec7449"
+  },
+  "limits": [
+    "Two HTTPS examples only; historical hosted all-board FAIL/PARTIAL unchanged and full hosted gate NOT RERUN.",
+    "Original guest reports have no browser-version field; outer executable provenance remains separate.",
+    "Native C6 IRQ changes are not in unchanged WASM assets; native cloud PONG failure is not resolved by this test.",
+    "ROM/firmware identities are actual launch receipts; mutable Flash postrun readback NOT RUN.",
+    "No browser, guest, service API, network fetch or screenshot was performed by this audit."
+  ]
+}
