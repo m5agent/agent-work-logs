@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-browser-304-diagnostic-summary",
+  "status": "PARTIAL",
+  "diagnosis": "coi_worker_response_body_for_bodyless_status",
+  "real_guest_diagnostic": {
+    "validation": "virtual-device validation",
+    "lane": "browser-native-service",
+    "configured_observation_seconds": 30,
+    "fetch_failure_count": 910,
+    "http_error_response_count": 0,
+    "ui_error_status_events": 910,
+    "ui_error_banner_events": 1009,
+    "ui_acceptance": "FAIL",
+    "source_summary_sha256": "d811bc8534db3bae68a7c5ddfa57e39c410cf87d673f17e38e10e499d20e28e6"
+  },
+  "browser_control": {
+    "validation": "synthetic browser transport diagnostic",
+    "guest_validation": false,
+    "result_groups": [
+      {
+        "variant": "no_worker",
+        "policy_combinations": 4,
+        "initial_http_200_count": 4,
+        "conditional_http_304_count": 4,
+        "fetch_failure_count": 0
+      },
+      {
+        "variant": "upstream_worker",
+        "policy_combinations": 4,
+        "initial_http_200_count": 4,
+        "conditional_http_304_count": 0,
+        "fetch_failure_count": 4
+      },
+      {
+        "variant": "null_body_adapter",
+        "policy_combinations": 4,
+        "initial_http_200_count": 4,
+        "conditional_http_304_count": 4,
+        "fetch_failure_count": 0
+      }
+    ],
+    "source_initial_control_sha256": "aee45e140dbef617df14a88b3072e5cb3ecb7ce14a9383942694d546aa9de09f",
+    "source_adapter_control_sha256": "58a354cfbf8b89ec72757718a1e17390d6a64716b9fb58cd2040aba2c8c39663"
+  },
+  "interpretation": [
+    "The guest remained operational while the browser fetch/UI layer failed.",
+    "The upstream worker failed all four conditional-304 policy cases; bypass and null-body adapter controls each returned 304 in all four.",
+    "This supports a frontend response-construction defect, separate from the cloud control-PONG timeout."
+  ],
+  "fix_delivery": "PENDING",
+  "same_user_path_after_fix": "PASS_FOR_UI_ONLY",
+  "redaction": "Request paths, endpoints, browser identifiers, guest identities, screenshots and arbitrary exception strings are omitted.",
+  "followup_evidence": "browser-candidate-v2-redacted-summary.json"
+}

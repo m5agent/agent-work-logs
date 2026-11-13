@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-first-browser-review-summary",
+  "validation": "virtual-device validation",
+  "execution_lane": "browser-native-service",
+  "status": "PARTIAL",
+  "ui_acceptance": "PARTIAL",
+  "observation_seconds": 195,
+  "long_connection_stability": "FAIL",
+  "guest_evidence": "browser-first-guest-redacted-summary.json",
+  "guest_reference_sha256": "713f579c174e819c0fd1cdf774017dc6eaf82792d2566527aaf505fa21a4fb12",
+  "source_reviewed_summary_sha256": "e60a60d5f6e6863fca7ab503ee3897d638d1fa02c5e05ccbcea9e893c9819840",
+  "source_summary_is_pre_review_original": false,
+  "original_pre_review_file_sha256": null,
+  "private_page_screenshot_sha256": "a65fc0a47f7b1051e0830eb6841a472daa31e3470c4538c1e76660784c11d5da",
+  "private_page_screenshot_bytes": 319378,
+  "observed_ui_failures": {
+    "fetch_error_banner": true,
+    "runtime_badge_disagreed_with_live_guest": true
+  },
+  "guest_facts": {
+    "registration_observed": true,
+    "text_heartbeat_roundtrips_before_close_total": 7,
+    "control_ping_sent": 6,
+    "control_pong_received": 0,
+    "registration_disconnect_reconnect_observed": true,
+    "serial_control_pong_timeout_120s_count": 1,
+    "identity_rejection_count": 0
+  },
+  "review_corrections": [
+    "Initial UI acceptance missed a visible fetch-error banner and a mismatched runtime badge.",
+    "The initial regular expression missed the exact serial wording; API serial data equals ZIP serial.log and both contain one literal no-PONG marker.",
+    "The summary file was corrected before retaining a byte-for-byte pre-review copy; no original file hash is claimed."
+  ],
+  "pending": [
+    "corrected_ui_followup_execution",
+    "final_candidate_commit",
+    "main_delivery",
+    "resident_service_deployment"
+  ],
+  "redaction": "No screenshots, code values, identities, endpoints, session identifiers, or host paths are published.",
+  "review_receipts": {
+    "initial_reconstruction": {
+      "path": "browser-initial-verdict-reconstructed-summary.json",
+      "sha256": "f9100ac345faeea70fbc89c82f0ba0baf3304c41f517be46e1597ab5aaeecfbc"
+    },
+    "independent_correction": {
+      "path": "browser-review-correction-summary.json",
+      "sha256": "bc8231492a1b9b9781651a644054cc0cfa3c6a7cdbb4794494007c5a16fa796e"
+    }
+  }
+}

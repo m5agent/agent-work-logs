@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-uiflow-websocket-evidence-summary",
+  "case": "authorized-identity",
+  "validation": "virtual-device validation",
+  "guest_source_commit": "ffa621cdcf8422005b7fdf66afdee1be7c5fbba7",
+  "source_commit_provenance": "operator-supplied",
+  "observer_source_commit": null,
+  "observer_module_sha256": "c4fa57f403fb4750fbceddb1027fe0fbedba55ebb7a831f9c6e04079630926f1",
+  "firmware_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+  "normalized_firmware_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+  "runtime_sha256": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+  "evidence_zip": {
+    "sha256": "4d9b40bdab2b46ae87db00515ac09ba6f57c750bec329f007ad683b6073e03b1",
+    "bytes": 32820
+  },
+  "pcap": {
+    "sha256": "daf94a116ce40dea388f418268b678c14c755922ab4e08e93427c42b5398952b",
+    "bytes": 19191
+  },
+  "serial": {
+    "sha256": "0f95f0fa65e05cedd867ab4a8e74e7785cc4cd2ce6fabb1c682ca8a83b189f2c",
+    "bytes": 486,
+    "receive_error_count": 0,
+    "control_pong_timeout_120s_marker_count": 1,
+    "marker_definition": "control_pong_timeout_120s"
+  },
+  "observer_status": {
+    "source": "guest-pcap",
+    "state": "observed",
+    "pairing": {
+      "state": "code_received"
+    },
+    "webrepl": {
+      "state": "disconnected",
+      "reason": null,
+      "device_registered": true,
+      "handshakes": 1,
+      "disconnects": 1,
+      "heartbeat_roundtrips": 5,
+      "protocol_ping_sent": 4,
+      "protocol_pong_received": 0,
+      "protocol_ping_without_pong_count": 4
+    },
+    "observation": {
+      "status": "complete",
+      "reason": null,
+      "capture_bytes": 19191,
+      "packets": 208,
+      "tcp_streams": 4,
+      "unsupported_packets": 0,
+      "partial_tail": false,
+      "partial_stream": false,
+      "protocol_unknown": false
+    }
+  },
+  "protocol": {
+    "state": "observed",
+    "capture_duration_seconds": 153.09217,
+    "valid_handshakes": 1,
+    "error_counts": {},
+    "server_first_fin_count": 0,
+    "guest_first_fin_count": 1,
+    "text_roundtrips_before_close": 5,
+    "protocol_ping_sent": 4,
+    "protocol_pong_received": 0,
+    "connections": [
+      {
+        "ordinal": 1,
+        "handshake_valid": true,
+        "state": "disconnected",
+        "reason": null,
+        "device_registered_observed": true,
+        "first_close": {
+          "kind": "fin",
+          "initiator": "guest",
+          "capture_seconds": 153.046923,
+          "seconds_from_connection_start": 151.354205
+        },
+        "guest_text_ping_count": 6,
+        "server_text_pong_count": 6,
+        "text_roundtrips_before_close": 5,
+        "protocol_ping_sent": 4,
+        "protocol_pong_received": 0,
+        "protocol_ping_without_pong_count": 4,
+        "first_protocol_ping_seconds": 32.068177,
+        "first_close_after_first_protocol_ping_seconds": 120.978746
+      }
+    ]
+  },
+  "cleanup": {
+    "state": "stopped",
+    "flash_released": true
+  },
+  "limits": {
+    "zip_bytes": 67108864,
+    "capture_bytes": 8388608,
+    "serial_bytes": 8388608,
+    "directional_tcp_streams": 64,
+    "tcp_stream_bytes": 65536
+  },
+  "not_claimed": [
+    "account_binding_from_pairing_code",
+    "remote_repl_execution",
+    "physical_hardware",
+    "long_term_stability"
+  ],
+  "redaction": "No MAC, IP, endpoint, session, task, host path, pairing code, credential, device identifier, raw header or raw peer body is included."
+}

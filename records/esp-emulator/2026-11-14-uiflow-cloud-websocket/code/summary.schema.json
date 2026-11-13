@@ -1,0 +1,668 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Redacted UIFlow WebSocket evidence summary",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "enum": [
+        1
+      ]
+    },
+    "kind": {
+      "enum": [
+        "redacted-uiflow-websocket-evidence-summary"
+      ]
+    },
+    "case": {
+      "enum": [
+        "default-baseline",
+        "authorized-identity",
+        "candidate-default",
+        "candidate-authorized",
+        "follow-up"
+      ]
+    },
+    "validation": {
+      "enum": [
+        "virtual-device validation"
+      ]
+    },
+    "guest_source_commit": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_commit_provenance": {
+      "enum": [
+        "operator-supplied"
+      ]
+    },
+    "observer_source_commit": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observer_module_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "firmware_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "normalized_firmware_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "runtime_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence_zip": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        }
+      },
+      "required": [
+        "sha256",
+        "bytes"
+      ],
+      "additionalProperties": false
+    },
+    "pcap": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        }
+      },
+      "required": [
+        "sha256",
+        "bytes"
+      ],
+      "additionalProperties": false
+    },
+    "serial": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "receive_error_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "control_pong_timeout_120s_marker_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "marker_definition": {
+          "enum": [
+            "control_pong_timeout_120s"
+          ]
+        }
+      },
+      "required": [
+        "sha256",
+        "bytes",
+        "receive_error_count",
+        "control_pong_timeout_120s_marker_count",
+        "marker_definition"
+      ],
+      "additionalProperties": false
+    },
+    "observer_status": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "enum": [
+            "guest-pcap"
+          ]
+        },
+        "state": {
+          "enum": [
+            "observed",
+            "not_observed",
+            "unavailable"
+          ]
+        },
+        "pairing": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "enum": [
+                "code_received",
+                "not_observed"
+              ]
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        "webrepl": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "enum": [
+                "not_observed",
+                "identity_rejected",
+                "server_error",
+                "heartbeat_observed",
+                "handshake_observed",
+                "disconnected"
+              ]
+            },
+            "reason": {
+              "enum": [
+                null,
+                "mac_not_bound",
+                "mac_not_found",
+                "server_error"
+              ]
+            },
+            "device_registered": {
+              "type": "boolean"
+            },
+            "handshakes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "disconnects": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "heartbeat_roundtrips": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "protocol_ping_sent": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "protocol_pong_received": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "protocol_ping_without_pong_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            }
+          },
+          "required": [
+            "state",
+            "reason",
+            "device_registered",
+            "handshakes",
+            "disconnects",
+            "heartbeat_roundtrips",
+            "protocol_ping_sent",
+            "protocol_pong_received",
+            "protocol_ping_without_pong_count"
+          ],
+          "additionalProperties": false
+        },
+        "observation": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ]
+            },
+            "reason": {
+              "enum": [
+                null,
+                "stream_bytes_limit",
+                "stream_gap",
+                "stream_conflict",
+                "malformed_packet",
+                "fragmented_ip",
+                "malformed_pcap",
+                "unsupported_pcap",
+                "packet_limit",
+                "stream_limit",
+                "capture_partial_tail",
+                "http_bytes_limit",
+                "malformed_http",
+                "malformed_websocket",
+                "message_bytes_limit",
+                "protocol_partial",
+                "unsupported_websocket",
+                "unrecognized_message",
+                "malformed_mqtt",
+                "capture_bytes_limit",
+                "malformed_protocol",
+                "capture_unavailable"
+              ]
+            },
+            "capture_bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "packets": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "tcp_streams": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "unsupported_packets": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "partial_tail": {
+              "type": "boolean"
+            },
+            "partial_stream": {
+              "type": "boolean"
+            },
+            "protocol_unknown": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "status",
+            "reason",
+            "capture_bytes",
+            "packets",
+            "tcp_streams",
+            "unsupported_packets",
+            "partial_tail",
+            "partial_stream",
+            "protocol_unknown"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "source",
+        "state",
+        "pairing",
+        "webrepl",
+        "observation"
+      ],
+      "additionalProperties": false
+    },
+    "protocol": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "observed",
+            "not_observed",
+            "unavailable"
+          ]
+        },
+        "capture_duration_seconds": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "valid_handshakes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "error_counts": {
+          "type": "object",
+          "properties": {
+            "mac_not_bound": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "mac_not_found": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            },
+            "server_error": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 67108864
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "server_first_fin_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "guest_first_fin_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "text_roundtrips_before_close": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "protocol_ping_sent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "protocol_pong_received": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ordinal": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "handshake_valid": {
+                "enum": [
+                  true
+                ]
+              },
+              "state": {
+                "enum": [
+                  "not_observed",
+                  "identity_rejected",
+                  "server_error",
+                  "heartbeat_observed",
+                  "handshake_observed",
+                  "disconnected"
+                ]
+              },
+              "reason": {
+                "enum": [
+                  null,
+                  "mac_not_bound",
+                  "mac_not_found",
+                  "server_error"
+                ]
+              },
+              "device_registered_observed": {
+                "type": "boolean"
+              },
+              "first_close": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "fin",
+                          "rst"
+                        ]
+                      },
+                      "initiator": {
+                        "enum": [
+                          "guest",
+                          "server"
+                        ]
+                      },
+                      "capture_seconds": {
+                        "type": "number"
+                      },
+                      "seconds_from_connection_start": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "initiator",
+                      "capture_seconds",
+                      "seconds_from_connection_start"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "guest_text_ping_count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "server_text_pong_count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "text_roundtrips_before_close": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "protocol_ping_sent": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "protocol_pong_received": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "protocol_ping_without_pong_count": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 67108864
+              },
+              "first_protocol_ping_seconds": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "first_close_after_first_protocol_ping_seconds": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "ordinal",
+              "handshake_valid",
+              "state",
+              "reason",
+              "device_registered_observed",
+              "first_close",
+              "guest_text_ping_count",
+              "server_text_pong_count",
+              "text_roundtrips_before_close",
+              "protocol_ping_sent",
+              "protocol_pong_received",
+              "protocol_ping_without_pong_count",
+              "first_protocol_ping_seconds",
+              "first_close_after_first_protocol_ping_seconds"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 64
+        }
+      },
+      "required": [
+        "state",
+        "connections"
+      ],
+      "additionalProperties": false
+    },
+    "cleanup": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "stopped",
+            "not_verified"
+          ]
+        },
+        "flash_released": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "flash_released"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "zip_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "capture_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "serial_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "directional_tcp_streams": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "tcp_stream_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        }
+      },
+      "required": [
+        "zip_bytes",
+        "capture_bytes",
+        "serial_bytes",
+        "directional_tcp_streams",
+        "tcp_stream_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "not_claimed": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "account_binding_from_pairing_code",
+          "remote_repl_execution",
+          "physical_hardware",
+          "long_term_stability"
+        ]
+      },
+      "maxItems": 4,
+      "uniqueItems": true
+    },
+    "redaction": {
+      "type": "string",
+      "maxLength": 256
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "case",
+    "validation",
+    "guest_source_commit",
+    "source_commit_provenance",
+    "observer_source_commit",
+    "observer_module_sha256",
+    "firmware_sha256",
+    "normalized_firmware_sha256",
+    "runtime_sha256",
+    "evidence_zip",
+    "pcap",
+    "serial",
+    "observer_status",
+    "protocol",
+    "cleanup",
+    "limits",
+    "not_claimed",
+    "redaction"
+  ],
+  "additionalProperties": false
+}

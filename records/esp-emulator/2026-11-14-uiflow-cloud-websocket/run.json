@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "timezone": "UTC+08:00",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "UIFlow2 persistent identity, cloud observation and browser 304 handling",
+  "source": {
+    "issue": null,
+    "pull_request": null,
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "ffa621cdcf8422005b7fdf66afdee1be7c5fbba7",
+    "final_candidate_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "main_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "final_observer_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "candidate_url": "https://github.com/m5agent/m5stack-esp-emulator/commit/a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43468922515",
+    "candidate_ci_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43468277158"
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "CoreS3",
+    "original_bin_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+    "normalized_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+    "original_bin_published": false
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime_sha256": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+    "executions": [
+      {
+        "label": "default-baseline",
+        "duration_seconds": 67.98277,
+        "status": "FAIL",
+        "scope": "WebREPL readiness",
+        "evidence": "evidence/default-baseline-redacted-summary.json"
+      },
+      {
+        "label": "authorized-identity",
+        "duration_seconds": 153.09217,
+        "status": "FAIL",
+        "scope": "sustained WebREPL connectivity",
+        "evidence": "evidence/authorized-identity-redacted-summary.json"
+      },
+      {
+        "label": "host-control-diagnostic",
+        "validation": "host-only diagnostic",
+        "configured_window_seconds": 12,
+        "status": "PARTIAL",
+        "evidence": "evidence/host-control-ping-redacted-summary.json"
+      }
+    ],
+    "follow_up_executions": [
+      {
+        "label": "persistent-identity-three-boots",
+        "status": "PASS",
+        "scope": "identity consistency and active duplicate admission only",
+        "source_commit": null,
+        "evidence": "evidence/persistent-identity-redacted-summary.json"
+      },
+      {
+        "label": "first-browser-native-service",
+        "status": "PARTIAL",
+        "scope": "guest behavior observed; visible UI errors prevent overall PASS",
+        "source_commit": null,
+        "evidence": "evidence/browser-first-review-redacted-summary.json"
+      },
+      {
+        "label": "host-control-accept-followup",
+        "validation": "host-only diagnostic",
+        "status": "PARTIAL",
+        "configured_window_seconds": 12,
+        "evidence": "evidence/host-control-ping-v2-redacted-summary.json"
+      },
+      {
+        "label": "core2-persistent-identity",
+        "status": "PASS",
+        "scope": "MQTT/eFuse identity and pairing-code receipt only; WS not observed",
+        "original_firmware_sha256": "57868df3d1bb0cbd03fdca3eac0db8a9c6578a70195e4479822147b29ef691ae",
+        "evidence": "evidence/core2-persistent-identity-redacted-summary.json"
+      },
+      {
+        "label": "browser-304-diagnostic",
+        "status": "PARTIAL",
+        "scope": "Historical browser failure plus synthetic transport controls; subsequent fixed user path recorded separately.",
+        "evidence": "evidence/browser-304-diagnostic-redacted-summary.json"
+      },
+      {
+        "label": "browser-candidate-v2",
+        "status": "PARTIAL",
+        "ui_acceptance": "PASS",
+        "long_connection_stability": "FAIL",
+        "source_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+        "evidence": "evidence/browser-candidate-v2-redacted-summary.json"
+      },
+      {
+        "label": "postdelivery-browser-native-service",
+        "status": "PARTIAL",
+        "ui_acceptance": "PASS",
+        "long_connection_stability": "FAIL",
+        "source_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+        "observation_seconds": 195,
+        "evidence": "evidence/browser-postdelivery-redacted-summary.json"
+      }
+    ],
+    "identity_values": "redacted",
+    "session_identifiers": "omitted",
+    "cleanup": "All completed owned guest runs stopped and Flash released; final browser, lease and process cleanup verified separately."
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "claim": "Real MQTT reply and valid guest WebSocket upgrades observed."
+    },
+    {
+      "layer": "device_response",
+      "status": "PARTIAL",
+      "claim": "Default identity rejected; authorized identity received matching registration response."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "FAIL",
+      "claim": "Authorized guest eventually closed after control PONG timeout; not a sustained-connectivity PASS."
+    },
+    {
+      "layer": "observer_unit_validation",
+      "status": "PASS",
+      "tests": 24,
+      "claim": "Bounded parsing, error enums, redaction, fragments and failure cases."
+    },
+    {
+      "layer": "observer_capture_validation",
+      "status": "PASS",
+      "captures": 10,
+      "claim": "Offline parser classified existing same-session guest captures."
+    },
+    {
+      "layer": "identity_persistence",
+      "status": "PASS",
+      "guest_executions": 3,
+      "claim": "Identity persisted across sequential guest starts and one service restart."
+    },
+    {
+      "layer": "active_identity_admission",
+      "status": "PASS",
+      "rejected_conflicts": 2,
+      "claim": "Active duplicate identity attempts returned 409; setup limitations preserved."
+    },
+    {
+      "layer": "final_candidate_integration",
+      "status": "PASS",
+      "state": "CANDIDATE_VALIDATED",
+      "claim": "Independent 195-second candidate browser UI run passed; cloud sustained connection remains FAIL."
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "state": "MAIN_AND_CI_VERIFIED",
+      "claim": "Fixed commit merged to main; corresponding CI succeeded. Functional results are separate."
+    },
+    {
+      "layer": "postdelivery_functional_validation",
+      "status": "PASS",
+      "state": "COMPLETED_LIMITED_SCOPE",
+      "claim": "34 checks in a separate 195-second original-firmware browser/native run passed; sustained cloud connectivity remains FAIL.",
+      "evidence": "evidence/browser-postdelivery-redacted-summary.json"
+    },
+    {
+      "layer": "browser_validation",
+      "status": "PASS",
+      "state": "CANDIDATE_AND_POSTDELIVERY_VALIDATED",
+      "claim": "Separate candidate and postdelivery 195-second UI runs passed; sustained cloud connectivity remains FAIL."
+    },
+    {
+      "layer": "remote_repl_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "classic_chip_identity",
+      "status": "PASS",
+      "claim": "Core2 real guest MQTT identity matches eFuse and receives code; WS not observed."
+    },
+    {
+      "layer": "browser_304_control",
+      "status": "PASS",
+      "scope": "diagnostic only",
+      "claim": "Controlled upstream-worker failures and adapter successes; independent real candidate guest/browser validation also passed."
+    },
+    {
+      "layer": "full_python",
+      "status": "PASS",
+      "tests": 2217,
+      "skipped": 8
+    },
+    {
+      "layer": "docs_contracts",
+      "status": "PASS",
+      "tests": 50
+    },
+    {
+      "layer": "node_contracts",
+      "status": "PASS"
+    },
+    {
+      "layer": "source_pin_readback",
+      "status": "PASS",
+      "files": 8,
+      "commit": "a5990e720a8c79310456bf5868141f4cfd50afe8"
+    },
+    {
+      "layer": "candidate_independent_visual_review",
+      "status": "PASS",
+      "evidence": "evidence/candidate-ui-independent-visual-summary.json"
+    }
+  ],
+  "delivery": {
+    "draft": false,
+    "main_merge": "PASS",
+    "hosted_pages": "PENDING",
+    "burner_submission": "NOT RUN",
+    "candidate_branch": "PUSHED",
+    "ci": "PASS",
+    "source_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "postdelivery_functional_validation": "PASS_LIMITED_SCOPE",
+    "cloud_sustained_connectivity": "FAIL"
+  },
+  "evidence": [
+    {
+      "path": "evidence/authorized-identity-redacted-summary.json",
+      "sha256": "1e03fec5c34f590d66fc95c82ecfca189379065d061885f28ded44450a7827ab",
+      "bytes": 3477,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-304-diagnostic-redacted-summary.json",
+      "sha256": "0b0b2b8f9f70acfcdd8f7636c799a7bba940611f48d48c66992a87e12cdfb6cf",
+      "bytes": 2186,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-candidate-v2-guest-redacted-summary.json",
+      "sha256": "acd11b66d057900d213dbd6a7ed8a83df938015989619866e8bbd2cceaf67c7f",
+      "bytes": 4039,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-candidate-v2-redacted-summary.json",
+      "sha256": "d1f22c967938a963e636ded1c58de3bbcef225e360892b1885516c18c882a0df",
+      "bytes": 5735,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-failure-history-redacted-summary.json",
+      "sha256": "dece0a23139a4720ff4fdfcfc6d4da8fa34b3083a6eb5d25c32e90e1e70479cd",
+      "bytes": 3067,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-first-guest-redacted-summary.json",
+      "sha256": "713f579c174e819c0fd1cdf774017dc6eaf82792d2566527aaf505fa21a4fb12",
+      "bytes": 4001,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-first-review-redacted-summary.json",
+      "sha256": "f47ed0c36f425c2adc601413aabefdbfe4e79f13407769d0e03ccb1842a60371",
+      "bytes": 2287,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-initial-verdict-reconstructed-summary.json",
+      "sha256": "f9100ac345faeea70fbc89c82f0ba0baf3304c41f517be46e1597ab5aaeecfbc",
+      "bytes": 480,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-postdelivery-guest-redacted-summary.json",
+      "sha256": "07fd328925ecf5cf82c99415cc741b2857f50c3f63a88e7cd15d40f689998cd8",
+      "bytes": 4066,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-postdelivery-postcheck-redacted-summary.json",
+      "sha256": "d6a2310c543f0ac7ce691753d215f57563146627ccc5f9779394f2af8c7e5b61",
+      "bytes": 1136,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-postdelivery-redacted-summary.json",
+      "sha256": "776b5948f0e43c0c414dbe7341d490bab03b733fb4f8b1ddbd0c654dce25f16b",
+      "bytes": 6024,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/browser-review-correction-summary.json",
+      "sha256": "bc8231492a1b9b9781651a644054cc0cfa3c6a7cdbb4794494007c5a16fa796e",
+      "bytes": 581,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/candidate-ui-independent-visual-summary.json",
+      "sha256": "15c4f8c396cb52b682500cb3c05642fde23f99397a7d14d0a3cba1964dbe1492",
+      "bytes": 482,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/coi-final-browser-controls-redacted-summary.json",
+      "sha256": "a6b175a5af379bc5e41361cfa5fe5aebd0579d949dfe4e110d5f2b0ee6d536be",
+      "bytes": 4763,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/core2-persistent-identity-redacted-summary.json",
+      "sha256": "8e672245395b6806cb8f8d948bf69ca88178ac27b7c617b154834f0b479a098f",
+      "bytes": 979,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/default-baseline-redacted-summary.json",
+      "sha256": "6eaffca9b82bef1dea437a0ed64b8dbe530f4eaac456846c0ed3f90401057f3d",
+      "bytes": 17186,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/diagnostic-redacted-summary.json",
+      "sha256": "a5f7d3958390a5b54daef21e1f351809634b9dab17ad5c0072abe83a09b75660",
+      "bytes": 5209,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/draft-validation-summary.json",
+      "sha256": "48f93c2c8db276cb51c9dddce309aef309435e2935bf368a13d0e37f916dd58f",
+      "bytes": 2460,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-host-validation-summary.json",
+      "sha256": "11e0821b9edc4e881449a5ce3de1c68e65476f699ab5a28f13214c9e18216391",
+      "bytes": 1899,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/host-control-ping-redacted-summary.json",
+      "sha256": "be6b36a48347fe1284124764652107be5d7317be7784b4320e6d84d6bfe389c2",
+      "bytes": 1177,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/host-control-ping-v2-redacted-summary.json",
+      "sha256": "b621d8fd59ecbfc8d638660aad3f9026ce1bf7dd80f2a3326736e6f0541a33ce",
+      "bytes": 1379,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/observer-ten-captures-redacted-summary.json",
+      "sha256": "85ccc82b4c1337611f25301e9d274fd5ea111a281c2b675451693dc037bafe3c",
+      "bytes": 10191,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/persistent-after-restart-redacted-summary.json",
+      "sha256": "5a8105d5c8e13b05b0676d6fc9738283db6db3c90e00d86dd710080d347f7aa3",
+      "bytes": 9187,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/persistent-first-redacted-summary.json",
+      "sha256": "e51a4dd2ff24edfde1b3d42a90a0dd3d15f2d37b66a4df7aafca5675e64698db",
+      "bytes": 9961,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/persistent-identity-redacted-summary.json",
+      "sha256": "019b929f5250532f245766d10689516bfe4c3f24ca0259b80e5f7a1d686ed60c",
+      "bytes": 4931,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/persistent-second-redacted-summary.json",
+      "sha256": "b7aa83a4cb0af777f9b94e791c013b62f3bfd5c5bdc901ed2636cd944783d3c3",
+      "bytes": 6995,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/source-delivery-redacted-summary.json",
+      "sha256": "8c0ed155b33aeb8a1d5d1a3987e0d0a71fce215377ce2cf0adb776395a9280f7",
+      "bytes": 1064,
+      "classification": "redacted-derived-summary"
+    }
+  ],
+  "notes": [
+    "Pairing-code receipt does not establish account binding.",
+    "Five text heartbeat roundtrips completed before guest FIN; the sixth text PONG arrived after FIN and is excluded from live success count.",
+    "One exact 120-second control-PONG timeout serial marker was observed.",
+    "Host-only diagnostic is not guest or physical-hardware validation.",
+    "Original BIN, ZIP, full serial, screenshots, code values, unique identities and endpoints remain private.",
+    "Final source and main are pinned; postdelivery functional evidence is separate; Pages remains pending. Reference failures are retained.",
+    "The first browser summary was corrected before an original byte-for-byte backup; preserve reconstructed stdout receipt and separate correction evidence without inventing an original hash.",
+    "Independent recheck confirms API serial data equals ZIP serial.log; the first browser verdict missed the marker because its regular expression did not match the actual wording."
+  ],
+  "reproduction": {
+    "script": "code/summarize_private_evidence.py",
+    "script_sha256": "47c42d27bbc9df38c7575b0494c0dd11c95466fdef026996c1eae19925417f58",
+    "schema": "code/summary.schema.json",
+    "schema_sha256": "6631cb34494e14557f89863a85547aa7369994d241333e272eeace40abd63787"
+  }
+}
