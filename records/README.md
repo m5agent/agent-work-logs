@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-13 | ESP Emulator | 社区固件 #216–#224 修复与原版复测 | `PARTIAL`（五项限定修复/验证；C6/StackChan开放，最终矩阵待补） | [查看](esp-emulator/2026-11-13-community-firmware-issues/) |
 | 2026-11-12 | M5Stack Web Design | 官网源码驱动的 Skill 升级 | `PARTIAL`（三份浏览器示例及发布回读通过，轻量模型仍重建列表行） | [查看](m5stack-web-design/2026-11-12-source-guided-skill-upgrade/) |
 | 2026-11-11 | Firmware Review Service | Cardputer ADV 固件复审与 60 秒运行观察 | `PARTIAL`（门槛与 EMBER 对照通过，LukewarmCard 应用界面未验证） | [查看](firmware-review-service/2026-11-11-virtual-observation/) |
 | 2026-11-09 | ESP Emulator | 23 板正式 Pages 发布 | `PARTIAL`（下载恢复，托管门禁未通过） | [查看](esp-emulator/2026-11-09-pages-23-board-rollout/) |

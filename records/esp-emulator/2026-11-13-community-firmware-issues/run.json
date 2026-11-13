@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Community firmware issue repair and original-image validation",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "676ae67c67941b976be799782ef4af40827b666d",
+    "snapshot_commit": "cf232dbcc93adacab224d6d2fce44c1f55ed0894",
+    "final_commit": null,
+    "issues": [
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/216",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/217",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/218",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/219",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/220",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/221",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/222",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/223",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/224"
+    ],
+    "pending_final_commit_replacement": true
+  },
+  "hardware": {
+    "validation": "NOT RUN",
+    "scope": "No physical devices, RF, power, optics, acoustics, electrical or physical memory-timing claims."
+  },
+  "firmware": {
+    "original_public_images_modified": false,
+    "diagnostic_fixtures_separate": true,
+    "identity_evidence": [
+      "evidence/issue216-c6-aes-summary.json",
+      "evidence/issue217-cache-atomic-summary.json",
+      "evidence/issue218-poweroff-summary.json",
+      "evidence/issue219-atoms3-display-summary.json",
+      "evidence/issue220-papercolor-usb-summary.json",
+      "evidence/issue223-i2c-lifetime-summary.json",
+      "evidence/issue224-efuse-identity-summary.json",
+      "evidence/issue224-integrated-identity-summary.json",
+      "evidence/issue224-board-comparison-summary.json",
+      "evidence/integration-summary.json"
+    ]
+  },
+  "execution": {
+    "environment": "Native QEMU virtual devices through dedicated Device Service sessions; same-controller regression fixtures; no browser-WASM execution.",
+    "task_id": "redacted",
+    "session_id": "redacted; hashes retained where present in curated summaries",
+    "snapshot_time_utc": "2026-11-13T02:11:21.856737+00:00",
+    "final_integration_status": "PARTIAL; final native68/platform result and issues221/222 pending",
+    "raw_artifacts_published": false,
+    "burner_submission": "NOT RUN; not authorized for this batch"
+  },
+  "checks": [
+    {
+      "issue": 216,
+      "status": "PARTIAL",
+      "disposition": "OPEN",
+      "scope": "C6 AES/GDMA/IRQ fixed; original Bruce reaches LittleFS error page; Launcher/Meshtastic/RFID failures remain.",
+      "evidence": "evidence/issue216-c6-aes-summary.json"
+    },
+    {
+      "issue": 217,
+      "status": "PASS",
+      "disposition": "FIXED_WITH_LIMITS",
+      "scope": "Cross-vCPU TLB flush host crash fixed; original PaperColor survives 300.74 seconds with guest assertion/reboots still present.",
+      "evidence": "evidence/issue217-cache-atomic-summary.json"
+    },
+    {
+      "issue": 218,
+      "status": "PASS",
+      "disposition": "FIXED_WITH_LIMITS",
+      "scope": "Guest poweroff classified from QMP shutdown event/state; final frame retained, application readiness not inferred.",
+      "evidence": "evidence/issue218-poweroff-summary.json"
+    },
+    {
+      "issue": 219,
+      "status": "PASS",
+      "disposition": "FIXED_WITH_LIMITS",
+      "scope": "Original AtomS3 Snake/UserDemo display and 120-second observation; bounded sensor-input visible response, not directional gameplay proof.",
+      "evidence": "evidence/issue219-atoms3-display-summary.json"
+    },
+    {
+      "issue": 220,
+      "status": "PASS",
+      "disposition": "VALIDATED_WITH_LIMITS",
+      "scope": "Original PaperColor USB MSC EP0 enumeration and class control transfer; bulk storage and application stability excluded.",
+      "evidence": "evidence/issue220-papercolor-usb-summary.json"
+    },
+    {
+      "issue": 221,
+      "status": "PARTIAL",
+      "disposition": "PENDING_FINAL_RESULT",
+      "scope": "Original classic Atom factory watchdog repair/validation remains pending.",
+      "evidence": "evidence/pending-final-results-summary.json"
+    },
+    {
+      "issue": 222,
+      "status": "PARTIAL",
+      "disposition": "PENDING_FINAL_RESULT",
+      "scope": "Core2 original UIFlow/HamRadio black-frame attribution and board comparison remain pending.",
+      "evidence": "evidence/pending-final-results-summary.json"
+    },
+    {
+      "issue": 223,
+      "status": "PARTIAL",
+      "disposition": "OPEN",
+      "scope": "I2C buffer lifetime race isolated; diagnostic SDK 30000-read control passes, original UserDemo/GPT still fail.",
+      "evidence": "evidence/issue223-i2c-lifetime-summary.json"
+    },
+    {
+      "issue": 224,
+      "status": "PASS",
+      "disposition": "FIXED_WITH_LIMITS",
+      "scope": "Classic eFuse byte order/CRC and explicit metadata verified; unconnected eFuse remains unprovisioned; no app-ready/NVS claim.",
+      "evidence": "evidence/issue224-integrated-identity-summary.json"
+    },
+    {
+      "name": "final_native_68_case_matrix",
+      "status": "PARTIAL",
+      "result": "PENDING_FINAL_RESULT",
+      "evidence": "evidence/pending-final-results-summary.json"
+    },
+    {
+      "name": "final_platform_suite",
+      "status": "PARTIAL",
+      "result": "PENDING_FINAL_RESULT",
+      "evidence": "evidence/pending-final-results-summary.json"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "browser_wasm",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "archive_preparation_validation",
+      "status": "PASS",
+      "evidence": "evidence/archive-validation-summary.json",
+      "limits": "Repeat after filling pending final results."
+    }
+  ],
+  "evidence": [
+    "evidence/issue216-c6-aes-summary.json",
+    "evidence/issue217-cache-atomic-summary.json",
+    "evidence/issue218-poweroff-summary.json",
+    "evidence/issue219-atoms3-display-summary.json",
+    "evidence/issue220-papercolor-usb-summary.json",
+    "evidence/issue223-i2c-lifetime-summary.json",
+    "evidence/issue224-efuse-identity-summary.json",
+    "evidence/issue224-integrated-identity-summary.json",
+    "evidence/issue224-board-comparison-summary.json",
+    "evidence/integration-summary.json",
+    "evidence/provenance-summary.json",
+    "evidence/pending-final-results-summary.json",
+    "evidence/archive-validation-summary.json"
+  ],
+  "notes": [
+    "PASS is limited to the stated repair/protocol layer; batch remains PARTIAL.",
+    "First failing controls and rejected runtime candidates remain visible.",
+    "No original BIN was patched to obtain the SDK diagnostic positive control.",
+    "Archive is a local preparation, not a delivery/push assertion."
+  ]
+}
