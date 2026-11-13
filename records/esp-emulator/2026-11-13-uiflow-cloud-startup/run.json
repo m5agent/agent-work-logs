@@ -2,23 +2,23 @@
   "schema_version": 1,
   "date": "2026-11-13",
   "kind": "code_change",
-  "overall_status": "PARTIAL",
+  "overall_status": "PASS",
   "title": "Original UIFlow2 cloud startup and pairing through the native device path",
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "98287067eaf558576d1120f213d676630d66c2bd",
     "snapshot_commit": "29a1372f1fade467721ec63a7a753407f990fc2e",
-    "final_commit": null,
-    "snapshot_status": "local candidate committed; main integration and publication pending",
-    "published_to_main": false,
+    "final_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+    "snapshot_status": "Initial candidate snapshot retained; final commit published to main and remote ref read back.",
+    "published_to_main": true,
     "issue": null,
     "pull_request": null,
     "permalinks": {
-      "platform/tools/uiflow_cloud_startup.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/platform/tools/uiflow_cloud_startup.py",
-      "platform/tools/device_service.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/platform/tools/device_service.py",
-      "platform/tests/test_uiflow_cloud_startup.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/platform/tests/test_uiflow_cloud_startup.py",
-      "docs/evidence/2026-11-13-uiflow-cloud-startup/README.md": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/docs/evidence/2026-11-13-uiflow-cloud-startup/README.md",
-      "tests/firmware/esp32_efuse_identity/evidence-2026-11-13-core2.json": "https://github.com/m5agent/m5stack-esp-emulator/blob/29a1372f1fade467721ec63a7a753407f990fc2e/tests/firmware/esp32_efuse_identity/evidence-2026-11-13-core2.json"
+      "platform/tools/uiflow_cloud_startup.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/8598b1f603ae6638a3f6d27824431781429b9e49/platform/tools/uiflow_cloud_startup.py",
+      "platform/tools/device_service.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/8598b1f603ae6638a3f6d27824431781429b9e49/platform/tools/device_service.py",
+      "platform/tests/test_uiflow_cloud_startup.py": "https://github.com/m5agent/m5stack-esp-emulator/blob/8598b1f603ae6638a3f6d27824431781429b9e49/platform/tests/test_uiflow_cloud_startup.py",
+      "docs/evidence/2026-11-13-uiflow-cloud-startup/README.md": "https://github.com/m5agent/m5stack-esp-emulator/blob/8598b1f603ae6638a3f6d27824431781429b9e49/docs/evidence/2026-11-13-uiflow-cloud-startup/README.md",
+      "tests/firmware/esp32_efuse_identity/evidence-2026-11-13-core2.json": "https://github.com/m5agent/m5stack-esp-emulator/blob/8598b1f603ae6638a3f6d27824431781429b9e49/tests/firmware/esp32_efuse_identity/evidence-2026-11-13-core2.json"
     },
     "logical_commits": [
       {
@@ -28,8 +28,13 @@
       {
         "commit": "29a1372f1fade467721ec63a7a753407f990fc2e",
         "scope": "stock UIFlow2 cloud startup, frontend paths, contracts and evidence"
+      },
+      {
+        "commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+        "scope": "documentation review date alignment after the retained contract failure"
       }
-    ]
+    ],
+    "main_commit": "8598b1f603ae6638a3f6d27824431781429b9e49"
   },
   "hardware": {
     "status": "NOT RUN",
@@ -57,7 +62,8 @@
     "runtime_sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
     "raw_artifacts_published": false,
     "burner_submission": "NOT RUN",
-    "delivery_followup": "NOT RUN; await separately recorded final delivery and repeated user path."
+    "delivery_followup": "PASS; followups/2026-11-13-published-source-paths/run.json",
+    "final_source_checks_completed_at_utc": "2026-11-13T03:30:15.573770+00:00"
   },
   "checks": [
     {
@@ -104,18 +110,28 @@
       "name": "node_contracts",
       "status": "PASS",
       "elapsed_seconds": 13.107,
-      "source": "integration-owner result"
+      "source": "recorded host contract execution; source inputs unchanged by final documentation-only commit",
+      "evidence": "evidence/source-checks-summary.json"
     },
     {
       "name": "full_platform_suite",
-      "status": "NOT RUN",
-      "reason": "Final committed-source run pending; no inference from narrow checks."
+      "status": "PASS",
+      "tests_run": 2098,
+      "passed": 2097,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 298.129,
+      "source_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "evidence": "evidence/source-checks-summary.json"
     },
     {
       "name": "pr_scope",
       "status": "PASS",
       "new_evidence_bytes": 36245,
-      "source": "integration-owner result"
+      "source": "independent fixed-base and fixed-head rerun",
+      "source_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "evidence": "evidence/source-checks-summary.json"
     },
     {
       "name": "diff_check",
@@ -124,8 +140,49 @@
     {
       "name": "source_delivery",
       "level": "delivery",
-      "status": "NOT RUN",
-      "reason": "Candidate commits exist; main merge/push not yet performed."
+      "status": "PASS",
+      "commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "published_to_main": true,
+      "remote_main_readback": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "evidence": "evidence/source-checks-summary.json"
+    },
+    {
+      "name": "affected_validators",
+      "status": "PASS",
+      "checks": 4,
+      "names": [
+        "runtime_coverage",
+        "peripheral_catalog",
+        "qemu_profiles",
+        "project_snapshot"
+      ],
+      "evidence": "evidence/source-checks-summary.json"
+    },
+    {
+      "name": "retained_source_check_failures",
+      "status": "FAIL",
+      "historical": true,
+      "executions": 2,
+      "evidence": [
+        "evidence/first-platform-check-failure-summary.json",
+        "evidence/platform-doc-date-failure-summary.json"
+      ],
+      "superseded_by": "evidence/source-checks-summary.json"
+    },
+    {
+      "name": "published_original_user_paths",
+      "level": "delivery",
+      "status": "PASS",
+      "cloud_executions": 8,
+      "local_programming_executions": 1,
+      "evidence": "followups/2026-11-13-published-source-paths/evidence/validation-summary.json"
+    },
+    {
+      "name": "public_ci",
+      "status": "PASS",
+      "jobs": 2,
+      "source_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "evidence": "evidence/ci-summary.json"
     }
   ],
   "evidence": [
@@ -134,13 +191,59 @@
       "sha256": "8a75448e647f55a7f4675247ebcdc90b72a69662e2855e3af067c93cc137be01",
       "bytes": 30320,
       "classification": "reviewed whitelist summary; no raw payload or identity values"
+    },
+    {
+      "path": "evidence/source-checks-summary.json",
+      "sha256": "1fcf6d52742005e30cc7174467246387f63f0c7069988c6ffa8a10b60b044f8e",
+      "bytes": 5051,
+      "classification": "redacted aggregate summary; raw host logs not published"
+    },
+    {
+      "path": "evidence/first-platform-check-failure-summary.json",
+      "sha256": "13c101b0d374e8d73ef231effe558d1a6ed6a82e3de1c9958b065cca85204710",
+      "bytes": 1137,
+      "classification": "redacted aggregate summary; raw host logs not published"
+    },
+    {
+      "path": "evidence/platform-doc-date-failure-summary.json",
+      "sha256": "7f0c3ab85550e4726244554d604800a5014fd8b1a8df470721c502756ec0f6ff",
+      "bytes": 1307,
+      "classification": "redacted aggregate summary; raw host logs not published"
+    },
+    {
+      "path": "evidence/ci-summary.json",
+      "sha256": "174dd385f2f627440ee33d7152298544df8f4b4ff3a50a731e2aca0128284d43",
+      "bytes": 1240,
+      "classification": "reviewed redacted summary"
+    },
+    {
+      "path": "followups/2026-11-13-published-source-paths/evidence/validation-summary.json",
+      "sha256": "d5e6f703a1218f52ed0329d9deb563acb2b0bd767321318667a11e55e9778999",
+      "bytes": 34240,
+      "classification": "reviewed redacted summary"
     }
   ],
-  "followups": [],
+  "followups": [
+    {
+      "kind": "source-checks-and-main-publication",
+      "status": "PASS",
+      "source_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "evidence": "evidence/source-checks-summary.json",
+      "does_not_replace": "evidence/validation-summary.json"
+    },
+    {
+      "kind": "published-source-user-paths",
+      "status": "PASS",
+      "source_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+      "path": "followups/2026-11-13-published-source-paths/run.json",
+      "does_not_replace": "evidence/validation-summary.json"
+    }
+  ],
   "notes": [
-    "Final source links are pinned to the local candidate commit and are not a claim that it has been published.",
-    "Full checks and delivery follow-up are intentionally pending.",
-    "Original baseline and initial failures remain in the immutable evidence summary.",
-    "No internal service topology, private endpoint, access code, device identity, session identifier or raw framebuffer is included."
+    "Final source is published to main and independently read back at the recorded full commit.",
+    "The frozen final full suite and all affected validators passed; two earlier failed executions remain independently recorded.",
+    "Published source was retested through eight original-firmware pairing executions and one actual browser local-programming control; results and a retained observer failure are in a separate follow-up.",
+    "Original baseline and initial guest failures remain in the immutable evidence summary.",
+    "No internal service topology, private endpoint, access-code value, device identity, session identifier or raw framebuffer is included."
   ]
 }

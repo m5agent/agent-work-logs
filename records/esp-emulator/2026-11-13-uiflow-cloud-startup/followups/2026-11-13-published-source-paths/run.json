@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "followup_execution",
+  "overall_status": "PASS",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+    "parent_record": "../../run.json"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "scope": "No physical-device or physical-property claim."
+  },
+  "firmware": {
+    "original_reference_images_modified": false,
+    "normalization": "trailing-ff-padding only",
+    "configuration": "session-isolated NVS",
+    "identity_evidence": "evidence/validation-summary.json"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime_sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+    "execution_window_utc": {
+      "first_guest_created_at": "2026-11-13T03:30:48.617793+00:00",
+      "last_guest_completed_at": "2026-11-13T03:33:03.266172+00:00"
+    },
+    "roles": [
+      "main",
+      "review"
+    ],
+    "raw_artifacts_published": false,
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "original_cloud_pairing",
+      "level": "device_response",
+      "status": "PASS",
+      "executions": 8,
+      "actual_browser_executions": 2,
+      "api_executions": 6
+    },
+    {
+      "name": "official_access_code_frame",
+      "level": "visual_or_physical",
+      "status": "PASS",
+      "scope": "virtual guest framebuffer, manually reviewed by the integration owner",
+      "executions": 8
+    },
+    {
+      "name": "local_programming_control",
+      "level": "data_behavior",
+      "status": "PASS",
+      "executions": 1,
+      "scope": "same submitted code, guest serial marker and actual drawing"
+    },
+    {
+      "name": "evidence_before_stop_and_cleanup",
+      "status": "PASS",
+      "executions": 10,
+      "all_stopped": true,
+      "all_leases_released": true,
+      "old_history_retained": true
+    },
+    {
+      "name": "initial_observer_path_failure",
+      "status": "FAIL",
+      "historical": true,
+      "guest_pairing_received": true,
+      "manual_evidence_saved_while_running": true,
+      "followup_retest": "PASS"
+    },
+    {
+      "name": "published_user_path_acceptance",
+      "level": "delivery",
+      "status": "PASS",
+      "scope": "Only the named original firmware images and native user paths."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/validation-summary.json",
+      "sha256": "d5e6f703a1218f52ed0329d9deb563acb2b0bd767321318667a11e55e9778999",
+      "bytes": 34240,
+      "classification": "reviewed whitelist summary"
+    }
+  ],
+  "notes": [
+    "The observer failure remains separate from the successfully paired guest.",
+    "Historical summaries in the parent record are unchanged.",
+    "No internal topology, endpoints, local paths, unique device identity or pairing values are included."
+  ]
+}

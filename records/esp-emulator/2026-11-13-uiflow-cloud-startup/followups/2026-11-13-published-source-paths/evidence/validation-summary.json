@@ -1,0 +1,944 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "source_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+  "runtime_sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+  "scope": "Published source: eight original-firmware cloud pairing executions across main/review roles and one actual browser local-programming control.",
+  "execution_window_utc": {
+    "first_guest_created_at": "2026-11-13T03:30:48.617793+00:00",
+    "last_guest_completed_at": "2026-11-13T03:33:03.266172+00:00"
+  },
+  "cloud_executions": [
+    {
+      "role": "main",
+      "device": "cores3",
+      "status": "PASS",
+      "execution_lane": "actual browser frontend controlling native guest",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+        "reference_size": 16121856,
+        "normalized_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+        "normalized_size": 16777216,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+        "effective_flash_sha256": "43a90f9362b093b699f72d09530601c2c0263105c8610d2c969822e044bd4e3f"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "c0b96ac0aefc82b67e13da9275b910a2dc28903a0aee94bed4fdef50e9ff7e27",
+        "capture_bytes": 16466,
+        "complete_packets": 142,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 18.138,
+        "ip_protocol_packet_counts": {
+          "UDP": 26,
+          "TCP": 104
+        },
+        "dns_counts": {
+          "uiflow_cloud_query": 6,
+          "uiflow_cloud_response": 6,
+          "response_rcode_0": 7,
+          "ntp_query": 1,
+          "ntp_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 7,
+            "guest_to_server_PUBLISH": 2,
+            "guest_to_server_PINGREQ": 1,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 7,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 1
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "6aa56566b282b0310bf19630332a6c3b352d50489c5361802a46346d874cd6e6",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "6aa56566b282b0310bf19630332a6c3b352d50489c5361802a46346d874cd6e6",
+      "evidence_zip_sha256": "e2e889ef44120116fd211dcf641f1cf9c6712fbad0906107bf738e4eca06a547",
+      "evidence_zip_bytes": 31897,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "fixed deployed native-runtime pin; browser receipt confirms qemu-wifi"
+      },
+      "page_error_count": 0
+    },
+    {
+      "role": "main",
+      "device": "sticks3",
+      "status": "PASS",
+      "execution_lane": "actual browser frontend controlling native guest",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "fd85648dfa1fd9656448aa45e86ee63be537a4534e959e422c0be4d45b3466c7",
+        "reference_size": 8384512,
+        "normalized_sha256": "e9d52fa2459624f277e0d6aa2433ae42db61975b54e9d1c0eb47889cc4ba5579",
+        "normalized_size": 8388608,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "e9d52fa2459624f277e0d6aa2433ae42db61975b54e9d1c0eb47889cc4ba5579",
+        "effective_flash_sha256": "5dd52f227697e92f71a7f6a59d10905042aa9f728d4c035305d8d27652053bd6"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "25ac19012c77c65c73d1b4b34af3cf5b64ac8c2159484da06c23795499712bd4",
+        "capture_bytes": 13641,
+        "complete_packets": 113,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 17.555,
+        "ip_protocol_packet_counts": {
+          "UDP": 24,
+          "TCP": 77
+        },
+        "dns_counts": {
+          "uiflow_cloud_query": 5,
+          "uiflow_cloud_response": 5,
+          "response_rcode_0": 6,
+          "ntp_query": 1,
+          "ntp_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 4,
+            "guest_to_server_PUBLISH": 2,
+            "guest_to_server_PINGREQ": 1,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 4,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 1
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "d205c009f6b75d5e2de3da2b8d086b4693dd40845754435ab90f7247ffef66fe",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "d205c009f6b75d5e2de3da2b8d086b4693dd40845754435ab90f7247ffef66fe",
+      "evidence_zip_sha256": "3d26dc8e00cbf7ec9bf0327822d1bff5911ee88adf44bc21f46269d03f627b68",
+      "evidence_zip_bytes": 37275,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "fixed deployed native-runtime pin; browser receipt confirms qemu-wifi"
+      },
+      "page_error_count": 0
+    },
+    {
+      "role": "main",
+      "device": "core2",
+      "status": "PASS",
+      "execution_lane": "native Device Service API",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "57868df3d1bb0cbd03fdca3eac0db8a9c6578a70195e4479822147b29ef691ae",
+        "reference_size": 16773120,
+        "normalized_sha256": "e3f0acd18a60b9bd914b38698b0ce2a5089a95625cd0c10ad5ed98d1d3ab54bb",
+        "normalized_size": 16777216,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "e3f0acd18a60b9bd914b38698b0ce2a5089a95625cd0c10ad5ed98d1d3ab54bb",
+        "effective_flash_sha256": "a01079a09a6642037f897a4f7515a9b3cc3f4d24d8c140c5a07b6947b02d6b36"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "c3bfda440e82cdae85e60b02f16a82c1827758e289010a0279de06db890c46d7",
+        "capture_bytes": 7135,
+        "complete_packets": 62,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 37.205,
+        "ip_protocol_packet_counts": {
+          "UDP": 16,
+          "TCP": 34
+        },
+        "dns_counts": {
+          "ntp_query": 1,
+          "ntp_response": 1,
+          "response_rcode_0": 2,
+          "uiflow_cloud_query": 1,
+          "uiflow_cloud_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 4,
+            "guest_to_server_PUBLISH": 3,
+            "guest_to_server_PINGREQ": 2,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 4,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 2
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "7cfb22bb96eae272ba86ae92cd765bef7a5a4a8d83302acaff061eb4f54e151f",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "7cfb22bb96eae272ba86ae92cd765bef7a5a4a8d83302acaff061eb4f54e151f",
+      "evidence_zip_sha256": "73a2343214f56d0f981cf6b4caa67d5ec1ee827541ce70a84260f7cd978e59b5",
+      "evidence_zip_bytes": 30401,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "executed process binary readback"
+      }
+    },
+    {
+      "role": "main",
+      "device": "atoms3r",
+      "status": "PASS",
+      "execution_lane": "native Device Service API",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "c289f7df74919b0b544e524d0117661e81429e0c3a4bb42623ccdf42200b952e",
+        "reference_size": 8384512,
+        "normalized_sha256": "262602882d69eeeb9d4160e2ba7b8934981009c26eb42e494aa5defcab6cba29",
+        "normalized_size": 8388608,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "262602882d69eeeb9d4160e2ba7b8934981009c26eb42e494aa5defcab6cba29",
+        "effective_flash_sha256": "14505f84fe731b3c177d92cfbea9fd02563a3cfd4afc5cfe63518d619498ba79"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "ef74b0e282fccfb27f4c9f6f1a3d5466017ad9a516c4c47189a00df1e1c48379",
+        "capture_bytes": 16169,
+        "complete_packets": 138,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 18.463,
+        "ip_protocol_packet_counts": {
+          "UDP": 26,
+          "TCP": 100
+        },
+        "dns_counts": {
+          "uiflow_cloud_query": 6,
+          "uiflow_cloud_response": 6,
+          "response_rcode_0": 7,
+          "ntp_query": 1,
+          "ntp_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 7,
+            "guest_to_server_PUBLISH": 2,
+            "guest_to_server_PINGREQ": 1,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 7,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 1
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "52a8bcb5ac304f85621305f39cf0501d4916ae0d989c7a17d0c397991468a746",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "52a8bcb5ac304f85621305f39cf0501d4916ae0d989c7a17d0c397991468a746",
+      "evidence_zip_sha256": "3a76df5698e48edff5a7973ccbb17f7727848ac7c47443ec18a62140990ad4d4",
+      "evidence_zip_bytes": 18492,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "executed process binary readback"
+      }
+    },
+    {
+      "role": "main",
+      "device": "stopwatch",
+      "status": "PASS",
+      "execution_lane": "native Device Service API",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "0bcb9269f42186ec0a66b503a4d97bb005fec72848c4374475a53009e1d3b24b",
+        "reference_size": 16773120,
+        "normalized_sha256": "7bf51befb4bdf7581367fdac993b6b3eb6a01f11c3f42c31a1feafa68365963c",
+        "normalized_size": 16777216,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "7bf51befb4bdf7581367fdac993b6b3eb6a01f11c3f42c31a1feafa68365963c",
+        "effective_flash_sha256": "99af2500711a144968afcc5b591d5488f652d6da269e74e984439a6f56cba7d0"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "3b5a29b0b3bf46ee9408c424b8822223d4e81667feb83a94358650cf7d5bf8e9",
+        "capture_bytes": 15715,
+        "complete_packets": 133,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 17.592,
+        "ip_protocol_packet_counts": {
+          "UDP": 26,
+          "TCP": 95
+        },
+        "dns_counts": {
+          "uiflow_cloud_query": 6,
+          "uiflow_cloud_response": 6,
+          "response_rcode_0": 7,
+          "ntp_query": 1,
+          "ntp_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 5,
+            "guest_to_server_PUBLISH": 2,
+            "guest_to_server_PINGREQ": 1,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 5,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 1
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "bbab9419883e00849529e61345908b558f8a4973edcd2d8660933da6371e1e4c",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "bbab9419883e00849529e61345908b558f8a4973edcd2d8660933da6371e1e4c",
+      "evidence_zip_sha256": "715970e13706c6e70ef0f42eccc38498ed30f34f665d67fe9c2da0645141d539",
+      "evidence_zip_bytes": 37620,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "executed process binary readback"
+      }
+    },
+    {
+      "role": "main",
+      "device": "cardputer-adv",
+      "status": "PASS",
+      "execution_lane": "native Device Service API",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+        "reference_size": 8384512,
+        "normalized_sha256": "f9d6026012b893409b33fde8be2e7b508f6c669db8b6d4f42d56522fe2b7c9d4",
+        "normalized_size": 8388608,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "f9d6026012b893409b33fde8be2e7b508f6c669db8b6d4f42d56522fe2b7c9d4",
+        "effective_flash_sha256": "ebfeaee768690b823866b4dfa6b5adf69f97bf54bf435d7f036e14bbc2ecaa75"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "d83cb5d31a9f3a99c78b5f9b4779944df18823b41a7fd6ee01abcb5451f53daf",
+        "capture_bytes": 16182,
+        "complete_packets": 138,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 17.934,
+        "ip_protocol_packet_counts": {
+          "UDP": 26,
+          "TCP": 100
+        },
+        "dns_counts": {
+          "uiflow_cloud_query": 6,
+          "uiflow_cloud_response": 6,
+          "response_rcode_0": 7,
+          "ntp_query": 1,
+          "ntp_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 7,
+            "guest_to_server_PUBLISH": 2,
+            "guest_to_server_PINGREQ": 1,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 7,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 1
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "79f03d2e79f5f7e779d3f1e48a45479234e90b1982583ebc48facebcf3d60988",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "79f03d2e79f5f7e779d3f1e48a45479234e90b1982583ebc48facebcf3d60988",
+      "evidence_zip_sha256": "dfa2bb3fa515e5fd5789bd8d82e54caf8be0607b8e032bd1772419754926c034",
+      "evidence_zip_bytes": 34733,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "executed process binary readback"
+      }
+    },
+    {
+      "role": "review",
+      "device": "cores3",
+      "status": "PASS",
+      "execution_lane": "native Device Service API",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+        "reference_size": 16121856,
+        "normalized_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+        "normalized_size": 16777216,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+        "effective_flash_sha256": "43a90f9362b093b699f72d09530601c2c0263105c8610d2c969822e044bd4e3f"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "5cd805ed496e999020f572c7530ba0196a4ce31a0e146f00759de28f22c50ce9",
+        "capture_bytes": 16365,
+        "complete_packets": 140,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 22.039,
+        "ip_protocol_packet_counts": {
+          "UDP": 28,
+          "TCP": 100
+        },
+        "dns_counts": {
+          "uiflow_cloud_query": 7,
+          "uiflow_cloud_response": 7,
+          "response_rcode_0": 8,
+          "ntp_query": 1,
+          "ntp_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 7,
+            "guest_to_server_PUBLISH": 2,
+            "guest_to_server_PINGREQ": 1,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 7,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 1
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "c1570090610e86c1fc275a45edff9130e40027437f680274e96fc91a65a9eb1f",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "c1570090610e86c1fc275a45edff9130e40027437f680274e96fc91a65a9eb1f",
+      "evidence_zip_sha256": "5b38ea6513f2898d3c5a3ae6e788064ca6c4f6300463a9f37ad8c2be3aab763f",
+      "evidence_zip_bytes": 32195,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "executed process binary readback"
+      }
+    },
+    {
+      "role": "review",
+      "device": "core2",
+      "status": "PASS",
+      "execution_lane": "native Device Service API",
+      "runtime": "qemu-wifi",
+      "firmware": {
+        "reference_sha256": "57868df3d1bb0cbd03fdca3eac0db8a9c6578a70195e4479822147b29ef691ae",
+        "reference_size": 16773120,
+        "normalized_sha256": "e3f0acd18a60b9bd914b38698b0ce2a5089a95625cd0c10ad5ed98d1d3ab54bb",
+        "normalized_size": 16777216,
+        "normalization": "trailing-ff-padding"
+      },
+      "nvs": {
+        "sha256": "370bb0fd9a8c0c226865982cb78fc87c850f32a5847707de6884879b277441ee",
+        "bytes": 24576,
+        "partition_label": "nvs",
+        "offset": 36864,
+        "size": 24576,
+        "session_isolated_overlay": true,
+        "source_artifact_modified": false,
+        "base_flash_sha256": "e3f0acd18a60b9bd914b38698b0ce2a5089a95625cd0c10ad5ed98d1d3ab54bb",
+        "effective_flash_sha256": "a01079a09a6642037f897a4f7515a9b3cc3f4d24d8c140c5a07b6947b02d6b36"
+      },
+      "checks": {
+        "original_reference_pin_matches": true,
+        "cloud_mode_in_receipt": true,
+        "identity_provisioned": true
+      },
+      "protocol": {
+        "capture_sha256": "9d878da2f42d36488072d13a9e4997aa79e4d4af4803e505af314f2b542cfa47",
+        "capture_bytes": 7065,
+        "complete_packets": 61,
+        "trailing_incomplete_bytes": 0,
+        "capture_duration_seconds": 36.687,
+        "ip_protocol_packet_counts": {
+          "UDP": 16,
+          "TCP": 33
+        },
+        "dns_counts": {
+          "ntp_query": 1,
+          "ntp_response": 1,
+          "response_rcode_0": 2,
+          "uiflow_cloud_query": 1,
+          "uiflow_cloud_response": 1
+        },
+        "dhcp_counts": {
+          "DISCOVER": 1,
+          "OFFER": 1,
+          "REQUEST": 1,
+          "ACK": 1
+        },
+        "ntp": {
+          "requests": 1,
+          "replies": 1,
+          "reply_mode4_count": 1,
+          "originate_matches_request_transmit_count": 1,
+          "nonzero_transmit_time_count": 1
+        },
+        "mqtt": {
+          "packet_counts": {
+            "guest_to_server_CONNECT": 1,
+            "guest_to_server_SUBSCRIBE": 4,
+            "guest_to_server_PUBLISH": 3,
+            "guest_to_server_PINGREQ": 2,
+            "server_to_guest_CONNACK": 1,
+            "server_to_guest_SUBACK": 4,
+            "server_to_guest_PUBLISH": 1,
+            "server_to_guest_PINGRESP": 2
+          },
+          "connack_return_codes": [
+            0
+          ],
+          "successful_connack_count": 1,
+          "access_code_request_count": 1,
+          "access_code_response_count": 1,
+          "actual_nonempty_access_code_received": true,
+          "all_codes_six_ascii_digits": true,
+          "all_down_topic_prefixes_match": true
+        }
+      },
+      "frame": {
+        "sha256": "63e6510afe10621fbc65ef4afa535d7c229a8998c106b926b7dbf6f35272d417",
+        "official_six_digit_access_code_visible": true
+      },
+      "evidence_frame_sha256": "63e6510afe10621fbc65ef4afa535d7c229a8998c106b926b7dbf6f35272d417",
+      "evidence_zip_sha256": "ffbadfdad0412ff7cf0706fcf5d8629fc2529d4ddf64fa2820236ec0925e0957",
+      "evidence_zip_bytes": 30415,
+      "cleanup": {
+        "state": "stopped",
+        "worker_lease_released": true,
+        "retained_history": true,
+        "evidence_before_stop": true
+      },
+      "runtime_identity": {
+        "sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1",
+        "basis": "executed process binary readback"
+      }
+    }
+  ],
+  "retained_observer_failure": {
+    "role": "review",
+    "device": "cores3",
+    "status": "FAIL",
+    "failure_scope": "host observer runtime-binary identification",
+    "cause": "Observer split a process command line at spaces, so a valid executable path was truncated.",
+    "guest_outcome": "A six-digit cloud response was received; manual evidence was saved while the guest was still running.",
+    "correction": "Read the executable with the process comm field, then rerun as a separate execution.",
+    "firmware": {
+      "reference_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+      "reference_size": 16121856,
+      "normalized_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+      "normalized_size": 16777216,
+      "normalization": "trailing-ff-padding"
+    },
+    "protocol": {
+      "capture_sha256": "e63701d72515943c10c58a921d09fab4d289b19c7798a1948b2422f0d3e85bd5",
+      "capture_bytes": 16604,
+      "complete_packets": 144,
+      "trailing_incomplete_bytes": 0,
+      "capture_duration_seconds": 18.8,
+      "ip_protocol_packet_counts": {
+        "UDP": 26,
+        "TCP": 105
+      },
+      "dns_counts": {
+        "uiflow_cloud_query": 6,
+        "uiflow_cloud_response": 6,
+        "response_rcode_0": 7,
+        "ntp_query": 1,
+        "ntp_response": 1
+      },
+      "dhcp_counts": {
+        "DISCOVER": 1,
+        "OFFER": 1,
+        "REQUEST": 1,
+        "ACK": 1
+      },
+      "ntp": {
+        "requests": 1,
+        "replies": 1,
+        "reply_mode4_count": 1,
+        "originate_matches_request_transmit_count": 1,
+        "nonzero_transmit_time_count": 1
+      },
+      "mqtt": {
+        "packet_counts": {
+          "guest_to_server_CONNECT": 1,
+          "guest_to_server_SUBSCRIBE": 7,
+          "guest_to_server_PUBLISH": 2,
+          "guest_to_server_PINGREQ": 1,
+          "server_to_guest_CONNACK": 1,
+          "server_to_guest_SUBACK": 7,
+          "server_to_guest_PUBLISH": 1,
+          "server_to_guest_PINGRESP": 1
+        },
+        "connack_return_codes": [
+          0
+        ],
+        "successful_connack_count": 1,
+        "access_code_request_count": 1,
+        "access_code_response_count": 1,
+        "actual_nonempty_access_code_received": true,
+        "all_codes_six_ascii_digits": true,
+        "all_down_topic_prefixes_match": true
+      }
+    },
+    "frame": {
+      "sha256": "8695ade5a6e6d53d1bb68b893b5c114a64b6d4791a46df823c5f901bd244f444"
+    },
+    "manual_evidence_zip_sha256": "6373fb4540b797cd75b969003686c170b2b80adde791d2fbbd1957b61cf4e69f",
+    "manual_evidence_zip_bytes": 31962,
+    "manual_evidence_session_state": "running",
+    "cleanup": {
+      "state": "stopped",
+      "worker_lease_released": true,
+      "retained_history": true,
+      "evidence_before_stop": true
+    }
+  },
+  "local_programming": {
+    "role": "main",
+    "device": "cores3",
+    "status": "PASS",
+    "execution_lane": "actual browser frontend controlling native guest",
+    "runtime": "qemu",
+    "firmware_sha256": "700d243ade543627100c76e8b68a2740d2701d6b0801b1262f2642f0512861f7",
+    "submitted_source_text_sha256": "39e09ae297b12457f7ffd3d1a275b4f599ad60d74160a52a7e0683635dbfaf47",
+    "checks": {
+      "explicit_local_mode": true,
+      "same_submitted_program_in_evidence": true,
+      "submitted_program_serial_marker_seen": true,
+      "real_guest_program_output": true,
+      "page_error_count": 0
+    },
+    "frame": {
+      "sha256": "6a862feb5be7487dcc6f07152402fff3866eb274e9961c2d17f0c470a833aaa6",
+      "blue_background_and_local_code_ok_visible": true
+    },
+    "visual_program_frame": "PASS: blue background and Local code OK, reviewed by the integration owner.",
+    "evidence_zip_sha256": "bbc73e66f40c3a2cfdf9cfad3a3fd054e258ba1b71d01d60d5306cc29b08be15",
+    "evidence_zip_bytes": 18176,
+    "cleanup": {
+      "state": "stopped",
+      "worker_lease_released": true,
+      "retained_history": true,
+      "evidence_before_stop": true
+    }
+  },
+  "history": {
+    "main": {
+      "before_count": 8,
+      "after_count": 15,
+      "existing_records_retained": true,
+      "active_sessions_after": 0,
+      "active_leases_after": 0
+    },
+    "review": {
+      "before_count": 16,
+      "after_count": 19,
+      "existing_records_retained": true,
+      "active_sessions_after": 0,
+      "active_leases_after": 0
+    },
+    "basis": "Integration owner compared pre/post history; archive reviewer independently read back final stopped sessions, lease release and totals."
+  },
+  "boundaries": {
+    "physical_hardware": "NOT RUN",
+    "browser_wasm_cloud_networking": "NOT RUN",
+    "long_term_online_stability": "NOT RUN",
+    "other_firmware_and_models": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  },
+  "redaction": "Only roles, public devices, hashes, protocol counts and booleans are retained. No topology, endpoints, local paths, session/process identifiers, device identities, credentials, pairing values, raw frames or packet payloads.",
+  "visual_review_basis": "Integration owner inspected the original frames; only image hashes and visibility booleans are published."
+}
