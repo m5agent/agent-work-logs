@@ -1,0 +1,1219 @@
+{
+  "schema_version": 1,
+  "scope": "Exact firmware/profile/controller and actual local browser-WASM execution; no whole-device or physical claim",
+  "overall_qualification": "LOCAL_FULL_GATE_PASS",
+  "cases": [
+    {
+      "ordinal": 9,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "cores3",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "9ed6db3dcc1d173d56721807641ac2875afabe1e44fcd1fc3ee5ea4b044e2f2e",
+      "child_report_bytes": 3442533,
+      "checks_passed": 10,
+      "checks_total": 10,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+        "execution_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+        "receipt_firmware_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5cores3",
+        "profile": "cores3-wasm-uiflow-workbench-wallclock-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "9c7c3fad692f980e3b3ab19becd72bd0b905b0f09e762c79e95afc5b99686f2b",
+          "serial_sha256": "1b30be33a89c53a4368f6344036aa6668ad24db790f82745b7906d573e89a457",
+          "serial_bytes": 1429
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "9c7c3fad692f980e3b3ab19becd72bd0b905b0f09e762c79e95afc5b99686f2b",
+          "serial_sha256": "227ddcbceae8d6e8f1daab12a90e965be1d282e1e2c416cf0f58925c5df84454",
+          "serial_bytes": 1542
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 2,
+        "component_counts": {
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 1,
+          "pointer": 1
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          254.21220899999935,
+          255.58437499999854
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 5,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 320,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 10,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "stopwatch",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "ea48d5bd476089e7cf152a106c7ad2666feba63d9da7aedb399f7b0f07743ec1",
+      "child_report_bytes": 14450483,
+      "checks_passed": 65,
+      "checks_total": 65,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "5a7fb2941c2dfa7b17ca57defa5ea857191e64daeb774d05da5cd427cd45fe2a",
+        "execution_sha256": "5a7fb2941c2dfa7b17ca57defa5ea857191e64daeb774d05da5cd427cd45fe2a",
+        "receipt_firmware_sha256": "5a7fb2941c2dfa7b17ca57defa5ea857191e64daeb774d05da5cd427cd45fe2a",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "ef5e81b6da17ba04a0356b3bde782e9f0f8f93b217701a4414a52a8d8d8532c0",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5stopwatch",
+        "profile": "stopwatch-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "4316d6d724bb6c05bc28815b2c921d9b684fb377c0599180b99b47d7ab190d40",
+          "serial_sha256": "861c233423f710b488334991d07a3a879b6ebee37754cc0d48d2e7c5f059c10b",
+          "serial_bytes": 454
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "4316d6d724bb6c05bc28815b2c921d9b684fb377c0599180b99b47d7ab190d40",
+          "serial_sha256": "3c5c697b5fc77b202d6d5b91f5e950f91eedbd84cc6f4287d10cfed20ce45733",
+          "serial_bytes": 4069
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "4316d6d724bb6c05bc28815b2c921d9b684fb377c0599180b99b47d7ab190d40",
+          "serial_sha256": "3c5c697b5fc77b202d6d5b91f5e950f91eedbd84cc6f4287d10cfed20ce45733",
+          "serial_bytes": 4069
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "8cfae99049b46a2972cb27be0c8fabd61b4de5f69b9acb91904ac82279300985",
+          "stdout_sha256": "a3f73258a776e9e0d354d77534f20582a2bbe832e7594dc62aaddb84447679d3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "9fc8fe0e260f4db4c0cd785c6713ed19fb0ed56d090045fd02bc5a0f2551f85f",
+          "stdout_sha256": "e4de7cc3bb272c40cffbd312aef1f44bb17fc6bbbe590dfb9d4e2919e68245c7",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "2ecc671d1961f89dd2c62c3ffd70d1d9ac3755c4b051d8659d71f4b31fbac0c7",
+          "stdout_sha256": "a4ce7ecf0388fd65362408372579c51f8ee7975d613306206bf5ebc30cc2bde6",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "6b82586d469c2d450a1676f75b169e2bb58b71d8e2f5da4a54fd0137b49bc4dd",
+          "stdout_sha256": "c168c97ea19a2cd82cd16f6567f687aec7972f4c9f5c2deefdf11b8526f9864b",
+          "stderr_sha256": "d268b424ced1143764fd42ce21bf6b05a2e8ae7d7d599bd6f684c27278004180",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "8893d7be62aa730ac70785e8ffc76f49ecd063f7a4bd7b513e88491144ce9b70",
+          "stdout_sha256": "7bafcda952ebca91476d9b569461706b44d95a8650f7ff75cc842e98a56468a8",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "9672d52740473cd94782fd18c93429f4f0c60fd703a4f78a2ab9e008d180c881",
+          "stdout_sha256": "4273d89ec9a747968719dbfccead4f6df3223c4ede9393561c6d92854afb793c",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "b74e51713112bcf88c70b0a1161e9cfd4bab355cb1406255f56946f9866ce962",
+          "stdout_sha256": "e407ddb3fbf82f55663c3adeb54fa4510b6fde7d8930dafae72a6c5c736d6a7b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "c66def5d9b73c60c3aa96e3e8fe0ab472fa2500806a4268b775ff8ca42847213",
+          "stdout_sha256": "8a419d50e70eddec36ac61f37f9dd97f39030ccfa8a6481c82908f54f0822fb2",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "98739365d9123997a45c3be236e07469e8324a33246f2f6486eeb7d8aa6013f0",
+          "stdout_sha256": "c25d5cde72b98698b28014ae68f61de5ce8059b396773924c166c330c33e63c7",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 466,
+          "height": 466,
+          "format": "rgb565le",
+          "sha256": "6cc911ec30cb65f8bd344e37320439eed8e62fcb79c6010ec125dd4ee959ee2a"
+        },
+        "independently_verified_raw_frame_hashes": 3,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 11,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "stopwatch",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "e14b74c56e672531e76c685c323c6733a95d6e81991c1e5b8e3535760a01742e",
+      "child_report_bytes": 9658638,
+      "checks_passed": 19,
+      "checks_total": 19,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "5a7fb2941c2dfa7b17ca57defa5ea857191e64daeb774d05da5cd427cd45fe2a",
+        "execution_sha256": "5a7fb2941c2dfa7b17ca57defa5ea857191e64daeb774d05da5cd427cd45fe2a",
+        "receipt_firmware_sha256": "5a7fb2941c2dfa7b17ca57defa5ea857191e64daeb774d05da5cd427cd45fe2a",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "ef5e81b6da17ba04a0356b3bde782e9f0f8f93b217701a4414a52a8d8d8532c0",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5stopwatch",
+        "profile": "stopwatch-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "4316d6d724bb6c05bc28815b2c921d9b684fb377c0599180b99b47d7ab190d40",
+          "serial_sha256": "42282421175580caf0b949063361d2334b70beb2bb683e60483db7c2c96bc5cf",
+          "serial_bytes": 5652
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "4316d6d724bb6c05bc28815b2c921d9b684fb377c0599180b99b47d7ab190d40",
+          "serial_sha256": "42282421175580caf0b949063361d2334b70beb2bb683e60483db7c2c96bc5cf",
+          "serial_bytes": 5652
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 6,
+        "component_counts": {
+          "a": 2,
+          "b": 2,
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 3,
+          "pointer": 3
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          251.7287920000017,
+          254.86595899999884
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 29,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 466,
+          "height": 466,
+          "format": "rgb565le",
+          "sha256": "6cc911ec30cb65f8bd344e37320439eed8e62fcb79c6010ec125dd4ee959ee2a"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 12,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "sticks3",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "a5e9ed3ca0e493e287d8e355ba038e6b8322c143034ab286345e26ac32ca46dd",
+      "child_report_bytes": 2253381,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "43855f0144edec8fafc4525ac6c8e30b01e2386d7b7f282ddb92833d792932fc",
+        "execution_sha256": "43855f0144edec8fafc4525ac6c8e30b01e2386d7b7f282ddb92833d792932fc",
+        "receipt_firmware_sha256": "43855f0144edec8fafc4525ac6c8e30b01e2386d7b7f282ddb92833d792932fc",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "c45d4514e21d94a6c069185e08f05851c75b4747d354c1423decdefa625e1dd3",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5sticks3",
+        "profile": "sticks3-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "b3029f124f5faa1ee8ca0de17944c9674ad3686971be18fa92e96aede780da29",
+          "serial_sha256": "5e794db48749970963cd0f41362abd23bebe912a63a93e2d3d53a45c8c3fc720",
+          "serial_bytes": 457
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "b3029f124f5faa1ee8ca0de17944c9674ad3686971be18fa92e96aede780da29",
+          "serial_sha256": "c81d7f297f9f1d226de47fc7cfc71a4966a04dc78aaae18a2daaa4e62565140d",
+          "serial_bytes": 4097
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "b3029f124f5faa1ee8ca0de17944c9674ad3686971be18fa92e96aede780da29",
+          "serial_sha256": "c81d7f297f9f1d226de47fc7cfc71a4966a04dc78aaae18a2daaa4e62565140d",
+          "serial_bytes": 4097
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "8d99764544c548cbeb531e13bc38d01e8053914f3d6e96ddd0d6c4dce929d0a8",
+          "stdout_sha256": "bcde8e55b7fdd900cf9be425ae0b2c608520c2434e747d36a177a8c3d7d1827b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "3cc1c83eda743806cabc7da0d37cfc87427ee4aed3c307c3bdd689837373d6ea",
+          "stdout_sha256": "9cd0b4d56882230046c3ca4e5547cdbf6315c268a9aca63d5d13b6c28b2e82f3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "abe77bfd336b4659859696305edbb965070a7ac872d3ac30fc826f697eae4dcd",
+          "stdout_sha256": "d741aac49ccdd7432e685c52d1c34d3569aa8dabab71a16493ff94f143ff822f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "c368b3791c84e30da41990113be1669374351ad2bc002eb40f46c86411271e48",
+          "stdout_sha256": "6808b39342576928cb0b299e787c7b1cda12a5d5428c1e545a9e7fbbc665c199",
+          "stderr_sha256": "1f75b7f64499443dd477dee0f37c78db44f12a161e5eab7554b6bcc4e4ebc817",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "f9d6eb15fb04b264d4b600bf7c445920b11304fe56f119daa19d2a3a9fe23e8a",
+          "stdout_sha256": "083fa1abd0939247752ba8fe3b994dfe776999c319cbda356027f8805550d80c",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "b3e6bf1f3b48a8798ea7031ba14441d93660f260e93ce831ef0005c7aba80098",
+          "stdout_sha256": "b1ae148c3025bb0fa0d657d800f03f20526274ec1e2c838ab5f4c04180ba4bca",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "c8c8c11da5935b85e96b7657e6586cbe18a1990e64b146fb400ff8b601f4da02",
+          "stdout_sha256": "756ed2c2428b6c1c090c2cd40795cdc95b221a6cdf1ca53e4791bd8904f40e50",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "5598552ee2b47346e85c1d0b6fabebe45cde4ce625f88cd832dae3023a3a8d3f",
+          "stdout_sha256": "33213b7fe6f43f88bb33eb54227412b9be4aabdebad602daf60e34346c2f885f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "3317cdcb433f26747fc6ff61acff0746bae4c4725563ed029421d6bd60d27c1b",
+          "stdout_sha256": "8dc37c5015975f1238d37bd6679c7d94b12167fff98e368a9f0592f60f64400f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 135,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 3,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 13,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "sticks3",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "5e047ccd64cb25113d8024704176179162e72feec15d30925cba2e8b23e29d9e",
+      "child_report_bytes": 1528908,
+      "checks_passed": 19,
+      "checks_total": 19,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "43855f0144edec8fafc4525ac6c8e30b01e2386d7b7f282ddb92833d792932fc",
+        "execution_sha256": "43855f0144edec8fafc4525ac6c8e30b01e2386d7b7f282ddb92833d792932fc",
+        "receipt_firmware_sha256": "43855f0144edec8fafc4525ac6c8e30b01e2386d7b7f282ddb92833d792932fc",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "c45d4514e21d94a6c069185e08f05851c75b4747d354c1423decdefa625e1dd3",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5sticks3",
+        "profile": "sticks3-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "b3029f124f5faa1ee8ca0de17944c9674ad3686971be18fa92e96aede780da29",
+          "serial_sha256": "5d8af4c65860b56322df76d197f6e46b6a1d4a51f3cde4ed9507c08dceb69400",
+          "serial_bytes": 5536
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "b3029f124f5faa1ee8ca0de17944c9674ad3686971be18fa92e96aede780da29",
+          "serial_sha256": "ce00fe0843a2e785974cf9059de641205e6352e99cd45d187c420f44bbaa87be",
+          "serial_bytes": 5658
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 6,
+        "component_counts": {
+          "btnA": 2,
+          "btnB": 2,
+          "btnPWR": 2
+        },
+        "methods": {
+          "keyboard": 3,
+          "pointer": 3
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          252.37208399999872,
+          255.2263329999987
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 29,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 135,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 14,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "atoms3",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "e2159c0694dead06e3ff7880232af571c4c08452a64ffcdeb8d41bb9f266b2f5",
+      "child_report_bytes": 1197838,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "8252177a41539523b8fcdd49c3d2bb0835c5087d76ab9cbe563051b44074e1ab",
+        "execution_sha256": "8252177a41539523b8fcdd49c3d2bb0835c5087d76ab9cbe563051b44074e1ab",
+        "receipt_firmware_sha256": "8252177a41539523b8fcdd49c3d2bb0835c5087d76ab9cbe563051b44074e1ab",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "fb294c9780cfc3766fd489e164a1a04dddf54cb989adb113d098fe10cbc52075",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5atoms3",
+        "profile": "atoms3-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "2e67317f51dcbc73afb52b9268b58d4df255cbf147211c638370866e5e21ae82",
+          "serial_sha256": "8fc1a71a4967184244bc83aac5111e0c5b32180034af7ae8a814461c20614743",
+          "serial_bytes": 618
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "2e67317f51dcbc73afb52b9268b58d4df255cbf147211c638370866e5e21ae82",
+          "serial_sha256": "555acf6b294bdf3727d1d4242cf6f25530657ae4efa8eb6c03b5b58beebb716b",
+          "serial_bytes": 4370
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "2e67317f51dcbc73afb52b9268b58d4df255cbf147211c638370866e5e21ae82",
+          "serial_sha256": "555acf6b294bdf3727d1d4242cf6f25530657ae4efa8eb6c03b5b58beebb716b",
+          "serial_bytes": 4370
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "17fbc928b309fc6d4aa1763b66f24bb3ab86a15a9ab4ac7a1f2b89e76f0ee411",
+          "stdout_sha256": "a36e4feea87ec1e163b4fcb51503f56d1d304d59edfb9a4f26feb9060eca996a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "709a3690b05c6d67b07e76b45553a7d2aadfd7d9316060c217abfc9f25756100",
+          "stdout_sha256": "9c0d8da16e17ef952c486ea3a7d0549f67ea8a8d7dd9d6daa099cc560755e1e5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "931e5619bc197fc9e637b6850e3a42ea5a93e41939fd7953cc1290da95391a91",
+          "stdout_sha256": "5da15bde157a50996adde0502d7b658680b0f15b72e18fe02b9cd96e48ec9217",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "d8ed52aadb79477d452a561cf04205c7682b320eb9752964017aa1adddb999a5",
+          "stdout_sha256": "e577b8b62de17d1b186d43b3a122450a5415fbd10d117ee21532776cba04cc97",
+          "stderr_sha256": "5d63ecaf00fb1c60a137f06245c29d8b3e2d5a485149ee18c95d5d913eca2ffb",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "0abbcd7b41e0eba55028463509f51c04597eb3691c4e041f8bc7c7659f138113",
+          "stdout_sha256": "1e910e8c7d41567be6095fabc91944746d24f3204aa64ef6371584b61aff2dbe",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "4d3188484abe415ed39dbce6b71f41971c1da84a76e23366c1884608d1e5edd5",
+          "stdout_sha256": "a437c51929e162615fba506bbf3df7f25e4f8f7de8385f773682ca7a23a1cf16",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "49e9258740f503b15ce77d24fc48fe668f3f254e33802ce95b1ec4edd56a0ba6",
+          "stdout_sha256": "22814da8c69914170f87bea0322323b1ee3e7af74df0f8c22d4281bcfca477c3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "a4213d34dcd9e93cbb3b944e52f5e5ae952ac34c665460ebe40dcc3df7f3475b",
+          "stdout_sha256": "0f52f22977ec61a4304e213b622880ae3b377f47708776b504cc54ca74281a9b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "ff002620f4d1b668d81725726441be03fef7037d6f8c0132fa70c6e43176ccb0",
+          "stdout_sha256": "fc30dcef53b386bc35592b15d83af4362a4082eae4a87761da2411ad8831953f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 128,
+          "height": 128,
+          "format": "rgb565le",
+          "sha256": "c35020473aed1b4642cd726cad727b63fff2824ad68cedd7ffb73c7cbd890479"
+        },
+        "independently_verified_raw_frame_hashes": 3,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 15,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "atoms3",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "3e38b5f6369d3aa99e8deed000fd9682d290c9487230c89ff483bd9877b5ab10",
+      "child_report_bytes": 790969,
+      "checks_passed": 10,
+      "checks_total": 10,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "8252177a41539523b8fcdd49c3d2bb0835c5087d76ab9cbe563051b44074e1ab",
+        "execution_sha256": "8252177a41539523b8fcdd49c3d2bb0835c5087d76ab9cbe563051b44074e1ab",
+        "receipt_firmware_sha256": "8252177a41539523b8fcdd49c3d2bb0835c5087d76ab9cbe563051b44074e1ab",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "fb294c9780cfc3766fd489e164a1a04dddf54cb989adb113d098fe10cbc52075",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5atoms3",
+        "profile": "atoms3-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "2e67317f51dcbc73afb52b9268b58d4df255cbf147211c638370866e5e21ae82",
+          "serial_sha256": "e7457bb25bc724474e7aeba5c6bc386ea27d0496852f57a42811028553ef459f",
+          "serial_bytes": 2969
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "2e67317f51dcbc73afb52b9268b58d4df255cbf147211c638370866e5e21ae82",
+          "serial_sha256": "e7457bb25bc724474e7aeba5c6bc386ea27d0496852f57a42811028553ef459f",
+          "serial_bytes": 2969
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 2,
+        "component_counts": {
+          "button": 2
+        },
+        "methods": {
+          "keyboard": 1,
+          "pointer": 1
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          252.1735000000008,
+          254.61324999999852
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 13,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 128,
+          "height": 128,
+          "format": "rgb565le",
+          "sha256": "c35020473aed1b4642cd726cad727b63fff2824ad68cedd7ffb73c7cbd890479"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 16,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "atoms3-lite",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "9ea91d1641bef89854f76ac21e739c9fc37b5675e41fcd3ced804d74ee03a110",
+      "child_report_bytes": 111936,
+      "checks_passed": 59,
+      "checks_total": 59,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+        "execution_sha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+        "receipt_firmware_sha256": "5c06f621bd765980f8ac274760b5648df58f3828d647f9d13acf77fb4d9601e8",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "338baf7f16703b26fff78619d32e593d8ca4f1934bdad63e3c95eef862f3133c",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5atoms3lite",
+        "profile": "atoms3-lite-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "73cfcc35fb710cb9831310ad2a204a6584628e3e668b6a101aafbdc235ea4d15",
+          "serial_sha256": "b3c62fe12e2a3b984026b8913277f998b4d8565e56f0bfca53387622518e25c7",
+          "serial_bytes": 454
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "73cfcc35fb710cb9831310ad2a204a6584628e3e668b6a101aafbdc235ea4d15",
+          "serial_sha256": "d07065ec36c80a613ea481997c9cca08ca059ad15c66a940bdef8fe0c91624ac",
+          "serial_bytes": 3877
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "73cfcc35fb710cb9831310ad2a204a6584628e3e668b6a101aafbdc235ea4d15",
+          "serial_sha256": "d07065ec36c80a613ea481997c9cca08ca059ad15c66a940bdef8fe0c91624ac",
+          "serial_bytes": 3877
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "9ccb35b3a5d80af3e12ada0643784ab9256dbd58ba4c27add5af9c2f7e88a9ee",
+          "stdout_sha256": "42d760436aba7a7bdf3fd340e098ca206a75558657891e223c4792909cbf3b63",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "1dadd8e41449a47caf26000696fe702a0887e3920605ca80ed0d28e1e12fa584",
+          "stdout_sha256": "7cb4fb9042ac64ffcb37ddb8690a155a09bf799dbb9c0bd2a5be9aa118e74a3c",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "bda9a721f66111e648fe04924e84f1faca64655acdc58b27e60472ec74a16f82",
+          "stdout_sha256": "106919b2543ebb290223269f3ebb4abd6fc2931a8e9014e22bc415393591bbce",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "883dc8efdff218762e11edca2df716a05cc5197ff51dd33805580028c7d9c6da",
+          "stdout_sha256": "e9c6786bae4653e2414ca5e1b1f69670cb0e47f261490806c85f41d68ad42943",
+          "stderr_sha256": "e2357e9e66a22996bfc9c420649f9d2199706665e3c977dfd9454662c656da57",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "b4ad6d05d48a74d1a2720c98528f6fa18ec05ad77e63b25133870f8b28cf1fd8",
+          "stdout_sha256": "e2547780f03e385f3ddb9095c4d58de4f5edd42c530872dbd0ba21edc1bdebc5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "6a6bc30dbc306a0971f0d61af887adac556cd504cb7c055ad1c80d2fc268e367",
+          "stdout_sha256": "7a31964876305183190fe0a57325451ee65f4dd8b893e869224ece5bebe5809a",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "b53e96850b7bb6e682c61d18d3b8852a0bdecf5e46e09aeae902dece4d2edda2",
+          "stdout_sha256": "3249b998885b6dc22154fa8c7c9a287621f5700f4c7863216bafb5367b22babd",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "08e313157979258c152548d391b8acf9cf18c36758fac1c67b84be8e756c3da5",
+          "stdout_sha256": "30903852f4fcb55d476a5f75a1eea45d51be545ac31a76ada5cfd7a5fe2592be",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": null,
+        "independently_verified_raw_frame_hashes": 0,
+        "headless_output": "Data/serial/LED control contract; no pixel display declared"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    }
+  ]
+}

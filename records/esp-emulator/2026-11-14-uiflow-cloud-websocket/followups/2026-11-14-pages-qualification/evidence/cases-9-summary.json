@@ -1,0 +1,938 @@
+{
+  "schema_version": 1,
+  "scope": "Exact firmware/profile/controller and actual local browser-WASM execution; no whole-device or physical claim",
+  "overall_qualification": "LOCAL_FULL_GATE_PASS",
+  "cases": [
+    {
+      "ordinal": 57,
+      "case": {
+        "lane": "fixed",
+        "device": "atoms3-lite",
+        "script": "test_public_qemu_headless_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_headless_guest.mjs",
+        "sha256": "8da7dd920761cf2875eae78ce485f9bf22e63e6affd8000191417a6f085b7a84"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "915120035b2269397222377034625d39b8807a77d4f7cea5512c9f5c81eaebce",
+      "child_report_bytes": 73688,
+      "checks_passed": 15,
+      "checks_total": 15,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-headless-reference-label",
+        "public-headless-reference-instructions",
+        "original-firmware-board-and-output-route",
+        "no-lcd-or-frame-transport",
+        "same-guest-rmt-output-and-qmp-button-loop",
+        "read-only-output-and-no-display-negative-controls",
+        "exact-model-button-edges-and-no-output-echo",
+        "automatic-poll-never-requests-a-frame",
+        "clean-guest-and-worker-stop",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-iframe",
+        "no-device-service-or-page-errors",
+        "stopped-model-output-unknown"
+      ],
+      "firmware": {
+        "input_sha256": "ad515fce316589d186fbcfb53b409787936f052748323db4b793ef3bc640fa36",
+        "execution_sha256": "ad515fce316589d186fbcfb53b409787936f052748323db4b793ef3bc640fa36",
+        "receipt_firmware_sha256": "ad515fce316589d186fbcfb53b409787936f052748323db4b793ef3bc640fa36",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5atoms3lite",
+        "profile": "atoms3-lite-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "Space",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "touch",
+            "down": true,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "atoms3-lite",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 137,
+            "device": "atoms3-lite",
+            "input": "button",
+            "kind": "ready",
+            "output": "ws2812-rmt-gpio35",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "atoms3-lite",
+            "kind": "pressed",
+            "seq": 3
+          },
+          {
+            "count": 1,
+            "device": "atoms3-lite",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "atoms3-lite",
+            "kind": "released",
+            "seq": 5
+          }
+        ],
+        "raw_snapshot_count": 2,
+        "raw_rgb565_hashes_verified": 0,
+        "headless_states": [
+          {
+            "stage": "idle",
+            "led_rgb": 2113632,
+            "led_frames": 2,
+            "pressed": false,
+            "model_known": true,
+            "model_pressed": false,
+            "spatial_mapping": "single-led"
+          },
+          {
+            "stage": "down",
+            "led_rgb": 4235296,
+            "led_frames": 3,
+            "pressed": true,
+            "model_known": true,
+            "model_pressed": true,
+            "spatial_mapping": "single-led"
+          },
+          {
+            "stage": "up",
+            "led_rgb": 2113632,
+            "led_frames": 4,
+            "pressed": false,
+            "model_known": true,
+            "model_pressed": false,
+            "spatial_mapping": "single-led"
+          }
+        ],
+        "limit": "Uniform RMT LED color only; no nonuniform spatial mapping or IMU claim"
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "snapshot_sha256": "f64fd1d9e8f491a4dbb7543628253f026453fddedc4929ff6162e7b6fe879729",
+          "serial_sha256": "2bcb5856a9e5283cb169dacae1f7e42a95799a5b83a3adeee1cfca361ee6c19d",
+          "serial_bytes": 770,
+          "fixture_serial_rows": 5,
+          "frame": null,
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "1358ef51ea088194db6c6bfeef959681c25b98991fefbbca713d515773313947",
+          "serial_sha256": "2bcb5856a9e5283cb169dacae1f7e42a95799a5b83a3adeee1cfca361ee6c19d",
+          "serial_bytes": 770,
+          "fixture_serial_rows": 5,
+          "frame": null,
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 58,
+      "case": {
+        "lane": "fixed",
+        "device": "atoms3r",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "5d6fe04103cffb620d49a93b931ad08cdc74dc2b3e5238b4dc3ebf649f9a6ec9",
+      "child_report_bytes": 84859,
+      "checks_passed": 25,
+      "checks_total": 25,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "39c8204958c09516407ee6743d532777b7ac81f7650d2fbf7c1038587b361a80",
+        "execution_sha256": "39c8204958c09516407ee6743d532777b7ac81f7650d2fbf7c1038587b361a80",
+        "receipt_firmware_sha256": "39c8204958c09516407ee6743d532777b7ac81f7650d2fbf7c1038587b361a80",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5atoms3r",
+        "profile": "atoms3r-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "Space",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "atoms3r",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 18,
+            "device": "atoms3r",
+            "input": "button",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "atoms3r",
+            "kind": "pressed",
+            "seq": 3,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "atoms3r",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "atoms3r",
+            "kind": "released",
+            "seq": 5,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "atoms3r",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "count": 0,
+            "device": "atoms3r",
+            "y": -1,
+            "x": -1,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "atoms3r",
+            "y": -1,
+            "x": -1,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 4,
+          "rendered_sequence": 4,
+          "pixels_compared": 16384,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "aad5d76942aaac82fcb25c656f81f2e2d4254a648089d05a54e4f3a98e163f0a",
+          "serial_sha256": "799aa1178e5a44cf99e11deb805e7d57e7cc699acaa8d394e9a0fd611f924e4f",
+          "serial_bytes": 885,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 128,
+            "height": 128,
+            "format": "rgb565le",
+            "sha256": "6e0fb3d07c4990c0b3dd44cee513ec934ffe395b141cde1c26373881469469bd"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "022ed4da53d978a2b776fb77ac16d1b9990a56c9578e1a0502eaaae184ac7268",
+          "serial_sha256": "a3a0a245af363b0ed2c33fd05a3ead2923f2487cbaab6e7787ec1a76092b518b",
+          "serial_bytes": 505,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 128,
+            "height": 128,
+            "format": "rgb565le",
+            "sha256": "a0b4dc103de3365f25dee5bb6cca20ba247935a77b2f3615c54bc21a82a96d73"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "d01961a53dd98d2ebbc92d45805d2f1cdf8bd83d5da5f6a2fb4e273b045eed4e",
+          "serial_sha256": "799aa1178e5a44cf99e11deb805e7d57e7cc699acaa8d394e9a0fd611f924e4f",
+          "serial_bytes": 885,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 128,
+            "height": 128,
+            "format": "rgb565le",
+            "sha256": "6e0fb3d07c4990c0b3dd44cee513ec934ffe395b141cde1c26373881469469bd"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 59,
+      "case": {
+        "lane": "fixed",
+        "device": "cardputer",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "39ab97840b5f0892de803f20bfb10cda1216c1fe066868f145ba0dfdbd7c880c",
+      "child_report_bytes": 88175,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "original-cardputer-k132-board",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "2a086148973b22f6c7f289536c977e1e7968e17f7f02717c552088269ed3ac55",
+        "execution_sha256": "2a086148973b22f6c7f289536c977e1e7968e17f7f02717c552088269ed3ac55",
+        "receipt_firmware_sha256": "2a086148973b22f6c7f289536c977e1e7968e17f7f02717c552088269ed3ac55",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5cardputer",
+        "profile": "cardputer-k132-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "F12",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "f12",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "f12",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "cardputer",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 14,
+            "device": "cardputer",
+            "input": "button",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "cardputer",
+            "kind": "pressed",
+            "seq": 3,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "cardputer",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "cardputer",
+            "kind": "released",
+            "seq": 5,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "cardputer",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "count": 0,
+            "device": "cardputer",
+            "y": -1,
+            "x": -1,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "cardputer",
+            "y": -1,
+            "x": -1,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 3,
+          "rendered_sequence": 3,
+          "pixels_compared": 32400,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "ec91a6bc7df9d8eb2074d8d57e377cb0cf283b37e831f26684381582b0540133",
+          "serial_sha256": "fa3f36070e7913f8285f8a52a048213d8de0ebfb226844d104ae6c568c95123f",
+          "serial_bytes": 812,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "045beb71bb337724b92f3f01d1948be6c8ad6c5e0849cb00009445be7e518d4f"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "7d8eb5524a9fb8c229cc94d7c201b9e9bfea1d2cc7d99d7d799d46559030a980",
+          "serial_sha256": "e03a7a6c9c7bc7386457928d31dfdeb28e795bd6b6cba6fd3ba0eb736a8355e4",
+          "serial_bytes": 424,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "3cef4c501419dbf0e17037d73b27b70f0c09036ba23f71ff01a42b625367f09e"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "5fa0de64e54ff3def8cfa0262b3e79ea548676e0dc78ed543b7b0fba985d8e7d",
+          "serial_sha256": "fa3f36070e7913f8285f8a52a048213d8de0ebfb226844d104ae6c568c95123f",
+          "serial_bytes": 812,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "045beb71bb337724b92f3f01d1948be6c8ad6c5e0849cb00009445be7e518d4f"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 60,
+      "case": {
+        "lane": "fixed",
+        "device": "stamplc",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "fba78759b5f68ebae9fe49f616e1e4f5a97926a6346949bba65fb42952e5acc7",
+      "child_report_bytes": 85270,
+      "checks_passed": 25,
+      "checks_total": 25,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "56b2fb1ce84b9fdde53b8e71737913bcf154e39b633b4311c26f2b3fd6e700bc",
+        "execution_sha256": "56b2fb1ce84b9fdde53b8e71737913bcf154e39b633b4311c26f2b3fd6e700bc",
+        "receipt_firmware_sha256": "56b2fb1ce84b9fdde53b8e71737913bcf154e39b633b4311c26f2b3fd6e700bc",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5stamplc",
+        "profile": "stamplc-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "KeyA",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "stamplc",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 21,
+            "device": "stamplc",
+            "input": "button",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "stamplc",
+            "kind": "pressed",
+            "seq": 3,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "stamplc",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "stamplc",
+            "kind": "released",
+            "seq": 5,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "stamplc",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "count": 0,
+            "device": "stamplc",
+            "y": -1,
+            "x": -1,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "stamplc",
+            "y": -1,
+            "x": -1,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 5,
+          "rendered_sequence": 5,
+          "pixels_compared": 32400,
+          "model_rotation": 90,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "090e1130e723e23df8562d3fa294b45e79342c84de42317b9e10ecd4abbe28ce",
+          "serial_sha256": "cbac7b2dcdb22e6e9f530d501fee0a9855b10b57e2faffbded5a89063ac51ae8",
+          "serial_bytes": 885,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "80a26e6423442b8f11b0b89ecf9f822d67ff31c865c5004dde24ebcec6b853a9"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "bbd7becf21b8eadca5afd0af8f984d883118c021535c1455bffb9b920f6d4ca7",
+          "serial_sha256": "e35199e5cf17abcc36645c18a38e542cf2b07a7c1daaa48994c8722e25fcce46",
+          "serial_bytes": 505,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "07ff179eeac79ceb1364ea2b6f15800291854c46f7f9059c4d91b34e6ec978bf"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "a156fe19a696e381ca6c25e38db233f730ae4770d2bee08dddd7121285c619ba",
+          "serial_sha256": "cbac7b2dcdb22e6e9f530d501fee0a9855b10b57e2faffbded5a89063ac51ae8",
+          "serial_bytes": 885,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "80a26e6423442b8f11b0b89ecf9f822d67ff31c865c5004dde24ebcec6b853a9"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    }
+  ]
+}

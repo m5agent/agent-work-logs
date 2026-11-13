@@ -1,0 +1,1174 @@
+{
+  "schema_version": 1,
+  "scope": "Exact firmware/profile/controller and actual local browser-WASM execution; no whole-device or physical claim",
+  "overall_qualification": "LOCAL_FULL_GATE_PASS",
+  "cases": [
+    {
+      "ordinal": 25,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "stackchan",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "d42c622eb1640aa3427021baad769554e6a371c3b163557ce2d7fb305b440e6c",
+      "child_report_bytes": 3444263,
+      "checks_passed": 10,
+      "checks_total": 10,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "8ed58bd2c21ccb811fcef5ffbce902ebe3a8eea7cb005d641a4c3ecf54df0394",
+        "execution_sha256": "8ed58bd2c21ccb811fcef5ffbce902ebe3a8eea7cb005d641a4c3ecf54df0394",
+        "receipt_firmware_sha256": "8ed58bd2c21ccb811fcef5ffbce902ebe3a8eea7cb005d641a4c3ecf54df0394",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "9e6e8066ee317691556c4758911a0345ed4e62398f461b364bb90a147c6db5f9",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5stackchan",
+        "profile": "stackchan-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "c968ec54fa8485051b612bdd1974fb2e085a2dc00bd721b4a33d78092454d8bb",
+          "serial_sha256": "c3015acee4607ac6545cb500acc4fe6eb9650493fa3953b927f7f9aefe385f9a",
+          "serial_bytes": 1473
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "c968ec54fa8485051b612bdd1974fb2e085a2dc00bd721b4a33d78092454d8bb",
+          "serial_sha256": "f6fa90a00d332d4ab5b7c59ceff3fba8bd1b9e7795a69655b0005e827b06aa31",
+          "serial_bytes": 1548
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 2,
+        "component_counts": {
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 1,
+          "pointer": 1
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          253.70299999999952,
+          254.1362909999989
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 5,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 320,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 26,
+      "case": {
+        "lane": "stackchan-body-touch",
+        "device": "stackchan",
+        "script": "test_public_stackchan_body_touch_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_stackchan_body_touch_guest.mjs",
+        "sha256": "a5c18d0fcff32de3e871692174be7d6208c00e2003a9e47cd5215ec3815d4bd4"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "08c563cf22fcd7a019329faed7f53873f224aa3a30ca60b4f0348598d87cbbb3",
+      "child_report_bytes": 1791817,
+      "checks_passed": 35,
+      "checks_total": 35,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "8ed58bd2c21ccb811fcef5ffbce902ebe3a8eea7cb005d641a4c3ecf54df0394",
+        "execution_sha256": "8ed58bd2c21ccb811fcef5ffbce902ebe3a8eea7cb005d641a4c3ecf54df0394",
+        "receipt_firmware_sha256": "8ed58bd2c21ccb811fcef5ffbce902ebe3a8eea7cb005d641a4c3ecf54df0394",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "9e6e8066ee317691556c4758911a0345ed4e62398f461b364bb90a147c6db5f9",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5stackchan",
+        "profile": "stackchan-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "c968ec54fa8485051b612bdd1974fb2e085a2dc00bd721b4a33d78092454d8bb",
+          "serial_sha256": "a3e4f7b8478f6933f95f4cd8669834db03e8e2dc94315b111d4836af66aeff31",
+          "serial_bytes": 337
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "c968ec54fa8485051b612bdd1974fb2e085a2dc00bd721b4a33d78092454d8bb",
+          "serial_sha256": "ed74e58754682b8fb397d54202a76f7f179b61a819fbf81e74a7684b17a9bc42",
+          "serial_bytes": 3729
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 6,
+        "component_counts": {
+          "touch-1": 2,
+          "touch-2": 2,
+          "touch-3": 2
+        },
+        "methods": {
+          "keyboard": 3,
+          "pointer": 3
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          253.4955829999999,
+          259.4156249999978
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 15,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 320,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+        },
+        "independently_verified_raw_frame_hashes": 1,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-private-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 27,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "papercolor",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "2fb26a478b444466a27084792e492de46e3594c26cd73a17cbde1a3628a26dd5",
+      "child_report_bytes": 18837482,
+      "checks_passed": 65,
+      "checks_total": 65,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "c4486aba3d494048a8dd9e464a610bce0d19369b51ae814f2f221ddc630b6b34",
+        "execution_sha256": "c4486aba3d494048a8dd9e464a610bce0d19369b51ae814f2f221ddc630b6b34",
+        "receipt_firmware_sha256": "c4486aba3d494048a8dd9e464a610bce0d19369b51ae814f2f221ddc630b6b34",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5papercolor",
+        "profile": "papercolor-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "537b195fdca8891f32c9ec571f4a30aabc60b399509a6ad64fad7e39ca72cd1b",
+          "serial_sha256": "c91ff367ee7469e1a9d5cf9614f5fbfb7774cef0a0da365d627a30485e2d8fe2",
+          "serial_bytes": 455
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "537b195fdca8891f32c9ec571f4a30aabc60b399509a6ad64fad7e39ca72cd1b",
+          "serial_sha256": "dae36c4c705e8b2e7b65f55587354ba74b811fd3082ed98ccdcab5f5884cb2f0",
+          "serial_bytes": 4068
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "537b195fdca8891f32c9ec571f4a30aabc60b399509a6ad64fad7e39ca72cd1b",
+          "serial_sha256": "dae36c4c705e8b2e7b65f55587354ba74b811fd3082ed98ccdcab5f5884cb2f0",
+          "serial_bytes": 4068
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "e0f4e2a5aac687dde191d8f61517b9ba112f09612b7d87e7f6cb8d8fc0c7daeb",
+          "stdout_sha256": "2bdb08e8fdb8d568747fff70ba09bdf6d84ef7e89cf6e799fd887420ec122c59",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "f085c78bf9499181f1aba246915b0e48181a1f372ac464697659eb7f216e97b3",
+          "stdout_sha256": "e797e124e2d2ed47ee9e12fd7a7becf8c559320113a6e630fcee6b90d7cbdab8",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "b743c57d6f599c722ab18bd8239c4305e3f54f6eb7d95f9a9ae572385e04bfab",
+          "stdout_sha256": "2269ca8d6b667e92346e252f3156e72d0a7e649764adfd2a66511ae9e9804b13",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "33b7d142fc4fb7117c47870e35729fe84bf2b4f7f033d157f95fe3c0a2188dfe",
+          "stdout_sha256": "7fcc494dd9fa03ad8f90c6ab3d4a0956898540d5e540cd521354681e6c4aebf2",
+          "stderr_sha256": "c493acfe532f7a7b920633f630802c1e8511335a00a97a2b3a6ae3fbf0accd9d",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "6d5b43e1af014479112a7f7f7932b68553192d6448ba58022cdce5c12c2dcfbd",
+          "stdout_sha256": "7406298df32789d0096a8ebcbf51e5f4c2c498c77949d627a215edb5a8ca1472",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "99d253041cf4527d66ea9919bd97185a5a6cef7927cc84f748feadb2dc392449",
+          "stdout_sha256": "17b46f449a212e11f5669129ba086ec7ffe5010e6f91809e4cb0a73f2b392390",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "c672ea38c45352476eeaa8b6c564913f2644ea69132fb56f30d50acbfaf1ef3b",
+          "stdout_sha256": "37d79cf97ea5eadae9d4676e6aa9d621c91a7c9bab0540023d06cc51ed5e0e07",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "8a92f9ffc5cee89b19f66fff97a63ce3db2c461c1d039532725ccc0437707b84",
+          "stdout_sha256": "7d2b88196e2a5ead4b3ab3ef87d502489aff2bc51bc022e86f7fadb78e4470aa",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "d1888a28cea96d5fbb568b1a14fdadd8308793fc0ec106b7c06c601146e20374",
+          "stdout_sha256": "7410631556c4d94d6bc21bef81ec190a24720b647442bc0f48921fc33babe8e3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 400,
+          "height": 600,
+          "format": "rgb565le",
+          "sha256": "fd3df91fd84ccf152312658b574cb0215e3bca334105a24ecc48f7f4f0a92261"
+        },
+        "independently_verified_raw_frame_hashes": 3,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 28,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "papercolor",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "86484ffa7051c2e33fb8b9e79ac34f4d581b65bfe8010cfd1e60eef789728116",
+      "child_report_bytes": 12604069,
+      "checks_passed": 23,
+      "checks_total": 23,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "c4486aba3d494048a8dd9e464a610bce0d19369b51ae814f2f221ddc630b6b34",
+        "execution_sha256": "c4486aba3d494048a8dd9e464a610bce0d19369b51ae814f2f221ddc630b6b34",
+        "receipt_firmware_sha256": "c4486aba3d494048a8dd9e464a610bce0d19369b51ae814f2f221ddc630b6b34",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5papercolor",
+        "profile": "papercolor-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "537b195fdca8891f32c9ec571f4a30aabc60b399509a6ad64fad7e39ca72cd1b",
+          "serial_sha256": "da9754d54e52fc17b5587e9c0dfcaeecfc1465eca24c33a64c42a48999b16429",
+          "serial_bytes": 7725
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "537b195fdca8891f32c9ec571f4a30aabc60b399509a6ad64fad7e39ca72cd1b",
+          "serial_sha256": "5f137c82f77f31020b278de149bed019110ada4e39bbd10d34e6b25c728104b5",
+          "serial_bytes": 7804
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 8,
+        "component_counts": {
+          "key1": 2,
+          "key2": 2,
+          "key3": 2,
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 4,
+          "pointer": 4
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          252.3424159999995,
+          254.669332999998
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 41,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 400,
+          "height": 600,
+          "format": "rgb565le",
+          "sha256": "fd3df91fd84ccf152312658b574cb0215e3bca334105a24ecc48f7f4f0a92261"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 29,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "papermono",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "3c0e5956379e6fe195aa5bfd1dae429af69b5c561213c75acabd2cb423c4085d",
+      "child_report_bytes": 30068960,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0",
+        "execution_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0",
+        "receipt_firmware_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5papermono",
+        "profile": "papermono-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "77d9e36c84fa93acd5c9477b54dbb4808e7b8ae1a597f01277eff6ae220ee70a",
+          "serial_sha256": "f23a3e9511c75b9a9e76c4e294e768a2c6275f0ea9df3cbf24c48faf1ba2065c",
+          "serial_bytes": 454
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "77d9e36c84fa93acd5c9477b54dbb4808e7b8ae1a597f01277eff6ae220ee70a",
+          "serial_sha256": "c8c32ffca17652d805eb912b8118b64038833a48d9e2c50479222a306b076b9d",
+          "serial_bytes": 4067
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "77d9e36c84fa93acd5c9477b54dbb4808e7b8ae1a597f01277eff6ae220ee70a",
+          "serial_sha256": "c8c32ffca17652d805eb912b8118b64038833a48d9e2c50479222a306b076b9d",
+          "serial_bytes": 4067
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "afb63124ce89206d275a5db8852705c962a85eb4b95e86f3b25b0e87dac9b068",
+          "stdout_sha256": "9d948b8eb35ea093a65aaebf3d2abbea147a1e2442b9a7b304d93f6a6f9c07bd",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "505b12be76114c6cf96417f4f6db63b174a81e1c918712a71dae0301a6510934",
+          "stdout_sha256": "ac37ffb4a7aa1db1fefed95a4afb11b49409faf59e0bb9fb6cfa1dacd78ace83",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "8914710ec1503624f7b62af1a34240e5c238649ddb8798160fee455ce2cccc2b",
+          "stdout_sha256": "6795242c36599b59bebe7ea85bd13eee4b117316510e5562cba2efd5753acf7c",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "69280fbeed2195d917fffb28ccac71a4d0a6b9f572d802491e7693e3822801b0",
+          "stdout_sha256": "584a07ef03c6612e44a43d540116c8cc85d515416cbd8e23889a7a9538fcc83e",
+          "stderr_sha256": "f594d2366203ddab01fed3727bef8659039d7a76835c099247a66f91ecfaa25b",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "4792349df73c1b2d16a7b55516814b0914d17b93f49c9afc4de9e595903ae351",
+          "stdout_sha256": "1729d33be18d4bdaee6e92b393f434bf03e28df631e4e5affb4046d615d9de45",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "0302c55439da4b147559eb7847069e01a4e5ee7c3c73bec93b94bd7c2ea5f1a2",
+          "stdout_sha256": "41dd2a1b413543d6c3cbb92a3918f08533bb0d1d256d82b526a99db008f5abef",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "18b44092f0c990deb8c3d042374052942025768215c3fe50aec1af860e6b2453",
+          "stdout_sha256": "7d854f525a2ec58b2fc70e356b37266a4daff48db9394ea3d1ad8e23bb4a52cb",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "a42372f1c6ce6bb0258cb5dfe3c6d80c62df39cffddd792d6da0b0eaae2fda0c",
+          "stdout_sha256": "bd8afb27bc3b5e47b192bb442b504c87dfa1126fc3a38f947c0882fe6911cdce",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "e85bf880270e0875c496c8af7437a8d440308575c47da0c2c65d3b3a8b1e948f",
+          "stdout_sha256": "1e79adf919e90b2080ba0e12d22cb1fb9b3627819efe2ad94616e3c60f9e32b6",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 480,
+          "height": 800,
+          "format": "rgb565le",
+          "sha256": "d734cba5a1c20b1822d70d4e2d2bc45e59c2f65917c099bff722b987d087e24f"
+        },
+        "independently_verified_raw_frame_hashes": 3,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 30,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "papermono",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "83622da69f59428219ed2ecd72c762f411426d70a52d86ae88bd81196c660184",
+      "child_report_bytes": 20072824,
+      "checks_passed": 19,
+      "checks_total": 19,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0",
+        "execution_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0",
+        "receipt_firmware_sha256": "f03a6fccab31e3f3b1a3c83aabff6953f822744b5672e5b46df2ee7e57b5a9f0",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5papermono",
+        "profile": "papermono-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "77d9e36c84fa93acd5c9477b54dbb4808e7b8ae1a597f01277eff6ae220ee70a",
+          "serial_sha256": "2972676bb6d449dae86043c8c1c3ff8f3f16df9173e071f4e636e9795f05136b",
+          "serial_bytes": 5745
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "77d9e36c84fa93acd5c9477b54dbb4808e7b8ae1a597f01277eff6ae220ee70a",
+          "serial_sha256": "2972676bb6d449dae86043c8c1c3ff8f3f16df9173e071f4e636e9795f05136b",
+          "serial_bytes": 5745
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 6,
+        "component_counts": {
+          "key1": 2,
+          "key2": 2,
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 3,
+          "pointer": 3
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          252.40549999999712,
+          254.60499999999956
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 29,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 480,
+          "height": 800,
+          "format": "rgb565le",
+          "sha256": "d734cba5a1c20b1822d70d4e2d2bc45e59c2f65917c099bff722b987d087e24f"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 31,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "core2",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "e4c3d66089ba63366d988d630fb94764a5ec4081c3d0e3679b768fe73f8a798e",
+      "child_report_bytes": 3489639,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "783b784df1e9ba1ea3896afcc845c6a26eb02f65dc35d9e33ebc4b000db7bce5",
+        "execution_sha256": "783b784df1e9ba1ea3896afcc845c6a26eb02f65dc35d9e33ebc4b000db7bce5",
+        "receipt_firmware_sha256": "783b784df1e9ba1ea3896afcc845c6a26eb02f65dc35d9e33ebc4b000db7bce5",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5core2",
+        "profile": "core2-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single"
+        },
+        "oneInsnPerTb": false
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "eed70a7eb143f8c5786397fce4f66999fa91f3bd0f6b231c91be51c454161b75",
+          "serial_sha256": "78887fde383e1fb5e27538a24a0077f8350ece18b4e7ef7c71fc93b8ce73530c",
+          "serial_bytes": 697
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "eed70a7eb143f8c5786397fce4f66999fa91f3bd0f6b231c91be51c454161b75",
+          "serial_sha256": "c3894ec421922b1cfff4862ab83f0f4dd0ff95c356d33cae9e0de6f7a8cd729f",
+          "serial_bytes": 4528
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "eed70a7eb143f8c5786397fce4f66999fa91f3bd0f6b231c91be51c454161b75",
+          "serial_sha256": "c3894ec421922b1cfff4862ab83f0f4dd0ff95c356d33cae9e0de6f7a8cd729f",
+          "serial_bytes": 4528
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "77fec5c7ae1888881356471085b8113b76d844272b3286489b682ae5c12d0fc6",
+          "stdout_sha256": "94294c07fb06a05b1bde845d73afc8918253e0f871ff9bc01caec395dd6896bc",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "722a6b69e1cc2635c509f2f0909d860aaac30427087c4085671d05b33a04455d",
+          "stdout_sha256": "105893d0ff273851003a283c230142ce1ad428cd980485a0167e5168feace162",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "85a5146946d1334fec617fefaf48fc59f7cbacfd16657fafed51dde7d9bc8000",
+          "stdout_sha256": "ab158453d9bbbed9072feacd5b2d1c6e3e109ad7c6774d416164e2cae5e6bcb7",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "fcb2dab4d88d4da847b12f06a968d358959f6337f9352498bceb2019bc4e2eaa",
+          "stdout_sha256": "14c44c7a18628028129d99c0116821f3e93065a91f2801cffa8f3f297eb016ca",
+          "stderr_sha256": "04582c23501a27eec210eaa585c5091059fc6b23082f658923eb7fbc1aef7f3a",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "eda678b543a2a73c176ac1a6c14bcf344ae912747b5d1c874e5c7186ba1cd943",
+          "stdout_sha256": "bf3aeacbe93cef447f3d8458ab92744b1c7ec9eb8db782bd9ec9de44d8a2e7e0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "570a624c1c447c4e3860add221d6e61e5f853eb27ad3dea6f5fc50ddbc861c74",
+          "stdout_sha256": "1818cb9bfb3cf9df680c6dac74bc07913e3e65ceb2c222ac590d91ecdf8b0dd7",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "184674e395a0303c2ed26d1ff566da2056f7e0f6149533531c7f49263b0f1819",
+          "stdout_sha256": "50249f08592bad6c14ea2f96ab585d870ad129a7807e5b820d75452aada378db",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "91dea0ec77b29b5aac5cc04ef1d1063963035f7e1527a31509d06911cda5db8f",
+          "stdout_sha256": "c2396cbf964205366f9dd6e3e837058a77cb5eb474bc0f50565a06e08c9029af",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "1d3313aec162c6f837e6156ee57e161bc5dce9dee97bda3c1c8fc01260e60fb4",
+          "stdout_sha256": "e560e9c3bb378e1aa1d84ad134d23621b793c3094beb9a7467ed88768c45830a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 320,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 5,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 32,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "core2",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "913492ca8e888b86a272a113b508b5b7b2dfb111cc6dc00276a1033e3629e032",
+      "child_report_bytes": 3496864,
+      "checks_passed": 22,
+      "checks_total": 22,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "783b784df1e9ba1ea3896afcc845c6a26eb02f65dc35d9e33ebc4b000db7bce5",
+        "execution_sha256": "783b784df1e9ba1ea3896afcc845c6a26eb02f65dc35d9e33ebc4b000db7bce5",
+        "receipt_firmware_sha256": "783b784df1e9ba1ea3896afcc845c6a26eb02f65dc35d9e33ebc4b000db7bce5",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5core2",
+        "profile": "core2-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single"
+        },
+        "oneInsnPerTb": false
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "eed70a7eb143f8c5786397fce4f66999fa91f3bd0f6b231c91be51c454161b75",
+          "serial_sha256": "0d87183044f9e25b554ac245f10106018ec72d61520de46c8d39865673870908",
+          "serial_bytes": 7617
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "eed70a7eb143f8c5786397fce4f66999fa91f3bd0f6b231c91be51c454161b75",
+          "serial_sha256": "0d87183044f9e25b554ac245f10106018ec72d61520de46c8d39865673870908",
+          "serial_bytes": 7617
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 8,
+        "component_counts": {
+          "a": 2,
+          "b": 2,
+          "c": 2,
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 4,
+          "pointer": 4
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          251.42791700000816,
+          255.49620799999684
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 41,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 320,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 5,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    }
+  ]
+}

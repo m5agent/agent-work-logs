@@ -1,0 +1,1313 @@
+{
+  "schema_version": 1,
+  "scope": "Exact firmware/profile/controller and actual local browser-WASM execution; no whole-device or physical claim",
+  "overall_qualification": "LOCAL_FULL_GATE_PASS",
+  "cases": [
+    {
+      "ordinal": 1,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "atom-matrix",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "f3dcc1b2b5660487849924a8121c0ca2e9b8df623a7908418459db479596d9d3",
+      "child_report_bytes": 110127,
+      "checks_passed": 59,
+      "checks_total": 59,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+        "execution_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+        "receipt_firmware_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5atommatrix",
+        "profile": "atom-matrix-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single",
+          "icountMaxPerCpuNs": 10000
+        },
+        "oneInsnPerTb": false
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "339b4a5c87b546d8c7a6eeea17ba7a74c0edb5415350fe1331bc605c6f675395",
+          "serial_sha256": "c68370567473b5d35fc809c6ff390483fdb2668be3df0dd3c0a51a08f383bee3",
+          "serial_bytes": 695
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "339b4a5c87b546d8c7a6eeea17ba7a74c0edb5415350fe1331bc605c6f675395",
+          "serial_sha256": "9e51a647ae7bb36c475fd6f93660dcb060cba406f27e5ca7b9a86ac1de6cc6eb",
+          "serial_bytes": 4273
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "339b4a5c87b546d8c7a6eeea17ba7a74c0edb5415350fe1331bc605c6f675395",
+          "serial_sha256": "9e51a647ae7bb36c475fd6f93660dcb060cba406f27e5ca7b9a86ac1de6cc6eb",
+          "serial_bytes": 4273
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "970aecdb42de05f3cd7e5aae926d15137795f820645acb15803ea0d14e6394ec",
+          "stdout_sha256": "ce8d49256109a07b02cc5be4cee3605c8d0e9805adfc3a8a271ab279ec60330d",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "20b43b3330fdbd53761a5ce215bf7c0e6961292d22712341060f6375cf6a3d6b",
+          "stdout_sha256": "1329a6dfce18e75697403ab32d7b3932f089e6642b59ea5d59e80faa3676122b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "8ce34b58fc997b664cc01407025e2b0ffda696f601542e636248b46ba6d6e32f",
+          "stdout_sha256": "a1c2cfb6f37c79c6740d528585e0ba84c3b9369ef5cf5e26311a34ff70df21a0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "fa349db8ee0bbd3c9e7ac21a3935b27e989b1337933833bbed33b19c585410fc",
+          "stdout_sha256": "9cbf9075dd41861964f86b92bd044ba65dcff6759f9e5e43c07413434e0d4caf",
+          "stderr_sha256": "818c6a0c604d7baff88949bc2123689d10f3c8a6034b08e4412e454c98c477d4",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "4cc6762db1a975f3a7de57deba5b287e0d1a2711fcaebbe56734d0b992d3c57c",
+          "stdout_sha256": "0fe1bc33a9327031586722747d565629cbc975de8435d2723a9316310741f2a8",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "f93b7a3a504f7746f1326448b15e360b8286747bbf3491d88d13d222f174f291",
+          "stdout_sha256": "f8e5970f21d84fd8bc2c75bfd29829243f097eb633d46aad4e25e87d57083f73",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "076362730e47ed0509124277cb4c0f2e78d3c4d64a217aaf63fa10ae3c42f90a",
+          "stdout_sha256": "8741b2c2e4675d25d5051ed67c53d629cb9d3e818c811f8c84fd508cf718634f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "1b63daf4de0ea63409d2de08dcf5a0256523ecca467c56634c701d20a6953695",
+          "stdout_sha256": "debd0e7de7d6464a03884cb78c66ffd01afb6c4ee292e82a9057a6cb3fd22d50",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": null,
+        "independently_verified_raw_frame_hashes": 0,
+        "headless_output": "Data/serial/LED control contract; no pixel display declared"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 5,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 2,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "atom-matrix",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "46ac8357d91bf87661306933f4db28046388744129bb63006b2b7b0ff24c39e5",
+      "child_report_bytes": 68680,
+      "checks_passed": 10,
+      "checks_total": 10,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+        "execution_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+        "receipt_firmware_sha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5atommatrix",
+        "profile": "atom-matrix-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single",
+          "icountMaxPerCpuNs": 10000
+        },
+        "oneInsnPerTb": false
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "339b4a5c87b546d8c7a6eeea17ba7a74c0edb5415350fe1331bc605c6f675395",
+          "serial_sha256": "8d6d91e1fa58c3fd50830b1906ab9e0c403afb1926dffe49612ca41bf444c4d1",
+          "serial_bytes": 3045
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "339b4a5c87b546d8c7a6eeea17ba7a74c0edb5415350fe1331bc605c6f675395",
+          "serial_sha256": "8d6d91e1fa58c3fd50830b1906ab9e0c403afb1926dffe49612ca41bf444c4d1",
+          "serial_bytes": 3045
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 2,
+        "component_counts": {
+          "button": 2
+        },
+        "methods": {
+          "keyboard": 1,
+          "pointer": 1
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          254.18650000000343,
+          256.45212499999616
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 13,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": null,
+        "independently_verified_raw_frame_hashes": 0,
+        "headless_output": "Data/serial/LED control contract; no pixel display declared"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 5,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 3,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "stickc-plus",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "fc975fade6ba8871b9ac0670c4206f1919d0a5784d2009ac7a0c75c548fe28e0",
+      "child_report_bytes": 2252005,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "42d6318333c7812a75c2072c1cc0e9f13c6e54edb6929198a5a3b3f7b592e36d",
+        "execution_sha256": "42d6318333c7812a75c2072c1cc0e9f13c6e54edb6929198a5a3b3f7b592e36d",
+        "receipt_firmware_sha256": "42d6318333c7812a75c2072c1cc0e9f13c6e54edb6929198a5a3b3f7b592e36d",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5stickcplus",
+        "profile": "stickc-plus-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single"
+        },
+        "oneInsnPerTb": false
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "4000be777241e658123a0f9349c8bb9cffb2de73ca11821fc6a19fe06c5623b5",
+          "serial_sha256": "078a0793c58dbe7f93b5945f12192f337a5807d4bd053ad6ea439c1fd68fe98b",
+          "serial_bytes": 1035
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "4000be777241e658123a0f9349c8bb9cffb2de73ca11821fc6a19fe06c5623b5",
+          "serial_sha256": "19ef4adf13ee4673ee77696327f13cb24878af9d331b50539cb50a85cdb01ed3",
+          "serial_bytes": 5180
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "4000be777241e658123a0f9349c8bb9cffb2de73ca11821fc6a19fe06c5623b5",
+          "serial_sha256": "19ef4adf13ee4673ee77696327f13cb24878af9d331b50539cb50a85cdb01ed3",
+          "serial_bytes": 5180
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "c8cff6641ca3505b96c58b780a417a78ef92afefbca4695ce446f902df177a0a",
+          "stdout_sha256": "116964fbd73fbab88d411169bcb6c151458955c001dec80cdfcfe02475044cfa",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "d660465d7b79ecff7d562c5d16f5a5ef6fecea07bf4a511351c251a81021b297",
+          "stdout_sha256": "417b6911376767c40387ef74643837175c9c201581bd6e5afd27597d38870932",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "568822ca1cbe0803c3bfc72ea2b8ded90ae2fba92b9357d6879ce42d746e2ddb",
+          "stdout_sha256": "b3ae313c64782f9fe6ca0dbb41e99dcbfad4c3a710bf8e39cd8de1e9fb63eb0e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "08900fff2e81e0a658454403a9167135651b1f309052d2551df4261d763adc2a",
+          "stdout_sha256": "f6b74a6d590f949d00e73abd452ac3a71904ff1edb5322ba9fb814c966f69996",
+          "stderr_sha256": "b9eaa9b97e686a83c4e0fc00eeb644e697707b1662e44ddf9893cbb48e3fa86f",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "ef258b5957a7d02160425a1dbbd62a774ed30b03efa5d281007743a35aa89ec2",
+          "stdout_sha256": "ec9c994578ec56dfa37fd2a7d8be18526d404553610456b649fb8fa1fdb8a9e9",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "1aad31103b981a2d1eeee49d1a0bbdb8eda7b000d3ebf3880359492af467df34",
+          "stdout_sha256": "85f20d9606a5fc8102521695e4c6dba91a546e59fbe800ce3b112ed5398831d4",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "aef26b91729a4fab9979d7a4bbfeb3c8d640653d1e78f44d24d96f4e0f7cd636",
+          "stdout_sha256": "846517a91dcdb981c40874601556000209e898b42ae8ad6eaa686e3c3c11bcb0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "bc51965db9e1470466dc09f4f0856b1968db81cbeaee0fbd137d9dccd6e7eb77",
+          "stdout_sha256": "c9c2919c5ccd846b81ac3a1a48c6ec1c3696516522e3b273c8d87d3019fa2c6a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "3ef6febb2e2f7d354704ecde3a081a9325c8f427e150852d4e1c837ddee4ca30",
+          "stdout_sha256": "89061b23b3f49a59aaaff3f42cabcb3c29c0a3a5d1877f7f79e87fb74a0193ea",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 135,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 3,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 5,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 4,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "stickc-plus",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "999bebbd01477184a152cf65e7766606887d264c9a2dba5930efd3bdf11cf7be",
+      "child_report_bytes": 1525637,
+      "checks_passed": 18,
+      "checks_total": 18,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "42d6318333c7812a75c2072c1cc0e9f13c6e54edb6929198a5a3b3f7b592e36d",
+        "execution_sha256": "42d6318333c7812a75c2072c1cc0e9f13c6e54edb6929198a5a3b3f7b592e36d",
+        "receipt_firmware_sha256": "42d6318333c7812a75c2072c1cc0e9f13c6e54edb6929198a5a3b3f7b592e36d",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5stickcplus",
+        "profile": "stickc-plus-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single"
+        },
+        "oneInsnPerTb": false
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "4000be777241e658123a0f9349c8bb9cffb2de73ca11821fc6a19fe06c5623b5",
+          "serial_sha256": "33b4887ae5614413d7a0c5167573445751bf79f57564b990c28fecc889002b28",
+          "serial_bytes": 5963
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "4000be777241e658123a0f9349c8bb9cffb2de73ca11821fc6a19fe06c5623b5",
+          "serial_sha256": "33b4887ae5614413d7a0c5167573445751bf79f57564b990c28fecc889002b28",
+          "serial_bytes": 5963
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 6,
+        "component_counts": {
+          "a": 2,
+          "b": 2,
+          "power": 2
+        },
+        "methods": {
+          "keyboard": 3,
+          "pointer": 3
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          253.2528750000056,
+          255.27483300000313
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 29,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 135,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 5,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 5,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "cardputer-adv",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "32cf39f293566a704544578089c375e09ce808be16ae043f07530a4142306bfd",
+      "child_report_bytes": 1542151,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "execution_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "receipt_firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5cardputeradv",
+        "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "28cc1dd58203a56a337ea5c14e1e3505c1d7fbe38f2c342d55cf6cfe11bf19c9",
+          "serial_bytes": 456
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "ab8ad655b51c1e18513a7d50d0f23a2a7779d99b5bda70e20069950daf193327",
+          "serial_bytes": 4083
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "ab8ad655b51c1e18513a7d50d0f23a2a7779d99b5bda70e20069950daf193327",
+          "serial_bytes": 4083
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "3514827f462f74a812edc496bfc0711e32d435ac442bb022a90bb84eb1ce94e4",
+          "stdout_sha256": "730f812afaab8070b6494160d2a2e8005252250d166f66beb2fa3c8b52a33635",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "d4c290e8061f41f23e7287b442990139dd3bf89f4835c29ecfceec062238f51a",
+          "stdout_sha256": "105c26c92f215417041fbd906e065f577a10a905d1467868793d2969859a11bc",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "93fded99b58a26c87cc61f40e1fee5e9dea0b8f6141be51dc1635d78874651e4",
+          "stdout_sha256": "a7e9374230549732ce63ab82cc28ef0f980cff579a8f0b0cfb1a9cf7530599ea",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "6bc19e3de1006cfd412230137c9d88a519bd17362c3790ad9844de4d416baecc",
+          "stdout_sha256": "dc82c3aa1f315d24b8e0bfbc7c95a0efa260353b49bf4ae77118f20ae2d7c05c",
+          "stderr_sha256": "6b7a769c84804249fb9fec0eb86622af789ad44cbef2946d8efabc4db7b245a2",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "06efb5a9ddf06e29df7888d9fee07c60080f9b55cb86eb6b8f7c9d1b00c77049",
+          "stdout_sha256": "78f7604de903065578314b53d514ebb59494116be3cbfa5424a672f6a43cc5f8",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "a86eb0fec7c3587346ca81c6b649f75c82a7b5ddf9f08878c4f8df0681d50d92",
+          "stdout_sha256": "6c4f5b52cec702c41c56c176a8887b4a05702545f6532f3b86072c116b4c3cb6",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "c2ede78b358b941602e6964c1e4fec3a1975b19dbfd98f196c213ed8ce832d80",
+          "stdout_sha256": "4a184519dc51518bb9fa9182ba8d6fbdf2ed7fb3dad1bd4b0a42df25917aa3a5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "14d0cbc894aeedf50c90c4134aa7c0205436e302c67ffa4b91cdc51e21cc234f",
+          "stdout_sha256": "87317299f9939ca0acea9338a60602e0ecf1e927ca8ae2bcbb3b7b140ad567b6",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "0c4d45a6a67dc50b918350ec1200db0d8869067a12aa3ba11c296b295343f118",
+          "stdout_sha256": "b0316ca2ecd44cad4150def098589ac9cf86d23f7a8ac4a8f97b474df0ea75fc",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 240,
+          "height": 135,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 6,
+      "case": {
+        "lane": "uiflow-buttons",
+        "device": "cardputer-adv",
+        "script": "test_public_qemu_buttons_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_buttons_guest.mjs",
+        "sha256": "917e07dc3f78d375f9291b1568960a5f3cc324f03c0bebf19964e7ca503f5bb3"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "377723a51310a387f8782d8854f6ca7f28e51d3a658a5b15acb9aa6115a8a6da",
+      "child_report_bytes": 1496340,
+      "checks_passed": 10,
+      "checks_total": 10,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "execution_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "receipt_firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5cardputeradv",
+        "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "1b4648097aafdc5e3215c24460eee9f8a0d3bb08f311f7ea410aa44e55f628ab",
+          "serial_bytes": 2785
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "1b4648097aafdc5e3215c24460eee9f8a0d3bb08f311f7ea410aa44e55f628ab",
+          "serial_bytes": 2785
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 2,
+        "component_counts": {
+          "boot": 2
+        },
+        "methods": {
+          "keyboard": 1,
+          "pointer": 1
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          254.24020800000108,
+          257.4097079999992
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 13,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 240,
+          "height": 135,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 7,
+      "case": {
+        "lane": "cardputer-keyboard",
+        "device": "cardputer-adv",
+        "script": "test_public_uiflow_cardputer_keyboard_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_cardputer_keyboard_guest.mjs",
+        "sha256": "0a6474231d1d9ad0ecd0ff9bbee0bc27ac2d1de9d211dd52c971c64cf9810194"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "514434ac06857038452777878698df63becde96850a493f05ed51dcf05594261",
+      "child_report_bytes": 2640957,
+      "checks_passed": 517,
+      "checks_total": 517,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "execution_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "receipt_firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5cardputeradv",
+        "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial.evidence",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "a230bf157db9f6e92404bcdfc662650219ee024cc15b2b932ab7aa7c43b93515",
+          "serial_bytes": 456
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "85acbec6c49e6a580cda90812cd1dd0afb4b6674afdae81816ce190c09cc1073",
+          "serial_bytes": 65538
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "988034bec4a400bb8d0300c8168221295be410ffcd4563e57f77b1b1809dfa5d",
+          "serial_sha256": "85acbec6c49e6a580cda90812cd1dd0afb4b6674afdae81816ce190c09cc1073",
+          "serial_bytes": 65538
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 112,
+        "component_counts": {
+          "key-Escape": 2,
+          "key-Digit1": 2,
+          "key-Digit2": 2,
+          "key-Digit3": 2,
+          "key-Digit4": 2,
+          "key-Digit5": 2,
+          "key-Digit6": 2,
+          "key-Digit7": 2,
+          "key-Digit8": 2,
+          "key-Digit9": 2,
+          "key-Digit0": 2,
+          "key-Minus": 2,
+          "key-Equal": 2,
+          "key-Backspace": 2,
+          "key-Tab": 2,
+          "key-KeyQ": 2,
+          "key-KeyW": 2,
+          "key-KeyE": 2,
+          "key-KeyR": 2,
+          "key-KeyT": 2,
+          "key-KeyY": 2,
+          "key-KeyU": 2,
+          "key-KeyI": 2,
+          "key-KeyO": 2,
+          "key-KeyP": 2,
+          "key-BracketLeft": 2,
+          "key-BracketRight": 2,
+          "key-Backslash": 2,
+          "key-Fn": 2,
+          "key-CapsLock": 2,
+          "key-KeyA": 2,
+          "key-KeyS": 2,
+          "key-KeyD": 2,
+          "key-KeyF": 2,
+          "key-KeyG": 2,
+          "key-KeyH": 2,
+          "key-KeyJ": 2,
+          "key-KeyK": 2,
+          "key-KeyL": 2,
+          "key-Semicolon": 2,
+          "key-Quote": 2,
+          "key-Enter": 2,
+          "key-ControlLeft": 2,
+          "key-AltLeft": 2,
+          "key-AltRight": 2,
+          "key-KeyZ": 2,
+          "key-KeyX": 2,
+          "key-KeyC": 2,
+          "key-KeyV": 2,
+          "key-KeyB": 2,
+          "key-KeyN": 2,
+          "key-KeyM": 2,
+          "key-Comma": 2,
+          "key-Period": 2,
+          "key-Slash": 2,
+          "key-Space": 2
+        },
+        "methods": {
+          "keyboard": 56,
+          "pointer": 56
+        },
+        "requested_hold_ms": [
+          250
+        ],
+        "observed_hold_ms_range": [
+          250.7051250000004,
+          257.4243749999987
+        ]
+      },
+      "actual_programs": [],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 390,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 240,
+          "height": 135,
+          "format": "rgb565le",
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 8,
+      "case": {
+        "lane": "uiflow-editor",
+        "device": "cores3",
+        "script": "test_public_uiflow_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_uiflow_guest.mjs",
+        "sha256": "497a5c5776444b84bd241498b890f44d9a8eb77f3a81c9fca3bdad5711bf0b23"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "5287f6643d5017e027b4caae1b3f01ef9b9347377c9b7b2998a65176aafe274d",
+      "child_report_bytes": 3494260,
+      "checks_passed": 64,
+      "checks_total": 64,
+      "errors": 0,
+      "firmware": {
+        "input_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+        "execution_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+        "receipt_firmware_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+        "semantics": "Launch/composed firmware identities; not a post-run mutable Flash readback",
+        "official_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+        "composer_source_commit": "6cb4e86540eca0d9ba62500a298385c9d863c8be"
+      },
+      "runtime": {
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "engine": "qemu-wasm",
+        "board": "m5cores3",
+        "profile": "cores3-wasm-uiflow-workbench-wallclock-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true
+      },
+      "phase_receipts": [
+        {
+          "stage": "initial",
+          "binding_sha256": "9c7c3fad692f980e3b3ab19becd72bd0b905b0f09e762c79e95afc5b99686f2b",
+          "serial_sha256": "9e33a8f4249fb64d6192693c1efa55ca36ebf80b2ba2881f29ebec49470f0737",
+          "serial_bytes": 335
+        },
+        {
+          "stage": "before_stop",
+          "binding_sha256": "9c7c3fad692f980e3b3ab19becd72bd0b905b0f09e762c79e95afc5b99686f2b",
+          "serial_sha256": "480da523ac8ec604bfceb1dab071aef4a283cd2d31d4882c58cbbe802b422d74",
+          "serial_bytes": 3971
+        },
+        {
+          "stage": "stopped",
+          "binding_sha256": "9c7c3fad692f980e3b3ab19becd72bd0b905b0f09e762c79e95afc5b99686f2b",
+          "serial_sha256": "480da523ac8ec604bfceb1dab071aef4a283cd2d31d4882c58cbbe802b422d74",
+          "serial_bytes": 3971
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "cases": 0,
+        "component_counts": {},
+        "methods": {},
+        "requested_hold_ms": [],
+        "observed_hold_ms_range": null
+      },
+      "actual_programs": [
+        {
+          "name": "default-editor-first-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "default-editor-repeat-run",
+          "source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout_sha256": "c214944ca6fe5b6a12361b0f2c583b69112f89e2b7f5728ee2e06d7cf4336da5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "utf8-print",
+          "source_sha256": "af808bfffab1155eee780e526abfe300c60d71b3e7363b9f42445d7ec0f8cba6",
+          "stdout_sha256": "4c561c0558f898f6e9a99bebc640ec8d0e628447632ee30da4657b5ffc5df230",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "multiline-loop",
+          "source_sha256": "9b09a1bcf871b0a30d0a90239ac09ae27554b52773382f9887dd1d6a0f83274b",
+          "stdout_sha256": "12a9530e772fe882c1b1d6b727b24a2a41d533130ebf8ce874d59de2550e7df7",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "long-utf8-source",
+          "source_sha256": "60204afea05486e18e8a67a602484fe9813ad430b54f3dba15d11c71eaec2019",
+          "stdout_sha256": "89ff7faa343264d1f75bbed476fc08c7ae2db3c6a43f673744042e103d6d059b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "syntax-error",
+          "source_sha256": "b5f77673ca286088d5e94dada734e41406e6c08e11c4206c813aec59674bac57",
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "f4fa8a8ee09e987a34b754c9769e3614c535c75586ae934b80f368e93848a3fe",
+          "interrupted": false
+        },
+        {
+          "name": "runtime-error",
+          "source_sha256": "6acee5f1b1b5d46c8a4ece079e0f32bb25a54447f21c8da526cb8b6b14523988",
+          "stdout_sha256": "d5de22a8df03d01da98002155b8583764122aff554ad19fa916459e3377968bf",
+          "stderr_sha256": "f61cd7c02032915e2e63a9b9aa5251f9c8abb7340534f9b80293c712bc74df5e",
+          "interrupted": false
+        },
+        {
+          "name": "file-import-recovery",
+          "source_sha256": "4e682323a09237ba0c9f98172ee8f260d06c68fc152cd31cf80c2a7cf1d24c6c",
+          "stdout_sha256": "5ece090edd154bcb51b75698a35421a797fef7383eda433b1d1042a7da01f113",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "infinite-program-interrupt",
+          "source_sha256": "13a4a9171a6acfebef810aef8678fbb0618b7056b0fe465aaad688bbdabf0677",
+          "stdout_sha256": "321221e39e376c74c1dc82e8685a15dd63e2fa0f6dd29a03b5ba6962289b4128",
+          "stderr_sha256": "998c4ae58701afca2a623f6cf0797e060481ed2042f4f3fa8292ddaf361de933",
+          "interrupted": true
+        },
+        {
+          "name": "same-vm-after-interrupt",
+          "source_sha256": "e525f249d92ced9c2108f4c17ffe7439c77be970056e70d2c0ead2c2a7bf0d93",
+          "stdout_sha256": "bc37ea00b5869a18c1cdd55831d5d50c11aee8f4ec02e311a88bc20cf62a308c",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "guest-display-output",
+          "source_sha256": "a18fa9fb5774118c54af1991ef45e1c48edcb4250332e0e499e8280b3acfc0df",
+          "stdout_sha256": "985ff7d3ca60af8704a24f194bedfda426f3f72a0614becfc02c63f0e55748bb",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        },
+        {
+          "name": "after-hardware-reset",
+          "source_sha256": "abfeb7f411f3a4f0a34a7d6d2fa33539c8afe60fadec9a09bec311d956ab2782",
+          "stdout_sha256": "6660d1896817c9db2c3a4e2ae5ef6e2dfe966f69a1f8f4a5a2005230116f0e93",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "interrupted": false
+        }
+      ],
+      "serial_or_data_markers": {
+        "independently_checked_observer_rows": 0,
+        "raw_serial_not_published": true
+      },
+      "frame_or_headless_result": {
+        "final_frame": {
+          "width": 320,
+          "height": 240,
+          "format": "rgb565le",
+          "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492"
+        },
+        "independently_verified_raw_frame_hashes": 2,
+        "headless_output": "Pixel frame and guest output contract; no physical optics claim"
+      },
+      "iframe_worker_cleanup": {
+        "iframe_removed": true,
+        "pthread_workers_at_exit": 0,
+        "pthread_workers_remaining": 0,
+        "engine_owner_live": false,
+        "pthread_broker_live": 0,
+        "engine_finalization_acknowledged": true,
+        "engine_ownership_stage": "before-iframe-removal",
+        "actual_cdp_targets_destroyed": 6,
+        "cdp_live_at_checkpoint": 0,
+        "post_browser_close_log_observed": true
+      },
+      "explicit_no_service_check_names": [
+        "no-device-service-requests"
+      ],
+      "independent_child_audit": "PASS"
+    }
+  ]
+}

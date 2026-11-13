@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-14 | ESP Emulator | Pages 完整本地资格与精确包 | `PASS`（本地72/72、2993项及2179文件闭集；发布/HTTPS NOT RUN） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-pages-qualification/) |
 | 2026-11-14 | ESP Emulator / Tab5 | esp-emu v1.0.0 两份原版固件复测 | `FAIL`（两原版均卡在旧 P4 CSR；执行与清理通过，USB 未到达） | [查看](esp-emulator/2026-11-14-p4-v1-originals/) |
 | 2026-11-14 | ESP Emulator | C6 GPIO source30 与实际 ISR | `PARTIAL`（普通 GPIO、70/70、最终源码32/32通过；额外 IRQ与原应用边界保留） | [查看](esp-emulator/2026-11-14-c6-gpio-irq/) |
 | 2026-11-14 | ESP Emulator | UIFlow 身份能力协商与最终源码复验 | `PARTIAL`（旧服务保护、两种身份与最终30/30通过；控制PONG仍FAIL） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-identity-capability/) |

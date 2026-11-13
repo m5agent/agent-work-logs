@@ -1,0 +1,1039 @@
+{
+  "schema_version": 1,
+  "scope": "Exact firmware/profile/controller and actual local browser-WASM execution; no whole-device or physical claim",
+  "overall_qualification": "LOCAL_FULL_GATE_PASS",
+  "cases": [
+    {
+      "ordinal": 53,
+      "case": {
+        "lane": "fixed",
+        "device": "cores3",
+        "example": "wallclock-candidate",
+        "script": "test_public_qemu_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_guest.mjs",
+        "sha256": "d3497c2855d56804003cd86ef1a77e4aa6fbd54cbdf253b40f3d7baa126c9a47"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "b97f48c14b4203bb53b53be317a2a99a952064684792a840b4a8f9b6d9522b2d",
+      "child_report_bytes": 149010,
+      "checks_passed": 34,
+      "checks_total": 34,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-shared-memory",
+        "explicit-public-reference-example",
+        "actual-cores3-lvgl-ready",
+        "c-qemu-runtime-and-exact-fixture",
+        "real-frame-pixels",
+        "actual-raw-canvas-input-target-visible",
+        "actual-trusted-native-pointer-down-up",
+        "negative-touch-does-not-click",
+        "actual-raw-canvas-input-target-visible",
+        "actual-trusted-native-pointer-down-up",
+        "actual-dom-touch-lvgl-callback",
+        "pir-qom-readback",
+        "pir-guest-both-transitions",
+        "qmp-pause-stops-guest-progress",
+        "qmp-resume",
+        "layout-1440",
+        "layout-1024",
+        "layout-768",
+        "layout-390",
+        "quit-and-container-cleanup",
+        "first-engine-and-five-pthreads-close-before-iframe-removal-pthreads-before-iframe-finalization",
+        "first-engine-and-five-pthreads-close-before-iframe-removal-all-targets-after-iframe-finalization",
+        "no-instance-frame-after-stop",
+        "dedicated-engine-closing-notification-without-owner-fallback",
+        "local-history-retains-hash",
+        "shared-reference-restores-example",
+        "fresh-guest-reopen-from-shared-reference",
+        "shared-reference-exact-runtime-variant",
+        "reopen-cleanup",
+        "both-engines-and-ten-pthreads-close-before-iframe-removal-pthreads-before-iframe-finalization",
+        "both-engines-and-ten-pthreads-close-before-iframe-removal-all-targets-after-iframe-finalization",
+        "reopened-engine-notification-without-owner-fallback",
+        "no-service-or-local-emulator-requests",
+        "no-javascript-errors"
+      ],
+      "firmware": {
+        "input_sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+        "execution_sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+        "receipt_firmware_sha256": "e9500994f4c0e1708ec35f5a46146225ac330d210a2427e1fc537c33635d9554",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5cores3",
+        "profile": "cores3-wasm-wallclock-sdk-candidate",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "NOT_RECORDED",
+      "actual_input": {
+        "keyboard": null,
+        "public_events": [],
+        "maximum_snapshot_input_events": 6,
+        "touch_trials": [
+          {
+            "requested_native_xy": {
+              "x": 310,
+              "y": 235
+            },
+            "requested_hold_ms": 650,
+            "trusted_dom_events": [
+              {
+                "type": "pointerdown",
+                "trusted": true
+              },
+              {
+                "type": "pointerup",
+                "trusted": true
+              }
+            ]
+          },
+          {
+            "requested_native_xy": {
+              "x": 160,
+              "y": 184
+            },
+            "requested_hold_ms": 650,
+            "trusted_dom_events": [
+              {
+                "type": "pointerdown",
+                "trusted": true
+              },
+              {
+                "type": "pointerup",
+                "trusted": true
+              }
+            ]
+          }
+        ]
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 10,
+            "kind": "m5_ready",
+            "seq": 2
+          },
+          {
+            "kind": "lvgl_ready",
+            "seq": 3
+          },
+          {
+            "kind": "ready",
+            "seq": 4
+          },
+          {
+            "clicks": 0,
+            "kind": "pir",
+            "seq": 5,
+            "value": 0
+          },
+          {
+            "clicks": 0,
+            "kind": "touch_pressed",
+            "seq": 6
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 7
+          },
+          {
+            "clicks": 0,
+            "kind": "touch_released",
+            "seq": 8
+          },
+          {
+            "clicks": 1,
+            "kind": "touch_clicked",
+            "seq": 9
+          },
+          {
+            "clicks": 1,
+            "kind": "pir",
+            "seq": 10,
+            "value": 1
+          },
+          {
+            "clicks": 1,
+            "kind": "heartbeat",
+            "seq": 11
+          },
+          {
+            "clicks": 1,
+            "kind": "pir",
+            "seq": 12,
+            "value": 0
+          }
+        ],
+        "raw_snapshot_count": 4,
+        "raw_rgb565_hashes_verified": 4
+      },
+      "phase_receipts": [
+        {
+          "stage": "reopened-running",
+          "snapshot_sha256": "2a022e79a6694a8eee3b9d8593d096ed8a52cb498999efc1258acf2f311a928c",
+          "serial_sha256": "18f7b834ab6d46de5231cfb5fb0ca351dc9a4ce364f1cd6ef5aa66ddc0a26df7",
+          "serial_bytes": 850,
+          "fixture_serial_rows": 4,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "0a90ca7c5eb78ef55df546f1478b94b2fe44cdb0619dc2154539666079f39a6d"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "running-boot",
+          "snapshot_sha256": "92959b98655b1f906a3b15125629c0a3e3c6a0936a02626e8fe9e7d6bd88a3f8",
+          "serial_sha256": "16335a5ab2b98278f1f5aa151bcf54424bdf85d0604fd3e78dae0aec6c0233b9",
+          "serial_bytes": 850,
+          "fixture_serial_rows": 4,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "72881d3689ecff771b0e16413b618635f95380690b59dde54d949b2c4cc36646"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped-first",
+          "snapshot_sha256": "30741ea8d199d9adb213972e3653c94032cdd899774ef2e59ea2ac03334d760e",
+          "serial_sha256": "83346c6d627985ac621c802c7ab06f74003fe53a69ce4e80ba579128ac5bd7cc",
+          "serial_bytes": 2230,
+          "fixture_serial_rows": 12,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "18bbd8ddaa1f5140d5e364854d425154b6fea62f4566400d05086a7c3031d90e"
+          },
+          "recorded_input_events": 6
+        },
+        {
+          "stage": "stopped-reopened",
+          "snapshot_sha256": "75d8289c219505847c43323d8512cf8c6600c4d68cae6a9a9f36741c2876a656",
+          "serial_sha256": "18f7b834ab6d46de5231cfb5fb0ca351dc9a4ce364f1cd6ef5aa66ddc0a26df7",
+          "serial_bytes": 850,
+          "fixture_serial_rows": 4,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "726645acf62fc365e1558e358eb48d5e0d0812a251969a573688292b6eec6f5c"
+          },
+          "recorded_input_events": 0
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped-first",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          },
+          {
+            "stage": "stopped-reopened",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          },
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 12,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 12,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 54,
+      "case": {
+        "lane": "fixed",
+        "device": "stopwatch",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "5a10a02b3fb94a28632dc245b54a195c42227163207ba8eaa2919bab1f3d3fde",
+      "child_report_bytes": 85409,
+      "checks_passed": 24,
+      "checks_total": 24,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "7300ee10e6dbb0e45af8b322d50e09176331cbf916f06ae52ff7be46f60999cc",
+        "execution_sha256": "7300ee10e6dbb0e45af8b322d50e09176331cbf916f06ae52ff7be46f60999cc",
+        "receipt_firmware_sha256": "7300ee10e6dbb0e45af8b322d50e09176331cbf916f06ae52ff7be46f60999cc",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5stopwatch",
+        "profile": "stopwatch-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": null,
+        "public_events": [
+          {
+            "type": "touch",
+            "down": true,
+            "x": 233,
+            "y": 233
+          },
+          {
+            "type": "touch",
+            "down": false,
+            "x": 233,
+            "y": 233
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "stopwatch",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 30,
+            "device": "stopwatch",
+            "input": "touch",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "stopwatch",
+            "kind": "pressed",
+            "seq": 3,
+            "x": 239,
+            "y": 239
+          },
+          {
+            "count": 1,
+            "device": "stopwatch",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "stopwatch",
+            "kind": "released",
+            "seq": 5,
+            "x": 239,
+            "y": 239
+          },
+          {
+            "count": 1,
+            "device": "stopwatch",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": {
+            "x": 233,
+            "y": 233
+          },
+          "pressed": {
+            "count": 0,
+            "device": "stopwatch",
+            "y": 239,
+            "x": 239,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "stopwatch",
+            "y": 239,
+            "x": 239,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 3,
+          "rendered_sequence": 3,
+          "pixels_compared": 217156,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "699d96e276bfce279fbd4702aa5fe545aebfdc51b0c20961d5dc566db3e2410d",
+          "serial_sha256": "fb80fd20c99d1c6b49f77da30b2d1c11bcdcdae9505a2e26ef8673c5e3e298e5",
+          "serial_bytes": 900,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 466,
+            "height": 466,
+            "format": "rgb565le",
+            "sha256": "acdb7cb84314eebfd062f9e28602f94317ca5788b06e2edf80ab86d2befa031a"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "e40ee43961091b9edc165c52ddd4edbdd174d719d8461bd6617b52d640ef87b2",
+          "serial_sha256": "aa41560366bbd21797b35013abead335f423c7e5eba5a99fae384af05b38d0a5",
+          "serial_bytes": 508,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 466,
+            "height": 466,
+            "format": "rgb565le",
+            "sha256": "d79d119d02ef8c42a7e34c6c152ec1e13ca7ae5a4e994cc02cd1493079c6d54c"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "ff80c270d04c9790aad5438643e50b1cbadc1167ea01f3fd50e0fd26b68de048",
+          "serial_sha256": "fb80fd20c99d1c6b49f77da30b2d1c11bcdcdae9505a2e26ef8673c5e3e298e5",
+          "serial_bytes": 900,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 466,
+            "height": 466,
+            "format": "rgb565le",
+            "sha256": "acdb7cb84314eebfd062f9e28602f94317ca5788b06e2edf80ab86d2befa031a"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 55,
+      "case": {
+        "lane": "fixed",
+        "device": "sticks3",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "b32f58ee7e05a19036586b68ac67130a276c587216437c59a70c7bc97edf071b",
+      "child_report_bytes": 84868,
+      "checks_passed": 25,
+      "checks_total": 25,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "a8a88bf4fd2736d4bfd2f4c629b4040c0d38ca8d1ec54156dd74b34cd5a38632",
+        "execution_sha256": "a8a88bf4fd2736d4bfd2f4c629b4040c0d38ca8d1ec54156dd74b34cd5a38632",
+        "receipt_firmware_sha256": "a8a88bf4fd2736d4bfd2f4c629b4040c0d38ca8d1ec54156dd74b34cd5a38632",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5sticks3",
+        "profile": "sticks3-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "Space",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "sticks3",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 26,
+            "device": "sticks3",
+            "input": "button",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "sticks3",
+            "kind": "pressed",
+            "seq": 3,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "sticks3",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "sticks3",
+            "kind": "released",
+            "seq": 5,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "sticks3",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "count": 0,
+            "device": "sticks3",
+            "y": -1,
+            "x": -1,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "sticks3",
+            "y": -1,
+            "x": -1,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 4,
+          "rendered_sequence": 4,
+          "pixels_compared": 32400,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "f4434366a71c9707d9dd66fe9dfd5484716d360494b728cefb6f54d682fc0297",
+          "serial_sha256": "31f15c2ec6b189f49d2671536528e005870599b69b213518950f1d0b1b66634d",
+          "serial_bytes": 885,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 135,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "0f4efd7eda743907d1063359ced117cc91c60dc7ffaade94f49d5d459e67e8f1"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "9986a2b320f6de3bbc1e2f73645178ebdd7e0033eea3325402e56a1ce01485fe",
+          "serial_sha256": "a7ad38da58e402a4258649b66fdcd808fb0ef970350676f0046ef1115d8be7f6",
+          "serial_bytes": 505,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 135,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "60315ddc5320df3c4126747a59a72146001b2aaa696ac21bb7fcf1cef6bacd17"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "2b3775c18950eb3becd2a9880a1521c3f4ce7709e3eda23f4e43761c908a38e8",
+          "serial_sha256": "31f15c2ec6b189f49d2671536528e005870599b69b213518950f1d0b1b66634d",
+          "serial_bytes": 885,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 135,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "0f4efd7eda743907d1063359ced117cc91c60dc7ffaade94f49d5d459e67e8f1"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 56,
+      "case": {
+        "lane": "fixed",
+        "device": "atoms3",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "f443ac32ecd6d02661c5baa4891a1cb7b6f848713b3e5ded9fc761c5139cb11e",
+      "child_report_bytes": 85684,
+      "checks_passed": 25,
+      "checks_total": 25,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "1cd37f1eb26c466e4c1bae052a55a5e0be307e3b60f9762a0c8a4d36d4a81319",
+        "execution_sha256": "1cd37f1eb26c466e4c1bae052a55a5e0be307e3b60f9762a0c8a4d36d4a81319",
+        "receipt_firmware_sha256": "1cd37f1eb26c466e4c1bae052a55a5e0be307e3b60f9762a0c8a4d36d4a81319",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5atoms3",
+        "profile": "atoms3-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "Space",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "atoms3",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 11,
+            "device": "atoms3",
+            "input": "button",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "atoms3",
+            "kind": "pressed",
+            "seq": 3,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "atoms3",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "atoms3",
+            "kind": "released",
+            "seq": 5,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "atoms3",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "count": 0,
+            "device": "atoms3",
+            "y": -1,
+            "x": -1,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "atoms3",
+            "y": -1,
+            "x": -1,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 5,
+          "rendered_sequence": 5,
+          "pixels_compared": 16384,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "28ebe9af258d48f02c7bea5a46ebb53e6ce4386e8b393321febbaf4b0f695614",
+          "serial_sha256": "f1ac9c0a27106997951261d9dc1e6cdc387a2da5295a8e2cbb555b69baf53757",
+          "serial_bytes": 1044,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 128,
+            "height": 128,
+            "format": "rgb565le",
+            "sha256": "be6b8781b25b1b734cad2b28eb42e356adc94c27841a100c19f9cb8465570550"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "6931ae3d5750899bdc303c3d7e70c90a2f6b3f990c33d0f72c258ebc9785a41e",
+          "serial_sha256": "1c13e9d833d3a94074dad5029f47c2f9c2d2f6880d30bf6badd3f62deebd4856",
+          "serial_bytes": 668,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 128,
+            "height": 128,
+            "format": "rgb565le",
+            "sha256": "9f9aba08312607825c790bbbc97104b97fde7e6d3f8c4983761daded745b061e"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "8846d44868e515d8a712471a95b7ec8a05ce6ca03b72a201a41940c2228a2b92",
+          "serial_sha256": "f1ac9c0a27106997951261d9dc1e6cdc387a2da5295a8e2cbb555b69baf53757",
+          "serial_bytes": 1044,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 128,
+            "height": 128,
+            "format": "rgb565le",
+            "sha256": "be6b8781b25b1b734cad2b28eb42e356adc94c27841a100c19f9cb8465570550"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    }
+  ]
+}

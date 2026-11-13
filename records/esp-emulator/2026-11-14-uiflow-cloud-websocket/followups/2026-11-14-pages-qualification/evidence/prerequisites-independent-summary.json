@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "scope": "independent-offline-prerequisite-audit",
+  "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+  "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+  "reports": {
+    "pixel": "78240514f67d6eaa4cd57855be41904a27ab997151a1a86a04cf288ae254a457",
+    "coi": "2831b3aec762d5cae10aeb9f1b59bf999b4bd7e7ddf1e5261a7ff9e1b94a9838",
+    "corematrix-stock": "61930e7dc1a3cd4ed151c1d700197dc03c73cb8a382fffb9a2cba3e661be7195"
+  },
+  "pixel": {
+    "host_controls": 5,
+    "guest_execution": "NOT RUN",
+    "browser_closed": true
+  },
+  "coi": {
+    "host_controls": 13,
+    "positive_304_controls": 8,
+    "expected_original_negative_controls": 4,
+    "worker_update_controls": 1,
+    "guest_execution": "NOT RUN"
+  },
+  "stock": {
+    "virtual_device": "corematrix",
+    "input_firmware_sha256": "0bfbe5a4acb467d93a7ded2186a4f73adea37511869328b563c15ab73163a018",
+    "normalized_firmware_sha256": "5562f685a8f3ed07d04ec7d7f58fa4435be8438fbf135c6fd61ff6e906783c07",
+    "runtime_sha256": "83ed57e0ac517ba2c83d40c640995050df33217138c59366c089962b399ba163",
+    "rom_sha256": "ba93108d967771826a8ba024da8c7002cf3c2c4346d600246b2fa882d95b30ec",
+    "serial_boot_markers": 5,
+    "usb_payload_bytes": 216,
+    "actual_input_edges": 8,
+    "same_session_frame_oracles": 9,
+    "final_raw_frame_sha_verified": true,
+    "cdp_destroyed_count": 5,
+    "no_service_requests_assertion_source_bound": true,
+    "cleanup": "PASS"
+  },
+  "limits": [
+    "Pixel and COI are host/browser controls, not guest tests.",
+    "Stock CDP report retains counts, not individual destruction events; before-iframe pthread fence explicitly NOT CAPTURED.",
+    "Prerequisite successful process exit inferred from sequential helper advancing into all; final full-gate wrapper still PENDING.",
+    "No guest/browser/API/network calls by this audit."
+  ]
+}

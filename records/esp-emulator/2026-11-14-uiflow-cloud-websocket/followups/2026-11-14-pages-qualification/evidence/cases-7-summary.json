@@ -1,0 +1,1573 @@
+{
+  "schema_version": 1,
+  "scope": "Exact firmware/profile/controller and actual local browser-WASM execution; no whole-device or physical claim",
+  "overall_qualification": "LOCAL_FULL_GATE_PASS",
+  "cases": [
+    {
+      "ordinal": 49,
+      "case": {
+        "lane": "fixed",
+        "device": "atom-matrix",
+        "script": "test_public_qemu_headless_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_headless_guest.mjs",
+        "sha256": "8da7dd920761cf2875eae78ce485f9bf22e63e6affd8000191417a6f085b7a84"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "7102b45962fa7cc3c0dbd8b37adddfa8ffb4dff659b7bd9beb35630726c8ec61",
+      "child_report_bytes": 82043,
+      "checks_passed": 15,
+      "checks_total": 15,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-headless-reference-label",
+        "public-headless-reference-instructions",
+        "original-firmware-board-and-output-route",
+        "no-lcd-or-frame-transport",
+        "same-guest-rmt-output-and-qmp-button-loop",
+        "read-only-output-and-no-display-negative-controls",
+        "exact-model-button-edges-and-no-output-echo",
+        "automatic-poll-never-requests-a-frame",
+        "clean-guest-and-worker-stop",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-iframe",
+        "no-device-service-or-page-errors",
+        "stopped-model-output-unknown"
+      ],
+      "firmware": {
+        "input_sha256": "f028cf0bca868f48b9ae9b5e5c524c6c0fa3ef8d5d19b4e75ab829a78ecbd88b",
+        "execution_sha256": "f028cf0bca868f48b9ae9b5e5c524c6c0fa3ef8d5d19b4e75ab829a78ecbd88b",
+        "receipt_firmware_sha256": "f028cf0bca868f48b9ae9b5e5c524c6c0fa3ef8d5d19b4e75ab829a78ecbd88b",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5atommatrix",
+        "profile": "atom-matrix-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single"
+        },
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "Space",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "touch",
+            "down": true,
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "atom-matrix",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 141,
+            "device": "atom-matrix",
+            "input": "button",
+            "kind": "ready",
+            "leds": 25,
+            "output": "ws2812-rmt-gpio27",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "atom-matrix",
+            "kind": "pressed",
+            "seq": 3
+          },
+          {
+            "count": 1,
+            "device": "atom-matrix",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "atom-matrix",
+            "kind": "released",
+            "seq": 5
+          }
+        ],
+        "raw_snapshot_count": 2,
+        "raw_rgb565_hashes_verified": 0,
+        "headless_states": [
+          {
+            "stage": "idle",
+            "led_rgb": [
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632
+            ],
+            "led_frames": 2,
+            "pressed": false,
+            "model_known": true,
+            "model_pressed": false,
+            "spatial_mapping": "uniform-only-v1"
+          },
+          {
+            "stage": "down",
+            "led_rgb": [
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296,
+              4235296
+            ],
+            "led_frames": 3,
+            "pressed": true,
+            "model_known": true,
+            "model_pressed": true,
+            "spatial_mapping": "uniform-only-v1"
+          },
+          {
+            "stage": "up",
+            "led_rgb": [
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632,
+              2113632
+            ],
+            "led_frames": 4,
+            "pressed": false,
+            "model_known": true,
+            "model_pressed": false,
+            "spatial_mapping": "uniform-only-v1"
+          }
+        ],
+        "limit": "Uniform RMT LED color only; no nonuniform spatial mapping or IMU claim"
+      },
+      "phase_receipts": [
+        {
+          "stage": "running",
+          "snapshot_sha256": "d0dc0862dfcf93777ef696cdf127d5b1ffaac47acbdd5f5f4ed9819c22cb05b5",
+          "serial_sha256": "7fcd5711a55e9d9c0bcfff1452f1cf2e2858f998339fd03145d743780a3dae8a",
+          "serial_bytes": 1026,
+          "fixture_serial_rows": 5,
+          "frame": null,
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "45858fef1a9c792950824ba813cd617cec41f5e096162fa0529a58ee240df997",
+          "serial_sha256": "7fcd5711a55e9d9c0bcfff1452f1cf2e2858f998339fd03145d743780a3dae8a",
+          "serial_bytes": 1026,
+          "fixture_serial_rows": 5,
+          "frame": null,
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 5,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 5,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 50,
+      "case": {
+        "lane": "fixed",
+        "device": "stickc-plus",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "56bee961603b344cf7aadae0380a55f20d98aea1f4fb4c32fe4b7ce4de8f8872",
+      "child_report_bytes": 83630,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "original-stickc-plus-board",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "guest-button-release",
+        "controller-input-changes-native-frame-marker",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "69567208e8c5a8ff3e2dbf07d85a724c85a3436e80c5ebce3d866c47464a5a6a",
+        "execution_sha256": "69567208e8c5a8ff3e2dbf07d85a724c85a3436e80c5ebce3d866c47464a5a6a",
+        "receipt_firmware_sha256": "69567208e8c5a8ff3e2dbf07d85a724c85a3436e80c5ebce3d866c47464a5a6a",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5stickcplus",
+        "profile": "stickc-plus-wasm-deterministic-icount",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": {
+          "icountShift": 5,
+          "kind": "tcg-icount",
+          "tbSizeMb": 128,
+          "thread": "single"
+        },
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32-v3-rom.bin",
+          "sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b"
+        },
+        {
+          "name": "esp32-v3-rom-app.bin",
+          "sha256": "6d3240e7cdb1ec9c1d683515e0a8578e9fb8ece3e7736cb9a996512c656e8442"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "Space",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 2
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "stickc-plus",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 4,
+            "device": "stickc-plus",
+            "input": "button",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "stickc-plus",
+            "kind": "pressed",
+            "seq": 3,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "stickc-plus",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "stickc-plus",
+            "kind": "released",
+            "seq": 5,
+            "x": -1,
+            "y": -1
+          },
+          {
+            "count": 1,
+            "device": "stickc-plus",
+            "kind": "heartbeat",
+            "seq": 6
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "count": 0,
+            "device": "stickc-plus",
+            "y": -1,
+            "x": -1,
+            "kind": "pressed",
+            "seq": 3
+          },
+          "released": {
+            "count": 1,
+            "device": "stickc-plus",
+            "y": -1,
+            "x": -1,
+            "kind": "released",
+            "seq": 5
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 7,
+          "rendered_sequence": 7,
+          "pixels_compared": 32400,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "aa54dd8d3740a225e2145f1d29eb29de09c7022a5c45a2687e290540dc3fb125",
+          "serial_sha256": "38575c1526a803145c21dcbcef65c52ac2e5f5f6cfd4653dd82db31f1899e15a",
+          "serial_bytes": 1492,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 135,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "d312ff0cfa9ce271994a5f67955b196a320b59e7b6a6396e7948b98ebdfedeae"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "5c3312b66ca4ec7152d948e6e71a2328e024bf1b3762eaa13995307e86c8d8f6",
+          "serial_sha256": "3fd5db55bd8173f9bc053e21a99969cfdbc2cdacb1b285ab54f327ef71e0b88a",
+          "serial_bytes": 1096,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 135,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "302ea7bcee69e15a8a86a4d28a401d24a4a2c01c2b4bf6db6c7a9e031d0f3be1"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "7a1d8a4d033979606e82ff932006f6964b7d0a6653941be8192143f5ff380f52",
+          "serial_sha256": "38575c1526a803145c21dcbcef65c52ac2e5f5f6cfd4653dd82db31f1899e15a",
+          "serial_bytes": 1492,
+          "fixture_serial_rows": 6,
+          "frame": {
+            "width": 135,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "d312ff0cfa9ce271994a5f67955b196a320b59e7b6a6396e7948b98ebdfedeae"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 5,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 5,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 51,
+      "case": {
+        "lane": "fixed",
+        "device": "cardputer-adv",
+        "script": "test_public_qemu_board_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "853e7d196819a9692c534b25fd8a83c8f059929ebf36ad1309cb5c81dab33153",
+      "child_report_bytes": 113590,
+      "checks_passed": 69,
+      "checks_total": 69,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-isolation",
+        "public-ui-selected-board-reference",
+        "same-guest-ready-and-display",
+        "model-rendering-paused-until-guest-ready",
+        "complete-native-red-marker",
+        "cardputer-presentation-converges-to-guest-logical-orientation",
+        "public-ui-3d-and-visible-native-frame",
+        "public-ui-native-to-rendered-model-texture-before-input",
+        "non-touch-screen-click-does-not-send-touch-or-show-error",
+        "hash-pinned-composed-firmware",
+        "exported-default-clock-profile",
+        "actual-physical-frame-dimensions",
+        "guest-button-counter",
+        "keyboard-original-driver-first-press",
+        "keyboard-first-press-counter-and-state-pixels",
+        "guest-button-release",
+        "keyboard-first-release-state-pixels",
+        "controller-input-changes-native-frame-marker",
+        "keyboard-z-real-fifo-press",
+        "keyboard-z-counter-and-press-pixels",
+        "keyboard-z-original-driver-release",
+        "keyboard-z-release-pixels",
+        "keyboard-q-real-fifo-press",
+        "keyboard-q-counter-and-press-pixels",
+        "keyboard-q-original-driver-release",
+        "keyboard-q-release-pixels",
+        "keyboard-b-real-fifo-press",
+        "keyboard-b-counter-and-press-pixels",
+        "keyboard-b-original-driver-release",
+        "keyboard-b-release-pixels",
+        "keyboard-n-real-fifo-press",
+        "keyboard-n-counter-and-press-pixels",
+        "keyboard-n-original-driver-release",
+        "keyboard-n-release-pixels",
+        "keyboard-m-real-fifo-press",
+        "keyboard-m-counter-and-press-pixels",
+        "keyboard-m-original-driver-release",
+        "keyboard-m-release-pixels",
+        "keyboard-1-real-fifo-press",
+        "keyboard-1-counter-and-press-pixels",
+        "keyboard-1-original-driver-release",
+        "keyboard-1-release-pixels",
+        "keyboard-0-real-fifo-press",
+        "keyboard-0-counter-and-press-pixels",
+        "keyboard-0-original-driver-release",
+        "keyboard-0-release-pixels",
+        "keyboard-ret-real-fifo-press",
+        "keyboard-ret-counter-and-press-pixels",
+        "keyboard-ret-original-driver-release",
+        "keyboard-ret-release-pixels",
+        "keyboard-spc-real-fifo-press",
+        "keyboard-spc-counter-and-press-pixels",
+        "keyboard-spc-original-driver-release",
+        "keyboard-spc-release-pixels",
+        "keyboard-backspace-real-fifo-press",
+        "keyboard-backspace-counter-and-press-pixels",
+        "keyboard-backspace-original-driver-release",
+        "keyboard-backspace-release-pixels",
+        "public-ui-native-to-rendered-model-texture-after-input",
+        "unsupported-button-fails-closed",
+        "qmp-pause-freezes-guest",
+        "qmp-resume-fresh-guest-heartbeat",
+        "guest-remains-free-of-panic-or-python-traceback",
+        "clean-guest-stop-and-worker-disposal",
+        "created-pthreads-close-before-iframe-finalization",
+        "engine-and-created-pthreads-close-after-iframe-finalization",
+        "no-leftover-guest-iframe",
+        "no-page-errors",
+        "no-device-service-requests"
+      ],
+      "firmware": {
+        "input_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+        "execution_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+        "receipt_firmware_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5cardputeradv",
+        "profile": "cardputer-adv-wasm-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": false,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "157.0.8103.52",
+      "actual_input": {
+        "keyboard": "KeyA",
+        "public_events": [
+          {
+            "type": "button",
+            "id": "a",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "a",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "z",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "z",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "q",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "q",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "b",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "b",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "n",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "n",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "m",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "m",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "1",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "1",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "0",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "0",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "ret",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "ret",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "spc",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "spc",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "backspace",
+            "down": true
+          },
+          {
+            "type": "button",
+            "id": "backspace",
+            "down": false
+          },
+          {
+            "type": "button",
+            "id": "unmapped-control",
+            "down": true
+          }
+        ],
+        "maximum_snapshot_input_events": 22
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "device": "cardputer-adv",
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 24,
+            "device": "cardputer-adv",
+            "input": "keyboard",
+            "kind": "ready",
+            "seq": 2
+          },
+          {
+            "count": 0,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 3
+          },
+          {
+            "count": 1,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 4
+          },
+          {
+            "count": 1,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 5
+          },
+          {
+            "count": 1,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 6
+          },
+          {
+            "count": 2,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 7
+          },
+          {
+            "count": 2,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 8
+          },
+          {
+            "count": 2,
+            "device": "cardputer-adv",
+            "kind": "heartbeat",
+            "seq": 9
+          },
+          {
+            "count": 2,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 10
+          },
+          {
+            "count": 3,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 11
+          },
+          {
+            "count": 3,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 12
+          },
+          {
+            "count": 3,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 13
+          },
+          {
+            "count": 4,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 14
+          },
+          {
+            "count": 4,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 15
+          },
+          {
+            "count": 4,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 16
+          },
+          {
+            "count": 5,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 17
+          },
+          {
+            "count": 5,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 18
+          },
+          {
+            "count": 5,
+            "device": "cardputer-adv",
+            "kind": "heartbeat",
+            "seq": 19
+          },
+          {
+            "count": 5,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 20
+          },
+          {
+            "count": 6,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 21
+          },
+          {
+            "count": 6,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 22
+          },
+          {
+            "count": 6,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 23
+          },
+          {
+            "count": 7,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 24
+          },
+          {
+            "count": 7,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 25
+          },
+          {
+            "count": 7,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 26
+          },
+          {
+            "count": 8,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 27
+          },
+          {
+            "count": 8,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 28
+          },
+          {
+            "count": 8,
+            "device": "cardputer-adv",
+            "kind": "heartbeat",
+            "seq": 29
+          },
+          {
+            "count": 8,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 30
+          },
+          {
+            "count": 9,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 31
+          },
+          {
+            "count": 9,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 32
+          },
+          {
+            "count": 9,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 33
+          },
+          {
+            "count": 10,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 34
+          },
+          {
+            "count": 10,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 35
+          },
+          {
+            "count": 10,
+            "device": "cardputer-adv",
+            "kind": "pressed",
+            "seq": 36
+          },
+          {
+            "count": 11,
+            "device": "cardputer-adv",
+            "kind": "count",
+            "seq": 37
+          },
+          {
+            "count": 11,
+            "device": "cardputer-adv",
+            "kind": "released",
+            "seq": 38
+          },
+          {
+            "count": 11,
+            "device": "cardputer-adv",
+            "kind": "heartbeat",
+            "seq": 39
+          },
+          {
+            "count": 11,
+            "device": "cardputer-adv",
+            "kind": "heartbeat",
+            "seq": 40
+          }
+        ],
+        "raw_snapshot_count": 3,
+        "raw_rgb565_hashes_verified": 3,
+        "guest_input_observation": {
+          "requested_physical_touch": null,
+          "pressed": {
+            "keycode": 97,
+            "row": 2,
+            "driver_pressed": true,
+            "kind": "pressed",
+            "seq": 3,
+            "device": "cardputer-adv",
+            "count": 0,
+            "col": 2
+          },
+          "released": {
+            "keycode": 97,
+            "row": 2,
+            "driver_pressed": false,
+            "kind": "released",
+            "seq": 5,
+            "device": "cardputer-adv",
+            "count": 1,
+            "col": 2
+          }
+        },
+        "native_to_texture_readback": {
+          "frame_sequence": 125,
+          "rendered_sequence": 125,
+          "pixels_compared": 32400,
+          "model_rotation": 0,
+          "scope": "Exact native RGB565 to model texture buffer after the viewer render event; no optical or hardware claim."
+        }
+      },
+      "phase_receipts": [
+        {
+          "stage": "running-after-input",
+          "snapshot_sha256": "47457643a2ae7a525599b371759546790daea38428400309779f35d1b594aa1d",
+          "serial_sha256": "76820f8afd263b7e32ca9aa761df11dd38b3fb389f305011ba896609ca0effc2",
+          "serial_bytes": 6119,
+          "fixture_serial_rows": 40,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "57562843fad92927cdf520e8e58638332bcf942c9a15ca7e39047827748cd75c"
+          },
+          "recorded_input_events": 22
+        },
+        {
+          "stage": "running-before-input",
+          "snapshot_sha256": "b1f3c438d007f6a2d0df913b5eb3e4d999227fcc1821536c3141fb78e4a2afb4",
+          "serial_sha256": "a43c14362db812978f14a344ea98fe38076e877f5f8a94970b2892e82b897f08",
+          "serial_bytes": 604,
+          "fixture_serial_rows": 2,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "7e3cb9a173bda3d4260f39a067aa8067d3179f9eaecdec7840ac53a211b04b6e"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped",
+          "snapshot_sha256": "3afca0f702cb3ccf68c813ef53bd04a50e0eb50b92058c34e0e5bbcbfc9922d4",
+          "serial_sha256": "76820f8afd263b7e32ca9aa761df11dd38b3fb389f305011ba896609ca0effc2",
+          "serial_bytes": 6119,
+          "fixture_serial_rows": 40,
+          "frame": {
+            "width": 240,
+            "height": 135,
+            "format": "rgb565le",
+            "sha256": "57562843fad92927cdf520e8e58638332bcf942c9a15ca7e39047827748cd75c"
+          },
+          "recorded_input_events": 22
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    },
+    {
+      "ordinal": 52,
+      "case": {
+        "lane": "fixed",
+        "device": "cores3",
+        "example": "stock-reference",
+        "script": "test_public_qemu_guest.mjs"
+      },
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "site_manifest_sha256": "54fc8d8fe023ef0d86e3bfdea3d3db37599a2f59404c54fdb8920d466bd14a8c",
+      "controller": {
+        "source_path": "platform/tests/test_public_qemu_guest.mjs",
+        "sha256": "d3497c2855d56804003cd86ef1a77e4aa6fbd54cbdf253b40f3d7baa126c9a47"
+      },
+      "collection_status": "COMPLETE_CHILD_REPORT",
+      "execution_result": "PASS",
+      "child_report_sha256": "7703bbae7be0e9fee3732f4117bb91c21c17b1e15d550d80bb196db0647fcf70",
+      "child_report_bytes": 171440,
+      "checks_passed": 49,
+      "checks_total": 49,
+      "errors": 0,
+      "check_names": [
+        "pages-service-worker-shared-memory",
+        "explicit-public-reference-example",
+        "actual-cores3-lvgl-ready",
+        "c-qemu-runtime-and-exact-fixture",
+        "real-frame-pixels",
+        "cold-before-input-actual-clicks-and-count-pixels",
+        "actual-raw-canvas-input-target-visible",
+        "actual-trusted-native-pointer-down-up",
+        "negative-touch-does-not-click",
+        "actual-raw-canvas-input-target-visible",
+        "actual-trusted-native-pointer-down-up",
+        "actual-dom-touch-lvgl-callback",
+        "cold-stock-same-fixture-receipt",
+        "cold-stock-controller-down-up",
+        "cold-stock-controller-hold",
+        "cold-stock-guest-clicks1",
+        "cold-clicks1-actual-clicks-and-count-pixels",
+        "pir-qom-readback",
+        "pir-guest-both-transitions",
+        "qmp-pause-stops-guest-progress",
+        "qmp-resume",
+        "layout-1440",
+        "layout-1024",
+        "layout-768",
+        "layout-390",
+        "quit-and-container-cleanup",
+        "first-engine-and-five-pthreads-close-before-iframe-removal-pthreads-before-iframe-finalization",
+        "first-engine-and-five-pthreads-close-before-iframe-removal-all-targets-after-iframe-finalization",
+        "no-instance-frame-after-stop",
+        "dedicated-engine-closing-notification-without-owner-fallback",
+        "local-history-retains-hash",
+        "shared-reference-restores-example",
+        "fresh-guest-reopen-from-shared-reference",
+        "shared-reference-exact-runtime-variant",
+        "reopened-before-input-actual-clicks-and-count-pixels",
+        "actual-raw-canvas-input-target-visible",
+        "actual-trusted-native-pointer-down-up",
+        "reopened-real-touch-clicks1",
+        "reopened-stock-same-fixture-receipt",
+        "reopened-stock-controller-down-up",
+        "reopened-stock-controller-hold",
+        "reopened-stock-guest-clicks1",
+        "reopened-clicks1-actual-clicks-and-count-pixels",
+        "reopen-cleanup",
+        "both-engines-and-ten-pthreads-close-before-iframe-removal-pthreads-before-iframe-finalization",
+        "both-engines-and-ten-pthreads-close-before-iframe-removal-all-targets-after-iframe-finalization",
+        "reopened-engine-notification-without-owner-fallback",
+        "no-service-or-local-emulator-requests",
+        "no-javascript-errors"
+      ],
+      "firmware": {
+        "input_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+        "execution_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+        "receipt_firmware_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+        "semantics": "Launch fixture identity; not postrun mutable Flash readback"
+      },
+      "runtime": {
+        "engine": "qemu-wasm",
+        "board": "m5cores3",
+        "profile": "cores3-wasm-stock-wallclock",
+        "clockDivisor": 1,
+        "clockOverride": null,
+        "accelerator": null,
+        "oneInsnPerTb": true,
+        "sourceCommit": "40edccac415693c5130f91c01d84176ae6008566",
+        "javascriptSha256": "5bc49e135de4900fd3444e7e8bf431e6ec91748e24bb15e294017c9930c3dffb",
+        "workerSha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "unbundled_roms": [
+        {
+          "name": "esp32s3_rev0_rom.bin",
+          "sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+        }
+      ],
+      "all_recorded_phase_bindings_equal": true,
+      "browser_version_recorded": "NOT_RECORDED",
+      "actual_input": {
+        "keyboard": null,
+        "public_events": [],
+        "maximum_snapshot_input_events": 6,
+        "touch_trials": [
+          {
+            "requested_native_xy": {
+              "x": 310,
+              "y": 235
+            },
+            "requested_hold_ms": 650,
+            "trusted_dom_events": [
+              {
+                "type": "pointerdown",
+                "trusted": true
+              },
+              {
+                "type": "pointerup",
+                "trusted": true
+              }
+            ]
+          },
+          {
+            "requested_native_xy": {
+              "x": 160,
+              "y": 184
+            },
+            "requested_hold_ms": 650,
+            "trusted_dom_events": [
+              {
+                "type": "pointerdown",
+                "trusted": true
+              },
+              {
+                "type": "pointerup",
+                "trusted": true
+              }
+            ]
+          },
+          {
+            "requested_native_xy": {
+              "x": 160,
+              "y": 184
+            },
+            "requested_hold_ms": 650,
+            "trusted_dom_events": [
+              {
+                "type": "pointerdown",
+                "trusted": true
+              },
+              {
+                "type": "pointerup",
+                "trusted": true
+              }
+            ]
+          }
+        ]
+      },
+      "serial_or_data_markers": {
+        "unique_fixture_serial_observations": [
+          {
+            "kind": "begin",
+            "seq": 1
+          },
+          {
+            "board": 10,
+            "kind": "m5_ready",
+            "seq": 2
+          },
+          {
+            "kind": "lvgl_ready",
+            "seq": 3
+          },
+          {
+            "kind": "ready",
+            "seq": 4
+          },
+          {
+            "clicks": 0,
+            "kind": "pir",
+            "seq": 5,
+            "value": 0
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 6
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 7
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 8
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 9
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 10
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 11
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 12
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 13
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 14
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 15
+          },
+          {
+            "clicks": 0,
+            "kind": "heartbeat",
+            "seq": 16
+          },
+          {
+            "clicks": 0,
+            "kind": "touch_pressed",
+            "seq": 17
+          },
+          {
+            "clicks": 0,
+            "kind": "touch_released",
+            "seq": 18
+          },
+          {
+            "clicks": 1,
+            "kind": "touch_clicked",
+            "seq": 19
+          },
+          {
+            "clicks": 0,
+            "kind": "touch_pressed",
+            "seq": 16
+          },
+          {
+            "clicks": 0,
+            "kind": "touch_released",
+            "seq": 17
+          },
+          {
+            "clicks": 1,
+            "kind": "touch_clicked",
+            "seq": 18
+          },
+          {
+            "clicks": 1,
+            "kind": "pir",
+            "seq": 20,
+            "value": 1
+          },
+          {
+            "clicks": 1,
+            "kind": "heartbeat",
+            "seq": 21
+          },
+          {
+            "clicks": 1,
+            "kind": "pir",
+            "seq": 22,
+            "value": 0
+          },
+          {
+            "clicks": 1,
+            "kind": "heartbeat",
+            "seq": 23
+          }
+        ],
+        "raw_snapshot_count": 6,
+        "raw_rgb565_hashes_verified": 6
+      },
+      "phase_receipts": [
+        {
+          "stage": "cold-stock-controller",
+          "snapshot_sha256": "c5350500ee21362febf0d79950e13733c0d3fc0ef85e3dfcf4af3a42df2989f7",
+          "serial_sha256": "32db0eff47be2a8dcf4ef75626378c7a576440bb3672fd6d70c784da1fe72fcd",
+          "serial_bytes": 2557,
+          "fixture_serial_rows": 19,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "88969b0a37c16023e2201355a45e7101a751c08dbff532f44b08ca57bc608bd6"
+          },
+          "recorded_input_events": 4
+        },
+        {
+          "stage": "reopened-running",
+          "snapshot_sha256": "20de589f4249fa3fec370ef970492724eead885bf7bf587f99ccf705e94aba93",
+          "serial_sha256": "da41a8a395457f84235c87f43fbbce2fe60b01f4c7fb48894f9c94d7116bbbae",
+          "serial_bytes": 769,
+          "fixture_serial_rows": 4,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "0a90ca7c5eb78ef55df546f1478b94b2fe44cdb0619dc2154539666079f39a6d"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "reopened-stock-controller",
+          "snapshot_sha256": "eaa2ff069ab0b1c0c985f8459d37a50bab618c64dbeb67484274baa3eaf1efd4",
+          "serial_sha256": "846f7cbd3b25a9a56642cffbcfd1f438620c625bb966eb1aca0bbe23654533eb",
+          "serial_bytes": 2431,
+          "fixture_serial_rows": 18,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "88969b0a37c16023e2201355a45e7101a751c08dbff532f44b08ca57bc608bd6"
+          },
+          "recorded_input_events": 2
+        },
+        {
+          "stage": "running-boot",
+          "snapshot_sha256": "414f28961b4197c53c0a386a5998f91544c3223e51e2de976553ecc811d0d078",
+          "serial_sha256": "e8c9acd779efe83919ddd9df82e5c844ef015b164efa774ee640266f5685726e",
+          "serial_bytes": 769,
+          "fixture_serial_rows": 4,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "320937b90747eee1a22d3affd319075b83f462d957635c62b0e3882c98884e3e"
+          },
+          "recorded_input_events": 0
+        },
+        {
+          "stage": "stopped-first",
+          "snapshot_sha256": "4bad59203da7ae13b5f6ae3cc274f82ea74f0a3561866b28d46b1275e571a287",
+          "serial_sha256": "644f145d851297b6d454adb45cc804c9742a221269a0cb3f1561031ab53dc924",
+          "serial_bytes": 3015,
+          "fixture_serial_rows": 23,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "2d9930668c45ebdf76b3416c998d2d5bdf44d403db0edc5cd762bb29b34842ad"
+          },
+          "recorded_input_events": 6
+        },
+        {
+          "stage": "stopped-reopened",
+          "snapshot_sha256": "12577409ed50cf949ab406e434f1d7ed171b5895b016505eff68a37a7661a6d6",
+          "serial_sha256": "937c2f708a87c7987f7c3b3e603b4984d8bd66f9e331c7942a9151ba3bbcc97d",
+          "serial_bytes": 2547,
+          "fixture_serial_rows": 18,
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "format": "rgb565le",
+            "sha256": "2d9930668c45ebdf76b3416c998d2d5bdf44d403db0edc5cd762bb29b34842ad"
+          },
+          "recorded_input_events": 2
+        }
+      ],
+      "iframe_worker_cleanup": {
+        "terminal_snapshots": [
+          {
+            "stage": "stopped-first",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          },
+          {
+            "stage": "stopped-reopened",
+            "graceful_exit": true,
+            "exit_code": 0,
+            "pthread_workers_at_exit": 0,
+            "pthread_workers_remaining": 0,
+            "engine_owner_live": false,
+            "normal_terminations": 1,
+            "fallback_terminations": 0,
+            "engine_finalization_acknowledged": true,
+            "iframe_removed": true,
+            "engine_ownership_stage": "before-iframe-removal"
+          }
+        ],
+        "actual_cdp_fences": [
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 6,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 6,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          },
+          {
+            "before_iframe_ok": true,
+            "before_iframe_live": 0,
+            "before_iframe_observed": 12,
+            "after_iframe_ok": true,
+            "after_iframe_live": 0,
+            "after_iframe_observed": 12,
+            "all_observed_targets_have_created_and_destroyed_timestamps": true
+          }
+        ]
+      },
+      "independent_child_audit": "PASS"
+    }
+  ]
+}
