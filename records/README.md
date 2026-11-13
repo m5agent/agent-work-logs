@@ -19,6 +19,8 @@
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
 | 2026-11-14 | ESP Emulator / Tab5 | esp-emu v1.0.0 两份原版固件复测 | `FAIL`（两原版均卡在旧 P4 CSR；执行与清理通过，USB 未到达） | [查看](esp-emulator/2026-11-14-p4-v1-originals/) |
+| 2026-11-14 | ESP Emulator | C6 GPIO source30 与实际 ISR | `PARTIAL`（普通 GPIO、70/70、最终源码32/32通过；额外 IRQ与原应用边界保留） | [查看](esp-emulator/2026-11-14-c6-gpio-irq/) |
+| 2026-11-14 | ESP Emulator | UIFlow 身份能力协商与最终源码复验 | `PARTIAL`（旧服务保护、两种身份与最终30/30通过；控制PONG仍FAIL） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-identity-capability/) |
 | 2026-11-14 | ESP Emulator | UIFlow 云端身份、协议心跳与条件取帧 | `PARTIAL`（main、持久身份与两轮网页通过；云端 PONG 缺失、Pages 独立验收） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/) |
 | 2026-11-13 | ESP Emulator | 经典时钟、C6 USB 与原版后续复验 | `PARTIAL`（69/69、9 条配对/编程和原版 MP3/2048 通过；其余固件及模型边界保留） | [查看](esp-emulator/2026-11-13-native-firmware-followups/followups/2026-11-13-clock-usb/) |
 | 2026-11-13 | ESP Emulator | 原生修复 main、回归与原版操作验收 | `PARTIAL`（138 次矩阵、9 条配对/编程、5 份方向及 MP3/2048 通过；剩余后端/应用范围开放） | [查看](esp-emulator/2026-11-13-native-firmware-followups/followups/2026-11-13-main-and-resident/) |

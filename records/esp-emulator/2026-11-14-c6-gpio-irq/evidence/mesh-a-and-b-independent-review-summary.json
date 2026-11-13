@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "independent offline review of original Mesh A-key positive path and preserved B-key/infra boundaries",
+  "validation": "virtual-device validation",
+  "source_commit": "0e00cdcbc99a8210af6485df1bcfd04a514bc8a1",
+  "runtime_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4",
+  "firmware_sha256": "ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744",
+  "a_contract": {
+    "execution_status": "PASS",
+    "machine_controls": "PASS",
+    "checks": 8,
+    "actual_input_count": 2,
+    "actual_input_specs": [
+      "key:a",
+      "key:a"
+    ],
+    "actual_virtual_hold_ms": [
+      1200,
+      450
+    ],
+    "reset_count": 0,
+    "observed_seconds": 150.1216948328074,
+    "natural_sleep_observed": true,
+    "sleep_black_not_a_selection_failure": true,
+    "zip_files_verified": 8,
+    "all_captured_frame_hashes_and_pixels_redecoded": 27,
+    "original_app_partitions_unchanged": true,
+    "terminal_history_and_flash_cleanup_readback": true,
+    "summary_sha256": "fb6c600aed4c9545ed7604817056b0c9763dbdb193f53318e5d3deca3cce7750",
+    "evidence_zip_sha256": "10fc188c89dee8d210c469ad5243a49a9c50e85bb9e4c396b72ea49f92802a47",
+    "application_visual_review": "Separate root/delivery visual evidence; this audit verifies pixels/hashes and does not relabel raw REVIEW"
+  },
+  "b_control": {
+    "raw_status": "FAIL",
+    "execution_status": "PASS",
+    "failed_check": "input_changed_frame",
+    "actual_input_specs": [
+      "key:b",
+      "key:b"
+    ],
+    "before_after_frame_pixels_identical": true,
+    "other_five_controls_pass": true,
+    "summary_sha256": "ba983869d53c8687afad265d42aacdad3ab13c1a39e04acf9012a6cac254f1ab",
+    "unchanged": true
+  },
+  "first_infrastructure_attempt": {
+    "raw_status": "INFRASTRUCTURE_FAIL",
+    "application_verdict": "NOT ESTABLISHED; legacy application_status=FAIL reflects incomplete empty control set, not a product conclusion",
+    "summary_sha256": "ae94e4c2c70656b1fee9b083060c63a3d8c07aee03d0b3f44e5a4a2035a056de",
+    "unchanged": true
+  },
+  "new_service_or_guest_started": false
+}

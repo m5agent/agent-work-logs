@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "kind": "follow-up-code-change-and-virtual-validation",
+  "date": "2026-11-14",
+  "timezone": "UTC+08:00",
+  "overall_status": "PARTIAL",
+  "follows_record": "records/esp-emulator/2026-11-14-uiflow-cloud-websocket",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "executed_candidate_commit": "3a4408e4a1f26c0c8ad3ff07dae1ac8149a50384",
+    "legacy_http_commit": "4a5d28e6d4764ec78c0621aed0e0527080597486",
+    "final_main_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+    "final_integration_candidate_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+    "host_validated_integration_candidate_commit": "014841a8fe082cf8aaaa57de898e0ac0f665aedf"
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "CoreS3",
+    "original_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+    "normalized_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+    "published": false
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime_sha256": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+    "site_manifest_sha256": "c9a3b79f45fdfeac7a4a8eb1eda1b521bea7a35a9da5538b1e35f52199cb0ca8",
+    "follow_up_executions": [
+      {
+        "label": "legacy-http-preallocation-negative-control",
+        "validation": "actual HTTP service with actual client/controller; no guest",
+        "status": "PASS",
+        "evidence": "evidence/capability-legacy-http-redacted-summary.json"
+      },
+      {
+        "label": "capability-harness-attempts-1-and-2",
+        "status": "FAIL",
+        "evidence": "evidence/capability-harness-failure-history-summary.json"
+      },
+      {
+        "label": "capability-authorized-third",
+        "status": "PARTIAL",
+        "ui_and_identity": "PASS",
+        "cloud_sustained": "FAIL",
+        "observation_seconds": 195,
+        "evidence": "evidence/capability-authorized-browser-redacted-summary.json"
+      },
+      {
+        "label": "capability-default-key-first",
+        "status": "FAIL",
+        "evidence": "evidence/capability-default-first-failure-summary.json",
+        "note": "Historical observer failure preserved; later host diagnostics and a new real guest run are independent."
+      },
+      {
+        "label": "capability-http304-host-comparison",
+        "status": "PASS",
+        "validation": "host-only diagnostic",
+        "cases": 16,
+        "evidence": "evidence/capability-browser-304-host-comparison-summary.json"
+      },
+      {
+        "label": "capability-default-key-second",
+        "status": "PASS",
+        "scope": "default-key UI and identity only",
+        "cloud_binding": "NOT BOUND",
+        "cloud_sustained": "NOT RUN",
+        "observation_seconds": 45,
+        "evidence": "evidence/capability-default-browser-redacted-summary.json"
+      },
+      {
+        "label": "final-main-explicit-identity-native-browser",
+        "status": "PARTIAL",
+        "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+        "ui_and_identity": "PASS",
+        "checks": 30,
+        "cloud_sustained": "FAIL",
+        "observation_seconds_after_handshake": 195,
+        "frame_304": 5870,
+        "runtime_http_errors": 0,
+        "runtime_network_failures": 0,
+        "evidence": "evidence/final-main-cloud-functional-summary.json"
+      }
+    ],
+    "session_identifiers": "omitted",
+    "raw_evidence": "private; hashes retained",
+    "cleanup": "Every owned guest, browser, Flash and lease was released; prior terminal histories and raw evidence retained."
+  },
+  "checks": [
+    {
+      "layer": "compatibility_admission",
+      "status": "PASS"
+    },
+    {
+      "layer": "actual_explicit_identity_receipt",
+      "status": "PASS"
+    },
+    {
+      "layer": "browser_native_user_path",
+      "status": "PASS",
+      "checks": 36
+    },
+    {
+      "layer": "default_key_user_path",
+      "status": "PASS",
+      "checks": 27,
+      "scope": "actual key receipt and identity; cloud remains unbound"
+    },
+    {
+      "layer": "cloud_sustained_connection",
+      "status": "FAIL"
+    },
+    {
+      "layer": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "remote_repl_execution",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "candidate_full_python",
+      "status": "NOT RUN",
+      "reason": "Historical candidate suite was operator interrupted; no completed-suite claim for this execution",
+      "source_commit": "3a4408e4a1f26c0c8ad3ff07dae1ac8149a50384"
+    },
+    {
+      "layer": "final_integration_full_python",
+      "status": "PASS",
+      "source_commit": "014841a8fe082cf8aaaa57de898e0ac0f665aedf",
+      "tests": 2235,
+      "skipped": 8,
+      "evidence": "evidence/integration-full-platform-summary.json",
+      "prior_failed_attempt_preserved": true
+    },
+    {
+      "layer": "integration_node_validators_scope",
+      "status": "PASS",
+      "source_commit": "8266dfb2a99cfdcf9fdfab95f612c924cd9180e9",
+      "evidence": "evidence/integration-full-platform-summary.json",
+      "scope": "Host checks; no product behavior changed before final combined candidate"
+    },
+    {
+      "layer": "final_integration_branch_ci",
+      "status": "PASS",
+      "source_commit": "014841a8fe082cf8aaaa57de898e0ac0f665aedf",
+      "run_id": 43492311926,
+      "jobs": 2,
+      "evidence": "evidence/integration-branch-ci-summary.json"
+    },
+    {
+      "layer": "final_integration_docs_only_delta",
+      "status": "PASS",
+      "base_commit": "014841a8fe082cf8aaaa57de898e0ac0f665aedf",
+      "candidate_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "changed_paths": 18,
+      "evidence": "evidence/integration-docs-only-delta-summary.json"
+    },
+    {
+      "layer": "final_main_integration_and_exact_commit_branch_ci",
+      "status": "PASS",
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "evidence": "evidence/main-integration-summary.json"
+    },
+    {
+      "layer": "final_main_ci",
+      "status": "PASS",
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "jobs": 2,
+      "run_id": 43496500912,
+      "evidence": "evidence/main-ci-completed-summary.json"
+    },
+    {
+      "layer": "final_main_native_browser_user_path",
+      "status": "PASS",
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "checks": 30,
+      "scope": "UI, actual explicit identity and cleanup; sustained cloud remains FAIL",
+      "evidence": "evidence/final-main-cloud-functional-summary.json"
+    }
+  ],
+  "delivery": {
+    "candidate": "EXACT_COMMIT_BRANCH_CI_PASSED",
+    "main_integration": "PASS",
+    "postdelivery_validation": "PASS for UI and identity; cloud sustained FAIL",
+    "hosted_pages": "PENDING",
+    "burner_submission": "NOT RUN",
+    "main_ci": "PASS"
+  },
+  "reproduction": {
+    "script": "code/summarize_private_evidence.py",
+    "script_sha256": "47c42d27bbc9df38c7575b0494c0dd11c95466fdef026996c1eae19925417f58",
+    "schema": "code/summary.schema.json",
+    "schema_sha256": "6631cb34494e14557f89863a85547aa7369994d241333e272eeace40abd63787"
+  },
+  "evidence": [
+    {
+      "path": "evidence/capability-authorized-browser-redacted-summary.json",
+      "sha256": "b3c2d53ffd8bd6db8050049c9b8f1dffd24996585bb0927c69277a32f3bd7696",
+      "bytes": 6909,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-authorized-guest-redacted-summary.json",
+      "sha256": "2ec6948f6e0670b51345d8863c92ff54bdb65762283464c451c2b200422b67b8",
+      "bytes": 4076,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-authorized-independent-review-summary.json",
+      "sha256": "f1c14f69ecf507dac28318bc537770c6ea570dc21d61354eb3e9587dd0e6063e",
+      "bytes": 1597,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-authorized-visual-review-summary.json",
+      "sha256": "fbcd4fe898b185fa0506ce0a6251070e5b04a8c8f8151702be992ae92643336d",
+      "bytes": 712,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-browser-304-host-comparison-summary.json",
+      "sha256": "009cb32146e19f635e36df878d330a34ae6472f232c05b792e7b53fe806bdaad",
+      "bytes": 7955,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-browser-provenance-summary.json",
+      "sha256": "ff500ff1ed885f330332aac9fe86afa2f02c48802499c7f5a053d053dd014bb0",
+      "bytes": 625,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-default-browser-redacted-summary.json",
+      "sha256": "af8076c3f79ffba0b1e58506fe1c438eb8ba6272d59e8838e4b2949c224c05a7",
+      "bytes": 9758,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-default-first-failure-summary.json",
+      "sha256": "02c007e7b04870dc8127840e84fb23f86222fd18a550a61c41171a49e349d416",
+      "bytes": 8087,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-default-guest-redacted-summary.json",
+      "sha256": "6bfb1f74d722ca6ab35f2bb256d35ce8a43bd080e32c980936144207bbce3b19",
+      "bytes": 12171,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-default-independent-review-summary.json",
+      "sha256": "8a7c6578b185799dc4fbe551579f39033bf7d02b49233cc1cd32a9d466497efc",
+      "bytes": 1493,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-default-visual-review-summary.json",
+      "sha256": "e1e2a87ab37001171c0ed043c7c8037e64e452c0ab7131c5840ad099cc690b06",
+      "bytes": 704,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-explicit-receipt-redacted-summary.json",
+      "sha256": "f39719a2a5be1a0e365acdb13eb168131f81a1ac21d62133571e7fd1d972d234",
+      "bytes": 611,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-harness-failure-history-summary.json",
+      "sha256": "c8f365c852d6fbf60eb3856240eb3454e5c9ddc3ad02487b46add16437fb34dc",
+      "bytes": 3867,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-host-validation-summary.json",
+      "sha256": "ef67365619d29cdc98942ed95f32b822d8a689aa82bb56ca6b751f7abfbc25bd",
+      "bytes": 1383,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-legacy-http-redacted-summary.json",
+      "sha256": "a49f02f18030b0e5f7b9e331182a568c5eb9a4b93d176daac0a286efe3fca1d4",
+      "bytes": 655,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/capability-network-phase-host-controls-summary.json",
+      "sha256": "6467885c0619b187cc0f896c457f5cbb6b27cb4e47d5efef33edaaa63b233edb",
+      "bytes": 285,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-cloud-functional-summary.json",
+      "sha256": "4b5d6d9a6d1c1b3a95811faf7f970f0f524a02f343051917cdcfd872d3b9326a",
+      "bytes": 6377,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-cloud-protocol-independent-summary.json",
+      "sha256": "69de4a5333b3dfba04635e98e2e11b328e7abeafe7e2430025184525ae0e72aa",
+      "bytes": 3833,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-cloud-protocol-summary.json",
+      "sha256": "cde3ca16b075a4aa0fa60d926cbe4f3e9af99abdbaab854a088570dfe87943a7",
+      "bytes": 2056,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-cloud-root-review-summary.json",
+      "sha256": "38f408be9910719138f02c54fd92e1e028646c165fc72f6be5f11ca07e407307",
+      "bytes": 811,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-cloud-ui-independent-summary.json",
+      "sha256": "acf7760197a142da6b0d9fa2ddaef412c0e5a845d1a68fb5d04d98e2c077ea1e",
+      "bytes": 2464,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-cloud-visual-summary.json",
+      "sha256": "123cfa083b000c44cf5b53ccbe54b75766be41b1829eae0f2db68dc304586cf6",
+      "bytes": 846,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/integration-branch-ci-summary.json",
+      "sha256": "f55bec8921046f117920247100e00ca12df1566446f1de921647c585972880b6",
+      "bytes": 1028,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/integration-docs-only-delta-summary.json",
+      "sha256": "e0d7c76a1d69f4df1f792a19346af21b3de9212c647faf16d93790f881f6de72",
+      "bytes": 1876,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/integration-full-platform-summary.json",
+      "sha256": "7bff0e20d437a1a8e7e95edbac9455b2b0fabe75f5bec13c08c691f2097e2069",
+      "bytes": 3310,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/main-ci-completed-summary.json",
+      "sha256": "3bd9e97a66c1559aeed23569cb1a1461f9b4e867ff8cb233752ed47ad3a9458a",
+      "bytes": 1247,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/main-integration-summary.json",
+      "sha256": "66c497d131d27a9c2bbcbe843d54801b255f0c587d0615f5474511e9f053aa49",
+      "bytes": 1046,
+      "classification": "redacted-derived-summary"
+    }
+  ]
+}

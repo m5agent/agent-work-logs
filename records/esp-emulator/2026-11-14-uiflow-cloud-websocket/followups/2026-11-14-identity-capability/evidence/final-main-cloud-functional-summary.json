@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "classification": "redacted derived summary",
+  "validation": "virtual-device validation",
+  "scope": "Final-main actual CoreS3 browser-to-native user path; operational deployment details omitted",
+  "status": "PARTIAL",
+  "ui_acceptance": "PASS",
+  "cloud_sustained": "FAIL",
+  "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+  "site_manifest_sha256": "c9a3b79f45fdfeac7a4a8eb1eda1b521bea7a35a9da5538b1e35f52199cb0ca8",
+  "runtime_sha256": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+  "original_firmware_sha256": "5847a2bcae33d6bb8942de1c3ae92295a8441b6a3424c78e444fc748c9508ded",
+  "execution_firmware_sha256": "480ca4a24c1c1b56deef1218f8533bf5b00c9e33a98f3b3f705e2569b53051c0",
+  "observation_seconds_after_handshake": 195,
+  "recorded_acceptance_checks": 30,
+  "recorded_acceptance_checks_passed": 30,
+  "functional_checks": {
+    "exact_authorized_mac_post_and_receipt": true,
+    "observed_195_seconds_after_handshake": true,
+    "efuse_receipt_matches_resolved": true,
+    "actual_guest_runtime_matches": true,
+    "original_firmware_bytes_and_execution_match": true,
+    "actual_nic_efuse_packet_and_websocket_identity_match": true,
+    "real_pairing_code_received": true,
+    "cloud_registration_observed": true,
+    "cloud_identity_rejection_zero": true,
+    "pairing_and_webrepl_shown_separately": true,
+    "heartbeat_does_not_claim_remote_execution": true,
+    "no_browser_identity_persistence": true,
+    "ui_running_and_no_error": true,
+    "no_page_errors": true,
+    "original_running_zip_valid": true,
+    "no_runtime_network_errors": true,
+    "frame_conditional_path_exercised": true,
+    "stopped_ui_marks_last_observation": true,
+    "owned_stopped_flash_released": true,
+    "evidence_before_stop": true,
+    "prior_history_preserved": true,
+    "owned_history_retained": true,
+    "owned_guest_process_reaped": true,
+    "browser_identity_unchanged": true,
+    "browser_closed": true,
+    "owned_browser_processes_reaped": true,
+    "runtime_network_final_check_no_late_errors": true
+  },
+  "browser": {
+    "executable_sha256": "5441ca699b9eff7763f2f10765e2e8409a4b05f38917826b5247f6f6bb3b0c6b",
+    "version": "157.0.8103.52"
+  },
+  "browser_before_after_identical": true,
+  "network": {
+    "capture_sha256": "af166eb99bc3d5e96a4fde6de0eb75733c3a762c82c3b14efd0a57f943f716de",
+    "capture_bytes": 23635,
+    "cloud": {
+      "source": "guest-pcap",
+      "state": "observed",
+      "pairing": {
+        "state": "code_received"
+      },
+      "webrepl": {
+        "state": "heartbeat_observed",
+        "reason": null,
+        "handshakes": 2,
+        "disconnects": 1,
+        "device_registered": true,
+        "heartbeat_roundtrips": 1,
+        "protocol_ping_sent": 2,
+        "protocol_pong_received": 0,
+        "protocol_ping_without_pong_count": 2
+      },
+      "observation": {
+        "status": "complete",
+        "reason": null,
+        "capture_bytes": 23635,
+        "packets": 258,
+        "tcp_streams": 6,
+        "partial_tail": false,
+        "partial_stream": false,
+        "protocol_unknown": false,
+        "unsupported_packets": 0
+      }
+    },
+    "connections": [
+      {
+        "state": "disconnected",
+        "reason": null,
+        "closed": true,
+        "device_registered": true,
+        "heartbeat_roundtrips": 6,
+        "protocol_ping_sent": 4,
+        "protocol_pong_received": 0,
+        "protocol_ping_without_pong_count": 4,
+        "expected_query_matches": true
+      },
+      {
+        "state": "heartbeat_observed",
+        "reason": null,
+        "closed": false,
+        "device_registered": true,
+        "heartbeat_roundtrips": 1,
+        "protocol_ping_sent": 2,
+        "protocol_pong_received": 0,
+        "protocol_ping_without_pong_count": 2,
+        "expected_query_matches": true
+      }
+    ],
+    "nic_launch_matches": true,
+    "actual_efuse_drive_matches": true,
+    "efuse_backing_matches": true,
+    "packet_ethernet_source_matches": true,
+    "all_websocket_identities_match_resolved": true,
+    "identity_rejections": 0,
+    "guest_registration_observed": true,
+    "registered_then_disconnect_then_reconnect": true,
+    "protocol_ping_without_pong_total": 6,
+    "protocol_ping_sent_total": 6,
+    "protocol_pong_received_total": 0,
+    "heartbeat_roundtrips_total": 7
+  },
+  "network_phases": {
+    "phases": {
+      "setup": {
+        "api_http_errors": 0,
+        "api_network_failures": 0,
+        "http_401": 0,
+        "http_409": 0
+      },
+      "runtime": {
+        "api_http_errors": 0,
+        "api_network_failures": 0,
+        "http_401": 0,
+        "http_409": 0
+      },
+      "cleanup": {
+        "api_http_errors": 0,
+        "api_network_failures": 0,
+        "http_401": 0,
+        "http_409": 0
+      }
+    },
+    "runtime_api_http_errors": 0,
+    "runtime_api_network_failures": 0,
+    "runtime_frame_304": 5870,
+    "setup_auth_401": 0,
+    "cleanup_owned_stop_frame_409": 0,
+    "cross_phase_responses": 0
+  },
+  "zip_evidence": {
+    "evidence_manifest_valid": true,
+    "evidence_manifest_files": 10,
+    "evidence_zip_sha256": "53b154de9ef8b89c7029a681b9835f8bc9d8ef22f24ce737244a3007acd7a5c2",
+    "frame_sha256": "8578d78db16eeb4cde064a6bad420effd36bc6c75e84830ae7cc20eb46d8aa50",
+    "frame_dimensions": [
+      320,
+      240
+    ],
+    "evidence_session_running": true,
+    "original_firmware_matches": true,
+    "normalized_firmware_matches": true,
+    "no_pong_count": 1
+  },
+  "serial_no_pong_markers": 1,
+  "serial_marker_source": "evidence ZIP serial.log",
+  "raw_receipts": {
+    "execution_summary": {
+      "sha256": "30b8419e985041afa22cfb3a5ea2d27b07304565c7c2c3a43212a7c5f73993f7",
+      "bytes": 8253
+    },
+    "browser_visual_review": {
+      "sha256": "123cfa083b000c44cf5b53ccbe54b75766be41b1829eae0f2db68dc304586cf6",
+      "bytes": 846
+    },
+    "root_review": {
+      "sha256": "38f408be9910719138f02c54fd92e1e028646c165fc72f6be5f11ca07e407307",
+      "bytes": 811
+    }
+  },
+  "limits": [
+    "Cloud control PONG absent and guest disconnect/reconnect observed; no sustained-connection PASS",
+    "Text heartbeats and registration do not prove remote REPL execution",
+    "Only actual native service path; no browser-WASM or physical hardware validation",
+    "Raw ZIP, screenshot, serial, DOM and unique identities remain private",
+    "No Burner submission"
+  ]
+}

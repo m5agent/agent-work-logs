@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "C6 ordinary GPIO interrupt delivery",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "reviewed_commit": "b7a312268389dee1729c70bbbee960672adf393c",
+    "final_delivery_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+    "upstream_qemu_base": "febae182e132e4055529be423a818225ebddaa3a",
+    "gpio_patch_sha256": "af329b68d47bed2ed20ef9fcae6f31b4363b305a84b2d3682260bca1aa05a18a",
+    "source_binding": {
+      "receipt_sha256": "d5a49beb0f186aff8e45481e02465191a02bfa68d440dadadb2d1b4b95822645",
+      "recorded_after_run": true,
+      "actual_service_files_unchanged_from": "9f51b19622e4373c3a8d7d3757b95b6002d4d384",
+      "baseline_test_only_commit_during_run": "469e45c6",
+      "candidate_started_after_test_only_commit": true
+    }
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "physical_hardware": "NOT RUN",
+    "models": [
+      "nanoc6",
+      "nesso-n1"
+    ]
+  },
+  "firmware": {
+    "idf": [
+      {
+        "device": "nanoc6",
+        "sha256": "2a0e22623387a60c339eb075d12e39f2b674bb04365a1be41d9bf16582e5ca4c"
+      },
+      {
+        "device": "nesso-n1",
+        "sha256": "316e46505f1d88bb652aedbd6e4557926fc1b6da35e32d767cd5a234f08ed83a"
+      }
+    ],
+    "nesso_original_sha256": "fcbd588fa92bcd24c8d4ba8fcd8837b8df64a6d5be72771e520c1ed84af88c7a",
+    "nesso_vfs_composed_sha256": "16255a35d2142a7f68363c79d3a083bab207e6c104b6a91d3563f8646889a3aa",
+    "app_partitions": [
+      {
+        "offset": 65536,
+        "size": 7405568,
+        "sha256": "4743d8b5e3cf234b064dc01566fa1cce9e44b545ea72992081a2628b937a6ba4",
+        "original_executable_unchanged": true,
+        "unchanged_after_execution": true
+      }
+    ]
+  },
+  "execution": {
+    "idf_lane": "checked-in direct QEMU regression",
+    "uiflow_lane": "Device Service ordinary merged firmware",
+    "runtime_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4",
+    "baseline_runtime_sha256": "80d92a6c6c68137a7813b8b7c519725aac350258078d9b244098eaabf82f63bf",
+    "full_native_matrix": {
+      "status": "PASS",
+      "cases": 70,
+      "attempts_each": 1,
+      "retries": 0,
+      "executed_source_commit": "0e00cdcbc99a8210af6485df1bcfd04a514bc8a1",
+      "compared_source_commit": "014841a8fe082cf8aaaa57de898e0ac0f665aedf",
+      "identical_implementation_files": 523,
+      "runtime_case_counts": {
+        "xtensa": 64,
+        "c6": 6
+      },
+      "all_application_partitions_unchanged": true,
+      "owned_guests_remaining": 0
+    },
+    "original_firmware_nonregression": {
+      "status": "PARTIAL",
+      "actual_executed_source_commit": "0e00cdcbc99a8210af6485df1bcfd04a514bc8a1",
+      "final_related_implementation_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "related_files_equal": 523,
+      "full_windows": 4,
+      "positive_scope_controls": "21/21",
+      "retained_b_negative_control": "FAIL 5/6; selection frame unchanged",
+      "retained_first_observer_failure": "INFRASTRUCTURE_FAIL; no full product verdict",
+      "boundary": "Original service execution differs from final service source; no final service or browser-WASM claim transferred."
+    },
+    "pages": "NOT RUN",
+    "final_main_functional_repeat": {
+      "status": "PASS",
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+      "checks": 32,
+      "actual_inputs": 22,
+      "resets": 1,
+      "evidence": "evidence/final-main-c6-functional-summary.json"
+    }
+  },
+  "checks": [
+    {
+      "name": "nanoc6 IDF FAIL",
+      "status": "FAIL",
+      "checks": 21,
+      "passed": 12
+    },
+    {
+      "name": "nanoc6 IDF PASS",
+      "status": "PASS",
+      "checks": 21,
+      "passed": 21
+    },
+    {
+      "name": "nesso-n1 IDF FAIL",
+      "status": "FAIL",
+      "checks": 26,
+      "passed": 14
+    },
+    {
+      "name": "nesso-n1 IDF PASS",
+      "status": "PASS",
+      "checks": 26,
+      "passed": 26
+    },
+    {
+      "name": "original Nesso executable with VFS probe",
+      "status": "FAIL",
+      "checks": 32,
+      "passed": 20
+    },
+    {
+      "name": "original Nesso executable with VFS probe",
+      "status": "PASS",
+      "checks": 32,
+      "passed": 32
+    },
+    {
+      "name": "full native peripheral matrix",
+      "status": "PASS",
+      "checks": 70,
+      "passed": 70,
+      "native_validation_only": true
+    },
+    {
+      "name": "original Mesh A long and short select, 150 seconds",
+      "status": "PASS",
+      "checks": 8,
+      "passed": 8,
+      "visual": "PASS separately reviewed; raw app status REVIEW retained"
+    },
+    {
+      "name": "original Bruce touch and reset, 150 seconds",
+      "status": "PASS",
+      "checks": 6,
+      "passed": 6,
+      "visual": "PASS separately reviewed; raw app status REVIEW retained"
+    },
+    {
+      "name": "original Honeypot USB console, 180 seconds",
+      "status": "PASS",
+      "checks": 7,
+      "passed": 7,
+      "application_status": "PARTIAL; AP/HTTP not run"
+    },
+    {
+      "name": "original Mesh B selection observation, 150 seconds",
+      "status": "FAIL",
+      "checks": 6,
+      "passed": 5,
+      "boundary": "No selection frame change; preserved negative observation, not overwritten by A positive"
+    },
+    {
+      "name": "initial Mesh rotation observer",
+      "status": "INFRASTRUCTURE_FAIL",
+      "boundary": "Stopped at 10 seconds; empty controls are not a product verdict; original report retained"
+    },
+    {
+      "name": "final-main Nesso original-executable Pin.irq repeat",
+      "status": "PASS",
+      "checks": 32,
+      "passed": 32,
+      "source_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099"
+    },
+    {
+      "name": "exact final-main host CI",
+      "status": "PASS",
+      "jobs": 2,
+      "run_id": 43496500912
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/c6-gpio-irq-summary.json",
+      "sha256": "6abf34435ec8006b8c89c6c2cfc876dc6cb045b6d39e20c9359752fe9aab624b",
+      "bytes": 64153,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-candidate-docs-only-delta-summary.json",
+      "sha256": "e0d7c76a1d69f4df1f792a19346af21b3de9212c647faf16d93790f881f6de72",
+      "bytes": 1876,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/final-main-c6-functional-summary.json",
+      "sha256": "afe8bd876cc6f7840eabe322ce2d2160b347bf4a99ce4bd6db5a63b3886d18d7",
+      "bytes": 7766,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/idf-independent-audit-summary.json",
+      "sha256": "627c37a3027038073d7e3bdb19dea2afc3e634cb359e7e6718b6ba933a720ccb",
+      "bytes": 5956,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/integration-review-summary.json",
+      "sha256": "f6f1df5c4fd818e123640691a3c350ae303706455f8fd9836e2afc454a51741d",
+      "bytes": 4199,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/main-ci-completed-summary.json",
+      "sha256": "3bd9e97a66c1559aeed23569cb1a1461f9b4e867ff8cb233752ed47ad3a9458a",
+      "bytes": 1247,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/mesh-a-and-b-independent-review-summary.json",
+      "sha256": "415cd0b83b77f22c8731c86133b55ca9ba43bb89da5d82f688956c241b52fea5",
+      "bytes": 2134,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/native70-independent-review-summary.json",
+      "sha256": "d4a8c97f9f64193d20420ea9ecd328dc0363f3e0bb8c5928a0b0f098ab4c4482",
+      "bytes": 3075,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/nesso-service-independent-audit-summary.json",
+      "sha256": "73ec8c8d9da9bbc962602f250aaab12d0b699e81c7fe3613d191cad860973fc6",
+      "bytes": 4292,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/original-firmware-nonregression-summary.json",
+      "sha256": "c4b4dd839fd22e1da936be36859d2888630e93f5d40f4cbc154902ee7a92c13d",
+      "bytes": 26564,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/registered-case-independent-audit-summary.json",
+      "sha256": "3b9087901b02210831efbaf260333ace2235d5ca269571d23f59d39533a84a0a",
+      "bytes": 3240,
+      "classification": "redacted-derived-summary"
+    }
+  ],
+  "notes": [
+    "Source binding recorded after execution; original preflight/build failures retained.",
+    "No Burner submission.",
+    "Registered-case review added independently: explicit matrix board selection is bound by case source/invocation; raw run did not retain a separate process-environment snapshot.",
+    "Full native matrix follow-up passed 70/70 once; original application nonregression and final-source functional evidence is appended separately.",
+    "The earlier dated source summary retains its historical NOT RUN for the matrix; the independent native70 follow-up records the later execution.",
+    "Original application follow-up preserves first observer INFRA and B selection FAIL; independent A positive does not erase either. Honeypot AP/HTTP remains NOT RUN."
+  ]
+}

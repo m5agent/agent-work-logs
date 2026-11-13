@@ -1,0 +1,103 @@
+{
+  "scope": "full-platform-host-regression",
+  "status": "PASS",
+  "validation": "host tests, not guest execution",
+  "attempts": [
+    {
+      "attempt": "a1",
+      "source_commit": "8266dfb2a99cfdcf9fdfab95f612c924cd9180e9",
+      "tests": 2235,
+      "seconds": 203.771,
+      "status": "FAIL",
+      "skipped": 8,
+      "log_sha256": "c3f825eb6f36a8e11b80d31fdde1effd0e23981f2526a5fb80fe1246fcbafb4d",
+      "failures": [
+        "test_every_published_operation_has_an_explicit_validation_plan (test_device_api_sweep_inventory.DeviceApiSweepInventoryTests.test_every_published_operation_has_an_explicit_validation_plan)",
+        "test_workstreams_and_platform_tool_inventory_are_current (test_docs_current_state_contract.DocsCurrentStateContractTests.test_workstreams_and_platform_tool_inventory_are_current)"
+      ]
+    },
+    {
+      "attempt": "a2",
+      "source_commit": "014841a8fe082cf8aaaa57de898e0ac0f665aedf",
+      "tests": 2235,
+      "seconds": 185.416,
+      "status": "PASS",
+      "skipped": 8,
+      "log_sha256": "a84524b7de63a4a62880fc06290e8981e5e98a2f877a2cabad0dd10f79acb32e",
+      "failures": []
+    }
+  ],
+  "corrections": "API inventory version and contract digest plus explicit runtime-gap review date; no product behavior changed between attempts",
+  "other_checks": {
+    "source_commit": "8266dfb2a99cfdcf9fdfab95f612c924cd9180e9",
+    "checks": [
+      {
+        "command": [
+          "python3",
+          "platform/tools/runtime_coverage.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.03321912488900125,
+        "log_sha256": "ae22dc70eea81ac4f6d6918c0d694fc72cbc72cb589a13d93dac5b5c453d9311"
+      },
+      {
+        "command": [
+          "python3",
+          "platform/tools/peripheral_catalog.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.02408562507480383,
+        "log_sha256": "6e3c49ec0c80a56051031a4bf3ba0fe16aa118f2b31f8863c09ef0bc4cc89633"
+      },
+      {
+        "command": [
+          "python3",
+          "platform/tools/qemu_profiles.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.02163854194805026,
+        "log_sha256": "04a26a35d775027ee0ce627c0888eeb20272591f8801dbd6e2f0dfb2e499281e"
+      },
+      {
+        "command": [
+          "python3",
+          "platform/tools/project_snapshot.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.40477495919913054,
+        "log_sha256": "05110c70ad2d40d6a4943005ed5d00f2780cb44d5288bcee45128d62b19d6f1d"
+      },
+      {
+        "command": [
+          "python3",
+          "platform/tools/check_pr_scope.py",
+          "--base",
+          "a5990e720a8c79310456bf5868141f4cfd50afe8",
+          "--head",
+          "HEAD"
+        ],
+        "exit_code": 0,
+        "seconds": 0.28593204100616276,
+        "log_sha256": "0a9ebd16b33f3585d3e0825c54c6e8daa6ff7ec16496af111ce12cacc0e6b7d0"
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "--prefix",
+          "platform/tests",
+          "test:contracts"
+        ],
+        "exit_code": 0,
+        "seconds": 12.95562404114753,
+        "log_sha256": "b54233c1bb2330843896201f7e954699a22ac288431c313761318ee409b30af2"
+      }
+    ],
+    "status": "PASS",
+    "guest": "NOT RUN; host checks"
+  }
+}

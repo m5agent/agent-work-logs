@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-harness-attempt-history",
+  "original_results_preserved": true,
+  "attempts": [
+    {
+      "ordinal": 1,
+      "harness": "FAIL",
+      "guest": "NOT RUN",
+      "stage": "connection UI before guest creation",
+      "reason": "The first-visit isolation reload reset a prematurely operated connection panel. The automation timed out before creation.",
+      "session_creation_observed": false,
+      "owned_guest_started": false,
+      "browser_cleanup": true,
+      "source_summary_sha256": "deccbb0fc511796392502e2edfc2ad854290c417205bdd0a82924d9e17c46bad"
+    },
+    {
+      "ordinal": 2,
+      "harness": "FAIL",
+      "guest_observation": "COMPLETED",
+      "cloud_sustained": "FAIL",
+      "reason": "The initial network oracle included a setup authentication 401. A separately retained read-only phase audit found zero HTTP errors during guest observation, but did not replace this original FAIL.",
+      "setup_http_401": 1,
+      "cleanup_frame_409": 1,
+      "runtime_api_network_errors": 0,
+      "runtime_ui_errors": 0,
+      "source_summary_sha256": "7af8a49a5bc201a8fa70babf7361bb76d4fc83ca2c19425b79fff1a3972266ab",
+      "evidence_zip_sha256": "2cd898cacd0ba3c3eb37c91c17c40f184a5fc9ab307b8f46c689772925f9c866",
+      "independent_retrospective_review_sha256": "3d409f7e115ce1a8060c858035afe5fad07ac39a1e360f95f0773b6b01046e28"
+    },
+    {
+      "ordinal": 3,
+      "harness": "PASS for UI and identity scope",
+      "overall": "PARTIAL",
+      "cloud_sustained": "FAIL",
+      "reason": "A new run used a phase policy fixed before execution and retained all raw network events. Runtime and late-response authentication/server errors remain failures.",
+      "source_summary_sha256": "b3c2d53ffd8bd6db8050049c9b8f1dffd24996585bb0927c69277a32f3bd7696",
+      "evidence_zip_sha256": "0db58cd3ce7e454d783d5072407510a21d090d8a0081873d8a1dc9841c2aa6a9",
+      "phase_host_controls": 15,
+      "owned_cleanup": "PASS"
+    }
+  ],
+  "raw_logs_images_and_identity_values": "private; not included",
+  "default_key_attempts": [
+    {
+      "ordinal": 1,
+      "status": "FAIL",
+      "reason": "Runtime observer emitted one requestfailed event per 304 response despite page JavaScript succeeding. Original verdict retained.",
+      "runtime_frame304": 1172,
+      "runtime_requestfailed": 1172,
+      "runtime_http_errors": 0,
+      "source_summary_sha256": "02c007e7b04870dc8127840e84fb23f86222fd18a550a61c41171a49e349d416",
+      "evidence_zip_sha256": "ab99f11245481f83ba111ef98171a92574deb0779b0dc78b1b8da354f12db2b4",
+      "historical_browser_version_and_executable_sha": "NOT CAPTURED"
+    },
+    {
+      "ordinal": 2,
+      "status": "PASS for default-key UI and identity scope only",
+      "reason": "A separate desktop-browser run retained the same strict network oracle; runtime network errors are zero.",
+      "checks": 27,
+      "runtime_frame304": 1176,
+      "runtime_requestfailed": 0,
+      "runtime_http_errors": 0,
+      "source_summary_sha256": "af8076c3f79ffba0b1e58506fe1c438eb8ba6272d59e8838e4b2949c224c05a7",
+      "evidence_zip_sha256": "49fcb155c100c01e1c1fd94cdc8a2d1a98864949948544db3bd919578db750a0",
+      "cloud_binding": "NOT BOUND",
+      "cloud_sustained": "NOT RUN",
+      "browser_version": "157.0.8103.52",
+      "browser_executable_sha256": "5441ca699b9eff7763f2f10765e2e8409a4b05f38917826b5247f6f6bb3b0c6b"
+    }
+  ],
+  "host_browser_diagnostic": {
+    "cases": 16,
+    "scope": "host-only exact HTTP304 and worker comparison; no guest",
+    "finding": "The later fixed bundled browser emitted ERR_ABORTED for successful 304 reads with or without the worker/CDP/allHeaders observation; fixed desktop Chrome did not. This does not retroactively identify an unrecorded historical executable version.",
+    "evidence": "capability-browser-304-host-comparison-summary.json"
+  }
+}

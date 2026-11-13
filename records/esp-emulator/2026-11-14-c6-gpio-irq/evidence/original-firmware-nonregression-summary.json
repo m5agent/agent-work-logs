@@ -1,0 +1,750 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "scope": "Private bounded original-firmware C6 nonregression aggregate; four complete windows plus one retained observer failure",
+  "overall_status": "PARTIAL",
+  "original_reports_unchanged": true,
+  "source_binding": {
+    "actual_executed_source_commit": "0e00cdcbc99a8210af6485df1bcfd04a514bc8a1",
+    "final_release_candidate_commit": "70ef503fc2fb8b2c787fa9065e2952f525c40099",
+    "native_matrix_related_files_same_git_blobs": 523,
+    "prior_executed_bytes_comparison": {
+      "sha256": "425f0df8cea31bbdb8add9cfcc1bcf2642e53489ed5749a7205a2a83e0169c7e",
+      "bytes": 122267
+    },
+    "source_heads_are_distinct": true,
+    "separate_service_changes": [
+      "platform/tools/device_service.py",
+      "platform/tools/device_service_identity.py"
+    ],
+    "boundary": "The original-app sessions executed the frozen actual source; final service identity changes require their separate postdeployment validation. Native runtime and relevant matrix source bytes match; this is not a claim that final service HEAD executed these sessions."
+  },
+  "runtime_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4",
+  "rom_sha256": "91db14c2419391308b108bac0b15fe3442a9c411cdd7f3fb088767c9fbc4b713",
+  "runtime_profile": "Native QEMU; explicit selected board; actual production clock arguments verified; no added network backend or peer",
+  "counts": {
+    "full_observation_windows": 4,
+    "positive_scope_checks_passed": 21,
+    "positive_scope_checks_total": 21,
+    "negative_observation_checks_passed": 5,
+    "negative_observation_checks_total": 6,
+    "retained_observer_infrastructure_failures": 1
+  },
+  "runs": [
+    {
+      "case": "meshtastic_a_positive",
+      "device": "nesso-n1",
+      "result_with_visual_review": "PASS",
+      "original_report_status": "REVIEW",
+      "original_application_status": "REVIEW",
+      "execution_status": "PASS",
+      "control_status": "PASS",
+      "controls_passed": 8,
+      "controls_total": 8,
+      "controls": {
+        "one_boot": true,
+        "no_fatal": true,
+        "select_changed_frame": true,
+        "short_a_changed_frame": true,
+        "exact_two_action_requests": true,
+        "fixed_dispatch_boundaries": true,
+        "exact_virtual_hold_receipts": true,
+        "fixed_duration_observed": true
+      },
+      "original_firmware_sha256": "ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744",
+      "normalized_firmware_sha256": "ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744",
+      "observed_seconds": 150.1216948328074,
+      "counts": {
+        "boot_banners": 1,
+        "fatal_marker_count": 0
+      },
+      "actual_inputs": [
+        {
+          "label": "main-input",
+          "requested_at_seconds": 30.062,
+          "duration_seconds": 0.5045396250206977,
+          "elapsed_seconds": 30.566,
+          "request": {
+            "kind": "key",
+            "key": "a",
+            "action": "tap",
+            "hold_seconds": 1.2,
+            "settle_seconds": 0.5
+          },
+          "actual_virtual_timing": {
+            "clock": "virtual",
+            "hold_seconds": 1.2,
+            "hold_time_ms": 1200,
+            "completion": "queued"
+          }
+        },
+        {
+          "label": "short-a",
+          "requested_at_seconds": 40.07,
+          "duration_seconds": 0.5121327920351177,
+          "elapsed_seconds": 40.582,
+          "request": {
+            "kind": "key",
+            "key": "a",
+            "action": "tap",
+            "settle_seconds": 0.5
+          },
+          "actual_virtual_timing": {
+            "clock": "virtual",
+            "hold_seconds": 0.45,
+            "hold_time_ms": 450,
+            "completion": "queued"
+          }
+        }
+      ],
+      "actual_evidence_timeline": [
+        [
+          "input",
+          "key:a"
+        ],
+        [
+          "input",
+          "key:a"
+        ]
+      ],
+      "curated_frames": [
+        {
+          "sample": "before-input",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "b6b33c6520917c123741ea9c928d0b6cb8131910949ff2cb89c7777a2d09b673",
+          "pixel_sha256": "c66b5cf0ea55080ab6faf8751bcd78403a37f675c6dceeb0eb0d799c78a2c804",
+          "nonblack_pixels": 7566,
+          "colors": 3,
+          "elapsed_seconds": 30.062
+        },
+        {
+          "sample": "after-input",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "99a30c825a30a1b2bb48b6d7b9ee3e23f703ed8888b34f6c0240a59efab22865",
+          "pixel_sha256": "e0dcb7796983919514814515f87e669664d9970466ad7677ef6ca1a9f419a9d5",
+          "nonblack_pixels": 6333,
+          "colors": 3,
+          "elapsed_seconds": 32.601
+        },
+        {
+          "sample": "before-short-a",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "99a30c825a30a1b2bb48b6d7b9ee3e23f703ed8888b34f6c0240a59efab22865",
+          "pixel_sha256": "e0dcb7796983919514814515f87e669664d9970466ad7677ef6ca1a9f419a9d5",
+          "nonblack_pixels": 6333,
+          "colors": 3,
+          "elapsed_seconds": 40.07
+        },
+        {
+          "sample": "after-short-a",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "e2a0e4d1d27db70f95a980e236c3021765b5817dcad3ef85d03805d137fc48d5",
+          "pixel_sha256": "8c42ca33e0b2dfe4f4ec36201a3dce6756c32d9490bf760f4cd7313aaaceb556",
+          "nonblack_pixels": 6333,
+          "colors": 3,
+          "elapsed_seconds": 42.611
+        },
+        {
+          "sample": "sleep-observed",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+          "pixel_sha256": "e6da5040cd854e914ae0ea9d85f741213ab077415c7498f2d41e0cf39ddb4b4d",
+          "nonblack_pixels": 0,
+          "colors": 1,
+          "elapsed_seconds": 72.319
+        },
+        {
+          "sample": "t150",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+          "pixel_sha256": "e6da5040cd854e914ae0ea9d85f741213ab077415c7498f2d41e0cf39ddb4b4d",
+          "nonblack_pixels": 0,
+          "colors": 1,
+          "elapsed_seconds": 150.145
+        }
+      ],
+      "all_frames_hash_verified_count": 27,
+      "application_partitions_unchanged": [
+        {
+          "offset": 65536,
+          "size": 2424832,
+          "original_padded_sha256": "f7d319abd01d9d971f4e53bd16b3bfa5bd6a4f12cddde5587e28a1c889c19ae4",
+          "final_sha256": "f7d319abd01d9d971f4e53bd16b3bfa5bd6a4f12cddde5587e28a1c889c19ae4",
+          "unchanged": true
+        },
+        {
+          "offset": 2490368,
+          "size": 655360,
+          "original_padded_sha256": "152e56baeaace51ee143f9a1b95d3b9d546cb873c259fecdbbb23ffb9d0dd22a",
+          "final_sha256": "152e56baeaace51ee143f9a1b95d3b9d546cb873c259fecdbbb23ffb9d0dd22a",
+          "unchanged": true
+        }
+      ],
+      "original_summary": {
+        "sha256": "fb6c600aed4c9545ed7604817056b0c9763dbdb193f53318e5d3deca3cce7750",
+        "bytes": 14835
+      },
+      "private_artifact_hashes": {
+        "evidence_zip": {
+          "sha256": "10fc188c89dee8d210c469ad5243a49a9c50e85bb9e4c396b72ea49f92802a47",
+          "bytes": 1264107
+        },
+        "serial": {
+          "sha256": "7ee22e5da8f3b51fcdbc4ac11e50002b5618b02a99954c64c59c27c5a7f50a34",
+          "bytes": 12453
+        },
+        "terminal_snapshot": {
+          "sha256": "001dc2b6eb357d247c38dada6594e5288d8336f3be3570d473cb713cc8ba0d7c",
+          "bytes": 2910
+        },
+        "retained_history_snapshot": {
+          "sha256": "0de661bb188c75886dd2e301b7554d4bf004b4c3c62b57808062d570322c9a1b",
+          "bytes": 3140
+        }
+      },
+      "evidence_and_cleanup": {
+        "zip_before_stop": true,
+        "evidence_guest_running": true,
+        "evidence_timeline_verified": true,
+        "actual_native_and_clock_args_verified": true,
+        "flash_released": true,
+        "lease_released": true,
+        "native_pid_exited": true,
+        "history_retained": true,
+        "worker_idle": true,
+        "owned_service_stopped": true,
+        "owned_port_released": true,
+        "frozen_inputs_unchanged": true
+      },
+      "prior_failure_rewritten": false,
+      "visual_reviews": {
+        "root-visual-review-safe.json": {
+          "sha256": "a04d9a51db75d47ab2533b1c903f88b00f305e6e1a9f8dd35cb18e71d0b1b6e8",
+          "bytes": 782
+        }
+      },
+      "visual_observation": "Welcome/Got it -> long A opens LoRa region menu with Back selected -> short A moves selection to US",
+      "limits": [
+        "No region selection commit or LoRa transmission claimed",
+        "A later black frame was observed without added wake input; one boot and no fatal marker across the window",
+        "Queued virtual 1200/450 ms holds are not host wall-clock press durations",
+        "Separate B selection FAIL is retained and is not converted into a PASS"
+      ]
+    },
+    {
+      "case": "bruce_touch_reset",
+      "device": "nesso-n1",
+      "result_with_visual_review": "PASS",
+      "original_report_status": "REVIEW",
+      "original_application_status": "REVIEW",
+      "execution_status": "PASS",
+      "control_status": "PASS",
+      "controls_passed": 6,
+      "controls_total": 6,
+      "controls": {
+        "two_boots_one_requested_reset": true,
+        "no_fatal": true,
+        "touch_changed_frame": true,
+        "remount_nonblack": true,
+        "post_reset_littlefs_error_absent": true,
+        "fixed_duration_observed": true
+      },
+      "original_firmware_sha256": "780a41bc61b330075ea2431437c87c1a35c81e3ed395be9777ed6f9bc5b62d95",
+      "normalized_firmware_sha256": "489472798deb5cb6424bb83a25921507742bc308c92fed8e66121f3177bcb940",
+      "observed_seconds": 150.11301383306272,
+      "counts": {
+        "boot_banners": 2,
+        "fatal_marker_count": 0
+      },
+      "actual_inputs": [
+        {
+          "label": "main-input",
+          "elapsed_seconds": 31.036,
+          "request": {
+            "kind": "touch",
+            "x": 66,
+            "y": 214,
+            "action": "tap",
+            "settle_seconds": 0.5
+          }
+        },
+        {
+          "label": "reset",
+          "elapsed_seconds": 100.097,
+          "request": {}
+        }
+      ],
+      "actual_evidence_timeline": [
+        [
+          "input",
+          "touch:66,214"
+        ],
+        [
+          "reset",
+          null
+        ]
+      ],
+      "curated_frames": [
+        {
+          "sample": "before-input",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "e763bd06ac289883ac50cbf1e58ea7c5166d1ab817db2505e0044ef79300e7bd",
+          "pixel_sha256": "8172d8fcd69f3b44b9c8326022c3ad73d0c5b64455e498fc9782719a9b3081a8",
+          "nonblack_pixels": 3531,
+          "colors": 5,
+          "elapsed_seconds": 30.071
+        },
+        {
+          "sample": "after-input",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "1494a15e663d2ee69538f1178ed24462106276b461dc3a645b5185db213ffc2f",
+          "pixel_sha256": "2879e5ce8c93e414caa0397a87601bc4082ed20f698b2f4ce88086475d7d9bae",
+          "nonblack_pixels": 3400,
+          "colors": 5,
+          "elapsed_seconds": 33.065
+        },
+        {
+          "sample": "remount",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "e763bd06ac289883ac50cbf1e58ea7c5166d1ab817db2505e0044ef79300e7bd",
+          "pixel_sha256": "8172d8fcd69f3b44b9c8326022c3ad73d0c5b64455e498fc9782719a9b3081a8",
+          "nonblack_pixels": 3531,
+          "colors": 5,
+          "elapsed_seconds": 125.283
+        },
+        {
+          "sample": "t150",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "c64a2f1430d36b6dc5e4aa8f04d915f3c94019bcdccfae881731cc2e3b7447b6",
+          "pixel_sha256": "3511b59691b1c61a51c384d1a1899a87c5df4f7efd61498a229a08d94fa0d777",
+          "nonblack_pixels": 3521,
+          "colors": 5,
+          "elapsed_seconds": 150.145
+        }
+      ],
+      "all_frames_hash_verified_count": 10,
+      "application_partitions_unchanged": [
+        {
+          "offset": 65536,
+          "size": 4653056,
+          "original_padded_sha256": "754af3b23ebbe007429efa7941a1d0f620dee011847fb62b8f758a6a1d595532",
+          "final_sha256": "754af3b23ebbe007429efa7941a1d0f620dee011847fb62b8f758a6a1d595532",
+          "unchanged": true
+        }
+      ],
+      "original_summary": {
+        "sha256": "c171e06dd792c2dfece8e2d5c1b158447cdae4d8fdfbd8567acd91299d2f08fd",
+        "bytes": 6850
+      },
+      "private_artifact_hashes": {
+        "evidence_zip": {
+          "sha256": "bc238e0202c10b03d8952759bf2df0f8933f72ef1b65b22a9f3e64d92f75f6fc",
+          "bytes": 2333482
+        },
+        "serial": {
+          "sha256": "fd4fa00c6172deb39e84d403283585e6f07772fc1c28ae90bbb7b3bb213819e4",
+          "bytes": 6044
+        },
+        "terminal_snapshot": {
+          "sha256": "e686e0e1e795c045f5c74a2d22ea507c9acf4abc8ee56e80144fd8f3b97ffb51",
+          "bytes": 2907
+        },
+        "retained_history_snapshot": {
+          "sha256": "c37b05441c5d6030cebbbf504f59bdaac8a4cc5de5d2a4840d9a77fb001648b3",
+          "bytes": 3137
+        }
+      },
+      "evidence_and_cleanup": {
+        "zip_before_stop": true,
+        "evidence_guest_running": true,
+        "evidence_timeline_verified": true,
+        "actual_native_and_clock_args_verified": true,
+        "flash_released": true,
+        "lease_released": true,
+        "native_pid_exited": true,
+        "history_retained": true,
+        "worker_idle": true,
+        "owned_service_stopped": true,
+        "owned_port_released": true,
+        "frozen_inputs_unchanged": true
+      },
+      "prior_failure_rewritten": false,
+      "visual_reviews": {
+        "root-visual-review-safe.json": {
+          "sha256": "fecb2a4d1660011505b4336b62b0e2ff97ea07c497f459a837c4f062b561d853",
+          "bytes": 556
+        },
+        "visual-review-safe.json": {
+          "sha256": "2409167b4670c8efc1aea58029dd5592f26b59159ad7bdc4aaa71f01172ba6e6",
+          "bytes": 1333
+        }
+      },
+      "visual_observation": "WiFi menu -> actual touch opens Clock -> requested reset and remount returns WiFi menu",
+      "limits": [
+        "No WiFi, attack, or RF operation claimed"
+      ]
+    },
+    {
+      "case": "honeypot_configuration_console",
+      "device": "nanoc6",
+      "result_with_visual_review": "PARTIAL",
+      "original_report_status": "PARTIAL",
+      "original_application_status": "PARTIAL",
+      "execution_status": "PASS",
+      "control_status": "PASS",
+      "controls_passed": 7,
+      "controls_total": 7,
+      "controls": {
+        "one_boot": true,
+        "no_fatal": true,
+        "usb_one_boot": true,
+        "usb_no_fatal": true,
+        "configuration_mode_observed": true,
+        "complete_payload_matches": true,
+        "fixed_duration_observed": true
+      },
+      "original_firmware_sha256": "4184ffc6b56f1742a926845d782f3b65c37246490cc6d3e1bfa067bff7b0c381",
+      "normalized_firmware_sha256": "4184ffc6b56f1742a926845d782f3b65c37246490cc6d3e1bfa067bff7b0c381",
+      "observed_seconds": 180.08409829204902,
+      "counts": {
+        "boot_banners": 1,
+        "fatal_marker_count": 0
+      },
+      "actual_inputs": [],
+      "actual_evidence_timeline": [],
+      "curated_frames": [],
+      "all_frames_hash_verified_count": 0,
+      "application_partitions_unchanged": [
+        {
+          "offset": 65536,
+          "size": 1310720,
+          "original_padded_sha256": "5de936fdceab2d3619a0db1805d55e72bae73b3b398f8c251dc846abeff97c0a",
+          "final_sha256": "5de936fdceab2d3619a0db1805d55e72bae73b3b398f8c251dc846abeff97c0a",
+          "unchanged": true
+        },
+        {
+          "offset": 1376256,
+          "size": 1310720,
+          "original_padded_sha256": "35805909a516a528e396b6ea22dab437b6f1c703afe92e92dddfa0243bfae738",
+          "final_sha256": "35805909a516a528e396b6ea22dab437b6f1c703afe92e92dddfa0243bfae738",
+          "unchanged": true
+        }
+      ],
+      "original_summary": {
+        "sha256": "e3c27ba26104c5a41e12fdb5b3f67804ba9e0724b829ad192866052b62347fd8",
+        "bytes": 3891
+      },
+      "private_artifact_hashes": {
+        "evidence_zip": {
+          "sha256": "8a12d8343086332488103261af77819d8e8bbecb7cc9006761f46890144a1954",
+          "bytes": 801374
+        },
+        "serial": {
+          "sha256": "456aafe5b3791f515fdcd70b6db74cdd09e32d849f2403104c3b1296f87fa9a7",
+          "bytes": 461
+        },
+        "terminal_snapshot": {
+          "sha256": "210eaa6221d498cc37601fedefdcdbb3140de645112e01a90b3388abcf7595c2",
+          "bytes": 2905
+        },
+        "retained_history_snapshot": {
+          "sha256": "bb3e0d6afe196867993f24d21aa8d9d8f493f38dadcc39f683065e7a4d89b6c0",
+          "bytes": 3137
+        },
+        "usb_serial": {
+          "sha256": "187071925a2d20c7315e90f85af9bc638ce44cd4b247fe96bab4a210b8bd1a2c",
+          "bytes": 614
+        }
+      },
+      "evidence_and_cleanup": {
+        "zip_before_stop": true,
+        "evidence_guest_running": true,
+        "evidence_timeline_verified": true,
+        "actual_native_and_clock_args_verified": true,
+        "flash_released": true,
+        "lease_released": true,
+        "native_pid_exited": true,
+        "history_retained": true,
+        "worker_idle": true,
+        "owned_service_stopped": true,
+        "owned_port_released": true,
+        "frozen_inputs_unchanged": true
+      },
+      "prior_failure_rewritten": false,
+      "configuration_payload": {
+        "application_payload_bytes": 153,
+        "application_payload_sha256": "957653a047aacb4f6c16b22209ba72edc5e5ae941ff7fd744992c3c297d9f3c6",
+        "complete_payload_matches": true,
+        "usb_uart_prefix_equal": true
+      },
+      "limits": [
+        "Configuration console path only",
+        "AP association, HTTP data plane and physical RF NOT RUN"
+      ]
+    },
+    {
+      "case": "meshtastic_b_selection_negative_observation",
+      "device": "nesso-n1",
+      "result_with_visual_review": "FAIL",
+      "original_report_status": "FAIL",
+      "original_application_status": "FAIL",
+      "execution_status": "PASS",
+      "control_status": "FAIL",
+      "controls_passed": 5,
+      "controls_total": 6,
+      "controls": {
+        "one_boot": true,
+        "no_fatal": true,
+        "input_changed_frame": false,
+        "natural_sleep_observed": true,
+        "button_wake_nonblack": true,
+        "fixed_duration_observed": true
+      },
+      "original_firmware_sha256": "ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744",
+      "normalized_firmware_sha256": "ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744",
+      "observed_seconds": 150.07236350001767,
+      "counts": {
+        "boot_banners": 1,
+        "fatal_marker_count": 0
+      },
+      "actual_inputs": [
+        {
+          "label": "main-input",
+          "elapsed_seconds": 30.595,
+          "request": {
+            "kind": "key",
+            "key": "b",
+            "action": "tap",
+            "settle_seconds": 0.5
+          },
+          "actual_virtual_timing": {
+            "clock": "virtual",
+            "hold_seconds": 0.45,
+            "hold_time_ms": 450,
+            "completion": "queued"
+          }
+        },
+        {
+          "label": "wake",
+          "elapsed_seconds": 62.384,
+          "request": {
+            "kind": "key",
+            "key": "b",
+            "action": "tap",
+            "settle_seconds": 0.5
+          },
+          "actual_virtual_timing": {
+            "clock": "virtual",
+            "hold_seconds": 0.45,
+            "hold_time_ms": 450,
+            "completion": "queued"
+          }
+        }
+      ],
+      "actual_evidence_timeline": [
+        [
+          "input",
+          "key:b"
+        ],
+        [
+          "input",
+          "key:b"
+        ]
+      ],
+      "curated_frames": [
+        {
+          "sample": "before-input",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "b6b33c6520917c123741ea9c928d0b6cb8131910949ff2cb89c7777a2d09b673",
+          "pixel_sha256": "c66b5cf0ea55080ab6faf8751bcd78403a37f675c6dceeb0eb0d799c78a2c804",
+          "nonblack_pixels": 7566,
+          "colors": 3,
+          "elapsed_seconds": 30.09
+        },
+        {
+          "sample": "after-input",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "b6b33c6520917c123741ea9c928d0b6cb8131910949ff2cb89c7777a2d09b673",
+          "pixel_sha256": "c66b5cf0ea55080ab6faf8751bcd78403a37f675c6dceeb0eb0d799c78a2c804",
+          "nonblack_pixels": 7566,
+          "colors": 3,
+          "elapsed_seconds": 32.632
+        },
+        {
+          "sample": "sleep-observed",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+          "pixel_sha256": "e6da5040cd854e914ae0ea9d85f741213ab077415c7498f2d41e0cf39ddb4b4d",
+          "nonblack_pixels": 0,
+          "colors": 1,
+          "elapsed_seconds": 61.88
+        },
+        {
+          "sample": "after-wake",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "89a8baf56c1681b97c09cb2fef70b11f7f5eda6c1c6b23a5c8587371e5d8440a",
+          "pixel_sha256": "49383f7200ec714e9d45d2c82ad14dccd6e1f182ecc15fc3a8360c29c4323741",
+          "nonblack_pixels": 7546,
+          "colors": 3,
+          "elapsed_seconds": 64.426
+        },
+        {
+          "sample": "t150",
+          "size": [
+            240,
+            135
+          ],
+          "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+          "pixel_sha256": "e6da5040cd854e914ae0ea9d85f741213ab077415c7498f2d41e0cf39ddb4b4d",
+          "nonblack_pixels": 0,
+          "colors": 1,
+          "elapsed_seconds": 150.095
+        }
+      ],
+      "all_frames_hash_verified_count": 20,
+      "application_partitions_unchanged": [
+        {
+          "offset": 65536,
+          "size": 2424832,
+          "original_padded_sha256": "f7d319abd01d9d971f4e53bd16b3bfa5bd6a4f12cddde5587e28a1c889c19ae4",
+          "final_sha256": "f7d319abd01d9d971f4e53bd16b3bfa5bd6a4f12cddde5587e28a1c889c19ae4",
+          "unchanged": true
+        },
+        {
+          "offset": 2490368,
+          "size": 655360,
+          "original_padded_sha256": "152e56baeaace51ee143f9a1b95d3b9d546cb873c259fecdbbb23ffb9d0dd22a",
+          "final_sha256": "152e56baeaace51ee143f9a1b95d3b9d546cb873c259fecdbbb23ffb9d0dd22a",
+          "unchanged": true
+        }
+      ],
+      "original_summary": {
+        "sha256": "ba983869d53c8687afad265d42aacdad3ab13c1a39e04acf9012a6cac254f1ab",
+        "bytes": 11583
+      },
+      "private_artifact_hashes": {
+        "evidence_zip": {
+          "sha256": "b91ed7831e2eae8c0ae1b2effe91a712a5bd4c89c14f46b5db51f6fecd65139a",
+          "bytes": 1264096
+        },
+        "serial": {
+          "sha256": "1567692f18e42f7fa601752dc329d5b4051bade6ad516e38b2b64e81a6429903",
+          "bytes": 12260
+        },
+        "terminal_snapshot": {
+          "sha256": "63c7a5ca506a61881a9f35efb675c9fbaae8e3ebeb6f906966c2f6e29b5df20f",
+          "bytes": 2910
+        },
+        "retained_history_snapshot": {
+          "sha256": "07be1b80944b894724d2fb8108be86de49cc7a8e60e899c8f669bc7ff12f25cb",
+          "bytes": 3140
+        }
+      },
+      "evidence_and_cleanup": {
+        "zip_before_stop": true,
+        "evidence_guest_running": true,
+        "evidence_timeline_verified": true,
+        "actual_native_and_clock_args_verified": true,
+        "flash_released": true,
+        "lease_released": true,
+        "native_pid_exited": true,
+        "history_retained": true,
+        "worker_idle": true,
+        "owned_service_stopped": true,
+        "owned_port_released": true,
+        "frozen_inputs_unchanged": true
+      },
+      "prior_failure_rewritten": false,
+      "visual_observation": "B tap leaves the Welcome selection unchanged; a later B tap after observed black frame restores a readable Welcome display",
+      "limits": [
+        "Selection assertion input_changed_frame remains FAIL",
+        "Does not establish a firmware bug or emulator bug",
+        "A-key positive test uses a separate session and does not replace this result"
+      ]
+    }
+  ],
+  "retained_first_observer_failure": {
+    "status": "INFRASTRUCTURE_FAIL",
+    "original_summary": {
+      "sha256": "ae94e4c2c70656b1fee9b083060c63a3d8c07aee03d0b3f44e5a4a2035a056de",
+      "bytes": 2213
+    },
+    "independent_review": {
+      "sha256": "f720cb130e747b4031d1213c03bae969bfb166fe68120c0353807b814d752b04",
+      "bytes": 1480
+    },
+    "root_cause": "Capture oracle assumed portrait for every sample; original Mesh switches to landscape after boot",
+    "ready_frame_sha256": "b6b33c6520917c123741ea9c928d0b6cb8131910949ff2cb89c7777a2d09b673",
+    "ready_frame_matches_prior_byte_for_byte": true,
+    "controls_after_t10": "NOT RUN",
+    "secondary_failures": [
+      "Planned input timeline incomplete after early observer abort",
+      "Final bind without address reuse encountered TIME_WAIT; independent check found no listener and released process/lease/history"
+    ],
+    "corrective_action": "Private harness stage-specific orientation oracle and free-port check corrected; new attempts preserved original firmware/runtime/action contracts",
+    "no_product_code_change": true
+  },
+  "cleanup_independent_receipt": {
+    "sha256": "2314a8929c3c6c05f6eabe4633fcc84f44febc00bece89f596c772e02c9a3ac7",
+    "bytes": 2125
+  },
+  "preparation_receipts": {
+    "three_originals": {
+      "sha256": "b8fa375bcb4b849cfca378feb13ab754c508091a95df2e91e778ffab4663c44a",
+      "bytes": 1024759
+    },
+    "separate_a_contract": {
+      "sha256": "a32885a7f3e1003588874ee4814be644c936c836a6fa2189ebcc8fd32f1233bc",
+      "bytes": 1023584
+    }
+  },
+  "limits": [
+    "No physical hardware, RF, electrical or power measurements",
+    "Native evidence does not qualify browser WASM or hosted Pages",
+    "No M5Burner submission",
+    "The separate full native matrix is 70/70 PASS; these additional original applications are not substituted for GPIO ISR evidence",
+    "BMI270 IRQ generation, FT timing, NMI/source31 and wake/filter coverage remain outside the ordinary GPIO source30 patch claim"
+  ]
+}
