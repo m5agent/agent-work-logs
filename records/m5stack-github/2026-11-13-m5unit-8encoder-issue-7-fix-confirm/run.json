@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "validation",
+  "overall_status": "PASS",
+  "title": "M5Unit-8Encoder issue 7: uint8_t _speed truncation fixed in 7447df75, confirmed with a host harness",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unit-8Encoder/issues/7",
+    "pull_request": "https://github.com/m5stack/M5Unit-8Encoder/pull/8",
+    "repository": "m5stack/M5Unit-8Encoder",
+    "base_commit": "7447df753d",
+    "comparison_commit": "59a8a0a"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS; Apple clang 21.0.0; host C++ harness with mock Arduino/Wire headers; no Arduino core and no Unit-8Encoder hardware",
+    "commands": [
+      "g++ -std=c++17 -Wall -I include -I prefix prefix/UNIT_8ENCODER.cpp harness.cpp -o out/harness_prefix",
+      "g++ -std=c++17 -Wall -I include -I fixed fixed/UNIT_8ENCODER.cpp harness.cpp -o out/harness_fixed"
+    ],
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "fix_present_in_source",
+      "status": "PASS",
+      "evidence": "7447df75:src/UNIT_8ENCODER.h:23 declares uint32_t _speed; begin() still takes uint32_t speed"
+    },
+    {
+      "name": "speed_passthrough_100k",
+      "status": "PASS",
+      "evidence": "harness: 160 (59a8a0a) -> 100000 (7447df75) for begin(..., 100000UL)"
+    },
+    {
+      "name": "speed_passthrough_400k",
+      "status": "PASS",
+      "evidence": "harness: 128 (59a8a0a) -> 400000 (7447df75) for begin(..., 400000UL)"
+    },
+    {
+      "name": "sda_scl_passthrough",
+      "status": "PASS",
+      "evidence": "harness: Wire.begin() receives sda=21 scl=22 in both builds"
+    },
+    {
+      "name": "read_bytes_error_handling",
+      "status": "PARTIAL",
+      "evidence": "requestFrom() returning 0 still reads 4 bytes and returns -1; pre-existing gap outside this issue"
+    },
+    {
+      "name": "hardware_i2c_clock_measurement",
+      "status": "NOT RUN",
+      "evidence": "no Unit-8Encoder hardware and no ESP32-S3 board available"
+    },
+    {
+      "name": "arduino_core_wire_begin",
+      "status": "NOT RUN",
+      "evidence": "harness uses a mock TwoWire; the Arduino-ESP32 core divider/clamp path was not executed"
+    },
+    {
+      "name": "library_manager_release",
+      "status": "NOT RUN",
+      "evidence": "library.properties still says 0.0.1 and the only tag is 0.0.1; the fix is on main only"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/harness-output.txt",
+      "description": "both harness runs plus sha256 of the headers and implementation used"
+    }
+  ],
+  "notes": [
+    "The merged fix changes only one line in src/UNIT_8ENCODER.h; src/UNIT_8ENCODER.cpp is identical before and after (sha256 034f6da8...).",
+    "The issue was authored by the reporter of the truncation and closed by M5Stack after PR #8 was merged.",
+    "No credentials, internal endpoints, or device identifiers are included."
+  ]
+}

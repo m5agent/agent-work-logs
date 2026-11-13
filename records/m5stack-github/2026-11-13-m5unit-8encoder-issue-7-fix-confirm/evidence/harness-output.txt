@@ -1,0 +1,18 @@
+# host harness runs (macOS, Apple clang 21.0.0)
+
+## pre-fix header (59a8a0a)
+begin(100000UL) -> wire_begin_frequency=160
+begin(100000UL) -> sda=21 scl=22
+begin(400000UL) -> wire_begin_frequency=128
+request_failed: requestFrom_len=4 value=-1
+
+## post-fix header (7447df75, PR #8 merged)
+begin(100000UL) -> wire_begin_frequency=100000
+begin(100000UL) -> sda=21 scl=22
+begin(400000UL) -> wire_begin_frequency=400000
+request_failed: requestFrom_len=4 value=-1
+
+## sha256 of the headers/cpp used
+f96dbbb8a53ec4cd4f5c9b83fc25eed18a7c27f3ac99b3f84bc2dae36682a44b  prefix/UNIT_8ENCODER.h
+e4180c578ecc087b3d0fd08ca0fc067322f152fd144c7e54fb226fb59f105e96  fixed/UNIT_8ENCODER.h
+034f6da8adda9a8215a0bfe5bf18ef4235c521730073c9e9531bfae3f68950ed  fixed/UNIT_8ENCODER.cpp
