@@ -1,0 +1,446 @@
+diff --git a/service/README.md b/service/README.md
+index 9d408af..68d04c7 100644
+--- a/service/README.md
++++ b/service/README.md
+@@ -235,6 +235,8 @@ SD 原始镜像，再将返回的 artifact SHA-256 放到 `validation.storage`
+ - 若来源明确说明是默认关闭、被动 BLE 成人用品候选检测，且没有色情媒体、性行为描写、
+   未成年或非自愿内容，可判内容 `PASS` 并提示补充描述；名称本身不自动等同于色情；
+ - 详情页展示标题、版本、描述、分类、设备、AI 中文结论和有效静态分析；
++- 先等待虚拟闪存准备和 QEMU 启动，最长 180 秒。会话进入 `running` 后才开始等待应用就绪。
++  启动阶段超时或提前停止时保留会话状态和日志，并标记为可重试的服务异常；
+ - 有启动画面时先执行交互，再在同一虚拟设备上继续观察至少 60 秒，每 5 秒采集运行状态、可用的串口增量和画面。
+   首帧迟到时等待画面并补做交互。`observation.json` 保存实际时长、输入时序和采样证据。
+   会话提前退出时保留已采集结果，交互和就绪仍分别验证；
+diff --git a/service/app.py b/service/app.py
+index f447855..385b2d2 100644
+--- a/service/app.py
++++ b/service/app.py
+@@ -76,6 +76,8 @@ QEMU_UNIFIED_RUNTIME = "qemu-unified"
+ DIAGNOSTIC_NETWORK_RUNTIME = "network"
+ MIN_VIRTUAL_OBSERVATION_SECONDS = 60
+ VIRTUAL_OBSERVATION_INTERVAL_SECONDS = 5
++VIRTUAL_STARTUP_TIMEOUT_SECONDS = 180
++TERMINAL_SESSION_STATES = {"failed", "stopped", "stopping", "expired", "interrupted"}
+ NETWORK_CLAIM_TERMS = (
+     "wifi", "wi-fi", "network", "networking", "网络", "局域网", "联网", "http", "https",
+     "mqtt", "tcp", "udp", "dns", "curl", "push", "推送", "远程", "cloud",
+@@ -95,6 +97,13 @@ BANNED = ("暴力", "色情", "赌博", "毒品", "破解", "盗版", "仇恨")
+ PLACEHOLDERS = {"1", "11", "111", "123", "ceshi", "test", "测试"}
+ 
+ 
++class SessionStartupError(RuntimeError):
++    def __init__(self, message: str, snapshot: Dict[str, Any], *, timed_out: bool = False):
++        super().__init__(message)
++        self.snapshot = snapshot
++        self.timed_out = timed_out
++
++
+ def utcnow() -> str:
+     return datetime.now(timezone.utc).isoformat()
+ 
+@@ -1016,11 +1025,12 @@ class Reviewer:
+         }
+ 
+     def crash_reason(self, serial: str) -> Optional[str]:
+-        markers = []
+-        for marker in ("nvs_open failed", "assert failed", "Rebooting...", "Core dump"):
+-            if marker in serial:
+-                markers.append(marker)
+-        if any(x in markers for x in ("assert failed", "Rebooting...", "Core dump")):
++        markers = [marker for marker in (
++            "Guru Meditation Error", "assert failed", "Rebooting...", "Core dump",
++        ) if marker in serial]
++        if markers:
++            if "nvs_open failed" in serial:
++                markers.insert(0, "nvs_open failed")
+             return "serial crash markers: %s" % ", ".join(markers)
+         return None
+ 
+@@ -1318,24 +1328,24 @@ class Reviewer:
+         return last
+ 
+     def wait_session_running(self, sid: str, timeout: float = 35) -> Dict[str, Any]:
+-        """Wait through the radio provisioning phase before QOM/QMP reads."""
++        """Wait for virtual flash preparation and emulator startup to finish."""
+ 
+-        deadline = time.time() + timeout
++        deadline = time.monotonic() + timeout
+         last: Dict[str, Any] = {}
+-        while time.time() < deadline:
++        while (remaining := deadline - time.monotonic()) > 0:
+             try:
+-                last = self.sim.json("/sessions/%s" % sid, timeout=20)
++                last = self.sim.json("/sessions/%s" % sid, timeout=min(5, remaining))
+             except Exception as exc:
+                 last = {"state": "unknown", "error": str(exc)}
+             state = last.get("state")
+             if state == "running":
+                 return last
+-            if state in {"failed", "stopped", "stopping", "expired", "interrupted"}:
+-                raise RuntimeError("session became %s before observation: %s" %
+-                                   (state, last.get("error") or "no further detail"))
+-            time.sleep(1)
+-        raise RuntimeError("session did not reach running within %.0fs (last=%s)" %
+-                           (timeout, last.get("state") or "unknown"))
++            if state in TERMINAL_SESSION_STATES:
++                raise SessionStartupError("session became %s before running: %s" %
++                                          (state, last.get("error") or "no further detail"), last)
++            time.sleep(max(0.0, min(1, deadline - time.monotonic())))
++        raise SessionStartupError("session did not reach running within %.0fs (last=%s)" %
++                                  (timeout, last.get("state") or "unknown"), last, timed_out=True)
+ 
+     def observe_session(self, sid: str, features: Dict[str, Any], evidence: Path
+                         ) -> tuple[Dict[str, Any], bytes, str, Dict[str, Any]]:
+@@ -2040,7 +2050,7 @@ class Reviewer:
+             session_payload: Dict[str, Any] = {
+                 "device_id": profile,
+                 "firmware_id": fw["firmware_id"],
+-                "ttl_seconds": 360,
++                "ttl_seconds": 480,
+             }
+             if execution.get("runtime") in {QEMU_UNIFIED_RUNTIME, "qemu-wifi"}:
+                 session_payload.update({
+@@ -2103,22 +2113,28 @@ class Reviewer:
+                     else 75
+                 )
+                 try:
++                    startup_started = time.monotonic()
++                    session = self.wait_session_running(sid, timeout=VIRTUAL_STARTUP_TIMEOUT_SECONDS)
++                    self.store.event(jid, "session_running", "virtual device reached running", {
++                        "elapsed_seconds": time.monotonic() - startup_started,
++                    })
+                     wait_payload: Dict[str, Any] = {
+                         "timeout_seconds": pre_input_observe_seconds
+                     }
+                     if ready:
+                         wait_payload["ready"] = ready
+-                    wait_info = self.sim.json(
+-                        "/sessions/%s/wait" % sid,
+-                        "POST",
+-                        wait_payload,
+-                        timeout=95,
++                        wait_info = self.sim.json(
++                            "/sessions/%s/wait" % sid, "POST", wait_payload, timeout=95,
++                        )
++                    (evidence / "session.json").write_text(
++                        json.dumps(session, ensure_ascii=False, indent=2) + "\n"
+                     )
+                     (evidence / "wait.json").write_text(
+                         json.dumps(wait_info, ensure_ascii=False, indent=2) + "\n"
+                     )
+                 except Exception as boot_exc:
+-                    snap = {}
++                    startup_error = boot_exc if isinstance(boot_exc, SessionStartupError) else None
++                    snap = startup_error.snapshot if startup_error else {}
+                     serial = {}
+                     logs = {}
+                     events = {}
+@@ -2126,6 +2142,7 @@ class Reviewer:
+                         snap = self.sim.json("/sessions/%s" % sid, timeout=20)
+                     except Exception:
+                         pass
++                    session = snap
+                     try:
+                         serial = self.sim.json("/sessions/%s/serial?offset=0&limit=65536" % sid, timeout=20)
+                         serial_text = serial.get("data") or ""
+@@ -2150,6 +2167,8 @@ class Reviewer:
+                     wait_info = {
+                         "ready": False,
+                         "error": str(boot_exc),
++                        "phase": "startup" if startup_error else "application_readiness",
++                        "session_state": snap.get("state"),
+                         "frame_fallback_bytes": len(frame),
+                     }
+                     (evidence / "wait.json").write_text(
+@@ -2195,75 +2214,31 @@ class Reviewer:
+                             "E_EMULATOR_MACHINE_UNAVAILABLE", evidence,
+                         )
+                         return
+-                    frame_ready = bool(features.get("screenshot") and len(frame) >= 1024)
+-                    serial_ready = bool(serial_text and ready_markers and
+-                                        all(m in serial_text for m in ready_markers))
+-                    if not frame_ready and not serial_ready:
+-                        detail = str(boot_exc)
+-                        tail = serial_text[-800:]
+-                        crash = self.crash_reason(serial_text)
+-                        continue_execution = snap.get("state") == "running" and not crash
+-                        if continue_execution:
+-                            wait_info["readiness_deferred"] = {
+-                                "reason": "running_without_readiness_evidence",
+-                                "frame_bytes": len(frame),
+-                                "serial_bytes": len(serial_text),
+-                            }
+-                            self.store.event(
+-                                jid, "readiness_deferred",
+-                                "guest is running; continue sampling while readiness is unresolved",
+-                                wait_info["readiness_deferred"],
+-                            )
+-                        device_row = execution.get("device") or {}
+-                        if (
+-                            crash
+-                            and device_row.get("peripheral_status") == "partial"
+-                        ):
+-                            finish_current(
+-                                jid, started, "manual_review", "SIM_PARTIAL", False,
+-                                "%s 虚拟后端仅部分覆盖，固件在应用日志/首帧前触发崩溃"
+-                                "（%s）；当前无法区分固件缺陷与已知模型缺口，"
+-                                "保留串口、Flash 和运行证据供人工复核。" %
+-                                (profile, crash),
+-                                "E_SIM_MODEL_GAP", evidence,
+-                            )
+-                            return
+-                        if not crash and not continue_execution:
+-                            finish_current(
+-                                jid, started, "manual_review", "SIM_PARTIAL", False,
+-                                "模拟器在产生可用串口/画面证据前退出（%s）；"
+-                                "当前无法区分固件失败与模拟器运行时缺陷，"
+-                                "不将本轮结果归因给固件，需保留日志并人工复核。"
+-                                % detail,
+-                                "E_SIM_BOOT_UNCERTAIN", evidence,
+-                            )
+-                            return
+-                        if not continue_execution:
+-                            finish_current(
+-                                jid, started, "failed", "FAIL", False,
+-                                "模拟器捕获到应用崩溃标记：%s；串口尾部=%s" %
+-                                (crash, tail),
+-                                "E_SIM_APP_CRASH", evidence,
+-                            )
+-                            return
++                    if startup_error:
++                        code = "E_SIM_STARTUP_TIMEOUT" if startup_error.timed_out else "E_SIM_STARTUP_FAILED"
++                        state = snap.get("state") or "unknown"
++                        reason = "虚拟设备准备或启动等待超时" if startup_error.timed_out else "虚拟设备在启动阶段停止"
++                        self.store.event(jid, "session_startup_error", reason, {"state": state, "code": code})
++                        finish_current(
++                            jid, started, "service_error", "SIM_PARTIAL", False,
++                            "%s（会话状态 %s），应用运行验证未执行。%s" % (reason, state, startup_error),
++                            code, evidence,
++                        )
++                        return
++                    crash = self.crash_reason(serial_text)
++                    if snap.get("state") != "running" and not crash:
++                        finish_current(
++                            jid, started, "service_error", "SIM_PARTIAL", False,
++                            "应用就绪检查未完成（会话状态 %s）。%s" %
++                            (snap.get("state") or "unknown", boot_exc),
++                            "E_SIM_BOOT_UNCERTAIN", evidence,
++                        )
++                        return
+                     self.store.event(
+                         jid, "readiness",
+-                        "wait timed out but usable evidence is present",
++                        "application readiness was not confirmed by the initial wait",
+                         {"frame_bytes": len(frame), "serial_bytes": len(serial_text)},
+                     )
+-                try:
+-                    session = self.wait_session_running(sid, timeout=35)
+-                    (evidence / "session.json").write_text(
+-                        json.dumps(session, ensure_ascii=False, indent=2) + "\n"
+-                    )
+-                except Exception as state_exc:
+-                    observation["error"] = str(state_exc)
+-                    evidence_errors.append("session_running: %s" % state_exc)
+-                    self.store.event(
+-                        jid, "session_state",
+-                        "session did not reach running before evidence collection",
+-                        {"error": str(state_exc)},
+-                    )
+                 def probe_input(frame: bytes, session: Dict[str, Any]) -> tuple[Dict[str, Any], bytes]:
+                     if storage:
+                         (evidence / "frame-before-input.png").write_bytes(frame)
+@@ -2320,7 +2295,7 @@ class Reviewer:
+                             )
+                     return result, frame
+ 
+-                session_running = session.get("state") == "running"
++                session_running = session.get("state") == "running" and not self.crash_reason(serial_text)
+                 can_probe_input = bool(features.get("input") or validation.get("drag_plan") is not None)
+                 if session_running and features.get("screenshot"):
+                     # Preserve the startup interaction window for firmware that
+@@ -2379,7 +2354,7 @@ class Reviewer:
+                 )
+                 if input_probed_early:
+                     interaction, frame = probe_input(frame, session)
+-                if session.get("state") == "running":
++                if session_running:
+                     self.store.event(jid, "observation_started", "sampling running virtual device", {
+                         "required_seconds": MIN_VIRTUAL_OBSERVATION_SECONDS,
+                     })
+diff --git a/tests/test_virtual_startup.py b/tests/test_virtual_startup.py
+new file mode 100644
+index 0000000..7e34e4e
+--- /dev/null
++++ b/tests/test_virtual_startup.py
+@@ -0,0 +1,171 @@
++"""Exercise startup sequencing through the real review worker with a virtual clock."""
++
++import hashlib
++import importlib.util
++import json
++from pathlib import Path
++import tempfile
++from types import SimpleNamespace
++import unittest
++from unittest.mock import Mock, patch
++from urllib.error import HTTPError
++
++
++SPEC = importlib.util.spec_from_file_location(
++    "review_startup_app", Path(__file__).parents[1] / "service/app.py",
++)
++app = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(app)
++FRAME = b"\x89PNG\r\n\x1a\nframe fixture"
++SESSION = "/sessions/session"
++
++
++class StageAwareStartupTests(unittest.TestCase):
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.runtime = Path(temporary.name)
++        self.evidence = self.runtime / "jobs" / "job" / "evidence"
++        self.clock = 0
++        self.runs_at = 23
++        self.frame_at = 42
++        self.terminal_at = float("inf")
++        self.terminal_state = "failed"
++        self.serial_output = ""
++        self.calls = []
++        self.readiness_requests = []
++        self.firmware = b"fixture merged firmware"
++        self.digest = hashlib.sha256(self.firmware).hexdigest()
++        self.reviewer = app.Reviewer.__new__(app.Reviewer)
++        self.reviewer.runtime = self.runtime
++        self.reviewer.config = {}
++        self.reviewer.store = Mock()
++        self.reviewer.store.job.return_value = {"id": "job", "version_id": "version"}
++        self.reviewer.burner = Mock()
++        self.reviewer.burner.json.return_value = {"rows": [{
++            "versionId": "version", "firmwareId": "firmware", "firmwareName": "Startup demo",
++            "versionName": "1.0", "firmwareDescription": "A standalone animation demo.",
++            "deviceCodes": ["CARDPUTER_ADV"],
++            "binFile": {
++                "sha256": self.digest, "fileSize": len(self.firmware),
++                "downloadUrl": "https://fixture.invalid/firmware.bin",
++            },
++        }]}
++        self.reviewer.sim = Mock()
++        self.reviewer.sim.bytes.return_value = self.firmware
++        self.reviewer.sim.upload_artifact.return_value = {
++            "artifact_id": self.digest, "sha256": self.digest, "size": len(self.firmware),
++        }
++        self.reviewer.sim.json.side_effect = self.sim_json
++        self.reviewer.sim.binary.side_effect = self.sim_binary
++        self.reviewer.security_static_scan = Mock(return_value={"status": "REVIEW"})
++
++    def session(self):
++        if self.clock >= self.terminal_at:
++            state = self.terminal_state
++        elif self.clock >= self.runs_at:
++            state = "running"
++        elif self.runs_at - 4 <= self.clock:
++            state = "booting"
++        else:
++            state = "flashing"
++        return {"session_id": "session", "state": state, "display": {"width": 240, "height": 135}}
++
++    def sim_json(self, path, method="GET", payload=None, timeout=120):
++        self.calls.append((self.clock, method, path))
++        if path == "/devices":
++            return {"devices": [{
++                "device_id": "cardputer-adv", "creatable": True,
++                "features": {"flash": True, "serial": True, "screenshot": True, "input": True},
++            }]}
++        if path == "/firmware":
++            return {"firmware_id": "image", "source": {"artifact_id": self.digest}}
++        if path == "/firmware/analyze":
++            return {
++                "valid": True, "bootloader": {"valid": True}, "partition_table": {"valid": True},
++                "app_images": [{"valid": True, "label": "factory"}],
++            }
++        if path in {"/sessions", SESSION}:
++            return self.session()
++        if path == SESSION + "/wait":
++            state = self.session()["state"]
++            self.readiness_requests.append((self.clock, state, payload["timeout_seconds"]))
++            if state != "running" or self.clock < self.frame_at:
++                self.advance(payload["timeout_seconds"])
++                raise RuntimeError("simulator HTTP 408 ready_timeout: readiness not met")
++            return {"ready": True, "state": state, "ready_reason": ["frame_nonblank"]}
++        if path.startswith(SESSION + "/serial?"):
++            return {"data": self.serial_output, "next_offset": len(self.serial_output)}
++        if path == SESSION + "/input":
++            return {"accepted": True}
++        if path == SESSION + "/flash-snapshot":
++            return {"snapshot_id": str(self.clock)}
++        if path.startswith((SESSION + "/flash", SESSION + "/events", SESSION + "/logs")) or method == "DELETE":
++            return {}
++        raise AssertionError("unexpected simulator call: %s %s" % (method, path))
++
++    def sim_binary(self, path, timeout=120):
++        self.calls.append((self.clock, "GET", path))
++        if path == SESSION + "/frame.png":
++            if self.clock < self.frame_at:
++                raise HTTPError(path, 404, "frame unavailable", None, None)
++            return FRAME
++        if path.startswith(SESSION + "/evidence?"):
++            return b"fixture evidence"
++        raise AssertionError("unexpected binary read: %s" % path)
++
++    def advance(self, seconds):
++        self.clock += seconds
++        if self.clock > 230:
++            raise AssertionError("review exceeded its virtual test deadline")
++
++    def run_review(self):
++        intake = SimpleNamespace(kind="merged", provenance={})
++        # The wall clock stays fixed to exercise the monotonic startup deadline.
++        with (patch.object(app, "prepare_firmware", return_value=intake),
++              patch.object(app.time, "time", return_value=1000),
++              patch.object(app.time, "monotonic", side_effect=lambda: self.clock),
++              patch.object(app.time, "sleep", side_effect=self.advance)):
++            self.reviewer.run("job")
++        return self.reviewer.store.update_job.call_args.kwargs
++
++    def test_delayed_virtual_flash_precedes_readiness_and_live_408_keeps_observing(self):
++        result = self.run_review()
++        self.assertEqual(self.readiness_requests[0], (23, "running", 12))
++        self.assertGreaterEqual(self.readiness_requests[-1][0], self.frame_at + 60)
++        self.assertEqual((result["status"], result["lane"], result["passed"]), ("done", "SIM_VERIFIED", 1))
++        observation = json.loads((self.evidence / "observation.json").read_text())
++        self.assertEqual(observation["status"], "PASS")
++        self.assertGreaterEqual(observation["elapsed_seconds"], 60)
++
++    def test_terminal_startup_finishes_early_without_readiness_or_observation(self):
++        self.terminal_at = 5
++        self.terminal_state = "stopped"
++        result = self.run_review()
++        self.assertEqual(result["error_code"], "E_SIM_STARTUP_FAILED")
++        self.assertEqual((result["status"], result["lane"], result["passed"]), ("service_error", "SIM_PARTIAL", 0))
++        self.assertEqual(self.clock, 5)
++        self.assertEqual(self.readiness_requests, [])
++        self.assertTrue(any(method == "DELETE" for _, method, _ in self.calls))
++        self.assertFalse(any(call.args[1] == "observation_started" for call in self.reviewer.store.event.call_args_list))
++
++    def test_flashing_past_startup_budget_gets_timeout_distinct_from_exit(self):
++        self.runs_at = float("inf")
++        result = self.run_review()
++        self.assertEqual(result["error_code"], "E_SIM_STARTUP_TIMEOUT")
++        self.assertEqual((result["status"], result["lane"], result["passed"]), ("service_error", "SIM_PARTIAL", 0))
++        self.assertEqual(self.clock, 180)
++        self.assertEqual(self.readiness_requests, [])
++        self.assertTrue(any(method == "DELETE" for _, method, _ in self.calls))
++
++    def test_guest_watchdog_at_readiness_timeout_is_reported_as_virtual_crash(self):
++        self.serial_output = "Guru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1).\n"
++        result = self.run_review()
++        self.assertEqual(result["error_code"], "E_SIM_APP_CRASH")
++        self.assertEqual((result["status"], result["lane"], result["passed"]), ("manual_review", "SIM_PARTIAL", 0))
++        self.assertFalse(any(call.args[1] == "observation_started" for call in self.reviewer.store.event.call_args_list))
++        self.assertTrue(any(method == "DELETE" for _, method, _ in self.calls))
++
++
++if __name__ == "__main__":
++    unittest.main()

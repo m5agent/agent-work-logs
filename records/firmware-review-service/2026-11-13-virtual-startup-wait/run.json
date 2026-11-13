@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "firmware-review-service",
+    "base_commit": "ab168a29e1dfc4b10aa478e5c1cb48c699a2cb7b",
+    "commit": "610419192ddb6acea0f85af773c453eefeee98d4"
+  },
+  "hardware": {
+    "virtual_boards": [
+      "Cardputer ADV",
+      "StickC Plus2"
+    ],
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": [
+    {
+      "firmware": "S1-ADV - AI Companion for Cardputer ADV",
+      "source_sha256": "64377f7e0166bbba5ef23d7c8dce880dec1e2fb1ee319efd1d2dbb335a8a277f",
+      "source_bytes": 2228512,
+      "version": "0.2.201-dev",
+      "virtual_firmware_sha256": "7c13aff8df4167bb46cd3a5e588ea811aa239a030c8c5417d3f2960951b4572e"
+    },
+    {
+      "firmware": "JIGGLER - BLE Mouse for M5StickC Plus2",
+      "source_sha256": "c5ce5ad2e1a1f33bf99bbc1e29574562e1f2dbe661b9aca554c052cdb6b6e401",
+      "source_bytes": 8388608,
+      "version": "1.0",
+      "virtual_firmware_sha256": "c5ce5ad2e1a1f33bf99bbc1e29574562e1f2dbe661b9aca554c052cdb6b6e401"
+    }
+  ],
+  "execution": {
+    "scope": "virtual-device validation",
+    "cold_cache_parallel": true,
+    "source_mode": "saved_snapshot",
+    "dry_run": true,
+    "service_app_sha256": "aba12941b4b94402200e08544b1050f281f60aa40a0d4f51db16ea1f0e0726c1",
+    "device_service_commit": "8598b1f603ae6638a3f6d27824431781429b9e49",
+    "native_qemu_sha256": "dcb5c9f3f33bab3915348d48ce5dfa35483889ef1255977b2d49df6c17bea8f1"
+  },
+  "checks": {
+    "startup_wait_regression": "PASS",
+    "unit_tests": {
+      "status": "PASS",
+      "count": 60
+    },
+    "s1_adv_virtual_observation": "PASS",
+    "s1_adv_network": "NOT RUN",
+    "jiggler_virtual_runtime": "FAIL",
+    "jiggler_root_cause": "REVIEW",
+    "burner_submission": "NOT RUN"
+  },
+  "evidence": [
+    "evidence/virtual-startup-summary.json",
+    "patches/0001-wait-for-virtual-startup.patch"
+  ]
+}
