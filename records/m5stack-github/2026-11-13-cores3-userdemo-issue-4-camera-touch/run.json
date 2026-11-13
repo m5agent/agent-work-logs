@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3-UserDemo #4: camera page releases the shared internal I2C bus and never restores it; symptom not reproduced on virtual CoreS3",
+  "source": {
+    "issue": "https://github.com/m5stack/CoreS3-UserDemo/issues/4",
+    "repository": "m5stack/CoreS3-UserDemo",
+    "base_commit": "1fe846a"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "M5StackCoreS3-UserDemo",
+    "version": "V0.5 (2023-06-01 shipped merged image)",
+    "sha256": "89bc0eac0affbad8fd468268ed6b5aa7c299a1a4d170fd9561287963b288bd6a",
+    "source_commit": "1fe846a"
+  },
+  "execution": {
+    "environment": "macOS; local Device Service with QEMU cores3 backend (esp-emulator 55e5763e); PlatformIO toolchain not installed",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "camera_page_releases_internal_i2c",
+      "status": "PASS",
+      "evidence": "AppCameraModel.cpp:37-45 calls M5.In_I2C.release() before esp_camera_init()"
+    },
+    {
+      "name": "bus_restored_after_camera_deinit",
+      "status": "FAIL",
+      "evidence": "AppCamera.cpp:50-56 only calls esp_camera_deinit(); no M5.In_I2C.begin()/Wire1.begin() exists in src/"
+    },
+    {
+      "name": "touch_is_the_only_lvgl_input_path",
+      "status": "PASS",
+      "evidence": "lib/m5gfx_lvgl/m5gfx_lvgl.cpp:21-47 reads M5.Display.getTouchRaw() (FT6336 on the same GPIO12/11 bus)"
+    },
+    {
+      "name": "display_continues_without_i2c",
+      "status": "PASS",
+      "evidence": "display flush is SPI via M5.Display; no I2C dependency in m5gfx_lvgl_flush()"
+    },
+    {
+      "name": "virtual_repro_exit_camera_then_tap",
+      "status": "FAIL",
+      "evidence": "two Camera->Home cycles on QEMU cores3 with the V0.5 image; IMU and WiFi pages still opened afterwards, so the symptom was not reproduced (see evidence/05,06)"
+    },
+    {
+      "name": "hardware_repro",
+      "status": "NOT RUN",
+      "evidence": "no physical CoreS3 available for touch interaction"
+    },
+    {
+      "name": "build_main_and_flash",
+      "status": "NOT RUN",
+      "evidence": "PlatformIO not installed in this environment"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/03-camera-preview.png",
+      "description": "camera page with live GC0308 preview and ALS bars"
+    },
+    {
+      "path": "evidence/04-homemenu-after-camera-exit.png",
+      "description": "HomeMenu redrawn after leaving the camera app"
+    },
+    {
+      "path": "evidence/05-imu-after-camera-exit.png",
+      "description": "IMU page opened by touch after leaving the camera app (not reproduced)"
+    },
+    {
+      "path": "evidence/06-wifi-after-second-camera-cycle.png",
+      "description": "second camera enter/exit cycle, then WiFi page opened by touch"
+    },
+    {
+      "path": "evidence/serial-console.txt",
+      "description": "ROM boot log only; application logs go to USBSerial and are not routed to the console"
+    },
+    {
+      "path": "evidence/checks.txt",
+      "description": "frame hashes, firmware hash, code locations and environment facts"
+    }
+  ],
+  "notes": [
+    "The code-level finding is a candidate mechanism, not a confirmed root cause; hardware confirmation is required.",
+    "The virtual pass shows the page-manager and event paths are not the cause in that environment.",
+    "Duplicate esp_camera_fb_return() in AppCamera is idempotent with esp32-camera v2.0.0 cam_give() and is not the reported cause.",
+    "No internal endpoints, credentials, or device identifiers are included."
+  ]
+}

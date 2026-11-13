@@ -1,0 +1,39 @@
+CoreS3-UserDemo #4 evidence checks
+collected: 2026-11-13 (UTC)
+
+Firmware
+  file: firmware/M5StackCoreS3-UserDemo-V0.5-BO-20230601_0x0.bin
+  sha256: 89bc0eac0affbad8fd468268ed6b5aa7c299a1a4d170fd9561287963b288bd6a
+  size: 6825392 bytes (merged image written to 16 MiB flash)
+
+Virtual device
+  device: cores3 (QEMU backend)
+  emulator checkout commit: 55e5763eac90a8166a3b0c522fd5291b99810517
+  display: 320x240 ILI9342C, FT6336 touch emulated
+  input: touch injection through the local Device Service (no internal endpoint recorded)
+
+Frames (PNG, SHA256)
+  01-startup.png                        2d282bf28f3774a0282cf9bd8a01c0b003264b6beb0dc2600f22ffd4f0b20ae0
+  02-homemenu.png                       39cdf56fae910fb183a972e7a670b55e8f7a02bf74ffeb3fabd8002997fe73c7
+  03-camera-preview.png                 e1e53d17e317e364ef3ade57c9d6734b82fc3771736995867b0eed5112cdc62b
+  04-homemenu-after-camera-exit.png     39cdf56fae910fb183a972e7a670b55e8f7a02bf74ffeb3fabd8002997fe73c7
+  05-imu-after-camera-exit.png          849626d2b5360805a11d51d8b41cb5dc19e7aadf9278c7b5a3fe440dd7c92b4c
+  06-wifi-after-second-camera-cycle.png 347180a178af87baf915d8644bf07112b6069a2a2a6343b9826103ed44f40676
+
+  02 and 04 are identical: the HomeMenu is redrawn identically after leaving the camera
+  app, and the following tap (IMU) changed the frame, so touch input was still delivered.
+
+Source references (m5stack/CoreS3-UserDemo @ 1fe846a)
+  src/pages/AppCamera/AppCameraModel.cpp:9-10   camera SCCB SDA 12 / SCL 11
+  src/pages/AppCamera/AppCameraModel.cpp:37-45  M5.In_I2C.release() before esp_camera_init()
+  src/pages/AppCamera/AppCamera.cpp:50-56       onViewUnload -> esp_camera_deinit(), no bus restore
+  lib/m5gfx_lvgl/m5gfx_lvgl.cpp:21-47           LVGL input read via M5.Display.getTouchRaw()
+  M5GFX 0.1.6 src/M5GFX.cpp:283-285             CoreS3 internal bus I2C_NUM_1, GPIO12/11
+  M5GFX 0.1.6 src/M5GFX.cpp:318-330             Touch_M5StackCoreS3, FT6336 0x38
+  M5Unified 0.1.6 src/M5Unified.cpp:412-447     ESP32-S3 In_I2C = I2C_NUM_1, CoreS3 12/11
+  esp32-camera v2.0.0 driver/esp_camera.c:288-300, driver/sccb.c:58-60  deinit deletes SCCB driver
+  esp32-camera v2.0.0 driver/cam_hal.c:475-484  cam_give() is idempotent for duplicate fb return
+
+Serial
+  evidence/serial-console.txt contains only the ROM boot log; the application writes to
+  USBSerial (src/main.cpp:24) which is not routed to the QEMU console channel.
