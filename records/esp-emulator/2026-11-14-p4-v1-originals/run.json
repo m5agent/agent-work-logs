@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "timezone": "UTC+08:00",
+  "kind": "firmware_regression",
+  "overall_status": "FAIL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "a5990e720a8c79310456bf5868141f4cfd50afe8",
+    "issues": [
+      188,
+      226
+    ]
+  },
+  "hardware": {},
+  "firmware": {
+    "188": {
+      "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+      "app_partitions": [
+        {
+          "offset": 65536,
+          "size": 10027008,
+          "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5",
+          "unchanged": true
+        }
+      ]
+    },
+    "226": {
+      "original_sha256": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+      "normalized_sha256": "4da826b590d879ccb7728b20257c1847a8093868eb2752600994f1242438bdeb",
+      "app_partitions": [
+        {
+          "offset": 65536,
+          "size": 16580608,
+          "sha256": "13286ecccea67fac92f07c1947dc92b580316c4fae3f755f0004ffe771d4c5f9",
+          "unchanged": true
+        }
+      ]
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device": "Tab5",
+    "runtime_version": "1.0.0",
+    "runtime_sha256": "cdfe1e8f3d447af4af12f0699457e958af0ea6ff8601d909079801c8655c6ef5",
+    "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse_seed_sha256": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware_sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+    "executions": [
+      {
+        "issue": 188,
+        "seconds": 120.909,
+        "harness_status": "PASS",
+        "application_result": "FAIL",
+        "evidence": "evidence/issue188-execution-summary.json"
+      },
+      {
+        "issue": 226,
+        "seconds": 60.516,
+        "harness_status": "PASS",
+        "application_result": "FAIL",
+        "evidence": "evidence/issue226-execution-summary.json"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "layer": "execution_integrity",
+      "status": "PASS",
+      "claim": "Original app partitions, runtime roles, evidence ZIP and cleanup independently verified."
+    },
+    {
+      "layer": "application_readiness",
+      "status": "FAIL",
+      "claim": "Both originals repeat older-P4 CSR instruction faults."
+    },
+    {
+      "layer": "usb_host_data_plane",
+      "status": "NOT RUN",
+      "claim": "Maker Fighter fails before its USB initialization stage; old DWC assertion remains separate."
+    },
+    {
+      "layer": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "browser_wasm",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "offline_serial_reproduction",
+      "status": "PASS",
+      "claim": "Ten bounded fields match each actual run using archived oracle."
+    },
+    {
+      "layer": "deployment",
+      "status": "NOT RUN",
+      "claim": "The evaluated upstream runtime was not installed into resident service."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/independent-audit-summary.json",
+      "sha256": "35fdd1565f751a08de7ca5e9116713b879da460e84462698c55d5f9ae7fd09ec",
+      "bytes": 3461,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/issue188-execution-summary.json",
+      "sha256": "70fc7d631aa0d9b85b867f8cd2d72b313b5c56668f2a298b48718ef9c5c1154c",
+      "bytes": 2283,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/issue226-execution-summary.json",
+      "sha256": "cadf602c97690186b80f941b18078879b9ca67a1ec058794146fd23b662387e8",
+      "bytes": 2280,
+      "classification": "redacted-derived-summary"
+    },
+    {
+      "path": "evidence/offline-analyzer-summary.json",
+      "sha256": "429b33b24e4dd01e3735d25e573c658b77151ec7a6249e92aed7eb8cee84def0",
+      "bytes": 340,
+      "classification": "redacted-derived-summary"
+    }
+  ],
+  "notes": [
+    "Prior failures are preserved independently.",
+    "Post-window GDB snapshots are not stopped-fault instruction or PHY-state proof.",
+    "No original BIN patch, invented peripheral value, unrelated ELF, issue closure or Burner submission.",
+    "Raw serial, Flash, firmware, runtime assets, unique process/session identities and local endpoints are omitted."
+  ]
+}
