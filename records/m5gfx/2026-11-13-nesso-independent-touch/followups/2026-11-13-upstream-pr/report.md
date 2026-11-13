@@ -5,3 +5,5 @@
 PR 正文引用 [原验证记录](https://github.com/m5agent/agent-work-logs/blob/90bd36f8ce24b68ebc4678d9b21817c7d2c8f4d1/records/m5gfx/2026-11-13-nesso-independent-touch/README.md)，明确 virtual-device validation 和物理硬件未测。GitHub 的事件转发工作流完成不视为源码编译验证。没有新增应用运行，没有合并上游或发布固件；原记录的所有功能边界保持。
 
 如需撤回交付，可关闭该 PR；源码回滚采用一行反向补丁。本追加不修改最初运行记录。
+
+计数更正：首份报告的 helper 控制数量少计了 clean 正控，实际为 16 项（1 clean、7 late fault、6 missing marker、1 before 正控、1 before 负控），另有 5 个完整 CLI 终局控制；2 个 unittest 方法数量不变。此处追加更正，首次执行摘要保留。

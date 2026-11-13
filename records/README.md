@@ -18,7 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
-| 2026-11-13 | M5GFX / Nesso N1 | 独立 I2C 触摸错误释放显示 SPI mutex | `PASS`（源码三组对照；原发布 BIN 仍 FAIL） | [查看](m5gfx/2026-11-13-nesso-independent-touch/) |
+| 2026-11-13 | M5GFX / Nesso N1 | 独立 I2C 触摸错误释放显示 SPI mutex | `PASS`（源码三组对照；原发布 BIN 仍 FAIL） | [查看](m5gfx/2026-11-13-nesso-independent-touch/followups/2026-11-13-upstream-pr/) |
 | 2026-11-13 | ESP Emulator | JIGGLER 蓝牙时钟初始化 | `PARTIAL`（原 BIN 复现，经典 ESP32 DPORT 缺口已定位） | [查看](esp-emulator/2026-11-13-jiggler-bt-low-power-clock/) |
 | 2026-11-13 | Firmware Review Service | 虚拟烧录与应用就绪计时 | `PASS`（冷缓存启动、60 秒观察和串口崩溃识别） | [查看](firmware-review-service/2026-11-13-virtual-startup-wait/) |
 | 2026-11-13 | ESP Emulator | #211 浏览器固件验收收口 | `PASS`（demo 49项、原版BIN 13项、main和CI通过） | [查看](esp-emulator/2026-11-13-browser-skill-acceptance/) |
