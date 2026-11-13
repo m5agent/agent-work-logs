@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-13 | ESP Emulator | JIGGLER 蓝牙时钟初始化 | `PARTIAL`（原 BIN 复现，经典 ESP32 DPORT 缺口已定位） | [查看](records/esp-emulator/2026-11-13-jiggler-bt-low-power-clock/) |
 | 2026-11-13 | Firmware Review Service | 虚拟烧录与应用就绪计时 | `PASS`（冷缓存启动、60 秒观察和串口崩溃识别） | [查看](records/firmware-review-service/2026-11-13-virtual-startup-wait/) |
 | 2026-11-13 | ESP Emulator | #211 浏览器固件验收收口 | `PASS`（demo 49项、原版BIN 13项、main和CI通过） | [查看](records/esp-emulator/2026-11-13-browser-skill-acceptance/) |
 | 2026-11-13 | ESP Emulator | UIFlow2 原版启动与云端配对 | `PASS`（限定原版配对/编程路径；main、完整检查、CI与发布后复测通过） | [查看](records/esp-emulator/2026-11-13-uiflow-cloud-startup/) |
