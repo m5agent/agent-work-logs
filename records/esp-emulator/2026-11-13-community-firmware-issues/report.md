@@ -4,7 +4,7 @@
 
 公开 [#216](https://github.com/m5agent/m5stack-esp-emulator/issues/216) 至 [#224](https://github.com/m5agent/m5stack-esp-emulator/issues/224) 报告了 C6 启动、PaperColor 宿主崩溃/USB/关机、AtomS3 黑屏、经典 Atom 看门狗、Core2 黑屏、StackChan 栈破坏及 eFuse 身份问题。本轮要求沿原版固件和真实控制器路径复现、修复和保留失败证据，不提交 Burner。
 
-本报告最终源码快照固定为 [`98287067eaf558576d1120f213d676630d66c2bd`](https://github.com/m5agent/m5stack-esp-emulator/commit/98287067eaf558576d1120f213d676630d66c2bd)，基线为 `676ae67c67941b976be799782ef4af40827b666d`；后续摘要分别记录其固定源码与运行时身份。最终精确提交的平台套件结果尚未完成。本次归档补充尚未提交或推送。
+本报告最终源码快照固定为 [`98287067eaf558576d1120f213d676630d66c2bd`](https://github.com/m5agent/m5stack-esp-emulator/commit/98287067eaf558576d1120f213d676630d66c2bd)，基线为 `676ae67c67941b976be799782ef4af40827b666d`；后续摘要分别记录其固定源码与运行时身份。该提交已推送 main；精确提交的完整平台套件共 2,086 项，2,085 通过、1 项因可选 Bumble 依赖缺失而跳过。
 
 ## 根因、改动与实际结果
 
@@ -78,7 +78,7 @@ UIFlow 有 Flash/cache handoff 指令簇活动，单个忙等或 WAITI 采样不
 
 证据：[全部失败、候选、写入和正负控](evidence/issue223-i2c-lifetime-summary.json)。复现：[诊断工程与 SDK 对照](https://github.com/m5agent/m5stack-esp-emulator/blob/98287067eaf558576d1120f213d676630d66c2bd/tests/firmware/s3_i2c_lifetime/README.md)。
 
-## 执行身份、验证层级与待补
+## 执行身份、验证层级与剩余边界
 
 首次整合 Xtensa 运行时 SHA 为 `d0c0054ae85aafd0eeb271045e81e258899d0f6d2422392d6834cb66c98a784d`，从固定源码重建，仅复用依赖产物。C6 是独立源/构建线，不能继承 Xtensa 结果。各用例的原版/填充 Flash SHA、运行时、串口、帧、协议和清理分别绑定到 evidence，不从服务 running 推断应用就绪。
 
@@ -92,13 +92,14 @@ UIFlow 有 Flash/cache handoff 指令簇活动，单个忙等或 WAITI 采样不
 | transport / device_response | PASS（限定路径） | USB EP0、AES/GDMA/IRQ、eFuse API、关机事件；不泛化所有外设 |
 | data_behavior | PARTIAL | IOMMU 控制通过；StackChan 原版仍失败 |
 | visual_or_physical | PARTIAL / NOT RUN | AtomS3 有效帧及限定输入、Atom Lite 按键→RMT；Core2 应用未就绪，物理未测 |
-| final platform suite | PARTIAL | **NOT YET COMPLETED**，尚未写入最终计数 |
+| remote CI | PASS | [固定提交 CI](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43352953847) 的两项 job 均成功；浏览器契约检查不是 browser-WASM guest 执行 |
+| final platform suite | PASS | 2,086 项：2,085 通过、1 项可选 Bumble 依赖跳过、0 失败，274.883 秒 |
 | native regression | PARTIAL | 首次完整 68 例为 66 PASS / 2 FAIL，修观察器后最终运行时七例 PASS；最终运行时的新一轮完整 68 例 `NOT RUN` |
-| delivery | NOT RUN（本次归档补充） | 本次补充未提交或 push；未评论 issue、未提交 Burner |
+| source delivery | PASS | 最终源码已推送 main；本记录提供固定证据，issue 状态见对应问题页；未提交 Burner |
 
-**待补：** 最终精确提交的完整平台套件结果。#216/#221/#222/#223 的剩余失败仍开放，不以待补字段代替已知失败。
+**剩余失败：** #216/#221/#222/#223 仍开放。精确提交的平台套件和四项契约校验通过不代表这些原版应用已通过。
 
-[机器可读待补项](evidence/pending-final-results-summary.json)与 [run.json](run.json)必须同步更新。所有失败控制都保留，新增成功是独立执行，不覆盖首次失败。
+[最终检查摘要](evidence/pending-final-results-summary.json)与 [run.json](run.json)同步记录结果。所有失败控制都保留，新增成功是独立执行，不覆盖首次失败。
 
 ## 复现与回滚
 
@@ -112,4 +113,4 @@ evidence 均为已审查的派生摘要，不是 raw。未复制端点、宿主�
 
 ## 归档准备检查
 
-当前 JSON 解析、UTF-8/BOM、相对链接、敏感值扫描、来源摘要结构一致及 `git diff --check` 均通过。本次修改范围仅本记录和两处索引，未提交或推送。详见 [准备检查](evidence/archive-validation-summary.json)；最终待补项填写后必须重新校验。
+最终 JSON 解析、UTF-8/BOM、相对链接、敏感值扫描、来源摘要字节一致及 `git diff --check` 均通过。归档修改范围为本记录和两处索引，详见 [归档检查](evidence/archive-validation-summary.json)。

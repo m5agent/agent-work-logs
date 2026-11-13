@@ -20,7 +20,7 @@
       "https://github.com/m5agent/m5stack-esp-emulator/issues/223",
       "https://github.com/m5agent/m5stack-esp-emulator/issues/224"
     ],
-    "pending_final_commit_replacement": false
+    "published_to_main": true
   },
   "hardware": {
     "validation": "NOT RUN",
@@ -54,9 +54,10 @@
     "task_id": "redacted",
     "session_id": "redacted; hashes retained where present in curated summaries",
     "snapshot_time_utc": "2026-11-13T02:30:08.721926+00:00",
-    "final_integration_status": "PARTIAL; final exact-commit platform suite NOT YET COMPLETED; original application issues216/221/222/223 remain open",
+    "final_integration_status": "PARTIAL batch; exact committed source platform suite PASS, first native68 66/2 with final affected seven PASS; four issues remain open",
     "raw_artifacts_published": false,
-    "burner_submission": "NOT RUN; not authorized for this batch"
+    "burner_submission": "NOT RUN; explicitly excluded by user",
+    "final_check_time_utc": "2026-11-13T02:33:01.348798+00:00"
   },
   "checks": [
     {
@@ -132,9 +133,15 @@
     },
     {
       "name": "final_platform_suite",
-      "status": "PARTIAL",
-      "result": "NOT YET COMPLETED",
-      "evidence": "evidence/pending-final-results-summary.json"
+      "status": "PASS",
+      "result": "2086 tests: 2085 passed, 1 optional Bumble dependency skip, 0 failed; exact source commit; 274.883 seconds",
+      "evidence": "evidence/pending-final-results-summary.json",
+      "counts": {
+        "run": 2086,
+        "passed": 2085,
+        "skipped": 1,
+        "failed": 0
+      }
     },
     {
       "name": "physical_hardware",
@@ -148,7 +155,7 @@
       "name": "archive_preparation_validation",
       "status": "PASS",
       "evidence": "evidence/archive-validation-summary.json",
-      "limits": "Repeat after filling pending final results."
+      "limits": "Curated public summaries only; raw private evidence excluded."
     }
   ],
   "evidence": [
@@ -177,6 +184,32 @@
     "PASS is limited to the stated repair/protocol layer; batch remains PARTIAL.",
     "First failing controls and rejected runtime candidates remain visible.",
     "No original BIN was patched to obtain the SDK diagnostic positive control.",
-    "This follow-up archive preparation did not commit, push, comment on an issue or submit to Burner."
-  ]
+    "Source published to main; original BINs unchanged; no Burner submission. Issue disposition remains limited to the scope stated in each check."
+  ],
+  "final_platform_suite": {
+    "status": "PASS",
+    "completion": "COMPLETE",
+    "counts": {
+      "run": 2086,
+      "passed": 2085,
+      "skipped": 1,
+      "failed": 0
+    },
+    "seconds": 274.883,
+    "skip_reason": "Optional Bumble runtime dependency unavailable; BLE connection-address test skipped",
+    "source_commit": "98287067eaf558576d1120f213d676630d66c2bd",
+    "log_sha256": "2046c67130c15650e22e6656e2a28888d92e0c3cb73a8248fe7c30458a3d951b",
+    "prior_failures": "Earlier suite had four stale docs/index failures; later suite had one status-page length failure. Snapshot/index/length corrected; exact committed source suite passes."
+  },
+  "remote_ci": {
+    "status": "PASS",
+    "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/43352953847",
+    "source_commit": "98287067eaf558576d1120f213d676630d66c2bd",
+    "jobs": {
+      "network-namespace-policy": "success",
+      "platform-contracts": "success"
+    },
+    "scope": "Platform and browser contracts, network isolation, offline fault controls and credential migration; not browser-WASM guest execution",
+    "pr_scope": "Main push CI scope step skipped; local full-branch scope check passed: 105 new blobs, 160844 evidence bytes, no errors"
+  }
 }
