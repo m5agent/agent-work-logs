@@ -28,3 +28,5 @@ Nesso 触摸使用独立 I2C，总线共享配置却使输入任务结束显示�
 ## 未覆盖项
 
 物理硬件、RF、在线安装及当前 M5GFX 的完整 Launcher 构建为 `NOT RUN`。当前 master 用最小并发工程执行相同库和 Arduino SPI 路径。本修复不保证任意并发显示操作安全，也不修复旧 BIN；未提交 Burner。
+
+后续：[上游 PR 交付与回读](followups/2026-11-13-upstream-pr/README.md)。
