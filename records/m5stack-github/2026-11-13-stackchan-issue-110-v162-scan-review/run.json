@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "review",
+  "overall_status": "REVIEW",
+  "title": "StackChan v1.6.2 sets all-channel scan and signal-based AP selection; mesh DHCP still unverified",
+  "source": {
+    "issue": "https://github.com/m5stack/StackChan/issues/110",
+    "repository": "m5stack/StackChan",
+    "base_commit": "0808a479697b2ad8ce4d5edc3eba243ada8d39bc"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "StackChan firmware",
+    "version": "v1.6.2",
+    "source_commit": "0808a479"
+  },
+  "execution": {
+    "environment": "macOS; GitHub API file reads at fixed commit; no ESP-IDF toolchain",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "scan_policy_present",
+      "status": "PASS",
+      "evidence": "wifi_station.cc:79-80 sets WIFI_ALL_CHANNEL_SCAN and WIFI_CONNECT_AP_BY_SIGNAL at 0808a479"
+    },
+    {
+      "name": "connection_timeout_classification",
+      "status": "PASS",
+      "evidence": "Poll() 30 s timeout returns dhcp_timeout when associated without IP"
+    },
+    {
+      "name": "mesh_dhcp_on_device",
+      "status": "NOT RUN",
+      "evidence": "no multi-AP network and no StackChan hardware available"
+    },
+    {
+      "name": "firmware_build_and_flash",
+      "status": "NOT RUN",
+      "evidence": "no ESP-IDF toolchain in this environment"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/scan-policy-review.txt",
+      "description": "line references, code excerpts and sha256 of the reviewed file"
+    }
+  ],
+  "notes": [
+    "MAX_RECONNECT_COUNT remains 1; the retry suggestion was not adopted.",
+    "The issue stays open because the maintainer requires multi-AP on-device validation.",
+    "No credentials, internal endpoints, or device identifiers are included."
+  ]
+}

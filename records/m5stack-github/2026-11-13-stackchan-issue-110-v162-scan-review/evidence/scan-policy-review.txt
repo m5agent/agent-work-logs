@@ -1,0 +1,36 @@
+StackChan #110 code-level review
+reviewed commit : 0808a479 (feat(firmware): update to v1.6.2), 2026-11-04T02:23:10Z
+file            : firmware/main/hal/utils/wifi_connect/wifi_station.cc
+file bytes      : 11700
+file sha256     : 9b9f6347de9d9721c812967f3492a8351bed2572860fafc2491ab8ac476b123c
+reviewed at     : 2026-11-13 (UTC)
+toolchain       : none (no ESP-IDF, no build, no flash)
+
+--- scan policy (lines 79-80) ---
+    config.sta.scan_method = WIFI_ALL_CHANNEL_SCAN;
+    config.sta.sort_method = WIFI_CONNECT_AP_BY_SIGNAL;
+
+--- 30 s timeout and classification (lines 118-133) ---
+        expired    = is_connecting_ && esp_timer_get_time() - connection_started_at_ >= 30000000;
+...
+    if (associated) {
+        fail(WifiConnectionFailure{
+            "dhcp_timeout",
+            "Connected to the router, but no IP address was assigned. ..."});
+    } else if (band.has_5ghz_hint()) {
+        fail(wifiNot2G4Failure());
+    } else {
+        fail(WifiConnectionFailure{"connection_timeout", "..."});
+    }
+
+--- disconnect reason mapping (line 304) ---
+    station->fail(wifiDisconnectFailure(event ? event->reason : 0, band));
+
+--- retry count (line 13) ---
+#define MAX_RECONNECT_COUNT  1
+
+--- diff scope of the v1.6.2 commit for this file ---
+firmware/main/hal/utils/wifi_connect/wifi_station.cc  +3 / -1
+(only the two scan policy lines were added)
+
+No mesh AP, no StackChan hardware: DHCP behaviour remains NOT RUN.
