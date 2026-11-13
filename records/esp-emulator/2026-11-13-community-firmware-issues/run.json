@@ -7,8 +7,8 @@
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "676ae67c67941b976be799782ef4af40827b666d",
-    "snapshot_commit": "cf232dbcc93adacab224d6d2fce44c1f55ed0894",
-    "final_commit": null,
+    "snapshot_commit": "98287067eaf558576d1120f213d676630d66c2bd",
+    "final_commit": "98287067eaf558576d1120f213d676630d66c2bd",
     "issues": [
       "https://github.com/m5agent/m5stack-esp-emulator/issues/216",
       "https://github.com/m5agent/m5stack-esp-emulator/issues/217",
@@ -20,7 +20,7 @@
       "https://github.com/m5agent/m5stack-esp-emulator/issues/223",
       "https://github.com/m5agent/m5stack-esp-emulator/issues/224"
     ],
-    "pending_final_commit_replacement": true
+    "pending_final_commit_replacement": false
   },
   "hardware": {
     "validation": "NOT RUN",
@@ -39,15 +39,22 @@
       "evidence/issue224-efuse-identity-summary.json",
       "evidence/issue224-integrated-identity-summary.json",
       "evidence/issue224-board-comparison-summary.json",
-      "evidence/integration-summary.json"
+      "evidence/integration-summary.json",
+      "evidence/issue216-c6-remaining-summary.json",
+      "evidence/issue221-classic-factory-summary.json",
+      "evidence/issue222-core2-remaining-summary.json",
+      "evidence/native-matrix-first-summary.json",
+      "evidence/audio-readiness-summary.json",
+      "evidence/final-runtime-summary.json",
+      "evidence/issue222-core2-final-summary.json"
     ]
   },
   "execution": {
     "environment": "Native QEMU virtual devices through dedicated Device Service sessions; same-controller regression fixtures; no browser-WASM execution.",
     "task_id": "redacted",
     "session_id": "redacted; hashes retained where present in curated summaries",
-    "snapshot_time_utc": "2026-11-13T02:11:21.856737+00:00",
-    "final_integration_status": "PARTIAL; final native68/platform result and issues221/222 pending",
+    "snapshot_time_utc": "2026-11-13T02:30:08.721926+00:00",
+    "final_integration_status": "PARTIAL; final exact-commit platform suite NOT YET COMPLETED; original application issues216/221/222/223 remain open",
     "raw_artifacts_published": false,
     "burner_submission": "NOT RUN; not authorized for this batch"
   },
@@ -57,7 +64,8 @@
       "status": "PARTIAL",
       "disposition": "OPEN",
       "scope": "C6 AES/GDMA/IRQ fixed; original Bruce reaches LittleFS error page; Launcher/Meshtastic/RFID failures remain.",
-      "evidence": "evidence/issue216-c6-aes-summary.json"
+      "evidence": "evidence/issue216-c6-aes-summary.json",
+      "additional_evidence": "evidence/issue216-c6-remaining-summary.json"
     },
     {
       "issue": 217,
@@ -90,16 +98,16 @@
     {
       "issue": 221,
       "status": "PARTIAL",
-      "disposition": "PENDING_FINAL_RESULT",
-      "scope": "Original classic Atom factory watchdog repair/validation remains pending.",
-      "evidence": "evidence/pending-final-results-summary.json"
+      "disposition": "OPEN",
+      "scope": "Final runtime original Atom Lite two 121.90/121.85-second cold starts and button-to-RMT PASS; Matrix watchdog and zero LED output remain; earlier Lite cold-start failures retained.",
+      "evidence": "evidence/issue221-classic-factory-summary.json"
     },
     {
       "issue": 222,
       "status": "PARTIAL",
-      "disposition": "PENDING_FINAL_RESULT",
-      "scope": "Core2 original UIFlow/HamRadio black-frame attribution and board comparison remain pending.",
-      "evidence": "evidence/pending-final-results-summary.json"
+      "disposition": "OPEN",
+      "scope": "Final runtime original UIFlow shows boot splash but not application readiness within 120 seconds; HamRadio remains black. AWS passes display control only.",
+      "evidence": "evidence/issue222-core2-final-summary.json"
     },
     {
       "issue": 223,
@@ -117,14 +125,15 @@
     },
     {
       "name": "final_native_68_case_matrix",
-      "status": "PARTIAL",
-      "result": "PENDING_FINAL_RESULT",
-      "evidence": "evidence/pending-final-results-summary.json"
+      "status": "NOT RUN",
+      "result": "No fresh full 68-case run on final runtime. First integrated full matrix: 66 PASS, 2 FAIL; final runtime seven affected regression cases: PASS.",
+      "evidence": "evidence/native-matrix-first-summary.json",
+      "additional_evidence": "evidence/audio-readiness-summary.json"
     },
     {
       "name": "final_platform_suite",
       "status": "PARTIAL",
-      "result": "PENDING_FINAL_RESULT",
+      "result": "NOT YET COMPLETED",
       "evidence": "evidence/pending-final-results-summary.json"
     },
     {
@@ -153,6 +162,13 @@
     "evidence/issue224-integrated-identity-summary.json",
     "evidence/issue224-board-comparison-summary.json",
     "evidence/integration-summary.json",
+    "evidence/issue216-c6-remaining-summary.json",
+    "evidence/issue221-classic-factory-summary.json",
+    "evidence/issue222-core2-remaining-summary.json",
+    "evidence/native-matrix-first-summary.json",
+    "evidence/audio-readiness-summary.json",
+    "evidence/final-runtime-summary.json",
+    "evidence/issue222-core2-final-summary.json",
     "evidence/provenance-summary.json",
     "evidence/pending-final-results-summary.json",
     "evidence/archive-validation-summary.json"
@@ -161,6 +177,6 @@
     "PASS is limited to the stated repair/protocol layer; batch remains PARTIAL.",
     "First failing controls and rejected runtime candidates remain visible.",
     "No original BIN was patched to obtain the SDK diagnostic positive control.",
-    "Archive is a local preparation, not a delivery/push assertion."
+    "This follow-up archive preparation did not commit, push, comment on an issue or submit to Burner."
   ]
 }
