@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Native firmware compatibility and SDK controls",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde",
+    "issues": [
+      188,
+      192,
+      205,
+      216,
+      221,
+      222,
+      223
+    ]
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "The stated assertions concern modeled virtual controller/data paths, not physical properties."
+  },
+  "firmware": {
+    "identities": "See individual bounded evidence; original images and public-source rebuilds are distinct."
+  },
+  "execution": {
+    "environment": "Dedicated native Device Service leases and checked-in controller regressions",
+    "validation": "virtual-device validation",
+    "cleanup": "Application evidence ZIPs collected before stop; retained history. Matrix and final combined-runtime follow-up pending."
+  },
+  "checks": [
+    {
+      "name": "#205",
+      "status": "PASS",
+      "scope": "PASS 限定原版方向；交付待验: 五份原版 StickS3 的 MADCTL/显示方向逐像素对照；raw 和触摸契约独立。"
+    },
+    {
+      "name": "#188",
+      "status": "PARTIAL",
+      "scope": "PARTIAL: 服务镜像身份与首触摸边界已修，最新 Tab5 仍受闭源 P4 CSR/DSI 控制器阻塞。"
+    },
+    {
+      "name": "#221",
+      "status": "PASS",
+      "scope": "PASS 原驱动子路径: Matrix WPA2/DHCP/DNS/TCP、RMT 灯阵和按键通过；真实 HTTP 404 与不完整帧保留。"
+    },
+    {
+      "name": "#222",
+      "status": "PASS",
+      "scope": "PASS 原驱动子路径: 错误板型 ID、硬件片选、SPI SD/DMA、重复缓存失效分别修正；原 HamRadio 可读配置进入仪表，原 UIFlow 可见配置页。"
+    },
+    {
+      "name": "#216",
+      "status": "PARTIAL",
+      "scope": "PARTIAL: 原 Bruce 进入菜单；SX1262、PHY、BLE AES 子路径通过，Meshtastic 后续 WDT 与其它原应用仍需复验。"
+    },
+    {
+      "name": "#223",
+      "status": "PARTIAL",
+      "scope": "PASS 因果对照；原 BIN FAIL: 公开应用未修重建同样崩溃，仅加入官方 I2C 修复的两款重建版各 360 秒通过。"
+    },
+    {
+      "name": "Device Service input",
+      "status": "PASS",
+      "scope": "PASS: QMP 失效后真实同 guest 触摸可重连并进入应用。"
+    },
+    {
+      "name": "final combined matrix and delivery",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/frame-orientation-summary.json",
+      "sha256": "51b79074aa292c2bc42a12aa8ca6a08387e9ed6f14273ab9b068f5401e12bdf5",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/docs/evidence/2026-11-13-native-frame-orientation/summary.json"
+    },
+    {
+      "file": "evidence/p4-service-boundaries-summary.json",
+      "sha256": "ce5b7a2e912a8d353ac13f2b65fa8d0b3a5b707a321a024da13edd1bd19e0cbb",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/docs/evidence/2026-11-13-tab5-service-boundaries/summary.json"
+    },
+    {
+      "file": "evidence/atom-wifi-summary.json",
+      "sha256": "36fd4cbf6ba6abc93ef901dc3dba52fbc327d2c93a9168665205666ed2933a77",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/classic_factory/wifi-rx-summary.json"
+    },
+    {
+      "file": "evidence/atom-rmt-led-summary.json",
+      "sha256": "123e9ea8877cd63edd10d153a449581f4615863a1dd5007e88a46503f66e8190",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/classic_factory/rmt-led-summary.json"
+    },
+    {
+      "file": "evidence/core2-panel-summary.json",
+      "sha256": "d1e3455864c6c844eba84d5e95eb6569b0295c12679485b6f114c773c04c411f",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/classic_panel_cs/evidence-summary.json"
+    },
+    {
+      "file": "evidence/core2-sd-summary.json",
+      "sha256": "bad4a47075da7123e14286f1195121a9d15818d747f62ae8f04d12ad1b9d4186",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/classic_panel_cs/sd-evidence-2026-11-13.json"
+    },
+    {
+      "file": "evidence/core2-cache-summary.json",
+      "sha256": "b8f9e034c4b0a290e6c41581354007cf55bb1b4466dddcf38abb5aa05a4dc087",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/classic_cache_boot/summary.json"
+    },
+    {
+      "file": "evidence/c6-qio-summary.json",
+      "sha256": "65811d9cb63aefbd8cdcfd03d4e231140f526f1db236b5682ba588c23ce62c2d",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/esp32c6_flash_qio/evidence-2026-11-13.json"
+    },
+    {
+      "file": "evidence/c6-sx1262-summary.json",
+      "sha256": "1b850bc0c4572c1fa3d5a2071feb49018f133966296c4ec1b7a83405b6bda271",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/esp32c6_sx1262_spi/evidence-2026-11-13.json"
+    },
+    {
+      "file": "evidence/c6-isolated-phy-summary.json",
+      "sha256": "45b4e5664b42d477686fe9b97d2ad2b2b1a4de7a3f0d6be8abdb317c8e6399c5",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/esp32c6_radio_controllers/presence-evidence-2026-11-13.json"
+    },
+    {
+      "file": "evidence/c6-ble-aes-summary.json",
+      "sha256": "0542799394cc49e4ebb47c07241b1d6a9a90a8c3a928f099042f4cff24e61072",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/esp32c6_radio_controllers/aes-evidence-2026-11-13.json"
+    },
+    {
+      "file": "evidence/stackchan-i2c-applications-summary.json",
+      "sha256": "799a97367e2ee1c8a4e8ba3839d7e37e395cfef41c9ecd6a3781e19297c6c6c1",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/s3_i2c_lifetime/application-evidence-2026-11-13.json"
+    },
+    {
+      "file": "evidence/input-reconnect-summary.json",
+      "sha256": "5e3c6e4a4f732bae60546f867737800f8c65efc27ea53faca6ce23f0ddc1b1d0",
+      "source": "https://github.com/m5agent/m5stack-esp-emulator/blob/7d0ef3ea088c305cb6cd244eb8aabd67a3d0ffde/tests/firmware/service_input_reconnect/evidence-2026-11-13.json"
+    }
+  ],
+  "notes": [
+    "Original negative controls retained.",
+    "No Burner submission.",
+    "Private raw storage, binaries and identifiers are excluded."
+  ]
+}
