@@ -41,3 +41,7 @@
 [2026-11-13：main、两轮高负载回归与常驻服务验收](followups/2026-11-13-main-and-resident/README.md) 已追加固定交付版本、九条联网/编程、五份原版方向、MP3/2048 dry-run 及同运行时 AWS 显示证据。旧候选记录保留；整体应用兼容性仍为 PARTIAL。
 
 I2C 因果对照的准确范围：只有 UserDemo 具有未修源码重建负控，GPT 的负控为原发布 BIN；两份补丁重建版的通过不能转移给原发布二进制。
+
+## Publication readback
+
+[Documentation CI and nine issue replies](followups/2026-11-13-publication-readback/README.md) records the actual published comments and closure states.
