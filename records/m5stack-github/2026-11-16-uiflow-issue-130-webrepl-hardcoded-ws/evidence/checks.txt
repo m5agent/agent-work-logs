@@ -1,11 +1,13 @@
 issue: https://github.com/m5stack/uiflow-micropython/issues/130
-collected_at: 2026-11-15T22:55Z
+collected_at: 2026-11-15T23:15Z
+public repository: github.com/m5stack/uiflow-micropython
+public master: 54b1d2424174cb032a6726cc007e5df4e479456e
 
-== local clone blob hashes (must equal GitHub master/2.5.4) ==
+== source blob hashes at public master ==
 webrepl.c  0f23c8e2a23d1a00d203329bc4dbdf7872c3e7d9
-main.c     549e5bbd274909978dd8012e42927431158b5fad
+main.c     fe19f86352369a5e83fd0663de92844339d72559
 
-== GitHub contents API blob sha by ref ==
+== GitHub contents API blob sha by ref (webrepl.c) ==
 2.5.0   705b24913b2bc92375ecb0205ff5afac3e624ecb
 2.5.1   3a2e7ef762c74e6e334b6825aee888deae3c7ef4
 2.5.2   3a2e7ef762c74e6e334b6825aee888deae3c7ef4
@@ -13,31 +15,48 @@ main.c     549e5bbd274909978dd8012e42927431158b5fad
 2.5.4   0f23c8e2a23d1a00d203329bc4dbdf7872c3e7d9
 master  0f23c8e2a23d1a00d203329bc4dbdf7872c3e7d9
 
-== master / tag commits ==
+== commits ==
 master    54b1d2424174cb032a6726cc007e5df4e479456e
 2.5.4     e437118892520ba987c2d930a2428db1cab65ab1
 2.5.0     cce783970158482693546fbf455b55aa0eb428dd
 
-== cited commits in local clone ==
+== cited commits (public) ==
 7a5f7598 aiflow: Add runtime-gated WebREPL support.
 05c2ca20 aiflow: enable fixed websocket webrepl
 8003d01a aiflow: derive websocket MAC from device
 
-== boards enabling WEB_REPL_ENABLE ==
-13
+== public master board enablement ==
+board dirs: 56
+WEB_REPL_ENABLE=1: 13
 M5STACK_AirQ,M5STACK_AtomS3,M5STACK_AtomS3R,M5STACK_CardputerADV,M5STACK_CoreS3,M5STACK_Dial,M5STACK_PaperMono,M5STACK_PaperS3,M5STACK_StackChan,M5STACK_StamPLC,M5STACK_StickS3,M5STACK_StopWatch,M5STACK_Tab5
-total board dirs: 53
 
-== residual runtime gate ==
+== line refs at public master ==
+-- Makefile --
+204:		$(BUILD)/nvs.bin \
+265:	@$(PYTHON) ./../tools/nvs_partition_gen.py generate $(BUILD)/partition_nvs.csv $(BUILD)/nvs.bin 0x6000
+-- CMakeListsDefault.cmake --
+175:if(NOT DEFINED WEB_REPL_ENABLE)
+176:    set(WEB_REPL_ENABLE 0)
+178:if(WEB_REPL_ENABLE)
+276:if(WEB_REPL_ENABLE)
+375:    WEB_REPL_ENABLE=${WEB_REPL_ENABLE}
+-- partition_nvs.csv --
+3:server,data,string,uiflow2.m5stack.com
+-- main.c --
+   319	    #if WEB_REPL_ENABLE
+   320	    xTaskCreatePinnedToCore(webrepl_task, "webrepl_task", 6000, NULL, MP_TASK_PRIORITY + 1, &webrepl_task_handle, MP_TASK_COREID);
+   321	    #endif
+
+== residual runtime gate in public master ==
 (no match: gate fully removed)
-== GitHub main.c blob by ref ==
-2.5.4   fe19f86352369a5e83fd0663de92844339d72559
-master  fe19f86352369a5e83fd0663de92844339d72559
 
-note: the local clone working tree has emulator-only modifications in m5stack/main.c,
-so its blob hash differs; the webrepl call site region is byte-identical to master
-(verified with: git diff -U1 m5stack/main.c | grep webrepl -> no change).
-The authoritative master content was fetched through the contents API and contains:
-71:#if WEB_REPL_ENABLE
-319:    #if WEB_REPL_ENABLE
-320:    xTaskCreatePinnedToCore(webrepl_task, "webrepl_task", 6000, NULL, MP_TASK_PRIORITY + 1, &webrepl_task_handle, MP_TASK_COREID);
+== public-tree note ==
+The public GitHub tree does not contain m5stack/components/m5things at any checked ref
+(2.5.0..2.5.4, master, 7a5f7598); that component is not published. The issue's
+'m5things respects the NVS server key' comparison could therefore not be checked
+against the public repository and is not used as evidence here. The NVS key itself is
+proven by 7a5f7598's own webrepl_read_server() (see original-gate-7a5f7598.txt) and by
+the factory partition_nvs.csv:3 default.
+The internal local clone used for history review sits at an older commit (122954de) and
+contains an internal-only m5things component; all cited line numbers above come from the
+public master fetched directly, not from that clone.

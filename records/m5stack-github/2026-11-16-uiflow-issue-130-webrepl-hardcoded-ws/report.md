@@ -17,16 +17,15 @@ Goal of this review:
 
 ## Version and method
 
-- `m5stack/uiflow-micropython@54b1d2424174cb032a6726cc007e5df4e479456e` (`master`,
-  2026-11-13 push). `webrepl.c` blob `0f23c8e2a23d1a00d203329bc4dbdf7872c3e7d9`,
-  `main.c` blob `fe19f86352369a5e83fd0663de92844339d72559`. Blob hashes were read
-  through the GitHub contents API and match the local clone for `webrepl.c`.
-- The local clone's `main.c` has unrelated emulator modifications, so its blob
-  differs. The `webrepl` call-site region is byte-identical (`git diff -U1
-  m5stack/main.c | grep webrepl` returns nothing) and the authoritative `master`
-  content was fetched through the API.
-- Commit history inspected in the local clone: `7a5f7598`, `05c2ca20`,
-  `8003d01a`, plus later `webrepl` commits.
+- `m5stack/uiflow-micropython@54b1d2424174cb032a6726cc007e5df4e479456e` (public
+  `master`, 2026-11-13 push). `webrepl.c` blob
+  `0f23c8e2a23d1a00d203329bc4dbdf7872c3e7d9`, `main.c` blob
+  `fe19f86352369a5e83fd0663de92844339d72559`. File contents and line numbers were
+  read from a public sparse clone and the GitHub contents API, not from the older
+  local internal clone.
+- Commit history was inspected in the local internal clone; the three cited
+  commits (`7a5f7598`, `05c2ca20`, `8003d01a`) also exist in the public repository
+  with identical SHAs and messages.
 - Release images: public GitHub Release `2.5.4`, CoreS3 and StickS3 assets,
   inspected with `strings -a`.
 
@@ -44,25 +43,21 @@ Goal of this review:
 otherwise) and formats the URI. There is no `nvs.h` include and no `nvs_*` call in
 the file, so the `uiflow`/`server` key cannot influence this connection.
 
-For comparison, `m5stack/components/m5things/m5things.c:2198-2205` does read the
-same key for MQTT:
+The key itself is not speculative: the pre-regression `webrepl` read it directly.
+`7a5f7598` opened the `uiflow` namespace and fetched `server`
+(`webrepl.c:128-147` at that commit), and the factory NVS image still sets the key
+explicitly: `partition_nvs.csv:3` contains `server,data,string,uiflow2.m5stack.com`,
+while `Makefile:204` includes the generated `nvs.bin` in `pack_fw`, i.e. in the
+merged release image.
 
-```c
-if (nvs_read_str_helper(UIFLOW_NVS_NAMESPACE, "server", nvs_server_uri, &uri_len)) {
-    sprintf(server_uri, "mqtt://%s:1883", nvs_server_uri);
-    mqtt_cfg.broker.address.uri = server_uri;
-} else {
-    mqtt_cfg.broker.address.uri = "mqtt://uiflow2.m5stack.com:1883";  // default
-}
-```
+The issue also compares this with `m5things`. That component is not part of the
+public GitHub tree at any checked ref (`2.5.0`..`2.5.4`, `master`, `7a5f7598`), so
+the comparison could not be checked against the public repository and is not used
+as evidence here. It is not needed: the removed `webrepl` code is sufficient to
+show that `uiflow`/`server` was the intended configuration point.
 
-The factory NVS image sets the key explicitly: `m5stack/partition_nvs.csv:3`
-contains `server,data,string,uiflow2.m5stack.com`, and `m5stack/Makefile:198`
-passes the generated `nvs.bin` into `pack_fw`, i.e. it is part of the merged
-release image.
-
-Conclusion: the asymmetry described in the issue is real. `m5things` honours the
-key; `webrepl` cannot.
+Conclusion: `webrepl` no longer consults the key it was originally built to
+respect, so the current NVS state cannot affect the connection.
 
 ### 2. History: gated introduction, then gate removal
 
@@ -110,8 +105,8 @@ xTaskCreatePinnedToCore(webrepl_task, "webrepl_task", 6000, NULL, MP_TASK_PRIORI
 #endif
 ```
 
-`WEB_REPL_ENABLE` defaults to `0` (`CMakeListsDefault.cmake:174-179`) and is set to
-`1` by 13 of the 53 board directories: AirQ, AtomS3, AtomS3R, CardputerADV,
+`WEB_REPL_ENABLE` defaults to `0` (`CMakeListsDefault.cmake:175-178`) and is set to
+`1` by 13 of the 56 board directories: AirQ, AtomS3, AtomS3R, CardputerADV,
 CoreS3, Dial, PaperMono, PaperS3, StackChan, StamPLC, StickS3, StopWatch, Tab5.
 The issue's "almost all S3/P4 board configs" is broader than the actual set
 (Cardputer, StampS3, StampP4 and others are not enabled), but every model it named
@@ -187,9 +182,8 @@ The issue's three suggestions address distinct gaps and are consistent with the
 code:
 
 1. read `uiflow`/`server` in `webrepl_build_uri()` and use it as the host, with a
-   documented fallback. Note `webrepl_uri[192]` and `char nvs_server_uri[32]` in
-   `m5things` show the existing size assumptions; a longer host needs an explicit
-   length policy.
+   documented fallback. Note `webrepl_uri[192]` is the existing size assumption; a
+   longer host needs an explicit length policy.
 2. restore a device-side gate so the task does not start without an explicit
    opt-in. Reinstating the `aiflow.m5stack.com` equality check would restore
    pre-2.5.1 behaviour only; honouring the user's `server` value needs a separate
@@ -231,7 +225,8 @@ strings -a <image>.bin | grep -c 'wss://'   # 0
   authorization are server-side and were not inspected.
 - `NOT RUN` web IDE opt-in. Whether the UIFlow2 front end exposes an explicit
   opt-in was not checked; the device has no local opt-in regardless.
-- Scope note: `m5things` already connects to `uiflow2.m5stack.com` by default for
-  MQTT, so "the device contacts the cloud" is not new. What is new in 2.5.1+ is
-  the ungated, plaintext REPL channel.
+- Scope note: the issue's `m5things` comparison could not be checked because that
+  component is not published in the public tree. Independently of it, what is new
+  in 2.5.1+ is the ungated, plaintext REPL channel; whether other UIFlow services
+  already contact the same host was not re-verified here.
 - The fixed MAC value from `05c2ca20` is intentionally omitted from this record.

@@ -45,19 +45,24 @@
       "evidence": "no nvs.h include and no nvs_* call in webrepl.c at master; nvs.h was removed by 05c2ca20"
     },
     {
-      "name": "m5things_reads_uiflow_server",
+      "name": "nvs_server_key_used_before_regression",
       "status": "PASS",
-      "evidence": "m5things.c:2198-2205 builds the MQTT broker URI from uiflow/server, default mqtt://uiflow2.m5stack.com:1883"
+      "evidence": "7a5f7598 webrepl.c:128-147 opens the uiflow namespace and reads the server key; 05c2ca20 removed that path; partition_nvs.csv:3 still sets server=uiflow2.m5stack.com"
     },
     {
       "name": "factory_nvs_default_is_cloud_host",
       "status": "PASS",
-      "evidence": "partition_nvs.csv:3 server=uiflow2.m5stack.com; Makefile:198 packs the generated nvs.bin into the release image"
+      "evidence": "partition_nvs.csv:3 server=uiflow2.m5stack.com; Makefile:204 includes the generated nvs.bin in pack_fw, i.e. in the merged release image"
     },
     {
       "name": "runtime_gate_removed",
       "status": "PASS",
       "evidence": "05c2ca20 deleted webrepl_read_server() and webrepl_should_start(); grep for either symbol in m5stack/ returns nothing"
+    },
+    {
+      "name": "m5things_comparison_availability",
+      "status": "NOT VERIFIED",
+      "evidence": "m5stack/components/m5things is absent from the public GitHub tree at 2.5.0..2.5.4, master and 7a5f7598, so the issue's m5things comparison could not be checked publicly"
     },
     {
       "name": "original_gate_was_single_host_allowlist",
@@ -72,7 +77,7 @@
     {
       "name": "board_scope",
       "status": "PASS",
-      "evidence": "CMakeListsDefault.cmake:174-179 defaults WEB_REPL_ENABLE to 0; 13 of 53 board directories set it to 1"
+      "evidence": "CMakeListsDefault.cmake:175-178 defaults WEB_REPL_ENABLE to 0; 13 of 56 board directories at public master set it to 1"
     },
     {
       "name": "client_message_reaches_stdin_ringbuf",
@@ -144,8 +149,9 @@
     }
   ],
   "notes": [
-    "The report's three claims are confirmed at code level; two scope statements are corrected (the old gate was a single-host allow-list, and 13 of 53 boards enable the component).",
+    "The report's three claims are confirmed at code level; two scope statements are corrected (the old gate was a single-host allow-list, and 13 of 56 public board directories enable the component).",
     "Plaintext ws:// plus no client credential means an on-path party can forge a clientMessage; whether MAC impersonation is possible depends on the server and is NOT VERIFIED.",
+    "The issue's m5things comparison is not used as evidence because that component is not published in the public repository; the uiflow/server key is proven by the removed webrepl code at 7a5f7598.",
     "The fixed developer MAC from 05c2ca20 is intentionally omitted from this record.",
     "No device, emulator, build or server was executed; all runtime checks are marked NOT RUN."
   ]
