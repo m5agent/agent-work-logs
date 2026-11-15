@@ -1,0 +1,33 @@
+release: m5stack/uiflow-micropython 2.5.4 (tag commit e437118892520ba987c2d930a2428db1cab65ab1)
+assets downloaded from the public GitHub Release with:
+  gh release download 2.5.4 --repo m5stack/uiflow-micropython -p '*sticks3-v2.5.4*.bin' -p '*cores3-v2.5.4*.bin'
+command: strings -a <bin> | grep -n <pattern>
+
+== uiflow-e437118-esp32s3-spiram-16mb-cores3-v2.5.4-20261030.bin ==
+size: 16121856 bytes
+sha256: a7b2483a74323800a6febfb652c89581b01371abf7503c1cc338012930ec2e5f
+-- C component symbols and endpoint template --
+16793:webrepl_task
+16895:webrepl_ws
+16901:ws://uiflow2.m5stack.com/ws/realtime?role=device&mac=%s
+-- total 'webrepl' string hits (includes MicroPython's frozen webrepl.py) --
+4
+-- 'wss://' string count --
+0
+
+== uiflow-e437118-esp32s3-spiram-8mb-sticks3-v2.5.4-20261030.bin ==
+size: 8384512 bytes
+sha256: 44fca7556643c34e316532c3dddcc184bef43f420ae711598212259ef73106f9
+-- C component symbols and endpoint template --
+7085:webrepl_task
+7185:webrepl_ws
+7192:ws://uiflow2.m5stack.com/ws/realtime?role=device&mac=%s
+-- total 'webrepl' string hits (includes MicroPython's frozen webrepl.py) --
+19
+-- 'wss://' string count --
+0
+
+note: 'webrepl_task' and 'webrepl_ws' are the C component's task name and
+esp_websocket_client task name (webrepl.c:457, main.c:316). MicroPython's own
+frozen webrepl.py strings are also present in the StickS3 image; they are unrelated
+to this C component.

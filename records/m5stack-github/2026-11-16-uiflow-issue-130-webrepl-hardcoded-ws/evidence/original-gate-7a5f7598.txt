@@ -1,0 +1,60 @@
+pre-regression gated implementation: commit 7a5f7598 (2026-07-09)
+file: m5stack/components/webrepl/webrepl.c
+
+    26	#define WEBREPL_TAG "webrepl"
+    27	#define WEBREPL_URI_TEMPLATE "ws://%s/ws/realtime?role=device&mac=%s"
+    28	#define WEBREPL_NVS_NAMESPACE "uiflow"
+    29	#define WEBREPL_NVS_SERVER_KEY "server"
+    30	#define WEBREPL_ENABLED_SERVER "aiflow.m5stack.com"
+   128	static bool webrepl_read_server(char *server, size_t server_len) {
+   129	    nvs_handle_t nvs_handle;
+   130	    esp_err_t err = nvs_open(WEBREPL_NVS_NAMESPACE, NVS_READONLY, &nvs_handle);
+   131	    if (err != ESP_OK) {
+   132	        ESP_LOGW(WEBREPL_TAG, "open nvs %s failed: %s", WEBREPL_NVS_NAMESPACE, esp_err_to_name(err));
+   133	        return false;
+   134	    }
+   135
+   136	    bool ok = webrepl_read_nvs_server_key(nvs_handle, WEBREPL_NVS_SERVER_KEY, server, server_len);
+   137	    nvs_close(nvs_handle);
+   138	    if (!ok) {
+   139	        ESP_LOGW(WEBREPL_TAG, "nvs %s not configured", WEBREPL_NVS_SERVER_KEY);
+   140	    }
+   141	    return ok;
+   142	}
+   143
+   144	bool webrepl_should_start(void) {
+   145	    char server[WEBREPL_SERVER_MAX_LEN] = {0};
+   146	    return webrepl_read_server(server, sizeof(server)) && strcmp(server, WEBREPL_ENABLED_SERVER) == 0;
+   147	}
+   148
+   149	static bool webrepl_build_uri(void) {
+   150	    uint8_t mac[6] = {0};
+   151	    char mac_str[13] = {0};
+   152	    char server[WEBREPL_SERVER_MAX_LEN] = {0};
+   153	    esp_err_t err = esp_wifi_get_mac(WIFI_IF_STA, mac);
+   154	    if (err != ESP_OK) {
+   155	        ESP_LOGW(WEBREPL_TAG, "read mac failed: %s, fallback 000000000000", esp_err_to_name(err));
+   156	    }
+   157
+   158	    snprintf(mac_str, sizeof(mac_str), "%02x%02x%02x%02x%02x%02x",
+   159	        mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+   160	    if (!webrepl_read_server(server, sizeof(server))) {
+   161	        return false;
+   162	    }
+   163	    snprintf(webrepl_uri, sizeof(webrepl_uri), WEBREPL_URI_TEMPLATE, server, mac_str);
+   164	    return true;
+   165	}
+   166
+
+m5stack/main.c at 7a5f7598:
+   298
+   299	    // Create and transfer control to the MicroPython task.
+   300	    xTaskCreatePinnedToCore(mp_task, "mp_task", MICROPY_TASK_STACK_SIZE / sizeof(StackType_t), NULL, MP_TASK_PRIORITY, &mp_main_task_handle, MP_TASK_COREID);
+   301	    #if M5STACK_WEBREPL_ENABLE
+   302	    if (webrepl_should_start()) {
+   303	        xTaskCreatePinnedToCore(webrepl_task, "webrepl_task", 6000, NULL, MP_TASK_PRIORITY + 1, &webrepl_task_handle, MP_TASK_COREID);
+   304	    }
+   305	    #endif
+   306	}
+   307
+   308	MP_WEAK void nlr_jump_fail(void *val) {

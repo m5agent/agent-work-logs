@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "uiflow-micropython #130: webrepl hardcodes ws://uiflow2.m5stack.com, ignores uiflow/server NVS and starts unconditionally",
+  "source": {
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/130",
+    "repository": "m5stack/uiflow-micropython",
+    "base_commit": "54b1d2424174cb032a6726cc007e5df4e479456e",
+    "release_tag": "2.5.4",
+    "release_commit": "e437118892520ba987c2d930a2428db1cab65ab1"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "UIFlow2 firmware release images",
+    "version": "2.5.4",
+    "images": [
+      {
+        "asset": "uiflow-e437118-esp32s3-spiram-16mb-cores3-v2.5.4-20261030.bin",
+        "size_bytes": 16121856,
+        "sha256": "a7b2483a74323800a6febfb652c89581b01371abf7503c1cc338012930ec2e5f"
+      },
+      {
+        "asset": "uiflow-e437118-esp32s3-spiram-8mb-sticks3-v2.5.4-20261030.bin",
+        "size_bytes": 8384512,
+        "sha256": "44fca7556643c34e316532c3dddcc184bef43f420ae711598212259ef73106f9"
+      }
+    ]
+  },
+  "execution": {
+    "environment": "macOS; local clone of m5stack/uiflow-micropython plus GitHub contents API; public 2.5.4 release assets; no device, no emulator, no build",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "endpoint_is_hardcoded",
+      "status": "PASS",
+      "evidence": "webrepl.c:27 defines ws://uiflow2.m5stack.com/ws/realtime?role=device&mac=%s; webrepl_build_uri() 110-126 substitutes only the MAC"
+    },
+    {
+      "name": "webrepl_has_no_nvs_access",
+      "status": "PASS",
+      "evidence": "no nvs.h include and no nvs_* call in webrepl.c at master; nvs.h was removed by 05c2ca20"
+    },
+    {
+      "name": "m5things_reads_uiflow_server",
+      "status": "PASS",
+      "evidence": "m5things.c:2198-2205 builds the MQTT broker URI from uiflow/server, default mqtt://uiflow2.m5stack.com:1883"
+    },
+    {
+      "name": "factory_nvs_default_is_cloud_host",
+      "status": "PASS",
+      "evidence": "partition_nvs.csv:3 server=uiflow2.m5stack.com; Makefile:198 packs the generated nvs.bin into the release image"
+    },
+    {
+      "name": "runtime_gate_removed",
+      "status": "PASS",
+      "evidence": "05c2ca20 deleted webrepl_read_server() and webrepl_should_start(); grep for either symbol in m5stack/ returns nothing"
+    },
+    {
+      "name": "original_gate_was_single_host_allowlist",
+      "status": "PASS",
+      "evidence": "7a5f7598 webrepl.c:144-147 compares uiflow/server to aiflow.m5stack.com; with the factory default the task never started"
+    },
+    {
+      "name": "task_starts_unconditionally",
+      "status": "PASS",
+      "evidence": "main.c:319-321 creates webrepl_task under #if WEB_REPL_ENABLE with no runtime check"
+    },
+    {
+      "name": "board_scope",
+      "status": "PASS",
+      "evidence": "CMakeListsDefault.cmake:174-179 defaults WEB_REPL_ENABLE to 0; 13 of 53 board directories set it to 1"
+    },
+    {
+      "name": "client_message_reaches_stdin_ringbuf",
+      "status": "PASS",
+      "evidence": "webrepl_process_text_message 299-335 -> webrepl_queue_input 181-195 -> drain 197-218 -> ringbuf_put(&stdin_ringbuf)"
+    },
+    {
+      "name": "ctrl_c_interrupt_path",
+      "status": "PASS",
+      "evidence": "0x03 calls mp_sched_keyboard_interrupt() at 200-205 when the REPL enabled the interrupt char"
+    },
+    {
+      "name": "no_tls",
+      "status": "PASS",
+      "evidence": "scheme is ws:// in webrepl.c:27; zero wss:// strings in both 2.5.4 images"
+    },
+    {
+      "name": "no_client_credentials",
+      "status": "PASS",
+      "evidence": "esp_websocket_client_config_t 455-466 sets no headers, token, username or password; MAC is the only identifier"
+    },
+    {
+      "name": "released_images_contain_endpoint",
+      "status": "PASS",
+      "evidence": "strings match the URI template plus webrepl_task/webrepl_ws in both 2.5.4 images (hashes in firmware.images)"
+    },
+    {
+      "name": "release_mapping",
+      "status": "PASS",
+      "evidence": "2.5.0 blob 705b2491 (gated); 2.5.1/2.5.2 blob 3a2e7ef7; 2.5.3/2.5.4/master blob 0f23c8e2"
+    },
+    {
+      "name": "runtime_injection_reproduction",
+      "status": "NOT RUN",
+      "evidence": "would require injecting a clientMessage into the production channel or an on-path proxy; not performed"
+    },
+    {
+      "name": "device_or_emulator_boot",
+      "status": "NOT RUN",
+      "evidence": "retail build logs at default level; no runtime marker would be visible and the source facts are already established"
+    },
+    {
+      "name": "server_side_auth_and_mac_validation",
+      "status": "NOT RUN",
+      "evidence": "server implementation is not in this repository"
+    },
+    {
+      "name": "web_ide_opt_in_check",
+      "status": "NOT RUN",
+      "evidence": "UIFlow2 web front end not inspected; the device has no local opt-in"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/webrepl-key-lines.txt",
+      "description": "numbered source excerpts from GitHub master for webrepl.c and main.c"
+    },
+    {
+      "path": "evidence/original-gate-7a5f7598.txt",
+      "description": "pre-regression gated implementation with the single-host allow-list"
+    },
+    {
+      "path": "evidence/checks.txt",
+      "description": "blob hashes by tag, commit IDs, board enablement count, residual gate grep"
+    },
+    {
+      "path": "evidence/release-bin-strings.txt",
+      "description": "2.5.4 asset hashes, URI and task-name strings, wss:// count"
+    }
+  ],
+  "notes": [
+    "The report's three claims are confirmed at code level; two scope statements are corrected (the old gate was a single-host allow-list, and 13 of 53 boards enable the component).",
+    "Plaintext ws:// plus no client credential means an on-path party can forge a clientMessage; whether MAC impersonation is possible depends on the server and is NOT VERIFIED.",
+    "The fixed developer MAC from 05c2ca20 is intentionally omitted from this record.",
+    "No device, emulator, build or server was executed; all runtime checks are marked NOT RUN."
+  ]
+}

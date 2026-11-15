@@ -1,0 +1,150 @@
+source: m5stack/uiflow-micropython master @ 54b1d2424174cb032a6726cc007e5df4e479456e
+file: m5stack/components/webrepl/webrepl.c (blob 0f23c8e2a23d1a00d203329bc4dbdf7872c3e7d9)
+
+    26	#define WEBREPL_TAG "webrepl"
+    27	#define WEBREPL_URI_TEMPLATE "ws://uiflow2.m5stack.com/ws/realtime?role=device&mac=%s"
+   110	static void webrepl_build_uri(void) {
+   111	    uint8_t mac[6] = {0};
+   112	    char mac_str[13] = {0};
+   113	    // Match m5things device identity: P4 uses its own MAC, not the Wi-Fi coprocessor's.
+   114	    #if CONFIG_IDF_TARGET_ESP32P4
+   115	    esp_err_t err = esp_efuse_mac_get_default(mac);
+   116	    #else
+   117	    esp_err_t err = esp_wifi_get_mac(WIFI_IF_STA, mac);
+   118	    #endif
+   119	    if (err != ESP_OK) {
+   120	        ESP_LOGW(WEBREPL_TAG, "read mac failed: %s, fallback 000000000000", esp_err_to_name(err));
+   121	    }
+   122
+   123	    snprintf(mac_str, sizeof(mac_str), "%02x%02x%02x%02x%02x%02x",
+   124	        mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+   125	    snprintf(webrepl_uri, sizeof(webrepl_uri), WEBREPL_URI_TEMPLATE, mac_str);
+   126	}
+   181	static void webrepl_queue_input(const char *data, size_t len) {
+   182	    webrepl_rx_received_total += len;
+   183	    for (size_t i = 0; i < len; i++) {
+   184	        uint8_t ch = (uint8_t)data[i];
+   185	        if (ch == 0x03) {
+   186	            webrepl_interrupt();
+   187	            continue;
+   188	        }
+   189	        if (ch == '\n') {
+   190	            ch = '\r';
+   191	        }
+   192	        webrepl_rx_push(ch);
+   193	    }
+   194	    webrepl_wake_main_task();
+   195	}
+   196
+   197	static void webrepl_drain_rx_to_stdin(void) {
+   198	    uint8_t ch;
+   199	    while (webrepl_rx_peek(&ch)) {
+   200	        if (ch == 0x03 && mp_interrupt_char == 0x03) {
+   201	            webrepl_rx_pop(&ch);
+   202	            mp_sched_keyboard_interrupt();
+   203	            webrepl_rx_read_total++;
+   204	            ESP_LOGD(WEBREPL_TAG, "ctrl-c interrupt scheduled");
+   205	            continue;
+   206	        }
+   207
+   208	        if (ringbuf_free(&stdin_ringbuf) <= 0) {
+   209	            break;
+   210	        }
+   211	        if (!webrepl_rx_pop(&ch)) {
+   212	            break;
+   213	        }
+   214	        ringbuf_put(&stdin_ringbuf, ch);
+   215	        webrepl_stdin_drained_total++;
+   216	        webrepl_rx_read_total++;
+   217	    }
+   218	}
+   299	static void webrepl_process_text_message(const char *data, int len) {
+   300	    if (data == NULL || len <= 0) {
+   301	        return;
+   302	    }
+   303
+   304	    webrepl_last_activity_us = esp_timer_get_time();
+   305
+   306	    if (webrepl_text_equals(data, len, "PONG")) {
+   307	        return;
+   308	    }
+   309	    if (webrepl_text_equals(data, len, "PING")) {
+   310	        webrepl_need_pong = true;
+   311	        return;
+   312	    }
+   313
+   314	    cJSON *root = cJSON_ParseWithLength(data, len);
+   315	    if (root == NULL) {
+   316	        ESP_LOGD(WEBREPL_TAG, "ignore non-json text len=%d", len);
+   317	        return;
+   318	    }
+   319
+   320	    cJSON *type = cJSON_GetObjectItem(root, "type");
+   321	    if (cJSON_IsString(type) && strcmp(type->valuestring, "clientMessage") == 0) {
+   322	        cJSON *payload = cJSON_GetObjectItem(root, "payload");
+   323	        if (cJSON_IsString(payload) && payload->valuestring != NULL) {
+   324	            webrepl_queue_input(payload->valuestring, strlen(payload->valuestring));
+   325	        } else if (cJSON_IsNumber(payload)) {
+   326	            char number_buf[32];
+   327	            int n = snprintf(number_buf, sizeof(number_buf), "%g", payload->valuedouble);
+   328	            if (n > 0) {
+   329	                webrepl_queue_input(number_buf, (size_t)n);
+   330	            }
+   331	        }
+   332	    }
+   333
+   334	    cJSON_Delete(root);
+   335	}
+   442	static void webrepl_wait_network(void) {
+   443	    ESP_LOGD(WEBREPL_TAG, "waiting for network");
+   444	    while (!(wifi_sta_connected || lan_connected)) {
+   445	        vTaskDelay(pdMS_TO_TICKS(500));
+   446	    }
+   447	}
+   448
+   449	static esp_err_t webrepl_start_client(void) {
+   450	    if (webrepl_client != NULL) {
+   451	        return ESP_OK;
+   452	    }
+   453
+   454	    webrepl_last_start_try_us = esp_timer_get_time();
+   455	    esp_websocket_client_config_t cfg = {
+   456	        .uri = webrepl_uri,
+   457	        .task_name = "webrepl_ws",
+   458	        .task_stack = 6144,
+   459	        .task_prio = tskIDLE_PRIORITY + 5,
+   460	        .buffer_size = 4096,
+   461	        .reconnect_timeout_ms = 3000,
+   462	        .network_timeout_ms = 10000,
+   463	        .ping_interval_sec = 30,
+   464	        .disable_auto_reconnect = false,
+   465	        .keep_alive_enable = true,
+   466	    };
+   557	static void webrepl_install_dupterm_if_needed(void) {
+   558	    #if MICROPY_PY_OS_DUPTERM
+   559	    mp_obj_t stream = MP_OBJ_FROM_PTR(&webrepl_stream_obj);
+   560	    mp_obj_t current = MP_STATE_VM(dupterm_objs[0]);
+   561	    if (current == stream) {
+   562	        webrepl_dupterm_installed = true;
+   563	        return;
+   564	    }
+   565	    if (current != MP_OBJ_NULL) {
+   566	        return;
+   567	    }
+   568
+   569	    MP_STATE_VM(dupterm_objs[0]) = stream;
+   570	    webrepl_dupterm_installed = true;
+   571	    ESP_LOGD(WEBREPL_TAG, "dupterm stream installed");
+   572	    #endif
+   573	}
+
+source: m5stack/uiflow-micropython master @ 54b1d242; m5stack/main.c (blob fe19f86352369a5e83fd0663de92844339d72559)
+   314	    // This defaults to initialising NVS and detecting the flash size.
+   315	    MICROPY_BOARD_STARTUP();
+   316
+   317	    // Create and transfer control to the MicroPython task.
+   318	    xTaskCreatePinnedToCore(mp_task, "mp_task", MICROPY_TASK_STACK_SIZE / sizeof(StackType_t), NULL, MP_TASK_PRIORITY, &mp_main_task_handle, MP_TASK_COREID);
+   319	    #if WEB_REPL_ENABLE
+   320	    xTaskCreatePinnedToCore(webrepl_task, "webrepl_task", 6000, NULL, MP_TASK_PRIORITY + 1, &webrepl_task_handle, MP_TASK_COREID);
+   321	    #endif
+   322	}
