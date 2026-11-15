@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-15",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "vinylM5Dial 1.0 Dial virtual-device no-frame attribution",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "55e5763e",
+    "review_task": "job-7071ded9a698"
+  },
+  "hardware": {
+    "device": "M5Dial (K130)",
+    "soc": "ESP32-S3FN8",
+    "flash_mib": 8,
+    "psram_mib": 0,
+    "status": "NOT RUN",
+    "reason": "No matching physical Dial fixture was used; all execution is virtual-device validation."
+  },
+  "firmware": {
+    "name": "vinylM5Dial : mp3 player",
+    "version": "1.0",
+    "version_id": "2122006759453179905",
+    "kind": "merged",
+    "size_bytes": 8388608,
+    "sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "app_descriptor": {
+      "project_name": "arduino-lib-builder",
+      "idf_version": "v5.5.5",
+      "app0_offset": 65536,
+      "spiffs_status": "UNFORMATTED"
+    }
+  },
+  "execution": {
+    "environment": "Device Service native QEMU, ESP32-S3, m5dial profile",
+    "profile": "m5dial",
+    "scope": "virtual-device validation",
+    "task_id": "job-7071ded9a698",
+    "session_id": "redacted",
+    "reproduction": "upload merged BIN as artifact, create firmware for dial, create session, poll serial/frame/wait for 60-120 s",
+    "offline_probe": "same qemu-system-xtensa -M m5dial on a copy of the session virtual flash, QMP PC/PS/CCOUNT sampling and panel presentation read"
+  },
+  "checks": [
+    {
+      "name": "evidence_intake",
+      "status": "PASS",
+      "detail": "analysis, execution-plan, wait, logs, serial, qom-before/after/diff, flash-before/after/diff and observation were read without modification."
+    },
+    {
+      "name": "rom_flash_boot",
+      "status": "PASS",
+      "detail": "Serial shows ROM banner, three load segments and entry; the bootloader is at 0x0, which is correct for ESP32-S3."
+    },
+    {
+      "name": "qemu_lifecycle_no_assert",
+      "status": "PASS",
+      "detail": "Session state stayed running; no panic, assert, Guru Meditation, reboot banner or QEMU exit was captured."
+    },
+    {
+      "name": "application_segments_loaded",
+      "status": "PASS",
+      "detail": "App0 DRAM at 0x3fc94c00 and IRAM at 0x40374000 match the image bytes in the independent probe, so the bootloader completed image load."
+    },
+    {
+      "name": "application_alive",
+      "status": "PASS",
+      "detail": "UART1 receives the 5-byte 04 fb 01 08 08 packet every ~2.7 s, matching the firmware's own PORT B 9600 bps string."
+    },
+    {
+      "name": "panel_initialisation_absent",
+      "status": "FAIL",
+      "detail": "Panel presentation reports generation=1 and madctl=0; the guest never issued a MADCTL write, while the 240x240 frame stays at the 248-byte all-black fallback."
+    },
+    {
+      "name": "same_board_reference_frame",
+      "status": "PASS",
+      "detail": "Official UIFlow2 v2.5.3 Dial image on the same machine produced 394 bytes of application serial and a 19,838-byte non-black 240x240 frame with generation=2 and madctl=8."
+    },
+    {
+      "name": "shared_boot_stage_messages",
+      "status": "PASS",
+      "detail": "Target and reference both trigger the same M25P80 probe messages and 0x10200C read notice; they are not the discriminator."
+    },
+    {
+      "name": "emulator_model_defect_attribution",
+      "status": "REVIEW",
+      "detail": "No fixed-PC assertion, register readback mismatch or missing device/bus was reproduced; the control firmware proves the Dial display path works."
+    },
+    {
+      "name": "firmware_attribution",
+      "status": "NOT RUN",
+      "detail": "No panic or assert marker exists and the application is still running, so the firmware is not blamed either."
+    },
+    {
+      "name": "application_usb_cdc_log",
+      "status": "NOT RUN",
+      "detail": "The dial machine's misc.esp32c3.usb_serial_jtag has an empty chardev, so the firmware's own boot diagnostics are not captured."
+    },
+    {
+      "name": "physical_dial_validation",
+      "status": "NOT RUN",
+      "detail": "No physical Dial fixture was used."
+    }
+  ],
+  "evidence": [
+    "evidence/attribution-summary.json"
+  ],
+  "notes": [
+    "No emulator code was changed, nothing was pushed to the emulator repository, and no issue was opened because the failure could not be attributed to a reproducible model defect.",
+    "Review verdict remains manual_review with E_NO_FRAME; the control firmware result does not transfer to the Arduino lib builder path.",
+    "Raw session identities and absolute paths are intentionally omitted."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "review_task": "job-7071ded9a698",
+  "captured_at": "2026-11-15T16:56:00Z",
+  "scope": "virtual-device validation; no physical hardware",
+  "target": {
+    "device": "dial",
+    "firmware_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "size_bytes": 8388608,
+    "bootloader_offset": 0,
+    "bootloader_offset_note": "0x0 is correct for ESP32-S3; not the 0x1000 misplacement case",
+    "app0": {"offset": 65536, "irom_load": "0x42000020", "irom_len": 348932, "iram_load": "0x40374000", "iram_len": 68588},
+    "spiffs": "UNFORMATTED"
+  },
+  "task_evidence": {
+    "serial_bytes": 226,
+    "serial_tail": "load:0x3fce2820,len:0x10cc; load:0x403c8700,len:0xc2c; load:0x403cb700,len:0x30b0; entry 0x403c88b8",
+    "frame_bytes": 248,
+    "frame_sha256": "4bf6fb04707daaa254f0d27219adbb5bfb282a2f495e0bf528cb7ee3efde5832",
+    "frame_nonblack_pixels": 0,
+    "wait": {"ready": false, "phase": "application_readiness", "session_state": "running"},
+    "qom_diff_changed": ["pcf8563/children/unix-time/value"],
+    "flash_diff_changed_bytes": 0,
+    "emulator_failure_json": null,
+    "crash_markers": []
+  },
+  "independent_repro": {
+    "runtime": "qemu-system-xtensa 9.2.2, -M m5dial",
+    "pc_samples": ["0x40378dda", "0x40378dda", "0x4004795c", "0x40378dda"],
+    "pc_note": "0x40378dda is the retw.n right after waiti 0 inside the app0 IRAM segment (0x40374000-0x40384bec); PS shows no interrupt/exception context and CCOUNT advances",
+    "panel_presentation": {"generation": 1, "madctl": 0, "apply_madctl": true, "width": 240, "height": 240},
+    "uart1": {"bytes_per_packet": 5, "packet_hex": "04fb010808", "period_seconds_approx": 2.7, "first_seen_after_seconds": 2},
+    "flash_changed_bytes": 0
+  },
+  "control": {
+    "device": "dial",
+    "firmware": "UIFlow2 v2.5.3",
+    "sha256": "6a0187dad13c491129e9228ca36b9e04adb46ebf9d8d51fca8eca5f9b7332a53",
+    "serial_bytes": 394,
+    "serial_excerpt": ["E (837) i2c.master: this port has not been initialized, please initialize it first", "E (1995) i2c.master: this port has not been initialized, please initialize it first"],
+    "frame_bytes": 19838,
+    "frame_sha256": "3116e0ebe6ee1dc60a6a7fe0ece8164a20f4981655df05efc2c1afdc6a96372e",
+    "frame_description": "UIFlow2 Offline screen, 240x240; on-screen pairing identifiers are not reproduced here",
+    "panel_presentation": {"generation": 2, "madctl": 8},
+    "flash_changed_bytes": 6208
+  },
+  "shared_boot_stage_messages": [
+    "M25P80: Read id (command 0x90/0xAB) is not supported by device",
+    "M25P80: Unknown cmd 5a",
+    "M25P80: Unknown cmd 7a",
+    "M25P80: Unknown cmd 77",
+    "Invalid read at addr 0x10200C, size 4, region 'er', reason: rejected"
+  ],
+  "observability_gap": {
+    "device": "misc.esp32c3.usb_serial_jtag",
+    "chardev": "",
+    "note": "The firmware's own boot diagnostics declare USB CDC as the log transport, but the Dial session does not attach a chardev to the USB Serial/JTAG model, so application logs are not part of the captured evidence."
+  },
+  "attribution": {
+    "emulator_model_defect": "not reproduced",
+    "firmware_defect": "not evidenced (no crash markers)",
+    "decision": "no issue opened",
+    "remaining": "application stop point before display initialisation is unlocalised"
+  },
+  "not_run": [
+    "physical Dial start-up and frame",
+    "application USB CDC boot log",
+    "peripheral attribution of the stop point (I2C/SD/I2S/USB)",
+    "audio playback, SPIFFS contents, electrical and acoustic behaviour",
+    "browser WASM path"
+  ]
+}
