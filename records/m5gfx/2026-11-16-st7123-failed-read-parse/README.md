@@ -5,6 +5,7 @@
 - 工作类型：`issue`
 - 问题来源：[m5stack/M5GFX#417](https://github.com/m5stack/M5GFX/issues/417)
 - 源码版本：M5GFX `28d47949bdc84f30881623476f555398e2194313`（0.3.0）
+- GitHub 回复：[issuecomment-6904990572](https://github.com/m5stack/M5GFX/issues/417#issuecomment-6904990572)（英文，单条；issue 保持开启）
 - 环境：macOS 主机 + host C++ 复现；本机无 Tab5 硬件；本地 Tab5 模拟器没有 ST7123
   控制器级模型，未做故障注入
 
