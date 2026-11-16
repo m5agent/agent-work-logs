@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Touch_ST7123 getTouchRaw() parses uninitialised buffers after a failed I2C read (code-level)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/417",
+    "companion_issue": "https://github.com/m5stack/M5GFX/issues/418",
+    "repository": "https://github.com/m5stack/M5GFX",
+    "base_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "tag": "0.3.0",
+    "pins": "evidence/source-pins.json"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "No Tab5 attached to this workspace; no I2C fault injection on real hardware."
+  },
+  "firmware": {
+    "target": "M5Stack Tab5, ST7121 panel, touch FW version 01 (reporter's unit, not tested here)",
+    "m5gfx": "0.3.0 (28d4794); 0.2.28 getTouchRaw() body identical",
+    "binaries_included": false
+  },
+  "execution": {
+    "validation": "code-level verification",
+    "host": "macOS, clang++ -std=c++17 -O0 -fno-inline",
+    "virtual_device": "NOT RUN: the local Tab5 emulator has no ST7123 controller-level model; no forced I2C read failure",
+    "device_identifiers": "none used"
+  },
+  "checks": [
+    {
+      "name": "source review of getTouchRaw() read handling",
+      "status": "PASS",
+      "details": "All three _readParams() results ignored; adv_info and touch_report[] uninitialised at Touch_ST7123.inl:132-141."
+    },
+    {
+      "name": "I2C failure semantics of _readParams()/transactionWriteRead()",
+      "status": "PASS",
+      "details": "readBytes() writes each received byte and returns connection_lost on NACK/timeout; buffer untouched or partially filled."
+    },
+    {
+      "name": "0.2.28 vs 0.3.0 getTouchRaw() body comparison",
+      "status": "PASS",
+      "details": "Identical function body; 0.2.28 uses Touch_ST7123.cpp, master uses Touch_ST7123.inl."
+    },
+    {
+      "name": "host reproduction: report read fails with untouched buffer",
+      "status": "PASS",
+      "details": "master returns 5 phantom touches (id=0 x=16383 y=65535 size=255); proposed patch returns 0."
+    },
+    {
+      "name": "host reproduction: report read fails after 3 bytes",
+      "status": "PASS",
+      "details": "master returns 4 phantom touches (first at id=1); proposed patch returns 0."
+    },
+    {
+      "name": "host reproduction: no failure / adv_info failure / max_touches failure",
+      "status": "PASS",
+      "details": "Both master and patched versions return 0, matching the reporter's results."
+    },
+    {
+      "name": "host check of _read_fw_info() failure return",
+      "status": "PASS",
+      "details": "All three reads fail -> returns 1, so init() reports success with no responding chip."
+    },
+    {
+      "name": "physical Tab5 I2C fault injection / soak",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "virtual-device reproduction in esp-emulator/QEMU",
+      "status": "NOT RUN",
+      "details": "No ST7123 controller-level model; forcing one read failure not attempted."
+    },
+    {
+      "name": "full M5GFX/firmware build and panel regression with the patch",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "effect of the patch on the #418 ghost contacts",
+      "status": "NOT RUN",
+      "details": "Reporter states the two issues are independent; not evaluated here."
+    }
+  ],
+  "evidence": [
+    {
+      "file": "README.md",
+      "bytes": 3195,
+      "sha256": "39f7e43a5069a5ebc44f122caf490b4588d0efb108265866fe5179809e7f9ccc"
+    },
+    {
+      "file": "report.md",
+      "bytes": 6558,
+      "sha256": "f1c31fdba959a18900b2950ed87664705ccb3804ddb65ac4f6d6efcdb1c9509f"
+    },
+    {
+      "file": "code/README.md",
+      "bytes": 1060,
+      "sha256": "e245f07cc5c59ce442a892d8f2ca427eea84787f1b8d57e1263e2b649503c540"
+    },
+    {
+      "file": "code/get_touchraw_check.cpp",
+      "bytes": 5304,
+      "sha256": "3901c9dae0c29ec6562506e32527a081a968c7b7c3ead841a2b2d2b24d1373a0"
+    },
+    {
+      "file": "code/fw_info_check.cpp",
+      "bytes": 1437,
+      "sha256": "31505f7d4c9a1a0134574411345c214d9467208f01b3040042623c200464fc27"
+    },
+    {
+      "file": "evidence/get-touchraw-output.txt",
+      "bytes": 754,
+      "sha256": "2ecfb727866e4d52c1601c6d4f596c9222bbd9c1f068d351cb35d2d08ef5e5d4"
+    },
+    {
+      "file": "evidence/fw-info-output.txt",
+      "bytes": 146,
+      "sha256": "5252796e0c756b0c012fb32565199064d71d4834ee798e3d8dac4d75f5c8db5c"
+    },
+    {
+      "file": "evidence/source-pins.json",
+      "bytes": 1212,
+      "sha256": "8fc68b4c40731d9a487691f9e697dac232d64df45bdc8e32964b272be1f68d62"
+    }
+  ],
+  "notes": [
+    "Read-only review: no M5GFX change, no push to the upstream repository, no issue close.",
+    "Host reproduction is code-level verification, not device validation.",
+    "Phantom coordinates depend on stack contents; only the 'uninitialised data is parsed' conclusion is portable."
+  ]
+}
