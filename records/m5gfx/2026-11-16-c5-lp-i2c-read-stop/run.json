@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "ESP32-C5 LP_I2C read-terminated transactions miss STOP (M5GFX #421 correction review)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/421",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "b48dce0"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS local; no ESP32-C5 hardware; virtual-device profiles up to ESP32-C6; QEMU without LP_I2C/ST25R3916 model",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "code-facts",
+      "status": "REVIEW",
+      "detail": "common.inl:1847-1882, 1984-1998, 1580-1592, 2258-2277 at b48dce0"
+    },
+    {
+      "id": "patch-applies-to-b48dce0",
+      "status": "FAIL",
+      "detail": "hunk 4 mismatches after comment translation 40928dd; hunks 1-3 apply with 102-line offset"
+    },
+    {
+      "id": "patch-applies-to-6f81929",
+      "status": "PASS",
+      "detail": "author's stated base"
+    },
+    {
+      "id": "c5-lp-iomux-entry",
+      "status": "PASS",
+      "detail": "IDF v5.5 esp32c5 i2c_periph.c provides i2c_periph_signal[1].iomux_func = 3"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 device"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "no C5 profile, no LP_I2C model"
+    }
+  ],
+  "evidence": [
+    "evidence/apply-check.txt",
+    "evidence/source-lines.txt",
+    "evidence/idf-c5-i2c-periph.txt",
+    "evidence/esp32c5-soc_caps.h",
+    "evidence/reporter-correction.md",
+    "evidence/reply.md"
+  ],
+  "notes": [
+    "Reply posted as a single comment; issue left OPEN and no repository changes were made.",
+    "Record committed locally only; not pushed, per the task instruction."
+  ]
+}

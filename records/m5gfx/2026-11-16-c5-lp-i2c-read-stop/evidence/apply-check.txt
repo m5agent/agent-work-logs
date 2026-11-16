@@ -1,0 +1,23 @@
+$ git apply --check -v /tmp/c421.patch   # base: develop b48dce0
+正在检查补丁 src/lgfx/v1/platforms/esp32/common.inl...
+块 #1 成功应用于 1844（偏移 102 行）
+块 #2 成功应用于 1876（偏移 102 行）
+块 #3 成功应用于 1913（偏移 102 行）
+错误：在搜索：
+
+      if (flg_stop || res.has_error())
+      {
+#if LGFX_I2C_REG_LAYOUT == 3
+// エラー発生後はペリフェラルが強制停止済みの場合があり、通常のSTOPコマンド発行では完了割り込みが来ずタイムアウトまで待たされるため強制STOP側へ分岐する;
+        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect_int_raw)
+#else
+        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect)
+#endif
+        { // force stop
+          // state が既にエラーの場合はエラー検出箇所で停止済みのため再停止しない (res のエラーはこの呼び出しで検出されたもので未停止);
+
+错误：打补丁失败：src/lgfx/v1/platforms/esp32/common.inl:1879
+错误：src/lgfx/v1/platforms/esp32/common.inl：补丁未应用
+
+$ git apply --check -v /tmp/c421.patch   # base: 6f81929
+正在检查补丁 src/lgfx/v1/platforms/esp32/common.inl...

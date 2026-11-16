@@ -1,0 +1,10 @@
+ESP-IDF v5.5 components/soc/esp32c5/i2c_periph.c (excerpt)
+https://raw.githubusercontent.com/espressif/esp-idf/release/v5.5/components/soc/esp32c5/i2c_periph.c
+
+#define LP_I2C_MUX_FUNC  (3)
+const i2c_signal_conn_t i2c_periph_signal[SOC_I2C_NUM] = {
+    /* LP_I2C_NUM_0*/
+    {
+        .sda_out_sig = 0, ... .iomux_func = LP_I2C_MUX_FUNC, .irq = ETS_LP_I2C_INTR_SOURCE,
+    },
+};

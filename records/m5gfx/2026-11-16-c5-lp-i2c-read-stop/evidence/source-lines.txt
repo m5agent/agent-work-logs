@@ -1,0 +1,93 @@
+# M5GFX develop b48dce0 source excerpts
+
+## i2c_stop (line 1847-1882)
+    static void i2c_stop(int i2c_port)
+    {
+      static constexpr int I2C_CLR_BUS_HALF_PERIOD_US = 2;
+      static constexpr int I2C_CLR_BUS_SCL_NUM        = 9;
+
+      gpio_num_t sda_io = i2c_context[i2c_port].pin_sda;
+      gpio_num_t scl_io = i2c_context[i2c_port].pin_scl;
+      gpio::pin_backup_t backup_pins[] = { sda_io, scl_io };
+
+      gpio_set_level(sda_io, 1);
+      gpio_set_direction(sda_io, GPIO_MODE_INPUT_OUTPUT_OD);
+
+      gpio_set_level(scl_io, 1);
+      gpio_set_direction(scl_io, GPIO_MODE_OUTPUT_OD);
+      delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+
+      // SDAがHIGHになるまでSTOP送出を繰り返す。;
+      int i = 0;
+      do
+      {
+        gpio_set_level(scl_io, 0);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(sda_io, 0);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(scl_io, 1);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(sda_io, 1);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+      } while (!gpio_get_level(sda_io) && (i++ < I2C_CLR_BUS_SCL_NUM));
+
+#if !defined (CONFIG_IDF_TARGET_ESP32C2) && !defined (CONFIG_IDF_TARGET_ESP32C3)
+/// ESP32C3で periph_module_reset を使用すると以後通信不能になる問題が起きたため分岐;
+      i2c_periph_reset(i2c_port);
+#endif
+      for (auto &bup : backup_pins) { bup.restore(); }
+    }
+
+## i2c_wait forced-stop branch (1984-1998)
+      {
+        // After an error the peripheral may already be force-stopped; a normal STOP command then
+        // never raises the completion interrupt and waits until the timeout, so take the force-stop path
+#if LGFX_I2C_REG_LAYOUT == 3
+        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect_int_raw)
+#else
+        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect)
+#endif
+        { // force stop
+          // If state already holds an error, the bus was stopped where it was detected; do not stop
+          // again (an error in res was detected in this call and is not stopped yet)
+          if (!hw_stopped && (res.has_error() || !i2c_context[i2c_port].state.has_error()))
+          {
+            i2c_stop(i2c_port);
+          }
+
+## i2c_periph_reset LP branch (1580-1592)
+    static void i2c_periph_reset(int i2c_num)
+    {
+#if LGFX_LP_I2C_NUM > 0
+      if (isLpPort(i2c_num))
+      { // The HP i2c_ll_reset_register() indexes the PCR I2C array by port number on some SoCs
+        // (e.g. ESP32-C5), which is out of range for the LP port, so use the LP-specific function
+        LGFX_RCC_NO_ATOMIC() {
+          lp_i2c_ll_reset_register(i2c_num - LGFX_HP_I2C_NUM);
+          (void)__DECLARE_RCC_ATOMIC_ENV;
+        }
+        return;
+      }
+#endif
+
+## init LP latch preset (2258-2277)
+      if (isLpPort(i2c_port))
+      {
+ #if SOC_RTCIO_INPUT_OUTPUT_SUPPORTED
+        // The driver enables the open-drain output before it hands the pad to the peripheral, so
+        // a low output latch (the reset default) pulls SDA low for a few microseconds. On the bus
+        // that is a START + STOP without an address, after which some MCU based slaves do not
+        // answer for about 0.6 ms. Raise the latches first, in open-drain mode so that SDA is not
+        // driven high. rtc_gpio_init() turns on the LP IO clock these registers need; SCL takes it
+        // because SDA must not become LP IO until they are set. A low on SCL alone is harmless.
+        const bool lp_pads = rtc_gpio_is_valid_gpio(pin_sda) && rtc_gpio_is_valid_gpio(pin_scl);
+        if (lp_pads)
+        {
+          rtc_gpio_init(pin_scl);
+          rtc_gpio_set_direction(pin_sda, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+          rtc_gpio_set_direction(pin_scl, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+          rtc_gpio_set_level(pin_sda, 1);
+          rtc_gpio_set_level(pin_scl, 1);
+          rtc_gpio_init(pin_sda);
+        }
+ #endif
