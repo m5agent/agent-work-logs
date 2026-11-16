@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](records/m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
 | 2026-11-17 | M5GFX / ToughC5 | #424 `release_held_sda()` 多比特保持 SDA 与 STOP 成立 | `PARTIAL`（host-level 模型复现旧代码 3 パルス失败、提案补丁 2 パルス通过；实机/虚拟设备 NOT RUN；9→10 パルス边界） | [查看](records/m5gfx/2026-11-17-issue424-held-sda-stop/) |
 | 2026-11-16 | ESP Emulator | 审核链路保存快照回归 | `PASS`（4 例原版隔离复审，保留覆盖缺口） | [查看](records/esp-emulator/2026-11-16-review-lane-regression/) |
 | 2026-11-16 | ESP Emulator / Cardputer | #229 / #230 原版缓存启动与板型探测 | `PASS`（原版启动及按键、70/70 原生矩阵；物理与 WASM 未执行） | [查看](records/esp-emulator/2026-11-16-cardputer-cache-board-detection/) |

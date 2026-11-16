@@ -1,0 +1,27 @@
+# IDF v6.1.1 DAC driver usage (authoritative replacement)
+## components/esp_driver_dac/esp32/dac_dma.c
+152:    dac_ll_dma_clk_inv(true);
+193:        dac_ll_dma_clk_inv(false);
+
+## components/esp_driver_dac/dac_common.c: data source + power + ADC sync
+76:        dac_ll_pad_set_data_source(chan_id, source);
+77:        dac_ll_sync_by_adc(false);
+78:        dac_ll_pad_power_on(chan_id);
+95:        dac_ll_pad_power_down(chan_id);
+
+## data source per driver
+components/esp_driver_dac/dac_oneshot.c:33:    ESP_GOTO_ON_ERROR(dac_priv_channel_enable(oneshot_cfg->chan_id, DAC_DATA_SOURCE_DIRECT), err1, TAG, "enable dac channel %d failed", oneshot_cfg->chan_id);
+components/esp_driver_dac/dac_continuous.c:381:        dac_priv_channel_enable(chan, DAC_DATA_SOURCE_DMA);
+components/esp_driver_dac/dac_cosine.c:137:    ESP_GOTO_ON_ERROR(dac_priv_channel_enable(handle->cfg.chan_id, DAC_DATA_SOURCE_COSINE), err,
+
+## dac_data_source_t (components/esp_hal_ana_conv/include/hal/dac_types_private.h)
+ *       - ESP32/ESP32-S2: cosine generator, DMA, and direct register output are three separate states.
+ *       - ESP32-S31: the Sintx path serves both the cosine generator and the direct software output.
+ */
+typedef enum {
+    DAC_DATA_SOURCE_COSINE = 0,  /*!< Channel output driven by the on-chip cosine wave generator (Sintx) */
+    DAC_DATA_SOURCE_DMA    = 1,  /*!< Channel output driven by the digital DMA path */
+    DAC_DATA_SOURCE_DIRECT = 2,  /*!< Channel output driven by the direct register value */
+} dac_data_source_t;
+
+#endif // SOC_DAC_SUPPORTED

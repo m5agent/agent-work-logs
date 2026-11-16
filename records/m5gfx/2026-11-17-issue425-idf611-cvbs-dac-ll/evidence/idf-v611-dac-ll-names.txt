@@ -1,0 +1,34 @@
+# ESP-IDF components/esp_hal_ana_conv/esp32/include/hal/dac_ll.h
+# tag v6.1 (old names still present)
+36:static inline void dac_ll_power_on(dac_channel_t channel)
+47:static inline void dac_ll_power_down(dac_channel_t channel)
+79:static inline void dac_ll_rtc_sync_by_adc(bool enable)
+195:static inline void dac_ll_digi_enable_dma(bool enable)
+
+# tag v6.1 (old dac_ll_digi_enable_dma body)
+/**
+ * Enable/disable DAC output data from I2S DMA.
+ * I2S_CLK connect to DAC_CLK, I2S_DATA_OUT connect to DAC_DATA.
+ */
+static inline void dac_ll_digi_enable_dma(bool enable)
+{
+    SENS.sar_dac_ctrl1.dac_dig_force = enable;
+    SENS.sar_dac_ctrl1.dac_clk_inv = enable;
+}
+
+
+# tag v6.1.1 (renamed / split functions)
+36:static inline void dac_ll_pad_power_on(dac_channel_t channel)
+47:static inline void dac_ll_pad_power_down(dac_channel_t channel)
+62:static inline void dac_ll_pad_set_data_source(dac_channel_t channel, dac_data_source_t source)
+101:static inline void dac_ll_sync_by_adc(bool enable)
+197:static inline void dac_ll_dma_clk_inv(bool enable)
+
+# tag v6.1.1: no declaration of dac_ll_digi_enable_dma
+0
+
+# master (2026-11-17 fetch): same new names
+38:static inline void dac_ll_pad_power_on(dac_channel_t channel)
+64:static inline void dac_ll_pad_set_data_source(dac_channel_t channel, dac_data_source_t source)
+103:static inline void dac_ll_sync_by_adc(bool enable)
+199:static inline void dac_ll_dma_clk_inv(bool enable)

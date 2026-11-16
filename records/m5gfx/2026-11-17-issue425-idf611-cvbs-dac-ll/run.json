@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "M5GFX #425: Panel_CVBS does not compile for esp32 on ESP-IDF v6.1.1 (DAC LL renames)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/425",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "b48dce04c80d3e3c9874b7ba946c43d672129c28",
+    "head_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 host; Docker image espressif/idf:v6.1.1 (linux/arm64); IDF_INIT_VERSION 6.1.1; xtensa-esp32-elf-g++ 15.2.0; -std=gnu++26; minimal ESP-IDF app with M5GFX as a component; target esp32",
+    "task_id": "eea11750e4a2 (unpatched build), 423e3e7b882a (patched build)",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "reproduce-unpatched-build",
+      "status": "FAIL",
+      "detail": "idf.py build with espressif/idf:v6.1.1 for esp32 fails compiling lgfx_v1_platforms.cpp: 5 errors for dac_ll_digi_enable_dma, dac_ll_power_down, dac_ll_power_on, dac_ll_rtc_sync_by_adc at Panel_CVBS.inl:1976,1978,2037,2039,2040 on b48dce0"
+    },
+    {
+      "id": "error-set-matches-report",
+      "status": "PASS",
+      "detail": "same five call sites and the same suggested replacements as the issue; line offsets differ because the report cites 0.2.36"
+    },
+    {
+      "id": "idf-api-facts",
+      "status": "PASS",
+      "detail": "v6.1 dac_ll.h declares dac_ll_power_on/power_down/rtc_sync_by_adc/digi_enable_dma; v6.1.1 declares dac_ll_pad_power_on/pad_power_down/pad_set_data_source/sync_by_adc/dma_clk_inv and no digi_enable_dma; IDF master has the same new names"
+    },
+    {
+      "id": "old-digi-enable-dma-semantics",
+      "status": "PASS",
+      "detail": "v6.1 dac_ll_digi_enable_dma writes dac_dig_force and dac_clk_inv; v6.1.1 dac_common.c sets the data source and dac_dma.c calls dac_ll_dma_clk_inv, confirming the split"
+    },
+    {
+      "id": "patch-applies-to-base",
+      "status": "PASS",
+      "detail": "0001-panel-cvbs-idf611-dac-ll.patch passes git apply --check on b48dce04c80d3e3c9874b7ba946c43d672129c28"
+    },
+    {
+      "id": "patched-build",
+      "status": "PASS",
+      "detail": "same 1057-step build completes; m5gfx425.bin 312304 bytes, sha256 553a7476027b1221092685286a9787d738c8cce535873465ed593711bf0ac03f"
+    },
+    {
+      "id": "ci-coverage",
+      "status": "REVIEW",
+      "detail": "IDFBuild.yml matrix covers esp32 only up to IDF 6.0.2; no 6.1.x job, so green CI does not exercise this path"
+    },
+    {
+      "id": "cvbs-runtime",
+      "status": "NOT RUN",
+      "detail": "no hardware and no DAC/CVBS model; patch only proves the translation unit compiles and links"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no esp32 board flashed or measured with composite video capture"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "Device Service esp32 profiles and esp-emulator have no ESP32 DAC/CVBS peripheral model; compile-time failure also blocks a runtime path before the fix"
+    },
+    {
+      "id": "older-idf-regression-build",
+      "status": "NOT RUN",
+      "detail": "the < 6.1.1 branch keeps the original calls byte-for-byte; 6.1 and 6.0.2 were not rebuilt"
+    },
+    {
+      "id": "arduino-esp32-build",
+      "status": "NOT RUN",
+      "detail": "only the ESP-IDF component build was tested"
+    }
+  ],
+  "evidence": [
+    "evidence/issue-425.json",
+    "evidence/build-unpatched-errors.txt",
+    "evidence/build-unpatched-fail-idf611-esp32.log",
+    "evidence/build-patched-pass-idf611-esp32.log",
+    "evidence/build-artifact.txt",
+    "evidence/idf-v611-dac-ll-names.txt",
+    "evidence/idf-dac-driver-mapping.txt",
+    "evidence/m5gfx-cvbs-source-refs.txt",
+    "evidence/m5gfx-ci-matrix.txt",
+    "evidence/patch-apply-check.txt",
+    "patches/0001-panel-cvbs-idf611-dac-ll.patch",
+    "code/"
+  ],
+  "notes": [
+    "Issue left OPEN; one English comment posted; no upstream code change, no push.",
+    "The fix uses ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(6,1,1) and keeps the original calls below that boundary.",
+    "CVBS output correctness after the API mapping is not verified; only compilation and linking are."
+  ]
+}

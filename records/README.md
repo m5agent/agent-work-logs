@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
 | 2026-11-16 | ESP Emulator | 审核链路保存快照回归 | `PASS`（4 例原版隔离复审，保留覆盖缺口） | [查看](esp-emulator/2026-11-16-review-lane-regression/) |
 | 2026-11-16 | ESP Emulator / Cardputer | #229 / #230 原版缓存启动与板型探测 | `PASS`（原版启动及按键、70/70 原生矩阵；物理与 WASM 未执行） | [查看](esp-emulator/2026-11-16-cardputer-cache-board-detection/) |
 | 2026-11-16 | ESP Emulator / StickC-Plus2 | #228 ESP32 合并镜像引导偏移校验 | `PASS`（原版 ROM 失败复现、提前拒绝和 E_STATIC；官方固件进入 Cloud 画面） | [查看](esp-emulator/2026-11-16-esp32-bootloader-offset/) |

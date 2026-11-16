@@ -1,0 +1,38 @@
+# m5stack/M5GFX: Panel_CVBS.inl DAC LL call sites
+## origin/develop b48dce04c80d3e3c9874b7ba946c43d672129c28
+1976:      dac_ll_digi_enable_dma(false);
+1978:      dac_ll_power_down(ch);
+2037:        dac_ll_power_on(channel);
+2039:      dac_ll_rtc_sync_by_adc(false);
+2040:      dac_ll_digi_enable_dma(true);
+
+## origin/master (0.3.0)
+1976:      dac_ll_digi_enable_dma(false);
+1978:      dac_ll_power_down(ch);
+2037:        dac_ll_power_on(channel);
+2039:      dac_ll_rtc_sync_by_adc(false);
+2040:      dac_ll_digi_enable_dma(true);
+
+## include site and guard
+12:#include "platforms/esp32/Panel_CVBS.inl"
+#error "Panel_CVBS.inl is part of lgfx_v1.cpp and is not meant to be included on its own"
+#endif
+#if defined (ESP_PLATFORM)
+#include <sdkconfig.h>
+#if !defined (CONFIG_IDF_TARGET) || defined (CONFIG_IDF_TARGET_ESP32)
+
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <esp_types.h>
+#include <esp_log.h>
+#include <soc/rtc.h>
+#include <soc/periph_defs.h>
+#include <soc/i2s_struct.h>
+
+#if __has_include(<esp_rom_lldesc.h>)
+ #include <esp_rom_lldesc.h>
+#elif __has_include(<esp32/rom/lldesc.h>)
+ #include <esp32/rom/lldesc.h>
+#else
+ #include <rom/lldesc.h>
+#endif
