@@ -309,3 +309,19 @@ ST7123）复核 #367 上拉态是否都黑——若都黑，合并态的显示�
 `code-level verification`；物理 Tab5 `NOT RUN`；虚拟设备 `NOT RUN`——Device Service 的
 Tab5 profile 仍 `tab5_enabled:false`、`qom`/`device_state` 为 false，ST7123 触摸是固件
 GDB 邮箱，无 0x43 扩展器与 reset 线模型，`adv_info`/`0x43`/引脚状态无法采样。
+
+## 追加：重启前按压为 0，报告延迟分支关闭（2026-11-16，第八轮）
+
+报告者确认重启前的多次按压在上拉黑屏构建上同样为 0 次按下、0 帧（逐次日志开着），
+重启后 24–31 s 登记的 6 次是当时逐条记录的新按压。因此我上一轮提出的另一分支
+"触摸核在扫描、主机在驱动恢复后才补报"不再成立：上拉态没有缓存任何坐标。
+
+同时收窄我自己的措辞：`getTouchRaw()` 读取成功而 `with_coord` 未置位，只能说明
+"没有坐标上报"，不能说明"核停止扫描"。上拉态的准确描述是显示灭、数字核在应答
+（I2C 有应答、`0x08` 保持）、无坐标上报、扫描状态未证实 —— 第七轮"扫描与显示停"
+中的"扫描停"降级为"未证实"。这不改变鬼点结论：对手指都不报坐标的面板不能当过滤器。
+
+门禁按其定义采用，但两半独立失败：未看屏为 `panel state unknown`，看屏而无手指为
+`touch path unknown`；二者不能合并。
+
+细节见 [evidence/followup-pre-restart-presses.md](evidence/followup-pre-restart-presses.md)。

@@ -124,3 +124,19 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
 
 第七轮回复：[issuecomment-6918409539](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918409539)
 （英文，单条；issue 保持开启，未推送上游）。
+
+## 追加：重启前按压为 0，报告延迟分支关闭（2026-11-16，第八轮）
+
+报告者补充：上拉黑屏构建上，重启**前**的多次按压即为 0 次按下、0 帧（逐次日志开着），
+重启后登记的 6 次是 24–31 s 后的新按压，不是补报。
+
+- **报告延迟分支关闭**：不存在“上拉态缓存、驱动恢复后补报”；上拉行只能读作“没有坐标
+  上报”。上一轮保留的 host-reporting-failure 分支撤回。
+- **“扫描停”降级为“未证实”**：failed-read = 0 且 `with_coord` 未置位，只证明没有坐标
+  上报；结合 A2/B3 的 I2C 应答与 `0x08` 保持，上拉态是“显示灭、数字核在应答、无坐标、
+  扫描状态未证实”。
+- **门禁两半独立**：未看屏 → `panel state unknown`；看屏无手指 → `touch path unknown`。
+
+证据：[evidence/followup-pre-restart-presses.md](evidence/followup-pre-restart-presses.md)。
+证据等级仍是 `hardware validation`（单台）+ 本记录 `code-level`；物理 Tab5 与虚拟设备
+`NOT RUN`。
