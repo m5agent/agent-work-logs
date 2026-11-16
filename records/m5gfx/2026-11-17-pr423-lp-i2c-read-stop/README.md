@@ -48,7 +48,8 @@ LP 端口焊盘由 LP IO 域接管（`:2278-2300`，且 `beginTransaction()` 对
 - 硬件清单（脱敏）：`evidence/hardware-inventory.md`（无 ESP32-C5）。
 - 虚拟设备边界：`evidence/virtual-device-check.md`（C6 的 LP 域 RTC I2C 是 all-ones 桩，
   LP I2C 控制器未建模；无 C5 profile、无 ST25R3916）。
-- 已发布回复：`evidence/reply.md`。
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/423#issuecomment-6922062344>（1 条，PR 保持 OPEN）
+- 回复原文：`evidence/reply.md`。
 
 ## 文件
 

@@ -86,4 +86,4 @@ Arduino-ESP32 工具链，因此 hardware validation、virtual-device validation
 
 - 2026-11-16：#421 订正复核，确认根因与代码一致，要求在最新 `develop` 上重做并走 PR。
 - 2026-11-17 00:07（CST）：作者提交 PR #423（head `cc60eaa`）。
-- 2026-11-17：本条代码层评审；发布一条日文评审回复。
+- 2026-11-17：本条代码层评审；发布一条日文评审回复 <https://github.com/m5stack/M5GFX/pull/423#issuecomment-6922062344>。PR 保持 OPEN，未关闭、未 push 上游。
