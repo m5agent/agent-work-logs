@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Cardputer original firmware startup and GPIO board detection",
+  "source": {
+    "issues": [
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/229",
+      "https://github.com/m5agent/m5stack-esp-emulator/issues/230"
+    ],
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/232",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "72002a8b895e8052a025c7081cc2a3700c270c94",
+    "executed_commit": "f2f26604a5e8c8df898aa5ba2354364e6f1911d5",
+    "reviewed_head": "242a8c069101eb605b5aa00553408bbdcef70949"
+  },
+  "hardware": {},
+  "firmware": {
+    "input_records": "evidence/combined-targeted-summary.json",
+    "preserved_uploaded_application": true
+  },
+  "execution": {
+    "environment": "macOS arm64 native Device Service and isolated QEMU regression runner",
+    "validation": "virtual-device validation",
+    "runtime_xtensa_sha256": "06db397cbe804e9eb13390d797cd67ca33ce5f29048fe7a56342cb66f4d2f9e0",
+    "runtime_c6_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4"
+  },
+  "checks": [
+    {
+      "case": "original M5Apps startup and wake with and without SPI trace",
+      "status": "PASS"
+    },
+    {
+      "case": "four original Cardputer framework images with keyboard input",
+      "status": "PASS"
+    },
+    {
+      "case": "cache and panel controller checks",
+      "status": "PASS"
+    },
+    {
+      "case": "70 native guest cases and cleanup",
+      "status": "PASS"
+    },
+    {
+      "case": "platform tests and exact PR head CI",
+      "status": "PASS"
+    },
+    {
+      "case": "physical devices, arbitrary storage/network/audio features and browser WASM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/board-stage-summary.json",
+    "evidence/cache-stage-summary.json",
+    "evidence/combined-build-summary.json",
+    "evidence/combined-targeted-summary.json",
+    "evidence/matrix-cases-1.json",
+    "evidence/matrix-cases-2.json",
+    "evidence/matrix-summary.json",
+    "evidence/platform-suite-summary.json",
+    "evidence/pr-ci-summary.json",
+    "evidence/visual-review-summary.json"
+  ],
+  "notes": [
+    "First baseline failures and rejected intermediate approaches remain retained.",
+    "Firmware submissions were disabled."
+  ]
+}
