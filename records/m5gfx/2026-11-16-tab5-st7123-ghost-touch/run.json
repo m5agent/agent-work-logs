@@ -70,18 +70,47 @@
       "name": "upstream comment",
       "status": "PASS",
       "details": "Posted one English comment at https://github.com/m5stack/M5GFX/issues/418#issuecomment-6904885353; issue left open, no code pushed."
+    },
+    {
+      "name": "protocol §6.6 With Coord clear condition extraction",
+      "status": "PASS",
+      "details": "ST7123 TDDI Interface Protocol V01.11 p.18-19: reading the last register of the last supported coordinate clears INT and the With Coord bit."
+    },
+    {
+      "name": "ack address coverage in both read modes (10 touches -> 0x0059)",
+      "status": "PASS",
+      "details": "stock: 70 B from 0x0014; single: 74 B from 0x0010; both end at 0x0059."
+    },
+    {
+      "name": "With Coord cleared after a burst on device",
+      "status": "REVIEW",
+      "details": "Author measured adv_info=0x08 after 10/10 bursts in both read modes while INT cleared; conflicts with §6.6c; device-side measurement, not reproduced here."
+    },
+    {
+      "name": "two consecutive ghost frames are separate controller frames",
+      "status": "REVIEW",
+      "details": "Author measured INT high-then-low between frames in 7/7 cases; bytes differed in 5/7; excludes re-serve and torn reads."
+    },
+    {
+      "name": "real-touch raw table near x=0 / x=719",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "adv_info after 10 s idle",
+      "status": "NOT RUN",
+      "details": "Would separate a per-frame status byte from a latch that never clears."
     }
   ],
   "evidence": [
     {
       "file": "README.md",
-      "bytes": 3050,
-      "sha256": "a240e0698a7888035490e3e4b76c8e1d8c3d1a1f9a3baaf4e9e622261ab708c0"
+      "bytes": 4923,
+      "sha256": "92408974ca9dac589b966a2d7e1e968f0e16590a18be0529df49b19f477bd1f0"
     },
     {
       "file": "report.md",
-      "bytes": 6017,
-      "sha256": "60ea4f9fae71f6be2dd289fd1034046008d65cc7e92437a9879122250b6ae6d9"
+      "bytes": 10160,
+      "sha256": "184471968964fcf7adb29ac426f1e640d1ce000d33af7669de6917d1d42ba39e"
     },
     {
       "file": "code/README.md",
@@ -102,11 +131,26 @@
       "file": "evidence/source-pins.json",
       "bytes": 3037,
       "sha256": "351962d6fff92f55c7cf9e1bd3a9e71af430a0d4eddcb4da7bea9620b5b66d29"
+    },
+    {
+      "file": "evidence/followup-int-trace.md",
+      "bytes": 5670,
+      "sha256": "172e213541257d669da07be7c3d672b86a4969561a73789a8096fd7eca84001e"
     }
   ],
   "notes": [
     "Read-only review: no M5GFX/M5Unified change, no push to the upstream repository, no issue close.",
     "Host parse results are not device validation.",
-    "The reporter's ghost statistics are quoted as their measurements, not reproduced here."
+    "The reporter's ghost statistics are quoted as their measurements, not reproduced here.",
+    "Round 2 adds the author's INT/frame trace and a protocol §6.6 cross-check; no hardware or virtual-device run here."
+  ],
+  "followups": [
+    {
+      "date": "2026-11-16",
+      "round": 2,
+      "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6907904668",
+      "summary": "作者补充逐帧 INT 电平、两种读取模式的 burst 原始帧与 burst 后 adv_info；结合协议 §6.6 复核后，排除重复供给与跨帧撕裂，修正 with_coord 判据，并把鬼点几何由“同一行”改为“两端钳位”。",
+      "evidence": "evidence/followup-int-trace.md"
+    }
   ]
 }
