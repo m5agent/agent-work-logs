@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer 运行时板型探测回退与近两日审核归因",
+  "source": {
+    "issue": "#230",
+    "pull_request": "",
+    "repository": "m5stack-esp-emulator",
+    "base_commit": "55e5763e"
+  },
+  "hardware": {},
+  "firmware": {
+    "cardputer_board_detect": [
+      {
+        "name": "Tiny Journal",
+        "version": "2026.11.14",
+        "device": "Cardputer",
+        "sha256": "b02460c9af14e499fe12c3018ff72740bbbeaaf362e7c51697d09e480824d707",
+        "size": 8388608,
+        "job_id": "job-9a0f60dda4ff"
+      },
+      {
+        "name": "MacroCard",
+        "version": "1.0.0",
+        "device": "Cardputer",
+        "sha256": "f1732ab34f26b2341ed554aa2d0e8f996c014087c7e5dd2b651799bcfcde555b",
+        "size": 2994976,
+        "job_id": "job-f5223ad43b5a"
+      },
+      {
+        "name": "Cardputer ADV Frequency and Noise Generator",
+        "version": "1.0",
+        "device": "Cardputer-ADV",
+        "sha256": "2ac8d0133c8bd75c8c3345e3aadca6f4d605b149f0a38549c93b1225286c1d32",
+        "size": 998640,
+        "job_id": "job-df141384a2fd"
+      },
+      {
+        "name": "CapLab: Sub-GHz + NFC Lab for Cardputer ADV",
+        "version": "1.5.1",
+        "device": "Cardputer-ADV",
+        "sha256": "f02a6c47fd436f619f4394aa3b4b3df7c79fb5168636a357e2c8e584b0423c4f",
+        "size": 1318080,
+        "job_id": "job-931f111cfb84"
+      }
+    ],
+    "other_reviewed": [
+      {
+        "name": "M5Apps",
+        "version": "2.7",
+        "device": "Cardputer",
+        "sha256": "04a87f9352ad402ede9a7f683ccd657dc6b2ff7339aa9b0895fe69f01c47348f",
+        "job_id": "job-8c513345cd22",
+        "existing_issue": "#229"
+      },
+      {
+        "name": "carPlay-Tab5",
+        "version": "1.0.0",
+        "device": "Tab5",
+        "job_id": "job-d67b8ae597f2",
+        "existing_issue": "#227"
+      },
+      {
+        "name": "M5TabOS",
+        "version": "0.9.1",
+        "device": "Tab5",
+        "sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+        "job_id": "job-bdb3209e5d3a"
+      }
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; esp-emu 0.50.0 native QEMU (ESP32-S3 / ESP32-P4); review service read-only attribution; no physical hardware",
+    "task_id": "review batch 2026-11-14T00:00+08:00..2026-11-16T09:20+08:00",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "review batch inventory",
+      "status": "PASS",
+      "detail": "42 jobs in window: 12 SIM_VERIFIED, 3 static FAIL, 27 SIM_PARTIAL"
+    },
+    {
+      "name": "Cardputer runtime board detection",
+      "status": "FAIL",
+      "detail": "4 firmwares print Unsupported board type: 136 and produce 174-byte black frames for 60 s"
+    },
+    {
+      "name": "issue #230 filed",
+      "status": "PASS",
+      "detail": "virtual-device + code-level evidence; physical Cardputer NOT RUN"
+    },
+    {
+      "name": "Tab5 screenshot evidence",
+      "status": "PARTIAL",
+      "detail": "HTTP 409 screenshot_requires_matching_elf reproduced; 5 jobs blocked by BIN-only evidence path"
+    },
+    {
+      "name": "device map coverage",
+      "status": "FAIL",
+      "detail": "ATOM_S3, PAPER_S3, PAPER_DIY missing from DEVICE_MAP while atoms3, papers3, paperdiy profiles are creatable"
+    },
+    {
+      "name": "network review path",
+      "status": "PARTIAL",
+      "detail": "Stopwatch generic network profile not selected; Cardputer profile has no network feature"
+    },
+    {
+      "name": "external fixtures",
+      "status": "NOT RUN",
+      "detail": "ZILLASTICK CC1101 RF Pack and vinylM5Dial Unit AudioPlayer not attached; no simulator defect attributed"
+    },
+    {
+      "name": "M5TabOS Tab5 crash loop",
+      "status": "PARTIAL",
+      "detail": "E_SIM_MODEL_GAP; 6 reboots after SPI SRAM test; no single model evidence, no new issue"
+    },
+    {
+      "name": "physical Cardputer / Tab5",
+      "status": "NOT RUN",
+      "detail": "out of scope for this read-only virtual-device attribution"
+    }
+  ],
+  "evidence": [
+    "evidence/attribution-summary.json",
+    "evidence/cardputer-serial-frames.json"
+  ],
+  "notes": [
+    "No simulator code or review-service code changed; no push; no issue closed.",
+    "M5Apps (#229) and carPlay-Tab5 (#227) were already filed before this record.",
+    "The Cardputer issue #230 covers 4 independent firmwares on Cardputer and Cardputer-ADV.",
+    "The review-service map/Tab5-ELF/network findings are service-side follow-ups, not simulator issues."
+  ]
+}

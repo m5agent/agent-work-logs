@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-16 | ESP Emulator | Cardputer 运行时板型探测回退与两日审核归因 | `PARTIAL`（4 条板型缺陷开 #230；其余多为服务/取证问题） | [查看](records/m5stack-esp-emulator/2026-11-16-cardputer-runtime-board-detect/) |
 | 2026-11-14 | ESP Emulator | Pages 发布与实际 HTTPS 两例 | `PASS`（2179文件、HTTPS83项及文档main CI；旧hosted全门边界保留） | [查看](records/esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-pages-delivery/) |
 | 2026-11-14 | ESP Emulator | Pages 完整本地资格与精确包 | `PASS`（本地72/72、2993项及2179文件闭集；发布/HTTPS NOT RUN） | [查看](records/esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-pages-qualification/) |
 | 2026-11-14 | ESP Emulator / Tab5 | esp-emu v1.0.0 两份原版固件复测 | `FAIL`（两原版均卡在旧 P4 CSR；执行与清理通过，USB 未到达） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/) |
