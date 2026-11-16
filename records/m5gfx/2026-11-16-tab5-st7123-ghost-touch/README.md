@@ -109,3 +109,15 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
 第六轮回复：[issuecomment-6918168398](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918168398)
 （英文，单条；issue 保持开启）。证据等级 `code-level verification` + 报告者测量；
 物理与虚拟设备 `NOT RUN`。
+
+## 追加：上拉态黑屏使零帧结果作废（2026-11-16，第七轮）
+
+报告者更正：镜像 M5Unified#367 三字节后屏幕空白、真实按压 0 次按下 0 帧，改回驱动并重启
+后画面恢复、6 次点击一次登记。故上拉态的所有零帧结果（mirror 电量/启动、develop、
+早前 0/58、二分“好”步进）都只是“面板不工作”，不是鬼点修复；第六轮“帧由驱动电平门控”
+与“`0x9C` 即醒着”的表述撤回，`0x08` 粘滞证据降级。DSI 读抑制也需重新区分“关显示”与
+“停扫描”。已站得住的是：面板工作时确有鬼帧。下一步用画面 + 真手指门禁重跑，并在两种
+面板上复核 #367 上拉态是否都黑（若都黑则为显示回归）。新增证据：
+[evidence/followup-panel-liveness.md](evidence/followup-panel-liveness.md)。
+证据等级 `hardware validation`（报告者观察）+ `code-level verification`；物理与虚拟设备
+`NOT RUN`（Tab5 profile 无 0x43/reset 模型，触摸为 GDB 邮箱）。

@@ -25,7 +25,7 @@
   "execution": {
     "validation": "code-level verification",
     "host": "macOS, clang++ -std=c++17 -O1",
-    "virtual_device": "NOT RUN: the local Device Service now lists Tab5 as supported/creatable, but its catalog warning still states that Tab5 ST7123 touch is a firmware GDB mailbox rather than an I2C chip model, and no PI4IOE5V6408 or reset-line model exists.",
+    "virtual_device": "NOT RUN: the local Device Service Tab5 profile is tab5_enabled:false with features.qom and features.device_state false; its catalog warning still states that Tab5 ST7123 touch is a firmware GDB mailbox rather than an I2C chip model, and no PI4IOE5V6408 (0x43) or reset-line model exists, so adv_info, the 0x43 block and the pin state cannot be sampled.",
     "device_identifiers": "none used"
   },
   "checks": [
@@ -164,13 +164,23 @@
       "name": "upstream round-6 comment",
       "status": "PASS",
       "details": "Posted one English comment at https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918168398; issue left open, no code pushed, no repository changed."
+    },
+    {
+      "name": "panel liveness on the LCD_RST pull-up state (author-observed)",
+      "status": "REVIEW",
+      "details": "Author reports a blank screen and 0 presses / 0 frames on the pull-up, and recovery after a restart with the pin driven. One unit, one restart, six taps; no finger-control raw table was taken while the panel was blank."
+    },
+    {
+      "name": "DCS 0x0A as a display-liveness witness",
+      "status": "REVIEW",
+      "details": "0x0A read 0x9C while the panel was blank, so the power-mode read does not prove visible output; earlier '0x9C means awake' inferences are withdrawn."
     }
   ],
   "evidence": [
     {
       "file": "README.md",
-      "bytes": 7938,
-      "sha256": "98481f7feeca6aadf96db9fc9124b01d7d98f12acd9749fdc9c3a8f48928fa0c"
+      "bytes": 8987,
+      "sha256": "de9171b76c8c79d75b8a084879983a04897312385ecd17870855eccf76328fde"
     },
     {
       "file": "code/README.md",
@@ -209,8 +219,13 @@
     },
     {
       "file": "report.md",
-      "bytes": 19205,
-      "sha256": "f35e93f645a1d14dfe6176fe402484be83504cf8217e1868c7bebc9d2eab2c3a"
+      "bytes": 21989,
+      "sha256": "2c8c65841b5bc1413ca49810850121c3697e56c8f1f7da56420180d8cf124dc6"
+    },
+    {
+      "file": "evidence/followup-panel-liveness.md",
+      "bytes": 5037,
+      "sha256": "e633c8b1c690ed432531208a3fdad9509fe8d4fde6bdbe66b4cebc396cf456b7"
     }
   ],
   "notes": [
@@ -220,7 +235,9 @@
     "Round 2 adds the author's INT/frame trace and a protocol §6.6 cross-check; no hardware or virtual-device run here.",
     "Round 5 corrects two earlier statements: the 0x43 expander block does differ between the pinned and develop builds (#367), and the sticky with_coord bit is a symptom of the controller's init state rather than a failed read acknowledgement.",
     "Round 6 corrects two statements: the 10 ms LCD_RST pulse did not clear with_coord (the clear coincided with the display entering sleep-in), and 0x08 is not a second precondition for ghost frames (A2/B3 are counter-cases).",
-    "Round 6 reply posted as a single comment; the record is cited by permalink at 933e6e3."
+    "Round 6 reply posted as a single comment; the record is cited by permalink at 933e6e3.",
+    "Round 7 withdraws the round-6 frame-gating claim and the '0x9C means awake' inference: the reporter's pull-up rows were a blank, non-reporting panel, so the pull-up zeros (mirror battery/boots, develop, earlier 0/58, bisect good steps) are panel-state-unknown rather than fixes.",
+    "Round 7 reply posted as a single comment; no issue close, no upstream push, no change to the reporter's repository."
   ],
   "followups": [
     {
@@ -243,6 +260,13 @@
       "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918020061",
       "summary": "报告者做了运行期 0x43 翻转、10 ms LCD_RST 低脉冲和两边 0x43 转储。翻转显示帧由驱动电平连续门控（无需复位），0x08 是与首帧同轮出现的粘滞标记而非前置条件（B3/A2 为反例）；脉冲在 3 ms 后仍未清 0x08，清除与显示进入 sleep-in 同窗，“只有低脉冲能清”属过度归因；一次 DCS 0x0A 读在引脚仍驱动时即可停止 60 轮帧，而 M5GFX 自身不做 DCS 读，说明显示命令路径会改变共享 TDDI 的触摸上报状态；0x43 两边一致，扩展器配置分支关闭，剩余差异是 M5.begin() 之后的活动。",
       "evidence": "evidence/followup-lcd-rst-flip.md"
+    },
+    {
+      "date": "2026-11-16",
+      "round": 7,
+      "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918314585",
+      "summary": "报告者更正上拉态屏幕空白、真实按压 0 次按下 0 帧；据此作废上拉态零帧结果、撤回第六轮帧门控与 0x9C 存活推断，并要求后续运行带画面 + 真手指门禁。",
+      "evidence": "evidence/followup-panel-liveness.md"
     }
   ]
 }
