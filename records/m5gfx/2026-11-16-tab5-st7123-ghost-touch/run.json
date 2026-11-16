@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "Tab5 Touch_ST7123 ghost contacts after a polling pause: code-level review",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/418",
+    "companion_issue": "https://github.com/m5stack/M5GFX/issues/417",
+    "repository": "https://github.com/m5stack/M5GFX",
+    "base_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "tag": "0.3.0",
+    "pins": "evidence/source-pins.json"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "No Tab5 attached to this workspace; physical reproduction and soak were not performed."
+  },
+  "firmware": {
+    "target": "M5Stack Tab5, ST7121 panel, touch FW version 01",
+    "m5gfx": "0.3.0 (28d4794)",
+    "m5unified": "96576a14247ddc935149145aa6b51943464120f1",
+    "binaries_included": false
+  },
+  "execution": {
+    "validation": "code-level verification",
+    "host": "macOS, clang++ -std=c++17 -O1",
+    "virtual_device": "NOT RUN: the local Tab5 emulator has no ST7123 controller-level model",
+    "device_identifiers": "none used"
+  },
+  "checks": [
+    {
+      "name": "M5GFX Touch_ST7123 source review",
+      "status": "PASS",
+      "details": "No area/intensity/duration filter; intensity byte discarded; INT pin unused; no register writes or reset."
+    },
+    {
+      "name": "0.2.28 vs 0.3.0 getTouchRaw comparison",
+      "status": "PASS",
+      "details": "Function body identical; only the .cpp to .inl layout changed."
+    },
+    {
+      "name": "M5Unified press-path review",
+      "status": "PASS",
+      "details": "First pressed frame enters touch_begin; TOUCH_MIN_UPDATE_MSEC is 4 ms; no debounce."
+    },
+    {
+      "name": "host-side parse reproduction with the reporter's field values",
+      "status": "PASS",
+      "details": "Shipped logic returns the two edge points; area+intensity rule returns 0; real tap survives."
+    },
+    {
+      "name": "physical Tab5 reproduction, soak and temperature variation",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "virtual-device reproduction",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "single-transaction read and INT-gated read experiments",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "touch firmware version availability and update path",
+      "status": "NOT RUN",
+      "details": "No public information found; requires M5Stack confirmation."
+    },
+    {
+      "name": "upstream comment",
+      "status": "NOT RUN",
+      "details": "This record is published before posting so the comment can cite a stable public permalink."
+    }
+  ],
+  "evidence": [
+    {
+      "file": "README.md",
+      "bytes": 2895,
+      "sha256": "fae6b5ce71c11350217dbbe71137763fa706a0496db93b24bf4fb2c5feb9306e"
+    },
+    {
+      "file": "report.md",
+      "bytes": 6017,
+      "sha256": "60ea4f9fae71f6be2dd289fd1034046008d65cc7e92437a9879122250b6ae6d9"
+    },
+    {
+      "file": "code/README.md",
+      "bytes": 746,
+      "sha256": "2be755bac14207ab31a5717ac1f4f36bb9f0f4f4ea705b03816826e748b8b884"
+    },
+    {
+      "file": "code/parse_check.cpp",
+      "bytes": 3306,
+      "sha256": "4c9add5e034985ce2e48fe6518879365c5104f87fe63475d89ce9c919dcebb93"
+    },
+    {
+      "file": "evidence/parse-check-output.txt",
+      "bytes": 596,
+      "sha256": "ae531eb29d1069d69a34d43f31c4dd27132bd0c21840b977541359b831337890"
+    },
+    {
+      "file": "evidence/source-pins.json",
+      "bytes": 3037,
+      "sha256": "351962d6fff92f55c7cf9e1bd3a9e71af430a0d4eddcb4da7bea9620b5b66d29"
+    }
+  ],
+  "notes": [
+    "Read-only review: no M5GFX/M5Unified change, no push to the upstream repository, no issue close.",
+    "Host parse results are not device validation.",
+    "The reporter's ghost statistics are quoted as their measurements, not reproduced here."
+  ]
+}

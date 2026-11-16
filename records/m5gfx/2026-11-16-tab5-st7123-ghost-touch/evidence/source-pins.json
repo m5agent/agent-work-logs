@@ -1,0 +1,50 @@
+{
+  "note": "Files were read from the pinned commits below on 2026-11-16. Hashes are of the downloaded blobs; third-party source is not redistributed in this record.",
+  "m5gfx": {
+    "repository": "https://github.com/m5stack/M5GFX",
+    "commit": "28d47949bdc84f30881623476f555398e2194313",
+    "tag": "0.3.0",
+    "files": {
+      "src/lgfx/v1/platforms/esp32p4/Touch_ST7123.inl": "2a740ccf6284d55e5412fcac4d10f842ed850ac3000bba5234a3d8a4843cfdea",
+      "src/lgfx/v1/platforms/esp32p4/Touch_ST7123.hpp": "d308bd8261cac2e7378f501edf13883ed4b69e4c8fcc3daf8b5ff42b2c32b93a",
+      "src/lgfx/v1/Touch.hpp": "60dfad8ebc258e890859972c3d19e6ea46d43d31740ed7a76f9947524b65a533",
+      "src/lgfx/v1/panel/Panel_Device.inl": "8418984db928c324f42b4b9b9306794db3a558ec2f94b550b6c1f5a5878c5bc9",
+      "src/board_detect/m5/esp32p4.inl": "835ccffac7f262a5680f513e507299dab548b4f8e416658670639ca4894b8b28",
+      "src/board_detect/m5/esp32p4_construct.inl": "f58becd484cd6682d6d9216bff3d5cd35321d1ce7ef8dc358912ffebd0f1d92b"
+    }
+  },
+  "m5gfx_0228": {
+    "repository": "https://github.com/m5stack/M5GFX",
+    "tag": "0.2.28",
+    "file": "src/lgfx/v1/platforms/esp32p4/Touch_ST7123.cpp",
+    "sha256": "47bcc89655f7d8e0ac0940553f95a907f7fdd5787407cb1dfc433f30df17e4a6",
+    "observation": "getTouchRaw() body is identical to 0.3.0; only the file layout changed (.cpp to .inl)."
+  },
+  "m5unified": {
+    "repository": "https://github.com/m5stack/M5Unified",
+    "commit": "96576a14247ddc935149145aa6b51943464120f1",
+    "file": "src/utility/Touch_Class.inl",
+    "sha256": "d979f4994900265733e11d9a3dd5f27ffb85cbeea44f14e1236ca9f6897d02ad"
+  },
+  "reference_drivers": {
+    "m5stack_tab5_demo": {
+      "repository": "https://github.com/m5stack/M5Tab5-Keyboard-UserDemo",
+      "commit": "b4c36227e2f3373e4e1f8cd7063aefa05cbf72bf",
+      "file": "components/m5_tab5_component/src/drivers/touch_st7123/esp_lcd_touch_st7123.c",
+      "sha256": "79f60aa96c1be0026fe504000a206fb90b73b7987ea6238afac9a0380c660e38",
+      "observation": "Same 0x0010/0x0009/0x0014 read sequence, no filtering, strength is the area byte; adv_info is zero-initialised."
+    },
+    "esphome": {
+      "repository": "https://github.com/esphome/esphome",
+      "commit": "eebe66da6205",
+      "file": "esphome/components/st7123/touchscreen/st7123_touchscreen.cpp",
+      "sha256": "db747b6084ec426396727e2a9cd0369c8c7a8595f389c11999a65416cae2e41f",
+      "observation": "Reads 0x0010 through 0x0014 + max_touches*7 in one transaction; INT is falling-edge, high when idle; reading the table clears INT; intensity is reported as the raw position quality; no ghost filter."
+    }
+  },
+  "public_register_notes": [
+    "https://components.espressif.com/components/espp/st7123touch/versions/1.4.2/readme?language=en",
+    "Register 0x0009: max simultaneous touch count (firmware configured); 0x0010 bit 3 = with_coord; 0x0014: 7 B x N reports; byte 4 area, byte 5 intensity.",
+    "TP_RST must not be toggled for ST7123; the touch engine is enabled by the LCD_RST pulse."
+  ]
+}
