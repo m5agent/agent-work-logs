@@ -4,6 +4,7 @@
 - 结果：`REVIEW`（仅代码级；物理硬件与虚拟设备均 `NOT RUN`）
 - 工作类型：`issue`
 - 问题来源：[m5stack/M5GFX#418](https://github.com/m5stack/M5GFX/issues/418)
+- GitHub 回复：[issuecomment-6904885353](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6904885353)（英文，单条；issue 保持开启）
 - 源码版本：M5GFX `28d47949bdc84f30881623476f555398e2194313`（0.3.0）；
   M5Unified `96576a14247ddc935149145aa6b51943464120f1`
 - 环境：macOS 主机 + host C++ 解析复现；本机无 Tab5 硬件，本地 Tab5 模拟器无 ST7123
