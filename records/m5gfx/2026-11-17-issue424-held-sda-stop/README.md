@@ -56,6 +56,7 @@ ST25R3916 固有の挙動はモデル化していない。
   上表の生出力。`code/sim_slave.cpp` がモデル本体。
 - `evidence/issue-424.json`：条目メタデータ（本文はコピーしない）。
 - `evidence/hardware-and-virtual.md`：C5 実機・profile がない理由。
+- 已发布回复：<https://github.com/m5stack/M5GFX/issues/424#issuecomment-6923090635>（1 条，Issue 保持 OPEN、代码未改）
 
 ## 文件
 
