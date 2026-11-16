@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-16 | Firmware Review Service | 设备映射、Tab5 ELF 取证与触摸声明修复 | `PASS`（86 项测试、两条复审；三款机型完整复审 NOT RUN） | [查看](records/firmware-review-service/2026-11-16-device-map-tab5-elf-touch-fix/) |
 | 2026-11-16 | ESP Emulator | Cardputer 运行时板型探测回退与两日审核归因 | `PARTIAL`（4 条板型缺陷开 #230；其余多为服务/取证问题） | [查看](records/m5stack-esp-emulator/2026-11-16-cardputer-runtime-board-detect/) |
 | 2026-11-16 | M5GFX / Tab5 | ST7123 停止轮询后的鬼触点（#418 代码级核对） | `REVIEW`（无过滤、intensity 丢弃；硬件/虚拟设备 NOT RUN） | [查看](records/m5gfx/2026-11-16-tab5-st7123-ghost-touch/) |
 | 2026-11-14 | ESP Emulator | Pages 发布与实际 HTTPS 两例 | `PASS`（2179文件、HTTPS83项及文档main CI；旧hosted全门边界保留） | [查看](records/esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-pages-delivery/) |

@@ -69,4 +69,6 @@
 - Tab5 的 4 个非 CarPlay 固件在真机或带 ELF 的取帧路径上的首帧：`NOT RUN`；
   审查链路的 409 已定位为 `screenshot_requires_matching_elf`，不是本轮模拟器归因对象。
 - ZILLASTICK 的 CC1101 RF Pack、vinylM5Dial 的 Unit AudioPlayer 数据面：`NOT RUN`。
-- 审查服务的 `DEVICE_MAP`、Tab5 取帧与网络路径修复：本轮只归因，未改代码、未重启服务。
+- 审查服务的 `DEVICE_MAP`、Tab5 ELF 取帧与触摸声明已在
+  [2026-11-16 修复记录](../../firmware-review-service/2026-11-16-device-map-tab5-elf-touch-fix/)
+  中修复并验证；网络路径、app-only 上下文与 StickC-Plus2 静态判定仍未改。

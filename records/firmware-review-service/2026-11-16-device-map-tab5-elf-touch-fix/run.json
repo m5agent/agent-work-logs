@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "审查服务设备映射、Tab5 ELF 取证与触摸声明修复",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": "baeb680"
+  },
+  "hardware": {},
+  "firmware": {
+    "ad_arcade": {
+      "job_id": "job-4ed91eb1fa1f",
+      "name": "AD Arcade",
+      "version": "1.3",
+      "sha256": "319b08c601db4f4d99cbcea902e5af1506ebd201e4040349fb486aa9275a3d68",
+      "size": 790992
+    },
+    "tab5_98": {
+      "job_id": "job-59ccfe1dfc48",
+      "name": "98TAB5",
+      "version": "1.3.0",
+      "sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+      "size": 9182880
+    }
+  },
+  "execution": {
+    "environment": "macOS arm64; resident firmware review service (LaunchAgent); native QEMU device service; saved-snapshot retries with submit=false",
+    "task_id": "review-service-fix-2026-11-16",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "device map covers AtomS3/PaperS3/PaperDIY",
+      "status": "PASS",
+      "detail": "ATOM_S3->atoms3, PAPER_S3->papers3, PAPER_DIY->paperdiy; live catalog creatable=true and execution_plan runtime=qemu"
+    },
+    {
+      "name": "Tab5 ELF 409 no longer aborts observation",
+      "status": "PASS",
+      "detail": "98TAB5 retry: 60.07 s / 13 samples, frame_scope=serial_only, E_EVIDENCE_UNAVAILABLE"
+    },
+    {
+      "name": "tap false touch claim",
+      "status": "PASS",
+      "detail": "AD Arcade retry: touch_claim_required=false, button PASS, done/SIM_VERIFIED"
+    },
+    {
+      "name": "regression suite",
+      "status": "PASS",
+      "detail": "86 tests passed"
+    },
+    {
+      "name": "service deployment",
+      "status": "PASS",
+      "detail": "resident service restarted; /api/health ok; no active job interrupted"
+    },
+    {
+      "name": "full review for ATOM_S3/PAPER_S3/PAPER_DIY",
+      "status": "NOT RUN",
+      "detail": "no pending BIN for these devices at verification time"
+    },
+    {
+      "name": "Tab5 frame with matching ELF",
+      "status": "NOT RUN",
+      "detail": "BIN-only evidence path; no ELF supplied"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json"
+  ],
+  "notes": [
+    "Service commit df0361d pushed to main.",
+    "Deployment backup of the previous app.py retained; rollback is documented in report.md.",
+    "No simulator code changed; no issue closed; retries used submit=false.",
+    "Network path, app-only intake and StickC-Plus2 static validation remain follow-ups."
+  ]
+}

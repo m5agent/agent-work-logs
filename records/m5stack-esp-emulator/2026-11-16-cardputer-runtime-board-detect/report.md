@@ -190,4 +190,6 @@ ST7123/CSI/USB/SDIO/C6 伴生芯片等模型缺口。该条登记为未定位模
 - 4 个 Cardputer BIN 的真机启动/显示/键盘：`NOT RUN`。
 - Tab5 非 CarPlay 固件的带 ELF 取帧与真机首帧：`NOT RUN`。
 - CC1101 RF Pack、Unit AudioPlayer、SD、音频、USB、BLE：`NOT RUN`。
-- 审查服务修复与部署：`NOT RUN`（本轮只归因）。
+- 审查服务的 `DEVICE_MAP`、Tab5 ELF 取帧与触摸声明已在
+  `records/firmware-review-service/2026-11-16-device-map-tab5-elf-touch-fix/` 修复并验证；
+  网络路径、app-only 上下文与 StickC-Plus2 静态判定仍未改。
