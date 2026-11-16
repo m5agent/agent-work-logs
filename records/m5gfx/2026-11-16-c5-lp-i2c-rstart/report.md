@@ -108,3 +108,16 @@ STOP は出さない（`END` は SCL を保持して停止するだけ）。STOP
 - Device Service（`http://127.0.0.1:8787`）のプロファイルは C6 / P4 / S3 / ESP32 / LX6 系のみ。
 - esp-emulator の wasm ランタイムに I2C の実装がない。
 - ハードウェアテストセンターのノードは matrix / corep4 / sticks3 / stopwatch のみ。
+
+## 7. 投稿した返信（2026-11-16）
+
+- URL：<https://github.com/m5stack/M5GFX/issues/421#issuecomment-6911970836>
+- 言語：日本語（条目の言語に合わせた）。issue は OPEN のまま、返信は 1 件のみ。
+- 証拠等級：`code-level verification`。実機・仮想デバイスは `NOT RUN` と本文に明記。
+- 依頼した切り分け（§5 を、既存 API で試せる順に整理）：
+  1. 2 バイトを `write(&b0,1)` + `write(&b1,1)` に分割する（ワイヤ上のバイト列は同じで `WRITE` の
+     `byte_num` だけが変わる）。
+  2. `write()` と `restart()` の間に `delayMicroseconds(100)` を入れる。
+  3. `M5.Ex_I2C.release()` の後、`LP_I2C_NUM_0` で自前のバスを作り、同じ転送を ESP-IDF
+     `i2c_master_transmit_receive()` で実行する。
+- 併せて、各周回の最初の read だけ `0xFF` になる現象（別系統の可能性）の再確認を依頼した。

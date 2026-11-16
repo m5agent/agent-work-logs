@@ -6,7 +6,7 @@
 - 問題：[m5stack/M5GFX#421](https://github.com/m5stack/M5GFX/issues/421)
 - 対象ソース：M5GFX `master` `28d47949bdc84f30881623476f555398e2194313`（0.3.0）、
   `develop` `b48dce0`、ESP-IDF `v5.5` の ESP32-C5 ヘッダ／`i2c_master.c`
-- GitHub 回复：未投稿（投稿後に追記）
+- GitHub 返信：投稿済み 2026-11-16（[issuecomment-6911970836](https://github.com/m5stack/M5GFX/issues/421#issuecomment-6911970836)）。issue は OPEN のまま
 - 環境：macOS。本機に ESP32-C5 実機なし。Device Service に C5 プロファイルなし。
   esp-emulator のランタイムに I2C コントローラのモデルなし。
 
