@@ -159,13 +159,18 @@
       "name": "0x43 block after M5.begin() is identical in the sketch and the firmware",
       "status": "REVIEW",
       "details": "Author measured 0x03=0x73, 0x05=0x74, 0x07=0x08, 0x0B=0x04, 0x0D=0x04, 0x0F=0x04 on both sides, with DCS 0x0A=0x9C and adv_info=0x00. Closes the expander-configuration branch; the block is not static (0x05 moves when the amp switches), so a post-begin dump cannot speak for the latch instant."
+    },
+    {
+      "name": "upstream round-6 comment",
+      "status": "PASS",
+      "details": "Posted one English comment at https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918168398; issue left open, no code pushed, no repository changed."
     }
   ],
   "evidence": [
     {
       "file": "README.md",
-      "bytes": 7779,
-      "sha256": "c6cf91e16b9b146d5761c14733688196093a6fe283e6dadc820457188c3e6ee3"
+      "bytes": 7938,
+      "sha256": "98481f7feeca6aadf96db9fc9124b01d7d98f12acd9749fdc9c3a8f48928fa0c"
     },
     {
       "file": "code/README.md",
@@ -214,7 +219,8 @@
     "The reporter's ghost statistics are quoted as their measurements, not reproduced here.",
     "Round 2 adds the author's INT/frame trace and a protocol §6.6 cross-check; no hardware or virtual-device run here.",
     "Round 5 corrects two earlier statements: the 0x43 expander block does differ between the pinned and develop builds (#367), and the sticky with_coord bit is a symptom of the controller's init state rather than a failed read acknowledgement.",
-    "Round 6 corrects two statements: the 10 ms LCD_RST pulse did not clear with_coord (the clear coincided with the display entering sleep-in), and 0x08 is not a second precondition for ghost frames (A2/B3 are counter-cases)."
+    "Round 6 corrects two statements: the 10 ms LCD_RST pulse did not clear with_coord (the clear coincided with the display entering sleep-in), and 0x08 is not a second precondition for ghost frames (A2/B3 are counter-cases).",
+    "Round 6 reply posted as a single comment; the record is cited by permalink at 933e6e3."
   ],
   "followups": [
     {

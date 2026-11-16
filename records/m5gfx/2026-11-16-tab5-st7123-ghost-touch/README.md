@@ -106,4 +106,6 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
 - `0x43` 两边字节相同，扩展器配置分支关闭；但转储时机应改到 `0x08` 首次置位那一轮。
 
 新增证据：[evidence/followup-lcd-rst-flip.md](evidence/followup-lcd-rst-flip.md)。
-证据等级 `code-level verification` + 报告者测量；物理与虚拟设备 `NOT RUN`。
+第六轮回复：[issuecomment-6918168398](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918168398)
+（英文，单条；issue 保持开启）。证据等级 `code-level verification` + 报告者测量；
+物理与虚拟设备 `NOT RUN`。
