@@ -163,3 +163,6 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
 新增证据：[evidence/followup-real-touch-table.md](evidence/followup-real-touch-table.md)。
 证据等级 `code-level verification`（表值算术核对）+ 报告者硬件测量；物理与虚拟设备
 `NOT RUN`（`tab5_enabled: false`，ST7123 为固件 GDB 邮箱，无 `0x43`/reset 模型）。
+
+第九轮回复：[issuecomment-6928659888](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6928659888)
+（英文，单条；issue 保持开启，未推送上游代码）。
