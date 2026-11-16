@@ -1,0 +1,1385 @@
+INFO ESPHome 2026.10.2
+INFO Reading configuration config.yaml...
+INFO Cloning https://github.com/m5stack/esphome-yaml@main
+INFO Fetching main
+INFO Cloning https://github.com/m5stack/esphome.git@m5-dev
+INFO Fetching m5-dev
+INFO Cloning https://github.com/m5stack/esphome.git@feat-voice-pyramid
+INFO Fetching feat-voice-pyramid
+INFO Cloning https://github.com/n-IA-hane/esphome-audio-stack.git@v2026.11.0
+INFO Fetching v2026.11.0
+INFO Checking 3 remote file(s) for updates
+INFO Downloading https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/wake_word_triggered.flac
+INFO Downloading https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/error_cloud_expired.mp3
+INFO Downloading https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/timer_finished.flac
+INFO Checking 4 wake word manifest(s) for updates
+INFO Downloading https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/hey_jarvis.json
+INFO Downloading https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/okay_nabu.json
+INFO Downloading https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
+INFO Downloading https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/vad.json
+INFO Checking 4 wake word model(s) for updates
+INFO Downloading https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/okay_nabu.tflite
+INFO Downloading https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/hey_jarvis.tflite
+INFO Downloading https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.tflite
+INFO Downloading https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/vad.tflite
+INFO Downloading https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/idle.eaf
+INFO Downloading https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/listening.eaf
+INFO Downloading https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/thinking.eaf
+INFO Downloading https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/replying.eaf
+INFO Downloading https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/loading.eaf
+INFO Downloading https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/error.eaf
+substitutions:
+  name: atoms3r-voice-pyramid
+  friendly_name: AtomS3R Voice Pyramid Voice Assistant
+  loading_animation_file: https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/loading.eaf
+  idle_animation_file: https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/idle.eaf
+  listening_animation_file: https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/listening.eaf
+  thinking_animation_file: https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/thinking.eaf
+  replying_animation_file: https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/replying.eaf
+  error_animation_file: https://raw.githubusercontent.com/m5stack/esphome-yaml/main/img/error.eaf
+  lcd_variant: st7735
+  wake_word_trigger_sound_file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/wake_word_triggered.flac
+  timer_finished_sound_file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/timer_finished.flac
+  error_cloud_expired_file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/error_cloud_expired.mp3
+  stop_model_file: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
+  voice_assist_idle_phase_id: '1'
+  voice_assist_listening_phase_id: '2'
+  voice_assist_thinking_phase_id: '3'
+  voice_assist_replying_phase_id: '4'
+  voice_assist_not_ready_phase_id: '10'
+  voice_assist_error_phase_id: '11'
+  voice_assist_muted_phase_id: '12'
+  voice_assist_timer_finished_phase_id: '20'
+esphome:
+  name: atoms3r-voice-pyramid
+  friendly_name: AtomS3R Voice Pyramid Voice Assistant
+  name_add_mac_suffix: true
+  project:
+    name: m5stack.atoms3r-voice-pyramid-satellite
+    version: 2026.11.0
+  min_version: 2026.10.0
+  on_boot:
+    - priority: 500.0
+      then:
+        - script.execute:
+            id: control_pyramid_leds
+        - delay: 30s
+        - if:
+            condition:
+              lambda: !lambda |-
+                return id(init_in_progress);
+            then:
+              - lambda: !lambda |-
+                  id(init_in_progress) = false;
+  build_path: build/atoms3r-voice-pyramid
+  platformio_options: {}
+  build_flags: []
+  environment_variables: {}
+  includes: []
+  includes_c: []
+  libraries: []
+  merge_warnings: true
+  debug_scheduler: false
+  suspend_loop: false
+  areas: []
+  devices: []
+esp32:
+  variant: ESP32S3
+  flash_size: 8MB
+  cpu_frequency: 240MHZ
+  framework:
+    type: esp-idf
+    advanced:
+      flash_chip: gd
+      compiler_optimization: SIZE
+      enable_idf_experimental_features: false
+      enable_lwip_assert: true
+      ignore_efuse_custom_mac: false
+      ignore_efuse_mac_crc: false
+      sram1_as_iram: false
+      enable_lwip_mdns_queries: true
+      enable_lwip_bridge_interface: false
+      enable_lwip_tcpip_core_locking: true
+      enable_lwip_check_thread_safety: true
+      disable_libc_locks_in_iram: true
+      disable_vfs_support_termios: true
+      disable_vfs_support_select: true
+      disable_vfs_support_dir: true
+      freertos_in_iram: false
+      ringbuf_in_iram: false
+      heap_in_iram: false
+      execute_from_psram: false
+      loop_task_stack_size: 8192
+      enable_ota_rollback: true
+      enable_ota_downgrade_protection: false
+      use_full_certificate_bundle: false
+      include_builtin_idf_components: []
+      enable_full_printf: false
+      disable_debug_stubs: true
+      disable_ocd_aware: true
+      disable_usb_serial_jtag_secondary: true
+      disable_dev_null_vfs: true
+      disable_mbedtls_peer_cert: true
+      disable_mbedtls_pkcs7: true
+      disable_mbedtls_tls: true
+      disable_mbedtls_tls_server: true
+      disable_mbedtls_tls_extras: true
+      disable_regi2c_in_iram: true
+      adc_oneshot_in_iram: false
+      disable_fatfs: true
+    sdkconfig_options:
+      CONFIG_ESP32S3_DATA_CACHE_64KB: y
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: y
+      CONFIG_ESP32S3_INSTRUCTION_CACHE_32KB: y
+      CONFIG_SPIRAM_RODATA: y
+      CONFIG_SPIRAM_FETCH_INSTRUCTIONS: y
+      CONFIG_BT_ALLOCATION_FROM_SPIRAM_FIRST: y
+      CONFIG_BT_BLE_DYNAMIC_ENV_MEMORY: y
+      CONFIG_MBEDTLS_EXTERNAL_MEM_ALLOC: y
+      CONFIG_MBEDTLS_SSL_PROTO_TLS1_3: y
+    version: 5.5.6
+    log_level: ERROR
+    components: []
+  watchdog_timeout: 5s
+  board: esp32-s3
+voice_assistant:
+  on_client_connected:
+    then:
+      - wait_until:
+          condition:
+            not:
+              ble.enabled: {}
+      - lambda: !lambda |-
+          id(init_in_progress) = false;
+      - script.execute:
+          id: set_idle_or_mute_phase
+      - script.execute:
+          id: start_wake_word
+      - script.execute:
+          id: control_pyramid_leds
+  id: va
+  microphone:
+    - microphone: voice_mic
+      channels:
+        - 0
+      gain_factor: 1
+      bits_per_sample: 16
+  media_player: external_media_player
+  micro_wake_word: mww
+  use_wake_word: false
+  noise_suppression_level: 0
+  auto_gain: 0
+  volume_multiplier: 1.0
+  on_tts_start:
+    then:
+      - lambda: !lambda |-
+          id(voice_assistant_phase) = 4;
+      - script.execute:
+          id: control_pyramid_leds
+  on_listening:
+    then:
+      - lambda: !lambda |-
+          id(voice_assistant_phase) = 2;
+      - script.execute:
+          id: control_pyramid_leds
+  on_stt_vad_end:
+    then:
+      - lambda: !lambda |-
+          id(voice_assistant_phase) = 3;
+      - script.execute:
+          id: control_pyramid_leds
+  on_end:
+    then:
+      - wait_until:
+          condition:
+            not:
+              voice_assistant.is_running: {}
+      - mixer_speaker.apply_ducking:
+          id: media_mixing_input
+          decibel_reduction: 0
+          duration: 1s
+      - if:
+          condition:
+            lambda: !lambda |-
+              return id(voice_assistant_phase) == 11;
+          then:
+            - delay: 1s
+      - lambda: !lambda |-
+          id(voice_assistant_phase) = 1;
+      - script.execute:
+          id: control_pyramid_leds
+  on_error:
+    then:
+      - if:
+          condition:
+            and:
+              - lambda: !lambda |-
+                  return !id(init_in_progress);
+              - lambda: !lambda |-
+                  return code != "duplicate_wake_up_detected";
+              - lambda: !lambda |-
+                  return code != "stt-no-text-recognized";
+          then:
+            - lambda: !lambda |-
+                id(voice_assistant_phase) = 11;
+      - if:
+          condition:
+            and:
+              - lambda: !lambda |-
+                  return code == "cloud-auth-failed";
+          then:
+            - script.execute:
+                id: play_sound
+                priority: true
+                sound_file: error_cloud_sound
+            - script.execute:
+                id: set_idle_or_mute_phase
+      - script.execute:
+          id: control_pyramid_leds
+  on_client_disconnected:
+    then:
+      - lambda: !lambda |-
+          id(voice_assistant_phase) = 10;
+      - voice_assistant.stop: {}
+      - script.execute:
+          id: control_pyramid_leds
+  on_timer_finished:
+    then:
+      - switch.turn_on:
+          id: timer_ringing
+      - lambda: !lambda |-
+          id(voice_assistant_phase) = 20;
+      - script.execute:
+          id: control_pyramid_leds
+      - wait_until:
+          condition:
+            media_player.is_announcing:
+              id: external_media_player
+  conversation_timeout: 300s
+psram:
+  mode: octal
+  speed: 80MHZ
+  enable_ecc: false
+  disabled: false
+  ignore_not_found: true
+api:
+  port: 6053
+  reboot_timeout: 15min
+  batch_delay: 100ms
+  custom_services: false
+  homeassistant_services: false
+  homeassistant_states: false
+  listen_backlog: 4
+  max_connections: 5
+  max_send_queue: 8
+ota:
+  - platform: web_server
+wifi:
+  ap:
+    ap_timeout: 90s
+  on_connect:
+    then:
+      - delay: 5s
+      - ble.disable: {}
+  on_disconnect:
+    then:
+      - ble.enable: {}
+  domain: .local
+  reboot_timeout: 15min
+  power_save_mode: LIGHT
+  fast_connect:
+    enabled: false
+    storage: flash
+  enable_btm: false
+  enable_rrm: false
+  passive_scan: false
+  enable_on_boot: true
+  post_connect_roaming: true
+  min_auth_mode: WPA2
+  use_address: atoms3r-voice-pyramid.local
+logger:
+  level: INFO
+  baud_rate: 115200
+  tx_buffer_size: 512
+  deassert_rts_dtr: false
+  task_log_buffer_size: 768
+  hardware_uart: USB_SERIAL_JTAG
+  logs: {}
+  runtime_tag_levels: false
+captive_portal:
+  compression: gzip
+button:
+  - platform: factory_reset
+    id: factory_reset_btn
+    internal: true
+    disabled_by_default: false
+    icon: mdi:restart-alert
+    entity_category: config
+    device_class: restart
+    name: factory_reset_btn
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 41
+      mode:
+        input: true
+        pullup: true
+        output: false
+        open_drain: false
+        pulldown: false
+      inverted: true
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    id: user_button
+    internal: true
+    on_multi_click:
+      - timing:
+          - state: true
+            min_length: 50ms
+          - state: false
+            min_length: 50ms
+        then:
+          - switch.turn_off:
+              id: timer_ringing
+        invalid_cooldown: 1s
+      - timing:
+          - state: true
+            min_length: 10s
+        then:
+          - button.press:
+              id: factory_reset_btn
+        invalid_cooldown: 1s
+    disabled_by_default: false
+    use_interrupt: true
+    interrupt_type: ANY
+    name: user_button
+  - platform: m5_voice_pyramid_kit
+    m5_voice_pyramid_kit_id: pyramid
+    touch: 1
+    name: Touch 1
+    disabled_by_default: false
+  - platform: m5_voice_pyramid_kit
+    m5_voice_pyramid_kit_id: pyramid
+    touch: 2
+    name: Touch 2
+    disabled_by_default: false
+  - platform: m5_voice_pyramid_kit
+    m5_voice_pyramid_kit_id: pyramid
+    touch: 3
+    name: Touch 3
+    disabled_by_default: false
+  - platform: m5_voice_pyramid_kit
+    m5_voice_pyramid_kit_id: pyramid
+    touch: 4
+    name: Touch 4
+    disabled_by_default: false
+external_components:
+  - source:
+      url: https://github.com/m5stack/esphome.git
+      ref: m5-dev
+      type: git
+    components:
+      - lp5562
+    refresh: 0s
+  - source:
+      url: https://github.com/m5stack/esphome.git
+      ref: feat-voice-pyramid
+      type: git
+    components:
+      - m5_voice_pyramid_kit
+      - aw87559
+      - si5351
+      - m5_atoms3_voice_ui
+    refresh: 0s
+  - source:
+      url: https://github.com/n-IA-hane/esphome-audio-stack.git
+      ref: v2026.11.0
+      type: git
+    components:
+      - esp_audio_stack
+      - esp_aec
+    refresh: 1d
+i2c:
+  - id: bsp_bus
+    sda: 45
+    scl: 0
+    frequency: 100000.0
+    sda_pullup_enabled: true
+    scl_pullup_enabled: true
+    scan: true
+  - id: ext_bus
+    sda: 38
+    scl: 39
+    frequency: 400000.0
+    sda_pullup_enabled: true
+    scl_pullup_enabled: true
+    scan: true
+m5_voice_pyramid_kit:
+  - id: pyramid
+    i2c_id: ext_bus
+    address: 0x1A
+    update_interval: 30ms
+    swipe_timeout: 500ms
+    touch_polling: true
+    voltage_update_interval: 5s
+    channel1_brightness: 100
+    channel2_brightness: 100
+pi4ioe5v6408:
+  - id: pi4ioe5v6408_hub
+    i2c_id: ext_bus
+    address: 0x43
+    reset: true
+aw87559:
+  - id: audio_amp
+    i2c_id: ext_bus
+    address: 0x5B
+    pa_gain: 16
+    reset_pin:
+      m5_voice_pyramid_kit_id: pyramid
+      number: 0
+      mode:
+        output: true
+      inverted: false
+    startup_delay: 1s
+si5351:
+  - id: clock_gen
+    i2c_id: ext_bus
+    address: 0x60
+    variant: a
+    package: msop10
+    crystal:
+      frequency: 27000000.0
+      load_capacitance: 10
+    clocks:
+      - pin: 1
+        frequency: 6144000.0
+        source: multisynth
+        integer_mode: auto
+        drive_strength: 2
+        inverted: false
+        disabled_state: low
+        phase_offset: 0.0
+        oeb_controlled: true
+        powered: true
+    pll_a:
+      source: xtal
+      integer_mode: auto
+    pll_b:
+      source: xtal
+      integer_mode: auto
+esp_aec:
+  id: aec
+  sample_rate: 16000
+  mode: fd_low_cost
+  filter_length: 4
+esp_audio_stack:
+  id: audio_stack
+  sample_rate: 48000
+  output_sample_rate: 16000
+  bits_per_sample: 16
+  slot_bit_width: 16
+  mclk_multiple: 128
+  processor_id: aec
+  use_tdm_reference: true
+  tdm_total_slots: 4
+  tdm_mic_slots:
+    - 0
+  tdm_ref_slot: 1
+  tdm_tx_slot: 0
+  buffers_in_psram: true
+  audio_task_stack_in_psram: true
+  telemetry: false
+  i2s_bclk_pin: 6
+  i2s_lrclk_pin: 8
+  i2s_din_pin: 5
+  i2s_dout_pin: 7
+  codec:
+    i2c_id: ext_bus
+    input:
+      address: 0x40
+      gain_db: 24.0
+      mic_selected: 0x05
+      ref_gain_db: 0.0
+      type: es7210
+    output:
+      address: 0x18
+      use_mclk: true
+      no_dac_ref: true
+      pa_gain: 0.0
+      type: es8311
+  on_amplifier_required:
+    - then:
+        - switch.turn_on:
+            id: speaker_enable
+  on_amplifier_idle:
+    - then:
+        - switch.turn_off:
+            id: speaker_enable
+  i2s_mclk_pin: -1
+  correct_dc_offset: false
+  num_channels: 1
+  speaker_channels: 1
+  mic_channel: left
+  rx_slot_mode: mono
+  tx_channel: left
+  i2s_mode: primary
+  use_apll: false
+  i2s_num: 0
+  i2s_comm_fmt: philips
+  mic_mix: passthrough
+  input_gain: 1.0
+  use_stereo_aec_reference: false
+  reference_channel: left
+  tdm_mic_slot: 0
+  task_priority: 19
+  task_core: 0
+  task_stack_size: 8192
+  aec_reference: ring_buffer
+  aec_reference_buffer_ms: 80
+  aec_ref_ring_in_psram: false
+  telemetry_log_interval_frames: 128
+  audio_effects:
+    rate_cvt_complexity: 3
+    rate_cvt_perf_type: speed
+spi:
+  - clk_pin:
+      number: 15
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    mosi_pin:
+      number: 21
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    interface: any
+    type: single
+    interface_index: 0
+microphone:
+  - platform: esp_audio_stack
+    id: voice_mic
+    esp_audio_stack_id: audio_stack
+    min_bits_per_sample: 16
+    max_bits_per_sample: 16
+    min_channels: 1
+    max_channels: 1
+    min_sample_rate: 16000
+    max_sample_rate: 16000
+speaker:
+  - platform: esp_audio_stack
+    id: voice_spk
+    esp_audio_stack_id: audio_stack
+    sample_rate: 48000
+    bits_per_sample: 16
+    timeout: 1s
+    buffer_duration: 500ms
+    num_channels: 1
+    min_bits_per_sample: 16
+    max_bits_per_sample: 16
+    min_channels: 1
+    max_channels: 1
+    min_sample_rate: 48000
+    max_sample_rate: 48000
+  - platform: mixer
+    id: audio_mixer
+    output_speaker: &id001 voice_spk
+    bits_per_sample: 16
+    num_channels: 1
+    task_stack_in_psram: true
+    source_speakers:
+      - id: announcement_mixing_input
+        timeout: never
+        buffer_duration: 100ms
+        output_speaker: *id001
+        bits_per_sample: 16
+        num_channels: 1
+        sample_rate: 48000
+      - id: media_mixing_input
+        timeout: never
+        buffer_duration: 100ms
+        output_speaker: *id001
+        bits_per_sample: 16
+        num_channels: 1
+        sample_rate: 48000
+    queue_mode: false
+  - platform: resampler
+    id: announcement_resampling_speaker
+    output_speaker: announcement_mixing_input
+    bits_per_sample: 16
+    sample_rate: 48000
+    buffer_duration: 100ms
+    filters: 16
+    taps: 16
+    min_bits_per_sample: 16
+    max_bits_per_sample: 32
+    num_channels: 1
+  - platform: resampler
+    id: media_resampling_speaker
+    output_speaker: media_mixing_input
+    bits_per_sample: 16
+    sample_rate: 48000
+    buffer_duration: 100ms
+    filters: 16
+    taps: 16
+    min_bits_per_sample: 16
+    max_bits_per_sample: 32
+    num_channels: 1
+media_player:
+  - platform: sendspin
+    id: sendspin_group_media_player
+    disabled_by_default: false
+    volume_increment: 0.05
+    name: sendspin_group_media_player
+    internal: true
+  - platform: speaker_source
+    id: external_media_player
+    name: Media Player
+    announcement_pipeline:
+      speaker: announcement_resampling_speaker
+      format: FLAC
+      sample_rate: 48000
+      num_channels: 1
+      sources:
+        - audio_file_announcement_source
+        - http_announcement_source
+    media_pipeline:
+      format: FLAC
+      sample_rate: 48000
+      num_channels: 2
+      speaker: media_resampling_speaker
+      sources:
+        - http_media_source
+        - sendspin_media_source
+    volume_increment: 0.05
+    volume_min: 0.0
+    volume_max: 1.0
+    volume_initial: 0.1
+    on_announcement:
+      - then:
+          - mixer_speaker.apply_ducking:
+              id: media_mixing_input
+              decibel_reduction: 20
+              duration: 0s
+    on_state:
+      - then:
+          - if:
+              condition:
+                and:
+                  - switch.is_off:
+                      id: timer_ringing
+                  - not:
+                      voice_assistant.is_running: {}
+                  - not:
+                      media_player.is_announcing:
+                        id: external_media_player
+              then:
+                - mixer_speaker.apply_ducking:
+                    id: media_mixing_input
+                    decibel_reduction: 0
+                    duration: 1s
+          - script.execute:
+              id: control_pyramid_leds
+    disabled_by_default: false
+audio_file:
+  - id: wake_word_sound
+    file:
+      url: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/wake_word_triggered.flac
+      type: web
+  - id: error_cloud_sound
+    file:
+      url: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/error_cloud_expired.mp3
+      type: web
+  - id: timer_finished_sound
+    file:
+      url: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/timer_finished.flac
+      type: web
+media_source:
+  - platform: audio_file
+    id: audio_file_announcement_source
+  - platform: audio_http
+    id: http_announcement_source
+    buffer_size: 250000
+    persistent_ring_buffer: false
+  - platform: audio_http
+    id: http_media_source
+    buffer_size: 500000
+    persistent_ring_buffer: false
+  - platform: sendspin
+    id: sendspin_media_source
+    codecs:
+      - flac
+      - pcm
+    buffer_size: 1000000
+    initial_static_delay: 0ms
+    static_delay_adjustable: false
+    fixed_delay: 0us
+    sample_rate: 48000
+sendspin:
+  id: sendspin_hub
+  task_stack_in_psram: true
+switch:
+  - platform: aw87559
+    id: speaker_enable
+    name: Speaker Enable
+    icon: mdi:volume-high
+    restore_mode: RESTORE_DEFAULT_ON
+    disabled_by_default: false
+  - platform: template
+    id: mute
+    name: Mute Microphone
+    icon: mdi:microphone-off
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    entity_category: config
+    on_turn_off:
+      - then:
+          - microphone.unmute: {}
+          - script.execute:
+              id: start_wake_word
+          - script.execute:
+              id: set_idle_or_mute_phase
+          - script.execute:
+              id: control_pyramid_leds
+    on_turn_on:
+      - then:
+          - microphone.mute: {}
+          - script.execute:
+              id: set_idle_or_mute_phase
+          - script.execute:
+              id: control_pyramid_leds
+    disabled_by_default: false
+    assumed_state: false
+  - platform: template
+    id: timer_ringing
+    optimistic: true
+    internal: true
+    restore_mode: ALWAYS_OFF
+    on_turn_off:
+      - then:
+          - micro_wake_word.disable_model:
+              id: stop
+          - script.execute:
+              id: disable_repeat
+          - if:
+              condition:
+                media_player.is_announcing:
+                  id: external_media_player
+              then:
+                - media_player.stop:
+                    announcement: true
+                    id: external_media_player
+          - mixer_speaker.apply_ducking:
+              id: media_mixing_input
+              decibel_reduction: 0
+              duration: 1s
+          - script.execute:
+              id: control_pyramid_leds
+    on_turn_on:
+      - then:
+          - mixer_speaker.apply_ducking:
+              id: media_mixing_input
+              decibel_reduction: 20
+              duration: 0s
+          - micro_wake_word.enable_model:
+              id: stop
+          - script.execute:
+              id: ring_timer
+          - script.execute:
+              id: control_pyramid_leds
+          - delay: 15min
+          - switch.turn_off:
+              id: timer_ringing
+    disabled_by_default: false
+    assumed_state: false
+    name: timer_ringing
+  - platform: template
+    id: wake_sound
+    name: Wake sound
+    icon: mdi:bullhorn
+    entity_category: config
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    disabled_by_default: false
+    assumed_state: false
+number:
+  - platform: esp_audio_stack
+    esp_audio_stack_id: audio_stack
+    mic_gain:
+      name: Mic Gain
+      min_value: -20.0
+      max_value: 30.0
+      initial_value: 24.0
+      disabled_by_default: false
+      mode: AUTO
+      icon: mdi:microphone
+      entity_category: config
+select:
+  - platform: template
+    name: Wake word sensitivity
+    id: wake_word_sensitivity
+    optimistic: true
+    restore_value: true
+    initial_option: Moderately sensitive
+    entity_category: config
+    options:
+      - Slightly sensitive
+      - Moderately sensitive
+      - Very sensitive
+    on_value:
+      - then:
+          - lambda: !lambda |-
+              if (x == "Slightly sensitive") {
+                id(okay_nabu).set_probability_cutoff(217);
+                id(hey_jarvis).set_probability_cutoff(247);
+              } else if (x == "Moderately sensitive") {
+                id(okay_nabu).set_probability_cutoff(176);
+                id(hey_jarvis).set_probability_cutoff(235);
+              } else if (x == "Very sensitive") {
+                id(okay_nabu).set_probability_cutoff(143);
+                id(hey_jarvis).set_probability_cutoff(212);
+              }
+    disabled_by_default: false
+    update_interval: 60s
+  - platform: template
+    id: aec_mode_select
+    name: AEC Mode
+    entity_category: config
+    options:
+      - sr_low_cost
+      - sr_high_perf
+      - voip_low_cost
+      - voip_high_perf
+      - fd_low_cost
+      - fd_high_perf
+    initial_option: sr_low_cost
+    optimistic: false
+    restore_value: false
+    set_action:
+      then:
+        - esp_aec.set_mode:
+            id: aec
+            mode: !lambda |-
+              return x;
+        - lambda: !lambda |-
+            id(aec_mode_select).publish_state(id(aec).get_mode_name());
+    disabled_by_default: false
+    update_interval: 60s
+micro_wake_word:
+  id: mww
+  microphone:
+    microphone: voice_mic
+    channels:
+      - 0
+    gain_factor: 1
+    bits_per_sample: 16
+  stop_after_detection: false
+  models:
+    - model:
+        url: https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/okay_nabu.json
+        type: http
+      id: okay_nabu
+      internal: false
+    - model:
+        url: https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/hey_jarvis.json
+        type: http
+      id: hey_jarvis
+      internal: false
+    - model:
+        url: https://github.com/kahrendt/microWakeWord/releases/download/stop/stop.json
+        type: http
+      id: stop
+      internal: true
+  vad:
+    internal: false
+    model:
+      url: https://github.com/esphome/micro-wake-word-models/raw/main/models/v2/vad.json
+      type: http
+  on_wake_word_detected:
+    then:
+      - if:
+          condition:
+            switch.is_off:
+              id: mute
+          then:
+            - if:
+                condition:
+                  switch.is_on:
+                    id: timer_ringing
+                then:
+                  - switch.turn_off:
+                      id: timer_ringing
+                else:
+                  - if:
+                      condition:
+                        voice_assistant.is_running: {}
+                      then:
+                        - voice_assistant.stop: {}
+                      else:
+                        - if:
+                            condition:
+                              media_player.is_announcing:
+                                id: external_media_player
+                            then:
+                              - media_player.stop:
+                                  announcement: true
+                                  id: external_media_player
+                            else:
+                              - if:
+                                  condition:
+                                    switch.is_on:
+                                      id: wake_sound
+                                  then:
+                                    - script.execute:
+                                        id: play_sound
+                                        priority: true
+                                        sound_file: wake_word_sound
+                                    - delay: 300ms
+                              - voice_assistant.start:
+                                  wake_word: !lambda |-
+                                    return wake_word;
+                                  silence_detection: true
+globals:
+  - id: init_in_progress
+    type: bool
+    restore_value: false
+    initial_value: 'true'
+  - id: voice_assistant_phase
+    type: int
+    restore_value: false
+    initial_value: '10'
+sensor:
+  - platform: m5_voice_pyramid_kit
+    m5_voice_pyramid_kit_id: pyramid
+    name: Touch Swipe Event
+    entity_category: diagnostic
+    on_value:
+      - then:
+          - if:
+              condition:
+                lambda: !lambda |-
+                  return x == 1;
+              then:
+                - script.execute:
+                    id: pyramid_volume_up
+          - if:
+              condition:
+                lambda: !lambda |-
+                  return x == 2;
+              then:
+                - script.execute:
+                    id: pyramid_volume_down
+          - if:
+              condition:
+                lambda: !lambda |-
+                  return x == 3;
+              then:
+                - script.execute:
+                    id: pyramid_brightness_up
+          - if:
+              condition:
+                lambda: !lambda |-
+                  return x == 4;
+              then:
+                - script.execute:
+                    id: pyramid_brightness_down
+    disabled_by_default: false
+    force_update: false
+    type: swipe_event
+lp5562:
+  id: lp5562_led
+  i2c_id: bsp_bus
+  use_internal_clk: true
+  white_current: 17.5
+  power_save_mode: false
+  high_pwm_freq: false
+  logarithmic_dimming: false
+  red_current: 0.0
+  green_current: 0.0
+  blue_current: 0.0
+  address: 0x30
+output:
+  - platform: lp5562
+    id: lp5562_white_channel
+    lp5562_id: lp5562_led
+    channel: white
+    zero_means_zero: false
+light:
+  - platform: monochromatic
+    name: LCD Backlight
+    output: lp5562_white_channel
+    icon: mdi:television
+    restore_mode: RESTORE_DEFAULT_ON
+    disabled_by_default: false
+    resume_effect: false
+    gamma_correct: 2.8
+    default_transition_length: 1s
+    flash_transition_length: 0s
+  - platform: m5_voice_pyramid_kit
+    id: pyramid_rgb1
+    m5_voice_pyramid_kit_id: pyramid
+    channel: 1
+    name: Pyramid RGB 1
+    restore_mode: RESTORE_DEFAULT_OFF
+    default_transition_length: 0s
+    gamma_correct: 1.0
+    disabled_by_default: false
+    resume_effect: false
+    flash_transition_length: 0s
+    start_led: 0
+    num_leds: 14
+    reverse: false
+    refresh_interval: 33ms
+  - platform: m5_voice_pyramid_kit
+    id: pyramid_rgb2
+    m5_voice_pyramid_kit_id: pyramid
+    channel: 2
+    name: Pyramid RGB 2
+    restore_mode: RESTORE_DEFAULT_OFF
+    default_transition_length: 0s
+    gamma_correct: 1.0
+    disabled_by_default: false
+    resume_effect: false
+    flash_transition_length: 0s
+    start_led: 0
+    num_leds: 14
+    reverse: false
+    refresh_interval: 33ms
+display:
+  - platform: mipi_spi
+    id: atoms3r_lcd
+    auto_clear_enabled: false
+    update_interval: 4294967295ms
+    model: CUSTOM
+    dc_pin:
+      number: 42
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    reset_pin:
+      number: 48
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    cs_pin:
+      number: 14
+      mode:
+        output: true
+        input: false
+        open_drain: false
+        pullup: false
+        pulldown: false
+      inverted: false
+      ignore_pin_validation_error: false
+      ignore_strapping_warning: false
+      drive_strength: 20.0
+    data_rate: 40000000.0
+    dimensions:
+      width: 128
+      height: 128
+      offset_width: 2
+      offset_height: 1
+      pad_width: 2
+      pad_height: 3
+    invert_colors: true
+    init_sequence:
+      - - 1
+      - - 4095
+        - 150
+      - - 17
+      - - 4095
+        - 120
+      - - 177
+        - 1
+        - 44
+        - 45
+      - - 178
+        - 1
+        - 44
+        - 45
+      - - 179
+        - 1
+        - 44
+        - 45
+        - 1
+        - 44
+        - 45
+      - - 180
+        - 7
+      - - 192
+        - 162
+        - 2
+        - 132
+      - - 193
+        - 197
+      - - 194
+        - 10
+        - 0
+      - - 195
+        - 138
+        - 42
+      - - 196
+        - 138
+        - 238
+      - - 197
+        - 14
+      - - 38
+        - 8
+    bus_mode: single
+    spi_mode: MODE0
+    color_order: BGR
+    byte_order: big_endian
+    color_depth: '16'
+    draw_rounding: 1
+    pixel_mode: 16bit
+    use_axis_flips: false
+    spi_16: false
+    show_test_card: true
+m5_atoms3_voice_ui:
+  id: atoms3r_voice_ui
+  display_id: atoms3r_lcd
+  voice_assistant_id: va
+  frame_delay: 33ms
+  phase_id: voice_assistant_phase
+  phase_mapping:
+    idle: 1
+    listening: 2
+    thinking: 3
+    replying: 4
+    loading: 10
+    error: 11
+    muted: 12
+    timer_finished: 20
+  animations:
+    idle: $WORK/docspath-new/.esphome/m5_atoms3_voice_ui/9eb9d102
+    listening: $WORK/docspath-new/.esphome/m5_atoms3_voice_ui/5e06d37c
+    thinking: $WORK/docspath-new/.esphome/m5_atoms3_voice_ui/16c6126f
+    replying: $WORK/docspath-new/.esphome/m5_atoms3_voice_ui/d03b9e10
+    loading: $WORK/docspath-new/.esphome/m5_atoms3_voice_ui/2f540c44
+    error: $WORK/docspath-new/.esphome/m5_atoms3_voice_ui/5e8e4fb0
+  background_color: 0x10131A
+script:
+  - id: start_wake_word
+    then:
+      - if:
+          condition:
+            and:
+              - lambda: !lambda |-
+                  return !id(init_in_progress);
+              - switch.is_off:
+                  id: mute
+              - lambda: !lambda |-
+                  return !id(mww).is_running();
+          then:
+            - micro_wake_word.start: {}
+    mode: single
+    parameters: {}
+  - id: pyramid_volume_up
+    then:
+      - media_player.volume_up:
+          id: external_media_player
+          announcement: false
+    mode: single
+    parameters: {}
+  - id: pyramid_volume_down
+    then:
+      - media_player.volume_down:
+          id: external_media_player
+          announcement: false
+    mode: single
+    parameters: {}
+  - id: pyramid_brightness_up
+    then:
+      - if:
+          condition:
+            light.is_on:
+              id: pyramid_rgb1
+          then:
+            - light.dim_relative:
+                id: pyramid_rgb1
+                relative_brightness: 0.05
+                transition_length: 0ms
+      - if:
+          condition:
+            light.is_on:
+              id: pyramid_rgb2
+          then:
+            - light.dim_relative:
+                id: pyramid_rgb2
+                relative_brightness: 0.05
+                transition_length: 0ms
+    mode: single
+    parameters: {}
+  - id: pyramid_brightness_down
+    then:
+      - if:
+          condition:
+            light.is_on:
+              id: pyramid_rgb1
+          then:
+            - light.dim_relative:
+                id: pyramid_rgb1
+                relative_brightness: -0.05
+                transition_length: 0ms
+      - if:
+          condition:
+            light.is_on:
+              id: pyramid_rgb2
+          then:
+            - light.dim_relative:
+                id: pyramid_rgb2
+                relative_brightness: -0.05
+                transition_length: 0ms
+    mode: single
+    parameters: {}
+  - id: control_pyramid_leds
+    then:
+      - lambda: !lambda |-
+          const int phase = id(voice_assistant_phase);
+          const auto media_state = id(external_media_player).state;
+
+          float red = 0.0f;
+          float green = 0.0f;
+          float blue = 0.0f;
+          bool on = false;
+
+          if (id(timer_ringing).state) {
+            red = 1.0f; green = 0.2f; blue = 0.0f; on = true;
+          } else if (phase == 2) {
+            red = 0.0f; green = 0.75f; blue = 1.0f; on = true;
+          } else if (phase == 4) {
+            red = 0.55f; green = 0.10f; blue = 1.0f; on = true;
+          } else if (phase == 3) {
+            red = 0.0f; green = 0.65f; blue = 1.0f; on = true;
+          } else if (phase == 11) {
+            red = 1.0f; green = 0.0f; blue = 0.0f; on = true;
+          } else if (media_state == media_player::MediaPlayerState::MEDIA_PLAYER_STATE_PLAYING ||
+                     media_state == media_player::MediaPlayerState::MEDIA_PLAYER_STATE_ANNOUNCING) {
+            red = 1.0f; green = 0.35f; blue = 0.0f; on = true;
+          } else if (id(mute).state || phase == 12 ||
+                     phase == 10) {
+            red = 0.35f; green = 0.0f; blue = 0.0f; on = true;
+          }
+
+          auto apply = [&](auto *light) {
+            if (!on) {
+              auto call = light->turn_off();
+              call.set_transition_length(0);
+              call.perform();
+              return;
+            }
+            auto call = light->turn_on();
+            call.set_rgb(red, green, blue);
+            call.set_transition_length(0);
+            call.perform();
+          };
+          apply(id(pyramid_rgb1));
+          apply(id(pyramid_rgb2));
+    mode: single
+    parameters: {}
+  - id: ring_timer
+    then:
+      - script.execute:
+          id: enable_repeat_one
+      - script.execute:
+          id: play_sound
+          priority: true
+          sound_file: timer_finished_sound
+    mode: single
+    parameters: {}
+  - id: enable_repeat_one
+    then:
+      - media_player.repeat_one:
+          id: external_media_player
+          announcement: true
+      - speaker_source.set_playlist_delay:
+          id: external_media_player
+          pipeline: announcement
+          delay: 500ms
+    mode: single
+    parameters: {}
+  - id: disable_repeat
+    then:
+      - media_player.repeat_off:
+          id: external_media_player
+          announcement: true
+      - speaker_source.set_playlist_delay:
+          id: external_media_player
+          pipeline: announcement
+          delay: 0ms
+    mode: single
+    parameters: {}
+  - id: set_idle_or_mute_phase
+    then:
+      - lambda: !lambda |-
+          if (id(timer_ringing).state) {
+            id(voice_assistant_phase) = 20;
+          } else if (id(va).get_api_connection() == nullptr) {
+            id(voice_assistant_phase) = 10;
+          } else {
+            id(voice_assistant_phase) = id(mute).state
+              ? 12 : 1;
+          }
+    mode: single
+    parameters: {}
+  - id: play_sound
+    parameters:
+      priority: bool
+      sound_file: string
+    then:
+      - if:
+          condition:
+            lambda: !lambda |-
+              return priority;
+          then:
+            - media_player.stop:
+                id: external_media_player
+                announcement: true
+      - lambda: !lambda |-
+          if ( (id(external_media_player).state != media_player::MediaPlayerState::MEDIA_PLAYER_STATE_ANNOUNCING ) || priority) {
+            id(external_media_player)
+              ->make_call()
+              .set_media_url("audio-file://" + sound_file)
+              .set_announcement(true)
+              .perform();
+          }
+    mode: single
+dashboard_import:
+  package_import_url: github://m5stack/esphome-yaml/common/atoms3r-voice-pyramid-satellite.yaml@main
+  import_full_config: false
+improv_serial: {}
+improv_ble:
+  authorizer: null
+  identify_duration: 10s
+  authorized_duration: 1min
+  wifi_timeout: 90s
+
+INFO Configuration is valid!

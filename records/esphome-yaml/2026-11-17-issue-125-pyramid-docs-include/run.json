@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "issue-triage",
+  "date": "2026-11-17",
+  "overall_status": "PARTIAL",
+  "collection_status": "HOST_LEVEL_CONFIG_VALIDATION_COMPLETE_DEVICE_NOT_RUN",
+  "source": {
+    "repository": "https://github.com/m5stack/esphome-yaml",
+    "issue": "https://github.com/m5stack/esphome-yaml/issues/125",
+    "issue_state_at_triage": "OPEN",
+    "repo_head": "f76024e1527b38170350be62c9c01fe29488319d",
+    "removal_commit": "4121c9539089c6b69b3dc55c34bc8d4e6b98aca6",
+    "removal_commit_date": "2026-11-05T07:21:03Z",
+    "docs_repository": "nuxt-m5-docs",
+    "docs_revision": "69e9325ed",
+    "docs_revision_date": "2026-09-28",
+    "live_docs_url": "https://docs.m5stack.com/en/homeassistant/components/audio/voice_pyramid"
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "reason": "no AtomS3R + Voice Pyramid unit available"
+  },
+  "firmware": {
+    "build": "NOT RUN",
+    "reason": "only ESPHome config validation was in scope; no esphome compile"
+  },
+  "virtual_device": {
+    "status": "NOT RUN",
+    "reason": "device service has no Voice Pyramid / Voice Base profile and no matching firmware image"
+  },
+  "execution": {
+    "validation": "host-level test",
+    "tool": "esphome CLI",
+    "esphome_primary": "2026.10.2",
+    "python_primary": "CPython 3.13.15 (uv)",
+    "esphome_comparison": "2025.5.2",
+    "python_comparison": "CPython 3.9.6",
+    "os": "macOS",
+    "feature_boundary": "IncludeFile with variable substitution present in ESPHome 2026.4.0; absent in 2026.3.0",
+    "config_min_version": "2026.10.0"
+  },
+  "checks": [
+    {
+      "layer": "config_parse",
+      "scope": "repo factory yaml in full checkout",
+      "esphome": "2026.10.2",
+      "status": "PASS",
+      "detail": "INFO Configuration is valid!"
+    },
+    {
+      "layer": "config_parse",
+      "scope": "docs packages block, old example path",
+      "esphome": "2026.10.2",
+      "status": "FAIL",
+      "detail": "examples/voice_assistant/echo_pyramid_example.yaml does not exist in repository."
+    },
+    {
+      "layer": "config_parse",
+      "scope": "docs packages block, new factory path",
+      "esphome": "2026.10.2",
+      "status": "PASS",
+      "detail": "INFO Configuration is valid!"
+    },
+    {
+      "layer": "config_parse",
+      "scope": "github:// common package import",
+      "esphome": "2026.10.2",
+      "status": "PASS",
+      "detail": "INFO Configuration is valid!"
+    },
+    {
+      "layer": "config_parse",
+      "scope": "github:// common package import",
+      "esphome": "2025.5.2",
+      "status": "FAIL",
+      "detail": "common/displays/atoms3r-lcd-${lcd_variant}.yaml: No such file or directory"
+    },
+    {
+      "layer": "config_parse",
+      "scope": "factory yaml copied standalone",
+      "esphome": "2026.10.2",
+      "status": "FAIL",
+      "detail": "Error including file '../../common/atoms3r-voice-pyramid-satellite.yaml': No such file or directory"
+    },
+    {
+      "layer": "compile",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "flash",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN"
+    }
+  ],
+  "root_cause": [
+    "docs still reference the file removed in 4121c953 and still state ESPHome 2025.11.3+",
+    "factory yaml is repo-relative and cannot be used as a standalone copy",
+    "include-path substitution requires ESPHome 2026.4.0+; config declares min_version 2026.10.0"
+  ],
+  "evidence": [
+    {"file": "evidence/inrepo-factory-2026.10.2.log", "sha256": "49a9b7f7052769a7bfc684abec3746156824f2f98fe4a6fcd80ddaadcc4ca903"},
+    {"file": "evidence/standalone-factory-2026.10.2.log", "sha256": "755bb2afe1f9f1ecce4b6d2f66157c376ba517653301d5edd1c99ea0fb046a58"},
+    {"file": "evidence/docs-old-path-2026.10.2.log", "sha256": "95f8c9977dc5e87f106b5df816e7047660ebe8e8ebccefea8a4c0ff27cfe0b36"},
+    {"file": "evidence/docs-new-path-2026.10.2.log", "sha256": "48965b4c3e62677a349d04fd2f53a0da00867d5babe20dc89ef70bc7e3038acb"},
+    {"file": "evidence/github-package-2026.10.2.log", "sha256": "73f4e8362c6d87022af596d683cfcec8ec6bfcfeda4e3d262626bb51e45dd6e4"},
+    {"file": "evidence/github-package-2025.5.2.log", "sha256": "af80f9c3beecc3558fdd11973a75f102c6c6cd493f28790d681695cf58cb8c1c"},
+    {"file": "evidence/docs-links.txt", "sha256": "c9fee501f043225611117359db2ea7c0ce6aa45bf57cf40bb032a24355837759"},
+    {"file": "evidence/repo-history.txt", "sha256": "d0597b3dca50368080f87976ce55800a781cdcf0138c9f6f4e6d349ed5fa753d"}
+  ]
+}
