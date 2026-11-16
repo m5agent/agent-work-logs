@@ -121,3 +121,6 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
 [evidence/followup-panel-liveness.md](evidence/followup-panel-liveness.md)。
 证据等级 `hardware validation`（报告者观察）+ `code-level verification`；物理与虚拟设备
 `NOT RUN`（Tab5 profile 无 0x43/reset 模型，触摸为 GDB 邮箱）。
+
+第七轮回复：[issuecomment-6918409539](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918409539)
+（英文，单条；issue 保持开启，未推送上游）。
