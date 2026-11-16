@@ -9,7 +9,7 @@
 - 验证层级：**host-level test**（仓库自带 `test/board_detect/run.sh` + 合同桩编译矩阵）
 - 硬件 / 虚拟设备：`NOT RUN`（编译期问题，无运行时行为可观测；本机无 Arduino ESP32 core / ESP-IDF 源码）
 - 上一轮记录：[2026-11-16-pr422-board-detect-log-warnings](../2026-11-16-pr422-board-detect-log-warnings/README.md)（`FAIL`，保留不改）
-- GitHub 回复：PR #422 本轮复核评论（2026-11-16，英文单条）
+- GitHub 回复：[issuecomment-6913839945](https://github.com/m5stack/M5GFX/pull/422#issuecomment-6913839945)（英文，单条；PR 保持 OPEN）
 - 环境：macOS 26.5.1，Apple clang 21.0.0（`clang-2100.1.1.101`）
 
 ## 结论
