@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-16 | ESP Emulator / StickC-Plus2 | #228 ESP32 合并镜像引导偏移校验 | `PASS`（原版 ROM 失败复现、提前拒绝和 E_STATIC；官方固件进入 Cloud 画面） | [查看](esp-emulator/2026-11-16-esp32-bootloader-offset/) |
+| 2026-11-16 | ESP Emulator / Tab5 | #227 / #226 原版触摸和 USB 启动、旧 P4 CSR 对照 | `PARTIAL`（9 个原版会话；旧版实际断言、新版 CSR 异常；问题保持开放） | [查看](esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-16-tab5-touch-usb-csr/) |
 | 2026-11-14 | ESP Emulator | Pages 发布与实际 HTTPS 两例 | `PASS`（2179文件、HTTPS83项及文档main CI；旧hosted全门边界保留） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-pages-delivery/) |
 | 2026-11-14 | ESP Emulator | Pages 完整本地资格与精确包 | `PASS`（本地72/72、2993项及2179文件闭集；发布/HTTPS NOT RUN） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-14-pages-qualification/) |
 | 2026-11-14 | ESP Emulator / Tab5 | esp-emu v1.0.0 两份原版固件复测 | `FAIL`（两原版均卡在旧 P4 CSR；执行与清理通过，USB 未到达） | [查看](esp-emulator/2026-11-14-p4-v1-originals/) |

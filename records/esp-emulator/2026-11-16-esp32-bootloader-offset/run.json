@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Reject a merged ESP32 image whose bootloader is at the wrong ROM offset",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/228",
+    "base_commit": "12c01eab89c41794ecea4b5b4d3eadf63999feab",
+    "candidate_commit": "1cb1975be1828ed72fad22dce1098a9565f78f86",
+    "firmware_review_commit": "2846fe9b4ee73d4b4dbb9afaf31f439d0b6c34f2",
+    "candidate_inventory_commit": "3640cc17db5ec52fc407a38ca3f8baa1a3080bd0",
+    "candidate_documentation_commit": "7c47a09dbc3d786628eb182fa48bcd873ff2e81b"
+  },
+  "hardware": {
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "device": "StickC-Plus2",
+    "original_sha256": "16cd916ac688555171a6d00ebf877d71053fcd40148c493564ab70ca90992c82",
+    "reference_sha256": "9b553277331a2cbb61b3fd73188da05bd312c66edd5ad2f39adfa4e155abf254"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13, isolated native Device Service and saved-snapshot firmware review",
+    "runtime_sha256": "5ce7d9f5ce397ce87935626c0284955714e0ed286fcce0cd91ca47f4f326040c",
+    "rom_sha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "unchanged original ROM failure",
+      "status": "PASS"
+    },
+    {
+      "name": "early compose/import and stored-image session rejection",
+      "status": "PASS"
+    },
+    {
+      "name": "review worker E_STATIC and zero sessions",
+      "status": "PASS"
+    },
+    {
+      "name": "official ESP32 0x1000 reference image serial and RGB frame",
+      "status": "PASS"
+    },
+    {
+      "name": "physical device and hosted/browser WASM",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "evidence ZIP hashes and all manifest entries",
+      "status": "PASS"
+    },
+    {
+      "name": "initial platform suite with stale API inventory binding",
+      "status": "FAIL"
+    },
+    {
+      "name": "full platform suite after inventory binding correction",
+      "status": "PASS"
+    },
+    {
+      "name": "firmware reviewer standalone test suite (87 tests)",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/baseline-rom-summary.json",
+    "evidence/candidate-first-observer-summary.json",
+    "evidence/candidate-retest-summary.json",
+    "evidence/archive-integrity-summary.json",
+    "evidence/platform-regression-summary.json"
+  ],
+  "notes": [
+    "No review submission was requested. The original BIN was not repacked.",
+    "Pre-existing saved analysis was refreshed with POST before the legacy session rejection check."
+  ]
+}

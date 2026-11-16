@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "title": "Tab5 original firmware startup diagnostics for touch, USB and old P4 CSR",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/227",
+    "related_issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/226",
+    "base_commit": "55e5763eac90a8166a3b0c522fd5291b99810517",
+    "documentation_commit": "ca833e8475a7ea0975309620f860f72e4b6b7baa",
+    "prior_record": "../../README.md"
+  },
+  "hardware": {
+    "device": "Tab5",
+    "soc": "ESP32-P4",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "CarPlay-Tab5": {
+      "firmware_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+      "firmware_bytes": 2221360,
+      "execution_firmware_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b",
+      "app_descriptor": {
+        "project_name": "carplay_tab5",
+        "version": "1.0.0",
+        "idf_version": "v5.5.3",
+        "elf_sha256": "5a9cecd71d5f3f3ec58e6c1d55cc5accc31f12c3af8a9b0a8072841e1e9de22b",
+        "min_efuse_blk_rev_full": 0,
+        "max_efuse_blk_rev_full": 199
+      }
+    },
+    "M5TabOS": {
+      "firmware_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+      "firmware_bytes": 7439248,
+      "execution_firmware_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec",
+      "app_descriptor": {
+        "project_name": "M5tabOS",
+        "version": "0.9.1",
+        "idf_version": "5.5.5",
+        "elf_sha256": "b795bfec03fa67f3e691be833d43becfa1211c2e14ff89c16e75f741f864bcd1",
+        "min_efuse_blk_rev_full": 0,
+        "max_efuse_blk_rev_full": 199
+      }
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": {
+      "backend": "native esp-emu selected through normal Device Service qemu Tab5 session",
+      "rom_revision": "esp32p4_rev0",
+      "efuse_fixture_revision": "Tab5 P4 1.0; session-owned copy",
+      "psram_mib": 32,
+      "console": "uart0",
+      "c6_companion": "present in every executed run; same runtime binary as P4",
+      "i2c_addresses": [
+        "0x32",
+        "0x41",
+        "0x43",
+        "0x44",
+        "0x68"
+      ],
+      "i2c_config_unchanged": true,
+      "firmware_instructions_modified": false,
+      "gdb": "Hardware breakpoints, read-only registers/memory; explicit single-instruction stepping only in CSR controls. No register or memory writes."
+    },
+    "runtime_sha256": {
+      "1.0.0": "cdfe1e8f3d447af4af12f0699457e958af0ea6ff8601d909079801c8655c6ef5",
+      "0.50.0": "a4c3468a4abf3f2e55ca0912fa7cdfbe5e101ecb6ab74a9ec35182d70ba6a771"
+    },
+    "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "c6_firmware_sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+    "executed_guest_sessions": 9,
+    "first_harness_attempt": "NOT RUN: misread discovery API before upload",
+    "cleanup": "Every executed session exported ZIP before purge=0 stop; mutable Flash released; all owned P4/C6 processes and isolated service exited."
+  },
+  "checks": [
+    {
+      "name": "0.50.0 CarPlay original abort reproduced",
+      "status": "PASS"
+    },
+    {
+      "name": "0.50.0 M5TabOS 0.9.1 original DWC abort reproduced",
+      "status": "PASS"
+    },
+    {
+      "name": "0.50.0 old P4 CSR positive controls both reached PC+4",
+      "status": "PASS"
+    },
+    {
+      "name": "1.0.0 original application readiness",
+      "status": "FAIL"
+    },
+    {
+      "name": "1.0.0 old CSR single-step reproduced on both originals",
+      "status": "PASS"
+    },
+    {
+      "name": "application framebuffer, touch input, USB-host enumeration, network, physical hardware and browser",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "evidence ZIP integrity, application bytes and cleanup",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/runtime-summary.redacted.json",
+    "evidence/archive-integrity-summary.json"
+  ]
+}

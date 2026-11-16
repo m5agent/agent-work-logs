@@ -48,6 +48,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-16 | ESP Emulator / StickC-Plus2 | #228 ESP32 合并镜像引导偏移校验 | `PASS`（原版 ROM 失败复现、提前拒绝和 E_STATIC；官方固件进入 Cloud 画面） | [查看](records/esp-emulator/2026-11-16-esp32-bootloader-offset/) |
+| 2026-11-16 | ESP Emulator / Tab5 | #227 / #226 原版触摸和 USB 启动、旧 P4 CSR 对照 | `PARTIAL`（9 个原版会话；旧版实际断言、新版 CSR 异常；问题保持开放） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-16-tab5-touch-usb-csr/) |
 | 2026-11-16 | Firmware Review Service | 设备映射、Tab5 ELF 取证与触摸声明修复 | `PASS`（86 项测试、两条复审；三款机型完整复审 NOT RUN） | [查看](records/firmware-review-service/2026-11-16-device-map-tab5-elf-touch-fix/) |
 | 2026-11-16 | ESP Emulator | Cardputer 运行时板型探测回退与两日审核归因 | `PARTIAL`（4 条板型缺陷开 #230；其余多为服务/取证问题） | [查看](records/m5stack-esp-emulator/2026-11-16-cardputer-runtime-board-detect/) |
 | 2026-11-16 | M5GFX / Tab5 | ST7123 停止轮询后的鬼触点（#418 代码级核对） | `REVIEW`（无过滤、intensity 丢弃；硬件/虚拟设备 NOT RUN） | [查看](records/m5gfx/2026-11-16-tab5-st7123-ghost-touch/) |
