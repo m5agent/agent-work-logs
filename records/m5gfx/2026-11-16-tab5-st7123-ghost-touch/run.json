@@ -129,13 +129,43 @@
       "name": "upstream round-5 comment",
       "status": "PASS",
       "details": "Posted one English comment at https://github.com/m5stack/M5GFX/issues/418#issuecomment-6915706899; issue left open, no code pushed, no repository changed."
+    },
+    {
+      "name": "runtime 0x43 flip keeps the latch and gates frames by the driven level",
+      "status": "REVIEW",
+      "details": "Author measured: rejecting the drive (A2) stops frames in one cycle with adv_info still 0x08; re-driving (A3) restarts them at cycle 1; a fresh driven state (B2) takes 4 cycles and sets 0x08 in the same cycle as the first frame. Device-side measurement, not reproduced here."
+    },
+    {
+      "name": "adv_info 0x08 is not sufficient for frames",
+      "status": "REVIEW",
+      "details": "A2 and B3: 0x08 set, LCD_RST on the pull-up, 0 frames in 60 cycles. Corrects the earlier 'frames need both the latch and the driven pin' reading."
+    },
+    {
+      "name": "10 ms LCD_RST pulse does not clear with_coord",
+      "status": "REVIEW",
+      "details": "3 ms after release the touch side answered (FW 01, 0x0009=10) with adv_info still 0x08; 0x00 appeared only ~2 s later, in the window where the display was reset into sleep-in (DCS 0x0A=0x08) and stayed dark. Clearing is confounded with display power-down."
+    },
+    {
+      "name": "one DCS 0x0A read suppresses ghost frames while the pin stays driven",
+      "status": "REVIEW",
+      "details": "Boot C: 100 frames in 50 cycles, then one DCS 0x0A read (0x9C) with P4 still driven, then 0 frames in 60 cycles with adv_info still 0x08. Boots D/E and 8 more: frames never form when the read precedes the latch. Device-side measurement, not reproduced here."
+    },
+    {
+      "name": "M5GFX Tab5 init path issues no DCS read",
+      "status": "PASS",
+      "details": "Panel_DSI.cpp:36-75 init_panel writes only via writeParams; Panel_DSI::init sends SWRESET only when getResetDelayBeforeDpi()!=0 (Panel_DSI.cpp:122-141) and Panel_DSI.hpp:91 returns 0, not overridden by Panel_ST7121; Bus_DSI::readParams (Bus_DSI.cpp:80-83) is called by no panel/touch path; the only esp_lcd_panel_io_rx_param users in esp32p4 are the LT8912B bridge (Panel_LT8912B.cpp:566-568)."
+    },
+    {
+      "name": "0x43 block after M5.begin() is identical in the sketch and the firmware",
+      "status": "REVIEW",
+      "details": "Author measured 0x03=0x73, 0x05=0x74, 0x07=0x08, 0x0B=0x04, 0x0D=0x04, 0x0F=0x04 on both sides, with DCS 0x0A=0x9C and adv_info=0x00. Closes the expander-configuration branch; the block is not static (0x05 moves when the amp switches), so a post-begin dump cannot speak for the latch instant."
     }
   ],
   "evidence": [
     {
       "file": "README.md",
-      "bytes": 6921,
-      "sha256": "b1261e5f6965330aa3ed5de60d0cc70c1aa4171c43ab8d564bbbe5e2a5bbe615"
+      "bytes": 7779,
+      "sha256": "c6cf91e16b9b146d5761c14733688196093a6fe283e6dadc820457188c3e6ee3"
     },
     {
       "file": "code/README.md",
@@ -158,6 +188,11 @@
       "sha256": "2cc098c31b497ca9e2022b6f3211aa093c45e2f7e48294ab27e53212094fed20"
     },
     {
+      "file": "evidence/followup-lcd-rst-flip.md",
+      "bytes": 7616,
+      "sha256": "f6a2881b602de0410b8a11844fe53e14f5dd315058fba4e3a041f522a02f5682"
+    },
+    {
       "file": "evidence/parse-check-output.txt",
       "bytes": 596,
       "sha256": "ae531eb29d1069d69a34d43f31c4dd27132bd0c21840b977541359b831337890"
@@ -169,8 +204,8 @@
     },
     {
       "file": "report.md",
-      "bytes": 17043,
-      "sha256": "84f429f229feeec185e748c5ac687b1f516c4b28ab12e1e30099f0449fa51b0a"
+      "bytes": 19205,
+      "sha256": "f35e93f645a1d14dfe6176fe402484be83504cf8217e1868c7bebc9d2eab2c3a"
     }
   ],
   "notes": [
@@ -178,7 +213,8 @@
     "Host parse results are not device validation.",
     "The reporter's ghost statistics are quoted as their measurements, not reproduced here.",
     "Round 2 adds the author's INT/frame trace and a protocol §6.6 cross-check; no hardware or virtual-device run here.",
-    "Round 5 corrects two earlier statements: the 0x43 expander block does differ between the pinned and develop builds (#367), and the sticky with_coord bit is a symptom of the controller's init state rather than a failed read acknowledgement."
+    "Round 5 corrects two earlier statements: the 0x43 expander block does differ between the pinned and develop builds (#367), and the sticky with_coord bit is a symptom of the controller's init state rather than a failed read acknowledgement.",
+    "Round 6 corrects two statements: the 10 ms LCD_RST pulse did not clear with_coord (the clear coincided with the display entering sleep-in), and 0x08 is not a second precondition for ghost frames (A2/B3 are counter-cases)."
   ],
   "followups": [
     {
@@ -194,6 +230,13 @@
       "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6915523306",
       "summary": "报告者用强制读排除 with_coord 门控，把差异二分到 M5Unified#367（24dad4ff）；该 PR 只改三个字节，把 Tab5 的 P4/LCD_RST 从推挽输出改为输入+内部上拉，TP_RST 不变。M5GFX Tab5 路径不控制该引脚，故 M5Unified 扩展器初始化是唯一写入者；adv_info 0x08 与鬼点 1:1 共变，指向上电/复位状态而非解析差异。",
       "evidence": "evidence/followup-lcd-rst-367.md"
+    },
+    {
+      "date": "2026-11-16",
+      "round": 6,
+      "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918020061",
+      "summary": "报告者做了运行期 0x43 翻转、10 ms LCD_RST 低脉冲和两边 0x43 转储。翻转显示帧由驱动电平连续门控（无需复位），0x08 是与首帧同轮出现的粘滞标记而非前置条件（B3/A2 为反例）；脉冲在 3 ms 后仍未清 0x08，清除与显示进入 sleep-in 同窗，“只有低脉冲能清”属过度归因；一次 DCS 0x0A 读在引脚仍驱动时即可停止 60 轮帧，而 M5GFX 自身不做 DCS 读，说明显示命令路径会改变共享 TDDI 的触摸上报状态；0x43 两边一致，扩展器配置分支关闭，剩余差异是 M5.begin() 之后的活动。",
+      "evidence": "evidence/followup-lcd-rst-flip.md"
     }
   ]
 }

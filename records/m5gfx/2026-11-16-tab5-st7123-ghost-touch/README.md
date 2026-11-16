@@ -94,3 +94,16 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
   reset 网络模型）。
 
 新增证据：[evidence/followup-lcd-rst-367.md](evidence/followup-lcd-rst-367.md)。
+
+## 追加：翻转/脉冲/0x43 转储（2026-11-16，第六轮）
+
+- 帧由 LCD_RST 的驱动电平连续门控（一轮内可停可起，无需复位）；`0x08` 是粘滞标记而非
+  前置条件（B3/A2：已置位 + 上拉 = 0 帧）。
+- 10 ms 低脉冲在 3 ms 后仍未清 `0x08`，`0x00` 出现在显示被打入 sleep in 的同一窗口，
+  故“只有低脉冲能清”是过度归因。
+- 一次 DCS `0x0A` 读可在 P4 仍驱动时停止 60 轮帧；M5GFX 自身不做 DCS 读，说明这是
+  显示命令路径影响共享 TDDI 状态。
+- `0x43` 两边字节相同，扩展器配置分支关闭；但转储时机应改到 `0x08` 首次置位那一轮。
+
+新增证据：[evidence/followup-lcd-rst-flip.md](evidence/followup-lcd-rst-flip.md)。
+证据等级 `code-level verification` + 报告者测量；物理与虚拟设备 `NOT RUN`。
