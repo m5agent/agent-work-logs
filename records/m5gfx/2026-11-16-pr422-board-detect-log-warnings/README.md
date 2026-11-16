@@ -10,7 +10,7 @@
   `M5GFX_BOARD_DETECT_IO_HEADER` 合同桩编译矩阵、快照恢复运行时等价检查）
 - 硬件 / 虚拟设备：`NOT RUN`（这是编译期与日志宏问题，没有可观测的运行时行为；本机没有
   Arduino/ESP-IDF 工具链）
-- GitHub 回复：发布后补充（单条英文评论，PR 保持 OPEN）
+- GitHub 回复：[issuecomment-6911547651](https://github.com/m5stack/M5GFX/pull/422#issuecomment-6911547651)（英文，单条；PR 保持 OPEN）
 - 环境：macOS，Apple clang 21.0.0（`clang-2100.1.1.101`）
 
 ## 结论
