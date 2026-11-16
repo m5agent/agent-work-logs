@@ -1,0 +1,26 @@
+M5GFX board_detect compile matrix (host stub, no Arduino/ESP-IDF toolchain)
+generated: 2026-11-16T08:37:28Z
+compiler: Apple clang version 21.0.0 (clang-2100.1.1.101)
+command: c++ -std=gnu++17 -Wall -Wextra -fsyntax-only -I<checkout>/src -I. -DM5GFX_BOARD_DETECT_IO_HEADER=\"stub_io.hpp\" tu.cpp
+master: 28d47949bdc84f30881623476f555398e2194313
+PR 422 head: ab6cf1c538db39a0c2108840ebddddeca828fdbe
+
+===== master 28d4794 | log arguments compiled out (ESP_LOGx -> no-op, CORE_DEBUG_LEVEL=0 equivalent) =====
+/tmp/m5gfx-422-evidence/master/src/board_detect/ops.inl:19:58: warning: unused parameter 'device' [-Wunused-parameter]
+/tmp/m5gfx-422-evidence/master/src/board_detect/ops.inl:20:53: warning: unused parameter 'elapsed_ms' [-Wunused-parameter]
+/tmp/m5gfx-422-evidence/master/src/board_detect/ops.inl:20:70: warning: unused parameter 'ready' [-Wunused-parameter]
+/tmp/m5gfx-422-evidence/master/src/board_detect/transaction.inl:59:9: warning: variable 'missing_pin' set but not used [-Wunused-but-set-variable]
+/tmp/m5gfx-422-evidence/master/src/board_detect/detector_runner.inl:51:19: warning: unused variable 'family' [-Wunused-variable]
+/tmp/m5gfx-422-evidence/master/src/board_detect/prepare.inl:8:81: warning: unused parameter 'why' [-Wunused-parameter]
+
+===== master 28d4794 | ESP_LOGD enabled (arguments evaluated) =====
+
+===== PR422 ab6cf1c | log arguments compiled out (ESP_LOGx -> no-op, CORE_DEBUG_LEVEL=0 equivalent) =====
+/tmp/m5gfx-422-evidence/pr/src/board_detect/ops.inl:19:58: warning: unused parameter 'device' [-Wunused-parameter]
+/tmp/m5gfx-422-evidence/pr/src/board_detect/ops.inl:20:53: warning: unused parameter 'elapsed_ms' [-Wunused-parameter]
+/tmp/m5gfx-422-evidence/pr/src/board_detect/ops.inl:20:70: warning: unused parameter 'ready' [-Wunused-parameter]
+/tmp/m5gfx-422-evidence/pr/src/board_detect/prepare.inl:8:81: warning: unused parameter 'why' [-Wunused-parameter]
+
+===== PR422 ab6cf1c | ESP_LOGD enabled (arguments evaluated) =====
+/tmp/m5gfx-422-evidence/pr/src/board_detect/detector_runner.inl:66:80: error: use of undeclared identifier 'family'
+1 error generated.
