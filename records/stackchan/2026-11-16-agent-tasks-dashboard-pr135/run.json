@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "StackChan PR #135 agent tasks dashboard and gateway review",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/StackChan/pull/135",
+    "repository": "https://github.com/yuanxiaoyu/StackChan",
+    "base_commit": "28b9f0c",
+    "head_commit": "01b78f686507ae477fede7c62e7cc5f8d92e002b"
+  },
+  "hardware": {},
+  "firmware": {
+    "target": "M5Stack StackChan (ESP32-S3)",
+    "build": "NOT RUN (ESP-IDF 6.1 and fetched xiaozhi components unavailable)",
+    "flash": "NOT RUN",
+    "image_sha256": "",
+    "reported_image_size": 4292768,
+    "reported_partition": "ota_0 0x4f0000"
+  },
+  "execution": {
+    "environment": "macOS 15 arm64, Python 3.12.14 venv, host clang/CMake, no ESP-IDF",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "firmware host ctest",
+      "command": "cmake -S firmware/tests -B build && cmake --build build && ctest --output-on-failure",
+      "status": "PASS",
+      "detail": "3/3 (motion_math_test, agent_tasks_model_test, home_gesture_test)"
+    },
+    {
+      "name": "gateway pytest",
+      "command": "python -m pytest -q",
+      "status": "PARTIAL",
+      "detail": "913 passed, 5 skipped, 1 failed; failure is platform-specific getaddrinfo message assertion"
+    },
+    {
+      "name": "gateway uv lock check",
+      "command": "uv lock --check",
+      "status": "PASS",
+      "detail": "resolved 90 packages"
+    },
+    {
+      "name": "agent dashboard endpoint contract",
+      "command": "serve --transport streamable-http --no-mdns + GET /agent-dashboard",
+      "status": "PASS",
+      "detail": "401 without bearer, 200 with bearer, fields match firmware parser"
+    },
+    {
+      "name": "firmware build",
+      "command": "idf.py build",
+      "status": "NOT RUN",
+      "detail": "ESP-IDF v6.1 toolchain not installed"
+    },
+    {
+      "name": "virtual device / hardware",
+      "command": "",
+      "status": "NOT RUN",
+      "detail": "no flashable BIN from PR; no hardware access"
+    }
+  ],
+  "evidence": [
+    "evidence/01-firmware-ctest.log",
+    "evidence/02-gateway-pytest.log",
+    "evidence/03-scope.txt",
+    "evidence/04-gateway-dashboard-contract.txt"
+  ],
+  "notes": [
+    "Read-only review: no upstream push, no PR close.",
+    "Review findings F1-F6 are documented with file:line in report.md.",
+    "Author hardware validation is self-reported and not reproducible without a build artifact."
+  ]
+}

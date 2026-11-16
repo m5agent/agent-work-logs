@@ -1,0 +1,19 @@
+Gateway /agent-dashboard contract check (loopback, throwaway bearer token, 2026-11-16 UTC)
+Command shape: python -m stackchan_mcp serve --transport streamable-http --no-mdns
+Address replaced with <loopback>:<port> below.
+
+GET /agent-dashboard without Authorization  -> HTTP 401
+GET /agent-dashboard with Bearer token      -> HTTP 200
+Body:
+{"agents":[{"agent":"codex","online":false,"stale":false,"status":"idle","stage":"","tasks":[]},{"agent":"claude","online":false,"stale":false,"status":"idle","stage":"","tasks":[]}]}
+
+GET /healthz -> 200 {"ok":true}
+
+Field-by-field comparison with the firmware parser
+(firmware/main/apps/app_agent_tasks/agent_tasks_poller.cpp:23-57):
+- top-level "agents" is an array of exactly 2 entries          -> matches (== 2 required)
+- entry 0 "agent" == "codex", entry 1 "agent" == "claude"     -> matches (order enforced)
+- "status" is one of idle/working/waiting/completed/failed     -> matches
+- "stage" string, "online"/"stale" bools, "tasks" array        -> matches
+- task fields id/text/status with pending/in_progress/completed-> matches
+- Content-Length present (the firmware relies on GetBodyLength) -> matches

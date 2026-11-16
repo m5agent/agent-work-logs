@@ -1,0 +1,34 @@
+/private/tmp/stackchan-pr135/gateway/.venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+.................................................................s...... [  7%]
+..........................................................F............. [ 15%]
+........................................................................ [ 23%]
+........................................................................ [ 31%]
+........................................................................ [ 39%]
+........................................................................ [ 47%]
+........................................................................ [ 54%]
+........................................................................ [ 62%]
+........................................................................ [ 70%]
+........................................................................ [ 78%]
+........................................................................ [ 86%]
+..........................ssss.......................................... [ 94%]
+.......................................................                  [100%]
+=================================== FAILURES ===================================
+_____________ test_check_port_unresolvable_host_returns_bind_error _____________
+
+    def test_check_port_unresolvable_host_returns_bind_error() -> None:
+        """``getaddrinfo`` failure is reported as a bind error, not a crash."""
+        # ``.invalid`` is reserved by RFC 6761 and never resolves.
+        available, info = _check_port("nonexistent.invalid", 0)
+        assert available is False
+        assert info is not None
+        assert info.startswith("bind error:")
+>       assert "getaddrinfo failed" in info
+E       assert 'getaddrinfo failed' in "bind error: Can't assign requested address"
+
+tests/test_cli.py:472: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_check_port_unresolvable_host_returns_bind_error
+1 failed, 913 passed, 5 skipped in 13.50s
