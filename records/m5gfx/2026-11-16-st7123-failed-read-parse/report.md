@@ -28,7 +28,7 @@
 ### 2.2 “失败时缓冲区未动或只填一部分”成立
 
 - `_readParams()`（`:39-44`）返回 `lgfx::i2c::transactionWriteRead(...).has_value()`。
-- `transactionWriteRead()`（`src/lgfx/v1/platforms/esp32/common.inl:2650-2661`）依次执行
+- `transactionWriteRead()`（`src/lgfx/v1/platforms/esp32/common.inl:2650-2662`）依次执行
   `beginTransaction` → `writeBytes` → `restart` → `readBytes`；任一环节失败即带着错误
   返回，不会回滚已写入的字节。
 - `readBytes()`（同文件 `:2542-2630`）在循环里逐字节写 `*readdata++ = *fifo_addr;`，
@@ -46,7 +46,7 @@
 
 ### 2.4 `_read_fw_info()` 的失败路径
 
-`Touch_ST7123.inl:47-71`：
+`Touch_ST7123.inl:47-76`：
 
 ```cpp
 if (_readParams(...) && _readParams(...) && _readParams(...)) {
@@ -56,7 +56,7 @@ if (_readParams(...) && _readParams(...) && _readParams(...)) {
 return true;
 ```
 
-三次读取全失败时整个 `if` 被跳过，直接返回 `true`。`init()`（`:88-106`）看到
+三次读取全失败时整个 `if` 被跳过，直接返回 `true`。`init()`（`:78-107`）看到
 `_read_fw_info()` 为真就置 `_inited = true`、调用 `wakeup()` 并返回 `true`，不会走
 六次重试。也就是说芯片完全不应答时触摸初始化仍报成功。
 

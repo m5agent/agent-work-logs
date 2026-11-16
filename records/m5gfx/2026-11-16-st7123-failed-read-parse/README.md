@@ -29,10 +29,10 @@
 - `readBytes()` 在收到字节时逐字节写入调用方缓冲区，NACK/超时后返回
   `connection_lost`（`src/lgfx/v1/platforms/esp32/common.inl:2542-2630`），因此失败时
   缓冲区可能完全未动，也可能只填了一部分；`transactionWriteRead()` 在
-  `:2650-2661` 汇总该错误。
+  `:2650-2662` 汇总该错误。
 - 0.2.28 的 `Touch_ST7123.cpp` 与 master 的 `getTouchRaw()` 函数体逐字相同，
   “0.2.28 已存在、0.3.0 未修”成立。
-- `_read_fw_info()`（`:47-71`）只在三次读取都成功时进入全零判断；失败路径直接落到
+- `_read_fw_info()`（`:47-76`）只在三次读取都成功时进入全零判断；失败路径直接落到
   `return true`。
 - host 复现输出见 [evidence/get-touchraw-output.txt](evidence/get-touchraw-output.txt)
   与 [evidence/fw-info-output.txt](evidence/fw-info-output.txt)。
