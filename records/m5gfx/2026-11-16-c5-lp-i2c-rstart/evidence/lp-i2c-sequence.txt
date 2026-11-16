@@ -1,0 +1,169 @@
+M5GFX master 28d47949bdc84f30881623476f555398e2194313
+file: src/lgfx/v1/platforms/esp32/common.inl
+sha256: 9d533bba091baf5c9b234d2e300c8c747be6726509da2617daebbb9ab2f7fefe
+retrieved: 2026-11-16 from https://github.com/m5stack/M5GFX
+
+===== LP init: i2c_new_master_bus (lines 2146-2168) =====
+ 2146: #if LGFX_LP_I2C_NUM > 0
+ 2147:       if (isLpPort(i2c_port))
+ 2148:       {
+ 2149:         i2c_master_bus_config_t bus_config;
+ 2150:         memset(&bus_config, 0, sizeof(i2c_master_bus_config_t));
+ 2151:         bus_config.i2c_port = i2c_port;
+ 2152:         bus_config.sda_io_num = pin_sda;
+ 2153:         bus_config.scl_io_num = pin_scl;
+ 2154:         bus_config.lp_source_clk = LGFX_LP_I2C_SCLK;
+ 2155:         bus_config.glitch_ignore_cnt = 7;
+ 2156:         bus_config.flags.enable_internal_pullup = true;
+ 2157:         bus_config.intr_priority = 1;
+ 2158: 
+ 2159:         i2c_master_bus_handle_t bus_handle = nullptr;
+ 2160:         if (ESP_OK != i2c_new_master_bus(&bus_config, &bus_handle))
+ 2161:         { // The pins of the low power port are constrained: they have to be LP IO, and on
+ 2162:           // the chips without an LP GPIO matrix they are a fixed pair.
+ 2163:           return cpp::fail(error_t::invalid_arg);
+ 2164:         }
+ 2165:         i2c_context[i2c_port].i2c_bus_handle = bus_handle;
+ 2166:         i2c_context[i2c_port].initialized = true;
+ 2167: 
+ 2168:         // The pads are already routed to the peripheral by the call above, and they do not
+
+===== restart(): command sequence (lines 2232-2262) =====
+ 2232:     cpp::result<void, error_t> restart(int i2c_port, int i2c_addr, uint32_t freq, bool read)
+ 2233:     {
+ 2234:       if (isSoftPort(i2c_port)) { return soft_i2c_restart(i2c_port, i2c_addr, freq, read); }
+ 2235:       if (i2c_port >= LGFX_I2C_PORT_NUM) { return cpp::fail(error_t::invalid_arg); }
+ 2236:       if (i2c_context[i2c_port].owner.load() != xTaskGetCurrentTaskHandle())
+ 2237:       { return cpp::fail(error_t::mode_mismatch); }
+ 2238:       if (i2c_addr < I2C_7BIT_ADDR_MIN || i2c_addr > I2C_10BIT_ADDR_MAX) return cpp::fail(error_t::invalid_arg);
+ 2239: 
+ 2240:       auto res = i2c_wait(i2c_port);
+ 2241:       if (res.has_error()) return res;
+ 2242: 
+ 2243: // ESP_LOGI("LGFX", "i2c::restart : port:%d / addr:%02x / freq:%d / rw:%d", i2c_port, i2c_addr, freq, read);
+ 2244: 
+ 2245:       auto dev = getDev(i2c_port);
+ 2246: 
+ 2247:       auto fifo_addr = getFifoAddr(i2c_port);
+ 2248:       i2c_set_cmd(dev, 0, i2c_cmd_start, 0);
+ 2249:       i2c_set_cmd(dev, 2, i2c_cmd_end, 0);
+ 2250:       if (i2c_addr <= I2C_7BIT_ADDR_MAX)
+ 2251:       { // 7bitアドレスの場合;
+ 2252:         *fifo_addr = i2c_addr << 1 | (read ? I2C_MASTER_READ : I2C_MASTER_WRITE);
+ 2253:         i2c_set_cmd(dev, 1, i2c_cmd_write, 1);
+ 2254:       }
+ 2255:       else
+ 2256:       { // 10bitアドレスの場合;
+ 2257:         *fifo_addr = 0xF0 | (i2c_addr>>8)<<1 | I2C_MASTER_WRITE;
+ 2258:         *fifo_addr =         i2c_addr;
+ 2259:         i2c_set_cmd(dev, 1, i2c_cmd_write, 2);
+ 2260:         if (read)
+ 2261:         { // 10bitアドレスのread要求の場合;
+ 2262:           *fifo_addr = 0xF0 | (i2c_addr>>8)<<1 | I2C_MASTER_READ;
+
+===== writeBytes(): starts and returns (lines 2501-2538) =====
+ 2501:     cpp::result<void, error_t> writeBytes(int i2c_port, const uint8_t *data, size_t length)
+ 2502:     {
+ 2503:       if (isSoftPort(i2c_port)) { return soft_i2c_writeBytes(i2c_port, data, length); }
+ 2504:       if (i2c_port >= LGFX_I2C_PORT_NUM) { return cpp::fail(error_t::invalid_arg); }
+ 2505:       if (i2c_context[i2c_port].owner.load() != xTaskGetCurrentTaskHandle())
+ 2506:       { return cpp::fail(error_t::mode_mismatch); }
+ 2507:       if (i2c_context[i2c_port].state.has_error()) { return cpp::fail(i2c_context[i2c_port].state.error()); }
+ 2508:       if (i2c_context[i2c_port].state != i2c_context_t::state_write) { return cpp::fail(error_t::mode_mismatch); }
+ 2509:       cpp::result<void, error_t> res {};
+ 2510:       if (!length) return res;
+ 2511: 
+ 2512:       const uint32_t txfifo_limit = getFifoLen(i2c_port);
+ 2513:       auto dev = getDev(i2c_port);
+ 2514:       auto fifo_addr = getFifoAddr(i2c_port);
+ 2515:       size_t len = ((length - 1) % txfifo_limit) + 1;
+ 2516:       do
+ 2517:       {
+ 2518:         res = i2c_wait(i2c_port);
+ 2519:         if (res.has_error())
+ 2520:         {
+ 2521:           ESP_LOGV("LGFX", "i2c write error : ack wait");
+ 2522:           break;
+ 2523:         }
+ 2524:         i2c_set_cmd(dev, 0, i2c_cmd_write, len);
+ 2525:         i2c_set_cmd(dev, 1, i2c_cmd_end, 0);
+ 2526:         size_t idx = 0;
+ 2527:         do
+ 2528:         {
+ 2529:           *fifo_addr = data[idx];
+ 2530:         } while (++idx != len);
+ 2531:         updateDev(dev);
+ 2532:         dev->int_clr.val = 0x1FFFF;
+ 2533:         dev->ctr.trans_start = 1;
+ 2534:         i2c_context[i2c_port].wait_ack_stage = 2;
+ 2535:         data += len;
+ 2536:         length -= len;
+ 2537:         len = txfifo_limit;
+ 2538:       } while (length);
+
+===== i2c_wait(): completion predicate (lines 1815-1840) =====
+ 1815: 
+ 1816:         dev->int_clr.val = int_raw.val;
+ 1817:         // A timeout or lost arbitration is fatal even when END is also set.
+ 1818:         if (int_raw.val & (I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M))
+ 1819:         {
+ 1820:           res = cpp::fail(error_t::connection_lost);
+ 1821:           i2c_context[i2c_port].state = cpp::fail(error_t::connection_lost);
+ 1822:         }
+ 1823:         else
+ 1824: #if LGFX_I2C_REG_LAYOUT == 0
+ 1825:         if (!int_raw.end_detect || int_raw.ack_err)
+ 1826: #elif LGFX_I2C_REG_LAYOUT == 3
+ 1827:         if (!int_raw.end_detect_int_raw || int_raw.nack_int_raw)
+ 1828: #else
+ 1829:         if (!int_raw.end_detect || int_raw.nack)
+ 1830: #endif
+ 1831:         {
+ 1832:           res = cpp::fail(error_t::connection_lost);
+ 1833:           i2c_context[i2c_port].state = cpp::fail(error_t::connection_lost);
+ 1834:         }
+ 1835:         i2c_context[i2c_port].wait_ack_stage = 0;
+ 1836: 
+ 1837:         // On a NACK the controller finishes the transaction with a STOP of its own
+ 1838:         // (the NACK interrupt fires while it is still on the bus). Taking the pins over
+ 1839:         // at that moment mangles that STOP and some slaves never accept a START again,
+ 1840:         // so let it complete: bus idle plus TRANS_COMPLETE means a STOP has been sent.
+
+===== i2c_wait(): force-stop branch (lines 1872-1884) =====
+ 1872:       if (flg_stop || res.has_error())
+ 1873:       {
+ 1874:         // After an error the peripheral may already be force-stopped; a normal STOP command then
+ 1875:         // never raises the completion interrupt and waits until the timeout, so take the force-stop path
+ 1876: #if LGFX_I2C_REG_LAYOUT == 3
+ 1877:         if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect_int_raw)
+ 1878: #else
+ 1879:         if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect)
+ 1880: #endif
+ 1881:         { // force stop
+ 1882:           // If state already holds an error, the bus was stopped where it was detected; do not stop
+ 1883:           // again (an error in res was detected in this call and is not stopped yet)
+ 1884:           if (!hw_stopped && (res.has_error() || !i2c_context[i2c_port].state.has_error()))
+
+===== readBytes(): single-byte command build (lines 2580-2600) =====
+ 2580:         length -= len;
+ 2581:         i2c_set_cmd(dev, 1, i2c_cmd_end, 0, false);
+ 2582:         bool flg_nack = (last_nack && length == 0);
+ 2583:         i2c_set_cmd(dev, 0, i2c_cmd_read, len - (flg_nack ? 1 : 0), false);
+ 2584:         if (flg_nack) {
+ 2585:           i2c_set_cmd(dev, (len == 1) ? 0 : 1, i2c_cmd_read, 1, true);
+ 2586:           i2c_set_cmd(dev, 2, i2c_cmd_end, 0, false);
+ 2587:         }
+ 2588:         updateDev(dev);
+ 2589:         dev->int_clr.val = intmask;
+ 2590:         dev->ctr.trans_start = 1;
+ 2591:         i2c_context[i2c_port].wait_ack_stage = 2;
+ 2592: 
+ 2593:         uint32_t us = lgfx::micros();
+ 2594:         taskYIELD();
+ 2595:         int delayus = ((us_limit + 2) >> 2) - (lgfx::micros() - us);
+ 2596:         if (delayus > 0) {
+ 2597:           delayMicroseconds(delayus);
+ 2598:         }
+ 2599:         do
+ 2600:         {
+

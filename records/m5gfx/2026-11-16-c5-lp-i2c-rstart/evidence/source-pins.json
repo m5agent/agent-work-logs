@@ -1,0 +1,59 @@
+{
+  "repository": "https://github.com/m5stack/M5GFX",
+  "retrieved": "2026-11-16",
+  "targets": [
+    {
+      "ref": "master",
+      "commit": "28d47949bdc84f30881623476f555398e2194313",
+      "tag": "0.3.0",
+      "files": [
+        {
+          "path": "src/lgfx/v1/platforms/esp32/common.inl",
+          "sha256": "9d533bba091baf5c9b234d2e300c8c747be6726509da2617daebbb9ab2f7fefe",
+          "lines": 2795,
+          "notes": "LP init 2146-2166; restart 2232-2358; writeBytes 2501-2537; readBytes 2542-2633; completion predicate 1827; force-stop branch 1877; i2c_stop 1736-1772; lp_i2c_ll_reset_register 1475; getFifoLen 1347-1355"
+        }
+      ]
+    },
+    {
+      "ref": "develop",
+      "commit": "b48dce0",
+      "files": [
+        {
+          "path": "src/lgfx/v1/platforms/esp32/common.inl",
+          "sha256": "7277eb4f341413d94b7788f3b675e54eec46d27f5cf86617c942571d36f0a95e",
+          "lines": 2958,
+          "notes": "Transfer path unchanged from 0.3.0 apart from check_ack plumbing and the input glitch filter; i2c_wait 1889, completion predicate 1938, writeBytes 2645"
+        }
+      ]
+    }
+  ],
+  "external_references": [
+    {
+      "project": "espressif/esp-idf",
+      "ref": "v5.5",
+      "files": [
+        {
+          "path": "components/hal/esp32c5/include/hal/i2c_ll.h",
+          "sha256": "de8db4d985c0edaae149bccb732349f0a1a6b077e8ffbde82e5a295424dacce1",
+          "notes": "cmd codes 6/1/3/2/4 at 46-50; i2c_ll_hw_cmd_t at 30-43; LP source clock at 828-853; LP reset at 875-883"
+        },
+        {
+          "path": "components/soc/esp32c5/include/soc/soc_caps.h",
+          "sha256": "e4c69bd641c4ed5c2b06971cf26fb7c950cadf2ce9dd36c0604326aedf118c12",
+          "notes": "SOC_I2C_NUM 267; SOC_HP_I2C_NUM 268; SOC_I2C_FIFO_LEN 270; SOC_I2C_CMD_REG_NUM 271; SOC_LP_I2C_NUM 287; SOC_LP_I2C_FIFO_LEN 289; no SOC_I2C_STOP_INDEPENDENT"
+        },
+        {
+          "path": "components/esp_driver_i2c/i2c_master.c",
+          "sha256": "34620436a7025db31e228e5958300b9c0e0e02c3d30ab242d09c1a6f0f35013f",
+          "notes": "I2C_FIFO_LEN macro 43-44; LP clock source 989-1012; single command list 204/294; op list RSTART/WRITE/RSTART/READ/STOP 1199-1212"
+        }
+      ]
+    }
+  ],
+  "local_environment": {
+    "device_service": "http://127.0.0.1:8787 (no ESP32-C5 profile; C6/P4/S3/ESP32/LX6 only)",
+    "esp_emulator": "no I2C controller model in platform/runtime/wasm",
+    "hardware_test_center": "nodes matrix / corep4 / sticks3 / stopwatch; no C5/ToughC5"
+  }
+}
