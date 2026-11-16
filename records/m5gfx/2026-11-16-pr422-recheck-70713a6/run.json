@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "pr_review",
+  "overall_status": "PASS",
+  "title": "M5GFX PR #422 follow-up recheck: (void)family fix compiles in both ESP_LOG argument modes",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/422",
+    "repository": "https://github.com/m5stack/M5GFX",
+    "base_branch": "master",
+    "base_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "base_tag": "0.3.0",
+    "head_commit": "70713a658b5b71aaf2fe73fee949796125e9d2e8",
+    "previous_head_commit": "ab6cf1c538db39a0c2108840ebddddeca828fdbe",
+    "head_repository": "Junbo-Zheng/M5GFX",
+    "head_branch": "fix/log-variable-warnings",
+    "previous_record": "records/m5gfx/2026-11-16-pr422-board-detect-log-warnings/",
+    "pins": "evidence/source-pins.json",
+    "github_reply": "posted 2026-11-16 (PR #422 review comment)"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "Compile-time/preprocessor change with no runtime observable; no M5GFX firmware involved."
+  },
+  "firmware": {
+    "target": "n/a (M5GFX board_detect library headers)",
+    "m5gfx": "0.3.0 base 28d4794 vs head 70713a6",
+    "binaries_included": false
+  },
+  "execution": {
+    "validation": "host-level test",
+    "host": "macOS 26.5.1, Apple clang 21.0.0 (clang-2100.1.1.101)",
+    "repository_harness": "sh test/board_detect/run.sh",
+    "compile_matrix": "33 translation units x {ESP_LOG args evaluated, discarded}, -Wall -Wextra -O2 -std=c++11 -pedantic",
+    "virtual_device": "NOT RUN: no Arduino ESP32 core or ESP-IDF source to build a minimal M5GFX sketch; defect decided at compile time",
+    "device_identifiers": "none used"
+  },
+  "checks": [
+    {
+      "name": "repository host test suite at base 28d4794",
+      "status": "PASS",
+      "details": "C++ test programs: 33 passed."
+    },
+    {
+      "name": "repository host test suite at head 70713a6",
+      "status": "PASS",
+      "details": "C++ test programs: 33 passed; this is the configuration that failed at ab6cf1c."
+    },
+    {
+      "name": "head compiles with ESP_LOG arguments discarded (approx CORE_DEBUG_LEVEL=0)",
+      "status": "PASS",
+      "details": "0 compile failures; 0 warnings in detector_runner.inl and transaction.inl (base had 29 + 29)."
+    },
+    {
+      "name": "head compiles with ESP_LOGD arguments evaluated (approx CORE_DEBUG_LEVEL>=4)",
+      "status": "PASS",
+      "details": "0 compile failures; 0 warnings in both changed files."
+    },
+    {
+      "name": "transaction.inl unchanged since the previous review",
+      "status": "PASS",
+      "details": "blob ef803e8 is identical to the previously reviewed version (both heads share parent a410256)."
+    },
+    {
+      "name": "full Arduino/ESP-IDF build at CORE_DEBUG_LEVEL=4/5",
+      "status": "NOT RUN",
+      "details": "No Arduino ESP32 core or ESP-IDF source on this host."
+    },
+    {
+      "name": "hardware validation",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "virtual-device validation",
+      "status": "NOT RUN"
+    }
+  ],
+  "observations": [
+    {
+      "name": "same-shape leftover at level 0",
+      "detail": "src/board_detect/m5/esp32p4.inl:227 revision is used only by ESP_LOGW, which is also compiled out at CORE_DEBUG_LEVEL=0; present on base and head, outside this PR's scope."
+    }
+  ],
+  "evidence": [
+    { "file": "README.md" },
+    { "file": "report.md" },
+    { "file": "code/recheck.sh" },
+    { "file": "evidence/compile-matrix.txt" },
+    { "file": "evidence/host-test-28d4794.txt" },
+    { "file": "evidence/host-test-70713a6.txt" },
+    { "file": "evidence/source-pins.json" }
+  ],
+  "notes": [
+    "Read-only recheck: no M5GFX change, no push to the author's branch, no PR close.",
+    "Host-level result, not a virtual-device or hardware result.",
+    "All workflows for head 70713a6 were action_required (first-time contributor approval), so GitHub has no check results.",
+    "Historical FAIL record at ab6cf1c is kept unchanged."
+  ]
+}
