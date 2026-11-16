@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "pull_request",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #423: close LP I2C reads with the controller STOP (code-level review)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/421",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/423",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "b48dce04c80d3e3c9874b7ba946c43d672129c28",
+    "head_commit": "cc60eaa02af50a559e7f856392a2b740f446fa0b"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS local; no ESP32-C5 hardware; device profiles up to ESP32-C6/P4; QEMU C6 without an LP I2C controller model; no ESP-IDF or Arduino-ESP32 toolchain",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "patch-applies-to-base",
+      "status": "PASS",
+      "detail": "git apply --check on b48dce0"
+    },
+    {
+      "id": "patch-scope",
+      "status": "PASS",
+      "detail": "single file +6/-2; force_stop_read = state_read && !isLpPort; expression equivalent when LGFX_LP_I2C_NUM == 0"
+    },
+    {
+      "id": "code-facts",
+      "status": "REVIEW",
+      "detail": "common.inl 1847-1882, 1583-1587, 1988, 2000-2037, 2278-2300, 2545-2549, 2555-2562, 2754 at b48dce0"
+    },
+    {
+      "id": "author-hardware-evidence",
+      "status": "REVIEW",
+      "detail": "ToughC5 + UnitNFC 400 kHz: 0/100 before, 100/100 after; regression items 100/100 at 100k/400k; reported by the author, not reproduced here"
+    },
+    {
+      "id": "other-lp-chips",
+      "status": "NOT RUN",
+      "detail": "C6 / P4 untested by the author and unavailable here; failure mode would be a 25 ms stall plus connection_lost on every read"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 in the local hardware test center"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "QEMU C6 LP domain returns all-ones for the RTC I2C block and drops writes; no C5 profile and no ST25R3916 model"
+    },
+    {
+      "id": "build",
+      "status": "NOT RUN",
+      "detail": "no ESP-IDF / Arduino-ESP32 toolchain on this host"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-view.json",
+    "evidence/pr-diff.patch",
+    "evidence/apply-check.txt",
+    "evidence/source-lines.txt",
+    "evidence/hardware-inventory.md",
+    "evidence/virtual-device-check.md",
+    "evidence/reply.md"
+  ],
+  "notes": [
+    "Review posted as a single Japanese comment; PR left OPEN and no upstream changes were made.",
+    "Remaining LP gaps acknowledged by the author: i2c_stop() bus recovery on beginTransaction and the readBytes timeout still cannot reach LP pads."
+  ]
+}
