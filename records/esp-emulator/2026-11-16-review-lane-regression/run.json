@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Saved-snapshot firmware review regression",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "source_commit": "2243f94c69ea3647594ec504b25b9033461494fa",
+    "review_main": "46529f185b3ba7e4e86c3f5632ca2b40860b3fe9"
+  },
+  "hardware": {},
+  "firmware": {
+    "exact_ids": "evidence/isolated-review-summary.json"
+  },
+  "execution": {
+    "environment": "isolated native Device Service and reviewer",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "check": "old layout rejected before guest",
+      "status": "PASS"
+    },
+    {
+      "check": "two Cardputer originals retain frame and input evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "original CarPlay reports explicit ELF gap",
+      "status": "PASS"
+    },
+    {
+      "check": "resident apply",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/isolated-review-summary.json"
+  ]
+}
