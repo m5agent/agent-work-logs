@@ -1,0 +1,98 @@
+# M5GFX b48dce04c80d3e3c9874b7ba946c43d672129c28 source excerpts
+# file: src/board_detect/probe_hardware.inl
+
+## release_held_sda (15-48): clocks up to 9 while SDA is low, then one STOP
+  15    bool release_held_sda(int pin_sda, int pin_scl)
+  16    {
+  17      io::pin_mode(pin_sda, io::pin_mode_t::input);
+  18      io::pin_mode(pin_scl, io::pin_mode_t::input);
+  19      io::delay_us(10);
+  20
+  21      // A reset of this MCU during a transfer can leave a peripheral holding
+  22      // SDA low while it waits for more clocks. Clock it out (up to 9 bits) and
+  23      // finish with STOP. Input mode is open drain with the output latch high.
+  24      bool bus_released = io::pin_read(pin_scl);
+  25      if (bus_released && !io::pin_read(pin_sda))
+  26      {
+  27        for (int i = 0; i < 9 && !io::pin_read(pin_sda); ++i)
+  28        {
+  29          io::pin_low(pin_scl);
+  30          io::delay_us(5);
+  31          if (!wait_i2c_scl_high(pin_scl)) { bus_released = false; break; }
+  32        }
+  33        if (bus_released)
+  34        {
+  35          io::pin_low(pin_scl);
+  36          io::pin_low(pin_sda);
+  37          io::delay_us(5);
+  38          bus_released = wait_i2c_scl_high(pin_scl);
+  39          if (bus_released)
+  40          {
+  41            io::pin_high(pin_sda);
+  42            io::delay_us(10);
+  43          }
+  44        }
+  45      }
+  46      const bool released = bus_released && io::pin_read(pin_sda) && io::pin_read(pin_scl);
+  47      return released;
+  48    }
+
+## probe_i2c_bus_present recover lambda (88-96)
+  88      {
+  89        // A reset during a transaction can leave a slave holding SDA forever.
+  90        // Recover it before attempting detection.
+  91        ESP_LOGD("M5GFX", "[Autodetect] recovering held SDA on I2C pins SDA=%d SCL=%d",
+  92                 pin_sda, pin_scl);
+  93        release_held_sda(pin_sda, pin_scl);
+  94        ctx.transaction->restore_to_snapshot({ pin_sda, pin_scl });
+  95      };
+  96      return i2c_bus_probe_detail::probe_i2c_bus_present(sample, wait_scl, recover);
+
+## probe_i2c_ack recovery (130-134)
+ 130        if (bus_released && !io::pin_read(pin_sda))
+ 131        {
+ 132          bus_released = release_held_sda(pin_sda, pin_scl);
+ 133        }
+ 134        cache.pullup_ok = bus_released && io::pin_read(pin_sda) && io::pin_read(pin_scl);
+
+## recover_held_sda_and_resample (50-62)
+  50    pin_pull_result_t recover_held_sda_and_resample(
+  51      probe_ctx_t& ctx, pin_pull_result_t pulls, std::uint64_t pin_mask,
+  52      int pin_sda, int pin_scl)
+  53    {
+  54      const auto high = pulls.pulldown_high;
+  55      if ((high & (std::uint64_t(1) << pin_scl))
+  56       && !(high & (std::uint64_t(1) << pin_sda)))
+  57      {
+  58        release_held_sda(pin_sda, pin_scl);
+  59        pulls = probe_pin_pulls(ctx, pin_mask);
+  60        ctx.transaction->restore_to_snapshot({ pin_sda, pin_scl });
+  61      }
+  62      return pulls;
+
+# file: src/board_detect/probe_types.hpp
+## probe_i2c_bus_present state machine (210-236)
+ 210      bool sda_high;
+ 211      bool scl_high;
+ 212      bool scl_held_low;
+ 213    };
+ 214
+ 215    template <typename Sample, typename WaitScl, typename Recover>
+ 216    bool probe_i2c_bus_present(Sample sample, WaitScl wait_scl, Recover recover)
+ 217    {
+ 218      line_state_t state = sample();
+ 219      if (!state.scl_high && state.scl_held_low)
+ 220      {
+ 221        wait_scl();
+ 222        state = sample();
+ 223      }
+ 224      if (state.scl_high && !state.sda_high)
+ 225      {
+ 226        recover();
+ 227        state = sample();
+ 228      }
+ 229      return state.sda_high && state.scl_high;
+ 230    }
+ 231  }
+ 232  }
+ 233  }

@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #424: release_held_sda() stops at a data 1 bit and the STOP does not hold (host-level)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/424",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "b48dce04c80d3e3c9874b7ba946c43d672129c28",
+    "head_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS local; clang C++11; no ESP32-C5 hardware; Device Service has 36 profiles and no C5; esp-emulator has no esp32-c5 device; no LP I2C or ST25R3916 model",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "patch-applies-to-base",
+      "status": "PASS",
+      "detail": "author-proposed.diff passes git apply --check on b48dce0"
+    },
+    {
+      "id": "code-facts",
+      "status": "PASS",
+      "detail": "release_held_sda probe_hardware.inl:15-48 at b48dce0; loop :27-32 breaks on SDA high; STOP :33-44; final check :46; callers :88-96, :50-62, :130-134, probe_types.hpp:224-228"
+    },
+    {
+      "id": "release-held-sda-mid-read",
+      "status": "PASS",
+      "detail": "host slave model 0,0,1,0,...: baseline released=false after 3 SCL pulses; author patch true after 2; 10-clock variant true after 2"
+    },
+    {
+      "id": "release-held-sda-termination",
+      "status": "PASS",
+      "detail": "stuck SDA returns false within 9 (patch) or 10 (baseline/10-clock) pulses; no infinite loop"
+    },
+    {
+      "id": "write-ack-boundary",
+      "status": "PARTIAL",
+      "detail": "host model: baseline true after 10 pulses, author 9-clock patch false after 9, 10-clock variant true after 10; model-only, no hardware ACK timing"
+    },
+    {
+      "id": "existing-host-suite",
+      "status": "PASS",
+      "detail": "sh test/board_detect/run.sh: 33 passed on baseline, 9-clock patch and 10-clock variant; suite does not cover the multi-bit held-SDA case"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 and no UnitNFC in the hardware test center; author's 30-reset table not reproduced"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "no C5 device profile; no esp32-c5 emulator device; LP I2C and ST25R3916 not modeled"
+    },
+    {
+      "id": "other-boards",
+      "status": "NOT RUN",
+      "detail": "P4/S3 recover_held_sda_and_resample paths not tested on hardware"
+    },
+    {
+      "id": "pr423-combined",
+      "status": "NOT RUN",
+      "detail": "no C5 hardware for the combined PR #423 + patch run"
+    },
+    {
+      "id": "build",
+      "status": "NOT RUN",
+      "detail": "no ESP-IDF / Arduino-ESP32 toolchain on this host"
+    }
+  ],
+  "evidence": [
+    "evidence/issue-424.json",
+    "evidence/source-lines.txt",
+    "evidence/author-proposed.diff",
+    "evidence/author-patch-apply-check.txt",
+    "evidence/host-run-baseline.txt",
+    "evidence/host-run-patched9.txt",
+    "evidence/host-run-patched10.txt",
+    "evidence/sim-slave-baseline.txt",
+    "evidence/sim-slave-patched9.txt",
+    "evidence/sim-slave-patched10.txt",
+    "evidence/hardware-and-virtual.md",
+    "code/sim_slave.cpp"
+  ],
+  "notes": [
+    "Issue left OPEN; one Japanese comment posted; no upstream code change, no push.",
+    "The host model assumes the slave ignores mid-byte STOP attempts, matching the issue's worst case; rise time, clock stretching and ST25R3916 internals are not modeled."
+  ]
+}
