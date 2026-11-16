@@ -140,3 +140,26 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
 证据：[evidence/followup-pre-restart-presses.md](evidence/followup-pre-restart-presses.md)。
 证据等级仍是 `hardware validation`（单台）+ 本记录 `code-level`；物理 Tab5 与虚拟设备
 `NOT RUN`。
+
+## 追加：真实触摸原始表与起始规则（2026-11-16，第九轮）
+
+报告者给出 16 次真实按压的 first/peak area、intensity、held ms，并说明第 16 号的真实
+首帧（area 35 / intensity 50）被 area-only 规则丢弃、下一帧才登记；规则改为
+`area>=30 && intensity<25`。
+
+- **area 条件只应在起始帧、且与强度同取**：本表 peak area 达 31/42（intensity 53/61），
+  全程生效会丢真实帧；报告者已改为 start-only。
+- **新规则在起始帧不可达**：门禁 intensity>=25 放行的点不可能同时 `<25`，故面积子句
+  在起始路径永不触发，实际过滤器只有强度门禁（若作用于非起始帧，则只在抬指/衰减帧触发，
+  等价于松开再按下）。
+- **“余量 8”是表内数字**：更早 20 次按压 first-scan 下限 26、鬼点上限 22；以 26 为约束，
+  门禁 25 的实侧余量 1、鬼侧 3；空带 23–25，24 为两侧各 2。
+- **两列都是幸存者样本**：`first` 是“通过过滤的第一帧”，第 16 号即反例；低于门禁的值
+  不会出现，实侧下限只有上界。
+- **两次 x≈719 未登记存在歧义**：轨上且 intensity<25 的真实按压与鬼点签名相同，会被
+  门禁静默拒绝，需记录被拒起始候选才能与“按到边框”区分。
+- 轨道坐标（真实点距轨 ≥26，鬼点全在 0/719）分离度够，但当前不增加拒绝力，先记录不先加规则。
+
+新增证据：[evidence/followup-real-touch-table.md](evidence/followup-real-touch-table.md)。
+证据等级 `code-level verification`（表值算术核对）+ 报告者硬件测量；物理与虚拟设备
+`NOT RUN`（`tab5_enabled: false`，ST7123 为固件 GDB 邮箱，无 `0x43`/reset 模型）。

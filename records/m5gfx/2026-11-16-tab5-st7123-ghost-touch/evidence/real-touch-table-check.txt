@@ -1,0 +1,34 @@
+== real table ==
+first intensity: 33..56   first area: 3..20
+peak  intensity: 36..66   peak  area: 4..42
+held ms: 145..2283
+
+== gate margins (reject <= T-1, admit >= T) ==
+   T | ghost max 22 | real min (all data) 26 | real min (this table) 33
+  23 |      +1     |            +3           |          +10
+  24 |      +2     |            +2           |          +9
+  25 |      +3     |            +1           |          +8
+
+== area-only start rule (area >= 30 drops) ==
+logged first frames dropped: none
+press 16 true first frame area=35 -> dropped; table logs the next frame (area 5)
+peak frames area>=30: [8, 10] all with intensity [53, 61]
+
+== proposed rule: gate>=25 then (area>=30 and intensity<25) ==
+start frames where both clauses can fire: none (dead clause)
+ghost points with area>=30 and intensity<25: all of them
+ghost points with intensity>=25: none observed
+
+== rails ==
+real min x: 35  real min 719-x: 26
+real points at x in {0,719}: none
+ghost x values: 0 and 719 only (thread)
+
+== survivor sample ==
+floor of this table's first-intensity column is the gate, not the panel:
+  press 16 true first intensity = 50, logged first = 34
+  earlier run: 20 taps admitted at >=25, min 26 -> nothing below 25 can appear
+
+== duration (not a safe rule) ==
+real held ms min 145; ghost 1-2 scans (8.7 ms/frame) = 9-17 ms
+but a 23 ms real tap was recorded earlier, so the classes overlap in principle
