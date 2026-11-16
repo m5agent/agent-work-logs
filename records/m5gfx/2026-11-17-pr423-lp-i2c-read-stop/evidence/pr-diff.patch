@@ -1,0 +1,50 @@
+From cc60eaa02af50a559e7f856392a2b740f446fa0b Mon Sep 17 00:00:00 2001
+From: GOB <goblin52@gmail.com>
+Date: Tue, 17 Nov 2026 01:03:16 +0900
+Subject: [PATCH] i2c: close reads on the LP port with the controller's STOP
+
+A transaction that ends in a read is closed by i2c_stop(), which builds the
+STOP by driving SDA and SCL as normal GPIO. The pads of a low power port are
+routed through the LP IO domain instead, so that STOP never reaches the bus.
+i2c_stop() then resets the controller and every call reports success.
+
+A device therefore takes the next transaction, read or write, as part of the
+one before it. On ToughC5 (ESP32-C5) with a UnitNFC (ST25R3916), whose space B
+access lasts until a STOP, a space A read right after a space B read returned
+0xFF on every attempt. Transactions that end in a write were not affected:
+they are closed by the controller's STOP command, which does reach the pads.
+
+On the LP port, close a read with the controller's STOP as well. The HP ports
+keep the forced stop.
+
+Bus recovery through i2c_stop() still does not reach the LP pads; that is
+left for separate work.
+
+Refs #421
+---
+ src/lgfx/v1/platforms/esp32/common.inl | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/lgfx/v1/platforms/esp32/common.inl b/src/lgfx/v1/platforms/esp32/common.inl
+index 6c67cd86..07835c8a 100644
+--- a/src/lgfx/v1/platforms/esp32/common.inl
++++ b/src/lgfx/v1/platforms/esp32/common.inl
+@@ -1982,12 +1982,16 @@ namespace lgfx
+ 
+       if (flg_stop || res.has_error())
+       {
++        // A read is normally closed by i2c_stop(), which drives the pins through the GPIO
++        // matrix. The pads of a low power port are routed through the low power IO domain
++        // instead, where that STOP never reaches the bus, so the controller sends it there.
++        const bool force_stop_read = (i2c_context[i2c_port].state == i2c_context_t::state_read) && !isLpPort(i2c_port);
+         // After an error the peripheral may already be force-stopped; a normal STOP command then
+         // never raises the completion interrupt and waits until the timeout, so take the force-stop path
+ #if LGFX_I2C_REG_LAYOUT == 3
+-        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect_int_raw)
++        if (res.has_error() || i2c_context[i2c_port].state.has_error() || force_stop_read || !int_raw.end_detect_int_raw)
+ #else
+-        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect)
++        if (res.has_error() || i2c_context[i2c_port].state.has_error() || force_stop_read || !int_raw.end_detect)
+ #endif
+         { // force stop
+           // If state already holds an error, the bus was stopped where it was detected; do not stop

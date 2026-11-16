@@ -1,0 +1,173 @@
+== i2c_stop (1847-1882) ==
+    static void i2c_stop(int i2c_port)
+    {
+      static constexpr int I2C_CLR_BUS_HALF_PERIOD_US = 2;
+      static constexpr int I2C_CLR_BUS_SCL_NUM        = 9;
+
+      gpio_num_t sda_io = i2c_context[i2c_port].pin_sda;
+      gpio_num_t scl_io = i2c_context[i2c_port].pin_scl;
+      gpio::pin_backup_t backup_pins[] = { sda_io, scl_io };
+
+      gpio_set_level(sda_io, 1);
+      gpio_set_direction(sda_io, GPIO_MODE_INPUT_OUTPUT_OD);
+
+      gpio_set_level(scl_io, 1);
+      gpio_set_direction(scl_io, GPIO_MODE_OUTPUT_OD);
+      delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+
+      // SDAがHIGHになるまでSTOP送出を繰り返す。;
+      int i = 0;
+      do
+      {
+        gpio_set_level(scl_io, 0);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(sda_io, 0);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(scl_io, 1);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(sda_io, 1);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+      } while (!gpio_get_level(sda_io) && (i++ < I2C_CLR_BUS_SCL_NUM));
+
+#if !defined (CONFIG_IDF_TARGET_ESP32C2) && !defined (CONFIG_IDF_TARGET_ESP32C3)
+/// ESP32C3で periph_module_reset を使用すると以後通信不能になる問題が起きたため分岐;
+      i2c_periph_reset(i2c_port);
+#endif
+      for (auto &bup : backup_pins) { bup.restore(); }
+    }
+
+== i2c_wait stop branch (1983-2037) ==
+      if (flg_stop || res.has_error())
+      {
+        // After an error the peripheral may already be force-stopped; a normal STOP command then
+        // never raises the completion interrupt and waits until the timeout, so take the force-stop path
+#if LGFX_I2C_REG_LAYOUT == 3
+        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect_int_raw)
+#else
+        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect)
+#endif
+        { // force stop
+          // If state already holds an error, the bus was stopped where it was detected; do not stop
+          // again (an error in res was detected in this call and is not stopped yet)
+          if (!hw_stopped && (res.has_error() || !i2c_context[i2c_port].state.has_error()))
+          {
+            i2c_stop(i2c_port);
+          }
+        }
+        else
+        {
+          i2c_set_cmd(dev, 0, i2c_cmd_stop, 0, false, i2c_context[i2c_port].check_ack);
+          i2c_set_cmd(dev, 1, i2c_cmd_end, 0);
+          // Wake only on events that end the STOP; a NACK is evaluated after it completes.
+          static constexpr uint32_t intmask_ = I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M | I2C_TRANS_COMPLETE_INT_RAW_M;
+          updateDev(dev);
+          dev->int_clr.val = intmask_ | I2C_ACK_ERR_INT_RAW_M | I2C_END_DETECT_INT_RAW_M;
+          dev->ctr.trans_start = 1;
+          uint32_t ms = lgfx::millis();
+          taskYIELD();
+          while (!(dev->int_raw.val & intmask_) && ((millis() - ms) < (i2c_stall_limit_us / 1000))) { taskYIELD(); }
+          // A STOP that did not complete leaves the bus in an unknown state:
+          // recover it and refuse further use of this transaction.
+          {
+            uint32_t stop_raw = dev->int_raw.val;
+            if (res.has_value()
+             && ((stop_raw & (I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M))
+              || !(stop_raw & I2C_TRANS_COMPLETE_INT_RAW_M)))
+            {
+              res = cpp::fail(error_t::connection_lost);
+              i2c_context[i2c_port].state = cpp::fail(error_t::connection_lost);
+              i2c_stop(i2c_port);
+            }
+          }
+#if LGFX_I2C_REG_LAYOUT == 0
+          if (res.has_value() && dev->int_raw.ack_err)
+#elif LGFX_I2C_REG_LAYOUT == 3
+          if (res.has_value() && dev->int_raw.nack_int_raw)
+#else
+          if (res.has_value() && dev->int_raw.nack)
+#endif
+          { // The STOP completed but a byte went unacknowledged.
+            res = cpp::fail(error_t::connection_lost);
+            i2c_context[i2c_port].state = cpp::fail(error_t::connection_lost);
+          }
+          //ESP_LOGI("LGFX", "I2C stop");
+        }
+
+== isLpPort (1447-1456) ==
+    static inline bool isLpPort(int i2c_port)
+    {
+#if LGFX_LP_I2C_NUM > 0
+      return i2c_port >= LGFX_LP_I2C_PORT;
+#else
+      (void)i2c_port;
+      return false;
+#endif
+    }
+
+
+== LP init branch (2278-2300) ==
+        i2c_master_bus_config_t bus_config;
+        memset(&bus_config, 0, sizeof(i2c_master_bus_config_t));
+        bus_config.i2c_port = i2c_port;
+        bus_config.sda_io_num = pin_sda;
+        bus_config.scl_io_num = pin_scl;
+        bus_config.lp_source_clk = LGFX_LP_I2C_SCLK;
+        bus_config.glitch_ignore_cnt = 7;
+        bus_config.flags.enable_internal_pullup = true;
+        bus_config.intr_priority = 1;
+
+        i2c_master_bus_handle_t bus_handle = nullptr;
+        if (ESP_OK != i2c_new_master_bus(&bus_config, &bus_handle))
+        { // The pins of the low power port are constrained: they have to be LP IO, and on
+          // the chips without an LP GPIO matrix they are a fixed pair.
+ #if SOC_RTCIO_INPUT_OUTPUT_SUPPORTED
+          if (lp_pads)
+          {
+            gpio::release_lp_pad(pin_sda);
+            gpio::release_lp_pad(pin_scl);
+          }
+ #endif
+          return cpp::fail(error_t::invalid_arg);
+        }
+
+== beginTransaction bus-busy + set_pin skip (2545-2562) ==
+      if (getBusBusy(dev))
+      {
+        ESP_LOGV("LGFX", "i2c::beginTransaction : bus busy, recover");
+        i2c_stop(i2c_port);
+      }
+
+      // A low power port reaches its pads through the low power IO domain, which set_pin()
+      // knows nothing about: routing them through the normal GPIO matrix here would
+      // disconnect the port from its own pins on every transaction. A shared port keeps
+      // the pin setup of the driver that owns it. ( see foreign_bus )
+      if (!i2c_context[i2c_port].foreign_bus
+#if LGFX_LP_I2C_NUM > 0
+       && !isLpPort(i2c_port)
+#endif
+      )
+      {
+        set_pin((i2c_port_t)i2c_port, i2c_context[i2c_port].pin_sda, i2c_context[i2c_port].pin_scl);
+      }
+
+== readBytes timeout i2c_stop (2748-2756) ==
+            taskYIELD();
+          } while ((len>>1) >= getRxFifoCount(dev) && !(dev->int_raw.val & intmask) && ((lgfx::micros() - us) <= us_limit + i2c_stall_limit_us));
+
+          if (0 == getRxFifoCount(dev))
+          {
+            uint32_t int_raw_val = dev->int_raw.val;
+            i2c_stop(i2c_port);
+            if ((int_raw_val & I2C_ACK_ERR_INT_RAW_M)
+             && !(int_raw_val & (I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M)))
+
+== endTransaction (2620-2628) ==
+    cpp::result<void, error_t> endTransaction(int i2c_port)
+    {
+      if (isSoftPort(i2c_port)) { return soft_i2c_endTransaction(i2c_port); }
+      if (i2c_port >= LGFX_I2C_PORT_NUM) return cpp::fail(error_t::invalid_arg);
+      // A failed begin or a different task must not stop another owner's transfer.
+      if (i2c_context[i2c_port].owner.load() != xTaskGetCurrentTaskHandle())
+      { return cpp::fail(error_t::mode_mismatch); }
+      return i2c_wait(i2c_port, true);
+    }
