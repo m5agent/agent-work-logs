@@ -25,7 +25,7 @@
   "execution": {
     "validation": "code-level verification",
     "host": "macOS, clang++ -std=c++17 -O1",
-    "virtual_device": "NOT RUN: the local Tab5 emulator has no ST7123 controller-level model",
+    "virtual_device": "NOT RUN: the local Device Service now lists Tab5 as supported/creatable, but its catalog warning still states that Tab5 ST7123 touch is a firmware GDB mailbox rather than an I2C chip model, and no PI4IOE5V6408 or reset-line model exists.",
     "device_identifiers": "none used"
   },
   "checks": [
@@ -104,18 +104,33 @@
       "name": "upstream follow-up comment",
       "status": "PASS",
       "details": "Posted one English comment at https://github.com/m5stack/M5GFX/issues/418#issuecomment-6908007729; issue left open, no code pushed."
+    },
+    {
+      "name": "#367 is a three-byte change limited to P4/LCD_RST",
+      "status": "PASS",
+      "details": "M5Unified 8530f53 Power_Class.cpp:141-155 vs e9a8e89 Power_Class.inl:556-570: IO_DIR 0x73->0x63, PULL_SEL/PULL_EN 0x04->0x14. PI4IOE driver declares bit=1 output and pull_up needs 0x0D+0x0B. TP_RST (P5), CAM_RST (P6), SPK_EN (P1), RF_PTH (P0) and EXT5V_EN (P2) are unchanged."
+    },
+    {
+      "name": "no other LCD_RST writer on the Tab5 path",
+      "status": "PASS",
+      "details": "Touch desc has no reset pin (esp32p4_construct.inl:120-128); panel desc has no pin_rst and Panel_Device::rst_control returns for pin_rst<0; Panel_DSI::init sends SWRESET only when getResetDelayBeforeDpi()!=0, which ST7121 does not override; Touch_ST7123 only reads."
+    },
+    {
+      "name": "adv_info=0x08 vs 0x00 tracks the #367 build",
+      "status": "REVIEW",
+      "details": "Author measured 0x00 on 3600/3600 forced reads with #367 and 0x08 on 3600/3600 without it, co-varying 1:1 with ghost frames; device-side measurement, not reproduced here."
+    },
+    {
+      "name": "runtime 0x43 flip and LCD_RST pulse",
+      "status": "NOT RUN",
+      "details": "Would separate a latched-at-init state from a continuous electrical effect; left to the reporter, no Tab5 here."
     }
   ],
   "evidence": [
     {
       "file": "README.md",
-      "bytes": 5105,
-      "sha256": "a1770330ee71cb845479348aaaa55bb9d2c3c8c533ed4969f234918b1b2fb64a"
-    },
-    {
-      "file": "report.md",
-      "bytes": 10160,
-      "sha256": "184471968964fcf7adb29ac426f1e640d1ce000d33af7669de6917d1d42ba39e"
+      "bytes": 6739,
+      "sha256": "5648990bf4b972903305e1ef0890f2133562d0f210ce142e2916bd69b41a9e6e"
     },
     {
       "file": "code/README.md",
@@ -128,6 +143,16 @@
       "sha256": "4c9add5e034985ce2e48fe6518879365c5104f87fe63475d89ce9c919dcebb93"
     },
     {
+      "file": "evidence/followup-int-trace.md",
+      "bytes": 5670,
+      "sha256": "172e213541257d669da07be7c3d672b86a4969561a73789a8096fd7eca84001e"
+    },
+    {
+      "file": "evidence/followup-lcd-rst-367.md",
+      "bytes": 9119,
+      "sha256": "2cc098c31b497ca9e2022b6f3211aa093c45e2f7e48294ab27e53212094fed20"
+    },
+    {
       "file": "evidence/parse-check-output.txt",
       "bytes": 596,
       "sha256": "ae531eb29d1069d69a34d43f31c4dd27132bd0c21840b977541359b831337890"
@@ -138,16 +163,17 @@
       "sha256": "351962d6fff92f55c7cf9e1bd3a9e71af430a0d4eddcb4da7bea9620b5b66d29"
     },
     {
-      "file": "evidence/followup-int-trace.md",
-      "bytes": 5670,
-      "sha256": "172e213541257d669da07be7c3d672b86a4969561a73789a8096fd7eca84001e"
+      "file": "report.md",
+      "bytes": 17043,
+      "sha256": "84f429f229feeec185e748c5ac687b1f516c4b28ab12e1e30099f0449fa51b0a"
     }
   ],
   "notes": [
     "Read-only review: no M5GFX/M5Unified change, no push to the upstream repository, no issue close.",
     "Host parse results are not device validation.",
     "The reporter's ghost statistics are quoted as their measurements, not reproduced here.",
-    "Round 2 adds the author's INT/frame trace and a protocol §6.6 cross-check; no hardware or virtual-device run here."
+    "Round 2 adds the author's INT/frame trace and a protocol §6.6 cross-check; no hardware or virtual-device run here.",
+    "Round 5 corrects two earlier statements: the 0x43 expander block does differ between the pinned and develop builds (#367), and the sticky with_coord bit is a symptom of the controller's init state rather than a failed read acknowledgement."
   ],
   "followups": [
     {
@@ -156,6 +182,13 @@
       "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6907904668",
       "summary": "作者补充逐帧 INT 电平、两种读取模式的 burst 原始帧与 burst 后 adv_info；结合协议 §6.6 复核后，排除重复供给与跨帧撕裂，修正 with_coord 判据，并把鬼点几何由“同一行”改为“两端钳位”。",
       "evidence": "evidence/followup-int-trace.md"
+    },
+    {
+      "date": "2026-11-16",
+      "round": 5,
+      "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6915523306",
+      "summary": "报告者用强制读排除 with_coord 门控，把差异二分到 M5Unified#367（24dad4ff）；该 PR 只改三个字节，把 Tab5 的 P4/LCD_RST 从推挽输出改为输入+内部上拉，TP_RST 不变。M5GFX Tab5 路径不控制该引脚，故 M5Unified 扩展器初始化是唯一写入者；adv_info 0x08 与鬼点 1:1 共变，指向上电/复位状态而非解析差异。",
+      "evidence": "evidence/followup-lcd-rst-367.md"
     }
   ]
 }

@@ -192,3 +192,61 @@ narrow ghost under intensity<25 rule: 0 point(s)
 证据等级：`code-level verification`（`b48dce04` 源码、#419/#420 改动）＋对方两台硬件
 测量。本机物理 Tab5 `NOT RUN`（无设备）；虚拟设备 `NOT RUN`（Device Service 中
 `tab5_enabled=false`，Tab5 profile 的 ST7123 触摸是固件 GDB 邮箱，非 I2C 寄存器模型）。
+
+## 追加：M5Unified#367 的三字节 LCD_RST 差异（2026-11-16）
+
+### 新增数据
+
+报告者在同一台 Tab5 上用“强制读”（跳过 `with_coord` 门控，每次必读
+`0x0010` + `0x0009` + `0x0014` 起 70 B）重跑 60 轮 × 3600 次：
+
+- develop（M5GFX `b48dce04` / M5Unified `e9a8e89`）：0 帧含 valid 位，
+  `adv_info` 3600/3600 为 `0x00`，三次读失败均为 0；
+- pinned（M5GFX `d91077b9` / M5Unified `8530f53`）：92 帧，分布在 46/60 轮，
+  `adv_info` 3600/3600 为 `0x08`，三次读失败均为 0。
+
+拆分与二分：M5GFX develop + M5Unified pinned = 45/60 轮有帧；两侧都 develop = 0；
+M5Unified `a5285020`（#366）44/60，`24dad4ff`（#367）0/60。
+
+### 复核结论
+
+1. **#367 只改三个字节，且只改 P4=LCD_RST。** `IO_DIR 0x73→0x63` 把 P4 从推挽输出改为
+   输入，`PULL_SEL/PULL_EN 0x04→0x14` 给 P4 使能内部上拉。驱动自身语义（`IO_DIR`
+   bit=1 为输出；`pull_up` 需 `0x0D`/`0x0B` 同时置位）证实了报告者的读法；`TP_RST`
+   （P5）与其余引脚两版一致。
+2. **这条线上堆栈里没有第二个写入者。** M5GFX 的 Tab5 触摸描述符无 reset 引脚，面板
+   描述符无 `pin_rst`（`Panel_Device::rst_control` 直接返回），`Panel_DSI::init()` 在
+   `getResetDelayBeforeDpi()==0` 时连 `CMD_SWRESET` 都不发，ST7121 也未覆盖该值；
+   `Touch_ST7123` 只读不写。因此 M5Unified 扩展器初始化是唯一能改变该引脚的地方，
+   二分结果与引脚差异在机理上一致。
+3. **`with_coord` 常置不再算“协议确认失效”。** 有 #367 的构建上该位为 `0x00`
+   （3600/3600），说明正常初始化时读表会清位；`0x08` 是控制器启动状态异常的症状，
+   与鬼点在同批构建上 1:1 共变，指向同一初始化差异。上一轮“两个确认信号矛盾”的表述
+   就此收窄。
+4. **“必要但不充分”的形态。** 目前所有出现鬼点的构建都缺 #367；但缺 #367 并不必然
+   出鬼点（报告者 sketch 在 pinned 库上为 0，`adv_info` 也是 `0x00`）。这更像初始化
+   边缘条件（复位释放/上电时序）而不是确定性逻辑差异。
+
+### 机制（未证明）
+
+- A：状态在初始化时锁存——TDDI 的触控核与显示复位共享复位域/释放时序，强驱动与仅上拉
+  给出的释放边沿不同，报表状态机停在异常态；
+- B：持续电气差异——反灌/漏电/电平差异，运行期改变引脚状态即可改变行为。
+
+判别：运行期改写 `0x43` 三个字节（不重启）看 `adv_info` 与鬼点是否立即变化；若不变，
+再在运行期给 LCD_RST 一个约 10 ms 低脉冲后释放，看是否能清 `0x08`。另建议在
+`M5.begin()` 后对比 sketch 与自家固件的 `0x43` 寄存器快照，解释“缺 #367 仍为 0”。
+
+### 边界与上游问题
+
+- 证据等级仍为 `code-level verification` + 报告者硬件测量；物理 Tab5 `NOT RUN`。
+  虚拟设备 `NOT RUN`：Device Service 已把 Tab5 列为 supported/creatable，但其告警仍写明
+  ST7123 触摸是固件 GDB 邮箱而非 I2C 芯片模型，且无扩展器/reset 网络模型。
+- 给上游：①#367 的 commit message（“应解决弱上拉”）与字节行为（改为依赖上拉）相反，
+  哪种才是 Tab5 预期，是否有需要强驱动的硬件版本？合并说明提到的 `_tab5_lcd_rst_pullup`
+  按版本捕获在代码中不存在，`M5Tab5`/`M5Tab5X` 一律走上拉形式。②该面板 LCD_RST 是否
+  同时复位触控核，是否有最小复位低电平/释放斜率要求？
+- 未测：LCD_RST 波形/电平、外部上拉是否存在、运行期回切与复位脉冲、#367 构建上的
+  boot 鬼点、第二台单元、温度/轻触、真实手指原始报表。
+
+新增证据：[evidence/followup-lcd-rst-367.md](evidence/followup-lcd-rst-367.md)。

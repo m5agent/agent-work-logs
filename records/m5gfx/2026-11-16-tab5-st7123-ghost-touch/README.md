@@ -71,3 +71,25 @@ INT 门控实验、驱动内强度阈值在真实触摸上的误拒率、触摸�
   协议 §6.6 原文、确认地址核算、`0x0059` 推导）
 - 证据等级仍为 `code-level verification` + 报告者测量；物理与虚拟设备均 `NOT RUN`
   （本地 Tab5 profile 的 ST7123 触摸仍是固件 GDB 邮箱，不是 I2C 寄存器模型）
+
+## 追加：#367 三字节 LCD_RST 差异与 `with_coord` 结论收窄（2026-11-16）
+
+报告者用强制读（跳过 `with_coord` 门控）证明 develop 的 0 帧不是门控造成的，并把差异
+二分到 M5Unified#367（merge `24dad4ff`）。该 PR 只改三个字节：Tab5 的 PI4IOE5V6408
+（0x43）把 P4/LCD_RST 从推挽输出高改为输入 + 内部上拉，`PULL_SEL/PULL_EN` 同步使能；
+`TP_RST` 与其余引脚不变。
+
+- 结论：M5GFX 的 Tab5 路径不控制这条 reset（触摸无 reset 引脚、面板无 `pin_rst`、
+  DSI 路径不发 `SWRESET`、`Touch_ST7123` 只读），因此 M5Unified 扩展器初始化是唯一
+  写入者，二分结果与引脚差异在机理上一致。
+- 修正：有 #367 时 `adv_info` 为 `0x00`（3600/3600），说明读表确实清位；`0x08` 是
+  控制器启动状态异常的症状，不是协议确认失效，上一轮“两个确认信号矛盾”收窄。
+- “必要但不充分”：现有出鬼点构建都缺 #367，但缺 #367 的 sketch 也不出（`adv_info`
+  同样 `0x00`），更像初始化边缘条件而非确定性逻辑差异。
+- 机制仍未证明：初始化时锁存 vs 持续电气差异；判别实验是运行期改写 `0x43` 三字节
+  （必要时加 LCD_RST 低脉冲）后观察 `adv_info` 与鬼点。
+- 证据等级仍为 `code-level verification` + 报告者硬件测量；物理与虚拟设备均 `NOT RUN`
+  （Tab5 profile 已 supported/creatable，但 ST7123 触摸仍是固件 GDB 邮箱，且无扩展器/
+  reset 网络模型）。
+
+新增证据：[evidence/followup-lcd-rst-367.md](evidence/followup-lcd-rst-367.md)。
