@@ -38,6 +38,7 @@
 - CI 矩阵：`evidence/m5gfx-ci-matrix.txt`
 - 补丁：`patches/0001-panel-cvbs-idf611-dac-ll.patch`，`evidence/patch-apply-check.txt`
 - 条目元数据：`evidence/issue-425.json`
+- 已发布回复：<https://github.com/m5stack/M5GFX/issues/425#issuecomment-6928508537>（1 条，Issue 保持 OPEN，代码未改）
 
 ## 文件
 
