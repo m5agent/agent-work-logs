@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "date": "2026-11-18",
+  "title": "Native retained filesystem baseline and file digest review",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "emulator_base": "c8a40dee575b944195ed52c7f8dfb8a16a51a8cf",
+    "emulator_initial_comparison_candidate": "9db66ecbec42d3c8f5197f31ce4333afdb0bd94d",
+    "emulator_executed_candidate": "bb94ea01e65da8c94c709960fbf4c05fc6ea261f",
+    "reviewer_executed_candidate": "4ffd5d951d42bab8e3c0834bbd01a0b1820073b0",
+    "emulator_main": "dacf6efbb7c7836821874916ff704ba6b96a2e49",
+    "reviewer_main": "4ffd5d951d42bab8e3c0834bbd01a0b1820073b0",
+    "published_bounded_summaries": {
+      "source-inventory-summary.json": {
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/blob/dacf6efbb7c7836821874916ff704ba6b96a2e49/tests/firmware/littlefs_partition/source-inventory-summary.json",
+        "sha256": "c5feb9982392d7c295e35450a30669d110d3498e4602d3699579a4f1de7f9e50",
+        "bytes": 4243
+      },
+      "reviewer-output-summary.json": {
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/blob/dacf6efbb7c7836821874916ff704ba6b96a2e49/tests/firmware/littlefs_partition/reviewer-output-summary.json",
+        "sha256": "4f46b1e4bd4bae6589aaf86151d6a4b9a4f2ea59b093a7fc19aeec950770f1b8",
+        "bytes": 14388
+      }
+    }
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer ADV",
+      "Cardputer"
+    ]
+  },
+  "firmware": {
+    "sdk": "6.1.1",
+    "base_flash_sha256": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf",
+    "seed_partition_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81"
+  },
+  "execution": {
+    "device_service_api": "1.83.0",
+    "native_runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24"
+  },
+  "checks": [
+    {
+      "name": "Existing retained filesystem endpoint and strict source inventory opt-in",
+      "status": "PASS",
+      "scope": "exact native HTTP fixture flow"
+    },
+    {
+      "name": "Stopped session source/retained same-fixture comparison, restart, later import and cleanup",
+      "status": "PASS",
+      "leases": 3
+    },
+    {
+      "name": "Saved native Reviewer six requested file-digest controls",
+      "status": "PASS",
+      "expected_case_outcomes": {
+        "PASS": 2,
+        "FAIL": 3,
+        "PARTIAL": 1
+      },
+      "whole_review": "E_NO_FRAME"
+    },
+    {
+      "name": "Reviewer tests",
+      "status": "PASS",
+      "tests": 225
+    },
+    {
+      "name": "Emulator full platform suite after API metadata correction",
+      "status": "PASS",
+      "tests": 2418,
+      "skipped": 10,
+      "failures": 0
+    },
+    {
+      "name": "Emulator documentation contracts, scope and validators",
+      "status": "PASS",
+      "documentation_tests": 51
+    },
+    {
+      "name": "Exact GitHub CI at archive time",
+      "status": "PENDING",
+      "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44192637455"
+    },
+    {
+      "name": "Physical hardware, browser validation, residents, Pages deployment and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/device-service-littlefs-comparison.summary.json",
+      "sha256": "c26e6c79e114c306fbc6ebc2b4c53bebeff8574130293426bfd7a02a2479600f",
+      "bytes": 6043
+    },
+    {
+      "path": "evidence/reviewer-vfs-file-digest.summary.json",
+      "sha256": "f473bd6e408e1399d38ef1f1b9e76b6315f3c001acf4f5304fbb967f7c1c3961",
+      "bytes": 18988
+    }
+  ]
+}

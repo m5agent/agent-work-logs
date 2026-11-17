@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | 原生 VFS 留存清单与文件摘要审核 | `PARTIAL`（分区回读和文件正负对照成立，整单仍待人工复核） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-retained-vfs-file-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | MP3 与 2048 原版隔离复审 | `PASS`（固定 PCM 与八次合法拖动通过） | [查看](esp-emulator/2026-11-18-mp3-2048-original-replay/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | StickS3 All day watch 原版看门狗复核 | `PARTIAL`（两次 CPU1 看门狗与 RTC 等待证据一致，修复未验证） | [查看](esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-watch-retained-watchdog/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 保存快照的本地 STA 应用断言 | `PARTIAL`（三板固定应用通过，错字节和准入对照成立；整单无画面） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-native-sta-saved-review/) |
