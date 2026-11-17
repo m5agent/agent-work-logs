@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | StickS3 All day watch 原版看门狗复核 | `PARTIAL`（两次 CPU1 看门狗与 RTC 等待证据一致，修复未验证） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-watch-retained-watchdog/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 保存快照的本地 STA 应用断言 | `PARTIAL`（三板固定应用通过，错字节和准入对照成立；整单无画面） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-native-sta-saved-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 原生固定 SoftAP 保存审核与 StickS3 原版配网 | `PARTIAL`（三板本地夹具通过；整单画面及云端边界保留） | [查看](records/esp-emulator/2026-11-17-isolated-native-open-softap/followups/2026-11-18-native-softap-saved-review/) |
 | 2026-11-18 | ESP Emulator | NC1020 跨服务存档与显示归因 | `PARTIAL`（跨服务保存及恢复通过；原版绘制问题待定位） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-storage-display-attribution/) |

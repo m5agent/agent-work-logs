@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "title": "StickS3 All day watch v0.3.8 retained watchdog review",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "executed_parser": "541871f6fb6f48a4bda9b8846a9fb3054074f207",
+    "historical_qemu_execution": "2db3851c0b7a4980210034d05130224a2ecf6455",
+    "executed_reviewer": "ea64e80e3d88e2761b5627545376a1de400cf34f",
+    "emulator_main": "c8a40dee575b944195ed52c7f8dfb8a16a51a8cf",
+    "reviewer_main": "ea64e80e3d88e2761b5627545376a1de400cf34f",
+    "published_bounded_summary": {
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/blob/c8a40dee575b944195ed52c7f8dfb8a16a51a8cf/tests/firmware/crash_diagnostics/watch-retained-rtc-timing-summary.json",
+      "sha256": "58768a291cbb72d3d95a42a1c6c15895bfe7943bfae304b189eb84d66c031dcb",
+      "bytes": 7661
+    }
+  },
+  "hardware": {
+    "scope": "retained native virtual-device evidence and read-only current parser replay",
+    "device": "StickS3",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "version": "v0.3.8",
+    "source_sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+    "bytes": 1840512,
+    "normalized_flash_sha256": "1d6ae6df2473bebf662955bbb050ce2304081e79485d9044d0bff3d150a4e363"
+  },
+  "execution": {
+    "review_api": "0.14.0",
+    "historical_runtime_sha256": "99da5cb681e44dfdf332f8af01b8d5d36bbb2801b30ca7e0ca6be21af4c0ecff",
+    "historical_profile": "uiflow2-sticks3-wifi",
+    "retained_zip_replays": 3,
+    "new_guest_runs": 0,
+    "burner_submissions": 0
+  },
+  "checks": [
+    {
+      "name": "Read-only byte-bound Watch replay on current service and Reviewer",
+      "status": "PASS",
+      "retained_bundles": 3
+    },
+    {
+      "name": "Historical long-hold Watch behavior",
+      "status": "FAIL",
+      "watchdog_panic_core": 1,
+      "runs": 2
+    },
+    {
+      "name": "Historical immediate-release control",
+      "status": "PASS",
+      "scope": "no panic seen in bounded logged interval",
+      "runs": 1
+    },
+    {
+      "name": "Firmware versus simulator attribution",
+      "status": "PARTIAL",
+      "firmware_conclusion": "UNRESOLVED",
+      "scope": "retained evidence and static RTC source audit"
+    },
+    {
+      "name": "New guest on current native runtime, RTC correction replay, hardware, browser, resident deployment and Burner",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Reviewer suite",
+      "status": "PASS",
+      "tests": 222
+    },
+    {
+      "name": "Emulator docs contracts, generated snapshot, affected validators and scope",
+      "status": "PASS",
+      "tests": 51
+    },
+    {
+      "name": "Emulator remote CI at archive time",
+      "status": "PENDING"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/watch-retained-watchdog-summary.redacted.json",
+      "sha256": "c468dcaa6c7a6ba17348448f2ca75a3724525d3dc54a9915260bd2c4b0790fd1",
+      "bytes": 12712
+    }
+  ]
+}
