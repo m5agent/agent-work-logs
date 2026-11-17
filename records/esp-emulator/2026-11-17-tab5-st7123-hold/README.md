@@ -15,3 +15,5 @@
 - [冻结版本的同会话审核摘要](evidence/snapshot-review-summary.json)
 
 真机、浏览器 WASM 和多点触摸未验收。本轮未触发 Burner 提交，原始固件、截图和 ZIP 未包含在记录中。
+
+[后续复审：同一原版单击到 B、长按到 F](followups/2026-11-17-explicit-review-hold/README.md)

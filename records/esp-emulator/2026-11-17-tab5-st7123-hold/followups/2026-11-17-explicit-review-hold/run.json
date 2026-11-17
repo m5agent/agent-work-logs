@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "title": "原版 Arduventure 明确长按复审",
+  "overall_status": "PASS",
+  "source": {
+    "repository": "firmware-review-service",
+    "base_commit": "31b384efb279d1fc915e23546501900fedf35af6",
+    "commit": "f48301b516f4b137abbde1d289605ef492fc651c",
+    "emulator_commit": "dc6853453a64f315a09b691c3631d9c2d4b3c08e"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "isolated native Tab5 Device Service and saved-snapshot review"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "同会话 1200 ms、74 次刷新、2/2 按下及释放"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "九个点按与声明长按的原版画面断言"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "真机和浏览器 WASM 未执行"
+    }
+  ],
+  "evidence": [
+    "evidence/explicit-hold-summary.json"
+  ],
+  "notes": [
+    "整单判定 SIM_PARTIAL，未提交 Burner。"
+  ]
+}
