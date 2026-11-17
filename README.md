@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | 原生固件审核数据面 | PARTIAL（StickS3 配网、CardputerDict 写入、Dial 画面与 MP3 通过） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/) |
 | 2026-11-17 | ESP Emulator | 原生 C6 UART core dump | `PASS`（两种校验格式、同会话任务状态和 ZIP） | [查看](records/esp-emulator/2026-11-17-native-c6-uart-core-dumps/) |
 | 2026-11-17 | ESP Emulator | PaperDIY 虚拟 SD 热插拔 | `PASS`（GPIO48 中断、同会话 FAT32、导出验证） | [查看](records/esp-emulator/2026-11-17-paperdiy-sd-hotplug/) |
 | 2026-11-17 | ESP Emulator | Tab5 并发 DSI 取帧 | `PARTIAL`（受控并发通过，高压仍有原生传输丢消息） | [查看](records/esp-emulator/2026-11-17-tab5-power-latch/followups/2026-11-17-tab5-dsi-readback/) |

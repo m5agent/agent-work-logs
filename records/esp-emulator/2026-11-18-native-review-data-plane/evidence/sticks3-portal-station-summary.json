@@ -1,0 +1,98 @@
+{
+  "validation": "virtual-device validation",
+  "status": "PASS",
+  "device": "sticks3",
+  "profile": "sticks3-open-softap-provisioning",
+  "execution_source": "a0fa14ae26f047fe4bef2c53681f9ea61b13eb8e",
+  "source_file_sha256": {
+    "serve.py": "566deb50bbf31a03dd269dd925f96f1dbd2c667053dcc69891ef715127aa36bb",
+    "device_service.py": "e789c71dad9a11c0af6b53c0ab295d273535b6b5078a649c4515dd82897fb14b",
+    "device_service_softap_peer.py": "57ad6c3496f9e2c5eb1065c9e6b385260a051dafd8020f9ba7d2e4daf7fb3c8e"
+  },
+  "source_firmware_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+  "composed_firmware_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70",
+  "runtime_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "segments": [
+    {
+      "offset": 0,
+      "name": "bootloader.bin",
+      "sha256": "1776e4dd896a69d0a5c2e79957b0e2a88aa4129b1381d6478683515a1f6af343"
+    },
+    {
+      "offset": 32768,
+      "name": "partitions.bin",
+      "sha256": "a388634787e6301eb31711138e4dc4012483b79b140d63f2519acf41fd59d02d"
+    },
+    {
+      "offset": 57344,
+      "name": "boot_app0.bin",
+      "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0"
+    },
+    {
+      "offset": 65536,
+      "name": "author app",
+      "sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6"
+    }
+  ],
+  "native_trace_enabled": false,
+  "transport": {
+    "schema_version": 1,
+    "scope": "same-session-native-ipv4-transport",
+    "source": "ethernet-pcap",
+    "capture_state": "finalized",
+    "capture_sha256": "4e47cdcb9507aeb72656bbe4f22b01f6b53060ba09c1d7d02c526457758008d8",
+    "dhcpv4": {
+      "completed_dora_transactions": 2,
+      "leased_address_count": 2
+    },
+    "tcp": {
+      "bidirectional_payload_flows": 2
+    },
+    "udp": {
+      "bidirectional_payload_flows": 0
+    }
+  },
+  "isolation": {
+    "mode": "unix-socketpair",
+    "host_ip_backends": 0,
+    "cleanup_completed": true
+  },
+  "final_peer": {
+    "schema_version": 1,
+    "transport": "unix-socketpair",
+    "generation": 1,
+    "status": "PASS",
+    "released": true,
+    "dhcp": true,
+    "arp": true,
+    "http": true,
+    "save_http": true,
+    "save_body_sha256": "0982190388fef17e1120651b46904d84d43d3f220f4224cbefe0f33ca3f501bf",
+    "station_dhcp": true,
+    "station_arp": true,
+    "stage": "station",
+    "http_body_sha256": "155b87edfafcd2bdf6142868c48b1bdc94c8b4b6a8ac7f4576baa68bbdae7854",
+    "http_request_sha256": "10e9746b99051679209d136b5650fb45345c18190233817f05d06853096666ae"
+  },
+  "before_stop_evidence_sha256": "b12b2700553039bc35194c76b1ef2469bc3b8dc31039a71bb11d19e8f26deeb4",
+  "frame_sha256": "0a8498edd5f79036224018a3642df176685989ff1962e3e1a9dca5bf9691c509",
+  "worker_active_leases": 0,
+  "service_exited": true,
+  "independent_readback": {
+    "status": "PASS",
+    "captured_http_200_body_bytes": [
+      5448,
+      5347
+    ],
+    "captured_requests": [
+      "GET /",
+      "POST /wifisave"
+    ],
+    "completed_dora_exchanges": 2,
+    "station_arp_from_assigned_address_after_ack": true,
+    "pcap_matches_finalized_report": true,
+    "peer_matches_pre_stop_zip": true,
+    "flash_released": true
+  }
+}

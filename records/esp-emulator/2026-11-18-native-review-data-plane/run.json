@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "原生固件审核数据面补齐",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "2db3851c0b7a4980210034d05130224a2ecf6455",
+    "commit": "a0fa14ae26f047fe4bef2c53681f9ea61b13eb8e",
+    "reviewer_commit": "959c8fce00b918d62309f031eceaca4b0f41b113"
+  },
+  "hardware": {
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "source_byte_and_virtual_flash_identity": "See evidence for exact hashes and composition"
+  },
+  "execution": {
+    "environment": "macOS, independent native Device Service and local reviewer",
+    "scope": "virtual-device validation",
+    "native_runtime_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a",
+    "device_service_openapi": "1.71.0",
+    "new_resident_deployment": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "release_manifest_sha256": "8e6fb4070dfa1d717f1d6b60f13508d3d66802fb1e9862fec097dabbe620be14"
+  },
+  "checks": [
+    {
+      "check": "StickS3 original portal-to-station",
+      "status": "PASS"
+    },
+    {
+      "check": "StickS3 cloud assistant workflow",
+      "status": "NOT RUN"
+    },
+    {
+      "check": "CardputerDict action-scoped SD write",
+      "status": "PASS"
+    },
+    {
+      "check": "CardputerDict unrelated interaction assertions",
+      "status": "PARTIAL"
+    },
+    {
+      "check": "Dial original panel and default input",
+      "status": "PASS"
+    },
+    {
+      "check": "Dial 5 ms full turns",
+      "status": "PARTIAL"
+    },
+    {
+      "check": "Native GP-SPI idle DMA and ADV MP3",
+      "status": "PASS"
+    },
+    {
+      "check": "NC1020 original SD full cold import",
+      "status": "PARTIAL"
+    },
+    {
+      "check": "EMBER original isolated dry-run",
+      "status": "PASS"
+    },
+    {
+      "check": "165-layer native stack and source comparison",
+      "status": "PASS"
+    },
+    {
+      "check": "Combined platform suite",
+      "status": "PASS",
+      "cases": 2367,
+      "skipped": 10
+    },
+    {
+      "check": "Reviewer suite using the resident interpreter",
+      "status": "PASS",
+      "cases": 182
+    },
+    {
+      "check": "Coverage, peripheral, QEMU profile, snapshot and PR-scope validators",
+      "status": "PASS"
+    },
+    {
+      "check": "Frozen release source, runtime and browser assets",
+      "status": "PASS",
+      "browser_assets": 2178
+    }
+  ],
+  "evidence": [
+    {
+      "name": "cardputerdict-final-summary",
+      "file": "evidence/cardputerdict-final-summary.json",
+      "bytes": 6479,
+      "sha256": "0e103f5a993cacfae2baa770d3fb2ef8f80e80fe124feca03212b1e80321ab94",
+      "kind": "summary"
+    },
+    {
+      "name": "dial-fast-repeat-summary",
+      "file": "evidence/dial-fast-repeat-summary.json",
+      "bytes": 697,
+      "sha256": "99e735e280dcceca9d7179e68d0deea0fe0396dc42d4575be6c7c51884985a87",
+      "kind": "summary"
+    },
+    {
+      "name": "dial-mp3-combined-summary",
+      "file": "evidence/dial-mp3-combined-summary.json",
+      "bytes": 7083,
+      "sha256": "9966168d2de087eae300b8e1a8c880e991f2acc629e4ffed0b1db3e1782045cf",
+      "kind": "summary"
+    },
+    {
+      "name": "ember-isolated-regression-summary",
+      "file": "evidence/ember-isolated-regression-summary.json",
+      "bytes": 2119,
+      "sha256": "65d5c8c34bd466fd12af305969f69645de522cde805882016ae7d14e683e994d",
+      "kind": "summary"
+    },
+    {
+      "name": "native-patch-stack-summary",
+      "file": "evidence/native-patch-stack-summary.json",
+      "bytes": 186,
+      "sha256": "b539b2f5513113b9635bb154ce44d03a776203d85b7dc3915bf91a5d5b833fdc",
+      "kind": "summary"
+    },
+    {
+      "name": "s3-gpspi-idle-rx-summary",
+      "file": "evidence/s3-gpspi-idle-rx-summary.json",
+      "bytes": 5212,
+      "sha256": "543d4368e56942365af1d364aba5442da054b463e8437d392ace5ab6f19946d9",
+      "kind": "summary"
+    },
+    {
+      "name": "sticks3-portal-station-summary",
+      "file": "evidence/sticks3-portal-station-summary.json",
+      "bytes": 3323,
+      "sha256": "aaf69b3403b47e9a3fb26c0f67c6a04f182a23fe9ca1a6af0fb3136e722610b0",
+      "kind": "summary"
+    },
+    {
+      "name": "sticks3-reviewer-summary",
+      "file": "evidence/sticks3-reviewer-summary.json",
+      "bytes": 2693,
+      "sha256": "53976eca52ddbc08ba0b5d926b18e1ca7f819be7bd92ee28d1877e43759ec904",
+      "kind": "summary"
+    }
+  ]
+}

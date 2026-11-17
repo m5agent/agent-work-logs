@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "original_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+  "runtime_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a",
+  "device_service_commit": "5b5afdf0a115e635df4635fe14ba8ce3b29bb057",
+  "descriptor": {
+    "portal_provisioning_fixture": {
+      "runtime": "qemu-wifi",
+      "profile": "sticks3-open-softap-provisioning",
+      "host_ip_backends": 0,
+      "scope": "portal-to-station"
+    }
+  },
+  "actual_unix_only_launch": true,
+  "review_status": "manual_review",
+  "lane": "SIM_PARTIAL",
+  "error_code": "E_NETWORK_PARTIAL",
+  "conclusion": "规则检查与静态检查通过；虚拟设备已启动并采集证据，但同一虚拟设备的配网页面、表单和本地入网已通过，云端助手功能未验证，需补充验证。 此应用 BIN 使用与原应用工具链匹配的启动上下文完成虚拟烧录，结果适用于本次组合镜像。 本次使用已保存描述和同哈希 BIN 快照复审，未核对上游当前待审状态。",
+  "submit_requested": 0,
+  "boot": "PASS",
+  "check": {
+    "status": "PASS",
+    "scope": "same-guest-stick-s3-portal-to-station",
+    "same_guest_as_board": true,
+    "checks": {
+      "portal_dhcp_arp_http": true,
+      "form_submit": true,
+      "guest_station_dhcp_arp": true,
+      "two_captured_dhcp_leases": true,
+      "two_captured_portal_flows": true
+    },
+    "observations": [],
+    "cloud_application": "NOT RUN",
+    "pcap_sha256": "23289d38d5a49791788d29eacceeb1edfdc23d7c7413a1883e678d3fe90e4b2d",
+    "http_body_sha256": "155b87edfafcd2bdf6142868c48b1bdc94c8b4b6a8ac7f4576baa68bbdae7854",
+    "save_body_sha256": "0982190388fef17e1120651b46904d84d43d3f220f4224cbefe0f33ca3f501bf",
+    "http_request_sha256": "10e9746b99051679209d136b5650fb45345c18190233817f05d06853096666ae"
+  },
+  "review_report_sha256": "88d6e0fb9436aea621acbc4b768d38fb9b8341839bad92c1372557b7c5d99dd3",
+  "final_capture": true,
+  "worker_active_leases": 0,
+  "finalized_transport": {
+    "schema_version": 1,
+    "scope": "same-session-native-ipv4-transport",
+    "source": "ethernet-pcap",
+    "capture_state": "finalized",
+    "capture_sha256": "23289d38d5a49791788d29eacceeb1edfdc23d7c7413a1883e678d3fe90e4b2d",
+    "dhcpv4": {
+      "completed_dora_transactions": 2,
+      "leased_address_count": 2
+    },
+    "tcp": {
+      "bidirectional_payload_flows": 2
+    },
+    "udp": {
+      "bidirectional_payload_flows": 0
+    }
+  },
+  "bundle_sha256": "94900d5e239e338bff97924bbc76e0d7dafb8777c22a5637696c359a1bd10796",
+  "normalized_flash_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70",
+  "isolated_services_exited": true
+}

@@ -1,0 +1,217 @@
+{
+  "source": "5b5afdf0a115e635df4635fe14ba8ce3b29bb057",
+  "runtime_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a",
+  "execution": "virtual-device validation",
+  "runs": {
+    "original_dial": {
+      "status": "PASS",
+      "device": "dial",
+      "firmware_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+      "port": "port-b",
+      "pins": {
+        "yellow": 2,
+        "white": 1
+      },
+      "media_tracks": 7,
+      "validation": "virtual-device validation",
+      "hardware": "NOT RUN",
+      "input": [
+        {
+          "delta": 3,
+          "edge_period_ms": 35,
+          "track": 4,
+          "command_hex": "04fb030600040c",
+          "total_gpio_edges": 12
+        },
+        {
+          "delta": -2,
+          "edge_period_ms": 35,
+          "track": 2,
+          "command_hex": "04fb030600020a",
+          "total_gpio_edges": 20
+        },
+        {
+          "delta": 16,
+          "edge_period_ms": 35,
+          "track": 4,
+          "command_hex": "04fb030600040c",
+          "total_gpio_edges": 84
+        },
+        {
+          "delta": -16,
+          "edge_period_ms": 35,
+          "track": 2,
+          "command_hex": "04fb030600020a",
+          "total_gpio_edges": 148
+        }
+      ],
+      "playback_controls": [
+        {
+          "control": "pause",
+          "property": "playback-status",
+          "before": 1,
+          "after": 2,
+          "guest_uart_append": "04fb0100000bf401000004fb010202"
+        },
+        {
+          "control": "resume",
+          "property": "playback-status",
+          "before": 2,
+          "after": 1,
+          "guest_uart_append": "04fb01151504fb01000004fb010101"
+        },
+        {
+          "control": "volume-up",
+          "property": "volume",
+          "before": 11,
+          "after": 12,
+          "guest_uart_append": "04fb01000004fb01151506f902010c0e"
+        },
+        {
+          "control": "volume-down",
+          "property": "volume",
+          "before": 12,
+          "after": 11,
+          "guest_uart_append": "06f902010b0d"
+        },
+        {
+          "control": "stop",
+          "property": "playback-status",
+          "before": 1,
+          "after": 0,
+          "guest_uart_append": "04fb010303"
+        },
+        {
+          "control": "play",
+          "property": "playback-status",
+          "before": 0,
+          "after": 1,
+          "guest_uart_append": "04fb010101"
+        }
+      ],
+      "controller": {
+        "tx-hex": "04fb01080804fb010d0d0bf40201000206f902010b0d04fb030600010904fb01000004fb030600040c04fb030600020a04fb01000004fb01151504fb030600040c04fb01000004fb01151504fb030600020a04fb0100000bf401000004fb01020204fb01151504fb01000004fb01010104fb01000004fb01151506f902010c0e06f902010b0d04fb01030304fb010101",
+        "frames-sent": 26,
+        "frames-injected": 18,
+        "transactions": 26,
+        "read-bytes": 114,
+        "written-bytes": 144,
+        "responses-hex": "",
+        "media-track-count": 7,
+        "selected-track": 2,
+        "playback-status": 1,
+        "volume": 11,
+        "loop-mode": 0,
+        "invalid-frames": 0,
+        "rx-hex": "04fb02000102"
+      },
+      "guest_markers": [],
+      "frame": {
+        "sha256": "6c09b929b0d25b06690f4804ffa3a7eb81a47012b4a6908b7f408187084aeb0a",
+        "width": 240,
+        "height": 240,
+        "nonblack_pixels": 57600,
+        "unique_colors": 160
+      },
+      "evidence_sha256": "050d763c3341444f68441021ce7371dbdf37745d072332386b43f63e6f87f76d",
+      "cleanup": {
+        "state": "stopped",
+        "flash_retained": false,
+        "active_leases": 0
+      },
+      "runtime_binary_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a"
+    },
+    "stock_dial": {
+      "device": "dial",
+      "firmware_sha256": "6a1c7f01bebb5b74284c2e58b3d7bb465dd7cca99252012f3007153f1d6611f1",
+      "runtime_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a",
+      "unit": false,
+      "status": "COMPLETE",
+      "runtime_source": "5b5afdf0a115e635df4635fe14ba8ce3b29bb057",
+      "trace_panel": true,
+      "usb_capture_candidate": false,
+      "scope": "virtual-device validation",
+      "serial_lines": 11,
+      "frame": {
+        "size": [
+          240,
+          240
+        ],
+        "nonblack": 57515,
+        "sha256": "5bf1cf308af5826b178fc0e498f1067c4011ab627cb2ce12ef4f546592bd8ff4"
+      },
+      "zip_sha256": "3081a1d8a7d755f545d20f106ab3007e814f81d0bcfd2d3f4ffcf7a19951b022",
+      "cleanup": {
+        "state": "stopped",
+        "flash_retained": false,
+        "leases": 0
+      },
+      "service_exited": true,
+      "hardware_spi_transfers": 36021
+    },
+    "original_cardputer_adv_mp3": {
+      "case": "mp3",
+      "source_commit": "5b5afdf0a115e635df4635fe14ba8ce3b29bb057",
+      "original_firmware_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+      "runtime_sha256": "528ab418daedc9dab895fcebd4092b1a284563513c8ed7aca06b06527b58061a",
+      "physical_hardware": "NOT RUN",
+      "burner_submitted": false,
+      "status": "PASS",
+      "normalized_flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+      "boot_source_format": "merged",
+      "sd_fixture_sha256": "6e7c003e532f2912b5a6841ea24b6ffbe1ca113caf0dd83b26d750d0cbd7f4a0",
+      "spi_cmd17_before_input": 4,
+      "spi_cmd17_final": 66,
+      "frame_sha256": {
+        "list": "370b4236939c088e11013efe20609e33e927a03f1e9da07b3d68fc230ed28d7d",
+        "playing": "112c1f955806e2113e7a3d29a92cd37271f089b050b3d6db7f5dae1d85c122c3",
+        "progress": "eabb271035ecfe67f887b6a7578991a1be01b658a812b34263333444162e198d"
+      },
+      "input": {
+        "kind": "key",
+        "key": "ret",
+        "hold_seconds": 0.1,
+        "settle_seconds": 1.4
+      },
+      "application": [
+        {
+          "offset": 65536,
+          "bytes": 3342336,
+          "sha256": "b1f1402955aead3935b45c5a3b0c4700512ccdb77e4906fe87352c885d524a0c",
+          "unchanged": true
+        },
+        {
+          "offset": 3407872,
+          "bytes": 3342336,
+          "sha256": "4f2efb4b6a6f31cb1912870b67cc34c0e489a8147b860fd7a84c2bf4064b0e63",
+          "unchanged": true
+        }
+      ],
+      "serial": {
+        "sha256": "440d7f5c201c11979c80192c9cee36cf0190c714098eca8000265e915b8a2d90",
+        "bytes": 701,
+        "boot_banners": 1,
+        "fatal_markers": []
+      },
+      "audio": {
+        "bytes": 108032,
+        "sha256": "6d37a510c7a3ebbfe076593e70f42007d1f84f92f2f86ee79cdbbc7f5f6bc8fc",
+        "peak_abs": 1353,
+        "nonzero_samples": 52833,
+        "sample_rate_hz": 48000,
+        "channels": 1,
+        "fixture_tone_hz": 524,
+        "physical_acoustics": "NOT RUN",
+        "matching_window_count": 12
+      },
+      "evidence_zip_sha256": "dd70a47910d4b29295cecbbf92282c116ab908174731c5b6f703f217b5e63bdb",
+      "source_artifact_unchanged": true,
+      "cleanup": {
+        "stopped": true,
+        "flash_released": true,
+        "active_leases": 0
+      },
+      "isolated_service_exit": true
+    }
+  }
+}
