@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Native semantic input and virtual FAT32 for firmware review",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "98bd8ea359b1003f71919d7ba17e8a3c8a8b72be",
+    "emulator_input_candidate": "5b793ac81b829522ddcafe6610425fbc6e6d9648",
+    "emulator_storage_candidate": "f4604fbe47743cd2c172baeb1bfe39a89a192077",
+    "review_candidate": "712fc621af988c92bcae1d1d95e58ddc15cc9cce"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "identities": "Pinned SHA-256 in scenario evidence"
+  },
+  "execution": {
+    "environment": "Isolated native Device Service and isolated review control path; submission disabled",
+    "native_validation": "virtual-device validation",
+    "browser_wasm": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "native-semantic-button-keyboard-touch",
+      "status": "PASS"
+    },
+    {
+      "name": "dial-physical-quadrature",
+      "status": "PASS"
+    },
+    {
+      "name": "dial-original-rotaryirq",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "original-review-control",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "esp-idf-fat32-guest-bus",
+      "status": "PASS"
+    },
+    {
+      "name": "production-cutover",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "name": "evidence/review-replay-summary.json",
+      "bytes": 3804,
+      "sha256": "d02022e1d5ad2e604dcd826814a26f40daa4ca328617b6b292b8f7036bbcef78"
+    },
+    {
+      "name": "evidence/spi-sd-summary.json",
+      "bytes": 4648,
+      "sha256": "fb9ef303283cc8ea3cf1bc0f8114a3691b9dd680bbd9f1721988c4c3f90dde8c"
+    },
+    {
+      "name": "evidence/virtual-input-summary.json",
+      "bytes": 5216,
+      "sha256": "df4f15fe6167b48e3f70d96e81be3364818f060b8da380d4a84b13f78f841f51"
+    }
+  ],
+  "notes": [
+    "Reviewer replay observed zero Burner submissions.",
+    "No original firmware redistributed."
+  ]
+}

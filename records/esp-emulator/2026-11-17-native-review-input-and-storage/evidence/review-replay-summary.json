@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device validation",
+  "source": {
+    "reviewer_commit": "712fc621af988c92bcae1d1d95e58ddc15cc9cce",
+    "reviewer_app_sha256": "9b6dfedc8669bd581f335fe563d0342c39b058346a93a839543ce2c5a4634471",
+    "device_service_source_sha256": {
+      "serve.py": "1692b33e9626c73e71e69ae343d4d84bdd9615d1d973f77f7284515399297942",
+      "device_service.py": "2ed727c10e760cd0399ba8d6c07bc71baf24ac7220981219980c181431fdcbbc",
+      "device_service_input.py": "fa5e47854a3cd924e4b047d99a7f5c2755c641b474c717bb9a4de1349f47c925",
+      "device_service_encoder.py": "9c077aa3626d85ffa7696719b4807c0beec080459f0e6cd5ae35a0926159fae8"
+    },
+    "device_service_openapi_sha256": "47c913a29ae7d3a28fafc46a231c0fb272e4d5ad2eb3fde6ff13cd42a89f35ee",
+    "raw_summary_sha256": "5295cbf0fe886044f08653735aa9871a7cfbeac8e1a13a31954c6ea016962b9f",
+    "raw_summary_bytes": 4044
+  },
+  "hardware": {
+    "physical_hardware": "NOT RUN",
+    "virtual_board": "stopwatch",
+    "backend": "native QEMU Xtensa",
+    "qemu_sha256": "8f5a839537857d05b2c1e5a7ba0bb401e123924b8202c4a7a6adfd2c0b5f4e41",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "firmware": {
+    "name": "Grok Bot MultiFace · StopWatch",
+    "version": "0.3.0",
+    "source": "same saved original BIN",
+    "size": 647664,
+    "sha256": "0b207ba2d2ba11907bb4a3bc58fb6cd2ecc0a8f0db8e847ac50969fded0d720a"
+  },
+  "execution": {
+    "normal_reviewer_route": "POST /api/reviews/{job_id}/retry sourceMode=saved_snapshot useAgentReview=false",
+    "observation_seconds": 60.019406,
+    "sessions": 1,
+    "final_session_state": "stopped",
+    "services_exited": true,
+    "burner_submissions": 0,
+    "production_touched": false
+  },
+  "evidence": {
+    "frames": {
+      "double_a": {
+        "width": 466,
+        "height": 466,
+        "nonblack_pixels": 170499,
+        "bytes": 3376,
+        "sha256": "10f0c973ec42ad6116ae41035b85789a61e2041e3d0d864b9854800c68056ffa"
+      },
+      "chord_a_b": {
+        "width": 466,
+        "height": 466,
+        "nonblack_pixels": 170499,
+        "bytes": 2774,
+        "sha256": "3d25aa5db5b89adf52494004be257c5e9920231068e1e518117a4e658c01f0f4"
+      }
+    },
+    "input_events": [
+      {
+        "event": "input",
+        "spec": "button:a",
+        "action": "double_click",
+        "timing": {
+          "clock": "virtual",
+          "hold_seconds": 0.12,
+          "hold_time_ms": 120,
+          "presses": 2,
+          "completion": "queued"
+        }
+      },
+      {
+        "event": "input",
+        "spec": "chord:a+b",
+        "action": "hold",
+        "timing": {
+          "clock": "host",
+          "hold_seconds": 1.0,
+          "presses": 1,
+          "completion": "events_sent"
+        }
+      }
+    ],
+    "serial": {
+      "bytes": 226,
+      "sha256": "00970f37d76d53e48b75e1ebc9a29ce7c54a5c3fb76675d068a675d008db3b67"
+    },
+    "archive_crc_ok": true,
+    "archive_sha256": "42a8a921139f3d65a8bd64345c119fbc728d37a3b220f4c9cb8f414bfdb9014b",
+    "archive_bytes": 391576
+  },
+  "checks": {
+    "exact_image_and_static_analysis": "PASS",
+    "normal_review_route": "PASS",
+    "semantic_http_dispatch": "PASS",
+    "device_service_input_event_match": "PASS",
+    "nonblack_frame_capture": "PASS",
+    "native_observation": "PASS",
+    "application_specific_function": "PARTIAL",
+    "burner_submission": "NOT RUN",
+    "physical_input": "NOT RUN"
+  },
+  "review": {
+    "status": "manual_review",
+    "error_code": "E_INTERACTION_CLAIM_PARTIAL",
+    "semantic_actions": {
+      "double_a": "PARTIAL",
+      "chord_a_b": "PARTIAL"
+    },
+    "limitations": "The input events prove dispatch and screenshots prove framebuffer capture. No guest state or region assertion proved the specific calibration action."
+  }
+}

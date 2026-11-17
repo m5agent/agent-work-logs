@@ -1,0 +1,151 @@
+{
+  "emulator_source": "5b793ac81b829522ddcafe6610425fbc6e6d9648",
+  "tests": {
+    "sticks3": {
+      "source_sha256": "4ae0875f8a210db00d48c0d3a0a4d9df1360a3a93e8997e35acd49d1734d9a0e",
+      "base_sha256": "fd85648dfa1fd9656448aa45e86ee63be537a4534e959e422c0be4d45b3466c7",
+      "firmware_sha256": "c3b808f1baedf12af0175729e5fadc95f49c5414a485a65a4e5f2b8549ba1200",
+      "runtime_binary_sha256": "8f5a839537857d05b2c1e5a7ba0bb401e123924b8202c4a7a6adfd2c0b5f4e41",
+      "frame_sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+      "evidence_sha256": "5a019cba07a00033829eab621199a260adc99135f9f3f713cd4af28d19d7c53e",
+      "guest_markers": [
+        "SK_READY",
+        "SK_A_DOUBLE",
+        "SK_AB_OVERLAP",
+        "SK_B_RELEASE_MS 554",
+        "SK_B_RELEASE_MS 4994",
+        "SK_DONE"
+      ],
+      "inputs": [
+        {
+          "kind": "button",
+          "control": "a",
+          "action": "double_click",
+          "settle_seconds": 0
+        },
+        {
+          "kind": "chord",
+          "keys": [
+            "a",
+            "b"
+          ],
+          "seconds": 0.55,
+          "settle_seconds": 0
+        },
+        {
+          "kind": "button",
+          "control": "b",
+          "action": "hold",
+          "seconds": 5,
+          "settle_seconds": 0
+        }
+      ],
+      "result": "PASS",
+      "evidence_zip_crc": true,
+      "cleanup": "PASS"
+    },
+    "cardputer": {
+      "source_sha256": "7d38588aa42d5028123d1a0499c61ae04f747a9bbc75814ae266610b69956650",
+      "base_sha256": "d9e1287eccb641863e7b1cc7cf057733592403d65aeec2d4b1fa4cb3e8b1b309",
+      "firmware_sha256": "05aaf207b477794995693c999feeb2ab8df5fe0598ab4ec1a7051df6fd65513c",
+      "runtime_binary_sha256": "8f5a839537857d05b2c1e5a7ba0bb401e123924b8202c4a7a6adfd2c0b5f4e41",
+      "frame_sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+      "evidence_sha256": "04bfaf6bcdfb2e14f09bb39877d8a826681bc0bee8758bed4f892c4f7fec4d3e",
+      "guest_markers": [
+        "KB_READY",
+        "KB_FN_SEMICOLON",
+        "KB_DONE"
+      ],
+      "inputs": [
+        {
+          "kind": "chord",
+          "keys": [
+            "fn",
+            "semicolon"
+          ],
+          "seconds": 0.55,
+          "settle_seconds": 0
+        }
+      ],
+      "result": "PASS",
+      "evidence_zip_crc": true,
+      "cleanup": "PASS"
+    },
+    "core2": {
+      "source_sha256": "6596e59ca963d78cc56bbb1bcce435c3210b26e0787b4b081161e7462853511b",
+      "base_sha256": "57868df3d1bb0cbd03fdca3eac0db8a9c6578a70195e4479822147b29ef691ae",
+      "firmware_sha256": "9065f7220e817e9d48e1e693074a3e4a0a63e79e19b64d61c6ff84acae942765",
+      "runtime_binary_sha256": "8f5a839537857d05b2c1e5a7ba0bb401e123924b8202c4a7a6adfd2c0b5f4e41",
+      "frame_sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+      "evidence_sha256": "ce4cb0c160cabd41abde477bcfef17afd9ed62732d99cfbc0c6a1b2fbe91af81",
+      "guest_markers": [
+        "TS_READY",
+        "TS_DOWN_RAW 67 110",
+        "TS_UP",
+        "TS_DOWN_RAW 67 110",
+        "TS_UP",
+        "TS_DONE"
+      ],
+      "inputs": [
+        {
+          "kind": "touch",
+          "action": "double_click",
+          "x": 67,
+          "y": 110,
+          "settle_seconds": 0
+        }
+      ],
+      "result": "PASS",
+      "evidence_zip_crc": true,
+      "cleanup": "PASS"
+    },
+    "adv-a3": {
+      "device": "cardputer-adv",
+      "base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+      "firmware_sha256": "c1e0c0dadfdcc401bc3d4050b238b8c8ac0735e558972ea4ed66a204a9560899",
+      "runtime_sha256": "8f5a839537857d05b2c1e5a7ba0bb401e123924b8202c4a7a6adfd2c0b5f4e41",
+      "evidence_zip_crc": true,
+      "service_exited": true,
+      "physical_keys_with_guest_press_release": 56,
+      "frame": {
+        "size": [
+          240,
+          135
+        ],
+        "nonblack": 0,
+        "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6"
+      }
+    },
+    "adv-old-a3": {
+      "device": "cardputer-adv",
+      "base_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+      "firmware_sha256": "c1e0c0dadfdcc401bc3d4050b238b8c8ac0735e558972ea4ed66a204a9560899",
+      "runtime_sha256": "06db397cbe804e9eb13390d797cd67ca33ce5f29048fe7a56342cb66f4d2f9e0",
+      "evidence_zip_crc": true,
+      "service_exited": true,
+      "legacy_runtime_guard": "unsupported_input",
+      "legacy_qcode_events": []
+    },
+    "dial-a3": {
+      "device": "dial",
+      "base_sha256": "6a1c7f01bebb5b74284c2e58b3d7bb465dd7cca99252012f3007153f1d6611f1",
+      "firmware_sha256": "d96ed86ddac999e5f44add088f3f7bf9db48e977f043daf5f859204fa4bcf3d0",
+      "runtime_sha256": "06db397cbe804e9eb13390d797cd67ca33ce5f29048fe7a56342cb66f4d2f9e0",
+      "evidence_zip_crc": true,
+      "service_exited": true,
+      "controller_check": true,
+      "guest_exact": 3,
+      "frame": {
+        "size": [
+          240,
+          240
+        ],
+        "nonblack": 2044,
+        "sha256": "c2bd8cf71a19ef32f73b5dd525b445ba41d4d4d6702ee4297a2af927c8e0011e"
+      }
+    }
+  },
+  "install": "NOT RUN",
+  "physical": "NOT RUN",
+  "browser_wasm": "NOT RUN"
+}
