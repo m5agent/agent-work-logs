@@ -1,0 +1,95 @@
+{
+  "service_source": "20f7e2bece0ace93574b9129576c9b8b14ac71b5",
+  "validation": "virtual-device validation",
+  "result": {
+    "device_id": "nesso-n1",
+    "runtime": "qemu",
+    "mode": "candidate",
+    "runtime_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4",
+    "sdk_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "status": "PASS",
+    "firmware_sha256": "8ea84737c443e32b9683f132da937ca4acba815c8e433329ecf3d40610bce080",
+    "elf_sha256": "6f29ed2b4031d15ef90e426f456ace9193fff45c4fdb99de30029f58b1c91521",
+    "wrong_elf_sha256": "2d8da0bfc913d4f78c9509c98c12a8e8ff34de4e48e75bad6fa3ff5e5a4db4ba",
+    "markers": [
+      "RISCV_C6_CRASH_PROBE_BOOT",
+      "RISCV_C6_CRASH_PROBE_ARMED"
+    ],
+    "receipt": {
+      "panic": {
+        "kind": "panic",
+        "core": 0,
+        "reason": "abort",
+        "line": "abort() was called at PC 0x4200a5dd on core 0",
+        "core_unassigned_backtrace": [],
+        "elf_sha256_prefix": "6f29ed2b4",
+        "abort_call_site_pc": "0x4200a5dd"
+      },
+      "cpus": [
+        {
+          "core": 0,
+          "pc": "0x40804cb8",
+          "register": "MEPC",
+          "pc_source": "guest_register_dump"
+        }
+      ],
+      "core_dump": {
+        "status": "not_observed"
+      },
+      "elf": {
+        "status": "matched",
+        "reported_sha256_prefix": "6f29ed2b4",
+        "artifact_sha256": "6f29ed2b4031d15ef90e426f456ace9193fff45c4fdb99de30029f58b1c91521",
+        "expected_sha256": "6f29ed2b4031d15ef90e426f456ace9193fff45c4fdb99de30029f58b1c91521",
+        "symbolization_eligible": true
+      },
+      "symbols": {
+        "status": "decoded",
+        "source": "matched_riscv_elf_function_ranges",
+        "addresses": [
+          {
+            "pc": "0x40804cb8",
+            "status": "resolved",
+            "function": "panic_abort",
+            "offset": 18
+          },
+          {
+            "pc": "0x4200a5dd",
+            "status": "resolved",
+            "function": "trigger_riscv_abort",
+            "offset": 39
+          }
+        ]
+      },
+      "sources": {
+        "console": {
+          "status": "available",
+          "offset": 0,
+          "bytes": 7071,
+          "sha256": "14e5099bc9f83ccd184ad5ec9cb9f9b3e288cc0546c399523466d7849be1f09b",
+          "truncated": false
+        },
+        "runtime_stderr": {
+          "status": "available",
+          "offset": 0,
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "truncated": false
+        }
+      }
+    },
+    "bundle_sha256": "0dbbba38d4d9fef937f0cc060774663ae6a43589290b2facfb96ed571c0a321d",
+    "bundle_crc_verified": true,
+    "serial_sha256_binds_archive": true,
+    "other_riscv_elf_rejected": true,
+    "unuploaded_symbols_excluded": true,
+    "live_pc": "cpu_pc_not_supported",
+    "cleanup": {
+      "stopped": true,
+      "flash_released": true,
+      "active_leases": 0,
+      "retained_receipt_matches": true
+    },
+    "isolated_service_exited": true
+  }
+}

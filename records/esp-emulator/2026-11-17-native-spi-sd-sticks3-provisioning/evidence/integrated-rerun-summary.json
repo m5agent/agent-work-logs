@@ -1,0 +1,206 @@
+{
+  "service_source": "20f7e2bece0ace93574b9129576c9b8b14ac71b5",
+  "validation": "virtual-device validation",
+  "stick_s3": {
+    "scenario": "press-reset",
+    "device": "sticks3",
+    "validation": "virtual-device validation",
+    "service_base": "6da7ab20351d732c6738fe13311f686efc856db3",
+    "service_source_sha256": {
+      "device_service.py": "f4c0c7c53bef394427f1ceaf211010b78ea748545e60c0e1e4c35b6246696ba4",
+      "device_service_softap_peer.py": "1b6ed5cc4088f2f952353fa86f2b8d53b32c8738185ce7b5cc78b956326eb869"
+    },
+    "firmware_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19",
+    "runtime_sha256": "5f8a5f38f0512db04a36fb7ca5cf13ec3d359d0fff1eb481fe9b2c06ab3580f2",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "status": "PASS",
+    "checks": [
+      {
+        "pre_press_serial_sha256": "a16f52103a52fab8a499a8f6a4abd2bfdd7ded5498ba2881077cff2ec28a5648",
+        "pre_press_peer": {
+          "schema_version": 1,
+          "transport": "unix-socketpair",
+          "generation": 1,
+          "status": "RUNNING",
+          "released": false,
+          "dhcp": false,
+          "arp": false,
+          "http": false
+        },
+        "observed_marker_order": [
+          "PROVISION_WAIT_BUTTON gpio=11 level=1",
+          "PROVISION_ENTER_BUTTON gpio=11 level=0",
+          "AP_FIXTURE_STARTED",
+          "AP_FIXTURE_HTTP_READY",
+          "AP_FIXTURE_JOINED",
+          "AP_FIXTURE_LEASED",
+          "AP_FIXTURE_HTTP_SENT"
+        ],
+        "serial_sha256": "5933b375d5c4339b2a6c7ef386a770edcc138ceb94b4404f36db768b76fd404f",
+        "peer_after_press": {
+          "schema_version": 1,
+          "transport": "unix-socketpair",
+          "generation": 1,
+          "status": "PASS",
+          "released": false,
+          "dhcp": true,
+          "arp": true,
+          "http": true,
+          "http_body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645",
+          "http_request_sha256": "9de47ca90bcb85d8e1c9fb8dde487b5665197fa7266099e94d394ca5fd908dc6"
+        },
+        "input": [
+          {
+            "control": "b",
+            "timing": {
+              "clock": "virtual",
+              "hold_seconds": 0.35,
+              "hold_time_ms": 350,
+              "presses": 1,
+              "completion": "queued"
+            },
+            "guest_readback": true
+          },
+          {
+            "control": "a",
+            "timing": {
+              "clock": "virtual",
+              "hold_seconds": 0.35,
+              "hold_time_ms": 350,
+              "presses": 1,
+              "completion": "queued"
+            }
+          }
+        ]
+      },
+      {
+        "pre_press_serial_sha256": "802bbe9a2e6039712ae851c69b5227247a5ef1e09be97693be705ad22df4e6f4",
+        "pre_press_peer": {
+          "schema_version": 1,
+          "transport": "unix-socketpair",
+          "generation": 2,
+          "status": "RUNNING",
+          "released": false,
+          "dhcp": false,
+          "arp": false,
+          "http": false
+        },
+        "observed_marker_order": [
+          "PROVISION_WAIT_BUTTON gpio=11 level=1",
+          "PROVISION_ENTER_BUTTON gpio=11 level=0",
+          "AP_FIXTURE_STARTED",
+          "AP_FIXTURE_HTTP_READY",
+          "AP_FIXTURE_JOINED",
+          "AP_FIXTURE_LEASED",
+          "AP_FIXTURE_HTTP_SENT"
+        ],
+        "serial_sha256": "5d1918727aba17ad59664d50aedd76adcdc324f8cc347d81923761aca35f2816",
+        "peer_after_press": {
+          "schema_version": 1,
+          "transport": "unix-socketpair",
+          "generation": 2,
+          "status": "PASS",
+          "released": false,
+          "dhcp": true,
+          "arp": true,
+          "http": true,
+          "http_body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645",
+          "http_request_sha256": "9de47ca90bcb85d8e1c9fb8dde487b5665197fa7266099e94d394ca5fd908dc6"
+        },
+        "input": [
+          {
+            "control": "a",
+            "timing": {
+              "clock": "virtual",
+              "hold_seconds": 0.35,
+              "hold_time_ms": 350,
+              "presses": 1,
+              "completion": "queued"
+            }
+          }
+        ]
+      }
+    ],
+    "wifi_auth_association_responses": {
+      "auth": 2,
+      "assoc": 2
+    },
+    "before_stop_evidence_sha256": "91ba231b145cdf1a9c06158cf3f7288c26c7935ea91b1d98d8220c8f3cc2b70f",
+    "final_peer": {
+      "schema_version": 1,
+      "transport": "unix-socketpair",
+      "generation": 2,
+      "status": "PASS",
+      "released": true,
+      "dhcp": true,
+      "arp": true,
+      "http": true,
+      "http_body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645",
+      "http_request_sha256": "9de47ca90bcb85d8e1c9fb8dde487b5665197fa7266099e94d394ca5fd908dc6"
+    },
+    "transport": {
+      "schema_version": 1,
+      "scope": "same-session-native-ipv4-transport",
+      "source": "ethernet-pcap",
+      "capture_state": "finalized",
+      "capture_sha256": "f79b38dc9a029c2ddff0a01618ff52210d7c6518a67f49978b2837f5de236682",
+      "dhcpv4": {
+        "completed_dora_transactions": 2,
+        "leased_address_count": 1
+      },
+      "tcp": {
+        "bidirectional_payload_flows": 2
+      },
+      "udp": {
+        "bidirectional_payload_flows": 0
+      }
+    },
+    "isolation": {
+      "mode": "unix-socketpair",
+      "host_ip_backends": 0,
+      "cleanup_completed": true
+    },
+    "worker_active_leases": 0,
+    "service_exited": true
+  },
+  "paperdiy": {
+    "emulator_commit": "6da7ab20351d732c6738fe13311f686efc856db3",
+    "service_source_sha256": {
+      "device_service.py": "f4c0c7c53bef394427f1ceaf211010b78ea748545e60c0e1e4c35b6246696ba4",
+      "device_service_specs.py": "cfc357604d5bc3a46e5c0a4d3e1721743351ed091d9698b5c497c967dace4c67",
+      "device_service_execution_parsing.py": "aa821f9866612fb2fff883d5d6b498a651c015a3c81b2c33e8ee20e390434127"
+    },
+    "qemu_sha256": "5f8a5f38f0512db04a36fb7ca5cf13ec3d359d0fff1eb481fe9b2c06ab3580f2",
+    "firmware_sha256": "5d7c8d7857fccb2c638dd8685f26802684dc623d495f86322e24ba7222f776c1",
+    "fixture_sha256": "7a985558069bc9104d6aae3eb33d03a29cb9e2081d249e38435b6c6d71d43b1d",
+    "written_sd_sha256": "66c5b65c54693b20325de494ffe31b93cc669312b3c804cb60ac3c7b675b05a6",
+    "source_card_unchanged": true,
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "qmp_model_available": true,
+    "qmp_running_readback": true,
+    "reset_same_guest_and_card": true,
+    "events": [
+      "PAPERDIY_CARD_DET gpio=48 level=0",
+      "STORAGE_PROBE_MOUNT seed=1 prior=0",
+      "STORAGE_PROBE_REMOUNT write=1 restored=1",
+      "STORAGE_PROBE_DONE",
+      "PAPERDIY_CARD_DET gpio=48 level=0",
+      "STORAGE_PROBE_MOUNT seed=1 prior=1",
+      "STORAGE_PROBE_REMOUNT write=1 restored=1",
+      "STORAGE_PROBE_DONE"
+    ],
+    "spi_commands": {
+      "17": 35,
+      "18": 0,
+      "24": 14,
+      "25": 0
+    },
+    "bundle_sha256": "3e9e7e16b2f3aa218e062831f7c5745ffe42e23682bab2b4f123f09ab70c91ee",
+    "bundle_crc_verified": true,
+    "session_final_state": "stopped",
+    "runtime_process_exited": true,
+    "worker_active_leases": 0,
+    "status": "PASS",
+    "isolated_service_exited": true
+  }
+}

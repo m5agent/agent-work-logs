@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "SPI SD attach and StickS3 input-gated isolated provisioning",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "integrated_commit": "20f7e2bece0ace93574b9129576c9b8b14ac71b5",
+    "spi_attach_commit": "20f7e2bece0ace93574b9129576c9b8b14ac71b5",
+    "sticks3_commit": "cb1316d6f42099df765b3c05943c7412c8b514dc",
+    "queued_integrated_revision": "20f7e2bece0ace93574b9129576c9b8b14ac71b5",
+    "author_spi_attach_commit": "cb632c01149f871734c7b62848fbdd50c3004c69",
+    "author_sticks3_commit": "9e8593ad3654f0dff3111312a755ee4a474714ab"
+  },
+  "hardware": {},
+  "firmware": {
+    "nc1020_original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "paperdiy_probe_sha256": "5d7c8d7857fccb2c638dd8685f26802684dc623d495f86322e24ba7222f776c1",
+    "sticks3_probe_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "native_xtensa_runtime_sha256": "5f8a5f38f0512db04a36fb7ca5cf13ec3d359d0fff1eb481fe9b2c06ab3580f2",
+    "scope": "isolated native Device Service and per-case source inputs"
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "name": "Reference NC1020 QEMU launch with exact 96 MiB card",
+      "status": "FAIL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Corrected NC1020 SPI mount with same 96 MiB card",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "NC1020 ROM import complete",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "NC1020 start and save restore",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "PaperDIY 96 MiB seeded read/write/remount and reset",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "StickS3 BtnB stays idle, BtnA enters provision, reset requires BtnA again",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "name": "StickS3 open fixture DORA, ARP and fixed HTTP body",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "name": "Extended no-input has zero authentication, association, DORA or TCP",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Original StickS3 portal and Linux namespace guest flow",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical hardware and browser WASM",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Integrated PaperDIY and StickS3 reset reruns",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/spi-capacity-summary.json",
+      "bytes": 3794,
+      "sha256": "9fcd7b17f072a5cbf137c06338384d698827621b007997809adf4c4f28c43f7b"
+    },
+    {
+      "path": "evidence/sticks3-button-summary.json",
+      "bytes": 12221,
+      "sha256": "2e12e7352f83ca6b365d3425e83a473edf839e65fcff76e21894144251ed3cb3"
+    },
+    {
+      "path": "evidence/sticks3-no-input-full-window-summary.json",
+      "bytes": 2112,
+      "sha256": "0aeaae053e6b7d249ea081273b7ec258608b4e7fe8c3f1fb60d4c721980ed499"
+    },
+    {
+      "path": "evidence/integrated-rerun-summary.json",
+      "bytes": 7274,
+      "sha256": "288cb7b946d84237a474a744b457a42f7f8c5466735b7d4b55a00d7dc464f690"
+    }
+  ]
+}

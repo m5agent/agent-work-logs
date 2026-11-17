@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "code_commit": "012a38630f0c0167a29afe9c675944b830145483",
+    "base_commit": "6da7ab20351d732c6738fe13311f686efc856db3",
+    "queued_integrated_revision": "20f7e2bece0ace93574b9129576c9b8b14ac71b5",
+    "selected_c6_commit": "7c9a76ff22a5e0110b9a21c0df6b03a2b2f3b4f7"
+  },
+  "hardware": {},
+  "firmware": {
+    "sdk_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "merged_flash_sha256": "8ea84737c443e32b9683f132da937ca4acba815c8e433329ecf3d40610bce080",
+    "matching_elf_sha256": "6f29ed2b4031d15ef90e426f456ace9193fff45c4fdb99de30029f58b1c91521"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "model": "nesso-n1",
+    "native_c6_runtime_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4"
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "name": "Same-artifact guest MEPC and abort site",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Exact matched ELF function ranges and independent tool agreement",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Missing and different ELF excluded",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "ZIP receipts, cleanup and stopped readback",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Exact native Xtensa watchdog retains same symbol path",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "RISC-V live sampling and stack unwinding",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical hardware and browser WASM",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Integrated native C6 guest rerun and exact symbol receipt",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/c6-crash-summary.json",
+      "bytes": 8713,
+      "sha256": "0b8e1fd8d5200e10c9a687116edaefd1288d2df3b8081284a42f6257d3925ff1"
+    },
+    {
+      "path": "evidence/integrated-rerun-summary.json",
+      "bytes": 3032,
+      "sha256": "bba77b86f168fd16b20cdb6992f82590e02fb78a6b658a0111fb53e2cbc37c83"
+    }
+  ]
+}
