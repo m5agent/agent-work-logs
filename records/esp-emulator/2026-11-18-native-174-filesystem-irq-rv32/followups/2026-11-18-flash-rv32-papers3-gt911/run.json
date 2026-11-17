@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer ADV Flash dumps, Nesso N1 saved UART frames and PaperS3 browser GT911",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a2148953f1c22a2b2b066780f9c501b3daddcdf0",
+    "cardputer_adv_flash_decoder_candidate": "a890e0e4af7ad9c277dd88b846422f5d1cbb5470",
+    "nesso_rv32_backtrace_candidate": "881445e30c2c306ef5b80249bb37491b54f4b2d7",
+    "papers3_browser_evidence_commit": "764467c1dce6ac4401d27cc1f166d0fa6913436e",
+    "prepared_package_commit": "63472ab884dc2968904999c75eb6aca91c3f2517",
+    "superseded_runtime_proof_commit": "04646a5dd13922f8d3ca3beead70c82b51d3f062"
+  },
+  "hardware": {
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "cardputer_adv_crc32": "56dd958a616169eb8daf6670dadcd4b5be44c04ecbde91539e166f1b301bdcc1",
+    "cardputer_adv_sha256": "9429f9c6442b2688969ebfb48492e24c5f646c802d0ea1293d72e53b6bb42622",
+    "papers3_official_factory_v05": {
+      "sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624",
+      "version": "Original PaperS3 Factory V0.5"
+    },
+    "nesso_uart": {
+      "crc32": "1597b8eb3b63cceae7e511578dffb8398175f5560a5079af2ae08a27de2a931b",
+      "sha256": "e5abbabdd16490c54db84fb85d8e627a0a3ef4f8b2dddbad892739ec2182fcc3"
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "xtensa_qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "paper_qemu_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+    "candidate_contract_version": "1.75.0",
+    "nesso_native_c6_qemu_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4",
+    "prepared_package_status": "PREPARED_NOT_APPLIED"
+  },
+  "checks": [
+    {
+      "name": "baseline Flash save marker and checksum-valid original dump",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate live Flash CRC32 and SHA256 decoding with exact ELF and independent offline comparison",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate absent and wrong ELF preserve contexts only",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate after released Flash is unavailable",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperS3 browser stable frame oracle and GT911 correlation",
+      "status": "PARTIAL",
+      "detail": "4/15 complete; 10 late-clear and one unclassified; 6/6 paused shared/QMP image region comparisons match."
+    },
+    {
+      "name": "physical board timing and e-paper optics",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Native serial-only permission control preserves UART panic symbols and denies Flash decoding",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate same-session API and ZIP decoded receipt, no binary payload",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate retain_flash true stop preserves five recorded contexts",
+      "status": "PASS"
+    },
+    {
+      "name": "Nesso N1 UART CRC32 and SHA256 saved frames match independent RV32 GDB",
+      "status": "PASS",
+      "detail": "Each fixture: 7/4/5 frames for main/IDLE/esp_timer. Missing or wrong ELF retains contexts without unwind."
+    },
+    {
+      "name": "Nesso N1 UART crash ZIP and retained observation across service restart",
+      "status": "PASS"
+    },
+    {
+      "name": "Superseded 04646a5d 1.75.0 package repeats native Flash CRC32/SHA256",
+      "status": "PASS"
+    },
+    {
+      "name": "Prepared package manifest and source PR scope",
+      "status": "PASS"
+    },
+    {
+      "name": "04646a5d full platform candidate inventory binding",
+      "status": "FAIL",
+      "detail": "One stale contract SHA; corrected by 63472ab8."
+    },
+    {
+      "name": "Final prepared 63472ab8 bundle repeats Cardputer ADV Flash and Nesso UART CRC32 and SHA256",
+      "status": "PASS"
+    },
+    {
+      "name": "First superseded package Nesso whole API-ZIP equality control",
+      "status": "FAIL",
+      "detail": "Cause undetermined. Retained ZIP contained the expected 7/4/5 saved frames."
+    },
+    {
+      "name": "Superseded package independent Nesso repeat",
+      "status": "PASS"
+    },
+    {
+      "name": "Node host contracts (34)",
+      "status": "PASS"
+    },
+    {
+      "name": "Final corrected 63472ab8 platform suite",
+      "status": "PASS",
+      "detail": "2389 tests, 2379 passed, 10 skipped."
+    },
+    {
+      "name": "Final prepared 63472ab8 both Flash formats match fresh independent Xtensa GDB receipts",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputer-adv-flash-dump-summary.redacted.json",
+    "evidence/gt911-browser-bus-summary.json",
+    "evidence/gt911-browser-stable-bus-summary.json",
+    "evidence/papers3-browser-integrity-summary.json",
+    "evidence/nesso-rv32-saved-frames-summary.redacted.json",
+    "evidence/prepared-package-summary.json"
+  ]
+}

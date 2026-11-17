@@ -1,0 +1,395 @@
+{
+  "baseline_source": "a2148953f1c22a2b2b066780f9c501b3daddcdf0",
+  "runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+  "scope": "virtual-device validation on native Cardputer ADV / ESP32-S3 / ESP-IDF v5.5.4",
+  "cases": {
+    "baseline-crc-a3": {
+      "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "firmware_sha256": "56dd958a616169eb8daf6670dadcd4b5be44c04ecbde91539e166f1b301bdcc1",
+      "elf_sha256": "c68c964ceb7ebe115bdbf9b11d79fabc69e48e571f4e60d12ba5eed7e0f3d77d",
+      "flash_sha256": "fb24196ca2a5b3c0cb0e874ac26d23f1a75e0b318692548e3f80db06780970fd",
+      "stopped": true,
+      "variant": "crc32",
+      "sdk": "ESP-IDF v5.5.4",
+      "partition": {
+        "label": "core_a",
+        "offset": 1601536,
+        "bytes": 393216
+      },
+      "dump_from_private_flash": {
+        "bytes": 8932,
+        "sha256": "6bffc48a1f2763325808cf306e96ec8834099b29bb088a90b0763c7280ed4bc1",
+        "verified_checksum": "d45af764"
+      },
+      "serial": {
+        "bytes": 3689,
+        "sha256": "4cde5333d834e187466521433554f06320a2990594283c9d4be99f7341aab9d3"
+      },
+      "original_receipt": {
+        "bytes": 366,
+        "sha256": "10eb8f1e298b2ce788260829f7c2cb8e2c71470c9b4dc4a07103417008df02a5"
+      },
+      "matched_original_response": {
+        "bytes": 2802,
+        "sha256": "eba35430cdbecbb2b7ce64fa5b42427f6e5afcdd3c109a512d5b367594e1ab0b"
+      },
+      "matched_elf": "matched",
+      "saved_marker": "flash_reported_saved",
+      "matched_decoding": null,
+      "after_stop": {
+        "status": "flash_reported_saved"
+      }
+    },
+    "candidate-crc-a1": {
+      "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "firmware_sha256": "56dd958a616169eb8daf6670dadcd4b5be44c04ecbde91539e166f1b301bdcc1",
+      "elf_sha256": "c68c964ceb7ebe115bdbf9b11d79fabc69e48e571f4e60d12ba5eed7e0f3d77d",
+      "flash_sha256": "f903d2f0aed54b62f3c2327087535243b1284dcaf729902a492f29f5043a4b57",
+      "stopped": true,
+      "variant": "crc32",
+      "sdk": "ESP-IDF v5.5.4",
+      "partition": {
+        "label": "core_a",
+        "offset": 1601536,
+        "bytes": 393216
+      },
+      "dump_from_private_flash": {
+        "bytes": 8932,
+        "sha256": "92d670f27f153aa80253544cfd5f2f690a21d030f432a78bbe13851f2f7299bd",
+        "verified_checksum": "d033fc2e"
+      },
+      "serial": {
+        "bytes": 3667,
+        "sha256": "4cc1ebe16b1c3aefb26773d8301d1dc0aa4b91727b37d49006da6776de30f07a"
+      },
+      "original_receipt": {
+        "bytes": 366,
+        "sha256": "efd6b6e2d769d28e15ca3375334240259b08136bca8bdf04b7d27749e6694ab4"
+      },
+      "matched_original_response": {
+        "bytes": 6209,
+        "sha256": "f27e08df638c7e2f6a8fdf3dc1bd4c4ca0b8b4d0ead63da6389a61c180b62f22"
+      },
+      "matched_elf": "matched",
+      "saved_marker": "flash_reported_saved",
+      "matched_decoding": "decoded",
+      "after_stop": {
+        "status": "flash_reported_saved",
+        "decoding": {
+          "status": "unavailable",
+          "reason": "flash_unavailable"
+        }
+      },
+      "control_receipts": {
+        "without_elf": {
+          "elf": "not_uploaded",
+          "task_contexts": 5,
+          "task_metadata_present": false,
+          "symbols_present": false
+        },
+        "wrong_elf": {
+          "elf": "mismatch",
+          "task_contexts": 5,
+          "task_metadata_present": false,
+          "symbols_present": false
+        }
+      },
+      "task_metadata": {
+        "status": "decoded",
+        "source": "matched_elf_dwarf_and_core_dump_tcb",
+        "complete_tasks": 5
+      },
+      "tasks": [
+        {
+          "pc": "0x4037948c",
+          "sp": "0x3fcea820",
+          "crashed": true,
+          "metadata": {
+            "name": "fixture_fault",
+            "priority": 2,
+            "base_priority": 2,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 512,
+              "free_bytes": 3580
+            }
+          }
+        },
+        {
+          "pc": "0x40377a76",
+          "sp": "0x3fc9a570",
+          "crashed": false,
+          "metadata": {
+            "name": "IDLE1",
+            "priority": 0,
+            "base_priority": 0,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 640,
+              "free_bytes": 884
+            }
+          }
+        },
+        {
+          "pc": "0x40377a76",
+          "sp": "0x3fc99e10",
+          "crashed": false,
+          "metadata": {
+            "name": "IDLE0",
+            "priority": 0,
+            "base_priority": 0,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 640,
+              "free_bytes": 884
+            }
+          }
+        },
+        {
+          "pc": "0x400559e0",
+          "sp": "0x3fc97d50",
+          "crashed": false,
+          "metadata": {
+            "name": "ipc0",
+            "priority": 24,
+            "base_priority": 24,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 656,
+              "free_bytes": 612
+            }
+          }
+        },
+        {
+          "pc": "0x400559e0",
+          "sp": "0x3fc983b0",
+          "crashed": false,
+          "metadata": {
+            "name": "ipc1",
+            "priority": 24,
+            "base_priority": 24,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 656,
+              "free_bytes": 612
+            }
+          }
+        }
+      ],
+      "symbol_status": "partial",
+      "offline_decoder": {
+        "offline_all_fields_match": true,
+        "task_count": 5,
+        "crashed_task": "fixture_fault",
+        "receipt": {
+          "bytes": 93,
+          "sha256": "5f67a5260b8e37880bb3181c1ee8eed6fe14eced0941745099cb08285b42b4ca"
+        }
+      }
+    },
+    "candidate-sha-a1": {
+      "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "firmware_sha256": "9429f9c6442b2688969ebfb48492e24c5f646c802d0ea1293d72e53b6bb42622",
+      "elf_sha256": "5675f0e1da50746e7b5725ece8b8b9c2bbe91052ba7d05d08660abf60049782e",
+      "flash_sha256": "4cb3a729db3e47bd245210ed5f13c1ae2af806dd809e0ea74beb84baa575332f",
+      "stopped": true,
+      "variant": "sha256",
+      "sdk": "ESP-IDF v5.5.4",
+      "partition": {
+        "label": "core_a",
+        "offset": 1601536,
+        "bytes": 393216
+      },
+      "dump_from_private_flash": {
+        "bytes": 8960,
+        "sha256": "1b253737f060b7626c58fd172794ba3f92e332c2f64adaac46f58566c94fa89a",
+        "verified_checksum": "ec23038c0239c3803e9aa7f1eedbb5ce39954a734f6f4cfe58aacd603a201734"
+      },
+      "serial": {
+        "bytes": 3665,
+        "sha256": "c36526c811365ad22cd095b2730b1e8de10c9ba4436568aa4852fcf90edea868"
+      },
+      "original_receipt": {
+        "bytes": 366,
+        "sha256": "771cec84ca421eae1c64bcc3d570002f9b26125269f8ca5b93963d11784bc77f"
+      },
+      "matched_original_response": {
+        "bytes": 6276,
+        "sha256": "f6bb374b10510a2a695867396ddf69b2fdd10a50414eb588a79ebe6268975354"
+      },
+      "matched_elf": "matched",
+      "saved_marker": "flash_reported_saved",
+      "matched_decoding": "decoded",
+      "after_stop": {
+        "status": "flash_reported_saved",
+        "decoding": {
+          "status": "unavailable",
+          "reason": "flash_unavailable"
+        }
+      },
+      "control_receipts": {
+        "without_elf": {
+          "elf": "not_uploaded",
+          "task_contexts": 5,
+          "task_metadata_present": false,
+          "symbols_present": false
+        },
+        "wrong_elf": {
+          "elf": "mismatch",
+          "task_contexts": 5,
+          "task_metadata_present": false,
+          "symbols_present": false
+        }
+      },
+      "task_metadata": {
+        "status": "decoded",
+        "source": "matched_elf_dwarf_and_core_dump_tcb",
+        "complete_tasks": 5
+      },
+      "tasks": [
+        {
+          "pc": "0x4037948c",
+          "sp": "0x3fcea820",
+          "crashed": true,
+          "metadata": {
+            "name": "fixture_fault",
+            "priority": 2,
+            "base_priority": 2,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 512,
+              "free_bytes": 3580
+            }
+          }
+        },
+        {
+          "pc": "0x40377a76",
+          "sp": "0x3fc9a570",
+          "crashed": false,
+          "metadata": {
+            "name": "IDLE1",
+            "priority": 0,
+            "base_priority": 0,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 640,
+              "free_bytes": 884
+            }
+          }
+        },
+        {
+          "pc": "0x40377a76",
+          "sp": "0x3fc99e10",
+          "crashed": false,
+          "metadata": {
+            "name": "IDLE0",
+            "priority": 0,
+            "base_priority": 0,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 640,
+              "free_bytes": 884
+            }
+          }
+        },
+        {
+          "pc": "0x400559e0",
+          "sp": "0x3fc97d50",
+          "crashed": false,
+          "metadata": {
+            "name": "ipc0",
+            "priority": 24,
+            "base_priority": 24,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 656,
+              "free_bytes": 612
+            }
+          }
+        },
+        {
+          "pc": "0x400559e0",
+          "sp": "0x3fc983b0",
+          "crashed": false,
+          "metadata": {
+            "name": "ipc1",
+            "priority": 24,
+            "base_priority": 24,
+            "stack": {
+              "source": "tcb_saved_stack_bounds",
+              "used_bytes": 656,
+              "free_bytes": 612
+            }
+          }
+        }
+      ],
+      "symbol_status": "partial",
+      "offline_decoder": {
+        "offline_all_fields_match": true,
+        "task_count": 5,
+        "crashed_task": "fixture_fault",
+        "receipt": {
+          "bytes": 93,
+          "sha256": "5f67a5260b8e37880bb3181c1ee8eed6fe14eced0941745099cb08285b42b4ca"
+        }
+      }
+    }
+  },
+  "serial_only_permission_control": {
+    "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "firmware_sha256": "56dd958a616169eb8daf6670dadcd4b5be44c04ecbde91539e166f1b301bdcc1",
+    "elf_sha256": "c68c964ceb7ebe115bdbf9b11d79fabc69e48e571f4e60d12ba5eed7e0f3d77d",
+    "metadata_read_denied": true,
+    "stopped": true,
+    "uart_panic_symbols": "decoded",
+    "flash_core_dump": {
+      "status": "unavailable",
+      "reason": "flash_read_denied"
+    },
+    "receipt": {
+      "bytes": 312,
+      "sha256": "ff54020e4c5cb54cd149a5f86dc0b12e708dd14caedf547f7d59e7b6d03a4e98"
+    },
+    "matched_original_response": {
+      "bytes": 2894,
+      "sha256": "f8332064edaf613f552e005283e4f8770a1f2e8a6d462773f65e083f952ee4b1"
+    }
+  },
+  "candidate_source": "a890e0e4af7ad9c277dd88b846422f5d1cbb5470",
+  "candidate_source_file_sha256": {
+    "platform/tools/device_service.py": "bede0c1019755841aa06ccfc301529dd4e76c6668f4ee4e650575f8b31b65058",
+    "platform/tools/device_service_crash.py": "8b96646ceb85343285cdc2fb2fdd3c62fd0f28b2b239ed4c86bc7e254fff7ce2"
+  },
+  "candidate_source_receipt": {
+    "bytes": 2871,
+    "sha256": "c7023292e155203bbe66070b7038920c86a026abce9bca19bc6b342cd0622789"
+  },
+  "sdk_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+  "offline_tool": "esp-coredump 1.17.2 with Espressif Xtensa GDB",
+  "same_session_api_zip_crash_equality_without_binary_payload": "PASS",
+  "retain_flash_stop_control": {
+    "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "firmware_sha256": "56dd958a616169eb8daf6670dadcd4b5be44c04ecbde91539e166f1b301bdcc1",
+    "elf_sha256": "c68c964ceb7ebe115bdbf9b11d79fabc69e48e571f4e60d12ba5eed7e0f3d77d",
+    "flash_sha256": "082ee8b564638e4e74294bccc696e77d66dc686c83809bc20e19d7504fb89c67",
+    "stopped": true,
+    "partition_dump": {
+      "bytes": 8932,
+      "sha256": "e58c4f5dff86b355b9b2ca6e53a4c31d3e7e11836c2050f6348b05a925b81549"
+    },
+    "stopped_equals_live": true,
+    "task_contexts_after_stop": 5,
+    "proof_receipt": {
+      "bytes": 366,
+      "sha256": "6784b24d67a2336e9de646e9ddd8c6137fe369a3b315ea0a74776c1d5f8a869a"
+    },
+    "live_response": {
+      "bytes": 3279,
+      "sha256": "8317c1e32493f9770b806191bb0ed06cbd8ca127db9388b3cd09db9a0ea6e051"
+    },
+    "stopped_response": {
+      "bytes": 3279,
+      "sha256": "8317c1e32493f9770b806191bb0ed06cbd8ca127db9388b3cd09db9a0ea6e051"
+    }
+  }
+}
