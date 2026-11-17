@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Integrated native guest validation for StickS3, Dial, NC1020 and Core2",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a0fa14ae26f047fe4bef2c53681f9ea61b13eb8e",
+    "validated_commit": "bd1dca3c74f8b9c2654e1ba3590e1f282d2071b0"
+  },
+  "hardware": {
+    "physical_status": "NOT RUN"
+  },
+  "firmware": {
+    "sticks3_original_application_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+    "sticks3_composed_flash_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70",
+    "dial_original_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "dial_stock_sha256": "6a1c7f01bebb5b74284c2e58b3d7bb465dd7cca99252012f3007153f1d6611f1",
+    "nc1020_original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "core2_abort_fixture_sha256": "ffb215be79beabd024e390c4fb3e9e8336e2e94e34b60fd42c690a8d2e634677",
+    "core2_watchdog_fixture_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "Isolated native Device Service sessions",
+    "source_commit": "bd1dca3c74f8b9c2654e1ba3590e1f282d2071b0",
+    "xtensa_runtime_sha256": "44d5b221e506c6b85dcc5d46d9d97a202eb6eca0a5713108a95f35676aed50f5"
+  },
+  "checks": [
+    {
+      "name": "StickS3 author portal and two station rejoins on same lease",
+      "status": "PASS"
+    },
+    {
+      "name": "Dial original indexed playback commands on 10 rotations",
+      "status": "PARTIAL",
+      "detail": "9/10 tracks; one -16-detent, 5 ms run selected track 1 rather than 7 with 64 recorded GPIO edges."
+    },
+    {
+      "name": "Dial original six button and touch controls and stock display",
+      "status": "PASS"
+    },
+    {
+      "name": "NC1020 original cold import and retained same-guest save",
+      "status": "PASS"
+    },
+    {
+      "name": "NC1020 visible framebuffer parity",
+      "status": "PARTIAL",
+      "detail": "Early samples are black and the observed crop does not cover the expected guest display."
+    },
+    {
+      "name": "Core2 matching-ELF tasks on abort and watchdog",
+      "status": "PASS"
+    },
+    {
+      "name": "physical devices, browser WASM, RF, acoustic output, hosted application behavior",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "full emulator platform suite",
+      "status": "PASS",
+      "detail": "2366 passed, 8 skipped."
+    },
+    {
+      "name": "reviewer Python 3.9 suite",
+      "status": "PASS",
+      "detail": "182 passed."
+    },
+    {
+      "name": "saved-snapshot StickS3 local AP review on the combined source and runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "StickS3 cloud claim review",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Node contracts and generated source validators",
+      "status": "PASS"
+    },
+    {
+      "name": "independent native stack audit",
+      "status": "PASS",
+      "detail": "168 forward and 168 reverse layers, clean pinned upstream, 10450 exact tracked inputs."
+    }
+  ],
+  "evidence": [
+    "evidence/core2-coredump-summary.redacted.json",
+    "evidence/dial-summary.redacted.json",
+    "evidence/nc1020-cold-summary.redacted.json",
+    "evidence/sticks3-rejoin-summary.redacted.json",
+    "evidence/platform-regression-summary.json"
+  ]
+}

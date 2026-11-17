@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | StickS3、Dial、NC1020 与 Core2 原生联合复验 | `PARTIAL`（原版两次重连、冷导入/存档及 Core2 崩溃元数据通过；Dial 9/10、NC1020 画面边界保留） | [查看](esp-emulator/2026-11-18-native-integrated-guest-validation/) |
 | 2026-11-17 | ESP Emulator | 原生 C6 UART core dump | `PASS`（两种校验格式、同会话任务状态和 ZIP） | [查看](esp-emulator/2026-11-17-native-c6-uart-core-dumps/) |
 | 2026-11-17 | ESP Emulator | PaperDIY 虚拟 SD 热插拔 | `PASS`（GPIO48 中断、同会话 FAT32、导出验证） | [查看](esp-emulator/2026-11-17-paperdiy-sd-hotplug/) |
 | 2026-11-17 | ESP Emulator | Tab5 并发 DSI 取帧 | `PARTIAL`（受控并发通过，高压仍有原生传输丢消息） | [查看](esp-emulator/2026-11-17-tab5-power-latch/followups/2026-11-17-tab5-dsi-readback/) |
