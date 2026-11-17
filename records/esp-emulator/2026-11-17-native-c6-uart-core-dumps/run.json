@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Native ESP32-C6 UART core dumps",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5a87913bf60dcde84420661d279ab5e0c9c9154c",
+    "candidate_commit": "7caf061ea74c5275910d3837e61786158cc263b5"
+  },
+  "hardware": {
+    "device": "Nesso N1",
+    "validation": "virtual-device validation"
+  },
+  "firmware": {
+    "esp_idf": "5.5.4",
+    "digests": "evidence/session-core-dump-summary.json"
+  },
+  "execution": {
+    "environment": "Two isolated native Nesso N1 Device Service abort sessions; two exact-build baseline and Core2 controls"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "name": "Real guest UART CRC32 and SHA-256"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "API/ZIP equality, matched ELF symbols, three task contexts each and clean stop"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "Independent RISC-V GDB PC/SP and thread count"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "name": "RISC-V stack unwinding and other dump storage formats"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/session-core-dump-summary.json",
+      "sha256": "b1d19bd74759c718e76d90cdc3953d60f4b04ee8766562304b7e0f4d834c33d1",
+      "bytes": 5975
+    },
+    {
+      "path": "evidence/frozen-combined-summary.json",
+      "sha256": "d165050507c35217105ac9f6254591d9b7d98c436b88b058116d0a954759290a",
+      "bytes": 2465
+    }
+  ],
+  "notes": [
+    "Sensitive and raw artifacts excluded. Burner submission was disabled."
+  ]
+}

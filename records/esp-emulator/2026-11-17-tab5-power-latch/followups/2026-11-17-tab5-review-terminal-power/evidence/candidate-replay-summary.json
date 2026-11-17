@@ -1,0 +1,168 @@
+{
+  "native_service_source": "5a87913bf60dcde84420661d279ab5e0c9c9154c",
+  "reviewer_source": "c721839",
+  "native_xtensa_sha256": "eca4ab4bce50c10834fc92b12a3bdb69fd4c504c3281bec03574322dc6b98187",
+  "validation": "virtual-device validation",
+  "outputs": {
+    "arduventure": {
+      "firmware_sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+      "firmware_bytes": 623152,
+      "expected_elf_sha256": null,
+      "device_id": "tab5",
+      "execution_runtime": "qemu",
+      "review_status": "manual_review",
+      "error_code": "E_INTERACTION_CLAIM_PARTIAL",
+      "lane": "SIM_PARTIAL",
+      "observation": {
+        "status": "PASS",
+        "required_seconds": 60,
+        "elapsed_seconds": 60.25667829099999,
+        "sample_count": 13,
+        "frame_scope": "framebuffer",
+        "frame_unavailable_reason": null,
+        "evidence_file": "observation.json"
+      },
+      "evidence_zip_sha256": "b9fcb9c5a401c1cbe117924537124a4946b957de2f7c784d82a0f912b8573f6d",
+      "serial_sha256": "68a7661429f4f9d85a88fec957059946d730d5324b56eddaaabfc9b71c9b88e2",
+      "serial_bytes": 5410,
+      "serial_power_on_count": 1,
+      "serial_sw_reset_count": 0,
+      "serial_primary_panic": false,
+      "verified_crash": {
+        "status": "no_evidence",
+        "source": "device_service",
+        "kind": null,
+        "elf_status": "not_uploaded",
+        "repeated_resets": false
+      },
+      "session_stopped": true,
+      "mutable_flash_released": true,
+      "burner": "NOT SUBMITTED",
+      "frame_backend": "esp-emu-dsi",
+      "panel_board": "st7123",
+      "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "elf_symbols_status": "unavailable",
+      "frame_width": 720,
+      "frame_height": 1280,
+      "screenshot_evidence": {
+        "bytes": 11313,
+        "sha256": "be3cd61931a21ae99d6241a14d1f50e9c66b5fc25384fabe2cb4c65a6087c0a2",
+        "readiness": "PASS",
+        "metrics": {
+          "capture_backend": "esp-emu-dsi",
+          "nonblack_pixels": 708520,
+          "unique_colors": 1
+        }
+      },
+      "input_assertion_status": "PARTIAL",
+      "touch_model": "esp-emu-st7123",
+      "simulation_input": {
+        "status": "PARTIAL",
+        "scope": "interactive-input",
+        "setup_actions_accepted": 0,
+        "accepted": 0,
+        "changed": 0,
+        "changed_inputs": [],
+        "ab_navigation_verified": null,
+        "touch_status": "PASS",
+        "touch_plan_status": "PASS",
+        "touch_plan_reason": null,
+        "terminal_power_off": {
+          "status": "PASS",
+          "scope": "tab5_terminal_power_off",
+          "region": [
+            208,
+            520,
+            300,
+            140
+          ],
+          "observed_before_region_sha256": "60c6b7e07a9411482c699f1c2793bd2f8e91195ba9e71a26b19e13d745c01263",
+          "power_before": {
+            "latched": false,
+            "chip_enabled": true,
+            "latched_at_guest_ns": null
+          },
+          "power_after": {
+            "latched": true,
+            "chip_enabled": false,
+            "latched_at_guest_ns": 66824160687
+          },
+          "observed_after_region_sha256": "c34293897f569eb2dad36e5a9d5766c3693ff73e27e077d0664fe6004366f712",
+          "input_error_code": "tab5_guest_powered_off",
+          "input_http_status": 409
+        },
+        "touch_button_bindings": {},
+        "button_status": "FAIL",
+        "keyboard_status": "NOT RUN",
+        "required_buttons_observed": {
+          "a": false,
+          "b": false
+        },
+        "probe_keys": [],
+        "probe_keys_responded": {},
+        "semantic_verification": "PASS",
+        "semantic_input_status": "NOT RUN",
+        "semantic_input_actions": {
+          "touch_hold_center": "NOT RUN"
+        },
+        "unsupported_semantic_inputs": [],
+        "verification_scope": "explicit_state_or_frame_assertions"
+      },
+      "expected_scope": "Exact gated on-screen A/B, D-pad, and name-picker right hold; declared terminal power action remains separate",
+      "terminal_touch": {
+        "hash_before_png": "be3cd61931a21ae99d6241a14d1f50e9c66b5fc25384fabe2cb4c65a6087c0a2",
+        "before_sha256": "60c6b7e07a9411482c699f1c2793bd2f8e91195ba9e71a26b19e13d745c01263",
+        "result": {
+          "status": "PASS",
+          "scope": "tab5_terminal_power_off",
+          "region": [
+            208,
+            520,
+            300,
+            140
+          ],
+          "observed_before_region_sha256": "60c6b7e07a9411482c699f1c2793bd2f8e91195ba9e71a26b19e13d745c01263",
+          "power_before": {
+            "latched": false,
+            "chip_enabled": true,
+            "latched_at_guest_ns": null
+          },
+          "power_after": {
+            "latched": true,
+            "chip_enabled": false,
+            "latched_at_guest_ns": 66824160687
+          },
+          "observed_after_region_sha256": "c34293897f569eb2dad36e5a9d5766c3693ff73e27e077d0664fe6004366f712"
+        },
+        "kind": "touch",
+        "action": "hold",
+        "coordinates": [
+          672,
+          53
+        ],
+        "seconds": 3,
+        "raw_input_accepted": false,
+        "input_error_code": "tab5_guest_powered_off",
+        "input_http_status": 409,
+        "observation_input_timing": "after_window",
+        "hash_after_png": "84f04dbb5fa1edffcd6acd0977b33aab77d99b8d03bfc951c38d50217f4c0097",
+        "after_sha256": "c34293897f569eb2dad36e5a9d5766c3693ff73e27e077d0664fe6004366f712"
+      },
+      "other_semantic_actions": {
+        "touch_hold_center": "NOT RUN"
+      },
+      "zip_power_state_sha256": "0ca36929048e22554bbfc90ea65f08922d486f14f68618bbccdb155c56dcdb3c",
+      "active_lease_count_after": 0,
+      "touch_part_sha256": "655ee4735028357d21ab9341c9d3a6cf14bc6720b6869be763f29b1458feb0a9",
+      "execution_firmware_sha256": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063"
+    }
+  },
+  "frozen_manifest_sha256": "ca42cee23937890fca0f5a147b187cdb9fe31d070ea1d041ffb8058a3b5d411c",
+  "frozen_manifest_status": "PREPARED_NOT_APPLIED",
+  "candidate_review_openapi_sha256": "24ea69516a7c8488e6e74fef206fe7015880c53891272d887b9978c57db1fb34",
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED",
+  "review_contract_version": "0.5.0",
+  "status": "COMPLETE",
+  "owned_services_stopped": true
+}

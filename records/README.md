@@ -18,6 +18,10 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | ESP Emulator | 原生 C6 UART core dump | `PASS`（两种校验格式、同会话任务状态和 ZIP） | [查看](esp-emulator/2026-11-17-native-c6-uart-core-dumps/) |
+| 2026-11-17 | ESP Emulator | PaperDIY 虚拟 SD 热插拔 | `PASS`（GPIO48 中断、同会话 FAT32、导出验证） | [查看](esp-emulator/2026-11-17-paperdiy-sd-hotplug/) |
+| 2026-11-17 | ESP Emulator | Tab5 并发 DSI 取帧 | `PARTIAL`（受控并发通过，高压仍有原生传输丢消息） | [查看](esp-emulator/2026-11-17-tab5-power-latch/followups/2026-11-17-tab5-dsi-readback/) |
+| 2026-11-17 | ESP Emulator | Tab5 原版终端关机审核 | `PARTIAL`（关机步骤通过，其他声明保留未验） | [查看](esp-emulator/2026-11-17-tab5-power-latch/followups/2026-11-17-tab5-review-terminal-power/) |
 | 2026-11-17 | ESP Emulator | Tab5 ST7123 原版关机与重启 | `PASS`（指定 ST7123 虚拟 EN、原版 DSI 与重启） | [查看](esp-emulator/2026-11-17-tab5-power-latch/) |
 | 2026-11-17 | ESP Emulator | StickS3 原版首次配网门户 | `PASS`（关联、DHCP、ARP、只读首页；提交凭据待验） | [查看](esp-emulator/2026-11-17-sticks3-portal-page/) |
 | 2026-11-17 | ESP Emulator | Cardputer 原版 Fn 审核动作 | `PARTIAL`（原版两板缓存重建和 ADV 清除已验证，完整交互待验） | [查看](esp-emulator/2026-11-17-cardputer-review-fn-controls/) |

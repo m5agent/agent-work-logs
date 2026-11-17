@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "title": "原版 Tab5 终端关机审核",
+  "kind": "code_change",
+  "date": "2026-11-17",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "Firmware Review Service",
+    "base_commit": "fa90d9a361a3b27e4d9eb02e76d7245e9c485e73",
+    "reviewer_implementation_commit": "c721839882d4dda958ec595f0e1b4071375c9276",
+    "reviewer_dashboard_commit": "57b38a3a6ffe4fda1ec9da3a9170eb8bf1c6f161",
+    "emulator_commit": "5a87913bf60dcde84420661d279ab5e0c9c9154c",
+    "mixed_plan_compatibility_commit": "ad2bd6bd8f323e85bcbb3b30faa37623c57e5cec"
+  },
+  "hardware": {
+    "board": "Tab5",
+    "variant": "ST7123",
+    "validation": "virtual-device validation"
+  },
+  "firmware": {
+    "name": "Arduventure",
+    "version": "1.0.0",
+    "source_sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+    "source_bytes": 623152,
+    "execution_flash_sha256": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063"
+  },
+  "execution": {
+    "scope": "isolated saved-snapshot review and native Device Service",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "touch_part_sha256": "655ee4735028357d21ab9341c9d3a6cf14bc6720b6869be763f29b1458feb0a9",
+    "observation_seconds": 60.25667829099999,
+    "samples": 13,
+    "evidence_zip_sha256": "b9fcb9c5a401c1cbe117924537124a4946b957de2f7c784d82a0f912b8573f6d"
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "name": "Qualified post-window same-session native latch transition"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "name": "Exact RGB frame-region checks and dashboard status"
+    },
+    {
+      "layer": "review",
+      "status": "PARTIAL",
+      "name": "Complete original input claims, including remaining unexecuted actions"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "name": "Physical power behavior"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "name": "Unqualified worker preserves ordinary prefix and forbids terminal input in a focused contract test"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/candidate-replay-summary.json",
+      "sha256": "269ad08fac56099505030387ba38336f1bdc2a94b2c61211d787e2fcd0a70b3d",
+      "bytes": 6345
+    },
+    {
+      "path": "evidence/legacy-control-summary.json",
+      "sha256": "2527a295f246cc48deed747918b0863afc2bb58f94410a3344f5a22b2d1f144f",
+      "bytes": 4822
+    },
+    {
+      "path": "evidence/dashboard-summary.json",
+      "sha256": "010b985683015226ffbf18bbe789763101eadc1aa5ff5166dda309f52f16bb56",
+      "bytes": 242
+    },
+    {
+      "path": "evidence/mixed-plan-final-replay-summary.json",
+      "bytes": 6340,
+      "sha256": "4379bb32a9030b801c3300987fff43940ea526bd636ff950293489ffcc9d9064"
+    },
+    {
+      "path": "evidence/frozen-combined-summary.json",
+      "sha256": "59740015610f7e55548ce23712234ca4c842feb3ea28a2dd9d0620d16273e181",
+      "bytes": 6373
+    }
+  ],
+  "notes": [
+    "Run artifacts, endpoint identifiers and service state remain in isolated storage.",
+    "Burner publication was not requested for this fixture."
+  ]
+}

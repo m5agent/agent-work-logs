@@ -16,3 +16,8 @@
 另一次并发回归确认了 EN 关机，DSI 报告丢帧且未捕获关机画面。本次覆盖指定 ST7123 运行配置。其他 Tab5 变体、物理供电与显示亮度、浏览器及常驻切换为 `NOT RUN`。
 
 [冻结包独立复验](evidence/frozen-native-replay-summary.json)完成关机画面、EN、ZIP 和重启。
+
+## 后续验证
+
+- [Tab5 并发 DSI 取帧](followups/2026-11-17-tab5-dsi-readback/)
+- [审核侧原版终端关机](followups/2026-11-17-tab5-review-terminal-power/)

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 ST7123 native DSI readback under contention",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5a87913bf60dcde84420661d279ab5e0c9c9154c",
+    "candidate_commit": "ddb6027e695f82bdc593b80599af73925b88ed5d"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "board": "Tab5 ST7123"
+  },
+  "firmware": {
+    "sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+    "virtual_flash_sha256": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063"
+  },
+  "execution": {
+    "environment": "Isolated native Device Service and pinned esp-emu 1.1.0",
+    "release_scope": "candidate",
+    "concurrent_clients": 4
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "name": "Idle message filtering preserves a sparse DSI diff watermark"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "Four clients at 125 ms: EN latch, original power frame, evidence ZIP, restart title"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "Four clients at 25 ms: complete post-fix guest replay"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "FAIL",
+      "name": "Earlier candidate at 25 ms: restart title timed out"
+    },
+    {
+      "layer": "transport",
+      "status": "FAIL",
+      "name": "Native transport reported message drops during severe contention"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "name": "Physical power and browser"
+    },
+    {
+      "layer": "delivery",
+      "status": "NOT RUN",
+      "name": "Resident service cutover"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "CarPlay GT911 no-ELF display, drag and confirmation-dialog regression"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/dsi-receiver-summary.json",
+      "sha256": "e893f1f69a55ffcf91b85798679db36a16dac0b78b0b8528100ba012153a9eca",
+      "bytes": 6845
+    },
+    {
+      "path": "evidence/gt911-carplay-regression-summary.json",
+      "sha256": "7996c005f5162cfcee64bde6a60646c6bd2541fe63f09788d69d3130bf1c8fb0",
+      "bytes": 1298
+    },
+    {
+      "path": "evidence/frozen-combined-summary.json",
+      "sha256": "b0e02fc31a5e7f0faf9fe4d3adcfe6214f6dba3ff6d1f11dde1052f05d084e83",
+      "bytes": 1579
+    }
+  ],
+  "notes": [
+    "Raw artifacts and identifiers omitted. No Burner submission."
+  ]
+}

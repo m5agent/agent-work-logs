@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "PaperDIY runtime SPI SD hot-plug",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "5a87913bf60dcde84420661d279ab5e0c9c9154c",
+    "candidate_commit": "563d4debf6ae11f4bd4092aba920f56aa82df772",
+    "qemu_upstream_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "patch_sha256": "0d79fbc3ef77f1e3d5300a71075c44b8041a5273e99f6da114d2fd34243ae70e"
+  },
+  "hardware": {
+    "board": "PaperDIY",
+    "validation": "virtual-device validation"
+  },
+  "firmware": {
+    "sha256": "7a10bda2976950dceb98c41744f35ec9a7da7f320d602f24cc5a9c838e47af94",
+    "fixture_sha256": "f4589390aa3525946fa1c8873f390f571a4729394c887daba2d1cc4a12803ea2",
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d"
+  },
+  "execution": {
+    "environment": "Independently owned native Device Service and Xtensa QEMU.",
+    "runtime_sha256": "99da5cb681e44dfdf332f8af01b8d5d36bbb2801b30ca7e0ca6be21af4c0ecff",
+    "active_leases_after_stop": 0
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "name": "Native recipe forward/reverse replay and built-source parity"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "name": "Real GPIO48 IRQ and SPI command deltas"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "FAT32 read/write/eject/reinsert and stopped export"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "name": "Legacy backend and missing-media controls"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "name": "Physical socket and electrical behavior"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/paperdiy-sd-hotplug-summary.json",
+      "sha256": "cf44f15ed586887386ef26a01fdd06ef28c93edd66ea2b1b8f068ce2f40574f4",
+      "bytes": 6579
+    },
+    {
+      "path": "evidence/frozen-combined-summary.json",
+      "sha256": "4db73ad1ce4677cb193f3af730eac4be6b083a90566c33bdb6138a11e6929ef6",
+      "bytes": 2059
+    }
+  ],
+  "notes": [
+    "Synthetic guest and SD file payloads. Process and session identifiers excluded.",
+    "The probe qualifies one prepared FAT32 fixture for the PaperDIY native runtime.",
+    "Burner was not submitted."
+  ]
+}
