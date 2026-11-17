@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Linux 原生 STA、Tab5 审核归因与 PaperS3 触摸复验 | `PARTIAL`（两板受控 Linux 数据面及审核通过；Tab5 画面未变、PaperS3 0/12，保留独立取证） | [查看](esp-emulator/2026-11-18-native-174-filesystem-irq-rv32/followups/2026-11-18-flash-rv32-papers3-gt911/followups/2026-11-18-linux-sta-tab5-papers3/) |
 | 2026-11-18 | ESP Emulator | 原生 Flash 与 UART 崩溃诊断、PaperS3 浏览器触摸复验 | `PARTIAL`（Cardputer ADV Flash、Nesso 保存帧离线对照通过；原版浏览器图标 4/15 和 GT911 总线证据） | [查看](esp-emulator/2026-11-18-native-174-filesystem-irq-rv32/followups/2026-11-18-flash-rv32-papers3-gt911/) |
 | 2026-11-18 | ESP Emulator | Device Service 1.74 原生复验与输入时序追踪 | `PARTIAL`（四组文件系统、GP-SPI IRQ 和 Nesso RV32 通过；原版画面与输入时序边界保留） | [查看](esp-emulator/2026-11-18-native-174-filesystem-irq-rv32/) |
 | 2026-11-18 | ESP Emulator | 原版容量准入、任务观测和网络复验 | PARTIAL（Flash 尺寸、StickS3 新会话及 Cardputer ADV 转储通过，NC1020 和 Dial 时序保留） | [查看](esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-native-guest-followup/)
