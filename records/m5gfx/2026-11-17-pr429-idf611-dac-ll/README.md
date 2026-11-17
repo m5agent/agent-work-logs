@@ -32,7 +32,7 @@
 - `evidence/idf-dac-ll-diff.txt`：6.1 / 6.1.1 的函数体对照与 IDF 自带驱动的调用顺序。
 - `evidence/build-commands.txt`：可重建的命令。
 - `patches/0001-panel-cvbs-idf611-dac-ll.patch`：PR head 的提交（`git format-patch`）。
-- 已发布回复：见下方“已发布回复”。
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/429#issuecomment-6948152024>（1 条，英文；PR 仍 OPEN，未 close、未 push 上游）
 
 ## 未覆盖项
 
