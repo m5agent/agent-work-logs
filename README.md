@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Core2 与 Nesso N1 LittleFS、Core2 HTTP、Dial 和 Tab5 原版诊断 | `PARTIAL`（LittleFS 六会话和受控 HTTP 通过；Dial 快速转动与 Tab5 启动边界保留） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | PaperS3 GT911 扫描相位与 Core2 受控 STA | `PARTIAL`（GT911 协议和 Core2 数据面通过，PaperS3 原版图标响应仍不稳定） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-mp3-review-papers3-gt911/followups/2026-11-18-papers3-gt911-scan-phase/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer ADV 原版 MP3 同会话 PCM 审核与 PaperS3 原生触摸 | `PARTIAL`（MP3 正向、错频与权限对照完成；PaperS3 驱动延迟的原因待定位） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-mp3-review-papers3-gt911/) |
 | 2026-11-18 | ESP Emulator | Cardputer 原生 PCM、CoreS3 Joystick 审核与 PaperS3 浏览器归因 | `PARTIAL`（双板数字音频与 Joystick 双用例通过；PaperS3 触摸归因待定位） | [查看](records/esp-emulator/2026-11-18-native-174-filesystem-irq-rv32/followups/2026-11-18-flash-rv32-papers3-gt911/followups/2026-11-18-linux-sta-tab5-papers3/followups/2026-11-18-native-pcm-cores3-papers3/) |

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Native LittleFS and contained HTTP plus original firmware diagnostics",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "littlefs_service": "c53750bf0cc23e717943c6c3c79e49b11e1a227a",
+    "littlefs_runtime_bundle": "63472ab884dc2968904999c75eb6aca91c3f2517",
+    "littlefs_evidence_commit": "2a85e1f9ba38cef14afaf4f0721f1581974005ae",
+    "core2_http_emulator": "7e0113e52befa5f7df559c03a228db6ef045b121",
+    "reviewer": "4537ea202bb51b0082fecb6c7cc271356d51aa8d",
+    "dial_execution": "c53750bf0cc23e717943c6c3c79e49b11e1a227a",
+    "tab5_execution": "c53750bf0cc23e717943c6c3c79e49b11e1a227a",
+    "emulator_main": "5f8e2f8fe97d2d76553efdf03068a8c3dcf83727",
+    "dial_evidence_commit": "6e69cc7619ed4e4c53570df24d8f0576ed60279b",
+    "tab5_evidence_commit": "5f8e2f8fe97d2d76553efdf03068a8c3dcf83727",
+    "source_main_readbacks": "PASS"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Core2",
+      "Nesso N1",
+      "Dial",
+      "Tab5"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "littlefs_core2": "9467f9a9c56cf19e8f88b9194d7dffd9f33bc2bd49bf8730105e8a3f8623a3e9",
+    "littlefs_nesso_n1": "66a94fe94a10ef19f0d60c57a42a8459ae49e9e88260d28582a79a47ca843a44",
+    "http_core2_probe": "d21cc74379de402f374d18c7e1a8b79fd912a9b734bbc3eda41370333f5c855e",
+    "dial_vinyl_original": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "tab5_98tab5_original": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+    "tab5_carplay_original": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3"
+  },
+  "execution": {
+    "littlefs_chips": [
+      "esp32",
+      "esp32c6"
+    ],
+    "core2_http_profile": "core2-openmac",
+    "core2_http_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "reviewer_test_count": 197,
+    "dial_observer_runtime_sha256": "0a4d21d04c16b5ce6be647239b731f2a3e59a7ccbd7904e70d54436a17a37560"
+  },
+  "checks": [
+    {
+      "name": "Integrated local emulator platform suite",
+      "status": "PASS",
+      "tested_runtime_source": "2a85e1f9ba38cef14afaf4f0721f1581974005ae",
+      "ran": 2396,
+      "skipped": 10,
+      "seconds": 191.486,
+      "result_sha256": "a0589f15b9d4514216671bd250ef72f2f4a746eb8268ec50c457805763d92530",
+      "result_bytes": 53750
+    },
+    {
+      "name": "Final documentation suite and generated validators",
+      "status": "PASS",
+      "docs_checks": 51,
+      "scope": "PASS",
+      "runtime_coverage": "PASS",
+      "peripheral_catalog": "PASS",
+      "qemu_profiles": "PASS",
+      "project_snapshot": "PASS",
+      "api_inventory": "PASS"
+    },
+    {
+      "name": "Final reviewer local suite",
+      "status": "PASS",
+      "tests": 197
+    },
+    {
+      "name": "Core2 and Nesso N1 selected LittleFS cross-session persistence, restart export and seed isolation",
+      "status": "PASS",
+      "cases": 6
+    },
+    {
+      "name": "Core2 and Nesso N1 out-of-partition byte equality and release",
+      "status": "PASS",
+      "cases": 6
+    },
+    {
+      "name": "Core2 HTTP allow, actual body digest and separate guest acceptance",
+      "status": "PASS"
+    },
+    {
+      "name": "Core2 HTTP explicit Host denial and namespace pre-allocation rejection",
+      "status": "PASS",
+      "controls": 2
+    },
+    {
+      "name": "Core2 Reviewer real plan, admission and finalized transport collection",
+      "status": "PASS"
+    },
+    {
+      "name": "Physical hardware, browser and complete reviews",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Dial same original track at 35 ms default in cold repeat",
+      "status": "PASS",
+      "observed": 18,
+      "total": 18
+    },
+    {
+      "name": "Dial same original track at 5 ms fast in cold repeat",
+      "status": "PARTIAL",
+      "observed": 15,
+      "total": 18,
+      "actual_sample_reconstructions_for_misses": 3
+    },
+    {
+      "name": "Tab5 same original produces a complete frame across 0.50.0 and 1.1.0",
+      "status": "PARTIAL",
+      "legacy_complete_frames": 0,
+      "current_complete_frames": 0
+    },
+    {
+      "name": "Tab5 unchanged CarPlay firmware display positive control",
+      "status": "PASS",
+      "valid_frames": 14,
+      "running_frame_queries": 14
+    },
+    {
+      "name": "Tab5 initial observer setup trial before valid qualifying controls",
+      "status": "FAIL",
+      "firmware_result": "NOT ASSESSED"
+    },
+    {
+      "name": "Burner publication",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Retained ESP32-S3 SDK v5.5.4 and v6.1.1 assembler output byte equality",
+      "status": "PASS",
+      "scope": "offline packaging identity"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/core2-nesso-littlefs-summary.redacted.json",
+      "sha256": "59c892771e75735aec10e07f58ee06d40c193d837287ae8f1c0ffb6bae4282b7",
+      "bytes": 9122
+    },
+    {
+      "path": "evidence/core2-contained-http-summary.redacted.json",
+      "sha256": "14af4d28fb1d625e84c8787c14670c9551d3874394bc45e229e3408f9c2a6367",
+      "bytes": 4508
+    },
+    {
+      "path": "evidence/dial-fast-original-readback-summary.redacted.json",
+      "sha256": "2cf786dfdf4bc628164b4594f1419e91ae054203c43e3c20bd159930182e0fa9",
+      "bytes": 24105
+    },
+    {
+      "path": "evidence/tab5-stock-frame-summary.redacted.json",
+      "sha256": "6d7de2507edb15518f8a82d7ffd7e79383033b1e55da63fcabb067561049b2ec",
+      "bytes": 7257
+    }
+  ]
+}
