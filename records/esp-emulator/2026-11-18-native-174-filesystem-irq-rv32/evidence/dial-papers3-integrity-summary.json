@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Dial rotary sampling under controlled native clocks and PaperS3 Factory touch",
+  "source": {
+    "repository": "esp-emulator",
+    "base_commit": "8c65905e466c69a62239371f1fcd254c183b0712"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Dial",
+      "PaperS3"
+    ]
+  },
+  "firmware": {
+    "dial_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "papers3_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624"
+  },
+  "execution": {
+    "environment": "Private isolated Device Service plus frozen Chromium WASM",
+    "runtime_observer_dial_sha256": "ce66b635d72bf4dcb9488c08ad707cf70988e3040d895e8809746cd523a0d7db"
+  },
+  "checks": [
+    {
+      "case": "Dial native 35 ms scheduled edges and original UART",
+      "status": "PASS",
+      "matches": 21,
+      "total": 21
+    },
+    {
+      "case": "Dial native 5 ms stock UART across clocks",
+      "status": "PARTIAL",
+      "matches": 16,
+      "total": 21
+    },
+    {
+      "case": "PaperS3 frozen native original icon toggle",
+      "status": "PARTIAL",
+      "matches": 4,
+      "total": 9
+    },
+    {
+      "case": "PaperS3 traced native original icon toggle",
+      "status": "PARTIAL",
+      "matches": 5,
+      "total": 9
+    },
+    {
+      "case": "PaperS3 browser uses same native icon oracle after exact original inputs",
+      "status": "PARTIAL",
+      "matches": 0,
+      "total": 9
+    },
+    {
+      "case": "Physical Dial and PaperS3",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/dial-clock-summary.json",
+      "sha256": "f7dade2bea5e412da24e983192b1e2817ead63686715ecb18fc1b5a842179576",
+      "bytes": 29194
+    },
+    {
+      "path": "evidence/dial-gpio-irq-summary.json",
+      "sha256": "f74ffa4b29575b664ccd377770990f33b7d4fdce01b87b970d565ba5502d24c0",
+      "bytes": 909
+    },
+    {
+      "path": "evidence/papers3-browser-summary.json",
+      "sha256": "ab144cef1a4b93aba458f022f3abd443179cb8f3722addcc673b61813e6eaace",
+      "bytes": 3912
+    },
+    {
+      "path": "evidence/papers3-frozen-native-summary.json",
+      "sha256": "3aa4d161630dd55f55ab35fa78bb5de886257766774a9e1c396636c929e8cf9a",
+      "bytes": 2495
+    },
+    {
+      "path": "evidence/papers3-gt911-summary.json",
+      "sha256": "6c25f868f401f7be1f291180e5fdec7808ed2ecc100ee7263b49437241a6b87a",
+      "bytes": 5121
+    }
+  ],
+  "source_receipt": {
+    "bytes": 2526,
+    "sha256": "f769a85556b608d6a3ecff382ec861458b260f64d0bd8df1eeebfe66519e8de6"
+  },
+  "bundles": {
+    "replay-wall": {
+      "bytes": 48013,
+      "sha256": "c43b8783ccfd6d8cf7a4e79f0c85a97ebc284e726ec7584653569125d5e1df50",
+      "manifest_entries_verified": 10
+    },
+    "replay-3": {
+      "bytes": 45400,
+      "sha256": "c36aaaeab4e24ca6ae92dd5e21e2a681fb302ace0fcbda6f9234053941d08db7",
+      "manifest_entries_verified": 10
+    },
+    "replay-5": {
+      "bytes": 45162,
+      "sha256": "769e06adbb5a2650e6818c7dc7b1dcaf4e83fa4fbd835d69ccac26f759a8f4ca",
+      "manifest_entries_verified": 10
+    },
+    "paper-native": {
+      "bytes": 22728,
+      "sha256": "d8663a3e2e2bfc48aac19d7fc52461a160f7f92a884322fab933a542f128c64b",
+      "manifest_entries_verified": 7
+    },
+    "paper-gt911-a2": {
+      "bytes": 24069,
+      "sha256": "916b695fb93193d548fc881ef83379e9a3cdcbf9f839c3dd00017bff72d20d85",
+      "manifest_entries_verified": 7
+    }
+  }
+}

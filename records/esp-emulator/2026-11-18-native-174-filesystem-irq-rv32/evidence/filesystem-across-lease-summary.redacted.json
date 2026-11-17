@@ -1,0 +1,520 @@
+{
+  "cases_by_lane": {
+    "sticks3": {
+      "status": "PASS",
+      "device": "sticks3",
+      "sdk": "5.5.4",
+      "base_flash_sha256": "8346d6abd56135fe3e369d46f91cdaab63035f4ae416d6fab5e84ef54c5f5e00",
+      "seed_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+      "runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "source_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+      "source_file_sha256": {
+        "device_service.py": "4546d6c8b0d2a5aafa3c8e8cd3faed98efc93989404e300b6fae99d16200943f",
+        "device_service_fs_fixture.py": "f689b28eebc3cfaba6792a99c2dbd0825a5ac9c1803454b81f9a443d23542fb3",
+        "serve.py": "42f5b925904c0b21e8cea5b7725cc25802ea1006575581b4617cc356ec6d08fe"
+      },
+      "format": "littlefs",
+      "validation": "virtual-device validation",
+      "cases": [
+        {
+          "name": "seed-first",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 1,
+          "fixture_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+          "outside_partition_unchanged": true,
+          "read_after_service_restart": true,
+          "filesystem_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "c34527919191e0545969e2b4ef6d987786e9d0e5dba262d09085846233da8db4",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 156518,
+            "sha256": "c34527919191e0545969e2b4ef6d987786e9d0e5dba262d09085846233da8db4",
+            "manifest_entries_verified": 6
+          },
+          "serial": {
+            "bytes": 3212,
+            "sha256": "fda67e5541ae041911f9c69b961a2b4b7b2677e9374000e2145f116ac875a639"
+          }
+        },
+        {
+          "name": "snapshot-import",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=1",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 2,
+          "fixture_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "9700aa3ef41dfaae2a15a8dc1fbb9b17f22f7e80331a3d09ae98a77b7d52f8f2",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "51ad56da36d6ec3c06be0047ac4a1d360a87e04e8b576362d7ae57382f5f1980",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 156564,
+            "sha256": "51ad56da36d6ec3c06be0047ac4a1d360a87e04e8b576362d7ae57382f5f1980",
+            "manifest_entries_verified": 6
+          },
+          "serial": {
+            "bytes": 3211,
+            "sha256": "3b0fc57f7ab80457e2010252cd231c457ee5bcd81b07cec6d8924aaa2eb65301"
+          }
+        },
+        {
+          "name": "seed-isolated-control",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 1,
+          "fixture_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "fb6c640b78da0405bb7913b57e1e5fc33ed36efd48a146065e913d184ae93909",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 156516,
+            "sha256": "fb6c640b78da0405bb7913b57e1e5fc33ed36efd48a146065e913d184ae93909",
+            "manifest_entries_verified": 6
+          },
+          "serial": {
+            "bytes": 3216,
+            "sha256": "5dc6691bd8548fb772bd64e49ff4d736653031a49ef4dac9358767e76cecf32a"
+          }
+        }
+      ],
+      "separate_leases": true,
+      "source_artifacts_unchanged": true,
+      "isolated_service_exited": true,
+      "source_receipt": {
+        "bytes": 3763,
+        "sha256": "0f60957868a38d05b2f3364ebc6da47c50a48a5ad5e54ddc6e12d9f4426ab48c"
+      }
+    },
+    "dial": {
+      "status": "PASS",
+      "device": "dial",
+      "sdk": "6.1.1",
+      "base_flash_sha256": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf",
+      "seed_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+      "runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "source_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+      "source_file_sha256": {
+        "device_service.py": "4546d6c8b0d2a5aafa3c8e8cd3faed98efc93989404e300b6fae99d16200943f",
+        "device_service_fs_fixture.py": "f689b28eebc3cfaba6792a99c2dbd0825a5ac9c1803454b81f9a443d23542fb3",
+        "serve.py": "42f5b925904c0b21e8cea5b7725cc25802ea1006575581b4617cc356ec6d08fe"
+      },
+      "format": "littlefs",
+      "validation": "virtual-device validation",
+      "cases": [
+        {
+          "name": "seed-first",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 1,
+          "fixture_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+          "outside_partition_unchanged": true,
+          "read_after_service_restart": true,
+          "filesystem_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "a88e892462b802db868e00b4614bfed75f109c7b28946fe2e17d473a39c0dc49",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 149283,
+            "sha256": "a88e892462b802db868e00b4614bfed75f109c7b28946fe2e17d473a39c0dc49",
+            "manifest_entries_verified": 5
+          },
+          "serial": {
+            "bytes": 2966,
+            "sha256": "4552df50f774a60a6efd34d9bc336b79c3521a102b37e2cc2f25c4c14933c406"
+          }
+        },
+        {
+          "name": "snapshot-import",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=1",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 2,
+          "fixture_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "9700aa3ef41dfaae2a15a8dc1fbb9b17f22f7e80331a3d09ae98a77b7d52f8f2",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "038b89283de6233f30da6db65be02688cbf7de98f75f0afa07692031a44e7c5a",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 149303,
+            "sha256": "038b89283de6233f30da6db65be02688cbf7de98f75f0afa07692031a44e7c5a",
+            "manifest_entries_verified": 5
+          },
+          "serial": {
+            "bytes": 2965,
+            "sha256": "cbeb807829e419dcd5590bbc92f38e6a4d06fa4c4e7e32d3c9959a0534e1fdca"
+          }
+        },
+        {
+          "name": "seed-isolated-control",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 1,
+          "fixture_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "8fc0bf8789d2ed6c50c33a759616aedf7af14de2be8dbe913fa972af8c7113d1",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 149269,
+            "sha256": "8fc0bf8789d2ed6c50c33a759616aedf7af14de2be8dbe913fa972af8c7113d1",
+            "manifest_entries_verified": 5
+          },
+          "serial": {
+            "bytes": 2965,
+            "sha256": "efdbc9e2efd02b991f7fee475cad512fd6af3752908cb8bfd45574c4000816bc"
+          }
+        }
+      ],
+      "separate_leases": true,
+      "source_artifacts_unchanged": true,
+      "isolated_service_exited": true,
+      "source_receipt": {
+        "bytes": 3760,
+        "sha256": "45cfe2458eb3b2dd756670766994322dbdedc80e348412797542253b1e1b89e9"
+      }
+    },
+    "adv-spiffs": {
+      "status": "PASS",
+      "device": "cardputer-adv",
+      "sdk": "5.5.4",
+      "base_flash_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+      "seed_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+      "runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "source_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+      "source_file_sha256": {
+        "device_service.py": "4546d6c8b0d2a5aafa3c8e8cd3faed98efc93989404e300b6fae99d16200943f",
+        "device_service_fs_fixture.py": "f689b28eebc3cfaba6792a99c2dbd0825a5ac9c1803454b81f9a443d23542fb3",
+        "serve.py": "42f5b925904c0b21e8cea5b7725cc25802ea1006575581b4617cc356ec6d08fe"
+      },
+      "format": "spiffs",
+      "validation": "virtual-device validation",
+      "cases": [
+        {
+          "name": "seed-first",
+          "status": "PASS",
+          "markers": [
+            "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "SPIFFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "SPIFFS_PROBE_DONE"
+          ],
+          "file_count_before": 2,
+          "fixture_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+          "outside_partition_unchanged": true,
+          "read_after_service_restart": true,
+          "filesystem_sha256": "01ebc2731adb27962ef33eb5891bb8533cf6cfc9fdbfd9738f2f2f5a8488f916",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "GEOMETRY_CHECK_FILE_LONG.BIN",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "e0e39e9775dd368dd63b91837ec5ee2acc1c93623ddd0c1b625310f509bc5c22",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 154471,
+            "sha256": "e0e39e9775dd368dd63b91837ec5ee2acc1c93623ddd0c1b625310f509bc5c22",
+            "manifest_entries_verified": 7
+          },
+          "serial": {
+            "bytes": 3202,
+            "sha256": "456e7043d178141dffff2fdbf27bd0a136d76972d7a79950d3f43346808a828a"
+          }
+        },
+        {
+          "name": "snapshot-import",
+          "status": "PASS",
+          "markers": [
+            "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "SPIFFS_PROBE_READ seeded=1 listed=1 prior=1",
+            "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "SPIFFS_PROBE_DONE"
+          ],
+          "file_count_before": 3,
+          "fixture_sha256": "01ebc2731adb27962ef33eb5891bb8533cf6cfc9fdbfd9738f2f2f5a8488f916",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "5dd3576d972b16c68f850d132fab4c22a96b1688b02e775172da7e8cf85af55e",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "GEOMETRY_CHECK_FILE_LONG.BIN",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "e9c2e592bc95ec3bedade0a5b4bcfc6e33c7d1c21f8dc5de72b28fe7e35a7f66",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 154501,
+            "sha256": "e9c2e592bc95ec3bedade0a5b4bcfc6e33c7d1c21f8dc5de72b28fe7e35a7f66",
+            "manifest_entries_verified": 7
+          },
+          "serial": {
+            "bytes": 3202,
+            "sha256": "72ea900ccafa4995ac58660dd65f957ae043b07f7848be0f6e5ab453e2851ddf"
+          }
+        },
+        {
+          "name": "seed-isolated-control",
+          "status": "PASS",
+          "markers": [
+            "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "SPIFFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "SPIFFS_PROBE_DONE"
+          ],
+          "file_count_before": 2,
+          "fixture_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "01ebc2731adb27962ef33eb5891bb8533cf6cfc9fdbfd9738f2f2f5a8488f916",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "GEOMETRY_CHECK_FILE_LONG.BIN",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "423e25f514b52b3e8bdd0d994a71bb1fcc49629fab6bc65d5a487d20b563c64a",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 154460,
+            "sha256": "423e25f514b52b3e8bdd0d994a71bb1fcc49629fab6bc65d5a487d20b563c64a",
+            "manifest_entries_verified": 7
+          },
+          "serial": {
+            "bytes": 3202,
+            "sha256": "9a7721b9a9a7b3f0e905df8ed10cdeda7382cdd7ef14c076720f87611714422e"
+          }
+        }
+      ],
+      "separate_leases": true,
+      "source_artifacts_unchanged": true,
+      "isolated_service_exited": true,
+      "source_receipt": {
+        "bytes": 3863,
+        "sha256": "de4c703fbf0ee4970ddfe087ce9ea8c245e460fee8160bd24266ab729e3912ab"
+      }
+    },
+    "adv-littlefs": {
+      "status": "PASS",
+      "device": "cardputer-adv",
+      "sdk": "6.1.1",
+      "base_flash_sha256": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf",
+      "seed_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+      "runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "source_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+      "source_file_sha256": {
+        "device_service.py": "4546d6c8b0d2a5aafa3c8e8cd3faed98efc93989404e300b6fae99d16200943f",
+        "device_service_fs_fixture.py": "f689b28eebc3cfaba6792a99c2dbd0825a5ac9c1803454b81f9a443d23542fb3",
+        "serve.py": "42f5b925904c0b21e8cea5b7725cc25802ea1006575581b4617cc356ec6d08fe"
+      },
+      "format": "littlefs",
+      "validation": "virtual-device validation",
+      "cases": [
+        {
+          "name": "seed-first",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 1,
+          "fixture_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+          "outside_partition_unchanged": true,
+          "read_after_service_restart": true,
+          "filesystem_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "6a7e39234c32c4ef9d80e32c3e8d5ae4cf3155fd922afa4e7aadac1b36042ea1",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 151063,
+            "sha256": "6a7e39234c32c4ef9d80e32c3e8d5ae4cf3155fd922afa4e7aadac1b36042ea1",
+            "manifest_entries_verified": 7
+          },
+          "serial": {
+            "bytes": 2966,
+            "sha256": "99f78d303130e527664b7c31730e4401c10b44e07fca3829e4dcdc5f0b2008ed"
+          }
+        },
+        {
+          "name": "snapshot-import",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=1",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 2,
+          "fixture_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "9700aa3ef41dfaae2a15a8dc1fbb9b17f22f7e80331a3d09ae98a77b7d52f8f2",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "e9440d1a3e72ef8d54a1dc4edde46643bf07e9f3637b5a14be4fcef1a4e8afdf",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 151092,
+            "sha256": "e9440d1a3e72ef8d54a1dc4edde46643bf07e9f3637b5a14be4fcef1a4e8afdf",
+            "manifest_entries_verified": 7
+          },
+          "serial": {
+            "bytes": 2965,
+            "sha256": "32cafadc348a17bcb23e8b5b0bb40604ec5aa4e25f150df2c976057ecf8827ee"
+          }
+        },
+        {
+          "name": "seed-isolated-control",
+          "status": "PASS",
+          "markers": [
+            "LITTLEFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+            "LITTLEFS_PROBE_READ seeded=1 listed=1 prior=0",
+            "LITTLEFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+            "LITTLEFS_PROBE_DONE"
+          ],
+          "file_count_before": 1,
+          "fixture_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+          "outside_partition_unchanged": true,
+          "filesystem_sha256": "7869b3105bc1767af0ed0f1ee4b092091a97e971d7177d4907a3221cb25bda84",
+          "exported_partition_bytes": 1048576,
+          "export_matches_pre_stop_zip": true,
+          "repeat_export_same_artifact": true,
+          "file_names": [
+            "FIXTURE.TXT",
+            "PROOF.TXT"
+          ],
+          "evidence_zip_sha256": "b92967c4dcf54e26854b5ee5760655dc0304428bf88cf75b6087d8cdf034f32d",
+          "stopped": true,
+          "flash_released": true,
+          "leases": 0,
+          "bundle": {
+            "bytes": 151045,
+            "sha256": "b92967c4dcf54e26854b5ee5760655dc0304428bf88cf75b6087d8cdf034f32d",
+            "manifest_entries_verified": 7
+          },
+          "serial": {
+            "bytes": 2965,
+            "sha256": "fade894bc948ee296986c19ea7ecff4944d8d0b03cceab34f30dbfd45722ef1c"
+          }
+        }
+      ],
+      "separate_leases": true,
+      "source_artifacts_unchanged": true,
+      "isolated_service_exited": true,
+      "source_receipt": {
+        "bytes": 3769,
+        "sha256": "d0719ce599526a62abbaf35ed056934cd456cdda872983302e54bb1398cfec77"
+      }
+    }
+  },
+  "total_guest_leases": 12
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Device Service 1.74 isolated native qualification and input timing follow-up",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "validated_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+    "previous_main": "8c65905e466c69a62239371f1fcd254c183b0712",
+    "filesystem_commit": "1d5a1ddcc6a47b2cb30571fbaaf486205b2053ed",
+    "irq_commit": "ef3cdc1ffa3f7edf871ae79dabf8c4ae6e216cfb",
+    "rv32_commit": "b4a2e24847e2a80ae80bb70d74dceb0f3e303956",
+    "release_commit": "a2148953f1c22a2b2b066780f9c501b3daddcdf0"
+  },
+  "hardware": {
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "filesystem_probe": {
+      "sticks3": "8346d6abd56135fe3e369d46f91cdaab63035f4ae416d6fab5e84ef54c5f5e00",
+      "dial": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf",
+      "adv-spiffs": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+      "adv-littlefs": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf"
+    },
+    "nc1020_original": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "nesso_rv32": {
+      "crc32": "1597b8eb3b63cceae7e511578dffb8398175f5560a5079af2ae08a27de2a931b",
+      "sha256": "e5abbabdd16490c54db84fb85d8e627a0a3ef4f8b2dddbad892739ec2182fcc3"
+    },
+    "earlier_dial_and_papers3": {
+      "dial_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+      "papers3_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624"
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "api_version": "1.74.0",
+    "release_package": "staged",
+    "xtensa_runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "native_c6_runtime_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4",
+    "input_timing_source": "8c65905e466c69a62239371f1fcd254c183b0712"
+  },
+  "checks": [
+    {
+      "name": "Four filesystem lanes, three isolated leases each, restart and partition-only export",
+      "status": "PASS"
+    },
+    {
+      "name": "Cardputer independent GP-SPI interrupt routing on exact e822",
+      "status": "PASS"
+    },
+    {
+      "name": "NC1020 exact original 206 ROM banks, NOR and G0 save on exact e822",
+      "status": "PASS"
+    },
+    {
+      "name": "NC1020 complete first drawing on exact e822",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Earlier isolated Cardputer factory v0.08, v0.09 and UIFlow2 v2.5.4 runtime regression",
+      "status": "PASS"
+    },
+    {
+      "name": "Nesso N1 exact UART RV32 CRC32 and SHA256 tasks",
+      "status": "PASS"
+    },
+    {
+      "name": "Earlier Dial default 35ms indexed UART",
+      "status": "PASS"
+    },
+    {
+      "name": "Earlier Dial fast 5ms sampling across default and icount clocks",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Earlier PaperS3 stock native, native GT911 observer and browser bridge",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Physical devices, acoustics, RF and broad clock equivalence",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "native stack",
+      "status": "PASS",
+      "detail": "170 forward/reverse layers, 10450 exact inputs"
+    },
+    {
+      "name": "full platform suite",
+      "status": "PASS",
+      "detail": "2372 passed, 10 skipped."
+    },
+    {
+      "name": "Node contracts, docs contracts, generated validators and scope",
+      "status": "PASS",
+      "detail": "34 Node suites and 23 docs tests."
+    },
+    {
+      "name": "isolated frozen 1.74 package startup and API bytes",
+      "status": "PASS",
+      "detail": "Independent rehash of all 11678 entries; package remains staged."
+    },
+    {
+      "name": "Public ESP-IDF cross-core SPI LCD queue diagnostic",
+      "status": "PARTIAL",
+      "detail": "Same core 960/960/960 in three runs. Cross core timed out at 299/299/298 frozen and 603/603/602 first e822, then passed 960/960/960 on identical e822 repeat."
+    },
+    {
+      "name": "Final release commit GitHub Actions platform and network namespace policies",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputer-irq-ab-summary.redacted.json",
+    "evidence/dial-clock-summary.json",
+    "evidence/dial-gpio-irq-summary.json",
+    "evidence/dial-papers3-integrity-summary.json",
+    "evidence/e822-nc1020-irq-summary.redacted.json",
+    "evidence/filesystem-across-lease-summary.redacted.json",
+    "evidence/native-stack-audit-summary.json",
+    "evidence/nesso-rv32-summary.redacted.json",
+    "evidence/papers3-browser-summary.json",
+    "evidence/papers3-frozen-native-summary.json",
+    "evidence/papers3-gt911-summary.json",
+    "evidence/release-validation-summary.json",
+    "evidence/lcd-cross-core-summary.redacted.json"
+  ]
+}

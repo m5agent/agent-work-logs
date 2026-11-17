@@ -1,0 +1,128 @@
+{
+  "type": "bounded diagnostic virtual-device validation",
+  "board": "Cardputer K132",
+  "scope": "Minimal SPI2/ST7789-only application. No SD traffic and no original NC1020 application logic. Default host timing and watchdog. CPU0 initializes SPI2 and executes all color completion callbacks.",
+  "sdk": {
+    "tag": "v5.4.1",
+    "commit": "4c2820d377d1375e787bcef612f0c32c1427d183",
+    "sdk_lcd_and_spi_driver_modified": false
+  },
+  "fixture": {
+    "source_sha256": "989d7235185dc22887a2726752f113fe16e364e9f3fb216a716f173e3740c9f9",
+    "merged_flash_sha256": "7a49808c9b388c953f7161a447f1e72b9b8b67a87f260c006bbffa7ccf173a5e",
+    "rows_per_case": 960,
+    "bytes_per_row": 240,
+    "observer_timeout_guest_ms": 6000
+  },
+  "path": [
+    "esp_lcd_panel_draw_bitmap",
+    "SPI2 DMA",
+    "esp_lcd color completion callback on core 0",
+    "esp_lcd_panel_io_tx_param(-1) drains the SPI result queue"
+  ],
+  "runs": {
+    "frozen_a1": {
+      "service_commit": "8c65905e466c69a62239371f1fcd254c183b0712",
+      "qemu_sha256": "14ed4ae1ed1819f7cc03cf116e491ce163519b5f1182db02615649385d499fd4",
+      "outcome": "FAIL",
+      "same_core": {
+        "init_core": 0,
+        "draw_core": 0,
+        "submitted": 960,
+        "callback_on_init_core": 960,
+        "callback_on_other_core": 0,
+        "drained": 960,
+        "observer_notified": 1
+      },
+      "cross_core": {
+        "init_core": 0,
+        "draw_core": 1,
+        "submitted": 299,
+        "callback_on_init_core": 299,
+        "callback_on_other_core": 0,
+        "drained": 298,
+        "observer_notified": 0
+      },
+      "evidence_zip_sha256": "6ae1b7a8d3698e5d49441b627c6d2fdb8666a1f66cc4da2b075442fcfe897cb5",
+      "observed_wall_seconds": 6.622,
+      "cleanup": "stopped, released, zero leases",
+      "bundle": {
+        "bytes": 7235,
+        "sha256": "6ae1b7a8d3698e5d49441b627c6d2fdb8666a1f66cc4da2b075442fcfe897cb5",
+        "manifest_entries_verified": 8
+      }
+    },
+    "combined_a1": {
+      "service_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+      "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "outcome": "FAIL",
+      "same_core": {
+        "init_core": 0,
+        "draw_core": 0,
+        "submitted": 960,
+        "callback_on_init_core": 960,
+        "callback_on_other_core": 0,
+        "drained": 960,
+        "observer_notified": 1
+      },
+      "cross_core": {
+        "init_core": 0,
+        "draw_core": 1,
+        "submitted": 603,
+        "callback_on_init_core": 603,
+        "callback_on_other_core": 0,
+        "drained": 602,
+        "observer_notified": 0
+      },
+      "evidence_zip_sha256": "19a1e93b57053e6216e580a71770b3a3c198753108db1538d4f779720179202d",
+      "observed_wall_seconds": 6.605,
+      "cleanup": "stopped, released, zero leases",
+      "bundle": {
+        "bytes": 7194,
+        "sha256": "19a1e93b57053e6216e580a71770b3a3c198753108db1538d4f779720179202d",
+        "manifest_entries_verified": 8
+      }
+    },
+    "combined_a2": {
+      "service_commit": "e822150c90a99b33fbb0f437db611c04f3e1e6e3",
+      "qemu_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+      "outcome": "PASS",
+      "same_core": {
+        "init_core": 0,
+        "draw_core": 0,
+        "submitted": 960,
+        "callback_on_init_core": 960,
+        "callback_on_other_core": 0,
+        "drained": 960,
+        "observer_notified": 1
+      },
+      "cross_core": {
+        "init_core": 0,
+        "draw_core": 1,
+        "submitted": 960,
+        "callback_on_init_core": 960,
+        "callback_on_other_core": 0,
+        "drained": 960,
+        "observer_notified": 1
+      },
+      "evidence_zip_sha256": "ab4111857c3f0c63ac88ab8ac874559a180033bbec79c8ac63d2ee8e0f0e3a8b",
+      "observed_wall_seconds": 1.336,
+      "cleanup": "stopped, released, zero leases",
+      "bundle": {
+        "bytes": 7209,
+        "sha256": "ab4111857c3f0c63ac88ab8ac874559a180033bbec79c8ac63d2ee8e0f0e3a8b",
+        "manifest_entries_verified": 8
+      }
+    }
+  },
+  "inference": "The final stalled row reached the ISR color callback. The result-drain call remained outstanding on CPU1. SDK invokes the callback before sending the result from ISR, so this does not prove result enqueue or the wake-up stage.",
+  "not_run": [
+    "physical hardware",
+    "stock comparison with the diagnostic guest",
+    "original firmware changes"
+  ],
+  "source_receipt": {
+    "bytes": 3892,
+    "sha256": "8566eb4f8ba420f0b26c830d84571e958a18d16f58ba6f8f73628c8bd5b07a69"
+  }
+}
