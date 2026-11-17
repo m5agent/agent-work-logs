@@ -1,0 +1,529 @@
+{
+  "evidence_type": "derived redacted summary",
+  "http_capability_discovery": {
+    "source_summary": {
+      "sha256": "ce5a3fec5187071590dcfd4210d5c5c9d75026501fb08bf504d75bde5d4af47a",
+      "bytes": 2214
+    },
+    "service_source": "01073526950164493f749f6908ba5ee0d224c0a0",
+    "status": "PASS",
+    "runs": [
+      {
+        "label": "current",
+        "qemu_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+        "scope": "live HTTP capability discovery, no guest",
+        "qom_property_present": true,
+        "devices": {
+          "cardputer": {
+            "backend_ready": true,
+            "open_softap_fixture": {
+              "runtime": "qemu-wifi",
+              "profile": "cardputer-open-softap-fixture",
+              "host_ip_backends": 0,
+              "scope": "fixed-softap-http"
+            }
+          },
+          "cardputer-adv": {
+            "backend_ready": true,
+            "open_softap_fixture": {
+              "runtime": "qemu-wifi",
+              "profile": "cardputer-open-softap-fixture",
+              "host_ip_backends": 0,
+              "scope": "fixed-softap-http"
+            }
+          },
+          "sticks3": {
+            "backend_ready": true,
+            "open_softap_fixture": {
+              "runtime": "qemu-wifi",
+              "profile": "sticks3-open-softap-fixture",
+              "host_ip_backends": 0,
+              "scope": "fixed-softap-http"
+            }
+          }
+        },
+        "core2_profile_absent": true,
+        "openapi_version": "1.82.0",
+        "openapi_sha256": "35cceae18eb8d89e64d1132fc2b1038dfdc737be5805333b8274a4b25fe69ae4",
+        "active_leases": 0,
+        "owned_service_exited": true
+      },
+      {
+        "label": "legacy",
+        "qemu_sha256": "eecf42ad4b393a76a9208c644abc2606030b585824b24ae53e5e9ecad2b4d4ed",
+        "scope": "live HTTP capability discovery, no guest",
+        "qom_property_present": false,
+        "devices": {
+          "cardputer": {
+            "backend_ready": true,
+            "open_softap_fixture": null
+          },
+          "cardputer-adv": {
+            "backend_ready": true,
+            "open_softap_fixture": null
+          },
+          "sticks3": {
+            "backend_ready": true,
+            "open_softap_fixture": null
+          }
+        },
+        "core2_profile_absent": true,
+        "openapi_version": "1.82.0",
+        "openapi_sha256": "35cceae18eb8d89e64d1132fc2b1038dfdc737be5805333b8274a4b25fe69ae4",
+        "active_leases": 0,
+        "owned_service_exited": true
+      }
+    ]
+  },
+  "fixed_softap_saved_review_cases": {
+    "sticks3_button_a": {
+      "case": "btn-a",
+      "reviewer": "afdfc0b662fa561d2a45c8373a13c095bb2c45e4",
+      "device_service": "01073526950164493f749f6908ba5ee0d224c0a0",
+      "runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+      "device": "sticks3",
+      "firmware_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19",
+      "profile": "sticks3-open-softap-fixture",
+      "reviewer_state": "manual_review",
+      "reviewer_lane": "SIM_PARTIAL",
+      "reviewer_error_code": "E_NO_FRAME",
+      "boot_and_ui": "PARTIAL",
+      "setup": {
+        "status": "PASS",
+        "scope": "setup-input-only",
+        "steps": [
+          {
+            "name": "enter_provision",
+            "before": {
+              "kind": "serial_marker",
+              "status": "PASS",
+              "next_offset": 2967,
+              "marker_sha256": "d92f9e34072c9d765c6c9e6aabd2af5cbe8059f15d4eecb5ce526f2c5a8a85ec"
+            },
+            "input": {
+              "status": "ACCEPTED",
+              "request": {
+                "kind": "button",
+                "control": "a",
+                "action": "hold",
+                "seconds": 0.35
+              },
+              "receipt": {
+                "input": "button:a",
+                "action": "hold",
+                "timing": {
+                  "clock": "virtual",
+                  "hold_seconds": 0.35,
+                  "hold_time_ms": 350,
+                  "presses": 1,
+                  "completion": "queued"
+                }
+              }
+            },
+            "after": {
+              "kind": "serial_marker",
+              "status": "PASS",
+              "next_offset": 4949,
+              "marker_sha256": "d8c0424d95ed1d9253a24c7848e2295306931d6502d2b5ff748850a6ba646e27"
+            }
+          }
+        ],
+        "source": "saved-snapshot",
+        "firmware_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19"
+      },
+      "same_guest_native_softap": {
+        "status": "PASS",
+        "scope": "fixed-softap-http",
+        "profile": "sticks3-open-softap-fixture",
+        "same_guest": true,
+        "checks": {
+          "dhcp": true,
+          "arp": true,
+          "http": true
+        },
+        "phase": "complete",
+        "http_body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645",
+        "http_request_sha256": "9de47ca90bcb85d8e1c9fb8dde487b5665197fa7266099e94d394ca5fd908dc6",
+        "capture_sha256": "7ccd6459b1b006081a2c403c77b96860d900ca338b273778ae811f273bc4666a",
+        "evidence_zip_sha256": "84f7fe85019ef297f7f9fe023456e7c06ed72d9705b6e41832f1220f40a8e218"
+      },
+      "guest_markers": [
+        "PROVISION_WAIT_BUTTON gpio=11 level=1",
+        "PROVISION_ENTER_BUTTON gpio=11 level=0",
+        "AP_FIXTURE_STARTED",
+        "AP_FIXTURE_HTTP_READY",
+        "AP_FIXTURE_JOINED aid=1",
+        "AP_FIXTURE_LEASED",
+        "AP_FIXTURE_HTTP_SENT"
+      ],
+      "reviewer_report_sha256": "ef8966085345e411806e31527f5815d9c763433949f8bb9e7057159ba6f947f0",
+      "evidence_zip_sha256": {
+        "running": "fa3265ba4d6971826239853ce0c12ac2bea81466bc6f874dcd0366a278256d32",
+        "stopped": "84f7fe85019ef297f7f9fe023456e7c06ed72d9705b6e41832f1220f40a8e218"
+      },
+      "packet_audit": {
+        "capture_sha256": "7ccd6459b1b006081a2c403c77b96860d900ca338b273778ae811f273bc4666a",
+        "capture_packets": 24,
+        "completed_dora_exchanges": 1,
+        "all_leases_verified_by_arp_reply": true,
+        "http_responses": [
+          {
+            "request": "GET /proof",
+            "http_status": 200,
+            "body_bytes": 13,
+            "body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645"
+          }
+        ],
+        "pre_stop_zip_capture_prefix_match": true,
+        "seconds_from_saved_snapshot_retry": {
+          "session_running": 1.108,
+          "network_setup": 1.414,
+          "observation_started": 15.733,
+          "network": 79.119,
+          "done": 79.296
+        },
+        "seconds_from_first_pcap_packet": {
+          "completed_dhcp": [
+            2.118
+          ],
+          "http_requests": [
+            2.167
+          ]
+        }
+      },
+      "active_leases": 0,
+      "mutable_flash_released": true,
+      "burner_submission": false,
+      "source_terminal_summary": {
+        "sha256": "28c95190b0f1f44ba3b7f776297447ee7d86c2e05d0f89843fddfba725bba04e",
+        "bytes": 3948
+      },
+      "archive_member_pcap": {
+        "running": {
+          "sha256": "7ccd6459b1b006081a2c403c77b96860d900ca338b273778ae811f273bc4666a",
+          "bytes": 4547
+        },
+        "stopped": {
+          "sha256": "7ccd6459b1b006081a2c403c77b96860d900ca338b273778ae811f273bc4666a",
+          "bytes": 4547
+        }
+      },
+      "archive_bundle_bytes": {
+        "running": 511222,
+        "stopped": 9886
+      }
+    },
+    "sticks3_button_b_control": {
+      "case": "alt-btn",
+      "reviewer": "afdfc0b662fa561d2a45c8373a13c095bb2c45e4",
+      "device_service": "01073526950164493f749f6908ba5ee0d224c0a0",
+      "runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+      "device": "sticks3",
+      "firmware_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19",
+      "profile": "sticks3-open-softap-fixture",
+      "reviewer_state": "manual_review",
+      "reviewer_lane": "SIM_PARTIAL",
+      "reviewer_error_code": "E_NO_FRAME",
+      "boot_and_ui": "PARTIAL",
+      "setup": {
+        "status": "PARTIAL",
+        "scope": "setup-input-only",
+        "steps": [
+          {
+            "name": "enter_provision",
+            "before": {
+              "kind": "serial_marker",
+              "status": "PASS",
+              "next_offset": 2967,
+              "marker_sha256": "d92f9e34072c9d765c6c9e6aabd2af5cbe8059f15d4eecb5ce526f2c5a8a85ec"
+            },
+            "input": {
+              "status": "ACCEPTED",
+              "request": {
+                "kind": "button",
+                "control": "b",
+                "action": "hold",
+                "seconds": 0.35
+              },
+              "receipt": {
+                "input": "button:b",
+                "action": "hold",
+                "timing": {
+                  "clock": "virtual",
+                  "hold_seconds": 0.35,
+                  "hold_time_ms": 350,
+                  "presses": 1,
+                  "completion": "queued"
+                }
+              }
+            },
+            "after": {
+              "kind": "serial_marker",
+              "status": "PARTIAL",
+              "reason": "checkpoint_timeout"
+            }
+          }
+        ],
+        "source": "saved-snapshot",
+        "firmware_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19"
+      },
+      "same_guest_native_softap": {
+        "status": "PARTIAL",
+        "scope": "fixed-softap-http",
+        "profile": "sticks3-open-softap-fixture",
+        "same_guest": true,
+        "checks": {},
+        "phase": "setup",
+        "reason": "pre_network_setup_incomplete"
+      },
+      "guest_markers": [
+        "PROVISION_WAIT_BUTTON gpio=11 level=1",
+        "PROVISION_IGNORED_BUTTON gpio=12 level=0"
+      ],
+      "reviewer_report_sha256": "4b178173a2e0ec7afab722c17e5f0dfbb5f3541a6efc79b66a12de74995e8e5a",
+      "evidence_zip_sha256": {
+        "running": "66e0beafc72b4efa211a2eb553ac8f46a9e5e730721e6398f93f40bef31134e8",
+        "stopped": "ba369066b9ec438b7e1c535613532b6cfc4ba5c59721b32d6e475b3923ebcdd9"
+      },
+      "packet_audit": {
+        "capture_sha256": "b49b009b1c11fe2b33b8d94b85eab73dfb328b105770d6e050852506c563ad44",
+        "capture_packets": 1,
+        "completed_dora_exchanges": 0,
+        "all_leases_verified_by_arp_reply": false,
+        "http_responses": [],
+        "pre_stop_zip_capture_prefix_match": true,
+        "seconds_from_saved_snapshot_retry": {
+          "session_running": 1.109,
+          "network_setup": 9.415,
+          "observation_started": 23.739,
+          "network": 87.132,
+          "done": 87.299
+        },
+        "seconds_from_first_pcap_packet": {
+          "completed_dhcp": [],
+          "http_requests": []
+        }
+      },
+      "active_leases": 0,
+      "mutable_flash_released": true,
+      "burner_submission": false,
+      "source_terminal_summary": {
+        "sha256": "6e0256a37ca1705501c9666cf1a8842f9dd473f59940cd14c43f1b1bbad4529a",
+        "bytes": 3106
+      },
+      "archive_member_pcap": {
+        "running": {
+          "sha256": "b49b009b1c11fe2b33b8d94b85eab73dfb328b105770d6e050852506c563ad44",
+          "bytes": 382
+        },
+        "stopped": {
+          "sha256": "b49b009b1c11fe2b33b8d94b85eab73dfb328b105770d6e050852506c563ad44",
+          "bytes": 382
+        }
+      },
+      "archive_bundle_bytes": {
+        "running": 508830,
+        "stopped": 7346
+      }
+    },
+    "cardputer_adv": {
+      "case": "adv",
+      "reviewer": "afdfc0b662fa561d2a45c8373a13c095bb2c45e4",
+      "device_service": "01073526950164493f749f6908ba5ee0d224c0a0",
+      "runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+      "device": "cardputer-adv",
+      "firmware_sha256": "25eaf5347edbb7a8e8139830c4e2bf4cd696c0964f30cf969e4a2c52aede9ee2",
+      "profile": "cardputer-open-softap-fixture",
+      "reviewer_state": "manual_review",
+      "reviewer_lane": "SIM_PARTIAL",
+      "reviewer_error_code": "E_NO_FRAME",
+      "boot_and_ui": "PARTIAL",
+      "setup": {
+        "status": "NOT RUN",
+        "scope": "setup-input-only",
+        "steps": []
+      },
+      "same_guest_native_softap": {
+        "status": "PASS",
+        "scope": "fixed-softap-http",
+        "profile": "cardputer-open-softap-fixture",
+        "same_guest": true,
+        "checks": {
+          "dhcp": true,
+          "arp": true,
+          "http": true
+        },
+        "phase": "complete",
+        "http_body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645",
+        "http_request_sha256": "9de47ca90bcb85d8e1c9fb8dde487b5665197fa7266099e94d394ca5fd908dc6",
+        "capture_sha256": "592234b37988b126d3b40740513e08c0deac63e9b2183098c60aa88fc678063e",
+        "evidence_zip_sha256": "5c522f171ef35e1505511aca66f93a604a856ffe06bc9e9c7fb9068ef21e0015"
+      },
+      "guest_markers": [
+        "AP_FIXTURE_STARTED",
+        "AP_FIXTURE_HTTP_READY",
+        "AP_FIXTURE_JOINED aid=1",
+        "AP_FIXTURE_LEASED",
+        "AP_FIXTURE_HTTP_SENT"
+      ],
+      "reviewer_report_sha256": "f00b4896f3585b1921501c4f708803a24e8d180836b2c551bd9d64811073e99a",
+      "evidence_zip_sha256": {
+        "running": "af8f884f934bd43214febbf8ff9a0db9858ddfb108825c59d1d444fe16701846",
+        "stopped": "5c522f171ef35e1505511aca66f93a604a856ffe06bc9e9c7fb9068ef21e0015"
+      },
+      "packet_audit": {
+        "capture_sha256": "592234b37988b126d3b40740513e08c0deac63e9b2183098c60aa88fc678063e",
+        "capture_packets": 23,
+        "completed_dora_exchanges": 1,
+        "all_leases_verified_by_arp_reply": true,
+        "http_responses": [
+          {
+            "request": "GET /proof",
+            "http_status": 200,
+            "body_bytes": 13,
+            "body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645"
+          }
+        ],
+        "pre_stop_zip_capture_prefix_match": true,
+        "seconds_from_saved_snapshot_retry": {
+          "session_running": 1.112,
+          "observation_started": 17.452,
+          "network": 80.84,
+          "done": 81.011
+        },
+        "seconds_from_first_pcap_packet": {
+          "completed_dhcp": [
+            1.058
+          ],
+          "http_requests": [
+            1.074
+          ]
+        }
+      },
+      "active_leases": 0,
+      "mutable_flash_released": true,
+      "burner_submission": false,
+      "source_terminal_summary": {
+        "sha256": "f81e65c17f887c089cd81ffb20055e7d1f31e50c9564ea79e4213bb716c434f8",
+        "bytes": 2609
+      },
+      "archive_member_pcap": {
+        "running": {
+          "sha256": "592234b37988b126d3b40740513e08c0deac63e9b2183098c60aa88fc678063e",
+          "bytes": 4189
+        },
+        "stopped": {
+          "sha256": "592234b37988b126d3b40740513e08c0deac63e9b2183098c60aa88fc678063e",
+          "bytes": 4189
+        }
+      },
+      "archive_bundle_bytes": {
+        "running": 509183,
+        "stopped": 10284
+      }
+    },
+    "cardputer_k132": {
+      "case": "cardputer",
+      "reviewer": "ef813f5a9e40ccacf1dd5d4945cbedcc87b0933d",
+      "device_service": "01073526950164493f749f6908ba5ee0d224c0a0",
+      "runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+      "device": "cardputer",
+      "firmware_sha256": "25eaf5347edbb7a8e8139830c4e2bf4cd696c0964f30cf969e4a2c52aede9ee2",
+      "profile": "cardputer-open-softap-fixture",
+      "reviewer_state": "manual_review",
+      "reviewer_lane": "SIM_PARTIAL",
+      "reviewer_error_code": "E_NO_FRAME",
+      "boot_and_ui": "PARTIAL",
+      "setup": {
+        "status": "NOT RUN",
+        "scope": "setup-input-only",
+        "steps": []
+      },
+      "same_guest_native_softap": {
+        "status": "PASS",
+        "scope": "fixed-softap-http",
+        "profile": "cardputer-open-softap-fixture",
+        "same_guest": true,
+        "checks": {
+          "dhcp": true,
+          "arp": true,
+          "http": true
+        },
+        "phase": "complete",
+        "http_body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645",
+        "http_request_sha256": "9de47ca90bcb85d8e1c9fb8dde487b5665197fa7266099e94d394ca5fd908dc6",
+        "capture_sha256": "24317a742c282cfe210cdcdcec9d0a8b2dbfdb17541c527aa88c663706c639ba",
+        "evidence_zip_sha256": "2c3e99546ff326807bcba7c8e7dbf786085606edf6232819b34273e92965d4ed"
+      },
+      "guest_markers": [
+        "AP_FIXTURE_STARTED",
+        "AP_FIXTURE_HTTP_READY",
+        "AP_FIXTURE_JOINED aid=1",
+        "AP_FIXTURE_LEASED",
+        "AP_FIXTURE_HTTP_SENT"
+      ],
+      "reviewer_report_sha256": "4c8443837006894beebd8e4b243a27af8f4ff7ac1a61018fb162b8fd725c00bb",
+      "evidence_zip_sha256": {
+        "running": "b4b6a71460a4fc1a90a5f3e101d098d6e265d8f5554a206a5cc2c78c2a2e1520",
+        "stopped": "2c3e99546ff326807bcba7c8e7dbf786085606edf6232819b34273e92965d4ed"
+      },
+      "packet_audit": {
+        "capture_sha256": "24317a742c282cfe210cdcdcec9d0a8b2dbfdb17541c527aa88c663706c639ba",
+        "capture_packets": 23,
+        "completed_dora_exchanges": 1,
+        "all_leases_verified_by_arp_reply": true,
+        "http_responses": [
+          {
+            "request": "GET /proof",
+            "http_status": 200,
+            "body_bytes": 13,
+            "body_sha256": "fd2e56ef92574b4d170e2672e9665bbc64a62026f8e8ecea44cf8ee54cfe2645"
+          }
+        ],
+        "pre_stop_zip_capture_prefix_match": true,
+        "seconds_from_saved_snapshot_retry": {
+          "session_running": 1.089,
+          "observation_started": 17.529,
+          "network": 80.915,
+          "done": 81.086
+        },
+        "seconds_from_first_pcap_packet": {
+          "completed_dhcp": [
+            1.064
+          ],
+          "http_requests": [
+            1.118
+          ]
+        }
+      },
+      "active_leases": 0,
+      "mutable_flash_released": true,
+      "burner_submission": false,
+      "source_terminal_summary": {
+        "sha256": "9efd55f36d1130c74a83367c73b497de7051c30173c2be1c991c40be7622b023",
+        "bytes": 2612
+      },
+      "archive_member_pcap": {
+        "running": {
+          "sha256": "24317a742c282cfe210cdcdcec9d0a8b2dbfdb17541c527aa88c663706c639ba",
+          "bytes": 4189
+        },
+        "stopped": {
+          "sha256": "24317a742c282cfe210cdcdcec9d0a8b2dbfdb17541c527aa88c663706c639ba",
+          "bytes": 4189
+        }
+      },
+      "archive_bundle_bytes": {
+        "running": 508640,
+        "stopped": 9773
+      }
+    }
+  },
+  "independent_archive_audit": {
+    "all_four_stopped_zip_capture_digests_and_original_firmware_bindings_verified": true,
+    "all_four_pre_stop_pcaps_are_final_byte_prefixes": true,
+    "all_four_guest_markers_in_retained_running_zip_verified": true,
+    "actual_dhcp_arp_http_on_positive_captures_verified": true,
+    "actual_button_b_capture_has_no_dhcp_ack_or_http_response": true
+  }
+}

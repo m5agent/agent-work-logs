@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Native fixed SoftAP saved review and original StickS3 provisioning compatibility",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "device_service_candidate": "01073526950164493f749f6908ba5ee0d224c0a0",
+    "reviewer_candidate": "afdfc0b662fa561d2a45c8373a13c095bb2c45e4",
+    "original_sticks3_service": "9d27879b55bcc6abc2c0e77163853867f19f1a6b",
+    "reviewer_classic_cardputer_execution": "ef813f5a9e40ccacf1dd5d4945cbedcc87b0933d",
+    "device_service_main": "9bbbcba8477039c8e35cf85b002c6b63a83cae86",
+    "reviewer_main": "ef813f5a9e40ccacf1dd5d4945cbedcc87b0933d",
+    "bounded_source_summary": {
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/blob/9bbbcba8477039c8e35cf85b002c6b63a83cae86/tests/network/native_open_softap/saved-review-summary.json",
+      "sha256": "5d869d4468671cff3a29d0920652d279c01102ed24346c995eb0d43e72b81721",
+      "bytes": 14987
+    },
+    "normalized_test_receipt": {
+      "sha256": "11c2dd096f6d0187349be260a297e8f221c65ac693572e16324a3e8c66cc7d2c",
+      "bytes": 20026
+    }
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer",
+      "Cardputer ADV",
+      "StickS3"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "sticks3_original_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+    "sticks3_normalized_flash_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70",
+    "sticks3_button_fixture_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19",
+    "cardputer_series_fixture_sha256": "25eaf5347edbb7a8e8139830c4e2bf4cd696c0964f30cf969e4a2c52aede9ee2"
+  },
+  "execution": {
+    "device_service_candidate_api": "1.82.0",
+    "original_sticks3_runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "candidate_xtensa_runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24"
+  },
+  "checks": [
+    {
+      "name": "Live HTTP descriptor advertises exact three fixed models and hides unsupported old-QEMU capability",
+      "status": "PASS",
+      "old_qemu_guests_created": 0
+    },
+    {
+      "name": "StickS3 BtnA, classic Cardputer and Cardputer ADV fixed SoftAP with same-session final ZIP",
+      "status": "PASS",
+      "qualified_cases": 3
+    },
+    {
+      "name": "Same StickS3 headless fixture BtnB fails setup checkpoint, no DORA or HTTP outcomes",
+      "status": "PARTIAL",
+      "expected_control_outcome": true,
+      "captured_packets": 1,
+      "dhcp_ack": 0
+    },
+    {
+      "name": "Headless fixture boot/UI observation",
+      "status": "PARTIAL",
+      "separate_overall_error": "E_NO_FRAME"
+    },
+    {
+      "name": "Original StickS3 portal, local STA, DHCP/ARP and HTTP on baseline and candidate with the same firmware",
+      "status": "PASS",
+      "runs": 2,
+      "completed_dora_per_run": 2,
+      "successful_http_responses_per_run": 2
+    },
+    {
+      "name": "Original StickS3 complete cloud and network review",
+      "status": "PARTIAL",
+      "overall_error": "E_NETWORK_PARTIAL"
+    },
+    {
+      "name": "Physical hardware, browser, resident deployment or Burner submission",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Platform suite",
+      "status": "PASS",
+      "tests": 2417,
+      "skips": 10,
+      "failures": 0
+    },
+    {
+      "name": "Reviewer suite",
+      "status": "PASS",
+      "tests": 214
+    },
+    {
+      "name": "Documentation, scope and four generated validators",
+      "status": "PASS",
+      "documentation_tests": 51
+    },
+    {
+      "name": "Remote CI at archive time",
+      "status": "PENDING"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/sticks3-original-provisioning-summary.redacted.json",
+      "sha256": "e303e91b6ce9b322eaf0556b9465a7e1056178b611393dd5dae35620f068e118",
+      "bytes": 6868
+    },
+    {
+      "path": "evidence/native-fixed-softap-saved-review-summary.redacted.json",
+      "sha256": "a8442049e021e69611d5f0cbc0f59594a4f44e2b0c31b594b815070073ebe0b7",
+      "bytes": 18944
+    }
+  ]
+}
