@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "native-network-fixture-qualification",
+  "source": {
+    "candidate_commit": "60b2131b52c31ae16231e1aaea998e4583905d00",
+    "integration_commit": "42e282f25c8ad8f0694f97c8a44bd82dd5d0a43c"
+  },
+  "hardware": {},
+  "firmware": {
+    "sta": "03689a2a462a03ed5652beb3dc97a289e7a2f5484be5d15d83539f6dbb1892af",
+    "softap_control": "25eaf5347edbb7a8e8139830c4e2bf4cd696c0964f30cf969e4a2c52aede9ee2"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime_sha256": "cbc0ea74c5763a9d989562b7061516fb3489fdc4056ddce4e016d555c1b86bb2"
+  },
+  "checks": {
+    "sta_cardputer": "PASS",
+    "sta_cardputer_adv": "PASS",
+    "wrong_udp_application_payload": "REJECTED",
+    "softap_association": "PARTIAL",
+    "linux_namespace_positive": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "physical_hardware": "NOT RUN"
+  },
+  "evidence": {
+    "evidence/softap-control-summary.json": {
+      "sha256": "c2f28ffe8cf14d115d3ee209feec9f7936742d85811ab3306b7cad960237be7e",
+      "bytes": 1554
+    },
+    "evidence/sta-summary.json": {
+      "sha256": "a91282cb8624ff67d082959b8084ed99a8e0eee55634eeea5d5ce4fa27754527",
+      "bytes": 6919
+    },
+    "code/softap_probe.c": {
+      "sha256": "dd4e61dc9a76d2c2c4502aec447616f08e4de321de0144e006d91a49923c4e2c",
+      "bytes": 2677
+    }
+  }
+}

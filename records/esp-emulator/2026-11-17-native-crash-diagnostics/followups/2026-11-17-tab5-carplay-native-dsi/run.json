@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 CarPlay original reaches native DSI readiness",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "device_service_source": "42e282f25c8ad8f0694f97c8a44bd82dd5d0a43c",
+    "reviewer_source": "55ffc80e7c9ec5e5280a267e875b4c042b54fde3",
+    "board_source": "60c715abc86ae1d77149b0c50014a85a403ec865"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+    "bytes": 2221360,
+    "expected_elf_sha256": "5a9cecd71d5f3f3ec58e6c1d55cc5accc31f12c3af8a9b0a8072841e1e9de22b"
+  },
+  "execution": {
+    "environment": "isolated Device Service and saved-snapshot reviewer",
+    "validation": "virtual-device validation",
+    "tab5_esp_emu_version": "1.1.0",
+    "tab5_esp_emu_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "panel_board": "gt911-ili9881c",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "check": "same-guest native DSI ready frame without matched ELF",
+      "status": "PASS"
+    },
+    {
+      "check": "running framebuffer and serial observation",
+      "status": "PASS"
+    },
+    {
+      "check": "input probe admission",
+      "status": "FAIL"
+    },
+    {
+      "check": "touch behavior, USB host, phone and physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/carplay-native-dsi-summary.json",
+      "bytes": 3783,
+      "sha256": "4b4055865815462f1226dfaf6969126663d297a5a22339d8e339f2b5eb831ff4"
+    }
+  ]
+}

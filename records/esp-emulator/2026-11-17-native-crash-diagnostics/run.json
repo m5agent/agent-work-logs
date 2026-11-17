@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Native crash diagnostics and exact saved-firmware replays",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "feb627f22e01cd1a530f63dd148285d3f39afe43",
+    "device_service_source": "271524908363e8666148a7b60932fcaf01b5d5ff",
+    "device_service_docs_and_fixture": "3c65a511b9fdb74fa1906322447a1e5b146e302f",
+    "reviewer_source": "2b88a86921e01c200be1d75f98e1a146ceef7da4",
+    "reviewer_test_only_followup": "55ffc80e7c9ec5e5280a267e875b4c042b54fde3",
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d"
+  },
+  "hardware": {},
+  "firmware": {
+    "core2_controlled": {
+      "abort": {
+        "firmware_sha256": "ffb215be79beabd024e390c4fb3e9e8336e2e94e34b60fd42c690a8d2e634677",
+        "elf_sha256": "1efaa30640a12dc3d9f8ccbf0461ec4b0844e2b5b9da58af633d50d8a7f84f9b"
+      },
+      "watchdog": {
+        "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+        "elf_sha256": "1916d0ba967d78f1028c27a25073bef7b94a683159fafd1c88e089bac9e678a4"
+      },
+      "retention_after_service_restart": {
+        "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+        "elf_sha256": "1916d0ba967d78f1028c27a25073bef7b94a683159fafd1c88e089bac9e678a4"
+      }
+    },
+    "saved_originals": {
+      "m5tabos": {
+        "firmware_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+        "firmware_bytes": 7439248,
+        "expected_elf_sha256": "b795bfec03fa67f3e691be833d43becfa1211c2e14ff89c16e75f741f864bcd1"
+      },
+      "all-day-watch": {
+        "firmware_sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+        "firmware_bytes": 1840512,
+        "expected_elf_sha256": "339f0e22891764c1ad223b34e4d1502f79fa51dd931bc9cad6dacdc76d8fa87b"
+      },
+      "98tab5": {
+        "firmware_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+        "firmware_bytes": 9182880,
+        "expected_elf_sha256": "9c4f145b8ff77deb36f82fc17083755139215288ab513a726cefe9699af20f4b"
+      }
+    }
+  },
+  "execution": {
+    "environment": "isolated Device Service and saved-snapshot firmware reviewer",
+    "validation": "virtual-device validation",
+    "xtensa_qemu_sha256": "cbc0ea74c5763a9d989562b7061516fb3489fdc4056ddce4e016d555c1b86bb2",
+    "tab5_esp_emu_version": "0.50.0",
+    "tab5_esp_emu_sha256": "a4c3468a4abf3f2e55ca0912fa7cdfbe5e101ecb6ab74a9ec35182d70ba6a771",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "check": "Core2 abort and CPU1 interrupt watchdog guest diagnostics",
+      "status": "PASS"
+    },
+    {
+      "check": "same-ELF function names and cross-artifact rejection",
+      "status": "PASS"
+    },
+    {
+      "check": "retained control diagnostics after isolated service restart",
+      "status": "PASS"
+    },
+    {
+      "check": "six evidence ZIPs, CRCs and serial range hashes",
+      "status": "PASS"
+    },
+    {
+      "check": "three original snapshot sessions with evidence binding",
+      "status": "PASS"
+    },
+    {
+      "check": "original application and crash attribution",
+      "status": "PARTIAL"
+    },
+    {
+      "check": "physical hardware, browser and resident deployment",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/archive-integrity-summary.json",
+      "sha256": "b158b0f6d012f8444edbe3426216e1f4f4b76b039a17f3570972c7e491573376",
+      "bytes": 4116
+    },
+    {
+      "path": "evidence/core2-controlled-crash-summary.json",
+      "sha256": "164dac4b1347ccddebe1e9b60384db64a37d41ab46ba7d1f2edf1c592076510c",
+      "bytes": 15482
+    },
+    {
+      "path": "evidence/saved-original-replay-summary.json",
+      "sha256": "109db8a5f5b39f137d261552a1446f2a969350ca73001e1aadb022092c203dc8",
+      "bytes": 7399
+    }
+  ]
+}
