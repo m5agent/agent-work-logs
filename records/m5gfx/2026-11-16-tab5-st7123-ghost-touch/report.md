@@ -341,3 +341,24 @@ GDB 邮箱，无 0x43 扩展器与 reset 线模型，`adv_info`/`0x43`/引脚状
 按读取计约 15 倍）。写 flash 日志同时停顿 CPU 与 PSRAM，而 CPU 停顿正是已测的出鬼条件，
 计数工具可能正在制造它统计的触发条件；需改 RAM 缓冲、记录 burst 前的轮询间隔后重跑。
 本轮未定位芯片侧机制，未做无停顿对照，单台单面板，物理与虚拟设备均 `NOT RUN`。
+
+## 第十五轮：44 条分类收口，24 强度打破门限上限（2026-11-18）
+
+报告者的 44 条逐行表回答了 remainder 问题：驱动先复制后丢弃，keep-alive 丢弃不打印，
+29 条 n=1 是整读，15 条被截到 6 点，其中 8 条两长边、7 条不可解。remainder 假设关闭。
+复算得到 9 个单读 + 10 对 23–24 ms 读，10/10 对同轨（x=0 17 条、x=719 12 条），
+y 变化而 x 不变；15 条截断里 12 条 n=10 整表。29 条强度 9–12，另有 17（boot 126）与
+**24（boot 25）**：24 超出“鬼点 ≤ 22”上限 2 个计数、只比真实下限 26 低 2 个，23 门限
+对它无余量，只靠列规则拦下；boot 25 是中段鬼帧还是真实边缘按压，日志不能判定。
+
+同时撤回两处我自己的表述：(a) “24 ms 下单侧罕见、两长边占优”只对当前构建的 21 帧成立，
+历史 44 条跨 boots 21–159、混合补丁与过滤器版本，且 7 条不可解，只能当存在性证明与下界；
+报告者 09:45Z 的当前构建普查是 0 单侧，两者不可合并。(b) run 1 t=1314 s 的次序说反了：
+keep-alive 在前、loop 读在后，9 点双轨帧出现在 50 ms 读结束之后，最近前因是慢读而不是
+空闲缺口；n=1，仅假设。100–112 ms 臂无 INT 数据，降级不再要求。
+
+证据见 [evidence/followup-run5-census-resolved.md](evidence/followup-run5-census-resolved.md)；
+复算脚本 [census-check.py](evidence/census-check.py) / [census-check.txt](evidence/census-check.txt)。
+证据等级：作者 `hardware validation` + `code-level`，本记录 `code-level verification`；
+物理 Tab5 `NOT RUN`；虚拟设备 `NOT RUN`（`tab5_enabled:false`，`qom`/`device_state`
+false，ST7123 触摸仍是固件 GDB 邮箱）。
