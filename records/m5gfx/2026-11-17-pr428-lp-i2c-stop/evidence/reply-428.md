@@ -5,7 +5,7 @@
 ## 確認したコード事実
 
 - 経路 3（`initialized` が立つ前の `init()`）は、LP ポートなら常に `release_lp_pad()` + `pinMode()` でパッドを借りてから `i2c_stop()` を呼ぶ形になっています（`common.inl:2311-2322`）。`initialized` の前後で分岐しないので、前回の実行から残った LP 側の接続もここで外れます。
-- 戻す順序は、`i2c_periph_reset()`（`:1928`）→ `pin_backup_t` の復元（`:1930`）→ `lp_pads_return()`（`:1931-1933`）で、コントローラのリセットがパッドの返却より先に済んでいます。借りる判定が `i2c_bus_handle != nullptr`（`:1893`）でも、`init()` 側は常時借りるので二重には借りません。
+- 戻す順序は、`i2c_periph_reset()`（`:1928`）→ `pin_backup_t` の復元（`:1930`）→ `lp_pads_return()`（`:1931-1933`）で、コントローラのリセットがパッドの返却より先に済んでいます。借りる判定が `i2c_bus_handle != nullptr`（`:1895`）でも、`init()` 側は常時借りるので二重には借りません。
 - `lp_pads_return()`（`:1857-1881`）は IDF v5.5.4 の `s_lp_i2c_pins_config()` と同じ手順です。`rtc_gpio_init()` は LP IO クロックの有効化と機能選択だけで、方向・プル・出力ラッチには触れません（`rtc_io.c` の `rtc_gpio_init`）。したがって「SDA のラッチを High にしてから `rtc_gpio_init(sda)`」の順序で偽の START が出ない、という本文の説明と一致します。`rtc_gpio_deinit()` が機能を digital に戻すことも確認しました。
 - `i2c_periph_signal[i2c_port]` を LP のポート番号で引く点が今回の新しい依存ですが、C5 は `static_assert(SOC_I2C_NUM == SOC_HP_I2C_NUM + SOC_LP_I2C_NUM)` があり、C6 は 2 件目、P4 は 3 件目に LP の `iomux_func` / `sda_out_sig` があります（IDF v5.5.4 の各 `soc/<chip>/i2c_periph.c`）。範囲外参照にはなりません。
 - `pinMode()` が IO MUX を GPIO 機能に切り替えた後、LP 側の方向・プル・ラッチは `lp_pads_return()` が設定し直し、`init()` の LP 分岐（`:2337-2342`）と同じ順序です。`init()` は `enable_internal_pullup = true`（`:2352`）で開くので、無条件の `rtc_gpio_pullup_en()` とも整合しています。
@@ -19,6 +19,6 @@
 
 ## 任意（ブロッカーではありません）
 
-LP GPIO マトリクスの分岐（`:1869-1876`）が `SOC_LP_GPIO_MATRIX_SUPPORTED` だけで、`driver/lp_io.h` の有無（`:192-194`）を見ていません。将来ヘッダの場所だけ変わってマクロが残るとビルドが壊れるので、include と同じ `__has_include` を条件に加えておくと安全だと思います。
+LP GPIO マトリクスの分岐（`:1869-1879`）が `SOC_LP_GPIO_MATRIX_SUPPORTED` だけで、`driver/lp_io.h` の有無（`:192-194`）を見ていません。将来ヘッダの場所だけ変わってマクロが残るとビルドが壊れるので、include と同じ `__has_include` を条件に加えておくと安全だと思います。
 
-参照したコードと IDF の摘録はこちらに置きました: PLACEHOLDER_RECORD_URL
+参照したコードと IDF の摘録はこちらに置きました: https://github.com/m5agent/agent-work-logs/tree/3d361c61c76052707871b5301880c6739463d123/records/m5gfx/2026-11-17-pr428-lp-i2c-stop

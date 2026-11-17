@@ -41,6 +41,7 @@
 - `evidence/platform-coverage.txt`：Device Service の SoC 一覧（C5 なし）と、QEMU 側に LP I2C /
   LP IO のモデルがないこと。
 - `evidence/reply-428.md` / `evidence/reply-posted.txt`：投稿した日本語返信と投稿結果。
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/428#issuecomment-6942651614>（1 条，日本語。PR は OPEN のまま、close / push なし）
 
 ## 文件
 
