@@ -202,3 +202,6 @@ area 32 / intensity 13；全部低于门禁 24，无一次成为按压。
 证据：[evidence/followup-idle-bursts.md](evidence/followup-idle-bursts.md)。
 证据等级 `code-level verification`（slot 组装与 `0x0009` 语义）+ 报告者硬件测量（单台、
 单面板、FW 01）；物理 Tab5 与虚拟设备均 `NOT RUN`。
+
+第十一轮回复：[issuecomment-6937083296](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6937083296)
+（英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。
