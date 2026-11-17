@@ -6,7 +6,8 @@
 - 条目：[m5stack/M5GFX#427](https://github.com/m5stack/M5GFX/pull/427)
   「board_detect: SDA の解放で、STOP が成立するまでクロックを出し続ける」，作者 GOB52，日文，
   OPEN，レビュー・コメント 0 件（取得時）
-- 源码：PR head `b8f5d89d516e8d88babec9c08103a9a6e52b5e9f`，
+- 源码：PR head `fa2bc6957a3f56a4087b7b1de70f1d16b17b266e`（第 2 ラウンド。第 1 ラウンドは
+  `b8f5d89d516e8d88babec9c08103a9a6e52b5e9f`），
   base `develop` `21213080fba00c675d5dcca0ef2abd4b349e3cef`（#423 のマージ後、当時の develop 先端と一致）
 - 环境：macOS、clang C++11。ESP32-C5 実機なし、Device Service に C5 profile なし
 
@@ -27,9 +28,24 @@
    `recover_held_sda_and_resample`、`probe_i2c_ack` の初回 pull-up 検査）で、余分なクロックが
    既存トランザクションを壊す経路はない。SCL が外部に Low 保持されている場合はクロックを出さず
    `false` を返す（従来どおり）。
-6. ブロッカーなし。任意の改善として「10 クロック後も SDA を放さない周辺」ケースが同梱テストに
-   無い点を挙げた（ループ終了上限だけがテストされていない。こちらでは別モデルで 10 パルス後に
-   `false` を返すことを確認済み）。
+6. ブロッカーなし。第 1 ラウンドでは任意の改善として「10 クロック後も SDA を放さない周辺」ケースが
+   同梱テストに無い点を挙げた（ループ終了上限だけがテストされていない）。作者が `fa2bc69` で
+   そのケースを追加し、第 2 ラウンドで下記のとおり確認した。
+
+## 追加ラウンド（`fa2bc69`）
+
+7. `fa2bc69` の差分は `test/board_detect/held_sda_release.cpp`（+3）と
+   `test/board_detect/README.md`（+1/-1）だけで、`probe_hardware.inl` は `b8f5d89` のまま。
+   `release_held_sda()` の挙動は変わっていない。
+8. 追加ケースは `run({9 ビットすべて 0, start 0, write, SCL 正常})` で、
+   `!release_held_sda()` と `pulses == 10` を要求する（`held_sda_release.cpp:110-112`）。
+   永久に SDA を放さないスレーブに対して、起動時に無限ループしないことを固定している。
+9. PR head で `sh test/board_detect/run.sh` は 34 本すべて合格、
+   `held_sda_release` 単体は 44 ケース合格（作者の報告と一致）。
+10. このケースが上限を実際に拘束することを変異テストで確認した。ループ条件を `++i < 11` に
+    変えると、追加ケースが `held_sda_release.cpp:112` の `pulses == 10` で `assert` 失敗（exit 134）。
+    上限を 1 増やすだけの退行を検出できる。
+11. CI は head `fa2bc69` で 27 チェックすべて success（fail / pending なし）。
 
 ## 关键证据
 
@@ -47,6 +63,12 @@
   `nanoc6` / `nesso-n1`）と esp-emu の QEMU バックエンド一覧（`esp32s3` / `esp32c6` / `esp32` /
   native / raspi3b、`esp32-c5` なし）。
 - 已发布回复：<https://github.com/m5stack/M5GFX/pull/427#issuecomment-6940429517>（1 条、日本語。PR は OPEN のまま、close / push なし）
+- `evidence/commit-fa2bc69.patch`：第 2 ラウンドのコミット全文と追加ケースの差分。
+- `evidence/host-run-fa2bc69.log`：head `fa2bc69` での `sh test/board_detect/run.sh` 全出力
+  （`C++ test programs: 34 passed`）。
+- `evidence/held-sda-fa2bc69.txt`：同 head の `held_sda_release.cpp` 単体（`44 cases passed`）。
+- `evidence/held-sda-bound-mutant.txt`：ループ上限を `++i < 11` に変えた変異体での実行結果
+  （`pulses == 10` で `assert` 失敗、exit 134）。
 
 ## 文件
 

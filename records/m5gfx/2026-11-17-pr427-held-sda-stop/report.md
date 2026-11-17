@@ -122,3 +122,25 @@ UnitNFC の `0x2D` / `0x93` の各 0 ビット位置、write 受信 ACK、SCL �
 ブロッカーなし。host テストで旧コードの失敗と新コードの解放・上限・終了が確認でき、
 既存 33 テストおよび CI のビルドにも回帰はない。実機での再現は未実施である点を明示して
 日文で 1 条のコメントを投稿した（PR は OPEN のまま、close / push はしない）。
+
+## 8. 追加ラウンド（`fa2bc69`、2026-11-17）
+
+第 1 ラウンドで「任意」として挙げた「10 クロック後も SDA を放さない周辺」ケースを作者が
+追加した。差分は `test/board_detect/held_sda_release.cpp`（+3）と
+`test/board_detect/README.md`（+1/-1）のみで、`src/board_detect/probe_hardware.inl` は
+`b8f5d89` のまま。修正本体の挙動は変わっていない。
+
+追加ケースは、9 ビットすべてで SDA を Low に駆動し続けるスレーブ（受信側、start 0、SCL は
+正常）に対して、`release_held_sda()` が `false` を返し、SCL パルスがちょうど 10 回であることを
+要求する（`held_sda_release.cpp:110-112`）。
+
+確認結果（head `fa2bc69`）:
+
+- `sh test/board_detect/run.sh` → `C++ test programs: 34 passed`
+- `held_sda_release` 単体 → `held SDA release: 44 cases passed`（作者の報告と一致）
+- 変異テスト：ループ条件を `++i < 10` から `++i < 11` に変えると、追加ケースが
+  `pulses == 10` で `assert` 失敗（`held_sda_release.cpp:112`、exit 134）。上限を 1 増やす
+  退行をこのケースが検出できる。
+- CI（head `fa2bc69`）：27 チェックすべて success、fail / pending なし。
+
+未覆盖は第 6 節と同じ。hardware / virtual-device は引き続き `NOT RUN`。

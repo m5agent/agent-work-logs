@@ -19,3 +19,22 @@ c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -ped
   '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
   -include test/board_detect/support/native_devices_io.hpp \
   -Itest/board_detect -Itest/board_detect/stubs -Isrc code/sim_slave.cpp -o sim_pr
+
+# --- follow-up round, head fa2bc69 (test-only commit on top of b8f5d89) ---
+# 5. new bounded-termination case, alone
+c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -pedantic \
+  '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
+  -include test/board_detect/support/native_devices_io.hpp \
+  -Itest/board_detect -Itest/board_detect/stubs -Isrc test/board_detect/held_sda_release.cpp -o held
+# -> "held SDA release: 44 cases passed"
+
+# 6. whole host suite
+sh test/board_detect/run.sh
+# -> "C++ test programs: 34 passed" (evidence/host-run-fa2bc69.log)
+
+# 7. mutation: does the new case pin the bound? copy the tree, widen the cap by one
+cp -R src /tmp/mut_src
+sed -i '' 's/++i < 10/++i < 11/' /tmp/mut_src/board_detect/probe_hardware.inl
+c++ ... -I/tmp/mut_src test/board_detect/held_sda_release.cpp -o held_mut
+# -> assert(pulses == 10) at held_sda_release.cpp:112, exit 134
+#    (evidence/held-sda-bound-mutant.txt)

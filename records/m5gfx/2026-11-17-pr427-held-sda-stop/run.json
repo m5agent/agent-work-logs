@@ -9,7 +9,7 @@
     "pull_request": "https://github.com/m5stack/M5GFX/pull/427",
     "repository": "m5stack/M5GFX",
     "base_commit": "21213080fba00c675d5dcca0ef2abd4b349e3cef",
-    "head_commit": "b8f5d89d516e8d88babec9c08103a9a6e52b5e9f"
+    "head_commit": "fa2bc6957a3f56a4087b7b1de70f1d16b17b266e"
   },
   "hardware": {},
   "firmware": {},
@@ -37,12 +37,12 @@
     {
       "id": "host-suite",
       "status": "PASS",
-      "detail": "sh test/board_detect/run.sh at b8f5d89: C++ test programs: 34 passed (exit 0)"
+      "detail": "sh test/board_detect/run.sh at b8f5d89 (round 1): C++ test programs: 34 passed"
     },
     {
       "id": "new-test-cases",
       "status": "PASS",
-      "detail": "held_sda_release.cpp alone: 43 cases passed"
+      "detail": "held_sda_release.cpp alone at b8f5d89: 43 cases passed"
     },
     {
       "id": "new-test-detects-old-code",
@@ -55,9 +55,24 @@
       "detail": "code/sim_slave.cpp (written for #424) against b8f5d89: 5/5, failures=0 (issue case true/2, all-zero true/8, one-clock true/1, write ACK true/10, stuck SDA false/10)"
     },
     {
-      "id": "termination-bound",
-      "status": "PARTIAL",
-      "detail": "host model only: a peripheral that never releases SDA returns false after 10 SCL pulses; no such case in the PR's own test"
+      "id": "termination-bound-own-test",
+      "status": "PASS",
+      "detail": "fa2bc69 adds {9x low bits, start 0, write, SCL free}: release_held_sda() returns false after exactly 10 SCL pulses (held_sda_release.cpp:110-112)"
+    },
+    {
+      "id": "bound-mutant-detected",
+      "status": "PASS",
+      "detail": "loop bound mutated to ++i < 11: new case fails at held_sda_release.cpp:112 (pulses == 10), exit 134"
+    },
+    {
+      "id": "host-suite-fa2bc69",
+      "status": "PASS",
+      "detail": "sh test/board_detect/run.sh at fa2bc69 (round 2): C++ test programs: 34 passed"
+    },
+    {
+      "id": "own-test-cases-fa2bc69",
+      "status": "PASS",
+      "detail": "held_sda_release.cpp alone at fa2bc69: 44 cases passed (author reported 44/34; matches)"
     },
     {
       "id": "ci-checks",
@@ -96,11 +111,15 @@
     "evidence/sim-independent-pr427.txt",
     "evidence/build-commands.txt",
     "evidence/platform-coverage.txt",
-    "code/sim_slave.cpp"
+    "code/sim_slave.cpp",
+    "evidence/commit-fa2bc69.patch",
+    "evidence/host-run-fa2bc69.log",
+    "evidence/held-sda-fa2bc69.txt",
+    "evidence/held-sda-bound-mutant.txt"
   ],
   "notes": [
     "PR left OPEN; one Japanese comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
-    "The change matches what was agreed in #424 (per-clock STOP, cap 10 clocks); the only review suggestion is an optional extra test for a peripheral that never releases SDA.",
+    "The change matches what was agreed in #424 (per-clock STOP, cap 10 clocks); the round-1 optional suggestion (a peripheral that never releases SDA) was added by the author in fa2bc69 and verified in round 2.",
     "Author's hardware table (ToughC5 0/70, Nesso N1 0/40, StickS3 0/40, CardputerADV 0/40, Tab5 0/40) is quoted, not reproduced here."
   ]
 }

@@ -1,0 +1,53 @@
+commit fa2bc6957a3f56a4087b7b1de70f1d16b17b266e
+Author:     GOB <goblin52@gmail.com>
+AuthorDate: Tue Nov 17 15:38:01 2026 +0900
+Commit:     GOB <goblin52@gmail.com>
+CommitDate: Tue Nov 17 15:38:01 2026 +0900
+
+    board_detect: test that a held SDA release gives up after 10 clocks
+    
+    A peripheral that never lets go of SDA, not even for a STOP, must not keep
+    release_held_sda() clocking at startup. Pin the bound: it returns false
+    after exactly 10 SCL pulses.
+
+diff --git a/test/board_detect/README.md b/test/board_detect/README.md
+index 1c4b0de..3f0e0d9 100644
+--- a/test/board_detect/README.md
++++ b/test/board_detect/README.md
+@@ -35,7 +35,7 @@ required. `BoardDetect.yml` runs the same command independently of catalog CI.
+ | `construction_c61.cpp` | CoreMatrix ACK success/failure and unavailable I2C; the temporary hardware port is closed before either successful construction or rejection |
+ | `construction_p4.cpp` | Tab5/Tab5X post-power software-I2C observations through real construction: ST firmware 1/3/unknown, GT911, silent touch with DSI ID fallback, retained power failures, DSI lane rate and display-part ownership |
+ | `ops_host.cpp` | Typed operation validation/execution, retry, dedicated-release summaries and I2C bus recovery policy |
+-| `held_sda_release.cpp` | Real `release_held_sda()` against a peripheral left inside a byte by a reset: every held position of the UnitNFC bytes and others, a receiver in its acknowledge slot, SCL held low and an idle bus; at most 10 SCL pulses |
++| `held_sda_release.cpp` | Real `release_held_sda()` against a peripheral left inside a byte by a reset: every held position of the UnitNFC bytes and others, a receiver in its acknowledge slot, a peripheral that never lets go (exactly 10 pulses, then failure), SCL held low and an idle bus; at most 10 SCL pulses |
+ | `detect_class_host.cpp`, `detect_session_host.cpp` | Detect-class matching and session verdict/preference/candidate/persistence rules |
+ 
+ The fixtures record the complete semantic fields
+diff --git a/test/board_detect/held_sda_release.cpp b/test/board_detect/held_sda_release.cpp
+index fc6b9e8..607e305 100644
+--- a/test/board_detect/held_sda_release.cpp
++++ b/test/board_detect/held_sda_release.cpp
+@@ -107,6 +107,9 @@ int main()
+     assert(run({bits, 8, false, false}, &pulses));
+     assert(pulses <= 10);
+   }
++  // A peripheral that never lets go of SDA, not even for a STOP: the clocking is bounded.
++  assert(!run({std::vector<bool>(9, false), 0, false, false}, &pulses));
++  assert(pulses == 10);
+   // SCL held low by someone else: give up instead of clocking.
+   assert(!run({byte_bits(0x00), 0, true, true}, &pulses));
+   assert(pulses == 0);
+diff --git a/test/board_detect/held_sda_release.cpp b/test/board_detect/held_sda_release.cpp
+index fc6b9e8..607e305 100644
+--- a/test/board_detect/held_sda_release.cpp
++++ b/test/board_detect/held_sda_release.cpp
+@@ -107,6 +107,9 @@ int main()
+     assert(run({bits, 8, false, false}, &pulses));
+     assert(pulses <= 10);
+   }
++  // A peripheral that never lets go of SDA, not even for a STOP: the clocking is bounded.
++  assert(!run({std::vector<bool>(9, false), 0, false, false}, &pulses));
++  assert(pulses == 10);
+   // SCL held low by someone else: give up instead of clocking.
+   assert(!run({byte_bits(0x00), 0, true, true}, &pulses));
+   assert(pulses == 0);
