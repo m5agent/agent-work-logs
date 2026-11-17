@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "redacted": true,
+  "note": "Derived summary; local paths, endpoints and identifiers removed. Raw job evidence retained internally by job id.",
+  "job_id": "job-080c2a4eacc1",
+  "firmware": {
+    "name": "Micropython code for cardputerADV",
+    "version": "1.0",
+    "file": "ShellMicroPythonShell_CN_v1.0.0_FACTORY_0x0.bin",
+    "size": 2041968,
+    "sha256": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826"
+  },
+  "device": {
+    "id": "cardputer-adv",
+    "sku": "K132-Adv",
+    "soc": "ESP32-S3FN8",
+    "flash_bytes": 8388608,
+    "display": "240x135 ST7789V2"
+  },
+  "analysis": {
+    "valid": true,
+    "declared_flash_size": 16777216,
+    "bootloader": {
+      "offset": 0,
+      "chip": "esp32s3",
+      "flash_size": 16777216,
+      "flash_size_code": 4
+    },
+    "partition_end": 16777216,
+    "partitions": [
+      {"label": "nvs", "offset": 36864, "size": 16384},
+      {"label": "phy_init", "offset": 61440, "size": 4096},
+      {"label": "factory", "offset": 65536, "size": 3145728},
+      {"label": "vfs", "offset": 3211264, "size": 13565952}
+    ],
+    "filesystem_vfs": "UNFORMATTED"
+  },
+  "parse_at_device_flash": {
+    "image_size": 8388608,
+    "valid": false,
+    "errors": ["partition vfs exceeds flash size"]
+  },
+  "composed_flash": {
+    "size": 8388608,
+    "sha256": "34aebda915be227f88b3bdbd85d83b856997afd595c5ffd204ce6bd0cdc9c400",
+    "method": "source BIN + 0xFF padding to 8 MiB"
+  },
+  "serial": {
+    "bytes": 660,
+    "excerpt": [
+      "ESP-ROM:esp32s3-20210327",
+      "E (438) spi_flash: Detected size(8192k) smaller than the size in the binary image header(16384k). Probe failed.",
+      "NEKO: app_main alive | console UART0 @115200 (USB-Serial-JTAG secondary)",
+      "Traceback (most recent call last):",
+      "  File \"_boot.py\", line 11, in <module>",
+      "  File \"inisetup.py\", line 38, in setup",
+      "  File \"inisetup.py\", line 7, in check_bootsec",
+      "OSError: (-24579, 'ESP_ERR_FLASH_NOT_INITIALISED')",
+      ">>> "
+    ]
+  },
+  "observation": {
+    "required_seconds": 60,
+    "elapsed_seconds": 60.14532875000032,
+    "samples": 13,
+    "final_session_state": "running",
+    "frame_scope": "framebuffer"
+  },
+  "frame": {
+    "bytes": 174,
+    "width": 240,
+    "height": 135,
+    "all_black": true,
+    "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6"
+  },
+  "qom_diff": {"added": 0, "removed": 0, "changed": 0},
+  "flash_diff": {"size": 8388608, "changed_bytes": 0, "ranges": []},
+  "crash_diagnostics": {
+    "status": "no_evidence",
+    "panic_count": 0,
+    "repeated_resets": false,
+    "elf_status": "not_uploaded"
+  },
+  "checks": {
+    "static_analysis": "PASS (valid=true under declared 16 MB)",
+    "partition_fit_device_flash": "FAIL (partition vfs exceeds flash size under 8 MB)",
+    "qemu_model_flash_size": "PASS (8192 KB reported)",
+    "firmware_boot": "FAIL (ESP_ERR_FLASH_NOT_INITIALISED, REPL only)",
+    "ui_frame": "FAIL (174-byte all-black frame for 60.145 s)",
+    "intake_rejection": "FAIL (image accepted and session allocated)",
+    "hardware_validation": "NOT RUN",
+    "elf_symbolization": "NOT RUN"
+  },
+  "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/234"
+}

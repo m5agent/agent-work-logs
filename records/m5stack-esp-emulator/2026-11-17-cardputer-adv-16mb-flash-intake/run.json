@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "firmware_review_attribution",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer-ADV 16 MB flash 契约镜像的 intake 校验缺口",
+  "source": {
+    "issue": "#234",
+    "pull_request": "",
+    "repository": "m5stack-esp-emulator",
+    "base_commit": "6da7ab20",
+    "service_snapshot": "fd08569f",
+    "review_job": "job-080c2a4eacc1"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "Micropython code for cardputerADV",
+    "version": "1.0",
+    "version_id": "2122652927099092995",
+    "device": "Cardputer-ADV",
+    "device_sku": "K132-Adv",
+    "device_flash_bytes": 8388608,
+    "file": "ShellMicroPythonShell_CN_v1.0.0_FACTORY_0x0.bin",
+    "size": 2041968,
+    "sha256": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826",
+    "declared_flash_bytes": 16777216,
+    "partition_end": 16777216
+  },
+  "execution": {
+    "runtime": "qemu",
+    "backend": "qemu-esp32s3",
+    "whole_device": true,
+    "composed_flash_size": 8388608,
+    "composed_flash_sha256": "34aebda915be227f88b3bdbd85d83b856997afd595c5ffd204ce6bd0cdc9c400",
+    "observation_seconds": 60.14532875000032,
+    "samples": 13,
+    "serial_bytes": 660,
+    "frame_bytes": 174,
+    "frame_sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+    "physical_hardware": "NOT RUN"
+  },
+  "checks": {
+    "static_analysis": "PASS (valid=true under declared 16 MB)",
+    "partition_fit_device_flash": "FAIL (partition vfs exceeds flash size under 8 MB)",
+    "qemu_model_flash_size": "PASS (8192 KB reported)",
+    "firmware_boot": "FAIL (ESP_ERR_FLASH_NOT_INITIALISED, REPL only)",
+    "ui_frame": "FAIL (174-byte all-black 240x135 frame for 60.145 s)",
+    "intake_rejection": "FAIL (image accepted and session allocated)",
+    "hardware_validation": "NOT RUN",
+    "elf_symbolization": "NOT RUN"
+  }
+}
