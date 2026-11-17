@@ -46,7 +46,7 @@
 - `evidence/platform-coverage.txt`：Device Service 36 プロファイルの SoC 一覧（C5 なし、C6 は
   `nanoc6` / `nesso-n1`）と esp-emu の QEMU バックエンド一覧（`esp32s3` / `esp32c6` / `esp32` /
   native / raspi3b、`esp32-c5` なし）。
-- 已发布回复：本記録の公開後に PR #427 へ 1 条投稿（リンクは次のコミットで追記）
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/427#issuecomment-6940429517>（1 条、日本語。PR は OPEN のまま、close / push なし）
 
 ## 文件
 
