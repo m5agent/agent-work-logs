@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 CarPlay 原版发布包复核 | `PARTIAL`（原版画面通过，整单交互保留） | [查看](esp-emulator/2026-11-18-tab5-identity-dial-media-review/followups/2026-11-18-tab5-release-package-readback/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 原生取帧准入与 Reviewer 观察 | `PARTIAL`（CarPlay 出帧，UserDemo 缺帧与 ROM 复位已独立取证） | [查看](esp-emulator/2026-11-18-tab5-identity-dial-media-review/followups/2026-11-18-tab5-frame-admission/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 原生 VFS 留存清单与文件摘要审核 | `PARTIAL`（分区回读和文件正负对照成立，整单仍待人工复核） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-retained-vfs-file-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | MP3 与 2048 原版隔离复审 | `PASS`（固定 PCM 与八次合法拖动通过） | [查看](esp-emulator/2026-11-18-mp3-2048-original-replay/) |

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "virtual_device_validation",
+  "date": "2026-11-18",
+  "title": "Tab5 CarPlay 原版发布包复核",
+  "overall_status": "PARTIAL",
+  "publication_tier": "public",
+  "source": {
+    "emulator_candidate": "929dbf749e4a8ecd6c469fce8aea44120febd03f",
+    "reviewer_candidate": "5807a7890aca0a6a0cdb2dcc399e96599114786a",
+    "emulator_ci": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44197101530"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "carplay": {
+      "source_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+      "normalized_flash_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b"
+    }
+  },
+  "execution": {
+    "device_service_api": "1.84.0",
+    "reviewer_contract": "0.16.0",
+    "tab5_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "panel_board": "st7123",
+    "elapsed_seconds": 60.00682491599582,
+    "frame_sample_count": 13,
+    "review_lane": "SIM_PARTIAL",
+    "review_error": "E_INTERACTION_CLAIM_PARTIAL"
+  },
+  "checks": [
+    {
+      "name": "Exact installed source pair CarPlay native DSI framebuffer",
+      "status": "PASS",
+      "scope": "Isolated saved snapshot virtual device"
+    },
+    {
+      "name": "Whole CarPlay review",
+      "status": "PARTIAL",
+      "scope": "E_INTERACTION_CLAIM_PARTIAL"
+    },
+    {
+      "name": "Package verification",
+      "status": "PASS",
+      "scope": "Exact OpenAPI, DSI executable, browser manifest and isolated catalog"
+    },
+    {
+      "name": "Physical hardware, browser WASM guest and Burner",
+      "status": "NOT RUN",
+      "scope": "Outside this verification"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/carplay-exact-candidate.summary.json",
+      "sha256": "78981ef5502355126884feb28b4c35cb5b2de980d21a023c38977e5bd0175a1d",
+      "bytes": 1917
+    },
+    {
+      "path": "evidence/release-package.summary.json",
+      "sha256": "4d4f14a4d7da61bb5024cdf11d4e78ad1e6fbb1c02acd2d229518629b6af5789",
+      "bytes": 1351
+    }
+  ]
+}
