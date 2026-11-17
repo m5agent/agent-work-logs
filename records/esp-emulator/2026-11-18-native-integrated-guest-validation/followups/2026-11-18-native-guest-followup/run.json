@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Native guest follow-up for Cardputer ADV, Dial, NC1020 and StickS3",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/234",
+    "base_commit": "bd1dca3c74f8b9c2654e1ba3590e1f282d2071b0",
+    "cardputer_capacity_candidate": "6c28cbb59641d02b0dcdc892488e6868bc4b0ea9",
+    "s3_uart_candidate": "bf47364af19bbc3d93e35e38d86f58e739744d51",
+    "nc1020_geometry_candidate": "a7cf9c08970f8f1c487efab86965c2c019be9982",
+    "sticks3_new_lease_candidate": "287b94ca036d64baca54cb370bf471c289125352",
+    "executed_integration_commit": "25b2e2069044c607c93192d7be691a91c877fdc9",
+    "release_commit": "8c65905e466c69a62239371f1fcd254c183b0712",
+    "reviewer_commit": "812e59dec72308b2e063366a7e751c0564dbb73e"
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "browser_WASM": "NOT RUN"
+  },
+  "firmware": {
+    "cardputer_adv_issue_234": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826",
+    "dial_original": {
+      "image": "Vinyl M5 Dial R1F30, original merged BIN",
+      "sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf"
+    },
+    "nc1020_original": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "sticks3_original": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+    "cardputer_adv_core_dump_probes": {
+      "crc": "98fa1ecd607ad3c091e565046c67829af6677526e3dd21852557edc329496f4a",
+      "sha": "2f824ef6c954bd52ce18129f61ce322138266ee404318d9bc7debff076fce127"
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "Isolated native Device Service sessions",
+    "baseline_xtensa_runtime_sha256": "44d5b221e506c6b85dcc5d46d9d97a202eb6eca0a5713108a95f35676aed50f5",
+    "nc1020_geometry_runtime_sha256": "14ed4ae1ed1819f7cc03cf116e491ce163519b5f1182db02615649385d499fd4",
+    "combined_native_sha256": "14ed4ae1ed1819f7cc03cf116e491ce163519b5f1182db02615649385d499fd4"
+  },
+  "checks": [
+    {
+      "name": "#234 original pre-admission baseline launch reproduces real flash probe failure",
+      "status": "PASS"
+    },
+    {
+      "name": "#234 capacity preflight and review E_STATIC, with official 8 MiB positive control",
+      "status": "PASS"
+    },
+    {
+      "name": "Dial frozen replay, 46/46 and 14/14 fast full turns",
+      "status": "PASS"
+    },
+    {
+      "name": "Dial instrumented fast original poll coverage",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Cardputer ADV UART S3 task metadata, both CRC32 and SHA256",
+      "status": "PASS"
+    },
+    {
+      "name": "NC1020 original complete virtual LCD geometry on isolated candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "StickS3 exact previously provisioned Flash new-lease cold import",
+      "status": "PASS"
+    },
+    {
+      "name": "Hardware, browser WASM and real acoustics or RF",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputer-adv-flash-capacity-summary.json",
+    "evidence/dial-diagnostic-timeline-summary.json",
+    "evidence/dial-frozen-replay-summary.json",
+    "evidence/dial-gpio-only-summary.json",
+    "evidence/dial-run-integrity-summary.json",
+    "evidence/nc1020-native-geometry-summary.redacted.json",
+    "evidence/s3-coredump-summary.redacted.json",
+    "evidence/sticks3-new-lease-summary.redacted.json",
+    "evidence/combined-25b2-panel-summary.json",
+    "evidence/combined-25b2-traced-panel-summary.json",
+    "evidence/combined-flash-capacity-summary.json",
+    "evidence/combined-native-stack-summary.json",
+    "evidence/combined-s3-crash-summary.json",
+    "evidence/combined-sticks3-cold-summary.json",
+    "evidence/combined-sticks3-reset-summary.json",
+    "evidence/release-gates-summary.json"
+  ]
+}

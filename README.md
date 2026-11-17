@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | 原版容量准入、任务观测和网络复验 | PARTIAL（Flash 尺寸、StickS3 新会话及 Cardputer ADV 转储通过，NC1020 和 Dial 时序保留） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-native-guest-followup/)
 | 2026-11-18 | ESP Emulator | StickS3、Dial、NC1020 与 Core2 原生联合复验 | `PARTIAL`（原版两次重连、冷导入/存档及 Core2 崩溃元数据通过；Dial 9/10、NC1020 画面边界保留） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/) |
 | 2026-11-18 | ESP Emulator | 原生固件审核数据面 | PARTIAL（StickS3 配网、CardputerDict 写入、Dial 画面与 MP3 通过） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/) |
 | 2026-11-17 | ESP Emulator | 原生 C6 UART core dump | `PASS`（两种校验格式、同会话任务状态和 ZIP） | [查看](records/esp-emulator/2026-11-17-native-c6-uart-core-dumps/) |

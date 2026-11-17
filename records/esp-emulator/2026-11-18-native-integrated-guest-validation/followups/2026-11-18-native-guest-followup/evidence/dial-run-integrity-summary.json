@@ -1,0 +1,105 @@
+{
+  "source": {
+    "repository": "esp-emulator",
+    "base_commit": "bd1dca3c74f8b9c2654e1ba3590e1f282d2071b0",
+    "issue": "Intermittent −16 @ 5 ms from virtual track 2"
+  },
+  "firmware": {
+    "image": "Vinyl M5 Dial R1F30, original merged BIN",
+    "sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf"
+  },
+  "execution": {
+    "environment": "Isolated Device Service native QEMU as a virtual device; original plain runtime clock with and without instrumentation",
+    "frozen_runtime_sha256": "44d5b221e506c6b85dcc5d46d9d97a202eb6eca0a5713108a95f35676aed50f5",
+    "observer_runtime_sha256": "911080650edf1bc40d16877bf44ad7e1573a20fc191b5bf96c52b776d214366a",
+    "clock": "Default native clock. No instruction-count pacing or deadline correction added."
+  },
+  "checks": [
+    {
+      "case": "Uninstrumented frozen replay, 3 cold sessions",
+      "status": "PASS",
+      "matches": 46,
+      "total": 46,
+      "followup_only": true
+    },
+    {
+      "case": "35 ms default, four USB diagnostic runs",
+      "status": "PASS",
+      "matches": 36,
+      "total": 36
+    },
+    {
+      "case": "5 ms +16, four USB diagnostic runs",
+      "status": "PARTIAL",
+      "matches": 6,
+      "total": 12
+    },
+    {
+      "case": "5 ms −16, four USB diagnostic runs",
+      "status": "PARTIAL",
+      "matches": 7,
+      "total": 12
+    },
+    {
+      "case": "5 ms shorter turns, four USB diagnostic runs",
+      "status": "PARTIAL",
+      "matches": 11,
+      "total": 12
+    },
+    {
+      "case": "GPIO-observer-only control without USB chardev, 18 actions",
+      "status": "PARTIAL",
+      "matches": 17,
+      "total": 18
+    },
+    {
+      "case": "Producer phase sequence across all instrumented rotary inputs",
+      "status": "PASS"
+    },
+    {
+      "case": "Same artifact on physical Dial",
+      "status": "NOT RUN"
+    },
+    {
+      "case": "Browser-WASM and physical acoustic output",
+      "status": "NOT RUN"
+    }
+  ],
+  "bundles": {
+    "frozen-a1": {
+      "bytes": 30676,
+      "sha256": "c48f13eba525f47c2210ee87c2f06bb6de92677451aea2b05d8305d39ba2ca3a",
+      "manifest_entries_verified": 10
+    },
+    "frozen-a2": {
+      "bytes": 31008,
+      "sha256": "d64574f420677a0272b782897f2064d5f1cf2a35471f499a570d46cb3c23b3ca",
+      "manifest_entries_verified": 10
+    },
+    "frozen-a3": {
+      "bytes": 30813,
+      "sha256": "8ab1d2a3a49cf3f641c02797b084a09421d923a6fa81fa73c54845fae0e7b616",
+      "manifest_entries_verified": 10
+    },
+    "observed-2": {
+      "bytes": 50319,
+      "sha256": "0b46c817b14965575ff57bb96fec9975ad4657c7cf9b33f8a157af73825fe8d7",
+      "manifest_entries_verified": 11
+    },
+    "observed-3": {
+      "bytes": 50845,
+      "sha256": "1db44c94324cf8fd3cfc8e838682528110e3904c0f65bd86a20e339ba515cf11",
+      "manifest_entries_verified": 11
+    },
+    "observed-4": {
+      "bytes": 50824,
+      "sha256": "2c49ede173c52e96124dffb76e892a571b1fde8caa4c786492fa8cb3daff8602",
+      "manifest_entries_verified": 11
+    },
+    "observed-without-usb": {
+      "bytes": 46609,
+      "sha256": "9264d17501fdeed553146a13e3327f7cf749aa25a9fee0638e0147b838ec3036",
+      "manifest_entries_verified": 10
+    }
+  }
+}
