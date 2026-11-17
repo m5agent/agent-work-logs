@@ -1,0 +1,194 @@
+{
+  "scope": "Same original Dial R1F30 saved-snapshot review using an isolated Device Service and AudioPlayer",
+  "validation": "virtual-device validation",
+  "source_and_virtual_flash_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+  "reviewer_source": "22569f70b6121f7eab263cf0364855b228497f79",
+  "emulator_source": "929dbf749e4a8ecd6c469fce8aea44120febd03f",
+  "runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+  "unit": "AudioPlayer PORT.B, seven indexed tracks",
+  "cases": [
+    {
+      "case": "positive-paced",
+      "review_status": "done",
+      "review_error": null,
+      "lane": "SIM_VERIFIED",
+      "actions": [
+        {
+          "name": "encoder_clockwise",
+          "delta": 3,
+          "edge_period_ms": 50,
+          "controller": "PASS",
+          "gpio_edges": 12,
+          "app_status": "PASS",
+          "app_reason": "track_index_verified",
+          "baseline": {
+            "track": 1,
+            "playback_status": 1,
+            "uart_bytes": 29,
+            "uart_sha256": "226825a691ce92d343db80da028ad566112957a5d3e3e011fae29527bae318bf",
+            "playing_command_hex": "04fb0306000109"
+          },
+          "expected_delta": 3,
+          "expected_track": 4,
+          "selected_track": 4,
+          "uart_command_hex": "04fb030600040c",
+          "uart_suffix_sha256": "aa5b5b02c35879afdec8e4b83319240daab745df526602922d00720db30cf02a"
+        },
+        {
+          "name": "encoder_counterclockwise",
+          "delta": -16,
+          "edge_period_ms": 35,
+          "controller": "PASS",
+          "gpio_edges": 64,
+          "app_status": "PASS",
+          "app_reason": "track_index_verified",
+          "baseline": {
+            "track": 4,
+            "playback_status": 1,
+            "uart_bytes": 51,
+            "uart_sha256": "8dcdeee0010317c86a43be89b1917b964bfb3248643f26d42f7e650be1d69b33",
+            "playing_command_hex": "04fb030600040c"
+          },
+          "expected_delta": -16,
+          "expected_track": 2,
+          "selected_track": 2,
+          "uart_command_hex": "04fb030600020a",
+          "uart_suffix_sha256": "7cd277e4d1dda905d0a50ef4e502adc0d715455baae538e2cd2789bcef69cdd2"
+        }
+      ],
+      "uart_bytes": 143,
+      "uart_sha256": "14670a99b40cc01bb6c4875b47469897507e571739f4c0a9ec9585fa90233945",
+      "serial_bytes": 226,
+      "serial_sha256": "15980f7fcbd82873cb5e51ee2a8c524166d030d863c822276d849b13f550c113",
+      "evidence_zip_sha256": "1bbb94fa8e597c89e789cbd8bdc834966d55b8594d3db7c07e6a36835ec32d6a",
+      "evidence_zip_crc_verified": true,
+      "flash_released": true,
+      "active_leases": 0,
+      "isolated_services_exited": true,
+      "burner_submitted": false
+    },
+    {
+      "case": "negative",
+      "review_status": "manual_review",
+      "review_error": "E_SIM_ENCODER_TRACK_MISMATCH",
+      "lane": "SIM_PARTIAL",
+      "actions": [
+        {
+          "name": "encoder_clockwise",
+          "delta": 3,
+          "edge_period_ms": 35,
+          "controller": "PASS",
+          "gpio_edges": 12,
+          "app_status": "FAIL",
+          "app_reason": "track_index_mismatch",
+          "baseline": {
+            "track": 1,
+            "playback_status": 1,
+            "uart_bytes": 29,
+            "uart_sha256": "226825a691ce92d343db80da028ad566112957a5d3e3e011fae29527bae318bf",
+            "playing_command_hex": "04fb0306000109"
+          },
+          "expected_delta": 4,
+          "expected_track": 5,
+          "selected_track": 4,
+          "uart_command_hex": "04fb030600040c",
+          "uart_suffix_sha256": "54f800c421028d4171f09a628990f78c73eea736634d1c7c105917f333438cb9"
+        },
+        {
+          "name": "encoder_counterclockwise",
+          "delta": -2,
+          "edge_period_ms": 35,
+          "controller": "PASS",
+          "gpio_edges": 8,
+          "app_status": "PASS",
+          "app_reason": "track_index_verified",
+          "baseline": {
+            "track": 4,
+            "playback_status": 1,
+            "uart_bytes": 56,
+            "uart_sha256": "bd3184d7f1db35be9769b5eb3f46deb4ebdf4d2787988b5a7b78fab10f0dc9c9",
+            "playing_command_hex": "04fb030600040c"
+          },
+          "expected_delta": -2,
+          "expected_track": 2,
+          "selected_track": 2,
+          "uart_command_hex": "04fb030600020a",
+          "uart_suffix_sha256": "5d6e753b334400241db378c5c174cfc83dee115325bec4061684a3c6532dbd40"
+        }
+      ],
+      "uart_bytes": 138,
+      "uart_sha256": "fc5cda6220e65b6fc1f0b882abf161d6a12966bf3250a77dd0bd077c55639798",
+      "serial_bytes": 226,
+      "serial_sha256": "15980f7fcbd82873cb5e51ee2a8c524166d030d863c822276d849b13f550c113",
+      "evidence_zip_sha256": "1158144a18068276c7522f89287bff1254ef9e4260bbd9acac1fad57fb0ee01c",
+      "evidence_zip_crc_verified": true,
+      "flash_released": true,
+      "active_leases": 0,
+      "isolated_services_exited": true,
+      "burner_submitted": false
+    },
+    {
+      "case": "native-fast",
+      "review_status": "manual_review",
+      "review_error": "E_SIM_ENCODER_TRACK_MISMATCH",
+      "lane": "SIM_PARTIAL",
+      "actions": [
+        {
+          "name": "encoder_clockwise",
+          "delta": 16,
+          "edge_period_ms": 5,
+          "controller": "PASS",
+          "gpio_edges": 64,
+          "app_status": "FAIL",
+          "app_reason": "track_index_mismatch",
+          "baseline": {
+            "track": 1,
+            "playback_status": 1,
+            "uart_bytes": 29,
+            "uart_sha256": "226825a691ce92d343db80da028ad566112957a5d3e3e011fae29527bae318bf",
+            "playing_command_hex": "04fb0306000109"
+          },
+          "expected_delta": 16,
+          "expected_track": 3,
+          "selected_track": 2,
+          "uart_command_hex": "04fb030600020a",
+          "uart_suffix_sha256": "d0e83aa82a80875fda5de8498944692b25b2f9fcffd5f3f74d5b7a65ddd5b730"
+        },
+        {
+          "name": "encoder_counterclockwise",
+          "delta": -16,
+          "edge_period_ms": 5,
+          "controller": "PASS",
+          "gpio_edges": 64,
+          "app_status": "PASS",
+          "app_reason": "track_index_verified",
+          "baseline": {
+            "track": 2,
+            "playback_status": 1,
+            "uart_bytes": 56,
+            "uart_sha256": "1e008f80ccd8731435956101308d04947fdd84e8a8b8f831e7ccd9c6369d1d65",
+            "playing_command_hex": "04fb030600020a"
+          },
+          "expected_delta": -16,
+          "expected_track": 7,
+          "selected_track": 7,
+          "uart_command_hex": "04fb030600070f",
+          "uart_suffix_sha256": "7b399a12a4f5228f69644618671351d58b8c2048924af6bfb5ebe75e8fc66925"
+        }
+      ],
+      "uart_bytes": 138,
+      "uart_sha256": "29ae282f59b4f1d6cafc7590a5785df9001b6cbd8bfb318ca9962b8915a92caa",
+      "serial_bytes": 226,
+      "serial_sha256": "15980f7fcbd82873cb5e51ee2a8c524166d030d863c822276d849b13f550c113",
+      "evidence_zip_sha256": "d76dea2383f7baf1224fcd701fc58c59c8815987acfd1f35d55457a02b4c1ab2",
+      "evidence_zip_crc_verified": true,
+      "flash_released": true,
+      "active_leases": 0,
+      "isolated_services_exited": true,
+      "burner_submitted": false
+    }
+  ],
+  "physical_hardware": "NOT RUN",
+  "browser_wasm": "NOT RUN",
+  "pcm": "NOT RUN"
+}

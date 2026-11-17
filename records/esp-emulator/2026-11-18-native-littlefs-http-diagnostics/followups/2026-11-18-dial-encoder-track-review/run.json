@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "title": "Dial 原版快转与选曲审核复核",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "publication_tier": "public",
+  "source": {
+    "device_service_executed": "929dbf749e4a8ecd6c469fce8aea44120febd03f",
+    "reviewer_early_control": "412b47d7392af6fc3526eb5887c3fe82cbf69f3d",
+    "r1f27_application": "d9d2af725412df9554bc1bf154efff8a541adf15",
+    "r1f27_library": "533c9d0198e72621d55a4d35f726d3d53a7e1431",
+    "earlier_live_gpio_evidence": "https://github.com/m5agent/m5stack-esp-emulator/blob/929dbf749e4a8ecd6c469fce8aea44120febd03f/docs/evidence/2026-11-18-dial-fast-rotary/original-pair-summary.json",
+    "emulator_evidence_main": "ca07fbba4c16877ec857d4cf9a36085f05568802",
+    "reviewer_exact": "22569f70b6121f7eab263cf0364855b228497f79",
+    "emulator_ci_completed_success": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44202285287"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "device": "M5Dial",
+    "unit": "AudioPlayer U197 / N9301 PORT.B",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_r1f30_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "r1f27_stock_sha256": "8071c1c3ed192130103d7dfa64a26cc2d32b962ae82296686cc2d007ea60737c",
+    "r1f27_irq_sha256": "bf870c8ea73c06b8f1653a794f4f7856bb5ab80da8dc357adfc02395c2a6c416"
+  },
+  "execution": {
+    "uninstrumented_runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "original_cold_runs": 2,
+    "track_count": 7,
+    "reviewer_api": "0.17.0",
+    "reviewer_local_tests_passed": 247,
+    "reviewer_native_runs": 3
+  },
+  "checks": [
+    {
+      "name": "Original R1F30 GPIO edge totals across all actions",
+      "status": "PASS",
+      "actions": 36
+    },
+    {
+      "name": "Original R1F30 indexed track at 35 ms",
+      "status": "PASS",
+      "correct": 18,
+      "actions": 18
+    },
+    {
+      "name": "Original R1F30 indexed track at 5 ms",
+      "status": "PARTIAL",
+      "correct": 14,
+      "actions": 18
+    },
+    {
+      "name": "Rebuilt R1F27 stock and S3 IRQ registration variant",
+      "status": "PASS",
+      "correct_per_variant": 14,
+      "actions_per_variant": 14,
+      "scope": "Equal result within the paired run"
+    },
+    {
+      "name": "Earlier R1F30 Reviewer readiness assertion",
+      "status": "FAIL",
+      "scope": "Initial acceptance used a zero-byte UART baseline"
+    },
+    {
+      "name": "Final Reviewer controller delivery and positive track proof",
+      "status": "PASS",
+      "delivered_actions": 6,
+      "positive_application_actions": 2
+    },
+    {
+      "name": "Final Reviewer controlled wrong expected track rejection",
+      "status": "PASS",
+      "job_code": "E_SIM_ENCODER_TRACK_MISMATCH",
+      "scope": "Expected track 5 and actual track 4"
+    },
+    {
+      "name": "Final Reviewer original fast indexed track",
+      "status": "PARTIAL",
+      "correct": 1,
+      "actions": 2,
+      "scope": "Clockwise expected track 3 and actual track 2"
+    },
+    {
+      "name": "Physical hardware, browser WASM, PCM and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/r1f30-uninstrumented.summary.json",
+      "sha256": "8571e1689f7694c4e64b00d3ba8c20dd75c62bfc77329f360a9cbe1dcac778b6",
+      "bytes": 4217
+    },
+    {
+      "path": "evidence/r1f27-rebuilds.summary.json",
+      "sha256": "ce0e02bf604563cc7d8a62dfbc2535aaf7b4347c43f15c326399cb47ac3455d0",
+      "bytes": 4777
+    },
+    {
+      "path": "evidence/reviewer-early-baseline.summary.json",
+      "sha256": "50903ae1ecaaf07b05273f7c02f1d5f2d821bc47be87bb911e9197564ad8dba3",
+      "bytes": 2794
+    },
+    {
+      "path": "evidence/reviewer-final-sourcebound.summary.json",
+      "sha256": "705236808466a4d813d2767fa5ce727e7b120a0f91a2f882c7af357a40522dd7",
+      "bytes": 7297
+    }
+  ]
+}
