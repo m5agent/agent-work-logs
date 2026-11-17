@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "pr",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #427: keep clocking a held SDA until a STOP holds (host-level review)",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/427",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "21213080fba00c675d5dcca0ef2abd4b349e3cef",
+    "head_commit": "b8f5d89d516e8d88babec9c08103a9a6e52b5e9f"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS local; clang C++11; no ESP32-C5 hardware; Device Service has 36 profiles and no C5; esp-emulator QEMU backends are esp32s3/esp32c6/esp32/native/raspi3b only",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "3 files: src/board_detect/probe_hardware.inl (+12/-15), test/board_detect/README.md (+1), test/board_detect/held_sda_release.cpp (new, 118 lines)"
+    },
+    {
+      "id": "code-facts",
+      "status": "PASS",
+      "detail": "do/while at probe_hardware.inl:31-41; STOP per clock (SCL high, SDA low->high); cap ++i < 10; break on wait_i2c_scl_high failure; SCL held low at entry returns false without clocking"
+    },
+    {
+      "id": "callers-pre-detection",
+      "status": "PASS",
+      "detail": "3 call sites (probe_i2c_bus_present recover :55, recover_held_sda_and_resample :90, probe_i2c_ack :129) all run before the master starts any transaction, and each restores pin state afterwards"
+    },
+    {
+      "id": "host-suite",
+      "status": "PASS",
+      "detail": "sh test/board_detect/run.sh at b8f5d89: C++ test programs: 34 passed (exit 0)"
+    },
+    {
+      "id": "new-test-cases",
+      "status": "PASS",
+      "detail": "held_sda_release.cpp alone: 43 cases passed"
+    },
+    {
+      "id": "new-test-detects-old-code",
+      "status": "PASS",
+      "detail": "same test against develop b48dce0 release_held_sda(): Assertion failed at held_sda_release.cpp:90 (first 0x2D case), exit 134"
+    },
+    {
+      "id": "independent-model",
+      "status": "PASS",
+      "detail": "code/sim_slave.cpp (written for #424) against b8f5d89: 5/5, failures=0 (issue case true/2, all-zero true/8, one-clock true/1, write ACK true/10, stuck SDA false/10)"
+    },
+    {
+      "id": "termination-bound",
+      "status": "PARTIAL",
+      "detail": "host model only: a peripheral that never releases SDA returns false after 10 SCL pulses; no such case in the PR's own test"
+    },
+    {
+      "id": "ci-checks",
+      "status": "PASS",
+      "detail": "PR #427 checks: catalog, IDF 5.1.6/5.4.3/6.0.2 and Arduino-ESP32 2.0.17/3.1.3 builds for C3/C5/C6/C61/H2/P4/S3 all pass"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "ToughC5 + UnitNFC and Nesso N1 internal-IMU reset campaigns not reproduced; author's table quoted only"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 profile and no esp32-c5 emulator backend; C6 profiles exist but a reset that leaves the internal IMU driving SDA mid-byte cannot be injected"
+    },
+    {
+      "id": "other-boards",
+      "status": "NOT RUN",
+      "detail": "TimerCam/PowerHub/Cardputer/VAMeter/StampS3Bat/PaperS3/PaperDIY/UnitC6L/CoreMatrix/CoreP4X/StampP4XHub not tested (author also lists them as unverified)"
+    },
+    {
+      "id": "write-ack-timing",
+      "status": "NOT RUN",
+      "detail": "receiver holding SDA in its ACK slot verified in the host model only"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-427-meta.json",
+    "evidence/commits.txt",
+    "evidence/function-diff.patch",
+    "evidence/source-lines.txt",
+    "evidence/host-run-pr427.log",
+    "evidence/held-sda-pr427.txt",
+    "evidence/held-sda-develop.txt",
+    "evidence/sim-independent-pr427.txt",
+    "evidence/build-commands.txt",
+    "evidence/platform-coverage.txt",
+    "code/sim_slave.cpp"
+  ],
+  "notes": [
+    "PR left OPEN; one Japanese comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
+    "The change matches what was agreed in #424 (per-clock STOP, cap 10 clocks); the only review suggestion is an optional extra test for a peripheral that never releases SDA.",
+    "Author's hardware table (ToughC5 0/70, Nesso N1 0/40, StickS3 0/40, CardputerADV 0/40, Tab5 0/40) is quoted, not reproduced here."
+  ]
+}

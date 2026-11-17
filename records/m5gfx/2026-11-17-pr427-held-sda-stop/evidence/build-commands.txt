@@ -1,0 +1,21 @@
+# All commands run in a worktree at PR head b8f5d89 (base develop 2121308), macOS clang, C++11.
+# 1. author's new test alone, PR head code
+c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -pedantic \
+  '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
+  -include test/board_detect/support/native_devices_io.hpp \
+  -Itest/board_detect -Itest/board_detect/stubs -Isrc test/board_detect/held_sda_release.cpp -o held
+# -> compiled with no diagnostics; run prints "held SDA release: 43 cases passed"
+
+# 2. same test, release_held_sda() replaced by the develop b48dce0 version
+git show b48dce0:src/board_detect/probe_hardware.inl > src/board_detect/probe_hardware.inl
+# (recompile as above, run -> assert at held_sda_release.cpp:90, exit 134; file restored with git checkout)
+
+# 3. whole host suite at PR head
+sh test/board_detect/run.sh
+# -> "C++ test programs: 34 passed"
+
+# 4. independent model (code/sim_slave.cpp, written for #424) against PR head code
+c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -pedantic \
+  '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
+  -include test/board_detect/support/native_devices_io.hpp \
+  -Itest/board_detect -Itest/board_detect/stubs -Isrc code/sim_slave.cpp -o sim_pr
