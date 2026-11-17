@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "date": "2026-11-18",
+  "title": "Tab5 native DSI admission and Reviewer frame observations",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "emulator_base": "dacf6efbb7c7836821874916ff704ba6b96a2e49",
+    "emulator_initial_candidate": "b75853e39afc82b28594b43ce6ffe177de178055",
+    "emulator_cache_guard_candidate": "c6a5ab02da5928f396aa716c1bb385e5de355d4d",
+    "reviewer_public_runtime_candidate": "99d504439b2aa945e757123651bbb40037cbb229",
+    "reviewer_watchdog_candidate": "5807a7890aca0a6a0cdb2dcc399e96599114786a",
+    "emulator_main": "929dbf749e4a8ecd6c469fce8aea44120febd03f",
+    "reviewer_main": "5807a7890aca0a6a0cdb2dcc399e96599114786a",
+    "published_bounded_summary": {
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/blob/929dbf749e4a8ecd6c469fce8aea44120febd03f/docs/evidence/2026-11-18-tab5-stock-frame-comparison/frame-admission-summary.json",
+      "sha256": "05d9ad8645e5a3d69ad2ec3716d8b34e358a4d1f1d59d6b0b2a2e86c821dcf08",
+      "bytes": 25528
+    }
+  },
+  "hardware": {
+    "scope": "native virtual-device validation",
+    "device": "tab5"
+  },
+  "firmware": {
+    "carplay_original_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+    "carplay_normalized_flash_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b",
+    "official_userdemo_original_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+    "official_userdemo_normalized_flash_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9"
+  },
+  "execution": {
+    "device_service_candidate_api": "1.84.0",
+    "native_esp_emu_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "reviewer_api": "0.16.0"
+  },
+  "checks": [
+    {
+      "name": "Static review of capture-path metadata and fallback errors",
+      "status": "REVIEW"
+    },
+    {
+      "name": "Same original CarPlay admitted frame, unlisted early-model-gap boundary",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Native receiver connected without a complete frame",
+      "status": "PASS",
+      "scope": "confirmed with official UserDemo serial-only observation"
+    },
+    {
+      "name": "Reviewer native and legacy structured observation paths",
+      "status": "PASS"
+    },
+    {
+      "name": "Official UserDemo original admission and connected/no complete frame",
+      "status": "PARTIAL",
+      "admitted_no_frame_responses": 17,
+      "unlisted_missing_elf_responses": 7
+    },
+    {
+      "name": "Earlier unreleased Reviewer aborted on live Tab5 qemu runtime label",
+      "status": "FAIL",
+      "scope": "Reviewer observation control flow, not the firmware"
+    },
+    {
+      "name": "CarPlay completed bound native observation after a DSI 409",
+      "status": "PASS",
+      "seconds": 60.012,
+      "valid_png_samples": 12
+    },
+    {
+      "name": "Native Tab5 rejects shared preview and still returns a fresh DSI PNG",
+      "status": "PASS",
+      "http_status": 409
+    },
+    {
+      "name": "Early corrected UserDemo complete serial-only observation with a ROM LP watchdog reset",
+      "status": "PARTIAL",
+      "seconds": 60.0083,
+      "connected_no_frame_samples": 13,
+      "rom_watchdog_resets": 1
+    },
+    {
+      "name": "Final UserDemo admitted original with native connected no-frame and matched ROM LP watchdog",
+      "status": "PARTIAL",
+      "observation_seconds": 60.0103,
+      "capture_conflicts": 13,
+      "serial_rom_watchdog_resets": 1,
+      "review_error": "E_SIM_WATCHDOG_RESET",
+      "firmware_conclusion": "UNRESOLVED"
+    },
+    {
+      "name": "Unlisted same official UserDemo serial-only observation",
+      "status": "PARTIAL",
+      "observation_seconds": 60.0023,
+      "review_error": "E_EVIDENCE_UNAVAILABLE"
+    },
+    {
+      "name": "Device Service full platform suite",
+      "status": "PASS",
+      "tests": 2419,
+      "skipped": 10
+    },
+    {
+      "name": "Reviewer unit suite",
+      "status": "PASS",
+      "tests": 234
+    },
+    {
+      "name": "Exact emulator GitHub CI at archive time",
+      "status": "PENDING",
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44197101530"
+    },
+    {
+      "name": "Browser WASM, hardware, resident release and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/direct-tab5-and-earlier-reviewer.summary.json",
+      "sha256": "5ac23bacd3a695081c233e7e9a94296b2e5979d9cb1827d37d656ec2710eeb77",
+      "bytes": 13538
+    },
+    {
+      "path": "evidence/tab5-observation-and-preview-controls.summary.json",
+      "sha256": "ad2ad317829d113b02f86f6379700ef2afa3d891136aa01c3c6bb7a66cdd7e2c",
+      "bytes": 8812
+    },
+    {
+      "path": "evidence/tab5-userdemo-final-review.summary.json",
+      "sha256": "980d9a6c9d2679d5b6b4bdf8bb7ae9268ae13088ef174c33af730f7a9c4b64a9",
+      "bytes": 7056
+    }
+  ]
+}
