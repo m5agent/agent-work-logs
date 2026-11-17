@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Tab5 ST7123 standby latch and restart",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "4160e5d27732742052e2246bffb773a718373ca6",
+    "candidate_commit": "2a4edd56d1e7023e7fef30026f3760a4a083b24e",
+    "published_emulator_commit": "5a87913bf60dcde84420661d279ab5e0c9c9154c"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "board": "Tab5 ST7123"
+  },
+  "firmware": {
+    "sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+    "virtual_flash_sha256": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063"
+  },
+  "execution": {
+    "environment": "Isolated native Device Service and pinned esp-emu 1.1.0; exact artifact digests in evidence",
+    "release_scope": "candidate"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "name": "P4 I2C expander output to EN"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "name": "Chip disabled, quiet UART, retained power receipt, restart"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "name": "Virtual DSI shutdown and title frames"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "name": "Physical power and backlight measurements"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "FAIL",
+      "name": "Shutdown frame during concurrent platform regression"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "name": "Standalone frozen source and runtime power and restart recheck"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/gateway-power-summary.json",
+      "sha256": "1dc9fbf9f0ca245a84457d21e04914846124f82521ce271dae7ea65ccdb449ae",
+      "kind": "summary"
+    },
+    {
+      "path": "evidence/concurrent-replay-summary.json",
+      "sha256": "d0cbee38c46f2aafa85a1c7981d10c03aadf9d2ef6975a3ace15b94435a11def",
+      "kind": "summary"
+    },
+    {
+      "path": "evidence/frozen-native-replay-summary.json",
+      "sha256": "5dcbb0900f20465b54e75dce3fb8c5258b55e216821b4bcbf2474cd2d20b3074",
+      "kind": "summary"
+    }
+  ],
+  "notes": [
+    "Runtime identifiers and byte-level hashes retained. Raw artifacts and session identifiers omitted.",
+    "No Burner submission."
+  ]
+}

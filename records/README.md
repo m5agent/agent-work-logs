@@ -18,6 +18,10 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | ESP Emulator | Tab5 ST7123 原版关机与重启 | `PASS`（指定 ST7123 虚拟 EN、原版 DSI 与重启） | [查看](esp-emulator/2026-11-17-tab5-power-latch/) |
+| 2026-11-17 | ESP Emulator | StickS3 原版首次配网门户 | `PASS`（关联、DHCP、ARP、只读首页；提交凭据待验） | [查看](esp-emulator/2026-11-17-sticks3-portal-page/) |
+| 2026-11-17 | ESP Emulator | Cardputer 原版 Fn 审核动作 | `PARTIAL`（原版两板缓存重建和 ADV 清除已验证，完整交互待验） | [查看](esp-emulator/2026-11-17-cardputer-review-fn-controls/) |
+| 2026-11-17 | ESP Emulator | Core2 会话自动解码 core dump | `PASS`（CPU1 看门狗和 abort 的受控会话，任务 PC 与 ELF） | [查看](esp-emulator/2026-11-17-native-crash-diagnostics/followups/2026-11-17-core2-session-coredump/) |
 | 2026-11-17 | ESP Emulator | 初代 Cardputer 普通会话原生 PCM | `PASS`（两板数字输入、输出和静音对照） | [查看](esp-emulator/2026-11-17-cardputer-owned-native-pcm/) |
 | 2026-11-17 | ESP Emulator | Tab5 原生 ST7123 单点拖动 | `PASS`（原生拖动探针及已有输入回归） | [查看](esp-emulator/2026-11-17-tab5-st7123-drag/) |
 | 2026-11-17 | ESP Emulator | StickS3 原版配网和隔离夹具对照 | `PARTIAL`（原版热点与 SDK 数据面通过） | [查看](esp-emulator/2026-11-17-sticks3-original-portal/) |

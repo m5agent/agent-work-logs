@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Bounded Core2 UART core dump task contexts in Device Service",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "4160e5d27732742052e2246bffb773a718373ca6",
+    "device_service_source": "3748b02807cdcd22096e70b5f647c7385164ba08",
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d"
+  },
+  "hardware": {},
+  "firmware": {
+    "watchdog": {
+      "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+      "elf_sha256": "1916d0ba967d78f1028c27a25073bef7b94a683159fafd1c88e089bac9e678a4"
+    },
+    "abort": {
+      "firmware_sha256": "ffb215be79beabd024e390c4fb3e9e8336e2e94e34b60fd42c690a8d2e634677",
+      "elf_sha256": "1efaa30640a12dc3d9f8ccbf0461ec4b0844e2b5b9da58af633d50d8a7f84f9b"
+    }
+  },
+  "execution": {
+    "environment": "isolated Device Service on native Core2 Xtensa QEMU",
+    "validation": "virtual-device validation",
+    "runtime_sha256": "7d19fd18eb0adeddcf36070c1d3c0e81c028552dcd4f76195e3234cdc1e9c03a",
+    "session_identity": "per-session ZIP SHA-256 after removing local identifiers",
+    "burner": "NOT RUN"
+  },
+  "checks": [
+    {
+      "check": "CPU1 WDT and abort complete UART transfers",
+      "level": "transport",
+      "status": "PASS"
+    },
+    {
+      "check": "5 and 6 saved task contexts with applicable matched ELF task PC symbols",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "check": "wrong and absent ELF cannot resolve task PC symbols",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "check": "ZIP receipt and ordinary API equality, CRC, console-range SHA and stop/restart readback",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "check": "vendor offline independent decode of both same archives",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "check": "task names and priorities in live HTTP, other formats, physical and browser",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/session-task-context-summary.json",
+      "sha256": "a087f5497e84819745b1f2e07ce2856aac7cd01aa1e3a823130f07429b65a439",
+      "bytes": 3142
+    },
+    {
+      "path": "evidence/combined-native-summary.json",
+      "sha256": "0c0e97d6e31adb6c3573b40b6b98a547c4f61f9a0acd1bd0d5707e9706ec2cd2",
+      "kind": "summary"
+    }
+  ],
+  "notes": [
+    "The evidence is a bounded digest and structured summary, with raw guest state and local identifiers excluded."
+  ]
+}

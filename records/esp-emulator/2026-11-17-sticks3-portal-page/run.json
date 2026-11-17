@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "StickS3 original setup page in the native virtual device",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "4160e5d27732742052e2246bffb773a718373ca6",
+    "commit": "d627ac203218e64387355b3ea541809b4bad3157"
+  },
+  "hardware": {
+    "device_profile": "sticks3",
+    "mode": "virtual-device validation"
+  },
+  "firmware": {
+    "original_app_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+    "composed_flash_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70"
+  },
+  "execution": {
+    "environment": "native Xtensa + isolated Device Service",
+    "runtime_sha256": "eca4ab4bce50c10834fc92b12a3bdb69fd4c504c3281bec03574322dc6b98187",
+    "clock": "default native service",
+    "network_profile": "sticks3-open-softap-portal"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "name": "pinned native source application, reverse replay, and Xtensa build",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "name": "native auth and association, DORA, ARP and one bidirectional TCP flow",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "HTTP 200 and exact protocol/body readback match the peer receipt",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "legacy SSID negative control on unchanged original and SDK button/reset regression",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "initial native association/ARP without recovery from startup TCP reset",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "credential submission and STA handoff on original",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Browser WASM and physical RF",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/portal-session-summary.json",
+    {
+      "path": "evidence/combined-native-summary.json",
+      "sha256": "56ffabcce776645d9f0b4cedde504190f00a57a13e8327e1d72af62fd7667b96",
+      "kind": "summary"
+    }
+  ],
+  "notes": [
+    "The overall result covers the isolated virtual first-boot setup page."
+  ]
+}

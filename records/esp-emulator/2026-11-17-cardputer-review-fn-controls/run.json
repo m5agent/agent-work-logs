@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer Fn control requirements and native guest acceptance",
+  "source": {
+    "repository": "firmware-review-service",
+    "base_commit": "ff8609e675ede52d16cbeb52d4752e7d7eb1bba0",
+    "candidate_commit": "fa90d9a361a3b27e4d9eb02e76d7245e9c485e73",
+    "device_service_commit": "4160e5d27732742052e2246bffb773a718373ca6"
+  },
+  "hardware": {
+    "target_models": [
+      "Cardputer K132",
+      "Cardputer ADV"
+    ],
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "name": "CardputerDict",
+    "version": "0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "composed_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929"
+  },
+  "execution": {
+    "environment": "macOS arm64 native QEMU, virtual-device validation",
+    "runtime_sha256": "7d19fd18eb0adeddcf36070c1d3c0e81c028552dcd4f76195e3234cdc1e9c03a",
+    "burner": "NOT SUBMITTED",
+    "released_all_owned_leases": true
+  },
+  "checks": [
+    {
+      "scope": "reviewer tests",
+      "status": "PASS",
+      "passed": 168
+    },
+    {
+      "scope": "default saved snapshot input planning and dispatch",
+      "status": "PASS"
+    },
+    {
+      "scope": "native per-action SPI control on both Cardputer variants",
+      "status": "PASS"
+    },
+    {
+      "scope": "Cardputer ADV application query cleared",
+      "status": "PASS"
+    },
+    {
+      "scope": "complete original review",
+      "status": "PARTIAL",
+      "code": "E_INTERACTION_CLAIM_PARTIAL"
+    },
+    {
+      "scope": "external network, physical hardware, browser, submission",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/execution-summary.json"
+  ],
+  "notes": [
+    "The same original was executed in all named validation cells. Device and job IDs are omitted."
+  ]
+}
