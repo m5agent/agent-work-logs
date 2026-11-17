@@ -224,6 +224,31 @@
       "name": "round 12: upstream comment",
       "status": "PASS",
       "details": "Posted one English comment at https://github.com/m5stack/M5GFX/issues/418#issuecomment-6939134071; issue left open, no upstream push, no repository changed."
+    },
+    {
+      "name": "round 13: A re-scored by latency",
+      "status": "REVIEW",
+      "details": "Only a <=110 ms post-resumption band is mechanically possible once the refresh period is 21-30 ms. 226 gaps then give 1 rail event (19 ms, intensity 13) against 0.081 expected from the free-running rail rate (2.60/h), Poisson P(>=1)=0.078, post-hoc. The three column bursts at 424-668 ms are 8-30 refresh periods after their gap and score as free-running. The author's 4-vs-0.733 (p=0.0067) counts those three."
+    },
+    {
+      "name": "round 13: B controlled association",
+      "status": "REVIEW",
+      "details": "6/7 fast-read bursts followed by a mid-rail episode 69-453 ms later vs 0/3 controls, Fisher exact one-tailed p=0.033. Missing cell: 500 ms of 3 ms reads at quiet moments without a burst; without it a read-rate provocation and a burst-triggered second episode are indistinguishable."
+    },
+    {
+      "name": "round 13: refresh period vs lifetime",
+      "status": "REVIEW",
+      "details": "8-11 byte-identical reads at 3 ms = 21-30 ms set the report refresh period, so 'no decay' is a property of the latch and the 24 ms poll samples at ~1x refresh. If the lifetime were an independent 21-54 ms, P(two reads per episode) ~ 0.52, and 38/38 two-read episodes has P ~ 1e-11; the tension is resolved by counting semantics, read extension (ruled out by direction) or phase lock. Round 12's 'two reads => lifetime >= one poll interval' is withdrawn if it is counting semantics."
+    },
+    {
+      "name": "round 13: gate leak",
+      "status": "REVIEW",
+      "details": "The mid-rail pair reached intensity 30-31 and passed the 24 gate; 30-31 is inside the real first-scan range 26-47, so intensity no longer separates this shape and the ghost maximum of 22 is void for it. The both-long-edge whole-read rule covers the demonstrated escape but leaves single-edge frames (61/97 at x=0) on intensity alone, has 3 counts of right-side margin (696 vs real 693) inside the delta<=3 coordinate spread, and would zero a legal two-finger edge frame if applied at the driver level."
+    },
+    {
+      "name": "round 13: upstream comment",
+      "status": "PASS",
+      "details": "Posted one English comment; issue left open, no upstream push, no repository changed."
     }
   ],
   "evidence": [
