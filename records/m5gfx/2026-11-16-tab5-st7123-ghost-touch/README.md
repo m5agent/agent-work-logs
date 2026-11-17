@@ -248,3 +248,6 @@ A 段 30 min 完全不写 flash（日志留 RAM 后落盘，0 行丢失），B �
 `code-level verification`（develop b48dce04 与 pinned d91077b9 的驱动源码 + 其数字的算术）。
 物理 Tab5 与虚拟设备均 `NOT RUN`（服务级 `tab5_enabled: false`，ST7123 触摸为固件
 GDB 邮箱，无 0x43 扩展器与 reset 线模型）。
+
+第十二轮回复：[issuecomment-6939134071](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6939134071)
+（英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。
