@@ -174,13 +174,58 @@
       "name": "DCS 0x0A as a display-liveness witness",
       "status": "REVIEW",
       "details": "0x0A read 0x9C while the panel was blank, so the power-mode read does not prove visible output; earlier '0x9C means awake' inferences are withdrawn."
+    },
+    {
+      "name": "round 12: gap-free idle run accepts the free-running reading for the column shape",
+      "status": "REVIEW",
+      "details": "Author: 30 min with no flash writes, log in RAM flushed after (0 lines lost), 15 bursts = 30/h, 13 free-running; 15 min with a flash op every 8-12 s, 2 bursts, 0/90 ops followed by a burst within 1 s, no op caused a >40 ms poll gap or >30 ms CPU stall. Removes both confounders named in round 11; the stall-trigger reading for the column shape is withdrawn. Device-side measurement, not reproduced here."
+    },
+    {
+      "name": "round 12: gap hypothesis splits by shape (rail 2/0 vs column 0/15)",
+      "status": "REVIEW",
+      "details": "Both rail bursts are the two gap-led bursts (81-95 ms after a 63-72 ms gap); all 15 column bursts are free-running. 2x2 Fisher exact two-tailed p=0.0147 post-hoc (evidence/idle-free-running-check.py). 2/34 gaps followed by a rail burst, ~6% per gap. Author-observed; the association is post-hoc and needs a forced-gap confirmation."
+    },
+    {
+      "name": "round 12: 0x0005-0x0009 = 02 d0 05 00 0a decodes to 720x1280, capacity 10",
+      "status": "REVIEW",
+      "details": "Author read. 720/2 = 360, not 358: 358 is 1.5-2 counts below the coordinate centre 359.5, so the 716 coincidence is dead but 'half-width' is off by two counts."
+    },
+    {
+      "name": "round 12: driver does not scale or clamp with 0x0005/0x0006",
+      "status": "PASS",
+      "details": "Touch_ST7123.inl:59-68 (develop b48dce04) and Touch_ST7123.cpp:58-62 (pinned d91077b9) use the five bytes only in the all-zero liveness sum; _cfg.x_max/y_max default to 2047 (Touch_ST7123.hpp:34-37, identical at both revisions). A driver default coordinate can only be 0 or 2047, not 358."
+    },
+    {
+      "name": "round 12: driver honours the slot valid bit (corrects round 11 wording)",
+      "status": "PASS",
+      "details": "Touch_ST7123.inl:144 / .cpp:141 skip slots whose valid bit is clear, so '9 is the fullest read, slot 9 never valid' is the chip's own report and the round-11 phrase 'emits every slot with valid=1' was wrong."
+    },
+    {
+      "name": "round 12: ghost x sits on a 20 px lattice with exact mirror pairs",
+      "status": "REVIEW",
+      "details": "174 points, x only 0,140,179,357-359,538,578,719; lattice x=20k-1 residual <=2; mirror sums 717-719 (axis 358.5-359.5); y residuals -7..+9 and unordered by slot. Arithmetic over the author's two pasted frames only."
+    },
+    {
+      "name": "round 12: 20 px x pitch alone is not a discriminator",
+      "status": "PASS",
+      "details": "8/29 real press x values fall within +-1 of 20k-1 (chance ~3/20, expected 4.35, 1.9 sigma), so the pitch cannot separate ghost from finger; the mirror-pair relation would, but is indistinguishable from a symmetric two-finger pinch without multi-touch data."
+    },
+    {
+      "name": "round 12: same-x backstop covers 8 of 17 bursts",
+      "status": "REVIEW",
+      "details": "Author measured 8/17 caught, and the intensity gate alone stopped all 17, so the backstop is a partial secondary rule, not the primary one. The 9 missed bursts carry one point per x."
+    },
+    {
+      "name": "round 12: A and B idle rates are not poolable",
+      "status": "REVIEW",
+      "details": "2 bursts/15 min in B vs 7.5 expected at A's 30/h, Poisson P(<=2|7.5)=0.020. Either the rate is non-stationary on a 15-30 min scale or the flash activity suppressed it; n=2 cannot separate them."
     }
   ],
   "evidence": [
     {
       "file": "README.md",
-      "bytes": 8987,
-      "sha256": "de9171b76c8c79d75b8a084879983a04897312385ecd17870855eccf76328fde"
+      "bytes": 18929,
+      "sha256": "a60631b8af90606c197cbe9aa402bcb11f9bb472a5c2ec6c60c7ba10b95bb43f"
     },
     {
       "file": "code/README.md",
@@ -226,6 +271,21 @@
       "file": "evidence/followup-panel-liveness.md",
       "bytes": 5037,
       "sha256": "e633c8b1c690ed432531208a3fdad9509fe8d4fde6bdbe66b4cebc396cf456b7"
+    },
+    {
+      "file": "evidence/followup-idle-free-running.md",
+      "bytes": 7458,
+      "sha256": "67619d79d21e4e74d4215e9a3f149563b18e98d7a92dc1ae7e28f478bf8b1b3d"
+    },
+    {
+      "file": "evidence/idle-free-running-check.py",
+      "bytes": 3393,
+      "sha256": "5045fc43b4187279425cc7abce6caeb48916beb911b01764e32c4f12a7433545"
+    },
+    {
+      "file": "evidence/idle-free-running-check.txt",
+      "bytes": 1653,
+      "sha256": "c0538505b29955823c61f4808ce8b5f7ec856e7b230eb3fdf12b57d7e215507c"
     }
   ],
   "notes": [
@@ -237,7 +297,8 @@
     "Round 6 corrects two statements: the 10 ms LCD_RST pulse did not clear with_coord (the clear coincided with the display entering sleep-in), and 0x08 is not a second precondition for ghost frames (A2/B3 are counter-cases).",
     "Round 6 reply posted as a single comment; the record is cited by permalink at 933e6e3.",
     "Round 7 withdraws the round-6 frame-gating claim and the '0x9C means awake' inference: the reporter's pull-up rows were a blank, non-reporting panel, so the pull-up zeros (mirror battery/boots, develop, earlier 0/58, bisect good steps) are panel-state-unknown rather than fixes.",
-    "Round 7 reply posted as a single comment; no issue close, no upstream push, no change to the reporter's repository."
+    "Round 7 reply posted as a single comment; no issue close, no upstream push, no change to the reporter's repository.",
+    "Round 12 withdraws the round-11 reading that a poll/flash stall produced the idle burst rate: with zero flash writes the column shape still ran at 30/h, while the rail shape alone stayed gap-locked (2/2, post-hoc p=0.0147). Round 12 also corrects two round-11 statements: the driver skips invalid slots rather than forcing valid=1, and 358 is not exactly half of max x 720 (360)."
   ],
   "followups": [
     {
@@ -267,6 +328,13 @@
       "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6918314585",
       "summary": "报告者更正上拉态屏幕空白、真实按压 0 次按下 0 帧；据此作废上拉态零帧结果、撤回第六轮帧门控与 0x9C 存活推断，并要求后续运行带画面 + 真手指门禁。",
       "evidence": "evidence/followup-panel-liveness.md"
+    },
+    {
+      "date": "2026-11-17",
+      "round": 12,
+      "source_comment": "https://github.com/m5stack/M5GFX/issues/418#issuecomment-6938977582",
+      "summary": "作者按要求做了无停顿空闲运行：30 min 零 flash 写仍 30 次/小时、13/15 自由运行，15 min 周期 flash 写段 90 次操作后 0 次 burst，从而对列形状撤回“停顿触发”。但两次轨 burst 恰是两次停顿后事件（15 次列 burst 全自由运行，Fisher p=0.0147 事后），说明是两个机制。寄存器读回 720×1280 修正 358 的算术并排除“驱动默认坐标”；174 点只落在 4 个 x 及其镜像上、栅距 20 px，x 为被扫描列、y 为逐点带出。后备规则实测覆盖 8/17，剩余 9 次不建议用镜像规则补。",
+      "evidence": "evidence/followup-idle-free-running.md"
     }
   ]
 }

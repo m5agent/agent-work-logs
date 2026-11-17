@@ -1,0 +1,42 @@
+== rates ==
+A: 15 bursts / 30 min      -> 30.0 /h
+B:  2 bursts / 15 min      -> 8.0 /h
+A+B pooled: 17 / 45 min    -> 22.7 /h
+previous run: 164 / 329 min-> 29.91 /h
+
+== significance ==
+P(>=2 bursts | lam=0.19)          = 0.0159
+P(<=2 bursts | lam=7.5, 15 min)   = 0.0203   (B vs A rate)
+Fisher exact, 2x2 (rail 2/0, col 0/15): one-tailed 0.00735, two-tailed 0.0147
+rail bursts per gap: 2/34 = 0.059 (5.9%)
+
+== chip registers 0x0005-0x0009 = 02 d0 05 00 0a ==
+max x = 720, max y = 1280, max touches = 10
+720/2 = 360.0   (0+719)/2 = 359.5   360-358 = 2   359.5-358 = 1.5
+
+== ghost x: 20 px lattice, x = 20k-1 ==
+  x=  0  k= 0  node= -1  residual=+1
+  x=140  k= 7  node=139  residual=+1
+  x=179  k= 9  node=179  residual=+0
+  x=357  k=18  node=359  residual=-2
+  x=358  k=18  node=359  residual=-1
+  x=359  k=18  node=359  residual=+0
+  x=538  k=27  node=539  residual=-1
+  x=578  k=29  node=579  residual=-1
+  x=719  k=36  node=719  residual=+0
+
+== mirror pairs (k <-> 36-k), axis = sum/2 ==
+    0 + 719 = 719   axis 359.5   vs 718: +1
+  140 + 578 = 718   axis 359.0   vs 718: +0
+  179 + 538 = 717   axis 358.5   vs 718: -1
+
+== y against the same lattice (residual should be small if y is electrode-derived) ==
+  centre column  residuals [9, -1, -1, -3, -4, -4, 6, -2, -2]  min -4 max +9
+  both rails     residuals [-3, -1, -2, -2, -2, -4, -7, -4, 6]  min -7 max +6
+
+== do real presses sit on the lattice by chance? ==
+  8/29 real x within +-1 of 20k-1 (chance ~3/20 = 15%, expected 4.35)
+  nearest real x to a rail: 35 from x=0, 26 from x=719
+
+== burst persistence ==
+  17/17 bursts are two consecutive reads 24 ms apart -> state lasts >= 1 poll interval
