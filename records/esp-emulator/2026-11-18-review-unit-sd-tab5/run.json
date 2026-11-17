@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Dial AudioPlayer review, saved SD admission and Tab5 passive write classification",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "reviewer_early": "6c0e666f0410292fd3af4a60d4944d26f0f800bb",
+    "reviewer_ab": "6402b43a6134778ee70f09e2cce1aec0658b43ba",
+    "reviewer_integrated": "30524015c15ead7940a66b53f496e1cd5f1cea07",
+    "review_device_service": "d99d4d00340b8ef3265a8b9d31252996e1f41d8c",
+    "tab5_replay_executed": "8eccd55bf92b77314ac1ce817392f293590e3364",
+    "reviewer_main": "30524015c15ead7940a66b53f496e1cd5f1cea07",
+    "tab5_integrated_parser": "dcc22c7fe7b261be6a6c40e18bc673a4a026e2f4",
+    "tab5_integrated_evidence": "05bdfd86a9ad668eec06ec817776ee27f3b49a01",
+    "tab5_integrated_retained_readback": "b92d7b5630687cb7d7142346a39839ef61bd0116",
+    "emulator_main": "b92d7b5630687cb7d7142346a39839ef61bd0116",
+    "source_main_readbacks": "PASS"
+  },
+  "hardware": {
+    "devices": [
+      "Dial",
+      "PaperDIY",
+      "PaperS3",
+      "Cardputer",
+      "Tab5"
+    ],
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "dial_original_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "paperdiy_probe_sha256": "7a10bda2976950dceb98c41744f35ec9a7da7f320d602f24cc5a9c838e47af94",
+    "papers3_original_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624",
+    "cardputerdict_original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "98tab5_original_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d"
+  },
+  "execution": {
+    "dial_runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "sd_runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "tab5_new_guest_sessions": 0,
+    "reviewer_api": "0.11.0",
+    "reviewer_unit_tests": 210,
+    "device_service_api": "1.81.0"
+  },
+  "checks": [
+    {
+      "name": "Final emulator platform suite",
+      "status": "PASS",
+      "ran": 2416,
+      "skipped": 10,
+      "seconds": 180.63,
+      "receipt_sha256": "fe061a3744607fd558a99d27830970c0c3eb78653c27719c374d02beded0dba4",
+      "receipt_bytes": 53770
+    },
+    {
+      "name": "Runtime coverage, catalog, QEMU profiles, project snapshot and source scope",
+      "status": "PASS"
+    },
+    {
+      "name": "Final integrated reviewer test suite",
+      "status": "PASS",
+      "tests": 210
+    },
+    {
+      "name": "Initial Dial original playback baseline reached in three seconds",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Dial exact original saved review passed positive and integrated re-run",
+      "status": "PASS",
+      "matching_windows_each": 2
+    },
+    {
+      "name": "Deliberate 1318 Hz Dial control and ACL boundary",
+      "status": "PASS",
+      "wrong_tone_assertion": "FAIL",
+      "acl_assertion": "PARTIAL",
+      "wrong_tone_windows": 24
+    },
+    {
+      "name": "PaperDIY actual reviewer plan/admission plus independent native Device Service probe",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperS3 saved review respects absent stamp capability and no live write assertion",
+      "status": "PARTIAL",
+      "automatic_stamp_requests": 0,
+      "independent_typed_409": 1
+    },
+    {
+      "name": "Legacy same original CardputerDict retained SD forced positive",
+      "status": "PASS",
+      "overall_review": "PARTIAL"
+    },
+    {
+      "name": "Tab5 passive chronological write failure classification",
+      "status": "PASS",
+      "98tab5_write_attempts": 31
+    },
+    {
+      "name": "New Tab5 guest, PaperDIY full reviewer, M5TabOS HTTP, real hardware, browser and resident deployment",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Integrated Tab5 write-attempt OpenAPI byte readback and same-retained-lease GET/ZIP behavior",
+      "status": "PASS",
+      "bounded_historical_http_cases": 2
+    },
+    {
+      "name": "Emulator remote CI",
+      "status": "REVIEW",
+      "detail": "pending at publication"
+    },
+    {
+      "name": "Burner publication",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/dial-u197-review-summary.redacted.json",
+      "bytes": 51762,
+      "sha256": "49073714df5bdc1f92d3315fc502765efbb944038998c0189a6ab4977b7f2171"
+    },
+    {
+      "path": "evidence/reviewer-sd-admission-summary.redacted.json",
+      "bytes": 11744,
+      "sha256": "8b840369310dc4ee1813aceedd59975e58a4e755d82821fd9a98221ff407e87a"
+    },
+    {
+      "path": "evidence/tab5-stock-write-report-summary.redacted.json",
+      "bytes": 20634,
+      "sha256": "2072c618353c69cb13f52eec2c31a7c7192918b78c992dbd22c7b100488af0aa"
+    }
+  ]
+}
