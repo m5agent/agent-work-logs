@@ -19,6 +19,7 @@
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
 | 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
+| 2026-11-17 | ESP Emulator | 原生实时 PC、Tab5 触摸、NC1020 存档、Dial 音频控制与设备能力预检 | `PARTIAL`（同客体功能与 HTTP 预检通过，原版全面行为保留限制） | [查看](esp-emulator/2026-11-17-native-review-evidence-next/) |
 | 2026-11-17 | ESP Emulator | Tab5 ST7123 原版取帧和 GT911 拖动 | `PARTIAL`（Arduventure 进入应用，CarPlay 拖动控制器与单击验证，ST7123 动态触控待验证） | [查看](esp-emulator/2026-11-17-tab5-st7123-gt911-gestures/) |
 | 2026-11-17 | ESP Emulator | Dial 普通输入节奏与原驱动 | `PARTIAL`（默认 35 ms 通过，显式 5 ms 同步重画仍少计） | [查看](esp-emulator/2026-11-17-native-review-input-and-storage/followups/2026-11-17-dial-default-rotary-pacing/) |
 | 2026-11-17 | ESP Emulator | 原生 C6 RISC-V 崩溃符号 | `PASS`（同一 Nesso N1 原生探针解析 MEPC 与 abort 调用点，错 ELF 拒绝） | [查看](esp-emulator/2026-11-17-native-c6-crash-symbols/) |

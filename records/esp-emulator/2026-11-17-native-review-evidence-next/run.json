@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Native review evidence for C6, Tab5, NC1020, Dial and Device Service preflight",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "37fc8963d77bf806cde4fa16ea11e31b5a98b4d7",
+    "integrated_commit": "cccc83b95d4c89f043d6d6d77d21161bc5ece106",
+    "reviewer_commit_for_nc1020": "6e2254fa3749d60c47ee6139c4c2d373e31ab896",
+    "earlier_combined_commit": "3e1084e717ac9514142c356593d3f91f30c4b3b3",
+    "reviewer_commit": "7e1ac6801ee3e505e334253ac506c67f16ece8b0"
+  },
+  "hardware": {},
+  "firmware": {
+    "binding": "Each receipt records its original artifact or probe image and native runtime SHA-256."
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "Owned native Device Service sessions and a separate read-only HTTP admission test",
+    "collective_scope": "Source contains the individual summarized executions. Per-run identities and actual outputs are in the receipts."
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "name": "Nesso N1 read-only live CPU0 PC and paused-state readback",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Core2 dual CPU watchdog control and same-session C6 panic MEPC",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Tab5 native ST7123 taps and separate GT911 control",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Arduventure generic saved-snapshot review and untested ST7123 gesture paths",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "NC1020 original SD save and state restore in a new session",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "NC1020 cold external ROM import and app display",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "transport",
+      "name": "Dial N9301 with vendor driver, no-media control, and original encoder UART commands",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Dial original application display and playback",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "device_response",
+      "name": "HTTP capabilities preflight plus original ADV MP3 SPI/PCM guest",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical hardware and browser WASM",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "device_response",
+      "name": "Tab5 explicit saved-snapshot nine actions with 60-second observation and unsupported hold boundary",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Exact integrated preflight reads, original MP3 SPI/PCM and Dial UART replay",
+      "status": "PASS"
+    },
+    {
+      "layer": "build",
+      "name": "Local platform suite on exact integrated source",
+      "status": "PASS",
+      "tests": 2339,
+      "skipped": 10,
+      "failures": 0
+    },
+    {
+      "layer": "build",
+      "name": "Reviewer suite on exact reviewer source",
+      "status": "PASS",
+      "tests": 153,
+      "failures": 0
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Exact joint reviewer/native replay of NC1020 save, Dial UART and Arduventure explicit steps",
+      "status": "PARTIAL"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/c6-live-pc-summary.json",
+      "source_path": "tests/firmware/crash_diagnostics/riscv_c6/live-cpu-pc-summary.json",
+      "bytes": 15429,
+      "sha256": "d5df7ab1948873e7ea141f50112c6220c6a8078d914f67fdf33d27d865910dd6"
+    },
+    {
+      "path": "evidence/nc1020-save-summary.json",
+      "source_path": "tests/firmware/spi_sd_media/nc1020-save-summary.json",
+      "bytes": 5822,
+      "sha256": "5a919a25543a4e8789c7a4bc18f0c4ae516075b135188b3bdbd35d19d34569c4"
+    },
+    {
+      "path": "evidence/tab5-st7123-touch-summary.json",
+      "source_path": "docs/evidence/2026-11-17-tab5-st7123-touch/summary.json",
+      "bytes": 9549,
+      "sha256": "b2bd3692111179f4f3760516b9758ba3ac0d726680894f6d255bde277db3fdee"
+    },
+    {
+      "path": "evidence/dial-audioplayer-summary.json",
+      "source_path": "docs/evidence/2026-11-17-dial-audioplayer/summary.json",
+      "bytes": 6418,
+      "sha256": "00653cedaf2f987b356db4c539e770d5152a68e38af57c2d94f3c38f0bb6695c"
+    },
+    {
+      "path": "evidence/device-capabilities-summary.json",
+      "source_path": "tests/uiflow2/api_sweep/device-capabilities-summary.json",
+      "bytes": 6114,
+      "sha256": "76d498bf6fd26843a2750dbb26c1ad4f3c38f13e616fd565c976dbee6559e029"
+    },
+    {
+      "path": "evidence/tab5-explicit-review-summary.json",
+      "source": "isolated reviewer follow-up with named on-screen actions",
+      "bytes": 8009,
+      "sha256": "8a226360164a16e6b004ed6df35f04559184d5af65cfee073c7832930ca9778f"
+    },
+    {
+      "path": "evidence/integrated-3e-native-summary.json",
+      "source": "selected readback from exact isolated source and runtime",
+      "bytes": 2989,
+      "sha256": "e24343d6116845c6d18667c3645b1cae5d43543605ddbdb12b19b8ffd296ceb6"
+    },
+    {
+      "path": "evidence/nc1020-cold-controls-summary.json",
+      "source": "local saved evidence summaries, serial byte digests and bounded run metadata",
+      "bytes": 2930,
+      "sha256": "7f7a1c48174d6d28f949219f35a69c92f36004c1abeffca9d52d4a16394a83cf"
+    },
+    {
+      "path": "evidence/integrated-final-review-summary.json",
+      "source": "bounded exact emulator/reviewer dry-run outputs and local suite receipts",
+      "bytes": 12650,
+      "sha256": "34396ad9a588bcc37befe03ce950fc0960130e50e9482396fa34f5fc744de303"
+    }
+  ],
+  "notes": [
+    "Published evidence stores bounded summaries from source. Raw firmware and ZIP files were not copied.",
+    "Guest PC and panic MEPC are independent observations.",
+    "The original Tab5 and NC1020 generic reviewer receipts retain their manual-review results.",
+    "Burner submission was not run."
+  ]
+}
