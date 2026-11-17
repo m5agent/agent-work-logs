@@ -1,0 +1,40 @@
+# v6.1 components/esp_hal_ana_conv/esp32/include/hal/dac_ll.h
+static inline void dac_ll_power_on(dac_channel_t channel)
+{ RTCIO.pad_dac[channel].dac_xpd_force = 1; RTCIO.pad_dac[channel].xpd_dac = 1; }
+
+static inline void dac_ll_rtc_sync_by_adc(bool enable)
+{ SENS.sar_meas_ctrl2.sar1_dac_xpd_fsm = enable; }
+
+static inline void dac_ll_digi_enable_dma(bool enable)
+{ SENS.sar_dac_ctrl1.dac_dig_force = enable; SENS.sar_dac_ctrl1.dac_clk_inv = enable; }
+
+# v6.1.1 same file
+static inline void dac_ll_pad_power_on(dac_channel_t channel)
+{ RTCIO.pad_dac[channel].dac_xpd_force = 1; RTCIO.pad_dac[channel].xpd_dac = 1; }
+static inline void dac_ll_pad_power_down(dac_channel_t channel)
+{ RTCIO.pad_dac[channel].dac_xpd_force = 0; RTCIO.pad_dac[channel].xpd_dac = 0; }
+
+static inline void dac_ll_pad_set_data_source(dac_channel_t channel, dac_data_source_t source)
+{
+    if (source == DAC_DATA_SOURCE_DMA) { SENS.sar_dac_ctrl1.dac_dig_force = true; }
+    else {
+        bool cw_en = (source == DAC_DATA_SOURCE_COSINE);
+        if (channel == DAC_CHAN_0) { SENS.sar_dac_ctrl2.dac_cw_en1 = cw_en; }
+        else if (channel == DAC_CHAN_1) { SENS.sar_dac_ctrl2.dac_cw_en2 = cw_en; }
+        SENS.sar_dac_ctrl1.dac_dig_force = false;
+    }
+}
+
+static inline void dac_ll_sync_by_adc(bool enable)
+{ SENS.sar_meas_ctrl2.sar1_dac_xpd_fsm = enable; }
+
+static inline void dac_ll_dma_clk_inv(bool enable)
+{ SENS.sar_dac_ctrl1.dac_clk_inv = enable; }
+
+# IDF 6.1.1 own driver sequencing (components/esp_driver_dac)
+esp32/dac_dma.c:152    dac_ll_dma_clk_inv(true);      # start
+esp32/dac_dma.c:193    dac_ll_dma_clk_inv(false);     # stop
+dac_common.c:76-78     dac_ll_pad_set_data_source(chan_id, source);
+                       dac_ll_sync_by_adc(false);
+                       dac_ll_pad_power_on(chan_id);
+dac_common.c:95        dac_ll_pad_power_down(chan_id);

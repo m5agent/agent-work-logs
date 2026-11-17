@@ -1,0 +1,11 @@
+# environment: macOS arm64; docker image espressif/idf:v6.1.1
+# project: minimal IDF app, main/ instantiates M5GFX, M5GFX vendored in components/M5GFX
+git -C M5GFX archive ce73a4d | tar -x -C proj-base/components/M5GFX
+git -C M5GFX archive pr429  | tar -x -C proj-pr/components/M5GFX
+
+docker run --rm -v $PWD/proj-base:/project -w /project espressif/idf:v6.1.1 \
+  bash -lc 'source /opt/esp/idf/export.sh; idf.py set-target esp32; idf.py build'
+docker run --rm -v $PWD/proj-pr:/project -w /project espressif/idf:v6.1.1 \
+  bash -lc 'source /opt/esp/idf/export.sh; idf.py set-target esp32; idf.py build'
+
+shasum -a 256 proj-pr/build/m5gfx425.bin

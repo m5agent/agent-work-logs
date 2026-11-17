@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "pr",
+  "overall_status": "PASS",
+  "title": "M5GFX #429: Panel_CVBS builds with the ESP-IDF 6.1.1 DAC LL renames (build verification)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/425",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/429",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "ce73a4deb28854d7fc2ba0a2361792355dbd6b9f",
+    "head_commit": "2328ff8605f6cd25a32615122ee139927b64b28a"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; docker image espressif/idf:v6.1.1; target esp32; minimal ESP-IDF app with M5GFX vendored as a component, main/ instantiates M5GFX; xtensa-esp32-elf-g++ 15.2.0",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file: src/lgfx/v1/platforms/esp32/Panel_CVBS.inl (+22/-4); head 2328ff8 on base ce73a4d, single commit, mergeable clean"
+    },
+    {
+      "id": "reproduce-unpatched-build",
+      "status": "FAIL",
+      "detail": "base ce73a4d, espressif/idf:v6.1.1, esp32: 5 errors at Panel_CVBS.inl:1976/1978/2037/2039/2040 (dac_ll_digi_enable_dma, dac_ll_power_down, dac_ll_power_on, dac_ll_rtc_sync_by_adc), same set as issue #425"
+    },
+    {
+      "id": "patched-build",
+      "status": "PASS",
+      "detail": "PR head 2328ff8, same project and image: 1057 steps, 'Project build complete', m5gfx425.bin 312272 bytes, sha256 7419b09762673354ff2dd39cb5eff253c79d7b5d8bdfec4173af306142d1381d"
+    },
+    {
+      "id": "gate-header-presence",
+      "status": "PASS",
+      "detail": "complete git tree of each tag (GitHub trees API, truncated=false): hal/dac_types_private.h absent in v5.1.6, v5.2.8, v5.4.3 (19806 paths), v6.0.2 (23661), v6.1 (26174), release/v5.5; present in v6.1.1 (esp_hal_ana_conv/include) and master"
+    },
+    {
+      "id": "gate-old-branch-compiles",
+      "status": "PASS",
+      "detail": "PR CI on head 2328ff8: esp32 builds at IDF 5.1.6 / 5.4.3 / 6.0.2 pass, so the unchanged #else branch still compiles on the versions whose source trees have no private header"
+    },
+    {
+      "id": "semantic-equivalence",
+      "status": "PASS",
+      "detail": "v6.1 pad_power_on/off, rtc_sync_by_adc bodies are register-identical to v6.1.1 pad_power_on/off, sync_by_adc; digi_enable_dma(en) = dac_dig_force + dac_clk_inv, reproduced by pad_set_data_source(DMA/DIRECT) + dma_clk_inv(en). Only delta: DIRECT clears that channel's dac_cw_en (cosine generator), unused by CVBS; documented in the diff comment."
+    },
+    {
+      "id": "idf-driver-crosscheck",
+      "status": "PASS",
+      "detail": "IDF 6.1.1 esp_driver_dac: esp32/dac_dma.c:152 dac_ll_dma_clk_inv(true) at start, :193 false at deinit; dac_common.c:76-78 set_data_source + sync_by_adc(false) + pad_power_on; dac_common.c:95 pad_power_down. Same ordering as the patch."
+    },
+    {
+      "id": "call-site-order",
+      "status": "PASS",
+      "detail": "both #ifdef branches keep the original order: stop = clear data source/clock inversion then power down; init = set source + power on per channel, then sync_by_adc(false) + dma_clk_inv(true). No window with the channel powered and the wrong data source."
+    },
+    {
+      "id": "pr-ci",
+      "status": "PASS",
+      "detail": "all checks on 2328ff8 pass: IDF esp32 5.1.6/5.4.3/6.0.2, S3/C3/C5/C6/C61/H2/P4, Arduino-ESP32 2.0.17/3.1.3"
+    },
+    {
+      "id": "ci-coverage-gap",
+      "status": "REVIEW",
+      "detail": "IDFBuild.yml has no esp32 job for 6.1.x; the rename landed in 6.1.1 (patch release), so the existing esp32 + 6.1 coverage would not catch it. Suggest adding esp32 + 6.1.1."
+    },
+    {
+      "id": "idf61-build",
+      "status": "NOT RUN",
+      "detail": "no local espressif/idf:v6.1 image (pull stalled); v6.1 has no dac_types_private.h anywhere in its tree and keeps the old declarations, and the #else branch is byte-identical to the current code that CI builds at 6.0.2"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no real ESP32 CVBS capture; the PR itself only proves the translation unit compiles and links"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "Device Service esp32-lx6 profiles (core2, stickc-plus2, basic-v27, ...) have LCD/input/serial models only; no DAC-to-CVBS output model and no composite capture path. The regression is a compile-time API rename with no runtime observable."
+    },
+    {
+      "id": "arduino-cores",
+      "status": "REVIEW",
+      "detail": "header presence checked via the IDF trees only; Arduino-ESP32 2.0.17/3.1.3 esp32 builds pass in PR CI, not rebuilt locally"
+    },
+    {
+      "id": "cosine-enable-side-effect",
+      "status": "NOT RUN",
+      "detail": "runtime effect of clearing dac_cw_en when stopping was not measured; CVBS does not use the cosine generator"
+    }
+  ],
+  "evidence": [
+    "evidence/base-errors.txt",
+    "evidence/build-base-ce73a4d-idf611-esp32.log",
+    "evidence/build-patched-pr429-idf611-esp32.log",
+    "evidence/patched-build-artifact.txt",
+    "evidence/gate-header-presence.txt",
+    "evidence/idf-dac-ll-diff.txt",
+    "evidence/build-commands.txt",
+    "evidence/head.txt",
+    "patches/0001-panel-cvbs-idf611-dac-ll.patch"
+  ],
+  "notes": [
+    "PR left OPEN; one English comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
+    "The PR uses __has_include of a private hal header instead of a version guard; verified against the complete source tree of every IDF release from 5.1.6 to master.",
+    "Review suggestion (non-blocking): add an esp32 + IDF 6.1.1 job to IDFBuild.yml, because the rename is in the 6.1.1 patch release and the matrix stops at 6.0.2 for esp32."
+  ]
+}

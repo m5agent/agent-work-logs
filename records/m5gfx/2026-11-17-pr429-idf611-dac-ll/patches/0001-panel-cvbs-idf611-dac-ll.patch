@@ -1,0 +1,81 @@
+From 2328ff8605f6cd25a32615122ee139927b64b28a Mon Sep 17 00:00:00 2001
+From: ainyan03 <205502311+ainyan03@users.noreply.github.com>
+Date: Tue, 17 Nov 2026 11:24:52 +0000
+Subject: [PATCH] Panel_CVBS: build with the DAC LL functions renamed in
+ ESP-IDF 6.1.1
+
+ESP-IDF 6.1.1 renamed dac_ll_power_on / dac_ll_power_down / dac_ll_rtc_sync_by_adc
+to dac_ll_pad_power_on / dac_ll_pad_power_down / dac_ll_sync_by_adc, and removed
+dac_ll_digi_enable_dma(), which set both the DMA data source (dac_dig_force) and
+the DMA clock inversion. These are now dac_ll_pad_set_data_source() and
+dac_ll_dma_clk_inv(). Panel_CVBS.inl is part of every ESP32 build, so the whole
+library failed to compile on ESP32 with 6.1.1.
+
+The new functions are selected by the presence of hal/dac_types_private.h, which
+came with them and which the new dac_ll.h includes itself, rather than by the
+version number, so a backport or a commit between release tags picks the right
+side. The register writes are the same, except that selecting the DIRECT source
+when stopping also turns off the cosine generator of that channel, which this
+panel does not use. Other SDKs keep the old calls.
+---
+ src/lgfx/v1/platforms/esp32/Panel_CVBS.inl | 24 +++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
+
+diff --git a/src/lgfx/v1/platforms/esp32/Panel_CVBS.inl b/src/lgfx/v1/platforms/esp32/Panel_CVBS.inl
+index 1d440ee..641b1a9 100644
+--- a/src/lgfx/v1/platforms/esp32/Panel_CVBS.inl
++++ b/src/lgfx/v1/platforms/esp32/Panel_CVBS.inl
+@@ -54,6 +54,10 @@ Inspiration Sources:
+   #include <hal/dac_types.h>
+   #include <hal/dac_ll.h>
+   #include <driver/rtc_io.h>
++  // ESP-IDF 6.1.1 renamed the DAC LL functions (dac_ll_pad_*) and added this header with them.
++  #if __has_include (<hal/dac_types_private.h>)
++   #define LGFX_DAC_LL_PAD_API
++  #endif
+  #endif
+ #else
+  #include <driver/i2s.h>
+@@ -1973,9 +1977,17 @@ namespace lgfx
+       I2S0.conf.tx_start = 0;
+ 
+ #if defined ( LGFX_I2S_STD_ENABLED )
+-      dac_ll_digi_enable_dma(false);
+       auto ch = _get_dacchannel(_config_detail.pin_dac);
++ #if defined ( LGFX_DAC_LL_PAD_API )
++      // dac_ll_digi_enable_dma() was split into the data source and the DMA clock inversion.
++      // DIRECT also turns off the cosine generator of this channel, which is not used here.
++      dac_ll_pad_set_data_source(ch, DAC_DATA_SOURCE_DIRECT);
++      dac_ll_dma_clk_inv(false);
++      dac_ll_pad_power_down(ch);
++ #else
++      dac_ll_digi_enable_dma(false);
+       dac_ll_power_down(ch);
++ #endif
+ #else
+       dac_i2s_disable();
+       auto ch = _get_dacchannel(_config_detail.pin_dac);
+@@ -2034,10 +2046,20 @@ namespace lgfx
+         rtc_gpio_pulldown_dis(gpio_num);
+ 
+         auto channel = _get_dacchannel(gpio_num);
++ #if defined ( LGFX_DAC_LL_PAD_API )
++        dac_ll_pad_set_data_source(channel, DAC_DATA_SOURCE_DMA);
++        dac_ll_pad_power_on(channel);
++ #else
+         dac_ll_power_on(channel);
++ #endif
+       }
++ #if defined ( LGFX_DAC_LL_PAD_API )
++      dac_ll_sync_by_adc(false);
++      dac_ll_dma_clk_inv(true);
++ #else
+       dac_ll_rtc_sync_by_adc(false);
+       dac_ll_digi_enable_dma(true);
++ #endif
+ 
+       I2S0.conf2.lcd_en = true;
+       I2S0.conf.tx_right_first = false;
+-- 
+2.55.0
+
