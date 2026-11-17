@@ -69,6 +69,7 @@
 - `evidence/held-sda-fa2bc69.txt`：同 head の `held_sda_release.cpp` 単体（`44 cases passed`）。
 - `evidence/held-sda-bound-mutant.txt`：ループ上限を `++i < 11` に変えた変異体での実行結果
   （`pulses == 10` で `assert` 失敗、exit 134）。
+- 第 2 ラウンドの已发布回复：<https://github.com/m5stack/M5GFX/pull/427#issuecomment-6942784653>（1 条、日本語）
 
 ## 文件
 

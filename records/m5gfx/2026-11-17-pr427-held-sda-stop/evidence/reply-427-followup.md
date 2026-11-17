@@ -9,3 +9,5 @@
 - head `fa2bc69` の CI は 27 チェックすべて success（fail / pending なし）。
 
 ブロッカーはありません。実機・仮想デバイスでの再現と、本文で未確認とされているボードは引き続き未確認です。
+
+（投稿済み: <https://github.com/m5stack/M5GFX/pull/427#issuecomment-6942784653>）
