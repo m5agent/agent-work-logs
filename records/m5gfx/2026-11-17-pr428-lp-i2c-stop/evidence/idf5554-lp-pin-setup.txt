@@ -1,0 +1,86 @@
+# ESP-IDF v5.5.4 reference (local tree, components/esp_driver_i2c/i2c_common.c)
+
+## s_lp_i2c_pins_config()
+static esp_err_t s_lp_i2c_pins_config(i2c_bus_handle_t handle)
+{
+    ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->sda_num), TAG, "LP I2C SDA GPIO invalid");
+    ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->scl_num), TAG, "LP I2C SCL GPIO invalid");
+
+    // reserve the GPIO output path, because we don't expect another peripheral to signal to the same GPIO
+    uint64_t old_gpio_rsv_mask = esp_gpio_reserve(BIT64(handle->sda_num) | BIT64(handle->scl_num));
+    // check if the GPIO is already used by others
+    if (old_gpio_rsv_mask & BIT64(handle->sda_num)) {
+        ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->sda_num);
+    }
+    // check if the GPIO is already used by others
+    if (old_gpio_rsv_mask & BIT64(handle->scl_num)) {
+        ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->scl_num);
+    }
+
+#if !SOC_LP_GPIO_MATRIX_SUPPORTED
+    /* Verify that the SDA and SCL line belong to the LP IO Mux I2C function group */
+    ESP_RETURN_ON_FALSE((handle->sda_num == LP_I2C_SDA_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SDA_PIN_ERR_LOG);
+    ESP_RETURN_ON_FALSE((handle->scl_num == LP_I2C_SCL_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SCL_PIN_ERR_LOG);
+#endif /* !SOC_LP_GPIO_MATRIX_SUPPORTED */
+    int port_id = handle->port_num;
+
+    rtc_gpio_init(handle->sda_num);
+    rtc_gpio_set_direction(handle->sda_num, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+    rtc_gpio_pulldown_dis(handle->sda_num);
+    if (handle->pull_up_enable) {
+        rtc_gpio_pullup_en(handle->sda_num);
+    } else {
+        rtc_gpio_pullup_dis(handle->sda_num);
+    }
+#if !SOC_LP_GPIO_MATRIX_SUPPORTED
+    rtc_gpio_iomux_func_sel(handle->sda_num, i2c_periph_signal[port_id].iomux_func);
+#else
+    lp_gpio_connect_out_signal(handle->sda_num, i2c_periph_signal[port_id].sda_out_sig, 0, 0);
+    lp_gpio_connect_in_signal(handle->sda_num, i2c_periph_signal[port_id].sda_in_sig, 0);
+#endif
+
+    rtc_gpio_init(handle->scl_num);
+    rtc_gpio_set_direction(handle->scl_num, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+    rtc_gpio_pulldown_dis(handle->scl_num);
+    if (handle->pull_up_enable) {
+        rtc_gpio_pullup_en(handle->scl_num);
+    } else {
+        rtc_gpio_pullup_dis(handle->scl_num);
+    }
+#if !SOC_LP_GPIO_MATRIX_SUPPORTED
+    rtc_gpio_iomux_func_sel(handle->scl_num, i2c_periph_signal[port_id].iomux_func);
+#else
+    lp_gpio_connect_out_signal(handle->scl_num, i2c_periph_signal[port_id].scl_out_sig, 0, 0);
+    lp_gpio_connect_in_signal(handle->scl_num, i2c_periph_signal[port_id].scl_in_sig, 0);
+#endif
+
+    return ESP_OK;
+}
+
+## rtc_gpio_init() / rtc_gpio_deinit() (components/esp_driver_gpio/src/rtc_io.c)
+esp_err_t rtc_gpio_init(gpio_num_t gpio_num)
+{
+    ESP_RETURN_ON_FALSE(rtc_gpio_is_valid_gpio(gpio_num), ESP_ERR_INVALID_ARG, RTCIO_TAG, "RTCIO number error");
+    RTCIO_ENTER_CRITICAL();
+#if SOC_LP_IO_CLOCK_IS_INDEPENDENT
+    io_mux_enable_lp_io_clock(gpio_num, true);
+#endif
+    rtcio_hal_function_select(rtc_io_number_get(gpio_num), RTCIO_LL_FUNC_RTC);
+    RTCIO_EXIT_CRITICAL();
+
+    return ESP_OK;
+}
+esp_err_t rtc_gpio_deinit(gpio_num_t gpio_num)
+{
+    ESP_RETURN_ON_FALSE(rtc_gpio_is_valid_gpio(gpio_num), ESP_ERR_INVALID_ARG, RTCIO_TAG, "RTCIO number error");
+    RTCIO_ENTER_CRITICAL();
+    // Select Gpio as Digital Gpio
+    rtcio_hal_function_select(rtc_io_number_get(gpio_num), RTCIO_LL_FUNC_DIGITAL);
+
+#if SOC_LP_IO_CLOCK_IS_INDEPENDENT
+    io_mux_force_disable_lp_io_clock(gpio_num);
+#endif
+    RTCIO_EXIT_CRITICAL();
+
+    return ESP_OK;
+}

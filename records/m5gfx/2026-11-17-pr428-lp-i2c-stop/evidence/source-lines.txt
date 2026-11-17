@@ -1,0 +1,140 @@
+# source excerpts at PR head 0fdef4e (src/lgfx/v1/platforms/esp32/common.inl)
+
+## include guard :191-194
+#endif
+// lp_gpio_connect_*_signal(): routing an LP I2C port through the LP GPIO matrix (ESP32-P4)
+#if defined ( SOC_LP_GPIO_MATRIX_SUPPORTED ) && SOC_LP_GPIO_MATRIX_SUPPORTED && __has_include(<driver/lp_io.h>)
+ #include <driver/lp_io.h>
+
+## lp_pads_return :1850-1881
+
+#if LGFX_LP_I2C_NUM > 0 && SOC_RTCIO_INPUT_OUTPUT_SUPPORTED
+ #define LGFX_LP_I2C_LEND_PADS 1
+    /// Hands the pads of an open low power port back to the low power I2C controller after
+    /// i2c_stop() borrowed them. Same steps as the ESP-IDF LP pin setup, ordered like init():
+    /// releasing the pads also turned their LP IO clock off, and SDA must not become LP IO
+    /// before its latch is high, or the bus would see a false START.
+    static void lp_pads_return(const int i2c_port, const gpio_num_t sda, const gpio_num_t scl)
+    {
+      rtc_gpio_init(scl);  // turns the LP IO clock back on for the registers below
+      rtc_gpio_set_direction(sda, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+      rtc_gpio_set_direction(scl, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+      rtc_gpio_pulldown_dis(sda);
+      rtc_gpio_pulldown_dis(scl);
+      rtc_gpio_pullup_en(sda);
+      rtc_gpio_pullup_en(scl);
+      rtc_gpio_set_level(sda, 1);
+      rtc_gpio_set_level(scl, 1);
+      rtc_gpio_init(sda);
+ #if SOC_LP_GPIO_MATRIX_SUPPORTED
+      // The LP IO function selected above is the LP GPIO matrix: route the controller through it.
+      const auto& sig = i2c_periph_signal[i2c_port];
+      lp_gpio_connect_out_signal(sda, sig.sda_out_sig, false, false);
+      lp_gpio_connect_in_signal(sda, sig.sda_in_sig, false);
+      lp_gpio_connect_out_signal(scl, sig.scl_out_sig, false, false);
+      lp_gpio_connect_in_signal(scl, sig.scl_in_sig, false);
+ #else
+      rtc_gpio_iomux_func_sel(sda, i2c_periph_signal[i2c_port].iomux_func);
+      rtc_gpio_iomux_func_sel(scl, i2c_periph_signal[i2c_port].iomux_func);
+ #endif
+    }
+#endif
+
+## i2c_stop :1883-1933
+    static void i2c_stop(int i2c_port)
+    {
+      static constexpr int I2C_CLR_BUS_HALF_PERIOD_US = 2;
+      static constexpr int I2C_CLR_BUS_SCL_NUM        = 9;
+
+      gpio_num_t sda_io = i2c_context[i2c_port].pin_sda;
+      gpio_num_t scl_io = i2c_context[i2c_port].pin_scl;
+      gpio::pin_backup_t backup_pins[] = { sda_io, scl_io };
+
+#if defined ( LGFX_LP_I2C_LEND_PADS )
+      // The pads of an open low power port are routed through the low power IO domain, out of
+      // reach of the GPIO writes below: lend them to the normal GPIO while the bus is cleared.
+      const bool lp_lent = isLpPort(i2c_port) && (i2c_context[i2c_port].i2c_bus_handle != nullptr);
+      if (lp_lent)
+      {
+        gpio::release_lp_pad(sda_io);
+        gpio::release_lp_pad(scl_io);
+        pinMode(sda_io, pin_mode_t::input_pullup);  // selects the GPIO function of the pads
+        pinMode(scl_io, pin_mode_t::input_pullup);
+      }
+#endif
+
+      gpio_set_level(sda_io, 1);
+      gpio_set_direction(sda_io, GPIO_MODE_INPUT_OUTPUT_OD);
+
+      gpio_set_level(scl_io, 1);
+      gpio_set_direction(scl_io, GPIO_MODE_OUTPUT_OD);
+      delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+
+      // SDAがHIGHになるまでSTOP送出を繰り返す。;
+      int i = 0;
+      do
+      {
+        gpio_set_level(scl_io, 0);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(sda_io, 0);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(scl_io, 1);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+        gpio_set_level(sda_io, 1);
+        delayMicroseconds(I2C_CLR_BUS_HALF_PERIOD_US);
+      } while (!gpio_get_level(sda_io) && (i++ < I2C_CLR_BUS_SCL_NUM));
+
+#if !defined (CONFIG_IDF_TARGET_ESP32C2) && !defined (CONFIG_IDF_TARGET_ESP32C3)
+/// ESP32C3で periph_module_reset を使用すると以後通信不能になる問題が起きたため分岐;
+      i2c_periph_reset(i2c_port);
+#endif
+      for (auto &bup : backup_pins) { bup.restore(); }
+#if defined ( LGFX_LP_I2C_LEND_PADS )
+      if (lp_lent) { lp_pads_return(i2c_port, sda_io, scl_io); }
+#endif
+
+## init LP borrow :2311-2322
+#if defined ( LGFX_LP_I2C_LEND_PADS )
+      if (isLpPort(i2c_port))
+      { // The routing of a previous run survives a reset and keeps the bus clearing below off
+        // the pads, while a peripheral cut off inside a byte may still hold SDA. The pads are
+        // routed to the controller again below. (see gpio::release_lp_pad)
+        gpio::release_lp_pad(pin_sda);
+        gpio::release_lp_pad(pin_scl);
+        pinMode(pin_sda, pin_mode_t::input_pullup);  // selects the GPIO function of the pads
+        pinMode(pin_scl, pin_mode_t::input_pullup);
+      }
+#endif
+      i2c_stop(i2c_port);
+
+## init LP pad setup :2324-2353
+#if LGFX_LP_I2C_NUM > 0
+      if (isLpPort(i2c_port))
+      {
+ #if SOC_RTCIO_INPUT_OUTPUT_SUPPORTED
+        // The driver enables the open-drain output before it hands the pad to the peripheral, so
+        // a low output latch (the reset default) pulls SDA low for a few microseconds. On the bus
+        // that is a START + STOP without an address, after which some MCU based slaves do not
+        // answer for about 0.6 ms. Raise the latches first, in open-drain mode so that SDA is not
+        // driven high. rtc_gpio_init() turns on the LP IO clock these registers need; SCL takes it
+        // because SDA must not become LP IO until they are set. A low on SCL alone is harmless.
+        const bool lp_pads = rtc_gpio_is_valid_gpio(pin_sda) && rtc_gpio_is_valid_gpio(pin_scl);
+        if (lp_pads)
+        {
+          rtc_gpio_init(pin_scl);
+          rtc_gpio_set_direction(pin_sda, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+          rtc_gpio_set_direction(pin_scl, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+          rtc_gpio_set_level(pin_sda, 1);
+          rtc_gpio_set_level(pin_scl, 1);
+          rtc_gpio_init(pin_sda);
+        }
+ #endif
+        i2c_master_bus_config_t bus_config;
+        memset(&bus_config, 0, sizeof(i2c_master_bus_config_t));
+        bus_config.i2c_port = i2c_port;
+        bus_config.sda_io_num = pin_sda;
+        bus_config.scl_io_num = pin_scl;
+        bus_config.lp_source_clk = LGFX_LP_I2C_SCLK;
+        bus_config.glitch_ignore_cnt = 7;
+        bus_config.flags.enable_internal_pullup = true;
+        bus_config.intr_priority = 1;

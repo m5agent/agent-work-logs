@@ -1,0 +1,18 @@
+=== esp32c5 components/soc/esp32c5/i2c_periph.c (SOC_I2C_NUM entry count and LP entry)
+10:#define LP_I2C_MUX_FUNC  (3)
+12:static_assert(SOC_I2C_NUM == (SOC_HP_I2C_NUM + SOC_LP_I2C_NUM));
+14:const i2c_signal_conn_t i2c_periph_signal[SOC_I2C_NUM] = {
+29:        .iomux_func = LP_I2C_MUX_FUNC,
+
+=== esp32c6 components/soc/esp32c6/i2c_periph.c (SOC_I2C_NUM entry count and LP entry)
+12:#define LP_I2C_MUX_FUNC  (1)
+17:const i2c_signal_conn_t i2c_periph_signal[SOC_I2C_NUM] = {
+30:        .iomux_func = LP_I2C_MUX_FUNC,
+
+=== esp32p4 components/soc/esp32p4/i2c_periph.c (SOC_I2C_NUM entry count and LP entry)
+14:const i2c_signal_conn_t i2c_periph_signal[SOC_I2C_NUM] = {
+30:        .sda_out_sig = LP_I2C_SDA_PAD_OUT_IDX,
+31:        .sda_in_sig = LP_I2C_SDA_PAD_IN_IDX,
+32:        .scl_out_sig = LP_I2C_SCL_PAD_OUT_IDX,
+33:        .scl_in_sig = LP_I2C_SCL_PAD_IN_IDX,
+

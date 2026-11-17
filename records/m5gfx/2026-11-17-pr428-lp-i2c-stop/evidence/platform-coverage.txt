@@ -1,0 +1,14 @@
+# Device Service profile coverage, captured 2026-11-17T08:17:59Z
+tab5_enabled: False | profiles: 36
+SoCs: ESP32-C6, ESP32-C6FH4, ESP32-D0WDQ6-V3, ESP32-P4NRW32, ESP32-PICO-D4, ESP32-PICO-V3-02, ESP32-S3, ESP32-S3-PICO-1-N8R8, ESP32-S3-WROOM-1-N16R8, ESP32-S3FN8, ESP32-S3R8, ESP32-WROOM32, RP3A0 (BCM2837)
+ESP32-C5 profile: none
+
+nanoc6 ESP32-C6FH4 qemu-esp32c6 peripheral_status=simulated display=True
+nesso-n1 ESP32-C6 qemu-esp32c6 peripheral_status=simulated display=True
+tab5 ESP32-P4NRW32 esp-emulator-native peripheral_status=partial display=True
+
+# esp-emulator QEMU sources: LP I2C / LP IO model search
+tree: the QEMU source used for the C6 backend in the esp-emulator checkout
+grep -rln 'lp_i2c|LP_I2C' hw/ include/ -> (no matches)
+grep -rln 'esp32c6_i2c' hw/ -> hw/misc/esp32c6_i2c_ana_mst.c, hw/misc/meson.build, hw/riscv/esp32c6.c
+i.e. only the analog-master register block is modelled; no I2C master controller, no LP IO MUX / rtc_io pad model.

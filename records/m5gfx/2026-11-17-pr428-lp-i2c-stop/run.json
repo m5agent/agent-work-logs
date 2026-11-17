@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "pr",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #428: let i2c_stop() reach the pads of an LP I2C port (code-level review)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/426",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/428",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "21213080fba00c675d5dcca0ef2abd4b349e3cef",
+    "head_commit": "0fdef4e88d98eb4b754bea6d993244b2331f231a"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS local; ESP-IDF v5.5.4 source tree (local); no ESP32-C5 hardware; Device Service 36 profiles and no C5; esp-emulator QEMU has no LP I2C controller / LP IO pad model; no Arduino or PlatformIO build chain installed",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file: src/lgfx/v1/platforms/esp32/common.inl (+63/-0)"
+    },
+    {
+      "id": "prior-point-3-init-path",
+      "status": "PASS",
+      "detail": "init() borrows the pads on every LP port init before i2c_stop() (common.inl:2311-2322); not gated on initialized/handle, so stale LP routing from a previous run is covered"
+    },
+    {
+      "id": "return-order",
+      "status": "PASS",
+      "detail": "i2c_periph_reset at :1928, pin_backup restore at :1930, lp_pads_return at :1931-1933 - controller reset happens before the pads go back"
+    },
+    {
+      "id": "idf-parity",
+      "status": "PASS",
+      "detail": "lp_pads_return (:1857-1881) uses the same elements as IDF v5.5.4 s_lp_i2c_pins_config(): rtc_gpio_init, INPUT_OUTPUT_OD, pulldown_dis, pullup_en, latch high, iomux/connect; SCL clock enabled first and SDA function connected last"
+    },
+    {
+      "id": "rtc-gpio-semantics",
+      "status": "PASS",
+      "detail": "IDF v5.5.4 rtc_gpio_init() only enables the per-pin LP IO clock and selects RTCIO_LL_FUNC_RTC; it does not touch direction/pull/latch, so a high latch survives rtc_gpio_init(sda)"
+    },
+    {
+      "id": "lp-signal-table-index",
+      "status": "PASS",
+      "detail": "i2c_periph_signal[LP port] is in range: C5 static_assert(SOC_I2C_NUM == HP + LP) with iomux_func; C6 second entry; P4 third entry with LP_I2C_*_PAD_*_IDX (IDF v5.5.4 and v5.4.2)"
+    },
+    {
+      "id": "pullup-consistency",
+      "status": "PASS",
+      "detail": "init() opens the LP bus with enable_internal_pullup = true (:2352), so the unconditional rtc_gpio_pullup_en() in lp_pads_return matches"
+    },
+    {
+      "id": "ci-build",
+      "status": "PASS",
+      "detail": "all 26 checks pass: IDF 5.5.2 c5, 5.4.3 c6/p4, 5.4.3/6.0.2 esp32/s3, pioarduino c5 3.3.0 / c6 3.1.3 / p4 3.1.3, translation unit consistency (build only)"
+    },
+    {
+      "id": "error-path-held-sda",
+      "status": "NOT RUN",
+      "detail": "deliberate wedged-bus recovery (SDA held low, 9 clocks + STOP, no false START on return) not tested; PR body also lists it as unverified"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 hardware; ToughC5 / Nesso N1 / Tab5 UnitNFC campaigns not reproduced; author's table quoted only"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "no C5 profile; C6/P4 QEMU backends model no LP I2C controller and no LP IO MUX / RTC IO pad routing; the observable is pad routing in the LP IO domain, which a GPIO-level model cannot reproduce"
+    },
+    {
+      "id": "other-idf-versions-hardware",
+      "status": "NOT RUN",
+      "detail": "IDF 5.4 / 6.0 hardware and IDF 6.1 C5 hardware untested (author also lists them as unverified)"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-428-meta.json",
+    "evidence/commits.txt",
+    "evidence/pr-428.diff",
+    "evidence/source-lines.txt",
+    "evidence/idf5554-lp-pin-setup.txt",
+    "evidence/idf5554-i2c-periph-lp.txt",
+    "evidence/ci-checks.txt",
+    "evidence/platform-coverage.txt",
+    "evidence/reply-428.md"
+  ],
+  "notes": [
+    "PR left OPEN; one Japanese comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
+    "The change matches what was suggested in #426 (borrow the pads, return them in the IDF order, reset the controller first, cover the pre-initialized path).",
+    "Only optional suggestion: the LP GPIO matrix branch is gated on SOC_LP_GPIO_MATRIX_SUPPORTED alone while the include also checks __has_include(<driver/lp_io.h>).",
+    "Author's hardware table (0/0 -> 100/100 on C5 / C6 / P4, Tab5 first probe 8/8) is quoted, not reproduced here."
+  ]
+}
