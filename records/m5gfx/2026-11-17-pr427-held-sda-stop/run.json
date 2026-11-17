@@ -80,14 +80,34 @@
       "detail": "PR #427 checks: catalog, IDF 5.1.6/5.4.3/6.0.2 and Arduino-ESP32 2.0.17/3.1.3 builds for C3/C5/C6/C61/H2/P4/S3 all pass"
     },
     {
+      "id": "external-p4-hardware-report",
+      "status": "REVIEW",
+      "detail": "ainyan03 reported ESP32-P4 (rev 3.2) HP-port hardware validation in the PR comment 6943480159: develop 2121308 misdetected 4/4 with 0x55 and 1/1 with 0x2A, the PR change detected correctly; 0x02 was correct on develop via the second attempt at the ACK slot. Read and cross-checked, not reproduced by m5agent."
+    },
+    {
+      "id": "owner-report-model",
+      "status": "PASS",
+      "detail": "host model at the report state (peripheral at the MSB after the master ACK), two calls: old b48dce0 0x55 false at 2/2 pulses, 0x2A false at 3/2, 0x02 false at 7 then true at 2 (ACK); fa2bc69 0x55 true at 1, 0x2A true at 2, 0x02 true at 6"
+    },
+    {
+      "id": "s3-recovery-path",
+      "status": "PASS",
+      "detail": "recover_held_sda_and_resample() (probe_hardware.inl:47-60) calls release_held_sda() and ignores its return; call sites only in esp32s3.inl:428,675,757,761. The fix therefore applies to the S3 path unchanged; worst case is the same resample after at most 10 clocks."
+    },
+    {
+      "id": "head-blob-unchanged",
+      "status": "PASS",
+      "detail": "fa2bc69:src/board_detect/probe_hardware.inl = b8f5d89 blob cb8577113cf72abfaaa7cdaae9ac02b8a46ad9a6; base 2121308 blob 437cb85547b0f5bf396bc7439b275e840184b066"
+    },
+    {
       "id": "hardware-validation",
       "status": "NOT RUN",
-      "detail": "ToughC5 + UnitNFC and Nesso N1 internal-IMU reset campaigns not reproduced; author's table quoted only"
+      "detail": "m5agent: NOT RUN (ToughC5 + UnitNFC and Nesso N1 reset campaigns not reproduced). Round 3 adds a third-party ESP32-P4 report (ainyan03) with 0x55/0x2A/0x02, reviewed but not reproduced here."
     },
     {
       "id": "virtual-device-validation",
       "status": "NOT RUN",
-      "detail": "no ESP32-C5 profile and no esp32-c5 emulator backend; C6 profiles exist but a reset that leaves the internal IMU driving SDA mid-byte cannot be injected"
+      "detail": "no ESP32-C5 profile and no esp32-c5 emulator backend; the ESP32-P4 tab5 profile is served with tab5_enabled=false, and no mechanism injects a reset that leaves a peripheral driving SDA mid-byte"
     },
     {
       "id": "other-boards",
@@ -115,11 +135,17 @@
     "evidence/commit-fa2bc69.patch",
     "evidence/host-run-fa2bc69.log",
     "evidence/held-sda-fa2bc69.txt",
-    "evidence/held-sda-bound-mutant.txt"
+    "evidence/held-sda-bound-mutant.txt",
+    "code/owner_report_check.cpp",
+    "evidence/owner-report-check-new.txt",
+    "evidence/owner-report-check-old.txt",
+    "evidence/owner-report-head-blob.txt"
   ],
   "notes": [
     "PR left OPEN; one Japanese comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
     "The change matches what was agreed in #424 (per-clock STOP, cap 10 clocks); the round-1 optional suggestion (a peripheral that never releases SDA) was added by the author in fa2bc69 and verified in round 2.",
-    "Author's hardware table (ToughC5 0/70, Nesso N1 0/40, StickS3 0/40, CardputerADV 0/40, Tab5 0/40) is quoted, not reproduced here."
+    "Author's hardware table (ToughC5 0/70, Nesso N1 0/40, StickS3 0/40, CardputerADV 0/40, Tab5 0/40) is quoted, not reproduced here.",
+    "Round 3: ainyan03 supplied ESP32-P4 hardware validation (their measurement, not m5agent's); the host model reproduces the old code's 2-clock cutoff for 0x55 and the 0x02 second-attempt ACK release.",
+    "PR left OPEN; one Japanese comment posted in round 1 and one in round 2; no close, no push to the upstream repository, no code changes to m5stack/M5GFX."
   ]
 }

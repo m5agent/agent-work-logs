@@ -144,3 +144,77 @@ UnitNFC の `0x2D` / `0x93` の各 0 ビット位置、write 受信 ACK、SCL �
 - CI（head `fa2bc69`）：27 チェックすべて success、fail / pending なし。
 
 未覆盖は第 6 節と同じ。hardware / virtual-device は引き続き `NOT RUN`。
+
+## 9. 第 3 ラウンド（ainyan03 の ESP32-P4 実機報告、2026-11-17）
+
+PR のコメント
+<https://github.com/m5stack/M5GFX/pull/427#issuecomment-6943480159>
+で、ainyan03 が ESP32-P4 実機での再現と修正確認を報告した。これは m5agent の測定ではなく、
+著者側の `hardware validation` である。
+
+### 9.1 報告の内容
+
+- 環境：ESP32-P4 (rev 3.2)、Arduino (pioarduino `55.03.312`)、M5GFX develop `2121308` に
+  #424 の差し替え後の修正案（`probe_hardware.inl` の差分はこの PR と同じ）を当てたもの。
+- 内部 I2C は GPIO11 = SDA / GPIO9 = SCL（HP ポート）。ボード判定は PM1 (0x6E)、
+  取り残されるスレーブは同じバスの BMI270 (0x68)。SDA / SCL をロジックアナライザで記録。
+- 状態の作り方：BMI270 の `0x46` (FIFO_WTM_0) に保持させたい値を書き、`0x45` を指して
+  read を開始して 1 バイト受けて ACK を返し、SCL を離して STOP を出さずに `esp_restart()`。
+  スレーブは `0x46` の値の先頭ビットを出したまま待つ。
+- 結果：`0x55` は develop で 4/4 誤判定（表示器なし）→ この PR で 4/4 正判定。`0x2A` は
+  1/1 誤判定 → 1/1 正判定。`0x02` は develop でも正判定（1 回目は失敗、2 回目に ACK の
+  位置でスレーブが SDA を離した）。
+- develop の `0x55` は解放の試みが 2 回あり、どちらも 2 クロックで打ち切られ、1 のビットで
+  SDA が High になった時点で STOP に移り、その間に次の 0 ビットで Low に戻されていた。
+  この PR では最初の試みが 1 クロックで STOP まで成立した。
+- 未確認：write の受信中に取り残されたスレーブ、ESP32-S3 の
+  `recover_held_sda_and_resample()` の経路。
+
+### 9.2 コード側の照合
+
+`fa2bc69` の `src/board_detect/probe_hardware.inl` は `b8f5d89` と同一の blob
+`cb8577113cf72abfaaa7cdaae9ac02b8a46ad9a6`。base `2121308` の blob は
+`437cb85547b0f5bf396bc7439b275e840184b066` で、PR の差分（+12/-15）はこのファイルを含む。
+したがって、報告が当てた差分と PR の修正本体は同じファイル内容である。
+
+報告の状態を `code/owner_report_check.cpp` でモデル化した。マスターが 1 バイトを ACK した後、
+スレーブが次のバイトの MSB を出して待っている状態から、`release_held_sda()` を 2 回続けて
+呼ぶ（報告の 2 回の解放試行に合わせる）。SCL の立ち下がりで次のビットに進み、8 データビットの
+後の ACK スロットで SDA を離し、NACK または STOP で送信を止める。
+
+| 保持値 | develop `b48dce0` | `fa2bc69` |
+| --- | --- | --- |
+| `0x55` | 1 回目 2 パルスで `false`、2 回目も 2 パルスで `false` | 1 パルスで `true` |
+| `0x2A` | 1 回目 3、2 回目 2 パルスで `false` | 2 パルスで `true` |
+| `0x02` | 1 回目 7 パルスで `false`、2 回目 2 パルスで `true`（ACK 位置） | 6 パルスで `true` |
+
+生出力は `evidence/owner-report-check-old.txt` / `-new.txt`。報告の「`0x55` は 2 クロックで
+打ち切り」「`0x02` は 2 回目に ACK の位置で離す」と一致し、新コードは最初の 1 ビットで
+止まらず、同じクロックのうちに STOP が成立する。これは実機の電気的挙動ではなく、
+GPIO イベント列に対する host モデルの結果である。
+
+### 9.3 未確認とされていた 2 点
+
+- **write 受信中**：I2C の write でスレーブが SDA を駆動するのは ACK スロットだけなので、
+  リセットで保持され得るのは ACK の間だけである。同梱テストの「ACK を保持する受信側」が
+  その形で、解放は ACK のクロックで起きる。実機の ACK タイミングは未確認のままだが、
+  上限 10 パルスは 9 ビット + ACK 1 クロックの余裕を含む。
+- **ESP32-S3 の `recover_held_sda_and_resample()`**：この関数は `release_held_sda()` を
+  呼ぶだけで（`probe_hardware.inl:55`）、戻り値を使わずピン状態を再サンプルする。呼び出しは
+  `esp32s3.inl:428,675,757,761` の 4 箇所（PMIC 判定、Paper 系、Cardputer のサブ division）。
+  修正はこの経路にもそのまま入り、別実装の変更は要らない。解放できなかった場合も再サンプル
+  結果は従来と同じで、余分なクロックは最大 10 回に収まる。実際に SDA を保持させた S3 実機
+  確認は未実施（報告の StickS3 / CardputerADV は 0/40 で、この経路の効果を直接は示さない）。
+
+### 9.4 仮想デバイス
+
+Device Service には `tab5` (ESP32-P4NRW32, esp-emulator-native) のプロファイルがあるが、
+サービスは `tab5_enabled: false` を返し、この環境では起動できない。加えて、リセットが
+転送中に当たって周辺が SDA を保持したピン状態を注入する手段がないため、この修正の効果は
+仮想デバイスでも確認していない（`NOT RUN`）。
+
+### 9.5 判定
+
+ブロッカーなし、は変わらない。hardware validation は著者側の P4 1 ボード分が追加され、
+m5agent 自身の実機・仮想検証は引き続き `NOT RUN`。残る未確認は write 中 ACK、S3 の保持
+SDA 経路、PR 本文の 11 ボードで、いずれもマージのブロッカーではない。

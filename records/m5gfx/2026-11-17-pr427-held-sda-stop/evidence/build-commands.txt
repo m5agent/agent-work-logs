@@ -38,3 +38,22 @@ sed -i '' 's/++i < 10/++i < 11/' /tmp/mut_src/board_detect/probe_hardware.inl
 c++ ... -I/tmp/mut_src test/board_detect/held_sda_release.cpp -o held_mut
 # -> assert(pulses == 10) at held_sda_release.cpp:112, exit 134
 #    (evidence/held-sda-bound-mutant.txt)
+
+# --- round 3: ainyan03's ESP32-P4 hardware report, two-attempt state model ---
+# 8. model at PR head fa2bc69
+c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -pedantic \
+  '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
+  -include test/board_detect/support/native_devices_io.hpp \
+  -Itest/board_detect -Itest/board_detect/stubs -Isrc code/owner_report_check.cpp -o owner_new
+./owner_new   # -> evidence/owner-report-check-new.txt
+# 9. same model in a worktree at develop b48dce0
+git worktree add /tmp/m5gfx-427-base b48dce0
+cp code/owner_report_check.cpp /tmp/m5gfx-427-base/
+cd /tmp/m5gfx-427-base && c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -pedantic \
+  '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
+  -include test/board_detect/support/native_devices_io.hpp \
+  -Itest/board_detect -Itest/board_detect/stubs -Isrc owner_report_check.cpp -o owner_old
+./owner_old   # -> evidence/owner-report-check-old.txt
+# 10. blob and diff facts
+git rev-parse fa2bc69:src/board_detect/probe_hardware.inl b8f5d89:src/board_detect/probe_hardware.inl
+# -> evidence/owner-report-head-blob.txt
