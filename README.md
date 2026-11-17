@@ -48,6 +48,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | ESP Emulator | ESP32-S3 原生 watchdog 回执 | `PASS`（探针和 API/ZIP 对照） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/) |
+| 2026-11-17 | ESP Emulator | Cardputer ADV 原版离线 DNS 和授时 | `PARTIAL`（原版 SNTP 通过，公共 HTTP 待验证） | [查看](records/esp-emulator/2026-11-17-cardputer-adv-offline-time/) |
 | 2026-11-17 | ESP Emulator | Tab5 ST7123 原生单点长按 | `PARTIAL`（持续触点、原版审核通过；整机关机待验证） | [查看](records/esp-emulator/2026-11-17-tab5-st7123-hold/) |
 | 2026-11-17 | Firmware Review Service | idkOS v1.3.0 启动失败归因：ADV 固件被按 Cardputer 机型审查 | `PARTIAL`（ADV 机型两次出帧、非 ADV 复现同一 I2C 错误；未开 issue；真机/符号化 NOT RUN） | [查看](records/firmware-review-service/2026-11-17-idkos-adv-profile-attribution/) |
 | 2026-11-17 | Firmware Review Service | 按声明控件取证、网络/翻页误报与非拉丁文件名修复 | `PARTIAL`（97 项测试、3 条转 VERIFIED；网络策略仍待定） | [查看](records/firmware-review-service/2026-11-17-interaction-plan-and-upload-fixes/) |

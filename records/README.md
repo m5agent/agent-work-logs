@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | ESP Emulator | ESP32-S3 原生 watchdog 回执 | `PASS`（探针和 API/ZIP 对照） | [查看](esp-emulator/2026-11-17-s3-iwdt-observability/) |
+| 2026-11-17 | ESP Emulator | Cardputer ADV 原版离线 DNS 和授时 | `PARTIAL`（原版 SNTP 通过，公共 HTTP 待验证） | [查看](esp-emulator/2026-11-17-cardputer-adv-offline-time/) |
 | 2026-11-17 | ESP Emulator | Tab5 ST7123 原生单点长按 | `PARTIAL`（持续触点、原版审核通过；整机关机待验证） | [查看](esp-emulator/2026-11-17-tab5-st7123-hold/) |
 | 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
 | 2026-11-17 | ESP Emulator | 原生实时 PC、Tab5 触摸、NC1020 存档、Dial 音频控制与设备能力预检 | `PARTIAL`（同客体功能与 HTTP 预检通过，原版全面行为保留限制） | [查看](esp-emulator/2026-11-17-native-review-evidence-next/) |
