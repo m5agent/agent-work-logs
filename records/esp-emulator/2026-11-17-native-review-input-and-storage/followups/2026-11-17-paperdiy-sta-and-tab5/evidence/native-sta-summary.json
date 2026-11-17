@@ -1,0 +1,452 @@
+{
+  "validation": "virtual-device validation",
+  "scope": "QEMU native Cardputer and Cardputer ADV station mode, trusted local TCP HTTP fixture, no WAN",
+  "code_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+  "documentation_commit": "78e25e4e4fa5f8e4b2172c97f2daeb0f74476e89",
+  "idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+  "gcc_version": "14.2.0",
+  "fixture_and_harness_sha256": {
+    "sta-fixture/main/probe.c": "c2fd8090fb37e19f0e6a15ce9782fb73b06486c8df134efbb71687c57c70a3c1",
+    "build-sta.sh": "dea36c8c9cfbec277c107d818fdd6c98ac58745c59f2c2805588241268658795",
+    "test-sta.py": "069e86780ef8e96b1af337f10c6c4609cbb3e0f5155e6b623f8ae46782351734",
+    "strict-qemu.py": "278ef8025224af8ba6fb87402caafd643204a69083ece590540fae2f9e7440fb"
+  },
+  "initial_failures": [
+    {
+      "firmware_sha256": "bd1ed720bfd7cb1096ef0580c24c49f89fde0af281825ab72bc9869af3592e10",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "capture_sha256": "cb0fe4af211ac71449120643b0699c125739db15565a22977d82f56c4bc688a2",
+      "capture_packets": 21,
+      "guest_result": "NO_FIXTURE",
+      "observed_dhcp_dora": true,
+      "fixed_http_tcp_bidirectional": true,
+      "observed_external_destinations": 0,
+      "status": "FAIL",
+      "device": "cardputer",
+      "scenario": "open"
+    },
+    {
+      "firmware_sha256": "945fcb142692a06658e87ed14fe4903012242c030647d67016dc15d518dc598c",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "capture_sha256": "d76a5f40fc69da665d9f07b9a7a606f1b4299a2556adf67ef85ab549ab7d82af",
+      "capture_packets": 21,
+      "guest_result": "NO_FIXTURE",
+      "observed_dhcp_dora": true,
+      "fixed_http_tcp_bidirectional": true,
+      "observed_external_destinations": 0,
+      "status": "FAIL",
+      "device": "cardputer-adv",
+      "scenario": "wpa2"
+    }
+  ],
+  "initial_failure_diagnosis": "Guest waited for TCP EOF after receiving a complete HTTP response over the persistent forwarded stream. Corrected parsing to finish from Content-Length and validate exact bytes.",
+  "corrected_runs": [
+    {
+      "validation": "virtual-device validation",
+      "device": "cardputer",
+      "scenario": "open",
+      "profile": "generic-observe",
+      "service_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "firmware_sha256": "37e214ffb3d52530e0a9dc22511d4c208dffa73ce137a2a91504f3df0fdac886",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "expected_result": "PASS",
+      "host_http_expected_body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d",
+      "hardware_validation": "NOT RUN",
+      "sta_advertised": {
+        "runtime": "qemu-wifi",
+        "profile": "generic-observe",
+        "operation_assertions": false
+      },
+      "namespace_policy_failed_closed": true,
+      "guest_result": "PASS",
+      "guest_serial_sha256": "c317b390b93448cd480a5afb9e2dfc5954db15a4bc4f122bfc3a82b8c39e7e13",
+      "guest_associated": true,
+      "guest_dhcp": true,
+      "guest_http_body_match": true,
+      "http_requests": [
+        {
+          "allowed": true,
+          "body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d"
+        }
+      ],
+      "pre_stop_capture_status": "CAPTURING",
+      "topology": {
+        "machine": "m5cardputer",
+        "nic": "misc.esp32s3.wifi",
+        "backends": 1,
+        "restrict": "on",
+        "ipv6": "off",
+        "forward": "one fixed fixture-only TCP endpoint"
+      },
+      "qom_wifi_nic_count": 1,
+      "session_stopped": true,
+      "service_network_status": "PARTIAL",
+      "native_data_plane": {
+        "schema_version": 1,
+        "scope": "same-session-native-ipv4-transport",
+        "source": "ethernet-pcap",
+        "capture_state": "finalized",
+        "capture_sha256": "8093d0d0dca631b3dce244ed9cfaf73823633fe50e1ca1f1c085d55a2878b8b1",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 1
+        },
+        "udp": {
+          "bidirectional_payload_flows": 0
+        }
+      },
+      "capture_analysis_status": "PASS",
+      "capture_sha256": "8093d0d0dca631b3dce244ed9cfaf73823633fe50e1ca1f1c085d55a2878b8b1",
+      "capture_packets": 17,
+      "observed_dhcp_dora": true,
+      "fixed_http_tcp_bidirectional": true,
+      "captured_tcp_packets": 8,
+      "captured_udp_packets": 4,
+      "observed_external_destinations": 0,
+      "released": true,
+      "status": "COMPLETE"
+    },
+    {
+      "validation": "virtual-device validation",
+      "device": "cardputer",
+      "scenario": "wpa2",
+      "profile": "generic-observe",
+      "service_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "firmware_sha256": "92e02c8cc9da544dfc24bfe2fe223192847df11a258213e6cb7dd02c471461c7",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "expected_result": "PASS",
+      "host_http_expected_body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d",
+      "hardware_validation": "NOT RUN",
+      "sta_advertised": {
+        "runtime": "qemu-wifi",
+        "profile": "generic-observe",
+        "operation_assertions": false
+      },
+      "guest_result": "PASS",
+      "guest_serial_sha256": "bda154e15163a474db9a40290d16b1c53c890eb8e5c18f1a0e046e937801ab20",
+      "guest_associated": true,
+      "guest_dhcp": true,
+      "guest_http_body_match": true,
+      "http_requests": [
+        {
+          "allowed": true,
+          "body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d"
+        }
+      ],
+      "pre_stop_capture_status": "CAPTURING",
+      "topology": {
+        "machine": "m5cardputer",
+        "nic": "misc.esp32s3.wifi",
+        "backends": 1,
+        "restrict": "on",
+        "ipv6": "off",
+        "forward": "one fixed fixture-only TCP endpoint"
+      },
+      "qom_wifi_nic_count": 1,
+      "session_stopped": true,
+      "service_network_status": "PARTIAL",
+      "native_data_plane": {
+        "schema_version": 1,
+        "scope": "same-session-native-ipv4-transport",
+        "source": "ethernet-pcap",
+        "capture_state": "finalized",
+        "capture_sha256": "425dec5a12a75cbb58a17fc877a528829ec626f0985742f605febde3ffd75e28",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 1
+        },
+        "udp": {
+          "bidirectional_payload_flows": 0
+        }
+      },
+      "capture_analysis_status": "PASS",
+      "capture_sha256": "425dec5a12a75cbb58a17fc877a528829ec626f0985742f605febde3ffd75e28",
+      "capture_packets": 17,
+      "observed_dhcp_dora": true,
+      "fixed_http_tcp_bidirectional": true,
+      "captured_tcp_packets": 8,
+      "captured_udp_packets": 4,
+      "observed_external_destinations": 0,
+      "released": true,
+      "status": "COMPLETE"
+    },
+    {
+      "validation": "virtual-device validation",
+      "device": "cardputer-adv",
+      "scenario": "open",
+      "profile": "generic-observe",
+      "service_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "firmware_sha256": "37e214ffb3d52530e0a9dc22511d4c208dffa73ce137a2a91504f3df0fdac886",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "expected_result": "PASS",
+      "host_http_expected_body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d",
+      "hardware_validation": "NOT RUN",
+      "sta_advertised": {
+        "runtime": "qemu-wifi",
+        "profile": "generic-observe",
+        "operation_assertions": false
+      },
+      "guest_result": "PASS",
+      "guest_serial_sha256": "639105379d33baf0f6a724ef27bd12fbde775cb11b554ab410263bea7cde09d7",
+      "guest_associated": true,
+      "guest_dhcp": true,
+      "guest_http_body_match": true,
+      "http_requests": [
+        {
+          "allowed": true,
+          "body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d"
+        }
+      ],
+      "pre_stop_capture_status": "CAPTURING",
+      "topology": {
+        "machine": "m5cardputeradv",
+        "nic": "misc.esp32s3.wifi",
+        "backends": 1,
+        "restrict": "on",
+        "ipv6": "off",
+        "forward": "one fixed fixture-only TCP endpoint"
+      },
+      "qom_wifi_nic_count": 1,
+      "session_stopped": true,
+      "service_network_status": "PARTIAL",
+      "native_data_plane": {
+        "schema_version": 1,
+        "scope": "same-session-native-ipv4-transport",
+        "source": "ethernet-pcap",
+        "capture_state": "finalized",
+        "capture_sha256": "48f5a4046a09351d0c89d243c33df9108f47bea13a89b1858f98a18ba69ebf6f",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 1
+        },
+        "udp": {
+          "bidirectional_payload_flows": 0
+        }
+      },
+      "capture_analysis_status": "PASS",
+      "capture_sha256": "48f5a4046a09351d0c89d243c33df9108f47bea13a89b1858f98a18ba69ebf6f",
+      "capture_packets": 17,
+      "observed_dhcp_dora": true,
+      "fixed_http_tcp_bidirectional": true,
+      "captured_tcp_packets": 8,
+      "captured_udp_packets": 4,
+      "observed_external_destinations": 0,
+      "released": true,
+      "status": "COMPLETE"
+    },
+    {
+      "validation": "virtual-device validation",
+      "device": "cardputer-adv",
+      "scenario": "wpa2",
+      "profile": "generic-observe",
+      "service_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "firmware_sha256": "92e02c8cc9da544dfc24bfe2fe223192847df11a258213e6cb7dd02c471461c7",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "expected_result": "PASS",
+      "host_http_expected_body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d",
+      "hardware_validation": "NOT RUN",
+      "sta_advertised": {
+        "runtime": "qemu-wifi",
+        "profile": "generic-observe",
+        "operation_assertions": false
+      },
+      "guest_result": "PASS",
+      "guest_serial_sha256": "522ea32f26ff5f9a8fbd037b3d64a14e7e3a401a9773cfdebee1c3e65b8a21f9",
+      "guest_associated": true,
+      "guest_dhcp": true,
+      "guest_http_body_match": true,
+      "http_requests": [
+        {
+          "allowed": true,
+          "body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d"
+        }
+      ],
+      "pre_stop_capture_status": "CAPTURING",
+      "topology": {
+        "machine": "m5cardputeradv",
+        "nic": "misc.esp32s3.wifi",
+        "backends": 1,
+        "restrict": "on",
+        "ipv6": "off",
+        "forward": "one fixed fixture-only TCP endpoint"
+      },
+      "qom_wifi_nic_count": 1,
+      "session_stopped": true,
+      "service_network_status": "PARTIAL",
+      "native_data_plane": {
+        "schema_version": 1,
+        "scope": "same-session-native-ipv4-transport",
+        "source": "ethernet-pcap",
+        "capture_state": "finalized",
+        "capture_sha256": "5487289b4aa6aae49e88a556c4b3c58cfa8de919823d4ae4ae8d140ed892adce",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 1
+        },
+        "udp": {
+          "bidirectional_payload_flows": 0
+        }
+      },
+      "capture_analysis_status": "PASS",
+      "capture_sha256": "5487289b4aa6aae49e88a556c4b3c58cfa8de919823d4ae4ae8d140ed892adce",
+      "capture_packets": 19,
+      "observed_dhcp_dora": true,
+      "fixed_http_tcp_bidirectional": true,
+      "captured_tcp_packets": 10,
+      "captured_udp_packets": 4,
+      "observed_external_destinations": 0,
+      "released": true,
+      "status": "COMPLETE"
+    },
+    {
+      "validation": "virtual-device validation",
+      "device": "cardputer",
+      "scenario": "wrong",
+      "profile": "generic-observe",
+      "service_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "firmware_sha256": "92e02c8cc9da544dfc24bfe2fe223192847df11a258213e6cb7dd02c471461c7",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "expected_result": "NO_LEASE",
+      "host_http_expected_body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d",
+      "hardware_validation": "NOT RUN",
+      "sta_advertised": {
+        "runtime": "qemu-wifi",
+        "profile": "generic-observe",
+        "operation_assertions": false
+      },
+      "guest_result": "NO_LEASE",
+      "guest_serial_sha256": "8d70404652749cff37cadc6925a960aedd4ad08ab54bbf30dd9f5f8b676e9030",
+      "guest_associated": false,
+      "guest_dhcp": false,
+      "guest_http_body_match": false,
+      "http_requests": [],
+      "pre_stop_capture_status": "CAPTURING",
+      "topology": {
+        "machine": "m5cardputer",
+        "nic": "misc.esp32s3.wifi",
+        "backends": 1,
+        "restrict": "on",
+        "ipv6": "off",
+        "forward": "one fixed fixture-only TCP endpoint"
+      },
+      "qom_wifi_nic_count": 1,
+      "session_stopped": true,
+      "service_network_status": "PARTIAL",
+      "native_data_plane": {
+        "schema_version": 1,
+        "scope": "same-session-native-ipv4-transport",
+        "source": "ethernet-pcap",
+        "capture_state": "finalized",
+        "capture_sha256": "704e5e5b3234433c01fcfd1b20a306e77e985038120492dc53965c3edd38a4ea",
+        "dhcpv4": {
+          "completed_dora_transactions": 0,
+          "leased_address_count": 0
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 0
+        },
+        "udp": {
+          "bidirectional_payload_flows": 0
+        }
+      },
+      "capture_analysis_status": "PASS",
+      "capture_sha256": "704e5e5b3234433c01fcfd1b20a306e77e985038120492dc53965c3edd38a4ea",
+      "capture_packets": 0,
+      "observed_dhcp_dora": false,
+      "fixed_http_tcp_bidirectional": false,
+      "captured_tcp_packets": 0,
+      "captured_udp_packets": 0,
+      "observed_external_destinations": 0,
+      "released": true,
+      "status": "COMPLETE"
+    },
+    {
+      "validation": "virtual-device validation",
+      "device": "cardputer-adv",
+      "scenario": "wrong",
+      "profile": "generic-observe",
+      "service_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "firmware_sha256": "92e02c8cc9da544dfc24bfe2fe223192847df11a258213e6cb7dd02c471461c7",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "expected_result": "NO_LEASE",
+      "host_http_expected_body_sha256": "070c783d34868144e37620b284967c59ead89af2130855da1f96b3563c9dd36d",
+      "hardware_validation": "NOT RUN",
+      "sta_advertised": {
+        "runtime": "qemu-wifi",
+        "profile": "generic-observe",
+        "operation_assertions": false
+      },
+      "guest_result": "NO_LEASE",
+      "guest_serial_sha256": "eef6624f0d874d6d2695d521ccc0dbbb20c13905d2923574993e01b51d613c86",
+      "guest_associated": false,
+      "guest_dhcp": false,
+      "guest_http_body_match": false,
+      "http_requests": [],
+      "pre_stop_capture_status": "CAPTURING",
+      "topology": {
+        "machine": "m5cardputeradv",
+        "nic": "misc.esp32s3.wifi",
+        "backends": 1,
+        "restrict": "on",
+        "ipv6": "off",
+        "forward": "one fixed fixture-only TCP endpoint"
+      },
+      "qom_wifi_nic_count": 1,
+      "session_stopped": true,
+      "service_network_status": "PARTIAL",
+      "native_data_plane": {
+        "schema_version": 1,
+        "scope": "same-session-native-ipv4-transport",
+        "source": "ethernet-pcap",
+        "capture_state": "finalized",
+        "capture_sha256": "704e5e5b3234433c01fcfd1b20a306e77e985038120492dc53965c3edd38a4ea",
+        "dhcpv4": {
+          "completed_dora_transactions": 0,
+          "leased_address_count": 0
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 0
+        },
+        "udp": {
+          "bidirectional_payload_flows": 0
+        }
+      },
+      "capture_analysis_status": "PASS",
+      "capture_sha256": "704e5e5b3234433c01fcfd1b20a306e77e985038120492dc53965c3edd38a4ea",
+      "capture_packets": 0,
+      "observed_dhcp_dora": false,
+      "fixed_http_tcp_bidirectional": false,
+      "captured_tcp_packets": 0,
+      "captured_udp_packets": 0,
+      "observed_external_destinations": 0,
+      "released": true,
+      "status": "COMPLETE"
+    }
+  ],
+  "not_run": [
+    "Linux namespace STA guest",
+    "DNS operation assertion",
+    "UDP application roundtrip",
+    "AP mode",
+    "physical hardware and RF"
+  ],
+  "source_summary_sha256": "1ab343148f5a225b5613bc50dfa9ed2bd0dd2e5fcb123d382c72e6d22339a093"
+}

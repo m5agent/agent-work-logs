@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "validation": "virtual-device validation",
+  "status": "PASS",
+  "scope": "native release and three saved-original review dry-runs",
+  "emulator_commit": "feb627f22e01cd1a530f63dd148285d3f39afe43",
+  "reviewer_commit": "7cab78ca1629f9845977739fd2461f6b146793f4",
+  "tests": {
+    "platform": {
+      "total": 2283,
+      "skipped": 10,
+      "failed": 0
+    },
+    "reviewer": {
+      "total": 129,
+      "failed": 0
+    },
+    "browser_host_contracts": "PASS",
+    "main_ci": "PASS"
+  },
+  "limits": {
+    "physical_hardware": "NOT RUN",
+    "browser_wasm_guest": "NOT RUN",
+    "tab5_originals_no_elf": "PARTIAL",
+    "burner_submissions": 0,
+    "live_rollback": "NOT RUN"
+  },
+  "evidence": {
+    "evidence/isolated-preflight-summary.json": {
+      "sha256": "ee11eff2a05c89198437fa8b0061a88d4a304e79e267fb82a5670cd85247ce74",
+      "bytes": 8276
+    },
+    "evidence/original-replay-summary.json": {
+      "sha256": "0441f48cea42efab23b869f0ba3ab9a4ad7df26082b6e0e93307f489463ceddc",
+      "bytes": 6812
+    },
+    "evidence/resident-readback-summary.json": {
+      "sha256": "14060560199a8a80c57a3e2d996a916c0b7a22e3dca693bd85d91e19f78fac95",
+      "bytes": 1076
+    }
+  },
+  "kind": "resident-cutover-and-saved-firmware-replay",
+  "source": {
+    "emulator_commit": "feb627f22e01cd1a530f63dd148285d3f39afe43",
+    "reviewer_commit": "7cab78ca1629f9845977739fd2461f6b146793f4"
+  },
+  "hardware": {},
+  "firmware": {
+    "mp3": {
+      "sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+      "bytes": 885600
+    },
+    "2048": {
+      "sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+      "bytes": 505760
+    },
+    "ember": {
+      "sha256": "f4261dbbabdaac5825838455ac553cc21ef9c5c6d308cb2c82941bd8ccc1cb5e",
+      "bytes": 1187056
+    }
+  },
+  "execution": {
+    "backend": "native QEMU Xtensa",
+    "mode": "saved_snapshot",
+    "burner_submissions": 0
+  },
+  "checks": {
+    "build_and_contracts": {
+      "platform": {
+        "total": 2283,
+        "skipped": 10,
+        "failed": 0
+      },
+      "reviewer": {
+        "total": 129,
+        "failed": 0
+      },
+      "browser_host_contracts": "PASS",
+      "main_ci": "PASS"
+    },
+    "resident_readback": "PASS",
+    "saved_review": {
+      "mp3": "SIM_VERIFIED",
+      "2048": "SIM_VERIFIED",
+      "ember": "SIM_VERIFIED"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-17",
+  "overall_status": "PARTIAL",
+  "title": "PaperDIY card detection, Cardputer native STA, and Tab5 upstream candidate",
+  "source": {
+    "emulator_repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "reviewer_commit": "ecde0561fe93a551610428934b2498b541c96745",
+    "emulator_paperdiy_candidate": "feb627f22e01cd1a530f63dd148285d3f39afe43",
+    "emulator_sta_code_commit": "f80000e5cac53c9dc8371a3b891d9eb753ff3a5e",
+    "emulator_sta_docs_commit": "78e25e4e4fa5f8e4b2172c97f2daeb0f74476e89",
+    "emulator_tab5_test_commit": "463ec8dfb50f6d9b4989dc83547e1e7c74e9156d"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "target_models": [
+      "PaperDIY",
+      "Cardputer K132",
+      "Cardputer ADV",
+      "Tab5"
+    ]
+  },
+  "firmware": {
+    "identity": "Per-case SHA-256 and size where recorded in bounded evidence summaries"
+  },
+  "execution": {
+    "environment": "Isolated native Device Service and reviewer on macOS",
+    "validation": "virtual-device validation",
+    "browser_wasm": "NOT RUN",
+    "burner_submission": "NOT RUN",
+    "native_sta_platform_checks": {
+      "total": 2279,
+      "skipped": 10,
+      "failures": 0
+    }
+  },
+  "checks": [
+    {
+      "name": "PaperDIY GPIO48, SD FAT32 read/write/remount and same-guest reset",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperDIY older runtime guard and no-media differential",
+      "status": "PASS"
+    },
+    {
+      "name": "K132 and ADV trusted fixture association, DHCP and byte-exact HTTP",
+      "status": "PASS"
+    },
+    {
+      "name": "macOS no-namespace review admission guard and offline fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "reviewer Linux namespace application qualification",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Tab5 native DSI ESP-IDF control and legacy CSR single-step",
+      "status": "PASS"
+    },
+    {
+      "name": "Tab5 three original application frames",
+      "status": "FAIL"
+    },
+    {
+      "name": "Tab5 routine backend qualification",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "source candidate validation for native STA",
+      "status": "PASS"
+    },
+    {
+      "name": "resident deployment verification",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical hardware and browser-WASM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "name": "evidence/native-sta-summary.json",
+      "sha256": "067e8502b0105b0094a922eb9e77a87d32877714e8eba393e5206e928b9a267b",
+      "bytes": 17412
+    },
+    {
+      "name": "evidence/paperdiy-sd-summary.json",
+      "sha256": "b9f7b491799ff89b19ff39476c3cb9add62fdeabe880965e1bdb853900744342",
+      "bytes": 5906
+    },
+    {
+      "name": "evidence/reviewer-namespace-negative-summary.json",
+      "sha256": "63e38d4d06ccba227060cf1d22439ea6d8d5dc35727015b352c98c6380085ad0",
+      "bytes": 1655
+    },
+    {
+      "name": "evidence/tab5-1.1.0-summary.json",
+      "sha256": "4f05bfc515a36ff93d74b05bcdc5e0705809eb14698fb02f0bd9d0ce1c0426cd",
+      "bytes": 6930
+    }
+  ]
+}

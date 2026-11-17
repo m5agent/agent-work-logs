@@ -1,0 +1,178 @@
+{
+  "kind": "derived summary",
+  "validation": "virtual-device validation",
+  "status": "PARTIAL",
+  "service_commit": "463ec8dfb50f6d9b4989dc83547e1e7c74e9156d",
+  "upstream_version": "1.1.0",
+  "upstream_release": "https://github.com/espressif/esp-emulator/releases/tag/v1.1.0",
+  "upstream_archive_sha256": "8bf2bd236c3bf472e8327e3b784bc2901e0ec5c65b5cbf68b4cdd6d0974264bc",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "dsi_observer_sha256": "fc61bd9926d2b4bdf9b12bfd02984a557e3fcc9e3226dd6978f54b2f6209ff3d",
+  "dsi_protocol_helper_sha256": "994efe25821405cc51bf050b1500478a783dfc08da6454c3b4956758d8702347",
+  "runtime_configuration": {
+    "rom": "esp32p4_rev0",
+    "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse": "P4 v1.0, session copy",
+    "efuse_sha256": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "psram_mib": 32,
+    "companion": "C6 ESP-Hosted v2.12.6 with the same esp-emu binary",
+    "companion_firmware_sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+    "console": "uart0 for originals and DSI control, auto only for the independent abort check",
+    "dsi": "upstream co-simulation observer on virtual channel 0",
+    "gdb": "hardware breakpoint, registers and memory observation, and single step of the original CSR instruction"
+  },
+  "idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+  "originals": [
+    {
+      "case": "arduventure",
+      "firmware_sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+      "firmware_bytes": 623152,
+      "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "suite": "upstream native DSI viewer",
+      "no_elf": true,
+      "serial_bytes": 3868,
+      "serial_sha256": "1d1fac9d762790812fae6843eaa8935d55c49a7d7c5b9c376f4c83631a479add",
+      "rom_boot_count": 1,
+      "illegal_instruction": 0,
+      "dwc_assert": 0,
+      "board_probe_assert": 0,
+      "observed_seconds": 32.203,
+      "zip_crc": true,
+      "stopped": true,
+      "no_active_leases": true,
+      "viewer_exited": true,
+      "service_exited": true,
+      "dsi_stream_options": [],
+      "dsi_dbi_commands": 0,
+      "last_observed_stage": "app_main reported Wrong display geometry and returned",
+      "application_frame": "FAIL"
+    },
+    {
+      "case": "carplay",
+      "firmware_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+      "firmware_bytes": 2221360,
+      "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "suite": "upstream native DSI viewer",
+      "no_elf": true,
+      "serial_bytes": 65536,
+      "serial_sha256": "92ec343fb754cfdda1f1fa0bef76274d29a452c3e27ff9f7095c83444463a937",
+      "rom_boot_count": 16,
+      "illegal_instruction": 0,
+      "dwc_assert": 0,
+      "board_probe_assert": 0,
+      "observed_seconds": 32.183,
+      "zip_crc": true,
+      "stopped": true,
+      "no_active_leases": true,
+      "viewer_exited": true,
+      "service_exited": true,
+      "dsi_stream_options": [],
+      "dsi_dbi_commands": 0,
+      "last_observed_stage": "continuous SW_CPU_RESET after initialization",
+      "application_frame": "FAIL"
+    },
+    {
+      "case": "tabos",
+      "firmware_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+      "firmware_bytes": 7439248,
+      "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "suite": "upstream native DSI viewer",
+      "no_elf": true,
+      "serial_bytes": 4190,
+      "serial_sha256": "e5f44a9a1af37a8945dabbd3d70fd860662deea3a7cd725300e1440a06565e88",
+      "rom_boot_count": 1,
+      "illegal_instruction": 0,
+      "dwc_assert": 0,
+      "board_probe_assert": 0,
+      "observed_seconds": 32.245,
+      "zip_crc": true,
+      "stopped": true,
+      "no_active_leases": true,
+      "viewer_exited": true,
+      "service_exited": true,
+      "dsi_stream_options": [],
+      "dsi_dbi_commands": 0,
+      "last_observed_stage": "boot reached application descriptor and core-dump initialization",
+      "application_frame": "FAIL"
+    }
+  ],
+  "dsi_positive_control": {
+    "case": "dsi-control",
+    "firmware_sha256": "870cdc8d4aa5f5f9e16d64fd6e6da27ffa1dc8b492aef17bd46b97a1e3892e5d",
+    "firmware_bytes": 316048,
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "suite": "upstream native DSI viewer",
+    "no_elf": true,
+    "frame": {
+      "width": 128,
+      "height": 120,
+      "nonblack": 15360
+    },
+    "frame_sha256": "9dc827aed3951d2e9528952dae51beac851e91fc322df603a06a96f1598f7a13",
+    "serial_bytes": 3965,
+    "serial_sha256": "1fdb9fa6fff7bf247a8e27d835fbe7cef540df401dbb13b29b34b43bcd9b769d",
+    "rom_boot_count": 1,
+    "illegal_instruction": 0,
+    "dwc_assert": 0,
+    "board_probe_assert": 0,
+    "observed_seconds": 0.778,
+    "zip_crc": true,
+    "stopped": true,
+    "no_active_leases": true,
+    "viewer_exited": true,
+    "service_exited": true,
+    "dsi_stream_options": [
+      "stream on: 128x120"
+    ],
+    "dsi_dbi_commands": 2,
+    "rgb_pixel_counts": {
+      "ff0000": 7680,
+      "00ff00": 3840,
+      "0000ff": 3840
+    },
+    "guest_markers": [
+      "DSI_CONTROL_LDO_READY",
+      "DSI_CONTROL_BUS_READY",
+      "DSI_CONTROL_FRAME_READY"
+    ],
+    "dbi_commands": [
+      "0x11",
+      "0x29"
+    ],
+    "application_frame": "PASS",
+    "fixture_source_sha256": "b314fe4ed86917f82d8aacda68e041ba84c3ad0f315c54656f09656cb4363464"
+  },
+  "gdb_differential": [
+    {
+      "case": "carplay",
+      "csr": "0x346",
+      "pc_before": "0x4ff014c0",
+      "pc_after": "0x4ff014c4",
+      "csr_step": "PASS",
+      "csr_log_sha256": "e77645df95f927344080058690881e503cca3c7666603bf0ee580e9cefd1458b",
+      "abort_debug_log_sha256": "47cee87b7d2fe6bb9d62bd633860c0bc386947d3a6df378d40656c8bd5a6a111",
+      "abort_diagnostic": "assert failed: bsp_get_board_version bsp_display.c:189 (NULL)"
+    },
+    {
+      "case": "tabos",
+      "csr": "0x346",
+      "pc_before": "0x4ff0255a",
+      "pc_after": "0x4ff0255e",
+      "csr_step": "PASS",
+      "csr_log_sha256": "f195ad26d1000794021d8c8dc46ee1cd6991352d851e9e70c59f2832931698fd",
+      "abort_debug_log_sha256": "82f4adc0608fa60ca894c6599870f6944566774d8ffcecb660f53c42d3409e71",
+      "abort_diagnostic": "legacy usb_dwc_hal_init abort breakpoint not reached during the 12-second debug window"
+    }
+  ],
+  "debug_runs": {
+    "csr_cleanup_pass": true,
+    "abort_cleanup_pass": true
+  },
+  "redaction": "Process and session identifiers, local paths, serial and debugger transcripts, evidence archives and firmware binaries omitted.",
+  "not_run": [
+    "Tab5 touchscreen controller and native input acceptance",
+    "Tab5 USB Host enumeration and endpoint data transfer",
+    "physical hardware",
+    "browser-WASM"
+  ]
+}
