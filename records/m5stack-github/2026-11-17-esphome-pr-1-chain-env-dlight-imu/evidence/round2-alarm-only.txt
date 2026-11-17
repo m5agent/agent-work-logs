@@ -1,0 +1,21 @@
+# Host runtime, alarm-only config, PR head 419362b4a (ENV temp alarm AHT20 source, DLight low_light, IMU motion; no sensor entities)
+# Each node: boot settings, then exactly one read because the alarm has no state yet.
+REQ idx=1 cmd=0xE3 000a28 -> ok
+REQ idx=2 cmd=0x33 6466260032000000 -> ok
+REQ idx=2 cmd=0x31 01 -> ok
+REQ idx=2 cmd=0xE1 01 -> ok
+REQ idx=2 cmd=0x30  -> reading
+[V][binary_sensor:039]: 'DLight Dark' >> OFF
+REQ idx=3 cmd=0xE3 2828 -> ok
+REQ idx=3 cmd=0xE1 01 -> ok
+REQ idx=3 cmd=0x30  -> reading
+[V][binary_sensor:039]: 'IMU Motion' >> OFF
+REQ idx=1 cmd=0xE1 01 -> ok
+REQ idx=1 cmd=0x30  -> reading
+[V][binary_sensor:039]: 'ENV TempAlarm' >> OFF
+[V][binary_sensor:039]: 'ENV TempAlarm' >> ON
+[V][binary_sensor:039]: 'ENV TempAlarm' >> OFF
+[V][binary_sensor:039]: 'IMU Motion' >> ON
+[V][binary_sensor:039]: 'IMU Motion' >> OFF
+[V][binary_sensor:039]: 'DLight Dark' >> ON
+[V][binary_sensor:039]: 'DLight Dark' >> OFF

@@ -1,0 +1,30 @@
+# Host runtime, all-alarm config without sensor entities and without injected 0xE0 events, PR head 419362b4a
+# ENV: temperature alarm source SPA06 + humidity + pressure + altitude; DLight: Dark + Bright; IMU: motion + rotation + temperature alarm.
+# Expected initial states from the injected readings: ENV temp OFF (24.00 C), humidity OFF (45 %), pressure OFF (1013.2 hPa), altitude ON (12.34 m < 20 m), DLight both OFF (1234 lx), IMU motion/rotation OFF, IMU temp OFF (27.50 C).
+REQ idx=1 cmd=0xE3 010a28 -> ok
+REQ idx=2 cmd=0x33 d007000032000000 -> ok
+REQ idx=2 cmd=0x31 01 -> ok
+REQ idx=2 cmd=0xE1 01 -> ok
+REQ idx=2 cmd=0x30  -> reading
+[V][binary_sensor:039]: 'DLight Dark' >> OFF
+[V][binary_sensor:039]: 'DLight Bright' >> OFF
+REQ idx=3 cmd=0xE3 2828 -> ok
+REQ idx=3 cmd=0xE5 0a28 -> ok
+REQ idx=3 cmd=0xE1 07 -> ok
+REQ idx=3 cmd=0x30  -> reading
+[V][binary_sensor:039]: 'IMU Motion' >> OFF
+[V][binary_sensor:039]: 'IMU Rotation' >> OFF
+REQ idx=3 cmd=0x34  -> reading
+[V][binary_sensor:039]: 'IMU TempAlarm' >> OFF
+REQ idx=1 cmd=0xE5 1450 -> ok
+REQ idx=1 cmd=0xE7 1c250429 -> ok
+REQ idx=1 cmd=0xE9 d0070000a0860100 -> ok
+REQ idx=1 cmd=0xE1 0f -> ok
+REQ idx=1 cmd=0x30  -> reading
+[V][binary_sensor:039]: 'ENV HumAlarm' >> OFF
+REQ idx=1 cmd=0x31  -> reading
+[V][binary_sensor:039]: 'ENV TempAlarm' >> OFF
+[V][binary_sensor:039]: 'ENV PressAlarm' >> OFF
+[V][binary_sensor:039]: 'ENV AltAlarm' >> ON
+
+# Read counts after 8 s: ENV 0x30=1 0x31=1; DLight 0x30=1; IMU 0x30=1 0x34=1 (polling stops once each alarm has a state).
