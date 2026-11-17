@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Reproduce retained Core2 FreeRTOS task reports with an offline CLI",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a3e722f49c5e0155a1180ba846371dff54669dd5",
+    "code_commit": "9436f1475dd03490c304cd90f5780bf5e6484b4e"
+  },
+  "hardware": {},
+  "firmware": {
+    "board": "Core2",
+    "soc": "ESP32",
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "runtime_qemu_sha256": "cbc0ea74c5763a9d989562b7061516fb3489fdc4056ddce4e016d555c1b86bb2"
+  },
+  "execution": {
+    "environment": "macOS offline decoder; retained native Core2 QEMU guest sessions",
+    "validation": "virtual-device validation",
+    "vendor_decoder": "esp-coredump 1.17.2",
+    "gdb_sha256": "84cadeb43a8e6288733937ac53f6ae019ec28ed3fdee2dbd353db13212f6b27d"
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "name": "verified CRC and task list for retained watchdog and abort UART streams",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "reject mismatched ELF, serial manifest and corrupted payload",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "name": "sandbox denied an owned loopback test connection",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "sandbox denied an outside temporary-directory write",
+      "status": "PASS"
+    },
+    {
+      "layer": "review",
+      "name": "other boards, crash formats and RISC-V",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "device_response",
+      "name": "live inspection and Device Service HTTP task decoding",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/coredump-task-summary.json",
+      "sha256": "54e412cadbe20c368dee9acc6935537a7a691ac71f1dba815cd6d587e764395f",
+      "bytes": 3996
+    },
+    {
+      "path": "evidence/negative-controls-summary.json",
+      "sha256": "a91b685a5f1d6274f899b82e3f7890fc9ccab2d3f4ba535c60a4ac092b4336a6",
+      "bytes": 815
+    }
+  ],
+  "notes": [
+    "The cases replay the original isolated Core2 guest evidence and do not start a new guest.",
+    "Evidence files are bounded derived summaries."
+  ]
+}

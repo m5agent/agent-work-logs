@@ -34,3 +34,5 @@ Core2 受控 abort 与 CPU1 中断看门狗都产生同会话诊断，已匹配�
 - [Tab5 CarPlay v1.0.0 原版 DSI 就绪](followups/2026-11-17-tab5-carplay-native-dsi/)
 
 [离线 FreeRTOS core dump 解码](followups/2026-11-17-offline-freertos-core-dump/)保留已匹配 ELF 的任务和调用栈验证。
+
+[Core2 离线任务 CLI](followups/2026-11-17-offline-coredump-task-cli/)通过相同 watchdog 和 abort 会话验证 CRC32、精确 ELF 匹配和 FreeRTOS 任务清单。

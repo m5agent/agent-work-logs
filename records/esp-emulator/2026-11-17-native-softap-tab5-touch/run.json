@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Native ESP32-S3 SoftAP association and Tab5 original firmware single-touch",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "integrated_source_commit": "fd08569f06b4afa478eb46da3654c4468e35a5bb",
+    "softap_run_source": "ad8f512dc09f42047e698fd11b561bfc94f7a7ce",
+    "tab5_run_source": "2bae48804564c61b2b6eb42f8f478267a009ce83"
+  },
+  "hardware": {},
+  "firmware": {
+    "esp32s3_softap_probe_sha256": "25eaf5347edbb7a8e8139830c4e2bf4cd696c0964f30cf969e4a2c52aede9ee2",
+    "tab5_original_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "isolated native Device Service, ESP32-S3 QEMU and macOS arm64 esp-emu",
+    "test_count": 2309,
+    "skipped_count": 10,
+    "github_actions": {
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44067130732",
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "name": "Cardputer and ADV SoftAP management-frame handshake and guest join",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Candidate STA DHCP and fixture HTTP with open and WPA2 controls",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Candidate ADV mismatched credential yields no association or lease",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "SoftAP DHCP and portal HTTP in this association probe",
+      "status": "FAIL"
+    },
+    {
+      "layer": "device_response",
+      "name": "Stable Tab5 raw DSI frame, GT911 reports and original modal",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Tab5 startup reliability across retries",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "device_response",
+      "name": "Independent staged CarPlay firmware review interaction claim",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "review",
+      "name": "Integrated source suite, 2309 total with 10 skips",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical hardware and browser WASM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/softap-summary.json",
+      "sha256": "f1c0f2910a9727cb55a85d07cc01eb68af1cfdb55af1b66befb90b702d20abbe",
+      "bytes": 9310
+    },
+    {
+      "path": "evidence/tab5-touch-summary.json",
+      "sha256": "cbbd86bee49b970c245cc7a84656b36b8e620edc33d6a3e11db6f4e1825af73c",
+      "bytes": 3437
+    }
+  ],
+  "notes": []
+}

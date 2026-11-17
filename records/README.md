@@ -20,6 +20,7 @@
 | --- | --- | --- | --- | --- |
 | 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
 | 2026-11-17 | ESP Emulator | 原生语义输入与虚拟 FAT32 | `PARTIAL`（同 guest 输入、FAT32 验证；Dial guest 待处理） | [查看](esp-emulator/2026-11-17-native-review-input-and-storage/) |
+| 2026-11-17 | ESP Emulator | 原生 SoftAP 关联与 Tab5 原版触摸 | `PARTIAL`（两款 Cardputer 可关联，AP DHCP/HTTP 未到达；Tab5 单击通过，启动可靠性待验） | [查看](esp-emulator/2026-11-17-native-softap-tab5-touch/) |
 | 2026-11-17 | ESP Emulator | 原生崩溃诊断与三份原版复审 | `PARTIAL`（Core2 受控崩溃与 ELF 准入通过；原版功能和归因保留限制） | [查看](esp-emulator/2026-11-17-native-crash-diagnostics/) |
 | 2026-11-16 | ESP Emulator | 审核链路保存快照回归 | `PASS`（4 例原版隔离复审，保留覆盖缺口） | [查看](esp-emulator/2026-11-16-review-lane-regression/) |
 | 2026-11-16 | ESP Emulator / Cardputer | #229 / #230 原版缓存启动与板型探测 | `PASS`（原版启动及按键、70/70 原生矩阵；物理与 WASM 未执行） | [查看](esp-emulator/2026-11-16-cardputer-cache-board-detection/) |
