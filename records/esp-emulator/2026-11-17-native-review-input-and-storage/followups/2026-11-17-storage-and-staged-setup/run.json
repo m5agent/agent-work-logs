@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Native storage fixtures and staged network setup review",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "emulator": "dbddd47db4ab8d6c66e569d98dcdcca755f14e65",
+    "reviewer_with_storage": "b244e63b9f520ace10f6db772d785ce7ab61d3e7",
+    "reviewer_stock_ticker": "76125ac4409f423fa9fcf7a5d2896268854ac357"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "identities": "Full SHA-256 in evidence"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "isolated": true,
+    "burner_submissions": 0
+  },
+  "checks": [
+    {
+      "name": "sd_export_and_reuse",
+      "status": "PASS"
+    },
+    {
+      "name": "spiffs_real_guest",
+      "status": "PASS"
+    },
+    {
+      "name": "uiflow_littlefs_real_guest",
+      "status": "PASS"
+    },
+    {
+      "name": "reviewer_same_storage_fixture",
+      "status": "PASS"
+    },
+    {
+      "name": "original_stock_ticker_setup",
+      "status": "PASS"
+    },
+    {
+      "name": "original_stock_ticker_network_data_plane",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "production_rollout",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "name": "evidence/littlefs-http.json",
+      "bytes": 3581,
+      "sha256": "9b86f3a1d5b669bc5fda202dc98575d28fd1234575381821d6f4dc7bb68019ea"
+    },
+    {
+      "name": "evidence/saved-spiffs-replay.json",
+      "bytes": 1838,
+      "sha256": "f4afb387885cf06c214506f559f98ee1ada07235e31d51ddefd18dd252a7894b"
+    },
+    {
+      "name": "evidence/sd-export.json",
+      "bytes": 4770,
+      "sha256": "125acc0bcea954ee6961fb5b4da1a7c69021036c9897c7edf7dee477ea1a223b"
+    },
+    {
+      "name": "evidence/spiffs-http.json",
+      "bytes": 9830,
+      "sha256": "4b8a6c688e58e4a77fd6caca24dc324371b558ac0b8106012a6ecc9d593a296c"
+    },
+    {
+      "name": "evidence/stock-ticker-setup.json",
+      "bytes": 5691,
+      "sha256": "e0c7023c4a735a1ec8a0dd4ac82f939150173170531e0b5fdf959ba7b092a594"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "status": "COMPLETED",
+  "source_commit": "dbddd47db4ab8d6c66e569d98dcdcca755f14e65",
+  "reviewer_commit": "76125ac4409f423fa9fcf7a5d2896268854ac357",
+  "reviewer_app_sha256": "c86f005b390ee5571b2e2d61a069f11d9db74311df1d5a99ffbe673808fa65bd",
+  "setup_module_sha256": "bfc8fa87eb57c832629b11aadf91e9f4113c03174b9c1d42a50447150d28b2a5",
+  "firmware_sha256": "dcbf054b7c605fb9c46dd5adfd9f8ce32bc7b61fdc5801e1c0e06c6a4d443270",
+  "firmware_bytes": 1633344,
+  "qemu_sha256": "8f5a839537857d05b2c1e5a7ba0bb401e123924b8202c4a7a6adfd2c0b5f4e41",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "wrapper_sha256": "b34d2bbbbdd5c24696451a9520341b1c1570f23d3c6e8b2ada3fa0efc5dc43e1",
+  "burner_submit_enabled": false,
+  "auto_submit": false,
+  "checks": {
+    "same_pinned_firmware": true,
+    "saved_retained_session": true,
+    "checkpoint_steps_pass": true,
+    "pass_expected_input_only": true,
+    "network_kept_partial": true,
+    "no_wan_or_portal_traffic": true,
+    "actual_guest_beacon": true,
+    "no_burner_submit": true,
+    "observation_window": true
+  },
+  "openapi_sha256": "b679cbba67067b69dadc96b14be17f123c2447e82f0b6b6cc4006567c96ed782",
+  "session_state": "stopped",
+  "ethernet_pcap_packets": 0,
+  "ethernet_pcap_flows": 0,
+  "mac_tx_beacons": 698,
+  "gpio_edges": [
+    {
+      "pin": 12,
+      "level": 0
+    },
+    {
+      "pin": 12,
+      "level": 1
+    },
+    {
+      "pin": 11,
+      "level": 0
+    },
+    {
+      "pin": 11,
+      "level": 1
+    }
+  ],
+  "review_status": "manual_review",
+  "error_code": "E_NETWORK_PARTIAL",
+  "observation_seconds": 60.014014249999995,
+  "elapsed_seconds": 82.307,
+  "archive_sha256": "c37251aff00c4adbf0645b2d2262d28942110cb4e146efafb63d15c1dde1b028",
+  "stopped_archive_sha256": "505d58f6980f1f18229fb3ccce8fc8a6d008e63b401a3ca486c09baf3afa04d9",
+  "setup": {
+    "status": "PASS",
+    "scope": "setup-input-only",
+    "steps": [
+      {
+        "name": "open_phone_setup",
+        "before": {
+          "kind": "frame_region_sha256",
+          "status": "PASS",
+          "region": [
+            88,
+            7,
+            29,
+            162
+          ],
+          "region_sha256": "8de9422b8b8c7f27a465c24913ff1feb5fa3da8c403dd3491f3ccb6005db9b6c",
+          "frame_sha256": "2a8b318120ad0bf75215a268f14a47b145027371ccc30b726b91cb6bc827f408"
+        },
+        "input": {
+          "status": "ACCEPTED",
+          "request": {
+            "kind": "button",
+            "control": "b",
+            "action": "hold",
+            "seconds": 6.2
+          },
+          "receipt": {
+            "input": "button:b",
+            "action": "hold",
+            "timing": {
+              "clock": "virtual",
+              "hold_seconds": 6.2,
+              "hold_time_ms": 6200,
+              "presses": 1,
+              "completion": "queued"
+            }
+          }
+        },
+        "after": {
+          "kind": "frame_region_sha256",
+          "status": "PASS",
+          "region": [
+            83,
+            9,
+            23,
+            107
+          ],
+          "region_sha256": "4b56c9dbe072a73513a51b070e695e1af72715896f44ec30cf93d6ef1d76a7ca",
+          "frame_sha256": "cba1f8946360fa672e82cb03c050469e5dfb0899cab530c43a0b5e1c86584aaf"
+        }
+      },
+      {
+        "name": "open_ticker_softap",
+        "before": {
+          "kind": "frame_region_sha256",
+          "status": "PASS",
+          "region": [
+            83,
+            9,
+            23,
+            107
+          ],
+          "region_sha256": "4b56c9dbe072a73513a51b070e695e1af72715896f44ec30cf93d6ef1d76a7ca",
+          "frame_sha256": "cba1f8946360fa672e82cb03c050469e5dfb0899cab530c43a0b5e1c86584aaf"
+        },
+        "input": {
+          "status": "ACCEPTED",
+          "request": {
+            "kind": "button",
+            "control": "a",
+            "action": "click"
+          },
+          "receipt": {
+            "input": "button:a",
+            "action": "click",
+            "timing": {
+              "clock": "virtual",
+              "hold_seconds": 0.12,
+              "hold_time_ms": 120,
+              "presses": 1,
+              "completion": "queued"
+            }
+          }
+        },
+        "after": {
+          "kind": "frame_region_sha256",
+          "status": "PASS",
+          "region": [
+            57,
+            139,
+            17,
+            81
+          ],
+          "region_sha256": "340e6c9b4526c000a2dce25b96f94dc63f91d3f3c4507ccebee55d86067723b0",
+          "frame_sha256": "6bb53d8621ad6cf23925a8963c56c6464b1767887d54715272dc462ec0faaf2b"
+        }
+      }
+    ],
+    "source": "stock-ticker-original",
+    "firmware_sha256": "dcbf054b7c605fb9c46dd5adfd9f8ce32bc7b61fdc5801e1c0e06c6a4d443270"
+  },
+  "network": {
+    "status": "PARTIAL",
+    "data_plane": "NOT RUN",
+    "profile": "uiflow2-sticks3-wifi",
+    "same_guest": true,
+    "diagnostic_only": false
+  },
+  "input": {
+    "status": "PASS",
+    "scope": "setup-input-only",
+    "setup_actions_accepted": 2,
+    "accepted": 0,
+    "changed": 0,
+    "changed_inputs": [],
+    "ab_navigation_verified": null,
+    "touch_status": null,
+    "button_status": null,
+    "keyboard_status": null,
+    "required_buttons_observed": null,
+    "probe_keys": null,
+    "probe_keys_responded": null,
+    "semantic_verification": null,
+    "semantic_input_status": null,
+    "semantic_input_actions": {},
+    "unsupported_semantic_inputs": [],
+    "verification_scope": null
+  },
+  "burner_submissions": 0,
+  "launch_policy": {
+    "mode": "slirp-restrict-on",
+    "alternate_nics": 0,
+    "hostfwd": 0,
+    "guestfwd": 0,
+    "wifi0_filter_dump": true,
+    "native_board": "m5sticks3"
+  },
+  "services_exited": true
+}

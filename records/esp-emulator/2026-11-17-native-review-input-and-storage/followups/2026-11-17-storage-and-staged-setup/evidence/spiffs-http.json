@@ -1,0 +1,217 @@
+{
+  "validation": "virtual-device validation",
+  "scope": "native Device Service storage.filesystem SPIFFS HTTP path",
+  "service_source": {
+    "head": "c0a12f7ef5004032ca9e0eb794105430cffa4ae6",
+    "platform/tools/device_service.py": "90e1fb25b5cc57e35aad06536f727d29d62808373e7bdfaae7f07735754cfef7",
+    "platform/tools/device_service_fs_fixture.py": "7ff26f4e3d1397ad4bead7d0baafb1337b140e8575b2306b8e6c1377cf0c0eaa",
+    "platform/tools/serve.py": "6fb9e7805be04510e1c60f1ccb832242d1e5eabf1e561f580637bdd10b22780d",
+    "platform/tools/firmware_filesystems.py": "9c8bc27ab961beb619adf69890853357c0cbe0530833aa7b9b520f9edc70caad"
+  },
+  "runtime_sha256": "06db397cbe804e9eb13390d797cd67ca33ce5f29048fe7a56342cb66f4d2f9e0",
+  "expected_effective_flash_sha256": "6d9377a6b4cce701925eeae6730f6b4b929cacf2d17c496c6f36e0cc15d6a258",
+  "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+  "fixture_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+  "service_exited": true,
+  "cases": [
+    {
+      "receipt": null,
+      "serial_markers": [
+        "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+        "SPIFFS_PROBE_READ seeded=0 listed=0 prior=0",
+        "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+        "SPIFFS_PROBE_DONE"
+      ],
+      "reset_persistence": false,
+      "bundle_sha256": "c2bdb3710beb863d0ecee233b5b5b72ca27a7ec4924ff6b956c889d81a81ee26",
+      "device": "cardputer",
+      "scenario": "no-overlay",
+      "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+      "final_flash_sha256": "ba16a9758ad15a05a177846274e64524de02ce916fdf42d84ff18dacc1ad3198",
+      "outside_storage_unchanged": true,
+      "uploaded_source_and_fixture_unchanged": true,
+      "final_files": {
+        "/BASELINE.TXT": "894d865a751ee9880bdca96b3d1adfbab1cdca82dbe51440c5129c3877e63683",
+        "/GEOMETRY_CHECK_FILE_LONG.BIN": "17aa8e33a610fc548d8f2c9e7d3d9b5b1e1341fafa9c7101da2ea422bfe7eaba",
+        "/PROOF.TXT": "cd96d1024fa7c5b44a0be83f49d7b624b3657613262a634f5630107e8cf5b120"
+      },
+      "state": "stopped",
+      "bundle_crc_ok": true,
+      "runtime_process_exited": true
+    },
+    {
+      "receipt": {
+        "schema_version": 1,
+        "image_artifact_id": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+        "partition_label": "storage",
+        "format": "spiffs",
+        "subtype": 130,
+        "offset": 1114112,
+        "size": 1048576,
+        "fixture_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+        "base_flash_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+        "base_partition_sha256": "9e1d69703c9cadcd801f98f13593b645262eca00d39f0601b8d1c7060e1cac5d",
+        "geometry": {
+          "page_size": 256,
+          "block_size": 4096,
+          "object_name_len": 32,
+          "metadata_len": 4
+        },
+        "file_count": 2,
+        "file_bytes": 11348,
+        "plan_sha256": "d84efdb038fb26fb3dd9d45e91189650e37ded4d0aac159d1ac61e0f91719b2f",
+        "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+        "effective_flash_sha256": "6d9377a6b4cce701925eeae6730f6b4b929cacf2d17c496c6f36e0cc15d6a258",
+        "session_isolated_overlay": true,
+        "status": "PREPARED"
+      },
+      "serial_markers": [
+        "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+        "SPIFFS_PROBE_READ seeded=1 listed=1 prior=0",
+        "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+        "SPIFFS_PROBE_DONE",
+        "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+        "SPIFFS_PROBE_READ seeded=1 listed=1 prior=1",
+        "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+        "SPIFFS_PROBE_DONE"
+      ],
+      "reset_persistence": true,
+      "bundle_sha256": "2d0439d8187d2c0d86067f17a36a4bd425dee1d63339f7b8ff48109b14b9a885",
+      "device": "cardputer",
+      "scenario": "overlay-reset",
+      "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+      "final_flash_sha256": "0e8e14b0ebd6aa661a1141ce425cdc1196b621aee2eff5b3fb6ba881cfd9f16d",
+      "outside_storage_unchanged": true,
+      "uploaded_source_and_fixture_unchanged": true,
+      "final_files": {
+        "/GEOMETRY_CHECK_FILE_LONG.BIN": "e8781ab51743949bb05c7a6930ca78e996e4fa631cb4e45800e2ba6b821f9974",
+        "/FIXTURE.TXT": "19850113c1e050a2a9b3deb3bcf0d1ad3dd35f401fd6ee4bbe6acb0885afb0cb",
+        "/PROOF.TXT": "cd96d1024fa7c5b44a0be83f49d7b624b3657613262a634f5630107e8cf5b120"
+      },
+      "state": "stopped",
+      "bundle_crc_ok": true,
+      "runtime_process_exited": true
+    },
+    {
+      "receipt": {
+        "schema_version": 1,
+        "image_artifact_id": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+        "partition_label": "storage",
+        "format": "spiffs",
+        "subtype": 130,
+        "offset": 1114112,
+        "size": 1048576,
+        "fixture_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+        "base_flash_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+        "base_partition_sha256": "9e1d69703c9cadcd801f98f13593b645262eca00d39f0601b8d1c7060e1cac5d",
+        "geometry": {
+          "page_size": 256,
+          "block_size": 4096,
+          "object_name_len": 32,
+          "metadata_len": 4
+        },
+        "file_count": 2,
+        "file_bytes": 11348,
+        "plan_sha256": "d84efdb038fb26fb3dd9d45e91189650e37ded4d0aac159d1ac61e0f91719b2f",
+        "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+        "effective_flash_sha256": "6d9377a6b4cce701925eeae6730f6b4b929cacf2d17c496c6f36e0cc15d6a258",
+        "session_isolated_overlay": true,
+        "status": "PREPARED"
+      },
+      "serial_markers": [
+        "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+        "SPIFFS_PROBE_READ seeded=1 listed=1 prior=0",
+        "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+        "SPIFFS_PROBE_DONE"
+      ],
+      "reset_persistence": false,
+      "bundle_sha256": "ad5b5dfeca6f6ea837ee6a3743cfc017852b39edfa93143cba01ec18a110b750",
+      "device": "sticks3",
+      "scenario": "overlay",
+      "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+      "final_flash_sha256": "f23220ebb4e4b33291c53575055b49f464cbf8f1d4c6f7801a1fbe0e28d4abd9",
+      "outside_storage_unchanged": true,
+      "uploaded_source_and_fixture_unchanged": true,
+      "final_files": {
+        "/GEOMETRY_CHECK_FILE_LONG.BIN": "e8781ab51743949bb05c7a6930ca78e996e4fa631cb4e45800e2ba6b821f9974",
+        "/FIXTURE.TXT": "19850113c1e050a2a9b3deb3bcf0d1ad3dd35f401fd6ee4bbe6acb0885afb0cb",
+        "/PROOF.TXT": "cd96d1024fa7c5b44a0be83f49d7b624b3657613262a634f5630107e8cf5b120"
+      },
+      "state": "stopped",
+      "bundle_crc_ok": true,
+      "runtime_process_exited": true
+    },
+    {
+      "receipt": {
+        "schema_version": 1,
+        "image_artifact_id": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+        "partition_label": "storage",
+        "format": "spiffs",
+        "subtype": 130,
+        "offset": 1114112,
+        "size": 1048576,
+        "fixture_sha256": "d53424b5735514fdab7a407eb30a22e6744b91a5a6db04610a756c1feff1a162",
+        "base_flash_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+        "base_partition_sha256": "9e1d69703c9cadcd801f98f13593b645262eca00d39f0601b8d1c7060e1cac5d",
+        "geometry": {
+          "page_size": 256,
+          "block_size": 4096,
+          "object_name_len": 32,
+          "metadata_len": 4
+        },
+        "file_count": 2,
+        "file_bytes": 11348,
+        "plan_sha256": "d84efdb038fb26fb3dd9d45e91189650e37ded4d0aac159d1ac61e0f91719b2f",
+        "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+        "effective_flash_sha256": "6d9377a6b4cce701925eeae6730f6b4b929cacf2d17c496c6f36e0cc15d6a258",
+        "session_isolated_overlay": true,
+        "status": "PREPARED"
+      },
+      "serial_markers": [
+        "SPIFFS_PROBE_PARTITION offset=0x110000 size=0x100000",
+        "SPIFFS_PROBE_READ seeded=1 listed=1 prior=0",
+        "SPIFFS_PROBE_REMOUNT wrote=1 restored=1 listed=1",
+        "SPIFFS_PROBE_DONE"
+      ],
+      "reset_persistence": false,
+      "bundle_sha256": "5ed057c75dc1123cded27510ef2c43bd2ce301683f3de3ba299f4aafb72dc157",
+      "device": "dial",
+      "scenario": "overlay",
+      "source_firmware_sha256": "b943f008d663cad2ba316b566825e0f9171f9c5c02c28e805ddcfc4629e614e3",
+      "final_flash_sha256": "f23220ebb4e4b33291c53575055b49f464cbf8f1d4c6f7801a1fbe0e28d4abd9",
+      "outside_storage_unchanged": true,
+      "uploaded_source_and_fixture_unchanged": true,
+      "final_files": {
+        "/GEOMETRY_CHECK_FILE_LONG.BIN": "e8781ab51743949bb05c7a6930ca78e996e4fa631cb4e45800e2ba6b821f9974",
+        "/FIXTURE.TXT": "19850113c1e050a2a9b3deb3bcf0d1ad3dd35f401fd6ee4bbe6acb0885afb0cb",
+        "/PROOF.TXT": "cd96d1024fa7c5b44a0be83f49d7b624b3657613262a634f5630107e8cf5b120"
+      },
+      "state": "stopped",
+      "bundle_crc_ok": true,
+      "runtime_process_exited": true
+    }
+  ],
+  "rejections": [
+    {
+      "status": 400,
+      "code": "invalid_fs_fixture",
+      "allocated_session": false
+    },
+    {
+      "status": 409,
+      "code": "fs_fixture_partition_unsupported",
+      "allocated_session": false
+    },
+    {
+      "status": 400,
+      "code": "fs_fixture_invalid_size",
+      "allocated_session": false
+    },
+    {
+      "status": 409,
+      "code": "fs_fixture_partition_unsupported",
+      "allocated_session": false
+    }
+  ],
+  "status": "PASS"
+}
