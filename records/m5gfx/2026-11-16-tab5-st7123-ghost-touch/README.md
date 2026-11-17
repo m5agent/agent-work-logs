@@ -323,3 +323,6 @@ GDB 邮箱，无 0x43 扩展器与 reset 线模型）。
 `code-level verification`（仅对其计数做 Poisson/Fisher/相位算术）。物理 Tab5 与虚拟设备
 均 `NOT RUN`（服务级 `tab5_enabled: false`，`features.qom`/`device_state` false，ST7123
 触摸仍为固件 GDB 邮箱、无 0x43 与 reset 线模型，无法在两种节奏下产生同一 burst）。
+
+第十四轮回复：[issuecomment-6944727938](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6944727938)
+（英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。

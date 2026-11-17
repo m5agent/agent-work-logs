@@ -103,3 +103,6 @@ firmware GDB mailbox rather than an I2C chip model”，无 0x43 扩展器与 re
 
 脚本与输出：[run4-four-steps-check.py](run4-four-steps-check.py) /
 [run4-four-steps-check.txt](run4-four-steps-check.txt)。
+
+回复：[issuecomment-6944727938](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6944727938)
+（英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。
