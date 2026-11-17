@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "PaperS3 GT911 ACK phase and Core2 contained STA",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "65f40eac4521ceb2af9962298e1a26a6e07aae78",
+    "candidate_commit": "0cf118851cf97dd8c63fc6ad0027856a929e4751",
+    "gt911_guide_revision": "2014-08-04 Rev.00",
+    "gt911_guide_sections": [
+      "3.2 Refresh_Rate",
+      "5 Coordinates Reading"
+    ],
+    "papers3_integrated_model_commit": "0feb537cd6c54da6174fdbad4338a5b30bf9e7f4",
+    "core2_integrated_network_commit": "71d8390c7a779f19e70909e38d7e33d70da5d592",
+    "reviewer_executed_commit": "697913308ec2fb24c5a8be8d50f9fcb3170875c2",
+    "reviewer_same_tree_commit": "755b275c7973d1c2b51ecaf26584b259d53071c8",
+    "reviewer_tree": "d0d67c989c3881332e57f1d63618263aaead524b",
+    "simulator_main": "c53750bf0cc23e717943c6c3c79e49b11e1a227a",
+    "reviewer_main": "755b275c7973d1c2b51ecaf26584b259d53071c8",
+    "source_main_readback": "PASS"
+  },
+  "hardware": {
+    "device": "PaperS3",
+    "touch_controller": "GT911",
+    "scope": "virtual-device validation",
+    "additional_device": "Core2"
+  },
+  "firmware": {
+    "release": "PaperS3 Factory V0.5 original merged",
+    "original_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624",
+    "original_bytes": 1439168,
+    "normalized_flash_sha256": "ea1fdd4b3ee20db6b27fcd74f9e3a4bc538195075b3dfdd30f5e266764265788",
+    "normalized_flash_bytes": 16777216,
+    "protocol_probe_source_sha256": "25f06387ddc733eb4fbcf6f5e0e3e5ed50a9473932c8f20a410176a88d539768",
+    "protocol_probe_normalized_sha256": "a8afe0857c9f1a85e8af1f00858c2f3656a2ac25d9f43df8013735ffa7157034",
+    "core2_probe_sha256": "e22f32f6d0fe82a593852761aa59cdfbbb07339c48c1a79199ecf95afd2895be"
+  },
+  "execution": {
+    "lane": "isolated native Device Service",
+    "candidate_runtime_sha256": "0b871bcd43a74d7c4d303e07ae496c0a673c9cc9d62911318de7d96bad1955be",
+    "frozen_runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "instrumented_runtime_sha256": "0259541892a8f9b8837b9cd8fa9dc6e2c56c3f051aa309401303a319abc5b635",
+    "protocol_probe_sdk": "ESP-IDF v5.5.4",
+    "core2_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "core2_profile": "core2-openmac",
+    "core2_linux_arch": "arm64",
+    "core2_reviewer_methods": [
+      "execution_plan",
+      "create_review_session",
+      "finalized_native_sta_transport"
+    ]
+  },
+  "checks": [
+    {
+      "name": "Early Core2 candidate suite detected stale API inventory metadata",
+      "status": "FAIL",
+      "ran": 2394,
+      "skipped": 10,
+      "failures": 1,
+      "receipt_sha256": "f86a95b379c27e30113750c6cf6db2a0683d97aaac98a8eb33003ef664d0423f",
+      "receipt_bytes": 55589
+    },
+    {
+      "name": "Integrated emulator full local platform suite",
+      "status": "PASS",
+      "ran": 2395,
+      "skipped": 10,
+      "seconds": 184.442,
+      "receipt_sha256": "d03eb22811d36d4eff8a1397b5c84747de6cd454d550a3b9e7555c56e51e74bd",
+      "receipt_bytes": 54495
+    },
+    {
+      "name": "Emulator documentation, scope, runtime coverage, peripheral catalog, QEMU profiles and snapshot",
+      "status": "PASS",
+      "docs_checks": 51
+    },
+    {
+      "name": "Original native PaperS3 icon responsiveness on frozen and candidate runtimes",
+      "status": "PARTIAL",
+      "baseline_matched": 9,
+      "candidate_matched": 7,
+      "accepted_per_arm": 12
+    },
+    {
+      "name": "Instrumented original reports intermediate coordinates for both drag directions and eventual release",
+      "status": "PASS",
+      "forward_intermediate_positions": 3,
+      "reverse_intermediate_positions": 2,
+      "accepted_inputs": 3
+    },
+    {
+      "name": "Frozen model respects probe-configured post-clear report interval",
+      "status": "FAIL",
+      "spaced_reports": 0,
+      "held_reports": 8
+    },
+    {
+      "name": "Scan-phase model respects probe-configured post-clear report interval",
+      "status": "PASS",
+      "spaced_reports": 8,
+      "held_reports": 8
+    },
+    {
+      "name": "Both protocol arms report 0x80 release and subsequent 0x00 idle",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser and physical hardware, including actual INT waveform and electrical behavior",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Core2 contained reviewer observes finalized native DHCP, DNS A/NXDOMAIN and binary UDP fixture",
+      "status": "PASS"
+    },
+    {
+      "name": "Core2 one-byte wrong response still transfers and guest rejects it",
+      "status": "PASS",
+      "expected_guest_application_acceptance": false
+    },
+    {
+      "name": "Core2 native admission fails before any lease if network namespace capability is missing",
+      "status": "PASS",
+      "http_status": 503,
+      "leases_created": 0
+    },
+    {
+      "name": "Core2 reviewer tests and executed versus staged Reviewer tree equality",
+      "status": "PASS",
+      "tests": 197
+    },
+    {
+      "name": "Original Core2 cloud firmware, HTTP, WPA2, IPv6, physical hardware and browser",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Core2 reviewer HTTP queue and overall firmware verdict",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/papers3-native-gt911-scan-phase-summary.redacted.json",
+      "sha256": "9a1cb413d331464b3752a7ce8f40b8bd3e098b0c311be4bf7a8a859ab1b76c01",
+      "bytes": 15677
+    },
+    {
+      "path": "evidence/core2-native-contained-sta-summary.redacted.json",
+      "sha256": "b6ab4049efb517a6749429fb8c32f5329fa6137d61d4ca37eeb81cfbe2c97a35",
+      "bytes": 4115
+    }
+  ]
+}
