@@ -49,6 +49,7 @@
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
 | 2026-11-17 | ESP Emulator | Tab5 ST7123 原生单点长按 | `PARTIAL`（持续触点、原版审核通过；整机关机待验证） | [查看](records/esp-emulator/2026-11-17-tab5-st7123-hold/) |
+| 2026-11-17 | Firmware Review Service | idkOS v1.3.0 启动失败归因：ADV 固件被按 Cardputer 机型审查 | `PARTIAL`（ADV 机型两次出帧、非 ADV 复现同一 I2C 错误；未开 issue；真机/符号化 NOT RUN） | [查看](records/firmware-review-service/2026-11-17-idkos-adv-profile-attribution/) |
 | 2026-11-17 | Firmware Review Service | 按声明控件取证、网络/翻页误报与非拉丁文件名修复 | `PARTIAL`（97 项测试、3 条转 VERIFIED；网络策略仍待定） | [查看](records/firmware-review-service/2026-11-17-interaction-plan-and-upload-fixes/) |
 | 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](records/m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
 | 2026-11-17 | M5GFX / ToughC5 | #424 `release_held_sda()` 多比特保持 SDA 与 STOP 成立 | `PARTIAL`（host-level 模型复现旧代码 3 パルス失败、提案补丁 2 パルス通过；实机/虚拟设备 NOT RUN；9→10 パルス边界） | [查看](records/m5gfx/2026-11-17-issue424-held-sda-stop/) |

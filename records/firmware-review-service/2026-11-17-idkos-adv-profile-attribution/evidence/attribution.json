@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "job_id": "job-67de39da0d65",
+  "generated_at": "2026-11-17T13:35:00Z",
+  "verdict": {
+    "attribution": "not_simulator",
+    "stage": "guest_application_init",
+    "root_cause": "Cardputer-ADV-only firmware was reviewed on the base Cardputer (K132) profile because M5Burner metadata declares CARDPUTER; the firmware rejects the non-ADV model and its fallback I2C setup uses identical SCL/SDA GPIO numbers.",
+    "simulator_issue_filed": false,
+    "existing_issue_comment_added": false
+  },
+  "firmware": {
+    "name": "idkOS",
+    "version": "v1.3.0",
+    "project_name": "idkOS ADV",
+    "file": "idkOS-v1.3.0-Cardputer-ADV-full-0x0.bin",
+    "size": 1643488,
+    "sha256": "c44c8f76567c3fb757be802e150ee6ef8db84bfc0c856a7b6cf880a030d2b1f9",
+    "version_id": "2122678585678315521",
+    "m5burner_device_names": ["Cardputer"],
+    "m5burner_device_codes": ["CARDPUTER"],
+    "description_hardware": "M5Stack Cardputer ADV",
+    "composed_image_sha256": "608952df07d22addd70f29032595113f7197f9fc528bcd963a51b9bf13c529b8",
+    "composed_image_size": 8388608,
+    "flash_contract": {
+      "declared_flash_size": 8388608,
+      "partition_end": 8388608,
+      "partitions_fit": true
+    }
+  },
+  "review_evidence": {
+    "device_id": "cardputer",
+    "sku": "K132",
+    "machine": "m5cardputer",
+    "session_id": "cbdd30535dae4562a6ca883130fcdfbb",
+    "serial_sha256": "a3c5d544487b1d67d220c3e30354cb0e51e9db3ac69672c9f2512ac77a1e1cea",
+    "serial_bytes": 4015,
+    "serial_markers": [
+      "E (2234) i2c: i2c_set_pin(882): scl and sda gpio numbers are the same",
+      "Guru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1).",
+      "Re-entered core dump! Exception happened during core dump!",
+      "rst:0xc (RTC_SW_CPU_RST)"
+    ],
+    "panic": {
+      "kind": "watchdog",
+      "core": 1,
+      "panic_count": 2,
+      "backend_illegal_instruction": false
+    },
+    "qemu_assertion": false,
+    "qemu_stderr": "Adding SPI flash device",
+    "frame": {
+      "png_bytes": 174,
+      "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+      "nonblack_pixels": 0
+    },
+    "qom": {
+      "supported": false,
+      "reason": "device does not advertise qom"
+    },
+    "review_report_final": {
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_SIM_MODEL_GAP"
+    }
+  },
+  "controlled_ab": [
+    {
+      "device_id": "cardputer",
+      "machine": "m5cardputer",
+      "session_id": "5969a098f9cb408e879aee3d1ce320ee",
+      "firmware_sha256": "608952df07d22addd70f29032595113f7197f9fc528bcd963a51b9bf13c529b8",
+      "result": "FAIL",
+      "serial_bytes": 709,
+      "serial_stopped": true,
+      "i2c_same_pin_error": true,
+      "panic_in_window": false,
+      "frame": {
+        "png_bytes": 649,
+        "sha256": "055320a15a474a5fde6e9ce8a18e47fc4144d144493d9e0a6f094007afdffc47",
+        "nonblack_pixels": 897,
+        "content": "DEVICE CHECK / ADV not detected / Check hardware/library setup"
+      }
+    },
+    {
+      "device_id": "cardputer-adv",
+      "machine": "m5cardputeradv",
+      "session_id": "7dba7685f9914f08af517ae847012f3d",
+      "firmware_sha256": "608952df07d22addd70f29032595113f7197f9fc528bcd963a51b9bf13c529b8",
+      "result": "PASS",
+      "ready": true,
+      "ready_reason": ["frame_nonblank"],
+      "first_frame_at": "2026-11-17T13:27:35.949599+00:00",
+      "serial_bytes": 1005,
+      "i2c_same_pin_error": false,
+      "panic_in_window": false,
+      "frame": {
+        "png_bytes": 9972,
+        "sha256": "e85c39928e857cea1c7a071499f2a2e2319862b695b7bf6487764ef31491ec8c",
+        "nonblack_pixels": 7357,
+        "unique_colors": 314,
+        "content": "idkOS boot splash"
+      }
+    },
+    {
+      "device_id": "cardputer-adv",
+      "machine": "m5cardputeradv",
+      "session_id": "7c2ed46f2df54fcca4305d40c9e9c998",
+      "firmware_sha256": "608952df07d22addd70f29032595113f7197f9fc528bcd963a51b9bf13c529b8",
+      "result": "PASS",
+      "ready": true,
+      "ready_reason": ["frame_nonblank"],
+      "first_frame_at": "2026-11-17T13:30:08.785760+00:00",
+      "serial_bytes": 708,
+      "i2c_same_pin_error": false,
+      "panic_in_window": false,
+      "frame": {
+        "png_bytes": 9972,
+        "sha256": "e85c39928e857cea1c7a071499f2a2e2319862b695b7bf6487764ef31491ec8c",
+        "nonblack_pixels": 7357,
+        "unique_colors": 314,
+        "content": "idkOS boot splash"
+      }
+    }
+  ],
+  "service_observations": {
+    "cardputer_adv_coverage": "peripheral_status=simulated, coverage.complete=true, backend_ready=true",
+    "cardputer_coverage": "peripheral_status=partial, warning covers audio/IR/RGB/ADC/USB/network/power sequencing",
+    "cross_device_reuse": "Creating a cardputer session with the firmware record last composed for cardputer-adv returned firmware_device_mismatch; the record device binding follows the last composition of the content-addressed image."
+  },
+  "issue_search": {
+    "queries": ["idkOS", "i2c scl sda", "ADV not detected", "profile mismatch"],
+    "matches_considered": [
+      {
+        "number": 230,
+        "state": "CLOSED",
+        "difference": "M5Unified runtime board detection fell back to board_M5StampS3(136); serial line Unsupported board type: 136; Cardputer-ADV did not render. This job has no such line and the ADV profile renders."
+      },
+      {
+        "number": 234,
+        "state": "OPEN",
+        "difference": "16 MB partition table accepted by an 8 MB device; this BIN declares 8 MiB and partitions fit."
+      }
+    ],
+    "filed": false
+  },
+  "limits": [
+    "Physical Cardputer / Cardputer-ADV: NOT RUN.",
+    "ELF symbolization: NOT RUN (no matching ELF).",
+    "Full idkOS application behavior: NOT RUN (Wi-Fi, SSH, calendar, themes).",
+    "60 s sampling observation protocol: NOT RUN; ADV sessions confirmed first frame and no panic before stop.",
+    "No emulator, review-service, or M5Burner metadata change was made."
+  ]
+}

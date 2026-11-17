@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "idkOS v1.3.0 启动失败归因：ADV 固件被按 Cardputer 机型审查",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "idkOS",
+    "version": "v1.3.0",
+    "project_name": "idkOS ADV",
+    "file": "idkOS-v1.3.0-Cardputer-ADV-full-0x0.bin",
+    "size": 1643488,
+    "sha256": "c44c8f76567c3fb757be802e150ee6ef8db84bfc0c856a7b6cf880a030d2b1f9",
+    "version_id": "2122678585678315521",
+    "declared_m5burner_device": "Cardputer",
+    "declared_m5burner_device_codes": ["CARDPUTER"],
+    "actual_target": "Cardputer-ADV",
+    "composed_image_sha256": "608952df07d22addd70f29032595113f7197f9fc528bcd963a51b9bf13c529b8",
+    "composed_image_size": 8388608
+  },
+  "execution": {
+    "environment": "macOS arm64; native QEMU ESP32-S3; m5stack-esp-emulator @ 55e5763e; Device Service v1",
+    "task_id": "job-67de39da0d65",
+    "session_id": "cbdd30535dae4562a6ca883130fcdfbb"
+  },
+  "checks": [
+    {
+      "name": "failure stage classification",
+      "status": "PASS",
+      "detail": "ROM and app run; failure in guest I2C init; no QEMU assertion, no illegal instruction, flash and partition contract valid"
+    },
+    {
+      "name": "review session on cardputer (K132)",
+      "status": "FAIL",
+      "detail": "3x i2c_set_pin scl==sda, 2x Interrupt wdt timeout on CPU1, 174 B black frame"
+    },
+    {
+      "name": "controlled rerun on cardputer (K132)",
+      "status": "FAIL",
+      "detail": "same i2c_set_pin error; 649 B frame shows firmware DEVICE CHECK / ADV not detected; serial stops after NVS errors"
+    },
+    {
+      "name": "controlled rerun on cardputer-adv (K132-Adv), first session",
+      "status": "PASS",
+      "detail": "ready in 8.7 s; 9972 B frame, 7357 non-black pixels, 314 colors; no i2c error, no panic"
+    },
+    {
+      "name": "controlled rerun on cardputer-adv (K132-Adv), second session",
+      "status": "PASS",
+      "detail": "same 9972 B frame; frame SHA-256 identical to first session"
+    },
+    {
+      "name": "issue deduplication",
+      "status": "PASS",
+      "detail": "no matching open/closed issue for idkOS, scl==sda, or ADV-to-non-ADV routing; #230 and #234 checked and differ"
+    },
+    {
+      "name": "simulator issue filing",
+      "status": "NOT RUN",
+      "detail": "intentionally not filed: failure not attributable to the emulator"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "no real Cardputer / Cardputer-ADV run"
+    },
+    {
+      "name": "ELF symbolization",
+      "status": "NOT RUN",
+      "detail": "no matching ELF available for the review job or reruns"
+    },
+    {
+      "name": "full idkOS application function",
+      "status": "NOT RUN",
+      "detail": "only first frame verified; Wi-Fi, SSH, calendar, themes not exercised"
+    },
+    {
+      "name": "60 s observation protocol",
+      "status": "NOT RUN",
+      "detail": "ADV sessions confirmed first frame and absence of panic until stop, without the full sampling protocol"
+    }
+  ],
+  "evidence": [
+    "evidence/attribution.json",
+    "evidence/job-serial.log",
+    "evidence/job-crash-diagnostics.json",
+    "evidence/cardputer-adv-first-frame.png",
+    "evidence/cardputer-device-check-frame.png"
+  ],
+  "notes": [
+    "Conclusion: not an emulator defect. The ADV-only BIN was routed to the base Cardputer profile because M5Burner metadata declares CARDPUTER.",
+    "No simulator, review-service, or metadata code was modified; nothing was pushed to the emulator repository; no issue was opened or closed.",
+    "The non-ADV fallback in the firmware initializes I2C with identical SCL/SDA GPIO numbers and then stalls or panics; this is firmware-side behavior on an unsupported model.",
+    "Frame SHA-256 on cardputer-adv: e85c39928e857cea1c7a071499f2a2e2319862b695b7bf6487764ef31491ec8c (both runs).",
+    "Frame SHA-256 on cardputer: 055320a15a474a5fde6e9ce8a18e47fc4144d144493d9e0a6f094007afdffc47."
+  ]
+}

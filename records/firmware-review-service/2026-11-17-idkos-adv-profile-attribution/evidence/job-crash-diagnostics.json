@@ -1,0 +1,136 @@
+{
+  "summary": {
+    "status": "observed",
+    "source": "device_service",
+    "kind": "watchdog",
+    "reason": "Interrupt wdt timeout on CPU1",
+    "repeated_resets": false,
+    "elf_status": "not_uploaded",
+    "symbolization_eligible": false,
+    "core": 1,
+    "core_dump_status": "not_observed",
+    "backend_illegal_instruction": false
+  },
+  "receipt": {
+    "schema_version": 1,
+    "session_id": "cbdd30535dae4562a6ca883130fcdfbb",
+    "firmware_sha256": "608952df07d22addd70f29032595113f7197f9fc528bcd963a51b9bf13c529b8",
+    "device_id": "cardputer",
+    "runtime": "qemu",
+    "status": "observed",
+    "sources": {
+      "console": {
+        "status": "available",
+        "offset": 0,
+        "bytes": 4015,
+        "sha256": "a3c5d544487b1d67d220c3e30354cb0e51e9db3ac69672c9f2512ac77a1e1cea",
+        "truncated": false
+      },
+      "runtime_stderr": {
+        "status": "available",
+        "offset": 0,
+        "bytes": 24,
+        "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+        "truncated": false
+      }
+    },
+    "panic": {
+      "kind": "watchdog",
+      "core": 1,
+      "reason": "Interrupt wdt timeout on CPU1",
+      "line": "Guru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1).",
+      "core_unassigned_backtrace": [],
+      "elf_sha256_prefix": "85e1b4c67cd1a8c5"
+    },
+    "panic_count": 2,
+    "cpus": [
+      {
+        "core": 0,
+        "pc": "0x420f4cde",
+        "register": "PC",
+        "pc_source": "guest_register_dump",
+        "backtrace": [
+          {
+            "pc": "0x420f4cdb",
+            "sp": "0x3fcf5000"
+          },
+          {
+            "pc": "0x4205befd",
+            "sp": "0x3fcf5020"
+          },
+          {
+            "pc": "0x4037f4d8",
+            "sp": "0x3fcf5040"
+          }
+        ]
+      },
+      {
+        "core": 1,
+        "pc": "0x4038655b",
+        "register": "PC",
+        "pc_source": "guest_register_dump",
+        "backtrace": [
+          {
+            "pc": "0x40386558",
+            "sp": "0x3fceb760"
+          },
+          {
+            "pc": "0x42084e7b",
+            "sp": "0x3fceb770"
+          },
+          {
+            "pc": "0x4208547d",
+            "sp": "0x3fceb790"
+          },
+          {
+            "pc": "0x4205ccf6",
+            "sp": "0x3fceb7b0"
+          },
+          {
+            "pc": "0x4205cff6",
+            "sp": "0x3fceb820"
+          },
+          {
+            "pc": "0x40377c81",
+            "sp": "0x3fceb870"
+          },
+          {
+            "pc": "0x40377638",
+            "sp": "0x3fceb890"
+          },
+          {
+            "pc": "0x00040022",
+            "sp": "0x3fceb950"
+          }
+        ]
+      }
+    ],
+    "boot": {
+      "rom_banners": 2,
+      "idf_banners": 0,
+      "reboot_requests": 1,
+      "reset_reports": [
+        {
+          "code": "0x1",
+          "reason": "POWERON"
+        },
+        {
+          "code": "0xc",
+          "reason": "RTC_SW_CPU_RST"
+        }
+      ]
+    },
+    "task_watchdog_reports": 0,
+    "core_dump": {
+      "status": "not_observed"
+    },
+    "backend_observations": [],
+    "elf": {
+      "status": "not_uploaded",
+      "reported_sha256_prefix": "85e1b4c67cd1a8c5",
+      "artifact_sha256": null,
+      "expected_sha256": null,
+      "symbolization_eligible": false
+    }
+  }
+}
