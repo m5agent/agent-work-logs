@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "title": "Contained native STA application assertions in saved-snapshot review",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "device_service_execution": "9bbbcba8477039c8e35cf85b002c6b63a83cae86",
+    "reviewer_base": "ef813f5a9e40ccacf1dd5d4945cbedcc87b0933d",
+    "reviewer_first_candidate": "f1805ec5450321216b11287d9884cf331a0e5038",
+    "reviewer_hardened_product": "ae60ffd00ba6aac36b8a89bc6b22f19934b2979d",
+    "reviewer_main": "8e27a74412310b224b2e1395fd5760c3eeb274c4",
+    "emulator_main": "541871f6fb6f48a4bda9b8846a9fb3054074f207",
+    "bounded_source": {
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/blob/541871f6fb6f48a4bda9b8846a9fb3054074f207/tests/network/native_sta_peers/saved-sta-operation-summary.json",
+      "sha256": "9020fbc436139f8b4a1b9681ad47164e384dfdbd1a687ff3733e8133d7fee404",
+      "bytes": 20587
+    }
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer",
+      "Cardputer ADV",
+      "Core2"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "cardputer_series_sha256": "f67e0a7a8e2805b01b3c2f9d1607ef6505467a60f4dd678d20a4576e56765db6",
+    "core2_sha256": "d21cc74379de402f374d18c7e1a8b79fd912a9b734bbc3eda41370333f5c855e"
+  },
+  "execution": {
+    "native_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "isolated_runs": 8,
+    "outer_network": "none",
+    "published_host_bindings": 0,
+    "review_api": "0.13.0"
+  },
+  "checks": [
+    {
+      "name": "Legacy passive native transport",
+      "status": "PASS",
+      "scope": "transport OBSERVED, typed application operation absent"
+    },
+    {
+      "name": "Cardputer, Cardputer ADV and Core2 fixed DNS, HTTP and binary UDP accepted by the guest",
+      "status": "PASS",
+      "source": "f1805ec5450321216b11287d9884cf331a0e5038"
+    },
+    {
+      "name": "One changed reply byte rejected by unchanged Cardputer ADV guest while transport remains OBSERVED",
+      "status": "FAIL",
+      "expected_negative_control": true
+    },
+    {
+      "name": "Hardened positive and wrong byte replay preserve result on Cardputer ADV",
+      "status": "PASS",
+      "source": "ae60ffd00ba6aac36b8a89bc6b22f19934b2979d"
+    },
+    {
+      "name": "Missing namespace capability leaves the network operation unexecuted",
+      "status": "PARTIAL",
+      "reason": "network_isolation_unavailable",
+      "phase": "admission",
+      "network_leases_allocated": 0
+    },
+    {
+      "name": "Core2 ignores saved historical network policy and rejects caller network override",
+      "status": "PASS",
+      "caller_http_status": 409
+    },
+    {
+      "name": "Aggregate review for headless fixtures",
+      "status": "PARTIAL",
+      "error_code": "E_NO_FRAME"
+    },
+    {
+      "name": "Internet, arbitrary networks, physical hardware, browser, resident deployment and Burner",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Reviewer test suite",
+      "status": "PASS",
+      "tests": 220
+    },
+    {
+      "name": "Emulator documentation contracts, generated validators and scope",
+      "status": "PASS",
+      "documentation_tests": 51
+    },
+    {
+      "name": "Remote CI at archive time",
+      "status": "PENDING"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/native-sta-saved-snapshot-summary.redacted.json",
+      "sha256": "94b39854417641477a5c0ab5c499cc3728b3d15ec0554188cf7ddf24eb696185",
+      "bytes": 24423
+    }
+  ]
+}
