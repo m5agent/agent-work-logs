@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "CardputerDict offline lookup and Tab5 native touch coordinate verification",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/227",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "fd08569f06b4afa478eb46da3654c4468e35a5bb"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": [
+      "M5Stack Cardputer",
+      "M5Stack Tab5"
+    ]
+  },
+  "firmware": {
+    "CardputerDict 0.6.4": {
+      "sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e"
+    },
+    "CarPlay-Tab5 1.0.0": {
+      "sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3"
+    }
+  },
+  "execution": {
+    "environment": "isolated macOS arm64 Device Service and saved_snapshot review",
+    "runtimes": [
+      "M5Stack Xtensa QEMU",
+      "esp-emu 1.1.0 macOS arm64"
+    ],
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "CardputerDict offline SD lookup",
+      "status": "PASS",
+      "layer": "data_behavior"
+    },
+    {
+      "name": "CardputerDict 0.3.0 artifact execution",
+      "status": "NOT RUN",
+      "layer": "visual_or_physical"
+    },
+    {
+      "name": "Tab5 raw panel coordinate and I2C acknowledgements",
+      "status": "PASS",
+      "layer": "device_response"
+    },
+    {
+      "name": "Tab5 complete guest interaction and USB host behavior",
+      "status": "PARTIAL",
+      "layer": "data_behavior"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cardputerdict-summary.json",
+      "sha256": "7e954606cef591bb09586027b9094af8b0803fa735f8f7e757dcd5266f642214",
+      "bytes": 4135
+    },
+    {
+      "path": "evidence/tab5-coordinate-summary.json",
+      "sha256": "03d3eafe2ad8f257b513877d40f38cf62ced67bf6324e94b66ee8bfe36011b10",
+      "bytes": 2521
+    }
+  ],
+  "notes": [
+    "Public summaries only. Original firmware, mutable flash, raw logs and evidence ZIPs are not distributed."
+  ]
+}

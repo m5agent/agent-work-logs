@@ -1,0 +1,160 @@
+{
+  "source_summary": {
+    "bytes": 7740,
+    "sha256": "c488033b4e0bfd51797b329daa5baf1afd3050fc9e63ff6b8def2808cfa18a0d"
+  },
+  "integrated_source": "6da7ab20351d732c6738fe13311f686efc856db3",
+  "validation": "virtual-device validation",
+  "board": "Core2",
+  "runtime": "native Xtensa QEMU",
+  "runtime_sha256": "5f8a5f38f0512db04a36fb7ca5cf13ec3d359d0fff1eb481fe9b2c06ab3580f2",
+  "status": "PASS",
+  "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+  "elf_sha256": "1916d0ba967d78f1028c27a25073bef7b94a683159fafd1c88e089bac9e678a4",
+  "other_elf_sha256": "1efaa30640a12dc3d9f8ccbf0461ec4b0844e2b5b9da58af633d50d8a7f84f9b",
+  "samples_before_panic": [
+    {
+      "schema_version": 1,
+      "device_id": "core2",
+      "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+      "runtime": "qemu",
+      "sampled_at": "2026-11-17T11:16:47.331620+00:00",
+      "source": "qmp_hmp_info_registers",
+      "target": "xtensa",
+      "run_state_before": "running",
+      "run_state_after": "running",
+      "cpus": [
+        {
+          "cpu_index": 0,
+          "pc": "0x40083da6"
+        },
+        {
+          "cpu_index": 1,
+          "pc": "0x400d7d1b"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "device_id": "core2",
+      "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+      "runtime": "qemu",
+      "sampled_at": "2026-11-17T11:16:47.332982+00:00",
+      "source": "qmp_hmp_info_registers",
+      "target": "xtensa",
+      "run_state_before": "paused",
+      "run_state_after": "paused",
+      "cpus": [
+        {
+          "cpu_index": 0,
+          "pc": "0x40083da6"
+        },
+        {
+          "cpu_index": 1,
+          "pc": "0x400d7d1b"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "device_id": "core2",
+      "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+      "runtime": "qemu",
+      "sampled_at": "2026-11-17T11:16:47.333938+00:00",
+      "source": "qmp_hmp_info_registers",
+      "target": "xtensa",
+      "run_state_before": "paused",
+      "run_state_after": "paused",
+      "cpus": [
+        {
+          "cpu_index": 0,
+          "pc": "0x40083da6"
+        },
+        {
+          "cpu_index": 1,
+          "pc": "0x400d7d1b"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "device_id": "core2",
+      "firmware_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5",
+      "runtime": "qemu",
+      "sampled_at": "2026-11-17T11:16:47.335599+00:00",
+      "source": "qmp_hmp_info_registers",
+      "target": "xtensa",
+      "run_state_before": "running",
+      "run_state_after": "running",
+      "cpus": [
+        {
+          "cpu_index": 0,
+          "pc": "0x40083da6"
+        },
+        {
+          "cpu_index": 1,
+          "pc": "0x400d7d1b"
+        }
+      ]
+    }
+  ],
+  "bundle_sha256": "115f6e27b5586428330b37431bf8e2c614c047bc0c49bc82d3f65c820a491373",
+  "zip_crc_verified": true,
+  "zip_serial_sha_binds_parser": true,
+  "other_elf_excluded": true,
+  "post_stop_sample_rejection": "session_not_running",
+  "cleanup": {
+    "stopped": true,
+    "flash_released": true,
+    "active_leases": 0
+  },
+  "isolated_service_exited": true,
+  "live_post_panic": {
+    "run_state_before": "running",
+    "run_state_after": "running",
+    "cpus": [
+      {
+        "cpu_index": 0,
+        "pc": "0x400d1b33"
+      },
+      {
+        "cpu_index": 1,
+        "pc": "0x400814e6"
+      }
+    ]
+  },
+  "guest_panic": {
+    "kind": "watchdog",
+    "core": 1,
+    "reason": "Interrupt wdt timeout on CPU1",
+    "guest_register_pcs": [
+      {
+        "core": 0,
+        "pc": "0x4000bfea",
+        "pc_source": "guest_register_dump"
+      },
+      {
+        "core": 1,
+        "pc": "0x400d7d19",
+        "pc_source": "guest_register_dump"
+      }
+    ],
+    "dump_status": "uart_reported_complete",
+    "elf_status": "matched",
+    "symbols_status": "partial"
+  },
+  "earlier_combined_probe": {
+    "source_summary": {
+      "bytes": 296,
+      "sha256": "6b6c3d09767fdf07df8b67f281f337a30816e68dd268036444f7572f4c956093"
+    },
+    "status": "FAIL",
+    "scope": "test harness timing checkpoint",
+    "observation": "Watchdog panic occurred before the post-resume assertion that no panic had yet appeared.",
+    "cleanup": {
+      "stopped": true,
+      "flash_released": true,
+      "active_leases": 0
+    }
+  }
+}

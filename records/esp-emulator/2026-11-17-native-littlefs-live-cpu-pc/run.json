@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Native ESP-IDF LittleFS and live Core2 CPU PCs",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "integrated_commit": "803e0a0500494d44e65586f8fc79e089b92ee1a0",
+    "littlefs_execution_source": "fd08569f06b4afa478eb46da3654c4468e35a5bb",
+    "live_pc_source_base": "fd08569f06b4afa478eb46da3654c4468e35a5bb"
+  },
+  "hardware": {},
+  "firmware": {
+    "littlefs_baseline_flash_sha256": "8346d6abd56135fe3e369d46f91cdaab63035f4ae416d6fab5e84ef54c5f5e00",
+    "littlefs_seed_sha256": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+    "idf61_comparison_flash_sha256": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf",
+    "core2_watchdog_flash_sha256": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "lanes": [
+      "isolated native Core2 QEMU",
+      "isolated native Cardputer and Cardputer ADV QEMU",
+      "isolated native Nesso N1 C6 QEMU rejection control"
+    ],
+    "xtensa_qemu_sha256": "eecf42ad4b393a76a9208c644abc2606030b585824b24ae53e5e9ecad2b4d4ed",
+    "c6_qemu_sha256": "69493c4edccaab5bc24961982ddb9097dda11c9b3418f9cdc0aaa2b27ae865a4"
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "name": "ESP-IDF 5.5.4 Cardputer and ADV seeded LittleFS mount/read/write/remount/reset",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Cardputer empty-baseline LittleFS negative control",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Outside-partition Flash bytes and source artifact bytes unchanged",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Single ESP-IDF 6.1.1 Cardputer startup reached app_main within 50 seconds",
+      "status": "FAIL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "ESP-IDF 6.1.1 LittleFS runtime behavior",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "device_response",
+      "name": "Core2 dual CPU live sample and no pause/resume side effects",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Same-session watchdog and separated UART panic and live PCs",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Stopped Core2 and live RISC-V sessions reject current-PC request as specified",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Vendor RISC-V tool resolves matching ELF symbol-table control",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "RISC-V live sampling and runtime panic attribution",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical devices and browser WASM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/littlefs-summary.json",
+      "bytes": 4784,
+      "sha256": "c3d0b63d658b9af746228cf0f217f52a8943cf8427fd1c0d20b2316a431a24a4"
+    },
+    {
+      "path": "evidence/live-cpu-pc-summary.json",
+      "bytes": 5621,
+      "sha256": "583898fc54e637473a0facb5866f59989ec69d11d699e132d196b378351cb996"
+    }
+  ]
+}

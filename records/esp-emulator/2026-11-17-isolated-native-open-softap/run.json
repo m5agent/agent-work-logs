@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Isolated native ESP32-S3 open SoftAP over a fixed fixture",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "integration_evidence_commit": "8861bcb99a18442b614728be55af24ce4c498fb9",
+    "assembling_project_base": "fd08569f06b4afa478eb46da3654c4468e35a5bb",
+    "source_summary": "tests/network/native_open_softap/summary.json",
+    "upstream_qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": [
+      "Cardputer",
+      "Cardputer ADV"
+    ]
+  },
+  "firmware": {
+    "merged_open_ap_fixture_sha256": "25eaf5347edbb7a8e8139830c4e2bf4cd696c0964f30cf969e4a2c52aede9ee2"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "isolated native Device Service, ESP32-S3 QEMU, per-session socketpair fixture",
+    "native_xtensa_qemu_sha256": "201c3611d48180ccd78c414a384f0aa1df77abfe4e66fa9706b2da75e0c352d7",
+    "native_patch_sha256": "7e407f3c52c6d84a9e892fe04b0fdee3183579453c22507428a1dfb98037d174",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "name": "Same-session open AP DHCPv4 DORA, ARP and bidirectional HTTP",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Same guest reset re-establishes the fixed exchange under the next peer generation",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Two concurrent Cardputer and Cardputer ADV leases, admission and ownership controls",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Independent STA open/WPA2/wrong-credential controls and PaperDIY storage fixture",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Original application captive portal, encrypted AP, Linux worker, browser and physical RF",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/native-open-softap-summary.json",
+      "sha256": "238a8dd2a00633caef1945aaa2f537688759c45dd91eb50d4eae5d56c61bd1b2",
+      "bytes": 17929
+    }
+  ],
+  "notes": [
+    "The evidence file is an exact byte copy of the bounded summary tracked in the integrated source. No raw capture or firmware is distributed."
+  ],
+  "followup_executions": [
+    {
+      "date": "2026-11-17",
+      "status": "PASS",
+      "scope": "same published ADV open-AP fixture and single reset with one isolated service",
+      "integration_commit": "6da7ab20351d732c6738fe13311f686efc856db3",
+      "runtime_sha256": "5f8a5f38f0512db04a36fb7ca5cf13ec3d359d0fff1eb481fe9b2c06ab3580f2",
+      "dhcp_dora": 2,
+      "bidirectional_tcp_payload_flows": 2,
+      "evidence": {
+        "path": "evidence/combined-adv-reset-summary.json",
+        "bytes": 2802,
+        "sha256": "b824b6c685aba4b62752069651c674404628a1eda6de968d231a2f7a5094f4b3"
+      }
+    }
+  ]
+}

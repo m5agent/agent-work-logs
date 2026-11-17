@@ -19,6 +19,9 @@
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
 | 2026-11-17 | M5GFX / ESP32 | #425 ESP-IDF v6.1.1 下 Panel_CVBS 的 DAC LL 编译失败 | `PASS`（原失败复现、最小补丁全量构建；CVBS 与实机未运行） | [查看](m5gfx/2026-11-17-issue425-idf611-cvbs-dac-ll/) |
+| 2026-11-17 | ESP Emulator | CardputerDict 原版查词与 Tab5 审核触点换算 | `PARTIAL`（离线词义通过，Tab5 原生坐标与回执通过，完整声明仍待验证） | [查看](esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/) |
+| 2026-11-17 | ESP Emulator | 原生 ESP-IDF LittleFS 与 Xtensa 实时 PC | `PARTIAL`（保留 6.1.1 首次启动失败，BBPLL 修复后组合 LittleFS 6/6 与 Core2 复验通过） | [查看](esp-emulator/2026-11-17-native-littlefs-live-cpu-pc/) |
+| 2026-11-17 | ESP Emulator | 隔离原生 Open SoftAP 数据面 | `PARTIAL`（两板固定 DHCP/ARP/HTTP、组合 ADV 复位复验通过，原版门户未执行） | [查看](esp-emulator/2026-11-17-isolated-native-open-softap/) |
 | 2026-11-17 | ESP Emulator | 原生语义输入与虚拟 FAT32 | `PARTIAL`（同 guest 输入、FAT32 验证；Dial guest 待处理） | [查看](esp-emulator/2026-11-17-native-review-input-and-storage/) |
 | 2026-11-17 | ESP Emulator | 原生 SoftAP 关联与 Tab5 原版触摸 | `PARTIAL`（两款 Cardputer 可关联，AP DHCP/HTTP 未到达；Tab5 单击通过，启动可靠性待验） | [查看](esp-emulator/2026-11-17-native-softap-tab5-touch/) |
 | 2026-11-17 | ESP Emulator | 原生崩溃诊断与三份原版复审 | `PARTIAL`（Core2 受控崩溃与 ELF 准入通过；原版功能和归因保留限制） | [查看](esp-emulator/2026-11-17-native-crash-diagnostics/) |

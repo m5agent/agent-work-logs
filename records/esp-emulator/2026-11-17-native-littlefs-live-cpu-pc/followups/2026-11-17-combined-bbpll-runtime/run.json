@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "title": "ESP32-S3 BBPLL startup diagnosis and combined native runtime validation",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "integrated_commit": "6da7ab20351d732c6738fe13311f686efc856db3",
+    "integration_base": "fd08569f06b4afa478eb46da3654c4468e35a5bb",
+    "bbpll_patch_sha256": "88bd9ce8c2db4d2c75fc84c3d5be40dd21ce2260e0a374b608c01ece9a7c35b7"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN",
+    "virtual_devices": [
+      "Cardputer",
+      "Cardputer ADV",
+      "Core2"
+    ]
+  },
+  "firmware": {
+    "idf_611_littlefs_merged": "b8fe2d8a0baf3466b60800713cf9070e8f030f9e60f057151dd47ccce28496bf",
+    "idf_554_littlefs_merged": "8346d6abd56135fe3e369d46f91cdaab63035f4ae416d6fab5e84ef54c5f5e00",
+    "littlefs_seed": "7c6462fc7c499539df682815543e01e1c130a9d7caef5952f60c716ab71d9c81",
+    "core2_watchdog_merged": "b08ca814400aaf0a7ede66cf195597b8ec8ac0f52d1c2fa8a7ced079eecf42f5"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime": "native Xtensa QEMU",
+    "old_runtime_sha256": "eecf42ad4b393a76a9208c644abc2606030b585824b24ae53e5e9ecad2b4d4ed",
+    "bbpll_test_runtime_sha256": "21755b0c95f0456e80ad3a1242a86a0214ab0f8136bae08507dc2093ee6d095c",
+    "combined_runtime_sha256": "5f8a5f38f0512db04a36fb7ca5cf13ec3d359d0fff1eb481fe9b2c06ab3580f2",
+    "littlefs_runtime_test_service_commit": "803e0a0500494d44e65586f8fc79e089b92ee1a0",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "name": "Earliest 6.1.1 startup reaches calibration polling but never app_main",
+      "status": "FAIL"
+    },
+    {
+      "layer": "device_response",
+      "name": "BBPLL-only correction boots same 6.1.1 Flash and seed",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Combined runtime same 6.1.1 and 5.5.4 LittleFS scenarios",
+      "status": "PASS",
+      "passed": 6,
+      "total": 6
+    },
+    {
+      "layer": "device_response",
+      "name": "Core2 first combined observation gate",
+      "status": "FAIL"
+    },
+    {
+      "layer": "device_response",
+      "name": "Core2 combined watchdog repeat, matching ELF and same-session PC proof",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical hardware, analog calibration timing and browser WASM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/bbpll-6-1-source-summary.json",
+      "bytes": 8132,
+      "sha256": "bb34a05afacfd805c2791ca51b6aeaf3dd0ba200c81f431e4ee6e92df360877f"
+    },
+    {
+      "path": "evidence/combined-littlefs-summary.json",
+      "bytes": 8145,
+      "sha256": "32a3c642130484a908b54430fb0e6ddec55512fff7071e31005653dcb0f103a9"
+    },
+    {
+      "path": "evidence/combined-core2-watchdog-summary.json",
+      "bytes": 4460,
+      "sha256": "35bb42ae4703d02348a7e2f85b10f06d2ec664ecbb89ff575727eb6402128a19"
+    }
+  ],
+  "notes": [
+    "A failing timing assertion belongs to the first Core2 test attempt. It does not replace guest evidence from the separate repeat."
+  ]
+}
