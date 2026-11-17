@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 ST7123 Arduventure startup and native GT911 drag controls",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "6da7ab20351d732c6738fe13311f686efc856db3",
+    "verified_source": "4fc493abdb305afb795a91f8d2639e71cca5c25f",
+    "integration_source": "fd823aeb37f5c89c93000df042cd6692a2771a3b",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/227",
+    "selected_tab5_integration_commit": "fd823aeb37f5c89c93000df042cd6692a2771a3b",
+    "integration_candidate": "693c56948c2458cf8e24c800832f7600438f4b45",
+    "reviewer_executed_commit": "393322693d4a5ba3341ae925e726cf68b80cc395",
+    "release_source_qualified_in_isolation": "37fc8963d77bf806cde4fa16ea11e31b5a98b4d7"
+  },
+  "hardware": {
+    "virtual_devices": [
+      "Tab5 ST7123",
+      "Tab5 GT911/ILI9881C"
+    ],
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "arduventure": {
+      "original_sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+      "normalized_sha256": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063"
+    },
+    "carplay": {
+      "original_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+      "normalized_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b"
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "isolated native Device Service and esp-emu v1.1.0 on macOS arm64",
+    "runtime_artifact_sha256": {
+      "esp_emu": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "gt911": "a0852d08d6cc04a11dcdd57c417b497f857be3e6265f8b690968ae3338cd3ce9",
+      "st7123": "6eaa3664fd81ce7e8f56bc0f84ad124ca2afcce21c947e74bbb41f1d9802d106"
+    },
+    "st7123_module_byte_identical_rebuild": true,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "Original Arduventure boot and native 720x1280 title frame",
+      "layer": "visual_or_physical",
+      "status": "PASS"
+    },
+    {
+      "name": "GPIO-level I2C diagnostic and firmware-specific board routing",
+      "layer": "transport",
+      "status": "PASS"
+    },
+    {
+      "name": "GT911 probe's six positions, IRQ, acknowledgements and release",
+      "layer": "device_response",
+      "status": "PASS"
+    },
+    {
+      "name": "Original CarPlay blank drag and confirm dialog tap in the same configured worker",
+      "layer": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "name": "ST7123 dynamic touch and Arduventure gameplay",
+      "layer": "device_response",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "USB/iPhone, physical hardware, browser touch and multitouch",
+      "layer": "data_behavior",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "两份原版截图和 60 秒隔离观察",
+      "status": "PASS"
+    },
+    {
+      "name": "Arduventure 手工复核，E_INTERACTION_INPUT_UNSUPPORTED",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "CarPlay 手工复核，E_INTERACTION_CLAIM_PARTIAL",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "device_response",
+      "name": "Exact 37fc release source, two screenshots and 60-second observations",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tab5-native-summary.json",
+      "bytes": 5480,
+      "sha256": "aac20f22bf50ece50941110f64fb7f00ee48e972c580a662a8ba0245edf8556a"
+    },
+    {
+      "path": "evidence/review-dry-run-summary.json",
+      "bytes": 5571,
+      "sha256": "e24c7555aff731aaec6cc8212e3ecbc518ae54ebb48cac76c9ee6dc9e7c97606"
+    },
+    {
+      "path": "evidence/release-source-review-summary.json",
+      "bytes": 5565,
+      "sha256": "04cde9bcdaf7b59cd8abc8c18bb1d1c8aa7b487e4e345d0f489a5079b49e7b33"
+    }
+  ]
+}

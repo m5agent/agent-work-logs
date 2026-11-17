@@ -18,3 +18,5 @@ StickS3、Cardputer、Cardputer-ADV、Core2 的指定输入已取到客体读回
 [PaperDIY、Cardputer STA 与 Tab5 上游候选](followups/2026-11-17-paperdiy-sta-and-tab5/)追加 SD 检测与复位、两板原生网络及 Tab5 DSI 对照。
 
 [常驻切换与原版复审](followups/2026-11-17-resident-cutover/)记录发布后真实 HTTP 复测、数据面与历史留存。
+
+[Dial 普通输入节奏与原驱动复验](followups/2026-11-17-dial-default-rotary-pacing/)记录 35 ms 默认路径、显式高速控制和旧运行时。
