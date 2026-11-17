@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer ADV original MP3 same-session playback review and PaperS3 native GT911 service",
+  "source": {
+    "simulator_repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "mp3_release": "https://github.com/TurbulentGoat/cardputer-adv-mp3-player/releases/tag/v1.0.0",
+    "papers3_frozen_native_release": "63472ab884dc2968904999c75eb6aca91c3f2517",
+    "simulator_execution": "731817add38c34e6d2a58f8dcde646cd7ded3f46",
+    "reviewer_main": "22c70e58306e2a5630167203e76923a47c5632ad",
+    "simulator_main": "65f40eac4521ceb2af9962298e1a26a6e07aae78",
+    "papers3_evidence_commit": "90f043973d2ecec48ac95df5749924f1866f09c5"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer ADV",
+      "PaperS3"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "mp3_original_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "mp3_original_bytes": 885600,
+    "mp3_normalized_flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "mp3_fat32_sha256": "6e7c003e532f2912b5a6841ea24b6ffbe1ca113caf0dd83b26d750d0cbd7f4a0",
+    "mp3_fat32_bytes": 67108864,
+    "papers3_factory_v05_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624",
+    "papers3_original_bytes": 1439168,
+    "papers3_normalized_flash_sha256": "ea1fdd4b3ee20db6b27fcd74f9e3a4bc538195075b3dfdd30f5e266764265788",
+    "papers3_normalized_flash_bytes": 16777216
+  },
+  "execution": {
+    "runtime_cardputer_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "papers3_observer_runtime_sha256": "1309290143c16e7a8f1131ca07acde728e809a48295abc255616ed3575a1706b",
+    "review_mode": "saved_snapshot dry-run",
+    "review_api": "0.7.0"
+  },
+  "checks": [
+    {
+      "name": "Reviewer candidate unit, OpenAPI and JavaScript syntax checks",
+      "status": "PASS",
+      "unit_tests": 196
+    },
+    {
+      "name": "Emulator scope, documentation and generated contracts",
+      "status": "PASS",
+      "doc_checks": 51,
+      "snapshot": "PASS",
+      "runtime_coverage": "PASS",
+      "peripheral_catalog": "PASS",
+      "qemu_profiles": "PASS"
+    },
+    {
+      "name": "Initial positive and wrong-tone startup attempts",
+      "status": "FAIL",
+      "cases": 2,
+      "detail": "QMP startup before either audio assertion; no firmware verdict."
+    },
+    {
+      "name": "524 Hz native PCM review after accepted ret",
+      "status": "PASS",
+      "matched_windows": 2,
+      "captured_windows": 2,
+      "review_lane": "SIM_VERIFIED"
+    },
+    {
+      "name": "Deliberate 880 Hz native PCM assertion",
+      "status": "FAIL",
+      "matched_windows": 0,
+      "captured_windows": 14,
+      "expected_control_outcome": true,
+      "review_error": "E_SIM_AUDIO_ASSERTION_FAILED"
+    },
+    {
+      "name": "Denied audio.read leaves PCM assertions partial",
+      "status": "PARTIAL",
+      "captured_windows": 0,
+      "expected_control_outcome": true,
+      "review_error": "E_SIM_AUDIO_PARTIAL"
+    },
+    {
+      "name": "PaperS3 source-bound GT911 service diagnostic provides one ready/poll/clear timeline in the original image",
+      "status": "PASS",
+      "cases": 1,
+      "contacts": 12,
+      "matched_icon": 10,
+      "late_clear_miss": 1,
+      "separate_unmatched_visual": 1,
+      "original_prefix_matches": true,
+      "flash_tail_fill_byte": 255,
+      "zip_manifests_bound": 3
+    },
+    {
+      "name": "PaperS3 repeatable original touch and why the foreground driver read happened late",
+      "status": "PARTIAL",
+      "controls_accepted": 12,
+      "controls_stable": 11,
+      "controls_matched": 4,
+      "controls_unchanged": 7,
+      "controls_unclassified": 1
+    },
+    {
+      "name": "Physical hardware and Burner submission",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/mp3-initial-startup-summary.redacted.json",
+      "bytes": 2623,
+      "sha256": "33f9cd1167b727f3eca887080f2be9220b4d52336aed9d75163c0eb93aa97963"
+    },
+    {
+      "path": "evidence/papers3-native-touch-poll-summary.redacted.json",
+      "bytes": 16391,
+      "sha256": "fa7ced302234e4cffba02b5cc032a72b421ba6b9804cc75213111ea95d00d893"
+    },
+    {
+      "path": "evidence/mp3-exact-playback-review-summary.redacted.json",
+      "sha256": "4a074cfdbec7120ffe498f2a91a472f905c69e8aadda6e8f91bd97383e31d801",
+      "bytes": 15589
+    }
+  ],
+  "source_main_readback": "PASS"
+}
