@@ -160,4 +160,4 @@ esp-emulator：`devices/` 只有 `esp32-c6` / `esp32-lx6` / `esp32-p4` / `esp32-
 ## 7. 回复
 
 日文单条回复，结构为 結論 → 証拠等級 → コード位置 → 未カバー項，正文见
-`evidence/reply-ja.md`。发布后补记链接。
+`evidence/reply-ja.md`。已发布：<https://github.com/m5stack/M5GFX/issues/426#issuecomment-6935810184>。

@@ -46,7 +46,7 @@
 - 各目标 `SOC_I2C_SUPPORT_HW_CLR_BUS` 对照与 IDF 兜底实现：`evidence/idf-v55-caps-and-bus-clear.txt`
 - 边界：`evidence/virtual-device-check.md`、`evidence/hardware-inventory.md`
 - 条目元数据与回复正文：`evidence/issue-426.json`、`evidence/reply-ja.md`
-- 已发布回复：见 `evidence/reply-ja.md` 顶部链接（1 条，Issue 保持 OPEN，未改代码）
+- 已发布回复：<https://github.com/m5stack/M5GFX/issues/426#issuecomment-6935810184>（1 条，Issue 保持 OPEN，未改代码）
 
 ## 文件
 
