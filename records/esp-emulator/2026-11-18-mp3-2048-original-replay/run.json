@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "title": "Cardputer ADV MP3 and Core2 2048 original virtual replay",
+  "overall_status": "PASS",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "emulator": "c8a40dee575b944195ed52c7f8dfb8a16a51a8cf",
+    "reviewer": "ea64e80e3d88e2761b5627545376a1de400cf34f"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "models": [
+      "Cardputer ADV",
+      "Core2"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "mp3_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "mp3_FAT32_sha256": "6e7c003e532f2912b5a6841ea24b6ffbe1ca113caf0dd83b26d750d0cbd7f4a0",
+    "2048_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa"
+  },
+  "execution": {
+    "mode": "isolated saved-snapshot dry-run",
+    "native_xtensa_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "reviewer_api": "0.14.0",
+    "device_service_api": "1.82.0"
+  },
+  "checks": [
+    {
+      "name": "Original MP3 with saved FAT32 input, same-session digital PCM",
+      "status": "PASS",
+      "tolerance_hz": 8,
+      "independent_matching_windows": 7
+    },
+    {
+      "name": "Original 2048 with eight independently valid completed moves",
+      "status": "PASS",
+      "moves": 8
+    },
+    {
+      "name": "Reviewer built-in 2048 semantic assertions",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Exact emulator source CI",
+      "status": "PASS",
+      "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44188018262"
+    },
+    {
+      "name": "Pages provenance and static readback",
+      "status": "PASS",
+      "scope": "earlier published artifact"
+    },
+    {
+      "name": "Physical hardware, browser guest regression, Pages publication or Burner submission",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/2048-isolated-review.summary.json",
+      "sha256": "536c5619f0ae0e6098cf9d0d31a310e47cd7a34ec9d946d8ec20e61f612fda8a",
+      "bytes": 3739
+    },
+    {
+      "path": "evidence/mp3-isolated-review.summary.json",
+      "sha256": "c7fd683e2056c20ca6928228ca837aa2fe46d99669804d7af9fbfe3b0ddf3493",
+      "bytes": 3414
+    },
+    {
+      "path": "evidence/remote-ci-and-pages-readback.summary.json",
+      "sha256": "045b48f95db0a852c4907f683095f7728ee70c64a20ac11c9616e4c620480a0a",
+      "bytes": 2793
+    }
+  ]
+}
