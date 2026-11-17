@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Original NC1020 cross-service storage recovery and display attribution",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "execution_service": "b92d7b5630687cb7d7142346a39839ef61bd0116",
+    "esp_idf_lcd_control": "4c2820d377d1375e787bcef612f0c32c1427d183",
+    "esp_idf_upstream_spi_reference": "8ee2dce0d6758d0dd8c782587ef5d8715c8c26e3",
+    "emulator_main": "9d27879b55bcc6abc2c0e77163853867f19f1a6b",
+    "source_main_readback": "PASS",
+    "evidence_commit": "9b0b21d6c9f2b3a08128a5297138abdb82d3ddea"
+  },
+  "hardware": {
+    "device": "Cardputer K132",
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "cold_flash_before_g0_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "source_sdk": "ESP-IDF v5.4.1"
+  },
+  "execution": {
+    "runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "normal_cold_runs": 2,
+    "fresh_worker_restore_phases": 2
+  },
+  "checks": [
+    {
+      "name": "Docs, project snapshot and source scope",
+      "status": "PASS",
+      "docs_checks": 51
+    },
+    {
+      "name": "Two same-original complete cold ROM and NOR imports",
+      "status": "PASS",
+      "rom_banks": 206,
+      "nor_bytes": 524288
+    },
+    {
+      "name": "Two same-original G0 saves and actual FAT state hashes",
+      "status": "PASS",
+      "state_bytes_per_run": 99384
+    },
+    {
+      "name": "Normal-timing original authored frame reproducibility",
+      "status": "PARTIAL",
+      "fits": [
+        1.0,
+        0.615879
+      ]
+    },
+    {
+      "name": "Cross-service exact retained FAT state and restore serial marker",
+      "status": "PASS"
+    },
+    {
+      "name": "Cross-service authored frame",
+      "status": "PARTIAL",
+      "fits": [
+        0,
+        0
+      ],
+      "decoded_rgb_nonblack_pixels": [
+        120,
+        4063
+      ]
+    },
+    {
+      "name": "Original failed guest directly observed waiting on SPI lock",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Physical hardware, browser, resident rollout and Burner",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Source changes to release runtime implementation",
+      "status": "NOT RUN",
+      "detail": "source commit contains documentation/evidence only"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/nc1020-storage-display-summary.redacted.json",
+      "sha256": "20315bea456dc37f937349d64c9afd647752c929dd052d1dc78a142d4c560ee0",
+      "bytes": 16847
+    }
+  ]
+}
