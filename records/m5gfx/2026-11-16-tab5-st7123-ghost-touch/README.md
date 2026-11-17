@@ -291,4 +291,5 @@ GDB 邮箱，无 0x43 扩展器与 reset 线模型）。
 无 0x43 扩展器与 reset 线模型，无法产生 9 个 valid slot 的锁存帧、强制 63–79 ms 停顿
 或 3 ms 快读时序）。
 
-第十三轮回复：见下方“回复链接”提交。
+第十三轮回复：[issuecomment-6943827854](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6943827854)
+（英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。
