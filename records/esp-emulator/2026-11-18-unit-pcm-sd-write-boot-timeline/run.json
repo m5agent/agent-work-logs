@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Dial Unit PCM, PaperDIY SD write stamps and Tab5 app-load timeline",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "dial_http_executed": "4ee0e106386f064fcb95f901e6141b8cde6198f3",
+    "dial_native_build": "73281c8c0e9f090544dfd57a9397dafe048198e8",
+    "paperdiy_a4_runtime_source": "2db3851c0b7a4980210034d05130224a2ecf6455",
+    "tab5_read_only_replay": "a3aba3335394639585df94c940e1b46b1b50403c",
+    "dial_final_replay": "d99d4d00340b8ef3265a8b9d31252996e1f41d8c",
+    "paperdiy_final_worker_generation": "167a462dd81ffd62f4b8dbe14d626f4fce18662e",
+    "paperdiy_old_control_service": "31867f0eea21b907328297a8cd2190f295765e79",
+    "simulator_main": "d99d4d00340b8ef3265a8b9d31252996e1f41d8c",
+    "stimulus_source_main_readback": "PASS",
+    "dial_integrated_native_patch": "19ccbc350fe295a213f0e6d2bd134df3883f7dae",
+    "dial_evidence_commit": "69a408e77b25d9eb8b22b3a9b6df3c679f0f1546",
+    "paperdiy_integrated_worker_binding": "f503dc1bca21bad427ccc7e59d61075b58121361",
+    "tab5_integrated_app_load": "2e87a3f8bda0dc83d9d74effa7e7b9ed47178c73",
+    "tab5_evidence_commit": "9c1726d9e5fc3caa701ef3ec50bbdc275c87db26"
+  },
+  "hardware": {
+    "devices": [
+      "Dial",
+      "PaperDIY",
+      "Tab5"
+    ],
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "dial_original_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "paperdiy_probe_sha256": "7a10bda2976950dceb98c41744f35ec9a7da7f320d602f24cc5a9c838e47af94",
+    "tab5_historical_98tab5_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+    "tab5_historical_carplay_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+    "tab5_historical_m5tabos_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e"
+  },
+  "execution": {
+    "dial_runtime_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "paperdiy_a4_runtime_sha256": "99da5cb681e44dfdf332f8af01b8d5d36bbb2801b30ca7e0ca6be21af4c0ecff",
+    "tab5_new_guest_sessions": 0,
+    "paperdiy_final_and_baseline_runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "device_service_api": "1.80.0"
+  },
+  "checks": [
+    {
+      "name": "Final integrated simulator platform suite",
+      "status": "PASS",
+      "ran": 2408,
+      "skipped": 10,
+      "seconds": 190.145,
+      "receipt_sha256": "8d1c8a8ebe83694138cc6c6c97c13aaf59d6f29f7c5a0d2c2a2af37dfc8b76dd",
+      "receipt_bytes": 54508
+    },
+    {
+      "name": "Final docs, API inventory, project snapshot, coverage, catalog, QEMU profiles, build recipe and scope",
+      "status": "PASS",
+      "docs_checks": 51
+    },
+    {
+      "name": "Dial original transport control with same-session HTTP and ZIP PCM",
+      "status": "PASS",
+      "verified_windows": 7
+    },
+    {
+      "name": "Dial end-to-end repeat using integrated service source",
+      "status": "PASS",
+      "verified_windows": 4
+    },
+    {
+      "name": "Dial native byte-exact transport, EOF wrap, unset and capacity controls",
+      "status": "PASS",
+      "controls": 4
+    },
+    {
+      "name": "Dial malformed WAV and legacy runtime fail closed",
+      "status": "PASS",
+      "invalid_wav_http": 400,
+      "legacy_runtime_http": 409
+    },
+    {
+      "name": "PaperDIY live SD write, quiet read, reinsertion and ejected guard",
+      "status": "PASS"
+    },
+    {
+      "name": "Tab5 historical bootload parser readback",
+      "status": "PASS",
+      "application_load_counts": {
+        "98tab5": 32,
+        "carplay": 1,
+        "m5tabos": 7
+      }
+    },
+    {
+      "name": "Tab5 98TAB5 and CarPlay retained GET/ZIP receipt equality",
+      "status": "PASS"
+    },
+    {
+      "name": "M5TabOS HTTP replay, new Tab5 startup, browser, physical and Burner",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "PaperDIY baseline live stamp API is unsupported despite same actual FAT data plane",
+      "status": "FAIL",
+      "expected_control_outcome": true,
+      "http": 409,
+      "error_code": "sd_write_stamp_unsupported"
+    },
+    {
+      "name": "PaperDIY worker incarnation rotates media identity",
+      "status": "PASS",
+      "scope": "unit control; live representative reinsert exercised separately"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/dial-u197-pcm-summary.redacted.json",
+      "sha256": "62ae36d078ec1f1caf4f54b27fd155c9a782c4867f75abbe7e2c507427d9b0da",
+      "bytes": 21015
+    },
+    {
+      "path": "evidence/paperdiy-sd-write-stamp-summary.redacted.json",
+      "sha256": "b975766df626e1ba324d265ba9ab71bb79970c7d5666c062f287a89504580b6e",
+      "bytes": 9114
+    },
+    {
+      "path": "evidence/tab5-app-load-retained-summary.redacted.json",
+      "sha256": "e13d16e1fe329707c9634344197ccf68c1f5b7366baa6015f1a793a9cd1bbe45",
+      "bytes": 10836
+    }
+  ]
+}
