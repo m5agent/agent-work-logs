@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "title": "Tab5 原生 ST7123 单点拖动",
+  "overall_status": "PASS",
+  "source": {
+    "repository": "m5stack-esp-emulator",
+    "commit": "4160e5d27732742052e2246bffb773a718373ca6"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "1e0c468252b88bb1b4e57165d6b32250ab4e4bc90db26eb34e40c8bbef027714"
+  },
+  "execution": {
+    "environment": "isolated native Tab5 virtual-device validation",
+    "part_sha256": "56e83f9a99119642ce34bbfde838cd96556d8587c52baba411729569f3d1f63d"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "每方向六坐标、一次释放、7/7 实际来宾确认"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "冻结探针正反向和原版旧输入回归"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "原版 ST7123 拖动语义与物理设备留待专测"
+    }
+  ],
+  "evidence": [
+    "evidence/native-drag-summary.json",
+    "evidence/combined-drag-summary.json"
+  ],
+  "notes": [
+    "未提交 Burner。"
+  ]
+}

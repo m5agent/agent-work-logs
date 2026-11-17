@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "初代 Cardputer 普通会话原生 PCM",
+  "source": {
+    "repository": "m5stack-esp-emulator",
+    "commit": "4160e5d27732742052e2246bffb773a718373ca6"
+  },
+  "hardware": {},
+  "firmware": {
+    "sha256": "0f7f57adcf67d012d59adf476acf55be0ecfa6af369eb1c961e0ac04ec736f13"
+  },
+  "execution": {
+    "environment": "isolated native Cardputer virtual-device validation",
+    "runtime_sha256": "7d19fd18eb0adeddcf36070c1d3c0e81c028552dcd4f76195e3234cdc1e9c03a"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "注入源、实际 DMA 音频与同会话 ZIP"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "初代和 ADV 独立音调与静音正负对照"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "此音频验证为数字数据，真机和声学未执行"
+    }
+  ],
+  "evidence": [
+    "evidence/board-audio-summary.json",
+    "evidence/combined-audio-summary.json"
+  ],
+  "notes": [
+    "保留 75 秒部分结果。",
+    "未提交 Burner。"
+  ]
+}

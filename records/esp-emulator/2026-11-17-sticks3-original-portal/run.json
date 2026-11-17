@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "hardware_test",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 原版配网与隔离夹具对照",
+  "source": {
+    "repository": "m5stack-esp-emulator",
+    "commit": "bb91232a26aa91e9f0bcd8dbfb736940c934b55e"
+  },
+  "hardware": {},
+  "firmware": {
+    "author_application_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+    "composed_firmware_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70",
+    "sdk_probe_sha256": "85eeb128b0d603fa3a10b421573015c713eb3e05587d11a2f525200597080d19"
+  },
+  "execution": {
+    "environment": "native StickS3 virtual-device validation with closed per-session peer"
+  },
+  "checks": [
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "detail": "原版首次配网页、无输入信标及长按 B 画面对照"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "SDK 同会话关联、DHCP、HTTP 及复位对照"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "detail": "原版热点启动，原版关联、HTTP 与 STA 尚无证据"
+    }
+  ],
+  "evidence": [
+    "evidence/portal-validation-summary.json"
+  ],
+  "notes": [
+    "真机和公网线路未运行。",
+    "未提交 Burner。"
+  ]
+}

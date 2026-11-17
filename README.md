@@ -48,6 +48,9 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-17 | ESP Emulator | 初代 Cardputer 普通会话原生 PCM | `PASS`（两板数字输入、输出和静音对照） | [查看](records/esp-emulator/2026-11-17-cardputer-owned-native-pcm/) |
+| 2026-11-17 | ESP Emulator | Tab5 原生 ST7123 单点拖动 | `PASS`（原生拖动探针及已有输入回归） | [查看](records/esp-emulator/2026-11-17-tab5-st7123-drag/) |
+| 2026-11-17 | ESP Emulator | StickS3 原版配网和隔离夹具对照 | `PARTIAL`（原版热点与 SDK 数据面通过） | [查看](records/esp-emulator/2026-11-17-sticks3-original-portal/) |
 | 2026-11-17 | ESP Emulator | ESP32-S3 原生 watchdog 回执 | `PASS`（探针和 API/ZIP 对照） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/) |
 | 2026-11-17 | ESP Emulator | Cardputer ADV 原版离线 DNS 和授时 | `PARTIAL`（原版 SNTP 通过，公共 HTTP 待验证） | [查看](records/esp-emulator/2026-11-17-cardputer-adv-offline-time/) |
 | 2026-11-17 | ESP Emulator | Tab5 ST7123 原生单点长按 | `PARTIAL`（持续触点、原版审核通过；整机关机待验证） | [查看](records/esp-emulator/2026-11-17-tab5-st7123-hold/) |
