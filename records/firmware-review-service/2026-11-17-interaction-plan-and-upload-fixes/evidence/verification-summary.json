@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "service_commit": "9046a0b",
+  "base_commit": "46529f1",
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "passed": 97,
+    "failed": 0
+  },
+  "retries": [
+    {
+      "job_id": "job-234a23521918",
+      "firmware": "card-gcalc 0.3",
+      "before": "E_NETWORK_PARTIAL",
+      "after": "done/SIM_VERIFIED",
+      "note": "graphics API no longer a network claim"
+    },
+    {
+      "job_id": "job-9100d103aa42",
+      "firmware": "card-gcalc 0.2",
+      "before": "E_NETWORK_PARTIAL",
+      "after": "done/SIM_VERIFIED",
+      "note": "same"
+    },
+    {
+      "job_id": "job-282e46098a8b",
+      "firmware": "Cardputer ADV Frequency 1.1",
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "done/SIM_VERIFIED",
+      "note": "declared keys ret/tab/semicolon changed"
+    },
+    {
+      "job_id": "job-ee74e7f677d8",
+      "firmware": "CardputerDict 0.6.4",
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "E_NETWORK_PARTIAL",
+      "note": "interaction PASS; network only"
+    },
+    {
+      "job_id": "job-152a7f59c47e",
+      "firmware": "CardputerDict ADV 0.6.4",
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "E_NETWORK_PARTIAL",
+      "note": "interaction PASS; network only"
+    },
+    {
+      "job_id": "job-219e982655dc",
+      "firmware": "Stock Ticker 1.0.0",
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "E_NETWORK_PARTIAL",
+      "note": "hold_a 5 s changed frame; network only"
+    },
+    {
+      "job_id": "job-3eee7e7f2cb6",
+      "firmware": "CardOS-zh V3.6",
+      "before": "E_INTERNAL",
+      "after": "E_CONTENT_MANUAL",
+      "note": "upload fixed; device/version fields need manual review; interaction PASS"
+    },
+    {
+      "job_id": "job-55ca380e66ea",
+      "firmware": "All day watch 0.3.8",
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "E_SIM_APP_CRASH",
+      "note": "hold_b then Interrupt wdt timeout on CPU1 at ~28 s"
+    }
+  ],
+  "current_recent_distribution": {
+    "done_SIM_VERIFIED": 5,
+    "E_NETWORK_PARTIAL": 4,
+    "E_INTERACTION_CLAIM_PARTIAL": 1,
+    "E_SIM_APP_CRASH": 1,
+    "E_NO_SIM_PROFILE": 3,
+    "E_CONTENT_MANUAL": 1,
+    "E_EVIDENCE_UNAVAILABLE": 1,
+    "E_NO_FRAME": 1,
+    "E_SIM_MODEL_GAP": 1,
+    "E_APP_ONLY_TARGET_MISMATCH": 1
+  },
+  "deployment": {
+    "health": "ok",
+    "active_jobs_interrupted": 0
+  },
+  "limits": [
+    "network evidence policy NOT RUN",
+    "XIAOZHI_CARD_KIT unsupported",
+    "ATEM historical retry NOT RUN",
+    "physical hardware NOT RUN"
+  ]
+}

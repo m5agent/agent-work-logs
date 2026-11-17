@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "审查服务按声明控件取证、网络/翻页误报与非拉丁文件名修复",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": "46529f1"
+  },
+  "hardware": {},
+  "firmware": {
+    "verified": [
+      {"job_id": "job-234a23521918", "name": "card-gcalc", "version": "0.3"},
+      {"job_id": "job-9100d103aa42", "name": "card-gcalc", "version": "0.2"},
+      {"job_id": "job-282e46098a8b", "name": "Cardputer ADV Frequency and Noise Generator", "version": "1.1"}
+    ],
+    "interaction_fixed_network_remaining": [
+      {"job_id": "job-ee74e7f677d8", "name": "CardputerDict", "version": "0.6.4"},
+      {"job_id": "job-152a7f59c47e", "name": "CardputerDict ADV", "version": "0.6.4"},
+      {"job_id": "job-219e982655dc", "name": "Stock Ticker", "version": "1.0.0"}
+    ],
+    "upload_fixed": [
+      {"job_id": "job-3eee7e7f2cb6", "name": "CardOS-zh", "version": "V3.6"}
+    ],
+    "new_crash": [
+      {"job_id": "job-55ca380e66ea", "name": "All day watch + Chess + Tetris + Blackjack", "version": "0.3.8"}
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; resident firmware review service (LaunchAgent); native QEMU device service; saved-snapshot retries with submit=false",
+    "task_id": "review-service-fix-2026-11-17",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "declared controls and holds",
+      "status": "PASS",
+      "detail": "Controls:/Keys: parsing, declared key probes, hold_seconds; Frequency and Stock Ticker verified"
+    },
+    {
+      "name": "network api false positive",
+      "status": "PASS",
+      "detail": "graphics API no longer triggers network; card-gcalc 0.2 and 0.3 SIM_VERIFIED"
+    },
+    {
+      "name": "A/B paging false positive",
+      "status": "PASS",
+      "detail": "A/B must be paired with paging words; CardputerDict no longer requires A/B paging"
+    },
+    {
+      "name": "non-Latin artifact filename",
+      "status": "PASS",
+      "detail": "CardOS-zh upload no longer raises UnicodeEncodeError"
+    },
+    {
+      "name": "ATOM_LITE mapping",
+      "status": "PASS",
+      "detail": "ATOM_LITE/ATOMLITE resolve to atom-lite; historical ATEM job has no cached BIN"
+    },
+    {
+      "name": "regression suite",
+      "status": "PASS",
+      "detail": "97 tests passed after rebase"
+    },
+    {
+      "name": "service deployment",
+      "status": "PASS",
+      "detail": "resident service restarted; /api/health ok; no active job interrupted"
+    },
+    {
+      "name": "network evidence policy",
+      "status": "NOT RUN",
+      "detail": "optional network and StickS3 setup-required network remain manual review"
+    },
+    {
+      "name": "XIAOZHI_CARD_KIT support",
+      "status": "NOT RUN",
+      "detail": "no M5Stack/emulator profile; should be classified unsupported"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/verification-summary.json"
+  ],
+  "notes": [
+    "Service commit 9046a0b pushed to main after rebasing onto 46529f1.",
+    "No simulator code changed; no Burner submission; retries used submit=false.",
+    "All day watch now shows an Interrupt WDT timeout on CPU1 after hold B; needs symbols/hardware to attribute."
+  ]
+}
