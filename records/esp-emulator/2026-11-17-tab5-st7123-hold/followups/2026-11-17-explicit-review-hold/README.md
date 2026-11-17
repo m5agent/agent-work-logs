@@ -14,3 +14,5 @@
 - [同会话脱敏回执](evidence/explicit-hold-summary.json)
 
 真机、浏览器 WASM 与常驻部署未执行。隔离会话全部停止并释放 Flash，未提交 Burner，源提交包含变更。
+
+最终冻结包 `bb91232a` 与 `952ba18` 同样通过九个点按和一次原版长按，观察 60.265 秒、13 个样本。 [组合复验回执](evidence/combined-frozen-review-summary.json)
