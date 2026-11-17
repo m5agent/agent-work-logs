@@ -80,8 +80,9 @@ reading whenever an alarm is configured), so the initial state has a source.
 
 ### 2. No component test YAMLs and a stale CODEOWNERS
 
-Every existing Chain component has `tests/components/m5_chain_*/common.yaml` +
-`test.esp32-idf.yaml`; these three do not, so the new sources are never built by
+Every existing Chain component ships `tests/components/m5_chain_*` with
+`common.yaml`, `test.esp32-idf.yaml` and a `<name>_test.cpp` unit test (12 of
+12); these three have nothing, so the new sources are never built or tested by
 CI. `script/build_codeowners.py --check` fails on the PR head ("CODEOWNERS file
 is not up to date"), and `.github/workflows/ci.yml:238` runs exactly that check,
 so CI will fail until the file is regenerated. The author already listed both

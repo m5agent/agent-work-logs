@@ -22,8 +22,10 @@ and binary-sensor states. Two things should be fixed before merge:
    therefore issues **no read at all** and the binary sensor stays `unknown`
    until the device happens to cross a threshold (reproduced: 7 configuration
    frames, 0 reads, 0 states).
-2. **No component test YAMLs.** All 14 existing Chain components ship
-   `tests/components/<name>/`, so this PR's 2171 lines are never compiled by CI.
+2. **No component tests.** All 12 existing Chain components ship
+   `tests/components/<name>/` (`common.yaml`, `test.esp32-idf.yaml` and a
+   `<name>_test.cpp` unit test), so this PR's 2171 lines are never compiled or
+   tested by CI.
    `script/build_codeowners.py --check` also fails, which is a required CI step
    (`ci.yml:238`).
 
