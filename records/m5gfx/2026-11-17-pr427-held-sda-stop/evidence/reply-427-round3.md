@@ -20,3 +20,6 @@
 - ESP32-S3 の `recover_held_sda_and_resample()`：この関数は `release_held_sda()` を呼ぶだけ（`probe_hardware.inl:55`）で、戻り値は使わず再サンプルします。修正はこの経路にもそのまま入り、別実装の変更は要りません。解放できなかった場合も再サンプル結果は従来と同じで、余分なクロックは最大 10 回です。実機で SDA を保持させた S3 経路は未確認です（StickS3 / CardputerADV の 0/40 はこの経路の効果を直接は示しません）。
 
 **必要な手順**：マージ判断に必要な追加手順はありません。残るのは write 中 ACK、S3 の保持 SDA 注入、本文の 11 ボードで、いずれも任意の追加カバレッジです。
+
+詳細（第 3 ラウンドを追記）：https://github.com/m5agent/agent-work-logs/blob/e5dddfb7b5aa4355af5515e0a404b3d812323431/records/m5gfx/2026-11-17-pr427-held-sda-stop/README.md
+（投稿済み: https://github.com/m5stack/M5GFX/pull/427#issuecomment-6943645133）

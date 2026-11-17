@@ -218,3 +218,7 @@ Device Service には `tab5` (ESP32-P4NRW32, esp-emulator-native) のプロフ�
 ブロッカーなし、は変わらない。hardware validation は著者側の P4 1 ボード分が追加され、
 m5agent 自身の実機・仮想検証は引き続き `NOT RUN`。残る未確認は write 中 ACK、S3 の保持
 SDA 経路、PR 本文の 11 ボードで、いずれもマージのブロッカーではない。
+
+日文で 1 条のコメントを投稿した（2026-11-17T09:07:54Z、
+<https://github.com/m5stack/M5GFX/pull/427#issuecomment-6943645133>）。PR は OPEN のまま、
+close / 上流への push はしていない。

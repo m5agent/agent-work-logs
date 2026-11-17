@@ -79,6 +79,7 @@
   次バイトの MSB を出している状態から `release_held_sda()` を 2 回呼ぶ）。
 - `evidence/owner-report-check-old.txt` / `-new.txt`：`b48dce0` と `fa2bc69` の関数での出力。
 - `evidence/owner-report-head-blob.txt`：head / `b8f5d89` / base の `probe_hardware.inl` blob と差分統計。
+- 第 3 ラウンドの已发布回复：<https://github.com/m5stack/M5GFX/pull/427#issuecomment-6943645133>（1 条、日本語）
 
 ## 第 3 ラウンド（ainyan03 の ESP32-P4 実機報告、2026-11-17）
 
