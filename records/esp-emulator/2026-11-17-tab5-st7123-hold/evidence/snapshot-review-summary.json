@@ -1,0 +1,268 @@
+{
+  "native_service_source": "dc6853453a64f315a09b691c3631d9c2d4b3c08e",
+  "reviewer_source": "31b384efb279d1fc915e23546501900fedf35af6",
+  "native_xtensa_sha256": "66cc7956a4609c0e55e9b4fe9b29920eee86e64ab5d14d1b88db22be678b8723",
+  "validation": "virtual-device validation",
+  "outputs": {
+    "arduventure": {
+      "firmware_sha256": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+      "firmware_bytes": 623152,
+      "expected_elf_sha256": null,
+      "device_id": "tab5",
+      "execution_runtime": "qemu",
+      "review_status": "manual_review",
+      "error_code": "E_INTERACTION_CLAIM_PARTIAL",
+      "lane": "SIM_PARTIAL",
+      "observation": {
+        "status": "PASS",
+        "required_seconds": 60,
+        "elapsed_seconds": 60.62003800000001,
+        "sample_count": 12,
+        "frame_scope": "framebuffer",
+        "frame_unavailable_reason": null,
+        "evidence_file": "observation.json"
+      },
+      "evidence_zip_sha256": "635ce0775f1c117b370546b55c3ddb73b205c5ee7ae370887ff2e20084bc4d78",
+      "serial_sha256": "ff41702b929d8e071d460c4086c3ba54819d68bf1676d7d572dc146a635fd874",
+      "serial_bytes": 6163,
+      "serial_power_on_count": 1,
+      "serial_sw_reset_count": 0,
+      "serial_primary_panic": false,
+      "verified_crash": {
+        "status": "no_evidence",
+        "source": "device_service",
+        "kind": null,
+        "elf_status": "not_uploaded",
+        "repeated_resets": false
+      },
+      "session_stopped": true,
+      "mutable_flash_released": true,
+      "burner": "NOT SUBMITTED",
+      "frame_backend": "esp-emu-dsi",
+      "panel_board": "st7123",
+      "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "elf_symbols_status": "unavailable",
+      "frame_width": 720,
+      "frame_height": 1280,
+      "screenshot_evidence": {
+        "bytes": 10911,
+        "sha256": "6cdbfa95b3b459554557a2908da5728f1c6a1e2d5d797a2c4d78be29b1818a58",
+        "readiness": "PASS",
+        "metrics": {
+          "capture_backend": "esp-emu-dsi",
+          "nonblack_pixels": 708520,
+          "unique_colors": 1
+        }
+      },
+      "input_assertion_status": "PARTIAL",
+      "touch_model": "esp-emu-st7123",
+      "simulation_input": {
+        "status": "PARTIAL",
+        "scope": "interactive-input",
+        "setup_actions_accepted": 0,
+        "accepted": 10,
+        "changed": 9,
+        "changed_inputs": [
+          "touch_speed",
+          "touch_b_menu",
+          "touch_b_new_game",
+          "touch_right",
+          "touch_down",
+          "touch_left",
+          "touch_up",
+          "touch_b_confirm",
+          "touch_a_delete"
+        ],
+        "ab_navigation_verified": null,
+        "touch_status": "PASS",
+        "touch_plan_status": "PASS",
+        "touch_plan_reason": null,
+        "touch_button_bindings": {
+          "a": "touch_a_delete",
+          "b": "touch_b_confirm"
+        },
+        "button_status": "PASS",
+        "keyboard_status": "NOT RUN",
+        "required_buttons_observed": {
+          "a": true,
+          "b": true
+        },
+        "probe_keys": [],
+        "probe_keys_responded": {},
+        "semantic_verification": "PASS",
+        "semantic_input_status": "PARTIAL",
+        "semantic_input_actions": {
+          "touch_hold_center": "PARTIAL"
+        },
+        "unsupported_semantic_inputs": [],
+        "verification_scope": "explicit_state_or_frame_assertions"
+      },
+      "expected_scope": "Exact gated on-screen A/B and D-pad; explicit hold claim remains separate",
+      "reviewer_generic_hold_control": {
+        "raw": [
+          360,
+          640
+        ],
+        "timing": {
+          "completion": "guest-observed",
+          "hold_seconds": 1.0,
+          "guest_hold_ms": 1000,
+          "refresh_acknowledged": 62
+        },
+        "status": "PASS",
+        "scope": "non-terminal center only"
+      },
+      "power_icon_hold_in_reviewer": "NOT RUN",
+      "explicit_steps": [
+        {
+          "name": "touch_speed",
+          "status": "PASS",
+          "raw": [
+            358,
+            548
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "be3cd61931a21ae99d6241a14d1f50e9c66b5fc25384fabe2cb4c65a6087c0a2",
+          "frame_after_sha256": "a302eec638f8695850e63cb47dd1c5526c5dfb7745bece311b437117200e80b5"
+        },
+        {
+          "name": "touch_b_menu",
+          "status": "PASS",
+          "raw": [
+            530,
+            770
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "a302eec638f8695850e63cb47dd1c5526c5dfb7745bece311b437117200e80b5",
+          "frame_after_sha256": "5b950e975616b0e28f9bf4a118f5cf6b52885217e20a9325b149bf6e58d180be"
+        },
+        {
+          "name": "touch_b_new_game",
+          "status": "PASS",
+          "raw": [
+            530,
+            770
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "5b950e975616b0e28f9bf4a118f5cf6b52885217e20a9325b149bf6e58d180be",
+          "frame_after_sha256": "6cdbfa95b3b459554557a2908da5728f1c6a1e2d5d797a2c4d78be29b1818a58"
+        },
+        {
+          "name": "touch_right",
+          "status": "PASS",
+          "raw": [
+            280,
+            850
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "6cdbfa95b3b459554557a2908da5728f1c6a1e2d5d797a2c4d78be29b1818a58",
+          "frame_after_sha256": "8f4f95ed83dffb9f443a0b91059771088bc669cd7c343773f3dd7697ebe07b58"
+        },
+        {
+          "name": "touch_down",
+          "status": "PASS",
+          "raw": [
+            180,
+            950
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "8f4f95ed83dffb9f443a0b91059771088bc669cd7c343773f3dd7697ebe07b58",
+          "frame_after_sha256": "02d73e9c700e90a5c8963d7f19252fd51a589dc51930d40c204203ccc73c7470"
+        },
+        {
+          "name": "touch_left",
+          "status": "PASS",
+          "raw": [
+            80,
+            850
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "02d73e9c700e90a5c8963d7f19252fd51a589dc51930d40c204203ccc73c7470",
+          "frame_after_sha256": "87a59f1d76622639f6a8d7a8752f51ec8efb3b5af9991f44029289ec52577d7c"
+        },
+        {
+          "name": "touch_up",
+          "status": "PASS",
+          "raw": [
+            180,
+            750
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "87a59f1d76622639f6a8d7a8752f51ec8efb3b5af9991f44029289ec52577d7c",
+          "frame_after_sha256": "6cdbfa95b3b459554557a2908da5728f1c6a1e2d5d797a2c4d78be29b1818a58"
+        },
+        {
+          "name": "touch_b_confirm",
+          "status": "PASS",
+          "raw": [
+            530,
+            770
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "6cdbfa95b3b459554557a2908da5728f1c6a1e2d5d797a2c4d78be29b1818a58",
+          "frame_after_sha256": "26934621c88a396fbdb7eb7349bf71bafa00d77bb8b735bdc984e4f4363fb33e"
+        },
+        {
+          "name": "touch_a_delete",
+          "status": "PASS",
+          "raw": [
+            530,
+            970
+          ],
+          "controller_reports": {
+            "reports": 2,
+            "acknowledged": 2
+          },
+          "frame_before_sha256": "26934621c88a396fbdb7eb7349bf71bafa00d77bb8b735bdc984e4f4363fb33e",
+          "frame_after_sha256": "6cdbfa95b3b459554557a2908da5728f1c6a1e2d5d797a2c4d78be29b1818a58"
+        }
+      ],
+      "active_lease_count_after": 0,
+      "touch_part_sha256": "0999697f5aad5b87d8802f628c0313425866a9d3ad232c1b5e0db15b2fe12e87",
+      "execution_firmware_sha256": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063"
+    }
+  },
+  "frozen_manifest_sha256": "87b238d7e5700ac8a1117c06d1ffc3a7f64c831e6e2df2cf569b850b00652e21",
+  "frozen_manifest_status": "PREPARED_NOT_APPLIED",
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED",
+  "review_contract_version": "0.5.0",
+  "status": "COMPLETE",
+  "owned_services_stopped": true,
+  "report_readback": {
+    "schema_version": 1,
+    "sha256": "508edb0ef7c07d253644c83c420f59b14fa1419b089598428b8a4f64beffd300",
+    "runtime_failure_attribution": null,
+    "empty_failure_categories": [
+      "emulator_or_transport",
+      "evidence_collection",
+      "firmware",
+      "unknown"
+    ],
+    "emulator_failure_receipt_written": false
+  }
+}

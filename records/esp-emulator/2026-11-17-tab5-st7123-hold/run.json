@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "code_change",
+  "title": "Tab5 ST7123 原生长按与固件复审",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "m5stack-esp-emulator",
+    "base_commit": "cccc83b95d4c89f043d6d6d77d21161bc5ece106",
+    "commit": "dc6853453a64f315a09b691c3631d9c2d4b3c08e"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Native ESP32-P4 virtual-device validation",
+    "band": "isolated Device Service and snapshot reviewer"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "ST7123 按下、刷新及释放；独立 GT911 回归"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "原版九个点按效果与中心长按读回"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "detail": "原版关机帧和 I2C 关机请求；锁存终态待验证"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "已合并 main，冻结版本隔离审核完成"
+    }
+  ],
+  "evidence": [
+    "evidence/native-hold-summary.json",
+    "evidence/snapshot-review-summary.json"
+  ],
+  "notes": [
+    "物理硬件、浏览器 WASM 客体与多点触摸未运行。",
+    "未提交 Burner。"
+  ]
+}
