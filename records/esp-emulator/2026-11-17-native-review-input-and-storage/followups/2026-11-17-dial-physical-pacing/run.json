@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Dial per-motion edge period",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "candidate_commit": "5f6f33c63e3b685e2ee0103edf47ad7823a218ac"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "exact_hashes": "See HTTP evidence by case"
+  },
+  "execution": {
+    "environment": "isolated native Device Service",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "explicit pacing with original driver",
+      "status": "PASS"
+    },
+    {
+      "name": "default controller delivery",
+      "status": "PASS"
+    },
+    {
+      "name": "default original driver count",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "old runtime and busy controls",
+      "status": "PASS"
+    },
+    {
+      "name": "physical timing",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "name": "evidence/paced-http-summary-safe.json",
+      "sha256": "314b3bb06a2970580e87c55a13d5f9883e37db9cbf41f6f71bff04aa7e34d8c4"
+    },
+    {
+      "name": "evidence/timing-summary-safe.json",
+      "sha256": "cbacb05b853326add945e8e99d93dab623365da6932c3e610013b7fc844f06eb"
+    }
+  ]
+}

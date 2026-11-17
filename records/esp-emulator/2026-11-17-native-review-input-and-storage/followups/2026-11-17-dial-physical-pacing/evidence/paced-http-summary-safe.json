@@ -1,0 +1,528 @@
+{
+  "validation": "virtual-device validation",
+  "device_service_source": "5f6f33c63e3b685e2ee0103edf47ad7823a218ac",
+  "native_pacing_patch_sha256": "caa798c3746e1f455b04f964ff5fdadbadebfe368637cc7bfdd6c71a5370b7d4",
+  "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+  "esp_idf_elf_sha256": "770afd2d30df7a00bbfe4bbfab61a8eff3eba41ec8b98d0f6c9bd5c3582ac4b2",
+  "scope": "Physical encoder commands through isolated authenticated Device Service",
+  "prior_harness_failure": {
+    "observed": "guest ready serial preceded API running",
+    "attempted_command_result": "409 session_not_running",
+    "cleanup": "stopped",
+    "later_run": "waited for both ready marker and API running"
+  },
+  "cases": {
+    "stock": {
+      "validation": "virtual-device validation",
+      "hardware": "NOT RUN",
+      "case": "stock",
+      "device": "dial",
+      "base_sha256": "6a1c7f01bebb5b74284c2e58b3d7bb465dd7cca99252012f3007153f1d6611f1",
+      "firmware_sha256": "310c6eff78be47a722582dc05400f2e18463eaf0a8a4b02a1682c9aa923ad4d5",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "input": [
+        {
+          "target": 3,
+          "delta": 3,
+          "edge_period_ms": 35,
+          "model_edges": 12,
+          "busy_command_rejected": true,
+          "guest_delta": 3
+        },
+        {
+          "target": -2,
+          "delta": -5,
+          "edge_period_ms": 50,
+          "model_edges": 20,
+          "busy_command_rejected": true,
+          "guest_delta": -5
+        },
+        {
+          "target": 0,
+          "delta": 2,
+          "edge_period_ms": 5,
+          "model_edges": 8,
+          "busy_command_rejected": false,
+          "guest_delta": 1
+        },
+        {
+          "target": 3,
+          "delta": 3,
+          "edge_period_ms": 35,
+          "model_edges": 12,
+          "busy_command_rejected": true,
+          "guest_delta": 3
+        },
+        {
+          "target": -2,
+          "delta": -5,
+          "edge_period_ms": 50,
+          "model_edges": 20,
+          "busy_command_rejected": true,
+          "guest_delta": -5
+        },
+        {
+          "target": 0,
+          "delta": 2,
+          "edge_period_ms": 5,
+          "model_edges": 8,
+          "busy_command_rejected": false,
+          "guest_delta": 1
+        },
+        {
+          "target": 3,
+          "delta": 3,
+          "edge_period_ms": 35,
+          "model_edges": 12,
+          "busy_command_rejected": true,
+          "guest_delta": 3
+        },
+        {
+          "target": -2,
+          "delta": -5,
+          "edge_period_ms": 50,
+          "model_edges": 20,
+          "busy_command_rejected": true,
+          "guest_delta": -5
+        },
+        {
+          "target": 0,
+          "delta": 2,
+          "edge_period_ms": 5,
+          "model_edges": 8,
+          "busy_command_rejected": false,
+          "guest_delta": 1
+        }
+      ],
+      "invalid_periods_before_motion": true,
+      "frame": {
+        "size": [
+          240,
+          240
+        ],
+        "nonblack": 2052,
+        "sha256": "3ee66961960368e0da8fc931b5a4d5204e89652121777753af2be18136101272"
+      },
+      "evidence_zip_crc": true,
+      "cleanup": "stopped",
+      "service_exited": true,
+      "status": "COMPLETE",
+      "evidence_zip_sha256": "e5a49ec3e7d4444238bcf4133a079cccab27feb4cce0c900fab862d0cb424532",
+      "serial_sha256": "dfe3c0656a105d4b7a13e885ea1d1e4ef3221cd2072edafa4e55288629906ab2"
+    },
+    "isr": {
+      "validation": "virtual-device validation",
+      "hardware": "NOT RUN",
+      "case": "isr",
+      "device": "dial",
+      "base_sha256": null,
+      "firmware_sha256": "69044c46dd88ac71e6691bd48f535cb8f5d97647a22ed7eb160da8416cd22046",
+      "runtime_sha256": "bef8e5f1f181c341076b35ea1cb5946ba8437349ed879196469d4448e0e33e98",
+      "input": [
+        {
+          "target": 3,
+          "delta": 3,
+          "edge_period_ms": 35,
+          "model_edges": 12,
+          "busy_command_rejected": true,
+          "expected_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            34705,
+            35426
+          ]
+        },
+        {
+          "target": -2,
+          "delta": -5,
+          "edge_period_ms": 50,
+          "model_edges": 20,
+          "busy_command_rejected": true,
+          "expected_phases": [
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3
+          ],
+          "observed_phases": [
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            49543,
+            51226
+          ]
+        },
+        {
+          "target": 0,
+          "delta": 2,
+          "edge_period_ms": 5,
+          "model_edges": 8,
+          "busy_command_rejected": false,
+          "expected_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            4939,
+            5145
+          ]
+        },
+        {
+          "target": 3,
+          "delta": 3,
+          "edge_period_ms": 35,
+          "model_edges": 12,
+          "busy_command_rejected": true,
+          "expected_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            34400,
+            36247
+          ]
+        },
+        {
+          "target": -2,
+          "delta": -5,
+          "edge_period_ms": 50,
+          "model_edges": 20,
+          "busy_command_rejected": true,
+          "expected_phases": [
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3
+          ],
+          "observed_phases": [
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            49610,
+            50793
+          ]
+        },
+        {
+          "target": 0,
+          "delta": 2,
+          "edge_period_ms": 5,
+          "model_edges": 8,
+          "busy_command_rejected": false,
+          "expected_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            4806,
+            5101
+          ]
+        },
+        {
+          "target": 3,
+          "delta": 3,
+          "edge_period_ms": 35,
+          "model_edges": 12,
+          "busy_command_rejected": true,
+          "expected_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            34786,
+            37545
+          ]
+        },
+        {
+          "target": -2,
+          "delta": -5,
+          "edge_period_ms": 50,
+          "model_edges": 20,
+          "busy_command_rejected": true,
+          "expected_phases": [
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3
+          ],
+          "observed_phases": [
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3,
+            1,
+            0,
+            2,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            49737,
+            50520
+          ]
+        },
+        {
+          "target": 0,
+          "delta": 2,
+          "edge_period_ms": 5,
+          "model_edges": 8,
+          "busy_command_rejected": false,
+          "expected_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_phases": [
+            2,
+            0,
+            1,
+            3,
+            2,
+            0,
+            1,
+            3
+          ],
+          "observed_interval_us_min_max": [
+            5026,
+            5057
+          ]
+        }
+      ],
+      "invalid_periods_before_motion": true,
+      "evidence_zip_crc": true,
+      "cleanup": "stopped",
+      "service_exited": true,
+      "status": "COMPLETE",
+      "evidence_zip_sha256": "50addaa231164e5c3189f0585ac7f2aead28a21c1c2438297bc46e49dfaa27c4",
+      "serial_sha256": "b003d5666d7c4f9fcb851872413106b32375b23e668d9a3fdb85c02c08915bfc"
+    },
+    "stale": {
+      "validation": "virtual-device validation",
+      "hardware": "NOT RUN",
+      "case": "stock",
+      "device": "dial",
+      "base_sha256": "6a1c7f01bebb5b74284c2e58b3d7bb465dd7cca99252012f3007153f1d6611f1",
+      "firmware_sha256": "310c6eff78be47a722582dc05400f2e18463eaf0a8a4b02a1682c9aa923ad4d5",
+      "runtime_sha256": "06db397cbe804e9eb13390d797cd67ca33ce5f29048fe7a56342cb66f4d2f9e0",
+      "input": [],
+      "previous_runtime_custom_pace": {
+        "status": 409,
+        "code": "unsupported_input",
+        "no_motion": true
+      },
+      "evidence_zip_crc": true,
+      "cleanup": "stopped",
+      "service_exited": true,
+      "status": "COMPLETE",
+      "evidence_zip_sha256": "8afe8e96932b8af4d94dc32379916cd8cc11f8c295ffc04a559ec6bae6686780",
+      "serial_sha256": "40d94aaadf725db407741fed4ef11e2f5ed7151f8dac1d980ab59d48ad82e250"
+    }
+  }
+}

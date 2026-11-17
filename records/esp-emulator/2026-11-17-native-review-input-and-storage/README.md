@@ -10,3 +10,5 @@ StickS3、Cardputer、Cardputer-ADV、Core2 的指定输入已取到客体读回
 - [SD 摘要](evidence/spi-sd-summary.json)
 
 合并、部署、浏览器-WASM 和物理验收为 NOT RUN。
+
+[Dial 显式速度与默认反例](followups/2026-11-17-dial-physical-pacing/)补充实际边沿、原驱动计数及旧后端的拒绝回执。
