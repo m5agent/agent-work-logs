@@ -175,7 +175,9 @@ PR のコメント
 `fa2bc69` の `src/board_detect/probe_hardware.inl` は `b8f5d89` と同一の blob
 `cb8577113cf72abfaaa7cdaae9ac02b8a46ad9a6`。base `2121308` の blob は
 `437cb85547b0f5bf396bc7439b275e840184b066` で、PR の差分（+12/-15）はこのファイルを含む。
-したがって、報告が当てた差分と PR の修正本体は同じファイル内容である。
+したがって、報告が当てた差分と PR の修正本体は同じファイル内容である。また `2121308` と
+`b48dce0` の `probe_hardware.inl` は diff がなく、報告の develop とこちらで使った旧コードは
+同じ関数内容である。
 
 報告の状態を `code/owner_report_check.cpp` でモデル化した。マスターが 1 バイトを ACK した後、
 スレーブが次のバイトの MSB を出して待っている状態から、`release_held_sda()` を 2 回続けて

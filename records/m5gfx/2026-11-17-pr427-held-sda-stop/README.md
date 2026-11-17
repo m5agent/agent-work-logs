@@ -99,6 +99,8 @@ m5agent 側は host-level / code-level のみ。
 - `fa2bc69` の `src/board_detect/probe_hardware.inl` は `b8f5d89` と同一
   （blob `cb8577113cf72abfaaa7cdaae9ac02b8a46ad9a6`）。base `2121308` の blob は
   `437cb85547b0f5bf396bc7439b275e840184b066` で、PR はこのファイルを変更している。
+  なお `2121308` と `b48dce0` の `probe_hardware.inl` は同一（diff なし）なので、報告の
+  develop とこちらで使った旧コードは同じ関数内容である。
 - 報告の状態（マスターの ACK 後、スレーブが次のバイトの MSB を出している）を
   `code/owner_report_check.cpp` でモデル化し、旧 `b48dce0` と `fa2bc69` の関数を 2 回
   続けて呼んだ（報告の 2 回の解放試行に合わせる）。結果は
