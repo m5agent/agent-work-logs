@@ -20,3 +20,5 @@
 实机电气、浏览器和其他板型为 `NOT RUN`。
 
 冻结组合版在同一真实来宾验证四次 GPIO48 中断和 FAT32 数据持久化。 [冻结组合版复验](evidence/frozen-combined-summary.json)
+
+同一冻结运行时也复验了原版 Cardputer ADV MP3 Player 1.0.0。来宾读到 TEST.MP3，按 Confirm 后显示播放进度，SPI CMD17 从 4 次增至 66 次，I2S PCM 捕获到 524 Hz。 [共享 SPI SD 回归](evidence/cardputer-adv-mp3-regression-summary.json)
