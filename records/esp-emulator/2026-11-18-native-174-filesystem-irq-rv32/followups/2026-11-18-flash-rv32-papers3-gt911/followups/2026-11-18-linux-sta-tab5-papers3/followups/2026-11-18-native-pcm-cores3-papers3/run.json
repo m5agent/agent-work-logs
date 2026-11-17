@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Native Cardputer PCM, CoreS3 U024 review and PaperS3 GT911 service",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "baseline": "36b091f9766209d2fbc1c28d717ea065cd035d96",
+    "cores3_review": "4315174c8231b7ac5dd27fc41083fbf20c112106",
+    "cores3_emulator": "63472ab884dc2968904999c75eb6aca91c3f2517",
+    "papers3_browser_reference": "36b091f9766209d2fbc1c28d717ea065cd035d96",
+    "papers3_factory_source": "5e275ad4b70abb85f7193fda137844730e64c4db",
+    "papers3_m5gfx": "c6f92dc03226cdc04d67c705a2020f62ad21ad01",
+    "native_service_pcm": "c9088f83c68ca2db87fa910c5f0c0544198788fe",
+    "papers3_evidence": "a8510c24cdc88640f0c430cdc1734de26c868021",
+    "integrated_emulator": "731817add38c34e6d2a58f8dcde646cd7ded3f46"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer",
+      "Cardputer ADV",
+      "CoreS3 with U024 on Port A",
+      "PaperS3"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "cardputer_uiflow2_probe_sha256": "22fbc67937d3f4292a7ae36ef8294945ff4794ebe3279f1436e89a2576b37859",
+    "cardputer_adv_uiflow2_probe_sha256": "664a4f3b7fe435bf6dba7368929722ca1dbfe92de151cfc816b3bec6ec11c328",
+    "cores3_uiflow2_probe_sha256": "f0cc7e7f04d2893d4f5e9f64a9989dcc229e18e540dda355c39d044ac4fb50ee",
+    "papers3_factory_v05_original_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624"
+  },
+  "execution": {
+    "native_runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "papers3_profile": "papers3-wasm-wallclock-et047tc1",
+    "papers3_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+    "papers3_clock_divisor": 1,
+    "cores3_reviewer_suite": 192,
+    "device_service_contract": "1.76.0"
+  },
+  "checks": [
+    {
+      "name": "Combined simulator platform suite",
+      "status": "PASS",
+      "tests_including_skips": 2393,
+      "skipped": 10,
+      "seconds": 204.731,
+      "combined_source": "731817add38c34e6d2a58f8dcde646cd7ded3f46",
+      "result_sha256": "f94b5ece214f2be51789ff653641ed3ae1068084ca93b336cff6d503745c9afe",
+      "result_bytes": 54494
+    },
+    {
+      "name": "Native service docs and focused unit checks",
+      "status": "PASS",
+      "docs": 51,
+      "audio": 4,
+      "acl": 16,
+      "api_contract_validators": "PASS"
+    },
+    {
+      "name": "Retained PCM worker restart readback and independently gated inject and read",
+      "status": "PASS",
+      "controls": 4
+    },
+    {
+      "name": "Initial Cardputer ADV key-gated harness reached microphone capture",
+      "status": "FAIL",
+      "detail": "2/2 stopped at the guest harness missing-audio-test-key assertion before recording; timed marker harness passed afterward."
+    },
+    {
+      "name": "First integrated Cardputer audio run met exploratory whole quiet-window RMS limit 200",
+      "status": "FAIL",
+      "detail": "Cardputer RMS 596.676, isolated to the first 400 samples relative to 8.0 later. Device still completed both record phases and playback."
+    },
+    {
+      "name": "Independent integrated two-board replay met whole-window relative attenuation and post-400-sample RMS limits",
+      "status": "PASS",
+      "detail": "Both complete quiet windows RMS 134.71, steady-state suffix RMS 8.0. Original exploratory failure retained."
+    },
+    {
+      "name": "Native Cardputer and ADV staged source consumption and I2S DMA output through Device Service",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "name": "CoreS3 U024 independent I2C and guest UART correlation through Reviewer",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "name": "CoreS3 U024 receipt mismatch and missing guest readback controls",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperS3 first engine launch reached input verification",
+      "status": "FAIL",
+      "detail": "WASM memory access trap before touch test"
+    },
+    {
+      "name": "PaperS3 original factory icon response with frame polling and panel activity interventions",
+      "status": "PARTIAL",
+      "detail": "1/12 initial cohort, 0/6 targeted cohort"
+    },
+    {
+      "name": "PaperS3 targeted contact with no active panel scan or browser frame requests still reproduced late GT911 clear",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "name": "Physical hardware, analog sound and EPD optics",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Burner submission",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cardputer-native-pcm-summary.redacted.json",
+      "sha256": "07613be9859c0bcead66343ea92c728e3c0e35091f11e8ad8ceab32ff19472ae",
+      "bytes": 11224
+    },
+    {
+      "path": "evidence/cores3-u024-review-summary.redacted.json",
+      "sha256": "5fc396699fae734d6108d31d8f6627c3a7b491a8d76fac223f1d7cf28ca652c7",
+      "bytes": 2505
+    },
+    {
+      "path": "evidence/papers3-first-comparison-summary.redacted.json",
+      "sha256": "5fa1ffbcda4e8ce41b672fecb29ffd92dcdc19df84536d420cd8b9dcbeeb4d31",
+      "bytes": 11493
+    },
+    {
+      "path": "evidence/papers3-flat-panel-summary.redacted.json",
+      "sha256": "2ca9a6cedb75a1602c1514f01dc2a62dcc8ab6db7992aa2a2a6f6356d7669ad0",
+      "bytes": 6003
+    },
+    {
+      "path": "evidence/cardputer-retained-pcm-acl-summary.redacted.json",
+      "sha256": "36df6024c4e613854d0d95d3751838f5f555f651e5a558893553890bcb0a46f8",
+      "bytes": 1145
+    }
+  ]
+}
