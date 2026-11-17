@@ -1,0 +1,78 @@
+# ESP-IDF v5.5: SOC_I2C_SUPPORT_HW_CLR_BUS / SOC_GPIO_SUPPORT_RTC_INDEPENDENT / SOC_LP_I2C_NUM per target
+# sources: components/soc/<target>/include/soc/soc_caps.h
+
+== esp32
+177:// SOC_GPIO_SUPPORT_RTC_INDEPENDENT not defined. On ESP32 those PADs which have RTC functions must
+
+== esp32s3
+181:#define SOC_GPIO_SUPPORT_RTC_INDEPENDENT (1)
+219:#define SOC_I2C_SUPPORT_HW_CLR_BUS  (1)
+335:#define SOC_LP_IO_CLOCK_IS_INDEPENDENT 1
+
+== esp32c6
+197:#define SOC_GPIO_SUPPORT_RTC_INDEPENDENT    (1)
+201:#define SOC_LP_IO_CLOCK_IS_INDEPENDENT      (1)
+252:#define SOC_I2C_SUPPORT_HW_CLR_BUS  (1)
+265:#define SOC_LP_I2C_NUM              (1U)
+
+== esp32p4
+249:#define SOC_GPIO_SUPPORT_RTC_INDEPENDENT    (1)
+255:#define SOC_LP_IO_CLOCK_IS_INDEPENDENT      (1)
+310:#define SOC_I2C_SUPPORT_HW_CLR_BUS  (1)
+324:#define SOC_LP_I2C_NUM              (1U)
+
+== esp32c5
+217:#define SOC_GPIO_SUPPORT_RTC_INDEPENDENT    (1)
+221:#define SOC_LP_IO_CLOCK_IS_INDEPENDENT      (1)
+287:#define SOC_LP_I2C_NUM              (1U)
+
+===== i2c_master.c s_i2c_master_clear_bus =====
+  58: static i2c_master_bus_platform_t s_platform;
+  59: 
+  60: static esp_err_t s_i2c_master_clear_bus(i2c_bus_handle_t handle)
+  61: {
+  62:     esp_err_t ret = ESP_OK;
+  63: #if !SOC_I2C_SUPPORT_HW_CLR_BUS
+  64:     const int scl_half_period = 5; // use standard 100kHz data rate
+  65:     int i = 0;
+  66:     gpio_set_direction(handle->scl_num, GPIO_MODE_OUTPUT_OD);
+  67:     gpio_set_direction(handle->sda_num, GPIO_MODE_INPUT_OUTPUT_OD);
+  68:     // If a SLAVE device was in a read operation when the bus was interrupted, the SLAVE device is controlling SDA.
+  69:     // The only bit during the 9 clock cycles of a READ byte the MASTER(ESP32) is guaranteed control over is during the ACK bit
+  70:     // period. If the slave is sending a stream of ZERO bytes, it will only release SDA during the ACK bit period.
+  71:     // So, this reset code needs to synchronous the bit stream with, Either, the ACK bit, Or a 1 bit to correctly generate
+  72:     // a STOP condition.
+  73:     gpio_set_level(handle->scl_num, 0);
+  74:     gpio_set_level(handle->sda_num, 1);
+  75:     esp_rom_delay_us(scl_half_period);
+  76:     while (!gpio_get_level(handle->sda_num) && (i++ < 9)) {
+  77:         gpio_set_level(handle->scl_num, 1);
+  78:         esp_rom_delay_us(scl_half_period);
+  79:         gpio_set_level(handle->scl_num, 0);
+  80:         esp_rom_delay_us(scl_half_period);
+  81:     }
+  82:     gpio_set_level(handle->sda_num, 0); // setup for STOP
+  83:     gpio_set_level(handle->scl_num, 1);
+  84:     esp_rom_delay_us(scl_half_period);
+  85:     gpio_set_level(handle->sda_num, 1); // STOP, SDA low -> high while SCL is HIGH
+  86:     i2c_common_set_pins(handle);
+  87: #else
+  88:     i2c_hal_context_t *hal = &handle->hal;
+  89:     i2c_ll_master_clr_bus(hal->dev, I2C_LL_RESET_SLV_SCL_PULSE_NUM_DEFAULT, true);
+  90:     // If the i2c master clear bus state machine got disturbed when its work, it would go into error state.
+  91:     // The solution here is to use freertos tick counter to set time threshold. If its not return on time,
+  92:     // return invalid state and turn off the state machine for avoiding its always wrong.
+  93:     TickType_t start_tick = xTaskGetTickCount();
+  94:     const TickType_t timeout_ticks = pdMS_TO_TICKS(I2C_CLR_BUS_TIMEOUT_MS);
+  95:     while (i2c_ll_master_is_bus_clear_done(hal->dev)) {
+  96:         if ((xTaskGetTickCount() - start_tick) > timeout_ticks) {
+  97:             ESP_LOGE(TAG, "clear bus failed.");
+  98:             i2c_ll_master_clr_bus(hal->dev, 0, false);
+  99:             ret = ESP_ERR_INVALID_STATE;
+ 100:             break;
+ 101:         }
+ 102:     }
+ 103:     i2c_ll_update(hal->dev);
+ 104: #endif
+ 105:     return ret;
+ 106: }

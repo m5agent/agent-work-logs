@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #426: i2c_stop() bus recovery does not reach LP I2C port pads",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/426",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "b48dce04c80d3e3c9874b7ba946c43d672129c28",
+    "head_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 host; source review only. No ESP32-C5 hardware; local Device Service has 36 device profiles and none is ESP32-C5; esp-emulator has no ESP32-C5 machine and no LP I2C controller model.",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "call-site-inventory",
+      "status": "PASS",
+      "detail": "In b48dce0 the only i2c_stop() call sites are common.inl:1997, :2022, :2255, :2548 and :2754; matches the five rows in the issue exactly"
+    },
+    {
+      "id": "i2c-stop-is-gpio-only",
+      "status": "PASS",
+      "detail": "i2c_stop() (common.inl:1847-1882) uses gpio_set_level/gpio_set_direction/gpio_get_level and pin_backup_t only; IDF v5.5 gpio_set_direction() (gpio.c:306-336) does not change the IO MUX, so the LP pad function selected by rtc_gpio_iomux_func_sel() is untouched"
+    },
+    {
+      "id": "lp-pad-routing",
+      "status": "PASS",
+      "detail": "IDF v5.5 s_lp_i2c_pins_config() (i2c_common.c:355-399) routes LP SDA/SCL with rtc_gpio_init + set_direction(INPUT_OUTPUT_OD) + pull config + rtc_gpio_iomux_func_sel(i2c_periph_signal[port].iomux_func); M5GFX skips set_pin() for LP ports (common.inl:2304-2308)"
+    },
+    {
+      "id": "backup-restore-scope",
+      "status": "PASS",
+      "detail": "On ESP32-C5 LGFX_GPIO_RTC_INDEPENDENT=1 (SOC_GPIO_SUPPORT_RTC_INDEPENDENT=1, soc_caps.h:217), so pin_backup_t skips RTC-register backup/restore (common.inl:783, :836)"
+    },
+    {
+      "id": "lp-reset-semantics",
+      "status": "PASS",
+      "detail": "i2c_periph_reset() for an LP port calls lp_i2c_ll_reset_register() (common.inl:1582-1590); IDF v5.5 implementation pulses LPPERI.reset_en.lp_ext_i2c_reset_en and returns void (i2c_ll.h:875-882), so no bus activity and no error is reported"
+    },
+    {
+      "id": "bus-clear-register-present",
+      "status": "PASS",
+      "detail": "ESP32-C5 LP I2C register block has scl_sp_conf.scl_rst_slv_en/num (lp_i2c_struct.h:352-380, :869) and ctr.conf_upgate (:224); i2c_ll_master_clr_bus()/is_bus_clear_done() exist in hal/esp32c5/include/hal/i2c_ll.h:755-795"
+    },
+    {
+      "id": "c5-caps-hw-clr-bus",
+      "status": "REVIEW",
+      "detail": "ESP32-C5 soc_caps.h has no SOC_I2C_SUPPORT_HW_CLR_BUS, while S3/C6/P4 do; whether the LP instance actually emits the nine clocks still needs hardware confirmation"
+    },
+    {
+      "id": "idf-bus-reset-reference",
+      "status": "REVIEW",
+      "detail": "IDF's own i2c_master_bus_reset() takes the GPIO bit-bang branch on C5 (i2c_master.c:60-104, gated by !SOC_I2C_SUPPORT_HW_CLR_BUS), which has the same LP-pad limitation, so IDF is not a working reference for LP recovery"
+    },
+    {
+      "id": "restore-sequence-diff",
+      "status": "REVIEW",
+      "detail": "IDF's LP pin restore includes set_direction(INPUT_OUTPUT_OD), pulldown_dis and pullup_en; the issue's failing restore only mentions rtc_gpio_init + rtc_gpio_iomux_func_sel, so the missing direction/pull setup is an open question for the author, not a confirmed root cause"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 board; no scope/logic-analyzer capture of SDA/SCL during the forced recovery"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "Device Service has no ESP32-C5 profile; esp-emulator has no ESP32-C5 machine and no LP I2C controller model (C6/P4 LP I2C also unmodeled); the defect depends on LP pad routing, which a GPIO-level model cannot reproduce"
+    },
+    {
+      "id": "proposal-verification",
+      "status": "NOT RUN",
+      "detail": "neither the pad-borrowing restore nor the controller bus-clear route was implemented, built or run"
+    },
+    {
+      "id": "other-lp-chips",
+      "status": "NOT RUN",
+      "detail": "C6 and P4 LP I2C ports were not exercised"
+    }
+  ],
+  "evidence": [
+    "evidence/issue-426.json",
+    "evidence/m5gfx-source-lines.txt",
+    "evidence/idf-v55-lp-i2c-pins.txt",
+    "evidence/idf-v55-lp-i2c-registers.txt",
+    "evidence/idf-v55-caps-and-bus-clear.txt",
+    "evidence/virtual-device-check.md",
+    "evidence/hardware-inventory.md",
+    "evidence/reply-ja.md"
+  ],
+  "notes": [
+    "Issue left OPEN; one Japanese comment posted; no upstream code change and no push.",
+    "Evidence class is code-level verification; hardware and virtual-device results are NOT RUN and must not be implied.",
+    "The report's mechanism is confirmed at source level, but the exact real-hardware waveform was not measured here."
+  ]
+}

@@ -1,0 +1,113 @@
+# ESP-IDF v5.5 ESP32-C5 LP I2C register support for controller-side bus clear
+# sources: components/soc/esp32c5/register/soc/lp_i2c_struct.h, components/hal/esp32c5/include/hal/i2c_ll.h, components/soc/esp32c5/include/soc/soc_caps.h
+
+===== lp_i2c_struct.h: scl_sp_conf fields =====
+ 352: /** Type of scl_sp_conf register
+ 353:  *  Power configuration register
+ 354:  */
+ 355: typedef union {
+ 356:     struct {
+ 357:         /** scl_rst_slv_en : R/W/SC; bitpos: [0]; default: 0;
+ 358:          *  When I2C master is IDLE, set this bit to send out SCL pulses. The number of pulses
+ 359:          *  equals to reg_scl_rst_slv_num[4:0].
+ 360:          */
+ 361:         uint32_t scl_rst_slv_en:1;
+ 362:         /** scl_rst_slv_num : R/W; bitpos: [5:1]; default: 0;
+ 363:          *  Configure the pulses of SCL generated in I2C master mode. Valid when
+ 364:          *  reg_scl_rst_slv_en is 1.
+ 365:          */
+ 366:         uint32_t scl_rst_slv_num:5;
+ 367:         /** scl_pd_en : R/W; bitpos: [6]; default: 0;
+ 368:          *  The power down enable bit for the I2C output SCL line. 1: Power down. 0: Not power
+ 369:          *  down. Set reg_scl_force_out and reg_scl_pd_en to 1 to stretch SCL low.
+ 370:          */
+ 371:         uint32_t scl_pd_en:1;
+ 372:         /** sda_pd_en : R/W; bitpos: [7]; default: 0;
+ 373:          *  The power down enable bit for the I2C output SDA line. 1: Power down. 0: Not power
+ 374:          *  down. Set reg_sda_force_out and reg_sda_pd_en to 1 to stretch SDA low.
+ 375:          */
+ 376:         uint32_t sda_pd_en:1;
+ 377:         uint32_t reserved_8:24;
+ 378:     };
+ 379:     uint32_t val;
+ 380: } lp_i2c_scl_sp_conf_reg_t;
+ 381: 
+
+===== lp_i2c_struct.h: dev struct field =====
+ 860:     volatile lp_i2c_scl_start_hold_reg_t scl_start_hold;
+ 861:     volatile lp_i2c_scl_rstart_setup_reg_t scl_rstart_setup;
+ 862:     volatile lp_i2c_scl_stop_hold_reg_t scl_stop_hold;
+ 863:     volatile lp_i2c_scl_stop_setup_reg_t scl_stop_setup;
+ 864:     volatile lp_i2c_filter_cfg_reg_t filter_cfg;
+ 865:     volatile lp_i2c_clk_conf_reg_t clk_conf;
+ 866:     volatile lp_i2c_command_reg_t command[8];
+ 867:     volatile lp_i2c_scl_st_time_out_reg_t scl_st_time_out;
+ 868:     volatile lp_i2c_scl_main_st_time_out_reg_t scl_main_st_time_out;
+ 869:     volatile lp_i2c_scl_sp_conf_reg_t scl_sp_conf;
+ 870:     uint32_t reserved_084[29];
+ 871:     volatile lp_i2c_date_reg_t date;
+ 872:     uint32_t reserved_0fc;
+ 873:     volatile lp_i2c_txfifo_start_addr_reg_t txfifo_start_addr;
+ 874:     uint32_t reserved_104[31];
+ 875:     volatile lp_i2c_rxfifo_start_addr_reg_t rxfifo_start_addr;
+
+===== lp_i2c_struct.h: conf_upgate =====
+ 220:         /** fsm_rst : WT; bitpos: [10]; default: 0;
+ 221:          *  This register is used to reset the scl FMS.
+ 222:          */
+ 223:         uint32_t fsm_rst:1;
+ 224:         /** conf_upgate : WT; bitpos: [11]; default: 0;
+ 225:          *  synchronization bit
+ 226:          */
+ 227:         uint32_t conf_upgate:1;
+ 228:         uint32_t reserved_12:20;
+ 229:     };
+ 230:     uint32_t val;
+
+===== i2c_ll.h: clr_bus / fsm_rst =====
+ 750:  *
+ 751:  * @param  hw Beginning address of the peripheral registers
+ 752:  *
+ 753:  * @return None
+ 754:  */
+ 755: static inline void i2c_ll_master_fsm_rst(i2c_dev_t *hw)
+ 756: {
+ 757:     // fsm_rst is a self cleared bit.
+ 758:     hw->ctr.fsm_rst = 1;
+ 759: }
+ 760: 
+ 761: /**
+ 762:  * @brief Clear I2C bus, when the slave is stuck in a deadlock and keeps pulling the bus low,
+ 763:  *        master can controls the SCL bus to generate 9 CLKs.
+ 764:  *
+ 765:  * Note: The master cannot detect if deadlock happens, but when the scl_st_to interrupt is generated, a deadlock may occur.
+ 766:  *
+ 767:  * @param  hw Beginning address of the peripheral registers
+ 768:  * @param  slave_pulses When I2C master is IDLE, the number of pulses will be sent out.
+ 769:  * @param  enable True to start the state machine, otherwise, false
+ 770:  *
+ 771:  * @return None
+ 772:  */
+ 773: static inline void i2c_ll_master_clr_bus(i2c_dev_t *hw, uint32_t slave_pulses, bool enable)
+ 774: {
+ 775:     hw->scl_sp_conf.scl_rst_slv_num = slave_pulses;
+ 776:     hw->scl_sp_conf.scl_rst_slv_en = enable;
+ 777:     hw->ctr.conf_upgate = 1;
+ 778:     // hardware will clear scl_rst_slv_en after sending SCL pulses,
+ 779:     // and we should set conf_upgate bit to synchronize register value after this function.
+ 780: }
+ 781: 
+ 782: /**
+ 783:  * @brief Get the clear bus state
+ 784:  *
+ 785:  * @param hw Beginning address of the peripheral registers
+ 786:  *
+ 787:  * @return true: the clear bus not finish, otherwise, false.
+ 788:  */
+ 789: static inline bool i2c_ll_master_is_bus_clear_done(i2c_dev_t *hw)
+ 790: {
+ 791:     return hw->scl_sp_conf.scl_rst_slv_en;
+ 792: }
+ 793: 
+ 794: /**
+ 795:  * @brief Set the ACK level that the I2C master must send when the Rx FIFO count has reached the threshold value.
