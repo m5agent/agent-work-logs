@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 OTA0、Dial U197 与 NC1020 SD 审核 | `PARTIAL`（Tab5 身份和 NC1020 指定文件通过；原版运行及媒体边界保留） | [查看](esp-emulator/2026-11-18-tab5-identity-dial-media-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Core2 与 Nesso N1 LittleFS、Core2 HTTP、Dial 和 Tab5 原版诊断 | `PARTIAL`（LittleFS 六会话和受控 HTTP 通过；Dial 快速转动与 Tab5 启动边界保留） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | PaperS3 GT911 扫描相位与 Core2 受控 STA | `PARTIAL`（GT911 协议和 Core2 数据面通过，PaperS3 原版图标响应仍不稳定） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-mp3-review-papers3-gt911/followups/2026-11-18-papers3-gt911-scan-phase/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer ADV 原版 MP3 同会话 PCM 审核与 PaperS3 原生触摸 | `PARTIAL`（MP3 正向、错频与权限对照完成；PaperS3 驱动延迟的原因待定位） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-mp3-review-papers3-gt911/) |

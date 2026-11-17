@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "date": "2026-11-18",
+  "title": "Tab5 stock OTA0 identity, Dial U197 real media, and NC1020 retained SD review",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "tab5_execution": "d6a22054fbf6527f89845804d90ff5c1ef44d864",
+    "dial_execution": "5f8e2f8fe97d2d76553efdf03068a8c3dcf83727",
+    "nc1020_emulator_execution": "5f8e2f8fe97d2d76553efdf03068a8c3dcf83727",
+    "reviewer_execution": "4e195d89ee767e51e9e11969c8f1e75ee6bf3f66",
+    "simulator_main": "31867f0eea21b907328297a8cd2190f295765e79",
+    "tab5_evidence_commit": "fee6df9d500f8ac6e70cc84217746fc2f9795cd5",
+    "dial_evidence_commit": "1b8d07e1070d1a960369a3eff3f5e5bf60d08677",
+    "reviewer_main": "4e195d89ee767e51e9e11969c8f1e75ee6bf3f66",
+    "source_main_readbacks": "PASS"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Tab5",
+      "Dial",
+      "Cardputer"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "98tab5": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+    "carplay": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+    "vinyl_m5dial": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "nc1020_original": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "nc1020_seed_sd": "d01c4f4b416e0b54ce5a006b99848158b816722b6a453a05caeda576026f5546"
+  },
+  "execution": {
+    "tab5_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "dial_runtime_sha256": "0b871bcd43a74d7c4d303e07ae496c0a673c9cc9d62911318de7d96bad1955be",
+    "nc1020_runtime_sha256": "68d98b8491b09eeb91fc3c99ee2dd7d2752ac1b6b548bf0c93981f4c225fb05d",
+    "reviewer_api": "0.10.0",
+    "reviewer_unit_tests": 203,
+    "device_service_api": "1.79.0"
+  },
+  "checks": [
+    {
+      "name": "Early platform suite detected API Markdown version mismatch",
+      "status": "FAIL",
+      "ran": 2399,
+      "skipped": 10,
+      "failures": 1,
+      "result_sha256": "2c3990773d406d95f76f454167c8ac061b586cbbc7ae0017408bfda5438b84b0",
+      "result_bytes": 55217
+    },
+    {
+      "name": "Final exact emulator local platform suite",
+      "status": "PASS",
+      "ran": 2399,
+      "skipped": 10,
+      "seconds": 181.017,
+      "result_sha256": "5c5a01bc1d272daeaf0ba0ab4e9bdd0bc727a61f2bfcf6cfde161d3c6e689d34",
+      "result_bytes": 53753
+    },
+    {
+      "name": "Final documentation, API inventory, scope, runtime coverage, catalog, profiles",
+      "status": "PASS",
+      "docs_checks": 51
+    },
+    {
+      "name": "Final reviewer local suite",
+      "status": "PASS",
+      "tests": 203
+    },
+    {
+      "name": "Tab5 98TAB5 application identity equals boot offset, live API, virtual Flash and retained ZIP",
+      "status": "PASS"
+    },
+    {
+      "name": "Tab5 98TAB5 stable app and complete DSI frame",
+      "status": "PARTIAL",
+      "sw_cpu_resets": 31,
+      "valid_frames": 0
+    },
+    {
+      "name": "Tab5 original CarPlay factory identity and startup display control",
+      "status": "PASS",
+      "valid_frames": 14
+    },
+    {
+      "name": "Dial U197 indexed commands via UART",
+      "status": "PASS",
+      "tracks": [
+        1,
+        4,
+        2
+      ]
+    },
+    {
+      "name": "Dial U197 actual WAV media admission and PCM routes",
+      "status": "FAIL",
+      "mount_http_status": 400,
+      "pcm_http_status": 409,
+      "expected_scope_boundary": true
+    },
+    {
+      "name": "Dial first harness measurement completed all output stages",
+      "status": "PARTIAL",
+      "reason": "framebuffer analysis needed Pillow"
+    },
+    {
+      "name": "Physical hardware, browser, audio decoding and Burner submission",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "NC1020 original write and requested retained state file after stop",
+      "status": "PASS",
+      "retained_size_bytes": 99384,
+      "overall_review": "PARTIAL"
+    },
+    {
+      "name": "NC1020 requested missing file despite confirmed live SD write",
+      "status": "PARTIAL",
+      "live_sd_write": "PASS",
+      "expected_control_outcome": true,
+      "review_error": "E_SIM_SD_WRITE_PARTIAL"
+    },
+    {
+      "name": "NC1020 first pair guest started and reached its SD assertion",
+      "status": "FAIL",
+      "cases": 2,
+      "environment": "model_admission files_missing",
+      "firmware_result": "NOT EVALUATED"
+    },
+    {
+      "name": "NC1020 raw mutated SD retention for offline re-read after isolation cleanup",
+      "status": "NOT RUN",
+      "file_digest_source": "same-session stopped inventory"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tab5-ota0-identity-summary.redacted.json",
+      "sha256": "0858b49f68aa4556e344d91bcc6c7eb0c0284ae2f1fdefa991db007882c766a7",
+      "bytes": 4582
+    },
+    {
+      "path": "evidence/dial-u197-real-media-boundary-summary.redacted.json",
+      "sha256": "af55b4ac2a8f769bd7c76dd27bea493511a83507b9756ec2cb53dbba1db78b5f",
+      "bytes": 4383
+    },
+    {
+      "path": "evidence/nc1020-retained-sd-write-review-summary.redacted.json",
+      "sha256": "d6df7a6fdcb6697ce2717ecef0dde752c1342ad6ebd059b6fa5d101f45a713fa",
+      "bytes": 6772
+    }
+  ]
+}
