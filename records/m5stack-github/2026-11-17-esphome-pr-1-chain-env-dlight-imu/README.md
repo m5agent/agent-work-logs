@@ -70,7 +70,7 @@ a PR comment. Re-checked on the host harness at that commit:
   each alarm's first state; the previous head issued zero reads and zero states.
   An all-alarm config without events (ENV temperature alarm on the SPA06 source
   plus humidity/pressure/altitude, DLight Dark+Bright, IMU motion/rotation/
-  temperature) publishes all seven initial states from one read each and then
+  temperature) publishes all nine initial states from one read each and then
   stops polling. Injected `0xE0` reports still switch the alarms afterwards.
   Evidence: `evidence/round2-alarm-only.txt`,
   `evidence/round2-all-alarms-noevents.txt`.
