@@ -13,6 +13,12 @@ print("== rates ==")
 print("A: 15 bursts / 30 min      -> %.1f /h" % (15 * 2))
 print("B:  2 bursts / 15 min      -> %.1f /h" % (2 * 4))
 print("A+B pooled: 17 / 45 min    -> %.1f /h" % (17 * 60 / 45))
+# A: 13 column (free-running) + 2 rail (gap-led) in 30 min; B: 2 column in 15 min
+print("A split: column 13/30 min  -> %.1f /h ; rail 2/30 min -> %.1f /h"
+      % (13 * 2, 2 * 2))
+print("B split: column  2/15 min  -> %.1f /h" % (2 * 4))
+print("pooled split: column %.2f /h ; rail %.2f /h"
+      % (15 * 60 / 45, 2 * 60 / 45))
 print("previous run: 164 / 329 min-> %.2f /h" % (164 * 60 / 329))
 
 # ---------------------------------------------------------------- significance
@@ -20,9 +26,11 @@ print("\n== significance ==")
 lam = 0.19
 print("P(>=2 bursts | lam=0.19)          = %.4f"
       % (1 - math.exp(-lam) * (1 + lam)))
-lam_b = 7.5  # A's 30/h re-scaled to 15 min
-p_le2 = math.exp(-lam_b) * (1 + lam_b + lam_b ** 2 / 2)
-print("P(<=2 bursts | lam=7.5, 15 min)   = %.4f   (B vs A rate)" % p_le2)
+for lam_b, label in ((6.5, "A column rate 26/h"), (7.5, "A total rate 30/h")):
+    p_le2 = math.exp(-lam_b) * (1 + lam_b + lam_b ** 2 / 2)
+    print("P(<=2 bursts | lam=%.1f, 15 min)  = %.4f   (B vs %s)" % (lam_b, p_le2, label))
+print("gaps per hour = %.2f ; rail bursts per gap = 2/34 = %.3f"
+      % (34 * 60 / 45, 2 / 34))
 
 # 2x2: shape (rail|column) x gap (after|free).  rail 2/0, column 0/15
 p_one = 1 / math.comb(17, 2)
