@@ -1,0 +1,50 @@
+esphome:
+  name: chain-host
+
+host:
+
+logger:
+  level: VERY_VERBOSE
+
+uart:
+  - id: uart_bus
+    port: /dev/ttys999
+    baud_rate: 115200
+    data_bits: 8
+    parity: NONE
+    stop_bits: 1
+
+m5_chain_env:
+  - id: chain_env
+    uart_id: uart_bus
+    chain_index: 1
+    update_interval: 1s
+
+m5_chain_dlight:
+  - id: chain_dlight
+    uart_id: uart_bus
+    chain_index: 2
+    update_interval: 1s
+
+m5_chain_imu:
+  - id: chain_imu
+    uart_id: uart_bus
+    chain_index: 3
+    update_interval: 1s
+
+binary_sensor:
+  - platform: m5_chain_env
+    m5_chain_env_id: chain_env
+    temperature_alarm:
+      name: ENV TempAlarm
+      low: 10
+      high: 40
+  - platform: m5_chain_dlight
+    m5_chain_dlight_id: chain_dlight
+    low_light:
+      name: DLight Dark
+      threshold: 50
+  - platform: m5_chain_imu
+    m5_chain_imu_id: chain_imu
+    motion:
+      name: IMU Motion

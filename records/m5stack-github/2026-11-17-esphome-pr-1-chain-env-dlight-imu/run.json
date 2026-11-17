@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/esphome #1: Chain ENV/DLight/IMU components build and run in a host harness; alarm-only configs never poll and CI lacks component tests",
+  "source": {
+    "pr": "https://github.com/m5stack/esphome/pull/1",
+    "repository": "m5stack/esphome",
+    "base_branch": "feat-m5-chain",
+    "base_commit": "170093f52939d0496b05e52cf31009f8d67a5202",
+    "head_commit": "a5263dbfc71d1e33fa18d1690faa13c5adf89837",
+    "reference_library": "https://github.com/m5stack/M5Chain",
+    "reference_library_commit": "277dcfe84a5712ef1bb07299f923360c5482d107"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "ESPHome build from the PR head",
+    "version": "2026.11.0-dev",
+    "targets": ["esp32dev / esp-idf 5.5.6", "host"],
+    "esp32_image_bytes": 725079
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13.15 venv, ESPHome 2026.11.0-dev from the PR checkout, ESP-IDF 5.5.6, ESPHome host target bound to a pseudo-terminal Chain simulator",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "esphome_config_valid",
+      "status": "PASS",
+      "evidence": "esphome config on a three-node YAML (all sensors, alarms, six outputs) reports 'Configuration is valid!'"
+    },
+    {
+      "name": "esp32_idf_build",
+      "status": "PASS",
+      "evidence": "esphome compile esp32dev/esp-idf 5.5.6 succeeds, 725079 bytes, Flash 39.5 %, RAM 27.3 % (evidence/build-esp-idf.txt)"
+    },
+    {
+      "name": "protocol_crosscheck",
+      "status": "PASS",
+      "evidence": "command codes, payload order, units and event masks match m5stack/M5Chain@277dcfe8 (evidence/protocol-crosscheck.txt)"
+    },
+    {
+      "name": "boot_settings_payloads",
+      "status": "PASS",
+      "evidence": "host run emits 0x36/0xE3/0xE5/0xE7/0xE9/0xE1 for ENV, 0x33/0x31/0xE1 for DLight, 0xE3/0xE5/0xE1 for IMU with the documented byte order (evidence/host-runtime.txt)"
+    },
+    {
+      "name": "readings_decode",
+      "status": "PASS",
+      "evidence": "synthetic answers decode to 23.50 C / 45 % / 1013.2 hPa / 12.34 m / 1234 lx / 9.80665 m/s2 / 27.50 C (evidence/host-runtime.txt)"
+    },
+    {
+      "name": "event_alarm_mapping",
+      "status": "PASS",
+      "evidence": "0xE0 payloads 010f/000f, 0310/0410/0010, 00/02/01/03 drive the ENV temperature, IMU motion/rotation/temperature and DLight Dark/Bright entities on and off (evidence/host-runtime.txt)"
+    },
+    {
+      "name": "alarm_only_initial_state",
+      "status": "FAIL",
+      "evidence": "host-alarmonly.yaml: 7 configuration frames, 0 reads, 0 state publications in 13 s; binary sensors stay unknown (evidence/alarm-only.txt)"
+    },
+    {
+      "name": "component_test_yamls",
+      "status": "FAIL",
+      "evidence": "no tests/components/m5_chain_{env,dlight,imu}/ while all 14 existing chain components have common.yaml + test.esp32-idf.yaml"
+    },
+    {
+      "name": "codeowners_check",
+      "status": "FAIL",
+      "evidence": "script/build_codeowners.py --check reports 'CODEOWNERS file is not up to date'; ci.yml:238 runs it (evidence/codeowners-check.txt)"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "local Device Service has 36 profiles, none is a Chain controller or Chain peripheral; no Chain model exists"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "no Chain Captain, Chain ENV, DLight or IMU on the bench"
+    },
+    {
+      "name": "dlight_interrupt_vs_polling",
+      "status": "NOT RUN",
+      "evidence": "vendor library documents lux acquisition only outside the threshold band when the interrupt is enabled; needs hardware confirmation"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/build-esp-idf.txt",
+      "description": "config validation and ESP-IDF build results with sizes"
+    },
+    {
+      "path": "evidence/protocol-crosscheck.txt",
+      "description": "PR constants against m5stack/M5Chain ENV, DLight and IMU headers/sources"
+    },
+    {
+      "path": "evidence/host-runtime.txt",
+      "description": "request frames, synthetic readings and entity transitions from the host run"
+    },
+    {
+      "path": "evidence/alarm-only.txt",
+      "description": "alarm-only run: seven configuration frames, no reads, no states"
+    },
+    {
+      "path": "evidence/codegen-main.txt",
+      "description": "generated setup code showing the setter order and the duplicate set_update_interval call"
+    },
+    {
+      "path": "evidence/codeowners-check.txt",
+      "description": "build_codeowners.py --check output"
+    }
+  ],
+  "notes": [
+    "Evidence class is host-level test plus code-level verification; nothing was run on a virtual M5Stack device or on physical Chain hardware.",
+    "The harness replies in about 140 ms because of ESPHome host UART read pacing, so 'Slow response' lines are an artefact of the simulator; poll intervals were raised to 2 s to avoid starvation.",
+    "Findings are stated as review comments only; no change was pushed to the PR and no issue was closed."
+  ]
+}

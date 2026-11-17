@@ -1,0 +1,49 @@
+  uart_bus->set_data_bits(8);
+  // m5_chain_env:
+  //   chain_index: 1
+  //   id: chain_env
+  //   sea_level_pressure: 1013.25
+  //   uart_id: uart_bus
+  //   update_interval: 10s
+  new(chain_env) m5_chain_env::M5ChainEnv();
+  chain_env->set_update_interval(10000);
+  App.register_component_(chain_env, 10);
+  chain_env->set_uart_parent(uart_bus);
+  chain_env->set_chain_index(1);
+  chain_env->set_update_interval(10000);
+  chain_env->set_sea_level_pressure(10132);
+  // m5_chain_dlight:
+  //   chain_index: 2
+  //   gain: 3X
+  //   id: chain_dlight
+  //   integration_time: 100ms
+  //   uart_id: uart_bus
+  //   update_interval: 1s
+  new(chain_dlight) m5_chain_dlight::M5ChainDLight();
+  chain_dlight->set_update_interval(1000);
+  App.register_component_(chain_dlight, 11);
+  chain_dlight->set_uart_parent(uart_bus);
+  chain_dlight->set_chain_index(2);
+  chain_dlight->set_update_interval(1000);
+  chain_dlight->set_gain(1);
+  chain_dlight->set_resolution(2);
+  // m5_chain_imu:
+  //   accelerometer_odr: 104HZ
+  //   accelerometer_range: 8G
+  //   chain_index: 3
+  //   gyroscope_odr: 104HZ
+  //   gyroscope_range: 1000DPS
+  //   id: chain_imu
+  //   uart_id: uart_bus
+  //   update_interval: 1s
+  new(chain_imu) m5_chain_imu::M5ChainImu();
+  chain_imu->set_update_interval(1000);
+  App.register_component_(chain_imu, 12);
+  chain_imu->set_uart_parent(uart_bus);
+  chain_imu->set_chain_index(3);
+  chain_imu->set_update_interval(1000);
+  chain_imu->set_accel_range(3);
+  chain_imu->set_gyro_range(4);
+  chain_imu->set_accel_odr(4);
+  chain_imu->set_gyro_odr(4);
+  // sensor.m5_chain_env:

@@ -1,0 +1,39 @@
+Protocol cross-check: PR head a5263dbfc vs m5stack/M5Chain @ 277dcfe84a5712ef1bb07299f923360c5482d107
+(public Arduino library for the Chain series; sx/ChainENV, sx/ChainDLight, sx/ChainIMU)
+
+ENV (ChainENV.hpp/.cpp)
+  0x30 GET_AHT20_DATA                    PR: AHT20_DATA_SIZE=3, int16 C x100 + uint8 %      MATCH
+  0x31 GET_SPA06_DATA                     PR: int16 C x100 + uint16 hPa x10 + int32 cm     MATCH
+  0x36 SET_SPA06_SEA_LEVEL_PRESSURE       PR: u16 LE + save flag 0 (no flash)              MATCH
+  0xE1 SET_CHANGE_EVENT_TRIGGER           PR: 1-byte mask, bit0 temp/1 hum/2 press/3 alt   MATCH
+  0xE3 SET_TEMPERATURE_WARNING_THRESHOLD  PR: [source, low, high]; source 0=AHT20 1=SPA06   MATCH
+  0xE5 SET_HUMIDITY_WARNING_THRESHOLD     PR: [low, high]                                  MATCH
+  0xE7 SET_PRESSURE_WARNING_THRESHOLD     PR: [low u16 LE, high u16 LE]                    MATCH
+  0xE9 SET_ALTITUDE_WARNING_THRESHOLD     PR: [low i32 LE, high i32 LE]                    MATCH
+  0xE0 report                             PR: data[0]=status, data[1]=0x0F; 2-bit field
+                                              per alarm, 1=high active 2=low active          MATCH
+                                             (0x0F00 | status in ChainCommon 0xE0 record)
+  sea level range                         PR: 300..1100 hPa -> 3000..11000 x10            MATCH
+
+DLIGHT (ChainDLight.hpp/.cpp)
+  0x30 GET_LUX                            PR: u32 LE lux                                   MATCH
+  0x31 SET_LUX_INTERRUPT_ENABLE           PR: 1 byte                                       MATCH
+  0x33 SET_LUX_INTERRUPT_THRESHOLD        PR: high u32 then low u32                        MATCH
+  0x35 SET_SENSOR_GAIN                    PR: 1x..18x = 0..4                               MATCH
+  0x37 SET_SENSOR_RESOLUTION              PR: 400/200/100/50/25 ms = 0..4                  MATCH
+  0xE1 SET_INTERRUPT_EVENT_TRIGGER        PR: 1 byte                                       MATCH
+  0xE0 event payload                      PR: data[0] 0=low active 1=high active
+                                              2=low release 3=high release                 MATCH
+  threshold max                           PR: 2516580                                      MATCH
+
+IMU (ChainIMU.hpp/.cpp)
+  0x30 GET_ACCEL_DATA / 0x31 GET_GYRO_DATA PR: int16 x3 (mg / dps)                         MATCH
+  0x34 GET_TEMPERATURE                    PR: int16 C x100                                 MATCH
+  0x35/0x37 SET_ACCEL/GYRO_RANGE          PR: 2G=0 16G=1 4G=2 8G=3; 250/125/500/1000/2000 = 0/1/2/4/6  MATCH
+  0x39/0x3B SET_ACCEL/GYRO_ODR            PR: OFF..6.66kHz = 0x00..0x0A, accel +0x0B 1.6Hz MATCH
+  0xE1 SET_EVENT_TRIGGER                  PR: accel 0x01 | gyro 0x02 | temp 0x04           MATCH
+  0xE3 SET_6AXIS_THRESHOLD                PR: [accel, gyro]                                MATCH
+  0xE5 SET_TEMPERATURE_THRESHOLD          PR: [low, high]                                  MATCH
+  0xE0 report                             PR: data[0]=INT_Status, data[1]=0x10;
+                                              bit0 accel, bit1 gyro, bit[3:2] temp (1/2 active) MATCH
+  INT_Status table                        also matches docs.m5stack.com Chain IMU UART protocol 6.6

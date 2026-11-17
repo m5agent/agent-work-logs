@@ -1,0 +1,100 @@
+esphome:
+  name: chain-host
+
+host:
+
+logger:
+  level: DEBUG
+
+uart:
+  - id: uart_bus
+    port: /dev/ttys999
+    baud_rate: 115200
+    data_bits: 8
+    parity: NONE
+    stop_bits: 1
+
+m5_chain_env:
+  - id: chain_env
+    uart_id: uart_bus
+    chain_index: 1
+    sea_level_pressure: 1013.25
+    update_interval: 2s
+
+m5_chain_dlight:
+  - id: chain_dlight
+    uart_id: uart_bus
+    chain_index: 2
+    update_interval: 2s
+
+m5_chain_imu:
+  - id: chain_imu
+    uart_id: uart_bus
+    chain_index: 3
+    update_interval: 2s
+
+sensor:
+  - platform: m5_chain_env
+    m5_chain_env_id: chain_env
+    temperature:
+      name: ENV Temp
+    humidity:
+      name: ENV Hum
+    pressure:
+      name: ENV Press
+    altitude:
+      name: ENV Alt
+    barometer_temperature:
+      name: ENV BaroTemp
+  - platform: m5_chain_dlight
+    m5_chain_dlight_id: chain_dlight
+    name: DLight Lux
+  - platform: m5_chain_imu
+    m5_chain_imu_id: chain_imu
+    acceleration_x:
+      name: IMU AX
+    acceleration_y:
+      name: IMU AY
+    acceleration_z:
+      name: IMU AZ
+    gyroscope_x:
+      name: IMU GX
+    gyroscope_y:
+      name: IMU GY
+    gyroscope_z:
+      name: IMU GZ
+    temperature:
+      name: IMU Temp
+
+binary_sensor:
+  - platform: m5_chain_env
+    m5_chain_env_id: chain_env
+    temperature_alarm:
+      name: ENV TempAlarm
+      low: 10
+      high: 40
+      source: aht20
+    humidity_alarm:
+      name: ENV HumAlarm
+    pressure_alarm:
+      name: ENV PressAlarm
+    altitude_alarm:
+      name: ENV AltAlarm
+  - platform: m5_chain_dlight
+    m5_chain_dlight_id: chain_dlight
+    low_light:
+      name: DLight Dark
+      threshold: 50
+    high_light:
+      name: DLight Bright
+      threshold: 5000
+  - platform: m5_chain_imu
+    m5_chain_imu_id: chain_imu
+    motion:
+      name: IMU Motion
+    rotation:
+      name: IMU Rotation
+    temperature_alarm:
+      name: IMU TempAlarm
+      low: 0
+      high: 60
