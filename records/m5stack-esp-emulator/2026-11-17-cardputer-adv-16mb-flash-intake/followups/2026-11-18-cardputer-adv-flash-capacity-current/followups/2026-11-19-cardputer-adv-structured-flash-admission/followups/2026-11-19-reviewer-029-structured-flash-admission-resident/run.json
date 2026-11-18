@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "service_release",
+  "overall_status": "PASS",
+  "title": "Reviewer 0.29.0 resident readback and historical Flash inventory admission",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/234",
+    "reviewer_baseline": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+    "reviewer_active": "69386c6a162a1c786d6745c46eaa330c14558d3c",
+    "device_source": "c9ec0f274579b78d87a4a301147f351e8b7a48fa"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS resident Reviewer and two native Device Service roles",
+    "reviewer_api": "0.29.0",
+    "device_api": "1.99.1",
+    "guest_on_production_services": "NOT RUN",
+    "issue_observation": "CLOSED / COMPLETED",
+    "burner_submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "system_python_startup",
+      "status": "PASS",
+      "details": "System Python 3.9.6 preflight and actual 0.29 runtime"
+    },
+    {
+      "name": "guarded_apply_and_independent_readback",
+      "status": "PASS",
+      "details": "App module only; 130 jobs, exact tables and sampled ZIP bytes preserved"
+    },
+    {
+      "name": "two_device_openapi_roles",
+      "status": "PASS",
+      "details": "Both HTTP 200 with exact unchanged 1.99.1 schema"
+    },
+    {
+      "name": "legacy_inventory_create_gate",
+      "status": "PASS",
+      "details": "Isolated copied historical record returns HTTP 409, identical records, no guest and zero leases"
+    },
+    {
+      "name": "production_firmware_physical_and_linux_route",
+      "status": "NOT RUN",
+      "details": "Resident verification covered readiness and saved history"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/resident-029-flash-admission.summary.json",
+      "kind": "redacted receipt summaries"
+    }
+  ]
+}
