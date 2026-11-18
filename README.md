@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | Core2 原版 2048 Game 1.0 的 Reviewer 0.28 四向复验 | PASS（八步合法、四向覆盖及拒绝对照） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/followups/2026-11-18-reviewer-027-core2-resident/followups/2026-11-19-core2-2048-reviewer-028/) |
 | 2026-11-19 | ESP Emulator | Reviewer 0.28.0 原版 ADV 发音审核的常驻切换 | PASS（保留首次失败和回退，修订版验证及独立回读通过） | [查看](records/esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/followups/2026-11-19-cardputerdict-adv050-standard-pronunciation/followups/2026-11-19-reviewer-028-adv-resident-python39/) |
 | 2026-11-19 | ESP Emulator | CardputerDict ADV 0.5.0 标准审核发音回归 | PASS（原版允许与拒绝，初代回归） | [查看](records/esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/followups/2026-11-19-cardputerdict-adv050-standard-pronunciation/) |
 | 2026-11-19 | ESP Emulator | PaperColor 原厂固件无宿主 USB 的互斥锁断言 | PARTIAL（上电独立复现，锁持有现场已核对） | [查看](records/esp-emulator/2026-11-13-community-firmware-issues/followups/2026-11-19-papercolor-original-msc-bulk-read/followups/2026-11-19-papercolor-no-host-usb-mutex/) |

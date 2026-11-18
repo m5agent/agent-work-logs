@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Original Core2 2048 four-direction dry run on Reviewer 0.28",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9837c3f84df4383eb74881a1f44fcd3f460daefa",
+    "reviewer_commit": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "board": "Core2",
+    "host_backend": "macOS native QEMU"
+  },
+  "firmware": {
+    "title": "2048 Game",
+    "version": "1.0",
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "normalized_flash_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8"
+  },
+  "execution": {
+    "environment": "Isolated native Device Service and Reviewer saved snapshot",
+    "evidence_summary_sha256": "a969bbb3ab911f13c1180051208b012eec5c2fa21908feb6332f3751c96cd974"
+  },
+  "checks": [
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "detail": "Exact retained and running factory app verified."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "All eight directional RGB board observations show an exact legal move and one valid spawn."
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "detail": "Malformed config rejected before queue or lease. Standard dry-run SIM_VERIFIED and cleanup checked."
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "Physical touch and browser WASM are outside this native run."
+    }
+  ],
+  "evidence": [
+    "evidence/core2-2048-review028.summary.json"
+  ],
+  "notes": [
+    "No deployment change or Burner submission in this replay."
+  ]
+}
