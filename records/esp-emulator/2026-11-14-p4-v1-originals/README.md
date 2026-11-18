@@ -38,3 +38,5 @@ are omitted; the summaries retain their hashes and bounded observations.
 ## 后续复验
 
 [Tab5 #188 原版 UIFlow2 1.1.0 双 Part 对照](followups/2026-11-18-tab5-uiflow254-v110-part-gap/README.md)
+
+[Tab5 #226 原版 Maker Fighter 1.1.0 USB 自检](followups/2026-11-18-maker-fighter-dwc-self-check/README.md)
