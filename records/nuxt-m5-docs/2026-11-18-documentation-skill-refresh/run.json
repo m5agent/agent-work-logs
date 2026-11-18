@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "delivery",
+  "overall_status": "PASS",
+  "title": "可复现的 M5Stack Markdown 文档 Skill 更新",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "668511a97a2e585c4d2438033fe1a5d29a58c593",
+    "workflow_commit": "b3af9349ab0429f269b8404598020bb07cdaab14"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS build and aarch64 Linux virtual-machine consumer validation"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "target": "确定性重建和构建失败保留上次产物"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "target": "虚拟设备验证。Linux VM 解包、7 项查询、指定 PDF 下载和页码核对"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "target": "分发后读取包并逐文件校验，复跑无重复上传"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "target": "流程纳入文档仓库主线，Skill 已同步"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "target": "问答缓存命中率 A/B"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "target": "M5Stack 硬件和固件路径"
+    }
+  ],
+  "evidence": [
+    "evidence/docs-skill-refresh-summary.json"
+  ]
+}
