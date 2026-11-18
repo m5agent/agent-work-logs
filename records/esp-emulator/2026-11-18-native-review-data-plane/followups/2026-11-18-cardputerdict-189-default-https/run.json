@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "CardputerDict 0.6.4 原版默认 HTTPS 发音与会话音频",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "1319222e0b7439789e35fd177d50b9f0371e3f11",
+    "device_service_version": "1.89.0",
+    "openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "native_linux_xtensa_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "esp32_s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "main_firmware_evidence_summary_sha256": "ff377cb3cc2b3fe246deff6560b35b0f98a743e0fb119579c413e10540764f2e"
+  },
+  "hardware": {
+    "target": "Cardputer K132",
+    "validation": "virtual-device",
+    "host": "Linux arm64"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929",
+    "authored_sd_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "seed_has_audio": false
+  },
+  "execution": {
+    "runtime": "qemu-wifi/generic-observe",
+    "isolated_cases": 2,
+    "diagnostic_overrides": false,
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "same firmware SNTP/TLS path and TCP/443 allow/deny controls"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "new 10605-byte MP3 and default session PCM through live API, evidence ZIP and stopped session"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "scope": "accepted keyboard operations and existing guest frames, denied trial returns to definition"
+    },
+    {
+      "layer": "workflow",
+      "status": "NOT RUN",
+      "scope": "reviewer saved snapshot, Cardputer ADV, browser, physical hardware, Burner submission"
+    }
+  ],
+  "evidence": [
+    "evidence/default-https.summary.json",
+    "evidence/same-session-pcm-and-policy.summary.json"
+  ]
+}
