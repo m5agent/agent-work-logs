@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Same-volume VZ controller exclusivity and cold recovery authority source fences",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "97339c1137e4e8564114e7476ba607f1129fe68c",
+    "validated_against_main": "7d18dc02be08c3885ec39de7fa7634e79381b042"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "board": "Cardputer K132",
+    "host_backend": "Linux VZ"
+  },
+  "firmware": {
+    "id": "CardputerDict 0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e"
+  },
+  "execution": {
+    "environment": "Isolated no-NIC Linux ARM64 VZ, private persistent volume and controlled local review services",
+    "public_summary_sha256": "1dc362d5f31266c0d34c3294966e09557c41df85cc1e979305c4c6f86a0abc03"
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "detail": "Two same-volume contenders exited before boot while the original owned one active lease."
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "detail": "Same retired VM and copied-stop-ACK different-volume attempts had no issued grant."
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "detail": "Two matching payloads sourced from restored state were rejected before any service listened or mutated old state."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "Trusted RO grant released the old lease; identical original retry produced verified MP3 and PCM."
+    },
+    {
+      "layer": "delivery",
+      "status": "NOT RUN",
+      "detail": "Cross-host lock, resident Linux route, and production guest."
+    }
+  ],
+  "evidence": [
+    "evidence/controller-exclusivity.summary.json"
+  ],
+  "notes": [
+    "Preexisting signed runner and controller were reused. Burner was not submitted."
+  ]
+}
