@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 v0.2.4 original saved-snapshot local portal-to-station review",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "1939e39885d3cffe74f01576182bfa28c6148dd2",
+    "device_service_release_commit": "597e03214dc5f442787cec52f1720567e4ed2a00",
+    "firmware_reviewer_commit": "f0101b6bb0926a69ef2f8477ae81e991338391f5"
+  },
+  "hardware": {
+    "device": "StickS3",
+    "soc": "ESP32-S3",
+    "validation_class": "virtual-device validation",
+    "firmware_runtime": "qemu-wifi",
+    "profile": "sticks3-open-softap-provisioning"
+  },
+  "firmware": {
+    "name": "StickS3-Claude-Codex-Assistant v0.2.4",
+    "author_tag_commit": "5faf4efaec9b9aa0d36fcb9514030cb9de649862",
+    "source_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+    "source_bytes": 2907680,
+    "source_format": "app-only",
+    "vendor_boot_prefix_sha256": "50947eb4fc39a12b1e760d5c5911e34c95c20085f1280fd0eb645087e398fa0c",
+    "application_offset": 65536,
+    "composed_flash_sha256": "9627c7bc4a313841b5e30477030af7c68d0b76c1172b7a46072938322ba3ec70",
+    "flash_bytes": 8388608
+  },
+  "execution": {
+    "environment": "isolated macOS ARM64, Python 3.13.15, native Xtensa QEMU, no external IP backend",
+    "task_id": "[redacted]",
+    "session_id": "[redacted]",
+    "started_at": "2026-11-18T16:11:26.669194+00:00",
+    "finished_at": "2026-11-18T16:12:33.392632+00:00",
+    "duration_ms": 66723,
+    "device_openapi_version": "1.99.0",
+    "device_openapi_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "reviewer_openapi_version": "0.27.0",
+    "reviewer_openapi_sha256": "3fec9b38f09a1bccc4ed365701d695ef432c9eade51b2645fcb627c5a687b6f2",
+    "qemu_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "source_mode": "saved_snapshot",
+    "reviewer_status": "manual_review",
+    "reviewer_lane": "SIM_PARTIAL",
+    "reviewer_error_code": "E_NETWORK_PARTIAL",
+    "submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "check": "incomplete_vendor_boot_context_control",
+      "status": "PASS",
+      "detail": "Rejected before any QEMU lease as E_APP_ONLY_BASE_MISMATCH"
+    },
+    {
+      "check": "boot_and_ui",
+      "status": "PASS",
+      "detail": "Original ROM serial output and terminal frame in Device Service evidence"
+    },
+    {
+      "check": "local_ap_provisioning",
+      "status": "PASS",
+      "detail": "Same guest: GET, POST, two complete DORA exchanges and station ARP"
+    },
+    {
+      "check": "same_session_flash_readback",
+      "status": "PASS",
+      "detail": "4344 NVS bytes changed; original app byte-for-byte equal"
+    },
+    {
+      "check": "review_workflow",
+      "status": "PARTIAL",
+      "detail": "E_NETWORK_PARTIAL, local provisioning passed and cloud application unverified"
+    },
+    {
+      "check": "cleanup",
+      "status": "PASS",
+      "detail": "Peer and mutable Flash released, zero active leases"
+    },
+    {
+      "check": "cloud_application",
+      "status": "NOT RUN",
+      "detail": "Local fixture has no host IP backend"
+    },
+    {
+      "check": "browser_wasm_and_physical_hardware",
+      "status": "NOT RUN",
+      "detail": "Native virtual device scope"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/same-guest-summary.json",
+      "kind": "redacted packet and flash readback summary"
+    }
+  ],
+  "notes": [
+    "Original ZIP and configured Flash kept in private retention. No deployment or code changes in this validation."
+  ]
+}
