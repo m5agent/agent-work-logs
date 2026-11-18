@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "scope": "Read-only virtual-device evidence analysis",
+  "baseline_receipt_sha256": "a55f8312f0772751152d8b29af9338e8854a1672e0f13a0dd2a7db02bd1f9437",
+  "runtime_source": {
+    "commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_api": "1.87.0",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "qemu_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "esp32s3_rev0_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "publisher_source": {
+    "repository": "https://github.com/gywan94/cardputer-nc1020emu",
+    "commit": "81b35b76cf88306cc2bfae425bff4b3e6fbf9ed1",
+    "files_sha256": {
+      "main/main.cpp": "d8da956c094cddbcb06e1fee01a4561e9896af174d2b8751615d7abc22cfedf5",
+      "main/cardputer_bsp.c": "2adf508f02255e995eede0f6c80d82f9b0f667f0ecfa2b4a0b940dc3a618a432"
+    }
+  },
+  "runs": [
+    {
+      "case": "A1",
+      "serial_sha256": "7a443eb8515299092a704960a94e1d86798d69042dd8dbe8446f73b775f859ee",
+      "evidence_zip_sha256": "05f800620203e9d1ecf90506071d675389c90c82361eb8eb1da7c1f606cb2ab1",
+      "frame_sha256": [
+        "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+        "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+        "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174"
+      ]
+    },
+    {
+      "case": "A2",
+      "serial_sha256": "8bb2d9a732b40aa4e8ecaabd7f5336f59887cdc3adc6ebe3c0e8a87179a16c65",
+      "evidence_zip_sha256": "3debd91ab7123bf9559a8f148f30338bda6ec1369309db95aee77f62e6ad0d76",
+      "frame_sha256": [
+        "0f28c4ae6384d5769231c7aac71f1a5db095270fddd44d971ced1942d54a91c1",
+        "0f28c4ae6384d5769231c7aac71f1a5db095270fddd44d971ced1942d54a91c1",
+        "0f28c4ae6384d5769231c7aac71f1a5db095270fddd44d971ced1942d54a91c1"
+      ]
+    }
+  ],
+  "frame_row_observation": {
+    "orientation": "landscape-counterclockwise",
+    "native_row0_pixels": 120,
+    "decoded_rgb_row0": [
+      189,
+      222,
+      189
+    ],
+    "A2_row0_matches_A1_at_all_points": true,
+    "samples": [
+      {
+        "sample": 1,
+        "row0_nonblack": {
+          "A1": 120,
+          "A2": 120
+        },
+        "row1_nonblack": {
+          "A1": 120,
+          "A2": 0
+        },
+        "A2_nonblack_rect_landscape_xyxy_exclusive": [
+          0,
+          15,
+          1,
+          135
+        ]
+      },
+      {
+        "sample": 2,
+        "row0_nonblack": {
+          "A1": 120,
+          "A2": 120
+        },
+        "row1_nonblack": {
+          "A1": 120,
+          "A2": 0
+        },
+        "A2_nonblack_rect_landscape_xyxy_exclusive": [
+          0,
+          15,
+          1,
+          135
+        ]
+      },
+      {
+        "sample": 3,
+        "row0_nonblack": {
+          "A1": 120,
+          "A2": 120
+        },
+        "row1_nonblack": {
+          "A1": 120,
+          "A2": 0
+        },
+        "A2_nonblack_rect_landscape_xyxy_exclusive": [
+          0,
+          15,
+          1,
+          135
+        ]
+      }
+    ]
+  },
+  "first_observed_divergence": {
+    "guest_cycles": 164524339,
+    "guest_rtc_hh_mm_ss": "11:14:55",
+    "A1_reported_draws_delta": 1,
+    "A2_reported_draws_delta": 0
+  },
+  "bound": "A2 received all color pixels for native content row 0. The next content row is missing and the complete-blit counter remains zero.",
+  "unresolved": "Guest DMA completion, interrupt delivery, command-free row-0 drain, or next-row enqueue are not visible in the untraced receipts.",
+  "verified_runtime_trace_names": [
+    {
+      "flag": "M5SW_SPI_WINDOW_TRACE",
+      "markers": [
+        "[m5panel-window]"
+      ],
+      "scope": "Address window command and parameter bytes"
+    },
+    {
+      "flag": "M5SW_PANEL_DC_TRACE",
+      "markers": [
+        "[m5panel-dc]"
+      ],
+      "scope": "Panel-selected DC phase, length and first byte"
+    },
+    {
+      "flag": "M5SW_SPI_XFER_TRACE",
+      "markers": [
+        "[spi-xfer]",
+        "[gpspi-forward]",
+        "[spi-tx]"
+      ],
+      "scope": "Bus command or data, payload length and FIFO"
+    },
+    {
+      "flag": "M5SW_GPSPI_TRACE",
+      "markers": [
+        "[gpspi-irq]",
+        "[gpspi-trace]"
+      ],
+      "scope": "Transfer-done interrupt mask, level and register activity"
+    }
+  ],
+  "proposed_panel_windows": {
+    "column_params_hex": "003400ab",
+    "row0_params_hex": "00280028",
+    "row1_params_hex": "00290029",
+    "expected_color_bytes_per_row": 240
+  },
+  "trace_replay": "NOT RUN"
+}
