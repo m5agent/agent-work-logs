@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "report",
+  "title": "NC1020 原版与 SPI 锁 SDK 回移候选对照",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": null,
+    "base_commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "previous_report": "https://github.com/m5agent/agent-work-logs/blob/5a6d032a13e35523cd59034c27372d09c5131287/records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-18-nc1020-dual-core-cas/README.md",
+    "upstream_code": "https://github.com/espressif/esp-idf/commit/2521f3887a78559496c0d2599b0f368ddc24e02b",
+    "sdk_base": "4c2820d377d1375e787bcef612f0c32c1427d183",
+    "authority_report_commit": "9df926ec45ffe1c7d9f91f4b98c58d8b23a40769",
+    "authority_receipt": "https://github.com/m5agent/m5stack-esp-emulator/blob/9df926ec45ffe1c7d9f91f4b98c58d8b23a40769/tests/firmware/cardputer_k132_stock/nc1020-esp-idf-lock-backport-summary.json",
+    "authority_receipt_sha256": "f4b963eca50d41c17bb13199f072dc8ff303b505ce233c5578711eef37a04269"
+  },
+  "hardware": {
+    "board": "Cardputer K132",
+    "soc": "ESP32-S3",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "NC1020 original and rebuilt SPI bus-lock candidate",
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "rebuilt_application_sha256": "8664bacefb940ffee232423e0da7eace521fbf5fc2b211c5ebe1e4661c8b9f07",
+    "rebuilt_flash_sha256": "47b4e571731cef3576e7b32bebc0daa9e2ab81f2ddc5a7a72cf04453fd104184",
+    "original_publisher_release": "UNCHANGED"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service": "1.87.0",
+    "native_runtime_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "original_trials": 3,
+    "rebuilt_candidate_trials": 4,
+    "guest_inputs": 0,
+    "browser": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "basis": "Pinned ESP-IDF v5.4.1 SDK, original toolchain and exact effective two-hunk source diff"
+    },
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "basis": "Only factory bytes replace the saved populated image for the candidate"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "basis": "All seven sessions complete 407 SD single-block reads"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "basis": "Exact 99384-byte state in seven separate restores"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "basis": "Original 1/3 full; rebuilt candidate 4/4 exact full; physical NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/nc1020-sdk-backport-comparison-summary.json",
+      "sha256": "e932448560fcf864a064d3d64abeb8cd815cd4c813b3a4ee5fc5a46b029dc911"
+    }
+  ]
+}

@@ -48,6 +48,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 原版 UIFlow2 BMI270 大请求与面板分支 | PARTIAL（ST7123 诊断离线启动页通过，GT911 DSI 读回仍开放） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/followups/2026-11-18-tab5-bmi270-transport/) |
+| 2026-11-18 | ESP Emulator | NC1020 原版与 SPI 锁 SDK 回移候选对照 | PARTIAL（原版完整 1/3，独立候选完整 4/4） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-18-nc1020-dual-core-cas/followups/2026-11-18-nc1020-sdk-candidate/) |
 | 2026-11-18 | ESP Emulator | ESP-EMU 1.1.0 P4 SDMMC 接入评估 | PASS（P4 读写与负控，Tab5 板级待验） | [查看](records/esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/) |
 | 2026-11-18 | ESP Emulator | Tab5 #188 原版 UIFlow2 V2.5.4 双 Part 对照 | PARTIAL（双 Part 复现同一超长编码请求） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/) |
 | 2026-11-18 | ESP Emulator | Nesso N1 #216 原版 RFID 看门狗与横屏 | PARTIAL（持续运行失败，离线横屏通过） | [查看](records/esp-emulator/2026-11-13-community-firmware-issues/followups/2026-11-18-nesso-rfid-current-paired/) |

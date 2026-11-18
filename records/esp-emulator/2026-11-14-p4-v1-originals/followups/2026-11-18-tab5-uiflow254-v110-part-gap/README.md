@@ -27,3 +27,7 @@
 ## 未覆盖项
 
 客体 I²C 线级长度和异常来源待定位。浏览器、触摸及实体设备尚未执行，Burner 未提交。
+
+## 后续复验
+
+[Tab5 原版 UIFlow2 BMI270 大请求与面板分支](followups/2026-11-18-tab5-bmi270-transport/README.md)

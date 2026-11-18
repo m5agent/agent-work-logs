@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "issue",
+  "title": "Tab5 原版 UIFlow2 BMI270 大请求与面板分支",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/188",
+    "base_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "previous_report": "https://github.com/m5agent/agent-work-logs/blob/5a6d032a13e35523cd59034c27372d09c5131287/records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/README.md",
+    "authority_report_commit": "9df926ec45ffe1c7d9f91f4b98c58d8b23a40769",
+    "authority_receipt": "https://github.com/m5agent/m5stack-esp-emulator/blob/9df926ec45ffe1c7d9f91f4b98c58d8b23a40769/docs/evidence/2026-11-18-tab5-stock-frame-comparison/uiflow254-bmi270-diagnostic-summary.json",
+    "authority_receipt_sha256": "2edf13011f2d035b4dfe59ab67e403e5cb70037e28bcc412a292bd45f5839f52"
+  },
+  "hardware": {
+    "board": "Tab5",
+    "soc": "ESP32-P4",
+    "companion": "ESP32-C6",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Original UIFlow2 for Tab5 v2.5.4",
+    "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "bytes": 16121856,
+    "normalized_flash_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service": "1.89.0",
+    "runtime": "esp-emu 1.1.0 native qemu/DSI",
+    "native_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "service_openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "isolated_guest_trials": 3,
+    "guest_inputs": 0,
+    "browser": "NOT RUN",
+    "cloud_pairing": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "basis": "Same original and normalized application bytes; original oversized diagnostic Part rejected without guest"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "basis": "3/3 decoded individual BMI270 writes of 8192 true payload bytes; two accept controls returned init status"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "basis": "ST7123 offline launcher rendered under diagnostic Part; GT911 DSI readback and visible UI remain limited"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "basis": "720x1280 ST launcher with 628 colors; GT911 has no valid frame; physical NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tab5-bmi270-display-comparison-summary.json",
+      "sha256": "76cebf00225329f1b61e131c371febf66e2ddf771fc8925069b6d6007a99dd98"
+    }
+  ]
+}

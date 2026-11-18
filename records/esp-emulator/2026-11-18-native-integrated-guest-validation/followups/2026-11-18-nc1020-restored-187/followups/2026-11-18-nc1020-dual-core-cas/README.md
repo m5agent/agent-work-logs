@@ -27,3 +27,7 @@
 ## 未覆盖项
 
 A2 完整原因、实体设备、浏览器及 Burner 提交未验证。
+
+## 后续复验
+
+[NC1020 原版与 SPI 锁 SDK 回移候选对照](followups/2026-11-18-nc1020-sdk-candidate/README.md)
