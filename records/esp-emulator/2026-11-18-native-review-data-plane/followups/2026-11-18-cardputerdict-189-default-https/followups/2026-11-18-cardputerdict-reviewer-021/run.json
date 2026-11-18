@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "CardputerDict 原版 Reviewer 保存快照",
+  "source": {
+    "emulator_repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "device_service_test_commit": "1319222e0b7439789e35fd177d50b9f0371e3f11",
+    "emulator_docs_main": "0e376abc91ddf8252eb565cb1b54204be8e1f089",
+    "device_service_openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "reviewer_commit": "ecc8cfc3aadd5b2ae0289171784d2abac91bf855",
+    "reviewer_openapi_sha256": "60e185f8936c0ae46520c034592aad682f387c321e993dcdebb6c6cfff0a7e90",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "hardware": {
+    "target": "Cardputer K132",
+    "host": "Linux arm64",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929",
+    "authored_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62"
+  },
+  "execution": {
+    "source_mode": "saved_snapshot",
+    "dry_run": true,
+    "isolated_cases": 3,
+    "burner_submissions": 0
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "allowed stock SNTP/TLS, 10605-byte MP3 and 84992-byte matching stopped API and ZIP PCM"
+    },
+    {
+      "layer": "workflow",
+      "status": "PASS",
+      "scope": "real saved snapshot done/PASS, POLICY_DENIED/manual and isolation admission/manual"
+    },
+    {
+      "layer": "workflow",
+      "status": "NOT RUN",
+      "scope": "Cardputer ADV, browser, physical hardware and Burner"
+    }
+  ],
+  "evidence": [
+    "evidence/reviewer-021-exact.summary.json"
+  ]
+}
