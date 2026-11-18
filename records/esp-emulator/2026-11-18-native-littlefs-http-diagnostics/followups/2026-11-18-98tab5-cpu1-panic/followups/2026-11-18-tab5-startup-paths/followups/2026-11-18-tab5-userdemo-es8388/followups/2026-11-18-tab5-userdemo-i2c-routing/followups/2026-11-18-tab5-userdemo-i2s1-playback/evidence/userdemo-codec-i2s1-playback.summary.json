@@ -1,0 +1,244 @@
+{
+  "status": "PASS_USERDEMO_DASHBOARD_TOUCH_AND_I2S1_PLAYBACK_DIAGNOSTIC",
+  "validation": "virtual-device validation",
+  "device": "tab5",
+  "board": "gt911-ili9881c",
+  "device_service_source_commit": "57d397462e661e608e7c3ae2a878e80527d08e84",
+  "openapi_sha256": "28e57b04345a9bf6b5e65b1cb8e0a44d11bdb734d15a69581ebd6e60ad78cb55",
+  "native_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "runtime_assets_sha256": {
+    "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+  },
+  "original_firmware_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+  "normalized_firmware_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9",
+  "controller_routing_summary_sha256": "a9d68d7ddb10568832494ecd004d5387c012312bba073d47cb51bfc0f53c2abb",
+  "diagnostic_part": {
+    "wasm_sha256": "6949840f29fe29205264e4f1c26d4f6dcdbb8c945515ce80b4c02c69eb7ba5c7",
+    "wasm_bytes": 122387,
+    "src_lib_sha256": "fe03d9d33441a9c6e968c2088453e09e91724a7aa1fedcb618d36bb4fc76adcb",
+    "src_codecs_sha256": "60b067c9432355eed08b6c0924b747c7ec9d23b8797930e065436fb69c8a8135",
+    "scoped_parent_patch_sha256": "14ae688adfd0be7000a214cdbb70f3504bdcd0a08030b471652dc31a1c89da2e",
+    "cargo_lock_sha256": "9e2b1bb04a5b34cb3e22392f74cf725b29d541e369cdbe08e77d36839c6aeb71",
+    "rust_toolchain": "1.88.0",
+    "sdk_commit": "34ba27a6e5a3da41743fc861b462cf2452f0ca28",
+    "unit_tests_passed": 4,
+    "scope": "Independent bounded ES8388 and ES7210 control-port storage and reset behavior on the same native I2C bus claimed by the GT911 Part.",
+    "dataset_references": [
+      "https://media.digikey.com/pdf/Data%20Sheets/ITW%20Chemtronics/ES8388.pdf",
+      "https://files.waveshare.com/wiki/common/ES7210_DS.pdf"
+    ]
+  },
+  "audio": {
+    "capture": "native I2S1 TX output",
+    "rate_hz": 48000,
+    "sample_bits": 16,
+    "channels": 2,
+    "payload_location": "Separate owned native output, reconciled to the same session ZIP at stop",
+    "controls": "Both same-duration I2S1 sessions opened Music Test. Only the Play case activated the identical observed PLAY MUSIC button."
+  },
+  "runs": {
+    "dashboard_no_input": {
+      "source_report_sha256": "6e92acb1a33af2046171dc760b438fd4a55ae901018166abf09df89114d6e4bd",
+      "same_session_zip_sha256": "94818abcf90d4ee78ca9eb867a15c5d969d42615d3dc57d117437f5f06b1d752",
+      "serial_sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+      "software_resets": 0,
+      "elapsed_seconds": 35.004,
+      "native_nonblack_frames": 13,
+      "last_codec_counters": {
+        "microphone_control_reads": 45,
+        "microphone_control_writes": 82,
+        "speaker_control_reads": 31,
+        "speaker_control_writes": 75
+      },
+      "maximum_frame_colors": 6166,
+      "wav_total_bytes": 44,
+      "wav_sha256": "85759b3811ff7dc47b03792ac85317be51431a3f9e01dcafce317ed736a391b0",
+      "i2s0_nonzero_pcm_bytes": 0
+    },
+    "i2s0_capture_control": {
+      "source_report_sha256": "2a82bf9dff5256ca9c3009086d7787abaaf32a9afc20ccec1373b1122057271d",
+      "same_session_zip_sha256": "359e308e6772cee38d012499dcd841cddad2be75c7aeebd82789a3450677dd57",
+      "serial_sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+      "software_resets": 0,
+      "elapsed_seconds": 45.005,
+      "native_nonblack_frames": 17,
+      "last_codec_counters": {
+        "microphone_control_reads": 6634,
+        "microphone_control_writes": 6670,
+        "speaker_control_reads": 62,
+        "speaker_control_writes": 119
+      },
+      "maximum_frame_colors": 6166,
+      "wav_total_bytes": 44,
+      "wav_sha256": "85759b3811ff7dc47b03792ac85317be51431a3f9e01dcafce317ed736a391b0",
+      "music_test": {
+        "before_frame_sha256": "e728675655b06348954837268c77f76d50097d31e3745e717e8b49dd8ddc9508",
+        "coordinates": [
+          640,
+          417
+        ],
+        "action": "Music Test",
+        "input_accepted": true,
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        },
+        "capture_bytes_before_input": 44,
+        "play_button": {
+          "before_frame_sha256": "ea164f3539c954db2b15a2fc49a991a5611fa41ca48f218a1edbb509605cacf3",
+          "coordinates": [
+            474,
+            270
+          ],
+          "input_accepted": true,
+          "controller_reports": {
+            "reports": 7,
+            "acknowledged": 7
+          }
+        }
+      },
+      "i2s0_nonzero_pcm_bytes": 0
+    },
+    "i2s1_play_music": {
+      "source_report_sha256": "6536fe6b1e76c0bcf53ec32d2c8ba7be5c7335a92788e8e7cec37ba676d618c0",
+      "same_session_zip_sha256": "9f8b4dedb3b35f64c490b3b2bfdffb7f835a9744b88049dec9194d3d03d842fd",
+      "serial_sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+      "software_resets": 0,
+      "elapsed_seconds": 45.003,
+      "native_nonblack_frames": 17,
+      "last_codec_counters": {
+        "microphone_control_reads": 6537,
+        "microphone_control_writes": 6574,
+        "speaker_control_reads": 62,
+        "speaker_control_writes": 119
+      },
+      "maximum_frame_colors": 6166,
+      "wav_total_bytes": 4169708,
+      "wav_sha256": "7a21e194fecbdb47dbda6bbf9d39b118de120c09568355ea2ee64bfd89b556a2",
+      "music_test": {
+        "before_frame_sha256": "e728675655b06348954837268c77f76d50097d31e3745e717e8b49dd8ddc9508",
+        "coordinates": [
+          640,
+          417
+        ],
+        "action": "Music Test",
+        "input_accepted": true,
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        },
+        "capture_bytes_before_input": 920108,
+        "play_button": {
+          "before_frame_sha256": "34179d8a707451594b4aff20f13adc4505e4b52973fcc1544eafb84a516943d0",
+          "coordinates": [
+            474,
+            270
+          ],
+          "capture_bytes_before_play": 1159148,
+          "input_accepted": true,
+          "controller_reports": {
+            "reports": 7,
+            "acknowledged": 7
+          }
+        }
+      },
+      "before_play_marker": {
+        "pcm_bytes": 1159104,
+        "pcm_sha256": "be4dcfb798d8764292b17d803d2993870d09cc3ef6cdd81ec69ae584c2857cf6",
+        "nonzero_s16_samples": 91366,
+        "peak_abs_s16": 23682,
+        "rms_s16": 1027.16
+      },
+      "after_play_marker": {
+        "pcm_bytes": 3010560,
+        "pcm_sha256": "2d65ad3a1ad6a2789457fb356ee7b7ed589b807e5fcfbfa29d43d6b537c1e276",
+        "nonzero_s16_samples": 1477609,
+        "peak_abs_s16": 32205,
+        "rms_s16": 5076.69
+      },
+      "whole_pcm": {
+        "pcm_bytes": 4169664,
+        "pcm_sha256": "7d75b4f7128743f1d4bb1099eb282bc81c4624bfbd1beccec8c1647c596f1cac",
+        "nonzero_s16_samples": 1568975,
+        "peak_abs_s16": 32205,
+        "rms_s16": 4347.6
+      }
+    },
+    "i2s1_modal_idle": {
+      "source_report_sha256": "4c786bd700c480d6492678d385534c550b94ff9b3c0f12eb07a3182873badb93",
+      "same_session_zip_sha256": "e0a500624b10b1f69da3044ccc01d8de8c99ba601ddd1414e7b754057d83668b",
+      "serial_sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+      "software_resets": 0,
+      "elapsed_seconds": 45.001,
+      "native_nonblack_frames": 17,
+      "last_codec_counters": {
+        "microphone_control_reads": 7537,
+        "microphone_control_writes": 7574,
+        "speaker_control_reads": 41,
+        "speaker_control_writes": 90
+      },
+      "maximum_frame_colors": 6166,
+      "wav_total_bytes": 4524908,
+      "wav_sha256": "a7306bb8561b4c3c8a799f7c46a251458f100d91e932df7ca5fceb6cba8867d6",
+      "music_test": {
+        "before_frame_sha256": "e728675655b06348954837268c77f76d50097d31e3745e717e8b49dd8ddc9508",
+        "coordinates": [
+          640,
+          417
+        ],
+        "action": "Music Test",
+        "input_accepted": true,
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        },
+        "capture_bytes_before_input": 922028,
+        "play_button": {
+          "before_frame_sha256": "34179d8a707451594b4aff20f13adc4505e4b52973fcc1544eafb84a516943d0",
+          "coordinates": [
+            474,
+            270
+          ],
+          "capture_bytes_before_play": 1157228,
+          "input_accepted": false,
+          "control": "visible PLAY MUSIC button deliberately left idle"
+        }
+      },
+      "before_play_marker": {
+        "pcm_bytes": 1157184,
+        "pcm_sha256": "2f636edb1c19a78952e0ccdad801403441ca36da6f659205c49c0fe5117b5c19",
+        "nonzero_s16_samples": 91366,
+        "peak_abs_s16": 23682,
+        "rms_s16": 1028.02
+      },
+      "after_play_marker": {
+        "pcm_bytes": 3367680,
+        "pcm_sha256": "0084511cca03a334bc65ccf18215e7c71b3879635f98394e6fb49e0b379bb616",
+        "nonzero_s16_samples": 0,
+        "peak_abs_s16": 0,
+        "rms_s16": 0.0
+      },
+      "whole_pcm": {
+        "pcm_bytes": 4524864,
+        "pcm_sha256": "fb4e1213d3d322ac1222e47a4455d14019da424f27e1cb0a93173dc91d150a92",
+        "nonzero_s16_samples": 91366,
+        "peak_abs_s16": 23682,
+        "rms_s16": 519.87
+      }
+    }
+  },
+  "limits": [
+    "Private Part digest admission only. Released main/runtime and resident service remain unchanged by this prototype.",
+    "Digital PCM capture demonstrates guest I2S1 transmission. Analog codec/speaker behavior and physical audibility were not measured.",
+    "GT911 CarPlay/UIFlow2 regression and browser path not run under this candidate.",
+    "Audio contents and raw captures stay private."
+  ],
+  "cleanup": {
+    "unique_owned_guests_and_services_exited": true,
+    "leases": 0,
+    "control_secrets_removed": true
+  },
+  "burner": "NOT SUBMITTED"
+}
