@@ -38,7 +38,7 @@
   `bash code/run.sh <M5GFX clone>` 可重建全部输出。
 - `patches/0001-i2c-lp-fifo-error.patch`：PR head 的差分，已在 base `e88846e` 上
   `git apply --check` 通过。
-- 已发布回复：<https://github.com/m5stack/M5GFX/pull/433#issuecomment-6979932868>（1 条，
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/433#issuecomment-6981823847>（1 条，
   英文；PR 仍 OPEN，未 close、未 push 上游）
 
 ## 未覆盖项
