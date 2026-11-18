@@ -41,7 +41,7 @@
   `write_chunk_sim.cpp`、`run.sh`；`bash code/run.sh <M5GFX clone>` 可重建全部输出。
 - `patches/0001-i2c-idf6-fifo-len.patch`：PR head 的差分，已在 base `452c15b` 上
   `git apply --check` 通过。
-- 已发布回复：（发布后补充）
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/432#issuecomment-6977090203>（1 条，日文；PR 仍 OPEN，未 close、未 push 上游）
 
 ## 未覆盖项
 
