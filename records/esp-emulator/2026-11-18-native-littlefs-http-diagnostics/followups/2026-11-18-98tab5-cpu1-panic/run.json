@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "98TAB5 原版 CPU1 异常与板级对照",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "98TAB5",
+    "version": "1.3.0",
+    "original_bytes": 9182880,
+    "original_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+    "normalized_sha256": "35c636324ea1fcebd12f4752e458936c2ac151a9d171a67f1d624d944b96b0ff"
+  },
+  "execution": {
+    "environment": "isolated native Device Service with P4 and C6",
+    "runtime": "esp-emu 1.1.0",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "assertion": "两组固定相同后端与板型，采集串口和同会话证据后释放供试资源。"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "assertion": "两种 GT911 路径均复现相同 18 个软件复位与转储写入失败事件。"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "assertion": "确认 CPU1 指令访问异常发生在转储写入前。有效交接进入故障路径的原因未定位。"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "assertion": "两组均无完整原生 DSI 帧，未进行真机测试。"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/98tab5-gt-board-route-comparison.summary.json",
+      "sha256": "87f133e438ffb32239c233599032a35a751fa3ecf7a8ff44b7a499e9fab01635"
+    },
+    {
+      "path": "evidence/98tab5-panic-entry.summary.json",
+      "sha256": "b977b3473198d9e1e60347da7b8e0ed37f1f5dcfe03825e7d3f361b89cd522c2"
+    }
+  ],
+  "notes": [
+    "保留未经调试器影响的两组自然启动样本。",
+    "首次字段标签错误在两个后续执行中更正并与原始异常帧交叉核对。",
+    "未提交 Burner。"
+  ]
+}

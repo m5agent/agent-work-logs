@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "infra_baseline",
+  "title": "Linux worker 冷容器重启与隔离准入",
+  "overall_status": "PASS",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666"
+  },
+  "hardware": {
+    "device": "Cardputer ADV SDK fixture",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+    "name": "ESP-IDF local STA streams fixture"
+  },
+  "execution": {
+    "environment": "virtual-device validation / isolated Linux arm64 / Device Service 1.89.0 / Reviewer 0.21.0",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "level": "transport",
+      "name": "Same-guest local STA application data on both admitted generations",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "Durable terminal history, ZIP and finalized pcap via API",
+      "status": "PASS"
+    },
+    {
+      "level": "device_response",
+      "name": "Missing isolation capability rejected with zero new leases",
+      "status": "PASS"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "Headless fixture application frame",
+      "status": "NOT RUN"
+    },
+    {
+      "level": "review",
+      "name": "Whole dry-run final status",
+      "status": "PARTIAL"
+    },
+    {
+      "level": "data_behavior",
+      "name": "Active guest reattach and physical multi-host",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/linux-worker-idle-restart-summary.json"
+  ],
+  "notes": [
+    "Reviewer 0.21.0 固定源码 ecc8cfc3aadd5b2ae0289171784d2abac91bf855",
+    "The overall PASS covers idle worker restart and fail-closed admission."
+  ]
+}

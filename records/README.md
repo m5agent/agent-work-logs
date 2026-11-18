@@ -18,6 +18,10 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 异常与板级对照 | PARTIAL（两种 GT911 路径各复现 18 次软件复位，转储写入前定位 CPU1 指令访问异常） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/) |
+| 2026-11-18 | ESP Emulator | CardputerDict ADV 0.5.0 原版 HTTPS 数字发音 | PASS（直接 Device Service 同会话缓存和数字音频） | [查看](esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/) |
+| 2026-11-18 | ESP Emulator | Linux worker 冷容器重启与隔离准入 | PASS（两单历史和证据精确复读，隔离能力缺失拒绝） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-linux-worker-idle-restart/) |
+| 2026-11-18 | ESP Emulator | Nesso N1 原版 RFID UART1 收包与复位对照 | PARTIAL（UART1 收包区分成立，原版仍复位，标签待验） | [查看](esp-emulator/2026-11-13-community-firmware-issues/followups/2026-11-18-nesso-rfid-current-paired/followups/2026-11-18-nesso-rfid-uart1/) |
 | 2026-11-18 | ESP Emulator | ESP-EMU 1.1.0 P4 SDMMC 接入评估 | PASS（P4 读写与负控，Tab5 板级待验） | [查看](esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/) |
 | 2026-11-18 | ESP Emulator | Dial 原版在 1.88 快转复验 | PARTIAL（35 ms 18/18，5 ms 14/18） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-native-fast-retest/) |
 | 2026-11-18 | ESP Emulator | Dial 原版快转的 GPIO 和选曲时间线 | PARTIAL（5 ms 17/18，一次有序边沿到达但读回漏相位） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-correlated-gpio/) |

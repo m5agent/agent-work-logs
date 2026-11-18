@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "title": "Nesso N1 原版 RFID UART1 收包与复位对照",
+  "overall_status": "PARTIAL",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/216",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666"
+  },
+  "hardware": {
+    "device": "Nesso N1",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Meshtastic RFID Demo Landscape 2.7.21",
+    "sha256": "1ea35725b85cf66745724daaaf8005ba1dcac522b2b10005671b7f7cf2cf86c8",
+    "normalized_flash_sha256": "a5450d7c2001b5ef04b8403b8e7c0ff2530d42d7cd11d794fd740c5056afed9e"
+  },
+  "execution": {
+    "environment": "virtual-device validation / Device Service 1.89.0 / C6 native QEMU / owned UART1 fixture",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "level": "transport",
+      "name": "Four UART1 branches",
+      "status": "PASS"
+    },
+    {
+      "level": "device_response",
+      "name": "Original received documented PN532 SAM response",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "Original PN532Killer recognition with physical module",
+      "status": "NOT RUN"
+    },
+    {
+      "level": "data_behavior",
+      "name": "Original remained continuously running",
+      "status": "FAIL"
+    },
+    {
+      "level": "visual_or_physical",
+      "name": "Read a real tag",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/nesso-rfid-uart1-summary.json",
+    "code/uart1_peer.py"
+  ],
+  "notes": [
+    "Modeled envelope for the proprietary query omits undocumented data; it is not a full PN532Killer implementation."
+  ]
+}

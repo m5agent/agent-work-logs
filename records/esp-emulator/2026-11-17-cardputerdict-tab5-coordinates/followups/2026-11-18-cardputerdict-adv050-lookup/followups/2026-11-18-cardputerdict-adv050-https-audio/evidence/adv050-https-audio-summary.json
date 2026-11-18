@@ -1,0 +1,119 @@
+{
+  "status": "PASS_ORIGINAL_ADV_HTTPS_AUDIO",
+  "validation": "virtual-device validation",
+  "scope": "Original CardputerDict ADV 0.5.0 through an isolated Linux arm64 Device Service, real guest keyboard, controlled DNS/allowlist and default I2S output. Direct Device Service lane.",
+  "source": {
+    "device_service_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+    "openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "linux_image_sha256": "7094a126f069d2d8e5dc77a88b0e4ea926c4dba390f43a46e61223476e21b8b4",
+    "native_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "esp32s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "esp_emu_sha256": "0186cd4cd76e2fe80012e2c195df10bbf04be4a23ad77e6fd3e03a1da3a8a6fc",
+    "harness_sha256": "dcde8bc97f58a5868677b76df7081aec930be48c2f669e245756c3d6bb700d4b",
+    "independent_verifier_sha256": "6d7167b5a2212172b86f93b531fccad93ed74027fa22f1b8119a3efe911f10ee"
+  },
+  "firmware": {
+    "board": "cardputer-adv",
+    "version": "0.5.0",
+    "original_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "original_bytes": 2141568,
+    "normalized_flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c",
+    "exact_original_plus_erased_padding": true,
+    "sd_fixture_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "lookup_word": "hello"
+  },
+  "guest": {
+    "actions_accepted": 18,
+    "fn_w_opened_wifi_setup": true,
+    "wifi_saved_frame": true,
+    "dictionary_definition_matched": true,
+    "fn_p_pronunciation_requested": true,
+    "frames_sha256": {
+      "dictionary_ready": "314b9a8017582f146dadd5b27d9d9a45ff2c5c1153fde40d8dd94b0d7d4be3d6",
+      "wifi_setup": "14419676fa616ad4895c74cadd701a3fd3aef9119b3f97a7cd37742967298a78",
+      "wifi_saved": "b471690a1444bba8c0f8545737a32c3c7cb8600c56404443718b1d39423f76e3",
+      "definition": "81bcb686a14d36c0a2aae5498095dc67fe80faaea5c12815251a675f53f3b694",
+      "pronunciation_request": "2b39093633915b54d5c24b04806c9788d368409082c8f65d83c2ce0688cba045",
+      "terminal_frame": "b452f380a400ecfd2300d1021000c5242640ee48f4c6bbdd981f02936bf96656"
+    }
+  },
+  "network": {
+    "default_drop_namespace": true,
+    "existing_approved_endpoints_only": true,
+    "sntp_and_https_port_defaults": [
+      123,
+      443
+    ],
+    "complete_dhcp_dora": 1,
+    "controlled_dns_positive_answers": 2,
+    "paired_sntp_roundtrips": 1,
+    "tls_client_and_server_hellos": true,
+    "tls_tcp_payload_bytes": {
+      "guest_to_server": 561,
+      "server_to_guest": 15983
+    },
+    "pcap_packets": 56,
+    "pcap_sha256": "d8cf886f7b6fadcc3ab486531157060d527eef3afdac40826030bee0a614183a"
+  },
+  "audio": {
+    "mp3_cache": {
+      "size": 10605,
+      "sha256": "af59cee7bd7ca8d12fd145fcf8bfcee23c882aa3f7377fe97f06936474a77a50"
+    },
+    "live_default_service_pcm": {
+      "observation": "session-owned audio.pcm",
+      "bytes": 60928,
+      "peak_absolute_s16le": 7051,
+      "rms_s16le": 2258.773824386174,
+      "sha256": "ca3ce471e8c66b6ef96f39d0b0a7a41dd460931010166189d6f3206115beabbb"
+    },
+    "prestop_zip_pcm": {
+      "bytes": 61952,
+      "sha256": "291703826613c1f34958a7906e47e575d8d78e8cb894a0aa12f214f2d556f98b"
+    },
+    "stopped_api_pcm": {
+      "bytes": 66048,
+      "sha256": "f66c9dae705691d9396dae85719f609cb21b715e06f7e4519329f9435041406d"
+    }
+  },
+  "evidence": {
+    "prestop_zip_sha256": "b37bc019823b5850dc7a1be908b9a07dafbc4719b8b7e18e6765e5669caee9a4",
+    "serial_sha256": "57e4c5599fe592d59783be2a70088317ebff6027023be335422d0ea97021e4d4",
+    "member_digests_verified": 15,
+    "raw_pcap_matches_finalized_api": true
+  },
+  "cleanup": {
+    "active_leases": 0,
+    "guest_stopped": true,
+    "mutable_flash_released": true,
+    "namespace_removed": true,
+    "temporary_nat_removed": true,
+    "owned_service_exited": true,
+    "container_removed": true
+  },
+  "preserved_setup_attempts": [
+    {
+      "candidate": "a1",
+      "status": "NO_GUEST_NETWORK_ATTEMPT",
+      "reason": "Fn+W submitted before dictionary UI readiness. Dictionary definition and Fn+P offline prompt were visible later."
+    },
+    {
+      "candidate": "a2",
+      "status": "HARNESS_TIMEOUT",
+      "reason": "Narrow raster W misread as U, wrong key and no setup steps."
+    }
+  ],
+  "not_run": [
+    "typed Reviewer ADV workflow",
+    "public device registration or cloud pairing",
+    "physical audio or RF",
+    "browser",
+    "repeat of successful ADV application route"
+  ],
+  "burner": "NOT SUBMITTED",
+  "derived_from": {
+    "bounded_receipt_sha256": "8829a9e391f0b392584a175c0d3a2e6594faf546de8da9c4ca3ddf0c5e53eea7",
+    "bounded_receipt_bytes": 4627,
+    "scope": "Public identity, hashes and counts only. Original ZIP, addresses, packet payload, audio and private session identifiers omitted."
+  }
+}

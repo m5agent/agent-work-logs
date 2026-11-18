@@ -1,0 +1,148 @@
+{
+  "firmware": "98TAB5 1.3.0 original",
+  "source_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+  "source_sha256": {
+    "platform/tools/serve.py": "71fec02eaa4597de86d993339fb34f46f57c4aaeca299d7c5c4f67787c4a64d1",
+    "platform/tools/device_service.py": "d1c226c4bc6587d735ce9c2edf1395a99086efffd7cdf4ba4e9e3a190e30eb22",
+    "platform/tools/device_service_tab5_dsi.py": "e2147da545306c2375ef9fe7e34770bd07e9d6ae30fbcde318886b3d7a17df93",
+    "platform/tools/device_service_specs.py": "2b3557fad081d27dbe4d6ae1e8a644dfd6c8646ade70fde3e0b67e040eaa6e87",
+    "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321",
+    "docs/device-service.openapi.yaml": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1"
+  },
+  "runtime_version": "1.1.0",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+  "original_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+  "original_size": 9182880,
+  "normalized_sha256": "35c636324ea1fcebd12f4752e458936c2ac151a9d171a67f1d624d944b96b0ff",
+  "working_assets_sha256": {
+    "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+  },
+  "observation_window_seconds": 35,
+  "instrumentation": {
+    "input": 0,
+    "debugger": false,
+    "elf_uploaded": false,
+    "external_network_requested": false
+  },
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "status": "PARTIAL_RESET_REPRODUCED_IN_BOTH_GT911_ROUTES",
+  "board": "gt911-ili9881c",
+  "cases": {
+    "gt-part": {
+      "scenario": "gt-part",
+      "board": "gt911-ili9881c",
+      "part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "elapsed_seconds": 35.003,
+      "before_stop_state": "running",
+      "serial": {
+        "sha256": "be7b5c60d53e0db47c777243061fc7d42054a6b3668aae4a36e1439b64220ed7",
+        "bytes": 85370,
+        "rom_boots": 19,
+        "software_resets": 18,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 18,
+        "core_dump_write_failures": 18,
+        "loaded_application_offsets": [
+          "0x10000"
+        ],
+        "panic_markers": 0
+      },
+      "dsi": {
+        "frame_codes": {
+          "session_not_running": 1,
+          "tab5_dsi_frame_unavailable": 17
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 0
+      },
+      "part_buffer_fatals": 0,
+      "evidence_zip_sha256": "53006790da1c63aa2016b24dca7b93675278d7b607080c09842dc15d0aacb83a",
+      "manifest_file_count": 4,
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "same_session_zip_verified": true,
+      "sample_count": 18,
+      "complete_reset_cycles_matching_order": 18,
+      "observation_scope": "Same released v1.1.0 DSI transport; no debugger, guest input or guest-network request.",
+      "serial_write_error_signature": "ESP-IDF core dump write failure before every observed SW_CPU_RESET",
+      "part_route": "wasm part",
+      "touch_model": "esp-emu-gt911",
+      "both_runtime_roles_observed_and_reaped": true,
+      "firmware_unmodified": true,
+      "owned_service_exited": true
+    },
+    "gt-idle": {
+      "scenario": "gt-idle",
+      "board": "gt911-ili9881c",
+      "part_sha256": null,
+      "elapsed_seconds": 35.01,
+      "before_stop_state": "running",
+      "serial": {
+        "sha256": "3e8a11914e6bf99da2a8c139d36b2f000b7918d3f6a90966cf9eaea4d76982ce",
+        "bytes": 85624,
+        "rom_boots": 19,
+        "software_resets": 18,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 18,
+        "core_dump_write_failures": 18,
+        "loaded_application_offsets": [
+          "0x10000"
+        ],
+        "panic_markers": 0
+      },
+      "dsi": {
+        "frame_codes": {
+          "session_not_running": 1,
+          "tab5_dsi_frame_unavailable": 17
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 0
+      },
+      "part_buffer_fatals": 0,
+      "evidence_zip_sha256": "bf5f5bad40c75d22513c3b1efe4452a0a0d963c6a4d4b92065e1ead945df3e81",
+      "manifest_file_count": 4,
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "same_session_zip_verified": true,
+      "sample_count": 18,
+      "complete_reset_cycles_matching_order": 18,
+      "observation_scope": "Same released v1.1.0 DSI transport; no debugger, guest input or guest-network request.",
+      "serial_write_error_signature": "ESP-IDF core dump write failure before every observed SW_CPU_RESET",
+      "part_route": "built-in idle identification registers",
+      "touch_model": "idle-identification-registers",
+      "both_runtime_roles_observed_and_reaped": true,
+      "firmware_unmodified": true,
+      "owned_service_exited": true
+    }
+  },
+  "primary_inference": "The custom GT911 Part is not required for the same original software-reset and incomplete-display sequence.",
+  "reset_cause": "UNRESOLVED",
+  "dsi_readback_cause": "UNRESOLVED; zero-read warning absent in these two recordings only.",
+  "frame_state": "No complete native DSI frame obtained in either case. No claim about underlying framebuffer contents.",
+  "expected_startup_order": [
+    "ota0_load",
+    "dump_attempt",
+    "dump_write_failure",
+    "sw_cpu_reset"
+  ],
+  "external_network": false,
+  "browser": "NOT RUN",
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED"
+}

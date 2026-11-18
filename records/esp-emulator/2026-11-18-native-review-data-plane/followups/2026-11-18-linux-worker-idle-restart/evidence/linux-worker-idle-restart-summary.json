@@ -1,0 +1,161 @@
+{
+  "status": "PASS_SCOPED_IDLE_RESTART_AND_ADMISSION",
+  "validation": "virtual-device validation",
+  "scope": "Isolated Docker Desktop Linux arm64 worker with no outer network and no published host ports. Fresh containers share only test state, replaying the same existing local STA fixture. No guest running during restarts.",
+  "source": {
+    "device_service_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+    "reviewer_commit": "ecc8cfc3aadd5b2ae0289171784d2abac91bf855",
+    "device_service_openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "reviewer_openapi_sha256": "60e185f8936c0ae46520c034592aad682f387c321e993dcdebb6c6cfff0a7e90",
+    "linux_image_sha256": "7094a126f069d2d8e5dc77a88b0e4ea926c4dba390f43a46e61223476e21b8b4",
+    "isolated_replay_harness_sha256": "f5b525f1cee94e27c546b624e752dd62f0d2cd96e567791558ee971a9e0b311e",
+    "isolated_launch_script_sha256": "a52c62c1303913195f34cfc483323445d6459db755d304b772925357916b59c7"
+  },
+  "fixture": {
+    "board": "cardputer-adv",
+    "firmware_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+    "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "same_stable_worker_identity": true,
+  "epochs": [
+    {
+      "epoch": "initial",
+      "worker_generation": 1,
+      "namespace_capability_present": true,
+      "accepting_leases": true,
+      "prior_histories": 0,
+      "prior_matching_proofs": [],
+      "retained_terminal_sessions": 1,
+      "network_gate": "PASS",
+      "overall_review_status": "manual_review",
+      "overall_review_code": "E_NO_FRAME",
+      "fixture_serial_terminal": "STA_FIXTURE_PEERS http=1 dns_a=1 dns_nxdomain=1 udp=1",
+      "same_guest_operations": {
+        "http_post": true,
+        "tcp": true
+      },
+      "review_saved_zip_sha256": "f6b2e7065c95402c1e201d351a121341cdec96bed9a0fbc26d481c795fe6eeba",
+      "device_zip_sha256": "0eea5bcf0c37749daba489fe40bdd50f04f59ea19140393f60a434379eb45355",
+      "finalized_pcap_sha256": "ab0a83170d918f71c0547a04ff22bd7d3e26baa1640a0c2d8298156bef6d0c2d",
+      "flash_released": true,
+      "namespace_finalized": true,
+      "review_network_outer_status": "PARTIAL",
+      "native_sta_operation": "PASS",
+      "native_sta_phase": "complete",
+      "independent_zip_crc_ok": true,
+      "private_result_sha256": "b33ae4b4934090f6553310fe97c1aad636721e21ead5f1c40480a9b443bcba20",
+      "private_result_bytes": 5012,
+      "fixture_application_data": [
+        {
+          "guest_correct_bytes": true,
+          "terminal_marker": "STA_FIXTURE_HTTP_POST matched=1",
+          "request_sha256": "89f0b43f502fa31533366b8e14ca6bdc67856155c8295179d3d616ba4f47dd48",
+          "response_sha256": "a74ed2dcec72dc97c18899e901d66bb790d5507bc41ebc15c548784a2c8e0c19"
+        },
+        {
+          "guest_correct_bytes": true,
+          "terminal_marker": "STA_FIXTURE_TCP matched=1",
+          "request_sha256": "62b3604b1e6572a8fff8c3ff6afebb8ba252b60cd8863d7b2272688ea84d1e55",
+          "response_sha256": "422fbefe3c53a1bc6b7fcd2cc0beaee310a369f5d95dfaa6772507ee7a8efdaf"
+        }
+      ]
+    },
+    {
+      "epoch": "restored",
+      "worker_generation": 2,
+      "namespace_capability_present": true,
+      "accepting_leases": true,
+      "prior_histories": 1,
+      "prior_matching_proofs": [
+        {
+          "review_detail_exact": true,
+          "review_zip_exact": true,
+          "device_pcap_exact": true,
+          "guest_stopped": true,
+          "flash_released": true
+        }
+      ],
+      "retained_terminal_sessions": 2,
+      "network_gate": "PASS",
+      "overall_review_status": "manual_review",
+      "overall_review_code": "E_NO_FRAME",
+      "fixture_serial_terminal": "STA_FIXTURE_PEERS http=1 dns_a=1 dns_nxdomain=1 udp=1",
+      "same_guest_operations": {
+        "http_post": true,
+        "tcp": true
+      },
+      "review_saved_zip_sha256": "3d22784149c56037f1006308a62edaba2674f9eb10773a5d821a7db4a83e2b16",
+      "device_zip_sha256": "f03533b63b5b9342769a97c2af9f85eb300dc9f24d31cccdbfaf20e76fb753d0",
+      "finalized_pcap_sha256": "82f5868a25f08878e0cd6ff70a6567a022d73ec7d92e1b83c0147a58f0c8b0c1",
+      "flash_released": true,
+      "namespace_finalized": true,
+      "review_network_outer_status": "PARTIAL",
+      "native_sta_operation": "PASS",
+      "native_sta_phase": "complete",
+      "independent_zip_crc_ok": true,
+      "private_result_sha256": "548b0d7fb80096287830b137d5cf4c39f699f259d8e26d0afbbbda82afaa0183",
+      "private_result_bytes": 5186,
+      "fixture_application_data": [
+        {
+          "guest_correct_bytes": true,
+          "terminal_marker": "STA_FIXTURE_HTTP_POST matched=1",
+          "request_sha256": "89f0b43f502fa31533366b8e14ca6bdc67856155c8295179d3d616ba4f47dd48",
+          "response_sha256": "a74ed2dcec72dc97c18899e901d66bb790d5507bc41ebc15c548784a2c8e0c19"
+        },
+        {
+          "guest_correct_bytes": true,
+          "terminal_marker": "STA_FIXTURE_TCP matched=1",
+          "request_sha256": "62b3604b1e6572a8fff8c3ff6afebb8ba252b60cd8863d7b2272688ea84d1e55",
+          "response_sha256": "422fbefe3c53a1bc6b7fcd2cc0beaee310a369f5d95dfaa6772507ee7a8efdaf"
+        }
+      ]
+    },
+    {
+      "epoch": "capability-denied",
+      "worker_generation": 3,
+      "namespace_capability_present": false,
+      "accepting_leases": true,
+      "prior_histories": 2,
+      "prior_matching_proofs": [
+        {
+          "review_detail_exact": true,
+          "review_zip_exact": true,
+          "device_pcap_exact": true,
+          "guest_stopped": true,
+          "flash_released": true
+        },
+        {
+          "review_detail_exact": true,
+          "review_zip_exact": true,
+          "device_pcap_exact": true,
+          "guest_stopped": true,
+          "flash_released": true
+        }
+      ],
+      "retained_terminal_sessions": 2,
+      "admission_rejection": {
+        "status": 503,
+        "service_code": "network_isolation_unavailable",
+        "leases_allocated": 0
+      },
+      "private_result_sha256": "4f17ca2f6a4d2573554ac761295baa656fa226ebb346784f52114204d6a9c32f",
+      "private_result_bytes": 541
+    }
+  ],
+  "outer_network": "none",
+  "owned_test_containers_removed": true,
+  "live_service_or_cross_host_worker": "NOT RUN",
+  "active_guest_reattach": "NOT RUN",
+  "burner": "NOT SUBMITTED",
+  "earlier_harness_run": {
+    "network_gate": "PASS",
+    "verified_initial_history_before_second_allocation": true,
+    "outcome": "Harness reused the job version key, so the store returned the existing job and the scratch seeder refused to overwrite its existing directory. The finished second cohort uses distinct test job keys."
+  },
+  "derived_from": {
+    "private_bounded_receipt_sha256": "9d36c84877579eeb6ffca9bb879ce15cc9595ce66b90c5488e2f1ffb16710294",
+    "private_bounded_receipt_bytes": 4724,
+    "scope": "Scope, hashes and outcome flags only. No worker identifiers, container locators, service topology, addresses, raw packet capture or logs."
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "source_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+  "runtime_version": "1.1.0",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+  "original_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+  "original_size": 9182880,
+  "normalized_sha256": "35c636324ea1fcebd12f4752e458936c2ac151a9d171a67f1d624d944b96b0ff",
+  "working_assets_sha256": {
+    "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+  },
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "status": "FAULT_OBSERVED_ROOT_CAUSE_UNRESOLVED",
+  "firmware": "98TAB5 1.3.0 original",
+  "board": "gt911-ili9881c with built-in idle I2C identification",
+  "methodology": "Owned isolated native Device Service and released 1.1.0. GDB hardware breakpoints and reads only. No guest writes, symbolic ELF, DSI spoof or injected user input.",
+  "uninstrumented_comparison_sha256": "87f133e438ffb32239c233599032a35a751fa3ecf7a8ff44b7a499e9fab01635",
+  "observations": {
+    "run-dump-entry-a1": {
+      "debugger": {
+        "version": "GNU gdb (GDB) 18.1",
+        "deadline_seconds": 12,
+        "elapsed_seconds": 2.511,
+        "hard_break_address": "0x400091fe",
+        "transcript_sha256": "b0df5f4bb8e467a8b0469d4525c0b07c0e588411716c31e92e90f19f0b429218",
+        "transcript_bytes": 1617,
+        "detach_reported": true
+      },
+      "observed_panic_information": {
+        "core": 1,
+        "exception_class": 4,
+        "fault_address": "0x0",
+        "reason": "Instruction access fault",
+        "description": "Exception was unhandled."
+      },
+      "saved_rv32_exception_frame": {
+        "mepc": "0x0",
+        "ra": "0x4fc02752",
+        "mstatus": "0x1881",
+        "mtvec": "0x4ff00003",
+        "mcause": "0x1",
+        "mtval": "0x0",
+        "mhartid": null
+      },
+      "core_dump_caller_return_address": "0x400015ce",
+      "resets_before_gdb_start": 3,
+      "software_resets_total": 18,
+      "after_detach_resets_recurred": true,
+      "elapsed_seconds": 35.0,
+      "same_serial_as_uninstrumented_gt_idle": true,
+      "serial_sha256": "3e8a11914e6bf99da2a8c139d36b2f000b7918d3f6a90966cf9eaea4d76982ce",
+      "evidence_zip_sha256": "5f6139af90580676678d88864e00883947d42641933920b6d460348e3a3523fb",
+      "same_session_zip_crc_and_manifest_verified": true,
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "observer_limit": "The convenience field labels used adjacent wrong offsets. Saved fields here were decoded independently from the raw frame. Raw capture covered 36 words and did not include mhartid."
+    },
+    "run-dump-entry-a2": {
+      "debugger": {
+        "version": "GNU gdb (GDB) 18.1",
+        "deadline_seconds": 12,
+        "elapsed_seconds": 2.452,
+        "hard_break_address": "0x400091fe",
+        "transcript_sha256": "011196e24a43ef15635fc60f47eb97caef2e2a4155b10b284950e94af1e8d663",
+        "transcript_bytes": 1653,
+        "detach_reported": true
+      },
+      "observed_panic_information": {
+        "core": 1,
+        "exception_class": 4,
+        "fault_address": "0x0",
+        "reason": "Instruction access fault",
+        "description": "Exception was unhandled."
+      },
+      "saved_rv32_exception_frame": {
+        "mepc": "0x0",
+        "ra": "0x4fc02752",
+        "mstatus": "0x1881",
+        "mtvec": "0x4ff00003",
+        "mcause": "0x1",
+        "mtval": "0x0",
+        "mhartid": 1
+      },
+      "core_dump_caller_return_address": "0x400015ce",
+      "resets_before_gdb_start": 3,
+      "software_resets_total": 18,
+      "after_detach_resets_recurred": true,
+      "elapsed_seconds": 35.0,
+      "same_serial_as_uninstrumented_gt_idle": true,
+      "serial_sha256": "3e8a11914e6bf99da2a8c139d36b2f000b7918d3f6a90966cf9eaea4d76982ce",
+      "evidence_zip_sha256": "2b6875f21b2643d822b9a46610fcf0304a7d687f9e122736eb4e003a809270d2",
+      "same_session_zip_crc_and_manifest_verified": true,
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      }
+    },
+    "run-handoff-a3": {
+      "debugger": {
+        "version": "GNU gdb (GDB) 18.1",
+        "deadline_seconds": 12,
+        "elapsed_seconds": 2.473,
+        "hard_break_address": "0x400091fe",
+        "transcript_sha256": "c59c77a2f4b17101a4928cffea90ffb11fcdc6f33750b0a1df364bdbe768abcd",
+        "transcript_bytes": 2111,
+        "detach_reported": true
+      },
+      "observed_panic_information": {
+        "core": 1,
+        "exception_class": 4,
+        "fault_address": "0x0",
+        "reason": "Instruction access fault",
+        "description": "Exception was unhandled."
+      },
+      "saved_rv32_exception_frame": {
+        "mepc": "0x0",
+        "ra": "0x4fc02752",
+        "mstatus": "0x1881",
+        "mtvec": "0x4ff00003",
+        "mcause": "0x1",
+        "mtval": "0x0",
+        "mhartid": 1
+      },
+      "core_dump_caller_return_address": "0x400015ce",
+      "resets_before_gdb_start": 3,
+      "software_resets_total": 18,
+      "after_detach_resets_recurred": true,
+      "elapsed_seconds": 35.005,
+      "same_serial_as_uninstrumented_gt_idle": true,
+      "serial_sha256": "3e8a11914e6bf99da2a8c139d36b2f000b7918d3f6a90966cf9eaea4d76982ce",
+      "evidence_zip_sha256": "38f6bca1bbc7d3924e9e8b7b3fe142448292b21d102ecde54a935dd75e80d292",
+      "same_session_zip_crc_and_manifest_verified": true,
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "same_boot_handoff": {
+        "rom_pc": "0x4fc02750",
+        "actual_a0": "0x4ff00330",
+        "application_entry_first_16_bytes_sha256": "7dc43f0ce6d9ce434a2c1faf168cb95784e95a168a1aebc84e1ffbaa0d8f0738",
+        "live_readable_instruction_matches_original": true
+      }
+    }
+  },
+  "same_image_control_flow": {
+    "panic_handler_call_site": "0x400015ca",
+    "core_dump_write_entry": "0x400091fe",
+    "dump_log_call_site": "0x40009210",
+    "dump_log_helper_entry": "0x400093f2",
+    "dump_log_drom_string": "0x40131674",
+    "rom_secondary_hart_handoff_instruction": "0x4fc02750 c.jalr a0",
+    "rom_secondary_hart_return_address": "0x4fc02752",
+    "vendor_context_links": [
+      "https://github.com/espressif/esp-idf/blob/v5.5/components/esp_system/panic.c#L378-L386",
+      "https://github.com/espressif/esp-idf/blob/v5.5/components/espcoredump/src/core_dump_common.c#L304-L312",
+      "https://github.com/espressif/esp-idf/blob/v5.5/components/riscv/include/riscv/rvruntime-frames.h#L44-L82"
+    ]
+  },
+  "core_dump_destination": {
+    "label": "coredump",
+    "start": "0xff0000",
+    "length": 65536,
+    "message_reported_calculated_crc": "0x7bd5c66f",
+    "message_reported_saved_crc": "0x0",
+    "zero_12_byte_config_crc": "0x7bd5c66f",
+    "scope": "Original partition exists. CRC messages report failed initialization of the dump writer after the panic. A matching all-zero CRC cannot establish the actual live config memory."
+  },
+  "attribution": "CPU1 encountered an instruction access fault at PC zero before writing the core dump. A3 observed a concrete nonzero ROM handoff target then the same panic in one guest. The intervening path to PC zero and the individual contribution of firmware and emulator remain unresolved.",
+  "browser": "NOT RUN",
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED"
+}
