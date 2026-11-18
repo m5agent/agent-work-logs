@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "validation",
+  "date": "2026-11-19",
+  "overall_status": "PASS",
+  "title": "Device Service 1.99.3 and Reviewer 0.29.1 resident readback",
+  "source": {
+    "device": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "reviewer": "3a45e3dd59c2163e0ffd8f948a484a8213b6b82b",
+    "device_tested_isolated_source": "86aa77a9e8eb7df4e582614cb3d4b48028645e11"
+  },
+  "hardware": {
+    "environment": "macOS native resident roles",
+    "validation_class": "service readback"
+  },
+  "firmware": {
+    "production_firmware_guest": "NOT RUN",
+    "isolated_original_firmware_validation": "linked independently"
+  },
+  "execution": {
+    "status": "LIVE_VERIFIED",
+    "linux_resident_route_changed": false,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "both_device_roles_live_with_exact_1993_schema",
+      "status": "PASS",
+      "details": {
+        "review_device": {
+          "catalog": 36,
+          "creatable": 33,
+          "openapi_http": 200,
+          "retained_history": 98
+        },
+        "workbench": {
+          "catalog": 36,
+          "creatable": 33,
+          "openapi_http": 200,
+          "retained_history": 55
+        }
+      }
+    },
+    {
+      "name": "reviewer_ready_and_sampled_history_evidence_retained",
+      "status": "PASS",
+      "details": {
+        "app_sha256": "254c655e70d29aee13158e9504d8224e56071b87d912b2b907bc22fa8f11443d",
+        "backend": "darwin",
+        "history_stats_and_sampled_zip_match": true,
+        "interpreter": "Python 3.9.6",
+        "only_reviewer_runtime_file_installed": "app.py",
+        "openapi_contract_sha256": "d20d0934ad027575c1b8b4a3dee52b8a88020982a9da929d5df659df099cd7b0",
+        "previous_source": "69386c6a162a1c786d6745c46eaa330c14558d3c",
+        "ready": true,
+        "ready_http": 200,
+        "retained_jobs": 130,
+        "rollback_used": false,
+        "source": "3a45e3dd59c2163e0ffd8f948a484a8213b6b82b",
+        "version": "0.29.1"
+      }
+    },
+    {
+      "name": "unchanged_runtime_payloads",
+      "status": "PASS",
+      "details": {
+        "binary_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e"
+      }
+    },
+    {
+      "name": "tab5_usb_host",
+      "status": "PARTIAL",
+      "details": "USB endpoint fixture absent"
+    },
+    {
+      "name": "published_production_firmware_or_physical_guest",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/atoms3-typed-resident.summary.json",
+      "kind": "Redacted device and reviewer resident migration receipts"
+    }
+  ]
+}
