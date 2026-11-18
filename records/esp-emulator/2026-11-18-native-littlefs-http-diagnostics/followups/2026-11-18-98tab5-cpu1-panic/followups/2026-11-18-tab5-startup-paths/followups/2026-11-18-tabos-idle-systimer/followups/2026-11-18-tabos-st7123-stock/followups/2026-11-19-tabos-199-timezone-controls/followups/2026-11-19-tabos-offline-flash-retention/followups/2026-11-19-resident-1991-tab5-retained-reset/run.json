@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "service_release",
+  "overall_status": "PASS",
+  "title": "Device Service 1.99.1 macOS resident readback",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "9837c3f84df4383eb74881a1f44fcd3f460daefa",
+    "candidate_commit": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "qualified_functional_commit": "76e734f5cf061bc7985a1bf6146f2cb5de223023"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS native resident Device Service and Reviewer",
+    "roles": [
+      "workbench",
+      "review-device"
+    ],
+    "active_device_api": "1.99.1",
+    "reviewer_api": "0.28.0",
+    "same_firmware_path": "See parent original M5TabOS virtual-device validation",
+    "production_guest": "NOT RUN",
+    "submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "frozen_release_and_source_scope",
+      "status": "PASS",
+      "details": "Exact manifest and docs-only successor of original firmware validated product"
+    },
+    {
+      "name": "both_resident_roles_served_openapi",
+      "status": "PASS",
+      "details": "Both roles HTTP 200, exact version 1.99.1 bytes"
+    },
+    {
+      "name": "device_sessions_and_reviewer_jobs",
+      "status": "PASS",
+      "details": "153 Device Session histories and 130 Reviewer jobs preserved; sampled evidence ZIPs byte-equal"
+    },
+    {
+      "name": "reviewer_readiness_and_runtime",
+      "status": "PASS",
+      "details": "Darwin backend ready; Reviewer 0.28.0 installed runtime and configuration preserved"
+    },
+    {
+      "name": "tab5_usb_host",
+      "status": "PARTIAL",
+      "details": "No USB endpoint fixture advertised"
+    },
+    {
+      "name": "production_guest_linux_routing_hardware_and_pages",
+      "status": "NOT RUN",
+      "details": "macOS resident service cutover and isolated same-product virtual-device validation only"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/resident-1991-readback-summary.json",
+      "kind": "redacted role and release verification receipts"
+    }
+  ]
+}
