@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "firmware_validation",
+  "overall_status": "PASS",
+  "title": "M5TabOS 0.9.1 原版在原生 ST7123 上的启动显示与触摸",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "57d397462e661e608e7c3ae2a878e80527d08e84"
+  },
+  "hardware": {
+    "physical": false,
+    "virtual_device": "tab5"
+  },
+  "firmware": {
+    "name": "M5TabOS",
+    "version": "0.9.1",
+    "original_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime": "esp-emu 1.1.0",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "device_service_api": "1.90.0",
+    "completed_guest_sessions": 7,
+    "preboot_negative_admission": 1
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "assertion": "原版应用在两种配置均完成内置启动记录，周期性调度仍推进。"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "assertion": "完整 ST7123 部件通过 GPIO23 与 I²C 完成指定按下和抬起回读。"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "assertion": "ST7123 识别部件和完整部件均出帧，指定单击由欢迎页进入时区页。"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "FAIL",
+      "assertion": "原版在 GT911 静态识别和完整部件配置下持续无完整画面。"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "assertion": "未执行真实硬件、浏览器、外网账号操作或 USB 设备枚举。"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tabos-stock-board-touch.summary.json",
+      "sha256": "f21f8f743a93a3e6b32ac0a1d7ac3f0bd971443fd4f94d8715d977045eb8d35c"
+    }
+  ]
+}
