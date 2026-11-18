@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "firmware_validation",
+  "overall_status": "PASS",
+  "title": "Tab5 双核 PMU 暂停与 WFI 对照",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "57d397462e661e608e7c3ae2a878e80527d08e84",
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d"
+  },
+  "hardware": {
+    "physical": false,
+    "virtual_device": "tab5"
+  },
+  "firmware": {
+    "busy_merged_sha256": "70412eb3fa5dd1cfa3387c07e6d2628835e94b72b45ac6ba5388235e92a2d7d7",
+    "wfi_merged_sha256": "4515b3b9a7f2da3e7fdeaff765bb92ada5d29be63e35e6ab180d26168464e584"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service_api": "1.90.0",
+    "backend": "esp-emu 1.1.0",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "busy_sessions": 1,
+    "wfi_cold_sessions": 2
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "assertion": "忙循环暂停时心跳停止并回读 bit 1，解除后继续运行。"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "assertion": "WFI 暂停时 bit 1 保持低，中断及心跳无进展，解除后待处理中断得到处理。"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "assertion": "未重跑原版 UserDemo，未执行真机或其他芯片修订。"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/busy-vs-wfi.summary.json",
+      "sha256": "fbdb544e1a6a80b0fc0b3cfc44ae5c9e8e70382b0cefdee022920b2ca3a50a87"
+    }
+  ]
+}

@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 双核 PMU 暂停与 WFI 对照 | PASS（两种状态暂停恢复，UserDemo 归因保持开放） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-pmu-wfi-control/) |
 | 2026-11-18 | ESP Emulator | Tab5 原生 SDMMC 与 Device Service 复位导出 | PASS（固定 SDK 会话写读、原卡复位保留、导出重用及准入对照） | [查看](records/esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/followups/2026-11-18-tab5-sdmmc-device-service/) |
 | 2026-11-18 | ESP Emulator | Tab5 三份原版启动路径复验 | PARTIAL（98TAB5 取帧诊断、M5TabOS WFI、官方 UserDemo 双核等待） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/) |
 | 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 启动跳转 | PARTIAL（两轮实际读到零并跳到零，DROM 读零原因待查） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-98tab5-startup-dispatch/) |

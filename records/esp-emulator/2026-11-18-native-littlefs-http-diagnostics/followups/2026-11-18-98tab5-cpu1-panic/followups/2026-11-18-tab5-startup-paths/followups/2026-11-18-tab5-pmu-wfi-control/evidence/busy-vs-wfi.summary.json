@@ -1,0 +1,57 @@
+{
+  "status": "PASS_WFI_FIXTURE_ONLY",
+  "validation": "virtual-device validation",
+  "device": "tab5",
+  "source_commit": "57d397462e661e608e7c3ae2a878e80527d08e84",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "openapi_sha256": "28e57b04345a9bf6b5e65b1cb8e0a44d11bdb734d15a69581ebd6e60ad78cb55",
+  "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+  "efuse_sha256": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+  "c6_firmware_sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+  "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+  "wfi_fixture_source_sha256": "c52140588e72db7bd39f6b1f2d2196e6dfa8324ea4109993fd3ad676b8d8c9c2",
+  "wfi_merged_firmware_sha256": "4515b3b9a7f2da3e7fdeaff765bb92ada5d29be63e35e6ab180d26168464e584",
+  "wfi_instruction": {
+    "address": "0x4000ba06",
+    "encoding": "0x10500073"
+  },
+  "runs_with_same_markers": [
+    {
+      "summary_sha256": "0cec4f80fadce44435d38517565ffae0f4f39355f6e54cdf5f4416fddf6f3c25",
+      "evidence_zip_sha256": "933b17d9456c390aa3bf0a4a07192c7f60b325e2de0be74e19befea024a6d559"
+    },
+    {
+      "summary_sha256": "d33e656a7f96f493f6825a78642dfae2f198583723f94d7cf912c64c7de428ed",
+      "evidence_zip_sha256": "2f1da8d5729ea2e8ae545df9d25e62ee8dd1591fa1b2de8eae41f0147e28419f"
+    }
+  ],
+  "serial_sha256": "5c3a5fc8d9117c9bee57476c332188e04846d9c253b51350627dde8e6c0ce260",
+  "markers": [
+    "TAB5_STALL_WFI_CONTROL idle_us=1051 returns_before_irq=0 irq_before=0 irq_after=1 return_after=1 second_ready=1",
+    "TAB5_STALL_WFI_HELD pmu=0x860000 prior_ack=0 initial_ack=0 no_irq_ack=0 pending_irq_ack=0 elapsed_us=2500 pre_stall_returns=1 before_irq_returns=1 held_returns=1 held_irqs=1 held_heartbeat=0",
+    "TAB5_STALL_WFI_RELEASED pmu=0xff0000 ack=0 irq_count=2 wfi_returns=2 heartbeat=4000",
+    "TAB5_STALL_PASS"
+  ],
+  "busy_control": {
+    "summary_sha256": "a80ff4d73f4bb09bb88fae8f6bbaf6a7a8d7aec068ded7d79f34052ff7112092",
+    "merged_firmware_sha256": "70412eb3fa5dd1cfa3387c07e6d2628835e94b72b45ac6ba5388235e92a2d7d7",
+    "markers": [
+      "TAB5_STALL_BEFORE progressed=1 pmu=0xff0000 status=0",
+      "TAB5_STALL_HELD pmu=0x860000 ack_initial=0 ack_after=0x2 heartbeat_delta=0",
+      "TAB5_STALL_RELEASED ack=0 heartbeat_delta=51432",
+      "TAB5_STALL_PASS"
+    ]
+  },
+  "interpretation": {
+    "before_stall": "CPU1's explicitly routed interrupt is its sole enabled IRQ. An unstalled WFI round yielded no spontaneous returns and exactly one return after one guest-issued interrupt.",
+    "during_stall": "CPU0 asserted PMU stall code 0x86 and held around 2500 virtual microseconds. The core-stalled status stayed low across the second WFI, including after a new wake interrupt was issued, and CPU1 accumulated neither a return nor a heartbeat.",
+    "release": "CPU0 unstall code 0xff delivered the pending interrupt and CPU1 returned from WFI and produced 4000 late heartbeats.",
+    "limit": "The busy CPU1 positive and WFI observation use different synthetic applications. A low status bit1 by itself cannot distinguish an effectively stalled WFI core from a failed stall or establish a cause for UserDemo. UserDemo, physical hardware and ECO variants were not run."
+  },
+  "cleanup": {
+    "token_files_absent": true,
+    "owned_service_and_guest_processes_exited": true,
+    "active_leases": 0
+  },
+  "burner": "NOT SUBMITTED"
+}
