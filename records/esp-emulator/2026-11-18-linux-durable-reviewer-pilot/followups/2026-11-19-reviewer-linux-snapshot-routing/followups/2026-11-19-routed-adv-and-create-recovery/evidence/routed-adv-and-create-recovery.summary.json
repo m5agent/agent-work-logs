@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "status": "PASS_WITH_PRESERVED_INTERRUPTED_REVIEW",
+  "scope": "One hosted Linux generation, routed original ADV application and owned Reviewer lost-create-response restart recovery",
+  "sources": {
+    "reviewer_revision": "b9426a2d8a88338d95346ed9b93b0eaf0893cb9a",
+    "reviewer_api": "0.30.0",
+    "reviewer_interpreter": "Python 3.9.6",
+    "reviewer_app_sha256": "3d4ddb6a78c90f83c0cbd110effc5dfa4c3b743871240800584ed0db6d3b9c17",
+    "reviewer_openapi_sha256": "5d062ee41dc45cfe346fd9aeadbf4a93f5e687549e2ce8284344571daaa2fc78",
+    "device_service_revision": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "device_api": "1.99.3",
+    "device_openapi_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "darwin_runtime_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e"
+  },
+  "routed_adv": {
+    "terminal": {
+      "error_code": null,
+      "lane": "SIM_VERIFIED",
+      "status": "done"
+    },
+    "actual_running_session_and_origin": true,
+    "application": {
+      "foreground_capture": {
+        "elapsed_seconds": 60.045247333,
+        "evidence_file": "observation.json",
+        "frame_scope": "framebuffer",
+        "frame_unavailable_reason": null,
+        "required_seconds": 60,
+        "sample_count": 13,
+        "status": "PASS"
+      },
+      "host_linux_wire": {
+        "guest_journal_append_sha256": "fd01e3050c64dbe5073dbfbfe9373806adced5c505ff22869a1525351b3ed1ef",
+        "host_journal_append_sha256": "7ff3a13506ddbf6edd698c80b2edad868b56ed3ac7e40948651a5bde5cbacc52",
+        "matched_transactions": {
+          "sntp": {
+            "reply_bytes": 48,
+            "reply_sha256": "750b485656d63b4dbcb7b7f79ff6eff57325d89879b5c5f39870beb0e16f69ac",
+            "request_bytes": 48,
+            "request_sha256": "4514195b25408d36634059087171a361438bfca93159d53765b3dec17de5814b"
+          },
+          "voice": {
+            "wire_bytes": {
+              "client": 561,
+              "server": 16179
+            },
+            "wire_sha256": {
+              "client": "09cc39d8316073325226a99882c8fb0c3a9b203700aead1308ceb1f09fdeb363",
+              "server": "032705c3d22aacafe1f17b3233286ed8e11ef67e146bac9c9757d31626324fc4"
+            }
+          }
+        }
+      },
+      "pcm": {
+        "bytes": 84992,
+        "sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+        "three_way_byte_equality": true
+      },
+      "qemu_pcap": {
+        "https_attempted": true,
+        "https_reply": true,
+        "sha256": "5735934bafa60d4c335961e58a12d806d0a5d368124a60aebd350b1a28ca4bb8",
+        "sntp_matched": true,
+        "tls_exchange": true
+      },
+      "real_input_steps": 18,
+      "reviewer_full_zip": {
+        "sha256": "dce2dbdc4c2d4c118dc925ab5cc1c82a419fe24bc9ff5fac26c1363e07bf96bf",
+        "verified_members": 16
+      },
+      "reviewer_typed_zip": {
+        "sha256": "0adfa753d17cb631c3acfb305a9df62e44125077f5ccc1acc0dc461951083da6",
+        "verified_members": 8
+      },
+      "sd": {
+        "cache_bytes": 10605,
+        "cache_sha256": "af59cee7bd7ca8d12fd145fcf8bfcee23c882aa3f7377fe97f06936474a77a50",
+        "seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62"
+      },
+      "source": {
+        "app_regions": [
+          {
+            "bytes": 6291456,
+            "offset": 65536,
+            "sha256": "797b23fc7a228ec9e8763c1d361760ad63df299e46f5afa6013718d0c2e24a6a"
+          }
+        ],
+        "normalized_flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c",
+        "original_bytes": 2141568,
+        "original_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14"
+      },
+      "stopped_device_zip": {
+        "sha256": "ad596427d8d793e3a5310f2402fc3efd328cc3599ab0528f32972a8f719272ef",
+        "verified_members": 11
+      }
+    },
+    "readiness_enabled": {
+      "linux_http": 200,
+      "linux_reason": null,
+      "primary_http": 200,
+      "primary_platform": "darwin"
+    },
+    "readiness_disabled": {
+      "linux_http": 503,
+      "linux_reason": "admission_disabled",
+      "primary_http": 200,
+      "primary_platform": "darwin"
+    },
+    "same_db_restart": {
+      "events": 21,
+      "evidence_exact": true,
+      "jobs": 1,
+      "pending_intents": 0
+    },
+    "cleanup": {
+      "creation_journal_cleared": true,
+      "flash_released": true,
+      "history_retained": true,
+      "zero_leases": true,
+      "zero_primary_sessions": true
+    },
+    "owned_processes_exited": true
+  },
+  "core2_lost_create_response": {
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "boot_flash_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "vendor_boot_sha256": "bfaa9203100a802de6a762217debc3cce269844e2caca7730155cd9bc02bf2d7",
+    "fault": {
+      "active_leases": 1,
+      "process_signal": "SIGKILL",
+      "real_upstream_create_http": 202,
+      "reply_bytes_delivered": 0,
+      "reviewer_retry_http": 202,
+      "scope": "only owned Reviewer exited; actual native guest remained active",
+      "unbound_row_durable": true,
+      "matches_worker_and_original": true,
+      "journal_request_sha256": "895207a010c674925171b81955ddb6c02ef9327094729c0da63d58e04733e6bf",
+      "upstream_create_response_sha256": "95fa499f136613caed8dfa29c7d2f4576e4d2aeba2a7794f63d0fafbe43c184b"
+    },
+    "before_recovery_zip": {
+      "frame_sha256": "f0542885d5e96a7ebc13814538c2106b2c70b89fdd070fd787e6c93d9307d020",
+      "members_verified": 8,
+      "readable_2048_board": true,
+      "retained_working_flash_member": true,
+      "serial_sha256": "353121f7108a20d9818c1e92d2fb9aa2a213d9bf07927bd56d8827fcd1cb3d7c",
+      "sha256": "3cb138a82bc9e95a1fc46e4ea333ac6b175cc717ead178876146c7dd677cbea9"
+    },
+    "after_recovery_zip": {
+      "frame_sha256": "f0542885d5e96a7ebc13814538c2106b2c70b89fdd070fd787e6c93d9307d020",
+      "members_verified": 7,
+      "readable_2048_board": true,
+      "retained_working_flash_member": false,
+      "serial_sha256": "353121f7108a20d9818c1e92d2fb9aa2a213d9bf07927bd56d8827fcd1cb3d7c",
+      "sha256": "1d47f8395a564998d435aace021758f53bcf2a3700dc86d4d6e5ff7af76f0db0"
+    },
+    "recovery": {
+      "active_leases": 0,
+      "durable_rows_after": 0,
+      "frame_bytes_identical_in_both_archives": true,
+      "job_terminal": {
+        "error_code": "E_SERVICE_RESTART",
+        "lane": "SIM_PARTIAL",
+        "source_mode": "saved_snapshot",
+        "status": "service_error"
+      },
+      "managed_admission_http": 503,
+      "managed_admission_reason": "admission_disabled",
+      "old_history_unchanged": true,
+      "primary_sentinel_requests": 0,
+      "product_recovery_event": "complete/released",
+      "product_routes": {
+        "session/detail HTTP 200": 1,
+        "session/stop HTTP 200": 1,
+        "sessions/reconcile-create HTTP 200": 1,
+        "worker HTTP 200": 2
+      },
+      "same_2048_board_and_serial_in_both_archives": true,
+      "same_linux_generation": true,
+      "same_managed_origin_and_pinned_worker": true,
+      "same_sqlite_inode": true,
+      "working_flash_released": true
+    },
+    "same_native_session_resolved": {
+      "same_session": true,
+      "same_worker": true,
+      "state": "bound"
+    },
+    "normal_retry": "NOT RUN",
+    "owned_reviewer_exited": true,
+    "fault_and_sentinel_listeners_closed": true
+  },
+  "independent_readback": {
+    "routed_adv": {
+      "status": "PASS",
+      "source_summary_sha256": "81c0d0f9891564c6db1a01c996e6b08e16b154bae44700676d9697236068b628",
+      "raw_archives": [
+        {
+          "role": "reviewer_full_zip",
+          "state": "running",
+          "members": 16,
+          "sha256": "dce2dbdc4c2d4c118dc925ab5cc1c82a419fe24bc9ff5fac26c1363e07bf96bf"
+        },
+        {
+          "role": "reviewer_typed_zip",
+          "state": "stopped",
+          "members": 8,
+          "sha256": "0adfa753d17cb631c3acfb305a9df62e44125077f5ccc1acc0dc461951083da6"
+        },
+        {
+          "role": "device_stopped_zip",
+          "state": "stopped",
+          "members": 11,
+          "sha256": "ad596427d8d793e3a5310f2402fc3efd328cc3599ab0528f32972a8f719272ef"
+        }
+      ],
+      "payloads_crc_size_sha256_verified": 35,
+      "same_session_across_all_archives": true,
+      "all_application_partitions_unchanged": [
+        {
+          "offset": 65536,
+          "bytes": 6291456,
+          "sha256": "797b23fc7a228ec9e8763c1d361760ad63df299e46f5afa6013718d0c2e24a6a"
+        }
+      ],
+      "pcap_sha256": "5735934bafa60d4c335961e58a12d806d0a5d368124a60aebd350b1a28ca4bb8",
+      "pcm_bytes": 84992,
+      "pcm_sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+      "three_archive_pcm_byte_equality": true,
+      "same_pcm_as_recorded_live_api": true,
+      "real_accepted_input_steps": 18,
+      "raw_pcap_signals": {
+        "sntp_matched": true,
+        "https_attempted": true,
+        "https_reply": true,
+        "tls_exchange": true
+      },
+      "independently_reassembled_pcap_and_two_journal_wire_match": {
+        "sntp": {
+          "request_bytes": 48,
+          "reply_bytes": 48,
+          "request_sha256": "4514195b25408d36634059087171a361438bfca93159d53765b3dec17de5814b",
+          "reply_sha256": "750b485656d63b4dbcb7b7f79ff6eff57325d89879b5c5f39870beb0e16f69ac"
+        },
+        "voice": {
+          "wire_bytes": {
+            "client": 561,
+            "server": 16179
+          },
+          "wire_sha256": {
+            "client": "09cc39d8316073325226a99882c8fb0c3a9b203700aead1308ceb1f09fdeb363",
+            "server": "032705c3d22aacafe1f17b3233286ed8e11ef67e146bac9c9757d31626324fc4"
+          }
+        }
+      },
+      "sd_raw_image_cache_bytes": 10605,
+      "sd_raw_image_cache_sha256": "af59cee7bd7ca8d12fd145fcf8bfcee23c882aa3f7377fe97f06936474a77a50",
+      "zero_leases_at_case_cleanup": true,
+      "owned_processes_exited": true,
+      "actual_routed_session_and_create_intent_bound": true,
+      "same_database_and_21_events": true,
+      "no_primary_sessions": true
+    },
+    "core2_recovery": {
+      "status": "PASS",
+      "source_summary_sha256": "bb1252afbf2b9916b4122a3b3fdeb5362b37b25562c1598036bcb81440f12712",
+      "recorded_backend_create_http": 202,
+      "recorded_create_response_bytes_delivered": 0,
+      "same_native_session_in_raw_archives": true,
+      "raw_archives": [
+        {
+          "role": "before_recovery",
+          "state": "running",
+          "members": 8,
+          "sha256": "3cb138a82bc9e95a1fc46e4ea333ac6b175cc717ead178876146c7dd677cbea9"
+        },
+        {
+          "role": "after_recovery",
+          "state": "stopped",
+          "members": 7,
+          "sha256": "1d47f8395a564998d435aace021758f53bcf2a3700dc86d4d6e5ff7af76f0db0"
+        }
+      ],
+      "payloads_crc_size_sha_verified": 15,
+      "original_application_bytes_exact": 505760,
+      "original_application_offset": 65536,
+      "readable_original_board_and_serial_unchanged": true,
+      "after_recovery_archive_has_no_working_flash": true,
+      "terminal_preserved": {
+        "status": "service_error",
+        "lane": "SIM_PARTIAL",
+        "error_code": "E_SERVICE_RESTART",
+        "source_mode": "saved_snapshot"
+      },
+      "sqlite_integrity": "ok",
+      "create_intents_after_recovery": 0,
+      "recovery_complete_and_released_event": true,
+      "admission_disabled_recovery_recorded": true,
+      "normal_retry": "NOT RUN",
+      "primary_requests_recorded": 0,
+      "same_hosted_generation_normal_stop": true,
+      "hosted_retained_sessions_stopped": 6,
+      "new_api_or_guest_calls": false
+    }
+  },
+  "normal_hosted_generation_close": {
+    "active_leases": 0,
+    "api_ready": true,
+    "confirmed_graceful_vz_stop": true,
+    "normal_device_close_sha256": "6bb3ad148d230f2ef09fc59a46f80ba6c153882894f2bab2154700b0dffe6471",
+    "ready_sha256": "e801a5f746d8b772bc1027f17745866136d90472153faa123c573c839c46b91b",
+    "runner_events_sha256": "1012f0140d0e179dccf7ea416128d603d14f9d4b08a54d51b745f6f4e2b7dfd3",
+    "service_exited": true,
+    "stopped_sha256": "b43153bf420e51c557949a7503cba56d77d5f3f39a4201328d32e933e419dc2f",
+    "retained_sessions_stopped": 6,
+    "temporary_launchagent_unloaded": true,
+    "temporary_endpoint_withdrawn": true,
+    "volume_lock_released": true,
+    "scope": "Normal shutdown after both cases, no volume or VM crash injected"
+  },
+  "input_receipts": {
+    "adv_run": {
+      "sha256": "81c0d0f9891564c6db1a01c996e6b08e16b154bae44700676d9697236068b628",
+      "bytes": 4774
+    },
+    "core2_run": {
+      "sha256": "bb1252afbf2b9916b4122a3b3fdeb5362b37b25562c1598036bcb81440f12712",
+      "bytes": 4043
+    },
+    "adv_independent_audit": {
+      "sha256": "b5986f166114665fe4c078342ae66cee1d63e6ddcc9c0b30d6f9cb5c3e3a89f2",
+      "bytes": 2360
+    },
+    "core2_independent_audit": {
+      "sha256": "069ecfa2056512416d80eb4065070e824bf3d2669d34cb41d8cb825d06c701fa",
+      "bytes": 1374
+    },
+    "core2_separate_saved_readback": {
+      "sha256": "d1b922ea9a8893989834a47cdebd00bf84c5674f183fea6a7f2c920917ce1782",
+      "bytes": 938
+    },
+    "full_lifecycle_summary": {
+      "sha256": "e7158211cae45ef272b5b42f32c662e1428eb8d6b256c1ece3b6e8c681483a27",
+      "bytes": 3132
+    },
+    "terminal_retirement_summary": {
+      "sha256": "9045b0e47bf2c46603d046f190c5c7d29ac8e3edf6124462bcf6f602f5e279dc",
+      "bytes": 219
+    }
+  },
+  "limits": {
+    "worker_vm_crash": "NOT RUN",
+    "volume_crash": "NOT RUN",
+    "host_os_restart": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "production_mutation": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "integration_validation",
+  "date": "2026-11-19",
+  "title": "Reviewer 0.30 原版 ADV 路由与 Core2 创建响应丢失恢复",
+  "source": {
+    "reviewer_revision": "b9426a2d8a88338d95346ed9b93b0eaf0893cb9a",
+    "reviewer_api": "0.30.0",
+    "reviewer_interpreter": "Python 3.9.6",
+    "reviewer_app_sha256": "3d4ddb6a78c90f83c0cbd110effc5dfa4c3b743871240800584ed0db6d3b9c17",
+    "reviewer_openapi_sha256": "5d062ee41dc45cfe346fd9aeadbf4a93f5e687549e2ce8284344571daaa2fc78",
+    "device_service_revision": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "device_api": "1.99.3",
+    "device_openapi_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "darwin_runtime_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "adv": {
+      "name": "CardputerDict ADV 0.5.0",
+      "original_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+      "composed_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c"
+    },
+    "core2": {
+      "name": "2048 1.0",
+      "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+      "composed_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8"
+    }
+  },
+  "execution": {
+    "status": "PASS_WITH_PRESERVED_INTERRUPTED_REVIEW",
+    "scope": "Single hosted generation, two separate sessions",
+    "adv_terminal": "SIM_VERIFIED",
+    "core2_interrupted_terminal": "service_error / SIM_PARTIAL / E_SERVICE_RESTART",
+    "adv_raw_zip_payloads_verified": 35,
+    "core2_raw_zip_payloads_verified": 15,
+    "retained_stopped_sessions": 6,
+    "evidence": "evidence/routed-adv-and-create-recovery.summary.json",
+    "evidence_bytes": 13872,
+    "evidence_sha256": "8993b3008ef4b7578369a49923b97eba6a02d733c00c1b888d4cb75b904d8716"
+  },
+  "checks": {
+    "routed_original_adv": "PASS",
+    "adv_same_database_restart": "PASS",
+    "core2_lost_response_same_session_recovery": "PASS",
+    "interrupted_review_error_preserved": "PASS",
+    "normal_hosted_stop": "PASS",
+    "core2_normal_retry": "NOT RUN",
+    "worker_vm_crash": "NOT RUN",
+    "volume_crash": "NOT RUN",
+    "host_os_restart": "NOT RUN",
+    "physical": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "production_mutation": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  }
+}
