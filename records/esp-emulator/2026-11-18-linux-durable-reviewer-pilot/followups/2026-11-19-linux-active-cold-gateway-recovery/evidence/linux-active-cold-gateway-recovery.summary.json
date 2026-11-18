@@ -1,0 +1,108 @@
+{
+  "status": "FAIL_COLD_BOOT_ACTIVE_GATEWAY_RECOVERY",
+  "source": {
+    "device": "09db00eb793972a679f87234a6797eff70334d47",
+    "reviewer": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "native_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "case": {
+    "original_firmware_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929",
+    "lease_at_abrupt_cut": 1,
+    "committed_gateway_before_cut": true,
+    "actual_original_sntp_before_cut": true,
+    "same_private_virtiofs_volume": true,
+    "separate_linux_boots": true,
+    "native_vz_owned_runner_exit": [
+      124,
+      0
+    ],
+    "both_owned_vms_confirmed_stopped": true,
+    "guest_network_adapters": 0
+  },
+  "receipts": {
+    "pre_cut_sha256": "62b3ee2dea5d0f879c501e820560074e979925f2a3f5508af3b52b1bff09bfa1",
+    "post_boot_sha256": "042e3531ababc07f196c12d2285824500330107a792176c15ae9d0aefc8ca6bd",
+    "pin_file_sha256": "953bec1b741f3b485cb956749592e6b4c9881ef2b4c0ad51539d5ab97e2835b4"
+  },
+  "recovery": {
+    "distinct_linux_boot_id": true,
+    "same_worker_advanced_generation": true,
+    "same_reviewer_backend_configuration": true,
+    "review_before_retry": {
+      "status": "service_error",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_SERVICE_RESTART",
+      "source_mode": "saved_snapshot"
+    },
+    "old_session_before_retry": {
+      "state": "stopping",
+      "interrupted_durable": true,
+      "api_stop_pending": true,
+      "api_optional_flash_retained": null,
+      "worker_active_leases": 1,
+      "durable_session_lease_active": true,
+      "actual_writable_flash_exists": true,
+      "old_kernel_gateway_objects_present": false
+    },
+    "review_recovery_events_before_retry": [
+      {
+        "status": "pending",
+        "resolved": [],
+        "pending": [
+          "device_service_recovery_unconfirmed"
+        ]
+      }
+    ],
+    "cleanup_pending_reason_from_standard_api": [
+      "named gateway belongs to a different kernel or worker namespace",
+      "named gateway belongs to a different kernel or worker namespace"
+    ],
+    "retained_gateway_receipt_sha256": "398b4432846310aab6880f733be49ce68a7a4f19d719f3d7dbc240233bd9adff",
+    "old_evidence": {
+      "http": 200,
+      "bytes": 12729,
+      "sha256": "f6df4881322e1fc7d0db7d02d4b855ffcd336dde9aec6385405469332dbb1b6c",
+      "typed_manifest_integrity": true
+    },
+    "retry": {
+      "http": 409,
+      "error": "上次设备会话清理尚未确认，待设备服务恢复后重试"
+    },
+    "status": "FAIL_COLD_BOOT_ACTIVE_GATEWAY_RECOVERY",
+    "owned_boot2_topology_removed": true,
+    "burner_submitted": false
+  },
+  "old_evidence_pcap": {
+    "bytes": 6812,
+    "sha256": "9e157d4eee5ba3efa83ffbd3598009e32c7346f176a3b7c4f54ad8fa0d6f9198"
+  },
+  "resident_or_physical": "NOT RUN",
+  "summary_kind": "bounded_redacted_execution_evidence",
+  "original_receipts": {
+    "independent_host_verification": {
+      "bytes": 2932,
+      "sha256": "42d288b4a7b86dc3d79fd8e794b0b0ecaca6bfa7ee9155cab30bbbfe9692d1e6"
+    },
+    "pre_cut": {
+      "bytes": 1462,
+      "sha256": "62b3ee2dea5d0f879c501e820560074e979925f2a3f5508af3b52b1bff09bfa1"
+    },
+    "cold_readback": {
+      "bytes": 1526,
+      "sha256": "042e3531ababc07f196c12d2285824500330107a792176c15ae9d0aefc8ca6bd"
+    },
+    "stopped_vm_evidence_zip": {
+      "bytes": 12729,
+      "sha256": "f6df4881322e1fc7d0db7d02d4b855ffcd336dde9aec6385405469332dbb1b6c"
+    },
+    "earlier_backend_changed_device_only_control": {
+      "bytes": 2712,
+      "sha256": "032365eb1f8f09b2fdbb5ae13a5c82a8c5946a82697432dcf0adafe3fed9796c"
+    }
+  },
+  "earlier_control_scope": "Device Service observation corroborated. Changed Reviewer backend URL prevented attributing that retry.",
+  "production_routing": "NOT RUN",
+  "retry_playback": "NOT RUN",
+  "sanitization": "Network addresses, device paths, launch, worker, job, and session identities omitted."
+}

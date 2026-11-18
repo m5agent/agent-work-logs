@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "service_debug",
+  "overall_status": "FAIL",
+  "title": "Linux 活动 CardputerDict 网关跨冷启动恢复",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "09db00eb793972a679f87234a6797eff70334d47",
+    "reviewer_commit": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "device_service_openapi": "1.99.0",
+    "reviewer_openapi": "0.27.0"
+  },
+  "hardware": {
+    "type": "virtual-device validation",
+    "target": "Cardputer, qemu-wifi",
+    "platform": "Linux ARM64 VZ, zero NIC, persistent private VirtioFS",
+    "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_bytes": 3619312,
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929"
+  },
+  "execution": {
+    "local_timezone": "UTC+08:00",
+    "standard_saved_snapshot_retry_before_cut_http": 202,
+    "standard_saved_snapshot_retry_after_boot_http": 409,
+    "same_reviewer_backend_configuration": true,
+    "raw_session_and_job_identifiers": "omitted"
+  },
+  "checks": [
+    {
+      "name": "active_original_saved_snapshot_and_namespace_gateway",
+      "status": "PASS"
+    },
+    {
+      "name": "abrupt_stop_and_same_volume_new_linux_kernel",
+      "status": "PASS"
+    },
+    {
+      "name": "old_session_and_evidence_readback",
+      "status": "PASS"
+    },
+    {
+      "name": "automatic_active_gateway_lease_and_flash_release",
+      "status": "FAIL"
+    },
+    {
+      "name": "standard_saved_snapshot_retry_after_cleanup",
+      "status": "FAIL",
+      "http": 409
+    },
+    {
+      "name": "repaired_candidate_and_fresh_playback",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "resident_routing_and_physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/linux-active-cold-gateway-recovery.summary.json",
+      "bytes": 4046,
+      "sha256": "e5e4332d5b52d105057a75771c77c76d7c3226d13820f2ba32bf7f2e50b43ed7"
+    }
+  ],
+  "notes": [
+    "Burner 未提交。",
+    "此前更换后端地址的 A4 只用于核对 Device Service，A5 固定后端对照覆盖 Reviewer。"
+  ]
+}
