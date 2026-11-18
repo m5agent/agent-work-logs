@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "redacted_executable_validation_summary",
+  "result": "PASS",
+  "observed_at_utc": "2026-11-18T18:17:49.644149+00:00",
+  "terminal_raw_receipt": {
+    "bytes": 7499,
+    "sha256": "f2ceb521d3c2cf3b66e8b3e80942a9524e0eb7f41e75e01265820e7ef7950c05"
+  },
+  "first_attempt": {
+    "status": "FIXTURE_FAILED_BEFORE_REVIEW",
+    "cause": "host proof fixture module/function import collision",
+    "original_review_posted": false,
+    "owned_vm_stop_acknowledged": true,
+    "listener_closed": true,
+    "raw_fixture_failure_receipt": {
+      "bytes": 888,
+      "sha256": "76b9805d6661be3a428e66073a1615dcebb40be9e201f3612afd7aef4031ed83"
+    }
+  },
+  "device": {
+    "commit": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "api": "1.99.1",
+    "packaged_source_sha256": {
+      "platform/tools/device_service.py": "7463f34200a0c84ec5dabea09ccebc8cf99e04cc9f573b1e337998eaba716395",
+      "docs/device-service.openapi.yaml": "e0b930608eab9a18e588ecb3ea61035cd8a5f43b69a998643aab6ee2408e3c35"
+    }
+  },
+  "reviewer": {
+    "commit": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+    "api": "0.28.0",
+    "host_python": "3.9.6",
+    "packaged_source_sha256": {
+      "service/app.py": "46f802ab7363e817d4eeb811228d94d3ebf4ff9bcd1dcde6084a95c4cb497f02",
+      "service/cardputerdict_pronunciation_review.py": "6bab666d9cac7d4721596ec6f4667ee497256a4c34326301f660b5365401e6a0",
+      "docs/review-service.openapi.yaml": "f5704cdf005138747b1e56b3e2f52dfa458157e208527e59ac42b6b1cc96b490"
+    }
+  },
+  "firmware": {
+    "board": "Cardputer ADV",
+    "product": "CardputerDict ADV",
+    "version": "0.5.0",
+    "original": {
+      "bytes": 2141568,
+      "sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14"
+    },
+    "normalized_flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c",
+    "seed_media_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "embedded_firmware_ca_der_sha256": "cb3ccbb76031e5e0138f8dd39a23f9de47ffc35e43c1144cea27d46a5ab1cb5f"
+  },
+  "virtual_execution": {
+    "macos_host_reviewer": true,
+    "linux_guest": true,
+    "guest_no_nic": true,
+    "guest_no_default_route": true,
+    "guest_device_http_loopback_only": true,
+    "host_bounded_listener_loopback_only": true,
+    "vsock_peer_host_cid_only": true,
+    "runtime_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "same_linux_worker_identity_and_generation_across_lanes": true,
+    "missing_or_incorrect_auth_http": 401,
+    "auth_rejections": 2,
+    "authenticated_route_session_method_or_artifact_outside_scope_http": 403,
+    "scope_rejections": 4,
+    "matched_host_guest_sntp": 2,
+    "matched_host_guest_tls": 1
+  },
+  "lifecycle": {
+    "guest_exit_status": 0,
+    "vm_stop_acknowledged": true,
+    "host_listener_closed": true,
+    "reviewer_exited": true,
+    "all_owned_guest_processes_and_network_released": true,
+    "original_artifact_unchanged_each_lane": true,
+    "reviewer_session_creation_intents_remaining": 0,
+    "physical_hardware": "NOT RUN",
+    "deployed_traffic_changed": false,
+    "burner_submitted": false
+  },
+  "reproducible_fixture_hashes": {
+    "boot_runner": {
+      "bytes": 140672,
+      "sha256": "4199aa2e51e6e38de48e02b6c3a82d5036e49b88f356b43d01eb6127cf799065"
+    },
+    "guest_harness": {
+      "bytes": 18148,
+      "sha256": "1a422ae1f7149798e3245a03ca7f02d284731a5a350655bb873175aaf72ccd9b"
+    },
+    "host_harness": {
+      "bytes": 19256,
+      "sha256": "e76a0ca853f9b2ae2b3886d9c599e35e20233c531ab66097314f789b9dbd2a41"
+    },
+    "device_source_package": {
+      "bytes": 3041280,
+      "sha256": "3072dc16a45cb271db3b298c118a9393d759ead9f32c950c81452e5ed5a3efa7"
+    },
+    "reviewer_source_package": {
+      "bytes": 768000,
+      "sha256": "1340232c70d5b0515a24d94f415ad2500ccf0b14b18c9163ceb197a13944f6a1"
+    }
+  },
+  "cases": {
+    "playback": {
+      "test_status": "PASS",
+      "normal_retry_http": 202,
+      "reviewer_terminal": {
+        "status": "done",
+        "lane": "SIM_VERIFIED",
+        "error_code": null,
+        "source_mode": "saved_snapshot"
+      },
+      "validation_status": "PASS",
+      "validation_reason": "authenticated_download_and_i2s",
+      "observations": {
+        "sntp_matched": true,
+        "https_attempted": true,
+        "https_reply": true,
+        "tls_exchange": true,
+        "dns": true,
+        "cache": true,
+        "pcm": true
+      },
+      "same_firmware_session": true,
+      "worker_active_leases_after": 0,
+      "working_flash_released": true,
+      "qemu_and_gateway_released": true,
+      "host_raw_case_receipt": {
+        "bytes": 1694,
+        "sha256": "c55e4f54ad987b36b3c8861df109824a4eacf24a7e459d4d936b44a5d137565c"
+      },
+      "reviewer_zip": {
+        "bytes": 82530,
+        "sha256": "b046f9473b960640c793269e5e6d3f03614afcc65f9332ffafbd44063d88c528"
+      },
+      "device_zip": {
+        "bytes": 84412,
+        "sha256": "ea953a1d0e00a6eb1e13c3efd49dc40c1c01e840287b4abd7b56cb0453045b1f"
+      },
+      "network_pcap": {
+        "bytes": 22562,
+        "sha256": "abfc014fc4bae6c42a38a4727aa32829724223097b725dcf86d0e3351c157fbc"
+      },
+      "pcap_and_pcm_same_bytes_in_both_zips": true,
+      "sd_mp3": {
+        "bytes": 10605,
+        "sha256": "af59cee7bd7ca8d12fd145fcf8bfcee23c882aa3f7377fe97f06936474a77a50"
+      },
+      "i2s_pcm": {
+        "bytes": 84992,
+        "sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+        "peak_s16le": 7051
+      }
+    },
+    "blocked": {
+      "test_status": "PASS",
+      "normal_retry_http": 202,
+      "reviewer_terminal": {
+        "status": "manual_review",
+        "lane": "SIM_PARTIAL",
+        "error_code": "E_CARDPUTER_PRONUNCIATION_POLICY_DENIED",
+        "source_mode": "saved_snapshot"
+      },
+      "validation_status": "POLICY_DENIED",
+      "validation_reason": "tcp_443_outside_allowlist",
+      "observations": {
+        "sntp_matched": true,
+        "https_attempted": true,
+        "https_reply": false,
+        "tls_exchange": false,
+        "dns": true,
+        "cache": false,
+        "pcm": false
+      },
+      "same_firmware_session": true,
+      "worker_active_leases_after": 0,
+      "working_flash_released": true,
+      "qemu_and_gateway_released": true,
+      "host_raw_case_receipt": {
+        "bytes": 1333,
+        "sha256": "7dffa03bb121498b5af832aa0b01079b806d78e94e97e085b717037774e7ac6d"
+      },
+      "reviewer_zip": {
+        "bytes": 14826,
+        "sha256": "35ee27519e4b03e7a209b3ec43cbeba750109cb3fc73b1c2c772dddf3fa4d46a"
+      },
+      "device_zip": {
+        "bytes": 16184,
+        "sha256": "8b425bc224cd132cab6e796c80fdd7da156eff71ba742c5ccc73e3e77a140e25"
+      },
+      "network_pcap": {
+        "bytes": 3194,
+        "sha256": "f617054b52441f764e77c333d8b66e1fa8af50ef1619aebc7985a970aeb6af32"
+      },
+      "pcap_and_pcm_same_bytes_in_both_zips": true,
+      "sd_mp3": null,
+      "i2s_pcm": null
+    }
+  },
+  "redaction": "Evidence preserves byte counts, SHA-256 digests and protocol outcomes. Endpoint and network identifiers, device and review identifiers, credentials, service configuration paths and raw captures are omitted."
+}

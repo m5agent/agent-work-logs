@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "CardputerDict ADV 0.5.0 macOS Reviewer to Linux VSOCK saved-snapshot qualification",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "esp-emulator",
+    "base_commit": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "reviewer_repository": "auto-firmware-review",
+    "reviewer_commit": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1"
+  },
+  "hardware": {
+    "model": "Cardputer ADV",
+    "execution": "virtual-device validation",
+    "physical_hardware": false
+  },
+  "firmware": {
+    "board": "Cardputer ADV",
+    "product": "CardputerDict ADV",
+    "version": "0.5.0",
+    "original": {
+      "bytes": 2141568,
+      "sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14"
+    },
+    "normalized_flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c",
+    "seed_media_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "embedded_firmware_ca_der_sha256": "cb3ccbb76031e5e0138f8dd39a23f9de47ffc35e43c1144cea27d46a5ab1cb5f"
+  },
+  "execution": {
+    "environment": "Apple Virtualization.framework with no Linux guest NIC; system macOS Python 3.9.6; pinned Linux QEMU",
+    "task_id": "",
+    "session_id": "",
+    "observed_at_utc": "2026-11-18T18:17:49.644149+00:00",
+    "proof_receipt": {
+      "bytes": 7499,
+      "sha256": "f2ceb521d3c2cf3b66e8b3e80942a9524e0eb7f41e75e01265820e7ef7950c05"
+    }
+  },
+  "checks": [
+    {
+      "level": "transport",
+      "status": "PASS",
+      "detail": "Authentication 401 and fixed-scope rejection 403; two SNTP and one TLS transactions match byte fingerprints"
+    },
+    {
+      "level": "device_response",
+      "status": "PASS",
+      "detail": "Both standard saved-snapshot requests admitted with HTTP 202 and used matching exact worker generation, original BIN and normalized Flash"
+    },
+    {
+      "level": "data_behavior",
+      "status": "PASS",
+      "detail": "Allowed: 10605-byte SD MP3 and 84992-byte captured I2S; denied: E_CARDPUTER_PRONUNCIATION_POLICY_DENIED with no SD cache or PCM"
+    },
+    {
+      "level": "cleanup",
+      "status": "PASS",
+      "detail": "Both leases and mutable Flash released; Reviewer and VM stopped; host listener closed"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "Physical acoustics, RF and hardware behavior outside isolated virtual execution"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/macos-linux-vsock-adv.summary.json",
+      "bytes": 7239,
+      "sha256": "5ae0a839e1d1c7ddada2fdd32cef90d4361d42682be267d6dd9eb2f54bedebda"
+    }
+  ],
+  "notes": [
+    "A1 failed before submitting any review because the private proof wrapper shadowed its HTTP import. Its owned VM exited and listener closed.",
+    "A2 qualifies exact binaries through isolated routing only. It did not change or exercise production traffic and did not submit to Burner."
+  ]
+}
