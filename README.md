@@ -48,6 +48,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Reviewer 0.27 与实际工作器的就绪状态 | PASS（四种设备状态正确返回，候选干跑与常驻部署未运行） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/) |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Linux 持久卷与原版 CardputerDict 审核试跑 | PARTIAL（持久卷和隔离传输有实测，磁盘中断后冷启回读未运行） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/) |
 | 2026-11-18 | ESP Emulator | StickS3 All Day Watch 原版浅睡唤醒 1.99 复测 | PASS（GPIO 唤醒与 65 秒看门狗复查） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/followups/2026-11-18-all-day-watch-199-regression/) |
 | 2026-11-18 | ESP Emulator | 具名网关启动交接中断恢复 | PASS（阻止迟到来宾、自动回收及同原版重试） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-gateway-startup-handoff/) |
 | 2026-11-18 | ESP Emulator | Dial R1F30 8 ms 复现与 5 ms 采样读回 | PARTIAL（5 ms 实际未读相位，8 ms 发布版错误仍待同场读回） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-198-original-poll-causality/) |

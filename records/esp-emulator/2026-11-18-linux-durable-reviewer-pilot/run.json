@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "infra_baseline",
+  "overall_status": "PARTIAL",
+  "title": "Linux 持久审核试验",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+    "reviewer_commit": "a295e0173a0e3157c120de8ba6fcec128aa665c1"
+  },
+  "hardware": {
+    "lane": "virtual-device validation",
+    "device": "Cardputer",
+    "classic_physical_hardware_used": false
+  },
+  "firmware": {
+    "name": "CardputerDict",
+    "version": "0.6.4",
+    "sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "bytes": 3619312
+  },
+  "execution": {
+    "environment": "Apple Virtualization, isolated Linux ARM64 VM without a virtual NIC, dedicated VirtioFS volume",
+    "source_mode": "saved_snapshot"
+  },
+  "checks": [
+    {
+      "name": "SQLite WAL and flock on dedicated guest mount",
+      "status": "PASS"
+    },
+    {
+      "name": "authenticated SD fixture intake",
+      "status": "PASS"
+    },
+    {
+      "name": "original app ordinary Retry plus SNTP and TLS ClientHello",
+      "status": "PASS"
+    },
+    {
+      "name": "clean final persisted review and subsequent cold restoration",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "trusted HTTPS playback and speaker PCM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/pilot.summary.json",
+      "sha256": "eea9510763824c52ffd182dd19c92cd28ac932c2598f0f3e616b20380845e324"
+    }
+  ],
+  "notes": [
+    "The host turned off the isolated VM at the storage floor. The last durable state remained in flight.",
+    "No Burner submission."
+  ]
+}
