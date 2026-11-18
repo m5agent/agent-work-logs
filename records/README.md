@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Reviewer 0.27 原版 Core2 与常驻回读 | PASS（隔离四向棋盘变化，常驻就绪和 125 条历史核对） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/followups/2026-11-18-reviewer-027-core2-resident/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Linux 持久卷冷启动回读与原版重试 | PASS（冷启保留旧任务、ZIP 与 PCAP；受控发音审核仍为 PARTIAL） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-18-linux-durable-reviewer-cold-pair/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Reviewer 0.27 与实际工作器的就绪状态 | PASS（四种设备状态正确返回，候选干跑与常驻部署未运行） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Linux 持久卷与原版 CardputerDict 审核试跑 | PARTIAL（持久卷和隔离传输有实测，磁盘中断后冷启回读未运行） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/) |
