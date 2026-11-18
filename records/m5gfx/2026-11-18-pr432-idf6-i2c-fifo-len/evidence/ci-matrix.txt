@@ -1,0 +1,56 @@
+# CI coverage of the branches this PR adds (head c90dda6)
+
+## .github/workflows/IDFBuild.yml matrix (verbatim, comment lines kept)
+          # minor from 5.1 to 6.1 without building the same one twice. Keep each chip at or above its
+          # minimum version.
+          # ESP32
+          - target: esp32
+            idf_version: "5.1.6"
+          - target: esp32
+            idf_version: "5.4.3"
+          - target: esp32
+            idf_version: "6.0.2"
+          # ESP32-S3
+          - target: esp32s3
+            idf_version: "5.1.6"
+          - target: esp32s3
+            idf_version: "5.4.3"
+          - target: esp32s3
+            idf_version: "6.0.2"
+          # ESP32-C3
+          - target: esp32c3
+            idf_version: "5.1.6"
+          - target: esp32c3
+            idf_version: "5.4.3"
+          # ESP32-C5 (IDF 5.5+ only)
+          - target: esp32c5
+            idf_version: "5.5.2"
+          # ESP32-C6 (IDF 5.3+ only)
+          - target: esp32c6
+            idf_version: "5.4.3"
+          # ESP32-H2
+          - target: esp32h2
+            idf_version: "5.1.6"
+          # ESP32-P4 (IDF 5.3+ only)
+          - target: esp32p4
+            idf_version: "5.4.3"
+          # ESP32-C61 (IDF 5.5.2+ only)
+          - target: esp32c61
+            idf_version: "5.5.2"
+
+
+## .github/workflows/ArduinoBuild.yml matrix entries for C5/C6/P4
+      matrix:
+        include:
+          # Versions are split with the M5Unified / M5GFX CI so that the two together cover every
+          # arduino-esp32 series from 2.0 to 3.3 without building the same one twice.
+          - board: esp32:esp32:esp32c6
+            esp32_version: 3.1.3
+          - board: esp32:esp32:esp32p4
+            esp32_version: 3.1.3
+          - board: esp32:esp32:esp32c5
+            esp32_version: 3.3.0
+
+## arduino-esp32 3.3.0 release note (newest core in that matrix)
+Arduino Release v3.3.0 based on ESP-IDF v5.5.0
+source: https://api.github.com/repos/espressif/arduino-esp32/releases/tags/3.3.0

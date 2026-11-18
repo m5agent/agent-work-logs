@@ -1,0 +1,41 @@
+# source: /tmp/m5gfx432
+# base:   452c15bc982af0b54acf567a79e7eb6066ace9e5
+# head:   c90dda61ae3718ea90f48c249055d38698e1f1f6
+# compiler: Apple clang version 21.0.0 (clang-2100.1.1.101)
+# flags:  -std=c++17 -Wall -Wextra -Werror -O1
+
+# extracted getFifoLen():       30 lines (head),       25 lines (base)
+
+## PR head (values expected from the 6.x / 5.x headers)
+-- pr_c6_603
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+-- pr_p4_603
+  port 0 -> 32 (expect 32)
+  port 1 -> 32 (expect 32)
+  lp port 2 -> 16 (expect 16)
+-- pr_c2_603
+  port 0 -> 16 (expect 16)
+-- pr_c6_554
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+-- pr_esp32_554
+  port 0 -> 32 (expect 32)
+
+## base develop (the reported behaviour)
+-- base_c6_603
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 32 (expect 32)
+-- base_c2_603
+  port 0 -> 32 (expect 32)
+-- base_c6_554
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+
+## write chunking (first-chunk arithmetic of writeBytes)
+6.x base, LP hw=16         lim=32 lens 9..97 : max chunk 32 (at  32 bytes), chunks > HW 16 : 81, bad sums: 0
+PR head, LP hw=16          lim=16 lens 9..97 : max chunk 16 (at  16 bytes), chunks > HW 16 : 0, bad sums: 0
+5.x, C5/C6/P4 LP           lim=16 lens 9..97 : max chunk 16 (at  16 bytes), chunks > HW 16 : 0, bad sums: 0
+6.x base, HP hw=32         lim=32 lens 33..97 : max chunk 32 (at  33 bytes), chunks > HW 32 : 0, bad sums: 0
+6.x base, C2 hw=16         lim=32 lens 33..97 : max chunk 32 (at  33 bytes), chunks > HW 16 : 65, bad sums: 0
+PR head, C2 hw=16          lim=16 lens 33..97 : max chunk 16 (at  33 bytes), chunks > HW 16 : 0, bad sums: 0

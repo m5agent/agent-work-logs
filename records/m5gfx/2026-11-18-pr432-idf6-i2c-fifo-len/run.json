@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "pr",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #432: I2C FIFO depth from hal/i2c_ll.h on ESP-IDF 6.0+ (code-level review)",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/432",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "452c15bc982af0b54acf567a79e7eb6066ace9e5",
+    "head_commit": "c90dda61ae3718ea90f48c249055d38698e1f1f6"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Apple clang 21.0.0; ESP-IDF headers fetched from raw.githubusercontent.com for v5.3/v5.4.3/v5.5.4/v6.0/v6.0.3/v6.1.1/v6.3-dev; no local ESP-IDF 6.x toolchain",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file, +5/-0 in src/lgfx/v1/platforms/esp32/common.inl (getFifoLen only); head c90dda6 on develop 452c15b, single commit, MERGEABLE"
+    },
+    {
+      "id": "macro-location",
+      "status": "PASS",
+      "detail": "30-row probe of soc_caps.h and hal/i2c_ll.h: SOC_I2C_FIFO_LEN/SOC_LP_I2C_FIFO_LEN present in v5.3/v5.4.3/v5.5.4 and absent from v6.0/v6.0.3/v6.1.1/v6.3-dev; I2C_LL_FIFO_LEN/I2C_LL_LP_FIFO_LEN absent in all 5.x and present in all 6.x (header moved to components/esp_hal_i2c/<chip>/include/hal/, include name unchanged)"
+    },
+    {
+      "id": "macro-values",
+      "status": "PASS",
+      "detail": "6.x values equal 5.x: C5/C6/P4 LP 16 + HP 32, C2 HP 16, ESP32 HP 32; C5 does not exist in v5.3"
+    },
+    {
+      "id": "branch-values-head",
+      "status": "PASS",
+      "detail": "extracted isLpPort/getFifoLen from head compiled with the real macro sets under -Wall -Wextra -Werror: C5/C6 HP 32 LP 16, P4 port0/1 32 port2 16, C2 16, C6 on 5.5.4 32/16, ESP32 on 5.5.4 32; no unused-parameter warning for chips without an LP port"
+    },
+    {
+      "id": "branch-values-base",
+      "status": "PASS",
+      "detail": "same harness on base develop: LP port 32 and C2 32 on 6.0.3 (the reported regression), C6 on 5.5.4 still 32/16"
+    },
+    {
+      "id": "five-x-unchanged",
+      "status": "PASS",
+      "detail": "5.x headers define SOC_* and no I2C_LL_* at all, so the new #elif is dead code there; base and head produce the same value on every 5.x scenario"
+    },
+    {
+      "id": "write-chunking",
+      "status": "PASS",
+      "detail": "replay of ((length-1)%limit)+1: with limit 32 the first chunk exceeds 16 from 17 bytes up (81 of the 9..97 lengths), matching the reported C5/C6 boundary at 18 and P4 boundary at 17; with limit 16 every length 9..97 splits into chunks <=16 and the chunks sum to the original length"
+    },
+    {
+      "id": "ci-coverage",
+      "status": "REVIEW",
+      "detail": "IDFBuild.yml 6.x jobs are esp32/esp32s3 at 6.0.2 only; C5 5.5.2, C6 5.4.3, P4 5.4.3, C61 5.5.2. ArduinoBuild.yml tops out at core 3.3.0 (ESP-IDF 5.5.0). The new LP #elif is never compiled in CI. Non-blocking suggestion: add esp32c6 and esp32c2 at 6.0.2."
+    },
+    {
+      "id": "silent-fallback",
+      "status": "REVIEW",
+      "detail": "a chip with an LP port but neither LP macro would fall into the #else and silently return the HP depth - the same class of bug this PR fixes. Unreachable with 5.4..6.3-dev; suggestion is an #error inside the LGFX_LP_I2C_NUM > 0 branch."
+    },
+    {
+      "id": "pr-ci",
+      "status": "PASS",
+      "detail": "checks on head c90dda6 pass; the 5.4.3/5.5.4 C5/C6/P4 jobs keep compiling the unchanged 5.x branch"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ToughC5 / Nesso N1 / Tab5 hardware here; the author's NFC detection counts and test_UnitNFC_ToughC5 181/181 were not reproduced"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "the change only takes effect when built with ESP-IDF 6.x and the local build chain is 5.4/5.5 only (no 6.x toolchain or image, no Docker image pulled). Under 5.x the new branch is preprocessed out, so base and head binaries are identical and a virtual device cannot show a difference. Device Service has nesso-n1 (C6) and tab5 (P4) profiles but no confirmed model that observes LP I2C FIFO overflow."
+    },
+    {
+      "id": "c2-runtime",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C2 hardware and no 6.x build; only the header value (I2C_LL_FIFO_LEN 16) and the branch evaluation are covered"
+    },
+    {
+      "id": "author-builds",
+      "status": "NOT RUN",
+      "detail": "the author's native builds for IDF 5.4.4 / 5.5.4 / 6.0.3 / 6.1 were not rerun here"
+    }
+  ],
+  "evidence": [
+    "evidence/idf-fifo-macro-probe.tsv",
+    "evidence/idf-fifo-macro-probe.column.txt",
+    "evidence/code-level-run.txt",
+    "evidence/write-chunk-sim.txt",
+    "evidence/getfifolen-diff.txt",
+    "evidence/ci-matrix.txt",
+    "code/probe-macros.sh",
+    "code/extract_fifo_fn.py",
+    "code/fifo_harness.cpp",
+    "code/write_chunk_sim.cpp",
+    "code/run.sh",
+    "patches/0001-i2c-idf6-fifo-len.patch"
+  ],
+  "notes": [
+    "PR left OPEN; one Japanese comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
+    "The review confirms the macro migration itself from the real headers of every 6.0.x/6.1.1 tag plus v6.3-dev, not from release notes.",
+    "Non-blocking suggestions only: compile the new branch in CI (esp32c6/esp32c2 at 6.0.2) and turn the LP fallback into an #error so a future rename cannot silently restore the 32 constant."
+  ]
+}
