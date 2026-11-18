@@ -1,0 +1,917 @@
+{
+  "schema_version": 1,
+  "status": "PASS_PLANNED_ACTIVE_DRAIN_WITH_PRESERVED_CONTROLS",
+  "validation": "virtual-device validation",
+  "scope": "Isolated hosted Linux review worker qualification",
+  "preserved_initial_failure": {
+    "failure_log_sha256": "673dff0d201da7a0855b8a5282cdc6e167c094ae50b157255ed381eb9d752ea1",
+    "guest_device_log_before_cleanup_sha256": "c75abfd2cad1c3834475f4254ff1b54516b3924eebdf0a10148478e6463c1959",
+    "launchd_bridge_error": "uncaught socket.timeout on system Python 3.9 accept",
+    "no_review_lease_created": true,
+    "normal_restart_refused_by_unchanged_quarantine": true,
+    "scope": "owned zero-lease failed pilot cleanup",
+    "shutdown_marker_emitted_as_idle_admin_cleanup": true
+  },
+  "socket_regression": {
+    "controller_policy_tests_passed": 6,
+    "entrypoint_sha256": "6e7fe4f0f65a7dd174b5572c8e2e434657642e2cc1886046cfe05f62e28ce99f",
+    "hosted_bridge_actual_socket_tests_passed": 2,
+    "new_bridge_sha256": "a3a9033f4d85c388ac16267c51ba60f51633054675b126b0c7006aa7f7c44567",
+    "old_bridge_sha256": "03c32af63101d0fb61ca83ed9ddbe41eb395308b6aaa1ef78849d3f03fe14931",
+    "python": "3.9.6",
+    "socket_tests_sha256": "eb3db5506ab9d9718c213c4387001d02ae03ac0d071ccd7ef40e57251677f193",
+    "socket_timeout_is_builtin_timeout": false,
+    "staged_controller_mutated_by_test": false,
+    "status": "PASS_MACOS_SYSTEM_PYTHON_SOCKET_TIMEOUT_REGRESSION",
+    "unchanged_a3_bridge_expected_failures": 2,
+    "validation": "isolated real host TCP and socketpair; no VZ launch or actual role API call"
+  },
+  "controller_offline": {
+    "guest_helper_files": 30,
+    "immutable_packaged_assets": 234,
+    "input_files": {
+      "controller-layout.md": "57b88e4a541cbc29aade5a63b20a14541f3ea93664988b485c8f2271fd461158",
+      "launchd_role.py": "d842034eca5ac8de003ab2e8975faad667d12100d9fc7fb12d3fbda48649e601",
+      "stable_bridge.py": "03c32af63101d0fb61ca83ed9ddbe41eb395308b6aaa1ef78849d3f03fe14931",
+      "supervisor.py": "847bb5db44806c86f0f037608fac3ee12b52c9c5119c22deade01aa450474252",
+      "test-launchd-role-offline.py": "aee24f6e3acbf111d363ca3f92a9cb3360849a7bb4d1232a8fcf71c19e1a99a5"
+    },
+    "preboot_exact_canonical_a3_source_and_volume_readback": "PASS",
+    "prior_unresolved_allowed": false,
+    "python_version": "3.9.6",
+    "retains_live_transport_while_draining": true,
+    "startup_services": false,
+    "state_changing_runtime_checks": "NOT RUN",
+    "status": "PASS_LAUNCHD_CONTROLLER_OFFLINE",
+    "tests_passed": 6,
+    "unit_test_output_sha256": "b781ad359313c691fdc468e9a36169618d910603567c97a54ab765cfa1f7a1ff"
+  },
+  "input_receipts": {
+    "initial_failure_summary": {
+      "sha256": "f23974ca9719f1a406e06432b259543cb5567e629b414e28d9f9219a5f6918c3",
+      "bytes": 509
+    },
+    "real_socket_regression_summary": {
+      "sha256": "1f3bc3d8777f62598a763d1bba341a1d4b1d5458832f11dc593c92a6acc7a405",
+      "bytes": 777
+    },
+    "offline_controller_summary": {
+      "sha256": "5e3f83cf3b3ce043b523da6c0f18fa30d03a1aac427ff41eeb370a3ea3b59d40",
+      "bytes": 984
+    },
+    "completed_planned_active_summary": {
+      "sha256": "63bee0da485482129193556e5c0bbd765cc4506b1ccf31e785bb85c8ce0d68ee",
+      "bytes": 11761
+    },
+    "active_signal_observation_summary": {
+      "sha256": "d8184cd77270c1f4a324cd175926173c6419f9dbfb38037d079695f66c1b2498",
+      "bytes": 542
+    },
+    "final_registry_independent_readback": {
+      "sha256": "d57fc78aa72a881a2315fc28d0c5abd85c5e708cc1e2fdbf4c071b8fd1414391",
+      "bytes": 423
+    },
+    "additional_adv_partial_independent_readback": {
+      "sha256": "a3c6771052fa659ead3c5acd89eda9bb7a1b833ef5a38216ca3e7c0264211b1c",
+      "bytes": 1166
+    },
+    "additional_adv_host_import_failure": {
+      "sha256": "42b0b095f65996c1f354013e24f2a9eb6be37026413b8d65e21450097e6c3af7",
+      "bytes": 443
+    },
+    "terminal_hosted_role_summary": {
+      "sha256": "d353049573792826c6197aba85951eebef4accc75909dfa9ef05372ca2cf0bd5",
+      "bytes": 463
+    },
+    "staged_relay_interpreter_summary": {
+      "sha256": "67a6a1713df136003a4a369bb52573614585e00e31774bba936fc92607f23d41",
+      "bytes": 520
+    }
+  },
+  "host_reboot": "NOT RUN",
+  "production_route_switch": "NOT RUN",
+  "initial_failure_cleanup_independent_readback": {
+    "status": "PASS",
+    "scope": "Read-only confirmation of initial failed role administrative cleanup",
+    "retained_endpoint_phase": "uncertain",
+    "matching_stop_owner_fields": true,
+    "normal_guest_stop_callback": true,
+    "forced_stop_callback": false,
+    "device_service_exited": true,
+    "active_leases": 0,
+    "cold_recovery_authority_absent": true,
+    "stopped_receipt_sha256": "e4eca72832870c965e67f1fe86f94799debf2cc62d38dc75c7af4a8fbbc17517",
+    "device_close_receipt_sha256": "4a991328cddd2e556542b30f91ba21cb4d0885483d861085a1d475debfde5c51",
+    "runner_events_sha256": "a8c5939df2d52ec2f073b5b2409aa9b6b4d03816af874c547d7621ac4553e388"
+  },
+  "completed_planned_active_case": {
+    "active_zip_during_drain": {
+      "members_verified": 7,
+      "sha256": "ba09725dfc753aeaad5ed18864d24c5d6adbc0b99ece7f01517f1a8c9e727d48",
+      "state": "running"
+    },
+    "burner": "NOT SUBMITTED",
+    "device_api_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "drain_http": {
+      "accepting_leases": false,
+      "active_leases": 1,
+      "active_leases_at_signal": 1,
+      "same_running_guest": true,
+      "session_http": 200,
+      "worker_http": 200
+    },
+    "flash_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "initial_stopped_history_count": 0,
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "owned_reviewer_exited": true,
+    "pre_drain": {
+      "bound_durable_intent": true,
+      "native_frame_sha256": "8013314a496149a0c01a58ae3becaaed874da6303fa44bdc4d0e809a3416dd91",
+      "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+      "retry_http": 202,
+      "reviewer_still_running": true,
+      "running_job": true,
+      "single_lease": true
+    },
+    "reviewer_api_sha256": "7d20bfca86709248313b0b60522c342d2dea2120f2a49c69e7468709348e0598",
+    "reviewer_source": "88ca2e3c325565c2cc0f1099c9d98260fd78386a",
+    "reviewer_terminal": {
+      "http": 200,
+      "lane": "SIM_VERIFIED",
+      "moves": {
+        "actions": {
+          "drag_down_1": {
+            "after": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                2,
+                2,
+                0
+              ]
+            ],
+            "before": [
+              [
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "direction": "down",
+            "largest_tile": 4,
+            "spawn": [
+              3,
+              1,
+              2
+            ],
+            "stable_frame_sha256": "b65c7e1b8cfa03dfe5297885d02d58e6a6997caca7ee436794c6470802ea4a7d",
+            "status": "PASS"
+          },
+          "drag_down_2": {
+            "after": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                8,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                4,
+                4,
+                0
+              ]
+            ],
+            "before": [
+              [
+                4,
+                4,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "direction": "down",
+            "largest_tile": 8,
+            "spawn": [
+              1,
+              1,
+              2
+            ],
+            "stable_frame_sha256": "798b21a796ea0dfc49d0d4cf80e1573a2658b283585cdfbc764ef7d3c435a100",
+            "status": "PASS"
+          },
+          "drag_left_1": {
+            "after": [
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "before": [
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                4
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "direction": "left",
+            "largest_tile": 4,
+            "spawn": [
+              1,
+              2,
+              2
+            ],
+            "stable_frame_sha256": "cce3d67d57e20e3c64943bc9b38a8d5de79ab1e2303ee62bcaa7d25aceaa9dbd",
+            "status": "PASS"
+          },
+          "drag_left_2": {
+            "after": [
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                4,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                4,
+                0,
+                0
+              ]
+            ],
+            "before": [
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                4
+              ],
+              [
+                0,
+                0,
+                2,
+                4
+              ]
+            ],
+            "direction": "left",
+            "largest_tile": 4,
+            "spawn": [
+              2,
+              2,
+              2
+            ],
+            "stable_frame_sha256": "59b56a9c686c397ac16405f2b494af340e60fae2144898ca42003660b15ba8df",
+            "status": "PASS"
+          },
+          "drag_right_1": {
+            "after": [
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                4
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "before": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "direction": "right",
+            "largest_tile": 4,
+            "spawn": [
+              0,
+              2,
+              2
+            ],
+            "stable_frame_sha256": "0b440d42e8dfc0054bf758713ddf55fea10f7d554cf879775dab95b3a5da766b",
+            "status": "PASS"
+          },
+          "drag_right_2": {
+            "after": [
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                4
+              ],
+              [
+                0,
+                0,
+                2,
+                4
+              ]
+            ],
+            "before": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                2,
+                2,
+                0
+              ]
+            ],
+            "direction": "right",
+            "largest_tile": 4,
+            "spawn": [
+              0,
+              2,
+              2
+            ],
+            "stable_frame_sha256": "ed63a6325f4e99b3f668dcb9f6c2fed9cab56099b5d327e80fb1befa482c3b54",
+            "status": "PASS"
+          },
+          "drag_up_1": {
+            "after": [
+              [
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "before": [
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "direction": "up",
+            "largest_tile": 4,
+            "spawn": [
+              2,
+              0,
+              2
+            ],
+            "stable_frame_sha256": "931105c21c6b305bf9c240a82e9dbac74b803e41b55e708154600d6fe0e9bd95",
+            "status": "PASS"
+          },
+          "drag_up_2": {
+            "after": [
+              [
+                4,
+                4,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "before": [
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                4,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                4,
+                0,
+                0
+              ]
+            ],
+            "direction": "up",
+            "largest_tile": 4,
+            "spawn": [
+              1,
+              2,
+              2
+            ],
+            "stable_frame_sha256": "ba62176ba8cdba0b7f7834e8baeab500ca1d4667c2ae13c26016c4f04608223e",
+            "status": "PASS"
+          }
+        },
+        "legal_moves": 8,
+        "verified_directions": [
+          "down",
+          "left",
+          "right",
+          "up"
+        ]
+      },
+      "status": "done",
+      "zip": {
+        "app_bytes_unchanged": true,
+        "device": "core2",
+        "members_verified": 9,
+        "sha256": "b54f0d245181c29488ea207352fc5ed9ee3f33926cd4929360c21ca55a3e4cbf",
+        "shape": [
+          320,
+          240
+        ]
+      }
+    },
+    "status": "PASS_ACTIVE_REVIEW_ACROSS_PLANNED_DRAIN",
+    "stopped_api_readback_before_poweroff": {
+      "members_verified": 7,
+      "sha256": "101784af1e41e54af3c9e7a1b8e96439f931200b43da990249781614e02add2a",
+      "state": "stopped"
+    },
+    "stopped_live_role_readback": true,
+    "successor": {
+      "active_leases": 0,
+      "history_count": 1,
+      "matching_retained_terminal_frame_and_serial": true,
+      "new_role_zip": {
+        "members_verified": 7,
+        "sha256": "2fc516399af4fbf5389e4f18ca63dc5016ac9b9ad167431479ca36cfb0ec2dfe",
+        "state": "stopped"
+      },
+      "no_duplicate_native_guest": true,
+      "same_backend": true,
+      "same_live_reviewer_database": true,
+      "worker_generation": 2
+    },
+    "terminal_role": {
+      "clean_guest_exit": true,
+      "forced_stop": false,
+      "receipt_sha256": "6c7bcfe31ec35b034ce80070d50d4fecec91177170b0d951c0113425676fd7b7",
+      "zero_leases": true
+    }
+  },
+  "active_signal_independent_observation": {
+    "device_registry_stopped_zero": true,
+    "endpoint_and_flock_released": true,
+    "guest_stop_receipt_sha256": "6c7bcfe31ec35b034ce80070d50d4fecec91177170b0d951c0113425676fd7b7",
+    "host_observation_note": "First HTTP observer ended on remote disconnect during peer shutdown; terminal state read from authoritative process and receipts.",
+    "launchd_exit_code": 0,
+    "leases_at_signal": 1,
+    "native_vz_normal_stop": true,
+    "new_create_503_count": 1,
+    "owned_signal": "SIGTERM",
+    "status": "PASS_ACTIVE_SIGNAL_AND_CONFIRMED_CLEAN_STOP"
+  },
+  "planned_case_independent_readback": {
+    "status": "PASS",
+    "raw_zips_reopened": [
+      {
+        "role": "active",
+        "state": "running",
+        "sha256": "ba09725dfc753aeaad5ed18864d24c5d6adbc0b99ece7f01517f1a8c9e727d48",
+        "members": 7
+      },
+      {
+        "role": "stopped",
+        "state": "stopped",
+        "sha256": "101784af1e41e54af3c9e7a1b8e96439f931200b43da990249781614e02add2a",
+        "members": 7
+      },
+      {
+        "role": "reattached",
+        "state": "stopped",
+        "sha256": "2fc516399af4fbf5389e4f18ca63dc5016ac9b9ad167431479ca36cfb0ec2dfe",
+        "members": 7
+      },
+      {
+        "role": "reviewer",
+        "state": "running",
+        "sha256": "b54f0d245181c29488ea207352fc5ed9ee3f33926cd4929360c21ca55a3e4cbf",
+        "members": 9
+      }
+    ],
+    "manifest_members_crc_and_sha256_verified": 30,
+    "same_session_across_all_archives": true,
+    "final_serial_and_frame_identical_before_and_after_restart": true,
+    "exact_original_application_in_reviewer_flash": true,
+    "independent_legal_moves": 8,
+    "directions": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "same_lease_served_while_admission_closed": true,
+    "matching_normal_stop_owner": true,
+    "no_forced_stop_event": true,
+    "same_worker_new_boot_and_generation": true,
+    "previous_history_in_successor": 1,
+    "new_reviewer_guest_duplicated": false
+  },
+  "seven_stopped_payloads_independent_readback": {
+    "status": "PASS",
+    "same_stopped_session_identity": true,
+    "manifest_session_changed_fields": [
+      "event_count",
+      "restored"
+    ],
+    "same_stopped_payloads": 7,
+    "payloads": {
+      "serial.log": {
+        "bytes": 325,
+        "sha256": "353121f7108a20d9818c1e92d2fb9aa2a213d9bf07927bd56d8827fcd1cb3d7c"
+      },
+      "serial1.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "qemu.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "qemu.stderr": {
+        "bytes": 24,
+        "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+      },
+      "diagnostics/crash.json": {
+        "bytes": 1420,
+        "sha256": "7ee33335cc0eb34f5988c5cccbf45b5e242de0544f495accc2fc24ef5da7dc94"
+      },
+      "frames/current.png": {
+        "bytes": 1786,
+        "sha256": "798b21a796ea0dfc49d0d4cf80e1573a2658b283585cdfbc764ef7d3c435a100"
+      },
+      "audio/microphone-source.pcm": {
+        "bytes": 32000,
+        "sha256": "7bf26780838b452847af12b4bb1c1eb56b303132f46659e8c913a3a01a5a6e9b"
+      }
+    }
+  },
+  "final_registry_independent_readback": {
+    "status": "PASS",
+    "two_owner_bound_normal_guest_stops": true,
+    "device_registry_current_and_previous_state": "stopped",
+    "retained_sessions": 2,
+    "retained_models": [
+      "cardputer-adv",
+      "core2"
+    ],
+    "active_leases": 0,
+    "session_mutable_flash_files_absent": true,
+    "terminal_endpoint_state": "stopped",
+    "second_stop_receipt_sha256": "5901c5ed18ce46e28729c565527df7ad9fbb31eccd226e70b011b3110acabcb2"
+  },
+  "additional_adv_partial_independent_readback": {
+    "status": "PASS_PRESERVED_ADV_PARTIAL_READBACK",
+    "reviewer_source": "88ca2e3c325565c2cc0f1099c9d98260fd78386a",
+    "original_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "product_lane": "SIM_PARTIAL",
+    "product_error": "E_CARDPUTER_PRONUNCIATION_PARTIAL",
+    "boot_and_observation": "PASS",
+    "typed_pronunciation": {
+      "status": "PARTIAL",
+      "reason": "pronunciation_request_unconfirmed",
+      "checks": {
+        "sntp_matched": false,
+        "https_attempted": false,
+        "https_reply": false,
+        "tls_exchange": false,
+        "dns": false,
+        "cache": false,
+        "pcm": false
+      }
+    },
+    "pcap_sha256": "cece2f165fe6674543d4afbe790643a7347dce05ae598551e85db2a996af5ba7",
+    "udp_tcp_counts": {
+      "sntp_requests": 1,
+      "sntp_replies": 0,
+      "dns_requests": 1,
+      "dns_replies": 1,
+      "tls_packets": 0
+    },
+    "dhcp_message_type_counts": {
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "5": 1
+    },
+    "typed_stopped_zip_sha256": "a869c6cf30c70dfca3716062a9bcae39e29bdb074eb9a7c87c55fd58e5ddd8db",
+    "collector_status": "REVIEW",
+    "collector_error_type": "KeyError",
+    "collector_missing_field": "source_artifacts"
+  },
+  "additional_adv_host_import_failure": {
+    "status": "CONFIRMED_IMPORT_FAILURE",
+    "scope": "Generation two host forwarding helper",
+    "worker_generation_matches": true,
+    "type_error": "dataclass() got an unexpected keyword argument 'slots'",
+    "failed_before_forwarding": true,
+    "host_relay_source_sha256": "e615196cb5a4fa72f50f7f9e37dd7ba70a6b62983d1545c8da63a7c37276da43",
+    "host_relay_failure_log_sha256": "c354465f34fc3eea6417a0f0ce5afe46c99d383378934a73139f50c7b9e5259f"
+  },
+  "terminal_hosted_role": {
+    "active_lease_count": 0,
+    "device_openapi_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "lifecycle_summary_sha256": "de15ed1fad5864bdae64b3d753c9200a10c4c8cbf1846a9b55437421839e0322",
+    "owned_launchagent_loaded": false,
+    "same_volume_and_worker": true,
+    "status": "PASS_TWO_HOSTED_GENERATIONS_AND_CLEANUP",
+    "temporary_loopback_listener_removed": true,
+    "terminal_retained_sessions": 2,
+    "volume_lock_released": true
+  },
+  "two_generation_lifecycle": {
+    "api_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "device_registry_final_state": "stopped",
+    "device_registry_previous_generation_state": "stopped",
+    "generations": [
+      {
+        "active_leases": 0,
+        "api_ready": true,
+        "confirmed_graceful_vz_stop": true,
+        "controller_generation": 1,
+        "normal_device_close_sha256": "bba6e451ec28ccee48890478269f71279956a68b3d566062eb1505ac21a7a1d3",
+        "ready_sha256": "3aec46cdc5cfa09ebf7cbacd8c78b9b1c1bb894487411cc23c55f9b99cfedbce",
+        "runner_events_sha256": "10685ccae362b76958676eea7adb413559bcebe0654eec871f91c6b70aa4dd0c",
+        "service_exited": true,
+        "stopped_sha256": "6c7bcfe31ec35b034ce80070d50d4fecec91177170b0d951c0113425676fd7b7",
+        "worker_generation": 1
+      },
+      {
+        "active_leases": 0,
+        "api_ready": true,
+        "confirmed_graceful_vz_stop": true,
+        "controller_generation": 2,
+        "normal_device_close_sha256": "e6e45e04d29aad7fa6272e7af5115dcabeb0739c5cc8ac3b3ba6ed28b699c0de",
+        "ready_sha256": "08a596b801d96e5bb4a43bb0624bd3fc54a94f955fde4143be7c780070db7f99",
+        "runner_events_sha256": "f65e13b7d3290e9f06cc9be67b792e3549b17726f8e9851d92925a140a859524",
+        "service_exited": true,
+        "stopped_sha256": "5901c5ed18ce46e28729c565527df7ad9fbb31eccd226e70b011b3110acabcb2",
+        "worker_generation": 2
+      }
+    ],
+    "initrd_sha256": "71d136362dbf5093d092e980cad39cd987b4c9ac49598eb6a99502b2920aba4d",
+    "kernel_sha256": "0c108326902b8cb9161796c4759fcfe6f182fa50d5cb569a70267979da7fef2c",
+    "runner_sha256": "9f5605040948048bafbcbf5da070925b89195deb8058dffb0c90028a6d8326ca",
+    "status": "PASS_TWO_OR_MORE_GRACEFUL_VZ_GENERATIONS",
+    "terminal_endpoint_withdrawn": true,
+    "terminal_volume_lock_released": true,
+    "termination_scope": "normal guest poweroff; no forced-stop recovery authority"
+  },
+  "host_relay_interpreter_preparation": {
+    "status": "PINNED_HOST_RELAY_LAYOUT_AND_IMPORT_PASS",
+    "controller_sha256": "79c418fdc56bd36d39bf01669596b3d63869909a242421a391ab8ae1d6a23bbf",
+    "python_version": "3.13.15",
+    "python_sha256": "2fb4683f9ab944ee39c46ff4184c985cd00b3431610440cf60b9fb8e2d1c8528",
+    "complete_no_network_import_preflight": "PASS",
+    "launch_agent_unloaded": true,
+    "same_original_adv_after_fix": "NOT RUN",
+    "launch_storage_reserve_available": false
+  },
+  "physical_hardware": "NOT RUN",
+  "browser_wasm": "NOT RUN",
+  "burner_submission": "NOT RUN"
+}

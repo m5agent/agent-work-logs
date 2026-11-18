@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | Linux 受管 worker 活跃审核排空验证 | PASS（活跃排空与两代清理，保留 ADV PARTIAL） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-launchd-active-drain/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | Core2 2048 审核器避开数值字形取样 | PASS（历史原帧修复与同原版标准审核） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-managed-worker-two-originals/followups/2026-11-19-core2-2048-glyph-overlap/) |
 | 2026-11-19 | ESP Emulator | 受管 Linux worker 重启与两份原版固件审核 | PASS（保留 A2 关停 FAIL 与 A3 首次 Core2 PARTIAL） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-managed-worker-two-originals/) |
 | 2026-11-19 | ESP Emulator | Spirit Level v1.0.0 来宾按键时钟复验 | PASS（同原版来宾计时及五项画面对照） | [查看](esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/followups/2026-11-19-atoms3-235-reviewer-029-standard/followups/2026-11-19-atoms3-spirit-gpio41-hold-timing/followups/2026-11-19-atoms3-spirit-level-guest-clock/) |
