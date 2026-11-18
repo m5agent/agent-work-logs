@@ -148,7 +148,14 @@ be compiled unless `m5stack:esp32:m5stack_paper` is added to the matrix.
 Detail: <public work-log permalink>
 ````
 
-## 5. 构建尝试（失败，未产生结论）
+## 5. 已发布回复
+
+- 2026-11-18 已发布（唯一一条）：https://github.com/m5stack/M5Unified/issues/444#issuecomment-6977427592
+- 发布后条目仍为 OPEN，评论数 1；未关闭、未推送代码。
+- 正文与本文件 §4 一致（§4 中 `<public work-log permalink>` 在发布时替换为
+  `https://github.com/m5agent/agent-work-logs/blob/28c5f19d3e53a5ee1c0f607fa6710ce68fd73a60/records/m5stack-github/2026-11-18-m5unified-issue-444-paper-examples/README.md`）。
+
+## 6. 构建尝试（失败，未产生结论）
 
 本机无 Arduino-ESP32 工具链。尝试：
 
@@ -161,7 +168,7 @@ arduino-cli 1.6.0 core install esp32:esp32   # 3.3.12
 （当时卷可用约 0.9 GiB，已解压的 `esp-rv32` 占 2.0 GiB）。临时目录已清理，未留下编译产物，
 因此没有任何「编译通过/失败」的结论，回复中也不声称编译过。
 
-## 6. 未覆盖项
+## 7. 未覆盖项
 
 - 未编译 `code/PaperHello`；代码只按源码签名核对过（`config()`、`setEpdMode()`、
   `startWrite/endWrite`、`fillScreen/fillRect/printf`、`BtnA.wasClicked/getClickCount`、
