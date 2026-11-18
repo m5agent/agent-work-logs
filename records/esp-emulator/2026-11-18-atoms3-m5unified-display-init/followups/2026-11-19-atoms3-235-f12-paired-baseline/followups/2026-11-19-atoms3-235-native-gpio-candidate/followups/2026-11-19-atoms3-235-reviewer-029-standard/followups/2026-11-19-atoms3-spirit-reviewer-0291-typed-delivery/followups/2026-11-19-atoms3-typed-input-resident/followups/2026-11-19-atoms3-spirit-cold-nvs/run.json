@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "validation",
+  "date": "2026-11-19",
+  "overall_status": "PASS",
+  "title": "Original Spirit Level normal cold Flash calibration and reset retention",
+  "source": {
+    "api_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "api_version": "1.99.3",
+    "device_release_manifest_sha256": "c6e575ba562ea0815331018c2a4a1b2400ca2531fa7ef53fdfd9322557f2eb8b",
+    "device_source": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "native_qemu_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "hardware": {
+    "board": "AtomS3",
+    "machine": "m5atoms3-st7735",
+    "validation_class": "native virtual-device validation"
+  },
+  "firmware": {
+    "name": "Spirit Level v1.0.0",
+    "sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393",
+    "bytes": 609856,
+    "normalized_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df"
+  },
+  "execution": {
+    "independent_guests": 3,
+    "exact_stopped_exports": 2,
+    "all_owned_guests_exited": true,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "original_cold_start_and_700ms_calibration",
+      "status": "PASS"
+    },
+    {
+      "name": "calibrated_stopped_flash_reimport_and_2350ms_reset",
+      "status": "PASS"
+    },
+    {
+      "name": "cleared_stopped_flash_reimport_and_frame_readback",
+      "status": "PASS"
+    },
+    {
+      "name": "nvs_crc_full_ota0_and_same_session_cleanup",
+      "status": "PASS",
+      "details": {
+        "bytes": 3342336,
+        "sha256": "d499e29a164b36bd126ce862e9b57514221ae83d54259956c546af8d8767afef",
+        "start": 65536,
+        "whole_partition_unchanged": true
+      }
+    },
+    {
+      "name": "physical_powerloss_or_additional_reviewer_production_run",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/atoms3-spirit-cold-nvs.summary.json",
+      "kind": "Redacted same-image cold Flash and NVS readback"
+    }
+  ]
+}
