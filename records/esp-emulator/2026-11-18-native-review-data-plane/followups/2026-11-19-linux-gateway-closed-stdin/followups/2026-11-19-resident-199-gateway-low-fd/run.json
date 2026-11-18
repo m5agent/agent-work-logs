@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "infra_baseline",
+  "overall_status": "PASS",
+  "title": "Device Service closed-stdin fix resident deployment and readback",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "597e03214dc5f442787cec52f1720567e4ed2a00",
+    "active_commit": "981fdcdf09253b75be960772147258b677775d8c",
+    "qualified_fix_commit": "4216d548477d0b7a52b72f5e07dd07d98d7e8d63",
+    "qualified_virtual_device_record": "../../README.md"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Native macOS Device Service and Firmware Reviewer",
+    "observed_utc": "2026-11-18T16:24:22Z",
+    "roles": [
+      "workbench",
+      "review_device",
+      "reviewer"
+    ],
+    "independent_verify_exit_code": 0,
+    "summary_sha256": "936e41fd9d680bdc09fdf05372e5133e505ba3ce3ae83af2f8d18edef18deb99"
+  },
+  "checks": [
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "Guarded coordinated cutover and independent LIVE_VERIFIED readback."
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "Both live Device Service OpenAPI responses match checked-in 1.99.0 bytes. Reviewer readiness returned HTTP 200."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "153 retained Device sessions, 129 Reviewer jobs and sampled Reviewer evidence preserved."
+    },
+    {
+      "layer": "review",
+      "status": "NOT RUN",
+      "detail": "Production guest, resident Linux review route and physical hardware."
+    }
+  ],
+  "evidence": [
+    "evidence/resident-readback.summary.json"
+  ],
+  "notes": [
+    "No Burner submission; no Pages or API contract change."
+  ]
+}
