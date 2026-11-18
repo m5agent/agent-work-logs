@@ -19,4 +19,4 @@ Reviewed the change against the ESP-IDF driver it mirrors.
 - CI is 26/26 green, but that is build only. I have no C5/C6 hardware, and I found no LP I2C model in the local emulator tree (C6 has QEMU profiles, P4 has the native profile), so the "routing survives" effect cannot be observed in a virtual run here. The P4 result in the body exercises the matrix path, where any LP pair is accepted.
 - Could you add one C5 or C6 check for the fixed-pair path: keep a valid-but-wrong LP pair (for example C6 GPIO4/5) on another function, call `i2c::init(lp_port, 4, 5)`, and confirm it returns `invalid_arg` while that pair's IO MUX routing and level are unchanged? That is the exact behaviour this PR fixes.
 
-Reviewed record with the IDF excerpts and the host harness: <PERMALINK>
+Reviewed record with the IDF excerpts and the host harness: https://github.com/m5agent/agent-work-logs/blob/c2c5a8cc76c83ad007c1d2219ba16c1e87d945f9/records/m5gfx/2026-11-18-pr430-lp-i2c-pin-precheck/README.md

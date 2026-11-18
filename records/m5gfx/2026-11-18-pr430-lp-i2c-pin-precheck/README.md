@@ -12,7 +12,7 @@
   （把谓词原样抽出，用真实固定对宏与真实 LP IO 引脚集合编译执行）
 - 硬件 / 虚拟设备：`NOT RUN`（无 C5 实机与 profile；可用的 C6 / P4 虚拟 profile 不建模 LP 端口的
   焊盘路由）
-- GitHub 回复：见 `evidence/reply-430.md`（英文，单条）
+- GitHub 回复：[issuecomment-6972144303](https://github.com/m5stack/M5GFX/pull/430#issuecomment-6972144303)（英文，单条；PR 保持 OPEN，未 close、未 push）
 - 环境：macOS arm64，Apple clang 21.0.0；ESP-IDF 源码按 tag 从公开 GitHub 获取；Device Service
   36 个 profile（无 ESP32-C5）
 
@@ -49,7 +49,7 @@
 - `evidence/ci-checks.txt`：PR 的 26 项 CI（全部 pass，仅构建）。
 - `evidence/device-profiles.txt`、`evidence/emulator-lp-i2c-search.txt`：可用虚拟 profile 与
   LP I2C / LP IO 模型的检索结果（无模型）。
-- `evidence/reply-430.md`：投稿英文回复。
+- `evidence/reply-430.md` / `evidence/reply-posted.txt`：投稿英文回复与投稿结果。
 
 ## 未覆盖项
 
