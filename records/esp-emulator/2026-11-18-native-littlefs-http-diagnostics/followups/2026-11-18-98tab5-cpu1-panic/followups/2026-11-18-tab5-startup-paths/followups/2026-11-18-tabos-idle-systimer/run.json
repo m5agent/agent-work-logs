@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "firmware_validation",
+  "overall_status": "PARTIAL",
+  "title": "M5TabOS 原版空闲任务与定时中断",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "57d397462e661e608e7c3ae2a878e80527d08e84"
+  },
+  "hardware": {
+    "physical": false,
+    "virtual_device": "tab5"
+  },
+  "firmware": {
+    "name": "M5TabOS",
+    "version": "0.9.1",
+    "original_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime": "esp-emu 1.1.0",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "device_service_api": "1.90.0",
+    "sessions": 3,
+    "read_only_gdb_samples": 9,
+    "working_assets_sha256": {
+      "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+      "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+      "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+    }
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "assertion": "在双核空闲任务场景观察到周期 SYSTIMER IRQ 及两核 ISR 执行，FreeRTOS 全局 tick 有进展。"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "FAIL",
+      "assertion": "三个执行会话均没有获得完整画面。"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "assertion": "首次应用任务等待及显示初始化未覆盖。"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tabos-idle-systimer.summary.json",
+      "sha256": "8ec459687c66645fa7bd93f05a71f623ae2fa3496f2a30bf6a47c0864e16ba1a"
+    }
+  ]
+}
