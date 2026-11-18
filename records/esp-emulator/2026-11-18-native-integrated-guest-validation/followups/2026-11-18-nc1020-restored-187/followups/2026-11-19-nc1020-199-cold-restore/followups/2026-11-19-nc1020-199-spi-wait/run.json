@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Original NC1020 SPI wait state paired with an existing upstream-fix build",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "981fdcdf09253b75be960772147258b677775d8c",
+    "issue": null,
+    "pull_request": null
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "board": "Cardputer K132",
+    "soc": "ESP32-S3"
+  },
+  "firmware": {
+    "name": "NC1020",
+    "version": "1.1",
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "original_populated_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "existing_control_populated_flash_sha256": "47b4e571731cef3576e7b32bebc0daa9e2ab81f2ddc5a7a72cf04453fd104184"
+  },
+  "execution": {
+    "environment": "Three isolated native macOS Device Service 1.99.0 workers; ordinary QEMU timing; no network",
+    "runtime_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+    "openapi_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "summary_sha256": "103fc36a625b4b7d8c2a2248fe7ba4fea01e56984a3e578712ecd6e82c8c0227"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "407 CMD17 blocks and the same SD save restored on all three sessions."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "Both original wait paths distinguished by actual FreeRTOS wait-list membership and SPI queue occupancy, compared with the completed draw control."
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "detail": "0/6 full frames on the original, 3/3 on the existing upstream-fix control."
+    },
+    {
+      "layer": "review",
+      "status": "NOT RUN",
+      "detail": "Current instruction ordering, physical hardware, browser WASM and a publisher-issued updated image."
+    }
+  ],
+  "evidence": [
+    "evidence/nc1020-199-spi-wait.summary.json"
+  ],
+  "notes": [
+    "No binary rebuild or source changes for this execution.",
+    "Review scope is the observed virtual-device execution."
+  ]
+}
