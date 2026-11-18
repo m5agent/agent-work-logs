@@ -1,0 +1,552 @@
+{
+  "validation": "virtual-device validation",
+  "scope": "Linux IPv4 local fixed HTTP POST and TCP streams with legacy GET, DNS and UDP controls",
+  "emulator_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+  "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+  "reviewer_legacy": "936be8b65ccf0598e80bf783c5a76cc06b2ddcb3",
+  "esp_idf": "v5.5.4",
+  "fixture_merged_bytes": 8388608,
+  "linux_native_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+  "cases": [
+    {
+      "board": "cardputer",
+      "scenario": "positive",
+      "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+      "device_service_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+      "firmware_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "dry_run": true,
+      "burner_submissions": 0,
+      "review_status": "manual_review",
+      "review_error": "E_NO_FRAME",
+      "final_lane": "SIM_PARTIAL",
+      "native_sta_status": "PASS",
+      "native_sta_phase": "complete",
+      "native_sta_reason": "guest_accepted_fixture_data",
+      "base_checks": {
+        "dns": true,
+        "http": true,
+        "udp": true,
+        "guest_terminal": true
+      },
+      "operation_results": {
+        "http_post": {
+          "status": "PASS",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_accepted_fixture_data",
+          "terminal_marker_sha256": "5738c7d4a5ba21aada7b67a2b61e6abbfeb9dc5f53ba17c604bcb1956fc8e9e3"
+        },
+        "tcp": {
+          "status": "PASS",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_accepted_fixture_data",
+          "terminal_marker_sha256": "bf22c22a268a0b3bde7c0413b2f3855161ced8369e2eadcd32341b4e7b905b10"
+        }
+      },
+      "sessions_released": true,
+      "original_result_summary": {
+        "bytes": 4928,
+        "sha256": "dfcfc12624d2f27ef66d14aae410198dfcb9e3c8284428d92623aec07a3a36a2"
+      },
+      "transport": {
+        "status": "OBSERVED",
+        "capture_sha256": "5b4760bd3a0528b9e69103f17f2522558c55b41e7c11df938fdb36346c795e44",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 3
+        },
+        "udp": {
+          "bidirectional_payload_flows": 3
+        }
+      },
+      "network_cleanup_complete": true,
+      "retained_serial_sha256": "ad068134e33bac3c1ec5ef79d40a7d72dde83065eac8a41cfef61d242a2f8260",
+      "terminal_marker_sha256": "74b07872de93d3a1ba75cbba4c1dc24d2431ea2249756b1b8e8f851f473a50dd",
+      "review_stopped_zip_sha256": "6b47f0fe81cef7702aca06f8fd62dde404ef81e20b43d630794b6abbe37aca6f",
+      "direct_stopped_zip_sha256": "89890cd9dfa11e4191ede53fcf7decf91506c5ba51507b1a96d9d7a63793eddf",
+      "stopped_zip_member_hashes_verified": true,
+      "raw_pcap_operations": {
+        "http_post": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "5738c7d4a5ba21aada7b67a2b61e6abbfeb9dc5f53ba17c604bcb1956fc8e9e3",
+          "guest_expected_bytes_match": true,
+          "request": {
+            "wire_bytes": 132,
+            "wire_sha256": "aa1ae0779f6c6d3d8be94a40ae61b72503eab43ce9a3de537956b66e5659ff43",
+            "body_bytes": 10,
+            "body_sha256": "89f0b43f502fa31533366b8e14ca6bdc67856155c8295179d3d616ba4f47dd48"
+          },
+          "reply": {
+            "wire_bytes": 110,
+            "wire_sha256": "de4b91fb40e0cae336754b0f493554bd9fa0d4e8bafdaef578e6d2c471658819",
+            "body_bytes": 12,
+            "body_sha256": "a74ed2dcec72dc97c18899e901d66bb790d5507bc41ebc15c548784a2c8e0c19"
+          }
+        },
+        "tcp": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "bf22c22a268a0b3bde7c0413b2f3855161ced8369e2eadcd32341b4e7b905b10",
+          "guest_expected_bytes_match": true,
+          "request": {
+            "wire_bytes": 11,
+            "wire_sha256": "b53b9906886c7192fa3e981eb3a7b1c8dfa8364026aaf4918b0d4147fc87d124",
+            "body_bytes": 9,
+            "body_sha256": "62b3604b1e6572a8fff8c3ff6afebb8ba252b60cd8863d7b2272688ea84d1e55"
+          },
+          "reply": {
+            "wire_bytes": 13,
+            "wire_sha256": "4c98752d55a3632ec7597a0678fe47348548e9c4127a715538e790c070e57560",
+            "body_bytes": 11,
+            "body_sha256": "422fbefe3c53a1bc6b7fcd2cc0beaee310a369f5d95dfaa6772507ee7a8efdaf"
+          }
+        }
+      }
+    },
+    {
+      "board": "cardputer-adv",
+      "scenario": "positive",
+      "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+      "device_service_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+      "firmware_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "dry_run": true,
+      "burner_submissions": 0,
+      "review_status": "manual_review",
+      "review_error": "E_NO_FRAME",
+      "final_lane": "SIM_PARTIAL",
+      "native_sta_status": "PASS",
+      "native_sta_phase": "complete",
+      "native_sta_reason": "guest_accepted_fixture_data",
+      "base_checks": {
+        "dns": true,
+        "http": true,
+        "udp": true,
+        "guest_terminal": true
+      },
+      "operation_results": {
+        "http_post": {
+          "status": "PASS",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_accepted_fixture_data",
+          "terminal_marker_sha256": "5738c7d4a5ba21aada7b67a2b61e6abbfeb9dc5f53ba17c604bcb1956fc8e9e3"
+        },
+        "tcp": {
+          "status": "PASS",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_accepted_fixture_data",
+          "terminal_marker_sha256": "bf22c22a268a0b3bde7c0413b2f3855161ced8369e2eadcd32341b4e7b905b10"
+        }
+      },
+      "sessions_released": true,
+      "original_result_summary": {
+        "bytes": 4932,
+        "sha256": "d6be0bb1aef2ab59139675d1b835bb3f61cd11ad2a6c39fd1681cf99b4cbe4ec"
+      },
+      "transport": {
+        "status": "OBSERVED",
+        "capture_sha256": "12e39aa1ded88707bbbe7ebfa410d4bd7ba6975c65e96ff6c15081bf53706016",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 3
+        },
+        "udp": {
+          "bidirectional_payload_flows": 3
+        }
+      },
+      "network_cleanup_complete": true,
+      "retained_serial_sha256": "3ffb977819b8de75206ba4f29507b39e4f4d063a4e559612bb7d7f10a00a2f65",
+      "terminal_marker_sha256": "74b07872de93d3a1ba75cbba4c1dc24d2431ea2249756b1b8e8f851f473a50dd",
+      "review_stopped_zip_sha256": "be7d6ad7fbfc00f7aef078e4a5253f2974cc3c972c589d89eabb894e59f2e755",
+      "direct_stopped_zip_sha256": "55a60fbe4140f96bd2fbf2490e4c012cc194f9615323f76d582749b165f7338d",
+      "stopped_zip_member_hashes_verified": true,
+      "raw_pcap_operations": {
+        "http_post": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "5738c7d4a5ba21aada7b67a2b61e6abbfeb9dc5f53ba17c604bcb1956fc8e9e3",
+          "guest_expected_bytes_match": true,
+          "request": {
+            "wire_bytes": 132,
+            "wire_sha256": "aa1ae0779f6c6d3d8be94a40ae61b72503eab43ce9a3de537956b66e5659ff43",
+            "body_bytes": 10,
+            "body_sha256": "89f0b43f502fa31533366b8e14ca6bdc67856155c8295179d3d616ba4f47dd48"
+          },
+          "reply": {
+            "wire_bytes": 110,
+            "wire_sha256": "de4b91fb40e0cae336754b0f493554bd9fa0d4e8bafdaef578e6d2c471658819",
+            "body_bytes": 12,
+            "body_sha256": "a74ed2dcec72dc97c18899e901d66bb790d5507bc41ebc15c548784a2c8e0c19"
+          }
+        },
+        "tcp": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "bf22c22a268a0b3bde7c0413b2f3855161ced8369e2eadcd32341b4e7b905b10",
+          "guest_expected_bytes_match": true,
+          "request": {
+            "wire_bytes": 11,
+            "wire_sha256": "b53b9906886c7192fa3e981eb3a7b1c8dfa8364026aaf4918b0d4147fc87d124",
+            "body_bytes": 9,
+            "body_sha256": "62b3604b1e6572a8fff8c3ff6afebb8ba252b60cd8863d7b2272688ea84d1e55"
+          },
+          "reply": {
+            "wire_bytes": 13,
+            "wire_sha256": "4c98752d55a3632ec7597a0678fe47348548e9c4127a715538e790c070e57560",
+            "body_bytes": 11,
+            "body_sha256": "422fbefe3c53a1bc6b7fcd2cc0beaee310a369f5d95dfaa6772507ee7a8efdaf"
+          }
+        }
+      }
+    },
+    {
+      "board": "cardputer-adv",
+      "scenario": "wrong-http_post",
+      "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+      "device_service_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+      "firmware_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "dry_run": true,
+      "burner_submissions": 0,
+      "review_status": "manual_review",
+      "review_error": "E_NO_FRAME",
+      "final_lane": "SIM_PARTIAL",
+      "native_sta_status": "FAIL",
+      "native_sta_phase": "application",
+      "native_sta_reason": "guest_rejected_stream_fixture_data",
+      "base_checks": {
+        "dns": true,
+        "http": true,
+        "udp": true,
+        "guest_terminal": true
+      },
+      "operation_results": {
+        "http_post": {
+          "status": "FAIL",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_rejected_fixture_data",
+          "terminal_marker_sha256": "331aa0a631bd2468b11266ac36f9f58781c965f6805cbbacb854317163f6e25c"
+        },
+        "tcp": {
+          "status": "PASS",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_accepted_fixture_data",
+          "terminal_marker_sha256": "bf22c22a268a0b3bde7c0413b2f3855161ced8369e2eadcd32341b4e7b905b10"
+        }
+      },
+      "sessions_released": true,
+      "original_result_summary": {
+        "bytes": 4953,
+        "sha256": "4f35166183ca7ad5075e91ede1ac5c81a574e4d1c8c871499d9b97c4b8d77156"
+      },
+      "transport": {
+        "status": "OBSERVED",
+        "capture_sha256": "d0b2bea3909b8f3b03b69de3d28808a71fbde2b0e21fadd6a22ad12b02ce38ac",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 3
+        },
+        "udp": {
+          "bidirectional_payload_flows": 3
+        }
+      },
+      "network_cleanup_complete": true,
+      "retained_serial_sha256": "a72202f743ef86c843b16a0e4e686d2d7b431bb3b69c220d940300cf764f6ccf",
+      "terminal_marker_sha256": "74b07872de93d3a1ba75cbba4c1dc24d2431ea2249756b1b8e8f851f473a50dd",
+      "review_stopped_zip_sha256": "834a419fb762953f73932f50e3a86859dd2d32757b093c07a4af82a1691b2ecf",
+      "direct_stopped_zip_sha256": "03269b9f0cd56b2b42c8ece75e305c4e005c3dec64e02a3c36c3108f3d94b0e4",
+      "stopped_zip_member_hashes_verified": true,
+      "raw_pcap_operations": {
+        "http_post": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "331aa0a631bd2468b11266ac36f9f58781c965f6805cbbacb854317163f6e25c",
+          "guest_expected_bytes_match": false,
+          "request": {
+            "wire_bytes": 132,
+            "wire_sha256": "aa1ae0779f6c6d3d8be94a40ae61b72503eab43ce9a3de537956b66e5659ff43",
+            "body_bytes": 10,
+            "body_sha256": "89f0b43f502fa31533366b8e14ca6bdc67856155c8295179d3d616ba4f47dd48"
+          },
+          "reply": {
+            "wire_bytes": 110,
+            "wire_sha256": "2630c7193f1c02fe55d9ddef019c644e6965ca3dea6672d0d52b3e0bf96b5a68",
+            "body_bytes": 12,
+            "body_sha256": "8fbccd3d6399e75e178d930ad70dcd9a7194785d96c70cf58cb33b785cbf9d2c"
+          }
+        },
+        "tcp": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "bf22c22a268a0b3bde7c0413b2f3855161ced8369e2eadcd32341b4e7b905b10",
+          "guest_expected_bytes_match": true,
+          "request": {
+            "wire_bytes": 11,
+            "wire_sha256": "b53b9906886c7192fa3e981eb3a7b1c8dfa8364026aaf4918b0d4147fc87d124",
+            "body_bytes": 9,
+            "body_sha256": "62b3604b1e6572a8fff8c3ff6afebb8ba252b60cd8863d7b2272688ea84d1e55"
+          },
+          "reply": {
+            "wire_bytes": 13,
+            "wire_sha256": "4c98752d55a3632ec7597a0678fe47348548e9c4127a715538e790c070e57560",
+            "body_bytes": 11,
+            "body_sha256": "422fbefe3c53a1bc6b7fcd2cc0beaee310a369f5d95dfaa6772507ee7a8efdaf"
+          }
+        }
+      }
+    },
+    {
+      "board": "cardputer",
+      "scenario": "wrong-tcp",
+      "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+      "device_service_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+      "firmware_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "dry_run": true,
+      "burner_submissions": 0,
+      "review_status": "manual_review",
+      "review_error": "E_NO_FRAME",
+      "final_lane": "SIM_PARTIAL",
+      "native_sta_status": "FAIL",
+      "native_sta_phase": "application",
+      "native_sta_reason": "guest_rejected_stream_fixture_data",
+      "base_checks": {
+        "dns": true,
+        "http": true,
+        "udp": true,
+        "guest_terminal": true
+      },
+      "operation_results": {
+        "http_post": {
+          "status": "PASS",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_accepted_fixture_data",
+          "terminal_marker_sha256": "5738c7d4a5ba21aada7b67a2b61e6abbfeb9dc5f53ba17c604bcb1956fc8e9e3"
+        },
+        "tcp": {
+          "status": "FAIL",
+          "checks": {
+            "peer": true,
+            "capture": true,
+            "guest_terminal": true
+          },
+          "reason": "guest_rejected_fixture_data",
+          "terminal_marker_sha256": "5c2b5dd2b160c6ddee15acc1855225c9696e97a812b71c0ac0845591c96cd231"
+        }
+      },
+      "sessions_released": true,
+      "original_result_summary": {
+        "bytes": 4943,
+        "sha256": "0265ae5d10181c6bdaff16195e39f50ce8456914ed6c32552d1d1590d6d9f36f"
+      },
+      "transport": {
+        "status": "OBSERVED",
+        "capture_sha256": "1bc5feafd7f0471d0f24a03926a6ace284eb4718b138d8aabd88b6197b084e53",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 3
+        },
+        "udp": {
+          "bidirectional_payload_flows": 3
+        }
+      },
+      "network_cleanup_complete": true,
+      "retained_serial_sha256": "31ab8a70185cc3187a148e70ab93c97fc3f24c93bb294a268502ff586c955f8d",
+      "terminal_marker_sha256": "74b07872de93d3a1ba75cbba4c1dc24d2431ea2249756b1b8e8f851f473a50dd",
+      "review_stopped_zip_sha256": "b68df4464a012122320012a4a8975456e7bb671b41abb751bda7ea2a3b54aac5",
+      "direct_stopped_zip_sha256": "189f9387a94bf6d7e78e8fb2ee50d2e1e17f7e7f40d913e84edf7439b4bd2705",
+      "stopped_zip_member_hashes_verified": true,
+      "raw_pcap_operations": {
+        "http_post": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "5738c7d4a5ba21aada7b67a2b61e6abbfeb9dc5f53ba17c604bcb1956fc8e9e3",
+          "guest_expected_bytes_match": true,
+          "request": {
+            "wire_bytes": 132,
+            "wire_sha256": "aa1ae0779f6c6d3d8be94a40ae61b72503eab43ce9a3de537956b66e5659ff43",
+            "body_bytes": 10,
+            "body_sha256": "89f0b43f502fa31533366b8e14ca6bdc67856155c8295179d3d616ba4f47dd48"
+          },
+          "reply": {
+            "wire_bytes": 110,
+            "wire_sha256": "de4b91fb40e0cae336754b0f493554bd9fa0d4e8bafdaef578e6d2c471658819",
+            "body_bytes": 12,
+            "body_sha256": "a74ed2dcec72dc97c18899e901d66bb790d5507bc41ebc15c548784a2c8e0c19"
+          }
+        },
+        "tcp": {
+          "single_connection_epoch": true,
+          "single_peer_reply": true,
+          "guest_terminal_marker_sha256": "5c2b5dd2b160c6ddee15acc1855225c9696e97a812b71c0ac0845591c96cd231",
+          "guest_expected_bytes_match": false,
+          "request": {
+            "wire_bytes": 11,
+            "wire_sha256": "b53b9906886c7192fa3e981eb3a7b1c8dfa8364026aaf4918b0d4147fc87d124",
+            "body_bytes": 9,
+            "body_sha256": "62b3604b1e6572a8fff8c3ff6afebb8ba252b60cd8863d7b2272688ea84d1e55"
+          },
+          "reply": {
+            "wire_bytes": 13,
+            "wire_sha256": "8362a42fbdc088baea4711176a2070fd5ce2330f1947cbcfeb36c4e7cff78efc",
+            "body_bytes": 11,
+            "body_sha256": "13fe17bd5ef4ec11f702453607bcfbc20e5e6704f48e7da47f71b3ad73c9bb2d"
+          }
+        }
+      }
+    },
+    {
+      "board": "cardputer-adv",
+      "scenario": "denied",
+      "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+      "device_service_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+      "firmware_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "dry_run": true,
+      "burner_submissions": 0,
+      "review_status": "manual_review",
+      "review_error": "E_NO_FRAME",
+      "final_lane": "SIM_PARTIAL",
+      "native_sta_status": "PARTIAL",
+      "native_sta_phase": "admission",
+      "native_sta_reason": "network_isolation_unavailable",
+      "base_checks": {},
+      "operation_results": {
+        "http_post": {
+          "status": "PARTIAL",
+          "reason": "stream_evidence_unavailable",
+          "checks": {}
+        },
+        "tcp": {
+          "status": "PARTIAL",
+          "reason": "stream_evidence_unavailable",
+          "checks": {}
+        }
+      },
+      "sessions_released": true,
+      "original_result_summary": {
+        "bytes": 1889,
+        "sha256": "d65cbe80adbb3b3dd975fa1020506d8cfafd11e104103300c5520472964f8f40"
+      },
+      "namespace_admission_control": {
+        "status": 503,
+        "service_code": "network_isolation_unavailable",
+        "leases_allocated": 0
+      }
+    },
+    {
+      "board": "cardputer-adv",
+      "scenario": "legacy",
+      "reviewer_source": "936be8b65ccf0598e80bf783c5a76cc06b2ddcb3",
+      "device_service_source": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+      "firmware_sha256": "f67e0a7a8e2805b01b3c2f9d1607ef6505467a60f4dd678d20a4576e56765db6",
+      "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "dry_run": true,
+      "burner_submissions": 0,
+      "review_status": "manual_review",
+      "review_error": "E_NO_FRAME",
+      "final_lane": "SIM_PARTIAL",
+      "native_sta_status": "PASS",
+      "native_sta_phase": "complete",
+      "native_sta_reason": "guest_accepted_fixture_data",
+      "base_checks": {
+        "dns": true,
+        "http": true,
+        "udp": true,
+        "guest_terminal": true
+      },
+      "operation_results": {},
+      "sessions_released": true,
+      "original_result_summary": {
+        "bytes": 3598,
+        "sha256": "64564f7aee33799a488ee4c99a7fc728051cb2ab00a064559899e043fc7555b8"
+      },
+      "transport": {
+        "status": "OBSERVED",
+        "capture_sha256": "0af851c017eabe11a635884baf4d95817cffffcddb0ff8e6e7a676706628cf4b",
+        "dhcpv4": {
+          "completed_dora_transactions": 1,
+          "leased_address_count": 1
+        },
+        "tcp": {
+          "bidirectional_payload_flows": 1
+        },
+        "udp": {
+          "bidirectional_payload_flows": 3
+        }
+      },
+      "network_cleanup_complete": true,
+      "retained_serial_sha256": "52d2c9be15b6b24b5229b3276b49d67c0edc0d0cf47ac6b9adf745112f2ffdef",
+      "terminal_marker_sha256": "74b07872de93d3a1ba75cbba4c1dc24d2431ea2249756b1b8e8f851f473a50dd",
+      "review_stopped_zip_sha256": "d0aa67a35b3d280b8ea9f77e6bcfb3fa4b2bee7f76582fd3ec531384fa94ac3a",
+      "direct_stopped_zip_sha256": "4c3aa7ad7d6a8063bb34239dc3b09314f47932ea2300a80f5616ecd331c413e0",
+      "stopped_zip_member_hashes_verified": true,
+      "raw_pcap_operations": {}
+    }
+  ],
+  "physical_hardware": "NOT RUN",
+  "browser_wasm": "NOT RUN",
+  "burner": "NOT SUBMITTED",
+  "legacy_no_options_same_firmware_current_reviewer": {
+    "board": "cardputer-adv",
+    "case": "legacy",
+    "reviewer_source": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+    "firmware_sha256": "f67e0a7a8e2805b01b3c2f9d1607ef6505467a60f4dd678d20a4576e56765db6",
+    "dry_run": true,
+    "burner_submitted": false,
+    "operation_status": "PASS",
+    "operation_phase": "complete",
+    "overall_review_error": "E_NO_FRAME",
+    "operation_statuses": {},
+    "isolated_guest_sessions_released": true,
+    "legacy_protocols": "PASS",
+    "capture_sha256": "333c90adc37abe747a91c0edccf85a2d2bd4245cf7bba3a39ed4e155ea2036c2",
+    "raw_capture_crc_verified_in_both_zips": true,
+    "reviewer_zip_sha256": "f766aa197ae24308e98ef61de1e3591113b06a68ab038ef7b2b543cf93ea9bfb",
+    "endpoint_namespace_external_route": false,
+    "bidirectional_tcp_payload_flows": 1,
+    "transport": "OBSERVED"
+  },
+  "source_seven_case_receipt_sha256": "547e1f4728afa5927b7e8b977a41cd6802daeb2ebe85d7b7f839d45abdf81b0d"
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "publication_tier": "public",
+  "title": "Cardputer 本地 HTTP POST 与 TCP 保存快照审核",
+  "source": {
+    "device_service_executed": "178d7a41c84ecf9f3b99fe6e742476b4c3f22286",
+    "reviewer_executed": "8a6640f7ce7698116c71174c8dad35d71bb8dc86",
+    "reviewer_legacy_executed": "936be8b65ccf0598e80bf783c5a76cc06b2ddcb3",
+    "device_service_published_docs": "7781a8f1a2af4e084dc6e90d1de5d6ac19d553a5"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer",
+      "Cardputer ADV"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "new_fixture_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+    "new_fixture_bytes": 8388608,
+    "legacy_fixture_sha256": "f67e0a7a8e2805b01b3c2f9d1607ef6505467a60f4dd678d20a4576e56765db6"
+  },
+  "execution": {
+    "emulator_api": "1.86.0",
+    "reviewer_api": "0.20.0",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "local_review_tests_passed": 263,
+    "native_cases": 7,
+    "local_platform_tests_run": 2430,
+    "local_platform_tests_skipped": 10,
+    "local_docs_contracts_passed": 51,
+    "github_ci": {
+      "run": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44211652376",
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    },
+    "current_reviewer_native_cases": 6,
+    "prior_reviewer_native_cases": 1
+  },
+  "checks": [
+    {
+      "name": "Both boards exact positive fixed HTTP POST and TCP",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong POST response and wrong TCP response controls",
+      "status": "PASS",
+      "scope": "Changed operation failed at the guest, other operations passed"
+    },
+    {
+      "name": "Missing namespace before network allocation",
+      "status": "PASS",
+      "scope": "Typed 503 and zero network leases allocated"
+    },
+    {
+      "name": "Legacy fixed GET/DNS/UDP without new options on Reviewer 0.19 and 0.20",
+      "status": "PASS"
+    },
+    {
+      "name": "Chromium real served Reviewer detail for one positive and two wrong-response controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Whole firmware review display readiness",
+      "status": "PARTIAL",
+      "scope": "Headless fixture E_NO_FRAME"
+    },
+    {
+      "name": "Physical hardware, browser WASM and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/linux-sta-streams.summary.json",
+      "sha256": "ebe23241ed049cdb21d11ae406f5b99cf955a714092b4de42c611d16e3845d08",
+      "bytes": 22307
+    },
+    {
+      "path": "evidence/reviewer-browser.summary.json",
+      "sha256": "303fafd11d0d9bfc236c34a565301e6f74b3695fc1e7021f7ff39bef63f605de",
+      "bytes": 1027
+    }
+  ]
+}

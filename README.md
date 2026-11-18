@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer 本地 HTTP POST 与 TCP 保存快照审核 | `PARTIAL`（本地正反对照成立，整单无画面） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-native-sta-streams-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer 原生 SPI SD 读响应与保存快照审核 | `PARTIAL`（原生响应与原版查词证据分别取证） | [查看](records/esp-emulator/2026-11-18-unit-pcm-sd-write-boot-timeline/followups/2026-11-18-cardputer-spi-sd-read-observation/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | CardputerDict ADV 0.5.0 原版查词 | `PARTIAL`（查词及画面正反对照成立） | [查看](records/esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Dial 原版快转与选曲审核复核 | `PARTIAL`（原版快转漏选可复现，Reviewer 分层验收通过） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/) |
