@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "firmware_review_attribution",
+  "overall_status": "PASS",
+  "title": "Cardputer ADV flash capacity retest",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/234",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7babbf9692c403cfc7052d8b9008d915b19a4418",
+    "intake_fix_commit": "6c28cbb59641d02b0dcdc892488e6868bc4b0ea9"
+  },
+  "hardware": {
+    "model": "Cardputer ADV",
+    "verification": "virtual-device validation"
+  },
+  "firmware": {
+    "incompatible_sha256": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826",
+    "official_control_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62"
+  },
+  "execution": {
+    "environment": "macOS ARM64, isolated Device Service and Reviewer with native QEMU and no guest NIC",
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "check": "Compose and import reject board-capacity mismatch",
+      "status": "PASS",
+      "http": 409
+    },
+    {
+      "check": "Saved-snapshot receipt retains E_STATIC capacity attribution",
+      "status": "PASS"
+    },
+    {
+      "check": "Official 8 MiB control boots and renders",
+      "status": "PASS"
+    },
+    {
+      "check": "Evidence ZIP ownership, manifest integrity and teardown",
+      "status": "PASS"
+    },
+    {
+      "check": "Physical flash and input, guest networking or cloud pairing",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/replay.summary.json"
+  ],
+  "notes": [
+    "Original failed setup trials retained",
+    "Evidence summaries omit unique identifiers and raw capture bytes"
+  ]
+}
