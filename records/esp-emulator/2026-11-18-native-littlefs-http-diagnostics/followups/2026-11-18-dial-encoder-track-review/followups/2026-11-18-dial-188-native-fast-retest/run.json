@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Dial R1F30 Device Service 1.88 原版快转复验",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "210c7bcca94c9066f7b839778db25519376879df",
+    "device_service_api": "1.88.0",
+    "openapi_sha256": "87392481ae5228143d6c90a6235e9938b31cc892d86b89befa4c97d003ca7515",
+    "native_runtime_sha256": "90cb5df45fceef9bd63e9979986e4608c4e5264c8a95e453c167e8b0f0a2a68a",
+    "native_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "hardware": {
+    "target": "Dial",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "name": "vinylM5Dial 1.0 R1F30",
+    "sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "bytes": 8388608,
+    "unchanged": true
+  },
+  "execution": {
+    "network": "offline",
+    "isolated_sessions": 2,
+    "calibration_and_trace": "normal default clock; diagnostic trace disabled",
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "36 complete GPIO actions and 1656 edges"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "18/18 same-session UART indexed play actions at 35 ms"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "scope": "14/18 same-session UART indexed play actions at 5 ms"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "physical dial, browser and acoustic playback"
+    }
+  ],
+  "evidence": [
+    "evidence/dial-r1f30-native-188.summary.json"
+  ]
+}

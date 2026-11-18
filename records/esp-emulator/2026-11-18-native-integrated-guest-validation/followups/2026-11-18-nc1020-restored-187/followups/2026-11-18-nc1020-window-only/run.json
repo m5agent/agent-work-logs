@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "NC1020 原版恢复的面板窗口追踪",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_api": "1.87.0",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "native_runtime_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "native_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "publisher_source_revision": "81b35b76cf88306cc2bfae425bff4b3e6fbf9ed1"
+  },
+  "hardware": {
+    "target": "Cardputer K132",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "name": "NC1020",
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "retained_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "original_application_bytes_verified": true
+  },
+  "execution": {
+    "network": "offline",
+    "isolated_sessions": 2,
+    "device_inputs": 0,
+    "diagnostic_trace": {
+      "M5SW_SPI_WINDOW_TRACE": "1"
+    },
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "2/2 independent restored storage with exact file and 407 SD blocks"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "scope": "1/2 full display and 1/2 stopped after painted content row 208"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "REVIEW",
+      "scope": "panel-window evidence only, absent next CASET and actual partial pixels; DMA and guest lock unresolved"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "physical or browser display"
+    }
+  ],
+  "evidence": [
+    "evidence/window-only.summary.json"
+  ]
+}

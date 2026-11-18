@@ -48,6 +48,10 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Dial 原版在 1.88 快转复验 | PARTIAL（35 ms 18/18，5 ms 14/18） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-native-fast-retest/) |
+| 2026-11-18 | ESP Emulator | Dial 原版快转的 GPIO 和选曲时间线 | PARTIAL（5 ms 17/18，一次有序边沿到达但读回漏相位） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-correlated-gpio/) |
+| 2026-11-18 | ESP Emulator | NC1020 原版面板窗口追踪 | PARTIAL（存档恢复 2/2，一次绘制停在第 208 行） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-18-nc1020-window-only/) |
+| 2026-11-18 | ESP Emulator | NC1020 原版无追踪寄存器对照 | PARTIAL（存档恢复 2/2，一次停在第 102 行，后置寄存器相同） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-18-nc1020-trace-off-mmio/) |
 | 2026-11-18 | ESP Emulator | 原版 NC1020 留存状态恢复 | `PARTIAL`（存储 2/2，完整显示 1/2） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/) |
 | 2026-11-18 | ESP Emulator | StickS3 RTC 定时及混合浅睡 | `PARTIAL`（最终原生定时、组合与复位通过，中间失败保留） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/followups/2026-11-18-sticks3-rtc-light-sleep-timer/) |
 | 2026-11-18 | ESP Emulator | StickS3 RTC GPIO 浅睡唤醒 | `PARTIAL`（GPIO 唤醒、拒绝与原版长按复验通过，保留旧运行时和未通过候选） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/) |

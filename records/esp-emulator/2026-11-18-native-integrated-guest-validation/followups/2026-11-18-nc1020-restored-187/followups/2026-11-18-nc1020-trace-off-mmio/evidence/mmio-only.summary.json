@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "validation": "virtual-device validation",
+  "scope": "Immutable offline K132 Cardputer restored-state NC1020 on Device Service 1.87.0, no guest input",
+  "source_to_diagnostic": {
+    "source_revision": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "runtime_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "soc_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "cold_firmware_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "real_imported_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "same_original_factory_bytes": true,
+    "media_seed_intact": true,
+    "guest_network": "none",
+    "guest_firmware_modified": false,
+    "trace_flags": [],
+    "replay_harness_sha256": "d6221eabc10c2d58956edb0960321f42ebdfdf9f44577b7848e1514559d0bd7d",
+    "transport": "A second isolated local QMP socket. HMP xp and info registers -a after the third standard frame. QMP query-status confirms running before each sample.",
+    "spi": [
+      {
+        "name": "spi2",
+        "base": "0x60024000"
+      },
+      {
+        "name": "spi3",
+        "base": "0x60025000"
+      }
+    ],
+    "spi_registers": {
+      "dma_conf": "0x30",
+      "int_ena": "0x34",
+      "int_raw": "0x3c",
+      "int_st": "0x40",
+      "trans_done_mask": "0x1000"
+    },
+    "interrupt_matrix": {
+      "base": "0x600c2000",
+      "cpu_bank_stride": "0x800",
+      "spi2_source": 21,
+      "spi3_source": 22,
+      "unallocated_route": 6
+    },
+    "gdma": {
+      "base": "0x6003f000",
+      "channel_stride": "0xc0",
+      "out_stride": "0x60",
+      "int_raw": "0x08",
+      "int_st": "0x0c",
+      "int_ena": "0x10",
+      "link": "0x20",
+      "state": "0x24",
+      "peri_sel": "0x48"
+    }
+  },
+  "unchanged_window_only_receipt_sha256": "e9bcd4058fdff425ec44b9169dc5159d4344921f2fa7fe34991e3c87b56c8d8c",
+  "runs": [
+    {
+      "run": "mmio-a1",
+      "storage_result": "PASS",
+      "display_result": "PASS",
+      "evidence_zip_crc_verified": true,
+      "cold_import_absent": true,
+      "flash_released": true,
+      "history_retained": true,
+      "guest_exited": true,
+      "sd_reads": {
+        "accepted_cmd17": 407,
+        "accepted_cmd18": 0,
+        "completed_blocks": 407
+      },
+      "state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "source_card_sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "final_card_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "serial_sha256": "5da73cf7862e0bba6b4d7b05bca726feea4fad904b5e432cf3132311630ef240",
+      "evidence_zip_sha256": "c2f1f7934602cf251ea3a86059488eba4d5b2e6c26dac3084e7db4c378530f8b",
+      "active_leases_after": 0,
+      "input_count": 0,
+      "worker_exited": true,
+      "heartbeat": {
+        "count": 96,
+        "first_cycles": 164524339,
+        "first_sd_delta": 0,
+        "first_rtc_hms": "11:14:55",
+        "first_draw_delta": 1,
+        "total_draws": 1
+      },
+      "frames": [
+        {
+          "frame_index": 1,
+          "seconds_from_first_capture": 0.023,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "nonblack_pixels": 25112,
+          "authored_pattern_match": true
+        },
+        {
+          "frame_index": 2,
+          "seconds_from_first_capture": 2.018,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "nonblack_pixels": 25112,
+          "authored_pattern_match": true
+        },
+        {
+          "frame_index": 3,
+          "seconds_from_first_capture": 8.013,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "nonblack_pixels": 25112,
+          "authored_pattern_match": true
+        }
+      ],
+      "late_cpu_states": [
+        {
+          "seconds_from_first_capture": 8.018,
+          "cpu0": {
+            "pc": 1107433795,
+            "interrupt": 0,
+            "ps": 394272,
+            "intenable": 318767918,
+            "spi2_routed": false
+          },
+          "cpu1": {
+            "pc": 1077424398,
+            "interrupt": 0,
+            "ps": 395808,
+            "intenable": 318767107,
+            "spi2_routed": false
+          }
+        },
+        {
+          "seconds_from_first_capture": 9.026,
+          "cpu0": {
+            "pc": 1074010742,
+            "interrupt": 0,
+            "ps": 394272,
+            "intenable": 318767918,
+            "spi2_routed": false
+          },
+          "cpu1": {
+            "pc": 1077424398,
+            "interrupt": 0,
+            "ps": 395808,
+            "intenable": 318767107,
+            "spi2_routed": false
+          }
+        }
+      ]
+    },
+    {
+      "run": "mmio-a2",
+      "storage_result": "PASS",
+      "display_result": "PARTIAL",
+      "evidence_zip_crc_verified": true,
+      "cold_import_absent": true,
+      "flash_released": true,
+      "history_retained": true,
+      "guest_exited": true,
+      "sd_reads": {
+        "accepted_cmd17": 407,
+        "accepted_cmd18": 0,
+        "completed_blocks": 407
+      },
+      "state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "source_card_sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "final_card_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "serial_sha256": "266e6f99956d55bfe957daadb8df5cb000cfe5a5625a1cfd81976f248c023019",
+      "evidence_zip_sha256": "b9c3fca6bdfb8efb60ed11a5053c268646dcefffbe85b52838ea37de4769bd07",
+      "active_leases_after": 0,
+      "input_count": 0,
+      "worker_exited": true,
+      "heartbeat": {
+        "count": 84,
+        "first_cycles": 164524339,
+        "first_sd_delta": 0,
+        "first_rtc_hms": "11:14:55",
+        "first_draw_delta": 0,
+        "total_draws": 0
+      },
+      "frames": [
+        {
+          "frame_index": 1,
+          "seconds_from_first_capture": 0.016,
+          "png_sha256": "c7bb2afd91b08fd653899bf975e774a445a08deb72d937ea117c6305b982fc2c",
+          "nonblack_pixels": 10241,
+          "authored_pattern_match": false
+        },
+        {
+          "frame_index": 2,
+          "seconds_from_first_capture": 2.02,
+          "png_sha256": "c7bb2afd91b08fd653899bf975e774a445a08deb72d937ea117c6305b982fc2c",
+          "nonblack_pixels": 10241,
+          "authored_pattern_match": false
+        },
+        {
+          "frame_index": 3,
+          "seconds_from_first_capture": 8.013,
+          "png_sha256": "c7bb2afd91b08fd653899bf975e774a445a08deb72d937ea117c6305b982fc2c",
+          "nonblack_pixels": 10241,
+          "authored_pattern_match": false
+        }
+      ],
+      "late_cpu_states": [
+        {
+          "seconds_from_first_capture": 8.017,
+          "cpu0": {
+            "pc": 1077373474,
+            "interrupt": 8,
+            "ps": 394272,
+            "intenable": 318767918,
+            "spi2_routed": false
+          },
+          "cpu1": {
+            "pc": 1077424398,
+            "interrupt": 2,
+            "ps": 394272,
+            "intenable": 318767107,
+            "spi2_routed": false
+          }
+        },
+        {
+          "seconds_from_first_capture": 9.043,
+          "cpu0": {
+            "pc": 1077384179,
+            "interrupt": 8,
+            "ps": 394784,
+            "intenable": 318767918,
+            "spi2_routed": false
+          },
+          "cpu1": {
+            "pc": 1077424398,
+            "interrupt": 2,
+            "ps": 394272,
+            "intenable": 318767107,
+            "spi2_routed": false
+          }
+        }
+      ]
+    }
+  ],
+  "controller_state_equal_at_all_four_samples": {
+    "spi2": {
+      "dma_conf": 270008320,
+      "int_ena": 4096,
+      "int_raw": 4096,
+      "int_st": 4096,
+      "done_raw": true,
+      "done_masked": true
+    },
+    "spi3": {
+      "dma_conf": 404226048,
+      "int_ena": 4096,
+      "int_raw": 4096,
+      "int_st": 4096,
+      "done_raw": true,
+      "done_masked": true
+    },
+    "cpu0_routes": {
+      "spi2": 6,
+      "spi3": 6
+    },
+    "cpu1_routes": {
+      "spi2": 6,
+      "spi3": 6
+    },
+    "gdma_out": [
+      {
+        "channel": 0,
+        "selected_peripheral": "spi2",
+        "int_raw": 0,
+        "int_st": 0,
+        "int_ena": 0,
+        "parked": false,
+        "state": 162672
+      },
+      {
+        "channel": 1,
+        "selected_peripheral": "spi3",
+        "int_raw": 0,
+        "int_st": 0,
+        "int_ena": 0,
+        "parked": false,
+        "state": 165016
+      },
+      {
+        "channel": 2,
+        "selected_peripheral": "spi2",
+        "int_raw": 0,
+        "int_st": 0,
+        "int_ena": 0,
+        "parked": false,
+        "state": 0
+      },
+      {
+        "channel": 3,
+        "selected_peripheral": "spi2",
+        "int_raw": 0,
+        "int_st": 0,
+        "int_ena": 0,
+        "parked": false,
+        "state": 0
+      },
+      {
+        "channel": 4,
+        "selected_peripheral": "spi2",
+        "int_raw": 0,
+        "int_st": 0,
+        "int_ena": 0,
+        "parked": false,
+        "state": 0
+      }
+    ]
+  },
+  "results": {
+    "storage_restored": {
+      "passed": 2,
+      "total": 2
+    },
+    "full_display": {
+      "passed": 1,
+      "total": 2
+    },
+    "partial_first_missing_content_raster_row": 103,
+    "partial_content_raster_rows_equal_to_pass": [
+      0,
+      102
+    ],
+    "remaining_partial_content_nonblack_pixels": 0
+  },
+  "bound": [
+    "Raster rows are inferred from framebuffer geometry. DCS windows, DMA payload and interrupt transitions during the draw were outside this trace-off probe.",
+    "The same settled TRANS_DONE and route state occurs on the full and the partial draw. Capture completion, acknowledgement and route transitions at transaction time to distinguish earlier guest and controller behavior.",
+    "Trace-off controls have reproduced distinct row-0 and row-102 cutoffs. The window-only trial stopped at row 208."
+  ]
+}
