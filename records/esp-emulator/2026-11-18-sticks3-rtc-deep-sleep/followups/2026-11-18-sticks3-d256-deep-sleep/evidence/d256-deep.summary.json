@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "scope": "virtual-device validation of internal RC_FAST/256 timer deep sleep on StickS3",
+  "date": "2026-11-18",
+  "status": "PASS",
+  "device_service_source": "3dae84c4cbce3671eb707f7c562973fef13df078",
+  "device_service_version": "1.94.0",
+  "openapi_sha256": "6ebca285314de432a13012f2df0f8e2497b3f71842f26739ca7deee488db1abe",
+  "native_binding": {
+    "added_patch": "0231-s3-rtc-fast-div256.patch",
+    "added_patch_sha256": "ded52a3f656854afa5347ec5ce357b4aa0d2a94109f8cba72d7fef8e6152cfb7",
+    "binary_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+    "previous_runtime_sha256": "d18e5fa7aaebda01bd4cb6eac5d4da6c11a012025882f37d567554fc807a5f06",
+    "source_qemu_commit": "40edccac415693c5130f91c01d84176ae6008566"
+  },
+  "build": {
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "source_fixture": "tests/firmware/sticks3_rtc_deep_sleep",
+    "source_sha256": {
+      "CMakeLists.txt": "c9388ec36fe6bdb0d72e4135b4ea2a134c7560bb331964158aad362b083dc4ce",
+      "main/CMakeLists.txt": "d5e48ac5d8e382fa5e99030e43bbd6e7453a56f9283068728aa2b7bdd39242b0",
+      "main/main.c": "7e9bb91cf06184d51c4e6d9341f7bee463694ee67e36b0d771ed20aaf22165cf",
+      "sdkconfig.defaults": "f369b1217f27690c2cf10e2fc8f76e33114ae9f0fc7562aff8ab4a5fb6445bad"
+    },
+    "sdk_overlay": {
+      "CONFIG_RTC_CLK_SRC_INT_8MD256": "y",
+      "CONFIG_RTC_CLK_CAL_CYCLES": "1024"
+    },
+    "sdk_overlay_sha256": "ddbff4625bf1b0453b58e01f20ed0a4192b04874859c13acfc1bd4032b18842a",
+    "generated_sdkconfig_sha256": "477b13d44e5503805096881d043b029a75ad55bc77768dcc6240e1e6e0f4c682",
+    "xtensa_compiler": "xtensa-esp-elf-gcc (crosstool-NG esp-14.2.0_20260121) 14.2.0",
+    "python": "Python 3.13.15",
+    "flash_sha256": "2f13ff0c8263e4b0eb0c9a93c75f679d51bda84bbc077970849094b5ca1707f2",
+    "flash_bytes": 8388608,
+    "app_sha256": "a487a7d87fa1529b0f4e5cc04751d6632698b4dd773e9c186339a72d325ff99a",
+    "app_bytes": 200592,
+    "elf_sha256": "fbc28df1e81e806b72e857602b08e52d4420f998f8bc5c77fc5eb093026c3278",
+    "esptool_application_checksum_and_sha_valid": true
+  },
+  "runs": [
+    {
+      "arm": "run-exact-194",
+      "execution_summary_sha256": "4caffa3d3c79db3dc282923539646905394c8441e463fe85796ec67f8cccee01",
+      "qmp_event_trace_sha256": "f47e5432af22ebf03e4757c48349a07e2b36436c150f2a4540126ffe0b15537d",
+      "device": "sticks3",
+      "runtime": "qemu",
+      "native_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "original_flash_sha256": "2f13ff0c8263e4b0eb0c9a93c75f679d51bda84bbc077970849094b5ca1707f2",
+      "app_readback_sha256": "a487a7d87fa1529b0f4e5cc04751d6632698b4dd773e9c186339a72d325ff99a",
+      "markers": [
+        "RTC_DEEP_BOOT reset=1 cause=0 rtc_us=41061",
+        "RTC_DEEP_ENTER step=1 requested_us=650000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=871463",
+        "RTC_DEEP_WAKE step=1 requested_us=650000 elapsed_us=829730 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_ENTER step=2 requested_us=1500000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=2551751",
+        "RTC_DEEP_WAKE step=2 requested_us=1500000 elapsed_us=1679499 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_PASS cycles=2",
+        "RTC_DEEP_BOOT reset=1 cause=0 rtc_us=24399",
+        "RTC_DEEP_ENTER step=1 requested_us=650000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=856161",
+        "RTC_DEEP_WAKE step=1 requested_us=650000 elapsed_us=831543 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_ENTER step=2 requested_us=1500000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=2536567",
+        "RTC_DEEP_WAKE step=2 requested_us=1500000 elapsed_us=1679690 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_PASS cycles=2"
+      ],
+      "guest_probe_result": "PASS",
+      "explicit_api_reset": true,
+      "sleep_windows": [
+        {
+          "requested_us": 650000,
+          "qmp_suspend_to_wakeup_us": 659426,
+          "monotonic_receive_interval_us": 659400
+        },
+        {
+          "requested_us": 1500000,
+          "qmp_suspend_to_wakeup_us": 1506658,
+          "monotonic_receive_interval_us": 1506658
+        },
+        {
+          "requested_us": 650000,
+          "qmp_suspend_to_wakeup_us": 661286,
+          "monotonic_receive_interval_us": 661266
+        },
+        {
+          "requested_us": 1500000,
+          "qmp_suspend_to_wakeup_us": 1511493,
+          "monotonic_receive_interval_us": 1511501
+        }
+      ],
+      "clock_select_readbacks": [
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "stage": "initial",
+          "step": 1
+        },
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "stage": "initial",
+          "step": 2
+        },
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "stage": "after_api_reset",
+          "step": 1
+        },
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "stage": "after_api_reset",
+          "step": 2
+        }
+      ],
+      "qmp_events": [
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "RESET",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP"
+      ],
+      "boot_count": 6,
+      "timing_pass": true,
+      "serial_bytes": 18926,
+      "serial_sha256": "aad829769aa92f4eb027e44b4e741a3ee71e52890018189b513273ed429e5008",
+      "zip_sha256": "dfc485cb0da2eb757dde729eb5b447104f13a014ff5edac750fbaaa720effa2a",
+      "evidence_members": 6,
+      "session_cleanup": {
+        "active_leases": 0,
+        "flash_released": true,
+        "guest_exited": true
+      },
+      "owned_service_exited": true,
+      "same_session_identity_manifest_original_app_bytes_and_archive_crc_verified": true
+    },
+    {
+      "arm": "run-exact-194-bracket",
+      "execution_summary_sha256": "70497d79faffbe61dd8e0a17d945e5a14741385686e3638a874fd88d512219f6",
+      "qmp_event_trace_sha256": "90ca38c434f0048ec58690a7df2b0d32c3a80b0a071c902ed87c553a8a5f3826",
+      "device": "sticks3",
+      "runtime": "qemu",
+      "native_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "original_flash_sha256": "2f13ff0c8263e4b0eb0c9a93c75f679d51bda84bbc077970849094b5ca1707f2",
+      "app_readback_sha256": "a487a7d87fa1529b0f4e5cc04751d6632698b4dd773e9c186339a72d325ff99a",
+      "markers": [
+        "RTC_DEEP_BOOT reset=1 cause=0 rtc_us=39905",
+        "RTC_DEEP_ENTER step=1 requested_us=650000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=870527",
+        "RTC_DEEP_WAKE step=1 requested_us=650000 elapsed_us=830154 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_ENTER step=2 requested_us=1500000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=2537460",
+        "RTC_DEEP_WAKE step=2 requested_us=1500000 elapsed_us=1666085 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_PASS cycles=2",
+        "RTC_DEEP_BOOT reset=1 cause=0 rtc_us=26798",
+        "RTC_DEEP_ENTER step=1 requested_us=650000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=854348",
+        "RTC_DEEP_WAKE step=1 requested_us=650000 elapsed_us=827331 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_ENTER step=2 requested_us=1500000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=2534066",
+        "RTC_DEEP_WAKE step=2 requested_us=1500000 elapsed_us=1679221 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_PASS cycles=2"
+      ],
+      "guest_probe_result": "PASS",
+      "explicit_api_reset": true,
+      "sleep_windows": [
+        {
+          "requested_us": 650000,
+          "qmp_suspend_to_wakeup_us": 659348,
+          "monotonic_receive_interval_us": 659349
+        },
+        {
+          "requested_us": 1500000,
+          "qmp_suspend_to_wakeup_us": 1504298,
+          "monotonic_receive_interval_us": 1504276
+        },
+        {
+          "requested_us": 650000,
+          "qmp_suspend_to_wakeup_us": 659826,
+          "monotonic_receive_interval_us": 659815
+        },
+        {
+          "requested_us": 1500000,
+          "qmp_suspend_to_wakeup_us": 1511032,
+          "monotonic_receive_interval_us": 1511134
+        }
+      ],
+      "clock_select_readbacks": [
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "qmp_status_before": "suspended",
+          "qmp_status_after": "suspended",
+          "stage": "initial",
+          "step": 1
+        },
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "qmp_status_before": "suspended",
+          "qmp_status_after": "suspended",
+          "stage": "initial",
+          "step": 2
+        },
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "qmp_status_before": "suspended",
+          "qmp_status_after": "suspended",
+          "stage": "after_api_reset",
+          "step": 1
+        },
+        {
+          "address": "0x60008074",
+          "value": "0xa0000000",
+          "rtc_clock_selector": 2,
+          "qmp_status_before": "suspended",
+          "qmp_status_after": "suspended",
+          "stage": "after_api_reset",
+          "step": 2
+        }
+      ],
+      "qmp_events": [
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "RESET",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP"
+      ],
+      "boot_count": 6,
+      "timing_pass": true,
+      "serial_bytes": 18926,
+      "serial_sha256": "834e213521482ee267bda1db39f0df18bc680ab979ffaef93bf66b86a40165c1",
+      "zip_sha256": "784406b60a14b7fb34d45df76ff1cc694e1befcf83f260e10842e6e8ec43424d",
+      "evidence_members": 6,
+      "session_cleanup": {
+        "active_leases": 0,
+        "flash_released": true,
+        "guest_exited": true
+      },
+      "owned_service_exited": true,
+      "same_session_identity_manifest_original_app_bytes_and_archive_crc_verified": true
+    }
+  ],
+  "limits": {
+    "unmodified_application": "checked-in diagnostic fixture",
+    "original_watch": "NOT RUN in these leases",
+    "external_32k": "NOT RUN",
+    "other_wakeup_sources": "NOT RUN",
+    "hardware_power_or_timing": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  }
+}

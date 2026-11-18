@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "date": "2026-11-18",
+  "source": {
+    "device_service_source": "3dae84c4cbce3671eb707f7c562973fef13df078",
+    "device_service_version": "1.94.0",
+    "openapi_sha256": "6ebca285314de432a13012f2df0f8e2497b3f71842f26739ca7deee488db1abe",
+    "native_binding": {
+      "added_patch": "0231-s3-rtc-fast-div256.patch",
+      "added_patch_sha256": "ded52a3f656854afa5347ec5ce357b4aa0d2a94109f8cba72d7fef8e6152cfb7",
+      "binary_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+      "previous_runtime_sha256": "d18e5fa7aaebda01bd4cb6eac5d4da6c11a012025882f37d567554fc807a5f06",
+      "source_qemu_commit": "40edccac415693c5130f91c01d84176ae6008566"
+    },
+    "installed_source_reference": "3dae84c4cbce3671eb707f7c562973fef13df078"
+  },
+  "hardware": {
+    "model": "StickS3",
+    "soc": "ESP32-S3",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "esp_idf_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "source_fixture": "tests/firmware/sticks3_rtc_deep_sleep",
+    "source_sha256": {
+      "CMakeLists.txt": "c9388ec36fe6bdb0d72e4135b4ea2a134c7560bb331964158aad362b083dc4ce",
+      "main/CMakeLists.txt": "d5e48ac5d8e382fa5e99030e43bbd6e7453a56f9283068728aa2b7bdd39242b0",
+      "main/main.c": "7e9bb91cf06184d51c4e6d9341f7bee463694ee67e36b0d771ed20aaf22165cf",
+      "sdkconfig.defaults": "f369b1217f27690c2cf10e2fc8f76e33114ae9f0fc7562aff8ab4a5fb6445bad"
+    },
+    "sdk_overlay": {
+      "CONFIG_RTC_CLK_SRC_INT_8MD256": "y",
+      "CONFIG_RTC_CLK_CAL_CYCLES": "1024"
+    },
+    "sdk_overlay_sha256": "ddbff4625bf1b0453b58e01f20ed0a4192b04874859c13acfc1bd4032b18842a",
+    "generated_sdkconfig_sha256": "477b13d44e5503805096881d043b029a75ad55bc77768dcc6240e1e6e0f4c682",
+    "xtensa_compiler": "xtensa-esp-elf-gcc (crosstool-NG esp-14.2.0_20260121) 14.2.0",
+    "python": "Python 3.13.15",
+    "flash_sha256": "2f13ff0c8263e4b0eb0c9a93c75f679d51bda84bbc077970849094b5ca1707f2",
+    "flash_bytes": 8388608,
+    "app_sha256": "a487a7d87fa1529b0f4e5cc04751d6632698b4dd773e9c186339a72d325ff99a",
+    "app_bytes": 200592,
+    "elf_sha256": "fbc28df1e81e806b72e857602b08e52d4420f998f8bc5c77fc5eb093026c3278",
+    "esptool_application_checksum_and_sha_valid": true
+  },
+  "execution": {
+    "independent_leases": 2,
+    "timer_cycles": 8,
+    "observed_sleep_duration_bounds_us": {
+      "650000": {
+        "count": 4,
+        "qmp_min_us": 659348,
+        "qmp_max_us": 661286,
+        "monotonic_receive_min_us": 659349,
+        "monotonic_receive_max_us": 661266
+      },
+      "1500000": {
+        "count": 4,
+        "qmp_min_us": 1504298,
+        "qmp_max_us": 1511493,
+        "monotonic_receive_min_us": 1504276,
+        "monotonic_receive_max_us": 1511501
+      }
+    },
+    "max_qmp_vs_host_receive_interval_diff_us": 102,
+    "evidence": "evidence/d256-deep.summary.json",
+    "evidence_sha256": "73a04d874aed51857364437cc109ff9a4c0dc14356118dd278a2e588c7f1a78c"
+  },
+  "checks": {
+    "overall": "PASS (internal D256 timer deep sleep only)",
+    "rtc_selector_during_suspend": "PASS (four bracketed reads, selector=2)",
+    "same_process_rearm_after_explicit_reset": "PASS",
+    "rtc_data_and_time_and_digital_bss": "PASS",
+    "same_session_zip_and_app_bytes": "PASS",
+    "owned_cleanup": "PASS",
+    "unmodified_application": "checked-in diagnostic fixture",
+    "original_watch": "NOT RUN in these leases",
+    "external_32k": "NOT RUN",
+    "other_wakeup_sources": "NOT RUN",
+    "hardware_power_or_timing": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  }
+}

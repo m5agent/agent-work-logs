@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | StickS3 内部 RC_FAST/256 RTC 定时深睡 | PASS（八次定时唤醒，复位和 RTC 保留通过） | [查看](esp-emulator/2026-11-18-sticks3-rtc-deep-sleep/followups/2026-11-18-sticks3-d256-deep-sleep/) |
 | 2026-11-18 | `M5Unified` | #444 M5Paper 示例仍指向 M5EPD | PARTIAL（code-level：M5Unified 已支持 M5Paper、缺 Paper 示例、产品页仍列已归档 M5EPD；构建/实机 NOT RUN） | [查看](m5stack-github/2026-11-18-m5unified-issue-444-paper-examples/) |
 | 2026-11-18 | Firmware Review Service | XIAOZHI_CARD_KIT 固件型号准入 | PASS（两版本均为 unsupported_target，BIN 未评估） | [查看](firmware-review-service/2026-11-18-xiaozhi-card-kit-model-admission/) |
 | 2026-11-18 | ESP Emulator | Tab5 #188 原版 GT911 面板 DSI 回包 | PARTIAL（原版实际收到 00 并进入面板未识别；有效画面待验证） | [查看](esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/followups/2026-11-18-tab5-bmi270-transport/followups/2026-11-18-tab5-bmi270-native-part/followups/2026-11-18-tab5-gt911-dsi-panel-read/) |

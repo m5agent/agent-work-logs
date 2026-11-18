@@ -31,3 +31,7 @@
 ## 未覆盖项
 
 实体硬件和功耗、browser-WASM、EXT0/EXT1、ULP、触摸深睡唤醒、其他 RTC 慢钟和电源域组合均为 `NOT RUN`。未提交 Burner。
+
+## 后续复验
+
+[内部 RC_FAST/256 定时深睡、独立计时和复位](followups/2026-11-18-sticks3-d256-deep-sleep/README.md)
