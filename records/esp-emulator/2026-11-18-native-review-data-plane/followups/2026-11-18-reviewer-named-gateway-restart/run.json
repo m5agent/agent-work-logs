@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "date": "2026-11-18",
+  "source": {
+    "baseline_device_service": "a7dbd9808a09bc507b657995dba079b8075badcf",
+    "candidate_device_service": "8fea7bb182afc0094b8c42461673459bb8f1d965",
+    "candidate_device_openapi_sha256": "045a0b29b7b6c3983493b9a59fb3f4b6851f00854239e43740df2137efb745de",
+    "reviewer": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+    "reviewer_openapi_sha256": "a2d5daa7ea48e5d446b760f422bfe203963a6a906132cf6f14b44a525784c91f",
+    "device_release": "8fea7bb182afc0094b8c42461673459bb8f1d965"
+  },
+  "hardware": {
+    "linux": "ARM64 isolated VM, no NIC",
+    "macos": "Core2 native virtual device"
+  },
+  "firmware": {
+    "cardputerdict_original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "cardputerdict_storage_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "core2_original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa"
+  },
+  "execution": {
+    "primitive.summary.json": {
+      "path": "evidence/primitive.summary.json",
+      "sha256": "4717a2e2e3cf1f4344777ea576416fa7e91e87ace427df532f71bfc28cb23e3b"
+    },
+    "macos-core2-control.summary.json": {
+      "path": "evidence/macos-core2-control.summary.json",
+      "sha256": "1f23ab33a38c24b24fa2cdfe9281f508c5055a3b33228df4c6763b56bf091a37"
+    },
+    "paired_gateway": {
+      "path": "evidence/linux-named-gateway-paired-restart.summary.json",
+      "sha256": "0b6cc6d83c31e7647f1d689511fc7015e1cace923cc1d087978cc8561dfd1b48"
+    }
+  },
+  "checks": {
+    "linux_gateway_kernel_primitive": "PASS",
+    "macos_core2_active_create_control": "PASS",
+    "device_8fea_platform_suite": {
+      "collected": 2469,
+      "passed": 2459,
+      "skipped": 10
+    },
+    "device_8fea_validators": "PASS",
+    "paired_gateway": "PASS both candidate restart orders; Device-first incumbent reproduced gateway resource leak",
+    "actual_external_tls_and_audio": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "fresh_same_original_retry_transport": "PASS",
+    "fresh_retry_review": "manual_review / E_CARDPUTER_PRONUNCIATION_PARTIAL"
+  }
+}

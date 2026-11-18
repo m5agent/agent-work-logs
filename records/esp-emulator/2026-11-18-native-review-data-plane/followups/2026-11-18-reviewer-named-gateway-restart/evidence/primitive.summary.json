@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "scope": "Linux VM named veth/NAT primitives",
+  "device_service_source": "a7dbd9808a09bc507b657995dba079b8075badcf",
+  "reviewer_source": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+  "before_named_gateway_resources": {
+    "no_named_gateway": true,
+    "isolated_peer_separate": true
+  },
+  "while_gateway_active": {
+    "gateway_named_namespace_present": true,
+    "gateway_host_veth_present": true,
+    "gateway_peer_veth_present": true,
+    "gateway_nat_table_present": true,
+    "dedicated_lab_peer_namespace_present": true,
+    "dedicated_lab_route_present": true
+  },
+  "immediately_after_gateway_cleanup": {
+    "gateway_named_namespace_present": false,
+    "gateway_host_veth_present": true,
+    "gateway_peer_veth_present": false,
+    "gateway_nat_table_present": false,
+    "dedicated_lab_peer_namespace_present": true,
+    "dedicated_lab_route_present": true
+  },
+  "actual_peer_challenge_and_reply": true,
+  "same_packet_source_nat_confirmed_on_owned_peer": true,
+  "after_gateway_cleanup": {
+    "gateway_named_namespace_present": false,
+    "gateway_host_veth_present": false,
+    "gateway_peer_veth_present": false,
+    "gateway_nat_table_present": false,
+    "dedicated_lab_peer_namespace_present": true,
+    "dedicated_lab_route_present": true
+  },
+  "outer_vm_network_adapter_count": 0,
+  "other_routes_in_peer_namespace": false,
+  "all_owned_topology_removed": true
+}

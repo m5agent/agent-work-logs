@@ -1,0 +1,275 @@
+{
+  "status": "PASS",
+  "verification": "virtual-device validation",
+  "scope": "Exact original CardputerDict 0.6.4, named Linux veth/NAT gateway resource recovery after simultaneous Device Service and Reviewer SIGKILL.",
+  "firmware_runtime": {
+    "firmware_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "native_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "release": {
+    "device_source": "8fea7bb182afc0094b8c42461673459bb8f1d965",
+    "device_openapi_sha256": "045a0b29b7b6c3983493b9a59fb3f4b6851f00854239e43740df2137efb745de",
+    "reviewer_source": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+    "reviewer_openapi_sha256": "a2d5daa7ea48e5d446b760f422bfe203963a6a906132cf6f14b44a525784c91f"
+  },
+  "baseline": {
+    "sha256": "737fc90331d26867d32a52577e0fa3cf6afe6800a3fe5af3f0a881432c035de0",
+    "device_source": "a7dbd9808a09bc507b657995dba079b8075badcf",
+    "device_openapi_sha256": "42f18e31af99bde171cd361ca3ecc55504ac0e521e6da71394934ee4502fdce9",
+    "status": "FAIL_NAMED_GATEWAY_SURVIVED_PAIRED_RESTART",
+    "before_explicit_owned_cleanup": {
+      "old_exact_outer_alive": true,
+      "old_exact_inner_alive": true,
+      "old_exact_qemu_alive": true,
+      "old_namespace_member_count": 2,
+      "gateway_named_namespace_present": true,
+      "gateway_host_veth_present": true,
+      "gateway_peer_veth_present": true,
+      "gateway_nat_table_present": true,
+      "dedicated_lab_peer_namespace_present": true,
+      "dedicated_lab_route_present": true,
+      "sandbox_runtime_cleanup": {
+        "cleanup_completed": false,
+        "qemu_process_reaped": null,
+        "dns_closed": null,
+        "http_closed": null,
+        "udp_closed": null
+      },
+      "interrupted": true,
+      "owned_virtual_flash_file_present": true,
+      "durable_worker_lease_active": true,
+      "durable_state": "stopping",
+      "gateway_bound_in_isolation_record": true,
+      "launch_receipt_present": false,
+      "state": "stopping",
+      "flash_retained": null,
+      "stop_pending": true,
+      "active_leases": 1,
+      "interrupted_reviewer_result": "E_SERVICE_RESTART",
+      "reviewer_recovery_events": [
+        {
+          "status": "pending",
+          "resolved": [],
+          "pending": [
+            "device_service_recovery_unconfirmed"
+          ]
+        }
+      ]
+    },
+    "after_exact_owned_outer_only_signal": {
+      "old_exact_outer_alive": false,
+      "old_exact_inner_alive": false,
+      "old_exact_qemu_alive": false,
+      "old_namespace_member_count": 0,
+      "gateway_named_namespace_present": false,
+      "gateway_host_veth_present": false,
+      "gateway_peer_veth_present": false,
+      "gateway_nat_table_present": false,
+      "dedicated_lab_peer_namespace_present": true,
+      "dedicated_lab_route_present": true,
+      "sandbox_runtime_cleanup": {
+        "cleanup_completed": true,
+        "qemu_process_reaped": true,
+        "dns_closed": true,
+        "http_closed": true,
+        "udp_closed": true
+      },
+      "interrupted": true,
+      "owned_virtual_flash_file_present": true,
+      "durable_worker_lease_active": true,
+      "durable_state": "stopping",
+      "gateway_bound_in_isolation_record": true,
+      "launch_receipt_present": false
+    },
+    "retained_pcap_prefix": true
+  },
+  "candidate_device_first": {
+    "sha256": "dc0c2ad20423d76bdfda4e885b568a52f1ec0643024ed7c82dee4f53548df8e1",
+    "restart_order": "device-first",
+    "gateway_terminal_receipt": {
+      "same_exact_launch_bound_in_outer_and_inner_receipts": true,
+      "inner_exited": true,
+      "inner_cleanup_completed": true,
+      "gateway_cleanup_completed": true,
+      "gateway_cleanup": {
+        "host_link_removed": true,
+        "nat_table_removed": true,
+        "namespace_removed": true
+      },
+      "raw_gateway_receipt_sha256": "ee2e8cb602c3bd1614b4ca55a1f6e9a8639ea95b7808ed61630de5908add5064"
+    },
+    "observed_before_any_retry_or_harness_teardown": {
+      "old_exact_outer_alive": false,
+      "old_exact_inner_alive": false,
+      "old_exact_qemu_alive": false,
+      "old_namespace_member_count": 0,
+      "gateway_named_namespace_present": false,
+      "gateway_host_veth_present": false,
+      "gateway_peer_veth_present": false,
+      "gateway_nat_table_present": false,
+      "dedicated_lab_peer_namespace_present": true,
+      "dedicated_lab_route_present": true,
+      "sandbox_runtime_cleanup": {
+        "cleanup_completed": true,
+        "qemu_process_reaped": true,
+        "dns_closed": true,
+        "http_closed": true,
+        "udp_closed": true
+      },
+      "interrupted": true,
+      "owned_virtual_flash_file_present": false,
+      "durable_worker_lease_active": false,
+      "durable_state": "failed",
+      "gateway_bound_in_isolation_record": true,
+      "launch_receipt_present": true,
+      "state": "failed",
+      "flash_retained": false,
+      "stop_pending": null,
+      "active_leases": 0,
+      "interrupted_reviewer_result": "E_SERVICE_RESTART",
+      "reviewer_recovery_events": [
+        {
+          "status": "complete",
+          "resolved": [
+            "released"
+          ],
+          "pending": []
+        }
+      ]
+    },
+    "separate_sibling_gateway_preserved": true,
+    "passive_terminal_confirmed_before_retry": true,
+    "same_original_standard_retry_http": 202,
+    "new_fixture_result": {
+      "status": "manual_review",
+      "error_code": "E_CARDPUTER_PRONUNCIATION_PARTIAL",
+      "same_original_saved_snapshot": true,
+      "actual_peer_flow": {
+        "sntp_matched": true,
+        "https_attempted": true,
+        "https_reply": true,
+        "tls_exchange": false
+      },
+      "new_session": true,
+      "flash_released": true,
+      "active_leases": 0
+    },
+    "original_active_and_retained_pcap_packets": [
+      26,
+      26
+    ],
+    "same_session_zip_crc_and_manifest_pass": true,
+    "pcap_and_serial_prefix_checked": true,
+    "fresh_lease_pcap_packets": 24,
+    "all_owned_test_topology_removed": true,
+    "vm_stopped": true
+  },
+  "candidate_reviewer_first": {
+    "sha256": "9c3e09879afceed89c2192e899f2d57326f71bea4e28a77f68001ec446f6d137",
+    "restart_order": "reviewer-first",
+    "gateway_terminal_receipt": {
+      "same_exact_launch_bound_in_outer_and_inner_receipts": true,
+      "inner_exited": true,
+      "inner_cleanup_completed": true,
+      "gateway_cleanup_completed": true,
+      "gateway_cleanup": {
+        "host_link_removed": true,
+        "nat_table_removed": true,
+        "namespace_removed": true
+      },
+      "raw_gateway_receipt_sha256": "026d675159271222127a09ca9f93fd4205d96426f3f33e161b38aa8ca22a64cd"
+    },
+    "observed_before_any_retry_or_harness_teardown": {
+      "old_exact_outer_alive": false,
+      "old_exact_inner_alive": false,
+      "old_exact_qemu_alive": false,
+      "old_namespace_member_count": 0,
+      "gateway_named_namespace_present": false,
+      "gateway_host_veth_present": false,
+      "gateway_peer_veth_present": false,
+      "gateway_nat_table_present": false,
+      "dedicated_lab_peer_namespace_present": true,
+      "dedicated_lab_route_present": true,
+      "sandbox_runtime_cleanup": {
+        "cleanup_completed": true,
+        "qemu_process_reaped": true,
+        "dns_closed": true,
+        "http_closed": true,
+        "udp_closed": true
+      },
+      "interrupted": true,
+      "owned_virtual_flash_file_present": false,
+      "durable_worker_lease_active": false,
+      "durable_state": "failed",
+      "gateway_bound_in_isolation_record": true,
+      "launch_receipt_present": true,
+      "state": "failed",
+      "flash_retained": false,
+      "stop_pending": null,
+      "active_leases": 0,
+      "interrupted_reviewer_result": "E_SERVICE_RESTART",
+      "reviewer_recovery_events": [
+        {
+          "status": "pending",
+          "resolved": [],
+          "pending": [
+            "device_service_unavailable"
+          ]
+        },
+        {
+          "status": "complete",
+          "resolved": [
+            "released"
+          ],
+          "pending": []
+        }
+      ]
+    },
+    "separate_sibling_gateway_preserved": true,
+    "passive_terminal_confirmed_before_retry": true,
+    "same_original_standard_retry_http": 202,
+    "new_fixture_result": {
+      "status": "manual_review",
+      "error_code": "E_CARDPUTER_PRONUNCIATION_PARTIAL",
+      "same_original_saved_snapshot": true,
+      "actual_peer_flow": {
+        "sntp_matched": true,
+        "https_attempted": true,
+        "https_reply": true,
+        "tls_exchange": false
+      },
+      "new_session": true,
+      "flash_released": true,
+      "active_leases": 0
+    },
+    "original_active_and_retained_pcap_packets": [
+      26,
+      26
+    ],
+    "same_session_zip_crc_and_manifest_pass": true,
+    "pcap_and_serial_prefix_checked": true,
+    "fresh_lease_pcap_packets": 26,
+    "all_owned_test_topology_removed": true,
+    "vm_stopped": true
+  },
+  "primitive": {
+    "sha256": "4717a2e2e3cf1f4344777ea576416fa7e91e87ace427df532f71bfc28cb23e3b",
+    "real_local_tcp_nat_round_trip": true,
+    "kernel_nft_comment_and_handle": true
+  },
+  "containment": {
+    "virtual_machine_network_adapter_count": 0,
+    "peer_had_default_route": false,
+    "external_calls": 0,
+    "only_synthetic_sntp_and_tls_client_hello_observation": true,
+    "certificate_sent": false,
+    "burner_submitted": false
+  },
+  "limits": [
+    "External HTTPS and decoded application media were not exercised.",
+    "Fresh saved-snapshot app remained manual_review/E_CARDPUTER_PRONUNCIATION_PARTIAL with the intentional no-certificate peer.",
+    "Functional recovery qualified only in isolated native Linux ARM64."
+  ]
+}
