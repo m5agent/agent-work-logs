@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 保存快照复审的 SDMMC 写入 | PASS（触摸写入、原版无写入、旧 API 保守处理、复位介质身份） | [查看](records/esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/followups/2026-11-18-tab5-sdmmc-action-review/) |
 | 2026-11-18 | ESP Emulator | M5TabOS 原版双核空闲任务与定时中断 | PARTIAL（双核 tick 中断交付，仍无完整画面） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/) |
 | 2026-11-18 | ESP Emulator | Tab5 UserDemo V0.4 初始化断言和 panic 等待 | PARTIAL（同源码 A/B，原版仍无完整帧） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-userdemo-es8388/) |
 | 2026-11-18 | ESP Emulator | Tab5 双核 PMU 暂停与 WFI 对照 | PASS（两种状态暂停恢复，UserDemo 归因保持开放） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-pmu-wfi-control/) |

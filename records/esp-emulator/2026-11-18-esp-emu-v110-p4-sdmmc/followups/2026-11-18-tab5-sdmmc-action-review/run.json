@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Tab5 SDMMC write evidence in saved-snapshot reviews",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "device_base_commit": "57d397462e661e608e7c3ae2a878e80527d08e84",
+    "device_tested_candidate_commit": "151dc43402a2e68a95ed0f424f56513e2434b5db",
+    "device_documentation_rebased_candidate_commit": "15724035425f9d64cb69d752ebb359e4e2458022",
+    "reviewer_base_commit": "ecc8cfc3aadd5b2ae0289171784d2abac91bf855",
+    "reviewer_candidate_commit": "2246e07ea10b6963e2c0096d1d2ba6e4187e3f47",
+    "behavior_and_api_sha256": {
+      "device_baseline": "57d397462e661e608e7c3ae2a878e80527d08e84",
+      "reviewer_baseline": "ecc8cfc3aadd5b2ae0289171784d2abac91bf855",
+      "device_behavior_sha256": "89199a4cd3e534b6579ab9fa851f53dc06c087a8c083c05c9d60ea17cb04370e",
+      "reviewer_sd_behavior_sha256": "5fee0864e362e351b036825484c09b7a32ce27e4d29389f8ce12bb9a2aa9abd1",
+      "reviewer_worker_sha256": "dbc35fec40c1348a06dfdd1b4b944cb95b4fbd9b0e769ae98588a3cee68a740a",
+      "device_openapi_version": "1.91.0",
+      "device_openapi_sha256": "56292f3394f0948fce598686ae0831df6da2ae29a764af07da8926458b7dfc48",
+      "reviewer_openapi_version": "0.22.0",
+      "reviewer_openapi_sha256": "29fd294e77134869adf50806b54ca79c0f2d5ad6e2b8aa4f62c7d787a2c8617f"
+    }
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "virtual_device": {
+      "device": "tab5",
+      "mode": "qemu",
+      "panel": "st7123",
+      "capture": "esp-emu-dsi",
+      "sdmmc_slot": 0,
+      "sha256": {
+        "esp_emu_1_1_0": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+        "p4_rev0_rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "initial_efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+        "c6_companion_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+        "st7123_touch_part": "6ecac188e0ebd7659b6af627c3f1fcf9c5143e2f36b5f9a4b8cb187468de14f3"
+      }
+    }
+  },
+  "firmware": {
+    "sdk": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "synthetic_merged_sha256": "87cf38e3a282c24c37ba17dde1d5dfedb341a8a2b252f947a1a00898a95ed5e1",
+    "original_arduventure_1_0_0": "e2f228813b719b81c47a8deaa7576f1b83e61e950c6178c5cf570bfaca7b8616",
+    "normalized_arduventure_1_0_0": "0922e46d70edc11d285fd3d4023a18f061d4d95fd8e7a1729e00702cc3dba063",
+    "synthetic_blank_fat16_sha256": "758cd5e18a7bd98241cb2849645bb8cc1d6f1646e9eb6cc8985ca0546211cfa1"
+  },
+  "execution": {
+    "environment": "isolated virtual-device validation through ordinary saved-snapshot Reviewer and Device Service HTTP",
+    "independent_cases": 4,
+    "active_leases_at_completion": 0,
+    "burner": "NOT SUBMITTED",
+    "additional_frozen_release_positive_replays": 1,
+    "additional_frozen_release_stock_controls": 1
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "check": "fixed ESP-IDF fixture with native DSI, ST7123 and SDMMC APIs",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "check": "saved-snapshot Retry and actual typed center action",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "check": "same-session ST7123 center point, release and write UART markers",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "quiet stamp, stamp advance and exact files after stop",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "stock selective no-write and unchanged SD seed",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "explicit no-stamp admission on legacy Device API 1.90",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "zero-input external API reset fences previous media identity",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "check": "native DSI before/after guest state",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "check": "physical hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "frozen exact release source positive same path with same two file SHA-256",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "frozen exact release source unchanged stock no-write control",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/tab5-sdmmc-action-review-summary.json",
+    "evidence/frozen-release-replay-summary.json",
+    "evidence/frozen-release-stock-control-summary.json"
+  ],
+  "notes": [
+    "Receipt carries measured runtime dependencies and ZIP hashes. See report for action attribution limits."
+  ]
+}
