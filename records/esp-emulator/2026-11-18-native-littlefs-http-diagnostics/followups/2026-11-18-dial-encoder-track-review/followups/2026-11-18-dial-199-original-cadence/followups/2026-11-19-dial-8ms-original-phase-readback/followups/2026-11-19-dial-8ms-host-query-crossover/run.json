@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "validation",
+  "overall_status": "PARTIAL",
+  "title": "Exact Dial R1F30 8 ms observation crossover",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "executed_source": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "main_source_checked": "8e4909f91fe628b7a93bdca46a833f2749496d17"
+  },
+  "hardware": {
+    "device": "Dial",
+    "validation_class": "virtual-device validation"
+  },
+  "firmware": {
+    "device": "Dial",
+    "firmware": "vinylM5Dial 1.0 R1F30",
+    "firmware_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "firmware_file_bytes": 8388608
+  },
+  "execution": {
+    "environment": "isolated macOS native QEMU Device Service 1.99.1",
+    "polling_controls": "12 matched pairs at 8 ms and 2 at 35 ms",
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "same_start_condition_and_physical_edge_delivery",
+      "status": "PASS",
+      "details": "28/28 controls and all tested commands delivered 64 GPIO edges"
+    },
+    {
+      "name": "both_observation_arms_uart_outcome",
+      "status": "PASS",
+      "details": "All 28 emitted checksum-valid track 1 selection; quiet zero in-window queries"
+    },
+    {
+      "name": "prior_fast_rotary_miss_attribution",
+      "status": "PARTIAL",
+      "details": "No miss in this new cohort. Previous misses persist as evidence"
+    },
+    {
+      "name": "same_session_zip_and_teardown",
+      "status": "PASS",
+      "details": "Member bytes and CRC, stopped service, Flash released, no leases"
+    },
+    {
+      "name": "physical_encoder_and_browser",
+      "status": "NOT RUN",
+      "details": "Exact wired virtual native path only"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/dial-8ms-crossover.summary.json",
+      "kind": "redacted paired observations and exact receipt digests"
+    }
+  ]
+}
