@@ -1,0 +1,84 @@
+{
+  "device": "sticks3",
+  "runtime": "qemu",
+  "service_source": "80a3b5eda5f50c4a8cced04e31021fc8363593ab",
+  "firmware_sha256": "db7bfcc809651b3fad6a051bd5ebc3575007a3d2becdcdf028e883a6911c1f39",
+  "native_sha256": "d18e5fa7aaebda01bd4cb6eac5d4da6c11a012025882f37d567554fc807a5f06",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "cases": {
+    "timer": {
+      "first_observed_rtc": {
+        "state0": 2147483648,
+        "wakeup_state": 262144,
+        "reject": 3221225472,
+        "digital_power": 3221356560,
+        "sleep_timer0": 111137,
+        "sleep_timer1": 0,
+        "int_raw": 0,
+        "reset_state": 12353
+      },
+      "last_observed_rtc": {
+        "state0": 536870912,
+        "wakeup_state": 262144,
+        "reject": 3221225472,
+        "digital_power": 3221356544,
+        "sleep_timer0": 335981,
+        "sleep_timer1": 0,
+        "int_raw": 0,
+        "reset_state": 12613
+      },
+      "guest_assertions": [
+        "RTC_DEEP_BOOT reset=1 cause=0 rtc_us=39601",
+        "RTC_DEEP_ENTER step=1 requested_us=650000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=842888",
+        "RTC_DEEP_WAKE step=1 requested_us=650000 elapsed_us=802810 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_ENTER step=2 requested_us=1500000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=2494522",
+        "RTC_DEEP_WAKE step=2 requested_us=1500000 elapsed_us=1650995 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_PASS cycles=2"
+      ],
+      "post_reset_guest_assertions": [
+        "RTC_DEEP_BOOT reset=1 cause=0 rtc_us=24792",
+        "RTC_DEEP_ENTER step=1 requested_us=650000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=828000",
+        "RTC_DEEP_WAKE step=1 requested_us=650000 elapsed_us=803039 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_ENTER step=2 requested_us=1500000",
+        "RTC_DEEP_BOOT reset=8 cause=4 rtc_us=2482354",
+        "RTC_DEEP_WAKE step=2 requested_us=1500000 elapsed_us=1653950 rtc_cookie=0x7c83e419",
+        "RTC_DEEP_PASS cycles=2"
+      ],
+      "same_guest_process": true,
+      "virtual_observation": "PASS",
+      "qmp_states": [
+        "suspended",
+        "running",
+        "suspended",
+        "running",
+        "suspended",
+        "running",
+        "suspended",
+        "running"
+      ],
+      "qmp_events": [
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "RESET",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP",
+        "SUSPEND",
+        "RESET",
+        "WAKEUP"
+      ],
+      "zip_sha256": "0c58a36c3c64941018ea95df5a2711e33ecaec2517b590aaf13fc4892c75cf2b",
+      "serial_sha256": "5bfedb35c8d9880d4c35a7cd8ad0001d2a848ab7681c6500cf98603b84f8b24d",
+      "isolated_session_released": true
+    }
+  },
+  "offline": true,
+  "isolated_service_stopped": true
+}

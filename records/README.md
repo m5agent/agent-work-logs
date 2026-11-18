@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | StickS3 原生 RTC 定时深睡 | PASS（同一会话四轮定时唤醒、原版 Watch 浅睡回归） | [查看](esp-emulator/2026-11-18-sticks3-rtc-deep-sleep/) |
 | 2026-11-18 | nuxt-m5-docs | Markdown 文档 Skill 可复现更新 | PASS（虚拟设备查阅和分发包回读） | [查看](nuxt-m5-docs/2026-11-18-documentation-skill-refresh/) |
 | 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 异常与板级对照 | PARTIAL（两种 GT911 路径各复现 18 次软件复位，转储写入前定位 CPU1 指令访问异常） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/) |
 | 2026-11-18 | ESP Emulator | CardputerDict ADV 0.5.0 原版 HTTPS 数字发音 | PASS（直接 Device Service 同会话缓存和数字音频） | [查看](esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/) |

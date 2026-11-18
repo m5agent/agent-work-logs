@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "StickS3 RTC 定时深睡与浅睡回归",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+    "implementation_commit": "80a3b5eda5f50c4a8cced04e31021fc8363593ab",
+    "published_main_commit": "80a3b5eda5f50c4a8cced04e31021fc8363593ab"
+  },
+  "hardware": {},
+  "firmware": {
+    "probe_sha256": "db7bfcc809651b3fad6a051bd5ebc3575007a3d2becdcdf028e883a6911c1f39",
+    "probe_bytes": 8388608,
+    "original_watch_sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+    "original_watch_version": "0.3.8"
+  },
+  "execution": {
+    "environment": "m5sticks3 native offline QEMU and isolated Device Service",
+    "api_version": "1.89.0",
+    "openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "final_native_sha256": "d18e5fa7aaebda01bd4cb6eac5d4da6c11a012025882f37d567554fc807a5f06",
+    "validation": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "assertion": "ESP-IDF 5.5.4 合并镜像与最终 QEMU 原生二进制哈希绑定。"
+    },
+    {
+      "layer": "device_response",
+      "status": "FAIL",
+      "assertion": "旧运行时在同探针首轮深睡请求后停在 panic。"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "assertion": "最终在同一进程完成显式复位前后合计四轮深睡。"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "assertion": "确认数值复位原因、唤醒原因、RTC 保留数据和数字域普通内存初始化。"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "assertion": "仅限原版 Watch 的虚拟设备浅睡、B 键唤醒和唤醒画面。"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "assertion": "三份证据 ZIP 的 CRC 与清单全部核验。"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "assertion": "固定公开 main 源码复验四轮定时深睡，另在定时和 GPIO 浅睡已挂起时调用普通 HTTP reset 并验证同一来宾完成重新入睡及唤醒。"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "assertion": "源码提交和针对该源码的两个 CI 工作通过。"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/rtc-deep-sleep.summary.json",
+      "sha256": "7cbf65dc1d3e9878391348fbaeceb19e815622c08d60f02f00b1adecb9b3c307"
+    },
+    {
+      "path": "evidence/exact-committed-deep.summary.json",
+      "sha256": "f0f8ae704177381f9f0ba25961baef76f36f27253e7850a3be9d2b97f6ff573d"
+    },
+    {
+      "path": "evidence/shallow-suspended-http-reset.summary.json",
+      "sha256": "4f51a1a0fedfecfa41ec731fc70a9fbe0059a431d859afea2719adaa7b86249a"
+    }
+  ],
+  "same_session_zip_checks": {
+    "baseline": {
+      "zip_sha256": "7dc27358334a3913b2e550a4f8109d4a4f092f66559e24256fc47647f4e604c5",
+      "manifest_member_count": 8,
+      "firmware_sha256": "db7bfcc809651b3fad6a051bd5ebc3575007a3d2becdcdf028e883a6911c1f39"
+    },
+    "timer_deep_sleep": {
+      "zip_sha256": "747484d9a831d372e24a40ae77c51f62d0d95503b927053426f4523ced99772f",
+      "manifest_member_count": 8,
+      "firmware_sha256": "db7bfcc809651b3fad6a051bd5ebc3575007a3d2becdcdf028e883a6911c1f39"
+    },
+    "original_watch_light_sleep": {
+      "zip_sha256": "4499548780dc1a7f5872c673f488623e84172da1b17865e5ed3f2fe7359dbb5a",
+      "manifest_member_count": 8,
+      "firmware_sha256": "1d6ae6df2473bebf662955bbb050ce2304081e79485d9044d0bff3d150a4e363"
+    },
+    "deep_exact_source": {
+      "zip_sha256": "0c58a36c3c64941018ea95df5a2711e33ecaec2517b590aaf13fc4892c75cf2b",
+      "manifest_member_count": 8,
+      "firmware_sha256": "db7bfcc809651b3fad6a051bd5ebc3575007a3d2becdcdf028e883a6911c1f39"
+    },
+    "shallow_suspended_http_reset": {
+      "zip_sha256": "1e6e06bcc8942c5b1862784c22802dc447d86d6b44e3877b3911330325c478cd",
+      "manifest_member_count": 8,
+      "firmware_sha256": "9b8c59f93cf00dfbd0df52ca7d0f5ca2a032c3677a7ebd53f3cd960952f82275"
+    }
+  },
+  "notes": [
+    "保留中间候选失败和环境结果。",
+    "真机、功耗、浏览器和其他唤醒源未执行。",
+    "未提交 Burner。"
+  ],
+  "ci": {
+    "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44254482005",
+    "status": "PASS",
+    "source_commit": "80a3b5eda5f50c4a8cced04e31021fc8363593ab",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  },
+  "local_source_checks": {
+    "platform_suite": {
+      "total": 2440,
+      "passed": 2430,
+      "skipped": 10
+    },
+    "artifact_validators_passed": 4,
+    "canonical_patch_layers": 176,
+    "forward_and_reverse_patch_verification": "PASS"
+  },
+  "main_ci": {
+    "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44254994638",
+    "status": "PASS",
+    "source_commit": "80a3b5eda5f50c4a8cced04e31021fc8363593ab",
+    "jobs": {
+      "platform-contracts": "PASS",
+      "network-namespace-policy": "PASS"
+    }
+  }
+}
