@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Dial original R1F30 missed 8 ms phase with original GPIO and UART readback",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "49f8ee2a4db30de0bdea49245d736fa8590a1628",
+    "device_service_frozen_commit": "981fdcdf09253b75be960772147258b677775d8c"
+  },
+  "hardware": {
+    "device": "Dial",
+    "soc": "ESP32-S3",
+    "machine": "m5dial",
+    "runtime": "qemu",
+    "validation_class": "virtual-device validation",
+    "unit": "AudioPlayer U197",
+    "unit_port": "PORT.B",
+    "indexed_tracks": 7,
+    "original_rotary_pins": [
+      41,
+      40
+    ]
+  },
+  "firmware": {
+    "name": "vinylM5Dial 1.0 R1F30",
+    "source_sha256": "7778656ee942bb5e87fbc780955c452f752059c9cf9325d7e026b83ec6c7ffaf",
+    "source_bytes": 8388608,
+    "unchanged": true
+  },
+  "execution": {
+    "environment": "isolated native macOS ARM64 Device Service; network disabled",
+    "task_id": "[redacted]",
+    "session_id": "[redacted]",
+    "artifact_capture_started_at": "2026-11-18T16:53:25.053017+00:00",
+    "artifact_capture_finished_at": "2026-11-18T16:58:12.122557+00:00",
+    "device_service_openapi": "1.99.0",
+    "api_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "release_qemu_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+    "read_only_observer_qemu_sha256": "0a4d21d04c16b5ce6be647239b731f2a3e59a7ccbd7904e70d54436a17a37560",
+    "esp32s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "native_release_8ms_selection",
+      "status": "PARTIAL",
+      "observed": "19/20 expected; one valid index 7 when expected 1"
+    },
+    {
+      "name": "same_original_8ms_readback",
+      "status": "PASS",
+      "observed": "Two traced misses explained by fully unsampled phases 14 and 4; +60 from actual registers and matching UART index 7"
+    },
+    {
+      "name": "read_only_observer_8ms_selection",
+      "status": "PARTIAL",
+      "observed": "18/20 expected; one additional unsampled phase revised to +64 by original transition table"
+    },
+    {
+      "name": "explicit_35ms_selection",
+      "status": "PASS",
+      "observed": "20/20 release and 20/20 observer preconditions, 6/6 additional same-start same-direction full-turn control plus 6/6 preconditions"
+    },
+    {
+      "name": "release_history_cleanup",
+      "status": "PASS",
+      "observed": "ZIP CRC and digest verification, three stopped sessions, released Flash and zero leases"
+    },
+    {
+      "name": "cause_of_poll_gaps",
+      "status": "REVIEW",
+      "observed": "Application render, guest scheduling and host scheduling not isolated"
+    },
+    {
+      "name": "physical_rotary_browser_wasm_and_pcm",
+      "status": "NOT RUN",
+      "observed": "Native rotary and indexed port-B UART only"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/phase-summary.json",
+      "kind": "redacted original behavior and timing summary"
+    }
+  ],
+  "notes": [
+    "No changes to original firmware, committed source, or resident service. Archive excludes raw trace or host/session identifiers."
+  ]
+}

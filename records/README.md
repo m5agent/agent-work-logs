@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | Dial 原版 8 ms 漏选的同会话 GPIO 读回 | PARTIAL（原版复现，诊断读回漏采，35 ms 对照通过） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-199-original-cadence/followups/2026-11-19-dial-8ms-original-phase-readback/) |
 | 2026-11-19 | ESP Emulator | Linux 活动原版审核的异常关机恢复 | FAIL（跨启动恢复和重试受阻，旧证据可读） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-active-cold-gateway-recovery/) |
 | 2026-11-19 | ESP Emulator | PaperColor 原版厂测 USB MSC 块读取 | PARTIAL（两次读块完成，原版稳定性待验） | [查看](esp-emulator/2026-11-13-community-firmware-issues/followups/2026-11-19-papercolor-original-msc-bulk-read/) |
 | 2026-11-19 | ESP Emulator | Cardputer NC1020 原版停刷的两个 SPI 等待现场 | PARTIAL（两种停刷复现，已有修订对照完整） | [查看](esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-19-nc1020-199-cold-restore/followups/2026-11-19-nc1020-199-spi-wait/) |
