@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "validation": "virtual-device validation",
+  "scope": "Additive K132 Cardputer original restored-state NC1020 capture with a diagnostic-only native build",
+  "source_to_diagnostic": {
+    "source_revision": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "soc_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "cold_firmware_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "real_imported_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "same_original_factory_bytes": true,
+    "media_seed_intact": true,
+    "source_upstream": "2c17bd45439cd08b873b9a411940c8e53ae4dde4",
+    "stock_qemu_v4_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "copy_source_checks": {
+      "hw/m5stopwatch/esp32s3_gpspi.c": "8216d7074169af581ec9cf927a8db948a7c3128118acca490f346ee5316d98a8",
+      "hw/m5stopwatch/m5cardputer.c": "f9bdfa54249bc05ecd8feed34e047eacc2a698c84da88d2bd9e50dcf6fb6e2a5",
+      "hw/m5stopwatch/m5stopwatch.h": "54c0e7a7a9fae4d26d03ae022cc04685e3e072edd092edd901baca5a9e67b6a5",
+      "hw/xtensa/esp32s3_intc.c": "97e57c1cfaa22f837fc0aa8a040333b938ae4477d6fc3b0b3d663d71156a7cbc",
+      "include/hw/xtensa/esp32s3_intc.h": "5b96ab26324501d8381186f7da27ca31703b7b2200aacb7c1b8dfaeac633b6ac",
+      "hw/dma/esp_gdma.c": "2737ef4c3fb95cd3ef5d316f56f7c4c0092b980baa1de62eb46d7345486446a9"
+    },
+    "diagnostic_qemu_sha256": "6fd37888fd84f7958783fbf65bee4d2aca40d412d5b616c5ead0cac06681953b",
+    "diagnostic_patch_sha256": "a13ececaf0cdd798dfcd15cb4eaf2bfe06d5e1809bb62c0aab470baf36012467",
+    "native_build": "fresh arm64 Darwin Xtensa, retained v4 source, libslirp-4.7.0 path corrected in isolated pkg-config",
+    "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "dependency_sha256": {
+      "lib/libslirp.a": "87edf45ed2daf0a68bb02d0e30b17a8bc71a9804f98edc8eee0fc5c35c034ec0",
+      "include/slirp/libslirp.h": "7276b26a265bdaf83e8623ba39d458d294ab09712fc1f3ab47326e0041039a7d",
+      "lib/libgcrypt.a": "d00d988b592a92be90b53940ab25f1cd09bb2c85280fcac2a93c7db316365349",
+      "lib/libgpg-error.a": "6ed7c6f1b01c2c96278bf6b4ea6f79627c22a8bb9862d9194cdf5cd55a883267"
+    },
+    "diagnostic_source_sha256": {
+      "hw/m5stopwatch/esp32s3_gpspi.c": "50af20ecbe200ed26fb6216cc69b4035f7bb9007192cad6310caff5f2e750042",
+      "hw/m5stopwatch/m5_k132_spi2_trace.h": "2392f1f0da3a4049fe7fdcb48cde5192b4a3451c3229f926ce937f321d35f368",
+      "hw/m5stopwatch/m5cardputer.c": "dd91dc7bbe0862e2d6bdad9d6334f6140fb55acda7d82f356dca2539b2c576c9",
+      "hw/m5stopwatch/m5stopwatch.h": "310a3d5a2bc92eb777ff322ee5625758368bdfa0e18111330d1067cdd003165e",
+      "hw/xtensa/esp32s3_intc.c": "af639e2a1a98274e579595ff5b9ee35bed77b61004784a0f827622269314a2ab"
+    },
+    "apply_check": true,
+    "reverse_check": true,
+    "replay_harness_sha256": "df1aa1e2ee1c9c01aa3e10136ec0783d813eaa18c9a0cbbd3068e5c60e2c5cda",
+    "raw_parser_sha256": "5429bf7fcd870a927d8ef9f6732de741bca7c04717d24e6c51774717f4df5dc7",
+    "guest_network": "none",
+    "guest_firmware_modified": false,
+    "enable": {
+      "M5SW_K132_SPI2_RING": "1"
+    },
+    "other_trace_flags": [],
+    "readback": "One read-only local QOM getter x-k132-spi2-history on /machine after the final frame for each valid trial",
+    "max_events_retained_per_trial": 16384,
+    "ring_args": {
+      "BEGIN": [
+        "USER",
+        "MS_DLEN",
+        "DMA_CONF",
+        "panel_selected"
+      ],
+      "GDMA_TX": [
+        "requested_bytes",
+        "read_bytes",
+        "panel_selected",
+        "reserved"
+      ],
+      "PANEL": [
+        "last_DCS_command",
+        "command_phase",
+        "bytes",
+        "address_params_for_2a_or_2b"
+      ],
+      "DONE": [
+        "INT_RAW",
+        "INT_ENA",
+        "tx_length",
+        "panel_selected"
+      ],
+      "CLEAR": [
+        "write_value",
+        "INT_RAW_after",
+        "INT_ENA",
+        "reserved"
+      ],
+      "MATRIX_LEVEL": [
+        "input_level",
+        "routes_cpu0_low_byte_cpu1_high_byte",
+        "CPU0_INTSET",
+        "CPU1_INTSET"
+      ],
+      "MATRIX_ROUTE": [
+        "target_CPU",
+        "old_low_byte_new_high_byte",
+        "source_level",
+        "target_INTSET"
+      ]
+    }
+  },
+  "unchanged_control_receipts_sha256": {
+    "baseline": "a55f8312f0772751152d8b29af9338e8854a1672e0f13a0dd2a7db02bd1f9437",
+    "window_only": "e9bcd4058fdff425ec44b9169dc5159d4344921f2fa7fe34991e3c87b56c8d8c",
+    "mmio_only": "b61cd80ece64ff96765c38da655a6bb481e5cb85596fc62be5d717bc435f991c"
+  },
+  "runs": [
+    {
+      "run": "ring-a1",
+      "storage_result": "PASS",
+      "display_result": "PARTIAL",
+      "source_card_sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "final_card_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "completed_sd_blocks": 407,
+      "input_count": 0,
+      "active_leases_after": 0,
+      "flash_released": true,
+      "history_retained": true,
+      "guest_exited": true,
+      "worker_exited": true,
+      "evidence_zip_crc_verified": true,
+      "evidence_zip_sha256": "d2237636169a9afc7f85d389d4cdf658bf1e417cc4b18c3759735ab4b5ca465e",
+      "serial_sha256": "c60f688659b05875aa15adfa3fe61126a548c7fd01adc6696b2bb99a262a2db9",
+      "first_heartbeat": {
+        "cycles": 164524339,
+        "rtc_hms": "11:14:55",
+        "sd_reads_delta": 0,
+        "draws_delta": 0
+      },
+      "heartbeat_count": 74,
+      "frames": [
+        {
+          "frame_index": 1,
+          "seconds_from_first_capture": 0.022,
+          "png_sha256": "5c6860449b12974ca53eee3a9568dde5d76188cca682819da0bfcf79c5671d6e",
+          "nonblack_pixels": 1820,
+          "authored_pattern_match": false
+        },
+        {
+          "frame_index": 2,
+          "seconds_from_first_capture": 2.015,
+          "png_sha256": "5c6860449b12974ca53eee3a9568dde5d76188cca682819da0bfcf79c5671d6e",
+          "nonblack_pixels": 1820,
+          "authored_pattern_match": false
+        },
+        {
+          "frame_index": 3,
+          "seconds_from_first_capture": 8.016,
+          "png_sha256": "5c6860449b12974ca53eee3a9568dde5d76188cca682819da0bfcf79c5671d6e",
+          "nonblack_pixels": 1820,
+          "authored_pattern_match": false
+        }
+      ],
+      "qom_read_s_after_first_frame": 8.027,
+      "qom_ring": {
+        "capacity": 16384,
+        "written": 51251,
+        "retained": 16384,
+        "sha256": "6fb146fbc235092ea7237d8e132132c08e24c4b4a197903799cc990ad610899d",
+        "bytes": 938367
+      },
+      "events_by_kind": {
+        "DONE": 1891,
+        "MATRIX_LEVEL": 3781,
+        "CLEAR": 3780,
+        "BEGIN": 1890,
+        "GDMA_TX": 1890,
+        "PANEL": 1890,
+        "MATRIX_ROUTE": 1262
+      },
+      "consecutive_content_rows_from_0": 23,
+      "color_transfer_oracle": "240 requested, 240 read by GDMA, 240 passed to panel before TRANS_DONE in every captured content row",
+      "first_missing_content_raster_row": 23
+    },
+    {
+      "run": "ring-a2",
+      "storage_result": "PASS",
+      "display_result": "PARTIAL",
+      "source_card_sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "final_card_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "completed_sd_blocks": 407,
+      "input_count": 0,
+      "active_leases_after": 0,
+      "flash_released": true,
+      "history_retained": true,
+      "guest_exited": true,
+      "worker_exited": true,
+      "evidence_zip_crc_verified": true,
+      "evidence_zip_sha256": "92226aa94491a13ebe9d6f404df5a729efea49b0ba754d36e3c0f166215ca778",
+      "serial_sha256": "68b6577ba025cdd1bbf6c765ed0161a0bab5e841464ca47aacc896a14701b52f",
+      "first_heartbeat": {
+        "cycles": 164524339,
+        "rtc_hms": "11:14:55",
+        "sd_reads_delta": 0,
+        "draws_delta": 0
+      },
+      "heartbeat_count": 74,
+      "frames": [
+        {
+          "frame_index": 1,
+          "seconds_from_first_capture": 0.016,
+          "png_sha256": "827a23efc6b84e306d68a4e933070593cc30261a857534a877ca9f09c8a9905d",
+          "nonblack_pixels": 5714,
+          "authored_pattern_match": false
+        },
+        {
+          "frame_index": 2,
+          "seconds_from_first_capture": 2.014,
+          "png_sha256": "827a23efc6b84e306d68a4e933070593cc30261a857534a877ca9f09c8a9905d",
+          "nonblack_pixels": 5714,
+          "authored_pattern_match": false
+        },
+        {
+          "frame_index": 3,
+          "seconds_from_first_capture": 8.013,
+          "png_sha256": "827a23efc6b84e306d68a4e933070593cc30261a857534a877ca9f09c8a9905d",
+          "nonblack_pixels": 5714,
+          "authored_pattern_match": false
+        }
+      ],
+      "qom_read_s_after_first_frame": 8.025,
+      "qom_ring": {
+        "capacity": 16384,
+        "written": 53359,
+        "retained": 16384,
+        "sha256": "a17228eb82f92fedd3be1da978804dfb6b7927ff7c5d5d792bac9ed27ef72c3c",
+        "bytes": 938375
+      },
+      "events_by_kind": {
+        "MATRIX_ROUTE": 1264,
+        "CLEAR": 3780,
+        "MATRIX_LEVEL": 3780,
+        "BEGIN": 1890,
+        "GDMA_TX": 1890,
+        "PANEL": 1890,
+        "DONE": 1890
+      },
+      "consecutive_content_rows_from_0": 64,
+      "color_transfer_oracle": "240 requested, 240 read by GDMA, 240 passed to panel before TRANS_DONE in every captured content row",
+      "first_missing_content_raster_row": 64
+    },
+    {
+      "run": "ring-a3",
+      "storage_result": "PASS",
+      "display_result": "PASS",
+      "source_card_sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "final_card_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "completed_sd_blocks": 407,
+      "input_count": 0,
+      "active_leases_after": 0,
+      "flash_released": true,
+      "history_retained": true,
+      "guest_exited": true,
+      "worker_exited": true,
+      "evidence_zip_crc_verified": true,
+      "evidence_zip_sha256": "46bafdcb4e1382ba45fc83b1b8945ebbb0ecb56827236142b2e45c8fab8588c8",
+      "serial_sha256": "0cd59066b8265b24f5a75de84a331c900375cef4f2009c2750076026036d2fdb",
+      "first_heartbeat": {
+        "cycles": 164524339,
+        "rtc_hms": "11:14:55",
+        "sd_reads_delta": 0,
+        "draws_delta": 1
+      },
+      "heartbeat_count": 73,
+      "frames": [
+        {
+          "frame_index": 1,
+          "seconds_from_first_capture": 0.019,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "nonblack_pixels": 25112,
+          "authored_pattern_match": true
+        },
+        {
+          "frame_index": 2,
+          "seconds_from_first_capture": 2.012,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "nonblack_pixels": 25112,
+          "authored_pattern_match": true
+        },
+        {
+          "frame_index": 3,
+          "seconds_from_first_capture": 8.014,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "nonblack_pixels": 25112,
+          "authored_pattern_match": true
+        }
+      ],
+      "qom_read_s_after_first_frame": 8.025,
+      "qom_ring": {
+        "capacity": 16384,
+        "written": 63291,
+        "retained": 16384,
+        "sha256": "6d723622b3a75e698e5d8a9d205507351d199514b6c74c1f29b9783944554af3",
+        "bytes": 938375
+      },
+      "events_by_kind": {
+        "MATRIX_ROUTE": 1264,
+        "CLEAR": 3780,
+        "MATRIX_LEVEL": 3780,
+        "BEGIN": 1890,
+        "GDMA_TX": 1890,
+        "PANEL": 1890,
+        "DONE": 1890
+      },
+      "consecutive_content_rows_from_0": 240,
+      "color_transfer_oracle": "240 requested, 240 read by GDMA, 240 passed to panel before TRANS_DONE in every captured content row"
+    }
+  ],
+  "results": {
+    "storage_restores": 3,
+    "full_displays": 1,
+    "partial_displays": 2,
+    "total": 3
+  },
+  "same_row_boundaries": {
+    "ring_a1": {
+      "last_fully_painted_row": 22,
+      "next_row": 23,
+      "observed_boundary": "The following CASET finished and the next RASET command byte reached the panel. Its one-byte GDMA and TRANS_DONE sequence and unallocated route exactly match the passing trial. The partial ring ends before the control's CPU1 CLEAR and following RASET parameters.",
+      "matched_terminal_events": [
+        {
+          "sequence": 51248,
+          "transaction": 5914,
+          "cpu": 1,
+          "event": "PANEL",
+          "args_hex": [
+            "0000002b",
+            "00000001",
+            "00000001",
+            "00000000"
+          ]
+        },
+        {
+          "sequence": 51249,
+          "transaction": 5914,
+          "cpu": 1,
+          "event": "DONE",
+          "args_hex": [
+            "00001000",
+            "00001000",
+            "00000001",
+            "00000001"
+          ]
+        },
+        {
+          "sequence": 51250,
+          "transaction": 5914,
+          "cpu": 1,
+          "event": "MATRIX_LEVEL",
+          "args_hex": [
+            "00000001",
+            "00000606",
+            "00000000",
+            "00000000"
+          ]
+        }
+      ],
+      "control_next_clear": {
+        "sequence": 51251,
+        "transaction": 5914,
+        "cpu": 1,
+        "event": "CLEAR",
+        "args_hex": [
+          "00001000",
+          "00000000",
+          "00001000",
+          "00000000"
+        ]
+      },
+      "control_next_RASET": {
+        "sequence": 51256,
+        "transaction": 5915,
+        "cpu": 1,
+        "event": "PANEL",
+        "args_hex": [
+          "0000002b",
+          "00000000",
+          "00000004",
+          "003f003f"
+        ]
+      }
+    },
+    "ring_a2": {
+      "last_fully_painted_row": 63,
+      "next_row": 64,
+      "observed_boundary": "The row-63 color GDMA and TRANS_DONE matched the passing trial. In both, source 21 raised CPU0 INTSET bit 8, then the CPU0 route went 8 to 6 with the source high and bit 8 dropped. The partial ring ends before the control's CPU1 CLEAR and next CASET.",
+      "terminal_events": [
+        {
+          "sequence": 53355,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "PANEL",
+          "args_hex": [
+            "0000002c",
+            "00000000",
+            "000000f0",
+            "00000000"
+          ]
+        },
+        {
+          "sequence": 53356,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "DONE",
+          "args_hex": [
+            "00001000",
+            "00001000",
+            "000000f0",
+            "00000001"
+          ]
+        },
+        {
+          "sequence": 53357,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "MATRIX_LEVEL",
+          "args_hex": [
+            "00000001",
+            "00000608",
+            "00000108",
+            "00000000"
+          ]
+        },
+        {
+          "sequence": 53358,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "MATRIX_ROUTE",
+          "args_hex": [
+            "00000000",
+            "00000608",
+            "00000001",
+            "00000008"
+          ]
+        }
+      ],
+      "control_matching_events": [
+        {
+          "sequence": 53355,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "PANEL",
+          "args_hex": [
+            "0000002c",
+            "00000000",
+            "000000f0",
+            "00000000"
+          ]
+        },
+        {
+          "sequence": 53356,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "DONE",
+          "args_hex": [
+            "00001000",
+            "00001000",
+            "000000f0",
+            "00000001"
+          ]
+        },
+        {
+          "sequence": 53357,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "MATRIX_LEVEL",
+          "args_hex": [
+            "00000001",
+            "00000608",
+            "00000100",
+            "00000000"
+          ]
+        },
+        {
+          "sequence": 53358,
+          "transaction": 6157,
+          "cpu": 0,
+          "event": "MATRIX_ROUTE",
+          "args_hex": [
+            "00000000",
+            "00000608",
+            "00000001",
+            "00000000"
+          ]
+        },
+        {
+          "sequence": 53359,
+          "transaction": 6157,
+          "cpu": 1,
+          "event": "CLEAR",
+          "args_hex": [
+            "00001000",
+            "00000000",
+            "00001000",
+            "00000000"
+          ]
+        }
+      ]
+    }
+  },
+  "bound": [
+    "The bounded QOM ring overwrote part of startup. Every restored content row through each terminal row remains captured.",
+    "CPU0 INTSET proves modeled delivery to interrupt input in A2. The experiment covers selected terminal transitions; guest ISR completion, acknowledgement beyond sampled registers, application task state, bus ownership and result-queue state remain unresolved.",
+    "The two partial draws ended in different guest transaction phases. This evidence identifies neither a common first cause nor a patch or rollout acceptance."
+  ]
+}

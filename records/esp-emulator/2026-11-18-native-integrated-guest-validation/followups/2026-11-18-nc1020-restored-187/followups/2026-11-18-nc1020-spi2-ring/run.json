@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "NC1020 原版 SPI2 事务完成和中断路由",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_api": "1.87.0",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "native_runtime_sha256": "6fd37888fd84f7958783fbf65bee4d2aca40d412d5b616c5ead0cac06681953b",
+    "release_runtime_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "native_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "diagnostic_patch_sha256": "a13ececaf0cdd798dfcd15cb4eaf2bfe06d5e1809bb62c0aab470baf36012467"
+  },
+  "hardware": {
+    "target": "Cardputer K132",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "name": "NC1020",
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "retained_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "original_factory_application_unchanged": true
+  },
+  "execution": {
+    "network": "offline",
+    "isolated_sessions": 3,
+    "device_inputs_per_session": 0,
+    "trace_flags": {
+      "M5SW_K132_SPI2_RING": "1"
+    },
+    "maximum_events_per_ring": 16384,
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "3/3 exact restored state and 407 SD blocks per session"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "scope": "1/3 complete display; other trials fully painted through row 22 and row 63, inclusive"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "REVIEW",
+      "scope": "240-byte color transfer and TRANS_DONE observed through each terminal row; two distinct ensuing transaction boundaries"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "scope": "guest ISR completion, queue and bus ownership"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "physical or browser display"
+    }
+  ],
+  "evidence": [
+    "evidence/k132-spi2-ring.summary.json"
+  ]
+}

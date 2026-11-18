@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "CardputerDict 原版 HTTPS 放行、拒绝与诊断 I2S DMA",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "published_base_commit": "210c7bcca94c9066f7b839778db25519376879df",
+    "candidate_schema_sha256": "d9c039e140afde3747ddc3894c82f872e8ad0a99ba6ac79702d81d51f03b6518",
+    "stock_base_schema_sha256": "87392481ae5228143d6c90a6235e9938b31cc892d86b89befa4c97d003ca7515",
+    "linux_aarch64_xtensa_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "esp32_s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "locally_retained_candidate_commit": "97ae097ddf1337c327e8bdbeae29642401ed5a74",
+    "locally_retained_candidate_git_file_sha256": {
+      "docs/device-service.openapi.yaml": "d9c039e140afde3747ddc3894c82f872e8ad0a99ba6ac79702d81d51f03b6518",
+      "platform/tools/device_service.py": "4a8f4ca83dfa0b493bff47271262318c415612d5bf1b0bae7bcfed41eb4f19f6",
+      "platform/tools/device_service_network.py": "d288207f8692b92a28376672bf43841725d81369b8cb57c4dd01a73bde6615a8",
+      "platform/tools/network_sandbox.py": "425196402c4d3b827755c05ff921b142d652a6b9267c63f0d9ca175b83c3772c"
+    }
+  },
+  "hardware": {
+    "target": "Cardputer K132",
+    "validation": "virtual-device",
+    "host": "Linux arm64"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "composed_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929",
+    "diagnostic_pair_input_sd_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62",
+    "original_bin_modified": false
+  },
+  "execution": {
+    "isolated_network": "Linux namespace with nftables default-drop egress",
+    "case_count": 2,
+    "same_original_input_card": true,
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "same guest DNS and matched SNTP in both trials; stock pronunciation TLS passed only on controlled allow"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "guest-created 10605-byte MP3 and exact diagnostic I2S PCM; denied case emitted two SYNs without response and had no MP3"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "scope": "actual Cardputer K132 guest definition and input frames"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "default playback, acoustics, browser and physical hardware"
+    },
+    {
+      "layer": "workflow",
+      "status": "NOT RUN",
+      "scope": "resident install, Firmware Reviewer and Burner"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputerdict-https-allow-deny.summary.json"
+  ]
+}
