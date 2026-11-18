@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "validation",
+  "date": "2026-11-19",
+  "overall_status": "PARTIAL",
+  "title": "AtomS3 original Spirit Level GPIO41 paired and typed press validation",
+  "source": {
+    "a3": {
+      "api_sha256": "cd1a84391f6f091fef671f05720c13f7d453c7378b70117e34b83ba6515b8689",
+      "api_version": "1.99.2",
+      "machine": "m5atoms3-st7735",
+      "source": "c25fdfc9623cdd716a395b881466c426b319474d"
+    },
+    "a4": {
+      "api_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+      "api_version": "1.99.3",
+      "machine": "m5atoms3-st7735",
+      "source": "cd1296802e2ac9972c84cb0fa7680083b48e987c"
+    },
+    "native_xtensa_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e"
+  },
+  "hardware": {
+    "board": "AtomS3",
+    "machine": "m5atoms3-st7735",
+    "validation_class": "native virtual-device validation"
+  },
+  "firmware": {
+    "author_source_commit": "095e0174a7529be52ffa53403c64dd2e105fc1b6",
+    "bytes": 609856,
+    "name": "Spirit Level v1.0.0",
+    "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df",
+    "public_release_asset_digest_and_size_verified": true,
+    "sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393"
+  },
+  "execution": {
+    "same_original": true,
+    "independent_sessions": 2,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "a3_host_paired_gpio41_calibration",
+      "status": "PASS",
+      "details": {
+        "gpio41_levels": [
+          0,
+          1
+        ],
+        "host_observed_gpio41_interval_ms": 611.131,
+        "input_posts": 2,
+        "name": "07-600ms-pair",
+        "receipt": {
+          "bytes": 767,
+          "sha256": "2d92c05832159b4312a82531a5736f0ea32b5a7f90abf34e16b11aa963e42490"
+        },
+        "requested_seconds": 0.6
+      }
+    },
+    {
+      "name": "a4_typed_gpio41_input_delivery",
+      "status": "PASS",
+      "details": "Five one-POST actions, exact requested virtual hold times, confirmed GPIO41 low/high edges"
+    },
+    {
+      "name": "a4_declared_timing_behavior",
+      "status": "PARTIAL",
+      "details": "600/610 ms retained tilt; 700 ms calibrated; 2200 ms set zero; 2350 ms restored original tilt"
+    },
+    {
+      "name": "same_session_frames_original_application_and_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "reviewer_physical_browser_power_cycle_production",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/atoms3-spirit-gpio41-timing.summary.json",
+      "kind": "Redacted paired GPIO41 timing and original app effect summary"
+    }
+  ]
+}
