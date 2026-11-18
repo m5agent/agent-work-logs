@@ -82,6 +82,7 @@
 | 2026-11-18 | ESP Emulator | Tab5 #188 原版 UIFlow2 V2.5.4 双 Part 对照 | PARTIAL（双 Part 复现同一超长编码请求） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/) |
 | 2026-11-18 | ESP Emulator | Nesso N1 #216 原版 RFID 看门狗与横屏 | PARTIAL（持续运行失败，离线横屏通过） | [查看](records/esp-emulator/2026-11-13-community-firmware-issues/followups/2026-11-18-nesso-rfid-current-paired/) |
 | 2026-11-18 | ESP Emulator | NC1020 原版双核 SPI 锁交接 | PARTIAL（定位一次完整竞态，另一路径保留） | [查看](records/esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-18-nc1020-dual-core-cas/) |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Core2 2048 原版四方向 Reviewer 0.24 | PASS（八次合法滑动及棋盘复核） | [查看](records/esp-emulator/2026-11-18-core2-2048-reviewer-024/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Core2 2048 原版 1.89 / Reviewer 0.21 四向 | PASS（四方向各两次合法移动） | [查看](records/esp-emulator/2026-11-18-mp3-2048-original-replay/followups/2026-11-18-core2-2048-189-review021/) |
 | 2026-11-18 | ESP Emulator | Dial 原版在 1.88 快转复验 | PARTIAL（35 ms 18/18，5 ms 14/18） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-native-fast-retest/) |
 | 2026-11-18 | ESP Emulator | Dial 原版快转的 GPIO 和选曲时间线 | PARTIAL（5 ms 17/18，一次有序边沿到达但读回漏相位） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-correlated-gpio/) |

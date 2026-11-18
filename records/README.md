@@ -65,6 +65,7 @@
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 CarPlay 原版发布包复核 | `PARTIAL`（原版画面通过，整单交互保留） | [查看](esp-emulator/2026-11-18-tab5-identity-dial-media-review/followups/2026-11-18-tab5-release-package-readback/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 原生取帧准入与 Reviewer 观察 | `PARTIAL`（CarPlay 出帧，UserDemo 缺帧与 ROM 复位已独立取证） | [查看](esp-emulator/2026-11-18-tab5-identity-dial-media-review/followups/2026-11-18-tab5-frame-admission/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 原生 VFS 留存清单与文件摘要审核 | `PARTIAL`（分区回读和文件正负对照成立，整单仍待人工复核） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-retained-vfs-file-review/) |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | Core2 2048 原版四方向 Reviewer 0.24 | PASS（八次合法滑动及棋盘复核） | [查看](esp-emulator/2026-11-18-core2-2048-reviewer-024/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | MP3 与 2048 原版隔离复审 | `PASS`（固定 PCM 与八次合法拖动通过） | [查看](esp-emulator/2026-11-18-mp3-2048-original-replay/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | StickS3 All day watch 原版看门狗复核 | `PARTIAL`（两次 CPU1 看门狗与 RTC 等待证据一致，修复未验证） | [查看](esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-watch-retained-watchdog/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 保存快照的本地 STA 应用断言 | `PARTIAL`（三板固定应用通过，错字节和准入对照成立；整单无画面） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-native-sta-saved-review/) |
