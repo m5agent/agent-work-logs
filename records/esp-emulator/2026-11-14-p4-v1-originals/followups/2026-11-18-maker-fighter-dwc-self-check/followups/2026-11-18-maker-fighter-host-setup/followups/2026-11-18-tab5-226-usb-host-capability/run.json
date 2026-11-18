@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 USB Host 能力记录与 Maker Fighter 1.4 原版对照",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/226",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+    "candidate_commit": "6dd68a116a44a9518ca56501ca6ffd212e167bd7"
+  },
+  "hardware": {
+    "device": "Tab5",
+    "validation": "virtual-device validation",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Maker Fighter 1.4",
+    "original_sha256": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+    "normalized_sha256": "4da826b590d879ccb7728b20257c1847a8093868eb2752600994f1242438bdeb"
+  },
+  "execution": {
+    "environment": "isolated Device Service 1.99 and native esp-emu 1.1.0",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "原版 USB Host 初始化、注册和空端口事件等待",
+      "status": "PASS"
+    },
+    {
+      "name": "归类、取证和清理",
+      "status": "PASS"
+    },
+    {
+      "name": "外设连接、枚举和端点数据传输",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/usb-host-capability.summary.json",
+      "sha256": "51e31b14331c48d82c564ac9a4791d9df94f158f0069e51214a95b377a1fbced"
+    }
+  ],
+  "notes": [
+    "未运行物理硬件或提交 Burner。",
+    "设备能力接口沿用 OpenAPI 1.99 的已有枚举。"
+  ]
+}
