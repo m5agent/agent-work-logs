@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "service_debug",
+  "overall_status": "PASS",
+  "title": "XIAOZHI_CARD_KIT 1.0/1.1 固件审核型号准入",
+  "source": {
+    "repository": "firmware-review-service",
+    "base_commit": "aebbe38ce0fa2ba5c278270554ef8af6f5da8a32"
+  },
+  "hardware": {},
+  "firmware": {
+    "target": "XIAOZHI_CARD_KIT",
+    "raw_bin_status": "NOT EVALUATED",
+    "declared_identity": [
+      {
+        "version": "1.0",
+        "sha256": "7e6b206ad06cf3a661b38887e56467b0ec4124753e0f7a0db900bef8297f0384",
+        "bytes": 2930208
+      },
+      {
+        "version": "1.1",
+        "sha256": "5fcc77a2b2f09237cc243261a93bd1c9b57c51dc8fed2ee64dda242e7937522e",
+        "bytes": 3978784
+      }
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.13.15, isolated Reviewer, local pending query fixture",
+    "openapi_version": "0.23.0",
+    "openapi_sha256": "482ad5ffe2279a46cc79f641cfb165416786eb00abfb77ae92b9c1a28bb96bce"
+  },
+  "checks": [
+    {
+      "name": "normal dry-run queue and typed unsupported target result",
+      "status": "PASS",
+      "versions": 2
+    },
+    {
+      "name": "saved snapshot guard for missing matching BIN",
+      "status": "PASS",
+      "http_status": 409,
+      "versions": 2
+    },
+    {
+      "name": "BIN download, static analysis and virtual-device guest behavior",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical device validation and Burner publication",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/reviewer-xiaozhi-model-admission.summary.json"
+  ],
+  "evidence_sha256": {
+    "evidence/reviewer-xiaozhi-model-admission.summary.json": "76665587b1cf31b2db28de94d9678b7fd6a532012e8db2d00f07a220a5ccc7f4"
+  },
+  "notes": [
+    "Success is scoped to the Reviewer HTTP and worker admission path. The two firmware identities are declared values from archived metadata."
+  ]
+}

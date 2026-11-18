@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | Firmware Review Service | XIAOZHI_CARD_KIT 固件型号准入 | PASS（两版本均为 unsupported_target，BIN 未评估） | [查看](records/firmware-review-service/2026-11-18-xiaozhi-card-kit-model-admission/) |
 | 2026-11-18 | ESP Emulator | Tab5 #188 原版 GT911 面板 DSI 回包 | PARTIAL（原版实际收到 00 并进入面板未识别；有效画面待验证） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/followups/2026-11-18-tab5-bmi270-transport/followups/2026-11-18-tab5-bmi270-native-part/followups/2026-11-18-tab5-gt911-dsi-panel-read/) |
 | 2026-11-18 | ESP Emulator | Tab5 #226 Maker Fighter 原版 USB Host 安装与事件等待 | PARTIAL（Host 安装和客户端注册通过；根端口上电、无连接，枚举待验证） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-maker-fighter-dwc-self-check/followups/2026-11-18-maker-fighter-host-setup/) |
 | 2026-11-18 | ESP Emulator | Tab5 #226 原版 Maker Fighter USB 自检 | PARTIAL（1.1.0 原版 DWC 核心 ID 自检通过，出帧和 USB Host 枚举仍待验证） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-maker-fighter-dwc-self-check/) |
