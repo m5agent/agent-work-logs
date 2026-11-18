@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 #227 原版启动和 GT911 触摸复验 | PASS（原版主页及确认弹窗，限定虚拟设备） | [查看](records/esp-emulator/2026-11-17-tab5-st7123-gt911-gestures/followups/2026-11-18-tab5-227-carplay-199/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 无网卡 Linux 通道原版 Core2 2048 审核 | PASS（原版四向、证据与清理，常驻接入和真机 NOT RUN） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-18-linux-vz-reviewer-core2/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Dial R1F30 快转与原版 GPIO 采样 | PARTIAL（5 ms 错选，诊断确认漏采相位；默认 35 ms 通过） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-199-original-cadence/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer ADV 16 MiB 镜像准入复验（#234） | PASS（拒绝与 8 MiB 原版出帧；真机 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-17-cardputer-adv-16mb-flash-intake/followups/2026-11-18-cardputer-adv-flash-capacity-current/) |

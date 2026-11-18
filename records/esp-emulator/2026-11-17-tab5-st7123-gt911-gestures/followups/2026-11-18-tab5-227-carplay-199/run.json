@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Tab5 CarPlay original current GT911 startup and input",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/227",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "218106fac28258325bed4a58091cf1217f67252f",
+    "frozen_executable_source": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3"
+  },
+  "hardware": {
+    "board": "Tab5 GT911/ILI9881C",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "CarPlay 1.0.0 original",
+    "bytes": 2221360,
+    "sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+    "normalized_flash_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b"
+  },
+  "execution": {
+    "environment": "isolated macOS arm64 Device Service 1.99.0 and esp-emu 1.1.0",
+    "validation_type": "virtual-device validation",
+    "physical": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {"name": "exact original and ordinary cold boot without matching ELF", "status": "PASS"},
+    {"name": "GT911 contact acknowledgement and original pairing confirmation UI", "status": "PASS"},
+    {"name": "bounded observation without original reset loop", "status": "PASS"},
+    {"name": "same-session ZIP and teardown", "status": "PASS"},
+    {"name": "independent GT911 reset line, alternate panel CarPlay, real hardware or iPhone USB", "status": "NOT RUN"}
+  ],
+  "evidence": ["evidence/carplay-227-199.summary.json"],
+  "notes": ["No pairing deletion was confirmed. No runtime source or resident service was modified."]
+}
