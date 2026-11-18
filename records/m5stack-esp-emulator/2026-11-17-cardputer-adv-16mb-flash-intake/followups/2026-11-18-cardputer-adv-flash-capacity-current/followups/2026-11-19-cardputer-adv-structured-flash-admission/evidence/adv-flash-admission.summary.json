@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "validation_class": "virtual-device validation",
+  "device": {
+    "model": "Cardputer ADV",
+    "source": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "api": "1.99.1",
+    "openapi_sha256": "e0b930608eab9a18e588ecb3ea61035cd8a5f43b69a998643aab6ee2408e3c35",
+    "native_qemu_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5"
+  },
+  "reviewer_candidate": {
+    "version": "0.29.0",
+    "openapi_sha256": "19c0975a130d21dc47a707d647c4bf6553f3b76b0519e3643578718bcb72d374",
+    "host_python": "3.9.6",
+    "unit_tests_passed": 301
+  },
+  "original_incompatible_firmware": {
+    "file_bytes": 2041968,
+    "sha256": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826",
+    "capacity_in_bytes": {
+      "device_flash_size": 8388608,
+      "required_flash_size": 16777216,
+      "bootloader_flash_size": 16777216,
+      "partition_end": 16777216
+    }
+  },
+  "intake_and_standard_saved_snapshot": {
+    "baseline": {
+      "reviewer_source": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+      "compose_http": 409,
+      "import_http": 409,
+      "intake_reason": "firmware_flash_contract_mismatch",
+      "reviewer_terminal": "failed",
+      "reviewer_code": "E_STATIC",
+      "human_finding": "Flash 容量",
+      "structured_admission": null,
+      "virtual_flash": "NOT RUN",
+      "native_guest_sessions_for_incompatible_firmware": 0,
+      "lease_count_after": 0,
+      "owned_service_processes_exited": true,
+      "raw_receipt": {
+        "bytes": 1198,
+        "sha256": "9eea763bd1858a672996a036ec90fd23dba1b4d826ed0aba843370734715f533"
+      },
+      "static_evidence_receipt": {
+        "bytes": 207,
+        "sha256": "46553cdf732fbe43ad9f88e677fd2aea375e04a53afd7ac63c469fe02d3d5a4c"
+      }
+    },
+    "candidate": {
+      "reviewer_source": "69386c6a162a1c786d6745c46eaa330c14558d3c",
+      "compose_http": 409,
+      "import_http": 409,
+      "intake_reason": "firmware_flash_contract_mismatch",
+      "reviewer_terminal": "failed",
+      "reviewer_code": "E_STATIC",
+      "human_finding": "Flash 容量",
+      "structured_admission": {
+        "category": "firmware_target_incompatible",
+        "phase": "firmware_composition",
+        "reason_code": "firmware_flash_contract_mismatch",
+        "device_id": "cardputer-adv",
+        "firmware_sha256": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826",
+        "flash_bytes": {
+          "device_flash_size": 8388608,
+          "required_flash_size": 16777216,
+          "bootloader_flash_size": 16777216,
+          "partition_end": 16777216
+        }
+      },
+      "virtual_flash": "NOT RUN",
+      "native_guest_sessions_for_incompatible_firmware": 0,
+      "lease_count_after": 0,
+      "owned_service_processes_exited": true,
+      "raw_receipt": {
+        "bytes": 2455,
+        "sha256": "806b38e30f9bb21d36dfc0ef86b6102b2885ace8c0d4e1e0c9873b509722323f"
+      },
+      "static_evidence_receipt": {
+        "bytes": 669,
+        "sha256": "fd10714002a7b7d3d805654d1d294b966c41fc8a64b1a51a8ff4486a307bee78"
+      }
+    }
+  },
+  "native_official_uiflow2_positive": {
+    "source_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62",
+    "normalized_flash_sha256": "f9d6026012b893409b33fde8be2e7b508f6c669db8b6d4f42d56522fe2b7c9d4",
+    "frame_sha256": "9e84a3960a595a21faaf59781f6a7a499bec9a14de218aa6fd8ff33dc3adbe39",
+    "serial_sha256": "7e84d379abbd3f1a8a12801a747a968a59041c6a40e9da65a8c4a7d0b40dbcd6",
+    "evidence_zip_sha256": "b58b9728e2e6afa6d8baf0b81fa2082b2b7e226404951343ec191ca4a74c009b",
+    "native_guest_booted": true,
+    "exact_runtime_verified": true,
+    "zip_manifest_verified": true,
+    "source_file_bytes": 8384512,
+    "padded_flash_bytes": 8388608,
+    "frame_dimensions": [
+      240,
+      135
+    ],
+    "frame_nonblack_pixels": 32400,
+    "frame_distinct_colors": 2,
+    "zip_receipt": {
+      "bytes": 10746,
+      "sha256": "b58b9728e2e6afa6d8baf0b81fa2082b2b7e226404951343ec191ca4a74c009b"
+    },
+    "all_zip_members_verified_against_manifest": true,
+    "authorized_native_guest_threshold": "boot_and_frame",
+    "writable_flash_released": true,
+    "lease_count_after": 0,
+    "owned_processes_exited": true
+  },
+  "earlier_test_setup_failures": [
+    {
+      "role": "baseline",
+      "receipt": {
+        "bytes": 795,
+        "sha256": "2d7f4975a8ec9ac885b5415d5ef678fd42bd04011e2cc711922338e3ea8fd55a"
+      },
+      "owned_cleanup": true,
+      "counts_as_product_result": false
+    },
+    {
+      "role": "candidate",
+      "receipt": {
+        "bytes": 795,
+        "sha256": "2d7f4975a8ec9ac885b5415d5ef678fd42bd04011e2cc711922338e3ea8fd55a"
+      },
+      "owned_cleanup": true,
+      "counts_as_product_result": false
+    },
+    {
+      "role": "candidate",
+      "receipt": {
+        "bytes": 1863,
+        "sha256": "6271d374816a4a3e8929a2725fb729dcf125061f8972cc94882d1eb6f7014098"
+      },
+      "owned_cleanup": true,
+      "counts_as_product_result": false
+    }
+  ],
+  "candidate_production_rollout": "NOT RUN",
+  "physical_burn_hardware_variants_network_and_pairing": "NOT RUN",
+  "burner_submitted": false,
+  "redaction": [
+    "endpoint",
+    "job and session identifiers",
+    "credentials",
+    "service state paths",
+    "raw host outputs"
+  ]
+}

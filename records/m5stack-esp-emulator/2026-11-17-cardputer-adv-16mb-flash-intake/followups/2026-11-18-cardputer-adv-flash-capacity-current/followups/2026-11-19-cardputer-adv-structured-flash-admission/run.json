@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "firmware_review_attribution",
+  "overall_status": "PASS",
+  "title": "Cardputer ADV typed Flash-capacity admission and native 8 MiB control",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/234",
+    "device_source": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "reviewer_baseline": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+    "reviewer_candidate": "69386c6a162a1c786d6745c46eaa330c14558d3c"
+  },
+  "hardware": {
+    "device": "Cardputer ADV",
+    "verification": "virtual-device validation"
+  },
+  "firmware": {
+    "incompatible_original_sha256": "53d73494dc80c8ff3e6ae8a7a8a28b4130f0d2cfe6907f1fa569531932209826",
+    "official_uiflow2_control_sha256": "fe39163d55d4c9b00eb9ff6d5ccce5fcaa4922819bcea8a75d83e3bd09a2af62"
+  },
+  "execution": {
+    "environment": "macOS system Python 3.9.6, isolated native Device Service and Reviewer",
+    "device_api": "1.99.1",
+    "reviewer_candidate_api": "0.29.0",
+    "guest_network_enabled": false,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "full_compose_and_import_capacity_gate",
+      "status": "PASS",
+      "details": "Both instances 409; 16 MiB image layout on an 8 MiB profile"
+    },
+    {
+      "name": "baseline_text_receipt",
+      "status": "PASS",
+      "details": "Exact original static rejection; a human Flash capacity finding"
+    },
+    {
+      "name": "candidate_saved_snapshot_numeric_capacity_receipt",
+      "status": "PASS",
+      "details": "Same E_STATIC verdict with four complete numeric capacity fields; no guest or lease"
+    },
+    {
+      "name": "official_8_mib_native_control",
+      "status": "PASS",
+      "details": "Exact 8 MiB normalized Flash, running QEMU, usable frame, same-session ZIP and clean teardown"
+    },
+    {
+      "name": "candidate_production_physical_pairing_and_network",
+      "status": "NOT RUN",
+      "details": "Isolated test only"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/adv-flash-admission.summary.json",
+      "kind": "redacted independently checked receipts"
+    }
+  ]
+}
