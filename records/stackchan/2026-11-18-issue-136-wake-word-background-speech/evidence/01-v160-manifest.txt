@@ -1,0 +1,30 @@
+# V1.6.0 firmware manifest (m5stack/StackChan @ 94856a7)
+
+## firmware/repos.json (xiaozhi entry)
+        "branch": "v2.12.0"
+    },
+    {
+        "url": "https://github.com/78/xiaozhi-esp32.git",
+        "path": "xiaozhi-esp32",
+        "branch": "v2.2.4",
+        "patch": "patches/xiaozhi-esp32.patch"
+    },
+
+## firmware/sdkconfig.defaults (wake word / server upload)
+11:CONFIG_BOARD_TYPE_M5STACK_STACK_CHAN=y
+15:CONFIG_SEND_WAKE_WORD_DATA=n
+16:CONFIG_SR_WN_WN9_HISTACKCHAN_TTS3=y
+
+## firmware/main/hal/board/config.h (audio path)
+8:#define AUDIO_INPUT_REFERENCE    true
+9:#define AUDIO_INPUT_SAMPLE_RATE  24000
+10:#define AUDIO_OUTPUT_SAMPLE_RATE 24000
+
+## firmware/main/hal/board/stackchan.cc (codec construction)
+    virtual AudioCodec* GetAudioCodec() override
+    {
+        static CoreS3AudioCodec audio_codec(i2c_bus_, AUDIO_INPUT_SAMPLE_RATE, AUDIO_OUTPUT_SAMPLE_RATE,
+                                            AUDIO_I2S_GPIO_MCLK, AUDIO_I2S_GPIO_BCLK, AUDIO_I2S_GPIO_WS,
+                                            AUDIO_I2S_GPIO_DOUT, AUDIO_I2S_GPIO_DIN, AUDIO_CODEC_AW88298_ADDR,
+                                            AUDIO_CODEC_ES7210_ADDR, AUDIO_INPUT_REFERENCE);
+        return &audio_codec;

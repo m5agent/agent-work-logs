@@ -1,0 +1,98 @@
+# xiaozhi-esp32 v2.2.4 audio / listening path
+# source: https://github.com/78/xiaozhi-esp32 @ tag v2.2.4
+
+## main/audio/wake_words/afe_wake_word.cc:66-80 (AFE wake word init)
+    66	    std::string input_format;
+    67	    for (int i = 0; i < codec_->input_channels() - ref_num; i++) {
+    68	        input_format.push_back('M');
+    69	    }
+    70	    for (int i = 0; i < ref_num; i++) {
+    71	        input_format.push_back('R');
+    72	    }
+    73	    afe_config_t* afe_config = afe_config_init(input_format.c_str(), models_, AFE_TYPE_SR, AFE_MODE_HIGH_PERF);
+    74	    afe_config->aec_init = codec_->input_reference();
+    75	    afe_config->aec_mode = AEC_MODE_SR_HIGH_PERF;
+    76	    afe_config->afe_perferred_core = 1;
+    77	    afe_config->afe_perferred_priority = 1;
+    78	    afe_config->memory_alloc_mode = AFE_MEMORY_ALLOC_MORE_PSRAM;
+    79	    
+    80	    afe_iface_ = esp_afe_handle_from_config(afe_config);
+
+## main/audio/wake_words/afe_wake_word.cc:141-150 (detection callback)
+   141	    while (true) {
+   142	        xEventGroupWaitBits(event_group_, DETECTION_RUNNING_EVENT, pdFALSE, pdTRUE, portMAX_DELAY);
+   143	
+   144	        auto res = afe_iface_->fetch_with_delay(afe_data_, portMAX_DELAY);
+   145	        if (res == nullptr || res->ret_value == ESP_FAIL) {
+   146	            continue;;
+   147	        }
+   148	
+   149	        // Store the wake word data for voice recognition, like who is speaking
+   150	        StoreWakeWordData(res->data, res->data_size / sizeof(int16_t));
+   151	
+   152	        if (res->wakeup_state == WAKENET_DETECTED) {
+
+## main/application.cc:522-541 (tts stop -> listening)
+   522	        // Parse JSON data
+   523	        auto type = cJSON_GetObjectItem(root, "type");
+   524	        if (strcmp(type->valuestring, "tts") == 0) {
+   525	            auto state = cJSON_GetObjectItem(root, "state");
+   526	            if (strcmp(state->valuestring, "start") == 0) {
+   527	                Schedule([this]() {
+   528	                    aborted_ = false;
+   529	                    SetDeviceState(kDeviceStateSpeaking);
+   530	                });
+   531	            } else if (strcmp(state->valuestring, "stop") == 0) {
+   532	                Schedule([this]() {
+   533	                    if (GetDeviceState() == kDeviceStateSpeaking) {
+   534	                        if (listening_mode_ == kListeningModeManualStop) {
+   535	                            SetDeviceState(kDeviceStateIdle);
+   536	                        } else {
+   537	                            SetDeviceState(kDeviceStateListening);
+   538	                        }
+   539	                    }
+   540	                });
+   541	            } else if (strcmp(state->valuestring, "sentence_start") == 0) {
+
+## main/application.cc:700-712 (tap in listening closes channel)
+   700	            Schedule([this, mode]() {
+   701	                ContinueOpenAudioChannel(mode);
+   702	            });
+   703	            return;
+   704	        }
+   705	        SetListeningMode(mode);
+   706	    } else if (state == kDeviceStateSpeaking) {
+   707	        AbortSpeaking(kAbortReasonNone);
+   708	    } else if (state == kDeviceStateListening) {
+   709	        protocol_->CloseAudioChannel();
+   710	    }
+   711	}
+   712	
+
+## main/application.cc:945-952 (default listening mode)
+   945	void Application::SetListeningMode(ListeningMode mode) {
+   946	    listening_mode_ = mode;
+   947	    SetDeviceState(kDeviceStateListening);
+   948	}
+   949	
+   950	ListeningMode Application::GetDefaultListeningMode() const {
+   951	    return aec_mode_ == kAecOff ? kListeningModeAutoStop : kListeningModeRealtime;
+   952	}
+
+## main/Kconfig.projbuild:726-741 (wake word in listening, default off)
+   726	    bool "Send Wake Word Data"
+   727	    default y
+   728	    depends on USE_AFE_WAKE_WORD || USE_CUSTOM_WAKE_WORD
+   729	    help
+   730	        Send wake word data to the server as the first message of the conversation and wait for response
+   731	
+   732	config WAKE_WORD_DETECTION_IN_LISTENING
+   733	    bool "Enable Wake Word Detection in Listening Mode"
+   734	    default n
+   735	    depends on USE_AFE_WAKE_WORD || USE_CUSTOM_WAKE_WORD
+   736	    help
+   737	        Enable wake word detection while in listening mode.
+   738	        When enabled, the device can detect wake word during listening,
+   739	        which allows interrupting the current conversation.
+   740	        When disabled (default), wake word detection is turned off during listening.
+   741	

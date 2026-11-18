@@ -1,0 +1,76 @@
+# User-facing settings and touch mapping (V1.6.0 source, 94856a7)
+
+## firmware/main/hal/board/stackchan_display.cc:254-267 (screen tap -> ToggleChatState)
+   254	    auto avatar = std::make_unique<DefaultAvatar>();
+   255	    avatar->init(lv_screen_active());
+   256	    avatar->getPanel()->onClick().connect([]() {
+   257	        static uint32_t last_toggle_tick = 0;
+   258	        const uint32_t now               = GetHAL().millis();
+   259	        if (last_toggle_tick != 0 && now - last_toggle_tick < 2000) {
+   260	            return;
+   261	        }
+   262	
+   263	        if (hal_bridge::is_xiaozhi_ready()) {
+   264	            last_toggle_tick = now;
+   265	            hal_bridge::toggle_xiaozhi_chat_state();
+   266	        }
+   267	    });
+
+## firmware/main/apps/app_setup/app_setup.cpp:57-92 (setup menu: no wake/timeout entry)
+    57	                  _worker       = std::make_unique<NetworkTestWorker>();
+    58	              }}},
+    59	        },
+    60	        {
+    61	            "Device",
+    62	            {{"Brightness",
+    63	              [&]() {
+    64	                  _destroy_menu = true;
+    65	                  _worker       = std::make_unique<BrightnessSetupWorker>();
+    66	              }},
+    67	             {"Volume",
+    68	              [&]() {
+    69	                  _destroy_menu = true;
+    70	                  _worker       = std::make_unique<VolumeSetupWorker>();
+    71	              }},
+    72	             {"Timezone",
+    73	              [&]() {
+    74	                  _destroy_menu = true;
+    75	                  _worker       = std::make_unique<TimezoneWorker>();
+    76	              }}},
+    77	        },
+    78	        {
+    79	            "AI.Agent",
+    80	            {{"General",
+    81	              [&]() {
+    82	                  _destroy_menu    = true;
+    83	                  _need_warm_reset = true;
+    84	                  _worker          = std::make_unique<XiaozhiGeneralWorker>();
+    85	              }},
+    86	             {"Power Saving",
+    87	              [&]() {
+    88	                  _destroy_menu    = true;
+    89	                  _need_warm_reset = true;
+    90	                  _worker          = std::make_unique<XiaozhiPowerSavingWorker>();
+    91	              }}},
+    92	        },
+
+## firmware/main/apps/app_setup/workers/ai_agent.cpp (AI.AGENT settings entries)
+22:XiaozhiPowerSavingWorker::XiaozhiPowerSavingWorker()
+60:    _label_idle_title->setText("Automatically power off after being idle for:");
+149:XiaozhiGeneralWorker::XiaozhiGeneralWorker()
+187:    _label_idle_motion_title->setText("Idle movement frequency:");
+
+## firmware/main/apps/app_setup/workers/ai_agent.cpp (config persisted)
+34:        if (_idle_shutdown_levels[i] >= _config.idleShutdownTimeSeconds) {
+123:        _config.idleShutdownTimeSeconds = _idle_shutdown_levels[_pending_idle_index];
+131:        GetHAL().setXiaozhiConfig(_config);
+132:        mclog::tagInfo(_tag, "xiaozhi config updated: idleShutdownTimeSeconds={}, allowShutdownWhenCharging={}",
+133:                       _config.idleShutdownTimeSeconds, _config.allowShutdownWhenCharging);
+140:    if (_config.idleShutdownTimeSeconds == 0) {
+145:    auto total_minutes = _config.idleShutdownTimeSeconds / 60;
+161:        if (_idle_motion_levels[i] >= _config.idleRandomMovementLevel) {
+250:        _config.idleRandomMovementLevel = _idle_motion_levels[_pending_idle_motion_index];
+258:        GetHAL().setXiaozhiConfig(_config);
+259:        mclog::tagInfo(_tag, "xiaozhi config updated: idleRandomMovementLevel={} ({})", _config.idleRandomMovementLevel,
+260:                       _idle_motion_level_labels[_config.idleRandomMovementLevel]);
+267:    _label_idle_motion_value->setText(_idle_motion_level_labels[_config.idleRandomMovementLevel]);

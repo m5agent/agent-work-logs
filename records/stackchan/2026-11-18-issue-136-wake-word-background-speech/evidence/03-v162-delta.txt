@@ -1,0 +1,37 @@
+# V1.6.2 delta relevant to the report (m5stack/StackChan @ 28b9f0c / 0808a47)
+
+## git diff 94856a7 0808a47 -- firmware/repos.json
+-        "branch": "v2.2.4",
++        "branch": "v2.5.2",
+-        "branch": "c33383de97f3ed2fc52117f5ef04f71990432e5d"
++        "branch": "c3b5f9be245f1a80db9cb938600566aa6a8dd1e5"
+
+## git diff 94856a7 0808a47 -- firmware/sdkconfig.defaults
+-CONFIG_SR_WN_WN9_HISTACKCHAN_TTS3=y
++CONFIG_SR_WN_WN9L_HISTACKCHAN_TTS3=y
+
+## git diff 94856a7 0808a47 -- firmware/main/idf_component.yml (esp-sr)
+-  espressif/esp-sr: ~2.3.0
++  espressif/esp-sr: ==2.4.7
+
+## xiaozhi-esp32 v2.5.2 main/application.cc:629-638 (tts stop still -> listening)
+   629	            } else if (strcmp(state->valuestring, "stop") == 0) {
+   630	                Schedule([this]() {
+   631	                    if (GetDeviceState() == kDeviceStateSpeaking) {
+   632	                        if (listening_mode_ == kListeningModeManualStop) {
+   633	                            SetDeviceState(kDeviceStateIdle);
+   634	                        } else {
+   635	                            SetDeviceState(kDeviceStateListening);
+   636	                        }
+   637	                    }
+   638	                });
+
+## xiaozhi-esp32 v2.5.2 main/application.cc:1183-1190 (default listening mode unchanged)
+  1183	void Application::SetListeningMode(ListeningMode mode) {
+  1184	    listening_mode_ = mode;
+  1185	    SetDeviceState(kDeviceStateListening);
+  1186	}
+  1187	
+  1188	ListeningMode Application::GetDefaultListeningMode() const {
+  1189	    return aec_mode_ == kAecOff ? kListeningModeAutoStop : kListeningModeRealtime;
+  1190	}

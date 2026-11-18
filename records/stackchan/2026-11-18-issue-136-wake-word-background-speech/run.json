@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "StackChan V1.6.0 unintended activation and prolonged conversations with background speech",
+  "source": {
+    "issue": "https://github.com/m5stack/StackChan/issues/136",
+    "pull_request": "",
+    "repository": "https://github.com/m5stack/StackChan",
+    "base_commit": "94856a7",
+    "comparison_commit": "28b9f0c",
+    "upstream": [
+      "https://github.com/78/xiaozhi-esp32/tree/v2.2.4",
+      "https://github.com/78/xiaozhi-esp32/tree/v2.5.2"
+    ]
+  },
+  "hardware": {},
+  "firmware": {
+    "target": "M5Stack StackChan (ESP32-S3)",
+    "build": "NOT RUN (ESP-IDF 6.1 and fetched xiaozhi components unavailable)",
+    "flash": "NOT RUN",
+    "image_sha256": ""
+  },
+  "execution": {
+    "environment": "macOS, source-only inspection, local Device Service profile query (no session created)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "V1.6.0 dependency baseline",
+      "command": "git show 94856a7:firmware/repos.json",
+      "status": "PASS",
+      "detail": "xiaozhi-esp32 v2.2.4 with StackChan patch"
+    },
+    {
+      "name": "V1.6.0 wake-word configuration",
+      "command": "git show 94856a7:firmware/sdkconfig.defaults",
+      "status": "PASS",
+      "detail": "CONFIG_SR_WN_WN9_HISTACKCHAN_TTS3=y, CONFIG_SEND_WAKE_WORD_DATA=n"
+    },
+    {
+      "name": "v2.2.4 post-TTS state transition",
+      "command": "sed -n '531,539p' main/application.cc",
+      "status": "PASS",
+      "detail": "tts stop -> Listening unless kListeningModeManualStop; no device-side listening timer found"
+    },
+    {
+      "name": "v2.2.4 wake-in-listening default",
+      "command": "sed -n '732,740p' main/Kconfig.projbuild",
+      "status": "PASS",
+      "detail": "WAKE_WORD_DETECTION_IN_LISTENING default n"
+    },
+    {
+      "name": "V1.6.2 delta",
+      "command": "git diff 94856a7 0808a47 -- firmware",
+      "status": "PASS",
+      "detail": "xiaozhi 2.5.2, esp-sr 2.4.7, WN9 -> WN9L; post-TTS re-listen unchanged in 2.5.2"
+    },
+    {
+      "name": "device-side settings surface",
+      "command": "git show 94856a7:firmware/main/apps/app_setup/app_setup.cpp",
+      "status": "PASS",
+      "detail": "no wake sensitivity or conversation timeout setting; AI.AGENT only idle movement and idle power-off"
+    },
+    {
+      "name": "local StackChan profile capability",
+      "command": "GET /api/v1/devices (filter stackchan)",
+      "status": "REVIEW",
+      "detail": "QEMU profile present (display/touch/WiFi, ES7210 model); no AI service session, no factory image"
+    },
+    {
+      "name": "runtime reproduction",
+      "command": "not executed",
+      "status": "NOT RUN",
+      "detail": "requires bound device and live AI service session plus real room/TV audio; no ESP-IDF build"
+    }
+  ],
+  "evidence": [
+    "evidence/01-v160-manifest.txt",
+    "evidence/02-xiaozhi-v224-audio-path.txt",
+    "evidence/03-v162-delta.txt",
+    "evidence/04-settings-and-touch.txt",
+    "evidence/05-device-service-profile-summary.json",
+    "evidence/06-reply.md"
+  ],
+  "notes": [
+    "No hardware or virtual-device claim is made.",
+    "Repository README states published source may lag released firmware.",
+    "Device identifier fields removed from the profile summary."
+  ]
+}
