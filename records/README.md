@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | XIAOZHI 模型准入归因与 Core2 原版回归 | PASS（真实审核入口、Core2 四向与常驻回读；XIAOZHI 固件 NOT RUN） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/followups/2026-11-18-xiaozhi-unsupported-intake/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Reviewer 0.27 原版 Core2 与常驻回读 | PASS（隔离四向棋盘变化，常驻就绪和 125 条历史核对） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/followups/2026-11-18-reviewer-027-core2-resident/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | 无虚拟网卡的 Linux Worker 就绪通道 | PASS（只读请求与认证对照，固件和常驻接入 NOT RUN） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-18-linux-vz-worker-vsock/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Linux 持久卷冷启动回读与原版重试 | PASS（冷启保留旧任务、ZIP 与 PCAP；受控发音审核仍为 PARTIAL） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-18-linux-durable-reviewer-cold-pair/) |
