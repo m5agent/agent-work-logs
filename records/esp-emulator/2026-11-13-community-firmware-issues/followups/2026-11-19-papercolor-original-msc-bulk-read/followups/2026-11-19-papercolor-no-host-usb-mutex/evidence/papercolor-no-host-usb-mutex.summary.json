@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "scope": "Original PaperColor factory release, boot only without host USB traffic",
+  "source": {
+    "main": "7d18dc02be08c3885ec39de7fa7634e79381b042",
+    "frozen": "9837c3f84df4383eb74881a1f44fcd3f460daefa",
+    "native_qemu_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "original_sha256": "a3f5ca4ae89dd724dd8f9b2d800fd9749af84bf0cf2fffbf99cdf822b285f419"
+  },
+  "cases": {
+    "boot-only-control": {
+      "host_usb_traffic": "NONE",
+      "guest_rom_epochs_observed": 2,
+      "guest_reboot_observed": true,
+      "flash_released": true,
+      "owned_processes_exited": true,
+      "leases_after_stop": 0,
+      "summary_sha256": "351b2ffe08b2f8747e6a661bb28639f8b8406dd80df8c665a6ba6d6111457326",
+      "zip": {
+        "bytes": 7524,
+        "sha256": "c1ae41860af162b891cbdf1a6f1a489b8f0c1160bb7463d2f8f7d232fba3a616",
+        "crc": "PASS"
+      },
+      "zip_serial": {
+        "bytes": 10777,
+        "sha256": "d4bc664a19c5e1856ecaa2e823a8587d6ad28606792b6c43308a910119e187b5"
+      }
+    },
+    "boot-only-observer": {
+      "host_usb_traffic": "NONE",
+      "guest_rom_epochs_observed": 1,
+      "guest_reboot_observed": true,
+      "flash_released": true,
+      "owned_processes_exited": true,
+      "leases_after_stop": 0,
+      "summary_sha256": "896faee75701c6f0e9bd1300714b0a2dc5ea9eaa7ff07ba4bbacc575e6dab257",
+      "zip": {
+        "bytes": 7413,
+        "sha256": "67f2d6a24cd1a12203f2e3a30c9e52ab9016825550fa5f4007273dd650009c8e",
+        "crc": "PASS"
+      },
+      "zip_serial": {
+        "bytes": 10488,
+        "sha256": "cedfea9b2dc20c00635c3aa3e6aa8c787beebcd52eef9d9d845a024ccb5457bb"
+      },
+      "task_observation": {
+        "active_cpu": 1,
+        "running_task": "app_mgr",
+        "owner_task": "LedStatusIndica",
+        "different_owner_and_running": true,
+        "owner_running_on_other_cpu": true,
+        "current_tcb_array_lookup_verified": true
+      }
+    },
+    "i2c-bus-observer": {
+      "host_usb_traffic": "NONE",
+      "guest_rom_epochs_observed": 2,
+      "guest_reboot_observed": true,
+      "flash_released": true,
+      "owned_processes_exited": true,
+      "leases_after_stop": 0,
+      "summary_sha256": "d8c9745bf36c08b703de2975b3ca650f8a5d017e455a8b2cb5104c66fb33aa18",
+      "zip": {
+        "bytes": 7442,
+        "sha256": "235ef3a46e564e47a589028b2c20548d22576f0709a74db40836ca6f9851a3aa",
+        "crc": "PASS"
+      },
+      "zip_serial": {
+        "bytes": 10629,
+        "sha256": "3053d05dc8b95ddbe53c2bde6be7fec60f721695f73d65aee46174f424e7bbc7"
+      },
+      "observer_status": "Task name parser produced a malformed receipt. Serial and cleanup only."
+    }
+  }
+}
