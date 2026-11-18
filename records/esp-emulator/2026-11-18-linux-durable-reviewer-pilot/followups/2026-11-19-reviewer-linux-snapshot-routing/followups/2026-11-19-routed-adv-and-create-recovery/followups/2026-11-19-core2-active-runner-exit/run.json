@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "integration_validation",
+  "date": "2026-11-19",
+  "title": "Core2 活跃会话运行器退出后的隔离与重试保护",
+  "source": {
+    "reviewer_revision": "b9426a2d8a88338d95346ed9b93b0eaf0893cb9a",
+    "reviewer_api": "0.30.0",
+    "device_service_revision": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "device_api": "1.99.3",
+    "device_openapi_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "hosted_runner_sha256": "9f5605040948048bafbcbf5da070925b89195deb8058dffb0c90028a6d8326ca",
+    "controller_sha256": "79c418fdc56bd36d39bf01669596b3d63869909a242421a391ab8ae1d6a23bbf",
+    "bridge_sha256": "a3a9033f4d85c388ac16267c51ba60f51633054675b126b0c7006aa7f7c44567",
+    "supervisor_sha256": "847bb5db44806c86f0f037608fac3ee12b52c9c5119c22deade01aa450474252"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Core2 2048 1.0",
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "original_bytes": 505760,
+    "initial_flash_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "vendor_boot_context_sha256": "bfaa9203100a802de6a762217debc3cce269844e2caca7730155cd9bc02bf2d7"
+  },
+  "execution": {
+    "status": "PASS_WITH_PRESERVED_UNRESOLVED_SESSION",
+    "review_terminal": "service_error / SIM_PARTIAL / E_SERVICE_RESTART",
+    "pending_bound_intents": 1,
+    "retained_lease_entries": 1,
+    "retained_working_flash_bytes": 16777216,
+    "managed_readiness_http": 503,
+    "ordinary_retry_http": 409,
+    "live_device_cleanup": "UNCONFIRMED",
+    "evidence": "evidence/core2-active-runner-exit.summary.json",
+    "evidence_bytes": 7725,
+    "evidence_sha256": "7ba0697ce202a4afcc1bf3e6a197d28eac5513db8d53555f0096c5e41489c35f"
+  },
+  "checks": {
+    "active_original_and_bound_intent": "PASS",
+    "runner_exit_and_quarantine": "PASS",
+    "same_persistent_attempt_and_evidence": "PASS",
+    "reviewer_restart_pending_recovery": "PASS",
+    "ordinary_retry_rejected": "PASS",
+    "same_volume_admission_denied": "PASS",
+    "temporary_role_unloaded": "PASS",
+    "trusted_cold_recovery": "NOT RUN",
+    "old_lease_and_flash_release": "NOT RUN",
+    "host_os_restart": "NOT RUN",
+    "host_power_loss": "NOT RUN",
+    "physical": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "production_mutation": "NOT RUN",
+    "burner_submission": "NOT RUN",
+    "volume_crash_recovery": "NOT RUN"
+  }
+}
