@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "overall_status": "PASS",
+  "kind": "firmware_validation",
+  "title": "M5TabOS 原版在最终 Device Service 1.91 的显示与触摸",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "c7e25be5410d3a9968107bc7a0cab5acb9d708bc"
+  },
+  "hardware": {
+    "physical": false,
+    "virtual_device": "tab5"
+  },
+  "firmware": {
+    "name": "M5TabOS",
+    "version": "0.9.1",
+    "original_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime": "esp-emu 1.1.0",
+    "device_service_api": "1.91.0",
+    "board": "st7123",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "assertion": "使用精确固件的 ST7123 板型覆盖进入普通会话。"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "assertion": "16 张完整帧，15 张非黑。欢迎页显示并进入时区页。"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "assertion": "收到两份消费回执，观察到 GPIO23 边沿和 I²C 读回。"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "assertion": "实体、外网或账号、浏览器及 USB 枚举未测试。"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/final-191-board-touch.summary.json",
+      "sha256": "50053c13561f1e1d7e42e7e3f59a7d1f3e56c8982c87893159b9d8cc9f237c77"
+    }
+  ]
+}
