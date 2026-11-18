@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Device Service 与 Reviewer 双重启恢复 | PASS（两种启动顺序自动回收及同固件重试，Linux 画面未验收） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-device-double-restart/) |
 | 2026-11-18 | ESP Emulator | Reviewer 活跃会话创建恢复 | PASS（Core2 原版双关口与 Linux STA A/B；Linux 显示未验收） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-active-create-recovery/) |
 | 2026-11-18 | ESP Emulator | StickS3 内部 RC_FAST/256 RTC 定时深睡 | PASS（八次定时唤醒，复位和 RTC 保留通过） | [查看](esp-emulator/2026-11-18-sticks3-rtc-deep-sleep/followups/2026-11-18-sticks3-d256-deep-sleep/) |
 | 2026-11-18 | `M5Unified` | #444 M5Paper 示例仍指向 M5EPD | PARTIAL（code-level：M5Unified 已支持 M5Paper、缺 Paper 示例、产品页仍列已归档 M5EPD；构建/实机 NOT RUN） | [查看](m5stack-github/2026-11-18-m5unified-issue-444-paper-examples/) |

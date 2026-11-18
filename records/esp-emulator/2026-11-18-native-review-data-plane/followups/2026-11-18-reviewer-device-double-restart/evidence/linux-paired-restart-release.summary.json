@@ -1,0 +1,190 @@
+{
+  "status": "PASS",
+  "verification": "virtual-device validation",
+  "release": {
+    "device_commit": "7e2cca17c5bbae40b6e4380b65e891a7ca9d0454",
+    "reviewer_commit": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+    "device_openapi_sha256": "42f18e31af99bde171cd361ca3ecc55504ac0e521e6da71394934ee4502fdce9",
+    "reviewer_openapi_sha256": "a2d5daa7ea48e5d446b760f422bfe203963a6a906132cf6f14b44a525784c91f"
+  },
+  "scope": "paired Device Service and Reviewer recovery from abrupt signal loss on a Linux ARM64 no-NIC VM",
+  "baselines": {
+    "device_first_minimal": {
+      "sha256": "f705d01ec0241dd385bfe26ff74f8818a967f10d03a092c51d5dbc56ca9bf44b",
+      "classification": "FAIL_OWNERSHIP_OR_FLASH_RETAINED_AFTER_PAIRED_RESTART",
+      "independent_packet_capture": {
+        "before_packets": 54,
+        "after_packets": 57,
+        "prefix_verified": true
+      },
+      "data_plane_verified_after_retry": true
+    },
+    "reviewer_first_procps_control": {
+      "sha256": "b6c70c6cee79896752bc2301ea8195ac749fe220a6fba2ffb3202663c83d86cf",
+      "classification": "PARTIAL_AUTOMATIC_RECONCILIATION_PENDING_UNTIL_RETRY",
+      "independent_packet_capture": {
+        "before_packets": 56,
+        "after_packets": 57,
+        "prefix_verified": true
+      },
+      "data_plane_verified_after_retry": true
+    }
+  },
+  "candidate": {
+    "device_first": {
+      "verified_receipt_sha256": "1d5d6df97f99e7af4aeea6ee58e1e1ed3a8eb36b559db290556e504ab9807f92",
+      "status": "PASS_OWNED_LINUX_VM_PAIRED_RESTART",
+      "physical_cleanup": {
+        "device_worker_generation": 2,
+        "state": "failed",
+        "session_lease_active": false,
+        "worker_has_old_session_lease": false,
+        "worker_lease_count": 0,
+        "interrupted": true,
+        "restored": true,
+        "flash_retained": false,
+        "old_exact_qemu_still_in_proc": false,
+        "old_exact_supervisor_still_in_proc": false,
+        "old_namespace_live_process_count": 0,
+        "network_isolation": {
+          "present": true,
+          "private_network_namespace": true,
+          "external_route": false,
+          "cleanup_completed": true,
+          "qemu_process_reaped": true,
+          "dns_closed": true,
+          "http_closed": true,
+          "udp_closed": true,
+          "http_post_closed": true,
+          "tcp_closed": true
+        },
+        "recovery_events": [
+          {
+            "status": "complete",
+            "resolved": [
+              "released"
+            ],
+            "pending": []
+          }
+        ],
+        "since_signal_seconds": 1.212
+      },
+      "retry": {
+        "same_saved_job": true,
+        "new_device_session": true,
+        "exactly_one_new_device_session": true,
+        "outer_review_status": "manual_review",
+        "outer_review_error": "E_NO_FRAME",
+        "same_guest_sta_application": "PASS",
+        "http_post_and_tcp": "PASS",
+        "fixture_serial_and_native_network_capture_verified": true,
+        "captured_pcap_sha256": "27624c579cc98dfb1ba63079cb1de205c743bdfab6f591d4eb2466ca7660fb33",
+        "native_review_zip_sha256": "ec47058acacfe0ec4d2131199074cd3c98695208b683625c103d13e887b51de7",
+        "sha_bound_stopped_device_zip": "2ce44d6e7289f54cdfe1085987358bf6cdf9f5790c289793e333c8c274d0693b",
+        "device_and_reviewer_pcap_match": true,
+        "flash_released": true,
+        "active_leases": 0,
+        "namespace_count_restored": true
+      },
+      "passive_recovery_before_user_retry": true,
+      "known_old_namespace_cleaned": true,
+      "old_session_archive_crc_and_manifest_verified": true,
+      "pcap_before_packets": 57,
+      "pcap_after_packets": 57,
+      "pcap_prefix_confirmed": true,
+      "process_and_lease_release_before_explicit_retry": true,
+      "independent_post_run_vm_shutdown_confirmed": true,
+      "old_worker_identity_preserved_new_generation": true,
+      "fixture_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "vm_rootfs": "sha256:acd43e9bebc37bc4ba7a5f47bd7598913337803e53d468f37d940f11f5d5f1ef"
+    },
+    "reviewer_first": {
+      "verified_receipt_sha256": "aa2162c7d8a05f13ae6166e633a0a7892d48dab531b026877d077b3e85310b1a",
+      "status": "PASS_OWNED_LINUX_VM_PAIRED_RESTART",
+      "physical_cleanup": {
+        "device_worker_generation": 2,
+        "state": "failed",
+        "session_lease_active": false,
+        "worker_has_old_session_lease": false,
+        "worker_lease_count": 0,
+        "interrupted": true,
+        "restored": true,
+        "flash_retained": false,
+        "old_exact_qemu_still_in_proc": false,
+        "old_exact_supervisor_still_in_proc": false,
+        "old_namespace_live_process_count": 0,
+        "network_isolation": {
+          "present": true,
+          "private_network_namespace": true,
+          "external_route": false,
+          "cleanup_completed": true,
+          "qemu_process_reaped": true,
+          "dns_closed": true,
+          "http_closed": true,
+          "udp_closed": true,
+          "http_post_closed": true,
+          "tcp_closed": true
+        },
+        "recovery_events": [
+          {
+            "status": "pending",
+            "resolved": [],
+            "pending": [
+              "device_service_unavailable"
+            ]
+          },
+          {
+            "status": "complete",
+            "resolved": [
+              "released"
+            ],
+            "pending": []
+          }
+        ],
+        "since_signal_seconds": 5.28
+      },
+      "retry": {
+        "same_saved_job": true,
+        "new_device_session": true,
+        "exactly_one_new_device_session": true,
+        "outer_review_status": "manual_review",
+        "outer_review_error": "E_NO_FRAME",
+        "same_guest_sta_application": "PASS",
+        "http_post_and_tcp": "PASS",
+        "fixture_serial_and_native_network_capture_verified": true,
+        "captured_pcap_sha256": "175eba31fe541873221cb7aae90dcc9a46d0bc78a840d9aef342d44530a10ab7",
+        "native_review_zip_sha256": "fa332da28d6e1614f2e3f5744962b5b37c6bd7f48e1da602d7a0764c45327709",
+        "sha_bound_stopped_device_zip": "8fecb44c1a13d894a8d6f19137d1be6f09a9747ef221078b9c2b3677f380dd22",
+        "device_and_reviewer_pcap_match": true,
+        "flash_released": true,
+        "active_leases": 0,
+        "namespace_count_restored": true
+      },
+      "passive_recovery_before_user_retry": true,
+      "known_old_namespace_cleaned": true,
+      "old_session_archive_crc_and_manifest_verified": true,
+      "pcap_before_packets": 56,
+      "pcap_after_packets": 57,
+      "pcap_prefix_confirmed": true,
+      "process_and_lease_release_before_explicit_retry": true,
+      "independent_post_run_vm_shutdown_confirmed": true,
+      "old_worker_identity_preserved_new_generation": true,
+      "fixture_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+      "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "vm_rootfs": "sha256:acd43e9bebc37bc4ba7a5f47bd7598913337803e53d468f37d940f11f5d5f1ef"
+    }
+  },
+  "routing": {
+    "outer_nic_count": 0,
+    "published_ports": 0,
+    "resident_services_used": false,
+    "burner": "NOT SUBMITTED"
+  },
+  "limits": [
+    "synthetic ESP32-S3 fixture has no app framebuffer; comprehensive job remains manual_review/E_NO_FRAME",
+    "no production Linux container runtime or physical device was restarted"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "date": "2026-11-18",
+  "source": {
+    "baseline": {
+      "device_service": "5b4b664272cab0a419257327baf42b26b12d79f6",
+      "device_service_openapi_sha256": "900f9734795148a0fc28dc5ff494177041933db88d9b01a79e4484fee002736f",
+      "reviewer": "0f732ea5c62596c0137e8ca0cd3a32e7aa3c3988",
+      "reviewer_openapi_sha256": "8894feba45bd97070953689170ce3d8700d1e177b94ff9b40f5a222884b1583c"
+    },
+    "candidate": {
+      "device_service": "7e2cca17c5bbae40b6e4380b65e891a7ca9d0454",
+      "device_service_openapi_sha256": "42f18e31af99bde171cd361ca3ecc55504ac0e521e6da71394934ee4502fdce9",
+      "reviewer": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+      "reviewer_openapi_sha256": "a2d5daa7ea48e5d446b760f422bfe203963a6a906132cf6f14b44a525784c91f",
+      "device_release": "a7dbd9808a09bc507b657995dba079b8075badcf",
+      "release_delta_from_executed_device_revision": [
+        "docs/project-status.md",
+        "docs/project-snapshot.md",
+        "tests/uiflow2/api_sweep/inventory_api.source.json"
+      ]
+    }
+  },
+  "hardware": {
+    "arm64_linux_vm": "isolated virtual device",
+    "board": "cardputer-adv",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "firmware": {
+    "cardputer_adv_sta_sdk_fixture_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd"
+  },
+  "execution": {
+    "baseline": {
+      "path": "evidence/baseline-double-service-recovery.summary.json",
+      "sha256": "a7b45b1d4e260b90071ce41f623e269f3e9866c67eae88dc4b8e70ab50eb60b5"
+    },
+    "candidate": {
+      "path": "evidence/linux-paired-restart-release.summary.json",
+      "sha256": "829ec6887427f8b8141b5b1c4cf3d973f8529f327e937226fd18872106ca613d"
+    },
+    "macos_active_create_regression": {
+      "path": "evidence/macos-active-create-regression.summary.json",
+      "sha256": "fda4164fc1666921e09d6fda205a166f27439da77891f5522188d17054e1bdc1"
+    }
+  },
+  "checks": {
+    "baseline_device_first": "FAIL: old guest and network supervisor still running before Retry",
+    "baseline_reviewer_first": "PARTIAL: first reconciliation still pending after Device Service was ready",
+    "baseline_same_fixture_retry_sta": "PASS",
+    "baseline_retry_display_verdict": "manual_review / E_NO_FRAME",
+    "candidate_reviewer_unit_tests_passed": 289,
+    "candidate_virtual_device_validation": "PASS for both paired-restart orders and same-fixture Retry",
+    "physical_hardware": "NOT RUN",
+    "browser": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "macos_active_create_regression": "PASS",
+    "candidate_retry_display_verdict": "manual_review / E_NO_FRAME",
+    "initial_platform_metadata_checks_corrected": [
+      "status document line budget",
+      "API inventory OpenAPI fingerprint"
+    ],
+    "device_release_platform_suite": {
+      "collected": 2462,
+      "passed": 2452,
+      "skipped": 10
+    },
+    "device_release_validators_and_scope": "PASS"
+  }
+}
