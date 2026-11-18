@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "validation",
+  "overall_status": "PARTIAL",
+  "title": "AtomS3 #235 f12 same-machine display baseline",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/235",
+    "executed_source": "f12b15fb3dc2c27e31b804ccfffd63e8cbce89b8"
+  },
+  "hardware": {
+    "board": "AtomS3",
+    "machine": "m5atoms3-st7735",
+    "validation_class": "virtual-device validation"
+  },
+  "firmware": {
+    "spirit": {
+      "source_bin": {
+        "bytes": 609856,
+        "sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393"
+      },
+      "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df"
+    },
+    "motion": {
+      "source_bin": {
+        "bytes": 610656,
+        "sha256": "648246c46223449355057f22d3cfd959633c71d734a86546f0405646b84b373c"
+      },
+      "normalized_flash_sha256": "6030dccd975c2249550aec4755e4dc57743971ab21e33b9620b9ea50a4a57498"
+    },
+    "pocket": {
+      "source_bin": {
+        "bytes": 1331504,
+        "sha256": "6e4bee7554c9931101aa13a74fd187cf1ad9509bd906c2cfc6a8cacafba9d09d"
+      },
+      "normalized_flash_sha256": "030ed782bb1b292b7dd0152be9c6fce8ae7576a1c52efba790c9bd40078a7d65"
+    },
+    "uiflow": {
+      "source_bin": {
+        "bytes": 8384512,
+        "sha256": "28ddd0885ff09c3246a30d6757ef0707e352f43191fe1c78ee5bf6d3e6fc3270"
+      },
+      "normalized_flash_sha256": "0d5c817333d716c7e7b7f2c6ab1b446497a922181d696f1829b5b16ace7c3742"
+    }
+  },
+  "execution": {
+    "environment": "isolated macOS native Device Service 1.99.2 and QEMU",
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "three_original_black_frame_reproductions",
+      "status": "PASS",
+      "details": "30 black frame samples per original; zero GP-SPI transfers and panel events; MPU6886 trace activity"
+    },
+    {
+      "name": "official_uiflow2_same_machine_control",
+      "status": "PASS",
+      "details": "6 of 8 frame samples nonblack; 9,838 SPI transfers"
+    },
+    {
+      "name": "spirit_optional_uart_line",
+      "status": "REVIEW",
+      "details": "Optional bootloader app offset line absent, evidence retained"
+    },
+    {
+      "name": "same_session_zip_and_teardown",
+      "status": "PASS",
+      "details": "Four independent evidence archives with matching member hashes; released Flash and zero leases"
+    },
+    {
+      "name": "exact_board_detector_result_and_hardware",
+      "status": "NOT RUN",
+      "details": "Bit-level RDDID and physical device outside this execution"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/atoms3-235-paired-baseline.summary.json",
+      "kind": "redacted original and control receipts"
+    }
+  ]
+}
