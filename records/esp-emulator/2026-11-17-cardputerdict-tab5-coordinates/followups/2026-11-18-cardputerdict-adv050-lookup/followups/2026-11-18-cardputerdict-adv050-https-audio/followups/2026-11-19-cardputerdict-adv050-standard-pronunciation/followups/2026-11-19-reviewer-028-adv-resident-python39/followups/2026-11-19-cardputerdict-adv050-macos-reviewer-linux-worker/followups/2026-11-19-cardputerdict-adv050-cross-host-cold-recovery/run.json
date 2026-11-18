@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "macOS Reviewer and Linux same-volume cold recovery of an active CardputerDict ADV review",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "esp-emulator",
+    "base_commit": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "documentation_commit": "71d22d91da76b56e06f47cdfebe37cb6c4622f39",
+    "reviewer_repository": "auto-firmware-review",
+    "reviewer_commit": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1"
+  },
+  "hardware": {
+    "model": "Cardputer ADV",
+    "scope": "virtual-device validation"
+  },
+  "firmware": {
+    "model": "Cardputer ADV",
+    "firmware": "CardputerDict ADV 0.5.0",
+    "original_bytes": 2141568,
+    "firmware_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c",
+    "sd_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62"
+  },
+  "execution": {
+    "environment": "macOS system Python 3.9.6 and authenticated Virtio VSOCK to a no-NIC Linux VM",
+    "observed_at_utc": "2026-11-18T18:39:53.996578+00:00",
+    "task_id": "",
+    "session_id": "",
+    "terminal_receipt": {
+      "bytes": 4973,
+      "sha256": "1843c6749fa91fcf80efeb60becd95ae4661b06edbf19c763dc9548ed396579e"
+    }
+  },
+  "checks": [
+    {
+      "level": "transport",
+      "status": "PASS",
+      "detail": "Same authenticated loopback endpoint across boots; actual 401 authentication and 403 scope controls"
+    },
+    {
+      "level": "cold_recovery_without_authority",
+      "status": "PASS",
+      "detail": "HTTP 409 is the expected fence; one retained lease, writable Flash, durable intent and matching old PCAP"
+    },
+    {
+      "level": "cold_recovery_with_authority",
+      "status": "PASS",
+      "detail": "Exact controller stop acknowledgment and out-of-state read-only receipt; old lease, writable Flash and Reviewer create intent released; old journals and capture unchanged"
+    },
+    {
+      "level": "data_behavior",
+      "status": "PASS",
+      "detail": "Fresh same-original standard retry 202 then SIM_VERIFIED; 10,605-byte SD MP3, 84,992-byte I2S PCM and paired evidence ZIP integrity and payload matches"
+    },
+    {
+      "level": "cleanup",
+      "status": "PASS",
+      "detail": "Both owned VMs and relays acknowledged stopped, zero leases and no owned open paths"
+    },
+    {
+      "level": "production_traffic",
+      "status": "NOT RUN",
+      "detail": "Isolated same-volume rehearsal, no production routing or current Reviewer 0.29 path in this execution"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "No physical device or host power-loss measurements"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cross-host-active-cold.summary.json",
+      "bytes": 7626,
+      "sha256": "4f303e236045a94c6f79176276cdfddc0396e4ec456be5b56eb6949cc64503ab"
+    }
+  ],
+  "notes": [
+    "The first two startup errors are fixture-only and occurred before a review was started.",
+    "The successful runtime receipts and cleanup were preserved. A post-run collector type error was resolved by a separate offline readback without another boot.",
+    "No Burner submission."
+  ]
+}
