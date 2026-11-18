@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "NC1020 原版停顿后的 LCD SPI 等待与队列",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_api": "1.87.0",
+    "restored_runtime_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "evidence_docs_main": "0e376abc91ddf8252eb565cb1b54204be8e1f089"
+  },
+  "hardware": {
+    "target": "Cardputer K132",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "name": "NC1020",
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "retained_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "reference_elf_sha256": "4c36c995ef2125ac13e1381b187639a76c0afb37b21b0bc2754c49ef29da39e8",
+    "exact_matched_executable_bytes": 392992
+  },
+  "execution": {
+    "network": "offline",
+    "pc_only_cases": 2,
+    "scheduler_cases": 4,
+    "device_inputs_per_session": 0,
+    "reference_locally_compiled": true,
+    "reference_guest_executed": false
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "six restores and byte-matched executable symbol binding"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "scope": "two complete displays in six original trials, one in four scheduler cases"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "paired late scheduler snapshots distinguish SPI wait with one result from normal frame queue"
+    },
+    {
+      "layer": "workflow",
+      "status": "NOT RUN",
+      "scope": "causal first transition, repair, hardware, browser and Burner"
+    }
+  ],
+  "evidence": [
+    "evidence/guest-rtos-wait.summary.json",
+    "evidence/original-vma.summary.json"
+  ]
+}
