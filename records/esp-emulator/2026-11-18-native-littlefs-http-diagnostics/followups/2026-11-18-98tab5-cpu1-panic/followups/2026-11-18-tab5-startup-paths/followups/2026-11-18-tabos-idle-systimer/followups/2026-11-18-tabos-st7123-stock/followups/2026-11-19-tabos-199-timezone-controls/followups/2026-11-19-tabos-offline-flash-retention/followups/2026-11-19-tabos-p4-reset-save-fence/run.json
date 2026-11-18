@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "validation",
+  "overall_status": "PASS",
+  "title": "Tab5 original M5TabOS virtual-device reset refusal after unconfirmed P4 Flash save",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "candidate_commit": "76e734f5cf061bc7985a1bf6146f2cb5de223023",
+    "frozen_asset_commit": "9837c3f84df4383eb74881a1f44fcd3f460daefa"
+  },
+  "hardware": {
+    "device": "Tab5",
+    "soc": "ESP32-P4",
+    "companion": "ESP32-C6",
+    "touch": "ST7123",
+    "validation_class": "virtual-device validation"
+  },
+  "firmware": {
+    "name": "M5TabOS 0.9.1",
+    "source_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_flash_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec"
+  },
+  "execution": {
+    "environment": "owned native macOS ARM64 Device Service",
+    "network_enabled": false,
+    "api_version": "1.99.1",
+    "openapi_sha256": "e0b930608eab9a18e588ecb3ea61035cd8a5f43b69a998643aab6ee2408e3c35",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "elf_supplied": false,
+    "submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "stock_offline_home",
+      "status": "PASS",
+      "details": "Positive panel and frame readback before controlled interruption"
+    },
+    {
+      "name": "dirty_p4_reset_fails_closed",
+      "status": "PASS",
+      "details": "HTTP 409 tab5_flash_save_failed; no successor P4 or C6"
+    },
+    {
+      "name": "historical_evidence_and_cleanup",
+      "status": "PASS",
+      "details": "Same-session terminal failed ZIP; zero leases, no owned child, writable Flash released"
+    },
+    {
+      "name": "hardware_power_loss_browser_online_and_other_firmware",
+      "status": "NOT RUN",
+      "details": "Scope limited to an owned native P4 process on the original offline path"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/p4-reset-crash-fence-summary.json",
+      "kind": "redacted virtual-device receipts"
+    }
+  ]
+}
