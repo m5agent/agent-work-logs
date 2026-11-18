@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 #188 UIFlow2 原版面板识别与触摸对照 | PARTIAL（ST7123 离线触摸通过，GT911 原版缺面板 ID 回包） | [查看](esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-196-board-compare/) |
 | 2026-11-18 | ESP Emulator | Device Service 与 Reviewer 双重启恢复 | PASS（两种启动顺序自动回收及同固件重试，Linux 画面未验收） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-device-double-restart/) |
 | 2026-11-18 | ESP Emulator | Reviewer 活跃会话创建恢复 | PASS（Core2 原版双关口与 Linux STA A/B；Linux 显示未验收） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-active-create-recovery/) |
 | 2026-11-18 | ESP Emulator | StickS3 内部 RC_FAST/256 RTC 定时深睡 | PASS（八次定时唤醒，复位和 RTC 保留通过） | [查看](esp-emulator/2026-11-18-sticks3-rtc-deep-sleep/followups/2026-11-18-sticks3-d256-deep-sleep/) |

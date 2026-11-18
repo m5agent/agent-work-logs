@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "issue": 188,
+  "issue_state": "OPEN",
+  "source_commit": "a7dbd9808a09bc507b657995dba079b8075badcf",
+  "source_sha256": {
+    "platform/tools/serve.py": "114c885c906d13da577e89baf97761c8597c07db760a04c9c502f40c7d413f45",
+    "platform/tools/device_service.py": "fa825ff4796c42a63a34270eb860ec147eac22f4a66d4762804d34469e84dd9e",
+    "platform/tools/device_service_tab5_dsi.py": "1fda23cb5550e0a92e6d19ce0787b0453dba9cadf3c5e7c9bc8ed921e9f6cce2",
+    "platform/tools/device_service_specs.py": "2b3557fad081d27dbe4d6ae1e8a644dfd6c8646ade70fde3e0b67e040eaa6e87",
+    "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321",
+    "docs/device-service.openapi.yaml": "42f18e31af99bde171cd361ca3ecc55504ac0e521e6da71394934ee4502fdce9"
+  },
+  "runtime_version": "1.1.0",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "openapi_sha256": "42f18e31af99bde171cd361ca3ecc55504ac0e521e6da71394934ee4502fdce9",
+  "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+  "original_size": 16121856,
+  "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+  "working_assets_sha256": {
+    "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+  },
+  "application_partitions_verified_after_execution": [
+    {
+      "offset": 65536,
+      "size": 10027008,
+      "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5"
+    }
+  ],
+  "previous_gt911": {
+    "service_source": "1c2eb72d3b7e517e2ceb487c408708a5b800a8c8",
+    "service_version": "1.92.0",
+    "summary_sha256": "c32e377a05ad93173e2aba5ebe94c71ee7a52154f5da8eb12eb063b106445721",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "ordinary_serial_byte_identical": true,
+    "complete_frames": 0,
+    "original_application_same": true
+  },
+  "network": {
+    "local_p4_c6_bridge": true,
+    "external_network_requested": false,
+    "relay_configured": false
+  },
+  "runs": {
+    "ordinary_gt911": {
+      "classification": "FAIL_NO_FRAME",
+      "full_receipt_sha256": "082f95fe0f77f3a80722534a871fad4e4d68387f4aefd54a6e1d9f28a6e1eaad",
+      "full_receipt_bytes": 6388,
+      "board": "gt911-ili9881c",
+      "part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "elapsed_seconds": 20.01,
+      "dsi": {
+        "frame_codes": {
+          "session_not_running": 1,
+          "tab5_dsi_frame_unavailable": 9
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 1
+      },
+      "serial": {
+        "sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+        "bytes": 406,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "panel_not_detected_markers": 1,
+      "part_buffer_fatals": 0,
+      "evidence_zip_sha256": "27d76e81544b7c77fdf5a5777354a8a0153f0d7f4cb6fabe2f28dc22d66f9553",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "owned_service_exited": true,
+      "usb_devices_attached": false,
+      "input_count": 0
+    },
+    "ordinary_st7123": {
+      "classification": "PASS_OFFLINE_I2C_SCAN_PAGE",
+      "full_receipt_sha256": "5f6807bcc92839e28875413685b7a19bdf8070e7550b9999e26f3c1078aeca18",
+      "full_receipt_bytes": 8724,
+      "board": "st7123",
+      "part_sha256": "6ecac188e0ebd7659b6af627c3f1fcf9c5143e2f36b5f9a4b8cb187468de14f3",
+      "elapsed_seconds": 25.007,
+      "dsi": {
+        "frame_codes": {
+          "session_not_running": 1
+        },
+        "states": {},
+        "nonblack_frames": 10,
+        "complete_frames": 11,
+        "zero_read_warnings": 0
+      },
+      "serial": {
+        "sha256": "b5e826337625da71ee828c0ce30d43c75988f5982b9dd42c50eca1d081a0dd1c",
+        "bytes": 436,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "panel_not_detected_markers": 0,
+      "part_buffer_fatals": 0,
+      "evidence_zip_sha256": "f8a29b13a1a742dc6417cc76878078e25cb8eb063cf4bc04007da31a376ed366",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "owned_service_exited": true,
+      "usb_devices_attached": false,
+      "input_count": 1,
+      "touch": {
+        "controller": "st7123",
+        "raw": [
+          83,
+          308
+        ],
+        "reports": {
+          "reports": 2,
+          "acknowledged": 2
+        },
+        "before_frame_sha256": "317e615fcd80fa15a9f749aa166a91012a10dd0e0d2a67793869768d983eeb67",
+        "reference_menu_roi_sha256": "fc0a6e6d5e51d01b57c3876bf0af14d20e8dab2098725246a54f322017eee093"
+      },
+      "i2c_scan_page": {
+        "frame_sha256": "158a4ed0f60b5bd07317eff79306fc259c539f58e301fae67484811ae46833f4",
+        "reference_scan_roi_sha256": "0670f8044f534804d688f6a2bba35c8ee8ba0b31af7d8a3d400d72169cb2ba9e",
+        "size": [
+          720,
+          1280
+        ]
+      }
+    },
+    "readonly_gt911_panel_compare": {
+      "classification": "PASS_OBSERVED_PANEL_ID_PREDICATE",
+      "full_receipt_sha256": "47139d4a54caaf5fcee8aed6501a4b892126a7ee9eb065a9729c4fd1f5a67139",
+      "full_receipt_bytes": 7328,
+      "board": "gt911-ili9881c",
+      "part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "elapsed_seconds": 20.01,
+      "dsi": {
+        "frame_codes": {
+          "tab5_dsi_frame_unavailable": 10
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 1
+      },
+      "serial": {
+        "sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+        "bytes": 406,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "panel_not_detected_markers": 1,
+      "part_buffer_fatals": 0,
+      "evidence_zip_sha256": "327c159a192dfd42e72ce28c50a187552f5ea6511df703c2e4fa7e063bd742da",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "owned_service_exited": true,
+      "usb_devices_attached": false,
+      "input_count": 0,
+      "read_only_diagnostic": {
+        "runtime_hardware_breakpoints": true,
+        "detached": true,
+        "transcript_sha256": "be4bab8d7f780635209c7a0da7f2f48dfd983ba169d444ac0c9b8e8b0dd651cf",
+        "first_read": {
+          "command_hex": "00",
+          "asked_bytes": 1,
+          "return": "ESP_OK",
+          "byte_hex": "00"
+        },
+        "consumer_pc": "0x481a1d86",
+        "comparison_pc": "0x481a1da8",
+        "stock_one_byte_read_registers_hex": [
+          "00",
+          "01",
+          "02"
+        ],
+        "actual_before_compare_hex": "000000",
+        "live_first_expected_byte_hex": "98",
+        "static_second_expected_byte_hex": "81",
+        "static_second_expected_pc": "0x481a1dbe",
+        "error_branch_pc": "0x481a1d20",
+        "vendor_page_command_hex": "ff",
+        "vendor_page_payload_bytes": 3,
+        "vendor_page_payload_capture": "NOT RUN"
+      }
+    }
+  },
+  "limits": {
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "cloud_pairing": "NOT RUN",
+    "nonzero_panel_response_positive_control": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  }
+}

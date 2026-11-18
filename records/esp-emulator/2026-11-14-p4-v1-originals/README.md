@@ -40,3 +40,5 @@ are omitted; the summaries retain their hashes and bounded observations.
 [Tab5 #188 原版 UIFlow2 1.1.0 双 Part 对照](followups/2026-11-18-tab5-uiflow254-v110-part-gap/README.md)
 
 [Tab5 #226 原版 Maker Fighter 1.1.0 USB 自检](followups/2026-11-18-maker-fighter-dwc-self-check/README.md)
+
+- [Tab5 UIFlow2 2.5.4 原版面板识别与离线触摸对照](followups/2026-11-18-tab5-uiflow254-196-board-compare/README.md)
