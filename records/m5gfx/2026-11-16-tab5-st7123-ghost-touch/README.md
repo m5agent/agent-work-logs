@@ -326,3 +326,25 @@ GDB 邮箱，无 0x43 扩展器与 reset 线模型）。
 
 第十四轮回复：[issuecomment-6944727938](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6944727938)
 （英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。
+
+## 追加：计时边界修正、148 ms 调用的内部分段与 65 s 枚举（2026-11-18，第二十一轮）
+
+作者修正计时器只包 `getTouchRaw()`（起点在 `M5.update()` 返回、触摸锁取得之后），
+故 148 ms 是触摸调用本身。我方撤回把窗口一部分归给 `M5.update()` 的 22–170 ms 分解：
+“22 ms 一端 ⇒ 无停顿”这一支不成立；定长操作（8 次 147.1–149.6 ms，1.7% 展布）的结论不变。
+
+新增的代码事实把 148.5 ms 定位到传输之外：`getTouchRaw()` 三次独立事务
+（`0x0010` 1 B、`0x0009` 1 B、`0x0014` 70 B），每次各自取/放该端口递归互斥量；
+单次传输停顿上限 25 ms、SCL 看门狗约 13 ms、总线忙自旋 128 µs。线上时间合计约
+1.7–2.3 ms，与作者正常调用 2.18–2.30 ms 一致；三次都触上限也只有 75 ms 且会置错误，
+而作者失败读计数为 0。故约 146 ms 位于三次传输之外（取锁后、传输间或返回前），
+四个时间戳即可判定。
+
+另给两条计数读法（ISR 时间记在被中断任务上、互斥量阻塞增量为 0）与判别规则，
+`esp_timer_dump()` + `CONFIG_ESP_TIMER_PROFILING` 的枚举办法（第一次 loop 通过时即可），
+以及替换运行的 A/B 两臂（裸 148 ms 空档；把空档移到 `0x0010` 与 `0x0014` 之间）。
+
+证据：[evidence/followup-run7-call-segments.md](evidence/followup-run7-call-segments.md)。
+证据等级：`code-level verification`（固定 commit `28d4794` 源码 + 算术）；作者
+`hardware validation` 为其自有测量；物理 Tab5 与虚拟设备均 `NOT RUN`（现查
+`tab5_enabled: false`，ST7123 触摸为固件 GDB 邮箱）。
