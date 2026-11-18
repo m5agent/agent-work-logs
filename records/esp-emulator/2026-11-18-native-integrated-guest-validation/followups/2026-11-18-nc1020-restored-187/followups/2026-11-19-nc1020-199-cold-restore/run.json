@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer NC1020 1.1 G0 save and cross-worker restore on Device Service 1.99.0",
+  "source": {
+    "issue": null,
+    "pull_request": null,
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "597e03214dc5f442787cec52f1720567e4ed2a00"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "board": "Cardputer K132",
+    "soc": "ESP32-S3",
+    "physical_device_used": false
+  },
+  "firmware": {
+    "title": "NC1020",
+    "version": "1.1",
+    "original_sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "original_bytes": 8388608,
+    "replayed_snapshot_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "replayed_snapshot_bytes": 8388608,
+    "original_factory_partition_preserved": true
+  },
+  "execution": {
+    "environment": "Isolated macOS Device Service 1.99.0 / native Xtensa QEMU / normal timing / offline",
+    "task_id": null,
+    "session_id": null,
+    "session_refs": [
+      "worker-A",
+      "worker-B"
+    ],
+    "openapi_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "capture_utc": [
+      "2026-11-18T16:12:17Z",
+      "2026-11-18T16:12:28Z"
+    ],
+    "runtime_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5"
+  },
+  "checks": [
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "detail": "Both fresh workers booted the exact populated snapshot of the original factory application."
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "Native SPI model completed 407 and 410 CMD17 blocks before any input on the respective workers."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "One real G0 action saved a new 99384-byte state. Worker B restored the exact exported card and its stopped file hash matched worker A."
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "detail": "All six timed native frames were nonblack and incomplete. The post-input frame remained unchanged."
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "Physical hardware and browser WASM were outside this isolated native replay."
+    },
+    {
+      "layer": "review",
+      "status": "NOT RUN",
+      "detail": "The 1.99 runtime was not instrumented for SPI lock attribution and no Burner submission was run."
+    }
+  ],
+  "evidence": [
+    "evidence/nc1020-199-cold-restore.summary.json"
+  ],
+  "notes": [
+    "No code change or new firmware build. Two exited guests, zero active leases, released Flash and retained history."
+  ]
+}
