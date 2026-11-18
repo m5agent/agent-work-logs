@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "infra_baseline",
+  "overall_status": "PASS",
+  "title": "macOS resident readback of Linux gateway cold recovery release",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "981fdcdf09253b75be960772147258b677775d8c",
+    "active_commit": "9837c3f84df4383eb74881a1f44fcd3f460daefa",
+    "qualified_linux_commit": "97339c1137e4e8564114e7476ba607f1129fe68c"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS Device Service roles and Reviewer",
+    "observed_utc": "2026-11-18T17:06:45+00:00",
+    "evidence_sha256": "d79ceebde445fdaa912f75e5a9da7d6205db708c232ed774a7d989a2de2499f4"
+  },
+  "checks": [
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "Idle cutover and independent macOS live verification."
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "detail": "Device OpenAPI bytes are identical on both roles and Reviewer readiness returned HTTP 200."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "153 Device histories and 129 Reviewer histories plus sampled evidence retained."
+    },
+    {
+      "layer": "review",
+      "status": "NOT RUN",
+      "detail": "No resident Linux route or production guest execution."
+    }
+  ],
+  "evidence": [
+    "evidence/resident-readback.summary.json"
+  ],
+  "notes": [
+    "The Linux original firmware validation is in the preceding record. Burner was not submitted."
+  ]
+}

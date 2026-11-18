@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | Device Service 冷启动恢复修订的常驻切换 | PASS（双角色接口、历史和默认配置回读） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-active-cold-gateway-recovery/followups/2026-11-19-linux-active-cold-gateway-controller-receipt/followups/2026-11-19-resident-199-gateway-cold-recovery/) |
 | 2026-11-19 | ESP Emulator | Linux 活动审核冷启动恢复与宿主停机凭据 | PASS（保持无凭据阻断，可信交接后原版重试播放） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-active-cold-gateway-recovery/followups/2026-11-19-linux-active-cold-gateway-controller-receipt/) |
 | 2026-11-19 | ESP Emulator | Dial 原版 8 ms 漏选的同会话 GPIO 读回 | PARTIAL（原版复现，诊断读回漏采，35 ms 对照通过） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-199-original-cadence/followups/2026-11-19-dial-8ms-original-phase-readback/) |
 | 2026-11-19 | ESP Emulator | Linux 活动原版审核的异常关机恢复 | FAIL（跨启动恢复和重试受阻，旧证据可读） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-active-cold-gateway-recovery/) |
