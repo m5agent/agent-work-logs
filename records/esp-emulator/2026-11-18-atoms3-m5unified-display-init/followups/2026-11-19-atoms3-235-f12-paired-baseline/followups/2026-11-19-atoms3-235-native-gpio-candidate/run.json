@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "validation",
+  "overall_status": "PASS",
+  "title": "AtomS3 #235 GPIO board-detection candidate against same original firmware",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/235",
+    "device_service_source": "f12b15fb3dc2c27e31b804ccfffd63e8cbce89b8",
+    "board_delta_sha256": "b9e6ab8e908a2779cd779567d022fc2f80a6a0b543e16edb918b5d479eeaa224",
+    "candidate_native_qemu_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e"
+  },
+  "hardware": {
+    "board": "AtomS3",
+    "validation_class": "native virtual-device validation"
+  },
+  "firmware": {
+    "spirit": {
+      "sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393",
+      "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df"
+    },
+    "motion": {
+      "sha256": "648246c46223449355057f22d3cfd959633c71d734a86546f0405646b84b373c",
+      "normalized_flash_sha256": "6030dccd975c2249550aec4755e4dc57743971ab21e33b9620b9ea50a4a57498"
+    },
+    "pocket": {
+      "sha256": "6e4bee7554c9931101aa13a74fd187cf1ad9509bd906c2cfc6a8cacafba9d09d",
+      "normalized_flash_sha256": "030ed782bb1b292b7dd0152be9c6fce8ae7576a1c52efba790c9bd40078a7d65"
+    },
+    "uiflow": {
+      "sha256": "28ddd0885ff09c3246a30d6757ef0707e352f43191fe1c78ee5bf6d3e6fc3270",
+      "normalized_flash_sha256": "0d5c817333d716c7e7b7f2c6ab1b446497a922181d696f1829b5b16ace7c3742"
+    },
+    "spirit_gc9107": {
+      "sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393",
+      "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df"
+    }
+  },
+  "execution": {
+    "environment": "isolated macOS native Device Service 1.99.2",
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "exact_signed_runtime_and_scoped_board_patch",
+      "status": "PASS",
+      "details": "arm64 QEMU with strict ad-hoc signature; one linked board object changed"
+    },
+    {
+      "name": "default_three_original_display_recovery",
+      "status": "PASS",
+      "details": "Spirit Level, Motion Face and Pocket Clock fully rendered with same original and normalized Flash"
+    },
+    {
+      "name": "pre_gpspi_panel_probe_command",
+      "status": "PASS",
+      "details": "C04 first recorded panel command before GP-SPI in five isolated sessions"
+    },
+    {
+      "name": "native_sensor_data_and_guest_pixels",
+      "status": "PASS",
+      "details": "Spirit Level +/-36.9 degree readout; Motion register and different frames; Pocket Clock offline setup"
+    },
+    {
+      "name": "official_default_and_gc9107_control",
+      "status": "PASS",
+      "details": "Stock UIFlow2 final frame byte-equal; Spirit matched positive results in explicit GC9107 override"
+    },
+    {
+      "name": "same_session_zip_and_teardown",
+      "status": "PASS",
+      "details": "Five saved ZIPs, seven members each, checked exact; zero leases and released Flash"
+    },
+    {
+      "name": "full_rddid_bit_trace_physical_browser_production",
+      "status": "NOT RUN",
+      "details": "Scope bounded to native simulator and observed panel command; Burner not submitted"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/atoms3-235-native-candidate.summary.json",
+      "kind": "redacted native candidate results"
+    }
+  ]
+}

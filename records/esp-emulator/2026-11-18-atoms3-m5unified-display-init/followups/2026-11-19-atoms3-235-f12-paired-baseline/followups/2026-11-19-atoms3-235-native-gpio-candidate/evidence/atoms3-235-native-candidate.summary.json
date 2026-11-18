@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "kind": "product_candidate_virtual_device_validation",
+  "status": "PASS",
+  "summary": "Native AtomS3 display restored in scoped original firmware validation.",
+  "service_source": "f12b15fb3dc2c27e31b804ccfffd63e8cbce89b8",
+  "device_openapi_version": "1.99.2",
+  "device_openapi_sha256": "cd1a84391f6f091fef671f05720c13f7d453c7378b70117e34b83ba6515b8689",
+  "candidate_native_qemu": {
+    "sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+    "bytes": 22422392,
+    "arch": "arm64",
+    "strict_linker_adhoc_signature": "PASS",
+    "dynamic_libraries_match_incumbent": true
+  },
+  "baseline_native_qemu_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+  "build": {
+    "source_revision": "847a0c929bdfa0c25e0f70eb06c1d6128d413216",
+    "qemu_upstream": "40edccac415693c5130f91c01d84176ae6008566",
+    "board_delta_sha256": "b9e6ab8e908a2779cd779567d022fc2f80a6a0b543e16edb918b5d479eeaa224",
+    "changed_link_object_count": 1,
+    "build_receipt": {
+      "bytes": 2515,
+      "sha256": "c2e2b096b40ae67232e2b70a516440daa9c9dbf51d1f5fac0562bf0f147394cd"
+    }
+  },
+  "previous_baseline_retained": {
+    "receipt": {
+      "bytes": 8827,
+      "sha256": "a23bd6fff30a25f91d0f42156d398c9cafd8b8a03f4a644ceb77f89512c5373b"
+    },
+    "spirit_setup_harness": "REVIEW"
+  },
+  "cases": {
+    "spirit": {
+      "original_firmware_sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393",
+      "original_firmware_bytes": 609856,
+      "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df",
+      "baseline_same_original_and_flash": true,
+      "panel_profile_override": null,
+      "native_result": "DISPLAY_OBSERVED",
+      "first_nonblack": {
+        "bytes": 998,
+        "colors": 5,
+        "dimensions": [
+          128,
+          128
+        ],
+        "elapsed_s": 2.07,
+        "http": 200,
+        "nonblack": 16384,
+        "sha256": "28922e1ed64bfbc322fc653ac91b88637da4bf31f157ae209a33d03162333a6a"
+      },
+      "before_and_after_archived_frame_pixels_nonblack": [
+        0,
+        16384
+      ],
+      "startup_trace": {
+        "first_panel_command": "04",
+        "panel_command_trace_line": 5,
+        "first_gpspi_trace_line": 47,
+        "spi_transfer_markers": 3527
+      },
+      "archived_frame": {
+        "bytes": 1128,
+        "sha256": "f96adec290c7b452328f60812138bc89f56661eb54e5a639c52559f96a5fae2a"
+      },
+      "serial_receipt": {
+        "bytes": 314,
+        "sha256": "c2a342740c7ecd222909137ea94305bb43f2b76ae66b7878575072b41a7a976e"
+      },
+      "trace_receipt": {
+        "bytes": 1436235,
+        "sha256": "a1a4ba09111e84295262269d83ab0b0575f6eaa2db54b1a3135a234031a9d672"
+      },
+      "terminal_receipt": {
+        "bytes": 9758,
+        "sha256": "b7426a4c1bd419652d2a5d101a231a719cdcef191c23790186dbc66cc4ef93a6"
+      },
+      "device_evidence_zip": {
+        "bytes": 18441,
+        "sha256": "e8de47324e5cb4c966ddaf4a60ae8ae12879d009941abfb85c97430d39d8eaf6"
+      },
+      "zip_members_checked": 7,
+      "same_session_cleanup": {
+        "active_leases": 0,
+        "owned_native_child_exited": true,
+        "stopped_history_reread": true,
+        "virtual_flash_released": true,
+        "service_exited": true
+      },
+      "mpu6886_guest_input": {
+        "neutral_frame": {
+          "bytes": 998,
+          "colors": 5,
+          "dimensions": [
+            128,
+            128
+          ],
+          "nonblack": 16384,
+          "sha256": "28922e1ed64bfbc322fc653ac91b88637da4bf31f157ae209a33d03162333a6a"
+        },
+        "original_axes_restored": true,
+        "phases": [
+          {
+            "axis_g_readback": [
+              0.75,
+              0.0
+            ],
+            "frame": {
+              "bytes": 1130,
+              "colors": 6,
+              "dimensions": [
+                128,
+                128
+              ],
+              "nonblack": 16384,
+              "sha256": "fe6b1035ca3c9a31ce3e192b2fdb300c8e24b73084fc69af63db83b41ed681f6"
+            },
+            "guest_registers": [
+              "3b:0c",
+              "3c:00",
+              "3d:00",
+              "3e:00"
+            ],
+            "label": "right-tilt",
+            "mpu6886_markers": 945,
+            "trace_sha256": "96421d5a8a671e087c2d7a809207d2aa41e88e04dd724c78652d4346e767dea1"
+          },
+          {
+            "axis_g_readback": [
+              -0.75,
+              0.0
+            ],
+            "frame": {
+              "bytes": 1128,
+              "colors": 6,
+              "dimensions": [
+                128,
+                128
+              ],
+              "nonblack": 16384,
+              "sha256": "f96adec290c7b452328f60812138bc89f56661eb54e5a639c52559f96a5fae2a"
+            },
+            "guest_registers": [
+              "3b:f4",
+              "3c:00",
+              "3d:00",
+              "3e:00"
+            ],
+            "label": "left-tilt",
+            "mpu6886_markers": 945,
+            "trace_sha256": "387ffbf417736917c143ff305675593bd40a4c503026ebe4f8b9835e1e746f89"
+          }
+        ]
+      },
+      "guest_display_readback_degrees_x_by_input": {
+        "+0.75g": 36.9,
+        "-0.75g": -36.9
+      }
+    },
+    "motion": {
+      "original_firmware_sha256": "648246c46223449355057f22d3cfd959633c71d734a86546f0405646b84b373c",
+      "original_firmware_bytes": 610656,
+      "normalized_flash_sha256": "6030dccd975c2249550aec4755e4dc57743971ab21e33b9620b9ea50a4a57498",
+      "baseline_same_original_and_flash": true,
+      "panel_profile_override": null,
+      "native_result": "DISPLAY_OBSERVED",
+      "first_nonblack": {
+        "bytes": 941,
+        "colors": 6,
+        "dimensions": [
+          128,
+          128
+        ],
+        "elapsed_s": 2.059,
+        "http": 200,
+        "nonblack": 16384,
+        "sha256": "ee2d83d8b078bb63b3ff73143d4b477d2441d69bdd9dafe695d3853b531ee408"
+      },
+      "before_and_after_archived_frame_pixels_nonblack": [
+        0,
+        16384
+      ],
+      "startup_trace": {
+        "first_panel_command": "04",
+        "panel_command_trace_line": 5,
+        "first_gpspi_trace_line": 47,
+        "spi_transfer_markers": 4021
+      },
+      "archived_frame": {
+        "bytes": 894,
+        "sha256": "cb38378b93063b6099b0487a3fe9ce23a598c5ea9f36f19b6da17efd9452c966"
+      },
+      "serial_receipt": {
+        "bytes": 225,
+        "sha256": "8a1251dbfb3ad0b96e366e15fcb5bfbd4e964d66776488ee628a5ebc8219f1e3"
+      },
+      "trace_receipt": {
+        "bytes": 1657300,
+        "sha256": "28dff56e069f916f94cba684b72a5ed2ff519834ba15a2cf60c71da26ae0f69e"
+      },
+      "terminal_receipt": {
+        "bytes": 10281,
+        "sha256": "292e6ea9ac2dc2c606d18ecd0818b51c1579d10977848bcd69dd17501d0b31a9"
+      },
+      "device_evidence_zip": {
+        "bytes": 19206,
+        "sha256": "14676470d84a69b32d586a4ac4cef7fbe1f1a3debdd7ee8e392deffa5849fadb"
+      },
+      "zip_members_checked": 7,
+      "same_session_cleanup": {
+        "active_leases": 0,
+        "owned_native_child_exited": true,
+        "stopped_history_reread": true,
+        "virtual_flash_released": true,
+        "service_exited": true
+      },
+      "mpu6886_guest_input": {
+        "neutral_frame": {
+          "bytes": 875,
+          "colors": 6,
+          "dimensions": [
+            128,
+            128
+          ],
+          "nonblack": 16384,
+          "sha256": "f816ba03d2c21442e8b02008e578274f50013e518e8d04e726da7e7935208b90"
+        },
+        "original_axes_restored": true,
+        "phases": [
+          {
+            "axis_g_readback": [
+              0.75,
+              0.0
+            ],
+            "frame": {
+              "bytes": 878,
+              "colors": 6,
+              "dimensions": [
+                128,
+                128
+              ],
+              "nonblack": 16384,
+              "sha256": "c0ad8d678504128dc364893293a6b7c48384acbcaaf1b5869d3ac528c5dfe73f"
+            },
+            "guest_registers": [
+              "3b:0c",
+              "3c:00",
+              "3d:00",
+              "3e:00"
+            ],
+            "label": "right-tilt",
+            "mpu6886_markers": 945,
+            "trace_sha256": "ac2833e7f9b7aba808a7b7ffeb5aa15b64f30925c13c1cb2407e3484841fd7f9"
+          },
+          {
+            "axis_g_readback": [
+              -0.75,
+              0.0
+            ],
+            "frame": {
+              "bytes": 894,
+              "colors": 6,
+              "dimensions": [
+                128,
+                128
+              ],
+              "nonblack": 16384,
+              "sha256": "cb38378b93063b6099b0487a3fe9ce23a598c5ea9f36f19b6da17efd9452c966"
+            },
+            "guest_registers": [
+              "3b:f4",
+              "3c:00",
+              "3d:00",
+              "3e:00"
+            ],
+            "label": "left-tilt",
+            "mpu6886_markers": 930,
+            "trace_sha256": "65fb4adfb49f2ac3968297912d5bab916cc05920f630107b8f83b44b94bd5137"
+          }
+        ]
+      }
+    },
+    "pocket": {
+      "original_firmware_sha256": "6e4bee7554c9931101aa13a74fd187cf1ad9509bd906c2cfc6a8cacafba9d09d",
+      "original_firmware_bytes": 1331504,
+      "normalized_flash_sha256": "030ed782bb1b292b7dd0152be9c6fce8ae7576a1c52efba790c9bd40078a7d65",
+      "baseline_same_original_and_flash": true,
+      "panel_profile_override": null,
+      "native_result": "DISPLAY_OBSERVED",
+      "first_nonblack": {
+        "bytes": 653,
+        "colors": 4,
+        "dimensions": [
+          128,
+          128
+        ],
+        "elapsed_s": 2.036,
+        "http": 200,
+        "nonblack": 16384,
+        "sha256": "ce9042fc5ce0648aa076a8a39647363cb6bd006c85e0b59a43566e525cd875cd"
+      },
+      "before_and_after_archived_frame_pixels_nonblack": [
+        0,
+        16384
+      ],
+      "startup_trace": {
+        "first_panel_command": "04",
+        "panel_command_trace_line": 5,
+        "first_gpspi_trace_line": 47,
+        "spi_transfer_markers": 2409
+      },
+      "archived_frame": {
+        "bytes": 1190,
+        "sha256": "81c7052a03125f3c93dc40388dc430bacecbf94da1be290e5a0a590d2b7005ba"
+      },
+      "serial_receipt": {
+        "bytes": 376,
+        "sha256": "17f6e6c5bfa0ca61875309dd09b30bce8209d07d3884241d0178eb3bb2d228b2"
+      },
+      "trace_receipt": {
+        "bytes": 936260,
+        "sha256": "b69d048a13d5b85da20f77a7bddffd3a174cf9f6b85525994fdd0cb41bc0b380"
+      },
+      "terminal_receipt": {
+        "bytes": 8727,
+        "sha256": "00337410e7e0e4ce7311479a17f0fd7fc363d64e443491fcb7767ebcadaeed1e"
+      },
+      "device_evidence_zip": {
+        "bytes": 15996,
+        "sha256": "71acee5266e6d9749360449f826aa3d3bc20d2e53c26712e2b6f3ac825466aa5"
+      },
+      "zip_members_checked": 7,
+      "same_session_cleanup": {
+        "active_leases": 0,
+        "owned_native_child_exited": true,
+        "stopped_history_reread": true,
+        "virtual_flash_released": true,
+        "service_exited": true
+      },
+      "observed_original_final_screen": "WI-FI SETUP in offline guest"
+    },
+    "uiflow": {
+      "original_firmware_sha256": "28ddd0885ff09c3246a30d6757ef0707e352f43191fe1c78ee5bf6d3e6fc3270",
+      "original_firmware_bytes": 8384512,
+      "normalized_flash_sha256": "0d5c817333d716c7e7b7f2c6ab1b446497a922181d696f1829b5b16ace7c3742",
+      "baseline_same_original_and_flash": true,
+      "panel_profile_override": null,
+      "native_result": "POSITIVE_CONTROL_PASS",
+      "first_nonblack": {
+        "bytes": 2589,
+        "colors": 102,
+        "dimensions": [
+          128,
+          128
+        ],
+        "elapsed_s": 4.069,
+        "http": 200,
+        "nonblack": 16384,
+        "sha256": "617541ff42c7066b7381084a85a11f2fb1ee71a7b9dd5b5ac567c12bc451df24"
+      },
+      "before_and_after_archived_frame_pixels_nonblack": [
+        16384,
+        16384
+      ],
+      "startup_trace": {
+        "first_panel_command": "04",
+        "panel_command_trace_line": 4,
+        "first_gpspi_trace_line": 44,
+        "spi_transfer_markers": 9838
+      },
+      "archived_frame": {
+        "bytes": 2589,
+        "sha256": "617541ff42c7066b7381084a85a11f2fb1ee71a7b9dd5b5ac567c12bc451df24"
+      },
+      "serial_receipt": {
+        "bytes": 548,
+        "sha256": "a2c875062bf2ab1d81b3fc2cd2eed29dd36e621238e8073cac5c0f77efb0918f"
+      },
+      "trace_receipt": {
+        "bytes": 1924018,
+        "sha256": "1e8458cdfa708516343799455deb145ccb8e357a32381bb76339129c68610299"
+      },
+      "terminal_receipt": {
+        "bytes": 7979,
+        "sha256": "64654059c8b361227297fa4f5b2e0c21350376a5d84670ff86ac7535abb1fb79"
+      },
+      "device_evidence_zip": {
+        "bytes": 27447,
+        "sha256": "f3f76cc0f2b1863335357f1fc65040b61d296ae8a7c8d6a1c1be68944feabdef"
+      },
+      "zip_members_checked": 7,
+      "same_session_cleanup": {
+        "active_leases": 0,
+        "owned_native_child_exited": true,
+        "stopped_history_reread": true,
+        "virtual_flash_released": true,
+        "service_exited": true
+      },
+      "archived_frame_byte_equal_to_baseline": true
+    },
+    "spirit_gc9107": {
+      "original_firmware_sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393",
+      "original_firmware_bytes": 609856,
+      "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df",
+      "baseline_same_original_and_flash": true,
+      "panel_profile_override": "gc9107",
+      "native_result": "DISPLAY_OBSERVED",
+      "first_nonblack": {
+        "bytes": 998,
+        "colors": 5,
+        "dimensions": [
+          128,
+          128
+        ],
+        "elapsed_s": 2.068,
+        "http": 200,
+        "nonblack": 16384,
+        "sha256": "28922e1ed64bfbc322fc653ac91b88637da4bf31f157ae209a33d03162333a6a"
+      },
+      "before_and_after_archived_frame_pixels_nonblack": [
+        0,
+        16384
+      ],
+      "startup_trace": {
+        "first_panel_command": "04",
+        "panel_command_trace_line": 5,
+        "first_gpspi_trace_line": 47,
+        "spi_transfer_markers": 3613
+      },
+      "archived_frame": {
+        "bytes": 1127,
+        "sha256": "da4dbb284fb97db2efcdd3d1293f01aa22505732d1a06512383ccbfddf58da0f"
+      },
+      "serial_receipt": {
+        "bytes": 314,
+        "sha256": "214b9204181349e4faec46c513000e70ed5600ad558cdacf4568c5550f1dd351"
+      },
+      "trace_receipt": {
+        "bytes": 1476868,
+        "sha256": "df4d816c935ff741387fa317e30de1c3549bc1cc4f3f5a46b1ae2ad28393eb61"
+      },
+      "terminal_receipt": {
+        "bytes": 10226,
+        "sha256": "f07abb5cc76b80ca3678edc6757dbc65f4b098fef0dac9155ddd79f2d3ef80bf"
+      },
+      "device_evidence_zip": {
+        "bytes": 18733,
+        "sha256": "885f882445fd4936c5fdd5ddeb4ebccad7c608e4ec717ef6aec92ebe452c30cf"
+      },
+      "zip_members_checked": 7,
+      "same_session_cleanup": {
+        "active_leases": 0,
+        "owned_native_child_exited": true,
+        "stopped_history_reread": true,
+        "virtual_flash_released": true,
+        "service_exited": true
+      },
+      "mpu6886_guest_input": {
+        "neutral_frame": {
+          "bytes": 998,
+          "colors": 5,
+          "dimensions": [
+            128,
+            128
+          ],
+          "nonblack": 16384,
+          "sha256": "28922e1ed64bfbc322fc653ac91b88637da4bf31f157ae209a33d03162333a6a"
+        },
+        "original_axes_restored": true,
+        "phases": [
+          {
+            "axis_g_readback": [
+              0.75,
+              0.0
+            ],
+            "frame": {
+              "bytes": 1130,
+              "colors": 6,
+              "dimensions": [
+                128,
+                128
+              ],
+              "nonblack": 16384,
+              "sha256": "fe6b1035ca3c9a31ce3e192b2fdb300c8e24b73084fc69af63db83b41ed681f6"
+            },
+            "guest_registers": [
+              "3b:0c",
+              "3c:00",
+              "3d:00",
+              "3e:00"
+            ],
+            "label": "right-tilt",
+            "mpu6886_markers": 945,
+            "trace_sha256": "96421d5a8a671e087c2d7a809207d2aa41e88e04dd724c78652d4346e767dea1"
+          },
+          {
+            "axis_g_readback": [
+              -0.75,
+              0.0
+            ],
+            "frame": {
+              "bytes": 1128,
+              "colors": 6,
+              "dimensions": [
+                128,
+                128
+              ],
+              "nonblack": 16384,
+              "sha256": "f96adec290c7b452328f60812138bc89f56661eb54e5a639c52559f96a5fae2a"
+            },
+            "guest_registers": [
+              "3b:f4",
+              "3c:00",
+              "3d:00",
+              "3e:00"
+            ],
+            "label": "left-tilt",
+            "mpu6886_markers": 959,
+            "trace_sha256": "49af0661bd1f47acb83753403beb49435cea495777a6705e1db40e87305eae8a"
+          }
+        ]
+      },
+      "guest_display_readback_degrees_x_by_input": {
+        "+0.75g": 36.9,
+        "-0.75g": -36.9
+      }
+    }
+  },
+  "limits": {
+    "physical_atom_s3": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "exact_rddid_assembly_and_complete_bit_trace": "NOT RUN",
+    "actual_wifi_link": "NOT RUN",
+    "production_deployment": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  }
+}
