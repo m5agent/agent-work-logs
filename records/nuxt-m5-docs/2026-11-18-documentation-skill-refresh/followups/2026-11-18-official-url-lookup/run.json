@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "follow_up",
+  "overall_status": "PASS",
+  "title": "M5Stack Assistant Local 官网 URL 查阅",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "12d1168ee750960bcff4910bb0e3a496f2e18bc0",
+    "workflow_commit": "2e90f937be5baf69480a4b2095292bcd0935ef28"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Linux virtual-machine consumer, read-only ZIP, network disabled"
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "target": "虚拟设备验证，三个官网页面各定位并读取对应 Markdown"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "target": "英文站点语料试验、打包中文、日文缺页和输入域名负例"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "target": "发布后 4,388 个文件路径和内容一致"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "target": "M5Stack 实机或固件"
+    }
+  ],
+  "evidence": [
+    "evidence/official-url-lookup-summary.json"
+  ]
+}
