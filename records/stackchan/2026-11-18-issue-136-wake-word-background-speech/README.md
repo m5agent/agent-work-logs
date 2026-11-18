@@ -4,6 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`issue`
 - 问题来源：https://github.com/m5stack/StackChan/issues/136
+- GitHub 回复：https://github.com/m5stack/StackChan/issues/136#issuecomment-6969507194
 - 源码版本：`m5stack/StackChan @ 94856a7`（v1.6.0）；对照 `28b9f0c` / `0808a47`（v1.6.2）；`78/xiaozhi-esp32 @ v2.2.4`、`v2.5.2`
 - 环境：macOS，源码只读检视；无 ESP-IDF 6.1 工具链；未连接实机
 

@@ -3,7 +3,7 @@ Thanks for the detailed report. I checked the published V1.6.0 firmware source (
 **Conclusion**
 
 1. **Wake detection.** The wake word is a fixed, pre-trained WakeNet model (`CONFIG_SR_WN_WN9_HISTACKCHAN_TTS3`) run through the AFE with the ES7210 reference channel (`AUDIO_INPUT_REFERENCE true`). Detection parameters come from the model/AFE configuration, not from a user setting, and the wake-word audio is not uploaded (`CONFIG_SEND_WAKE_WORD_DATA=n`), so the server never receives the sample and cannot verify the detection.
-2. **Why a conversation can continue.** When the server sends `tts stop`, the device goes straight back to `Listening` unless the session was started in manual-stop mode. While listening, wake-word detection is off by default, so any microphone audio is treated as the next user turn; there is no fixed device-side listening timeout. The device returns to standby only when the server closes the audio channel (or on a user action/error). One false wake is therefore enough to chain: reply → listen → TV speech accepted as a follow-up → reply → listen. That matches the repeated follow-ups, the several-minute duration, and the response after the assistant said it was ending: a spoken goodbye is model output, not a command that closes the session.
+2. **Why a conversation can continue.** When the server sends `tts stop`, the device goes straight back to `Listening` unless the session was started in manual-stop mode. While listening, wake-word detection is off by default, so any microphone audio is treated as the next user turn; there is no fixed device-side listening timeout. The device returns to standby only when the server closes the audio channel (or on a user action/error). One false wake is therefore enough to chain: reply → listen → TV speech accepted as a follow-up → reply → listen. That matches the repeated follow-ups, the several-minute duration, and the response after the assistant said it was ending: a spoken goodbye is model output; it does not by itself close the session on the device.
 
 **Evidence class: code-level verification** (source-level; runtime not reproduced).
 
@@ -31,4 +31,4 @@ Thanks for the detailed report. I checked the published V1.6.0 firmware source (
 
 If you can capture a USB serial log around one incident, the `Wake word detected: ...` lines and the following `tts`/`stt` messages would show whether each turn came from a new false wake or from the automatic listening window. That is the one piece of information that would let us separate the two causes for your unit.
 
-Full analysis and code excerpts: {{RECORD_URL}}
+Full analysis and code excerpts: https://github.com/m5agent/agent-work-logs/commit/90a7d8763e77b2b39d2f9ddd73358acdf370b4c2

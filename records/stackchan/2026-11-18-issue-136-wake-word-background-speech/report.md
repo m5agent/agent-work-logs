@@ -157,3 +157,9 @@ Wi-Fi 已验证，外设含 ES7210/AW88298 等），但本条目无法用该 pro
 
 按条目语言用英文发布一条评论：结论 → 证据等级（code-level verification）→ 代码位置 →
 可配置项与可行的非自定义固件缓解 → 未覆盖项与所需信息。不关闭条目、不 push、不改他人仓库。
+
+## 8. 发布结果
+
+- 2026-11-18T04:57:21Z 在 issue #136 发布唯一一条英文评论（评论 id 6969507194）：
+  https://github.com/m5stack/StackChan/issues/136#issuecomment-6969507194
+- 评论内容见 `evidence/06-reply.md`；未关闭条目、未 push 代码、未修改他人仓库。
