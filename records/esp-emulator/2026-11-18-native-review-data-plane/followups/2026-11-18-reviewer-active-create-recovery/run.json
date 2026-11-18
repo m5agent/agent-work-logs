@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "date": "2026-11-18",
+  "source": {
+    "device": {
+      "git_base": "5b4b664272cab0a419257327baf42b26b12d79f6",
+      "files": {
+        "platform/tools/serve.py": "114c885c906d13da577e89baf97761c8597c07db760a04c9c502f40c7d413f45",
+        "platform/tools/device_service.py": "88a0b70ba08fc235afb915a83e536e5183aa76064f2019dd104584663d680258",
+        "platform/tools/device_service_create_recovery.py": "9d7b060984ef6897ce578f0084c17d91808fe54a5ddab35f40d2f7db2b5d62ee",
+        "docs/device-service.openapi.yaml": "900f9734795148a0fc28dc5ff494177041933db88d9b01a79e4484fee002736f"
+      }
+    },
+    "reviewer": {
+      "git_base": "0f732ea5c62596c0137e8ca0cd3a32e7aa3c3988",
+      "files": {
+        "service/app.py": "71d954aeff25750f54564b21a73392b5a8fdd8961402ede30e8640ebbe33d02d",
+        "service/session_recovery.py": "49d8d485306f79634ae741d775e70c5a1c85e926621e1b1c408471bc9af20352",
+        "docs/review-service.openapi.yaml": "8894feba45bd97070953689170ce3d8700d1e177b94ff9b40f5a222884b1583c"
+      }
+    }
+  },
+  "hardware": {
+    "macos": "native Core2 virtual device",
+    "linux": "Isolated ARM64 Linux VM; native ELF QEMU; Cardputer ADV virtual device"
+  },
+  "firmware": {
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "normalized_firmware_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "linux_sta_sdk_fixture_sha256": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd"
+  },
+  "execution": {
+    "macos_summary": "evidence/macos-create-recovery.summary.json",
+    "macos_summary_sha256": "b6a26410369bd6a5f3d31af428c9891435f994539a68edaee045241dbeeff7d8",
+    "linux": {
+      "summary": "evidence/linux-reviewer-restart-ab.summary.json",
+      "sha256": "d698d569a57f2644454619aa387d330d55e48ace97b385f5ad1f0e2576360cb0"
+    }
+  },
+  "checks": {
+    "macos": "PASS",
+    "linux": {
+      "baseline_recovery": "PARTIAL_REVIEWER_RESTART_RETAINS_OLD_ACTIVE_LEASE",
+      "candidate_recovery": "PASS_OWNED_LINUX_VM_REVIEWER_RESTART",
+      "standard_retry_sta_application": "PASS",
+      "reviewer_display_verdict": "manual_review / E_NO_FRAME"
+    },
+    "device_platform_contracts": {
+      "collected": 2454,
+      "passed": 2444,
+      "skipped": 10
+    },
+    "reviewer_contracts": {
+      "passed": 288
+    },
+    "burner": "NOT SUBMITTED",
+    "active_create_recovery_scope": "PASS"
+  }
+}

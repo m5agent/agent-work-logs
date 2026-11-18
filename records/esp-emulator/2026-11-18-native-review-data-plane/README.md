@@ -18,5 +18,6 @@ StickS3 原版从配网页切到本地 STA。CardputerDict 原版在画面相同
 - [CardputerDict 原版缓存复审](evidence/cardputerdict-final-summary.json)
 - [EMBER 隔离原版回归](evidence/ember-isolated-regression-summary.json)
 - [SPI DMA 探针和 NC1020 边界](evidence/s3-gpspi-idle-rx-summary.json)
+- [Reviewer 活跃会话创建恢复](followups/2026-11-18-reviewer-active-create-recovery/README.md)
 
 全部 dry-run 未提交 Burner。真机、物理 RF 和声学输出为 NOT RUN。
