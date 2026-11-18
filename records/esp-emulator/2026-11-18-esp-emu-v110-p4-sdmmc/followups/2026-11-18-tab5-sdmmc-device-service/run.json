@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "code_change",
+  "title": "Tab5 原生 SDMMC 与 Device Service 复位导出",
+  "overall_status": "PASS",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "57d397462e661e608e7c3ae2a878e80527d08e84"
+  },
+  "hardware": {
+    "device": "Tab5 ST7123 P4+C6",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "2112cc6e26cd82fbe99646dc9eada27e9a89d9d3f9a0613e8db78e87627e8381",
+    "description": "Synthetic ESP-IDF v5.5.4 Tab5 slot 0 probe"
+  },
+  "execution": {
+    "environment": "virtual-device validation / native Device Service 1.90.0 / esp-emu 1.1.0",
+    "task_id": "",
+    "session_id": "",
+    "no_reset_control_source_commit": "002c490083707cd0966551d53b2463e9797f349c"
+  },
+  "checks": [
+    {
+      "level": "transport",
+      "name": "P4 slot 0 mount and guest FAT write/read",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "Same media before P4 relaunch and successful remount after HTTP reset",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "After-stop inventory, export, isolated reattachment and immutable source",
+      "status": "PASS"
+    },
+    {
+      "level": "device_response",
+      "name": "Empty card, unadmitted firmware and legacy backend controls",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "48 MiB CSD and additional sector capacity control",
+      "status": "PASS"
+    },
+    {
+      "level": "data_behavior",
+      "name": "C6 network, stock app startup, hardware and hot-plug",
+      "status": "NOT RUN"
+    },
+    {
+      "level": "device_response",
+      "name": "Exact release HTTP permits 48 MiB and rejects additional 512 bytes before lease",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/tab5-sdmmc-http-reset-summary.json",
+    "evidence/tab5-sdmmc-http-no-reset-summary.json",
+    "evidence/tab5-sdmmc-slot0-geometry-summary.json",
+    "evidence/tab5-sdmmc-http-capacity-summary.json"
+  ],
+  "notes": [
+    "Reset cohort pins 57d39746. Independent no-reset cohort pins 002c4900. Geometry was collected in separate direct controller sessions. No Burner submission."
+  ]
+}
