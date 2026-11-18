@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 UserDemo 录音会话复位与停机 | PASS（WAV 更换、租约保留、停机 PCM 回读） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-userdemo-es8388/followups/2026-11-18-tab5-userdemo-i2c-routing/followups/2026-11-18-tab5-userdemo-i2s1-playback/followups/2026-11-18-tab5-userdemo-device-service-192/followups/2026-11-18-tab5-userdemo-speaker-reset/) |
 | 2026-11-18 | ESP Emulator | M5TabOS 原版保存快照复审的触摸对照 | PARTIAL（显式欢迎页触摸 PASS，网络未运行） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-18-tabos-reviewer-touch-plan/) |
 | 2026-11-18 | ESP Emulator | Tab5 保存快照复审的 SDMMC 写入 | PASS（触摸写入、原版无写入、旧 API 保守处理、复位介质身份） | [查看](records/esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/followups/2026-11-18-tab5-sdmmc-action-review/) |
 | 2026-11-18 | ESP Emulator | 98TAB5 冷启动及双核缓存/MMU 对照 | PARTIAL（原版仍复位，SDK 双核对照通过） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-98tab5-p4-mmu-controls/) |

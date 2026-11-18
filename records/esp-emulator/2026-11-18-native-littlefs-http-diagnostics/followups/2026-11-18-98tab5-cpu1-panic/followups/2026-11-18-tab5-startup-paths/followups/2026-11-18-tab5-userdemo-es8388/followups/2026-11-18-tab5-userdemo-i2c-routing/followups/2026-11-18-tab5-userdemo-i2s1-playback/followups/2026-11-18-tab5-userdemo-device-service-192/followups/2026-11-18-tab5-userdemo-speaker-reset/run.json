@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "service_debug",
+  "overall_status": "PASS",
+  "title": "Tab5 UserDemo I2S1 opt-in capture across one API reset",
+  "source": {
+    "device_source": "1c2eb72d3b7e517e2ceb487c408708a5b800a8c8",
+    "device_openapi": "1.92.0",
+    "device_openapi_sha256": "87f44a1b3180ccc9cc6e8d77e39e260f4734890a848b4fc9840908fe20181ccd"
+  },
+  "hardware": {
+    "virtual_target": "Tab5 GT911, esp-emu 1.1.0",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_firmware_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+    "normalized_firmware_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9",
+    "codec_part_sha256": "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270",
+    "native_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828"
+  },
+  "execution": {
+    "environment": "isolated virtual Device Service",
+    "guest_inputs": 0,
+    "api_resets": 1,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "check": "active capture pending in both generations",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "same session and deadline, replaced native process and WAV inode",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "check": "fresh nonblack frame and cold ROM banner after reset",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "finalized new PCM matches bounded HTTP and complete retained ZIP",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "check": "guest playback or spontaneous guest reset",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/reset-lifecycle.summary.json"
+  ]
+}
