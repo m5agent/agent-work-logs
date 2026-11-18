@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "kind": "redacted virtual-device validation summary",
+  "original_sha256": "a3f5ca4ae89dd724dd8f9b2d800fd9749af84bf0cf2fffbf99cdf822b285f419",
+  "storage_sha256": "37f07c05d95392d952203947d27df25163291b0d556c57162bb2d120fe1d9267",
+  "runtime_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+  "usb_bulk_out_endpoint": "0x01",
+  "usb_bulk_in_endpoint": "0x81",
+  "read_capacity_last_lba": 1519,
+  "read_capacity_block_size": 4096,
+  "read_capacity_bytes": 6225920,
+  "runs": [
+    {
+      "case": "current-01",
+      "status": "PARTIAL",
+      "started_at": "2026-11-18T16:36:16.739464+00:00",
+      "finished_at": "2026-11-18T16:36:21.331614+00:00",
+      "nak_poll_interval_ms": 20,
+      "read_10_sent": true,
+      "usb": {
+        "buffer_dma": true,
+        "get_max_lun": 0,
+        "bot": {
+          "inquiry": {
+            "tag": 1514405889,
+            "cbw_acked": true,
+            "data_bytes": 36,
+            "data_in_count": 1,
+            "data_sha256": "9e3046c6e62b6338745819d5cf76813703ffa4726738f6b9d4222dec5598f54d",
+            "command_elapsed_seconds": 3.7165,
+            "last_response_elapsed_seconds": 3.7203,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405889,
+            "residue": 0,
+            "status": 0
+          },
+          "read_capacity_10": {
+            "tag": 1514405890,
+            "cbw_acked": true,
+            "data_bytes": 8,
+            "data_in_count": 1,
+            "data_sha256": "b64c12bc85f739c3776e4d8b3aba55572803741260ead0d1410c9a53d025bc15",
+            "command_elapsed_seconds": 3.7226,
+            "last_response_elapsed_seconds": 3.7273,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405890,
+            "residue": 0,
+            "status": 0
+          },
+          "read_10": {
+            "tag": 1514405891,
+            "cbw_acked": true,
+            "data_bytes": 4096,
+            "data_in_count": 64,
+            "data_sha256": "0f4d553e005ae1452cc98c3d50a12595c94e367c9e8373bec8f4be9d5a92a766",
+            "command_elapsed_seconds": 3.7295,
+            "last_response_elapsed_seconds": 4.0776,
+            "status_phase_naks": 7,
+            "csw": "NOT OBSERVED",
+            "final_host_response": "DETACHED",
+            "lba": 0,
+            "exact_original_storage_sector": true,
+            "storage_offset": 0,
+            "first_epoch_before_stop": false,
+            "identical_sector_offsets": [
+              0
+            ]
+          }
+        }
+      },
+      "guest_assertion": {
+        "assertion": "assert failed: xTaskPriorityDisinherit tasks.c:5156 (pxTCB == pxCurrentTCBs[ xPortGetCoreID() ])",
+        "rebooted": true,
+        "backtrace_pc_sequence_sha256": "bff0a5c3926bad144e3cc16704dea86d6d4f8e8e7c3b8e3e25d514f11c42d307",
+        "backtrace_first_nine_pcs_sha256": "df328b30b48e846e1e78a58a882ef44388e1b713fc8187a598fb0e5f0e970c2a"
+      },
+      "zip": {
+        "bytes": 8373,
+        "sha256": "103fc3951bb40e966b18492bdd0bfefef6accc4927c5212904673076a11295a4",
+        "crc_verified": true,
+        "pre_stop_state": "running",
+        "matches_original_firmware": true
+      },
+      "serial_sha256": "94504f823d174164d1183c4607024e3c517101cd2bf522a5ba16a00d5625f63d",
+      "transcript_sha256": "0a6f94c8decdf8072a05149f43ad91f75787b005d5a8cde83a45ea3f296822bc",
+      "cleanup": {
+        "state": "stopped",
+        "flash_released": true,
+        "active_leases_after": 0,
+        "owned_service_exited": true
+      }
+    },
+    {
+      "case": "no-read-control",
+      "status": "REVIEW",
+      "started_at": "2026-11-18T16:37:44.921633+00:00",
+      "finished_at": "2026-11-18T16:37:49.306383+00:00",
+      "nak_poll_interval_ms": 20,
+      "read_10_sent": false,
+      "usb": {
+        "buffer_dma": true,
+        "get_max_lun": 0,
+        "bot": {
+          "inquiry": {
+            "tag": 1514405889,
+            "cbw_acked": true,
+            "data_bytes": 36,
+            "data_in_count": 1,
+            "data_sha256": "9e3046c6e62b6338745819d5cf76813703ffa4726738f6b9d4222dec5598f54d",
+            "command_elapsed_seconds": 3.3852,
+            "last_response_elapsed_seconds": 3.3907,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405889,
+            "residue": 0,
+            "status": 0
+          },
+          "read_capacity_10": {
+            "tag": 1514405890,
+            "cbw_acked": true,
+            "data_bytes": 8,
+            "data_in_count": 1,
+            "data_sha256": "b64c12bc85f739c3776e4d8b3aba55572803741260ead0d1410c9a53d025bc15",
+            "command_elapsed_seconds": 3.3945,
+            "last_response_elapsed_seconds": 3.399,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405890,
+            "residue": 0,
+            "status": 0
+          }
+        }
+      },
+      "guest_assertion": {
+        "assertion": "assert failed: xTaskPriorityDisinherit tasks.c:5156 (pxTCB == pxCurrentTCBs[ xPortGetCoreID() ])",
+        "rebooted": true,
+        "backtrace_pc_sequence_sha256": "e3766b17e6d82e59f350bf9ebca38f4231ef519896eac262beb96be7051dcfb2",
+        "backtrace_first_nine_pcs_sha256": "df328b30b48e846e1e78a58a882ef44388e1b713fc8187a598fb0e5f0e970c2a"
+      },
+      "zip": {
+        "bytes": 7890,
+        "sha256": "f8c520f1539edf1b5185423dc0bf8ac682e6b24f565829d140b6b664026c323b",
+        "crc_verified": true,
+        "pre_stop_state": "running",
+        "matches_original_firmware": true
+      },
+      "serial_sha256": "4b29a15a0b38bc8c3b0a81eed01645babee97982afe936b903285b961e786ac5",
+      "transcript_sha256": "839cccc6f6cbeb25cc21ebc8bbb4f69f7c5a7ef973a0789620a3b83e551b5137",
+      "cleanup": {
+        "state": "stopped",
+        "flash_released": true,
+        "active_leases_after": 0,
+        "owned_service_exited": true
+      }
+    },
+    {
+      "case": "current-02-lba1",
+      "status": "PASS",
+      "started_at": "2026-11-18T16:38:23.962217+00:00",
+      "finished_at": "2026-11-18T16:38:27.776024+00:00",
+      "nak_poll_interval_ms": 2,
+      "read_10_sent": true,
+      "usb": {
+        "buffer_dma": true,
+        "get_max_lun": 0,
+        "bot": {
+          "inquiry": {
+            "tag": 1514405889,
+            "cbw_acked": true,
+            "data_bytes": 36,
+            "data_in_count": 1,
+            "data_sha256": "9e3046c6e62b6338745819d5cf76813703ffa4726738f6b9d4222dec5598f54d",
+            "command_elapsed_seconds": 3.1537,
+            "last_response_elapsed_seconds": 3.1585,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405889,
+            "residue": 0,
+            "status": 0
+          },
+          "read_capacity_10": {
+            "tag": 1514405890,
+            "cbw_acked": true,
+            "data_bytes": 8,
+            "data_in_count": 1,
+            "data_sha256": "b64c12bc85f739c3776e4d8b3aba55572803741260ead0d1410c9a53d025bc15",
+            "command_elapsed_seconds": 3.1613,
+            "last_response_elapsed_seconds": 3.167,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405890,
+            "residue": 0,
+            "status": 0
+          },
+          "read_10": {
+            "tag": 1514405891,
+            "cbw_acked": true,
+            "data_bytes": 4096,
+            "data_in_count": 64,
+            "data_sha256": "ced0579af54271f3efef0d6d75232ebd70652663265a030eb0fa983c55ca2f6d",
+            "command_elapsed_seconds": 3.1699,
+            "last_response_elapsed_seconds": 3.2759,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405891,
+            "residue": 0,
+            "status": 0,
+            "lba": 1,
+            "exact_original_storage_sector": true,
+            "storage_offset": 4096,
+            "first_epoch_before_stop": true,
+            "identical_sector_offsets": [
+              4096,
+              8192
+            ]
+          }
+        }
+      },
+      "guest_assertion": null,
+      "zip": {
+        "bytes": 7465,
+        "sha256": "ffcc6a08ac18645ec04f6793c2884e12e37db544ae6089ec9e513f6f6a4ecb03",
+        "crc_verified": true,
+        "pre_stop_state": "running",
+        "matches_original_firmware": true
+      },
+      "serial_sha256": "75548d5d5aba2a4f48bcea607552515d906576ba35f7c6bd73616bdcb249fd51",
+      "transcript_sha256": "900b0c088b3a47ca12a539730df7243440b74040877c2ef87e0f08a01e812e97",
+      "cleanup": {
+        "state": "stopped",
+        "flash_released": true,
+        "active_leases_after": 0,
+        "owned_service_exited": true
+      }
+    },
+    {
+      "case": "current-03-lba0-fast",
+      "status": "PASS",
+      "started_at": "2026-11-18T16:38:52.559069+00:00",
+      "finished_at": "2026-11-18T16:38:56.326636+00:00",
+      "nak_poll_interval_ms": 2,
+      "read_10_sent": true,
+      "usb": {
+        "buffer_dma": true,
+        "get_max_lun": 0,
+        "bot": {
+          "inquiry": {
+            "tag": 1514405889,
+            "cbw_acked": true,
+            "data_bytes": 36,
+            "data_in_count": 1,
+            "data_sha256": "9e3046c6e62b6338745819d5cf76813703ffa4726738f6b9d4222dec5598f54d",
+            "command_elapsed_seconds": 3.0844,
+            "last_response_elapsed_seconds": 3.089,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405889,
+            "residue": 0,
+            "status": 0
+          },
+          "read_capacity_10": {
+            "tag": 1514405890,
+            "cbw_acked": true,
+            "data_bytes": 8,
+            "data_in_count": 1,
+            "data_sha256": "b64c12bc85f739c3776e4d8b3aba55572803741260ead0d1410c9a53d025bc15",
+            "command_elapsed_seconds": 3.0916,
+            "last_response_elapsed_seconds": 3.0962,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405890,
+            "residue": 0,
+            "status": 0
+          },
+          "read_10": {
+            "tag": 1514405891,
+            "cbw_acked": true,
+            "data_bytes": 4096,
+            "data_in_count": 64,
+            "data_sha256": "0f4d553e005ae1452cc98c3d50a12595c94e367c9e8373bec8f4be9d5a92a766",
+            "command_elapsed_seconds": 3.0983,
+            "last_response_elapsed_seconds": 3.23,
+            "status_phase_naks": 0,
+            "csw": "PASS",
+            "echoed_tag": 1514405891,
+            "residue": 0,
+            "status": 0,
+            "lba": 0,
+            "exact_original_storage_sector": true,
+            "storage_offset": 0,
+            "first_epoch_before_stop": true,
+            "identical_sector_offsets": [
+              0
+            ]
+          }
+        }
+      },
+      "guest_assertion": null,
+      "zip": {
+        "bytes": 7528,
+        "sha256": "8b6d88ecd9b3362f7baa22ae1f2d6c1f0687570c6d226598eb3665d7071c8ec9",
+        "crc_verified": true,
+        "pre_stop_state": "running",
+        "matches_original_firmware": true
+      },
+      "serial_sha256": "f06285c8e23ef260008406427b2b4dcab63fa84c81111f2f81371913c8ed87fe",
+      "transcript_sha256": "2d5ff6e9bb9c08489ad698a380d17fbd50f66c7f5c6510efe63440ebef7c6bd4",
+      "cleanup": {
+        "state": "stopped",
+        "flash_released": true,
+        "active_leases_after": 0,
+        "owned_service_exited": true
+      }
+    }
+  ],
+  "msc_write": "NOT RUN",
+  "browser_wasm": "NOT RUN",
+  "physical_usb": "NOT RUN"
+}

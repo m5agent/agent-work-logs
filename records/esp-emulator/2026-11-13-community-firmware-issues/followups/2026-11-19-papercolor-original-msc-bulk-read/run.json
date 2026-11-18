@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "PaperColor factory USB MSC bulk reads",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/220",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "09db00eb793972a679f87234a6797eff70334d47",
+    "device_service_release_commit": "981fdcdf09253b75be960772147258b677775d8c"
+  },
+  "hardware": {
+    "device": "PaperColor",
+    "soc": "ESP32-S3",
+    "validation_class": "virtual-device validation",
+    "controller": "DWC2 Buffer DMA",
+    "machine": "m5papercolor"
+  },
+  "firmware": {
+    "name": "PaperColor_Factory_Code",
+    "public_firmware_id": "1897200000000000148",
+    "source_sha256": "a3f5ca4ae89dd724dd8f9b2d800fd9749af84bf0cf2fffbf99cdf822b285f419",
+    "source_bytes": 16777216,
+    "storage_partition_offset": 10485760,
+    "storage_partition_bytes": 6291456,
+    "storage_partition_sha256": "37f07c05d95392d952203947d27df25163291b0d556c57162bb2d120fe1d9267"
+  },
+  "execution": {
+    "environment": "isolated macOS ARM64 Device Service, host IP networking disabled",
+    "task_id": "[redacted]",
+    "session_id": "[redacted]",
+    "started_at": "2026-11-18T16:36:16.739464+00:00",
+    "finished_at": "2026-11-18T16:38:56.326636+00:00",
+    "device_service_openapi": "1.99.0",
+    "native_qemu_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+    "boot_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "exported_status_by_case": {
+      "current-01": "PARTIAL",
+      "no-read-control": "REVIEW",
+      "current-02-lba1": "PASS",
+      "current-03-lba0-fast": "PASS"
+    },
+    "submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "ep0_and_get_max_lun",
+      "status": "PASS",
+      "details": "Four native sessions reported Buffer DMA and LUN 0"
+    },
+    {
+      "name": "bulk_inquiry_and_capacity",
+      "status": "PASS",
+      "details": "Four native sessions returned 36-byte INQUIRY and 8-byte READ CAPACITY, valid CSW and zero residue"
+    },
+    {
+      "name": "first_cold_boot_read10_lba_0_lba_1",
+      "status": "PASS",
+      "details": "Two independent sessions, exact 4096-byte stock sectors and successful matching CSW"
+    },
+    {
+      "name": "initial_read10_csw",
+      "status": "PARTIAL",
+      "details": "Full original sector received, seven NAK then detach before status"
+    },
+    {
+      "name": "original_assertion_without_read10_control",
+      "status": "PASS",
+      "details": "Known xTaskPriorityDisinherit assertion and reboot reproduced without READ(10)"
+    },
+    {
+      "name": "stable_application",
+      "status": "PARTIAL",
+      "details": "Existing original guest assertion remains observable; narrow read proof completed in first epoch"
+    },
+    {
+      "name": "owned_cleanup",
+      "status": "PASS",
+      "details": "Four stopped sessions, zero leases, mutable Flash released, manifest/ZIP readback verified"
+    },
+    {
+      "name": "write10_physical_usb_browser_wasm",
+      "status": "NOT RUN",
+      "details": "Read-only native virtual-device validation"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/bulk-read-summary.json",
+      "kind": "redacted transport evidence"
+    }
+  ],
+  "notes": [
+    "No source or resident service changes. Raw per-session ZIP, serial and USB transcript retained privately."
+  ]
+}
