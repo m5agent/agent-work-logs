@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | AtomS3 Spirit Level 原版 Reviewer 0.29 复验 | PARTIAL（应用就绪通过，互动待复核） | [查看](records/esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/followups/2026-11-19-atoms3-235-reviewer-029-standard/) |
 | 2026-11-19 | ESP Emulator | AtomS3 #235 原版显示初始化候选 | PASS（原生虚拟设备） | [查看](records/esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/) |
 | 2026-11-19 | ESP Emulator | AtomS3 #235 三款原版与官方同机型对照 | PARTIAL（基线已复现） | [查看](records/esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/) |
 | 2026-11-19 | ESP Emulator | Device Service 1.99.2 DSI 双角色常驻回读 | LIVE_VERIFIED | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-19-tabos-199-timezone-controls/followups/2026-11-19-tabos-offline-flash-retention/followups/2026-11-19-resident-1991-tab5-retained-reset/followups/2026-11-19-tab5-dsi-reconnect-1992/followups/2026-11-19-resident-1992-tab5-dsi-reconnect/) |

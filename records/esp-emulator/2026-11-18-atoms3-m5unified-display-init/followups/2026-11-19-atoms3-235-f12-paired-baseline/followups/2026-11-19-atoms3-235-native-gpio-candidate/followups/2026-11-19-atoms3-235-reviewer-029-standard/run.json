@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "validation",
+  "overall_status": "PARTIAL",
+  "title": "AtomS3 Spirit Level original standard saved-snapshot Reviewer 0.29 validation",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/235",
+    "device_api_sha256": "cd1a84391f6f091fef671f05720c13f7d453c7378b70117e34b83ba6515b8689",
+    "device_api_version": "1.99.2",
+    "device_source": "f12b15fb3dc2c27e31b804ccfffd63e8cbce89b8",
+    "native_runtime_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+    "reviewer_api_sha256": "19c0975a130d21dc47a707d647c4bf6553f3b76b0519e3643578718bcb72d374",
+    "reviewer_api_version": "0.29.0",
+    "reviewer_app_sha256": "57a3bc3ff3e3262e8c38a813066f7417d38e661108b5bd010988c3e2df7f2367",
+    "reviewer_python": "Python 3.9.6",
+    "reviewer_source": "69386c6a162a1c786d6745c46eaa330c14558d3c",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "hardware": {
+    "board": "AtomS3",
+    "machine": "m5atoms3-st7735",
+    "validation_class": "native virtual-device validation"
+  },
+  "firmware": {
+    "bytes": 609856,
+    "exact_image_application_range_comparison": {
+      "end_exclusive": 609856,
+      "matches": true,
+      "start": 65536
+    },
+    "normalized_flash_sha256": "5aca1ffb95a3294038905680d37e10b1cfa63a6a9093e7feb50bb0b61f31e8df",
+    "sha256": "c41ba69a80bd83d387808f2c8e562eddbe114733b1bb6ed71aec0c0608e9e393"
+  },
+  "execution": {
+    "mode": "saved_snapshot",
+    "isolated_services": true,
+    "network_enabled": false,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "same_original_standard_retry",
+      "status": "PASS",
+      "details": {
+        "boot_ui_status": "PASS",
+        "initial_ready": true,
+        "input_required_for_first_frame": false,
+        "reason": "frame_nonblank",
+        "retry_http_status": 202,
+        "source_mode": "saved_snapshot",
+        "wait_http_status": 200
+      }
+    },
+    {
+      "name": "boot_and_frame_observation",
+      "status": "PASS",
+      "details": {
+        "duration_seconds": 60.009,
+        "framebuffer_samples": 13,
+        "minimum_seconds": 60,
+        "result": "PASS"
+      }
+    },
+    {
+      "name": "same_session_evidence_and_cleanup",
+      "status": "PASS",
+      "details": {
+        "crc_pass": true,
+        "evidence_png_matches_live_capture": true,
+        "exact_session_binding_confirmed": true,
+        "flash_after_guest_sha256": "0ec59109b13d12108df38fed95288f2ca8f5ffd4d1971635bfd011a1d7bef471",
+        "member_hashes_checked": 8
+      }
+    },
+    {
+      "name": "application_interaction_claim",
+      "status": "NOT RUN",
+      "details": {
+        "error_code": "E_INTERACTION_CLAIM_PARTIAL",
+        "lane": "SIM_PARTIAL",
+        "passed": 0,
+        "status": "manual_review"
+      }
+    },
+    {
+      "name": "physical_browser_network_resident_route",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/atoms3-spirit-reviewer-029.summary.json",
+      "kind": "redacted same-original Reviewer readiness and observation summary"
+    }
+  ]
+}
