@@ -70,6 +70,7 @@
 | 2026-11-18 | ESP Emulator | 98TAB5 原版合成 NHD 识别 | PARTIAL（只读时序诊断确证 FAT 挂载与 IDE 打开，普通冷启动仍复位） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-98tab5-synthetic-hdd/) |
 | 2026-11-18 | ESP Emulator | Tab5 三份原版启动路径复验 | PARTIAL（98TAB5 取帧诊断、M5TabOS WFI、官方 UserDemo 双核等待） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/) |
 | 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 启动跳转 | PARTIAL（两轮实际读到零并跳到零，DROM 读零原因待查） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-98tab5-startup-dispatch/) |
+| 2026-11-18 | ESP Emulator | StickS3 分频 RTC 慢钟和 1.94 复验 | PASS（同镜像修正与冻结包回读） | [查看](records/esp-emulator/2026-11-18-sticks3-rtc-slowclk-d256/) |
 | 2026-11-18 | ESP Emulator | StickS3 原生 RTC 定时深睡 | PASS（同一会话四轮定时唤醒、原版 Watch 浅睡回归） | [查看](records/esp-emulator/2026-11-18-sticks3-rtc-deep-sleep/) |
 | 2026-11-18 | nuxt-m5-docs | Markdown 文档 Skill 可复现更新 | PASS（Linux 虚拟机查阅、PDF 按需读取与分发包回读） | [查看](records/nuxt-m5-docs/2026-11-18-documentation-skill-refresh/) |
 | 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 异常与板级对照 | PARTIAL（两种 GT911 路径各复现 18 次软件复位，转储写入前定位 CPU1 指令访问异常） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/) |
