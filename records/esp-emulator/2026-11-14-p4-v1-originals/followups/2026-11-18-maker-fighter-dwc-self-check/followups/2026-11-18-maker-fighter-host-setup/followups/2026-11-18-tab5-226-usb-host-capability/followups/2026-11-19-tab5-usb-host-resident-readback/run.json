@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "infra_baseline",
+  "overall_status": "PASS",
+  "title": "Tab5 USB Host capability resident readback",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/226",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "597e03214dc5f442787cec52f1720567e4ed2a00"
+  },
+  "hardware": {
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_guest_replayed_during_deployment": false,
+    "reference": "Maker Fighter 1.4 capability proof in the parent record"
+  },
+  "execution": {
+    "environment": "Resident macOS arm64 Device Services and Reviewer",
+    "scope": "Cutover and post-deploy readback of Device role capabilities and retained histories",
+    "timestamp": "2026-11-19T00:00:14+08:00",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {"name": "both live Device roles on exact source with OpenAPI 1.99.0", "status": "PASS"},
+    {"name": "Tab5 USB Host partial and no endpoint fixture on both live Device roles", "status": "PASS"},
+    {"name": "Device histories and same-code Reviewer history plus sampled evidence", "status": "PASS"},
+    {"name": "physical USB enumeration and end-to-end endpoint data", "status": "NOT RUN"}
+  ],
+  "evidence": ["evidence/resident-readback.summary.json"]
+}
