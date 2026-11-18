@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "record_date": "2026-11-18",
+  "issue": 188,
+  "source": {
+    "source_commit": "1c2eb72d3b7e517e2ceb487c408708a5b800a8c8",
+    "service_version": "1.92.0",
+    "openapi_sha256": "87f44a1b3180ccc9cc6e8d77e39e260f4734890a848b4fc9840908fe20181ccd",
+    "runtime_version": "1.1.0",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "upstream_dsi_contract": "https://github.com/espressif/esp-emulator/blob/34ba27a6e5a3da41743fc861b462cf2452f0ca28/docs/guides/HOST-INTERFACES.md"
+  },
+  "hardware": {
+    "device": "Tab5",
+    "soc": "ESP32-P4 with ESP32-C6",
+    "board": "gt911-ili9881c",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Tab5 UIFlow2 v2.5.4 original",
+    "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "original_size": 16121856,
+    "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+    "app_partitions": [
+      {
+        "offset": 65536,
+        "size": 10027008,
+        "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5"
+      }
+    ]
+  },
+  "execution": {
+    "arms": 2,
+    "summary": "evidence/uiflow254-gt911-panel-read.summary.json",
+    "summary_sha256": "c32e377a05ad93173e2aba5ebe94c71ee7a52154f5da8eb12eb063b106445721"
+  },
+  "checks": {
+    "gt911_original_display": "FAIL (bounded cold arm)",
+    "controller_rx_nonzero_path": "NOT RUN (pinned runtime documents internally synthesized zeros and no published panel response API)",
+    "st7123_this_run": "NOT RUN",
+    "cloud_pairing": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "panel_read_observation": "PASS",
+    "same_session_evidence_and_cleanup": "PASS",
+    "overall": "PARTIAL"
+  }
+}

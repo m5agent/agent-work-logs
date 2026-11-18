@@ -13,3 +13,7 @@
 - [运行清单](run.json)记录实现版本、环境、检查和文件哈希。
 - [有界证据](evidence/README.md)链接四项 Part 回归和最终源码重放收据。
 - [前次隔离诊断](../../README.md)保留旧传输缓冲区、BMI270 诊断 Part 与两种面板的现象。
+
+## 后续复验
+
+[原版 GT911 档案的 DSI 命令、回包和未识别分支](followups/2026-11-18-tab5-gt911-dsi-panel-read/README.md)

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "issue": 188,
+  "scope": "native virtual-device validation",
+  "source_commit": "1c2eb72d3b7e517e2ceb487c408708a5b800a8c8",
+  "service_version": "1.92.0",
+  "openapi_sha256": "87f44a1b3180ccc9cc6e8d77e39e260f4734890a848b4fc9840908fe20181ccd",
+  "runtime_version": "1.1.0",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "board": "gt911-ili9881c",
+  "native_gt911_part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+  "firmware": {
+    "name": "Tab5 UIFlow2 v2.5.4 original",
+    "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "original_size": 16121856,
+    "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+    "app_partitions": [
+      {
+        "offset": 65536,
+        "size": 10027008,
+        "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5"
+      }
+    ]
+  },
+  "exec": [
+    {
+      "arm": "native logging, no debugger",
+      "observed_seconds": 20.005,
+      "full_receipt_sha256": "324454f78baab2f8c033366d7f32b99b3e6010994216e6a5de8f66520b4d2d8a",
+      "method": {
+        "input": 0,
+        "hardware_breakpoint": null,
+        "debugger": null,
+        "usb_device_attached": false,
+        "elf_uploaded": false,
+        "external_network_requested": false
+      },
+      "serial": {
+        "sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+        "bytes": 406,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "native_dsi": {
+        "frame_codes": {
+          "session_not_running": 1,
+          "tab5_dsi_frame_unavailable": 9
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 1
+      },
+      "panel_not_detected_markers": 1,
+      "evidence_zip_sha256": "fc74f716724260acca2d2fab59fcd10a0a5b11def0bb8128c62959cdc809d2a1",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "owned_service_exited": true
+    },
+    {
+      "arm": "read-only hardware breakpoints",
+      "observed_seconds": 20.002,
+      "full_receipt_sha256": "b01fd8e3a4bae7968892cf2fe88aa8375e6fa83f8c73ef127a2c0ffacff22822",
+      "method": {
+        "input": 0,
+        "hardware_breakpoint": [
+          "0x4825bbc4",
+          "dynamic original return",
+          "0x481a1d20"
+        ],
+        "debugger": "GDB read-only, separate lease",
+        "usb_device_attached": false,
+        "elf_uploaded": false,
+        "external_network_requested": false
+      },
+      "serial": {
+        "sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+        "bytes": 406,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "native_dsi": {
+        "frame_codes": {
+          "tab5_dsi_frame_unavailable": 10
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 1
+      },
+      "panel_not_detected_markers": 1,
+      "evidence_zip_sha256": "63663f393d45b465d7fdb2600f21d6851acc4286c26a7094b3052ba6c3c0f9b3",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "owned_service_exited": true,
+      "read_only_debugger": {
+        "read_api_pc": "0x4825bbc4",
+        "caller_pc": "0x481c0010",
+        "command": "0x00",
+        "requested_bytes": 1,
+        "sdk_return": "ESP_OK",
+        "guest_receive_data_hex": "00",
+        "panel_not_detected_branch_pc": "0x481a1d20",
+        "debugger_detached": true,
+        "debugger_transcript_sha256": "282c7a58a699c16a4434ff6f049fb45c59a01654029c77bee4184429f6943aa8"
+      }
+    }
+  ],
+  "upstream_dsi_contract": "https://github.com/espressif/esp-emulator/blob/34ba27a6e5a3da41743fc861b462cf2452f0ca28/docs/guides/HOST-INTERFACES.md",
+  "limitations": {
+    "gt911_original_display": "FAIL (bounded cold arm)",
+    "controller_rx_nonzero_path": "NOT RUN (pinned runtime documents internally synthesized zeros and no published panel response API)",
+    "st7123_this_run": "NOT RUN",
+    "cloud_pairing": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  }
+}
