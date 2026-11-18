@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Dial R1F30 8 ms 复现与 5 ms 采样读回 | PARTIAL（5 ms 实际未读相位，8 ms 发布版错误仍待同场读回） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-198-original-poll-causality/) |
 | 2026-11-18 | ESP Emulator | 外层网关监督进程中断后的审核恢复 | PASS（两种中断时序自动回收并完成同原版传输复验） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-gateway-outer-loss/) |
 | 2026-11-18 | ESP Emulator | Dial R1F30 原版 8 ms 漏选 | PARTIAL（64 条 GPIO 边沿已交付，实际 UART 索引错一轨） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-197-original-cadence/) |
 | 2026-11-18 | ESP Emulator | 审核会话具名出口网关恢复 | PASS（两种重启顺序回收和同原版传输，发音审核 PARTIAL） | [查看](esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-named-gateway-restart/) |
