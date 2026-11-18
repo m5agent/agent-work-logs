@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | StickS3 RTC GPIO 浅睡唤醒 | `PARTIAL`（GPIO 唤醒、拒绝与原版长按复验通过，保留旧运行时和未通过候选） | [查看](esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer 本地 HTTP POST 与 TCP 保存快照审核 | `PARTIAL`（本地正反对照成立，整单无画面） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-native-sta-streams-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer 原生 SPI SD 读响应与保存快照审核 | `PARTIAL`（原生响应与原版查词证据分别取证） | [查看](esp-emulator/2026-11-18-unit-pcm-sd-write-boot-timeline/followups/2026-11-18-cardputer-spi-sd-read-observation/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | CardputerDict ADV 0.5.0 原版查词 | `PARTIAL`（查词及画面正反对照成立） | [查看](esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/) |

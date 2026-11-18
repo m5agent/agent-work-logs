@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 原生 RTC GPIO 浅睡唤醒对照",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "7781a8f1a2af4e084dc6e90d1de5d6ac19d553a5",
+    "upstream_qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "runtime_patch_commit": "ed15f0196e1689b0a9f0a9f308d8d672ab2ed83f",
+    "esp_idf_rtc_reference": "https://github.com/espressif/esp-idf/blob/v5.4.1/components/esp_hw_support/port/esp32s3/rtc_sleep.c#L269-L284",
+    "published_commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "ci": {
+      "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44219891753",
+      "status": "success",
+      "verified_commit": "d25eae8db848918e9cafebc127a53a0f989941d4"
+    }
+  },
+  "hardware": {
+    "board": "M5StickS3",
+    "soc": "ESP32-S3",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "original": {
+      "label": "All day watch v0.3.8",
+      "sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+      "bytes": 1840512,
+      "normalized_flash_sha256": "1d6ae6df2473bebf662955bbb050ce2304081e79485d9044d0bff3d150a4e363"
+    },
+    "gpio_fixture": {
+      "sha256": "c6e37819a8913f1517d9d74cf18b1ab047c0897983751019b4bf21110616a874",
+      "elf_sha256": "50c2641aa2cd512190ace2acf7de319b979df4c06bdfe5394c2b6881411e2c37"
+    },
+    "timer_fixture": {
+      "sha256": "14a157a59d8092a5a3c2d7f8eae0de45ff3da38cc7b5b66d6f0587e7a30be44c"
+    },
+    "gpio_reject_fixture": {
+      "sha256": "1f9b94f269f9b11087a707a29be8a23ca9fe35b32563425e5f3cacebf1912a50",
+      "elf_sha256": "1c036cc72d1d3e22ec6fa4692cdac8446e6de1e8b0f58dc36d8c5de8bbb1195f"
+    }
+  },
+  "execution": {
+    "environment": "isolated direct-device API sessions, native Xtensa QEMU, offline",
+    "original_replays": 8,
+    "fixture_replays": 7,
+    "burner_submission": "NOT RUN",
+    "suspended_reattach_replays": 1
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "scope": "input API receipts and same-session console, ZIP manifests"
+    },
+    {
+      "layer": "device_response",
+      "status": "FAIL",
+      "scope": "current runtime on timer-wake and GPIO-wake fixtures, before patch"
+    },
+    {
+      "layer": "device_response",
+      "status": "FAIL",
+      "scope": "second GPIO candidate guest sleep-return after host wake"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "third candidate, ESP-IDF GPIO B wake return, two withheld-input controls"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "original All day watch third- and final-candidate B wake, independent 65-second windows without watchdog or reset"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "final runtime GPIO five-second idle window and active-at-entry GPIO rejection with cleared cause"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "Device Service 1.87 original suspended B semantic click with same-runtime post-wake evidence"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "Device Service 1.87 restarted with the same suspended guest and woke it with semantic B input"
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "scope": "complete 70-case native device matrix, 51 documentation checks and four repository validators"
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "scope": "exact source platform suite",
+      "total": 2433,
+      "passed": 2425,
+      "skipped": 8
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "physical device, browser and power"
+    }
+  ],
+  "evidence": [
+    "evidence/all-day-watch-native.summary.json",
+    "evidence/rtc-light-sleep-fixture.summary.json",
+    "evidence/device-service-semantic-wake.summary.json",
+    "evidence/device-service-suspend-reattach.summary.json"
+  ]
+}
