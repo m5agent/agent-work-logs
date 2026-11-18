@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "issue",
+  "title": "Tab5 原版 UIFlow2 的 BMI270 初始化与原生触摸复验",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/188",
+    "base_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "part_source_commit": "bdf4588f8f15236185a07d4efe4d0b3e91c8a54a",
+    "part_model_source_sha256": "51d01639dff1f8e70e157e4a19282d12eb64920b856ab073f7354e62a84e4fb7",
+    "source_replay_commit": "f7f6b53eed43257b21d9bec291088c8c5e2648f6",
+    "final_evidence_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+    "change": "https://github.com/m5agent/m5stack-esp-emulator/commit/f7f6b53eed43257b21d9bec291088c8c5e2648f6",
+    "previous_report": "https://github.com/m5agent/agent-work-logs/blob/23131358893fb434511a562e85dc535151ce4444/records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-v110-part-gap/followups/2026-11-18-tab5-bmi270-transport/README.md",
+    "final_ci": {
+      "run_url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44249549298",
+      "head_commit": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+      "checks": {
+        "platform-contracts": "PASS",
+        "network-namespace-policy": "PASS"
+      }
+    }
+  },
+  "hardware": {
+    "board": "Tab5",
+    "soc": "ESP32-P4",
+    "companion": "ESP32-C6",
+    "virtual_profiles": [
+      "st7123",
+      "gt911-ili9881c"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Original UIFlow2 for Tab5 v2.5.4",
+    "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "bytes": 16121856,
+    "normalized_flash_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+    "regression_controls": [
+      "Original ST7123 Arduventure",
+      "Original GT911 CarPlay"
+    ]
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service": "1.89.0",
+    "service_openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+    "runtime": "esp-emu 1.1.0 native qemu/DSI",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse_sha256": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware_sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+    "part_abi_buffer_bytes": 16384,
+    "unchanged_part_size_ceiling": 147456,
+    "part_artifacts": {
+      "gt911": {
+        "bytes": 118355,
+        "sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286"
+      },
+      "st7123": {
+        "bytes": 130425,
+        "sha256": "6ecac188e0ebd7659b6af627c3f1fcf9c5143e2f36b5f9a4b8cb187468de14f3"
+      }
+    },
+    "part_qualification_cases": 4,
+    "source_replay_cases": 1,
+    "source_replay_touch_actions": 1,
+    "source_replay_tap_controller_reports_acknowledged": 2,
+    "source_replay_scan_button": "NOT RUN",
+    "browser": "NOT RUN",
+    "cloud_pairing": "NOT RUN",
+    "internet_connectivity": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "source_replay_frame_binding": {
+      "separately_saved_menu_png_sha256": "9963d5edcd9f6fccd58f7daf4709092bc234ef2064946d8f604f4f103513fb41",
+      "same_session_zip_current_png_sha256": "158a4ed0f60b5bd07317eff79306fc259c539f58e301fae67484811ae46833f4",
+      "pixel_difference_bbox": [
+        230,
+        176,
+        578,
+        656
+      ],
+      "same_sidebar_and_address_grid_regions": true
+    }
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "basis": "Rust 1.88.0 locked build and 8 Part tests, 60 focused service tests, platform 2440 tests with 10 skipped, four validators and 51 docs checks"
+    },
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "basis": "Unchanged original application and exact normalized Flash readback, matching original/artifact/runtime hashes"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "basis": "UIFlow2 stock reports 8192 configuration bytes in each named board profile, no transport buffer fatal"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "basis": "Both stock paths read initialization register once, with BMI270 status 1"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "basis": "ST7123 stock touch reached I2C Scan menu; GT911 stock unresolved downstream panel detection; other two native interaction controls passed"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "basis": "ST7123 menu and CarPlay/Arduventure changes observed in native guest frames; GT911 UIFlow2 missing valid frame, physical NOT RUN"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "basis": "Production code and exact documentation/evidence verified on repository main"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tab5-native-qualification-summary.json",
+      "sha256": "ae4ace1a4aa8699a446364d2242fedac78a615300b6d500e7fa96c9b6f1db09f",
+      "bytes": 13416
+    },
+    {
+      "path": "evidence/tab5-native-service-replay-summary.json",
+      "sha256": "24f2ea4e996f13835ffeeba87473acaee45d55eba862e1a9476fb1cc54a714fd",
+      "bytes": 4318
+    }
+  ]
+}
