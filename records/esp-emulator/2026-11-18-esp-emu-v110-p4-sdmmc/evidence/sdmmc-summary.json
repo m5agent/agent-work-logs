@@ -1,0 +1,79 @@
+{
+  "validation": "virtual-device validation",
+  "date": "2026-11-18",
+  "runtime": {
+    "version": "1.1.0",
+    "tag_commit": "34ba27a6e5a3da41743fc861b462cf2452f0ca28",
+    "sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "release_asset_sha256": "8bf2bd236c3bf472e8327e3b784bc2901e0ec5c65b5cbf68b4cdd6d0974264bc"
+  },
+  "rom_sha256": "90e723f71fe4701adee7e40bfab6971d8ecf5e356f4d5a81e77743248abc3a97",
+  "firmware": {
+    "sha256": "df3123a2bc6cb2e1bf310c0ff9eee5bb70ce25ea3460a8acef4f46f3c5a1d4e5",
+    "bytes": 367696
+  },
+  "base_card": {
+    "sha256": "758cd5e18a7bd98241cb2849645bb8cc1d6f1646e9eb6cc8985ca0546211cfa1",
+    "bytes": 33554432
+  },
+  "runs": {
+    "read-write": {
+      "uart": {
+        "sha256": "9027cad1a2ff76f06d858479ea16ba6702490732b22010b31ae2537a39d9c53d",
+        "bytes": 3811
+      },
+      "markers": [
+        "Filesystem mounted",
+        "File written",
+        "Renaming file /sdcard/hello.txt to /sdcard/foo.txt",
+        "Read from file: 'Hello EMUSD!'",
+        "Read from file: 'Nihao EMUSD!'",
+        "Card unmounted"
+      ],
+      "exit_status": 0,
+      "output_image": {
+        "sha256": "9352fc9e55cdaa35d391fa5ac522326a52c752fd104f827b18ec3d5103dc5193",
+        "bytes": 33554432
+      }
+    },
+    "empty-slot": {
+      "uart": {
+        "sha256": "725aef3275627908ec97f085a36612b6600f29e87aaa4c761be0fde1c2ea989f",
+        "bytes": 3426
+      },
+      "markers": [
+        "sdmmc_init_ocr: send_op_cond (1) returned 0x107",
+        "Failed to initialize the card (ESP_ERR_TIMEOUT)"
+      ],
+      "exit_status": 0
+    },
+    "read-only": {
+      "uart": {
+        "sha256": "319ad989c98215cb5d0b22deae903bb9751cfe572798fb26e6976d0b09ece046",
+        "bytes": 4134
+      },
+      "markers": [
+        "Filesystem mounted",
+        "sdmmc_write_blocks failed (0x107)",
+        "File written",
+        "Rename failed"
+      ],
+      "exit_status": 0,
+      "output_image": {
+        "sha256": "9352fc9e55cdaa35d391fa5ac522326a52c752fd104f827b18ec3d5103dc5193",
+        "bytes": 33554432
+      }
+    }
+  },
+  "after_process_exit": {
+    "base_files": {},
+    "read_write_files": {
+      "FOO.TXT": "Hello EMUSD!\n",
+      "NIHAO.TXT": "Nihao EMUSD!\n"
+    },
+    "read_only_same_as_read_write_sha256": true,
+    "host_fat_check": "PASS",
+    "all_owned_processes_returned": true
+  },
+  "uart_excerpt_policy": "Selected public example markers. Complete UART hash and size retained. Full log and mutable images omitted."
+}

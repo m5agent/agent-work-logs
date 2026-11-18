@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | ESP-EMU 1.1.0 P4 SDMMC 接入评估 | PASS（P4 读写与负控，Tab5 板级待验） | [查看](esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/) |
 | 2026-11-18 | ESP Emulator | Dial 原版在 1.88 快转复验 | PARTIAL（35 ms 18/18，5 ms 14/18） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-native-fast-retest/) |
 | 2026-11-18 | ESP Emulator | Dial 原版快转的 GPIO 和选曲时间线 | PARTIAL（5 ms 17/18，一次有序边沿到达但读回漏相位） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/followups/2026-11-18-dial-188-correlated-gpio/) |
 | 2026-11-18 | ESP Emulator | NC1020 原版面板窗口追踪 | PARTIAL（存档恢复 2/2，一次绘制停在第 208 行） | [查看](esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/followups/2026-11-18-nc1020-window-only/) |

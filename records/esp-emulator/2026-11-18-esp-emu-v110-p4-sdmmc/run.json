@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "ESP-EMU v1.1.0 P4 SDMMC downstream feasibility",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "upstream_release": "https://github.com/espressif/esp-emulator/releases/tag/v1.1.0"
+  },
+  "hardware": {
+    "physical": false,
+    "virtual_chip": "ESP32-P4 rev3.1",
+    "sdmmc_slot": 1
+  },
+  "firmware": {
+    "sdk": "ESP-IDF v5.5.4",
+    "sdk_commit": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "example": "examples/storage/sd_card/sdmmc",
+    "sha256": "df3123a2bc6cb2e1bf310c0ff9eee5bb70ce25ea3460a8acef4f46f3c5a1d4e5",
+    "bytes": 367696
+  },
+  "execution": {
+    "environment": "macOS arm64, native ESP-EMU v1.1.0",
+    "validation": "virtual-device validation",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "configuration": "P4 rev300 ROM, 32 MiB FAT16, independent private image copies",
+    "task_id": null,
+    "session_id": null
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "case": "Stock SDMMC example for rev3 P4",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "case": "SDMMC card and empty-slot control",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "case": "Guest write/rename/read and host FAT bytes",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "case": "Read-only write failure and identical image",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "case": "Tab5 Device Service slot 0 and ESP-Hosted coexistence",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/sdmmc-summary.json"
+  ],
+  "notes": [
+    "No Tab5 board-profile or original-firmware SD session in this run.",
+    "No project code changes or service deployment."
+  ]
+}
