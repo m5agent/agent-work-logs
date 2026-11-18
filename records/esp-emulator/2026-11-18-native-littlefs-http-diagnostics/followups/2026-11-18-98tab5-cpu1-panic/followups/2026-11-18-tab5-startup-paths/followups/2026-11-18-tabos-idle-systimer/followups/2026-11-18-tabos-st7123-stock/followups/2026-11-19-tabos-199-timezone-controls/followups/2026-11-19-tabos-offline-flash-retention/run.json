@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Tab5 original M5TabOS offline wizard persistence and retained Flash",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": "",
+    "pull_request": "",
+    "base_commit": "9837c3f84df4383eb74881a1f44fcd3f460daefa",
+    "candidate_commit": "76e734f5cf061bc7985a1bf6146f2cb5de223023"
+  },
+  "hardware": {
+    "device": "Tab5",
+    "soc": "ESP32-P4",
+    "companion": "ESP32-C6",
+    "touch": "ST7123",
+    "validation_class": "virtual-device validation"
+  },
+  "firmware": {
+    "name": "M5TabOS 0.9.1",
+    "source_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "source_bytes": 7439248,
+    "normalized_flash_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec",
+    "normalized_flash_bytes": 16777216
+  },
+  "execution": {
+    "environment": "owned native macOS ARM64 loopback Device Service",
+    "task_id": "[redacted]",
+    "session_id": "[redacted]",
+    "baseline_api_version": "1.99.0",
+    "baseline_api_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "product_api_version": "1.99.1",
+    "product_api_sha256": "e0b930608eab9a18e588ecb3ea61035cd8a5f43b69a998643aab6ee2408e3c35",
+    "native_esp_emu_version": "1.1.0",
+    "native_esp_emu_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "st7123_part_sha256": "6ecac188e0ebd7659b6af627c3f1fcf9c5143e2f36b5f9a4b8cb187468de14f3",
+    "native_seed_sha256s": {
+      "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+      "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+      "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+    },
+    "elf_supplied": false,
+    "network_enabled": false,
+    "submission": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "baseline_same_session_reset",
+      "status": "FAIL",
+      "details": "Identical stock NVS and repeated welcome screen after observed settings"
+    },
+    {
+      "name": "real_stock_wizard_offline",
+      "status": "PASS",
+      "details": "Original +30 min action, explicit no Internet, and ordinary finish"
+    },
+    {
+      "name": "actual_device_service_reset_retention",
+      "status": "PASS",
+      "details": "Same lease, replaced native P4/C6; UTC−2:30 and offline settings recovered"
+    },
+    {
+      "name": "retained_flash_stop_and_api_readback",
+      "status": "PASS",
+      "details": "New UTC−2:00 reproduced by validated NVS key; 16 MiB returned and app identical"
+    },
+    {
+      "name": "original_artifact_and_host_cleanup",
+      "status": "PASS",
+      "details": "Original / normalized artifacts, C6 seed and runtime unchanged; retained Flash released and zero leases"
+    },
+    {
+      "name": "browser_physical_online_and_other_firmware",
+      "status": "NOT RUN",
+      "details": "Offline original native ST7123 path"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/m5tabos-flash-retention-summary.json",
+      "kind": "redacted same-session native evidence summary"
+    }
+  ],
+  "notes": [
+    "No original firmware upload, no source patch applied during test, and no resident service accessed."
+  ]
+}

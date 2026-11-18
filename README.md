@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | Tab5 原版离线向导和 Flash 持久化 | PASS（原生虚拟设备） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-19-tabos-199-timezone-controls/followups/2026-11-19-tabos-offline-flash-retention/) |
 | 2026-11-19 | ESP Emulator | Core2 原版 2048 Game 1.0 的 Reviewer 0.28 四向复验 | PASS（八步合法、四向覆盖及拒绝对照） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-18-reviewer-027-worker-readiness/followups/2026-11-18-reviewer-027-core2-resident/followups/2026-11-19-core2-2048-reviewer-028/) |
 | 2026-11-19 | ESP Emulator | Reviewer 0.28.0 原版 ADV 发音审核的常驻切换 | PASS（保留首次失败和回退，修订版验证及独立回读通过） | [查看](records/esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/followups/2026-11-19-cardputerdict-adv050-standard-pronunciation/followups/2026-11-19-reviewer-028-adv-resident-python39/) |
 | 2026-11-19 | ESP Emulator | CardputerDict ADV 0.5.0 标准审核发音回归 | PASS（原版允许与拒绝，初代回归） | [查看](records/esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/followups/2026-11-19-cardputerdict-adv050-standard-pronunciation/) |
