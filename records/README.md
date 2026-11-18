@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | CardputerDict ADV 0.5.0 标准审核发音回归 | PASS（原版允许与拒绝，初代回归） | [查看](esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/followups/2026-11-18-cardputerdict-adv050-https-audio/followups/2026-11-19-cardputerdict-adv050-standard-pronunciation/) |
 | 2026-11-19 | ESP Emulator | PaperColor 原厂固件无宿主 USB 的互斥锁断言 | PARTIAL（上电独立复现，锁持有现场已核对） | [查看](esp-emulator/2026-11-13-community-firmware-issues/followups/2026-11-19-papercolor-original-msc-bulk-read/followups/2026-11-19-papercolor-no-host-usb-mutex/) |
 | 2026-11-19 | ESP Emulator | Linux 宿主停机凭据的独占和信任边界复验 | PASS（同卷竞争拒绝、恢复状态来源拒绝与原版重试） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-linux-active-cold-gateway-recovery/followups/2026-11-19-linux-active-cold-gateway-controller-receipt/followups/2026-11-19-linux-controller-volume-exclusivity/) |
 | 2026-11-19 | ESP Emulator | Tab5 ST7123 原版 M5TabOS 时区操作 | PARTIAL（间隔复测八次通过，保留快速操作漏响应） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-19-tabos-199-timezone-controls/) |

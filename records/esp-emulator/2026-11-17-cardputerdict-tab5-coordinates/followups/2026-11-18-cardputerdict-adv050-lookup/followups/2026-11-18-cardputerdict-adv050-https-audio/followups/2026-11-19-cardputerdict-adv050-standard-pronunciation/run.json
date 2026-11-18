@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "CardputerDict ADV 0.5.0 标准审核发音回归",
+  "source": {
+    "device_service": "7d18dc02be08c3885ec39de7fa7634e79381b042",
+    "reviewer_baseline": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "reviewer_candidate": "e7e32f19d03f88394dfadb4e9f73fb1a83ea39c0",
+    "openapi": {
+      "openapi_version": "0.28.0",
+      "openapi_sha256": "f5704cdf005138747b1e56b3e2f52dfa458157e208527e59ac42b6b1cc96b490"
+    }
+  },
+  "hardware": {
+    "type": "virtual-device validation",
+    "runtime": "Linux ARM64 VZ and native qemu-wifi",
+    "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "firmware": {
+    "original_adv": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "original_stock": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e"
+  },
+  "execution": {
+    "timezone": "UTC+08:00",
+    "actual_saved_snapshot_retries": 3,
+    "guest_network_adapters": 0
+  },
+  "checks": [
+    {
+      "name": "baseline_typed_rejection_before_session",
+      "status": "PASS"
+    },
+    {
+      "name": "adv_real_tls_sd_and_pcm",
+      "status": "PASS"
+    },
+    {
+      "name": "adv_fixed_policy_denial",
+      "status": "PASS"
+    },
+    {
+      "name": "stock_cardputer_legacy_playback",
+      "status": "PASS"
+    },
+    {
+      "name": "same_session_pcap_audio_zip_and_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "resident_and_physical",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/adv050-standard-pronunciation.summary.json",
+      "bytes": 12654,
+      "sha256": "dd231d32e98a75e2d031428851faec2a0fbe59d8ac8d650695919a459951aeaa"
+    }
+  ],
+  "notes": [
+    "Burner 未提交。"
+  ]
+}
