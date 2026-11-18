@@ -348,3 +348,6 @@ GDB 邮箱，无 0x43 扩展器与 reset 线模型）。
 证据等级：`code-level verification`（固定 commit `28d4794` 源码 + 算术）；作者
 `hardware validation` 为其自有测量；物理 Tab5 与虚拟设备均 `NOT RUN`（现查
 `tab5_enabled: false`，ST7123 触摸为固件 GDB 邮箱）。
+
+第二十一轮回复：[issuecomment-6966686967](https://github.com/m5stack/M5GFX/issues/418#issuecomment-6966686967)
+（英文，单条；issue 保持开启，未推送上游代码，未关闭 issue）。
