@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "infra_baseline",
+  "overall_status": "PASS",
+  "title": "Linux 持久审核卷冷启动回读与重试",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+    "reviewer_commit": "a295e0173a0e3157c120de8ba6fcec128aa665c1"
+  },
+  "hardware": {
+    "lane": "virtual-device validation",
+    "device": "Cardputer"
+  },
+  "firmware": {
+    "name": "CardputerDict",
+    "version": "0.6.4",
+    "sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "bytes": 3619312
+  },
+  "execution": {
+    "environment": "isolated Linux ARM64 VM, same dedicated VirtioFS volume, no virtual NIC"
+  },
+  "checks": [
+    {
+      "name": "clean retained review and exact saved ZIP/PCAP",
+      "status": "PASS"
+    },
+    {
+      "name": "same state after Linux VM cold boot before retry",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinary retry started same original in a fresh session and closed both leases",
+      "status": "PASS"
+    },
+    {
+      "name": "trusted HTTPS-origin playback and PCM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cold-pair.summary.json",
+      "sha256": "5b0fabeef64c0cbbae3ce74d52f3b8ff485781c8a1cd0d08f9c8a912251ee92e"
+    }
+  ]
+}
