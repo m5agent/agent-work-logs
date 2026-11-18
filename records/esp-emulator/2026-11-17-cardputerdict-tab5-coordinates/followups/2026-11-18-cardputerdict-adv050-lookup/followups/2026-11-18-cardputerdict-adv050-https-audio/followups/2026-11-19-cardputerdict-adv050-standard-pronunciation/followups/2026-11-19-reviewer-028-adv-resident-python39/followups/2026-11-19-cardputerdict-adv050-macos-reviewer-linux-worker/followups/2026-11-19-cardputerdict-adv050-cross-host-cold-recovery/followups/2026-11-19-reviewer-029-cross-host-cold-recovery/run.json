@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Reviewer 0.29 same-volume cold recovery of active CardputerDict ADV playback",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "esp-emulator",
+    "base_commit": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "documentation_commit": "8e4909f91fe628b7a93bdca46a833f2749496d17",
+    "reviewer_repository": "auto-firmware-review",
+    "reviewer_commit": "69386c6a162a1c786d6745c46eaa330c14558d3c"
+  },
+  "hardware": {
+    "model": "Cardputer ADV",
+    "scope": "virtual-device validation"
+  },
+  "firmware": {
+    "model": "Cardputer ADV",
+    "firmware": "CardputerDict ADV 0.5.0",
+    "original_bytes": 2141568,
+    "firmware_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c",
+    "sd_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62"
+  },
+  "execution": {
+    "environment": "macOS system Python 3.9.6 and authenticated Virtio VSOCK to a no-NIC Linux VM",
+    "observed_at_utc": "2026-11-18T18:52:52.377196+00:00",
+    "task_id": "",
+    "session_id": "",
+    "terminal_receipt": {
+      "bytes": 5482,
+      "sha256": "1d7dbc32e9ba152b665b818830d6d6e0c18ea9e2d4e11718e322a66177e50882"
+    }
+  },
+  "checks": [
+    {
+      "level": "transport",
+      "status": "PASS",
+      "detail": "Same authenticated loopback address across boots, HTTP 401 and 403 scope controls"
+    },
+    {
+      "level": "cold_recovery_without_authority",
+      "status": "PASS",
+      "detail": "Expected HTTP 409 and one fenced lease; preserved Flash and old PCAP"
+    },
+    {
+      "level": "cold_recovery_with_authority",
+      "status": "PASS",
+      "detail": "Controller acknowledged old-VM stop and supplied protected receipt; old lease, working Flash and Reviewer intent released"
+    },
+    {
+      "level": "data_behavior",
+      "status": "PASS",
+      "detail": "Same-original standard retry HTTP 202 then SIM_VERIFIED, 10605-byte SD MP3, 84992-byte I2S PCM, paired ZIP and direct API payload matches"
+    },
+    {
+      "level": "cleanup",
+      "status": "PASS",
+      "detail": "Both owned VMs, reviewers and relays stopped; zero active leases"
+    },
+    {
+      "level": "production_traffic",
+      "status": "NOT RUN",
+      "detail": "Production Reviewer still uses current native worker; dedicated resident Linux controller outside this rehearsal"
+    },
+    {
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "No real hardware or host hard-loss experiment"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/reviewer-029-cross-host-cold.summary.json",
+      "bytes": 7527,
+      "sha256": "af9415d5c39b1b9090e89d320413cc15b42ca1d317c2efc64affeff9c06bde72"
+    }
+  ],
+  "notes": [
+    "Exact Reviewer 0.29 package and source hashes verified on Mac host; Device app and API unchanged from c9.",
+    "Prior 0.28 record is preserved. This repin passed on the first isolated two-boot trial. Burner not submitted."
+  ]
+}
