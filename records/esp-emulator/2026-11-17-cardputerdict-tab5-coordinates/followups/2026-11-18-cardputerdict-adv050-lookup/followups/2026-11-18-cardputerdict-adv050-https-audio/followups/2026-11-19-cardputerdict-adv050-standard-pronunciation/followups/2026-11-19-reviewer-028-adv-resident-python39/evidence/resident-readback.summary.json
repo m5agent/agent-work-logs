@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "status": "LIVE_VERIFIED",
+  "first_cutover": {
+    "candidate": "e7e32f19d03f88394dfadb4e9f73fb1a83ea39c0",
+    "status": "FAIL",
+    "reason": "resident Python 3.9.6 failed to import an evaluated type union",
+    "guarded_rollback": "ROLLED_BACK",
+    "restored_reviewer": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "restored_api": "0.27.0",
+    "jobs_after_rollback": 129,
+    "db_history_and_sampled_zip_preserved": true,
+    "rollback_readiness_verified": true,
+    "private_rollback_receipt_sha256": "bd65d3ee6097cce2687b46d6e31eba09b0288883fa1b1a6311d95d29e96e2827"
+  },
+  "compatibility_preflight": {
+    "candidate": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+    "interpreter": "3.9.6",
+    "reviewer_unit_tests": 301,
+    "isolated_http_readiness_verified": true,
+    "isolated_activity_zero": true,
+    "private_preflight_summary_sha256": "55c70dec51e763ef4e63c65c5d043c4de57a1db65f77279803381e464a263c85"
+  },
+  "exact_corrected_linux_qualification": {
+    "summary_sha256": "564624b3a44927409f93456eff1de8b7877a9a968e8d3be70322b3b8a6c22cab",
+    "isolated_no_guest_nic": true,
+    "cases": {
+      "playback": {
+        "board": "cardputer-adv",
+        "terminal": "SIM_VERIFIED",
+        "status": "done",
+        "error_code": null,
+        "audio_bytes": 84992,
+        "audio_sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+        "paired_zip_pcap_and_pcm_equal": true,
+        "cleanup": true
+      },
+      "blocked": {
+        "board": "cardputer-adv",
+        "terminal": "SIM_PARTIAL",
+        "status": "manual_review",
+        "error_code": "E_CARDPUTER_PRONUNCIATION_POLICY_DENIED",
+        "audio_bytes": 0,
+        "audio_sha256": null,
+        "paired_zip_pcap_and_pcm_equal": true,
+        "cleanup": true
+      },
+      "stock-playback": {
+        "board": "cardputer",
+        "terminal": "SIM_VERIFIED",
+        "status": "done",
+        "error_code": null,
+        "audio_bytes": 84992,
+        "audio_sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+        "paired_zip_pcap_and_pcm_equal": true,
+        "cleanup": true
+      }
+    }
+  },
+  "resident": {
+    "reviewer_source": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+    "reviewer_api": "0.28.0",
+    "backend": "darwin-backend-ready",
+    "readiness_http_status": 200,
+    "device_source": "9837c3f84df4383eb74881a1f44fcd3f460daefa",
+    "both_device_roles_unchanged": true,
+    "device_api": "1.99.0",
+    "device_openapi_bytes_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "retained_jobs": 129,
+    "actual_ui_api_and_db_history_preserved": true,
+    "sampled_zip_preserved": true,
+    "private_verified_aggregate_receipt_sha256": "feb0334d76773a345c0620e9c1ad76a04a9401198dd5758d3f152ba3621dd523"
+  },
+  "production_guest": "NOT RUN",
+  "resident_linux_route": "NOT RUN",
+  "burner": "NOT SUBMITTED"
+}

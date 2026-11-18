@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "infra_baseline",
+  "overall_status": "PASS",
+  "title": "Reviewer 0.28.0 resident Python 3.9 recovery and readiness",
+  "source": {
+    "base_commit": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "active_commit": "37d7675dced42b2b932c51d1ca21bbb8ccfdf7e1",
+    "companion_device_commit": "9837c3f84df4383eb74881a1f44fcd3f460daefa"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "Resident macOS native Device Service and Reviewer; isolated Linux firmware comparison",
+    "evidence_sha256": "00d8918c91e38a5746bbdbd4618c63c573c62e4cb5a387a3b37eca3661152069"
+  },
+  "checks": [
+    {
+      "layer": "delivery",
+      "status": "FAIL",
+      "detail": "First candidate failed resident Python 3.9.6 module import."
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "Guarded rollback verified and corrected release deployment independently read back."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "All three corrected original firmware cases validated separately in isolated Linux VZ."
+    },
+    {
+      "layer": "review",
+      "status": "NOT RUN",
+      "detail": "Production guest and resident Linux route."
+    }
+  ],
+  "evidence": [
+    "evidence/resident-readback.summary.json"
+  ],
+  "notes": [
+    "No Burner submission."
+  ]
+}
