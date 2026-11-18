@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "integration_validation",
+  "date": "2026-11-19",
+  "title": "Reviewer 0.31 独立保存快照与原版 Core2 验证",
+  "source": {
+    "reviewer_revision": "1151dda034d6ec43dcd8c5ef895ae79e009d088f",
+    "reviewer_api": "0.31.0",
+    "reviewer_openapi_sha256": "1c68f24bba53c12fd759125149502f120f930a42e3b1f19b78560d831ed7f110",
+    "device_service_revision": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "device_api": "1.99.3",
+    "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Core2 2048 1.0",
+    "original_bytes": 505760,
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "composed_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "vendor_boot_context_sha256": "bfaa9203100a802de6a762217debc3cce269844e2caca7730155cd9bc02bf2d7"
+  },
+  "execution": {
+    "status": "PASS",
+    "child_terminal": "SIM_VERIFIED",
+    "parent_file_count": 49,
+    "parent_events": 17,
+    "legal_moves": 8,
+    "directions": 4,
+    "observed_seconds": 60.041666542,
+    "samples": 13,
+    "evidence": "evidence/independent-snapshot-clone.summary.json",
+    "evidence_bytes": 14593,
+    "evidence_sha256": "ea7743756cea1fadab37d2a1267ad4ac5639ccccf7b0d3f870917af96e748e62"
+  },
+  "checks": {
+    "independent_clone": "PASS",
+    "idempotent_replay_and_changed_request_fence": "PASS",
+    "parent_unchanged": "PASS",
+    "same_original_and_four_direction_moves": "PASS",
+    "same_database_reviewer_restart": "PASS",
+    "normal_guest_stop_and_unload": "PASS",
+    "local_unit_tests_326": "PASS",
+    "physical": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "production_snapshot_canary": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  }
+}
