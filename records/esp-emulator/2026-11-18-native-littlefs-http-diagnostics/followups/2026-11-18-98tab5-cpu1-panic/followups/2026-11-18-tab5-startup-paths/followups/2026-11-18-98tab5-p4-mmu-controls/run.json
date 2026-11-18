@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "firmware_validation",
+  "overall_status": "PARTIAL",
+  "title": "98TAB5 stock cold startup and two-hart P4 MMU controls",
+  "source": {
+    "base_commit": "c7e25be5410d3a9968107bc7a0cab5acb9d708bc",
+    "sdk": "735507283d5b2f9fb363a1901172dbd9e847945d"
+  },
+  "hardware": {
+    "virtual_device": "tab5",
+    "physical": false
+  },
+  "firmware": {
+    "original": "98TAB5 1.3.0 stock",
+    "sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "runtime": "esp-emu 1.1.0",
+    "device_service_api": "1.91.0",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "Original normal cold boot and complete frame",
+      "status": "FAIL"
+    },
+    {
+      "name": "Original first observed CPU1 trap and latch readback",
+      "status": "PASS"
+    },
+    {
+      "name": "Two repeat disjoint ROM L2 invalidation controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Two repeat Flash page zero mapping and unmapping controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Attribution of the original early cache handoff and physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/98tab5-c7e-stock-natural-and-panic.summary.json",
+      "sha256": "58b0d246ac4df0616ba7d5c9732da86ce6c5db54e7548fb8ff00ad1c1f79d137"
+    },
+    {
+      "path": "evidence/98tab5-p4-two-hart-cache-control.summary.json",
+      "sha256": "46a2d1dc4162ca6e0b8e5d90c4ed320c7f41f924b51d68da18a5d34f5cbce983"
+    }
+  ]
+}
