@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "scope": "original All Day Watch StickS3 GPIO light sleep/wake and post-wake watchdog observation",
+  "evidence_lane": "isolated loopback macOS Device Service, native QEMU virtual-device validation",
+  "device_id": "sticks3",
+  "qemu_machine": "m5sticks3",
+  "source_commit": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+  "api_version": "1.99.0",
+  "openapi_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+  "runtime_sha256": "38549673557129d5e9e0100ce9de6539b261b834e9960523b2400dfa110c61b5",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "original_firmware_sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+  "original_firmware_bytes": 1840512,
+  "normalized_flash_sha256": "1d6ae6df2473bebf662955bbb050ce2304081e79485d9044d0bff3d150a4e363",
+  "normal_stock_guest": true,
+  "guest_network": "offline; NIC disabled",
+  "extra_watchdog_trace": false,
+  "criteria": {
+    "cold_nonblack": true,
+    "four_historical_dispatches": true,
+    "observed_qmp_suspend": true,
+    "qmp_running_after_semantic_b_click": true,
+    "wake_nonblack": true,
+    "panic_free_postwake_window": true
+  },
+  "first_frame": {
+    "width": 135,
+    "height": 240,
+    "nonblack_pixels": 32400,
+    "sha256": "660d9b46e49fe21880e831d7d1b35b881c2c5914468d42fc2b40e2e1a235c07d"
+  },
+  "historical_input_dispatch": [
+    {
+      "kind": "key_a",
+      "action": "tap",
+      "dispatch_s_after_first_frame": 2.336228,
+      "receipt_s_after_first_frame": 3.34206
+    },
+    {
+      "kind": "key_b",
+      "action": "tap",
+      "dispatch_s_after_first_frame": 3.366676,
+      "receipt_s_after_first_frame": 4.370814
+    },
+    {
+      "kind": "hold_b",
+      "action": "down",
+      "dispatch_s_after_first_frame": 4.448132,
+      "receipt_s_after_first_frame": 4.553775
+    },
+    {
+      "kind": "hold_b",
+      "action": "up",
+      "dispatch_s_after_first_frame": 6.734056,
+      "receipt_s_after_first_frame": 6.796448
+    }
+  ],
+  "natural_suspend_observed_seconds_after_historical_inputs": 20.229,
+  "semantic_b_click_timing": {
+    "clock": "host",
+    "hold_seconds": 0.12,
+    "presses": 1,
+    "completion": "events_sent"
+  },
+  "b_click_to_observed_running_seconds": 0.439,
+  "postwake_frame": {
+    "width": 135,
+    "height": 240,
+    "nonblack_pixels": 32400,
+    "sha256": "b1a12878a24ddad3c3f3e05da1216e8f5e748bb8e0fdaf881fbdba03a3c59ad4"
+  },
+  "window_seconds_after_wake_frame": 65.117,
+  "watchdog": {
+    "crash_diagnostic_status": "no_evidence",
+    "uart_panic_count": 0,
+    "uart_poweron_count": 1,
+    "uart_software_reset_count": 0,
+    "poll_samples": 14
+  },
+  "historical_comparator": {
+    "source_commit": "2db3851c0b7a4980210034d05130224a2ecf6455",
+    "runtime_sha256": "99da5cb681e44dfdf332f8af01b8d5d36bbb2801b30ca7e0ca6be21af4c0ecff",
+    "rtc_sleep_completion_poll_cpu1_iwdt_count": 2,
+    "faster_timing_no_panic_control": "Same firmware and runtime with different interaction timing did not show a panic in the retained observation window.",
+    "not_a_same_runtime_causal_ablation": true
+  },
+  "before_stop_same_session_zip": {
+    "crc_check": "PASS",
+    "manifest_identity_and_file_hashes": "PASS",
+    "sha256": "d6e71cafbd5540586d085b38b7fbdf56903b0767d23cd6e8b86bfc9580efd88a",
+    "serial_sha256": "7c1cc7f70ac3b12d853b36fcbd5c61b678f0718d9450282d0aeb9211b88f2de0",
+    "frame_at_evidence_collection": {
+      "width": 135,
+      "height": 240,
+      "nonblack_pixels": 0,
+      "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0"
+    }
+  },
+  "cleanup": {
+    "lease_state": "stopped",
+    "active_lease_count": 0,
+    "mutable_flash_retained": false
+  },
+  "owned_service_stopped": true,
+  "limits": [
+    "one observed stock GPIO sleep/wake cycle",
+    "physical hardware, external 32.768 kHz clock and other deep-sleep sources NOT RUN",
+    "fixture RTC timer/deep-sleep results are separate"
+  ]
+}
