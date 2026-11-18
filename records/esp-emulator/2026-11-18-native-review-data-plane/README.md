@@ -22,5 +22,6 @@ StickS3 原版从配网页切到本地 STA。CardputerDict 原版在画面相同
 - [Device Service 与 Reviewer 双重启恢复](followups/2026-11-18-reviewer-device-double-restart/README.md)
 - [审核会话具名出口网关恢复](followups/2026-11-18-reviewer-named-gateway-restart/README.md)
 - [外层网关监督进程中断后的审核恢复](followups/2026-11-18-reviewer-gateway-outer-loss/README.md)
+- [具名网关启动交接中断恢复](followups/2026-11-18-reviewer-gateway-startup-handoff/README.md)
 
 全部 dry-run 未提交 Burner。真机、物理 RF 和声学输出为 NOT RUN。

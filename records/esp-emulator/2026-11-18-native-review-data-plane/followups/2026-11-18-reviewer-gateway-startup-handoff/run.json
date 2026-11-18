@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "date": "2026-11-18",
+  "source": {
+    "incumbent_device_service": "dffe87fd60ef34b0c65ddaf7e46ab73fa224d16d",
+    "early_device_candidate": "124774ec547c0cfe33e3ffb9eb20142317f8ab98",
+    "final_device_candidate": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+    "final_device_openapi_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "reviewer": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+    "reviewer_openapi_sha256": "a2d5daa7ea48e5d446b760f422bfe203963a6a906132cf6f14b44a525784c91f",
+    "device_release": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3"
+  },
+  "hardware": {
+    "target": "isolated native Linux ARM64 VM without external network adapter",
+    "original_virtual_device": "Cardputer",
+    "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "storage_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62"
+  },
+  "execution": {
+    "incumbent_pre_spawn": {
+      "path": "evidence/incumbent-pre-spawn-a1.verified.summary.json",
+      "sha256": "b2166ff764c0e2ed08368a24838610ca8a187f33db95564ed0655d3e9cb9e0b6"
+    },
+    "incumbent_inner_before_receipt": {
+      "path": "evidence/incumbent-inner-before-receipt-a1.verified.summary.json",
+      "sha256": "40c39906b20ef9ddc597b06ecadd15d8e690ad520e22dca95c497a47172a3a1f"
+    },
+    "first_handoff_candidate": {
+      "path": "evidence/candidate-post-fork-pre-commit-a1.verified.summary.json",
+      "sha256": "b5ab36dde179108f4e4ebc086a2d98a42132e80852925150024e600b0d986bba"
+    },
+    "pilot_short_window": {
+      "path": "evidence/candidate-pre-spawn-a1.bounded-window.summary.json",
+      "sha256": "0f1fef22c4cecda5aa4d47c3234a80910b789483adad5f1e93907d9182ec0773"
+    },
+    "final_pre_spawn": {
+      "path": "evidence/final-pre-spawn-a1.verified.summary.json",
+      "sha256": "871a2e34fcb61e60b0691c9c944fd5bbb3b6a0f2e2554390673899b3cfa077fd"
+    },
+    "final_post_fork": {
+      "path": "evidence/linux-named-gateway-handoff-release.summary.json",
+      "sha256": "b6052ce3c9a9336965a0d988eefc1e58cb005e002fbe744d2359ca0bd6774fc7"
+    },
+    "supplement_commit_before_permit": {
+      "path": "evidence/final-post-commit-pre-permit-a1.verified.summary.json",
+      "sha256": "3bdd2e24399c25a96201f122915655ed5bdbb422cea758fb8bfd4153640af9ff"
+    }
+  },
+  "checks": {
+    "incumbent_pre_spawn": "FAIL retained named gateway, Flash and lease",
+    "incumbent_inner_before_receipt": "FAIL startup fence; late original QEMU observed; eventual cleanup",
+    "early_candidate_post_fork": "PASS blocked late start; automatic resource cleanup observed at 61.310 s",
+    "short_pilot": "INCONCLUSIVE: stopped before 60 s QMP setup timeout",
+    "final_pre_spawn": "PASS full cleanup 2.436 s; same original Retry HTTP 202",
+    "final_post_fork": "PASS; guarded wait while original inner stopped, no late QEMU, automatic cleanup and original Retry",
+    "external_tls_playback": "NOT RUN",
+    "physical": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "device_release_platform_suite": {
+      "collected": 2482,
+      "passed": 2472,
+      "skipped": 10
+    },
+    "device_release_validators_and_scope": "PASS",
+    "partial_kernel_provisioning_failure_windows": "NOT RUN",
+    "supplemental_committed_before_permit": "PASS startup fence and passive cleanup; standalone Retry NOT RUN"
+  }
+}
