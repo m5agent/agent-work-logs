@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-18",
+  "validation": "virtual-device validation",
+  "status": "IMMEDIATE_GUEST_FAILURE_OBSERVED_MAPPING_CAUSE_UNRESOLVED",
+  "firmware": "98TAB5 1.3.0 original",
+  "firmware_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+  "normalized_flash_sha256": "35c636324ea1fcebd12f4752e458936c2ac151a9d171a67f1d624d944b96b0ff",
+  "device": "Tab5 gt911-ili9881c; built-in idle I2C identification",
+  "device_service_source": "13df3b8a7ab197df14f57d2ca8bc58919a7eb666",
+  "device_service_openapi_sha256": "2fbea7a0ec6d386dd6b6fa718d68291a3497eb7d3232feb85211ca93efa43cc1",
+  "runtime_version": "1.1.0",
+  "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "working_assets_sha256": {
+    "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+    "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+    "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+  },
+  "application_flash_offset": "0x10000",
+  "drom_segment": {
+    "flash_offset": "0x10020",
+    "vaddr": "0x40130020",
+    "length": "0x760d48"
+  },
+  "flash_dispatch_table": {
+    "flash_offset": "0x3cc54",
+    "virtual_address": "0x4015cc54",
+    "original_and_normalized_bytes_hex": "98160040ca0cf04f",
+    "expected_entries": [
+      "0x40001698",
+      "0x4ff00cca"
+    ]
+  },
+  "debugger_method": "Read-only register and memory observations with four hardware breakpoints; no guest writes, no network or touch. In the cross-hart case selection changed only the debugger thread.",
+  "observation": "Both runs entered the nonzero ROM handoff target. The actual CPU1 load of the startup dispatch pointer yielded zero, and the following indirect jump caused the saved instruction access fault. Only CPU1 executed the observed load; debugger reads selected on CPU0 also returned zero in the cross-hart case.",
+  "runs": [
+    {
+      "case": "run-dispatch-a5",
+      "firmware_flash_dispatch_slot": "0x4ff00cca",
+      "guest_instruction_result": {
+        "load_pc": "0x4ff003fc",
+        "address": "0x4015cc58",
+        "jump_pc": "0x4ff00400",
+        "jump_target": "0x0",
+        "hart": 1,
+        "fault_mepc": "0x0",
+        "fault_mcause": "0x1",
+        "fault_mtval": "0x0"
+      },
+      "debugger_table_reads": {
+        "1": [
+          "0x0",
+          "0x0"
+        ]
+      },
+      "adjacent_drom_bytes_check": "NOT RUN",
+      "software_resets_after_total_35s": 18,
+      "complete_frames": 0,
+      "debugger_output_sha256": "18b1325ec6e4ab509188fa1e8826958676b9c197a08df0406073367026a11b6b",
+      "zip_sha256": "5d79c0694f4698cf8c2a1de539687aa60a3972f4609d8361051842f4254dc669",
+      "serial_sha256": "3e8a11914e6bf99da2a8c139d36b2f000b7918d3f6a90966cf9eaea4d76982ce",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      }
+    },
+    {
+      "case": "run-dispatch-a6",
+      "firmware_flash_dispatch_slot": "0x4ff00cca",
+      "guest_instruction_result": {
+        "load_pc": "0x4ff003fc",
+        "address": "0x4015cc58",
+        "jump_pc": "0x4ff00400",
+        "jump_target": "0x0",
+        "hart": 1,
+        "fault_mepc": "0x0",
+        "fault_mcause": "0x1",
+        "fault_mtval": "0x0"
+      },
+      "debugger_table_reads": {
+        "1": [
+          "0x0",
+          "0x0"
+        ],
+        "0": [
+          "0x0",
+          "0x0"
+        ]
+      },
+      "adjacent_drom_bytes_check": "both debugger thread selections read zero",
+      "software_resets_after_total_35s": 18,
+      "complete_frames": 0,
+      "debugger_output_sha256": "c47c7f06448db0881a08bc76a2c0fa98e8d24123f0b6ad0883a6c90d10963476",
+      "zip_sha256": "e2ccebeab8c95ac0ed1f01676dedcf828663a1e71bd8cd848feb317e456adb90",
+      "serial_sha256": "3e8a11914e6bf99da2a8c139d36b2f000b7918d3f6a90966cf9eaea4d76982ce",
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      }
+    }
+  ],
+  "negative_observer_control": {
+    "case": "run-dispatch-a4",
+    "observer": "GDB batch format error; startup dispatch observation invalid",
+    "cleanup": {
+      "terminal": "stopped",
+      "active_leases": 0,
+      "flash_released": true,
+      "owned_p4_c6_children_exited": true
+    },
+    "zip_sha256": "a1af92b4267a69c52da3bd65f4717e24f3064b04fc838ee449eaf46d845b72bb"
+  },
+  "next_open": "Compare DROM reads from the actual CPU instruction path and live cache/MMU mapping registers with a working original Tab5 reference. The test does not identify which mapping step yields zero. Hardware, browser and Burner were not run."
+}

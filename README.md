@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 启动跳转 | PARTIAL（两轮实际读到零并跳到零，DROM 读零原因待查） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-98tab5-startup-dispatch/) |
 | 2026-11-18 | ESP Emulator | StickS3 原生 RTC 定时深睡 | PASS（同一会话四轮定时唤醒、原版 Watch 浅睡回归） | [查看](records/esp-emulator/2026-11-18-sticks3-rtc-deep-sleep/) |
 | 2026-11-18 | nuxt-m5-docs | Markdown 文档 Skill 可复现更新 | PASS（Linux 虚拟机查阅、PDF 按需读取与分发包回读） | [查看](records/nuxt-m5-docs/2026-11-18-documentation-skill-refresh/) |
 | 2026-11-18 | ESP Emulator | 98TAB5 原版 CPU1 异常与板级对照 | PARTIAL（两种 GT911 路径各复现 18 次软件复位，转储写入前定位 CPU1 指令访问异常） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/) |
