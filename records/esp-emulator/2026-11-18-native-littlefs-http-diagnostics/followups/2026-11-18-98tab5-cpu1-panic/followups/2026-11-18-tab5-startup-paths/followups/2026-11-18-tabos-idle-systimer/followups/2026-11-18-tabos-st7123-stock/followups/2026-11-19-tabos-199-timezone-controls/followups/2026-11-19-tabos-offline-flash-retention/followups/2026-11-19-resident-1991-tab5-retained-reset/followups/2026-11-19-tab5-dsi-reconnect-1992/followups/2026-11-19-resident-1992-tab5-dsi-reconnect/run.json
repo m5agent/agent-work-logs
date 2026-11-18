@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "service_release",
+  "overall_status": "PASS",
+  "title": "Device Service 1.99.2 Tab5 DSI resident readback",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "released_commit": "f12b15fb3dc2c27e31b804ccfffd63e8cbce89b8",
+    "qualified_functional_commit": "b221c87632b087d099bba00385015668a131d0a1",
+    "reviewer_incumbent_commit": "69386c6a162a1c786d6745c46eaa330c14558d3c"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS native resident Device Service and Reviewer",
+    "device_api_version": "1.99.2",
+    "reviewer_api_version": "0.29.0",
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "two_roles_exact_api_readback",
+      "status": "PASS",
+      "details": "Both HTTP 200 and byte-identical published 1.99.2 schema"
+    },
+    {
+      "name": "preserved_resident_history_and_reviewer",
+      "status": "PASS",
+      "details": "55 workbench and 98 review-device histories; 130 Reviewer jobs and sampled ZIPs"
+    },
+    {
+      "name": "frozen_inventory_and_runtime",
+      "status": "PASS",
+      "details": "Exact manifest, three inventories, and existing native/browser assets"
+    },
+    {
+      "name": "production_guest_physical_and_linux_rollout",
+      "status": "NOT RUN",
+      "details": "The exact reconnect firmware path is verified in the separate native record"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/tab5-dsi-1992-resident.summary.json",
+      "kind": "redacted resident and qualified product receipts"
+    }
+  ]
+}
