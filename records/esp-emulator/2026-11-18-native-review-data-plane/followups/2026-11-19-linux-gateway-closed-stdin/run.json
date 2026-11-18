@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Linux 审核网关关闭 stdin 的原版 CardputerDict A/B 回归",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "1939e39885d3cffe74f01576182bfa28c6148dd2",
+    "candidate_commit": "4216d548477d0b7a52b72f5e07dd07d98d7e8d63",
+    "native_runtime_package_source": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+    "reviewer_commit": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "device_service_openapi": {
+      "version": "1.99.0",
+      "sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325"
+    },
+    "reviewer_openapi": {
+      "version": "0.27.0",
+      "sha256": "3fec9b38f09a1bccc4ed365701d695ef432c9eade51b2645fcb627c5a687b6f2"
+    }
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "environment": "Linux ARM64 VZ without a virtual NIC, plus a fixed-purpose Virtio Socket relay",
+    "device": "Cardputer",
+    "runtime": "qemu-wifi",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_bytes": 3619312,
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929",
+    "sd_seed_sha256": "f68f5ea7d3a3e3b38ead3a2bdb3327eae356c73ac97e190e73e7ff69189f3b62"
+  },
+  "execution": {
+    "local_timezone": "UTC+08:00",
+    "baseline_begin_local_date": "2026-11-19",
+    "cases_in_order": [
+      "baseline_blocked",
+      "candidate_blocked",
+      "candidate_playback"
+    ],
+    "saved_snapshot_retry_http": 202,
+    "retained_evidence_type": "sanitized summary bound to original receipt and artifact digests"
+  },
+  "checks": [
+    {
+      "name": "baseline_boot_with_fd0_closed",
+      "status": "FAIL",
+      "outcome": "E_SIM_STARTUP_FAILED"
+    },
+    {
+      "name": "baseline_failure_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate_blocked_launch_and_expected_policy_denial",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate_playback_tls_mp3_and_pcm",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate_stopped_zip_pcap_readback_and_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid_relay_authorizations_zero_upstream",
+      "status": "PASS"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "resident_worker_integration_and_deployment",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/linux-gateway-closed-stdin.summary.json",
+      "bytes": 7530,
+      "sha256": "5e8b47886383a6d3d5297f02237ab62fb25e5fd6c9ca24cebc0b46fc3f7d1f28"
+    }
+  ],
+  "notes": [
+    "Burner 未提交。",
+    "虚拟设备结论适用于此原版固件和固定运行路径。"
+  ]
+}
