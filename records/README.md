@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator / Firmware Reviewer | 可安装 Linux worker 组件的原版 Core2 验证 | PASS（原版与重启，保留首次预检 FAIL） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-installed-linux-worker-component/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | Core2 活跃会话运行器退出后的隔离与重试保护 | PASS（隔离与拒绝，旧资源保留未处置） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-routed-adv-and-create-recovery/followups/2026-11-19-core2-active-runner-exit/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | Reviewer 0.30 原版 ADV 路由与 Core2 创建响应丢失恢复 | PASS（ADV 应用与 Core2 会话恢复，保留中断错误） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-routed-adv-and-create-recovery/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | Reviewer 0.30.0 通过受管 Linux 复审原版 Core2 2048 | PASS（隔离路由、四向棋盘及就绪状态） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/) |

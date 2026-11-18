@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "integration_validation",
+  "date": "2026-11-19",
+  "title": "可安装 Linux worker 组件的原版 Core2 验证",
+  "source": {
+    "local_component_commit": "5eacb1b7ae76d8bc3764caa7b45b23185f553ebe",
+    "source_file_manifest": [
+      {
+        "repository_path": "platform/tests/test_macos_linux_worker_install.py",
+        "bytes": 20857,
+        "sha256": "b07a344020c589427b2445ff1650899f81815c5a77eedfe80843c2345ef89e17"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/build_runner.py",
+        "bytes": 3180,
+        "sha256": "1385daa5be1e97fcfd25679193576389163123a5b081709dfa0f316238c17782"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/install.py",
+        "bytes": 19760,
+        "sha256": "d1408696f25e2f53d58a1cf26cba6d2a24d191bddbe668f45a365fb50f647078"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/launchd_role.py",
+        "bytes": 23338,
+        "sha256": "73d764b911468c53b08a07c27e90ec387d8a5db2f5fece0767b154121f1a3354"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/runner.entitlements.plist",
+        "bytes": 235,
+        "sha256": "ca3c678fb76c21598af231adc0b839d2a776804a3b4dba93575776a6278651e7"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/runner.swift",
+        "bytes": 13680,
+        "sha256": "e7bd9d031874e6d257a2847ee198a08a0f248255221d0164096b240616138eb2"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/stable_bridge.py",
+        "bytes": 5720,
+        "sha256": "2c8f681115acd141e8760cd4fafbbf838dc22d701213469740822a174ec9aa94"
+      },
+      {
+        "repository_path": "platform/tools/macos_linux_worker/supervisor.py",
+        "bytes": 16726,
+        "sha256": "e7295e1e33423b0da358d82cc0045237445dd9143a7a56ef8f93b53c115eaa68"
+      }
+    ],
+    "final_installer_sha256": "d1408696f25e2f53d58a1cf26cba6d2a24d191bddbe668f45a365fb50f647078",
+    "reviewer_revision": "b9426a2d8a88338d95346ed9b93b0eaf0893cb9a",
+    "reviewer_api": "0.30.0",
+    "reviewer_openapi_sha256": "5d062ee41dc45cfe346fd9aeadbf4a93f5e687549e2ce8284344571daaa2fc78",
+    "device_service_revision": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "device_api": "1.99.3",
+    "device_openapi_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Core2 2048 1.0",
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "original_bytes": 505760,
+    "composed_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "vendor_boot_context_sha256": "bfaa9203100a802de6a762217debc3cce269844e2caca7730155cd9bc02bf2d7"
+  },
+  "execution": {
+    "status": "PASS_WITH_PRESERVED_PREFLIGHT_FAILURE",
+    "application_terminal": "SIM_VERIFIED",
+    "legal_moves": 8,
+    "directions": 4,
+    "raw_payloads_verified": 30,
+    "immutable_files_verified": 286,
+    "qualified_external_payload_entries": 282,
+    "normal_hosted_generations": 2,
+    "initial_restart_preflight": "FAIL",
+    "final_installer_restart": "PASS",
+    "repeat_stage_only": "PASS",
+    "evidence": "evidence/installed-linux-worker-component.summary.json",
+    "evidence_bytes": 20794,
+    "evidence_sha256": "73756cee26811fbb3421e661d0c6d6875e9484c0c5fbc5a1a83e191cbd94a396"
+  },
+  "checks": {
+    "installed_assets_and_signed_runner": "PASS",
+    "original_core2_and_routing": "PASS",
+    "first_restart_preflight": "FAIL",
+    "fixed_installer_same_volume_restart": "PASS",
+    "seven_historical_payloads_identical": "PASS",
+    "both_normal_stops_and_unload": "PASS",
+    "independent_repeat_stage": "PASS",
+    "production_cutover": "NOT RUN",
+    "physical": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "other_original_applications": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  }
+}
