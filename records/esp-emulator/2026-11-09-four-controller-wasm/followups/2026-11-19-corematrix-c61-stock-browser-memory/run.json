@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "validation",
+  "overall_status": "PARTIAL",
+  "title": "CoreMatrix C61 original browser-WASM memory observation",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "c61_runtime_source": "8fd40d7f1a5151c1747375b920c3e2d5cff0b0dc"
+  },
+  "hardware": {
+    "board": "CoreMatrix C158",
+    "model": "ESP32-C61",
+    "validation_class": "virtual-device validation"
+  },
+  "firmware": {
+    "name": "official UIFlow2 v2.5.4",
+    "device": "CoreMatrix",
+    "sku": "C158",
+    "source_sha256": "0bfbe5a4acb467d93a7ded2186a4f73adea37511869328b563c15ab73163a018",
+    "source_bytes": 16773120,
+    "normalized_flash_sha256": "5562f685a8f3ed07d04ec7d7f58fa4435be8438fbf135c6fd61ff6e906783c07",
+    "normalized_flash_bytes": 16777216
+  },
+  "execution": {
+    "environment": "local exported browser site, Chromium and C61 WASM",
+    "same_guest_editor_raw_repl": true,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "same_stock_initial_frame_and_editor_input",
+      "status": "PASS",
+      "details": "16x16 RGB565 with 36 nonblack pixels, same original guest, USB Raw REPL output through browser editor"
+    },
+    {
+      "name": "guest_regular_32_kib_sampled_roundtrip",
+      "status": "PASS",
+      "details": "8 sampled pages with zero mismatch plus final-byte readback"
+    },
+    {
+      "name": "external_psram_8_mib",
+      "status": "PARTIAL",
+      "details": "SPI RAM capability returns []; regular 1 MiB bytearray gives MemoryError; 179,624 B data heap region total"
+    },
+    {
+      "name": "local_browser_worker_teardown",
+      "status": "PASS",
+      "details": "1 engine and 4 pthread targets observed, zero live at stop"
+    },
+    {
+      "name": "native_hosted_and_hardware",
+      "status": "NOT RUN",
+      "details": "Evidence bounded to local exported browser path"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/corematrix-stock-browser-memory.summary.json",
+      "kind": "redacted same-guest browser memory and teardown observations"
+    }
+  ]
+}

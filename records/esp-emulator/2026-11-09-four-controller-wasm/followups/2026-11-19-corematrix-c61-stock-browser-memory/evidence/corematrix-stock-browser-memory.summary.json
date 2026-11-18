@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "experimental_control",
+  "overall_status": "PARTIAL",
+  "browser_runtime_validation": "PASS",
+  "guest_32_kib_sampled_roundtrip": "PASS",
+  "external_psram_8_mib": "NOT VALIDATED",
+  "validation_class": "virtual-device validation. Local exported browser-WASM only.",
+  "browser": {
+    "type": "Chromium",
+    "version": "156.0.8078.4"
+  },
+  "firmware": {
+    "name": "official UIFlow2 v2.5.4",
+    "device": "CoreMatrix",
+    "sku": "C158",
+    "source_sha256": "0bfbe5a4acb467d93a7ded2186a4f73adea37511869328b563c15ab73163a018",
+    "source_bytes": 16773120,
+    "normalized_flash_sha256": "5562f685a8f3ed07d04ec7d7f58fa4435be8438fbf135c6fd61ff6e906783c07",
+    "normalized_flash_bytes": 16777216
+  },
+  "local_export_assets": {
+    "site_manifest_sha256": "1e76871f6dd5fd938b7608e4983dc061c7e19dc06ab3ce29fe65b493df466cc1",
+    "runtime_manifest_sha256": "87d077e09fdd72ed440a4ff502d1eab1daf1f7d7e7e25e92be5691bf3e02746e",
+    "board": "esp32c61,m5corematrix=on",
+    "runtime_source": "8fd40d7f1a5151c1747375b920c3e2d5cff0b0dc",
+    "javascript_sha256": "842db6be75a091f1bacc4d90bb3ec14a64e649acfb3e32712e150c9294945d3d",
+    "worker_sha256": "4dd0c5f6939ba709c22b4558fe0fd4116eace965d6d7085d9926b4bd8edf5f4c",
+    "wasm_sha256": "83ed57e0ac517ba2c83d40c640995050df33217138c59366c089962b399ba163",
+    "rom_sha256": "ba93108d967771826a8ba024da8c7002cf3c2c4346d600246b2fa882d95b30ec",
+    "harness_sha256": "ae9e1914cecef2616a7dbedadd3d81a8fb91a8837177926f9fa2b5c4fc96677d",
+    "helper_sha256": "944f0f00dab6e1c0df81a9adbf26455c47308b4026c22bf928f655eb13825230"
+  },
+  "same_original_browser_session": {
+    "browser_matrix_frame_pixels": [
+      16,
+      16
+    ],
+    "stock_unconfigured_network_cross_nonblack_pixels": 36,
+    "stock_shared_rgb565_frame_sha256": "af95bab4e8c242863fe41f184dfb77b4ccee4cdc1f1ebf0b2521635c72425365",
+    "frame_texture_pixels_checked": 256,
+    "same_stock_repl_exec_via_browser_editor": "PASS",
+    "stock_frame_retained_after_repl": true,
+    "gpio_button_input": "NOT RUN"
+  },
+  "memory_observations": {
+    "readback_target": "Stock firmware via guest USB Raw REPL",
+    "data_heap_reports": [
+      [
+        12120,
+        4,
+        0,
+        4
+      ],
+      [
+        167504,
+        17852,
+        13312,
+        13592
+      ]
+    ],
+    "reported_data_heap_region_totals_bytes": 179624,
+    "sampled_regular_bytearray": {
+      "bytes": 32768,
+      "result": "roundtrip",
+      "sampled_pages": 8,
+      "errors": 0
+    },
+    "larger_regular_bytearray": {
+      "bytes": 1048576,
+      "result": "MemoryError"
+    },
+    "MALLOC_CAP_SPIRAM": {
+      "query_mask": 1024,
+      "reported_regions": []
+    },
+    "conclusion": "No SPI RAM heap region was reported. Physical PSRAM, exported PSRAM data-plane behavior and cause remain unvalidated."
+  },
+  "cleanup": {
+    "engine_workers_observed": 1,
+    "pthread_workers_observed": 4,
+    "browser_workers_observed_total": 5,
+    "browser_worker_targets_live_after_stop": 0,
+    "iframe_removed": true,
+    "exit_code": 0
+  },
+  "raw_receipts": {
+    "browser_report": {
+      "bytes": 24039,
+      "sha256": "d126bde59b57192a6103304ca5db31ac3581607958398ffddfdf1629e3863a22"
+    },
+    "same_session_serial_frame_receipt": {
+      "bytes": 10874,
+      "sha256": "c46e04e7815347b942339af078572329ed129749497edeaa8619c1857aac6c15"
+    }
+  },
+  "limits": {
+    "current_hosted_pages": "NOT RUN",
+    "native_device_service": "NOT RUN",
+    "physical_device": "NOT RUN",
+    "production_routing": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  },
+  "redaction": "No local URL, service paths, runtime arguments, guest identifier, full serial or frame pixels."
+}
