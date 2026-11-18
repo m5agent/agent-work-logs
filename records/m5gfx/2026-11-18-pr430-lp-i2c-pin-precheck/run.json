@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "pr",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #430: refuse LP I2C pins the driver does not accept before touching them (code-level review)",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/430",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "15d7651faa91c0ef5e0ae53f5ebf0f4db383b51c",
+    "head_commit": "5ed5a0df73eaafb4241d9048e517f94d32a27ab0",
+    "files": [
+      "src/lgfx/v1/platforms/esp32/common.inl"
+    ]
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Apple clang 21.0.0; ESP-IDF sources fetched by public tag (v5.4.4, v5.5.4, v6.0.3, v6.1.1); Device Service has 36 profiles and no ESP32-C5; local esp-emulator checkout has no LP I2C / LP IO routing model; no local Arduino, PlatformIO or ESP-IDF toolchain",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file: src/lgfx/v1/platforms/esp32/common.inl (+19/-4); adds lp_pads_accepted() and an early invalid_arg return in the LP branch of init()"
+    },
+    {
+      "id": "predicate-idf-parity",
+      "status": "PASS",
+      "detail": "lp_pads_accepted() (common.inl:1867-1875) matches s_lp_i2c_pins_config() in IDF v5.4.4 (i2c_common.c:366-386), v5.5.4 (:367-387), v6.0.3 (:358-378) and v6.1.1 (:358-378): rtc_gpio_is_valid_gpio() on both pins, then the fixed pair only when !SOC_LP_GPIO_MATRIX_SUPPORTED"
+    },
+    {
+      "id": "macro-guard-equivalence",
+      "status": "PASS",
+      "detail": "#if !defined(LGFX_LP_GPIO_MATRIX) equals the driver's !SOC_LP_GPIO_MATRIX_SUPPORTED wherever LGFX_LP_I2C_LEND_PADS is active: the macro is auto-defined only for an SoC with the LP GPIO matrix and <driver/lp_io.h> (common.inl:192-196), and P4 without that header does not define LEND_PADS at all (:1863-1865)"
+    },
+    {
+      "id": "fixed-pair-values",
+      "status": "PASS",
+      "detail": "C6 6/7 in v5.4.4, v5.5.4, v6.0.3, v6.1.1; C5 6/7 in v5.4.4 and 2/3 in v5.5.4, v6.0.3, v6.1.1; rtc_io_num_map agrees (C5 5.5 has GPIO7 = -1 and LP IO 0-6, so 2/3 is the only valid pair; C6 0-7; P4 0-15)"
+    },
+    {
+      "id": "check-placement",
+      "status": "PASS",
+      "detail": "the check is the first pad-affecting statement of the LP branch (common.inl:2341), before release_lp_pad()/pinMode() (:2345-2348) and i2c_stop() (:2351); init(port, sda, scl) goes through setPins() first (:2454-2462), so init() sees an uninitialized context"
+    },
+    {
+      "id": "rejected-call-side-effects",
+      "status": "PASS",
+      "detail": "the early return happens before any write to i2c_context, before the driver call and before any pad access on the new pins; the only preceding state change, release() of an already-initialized port, is not reachable with changed pins because setPins() releases first"
+    },
+    {
+      "id": "host-predicate-matrix",
+      "status": "PASS",
+      "detail": "predicate extracted verbatim, stubbed with the real rtc_io_num_map LP-IO set and the real fixed-pair macros; 5 configurations and 20 cases all pass (C6 6/7 accept 4/5 reject; C5 5.4 6/7 accept; C5 5.5 2/3 accept 6/7 reject; P4 11/9 and 0/15 accept 18/19 reject; no-macro case falls back to validity only)"
+    },
+    {
+      "id": "redundant-later-guard",
+      "status": "PASS",
+      "detail": "with LEND_PADS active, const bool lp_pads = rtc_gpio_is_valid_gpio(...) at :2363 is always true; harmless, may stay as a defensive guard"
+    },
+    {
+      "id": "old-sdk-boundary",
+      "status": "PASS",
+      "detail": "without LP_I2C_SDA/SCL_IOMUX_PAD the fixed-pair half compiles out and a valid-but-wrong pair still reaches the driver and takes the old failure path; pre-existing behaviour, IDF 5.4.3+ defines both macros"
+    },
+    {
+      "id": "ci-build",
+      "status": "PASS",
+      "detail": "all 26 PR checks pass, including c5 (IDF 5.5.2), c6/p4 (IDF 5.4.3), esp32/s3 (5.1.6, 5.4.3, 6.0.2), pioarduino c5 3.3.0 / c6 3.1.3 / p4 3.1.3 and translation unit consistency; build only, not behaviour"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 / C6 hardware; the author's P4 result (GPIO11/9 works, GPIO18/19 returns invalid_arg) is quoted, not reproduced"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "no C5 profile; C6 and P4 profiles exist but the changed observable is LP IO pad routing, and the local emulator tree has no LP I2C / LP IO routing model, so a firmware run would only show the same invalid_arg as before the change"
+    },
+    {
+      "id": "build-local",
+      "status": "NOT RUN",
+      "detail": "no local Arduino / PlatformIO / ESP-IDF toolchain; the PR CI result is quoted"
+    },
+    {
+      "id": "c5-c6-fixed-pair-runtime",
+      "status": "NOT RUN",
+      "detail": "the fixed-pair rejection path (C5/C6) has no runtime evidence on either side; the review asks the author for one C5 or C6 check that the rejected pair keeps its IO MUX routing/level"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-430-meta.json",
+    "evidence/pr-430.diff",
+    "evidence/commits.txt",
+    "evidence/source-lines.txt",
+    "evidence/idf-pin-checks.txt",
+    "evidence/host-predicate/harness.cpp",
+    "evidence/host-predicate/predicate.inc",
+    "evidence/host-predicate/test-output.txt",
+    "evidence/ci-checks.txt",
+    "evidence/device-profiles.txt",
+    "evidence/emulator-lp-i2c-search.txt",
+    "evidence/reply-430.md"
+  ],
+  "notes": [
+    "PR left OPEN; one English comment; no close, no push, no changes to m5stack/M5GFX.",
+    "Reviewed against four ESP-IDF releases; the author claims 5.4.3 to 6.1.1 and Arduino-ESP32 SDKs, of which 5.4.4, 5.5.4, 6.0.3 and 6.1.1 were checked here.",
+    "Only C5, C6 and P4 have SOC_LP_I2C_SUPPORTED; C61/H4/H21 do not, so the author's three-chip scope covers the affected targets.",
+    "Optional simplification: the later lp_pads check at :2363 is now always true where LEND_PADS is active.",
+    "The P4 hardware numbers in the PR body are the author's, not reproduced here."
+  ]
+}

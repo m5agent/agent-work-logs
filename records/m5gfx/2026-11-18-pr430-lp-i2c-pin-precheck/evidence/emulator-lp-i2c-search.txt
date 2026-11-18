@@ -1,0 +1,10 @@
+Search for an LP I2C / LP IO model in the local esp-emulator checkout (2026-11-18).
+Repository root: the esp-emulator tree (paths redacted); .git, .work and build output excluded.
+
+$ grep -rIln 'lp_i2c\|LP_I2C' --exclude-dir=.git --exclude-dir=.work --exclude-dir=out .
+(no match: no LP I2C controller model in this tree)
+
+$ grep -rIln 'lp_io\|LP_IO' patches platform devices --exclude-dir=.work --exclude-dir=out
+
+QEMU sources are not vendored in this checkout (platform/qemu holds profiles.json only),
+so the peripheral model source could not be inspected further.

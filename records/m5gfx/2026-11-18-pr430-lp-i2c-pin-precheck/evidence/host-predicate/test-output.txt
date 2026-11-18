@@ -1,0 +1,49 @@
+Host check of lp_pads_accepted() extracted verbatim from M5GFX 5ed5a0d common.inl:1867-1875.
+Only rtc_gpio_is_valid_gpio() is stubbed; its accepted set is the exact 0..N LP-IO range from
+the IDF rtc_io_num_map for the chip/version (see idf-pin-checks.txt), and the fixed-pair
+macros are the exact values from that release's i2c_ll.h.
+
+### C6 / IDF 5.5.4
+$ clang++ -std=c++17 -Wall -Wextra -Werror -DLP_I2C_SDA_IOMUX_PAD=6 -DLP_I2C_SCL_IOMUX_PAD=7 harness.cpp -o out && ./out
+profile fixed pair 6/7
+fixed pair                   sda= 6 scl= 7 -> true  want true  OK
+swapped pair                 sda= 7 scl= 6 -> false want false OK
+LP IO, wrong pair            sda= 4 scl= 5 -> false want false OK
+one fixed, one wrong         sda= 6 scl= 5 -> false want false OK
+not LP IO                    sda=18 scl=19 -> false want false OK
+PASS (0 failure(s))
+
+### C5 / IDF 5.4.4
+$ clang++ -std=c++17 -Wall -Wextra -Werror -DLP_I2C_SDA_IOMUX_PAD=6 -DLP_I2C_SCL_IOMUX_PAD=7 harness.cpp -o out && ./out
+profile fixed pair 6/7
+fixed pair                   sda= 6 scl= 7 -> true  want true  OK
+swapped pair                 sda= 7 scl= 6 -> false want false OK
+LP IO, wrong pair            sda= 4 scl= 5 -> false want false OK
+one fixed, one wrong         sda= 6 scl= 5 -> false want false OK
+not LP IO                    sda=18 scl=19 -> false want false OK
+PASS (0 failure(s))
+
+### C5 / IDF 5.5.4
+$ clang++ -std=c++17 -Wall -Wextra -Werror -DLP_I2C_SDA_IOMUX_PAD=2 -DLP_I2C_SCL_IOMUX_PAD=3 harness.cpp -o out && ./out
+profile fixed pair 2/3
+fixed pair                   sda= 2 scl= 3 -> true  want true  OK
+old 5.4 pair                 sda= 6 scl= 7 -> false want false OK
+LP IO, wrong pair            sda= 6 scl= 5 -> false want false OK
+not LP IO                    sda=18 scl=19 -> false want false OK
+PASS (0 failure(s))
+
+### P4 / IDF 5.5.4
+$ clang++ -std=c++17 -Wall -Wextra -Werror -DLGFX_LP_GPIO_MATRIX harness.cpp -o out && ./out
+profile P4 (LP GPIO matrix, no fixed pair)
+pads used by the author      sda=11 scl= 9 -> true  want true  OK
+other LP pair                sda= 0 scl=15 -> true  want true  OK
+not LP IO                    sda=18 scl=19 -> false want false OK
+one not LP IO                sda=11 scl=19 -> false want false OK
+PASS (0 failure(s))
+
+### older IDF, no fixed-pair macro
+$ clang++ -std=c++17 -Wall -Wextra -Werror  harness.cpp -o out && ./out
+profile no fixed-pair macro
+any LP pair                  sda= 4 scl= 5 -> true  want true  OK
+not LP IO                    sda=18 scl=19 -> false want false OK
+PASS (0 failure(s))

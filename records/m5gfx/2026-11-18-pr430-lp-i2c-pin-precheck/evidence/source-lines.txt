@@ -1,0 +1,97 @@
+M5GFX PR #430 source excerpts
+repository: m5stack/M5GFX   commit: 5ed5a0df73eaafb4241d9048e517f94d32a27ab0   file: src/lgfx/v1/platforms/esp32/common.inl
+
+--- LP GPIO matrix auto-define (P4 only) ---
+  192  // lp_gpio_connect_*_signal(): routing an LP I2C port through the LP GPIO matrix (ESP32-P4)
+  193  #if defined ( SOC_LP_GPIO_MATRIX_SUPPORTED ) && SOC_LP_GPIO_MATRIX_SUPPORTED && __has_include(<driver/lp_io.h>)
+  194   #include <driver/lp_io.h>
+  195   #define LGFX_LP_GPIO_MATRIX 1
+  196  #endif
+
+--- LGFX_LP_I2C_LEND_PADS guard + new predicate ---
+ 1861  // Without driver/lp_io.h, a chip that routes LP I2C through the LP GPIO matrix keeps the pads
+ 1862  // on the LP side, as before.
+ 1863  #if LGFX_LP_I2C_NUM > 0 && SOC_RTCIO_INPUT_OUTPUT_SUPPORTED \
+ 1864   && (!(defined ( SOC_LP_GPIO_MATRIX_SUPPORTED ) && SOC_LP_GPIO_MATRIX_SUPPORTED) || defined ( LGFX_LP_GPIO_MATRIX ))
+ 1865   #define LGFX_LP_I2C_LEND_PADS 1
+ 1866      /// Whether the ESP-IDF driver accepts these pins for the low power port.
+ 1867      static bool lp_pads_accepted(const gpio_num_t sda, const gpio_num_t scl)
+ 1868      {
+ 1869        if (!rtc_gpio_is_valid_gpio(sda) || !rtc_gpio_is_valid_gpio(scl)) { return false; }
+ 1870   #if !defined ( LGFX_LP_GPIO_MATRIX ) && defined ( LP_I2C_SDA_IOMUX_PAD ) && defined ( LP_I2C_SCL_IOMUX_PAD )
+ 1871        // Without the LP GPIO matrix the controller reaches one fixed pair only.
+ 1872        if (sda != LP_I2C_SDA_IOMUX_PAD || scl != LP_I2C_SCL_IOMUX_PAD) { return false; }
+ 1873   #endif
+ 1874        return true;
+ 1875      }
+ 1876
+ 1877      /// Hands the pads of an open low power port back to the low power I2C controller after
+ 1878      /// i2c_stop() borrowed them. Same steps as the ESP-IDF LP pin setup, ordered like init():
+
+--- i2c::init(): pin range check and release() before the LP branch ---
+ 2283         || ((uint32_t)pin_sda >= GPIO_NUM_MAX))
+ 2284        {
+ 2285          return cpp::fail(error_t::invalid_arg);
+ 2286        }
+ 2287
+ 2288        if (i2c_context[i2c_port].initialized)
+ 2289        {
+ 2290          release(i2c_port);
+ 2291        }
+ 2292
+
+--- i2c::init(): LP branch - new pre-check is the first pad access ---
+ 2330          // touched here nor per transaction, which is why both sides must use the same pins.
+ 2331          i2c_context[i2c_port].save_reg(getDev(i2c_port));
+ 2332          return {};
+ 2333        }
+ 2334
+ 2335  #if defined ( LGFX_LP_I2C_LEND_PADS )
+ 2336        if (isLpPort(i2c_port))
+ 2337        {
+ 2338          // Refuse the pins the driver would refuse, before any pin is touched: otherwise the steps
+ 2339          // below set them to GPIO and move them to the LP side, and the failure path moves them back,
+ 2340          // which loses the routing they had (HP or LP).
+ 2341          if (!lp_pads_accepted(pin_sda, pin_scl)) { return cpp::fail(error_t::invalid_arg); }
+ 2342          // The routing of a previous run survives a reset and keeps the bus clearing below off
+ 2343          // the pads, while a peripheral cut off inside a byte may still hold SDA. The pads are
+ 2344          // routed to the controller again below. (see gpio::release_lp_pad)
+ 2345          gpio::release_lp_pad(pin_sda);
+ 2346          gpio::release_lp_pad(pin_scl);
+ 2347          pinMode(pin_sda, pin_mode_t::input_pullup);  // selects the GPIO function of the pads
+ 2348          pinMode(pin_scl, pin_mode_t::input_pullup);
+ 2349        }
+ 2350  #endif
+ 2351        i2c_stop(i2c_port);
+ 2352
+ 2353  #if LGFX_LP_I2C_NUM > 0
+ 2354        if (isLpPort(i2c_port))
+ 2355        {
+ 2356   #if SOC_RTCIO_INPUT_OUTPUT_SUPPORTED
+ 2357          // The driver enables the open-drain output before it hands the pad to the peripheral, so
+ 2358          // a low output latch (the reset default) pulls SDA low for a few microseconds. On the bus
+ 2359          // that is a START + STOP without an address, after which some MCU based slaves do not
+ 2360          // answer for about 0.6 ms. Raise the latches first, in open-drain mode so that SDA is not
+ 2361          // driven high. rtc_gpio_init() turns on the LP IO clock these registers need; SCL takes it
+ 2362          // because SDA must not become LP IO until they are set. A low on SCL alone is harmless.
+ 2363          const bool lp_pads = rtc_gpio_is_valid_gpio(pin_sda) && rtc_gpio_is_valid_gpio(pin_scl);
+ 2364          if (lp_pads)
+ 2365          {
+ 2366            rtc_gpio_init(pin_scl);
+ 2367            rtc_gpio_set_direction(pin_sda, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+ 2368            rtc_gpio_set_direction(pin_scl, RTC_GPIO_MODE_INPUT_OUTPUT_OD);
+ 2369            rtc_gpio_set_level(pin_sda, 1);
+ 2370            rtc_gpio_set_level(pin_scl, 1);
+ 2371            rtc_gpio_init(pin_sda);
+ 2372          }
+
+--- i2c::init(port, sda, scl) goes through setPins() ---
+ 2454      cpp::result<void, error_t> init(int i2c_port, int pin_sda, int pin_scl)
+ 2455      {
+ 2456        auto res = setPins(i2c_port, pin_sda, pin_scl);
+ 2457        if (res.has_value())
+ 2458        {
+ 2459          return init(i2c_port);
+ 2460        }
+ 2461        return res;
+ 2462      }

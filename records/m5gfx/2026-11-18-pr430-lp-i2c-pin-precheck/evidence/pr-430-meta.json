@@ -1,0 +1,11 @@
+{
+  "additions": 19,
+  "baseRefName": "develop",
+  "baseRefOid": "15d7651faa91c0ef5e0ae53f5ebf0f4db383b51c",
+  "body": "Follow-up to #428.\n\nFor a low power I2C port, `init()` set the pads to GPIO for the first bus clear and moved them to the LP side before the ESP-IDF driver checked them. The driver accepts only LP IO pins, and on the chips without an LP GPIO matrix (ESP32-C5 / C6) only the fixed pair `LP_I2C_SDA_IOMUX_PAD` / `LP_I2C_SCL_IOMUX_PAD`. With other pins it refused them afterwards, and its failure path moved them back to the HP side, so the routing those pins had before (HP or LP, for example another peripheral using them) was lost.\n\n`init()` now returns `invalid_arg` for such pins before any pin is touched. The pins the driver accepts are handled as before. The check mirrors the driver's: in the ESP-IDF releases from 5.4.3 to 6.1.1 and the Arduino-ESP32 SDKs checked, the fixed pair is 6 / 7 on ESP32-C6, and 6 / 7 (5.4.x) or 2 / 3 (5.5 and later) on ESP32-C5. On ESP32-P4 any LP IO pair is accepted, as by the driver.\n\n**Checked**\n\n- ESP32-P4, LP port on GPIO11 / GPIO9: reads, and the bus recovery checked in #428, work as before. Opening the LP port on GPIO18 / 19 (not LP IO) returns `invalid_arg`, and the internal bus still works afterwards.\n- Builds for the ESP-IDF and Arduino-ESP32 versions and chips of the CI still pass.\n- Fork CI passed.\n\nNot run on ESP32-C5 / C6 hardware.\n",
+  "changedFiles": 1,
+  "createdAt": "2026-11-18T07:19:43Z",
+  "deletions": 4,
+  "headRefOid": "5ed5a0df73eaafb4241d9048e517f94d32a27ab0",
+  "updatedAt": "2026-11-18T07:19:43Z"
+}

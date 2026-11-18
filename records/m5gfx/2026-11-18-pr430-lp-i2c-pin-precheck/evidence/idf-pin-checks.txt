@@ -1,0 +1,140 @@
+==============================================================================
+1. ESP-IDF s_lp_i2c_pins_config(): the driver checks M5GFX mirrors
+==============================================================================
+--- v5.4.4 components/esp_driver_i2c/i2c_common.c:366 ---
+ 366  static esp_err_t s_lp_i2c_pins_config(i2c_bus_handle_t handle)
+ 367  {
+ 368      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->sda_num), TAG, "LP I2C SDA GPIO invalid");
+ 369      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->scl_num), TAG, "LP I2C SCL GPIO invalid");
+ 370
+ 371      // reserve the GPIO output path, because we don't expect another peripheral to signal to the same GPIO
+ 372      uint64_t old_gpio_rsv_mask = esp_gpio_reserve(BIT64(handle->sda_num) | BIT64(handle->scl_num));
+ 373      // check if the GPIO is already used by others
+ 374      if (old_gpio_rsv_mask & BIT64(handle->sda_num)) {
+ 375          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->sda_num);
+ 376      }
+ 377      // check if the GPIO is already used by others
+ 378      if (old_gpio_rsv_mask & BIT64(handle->scl_num)) {
+ 379          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->scl_num);
+ 380      }
+ 381
+ 382  #if !SOC_LP_GPIO_MATRIX_SUPPORTED
+ 383      /* Verify that the SDA and SCL line belong to the LP IO Mux I2C function group */
+ 384      ESP_RETURN_ON_FALSE((handle->sda_num == LP_I2C_SDA_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SDA_PIN_ERR_LOG);
+ 385      ESP_RETURN_ON_FALSE((handle->scl_num == LP_I2C_SCL_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SCL_PIN_ERR_LOG);
+ 386  #endif /* !SOC_LP_GPIO_MATRIX_SUPPORTED */
+ 387      int port_id = handle->port_num;
+
+--- v5.5.4 components/esp_driver_i2c/i2c_common.c:367 ---
+ 367  static esp_err_t s_lp_i2c_pins_config(i2c_bus_handle_t handle)
+ 368  {
+ 369      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->sda_num), TAG, "LP I2C SDA GPIO invalid");
+ 370      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->scl_num), TAG, "LP I2C SCL GPIO invalid");
+ 371
+ 372      // reserve the GPIO output path, because we don't expect another peripheral to signal to the same GPIO
+ 373      uint64_t old_gpio_rsv_mask = esp_gpio_reserve(BIT64(handle->sda_num) | BIT64(handle->scl_num));
+ 374      // check if the GPIO is already used by others
+ 375      if (old_gpio_rsv_mask & BIT64(handle->sda_num)) {
+ 376          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->sda_num);
+ 377      }
+ 378      // check if the GPIO is already used by others
+ 379      if (old_gpio_rsv_mask & BIT64(handle->scl_num)) {
+ 380          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->scl_num);
+ 381      }
+ 382
+ 383  #if !SOC_LP_GPIO_MATRIX_SUPPORTED
+ 384      /* Verify that the SDA and SCL line belong to the LP IO Mux I2C function group */
+ 385      ESP_RETURN_ON_FALSE((handle->sda_num == LP_I2C_SDA_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SDA_PIN_ERR_LOG);
+ 386      ESP_RETURN_ON_FALSE((handle->scl_num == LP_I2C_SCL_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SCL_PIN_ERR_LOG);
+ 387  #endif /* !SOC_LP_GPIO_MATRIX_SUPPORTED */
+ 388      int port_id = handle->port_num;
+
+--- v6.0.3 components/esp_driver_i2c/i2c_common.c:358 ---
+ 358  static esp_err_t s_lp_i2c_pins_config(i2c_bus_handle_t handle)
+ 359  {
+ 360      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->sda_num), TAG, "LP I2C SDA GPIO invalid");
+ 361      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->scl_num), TAG, "LP I2C SCL GPIO invalid");
+ 362
+ 363      // reserve the GPIO output path, because we don't expect another peripheral to signal to the same GPIO
+ 364      uint64_t old_gpio_rsv_mask = esp_gpio_reserve(BIT64(handle->sda_num) | BIT64(handle->scl_num));
+ 365      // check if the GPIO is already used by others
+ 366      if (old_gpio_rsv_mask & BIT64(handle->sda_num)) {
+ 367          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->sda_num);
+ 368      }
+ 369      // check if the GPIO is already used by others
+ 370      if (old_gpio_rsv_mask & BIT64(handle->scl_num)) {
+ 371          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->scl_num);
+ 372      }
+ 373
+ 374  #if !SOC_LP_GPIO_MATRIX_SUPPORTED
+ 375      /* Verify that the SDA and SCL line belong to the LP IO Mux I2C function group */
+ 376      ESP_RETURN_ON_FALSE((handle->sda_num == LP_I2C_SDA_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SDA_PIN_ERR_LOG);
+ 377      ESP_RETURN_ON_FALSE((handle->scl_num == LP_I2C_SCL_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SCL_PIN_ERR_LOG);
+ 378  #endif /* !SOC_LP_GPIO_MATRIX_SUPPORTED */
+ 379      int port_id = handle->port_num;
+
+--- v6.1.1 components/esp_driver_i2c/i2c_common.c:358 ---
+ 358  static esp_err_t s_lp_i2c_pins_config(i2c_bus_handle_t handle)
+ 359  {
+ 360      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->sda_num), TAG, "LP I2C SDA GPIO invalid");
+ 361      ESP_RETURN_ON_ERROR(!rtc_gpio_is_valid_gpio(handle->scl_num), TAG, "LP I2C SCL GPIO invalid");
+ 362
+ 363      // reserve the GPIO output path, because we don't expect another peripheral to signal to the same GPIO
+ 364      uint64_t old_gpio_rsv_mask = esp_gpio_reserve(BIT64(handle->sda_num) | BIT64(handle->scl_num));
+ 365      // check if the GPIO is already used by others
+ 366      if (old_gpio_rsv_mask & BIT64(handle->sda_num)) {
+ 367          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->sda_num);
+ 368      }
+ 369      // check if the GPIO is already used by others
+ 370      if (old_gpio_rsv_mask & BIT64(handle->scl_num)) {
+ 371          ESP_LOGW(TAG, "GPIO %d is not usable, maybe conflict with others", handle->scl_num);
+ 372      }
+ 373
+ 374  #if !SOC_LP_GPIO_MATRIX_SUPPORTED
+ 375      /* Verify that the SDA and SCL line belong to the LP IO Mux I2C function group */
+ 376      ESP_RETURN_ON_FALSE((handle->sda_num == LP_I2C_SDA_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SDA_PIN_ERR_LOG);
+ 377      ESP_RETURN_ON_FALSE((handle->scl_num == LP_I2C_SCL_IOMUX_PAD), ESP_ERR_INVALID_ARG, TAG, LP_I2C_SCL_PIN_ERR_LOG);
+ 378  #endif /* !SOC_LP_GPIO_MATRIX_SUPPORTED */
+ 379      int port_id = handle->port_num;
+
+==============================================================================
+2. rtc_gpio_is_valid_gpio(): per-pin map, not a plain range
+==============================================================================
+--- v5.5.4 components/esp_driver_gpio/src/rtc_io.c:29 ---
+  29  bool rtc_gpio_is_valid_gpio(gpio_num_t gpio_num)
+  30  {
+  31  #if SOC_RTCIO_PIN_COUNT > 0
+  32      return (gpio_num < GPIO_PIN_COUNT && rtc_io_num_map[gpio_num] >= 0);
+  33  #else
+  34      return false;
+  35  #endif
+  36  }
+
+==============================================================================
+3. Fixed LP I2C pair per release (esp_hal_i2c / hal i2c_ll.h)
+==============================================================================
+v5.4.4   esp32c5  components/hal/esp32c5/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 6; #define LP_I2C_SCL_IOMUX_PAD 7
+v5.4.4   esp32c6  components/hal/esp32c6/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 6; #define LP_I2C_SCL_IOMUX_PAD 7
+v5.5.4   esp32c5  components/hal/esp32c5/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 2; #define LP_I2C_SCL_IOMUX_PAD 3
+v5.5.4   esp32c6  components/hal/esp32c6/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 6; #define LP_I2C_SCL_IOMUX_PAD 7
+v6.0.3   esp32c5  components/esp_hal_i2c/esp32c5/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 2; #define LP_I2C_SCL_IOMUX_PAD 3
+v6.0.3   esp32c6  components/esp_hal_i2c/esp32c6/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 6; #define LP_I2C_SCL_IOMUX_PAD 7
+v6.1.1   esp32c5  components/esp_hal_i2c/esp32c5/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 2; #define LP_I2C_SCL_IOMUX_PAD 3
+v6.1.1   esp32c6  components/esp_hal_i2c/esp32c6/include/hal/i2c_ll.h  ->  #define LP_I2C_SDA_IOMUX_PAD 6; #define LP_I2C_SCL_IOMUX_PAD 7
+
+==============================================================================
+4. rtc_io_num_map: which pins are LP (RTC) IO
+==============================================================================
+v5.5.4 esp32c6   components/soc/<chip>/rtc_io_periph.c: valid LP IO pins = [0, 1, 2, 3, 4, 5, 6, 7]
+v5.4.4 esp32c5   components/soc/<chip>/rtc_io_periph.c: valid LP IO pins = [0, 1, 2, 3, 4, 5, 6, 7]
+v5.5.4 esp32c5   components/soc/<chip>/rtc_io_periph.c: valid LP IO pins = [0, 1, 2, 3, 4, 5, 6]
+v5.5.4 esp32p4   components/soc/<chip>/rtc_io_periph.c: valid LP IO pins = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+==============================================================================
+5. SOC caps
+==============================================================================
+v5.5.4 esp32p4 soc_caps.h: SOC_LP_GPIO_MATRIX_SUPPORTED 1, SOC_LP_I2C_SUPPORTED 1
+v5.5.4 esp32c5/c6: SOC_LP_GPIO_MATRIX_SUPPORTED not defined, SOC_LP_I2C_SUPPORTED 1
+v5.5.4 esp32c61/h21: no SOC_LP_I2C_SUPPORTED -> only C5, C6, P4 enter this code
+
+Fetched from raw.githubusercontent.com at the tags above on 2026-11-18.
