@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "NC1020 原版双核 SPI 锁实序",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": null,
+    "pull_request": null,
+    "base_commit": "0e376abc91ddf8252eb565cb1b54204be8e1f089",
+    "authority_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "authority_receipt": "https://github.com/m5agent/m5stack-esp-emulator/blob/174c6d42048bf12f315e8b572948f17638d0bb77/tests/firmware/cardputer_k132_stock/nc1020-dual-core-spi-cas-summary.json",
+    "authority_receipt_sha256": "125ecf19a0019b470113193747bb1a9835ee2206b00ef084d99f955cd0b74f5f",
+    "upstream_code_reference": "https://github.com/espressif/esp-idf/commit/2521f3887a78559496c0d2599b0f368ddc24e02b"
+  },
+  "hardware": {
+    "board": "Cardputer K132",
+    "soc": "ESP32-S3",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Original NC1020",
+    "sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+    "restored_flash_sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+    "fat32_sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service_versions": [
+      "1.87.0",
+      "1.89.0"
+    ],
+    "traced_1_87": 3,
+    "untraced_1_89": 1,
+    "trace_abi": 4,
+    "inputs": 0,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "basis": "Native arm64 observer plugin built and ABI unloaded normally on two frozen binaries"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "basis": "Four exact state restores, one A1 interleaving matched by same lock/semaphore and later read"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "basis": "Older traced 1/3 full display, current untraced 1/1 full display, physical NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/nc1020-dual-core-cas-summary.json",
+      "sha256": "1bd6dbc62523c74100f3b6539e6f098d2766b0b54b0e256bd8ca084b8c5b78b7"
+    }
+  ],
+  "notes": [
+    "The ESP-IDF upstream code change is a source comparison. The proposed backport candidate is under separate validation."
+  ]
+}

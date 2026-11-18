@@ -26,3 +26,7 @@
 
 本次是留存状态恢复的 virtual-device validation。实体设备、浏览器、从空 Flash 导入、
 恢复后再次保存、原版来宾的 SPI 锁现场和 Burner 均为 `NOT RUN`。
+
+## 后续复验
+
+[NC1020 原版双核 SPI 锁交接](followups/2026-11-18-nc1020-dual-core-cas/README.md)

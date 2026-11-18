@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Nesso N1 原版 RFID 看门狗与横屏复验",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/216",
+    "pull_request": null,
+    "base_commit": "0e376abc91ddf8252eb565cb1b54204be8e1f089",
+    "authority_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "authority_receipt": "https://github.com/m5agent/m5stack-esp-emulator/blob/174c6d42048bf12f315e8b572948f17638d0bb77/tests/firmware/esp32c6_mwdt_clock/current-main-rfid-summary.json",
+    "authority_receipt_sha256": "96d7cf2de65ee52716358ca7593e8bf5f78b16c3bb1a53aaa2afa586a845199c"
+  },
+  "hardware": {
+    "board": "Nesso N1",
+    "soc": "ESP32-C6",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Original Meshtastic RFID Demo 2.7.21 Landscape",
+    "sha256": "1ea35725b85cf66745724daaaf8005ba1dcac522b2b10005671b7f7cf2cf86c8",
+    "normalized_flash_sha256": "a5450d7c2001b5ef04b8403b8e7c0ff2530d42d7cd11d794fd740c5056afed9e"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service_version": "1.89.0",
+    "backend": "native ESP32-C6 QEMU",
+    "trials": 2,
+    "untraced_seconds": 150.021,
+    "inputs": 0,
+    "rfid": "NOT RUN",
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "basis": "Both application partitions are byte-identical to the original in each trial"
+    },
+    {
+      "layer": "transport",
+      "status": "PARTIAL",
+      "basis": "Both PN532 UART reads returned normally by timeout; no peer and no RFID read"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "FAIL",
+      "basis": "One unrequested reset in 150.021 s; independent first-fault trace identifies IDLE watchdog"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "basis": "Offline same-frame orientation transform produced a byte-identical 240x135 welcome image"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/nesso-current-paired-summary.json",
+      "sha256": "241adcd1d2cec11234ffdfa3036643ccaf98fe289f33d6ea055c37d43565c47e"
+    }
+  ],
+  "notes": []
+}

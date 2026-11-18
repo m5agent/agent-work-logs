@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Core2 2048 原版四方向隔离复审",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": null,
+    "pull_request": null,
+    "base_commit": "0e376abc91ddf8252eb565cb1b54204be8e1f089",
+    "authority_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "authority_receipt": "https://github.com/m5agent/m5stack-esp-emulator/blob/174c6d42048bf12f315e8b572948f17638d0bb77/tests/firmware/evidence-2026-11-18-core2-2048-current-review.json",
+    "authority_receipt_sha256": "e9827d0184ec30554864b1de95dea439535ed41e879896070bb78e0cc1b7a59e",
+    "reviewer_project": "Firmware Reviewer"
+  },
+  "hardware": {
+    "board": "Core2",
+    "soc": "ESP32",
+    "physical": "NOT RUN",
+    "browser": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Original 2048 Game 1.0",
+    "sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "bytes": 505760,
+    "normalized_flash_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service_version": "1.89.0",
+    "reviewer_openapi_version": "0.21.0",
+    "reviewer_commit": "ecc8cfc3aadd5b2ae0289171784d2abac91bf855",
+    "mode": "dry-run",
+    "runtime": "native Xtensa QEMU",
+    "actions": 8,
+    "legal_moves_by_direction": {
+      "right": 2,
+      "left": 2,
+      "up": 2,
+      "down": 2
+    },
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "basis": "Exact normalized image and unchanged original application partition"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "basis": "Eight accepted drag inputs in one isolated lease"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "basis": "All eight before/after boards match independent directional slide, merge and single legal spawn"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PASS",
+      "basis": "Boot panel and eight changed actual frames; browser and physical NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/core2-2048-a2-summary.json",
+      "sha256": "93dadc381e03617c12523a2590fbb29601f5aaa8f4371755b9b4dd3706c9a271"
+    }
+  ],
+  "notes": []
+}

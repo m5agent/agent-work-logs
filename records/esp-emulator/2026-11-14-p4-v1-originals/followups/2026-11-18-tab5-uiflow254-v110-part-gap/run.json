@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 原版 UIFlow2 V2.5.4 在 esp-emu 1.1.0 的双 Part 对照",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/188",
+    "pull_request": null,
+    "base_commit": "0e376abc91ddf8252eb565cb1b54204be8e1f089",
+    "authority_commit": "174c6d42048bf12f315e8b572948f17638d0bb77",
+    "authority_receipt": "https://github.com/m5agent/m5stack-esp-emulator/blob/174c6d42048bf12f315e8b572948f17638d0bb77/docs/evidence/2026-11-18-tab5-stock-frame-comparison/uiflow254-v110-summary.json",
+    "authority_receipt_sha256": "da25ef921ef0ffc42727895dbf37a630efdda6a33be84a33627da66f6969ba56"
+  },
+  "hardware": {
+    "board": "Tab5",
+    "soc": "ESP32-P4",
+    "companion": "ESP32-C6",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Original UIFlow2 V2.5.4",
+    "sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "normalized_flash_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "device_service_version": "1.89.0",
+    "backend": "native esp-emu 1.1.0 and Device Service DSI path",
+    "inputs": 0,
+    "complete_original_ui": 0,
+    "trials": 2,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "flash",
+      "status": "PASS",
+      "basis": "Same original and normalized image identities in both isolated trials"
+    },
+    {
+      "layer": "transport",
+      "status": "FAIL",
+      "basis": "Encoded I2C Part request 8205 exceeded 1024-byte Part buffer in both trials"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "FAIL",
+      "basis": "Both native processes exited before a MicroPython banner"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "PARTIAL",
+      "basis": "One all-black DSI PNG, other trial no valid frame, physical NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/tab5-v110-comparison-summary.json",
+      "sha256": "c9e30e4f775e64b257eb0c624a9b0003b073436704ecf4078ec9a3fe9ed2ace5"
+    }
+  ],
+  "notes": []
+}

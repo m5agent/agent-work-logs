@@ -5,3 +5,7 @@
 - MP3 数字 PCM 达到固定频率判据，2048 通过四个方向各两次的独立棋盘校验
 
 [报告](report.md) · [运行清单](run.json) · [有界证据](evidence/README.md)
+
+## 后续复验
+
+[Core2 2048 原版 1.89 / Reviewer 0.21 四向](followups/2026-11-18-core2-2048-189-review021/README.md)

@@ -41,3 +41,7 @@
 
 物理硬件、RF、电气、光学、机械和浏览器 WASM 均 `NOT RUN`。没有提交 Burner。
 [最终检查摘要](evidence/pending-final-results-summary.json)记录平台套件结果和剩余边界；未执行的新一轮完整 68 例矩阵明确为 `NOT RUN`。所有已知应用失败均保持开放。
+
+## 后续复验
+
+[Nesso N1 #216 原版 RFID 看门狗与横屏](followups/2026-11-18-nesso-rfid-current-paired/README.md)
