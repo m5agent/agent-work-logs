@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | 原版 NC1020 留存状态恢复 | `PARTIAL`（存储 2/2，完整显示 1/2） | [查看](esp-emulator/2026-11-18-native-integrated-guest-validation/followups/2026-11-18-nc1020-restored-187/) |
+| 2026-11-18 | ESP Emulator | StickS3 RTC 定时及混合浅睡 | `PARTIAL`（最终原生定时、组合与复位通过，中间失败保留） | [查看](esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/followups/2026-11-18-sticks3-rtc-light-sleep-timer/) |
 | 2026-11-18 | ESP Emulator | StickS3 RTC GPIO 浅睡唤醒 | `PARTIAL`（GPIO 唤醒、拒绝与原版长按复验通过，保留旧运行时和未通过候选） | [查看](esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer 本地 HTTP POST 与 TCP 保存快照审核 | `PARTIAL`（本地正反对照成立，整单无画面） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-native-sta-streams-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Cardputer 原生 SPI SD 读响应与保存快照审核 | `PARTIAL`（原生响应与原版查词证据分别取证） | [查看](esp-emulator/2026-11-18-unit-pcm-sd-write-boot-timeline/followups/2026-11-18-cardputer-spi-sd-read-observation/) |

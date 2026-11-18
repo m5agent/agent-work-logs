@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "scope": "Restored state only, normal-timing offline native virtual-device validation",
+  "device": "Cardputer K132",
+  "source": {
+    "commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_api": "1.87.0",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba",
+    "qemu_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "esp32s3_rev0_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+  },
+  "artifacts": {
+    "original_firmware": {
+      "sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+      "bytes": 8388608
+    },
+    "retained_composed_flash": {
+      "sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+      "bytes": 8388608
+    },
+    "factory_partition": {
+      "offset": 65536,
+      "bytes": 1048576,
+      "sha256": "deb49672951545caa29a32d64f526c62af461bc6f8b40655f6b503dfa3e6fd5f",
+      "original_bytes_verified": true
+    },
+    "prior_cold_evidence_zip_sha256": "a5252ba00ff48649efffd9564699c2d4f2fab7782f8999693196928e6822266f",
+    "input_fat32": {
+      "sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "bytes": 67108864,
+      "unchanged_after_runs": true
+    },
+    "retained_state": {
+      "size": 99384,
+      "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+    }
+  },
+  "results": {
+    "storage": {
+      "passed": 2,
+      "runs": 2
+    },
+    "display": {
+      "passed": 1,
+      "partial": 1,
+      "runs": 2
+    }
+  },
+  "first_observed_divergence": {
+    "guest_cycles": 164524339,
+    "guest_rtc_hh_mm_ss": "11:14:55",
+    "A1_reported_draws_delta": 1,
+    "A2_reported_draws_delta": 0
+  },
+  "runs": [
+    {
+      "case": "A1",
+      "started_at": "2026-11-18T02:45:06.238250+00:00",
+      "storage_result": "PASS",
+      "display_result": "PASS",
+      "input_count": 0,
+      "terminal_fat_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "restored_state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "flash_partitions_sha256": {
+        "factory": "deb49672951545caa29a32d64f526c62af461bc6f8b40655f6b503dfa3e6fd5f",
+        "romdata": "25117767e4ec0dff24c5b6f6d535ee306a39fe10da30e5cf629fe562daf6ff8b",
+        "nordata": "532d72411d3b255376cfe76d6266b30208256acafc6621cceb4a77baaab80bc4"
+      },
+      "serial_markers": {
+        "romdata pre-filled": true,
+        "NOR in flash ready": true,
+        "LoadNC2k() returned": true,
+        "heartbeat:": true,
+        "state restored: /sd/nc1020.state": true
+      },
+      "no_cold_rom_import": true,
+      "restored_fields": "sleeping=0, lcdon=1, lcden=1, lcdbuffaddr=0x9c0 clk05=0x00",
+      "boot_count": 1,
+      "spi_sd_reads": {
+        "accepted_cmd17": 407,
+        "accepted_cmd18": 0,
+        "completed_blocks": 407
+      },
+      "heartbeat": {
+        "count": 73,
+        "first_cycles": 164524339,
+        "first_rtc_hh_mm_ss": "11:14:55",
+        "first_draws_delta": 1,
+        "last_cycles": 275335816,
+        "draw_events_reported": 1
+      },
+      "frames": [
+        {
+          "sample_seconds": 0.022,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "png_bytes": 499,
+          "size": [
+            240,
+            135
+          ],
+          "decoded_rgb_nonblack_pixels": 25112,
+          "distinct_colors": 3,
+          "authored_fit": 1.0
+        },
+        {
+          "sample_seconds": 2.016,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "png_bytes": 499,
+          "size": [
+            240,
+            135
+          ],
+          "decoded_rgb_nonblack_pixels": 25112,
+          "distinct_colors": 3,
+          "authored_fit": 1.0
+        },
+        {
+          "sample_seconds": 8.012,
+          "png_sha256": "1071a94985229558278c2784619cd833ee2b9187ef3156f4ec88db616f8c0174",
+          "png_bytes": 499,
+          "size": [
+            240,
+            135
+          ],
+          "decoded_rgb_nonblack_pixels": 25112,
+          "distinct_colors": 3,
+          "authored_fit": 1.0
+        }
+      ],
+      "serial_log": {
+        "sha256": "7a443eb8515299092a704960a94e1d86798d69042dd8dbe8446f73b775f859ee",
+        "bytes": 14015
+      },
+      "evidence_zip": {
+        "sha256": "05f800620203e9d1ecf90506071d675389c90c82361eb8eb1da7c1f606cb2ab1",
+        "bytes": 9513,
+        "crc_verified": true
+      },
+      "cleanup": {
+        "history_retained": true,
+        "leases_remaining": 0,
+        "flash_released": true,
+        "guest_exited": true,
+        "worker_exited": true
+      }
+    },
+    {
+      "case": "A2",
+      "started_at": "2026-11-18T02:45:54.851472+00:00",
+      "storage_result": "PASS",
+      "display_result": "PARTIAL",
+      "input_count": 0,
+      "terminal_fat_sha256": "d43c8bcc6ff3c93caccb52707a213feebdf9abf94bffd82447ac809389ea5a39",
+      "restored_state_file": {
+        "size": 99384,
+        "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+      },
+      "flash_partitions_sha256": {
+        "factory": "deb49672951545caa29a32d64f526c62af461bc6f8b40655f6b503dfa3e6fd5f",
+        "romdata": "25117767e4ec0dff24c5b6f6d535ee306a39fe10da30e5cf629fe562daf6ff8b",
+        "nordata": "532d72411d3b255376cfe76d6266b30208256acafc6621cceb4a77baaab80bc4"
+      },
+      "serial_markers": {
+        "romdata pre-filled": true,
+        "NOR in flash ready": true,
+        "LoadNC2k() returned": true,
+        "heartbeat:": true,
+        "state restored: /sd/nc1020.state": true
+      },
+      "no_cold_rom_import": true,
+      "restored_fields": "sleeping=0, lcdon=1, lcden=1, lcdbuffaddr=0x9c0 clk05=0x00",
+      "boot_count": 1,
+      "spi_sd_reads": {
+        "accepted_cmd17": 407,
+        "accepted_cmd18": 0,
+        "completed_blocks": 407
+      },
+      "heartbeat": {
+        "count": 70,
+        "first_cycles": 164524339,
+        "first_rtc_hh_mm_ss": "11:14:55",
+        "first_draws_delta": 0,
+        "last_cycles": 270718633,
+        "draw_events_reported": 0
+      },
+      "frames": [
+        {
+          "sample_seconds": 0.031,
+          "png_sha256": "0f28c4ae6384d5769231c7aac71f1a5db095270fddd44d971ced1942d54a91c1",
+          "png_bytes": 319,
+          "size": [
+            240,
+            135
+          ],
+          "decoded_rgb_nonblack_pixels": 120,
+          "distinct_colors": 2,
+          "authored_fit": 0
+        },
+        {
+          "sample_seconds": 2.017,
+          "png_sha256": "0f28c4ae6384d5769231c7aac71f1a5db095270fddd44d971ced1942d54a91c1",
+          "png_bytes": 319,
+          "size": [
+            240,
+            135
+          ],
+          "decoded_rgb_nonblack_pixels": 120,
+          "distinct_colors": 2,
+          "authored_fit": 0
+        },
+        {
+          "sample_seconds": 8.012,
+          "png_sha256": "0f28c4ae6384d5769231c7aac71f1a5db095270fddd44d971ced1942d54a91c1",
+          "png_bytes": 319,
+          "size": [
+            240,
+            135
+          ],
+          "decoded_rgb_nonblack_pixels": 120,
+          "distinct_colors": 2,
+          "authored_fit": 0
+        }
+      ],
+      "serial_log": {
+        "sha256": "8bb2d9a732b40aa4e8ecaabd7f5336f59887cdc3adc6ebe3c0e8a87179a16c65",
+        "bytes": 13703
+      },
+      "evidence_zip": {
+        "sha256": "3debd91ab7123bf9559a8f148f30338bda6ec1369309db95aee77f62e6ad0d76",
+        "bytes": 9246,
+        "crc_verified": true
+      },
+      "cleanup": {
+        "history_retained": true,
+        "leases_remaining": 0,
+        "flash_released": true,
+        "guest_exited": true,
+        "worker_exited": true
+      }
+    }
+  ],
+  "not_run": [
+    "Physical hardware",
+    "Browser-WASM",
+    "Fresh ROM import",
+    "Re-saving after restore",
+    "In-guest SPI lock attribution",
+    "Burner"
+  ]
+}

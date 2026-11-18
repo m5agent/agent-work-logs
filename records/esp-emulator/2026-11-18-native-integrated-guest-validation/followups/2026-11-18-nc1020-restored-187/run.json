@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "title": "Original NC1020 saved-state display recheck on Device Service 1.87.0",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "device_service_api": "1.87.0",
+    "openapi_sha256": "32c89158fb1c4ac97c2210fff027dc1f845e19961472c99ee1b3bb1e07a02aba"
+  },
+  "hardware": {
+    "device": "Cardputer K132",
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_firmware": {
+      "sha256": "d325ebaa890f4f996fdeec41f0c85c0c2e547787637ef7c325d0e89a84d3180f",
+      "bytes": 8388608
+    },
+    "retained_composed_flash": {
+      "sha256": "4d345b3c54bce553a28c7ee0f72e40e8784b072a0dbd236e2f805593f64e2b93",
+      "bytes": 8388608
+    },
+    "factory_partition": {
+      "offset": 65536,
+      "bytes": 1048576,
+      "sha256": "deb49672951545caa29a32d64f526c62af461bc6f8b40655f6b503dfa3e6fd5f",
+      "original_bytes_verified": true
+    },
+    "prior_cold_evidence_zip_sha256": "a5252ba00ff48649efffd9564699c2d4f2fab7782f8999693196928e6822266f",
+    "input_fat32": {
+      "sha256": "c2eb71d31098aa4666e204732a21b49e8c154bf2a7aa6de43f972048c7aa4bd9",
+      "bytes": 67108864,
+      "unchanged_after_runs": true
+    },
+    "retained_state": {
+      "size": 99384,
+      "sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383"
+    }
+  },
+  "execution": {
+    "environment": "Independent offline native QEMU Device Service runs at default guest timing",
+    "runtime_sha256": "ca3ace33a00982d49b99fd850f6a39f5021abab5f3b590bcbc4d0b33d0fb450d",
+    "esp32s3_rev0_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "cases": [
+      {
+        "label": "A1",
+        "started_at": "2026-11-18T02:45:06.238250+00:00",
+        "boots": 1,
+        "inputs": 0,
+        "evidence_zip_sha256": "05f800620203e9d1ecf90506071d675389c90c82361eb8eb1da7c1f606cb2ab1",
+        "retained_state_sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383",
+        "display": "PASS"
+      },
+      {
+        "label": "A2",
+        "started_at": "2026-11-18T02:45:54.851472+00:00",
+        "boots": 1,
+        "inputs": 0,
+        "evidence_zip_sha256": "3debd91ab7123bf9559a8f148f30338bda6ec1369309db95aee77f62e6ad0d76",
+        "retained_state_sha256": "ae2f7d120f3cec3ef8774477c3e10ae266fe24024910e7cbd456184b9807e383",
+        "display": "PARTIAL"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "Virtual-device import and boot of retained flash with same original factory bytes",
+      "level": "flash",
+      "status": "PASS",
+      "passed": 2,
+      "runs": 2
+    },
+    {
+      "name": "Complete SPI SD CMD17 read blocks",
+      "level": "transport",
+      "status": "PASS",
+      "read_blocks_by_run": [
+        407,
+        407
+      ]
+    },
+    {
+      "name": "Same retained FAT32 state readback and guest restore marker",
+      "level": "data_behavior",
+      "status": "PASS",
+      "passed": 2,
+      "runs": 2
+    },
+    {
+      "name": "Three same-run fresh authored-frame comparisons",
+      "level": "visual_or_physical",
+      "status": "PARTIAL",
+      "results": [
+        "PASS",
+        "PARTIAL"
+      ],
+      "first_observed_divergence": {
+        "guest_cycles": 164524339,
+        "guest_rtc_hh_mm_ss": "11:14:55",
+        "A1_reported_draws_delta": 1,
+        "A2_reported_draws_delta": 0
+      }
+    },
+    {
+      "name": "Same-stock-guest SPI lock root-cause capture",
+      "level": "review",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Evidence archive integrity and lease/process cleanup",
+      "level": "review",
+      "status": "PASS"
+    },
+    {
+      "name": "Hardware, browser-WASM, repeat save and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/nc1020-restored-187.summary.json",
+      "sha256": "a55f8312f0772751152d8b29af9338e8854a1672e0f13a0dd2a7db02bd1f9437",
+      "bytes": 8033
+    }
+  ],
+  "notes": [
+    "All test images are pre-existing. The prior cold and cross-service runs remain distinct.",
+    "The two runs show an early difference in reported drawing at equal app cycle. The cause remains open."
+  ]
+}

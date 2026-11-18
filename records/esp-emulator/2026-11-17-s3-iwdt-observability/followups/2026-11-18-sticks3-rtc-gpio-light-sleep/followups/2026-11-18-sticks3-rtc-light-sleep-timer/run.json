@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "StickS3 原生 RTC 定时与混合浅睡唤醒",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "d25eae8db848918e9cafebc127a53a0f989941d4",
+    "esp_idf_source": "735507283d5b2f9fb363a1901172dbd9e847945d",
+    "runtime_patch_commit": "4fc6ab3b9771cf4b9b42fa4dec6c40f7292302fb",
+    "device_service_http_reset_observed_source": "4daeb4092c67f1f59c6880e85aafa7bf6c460b97",
+    "published_commit": "210c7bcca94c9066f7b839778db25519376879df",
+    "device_service_version": "1.88.0",
+    "device_service_openapi_sha256": "87392481ae5228143d6c90a6235e9938b31cc892d86b89befa4c97d003ca7515",
+    "ci_attempts": [
+      {
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44225725219",
+        "source_commit": "e51347981119425789d7b248e983a3c45607b0df",
+        "status": "failure",
+        "check": "test_reset_revokes_old_loader_proof_without_reprobing_during_the_mutation",
+        "first_actual_qmp_command": "query-status",
+        "prior_expectation": "only system_reset"
+      },
+      {
+        "url": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44226763039",
+        "source_commit": "210c7bcca94c9066f7b839778db25519376879df",
+        "status": "success"
+      }
+    ],
+    "loader_contract_test_followup": {
+      "commit": "210c7bcca94c9066f7b839778db25519376879df",
+      "targeted_checks_passed": 28,
+      "emulator_and_api_bytes_unchanged_from": "e51347981119425789d7b248e983a3c45607b0df"
+    }
+  },
+  "hardware": {
+    "device": "StickS3",
+    "validation": "virtual-device"
+  },
+  "firmware": {
+    "timer_fixture": "14a157a59d8092a5a3c2d7f8eae0de45ff3da38cc7b5b66d6f0587e7a30be44c",
+    "mixed_fixture": "9b8c59f93cf00dfbd0df52ca7d0f5ca2a032c3677a7ebd53f3cd960952f82275",
+    "mixed_reject_fixture": "35c6bcc624e74c73b9b9f761da07af11f352319d2b4ca8f55ad769df7567c296",
+    "awake_compare_fixture": "b9f41f0a6910babe4668e6bde75ca2b3cdf65b516fa0df1ed8d62ffa9337ba34",
+    "original_watch": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8"
+  },
+  "execution": {
+    "source": "isolated native Device Service, offline",
+    "firmware_oracle": "same BIN per paired control",
+    "burner_submission": "NOT RUN"
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "first timer candidate, two consecutive timer wake cycles"
+    },
+    {
+      "layer": "device_response",
+      "status": "FAIL",
+      "scope": "frozen native timer baseline and second candidate timer elapsed lower bound"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "both candidates, awake comparator, mixed timer and GPIO wake and held-GPIO rejection with deadline replacement"
+    },
+    {
+      "layer": "device_response",
+      "status": "FAIL",
+      "scope": "both intermediate candidates, reset with old compare armed and restoration of new wake cycle"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "final candidate, three cold and one overlapping timer-only runs, mixed and rejected GPIO controls"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "final candidate, same-BIN awake comparator"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "final candidate, extended host pause then timer wake and reset/rearm with clean comparator"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "first and final candidates, stock All day watch GPIO regression"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "scope": "complete native device regression on exact final RTC runtime",
+      "groups": [
+        13,
+        17,
+        13,
+        14,
+        13
+      ],
+      "passed": 70
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "Device Service 1.88 normal HTTP reset, same QEMU and new boot/timer wake"
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "scope": "51 documentation checks and four repository validators"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "scope": "freeze-exact final release Device Service HTTP reset and rearmed wake, offline"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "scope": "browser WASM, physical timing, RF and power"
+    }
+  ],
+  "evidence": [
+    "evidence/awake-compare.summary.json",
+    "evidence/original-watch-timer-regression.summary.json",
+    "evidence/reset-rearm-candidates.summary.json",
+    "evidence/sdk-timer-and-combined.summary.json",
+    "evidence/device-service-timer-reset.summary.json",
+    "evidence/device-service-timer-reset-frozen-188.summary.json"
+  ]
+}
