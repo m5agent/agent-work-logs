@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "integration_validation",
+  "date": "2026-11-19",
+  "title": "Reviewer 0.31 首次常驻 Core2 独立快照验证",
+  "source": {
+    "reviewer_revision": "1151dda034d6ec43dcd8c5ef895ae79e009d088f",
+    "reviewer_api": "0.31.0",
+    "reviewer_openapi_sha256": "1c68f24bba53c12fd759125149502f120f930a42e3b1f19b78560d831ed7f110",
+    "device_service_revision": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "device_api": "1.99.3",
+    "device_openapi_sha256": "1cfe820f82c08d1295563b8f760ba1a39026661241c74170554e2732ab2cca18",
+    "linux_runtime_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "runner_sha256": "30ec221468f3ead75854a71482bce25c61825d74832a2d97a01f6ce2578006a2",
+    "worker_asset_manifest_sha256": "275b760a82f0f623ee183df68f48910130544e7112000dda6ed1ce267937c4e4"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Core2 2048 1.0",
+    "original_bytes": 505760,
+    "original_sha256": "41db3680f167565dc3ba06e30493e5bb9d6985ee2c5c9e7706940d003a1fdcaa",
+    "composed_sha256": "cd13c9bc7594ea3ad1994b1192d7bdd620ab1e6fa2adb2abf23152ebd80020d8",
+    "vendor_boot_context_sha256": "bfaa9203100a802de6a762217debc3cce269844e2caca7730155cd9bc02bf2d7"
+  },
+  "execution": {
+    "status": "PARTIAL",
+    "standard_child_terminal": "SIM_VERIFIED",
+    "requests_sent": 1,
+    "effective_moves": 7,
+    "directions": 4,
+    "planned_first_right": "NOT RUN / no_legal_move",
+    "observed_seconds": 60.05764720799999,
+    "samples": 13,
+    "parent_files": 377,
+    "parent_events": 126,
+    "evidence": "evidence/resident-core2-canary.summary.json",
+    "evidence_bytes": 13242,
+    "evidence_sha256": "01ab2a4cef2214e76057fb160377b6fe84140b2500ff192329ddbbc1a6c8ec57"
+  },
+  "checks": {
+    "single_authorized_snapshot_and_same_guest_binding": "PASS",
+    "same_original_boot_and_observation": "PASS",
+    "seven_effective_moves_all_four_directions": "PASS",
+    "strict_eight_effective_moves": "PARTIAL",
+    "initial_no_legal_right_move": "NOT RUN",
+    "parent_and_old_evidence_preserved": "PASS",
+    "session_stop_flash_release_and_later_payload_readback": "PASS",
+    "additional_snapshot_replay": "NOT RUN",
+    "other_boards_and_firmware": "NOT RUN",
+    "hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  }
+}
