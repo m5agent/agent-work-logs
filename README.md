@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | StickS3 原版手表连续两次浅睡唤醒 | PASS（同会话两次唤醒和再次浅睡） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/followups/2026-11-18-all-day-watch-199-regression/followups/2026-11-19-all-day-watch-two-gpio-wakes/) |
 | 2026-11-19 | ESP Emulator | Device Service 网关低位描述符修复的常驻切换 | PASS（两套设备服务、审核历史和 API 读回） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-19-linux-gateway-closed-stdin/followups/2026-11-19-resident-199-gateway-low-fd/) |
 | 2026-11-19 | ESP Emulator | Linux 审核网关关闭 stdin 后的原版回归 | PASS（保留基线故障，原版拒绝和播放均验收） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-19-linux-gateway-closed-stdin/) |
 | 2026-11-19 | ESP Emulator | StickS3 原版保存快照的热点配网复审 | PARTIAL（本地热点配网通过，云端未执行） | [查看](records/esp-emulator/2026-11-18-native-review-data-plane/followups/2026-11-19-sticks3-reviewer-199-original-portal/) |
