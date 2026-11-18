@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "Tab5 CarPlay original cold boot and GT911 input on Device Service 1.99.1",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/227",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "71d22d91da76b56e06f47cdfebe37cb6c4622f39",
+    "frozen_executable_source": "c9ec0f274579b78d87a4a301147f351e8b7a48fa",
+    "docs_only_main_readback": "9331d771e927b18ce913cf6132bf821df1269b60"
+  },
+  "hardware": {
+    "board": "Tab5 GT911 / ILI9881C",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "name": "CarPlay 1.0.0 original",
+    "bytes": 2221360,
+    "sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+    "normalized_flash_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b",
+    "app_partition_sha256": "6abf98807039706544f2f76c34851a9f50544f7852b60a89f129c47064315c8d"
+  },
+  "execution": {
+    "environment": "isolated macOS arm64 Device Service 1.99.1 and official esp-emu 1.1.0",
+    "validation_type": "virtual-device validation",
+    "evidence_saved_at": "2026-11-19T02:41:06+08:00",
+    "normal_api": true,
+    "matching_elf_attached": false,
+    "debugger_attached": false,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "exact input original and normal native cold boot",
+      "status": "PASS"
+    },
+    {
+      "name": "BSP passes and real 720×1280 application Home",
+      "status": "PASS"
+    },
+    {
+      "name": "both GT911 touch acknowledgements and original confirmation UI",
+      "status": "PASS"
+    },
+    {
+      "name": "bounded observation without board abort/reset loop",
+      "status": "PASS"
+    },
+    {
+      "name": "same-session evidence and release of owned Flash/process/lease",
+      "status": "PASS"
+    },
+    {
+      "name": "USB DWC enumeration, iPhone, alternate boards and physical validation",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/carplay-227-1991.summary.json"
+  ]
+}
