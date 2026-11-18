@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "title": "CardputerDict ADV 0.5.0 原版查词",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "publication_tier": "public",
+  "source": {
+    "device_service_executed": "929dbf749e4a8ecd6c469fce8aea44120febd03f",
+    "reviewer_baseline": "22569f70b6121f7eab263cf0364855b228497f79",
+    "reviewer_tested": "ce92d559873602963e036e8d804a322cf2428823",
+    "emulator_evidence_main": "72aa245ae0abfbf0b72af4edffa8df56fa8ab93a",
+    "emulator_ci": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44204118299"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "device": "Cardputer ADV",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "CardputerDict ADV 0.5.0",
+    "original_bytes": 2141568,
+    "original_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "normalized_flash_sha256": "f517333f24bcce896ff9f2a0e783102000ccfae2d2da212fafbe4e9a45c6598c"
+  },
+  "execution": {
+    "native_xtensa_sha256": "7e63fc223c6946ef8b2f44b1510d904aea6cc7c36c21324bb631490a3f325b24",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "native_cases": 3,
+    "retained_image_size": [
+      240,
+      135
+    ],
+    "final_cleanup_remaining_leases": 0,
+    "reviewer_baseline_api": "0.17.0",
+    "reviewer_api": "0.18.0",
+    "reviewer_tests_passed": 250,
+    "reviewer_tests_python": "3.9",
+    "reviewer_saved_snapshot_cases": 3
+  },
+  "checks": [
+    {
+      "name": "Same original complete dictionary lookup",
+      "status": "PASS",
+      "spi_cmd17": 128
+    },
+    {
+      "name": "Same original missing dictionary body",
+      "status": "PASS",
+      "spi_cmd17": 79
+    },
+    {
+      "name": "Same original without media",
+      "status": "PASS",
+      "spi_cmd17": 0
+    },
+    {
+      "name": "Reviewer 0.17 exact original complete dictionary offline baseline",
+      "status": "PASS",
+      "spi_cmd17": 136
+    },
+    {
+      "name": "Reviewer 0.18 exact fixed RGB region on complete board fixture",
+      "status": "PASS",
+      "spi_cmd17": 136
+    },
+    {
+      "name": "Reviewer 0.18 region controls detected and did not misreport as PASS",
+      "status": "PASS",
+      "missing_body_region": "FAIL",
+      "no_card_region": "FAIL"
+    },
+    {
+      "name": "Whole review and unverified network pronunciation",
+      "status": "PARTIAL",
+      "pronunciation": "NOT RUN"
+    },
+    {
+      "name": "Reviewer 0.18 HTML rendering for the three retained job reports",
+      "status": "PASS"
+    },
+    {
+      "name": "Physical hardware, browser WASM, and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/native-lookup.summary.json",
+      "sha256": "9cb302fef0e433d70310743cc42e77e1fe04baa6a0af754f6f0a56ccd852d781",
+      "bytes": 4801
+    },
+    {
+      "path": "evidence/reviewer017-offline-baseline.summary.json",
+      "bytes": 1759,
+      "sha256": "82c826cd85b31e798ea27ed527730eea7798f6e22e9b009cce09fd187922d9d3"
+    },
+    {
+      "path": "evidence/reviewer018-frame-region.summary.json",
+      "bytes": 8433,
+      "sha256": "2ecf8aa665ffe1bc219981025f60a8384272f0a9930a63c0ca327b323a9aa0de"
+    },
+    {
+      "path": "evidence/reviewer018-ui.summary.json",
+      "bytes": 627,
+      "sha256": "59cf37b84177bad81dda37e62040499d30a62d69962c1ce3b7bed7bed3f8036f"
+    }
+  ]
+}

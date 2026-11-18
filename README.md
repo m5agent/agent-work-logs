@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator / Firmware Reviewer | CardputerDict ADV 0.5.0 原版查词 | `PARTIAL`（查词及画面正反对照成立） | [查看](records/esp-emulator/2026-11-17-cardputerdict-tab5-coordinates/followups/2026-11-18-cardputerdict-adv050-lookup/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Dial 原版快转与选曲审核复核 | `PARTIAL`（原版快转漏选可复现，Reviewer 分层验收通过） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-dial-encoder-track-review/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 CarPlay 原版发布包复核 | `PARTIAL`（原版画面通过，整单交互保留） | [查看](records/esp-emulator/2026-11-18-tab5-identity-dial-media-review/followups/2026-11-18-tab5-release-package-readback/) |
 | 2026-11-18 | ESP Emulator / Firmware Reviewer | Tab5 原生取帧准入与 Reviewer 观察 | `PARTIAL`（CarPlay 出帧，UserDemo 缺帧与 ROM 复位已独立取证） | [查看](records/esp-emulator/2026-11-18-tab5-identity-dial-media-review/followups/2026-11-18-tab5-frame-admission/) |
