@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "follow_up",
+  "overall_status": "PASS",
+  "title": "本地文档 Skill 接入官方反馈",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "2e90f937be5baf69480a4b2095292bcd0935ef28",
+    "workflow_commit": "c4d5fdb345f16b35bb73a2c57eb8937c3f6eaa2f"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "aarch64 Linux virtual-machine fixture and official read-only discovery"
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "target": "官方 MCP 只读工具发现"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "target": "虚拟设备验证。隔离模拟端的提交、成功回执、负例和单次发送"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "target": "本机安装及分发包 4,390 个文件回读一致"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "target": "生产反馈写入"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "target": "M5Stack 实机或固件"
+    }
+  ],
+  "evidence": [
+    "evidence/official-feedback-summary.json"
+  ]
+}
