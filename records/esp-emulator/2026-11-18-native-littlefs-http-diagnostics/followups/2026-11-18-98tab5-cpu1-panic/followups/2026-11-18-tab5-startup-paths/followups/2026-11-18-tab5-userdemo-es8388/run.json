@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "firmware-virtual-device-diagnosis",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 UserDemo V0.4 codec assertion and panic stall",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "57d397462e661e608e7c3ae2a878e80527d08e84",
+    "userdemo_release_commit": "68b19d37fbf9cefd5f256992f5dca34794c62ab4",
+    "rebuild_sdk_commit": "f5c3654a1c2d2a01f7f67def7a0dc48e691f63c0"
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "virtual_device": "Tab5 ESP32-P4 with ESP32-C6 companion"
+  },
+  "firmware": {
+    "original": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+    "baseline": "2d0afc3ba43661e818b0b202f393a3188c0fd80cb253388cc9457678ee629537",
+    "upstream-wfi": "bb2c22921fe88111448f8d684d02f649a9d168f94488ba76ec609d610083c017"
+  },
+  "execution": {
+    "environment": "Isolated native Device Service 1.90.0 / esp-emu 1.1.0",
+    "mode": "virtual-device validation",
+    "sessions": 6,
+    "openapi_sha256": "28e57b04345a9bf6b5e65b1cb8e0a44d11bdb734d15a69581ebd6e60ad78cb55",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828"
+  },
+  "checks": [
+    {
+      "stage": "build",
+      "status": "PASS",
+      "detail": "Identical source tree, dependencies, base SDK, partitions, build settings and bootloader"
+    },
+    {
+      "stage": "data_behavior",
+      "status": "PASS",
+      "detail": "Both matching source rebuilds reached the same ES8388 assertion, and the unpatched panic stalls polling a zero status bit"
+    },
+    {
+      "stage": "visual_or_physical",
+      "status": "FAIL",
+      "detail": "Zero complete frames in standard native sessions"
+    },
+    {
+      "stage": "cleanup",
+      "status": "PASS",
+      "detail": "Evidence, immutable firmware, released flash and zero leases verified"
+    },
+    {
+      "stage": "hardware_browser_burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/userdemo-wfi-source-ab-summary.json",
+      "sha256": "80198545ff9aceb6ddefee67a61a428b10c7aac90014cf22a9a879328ef35763"
+    }
+  ],
+  "notes": [
+    "Source-built applications are independent diagnostics. Stock BIN identity remains unchanged."
+  ]
+}
