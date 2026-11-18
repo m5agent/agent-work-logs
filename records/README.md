@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | AtomS3 Spirit Level 原版 Reviewer 0.29.1 按键送达 | PARTIAL（标准路径按键送达验证） | [查看](esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/followups/2026-11-19-atoms3-235-reviewer-029-standard/followups/2026-11-19-atoms3-spirit-reviewer-0291-typed-delivery/) |
 | 2026-11-19 | ESP Emulator | AtomS3 Spirit Level 原版 GPIO41 按压复验 | PARTIAL（GPIO41 已验证，标准时长待复验） | [查看](esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/followups/2026-11-19-atoms3-235-reviewer-029-standard/followups/2026-11-19-atoms3-spirit-gpio41-hold-timing/) |
 | 2026-11-19 | ESP Emulator | AtomS3 原生 QEMU 常驻切换回读 | PASS（两角色常驻回读） | [查看](esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/followups/2026-11-19-atoms3-235-native-resident/) |
 | 2026-11-19 | ESP Emulator | AtomS3 Spirit Level 原版 Reviewer 0.29 复验 | PARTIAL（应用就绪通过，互动待复核） | [查看](esp-emulator/2026-11-18-atoms3-m5unified-display-init/followups/2026-11-19-atoms3-235-f12-paired-baseline/followups/2026-11-19-atoms3-235-native-gpio-candidate/followups/2026-11-19-atoms3-235-reviewer-029-standard/) |
