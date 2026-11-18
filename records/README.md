@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | Tab5 #226 Maker Fighter 原版 USB Host 安装与事件等待 | PARTIAL（Host 安装和客户端注册通过；根端口上电、无连接，枚举待验证） | [查看](esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-maker-fighter-dwc-self-check/followups/2026-11-18-maker-fighter-host-setup/) |
 | 2026-11-18 | ESP Emulator | Tab5 #226 原版 Maker Fighter USB 自检 | PARTIAL（1.1.0 原版 DWC 核心 ID 自检通过，出帧和 USB Host 枚举仍待验证） | [查看](esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-maker-fighter-dwc-self-check/) |
 | 2026-11-18 | ESP Emulator | Tab5 UserDemo 录音会话复位与停机 | PASS（WAV 更换、租约保留、停机 PCM 回读） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-userdemo-es8388/followups/2026-11-18-tab5-userdemo-i2c-routing/followups/2026-11-18-tab5-userdemo-i2s1-playback/followups/2026-11-18-tab5-userdemo-device-service-192/followups/2026-11-18-tab5-userdemo-speaker-reset/) |
 | 2026-11-18 | ESP Emulator | M5TabOS 原版保存快照复审的触摸对照 | PARTIAL（显式欢迎页触摸 PASS，网络未运行） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-18-tabos-reviewer-touch-plan/) |

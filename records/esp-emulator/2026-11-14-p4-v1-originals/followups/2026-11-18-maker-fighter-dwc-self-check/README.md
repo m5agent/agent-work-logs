@@ -8,3 +8,7 @@
 同一原版 BIN 的无调试试验在 42.002 秒内串口仅记录一次 ROM 启动，且无有效帧。独立的只读 PC 样本在原应用代码中观察到半字读写循环。第三次冷启动在原固件自检通过分支读得现场寄存器值 `0x4f54400a`，对应原指令从 `0x50000040` 读取的 DWC `GSNPSID`。历史断言已在这次复验中越过。USB Host 安装返回值、HID/MSC 枚举、端点传输和原应用画面仍待验收。
 
 [详细报告和复现步骤](report.md) · [结构化结果](run.json) · [有界记录](evidence/same-bin-usb-summary.json) · [v1.0.0 复验](../../README.md)
+
+## 后续复验
+
+[原版 USB Host 安装、事件等待和根端口状态](followups/2026-11-18-maker-fighter-host-setup/README.md)
