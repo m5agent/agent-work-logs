@@ -1,0 +1,170 @@
+{
+  "status": "PASS_LEGACY_ROUTE_WITH_REPRODUCED_GT911_UIFLOW_DISPLAY_GAP",
+  "validation": "virtual-device validation",
+  "scope": "Candidate UserDemo codec configuration preserves legacy GT911 selection, CarPlay frame and action, and known UIFlow2 GT911 display boundary.",
+  "cases": {
+    "carplay": {
+      "status": "PASS_EXACT_CARPLAY_FRAME_AND_TOUCH",
+      "case": "carplay",
+      "validation": "virtual-device validation",
+      "production_source_base": "c7e25be5410d3a9968107bc7a0cab5acb9d708bc",
+      "production_source_files_sha256": {
+        "platform/tools/serve.py": "71fec02eaa4597de86d993339fb34f46f57c4aaeca299d7c5c4f67787c4a64d1",
+        "platform/tools/device_service.py": "0ef13255231f9f626cc73c9f0b296ab752fe2298a8f669baa19a56c912d8fd32",
+        "platform/tools/device_service_audio.py": "b9b53e29a6ee5405debc17a0c5df9dc0f7523b159962d24178998709d5da7abc",
+        "platform/tools/device_service_tab5_dsi.py": "1fda23cb5550e0a92e6d19ce0787b0453dba9cadf3c5e7c9bc8ed921e9f6cce2",
+        "docs/device-service.openapi.yaml": "803e0eaf380c8a34ce34e208d7272c0c0fc7a88cb19db46b3e07c6bf74041bac",
+        "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321"
+      },
+      "original_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+      "normalized_sha256": "ff578ccc3f4f93a6f431eff0809b1e46bfb3951101c81bc676774d3f3a36387b",
+      "native_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "legacy_gt911_part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "configured_userdemo_codec_part_sha256": "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270",
+      "configured_userdemo_norm_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9",
+      "board": "gt911-ili9881c",
+      "isolated_stock_uiflow_gt911_override": false,
+      "physical_hardware": "NOT RUN",
+      "burner": "NOT SUBMITTED",
+      "input_count": 1,
+      "actual_staged_gt911_part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "non_userdemo_no_i2s_flags": true,
+      "no_session_audio_capture_identity": true,
+      "source_application_bytes_unchanged": true,
+      "network_configuration_absent": true,
+      "pcm_route_http": 409,
+      "pcm_route_error": "audio_unsupported",
+      "touch": {
+        "raw": [
+          640,
+          160
+        ],
+        "controller_reports": {
+          "reports": 13,
+          "acknowledged": 13
+        },
+        "before_frame_sha256": "b9caf8f325d9b9ec1ee5d7ae3b49f3c709d584b0a5dce54d2ffd2fc62708f767",
+        "after_frame_sha256": "bf357f04e40dc9cb76f7e34df7b94a45a89f97da7df26f813fac35577103eed3"
+      },
+      "observed_seconds": 2.9313549159560353,
+      "frames": [
+        {
+          "frame_sha256": "b9caf8f325d9b9ec1ee5d7ae3b49f3c709d584b0a5dce54d2ffd2fc62708f767",
+          "width": 720,
+          "height": 1280,
+          "nonblack_pixels": 921600,
+          "samples": 1
+        },
+        {
+          "frame_sha256": "9b32f040ac6dca34dada545a3e75d0efb1e70e8f10d0194d6107e681d11a2fea",
+          "width": 720,
+          "height": 1280,
+          "nonblack_pixels": 921600,
+          "samples": 1
+        },
+        {
+          "frame_sha256": "bf357f04e40dc9cb76f7e34df7b94a45a89f97da7df26f813fac35577103eed3",
+          "width": 720,
+          "height": 1280,
+          "nonblack_pixels": 921600,
+          "samples": 1
+        }
+      ],
+      "frame_codes": {
+        "tab5_dsi_frame_unavailable": 2
+      },
+      "evidence_zip_sha256": "c00d74d14fc4c361140806e5ec8aa7a586e54c89c1086599a484505b21926e2a",
+      "zip_members_verified": 5,
+      "same_session_firmware_zip_bound": true,
+      "no_pcm_zip_member": true,
+      "uart_guru_meditation": 0,
+      "uart_dsi_zero_read_events": 0,
+      "uart_part_response_errors": 0,
+      "cleaned_guest_and_released_flash": true,
+      "active_leases_after_cleanup": 0,
+      "source_files_unchanged_during_replay": true,
+      "owned_service_exited": true,
+      "checked_uart_sha256": "171d673458bbf4204ffbc41a1cb7f7e98cfed781f6b73ec0e1bdcd5e0d9757d3",
+      "checked_uart_bytes": 4151,
+      "checked_uart_boot_banner_count": 1,
+      "checked_uart_micropython_markers": 0,
+      "checked_stderr_dsi_read_markers": 1,
+      "checked_stderr_part_response_markers": 0,
+      "independent_receipt_sha256": "e19d4a866cc729f3627f1074e214907adebf2ca0d578c2a63acf6dde329cf7c3",
+      "checked_stderr_dsi_reads_answered_zero": 1
+    },
+    "uiflow-gt911": {
+      "status": "KNOWN_GT911_UIFLOW_DISPLAY_GAP_REPRODUCED",
+      "case": "uiflow-gt911",
+      "validation": "virtual-device validation",
+      "production_source_base": "c7e25be5410d3a9968107bc7a0cab5acb9d708bc",
+      "production_source_files_sha256": {
+        "platform/tools/serve.py": "71fec02eaa4597de86d993339fb34f46f57c4aaeca299d7c5c4f67787c4a64d1",
+        "platform/tools/device_service.py": "0ef13255231f9f626cc73c9f0b296ab752fe2298a8f669baa19a56c912d8fd32",
+        "platform/tools/device_service_audio.py": "b9b53e29a6ee5405debc17a0c5df9dc0f7523b159962d24178998709d5da7abc",
+        "platform/tools/device_service_tab5_dsi.py": "1fda23cb5550e0a92e6d19ce0787b0453dba9cadf3c5e7c9bc8ed921e9f6cce2",
+        "docs/device-service.openapi.yaml": "803e0eaf380c8a34ce34e208d7272c0c0fc7a88cb19db46b3e07c6bf74041bac",
+        "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321"
+      },
+      "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+      "native_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+      "legacy_gt911_part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "configured_userdemo_codec_part_sha256": "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270",
+      "configured_userdemo_norm_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9",
+      "board": "gt911-ili9881c",
+      "isolated_stock_uiflow_gt911_override": true,
+      "physical_hardware": "NOT RUN",
+      "burner": "NOT SUBMITTED",
+      "input_count": 0,
+      "actual_staged_gt911_part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "non_userdemo_no_i2s_flags": true,
+      "no_session_audio_capture_identity": true,
+      "source_application_bytes_unchanged": true,
+      "network_configuration_absent": true,
+      "pcm_route_http": 409,
+      "pcm_route_error": "audio_unsupported",
+      "observed_seconds": 70.23635708307847,
+      "frames": [],
+      "frame_codes": {
+        "tab5_dsi_frame_unavailable": 35
+      },
+      "evidence_zip_sha256": "3a8f39d12a1a0c3bd1bd3ab4140aace3ca3c8b49e2c065061b945fe4ea64d8e6",
+      "zip_members_verified": 4,
+      "same_session_firmware_zip_bound": true,
+      "no_pcm_zip_member": true,
+      "uart_guru_meditation": 0,
+      "uart_dsi_zero_read_events": 0,
+      "uart_part_response_errors": 0,
+      "cleaned_guest_and_released_flash": true,
+      "active_leases_after_cleanup": 0,
+      "source_files_unchanged_during_replay": true,
+      "owned_service_exited": true,
+      "checked_uart_sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+      "checked_uart_bytes": 406,
+      "checked_uart_boot_banner_count": 1,
+      "checked_uart_micropython_markers": 0,
+      "checked_stderr_dsi_read_markers": 1,
+      "checked_stderr_part_response_markers": 0,
+      "independent_receipt_sha256": "2aaebfb3620ab475433ac411f9298a84208f4f8810e7a383c440fc767d244464",
+      "checked_stderr_dsi_reads_answered_zero": 1
+    }
+  },
+  "prior_uiflow_gt911_same_part_control": {
+    "result": "PARTIAL_BMI270_INITIALIZED_PANEL_IDENTIFICATION_GAP",
+    "observed_seconds": 18.01,
+    "valid_nonblack_frames": 0,
+    "frame_errors": {
+      "session_not_running": 1,
+      "tab5_dsi_frame_unavailable": 14
+    },
+    "part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+    "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7",
+    "serial_sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e"
+  },
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED",
+  "uiflow_gt911_serial_byte_equal_to_previous_same_part_control": true,
+  "display_warning_scope": "CarPlay and GT911 UIFlow2 each recorded one zero-return DSI read. The comparison establishes the prior UIFlow2 no-frame boundary."
+}
