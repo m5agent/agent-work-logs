@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | M5TabOS 原版保存快照复审的触摸对照 | PARTIAL（显式欢迎页触摸 PASS，网络未运行） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-18-tabos-reviewer-touch-plan/) |
 | 2026-11-18 | ESP Emulator | Tab5 保存快照复审的 SDMMC 写入 | PASS（触摸写入、原版无写入、旧 API 保守处理、复位介质身份） | [查看](records/esp-emulator/2026-11-18-esp-emu-v110-p4-sdmmc/followups/2026-11-18-tab5-sdmmc-action-review/) |
 | 2026-11-18 | ESP Emulator | M5TabOS 原版在最终 Device Service 1.91 的启动与触摸 | PASS（精确板型覆盖、欢迎页触摸翻页和回执） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-18-tabos-st7123-frozen-191/) |
 | 2026-11-18 | ESP Emulator | M5TabOS 原版的 Tab5 板型、出帧与触摸 | PASS（ST7123 欢迎画面和单次原生触摸，GT911 对照仍无帧） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/) |

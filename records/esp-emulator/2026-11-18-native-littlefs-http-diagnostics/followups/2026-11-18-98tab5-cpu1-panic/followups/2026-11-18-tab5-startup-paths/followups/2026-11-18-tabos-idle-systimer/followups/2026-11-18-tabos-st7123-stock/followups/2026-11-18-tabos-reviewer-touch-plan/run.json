@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "M5TabOS 0.9.1 saved-snapshot default and explicit touch",
+  "source": {
+    "device_source": "c7e25be5410d3a9968107bc7a0cab5acb9d708bc",
+    "reviewer_source": "2246e07ea10b6963e2c0096d1d2ba6e4187e3f47"
+  },
+  "hardware": {
+    "virtual_panel": "ST7123 720x1280",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "firmware": "M5TabOS 0.9.1",
+    "original_firmware_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_firmware_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec"
+  },
+  "execution": {
+    "environment": "isolated saved-snapshot Reviewer and Device Service",
+    "independent_cases": 2,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "layer": "visual_or_physical",
+      "check": "native DSI boot frame for both runs",
+      "status": "PASS"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "default touch and drag without visible transition",
+      "status": "PARTIAL"
+    },
+    {
+      "layer": "data_behavior",
+      "check": "exact explicit welcome-next touch and before/after RGB title regions",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "check": "network data plane",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/paired-reviewer-touch.summary.json"
+  ]
+}

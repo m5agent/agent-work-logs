@@ -1,0 +1,189 @@
+{
+  "status": "PARTIAL",
+  "validation": "virtual-device validation",
+  "date": "2026-11-18",
+  "source_identity": {
+    "firmware": "M5TabOS 0.9.1",
+    "original_firmware_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_firmware_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec",
+    "device_source": "c7e25be5410d3a9968107bc7a0cab5acb9d708bc",
+    "reviewer_source": "2246e07ea10b6963e2c0096d1d2ba6e4187e3f47",
+    "device_openapi": "1.91.0",
+    "reviewer_openapi": "0.22.0",
+    "device_openapi_sha256": "56292f3394f0948fce598686ae0831df6da2ae29a764af07da8926458b7dfc48",
+    "reviewer_openapi_sha256": "29fd294e77134869adf50806b54ca79c0f2d5ad6e2b8aa4f62c7d787a2c8617f",
+    "dsi_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "st7123_part_sha256": "6ecac188e0ebd7659b6af627c3f1fcf9c5143e2f36b5f9a4b8cb187468de14f3",
+    "native_board": "st7123",
+    "controller": "esp-emu-st7123"
+  },
+  "authentic_saved_snapshot_inputs": true,
+  "controlled_difference": "ordinary default inputs vs one preregistered valid native-panel frame-gated step",
+  "reviewer_retry_route": "POST /api/reviews/{id}/retry",
+  "device_touch_route": "POST /api/v1/sessions/{id}/input",
+  "device_fresh_panel_frame_route": "GET /api/v1/sessions/{id}/frame.png?orient=panel&max_age_ms=0",
+  "cases": {
+    "default": {
+      "reviewer_status": "manual_review",
+      "review_lane": "SIM_PARTIAL",
+      "reviewer_error_code": "E_INTERACTION_CLAIM_PARTIAL",
+      "frame": {
+        "capture_backend": "esp-emu-dsi",
+        "width": 720,
+        "height": 1280,
+        "nonblack_pixels": 232553,
+        "unique_colors": 356,
+        "sha256": "f1d8e382782fb44cdc22c81582e4276c1aa09a4bf4a271640592200c0dfc5f7c"
+      },
+      "zip_members_verified": 6,
+      "guest_serial": {
+        "i2c_part_message_count": 0,
+        "rom_banner_count": 1,
+        "panic_count": 0,
+        "m5tabos_marker_count": 1,
+        "st7123_marker_count": 0
+      },
+      "evidence_zip_sha256": "670a310c3ef78e113f82b1a612cefa782af45dc9ead92cd5d15190a85a4c942b",
+      "final_device_state": "stopped",
+      "flash_released": true,
+      "lease_count_after_cleanup": 0,
+      "validation_variant": "default",
+      "observation_seconds": 60.013187292,
+      "observation_samples": 13,
+      "touch_status": "PARTIAL",
+      "original_local_receipt_sha256": "7e57a0b891f8ec3f177d3c6b9a0cf683432f234d8af2becb1137f3969b26bc17",
+      "actual_inputs": [
+        {
+          "name": "touch_center",
+          "input": {
+            "kind": "touch",
+            "x": 360,
+            "y": 640,
+            "settle_seconds": 0.9
+          },
+          "accepted": true,
+          "frame_changed": false,
+          "native_controller_raw": [
+            360,
+            640
+          ],
+          "controller": "st7123"
+        },
+        {
+          "name": "drag_left",
+          "input": {
+            "kind": "drag",
+            "x1": 540,
+            "y1": 640,
+            "x2": 180,
+            "y2": 640,
+            "settle_seconds": 0.9
+          },
+          "accepted": true,
+          "frame_changed": false,
+          "native_controller_raw": [
+            540,
+            640,
+            180,
+            640
+          ],
+          "controller": "st7123"
+        }
+      ]
+    },
+    "authored": {
+      "reviewer_status": "manual_review",
+      "review_lane": "SIM_PARTIAL",
+      "reviewer_error_code": "E_NETWORK_PARTIAL",
+      "frame": {
+        "capture_backend": "esp-emu-dsi",
+        "width": 720,
+        "height": 1280,
+        "nonblack_pixels": 183521,
+        "unique_colors": 420,
+        "sha256": "afe3a4b0870cce295a549c9bdb1bb3f17ac456d5d7907926aba04b4cfafb6a9a"
+      },
+      "zip_members_verified": 6,
+      "guest_serial": {
+        "i2c_part_message_count": 0,
+        "rom_banner_count": 1,
+        "panic_count": 0,
+        "m5tabos_marker_count": 1,
+        "st7123_marker_count": 0
+      },
+      "evidence_zip_sha256": "d2b2a64c64ffaa6c9031f482dc345edaa28bc7657dc1adef7cf7d40a15aeed5c",
+      "final_device_state": "stopped",
+      "flash_released": true,
+      "lease_count_after_cleanup": 0,
+      "validation_variant": "authored",
+      "observation_seconds": 60.016068583999996,
+      "observation_samples": 13,
+      "touch_status": "PASS",
+      "original_local_receipt_sha256": "f60ba081a4e62e02f7386d90510ad353804c53d15b7d224975f8c79e2b04d5bc",
+      "actual_inputs": [
+        {
+          "name": "touch_welcome_next",
+          "input": {
+            "kind": "touch",
+            "x": 530,
+            "y": 1147
+          },
+          "accepted": true,
+          "frame_changed": true,
+          "native_controller_raw": [
+            530,
+            1147
+          ],
+          "controller": "st7123"
+        }
+      ],
+      "authored_touch_plan": {
+        "frame_size": [
+          720,
+          1280
+        ],
+        "button_bindings": {},
+        "steps": [
+          {
+            "name": "touch_welcome_next",
+            "x": 530,
+            "y": 1147,
+            "region": [
+              32,
+              104,
+              656,
+              142
+            ],
+            "before_sha256": "25ad6d2af4dc1f2fdb044d300232e3f6c5247aee192e1769d48f3c66b83719d0",
+            "after_sha256": "d37c458b6018c36075503965ce78ce511124474d1b40dbebcfb2a2c2c466dc86",
+            "timeout_seconds": 12
+          }
+        ]
+      },
+      "exact_visual_assertion": {
+        "semantic_status": "PASS",
+        "accepted": true,
+        "frame_changed": true,
+        "before_region_sha256": "25ad6d2af4dc1f2fdb044d300232e3f6c5247aee192e1769d48f3c66b83719d0",
+        "after_region_sha256": "d37c458b6018c36075503965ce78ce511124474d1b40dbebcfb2a2c2c466dc86",
+        "controller": "st7123",
+        "coordinate_space": "panel-native",
+        "raw": [
+          530,
+          1147
+        ],
+        "controller_reports": {
+          "reports": 2,
+          "acknowledged": 2
+        },
+        "before_png_sha256": "6c6294dfbe39975438e1595e6814890b3e96bb53e48af044c9af41a5bf2c33fc",
+        "after_png_sha256": "d4ece884a2decc4f6c9357332c51191f4090d3ab14fbe4e9d62debe5d434ab45"
+      },
+      "expected_roi_prevalidated_on_same_release": true
+    }
+  },
+  "network_data_plane": "NOT RUN",
+  "other_ui_workflows": "NOT RUN",
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED"
+}
