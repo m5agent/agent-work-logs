@@ -6,3 +6,5 @@
 - 早期 Reviewer 使用空 UART 光标，从设备的默认曲目编号开始比较。最终版本通过真实播放基线和 UART 回读，把完整边沿交付、刻意错误的期望值和原版快转漏选分开判定。
 
 [报告](report.md) · [运行清单](run.json) · [证据索引](evidence/README.md) · [前次原版诊断](../../README.md)
+
+- [Device Service 1.97.0 同原版 8 ms 漏选](followups/2026-11-18-dial-197-original-cadence/README.md)
