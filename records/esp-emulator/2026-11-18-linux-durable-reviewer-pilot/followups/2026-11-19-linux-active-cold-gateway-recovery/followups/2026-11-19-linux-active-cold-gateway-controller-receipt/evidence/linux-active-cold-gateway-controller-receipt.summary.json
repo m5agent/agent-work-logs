@@ -1,0 +1,189 @@
+{
+  "status": "PASS",
+  "source": {
+    "device": "97339c1137e4e8564114e7476ba607f1129fe68c",
+    "reviewer": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "native_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "firmware_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929"
+  },
+  "packaged_source_sha256": {
+    "platform/tools/device_service.py": "14fc2b4494acf5279f1530d978f81b8dbd771fb19e0d1594304fc396c27a797d",
+    "platform/tools/device_service_namespace_recovery.py": "fe0adb2222b3d38278d1c8950121be5dff7cb5521bf70bd7402dfffcbc20b2a0",
+    "platform/tools/serve.py": "bc300f72401d24bedb2acff5f8ef6e61bec2d94e0fa5515b888add68a5bb2683"
+  },
+  "candidate_package": {
+    "bytes": 3031040,
+    "sha256": "71b8186e25dd3b408bdf63922ae4caee9c584def8ab0b858cb67a0d5584c8c35"
+  },
+  "negative_control": {
+    "distinct_linux_boot_id": true,
+    "same_worker_advanced_generation": true,
+    "same_reviewer_backend_configuration": true,
+    "review_before_retry": {
+      "status": "service_error",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_SERVICE_RESTART",
+      "source_mode": "saved_snapshot"
+    },
+    "old_session_before_retry": {
+      "state": "stopping",
+      "interrupted_durable": true,
+      "api_stop_pending": true,
+      "api_optional_flash_retained": null,
+      "worker_active_leases": 1,
+      "durable_session_lease_active": true,
+      "actual_writable_flash_exists": true,
+      "old_kernel_gateway_objects_present": false
+    },
+    "review_recovery_events_before_retry": [
+      {
+        "status": "pending",
+        "resolved": [],
+        "pending": [
+          "device_service_recovery_unconfirmed"
+        ]
+      }
+    ],
+    "cleanup_pending_reason_from_standard_api": [
+      "named gateway belongs to a different kernel or worker namespace",
+      "named gateway belongs to a different kernel or worker namespace"
+    ],
+    "retained_gateway_receipt_sha256": "23a3dfe7445b2a5884bcc399fc1d0fedeecf0ca75075be0f341b613b0dc3f1e2",
+    "old_evidence": {
+      "http": 200,
+      "bytes": 14260,
+      "sha256": "d5298c31408a5af764b5e70bbc8a59bb76ff11db286c1eb3e7e747681cd3111e",
+      "typed_manifest_integrity": true
+    },
+    "original_isolation_receipt_sha256": "969b4bdb35310e07f10e3617394d19b451f44ff6bcd84158feb7a84c504f26a4",
+    "old_raw_pcap_sha256": "1815a89517086515fad57b5c05c521ebcbf6a1977baaed20d44fa2da33195da9",
+    "retry": {
+      "http": 409,
+      "error": "上次设备会话清理尚未确认，待设备服务恢复后重试"
+    },
+    "status": "FAIL_COLD_BOOT_ACTIVE_GATEWAY_RECOVERY"
+  },
+  "positive": {
+    "status": "PASS_ACTIVE_COLD_RECOVERY_AND_SAME_ORIGINAL_PLAYBACK",
+    "old_session_failed_interrupted": true,
+    "old_worker_lease_and_flash_released": true,
+    "old_kernel_gateway_objects_present": false,
+    "original_gateway_and_isolation_journals_byte_equal": true,
+    "cold_marker_sha256": "12543e81e56c0b80fa9617f702858c77693cc12bf5871f529fdc90e9b2639227",
+    "old_pending_zip_sha256": "d5298c31408a5af764b5e70bbc8a59bb76ff11db286c1eb3e7e747681cd3111e",
+    "old_recovered_zip": {
+      "zip_sha256": "8d24104b82b077177ca0e35edeb15f0422d02777836fcdb8ed00b23d218b589e",
+      "pcap_sha256": "1815a89517086515fad57b5c05c521ebcbf6a1977baaed20d44fa2da33195da9",
+      "pcap_bytes": 9259,
+      "zip_crc_manifest_and_session_match": true
+    },
+    "old_pcap_preserved_byte_for_byte": true,
+    "reviewer_recovery_released": true,
+    "standard_saved_snapshot_retry_http": 202,
+    "new_review": {
+      "review_status": "done",
+      "lane": "SIM_VERIFIED",
+      "typed_checks": {
+        "sntp_matched": true,
+        "https_attempted": true,
+        "https_reply": true,
+        "tls_exchange": true,
+        "dns": true,
+        "cache": true,
+        "pcm": true
+      },
+      "cache": {
+        "bytes": 10605,
+        "sha256": "af59cee7bd7ca8d12fd145fcf8bfcee23c882aa3f7377fe97f06936474a77a50"
+      },
+      "speaker": {
+        "zip_bytes": 84992,
+        "zip_pcm_sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+        "api_bytes": 84992,
+        "api_pcm_sha256": "9be659af8f0699234c50409ff36423caadc522a3555931c7041393f767771a61",
+        "peak_s16le": 7051
+      },
+      "cleanup": {
+        "stopped": true,
+        "zero_leases": true,
+        "flash_released": true,
+        "inner_guest_reaped_and_named_kernel_resources_removed": true
+      },
+      "reviewer_zip": {
+        "zip_sha256": "b795b17644bf72f3199dad375ca39f146f805b3c01e5a6bade3146d742367010",
+        "pcap_sha256": "b34103b59d5f4ca07863cc8bb4e5180ca7c205353637024e84379bb937540f6f",
+        "pcap_bytes": 22702,
+        "zip_crc_manifest_and_session_match": true
+      },
+      "api_zip": {
+        "zip_sha256": "6c12e8a2b88cf52bfc3c6422dfcca3e6846967421d819150e0a598aa217587f9",
+        "pcap_sha256": "b34103b59d5f4ca07863cc8bb4e5180ca7c205353637024e84379bb937540f6f",
+        "pcap_bytes": 22702,
+        "zip_crc_manifest_and_session_match": true
+      },
+      "pcap_byte_equal": true
+    },
+    "same_successor_boot_negative_and_positive": true,
+    "receipt_read_only_outside_state": true,
+    "owned_boot2_topology_removed": true,
+    "burner_submitted": false
+  },
+  "captured_zips": {
+    "interrupted_session": {
+      "bytes": 14260,
+      "sha256": "d5298c31408a5af764b5e70bbc8a59bb76ff11db286c1eb3e7e747681cd3111e"
+    },
+    "recovered_old_api": {
+      "bytes": 21457,
+      "sha256": "8d24104b82b077177ca0e35edeb15f0422d02777836fcdb8ed00b23d218b589e"
+    },
+    "replayed_reviewer": {
+      "bytes": 82056,
+      "sha256": "b795b17644bf72f3199dad375ca39f146f805b3c01e5a6bade3146d742367010"
+    },
+    "replayed_api": {
+      "bytes": 83408,
+      "sha256": "6c12e8a2b88cf52bfc3c6422dfcca3e6846967421d819150e0a598aa217587f9"
+    }
+  },
+  "previous_vm_ack": {
+    "bytes": 701,
+    "sha256": "f6731993bb1ff2cb6b12bfc4e91e79bb092712cddc162827e73b6264e746e58b"
+  },
+  "successor_receipt": {
+    "bytes": 436,
+    "sha256": "38318910e821bbb842e8eb63305b7d8fd0d88b214697525293f57ca3ae9fd6a9"
+  },
+  "receipt_issued_after_negative_control": true,
+  "distinct_native_vz_incarnations": true,
+  "host_owned_exclusive_state_volume": true,
+  "owned_vz_and_host_relays_exited": true,
+  "both_service_sessions_released_without_raw_boot_journal_mutation": true,
+  "final_worker_active_leases": 0,
+  "one_matching_sntp_and_one_matching_tls_host_relay_transaction": true,
+  "retained_post_cut_pcap": {
+    "bytes": 9259,
+    "sha256": "1815a89517086515fad57b5c05c521ebcbf6a1977baaed20d44fa2da33195da9"
+  },
+  "same_authenticated_backend_all_three_service_starts": true,
+  "zero_guest_network_adapters": true,
+  "resident_and_physical": "NOT RUN",
+  "burner_submitted": false,
+  "summary_kind": "bounded_redacted_execution_evidence",
+  "original_receipts": {
+    "independent_verification": {
+      "bytes": 6886,
+      "sha256": "6d1cdfe3afd4935a7287296df013c49eb3703f32fd2d90b0527fa1b7a4b61c1c"
+    },
+    "negative_control": {
+      "bytes": 1657,
+      "sha256": "8e6cc3e930a850097d579d062cd16acb4d25bdcb8f9ee9efcd0571136059eb89"
+    },
+    "positive_recovery_and_replay": {
+      "bytes": 2475,
+      "sha256": "91f1096a4176cc8efeecdc044dfbffe89915462ec9d7eebddeaba28fd807083b"
+    }
+  },
+  "sanitization": "Network addresses, host paths, raw logs and execution identifiers omitted."
+}

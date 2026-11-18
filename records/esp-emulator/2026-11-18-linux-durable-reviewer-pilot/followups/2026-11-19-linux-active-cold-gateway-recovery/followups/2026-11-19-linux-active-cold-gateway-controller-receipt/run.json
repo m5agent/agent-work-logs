@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "Linux 活动审核冷启动恢复与宿主停机凭据",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "candidate_device_service": "97339c1137e4e8564114e7476ba607f1129fe68c",
+    "reviewer": "f0101b6bb0926a69ef2f8477ae81e991338391f5",
+    "device_service_openapi": "1.99.0",
+    "reviewer_openapi": "0.27.0"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "device": "Cardputer",
+    "profile": "qemu-wifi",
+    "hosted_runtime": "Linux ARM64 VZ with zero network adapters and private VirtioFS",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_bytes": 3619312,
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e",
+    "normalized_flash_sha256": "dd5ae9b2d1af6dce97adfd27d55a2097fff9920cee5f7e2771c67e05011b2929"
+  },
+  "execution": {
+    "local_timezone": "UTC+08:00",
+    "same_successor_boot_for_both_controls": true,
+    "without_receipt_retry_http": 409,
+    "with_receipt_retry_http": 202
+  },
+  "checks": [
+    {
+      "name": "real_active_cut_and_exclusive_host_stop_ack",
+      "status": "PASS"
+    },
+    {
+      "name": "without_authority_retains_session_and_fences_retry",
+      "status": "PASS"
+    },
+    {
+      "name": "scoped_read_only_receipt_releases_old_lease_and_flash",
+      "status": "PASS"
+    },
+    {
+      "name": "original_journals_and_interrupted_pcap_preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "same_original_standard_retry_tls_sd_mp3_and_pcm",
+      "status": "PASS"
+    },
+    {
+      "name": "worker_flash_process_and_network_cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "resident_linux_deployment_and_physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/linux-active-cold-gateway-controller-receipt.summary.json",
+      "bytes": 7451,
+      "sha256": "1e50c319fb4501ffdb4d0390a71d283fb6419f826f90a20976c225c756134056"
+    }
+  ],
+  "notes": [
+    "Burner 未提交。",
+    "仅验证明确宿主停机和同一持久卷交接。"
+  ]
+}
