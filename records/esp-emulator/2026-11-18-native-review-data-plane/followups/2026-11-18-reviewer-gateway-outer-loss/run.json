@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "virtual-device-validation",
+  "date": "2026-11-18",
+  "source": {
+    "incumbent_device_service": "8fea7bb182afc0094b8c42461673459bb8f1d965",
+    "candidate_device_service": "dffe87fd60ef34b0c65ddaf7e46ab73fa224d16d",
+    "candidate_device_openapi_sha256": "bc8340308b18bbe9aaa39990dec65d37c9cd8e9467d5ce4186debd7983a41de9",
+    "reviewer": "a295e0173a0e3157c120de8ba6fcec128aa665c1",
+    "reviewer_openapi_sha256": "a2d5daa7ea48e5d446b760f422bfe203963a6a906132cf6f14b44a525784c91f",
+    "device_release": "dffe87fd60ef34b0c65ddaf7e46ab73fa224d16d"
+  },
+  "hardware": {
+    "target": "isolated ARM64 Linux VM without network adapter",
+    "board": "original Cardputer firmware on native virtual device"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "original_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e"
+  },
+  "execution": {
+    "incumbent": {
+      "path": "evidence/named-outer-loss-baseline.summary.json",
+      "sha256": "f734ae377bafa2a5f2ac0b9b5c1243b267d0a03c50254d3df6a6dd2a28f19dcf"
+    },
+    "candidate": {
+      "path": "evidence/named-outer-loss-candidate.summary.json",
+      "sha256": "1301b2bb3226ca89e3e862372cf2b851ed255b8be4bf6df68c15f97f8fa0853b"
+    },
+    "macos_control": {
+      "path": "evidence/macos-core2-control.summary.json",
+      "sha256": "10e0ca1f34d4bed9d79ed06266126979da0b12bce1e5e711558840a3779819c1"
+    }
+  },
+  "checks": {
+    "outer_only_legacy": "FAIL named gateway remains",
+    "outer_and_service_pair_legacy": "FAIL named gateway remains",
+    "candidate": "PASS in both scoped native Linux fault modes",
+    "public_certificate_and_audio": "NOT RUN",
+    "physical": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "candidate_outer_only": "PASS; passive cleanup before first session detail and verified same-original Retry",
+    "macos_control": "PASS; four Core2 original movement directions",
+    "fresh_standards_retry": "PASS for scoped synthetic SNTP and TLS ClientHello; overall pronunciation PARTIAL",
+    "device_release_platform_suite": {
+      "collected": 2475,
+      "passed": 2465,
+      "skipped": 10
+    },
+    "device_release_validators_and_scope": "PASS"
+  }
+}
