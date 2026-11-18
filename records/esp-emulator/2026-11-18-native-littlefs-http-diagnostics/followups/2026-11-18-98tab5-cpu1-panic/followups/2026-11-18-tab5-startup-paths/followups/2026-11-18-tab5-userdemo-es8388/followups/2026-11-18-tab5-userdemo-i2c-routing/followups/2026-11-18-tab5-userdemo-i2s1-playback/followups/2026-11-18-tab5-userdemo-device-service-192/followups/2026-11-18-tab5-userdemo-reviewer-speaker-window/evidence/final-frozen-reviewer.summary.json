@@ -1,0 +1,242 @@
+{
+  "status": "PASS_EXACT_FROZEN_PLAY_AND_IDLE_CONTROL",
+  "validation": "virtual-device validation",
+  "scope": "Frozen Device Service and Reviewer. Isolated saved local snapshot seeded from official metadata.",
+  "source": {
+    "device_service": "8ba3677708fbf11d47576f2dda1baa8431492452",
+    "reviewer": "aebbe38ce0fa2ba5c278270554ef8af6f5da8a32",
+    "device_openapi_sha256": "4046970596e4b21913eb1ddc2339bd366cdf13d6cf7fa55579df8af90a9dd79d",
+    "reviewer_openapi_sha256": "482ad5ffe2279a46cc79f641cfb165416786eb00abfb77ae92b9c1a28bb96bce",
+    "production_code_delta_vs_c6d7e": "NONE; source diff contains only documentation and evidence"
+  },
+  "firmware": {
+    "original_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+    "normalized_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9"
+  },
+  "board": "gt911-ili9881c",
+  "native_runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "codec_part_sha256": "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270",
+  "cases": {
+    "play": {
+      "typed_audio": {
+        "status": "PASS",
+        "reason": "tab5_audio_after_verified_tap"
+      },
+      "overall_review": {
+        "status": "manual_review",
+        "error_code": "E_NETWORK_PARTIAL"
+      },
+      "analysis_inputs": {
+        "touch_plan": {
+          "frame_size": [
+            720,
+            1280
+          ],
+          "button_bindings": {},
+          "steps": [
+            {
+              "name": "touch_music_test",
+              "x": 640,
+              "y": 417,
+              "region": [
+                453,
+                245,
+                46,
+                46
+              ],
+              "before_sha256": "5cd8da4b507febe44fe50a9848762e1d4a3bf81983649a626ea1a298a7968a7b",
+              "after_sha256": "58cda2771ea99b176f572e63332f2e08d01d32f94cbdff41adf5329230b70a6f",
+              "timeout_seconds": 12
+            },
+            {
+              "name": "touch_play_music",
+              "x": 474,
+              "y": 270,
+              "region": [
+                453,
+                245,
+                46,
+                46
+              ],
+              "before_sha256": "58cda2771ea99b176f572e63332f2e08d01d32f94cbdff41adf5329230b70a6f",
+              "after_sha256": "c3e0c6ea8e97359297c2866a7f22830268b8599712a719e24fdb0f3f1ea82726",
+              "timeout_seconds": 12
+            }
+          ]
+        },
+        "tab5_speaker_playback": {
+          "after_input": "touch_play_music",
+          "maximum_quiet_rms": 8,
+          "minimum_rms": 128
+        }
+      },
+      "native_touches": [
+        {
+          "name": "touch_music_test",
+          "kind": "touch",
+          "controller": "gt911",
+          "reports": 7,
+          "acknowledged": 7,
+          "frame_changed": true
+        },
+        {
+          "name": "touch_play_music",
+          "kind": "touch",
+          "controller": "gt911",
+          "reports": 7,
+          "acknowledged": 7,
+          "frame_changed": true
+        }
+      ],
+      "visual_regions": {
+        "before_region_sha256": "58cda2771ea99b176f572e63332f2e08d01d32f94cbdff41adf5329230b70a6f",
+        "after_region_sha256": "c3e0c6ea8e97359297c2866a7f22830268b8599712a719e24fdb0f3f1ea82726"
+      },
+      "windows": [
+        {
+          "window": "quiet",
+          "frames": 4096,
+          "bytes": 16384,
+          "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "nonzero_samples": 0
+        },
+        {
+          "window": "excluded_first_second",
+          "frames": 48000,
+          "bytes": 192000,
+          "sha256": "bc65657c1343f94bd220405e526084ec9b8082ce66d7e310a9e077be7581c2da",
+          "rms": [
+            2457.922,
+            3344.328
+          ],
+          "nonzero_samples": 67514
+        },
+        {
+          "window": "measured_second_second",
+          "frames": 48000,
+          "bytes": 192000,
+          "sha256": "d9919a102986b4913cf8b91da4bf8e4d989367b9053ad4bea5bc918cfb0cb7f9",
+          "rms": [
+            3713.65,
+            4601.958
+          ],
+          "nonzero_samples": 95995
+        }
+      ],
+      "stopped_scoped_pcm_sha256": "13abc413f548d03cab752005b83d8c6e900d3733dccc910e70e48b091e3a8be7",
+      "scoped_zip_sha256": "602c41d5cd37314141ba625e4609f1ff4a9e532097e4b47ed986e63c1266c324",
+      "pre_stop_zip_sha256": "02391e0fc88b9dd412ad9ef64cc9829c395d63c9a277c836e2bc0a078d7b2574",
+      "source_run_summary_sha256": "df75be551d9c3caf08ef899596685ff831a101cf73dfd2bd34898c44610896dc",
+      "same_recording_generation_bound": true,
+      "both_zip_crc_manifest_and_same_session_verified": true,
+      "active_leases_after": 0,
+      "owned_services_exited": true,
+      "stock_firmware_unchanged": true
+    },
+    "idle": {
+      "typed_audio": {
+        "status": "PARTIAL",
+        "reason": "tab5_audio_playback_below_threshold"
+      },
+      "overall_review": {
+        "status": "manual_review",
+        "error_code": "E_TAB5_SPEAKER_PARTIAL"
+      },
+      "analysis_inputs": {
+        "touch_plan": {
+          "frame_size": [
+            720,
+            1280
+          ],
+          "button_bindings": {},
+          "steps": [
+            {
+              "name": "touch_music_test",
+              "x": 640,
+              "y": 417,
+              "region": [
+                453,
+                245,
+                46,
+                46
+              ],
+              "before_sha256": "5cd8da4b507febe44fe50a9848762e1d4a3bf81983649a626ea1a298a7968a7b",
+              "after_sha256": "58cda2771ea99b176f572e63332f2e08d01d32f94cbdff41adf5329230b70a6f",
+              "timeout_seconds": 12
+            }
+          ]
+        },
+        "tab5_speaker_playback": {
+          "after_input": "touch_music_test",
+          "maximum_quiet_rms": 8,
+          "minimum_rms": 128
+        }
+      },
+      "native_touches": [
+        {
+          "name": "touch_music_test",
+          "kind": "touch",
+          "controller": "gt911",
+          "reports": 7,
+          "acknowledged": 7,
+          "frame_changed": true
+        }
+      ],
+      "visual_regions": {
+        "before_region_sha256": "5cd8da4b507febe44fe50a9848762e1d4a3bf81983649a626ea1a298a7968a7b",
+        "after_region_sha256": "58cda2771ea99b176f572e63332f2e08d01d32f94cbdff41adf5329230b70a6f"
+      },
+      "windows": [
+        {
+          "window": "quiet",
+          "frames": 4096,
+          "bytes": 16384,
+          "sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "nonzero_samples": 0
+        },
+        {
+          "window": "excluded_first_second",
+          "frames": 48000,
+          "bytes": 192000,
+          "sha256": "6867df6614efc403e801fa2433ce2f1e23456d81d5eccde0764f2494cb225b87",
+          "rms": [
+            1444.768,
+            1444.768
+          ],
+          "nonzero_samples": 9598
+        },
+        {
+          "window": "measured_second_second",
+          "frames": 48000,
+          "bytes": 192000,
+          "sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+          "rms": [
+            0.0,
+            0.0
+          ],
+          "nonzero_samples": 0
+        }
+      ],
+      "stopped_scoped_pcm_sha256": "6a6a7f80c30fbcd424233e2b1226449acba6d496bdf97b3c48ac23a543010e66",
+      "scoped_zip_sha256": "45d39ac982ea9ea10e425e4b6d76dfc989552adfa468cd61bef056cfbddb3f8b",
+      "pre_stop_zip_sha256": "6858b9a544f53d0f10766b22e6d71e3532fe07a0d9fbd73a48ab97144e46015e",
+      "source_run_summary_sha256": "4bfeb5f15e3d9e36c35329f5e3c265e05fa59493dd3eb4f3fd187f18a0759029",
+      "same_recording_generation_bound": true,
+      "both_zip_crc_manifest_and_same_session_verified": true,
+      "active_leases_after": 0,
+      "owned_services_exited": true,
+      "stock_firmware_unchanged": true
+    }
+  },
+  "browser_guest": "NOT RUN",
+  "physical_hardware": "NOT RUN",
+  "burner": "NOT SUBMITTED"
+}
