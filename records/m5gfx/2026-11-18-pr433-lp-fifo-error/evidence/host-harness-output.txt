@@ -1,0 +1,64 @@
+# source: /tmp/m5gfx433
+# base:   e88846e781091ff489de3afb5770f7333af1d864
+# head:   99eb30e815438bc01bd2a114992db5c0e076acd4
+# compiler: Apple clang version 21.0.0 (clang-2100.1.1.101)
+# flags:  -std=c++17 -Wall -Wextra -Werror -O1
+
+# extracted isLpPort()+getFifoLen():       33 lines (head),       30 lines (base)
+
+## released configurations (head must give the 5.x/6.x header values)
+-- head_c6_6x
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+-- head_p4_6x
+  port 0 -> 32 (expect 32)
+  port 1 -> 32 (expect 32)
+  lp port 2 -> 16 (expect 16)
+-- head_c2_6x
+  port 0 -> 16 (expect 16)
+-- head_esp32_6x
+  port 0 -> 32 (expect 32)
+-- head_c6_5x
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+-- head_p4_5x
+  port 0 -> 32 (expect 32)
+  port 1 -> 32 (expect 32)
+  lp port 2 -> 16 (expect 16)
+-- head_esp32_5x
+  port 0 -> 32 (expect 32)
+
+## same configurations on base (must be identical: this PR changes no compiled code)
+-- base_c6_6x
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+-- base_p4_6x
+  port 0 -> 32 (expect 32)
+  port 1 -> 32 (expect 32)
+  lp port 2 -> 16 (expect 16)
+-- base_c2_6x
+  port 0 -> 16 (expect 16)
+-- base_esp32_6x
+  port 0 -> 32 (expect 32)
+-- base_c6_5x
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 16 (expect 16)
+-- base_p4_5x
+  port 0 -> 32 (expect 32)
+  port 1 -> 32 (expect 32)
+  lp port 2 -> 16 (expect 16)
+-- base_esp32_5x
+  port 0 -> 32 (expect 32)
+
+## LP port with no depth macro (synthetic rename of the depth macro)
+-- base: falls back to the HP depth without a word
+-- base_unknown_5x
+  port 0 -> 32 (expect 32)
+  lp port 1 -> 32 (expect 32)
+-- head: build must stop
+-- head_unknown_5x: build stopped
+   In file included from /Users/m5agent/Documents/agent-work-logs/records/m5gfx/2026-11-18-pr433-lp-fifo-error/code/fifo_harness.cpp:15:
+   /Users/m5agent/Documents/agent-work-logs/records/m5gfx/2026-11-18-pr433-lp-fifo-error/code/pr_fn.inc:22:3: error: "LP I2C FIFO depth is unknown: neither SOC_LP_I2C_FIFO_LEN nor I2C_LL_LP_FIFO_LEN is defined"
+-- head_unknown_6x: build stopped
+   In file included from /Users/m5agent/Documents/agent-work-logs/records/m5gfx/2026-11-18-pr433-lp-fifo-error/code/fifo_harness.cpp:15:
+   /Users/m5agent/Documents/agent-work-logs/records/m5gfx/2026-11-18-pr433-lp-fifo-error/code/pr_fn.inc:22:3: error: "LP I2C FIFO depth is unknown: neither SOC_LP_I2C_FIFO_LEN nor I2C_LL_LP_FIFO_LEN is defined"

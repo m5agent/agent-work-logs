@@ -1,0 +1,23 @@
+# M5GFX PR #433 scope
+base e88846e781091ff489de3afb5770f7333af1d864  (develop, "Merge pull request #432")
+head 99eb30e815438bc01bd2a114992db5c0e076acd4  (lp_fifo_len_guard, 1 commit)
+git diff --stat:
+ src/lgfx/v1/platforms/esp32/common.inl | 3 +++
+ 1 file changed, 3 insertions(+)
+
+git diff:
+@@ -1468,6 +1468,9 @@ namespace lgfx
+       if (isLpPort(i2c_port)) { return SOC_LP_I2C_FIFO_LEN; }
+ #elif LGFX_LP_I2C_NUM > 0 && defined ( I2C_LL_LP_FIFO_LEN )
+       if (isLpPort(i2c_port)) { return I2C_LL_LP_FIFO_LEN; }
++#elif LGFX_LP_I2C_NUM > 0
++      // Falling back to the HP depth would overrun the shallower LP FIFO without any error.
++ #error "LP I2C FIFO depth is unknown: neither SOC_LP_I2C_FIFO_LEN nor I2C_LL_LP_FIFO_LEN is defined"
+ #else
+       (void)i2c_port;
+ #endif
+
+git apply --check patches/0001-i2c-lp-fifo-error.patch  on base e88846e: OK
+LGFX_LP_I2C_NUM is derived at common.inl:123-130 and is 1 only when the SDK defines
+SOC_LP_I2C_NUM > 0, has <driver/i2c_master.h> and ESP-IDF >= 5.4; otherwise 0.
+getFifoLen() is used at common.inl:2760 (txfifo_limit) and :2802 (rxfifo_limit).

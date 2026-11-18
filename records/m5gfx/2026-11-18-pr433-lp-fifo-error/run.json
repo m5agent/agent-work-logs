@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "pr",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #433: stop the build when the LP I2C FIFO depth is unknown (code-level review)",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/433",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "e88846e781091ff489de3afb5770f7333af1d864",
+    "head_commit": "99eb30e815438bc01bd2a114992db5c0e076acd4"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Apple clang 21.0.0; ESP-IDF headers fetched from raw.githubusercontent.com for v5.4.1..v6.1.1, master and v6.3-dev; no local ESP-IDF 6.x toolchain and Docker cannot create containers",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file, +3/-0 in src/lgfx/v1/platforms/esp32/common.inl (one #elif plus #error inside getFifoLen); head 99eb30e on develop e88846e (the merge of #432), single commit, MERGEABLE, patch applies cleanly"
+    },
+    {
+      "id": "guard-reachability",
+      "status": "PASS",
+      "detail": "112-row survey over 14 refs x 8 chips: every tag that defines SOC_LP_I2C_NUM (C5/C6/P4 in 5.4.1-5.5.4, H4 in 5.5.1-5.5.4, C5/C6/P4/S31 in 6.0-6.1.1/master/6.3-dev) also defines a depth macro (SOC_LP_I2C_FIFO_LEN 16 or I2C_LL_LP_FIFO_LEN 16); no ref has the port count without a depth macro, so the new branch is unreachable for released SDKs"
+    },
+    {
+      "id": "guard-condition",
+      "status": "PASS",
+      "detail": "LGFX_LP_I2C_NUM is derived at common.inl:121-130 and is >0 only when SOC_LP_I2C_NUM>0, driver/i2c_master.h exists and ESP-IDF>=5.4, so chips without an LP port (ESP32/C2/C3/S2/S3/C61/H4-6.x) never enter the branch; getFifoLen is called only at common.inl:2760 and :2802"
+    },
+    {
+      "id": "compiled-code-unchanged",
+      "status": "PASS",
+      "detail": "extracted isLpPort()/getFifoLen() from base and head compiled with -Wall -Wextra -Werror for 7 released configurations (6.x C6/P4/C2/ESP32, 5.x C6/P4/ESP32): identical values on base and head (HP 32, LP 16, P4 LP at port 2, C2 16); no new warnings"
+    },
+    {
+      "id": "error-fires",
+      "status": "PASS",
+      "detail": "synthetic LP-port config without a depth macro: base builds and returns HP depth 32 (the silent fallback), head stops the build in both variants (SOC_I2C_FIFO_LEN only, I2C_LL_FIFO_LEN only) with the message 'LP I2C FIFO depth is unknown: neither SOC_LP_I2C_FIFO_LEN nor I2C_LL_LP_FIFO_LEN is defined'"
+    },
+    {
+      "id": "ci-coverage",
+      "status": "REVIEW",
+      "detail": "IDFBuild.yml 6.x jobs are esp32/esp32s3 at 6.0.2 only (no LP port); C5 5.5.2, C6 5.4.3, P4 5.4.3, C61 5.5.2 are all 5.x; ArduinoBuild.yml tops out at core 3.3.0 (ESP-IDF 5.5.0). The new #elif and the #error are preprocessed out in every CI job, so the 20 passing checks do not compile this hunk. Non-blocking: add esp32c6 at 6.0.2."
+    },
+    {
+      "id": "guard-boundary",
+      "status": "REVIEW",
+      "detail": "the guard covers a renamed depth macro only; if a future SDK drops SOC_LP_I2C_NUM (H4 does between 5.5.x and 6.0), LGFX_LP_I2C_NUM silently becomes 0 and the LP port disappears with no build error. Out of scope for this PR, recorded so the protection is not overstated."
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 / C6 / P4 hardware here; the author's builds and the #432 on-device data were not reproduced"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "structural: the change only decides whether the translation unit compiles, so every configuration that builds produces code identical to base and no device model can show a difference; the only observable is build success/failure"
+    },
+    {
+      "id": "idf6-native-build",
+      "status": "NOT RUN",
+      "detail": "not run locally: Docker cannot create containers on this host (write /var/lib/desktop-containerd/.../meta.db: read-only file system) and no local ESP-IDF 6.x toolchain; relies on the author's ESP32-P4 / IDF 6.1 build plus the header survey"
+    },
+    {
+      "id": "error-branch-real-sdk",
+      "status": "NOT RUN",
+      "detail": "no released SDK reaches the #error; only synthetic macro-less builds exercise it"
+    }
+  ],
+  "evidence": [
+    "evidence/lp-fifo-macro-survey.tsv",
+    "evidence/host-harness-output.txt",
+    "evidence/ci-matrix.txt",
+    "evidence/diff-scope.txt",
+    "code/probe-lp-macros.sh",
+    "code/extract_fifo_fn.py",
+    "code/fifo_harness.cpp",
+    "code/run.sh",
+    "patches/0001-i2c-lp-fifo-error.patch"
+  ],
+  "notes": [
+    "PR left OPEN; one English comment posted; no close, no push to the upstream repository, no code changes to m5stack/M5GFX.",
+    "The guard implements the #error suggestion made while reviewing #432, so the review checks reachability against real headers rather than re-arguing the design.",
+    "v5.4.0 and v5.5.0 are not existing tags (404), hence 5.4.1 as the lower bound of the 5.4 line."
+  ]
+}

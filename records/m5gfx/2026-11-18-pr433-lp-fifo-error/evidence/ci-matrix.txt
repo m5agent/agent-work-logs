@@ -1,0 +1,39 @@
+# CI coverage of the LP I2C FIFO depth branch (M5GFX @ 99eb30e, 2026-11-18)
+#
+# Source: .github/workflows/IDFBuild.yml and .github/workflows/ArduinoBuild.yml at head.
+# Question: is the `#elif LGFX_LP_I2C_NUM > 0 && defined ( I2C_LL_LP_FIFO_LEN )` branch
+# (and the new `#error`) ever compiled by CI?
+
+## IDFBuild.yml include list (verbatim target/idf_version pairs)
+esp32    5.1.6
+esp32    5.4.3
+esp32    6.0.2
+esp32s3  5.1.6
+esp32s3  5.4.3
+esp32s3  6.0.2
+esp32c3  5.1.6
+esp32c3  5.4.3
+esp32c5  5.5.2
+esp32c6  5.4.3
+esp32h2  5.1.6
+esp32p4  5.4.3
+esp32c61 5.5.2
+
+## Which of those have a low power I2C port?
+esp32 / esp32s3 / esp32c3 / esp32h2 : no LP I2C caps -> LGFX_LP_I2C_NUM 0
+esp32c5 / esp32c6 / esp32p4 / esp32c61 : LP I2C, but every one of them is built on 5.x
+esp32c61 on 5.4.3 has no SOC_LP_I2C_NUM at all (LP I2C appears later), not built there
+
+=> the only 6.x jobs (esp32, esp32s3 at 6.0.2) have no LP port, so the new #elif and the
+   #error are preprocessed out in every CI job. "Fork CI passed" says nothing about them.
+
+## ArduinoBuild.yml (core -> bundled ESP-IDF)
+2.0.17 -> ESP-IDF 4.4      : no LGFX_LP_I2C_NUM (gated to IDF >= 5.4)
+3.1.3  -> ESP-IDF 5.3      : no LGFX_LP_I2C_NUM
+3.3.0  -> ESP-IDF 5.5.0    : SOC_LP_I2C_FIFO_LEN path (first branch), LP chips C5 only
+2.1.4  -> M5Stack board manager
+
+=> no Arduino job reaches the I2C_LL_* branch either.
+
+## PR checks at 99eb30e (gh pr checks 433)
+All 20 jobs pass (IDF 13/13, Arduino 7/7). mergeStateStatus UNSTABLE at read time.
