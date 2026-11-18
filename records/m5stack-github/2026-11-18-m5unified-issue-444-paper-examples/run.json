@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #444 M5Paper examples still route to M5EPD",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unified/issues/444",
+    "pull_request": "",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "96576a14247ddc935149145aa6b51943464120f1"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; no M5Paper hardware; no M5Paper profile in the local device catalogue; no Arduino-ESP32 toolchain",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "local device catalogue has no M5Paper profile",
+      "status": "CONFIRMED",
+      "detail": "36 profiles; e-paper profiles are PaperMono (ESP32-S3, SSD1677), PaperColor (ESP32-S3, E Ink Spectra 6), PaperS3/PaperDIY (ESP32-S3, ET047TC1)"
+    },
+    {
+      "name": "esp-emulator esp32-lx6 models exclude M5Paper",
+      "status": "CONFIRMED",
+      "detail": "12 models, no paper entry"
+    },
+    {
+      "name": "M5Unified 0.3.0 board support for M5Paper",
+      "status": "PASS",
+      "detail": "README.md:60; src/M5Unified.inl:153,1839,2988"
+    },
+    {
+      "name": "M5GFX M5Paper panel and touch construction",
+      "status": "PASS",
+      "detail": "Panel_IT8951 + Touch_GT911 at esp32_d0wdq6_construct.inl:192-203; 540x960 grayscale_8bit at M5GFX.cpp:1105-1113; auto_display at Panel_IT8951.inl:116"
+    },
+    {
+      "name": "no Paper-specific example in M5Unified 0.3.0",
+      "status": "CONFIRMED",
+      "detail": "18 .ino files under examples/, none Paper-specific"
+    },
+    {
+      "name": "docs product page still lists M5EPD",
+      "status": "CONFIRMED",
+      "detail": "docs.m5stack.com/en/core/Paper rendered 2026-11-18 with M5EPD driver + 3 M5EPD example repos; M5EPD archived"
+    },
+    {
+      "name": "build check for m5stack_paper",
+      "status": "NOT RUN",
+      "detail": "arduino-cli core install esp32:esp32 failed extracting esp32:esp-x32: no space left on device"
+    },
+    {
+      "name": "hardware validation on M5Paper",
+      "status": "NOT RUN",
+      "detail": "no M5Paper unit available"
+    },
+    {
+      "name": "virtual-device validation",
+      "status": "NOT RUN",
+      "detail": "no M5Paper profile; IT8951 e-paper path not modelled"
+    }
+  ],
+  "evidence": [
+    "evidence/issue-444.json",
+    "evidence/m5unified-paper-support.txt",
+    "evidence/m5gfx-paper-panel.txt",
+    "evidence/examples-tree.txt",
+    "evidence/docs-paper-page.txt",
+    "evidence/m5epd-repo.json",
+    "evidence/m5epd-readme-head.txt",
+    "evidence/local-virtual-paper-profiles.txt",
+    "evidence/esp-emulator-esp32-models.txt",
+    "evidence/build-attempt.txt"
+  ],
+  "notes": [
+    "Reply language is English to match the issue title and body.",
+    "No code was pushed to the upstream repository; one comment only."
+  ]
+}

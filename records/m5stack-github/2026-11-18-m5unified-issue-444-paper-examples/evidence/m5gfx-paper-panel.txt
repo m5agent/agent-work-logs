@@ -1,0 +1,56 @@
+# m5stack/M5GFX @ 28d47949bdc84f30881623476f555398e2194313
+
+## M5Paper board construct (src/board_detect/m5/esp32_d0wdq6_construct.inl:192-203)
+  construct_status_t construct_paper(const board_result_t&, display_parts_t* parts)
+  {
+    display_parts_owner_t out;
+    out.bus.reset(make_spi_bus(bus_paper));
+    out.panel.reset(make_panel<lgfx::Panel_IT8951>(panel_paper, out.bus.get()));
+    auto touch_desc = touch_paper;
+#ifdef _M5EPD_H_
+    touch_desc.port = I2C_NUM_0;
+#endif
+    out.touch.reset(make_i2c_touch<lgfx::Touch_GT911>(touch_desc));
+    out.panel->touch(out.touch.get());
+    return construct_status(out.release_to(parts));
+
+## 540x960 grayscale_8bit (src/M5GFX.cpp:1105-1113)
+    // SDL stores pixels in window orientation, so rotation zero must keep w/h.
+    case board_M5Paper:
+    case board_M5PaperS3:
+    case board_M5PaperDIY:
+      w = 540;
+      h = 960;
+      pnl_cfg.offset_rotation = 0;
+      p->setColorDepth(lgfx::color_depth_t::grayscale_8bit);
+      r = 0;
+
+## Panel_IT8951 auto display (src/lgfx/v1/panel/Panel_IT8951.inl:110-118)
+
+  Panel_IT8951::Panel_IT8951(void)
+  {
+    _cfg.panel_width  = _cfg.memory_width  = 2048;
+    _cfg.panel_height = _cfg.memory_height = 2048;
+    _epd_mode = epd_mode_t::epd_quality;
+    _auto_display = true;
+  }
+
+
+## Panel::endWrite triggers display when auto_display (src/lgfx/v1/Panel.hpp:88)
+    void endWrite(void) { if (_start_count) {  if (0 == --_start_count) { if (_auto_display) { display(0,0,0,0); } endTransaction(); } } }
+
+## EPD update mode selection (Panel_IT8951.inl:485-494)
+    _range_old = _range_new;
+    epd_update_mode_t mode;
+    switch (_epd_mode)
+    {
+    case epd_mode_t::epd_fastest:  mode = UPDATE_MODE_DU4;  break;
+    case epd_mode_t::epd_fast:     mode = UPDATE_MODE_DU;   break;
+    case epd_mode_t::epd_text:     mode = UPDATE_MODE_GL16; break;
+    default:                       mode = UPDATE_MODE_GC16; break;
+    }
+
+
+## setEpdMode public API (src/lgfx/v1/LGFXBase.hpp:1440-1441)
+    void setEpdMode(epd_mode_t epd_mode) { _panel->setEpdMode(epd_mode); }
+    epd_mode_t getEpdMode(void) const { return _panel->getEpdMode(); }
