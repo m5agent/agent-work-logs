@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "date": "2026-11-18",
+  "overall_status": "PARTIAL",
+  "publication_tier": "public",
+  "title": "Cardputer 原生 SPI SD 读响应与保存快照审核",
+  "source": {
+    "device_service_executed": "23904862ae25a86d36e609b1f37e164027401d02",
+    "reviewer_executed": "936be8b65ccf0598e80bf783c5a76cc06b2ddcb3",
+    "native_patch": "0227",
+    "emulator_main": "baf174cec565f160d146fbad39c857686319917b",
+    "reviewer_main": "936be8b65ccf0598e80bf783c5a76cc06b2ddcb3",
+    "emulator_ci_completed_success": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/44207826414"
+  },
+  "hardware": {
+    "scope": "virtual-device validation",
+    "devices": [
+      "Cardputer",
+      "Cardputer ADV"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_cardputerdict_adv050_sha256": "21b7a88e7e58f18674184a58193d30f2722ddd690b4803d9b403b63ec0796d14",
+    "original_cardputer_adv_mp3_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45"
+  },
+  "execution": {
+    "device_service_api": "1.85.0",
+    "reviewer_api": "0.19.0",
+    "native_runtime_sha256": "26f753119896c70d6287f516cc54e941ad9fa328b0464b7af7385c3b9387d12d",
+    "native_cases": 4,
+    "legacy_native_case": 1,
+    "reviewer_cases": 5,
+    "spi_trace_disabled": true,
+    "mp3_saved_snapshot_cases": 1,
+    "reviewer_tests_passed": 256,
+    "platform_tests_run": 2424,
+    "platform_tests_skipped": 10
+  },
+  "checks": [
+    {
+      "name": "Fixed native runtime completion for both boards",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid command, interrupted response, stale reset stream",
+      "status": "PASS",
+      "scope": "Host card-protocol test"
+    },
+    {
+      "name": "SDK multiblock actual guest content and modeled response blocks",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact CardputerDict full and incomplete media responses",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact CardputerDict stable empty slot and old capability controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Whole CardputerDict firmware review",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Exact original ADV MP3 native SPI model response blocks",
+      "status": "PASS",
+      "baseline_completed_blocks": 4,
+      "after_completed_blocks": 58
+    },
+    {
+      "name": "Exact original ADV MP3 matching same-session digital PCM",
+      "status": "PASS",
+      "dominant_frequencies_hz": [
+        522.792,
+        522.582
+      ]
+    },
+    {
+      "name": "Actual Reviewer HTTP badges rendered in Chromium",
+      "status": "PASS",
+      "cases": 4
+    },
+    {
+      "name": "Independent native dual-host exercise, physical hardware, browser WASM and Burner",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/native-spi-sd-read.summary.json",
+      "bytes": 5258,
+      "sha256": "449683dc84b9879d1e20f3b69d3eb7dfa18beb2c70b957b5d9ecf7cc5cee0d6e"
+    },
+    {
+      "path": "evidence/reviewer019-original-dictionary.summary.json",
+      "bytes": 17401,
+      "sha256": "1c97ea29e770d04ce918c8d5e4d5a0b2b26854a923274b03746d402498949dc7"
+    },
+    {
+      "path": "evidence/reviewer019-original-mp3.summary.json",
+      "bytes": 1544,
+      "sha256": "f65237801177e51138a7eda2e6123f9d670b79b74823a7967a61798186fb3435"
+    },
+    {
+      "path": "evidence/reviewer019-ui.summary.json",
+      "bytes": 374,
+      "sha256": "0ae98fb231abb3e5270d20edd50e620819a7a5aad2ff3bfbb39adf5efadc29a7"
+    }
+  ]
+}
