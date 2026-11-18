@@ -11,3 +11,4 @@
 - [执行报告](report.md)
 - [运行记录](run.json)
 - [验证摘要](evidence/docs-skill-refresh-summary.json)
+- [后续更新：M5Stack Assistant Local 多语文档和产品目录](followups/2026-11-18-assistant-local-multilingual/)

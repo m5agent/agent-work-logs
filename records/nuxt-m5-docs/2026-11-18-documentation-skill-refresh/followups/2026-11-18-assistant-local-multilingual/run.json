@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "follow_up",
+  "overall_status": "PASS",
+  "title": "M5Stack Assistant Local 多语文档与产品目录",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "fe2961505ef4418db681b8205840bbba354710c9",
+    "workflow_commit": "12d1168ee750960bcff4910bb0e3a496f2e18bc0"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "aarch64 Linux virtual-machine consumer validation and host build"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "target": "全量英文逐文件一致，中文按篇封装无损，三语目录匹配"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "target": "虚拟设备验证。四项查阅、六项产品查询及按需读取 PDF"
+    },
+    {
+      "layer": "transport",
+      "status": "PASS",
+      "target": "新名称发布后逐文件回读"
+    },
+    {
+      "layer": "device_response",
+      "status": "NOT RUN",
+      "target": "M5Stack 硬件或固件"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "target": "线上问答缓存与回答质量 A/B"
+    }
+  ],
+  "evidence": [
+    "evidence/multilingual-package-summary.json"
+  ]
+}
