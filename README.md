@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-18 | ESP Emulator | 无网卡 Linux 原版 CardputerDict 可信 HTTPS | PASS（原版真实 TLS、SD 缓存与 I²S PCM，保留阻断对照） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-18-linux-vz-cardputerdict-trusted-https/) |
 | 2026-11-18 | ESP Emulator | Tab5 #188 原版 UIFlow2 的 DSI RX FIFO 复验 | PARTIAL（GT911 读回零，ST7123 画面与输入通过） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-tab5-uiflow254-199-dsi-rx-fifo/) |
 | 2026-11-18 | ESP Emulator | Tab5 #226 原版 USB Host 初始化和能力边界 | PARTIAL（初始化通过，外设传输、应用画面未建立） | [查看](records/esp-emulator/2026-11-14-p4-v1-originals/followups/2026-11-18-maker-fighter-dwc-self-check/followups/2026-11-18-maker-fighter-host-setup/followups/2026-11-18-tab5-226-usb-host-capability/) |
 | 2026-11-18 | ESP Emulator | Tab5 #227 原版启动和 GT911 触摸复验 | PASS（原版主页及确认弹窗，限定虚拟设备） | [查看](records/esp-emulator/2026-11-17-tab5-st7123-gt911-gestures/followups/2026-11-18-tab5-227-carplay-199/) |

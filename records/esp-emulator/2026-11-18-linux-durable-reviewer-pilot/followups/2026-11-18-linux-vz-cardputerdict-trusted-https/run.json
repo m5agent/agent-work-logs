@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "infra_baseline",
+  "date": "2026-11-18",
+  "overall_status": "PASS",
+  "title": "无网卡 Linux 原版 CardputerDict 可信 HTTPS 复审",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "218106fac28258325bed4a58091cf1217f67252f"
+  },
+  "hardware": {
+    "target": "Cardputer",
+    "validation": "virtual-device validation"
+  },
+  "firmware": {
+    "name": "CardputerDict 0.6.4",
+    "source_sha256": "346240b38be5bfbeaf8180f7b885a5d844c700a665dcab90d9cc62ce4b386b7e"
+  },
+  "execution": {
+    "environment": "Linux ARM64 VZ without NIC, constrained Virtio VSOCK, native Xtensa QEMU"
+  },
+  "checks": [
+    {
+      "check": "saved_snapshot_blocked",
+      "status": "PASS"
+    },
+    {
+      "check": "same_guest_trusted_tls_cache_and_pcm",
+      "status": "PASS"
+    },
+    {
+      "check": "cleanup",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputerdict-trusted-https.summary.json"
+  ],
+  "notes": [
+    "Resident worker and physical device NOT RUN",
+    "Burner NOT SUBMITTED"
+  ]
+}
