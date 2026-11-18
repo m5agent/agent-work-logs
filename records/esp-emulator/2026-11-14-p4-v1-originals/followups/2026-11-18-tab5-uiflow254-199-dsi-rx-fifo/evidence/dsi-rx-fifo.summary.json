@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "label": "virtual-device validation",
+  "claim": "Tab5 #188 RX FIFO receives a zero-filled response on the pinned firmware path",
+  "overall_status": "PARTIAL",
+  "identity": {
+    "firmware": "Tab5 UIFlow2 v2.5.4 original",
+    "source_commit": "a729e24b1e4724b783ab2d59eec689cfdfeb24b3",
+    "current_docs_only_main": "218106fac28258325bed4a58091cf1217f67252f",
+    "source_sha256": {
+      "platform/tools/serve.py": "114c885c906d13da577e89baf97761c8597c07db760a04c9c502f40c7d413f45",
+      "platform/tools/device_service.py": "aee36a1c3406d4c7e10acfd15ca617ce67a81510cd093c78e0d72c020e7eefe7",
+      "platform/tools/device_service_tab5_dsi.py": "1fda23cb5550e0a92e6d19ce0787b0453dba9cadf3c5e7c9bc8ed921e9f6cce2",
+      "platform/tools/device_service_specs.py": "2b3557fad081d27dbe4d6ae1e8a644dfd6c8646ade70fde3e0b67e040eaa6e87",
+      "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321",
+      "docs/device-service.openapi.yaml": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325"
+    },
+    "openapi_sha256": "82758d20ff3d129ec57e2e1587bf699d683f44525f8dfa8befc05b433ed74325",
+    "runtime_version": "1.1.0",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "working_assets_sha256": {
+      "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+      "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+      "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+    },
+    "original_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "original_size": 16121856,
+    "normalized_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7"
+  },
+  "runs": {
+    "gt911_normal": {
+      "board": "gt911-ili9881c",
+      "part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "elapsed_seconds": 20.001,
+      "dsi": {
+        "frame_codes": {
+          "session_not_running": 1,
+          "tab5_dsi_frame_unavailable": 9
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 1
+      },
+      "serial": {
+        "sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+        "bytes": 406,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "manifest_file_count": 5,
+      "application_partitions_verified_after_execution": [
+        {
+          "offset": 65536,
+          "size": 10027008,
+          "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5"
+        }
+      ],
+      "evidence_zip_sha256": "cf219c7139617196c7483db74c5e72baf18811b207cf47455b65fbd67685591c",
+      "evidence_zip_bytes": 4859504,
+      "original_unchanged": true,
+      "terminal_cleanup_confirmed": true,
+      "original_summary_sha256": "ef5c79d23ea4b8f43240533c0bb09542c0074b05555e8a36a900aaedee8dcbc9"
+    },
+    "gt911_fifo_diagnostic": {
+      "board": "gt911-ili9881c",
+      "part_sha256": "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286",
+      "elapsed_seconds": 20.001,
+      "dsi": {
+        "frame_codes": {
+          "tab5_dsi_frame_unavailable": 9
+        },
+        "states": {},
+        "nonblack_frames": 0,
+        "complete_frames": 0,
+        "zero_read_warnings": 1
+      },
+      "serial": {
+        "sha256": "6e050172021b16359af90700fd2206b7ad87a98be65fdb3427f347c25872a64e",
+        "bytes": 406,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "manifest_file_count": 5,
+      "application_partitions_verified_after_execution": [
+        {
+          "offset": 65536,
+          "size": 10027008,
+          "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5"
+        }
+      ],
+      "evidence_zip_sha256": "d245c0bc5b68158989e141c8d6775f696a65528c81d86e868c087a6405c5668f",
+      "evidence_zip_bytes": 4859587,
+      "original_unchanged": true,
+      "terminal_cleanup_confirmed": true,
+      "original_summary_sha256": "01c116548396ba6e9541e9d8d7db0b301c21c28a1de353398a9d118aa93e9bce",
+      "guest_instruction_observation": {
+        "dsihost": {
+          "api_return": {
+            "byte": 0,
+            "pc": 1209794576,
+            "status": 0
+          },
+          "command": 0,
+          "comparison": {
+            "actual": [
+              0,
+              0,
+              0
+            ],
+            "expected_first": 152,
+            "pc": 1209671080
+          },
+          "driver_entry": 1210436376,
+          "header_words_written": [
+            311,
+            6
+          ],
+          "last_status": {
+            "address": 1342832756,
+            "pc": 1210821642,
+            "word": 327685
+          },
+          "requested_bytes": 1,
+          "rx_payload": {
+            "address": 1342832752,
+            "pc": 1210821658,
+            "word": 0
+          }
+        },
+        "transcript_sha256": "68c17d6292b4be6c3bb9afb6352f63fffe483d05b3c72e16dc44340ce90f4ad6",
+        "detached": true,
+        "gdb_exit_code": 0
+      }
+    },
+    "st7123_normal_touch": {
+      "board": "st7123",
+      "part_sha256": "6ecac188e0ebd7659b6af627c3f1fcf9c5143e2f36b5f9a4b8cb187468de14f3",
+      "elapsed_seconds": 25.001,
+      "dsi": {
+        "frame_codes": {
+          "session_not_running": 1
+        },
+        "states": {},
+        "nonblack_frames": 10,
+        "complete_frames": 11,
+        "zero_read_warnings": 0
+      },
+      "serial": {
+        "sha256": "383d886ecf9b3d30fcf33f6d527f7e5c586f9617cab6ff56426156d9d88ace1c",
+        "bytes": 436,
+        "rom_boots": 1,
+        "software_resets": 0,
+        "lp_watchdog_resets": 0,
+        "core_dump_save_attempts": 0,
+        "core_dump_write_failures": 0,
+        "loaded_application_offsets": [],
+        "panic_markers": 0
+      },
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "flash_released": true,
+        "owned_p4_c6_children_exited": true
+      },
+      "manifest_file_count": 6,
+      "application_partitions_verified_after_execution": [
+        {
+          "offset": 65536,
+          "size": 10027008,
+          "sha256": "f49ac654a62bd521a0ee9e1adbbcf90db8b9f29cbd4493a88786eee6612971a5"
+        }
+      ],
+      "evidence_zip_sha256": "0c2195f2a9d2257297f2f6c039277d6b63cc4c86db08a9a3df0d8e36618f17f3",
+      "evidence_zip_bytes": 4929251,
+      "original_unchanged": true,
+      "terminal_cleanup_confirmed": true,
+      "original_summary_sha256": "d3957c7347509dfeaf8c943cd9fdfe288b6d626a524adaadc2f36feb33329b69",
+      "tap": {
+        "controller": "st7123",
+        "raw": [
+          83,
+          308
+        ],
+        "reports": {
+          "reports": 2,
+          "acknowledged": 2
+        },
+        "before_frame_sha256": "317e615fcd80fa15a9f749aa166a91012a10dd0e0d2a67793869768d983eeb67",
+        "reference_menu_roi_sha256": "fc0a6e6d5e51d01b57c3876bf0af14d20e8dab2098725246a54f322017eee093"
+      },
+      "visible_scan_page": {
+        "frame_sha256": "158a4ed0f60b5bd07317eff79306fc259c539f58e301fae67484811ae46833f4",
+        "reference_scan_roi_sha256": "0670f8044f534804d688f6a2bba35c8ee8ba0b31af7d8a3d400d72169cb2ba9e",
+        "size": [
+          720,
+          1280
+        ]
+      }
+    }
+  },
+  "comparison_scope": {
+    "prior_1_96_normal_gt911_uart_same_sha256": true,
+    "same_source_original_rom_and_runtime": true,
+    "debugger_excluded_from_normal_and_control": true,
+    "firmware_written_by_diagnostic": false
+  },
+  "upstream": {
+    "latest_confirmed": "v1.1.0",
+    "dsievent_direction": "emulator_to_consumer",
+    "consumer_synchronous_dsi_reply": "unavailable"
+  },
+  "not_run": [
+    "physical hardware",
+    "browser",
+    "external network",
+    "UIFlow2 cloud pairing",
+    "user script execution",
+    "I2C device scan data",
+    "nonzero panel read reply"
+  ],
+  "burner": "NOT SUBMITTED"
+}

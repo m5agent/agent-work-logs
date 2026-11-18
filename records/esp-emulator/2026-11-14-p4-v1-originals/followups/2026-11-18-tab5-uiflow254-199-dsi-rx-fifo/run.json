@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Tab5 原版 UIFlow2 v2.5.4 的 DSI RX FIFO 复验",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/188",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "218106fac28258325bed4a58091cf1217f67252f"
+  },
+  "hardware": {
+    "tab5_variants": [
+      "gt911-ili9881c",
+      "st7123"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Tab5 UIFlow2 v2.5.4 original",
+    "sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "bytes": 16121856,
+    "execution_sha256": "507f2aeeddfdd71357c019122cc76785b710ba24a4dc3adeb840d61c9ee8b1a7"
+  },
+  "execution": {
+    "environment": "isolated virtual Device Service 1.99 and native esp-emu 1.1.0",
+    "diagnostic": "read-only guest CPU instruction observation",
+    "archives_verified": 3,
+    "burner": "NOT SUBMITTED"
+  },
+  "checks": [
+    {
+      "name": "GT911 original cold-boot usable frame",
+      "status": "FAIL"
+    },
+    {
+      "name": "guest RX FIFO zero and panel ID comparison",
+      "status": "PASS"
+    },
+    {
+      "name": "ST7123 original offline frame and controller tap to I2C Scan view",
+      "status": "PASS"
+    },
+    {
+      "name": "evidence and teardown",
+      "status": "PASS"
+    },
+    {
+      "name": "physical, cloud and user Python validation",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/dsi-rx-fifo.summary.json",
+      "sha256": "a3538f05d10644bb2dd2269589a383735d1331116e52cc8705f2db7817e1a880"
+    },
+    {
+      "path": "code/fifo_probe.py",
+      "sha256": "acc91d1f8e495edef3738def3e27299937ea7079eddd24d3e77258cfbef2e582"
+    }
+  ],
+  "notes": [
+    "Exact source and guest identities are retained. Local state paths, credentials, internal ports and session IDs have been omitted."
+  ]
+}
