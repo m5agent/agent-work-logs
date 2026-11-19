@@ -1,0 +1,238 @@
+{
+  "date": "2026-11-19",
+  "status": "PASS_FINAL_WAV_PARSER_ORIGINAL_TONE_AND_FORMAT_REJECTION",
+  "validation": "virtual-device validation / ordinary isolated Device Service",
+  "prior_evidence": {
+    "filename": "tab5-userdemo-microphone-product.summary.json",
+    "sha256": "2b6fb7582e43bc4c99e24b02784097d39e9228d96c2683590bade375a047cd50",
+    "cases": [
+      "four_slot_tone",
+      "four_slot_silence",
+      "missing_audio_inject_acl",
+      "same_session_reset"
+    ],
+    "scope": "Four exact original-image product executions with the earlier audio parser."
+  },
+  "final_source_change": {
+    "platform/tools/device_service_audio.py": {
+      "previous": "34e1237573d5265c22f723afc3d7930408299ef930e07449d02833d3d1ffd4af",
+      "final": "15a5fc5cd47ee0f24ee4a76b340978f49cf22979d2d19d25a0011257148d3e87"
+    }
+  },
+  "identity": {
+    "main": "dc222d55a8743c341219b7b4e5a2b70c6da6cb4a",
+    "service_version": "1.99.5",
+    "openapi_sha256": "415496b845ad157c5f5f30aa1ff6a32a58477352521d53f863c60e977d0aec9c",
+    "extra_launch_adapter": false,
+    "firmware_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+    "execution_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "codec_part_sha256": "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270",
+    "runtime_assets_sha256": {
+      "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+      "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+      "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+    },
+    "physical_hardware": "NOT RUN",
+    "browser": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "board": "gt911-ili9881c",
+    "service_source_sha256": {
+      "platform/tools/serve.py": "bc300f72401d24bedb2acff5f8ef6e61bec2d94e0fa5515b888add68a5bb2683",
+      "platform/tools/device_service.py": "33b496daec4c66fecae22a69629fad53445212b8bdcfe0e38b67291bf1f37203",
+      "platform/tools/device_service_audio.py": "15a5fc5cd47ee0f24ee4a76b340978f49cf22979d2d19d25a0011257148d3e87",
+      "platform/tools/device_service_tab5_dsi.py": "c5b2431b8475f12da7960f4a6a3a87cbceb6bc9d479ba49f6a858fd12b200568",
+      "platform/tools/device_service_specs.py": "2b3557fad081d27dbe4d6ae1e8a644dfd6c8646ade70fde3e0b67e040eaa6e87",
+      "docs/device-service.openapi.yaml": "415496b845ad157c5f5f30aa1ff6a32a58477352521d53f863c60e977d0aec9c",
+      "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321"
+    }
+  },
+  "scope": "Exact admitted UserDemo V0.4 on GT911/ILI9881C, 10-second original dual-mic input and replay, plus HTTP admission of invalid stereo checked before allocation.",
+  "audio_method": "Four-channel synthetic s16le PCM, 48 kHz, ten seconds. Tone slot 0 is 440 Hz, slot 2 is 880 Hz. DSI frames measure each original chart and REC/PLAY/idle. Same-generation I2S1 TX cursors delimit the original PLAY phase. A 100 ms sine/cosine projection measures candidate frequencies in each stereo channel.",
+  "case": {
+    "status": "OBSERVED_STOCK_API_ROUND_TRIP",
+    "input": {
+      "source": "session-owned WAV artifact through esp-emu I2S1 RX",
+      "i2s_port": 1,
+      "rate": 48000,
+      "bits": 16,
+      "slots": 4,
+      "virtual_input_seconds": 10,
+      "slot_tones_hz": [
+        440,
+        0,
+        880,
+        0
+      ],
+      "wav_sha256": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+      "wav_bytes": 3840044
+    },
+    "microphone_receipt": {
+      "source": "esp_emu_i2s1_rx",
+      "artifact_id": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+      "pcm_sha256": "c93ad50783cea470e040d17516d795f995a224ae4a441bc63cfedb06909ed436",
+      "sample_format": "s16le",
+      "sample_rate_hz": 48000,
+      "channels": 4,
+      "frames": 480000
+    },
+    "stereo_control": {
+      "status": 400,
+      "code": "invalid_audio_fixture",
+      "no_lease_or_guest_allocated": true
+    },
+    "dual_mic_test": {
+      "coordinates": [
+        49,
+        793
+      ],
+      "controller_reports": {
+        "reports": 7,
+        "acknowledged": 7
+      }
+    },
+    "dual_mic_frame": {
+      "sha256": "ddf416125e806e33d17a26f8797ef520646b8af5961257493b791ddb283785d9",
+      "left": {
+        "trace_pixels": 793,
+        "amplitude_axis_span": 37
+      },
+      "right": {
+        "trace_pixels": 1878,
+        "amplitude_axis_span": 49
+      }
+    },
+    "record_button": {
+      "coordinates": [
+        145,
+        585
+      ],
+      "controller_reports": {
+        "reports": 6,
+        "acknowledged": 6
+      }
+    },
+    "record_phases": [
+      {
+        "phase": "REC",
+        "sha256": "2994edc55ca98b1954026c20e0b4a3ef50ac34f7a85e56684c805b6f26b02b4c",
+        "pcm_cursor": 1281984
+      },
+      {
+        "phase": "PLAY",
+        "sha256": "6840162cc1468afbb841b451cdcf2da3b874d0840facc124a0464b786f970efd",
+        "pcm_cursor": 1700544
+      },
+      {
+        "phase": "IDLE",
+        "sha256": "a9a99e65919c53f31118670c7bf21b619140264cbd5e5a7d4a0211f3f2f82a87",
+        "pcm_cursor": 2328384
+      }
+    ],
+    "i2s1_output": {
+      "window_start": 1013184,
+      "window_end": 2328384,
+      "pcm_sha256": "cc56a4a188f9a89d25f010f6edb1d540c584cca048d812f3263887cf961280e0",
+      "exact_tone_match_offset": null,
+      "exact_tone_match_frames": 0,
+      "all_zero_bytes": false,
+      "fixture_found_before_record": false,
+      "format": "s16le",
+      "rate": 48000,
+      "channels": 2,
+      "play_phase": {
+        "start": 1700544,
+        "end": 2328384,
+        "time_bins_ms": 100,
+        "active_bins": 29,
+        "candidate_peaks": [
+          {
+            "110": 388.8,
+            "220": 333.4,
+            "330": 821.1,
+            "440": 10836.7,
+            "660": 429.7,
+            "880": 154.8,
+            "1100": 112.6,
+            "1320": 95.2,
+            "1760": 72.6,
+            "2200": 58.1,
+            "3520": 41.2
+          },
+          {
+            "110": 231.2,
+            "220": 229.0,
+            "330": 225.1,
+            "440": 315.1,
+            "660": 462.4,
+            "880": 11710.9,
+            "1100": 516.3,
+            "1320": 268.9,
+            "1760": 114.7,
+            "2200": 94.6,
+            "3520": 52.0
+          }
+        ],
+        "strongest_rms_offset": 1988544,
+        "strongest_rms": 11669.73
+      },
+      "full_action": {
+        "start": 1013184,
+        "end": 2328384,
+        "time_bins_ms": 100,
+        "active_bins": 31,
+        "candidate_peaks": [
+          {
+            "110": 316.5,
+            "220": 306.6,
+            "330": 832.9,
+            "440": 10988.5,
+            "660": 412.4,
+            "880": 171.7,
+            "1100": 109.7,
+            "1320": 97.8,
+            "1760": 81.5,
+            "2200": 47.6,
+            "3520": 30.6
+          },
+          {
+            "110": 190.7,
+            "220": 245.9,
+            "330": 272.0,
+            "440": 304.9,
+            "660": 536.4,
+            "880": 13333.7,
+            "1100": 471.6,
+            "1320": 271.4,
+            "1760": 157.7,
+            "2200": 104.5,
+            "3520": 62.0
+          }
+        ],
+        "strongest_rms_offset": 1915584,
+        "strongest_rms": 11669.8
+      }
+    },
+    "scoped_evidence": {
+      "sha256": "81961d152485b52f34490deb1a746d86d73393a9d42c5731a46f443e4d10658b",
+      "pcm_sha256": "e831829f6779bdeaa6d4a25a8297eab18ff1e7117635aefd7a994f037c95c0cd",
+      "pcm_bytes": 57600,
+      "matches_finalized_wav": true
+    },
+    "uart": {
+      "markers": [],
+      "sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+      "bytes": 4274,
+      "app_record_markers_available": false
+    },
+    "cleanup": {
+      "terminal": "stopped",
+      "active_leases": 0,
+      "owned_children_exited": true,
+      "service_exited": true,
+      "temporary_state_removed_on_exit": true
+    },
+    "fixture_is_session_owned": true,
+    "real_p4_argv_observed": true
+  }
+}

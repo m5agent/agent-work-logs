@@ -48,6 +48,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | Tab5 UserDemo 原版双麦录放 | PASS（I²S1 音源、回放、静音及复位） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-userdemo-es8388/followups/2026-11-18-tab5-userdemo-i2c-routing/followups/2026-11-18-tab5-userdemo-i2s1-playback/followups/2026-11-18-tab5-userdemo-device-service-192/followups/2026-11-19-tab5-userdemo-1995-microphone/) |
+| 2026-11-19 | ESP Emulator | All day watch 原版游戏菜单导航与再次唤醒 | PASS（同会话离线操作和唤醒） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/followups/2026-11-18-all-day-watch-199-regression/followups/2026-11-19-all-day-watch-two-gpio-wakes/followups/2026-11-19-all-day-watch-games-navigation/) |
 | 2026-11-19 | ESP Emulator | M5TabOS 原版时区连续触摸 | PASS（ST7123 两档间隔与独立加号） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-19-tabos-199-timezone-controls/followups/2026-11-19-tabos-1994-cadence/) |
 | 2026-11-19 | ESP Emulator | 98TAB5 原版冷启动指令批量对照 | FAIL（无卡三轮复位，指令批量不恢复画面） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-19-98tab5-1994-instruction-batch/) |
 | 2026-11-19 | ESP Emulator | UIFlow2 WebREPL 断开方向与分层心跳 | PASS（原版抓包 API 与界面回放） | [查看](records/esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-19-webrepl-close-observation/) |

@@ -1,0 +1,532 @@
+{
+  "schema_version": 1,
+  "validation": "virtual-device validation",
+  "status": "PASS_ORIGINAL_OFFLINE_MENU_AND_RETURN_WITH_LIMITS",
+  "source": {
+    "emulator_commit": "2e4ecb1037e38a3d5ce47864aa0cfd54b8c2b858",
+    "device_api": "1.99.4",
+    "openapi_sha256": "de40f9f908869b7eb1cf9a775887acd209c75644bf44277d098659fc8defd914",
+    "native_qemu_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+    "s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "device": "sticks3",
+    "runtime": "qemu",
+    "watchdog_trace_enabled": false,
+    "guest_nic": "disabled"
+  },
+  "firmware": {
+    "name": "All day watch",
+    "version": "0.3.8",
+    "original_bytes": 1840512,
+    "original_sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+    "normalized_flash_sha256": "1d6ae6df2473bebf662955bbb050ce2304081e79485d9044d0bff3d150a4e363"
+  },
+  "recorded_outcomes": {
+    "initial_sleep_delay_after_historical_inputs_seconds": 20.109,
+    "B_wake_A_menu": {
+      "before": {
+        "file": "navigation-clock-before-A.png",
+        "width": 135,
+        "height": 240,
+        "nonblack_pixels": 32400,
+        "sha256": "b1a12878a24ddad3c3f3e05da1216e8f5e748bb8e0fdaf881fbdba03a3c59ad4"
+      },
+      "after": {
+        "file": "navigation-after-A.png",
+        "width": 135,
+        "height": 240,
+        "nonblack_pixels": 32400,
+        "sha256": "e11a5293b1b74695573dc95d28913124cf656fd1ff7e9df383e98bc82b811315"
+      },
+      "input": {
+        "kind": "button",
+        "control": "a",
+        "action": "click",
+        "settle_seconds": 0.8
+      },
+      "before_runstate": "running",
+      "after_runstate": "running",
+      "receipt": {
+        "input": "button:a",
+        "accepted": true,
+        "action": "click",
+        "timing": {
+          "clock": "virtual",
+          "hold_seconds": 0.12,
+          "hold_time_ms": 120,
+          "presses": 1,
+          "completion": "queued"
+        }
+      }
+    },
+    "B_hold_clock": {
+      "input": {
+        "kind": "button",
+        "control": "b",
+        "action": "hold",
+        "seconds": 2.0,
+        "settle_seconds": 1.0
+      },
+      "after": {
+        "file": "navigation-after-long-B.png",
+        "width": 135,
+        "height": 240,
+        "nonblack_pixels": 32400,
+        "sha256": "b1a12878a24ddad3c3f3e05da1216e8f5e748bb8e0fdaf881fbdba03a3c59ad4"
+      },
+      "after_runstate": "running",
+      "receipt": {
+        "input": "button:b",
+        "accepted": true,
+        "action": "hold",
+        "timing": {
+          "clock": "virtual",
+          "hold_seconds": 2.0,
+          "hold_time_ms": 2000,
+          "presses": 1,
+          "completion": "queued"
+        }
+      }
+    },
+    "cycles": [
+      {
+        "number": 1,
+        "suspended_before": true,
+        "pre_wake_frame": {
+          "file": "cycle-1-before-wake.png",
+          "width": 135,
+          "height": 240,
+          "nonblack_pixels": 0,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0"
+        },
+        "wake_input": "button:b",
+        "observed_new_lit_running_frame": true,
+        "natural_resuspend": true,
+        "wake_click_timing": {
+          "clock": "host",
+          "hold_seconds": 0.12,
+          "presses": 1,
+          "completion": "events_sent"
+        },
+        "last_frame": {
+          "after_click_seconds": 40.723,
+          "before": "suspended",
+          "after": "suspended",
+          "file": "cycle-1-frame-007.png",
+          "width": 135,
+          "height": 240,
+          "nonblack_pixels": 0,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0"
+        },
+        "frame_sample_count": 8,
+        "first_running_checkpoint_after_navigation_seconds": 19.5,
+        "initial_running_checkpoint": "running asserted immediately after B click receipt, latency duration not retained"
+      },
+      {
+        "number": 2,
+        "suspended_before": true,
+        "pre_wake_frame": {
+          "file": "cycle-2-before-wake.png",
+          "width": 135,
+          "height": 240,
+          "nonblack_pixels": 0,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0"
+        },
+        "wake_input": "button:b",
+        "running_seconds_from_wake": 0.442,
+        "observed_new_lit_running_frame": true,
+        "natural_resuspend": true,
+        "wake_click_timing": {
+          "clock": "host",
+          "hold_seconds": 0.12,
+          "presses": 1,
+          "completion": "events_sent"
+        },
+        "last_frame": {
+          "after_click_seconds": 20.651,
+          "before": "suspended",
+          "after": "suspended",
+          "file": "cycle-2-frame-008.png",
+          "width": 135,
+          "height": 240,
+          "nonblack_pixels": 0,
+          "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0"
+        },
+        "frame_sample_count": 9
+      }
+    ],
+    "final_run_state": "suspended",
+    "crash_status": "no_evidence",
+    "panic": null,
+    "boot": {
+      "rom_banners": 1,
+      "idf_banners": 0,
+      "reboot_requests": 0,
+      "reset_reports": [
+        {
+          "code": "0x1",
+          "reason": "POWERON"
+        }
+      ],
+      "application_load_count": 0,
+      "application_loads": []
+    },
+    "live_cpu_pc_samples": [
+      {
+        "phase": "before-A",
+        "source": "qmp_hmp_info_registers",
+        "target": "xtensa",
+        "cpus": [
+          {
+            "cpu_index": 0,
+            "pc": "0x4211d4fe"
+          },
+          {
+            "cpu_index": 1,
+            "pc": "0x4205f8d0"
+          }
+        ],
+        "run_state_before": "running",
+        "run_state_after": "running",
+        "receipt_sha256": "c05898e07d563455077708809ce169d0bcf16058f9aa516967c6eb135c88cb33"
+      },
+      {
+        "phase": "after-A",
+        "source": "qmp_hmp_info_registers",
+        "target": "xtensa",
+        "cpus": [
+          {
+            "cpu_index": 0,
+            "pc": "0x4038129f"
+          },
+          {
+            "cpu_index": 1,
+            "pc": "0x403797c8"
+          }
+        ],
+        "run_state_before": "running",
+        "run_state_after": "running",
+        "receipt_sha256": "9f32754a66482ab0d4bc36260e9ff9e2cdc6c4b50b28d34c4a9d7d59cdc549c4"
+      },
+      {
+        "phase": "after-long-B",
+        "source": "qmp_hmp_info_registers",
+        "target": "xtensa",
+        "cpus": [
+          {
+            "cpu_index": 0,
+            "pc": "0x4037e060"
+          },
+          {
+            "cpu_index": 1,
+            "pc": "0x4037e039"
+          }
+        ],
+        "run_state_before": "running",
+        "run_state_after": "running",
+        "receipt_sha256": "e616ab1fe5c3d92b2d1da63a84e6b4e14b622772a94f8c2d42b0282b9b55df0d"
+      }
+    ]
+  },
+  "serial_summary": {
+    "sha256": "af6fbbb8df72252dd98bf6f4f29d5f29a23143d00ea7b2fdc0aff0a10e4db340",
+    "bytes": 1006,
+    "poweron_count": 1,
+    "software_reset_count": 0
+  },
+  "evidence_zip": {
+    "sha256": "ea68868de1632a04e96c387566095a0f38c247baf1fb20a704da97367d8b7763",
+    "bytes": 10809,
+    "CRC": "PASS",
+    "manifest_files_sha256": "PASS",
+    "same_session_identity": "PASS",
+    "collected_before_stop": true,
+    "payloads_crc_size_sha_verified_independently": 8
+  },
+  "frame_roi_summary": {
+    "orientation": "135x240 raw panel rotated clockwise into logical240x135 for ROI accounting",
+    "frames": {
+      "navigation-clock-before-A.png": {
+        "sha256": "b1a12878a24ddad3c3f3e05da1216e8f5e748bb8e0fdaf881fbdba03a3c59ad4",
+        "rois": {
+          "menu_title": {
+            "logical_roi": [
+              0,
+              0,
+              240,
+              15
+            ],
+            "rgb_sha256": "85b2c7add63d125364e82ae9f89507faa291cf55cb5ad2fc42d4b6227a7b8278",
+            "pixels": 3600,
+            "nonblack_pixels": 3600,
+            "bright_green_pixels": 0
+          },
+          "menu_entries": {
+            "logical_roi": [
+              0,
+              15,
+              235,
+              110
+            ],
+            "rgb_sha256": "0e2c67dde56a9d5b48db56ed2a25d17d32f39e9d30458d575e56f2d0af3b1bde",
+            "pixels": 22325,
+            "nonblack_pixels": 22325,
+            "bright_green_pixels": 800
+          },
+          "clock_digits": {
+            "logical_roi": [
+              50,
+              24,
+              195,
+              72
+            ],
+            "rgb_sha256": "f16b4e77859b7fc6d798e3702dbca19dcb6a1a50ffaf853202f2853a12d4522b",
+            "pixels": 6960,
+            "nonblack_pixels": 6960,
+            "bright_green_pixels": 575
+          }
+        }
+      },
+      "navigation-after-A.png": {
+        "sha256": "e11a5293b1b74695573dc95d28913124cf656fd1ff7e9df383e98bc82b811315",
+        "rois": {
+          "menu_title": {
+            "logical_roi": [
+              0,
+              0,
+              240,
+              15
+            ],
+            "rgb_sha256": "484bf3b0cd3468ac351401f7c97bd113dcbe807f90a2027d0c2c5099a0a9a7b9",
+            "pixels": 3600,
+            "nonblack_pixels": 3600,
+            "bright_green_pixels": 351
+          },
+          "menu_entries": {
+            "logical_roi": [
+              0,
+              15,
+              235,
+              110
+            ],
+            "rgb_sha256": "7f5ee524f5b86ded542543488d3f8e73054cc02c3ffdd31a464b386a9667c9e7",
+            "pixels": 22325,
+            "nonblack_pixels": 22325,
+            "bright_green_pixels": 2374
+          },
+          "clock_digits": {
+            "logical_roi": [
+              50,
+              24,
+              195,
+              72
+            ],
+            "rgb_sha256": "9dfb5ad7cd2392d557ae14722d721114047158d11575ab0371241961d1a38d0f",
+            "pixels": 6960,
+            "nonblack_pixels": 6960,
+            "bright_green_pixels": 548
+          }
+        }
+      },
+      "navigation-after-long-B.png": {
+        "sha256": "b1a12878a24ddad3c3f3e05da1216e8f5e748bb8e0fdaf881fbdba03a3c59ad4",
+        "rois": {
+          "menu_title": {
+            "logical_roi": [
+              0,
+              0,
+              240,
+              15
+            ],
+            "rgb_sha256": "85b2c7add63d125364e82ae9f89507faa291cf55cb5ad2fc42d4b6227a7b8278",
+            "pixels": 3600,
+            "nonblack_pixels": 3600,
+            "bright_green_pixels": 0
+          },
+          "menu_entries": {
+            "logical_roi": [
+              0,
+              15,
+              235,
+              110
+            ],
+            "rgb_sha256": "0e2c67dde56a9d5b48db56ed2a25d17d32f39e9d30458d575e56f2d0af3b1bde",
+            "pixels": 22325,
+            "nonblack_pixels": 22325,
+            "bright_green_pixels": 800
+          },
+          "clock_digits": {
+            "logical_roi": [
+              50,
+              24,
+              195,
+              72
+            ],
+            "rgb_sha256": "f16b4e77859b7fc6d798e3702dbca19dcb6a1a50ffaf853202f2853a12d4522b",
+            "pixels": 6960,
+            "nonblack_pixels": 6960,
+            "bright_green_pixels": 575
+          }
+        }
+      },
+      "cycle-1-before-wake.png": {
+        "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+        "rois": {
+          "menu_title": {
+            "logical_roi": [
+              0,
+              0,
+              240,
+              15
+            ],
+            "rgb_sha256": "158b8db9da6b60d8cd31b06f22d3a911fd7e64ec70a281848089a8eb150d1609",
+            "pixels": 3600,
+            "nonblack_pixels": 0,
+            "bright_green_pixels": 0
+          },
+          "menu_entries": {
+            "logical_roi": [
+              0,
+              15,
+              235,
+              110
+            ],
+            "rgb_sha256": "a6193175d44af76a02448e93ef05300eae363c0a9395770e597eb25bb9d7ebf1",
+            "pixels": 22325,
+            "nonblack_pixels": 0,
+            "bright_green_pixels": 0
+          },
+          "clock_digits": {
+            "logical_roi": [
+              50,
+              24,
+              195,
+              72
+            ],
+            "rgb_sha256": "c256371768810a814d7d0448265db0009b6cec92fd0c86209f9b3b317894ea9d",
+            "pixels": 6960,
+            "nonblack_pixels": 0,
+            "bright_green_pixels": 0
+          }
+        }
+      },
+      "cycle-2-before-wake.png": {
+        "sha256": "6137776e702c5b264abb6b213b709fd7ba3f40310d38d3e33d7f06be08cfc5c0",
+        "rois": {
+          "menu_title": {
+            "logical_roi": [
+              0,
+              0,
+              240,
+              15
+            ],
+            "rgb_sha256": "158b8db9da6b60d8cd31b06f22d3a911fd7e64ec70a281848089a8eb150d1609",
+            "pixels": 3600,
+            "nonblack_pixels": 0,
+            "bright_green_pixels": 0
+          },
+          "menu_entries": {
+            "logical_roi": [
+              0,
+              15,
+              235,
+              110
+            ],
+            "rgb_sha256": "a6193175d44af76a02448e93ef05300eae363c0a9395770e597eb25bb9d7ebf1",
+            "pixels": 22325,
+            "nonblack_pixels": 0,
+            "bright_green_pixels": 0
+          },
+          "clock_digits": {
+            "logical_roi": [
+              50,
+              24,
+              195,
+              72
+            ],
+            "rgb_sha256": "c256371768810a814d7d0448265db0009b6cec92fd0c86209f9b3b317894ea9d",
+            "pixels": 6960,
+            "nonblack_pixels": 0,
+            "bright_green_pixels": 0
+          }
+        }
+      }
+    }
+  },
+  "evidence_authority": {
+    "ui_navigation": "Actual original framebuffer inspection and before/after hashes, supported by same-session semantic inputs.",
+    "live_pc_readback": "Three read-only CPU PC snapshots with running state; this is separate diagnostic evidence and does not establish UI readiness or symbol-level function attribution.",
+    "sleep_and_wake": "Fresh frame samples bracketed by QMP run-state observations; final black frames correlate with suspended state."
+  },
+  "observer_review": {
+    "current_recorded_guest_runs": 1,
+    "failed_guest_or_observer_cases_observed": [],
+    "preserved_measurement_correction": {
+      "field": "First raw cycle running_seconds_from_wake",
+      "reason": "The timestamp was taken after menu navigation, so it is not a B wake latency.",
+      "cycle1_wake_latency": "NOT RUN",
+      "cycle1_later_running_checkpoint_after_navigation_seconds": 19.5,
+      "cycle2_first_observed_running_after_B_seconds": 0.442
+    },
+    "historical_failures": "Preserved in prior records; this follow-up does not overwrite or close them."
+  },
+  "cleanup": {
+    "lease_state": "stopped",
+    "active_lease_count": 0,
+    "mutable_flash_retained": false,
+    "owned_guest_exited": true,
+    "owned_service_stopped": true
+  },
+  "independent_readback": {
+    "status": "PASS_READ_ONLY_EVIDENCE_AUDIT",
+    "source": "2e4ecb1037e38a3d5ce47864aa0cfd54b8c2b858",
+    "source_files_verified": 4,
+    "original_bytes_and_sha_verified": true,
+    "runtime_and_rom_sha_verified": true,
+    "navigation_frame_byte_equal_after_return": true,
+    "menu_frame_distinct": true,
+    "menu_and_clock_visually_inspected": true,
+    "roi_frames_verified": 5,
+    "two_natural_resuspends": true,
+    "one_new_wake_after_navigation": true,
+    "one_guest_poweron_no_software_reset_marker": true,
+    "zip_payloads_crc_size_sha_verified": 8,
+    "live_pc_phase_count": 3,
+    "live_pc_does_not_certify_ui_readiness": true,
+    "cycle1_raw_latency_label_not_a_wake_latency": true,
+    "cycle2_observed_running_seconds": 0.442,
+    "failed_observer_cases_observed": 0,
+    "new_services_or_tests_run": false
+  },
+  "provenance": [
+    {
+      "role": "safe_terminal_summary",
+      "bytes": 7919,
+      "sha256": "7f7c5b0f6baf8c7729717c1fdb6ed85fe2bb678a40c92e2d944257e56bd487e4"
+    },
+    {
+      "role": "raw_terminal_summary_kept_private",
+      "bytes": 17734,
+      "sha256": "7b2bd4922f8f650da2643934da08c32a8ef5444b155f5ec25698745508de1aea"
+    },
+    {
+      "role": "frame_roi_summary",
+      "bytes": 5780,
+      "sha256": "e19809384cf34befe65b1c31455cccec4cf4a3fa474e28d4a5e12405759e4ee5"
+    },
+    {
+      "role": "read_only_archive_audit",
+      "bytes": 798,
+      "sha256": "590895c7ac8224afd3e65fee1b9e9e295972e3c13ab89da0212d89bcacc259db"
+    }
+  ],
+  "limits": {
+    "game_entry_or_gameplay": "NOT RUN",
+    "network_login_or_time_sync": "NOT RUN",
+    "external_slow_clock": "NOT RUN",
+    "other_wake_sources": "NOT RUN",
+    "physical_hardware_or_electrical_behavior": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  },
+  "redaction": "Raw logs, ZIP, original firmware/Flash, frame series, host locations, endpoint details, unique task/session/worker identifiers and any room/account data remain private. No screenshots are included."
+}

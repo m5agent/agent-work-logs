@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "virtual_device_regression",
+  "date": "2026-11-19",
+  "title": "All day watch 原版游戏菜单导航与再次唤醒",
+  "source": {
+    "emulator_commit": "2e4ecb1037e38a3d5ce47864aa0cfd54b8c2b858",
+    "device_api": "1.99.4",
+    "openapi_sha256": "de40f9f908869b7eb1cf9a775887acd209c75644bf44277d098659fc8defd914",
+    "native_qemu_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+    "s3_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "device": "sticks3",
+    "runtime": "qemu",
+    "watchdog_trace_enabled": false,
+    "guest_nic": "disabled"
+  },
+  "hardware": {
+    "model": "StickS3",
+    "validation": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "All day watch",
+    "version": "0.3.8",
+    "original_bytes": 1840512,
+    "original_sha256": "f6e88da91e68e5183785b370ca76338ec34afea90a9440862af8b221724db4b8",
+    "normalized_flash_sha256": "1d6ae6df2473bebf662955bbb050ce2304081e79485d9044d0bff3d150a4e363"
+  },
+  "execution": {
+    "result": "PASS",
+    "guest_runs": 1,
+    "navigation": "B wake -> A menu -> B hold 2s -> identical offline clock -> resuspend -> B wake -> resuspend",
+    "poweron_count": 1,
+    "software_reset_markers": 0,
+    "cycles": 2,
+    "evidence": "evidence/watch-games-navigation.summary.json",
+    "evidence_bytes": 16877,
+    "evidence_sha256": "7ddd8d029f2afc6e4d5f0ec4d6c7c266706b78f35224165517370e78586b0504"
+  },
+  "checks": {
+    "source_firmware_runtime_rom_identity": "PASS",
+    "same_original_menu_and_return_frame": "PASS",
+    "second_B_wake_and_two_natural_resuspends": "PASS",
+    "zip_payload_crc_size_sha": "PASS",
+    "ui_readiness_from_actual_frames": "PASS",
+    "live_pc_readback": "PASS",
+    "cycle1_wake_latency": "NOT RUN",
+    "observer_case_review": "REVIEW",
+    "history_preserved_and_owned_cleanup": "PASS",
+    "gameplay": "NOT RUN",
+    "network_login_time_sync": "NOT RUN",
+    "external_clock_and_other_wakes": "NOT RUN",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm": "NOT RUN",
+    "burner_submission": "NOT RUN"
+  }
+}

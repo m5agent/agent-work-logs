@@ -1,0 +1,667 @@
+{
+  "date": "2026-11-19",
+  "status": "PASS_ORIGINAL_USERDEMO_P4_I2S1_INPUT_APP_PLAYBACK_AND_RESET",
+  "validation": "virtual-device validation / ordinary isolated Device Service",
+  "firmware": "Published M5Stack Tab5 UserDemo V0.4, unmodified",
+  "firmware_release_source": "68b19d37fbf9cefd5f256992f5dca34794c62ab4",
+  "firmware_embedded_revision": "4b57c62a2aef99f6f68902c045c34fea467e21a7",
+  "runtime_version": "esp-emu 1.1.0",
+  "launch_route": "POST /api/v1/artifacts then POST /api/v1/sessions with microphone_wav_artifact_id",
+  "audio_method": "Four-channel synthetic s16le PCM, 48 kHz, ten seconds. Tone slot 0 is 440 Hz, slot 2 is 880 Hz. DSI frames measure each original chart and REC/PLAY/idle. Same-generation I2S1 TX cursors delimit the original PLAY phase. A 100 ms sine/cosine projection measures candidate frequencies in each stereo channel.",
+  "guardrails": "Original application bytes retained. Overlay fixture is isolated and verified. No network or debugger attachment.",
+  "limits": "Virtual digital PCM for the exact admitted UserDemo image and codec Part. No acoustic validation, other Tab5 boards, other firmware, hot swapping, browser, or Burner.",
+  "identity": {
+    "main": "dc222d55a8743c341219b7b4e5a2b70c6da6cb4a",
+    "service_version": "1.99.5",
+    "service_source_sha256": {
+      "platform/tools/serve.py": "bc300f72401d24bedb2acff5f8ef6e61bec2d94e0fa5515b888add68a5bb2683",
+      "platform/tools/device_service.py": "33b496daec4c66fecae22a69629fad53445212b8bdcfe0e38b67291bf1f37203",
+      "platform/tools/device_service_audio.py": "34e1237573d5265c22f723afc3d7930408299ef930e07449d02833d3d1ffd4af",
+      "platform/tools/device_service_tab5_dsi.py": "c5b2431b8475f12da7960f4a6a3a87cbceb6bc9d479ba49f6a858fd12b200568",
+      "platform/tools/device_service_specs.py": "2b3557fad081d27dbe4d6ae1e8a644dfd6c8646ade70fde3e0b67e040eaa6e87",
+      "docs/device-service.openapi.yaml": "415496b845ad157c5f5f30aa1ff6a32a58477352521d53f863c60e977d0aec9c",
+      "tests/uiflow2/device_matrix.json": "a0c291c837a0751d2969617867fb3da43ccecbb863e9f0261258daa102f10321"
+    },
+    "openapi_sha256": "415496b845ad157c5f5f30aa1ff6a32a58477352521d53f863c60e977d0aec9c",
+    "extra_launch_adapter": false,
+    "firmware_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+    "execution_sha256": "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9",
+    "runtime_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "codec_part_sha256": "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270",
+    "runtime_assets_sha256": {
+      "rom": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+      "efuse": "0f8266520c4264b2ba898f3645e3f6f701e9304968c5a51307fe4baf6fc03f1e",
+      "c6_firmware": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554"
+    },
+    "physical_hardware": "NOT RUN",
+    "browser": "NOT RUN",
+    "burner": "NOT SUBMITTED",
+    "board": "gt911-ili9881c"
+  },
+  "cases": {
+    "four_slot_tone": {
+      "status": "OBSERVED_STOCK_API_ROUND_TRIP",
+      "input": {
+        "source": "session-owned WAV artifact through esp-emu I2S1 RX",
+        "i2s_port": 1,
+        "rate": 48000,
+        "bits": 16,
+        "slots": 4,
+        "virtual_input_seconds": 10,
+        "slot_tones_hz": [
+          440,
+          0,
+          880,
+          0
+        ],
+        "wav_sha256": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+        "wav_bytes": 3840044
+      },
+      "dashboard_sha256": "e728675655b06348954837268c77f76d50097d31e3745e717e8b49dd8ddc9508",
+      "stereo_control": {
+        "status": 400,
+        "code": "invalid_audio_fixture",
+        "no_lease_or_guest_allocated": true
+      },
+      "fixture_is_session_owned": true,
+      "real_p4_argv_observed": true,
+      "dual_mic_test": {
+        "coordinates": [
+          49,
+          793
+        ],
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        }
+      },
+      "dual_mic_frame": {
+        "sha256": "0f884cce9394ea14d6f34189bb1360dc33d4b7eb365d65700c6fddf91763fd3f",
+        "left": {
+          "trace_pixels": 782,
+          "amplitude_axis_span": 37
+        },
+        "right": {
+          "trace_pixels": 2012,
+          "amplitude_axis_span": 49
+        }
+      },
+      "record_button": {
+        "coordinates": [
+          145,
+          585
+        ],
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        }
+      },
+      "record_phases": [
+        {
+          "phase": "REC",
+          "sha256": "065711ff3c1e5dd27a940a8c90b43f92e368ea9bf10e6b36d66db0ef14679c61",
+          "pcm_cursor": 1408704
+        },
+        {
+          "phase": "PLAY",
+          "sha256": "c1fb3e4966906fb94cbbd22d64aee0edf5c9e22ea1474eead1878f792c2fbc4b",
+          "pcm_cursor": 1834944
+        },
+        {
+          "phase": "IDLE",
+          "sha256": "82a992899a769cdde16f4bef27d5677441f6450a45a7402192771b13e0351f54",
+          "pcm_cursor": 2456064
+        }
+      ],
+      "i2s1_output": {
+        "window_start": 1117824,
+        "window_end": 2456064,
+        "pcm_sha256": "78c040a92dfe71c5615dcadba2c748420e2d3ee27f2f52634e5278e958a511d3",
+        "exact_tone_match_offset": null,
+        "exact_tone_match_frames": 0,
+        "all_zero_bytes": false,
+        "fixture_found_before_record": false,
+        "format": "s16le",
+        "rate": 48000,
+        "channels": 2,
+        "play_phase": {
+          "start": 1834944,
+          "end": 2456064,
+          "time_bins_ms": 100,
+          "active_bins": 27,
+          "candidate_peaks": [
+            {
+              "110": 395.0,
+              "220": 318.8,
+              "330": 724.0,
+              "440": 10919.7,
+              "660": 467.8,
+              "880": 203.0,
+              "1100": 106.5,
+              "1320": 98.8,
+              "1760": 77.9,
+              "2200": 62.1,
+              "3520": 45.2
+            },
+            {
+              "110": 219.6,
+              "220": 218.6,
+              "330": 270.2,
+              "440": 289.6,
+              "660": 506.3,
+              "880": 11711.2,
+              "1100": 490.3,
+              "1320": 280.9,
+              "1760": 124.1,
+              "2200": 100.9,
+              "3520": 52.0
+            }
+          ],
+          "strongest_rms_offset": 2142144,
+          "strongest_rms": 11669.9
+        },
+        "full_action": {
+          "start": 1117824,
+          "end": 2456064,
+          "time_bins_ms": 100,
+          "active_bins": 31,
+          "candidate_peaks": [
+            {
+              "110": 311.1,
+              "220": 304.6,
+              "330": 761.2,
+              "440": 10985.9,
+              "660": 412.1,
+              "880": 170.8,
+              "1100": 116.0,
+              "1320": 100.4,
+              "1760": 80.9,
+              "2200": 58.3,
+              "3520": 34.8
+            },
+            {
+              "110": 194.7,
+              "220": 246.6,
+              "330": 271.5,
+              "440": 300.6,
+              "660": 537.2,
+              "880": 11717.1,
+              "1100": 466.9,
+              "1320": 267.9,
+              "1760": 158.1,
+              "2200": 103.4,
+              "3520": 62.1
+            }
+          ],
+          "strongest_rms_offset": 2001024,
+          "strongest_rms": 11669.8
+        }
+      },
+      "uart": {
+        "markers": [],
+        "sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+        "bytes": 4274,
+        "app_record_markers_available": false
+      },
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "owned_children_exited": true,
+        "service_exited": true,
+        "temporary_state_removed_on_exit": true
+      },
+      "microphone_receipt": {
+        "source": "esp_emu_i2s1_rx",
+        "artifact_id": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+        "pcm_sha256": "c93ad50783cea470e040d17516d795f995a224ae4a441bc63cfedb06909ed436",
+        "sample_format": "s16le",
+        "sample_rate_hz": 48000,
+        "channels": 4,
+        "frames": 480000
+      },
+      "scoped_evidence": {
+        "sha256": "49ffb8e06f2a1248dc98fae6a6f6d0417167b4f91cf276de3eed7800f38e8de4",
+        "pcm_sha256": "6ef479800fe494c19fb017c661e105537693a37a1ef3f63fac2cf2876d28f74a",
+        "pcm_bytes": 57600,
+        "matches_finalized_wav": true
+      }
+    },
+    "four_slot_silence": {
+      "status": "OBSERVED_STOCK_API_ROUND_TRIP",
+      "input": {
+        "source": "session-owned WAV artifact through esp-emu I2S1 RX",
+        "i2s_port": 1,
+        "rate": 48000,
+        "bits": 16,
+        "slots": 4,
+        "virtual_input_seconds": 10,
+        "slot_tones_hz": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "wav_sha256": "11f10458e0de5b60f851d46fec6d29f0eebab62ffceb237b626e810a26a44d22",
+        "wav_bytes": 3840044
+      },
+      "dashboard_sha256": "e728675655b06348954837268c77f76d50097d31e3745e717e8b49dd8ddc9508",
+      "stereo_control": {
+        "status": 400,
+        "code": "invalid_audio_fixture",
+        "no_lease_or_guest_allocated": true
+      },
+      "fixture_is_session_owned": true,
+      "real_p4_argv_observed": true,
+      "dual_mic_test": {
+        "coordinates": [
+          49,
+          793
+        ],
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        }
+      },
+      "dual_mic_frame": {
+        "sha256": "1affbe337f91150331457a1b79efa7b41874cba17ebb22b2a7d5e3d9a8987b72",
+        "left": {
+          "trace_pixels": 191,
+          "amplitude_axis_span": 0
+        },
+        "right": {
+          "trace_pixels": 218,
+          "amplitude_axis_span": 0
+        }
+      },
+      "record_button": {
+        "coordinates": [
+          145,
+          585
+        ],
+        "controller_reports": {
+          "reports": 6,
+          "acknowledged": 6
+        }
+      },
+      "record_phases": [
+        {
+          "phase": "REC",
+          "sha256": "e38725f9cc67a5d6a0b276d5a0f6cd2734461142c6c55a26c1327a527ba80c50",
+          "pcm_cursor": 1321344
+        },
+        {
+          "phase": "PLAY",
+          "sha256": "9088b78ed90b23aee1cba18e7116cfa0eebc85427b30a2988d4227f6f2ce9c0c",
+          "pcm_cursor": 1748544
+        },
+        {
+          "phase": "IDLE",
+          "sha256": "9ab6e110bd57a992404666a86379658a0ef5e76f6e545caee8eb8146d682c5ff",
+          "pcm_cursor": 2323584
+        }
+      ],
+      "i2s1_output": {
+        "window_start": 1055424,
+        "window_end": 2323584,
+        "pcm_sha256": "370d3571d74d6905be36560187814cc488cc2cd0ba7c98a4b94199501ad59f3f",
+        "exact_tone_match_offset": null,
+        "exact_tone_match_frames": 0,
+        "all_zero_bytes": true,
+        "fixture_found_before_record": false,
+        "format": "s16le",
+        "rate": 48000,
+        "channels": 2,
+        "play_phase": {
+          "start": 1748544,
+          "end": 2323584,
+          "time_bins_ms": 100,
+          "active_bins": 0,
+          "candidate_peaks": [
+            {
+              "110": 0,
+              "220": 0,
+              "330": 0,
+              "440": 0,
+              "660": 0,
+              "880": 0,
+              "1100": 0,
+              "1320": 0,
+              "1760": 0,
+              "2200": 0,
+              "3520": 0
+            },
+            {
+              "110": 0,
+              "220": 0,
+              "330": 0,
+              "440": 0,
+              "660": 0,
+              "880": 0,
+              "1100": 0,
+              "1320": 0,
+              "1760": 0,
+              "2200": 0,
+              "3520": 0
+            }
+          ],
+          "strongest_rms_offset": null,
+          "strongest_rms": 0
+        },
+        "full_action": {
+          "start": 1055424,
+          "end": 2323584,
+          "time_bins_ms": 100,
+          "active_bins": 0,
+          "candidate_peaks": [
+            {
+              "110": 0,
+              "220": 0,
+              "330": 0,
+              "440": 0,
+              "660": 0,
+              "880": 0,
+              "1100": 0,
+              "1320": 0,
+              "1760": 0,
+              "2200": 0,
+              "3520": 0
+            },
+            {
+              "110": 0,
+              "220": 0,
+              "330": 0,
+              "440": 0,
+              "660": 0,
+              "880": 0,
+              "1100": 0,
+              "1320": 0,
+              "1760": 0,
+              "2200": 0,
+              "3520": 0
+            }
+          ],
+          "strongest_rms_offset": null,
+          "strongest_rms": 0
+        }
+      },
+      "uart": {
+        "markers": [],
+        "sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+        "bytes": 4274,
+        "app_record_markers_available": false
+      },
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "owned_children_exited": true,
+        "service_exited": true,
+        "temporary_state_removed_on_exit": true
+      },
+      "microphone_receipt": {
+        "source": "esp_emu_i2s1_rx",
+        "artifact_id": "11f10458e0de5b60f851d46fec6d29f0eebab62ffceb237b626e810a26a44d22",
+        "pcm_sha256": "81beb57ba94e8afbf61c796a8a2438ff11c5e05c6fc156e7425b391c81369516",
+        "sample_format": "s16le",
+        "sample_rate_hz": 48000,
+        "channels": 4,
+        "frames": 480000
+      },
+      "scoped_evidence": {
+        "sha256": "fad8240e54fcc16c5ce4e32d195bf083f9f944da584a0a6d8db5aa68d2c3a333",
+        "pcm_sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+        "pcm_bytes": 57600,
+        "matches_finalized_wav": true
+      }
+    },
+    "missing_audio_inject_acl": {
+      "status": "PASS_DENIED_BEFORE_ALLOCATION",
+      "input": {
+        "source": "session-owned WAV artifact through esp-emu I2S1 RX",
+        "i2s_port": 1,
+        "rate": 48000,
+        "bits": 16,
+        "slots": 4,
+        "virtual_input_seconds": 10,
+        "slot_tones_hz": [
+          440,
+          0,
+          880,
+          0
+        ],
+        "wav_sha256": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+        "wav_bytes": 3840044
+      },
+      "acl_control": {
+        "status": 403,
+        "code": "runtime_acl_denied",
+        "no_lease_or_guest_allocated": true
+      },
+      "cleanup": {
+        "service_exited": true,
+        "temporary_state_removed_on_exit": true
+      }
+    },
+    "same_session_reset": {
+      "status": "OBSERVED_STOCK_API_ROUND_TRIP",
+      "input": {
+        "source": "session-owned WAV artifact through esp-emu I2S1 RX",
+        "i2s_port": 1,
+        "rate": 48000,
+        "bits": 16,
+        "slots": 4,
+        "virtual_input_seconds": 10,
+        "slot_tones_hz": [
+          440,
+          0,
+          880,
+          0
+        ],
+        "wav_sha256": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+        "wav_bytes": 3840044
+      },
+      "dashboard_sha256": "e728675655b06348954837268c77f76d50097d31e3745e717e8b49dd8ddc9508",
+      "stereo_control": {
+        "status": 400,
+        "code": "invalid_audio_fixture",
+        "no_lease_or_guest_allocated": true
+      },
+      "fixture_is_session_owned": true,
+      "real_p4_argv_observed": true,
+      "dual_mic_test": {
+        "coordinates": [
+          49,
+          793
+        ],
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        }
+      },
+      "dual_mic_frame": {
+        "sha256": "eff7082fce9a84e0ae6afe4547c0c8b3c2a1cd39d789670908119798b9ed4780",
+        "left": {
+          "trace_pixels": 710,
+          "amplitude_axis_span": 37
+        },
+        "right": {
+          "trace_pixels": 1928,
+          "amplitude_axis_span": 49
+        }
+      },
+      "record_button": {
+        "coordinates": [
+          145,
+          585
+        ],
+        "controller_reports": {
+          "reports": 6,
+          "acknowledged": 6
+        }
+      },
+      "record_phases": [
+        {
+          "phase": "REC",
+          "sha256": "ae1d84d6bf994fbb15fb51330f9303213e5dc96d32ab16049ad7c86beb1ab616",
+          "pcm_cursor": 1325184
+        },
+        {
+          "phase": "PLAY",
+          "sha256": "2cf61d9ff6c9b0fa9a16f80f43222515923e8f2dbef3ee9d412a72353181d68e",
+          "pcm_cursor": 1749504
+        },
+        {
+          "phase": "IDLE",
+          "sha256": "9ab6e110bd57a992404666a86379658a0ef5e76f6e545caee8eb8146d682c5ff",
+          "pcm_cursor": 2321664
+        }
+      ],
+      "i2s1_output": {
+        "window_start": 1038144,
+        "window_end": 2321664,
+        "pcm_sha256": "eacb400b15d7189430ea35264d49fe2e6c986a6a750222858c3c9359dfbae351",
+        "exact_tone_match_offset": null,
+        "exact_tone_match_frames": 0,
+        "all_zero_bytes": false,
+        "fixture_found_before_record": false,
+        "format": "s16le",
+        "rate": 48000,
+        "channels": 2,
+        "play_phase": {
+          "start": 1749504,
+          "end": 2321664,
+          "time_bins_ms": 100,
+          "active_bins": 28,
+          "candidate_peaks": [
+            {
+              "110": 225.4,
+              "220": 304.4,
+              "330": 854.1,
+              "440": 10951.9,
+              "660": 425.4,
+              "880": 158.4,
+              "1100": 109.8,
+              "1320": 103.2,
+              "1760": 59.7,
+              "2200": 45.7,
+              "3520": 31.7
+            },
+            {
+              "110": 211.5,
+              "220": 253.4,
+              "330": 231.4,
+              "440": 314.3,
+              "660": 543.9,
+              "880": 11718.6,
+              "1100": 472.9,
+              "1320": 265.1,
+              "1760": 146.4,
+              "2200": 106.3,
+              "3520": 54.2
+            }
+          ],
+          "strongest_rms_offset": 1960704,
+          "strongest_rms": 11669.68
+        },
+        "full_action": {
+          "start": 1038144,
+          "end": 2321664,
+          "time_bins_ms": 100,
+          "active_bins": 31,
+          "candidate_peaks": [
+            {
+              "110": 370.9,
+              "220": 304.8,
+              "330": 838.9,
+              "440": 10930.0,
+              "660": 456.1,
+              "880": 160.9,
+              "1100": 110.6,
+              "1320": 89.4,
+              "1760": 81.2,
+              "2200": 58.2,
+              "3520": 42.7
+            },
+            {
+              "110": 206.7,
+              "220": 199.7,
+              "330": 244.6,
+              "440": 316.7,
+              "660": 496.7,
+              "880": 12375.0,
+              "1100": 468.8,
+              "1320": 271.8,
+              "1760": 142.1,
+              "2200": 100.9,
+              "3520": 55.9
+            }
+          ],
+          "strongest_rms_offset": 1825344,
+          "strongest_rms": 11671.46
+        }
+      },
+      "uart": {
+        "markers": [],
+        "sha256": "c27667a5853965c116594e42aaf44f54599aa01ca7630638d64d6ec88d868eb2",
+        "bytes": 4274,
+        "app_record_markers_available": false
+      },
+      "same_session_reset": {
+        "new_guest_process": true,
+        "artifact_receipt_unchanged": true,
+        "tx_recording_generation_rotated": true,
+        "waveforms_before": {
+          "left": {
+            "trace_pixels": 813,
+            "amplitude_axis_span": 37
+          },
+          "right": {
+            "trace_pixels": 1919,
+            "amplitude_axis_span": 49
+          }
+        },
+        "waveforms_after": {
+          "left": {
+            "trace_pixels": 710,
+            "amplitude_axis_span": 37
+          },
+          "right": {
+            "trace_pixels": 1928,
+            "amplitude_axis_span": 49
+          }
+        }
+      },
+      "post_reset_dual_mic": {
+        "coordinates": [
+          49,
+          793
+        ],
+        "controller_reports": {
+          "reports": 7,
+          "acknowledged": 7
+        }
+      },
+      "cleanup": {
+        "terminal": "stopped",
+        "active_leases": 0,
+        "owned_children_exited": true,
+        "service_exited": true,
+        "temporary_state_removed_on_exit": true
+      },
+      "microphone_receipt": {
+        "source": "esp_emu_i2s1_rx",
+        "artifact_id": "465c9cb9725a59b70f343effc3d8e6f9a36fa95b0342a4d22fa1dd0fbbcc3750",
+        "pcm_sha256": "c93ad50783cea470e040d17516d795f995a224ae4a441bc63cfedb06909ed436",
+        "sample_format": "s16le",
+        "sample_rate_hz": 48000,
+        "channels": 4,
+        "frames": 480000
+      },
+      "scoped_evidence": {
+        "sha256": "5566a65b4cb2c6a7a381ccf9e8a0ab48d3c520525c611031439efd7099ce78ed",
+        "pcm_sha256": "08dd5c50b6f0fb3a16881c636ab9d49f4b8cb3a034f4f9c07c99a9fa60af9ab4",
+        "pcm_bytes": 57600,
+        "matches_finalized_wav": true
+      }
+    }
+  }
+}
