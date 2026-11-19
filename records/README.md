@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | ESP Emulator | M5TabOS 原版时区连续触摸 | PASS（ST7123 两档间隔与独立加号） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tabos-idle-systimer/followups/2026-11-18-tabos-st7123-stock/followups/2026-11-19-tabos-199-timezone-controls/followups/2026-11-19-tabos-1994-cadence/) |
+| 2026-11-19 | ESP Emulator | 98TAB5 原版冷启动指令批量对照 | FAIL（无卡三轮复位，指令批量不恢复画面） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-19-98tab5-1994-instruction-batch/) |
 | 2026-11-19 | ESP Emulator | UIFlow2 WebREPL 断开方向与分层心跳 | PASS（原版抓包 API 与界面回放） | [查看](esp-emulator/2026-11-14-uiflow-cloud-websocket/followups/2026-11-19-webrepl-close-observation/) |
 | 2026-11-19 | Firmware Review Service | Reviewer 区分 Device Service 存储不足并复跑 MP3 原版 | PASS（真实 507、同一子任务 SD 与 PCM） | [查看](firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/followups/2026-11-19-storage-admission-507/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | 常驻 CardputerDict ADV 原版发音复审 | PASS（同会话 HTTPS、SD 缓存与 PCM） | [查看](esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-installed-linux-worker-component/followups/2026-11-19-independent-saved-snapshot-clone/followups/2026-11-19-resident-adv-snapshot-canary/) |

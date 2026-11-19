@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Tab5 M5TabOS 0.9.1 ST7123 native cadence replay",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "2e4ecb1037e38a3d5ce47864aa0cfd54b8c2b858"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "model": "Tab5 ST7123",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_sha256": "08aa10d0caeaf7835cd2f93ee66a8d2042ce15bd6e52350df6b96c70ec8bbe3e",
+    "normalized_sha256": "8def8f22155f9b7459c75de9aea02f6401ccc5f65341fcf52a5e6992b9c875ec",
+    "version": "0.9.1"
+  },
+  "execution": {
+    "environment": "Device Service 1.99.4 / esp-emu 1.1.0 / host arm64",
+    "openapi_sha256": "de40f9f908869b7eb1cf9a775887acd209c75644bf44277d098659fc8defd914",
+    "cases": 5,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "controller readback and app state",
+      "status": "PASS",
+      "inputs": 22
+    },
+    {
+      "name": "same-session evidence and cleanup",
+      "status": "PASS",
+      "cases": 5
+    },
+    {
+      "name": "historical early frame on the first plus",
+      "status": "FAIL",
+      "version": "1.99.0"
+    },
+    {
+      "name": "faster timing, other boards, network wizard, browser and hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/native-cadence-summary.json",
+      "sha256": "70077bb39ad04ba79e8932ba0290bf5a4e9513c9d3ce602f545f96e53bd845ba"
+    }
+  ]
+}

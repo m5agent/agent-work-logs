@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "FAIL",
+  "title": "98TAB5 1.3.0 stock no-card cold start batch-size controls",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "2e4ecb1037e38a3d5ce47864aa0cfd54b8c2b858"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "model": "Tab5 GT911/ILI9881C",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "original_sha256": "ea4fb0889e4a2c68d472947137908c52c25a663152d3ff78262ce2605440dc6d",
+    "normalized_sha256": "35c636324ea1fcebd12f4752e458936c2ac151a9d171a67f1d624d944b96b0ff",
+    "version": "1.3.0"
+  },
+  "execution": {
+    "environment": "Device Service 1.99.4 / esp-emu 1.1.0 / host arm64",
+    "openapi_sha256": "de40f9f908869b7eb1cf9a775887acd209c75644bf44277d098659fc8defd914",
+    "cases": 3,
+    "burner_submitted": false
+  },
+  "checks": [
+    {
+      "name": "stock cold boot to an application frame",
+      "status": "FAIL",
+      "cases": 3
+    },
+    {
+      "name": "stock application identity, UART comparison, evidence and cleanup",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "name": "disk, input, browser and hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/instruction-batch-summary.json",
+      "sha256": "577cc9b724a6450cf8df09a41d42fc3d982529ea6315786f0618a02f4832d370"
+    }
+  ]
+}
