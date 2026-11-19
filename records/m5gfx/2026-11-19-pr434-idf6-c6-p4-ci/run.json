@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "pr",
+  "overall_status": "PASS",
+  "title": "M5GFX #434: build ESP32-C6 / ESP32-P4 with ESP-IDF 6.0.2 (CI build verification)",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/434",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "1d4f3f992800f7fa5c835dbb74db5c1e6cd1cfff",
+    "head_commit": "6cee1901eb7eb0e6bbd44ff6907d98efa44b0b70"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "GitHub Actions ubuntu-latest with espressif/idf:v6.0.2 container (PR CI run 44435534890); macOS arm64 host used only for read-only evidence collection; no local rebuild",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file, +4/-0 in .github/workflows/IDFBuild.yml, adding esp32c6 and esp32p4 at IDF 6.0.2; head 6cee190 single commit on develop 1d4f3f9 (merge of #433); MERGEABLE/CLEAN; patch applies to base"
+    },
+    {
+      "id": "ci-jobs",
+      "status": "PASS",
+      "detail": "28/28 checks on head pass; esp32c6 (IDF 6.0.2) pass 2m58s, esp32p4 (IDF 6.0.2) pass 3m04s; both job logs contain 0 'warning:' and 0 'error:' lines and end with 'Project build complete' (binaries 0x584d0 / 0x524b0 bytes)"
+    },
+    {
+      "id": "lp-branch-compiled",
+      "status": "PASS",
+      "detail": "M5GFX REQUIRES driver for IDF>=6 (CI log prints the same component list), so <driver/i2c_master.h> is found; ESP-IDF 6.0.2 defines SOC_LP_I2C_NUM=(1U) for C6/P4 and I2C_LL_LP_FIFO_LEN=16 (SOC_LP_I2C_FIFO_LEN absent); LGFX_LP_I2C_NUM=1, so getFifoLen() compiles the I2C_LL_LP_FIFO_LEN branch and the #433 #error does not fire; both jobs compile lgfx_v1_platforms.cpp, the translation unit that includes esp32/common.inl"
+    },
+    {
+      "id": "p4-lp-gpio-matrix",
+      "status": "PASS",
+      "detail": "ESP-IDF 6.0.2 esp32p4 has SOC_LP_GPIO_MATRIX_SUPPORTED=1 and driver/lp_io.h exists, so LGFX_LP_GPIO_MATRIX and LGFX_LP_I2C_LEND_PADS are defined and lp_pads_return() uses lp_gpio_connect_*_signal(); esp32c6 has no such cap and takes the rtc_gpio_iomux_func_sel() branch, matching the PR description"
+    },
+    {
+      "id": "no-m5unified-duplicate",
+      "status": "PASS",
+      "detail": "M5Unified IDFBuild.yml builds esp32c6/esp32p4 at 5.3 and 6.1; this PR adds 6.0.2 in M5GFX, so no chip + minor version is built twice across the two CIs"
+    },
+    {
+      "id": "error-path-reachable",
+      "status": "REVIEW",
+      "detail": "the jobs prove the LP branch compiles, but the #433 #error path (LP port without either depth macro) cannot be reached by any released SDK and is still not exercised by CI"
+    },
+    {
+      "id": "local-independent-rebuild",
+      "status": "NOT RUN",
+      "detail": "not run locally: the Docker daemon on this host cannot create containers (containerd metadata store is read-only), so no independent 6.0.2 build outside the PR CI was performed"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "not applicable: the change only edits a GitHub Actions matrix and does not change runtime behavior"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "structurally not applicable: a CI matrix change produces no firmware behavior difference, so no virtual device model can observe anything; the only observable is build success"
+    }
+  ],
+  "evidence": [
+    "evidence/ci-jobs.txt",
+    "evidence/idf602-lp-caps.txt",
+    "evidence/diff-scope.txt",
+    "patches/0001-ci-idf6-c6-p4.patch"
+  ],
+  "notes": [
+    "PR left OPEN; one English comment posted; no close, no push, no code change to m5stack/M5GFX.",
+    "The PR implements the non-blocking suggestion recorded in records/m5gfx/2026-11-18-pr433-lp-fifo-error (add esp32c6 at 6.0.2) and additionally adds esp32p4 for the LP GPIO matrix path.",
+    "No m5agent comment existed before this review (PR comments list was empty)."
+  ]
+}

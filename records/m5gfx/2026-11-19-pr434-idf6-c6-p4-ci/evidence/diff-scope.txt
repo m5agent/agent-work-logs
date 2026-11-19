@@ -1,0 +1,53 @@
+# M5GFX #434 change scope (collected 2026-11-19 UTC)
+
+PR:    https://github.com/m5stack/M5GFX/pull/434
+base:  1d4f3f992800f7fa5c835dbb74db5c1e6cd1cfff  (develop, merge of #433)
+head:  6cee1901eb7eb0e6bbd44ff6907d98efa44b0b70  (single commit, ci_idf6_lp)
+state: OPEN, MERGEABLE, mergeStateStatus CLEAN, 28/28 checks pass
+
+$ git diff --stat base head
+ .github/workflows/IDFBuild.yml | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+$ git apply --check patches/0001-ci-idf6-c6-p4.patch   (run in a worktree at base)
+ OK
+
+## diff
+diff --git a/.github/workflows/IDFBuild.yml b/.github/workflows/IDFBuild.yml
+index dd0ebb1..a671c2d 100644
+--- a/.github/workflows/IDFBuild.yml
++++ b/.github/workflows/IDFBuild.yml
+@@ -56,12 +56,16 @@ jobs:
+           # ESP32-C6 (IDF 5.3+ only)
+           - target: esp32c6
+             idf_version: "5.4.3"
++          - target: esp32c6
++            idf_version: "6.0.2"
+           # ESP32-H2
+           - target: esp32h2
+             idf_version: "5.1.6"
+           # ESP32-P4 (IDF 5.3+ only)
+           - target: esp32p4
+             idf_version: "5.4.3"
++          - target: esp32p4
++            idf_version: "6.0.2"
+           # ESP32-C61 (IDF 5.5.2+ only)
+           - target: esp32c61
+             idf_version: "5.5.2"
+
+## IDFBuild.yml matrix: before (base) -> after (head)
+
+before: esp32 3, esp32s3 3, esp32c3 2, esp32c5 1, esp32c6 1, esp32h2 1, esp32p4 1, esp32c61 1 = 13 jobs
+after : esp32 3, esp32s3 3, esp32c3 2, esp32c5 1, esp32c6 2, esp32h2 1, esp32p4 2, esp32c61 1 = 15 jobs
+
+added rows:
+  - target: esp32c6
+    idf_version: "6.0.2"
+  - target: esp32p4
+    idf_version: "6.0.2"
+
+Before this PR the only IDF 6.x jobs were esp32 and esp32s3 at 6.0.2, neither of
+which has a low power I2C port, so the LP I2C implementation in
+src/lgfx/v1/platforms/esp32/common.inl was never compiled by IDFBuild.yml.
+See records/m5gfx/2026-11-18-pr433-lp-fifo-error/evidence/ci-matrix.txt for the
+pre-PR matrix and the macro-per-target analysis.

@@ -1,0 +1,68 @@
+# ESP-IDF v6.0.2 LP I2C facts used by M5GFX #434 (collected 2026-11-19 UTC)
+
+# Source: espressif/esp-idf at tag v6.0.2, fetched through the GitHub contents API
+#   gh api "repos/espressif/esp-idf/contents/<path>?ref=v6.0.2" -H "Accept: application/vnd.github.raw"
+# Tree index: gh api "repos/espressif/esp-idf/git/trees/v6.0.2?recursive=1"
+
+## 1. soc_caps.h: LP I2C port count
+
+components/soc/esp32c6/include/soc/soc_caps.h
+  242:#define SOC_I2C_NUM                             (2U)
+  243:#define SOC_HP_I2C_NUM                          (1U)
+  244:#define SOC_LP_I2C_NUM                          (1U)
+
+components/soc/esp32p4/include/soc/soc_caps.h
+  310:#define SOC_I2C_NUM                             (3U)
+  311:#define SOC_HP_I2C_NUM                          (2U)
+  312:#define SOC_LP_I2C_NUM                          (1U)
+
+# SOC_LP_I2C_FIFO_LEN is absent in both files (moved to esp_hal_i2c in 6.0).
+
+## 2. esp_hal_i2c <target>/include/hal/i2c_ll.h: FIFO depths
+
+components/esp_hal_i2c/esp32c6/include/hal/i2c_ll.h
+  31:#define I2C_LL_FIFO_LEN         32 /*!< I2C hardware FIFO depth */
+  32:#define I2C_LL_LP_FIFO_LEN      16 /*!< LP_I2C hardware FIFO depth */
+
+components/esp_hal_i2c/esp32p4/include/hal/i2c_ll.h
+  29:#define I2C_LL_FIFO_LEN         32 /*!< I2C hardware FIFO depth */
+  30:#define I2C_LL_LP_FIFO_LEN      16 /*!< LP_I2C hardware FIFO depth */
+
+## 3. LP GPIO matrix (the path the PR says only ESP32-P4 covers)
+
+components/soc/esp32p4/include/soc/soc_caps.h
+  94:#define SOC_LP_GPIO_MATRIX_SUPPORTED    1
+
+components/soc/esp32c6/include/soc/soc_caps.h
+  (no SOC_LP_GPIO_MATRIX_SUPPORTED)
+
+components/esp_driver_gpio/include/driver/lp_io.h            exists in v6.0.2
+components/esp_driver_i2c/include/driver/i2c_master.h        exists in v6.0.2
+
+## 4. M5GFX build pulls driver into every IDF >= 6 build
+
+CMakeLists.txt (component registration):
+  if (IDF_VERSION_MAJOR GREATER_EQUAL 6)
+      set(COMPONENT_REQUIRES nvs_flash efuse esp_lcd driver esp_timer esp_mm esp_driver_ledc esp_driver_i2s hal esp_psram)
+
+CI log (both new jobs, from evidence/ci-jobs.txt):
+  -- M5GFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer;esp_mm;esp_driver_ledc;esp_driver_i2s;hal;esp_psram
+
+## 5. Resulting preprocessor state in the two new jobs
+
+src/lgfx/v1/platforms/esp32/common.inl:125-130
+  LGFX_LP_I2C_NUM becomes SOC_LP_I2C_NUM (1) when SOC_LP_I2C_NUM > 0,
+  <driver/i2c_master.h> is findable and ESP_IDF_VERSION >= 5.4.0.
+  All three hold for esp32c6 and esp32p4 at 6.0.2 in this build.
+  -> LGFX_LP_I2C_NUM = 1
+
+src/lgfx/v1/platforms/esp32/common.inl:1467-1473
+  With LGFX_LP_I2C_NUM = 1 and SOC_LP_I2C_FIFO_LEN absent in 6.0.2, the branch
+  `#elif ... defined ( I2C_LL_LP_FIFO_LEN )` is the one that compiles and returns 16.
+  The #433 #error (line 1471-1473) is not reached.
+
+src/lgfx/v1/platforms/esp32/common.inl:193-195 and 1871-1873
+  For esp32p4 at 6.0.2: SOC_LP_GPIO_MATRIX_SUPPORTED=1 and driver/lp_io.h exists
+  -> LGFX_LP_GPIO_MATRIX=1, LGFX_LP_I2C_LEND_PADS=1, lp_pads_return() takes the
+     lp_gpio_connect_*_signal() branch.
+  For esp32c6 at 6.0.2: cap absent -> the rtc_gpio_iomux_func_sel() branch.
