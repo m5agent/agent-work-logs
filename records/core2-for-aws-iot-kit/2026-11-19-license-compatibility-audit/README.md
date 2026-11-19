@@ -4,7 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`issue`
 - 问题来源：https://github.com/m5stack/Core2-for-AWS-IoT-Kit/issues/108
-- GitHub 回复：见 `evidence/06-reply.md`（发布后补评论链接）
+- GitHub 回复：https://github.com/m5stack/Core2-for-AWS-IoT-Kit/issues/108#issuecomment-7011415744
 - 源码版本：`m5stack/Core2-for-AWS-IoT-Kit @ e1c3750e204e714ca62b93f6c20aabd7f7ce286d`
 - 环境：macOS，只读仓检视（`git clone --depth 50`）；不涉及设备、固件构建或服务
 
