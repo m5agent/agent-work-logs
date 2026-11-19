@@ -7,6 +7,7 @@
 - Source version: PR head `68c7dbb8b578d1d649e97c7927a0a66e6db97cc2` (commit 3 of 3), base `ci/bootstrap`
 - Artifact: `incoming/beaconhound_0.1.0_arm64.deb`, 501,370 bytes, SHA-256 `19a39a46c71d7a6e2d0cd3f539001de3fc270eee4bf7b837a1c644e522f2cd7d`
 - Previous review: comment `#issuecomment-6997380419` on head `67195a6`
+- Comment: https://github.com/m5stack/CardputerZeroRepository/pull/2#issuecomment-7001364162 (2026-11-19T06:12:49Z)
 - Environment: macOS arm64; no CardputerZero hardware; local Device Service `cardputer-zero` profile is not creatable; arm64 Linux container runtime unavailable (Docker metadata store read-only)
 - Evidence class: **code-level verification** (package payload diff, systemd unit, maintainer scripts, AArch64 disassembly, iw 6.9 source cross-check)
 
