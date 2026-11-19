@@ -1,0 +1,85 @@
+{
+  "checks": [
+    {
+      "description": "Actual 507 captured in both reviewer runs.",
+      "level": "transport",
+      "status": "PASS"
+    },
+    {
+      "description": "Typed environment failure, firmware NOT EVALUATED, no allocated guest.",
+      "level": "review",
+      "status": "PASS"
+    },
+    {
+      "description": "Same-child retry exercised SPI SD and received expected digital PCM.",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "description": "Bounded comparison evidence retained with full artifact hashes.",
+      "level": "delivery",
+      "status": "PASS"
+    },
+    {
+      "description": "Physical hardware and acoustics are outside this execution.",
+      "level": "visual_or_physical",
+      "status": "NOT RUN"
+    }
+  ],
+  "date": "2026-11-19",
+  "evidence": [
+    {
+      "path": "evidence/mp3-storage-admission.summary.json",
+      "sha256": "94ed6304f4dd6281ac8937782bf5d4a94e808b546290d0d16c9ea726dcd9a701"
+    }
+  ],
+  "execution": {
+    "environment": "isolated native macOS ARM64 Reviewer and Device Service, offline guest",
+    "evidence": "evidence/mp3-storage-admission.summary.json",
+    "evidence_bytes": 10042,
+    "evidence_sha256": "94ed6304f4dd6281ac8937782bf5d4a94e808b546290d0d16c9ea726dcd9a701",
+    "finished_at": "2026-11-19T00:55:43.445107+00:00",
+    "session_id": "omitted",
+    "started_at": "2026-11-19T00:54:31.348367+00:00",
+    "task_id": "omitted"
+  },
+  "firmware": {
+    "composed_flash_sha256": "10d42a08a69d3e1f628fd9078015a64b598a74f02437c26ecc7201cc2db3e78d",
+    "device": "cardputer-adv",
+    "live_flash_bytes": 8388608,
+    "live_flash_sha256": "bd9975d82e9d3caa82350fde2c44b5434f1e87235e47c7677c2d4956772bc35a",
+    "live_original_range_changes_confined_to_nvs": 86,
+    "name": "Cardputer ADV MP3 Player v1.0.0",
+    "original_bytes": 885600,
+    "sd_seed_bytes": 67108864,
+    "sd_seed_sha256": "6e7c003e532f2912b5a6841ea24b6ffbe1ca113caf0dd83b26d750d0cbd7f4a0",
+    "source_sha256": "c5918ff914a51b0dc4398f331c8306c25e26a4b157592d3e7d9c0dff2d0c5e45",
+    "unchanged_original_application": {
+      "bytes": 820064,
+      "offset": 65536,
+      "sha256": "d0fc33d7e963ccae9146f1ffec68fc256eb53a673724334ad4adc8d4f7bac0f0"
+    }
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "target": "Cardputer ADV",
+    "validation": "virtual-device validation"
+  },
+  "kind": "code_change",
+  "notes": [
+    "Source and old attempt preserved. Zero leases and unresolved intents. No Burner submission."
+  ],
+  "overall_status": "PASS",
+  "schema_version": 1,
+  "source": {
+    "base_commit": "1151dda034d6ec43dcd8c5ef895ae79e009d088f",
+    "device_service_commit": "2a7f979c0c7e67420d8b790a3cfdb692702abf05",
+    "issue": null,
+    "pull_request": null,
+    "repository": "Firmware Reviewer",
+    "source_commit": "883ccf08d8ef3f9afd111199974e57c08b09a1fd",
+    "tested_commit": "4024a0d2b931315028e020277641ed6662c48b43",
+    "tree": "66c36037958b93d8c99688cf375d764a15d2c886"
+  },
+  "title": "Reviewer 区分 Device Service 存储不足并复跑 MP3 原版"
+}

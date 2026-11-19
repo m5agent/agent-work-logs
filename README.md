@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | Firmware Review Service | Reviewer 区分 Device Service 存储不足并复跑 MP3 原版 | PASS（真实 507、同一子任务 SD 与 PCM） | [查看](records/firmware-review-service/2026-11-09-cardputer-adv-mp3-startup/followups/2026-11-19-storage-admission-507/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | 常驻 CardputerDict ADV 原版发音复审 | PASS（同会话 HTTPS、SD 缓存与 PCM） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-installed-linux-worker-component/followups/2026-11-19-independent-saved-snapshot-clone/followups/2026-11-19-resident-adv-snapshot-canary/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | 首次常驻 Core2 独立快照验证 | PARTIAL（七次有效四向，首次右移无合法移动） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-installed-linux-worker-component/followups/2026-11-19-independent-saved-snapshot-clone/followups/2026-11-19-resident-core2-snapshot-canary/) |
 | 2026-11-19 | ESP Emulator / Firmware Reviewer | Reviewer 0.31 独立保存快照与原版 Core2 | PASS（独立克隆、原记录保留和四向交互） | [查看](records/esp-emulator/2026-11-18-linux-durable-reviewer-pilot/followups/2026-11-19-reviewer-linux-snapshot-routing/followups/2026-11-19-installed-linux-worker-component/followups/2026-11-19-independent-saved-snapshot-clone/) |
