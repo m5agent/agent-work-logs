@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "pr_review",
+  "overall_status": "REVIEW",
+  "title": "m5stack/CardputerZeroRepository #2: beaconhound 0.1.0 arm64 .deb is well formed, but hard-codes the pi account and grants no scan capability",
+  "source": {
+    "pr": "https://github.com/m5stack/CardputerZeroRepository/pull/2",
+    "repository": "m5stack/CardputerZeroRepository",
+    "base_branch": "ci/bootstrap",
+    "base_commit": "c817f795c5a1597e13b428296130bd043df71a23",
+    "head_commit": "147196989af3a4ef31f7d3764f803a571be3b714",
+    "artifact_blob": "fcad30d2b8c458079f9ec4ded9bb06a976147b99",
+    "artifact_sha256": "46f6d41a5f3a0dbe4bc02843917e5ee3929dd327c5be3f32d181fbf224d2ec10",
+    "artifact_size": 497010,
+    "author": "pingequalab"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "beaconhound",
+    "version": "0.1.0",
+    "architecture": "arm64",
+    "packages": ["beaconhound-lite-daemon", "beaconhound-ui"]
+  },
+  "execution": {
+    "environment": "macOS arm64; package unpacked with ar/tar, inspected with llvm-readelf/llvm-objdump and strings; dpkg-deb unavailable; no Linux arm64 runtime",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "deb_structure",
+      "status": "PASS",
+      "evidence": "ar members debian-binary(2.0), control.tar.gz, data.tar.gz; gzip -t passes for both; evidence/deb-metadata.txt"
+    },
+    {
+      "name": "control_metadata",
+      "status": "PASS",
+      "evidence": "Package beaconhound, Version 0.1.0, Architecture arm64, Depends iw, wireless-regdb, libc6 (>= 2.34); filename matches <pkg>_<version>_arm64.deb; evidence/deb-metadata.txt"
+    },
+    {
+      "name": "payload_md5sums",
+      "status": "PASS",
+      "evidence": "all 7 DEBIAN/md5sums entries match the extracted payload"
+    },
+    {
+      "name": "elf_arch_and_deps",
+      "status": "PASS",
+      "evidence": "both binaries AArch64 PIE, interpreter /lib/ld-linux-aarch64.so.1, NEEDED libc.so.6 only, max symbol GLIBC_2.34, no RPATH/RUNPATH; evidence/elf-dynamic.txt"
+    },
+    {
+      "name": "maintainer_script_syntax",
+      "status": "PASS",
+      "evidence": "sh -n passes for postinst and prerm; scripts only act on configure/remove/deconfigure; evidence/service-and-scripts.txt"
+    },
+    {
+      "name": "service_hardcoded_pi_user",
+      "status": "FAIL",
+      "evidence": "unit lines 7-8 User=pi/Group=pi; postinst line 7 enables only if 'id -u pi' succeeds; docs say the username is chosen in the first-boot wizard"
+    },
+    {
+      "name": "socket_accessible_to_desktop_user",
+      "status": "REVIEW",
+      "evidence": "socket chmod mode immediate 0x1b0 = 0660, RuntimeDirectory owned by User=pi; a UI running as a different account cannot connect"
+    },
+    {
+      "name": "scan_capability",
+      "status": "REVIEW",
+      "evidence": "static: daemon execs iw dev <iface> scan dump; unit has NoNewPrivileges=true and no AmbientCapabilities; nl80211 trigger scan requires CAP_NET_ADMIN (not executed)"
+    },
+    {
+      "name": "ci_validation",
+      "status": "NOT RUN",
+      "evidence": "validate-submission run 44433521771 conclusion=action_required, 0 s, no jobs; no dpkg-deb log"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "no CardputerZero on the hardware bench; test center exposes ESP32 slots only"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "Device Service cardputer-zero profile supported=false creatable=false, missing __missing_qemu__/__missing_rom__, reason 'CardputerZero uses a separate Linux backend'"
+    },
+    {
+      "name": "install_and_execute",
+      "status": "NOT RUN",
+      "evidence": "no arm64 Linux userland available; Docker metadata store unwritable and ~4 GiB free"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/deb-metadata.txt",
+      "description": "ar layout, control, payload list, md5sums comparison, hashes"
+    },
+    {
+      "path": "evidence/elf-dynamic.txt",
+      "description": "ELF class/machine/interpreter, NEEDED, GLIBC symbol version"
+    },
+    {
+      "path": "evidence/service-and-scripts.txt",
+      "description": "unit file, postinst, prerm, sh -n, desktop entry"
+    },
+    {
+      "path": "evidence/daemon-iw-invocation.txt",
+      "description": "iw argv strings, execv fallbacks, socket chmod mode"
+    },
+    {
+      "path": "evidence/ci-status.txt",
+      "description": "action_required validate run and recent workflow runs"
+    },
+    {
+      "path": "evidence/cardputerzero-profile.txt",
+      "description": "Device Service cardputer-zero profile and hardware bench summary"
+    }
+  ],
+  "notes": [
+    "Evidence class is code-level verification; the package was not installed and neither binary was executed.",
+    "F2 (CAP_NET_ADMIN) is an expected-failure inference from the unit and call path, not an observed EPERM.",
+    "Review comment only; no change was pushed to the PR or the fork and the PR was not closed."
+  ]
+}

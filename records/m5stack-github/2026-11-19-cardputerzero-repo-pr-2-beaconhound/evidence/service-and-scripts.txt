@@ -1,0 +1,66 @@
+===== usr/lib/systemd/system/beaconhound-lite-daemon.service =====
+[Unit]
+Description=BeaconHound Community 2.4GHz Passive Telemetry Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+RuntimeDirectory=beaconhound
+RuntimeDirectoryMode=0755
+ExecStart=/usr/bin/beaconhound-lite-daemon
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
+
+===== DEBIAN/postinst =====
+#!/bin/sh
+set -e
+
+SERVICE="beaconhound-lite-daemon.service"
+
+if [ "$1" = "configure" ]; then
+    if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ] && id -u pi >/dev/null 2>&1; then
+        systemctl daemon-reload >/dev/null 2>&1 || true
+        systemctl enable "$SERVICE" >/dev/null 2>&1 || true
+        systemctl restart "$SERVICE" >/dev/null 2>&1 || true
+    fi
+fi
+
+exit 0
+
+===== DEBIAN/prerm =====
+#!/bin/sh
+set -e
+
+SERVICE="beaconhound-lite-daemon.service"
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+    if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+        systemctl stop "$SERVICE" >/dev/null 2>&1 || true
+        systemctl disable "$SERVICE" >/dev/null 2>&1 || true
+    fi
+fi
+
+exit 0
+
+===== sh -n syntax =====
+postinst: OK
+prerm: OK
+
+===== usr/share/APPLaunch/applications/beaconhound.desktop =====
+[Desktop Entry]
+Type=Application
+Name=BeaconHound
+Comment=Pocket Wireless Spectrum HUD, Site Survey & Privacy Auditor for CardputerZero
+Exec=/usr/bin/beaconhound-ui
+Icon=share/images/beaconhound.png
+Terminal=false
+Categories=Network;Security;Utility;
+StartupNotify=false

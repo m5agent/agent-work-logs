@@ -1,0 +1,74 @@
+strings (file offset) in beaconhound-lite-daemon:
+39e8 /proc/net/wireless
+3a58 dev
+3a60 scan
+3a68 dump
+3a80 /usr/sbin/iw
+3a90 /sbin/iw
+3aa0 freq:
+3aa8 wlan0
+3ab8 /run/beaconhound/engine.sock
+
+disassembly around execv (argv built at sp+0x1a0):
+    30f8:      	mov	w1, #0x1                // =1
+    30fc:      	bl	0x1310 <dup2@plt>
+    3100:      	tbnz	w0, #0x1f, 0x3184 <.text+0x1dc4>
+    3104:      	adrp	x0, 0x3000 <.text+0x1c40>
+    3108:      	mov	w1, #0x1                // =1
+    310c:      	add	x0, x0, #0xa70
+    3110:      	bl	0x1180 <open@plt>
+    3114:      	mov	w19, w0
+    3118:      	tbz	w0, #0x1f, 0x3268 <.text+0x1ea8>
+    311c:      	ldr	w0, [sp, #0x8c]
+    3120:      	mov	w20, w21
+    3124:      	mov	w19, #0x3               // =3
+    3128:      	bl	0x11f0 <close@plt>
+    312c:      	cmp	x21, #0x3
+    3130:      	b.le	0x3154 <.text+0x1d94>
+    3134:      	nop
+    3138:      	nop
+    313c:      	nop
+    3140:      	mov	w0, w19
+    3144:      	add	w19, w19, #0x1
+    3148:      	bl	0x11f0 <close@plt>
+    314c:      	cmp	w19, w20
+    3150:      	b.ne	0x3140 <.text+0x1d80>
+    3154:      	add	x19, sp, #0x1a0
+    3158:      	adrp	x0, 0x3000 <.text+0x1c40>
+    315c:      	mov	x1, x19
+    3160:      	add	x0, x0, #0xa80
+    3164:      	bl	0x11e0 <execv@plt>
+    3168:      	mov	x1, x19
+    316c:      	adrp	x0, 0x3000 <.text+0x1c40>
+    3170:      	add	x0, x0, #0xa90
+    3174:      	bl	0x11e0 <execv@plt>
+    3178:      	mov	x1, x19
+    317c:      	add	x0, x22, #0xa50
+    3180:      	bl	0x1250 <execvp@plt>
+    3184:      	mov	w0, #0x7f               // =127
+    3188:      	bl	0x1090 <_exit@plt>
+    318c:      	mov	w1, #0x1                // =1
+    3190:      	stp	w0, w1, [sp, #0x90]
+    3194:      	add	x25, sp, #0x90
+    3198:      	subs	w2, w20, w2
+
+chmod mode before socket chmod:
+    185c:      	bl	0x1320 <umask@plt>
+    1860:      	mov	w20, w0
+    1864:      	ldr	x1, [sp, #0x78]
+    1868:      	mov	w2, #0x6e               // =110
+    186c:      	mov	w0, w24
+    1870:      	bl	0x10e0 <bind@plt>
+    1874:      	mov	w19, w0
+    1878:      	mov	w0, w20
+    187c:      	bl	0x1320 <umask@plt>
+    1880:      	cbnz	w19, 0x23f8 <.text+0x1038>
+    1884:      	mov	x0, x27
+    1888:      	mov	w1, #0x1b0              // =432
+    188c:      	bl	0x1170 <chmod@plt>
+    1890:      	cbnz	w0, 0x2410 <.text+0x1050>
+    1894:      	mov	w0, w24
+    1898:      	mov	w1, #0x8                // =8
+
+interpretation: argv = {iw, dev, <iface>, scan, dump}; iw path fallbacks /usr/sbin/iw then /sbin/iw then execvp(iw);
+socket chmod mode immediate 0x1b0 = 0660; RuntimeDirectory=beaconhound (0755) owned by the service user.
