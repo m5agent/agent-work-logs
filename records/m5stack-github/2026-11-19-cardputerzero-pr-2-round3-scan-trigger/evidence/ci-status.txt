@@ -1,0 +1,28 @@
+# CI at PR head 68c7dbb8b578d1d649e97c7927a0a66e6db97cc2
+## gh run view 44469413044
+
+X add-beaconhound-0.1.0 Validate submission m5stack/CardputerZeroRepository#2 · 44469413044
+Triggered via pull_request about 7 minutes ago
+
+JOBS
+
+
+To see what failed, try: gh run view 44469413044 --log-failed
+View this run on GitHub: https://github.com/m5stack/CardputerZeroRepository/actions/runs/44469413044
+
+## recent runs
+completed	action_required	Add beaconhound 0.1.0 (arm64)	Validate submission	add-beaconhound-0.1.0	pull_request	44469413044	0s	2026-11-19T06:03:37Z
+completed	success	Add beaconhound 0.1.0 (arm64)	Forward events to WeCom digest	ci/bootstrap	issue_comment	44469412422	7s	2026-11-19T06:03:37Z
+completed	success	Add beaconhound 0.1.0 (arm64)	Forward events to WeCom digest	ci/bootstrap	issue_comment	44441190095	9s	2026-11-19T02:01:06Z
+completed	success	Add beaconhound 0.1.0 (arm64)	Forward events to WeCom digest	ci/bootstrap	issue_comment	44439978719	7s	2026-11-19T01:51:05Z
+completed	action_required	Add beaconhound 0.1.0 (arm64)	Validate submission	add-beaconhound-0.1.0	pull_request	44439975099	0s	2026-11-19T01:51:03Z
+completed	success	Add beaconhound 0.1.0 (arm64)	Forward events to WeCom digest	ci/bootstrap	issue_comment	44434849278	16s	2026-11-19T01:10:24Z
+
+# workflow scope: dpkg-deb -I, Architecture, filename, size warning; no install, no unit/capability exercise
+66:              # 1. Must be a valid .deb (dpkg-deb fails loudly otherwise).
+67:              if ! dpkg-deb -I "$f" > /tmp/ctrl.txt 2>&1; then
+68:                  echo "::error file=$f::dpkg-deb -I failed:"
+75:              # 2. Architecture must be arm64.
+76:              arch=$(dpkg-deb --field "$f" Architecture)
+78:                  echo "::error file=$f::Architecture=$arch, expected arm64"
+86:              # 4. Size sanity: warn if > 50 MiB.

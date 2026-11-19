@@ -1,0 +1,16 @@
+# iw 6.9 (Debian trixie) has 'scan trigger' -> NL80211_CMD_TRIGGER_SCAN
+source: https://sources.debian.org/data/main/i/iw/6.9-1/scan.c
+2764:COMMAND(scan, trigger, "[freq <freq>*] [duration <dur>] [ies <hex as 00:11:..>] [meshid <meshid>] [lowpri,flush,ap-force,duration-mandatory,coloc] [randomise[=<addr>/<mask>]] [ssid <ssid>*|passive]",
+2765-	NL80211_CMD_TRIGGER_SCAN, 0, CIB_NETDEV, handle_scan,
+2766-	 "Trigger a scan on the given frequencies with probing for the given\n"
+
+# iw main() returns -errno; error path prints '(%d)' and exits with -errno & 0xff
+	return err;
+	return err;
+		fprintf(stderr, "command failed: %s (%d)\n", strerror(-err), err);
+	return err;
+
+# usage path exits 3 (iw.c), not 2
+240-		      enum id_input id)
+241-{
+242:	exit(3);

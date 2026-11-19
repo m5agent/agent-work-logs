@@ -1,0 +1,253 @@
+# Payload diff: 67195a6 (previous review) -> 68c7dbb (this build)
+prev sha256: d6821895fa9d39165764ac0e8dab80ba6a2bd90806596c54cb5413b5b765ed0d  size 499206
+cur  sha256: 19a39a46c71d7a6e2d0cd3f539001de3fc270eee4bf7b837a1c644e522f2cd7d  size 501370
+
+## file md5 differences
+1c1
+< MD5 (usr/bin/beaconhound-lite-daemon) = 5631c8c016f81ba855baf27f8c4d90f9
+---
+> MD5 (usr/bin/beaconhound-lite-daemon) = 315b262efe546bffb5138ba717c5c818
+3c3
+< MD5 (usr/lib/systemd/system/beaconhound-lite-daemon@.service) = 8350c382c2b43cbada5ddf13da7789fc
+---
+> MD5 (usr/lib/systemd/system/beaconhound-lite-daemon@.service) = ebd33d5dc5a8170c5aabd917efa33ee1
+
+## unit diff
+--- prev/usr/lib/systemd/system/beaconhound-lite-daemon@.service	2026-11-19 09:35:13.000000000 +0800
++++ x/usr/lib/systemd/system/beaconhound-lite-daemon@.service	2026-11-19 10:46:25.000000000 +0800
+@@ -1,5 +1,5 @@
+ [Unit]
+-Description=BeaconHound Community 2.4GHz Passive Telemetry Daemon (%i)
++Description=BeaconHound Community 2.4GHz Spectrum Telemetry Daemon (%i)
+ After=network.target
+ 
+ [Service]
+
+## control member diff
+control: unchanged
+prerm: unchanged
+postrm: unchanged
+Files prevc/md5sums and x/md5sums differ
+postinst: changed (seat0 block added), see evidence/postinst-seat0.txt
+
+## postinst diff
+--- prevc/postinst	2026-11-19 09:44:13.000000000 +0800
++++ x/postinst	2026-11-19 11:57:34.000000000 +0800
+@@ -9,7 +9,7 @@
+ WANTS_DIR="/etc/systemd/system/multi-user.target.wants"
+ 
+ bh_user_by_uid() {
+-    bh_u_uid="$1"
++    bh_u_uid="${1:-}"
+     case "$bh_u_uid" in
+         ""|*[!0-9]*)
+             return 0
+@@ -26,7 +26,7 @@
+ }
+ 
+ bh_shell_by_user() {
+-    bh_s_user="$1"
++    bh_s_user="${1:-}"
+     if command -v getent >/dev/null 2>&1; then
+         bh_s_res=$(getent passwd "$bh_s_user" 2>/dev/null | awk -F: '{ print $7; exit }' || true)
+         if [ -n "$bh_s_res" ]; then
+@@ -38,12 +38,12 @@
+ }
+ 
+ bh_is_valid_user() {
+-    bh_v_cand="$1"
++    bh_v_cand="${1:-}"
+     case "$bh_v_cand" in
+         ""|-*|*[!a-zA-Z0-9._-]*)
+             return 1
+             ;;
+-        root|nobody)
++        root|nobody|*greeter*|lightdm|gdm|gdm3|sddm)
+             return 1
+             ;;
+     esac
+@@ -69,7 +69,7 @@
+ }
+ 
+ bh_is_safe_unit_token() {
+-    case "$1" in
++    case "${1:-}" in
+         ""|-*|*[!a-zA-Z0-9._-]*)
+             return 1
+             ;;
+@@ -78,7 +78,7 @@
+ }
+ 
+ bh_cleanup_invalid_wants() {
+-    bh_has_systemd="$1"
++    bh_has_systemd="${1:-0}"
+     for bh_link in "${WANTS_DIR}/${TEMPLATE_PREFIX}"*.service; do
+         [ -e "$bh_link" ] || [ -L "$bh_link" ] || continue
+         bh_base=$(basename -- "$bh_link")
+@@ -95,7 +95,7 @@
+ }
+ 
+ bh_detect_target_user() {
+-    # 0. Preserve an already-enabled valid template instance across upgrades
++    # 1. Preserve an already-enabled valid template instance across upgrades
+     for bh_link in "${WANTS_DIR}/${TEMPLATE_PREFIX}"*.service; do
+         [ -e "$bh_link" ] || [ -L "$bh_link" ] || continue
+         bh_base=$(basename -- "$bh_link")
+@@ -107,7 +107,87 @@
+         fi
+     done
+ 
+-    # 1. Prefer the explicit desktop invoking user (PolicyKit pkexec or sudo)
++    # 2. Prefer an active local seat0 graphical/console session user before pkexec/sudo
++    #    Two-pass selection via loginctl show-session:
++    #      Pass 1: first valid seat0 user with State=active and Class in user*
++    #      Pass 2: first valid seat0 user with State!=closing and Class in user* (e.g. online)
++    if [ -d /run/systemd/system ] && command -v loginctl >/dev/null 2>&1; then
++        bh_seat_candidates=$(loginctl list-sessions --no-legend --no-pager 2>/dev/null | awk '
++            $4 == "seat0" && $1 ~ /^[a-zA-Z0-9._-]+$/ && $3 ~ /^[a-zA-Z0-9._][a-zA-Z0-9._-]*$/ {
++                hint = "fallback_ok"
++                for (i = 5; i <= NF; i++) {
++                    if ($i == "closing") {
++                        hint = "closing"
++                    }
++                }
++                if (hint != "closing") {
++                    if (NF >= 7 && $5 ~ /^[0-9]+$/) {
++                        if ($6 != "user" && $6 != "user-early" && $6 != "user-incomplete") {
++                            hint = "skip_class"
++                        }
++                    } else if ($6 == "active") {
++                        hint = "active"
++                    }
++                }
++                print $1 ":" $3 ":" hint
++            }
++        ' || true)
++        bh_fallback_seat_user=""
++        for bh_cand_tok in $bh_seat_candidates; do
++            bh_sid=${bh_cand_tok%%:*}
++            bh_rest=${bh_cand_tok#*:}
++            bh_seat_user=${bh_rest%%:*}
++            bh_row_hint=${bh_rest#*:}
++            if ! bh_is_valid_user "$bh_seat_user"; then
++                continue
++            fi
++            bh_sess_props=$(loginctl show-session "$bh_sid" -p State -p Class 2>/dev/null || true)
++            bh_state=""
++            bh_class=""
++            if [ -n "$bh_sess_props" ]; then
++                bh_state=$(printf '%s\n' "$bh_sess_props" | awk -F= '$1 == "State" { print $2; exit }')
++                bh_class=$(printf '%s\n' "$bh_sess_props" | awk -F= '$1 == "Class" { print $2; exit }')
++            fi
++            if [ -n "$bh_state" ] || [ -n "$bh_class" ]; then
++                if [ "$bh_state" = "closing" ]; then
++                    continue
++                fi
++                if [ -n "$bh_class" ]; then
++                    case "$bh_class" in
++                        user|user-early|user-incomplete)
++                            ;;
++                        *)
++                            continue
++                            ;;
++                    esac
++                fi
++                if [ "$bh_state" = "active" ]; then
++                    printf '%s\n' "$bh_seat_user"
++                    return 0
++                fi
++                if [ -z "$bh_fallback_seat_user" ]; then
++                    bh_fallback_seat_user="$bh_seat_user"
++                fi
++            else
++                if [ "$bh_row_hint" = "closing" ] || [ "$bh_row_hint" = "skip_class" ]; then
++                    continue
++                fi
++                if [ "$bh_row_hint" = "active" ]; then
++                    printf '%s\n' "$bh_seat_user"
++                    return 0
++                fi
++                if [ -z "$bh_fallback_seat_user" ]; then
++                    bh_fallback_seat_user="$bh_seat_user"
++                fi
++            fi
++        done
++        if [ -n "$bh_fallback_seat_user" ]; then
++            printf '%s\n' "$bh_fallback_seat_user"
++            return 0
++        fi
++    fi
++
++    # 3. Fall back to the explicit invoking non-root user (PolicyKit pkexec or sudo)
+     if [ -n "${PKEXEC_UID:-}" ]; then
+         bh_pk_user=$(bh_user_by_uid "$PKEXEC_UID")
+         if bh_is_valid_user "$bh_pk_user"; then
+@@ -120,40 +200,28 @@
+         return 0
+     fi
+ 
+-    # 2. Prefer an active local seat0 graphical/console session, then active user@<uid>.service
+-    if [ -d /run/systemd/system ]; then
+-        if command -v loginctl >/dev/null 2>&1; then
+-            bh_seat_users=$(loginctl list-sessions --no-legend --no-pager 2>/dev/null | awk '$4 == "seat0" && $3 ~ /^[a-zA-Z0-9._][a-zA-Z0-9._-]*$/ { print $3 }' || true)
+-            for bh_seat_user in $bh_seat_users; do
+-                if bh_is_valid_user "$bh_seat_user"; then
+-                    printf '%s\n' "$bh_seat_user"
+-                    return 0
+-                fi
+-            done
+-        fi
+-
+-        if command -v systemctl >/dev/null 2>&1; then
+-            bh_uids=$(systemctl list-units --plain --type=service --state=running --no-legend --no-pager 'user@*.service' 2>/dev/null | awk '{
+-                for (i = 1; i <= NF; i++) {
+-                    if ($i ~ /^user@[0-9]+\.service$/) {
+-                        u = $i
+-                        sub(/^user@/, "", u)
+-                        sub(/\.service$/, "", u)
+-                        print u
+-                    }
++    # 4. Fall back to an active user@<uid>.service manager
++    if [ -d /run/systemd/system ] && command -v systemctl >/dev/null 2>&1; then
++        bh_uids=$(systemctl list-units --plain --type=service --state=running --no-legend --no-pager 'user@*.service' 2>/dev/null | awk '{
++            for (i = 1; i <= NF; i++) {
++                if ($i ~ /^user@[0-9]+\.service$/) {
++                    u = $i
++                    sub(/^user@/, "", u)
++                    sub(/\.service$/, "", u)
++                    print u
+                 }
+-            }' || true)
+-            for bh_u_id in $bh_uids; do
+-                bh_u_name=$(bh_user_by_uid "$bh_u_id")
+-                if bh_is_valid_user "$bh_u_name"; then
+-                    printf '%s\n' "$bh_u_name"
+-                    return 0
+-                fi
+-            done
+-        fi
++            }
++        }' || true)
++        for bh_u_id in $bh_uids; do
++            bh_u_name=$(bh_user_by_uid "$bh_u_id")
++            if bh_is_valid_user "$bh_u_name"; then
++                printf '%s\n' "$bh_u_name"
++                return 0
++            fi
++        done
+     fi
+ 
+-    # 3. Fall back to the first interactive local user (UID 1000..65533) with a home directory
++    # 5. Fall back to the first interactive local user (UID 1000..65533) with a home directory
+     bh_passwd_match=""
+     while IFS=: read -r bh_p_u _ bh_p_uid _ _ bh_p_home bh_p_sh; do
+         case "$bh_p_uid" in
+@@ -177,7 +245,7 @@
+     return 1
+ }
+ 
+-if [ "$1" = "configure" ]; then
++if [ "${1:-}" = "configure" ]; then
+     HAS_SYSTEMD=0
+     if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+         HAS_SYSTEMD=1

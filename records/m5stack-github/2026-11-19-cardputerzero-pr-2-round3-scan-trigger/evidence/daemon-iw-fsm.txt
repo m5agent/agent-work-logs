@@ -1,0 +1,172 @@
+# Daemon: iw invocation, watchdog, schedule, error classification
+binary md5: 315b262efe546bffb5138ba717c5c818
+
+## dynamic imports (subset)
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) pipe
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) kill
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) fork
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) poll
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) strncmp
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) execv
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) setpgid
+0000000000000000      DF *UND*	0000000000000000 (GLIBC_2.17) waitpid
+
+## .rodata argv table 0x48e0-0x4910
+ 48e0 002f7573 722f7362 696e2f69 77002f73  ./usr/sbin/iw./s
+ 48f0 62696e2f 69770069 77006465 76007363  bin/iw.iw.dev.sc
+ 4900 616e0074 72696767 65720064 756d7000  an.trigger.dump.
+decoded: 0x48e1=/usr/sbin/iw 0x48ee=/sbin/iw 0x48f7=iw 0x48fa=dev 0x48fe=scan 0x4903=trigger 0x490b=dump
+argv built in child: {iw, dev, <iface>, scan, <trigger|dump>, NULL}; execv(fallback) only
+
+## child: setpgid(0,0), execv paths, _exit(127)
+    32d8:      	add	x4, x1, #0x17
+    32dc:      	add	x3, x1, #0x1a
+    32e0:      	add	x2, x1, #0x1e
+    32f0:      	stp	x25, x2, [sp, #0xf0]
+    32f4:      	stp	x26, xzr, [sp, #0x100]
+    32f8:      	bl	0x1340 <setpgid@plt>
+    3384:      	add	x22, x22, #0x8e0
+    3394:      	bl	0x12a0 <execv@plt>
+    33a0:      	bl	0x12a0 <execv@plt>
+    33a8:      	bl	0x1140 <_exit@plt>
+
+## parent: setpgid(pid,pid), kill(-pid), waitpid
+    30a4:      	mov	w1, w0
+    30a8:      	bl	0x1340 <setpgid@plt>
+    30ac:      	ldr	w0, [sp, #0xbc]
+    30b0:      	bl	0x12b0 <close@plt>
+    3564:      	tbz	w25, #0x1f, 0x3734 <.text+0x22b4>
+    3568:      	mov	w1, #0x9                // =9
+    356c:      	neg	w0, w19
+    3570:      	bl	0x11e0 <kill@plt>
+    3574:      	add	x21, sp, #0xb4
+    3578:      	mov	w0, w19
+    357c:      	mov	w1, #0x9                // =9
+    3580:      	bl	0x11e0 <kill@plt>
+    3584:      	b	0x351c <.text+0x209c>
+2264:    3270:      	bl	0x1420 <waitpid@plt>
+2438:    3528:      	bl	0x1420 <waitpid@plt>
+
+## spawn call sites: dump timeout 300 ms, trigger timeout 250 ms
+    3818:      	mov	x2, #0x210              // =528
+    3824:      	mov	x21, x1
+    3838:      	add	x1, x1, #0x2b
+    384c:      	mov	x5, #0x0                // =0
+    3850:      	mov	x4, #0x0                // =0
+    3854:      	mov	x2, #0x12c              // =300
+    3858:      	bl	0x2fac <.text+0x1b2c>
+    3964:      	add	x1, x2, #0x23
+    3968:      	mov	x2, #0xfa               // =250
+    396c:      	strb	wzr, [sp, #0x4b]
+    3970:      	str	wzr, [sp, #0x4c]
+    3974:      	bl	0x2fac <.text+0x1b2c>
+
+## schedule constants in .rodata (0x48c8: 2000000, 0x48d0: 10000, 0x48d8: 1500)
+ 48c0 00000000 00000000 80841e00 00000000  ................
+ 48d0 10270000 00000000 dc050000 00000000  .'..............
+ 48e0 002f7573 722f7362 696e2f69 77002f73  ./usr/sbin/iw./s
+
+## success path: next_trigger=now+10000, next_dump=now+1500
+    3c00:      	adrp	x1, 0x4000 <.text+0x2b80>
+    3c04:      	dup	v31.2d, x19
+    3c08:      	mov	w0, #0x101              // =257
+    3c0c:      	strh	w0, [x21, #0x46]
+    3c10:      	ldr	q30, [x1, #0x8d0]
+    3c14:      	ldr	x23, [sp, #0x30]
+    3c18:      	add	v30.2d, v31.2d, v30.2d
+    3c1c:      	stur	q30, [x21, #0x28]
+    3c20:      	ldp	x19, x20, [sp, #0x10]
+    3c24:      	ldp	x21, x22, [sp, #0x20]
+    3c28:      	ldp	x29, x30, [sp], #0x1d0
+    3c2c:      	ret
+
+## EBUSY path: -16 or exit 240 -> next_trigger=now+2000, next_dump<=now+1000
+    3a64:      	cmp	w23, #0xf0
+    3a68:      	b.eq	0x3a80 <.text+0x2600>
+    3a80:      	ldrb	w0, [x21, #0x47]
+    3a84:      	add	x2, x19, #0x7d0
+    3a88:      	mov	w1, #0x1                // =1
+    3a8c:      	str	x2, [x21, #0x28]
+    3a90:      	strb	w1, [x21, #0x46]
+    3a94:      	add	x19, x19, #0x3e8
+    3a98:      	cbz	w0, 0x3aa8 <.text+0x2628>
+    3a9c:      	ldr	x0, [x21, #0x30]
+    3aa0:      	cmp	x0, x19
+    3aa4:      	b.ls	0x3bf8 <.text+0x2778>
+    3aa8:      	mov	w0, #0x1                // =1
+    3aac:      	strb	w0, [x21, #0x47]
+    3ab0:      	ldr	x23, [sp, #0x30]
+    3a6c:      	adrp	x1, 0x4000 <.text+0x2b80>
+    3a70:      	mov	x0, x22
+    3a74:      	add	x1, x1, #0x5f8
+    3a78:      	bl	0x13d0 <strstr@plt>
+    3a7c:      	cbz	x0, 0x3b68 <.text+0x26e8>
+
+## EPERM/EACCES path: 255/243 or text (-1)/(-13) -> latch dump-only; usage/missing 1/2/127 excluded
+    3b68:      	cmp	w23, #0x7f
+    3b6c:      	b.eq	0x3cec <.text+0x286c>
+    3b70:      	sub	w0, w23, #0x1
+    3b74:      	cmp	w0, #0x1
+    3b78:      	b.ls	0x3b8c <.text+0x270c>
+    3b7c:      	cmp	w23, #0xff
+    3b80:      	mov	w0, #0xf3               // =243
+    3b84:      	ccmp	w23, w0, #0x4, ne
+    3b88:      	b.eq	0x3ba0 <.text+0x2720>
+    3b8c:      	adrp	x1, 0x4000 <.text+0x2b80>
+    3b90:      	mov	x0, x22
+    3b94:      	add	x1, x1, #0x600
+    3b98:      	bl	0x13d0 <strstr@plt>
+    3b9c:      	cbz	x0, 0x3cd8 <.text+0x2858>
+    3ba0:      	ldrb	w0, [x21, #0x49]
+
+## generic failure: retry 10000 ms, log throttle 59999 ms
+    3b48:      	ldr	x0, [x21, #0x38]
+    3b4c:      	cmp	x19, x0
+    3b50:      	b.lo	0x3ae8 <.text+0x2668>
+    3b54:      	sub	x0, x19, x0
+    3b58:      	mov	x1, #0xea5f             // =59999
+    3b5c:      	cmp	x0, x1
+    3b60:      	b.hi	0x3ae8 <.text+0x2668>
+    3d5c:      	mov	x0, #0x2710             // =10000
+    3d60:      	add	x19, x19, x0
+    3d64:      	mov	w0, #0x1                // =1
+    3d68:      	strb	w0, [x21, #0x46]
+    3d6c:      	ldr	x23, [sp, #0x30]
+    3d70:      	str	x19, [x21, #0x28]
+    3d74:      	b	0x3b38 <.text+0x26b8>
+
+## dump reschedule +3000 ms
+    423c:      	add	x0, x20, #0xbb8
+    4240:      	mov	w1, #0x1                // =1
+    4244:      	str	x0, [x19, #0x30]
+    4248:      	strb	w1, [x19, #0x47]
+    424c:      	b	0x4098 <.text+0x2c18>
+
+## freq parser: skip leading whitespace, anchor 'freq:', accept 2412..2484
+    38c0:      	ldrb	w2, [x19, #0x1]!
+    38c4:      	cmp	w2, #0x20
+    38c8:      	ccmp	w2, #0x9, #0x4, ne
+    38cc:      	b.eq	0x38c0 <.text+0x2440>
+    38d0:      	adrp	x1, 0x4000 <.text+0x2b80>
+    38d4:      	mov	x0, x19
+    38d8:      	add	x1, x1, #0x4e0
+    38dc:      	mov	x2, #0x5                // =5
+    38e0:      	bl	0x1260 <strncmp@plt>
+    38e4:      	cbnz	w0, 0x3880 <.text+0x2400>
+    38e8:      	add	x19, x19, #0x5
+    38ec:      	add	x1, sp, #0x38
+    38f0:      	mov	w2, #0xa                // =10
+    38f4:      	mov	x0, x19
+    38f8:      	str	xzr, [sp, #0x38]
+    38fc:      	bl	0x1330 <strtol@plt>
+    3900:      	ldr	x2, [sp, #0x38]
+    3904:      	ldr	w1, [sp, #0x248]
+    3908:      	cmp	x19, x2
+    390c:      	b.eq	0x3884 <.text+0x2404>
+    3910:      	sub	x0, x0, #0x96c
+    3914:      	cmp	x0, #0x49
+    3918:      	cinc	w1, w1, lo
+    391c:      	b	0x3884 <.text+0x2404>
+
+## test hooks absent from stripped ELF
+BH_ENABLE_TEST_HOOKS occurrences: 0

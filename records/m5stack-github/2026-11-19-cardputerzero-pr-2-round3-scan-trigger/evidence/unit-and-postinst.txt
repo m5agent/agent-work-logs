@@ -1,0 +1,115 @@
+# Installed unit (usr/lib/systemd/system/beaconhound-lite-daemon@.service)
+[Unit]
+Description=BeaconHound Community 2.4GHz Spectrum Telemetry Daemon (%i)
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+RuntimeDirectory=beaconhound
+RuntimeDirectoryMode=0700
+ExecStart=/usr/bin/beaconhound-lite-daemon
+Restart=on-failure
+RestartSec=2
+AmbientCapabilities=CAP_NET_ADMIN
+CapabilityBoundingSet=CAP_NET_ADMIN
+NoNewPrivileges=true
+RestrictSUIDSGID=true
+ProtectSystem=strict
+PrivateTmp=true
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
+
+# postinst: detection order (line numbers)
+98:    # 1. Preserve an already-enabled valid template instance across upgrades
+110:    # 2. Prefer an active local seat0 graphical/console session user before pkexec/sudo
+190:    # 3. Fall back to the explicit invoking non-root user (PolicyKit pkexec or sudo)
+203:    # 4. Fall back to an active user@<uid>.service manager
+224:    # 5. Fall back to the first interactive local user (UID 1000..65533) with a home directory
+
+## seat0 block (postinst 110-188) precedes PKEXEC_UID/SUDO_USER (190-201)
+    # 2. Prefer an active local seat0 graphical/console session user before pkexec/sudo
+    #    Two-pass selection via loginctl show-session:
+    #      Pass 1: first valid seat0 user with State=active and Class in user*
+    #      Pass 2: first valid seat0 user with State!=closing and Class in user* (e.g. online)
+    if [ -d /run/systemd/system ] && command -v loginctl >/dev/null 2>&1; then
+        bh_seat_candidates=$(loginctl list-sessions --no-legend --no-pager 2>/dev/null | awk '
+            $4 == "seat0" && $1 ~ /^[a-zA-Z0-9._-]+$/ && $3 ~ /^[a-zA-Z0-9._][a-zA-Z0-9._-]*$/ {
+                hint = "fallback_ok"
+                for (i = 5; i <= NF; i++) {
+                    if ($i == "closing") {
+                        hint = "closing"
+    # 3. Fall back to the explicit invoking non-root user (PolicyKit pkexec or sudo)
+    if [ -n "${PKEXEC_UID:-}" ]; then
+        bh_pk_user=$(bh_user_by_uid "$PKEXEC_UID")
+        if bh_is_valid_user "$bh_pk_user"; then
+            printf '%s\n' "$bh_pk_user"
+            return 0
+        fi
+    fi
+    if [ -n "${SUDO_USER:-}" ] && bh_is_valid_user "$SUDO_USER"; then
+        printf '%s\n' "$SUDO_USER"
+        return 0
+    fi
+
+## prerm: stop/disable all template instances + legacy unit
+}
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+    HAS_SYSTEMD=0
+    if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+        HAS_SYSTEMD=1
+    fi
+
+    for bh_link in "${WANTS_DIR}/${TEMPLATE_PREFIX}"*.service; do
+        [ -e "$bh_link" ] || [ -L "$bh_link" ] || continue
+        bh_unit=$(basename -- "$bh_link")
+        if [ "$HAS_SYSTEMD" = "1" ] && bh_is_safe_unit_name "$bh_unit"; then
+            systemctl stop "$bh_unit" >/dev/null 2>&1 || true
+            systemctl disable "$bh_unit" >/dev/null 2>&1 || true
+        fi
+        if [ -L "$bh_link" ]; then
+            rm -f -- "$bh_link"
+        fi
+    done
+
+    if [ "$HAS_SYSTEMD" = "1" ]; then
+        bh_active_units=$(systemctl list-units --plain --type=service --all --no-legend --no-pager "${TEMPLATE_PREFIX}*.service" 2>/dev/null | awk '{
+            for (i = 1; i <= NF; i++) {
+                if ($i ~ /^beaconhound-lite-daemon@[a-zA-Z0-9._][a-zA-Z0-9._-]*\.service$/) {
+                    print $i
+                }
+            }
+        }' || true)
+        printf '%s\n' "$bh_active_units" | while IFS= read -r bh_unit; do
+            [ -n "$bh_unit" ] || continue
+            if bh_is_safe_unit_name "$bh_unit"; then
+                systemctl stop "$bh_unit" >/dev/null 2>&1 || true
+                systemctl disable "$bh_unit" >/dev/null 2>&1 || true
+            fi
+        done
+
+        systemctl stop "$LEGACY_SERVICE" >/dev/null 2>&1 || true
+        systemctl disable "$LEGACY_SERVICE" >/dev/null 2>&1 || true
+    fi
+
+    if [ -L "${WANTS_DIR}/${LEGACY_SERVICE}" ]; then
+        rm -f -- "${WANTS_DIR}/${LEGACY_SERVICE}"
+    fi
+fi
+
+exit 0
+
+## postrm
+#!/bin/sh
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+        systemctl daemon-reload >/dev/null 2>&1 || true
+    fi
+fi
+
+exit 0
