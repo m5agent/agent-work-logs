@@ -30,3 +30,7 @@
 [完整报告](report.md)、[结构化记录](run.json)、[离线复现说明](code/README.md)、[摘要生成脚本](code/summarize_private_evidence.py)、[摘要结构](code/summary.schema.json)。产品变更直接由不可变源码链接查阅，本记录不重复附带 patch。
 
 部署后的同路径功能复验已完成。Pages 更新仍为 PENDING，将独立记录。远程 REPL 命令执行、物理硬件和长期连接可靠性没有通过结论。没有提交 Burner。原始 BIN、ZIP、完整串口、截图、配对码、唯一身份和本机部署信息不公开。
+
+## 后续验证
+
+- 2026-11-19 [断开方向与分层心跳](followups/2026-11-19-webrepl-close-observation/)用原版留存抓包复验 Device Service 1.99.4 API 与浏览器历史卡片。
