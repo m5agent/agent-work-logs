@@ -1,0 +1,23 @@
+# Pip dependency evidence: cryptoauthlib==20250916 (Blinky-Hello-World registration helper)
+
+## requirements.txt:10
+10:cryptoauthlib==20250916
+
+## consumers (grep 'from cryptoauthlib import')
+Blinky-Hello-World/utilities/trustplatform/assets/python/trustplatform/common_helper.py:5:from cryptoauthlib import *
+Blinky-Hello-World/utilities/trustplatform/assets/python/certs_handler/create_cert_defs.py:30:from cryptoauthlib import *
+Blinky-Hello-World/utilities/trustplatform/assets/python/manifest_helper/tng_manifest_helper.py:25:from cryptoauthlib import *
+Blinky-Hello-World/utilities/trustplatform/assets/python/manifest_helper/tflx_manifest_helper.py:26:from cryptoauthlib import *
+
+## sdist metadata (PyPI cryptoauthlib-20250916.tar.gz)
+  filename: cryptoauthlib-20250916.tar.gz
+  sha256:   c73272d66f5e2fff7835b8872e92b41d8d9f4211ebfd38db854781922efc91ad
+  PKG-INFO: License: Other / Classifier: License :: Other/Proprietary License
+  PKG-INFO: License-File: LICENSE.txt
+  LICENSE.txt sha256: ddab06e5171288e79b97d973eb72c2b3159eb631331044db868b17a5da6a9be3
+  LICENSE.txt operative text: '(c) 2017 Microchip Technology Inc. and its subsidiaries.  You may use this
+    software and any derivatives exclusively with Microchip products.'
+
+## note on distribution direction
+  requirements.txt is consumed by 'pip install -r' in the helper setup; the package is fetched
+  from PyPI by the end user. The repository does not bundle the pip wheel/sdist.

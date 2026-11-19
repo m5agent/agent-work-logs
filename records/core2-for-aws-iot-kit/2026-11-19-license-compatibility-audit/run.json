@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "report",
+  "overall_status": "REVIEW",
+  "title": "Core2-for-AWS-IoT-Kit issue 108: license compatibility with upstream cryptoauthlib",
+  "source": {
+    "issue": "https://github.com/m5stack/Core2-for-AWS-IoT-Kit/issues/108",
+    "pull_request": "",
+    "repository": "m5stack/Core2-for-AWS-IoT-Kit",
+    "base_commit": "e1c3750e204e714ca62b93f6c20aabd7f7ce286d"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS, read-only clone (git clone --depth 50), no device service, no emulator, no build",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "root and per-example license inventory",
+      "layer": "review",
+      "status": "REVIEW",
+      "detail": "root LICENSE = MIT (c) 2020 Amazon Web Services; no NOTICE for third-party components; GitHub license API returns spdx_id=MIT"
+    },
+    {
+      "name": "vendored cryptoauthlib presence and version",
+      "layer": "review",
+      "status": "REVIEW",
+      "detail": "5 of 7 examples vendor components/esp-cryptoauthlib/cryptoauthlib at cryptoauthlib-v3.7.9; Microchip LICENSE preserved in all 5 (sha256 17f8ada09570f01b9e2c3c995f220fce01ffb61c6b8c0199f6f6ac2f355cd7d2)"
+    },
+    {
+      "name": "component linkage into firmware",
+      "layer": "review",
+      "status": "REVIEW",
+      "detail": "Blinky-Hello-World/main/CMakeLists.txt:3 and components/core2forAWS/CMakeLists.txt:36 require esp-cryptoauthlib; atecc608.c includes cryptoauthlib.h"
+    },
+    {
+      "name": "prebuilt binaries redistributed in tree",
+      "layer": "review",
+      "status": "REVIEW",
+      "detail": "55 sample_bins/*.bin files (secure_cert_mfg*.bin) across 5 examples"
+    },
+    {
+      "name": "pip dependency metadata for pinned version",
+      "layer": "review",
+      "status": "REVIEW",
+      "detail": "cryptoauthlib==20250916 sdist sha256 c73272d66f5e2fff7835b8872e92b41d8d9f4211ebfd38db854781922efc91ad; PKG-INFO License: Other / Other/Proprietary; LICENSE.txt requires use exclusively with Microchip products"
+    },
+    {
+      "name": "firmware build and binary symbol verification",
+      "layer": "build",
+      "status": "NOT RUN",
+      "detail": "examples not compiled; linkage inferred from CMake requires and includes"
+    },
+    {
+      "name": "distribution channel license packaging",
+      "layer": "delivery",
+      "status": "NOT RUN",
+      "detail": "no release assets in repo; docs/M5Burner packaging not inspectable from source"
+    }
+  ],
+  "evidence": [
+    "evidence/01-license-artifacts.txt",
+    "evidence/02-vendored-component.txt",
+    "evidence/03-pip-dependency.txt",
+    "evidence/04-upstream-license-clauses.txt",
+    "evidence/06-reply.md"
+  ],
+  "notes": [
+    "REVIEW only: static licensing analysis, no runtime or device validation is applicable",
+    "finding: repository-level scope disclosure gap (MIT root without third-party notice), not a copyleft-style incompatibility",
+    "Microchip redistribution clause is already satisfied at file level because each vendored copy keeps LICENSE",
+    "legal acceptability of a field-of-use restricted license left to maintainers/legal"
+  ]
+}
