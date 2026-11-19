@@ -75,3 +75,8 @@
 - virtual-device validation：不适用，且是结构性的：无论 base 还是 head，固件行为都
   没有可观察差异（BIN 大小已相同），任何虚拟设备都无法据此给出额外信息。
 - 逐字节产物比对：`NOT RUN`。只比对到尺寸与构建步骤；CI 不保留 BIN 供下载比对。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/435#issuecomment-6997607473>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游）
