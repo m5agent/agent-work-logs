@@ -45,6 +45,8 @@
 - `patches/0001-ci-idf6-c6-p4.patch`：PR head 的差分。
 - 前序分析：`records/m5gfx/2026-11-18-pr433-lp-fifo-error/`（该记录当时建议
   「加 esp32c6 at 6.0.2」，本 PR 就是这条建议的落地，并额外加了 P4）。
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/434#issuecomment-6996746003>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游）
 
 ## 未覆盖项
 
