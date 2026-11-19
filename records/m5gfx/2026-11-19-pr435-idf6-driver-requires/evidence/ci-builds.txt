@@ -1,0 +1,30 @@
+# CI build evidence: M5GFX #435 (head 299c52a) vs base develop 5f7ad47
+# Workflow: .github/workflows/IDFBuild.yml, examples/Test/build_test, espressif/idf:v6.0.2
+
+## head checks: 28 of 28 pass (gh pr checks 435)
+## IDF 6.0.2 matrix jobs on head: esp32, esp32s3, esp32c6, esp32p4 -- all pass
+
+### base esp32s3 (IDF 6.0.2) run 44438223864 job 135272327723
+2026-11-19T01:38:31.1128788Z -- M5GFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer;esp_mm;esp_driver_ledc;esp_driver_i2s;hal;esp_psram
+component count: 138; four present: ['esp_driver_dma', 'esp_driver_gpio', 'esp_driver_i2c', 'esp_driver_spi']
+total build steps (max [n/N]): 1077
+
+### head esp32s3 (IDF 6.0.2) run 44441797261 job 135284166545
+2026-11-19T02:07:41.0032428Z -- M5GFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer;esp_mm;esp_driver_ledc;esp_driver_i2s;hal;esp_psram;esp_driver_gpio;esp_driver_i2c;esp_driver_spi;esp_driver_dma
+component count: 138; four present: ['esp_driver_dma', 'esp_driver_gpio', 'esp_driver_i2c', 'esp_driver_spi']
+total build steps (max [n/N]): 1077
+
+### base esp32p4 (IDF 6.0.2) run 44438223864 job 135272327625
+2026-11-19T01:38:29.2709969Z -- M5GFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer;esp_mm;esp_driver_ledc;esp_driver_i2s;hal;esp_psram
+component count: 137; four present: ['esp_driver_dma', 'esp_driver_gpio', 'esp_driver_i2c', 'esp_driver_spi']
+total build steps (max [n/N]): 1090
+
+### head esp32p4 (IDF 6.0.2) run 44441797261 job 135284166054
+2026-11-19T02:07:37.8278964Z -- M5GFX use components = nvs_flash;efuse;esp_lcd;driver;esp_timer;esp_mm;esp_driver_ledc;esp_driver_i2s;hal;esp_psram;esp_driver_gpio;esp_driver_i2c;esp_driver_spi;esp_driver_dma
+component count: 137; four present: ['esp_driver_dma', 'esp_driver_gpio', 'esp_driver_i2c', 'esp_driver_spi']
+total build steps (max [n/N]): 1090
+
+## final image size (identical base vs head)
+esp32s3: base 0x632e0 / head 0x632e0 bytes (M5GFX-build-test.bin)
+esp32p4: base 0x524b0 / head 0x524b0 bytes (M5GFX-build-test.bin)
+component lists identical (138 S3 / 137 P4) and build step counts identical (1077 S3 / 1090 P4).

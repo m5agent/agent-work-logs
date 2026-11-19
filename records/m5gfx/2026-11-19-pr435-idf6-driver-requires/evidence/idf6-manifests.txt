@@ -1,0 +1,76 @@
+# IDF manifests and M5GFX source facts (read-only, fetched 2026-11-19)
+# raw URLs: https://raw.githubusercontent.com/espressif/esp-idf/<tag>/components/<c>/CMakeLists.txt
+
+## esp-idf v6.0.2 components/driver/CMakeLists.txt
+    idf_component_register(SRCS "${srcs}"
+                           INCLUDE_DIRS ${includes}
+                           PRIV_REQUIRES esp_timer esp_mm esp_driver_gpio esp_ringbuf esp_pm
+                           REQUIRES esp_hal_i2c esp_hal_twai esp_hal_touch_sens
+                           LDFRAGMENTS ${ldfragments}
+                          )
+endif()
+
+## esp-idf v6.1.1 components/driver/CMakeLists.txt
+    idf_component_register(SRCS "${srcs}"
+                           INCLUDE_DIRS ${includes}
+                           PRIV_REQUIRES esp_timer esp_mm esp_driver_gpio esp_ringbuf esp_pm
+                           REQUIRES esp_hal_i2c esp_hal_twai esp_hal_touch_sens
+                           LDFRAGMENTS ${ldfragments}
+                          )
+endif()
+
+## esp-idf v6.0.2 components/esp_lcd/CMakeLists.txt (requires split)
+         "src/esp_lcd_panel_ssd1306.c"
+         "src/esp_lcd_panel_st7789.c"
+         "src/esp_lcd_panel_ops.c")
+set(includes "include" "interface")
+## esp-idf v6.1.1 components/esp_lcd/CMakeLists.txt
+if(NOT ${target} STREQUAL "linux")
+    list(APPEND srcs "src/esp_lcd_common.c"
+                     "src/esp_lcd_panel_io.c"
+                     "src/esp_lcd_panel_ssd1306.c"
+
+## esp-idf v6.0.2 / v6.1.1 components/esp_driver_spi/CMakeLists.txt
+idf_component_register(
+    SRCS ${srcs}
+    INCLUDE_DIRS ${public_include}
+    REQUIRES esp_pm esp_hal_gpspi esp_driver_dma
+    PRIV_REQUIRES esp_timer esp_mm esp_driver_gpio spi_flash esp_psram
+    LDFRAGMENTS "linker.lf"
+
+## esp-idf v5.4.3 / v5.5.4 components/driver/CMakeLists.txt (backward-compat public deps)
+    idf_component_register(SRCS "${srcs}"
+                           INCLUDE_DIRS ${includes}
+                           PRIV_REQUIRES efuse esp_timer esp_mm
+                           REQUIRES esp_pm esp_ringbuf freertos soc hal esp_hw_support
+                           # for backward compatibility, the driver component needs to
+                           # have a public dependency on other "esp_driver_foo" components
+                                    esp_driver_gpio esp_driver_pcnt esp_driver_gptimer esp_driver_spi esp_driver_mcpwm
+                                    esp_driver_ana_cmpr esp_driver_i2s esp_driver_sdmmc esp_driver_sdspi esp_driver_sdio
+                                    esp_driver_dac esp_driver_rmt esp_driver_tsens esp_driver_sdm esp_driver_i2c
+                                    esp_driver_uart esp_driver_ledc esp_driver_parlio esp_driver_usb_serial_jtag
+                                    esp_driver_twai
+                           LDFRAGMENTS ${ldfragments}
+
+## existence of the four components per tag (HTTP status of components/<c>/CMakeLists.txt)
+v6.0    gpio:200 i2c:200 spi:200 dma:200 
+v6.0.1  gpio:200 i2c:200 spi:200 dma:200 
+v6.0.2  gpio:200 i2c:200 spi:200 dma:200 
+v6.1    gpio:200 i2c:200 spi:200 dma:200 
+v6.1.1  gpio:200 i2c:200 spi:200 dma:200 
+note: tags v6.0.0 / v6.1.0 do not exist (known file components/esp_lcd/CMakeLists.txt also 404)
+
+## header locations in v6.0.2 (git tree, components/esp_driver_*/include)
+components/esp_driver_gpio/include/driver/gpio.h
+components/esp_driver_gpio/include/driver/lp_io.h
+components/esp_driver_i2c/include/driver/i2c_master.h
+components/esp_driver_spi/include/driver/spi_master.h
+components/esp_driver_dma/include/esp_private/gdma.h
+(esp_private/gdma.h exists only in esp_driver_dma; not in esp_hal_dma or esp_lcd)
+
+## M5GFX head 299c52a source line numbers
+CMakeLists.txt:36  if (IDF_VERSION_MAJOR GREATER_EQUAL 6)
+CMakeLists.txt:38-39  new COMPONENT_REQUIRES with esp_driver_gpio esp_driver_i2c esp_driver_spi esp_driver_dma
+src/M5GFX.cpp:13  #if __has_include(<driver/i2c_master.h>)
+src/lgfx/v1/platforms/esp32/common.inl:125  LP I2C gate: __has_include(<driver/i2c_master.h>)
+src/lgfx/v1/platforms/esp32/common.inl:193  P4 LP GPIO matrix gate: __has_include(<driver/lp_io.h>)

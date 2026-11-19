@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "pr",
+  "overall_status": "PASS",
+  "title": "M5GFX #435: require esp_driver_gpio / i2c / spi / dma on ESP-IDF 6 (build-level verification)",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/435",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "5f7ad476457cd738407766c38df23620ead7baac",
+    "head_commit": "299c52aa540555a716957eb3aa83c4490a8a4961"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "GitHub Actions ubuntu-latest with espressif/idf:v6.0.2 container (base run 44438223864, head run 44441797261); macOS arm64 host used only for read-only evidence collection; no local rebuild",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file, +6/-1 in CMakeLists.txt: four components appended to the IDF>=6 COMPONENT_REQUIRES plus a four-line comment; head 299c52a single commit on develop 5f7ad47 (merge of #434); MERGEABLE/CLEAN; patch applies to base"
+    },
+    {
+      "id": "ci-jobs",
+      "status": "PASS",
+      "detail": "28/28 checks on head pass, including esp32, esp32s3, esp32c6 and esp32p4 at IDF 6.0.2; every job ends with 'Project build complete'"
+    },
+    {
+      "id": "driver-no-longer-public",
+      "status": "PASS",
+      "detail": "IDF v6.0.2 and v6.1.1 components/driver: PRIV_REQUIRES esp_driver_gpio, REQUIRES esp_hal_i2c/esp_hal_twai/esp_hal_touch_sens; v5.4.3/v5.5.4 instead list every esp_driver_* as public 'for backward compatibility', so the PR rationale matches upstream source"
+    },
+    {
+      "id": "header-ownership",
+      "status": "PASS",
+      "detail": "driver/gpio.h and driver/lp_io.h live in esp_driver_gpio, i2c_master.h in esp_driver_i2c, spi_master.h in esp_driver_spi, esp_private/gdma.h only in esp_driver_dma; all four components are covered by the new REQUIRES"
+    },
+    {
+      "id": "dma-reachability",
+      "status": "PASS",
+      "detail": "esp_lcd 6.0.2/6.1.1 lists esp_driver_gpio/i2c/spi publicly but esp_driver_dma only in PRIV_REQUIRES; <esp_private/gdma.h> is reached on base via esp_lcd -> esp_driver_spi (its REQUIRES publicly includes esp_driver_dma), so the explicit dma line is redundant today and correct as a future guard"
+    },
+    {
+      "id": "silent-drop-path",
+      "status": "PASS",
+      "detail": "src/lgfx/v1/platforms/esp32/common.inl:125 gates LGFX_LP_I2C_NUM on __has_include(<driver/i2c_master.h>) and :193 gates LGFX_LP_GPIO_MATRIX on __has_include(<driver/lp_io.h>); both degrade silently when the header is missing, which is the risk the PR removes"
+    },
+    {
+      "id": "component-set-invariant",
+      "status": "PASS",
+      "detail": "same 6.0.2 image, base vs head: esp32s3 138 components / 1077 build steps / BIN 0x632e0 both sides; esp32p4 137 components / 1090 steps / BIN 0x524b0 both sides; -- Components: lists diff empty and base already compiled esp_driver_dma ([71/1077])"
+    },
+    {
+      "id": "idf6-component-existence",
+      "status": "PASS",
+      "detail": "components/esp_driver_gpio, esp_driver_i2c, esp_driver_spi and esp_driver_dma all return 200 on tags v6.0, v6.0.1, v6.0.2, v6.1 and v6.1.1; v6.0.0 and v6.1.0 are not real tags"
+    },
+    {
+      "id": "local-independent-rebuild",
+      "status": "NOT RUN",
+      "detail": "the Docker daemon on this host cannot create new containers (containerd metadata store is read-only), so no independent 6.0.2 build outside the PR CI was performed; the build evidence is the PR's own CI"
+    },
+    {
+      "id": "idf61-build",
+      "status": "NOT RUN",
+      "detail": "IDFBuild.yml has no 6.1 job although the change applies to all 6.x; only manifest and component-existence checks were done for 6.1/6.1.1"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "not applicable: the change only declares component dependencies and does not change runtime behavior"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "structurally not applicable: base and head produce the same component set, step count and BIN size, so no virtual device model could observe a difference"
+    }
+  ],
+  "evidence": [
+    "evidence/ci-builds.txt",
+    "evidence/idf6-manifests.txt",
+    "evidence/diff-scope.txt",
+    "patches/0001-build-idf6-driver-requires.patch"
+  ],
+  "notes": [
+    "PR left OPEN; one English comment posted; no close, no push, no code change to m5stack/M5GFX.",
+    "No m5agent comment existed before this review (comments and reviews were empty).",
+    "Follow-up to records/m5gfx/2026-11-19-pr434-idf6-c6-p4-ci."
+  ]
+}
