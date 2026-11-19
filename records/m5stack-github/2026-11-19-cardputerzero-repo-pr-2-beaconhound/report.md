@@ -137,4 +137,6 @@ alone.
 ## 7. Disposition
 
 One review comment was posted on the PR with F1, F2 and F3 and the evidence
-class. No code was pushed to the PR or the fork and the PR was not closed.
+class: https://github.com/m5stack/CardputerZeroRepository/pull/2#issuecomment-6996544162
+(2026-11-19T01:10:21Z). No code was pushed to the PR or the fork and the PR was
+not closed.

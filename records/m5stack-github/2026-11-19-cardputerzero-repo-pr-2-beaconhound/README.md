@@ -5,6 +5,7 @@
 - Work type: `pr_review`
 - Source: https://github.com/m5stack/CardputerZeroRepository/pull/2 (opened 2026-11-19T01:00:23Z by pingequalab, open, no prior comments)
 - Source version: PR head `147196989af3a4ef31f7d3764f803a571be3b714` on base `ci/bootstrap` (`c817f795c5a1597e13b428296130bd043df71a23`), one added file, 497,010 bytes
+- Comment: https://github.com/m5stack/CardputerZeroRepository/pull/2#issuecomment-6996544162 (2026-11-19T01:10:21Z)
 - Artifact: `incoming/beaconhound_0.1.0_arm64.deb`, git blob `fcad30d2b8c458079f9ec4ded9bb06a976147b99`, SHA256 `46f6d41a5f3a0dbe4bc02843917e5ee3929dd327c5be3f32d181fbf224d2ec10`
 - Environment: macOS arm64; no CardputerZero hardware; local Device Service `cardputer-zero` profile is not creatable
 - Evidence class: **code-level verification** (package structure, control metadata, ELF headers/dynamic deps, maintainer scripts, static call path)
