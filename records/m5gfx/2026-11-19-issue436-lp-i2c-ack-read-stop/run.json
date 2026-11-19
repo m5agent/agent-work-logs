@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #436: LP I2C ACK-terminated read makes endTransaction wait 25 ms (code-level verification)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/436",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "44324f34748812ce557e0dea39fb173cf9a73952",
+    "head_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 read-only source inspection; no Arduino/ESP-IDF toolchain; local Device Service has 36 profiles without ESP32-C5; hardware test center has 5 nodes (4 online) without ESP32-C5",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "issue-state",
+      "status": "PASS",
+      "detail": "issue OPEN, 0 comments before handling, author GOB52, Japanese title/body; no m5agent reply exists"
+    },
+    {
+      "id": "source-version",
+      "status": "PASS",
+      "detail": "m5stack/M5GFX develop is 44324f34748812ce557e0dea39fb173cf9a73952, matching the 44324f3 reported by the author"
+    },
+    {
+      "id": "default-ack-read",
+      "status": "PASS",
+      "detail": "src/lgfx/v1/platforms/common.hpp:275 declares readBytes(..., bool last_nack = false); Touch_CHSC6540.inl:73 and :78 both use the default, so the transaction ends with ACK"
+    },
+    {
+      "id": "lp-stop-path",
+      "status": "PASS",
+      "detail": "common.inl:2072 sets force_stop_read=false for LP ports, routing read termination into the controller STOP+END branch; :2099 waits i2c_stall_limit_us/1000 = 25 ms for TRANS_COMPLETE; :2110 calls i2c_stop() after the timeout"
+    },
+    {
+      "id": "regression-origin",
+      "status": "PASS",
+      "detail": "#423 cc60eaa only introduced force_stop_read; the STOP command and its 25 ms wait already existed for write termination and error paths. Reverting #423 would reintroduce #421"
+    },
+    {
+      "id": "error-observability",
+      "status": "PASS",
+      "detail": "Touch_CHSC6540.inl:84 discards the endTransaction() return value with an empty if body, so connection_lost is invisible to the caller"
+    },
+    {
+      "id": "driver-shape",
+      "status": "PASS",
+      "detail": "CHSC6540 :73/:78, FT5x06 :118/:127 and CST816S :208/:213 all end with ACK; GT911 :150 reads the count with ACK and :158 reads coordinates with last_nack=true, so only its zero-point branch ends with ACK"
+    },
+    {
+      "id": "proposed-fix-b",
+      "status": "REVIEW",
+      "detail": "proposal only: record whether the last read byte was ACK-terminated, then insert one READ+NACK before the LP STOP; not implemented, not compiled, not run on hardware"
+    },
+    {
+      "id": "duplicate-check",
+      "status": "PASS",
+      "detail": "no duplicate issue and no open fix PR found in m5stack/M5GFX at handling time"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5 / ToughC5 hardware available; the 37-80 ms figures are the author's measurements, not reproduced here"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "local Device Service has 36 profiles and none is ESP32-C5; no C5 QEMU profile exists, so the reported board cannot be booted"
+    },
+    {
+      "id": "build",
+      "status": "NOT RUN",
+      "detail": "no Arduino / ESP-IDF toolchain on this host; no minimal sketch or merged firmware was built"
+    },
+    {
+      "id": "c6-p4-lp-ports",
+      "status": "NOT RUN",
+      "detail": "same common.inl path is shared by C6/P4 LP ports, but no corresponding touch configuration was available to confirm the same wait"
+    }
+  ],
+  "evidence": [
+    "evidence/issue-status.txt",
+    "evidence/code-facts.txt",
+    "evidence/environment.txt",
+    "evidence/duplicate-check.txt"
+  ],
+  "notes": [
+    "Issue left OPEN; exactly one Japanese reply to be posted; no close, no push, no change to m5stack/M5GFX.",
+    "Evidence class is code-level verification. The author's hardware measurements are cited as their data, not reproduced.",
+    "Related prior work: #421, #423, #426, #428."
+  ]
+}

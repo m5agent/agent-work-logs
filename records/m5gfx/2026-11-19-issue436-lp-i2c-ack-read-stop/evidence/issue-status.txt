@@ -1,0 +1,24 @@
+# M5GFX #436 issue status
+# collected 2026-11-19 (UTC) via gh
+
+number: 436
+title: LP_I2C ポートで ACK 終端の read の後に endTransaction() が 25 ms 待ち切る (ToughC5 のタッチで M5.update() が毎回 37〜80 ms 止まる)
+state: OPEN
+author: GOB52
+createdAt: 2026-11-19T09:34:26Z
+updatedAt: 2026-11-19T09:34:26Z
+labels: []
+comments: 0
+
+reported versions (selected lines from body):
+  ToughC5 のタッチ (`Touch_CHSC6540`) がちょうどこの読み方をしています。そのため、**タッチされていなくても
+  | M5GFX | develop `44324f3` |
+  | M5Unified | develop `6df0152` |
+  | ボード | M5Stack ToughC5 (ESP32-C5)、board id `0x21` |
+  | ビルド環境 | arduino-cli 1.3.1 + `m5stack:esp32 3.3.10` (FQBN `m5stack:esp32:m5stack_toughc5`) |
+  | **ToughC5** | **37,548 µs** (最大 37,569) | **72** |
+  | **ToughC5、指を 1 点触れたまま** | **80,485〜81,709 µs** (最大 287,934) | **35〜36** |
+  | ToughC5 + `M5.Touch.end()` | 721〜812 µs | 490〜645 |
+  実害の例として、M5Unit-NFC の NFC-A カードエミュレーションが ToughC5 で成り立ちません
+  `endTransaction()` が待たない状態 (下記の NACK 終端の実験) にすると、ToughC5 でも example を無改変のまま
+  | M5GFX | `endTransaction()` の戻り値 | `endTransaction()` の所要 | `getTouchRaw()` 全体 | `M5.update()` | 3 秒のループ回数 |

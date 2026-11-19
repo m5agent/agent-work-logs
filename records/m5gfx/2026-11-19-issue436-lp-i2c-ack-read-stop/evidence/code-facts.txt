@@ -1,0 +1,213 @@
+# M5GFX #436 code facts
+# repository: https://github.com/m5stack/M5GFX
+# develop: 44324f34748812ce557e0dea39fb173cf9a73952  2026-11-19T11:24:24+09:00
+
+## readBytes signature (default last_nack=false)
+   270	    cpp::result<void, error_t> release(int i2c_port);
+   271	    cpp::result<void, error_t> restart(int i2c_port, int i2c_addr, uint32_t freq, bool read = false);
+   272	    cpp::result<void, error_t> beginTransaction(int i2c_port, int i2c_addr, uint32_t freq, bool read = false);
+   273	    cpp::result<void, error_t> endTransaction(int i2c_port);
+   274	    cpp::result<void, error_t> writeBytes(int i2c_port, const uint8_t *data, size_t length);
+   275	    cpp::result<void, error_t> readBytes(int i2c_port, uint8_t *data, size_t length, bool last_nack = false);
+   276	
+   277	//--------
+   278	
+
+## Touch_CHSC6540 read path
+    66	      tmp = buf[flip];
+    67	      memset(tmp, 0, len);
+    68	      if (lgfx::i2c::beginTransaction(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, false))
+    69	      {
+    70	        static constexpr uint8_t reg_number = 2;
+    71	        if (lgfx::i2c::writeBytes(_cfg.i2c_port, &reg_number, 1)
+    72	        && lgfx::i2c::restart(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, true)
+    73	        && lgfx::i2c::readBytes(_cfg.i2c_port, tmp, 1)
+    74	        && (tmp[0] != 0))
+    75	        {
+    76	          flip = !flip;
+    77	          size_t points = std::min<uint_fast8_t>(count, tmp[0]);
+    78	          if (points && !lgfx::i2c::readBytes(_cfg.i2c_port, &tmp[1], points * 6 - 2))
+    79	          { // Discard a frame whose coordinates could not be read fully (zero-filled coordinates
+    80	            // must not be returned as a valid touch)
+    81	            tmp[0] = 0;
+    82	          }
+    83	        }
+    84	        if (lgfx::i2c::endTransaction(_cfg.i2c_port)) {}
+    85	        if (tmp[0] == 0 || memcmp(buf[0], buf[1], len) == 0) break;
+    86	      }
+    87	      // When the retries are used up, keep the latest reading instead of reporting no touch.
+    88	      // (Consecutive reads differ while the finger moves; returning 0 would drop flicks.)
+
+## i2c_wait: stall limit and LP STOP path
+  1968	    /// Minimum time a transfer may stall (clock stretching or a wedged bus)
+  1969	    /// before it is given up on; 25ms covers the SMBus Tlow:sext ceiling.
+  1970	    /// NACK handling does not depend on this limit.
+  1971	    static constexpr uint32_t i2c_stall_limit_us = 25000;
+  1972	
+  1973	    static cpp::result<void, error_t> i2c_wait(int i2c_port, bool flg_stop = false)
+  2068	      {
+  2069	        // A read is normally closed by i2c_stop(), which ends it with a STOP driven through the
+  2070	        // GPIO. On a low power port the controller sends that STOP instead: i2c_stop() would
+  2071	        // first have to take its pads from the low power IO domain and hand them back after.
+  2072	        const bool force_stop_read = (i2c_context[i2c_port].state == i2c_context_t::state_read) && !isLpPort(i2c_port);
+  2073	        // After an error the peripheral may already be force-stopped; a normal STOP command then
+  2074	        // never raises the completion interrupt and waits until the timeout, so take the force-stop path
+  2075	#if LGFX_I2C_REG_LAYOUT == 3
+  2076	        if (res.has_error() || i2c_context[i2c_port].state.has_error() || force_stop_read || !int_raw.end_detect_int_raw)
+  2077	#else
+  2078	        if (res.has_error() || i2c_context[i2c_port].state.has_error() || force_stop_read || !int_raw.end_detect)
+  2079	#endif
+  2080	        { // force stop
+  2081	          // If state already holds an error, the bus was stopped where it was detected; do not stop
+  2082	          // again (an error in res was detected in this call and is not stopped yet)
+  2083	          if (!hw_stopped && (res.has_error() || !i2c_context[i2c_port].state.has_error()))
+  2084	          {
+  2085	            i2c_stop(i2c_port);
+  2086	          }
+  2087	        }
+  2088	        else
+  2089	        {
+  2090	          i2c_set_cmd(dev, 0, i2c_cmd_stop, 0, false, i2c_context[i2c_port].check_ack);
+  2091	          i2c_set_cmd(dev, 1, i2c_cmd_end, 0);
+  2092	          // Wake only on events that end the STOP; a NACK is evaluated after it completes.
+  2093	          static constexpr uint32_t intmask_ = I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M | I2C_TRANS_COMPLETE_INT_RAW_M;
+  2094	          updateDev(dev);
+  2095	          dev->int_clr.val = intmask_ | I2C_ACK_ERR_INT_RAW_M | I2C_END_DETECT_INT_RAW_M;
+  2096	          dev->ctr.trans_start = 1;
+  2097	          uint32_t ms = lgfx::millis();
+  2098	          taskYIELD();
+  2099	          while (!(dev->int_raw.val & intmask_) && ((millis() - ms) < (i2c_stall_limit_us / 1000))) { taskYIELD(); }
+  2100	          // A STOP that did not complete leaves the bus in an unknown state:
+  2101	          // recover it and refuse further use of this transaction.
+  2102	          {
+  2103	            uint32_t stop_raw = dev->int_raw.val;
+  2104	            if (res.has_value()
+  2105	             && ((stop_raw & (I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M))
+  2106	              || !(stop_raw & I2C_TRANS_COMPLETE_INT_RAW_M)))
+  2107	            {
+  2108	              res = cpp::fail(error_t::connection_lost);
+  2109	              i2c_context[i2c_port].state = cpp::fail(error_t::connection_lost);
+  2110	              i2c_stop(i2c_port);
+  2111	            }
+  2112	          }
+  2113	#if LGFX_I2C_REG_LAYOUT == 0
+
+## Touch_FT5x06 read path
+   112	    size_t res = 0;
+   113	    if (lgfx::i2c::beginTransaction(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, false))
+   114	    {
+   115	      readdata[0] = 0x02;
+   116	      if (lgfx::i2c::writeBytes(_cfg.i2c_port, readdata, 1)
+   117	      && lgfx::i2c::restart(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, true)
+   118	      && lgfx::i2c::readBytes(_cfg.i2c_port, readdata, 1))
+   119	      {
+   120	        uint_fast8_t points = std::min<uint_fast8_t>(max_touch_points, readdata[0] & 0x0Fu);
+   121	        if (points)
+   122	        {
+   123	#ifdef PORTDUINO_LINUX_HARDWARE
+   124	          readdata[1] = 0x03;
+   125	          lgfx::i2c::writeBytes(_cfg.i2c_port, &readdata[1], 1);
+   126	#endif
+   127	          if (lgfx::i2c::readBytes(_cfg.i2c_port, &readdata[1], points * 6 - 2))
+   128	          {
+   129	            res = points * 6 - 1;
+   130	          }
+   131	        }
+   132	        else
+
+## Touch_CST816S read path
+   202	    size_t res = 0;
+   203	    if (lgfx::i2c::beginTransaction(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, false))
+   204	    {
+   205	      readdata[0] = 0x02;
+   206	      if (lgfx::i2c::writeBytes(_cfg.i2c_port, readdata, 1)
+   207	      && lgfx::i2c::restart(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, true)
+   208	      && lgfx::i2c::readBytes(_cfg.i2c_port, readdata, 1))
+   209	      {
+   210	        uint_fast8_t points = std::min<uint_fast8_t>(max_touch_points, readdata[0] & 0x0Fu);
+   211	        if (points)
+   212	        {
+   213	          if (lgfx::i2c::readBytes(_cfg.i2c_port, &readdata[1], points * 6 - 2))
+   214	          {
+   215	            res = points * 6 - 1;
+   216	          }
+   217	        }
+   218	        else
+
+## Touch_GT911 read path
+   145	    if (lgfx::i2c::beginTransaction(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, false))
+   146	    {
+   147	      uint8_t buf = 0;
+   148	      if (lgfx::i2c::writeBytes(_cfg.i2c_port, gt911cmd_getdata, 2).has_value()
+   149	      && lgfx::i2c::restart(_cfg.i2c_port, _cfg.i2c_addr, _cfg.freq, true).has_value()
+   150	      && lgfx::i2c::readBytes(_cfg.i2c_port, &buf, 1).has_value())
+   151	      {
+   152	        res = (buf & 0x80);
+   153	        if (res)
+   154	        {
+   155	          uint_fast8_t points = std::min<uint_fast8_t>(max_touch_points, buf & 0x0Fu);
+   156	          size_t len = points ? points * 8 : 1;
+   157	          if (points) {
+   158	            res = lgfx::i2c::readBytes(_cfg.i2c_port, &_readdata[1], len, true).has_value();
+   159	          }
+   160	        }
+   161	      }
+   162	      lgfx::i2c::endTransaction(_cfg.i2c_port).has_value();
+
+## #423 commit
+cc60eaa i2c: close reads on the LP port with the controller's STOP
+ src/lgfx/v1/platforms/esp32/common.inl | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+commit cc60eaa02af50a559e7f856392a2b740f446fa0b
+Author: GOB (email redacted)
+Date:   Tue Nov 17 01:03:16 2026 +0900
+
+    i2c: close reads on the LP port with the controller's STOP
+    
+    A transaction that ends in a read is closed by i2c_stop(), which builds the
+    STOP by driving SDA and SCL as normal GPIO. The pads of a low power port are
+    routed through the LP IO domain instead, so that STOP never reaches the bus.
+    i2c_stop() then resets the controller and every call reports success.
+    
+    A device therefore takes the next transaction, read or write, as part of the
+    one before it. On ToughC5 (ESP32-C5) with a UnitNFC (ST25R3916), whose space B
+    access lasts until a STOP, a space A read right after a space B read returned
+    0xFF on every attempt. Transactions that end in a write were not affected:
+    they are closed by the controller's STOP command, which does reach the pads.
+    
+    On the LP port, close a read with the controller's STOP as well. The HP ports
+    keep the forced stop.
+    
+    Bus recovery through i2c_stop() still does not reach the LP pads; that is
+    left for separate work.
+    
+    Refs #421
+
+diff --git a/src/lgfx/v1/platforms/esp32/common.inl b/src/lgfx/v1/platforms/esp32/common.inl
+index 6c67cd8..07835c8 100644
+--- a/src/lgfx/v1/platforms/esp32/common.inl
++++ b/src/lgfx/v1/platforms/esp32/common.inl
+@@ -1982,12 +1982,16 @@ namespace lgfx
+ 
+       if (flg_stop || res.has_error())
+       {
++        // A read is normally closed by i2c_stop(), which drives the pins through the GPIO
++        // matrix. The pads of a low power port are routed through the low power IO domain
++        // instead, where that STOP never reaches the bus, so the controller sends it there.
++        const bool force_stop_read = (i2c_context[i2c_port].state == i2c_context_t::state_read) && !isLpPort(i2c_port);
+         // After an error the peripheral may already be force-stopped; a normal STOP command then
+         // never raises the completion interrupt and waits until the timeout, so take the force-stop path
+ #if LGFX_I2C_REG_LAYOUT == 3
+-        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect_int_raw)
++        if (res.has_error() || i2c_context[i2c_port].state.has_error() || force_stop_read || !int_raw.end_detect_int_raw)
+ #else
+-        if (res.has_error() || i2c_context[i2c_port].state.has_error() || i2c_context[i2c_port].state == i2c_context_t::state_read || !int_raw.end_detect)
++        if (res.has_error() || i2c_context[i2c_port].state.has_error() || force_stop_read || !int_raw.end_detect)
+ #endif
+         { // force stop
+           // If state already holds an error, the bus was stopped where it was detected; do not stop
+
+## merge commits
+2121308 Merge pull request #423 from GOB52/fix/lp-i2c-read-stop
+15d7651 Merge pull request #428 from GOB52/fix/lp-i2c-stop-lend

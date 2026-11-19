@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-19 | M5GFX / ToughC5 | #436 LP I2C 的 ACK 终端 read 后 endTransaction 等待 25 ms | REVIEW（代码级定位；实机/虚拟设备/构建 NOT RUN） | [查看](records/m5gfx/2026-11-19-issue436-lp-i2c-ack-read-stop/) |
 | 2026-11-19 | ESP Emulator | 项目文档与开放待办整理 | PASS（GitHub 回读和平台回归） | [查看](records/esp-emulator/2026-11-19-project-documentation-closeout/) |
 | 2026-11-19 | ESP Emulator | Tab5 UserDemo 原版双麦录放 | PASS（I²S1 音源、回放、静音及复位） | [查看](records/esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-userdemo-es8388/followups/2026-11-18-tab5-userdemo-i2c-routing/followups/2026-11-18-tab5-userdemo-i2s1-playback/followups/2026-11-18-tab5-userdemo-device-service-192/followups/2026-11-19-tab5-userdemo-1995-microphone/) |
 | 2026-11-19 | ESP Emulator | All day watch 原版游戏菜单导航与再次唤醒 | PASS（同会话离线操作和唤醒） | [查看](records/esp-emulator/2026-11-17-s3-iwdt-observability/followups/2026-11-18-sticks3-rtc-gpio-light-sleep/followups/2026-11-18-all-day-watch-199-regression/followups/2026-11-19-all-day-watch-two-gpio-wakes/followups/2026-11-19-all-day-watch-games-navigation/) |
