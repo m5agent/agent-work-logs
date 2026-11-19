@@ -62,4 +62,5 @@ read 的最后一个字节是 ACK 终端，先在 STOP 前补 1 字节 `READ` + 
 
 ## 已发布回复
 
-- 待发布后补充固定链接。
+- <https://github.com/m5stack/M5GFX/issues/436#issuecomment-7005484763>
+  （1 条，日文；issue 仍 OPEN，未 close、未 push 上游）
