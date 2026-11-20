@@ -35,6 +35,7 @@ Timer_control 的 TE(bit7) 清 0，并把 TD(bits1:0) 改成 0b11（1/60 Hz）�
 - `patches/0001-pcf8563-preserve-timer-control.patch`：可对 base `96576a1`
   通过 `git apply --check` 的一行 patch。
 - `code/pcf8563-446/`：ESP-IDF 复现应用、构建步骤、Device Service 执行脚本。
+- 已发布回复：<https://github.com/m5stack/M5Unified/issues/446#issuecomment-7053332430>（1 条，日语；issue 仍 OPEN，未 close、未 push、未改上游代码）
 
 ## 文件
 

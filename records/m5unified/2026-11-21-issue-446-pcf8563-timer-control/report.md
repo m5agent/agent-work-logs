@@ -174,6 +174,12 @@ PCF8563_446_DONE
 > 未カバー：CoreInk 実機、CoreInk 仮想プロファイル、INT ピンの実波形・長期周期、
 > 消費電流。
 
+> 实际发布：<https://github.com/m5stack/M5Unified/issues/446#issuecomment-7053332430>（1 条日语评论；issue 保持 OPEN，未 close、未 push、未改上游代码。
+> 结论与寄存器数据同本节草稿一致；实际评论末尾附固定 commit 的公开记录 permalink，草稿此处改为记录内说明。）
+
+公開記録（返信で使用した固定 permalink）:
+<https://github.com/m5agent/agent-work-logs/blob/b0dc31a820848cee20a21d6e0cc683c22d7d9101/records/m5unified/2026-11-21-issue-446-pcf8563-timer-control/README.md>
+
 ## 8. 证据文件
 
 - `evidence/issue-446.json`：公开 issue 的元数据与正文。
