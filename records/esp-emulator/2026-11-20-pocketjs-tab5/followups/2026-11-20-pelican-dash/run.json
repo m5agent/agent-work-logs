@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Pelican Dash native Tab5 and Grove camera shot checkout",
+  "source": {
+    "repository": "https://github.com/pocket-nexus/pocketjs",
+    "pocketjs_commit": "806ac202141ece274f47c938c2899ffe8d30921d",
+    "model_snapshot": "de6cddc065674ecb53bba29c7fe90d9ab4ee32f7"
+  },
+  "hardware": {
+    "model": "M5Stack Tab5",
+    "soc": "ESP32-P4",
+    "profile": "gt911-ili9881c"
+  },
+  "firmware": {
+    "source_flash": {
+      "bytes": 7577424,
+      "sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e"
+    },
+    "test_flash": {
+      "bytes": 16777216,
+      "sha256": "a886402e9d964fbfa64a0968e4c5a767a29a090f37493447c04c7093966c742a"
+    },
+    "applet_package": {
+      "bytes": 1853912,
+      "sha256": "263deab5ecab317b64988ff6d318534c4fb711f5acda867127b9d3656f6ad132"
+    },
+    "applet_png_sha256": {
+      "bike-00.png": "30eff0dd552929019995455b2051b30a86ed5018e257e4ab600efc8f396dc9a7",
+      "bike-01.png": "5651f1067f45a08a0716187ba4c4d53fb8e28ee34ca94d86b42724e2cfbbbbab",
+      "bike-02.png": "3e48c9d94ec79f9392c151211b1a3f7500c036dedbb0ed83a23ae3b4c208ab29",
+      "bike-03.png": "2f9bb7984dbf143c34cd4114732d5801ebbb4a72374afec0d4cac0c77549fbcb",
+      "bike-04.png": "4fd310cddb7f2aefd38570a0479b23f70829d00adaafb3cad8c7a3411d06388e",
+      "bike-05.png": "0628edb5d519af0ceada53489e60fcbe074fcad2defdb9700a3ea9b4ca1e84e9",
+      "bike-06.png": "0658727386c788a7a9c7b477249bc6a2e2e52fc2d1358cb35acef43f68a3d7e0",
+      "bike-07.png": "34c5c5a22a5bdd45f54622340e0a055fe6a6d86b179f521e9037fdc50328988e",
+      "bike-08.png": "e463d1f38671197c861a203c58d523c807ecee4ef78ad823e2509acfb75be622",
+      "bike-09.png": "a5070e12d713b84cff22a6b3722bc17c608bb26702651857c35c50eee129c428",
+      "bike-10.png": "beb76419dd8a8a30b127e6dc20c761ef12b40aba62d4aff0a828878048cc5e47",
+      "bike-11.png": "e318bf2ffe6214ff7c2843da698e878ae2295aca038bd85767a8906dc73cc33e"
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "session_id": "redacted",
+    "start_utc": "2026-11-20T09:20:27.273693+00:00",
+    "end_utc": "2026-11-20T09:21:05.295875+00:00",
+    "capture_profile": "isolated offline Tab5, native MIPI-DSI RGB565 readback"
+  },
+  "checks": [
+    {
+      "name": "applet_compiles_and_has_12_distinct_baked_frames",
+      "status": "PASS"
+    },
+    {
+      "name": "launch_and_gt911_boost_back_to_normal",
+      "status": "PASS"
+    },
+    {
+      "name": "native_dsi_framebuffer_changes_in_both_speed_states",
+      "status": "PASS"
+    },
+    {
+      "name": "visual_clearance_from_tank_envelope",
+      "status": "PASS"
+    },
+    {
+      "name": "unassisted_cold_start_physical_board_and_browser_wasm",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/virtual-device.summary.json"
+  ]
+}

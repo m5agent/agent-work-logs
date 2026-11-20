@@ -18,3 +18,5 @@ PocketJS 主仓库 ESP-IDF 示例在虚拟设备上的结果为 **PASS**。原�
 [2026-11-20 Port A 两种外接 Unit 虚拟验证](followups/2026-11-20-port-a-unit-swap/)
 
 [2026-11-20 Grow Room 自定义 Applet](followups/2026-11-20-grow-room/)
+
+[2026-11-20 Pelican Dash 触控与 Grove 走线验证](followups/2026-11-20-pelican-dash/)

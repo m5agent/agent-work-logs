@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-20 | ESP Emulator | PocketJS Pelican Dash 与 Grove 镜头 | PARTIAL（原生触控与 DSI 实录通过） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-dash/) |
 | 2026-11-20 | ESP Emulator | PocketJS Grow Room Tab5 Applet | PARTIAL（传感器与来宾显示通过，冷启动仍有复位） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-grow-room/) |
 | 2026-11-20 | ESP Emulator | Pocket M5 Tab5 Port A 外接 Unit | PARTIAL（两种 Unit 虚拟联动通过，冷启动仍有复位） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-port-a-unit-swap/) |
 | 2026-11-20 | ESP Emulator | PocketJS Tab5 触控与 PCM Applet | PARTIAL（交互音频通过，冷启动仍有复位） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pulse-field/) |
