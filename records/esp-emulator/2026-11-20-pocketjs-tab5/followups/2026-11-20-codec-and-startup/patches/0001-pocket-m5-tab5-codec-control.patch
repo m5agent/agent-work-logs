@@ -1,0 +1,176 @@
+diff --git a/docs/device-service-api.md b/docs/device-service-api.md
+index 6284612d6..7f3f5baab 100644
+--- a/docs/device-service-api.md
++++ b/docs/device-service-api.md
+@@ -3454,6 +3454,11 @@ interaction. Invalid coordinates return `400 invalid_input`. An unacknowledged
+ gesture returns `409 tab5_gt911_ack_timeout`. If release cannot be queued, the
+ worker stops the session and returns `409 tab5_gt911_release_uncertain`.
+ Long press and multitouch are outside this native input path.
++For firmware that initializes the Tab5 codecs, `M5_TAB5_GT911_PART` can point
++to the verified `--codec-control` build. This GT911 board variant handles ES8388
++and ES7210 control traffic on the GPIO31/32 I²C bus, including ES7210
++register `0x15`.
++The separate UserDemo binding controls admission to the audio fixture API.
+ 
+ For `st7123`, build the [ST7123 ESP Part](../platform/esp-parts/tab5-st7123-gpio/README.md)
+ and set `M5_TAB5_ST7123_TOUCH_PART` to the absolute module path. The worker
+diff --git a/platform/esp-parts/tab5-gt911/README.md b/platform/esp-parts/tab5-gt911/README.md
+index 09033f743..5c21eee55 100644
+--- a/platform/esp-parts/tab5-gt911/README.md
++++ b/platform/esp-parts/tab5-gt911/README.md
+@@ -28,8 +28,10 @@ initialization. The model validates a complete upload before reporting
+ success through `INTERNAL_STATUS`.
+ 
+ The optional `--codec-control` build composes the same GT911 touch Part
+-with the Tab5 HP I²C0 control ports for ES8388 and ES7210. Its WASM digest is
+-`2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270`.
+-Use the separate UserDemo binding described in the Device Service API. The
+-default build retains the legacy module digest. Audio samples come from the
+-native I²S1 output, while this Part responds to codec register transactions.
++with the ES8388 and ES7210 control ports on Tab5 GPIO31/32. Its WASM digest is
++`9f83038994925b3aa8482d63c13f47c771277219c15377911a855aebdfa6b56d`.
++It includes the ES7210 ADC1/2 mute control register used by Pocket M5.
++Select it with `M5_TAB5_GT911_PART` for GT911 I²C codec control, or use the
++separate UserDemo binding for the qualified audio capture and injection API.
++The default build without `--codec-control` keeps the touch-only module.
++The Part handles I²C register traffic. The native backend handles I²S1.
+diff --git a/platform/esp-parts/tab5-gt911/src/codecs.rs b/platform/esp-parts/tab5-gt911/src/codecs.rs
+index 2076f6a2c..6135d9d25 100644
+--- a/platform/esp-parts/tab5-gt911/src/codecs.rs
++++ b/platform/esp-parts/tab5-gt911/src/codecs.rs
+@@ -7,7 +7,7 @@ const SPEAKER: u32 = 0x10;
+ const MICROPHONE: u32 = 0x40;
+ 
+ // Everest ES8388 rev 1.0 §6 and ES7210 rev 21.0 §7 reset values,
+-// limited to the control registers used by ESP Codec Dev v1.3.4.
++// limited to the control registers used by ESP Codec Dev on Tab5.
+ // The three DLL controls are written by the vendor driver and have no
+ // documented reset value in the ES8388 register table.
+ const SPEAKER_RESET: &[(u8, u8)] = &[
+@@ -81,6 +81,7 @@ const MICROPHONE_RESET: &[(u8, u8)] = &[
+     (0x12, 0x00),
+     (0x13, 0x00),
+     (0x14, 0x00),
++    (0x15, 0x00), // ADC1/2 software mute and automute control.
+     (0x20, 0x26),
+     (0x21, 0x26),
+     (0x22, 0x06),
+@@ -292,6 +293,16 @@ mod tests {
+         }
+     }
+ 
++    #[test]
++    fn microphone_adc12_mute_starts_clear_and_resets() {
++        let mut codecs = Codecs::default();
++        assert_eq!(codecs.transfer(&transaction(MICROPHONE, &[0x15], 1)), Some(vec![0]));
++        assert_eq!(codecs.transfer(&transaction(MICROPHONE, &[0x15, 3], 0)), Some(vec![]));
++        assert_eq!(codecs.transfer(&transaction(MICROPHONE, &[0x15], 1)), Some(vec![3]));
++        assert_eq!(codecs.transfer(&transaction(MICROPHONE, &[0x00, 0xff], 0)), Some(vec![]));
++        assert_eq!(codecs.transfer(&transaction(MICROPHONE, &[0x15], 1)), Some(vec![0]));
++    }
++
+     #[test]
+     fn control_port_writes_and_readback_are_independent() {
+         let mut model = Codecs::default();
+diff --git a/platform/tests/test_firmware_static_review.py b/platform/tests/test_firmware_static_review.py
+index 0b40b0591..015571d9c 100644
+--- a/platform/tests/test_firmware_static_review.py
++++ b/platform/tests/test_firmware_static_review.py
+@@ -28,6 +28,8 @@ class FirmwareStaticReviewTests(unittest.TestCase):
+             "?token=SECRET_QUERY_VALUE"
+             "\x00api_key=SUPER_SECRET_VALUE_1234567890"
+             "\x00-----BEGIN PRIVATE KEY-----"
++            "\x00https://[%s]:%u/template"
++            "\x00https://[2001:db8::1]"
+             "\x00http://format.example:%d/template"
+             f"\x00{blob}"
+         ).encode("ascii")
+@@ -59,6 +61,7 @@ class FirmwareStaticReviewTests(unittest.TestCase):
+                 for row in review["urls"]
+             )
+         )
++        self.assertIn("2001:db8::1", {row["host"] for row in review["urls"]})
+         self.assertIn(
+             "private-key",
+             {
+diff --git a/platform/tests/test_tab5_dsi.py b/platform/tests/test_tab5_dsi.py
+index 492993ccf..b8ae1a4e9 100644
+--- a/platform/tests/test_tab5_dsi.py
++++ b/platform/tests/test_tab5_dsi.py
+@@ -14,6 +14,8 @@ from device_service_tab5_dsi import (
+     DsiProtocolError,
+     MAX_MESSAGE_BYTES,
+     REGISTER_VC0,
++    TAB5_GT911_CODEC_PART_SHA256,
++    TAB5_USERDEMO_CODEC_PART_SHA256,
+     Tab5DsiReceiver,
+     Tab5Gt911Touch,
+     Tab5St7123Touch,
+@@ -41,6 +43,22 @@ def _rows(number: int, y: int, count: int, data: bytes) -> dict:
+ 
+ 
+ class Tab5DsiTests(unittest.TestCase):
++    def test_gt911_part_admits_the_current_codec_board(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root = Path(directory)
++            module = root / "input.wasm"
++            module.write_bytes(b"codec module fixture")
++            with mock.patch("device_service_tab5_dsi.hashlib.sha256") as sha256:
++                sha256.return_value.hexdigest.return_value = TAB5_GT911_CODEC_PART_SHA256
++                config, digest = stage_tab5_gt911_part(str(module), "gt911-ili9881c", root)
++                self.assertTrue(config.is_file())
++                self.assertEqual(digest, TAB5_GT911_CODEC_PART_SHA256)
++                sha256.return_value.hexdigest.return_value = TAB5_USERDEMO_CODEC_PART_SHA256
++                with self.assertRaises(ServiceError):
++                    stage_tab5_gt911_part(str(module), "gt911-ili9881c", root)
++                _, digest = stage_tab5_gt911_part(str(module), "gt911-ili9881c", root, codec_control=True)
++                self.assertEqual(digest, TAB5_USERDEMO_CODEC_PART_SHA256)
++
+     def test_gt911_part_rejects_wrong_artifact_or_board(self):
+         with tempfile.TemporaryDirectory() as directory:
+             root = Path(directory)
+diff --git a/platform/tools/device_service_tab5_dsi.py b/platform/tools/device_service_tab5_dsi.py
+index 61885cfb6..180ada52c 100644
+--- a/platform/tools/device_service_tab5_dsi.py
++++ b/platform/tools/device_service_tab5_dsi.py
+@@ -20,6 +20,7 @@ from device_service_errors import ServiceError
+ TAB5_DSI_RUNTIME_SHA256 = "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828"
+ TAB5_GT911_PART_SHA256 = "a0852d08d6cc04a11dcdd57c417b497f857be3e6265f8b690968ae3338cd3ce9"
+ TAB5_GT911_BMI270_PART_SHA256 = "f80d7bbb35fdbd9a260832846b96b64e8bb04d88c9f548cdb2354218852e1286"
++TAB5_GT911_CODEC_PART_SHA256 = "9f83038994925b3aa8482d63c13f47c771277219c15377911a855aebdfa6b56d"
+ TAB5_USERDEMO_CODEC_PART_SHA256 = "2505106410b2f6b18b2ad243bc4c3730961762710ea565733fe7a8b117387270"
+ TAB5_USERDEMO_FLASH_SHA256 = "62a86dd0ec80b98f443e1e43aea28e3517ef6877b5c339d111f897a8cc55e9c9"
+ TAB5_ST7123_I2C_PART_SHA256 = "6eaa3664fd81ce7e8f56bc0f84ad124ca2afcce21c947e74bbb41f1d9802d106"
+@@ -104,9 +105,9 @@ def stage_tab5_gt911_part(
+         raise ServiceError(
+             "tab5_gt911_part_unavailable", "Tab5 GT911 requires the gt911-ili9881c board revision", 409
+         )
+-    expected = (TAB5_GT911_PART_SHA256, TAB5_GT911_BMI270_PART_SHA256)
++    expected = (TAB5_GT911_PART_SHA256, TAB5_GT911_BMI270_PART_SHA256, TAB5_GT911_CODEC_PART_SHA256)
+     if codec_control:
+-        expected = (TAB5_USERDEMO_CODEC_PART_SHA256,)
++        expected = (TAB5_USERDEMO_CODEC_PART_SHA256, TAB5_GT911_CODEC_PART_SHA256)
+     return _stage_tab5_part(
+         value, session_dir, "tab5-gt911", "m5_tab5_gt911.wasm", expected,
+         "tab5_gt911_part_unavailable",
+diff --git a/platform/tools/firmware_static_review.py b/platform/tools/firmware_static_review.py
+index 20c136f8d..27863c97e 100644
+--- a/platform/tools/firmware_static_review.py
++++ b/platform/tools/firmware_static_review.py
+@@ -94,8 +94,14 @@ def _sanitized_urls(
+     truncated = False
+     for string_offset, text in strings:
+         for match in URL_RE.finditer(text):
+-            raw = match.group(0).rstrip(".,);]")
+-            parsed = urlsplit(raw)
++            raw = match.group(0).rstrip(".,);")
++            if "[" not in raw:
++                raw = raw.rstrip("]")
++            try:
++                parsed = urlsplit(raw)
++            except ValueError:
++                # Printable firmware strings include URL format templates.
++                continue
+             try:
+                 hostname = parsed.hostname
+                 port = parsed.port

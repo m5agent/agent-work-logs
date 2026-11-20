@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-20 | ESP Emulator | Pocket M5 Tab5 codec 与冷启动复验 | PARTIAL（原版启动音和交互通过，冷启动仍有复位） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-codec-and-startup/) |
 | 2026-11-20 | ESP Emulator | PocketJS 原生 Tab5 兼容性 | PARTIAL（主仓库示例 PASS，Unit Swap 通过） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/) |
 | 2026-11-19 | ESP Emulator | 项目文档与开放待办整理 | PASS（GitHub 回读和平台回归） | [查看](esp-emulator/2026-11-19-project-documentation-closeout/) |
 | 2026-11-19 | ESP Emulator | Tab5 UserDemo 原版双麦录放 | PASS（I²S1 音源、回放、静音及复位） | [查看](esp-emulator/2026-11-18-native-littlefs-http-diagnostics/followups/2026-11-18-98tab5-cpu1-panic/followups/2026-11-18-tab5-startup-paths/followups/2026-11-18-tab5-userdemo-es8388/followups/2026-11-18-tab5-userdemo-i2c-routing/followups/2026-11-18-tab5-userdemo-i2s1-playback/followups/2026-11-18-tab5-userdemo-device-service-192/followups/2026-11-19-tab5-userdemo-1995-microphone/) |

@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-20 | ESP Emulator | Pocket M5 Tab5 codec 与冷启动复验 | PARTIAL（原版启动音和交互通过，冷启动仍有复位） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-codec-and-startup/) |
 | 2026-11-20 | ESP Emulator | PocketJS 原生 Tab5 兼容性 | PARTIAL（主仓库示例 PASS，Unit Swap 通过） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/) |
 | 2026-11-19 | M5GFX / ToughC5 | #436 LP I2C 的 ACK 终端 read 后 endTransaction 等待 25 ms | REVIEW（代码级定位；实机/虚拟设备/构建 NOT RUN） | [查看](records/m5gfx/2026-11-19-issue436-lp-i2c-ack-read-stop/) |
 | 2026-11-19 | ESP Emulator | 项目文档与开放待办整理 | PASS（GitHub 回读和平台回归） | [查看](records/esp-emulator/2026-11-19-project-documentation-closeout/) |

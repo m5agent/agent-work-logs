@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "code_change",
+  "title": "Tab5 Pocket M5 codec control and firmware intake",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "cc25a8a8ac083e00608d591281289f1452cc75ac",
+    "local_fix_commit": "0b29e2117b569007cf9508723109c12a506e5994"
+  },
+  "hardware": {"model": "Tab5", "soc": "ESP32-P4 v1.0", "board": "GT911 / ILI9881C"},
+  "firmware": {"version": "Pocket M5 v0.1.4", "release_sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e"},
+  "execution": {"validation": "virtual-device validation", "environment": "isolated native Device Service, esp-emu 1.1.0"},
+  "checks": [
+    {"name": "standard_firmware_import", "status": "PASS"},
+    {"name": "tab5_demo_original_guest_frame", "status": "PASS"},
+    {"name": "es7210_adc12_mute_control_i2c", "status": "PASS"},
+    {"name": "pocket_m5_boot_audio_i2s1_digital", "status": "PASS"},
+    {"name": "unit_swap_touch_and_ext5v_ui", "status": "PASS"},
+    {"name": "unit_swap_reproducible_package", "status": "PASS"},
+    {"name": "userdemo_playback_regression", "status": "PASS"},
+    {"name": "pocket_m5_cold_start_stability", "status": "FAIL"},
+    {"name": "browser_wifi_data_plane_physical_hardware", "status": "NOT RUN"}
+  ],
+  "evidence": ["evidence/virtual-device.summary.json"],
+  "patches": ["patches/0001-pocket-m5-tab5-codec-control.patch"]
+}
