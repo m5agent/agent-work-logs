@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-20 | ESP Emulator | PocketJS Tab5 触控与 PCM Applet | PARTIAL（交互音频通过，冷启动仍有复位） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pulse-field/) |
 | 2026-11-20 | ESP Emulator | Pocket M5 Tab5 codec 与冷启动复验 | PARTIAL（原版启动音和交互通过，冷启动仍有复位） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-codec-and-startup/) |
 | 2026-11-20 | ESP Emulator | PocketJS 原生 Tab5 兼容性 | PARTIAL（主仓库示例 PASS，Unit Swap 通过） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/) |
 | 2026-11-19 | ESP Emulator | 项目文档与开放待办整理 | PASS（GitHub 回读和平台回归） | [查看](esp-emulator/2026-11-19-project-documentation-closeout/) |

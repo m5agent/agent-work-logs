@@ -12,3 +12,5 @@ PocketJS 主仓库 ESP-IDF 示例在虚拟设备上的结果为 **PASS**。原�
 未执行浏览器 WASM、真机、外接 Unit 或联网功能验收。
 
 [2026-11-20 codec 修复与冷启动复验](followups/2026-11-20-codec-and-startup/)
+
+[2026-11-20 自定义触控与 PCM Applet 验证](followups/2026-11-20-pulse-field/)

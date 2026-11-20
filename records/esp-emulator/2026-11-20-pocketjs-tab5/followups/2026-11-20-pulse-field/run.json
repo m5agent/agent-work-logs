@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "report",
+  "title": "PocketJS custom touch and PCM Applet on Tab5",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/pocket-nexus/pocketjs",
+    "base_commit": "806ac202141ece274f47c938c2899ffe8d30921d",
+    "pocket_m5_host_repository": "https://github.com/pocket-nexus/pocket-m5",
+    "pocket_m5_host_commit": "db98ac45916a8ec4a2d85fa2a7e9cb09fa95bd1c"
+  },
+  "hardware": {
+    "model": "Tab5",
+    "chip": "ESP32-P4 v1.0",
+    "profile": "gt911-ili9881c"
+  },
+  "firmware": {
+    "version": "Pocket M5 v0.1.4",
+    "variant": "only LittleFS storage partition replaced",
+    "emulator_repository_base": "cc25a8a8ac083e00608d591281289f1452cc75ac",
+    "emulator_local_fix": "0b29e2117b569007cf9508723109c12a506e5994",
+    "esp_emu_1_1_0_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+    "gt911_codec_part_sha256": "9f83038994925b3aa8482d63c13f47c771277219c15377911a855aebdfa6b56d",
+    "pocket_m5_release_sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e",
+    "test_flash_sha256": "c5ad9555dff5527cbe1ee54dbe0012004df9b26aa19e39a6582434c173bb711a",
+    "applet_sha256": "28827d25866dfe6e57e0fa771013bf59450a48be2dfb55ab342e53ab0778958b"
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "isolated Device Service 1.99.5, native esp-emu 1.1.0, I2S1 WAV capture",
+    "session_id": "redacted",
+    "started_utc": "2026-11-20T08:47:47.987326+00:00",
+    "stopped_utc": "2026-11-20T08:48:24.788241+00:00"
+  },
+  "checks": [
+    {
+      "name": "applet_compile_and_package",
+      "status": "PASS"
+    },
+    {
+      "name": "storage_mount_and_launcher_open",
+      "status": "PASS"
+    },
+    {
+      "name": "GT911_controller_reports",
+      "status": "PASS"
+    },
+    {
+      "name": "visible_reaction_to_touch_and_drag",
+      "status": "PASS"
+    },
+    {
+      "name": "applet_pcm_and_i2s1_capture",
+      "status": "PASS"
+    },
+    {
+      "name": "cold_start_without_reset",
+      "status": "FAIL"
+    },
+    {
+      "name": "web_wasm_physical_audio_and_external_units",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/virtual-device.summary.json"
+  ]
+}
