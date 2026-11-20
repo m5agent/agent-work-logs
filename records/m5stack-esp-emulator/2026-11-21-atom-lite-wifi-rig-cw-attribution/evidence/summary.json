@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "kind": "redacted_summary",
+  "redactions": [
+    "已删除设备 MAC（session tool 里仅供内部使用的 fixture 身份）",
+    "已删除本机绝对路径与内部端点",
+    "未包含原始 4 MiB flash 镜像，仅保留 SHA256 与差异摘要"
+  ],
+  "source": {
+    "review_job": "job-c5d046d3dd9f",
+    "session_id_sha256": "d8c1f485a45e5aa30ce96b837864491917faf6ffe8b8963ae195d95d310d775e",
+    "source_artifact_sha256": "3f7cc345195a019170c6d6021503141c702736b70d466eb43c913a5d167ba3fb"
+  },
+  "emulator_failure": {
+    "schema_version": 2,
+    "category": "unresolved",
+    "phase": "guest_observation",
+    "source": "review_observation",
+    "source_code": "E_SIM_APP_READY_PARTIAL",
+    "device_id": "atom-lite",
+    "runtime": "qemu",
+    "guest": null,
+    "firmware_conclusion": "NOT EVALUATED",
+    "review_error_code": "E_SIM_APP_READY_PARTIAL"
+  },
+  "execution_plan": {
+    "runtime": "qemu",
+    "whole_device": true,
+    "claims": {
+      "network_required": true,
+      "touch_required": false,
+      "button_required": true,
+      "required_buttons": [
+        "a",
+        "b"
+      ],
+      "physical_button_claim": false,
+      "probe_keys": [],
+      "hold_buttons": [],
+      "semantic_inputs": [],
+      "input_options": {},
+      "ab_navigation_required": false
+    },
+    "native_sta": {
+      "status": "unavailable",
+      "reason": "board_not_advertised"
+    },
+    "device": {
+      "device_id": "atom-lite",
+      "sku": "C008",
+      "features": {
+        "flash": true,
+        "serial": true,
+        "screenshot": false,
+        "input": true,
+        "qom": true,
+        "device_state": true,
+        "storage": false,
+        "network": false,
+        "network_capture": false
+      },
+      "network_status": "not-supported",
+      "network_profiles": []
+    }
+  },
+  "session": {
+    "device_id": "atom-lite",
+    "state": "running",
+    "runtime": "qemu",
+    "display": null,
+    "display_available": false,
+    "last_frame_available": false,
+    "serial_bytes": 1086,
+    "serial_channels": [
+      {
+        "channel": "console",
+        "transport": "console",
+        "bytes": 1086
+      }
+    ],
+    "stop_reason": null,
+    "error": null,
+    "flash_retained": true,
+    "flash": {
+      "transport": "qemu-esptool",
+      "chip": "esp32",
+      "machine": "m5atomlite",
+      "flash_size": 4194304,
+      "verified": true,
+      "byte_compare": "equal",
+      "image_sha256": "ccbf21b600fe1c526771bb55549382750f175c3557e4911983e82befbd323454",
+      "readback_sha256": "ccbf21b600fe1c526771bb55549382750f175c3557e4911983e82befbd323454"
+    },
+    "runtime_memory": {
+      "requested_psram_mib": 0,
+      "cli_requested_psram_mib": 0,
+      "effective_psram_mib": 0,
+      "effective_source": "qemu-cli-request",
+      "policy": "qemu-no-psram",
+      "claim": "qemu-memory-configuration-only",
+      "physical_cache_psram_timing": "NOT RUN"
+    }
+  },
+  "observation": {
+    "status": "PASS",
+    "scope": "running_virtual_device",
+    "required_seconds": 60,
+    "elapsed_seconds": 60.14355479200094,
+    "final_session_state": "running",
+    "serial_next_offset": 1179,
+    "frame_scope": "serial_only",
+    "input_probe_timing": "not_run",
+    "session_id_sha256": "d8c1f485a45e5aa30ce96b837864491917faf6ffe8b8963ae195d95d310d775e",
+    "sample_count": 13,
+    "sample_states": [
+      "running"
+    ]
+  },
+  "qom": {
+    "diff": {
+      "session_id": "a4234dd0e67e4d238a870a0b5f17d9d1",
+      "before": "17f5c6a20ed742198e20ba9646dfcac9",
+      "after": "841555c9f6a149d9828d84b11366f999",
+      "added": {},
+      "removed": {},
+      "changed": {
+        "onboard_io/children/led-frames/value": {
+          "before": 1,
+          "after": 40467
+        },
+        "onboard_io/children/led-rgb/value": {
+          "before": 12850,
+          "after": 3276800
+        },
+        "onboard_io/children/output-transitions/value": {
+          "before": 1,
+          "after": 40467
+        },
+        "rmt-classic/children/tx-completions/value": {
+          "before": 1,
+          "after": 40470
+        },
+        "rmt-classic/children/tx-symbols/value": {
+          "before": 24,
+          "after": 971304
+        }
+      }
+    },
+    "machine_children": [
+      "esp32.i2s0",
+      "esp32.i2s1",
+      "onboard_io",
+      "peripheral",
+      "peripheral-anon",
+      "rmt-classic",
+      "soc",
+      "unattached"
+    ],
+    "note": "/machine 下无 wifi/eth 节点"
+  },
+  "flash_diff": {
+    "changed_bytes": 3199,
+    "range_count": 86,
+    "first_offset": 36864,
+    "last_offset": 43556,
+    "last_end": 43577,
+    "truncated_ranges": false,
+    "note": "全部落入 nvs 分区 0x9000..0xDFFF"
+  },
+  "serial": {
+    "bytes": 1179,
+    "sha256": "ea0d2bedf3e4024bd31a07defeb6a11210f66489d9534015353541f8baa2996e",
+    "excerpt": [
+      "ets Jul 29 2019 12:21:46",
+      "",
+      "rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)",
+      "configsip: 0, SPIWP:0xee",
+      "clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00",
+      "mode:DIO, clock div:2",
+      "load:0x3fff0030,len:4640",
+      "load:0x40078000,len:15660",
+      "load:0x40080400,len:3164",
+      "entry 0x4008059c",
+      "[   107][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400edf54 arg=0x3ffbdcc0",
+      "[   122][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400edf54 arg=0x3ffbdcc0",
+      "[   136][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400edf54 arg=0x3ffbdcc0",
+      "[   151][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400edf54 arg=0x3ffbdcc0",
+      "E (243) gpio: gpio_pullup_en(85): GPIO number error (input-only pad has no internal PU)",
+      "[ 10395][E][STA.cpp:540] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT"
+    ]
+  },
+  "static_analysis": {
+    "valid": true,
+    "declared_flash_size": 4194304,
+    "bootloader": {
+      "offset": 4096,
+      "valid": true,
+      "entry_addr": 1074267548,
+      "flash_size_code": 2,
+      "flash_size": 4194304,
+      "image_end": 27608
+    },
+    "partition_end": 4194304,
+    "partitions_fit": true,
+    "partitions": [
+      {
+        "label": "nvs",
+        "offset": 36864,
+        "size": 20480
+      },
+      {
+        "label": "otadata",
+        "offset": 57344,
+        "size": 8192
+      },
+      {
+        "label": "app0",
+        "offset": 65536,
+        "size": 1310720
+      },
+      {
+        "label": "app1",
+        "offset": 1376256,
+        "size": 1310720
+      },
+      {
+        "label": "spiffs",
+        "offset": 2686976,
+        "size": 1441792
+      },
+      {
+        "label": "coredump",
+        "offset": 4128768,
+        "size": 65536
+      }
+    ],
+    "app_images": [
+      {
+        "label": "app0",
+        "valid": true,
+        "present": true
+      },
+      {
+        "label": "app1",
+        "valid": false,
+        "present": false
+      }
+    ],
+    "app_descriptor": {
+      "offset": 65568,
+      "secure_version": 0,
+      "version": "43a8f6d",
+      "project_name": "arduino-lib-builder",
+      "compile_time": "11:21:21",
+      "compile_date": "Jun  2 2026",
+      "idf_version": "v5.5.4",
+      "elf_sha256": "177217e237e338e420d83b5350bdda22020817d706ccd5b6ba1cb7fc21d7578a",
+      "min_efuse_blk_rev_full": 0,
+      "max_efuse_blk_rev_full": 99
+    }
+  },
+  "review_checks": {
+    "content": {
+      "status": "PASS",
+      "rules_status": "PASS",
+      "reason": "标题、版本、描述、分类和设备字段已检查，未发现违规内容",
+      "executor": "dsh",
+      "agent_status": "NOT RUN",
+      "manual_reason": null,
+      "service_error": null,
+      "attempts": []
+    },
+    "static_firmware": {
+      "status": "PASS",
+      "valid_app_slots": [
+        "app0"
+      ],
+      "empty_app_slots": [
+        "app1"
+      ],
+      "errors": []
+    },
+    "virtual_flash": {
+      "status": "PASS",
+      "flash_sha256": "2882bc8a21562e22c679c356561176c072b69394414dbb419c0e4358bb29d041"
+    },
+    "boot_and_ui": {
+      "status": "PARTIAL",
+      "ready": false,
+      "initial_ready": false,
+      "frame_bytes": 0,
+      "frame_metrics": null,
+      "ready_reason": [],
+      "serial_sha256": "ea0d2bedf3e4024bd31a07defeb6a11210f66489d9534015353541f8baa2996e"
+    },
+    "virtual_observation": {
+      "status": "PASS",
+      "required_seconds": 60,
+      "elapsed_seconds": 60.14355479200094,
+      "sample_count": 13,
+      "frame_scope": "serial_only",
+      "frame_unavailable_reason": null,
+      "evidence_file": "observation.json"
+    },
+    "device_state": {
+      "status": "PASS",
+      "available": true,
+      "source": "live"
+    },
+    "network": {
+      "status": "NOT RUN",
+      "data_plane": "NOT RUN",
+      "profile": null,
+      "same_guest": false,
+      "diagnostic_only": false,
+      "native_sta_admission": {
+        "status": "unavailable",
+        "reason": "board_not_advertised"
+      }
+    },
+    "input_and_function": {
+      "status": "NOT RUN",
+      "accepted": 0,
+      "changed": 0
+    }
+  },
+  "failure_attribution": {
+    "emulator_or_transport": [],
+    "firmware": [],
+    "unknown": [],
+    "evidence_collection": [],
+    "runtime": {
+      "schema_version": 2,
+      "category": "unresolved",
+      "phase": "guest_observation",
+      "source": "review_observation",
+      "source_code": "E_SIM_APP_READY_PARTIAL",
+      "device_id": "atom-lite",
+      "runtime": "qemu",
+      "guest": null,
+      "firmware_conclusion": "NOT EVALUATED",
+      "review_error_code": "E_SIM_APP_READY_PARTIAL"
+    }
+  },
+  "crash_diagnostics": {
+    "status": "no_evidence",
+    "source": "device_service",
+    "kind": null,
+    "reason": null,
+    "repeated_resets": false,
+    "elf_status": "not_uploaded",
+    "symbolization_eligible": false,
+    "core_dump_status": "not_observed",
+    "backend_illegal_instruction": false
+  },
+  "qemu_stderr": "Adding SPI flash device",
+  "code_citations": {
+    "qemu_wifi_admission": "platform/tools/device_service.py:958 parse_qemu_wifi_execution; :976 qemu_wifi_not_supported",
+    "readiness_markers": "service/app.py:3976 ready_markers 仅来自任务 network 配置",
+    "boot_status": "service/app.py:4702-4714 无屏分支要求 serial_runtime_ready",
+    "error_code": "service/app.py:5140 boot_status != PASS -> E_SIM_APP_READY_PARTIAL"
+  },
+  "duplicate_check": {
+    "open_issues": {
+      "226": "Tab5 USB OTG",
+      "223": "StackChan BREAK instr",
+      "216": "Nesso N1 xTaskPriorityDisinherit",
+      "188": "Tab5 分区不可启动"
+    },
+    "closed_related": {
+      "221": "Atom-Lite/Atom-Matrix IDLE WDT abort（不同现象）",
+      "224": "eFuse MAC 全 0（不同现象）"
+    },
+    "result": "无同题 issue；未开新单，未追加评论"
+  }
+}

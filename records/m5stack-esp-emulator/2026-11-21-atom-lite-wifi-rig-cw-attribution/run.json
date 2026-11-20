@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "kind": "firmware_review_attribution",
+  "overall_status": "PARTIAL",
+  "title": "Atom Lite Wifi_Rig_CW(Server) 1.431 审查 E_SIM_APP_READY_PARTIAL 归因：非模拟器启动缺陷，未开 issue",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "55e5763ea",
+    "review_service_commit": "9e62882",
+    "review_job": "job-c5d046d3dd9f",
+    "lane": "SIM_PARTIAL",
+    "status": "manual_review",
+    "error_code": "E_SIM_APP_READY_PARTIAL"
+  },
+  "hardware": {
+    "device_id": "atom-lite",
+    "sku": "C008",
+    "soc": "ESP32-PICO-D4",
+    "flash_bytes": 4194304,
+    "psram_bytes": 0,
+    "display": null,
+    "runtime": "native-qemu",
+    "machine": "m5atomlite",
+    "physical_device": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Wifi_Rig_CW(Server) For AtomLite",
+    "version_name": "1.431",
+    "version_id": "2123847841971388417",
+    "file_name": "Serv_M5AtomLitev1.43.bin",
+    "size": 1258736,
+    "sha256": "3f7cc345195a019170c6d6021503141c702736b70d466eb43c913a5d167ba3fb",
+    "composed_sha256": "ccbf21b600fe1c526771bb55549382750f175c3557e4911983e82befbd323454",
+    "composed_size": 4194304,
+    "flash_size_code": 2,
+    "bootloader_valid": true,
+    "partition_table_valid": true,
+    "app0_valid": true,
+    "app1_empty": true
+  },
+  "execution": {
+    "environment": "macOS arm64; 审查任务证据目录只读归因; Device Service 原生 QEMU (m5atomlite); 未使用真机",
+    "task_id": "job-c5d046d3dd9f",
+    "session_id_sha256": "d8c1f485a45e5aa30ce96b837864491917faf6ffe8b8963ae195d95d310d775e",
+    "observation_seconds": 60.14355479200094,
+    "samples": 13
+  },
+  "checks": [
+    {"name": "content_rules", "status": "PASS"},
+    {"name": "static_firmware", "status": "PASS", "detail": "bootloader/partition/app0 valid; app1 空槽 0xff"},
+    {"name": "virtual_flash", "status": "PASS", "detail": "qemu-esptool 回读与镜像逐字节相等"},
+    {"name": "guest_boot", "status": "PASS", "detail": "entry 0x4008059c; 无 panic/WDT/重启"},
+    {"name": "virtual_observation", "status": "PASS", "detail": "60.145 s / 13 采样全 running"},
+    {"name": "peripheral_activity", "status": "PASS", "detail": "led-frames 1->40467, rmt tx-symbols 24->971304"},
+    {"name": "device_state", "status": "PASS"},
+    {"name": "boot_and_ui_readiness", "status": "PARTIAL", "detail": "无 framebuffer (frame_bytes=0, serial_only) 且无 ready_markers"},
+    {"name": "input_and_function", "status": "NOT RUN", "detail": "accepted=0 changed=0"},
+    {"name": "network_data_plane", "status": "NOT RUN", "detail": "atom-lite 无 Wi-Fi NIC; native_sta=board_not_advertised"},
+    {"name": "crash_diagnostics", "status": "NOT RUN", "detail": "no_evidence; panic_count=0"},
+    {"name": "hardware_reproduction", "status": "NOT RUN"},
+    {"name": "emulator_defect_attribution", "status": "PASS", "detail": "failure_attribution 四个桶均为空; 启动阶段无模拟器缺陷证据"}
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "结论层级：virtual-device validation（启动/运行/外设）+ code-level verification（qemu-wifi 准入与 readiness 判定代码）",
+    "未开 issue：启动阶段无缺陷证据；网络缺口为文档化能力边界；查重后无同题 open issue",
+    "串口 ESP_ERR_WIFI_NOT_INIT (0x3001) 成因未区分（固件初始化顺序 vs 缺 radio 模型），按未定位处理",
+    "审查结论文案「首帧已出现」与 frame_bytes=0 矛盾，属审查服务表述缺口",
+    "未修改模拟器代码，未 push 模拟器仓库，未关闭任何 issue"
+  ]
+}

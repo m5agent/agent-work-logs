@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-21 | ESP Emulator | Atom Lite「Wifi_Rig_CW(Server)」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（非模拟器启动缺陷，未开 issue；真机 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-21-atom-lite-wifi-rig-cw-attribution/) |
 | 2026-11-20 | Firmware Review Service | app-only 启动上下文、错误文案与设备映射修复 | `PARTIAL`（334 项测试；CardBuddy/Saitama 转 VERIFIED，StickS3 自定义分区待补） | [查看](records/firmware-review-service/2026-11-20-app-only-boot-contexts/) |
 | 2026-11-20 | ESP Emulator | Pelican Dash 高清与节奏复验 | PARTIAL（原生触控通过，实录速度对比经变速呈现） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-coastal-cut/) |
 | 2026-11-20 | ESP Emulator | PocketJS Pelican Dash 与 Grove 镜头 | PARTIAL（原生触控与 DSI 实录通过） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-dash/) |
