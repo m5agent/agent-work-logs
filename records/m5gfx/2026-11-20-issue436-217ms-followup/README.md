@@ -87,4 +87,6 @@ validation 仍为 `NOT RUN`（Device Service 36 个 profile 无 C5；esp-emulato
 
 ## 已发布回复（续）
 
-- 2026-11-20 08:13Z 评论之后：接受撤回的短回复（日文，1 条）。
+- 2026-11-20 08:13Z 评论之后：接受撤回的短回复（日文，1 条）
+  <https://github.com/m5stack/M5GFX/issues/436#issuecomment-7034146035>
+  （issue 仍 OPEN，未 close、未 push 上游）。
