@@ -1,0 +1,157 @@
+{
+  "kind": "redacted summary from one native Device Service session",
+  "redactions": "Session identifiers, machine details, credentials, raw firmware and raw test files omitted.",
+  "created_utc": "2026-11-20T08:55:51.672288+00:00",
+  "completed_utc": "2026-11-20T08:56:59.461865+00:00",
+  "firmware_release_sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e",
+  "executed_flash_sha256": "814ffdcc234d60f951c34c39cb1830bc4b6b5497ba209f0dc0463dc79f3ea593",
+  "native_esp_emu_1_1_0_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "gt911_codec_and_port_a_part": {
+    "bytes": 136013,
+    "sha256": "207102ed58735b1227979a2147e89d7a5bd00750b129354aa3de939ad3473ffa"
+  },
+  "startup_assert_resets": 1,
+  "assert_resets_after_applet_ready": 0,
+  "launch_touch": {
+    "point": [
+      320,
+      99
+    ],
+    "response": {
+      "reports": 8,
+      "acknowledged": 8
+    }
+  },
+  "serial": {
+    "bytes": 24986,
+    "sha256": "bcbaa98d9fd96c8146ec4971fd550a2608d7701b772af96f7e89dfe14aa6f8d3",
+    "markers": [
+      "I (3575) worker: unit-swap worker: porta node declared",
+      "I (6048) worker: ENV III attached at 0x44 0x70",
+      "I (6079) worker: ENV III: 22.50 C 48.0 %RH 1013.20 hPa (QMP6988 22.50 C, 0 CRC errors)",
+      "I (16077) worker: ENV III: 22.50 C 48.0 %RH 1013.20 hPa (QMP6988 22.50 C, 0 CRC errors)",
+      "I (26551) worker: ENV III removed",
+      "I (30423) worker: Ultrasonic I2C attached at 0x57",
+      "I (30545) worker: Ultrasonic: 1200.0 mm (last echo 1200.0 mm)",
+      "I (35428) worker: Ultrasonic: 1200.0 mm (last echo 1200.0 mm)",
+      "I (40311) worker: Ultrasonic: 560.0 mm (last echo 560.0 mm)",
+      "I (45194) worker: Ultrasonic: 560.0 mm (last echo 560.0 mm)",
+      "I (50076) worker: Ultrasonic: 220.0 mm (last echo 220.0 mm)",
+      "I (54959) worker: Ultrasonic: 220.0 mm (last echo 220.0 mm)"
+    ]
+  },
+  "port_a": {
+    "sda_gpio": 53,
+    "scl_gpio": 54,
+    "stages": [
+      {
+        "stage": "empty",
+        "stimulus": "none",
+        "request_capture_time_s": 0.001,
+        "checkpoint_capture_time_s": 2.091,
+        "I2C_ACK_address_transactions": 0,
+        "I2C_slave_transmit_bytes": 0,
+        "guest_framebuffer_readback": "Plug a unit into Port A",
+        "framebuffer": {
+          "bytes": 117915,
+          "sha256": "acb0c971b627cc0eb1a9668f73f7e6ea0f7964be3e72e82ad23a5bd0314cc91e"
+        }
+      },
+      {
+        "stage": "env-ambient",
+        "stimulus": "env:22.5:48:101320",
+        "request_capture_time_s": 2.091,
+        "checkpoint_capture_time_s": 14.099,
+        "I2C_ACK_address_transactions": 125,
+        "I2C_slave_transmit_bytes": 293,
+        "guest_framebuffer_readback": "22.5 °C · 48.0% RH · 1013.2 hPa",
+        "framebuffer": {
+          "bytes": 126510,
+          "sha256": "9bb4a98c2ca4ec3822de1318668b704dde4f46508f99f903a5f4c5d5f2e28698"
+        }
+      },
+      {
+        "stage": "env-warm",
+        "stimulus": "env:31.5:67:100800",
+        "request_capture_time_s": 14.099,
+        "checkpoint_capture_time_s": 23.156,
+        "I2C_ACK_address_transactions": 90,
+        "I2C_slave_transmit_bytes": 216,
+        "guest_framebuffer_readback": "31.5 °C · 67.0% RH · 1008.0 hPa",
+        "framebuffer": {
+          "bytes": 126889,
+          "sha256": "06880e0eff3b6d33ac2fc59b78387d96820be26fce884c35f1093d285062a1e5"
+        }
+      },
+      {
+        "stage": "unplug",
+        "stimulus": "none",
+        "request_capture_time_s": 23.157,
+        "checkpoint_capture_time_s": 28.303,
+        "I2C_ACK_address_transactions": 0,
+        "I2C_slave_transmit_bytes": 0,
+        "guest_framebuffer_readback": "ENV III removed · state waiting · no answer",
+        "framebuffer": {
+          "bytes": 125783,
+          "sha256": "dd85d57ebffa5bd726a9445ffd7e021bcb115c40727396001edcacf9966d2890"
+        }
+      },
+      {
+        "stage": "sonic-far",
+        "stimulus": "sonic:1200",
+        "request_capture_time_s": 28.304,
+        "checkpoint_capture_time_s": 38.66,
+        "I2C_ACK_address_transactions": 153,
+        "I2C_slave_transmit_bytes": 225,
+        "guest_framebuffer_readback": "120.0 cm · last echo 1200 mm",
+        "framebuffer": {
+          "bytes": 125207,
+          "sha256": "bf2e0ac6936095dbc4331aa0f8999c18e47454de61126993eab1be78e72c065c"
+        }
+      },
+      {
+        "stage": "sonic-mid",
+        "stimulus": "sonic:560",
+        "request_capture_time_s": 38.662,
+        "checkpoint_capture_time_s": 47.148,
+        "I2C_ACK_address_transactions": 128,
+        "I2C_slave_transmit_bytes": 192,
+        "guest_framebuffer_readback": "56.0 cm · last echo 560 mm",
+        "framebuffer": {
+          "bytes": 124793,
+          "sha256": "c112ee15eb222ae71134074f3685b1fe68c678ceab58eb71553051f14773d0a6"
+        }
+      },
+      {
+        "stage": "sonic-near",
+        "stimulus": "sonic:220",
+        "request_capture_time_s": 47.149,
+        "checkpoint_capture_time_s": 55.55,
+        "I2C_ACK_address_transactions": 131,
+        "I2C_slave_transmit_bytes": 195,
+        "guest_framebuffer_readback": "22.0 cm · last echo 220 mm",
+        "framebuffer": {
+          "bytes": 123597,
+          "sha256": "eec085d0d84039d2f2c6c161922e7498108e3672777e6e815704aa0246404384"
+        }
+      }
+    ]
+  },
+  "frame_capture": {
+    "samples": 314,
+    "distinct_hashes": 151,
+    "uncut_window_seconds": 56.372
+  },
+  "evidence_zip": {
+    "bytes": 134877,
+    "sha256": "3067ac8a2504032fe6782e89ead19df7ab397e4165bd2a9ea003567d346c6f23",
+    "crc_ok": true,
+    "entries": 6
+  },
+  "cleanup": {
+    "terminal_state": "stopped",
+    "purged": false,
+    "writable_flash_retained": false,
+    "session_socket_retained": false
+  }
+}

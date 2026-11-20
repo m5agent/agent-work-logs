@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Pocket M5 Unit Swap through Tab5 GPIO Port A",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "cc25a8a8ac083e00608d591281289f1452cc75ac",
+    "capture_base_after_codec_patch": "0b29e2117b569007cf9508723109c12a506e5994",
+    "pocket_m5_commit": "db98ac45916a8ec4a2d85fa2a7e9cb09fa95bd1c"
+  },
+  "hardware": {
+    "model": "Tab5",
+    "chip": "ESP32-P4 v1.0",
+    "profile": "gt911-ili9881c",
+    "unit_models": [
+      "ENV III",
+      "Ultrasonic-I2C"
+    ]
+  },
+  "firmware": {
+    "release": "Pocket M5 v0.1.4",
+    "release_sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e",
+    "native_flash_sha256": "814ffdcc234d60f951c34c39cb1830bc4b6b5497ba209f0dc0463dc79f3ea593",
+    "partition_payload_unchanged": true
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "isolated Device Service 1.99.5 and native esp-emu 1.1.0",
+    "session_id": "redacted",
+    "start_utc": "2026-11-20T08:55:51.672288+00:00",
+    "stop_utc": "2026-11-20T08:56:59.461865+00:00"
+  },
+  "checks": [
+    {
+      "name": "native_launcher_touch",
+      "status": "PASS"
+    },
+    {
+      "name": "port_a_gpio_i2c_two_unit_models_same_guest",
+      "status": "PASS"
+    },
+    {
+      "name": "env_iii_register_identification_and_changed_readings",
+      "status": "PASS"
+    },
+    {
+      "name": "unplug_waiting_and_ultrasonic_attach",
+      "status": "PASS"
+    },
+    {
+      "name": "three_ultrasonic_stimuli_in_guest_serial_and_framebuffer",
+      "status": "PASS"
+    },
+    {
+      "name": "cold_start_without_reset",
+      "status": "FAIL"
+    },
+    {
+      "name": "physical_electrical_timing_units_other_than_env_iii_and_ultrasonic_wasm",
+      "status": "NOT RUN"
+    }
+  ],
+  "patches": [
+    "patches/0001-tab5-port-a-unit-capture.patch"
+  ],
+  "evidence": [
+    "evidence/virtual-device.summary.json"
+  ]
+}

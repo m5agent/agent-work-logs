@@ -1,0 +1,423 @@
+diff --git a/platform/esp-parts/tab5-gt911/Cargo.toml b/platform/esp-parts/tab5-gt911/Cargo.toml
+--- a/platform/esp-parts/tab5-gt911/Cargo.toml
++++ b/platform/esp-parts/tab5-gt911/Cargo.toml
+@@ -18,4 +18,4 @@
+ lto = true
+ panic = "abort"
+ strip = true
+-opt-level = "s"
++opt-level = "z"
+diff --git a/platform/esp-parts/tab5-gt911/src/lib.rs b/platform/esp-parts/tab5-gt911/src/lib.rs
+--- a/platform/esp-parts/tab5-gt911/src/lib.rs
++++ b/platform/esp-parts/tab5-gt911/src/lib.rs
+@@ -1,6 +1,7 @@
+ //! Single-contact, early Tab5 GT911 report path through the real esp-emu I2C
+ //! controller and GPIO INT line. Coordinates are in the panel's raw orientation.
+ use esp_part::prelude::*;
++mod port_a;
+ 
+ #[path = "../../tab5-bmi270.rs"]
+ mod bmi270;
+@@ -90,6 +91,7 @@
+     board: Vec<(u32, RegisterFile)>,
+     imu: bmi270::Bmi270,
+     tap: Option<Tap>,
++    port: port_a::PortA,
+ }
+ 
+ impl Gt911 {
+@@ -176,6 +178,7 @@
+         if let Some(pin) = self.interrupt {
+             claims.push(drives(1_u64 << pin));
+         }
++        claims.extend(self.port.claims());
+         claims
+     }
+ 
+@@ -227,6 +230,7 @@
+     }
+ 
+     fn on_input(&mut self, input: &str) {
++        if self.port.input(input) { return; }
+         if let Some(point) = input.strip_prefix("tap:").and_then(Self::parse_point) {
+             if !self.ready && self.contact.is_none() && self.pending.is_empty() {
+                 self.contact = Some(point);
+@@ -246,7 +250,12 @@
+         }
+     }
+ 
++    fn on_pins(&mut self, levels: u64, now_ns: u64) {
++        self.port.on_pins(levels, now_ns);
++    }
++
+     fn poll(&mut self, now_ns: u64) -> Option<EmulatorMessage> {
++        if let Some(message) = self.port.poll(now_ns) { return Some(message); }
+         let pin = self.interrupt?;
+         if matches!(self.tap, Some(Tap::ReleaseAt(deadline)) if now_ns >= deadline) {
+             self.tap = None;
+@@ -279,12 +288,12 @@
+ 
+     fn state(&self) -> Option<State> {
+         Some(self.imu.observe(
+-            State::new()
++            self.port.observe(State::new()
+                 .set("ready", self.ready)
+                 .set("contact", self.contact.is_some())
+                 .set("reports", self.produced)
+                 .set("acknowledged", self.acknowledged)
+-                .set("rejected_inputs", self.rejected_inputs),
++                .set("rejected_inputs", self.rejected_inputs)),
+         ))
+     }
+ }
+diff --git a/platform/esp-parts/tab5-gt911/src/codecs.rs b/platform/esp-parts/tab5-gt911/src/codecs.rs
+--- a/platform/esp-parts/tab5-gt911/src/codecs.rs
++++ b/platform/esp-parts/tab5-gt911/src/codecs.rs
+@@ -257,6 +257,10 @@
+         self.board.on_bus(request)
+     }
+ 
++    fn on_pins(&mut self, levels: u64, now_ns: u64) {
++        self.board.on_pins(levels, now_ns);
++    }
++
+     fn on_input(&mut self, input: &str) {
+         self.board.on_input(input);
+     }
+diff --git a/platform/esp-parts/tab5-gt911/src/port_a.rs b/platform/esp-parts/tab5-gt911/src/port_a.rs
+new file mode 100644
+--- /dev/null
++++ b/platform/esp-parts/tab5-gt911/src/port_a.rs
+@@ -0,0 +1,321 @@
++//! Port A virtual sensor bus for the Pocket M5 Unit Swap capture.
++use esp_part::prelude::*;
++#[derive(Clone, Copy)]
++enum Next {
++    Write,
++    Read,
++    Ignore,
++}
++
++#[derive(Clone, Copy, Default)]
++enum Phase {
++    #[default]
++    Idle,
++    Receive {
++        address: bool,
++        data: u8,
++        count: u8,
++    },
++    NeedAck(Next),
++    AckLow(Next),
++    AckHigh(Next),
++    Transmit {
++        data: u8,
++        next_bit: u8,
++    },
++    LastDataBit,
++    ReadMasterAck,
++    ContinueRead,
++}
++
++const SDA: u32 = 53;
++const SCL: u32 = 54;
++const SONIC: u8 = 0x57;
++const SHT: u8 = 0x44;
++const QMP: u8 = 0x70;
++const OTP: [u8; 25] = [0x4e,0x20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0x02,0x80,0,0,0,0,0];
++
++#[derive(Clone, Copy, Default)]
++enum Unit {
++    #[default] Empty,
++    Sonic(u32),
++    Env(f64, f64, f64),
++}
++
++pub struct PortA {
++    old: Option<(bool, bool)>,
++    phase: Phase,
++    desired_level: bool,
++    driven_level: bool,
++    unit: Unit,
++    selected: u8,
++    command: u16,
++    pointer: u8,
++    position: u8,
++    buffer: [u8; 6],
++    qmp_raw: [u8; 6],
++    echo: u32,
++    due: u64,
++    now: u64,
++    selected_transactions: u32,
++    written: u32,
++    read: u32,
++}
++
++impl Default for PortA {
++    fn default() -> Self {
++        Self {
++            old: None, phase: Phase::Idle, desired_level: true, driven_level: true,
++            unit: Unit::Empty, selected: 0, command: 0, pointer: 0, position: 0,
++            buffer: [0xff; 6], qmp_raw: [0; 6], echo: 0, due: 0, now: 0,
++            selected_transactions: 0, written: 0, read: 0,
++        }
++    }
++}
++
++impl PortA {
++    pub fn claims(&self) -> [Claim; 2] {
++        [watches((1 << SDA) | (1 << SCL)), drives(1 << SDA)]
++    }
++
++    pub fn input(&mut self, input: &str) -> bool {
++        let Some(value) = input.strip_prefix("unit:") else { return false };
++        let fields: Vec<_> = value.split(':').collect();
++        let new = match fields.as_slice() {
++            ["none"] => Some(Unit::Empty),
++            ["sonic",mm] => mm.parse::<u32>().ok()
++                .filter(|mm| (20..=4500).contains(mm)).map(Unit::Sonic),
++            ["env",t,rh,p] => match (t.parse::<f64>(),rh.parse::<f64>(),p.parse::<f64>()) {
++                (Ok(t),Ok(h),Ok(p)) if (-20.0..=65.0).contains(&t) &&
++                    (0.0..=100.0).contains(&h) && (36_000.0..=110_000.0).contains(&p) => Some(Unit::Env(t,h,p)),
++                _ => None,
++            },
++            _ => None,
++        };
++        if let Some(new) = new {
++            if std::mem::discriminant(&self.unit)!=std::mem::discriminant(&new) {
++                self.phase=Phase::Idle;
++                self.desired_level=true;
++                self.command=0;
++                self.pointer=0;
++                self.echo=0;
++                self.due=0;
++            }
++            self.unit = new;
++        }
++        true
++    }
++
++    pub fn observe(&self, state: State) -> State {
++        let name = match self.unit { Unit::Empty => "none", Unit::Sonic(..) => "sonic", Unit::Env(..) => "env" };
++        state.set("port_a", name)
++            .set("unit_transactions", self.selected_transactions)
++            .set("unit_written_bytes",self.written)
++            .set("unit_read_bytes",self.read)
++    }
++
++    fn received(&mut self, address: bool, byte: u8) -> Next {
++        if address {
++            let target=byte >> 1;
++            let present=match self.unit {
++                Unit::Empty=>false, Unit::Sonic(..)=>target==SONIC, Unit::Env(..)=>matches!(target,SHT|QMP),
++            };
++            if !present { return Next::Ignore; }
++            self.selected=target;
++            self.position=0;
++            self.selected_transactions+=1;
++            if byte & 1 != 0 {
++                self.prepare_read();
++                return Next::Read;
++            }
++            return Next::Write;
++        }
++        self.written+=1;
++        match self.selected {
++            SONIC if byte==1 => {
++                self.due=self.now+120_000_000;
++                if let Unit::Sonic(mm)=self.unit { self.echo=mm*1000; }
++            }
++            SHT if self.position==0 => self.command=u16::from(byte)<<8,
++            SHT if self.position==1 => self.command|=u16::from(byte),
++            QMP if self.position==0 => self.pointer=byte,
++            QMP => {
++                if self.pointer==0xf4 && byte & 3 != 0 {
++                    if let Unit::Env(t,_,p)=self.unit { self.qmp_raw=qmp_raw(t,p); }
++                }
++                self.pointer=self.pointer.wrapping_add(1);
++            }
++            _ => (),
++        }
++        self.position=self.position.saturating_add(1);
++        Next::Write
++    }
++
++    fn prepare_read(&mut self) {
++        self.buffer=[0xff; 6];
++        match self.unit {
++            Unit::Sonic(_) if self.selected==SONIC => {
++                if self.now >= self.due {
++                    self.buffer[..3].copy_from_slice(&self.echo.to_be_bytes()[1..]);
++                }
++            },
++            Unit::Env(t,h,_) if self.selected==SHT => {
++                if self.command==0xf32d {
++                    self.buffer[..2].copy_from_slice(&[0,0]);
++                    self.buffer[2]=crc(&self.buffer[..2]);
++                } else if self.command==0x2400 {
++                    let t=(((t+45.0)*65535.0/175.0).round() as u16).to_be_bytes();
++                    let h=((h*65535.0/100.0).round() as u16).to_be_bytes();
++                    self.buffer=[t[0],t[1],crc(&t),h[0],h[1],crc(&h)];
++                }
++            },
++            _ => (),
++        }
++    }
++
++    fn transmit_byte(&mut self) {
++        let data=if self.selected==QMP {
++            let p=self.pointer;
++            self.pointer=self.pointer.wrapping_add(1);
++            match p {
++                0xd1=>0x5c, 0xa0..=0xb8=>OTP[(p-0xa0) as usize],
++                0xf7..=0xfc=>self.qmp_raw[(p-0xf7) as usize], _=>0,
++            }
++        } else {
++            self.buffer.get(self.position as usize).copied().unwrap_or(0xff)
++        };
++        self.position=self.position.saturating_add(1);
++        self.read+=1;
++        self.desired_level=data & 0x80!=0;
++        self.phase=Phase::Transmit { data, next_bit:7 };
++    }
++    fn rising(&mut self, sda: bool) {
++        match self.phase {
++            Phase::Receive {
++                address,
++                data,
++                count,
++            } => {
++                let next = (data << 1) | u8::from(sda);
++                self.phase = if count == 7 {
++                    Phase::NeedAck(self.received(address, next))
++                } else {
++                    Phase::Receive {
++                        address,
++                        data: next,
++                        count: count + 1,
++                    }
++                };
++            }
++            Phase::AckLow(next) => self.phase = Phase::AckHigh(next),
++            Phase::Transmit { data, next_bit } => {
++                self.phase = if next_bit == 0 {
++                    Phase::LastDataBit
++                } else {
++                    Phase::Transmit {
++                        data,
++                        next_bit: next_bit - 1,
++                    }
++                };
++            }
++            Phase::ReadMasterAck => {
++                self.phase = if sda {
++                    Phase::Idle
++                } else {
++                    Phase::ContinueRead
++                };
++            }
++            _ => (),
++        }
++    }
++
++    fn falling(&mut self) {
++        match self.phase {
++            Phase::NeedAck(next) => {
++                self.desired_level = matches!(next, Next::Ignore);
++                self.phase = Phase::AckLow(next);
++            }
++            Phase::AckHigh(Next::Read) | Phase::ContinueRead => self.transmit_byte(),
++            Phase::AckHigh(next) => {
++                self.desired_level = true;
++                self.phase = match next {
++                    Next::Write => Phase::Receive {
++                        address: false,
++                        data: 0,
++                        count: 0,
++                    },
++                    _ => Phase::Idle,
++                };
++            }
++            Phase::Transmit { data, next_bit } => self.desired_level = data & (1 << next_bit) != 0,
++            Phase::LastDataBit => {
++                self.desired_level = true;
++                self.phase = Phase::ReadMasterAck;
++            }
++            _ => (),
++        }
++    }
++    pub fn on_pins(&mut self, levels: u64, now_ns: u64) {
++        self.now = now_ns;
++        let scl = levels & (1 << SCL) != 0;
++        let sda = levels & (1 << SDA) != 0;
++        let Some((old_scl, old_sda)) = self.old.replace((scl, sda)) else {
++            return;
++        };
++        if old_scl && scl && old_sda != sda {
++            self.desired_level = true;
++            self.phase = if sda {
++                Phase::Idle
++            } else {
++                Phase::Receive {
++                    address: true,
++                    data: 0,
++                    count: 0,
++                }
++            };
++        } else if scl && !old_scl {
++            self.rising(sda);
++        } else if !scl && old_scl {
++            self.falling();
++        }
++    }
++
++    pub fn poll(&mut self, now_ns:u64)->Option<EmulatorMessage> {
++        self.now=now_ns;
++        if self.driven_level == self.desired_level { return None }
++        self.driven_level=self.desired_level;
++        Some(drive(SDA,self.driven_level,now_ns))
++    }
++}
++
++fn crc(word:&[u8])->u8 {
++    word.iter().fold(0xff, |c,b| (0..8).fold(c^b, |x,_| if x&0x80!=0 {(x<<1)^0x31} else {x<<1}))
++}
++
++fn qmp_inverse(target:f64, increasing:bool, value:impl Fn(i32)->f64)->i32 {
++    let (mut lo,mut hi)=(-(1<<23),(1<<23)-1);
++    while lo<hi {
++        let mid=lo+(hi-lo)/2;
++        if (value(mid)<target)==increasing { lo=mid+1 } else { hi=mid }
++    }
++    if lo>-(1<<23) && (value(lo-1)-target).abs()<(value(lo)-target).abs() { lo-1 } else { lo }
++}
++
++// Synthetic calibration mirrors the simulator's existing ENV III model.
++// It isn't a per-unit manufacturing calibration.
++fn qmp_raw(t:f64,p:f64)->[u8;6] {
++    let calibrated_t=|dt:i32| {
++        let x=f64::from(dt);
++        640.0-6.30e-3*x-1.90e-11*x*x
++    };
++    let dt=qmp_inverse(t*256.0,false,calibrated_t);
++    let tr=calibrated_t(dt);
++    let dp=qmp_inverse(p,true,|dp| {
++        let d=f64::from(dp);
++        20000.0+0.1*tr+0.033*d+2.10e-7*tr*d+1.20e-8*tr*tr-6.30e-10*d*d+
++        2.90e-13*d*tr*tr+2.10e-15*d*d*tr+1.30e-16*d*d*d
++    });
++    let a=(dp+(1<<23)).to_be_bytes();
++    let b=(dt+(1<<23)).to_be_bytes();
++    [a[1],a[2],a[3],b[1],b[2],b[3]]
++}
+diff --git a/platform/tools/device_service_tab5_dsi.py b/platform/tools/device_service_tab5_dsi.py
+--- a/platform/tools/device_service_tab5_dsi.py
++++ b/platform/tools/device_service_tab5_dsi.py
+@@ -108,6 +108,7 @@
+     expected = (TAB5_GT911_PART_SHA256, TAB5_GT911_BMI270_PART_SHA256, TAB5_GT911_CODEC_PART_SHA256)
+     if codec_control:
+         expected = (TAB5_USERDEMO_CODEC_PART_SHA256, TAB5_GT911_CODEC_PART_SHA256)
++    expected += ("207102ed58735b1227979a2147e89d7a5bd00750b129354aa3de939ad3473ffa",)
+     return _stage_tab5_part(
+         value, session_dir, "tab5-gt911", "m5_tab5_gt911.wasm", expected,
+         "tab5_gt911_part_unavailable",
