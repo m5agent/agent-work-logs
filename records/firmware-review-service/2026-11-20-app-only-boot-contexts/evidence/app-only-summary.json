@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "service_commits": [
+    "479a852",
+    "9e62882"
+  ],
+  "base_commit": "883ccf0",
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "passed": 334,
+    "failed": 0
+  },
+  "boot_contexts": {
+    "cardputer": {
+      "base": "UIFlow2 v2.5.4 Cardputer 8MB",
+      "size": 8384512,
+      "factory_offset": 65536,
+      "slot_size": 5509120
+    },
+    "cardputer-adv": {
+      "base": "same as cardputer",
+      "size": 8384512,
+      "factory_offset": 65536,
+      "slot_size": 5509120
+    },
+    "papermono": {
+      "base": "UIFlow2 v2.5.3 PaperMono 16MB",
+      "size": 16773120,
+      "factory_offset": 65536,
+      "slot_size": 7405568
+    },
+    "sticks3": {
+      "base": "default_8MB boot prefix",
+      "size": 65536,
+      "otadata_offset": 57344,
+      "ota0_offset": 65536,
+      "slot_size": 3342336
+    }
+  },
+  "retries": [
+    {
+      "job_id": "job-3937ca75e53d",
+      "firmware": "CardBuddy",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "done/SIM_VERIFIED"
+    },
+    {
+      "job_id": "job-7332bee8ee00",
+      "firmware": "Saitama",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "done/SIM_VERIFIED"
+    },
+    {
+      "job_id": "job-d40fa9a90c9b",
+      "firmware": "Meshtastic Cardputer ADV",
+      "before": "E_APP_ONLY_BASE_REQUIRED",
+      "after": "E_NETWORK_PARTIAL"
+    },
+    {
+      "job_id": "job-4de071397ee7",
+      "firmware": "Intercom StickS3",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "E_NETWORK_PARTIAL"
+    },
+    {
+      "job_id": "job-ea619c05e10b",
+      "firmware": "META TV IR",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "E_NO_FRAME"
+    },
+    {
+      "job_id": "job-1dd264165cf2",
+      "firmware": "BitMap16 DX",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "E_NO_FRAME"
+    },
+    {
+      "job_id": "job-0b91a054ce39",
+      "firmware": "Slow Draw",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "E_NO_SIM_PROFILE"
+    },
+    {
+      "job_id": "job-d4c72ab5225a",
+      "firmware": "K85OS 8.9",
+      "before": "E_APP_ONLY_UNSUPPORTED_DEVICE",
+      "after": "E_APP_ONLY_UNSUPPORTED_DEVICE (clear message)"
+    }
+  ],
+  "deployment": {
+    "health": "ok",
+    "submit": false
+  },
+  "limits": [
+    "K85OS custom partition table NOT RUN",
+    "META TV/BitMap no-frame NOT RUN",
+    "PaperMono matching sample NOT RUN",
+    "M5GO/Fire/Xiaozhi NOT RUN",
+    "physical hardware NOT RUN"
+  ]
+}

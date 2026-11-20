@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "审查服务 app-only 启动上下文、错误文案与设备映射修复",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": "883ccf0"
+  },
+  "hardware": {},
+  "firmware": {
+    "app_only_verified": [
+      {"job_id": "job-3937ca75e53d", "name": "CardBuddy", "device": "cardputer"},
+      {"job_id": "job-7332bee8ee00", "name": "Saitama", "device": "cardputer"}
+    ],
+    "app_only_booted_network_pending": [
+      {"job_id": "job-d40fa9a90c9b", "name": "Meshtastic", "device": "cardputer-adv"},
+      {"job_id": "job-4de071397ee7", "name": "Intercom", "device": "sticks3"}
+    ],
+    "app_only_no_frame": [
+      {"job_id": "job-ea619c05e10b", "name": "META TV IR", "device": "cardputer"},
+      {"job_id": "job-1dd264165cf2", "name": "BitMap16 DX", "device": "cardputer"}
+    ],
+    "mapping_fixed": [
+      {"job_id": "job-0b91a054ce39", "name": "Slow Draw", "device": "PAPER"}
+    ],
+    "unsupported": [
+      {"job_id": "job-d4c72ab5225a", "name": "K85OS 8.9", "device": "sticks3"}
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; resident firmware review service; native QEMU device service; saved-snapshot retries with submit=false",
+    "task_id": "review-service-app-only-2026-11-20",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "app-only error copy",
+      "status": "PASS",
+      "detail": "explicit missing bootloader/partition table guidance in UNSUPPORTED/BASE_REQUIRED/TARGET_MISMATCH"
+    },
+    {
+      "name": "device mappings",
+      "status": "PASS",
+      "detail": "STICKC/M5STICK added; PAPER removed from papermono; unsupported reasons added"
+    },
+    {
+      "name": "Cardputer/ADV stock base",
+      "status": "PASS",
+      "detail": "CardBuddy and Saitama SIM_VERIFIED; Meshtastic booted, network pending"
+    },
+    {
+      "name": "StickS3 default-8MB vendor context",
+      "status": "PARTIAL",
+      "detail": "Intercom booted and interaction PASS; K85OS custom OTA/storage still unsupported"
+    },
+    {
+      "name": "PaperMono stock base",
+      "status": "PARTIAL",
+      "detail": "base configured; no matching PaperMono app-only sample"
+    },
+    {
+      "name": "regression suite",
+      "status": "PASS",
+      "detail": "334 tests passed"
+    },
+    {
+      "name": "service deployment",
+      "status": "PASS",
+      "detail": "resident service restarted; /api/health ok"
+    },
+    {
+      "name": "META TV IR / BitMap16 first frame",
+      "status": "FAIL",
+      "detail": "app starts but no non-black frame; partition/peripheral mismatch remains"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/app-only-summary.json"
+  ],
+  "notes": [
+    "Two commits: 479a852 (copy/mapping/Cardputer+PaperMono base), 9e62882 (StickS3 default-8MB vendor context).",
+    "Resident runtime was patched with the same logic because the runtime branch is newer than repo main; app.py/firmware_intake.py/config backups retained.",
+    "No simulator code changed; retries used submit=false."
+  ]
+}
