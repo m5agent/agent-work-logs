@@ -62,4 +62,5 @@
 
 ## 已发布回复
 
-- 待补充（发布后追加 URL）。
+- <https://github.com/m5stack/M5GFX/issues/436#issuecomment-7031499320>
+  （1 条，日文；issue 仍 OPEN，未 close、未 push 上游）
