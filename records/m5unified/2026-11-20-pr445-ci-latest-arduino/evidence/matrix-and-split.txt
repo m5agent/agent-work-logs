@@ -1,0 +1,79 @@
+# CI split and counterpart PR — PR #445 review
+# collected 2026-11-20T11:22:16Z
+
+## Current Arduino CI matrix rows (from each workflow file)
+m5stack/M5GFX @ develop — 11 rows
+   2.0.17 esp32:esp32:esp32
+   2.0.17 esp32:esp32:esp32s3
+   2.0.17 esp32:esp32:esp32c3
+   3.1.3 esp32:esp32:esp32
+   3.1.3 esp32:esp32:esp32s3
+   3.1.3 esp32:esp32:esp32c3
+   3.1.3 esp32:esp32:esp32c6
+   3.1.3 esp32:esp32:esp32p4
+   3.1.3 esp32:esp32:esp32h2
+   3.3.0 esp32:esp32:esp32c5
+   2.1.4 m5stack:esp32:m5stack_core
+
+m5stack/M5Unified @ PR head 3d7abeed — 21 rows
+   3.0.7 esp32:esp32:esp32
+   3.0.7 esp32:esp32:esp32s3
+   3.0.7 esp32:esp32:esp32c3
+   3.0.7 esp32:esp32:esp32c6
+   3.0.7 esp32:esp32:esp32h2
+   3.2.1 esp32:esp32:esp32
+   3.2.1 esp32:esp32:esp32s3
+   3.2.1 esp32:esp32:esp32c6
+   3.2.1 esp32:esp32:esp32p4
+   3.3.13 esp32:esp32:esp32
+   3.3.13 esp32:esp32:esp32s3
+   3.3.13 esp32:esp32:esp32c5
+   3.3.13 esp32:esp32:esp32p4
+   3.3.13 esp32:esp32:esp32p4:ChipVariant=postv3
+   4.0.0 esp32:esp32:esp32
+   4.0.0 esp32:esp32:esp32s3
+   4.0.0 esp32:esp32:esp32c5
+   4.0.0 esp32:esp32:esp32p4
+   4.0.0 esp32:esp32:esp32p4:ChipVariant=prev3
+   3.2.5 m5stack:esp32:m5stack_core
+   3.2.5 m5stack:esp32:m5stack_cores3
+
+## Workflow facts
+118:          BRANCH="${{ github.base_ref || github.ref_name }}"
+119:          [ "$BRANCH" = "master" ] || BRANCH="develop"
+172:          git clone --depth 1 --branch "${{ steps.m5gfx.outputs.branch }}" \
+178:          arduino-cli compile --fqbn ${{ matrix.board }} examples/Test/build_test/build_test.ino
+
+M5GFX ArduinoBuild.yml has no step cloning or building M5Unified:
+1
+
+## Counterpart M5GFX PR #437 (same change, still OPEN at review time)
+#437 state=OPEN files=1 +43/-2 head=6be660c181c860a89acc978320f765f03ff5433c
+- board: esp32:esp32:esp32
+esp32_version: 3.3.13
+- board: esp32:esp32:esp32s3
+esp32_version: 3.3.13
+- board: esp32:esp32:esp32c5
+esp32_version: 3.3.13
+- board: esp32:esp32:esp32p4
+esp32_version: 3.3.13
+- board: esp32:esp32:esp32p4:ChipVariant=postv3
+esp32_version: 3.3.13
+- board: esp32:esp32:esp32
+esp32_version: 4.0.0
+- board: esp32:esp32:esp32s3
+esp32_version: 4.0.0
+- board: esp32:esp32:esp32c5
+esp32_version: 4.0.0
+- board: esp32:esp32:esp32p4
+esp32_version: 4.0.0
+- board: esp32:esp32:esp32p4:ChipVariant=prev3
+esp32_version: 4.0.0
+
+## Split observed from the two matrix files
+- 2.0 series: M5GFX only (2.0.17 esp32/s3/c3)
+- 3.0 series: M5Unified only (3.0.7 esp32/s3/c3/c6/h2)
+- 3.1 series: M5GFX only (3.1.3 esp32/s3/c3/c6/p4/h2)
+- 3.2 series: M5Unified only (3.2.1 esp32/s3/c6/p4)
+- 3.3: M5GFX 3.3.0 (c5) + M5Unified 3.3.12/3.3.13; after this PR both cover 3.3.13
+- 4.0: added by this PR and PR #437

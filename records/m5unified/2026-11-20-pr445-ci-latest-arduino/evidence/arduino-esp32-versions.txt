@@ -1,0 +1,42 @@
+# arduino-esp32 release facts — PR #445 review
+# collected 2026-11-20T11:22:07Z from public sources
+
+Source 1: https://espressif.github.io/arduino-esp32/package_esp32_index.json
+package: esp32
+newest 8 versions: 4.0.0, 3.3.13, 3.3.12, 3.3.11, 3.3.10, 3.3.9, 3.3.8, 3.3.7
+contains 4.0.0: True | contains 3.3.13: True
+newest version overall: 4.0.0
+
+Source 2: https://github.com/espressif/arduino-esp32/releases/tag/4.0.0
+ESP32 Arduino Release 4.0.0 based on ESP-IDF v6.1.1 | published 2026-11-19T01:45:00Z
+Source 3: https://github.com/espressif/arduino-esp32/releases/tag/3.3.13
+ESP32 Arduino Release 3.3.13 based on ESP-IDF v5.5.6+ | published 2026-11-17T16:34:08Z
+
+Source 4: boards.txt at each release tag (raw.githubusercontent.com/espressif/arduino-esp32/<tag>/boards.txt)
+
+## 3.3.13 — esp32p4 default and ChipVariant menu
+425:esp32p4.build.chip_variant=esp32p4_es
+442:esp32p4.menu.ChipVariant.prev3=Before v3.00
+443:esp32p4.menu.ChipVariant.prev3.build.chip_variant=esp32p4_es
+444:esp32p4.menu.ChipVariant.prev3.build.f_cpu=360000000L
+445:esp32p4.menu.ChipVariant.postv3=v3.00 or newer
+446:esp32p4.menu.ChipVariant.postv3.build.chip_variant=esp32p4
+447:esp32p4.menu.ChipVariant.postv3.build.f_cpu=400000000L
+
+## 4.0.0 — esp32p4 default and ChipVariant menu
+661:esp32p4.build.chip_variant=esp32p4
+678:esp32p4.menu.ChipVariant.postv3=v3.00 or newer
+679:esp32p4.menu.ChipVariant.postv3.build.chip_variant=esp32p4
+680:esp32p4.menu.ChipVariant.postv3.build.f_cpu=400000000L
+681:esp32p4.menu.ChipVariant.prev3=Before v3.00
+682:esp32p4.menu.ChipVariant.prev3.build.chip_variant=esp32p4_es
+683:esp32p4.menu.ChipVariant.prev3.build.f_cpu=360000000L
+
+## esp32c5 board present in both releases
+/tmp/boards_3.3.13.txt:171:esp32c5.name=ESP32C5 Dev Module
+/tmp/boards_4.0.0.txt:401:esp32c5.name=ESP32C5 Dev Module
+
+Interpretation:
+- 3.3.13 default esp32p4 target = esp32p4_es (chip revision < 3); 4.0.0 default = esp32p4 (revision >= 3).
+- Both releases expose menu.ChipVariant with both options prev3 and postv3, so the FQBNs
+  esp32:esp32:esp32p4:ChipVariant=postv3 and :ChipVariant=prev3 are valid on both.

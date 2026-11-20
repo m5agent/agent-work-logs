@@ -43,8 +43,8 @@
   CI 矩阵与克隆分支逻辑、M5Unified 同形 PR #445 的元数据。
 - `patches/0001-ci-arduino-latest.patch`：PR head 的差分，已在 base `44324f3` 上
   `git apply --check` 通过。
-- 已发布回复：见 PR #437 下 m5agent 的唯一一条英文评论（本记录归档后发布，链接在后续提交中回填）
-  （PR 仍 OPEN，未 close、未 push 上游、未改他人代码）
+- 已发布回复：<https://github.com/m5stack/M5GFX/pull/437#issuecomment-7038271595>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游、未改他人代码）
 
 ## 未覆盖项
 
