@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "M5Unified #446: PCF8563 begin() clears Timer_control TE (virtual-device validation)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unified/issues/446",
+    "pull_request": "",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "96576a14247ddc935149145aa6b51943464120f1",
+    "issue_author": "atgcgcta",
+    "issue_language": "ja",
+    "issue_state": "open",
+    "issue_comments_before": 0
+  },
+  "hardware": {},
+  "firmware": {
+    "m5unified": "96576a14247ddc935149145aa6b51943464120f1 (0.3.0)",
+    "m5gfx": "28d47949bdc84f30881623476f555398e2194313 (0.3.0)",
+    "esp_idf": "7101770dc6db2667b3c477cc31365dd1acd6db4e (v6.0.2)",
+    "target": "esp32s3, 8 MB flash, no PSRAM",
+    "original_artifact_sha256": "e11ccbe3cf08f46da668419a890c4ce1c93f60713270bcff0606f5ea7dca754e",
+    "original_firmware_sha256": "3e99e54410f6a625e6a2874f493679183f285e43c1ad7d97a45edb3116985763",
+    "patched_artifact_sha256": "c64d8130772622c2e8925eee346f490d0ec13e990615ad53759b909c05d1a4c9",
+    "patched_firmware_sha256": "08c1ae38441365fbc93ca51db5117a04cac884565d94d0ee7c52bab3b72af754",
+    "rebuild_reproduced_original_artifact": true
+  },
+  "execution": {
+    "environment": "macOS arm64 build host; ESP-IDF v6.0.2; Device Service dial profile (M5Dial, qemu-esp32s3, PCF8563 I2C model)",
+    "session_id": "",
+    "task_id": "",
+    "session_id_original": "61d74ab2faa148b89da4a662f065282b",
+    "session_id_patched": "eb8c1220d8054a18adc9db2eba1652c9"
+  },
+  "checks": [
+    {
+      "id": "issue-state",
+      "status": "PASS",
+      "detail": "issue #446 is open, authored by atgcgcta in Japanese, with 0 comments before this work; no prior m5agent reply"
+    },
+    {
+      "id": "code-path",
+      "status": "PASS",
+      "detail": "PCF8563_Class::begin() at src/utility/rtc/PCF8563_Class.inl:22 unconditionally writes 0x0E=0x03 (TE=0, TD=0b11). M5.begin() calls Rtc.begin() at src/M5Unified.inl:2874 and only afterwards checks cfg.disable_rtc_irq at 2883-2884; disabling the IRQ through config cannot prevent the earlier write"
+    },
+    {
+      "id": "virtual-device-reproducer",
+      "status": "PASS",
+      "detail": "M5Dial QEMU: timer pre-armed as 0x0E=0x82; after M5.begin(cfg.disable_rtc_irq=false) the register reads 0x03; setTimerIRQ(1000) restores 0x82 (C2=0x09, CNT=0x01); calling Rtc.begin() again returns it to 0x03; re-arming restores 0x82"
+    },
+    {
+      "id": "virtual-device-proposed-fix",
+      "status": "PASS",
+      "detail": "with the one-line 0x0E,0x03 -> 0x00,0x00 replacement, the pre-armed 0x82 survives M5.begin(cfg.disable_rtc_irq=false) and a subsequent Rtc.begin(); C2/CNT still show the timer armed"
+    },
+    {
+      "id": "build",
+      "status": "PASS",
+      "detail": "ESP-IDF v6.0.2 build for esp32s3 succeeded; merged image 490 KiB; an independent rebuild of the unmodified source reproduced artifact SHA256 e11ccbe3... byte-for-byte"
+    },
+    {
+      "id": "coreink-hardware",
+      "status": "NOT RUN",
+      "detail": "no CoreInk hardware available; the physical board, its PCF8563 circuit and the INT pin were not observed"
+    },
+    {
+      "id": "coreink-virtual-device",
+      "status": "NOT RUN",
+      "detail": "the Device Service inventory has no CoreInk profile; M5Dial was used because it exposes the same PCF8563 driver path and a validated RTC model"
+    },
+    {
+      "id": "irq-waveform-and-long-run",
+      "status": "NOT RUN",
+      "detail": "INT pin waveform, long-term period drift, and current consumption after the TD change were not measured"
+    },
+    {
+      "id": "default-disable-rtc-irq-path",
+      "status": "NOT RUN",
+      "detail": "the default cfg.disable_rtc_irq=true path was not executed on the virtual device; source inspection shows disableIRQ() writes 0x0E=0x00 at PCF8563_Class.inl:281"
+    },
+    {
+      "id": "upstream-change",
+      "status": "NOT RUN",
+      "detail": "no upstream push, PR, or patch submission; the proposal is recorded only as a local patch for the maintainer"
+    }
+  ],
+  "evidence": [
+    "evidence/issue-446.json",
+    "evidence/device-service-profile.txt",
+    "evidence/build-and-run.txt",
+    "evidence/register-readback.txt",
+    "evidence/serial-original.log",
+    "evidence/serial-fixed.log",
+    "patches/0001-pcf8563-preserve-timer-control.patch",
+    "code/pcf8563-446/main/main.cpp",
+    "code/pcf8563-446/run_on_device_service.py"
+  ],
+  "notes": [
+    "Reply language is Japanese to match the issue title and body; one comment only, no close, no push, no changes to the upstream repository.",
+    "The issue is a chip-driver behavior, so the M5Dial virtual board exercises the same PCF8563_Class code path even though CoreInk is not modeled.",
+    "The proposed patch keeps the existing two-write initialization pattern and leaves the default disable_rtc_irq=true behavior to disableIRQ()."
+  ]
+}

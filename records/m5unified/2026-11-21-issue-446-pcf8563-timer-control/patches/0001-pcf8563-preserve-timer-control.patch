@@ -1,0 +1,13 @@
+diff --git a/src/utility/rtc/PCF8563_Class.inl b/src/utility/rtc/PCF8563_Class.inl
+index 8e7c242..5672763 100644
+--- a/src/utility/rtc/PCF8563_Class.inl
++++ b/src/utility/rtc/PCF8563_Class.inl
+@@ -19,7 +19,7 @@ namespace m5
+     }
+     /// TimerCameraの内蔵RTCが初期化に失敗することがあったため、最初に空打ちする; 
+     writeRegister8(0x00, 0x00);
+-    _init = writeRegister8(0x00, 0x00) && writeRegister8(0x0E, 0x03);
++    _init = writeRegister8(0x00, 0x00) && writeRegister8(0x00, 0x00);
+     return _init;
+   }
+ 

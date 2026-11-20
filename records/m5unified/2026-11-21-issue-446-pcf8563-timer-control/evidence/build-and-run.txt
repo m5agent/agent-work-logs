@@ -1,0 +1,40 @@
+Build and run summary
+=====================
+captured_at_utc: 2026-11-21T07:35Z (build), 2026-11-20T23:34-23:35Z (service run timestamps in manifest)
+
+Sources
+-------
+M5Unified: 96576a14247ddc935149145aa6b51943464120f1 (0.3.0, master)
+M5GFX:     28d47949bdc84f30881623476f555398e2194313 (0.3.0, master)
+ESP-IDF:   7101770dc6db2667b3c477cc31365dd1acd6db4e (v6.0.2)
+Toolchain: xtensa-esp32s3-elf-g++ (GNU 15.2.0)
+Target:    esp32s3, 8 MB flash, no PSRAM
+Build:     idf.py set-target esp32s3 && idf.py build && idf.py merge-bin
+Product:   merged flash image at offset 0x0, 490 KiB before service padding
+
+Firmware identities
+-------------------
+original begin() (reproducer), artifact SHA256:
+  e11ccbe3cf08f46da668419a890c4ce1c93f60713270bcff0606f5ea7dca754e
+original begin() (reproducer), normalized firmware SHA256 / service firmware_id:
+  3e99e54410f6a625e6a2874f493679183f285e43c1ad7d97a45edb3116985763
+patched begin() (proposed fix), artifact SHA256:
+  c64d8130772622c2e8925eee346f490d0ec13e990615ad53759b909c05d1a4c9
+patched begin() (proposed fix), normalized firmware SHA256 / service firmware_id:
+  08c1ae38441365fbc93ca51db5117a04cac884565d94d0ee7c52bab3b72af754
+Rebuild check: rebuilding the unmodified source reproduced artifact
+  e11ccbe3cf08f46da668419a890c4ce1c93f60713270bcff0606f5ea7dca754e byte-for-byte.
+
+Serial evidence
+---------------
+serial-original.log: 3809 bytes (LF; raw UART 3888 bytes CRLF; trailing spaces stripped), SHA256 c66adda11e278b4b2c6b13a5ab94eddeaedf2baa412353926cd442df4a9f66ef
+serial-fixed.log:    3809 bytes (LF; raw UART 3888 bytes CRLF; trailing spaces stripped), SHA256 cee849c043b297181ba8454b3edf29e9ca974a01e355e57b420b0bc9b60621eb
+
+Device Service
+--------------
+device_id: dial
+runtime: qemu
+machine: m5dial
+session (original): 61d74ab2faa148b89da4a662f065282b
+session (patched):  eb8c1220d8054a18adc9db2eba1652c9
+Each session was released after evidence collection (DELETE ?purge=0).

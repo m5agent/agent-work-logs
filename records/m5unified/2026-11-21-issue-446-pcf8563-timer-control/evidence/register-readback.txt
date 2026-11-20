@@ -1,0 +1,41 @@
+PCF8563 register read-back (0x51, register 0x0E Timer_control)
+================================================================
+Fields: bit7 TE, bits1:0 TD (0b10 = 1 Hz; 0b11 = 1/60 Hz).
+C2 = register 0x01 Control_status_2, CNT = register 0x0F timer count.
+
+Firmware sequence
+-----------------
+1. Before M5.begin(): raw I2C write 0x0E=0x82 (TE=1, TD=1 Hz), read back.
+2. M5.begin(cfg) with cfg.disable_rtc_irq = false; read 0x0E.
+3. M5.Rtc.setTimerIRQ(1000); read 0x0E / 0x01 / 0x0F.
+4. M5.Rtc.begin(&In_I2C) again (the exact function M5.begin uses); read 0x0E.
+5. M5.Rtc.setTimerIRQ(1000) again; read 0x0E.
+
+Unmodified M5Unified @ 96576a1 (reproducer)
+-------------------------------------------
+PRE_ARM            TC=0x82
+POST_BEGIN         TC=0x03   C2=0x00 CNT=0x00   <- TE cleared, TD=1/60 Hz
+SET_TIMER          ok=1 applied=1000
+ARMED              TC=0x82   C2=0x09 CNT=0x01
+RTC_BEGIN_AGAIN    ok=1
+AFTER_REBEGIN      TC=0x03   C2=0x09 CNT=0x01   <- TE cleared again
+REARM              ok=1 applied=1000
+AFTER_REARM        TC=0x82   C2=0x09 CNT=0x01
+
+Patched begin() (0x0E write replaced by 0x00 write)
+---------------------------------------------------
+PRE_ARM            TC=0x82
+POST_BEGIN         TC=0x82   C2=0x00 CNT=0x00   <- TE preserved
+SET_TIMER          ok=1 applied=1000
+ARMED              TC=0x82   C2=0x09 CNT=0x01
+RTC_BEGIN_AGAIN    ok=1
+AFTER_REBEGIN      TC=0x82   C2=0x09 CNT=0x01   <- TE preserved
+REARM              ok=1 applied=1000
+AFTER_REARM        TC=0x82   C2=0x09 CNT=0x01
+
+Interpretation
+--------------
+The unmodified begin() drives TE from 1 to 0 and TD from 0b10 to 0b11 on every
+invocation, regardless of cfg.disable_rtc_irq. The single-line replacement
+keeps the register value across begin() while the default disable_rtc_irq=true
+path still stops the timer through disableIRQ() (0x0E=0x00).
