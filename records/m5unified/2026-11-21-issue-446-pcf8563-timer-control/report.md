@@ -169,7 +169,7 @@ PCF8563_446_DONE
 > 考えられます。現状の回避策は `M5.begin()` 後に `M5.Rtc.setTimerIRQ()` を
 > 呼び直す方法です。
 >
-> 詳細と生ログ：<public permalink>
+> 詳細と生ログ：公開作業記録を参照（返信に固定 commit の permalink を記載）。
 >
 > 未カバー：CoreInk 実機、CoreInk 仮想プロファイル、INT ピンの実波形・長期周期、
 > 消費電流。
