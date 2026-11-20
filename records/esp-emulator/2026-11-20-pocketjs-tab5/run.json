@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "PocketJS on the native Tab5 simulator",
+  "source": {
+    "repository": "https://github.com/pocket-nexus/pocketjs",
+    "base_commit": "83c6cac996237968785125118b543cd4e339254c",
+    "device_service_commit": "cc25a8a8ac083e00608d591281289f1452cc75ac"
+  },
+  "hardware": {
+    "model": "Tab5",
+    "soc": "ESP32-P4 v1.0",
+    "panel": "ILI9881C",
+    "touch": "GT911",
+    "virtual_flash_mib": 16,
+    "virtual_psram_mib": 32
+  },
+  "firmware": {
+    "framework_smoke": {
+      "bytes": 1774512,
+      "sha256": "a82b994aca1aa1ee1de94ef6c7d585ac0637f51c99bc61ef1462ff8cbff8928e",
+      "tag": "v0.17.0"
+    },
+    "pocket_m5": {
+      "bytes": 7577424,
+      "sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e",
+      "tag": "v0.1.4",
+      "pocketjs": "806ac202"
+    }
+  },
+  "execution": {
+    "validation": "virtual-device validation",
+    "environment": "isolated native Device Service 1.99.5, esp-emu 1.1.0",
+    "sessions": [
+      "framework-v0.17.0-esp32p4",
+      "release-unit-swap",
+      "release-tab5-demo"
+    ]
+  },
+  "checks": [
+    {
+      "name": "framework_smoke_build",
+      "status": "PASS"
+    },
+    {
+      "name": "framework_smoke_guest",
+      "status": "PASS"
+    },
+    {
+      "name": "pocket_m5_launcher",
+      "status": "PASS"
+    },
+    {
+      "name": "gt911_unit_swap_open_toggle_return",
+      "status": "PASS"
+    },
+    {
+      "name": "tab5_demo_boot",
+      "status": "FAIL"
+    },
+    {
+      "name": "pocket_m5_audio_init",
+      "status": "FAIL"
+    },
+    {
+      "name": "wifi_remote_data_plane",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "browser_wasm",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/virtual-device.summary.json"
+  ]
+}
