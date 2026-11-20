@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "pr",
+  "overall_status": "PASS",
+  "title": "M5Unified #445: build arduino-esp32 3.3.13 / 4.0.0 in Arduino CI (build-level verification)",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/445",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "6df015290976764e5e71beffe28abcd25dc54818",
+    "head_commit": "3d7abeed4cdf46f3791fa61ae30618d4f700ba67"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "GitHub Actions ubuntu-latest with arduino-cli 1.1.1 (upstream PR run 44725789948; author fork run 44696180242); macOS arm64 host used only for read-only evidence collection; no local rebuild",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file, +35/-7 in .github/workflows/ArduinoBuild.yml; matrix 15 -> 21 rows: four rows renamed 3.3.12 -> 3.3.13, one 3.3.13 P4 ChipVariant=postv3 row and five 4.0.0 rows added; no removed jobs, no duplicate (board, version, variant) pairs; patch applies to base 6df0152 and reproduces the head workflow byte-for-byte"
+    },
+    {
+      "id": "ci-matrix-execution",
+      "status": "PASS",
+      "detail": "upstream Arduino Build run 44725789948 on head 3d7abeed: 21/21 jobs success (whole run ~6 min); all 10 new/renamed rows success in 69-115 s each, and each job log shows the intended platform (3.3.13 or 4.0.0) with 0 'error:' and 0 'warning:' lines; author fork run 44696180242 on the same head is also 21/21 success"
+    },
+    {
+      "id": "pr-checks",
+      "status": "PASS",
+      "detail": "37/37 checks pass on the PR (Arduino Build 21, ESP-IDF Build 14, SourceCheck 1, Forward events 1); mergeable=MERGEABLE, mergeStateStatus=CLEAN; ESP-IDF Build was untouched by this PR"
+    },
+    {
+      "id": "version-facts",
+      "status": "PASS",
+      "detail": "Espressif board-manager index lists 4.0.0 newest and 3.3.13 next; release notes say 4.0.0 is based on ESP-IDF v6.1.1 (published 2026-11-19) and 3.3.13 on v5.5.6+ (2026-11-17), matching the PR body"
+    },
+    {
+      "id": "p4-chip-variants",
+      "status": "PASS",
+      "detail": "boards.txt on 3.3.13 defaults esp32p4.build.chip_variant=esp32p4_es (pre-v3), on 4.0.0 defaults to esp32p4 (v3+); both tags define menu.ChipVariant.prev3/postv3; platform.txt selects the prebuilt SDK via {build.chip_variant}; the CI sketch sizes differ per variant (3.3.13: 538300 default vs 539696 postv3; 4.0.0: 531556 default vs 534536 prev3), so each release is genuinely built for both revisions"
+    },
+    {
+      "id": "split-comment-accuracy",
+      "status": "PASS",
+      "detail": "M5GFX CI on develop covers 2.0.17 / 3.1.3 / 3.3.0 (C5) / M5Stack 2.1.4 and never builds M5Unified; M5Unified CI covers 3.0.7 / 3.2.1 / 3.3.13 / M5Stack and clones M5GFX at the PR base branch (master else develop), so the new comment's description matches reality"
+    },
+    {
+      "id": "counterpart-pr-437",
+      "status": "PASS",
+      "detail": "m5stack/M5GFX#437 (OPEN) adds the identical 3.3.13 / 4.0.0 row set including both P4 ChipVariant rows, so the pair is consistent; the 'built by both CIs' wording only becomes fully true once both PRs land"
+    },
+    {
+      "id": "runtime-scope",
+      "status": "REVIEW",
+      "detail": "CI compiles examples/Test/build_test (includes <M5Unified.h>, calls Display/Speaker/Mic/Imu/Touch/Btn APIs) to a BIN only; no flash, boot, peripheral or network behavior is exercised, so runtime correctness on arduino-esp32 4.0.0 remains outside this PR's claim"
+    },
+    {
+      "id": "local-independent-rebuild",
+      "status": "NOT RUN",
+      "detail": "not run locally: arduino-cli and the 3.3.13 / 4.0.0 platform packages are not installed on this host; the object under test is the YAML matrix itself, which the PR's own CI executed, so a hand-run arduino-cli build would not exercise the YAML change"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "not applicable: the change only extends a GitHub Actions matrix and does not change runtime behavior"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "structurally not applicable: a CI matrix change produces no firmware behavior difference, so no virtual device model can observe anything; the only observable is build success"
+    },
+    {
+      "id": "p4-silicon-boot",
+      "status": "NOT RUN",
+      "detail": "booting on ESP32-P4 silicon of either revision (pre-v3 / v3+) was not exercised; the PR claims only that both targets compile"
+    },
+    {
+      "id": "4.0-coverage-c3-c6-h2",
+      "status": "NOT RUN",
+      "detail": "the 4.0.0 rows cover esp32 / s3 / c5 / p4 only; C3 / C6 / H2 are still not built at 4.0 (same shape as the 3.3 rows), so SoC-specific 4.0 regressions on those parts would not be caught"
+    }
+  ],
+  "evidence": [
+    "evidence/ci-jobs.txt",
+    "evidence/new-matrix-rows-builds.txt",
+    "evidence/arduino-esp32-versions.txt",
+    "evidence/matrix-and-split.txt",
+    "evidence/diff-scope.txt",
+    "patches/0001-ci-arduino-latest.patch"
+  ],
+  "notes": [
+    "PR left OPEN; no close, no push, no code change to m5stack/M5Unified.",
+    "No m5agent comment existed before this review (PR comments and reviews were both empty).",
+    "Counterpart review: records/m5gfx/2026-11-20-pr437-arduino-latest-ci/ covers the identical M5GFX change.",
+    "Reply: one English comment posted after this record was committed, citing the public permalink of this record."
+  ]
+}

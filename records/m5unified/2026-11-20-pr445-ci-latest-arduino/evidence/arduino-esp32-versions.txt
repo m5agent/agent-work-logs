@@ -40,3 +40,13 @@ Interpretation:
 - 3.3.13 default esp32p4 target = esp32p4_es (chip revision < 3); 4.0.0 default = esp32p4 (revision >= 3).
 - Both releases expose menu.ChipVariant with both options prev3 and postv3, so the FQBNs
   esp32:esp32:esp32p4:ChipVariant=postv3 and :ChipVariant=prev3 are valid on both.
+
+Source 5: platform.txt at each release tag — the prebuilt SDK directory follows build.chip_variant
+3.3.13: 30:compiler.sdk.path={tools.esp32-arduino-libs.path}/{build.chip_variant}
+3.3.13: 111:build.chip_variant={build.mcu}
+4.0.0: 36:compiler.sdk.path={tools.esp32-arduino-libs.path}/{build.chip_variant}
+4.0.0: 121:build.chip_variant={build.mcu}
+
+Consequence: the postv3 rows link the esp32p4 SDK and the prev3 rows the esp32p4_es SDK,
+so the two P4 rows per release are different builds, not duplicates. The CI sketch sizes
+differ accordingly (see new-matrix-rows-builds.txt).

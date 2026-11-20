@@ -1,0 +1,21 @@
+# Diff scope — m5stack/M5Unified PR #445
+# collected 2026-11-20T11:23:18Z
+
+PR: https://github.com/m5stack/M5Unified/pull/445
+Title: CI: build the latest arduino-esp32 3.3 and 4.0 releases
+Author: ainyan03
+State at review: OPEN, 0 comments, 0 reviews; mergeable=MERGEABLE, mergeStateStatus=CLEAN, 37/37 checks pass
+Base: 6df015290976764e5e71beffe28abcd25dc54818 (develop)
+Head: 3d7abeed4cdf46f3791fa61ae30618d4f700ba67 (single commit)
+Changed: 1 file, +35/-7 — .github/workflows/ArduinoBuild.yml
+
+Matrix rows: base 15 -> head 21
+- 4 rows renamed 3.3.12 -> 3.3.13 (esp32 / s3 / c5 / p4)
+- 1 row added: esp32p4 @ 3.3.13 with ChipVariant=postv3
+- 5 rows added: esp32 / s3 / c5 / p4(+ChipVariant=prev3) @ 4.0.0
+- job names remain unique: no duplicates in base or head
+
+git apply --check on base 6df0152:
+  patch applies cleanly (patches/0001-ci-arduino-latest.patch)
+
+No other files changed; no source, example, library or API change.
