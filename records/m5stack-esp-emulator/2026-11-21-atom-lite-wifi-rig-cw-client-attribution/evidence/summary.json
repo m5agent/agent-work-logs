@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "kind": "redacted_summary",
+  "redactions": [
+    "已删除设备 MAC 与 session fixture 身份",
+    "已删除本机绝对路径与内部端点",
+    "未包含原始 4 MiB flash 镜像，仅保留 SHA256、分区与差异摘要"
+  ],
+  "source": {
+    "review_job": "job-a4dc24b70d32",
+    "session_id_sha256": "43a6bbb0ed033356670ba87fee2df7b9ace27cf5768a0e0e48525eb165304f68",
+    "source_artifact_sha256": "9e317f1c84702c9190d95cfb3131195427d08238d16172563d227c1edbc8c87b",
+    "evidence_files": [
+      "analysis.json",
+      "crash-diagnostics.json",
+      "device-state.json",
+      "emulator-failure.json",
+      "events.json",
+      "evidence.zip",
+      "flash-after.json",
+      "flash-before.json",
+      "flash-diff.json",
+      "flash.json",
+      "frame.png",
+      "interactions.json",
+      "observation/serial-000000.log",
+      "observation/serial-000001.log",
+      "observation/serial-000003.log",
+      "observation/serial-000005.log",
+      "observation/serial-000007.log",
+      "observation/serial-000010.log",
+      "observation/serial-000012.log",
+      "observation.json",
+      "qom-after.json",
+      "qom-before.json",
+      "qom-diff.json",
+      "qom-list.json",
+      "security-static.json",
+      "serial.log",
+      "session.json",
+      "wait.json"
+    ],
+    "execution_plan_present": false
+  },
+  "emulator_failure": {
+    "schema_version": 2,
+    "category": "unresolved",
+    "phase": "guest_observation",
+    "source": "review_observation",
+    "source_code": "E_SIM_APP_READY_PARTIAL",
+    "device_id": "atom-lite",
+    "runtime": "qemu",
+    "guest": null,
+    "firmware_conclusion": "NOT EVALUATED",
+    "review_error_code": "E_SIM_APP_READY_PARTIAL"
+  },
+  "static_analysis": {
+    "image_size": 4194304,
+    "sha256": "f50290c5a12676a506764efb825a2a90a8ed88588cac369dd80b70fb83818705",
+    "valid": true,
+    "errors": [],
+    "warnings": [
+      "classic ESP32 bootloader found at 0x1000"
+    ],
+    "bootloader": {
+      "valid": true,
+      "offset": 4096,
+      "entry_addr": 1074267548,
+      "flash_size_code": 2,
+      "flash_size": 4194304,
+      "image_end": 27608,
+      "chip": "esp32"
+    },
+    "partition_table": {
+      "offset": 32768,
+      "valid": true,
+      "partitions": [
+        {
+          "type": 1,
+          "subtype": 2,
+          "offset": 36864,
+          "size": 20480,
+          "label": "nvs",
+          "flags": 0
+        },
+        {
+          "type": 1,
+          "subtype": 0,
+          "offset": 57344,
+          "size": 8192,
+          "label": "otadata",
+          "flags": 0
+        },
+        {
+          "type": 0,
+          "subtype": 16,
+          "offset": 65536,
+          "size": 3145728,
+          "label": "app0",
+          "flags": 0
+        },
+        {
+          "type": 1,
+          "subtype": 130,
+          "offset": 3211264,
+          "size": 917504,
+          "label": "spiffs",
+          "flags": 0
+        },
+        {
+          "type": 1,
+          "subtype": 3,
+          "offset": 4128768,
+          "size": 65536,
+          "label": "coredump",
+          "flags": 0
+        }
+      ]
+    },
+    "app0": {
+      "label": "app0",
+      "offset": 65536,
+      "size": 3145728,
+      "present": true,
+      "valid": true,
+      "entry_addr": 1074274068,
+      "image_end": 2078976
+    },
+    "app_descriptor": {
+      "offset": 65568,
+      "secure_version": 0,
+      "version": "43a8f6d",
+      "project_name": "arduino-lib-builder",
+      "compile_time": "11:21:21",
+      "compile_date": "Jun  2 2026",
+      "idf_version": "v5.5.4",
+      "elf_sha256": "474a9c440ed710f508ba800f2e186070ea0a47f8bac8e29d3078164ddc0257df",
+      "min_efuse_blk_rev_full": 0,
+      "max_efuse_blk_rev_full": 99
+    },
+    "filesystems": [
+      {
+        "label": "spiffs",
+        "offset": 3211264,
+        "size": 917504,
+        "type": "spiffs",
+        "status": "UNFORMATTED",
+        "errors": [
+          "SPIFFS partition appears erased or zero-filled"
+        ]
+      }
+    ],
+    "bootloader_flash_contract": {
+      "declared_flash_size": 4194304,
+      "partition_end": 4194304,
+      "partitions_fit": true
+    }
+  },
+  "review": {
+    "policy": {
+      "validation": {},
+      "content_review_required": true,
+      "execution_required": true,
+      "execution_scope": "virtual-device validation",
+      "network_claim_required": true,
+      "touch_claim_required": false,
+      "button_claim_required": true,
+      "ab_navigation_claim_required": false,
+      "input_probe_keys": [],
+      "input_hold_buttons": [],
+      "semantic_inputs": [],
+      "pre_network_setup_source": null,
+      "submit_enabled": true
+    },
+    "execution": {
+      "runtime": "qemu",
+      "profile": null,
+      "whole_device": true,
+      "session_id": "381b313653284a26b0561936847a641f",
+      "session_id_sha256": "43a6bbb0ed033356670ba87fee2df7b9ace27cf5768a0e0e48525eb165304f68",
+      "device_id": "atom-lite",
+      "sku": "C008",
+      "device_code": [
+        "ATOM_LITE"
+      ],
+      "storage": null,
+      "features": {
+        "flash": true,
+        "serial": true,
+        "screenshot": false,
+        "input": true,
+        "qom": true,
+        "device_state": true,
+        "storage": false,
+        "network": false,
+        "network_capture": false
+      },
+      "warnings": []
+    },
+    "checks": {
+      "static_firmware": {
+        "status": "PASS",
+        "valid_app_slots": [
+          "app0"
+        ],
+        "empty_app_slots": [],
+        "errors": []
+      },
+      "virtual_flash": {
+        "status": "PASS",
+        "flash_sha256": "eab292ab0fbc0359a06398e17b12e69bbb009b2d38a50e56633af896ab99ea96"
+      },
+      "boot_and_ui": {
+        "status": "PARTIAL",
+        "ready": false,
+        "initial_ready": false,
+        "input_unlocked_frame": false,
+        "ready_reason": [],
+        "frame_bytes": 0,
+        "frame_metrics": null,
+        "frame_sha256": null,
+        "serial_sha256": "d52915026edd217f5d6ded8b96c26959046375d8693273d0c240dc9171d83ea6"
+      },
+      "virtual_observation": {
+        "status": "PASS",
+        "required_seconds": 60,
+        "elapsed_seconds": 60.13632425000105,
+        "sample_count": 13,
+        "frame_scope": "serial_only",
+        "frame_unavailable_reason": null,
+        "evidence_file": "observation.json"
+      },
+      "input_and_function": {
+        "status": "NOT RUN",
+        "scope": "interactive-input",
+        "setup_actions_accepted": 0,
+        "accepted": 0,
+        "changed": 0,
+        "changed_inputs": [],
+        "ab_navigation_verified": null,
+        "touch_status": null,
+        "touch_plan_status": null,
+        "touch_plan_reason": null,
+        "touch_button_bindings": null,
+        "button_status": null,
+        "keyboard_status": null,
+        "required_buttons_observed": null,
+        "probe_keys": null,
+        "probe_keys_responded": null,
+        "semantic_verification": null,
+        "semantic_input_status": null,
+        "semantic_input_actions": {},
+        "unsupported_semantic_inputs": [],
+        "verification_scope": null
+      },
+      "device_state": {
+        "status": "PASS",
+        "available": true,
+        "source": "live"
+      },
+      "network": {
+        "status": "NOT RUN",
+        "data_plane": "NOT RUN",
+        "profile": null,
+        "same_guest": false,
+        "diagnostic_only": false,
+        "native_sta_admission": {
+          "status": "unavailable",
+          "reason": "board_not_advertised"
+        }
+      },
+      "crash_diagnostics": {
+        "status": "no_evidence",
+        "source": "device_service",
+        "kind": null,
+        "reason": null,
+        "repeated_resets": false,
+        "elf_status": "not_uploaded",
+        "symbolization_eligible": false,
+        "core_dump_status": "not_observed",
+        "backend_illegal_instruction": false
+      }
+    },
+    "failure_attribution": {
+      "emulator_or_transport": [],
+      "firmware": [],
+      "unknown": [],
+      "evidence_collection": [],
+      "runtime": {
+        "schema_version": 2,
+        "category": "unresolved",
+        "phase": "guest_observation",
+        "source": "review_observation",
+        "source_code": "E_SIM_APP_READY_PARTIAL",
+        "device_id": "atom-lite",
+        "runtime": "qemu",
+        "guest": null,
+        "firmware_conclusion": "NOT EVALUATED",
+        "review_error_code": "E_SIM_APP_READY_PARTIAL"
+      }
+    },
+    "final": {
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "passed": false,
+      "conclusion": "规则检查与静态检查通过；虚拟设备已启动并采集证据，但首帧已出现但应用级 readiness 未完全确认；交互输入未产生足够的功能性画面变化；描述声明的网络功能未获得同一虚拟设备上的数据面 PASS（设备目录尚未公布同 guest STA 能力），需补充验证。",
+      "error_code": "E_SIM_APP_READY_PARTIAL",
+      "submission": "NOT SUBMITTED",
+      "ap_provisioning_status": "NOT RUN"
+    }
+  },
+  "session": {
+    "firmware_id": "f50290c5a12676a506764efb825a2a90a8ed88588cac369dd80b70fb83818705",
+    "firmware_sha256": "f50290c5a12676a506764efb825a2a90a8ed88588cac369dd80b70fb83818705",
+    "artifact_sha256": "9e317f1c84702c9190d95cfb3131195427d08238d16172563d227c1edbc8c87b",
+    "runtime": "qemu",
+    "runtime_memory": {
+      "requested_psram_mib": 0,
+      "cli_requested_psram_mib": 0,
+      "effective_psram_mib": 0,
+      "effective_source": "qemu-cli-request",
+      "policy": "qemu-no-psram",
+      "claim": "qemu-memory-configuration-only",
+      "physical_cache_psram_timing": "NOT RUN"
+    },
+    "display": null,
+    "display_available": false,
+    "last_frame_available": false,
+    "flash": {
+      "transport": "qemu-esptool",
+      "chip": "esp32",
+      "machine": "m5atomlite",
+      "flash_size": 4194304,
+      "verified": true,
+      "readback_sha256": "f50290c5a12676a506764efb825a2a90a8ed88588cac369dd80b70fb83818705",
+      "byte_compare": "equal",
+      "session_isolated_copy": true
+    },
+    "serial_bytes": 0,
+    "serial_channels": [
+      {
+        "channel": "console",
+        "transport": "console",
+        "bytes": 0
+      }
+    ],
+    "state": "running"
+  },
+  "observation": {
+    "status": "PASS",
+    "scope": "running_virtual_device",
+    "required_seconds": 60,
+    "elapsed_seconds": 60.13632425000105,
+    "sample_count": 13,
+    "final_session_state": "running",
+    "frame_scope": "serial_only",
+    "input_probe_timing": "not_run",
+    "serial_next_offset": 1872
+  },
+  "serial": {
+    "bytes": 1843,
+    "sha256": "c7d87a2bc3b674405113df354241ab91bbda9fefc4fb8e8baced3b38a434a728",
+    "text": "ets Jul 29 2019 12:21:46\n\nrst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)\nconfigsip: 0, SPIWP:0xee\nclk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00\nmode:DIO, clock div:2\nload:0x3fff0030,len:4640\nload:0x40078000,len:15660\nload:0x40080400,len:3164\nentry 0x4008059c\n[   105][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\n[   109][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\n[   123][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\n[   138][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\n[   152][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\n[   167][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\n[   181][E][esp32-hal-cpu.c:143] addApbChangeCallback(): duplicate func=0x400f9ab0 arg=0x3ffbdd54\nE (249) gpio: gpio_pullup_en(85): GPIO number error (input-only pad has no internal PU)\n[134559][E][NetworkUdp.cpp:255] endPacket(): could not send data: 118\nE (144508) wifi:sta is connecting, cannot set config\n[134561][E][STA.cpp:417] connect(): STA clear config failed! 0x3006: ESP_ERR_WIFI_STATE\nE (174511) wifi:sta is connecting, cannot set config\n[164564][E][STA.cpp:417] connect(): STA clear config failed! 0x3006: ESP_ERR_WIFI_STATE\nE (204510) wifi:sta is connecting, cannot set config\n[194563][E][STA.cpp:417] connect(): STA clear config failed! 0x3006: ESP_ERR_WIFI_STATE\nE (234512) wifi:sta is connecting, cannot set config\n[224564][E][STA.cpp:417] connect(): STA clear config failed! 0x3006: ESP_ERR_WIFI_STATE\nE (264512) wifi:sta is connecting, cannot set config\n[254563][E][STA.cpp:417] connect(): STA clear config failed! 0x3006: ESP_ERR_WIFI_STATE\n"
+  },
+  "qom_diff": {
+    "before": "dfee92f69ae64562a8dc0182f46270cc",
+    "after": "c3bdd3c7500a4dd5a674a39c3b25accb",
+    "added": {},
+    "removed": {},
+    "changed": {
+      "onboard_io/children/led-frames/value": {
+        "before": 0,
+        "after": 187
+      },
+      "onboard_io/children/output-transitions/value": {
+        "before": 0,
+        "after": 187
+      },
+      "rmt-classic/children/tx-completions/value": {
+        "before": 0,
+        "after": 187
+      },
+      "rmt-classic/children/tx-last-tick-hz/value": {
+        "before": 0,
+        "after": 10000000
+      },
+      "rmt-classic/children/tx-symbols/value": {
+        "before": 0,
+        "after": 4488
+      }
+    }
+  },
+  "flash_diff": {
+    "before": "9e6c0de30afb4023b137a4ed0cd122fc",
+    "after": "460af501a9fa49049bbfffcf58ffa159",
+    "size": 4194304,
+    "changed_bytes": 4587,
+    "range_count": 114,
+    "min_offset": 36864,
+    "max_end": 46334,
+    "nvs_bounds": [
+      36864,
+      57344
+    ],
+    "all_inside_nvs": true,
+    "truncated_ranges": false
+  },
+  "crash_diagnostics": {
+    "summary": {
+      "status": "no_evidence",
+      "source": "device_service",
+      "kind": null,
+      "reason": null,
+      "repeated_resets": false,
+      "elf_status": "not_uploaded",
+      "symbolization_eligible": false,
+      "core_dump_status": "not_observed",
+      "backend_illegal_instruction": false
+    },
+    "receipt": {
+      "schema_version": 1,
+      "session_id": "381b313653284a26b0561936847a641f",
+      "firmware_sha256": "f50290c5a12676a506764efb825a2a90a8ed88588cac369dd80b70fb83818705",
+      "device_id": "atom-lite",
+      "runtime": "qemu",
+      "status": "no_evidence",
+      "sources": {
+        "console": {
+          "status": "available",
+          "offset": 0,
+          "bytes": 1872,
+          "sha256": "d52915026edd217f5d6ded8b96c26959046375d8693273d0c240dc9171d83ea6",
+          "truncated": false
+        },
+        "runtime_stderr": {
+          "status": "available",
+          "offset": 0,
+          "bytes": 24,
+          "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+          "truncated": false
+        }
+      },
+      "panic": null,
+      "panic_count": 0,
+      "cpus": [],
+      "boot": {
+        "rom_banners": 1,
+        "idf_banners": 0,
+        "reboot_requests": 0,
+        "reset_reports": [
+          {
+            "code": "0x1",
+            "reason": "POWERON_RESET"
+          }
+        ],
+        "application_load_count": 0,
+        "application_loads": []
+      },
+      "task_watchdog_reports": 0,
+      "core_dump": {
+        "status": "not_observed",
+        "write_attempt_count": 0,
+        "write_attempts": [],
+        "last_terminal_write_attempt": null
+      },
+      "backend_observations": [],
+      "elf": {
+        "status": "not_uploaded",
+        "reported_sha256_prefix": null,
+        "artifact_sha256": null,
+        "expected_sha256": null,
+        "symbolization_eligible": false
+      }
+    }
+  },
+  "device_state": {
+    "session_id": "381b313653284a26b0561936847a641f",
+    "device_id": "atom-lite",
+    "state": "running",
+    "supported": true,
+    "available": true,
+    "source": "live",
+    "captured_at": "2026-11-20T18:47:48.926889+00:00",
+    "components": {
+      "onboard-io": {
+        "path": "/machine/onboard_io",
+        "properties": {
+          "led-rgb": 0,
+          "led-frames": 0,
+          "pressed": false,
+          "input-level": true
+        }
+      }
+    },
+    "errors": {}
+  },
+  "interactions": {
+    "results": [],
+    "accepted": 0,
+    "changed": 0,
+    "status": "NOT RUN"
+  },
+  "security_static": {
+    "status": "REVIEW",
+    "strings_lines": 19853,
+    "urls": [
+      "http://www.",
+      "https://www."
+    ],
+    "ips": [],
+    "suspicious": [],
+    "note": "静态字符串检查不等于病毒/木马检测"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "kind": "firmware_review_attribution",
+  "overall_status": "PARTIAL",
+  "title": "Atom Lite Wifi_Rig_CW(Client) 1.431 审查 E_SIM_APP_READY_PARTIAL 归因：非模拟器启动缺陷，未开 issue",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "55e5763ea",
+    "review_service_commit": "9e62882",
+    "review_job": "job-a4dc24b70d32",
+    "lane": "SIM_PARTIAL",
+    "status": "manual_review",
+    "error_code": "E_SIM_APP_READY_PARTIAL"
+  },
+  "hardware": {
+    "device_id": "atom-lite",
+    "sku": "C008",
+    "soc": "ESP32-PICO-D4",
+    "flash_bytes": 4194304,
+    "psram_bytes": 0,
+    "display": null,
+    "runtime": "native-qemu",
+    "machine": "m5atomlite",
+    "physical_device": "NOT RUN"
+  },
+  "firmware": {
+    "name": "Wifi_Rig_CW(Client) For AtomLite",
+    "version_name": "1.431",
+    "version_id": "2123848540738240513",
+    "file_name": "Clie_M5AtomLitev1.43.bin",
+    "size": 2079024,
+    "sha256": "9e317f1c84702c9190d95cfb3131195427d08238d16172563d227c1edbc8c87b",
+    "composed_sha256": "f50290c5a12676a506764efb825a2a90a8ed88588cac369dd80b70fb83818705",
+    "composed_size": 4194304,
+    "readback_sha256_after_run": "eab292ab0fbc0359a06398e17b12e69bbb009b2d38a50e56633af896ab99ea96",
+    "flash_size_code": 2,
+    "bootloader_valid": true,
+    "bootloader_entry": "0x4008059c",
+    "partition_table_valid": true,
+    "partition_end": 4194304,
+    "app_slots": 1,
+    "app0_valid": true,
+    "app0_image_end": 2078976,
+    "idf_version": "v5.5.4",
+    "app_descriptor_version": "43a8f6d"
+  },
+  "execution": {
+    "environment": "macOS arm64; 审查任务证据目录只读归因; Device Service 原生 QEMU (m5atomlite); 未使用真机",
+    "task_id": "job-a4dc24b70d32",
+    "session_id_sha256": "43a6bbb0ed033356670ba87fee2df7b9ace27cf5768a0e0e48525eb165304f68",
+    "observation_seconds": 60.13632425000105,
+    "samples": 13
+  },
+  "checks": [
+    {"name": "content_rules", "status": "PASS"},
+    {"name": "static_firmware", "status": "PASS", "detail": "bootloader/partition/app0 valid; 单 app 槽 3 MiB; 分区结束 0x400000 = 4 MiB"},
+    {"name": "virtual_flash", "status": "PASS", "detail": "qemu-esptool 回读与镜像逐字节相等"},
+    {"name": "guest_boot", "status": "PASS", "detail": "entry 0x4008059c; 无 panic/WDT/重启"},
+    {"name": "virtual_observation", "status": "PASS", "detail": "60.136 s / 13 采样全 running"},
+    {"name": "peripheral_activity", "status": "PASS", "detail": "led-frames 0->187, rmt tx-symbols 0->4488"},
+    {"name": "device_state", "status": "PASS"},
+    {"name": "crash_diagnostics", "status": "PASS", "detail": "no_evidence; panic_count=0"},
+    {"name": "boot_and_ui_readiness", "status": "PARTIAL", "detail": "无 framebuffer (frame_bytes=0, serial_only) 且任务无 ready_markers"},
+    {"name": "input_and_function", "status": "NOT RUN", "detail": "accepted=0 changed=0; 未生成输入探针"},
+    {"name": "network_data_plane", "status": "NOT RUN", "detail": "atom-lite 无 Wi-Fi NIC; native_sta=board_not_advertised"},
+    {"name": "hardware_reproduction", "status": "NOT RUN"},
+    {"name": "emulator_defect_attribution", "status": "PASS", "detail": "failure_attribution 四个桶均为空; 启动阶段无模拟器缺陷证据"}
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ],
+  "notes": [
+    "结论层级：virtual-device validation（启动/运行/外设）+ code-level verification（qemu-wifi 准入与 readiness 判定代码）",
+    "未开 issue：启动与运行无缺陷证据；网络缺口为设备档案声明的能力边界；查重无同题 open/closed 单",
+    "串口 0x3006 ESP_ERR_WIFI_STATE 为 STA connecting 时固件每 30 s 重入 WiFi.begin() 的结果，与无 radio 环境一致，未作为缺陷证据",
+    "串口 gpio_pullup_en(85) 为固件非法 GPIO 调用，真机同 core 会打印同一行，不构成模型异常",
+    "结论文案「首帧已出现」与 frame_bytes=0 矛盾、「交互输入未产生变化」与 NOT RUN 矛盾，均属审查服务表述缺口",
+    "session.json 的 serial_bytes/serial_channels/last_device_state 与同目录日志不一致，属导出快照元数据问题，未据此开单",
+    "未修改模拟器代码，未 push 模拟器仓库，未关闭任何 issue"
+  ]
+}
