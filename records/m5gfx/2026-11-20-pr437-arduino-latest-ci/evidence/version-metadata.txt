@@ -1,0 +1,51 @@
+# Version / board-metadata evidence for m5stack/M5GFX PR #437 (UTC 2026-11-20)
+
+## 1. Espressif board manager index (https://espressif.github.io/arduino-esp32/package_esp32_index.json)
+package: esp32
+platforms (newest first): 4.0.0, 3.3.13, 3.3.12, 3.3.11, 3.3.10
+
+## 2. Release notes (gh api repos/espressif/arduino-esp32/releases/tags/<tag>)
+4.0.0: ESP32 Arduino Release 4.0.0 based on ESP-IDF v6.1.1 | published 2026-11-19T01:45:00Z
+3.3.13: ESP32 Arduino Release 3.3.13 based on ESP-IDF v5.5.6+ | published 2026-11-17T16:34:08Z
+
+## 3. boards.txt esp32p4 defaults and ChipVariant menu
+--- tag 3.3.13 (raw.githubusercontent.com/espressif/arduino-esp32/3.3.13/boards.txt)
+400:esp32p4.name=ESP32P4 Dev Module
+422:esp32p4.build.mcu=esp32p4
+424:esp32p4.build.variant=esp32p4
+425:esp32p4.build.chip_variant=esp32p4_es
+426:esp32p4.build.board=ESP32P4_DEV
+433:esp32p4.build.f_cpu=360000000L
+442:esp32p4.menu.ChipVariant.prev3=Before v3.00
+443:esp32p4.menu.ChipVariant.prev3.build.chip_variant=esp32p4_es
+444:esp32p4.menu.ChipVariant.prev3.build.f_cpu=360000000L
+445:esp32p4.menu.ChipVariant.postv3=v3.00 or newer
+446:esp32p4.menu.ChipVariant.postv3.build.chip_variant=esp32p4
+447:esp32p4.menu.ChipVariant.postv3.build.f_cpu=400000000L
+--- tag 4.0.0 (raw.githubusercontent.com/espressif/arduino-esp32/4.0.0/boards.txt)
+636:esp32p4.name=ESP32P4 Dev Module
+658:esp32p4.build.mcu=esp32p4
+660:esp32p4.build.variant=esp32p4
+661:esp32p4.build.chip_variant=esp32p4
+662:esp32p4.build.board=ESP32P4_DEV
+669:esp32p4.build.f_cpu=400000000L
+678:esp32p4.menu.ChipVariant.postv3=v3.00 or newer
+679:esp32p4.menu.ChipVariant.postv3.build.chip_variant=esp32p4
+680:esp32p4.menu.ChipVariant.postv3.build.f_cpu=400000000L
+681:esp32p4.menu.ChipVariant.prev3=Before v3.00
+682:esp32p4.menu.ChipVariant.prev3.build.chip_variant=esp32p4_es
+683:esp32p4.menu.ChipVariant.prev3.build.f_cpu=360000000L
+
+## 4. platform.txt uses the selected chip variant to pick the prebuilt SDK
+--- tag 3.3.13
+30:compiler.sdk.path={tools.esp32-arduino-libs.path}/{build.chip_variant}
+111:build.chip_variant={build.mcu}
+155:recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.extra_flags} {compiler.c.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -
+158:recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.extra_flags} {compiler.cpp.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.
+161:recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.S.extra_flags} {compiler.S.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -
+--- tag 4.0.0
+36:compiler.sdk.path={tools.esp32-arduino-libs.path}/{build.chip_variant}
+121:build.chip_variant={build.mcu}
+170:recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.extra_flags} {compiler.c.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -
+173:recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.extra_flags} {compiler.cpp.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.
+176:recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.S.extra_flags} {compiler.S.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -

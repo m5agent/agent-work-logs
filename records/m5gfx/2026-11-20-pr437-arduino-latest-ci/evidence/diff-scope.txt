@@ -1,0 +1,77 @@
+# Diff scope and cross-repo matrix context (m5stack/M5GFX PR #437, UTC 2026-11-20)
+
+## PR scope
+ .github/workflows/ArduinoBuild.yml | 45 ++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 43 insertions(+), 2 deletions(-)
+
+base develop = 44324f34748812ce557e0dea39fb173cf9a73952
+head pr437   = 6be660c181c860a89acc978320f765f03ff5433c
+MERGEABLE / clean; 1 commit; 1 file changed
+
+## Matrix size
+base rows: 11
+head rows: 21
+
+## Rows added by the PR (10)
+  >           - board: esp32:esp32:esp32
+  >             esp32_version: 3.3.13
+  >           - board: esp32:esp32:esp32s3
+  >             esp32_version: 3.3.13
+  >           - board: esp32:esp32:esp32c5
+  >             esp32_version: 3.3.13
+  >           - board: esp32:esp32:esp32p4
+  >             esp32_version: 3.3.13
+  >           - board: esp32:esp32:esp32p4:ChipVariant=postv3
+  >             esp32_version: 3.3.13
+  >           - board: esp32:esp32:esp32
+  >             esp32_version: 4.0.0
+  >           - board: esp32:esp32:esp32s3
+  >             esp32_version: 4.0.0
+  >           - board: esp32:esp32:esp32c5
+  >             esp32_version: 4.0.0
+  >           - board: esp32:esp32:esp32p4
+  >             esp32_version: 4.0.0
+  >           - board: esp32:esp32:esp32p4:ChipVariant=prev3
+  >             esp32_version: 4.0.0
+
+## M5Unified ArduinoBuild.yml on develop (the other half of the split)
+            # Espressif Board Manager: 3.0.7
+            - board: esp32:esp32:esp32
+              esp32_version: 3.0.7
+            - board: esp32:esp32:esp32s3
+              esp32_version: 3.0.7
+            - board: esp32:esp32:esp32c3
+              esp32_version: 3.0.7
+            - board: esp32:esp32:esp32c6
+              esp32_version: 3.0.7
+            - board: esp32:esp32:esp32h2
+              esp32_version: 3.0.7
+            # Espressif Board Manager: 3.2.1
+            - board: esp32:esp32:esp32
+              esp32_version: 3.2.1
+            - board: esp32:esp32:esp32s3
+              esp32_version: 3.2.1
+            - board: esp32:esp32:esp32c6
+              esp32_version: 3.2.1
+            - board: esp32:esp32:esp32p4
+              esp32_version: 3.2.1
+            # Espressif Board Manager: 3.3.12 (latest)
+            - board: esp32:esp32:esp32
+              esp32_version: 3.3.12
+            - board: esp32:esp32:esp32s3
+              esp32_version: 3.3.12
+            - board: esp32:esp32:esp32c5
+              esp32_version: 3.3.12
+            - board: esp32:esp32:esp32p4
+              esp32_version: 3.3.12
+            # M5Stack Board Manager
+            - board: m5stack:esp32:m5stack_core
+              esp32_version: 3.2.5
+            - board: m5stack:esp32:m5stack_cores3
+              esp32_version: 3.2.5
+            BRANCH="${{ github.base_ref || github.ref_name }}"
+            [ "$BRANCH" = "master" ] || BRANCH="develop"
+            git clone --depth 1 --branch "${{ steps.m5gfx.outputs.branch }}" \
+
+## Mirrored PR in M5Unified
+number=445 state=open head=3d7abeed4cdf46f3791fa61ae30618d4f700ba67 +35/-7 files=1 title=CI: build the latest arduino-esp32 3.3 and 4.0 releases
