@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "issue_followup",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #436 追加排查：217 ms 的归属（ToughC5 触摸）",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/436",
+    "latest_comment": "https://github.com/m5stack/M5GFX/issues/436#issuecomment-7031378374",
+    "repository": "https://github.com/m5stack/M5GFX",
+    "base_commit": "44324f34748812ce557e0dea39fb173cf9a73952",
+    "related_repository": "https://github.com/m5stack/M5Unified",
+    "related_commit": "6df015290976764e5e71beffe28abcd25dc54818"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; public source read only; no C5 hardware and no C5 virtual profile",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "one getTouchRaw per M5.update",
+      "method": "source",
+      "status": "PASS",
+      "evidence": "M5Unified.inl:2927; Touch_Class.inl:26"
+    },
+    {
+      "name": "ToughC5 touch bus_shared is false",
+      "method": "source",
+      "status": "PASS",
+      "evidence": "esp32c5_construct.inl:25-31; construct_common.inl:252; Panel_Device.inl:531-535"
+    },
+    {
+      "name": "217 ms reproduced",
+      "method": "runtime",
+      "status": "NOT RUN",
+      "evidence": "no ESP32-C5 hardware or virtual profile"
+    },
+    {
+      "name": "virtual-device validation",
+      "method": "virtual-device",
+      "status": "NOT RUN",
+      "evidence": "Device Service lists 36 profiles, none with ESP32-C5 SoC"
+    }
+  ],
+  "evidence": [
+    "evidence/code-facts.txt",
+    "evidence/latest-comment-summary.md"
+  ],
+  "notes": [
+    "The previous 25 ms x retry accumulation hypothesis is withdrawn based on the author's prototype numbers.",
+    "The author's 217 ms and 21-27 ms outer measurement are not consistent as the same call in the same run.",
+    "PR need not wait for the 217 ms triage; the review points are independent."
+  ]
+}

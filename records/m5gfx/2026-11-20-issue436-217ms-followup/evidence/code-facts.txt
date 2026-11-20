@@ -1,0 +1,81 @@
+M5GFX #436 source facts
+=======================
+
+Fixed versions
+--------------
+M5GFX    develop @ 44324f34748812ce557e0dea39fb173cf9a73952
+M5Unified        @ 6df015290976764e5e71beffe28abcd25dc54818
+
+1. M5Unified::update() calls Touch.update() once
+-----------------------------------------------
+src/M5Unified.inl:2927
+    if (Touch.isEnabled())
+    {
+      Touch.update(ms);
+
+2. Touch_Class::update() calls getTouchRaw() once
+-------------------------------------------------
+src/utility/Touch_Class.inl:26
+    std::size_t count = _gfx->getTouchRaw(_touch_raw, TOUCH_MAX_POINTS);
+(The later touch-button handling uses the cached points; no second getTouchRaw.)
+
+3. Panel_Device::getTouchRaw() wrapper
+--------------------------------------
+src/lgfx/v1/panel/Panel_Device.inl:527
+  uint_fast8_t Panel_Device::getTouchRaw(touch_point_t* tp, uint_fast8_t count)
+  {
+    if (_touch == nullptr) return 0;
+
+    bool need_transaction = (getStartCount() && _touch->config().bus_shared);
+    if (need_transaction) { endTransaction(); }
+    count = _touch->getTouchRaw(tp, count);
+    if (need_transaction) { beginTransaction(); }
+    return count;
+  }
+
+4. ToughC5 touch descriptor: bus_shared not set
+----------------------------------------------
+src/board_detect/m5/esp32c5_construct.inl:25
+  static constexpr i2c_touch_desc_t touch_toughc5 =
+    i2c_touch(specs::toughc5::touch::i2c_addr)
+      .with_port(toughc5_detail::i2c_port)
+      .with_pins(toughc5_detail::sda, toughc5_detail::scl, GPIO_NUM_NC)
+      .with_freq(specs::toughc5::touch::i2c_freq)
+      .with_range(specs::toughc5::touch::x_min, specs::toughc5::touch::x_max,
+                  specs::toughc5::touch::y_min, specs::toughc5::touch::y_max);
+
+5. i2c_touch_desc_t default bus_shared = false
+----------------------------------------------
+src/board_detect/m5/construct_common.inl:248
+    constexpr i2c_touch_desc_t(std::uint8_t addr_)
+    : addr(addr_), port(setup_sentinel::no_pin), sda(setup_sentinel::no_pin),
+      scl(setup_sentinel::no_pin), pin_int(setup_sentinel::no_pin), freq(400000),
+      x_min(0), x_max(0), y_min(0), y_max(0),
+      offset_rotation(setup_sentinel::keep_u8), bus_shared(false) {}
+
+6. Touch driver body (retry loop)
+---------------------------------
+src/lgfx/v1/touch/Touch_CHSC6540.inl:49-102
+  int32_t retry = 5;
+  for (;;)
+  {
+    ... beginTransaction / writeBytes / restart / readBytes(1) / readBytes(points*6-2)
+    if (lgfx::i2c::endTransaction(_cfg.i2c_port)) {}
+    if (tmp[0] == 0 || memcmp(buf[0], buf[1], len) == 0) break;
+    if (0 == --retry) { break; }
+  }
+
+7. PM1 key read in M5.update() uses In_I2C
+------------------------------------------
+src/M5Unified.inl:3275
+        switch (Power.getKeyState())
+
+src/utility/Power_Class.inl:4269
+  uint8_t Power_Class::getKeyState(void)
+  ... case pmic_t::pmic_m5pm1: return M5pm1.getPekPress();
+
+src/utility/power/M5PM1_Class.hpp:17
+    M5PM1_Class(std::uint8_t i2c_addr = DEFAULT_ADDRESS, std::uint32_t freq = 100000,
+                I2C_Class* i2c = &In_I2C)
+
+src/M5Unified.inl:1592-1605 (ToughC5 internal/Ex I2C use LP_I2C_NUM_0)
