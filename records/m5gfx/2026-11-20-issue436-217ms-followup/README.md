@@ -64,3 +64,27 @@
 
 - <https://github.com/m5stack/M5GFX/issues/436#issuecomment-7031499320>
   （1 条，日文；issue 仍 OPEN，未 close、未 push 上游）
+
+## 2026-11-20 08:13Z 后续：作者以オシロ撤回 217 ms
+
+GOB52 改用 GPIO + Analog Discovery 3（オシロ）重测，不再使用串口输出与 `micros()`：
+
+- `M5Unified::update()` 入口 GPIO HIGH、出口 LOW；`Touch_CHSC6540::getTouchRaw()`
+  入口/出口用另一路 GPIO。
+- 触发器只捕捉长于阈值的高电平；阈值 3 ms / 5 ms。
+- 试作（案 B）ToughC5，强按并快速移动 60 秒 × 多组，串口开/关、host 侧读取开/关，
+  超过阈值的次数均为 0；非接触 20 秒（3 ms 阈值）也为 0。
+- 典型值：`M5.update()` 约 1 ms，`getTouchRaw()` 数百 µs。
+- 撤回 217 ms（试作）、293 ms（develop）、21〜27 ms；三者均为软件计时，没有外部计测支持。
+
+结论：本 issue 的原因（ACK 终端 read 后 STOP 等待约 36.5 ms）与案 B 的效果不变；
+217 ms 不再作为遗留问题。原记录「217 ms 与 21〜27 ms 不能在同一次调用同时成立」的
+待办随之关闭。
+
+证据等级：作者侧的 hardware validation（オシロ）。本仓库的 hardware / virtual-device
+validation 仍为 `NOT RUN`（Device Service 36 个 profile 无 C5；esp-emulator 无 LP I2C
+控制器模型）。
+
+## 已发布回复（续）
+
+- 2026-11-20 08:13Z 评论之后：接受撤回的短回复（日文，1 条）。
