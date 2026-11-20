@@ -173,7 +173,7 @@ flash 差异 4,587 B / 114 段，最小值 `0x9000`、最大结束 `0xB4FE`，�
 | #224 | CLOSED | eFuse MAC 全 0，联网固件停在启动阶段 | 本次已 provision fixture 身份并正常启动，现象不同 |
 | #204 | CLOSED | `[WiFi][StickS3]` 缺 802.11 monitor/raw-frame data plane | S3 安全固件功能面，非 LX6 STA 关联；本次也不属 monitor 缺口 |
 | #226 / #216 / #188 | OPEN | P4 USB 断言 / C6 崩溃循环 / Tab5 分区不可启动 | 机型与失败形态均不同 |
-| #225 / #178 / #228–#235 | CLOSED | LX6 DPORT、classic 烧录链路、镜像有效性等 | 均为其他阶段或机型，已修复或独立 |
+| #178 / #225 / #228 / #229 / #230 / #234 / #235 | CLOSED | classic 烧录链路、LX6 DPORT、镜像有效性、板型探测等 | 均为其他阶段或机型，已修复或独立 |
 
 因此：无同题单可补充证据，本次也无模拟器缺陷可开新单。按“已有同问题才评论、可归因才开单”的约束，
 本次对 `m5stack-esp-emulator` **不产生任何写操作**（未开 issue、未评论、未改代码、未 push）。
