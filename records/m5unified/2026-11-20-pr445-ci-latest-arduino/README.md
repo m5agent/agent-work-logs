@@ -52,6 +52,8 @@
   工作流里的 M5GFX 克隆与 FQBN 编译行、M5GFX #437 的同形新增行。
 - `evidence/diff-scope.txt`：base/head、`+35/-7`、15→21 行、job 名唯一性、
   `git apply --check` 结果；`patches/0001-ci-arduino-latest.patch` 为 PR head 差分。
+- 已发布回复：<https://github.com/m5stack/M5Unified/pull/445#issuecomment-7038352238>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游、未改他人代码）
 - 同批对照：`records/m5gfx/2026-11-20-pr437-arduino-latest-ci/`（另一侧同形 PR 的评审记录）。
 
 ## 未覆盖项
