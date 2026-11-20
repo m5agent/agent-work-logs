@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-20",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Grow Room PocketJS Applet on the native Tab5",
+  "source": {
+    "repository": "https://github.com/pocket-nexus/pocketjs",
+    "base_commit": "806ac202141ece274f47c938c2899ffe8d30921d",
+    "host_commit": "db98ac45916a8ec4a2d85fa2a7e9cb09fa95bd1c"
+  },
+  "hardware": {
+    "model": "Tab5",
+    "soc": "ESP32-P4 v1.0",
+    "profile": "gt911-ili9881c",
+    "units": [
+      "ENV III",
+      "Ultrasonic-I2C"
+    ]
+  },
+  "firmware": {
+    "version": "Pocket M5 v0.1.4",
+    "original": {
+      "bytes": 7577424,
+      "sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e"
+    },
+    "loaded": {
+      "bytes": 16777216,
+      "sha256": "ff58d6dfe87a5362688ca9d10eac3cf0f078f74a313eaa5964185448e764ca24"
+    },
+    "packaging": "preloaded Grow Room into the LittleFS storage partition"
+  },
+  "execution": {
+    "level": "virtual-device validation",
+    "environment": "Device Service 1.99.5 and esp-emu 1.1.0",
+    "session_id": "redacted",
+    "started_utc": "2026-11-20T09:09:53.475304+00:00",
+    "stopped_utc": "2026-11-20T09:10:40.403637+00:00"
+  },
+  "checks": [
+    {
+      "name": "pocketjs_package_compile_and_flash_store_migration",
+      "status": "PASS"
+    },
+    {
+      "name": "gt911_launcher_and_applet_ready",
+      "status": "PASS"
+    },
+    {
+      "name": "env_iii_two_states_with_heat_alert_and_actual_frames",
+      "status": "PASS"
+    },
+    {
+      "name": "sonar_two_states_with_calibration_and_actual_frames",
+      "status": "PASS"
+    },
+    {
+      "name": "reset_free_cold_boot",
+      "status": "FAIL"
+    },
+    {
+      "name": "hardware_browser_wasm_and_network",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/virtual-device.summary.json"
+  ]
+}

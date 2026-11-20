@@ -1,0 +1,159 @@
+{
+  "evidence_kind": "redacted summary of one native Device Service session",
+  "redactions": "Service/session identifiers, credentials, absolute paths and binaries are omitted.",
+  "started_utc": "2026-11-20T09:09:53.475304+00:00",
+  "stopped_utc": "2026-11-20T09:10:40.403637+00:00",
+  "native_esp_emu_1_1_0_sha256": "633a35f993300a765634ed78a2dbcfd5ffcd5c3f2f354a2dddabeb6108240828",
+  "gt911_codec_and_port_a_part": {
+    "bytes": 136013,
+    "sha256": "207102ed58735b1227979a2147e89d7a5bd00750b129354aa3de939ad3473ffa"
+  },
+  "pocket_m5_release": {
+    "bytes": 7577424,
+    "sha256": "26d7bb07fc3e35b759d5a1f2acddef675957d808bf7130b3eb975c6a36f2b99e"
+  },
+  "test_flash": {
+    "bytes": 16777216,
+    "sha256": "ff58d6dfe87a5362688ca9d10eac3cf0f078f74a313eaa5964185448e764ca24"
+  },
+  "applet": {
+    "bytes": 625656,
+    "sha256": "ee94005c222ac077cc6658fa3ccea86384239e47c627544e669b71f974a99ddc"
+  },
+  "launcher_touch": [
+    {
+      "point": [
+        106,
+        99
+      ],
+      "response": {
+        "reports": 8,
+        "acknowledged": 8
+      }
+    }
+  ],
+  "serial": {
+    "bytes": 33642,
+    "sha256": "8a21871c9d9869308cb27c569cfa0212d23858035972cc83ee0774825bcd2cd5",
+    "applet_markers": [
+      "GROW_ROOM init",
+      "GROW_ROOM ready",
+      "GROW_ROOM waiting",
+      "GROW_ROOM climate 24.0C 55RH 1013.2hPa Climate stable",
+      "GROW_ROOM climate 34.0C 38RH 1008.0hPa Heat stress",
+      "GROW_ROOM waiting",
+      "GROW_ROOM water 28% gap=46.0cm Refill tank",
+      "GROW_ROOM water 82% gap=19.0cm Water ready"
+    ],
+    "startup_tlsf_asserts": 1
+  },
+  "stages": [
+    {
+      "stage": "empty",
+      "stimulus": "none",
+      "screen_observed": "Waiting for readings",
+      "slave_address_ack": 0,
+      "slave_transmit_bytes": 0,
+      "start_capture_second": 0.0008,
+      "checkpoint_capture_second": 2.0064,
+      "frame": {
+        "bytes": 90378,
+        "sha256": "b8bdeec314ddb731ef5236e29e155a1a051cf0c427b87c27d7147f346f6cebe3"
+      }
+    },
+    {
+      "stage": "env-stable",
+      "stimulus": "env:24:55:101320",
+      "screen_observed": "24.0 °C, 55% RH, 1013.2 hPa / Climate stable",
+      "slave_address_ack": 63,
+      "slave_transmit_bytes": 149,
+      "start_capture_second": 2.0069,
+      "checkpoint_capture_second": 7.0131,
+      "frame": {
+        "bytes": 91950,
+        "sha256": "1934339bcf92ec66f6b7bd51e01613480b52b83f7268829a57ab67f49a46e8e9"
+      }
+    },
+    {
+      "stage": "env-hot",
+      "stimulus": "env:34:38:100800",
+      "screen_observed": "34.0 °C, 38% RH, 1008.0 hPa / Heat stress",
+      "slave_address_ack": 58,
+      "slave_transmit_bytes": 138,
+      "start_capture_second": 7.0172,
+      "checkpoint_capture_second": 13.0239,
+      "frame": {
+        "bytes": 95969,
+        "sha256": "b3bea56662ef767eb92e370922d03d3db63b59aec9d24e242c75aade8dae0c32"
+      }
+    },
+    {
+      "stage": "unplug",
+      "stimulus": "none",
+      "screen_observed": "Waiting for readings",
+      "slave_address_ack": 0,
+      "slave_transmit_bytes": 0,
+      "start_capture_second": 13.0248,
+      "checkpoint_capture_second": 17.0308,
+      "frame": {
+        "bytes": 90118,
+        "sha256": "61015c6bd4b3ae888e0897838f723348cf3b588ea587ca5ec9aabef126a07cdd"
+      }
+    },
+    {
+      "stage": "water-low",
+      "stimulus": "sonic:460",
+      "screen_observed": "28% reserve, 46.0 cm gap / Refill tank",
+      "slave_address_ack": 91,
+      "slave_transmit_bytes": 132,
+      "start_capture_second": 17.0311,
+      "checkpoint_capture_second": 23.0358,
+      "frame": {
+        "bytes": 88100,
+        "sha256": "83c38ac9e27c108e8a7e0d4917b64c7963f9c2001ebd2200266d777f67c1bf21"
+      }
+    },
+    {
+      "stage": "water-fuller",
+      "stimulus": "sonic:190",
+      "screen_observed": "82% reserve, 19.0 cm gap / Water ready",
+      "slave_address_ack": 98,
+      "slave_transmit_bytes": 147,
+      "start_capture_second": 23.0367,
+      "checkpoint_capture_second": 29.0481,
+      "frame": {
+        "bytes": 90523,
+        "sha256": "59937a01d7e290bdd941dd8e53d3b421619dce9a2adc41bc97c8d4573effa372"
+      }
+    }
+  ],
+  "framebuffer_response_lower_rate_sampling": {
+    "heat": {
+      "sample_delay_s": 0.881,
+      "frame_sha256": "b3bea56662ef767eb92e370922d03d3db63b59aec9d24e242c75aade8dae0c32"
+    },
+    "fill": {
+      "sample_delay_s": 0.8385,
+      "frame_sha256": "59937a01d7e290bdd941dd8e53d3b421619dce9a2adc41bc97c8d4573effa372"
+    }
+  },
+  "framebuffer": {
+    "native_dimensions": [
+      720,
+      1280
+    ],
+    "snapshots": 535,
+    "unique": 8
+  },
+  "evidence_zip": {
+    "bytes": 99960,
+    "sha256": "d8ef114a24603cfad1baec048771fe1aaa60118065351750fd43a9fc52fb06b6",
+    "crc_ok": true,
+    "entries": 6
+  },
+  "cleanup": {
+    "stop": "stopped",
+    "purged": false,
+    "writable_flash_retained": false
+  }
+}
