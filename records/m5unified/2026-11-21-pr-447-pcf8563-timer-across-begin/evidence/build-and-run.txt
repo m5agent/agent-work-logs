@@ -1,0 +1,67 @@
+Build and run summary
+=====================
+captured_at_utc: 2026-11-21T10:10Z (build), 10:11:46Z/10:12:16Z (session create)
+
+Sources
+-------
+M5Unified PR head: 4a0ebfd74ec5f2fd0087fd025e7d4c36b6261e6a
+M5Unified base:    11bfd4bbb2705a36e7149a117c94f39511cee1bb (develop, merge of #445)
+M5GFX:             28d47949bdc84f30881623476f555398e2194313 (0.3.0)
+ESP-IDF:           7101770dc6db2667b3c477cc31365dd1acd6db4e (v6.0.2)
+Toolchain:         xtensa-esp32s3-elf-g++ (GNU 15.2.0)
+Target:            esp32s3, 8 MB flash, no PSRAM
+Component manager: disabled (IDF_COMPONENT_MANAGER=0); only the pinned local
+                   M5Unified and M5GFX checkouts were linked.
+Build:             idf.py set-target esp32s3 && idf.py build && idf.py merge-bin
+Product:           merged flash image at offset 0x0, 503936 bytes
+
+Firmware identities
+-------------------
+PR artifact SHA256:      e7d73710c2c4268ed37c5d6b5a0bea6dcefe8f5249d65d0d94e736badd6bc9a0
+PR normalized firmware:  bfb48593519ecdda805470e94555516f2ee46262cd4e54f15a12cf452637976e
+base artifact SHA256:    0633d3edb461fb65ba1cb53adce96010250d03b052a0f173072071188f91cab1
+base normalized firmware:59670dc528fe2e8f2b0d7477028382b8fdf89cb6f3ae33a058f246a17f5cd37b
+
+Device Service
+--------------
+profile: dial (M5Dial / qemu-esp32s3 / PCF8563 register model)
+runtime: qemu, no PSRAM
+session PR:   4612018cde434b90a7271fc3f96b61b5
+session base: f4c0f1eef33046ea98d95d9c78134d92
+serial: 4387 bytes each, includes the PCF8563_447_DONE marker
+Both sessions released after evidence collection (DELETE ?purge=0).
+
+Note on session.json in the original run: it is the creation snapshot
+(state=flashing); completion is evidenced by the PCF8563_447_DONE marker in
+serial.log. No raw service manifest with fixture identifiers is archived.
+
+Patch check
+-----------
+git -C M5Unified diff 11bfd4b 4a0ebfd > 0001-pcf8563-keep-timer-across-begin.patch
+git apply --check (in a clean 11bfd4b worktree): OK
+
+Verdict
+-------
+build: PASS (both variants)
+device_response: PASS (PCF8563 register readback over I2C)
+data_behavior (register preservation): PASS
+data_behavior (timer countdown/TF): NOT RUN (model lacks countdown logic)
+hardware: NOT RUN (no PCF8563 board available)
+
+Serial log hashes
+-----------------
+Raw console capture was 4387 bytes each with 94 CRLF line endings.
+The archived logs are normalised to LF with trailing spaces stripped
+(4292 bytes each), matching the previous M5Unified record's convention.
+
+serial-pr.log   raw SHA256 702975fb782034e7d867575a85f899c7b0fae920e80e49dfabfceb2fd8c2332a
+                norm SHA256 d4c502291f47d4c9a0cb7e0b9c2a67d476dab8d1edd2af289d93ff0239989cf8
+serial-base.log raw SHA256 57a46b7d076a5977a104e609decb994ddae2292b6d842ae3c49e5644aad1babb
+                norm SHA256 5a159c79248b34b44a63bbb23d1837c5a5023b29053269e8772398b1f38b3c79
+
+Pre-commit whitespace check
+---------------------------
+git diff --cached --check: clean for all authored files. The two verbatim
+upstream artifacts (evidence/pr-447.diff and the patch) are excluded from that
+check because unified-diff context blank lines appear as "+ " lines in the
+record diff; their content is the PR's exact diff and is not whitespace-edited.

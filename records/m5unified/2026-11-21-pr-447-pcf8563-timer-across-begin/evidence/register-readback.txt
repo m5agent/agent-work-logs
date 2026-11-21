@@ -1,0 +1,31 @@
+PCF8563 Timer_control (0x0E) A/B readback
+=========================================
+Device Service profile: dial (M5Dial, QEMU, PCF8563 register model)
+Firmware: pr=4a0ebfd M5Unified, base=11bfd4b M5Unified, both M5GFX 28d4794
+Sessions: pr=4612018cde434b90a7271fc3f96b61b5 base=f4c0f1eef33046ea98d95d9c78134d92
+pre-arm: 0x01=0x00, 0x0F=2, 0x0E=0x82 (TE=1, TD=1 Hz, 2 s countdown)
+
+phase                        base 11bfd4b   PR 4a0ebfd   meaning
+---------------------------  -------------   -----------   ------------------------------------------
+PRE_ARM                      0x82            0x82          timer armed before M5.begin()
+POST_BEGIN (cfg irq=false)   0x03            0x82          PR preserves TE/TD; base stops timer
+AFTER_REBEGIN_RUNNING        0x03            0x82          same call M5.begin() makes, re-run
+AFTER_ARM_LIB                0x82            0x82          after M5.Rtc.setTimerIRQ(3000)
+AFTER_REBEGIN_ARMED          0x03            0x82          second begin() with armed timer
+AFTER_DISABLE_IRQ            0x00            0x03          PR writes TE=0,TD=1/60; base writes 0x00
+BEFORE_REBEGIN_STOPPED       0x00            0x00          direct write of a stopped timer
+AFTER_REBEGIN_STOPPED        0x03            0x03          stopped timer normalised to 0x03
+AFTER_DEFAULT_PATH           0x00            0x03          begin()+disableIRQ(), cfg default path
+AFTER_SETTIMER0              0x03            0x03          M5.Rtc.setTimerIRQ(0)
+AFTER_PRESERVE_TD60          0x03            0x83          running 0x83 (TD=1/60) preserved by PR
+
+TF polling (Control_status_2 bit2)
+----------------------------------
+TF_AFTER_BEGIN= -1 / -1, TF_AFTER_REBEGIN= -1 / -1, TF_AFTER_DEFAULT= -1 / -1
+for base / PR respectively. The QEMU PCF8563 model does not implement the
+countdown timer or TF flag, so these values are NOT evidence about whether the
+timer runs. They are recorded only to show the limit of this virtual device.
+The timer-actually-fires result in the PR description was measured by the author
+on CoreInk hardware and is not reproduced here.
+
+Raw logs: serial-base.log, serial-pr.log

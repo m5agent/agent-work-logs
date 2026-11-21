@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified PR #447 PCF8563 keep timer running across begin()",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unified/issues/446",
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/447",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "11bfd4bbb2705a36e7149a117c94f39511cee1bb",
+    "head_commit": "4a0ebfd74ec5f2fd0087fd025e7d4c36b6261e6a",
+    "author": "ainyan03",
+    "state": "OPEN"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "No CoreInk or other PCF8563 board available locally or in the hardware test center; only the M5Dial virtual profile provides a PCF8563 model.",
+    "devices_considered": "matrix, corep4, sticks3, stopwatch (hardware test center); none is a PCF8563 board"
+  },
+  "firmware": {
+    "builder": "ESP-IDF v6.0.2 @ 7101770dc6db2667b3c477cc31365dd1acd6db4e",
+    "target": "esp32s3",
+    "flash_size": "8MB",
+    "psram": "none",
+    "m5unified_pr": "4a0ebfd74ec5f2fd0087fd025e7d4c36b6261e6a",
+    "m5unified_base": "11bfd4bbb2705a36e7149a117c94f39511cee1bb",
+    "m5gfx": "28d47949bdc84f30881623476f555398e2194313",
+    "artifacts": [
+      {
+        "variant": "pr",
+        "size": 503936,
+        "artifact_sha256": "e7d73710c2c4268ed37c5d6b5a0bea6dcefe8f5249d65d0d94e736badd6bc9a0",
+        "firmware_sha256": "bfb48593519ecdda805470e94555516f2ee46262cd4e54f15a12cf452637976e"
+      },
+      {
+        "variant": "base",
+        "size": 503936,
+        "artifact_sha256": "0633d3edb461fb65ba1cb53adce96010250d03b052a0f173072071188f91cab1",
+        "firmware_sha256": "59670dc528fe2e8f2b0d7477028382b8fdf89cb6f3ae33a058f246a17f5cd37b"
+      }
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; local ESP-IDF v6.0.2; Device Service dial profile (M5Dial, QEMU, PCF8563 register model)",
+    "task_id": "",
+    "session_id": "pr=4612018cde434b90a7271fc3f96b61b5; base=f4c0f1eef33046ea98d95d9c78134d92",
+    "verified_at_utc": "2026-11-21T10:11:46Z/10:12:16Z (session creation)"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "detail": "Both variants built from pinned local checkouts with IDF_COMPONENT_MANAGER=0; merged BIN 503936 bytes each."
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "detail": "M5Dial QEMU session booted the sketch and returned PCF8563 register readbacks over I2C (TC/C2/CNT)."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "PR keeps 0x82 across M5.begin() and a second Rtc.begin(); a stopped 0x00 is normalised to 0x03; 0x83 is preserved; disableIRQ() leaves 0x03. Base rewrites to 0x03/0x00 as expected."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "detail": "Timer countdown and TF/INT firing after begin() cannot be observed: the QEMU PCF8563 model has no countdown logic. Author's CoreInk hardware result remains the only evidence for that."
+    },
+    {
+      "layer": "hardware",
+      "status": "NOT RUN",
+      "detail": "No PCF8563 physical board available."
+    }
+  ],
+  "evidence": [
+    "evidence/pr-447.json",
+    "evidence/pr-447.diff",
+    "evidence/serial-pr.log",
+    "evidence/serial-base.log",
+    "evidence/register-readback.txt",
+    "evidence/build-and-run.txt",
+    "evidence/device-service-profile.txt",
+    "evidence/review-comment.txt"
+  ],
+  "notes": [
+    "PR description is English; the published comment is English.",
+    "Comment posted once; PR remains OPEN; no approval, merge, close or push.",
+    "The PR patch applies cleanly to base 11bfd4b (git apply --check).",
+    "Non-blocking review note: begin() now fails if the new 0x0E read fails, where it previously needed only writes; the driver already depends on reads for the RTC time registers."
+  ]
+}

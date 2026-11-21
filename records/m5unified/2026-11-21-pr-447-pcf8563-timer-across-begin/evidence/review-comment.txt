@@ -1,0 +1,24 @@
+Thanks for the fix. I independently checked the register behaviour on a virtual M5Dial (QEMU PCF8563 model), building the same sketch against this PR (`4a0ebfd`) and against current develop (`11bfd4b`), with ESP-IDF v6.0.2 / M5GFX `28d4794`.
+
+**Conclusion:** the change behaves as described, and I found no regression in the paths I could execute. With `cfg.disable_rtc_irq = false`, a timer armed before `M5.begin()` keeps `Timer_control` unchanged (`0x82` → `0x82`); develop rewrites it to `0x03`. A second `M5.Rtc.begin()` also keeps `0x82`, a stopped timer (`0x00`) is still normalised to `0x03`, and a running timer with `TD = 1/60 Hz` (`0x83`) is preserved bit-for-bit. `disableIRQ()` now leaves `0x03` (develop leaves `0x00`), which matches the value `setTimerIRQ(0)` already wrote.
+
+**Evidence level:** virtual-device validation (M5Dial / QEMU PCF8563 register model). Hardware: NOT RUN — no CoreInk or other PCF8563 board was available to me.
+
+The QEMU PCF8563 model implements only the time registers, not the countdown/TF logic, so I could not observe the timer actually firing after `M5.begin()`; that part still rests on your CoreInk measurement. Keeping the reset/`M5.begin()` table in the PR description as the hardware evidence is the right split.
+
+**What I ran** (pre-arm `0x0F = 2`, `0x0E = 0x82`, then `M5.begin()` with `disable_rtc_irq = false`):
+
+| phase | develop `11bfd4b` | PR `4a0ebfd` |
+|---|---|---|
+| after `M5.begin()` | `0x03` | `0x82` |
+| after a second `Rtc.begin()` | `0x03` | `0x82` |
+| after `setTimerIRQ(3000)` + `begin()` | `0x03` | `0x82` |
+| after `disableIRQ()` | `0x00` | `0x03` |
+| stopped `0x00` → `begin()` | `0x03` | `0x03` |
+| running `0x83` → `begin()` | `0x03` | `0x83` |
+
+One non-blocking note: `begin()` now also fails if the new `0x0E` read fails, where previously it only needed writes. The driver already reads the RTC time registers, so a usable part is unaffected; I would not hold the PR on this.
+
+**Not covered:** the other PCF8563 boards, a real power-off/RTC wake-up cycle, INT pin behaviour, and long-term drift/power. I did not modify, approve or merge anything.
+
+Record (fixed commit): __RECORD_PERMALINK__
