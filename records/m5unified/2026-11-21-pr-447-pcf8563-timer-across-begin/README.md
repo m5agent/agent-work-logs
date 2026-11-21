@@ -35,6 +35,7 @@ PR 的寄存器行为与描述一致，未发现所测路径的回归。`cfg.dis
 - `patches/0001-pcf8563-keep-timer-across-begin.patch`：PR diff，可对 base `11bfd4b` 通过
   `git apply --check`。
 - `code/pcf8563-pr447/`：同一 sketch 的 ESP-IDF 工程与 Device Service 执行脚本。
+- 已发布回复：<https://github.com/m5stack/M5Unified/pull/447#issuecomment-7061111910>（1 条，英语；PR 仍 OPEN，未 approve/close/push）
 
 ## 文件
 
