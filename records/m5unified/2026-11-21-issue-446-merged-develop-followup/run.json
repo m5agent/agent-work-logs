@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #446 follow-up: merged develop PCF8563 timer preservation",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unified/issues/446",
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/447",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "dae3b5d04e6ad5f91ac72a89da09d427a0e20543",
+    "reviewed_head_commit": "4a0ebfd74ec5f2fd0087fd025e7d4c36b6261e6a",
+    "author": "ainyan03",
+    "state": "OPEN"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "No CoreInk or other PCF8563 board is available locally or through the Device Service; only the dial (M5Dial) virtual profile provides a PCF8563 model."
+  },
+  "firmware": {
+    "builder": "ESP-IDF v6.0.2 @ 7101770dc6db2667b3c477cc31365dd1acd6db4e",
+    "target": "esp32s3",
+    "flash_size": "8MB",
+    "psram": "none",
+    "m5unified": "dae3b5d04e6ad5f91ac72a89da09d427a0e20543",
+    "m5gfx": "28d47949bdc84f30881623476f555398e2194313",
+    "artifact_size": 503424,
+    "artifact_sha256": "b57aa03c257ea0ddaa8d1d64c04be651b87ee1150dcd6612ecde9a39af913757",
+    "firmware_sha256": "af556600a1126b5fa71a9d41388d522fe4ba1b57388f8a4352e50370b5f0e12c"
+  },
+  "execution": {
+    "environment": "macOS arm64; local ESP-IDF v6.0.2; Device Service dial profile (M5Dial, QEMU, PCF8563 register model)",
+    "session_id": "29343da692c440b6899f128a2b401402",
+    "verified_at_utc": "2026-11-21T10:23Z"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "detail": "Merged develop (dae3b5d) built with pinned local M5Unified/M5GFX; merged BIN 503424 bytes."
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "detail": "M5Dial QEMU session booted the sketch and returned PCF8563 register readbacks (0x0E/0x01/0x0F) over I2C."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "detail": "disable_rtc_irq=false kept 0x82 across M5.begin(), clearIRQ() and a later Rtc.begin(); setTimerIRQ(0)/disableIRQ() left 0x03; the default path left 0x03."
+    },
+    {
+      "layer": "data_behavior",
+      "status": "NOT RUN",
+      "detail": "Timer countdown, TF latching and INT firing are not observable: the QEMU PCF8563 model has no countdown logic (0x0F does not decrement)."
+    },
+    {
+      "layer": "hardware",
+      "status": "NOT RUN",
+      "detail": "No PCF8563 physical board or CoreInk virtual profile available."
+    },
+    {
+      "layer": "hardware",
+      "status": "NOT RUN",
+      "detail": "Power-off to RTC wake repetition, including M5.Power.timerSleep(seconds), was not executed."
+    }
+  ],
+  "evidence": [
+    "evidence/merged-commit.txt",
+    "evidence/build-and-run.txt",
+    "evidence/device-service-profile.txt",
+    "evidence/register-readback.txt",
+    "evidence/serial-develop.log"
+  ],
+  "notes": [
+    "Merged commit dae3b5d has the same tree as the previously reviewed PR head 4a0ebfd (git diff --stat empty; compare API files=[]).",
+    "Issue #446 is Japanese; the reply is Japanese. One comment only.",
+    "Issue remains OPEN; no close, approval, push or upstream change.",
+    "QEMU model limit: only time registers 0x02-0x08; CNT (0x0F) is stored but does not count down."
+  ]
+}

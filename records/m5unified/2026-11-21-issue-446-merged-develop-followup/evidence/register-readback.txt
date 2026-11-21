@@ -1,0 +1,26 @@
+# PCF8563 register readback on merged develop (dae3b5d)
+
+Source: evidence/serial-develop.log (M5Dial / QEMU, PCF8563 register model).
+TC = Timer_control (0x0E), C2 = Control_status_2 (0x01), CNT = timer countdown (0x0F).
+TD 2 = 1 Hz (0b10), TD 3 = 1/60 Hz (0b11).
+
+| stage | TC | C2 | CNT | TE | TD | TIE |
+|---|---|---|---|---|---|---|
+| PRE_ARM | 0x82 | 0x01 | 0x02 | 1 | 2 | 1 |
+| POST_BEGIN_FALSE (cfg.disable_rtc_irq=false) | 0x82 | 0x01 | 0x02 | 1 | 2 | 1 |
+| AFTER_CLEAR_IRQ | 0x82 | 0x01 | 0x02 | 1 | 2 | 1 |
+| AFTER_REBEGIN_AFTER_CLEAR | 0x82 | 0x01 | 0x02 | 1 | 2 | 1 |
+| AFTER_SETTIMER0 (setTimerIRQ(0)) | 0x03 | 0x08 | 0x02 | 0 | 3 | 0 |
+| AFTER_ARM_LIB (setTimerIRQ(3000)) | 0x82 | 0x09 | 0x03 | 1 | 2 | 1 |
+| AFTER_DISABLE_IRQ | 0x03 | 0x00 | 0x03 | 0 | 3 | 0 |
+| BEFORE_DEFAULT_REBEGIN (raw 0x82) | 0x82 | 0x01 | 0x02 | 1 | 2 | 1 |
+| AFTER_DEFAULT_REBEGIN (Rtc.begin) | 0x82 | 0x01 | 0x02 | 1 | 2 | 1 |
+| AFTER_DEFAULT_PATH (Rtc.begin + disableIRQ) | 0x03 | 0x00 | 0x02 | 0 | 3 | 0 |
+
+Interpretation:
+- disable_rtc_irq=false: 0x0E is preserved bit-for-bit across M5.begin() and a later Rtc.begin().
+- clearIRQ() only clears TF/AF in 0x01; 0x0E and TIE are unchanged, so it does not stop the timer.
+- setTimerIRQ(0) and disableIRQ() both leave 0x0E=0x03 (TE=0, TD=1/60 Hz).
+- The default path (begin() then disableIRQ()) leaves 0x03.
+- CNT does not decrement in this model, and TF never latches: the QEMU PCF8563 model has no
+  countdown logic. These rows prove register preservation only, not that the timer fires.

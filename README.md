@@ -50,6 +50,7 @@
 | --- | --- | --- | --- | --- |
 | 2026-11-21 | `M5Unified` | #446 PCF8563 `begin()` 清掉 Timer_control 的 TE | PASS（virtual-device：M5Dial 上复现并验证一行修复；CoreInk 实机/虚拟 NOT RUN） | [查看](records/m5unified/2026-11-21-issue-446-pcf8563-timer-control/) |
 | 2026-11-21 | `M5Unified` | #447 PCF8563 `begin()` 保留跨重启的运行中定时器 | PARTIAL（virtual-device：寄存器 A/B 通过；定时器计数与实机 NOT RUN） | [查看](records/m5unified/2026-11-21-pr-447-pcf8563-timer-across-begin/) |
+| 2026-11-21 | `M5Unified` | #446 后续：合并后 develop 的 PCF8563 定时器保留复测 | PARTIAL（virtual-device：四个行为点寄存器复现；实机/定时器触发 NOT RUN） | [查看](records/m5unified/2026-11-21-issue-446-merged-develop-followup/) |
 | 2026-11-21 | ESP Emulator | Atom Lite「Wifi_Rig_CW(Server)」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（非模拟器启动缺陷，未开 issue；真机 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-21-atom-lite-wifi-rig-cw-attribution/) |
 | 2026-11-20 | Firmware Review Service | app-only 启动上下文、错误文案与设备映射修复 | `PARTIAL`（334 项测试；CardBuddy/Saitama 转 VERIFIED，StickS3 自定义分区待补） | [查看](records/firmware-review-service/2026-11-20-app-only-boot-contexts/) |
 | 2026-11-20 | ESP Emulator | Pelican Dash 高清与节奏复验 | PARTIAL（原生触控通过，实录速度对比经变速呈现） | [查看](records/esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-coastal-cut/) |

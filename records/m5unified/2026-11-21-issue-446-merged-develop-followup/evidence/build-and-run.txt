@@ -1,0 +1,48 @@
+# Build and run summary
+
+captured_at_utc: 2026-11-21T10:23Z
+
+## Sources
+
+| item | version |
+|---|---|
+| M5Unified | develop `dae3b5d04e6ad5f91ac72a89da09d427a0e20543` (merge of #447) |
+| reviewed PR head | `4a0ebfd74ec5f2fd0087fd025e7d4c36b6261e6a` (identical tree to the merge commit) |
+| M5GFX | `28d47949bdc84f30881623476f555398e2194313` (0.3.0) |
+| ESP-IDF | `7101770dc6db2667b3c477cc31365dd1acd6db4e` (v6.0.2) |
+| toolchain | xtensa-esp32s3-elf-g++ (GNU 15.2.0) |
+
+target: esp32s3, 8 MB flash, no PSRAM; `IDF_COMPONENT_MANAGER=0`; only the pinned local
+M5Unified and M5GFX checkouts were linked.
+
+## Build
+
+```bash
+idf.py set-target esp32s3
+idf.py build
+idf.py merge-bin
+```
+
+merged flash image at offset 0x0: 503424 bytes
+artifact SHA256: b57aa03c257ea0ddaa8d1d64c04be651b87ee1150dcd6612ecde9a39af913757
+Device Service normalized firmware SHA256: af556600a1126b5fa71a9d41388d522fe4ba1b57388f8a4352e50370b5f0e12c
+
+## Device run
+
+profile: dial (M5Dial / qemu-esp32s3 / PCF8563 register model)
+runtime: qemu, no PSRAM
+session_id: 29343da692c440b6899f128a2b401402
+completion marker: PCF8563_446_FOLLOW_DONE in serial-develop.log
+session snapshot state at capture: flashing (creation snapshot); the marker is the completion signal.
+
+serial raw: 4384 bytes, 88 CRLF line endings
+serial normalized to LF, trailing spaces stripped: 4295 bytes
+serial normalized SHA256: 741ac05276145a8a5981d4a7af106e4a97fa263e615151d0561bfff425da5bc0
+
+The session was released after collection (DELETE ?purge=0).
+
+## Not covered
+
+- hardware validation: NOT RUN (no CoreInk or other PCF8563 board).
+- timer countdown / TF / INT firing: NOT RUN (the QEMU model has no countdown logic).
+- power-off -> RTC wake repetition, including M5.Power.timerSleep(seconds): NOT RUN.
