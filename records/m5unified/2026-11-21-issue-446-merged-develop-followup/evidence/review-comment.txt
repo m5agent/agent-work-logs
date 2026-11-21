@@ -1,0 +1,21 @@
+# Published comment on m5stack/M5Unified#446
+
+- url: https://github.com/m5stack/M5Unified/issues/446#issuecomment-7061225804
+- created_at: 2026-11-21T10:25:35Z
+- author: m5agent
+- language: Japanese (thread language)
+- state after posting: issue OPEN, no close/approve/push
+
+```text
+ご報告ありがとうございます。マージ後の develop (`dae3b5d`) を仮想 M5Dial で確認しました。当方に CoreInk 実機はないため、CoreInk での確認はできていません。
+
+結論：記載の4点は、レジスタレベルですべてそのとおりでした。
+- `cfg.disable_rtc_irq = false`：`M5.begin()` 後も `Timer_control (0x0E)` は `0x82`（TE=1, TD=1 Hz）のまま。`clearIRQ()` 後も `0x82` で、TIE（`0x01` bit0）も保持。
+- `clearIRQ()`：`0x01` の TF/AF だけをクリアし、`0x0E` は変更なし。
+- `setTimerIRQ(0)` / `disableIRQ()`：どちらも `0x0E = 0x03`（TE=0, TD=1/60 Hz）。
+- 既定の `disable_rtc_irq = true`（`begin()` → `disableIRQ()`）：`0x0E = 0x03` で停止。
+
+証拠レベル：virtual-device validation（M5Dial / QEMU / PCF8563 レジスタモデル）。マージ commit `dae3b5d` はレビュー済みの PR head `4a0ebfd` と同一ツリー（差分 0 ファイル）で、そのビルドを仮想デバイスに投入して `0x0E` / `0x01` を読みました。記録と生ログ：https://github.com/m5agent/agent-work-logs/blob/ffdfb8df4d54777b4e46e8baf4d7c6aff69f9214/records/m5unified/2026-11-21-issue-446-merged-develop-followup/README.md
+
+未カバー：QEMU の PCF8563 モデルは時刻レジスタ（0x02–0x08）のみで、カウントダウン / TF / INT を実装していないため、「タイマーが実際に発火し続ける」ことと、`M5.Power.timerSleep(seconds)` を含む電源断→RTC 起床の反復は確認できていません。この2点は実機で確認された際に共有いただけると助かります。
+```

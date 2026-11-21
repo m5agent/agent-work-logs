@@ -34,6 +34,7 @@ TF / INT 逻辑，因此“定时器实际持续触发”和“电源断→RTC �
 - 寄存器读回（`0x0E` / `0x01` / `0x0F`）：`disable_rtc_irq=false` 时 `0x82` 跨 `begin()` 与
   `clearIRQ()` 保持；停止路径均落到 `0x03`。见 `evidence/register-readback.txt` 与
   `evidence/serial-develop.log`。
+- 对外回复：https://github.com/m5stack/M5Unified/issues/446#issuecomment-7061225804 （1 条，日文）。
 
 ## 文件
 

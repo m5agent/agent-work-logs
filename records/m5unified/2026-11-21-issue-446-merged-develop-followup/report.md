@@ -123,7 +123,7 @@ Device Service 归一化 firmware SHA256 `af556600a1126b5fa71a9d41388d522fe4ba1b
 
 ## 6. 对外回复（1 条，日文）
 
-见 `evidence/review-comment.txt`（发布后补入）。回复只包含：
+已发布（https://github.com/m5stack/M5Unified/issues/446#issuecomment-7061225804 ，2026-11-21T10:25:35Z），原文见 `evidence/review-comment.txt`。回复只包含：
 
 - 合并后 develop 的寄存器复测结论；
 - 证据等级、同树事实、记录 permalink；
