@@ -1,0 +1,24 @@
+== base/head ==
+base a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4
+head 40022b4a0f0c2d27347c9b520895475dd46b2c21
+
+== gh pr diff 17 ==
+diff --git a/modules/st7789v-1.0/panel-mipi-dbi-m.c b/modules/st7789v-1.0/panel-mipi-dbi-m.c
+index e2d7262..00ffbab 100644
+--- a/modules/st7789v-1.0/panel-mipi-dbi-m.c
++++ b/modules/st7789v-1.0/panel-mipi-dbi-m.c
+@@ -653,6 +653,11 @@ MODULE_DEVICE_TABLE(of, panel_mipi_dbi_spi_of_match);
+ static const struct spi_device_id panel_mipi_dbi_spi_id[] = {
+     { "panel-mipi-dbi-spi", 0 },
+     { "panel-mipi-dbi-m5stack", 0 },
++    /*
++     * The SPI core announces "spi:" + the first compatible without its
++     * vendor prefix: list the panels' first compatibles for autoloading.
++     */
++    { "st7789v_lcd", 0 },
+     { },
+ };
+ MODULE_DEVICE_TABLE(spi, panel_mipi_dbi_spi_id);
+
+== git apply --check at base ==
+PATCH_APPLIES_OK

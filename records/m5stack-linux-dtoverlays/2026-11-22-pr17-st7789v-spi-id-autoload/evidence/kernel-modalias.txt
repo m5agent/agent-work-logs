@@ -1,0 +1,160 @@
+Sources (public):
+  https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.1.y/drivers/of/base.c
+  https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.1.y/drivers/spi/spi.c
+  https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.6.y/drivers/of/base.c
+  https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.6.y/drivers/spi/spi.c
+  https://raw.githubusercontent.com/raspberrypi/linux/rpi-6.6.y/scripts/mod/file2alias.c
+
+== rpi-6.1.y drivers/of/base.c:1210-1235 (of_modalias_node: first compatible, vendor stripped) ==
+  1210	/**
+  1211	 * of_modalias_node - Lookup appropriate modalias for a device node
+  1212	 * @node:	pointer to a device tree node
+  1213	 * @modalias:	Pointer to buffer that modalias value will be copied into
+  1214	 * @len:	Length of modalias value
+  1215	 *
+  1216	 * Based on the value of the compatible property, this routine will attempt
+  1217	 * to choose an appropriate modalias value for a particular device tree node.
+  1218	 * It does this by stripping the manufacturer prefix (as delimited by a ',')
+  1219	 * from the first entry in the compatible list property.
+  1220	 *
+  1221	 * Return: This routine returns 0 on success, <0 on failure.
+  1222	 */
+  1223	int of_modalias_node(struct device_node *node, char *modalias, int len)
+  1224	{
+  1225		const char *compatible, *p;
+  1226		int cplen;
+  1227
+  1228		compatible = of_get_property(node, "compatible", &cplen);
+  1229		if (!compatible || strlen(compatible) > cplen)
+  1230			return -ENODEV;
+  1231		p = strchr(compatible, ',');
+  1232		strscpy(modalias, p ? p + 1 : compatible, len);
+  1233		return 0;
+  1234	}
+  1235	EXPORT_SYMBOL_GPL(of_modalias_node);
+
+== rpi-6.1.y drivers/spi/spi.c:2332-2342 (of_register_spi_device uses of_modalias_node) ==
+  2332			rc = -ENOMEM;
+  2333			goto err_out;
+  2334		}
+  2335
+  2336		/* Select device driver */
+  2337		rc = of_modalias_node(nc, spi->modalias,
+  2338					sizeof(spi->modalias));
+  2339		if (rc < 0) {
+  2340			dev_err(&ctlr->dev, "cannot find modalias for %pOF\n", nc);
+  2341			goto err_out;
+  2342		}
+
+== rpi-6.6.y drivers/of/base.c:1024-1053 (of_alias_from_compatible: same rule) ==
+  1024	/**
+  1025	 * of_alias_from_compatible - Lookup appropriate alias for a device node
+  1026	 *			      depending on compatible
+  1027	 * @node:	pointer to a device tree node
+  1028	 * @alias:	Pointer to buffer that alias value will be copied into
+  1029	 * @len:	Length of alias value
+  1030	 *
+  1031	 * Based on the value of the compatible property, this routine will attempt
+  1032	 * to choose an appropriate alias value for a particular device tree node.
+  1033	 * It does this by stripping the manufacturer prefix (as delimited by a ',')
+  1034	 * from the first entry in the compatible list property.
+  1035	 *
+  1036	 * Note: The matching on just the "product" side of the compatible is a relic
+  1037	 * from I2C and SPI. Please do not add any new user.
+  1038	 *
+  1039	 * Return: This routine returns 0 on success, <0 on failure.
+  1040	 */
+  1041	int of_alias_from_compatible(const struct device_node *node, char *alias, int len)
+  1042	{
+  1043		const char *compatible, *p;
+  1044		int cplen;
+  1045
+  1046		compatible = of_get_property(node, "compatible", &cplen);
+  1047		if (!compatible || strlen(compatible) > cplen)
+  1048			return -ENODEV;
+  1049		p = strchr(compatible, ',');
+  1050		strscpy(alias, p ? p + 1 : compatible, len);
+  1051		return 0;
+  1052	}
+  1053	EXPORT_SYMBOL_GPL(of_alias_from_compatible);
+
+== rpi-6.6.y drivers/spi/spi.c:57-68 (modalias sysfs = spi: + spi->modalias) ==
+    57	static ssize_t
+    58	modalias_show(struct device *dev, struct device_attribute *a, char *buf)
+    59	{
+    60		const struct spi_device	*spi = to_spi_device(dev);
+    61		int len;
+    62
+    63		len = acpi_device_modalias(dev, buf, PAGE_SIZE - 1);
+    64		if (len != -ENODEV)
+    65			return len;
+    66
+    67		return sysfs_emit(buf, "%s%s\n", SPI_MODULE_PREFIX, spi->modalias);
+    68	}
+
+== rpi-6.6.y drivers/spi/spi.c:342-354 (spi_match_id: exact name compare) ==
+   342	/*
+   343	 * modalias support makes "modprobe $MODALIAS" new-style hotplug work,
+   344	 * and the sysfs version makes coldplug work too.
+   345	 */
+   346	static const struct spi_device_id *spi_match_id(const struct spi_device_id *id, const char *name)
+   347	{
+   348		while (id->name[0]) {
+   349			if (!strcmp(name, id->name))
+   350				return id;
+   351			id++;
+   352		}
+   353		return NULL;
+   354	}
+
+== rpi-6.6.y drivers/spi/spi.c:376-409 (OF match first, then id_table; uevent adds spi: modalias only) ==
+   376	static int spi_match_device(struct device *dev, struct device_driver *drv)
+   377	{
+   378		const struct spi_device	*spi = to_spi_device(dev);
+   379		const struct spi_driver	*sdrv = to_spi_driver(drv);
+   380
+   381		/* Check override first, and if set, only use the named driver */
+   382		if (spi->driver_override)
+   383			return strcmp(spi->driver_override, drv->name) == 0;
+   384
+   385		/* Attempt an OF style match */
+   386		if (of_driver_match_device(dev, drv))
+   387			return 1;
+   388
+   389		/* Then try ACPI */
+   390		if (acpi_driver_match_device(dev, drv))
+   391			return 1;
+   392
+   393		if (sdrv->id_table)
+   394			return !!spi_match_id(sdrv->id_table, spi->modalias);
+   395
+   396		return strcmp(spi->modalias, drv->name) == 0;
+   397	}
+   398
+   399	static int spi_uevent(const struct device *dev, struct kobj_uevent_env *env)
+   400	{
+   401		const struct spi_device		*spi = to_spi_device(dev);
+   402		int rc;
+   403
+   404		rc = acpi_device_uevent_modalias(dev, env);
+   405		if (rc != -ENODEV)
+   406			return rc;
+   407
+   408		return add_uevent_var(env, "MODALIAS=%s%s", SPI_MODULE_PREFIX, spi->modalias);
+   409	}
+
+== rpi-6.6.y drivers/spi/spi.c:2355-2357 (device modalias from first compatible) ==
+  2355		/* Select device driver */
+  2356		rc = of_alias_from_compatible(nc, spi->modalias,
+  2357					      sizeof(spi->modalias));
+
+== rpi-6.6.y scripts/mod/file2alias.c:960-968 (MODULE_DEVICE_TABLE(spi) -> alias spi:<name>) ==
+   960	/* Looks like: spi:S */
+   961	static int do_spi_entry(const char *filename, void *symval,
+   962				char *alias)
+   963	{
+   964		DEF_FIELD_ADDR(symval, spi_device_id, name);
+   965		sprintf(alias, SPI_MODULE_PREFIX "%s", *name);
+   966
+   967		return 1;
+   968	}

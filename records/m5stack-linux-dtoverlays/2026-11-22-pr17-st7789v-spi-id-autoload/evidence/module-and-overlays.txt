@@ -1,0 +1,87 @@
+== PR head modules/st7789v-1.0/panel-mipi-dbi-m.c:216-235 (firmware name from compatible[0]) ==
+   216	static struct panel_mipi_dbi_commands *panel_mipi_dbi_commands_from_fw(struct device *dev)
+   217	{
+   218	    struct panel_mipi_dbi_commands *commands;
+   219	    const struct firmware *fw;
+   220	    const char *compatible;
+   221	    char fw_name[40];
+   222	    int ret;
+   223
+   224	    ret = of_property_read_string_index(dev->of_node, "compatible", 0, &compatible);
+   225	    if (ret)
+   226	        return ERR_PTR(ret);
+   227
+   228	    snprintf(fw_name, sizeof(fw_name), "%s.bin", compatible);
+   229	    ret = request_firmware(&fw, fw_name, dev);
+   230	    if (ret) {
+   231	        dev_err(dev, "No config file found for compatible '%s' (error=%d)\n",
+   232	            compatible, ret);
+   233
+   234	        return ERR_PTR(ret);
+   235	    }
+
+== PR head modules/st7789v-1.0/panel-mipi-dbi-m.c:646-675 (of table, SPI id table, driver) ==
+   646	static const struct of_device_id panel_mipi_dbi_spi_of_match[] = {
+   647	    { .compatible = "panel-mipi-dbi-spi" },
+   648	    { .compatible = "panel-mipi-dbi-m5stack" },
+   649	    {},
+   650	};
+   651	MODULE_DEVICE_TABLE(of, panel_mipi_dbi_spi_of_match);
+   652
+   653	static const struct spi_device_id panel_mipi_dbi_spi_id[] = {
+   654	    { "panel-mipi-dbi-spi", 0 },
+   655	    { "panel-mipi-dbi-m5stack", 0 },
+   656	    /*
+   657	     * The SPI core announces "spi:" + the first compatible without its
+   658	     * vendor prefix: list the panels' first compatibles for autoloading.
+   659	     */
+   660	    { "st7789v_lcd", 0 },
+   661	    { },
+   662	};
+   663	MODULE_DEVICE_TABLE(spi, panel_mipi_dbi_spi_id);
+   664
+   665	static struct spi_driver panel_mipi_dbi_spi_driver = {
+   666	    .driver = {
+   667	        .name = "panel-mipi-dbi-spi",
+   668	        .of_match_table = panel_mipi_dbi_spi_of_match,
+   669	        .pm = &panel_mipi_dbi_pm_ops,
+   670	    },
+   671	    .id_table = panel_mipi_dbi_spi_id,
+   672	    .probe = panel_mipi_dbi_spi_probe,
+   673	    .remove = panel_mipi_dbi_spi_remove,
+   674	    .shutdown = panel_mipi_dbi_spi_shutdown,
+   675	};
+
+== v3 overlay:369-372 ==
+   369	            display: st7789v@0 {
+   370	                compatible = "cardputerzero,st7789v_lcd", "panel-mipi-dbi-m5stack";
+   371	                reg = <0>;
+   372	                spi-max-frequency = <60000000>;
+
+== v5 overlay:448-451 ==
+   448	            display: st7789v@0 {
+   449	                compatible = "cardputerzero,st7789v_lcd", "panel-mipi-dbi-m5stack";
+   450	                reg = <0>;
+   451	                spi-max-frequency = <60000000>;
+
+== users of panel-mipi-dbi-m5stack in the repo ==
+modules/CardputerZero/cardputerzero-v3-overlay.dts
+modules/CardputerZero/cardputerzero-v5-overlay.dts
+modules/st7789v-1.0/panel-mipi-dbi-m.c
+
+== modules/st7789v-1.0/99-cardputer-zero-lcd.rules (symlinks only, no modprobe) ==
+# DRM card -> /dev/dri/cardputer-zero-internal
+SUBSYSTEM=="drm", KERNEL=="card*", \
+  ENV{ID_PATH}=="platform-3f204000.spi-cs-0", \
+  SYMLINK+="dri/cardputer-zero-internal", \
+  TAG+="seat", TAG+="master-of-seat", \
+  ENV{ID_SEAT}="seat-cardputer-zero"
+
+# drm_fbdev_generic emulated fb device -> /dev/fb_lcd
+SUBSYSTEM=="graphics", KERNEL=="fb*", \
+  ATTRS{of_node/compatible}=="*st7789v*", \
+  SYMLINK+="fb_lcd"
+
+== firmware blob ==
+-rw-r--r--@ 1 m5agent  staff  93 Nov 23 06:37 modules/st7789v-1.0/cardputerzero,st7789v_lcd.bin
+1fa1dab483f512fe7d5190e07a5ad53e88ed2bcc70cbed05e861adf4be6391b3  modules/st7789v-1.0/cardputerzero,st7789v_lcd.bin

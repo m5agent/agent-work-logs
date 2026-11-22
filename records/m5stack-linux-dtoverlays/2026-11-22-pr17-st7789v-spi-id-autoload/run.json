@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "kind": "pr_review",
+  "overall_status": "REVIEW",
+  "title": "m5stack/m5stack-linux-dtoverlays #17: SPI id entry st7789v_lcd correctly restores panel-mipi-dbi autoload on Cardputer Zero",
+  "source": {
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/17",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "head_commit": "40022b4a0f0c2d27347c9b520895475dd46b2c21",
+    "author": "khalifa-mnt",
+    "changed_files": 1,
+    "additions": 5,
+    "deletions": 0,
+    "prior_comments": 0,
+    "prior_reviews": 0,
+    "state": "OPEN",
+    "mergeable_state": "clean"
+  },
+  "hardware": {},
+  "firmware": {
+    "file": "modules/st7789v-1.0/cardputerzero,st7789v_lcd.bin",
+    "sha256": "1fa1dab483f512fe7d5190e07a5ad53e88ed2bcc70cbed05e861adf4be6391b3"
+  },
+  "execution": {
+    "environment": "macOS arm64; no Cardputer Zero hardware; local Device Service cardputer-zero profile supported=false creatable=false backend_ready=false (Linux ARM64 backend, __missing_qemu__/__missing_rom__); no Linux ARM64 kernel headers or cross toolchain for a module rebuild",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "patch_scope",
+      "status": "PASS",
+      "evidence": "1 file, +5/-0: comment plus { \"st7789v_lcd\", 0 } in panel_mipi_dbi_spi_id[]; evidence/pr-diff.txt"
+    },
+    {
+      "name": "patch_applies_to_base",
+      "status": "PASS",
+      "evidence": "git apply --check at a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4 -> PATCH_APPLIES_OK; evidence/pr-diff.txt"
+    },
+    {
+      "name": "device_modalias_rule",
+      "status": "PASS",
+      "evidence": "rpi-6.1.y of_modalias_node() (drivers/of/base.c:1223-1234) and rpi-6.6.y of_alias_from_compatible() (drivers/of/base.c:1041-1051) both use the first compatible and strip the vendor prefix; evidence/kernel-modalias.txt"
+    },
+    {
+      "name": "spi_uevent_modalias",
+      "status": "PASS",
+      "evidence": "modalias_show() emits spi: + spi->modalias (drivers/spi/spi.c:57-68); spi_uevent() emits MODALIAS=spi:... (drivers/spi/spi.c:399-408); no of: modalias for SPI; evidence/kernel-modalias.txt"
+    },
+    {
+      "name": "module_alias_generation",
+      "status": "PASS",
+      "evidence": "scripts/mod/file2alias.c:960-968 do_spi_entry() emits spi:<name> for MODULE_DEVICE_TABLE(spi, ...); evidence/kernel-modalias.txt"
+    },
+    {
+      "name": "alias_name_matches_device",
+      "status": "PASS",
+      "evidence": "cardputerzero,st7789v_lcd -> st7789v_lcd; author sysfs modalias spi:st7789v_lcd; id { \"st7789v_lcd\" } is an exact strcmp match (drivers/spi/spi.c:346-354)"
+    },
+    {
+      "name": "first_compatible_preserved",
+      "status": "PASS",
+      "evidence": "panel_mipi_dbi_commands_from_fw() still reads compatible[0] and requests cardputerzero,st7789v_lcd.bin (panel-mipi-dbi-m.c:224-229); patch does not touch it"
+    },
+    {
+      "name": "overlay_coverage",
+      "status": "PASS",
+      "evidence": "v3 overlay:370 and v5 overlay:449 share compatible cardputerzero,st7789v_lcd,panel-mipi-dbi-m5stack; these are the only users of panel-mipi-dbi-m5stack in the repo; evidence/module-and-overlays.txt"
+    },
+    {
+      "name": "udev_rule_does_not_modprobe",
+      "status": "PASS",
+      "evidence": "99-cardputer-zero-lcd.rules only creates the DRM card and /dev/fb_lcd symlinks; no RUN+=modprobe; evidence/module-and-overlays.txt"
+    },
+    {
+      "name": "firmware_blob_present",
+      "status": "PASS",
+      "evidence": "modules/st7789v-1.0/cardputerzero,st7789v_lcd.bin SHA256 1fa1dab483f512fe7d5190e07a5ad53e88ed2bcc70cbed05e861adf4be6391b3"
+    },
+    {
+      "name": "author_hardware_report",
+      "status": "REVIEW",
+      "evidence": "PR body: tested on a Cardputer Zero; module loads at boot and LCD console appears with this change and no modprobe alias/i2cprobe. Self-reported by the author, not independently reproduced."
+    },
+    {
+      "name": "module_rebuild",
+      "status": "NOT RUN",
+      "evidence": "no Linux ARM64 kernel headers or cross toolchain on this host; change is table-only and patch applies cleanly"
+    },
+    {
+      "name": "runtime_autoload_on_cardputer_zero",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer Zero hardware; local cardputer-zero virtual profile is not creatable"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "hardware bench has 5 ESP32/ESP32-P4-class nodes and no Cardputer Zero / Linux ARM64 / Broadcom target; evidence/hardware-bench-summary.txt"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "cardputer-zero profile supported=false creatable=false backend_ready=false, missing __missing_qemu__/__missing_rom__, reason 'CardputerZero uses a separate Linux backend'; evidence/local-profile-summary.txt"
+    },
+    {
+      "name": "ci_build",
+      "status": "NOT RUN",
+      "evidence": "the only PR check is the WeCom digest forwarder; the repository has no workflow that builds the kernel module; evidence/pr-metadata.txt"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/pr-metadata.txt",
+      "description": "PR state, author, scope, base/head, comments/reviews, PR checks"
+    },
+    {
+      "path": "evidence/pr-diff.txt",
+      "description": "PR diff, base/head, git apply --check result"
+    },
+    {
+      "path": "evidence/kernel-modalias.txt",
+      "description": "RPi 6.1.y/6.6.y of_modalias_node/of_alias_from_compatible, spi_uevent, spi_match_id, do_spi_entry excerpts"
+    },
+    {
+      "path": "evidence/module-and-overlays.txt",
+      "description": "PR head driver, v3/v5 overlays, udev rules, firmware blob hash"
+    },
+    {
+      "path": "evidence/local-profile-summary.txt",
+      "description": "redacted local Device Service cardputer-zero profile fields"
+    },
+    {
+      "path": "evidence/hardware-bench-summary.txt",
+      "description": "redacted hardware bench summary: no Cardputer Zero target"
+    }
+  ],
+  "notes": [
+    "Evidence class is code-level verification. The boot-time autoload and console result is the author's hardware report, not re-run here.",
+    "Virtual-device validation was not possible: the cardputer-zero profile is not creatable and its Linux ARM64 backend has no QEMU/ROM.",
+    "No upstream branch was pushed, no PR was closed, and no other repository was modified; one English review comment was posted."
+  ]
+}
