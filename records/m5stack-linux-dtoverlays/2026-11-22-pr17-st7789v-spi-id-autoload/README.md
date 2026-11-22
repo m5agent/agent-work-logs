@@ -11,6 +11,8 @@
 - 环境：macOS arm64；本机无 Cardputer Zero 硬件；本地 Device Service 的
   `cardputer-zero` profile 为 Linux ARM64 后端且不可创建；无 Linux 内核头文件或
   交叉工具链可重建模块
+- 已发布回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/17#issuecomment-7087026741>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游、未改他人代码）
 - 证据等级：**code-level verification**（Raspberry Pi 6.1.y / 6.6.y 内核源码 +
   PR 源码 + 提交者自述的硬件结果）
 
