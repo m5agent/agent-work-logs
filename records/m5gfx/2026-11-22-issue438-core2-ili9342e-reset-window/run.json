@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #438: Core2 (AXP192) + ILI9342E init sent inside the 120 ms reload window (code-level verification)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/438",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "head_commit": ""
+  },
+  "hardware": {
+    "used": false,
+    "detail": "No Core2 / ILI9342E and no AXP192 substitute board in the hardware test center; 5 nodes, 4 online, all profile=unknown ('matrix')."
+  },
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 read-only source inspection; M5GFX v0.3.0 at 28d4794; local Device Service exposes 36 profiles including core2 (machine m5core2, display ILI9342C/ILI9342E); no Arduino/ESP-IDF toolchain locally; docker run fails with 'write /var/lib/desktop-containerd/daemon/io.containerd.metadata.v1.bolt/meta.db: read-only file system'",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "issue-state",
+      "status": "PASS",
+      "detail": "issue OPEN, 0 comments before handling, author svengrun, English title/body; no m5agent reply exists"
+    },
+    {
+      "id": "source-version",
+      "status": "PASS",
+      "detail": "m5stack/M5GFX master is 28d47949bdc84f30881623476f555398e2194313 (v0.3.0), the version the author read"
+    },
+    {
+      "id": "reset-timing-params",
+      "status": "PASS",
+      "detail": "src/board_detect/m5/esp32_d0wdq6.inl:60 (and :75 for Tough) use i2c_reset(1, 10); src/board_detect/prepare.inl:510 applies io::delay_ms(reset.post_ms) after release, i.e. 10 ms"
+    },
+    {
+      "id": "poll-is-a-ceiling",
+      "status": "PASS",
+      "detail": "src/board_detect/m5/board_registry.inl:170-183 returns as soon as probe_panel_variant reports a variant; the 1 ms loop only runs while the variant is unknown, so 120 is a maximum wait. E detection keys checked at :150 (DDh 01 / CBh 1c)"
+    },
+    {
+      "id": "single-reset-before-init",
+      "status": "PASS",
+      "detail": "src/M5GFX.cpp:997-1002 calls LGFX_Device::init_impl(false, use_clear) with the comment that detection already reset and it must not pulse again; LGFXBase.hpp:1433 begin() -> init_impl(true,true), so only the detection reset precedes init"
+    },
+    {
+      "id": "init-list-order",
+      "status": "PASS",
+      "detail": "src/lgfx/v1/panel/Panel_ILI9342.hpp:86-101 (E list) writes EXTC/power/gamma then IDMOFF, DISPON, and only then SLPOUT with CMD_INIT_DELAY 120; Panel_Device.inl:196-218 delays after writing the command, so the 120 ms cannot protect the preceding writes"
+    },
+    {
+      "id": "pr300-claim",
+      "status": "PASS",
+      "detail": "PR #300 states polling until the keys answer '(at most 120 ms)' keeps init out of the reload window; for the E the keys answer at ~6 ms while the reload continues to 120 ms, so that statement does not hold"
+    },
+    {
+      "id": "hardware-reproduction",
+      "status": "NOT RUN",
+      "detail": "no Core2/ILI9342E or AXP192 substitute board available; author measurements are cited, not reproduced"
+    },
+    {
+      "id": "virtual-device-reproduction",
+      "status": "NOT RUN",
+      "detail": "core2 profile exists, but the emulator ILI9342 sink (hw/m5stopwatch/m5_spi_panel.c) models Sleep In/Out only as a flag set by 0x10/0x11 with no reload interval and no reset-to-Sleep-In transition, so the alternating blank is not representable; additionally no local Arduino/ESP-IDF build chain and the container runtime cannot create containers"
+    },
+    {
+      "id": "fix-proposal",
+      "status": "REVIEW",
+      "detail": "hold init until 120 ms after the detection reset release when the pre-reset probe identified a displaying panel (e.g. io::delay_ms(120 - post_ms) in observe_core_panel); not implemented, not compiled, not validated"
+    }
+  ]
+}
