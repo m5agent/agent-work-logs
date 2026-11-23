@@ -79,4 +79,5 @@
 
 ## 已发布回复
 
-- 待填（发布后补 URL；issue 保持 OPEN，未 close、未 push、未改他人仓库）
+- <https://github.com/m5stack/M5GFX/issues/431#issuecomment-7093871078>
+  （1 条，日文；issue 保持 OPEN，未 close、未 push、未改他人仓库）

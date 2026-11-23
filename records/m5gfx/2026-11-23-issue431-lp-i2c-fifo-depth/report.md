@@ -175,5 +175,5 @@ bash code/run.sh
 
 ## 8. 发布
 
-- 唯一一条日文回复：待填
+- 唯一一条日文回复：<https://github.com/m5stack/M5GFX/issues/431#issuecomment-7093871078>
 - issue 保持 OPEN；未 close、未 push 代码、未改他人仓库。
