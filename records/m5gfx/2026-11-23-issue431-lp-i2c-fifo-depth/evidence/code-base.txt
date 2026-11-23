@@ -1,0 +1,31 @@
+# 452c15b common.inl isLpPort/getFifoLen
+  1452	    static inline bool isLpPort(int i2c_port)
+  1453	    {
+  1454	#if LGFX_LP_I2C_NUM > 0
+  1455	      return i2c_port >= LGFX_LP_I2C_PORT;
+  1456	#else
+  1457	      (void)i2c_port;
+  1458	      return false;
+  1459	#endif
+  1460	    }
+  1461	
+  1462	    /// Hardware FIFO depth of this port. The low power I2C has a shallower FIFO than the
+  1463	    /// normal one, so this cannot be a single constant for the whole chip.
+  1464	    static inline uint32_t getFifoLen(int i2c_port)
+  1465	    {
+  1466	#if LGFX_LP_I2C_NUM > 0 && defined ( SOC_LP_I2C_FIFO_LEN )
+  1467	      if (isLpPort(i2c_port)) { return SOC_LP_I2C_FIFO_LEN; }
+  1468	#else
+  1469	      (void)i2c_port;
+  1470	#endif
+  1471	#if defined ( SOC_I2C_FIFO_LEN )
+  1472	      return SOC_I2C_FIFO_LEN;
+  1473	#else
+  1474	      return 32;
+  1475	#endif
+  1476	    }
+  1477	
+  1478	    /// Clock feeding the SCL divider of this port [Hz].
+  1479	    /// This is not a property of the chip alone: the low power I2C runs from its own
+  1480	    /// clock, and on the older chips the normal one follows the CPU frequency.
+  1481	    static inline uint32_t getSourceClock(int i2c_port)

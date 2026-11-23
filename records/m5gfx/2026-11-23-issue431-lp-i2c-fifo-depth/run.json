@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #431: LP I2C FIFO depth read as 32 on ESP-IDF 6.x (code-level verification)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/431",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/432",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "452c15bc982af0b54acf567a79e7eb6066ace9e5",
+    "head_commit": "43a87193f898f998edf79c5fb99b166d11ee1eaf",
+    "fix_commit": "e88846e781091ff489de3afb5770f7333af1d864",
+    "guard_commit": "1d4f3f9"
+  },
+  "hardware": {
+    "used": false,
+    "detail": "No ESP32-C5 / C6 / P4 board available. The NFC-V and byte-boundary measurements quoted in the issue are the reporter's own data in PR #432; not re-run here."
+  },
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 read-only source inspection; ESP-IDF v6.1 local source tree for header facts; M5GFX develop 43a8719 and reported commit 452c15b; host compile of the extracted isLpPort/getFifoLen with Apple clang 21 at -Wall -Wextra -Werror; no idf.py build; local Device Service exposes 36 profiles with no ESP32-C5 and tab5 disabled; esp-emulator has no LP I2C controller model",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "issue-state",
+      "status": "PASS",
+      "detail": "Issue OPEN, 0 comments before handling, author GOB52, Japanese title/body, no m5agent reply exists"
+    },
+    {
+      "id": "reported-code",
+      "status": "PASS",
+      "detail": "452c15b common.inl:1464-1476 checks only SOC_LP_I2C_FIFO_LEN / SOC_I2C_FIFO_LEN and falls back to return 32; no I2C_LL_* branch"
+    },
+    {
+      "id": "develop-fixed",
+      "status": "PASS",
+      "detail": "origin/develop 43a8719 common.inl:1465-1484 has I2C_LL_LP_FIFO_LEN and I2C_LL_FIFO_LEN branches plus the #433 #error guard at :1471-1473"
+    },
+    {
+      "id": "macro-removal",
+      "status": "PASS",
+      "detail": "ESP-IDF v6.1 tree: zero SOC_I2C_FIFO_LEN / SOC_LP_I2C_FIFO_LEN hits under components/soc and components/esp_hal_i2c; I2C_LL_* present per chip"
+    },
+    {
+      "id": "depth-values-idf61",
+      "status": "PASS",
+      "detail": "C5 32/16 (soc_caps I2C_NUM 2, HP 1, LP 1); C6 32/16 (2/1/1); P4 32/16 (3/2/1); C2 16 (1/1/0); ESP32 32"
+    },
+    {
+      "id": "host-harness",
+      "status": "PASS",
+      "detail": "Extracted functions with real IDF 6.1 macro sets: base returns 32 for C5/C6/P4 LP and C2, head returns 16 for C5/C6 LP, P4 port2, and C2 HP; 5.5.4 macro sets identical in both"
+    },
+    {
+      "id": "chunk-boundary",
+      "status": "PASS",
+      "detail": "writeBytes first chunk ((length-1) % limit) + 1 (common.inl:2763): limit=32 gives a single 17/18/24-byte chunk; limit=16 keeps every chunk <= 16 and preserves total length"
+    },
+    {
+      "id": "unknown-macro-guard",
+      "status": "PASS",
+      "detail": "Synthetic LP port with neither depth macro: base compiles and returns 32, head stops with the #error message"
+    },
+    {
+      "id": "release-status",
+      "status": "PASS",
+      "detail": "git tag --contains e88846e is empty; latest release 0.3.0 (28d4794, 2026-11-06) contains no I2C_LL_LP_FIFO_LEN, so 0.3.0 + ESP-IDF 6.x still reproduces"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "No C5/C6/P4 hardware and no substitute board exercising the LP I2C FIFO"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "No ESP32-C5 profile among 36 Device Service profiles; C6 profiles exist but esp-emulator has no LP I2C controller model (0 lp_i2c hits, classic model only 32-byte FIFO); tab5 disabled and its I2C is static register probes, so a >16-byte silent corruption cannot be observed"
+    },
+    {
+      "id": "idf-build",
+      "status": "NOT RUN",
+      "detail": "Headers read from the local v6.1 tree; no idf.py build for C5/C6/P4 and upstream CI results not re-run"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# esp-emulator LP I2C model search (UTC 2026-11-23T06:56:52Z)
+## grep -rl "lp_i2c|LP_I2C" patches platform devices:
+(no output = no LP I2C model)
+## classic I2C FIFO length in QEMU patches:
+patches/qemu-multi-board-uiflow2/0001-qemu-m5stack-multiboard-uiflow2.patch:185:     fifo8_create(&s->rx_fifo, ESP32_I2C_FIFO_LENGTH);
+patches/qemu-unit-runtime/0001-reconstructed-xtensa-source.patch:742:     fifo8_create(&s->rx_fifo, ESP32_I2C_FIFO_LENGTH);
+patches/qemu-unit-runtime/0001-reconstructed-xtensa-source.patch:1897:+#define I2C_FIFO_LEN 32
+patches/qemu-unit-runtime/0001-reconstructed-xtensa-source.patch:1941:+    uint8_t txfifo[I2C_FIFO_LEN];
+patches/qemu-unit-runtime/0001-reconstructed-xtensa-source.patch:1943:+    uint8_t rxfifo[I2C_FIFO_LEN];
+## C6 device dir mentions of i2c:
+(no output = none)
+## tab5 I2C note:
+38:- ST7123 touch is currently a firmware GDB mailbox, not an I2C chip model
+52:- 触摸、RS-485、C6 ESP-Hosted 和静态 I2C 寄存器探测可用；

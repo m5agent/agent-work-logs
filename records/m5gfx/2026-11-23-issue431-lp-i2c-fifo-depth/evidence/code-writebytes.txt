@@ -1,0 +1,38 @@
+  2755	      if (i2c_context[i2c_port].state.has_error()) { return cpp::fail(i2c_context[i2c_port].state.error()); }
+  2756	      if (i2c_context[i2c_port].state != i2c_context_t::state_write) { return cpp::fail(error_t::mode_mismatch); }
+  2757	      cpp::result<void, error_t> res {};
+  2758	      if (!length) return res;
+  2759	
+  2760	      const uint32_t txfifo_limit = getFifoLen(i2c_port);
+  2761	      auto dev = getDev(i2c_port);
+  2762	      auto fifo_addr = getFifoAddr(i2c_port);
+  2763	      size_t len = ((length - 1) % txfifo_limit) + 1;
+  2764	      do
+  2765	      {
+  2766	        res = i2c_wait(i2c_port);
+  2767	        if (res.has_error())
+  2768	        {
+  2769	          ESP_LOGV("LGFX", "i2c write error : ack wait");
+  2770	          break;
+  2771	        }
+  2772	        i2c_set_cmd(dev, 0, i2c_cmd_write, len, false, i2c_context[i2c_port].check_ack);
+  2773	        i2c_set_cmd(dev, 1, i2c_cmd_end, 0);
+  2774	        size_t idx = 0;
+  2775	        do
+  2776	        {
+  2777	          *fifo_addr = data[idx];
+  2778	        } while (++idx != len);
+  2779	        updateDev(dev);
+  2780	        dev->int_clr.val = 0x1FFFF;
+  2781	        dev->ctr.trans_start = 1;
+  2782	        i2c_context[i2c_port].wait_ack_stage = 2;
+  2783	        data += len;
+  2784	        length -= len;
+  2785	        len = txfifo_limit;
+  2786	      } while (length);
+  2787	      return res;
+  2788	    }
+  2789	
+  2790	    cpp::result<void, error_t> readBytes(int i2c_port, uint8_t *readdata, size_t length, bool last_nack)
+  2791	    {
+  2792	      if (isSoftPort(i2c_port)) { return soft_i2c_readBytes(i2c_port, readdata, length, last_nack); }

@@ -1,0 +1,31 @@
+# origin/develop 43a8719 common.inl:1465-1487
+  1458	      return false;
+  1459	#endif
+  1460	    }
+  1461	
+  1462	    /// Hardware FIFO depth of this port. The low power I2C has a shallower FIFO than the
+  1463	    /// normal one, so this cannot be a single constant for the whole chip.
+  1464	    /// ESP-IDF 6.0 moved the depths from soc_caps.h (SOC_*) to hal/i2c_ll.h (I2C_LL_*).
+  1465	    static inline uint32_t getFifoLen(int i2c_port)
+  1466	    {
+  1467	#if LGFX_LP_I2C_NUM > 0 && defined ( SOC_LP_I2C_FIFO_LEN )
+  1468	      if (isLpPort(i2c_port)) { return SOC_LP_I2C_FIFO_LEN; }
+  1469	#elif LGFX_LP_I2C_NUM > 0 && defined ( I2C_LL_LP_FIFO_LEN )
+  1470	      if (isLpPort(i2c_port)) { return I2C_LL_LP_FIFO_LEN; }
+  1471	#elif LGFX_LP_I2C_NUM > 0
+  1472	      // Falling back to the HP depth would overrun the shallower LP FIFO without any error.
+  1473	 #error "LP I2C FIFO depth is unknown: neither SOC_LP_I2C_FIFO_LEN nor I2C_LL_LP_FIFO_LEN is defined"
+  1474	#else
+  1475	      (void)i2c_port;
+  1476	#endif
+  1477	#if defined ( SOC_I2C_FIFO_LEN )
+  1478	      return SOC_I2C_FIFO_LEN;
+  1479	#elif defined ( I2C_LL_FIFO_LEN )
+  1480	      return I2C_LL_FIFO_LEN;
+  1481	#else
+  1482	      return 32;
+  1483	#endif
+  1484	    }
+  1485	
+  1486	    /// Clock feeding the SCL divider of this port [Hz].
+  1487	    /// This is not a property of the chip alone: the low power I2C runs from its own
