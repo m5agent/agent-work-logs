@@ -19,3 +19,7 @@ StopWatch Demo Plus 的原版冷启动需要从设置打开 Wi‑Fi。六个真�
 - [StopWatch 原版已配网复审请求参数](code/stopwatch-preconfigured-validation.json)
 
 未运行物理硬件。常驻服务部署和 Burner 提交均未执行。
+
+## 后续
+
+- [常驻切换与原版 dry-run](followups/2026-11-23-resident-sta-cutover/)

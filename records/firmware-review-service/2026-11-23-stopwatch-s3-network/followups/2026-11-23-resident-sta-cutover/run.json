@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "StopWatch STA 常驻切换",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "cc25a8a8ac083e00608d591281289f1452cc75ac",
+    "device_main": "a4343d86d21a797ecf12384c9d200a9bc7ef2e32",
+    "reviewer_main": "a938d9651af5dc9c94868bcede48f6a64712bcb9"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "linux_qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff"
+  },
+  "firmware": {
+    "stopwatch_original_sha256": "606aac7831cb4ca2bd45fdac40f0755fc918d1c7772caeaafa7965ef72c64bac",
+    "normalized_flash_sha256": "f735f999d2fe6217f129fcc974edd08b0c5f9c8dca960dbadaa7b8669cf4474b"
+  },
+  "execution": {
+    "environment": "macOS resident Device Service and Reviewer, Linux managed snapshot worker",
+    "submission_requested": 0,
+    "active_leases_after_test": 0
+  },
+  "checks": [
+    {
+      "name": "device and reviewer cutover",
+      "status": "PASS",
+      "detail": "Live capability, API, source stage and history readback"
+    },
+    {
+      "name": "managed historical session readback",
+      "status": "PASS",
+      "detail": "Two sessions; full SD and speaker PCM; 22 exact non-manifest ZIP members"
+    },
+    {
+      "name": "resident original learned network path",
+      "status": "PASS",
+      "detail": "Six setup steps, UI, 60-second observation and complete same-guest DHCP"
+    },
+    {
+      "name": "application network",
+      "status": "PARTIAL",
+      "detail": "No bidirectional payload flows during the isolated observation"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "Virtual-device scope"
+    }
+  ],
+  "evidence": [
+    "evidence/deployment-summary.redacted.json"
+  ]
+}
