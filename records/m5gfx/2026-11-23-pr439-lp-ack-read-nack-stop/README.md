@@ -60,3 +60,8 @@
   esp-emulator 无 LP I2C 控制器模型。
 - maintainer 侧承诺的 C6 / P4 回归：`NOT RUN`（第三方计划，本记录只做差分核对）。
 - 只做代码级核对，未在本机构建；编译结论来自上游 CI（38/38 SUCCESS，仅编译）。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/439#issuecomment-7093676522>
+  （1 条，日文；PR 仍 OPEN，未 close、未 push、未改他人仓库）

@@ -107,4 +107,5 @@ FIFO は空。コメントの記述と実装が一致する。
 
 - PR #439 へのコメント 1 条（日文）。内容：差分核对の結論、code-level verification、
   上游 CI 38/38、未覆盖项（hardware / virtual-device `NOT RUN`）。
+  <https://github.com/m5stack/M5GFX/pull/439#issuecomment-7093676522>
 - PR は OPEN のまま。close・push・他人リポジトリ変更はしていない。
