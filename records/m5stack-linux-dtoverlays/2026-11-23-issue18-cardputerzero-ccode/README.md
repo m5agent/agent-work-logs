@@ -11,6 +11,7 @@
   profile 是 Linux ARM64 后端且不可创建（`missing_runtime_files` 为
   `__missing_qemu__` / `__missing_rom__`）；无 Linux ARM64 内核/QEMU 环境可跑
   `brcmfmac` + CYW43439 固件国家逻辑
+- 已发布回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/issues/18#issuecomment-7106894286>（1 条，英文；issue 仍 OPEN，未 close、未改上游代码）
 - 证据等级：**code-level verification**（Raspberry Pi 6.18.y 驱动与 binding）+
   **host-level device-tree check**（补丁可编译并应用到 CM0 基础 DTB）；信道 12/13
   的实际扫描/连接结果来自报告者的 **hardware validation**，本记录未独立复跑
