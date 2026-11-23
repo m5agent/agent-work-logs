@@ -1,0 +1,87 @@
+# captured 2026-11-23T18:25:25Z
+## branch/commit
+9d7190317d49ff87fa98db345b049ed77c5a1780 2026-11-05T10:37:22+08:00 fix(time): track ADV clock synchronization from SNTP notifications
+CardputerADV
+## README.md:1-27
+# Cardputer ADV User Demo
+
+User demo source code of [Cardputer ADV](https://docs.m5stack.com/en/products/sku/K132-Adv).
+
+## Build
+
+### Fetch Dependencies
+
+```bash
+python3 ./fetch_repos.py
+```
+
+### Tool Chains
+
+[ESP-IDF v5.4.2](https://docs.espressif.com/projects/esp-idf/en/v5.4.2/esp32s3/index.html)
+
+### Build
+
+```bash
+idf.py build
+```
+
+### Flash
+
+```bash
+idf.py flash
+```
+## dependencies.lock idf block
+73:  idf:
+74-    source:
+75-      type: idf
+76-    version: 6.1.0
+## main/idf_component.yml
+## IDF Component Manager Manifest File
+dependencies:
+  ## Required IDF version
+  idf:
+    version: '>=4.1.0'
+  # # Put list of dependencies here
+  # # For components maintained by Espressif:
+  # component: "~1.0.0"
+  # # For 3rd party components:
+  # username/component: ">=1.0.0,<2.0.0"
+  # username2/component2:
+  #   version: "~1.0.0"
+  #   # For transient dependencies `public` flag can be set.
+  #   # `public` flag doesn't have an effect dependencies of the `main` component.
+  #   # All dependencies of `main` are public by default.
+  #   public: true
+  espressif/esp-now: ^2.5.2
+  espressif/esp_tinyusb: ^1.1
+  jgromes/radiolib: ^7.2.1
+  espressif/usb: '*'
+## repos.json refs
+4:        "path": "components/M5GFX",
+5:        "branch": "0.2.15"
+9:        "path": "components/M5Unified",
+10:        "branch": "0.2.10"
+14:        "path": "components/mooncake",
+15:        "branch": "v2.2.0"
+19:        "path": "components/mooncake_log",
+20:        "branch": "v1.3.0"
+24:        "path": "components/smooth_ui_toolkit",
+25:        "branch": "v2.4.0"
+## patch entries in repos.json
+0
+## tracked files at root
+.clang-format
+.gitignore
+CMakeLists.txt
+README.md
+dependencies.lock
+fetch_repos.py
+main
+partitions.csv
+repos.json
+sdkconfig.defaults
+## .gitignore relevant
+38:build/
+39:cmake-build-*/
+40:components/
+41:managed_components/

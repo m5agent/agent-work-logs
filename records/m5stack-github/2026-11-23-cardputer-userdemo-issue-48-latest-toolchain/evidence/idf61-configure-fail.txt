@@ -1,0 +1,41 @@
+# captured 2026-11-23T18:25:26Z
+# IDF 6.1 configure stage, no source changes
+NOTE: 
+Following dependencies have new versions available:
+Dependency "espressif/cmake_utilities": "0.5.3" -> "1.4.1"
+Dependency "espressif/esp-now": "2.5.2" -> "2.5.3"
+Dependency "espressif/esp_tinyusb": "1.7.6~1" -> "1.7.6~2"
+Dependency "espressif/tinyusb": "0.18.0~4" -> "0.21.0~6"
+Dependency "jgromes/radiolib": "7.2.1" -> "7.8.1"
+Consider running "idf.py update-dependencies" to update your lock file.
+NOTE: Updating lock file at /private/tmp/cpadv48/dependencies.lock
+NOTE: Processing 6 dependencies:
+NOTE: [1/6] espressif/cmake_utilities (0.5.3)
+NOTE: [2/6] espressif/esp-now (2.5.2)
+NOTE: [3/6] espressif/esp_tinyusb (1.7.6~1)
+NOTE: [4/6] espressif/tinyusb (0.18.0~4)
+NOTE: [5/6] jgromes/radiolib (7.2.1)
+NOTE: [6/6] idf (6.1.0)
+-- M5GFX use components = nvs_flash;efuse;driver;esp_timer;esp_lcd;esp_mm
+-- M5Unified use component = M5GFX;esp_adc;driver
+CMake Error at /Users/m5agent/Documents/esp-idf-6.1/tools/cmake/build.cmake:380 (message):
+  Failed to resolve component 'usb' required by component
+  'espressif__esp_tinyusb': unknown name.
+Call Stack (most recent call first):
+  /Users/m5agent/Documents/esp-idf-6.1/tools/cmake/build.cmake:429 (__build_resolve_and_add_req)
+  /Users/m5agent/Documents/esp-idf-6.1/tools/cmake/build.cmake:430 (__build_expand_requirements)
+  /Users/m5agent/Documents/esp-idf-6.1/tools/cmake/build.cmake:784 (__build_expand_requirements)
+  /Users/m5agent/Documents/esp-idf-6.1/tools/cmake/project.cmake:868 (idf_build_process)
+  CMakeLists.txt:6 (project)
+
+
+-- Configuring incomplete, errors occurred!
+[0;33mHINT: The component 'usb' could not be found. This could be because: component name was misspelled, the component was not added to the build, the component has been moved to the IDF component manager, the component has been removed and refactored into some other component or the component may not be supported by the selected target.
+Please look out for component in 'https://components.espressif.com' and add using 'idf.py add-dependency' command.
+Refer to the migration guide for more details about moved components.
+Refer to the build-system guide for more details about how components are found and included in the build.[0m
+[0;33mHINT: USB host layer ('usb' component) was removed from ESP-IDF. Please use 'usb' component from IDF component manager instead.
+You can install 'usb' component using 'idf.py add-dependency espressif/usb' command.
+Refer to the migration guide for more details.[0m
+cmake failed with exit code 1, output of the command is in the /private/tmp/cpadv48/build/log/idf_py_stderr_output_58365 and /private/tmp/cpadv48/build/log/idf_py_stdout_output_58365
+Executing action: all (aliases: build)

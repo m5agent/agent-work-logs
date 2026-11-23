@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "issue_triage",
+  "overall_status": "PASS",
+  "title": "M5Cardputer-UserDemo #48 round 3: repo pins rather than mutates the toolchain; ESP-IDF 6.1 build needs upstream component port",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Cardputer-UserDemo/issues/48",
+    "repository": "m5stack/M5Cardputer-UserDemo",
+    "base_branch": "CardputerADV",
+    "base_commit": "9d7190317d49ff87fa98db345b049ed77c5a1780",
+    "number": 48,
+    "author": "nuncio-bitis",
+    "language": "en",
+    "state": "OPEN",
+    "prior_comments": 3,
+    "reply_to": "https://github.com/m5stack/M5Cardputer-UserDemo/issues/48#issuecomment-7110046104",
+    "comment": "PENDING"
+  },
+  "hardware": {},
+  "firmware": {
+    "board": "Cardputer ADV",
+    "soc": "ESP32-S3",
+    "target": "esp32s3",
+    "declared_toolchain": "ESP-IDF v5.4.2",
+    "attempted_toolchain": "ESP-IDF v6.1 (6.1.0, GCC 15.2.0)"
+  },
+  "execution": {
+    "environment": "macOS arm64; ESP-IDF v6.1 checkout with idf6.1_py3.13_env; Python 3.13.15; temp clone /tmp/cpadv48",
+    "command": "git clone -b CardputerADV; python3 ./fetch_repos.py; idf.py build; idf.py add-dependency espressif/usb; idf.py build",
+    "repro": "code/repro.sh (writes only under /tmp)"
+  },
+  "evidence_class": "code-level verification, build-executed (real ESP-IDF v6.1 configure and compile); no hardware or virtual-device runtime",
+  "checks": [
+    {
+      "name": "issue_open_latest_comment_unanswered",
+      "status": "PASS",
+      "evidence": "state=OPEN, 4 comments; latest 2026-11-23T18:21:33Z by nuncio-bitis; no m5agent comment after it; evidence/issue-48.json"
+    },
+    {
+      "name": "repo_does_not_mutate_toolchain",
+      "status": "PASS",
+      "evidence": "root tree has no install.sh/requirements; fetch_repos.py only clones git components into gitignored components/; 0 patch entries in repos.json; evidence/repo-toolchain-declaration.txt"
+    },
+    {
+      "name": "toolchain_declared_not_vendored",
+      "status": "PASS",
+      "evidence": "README.md:15 ESP-IDF v5.4.2; dependencies.lock:54-57 idf 5.4.2; main/idf_component.yml idf '>=4.1.0'; evidence/repo-toolchain-declaration.txt"
+    },
+    {
+      "name": "fetched_component_tags_match_repos_json",
+      "status": "PASS",
+      "evidence": "M5GFX 0.2.15, M5Unified 0.2.10, mooncake v2.2.0, mooncake_log v1.3.0, smooth_ui_toolkit v2.4.0; evidence/component-refs.txt"
+    },
+    {
+      "name": "idf_6_1_configure_fails_on_usb_component",
+      "status": "PASS",
+      "evidence": "Failed to resolve component 'usb' required by component 'espressif__esp_tinyusb'; IDF HINT: usb removed, use espressif/usb; evidence/idf61-configure-fail.txt"
+    },
+    {
+      "name": "idf_6_1_build_fails_in_pinned_m5gfx_under_c23",
+      "status": "PASS",
+      "evidence": "after adding only espressif/usb, build reaches 1164/1515 then lgfx_qrcode.h:42 'bool' cannot be defined via 'typedef' with -std=gnu23; BUILD_RC=2; evidence/idf61-compile-fail.txt"
+    },
+    {
+      "name": "build_idf_5_4_2",
+      "status": "NOT RUN",
+      "evidence": "no ESP-IDF 5.4.2 toolchain installed locally; declared-toolchain buildability not re-proven by this round"
+    },
+    {
+      "name": "build_idf_6_1_full",
+      "status": "PARTIAL",
+      "evidence": "stopped at first component compile error; later 6.x incompatibilities remain unknown"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "failures occur before a firmware image exists"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "no image/port/framebuffer exists at configure or component compile stage; Device Service and esp-emulator cannot exercise it"
+    }
+  ],
+  "limitations": [
+    "ESP-IDF v5.4.2 build was not executed, so 'builds on the declared toolchain' rests on documentation and prior layout analysis, not a fresh build.",
+    "The v6.1 attempt was stopped at the first failing component, so additional 6.x incompatibilities may exist.",
+    "The component manager upgraded dependencies.lock from format 2.0.0 to 3.0.0 in the temp clone; this is tool behaviour and not used as evidence."
+  ],
+  "artifacts": [
+    "README.md",
+    "report.md",
+    "run.json",
+    "evidence/issue-48.json",
+    "evidence/repo-toolchain-declaration.txt",
+    "evidence/component-refs.txt",
+    "evidence/idf61-configure-fail.txt",
+    "evidence/idf61-compile-fail.txt",
+    "code/repro.sh"
+  ]
+}

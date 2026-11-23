@@ -1,0 +1,31 @@
+# captured 2026-11-23T18:25:26Z
+# after: idf.py add-dependency espressif/usb (only change)
+
+## errors
+1347:FAILED: [code=1] esp-idf/M5GFX/CMakeFiles/__idf_M5GFX.dir/src/lgfx/utility/lgfx_qrcode.c.obj 
+1350:/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:42:23: error: 'bool' cannot be defined via 'typedef'
+1354:/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:42:1: error: useless type name in empty declaration [-Werror]
+1357:/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:43:19: error: expected identifier or '(' before 'false'
+1360:/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:44:19: error: expected identifier or '(' before 'true'
+1450:ninja: build stopped: subcommand failed.
+1457:BUILD_RC=2
+
+## failing translation unit context
+/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:42:23: error: 'bool' cannot be defined via 'typedef'
+   42 | typedef unsigned char bool;
+      |                       ^~~~
+/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:42:23: note: 'bool' is a keyword with '-std=c23' onwards
+/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:42:1: error: useless type name in empty declaration [-Werror]
+   42 | typedef unsigned char bool;
+      | ^~~~~~~
+/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:43:19: error: expected identifier or '(' before 'false'
+   43 | static const bool false = 0;
+      |                   ^~~~~
+/private/tmp/cpadv48/components/M5GFX/src/lgfx/utility/lgfx_qrcode.h:44:19: error: expected identifier or '(' before 'true'
+   44 | static const bool true = 1;
+      |                   ^~~~
+cc1: all warnings being treated as errors
+[1154/1515] Building C object esp-idf/espressif__usb/CMakeFiles/__idf_espressif__usb.dir/src/usbh.c.obj
+
+## cflags of the failing command (std flag only)
+-std=gnu23
