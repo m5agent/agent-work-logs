@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-23 | AIFlow | #6「Run Always」下载路径重复 `apps/...py/...py` 的虚拟设备复现与归因 | `PARTIAL`（虚拟设备复现；云端上传与实机 NOT RUN） | [查看](m5stack-github/2026-11-23-aiflow-issue-6-run-always-path/) |
 | 2026-11-21 | ESP Emulator | Atom Lite「Wifi_Rig_CW(Server)」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（非模拟器启动缺陷，未开 issue；真机 NOT RUN） | [查看](m5stack-esp-emulator/2026-11-21-atom-lite-wifi-rig-cw-attribution/) |
 | 2026-11-20 | ESP Emulator | Pelican Dash 高清与节奏复验 | PARTIAL（原生触控通过，实录速度对比经变速呈现） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-coastal-cut/) |
 | 2026-11-20 | ESP Emulator | PocketJS Pelican Dash 与 Grove 镜头 | PARTIAL（原生触控与 DSI 实录通过） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-dash/) |

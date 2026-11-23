@@ -1,0 +1,29 @@
+# Evidence: virtual StickS3 serial
+# Captured: 2026-11-23T07:09Z (UTC)
+# Guest: StickS3 QEMU, AIFlow StickS3 firmware artifact 7ebc5d87..., composed with UART REPL bootstrap 9cf3c84c...
+# Note: the guest fixture path uses an in-memory fake HTTP transport (URL normalized to fixture.invalid); no request was made.
+#       The m5sync filesystem/path logic is the real firmware code.
+# Session: c32706f184e34452a7fe10ccc3c3c91e
+
+# Case A: devicePath = apps/My_Project_1795168094430.py/My_Project_1795168094430.py
+# Two 2065-byte records, total 4130; first unchanged -> 50%, second fails -> Failed 50%.
+
+PROBE_PAYLOAD 2065 2065
+file_path: main_ota_temp.py md5: d587c2d8f58c8ecfebe4742ab836b421 raw: b'\xd5\x87\xc2\xd8\xf5\x8c\x8e\xcf\xeb\xe4t*\xb86\xb4!'
+[INFO] File main_ota_temp.py already downloaded.
+[INFO] MD5 mismatch for file: My_Project_1795168094430.py
+PROBE_GET http://fixture.invalid/My_Project_1795168094430.py
+[WARN] Download error: [Errno 2] ENOENT
+[WARN] Retry 1...
+PROBE_GET http://fixture.invalid/My_Project_1795168094430.py
+[WARN] Download error: [Errno 2] ENOENT
+[WARN] Retry 2...
+PROBE_GET http://fixture.invalid/My_Project_1795168094430.py
+[WARN] Download error: [Errno 2] ENOENT
+[WARN] Retry 3...
+[INFO] Failed to download file: apps/My_Project_1795168094430.py/My_Project_1795168094430.py
+PROBE_TOTAL 4130
+PROBE_DUP_PATH apps/My_Project_1795168094430.py/My_Project_1795168094430.py
+PROBE_DUP_ERR 'apps/My_Project_1795168094430.py/My_Project_1795168094430.py\n'
+__M5_EXEC_ba8b5ef0d50a4c1b82c518062a7039fc__:DONE
+>

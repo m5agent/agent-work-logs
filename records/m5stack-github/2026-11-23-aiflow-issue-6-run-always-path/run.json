@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "AIFlow #6「Run Always」应用文件下载路径重复的虚拟设备复现",
+  "source": {
+    "issue": "https://github.com/m5stack/AIFlow/issues/6",
+    "pull_request": "",
+    "repository": "m5stack/AIFlow",
+    "base_commit": "0bc08aa8442c40c7430f55a37dfa4fab8914d8bf"
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "sticks3",
+    "base_artifact_sha256": "7ebc5d87e04182bcf1c3875b8cbff923e97738dec401b4983e52b2054e8d7b6a",
+    "base_artifact_size": 8384512,
+    "base_firmware_sha256": "d612b47941c3c2ac4a5e6bc5b2e07b4a147270f0813d6a5bd536167bc4a03366",
+    "composed_firmware_sha256": "9cf3c84c5959a982973ca011ace9c9c6592dad693219ed01e7f2790df156d0c8",
+    "composed_firmware_size": 8388608,
+    "guest": "MicroPython v1.27.0-dirty on 2026-07-22; M5STACK StickS3",
+    "note": "AIFlow repository resources/firmware/aiflow-sticks3.bin, composed with the Device Service UART REPL bootstrap"
+  },
+  "execution": {
+    "environment": "macOS host, local Device Service, QEMU StickS3 (simulated/display)",
+    "task_id": "",
+    "session_id": "c32706f184e34452a7fe10ccc3c3c91e"
+  },
+  "checks": [
+    {
+      "name": "firmware_import",
+      "status": "PASS",
+      "detail": "AIFlow StickS3 BIN imported as a manifest firmware; flash size 8 MiB"
+    },
+    {
+      "name": "session_create_uiflow_live",
+      "status": "PASS",
+      "detail": "StickS3 QEMU session running with the AIFlow base plus UART REPL bootstrap"
+    },
+    {
+      "name": "duplicated_devicePath",
+      "status": "PASS",
+      "detail": "apps/<name>.py/<name>.py -> ENOENT x3 -> Failed 50%; matches the reported symptom"
+    },
+    {
+      "name": "corrected_devicePath",
+      "status": "PASS",
+      "detail": "apps/<name>.py -> download and MD5 verify -> Success 100%"
+    },
+    {
+      "name": "cloud_upload_path",
+      "status": "NOT RUN",
+      "detail": "No AIFlow account/device; upload-resource-batch-and-push not exercised"
+    },
+    {
+      "name": "physical_sticks3",
+      "status": "NOT RUN",
+      "detail": "Virtual StickS3 only; same m5things/m5sync path logic"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/2026-11-23-serial-duplicated-path.txt",
+      "sha256": "87d535dbe632808528fd68b4eacd4a43991f2b16b896e1aac958557c56cebd1b"
+    },
+    {
+      "path": "evidence/2026-11-23-serial-corrected-path.txt",
+      "sha256": "0cf807d11a9d62f0738211019aca9ff1974ecbdc4bd89a5e534fd805f8fbf98a"
+    },
+    {
+      "path": "evidence/2026-11-23-failed-50.png",
+      "sha256": "4c39ca2191cadaf56268f47008100a9aed8dc8fb066057d8abd5658cafdaf4d4"
+    },
+    {
+      "path": "evidence/2026-11-23-success-100.png",
+      "sha256": "c5af0551c361972001d69eed0ec1d0ddf4cbe00500126b06f1d290e2ab16fcfa"
+    }
+  ],
+  "notes": [
+    "Client sends filePaths=apps/<name>.py from src/renderer/src/utils/project/projectRunFiles.ts.",
+    "Device-side m5things concatenates the cloud-provided directory devicePath with name; the cloud value therefore ends with a slash.",
+    "The same buildDeviceFiles path is used for res/... project resources; duplication there is code-level inference and was not cloud-tested.",
+    "No source repository was modified and no patch was submitted."
+  ]
+}

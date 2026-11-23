@@ -50,11 +50,11 @@
 ### 3.1 重复路径（Case A）
 
 ```text
-PROBE_PAYLOAD 2135 2065
-file_path: main_ota_temp.py md5: 0749e1...
+PROBE_PAYLOAD 2065 2065
+file_path: main_ota_temp.py md5: d587c2...
 [INFO] File main_ota_temp.py already downloaded.
 [INFO] MD5 mismatch for file: My_Project_1795168094430.py
-PROBE_GET http://fixture.local/My_Project_1795168094430.py
+PROBE_GET http://fixture.invalid/My_Project_1795168094430.py
 [WARN] Download error: [Errno 2] ENOENT
 [WARN] Retry 1...
 ...
@@ -72,8 +72,8 @@ PROBE_DUP_ERR 'apps/My_Project_1795168094430.py/My_Project_1795168094430.py\n'
 ```text
 [INFO] File main_ota_temp.py already downloaded.
 [INFO] MD5 mismatch for file: My_Project_1795168094430.py
-PROBE_GET http://fixture.local/My_Project_1795168094430.py
-[INFO] File http://fixture.local/My_Project_1795168094430.py downloaded successfully.
+PROBE_GET http://fixture.invalid/My_Project_1795168094430.py
+[INFO] File http://fixture.invalid/My_Project_1795168094430.py downloaded successfully.
 [INFO] Downloaded and verified file: apps/My_Project_1795168094430.py
 PROBE_FIXED_ERR ''
 PROBE_EXISTS True
