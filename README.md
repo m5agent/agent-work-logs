@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-23 | Firmware Review Service | StopWatch 出厂配网与 DHCP 重传摘要修复 | `PARTIAL`（隔离原版配网/复位回连及摘要修复通过；旧门户限制保留） | [查看](records/firmware-review-service/2026-11-23-stopwatch-s3-network/followups/2026-11-23-stopwatch-factory-provisioning/) |
 | 2026-11-23 | Firmware Review Service | StopWatch STA 常驻切换 | `PARTIAL`（常驻 0.32.1、原版 DHCP 及历史保全） | [查看](records/firmware-review-service/2026-11-23-stopwatch-s3-network/followups/2026-11-23-resident-sta-cutover/) |
 | 2026-11-23 | Firmware Review Service | StopWatch 与 ESP32-S3 网络审查复验 | `PARTIAL`（StopWatch 已配网 STA、PaperDIY 板级 DHCP 和 Linux 分流通过） | [查看](records/firmware-review-service/2026-11-23-stopwatch-s3-network/) |
 | 2026-11-23 | Firmware Review Service | 近 59 条审查的过程诊断与假失败修复 | `PARTIAL`（4 条转 VERIFIED；11 条网络受 Linux worker 准入限制） | [查看](records/firmware-review-service/2026-11-23-review-process-diagnosis/) |

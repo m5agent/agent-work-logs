@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "PASS_SAME_CAPTURE_REPLAY",
+  "source_base": "a4343d86d21a797ecf12384c9d200a9bc7ef2e32",
+  "capture_sha256": "7a1a39ea1519128ec59df9f8c993870fe8d301391722e66ae160bd684acf6d72",
+  "capture_bytes": 109684,
+  "capture_packets": 358,
+  "dhcp_packets": 71,
+  "raw_message_type_counts_unchanged": {
+    "ack": 1,
+    "discover": 67,
+    "offer": 1,
+    "request": 2
+  },
+  "non_sequence_summary_fields_unchanged": true,
+  "before": {
+    "recorded_states": 32,
+    "recorded_types": [
+      "DISCOVER"
+    ],
+    "data_plane": {
+      "schema_version": 1,
+      "scope": "same-session-native-ipv4-transport",
+      "source": "ethernet-pcap",
+      "capture_state": "finalized",
+      "capture_sha256": "7a1a39ea1519128ec59df9f8c993870fe8d301391722e66ae160bd684acf6d72",
+      "dhcpv4": {
+        "completed_dora_transactions": 0,
+        "leased_address_count": 0
+      },
+      "tcp": {
+        "bidirectional_payload_flows": 0
+      },
+      "udp": {
+        "bidirectional_payload_flows": 0
+      }
+    }
+  },
+  "after": {
+    "recorded_sequence": [
+      "DISCOVER",
+      "OFFER",
+      "REQUEST",
+      "ACK"
+    ],
+    "data_plane": {
+      "schema_version": 1,
+      "scope": "same-session-native-ipv4-transport",
+      "source": "ethernet-pcap",
+      "capture_state": "finalized",
+      "capture_sha256": "7a1a39ea1519128ec59df9f8c993870fe8d301391722e66ae160bd684acf6d72",
+      "dhcpv4": {
+        "completed_dora_transactions": 1,
+        "leased_address_count": 1
+      },
+      "tcp": {
+        "bidirectional_payload_flows": 2
+      },
+      "udp": {
+        "bidirectional_payload_flows": 0
+      }
+    }
+  },
+  "bounded_sequence_limit": 32,
+  "validation": "virtual-device evidence replay; actual original capture retained unchanged",
+  "not_claimed": [
+    "firmware or controller behavior changed",
+    "current guest rerun",
+    "application HTTP acceptance",
+    "physical hardware or RF validation",
+    "resident deployment"
+  ],
+  "candidate_commit": "be59793ea2192d817bf45044bb538e01b7a933ec"
+}

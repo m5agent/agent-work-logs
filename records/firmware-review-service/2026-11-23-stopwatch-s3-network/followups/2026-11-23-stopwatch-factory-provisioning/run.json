@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "StopWatch factory provisioning and DHCP retransmission summary",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a4343d86d21a797ecf12384c9d200a9bc7ef2e32",
+    "factory_execution_commit": "e32e84ff933ab068be635c7aacd3ef1bae731c62",
+    "factory_api_inventory_and_evidence_commit": "1e844f230d1ddaa1cc642cbf5b7bd0c2f65d4c26",
+    "independent_pcap_commit": "be59793ea2192d817bf45044bb538e01b7a933ec",
+    "publication": "Literal local source identities; these follow-up source commits are not claimed as project-main releases"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "device": "stopwatch",
+    "machine": "m5stopwatch",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "name": "StopWatch Demo Plus V0.6-OPT",
+    "original_sha256": "606aac7831cb4ca2bd45fdac40f0755fc918d1c7772caeaafa7965ef72c64bac",
+    "original_bytes": 4200368,
+    "normalized_sha256": "f735f999d2fe6217f129fcc974edd08b0c5f9c8dca960dbadaa7b8669cf4474b",
+    "normalized_bytes": 16777216,
+    "application_modified": false,
+    "nvs_seeded": false
+  },
+  "execution": {
+    "environment": "Isolated Darwin arm64 native Device Service and private Unix socketpair",
+    "profile": "stopwatch-open-softap-provisioning",
+    "native_binary_sha256": "5b8b3f24b9d2c757a21b1d17d635218348167d258b3e3677b69c3196cdf5d4db",
+    "host_ip_backends": 0,
+    "input_requests": 6,
+    "linux_factory_profile": "NOT RUN",
+    "resident_followup_deployment": "NOT RUN",
+    "burner_submission": false,
+    "timezone": "Asia/Shanghai"
+  },
+  "checks": [
+    {
+      "name": "factory-NVS portal and same-session saved reset reconnect",
+      "status": "PASS",
+      "dora_transactions": 3,
+      "leased_addresses": 2,
+      "bidirectional_tcp_payload_flows": 4
+    },
+    {
+      "name": "same historical A1 capture summary correction",
+      "status": "PASS",
+      "guest_rerun": false,
+      "original_application_verdict": "PARTIAL",
+      "retransmission_counts_unchanged": true
+    },
+    {
+      "name": "factory-source full platform suite",
+      "status": "PASS",
+      "tests": 2522,
+      "skipped": 11,
+      "seconds": 202.684
+    },
+    {
+      "name": "independent PCAP-source full platform suite",
+      "status": "PASS",
+      "tests": 2522,
+      "skipped": 11,
+      "seconds": 229.454
+    },
+    {
+      "name": "legacy portal candidate and 178-layer control",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Linux/resident deployment of these followups, browser, physical hardware, WPA2, external Internet",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/stopwatch-factory-provisioning.summary.json",
+      "sha256": "b909ce4cbcaddd3cb17e1c85ae7723c09e16c52a081fc47883bc57e4a229fef4",
+      "bytes": 13502
+    },
+    {
+      "path": "evidence/stopwatch-validation.summary.json",
+      "sha256": "0ea8e2d916e1e93bc6eaeee7bae23f7ffd0a27e7db9a4a599d19d8af6b7fce43",
+      "bytes": 1741
+    },
+    {
+      "path": "evidence/pcap-dhcp-replay.summary.json",
+      "sha256": "f08ba246ad2c68ad0e112797e253d1481a73a296f2deca6f211e571c96c49bd7",
+      "bytes": 2051
+    },
+    {
+      "path": "evidence/pcap-validation.summary.json",
+      "sha256": "81d2912f411d5c7f86f604eff68e20686cfbe0d5bc9153be7f51df0e3db7c0ce",
+      "bytes": 2046
+    }
+  ],
+  "notes": [
+    "Latest factory authority is exact_committed_replay; earlier observations and partial attempts remain in its summary.",
+    "Independent full-suite counts do not imply a combined release suite.",
+    "Raw captures, frames, credentials, session/device identifiers, binaries and private paths are omitted."
+  ]
+}
