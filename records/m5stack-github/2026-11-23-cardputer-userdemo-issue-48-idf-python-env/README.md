@@ -7,7 +7,7 @@
   「Doesn't build」，作者 nuncio-bitis，英文，OPEN，0 条评论，无关联 PR
 - 源码：`main` `a897c5f2752003dba6d960b572f4c6ec8e71abea`（2026-11-05，PR #47 合并后）
 - 环境：macOS arm64，Python 3.13.15；本机有 ESP-IDF 6.1（tag `v6.1`，6.1.0）
-- 已发布回复：待填（1 条，英文；issue 仍 OPEN，未 close、未改上游代码）
+- 已发布回复：<https://github.com/m5stack/M5Cardputer-UserDemo/issues/48#issuecomment-7109690119>（1 条，英文；issue 仍 OPEN，未 close、未改上游代码）
 - 证据等级：**host-level test**（用 ESP-IDF v6.1 自带检查脚本复现两条报错）+
   **code-level verification**（仓库工具链声明、ESP-IDF v6.1/v4.4.6 requirements）
 - 未使用虚拟设备验证：失败发生在固件生成之前的本机 Python 环境检查，

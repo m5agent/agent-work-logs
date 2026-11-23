@@ -123,6 +123,7 @@
 
 ## 6. 回复策略
 
+- 已发布：<https://github.com/m5stack/M5Cardputer-UserDemo/issues/48#issuecomment-7109690119>
 - 语言：英文（issue 标题/正文均为英文）。
 - 结构：结论 → 证据等级（host-level test + code-level verification）→
   机制与修复命令 → 未覆盖项；不关闭 issue、不改上游代码。
