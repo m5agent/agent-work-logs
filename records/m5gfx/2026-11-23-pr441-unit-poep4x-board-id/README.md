@@ -53,4 +53,5 @@
 
 ## 已发布回复
 
-- 待发布（发布后回填评论永久链接）。
+- <https://github.com/m5stack/M5GFX/pull/441#issuecomment-7095069465>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
