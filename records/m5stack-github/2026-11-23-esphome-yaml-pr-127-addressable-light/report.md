@@ -14,7 +14,8 @@ PR 为 `m5ioe1` 与 `extio2` 两个组件加上版本门控，在 2026.11 使用
 3. 新 accessor 在运行时确实绑定到组件的 `buf_`/`effect_data_`，而不是默认空访问器。
 
 PR 当时状态 OPEN、draft=false、无既有评论；CI 只有 `wecom-digest-forward` 转发任务，
-不提供构建验证。
+不提供构建验证。评审结论以英文单条评论发布：
+https://github.com/m5stack/esphome-yaml/pull/127#issuecomment-7094556591
 
 ## 2. 改动审阅
 

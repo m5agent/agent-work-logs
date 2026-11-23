@@ -5,6 +5,7 @@
 - 工作类型：`pr_review`
 - 问题来源：https://github.com/m5stack/esphome-yaml/pull/127
 - 源码版本：`m5stack/esphome-yaml @ 385dc4ba8d87b48c87459aa77b98ab2d493683d0`（PR head），base `main @ bc507b50d818c316fe1e9d60a8f6b971d96952a1`
+- 公开评论：https://github.com/m5stack/esphome-yaml/pull/127#issuecomment-7094556591
 - 环境：macOS 主机；ESPHome 2026.11.0 与 2026.10.0（各自独立 venv）+ ESP-IDF 5.5.6；本机 Device Service 的 QEMU `atom-echo`（ESP32，`partial`/无显示）
 
 ## 结论
