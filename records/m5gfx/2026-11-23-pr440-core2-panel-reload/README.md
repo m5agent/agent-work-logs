@@ -62,3 +62,8 @@ deadline，所以 **无法** 在这个模型上复现“隔次黑屏已被修复
   没有 RDDPM 命令读，SPI 读恒为 `0x7f`；复位后按键探测固定跑满 120 ms，122 ms 等待不会触发。
 - `extras/board_spec` 的 `npm test` / `npm run check`：本机无 node/npm，未跑；由上游 CI 覆盖。
 - 无 EN/RST 复位重复、无 Sleep In 起始、无触摸/SD/背光回归；每次构建只跑了 1 次上电启动。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/440#issuecomment-7095252623>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
