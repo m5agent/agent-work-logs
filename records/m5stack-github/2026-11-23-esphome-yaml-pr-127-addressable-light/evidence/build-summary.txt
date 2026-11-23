@@ -1,0 +1,60 @@
+Build and runtime verification summary — m5stack/esphome-yaml PR #127
+Date: 2026-11-23 (UTC+8)
+
+PR head: 385dc4ba8d87b48c87459aa77b98ab2d493683d0
+Base main: bc507b50d818c316fe1e9d60a8f6b971d96952a1
+Repo: https://github.com/m5stack/esphome-yaml
+
+Toolchain
+- ESPHome 2026.11.0 (pip, Python 3.13 venv)
+- ESPHome 2026.10.0 (pip, Python 3.13 venv)
+- ESP-IDF 5.5.6 via ESPHome managed toolchain
+- Board: esp32dev (ESP32, 4 MB flash)
+
+Config under test (code/pr127.yaml): local external_components = <repo>/components,
+m5ioe1 hub (default 0x6F) + extio2 hub (default 0x45), one M5IOE1AddressableLight
+(4 or 8 LEDs) and one EXTIO2AddressableLight (4 or 8 LEDs), i2c on GPIO21/22.
+
+Commands
+  esphome config pr127.yaml
+  esphome compile pr127.yaml        # 2026.11.0
+  esphome compile pr127-2610.yaml   # 2026.10.0
+
+Results
+1) 2026.11.0 build: PASS
+   - xTask: "INFO Successfully compiled program."
+   - pr127-light.bin sha256 d063c9ab956eb414bb5df74002067afd984cbffa7a1c9fd933184c6b39b772c1
+   - Generated build version header: ESPHOME_VERSION_CODE VERSION_CODE(2026, 11, 0)
+   - ELF contains 0 instances of AddressableLight::get_view_internal.
+   - Only warning from the changed files: pre-existing printf %d vs int32_t in
+     extio2_light.cpp dump_config (not introduced by this PR).
+
+2) 2026.10.0 build: PASS
+   - pr127-light.bin sha256 78847daabbb4ed216dbba26281a79c02428b410fbb16ff9c127b2cc049306192
+   - Generated build version header: ESPHOME_VERSION_CODE VERSION_CODE(2026, 10, 0)
+   - ELF still defines both legacy symbols:
+       esphome::extio2::EXTIO2AddressableLight::get_view_internal(long) const
+       esphome::m5ioe1::M5IOE1AddressableLight::get_view_internal(long) const
+   - Confirms the version gate selects the legacy path on 2026.10, not the stub
+     version.h (which would report 2099.12.0).
+
+3) Virtual-device boot (2026.11.0): PARTIAL
+   - Device Service session on profile atom-echo (ESP32, QEMU), runtime qemu.
+   - Firmware: pr127-runtime.factory.bin sha256
+     07c71dd6a2fb0f35cc16d65d6b2665e82022346952c1541d515775e998d90d03
+   - Guest logs "ESPHome version 2026.11.0"; setup() finished successfully.
+   - Boot automation set M5IOE1 strip to red and EXTIO2 strip to green; core
+     AddressableLight VERY_VERBOSE dump reads the pixels back through the new
+     accessor:
+       Addressable Light 'M5IOE1 Strip': R=255 G=0 B=0 (all 4 pixels)
+       Addressable Light 'EXTIO2 Strip': R=0 G=255 B=0 (all 4 pixels)
+   - The emulated ESP32 board has no AW9523/EXTIO2 controller model, so I2C
+     writes to 0x6F and 0x45 are NAKed and the hubs are marked failed; the
+     lights still initialize and their buffers are exercised. Actual LED
+     payload on the expander bus and LED optics are NOT RUN.
+
+Version/header note
+- esphome/core/version.h in the source tree is a static-analysis stub
+  (dev / VERSION_CODE(2099,12,0)); the build generates the real header under
+  <build>/src/esphome/core/version.h. Both builds above used the generated
+  header and resolved to the intended branch.

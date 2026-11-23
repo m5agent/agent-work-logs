@@ -1,0 +1,43 @@
+esphome:
+  name: pr127-light
+  friendly_name: PR127 Light
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+external_components:
+  - source:
+      type: local
+      path: <repo>/components
+    components: [m5ioe1, extio2]
+
+logger:
+  level: DEBUG
+
+i2c:
+  sda: 21
+  scl: 22
+  scan: false
+
+m5ioe1:
+  id: ioe1
+
+extio2:
+  id: io2
+
+light:
+  - platform: m5ioe1
+    name: "M5IOE1 Strip"
+    m5ioe1_id: ioe1
+    num_led: 8
+    effects:
+      - addressable_rainbow:
+  - platform: extio2
+    name: "EXTIO2 Strip"
+    type: addressable_light
+    extio2_id: io2
+    num_leds: 8
+    effects:
+      - addressable_rainbow:

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "esphome-yaml #127 ESPHome 2026.11 addressable light 兼容性评审",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/esphome-yaml/pull/127",
+    "repository": "m5stack/esphome-yaml",
+    "base_commit": "385dc4ba8d87b48c87459aa77b98ab2d493683d0",
+    "base_branch_commit": "bc507b50d818c316fe1e9d60a8f6b971d96952a1"
+  },
+  "hardware": {},
+  "firmware": {
+    "device": "esp32dev",
+    "framework": "esp-idf 5.5.6",
+    "esphome_2026_11_0_bin_sha256": "d063c9ab956eb414bb5df74002067afd984cbffa7a1c9fd933184c6b39b772c1",
+    "esphome_2026_10_0_bin_sha256": "78847daabbb4ed216dbba26281a79c02428b410fbb16ff9c127b2cc049306192",
+    "runtime_factory_sha256": "07c71dd6a2fb0f35cc16d65d6b2665e82022346952c1541d515775e998d90d03",
+    "guest": "ESPHome 2026.11.0 (ESP-IDF 5.5.6), virtual ESP32 profile atom-echo"
+  },
+  "execution": {
+    "environment": "macOS host, ESPHome 2026.11.0 and 2026.10.0 venvs, local Device Service, QEMU atom-echo (ESP32)",
+    "task_id": "",
+    "session_id": "27bf5e12a00047d1a61ee4e548c77479"
+  },
+  "checks": [
+    {
+      "name": "build_esphome_2026_11_0",
+      "status": "PASS",
+      "detail": "esphome compile with PR head; m5ioe1 + extio2 addressable lights built; ELF has no get_view_internal symbol"
+    },
+    {
+      "name": "build_esphome_2026_10_0",
+      "status": "PASS",
+      "detail": "same PR head builds; ELF retains both get_view_internal symbols, proving the legacy branch is selected"
+    },
+    {
+      "name": "version_gate_header",
+      "status": "PASS",
+      "detail": "generated build version.h is 2026.11.0 / 2026.10.0 respectively, not the 2099.12.0 source stub"
+    },
+    {
+      "name": "virtual_device_boot",
+      "status": "PASS",
+      "detail": "QEMU atom-echo session boots ESPHome 2026.11.0 firmware; setup() finished successfully"
+    },
+    {
+      "name": "accessor_pixel_readback",
+      "status": "PASS",
+      "detail": "VERY_VERBOSE dump reads M5IOE1 pixels as R=255 and EXTIO2 pixels as G=255 through the new accessor"
+    },
+    {
+      "name": "i2c_expander_payload",
+      "status": "NOT RUN",
+      "detail": "atom-echo profile has no AW9523/EXTIO2 controller model; I2C writes to 0x6F/0x45 are NAKed"
+    },
+    {
+      "name": "physical_hardware_led_output",
+      "status": "NOT RUN",
+      "detail": "No M5IOE1/EXTIO2 hardware available; LED color order, brightness and optics not observed"
+    },
+    {
+      "name": "effects_frame_behavior",
+      "status": "NOT RUN",
+      "detail": "Only static set/get was exercised; rainbow/twinkle/lambda effects not run"
+    }
+  ],
+  "evidence": [
+    "evidence/build-summary.txt",
+    "evidence/serial-evidence.txt",
+    "evidence/symbols.txt",
+    "evidence/firmware-hashes.txt",
+    "evidence/session-summary.json",
+    "code/pr127.yaml",
+    "code/pr127-runtime.yaml"
+  ],
+  "notes": [
+    "PR head 385dc4b, base main bc507b5; PR remains OPEN.",
+    "The 2026.11 accessor pattern matches core esp32_rmt_led_strip and m5stack_8angle.",
+    "common/stackchan-voice-assistant-base.yaml still sources m5ioe1 from m5stack/esphome@m5-dev and needs the separate migration the author mentioned.",
+    "README ESPHome badge still says 2026.10.0 (documentation note only)."
+  ]
+}
