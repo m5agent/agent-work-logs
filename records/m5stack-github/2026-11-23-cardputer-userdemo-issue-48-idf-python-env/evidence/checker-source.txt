@@ -1,0 +1,68 @@
+# ESP-IDF v6.1 tools/check_python_dependencies.py
+# source: ~/Documents/esp-idf-6.1 (tag v6.1, 6.1.0)
+# sha256: 11b5c8edc2aaac5854fad759cb4d4ae50ed98ee944b4f5cf8c26725672ddc00e
+# key point: the except handler inside the dependency-tree loop (line 176) prints
+# 'req', a variable left over from the direct-requirements loop at line 135;
+# the real failing package is only named in the exception text after the colon.
+
+   125	    # version is the direct dependencies deduced from the requirements arguments of the script.
+   126	    new_req_list = [Requirement(constr_dict.get(i, i)) for i in required_set]
+   127	
+   128	    def version_check(requirement: Requirement) -> None:
+   129	        # compare installed version with required
+   130	        version = Version(get_version(requirement.name))
+   131	        if not requirement.specifier.contains(version, prereleases=True):
+   132	            not_satisfied.append(f"Requirement '{requirement}' was not met. Installed version: {version}")
+   133	
+   134	    # evaluate markers and check versions of direct requirements
+   135	    for req in new_req_list[:]:
+   136	        if not req.marker or req.marker.evaluate():
+   137	            try:
+   138	                version_check(req)
+   139	            except Exception as e:
+   140	                # Catch general exception, because get_version may return None (https://github.com/python/cpython/issues/91216)
+   141	                # log package name alongside the error message for easier debugging
+   142	                not_satisfied.append(
+   143	                    f"Error while checking requirement '{req}'. Package was not found and is required by the "
+   144	                    f'application: {e}'
+   145	                )
+   146	                new_req_list.remove(req)
+   147	        else:
+   148	            new_req_list.remove(req)
+   149	
+   150	    while new_req_list:
+   151	        req_list = new_req_list
+   152	        new_req_list = []
+   153	        already_checked.update(req_list)
+   154	        for requirement in req_list:  # check one level of the dependency tree
+   155	            try:
+   156	                dependency_requirements = set()
+   157	                extras = list(requirement.extras) or ['']
+   158	                # `requires` returns all sub-requirements including all extras; we need to filter out just required ones
+   159	                for name in get_requires(requirement.name) or []:
+   160	                    sub_req = Requirement(name)
+   161	                    # check extras e.g. esptool[hsm]
+   162	                    for extra in extras:
+   163	                        # evaluate markers if present
+   164	                        if not sub_req.marker or sub_req.marker.evaluate(environment={'extra': extra}):
+   165	                            dependency_requirements.add(sub_req)
+   166	                            version_check(sub_req)
+   167	                # dependency_requirements are the direct dependencies of "requirement". They belong to the next level
+   168	                # of the dependency tree. They will be checked only if they haven't been already. Note that the
+   169	                # version is taken into account as well because packages can have different requirements for a given
+   170	                # Python package. The dependencies need to be checked for all of them because they can be different.
+   171	                new_req_list.extend(dependency_requirements - already_checked)
+   172	            except Exception as e:
+   173	                # Catch general exception, because get_version may return None (https://github.com/python/cpython/issues/91216)
+   174	                # log package name alongside the error message for easier debugging
+   175	                not_satisfied.append(
+   176	                    f"Error while checking requirement '{req}'. Package was not found and is required by the "
+   177	                    f'application: {e}'
+   178	                )
+   179	
+   180	    if len(not_satisfied) > 0:
+   181	        print('The following Python requirements are not satisfied:')
+   182	        print(os.linesep.join(not_satisfied))
+   183	        if 'IDF_PYTHON_ENV_PATH' in os.environ:
+   184	            # We are running inside a private virtual environment under IDF_TOOLS_PATH,
+   185	            # ask the user to run install.bat again.

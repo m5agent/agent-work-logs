@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "issue_triage",
+  "overall_status": "PASS",
+  "title": "m5stack/M5Cardputer-UserDemo #48: rich-click/bitarray failure comes from an ESP-IDF v6.1 Python env, not from the repo",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Cardputer-UserDemo/issues/48",
+    "repository": "m5stack/M5Cardputer-UserDemo",
+    "base_branch": "main",
+    "base_commit": "a897c5f2752003dba6d960b572f4c6ec8e71abea",
+    "number": 48,
+    "author": "nuncio-bitis",
+    "language": "en",
+    "state": "OPEN",
+    "prior_comments": 0,
+    "related_pr": null,
+    "comment": "PENDING"
+  },
+  "hardware": {},
+  "firmware": {
+    "board": "Cardputer",
+    "soc": "ESP32-S3",
+    "target": "esp32s3",
+    "declared_toolchain": "ESP-IDF v4.4.6",
+    "observed_checker_toolchain": "ESP-IDF v6.1 constraints"
+  },
+  "execution": {
+    "environment": "macOS arm64; Python 3.13.15 (uv); local ESP-IDF checkout tag v6.1 (6.1.0); no Cardputer hardware used",
+    "tools": {
+      "python": "3.13.15",
+      "idf_checker_sha256": "11b5c8edc2aaac5854fad759cb4d4ae50ed98ee944b4f5cf8c26725672ddc00e",
+      "idf61_constraints_sha256": "fa2846f1e93ec3e604553a0b8a576a61c47737055360871b7be08523e1e47325",
+      "idf61_constraints_size": 16507
+    },
+    "repro": "code/repro.sh (writes only under /tmp; executed, exit 0)"
+  },
+  "evidence_class": "host-level test plus code-level verification; no hardware or virtual-device runtime",
+  "checks": [
+    {
+      "name": "issue_open_no_prior_reply",
+      "status": "PASS",
+      "evidence": "state=OPEN, comments=0, author_association=NONE, no related PR; evidence/issue-48.json"
+    },
+    {
+      "name": "repo_declares_idf_4_4_6",
+      "status": "PASS",
+      "evidence": "README.md:14 'ESP-IDF v4.4.6'; dependencies.lock:18 'version: 4.4.6'; flash.sh IDF_PATH=$HOME/esp/esp-idf-v4.4.6; evidence/repo-toolchain.txt"
+    },
+    {
+      "name": "repo_has_no_install_script_or_python_requirements",
+      "status": "PASS",
+      "evidence": "688 tracked files, no install.sh, no build requirements file; grep 'rich-click|bitarray' -> none; evidence/repo-toolchain.txt"
+    },
+    {
+      "name": "rich_click_1_9_0_belongs_to_idf_6_1",
+      "status": "PASS",
+      "evidence": "official espidf.constraints.v6.1.txt line 8 'rich-click~=1.9.0'; absent from ESP-IDF v4.4.6 requirements.txt (only click>=7.0); evidence/idf-constraints.txt"
+    },
+    {
+      "name": "checker_reports_stale_requirement_name",
+      "status": "PASS",
+      "evidence": "tools/check_python_dependencies.py:135 sets req, :176 prints it inside the dependency-tree except; requirement set order varies per process; evidence/checker-source.txt"
+    },
+    {
+      "name": "host_repro_rich_click_version_error",
+      "status": "PASS",
+      "evidence": "realistic IDF v6.1 venv passes the checker, then rich-click==1.8.9 downgrade yields 'Requirement rich-click~=1.9.0 was not met. Installed version: 1.8.9'; evidence/host-repro-idf61-env.txt"
+    },
+    {
+      "name": "host_repro_bitarray_metadata_error",
+      "status": "PASS",
+      "evidence": "removing only bitarray's dist-info reproduces 'No package metadata was found for bitarray'; evidence/host-repro-bitarray.txt"
+    },
+    {
+      "name": "host_repro_name_randomization",
+      "status": "PASS",
+      "evidence": "across 18 runs the printed prefix was packaging, bitstring or rich-click~=1.9.0 while the bitarray text stayed constant; one run matches the issue text verbatim; evidence/host-repro-bitarray.txt"
+    },
+    {
+      "name": "build_idf_4_4_6",
+      "status": "NOT RUN",
+      "evidence": "ESP-IDF 4.4.6 toolchain not installed; repo buildability not established by this record"
+    },
+    {
+      "name": "build_idf_6_1",
+      "status": "NOT RUN",
+      "evidence": "6.1 is not the declared toolchain; post-Python errors would be a separate issue"
+    },
+    {
+      "name": "inspect_reporter_environment",
+      "status": "NOT RUN",
+      "evidence": "no Diagnostic information block, idf.py --version or python -V from the reporter; attribution is inferred from constraints and checker source"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "failure occurs before any firmware exists"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "no firmware/image/serial/framebuffer exists at this stage; Device Service and esp-emulator cannot exercise a host Python env check"
+    }
+  ],
+  "limitations": [
+    "No ESP-IDF v4.4.6 build was executed, so 'the repo builds' is not proven.",
+    "The reporter's exact environment was not inspected; the conclusion is that the checker is using ESP-IDF v6.1 constraints, inferred from the unique rich-click~=1.9.0 pin.",
+    "Why install.sh did not update the checked environment is not directly observed; the reply requests the checker's Diagnostic information block.",
+    "No hardware or virtual-device validation applies to a host Python dependency check."
+  ],
+  "artifacts": [
+    "README.md",
+    "report.md",
+    "run.json",
+    "evidence/issue-48.json",
+    "evidence/repo-toolchain.txt",
+    "evidence/idf-constraints.txt",
+    "evidence/constraints61.txt",
+    "evidence/checker-source.txt",
+    "evidence/host-repro-idf61-env.txt",
+    "evidence/host-repro-bitarray.txt",
+    "code/repro.sh"
+  ]
+}

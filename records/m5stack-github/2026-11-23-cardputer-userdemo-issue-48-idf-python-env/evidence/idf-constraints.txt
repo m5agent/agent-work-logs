@@ -1,0 +1,65 @@
+# ESP-IDF python constraint facts
+# generated 2026-11-23T18:05:29Z
+
+## official ESP-IDF v6.1 constraints: https://dl.espressif.com/dl/esp-idf/espidf.constraints.v6.1.txt
+sha256: fa2846f1e93ec3e604553a0b8a576a61c47737055360871b7be08523e1e47325  size:    16507 bytes
+     1	# --------- CORE ----------
+     2	
+     3	# setuptools: version 64 is required to support PEP 621 - pyproject.toml (with editable installs)
+     4	setuptools>=64
+     5	
+     6	# click: Min. version was set to support the API used in idf.py and auto-completion
+     7	click>=7.0,<8.5
+     8	rich-click~=1.9.0
+     9	
+    10	# pyserial: Min. version was set to support the used API
+    11	pyserial>=3.3,<4
+    12	
+...
+   265	requests <=2.34.2; python_version < "3.16"
+   266	requests-file <=3.0.1; python_version < "3.16"
+   267	requests-toolbelt <=1.0.0; python_version < "3.16"
+   268	rich <=15.0.0; python_version < "3.16"
+   269	rich-click <=1.9.9; python_version < "3.16"
+   270	rpds-py <=0.30.0; python_version < "3.11"
+
+## ESP-IDF v6.1 requirements.core.txt (repo file, tag v6.1 6.1.0)
+     1	# Python package requirements for ESP-IDF. These are the so called core features which are installed in all systems.
+     2	#
+     3	# This file lists Python packages without version specifiers. Version details
+     4	# are stored in a separate constraints file. For more information, visit:
+     5	# https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/tools/idf-tools.html
+     6	
+     7	setuptools
+     8	packaging
+     9	click
+    10	rich-click
+    11	pyserial
+    12	cryptography
+    13	pyparsing
+    14	pyelftools
+
+## ESP-IDF v4.4.6 python requirements (root requirements.txt): https://raw.githubusercontent.com/espressif/esp-idf/v4.4.6/requirements.txt
+     1	# This is a list of python packages needed for ESP-IDF. This file is used with pip.
+     2	# Please see the Get Started section of the ESP-IDF Programming Guide for further information.
+     3	#
+     4	setuptools>=21
+     5	# The setuptools package is required to install source distributions and on some systems is not installed by default.
+     6	# Please keep it as the first item of this list. Version 21 is required to handle PEP 508 environment markers.
+     7	#
+     8	# importlib_metadata: is part of python3.8 and newer as importlib.metadata
+     9	importlib_metadata; python_version < "3.8"
+    10	packaging
+    11	click>=7.0
+    12	pyserial>=3.3
+    13	future>=0.15.2
+    14	
+    15	cryptography>=2.1.4
+    16	--only-binary cryptography
+    17	# Only binary for cryptography is here to make it work on ARMv7 architecture
+    18	# We do have cryptography binary on https://dl.espressif.com/pypi for ARM
+    19	# On https://pypi.org/ are no ARM binaries as standard now
+    20	
+
+## grep rich-click in v4.4.6 requirements.txt
+(none: v4.4.6 has no rich-click requirement)
