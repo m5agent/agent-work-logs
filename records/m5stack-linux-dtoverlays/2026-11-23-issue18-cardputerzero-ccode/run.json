@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "issue_triage",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/m5stack-linux-dtoverlays #18: brcm,ccode-map-trivial is the correct DT fix for CardputerZero 12/13-channel scans",
+  "source": {
+    "issue": "https://github.com/m5stack/m5stack-linux-dtoverlays/issues/18",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "number": 18,
+    "author": "cjct-dev",
+    "language": "en",
+    "state": "OPEN",
+    "prior_comments": 0,
+    "related_pr": null,
+    "comment": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "board": "CardputerZero (CM0)",
+    "soc": "RP3A0 (BCM2837)",
+    "wifi_chip": "CYW43439",
+    "driver": "brcmfmac",
+    "kernel": "6.18.39+rpt-rpi-v8",
+    "transport": "SDIO function 1 on mmcnr@7e300000"
+  },
+  "execution": {
+    "environment": "macOS arm64; no CardputerZero hardware; local Device Service cardputer-zero profile supported=false creatable=false backend_ready=false, missing __missing_qemu__/__missing_rom__, Linux ARM64 backend excluded from ESP emulator",
+    "tools": {
+      "dtc": "1.8.1",
+      "cpp": "Apple clang 21.0.0",
+      "fdtoverlay": "libfdt (host)"
+    },
+    "base_dtb": {
+      "source": "https://github.com/raspberrypi/firmware/raw/master/boot/bcm2710-rpi-cm0.dtb",
+      "sha256": "1ef5ed4abcb860a6b97efd31c4104a57e1ccc8d0dcec71834a3ac82ff71edb08",
+      "size": 33740
+    },
+    "patched_dtbo_sha256": {
+      "v3": "66abb56c386643343884406cf958b278abc3714848fe60f136c7c6f3e9e40239",
+      "v5": "941594104b6f72e67445c11aa9ec8caf74e9d45ee8ec7d7a842b3828a4974129"
+    },
+    "patch_sha256": "0968314a53b442035ab9aafcb478de9a24564a3094563f22ec73dd0c85d07704",
+    "kernel_source": "raspberrypi/linux rpi-6.18.y d4addd158e6e06df12e4ccaf95ba699a9ed047b2"
+  },
+  "evidence_class": "code-level verification plus host-level device-tree check; no hardware or virtual-device runtime",
+  "checks": [
+    {
+      "name": "issue_open_no_prior_reply",
+      "status": "PASS",
+      "evidence": "state=open, comments=0, no related PR; evidence/issue-18.json"
+    },
+    {
+      "name": "driver_failure_path",
+      "status": "PASS",
+      "evidence": "43439 absent from brmcf_use_iso3166_ccode_fallback() (cfg80211.c:8266-8280); translate returns -EINVAL (8282-8310); country iovar never written (8606-8610); evidence/kernel-ccode-path.txt"
+    },
+    {
+      "name": "property_semantics",
+      "status": "PASS",
+      "evidence": "brcm,ccode-map-trivial sets trivial_ccode_map (of.c:31-32), only read for brcm,bcm4329-fmac nodes (of.c:124-127); binding defines cc -> {cc,0} (yaml:91-99); evidence/kernel-ccode-path.txt"
+    },
+    {
+      "name": "dtb_target_path",
+      "status": "PASS",
+      "evidence": "/soc/mmcnr@7e300000/wifi@1 exists in CM0 DTB with compatible brcm,bcm4329-fmac; DT source bcm270x.dtsi:50 and bcm2710-rpi-cm0.dts:152-154; evidence/overlay-dt-check.txt"
+    },
+    {
+      "name": "patched_overlay_build_and_apply",
+      "status": "PASS",
+      "evidence": "v3 and v5 patched overlays compile with cpp+dtc and apply to the CM0 DTB via fdtoverlay (exit 0); property lands on wifi@1; evidence/overlay-dt-check.txt"
+    },
+    {
+      "name": "patch_applies_to_base",
+      "status": "PASS",
+      "evidence": "git apply --check at a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4 -> PATCH_APPLIES_OK; patches/0001-cardputerzero-ccode-map-trivial.patch"
+    },
+    {
+      "name": "shipped_prebuilt_dtbo",
+      "status": "REVIEW",
+      "evidence": "firmware/CardputerZero/overlays/cardputerzero-overlay.dtbo (6535 bytes, last changed 2026-02-08) has no mmcnr fragment and no brcm,ccode-map-trivial; it must be regenerated if stock images ship it"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "no CardputerZero hardware; reporter's GB scan/connect result not independently reproduced"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "cardputer-zero profile supported=false creatable=false backend_ready=false, missing QEMU/ROM, Linux ARM64 backend; no CYW43439 model; evidence/device-service-profile.json"
+    },
+    {
+      "name": "end_to_end_country_set",
+      "status": "NOT RUN",
+      "evidence": "no run of raspi-config / iw reg set + scan on channels 12/13, no reboot or runtime country switch"
+    },
+    {
+      "name": "other_iso_country_codes",
+      "status": "NOT RUN",
+      "evidence": "trivial map uses revision 0; only GB is reported as tested by the issue author"
+    }
+  ],
+  "limitations": [
+    "No hardware validation and no virtual-device validation in this environment.",
+    "Host-level DT check proves the overlay compiles and applies, not that the firmware accepts GB or scans channels 12/13.",
+    "The CYW43439 CLM may require non-zero revisions for some countries; the trivial map assumes ISO code plus revision 0.",
+    "The committed prebuilt dtbo under firmware/CardputerZero/overlays does not contain the change and needs regeneration."
+  ],
+  "artifacts": [
+    "README.md",
+    "report.md",
+    "evidence/issue-18.json",
+    "evidence/kernel-ccode-path.txt",
+    "evidence/overlay-dt-check.txt",
+    "evidence/device-service-profile.json",
+    "evidence/device-service-exclusion.txt",
+    "patches/0001-cardputerzero-ccode-map-trivial.patch"
+  ]
+}

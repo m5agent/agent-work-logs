@@ -1,0 +1,12 @@
+{
+  "number": 18,
+  "title": "CardputerZero: Wi-Fi never sees networks on 2.4 GHz channels 12 and 13 (the firmware stays on country US)",
+  "state": "open",
+  "html_url": "https://github.com/m5stack/m5stack-linux-dtoverlays/issues/18",
+  "created_at": "2026-11-23T16:05:09Z",
+  "updated_at": "2026-11-23T16:05:09Z",
+  "comments": 0,
+  "user": "cjct-dev",
+  "author_association": "NONE",
+  "body": "**Device:** CardputerZero (CM0, CYW43439 through `brcmfmac`), stock image: Debian 13, kernel `6.18.39+rpt-rpi-v8`,\nWi-Fi country set to GB.\n\n**Symptom.** Networks on channels 12 and 13 never show up, in a scan or in the launcher's Wi-Fi list, while other\ndevices in the same room see them. Routers in Europe and Asia often pick these channels by themselves.\n\n**Cause.** `brcmfmac` has no country-code mapping for this chip, so it never passes the configured country on to the\nfirmware. With driver debugging on, it logs `brcmf_translate_country_code No country codes configured for device`. The\nfirmware stays on its default country, US, which allows only channels 1 to 11.\n- `raspi-config nonint do_wifi_country GB` and `iw reg set GB` change only the kernel's channel list. `iw list` then\n  shows channels 12 and 13 as enabled, but scans still find nothing on them.\n- Setting `ccode=` in the NVRAM file does not help: the Raspberry Pi kernel intercepts it (`brcmfmac: intercepting\n  ccode=...`).\n\n**Fix.** `brcm,ccode-map-trivial` on the Wi-Fi node makes `brcmfmac` hand the ISO country code straight to the\nfirmware. It has been in use on one device since 17 November, and still works after restarts:\n\n```dts\n/dts-v1/;\n/plugin/;\n/ {\n\tcompatible = \"brcm,bcm2835\";\n\tfragment@0 {\n\t\ttarget-path = \"/soc/mmcnr@7e300000/wifi@1\";\n\t\t__overlay__ {\n\t\t\tbrcm,ccode-map-trivial;\n\t\t};\n\t};\n};\n```\n\nWith this loaded (`dtoverlay=` in `config.txt`) and the country set, the firmware uses the configured country, and\nnetworks on channels 12 and 13 scan and connect. The property would fit in `cardputerzero-overlay`, so that every\nCardputerZero uses the country it is set to.\n"
+}

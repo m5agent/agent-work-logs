@@ -1,0 +1,86 @@
+CardputerZero (CM0) device-tree checks - collected 2026-11-23
+
+Base DTB: raspberrypi/firmware master boot/bcm2710-rpi-cm0.dtb
+  https://github.com/raspberrypi/firmware/raw/master/boot/bcm2710-rpi-cm0.dtb
+  sha256 1ef5ed4abcb860a6b97efd31c4104a57e1ccc8d0dcec71834a3ac82ff71edb08
+  size 33740 bytes
+  wifi node path confirmed present:
+  988  			brcmf: wifi@1 {
+  989  				reg = <0x01>;
+  990  				compatible = "brcm,bcm4329-fmac";
+  991  				phandle = <0x86>;
+  992  			};
+  993  		};
+  994
+
+Kernel DT source that creates the node (rpi-6.18.y, d4addd1):
+  https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/arch/arm/boot/dts/broadcom/bcm270x.dtsi#L49-L60
+   49  		/* A clone of mmc but with non-removable set */
+   50  		mmcnr: mmcnr@7e300000 {
+   51  			compatible = "brcm,bcm2835-mmc", "brcm,bcm2835-sdhci";
+   52  			reg = <0x7e300000 0x100>;
+   53  			interrupts = <2 30>;
+   54  			clocks = <&clocks BCM2835_CLOCK_EMMC>;
+   55  			dmas = <&dma 11>;
+   56  			dma-names = "rx-tx";
+   57  			brcm,overclock-50 = <0>;
+   58  			non-removable;
+   59  			status = "disabled";
+   60  		};
+
+  https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/arch/arm/boot/dts/broadcom/bcm2710-rpi-cm0.dts#L144-L155
+  144  &mmcnr {
+  145  	pinctrl-names = "default";
+  146  	pinctrl-0 = <&sdio_pins>;
+  147  	bus-width = <4>;
+  148  	status = "okay";
+  149  	#address-cells = <1>;
+  150  	#size-cells = <0>;
+  151
+  152  	brcmf: wifi@1 {
+  153  		reg = <1>;
+  154  		compatible = "brcm,bcm4329-fmac";
+  155  	};
+
+Repository at a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4:
+  modules/CardputerZero/cardputerzero-v3-overlay.dts: 426 lines, fragment@6 at 407, no ccode property
+  modules/CardputerZero/cardputerzero-v5-overlay.dts: 502 lines, fragment@6 at 486, no ccode property
+  firmware/CardputerZero/config.txt:58  dtoverlay=cardputerzero-overlay
+  firmware/CardputerZero/overlays/cardputerzero-overlay.dtbo: 6535 bytes, committed 2026-02-08 (db765d2a70);
+    decompiled: no mmcnr fragment and no brcm,ccode-map-trivial property
+
+Patch: patches/0001-cardputerzero-ccode-map-trivial.patch (+7 lines in each overlay)
+  git apply --check -> PATCH_APPLIES_OK (base a3fd3e8)
+
+== environment ==
+Version: DTC 1.8.1
+Apple clang version 21.0.0 (clang-2100.1.1.101)
+
+== build v3 ==
+cpp v3 OK
+dtc v3 OK
+
+== build v5 ==
+cpp v5 OK
+dtc v5 OK
+
+== apply to CM0 base DTB ==
+fdtoverlay v3 OK
+			brcmf: wifi@1 {
+				brcm,ccode-map-trivial;
+				reg = <0x01>;
+				compatible = "brcm,bcm4329-fmac";
+				phandle = <0x86>;
+			};
+fdtoverlay v5 OK
+			brcmf: wifi@1 {
+				brcm,ccode-map-trivial;
+				reg = <0x01>;
+				compatible = "brcm,bcm4329-fmac";
+				phandle = <0x86>;
+			};
+
+== SHA256 ==
+66abb56c386643343884406cf958b278abc3714848fe60f136c7c6f3e9e40239  /tmp/patchgen/v3.dtbo
+941594104b6f72e67445c11aa9ec8caf74e9d45ee8ec7d7a842b3828a4974129  /tmp/patchgen/v5.dtbo
+1ef5ed4abcb860a6b97efd31c4104a57e1ccc8d0dcec71834a3ac82ff71edb08  /tmp/ksrc/bcm2710-rpi-cm0.dtb

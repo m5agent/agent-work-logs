@@ -1,0 +1,294 @@
+Raspberry Pi kernel rpi-6.18.y, commit d4addd158e6e06df12e4ccaf95ba699a9ed047b2
+The reported CardputerZero kernel is 6.18.39+rpt-rpi-v8 (same 6.18.y line).
+Collected 2026-11-23. Excerpts keep original line numbers.
+
+==================================================================
+of.c: no explicit brcm,ccode-map -> read brcm,ccode-map-trivial boolean
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/of.c#L16-L38
+------------------------------------------------------------------
+   16
+   17  static int brcmf_of_get_country_codes(struct device *dev,
+   18  				      struct brcmf_mp_device *settings)
+   19  {
+   20  	struct device_node *np = dev->of_node;
+   21  	struct brcmfmac_pd_cc_entry *cce;
+   22  	struct brcmfmac_pd_cc *cc;
+   23  	int count;
+   24  	int i;
+   25
+   26  	count = of_property_count_strings(np, "brcm,ccode-map");
+   27  	if (count < 0) {
+   28  		/* If no explicit country code map is specified, check whether
+   29  		 * the trivial map should be used.
+   30  		 */
+   31  		settings->trivial_ccode_map =
+   32  			of_property_read_bool(np, "brcm,ccode-map-trivial");
+   33
+   34  		/* The property is optional, so return success if it doesn't
+   35  		 * exist. Otherwise propagate the error code.
+   36  		 */
+   37  		return (count == -EINVAL) ? 0 : count;
+   38  	}
+
+==================================================================
+of.c: country-code parsing only runs for a node compatible with brcm,bcm4329-fmac
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/of.c#L118-L132
+------------------------------------------------------------------
+  118  	clk = devm_clk_get_optional_enabled_with_rate(dev, "lpo", 32768);
+  119  	if (IS_ERR(clk))
+  120  		return PTR_ERR(clk);
+  121
+  122  	brcmf_dbg(INFO, "%s LPO clock\n", clk ? "enable" : "no");
+  123
+  124  	if (!np || !of_device_is_compatible(np, "brcm,bcm4329-fmac"))
+  125  		return 0;
+  126
+  127  	err = brcmf_of_get_country_codes(dev, settings);
+  128  	if (err)
+  129  		brcmf_err("failed to get OF country code map (err=%d)\n", err);
+  130
+  131  	of_get_mac_address(np, settings->mac);
+  132
+
+==================================================================
+common.c: brcmf_of_probe() is called on the probed device when no board platform data exists
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/common.c#L597-L608
+------------------------------------------------------------------
+  597  				break;
+  598  			}
+  599  		}
+  600  	}
+  601  	if (!found) {
+  602  		/* No platform data for this device, try OF and DMI data */
+  603  		brcmf_dmi_probe(settings, chip, chiprev);
+  604  		if (brcmf_of_probe(dev, bus_type, settings) == -EPROBE_DEFER) {
+  605  			kfree(settings);
+  606  			return ERR_PTR(-EPROBE_DEFER);
+  607  		}
+  608  		brcmf_acpi_probe(dev, bus_type, settings);
+
+==================================================================
+sdio.c: the SDIO function device is what supplies the OF node
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c#L4200-L4208
+------------------------------------------------------------------
+ 4200  	sdiodev->cc_core = brcmf_chip_get_core(bus->ci, BCMA_CORE_CHIPCOMMON);
+ 4201  	if (!sdiodev->cc_core)
+ 4202  		goto fail;
+ 4203
+ 4204  	sdiodev->settings = brcmf_get_module_param(sdiodev->dev,
+ 4205  						   BRCMF_BUSTYPE_SDIO,
+ 4206  						   bus->ci->chip,
+ 4207  						   bus->ci->chiprev);
+ 4208  	if (IS_ERR_OR_NULL(sdiodev->settings)) {
+
+==================================================================
+sdio_bus.c: SDIO function of_node is the child node matching the function number
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/mmc/core/sdio_bus.c#L355-L376
+------------------------------------------------------------------
+  355  static inline void sdio_acpi_set_handle(struct sdio_func *func) {}
+  356  #endif
+  357
+  358  static void sdio_set_of_node(struct sdio_func *func)
+  359  {
+  360  	struct mmc_host *host = func->card->host;
+  361
+  362  	func->dev.of_node = mmc_of_find_child_device(host, func->num);
+  363  }
+  364
+  365  /*
+  366   * Register a new SDIO function with the driver model.
+  367   */
+  368  int sdio_add_func(struct sdio_func *func)
+  369  {
+  370  	int ret;
+  371
+  372  	dev_set_name(&func->dev, "%s:%d", mmc_card_id(func->card), func->num);
+  373
+  374  	sdio_set_of_node(func);
+  375  	sdio_acpi_set_handle(func);
+  376  	device_enable_async_suspend(&func->dev);
+
+==================================================================
+mmc core.c: child lookup matches reg == func_num (wifi@1, reg = <1>)
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/mmc/core/core.c#L1113-L1127
+------------------------------------------------------------------
+ 1113  struct device_node *mmc_of_find_child_device(struct mmc_host *host,
+ 1114  		unsigned func_num)
+ 1115  {
+ 1116  	struct device_node *node;
+ 1117
+ 1118  	if (!host->parent || !host->parent->of_node)
+ 1119  		return NULL;
+ 1120
+ 1121  	for_each_child_of_node(host->parent->of_node, node) {
+ 1122  		if (mmc_of_get_func_num(node) == func_num)
+ 1123  			return node;
+ 1124  	}
+ 1125
+ 1126  	return NULL;
+ 1127  }
+
+==================================================================
+cfg80211.c: ISO3166 fallback list excludes 43439; without a map translation fails with -EINVAL
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c#L8262-L8312
+------------------------------------------------------------------
+ 8262  	return wait_event_timeout(event->vif_wq,
+ 8263  				  vif_event_equals(event, action), timeout);
+ 8264  }
+ 8265
+ 8266  static bool brmcf_use_iso3166_ccode_fallback(struct brcmf_pub *drvr)
+ 8267  {
+ 8268  	if (drvr->settings->trivial_ccode_map)
+ 8269  		return true;
+ 8270
+ 8271  	switch (drvr->bus_if->chip) {
+ 8272  	case BRCM_CC_43430_CHIP_ID:
+ 8273  	case BRCM_CC_4345_CHIP_ID:
+ 8274  	case BRCM_CC_4356_CHIP_ID:
+ 8275  	case BRCM_CC_43602_CHIP_ID:
+ 8276  		return true;
+ 8277  	default:
+ 8278  		return false;
+ 8279  	}
+ 8280  }
+ 8281
+ 8282  static s32 brcmf_translate_country_code(struct brcmf_pub *drvr, char alpha2[2],
+ 8283  					struct brcmf_fil_country_le *ccreq)
+ 8284  {
+ 8285  	struct brcmfmac_pd_cc *country_codes;
+ 8286  	struct brcmfmac_pd_cc_entry *cc;
+ 8287  	s32 found_index;
+ 8288  	int i;
+ 8289
+ 8290  	if ((alpha2[0] == ccreq->country_abbrev[0]) &&
+ 8291  	    (alpha2[1] == ccreq->country_abbrev[1])) {
+ 8292  		brcmf_dbg(TRACE, "Country code already set\n");
+ 8293  		return -EAGAIN;
+ 8294  	}
+ 8295
+ 8296  	country_codes = drvr->settings->country_codes;
+ 8297  	if (!country_codes) {
+ 8298  		if (brmcf_use_iso3166_ccode_fallback(drvr)) {
+ 8299  			brcmf_dbg(TRACE, "No country codes configured for device, using ISO3166 code and 0 rev\n");
+ 8300  			memset(ccreq, 0, sizeof(*ccreq));
+ 8301  			ccreq->country_abbrev[0] = alpha2[0];
+ 8302  			ccreq->country_abbrev[1] = alpha2[1];
+ 8303  			ccreq->ccode[0] = alpha2[0];
+ 8304  			ccreq->ccode[1] = alpha2[1];
+ 8305  			return 0;
+ 8306  		}
+ 8307
+ 8308  		brcmf_dbg(TRACE, "No country codes configured for device\n");
+ 8309  		return -EINVAL;
+ 8310  	}
+ 8311
+ 8312  	found_index = -1;
+
+==================================================================
+cfg80211.c: on failure the country iovar is never written, so firmware keeps its default channels
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c#L8560-L8616
+------------------------------------------------------------------
+ 8560
+ 8561  static void brcmf_cfg80211_reg_notifier(struct wiphy *wiphy,
+ 8562  					struct regulatory_request *req)
+ 8563  {
+ 8564  	struct brcmf_cfg80211_info *cfg = wiphy_to_cfg(wiphy);
+ 8565  	struct brcmf_if *ifp = brcmf_get_ifp(cfg->pub, 0);
+ 8566  	struct brcmf_pub *drvr = cfg->pub;
+ 8567  	struct brcmf_fil_country_le ccreq;
+ 8568  	char *alpha2;
+ 8569  	s32 err;
+ 8570  	int i;
+ 8571
+ 8572  	err = brcmf_fil_iovar_data_get(ifp, "country", &ccreq, sizeof(ccreq));
+ 8573  	if (err) {
+ 8574  		bphy_err(drvr, "Country code iovar returned err = %d\n", err);
+ 8575  		return;
+ 8576  	}
+ 8577
+ 8578  	/* The country code gets set to "00" by default at boot - substitute
+ 8579  	 * any saved ccode from the nvram file unless there is a valid code
+ 8580  	 * already set.
+ 8581  	 */
+ 8582  	alpha2 = req->alpha2;
+ 8583  	if (alpha2[0] == '0' && alpha2[1] == '0') {
+ 8584  		extern char saved_ccode[2];
+ 8585
+ 8586  		if ((isupper(ccreq.country_abbrev[0]) &&
+ 8587  		     isupper(ccreq.country_abbrev[1])) ||
+ 8588  		    !saved_ccode[0])
+ 8589  			return;
+ 8590  		alpha2 = saved_ccode;
+ 8591  		pr_debug("brcmfmac: substituting saved ccode %c%c\n",
+ 8592  			 alpha2[0], alpha2[1]);
+ 8593  	}
+ 8594
+ 8595  	/* ignore non-ISO3166 country codes */
+ 8596  	for (i = 0; i < 2; i++)
+ 8597  		if (alpha2[i] < 'A' || alpha2[i] > 'Z') {
+ 8598  			bphy_err(drvr, "not an ISO3166 code (0x%02x 0x%02x)\n",
+ 8599  				 alpha2[0], alpha2[1]);
+ 8600  			return;
+ 8601  		}
+ 8602
+ 8603  	brcmf_dbg(TRACE, "Enter: initiator=%d, alpha=%c%c\n", req->initiator,
+ 8604  		  alpha2[0], alpha2[1]);
+ 8605
+ 8606  	err = brcmf_translate_country_code(ifp->drvr, alpha2, &ccreq);
+ 8607  	if (err)
+ 8608  		return;
+ 8609
+ 8610  	err = brcmf_fil_iovar_data_set(ifp, "country", &ccreq, sizeof(ccreq));
+ 8611  	if (err) {
+ 8612  		bphy_err(drvr, "Firmware rejected country setting\n");
+ 8613  		return;
+ 8614  	}
+ 8615  	brcmf_setup_wiphybands(cfg);
+ 8616  }
+
+==================================================================
+firmware.c (Raspberry Pi downstream): NVRAM ccode= is intercepted and commented out
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/drivers/net/wireless/broadcom/brcm80211/brcmfmac/firmware.c#L570-L590
+------------------------------------------------------------------
+  570  	}
+  571
+  572  	if (data) {
+  573  		char *ccode = strnstr((char *)data, "ccode=", data_len);
+  574  		/* Ensure this is a whole token */
+  575  		if (ccode && ((void *)ccode == (void *)data || isspace(ccode[-1]))) {
+  576  			/* Comment out the line */
+  577  			ccode[0] = '#';
+  578  			ccode += 6;
+  579  			if (isupper(ccode[0]) && isupper(ccode[1]) &&
+  580  			    isspace(ccode[2])) {
+  581  				pr_debug("brcmfmac: intercepting ccode=%c%c\n",
+  582  					 ccode[0], ccode[1]);
+  583  				saved_ccode[0] = ccode[0];
+  584  				saved_ccode[1] = ccode[1];
+  585  			}
+  586  		};
+  587
+  588  		nvram = brcmf_fw_nvram_strip(data, data_len, &nvram_length,
+  589  					     fwctx->req->domain_nr,
+  590  					     fwctx->req->bus_nr,
+
+==================================================================
+binding: brcm,ccode-map-trivial semantics (cc -> {cc,0}, rev 0; brcm,ccode-map wins)
+https://github.com/raspberrypi/linux/blob/d4addd158e6e06df12e4ccaf95ba699a9ed047b2/Documentation/devicetree/bindings/net/wireless/brcm,bcm4329-fmac.yaml#L84-L99
+------------------------------------------------------------------
+   84    brcm,ccode-map:
+   85      $ref: /schemas/types.yaml#/definitions/string-array
+   86      description: Multiple strings for translating ISO3166 country code to
+   87        brcmfmac firmware country code and revision.
+   88      items:
+   89        pattern: '^[A-Z][A-Z]-[A-Z][0-9A-Z]-[0-9]+$'
+   90
+   91    brcm,ccode-map-trivial:
+   92      description: |
+   93        Use a trivial mapping of ISO3166 country codes to brcmfmac firmware
+   94        country code and revision: cc -> { cc, 0 }. In other words, assume that
+   95        the CLM blob firmware uses ISO3166 country codes as well, and that all
+   96        revisions are zero. This property is mutually exclusive with
+   97        brcm,ccode-map. If both properties are specified, then brcm,ccode-map
+   98        takes precedence.
+   99      type: boolean
