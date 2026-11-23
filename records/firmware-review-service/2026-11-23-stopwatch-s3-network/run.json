@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "StopWatch 与 ESP32-S3 网络审查复验",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "cc25a8a8ac083e00608d591281289f1452cc75ac",
+    "reviewer_base_commit": "9e628827621d27a3de72e27177f2e5be2b93ebcd",
+    "reviewer_candidate_commit": "bf96c06d7064e7db7933ce23519079075de309f1",
+    "device_service_candidate_commit": "a4343d86d21a797ecf12384c9d200a9bc7ef2e32"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "qemu_sha256": "1733f511c4528cbd991e673069ecedf261b7043e8302553e050924089ce09bff",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "stopwatch_factory": "606aac7831cb4ca2bd45fdac40f0755fc918d1c7772caeaafa7965ef72c64bac",
+    "paperdiy": "a225471a938cd2ffef45b555f6518e485be9c09566fdb4235048962b7bfea2fd",
+    "s3_watch": "eb7f9425c07cffd972d0de479fc6c82d86af2aa51dc807d9829d5ee55add163b",
+    "cardputer": "7c8ddd56e87a3b3ef5a69721b0847eb8461cb1833eb68eade918290e21894bf3",
+    "cardputer_adv": "52e452cbf313540f8356ee2be56e56806de726c20169c512d830e59ab1fafa5e"
+  },
+  "execution": {
+    "environment": "Isolated Linux native QEMU and Device Service",
+    "network_policy": {
+      "isolation": "namespace",
+      "egress": "lab-only",
+      "dns": "deny"
+    },
+    "publication_submission": false,
+    "service_deployment": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "stopwatch cold setup actions",
+      "status": "PASS",
+      "detail": "Six ordered interactions through Setup AP startup"
+    },
+    {
+      "name": "stopwatch factory credential HTTP submission",
+      "status": "NOT RUN",
+      "detail": "Same-guest client for the actual portal contract unavailable"
+    },
+    {
+      "name": "stopwatch preconfigured original STA",
+      "status": "PASS",
+      "detail": "Association and DHCP using an isolated NVS fixture"
+    },
+    {
+      "name": "paperdiy STA board qualification",
+      "status": "PASS",
+      "detail": "Owned fixture association and completed DHCP; CrossPoint app NOT RUN"
+    },
+    {
+      "name": "cardputer and cardputer adv saved dry-run worker routing",
+      "status": "PASS",
+      "detail": "Two originals admitted; both guest network checks PARTIAL"
+    },
+    {
+      "name": "s3-watch native web toggle",
+      "status": "PASS",
+      "detail": "Mature OFF to Web address UI transition; HTTP NOT RUN in native QEMU"
+    },
+    {
+      "name": "s3-watch independent legacy HTTP",
+      "status": "PARTIAL",
+      "detail": "No HTTP response in 26 requests; I2C initialization marker captured in separate esp-emu guest"
+    },
+    {
+      "name": "stopwatch preconfigured saved snapshot dry-run",
+      "status": "PASS",
+      "detail": "Exact image, six verified actions, same guest finalized 1 DORA, zero active leases; aggregate app network remains PARTIAL"
+    },
+    {
+      "name": "candidate regression suites",
+      "status": "PASS",
+      "detail": "Reviewer 340 tests; emulator 2518 tests including 11 skipped; four generated contract checks passed"
+    }
+  ],
+  "evidence": [
+    "evidence/validation-summary.redacted.json",
+    "code/stopwatch-preconfigured-validation.json"
+  ]
+}

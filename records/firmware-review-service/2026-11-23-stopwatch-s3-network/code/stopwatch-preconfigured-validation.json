@@ -1,0 +1,235 @@
+{
+  "stopwatch_preconfigured_sta": true,
+  "pre_network_steps": [
+    {
+      "name": "dismiss_first_run",
+      "before": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          109,
+          114,
+          245,
+          42
+        ],
+        "sha256": "5840abe12c9fcea3b30b00e49509f0fc029faee88256ed635ce9fc1fed5899f0"
+      },
+      "after": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          170,
+          373,
+          128,
+          32
+        ],
+        "sha256": "a2b6cb48fdd763e9d86df67d0c8bb017b91c6c8f05c540624e16853186ff91b5"
+      },
+      "input": {
+        "kind": "chord",
+        "target": "button",
+        "keys": [
+          "a",
+          "b"
+        ],
+        "seconds": 1.5,
+        "settle_seconds": 1.0
+      },
+      "timeout_seconds": 15
+    },
+    {
+      "name": "select_settings_card",
+      "before": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          170,
+          373,
+          128,
+          32
+        ],
+        "sha256": "a2b6cb48fdd763e9d86df67d0c8bb017b91c6c8f05c540624e16853186ff91b5"
+      },
+      "after": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          174,
+          373,
+          118,
+          33
+        ],
+        "sha256": "5056109677e76cb6c88a026f120f84efc421fa2a20f432c461c6fc98c08491fa"
+      },
+      "input": {
+        "kind": "touch",
+        "x": 32,
+        "y": 233,
+        "action": "click",
+        "settle_seconds": 0.6
+      },
+      "timeout_seconds": 15
+    },
+    {
+      "name": "open_settings",
+      "before": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          174,
+          373,
+          118,
+          33
+        ],
+        "sha256": "5056109677e76cb6c88a026f120f84efc421fa2a20f432c461c6fc98c08491fa"
+      },
+      "after": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          182,
+          34,
+          101,
+          29
+        ],
+        "sha256": "f5843ea53ff739006ff9573f8a02e6bedc8bae3c3f0712f56b4bb5384d2b249a"
+      },
+      "input": {
+        "kind": "touch",
+        "x": 234,
+        "y": 230,
+        "action": "click",
+        "settle_seconds": 0.6
+      },
+      "timeout_seconds": 15
+    },
+    {
+      "name": "scroll_to_wifi",
+      "before": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          182,
+          34,
+          101,
+          29
+        ],
+        "sha256": "f5843ea53ff739006ff9573f8a02e6bedc8bae3c3f0712f56b4bb5384d2b249a"
+      },
+      "after": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          184,
+          112,
+          95,
+          36
+        ],
+        "sha256": "f6301bae6886d26872481eeb6df4beb59fb860331cfc2d62a0601bf4be2d9ad5",
+        "vertical_tolerance_px": 12
+      },
+      "input": {
+        "kind": "drag",
+        "x1": 236,
+        "y1": 398,
+        "x2": 236,
+        "y2": 130,
+        "settle_seconds": 0.8
+      },
+      "timeout_seconds": 15
+    },
+    {
+      "name": "open_wifi",
+      "before": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          184,
+          112,
+          95,
+          36
+        ],
+        "sha256": "f6301bae6886d26872481eeb6df4beb59fb860331cfc2d62a0601bf4be2d9ad5",
+        "vertical_tolerance_px": 12
+      },
+      "after": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          202,
+          245,
+          63,
+          35
+        ],
+        "sha256": "d706d9a0a8fd37bba3dfb6daa4feec4dbcda563d2ff0b28a2a440c79d2a59fd1"
+      },
+      "input": {
+        "kind": "touch",
+        "x": 234,
+        "y": 132,
+        "action": "click",
+        "settle_seconds": 0.9
+      },
+      "timeout_seconds": 15
+    },
+    {
+      "name": "enable_wifi",
+      "before": {
+        "kind": "frame_region_sha256",
+        "frame_size": [
+          466,
+          466
+        ],
+        "region": [
+          202,
+          245,
+          63,
+          35
+        ],
+        "sha256": "d706d9a0a8fd37bba3dfb6daa4feec4dbcda563d2ff0b28a2a440c79d2a59fd1"
+      },
+      "after": {
+        "kind": "serial_marker",
+        "marker": "Got IP:"
+      },
+      "input": {
+        "kind": "touch",
+        "x": 340,
+        "y": 160,
+        "action": "click",
+        "settle_seconds": 1.0
+      },
+      "timeout_seconds": 20
+    }
+  ]
+}
