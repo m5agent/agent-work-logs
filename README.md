@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-23 | ESP Emulator | Atom Lite「ATEM HD8 EMULATOR 1.01」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（启动/外设 PASS；readiness/输入属审查判定口径，非模拟器缺陷，未开 issue；真机/网络 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-23-atem-hd8-atom-lite-readiness-attribution/) |
 | 2026-11-23 | nuxt-m5-docs | 文档 Skill 过滤 Coming Soon 页面 | PASS（Linux 虚拟机正文核对、查询及 Skill Hub 回读） | [查看](records/nuxt-m5-docs/2026-11-18-documentation-skill-refresh/followups/2026-11-23-coming-soon-filter/) |
 | 2026-11-23 | `esphome-yaml` | #127 ESPHome 2026.11 addressable light 兼容性 | `PARTIAL`（构建 2026.11/2026.10 PASS；虚拟设备像素读回 PASS；实机 LED 输出 NOT RUN） | [查看](records/m5stack-github/2026-11-23-esphome-yaml-pr-127-addressable-light/) |
 | 2026-11-23 | Firmware Review Service | S3-watch 原版 WPA2/HTTP 与组合兼容性边界 | `PARTIAL`（原版正负控通过；组合 StopWatch 提升仍阻塞） | [查看](records/firmware-review-service/2026-11-23-stopwatch-s3-network/followups/2026-11-23-s3-watch-native-wpa2-http/) |

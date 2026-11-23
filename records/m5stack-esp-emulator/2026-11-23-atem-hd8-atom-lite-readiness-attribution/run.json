@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "firmware_review_attribution",
+  "overall_status": "PARTIAL",
+  "title": "Atom Lite ATEM HD8 EMULATOR 1.01 审查 E_SIM_APP_READY_PARTIAL 归因：非模拟器启动缺陷，未开 issue",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "55e5763ea",
+    "review_service_commit": "a938d9651af5dc9c94868bcede48f6a64712bcb9",
+    "review_job": "job-64c19d0704ae",
+    "lane": "SIM_PARTIAL",
+    "status": "manual_review",
+    "error_code": "E_SIM_APP_READY_PARTIAL"
+  },
+  "hardware": {
+    "device_id": "atom-lite",
+    "sku": "C008",
+    "soc": "ESP32-PICO-D4",
+    "flash_bytes": 4194304,
+    "psram_bytes": 0,
+    "display": null,
+    "controls": [
+      {
+        "id": "button",
+        "label": "USER",
+        "gpio": 39
+      }
+    ],
+    "runtime": "native-qemu",
+    "machine": "m5atomlite",
+    "physical_device": "NOT RUN"
+  },
+  "firmware": {
+    "name": "ATEM HD8 EMULATOR",
+    "version_name": "1.01",
+    "version_id": "2124772926055989250",
+    "firmware_id": "2122545120110657537",
+    "file_name": "atem-emu-atom-0.5.0-stock.bin",
+    "size": 522384,
+    "sha256": "86ad1b7f784e3a9965884f46e3114c03cfbd21aa9f9f4bf06b8578d4691c9758",
+    "composed_sha256": "3a59f6f97224f7c73bf1e803038f449135a5877af51e3f8e9a7115803b1e387e",
+    "composed_size": 4194304,
+    "flash_size_code": 2,
+    "bootloader_valid": true,
+    "partition_table_valid": true,
+    "app0_valid": true,
+    "app1_empty": true,
+    "spiffs_at_intake": "UNFORMATTED",
+    "app_descriptor": {
+      "idf_version": "v4.4.4",
+      "project_name": "arduino-lib-builder",
+      "compile_date": "Apr 20 2023",
+      "app_banner": "atem-emu-atom 0.5.0"
+    }
+  },
+  "execution": {
+    "environment": "macOS arm64; 审查任务证据目录只读归因; Device Service 原生 QEMU (m5atomlite); 未使用真机",
+    "task_id": "job-64c19d0704ae",
+    "session_id_sha256": "eecda6fe4e7b8711daafff8d821effdb5b0a32765265a4382b3709578ede16e5",
+    "observation_seconds": 60.14795287499874,
+    "samples": 13,
+    "final_session_state": "running"
+  },
+  "checks": [
+    {
+      "name": "content_rules",
+      "status": "PASS"
+    },
+    {
+      "name": "static_firmware",
+      "status": "PASS",
+      "detail": "bootloader 0x1000 有效; 分区表止于 0x400000; app0 有效; app1 空槽 0xff"
+    },
+    {
+      "name": "virtual_flash",
+      "status": "PASS",
+      "detail": "qemu-esptool 回读与 4 MiB 合成镜像逐字节相等"
+    },
+    {
+      "name": "guest_boot",
+      "status": "PASS",
+      "detail": "entry 0x400805e4; 串口 2.0 s 打印应用 ready 行; 无 panic/WDT/重启"
+    },
+    {
+      "name": "virtual_observation",
+      "status": "PASS",
+      "detail": "60.148 s / 13 采样全 running; 末态 running"
+    },
+    {
+      "name": "peripheral_activity",
+      "status": "PASS",
+      "detail": "led-frames 0->473, output-transitions 0->473, rmt tx-symbols 0->11352"
+    },
+    {
+      "name": "device_state",
+      "status": "PASS",
+      "detail": "live; onboard-io 可读"
+    },
+    {
+      "name": "boot_and_ui_readiness",
+      "status": "PARTIAL",
+      "detail": "无 framebuffer (frame_bytes=0, serial_only) 且任务未配置 ready_markers; wait.json 为空说明未发起 readiness 探测"
+    },
+    {
+      "name": "input_and_function",
+      "status": "NOT RUN",
+      "detail": "输入探针被 PNG 帧门控; accepted=0 changed=0; 计划默认 required_buttons=[a,b] 与单键板不符"
+    },
+    {
+      "name": "network_data_plane",
+      "status": "NOT RUN",
+      "detail": "机型无 NIC; native_sta=board_not_advertised; 固件自报 W5500 not found（外置 PoE 底座）"
+    },
+    {
+      "name": "first_boot_littlefs",
+      "status": "REVIEW",
+      "detail": "Corrupted dir pair -> mount failed (-84); 已知 sparse 镜像首启空白 FS (#206); guest 回退内置状态并完成格式化"
+    },
+    {
+      "name": "crash_diagnostics",
+      "status": "NOT RUN",
+      "detail": "no_evidence; panic_count=0; WDT=0; reboot_requests=0; core dump 未观测"
+    },
+    {
+      "name": "hardware_reproduction",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "emulator_defect_attribution",
+      "status": "PASS",
+      "detail": "failure_attribution 四个桶均为空; 启动/运行/外设阶段无模拟器缺陷证据"
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json",
+    "evidence/serial.log",
+    "evidence/qemu.stderr"
+  ],
+  "notes": [
+    "结论层级：virtual-device validation（启动/运行/外设）+ code-level verification（readiness 与输入门控代码）",
+    "未开 issue：主因在审查服务判定口径（ready_markers 未配置 + 输入 PNG 门控 + 固定文案），叠加无 framebuffer / 无 NIC 的能力边界；查重无同题 open issue",
+    "审查结论文案「首帧已出现」与 frame_bytes=0 矛盾，属审查服务表述缺口",
+    "网络 NOT RUN 不得表述为 FAIL 或「网络不通」；W5500 属外置 PoE 底座，不在 Atom Lite 模型范围",
+    "固件静态字符串含 2 个私网 IPv4 字面量（地址值不记录），交内容审查判断：REVIEW",
+    "未修改模拟器或审查服务代码，未 push 模拟器仓库，未新建会话，未关闭任何 issue"
+  ]
+}

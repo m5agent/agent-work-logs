@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "kind": "redacted_summary",
+  "redactions": [
+    "已删除设备 MAC 与 session 内部 fixture 字段，仅保留 SHA256 与计数",
+    "已删除本机绝对路径、内部端点与服务目录",
+    "未包含原始 4 MiB flash 镜像与固件 BIN，仅保留 SHA256、分区表和差异摘要",
+    "security 静态扫描命中的内网 IPv4 字面量已删除，仅保留计数"
+  ],
+  "source": {
+    "review_job": "job-64c19d0704ae",
+    "review_service_commit": "a938d9651af5dc9c94868bcede48f6a64712bcb9",
+    "emulator_repo_commit": "55e5763ea",
+    "session_id_sha256": "eecda6fe4e7b8711daafff8d821effdb5b0a32765265a4382b3709578ede16e5",
+    "source_artifact_sha256": "86ad1b7f784e3a9965884f46e3114c03cfbd21aa9f9f4bf06b8578d4691c9758",
+    "composed_firmware_sha256": "3a59f6f97224f7c73bf1e803038f449135a5877af51e3f8e9a7115803b1e387e",
+    "firmware_id": "2122545120110657537",
+    "version_id": "2124772926055989250",
+    "version_name": "1.01",
+    "file_name": "atem-emu-atom-0.5.0-stock.bin"
+  },
+  "emulator_failure": {
+    "schema_version": 2,
+    "category": "unresolved",
+    "phase": "guest_observation",
+    "source": "review_observation",
+    "source_code": "E_SIM_APP_READY_PARTIAL",
+    "device_id": "atom-lite",
+    "runtime": "qemu",
+    "guest": null,
+    "firmware_conclusion": "NOT EVALUATED",
+    "review_error_code": "E_SIM_APP_READY_PARTIAL"
+  },
+  "review_policy": {
+    "validation": {},
+    "content_review_required": true,
+    "execution_required": true,
+    "execution_scope": "virtual-device validation",
+    "network_claim_required": true,
+    "touch_claim_required": false,
+    "button_claim_required": true,
+    "ab_navigation_claim_required": false,
+    "input_probe_keys": [],
+    "input_hold_buttons": [],
+    "semantic_inputs": [],
+    "pre_network_setup_source": null,
+    "submit_enabled": true
+  },
+  "execution_plan": {
+    "runtime": "qemu",
+    "profile": null,
+    "whole_device": true,
+    "claims": {
+      "network_required": true,
+      "touch_required": false,
+      "button_required": true,
+      "required_buttons": [
+        "a",
+        "b"
+      ],
+      "physical_button_claim": false,
+      "probe_keys": [],
+      "hold_buttons": [],
+      "semantic_inputs": [],
+      "input_options": {},
+      "ab_navigation_required": false
+    },
+    "native_sta": {
+      "status": "unavailable",
+      "reason": "board_not_advertised"
+    },
+    "device": {
+      "device_id": "atom-lite",
+      "sku": "C008",
+      "features": {
+        "flash": true,
+        "serial": true,
+        "screenshot": false,
+        "input": true,
+        "qom": true,
+        "device_state": true,
+        "storage": false,
+        "network": false,
+        "network_capture": false
+      },
+      "network_status": "not-supported",
+      "warnings": [
+        "IR and other unselected peripheral paths remain unvalidated; browser admission is limited to its hash-pinned RGB/USER fixture."
+      ]
+    }
+  },
+  "firmware_analysis": {
+    "image_size": 4194304,
+    "valid": true,
+    "chip": "ESP32-PICO-D4",
+    "declared_flash_size": 4194304,
+    "bootloader": {
+      "offset": 4096,
+      "valid": true,
+      "segment_count": 3,
+      "entry_addr_hex": "0x400805e4",
+      "flash_mode": 2,
+      "flash_size_code": 2,
+      "hash_appended": true,
+      "secure_boot_v2": "not-found"
+    },
+    "partition_table": {
+      "offset": 32768,
+      "valid": true,
+      "md5": "972dae2ff872a0142d60bad124c0666b",
+      "partitions": [
+        {
+          "type": 1,
+          "subtype": 2,
+          "offset": 36864,
+          "size": 20480,
+          "label": "nvs",
+          "flags": 0
+        },
+        {
+          "type": 1,
+          "subtype": 0,
+          "offset": 57344,
+          "size": 8192,
+          "label": "otadata",
+          "flags": 0
+        },
+        {
+          "type": 0,
+          "subtype": 16,
+          "offset": 65536,
+          "size": 1310720,
+          "label": "app0",
+          "flags": 0
+        },
+        {
+          "type": 0,
+          "subtype": 17,
+          "offset": 1376256,
+          "size": 1310720,
+          "label": "app1",
+          "flags": 0
+        },
+        {
+          "type": 1,
+          "subtype": 130,
+          "offset": 2686976,
+          "size": 1441792,
+          "label": "spiffs",
+          "flags": 0
+        },
+        {
+          "type": 1,
+          "subtype": 3,
+          "offset": 4128768,
+          "size": 65536,
+          "label": "coredump",
+          "flags": 0
+        }
+      ]
+    },
+    "app_images": [
+      {
+        "offset": 65536,
+        "label": "app0",
+        "present": true,
+        "valid": true,
+        "size": 1310720,
+        "image_end": 522340,
+        "entry_addr_hex": "0x40082f90",
+        "segment_count": 5
+      },
+      {
+        "offset": 1376256,
+        "label": "app1",
+        "present": false,
+        "valid": false,
+        "size": 1310720,
+        "image_end": null,
+        "entry_addr_hex": null,
+        "segment_count": null
+      }
+    ],
+    "app_descriptor": {
+      "offset": 65568,
+      "secure_version": 0,
+      "version": "esp-idf: v4.4.4 e8bdaf9198",
+      "project_name": "arduino-lib-builder",
+      "compile_time": "00:53:55",
+      "compile_date": "Apr 20 2023",
+      "idf_version": "v4.4.4",
+      "elf_sha256": "2656a7807c2846aa0a03b0d3406ac09742328497a97d4a22f5ff4e36292cc231",
+      "min_efuse_blk_rev_full": 0,
+      "max_efuse_blk_rev_full": 0
+    },
+    "filesystems": [
+      {
+        "label": "spiffs",
+        "offset": 2686976,
+        "size": 1441792,
+        "type": "spiffs",
+        "status": "UNFORMATTED",
+        "errors": [
+          "SPIFFS partition appears erased or zero-filled"
+        ],
+        "sha256": "3cf4e5a0597dd20f5a6f7b56607f7ba795de600e159f06a7189f7a990f376b46"
+      }
+    ],
+    "bootloader_flash_contract": {
+      "declared_flash_size": 4194304,
+      "partition_end": 4194304,
+      "partitions_fit": true
+    }
+  },
+  "serial": {
+    "bytes": 926,
+    "sha256": "504b5662019279d6a7bc152f83758c9ddd7c73216a9f3c00637a9f54a20d67a3",
+    "text": "ets Jul 29 2019 12:21:46\n\nrst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)\nconfigsip: 0, SPIWP:0xee\nclk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00\nmode:DIO, clock div:1\nload:0x3fff0030,len:1184\nload:0x40078000,len:13220\nho 0 tail 12 room 4\nload:0x40080400,len:3028\nentry 0x400805e4\n00:00:00 atem-emu-atom 0.5.0\n./components/esp_littlefs/src/littlefs/lfs.c:1229:error: Corrupted dir pair at {0x0, 0x1}\nE (97) esp_littlefs: mount failed,  (-84)\nE (97) esp_littlefs: Failed to initialize LittleFS\n00:00:00 atem-emu-atom 0.5.0: ATEM Television Studio HD8 ISO, 1322 records, 0 macros, 30.00 fps, 1 M/E, 3 aux, PGM 5 Camera 5\n00:00:00 state: built-in standard HD8 ISO\n00:00:00 M/E1 PGM 1 Camera 1\n00:00:00 M/E1 PVW 3 Camera 3\n00:00:00 ethernet: W5500 not found - check the PoE base\n00:00:02 ethernet: 0.0.0.0, link down\n00:00:02 ready: ATEM udp 0.0.0.0:9910, videohub 9990, web :80, free heap 220724\n"
+  },
+  "qemu_runtime": {
+    "stdout_bytes": 0,
+    "stderr_bytes": 24,
+    "stderr_text": "Adding SPI flash device\n",
+    "stderr_sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+  },
+  "observation": {
+    "status": "PASS",
+    "required_seconds": 60,
+    "elapsed_seconds": 60.14795287499874,
+    "samples": 13,
+    "final_session_state": "running",
+    "frame_scope": "serial_only",
+    "frame_bytes": 0,
+    "frame_sha256": null,
+    "readiness": {
+      "initial_ready": false,
+      "ready": false,
+      "ready_reason": [],
+      "wait_payload_evidence": "wait.json 记录为空对象，未发起 readiness 探测"
+    },
+    "input_probe_timing": "not_run"
+  },
+  "qom_diff": {
+    "onboard_io/children/led-frames/value": {
+      "before": 0,
+      "after": 473
+    },
+    "onboard_io/children/led-rgb/value": {
+      "before": 0,
+      "after": 24
+    },
+    "onboard_io/children/output-transitions/value": {
+      "before": 0,
+      "after": 473
+    },
+    "rmt-classic/children/tx-completions/value": {
+      "before": 0,
+      "after": 473
+    },
+    "rmt-classic/children/tx-last-tick-hz/value": {
+      "before": 0,
+      "after": 10000000
+    },
+    "rmt-classic/children/tx-symbols/value": {
+      "before": 0,
+      "after": 11352
+    }
+  },
+  "flash": {
+    "size": 4194304,
+    "before_sha256": "3a59f6f97224f7c73bf1e803038f449135a5877af51e3f8e9a7115803b1e387e",
+    "after_sha256": "ba6ad62dc4eef887105c7c8f66abe83c8c13d8a784a2381884844a03366d59f3",
+    "changed_bytes": 129,
+    "range_count": 13,
+    "nvs_region_hex": "0x9000..0x9059",
+    "spiffs_region_hex": "0x290000..0x291034",
+    "ranges": [
+      {
+        "offset": 36864,
+        "length": 1
+      },
+      {
+        "offset": 36868,
+        "length": 5
+      },
+      {
+        "offset": 36892,
+        "length": 5
+      },
+      {
+        "offset": 36928,
+        "length": 3
+      },
+      {
+        "offset": 36932,
+        "length": 21
+      },
+      {
+        "offset": 2686976,
+        "length": 6
+      },
+      {
+        "offset": 2686983,
+        "length": 25
+      },
+      {
+        "offset": 2687009,
+        "length": 3
+      },
+      {
+        "offset": 2687015,
+        "length": 13
+      },
+      {
+        "offset": 2691072,
+        "length": 6
+      },
+      {
+        "offset": 2691079,
+        "length": 25
+      },
+      {
+        "offset": 2691105,
+        "length": 3
+      },
+      {
+        "offset": 2691111,
+        "length": 13
+      }
+    ]
+  },
+  "checks": {
+    "content": {
+      "status": "PASS"
+    },
+    "static_firmware": {
+      "status": "PASS"
+    },
+    "virtual_flash": {
+      "status": "PASS"
+    },
+    "boot_and_ui": {
+      "status": "PARTIAL",
+      "ready": false,
+      "initial_ready": false,
+      "frame_bytes": 0
+    },
+    "virtual_observation": {
+      "status": "PASS"
+    },
+    "input_and_function": {
+      "status": "NOT RUN",
+      "accepted": 0,
+      "changed": 0
+    },
+    "device_state": {
+      "status": "PASS"
+    },
+    "network": {
+      "status": "NOT RUN",
+      "data_plane": "NOT RUN",
+      "same_guest": false
+    },
+    "network_setup": {
+      "status": "NOT RUN"
+    },
+    "ap_provisioning": {
+      "status": "NOT RUN"
+    },
+    "security": {},
+    "crash_diagnostics": {
+      "status": "no_evidence"
+    }
+  },
+  "device_state": {
+    "supported": true,
+    "available": true,
+    "source": "live",
+    "components": [
+      "onboard-io"
+    ]
+  },
+  "crash_diagnostics": {
+    "status": "no_evidence",
+    "kind": null,
+    "repeated_resets": false,
+    "panic_count": 0,
+    "task_watchdog_reports": 0,
+    "reboot_requests": 0,
+    "rom_banners": 1,
+    "reset_reports": [
+      {
+        "code": "0x1",
+        "reason": "POWERON_RESET"
+      }
+    ],
+    "core_dump_status": "not_observed"
+  },
+  "review_service_code": {
+    "commit": "a938d9651af5dc9c94868bcede48f6a64712bcb9",
+    "ready_markers_source": "service/app.py:4017-4022：仅来自任务 network 配置或已保存 validation；缺失时不注入 serial_markers",
+    "wait_gate": "service/app.py:4041-4046：ready 为空对象时不调用 /sessions/{id}/wait",
+    "boot_status": "service/app.py:4743-4754：无 framebuffer 机型要求 serial_runtime_ready，而该值为真需 ready_markers 非空",
+    "input_probe_gate": "service/app.py:4312-4313、4346-4347：输入探针仅在帧以 PNG magic 起始时执行",
+    "readiness_reason": "service/app.py:5179-5181：boot_status != PASS 时固定写入「首帧已出现但应用级 readiness 未完全确认」并置 E_SIM_APP_READY_PARTIAL",
+    "button_claim": "service/app.py:806-825：描述含 button 词即 button_required；无显式 a/b 时默认 required_buttons=[a,b]"
+  },
+  "emulator_model_facts": {
+    "profile": "platform/qemu/profiles.json: atom-lite -> qemu-esp32lx6, display=null, input=gpio-button, peripherals=gpio-button/rgb-led/ir-tx-rx, peripheral_status=partial",
+    "device_spec": "devices/esp32-lx6/atom-lite/device.json: display=null, controls=[button USER gpio39], led_matrix=1x1",
+    "validation": "2026-10-29 native-selected-behaviors-pass：启动、两次 USER 按键、GPIO27 RMT RGB、无 LCD 契约共 13 项",
+    "ethernet_model": "platform/peripherals/catalog.json 仅有 ethernet-sr9900a（Cardputer Zero Linux 后端），无 W5500 SPI 模型",
+    "repo_commit": "55e5763ea"
+  },
+  "security_static": {
+    "status": "REVIEW",
+    "strings_lines": 6620,
+    "url_count": 0,
+    "private_ipv4_literal_count": 2,
+    "note": "仅计数，不记录地址值与用途；静态字符串扫描不等于病毒/木马检测"
+  },
+  "dedup": {
+    "searched": "atom-lite / ATOM_LITE / ready_markers / onboard_io / W5500 / littlefs / ethernet / readiness / screenshot",
+    "nearest": [
+      {
+        "issue": 221,
+        "state": "CLOSED",
+        "why_not": "Atom-Lite/Atom-Matrix 厂测固件 IDLE WDT abort 重启，本次无 WDT/重启"
+      },
+      {
+        "issue": 206,
+        "state": "CLOSED",
+        "why_not": "sparse merged 镜像首启空白 FS 已作为已知现象登记，本次 LittleFS 报错与之一致"
+      },
+      {
+        "issue": 224,
+        "state": "CLOSED",
+        "why_not": "eFuse MAC 全 0 导致联网固件停启，本次 MAC fixture 已 provisioned 且启动完成"
+      }
+    ],
+    "same_open_issue": null,
+    "decision": "非模拟器缺陷，未开 issue、未追加评论"
+  }
+}
