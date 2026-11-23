@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "kind": "follow_up",
+  "overall_status": "PASS",
+  "title": "文档 Skill 过滤 Coming Soon 页面",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "a03b1adfd6fa31f668ba6ae48097c323696848cb",
+    "workflow_commit": "74ccbb789062fc43b74e2673b115fbeb0c19af87"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "aarch64 Linux 7.0.12-linuxkit, Python 3.12.16, read-only virtio block device",
+    "builder": "tools/knowledge/update_docs_skill.py",
+    "artifact_sha256": "e9a83d2014f7157ccf1b6adbc3eec922c7de9f45759eb2fad10a43f745d9ae5e"
+  },
+  "checks": [
+    {"layer": "build", "status": "PASS", "target": "20 项回归测试和两次 ZIP 一致性验证"},
+    {"layer": "data_behavior", "status": "PASS", "target": "Linux 虚拟机内逐条读取 6410 篇索引正文，复核官网 URL 和 SKU 查询"},
+    {"layer": "delivery", "status": "PASS", "target": "Skill Hub 发布及本机安装 4401 个文件逐项回读"},
+    {"layer": "device_response", "status": "NOT RUN", "target": "M5Stack 固件及实机行为"}
+  ],
+  "evidence": ["evidence/coming-soon-filter-summary.json"]
+}

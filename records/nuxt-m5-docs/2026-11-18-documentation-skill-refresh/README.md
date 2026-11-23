@@ -14,3 +14,4 @@
 - [后续更新：M5Stack Assistant Local 多语文档和产品目录](followups/2026-11-18-assistant-local-multilingual/)
 - [后续更新：使用官网 URL 定位原文](followups/2026-11-18-official-url-lookup/)
 - [后续更新：接入官方文档反馈](followups/2026-11-18-official-feedback/)
+- [后续更新：过滤 Coming Soon 页面](followups/2026-11-23-coming-soon-filter/)
