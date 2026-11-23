@@ -1,0 +1,51 @@
+# 虚拟设备运行（Device Service，stackchan profile）
+
+profile：device_id=stackchan，backend=qemu-esp32s3，machine=m5stackchan，
+ILI9342C 320x240 + 触摸，flash 16 MB，peripheral_status=simulated，
+features.storage=false（无 microSD 模型），features.screenshot/input/serial=true。
+
+会话：session 7ff25f9c4bb84a5db2c6716e865c3a20
+firmware sha256 34bbac38be50050d7aa50715b108b987c0499ce1f46bb9c80c65b7f163878a31
+（上传的 merged-binary，12,941,738 B；flash verified=true，session_isolated_copy=true）
+
+## 步骤
+
+1. 上传 merged BIN -> 创建 stackchan firmware -> 创建 session（ttl 1800）。
+2. 串口确认启动到 Mooncake launcher；`[MUSIC] on create` 出现。
+3. 触摸 Skip -> launcher 轮播（8 个图标）。
+4. 右翻 6 次到第 7 个图标，画面显示 MUSIC 图标（assets 图标加载成功）。
+5. 点图标进入 App，采集主界面 / 设置 / 播放列表。
+6. 设置 -> EXIT，观察 warm reboot。
+7. 停止会话（purge=false），导出 evidence ZIP。
+
+## 观测
+
+- 启动日志（节选）：
+    [MUSIC] on create
+    [Launcher] handle open app, app id: 7
+    [MUSIC] on open
+    CoreS3AudioCodec: Audio IOs: mclk: 0, bclk: 34, ws: 33, dout: 13, din: 14
+    AudioCodec: Set output volume to 70
+    E (55523) sdmmc_sd: sdmmc_init_sd_if_cond: send_if_cond (1) returned 0x108
+    E (55523) vfs_fat_sdmmc: sdmmc_card_init failed (0x108).
+    W (55523) gpio: conflict found for GPIO[4]
+    W [MUSIC] SD mount failed on SPI3_HOST: ESP_ERR_INVALID_RESPONSE
+- 无卡时主界面标题 "NO MUSIC"，其余控件正常；播放列表显示
+  "SD NOT MOUNTED / FORMAT AS FAT32"（截图 02、04）。
+- 设置页 LOOP/SHUFFLE/LIGHTS/MOVE/PLAYLIST/HEAD/EXIT 与 BACK 均渲染正常（截图 03）。
+- 内部 SRAM：launcher 空闲 free 111 KB / minimal 44 KB；进入 MUSIC 后
+  free 92 KB / minimal 39,828 B。
+- EXIT 后串口出现 `[HAL] warm reboot request to app index: 6`，设备执行
+  RTC_SW_CPU_RST 复位；第二次 application_load 后停在
+  `I (43018) cpu_start: Multicore app`，40 s 内没有继续输出，画面为背景色
+  （截图 05）。diagnostics 无 panic、无 task WDT 报告，复位前没有异常。
+  该停点在 app_main 之前，与 MUSIC 代码无关，判为虚拟设备 warm-reset 路径限制；
+  没有在实机复现。
+
+## 边界
+
+- 没有 microSD 模型，未验证挂载成功、扫描、解码、播放、进度、seek、NVS 持久化。
+- 触摸坐标注入是控制器坐标，不代表实机触摸手感/校准。
+- 未做音频采集，音质/音量/爆音均 NOT RUN。
+- 未验证舵机、RGB、头部校准的实际运动；只验证 UI 与代码路径。
+- 虚拟设备不建模 GPIO35 pad 级冲突与 SD 电气层。

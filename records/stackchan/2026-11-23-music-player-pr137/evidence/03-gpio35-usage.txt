@@ -1,0 +1,34 @@
+# GPIO35 双用途核对（head db4fee0）
+
+## PR 的改动
+
+main/hal/board/stackchan.cc:569
+    buscfg.miso_io_num = GPIO_NUM_35;
+
+同一文件 :587（上游既有代码，未改动）
+    io_config.dc_gpio_num = GPIO_NUM_35;
+
+即本固件把 GPIO35 同时作为 SPI3 的 MISO 和 ILI9342 的 D/C。这不是笔误：CoreS3 的
+LCD D/C 与 microSD MISO 在硬件上共用 GPIO35，M5GFX 的 Panel_M5StackCoreS3 也显式
+按 LCD CS 切换该脚角色（GPIO_FUNC35_OUT_SEL_CFG_REG 在 FSPIQ_OUT_IDX 与
+SIG_GPIO_OUT_IDX 之间切换，并在 CS 高时关闭输出使能）。
+
+## 关键判定：IDF v6.1 的 esp_lcd SPI panel IO 会释放 D/C 脚
+
+components/esp_lcd/spi/esp_lcd_panel_io_spi.c（本机 ESP-IDF v6.1 源码）：
+
+- :101-103 初始化时 gpio_set_level(dc,0) + gpio_output_enable(dc)
+- :423-430 pre_trans_cb：每笔事务开始前设置 D/C 电平并 gpio_ll_output_enable
+- :438-441 post_trans_color_cb：每笔事务结束后 gpio_ll_output_disable(dc)
+  （注释 "disable the D/C output as we no longer need it"）
+
+因此 GPIO35 在 LCD 事务之间是输入（MISO 可读），仅在某笔 LCD 事务进行期间被驱动为
+D/C；SD 与 LCD 共用 SPI3 总线的设备级事务由 SPI master 串行化，二者不会同时占用总线。
+按当前 IDF v6.1 实现，PR 只改 buscfg.miso_io_num 即可工作。
+
+## 反例边界
+
+- 该结论绑定 IDF v6.1 的 esp_lcd 行为；若后续 IDF 改回“D/C 常开”，GPIO35 会重新与
+  MISO 冲突。建议在 board 文件加一行注释说明这一依赖。
+- 虚拟设备不建模 pad 级冲突，因此本次运行不能证明电气层行为；只证明固件在该
+  IDF 版本下能启动并正常渲染。

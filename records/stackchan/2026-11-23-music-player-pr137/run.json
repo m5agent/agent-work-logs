@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "StackChan PR #137 MicroSD music player app review",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/StackChan/pull/137",
+    "repository": "https://github.com/m5stack/StackChan",
+    "base_commit": "28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400",
+    "head_commit": "db4fee0f5525a80ee34cd71131f2fb2739621e35"
+  },
+  "hardware": {
+    "target": "M5Stack StackChan (CoreS3, ESP32-S3)",
+    "access": "NOT RUN (no device access)"
+  },
+  "firmware": {
+    "target": "M5Stack StackChan (ESP32-S3, 16 MB flash / 8 MB PSRAM)",
+    "build": "PASS",
+    "flash": "PASS (virtual flash, session-isolated copy, verified=true)",
+    "image_sha256": "de1b0779acf8d8143ad530c2d5e8d0f20e1d561f195c16442db7673a85377583",
+    "app_sha256": "85109918823d2ac62c323f86e5e6c72bb732d86ca0c93b4cf19d1ca6baad9386",
+    "app_size": 3976928,
+    "merged_size": 12941738,
+    "reported_partition": "ota_0 0x4f0000, app 0x3caee0, 23% free; assets 4 MB at 0xA00000"
+  },
+  "execution": {
+    "environment": "macOS 15 arm64, ESP-IDF v6.1, xtensa-esp-elf GCC 15.2.0, local Device Service stackchan QEMU profile",
+    "task_id": "",
+    "session_id": "7ff25f9c4bb84a5db2c6716e865c3a20",
+    "device_id": "stackchan",
+    "runtime": "qemu-esp32s3 / m5stackchan"
+  },
+  "checks": [
+    {
+      "name": "PR state and prior replies",
+      "command": "gh pr view 137 --repo m5stack/StackChan --json state,comments,reviews",
+      "status": "PASS",
+      "detail": "OPEN, comments=[], reviews=[]; no prior m5agent reply"
+    },
+    {
+      "name": "PR scope and fixed commits",
+      "command": "git clone + git diff --stat base...head",
+      "status": "PASS",
+      "detail": "15 files, +8052/-9; head db4fee0, base 28b9f0c"
+    },
+    {
+      "name": "device profile availability",
+      "command": "GET /api/v1/devices",
+      "status": "PASS",
+      "detail": "stackchan profile: ESP32-S3, ILI9342C 320x240 touch, generic-flash, features.storage=false"
+    },
+    {
+      "name": "SD/DC pin sharing trace",
+      "command": "read IDF v6.1 esp_lcd_panel_io_spi.c + board file",
+      "status": "PASS",
+      "detail": "GPIO35 is LCD DC and SD MISO by design; IDF disables DC output after each transaction, so MISO is readable between transactions"
+    },
+    {
+      "name": "visibility mask migration trace",
+      "command": "read hal_toggles.h/hal_toggles.cpp",
+      "status": "PASS",
+      "detail": "MASK_KEY renamed to visible_mask_v2; old visible_mask never read; save_states writes only the mask"
+    },
+    {
+      "name": "firmware build",
+      "command": "python3 ./fetch_repos.py && idf.py build",
+      "status": "PASS",
+      "detail": "2503/2503, exit 0, app 0x3caee0 (23% free), merged 12,941,738 B"
+    },
+    {
+      "name": "virtual device boot and UI",
+      "command": "Device Service artifact/firmware/session/input/frame",
+      "status": "PASS",
+      "detail": "MUSIC installed as 7th launcher icon, app opens, main/settings/playlist render, no-SD mount failure handled"
+    },
+    {
+      "name": "virtual device microSD playback",
+      "command": "",
+      "status": "NOT RUN",
+      "detail": "stackchan profile has no storage model; mount fails with ESP_ERR_INVALID_RESPONSE 0x108"
+    },
+    {
+      "name": "virtual device warm reboot",
+      "command": "settings -> EXIT",
+      "status": "PARTIAL",
+      "detail": "warm reboot index 6 logged and RTC_SW_CPU_RST executed; second boot stops at 'cpu_start: Multicore app' before app_main, no panic/TWDT; treated as emulator reset limitation"
+    },
+    {
+      "name": "hardware validation",
+      "command": "",
+      "status": "NOT RUN",
+      "detail": "no device access"
+    }
+  ],
+  "evidence": [
+    "evidence/01-scope.txt",
+    "evidence/02-device-profile-redacted.json",
+    "evidence/03-gpio35-usage.txt",
+    "evidence/04-code-findings.txt",
+    "evidence/05-build.txt",
+    "evidence/06-virtual-device-run.txt",
+    "evidence/frames/01-launcher-music-icon.png",
+    "evidence/frames/02-music-main-no-sd.png",
+    "evidence/frames/03-music-settings.png",
+    "evidence/frames/04-playlist-sd-not-mounted.png",
+    "evidence/frames/05-after-exit-warm-reboot-stalled.png"
+  ],
+  "notes": [
+    "Read-only review: no upstream push, no PR close, one comment only.",
+    "Findings F1-F7 documented with file:line in report.md; none blocking.",
+    "Author hardware claims (1,022 tracks, full build) are self-reported; build reproduced, playback not."
+  ]
+}

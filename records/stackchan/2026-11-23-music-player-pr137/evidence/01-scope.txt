@@ -1,0 +1,33 @@
+# PR 137 head and scope
+head_commit: db4fee0f5525a80ee34cd71131f2fb2739621e35
+base_commit: 28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400
+
+ README.md                                          |   10 +
+ firmware/README.md                                 |   11 +
+ firmware/main/CMakeLists.txt                       |    2 +
+ .../apps/app_music_player/app_music_player.cpp     | 2255 +++++++++++++
+ .../main/apps/app_music_player/app_music_player.h  |  268 ++
+ .../main/apps/app_music_player/assets/icon_music.c | 3543 ++++++++++++++++++++
+ firmware/main/apps/app_music_player/minimp3.h      | 1948 +++++++++++
+ firmware/main/apps/app_setup/app_setup.cpp         |    2 +-
+ firmware/main/apps/apps.h                          |    1 +
+ firmware/main/assets/assets_bin/icon_music.bin     |  Bin 0 -> 84612 bytes
+ firmware/main/hal/board/stackchan.cc               |    2 +-
+ firmware/main/hal/hal.cpp                          |    6 +-
+ firmware/main/hal/hal_toggles.h                    |    9 +-
+ firmware/main/main.cpp                             |    2 +
+ firmware/sdkconfig.defaults                        |    2 +
+ 15 files changed, 8052 insertions(+), 9 deletions(-)
+
+# PR state at review
+state: OPEN
+comments: 0
+reviews: 0
+author: NicolasChicunque
+language: en (title + body)
+head ref: feat/music-player (db4fee0)
+
+# Build/dependency notes
+fetch_repos.py: mooncake v2.3.3, mooncake_log v1.5.0, smooth_ui_toolkit v2.12.0,
+xiaozhi-esp32 v2.5.2 + patches/xiaozhi-esp32.patch, ArduinoJson v7.4.2, esp-now c3b5f9b
+managed_components: 63

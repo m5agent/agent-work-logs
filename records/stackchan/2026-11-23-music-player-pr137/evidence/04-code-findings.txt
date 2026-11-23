@@ -1,0 +1,59 @@
+# PR 137 源码定位（head db4fee0）
+
+## F1 并发：onRunning 在 LVGL 锁外调用 GetStackChan().update()
+
+main/apps/app_music_player/app_music_player.cpp
+   306:    beat_update(now);
+   307:    GetStackChan().update();
+   308:
+   309:    {
+   310:        LvglLockGuard lock;
+   ...
+   326:        view::update_home_indicator();
+
+对照：
+- main/hal/hal.cpp:158-160 `LvglLockGuard lock;` 之后才调用 `GetStackChan().update()`
+- main/apps/app_dance/app_dance.cpp:97-118 同样先 `LvglLockGuard lvgl_lock;`
+- stackchan::Avatar::update() 会遍历 LVGL 元素并更新它们
+  （main/stackchan/stackchan.h:130-145 -> avatar.h:update -> skins/default/eyes.cpp
+   使用 uitk::lvgl_cpp::Container 包装的 lv_obj）
+Mooncake 主循环在 app_main 任务（main/main.cpp:55-63），LVGL 由 esp_lvgl_port 独立任务
+渲染，HAL 的 _stackchan_update_task 也在另一任务，所以这是跨任务 LVGL 访问。
+
+## F2 NVS 可见性键改名
+
+main/hal/hal_toggles.h:10
+    inline constexpr const char* MASK_KEY = "visible_mask_v2";
+旧键为 "visible_mask"（6 bit）。main/hal/hal_toggles.cpp:57-74 的 save_states() 只写
+MASK_KEY，从不写 TOGGLE_LIST[i].key 对应的旧版独立键；load_states() 在 v2 缺失时回退
+到这些独立键（:35-47），因此现网只写过 mask 的设备会落到 default_states()（全开）。
+
+## F3 WAV 位深
+
+main/apps/app_music_player/app_music_player.cpp:614 probe_wav 对任意 format_tag==1 的
+PCM 文件都置 info.valid=true（未限制 bits）；:864-874 播放分支只处理 16/8 bit，其余
+直接 close_file + _track_eof=true，表现为“显示时长、播放时静默跳到下一首”。
+
+## F4 MP3 缓冲丢弃
+
+同文件 :926-937：frame_info.frame_bytes == 0 且未 EOF 时 `mp3_buf_filled = 0`，丢掉整个
+最多 16 KB 的缓冲；改为前移 1 字节重新同步可避免吞掉后续有效音频。
+:647 probe_mp3 在没有找到帧头时也置 valid=true，坏文件会显示 0:00。
+
+## F5 PsramAllocator
+
+main/apps/app_music_player/app_music_player.h:27-34 allocate() 在 OOM 时返回 nullptr，
+而标准 allocator 语义要求抛 std::bad_alloc；std::vector/std::string 在容量增长时依赖该
+契约，返回空指针属于未定义行为。
+
+## F6 与本功能无关的全局时序改动
+
+main/hal/hal.cpp:151-160 把非 idle 分支的 vTaskDelay 从 100 ms 改为 80 ms（并移出
+LvglLockGuard，移出锁本身是好的）。20 ms 的全局变化影响所有 App，与本 PR 无关。
+
+## F7 打开 App 时同步扫描
+
+main/apps/app_music_player/app_music_player.cpp:245-246 onOpen 内 mount_sd() +
+scan_tracks() 先于 build_ui() 执行；scan_tracks() 递归 3 层、上限 2000 条，循环内无让出。
+1,000+ 曲目时为秒级首帧延迟。open_list()（:1941-1948）在列表为空时会重试挂载，插卡后
+可从这里恢复。

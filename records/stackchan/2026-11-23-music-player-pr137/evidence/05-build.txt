@@ -1,0 +1,20 @@
+# 固件构建（PR head db4fee0）
+
+工具链：ESP-IDF v6.1（version.txt = v6.1），xtensa-esp32-elf-gcc 15.2.0
+目标：esp32s3，16 MB flash，8 MB PSRAM（sdkconfig.defaults）
+依赖：`python3 ./fetch_repos.py` 拉取 mooncake v2.3.3 / mooncake_log v1.5.0 /
+smooth_ui_toolkit v2.12.0 / xiaozhi-esp32 v2.5.2（含 patches/xiaozhi-esp32.patch）/
+ArduinoJson v7.4.2 / esp-now c3b5f9b，IDF 组件管理器补齐 63 个 managed_components。
+
+命令：`idf.py build` -> 2503/2503，退出码 0
+
+关键尺寸：
+  stack-chan.bin    0x3caee0 = 3,976,928 B，分区 0x4f0000，余量 0x125120 (23%)
+  merged-binary.bin 12,941,738 B（含 bootloader/partition/ota_data/app/assets）
+  assets 分区使用 2432 KB / 4096 KB
+
+二进制 SHA-256：
+  merged-binary.bin de1b0779acf8d8143ad530c2d5e8d0f20e1d561f195c16442db7673a85377583
+  stack-chan.bin    85109918823d2ac62c323f86e5e6c72bb732d86ca0c93b4cf19d1ca6baad9386
+
+结论：build = PASS。PR 正文所述“idf.py build 零错误”在本机复现。
