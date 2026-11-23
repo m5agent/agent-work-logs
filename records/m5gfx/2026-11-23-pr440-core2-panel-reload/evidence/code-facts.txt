@@ -1,0 +1,80 @@
+M5GFX PR #440 code facts
+base 43a87193f898f998edf79c5fb99b166d11ee1eaf (develop tip)
+head 81642aef6a6571330689d581005b94286955de3b
+diff: 9 files, +114 / -8 (evidence/pr440.diff)
+
+1. New reset flag
+src/board_detect/board_detect.hpp:166-174
+  reset_panel_reload = 1 << 2, documented as i2c_regs only.
+src/board_detect/m5/esp32_d0wdq6.inl:60 (desc_core2) and :75 (desc_tough)
+  i2c_reset(1, 10, reset_panel_reload)
+  -> 1 ms assert, 10 ms post-release, same for all Core2 PMIC variants
+     (AXP192 / AXP2101) and Tough.
+
+2. Flag applicability check
+src/board_detect/prepare.inl:367-370
+  description_valid() rejects reset_panel_reload when reset.kind != i2c_regs
+  or when reset_hold_when_skipped is also set.
+
+3. Pre-reset Sleep In observation
+src/board_detect/m5/board_registry.inl:120-148
+  read_byte() extracted from read_parameter(); panel_sleep_in() reads RDDPM
+  (0x0A) directly and tests (value & 0x18) == 0x08 (Normal Mode On, Sleep Out
+  clear); a zero read is not treated as Sleep In.
+src/board_detect/m5/esp32_d0wdq6.inl:495-503
+  observation happens after identify_panel_variant() and before prepare_reset();
+  only recorded while !reload.reset_seen and only when the variant is known.
+  After that, src/board_detect/m5/esp32_d0wdq6.inl:504-515 probes the panel
+  again after the reset for up to 120 ms.
+
+4. State and deadline
+src/board_detect/prepare.inl:22-40
+  inline panel_reload() returns one function-local static {reset_seen, sleep_in,
+  pending, ready_ms}; panel_reload_ms = 122 (120 ms datasheet + millis margin).
+  The function is inline, so the static is one object for the whole program.
+src/board_detect/prepare.inl:260-261
+  power list released a panel that was held in reset -> reset_seen = true
+  (no observation may be trusted afterwards; no wait scheduled here).
+src/board_detect/prepare.inl:515
+  reset assert attempted -> reset_seen = true.
+src/board_detect/prepare.inl:539-552
+  after the release sequence: if !sleep_in, ready_ms = millis() + 122 and
+  pending = true (also when the release sequence reported an error, because it
+  may have released the panel); sleep_in is cleared.
+
+5. Wait and call sites
+src/board_detect/detection_integration.inl:226-239
+  wait_panel_ready(): clears sleep_in, returns if !pending, clears pending,
+  left = ready_ms - millis(); delays only when 0 < left <= 122.
+src/M5GFX.cpp:925 (fixed-board startup) and src/M5GFX.cpp:1039
+  (outcome.adopted, detection path), both immediately before
+  _init_adopted_panel(use_clear) -> LGFX_Device::init_impl(false, ...), i.e.
+  before the panel init list. No other caller.
+
+6. Why the fix matches issue #438
+- The pre-reset observation is a valid "panel was displaying" test because the
+  ESP32 EN/RST reset does not reset the panel; the panel is still displaying
+  when M5.begin() runs.
+- If it was displaying, the reset starts the up-to-120 ms NV reload; the init
+  list is now held until 122 ms after the release instead of ~6-32 ms.
+- If it was already in Sleep In, a reset in Sleep In has no long reload, so the
+  wait is skipped, preserving the power-on/blank-state 32 ms start.
+- Once a flagged reset has been attempted, later RDDPM reads are ignored
+  (a reloading panel also reads Sleep In), so a retry cannot mistake the
+  reloading panel for a safe one.
+
+7. init_without_reset() caveat
+src/board_detect/detect_types.hpp:171
+  run_detection_session() sets request.allow_reset = true when
+  attempt + 2 == max_attempts. M5GFX::begin() uses max_attempts = 5, so
+  init_without_reset() (use_reset = false) can still reset on attempts 4 and 5
+  and then waits. src/M5GFX.h:304-305 already documents this promotion; the PR body
+  sentence "init_without_reset() ... does not reset the panel and does not wait"
+  is only true for the first three attempts.
+
+8. Test coverage in the PR
+test/board_detect/esp32_families.cpp:122-146
+  new core_panel_sleep_in() covers four RDDPM/reset_seen combinations and
+  asserts the read count (3 reads when unreset, 2 after reset_seen).
+  No host test drives apply_reset()/wait_panel_ready() with a fake clock, so
+  the 122 ms deadline and the skip/wait decision are not asserted end to end.

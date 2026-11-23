@@ -1,0 +1,53 @@
+Build and run record (both builds use the same harness)
+
+Source
+- PR head 81642aef6a6571330689d581005b94286955de3b (tree /tmp/pr440/M5GFX)
+- base 43a87193f898f998edf79c5fb99b166d11ee1eaf (tree /tmp/base440/M5GFX)
+- Project: examples/Test/build_test (the ESP-IDF CI example), target esp32,
+  ESP-IDF v6.1, xtensa toolchain, default 2 MB flash header.
+- Measurement harness only: examples/Test/build_test/main/main.cpp was replaced
+  with setup(){init + markers + small drawing} and loop(){ALIVE marker};
+  diff in evidence/harness-main.diff. No M5GFX source was modified.
+
+Commands (same for both trees)
+  . ~/Documents/esp-idf-6.1/export.sh
+  cd <tree>/examples/Test/build_test
+  idf.py set-target esp32
+  idf.py build
+  python -m esptool --chip esp32 merge-bin -o <out>.bin --flash-mode dio \
+    --flash-freq 40m --flash-size 2MB 0x1000 bootloader/bootloader.bin \
+    0x8000 partition_table/partition-table.bin 0x10000 M5GFX-build-test.bin
+  # Device Service: POST /artifacts -> POST /firmware (kind=merged) -> POST /sessions
+
+Artifacts
+- PR merged BIN: sha256 3aeeb9a56ecf38fb5eedcee134a92aef43989a9bbf762bcbb30da1aea6976271
+  (app 318,592 bytes; merged 423,376 bytes)
+- base merged BIN: sha256 2d25ca59f8e87d383c50002925bca698677ff45109f78c192f9b952a7bb0a1e4
+  (merged 423,376 bytes)
+- Stored firmware sha256 (padded to 16 MB by the Device Service):
+  PR   fdf7f6661a938663bdacd14514ac4765351c5c0aed1ffee2cc8b7963e135ab8d
+  base 2bc1e01c4a646b6c17887999abdc37daef81f8e76b1344d2c1b674abff129d75
+
+PR firmware contains the new code
+  xtensa-esp32-elf-nm -C M5GFX-build-test.elf:
+  PR:   400dc4c8 t m5gfx::wait_panel_ready()
+        3ffb3aa8 V m5gfx::board_detect::prepare_detail::panel_reload()::state
+  base: neither symbol.
+
+Results (power-on, single run each)
+- PR:   Autodetect M5StackCore2, board=2, init ok=1, elapsed_us=328333,
+        expected frame (blue background, green rect, "PR440").
+- base: Autodetect M5StackCore2, board=2, init ok=1, elapsed_us=328330,
+        same frame.
+- frame PNG sha256 is identical: 22fe80fc70999a09b53a6e09109d358f61a0abb9a52cdab283d581cb79ab3356
+- The init-time delta is 3 us, i.e. the 122 ms wait did not fire in this model.
+  Cause is in evidence/environment.txt: the model never answers the panel keys
+  and has no RDDPM read, so the post-reset probe already spends 120 ms before
+  the wait is evaluated.
+
+Limits
+- One run per build, power-on only; no EN/RST-triggered repeat, no sleep-in
+  start, no touch/SD/backlight checks.
+- The example's drawing here is minimal; the stock example over SPI is slow in
+  QEMU and triggers a task-WDT print in its own pushRotateZoom() test block
+  (unrelated to this PR; the heavy example was discarded in favour of this one).

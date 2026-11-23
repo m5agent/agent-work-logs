@@ -1,0 +1,17 @@
+commit 81642aef6a6571330689d581005b94286955de3b
+Author: ainyan03 <205502311+ainyan03@users.noreply.github.com>
+Date: Mon Nov 23 07:37:34 2026 +0000
+
+board_detect: wait for the panel reload after the Core2 / Tough LCD reset
+
+
+ extras/board_spec/test/fixed_board.test.js |  1 +
+ src/M5GFX.cpp                              |  2 ++
+ src/board_detect/board_detect.hpp          |  6 +++++
+ src/board_detect/detection_integration.inl | 15 +++++++++++
+ src/board_detect/m5/board_registry.inl     | 14 +++++++++--
+ src/board_detect/m5/esp32_d0wdq6.inl       | 10 ++++++--
+ src/board_detect/prepare.inl               | 40 ++++++++++++++++++++++++++++++
+ test/board_detect/esp32_families.cpp       | 30 ++++++++++++++++++++--
+ test/board_detect/fixtures/esp32.txt       |  4 +--
+ 9 files changed, 114 insertions(+), 8 deletions(-)

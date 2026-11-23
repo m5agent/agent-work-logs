@@ -1,0 +1,314 @@
+diff --git a/extras/board_spec/test/fixed_board.test.js b/extras/board_spec/test/fixed_board.test.js
+index 714bc21..f2a7e72 100644
+--- a/extras/board_spec/test/fixed_board.test.js
++++ b/extras/board_spec/test/fixed_board.test.js
+@@ -101,6 +101,7 @@ template<class Adopt> board_detect::detect_outcome_t run_fixed_startup(const boa
+ template<class Adopt> board_detect::detect_outcome_t run_fixed_startup_session(const board_detect::m5::board_entry_t& entry,bool allow_reset,Adopt adopt) ${session}
+ const board_detect::m5::board_entry_t* select_fixed_board(board_t board) ${select}
+ bool reject_detected_setup(board_t){return false;}
++void wait_panel_ready(){}
+ struct M5GFX {
+  static board_t _detected_board;
+  bool _detect_started=false;
+diff --git a/src/M5GFX.cpp b/src/M5GFX.cpp
+index 2cd154c..d520456 100644
+--- a/src/M5GFX.cpp
++++ b/src/M5GFX.cpp
+@@ -922,6 +922,7 @@ namespace m5gfx
+           });
+         if (!outcome.adopted) { return false; }
+         _board = _fixed_board;
++        wait_panel_ready();
+         return _init_adopted_panel(use_clear);
+       }
+ #endif
+@@ -1035,6 +1036,7 @@ namespace m5gfx
+         nvs_close(nvs_handle);
+       }
+     }
++    if (outcome.adopted) { wait_panel_ready(); }
+ 
+ #else
+     // Unsupported chips return an unknown board; build hints are ignored.
+diff --git a/src/board_detect/board_detect.hpp b/src/board_detect/board_detect.hpp
+index f0a68f6..021271a 100644
+--- a/src/board_detect/board_detect.hpp
++++ b/src/board_detect/board_detect.hpp
+@@ -166,6 +166,12 @@ namespace board_detect
+     reset_no_flags = 0,
+     reset_always = 1 << 0,
+     reset_hold_when_skipped = 1 << 1,
++    // i2c_regs only. A panel reset in Sleep Out reloads its registers for up to
++    // 120 ms, and an init sequence sent meanwhile is lost (the panel stays in
++    // Sleep In); answering commands again does not mean the reload has ended.
++    // Unless the panel was seen in Sleep In, hold the init until 120 ms after
++    // the release (prepare_detail::panel_reload()).
++    reset_panel_reload = 1 << 2,
+   };
+ 
+   struct reset_desc_t
+diff --git a/src/board_detect/detection_integration.inl b/src/board_detect/detection_integration.inl
+index 3f3bf9a..96af807 100644
+--- a/src/board_detect/detection_integration.inl
++++ b/src/board_detect/detection_integration.inl
+@@ -223,6 +223,21 @@
+                                   static_cast<board_t>(desc.def.id), adopt);
+   }
+ 
++  // Hold the panel init sequence until a panel reset during preparation has
++  // finished reloading (reset_panel_reload).
++  static void wait_panel_ready()
++  {
++    auto& reload = board_detect::prepare_detail::panel_reload();
++    // The init sequence takes the panel out of Sleep In.
++    reload.sleep_in = false;
++    if (!reload.pending) { return; }
++    reload.pending = false;
++    // A deadline left by a failed init long ago is ignored.
++    const auto left = static_cast<std::int32_t>(reload.ready_ms - board_detect::io::millis());
++    if (left > 0 && left <= board_detect::prepare_detail::panel_reload_ms)
++    { board_detect::io::delay_ms(static_cast<std::uint32_t>(left)); }
++  }
++
+   template <class Adopt>
+   static board_detect::detect_outcome_t run_fixed_startup_session(
+     const board_detect::m5::board_entry_t& entry, bool allow_reset, Adopt adopt)
+diff --git a/src/board_detect/m5/board_registry.inl b/src/board_detect/m5/board_registry.inl
+index 7e794ee..e29a37b 100644
+--- a/src/board_detect/m5/board_registry.inl
++++ b/src/board_detect/m5/board_registry.inl
+@@ -120,9 +120,8 @@ namespace m5
+       bus.endTransaction();
+     }
+ 
+-    std::uint8_t read_parameter(soft_spi_t& bus, int pin_cs, std::uint8_t cmd, std::uint8_t index)
++    std::uint8_t read_byte(soft_spi_t& bus, int pin_cs, std::uint8_t cmd)
+     {
+-      write8(bus, pin_cs, 0xD9, 0x10 | index);
+       bus.beginTransaction();
+       io::pin_low(pin_cs);
+       bus.writeCommand(cmd, 8);
+@@ -138,6 +137,17 @@ namespace m5
+       return (value >> 1) & 0x7F;
+     }
+ 
++    std::uint8_t read_parameter(soft_spi_t& bus, int pin_cs, std::uint8_t cmd, std::uint8_t index)
++    {
++      write8(bus, pin_cs, 0xD9, 0x10 | index);
++      return read_byte(bus, pin_cs, cmd);
++    }
++
++    // RDDPM (0Ah) as read by read_byte() (D6..D0): Normal Mode On (D3) with
++    // Sleep Out (D4) clear. A zero read is not taken as Sleep In.
++    bool panel_sleep_in(soft_spi_t& bus, int pin_cs)
++    { return (read_byte(bus, pin_cs, 0x0A) & 0x18) == 0x08; }
++
+     panel_variant_t probe_panel_variant(soft_spi_t& bus, int pin_cs,
+                                         std::uint32_t keys[4], bool try_c_key)
+     {
+diff --git a/src/board_detect/m5/esp32_d0wdq6.inl b/src/board_detect/m5/esp32_d0wdq6.inl
+index e338c6f..eab291d 100644
+--- a/src/board_detect/m5/esp32_d0wdq6.inl
++++ b/src/board_detect/m5/esp32_d0wdq6.inl
+@@ -57,7 +57,7 @@ namespace m5
+   };
+   static constexpr board_desc_t desc_core2 = {
+     { id(lgfx::board_M5StackCore2), "M5StackCore2", 0 },
+-    i2c_power(400000, core_pmic_variants, pmic_ops::core2_devices, 5, 20), i2c_reset(1, 10),
++    i2c_power(400000, core_pmic_variants, pmic_ops::core2_devices, 5, 20), i2c_reset(1, 10, reset_panel_reload),
+     shared_sd(wiring::core2::shared_sd_sclk, wiring::core2::shared_sd_mosi,
+               wiring::core2::shared_sd_miso, wiring::core2::shared_sd_sd_cs,
+               wiring::core2::shared_sd_other_cs),
+@@ -72,7 +72,7 @@ namespace m5
+   };
+   static constexpr board_desc_t desc_tough = {
+     { id(lgfx::board_M5Tough), "M5Tough", 0 },
+-    i2c_power(400000, core_pmic_variants, pmic_ops::core2_devices, 5, 20), i2c_reset(1, 10),
++    i2c_power(400000, core_pmic_variants, pmic_ops::core2_devices, 5, 20), i2c_reset(1, 10, reset_panel_reload),
+     shared_sd(wiring::tough::shared_sd_sclk, wiring::tough::shared_sd_mosi,
+               wiring::tough::shared_sd_miso, wiring::tough::shared_sd_sd_cs,
+               wiring::tough::shared_sd_other_cs),
+@@ -495,6 +495,12 @@ construct_status_t construct_atompsram(const board_result_t&, display_parts_t*);
+       // Without reset, leave the same 120 ms window for a waking panel.
+       variant = identify_panel_variant(bus, display.cs, keys,
+                                             ctx.allow_reset ? 1 : 120);
++      // A panel found in Sleep In before any reset has no long register reload
++      // after the reset (reset_panel_reload). Once reset, a panel still reloading
++      // also reads as Sleep In, so only an observation before the first reset counts.
++      auto& reload = prepare_detail::panel_reload();
++      if (!reload.reset_seen)
++      { reload.sleep_in = variant != panel_variant_t::unknown && panel_sleep_in(bus, display.cs); }
+       if (ctx.allow_reset)
+       {
+         prepare_detail::i2c_scope_t i2c(*ctx.transaction, ctx.probe_port,
+diff --git a/src/board_detect/prepare.inl b/src/board_detect/prepare.inl
+index 27cee4d..a4c06d1 100644
+--- a/src/board_detect/prepare.inl
++++ b/src/board_detect/prepare.inl
+@@ -19,6 +19,26 @@
+ 
+   namespace prepare_detail
+   {
++    // reset_panel_reload state for the panel on the internal display bus. It
++    // outlives detection attempts: an attempt that fails after a reset must not
++    // let the next one take the reloading panel for one found in Sleep In.
++    struct panel_reload_t
++    {
++      // Observations of the panel no longer count: a reset_panel_reload reset was
++      // tried, or the power list released a panel held in reset.
++      bool reset_seen = false;
++      bool sleep_in = false;    // Seen in Sleep In before any such reset.
++      bool pending = false;     // The init sequence waits for ready_ms.
++      std::uint32_t ready_ms = 0;
++    };
++    // 120 ms by the datasheet, plus margin for the truncated millis().
++    constexpr std::int32_t panel_reload_ms = 122;
++    inline panel_reload_t& panel_reload()
++    {
++      static panel_reload_t state;
++      return state;
++    }
++
+     class retry_budget_t
+     {
+     public:
+@@ -235,6 +255,10 @@
+                                                             variant->power_on,
+                                                             desc.op_gpio_pins,
+                                                             &retry_policy);
++    // A powered panel held in reset is released by this list, even when the list
++    // stops later, so a reload may be running when it is next observed.
++    if (reset_was_low && !power_was_off && (desc.reset.flags & reset_panel_reload))
++    { prepare_detail::panel_reload().reset_seen = true; }
+     if (power_result.status != ops::op_status_t::ok)
+     {
+       if (!retain_confirmed_board) { return false; }
+@@ -340,6 +364,10 @@
+                 && !((has_variants || desc.reset.kind == reset_kind_t::i2c_regs)
+                      && (desc.internal_i2c.sda < 0 || desc.internal_i2c.scl < 0))
+                 && !(desc.reset.kind == reset_kind_t::custom && desc.reset.custom == nullptr)
++                // reset_panel_reload is implemented for the full i2c_regs reset only.
++                && !((desc.reset.flags & reset_panel_reload)
++                  && (desc.reset.kind != reset_kind_t::i2c_regs
++                   || (desc.reset.flags & reset_hold_when_skipped)))
+                 && pin_list_valid(desc.hold_high_pins)
+                 && list_valid(desc.option_names)
+                 && pin_list_valid(desc.op_gpio_pins);
+@@ -484,6 +512,7 @@
+         i2c_port, desc.power, variant->reset_assert, desc.op_gpio_pins,
+         &assert_policy);
+       ok = assert_result.status == ops::op_status_t::ok;
++      if (reset.flags & reset_panel_reload) { prepare_detail::panel_reload().reset_seen = true; }
+       if (!ok && retain_confirmed_board)
+       {
+         ESP_LOGW("board_detect",
+@@ -507,6 +536,17 @@
+                    static_cast<unsigned>(release_result.failed_index),
+                    static_cast<unsigned>(release_result.status), 0);
+         }
++        if (reset.flags & reset_panel_reload)
++        {
++          // Also after a failed release: part of it may have released the panel.
++          auto& reload = prepare_detail::panel_reload();
++          if (!reload.sleep_in)
++          {
++            reload.ready_ms = io::millis() + prepare_detail::panel_reload_ms;
++            reload.pending = true;
++          }
++          reload.sleep_in = false;
++        }
+         if (ok || retain_confirmed_board) { io::delay_ms(reset.post_ms); }
+       }
+       if (retain_confirmed_board) { ok = true; }
+diff --git a/test/board_detect/esp32_families.cpp b/test/board_detect/esp32_families.cpp
+index 3ec96c4..3cceacd 100644
+--- a/test/board_detect/esp32_families.cpp
++++ b/test/board_detect/esp32_families.cpp
+@@ -119,6 +119,28 @@ static void axp_table() {
+   board_result_t r;
+   assert(!axp_family_detector.confirm(ctx, &r) && !ctx.family_identified);
+ }
++// reset_panel_reload: RDDPM is read only before the first such reset, and only a
++// Sleep In reading (Normal Mode On, Sleep Out clear) counts.
++static void core_panel_sleep_in() {
++  struct case_t { std::uint32_t rddpm; bool reset_seen, sleep_in; unsigned reads; };
++  for (const auto& c : {case_t{16, false, true, 3}, case_t{56, false, false, 3},
++                        case_t{0, false, false, 3}, case_t{16, true, false, 2}}) {
++    host_hardware::reset();
++    host_probes::reset();
++    prepare_detail::panel_reload() = prepare_detail::panel_reload_t{};
++    prepare_detail::panel_reload().reset_seen = c.reset_seen;
++    host_probes::expected_sda = 21;
++    host_probes::expected_scl = 22;
++    host_hardware::wire = [](int addr, int, std::uint8_t *, std::size_t, bool) { return addr == 0x38; };
++    host_probes::spi_data = {2, 56, c.rddpm};
++    host_probes::on_read = []() { assert(host_probes::transfers > 0); };
++    auto ctx = context();
++    board_result_t r;
++    r.assign(&desc_core2);
++    assert(detail::refine_core_family(r, ctx));
++    assert(host_probes::reads == c.reads && prepare_detail::panel_reload().sleep_in == c.sleep_in);
++  }
++}
+ static void core_refinement() {
+   for (bool new_pmic : {false, true})
+     for (bool core : {false, true})
+@@ -130,6 +152,7 @@ static void core_refinement() {
+                                     desc_station.def.id, board_id_t(65535)}) {
+               host_hardware::reset();
+               host_probes::reset();
++              prepare_detail::panel_reload() = prepare_detail::panel_reload_t{};
+               host_probes::expected_sda = 21;
+               host_probes::expected_scl = 22;
+               unsigned core_reads = 0, tough_reads = 0;
+@@ -143,7 +166,8 @@ static void core_refinement() {
+                 ++tough_reads;
+                 return tough;
+               };
+-              host_probes::spi_data = {2, 56};
++              // ILI9342E keys (DDh 01, CBh 1C), then RDDPM in Sleep In (Normal Mode On).
++              host_probes::spi_data = {2, 56, 16};
+               host_probes::on_read = []() { assert(host_probes::transfers > 0); };
+               auto ctx = context();
+               ctx.final_attempt = final;
+@@ -155,8 +179,9 @@ static void core_refinement() {
+               bool ok = detail::refine_core_family(r, ctx),
+                    contradiction = (core && tough) || (new_pmic && tough);
+               assert(ok == (!contradiction && (core || tough || final)));
+-              assert(core_reads == tough_reads && core_reads > 0 && host_probes::reads == 2 &&
++              assert(core_reads == tough_reads && core_reads > 0 && host_probes::reads == 3 &&
+                      host_probes::transfers > 0);
++              assert(prepare_detail::panel_reload().sleep_in && !prepare_detail::panel_reload().reset_seen);
+               if (ok) {
+                 auto possible = [&](board_id_t id) {
+                   return id == desc_core2.def.id || (id == desc_tough.def.id && !new_pmic);
+@@ -407,6 +432,7 @@ int main() {
+   tx = &transaction;
+   axp_table();
+   core_refinement();
++  core_panel_sleep_in();
+   atom_and_stack();
+   stack_confirmation();
+   fixed_core();
+diff --git a/test/board_detect/fixtures/esp32.txt b/test/board_detect/fixtures/esp32.txt
+index 8e9e63b..af44548 100644
+--- a/test/board_detect/fixtures/esp32.txt
++++ b/test/board_detect/fixtures/esp32.txt
+@@ -17,7 +17,7 @@ power -1 1 400000 5 20 0 0
+ device 400000 0 52 0 1 0
+ variant 52 3 3 255 18 4 150 2 0 0 0 [6:0,149,132,141;6:0,40,240,240;6:0,18,4,4;6:0,146,0,7;6:0,150,2,2;6:0,148,2,2;][6:0,150,0,2;6:0,148,0,2;][6:0,150,2,2;6:0,148,2,2;]
+ variant 52 3 74 255 144 8 144 2 1 0 0 [6:0,35,0,31;6:0,144,8,8;6:0,128,5,5;4:0,130,18,255;4:0,132,106,255;6:0,144,2,2;][6:0,144,0,2;][6:0,144,2,2;]
+-reset 2 -1 1 10 0 0
++reset 2 -1 1 10 4 0
+ sd 18 23 38 4 5
+ display 18 23 38 15 5 -1 -1
+ i2c 21 22 1 hold [4,5,] ops [4,5,] options[new_pmic,lcd_e,]
+@@ -27,7 +27,7 @@ power -1 1 400000 5 20 0 0
+ device 400000 0 52 0 1 0
+ variant 52 3 3 255 18 4 150 2 0 0 0 [6:0,149,132,141;6:0,40,240,240;6:0,18,4,4;6:0,146,0,7;6:0,150,2,2;6:0,148,2,2;][6:0,150,0,2;6:0,148,0,2;][6:0,150,2,2;6:0,148,2,2;]
+ variant 52 3 74 255 144 8 144 2 1 0 0 [6:0,35,0,31;6:0,144,8,8;6:0,128,5,5;4:0,130,18,255;4:0,132,106,255;6:0,144,2,2;][6:0,144,0,2;][6:0,144,2,2;]
+-reset 2 -1 1 10 0 0
++reset 2 -1 1 10 4 0
+ sd 18 23 38 4 5
+ display 18 23 38 15 5 -1 -1
+ i2c 21 22 1 hold [4,5,] ops [4,5,] options[reserved,lcd_e,]

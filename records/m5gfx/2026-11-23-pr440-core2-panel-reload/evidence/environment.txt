@@ -1,0 +1,34 @@
+Environment
+
+Host
+- macOS arm64 (Darwin 25.5.0), Apple clang 21.0.0 (clang-2100.1.1.101), no node/npm.
+- ESP-IDF v6.1 at ~/Documents/esp-idf-6.1 with xtensa-esp32-elf toolchain.
+- Docker daemon is unusable on this host (containerd metadata on a read-only file
+  system), so the espressif/idf container path was not used; the local IDF was.
+
+Device Service
+- Internal Device Service (endpoint not published), 36 profiles.
+- core2 profile: backend qemu-esp32lx6, machine m5core2, display
+  "ILI9342C / ILI9342E" 320x240, peripheral_status=simulated, screenshot=true,
+  features.flash=true, serial=true.
+- Used only for the two owned sessions below; both stopped after capture.
+
+Emulator model boundary (why the wait is not observable there)
+- patches/qemu-m5stack-peripherals/0003-m5stack-shared-spi-full.patch:3563-3570
+  adds the panel state; :3663-3665 implements 0x10/0x11 as a plain sleep flag;
+  :4012 sets sleep=true only at device realize; :3737-3740 exposes only
+  read_id, there is no RDDPM/0x0A command read path.
+- All SPI reads in the guest return 0x7f (guest serial:
+  "ILI9342 read-back DDh:7f CBh:7f ID4:7f7f -> neither key answered"), so the
+  post-reset identify_panel_variant(...,120,...) polls for the full 120 ms.
+  That consumes the 122 ms deadline before wait_panel_ready() runs, so the fix
+  adds no measurable delay on this model.
+- There is no register-reload interval and no reset-to-Sleep-In transition in
+  the model, so the alternating blank of issue #438 cannot be represented.
+  The virtual run can only show non-regression of the Core2 detection/init and
+  display path, not that the blank is prevented.
+
+Tooling gap
+- extras/board_spec `npm test` / `npm run check` need node/npm, which are not
+  installed here. The upstream "Catalog and generated sources" CI job covers
+  them and passed (evidence/ci-status.txt).

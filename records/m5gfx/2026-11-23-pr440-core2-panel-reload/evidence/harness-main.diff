@@ -1,0 +1,46 @@
+diff --git a/examples/Test/build_test/main/main.cpp b/examples/Test/build_test/main/main.cpp
+index 3e3e8a2..f6b3e4c 100644
+--- a/examples/Test/build_test/main/main.cpp
++++ b/examples/Test/build_test/main/main.cpp
+@@ -1,11 +1,12 @@
+ #include <M5GFX.h>
++#include <cstdio>
++#include <esp_timer.h>
+ 
+ static M5GFX display;
+ static M5Canvas sprite(&display);
+ 
+ void test(M5GFX &lcd)
+ {
+-  lcd.init();
+   lcd.setRotation(1);
+   lcd.setBrightness(128);
+   lcd.setColorDepth(24);
+@@ -127,11 +128,26 @@ void test(M5GFX &lcd)
+ 
+ void setup()
+ {
+-  test(display);
++  setvbuf(stdout, NULL, _IONBF, 0);
++  printf("M5GFX-BOOT-BEGIN\n");
++  const int64_t t0 = esp_timer_get_time();
++  const bool ok = display.init();
++  const int64_t t1 = esp_timer_get_time();
++  printf("M5GFX-INIT ok=%d board=%d elapsed_us=%lld\n", (int)ok,
++         (int)display.getBoard(), (long long)(t1 - t0));
++  display.fillScreen(0x001F);
++  display.fillRect(20, 20, 120, 80, 0x07E0);
++  display.setTextColor(0xFFFF);
++  display.setTextSize(2);
++  display.setCursor(30, 120);
++  display.print("PR440");
++  printf("M5GFX-DRAW-DONE\n");
+ }
+ 
+ void loop(void)
+ {
++  static unsigned n = 0;
++  printf("M5GFX-ALIVE %u\n", ++n);
+   lgfx::delay(1000);
+ }
+ 

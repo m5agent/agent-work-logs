@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "pr-review",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #440 review: hold the panel init until 122 ms after the Core2/Tough LCD reset release",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/440",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "43a87193f898f998edf79c5fb99b166d11ee1eaf",
+    "head_commit": "81642aef6a6571330689d581005b94286955de3b",
+    "related_issue": "https://github.com/m5stack/M5GFX/issues/438"
+  },
+  "hardware": {},
+  "firmware": {
+    "build": "ESP-IDF v6.1, target esp32, examples/Test/build_test, harness-only main.cpp (evidence/harness-main.diff)",
+    "pr_merged_bin_sha256": "3aeeb9a56ecf38fb5eedcee134a92aef43989a9bbf762bcbb30da1aea6976271",
+    "pr_stored_firmware_sha256": "fdf7f6661a938663bdacd14514ac4765351c5c0aed1ffee2cc8b7963e135ab8d",
+    "base_merged_bin_sha256": "2d25ca59f8e87d383c50002925bca698677ff45109f78c192f9b952a7bb0a1e4",
+    "base_stored_firmware_sha256": "2bc1e01c4a646b6c17887999abdc37daef81f8e76b1344d2c1b674abff129d75"
+  },
+  "execution": {
+    "environment": "macOS arm64; ESP-IDF v6.1 + xtensa-esp32-elf; local Device Service core2 profile (qemu-esp32lx6/m5core2, ILI9342C-E 320x240, simulated, screenshot); no node/npm",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #440 OPEN, not draft, author ainyan03, English; 0 comments and 0 reviews before this review; mergeable MERGEABLE"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "9 files, +114/-8 against develop tip 43a8719; only board detection, M5GFX init call sites and board_detect tests change"
+    },
+    {
+      "id": "reset-flag-scope",
+      "status": "PASS",
+      "detail": "reset_panel_reload (1<<2) is set only on desc_core2:60 and desc_tough:75; description_valid() rejects it for non-i2c_regs resets and with reset_hold_when_skipped (prepare.inl:367-370)"
+    },
+    {
+      "id": "sleep-in-observation",
+      "status": "PASS",
+      "detail": "RDDPM(0Ah) is read once before the reset and only while !reset_seen; (v & 0x18)==0x08 selects Normal Mode On with Sleep Out clear; a zero read is not Sleep In (board_registry.inl:120-148, esp32_d0wdq6.inl:495-503)"
+    },
+    {
+      "id": "wait-placement",
+      "status": "PASS",
+      "detail": "wait_panel_ready() is invoked at M5GFX.cpp:925 (fixed board) and M5GFX.cpp:1039 (adopted detection) immediately before _init_adopted_panel(), i.e. before the panel init list; deadline is release+122 ms so detection/NVS time counts (detection_integration.inl:226-239, prepare.inl:539-552)"
+    },
+    {
+      "id": "retry-safety",
+      "status": "PASS",
+      "detail": "reset_seen is set on assert and when the power list releases a held reset, so a retry cannot treat a reloading panel as Sleep In; a stale deadline is ignored when left <= 0 or > 122"
+    },
+    {
+      "id": "host-tests",
+      "status": "PASS",
+      "detail": "test/board_detect/run.sh at PR head: 34/34 C++ test programs passed, including new core_panel_sleep_in() (4 cases, read-count asserts)"
+    },
+    {
+      "id": "ci",
+      "status": "PASS",
+      "detail": "40/40 upstream checks passed (Arduino esp32 2.0.17/3.1.3/3.3.13/4.0.0, C3/C5/C6/H2/P4, ESP-IDF 5.1.6/5.4.3/6.0.2, catalog, host, translation-unit)"
+    },
+    {
+      "id": "virtual-device-nonregression",
+      "status": "PASS",
+      "detail": "PR firmware boots on the Core2 profile: rst POWERON, Autodetect M5StackCore2, board=2, init ok=1, expected 320x240 frame; frame sha256 22fe80fc70999a09b53a6e09109d358f61a0abb9a52cdab283d581cb79ab3356 is identical to the base build; init 328333 us vs 328330 us"
+    },
+    {
+      "id": "virtual-device-wait-observable",
+      "status": "NOT RUN",
+      "detail": "the 122 ms wait did not fire on the model: the ILI9342 sink has no RDDPM read (SPI reads return 0x7f) and no reload window, so the post-reset identify_panel_variant(120 ms) consumes the deadline first"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no Core2/Tough hardware on this host; the alternating blank and the four-board timing table are the author's evidence in the PR body, not measured here"
+    },
+    {
+      "id": "fix-reproduction",
+      "status": "NOT RUN",
+      "detail": "the emulator's ILI9342 sink models sleep as a plain flag (0x10/0x11) with no reset-to-Sleep-In transition and no register reload, so the issue #438 failure cannot be represented"
+    },
+    {
+      "id": "board-spec-npm",
+      "status": "NOT RUN",
+      "detail": "extras/board_spec npm test / npm run check need node/npm, not installed here; covered by the upstream Catalog and generated sources job"
+    },
+    {
+      "id": "wait-test-coverage",
+      "status": "REVIEW",
+      "detail": "non-blocking: no host test drives apply_reset()/wait_panel_ready() with a fake clock, so the 122 ms deadline and the Sleep In skip are not asserted end to end; suggested follow-up"
+    },
+    {
+      "id": "init-without-reset-wording",
+      "status": "REVIEW",
+      "detail": "non-blocking: run_detection_session() promotes allow_reset=true when attempt+2==max_attempts (detect_types.hpp:171), so init_without_reset() can reset and wait on M5GFX::begin()'s 4th/5th attempt; PR body wording says it never does, M5GFX.h:304-305 already documents the promotion"
+    }
+  ],
+  "evidence": [
+    "evidence/pr440.diff",
+    "evidence/pr-head.txt",
+    "evidence/code-facts.txt",
+    "evidence/host-tests.txt",
+    "evidence/ci-status.txt",
+    "evidence/build-info.txt",
+    "evidence/harness-main.diff",
+    "evidence/serial-pr.txt",
+    "evidence/serial-base.txt",
+    "evidence/frame-pr440.png",
+    "evidence/frame-base.png",
+    "evidence/environment.txt"
+  ],
+  "notes": [
+    "PR left OPEN; exactly one English comment posted; no close, no push, no change to m5stack/M5GFX or the author's fork.",
+    "Evidence classes used: virtual-device validation (Core2 non-regression only), host-level test (board_detect suite), upstream CI, code-level verification. Hardware validation is NOT RUN.",
+    "The virtual run cannot show that the blank is fixed; the model has no reload window and no RDDPM read. This limit is stated in the public comment and README.",
+    "No blocking issue found. Two non-blocking notes: wait-path test coverage and the init_without_reset() wording."
+  ]
+}
