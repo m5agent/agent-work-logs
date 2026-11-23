@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "pr-review",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #441 review: reserve board id 158 for M5UnitPoEP4X",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/441",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "43a87193f898f998edf79c5fb99b166d11ee1eaf",
+    "head_commit": "bb02d2e7cef83214fd3e54e2dcfd4c52ac51268e"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 read-only diff and source review; host g++ (Apple clang 21.0.0) static_assert compile check of lgfx/boards.hpp; local loopback Device Service has 36 profiles with ESP32-P4 only as tab5; upstream GitHub Actions provided build and host board-detection test evidence",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #441 OPEN, not draft, author TinyuZhao, English title with empty body, 0 comments and 0 reviews before review, mergeable MERGEABLE"
+    },
+    {
+      "id": "head-and-base",
+      "status": "PASS",
+      "detail": "head bb02d2e7cef83214fd3e54e2dcfd4c52ac51268e, base 43a87193f898f998edf79c5fb99b166d11ee1eaf (= develop tip); diff against base is 1 file, +1 line"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "only src/lgfx/boards.hpp adds board_M5UnitPoEP4X = 158; no other hunk or file"
+    },
+    {
+      "id": "id-space",
+      "status": "PASS",
+      "detail": "158 is the next free non-display value after board_M5StampP4XHub = 157 and stays below board_M5AtomDisplay = 192; no duplicate with 148, 157, 201, or any existing enumerator"
+    },
+    {
+      "id": "host-static-assert",
+      "status": "PASS",
+      "detail": "minimal TU with five static_asserts (value 158, distinct from 148/157/201, below 192) compiles with g++ -std=c++17 -Wall -Wextra -Werror -I src -fsyntax-only, exit 0"
+    },
+    {
+      "id": "placement-and-naming",
+      "status": "PASS",
+      "detail": "placed after the board_M5StamP4XHub alias inside the non-display block; name follows board_M5UnitPoEP4 (148) plus the X suffix used by board_M5StampP4X (156)"
+    },
+    {
+      "id": "reference-surface",
+      "status": "PASS",
+      "detail": "git grep at head finds only the declaration itself: no esp32p4_boards[] entry, no SDL title case, no fixture or generated-table entry; no existing runtime path changes"
+    },
+    {
+      "id": "fixed-board-behavior",
+      "status": "PASS",
+      "detail": "select_fixed_board() looks the value up in esp32p4_boards[] and returns nullptr on a miss (detection_package.inl:65-86); M5GFX::init_impl() then logs 'Fixed board:%u is not supported by this chip' and returns false (M5GFX.cpp:910-929), so id 158 is reserved but not yet selectable"
+    },
+    {
+      "id": "precedent",
+      "status": "PASS",
+      "detail": "same author previously landed bare id reservations: board_M5UnitPoEP4 added alone in f4923a7 (2026-01-22) and board_M5StamP4XHub = 157 added alone in 8d036e1 (2026-11-04), the latter renamed the next day in dc21d40; a one-line id reservation matches project practice"
+    },
+    {
+      "id": "ci",
+      "status": "PASS",
+      "detail": "upstream GitHub Actions at head bb02d2e: 39/39 checks SUCCESS, including 'host' (Board detection host tests) and 'translation unit consistency'; Arduino 2.0.17/3.1.3/3.3.0/3.3.13/4.0.0, m5stack_core 2.1.4, ESP-IDF 5.1.6/5.4.3/5.5.2/6.0.2"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no Unit PoE-P4X hardware on this host; neither power-on nor display behaviour was exercised"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "the diff adds one unreferenced enum constant with no executable runtime path; the local Device Service has 36 profiles and its only ESP32-P4 profile is tab5, with no Unit PoE-P4/P4X model; a firmware built with fixed board 158 would only reach the unsupported-board branch"
+    },
+    {
+      "id": "follow-up-descriptor",
+      "status": "NOT RUN",
+      "detail": "detector, esp32p4_boards[] entry, fixture and SDL title mapping for 158 are outside this PR and were not validated"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-status.txt",
+    "evidence/pr441.diff",
+    "evidence/code-facts.txt",
+    "evidence/host-check.txt",
+    "evidence/board_id_check.cpp",
+    "evidence/precedent.txt",
+    "evidence/environment.txt"
+  ],
+  "notes": [
+    "PR left OPEN; exactly one English comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Evidence class is code-level verification plus upstream CI compile/test. Hardware and virtual-device validation are NOT RUN.",
+    "The ID is a reservation only: it cannot be selected through fixed board until a board_entry_t lands, which is called out in the review as informational and non-blocking."
+  ]
+}

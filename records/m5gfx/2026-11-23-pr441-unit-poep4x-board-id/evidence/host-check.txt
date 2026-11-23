@@ -1,0 +1,12 @@
+# Host compile check (macOS arm64, Apple clang version 21.0.0 (clang-2100.1.1.101))
+# command: g++ -std=c++17 -Wall -Wextra -Werror -I src -fsyntax-only <evidence>/board_id_check.cpp
+# PR head: bb02d2e7cef83214fd3e54e2dcfd4c52ac51268e
+
+exit=0 HOST_CHECK_OK
+
+# static assertions compiled by this check:
+static_assert(static_cast<std::uint32_t>(lgfx::board_M5UnitPoEP4X) == 158u,
+static_assert(lgfx::board_M5UnitPoEP4X != lgfx::board_M5StampP4XHub,
+static_assert(lgfx::board_M5UnitPoEP4X != lgfx::board_M5UnitPoEP4,
+static_assert(lgfx::board_M5UnitPoEP4X != lgfx::board_M5UnitPoEP4DisplayOut,
+static_assert(lgfx::board_M5UnitPoEP4X < lgfx::board_M5AtomDisplay,

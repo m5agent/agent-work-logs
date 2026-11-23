@@ -1,0 +1,122 @@
+# Code facts at PR head bb02d2e (base 43a8719)
+
+## src/lgfx/boards.hpp (non-display block tail and external-display boundary)
+81-    , board_M5StampC5 = 153
+82-    , board_M5StampC6 = 154
+83-    , board_M5StampS3Mini = 155
+84-    , board_M5StampP4X = 156
+85-    , board_M5StampP4XHub = 157
+86-    , board_M5StamP4XHub = board_M5StampP4XHub // same board, alternate spelling
+87:    , board_M5UnitPoEP4X = 158
+88-
+89-/// external displays
+
+## integer value and neighbours
+76:    , board_M5UnitPoEP4 = 148
+85:    , board_M5StampP4XHub = 157
+86:    , board_M5StamP4XHub = board_M5StampP4XHub // same board, alternate spelling
+87:    , board_M5UnitPoEP4X = 158
+90:    , board_M5AtomDisplay = 192
+
+## all references to the new enumerator in the tree (only the declaration)
+src/lgfx/boards.hpp:87:    , board_M5UnitPoEP4X = 158
+
+## fixed-board lookup that requires a board_entry_t (src/board_detect/detection_package.inl)
+  static const board_detect::m5::board_entry_t* select_fixed_board(board_t board)
+  {
+    using namespace board_detect::m5;
+#if !defined(CONFIG_IDF_TARGET) || defined(CONFIG_IDF_TARGET_ESP32)
+    const auto& boards = esp32_d0wdq6_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32S3)
+    const auto& boards = esp32s3_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32C3)
+    const auto& boards = esp32c3_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32C5)
+    const auto& boards = esp32c5_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32C6)
+    const auto& boards = esp32c6_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32C61)
+    const auto& boards = esp32c61_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32H2)
+    const auto& boards = esp32h2_boards;
+#elif defined(CONFIG_IDF_TARGET_ESP32P4)
+    const auto& boards = esp32p4_boards;
+#endif
+    const auto id = static_cast<board_detect::board_id_t>(board);
+    return static_cast<std::uint32_t>(board) == id ? find_board(boards, id) : nullptr;
+  }
+
+
+## fixed-board init failure path (src/M5GFX.cpp)
+    _fixed_board = board_t::board_unknown;
+    if (_detect_config.fixed_board != board_t::board_unknown)
+    {
+#if defined (M5GFX_HAS_BOARD_DETECT)
+      const auto* entry = select_fixed_board(_detect_config.fixed_board);
+      if (entry != nullptr)
+      {
+        // Acceptance is independent of display construction; a failed init may retry.
+        _fixed_board = _detect_config.fixed_board;
+        // Accessories need the accepted identity even if display startup fails.
+        _detected_board = _fixed_board;
+        const auto outcome = run_fixed_startup_session(*entry, use_reset,
+          [this](board_detect::m5::display_parts_t& parts, board_t representative_board)
+          {
+            return !reject_detected_setup(representative_board)
+                && _adopt_detected_parts(parts.bus, parts.panel, parts.light, parts.touch);
+          });
+        if (!outcome.adopted) { return false; }
+        _board = _fixed_board;
+        return _init_adopted_panel(use_clear);
+      }
+#endif
+      ESP_LOGW(LIBRARY_NAME, "Fixed board:%u is not supported by this chip",
+               static_cast<unsigned>(_detect_config.fixed_board));
+      return false;
+    }
+
+## P4 board entry table (src/board_detect/m5/esp32p4.inl tail)
+// No detector: selectable only through fixed_board.
+static constexpr board_desc_t desc_stampp4 = {
+  { static_cast<board_id_t>(lgfx::board_M5StampP4), "M5StampP4", 0 },
+  no_power(), no_reset(), no_shared_sd(), no_display_pins(), no_pins(),
+  no_internal_i2c(), no_options(), no_pins(),
+};
+
+// Module revision alone supplies no board evidence; leave defaults to M5Unified.
+#include "generated/esp32p4_detector_order.hpp"
+static const board_entry_t esp32p4_boards[] = {
+  { &desc_corep4x, construct_corep4x, "board_M5CoreP4X", nullptr },
+  { &desc_stampp4xhub, construct_stampp4xhub, "board_M5StamP4XHub", nullptr },
+  { &desc_tab5, construct_tab5, "board_M5Tab5", nullptr, tab5_detail::fixed_prepare },
+  { &desc_tab5x, construct_tab5, "board_M5Tab5X", nullptr, tab5_detail::fixed_prepare },
+  { &desc_unitpoep4, construct_displayless, "board_M5UnitPoEP4", nullptr },
+  { &desc_stampp4, construct_displayless, "board_M5StampP4", nullptr },
+};
+success_log_t success_log(const board_result_t& result) { return success_log(esp32p4_boards, result); }
+}
+}
+}
+
+## SDL title switch: no case for 158, default branch exists (src/M5GFX.cpp)
+    case board_M5Tab5:         title = "M5Tab5";         break;
+    case board_M5Tab5X:        title = "M5Tab5X";        break;
+    case board_M5UnitPoEP4:    title = "M5UnitPoEP4";    break;
+    case board_ArduinoNessoN1: title = "ArduinoNessoN1"; break;
+    default:                   title = "M5GFX";          break;
+    }
+    p->setWindowTitle(title);
+
+    switch (board) {
+    case board_M5AtomS3:
+    case board_M5AtomS3R:
+      w = 128;
+      h = 128;
+      break;
+
+    // SDL stores pixels in window orientation, so rotation zero must keep w/h.
+    case board_M5Paper:
+    case board_M5PaperS3:
+    case board_M5PaperDIY:
+      w = 540;
+      h = 960;

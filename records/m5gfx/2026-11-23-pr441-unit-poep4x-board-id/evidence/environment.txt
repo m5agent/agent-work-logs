@@ -1,0 +1,13 @@
+# Environment inventory (2026-11-23, local loopback Device Service)
+
+profile_count: 36
+ESP32-P4 profiles: tab5 (creatable); no Unit PoE-P4 / PoE-P4X profile
+unit PoE profiles: none
+
+# Host toolchain
+Apple clang version 21.0.0 (clang-2100.1.1.101)
+
+# Why virtual-device validation is not applicable
+- The diff adds one enum constant and no executable code path; no firmware can exercise it in M5GFX at this head.
+- Even with a P4 profile, a firmware built with fixed board 158 would only hit the unsupported-board path until a board_entry_t exists.
+- P4 board_detect entries at this head: CoreP4X, StampP4XHub, Tab5, Tab5X, UnitPoEP4, StampP4; none is 158.
