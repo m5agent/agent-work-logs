@@ -10,7 +10,7 @@
 - 源码：`CardputerADV` 分支 `9d7190317d49ff87fa98db345b049ed77c5a1780`（2026-11-05）
 - 环境：macOS arm64；ESP-IDF `v6.1`（6.1.0，`~/Documents/esp-idf-6.1`，GCC 15.2.0，
   Python 3.13.15，venv `idf6.1_py3.13_env`）
-- 已发布回复：（发布后补）
+- 已发布回复：<https://github.com/m5stack/M5Cardputer-UserDemo/issues/48#issuecomment-7110170986>（英文，1 条；issue 仍 OPEN，未 close、未改上游代码）
 - 证据等级：**code-level verification（build-executed）**——在真实 v6.1 工具链上执行
   configure/build；没有源码修改，第二次构建只额外添加 `espressif/usb` 依赖
 - 未使用虚拟设备验证：两处失败都发生在固件镜像生成之前（configure 阶段与组件编译阶段），
