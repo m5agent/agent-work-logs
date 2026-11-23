@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "window": {
+    "local": "2026-11-20T00:00+08:00..2026-11-23T09:16+08:00"
+  },
+  "total": 59,
+  "outcomes": {
+    "done_SIM_VERIFIED": 26,
+    "manual_SIM_PARTIAL": 30,
+    "failed": 3
+  },
+  "manual_codes": {
+    "E_NETWORK_PARTIAL": 11,
+    "E_INTERACTION_CLAIM_PARTIAL": 8,
+    "E_NO_SIM_PROFILE": 3,
+    "E_APP_ONLY_UNSUPPORTED_DEVICE": 2,
+    "E_EVIDENCE_UNAVAILABLE": 2,
+    "E_NO_FRAME": 2,
+    "E_SIM_APP_READY_PARTIAL": 2
+  },
+  "failed_codes": {
+    "E_STATIC": 2,
+    "E_CONTENT_AGENT": 1
+  },
+  "network_reasons": {
+    "worker_namespace_unavailable": 7,
+    "board_not_advertised": 3,
+    "qemu_wifi_partial": 1
+  },
+  "fixes": [
+    {
+      "name": "semantic hold frame response",
+      "jobs": [
+        "job-cd404de9d2b8",
+        "job-43c707bc2bcc"
+      ],
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "done/SIM_VERIFIED"
+    },
+    {
+      "name": "no-buttons negation",
+      "jobs": [
+        "job-e4f0a756e5b2"
+      ],
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "done/SIM_VERIFIED"
+    },
+    {
+      "name": "inline OK/arrow/WASD parsing",
+      "jobs": [
+        "job-64eb67524a7f"
+      ],
+      "before": "E_INTERACTION_CLAIM_PARTIAL",
+      "after": "E_NETWORK_PARTIAL (interaction PASS)"
+    },
+    {
+      "name": "bare network term context gate",
+      "jobs": [
+        "job-1397507cdf00"
+      ],
+      "before": "E_APP_ONLY_BASE_REQUIRED -> E_NETWORK_PARTIAL",
+      "after": "done/SIM_VERIFIED"
+    },
+    {
+      "name": "AtomS3Lite mapping",
+      "jobs": [],
+      "before": "E_NO_SIM_PROFILE",
+      "after": "mapped for future jobs"
+    },
+    {
+      "name": "StickS3 default-8MB vendor contexts",
+      "jobs": [
+        "job-baebccbe4704",
+        "job-1397507cdf00"
+      ],
+      "before": "E_APP_ONLY_BASE_REQUIRED",
+      "after": "booted; MuartKey content fail",
+      "note": "Stick Arcade SIM_VERIFIED"
+    }
+  ],
+  "remaining_interaction_jobs": [
+    "job-6d8453aa1b03",
+    "job-80044b9ebb7b",
+    "job-a5b5ed7f4b86",
+    "job-5eba34490ad5",
+    "job-f95036c6a990",
+    "job-14caec9b6956",
+    "job-0e32ee3706e2",
+    "job-36fb7ad15c46"
+  ],
+  "runtime_backup": "20261123T091648",
+  "limits": [
+    "native STA Linux worker NOT RUN",
+    "remaining interaction semantics NOT RUN",
+    "StickC Plus2/PaperS3 app-only NOT RUN",
+    "Tab5 ELF capture NOT RUN",
+    "AtomLite readiness NOT RUN",
+    "physical hardware NOT RUN"
+  ]
+}

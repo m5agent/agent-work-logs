@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-23 | Firmware Review Service | 近 59 条审查的过程诊断与假失败修复 | `PARTIAL`（4 条转 VERIFIED；11 条网络受 Linux worker 准入限制） | [查看](records/firmware-review-service/2026-11-23-review-process-diagnosis/) |
 | 2026-11-21 | `M5Unified` | #446 PCF8563 `begin()` 清掉 Timer_control 的 TE | PASS（virtual-device：M5Dial 上复现并验证一行修复；CoreInk 实机/虚拟 NOT RUN） | [查看](records/m5unified/2026-11-21-issue-446-pcf8563-timer-control/) |
 | 2026-11-21 | `M5Unified` | #447 PCF8563 `begin()` 保留跨重启的运行中定时器 | PARTIAL（virtual-device：寄存器 A/B 通过；定时器计数与实机 NOT RUN） | [查看](records/m5unified/2026-11-21-pr-447-pcf8563-timer-across-begin/) |
 | 2026-11-21 | `M5Unified` | #446 后续：合并后 develop 的 PCF8563 定时器保留复测 | PARTIAL（virtual-device：四个行为点寄存器复现；实机/定时器触发 NOT RUN） | [查看](records/m5unified/2026-11-21-issue-446-merged-develop-followup/) |

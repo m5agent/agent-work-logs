@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "近 59 条固件审查的过程诊断与假失败修复",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": "9e62882"
+  },
+  "hardware": {},
+  "firmware": {
+    "verified_after_fix": [
+      {"job_id": "job-cd404de9d2b8", "name": "AD Arcade for M5StickS3"},
+      {"job_id": "job-43c707bc2bcc", "name": "AD Arcade for M5StickC Plus"},
+      {"job_id": "job-e4f0a756e5b2", "name": "Bubble Level"},
+      {"job_id": "job-1397507cdf00", "name": "Stick Arcade"}
+    ],
+    "network_only_after_fix": [
+      {"job_id": "job-64eb67524a7f", "name": "玄机OS"}
+    ],
+    "content_failed": [
+      {"job_id": "job-baebccbe4704", "name": "MuartKey"}
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; resident firmware review service; native QEMU device service; no generic Linux network-namespace worker; saved-snapshot retries submit=false",
+    "task_id": "review-process-diagnosis-2026-11-23",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "recent outcome inventory",
+      "status": "PASS",
+      "detail": "59 jobs: 26 SIM_VERIFIED, 30 SIM_PARTIAL, 3 failed"
+    },
+    {
+      "name": "network admission root cause",
+      "status": "NOT RUN",
+      "detail": "11 network manuals: 7 worker_namespace_unavailable, 3 board_not_advertised, 1 qemu-wifi partial"
+    },
+    {
+      "name": "interaction false partials",
+      "status": "PASS",
+      "detail": "AD Arcade x2, Bubble Level, Stick Arcade flipped to SIM_VERIFIED; 玄机OS interaction PASS"
+    },
+    {
+      "name": "app-only contexts",
+      "status": "PARTIAL",
+      "detail": "StickS3 default-8MB vendor contexts added; StickC Plus2/PaperS3 still missing"
+    },
+    {
+      "name": "AtomS3Lite mapping",
+      "status": "PASS",
+      "detail": "ATOMS3_LITE/ATOMS3LITE mapped to atoms3-lite; historical jobs lack cached BIN"
+    },
+    {
+      "name": "remaining interaction jobs",
+      "status": "PARTIAL",
+      "detail": "8 jobs: Cardputer keyboard, PaperS3 E-Ink, Game Boy SD, Mouse single-button, PINGO hold B"
+    },
+    {
+      "name": "Tab5 frame evidence",
+      "status": "NOT RUN",
+      "detail": "2 jobs E_EVIDENCE_UNAVAILABLE; ELF-bound capture"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/process-summary.json"
+  ],
+  "notes": [
+    "Runtime-only interaction/network fixes were applied directly to the resident service; repo main is a different branch and not fully synced.",
+    "Backups of app.py, firmware_intake.py and config.json retained before deployment.",
+    "No Burner submission; no simulator code changes."
+  ]
+}
