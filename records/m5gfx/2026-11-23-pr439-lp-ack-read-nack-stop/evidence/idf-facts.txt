@@ -1,0 +1,91 @@
+# ESP-IDF v6.0.2 (local source tree, unchanged)
+# base: components/esp_driver_i2c/i2c_master.c and components/esp_hal_i2c/esp32c5/include/hal/i2c_ll.h
+
+## IDF read-then-STOP shape: i2c_master_receive() :1334-1346
+  1334	esp_err_t i2c_master_receive(i2c_master_dev_handle_t i2c_dev, uint8_t *read_buffer, size_t read_size, int xfer_timeout_ms)
+  1335	{
+  1336	    ESP_RETURN_ON_FALSE(i2c_dev != NULL, ESP_ERR_INVALID_ARG, TAG, "i2c handle not initialized");
+  1337	    ESP_RETURN_ON_FALSE((read_buffer != NULL) && (read_size > 0), ESP_ERR_INVALID_ARG, TAG, "i2c receive buffer or size invalid");
+  1338	    esp_err_t ret = ESP_OK;
+  1339
+  1340	    i2c_operation_t i2c_ops[] = {
+  1341	        {.hw_cmd = I2C_TRANS_START_COMMAND},
+  1342	        {.hw_cmd = I2C_TRANS_READ_COMMAND(I2C_ACK_VAL), .data = read_buffer, .total_bytes = read_size - 1},
+  1343	        {.hw_cmd = I2C_TRANS_READ_COMMAND(I2C_NACK_VAL), .data = (read_buffer + read_size - 1), .total_bytes = 1},
+  1344	        {.hw_cmd = I2C_TRANS_STOP_COMMAND},
+  1345	    };
+  1346
+
+## IDF rejects READ(ACK) followed by STOP :1456-1470
+  1456	            i2c_ops[i].data = (uint8_t *)i2c_operation[i].write.data;
+  1457	            i2c_ops[i].total_bytes = i2c_operation[i].write.total_bytes;
+  1458	            break;
+  1459	        case I2C_MASTER_CMD_READ:
+  1460	            i2c_ops[i].hw_cmd.op_code = I2C_LL_CMD_READ;
+  1461	            i2c_ops[i].hw_cmd.ack_val = i2c_operation[i].read.ack_value;
+  1462	            i2c_ops[i].data = i2c_operation[i].read.data;
+  1463	            i2c_ops[i].total_bytes = i2c_operation[i].read.total_bytes;
+  1464	            // Add check: If current command is READ and the next command is STOP, ack_value must be NACK
+  1465	            if (i + 1 < operation_list_num && i2c_operation[i + 1].command == I2C_MASTER_CMD_STOP) {
+  1466	                if (i2c_operation[i].read.ack_value != I2C_NACK_VAL) {
+  1467	                    ESP_LOGE(TAG, "ack_value must be NACK (1) when the next command of READ is STOP.");
+  1468	                    return ESP_ERR_INVALID_ARG;
+  1469	                }
+  1470	            }
+
+## IDF maps nack_int to ACK_ERROR while normal reads always NACK the last byte :790-800
+   790	    i2c_ll_clear_intr_mask(hal->dev, int_mask);
+   791	    if (int_mask == 0) {
+   792	        return;
+   793	    }
+   794
+   795	    if (int_mask & I2C_LL_INTR_NACK) {
+   796	        atomic_store(&i2c_master->status, I2C_STATUS_ACK_ERROR);
+   797	        i2c_master->event = I2C_EVENT_NACK;
+   798	    } else if (int_mask & I2C_LL_INTR_TIMEOUT || int_mask & I2C_LL_INTR_ARBITRATION) {
+   799	        atomic_store(&i2c_master->status, I2C_STATUS_TIMEOUT);
+   800	        i2c_master->event = I2C_EVENT_TIMEOUT;
+
+## new-IP command register layout (ack_val bit10 / op_code bits11-13) :39-63
+    39	 * @brief I2C hardware cmd register fields.
+    40	 */
+    41	typedef union {
+    42	    struct {
+    43	        uint32_t byte_num:    8,  /*!< Specifies the length of data (in bytes) to be read or written */
+    44	                 ack_en:      1,  /*!< Used to enable the I2C controller during a write operation to check whether ACK */
+    45	                 ack_exp:     1,  /*!< Used to configure the level of the ACK bit expected by the I2C controller during a write operation */
+    46	                 ack_val:     1,  /*!< Used to configure the level of the ACK bit sent by the I2C controller during a read operation */
+    47	                 op_code:     3,  /*!< Indicates the command */
+    48	                 reserved14: 17, /*!< Reserved bits */
+    49	                 done:        1;  /*!< Indicates that a command has been executed */
+    50	    };
+    51	    uint32_t val;
+    52	} i2c_ll_hw_cmd_t;
+    53
+    54	// I2C operation mode command
+    55	#define I2C_LL_CMD_RESTART    6    /*!<I2C restart command */
+    56	#define I2C_LL_CMD_WRITE      1    /*!<I2C write command */
+    57	#define I2C_LL_CMD_READ       3    /*!<I2C read command */
+    58	#define I2C_LL_CMD_STOP       2    /*!<I2C stop command */
+    59	#define I2C_LL_CMD_END        4    /*!<I2C end command */
+    60
+    61	typedef enum {
+    62	    I2C_INTR_MST_TXFIFO_WM = (1 << 1),
+    63	    I2C_INTR_MST_RXFIFO_WM = (1 << 0),
+
+## LP I2C exists only on C5 / C6 / P4 in IDF v6.0.2
+esp32c5    #define SOC_HP_I2C_NUM (1U) #define SOC_LP_I2C_NUM (1U)
+esp32c6    #define SOC_HP_I2C_NUM (1U) #define SOC_LP_I2C_NUM (1U)
+esp32p4    #define SOC_HP_I2C_NUM (2U) #define SOC_LP_I2C_NUM (1U)
+esp32h2    #define SOC_HP_I2C_NUM (2U)
+esp32c61   #define SOC_HP_I2C_NUM (1U)
+
+## M5GFX LP gate: SOC_LP_I2C_NUM > 0 && IDF >= 5.4.0 (common.inl:123-130)
+// Define LP-I2C availability before the GPIO helpers: board detection may
+// reclaim an LP-owned pad without entering the I2C implementation below.
+#if defined ( SOC_LP_I2C_NUM ) && ( SOC_LP_I2C_NUM > 0 ) && __has_include ( <driver/i2c_master.h> ) \
+ && defined ( ESP_IDF_VERSION_VAL ) && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 4, 0)
+ #define LGFX_LP_I2C_NUM SOC_LP_I2C_NUM
+#else
+ #define LGFX_LP_I2C_NUM 0
+#endif

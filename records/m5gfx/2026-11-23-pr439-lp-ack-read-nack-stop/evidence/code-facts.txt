@@ -1,0 +1,137 @@
+# M5GFX PR #439 head 4b012d6e691b9d6281c244e7bb212169dd97e7f6
+# develop tip 43a87193f898f998edf79c5fb99b166d11ee1eaf
+# diff develop..head for common.inl = 26 additions / 2 deletions (same as the PR)
+
+## diffstat (develop -> head, common.inl only)
+ src/lgfx/v1/platforms/esp32/common.inl | 28 ++++++++++++++++++++++++++--
+ 1 file changed, 26 insertions(+), 2 deletions(-)
+
+## i2c_set_cmd encoding (read nack = ack_val bit10) :1841-1856
+  1841	    static void i2c_set_cmd(i2c_dev_t* dev, uint8_t index, uint8_t op_code, uint8_t byte_num, bool flg_nack = false, bool check_ack = true)
+  1842	    {
+  1843	/*
+  1844	      typeof(dev->command[0]) cmd;
+  1845	      cmd.val = 0;
+  1846	      cmd.ack_en = (op_code == i2c_cmd_write || op_code == i2c_cmd_stop);
+  1847	      cmd.byte_num = byte_num;
+  1848	      cmd.op_code = op_code;
+  1849	      dev->command[index].val = cmd.val;
+  1850	*/
+  1851	      uint32_t cmd_val = byte_num
+  1852	                       | ((check_ack && (op_code == i2c_cmd_write || op_code == i2c_cmd_stop)) ? 0x100 : 0)
+  1853	                       | (op_code << 11);
+  1854	      if (flg_nack && op_code == i2c_cmd_read) {
+  1855	        cmd_val |= (1 << 10); // ACK_VALUE (set NACK)
+  1856	      }
+
+## context field :1713
+  1709	      gpio_num_t pin_scl = (gpio_num_t)-1;
+  1710	      gpio_num_t pin_sda = (gpio_num_t)-1;
+  1711	      uint8_t wait_ack_stage = 0;   // 0:Not waiting. / 1:Waiting after addressing. / 2:Waiting during data transmission.
+  1712	      bool check_ack = true;
+  1713	      bool last_read_acked = false; // the last read ended with an ACK, so the slave still drives SDA for the next byte
+  1714	      bool initialized = false;
+  1715	      bool foreign_bus = false;     // the port was already open through the platform driver when init() ran: shared, not owned
+
+## force_stop_read (HP only) :2073
+  2070	        // A read is normally closed by i2c_stop(), which ends it with a STOP driven through the
+  2071	        // GPIO. On a low power port the controller sends that STOP instead: i2c_stop() would
+  2072	        // first have to take its pads from the low power IO domain and hand them back after.
+  2073	        const bool force_stop_read = (i2c_context[i2c_port].state == i2c_context_t::state_read) && !isLpPort(i2c_port);
+  2074	        // After an error the peripheral may already be force-stopped; a normal STOP command then
+
+## STOP branch: predicate + dummy READ1 NACK + FIFO discard + clear :2098-2132
+  2098	          const bool nack_before_stop = isLpPort(i2c_port)
+  2099	                                     && (i2c_context[i2c_port].state == i2c_context_t::state_read)
+  2100	                                     && i2c_context[i2c_port].last_read_acked;
+  2101	          uint8_t cmd_idx = 0;
+  2102	          if (nack_before_stop) { i2c_set_cmd(dev, cmd_idx++, i2c_cmd_read, 1, true); }
+  2103	          i2c_set_cmd(dev, cmd_idx++, i2c_cmd_stop, 0, false, i2c_context[i2c_port].check_ack);
+  2104	          i2c_set_cmd(dev, cmd_idx, i2c_cmd_end, 0);
+  2105	          // Wake only on events that end the STOP; a NACK is evaluated after it completes.
+  2106	          static constexpr uint32_t intmask_ = I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M | I2C_TRANS_COMPLETE_INT_RAW_M;
+  2107	          updateDev(dev);
+  2108	          dev->int_clr.val = intmask_ | I2C_ACK_ERR_INT_RAW_M | I2C_END_DETECT_INT_RAW_M;
+  2109	          dev->ctr.trans_start = 1;
+  2110	          uint32_t ms = lgfx::millis();
+  2111	          taskYIELD();
+  2112	          while (!(dev->int_raw.val & intmask_) && ((millis() - ms) < (i2c_stall_limit_us / 1000))) { taskYIELD(); }
+  2113	          // A STOP that did not complete leaves the bus in an unknown state:
+  2114	          // recover it and refuse further use of this transaction.
+  2115	          {
+  2116	            uint32_t stop_raw = dev->int_raw.val;
+  2117	            if (res.has_value()
+  2118	             && ((stop_raw & (I2C_TIME_OUT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M))
+  2119	              || !(stop_raw & I2C_TRANS_COMPLETE_INT_RAW_M)))
+  2120	            {
+  2121	              res = cpp::fail(error_t::connection_lost);
+  2122	              i2c_context[i2c_port].state = cpp::fail(error_t::connection_lost);
+  2123	              i2c_stop(i2c_port);
+  2124	            }
+  2125	          }
+  2126	          if (nack_before_stop)
+  2127	          { // Discard the extra byte so the next read does not pick it up from the RX FIFO.
+  2128	            // This also runs after a failed STOP; the FIFO is then already empty if i2c_stop() reset the peripheral.
+  2129	            auto fifo_addr = getFifoAddr(i2c_port);
+  2130	            while (getRxFifoCount(dev)) { (void)*fifo_addr; }
+  2131	          }
+  2132	          i2c_context[i2c_port].last_read_acked = false;
+
+## restart() clears on every beginTransaction :2622-2628
+  2622	      updateDev(dev);
+  2623	      dev->int_clr.val = 0x1FFFF;
+  2624	      dev->ctr.trans_start = 1;
+  2625	      i2c_context[i2c_port].state = read ? i2c_context_t::state_t::state_read : i2c_context_t::state_t::state_write;
+  2626	      i2c_context[i2c_port].last_read_acked = false;
+  2627	      i2c_context[i2c_port].wait_ack_stage = 1;
+  2628	      return res;
+
+## readBytes() start clear :2818-2824
+  2818	      if (i2c_context[i2c_port].state != i2c_context_t::state_read) { return cpp::fail(error_t::mode_mismatch); }
+  2819	      cpp::result<void, error_t> res {};
+  2820	      if (!length) return res;
+  2821	      // Set again only when this read succeeds, so a failed read leaves no stale value behind.
+  2822	      i2c_context[i2c_port].last_read_acked = false;
+  2823
+  2824	      static constexpr uint32_t intmask = I2C_ACK_ERR_INT_RAW_M | I2C_TIME_OUT_INT_RAW_M | I2C_END_DETECT_INT_RAW_M | I2C_ARBITRATION_LOST_INT_RAW_M;
+
+## readBytes() success set :2896-2901
+  2896	          *readdata++ = *fifo_addr;
+  2897	        } while (--len);
+  2898	      } while (length);
+  2899
+  2900	      if (res.has_value()) { i2c_context[i2c_port].last_read_acked = !last_nack; }
+  2901	      return res;
+
+## default last_nack=false (src/lgfx/v1/platforms/common.hpp)
+275:    cpp::result<void, error_t> readBytes(int i2c_port, uint8_t *data, size_t length, bool last_nack = false);
+
+## M5GFX own register reads already use last_nack=true :2931-2958
+  2931
+  2932	    cpp::result<void, error_t> transactionRead(int i2c_port, int addr, uint8_t *readdata, uint8_t readlen, uint32_t freq)
+  2933	    {
+  2934	      auto res = beginTransaction(i2c_port, addr, freq, true);
+  2935	      if (res.has_error()) { return res; } // No transaction was acquired.
+  2936	      res = readBytes(i2c_port, readdata, readlen, true);
+  2937	      auto last = endTransaction(i2c_port);
+  2938	      return res.has_error() ? res : last;
+  2939	    }
+  2940
+  2941	    cpp::result<void, error_t> transactionWriteRead(int i2c_port, int addr, const uint8_t *writedata, uint8_t writelen, uint8_t *readdata, size_t readlen, uint32_t freq)
+  2942	    {
+  2943	      auto res = beginTransaction(i2c_port, addr, freq, false);
+  2944	      if (res.has_error()) { return res; } // No transaction was acquired.
+  2945	      if ((res = writeBytes(i2c_port, writedata, writelen)).has_value()
+  2946	       && (res = restart(i2c_port, addr, freq, true)).has_value()
+  2947	      )
+  2948	      {
+  2949	        res = readBytes(i2c_port, readdata, readlen, true);
+  2950	      }
+  2951	      auto last = endTransaction(i2c_port);
+  2952	      return res.has_error() ? res : last;
+  2953	    }
+  2954
+  2955	    cpp::result<uint8_t, error_t> readRegister8(int i2c_port, int addr, uint8_t reg, uint32_t freq)
+  2956	    {
+  2957	      auto res = transactionWriteRead(i2c_port, addr, &reg, 1, &reg, 1, freq);
+  2958	      if (res.has_value()) { return reg; }

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "pr-review",
+  "overall_status": "REVIEW",
+  "title": "M5GFX #439 review: NACK one extra byte before the LP-port STOP after an ACK-terminated read",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/436",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/439",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "43a87193f898f998edf79c5fb99b166d11ee1eaf",
+    "head_commit": "4b012d6e691b9d6281c244e7bb212169dd97e7f6"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64 read-only diff review plus local ESP-IDF v6.0.2 source comparison; no C5/C6/P4 hardware; local device profiles have no ESP32-C5 and the P4 (tab5) profile is not enabled; the emulator has no LP I2C controller model; upstream CI provided the only build evidence",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #439 OPEN, not draft, author GOB52, Japanese title/body, 0 comments and 0 reviews before review, mergeStateStatus CLEAN"
+    },
+    {
+      "id": "head-and-base",
+      "status": "PASS",
+      "detail": "head 4b012d6e691b9d6281c244e7bb212169dd97e7f6, base 43a87193f898f998edf79c5fb99b166d11ee1eaf (= develop tip); common.inl at head differs from develop only by this PR"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "1 file, 26 additions / 2 deletions in src/lgfx/v1/platforms/esp32/common.inl; no change to HP-port or NACK-terminated read paths"
+    },
+    {
+      "id": "state-bookkeeping",
+      "status": "PASS",
+      "detail": "last_read_acked set only on successful read (!last_nack) at :2900; cleared at :2822 (read start), :2626 (restart, always reached via beginTransaction) and :2132 (after STOP); a failed read or failed STOP cannot leave a stale true"
+    },
+    {
+      "id": "predicate",
+      "status": "PASS",
+      "detail": "extra byte is added only when isLpPort && state == state_read && last_read_acked (:2098-2100), so NACK-terminated reads (last_nack=true) and all HP ports are unchanged"
+    },
+    {
+      "id": "idf-conformance",
+      "status": "PASS",
+      "detail": "ESP-IDF v6.0.2 i2c_master_receive() builds READ(n-1,ACK)->READ(1,NACK)->STOP (:1334-1345) and i2c_master_transmit_receive() rejects a READ followed by STOP unless ack_val is NACK (:1459-1470); the inserted sequence matches the IDF contract"
+    },
+    {
+      "id": "ack-error-semantics",
+      "status": "PASS",
+      "detail": "IDF maps nack_int to ACK_ERROR (:795-797) while its receive path always NACKs the last byte and succeeds, which supports the PR comment that a controller-sent NACK does not trip the ack check"
+    },
+    {
+      "id": "fifo-discard-safety",
+      "status": "PASS",
+      "detail": "readBytes drains exactly the requested bytes, so only the dummy byte is in the RX FIFO; on a failed STOP i2c_stop() resets the LP peripheral, so the discard loop cannot drop real data (:2126-2131)"
+    },
+    {
+      "id": "lp-target-coverage",
+      "status": "PASS",
+      "detail": "IDF v6.0.2 soc_caps give LP I2C only to ESP32-C5, C6 and P4 (H2 has 2 HP, C61 has 1 HP), so the author's three-chip runtime matrix covers every LP-capable SoC"
+    },
+    {
+      "id": "ci-compile",
+      "status": "PASS",
+      "detail": "upstream GitHub Actions: 38/38 checks SUCCESS at head 4b012d6 (ESP-IDF 5.1.6-6.x and Arduino cores incl. esp32c5/C6/P4/H2); compile only, not executed locally"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no ESP32-C5/C6/P4 hardware on this host; the PR's 46-75 us and ~1.0 ms figures are the author's measurements, not reproduced"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "36 device profiles without ESP32-C5, tab5 not creatable (tab5_enabled=false), and no LP I2C controller model in esp-emulator; the SDA-held/STOP-stall state cannot be reproduced"
+    },
+    {
+      "id": "maintainer-c6-p4-regression",
+      "status": "NOT RUN",
+      "detail": "C6/P4 LP I2C regression was promised by the maintainer in #436 and is not part of this record"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-status.txt",
+    "evidence/code-facts.txt",
+    "evidence/idf-facts.txt",
+    "evidence/environment.txt",
+    "evidence/pr439.diff"
+  ],
+  "notes": [
+    "PR left OPEN; exactly one Japanese comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Evidence class is code-level verification plus upstream CI compile. Hardware and virtual-device validation are NOT RUN.",
+    "The PR implements the case B direction this agent proposed in #436 and approved by the maintainer on 2026-11-20."
+  ]
+}

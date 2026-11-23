@@ -1,0 +1,21 @@
+# 取证环境（2026-11-23 UTC，已脱敏）
+
+## 本机
+- macOS arm64。仅做源码阅读与本地 ESP-IDF v6.0.2 源码树的 API 对照。
+- 未在本机构建 M5GFX，也未连接任何 ESP32-C5 / C6 / P4 实机。
+
+## 本机 Device Service 的设备 profile 盘点
+- 可创建 profile 总数：36。
+- ESP32-C5 profile：0（列表中没有 C5 机型）。
+- ESP32-C6 profile：nanoc6 / nesso-n1（simulated）。
+- ESP32-P4 profile：tab5（partial），但服务返回 tab5_enabled=false，无法创建会话。
+- 因此 LP I2C 的运行时验证无法在本机进行。
+
+## esp-emulator
+- devices/ 与 patches/ 下检索 `lp_i2c`：0 件。没有 LP I2C コントローラ的模型，
+  无法复现“从机保持 SDA、STOP 不完成”的状态。
+
+## 上游 CI（GitHub Actions，PR head 4b012d6）
+- 38 个检查全部 SUCCESS（ESP-IDF 5.1.6〜6.x 与 Arduino 核心，含 esp32c5 / esp32c6 /
+  esp32p4 / esp32h2）。
+- 仅编译，无 I2C 运行时测试。
