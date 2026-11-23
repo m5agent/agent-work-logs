@@ -25,3 +25,5 @@ StopWatch Demo Plus 的原版冷启动需要从设置打开 Wi‑Fi。六个真�
 - [常驻切换与原版 dry-run](followups/2026-11-23-resident-sta-cutover/)
 
 - [StopWatch 出厂配网与 DHCP 重传摘要修复](followups/2026-11-23-stopwatch-factory-provisioning/)
+
+- [S3-watch 原版 WPA2、HTTP 与组合兼容性边界](followups/2026-11-23-s3-watch-native-wpa2-http/)

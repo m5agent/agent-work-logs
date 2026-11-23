@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "S3-watch original WPA2/HTTP with combined-runtime compatibility blocker",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "local_commit": "073104c072ebfab24ed010216a6ea24e0ba4ea4e",
+    "publication": "Local sealed candidate source, not pushed or promoted to project main",
+    "source_manifest_sha256": "457a3ab7401cec2501769962703a8716dcdb165bbfe3e0903e0d9b30081dc1d8",
+    "api_contract_sha256": "2bdcdbd42af109fcf93c149c859e02eec28cb8b77d735991c46b7f70bd3cf51b",
+    "patch_0234_sha256": "97c2a9cb9f6b34704f0c59e57618df0111b73b78bdc5500198c758d99e80fe13"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "device": "sticks3",
+    "machine": "m5sticks3",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "name": "S3-watch 0.1 (worked)",
+    "original_sha256": "eb7f9425c07cffd972d0de479fc6c82d86af2aa51dc807d9829d5ee55add163b",
+    "original_bytes": 8388608,
+    "original_main_source_sha256": "eeeea530fa327e38ce4bd4b78c0a06bd194204c41ae385d10a66a1f17ce26f1c",
+    "application_modified": false
+  },
+  "execution": {
+    "environment": "Isolated macOS arm64 native Device Service",
+    "timezone": "Asia/Shanghai",
+    "runtime_sha256": "67e78237fe35a1b81b0e2e3070c72b7e415dc4bf22e3506162c78a2c51da609a",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "profile": "sticks3-s3-watch-wpa2",
+    "transport": "private Unix socketpair",
+    "host_ip_backends": 0,
+    "external_traffic": false,
+    "b_hold_requests": 2,
+    "b_hold_seconds": 2,
+    "clock_fixture_or_write": false,
+    "linux_qualification": "NOT RUN",
+    "browser_qualification": "NOT RUN",
+    "resident_rollout": "NOT RUN",
+    "burner_submission": false
+  },
+  "checks": [
+    {
+      "name": "same-original target WPA2, protected data and fixed HTTP positive",
+      "status": "PASS",
+      "http_status": 200,
+      "http_body_bytes": 152,
+      "qom_m1_m2_m3_m4": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "qom_protected_tx": 11,
+      "qom_protected_rx": 7,
+      "finalized_dora": 1,
+      "finalized_tcp_pairs": 1
+    },
+    {
+      "name": "wrong-passphrase expected rejection",
+      "status": "PASS",
+      "peer_status": "PARTIAL",
+      "qom_ready": false,
+      "qom_m3_m4": [
+        0,
+        0
+      ],
+      "finalized_dora": 0,
+      "finalized_tcp_pairs": 0,
+      "http_status": null
+    },
+    {
+      "name": "maintained runner positive repeat and formatted negative",
+      "status": "PASS"
+    },
+    {
+      "name": "initial HTTP oracle with valid unset-clock value",
+      "status": "FAIL",
+      "http_200_was_observed": true,
+      "later_fixture_or_clock_change": false
+    },
+    {
+      "name": "combined-runtime previous StopWatch compatibility",
+      "status": "PARTIAL",
+      "promotion": "BLOCKED",
+      "untraced_candidate": "PARTIAL",
+      "same_config_baseline": "PASS",
+      "trace_enabled_unchanged_binaries": "both PASS",
+      "cause": "unresolved"
+    },
+    {
+      "name": "full platform tests",
+      "status": "PASS",
+      "tests": 2529,
+      "skipped": 11,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 221.812
+    },
+    {
+      "name": "focused and documentation tests, four validators, actual-C sanitizer controls",
+      "status": "PASS",
+      "focused_tests": 7,
+      "documentation_tests": 22
+    },
+    {
+      "name": "case cleanup",
+      "status": "PASS",
+      "sessions_stopped": true,
+      "leases_zero": true,
+      "services_stopped": true,
+      "flash_released": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/s3-watch-native-wpa2.summary.json",
+      "sha256": "528e65ba62305c2dc639e0172ed87c9d6f879dfc89a4073fdcfb5498647805e6",
+      "bytes": 24633
+    }
+  ],
+  "notes": [
+    "Final counts cite post-stop same-session capture, not a running ZIP summary.",
+    "All earlier results and the unresolved combined-runtime blocker are retained.",
+    "No sensitive original code or ZIP bytes were read by the archiver; no raw data or identifiers published."
+  ]
+}
