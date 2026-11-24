@@ -1,0 +1,55 @@
+{
+ "schema_version": 1,
+ "date": "2026-11-24",
+ "kind": "service_debug",
+ "overall_status": "PARTIAL",
+ "title": "review-sta 便携网络审查实现、验收与上线（issue #238）",
+ "source": {
+  "issue": "#238",
+  "pull_request": "#237, #239",
+  "repository": "m5stack-esp-emulator",
+  "base_commit": "a4343d86d21a797ecf12384c9d200a9bc7ef2e32"
+ },
+ "hardware": {},
+ "firmware": {
+  "control_firmware": "tests/network/review_sta_controls (ESP-IDF v5.5.4)"
+ },
+ "execution": {
+  "environment": "macOS arm64; native QEMU 04abc3ba; dedicated agent Device Service and isolated staging reviewer for qualification; resident services after cutover",
+  "emulator_commit": "c5175868f2a798ec828f6a4bf38279d84bd2f2c0",
+  "reviewer_commit": "3ce2fe1",
+  "post_cutover_job": "job-f63ed14dd63b"
+ },
+ "checks": [
+  {
+   "name": "control matrix (8 boards, known-good/bad/offline/setup)",
+   "status": "PASS",
+   "detail": "matrix3 32/32; 32 final pcaps isolation PASS"
+  },
+  {
+   "name": "platform suite and validators",
+   "status": "PASS",
+   "detail": "2553 tests OK; coverage/catalog/profiles/snapshot OK"
+  },
+  {
+   "name": "reviewer suite",
+   "status": "PASS",
+   "detail": "357 tests OK on 3ce2fe1"
+  },
+  {
+   "name": "current network jobs replay",
+   "status": "PARTIAL",
+   "detail": "14/14 reached review-sta; no namespace/catalog reasons; all PARTIAL no_network_activity (no probe requests)"
+  },
+  {
+   "name": "resident cutover",
+   "status": "PASS",
+   "detail": "18853, 8787, 8790 switched; history retained; Burner submissions 0"
+  },
+  {
+   "name": "physical hardware, browser-WASM, WPA3, TLS",
+   "status": "NOT RUN",
+   "detail": "out of scope"
+  }
+ ]
+}
