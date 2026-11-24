@@ -45,3 +45,18 @@
 
 恢复 `run.sh.bak.20261124T071657Z` 与 `backups/app.py.20261124T071830Z`，删除
 `review_sta_network.py`，按上一发布目录重新启动 8787。
+
+## 后续：CardRadio 仍转人工的原因与修复
+
+上线后 CardRadio v1.0（`job-ea9c50fa3fdb`）仍判 `E_NETWORK_NO_ACTIVITY`。按其源码
+（fengzeest-cpu/Cardradio）开机先挂载 SD，没有卡会一直停在“没有 microSD 卡”，挂载后只连接
+Preferences `mp3net` 里保存的网络，所以窗口内没有任何联网尝试。
+
+- 模拟器 main `ee32904283e484968fd5c107b435ff96651f914f`（PR #240，API 1.101.0）：新增
+  `network.preset`。`sd_card=blank` 挂接会话级空白 FAT32 卡；`saved_station=true` 只向已按
+  源码核对且在镜像中出现的布局写入审查 SSID（目前仅 `mp3net`）。原 BIN 不改。
+- 审查服务 `7efa0b7`（OpenAPI 0.34.0）：默认请求预置；入网、认证、DHCP 通过且 pcap 隔离
+  PASS 时网络记为 `STATION PASS`，公网服务注明为外部依赖未验证，不再转人工。
+- 验证：控制矩阵 `matrix4` 32/32；平台套件 2556 项与审查套件通过；生产 dry-run
+  `job-56c2d7300f18`（CardRadio 快照，未提交）为 `done / SIM_VERIFIED`。
+- 仍为 `PARTIAL`：Bruce CN、Monster 等的已保存网络布局未核对，预置记 `no_known_layout`。
