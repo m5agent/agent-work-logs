@@ -132,6 +132,6 @@ G1 为低则后部口是 UART0。作者描述的 V1.1 若确实重画了复用�
 
 - PR head 源码：`https://github.com/m5stack/M5GFX/blob/cc6d5ff74783f7b001725a6f758ef11ffa7231aa/src/board_detect/m5/pmic_ops.hpp#L94-L108`
 - 原理图：`https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1242/C152-SCH_Stopwatch_PRJ_Main_VA_20251201_2026_04_24_17_46_22.pdf`
-  （第 3、4 页；副本与 SHA256 见 `evidence/`）
+  （第 3、4 页；URL 与 SHA256 见 `evidence/external-references.txt`）
 - M5IOE1 数据手册：`https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1210/IO_Expander_Datasheet_EN.pdf`（第 6 页）
 - 官方 App 固件：`https://github.com/m5stack/M5StopWatch-UserDemo/blob/main/main/hal/hal_ioe.cpp`

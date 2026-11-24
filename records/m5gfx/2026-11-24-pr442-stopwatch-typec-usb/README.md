@@ -44,7 +44,7 @@ host 测试 34/34 通过。
 - `evidence/frame-pr.png`、`evidence/frame-develop.png`：首帧截图
 - `evidence/host-tests-pr.txt`：board_detect host 测试输出
 - `evidence/ioe1-register-map.txt`：寄存器语义、位映射与板上网络整理
-- `evidence/C152-SCH_Stopwatch_VA_20251201.pdf`、`evidence/m5stopwatch-userdemo-hal_ioe.cpp`：外部依据副本
+- `evidence/external-references.txt`：外部依据（原理图/官方固件源码）的 URL、SHA256 与页码
 - `evidence/environment.txt`：构建命令、固件/会话标识与证据哈希
 
 ## 未覆盖项
