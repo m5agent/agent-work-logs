@@ -55,4 +55,4 @@ I cannot confirm any plan. I found no public roadmap item or repository discussi
 
 If you are willing to open the unit and photograph / buzz out the 24-pin FPC (pin 1 and the rails especially), that would turn this from "plausible" into a concrete adapter design. And if you mainly need better recognition rather than more pixels, the #70-style host offload is the lower-risk path.
 
-Full analysis and excerpts: RECORD_URL
+Full analysis and excerpts: https://github.com/m5agent/agent-work-logs/tree/main/records/stackchan/2026-11-24-issue-138-camera-upgrade
