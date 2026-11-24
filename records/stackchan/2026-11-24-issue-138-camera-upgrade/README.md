@@ -5,7 +5,7 @@
 - 工作类型：`issue`
 - 问题来源：https://github.com/m5stack/StackChan/issues/138
 - GitHub 回复（首轮）：https://github.com/m5stack/StackChan/issues/138#issuecomment-7143018501
-- GitHub 回复（第二轮）：`PENDING`
+- GitHub 回复（第二轮）：https://github.com/m5stack/StackChan/issues/138#issuecomment-7143340584
 - 源码版本：`m5stack/StackChan @ 28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400`（v1.6.2 main）
 - 依赖：`esp_video 2.5.0`、`esp_cam_sensor 2.6.0`、`esp32-camera 2.1.8`
 - 环境：macOS，源码与公开原理图/文档只读检视；无 StackChan 实机；未构建固件
