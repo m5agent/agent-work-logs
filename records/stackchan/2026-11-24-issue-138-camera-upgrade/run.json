@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-24",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "StackChan K151 camera upgrade feasibility (GC0308 -> OV2640/OV3660/OV5640)",
+  "source": {
+    "issue": "https://github.com/m5stack/StackChan/issues/138",
+    "pull_request": "",
+    "repository": "https://github.com/m5stack/StackChan",
+    "base_commit": "28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400",
+    "upstream": [
+      "https://github.com/espressif/esp-video-components/tree/v2.6.0",
+      "https://github.com/espressif/esp32-camera"
+    ]
+  },
+  "hardware": {
+    "device": "M5Stack StackChan K151",
+    "present": false,
+    "notes": "No physical unit available; no J2 continuity, rail, reset or lens measurements"
+  },
+  "firmware": {
+    "target": "M5Stack StackChan (ESP32-S3, 16MB flash, 8MB PSRAM)",
+    "build": "NOT RUN",
+    "flash": "NOT RUN",
+    "image_sha256": "",
+    "source_commit": "28b9f0c8",
+    "camera_path": "esp_video 2.5.0 + esp_cam_sensor 2.6.0, GC0308 DVP 8-bit, YUV422 320x240@20, SCCB 100kHz",
+    "resolved_dependencies": {
+      "esp32-camera": "2.1.8",
+      "esp_video": "2.5.0",
+      "esp_cam_sensor": "2.6.0",
+      "esp_sccb_intf": "0.0.9"
+    }
+  },
+  "execution": {
+    "environment": "macOS; read-only source, published schematic text and official docs; local Device Service profile query only (no session)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "Issue state and existing replies",
+      "command": "gh issue view 138 --repo m5stack/StackChan --json state,comments",
+      "status": "PASS",
+      "detail": "OPEN, 0 comments at 2026-11-24T20:02Z; no prior m5agent reply"
+    },
+    {
+      "name": "Firmware camera pin and format configuration",
+      "command": "sed -n '42,62p' firmware/main/hal/board/config.h; grep -n 'CAMERA' firmware/sdkconfig.defaults",
+      "status": "PASS",
+      "detail": "8-bit DVP pins D0-D7, VSYNC 46, HREF 38, PCLK 45; XCLK/RESET/PWDN/SIOD/SIOC NC; CONFIG_CAMERA_GC0308_DVP_YUV422_320X240_20FPS=y"
+    },
+    {
+      "name": "esp_video DVP/SCCB initialisation",
+      "command": "sed -n '632,675p' firmware/main/hal/board/stackchan.cc",
+      "status": "PASS",
+      "detail": "CAM_CTLR_DATA_WIDTH_8; SCCB reuses i2c_bus_ at 100kHz; xclk_freq 20MHz with xclk_io NC"
+    },
+    {
+      "name": "Resolved camera component versions",
+      "command": "python3 parse firmware/dependencies.lock",
+      "status": "PASS",
+      "detail": "esp_video 2.5.0, esp_cam_sensor 2.6.0, esp32-camera 2.1.8 (manifest says ^2.4.1)"
+    },
+    {
+      "name": "Host camera interface from published schematic",
+      "command": "grep -nE 'J2|CAM_|X2|20MHz' StackChan Core.md",
+      "status": "PASS",
+      "detail": "J2 AFC34-S24FIA-00 24-pin: CAM_D2-D9, PCLK/VSYNC/HREF, RST/PWDN, MCLK from X2 20MHz via R31, I2C_SYS, AVDD/DVDD/VDDCAM_3V3; CAM_RST on AW9523B P1_0"
+    },
+    {
+      "name": "Camera sub-board schematic/BOM availability",
+      "command": "grep -n 'subboard_bom\\|review.camera-proximity' StackChan Core.md",
+      "status": "PASS",
+      "detail": "subboard_bom=null; only J2 is shown, no GC0308/LTR-553 devices or FPC pin order published"
+    },
+    {
+      "name": "esp_cam_sensor v2.6.0 DVP ceiling per sensor",
+      "command": "grep -oE 'DVP_[A-Z0-9_]+_[0-9]+X[0-9]+_[0-9]+FPS' sensors/{gc0308,ov2640,ov3660,ov5640}/*.c",
+      "status": "PASS",
+      "detail": "GC0308 640x480@16; OV2640 JPEG 1600x1200@12; OV3660 JPEG 1280x720@12; OV5640 800x600@10 DVP only"
+    },
+    {
+      "name": "SCCB address collision check",
+      "command": "grep SCCB_ADDR sensors/*/include/*.h; cross-check documented bus devices",
+      "status": "PASS",
+      "detail": "GC0308 0x21, OV2640 0x30, OV3660/OV5640 0x3C; none collide with 0x21/0x23/0x34/0x36/0x38/0x40/0x50/0x58/0x68/0x69/0x6F/0x71"
+    },
+    {
+      "name": "Official camera example resolution",
+      "command": "grep -nE 'frame_size|pixel_format|xclk' nuxt-m5-docs static/en/arduino/stackchan/camera.md",
+      "status": "PASS",
+      "detail": "FRAMESIZE_QVGA (320x240), PIXFORMAT_RGB565, fb_count 2 in PSRAM, xclk 20MHz"
+    },
+    {
+      "name": "LTR-553 official support",
+      "command": "sed -n '1,80p' static/en/arduino/stackchan/ltr553.md",
+      "status": "PASS",
+      "detail": "Official LTR5XX example reads PS and ALS; product docs group the part with the camera sub-board"
+    },
+    {
+      "name": "LTR-553 population across K151 revisions",
+      "command": "gh issue view 77 --repo m5stack/StackChan",
+      "status": "REVIEW",
+      "detail": "One owner reported 0x23 not ACKing; issue closed with no maintainer reply; population unconfirmed"
+    },
+    {
+      "name": "Local Device Service StackChan profile",
+      "command": "curl -s <local-device-service>/api/v1/devices",
+      "status": "PASS",
+      "detail": "stackchan profile present: ESP32-S3, 16MB flash, ILI9342C 320x240, peripheral_status simulated, creatable"
+    },
+    {
+      "name": "Virtual-device validation of sensor substitution",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "Profile camera is a modelled GC0308 DVP frame source; cannot represent a different physical sensor's pinout, rails, SCCB ID or optics"
+    },
+    {
+      "name": "Hardware validation (J2 rails, reset, FPC, lens, thermal)",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "No K151 unit available"
+    },
+    {
+      "name": "Build with an OV sensor driver enabled",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "No ESP-IDF build performed; esp_video V4L2 acceptance of JPEG DVP modes untested"
+    }
+  ],
+  "evidence": [
+    "evidence/01-issue-context.txt",
+    "evidence/02-firmware-camera-path.txt",
+    "evidence/03-schematic-camera-interface.txt",
+    "evidence/04-sensor-format-ceilings.txt",
+    "evidence/05-official-docs.txt",
+    "evidence/06-related-threads.txt",
+    "evidence/07-device-service-profile.json",
+    "evidence/08-reply.md"
+  ],
+  "notes": [
+    "Reply language follows the issue (English); one comment only, no issue close, no repository change.",
+    "No credentials, device identifiers, MAC addresses or internal endpoints are included in this record.",
+    "The camera sub-board pinout is the blocking unknown for any adapter design."
+  ]
+}

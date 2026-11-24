@@ -1,0 +1,97 @@
+# Firmware camera path — m5stack/StackChan @ 28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400
+# captured 2026-11-24T20:03:10Z
+
+## firmware/main/hal/board/config.h:42-62
+
+
+/* Camera pins */
+#define CAMERA_PIN_PWDN GPIO_NUM_NC
+#define CAMERA_PIN_RESET GPIO_NUM_NC
+#define CAMERA_PIN_XCLK  GPIO_NUM_NC // 像素时钟 (固定由 20MHz 外部晶振输入) 
+#define CAMERA_PIN_SIOD GPIO_NUM_NC  // 串行时钟 Using existing I2C port
+#define CAMERA_PIN_SIOC GPIO_NUM_NC  // 串行时钟 Using existing I2C port
+#define CAMERA_PIN_D0 GPIO_NUM_39
+#define CAMERA_PIN_D1 GPIO_NUM_40
+#define CAMERA_PIN_D2 GPIO_NUM_41
+#define CAMERA_PIN_D3 GPIO_NUM_42
+#define CAMERA_PIN_D4 GPIO_NUM_15
+#define CAMERA_PIN_D5 GPIO_NUM_16
+#define CAMERA_PIN_D6 GPIO_NUM_48
+#define CAMERA_PIN_D7 GPIO_NUM_47
+#define CAMERA_PIN_VSYNC GPIO_NUM_46
+#define CAMERA_PIN_HREF GPIO_NUM_38
+#define CAMERA_PIN_PCLK GPIO_NUM_45
+
+#define XCLK_FREQ_HZ 20000000
+
+## firmware/sdkconfig.defaults (camera and PSRAM)
+8:CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+29:CONFIG_SPIRAM=y
+30:CONFIG_SPIRAM_SPEED_80M=y
+31:CONFIG_SPIRAM_MEMTEST=n
+32:CONFIG_SPIRAM_MALLOC_ALWAYSINTERNAL=512
+33:CONFIG_SPIRAM_MALLOC_RESERVE_INTERNAL=65536
+58:CONFIG_CAMERA_GC0308=y
+59:CONFIG_CAMERA_GC0308_DVP_YUV422_320X240_20FPS=y
+
+## firmware/main/hal/board/stackchan.cc:632-675 (esp_video DVP init)
+    void InitializeCamera()
+    {
+        ESP_LOGI(TAG, "Init Camera");
+
+        static esp_cam_ctlr_dvp_pin_config_t dvp_pin_config = {
+            .data_width = CAM_CTLR_DATA_WIDTH_8,
+            .data_io =
+                {
+                    [0] = CAMERA_PIN_D0,
+                    [1] = CAMERA_PIN_D1,
+                    [2] = CAMERA_PIN_D2,
+                    [3] = CAMERA_PIN_D3,
+                    [4] = CAMERA_PIN_D4,
+                    [5] = CAMERA_PIN_D5,
+                    [6] = CAMERA_PIN_D6,
+                    [7] = CAMERA_PIN_D7,
+                },
+            .vsync_io = CAMERA_PIN_VSYNC,
+            .de_io    = CAMERA_PIN_HREF,
+            .pclk_io  = CAMERA_PIN_PCLK,
+            .xclk_io  = CAMERA_PIN_XCLK,
+        };
+
+        esp_video_init_sccb_config_t sccb_config = {
+            .init_sccb  = false,
+            .i2c_handle = i2c_bus_,
+            .freq       = 100000,
+        };
+
+        esp_video_init_dvp_config_t dvp_config = {
+            .sccb_config = sccb_config,
+            .reset_pin   = CAMERA_PIN_RESET,
+            .pwdn_pin    = CAMERA_PIN_PWDN,
+            .dvp_pin     = dvp_pin_config,
+            .xclk_freq   = XCLK_FREQ_HZ,
+        };
+
+        esp_video_init_config_t video_config = {
+            .dvp = &dvp_config,
+        };
+
+        camera_ = new StackChanCamera(video_config);
+        camera_->SetHMirror(false);
+    }
+
+## dependency versions (firmware/main/idf_component.yml)
+40:  espressif/esp32-camera:
+41-    version: ^2.1.7
+42-    rules:
+43-    - if: target in [esp32s3]
+44:  espressif/esp_video:
+45-    version: ^2.4.1
+46-    rules:
+47-    - if: target in [esp32p4, esp32s3]
+
+## resolved versions (firmware/dependencies.lock)
+espressif/esp32-camera: 2.1.8
+espressif/esp_video: 2.5.0
+espressif/esp_cam_sensor: 2.6.0
+espressif/esp_sccb_intf: 0.0.9

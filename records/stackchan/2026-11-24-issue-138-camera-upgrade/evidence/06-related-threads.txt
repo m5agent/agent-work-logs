@@ -1,0 +1,28 @@
+# Related public threads
+# captured 2026-11-24T20:03:01Z via gh
+
+## #77 LTR553/INA226/ST25R3916 do not ACK (CLOSED, no maintainer comment)
+77 K151 StackChan: LTR553, INA226, and ST25R3916 do not ACK on expected I2C bus CLOSED comments=0
+- LTR553 proximity / ambient light sensor at `0x23`
+  - LTR553: read PART_ID register `0x86`
+So after the PY32 is initialized and VM_EN is set, the only detected target device is still `0x6F`. `0x23`, `0x41`, and `0x50` are not visible.
+Are LTR553, INA226, or ST25R3916 behind any additional power-enable line, reset line, firmware gate, mux, or alternate I2C bus/address that is not obvious from the public docs/BSP examples?
+- Is LTR553 actually present on the CoreS3 module shipped with StackChan, and should it respond at `0x23` after CoreS3 AXP2101 initialization?
+
+## #70 visual gaze following (CLOSED) — on-device headroom finding
+70 [Feature Request] 支持对话时视觉跟随 / visual gaze following during conversation CLOSED comments=3
+We built an experimental local-first implementation here:
+
+https://github.com/xuruiray/stackchan-local
+
+The main idea is to move the heavy computation off the ESP32. In practice, the ESP32 does not have enough headroom to run stable real-time image recognition together with the existing avatar, audio, servo, camera, Wi-Fi, and UI workload.
+
+So our approach is:
+
+- StackChan hardware captures low-FPS camera frames and sends them to a local desktop daemon over LAN WebSocket.
+- The desktop daemon runs face detection / tracking locally on the computer.
+- The daemon sends only lightweight motion targets back to the hardware.
+- The hardware focuses on expression: avatar, servos, RGB, audio playback, sensors, and companion state.
+- Codex / MCP integration also runs on the computer, so StackChan behaves more like a desktop pet: the computer is the brain, and the hardware is the expressive body.
+
+

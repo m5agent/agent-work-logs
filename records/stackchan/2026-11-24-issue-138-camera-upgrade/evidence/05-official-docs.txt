@@ -1,0 +1,51 @@
+# Official M5Stack StackChan camera / LTR553 documentation
+# source: nuxt-m5-docs static/en/arduino/stackchan/{camera,ltr553}.md
+# captured 2026-11-24T20:03:01Z
+
+## camera.md — configuration fields
+27:    .pin_pwdn     = -1,
+28:    .pin_reset    = -1,
+29:    .pin_xclk     = -1,
+30:    .pin_sscb_sda = 12,
+31:    .pin_sscb_scl = 11,
+32:    .pin_d7       = 47,
+33:    .pin_d6       = 48,
+34:    .pin_d5       = 16,
+35:    .pin_d4       = 15,
+36:    .pin_d3       = 42,
+37:    .pin_d2       = 41,
+38:    .pin_d1       = 40,
+39:    .pin_d0       = 39,
+40:    .pin_vsync = 46,
+41:    .pin_href  = 38,
+42:    .pin_pclk  = 45,
+43:    .xclk_freq_hz = 20000000,
+46:    .pixel_format  = PIXFORMAT_RGB565,
+47:    .frame_size    = FRAMESIZE_QVGA,
+49:    .fb_count      = 2,
+50:    .fb_location   = CAMERA_FB_IN_PSRAM,
+88:    Camera.sensor->set_framesize(Camera.sensor, FRAMESIZE_QVGA);
+
+## camera.md — image size assignment
+88:    Camera.sensor->set_framesize(Camera.sensor, FRAMESIZE_QVGA);
+92:        M5.Display.pushImage(0, 0, M5.Display.width(),
+
+## ltr553.md — sensor example (begin/modes/reads)
+12:- [LTR5XX Library](https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1205/LTR5XX.zip) (After extracting, place it in the same folder as the .ino file)
+16:#include "LTR5XX.h"
+18:Ltr5xx_Init_Basic_Para device_init_base_para = LTR5XX_BASE_PARA_CONFIG_DEFAULT;
+19:LTR5XX DistanceSensor;
+32:    device_init_base_para.ps_led_pulse_freq   = LTR5XX_LED_PULSE_FREQ_40KHZ;
+33:    device_init_base_para.ps_measurement_rate = LTR5XX_PS_MEASUREMENT_RATE_50MS;
+34:    device_init_base_para.als_gain            = LTR5XX_ALS_GAIN_48X;
+36:    if (!DistanceSensor.begin(&device_init_base_para)) {
+48:    DistanceSensor.setPsMode(LTR5XX_PS_ACTIVE_MODE);
+51:    DistanceSensor.setAlsMode(LTR5XX_ALS_ACTIVE_MODE);
+53:    // DistanceSensor.setPsMode(LTR5XX_PS_STAND_BY_MODE);
+56:    // DistanceSensor.setAlsMode(LTR5XX_ALS_STAND_BY_MODE);
+61:    read_ps_value  = DistanceSensor.getPsValue();
+62:    read_als_value = DistanceSensor.getAlsValue();
+
+## StackChan_Core.md — product camera spec
+23:The board integrates many built-in peripherals: a rugged 2.0-inch capacitive touch screen, a 0.3 MP camera, proximity sensor, ambient light sensor, and nine-axis IMU; it also provides a microSD card slot, an onboard 1W speaker, dual microphones, power and reset buttons, and is suitable as a direct replacement for the original controller in StackChan AI desktop robots.
+57:| Camera              | GC0308 0.3MP                                                                                                                                                          |

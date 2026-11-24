@@ -1,0 +1,71 @@
+# esp_cam_sensor v2.6.0 DVP format tables (github.com/espressif/esp-video-components @ v2.6.0)
+# captured 2026-11-24T20:03:00Z
+
+## gc0308 — DVP modes
+DVP_GRAY_320X240_20FPS
+DVP_GRAY_640X480_16FPS
+DVP_RGB565_BE_320X240_20FPS
+DVP_RGB565_BE_640X480_16FPS
+DVP_YUV422_320X240_20FPS
+DVP_YUV422_640X480_16FPS
+DVP_YUV422_YUYV_320X240_20FPS
+DVP_YUV422_YUYV_640X480_16FPS
+
+## ov2640 — DVP modes
+DVP_JPEG_1280X720_12FPS
+DVP_JPEG_1600X1200_12FPS
+DVP_JPEG_320X240_50FPS
+DVP_JPEG_640X480_25FPS
+DVP_RAW8_1024X600_15FPS
+DVP_RAW8_800X640_15FPS
+DVP_RAW8_800X640_30FPS
+DVP_RAW8_800X800_15FPS
+DVP_RGB565_240X240_25FPS
+DVP_RGB565_640X480_6FPS
+DVP_RGB565_BE_240X240_25FPS
+DVP_RGB565_BE_640X480_6FPS
+DVP_YUV422_240X240_25FPS
+DVP_YUV422_320X240_25FPS
+DVP_YUV422_640X480_6FPS
+DVP_YUV422_YUYV_240X240_25FPS
+DVP_YUV422_YUYV_320X240_25FPS
+DVP_YUV422_YUYV_640X480_6FPS
+
+## ov3660 — DVP modes
+DVP_JPEG_1280X720_12FPS
+DVP_JPEG_240X240_30FPS
+DVP_JPEG_320X240_25FPS
+DVP_JPEG_640X480_25FPS
+DVP_RGB565_BE_240X240_24FPS
+DVP_RGB565_BE_640X480_10FPS
+DVP_YUV422_YUYV_240X240_24FPS
+DVP_YUV422_YUYV_640X480_10FPS
+
+## ov5640 — DVP modes
+DVP_RGB565_800X600_10FPS
+DVP_RGB565_BE_800X600_10FPS
+DVP_YUV422_800X600_10FPS
+DVP_YUV422_YUYV_800X600_10FPS
+
+## SCCB addresses (sensor headers, v2.6.0)
+gc0308   #define GC0308_SCCB_ADDR   0x21
+ov2640   #define OV2640_SCCB_ADDR   0x30
+ov3660   #define OV3660_SCCB_ADDR   0x3c
+ov5640   #define OV5640_SCCB_ADDR   0x3C
+
+## esp32-camera 2.1.8 sensor table and PSRAM/format constraints
+# source: https://github.com/espressif/esp32-camera README.md (master, fetched 2026-11-24T20:03:01Z)
+### Supported Sensor
+
+| model   | max resolution | color type | output format                                                | Len Size |
+| ------- | -------------- | ---------- | ------------------------------------------------------------ | -------- |
+| OV2640  | 1600 x 1200    | color      | YUV(422/420)/YCbCr422<br>RGB565/555<br>8-bit compressed data<br>8/10-bit Raw RGB data | 1/4"     |
+| OV3660  | 2048 x 1536    | color      | raw RGB data<br/>RGB565/555/444<br/>CCIR656<br/>YCbCr422<br/>compression | 1/5"     |
+| OV3640  | 2048 x 1536    | color      | raw RGB data<br/>RGB565/555/444<br/>CCIR656<br/>YCbCr422<br/>compression | 1/4"     |
+| OV5640  | 2592 x 1944    | color      | RAW RGB<br/>RGB565/555/444<br/>CCIR656<br/>YUV422/420<br/>YCbCr422<br/>compression | 1/4"     |
+## Important to Remember
+
+- Except when using CIF or lower resolution with JPEG, the driver requires PSRAM to be installed and activated.
+- Using YUV or RGB puts a lot of strain on the chip because writing to PSRAM is not particularly fast. The result is that image data might be missing. This is particularly true if WiFi is enabled. If you need RGB data, it is recommended that JPEG is captured and then turned into RGB using `fmt2rgb888` or `fmt2bmp`/`frame2bmp`.
+- When 1 frame buffer is used, the driver will wait for the current frame to finish (VSYNC) and start I2S DMA. After the frame is acquired, I2S will be stopped and the frame buffer returned to the application. This approach gives more control over the system, but results in longer time to get the frame.
+- When 2 or more frame buffers are used, I2S is running in continuous mode and each frame is pushed to a queue that the application can access. This approach puts more strain on the CPU/Memory, but allows for double the frame rate. Please use only with JPEG.

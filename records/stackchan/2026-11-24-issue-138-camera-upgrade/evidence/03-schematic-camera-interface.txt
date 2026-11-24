@@ -1,0 +1,25 @@
+# StackChan Core schematic text — camera/sensor section
+# source: ~/Documents/m5stack-schematics-text/zh_CN/schematic/StackChan Core.md
+# extracted 2026-11-24T20:03:00Z
+
+14:StackChan Core 清单绑定的七页 CoreS3 v1.0 电路以 ESP32-S3 为主控，集成 AXP2101 电源、128Mbit SPI Flash、外部 PSRAM、USB Type-C/OTG、BM8563 RTC、AW88298 功放、ES7210 双麦克风编码、AW9523B IO 扩展、LCD/触摸/摄像头连接器、microSD，以及 BMI270 通过辅助 I2C 挂载 BMM150。图中明确标注 AXP2101=0x34、AW88298=0x36、ES7210=0x40、AW9523B=0x58、BMI270=0x69。产品源文档声明 StackChan Core 与 CoreS3/CoreS3-Lite 硬件功能相同并预置 StackChan 固件，但七页资源没有 StackChan Core/C156 标识；8MB PSRAM、ILI9342C、GC0308、LTR-553ALS-WA、1W 扬声器和无线性能也未在当前主板图中完整标注，因此这些产品级信息保留待确认。
+18:`StackChan Core`、`C156`、`StackChan`、`CoreS3 v1.0`、`ESP32-S3`、`GD25Q128`、`W25Q128`、`128Mbit Flash`、`16MB Flash`、`EPSRAM`、`8MB PSRAM`、`AXP2101`、`AXP2101 0x34`、`SY7088`、`BM8563`、`AW88298`、`AW88298 0x36`、`ES7210`、`ES7210 0x40`、`AW9523B`、`AW9523B 0x58`、`BMI270`、`BMI270 0x69`、`BMM150`、`GC0308`、`LTR-553ALS-WA`、`ILI9342C`、`MicroSD-SPI`、`USB Type-C`、`USB OTG`、`StackChan firmware`、`BUS_OUT_EN`、`USB_OTG_EN`、`I2C_SYS_SDA`、`I2C_SYS_SCL`、`I2S_BCK`、`I2S_WCK`、`I2S_DATO`、`I2S_DATI`、`M5.BUS`、`BUS_5V`、`BUS_OUT`、`VUSB`、`VBUS`、`VDD_3V3`、`VCC_3V3`、`VDD_1V8`、`VDDCAM_3V3`、`VDD_3V3_SD`、`VCC_BL`、`PROANT440`、`IPEX`
+39:| J2 | AFC34-S24FIA-00 | 24 针摄像头/传感子板连接器，承载并行像素、I2C、时钟、复位、掉电和多路电源 | 图 12e215412fd9 / 第 1 页 / 网格 A1-B2，J2 24-pin camera connector |
+57:U1 AXP2101 从 VBUS/VBAT 供电：LX1 经 L1 产生 VDD_3V3，LX3 经 L3 产生 VCC_3V3；BLDO1/2 输出 AVDD/DVDD，DLDO1/DC1SW 输出 VCC_BL，VBackup/VRTC 连接 RTC_VDD，ALDO1-4 分别输出 VDD_1V8、VDDA_3V3、VDDCAM_3V3、VDD_3V3_SD。
+59:- 参数与网络：`dcdc1=VDD_3V3`；`dcdc3=VCC_3V3`；`bldo1=AVDD`；`bldo2=DVDD`；`dldo1=VCC_BL`；`rtc=RTC_VDD`；`aldo1=VDD_1V8`；`aldo2=VDDA_3V3`；`aldo3=VDDCAM_3V3`；`aldo4=VDD_3V3_SD`
+94:J2 24-pin 接口承载 CAM_D2-D9、CAM_PCLK、CAM_VSYNC、CAM_HREF、CAM_RST、CAM_PWDN、CAM_MCLK、I2C_SYS_SDA/SCL，以及 AVDD、DVDD、VDDCAM_3V3 和 GND；CAM_MCLK 经 R31 51Ω连接 X2 20MHz 输出。
+96:- 参数与网络：`connector=J2 AFC34-S24FIA-00`；`pixel_data=CAM_D2-D9`；`sync=CAM_PCLK,CAM_VSYNC,CAM_HREF`；`control=CAM_RST,CAM_PWDN`；`bus=I2C_SYS_SDA/SCL`；`clock=CAM_MCLK via R31 51R from X2`；`supplies=AVDD,DVDD,VDDCAM_3V3`
+97:- 证据：图 12e215412fd9 / 第 1 页 / 网格 A1-B2，J2 与 X2
+142:U10 P0_0-P0_5 依次连接 TOUCH_RST、BUS_OUT_EN、AW_RST、ES_INT、TF_SW、USB_OTG_EN；P1_0-P1_3 依次连接 CAM_RST、LCD_RST、TOUCH_INT、AW_INT，P1_7 连接 BOOST_EN，RSTN 接 AXP_PG，INTN 输出 I2C_INT。
+144:- 参数与网络：`p0_0=TOUCH_RST`；`p0_1=BUS_OUT_EN`；`p0_2=AW_RST`；`p0_3=ES_INT`；`p0_4=TF_SW`；`p0_5=USB_OTG_EN`；`p1_0=CAM_RST`；`p1_1=LCD_RST`；`p1_2=TOUCH_INT`；`p1_3=AW_INT`；`p1_7=BOOST_EN`；`reset=AXP_PG`；`interrupt=I2C_INT`
+163:### 摄像头 20MHz 时钟
+165:X2 标注 20MHz ±25ppm 3.3V，输出 CAM_MCLK，并经 R31 51Ω送到 J2 pin12。
+167:- 参数与网络：`reference=X2`；`frequency=20MHz`；`tolerance=±25ppm`；`supply=VDDCAM_3V3`；`output=CAM_MCLK`；`series=R31 51R`
+168:- 证据：图 12e215412fd9 / 第 1 页 / 网格 A2-B2，X2 与 CAM_MCLK
+260:| 电源 | AXP2101 电源轨 | `dcdc1=VDD_3V3`；`dcdc3=VCC_3V3`；`bldo1=AVDD`；`bldo2=DVDD`；`dldo1=VCC_BL`；`rtc=RTC_VDD`；`aldo1=VDD_1V8`；`aldo2=VDDA_3V3`；`aldo3=VDDCAM_3V3`；`aldo4=VDD_3V3_SD` |
+276:| GPIO 与控制信号 | AW9523B 控制信号映射 | `p0_0=TOUCH_RST`；`p0_1=BUS_OUT_EN`；`p0_2=AW_RST`；`p0_3=ES_INT`；`p0_4=TF_SW`；`p0_5=USB_OTG_EN`；`p1_0=CAM_RST`；`p1_1=LCD_RST`；`p1_2=TOUCH_INT`；`p1_3=AW_INT`；`p1_7=BOOST_EN`；`reset=AXP_PG`；`interrupt=I2C_INT` |
+277:| 接口 | 摄像头/传感子板接口 | `connector=J2 AFC34-S24FIA-00`；`pixel_data=CAM_D2-D9`；`sync=CAM_PCLK,CAM_VSYNC,CAM_HREF`；`control=CAM_RST,CAM_PWDN`；`bus=I2C_SYS_SDA/SCL`；`clock=CAM_MCLK via R31 51R from X2`；`supplies=AVDD,DVDD,VDDCAM_3V3` |
+278:| 时钟 | 摄像头 20MHz 时钟 | `reference=X2`；`frequency=20MHz`；`tolerance=±25ppm`；`supply=VDDCAM_3V3`；`output=CAM_MCLK`；`series=R31 51R` |
+288:| 传感器 | GC0308 与 LTR-553ALS-WA 子板器件 | `documented_camera=GC0308 0.3MP`；`documented_proximity=LTR-553ALS-WA`；`schematic=J2 connector only`；`subboard_bom=null` |
+298:- `sensor.documented-camera-proximity`：产品源文档标注 GC0308 0.3MP 摄像头和 LTR-553ALS-WA 接近/环境光传感器；主板图仅给 J2 摄像头/传感子板接口，没有这两个器件、地址选择、像素或光学参数。（证据：图 12e215412fd9 / 第 1 页 / J2 24-pin 接口，无 GC0308/LTR-553ALS-WA 器件）
+305:- `review.camera-proximity`：请提供 StackChan Core 摄像头/接近传感子板原理图或 BOM，确认 GC0308、LTR-553ALS-WA 与 0.3MP 参数。；原因：主板页只有 J2 接口。
