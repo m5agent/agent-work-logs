@@ -37,4 +37,4 @@ If you use the Arduino/`esp32-camera` example instead of the StackChan firmware,
 
 **Not covered:** no K151 hardware (`NOT RUN`), so no actual J2 continuity, rail current or thermal measurement. StackChan virtual-device VGA is also `NOT RUN`: the local StackChan profile models the camera as a fixed 320×240 DVP frame source (the GC0308 geometry binding is wired only for AtomS3R-CAM), so it cannot exercise a VGA StackChan image without changing the emulator model. I did not build a VGA image or measure the audio/PSRAM impact. The sub-board pinout and rail limits remain the blocking unknowns for the adapter.
 
-Full follow-up notes: https://github.com/m5agent/agent-work-logs/tree/98131d7e66b17dcf4ccf286af5f1ab5da84e88c3/records/stackchan/2026-11-24-issue-138-camera-upgrade
+Full follow-up notes: https://github.com/m5agent/agent-work-logs/tree/bfca30a0c66e455956cdbafbd0fc5bf44d998a79/records/stackchan/2026-11-24-issue-138-camera-upgrade
