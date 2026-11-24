@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "window": {
+    "local": "2026-11-23T00:00+08:00..2026-11-24T11:53+08:00"
+  },
+  "total": 27,
+  "done": 6,
+  "manual": 21,
+  "failed": 0,
+  "network_manual": 11,
+  "network_reasons": {
+    "worker_namespace_unavailable": 7,
+    "board_not_advertised": 3,
+    "qemu_wifi_partial": 1
+  },
+  "existing_capabilities": {
+    "cardputer": {
+      "native_sta": "qemu-wifi/generic-observe",
+      "http_post_fixture": true,
+      "tcp_fixture": true,
+      "features_network": false
+    },
+    "cardputer-adv": {
+      "native_sta": "qemu-wifi/generic-observe",
+      "http_post_fixture": true,
+      "tcp_fixture": true,
+      "features_network": true
+    },
+    "sticks3": {
+      "qemu_wifi_profile": "uiflow2-sticks3-wifi",
+      "native_sta": null
+    },
+    "stopwatch": {
+      "profiles": [
+        "uiflow2-stopwatch-unified"
+      ],
+      "native_sta": null
+    },
+    "paperdiy": {
+      "features_network": false,
+      "native_sta": null
+    },
+    "papers3": {
+      "features_network": false,
+      "native_sta": null
+    },
+    "tab5": {
+      "features_network": false,
+      "profiles": []
+    }
+  },
+  "requirements": {
+    "p0": [
+      "portable review-sta without Linux namespace",
+      "fixtures DHCP/DNS/HTTP/TCP/UDP/MQTT",
+      "setup_inputs same guest",
+      "events/assertions/pcap/fixture log"
+    ],
+    "p1": [
+      "board coverage Cardputer/ADV/StickS3/StopWatch/PaperDIY/PaperS3/Tab5/StickC Plus2",
+      "known-good/known-bad/setup/no-network controls"
+    ],
+    "p2": [
+      "external dependency classification for RF/LoRa/NFC/phone/BadUSB"
+    ]
+  },
+  "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/238",
+  "limits": [
+    "simulator implementation NOT RUN",
+    "portable backend NOT RUN",
+    "11 network jobs retry NOT RUN",
+    "physical RF NOT RUN"
+  ]
+}

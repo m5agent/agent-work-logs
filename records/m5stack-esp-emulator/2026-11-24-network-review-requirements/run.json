@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-24",
+  "kind": "infra_baseline",
+  "overall_status": "REVIEW",
+  "title": "模拟器网络审查能力需求（issue #238）",
+  "source": {
+    "issue": "#238",
+    "pull_request": "",
+    "repository": "m5stack-esp-emulator",
+    "base_commit": ""
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; resident review service; native QEMU device service; Linux snapshot worker only admits cardputer_adv_pronunciation/core2_2048; no physical hardware",
+    "task_id": "network-review-requirements-2026-11-24",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "recent network manual inventory",
+      "status": "PASS",
+      "detail": "27 jobs: 11 E_NETWORK_PARTIAL (7 worker_namespace_unavailable, 3 board_not_advertised, 1 qemu-wifi partial)"
+    },
+    {
+      "name": "existing simulator capability audit",
+      "status": "PARTIAL",
+      "detail": "Cardputer/ADV advertise qemu-wifi/generic-observe + POST/TCP fixtures; StickS3 has qemu-wifi; StopWatch/PaperDIY/PaperS3/Tab5 lack generic review STA"
+    },
+    {
+      "name": "portable review-sta requirement",
+      "status": "NOT RUN",
+      "detail": "specified in issue #238; no implementation"
+    },
+    {
+      "name": "fixtures/events/setup inputs requirement",
+      "status": "NOT RUN",
+      "detail": "specified; no implementation"
+    },
+    {
+      "name": "board coverage and control firmware",
+      "status": "NOT RUN",
+      "detail": "Cardputer/ADV/StickS3/StopWatch/PaperDIY/PaperS3/Tab5/StickC Plus2; four control classes"
+    },
+    {
+      "name": "physical RF/LoRa/NFC/phone",
+      "status": "NOT RUN",
+      "detail": "external dependency boundary; not claimed"
+    }
+  ],
+  "evidence": [
+    "evidence/network-review-summary.json"
+  ],
+  "notes": [
+    "Requirements filed as m5stack-esp-emulator issue #238.",
+    "Main blocker is the review service requiring Linux network namespaces; Cardputer/ADV already advertise qemu-wifi/generic-observe.",
+    "No simulator code changed; no review service policy changed."
+  ]
+}
