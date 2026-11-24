@@ -38,6 +38,21 @@
     "task_id": "",
     "session_id": ""
   },
+  "followup": {
+    "comment_url": "PENDING",
+    "status": "REVIEW",
+    "questions": [
+      "Can M5Stack provide the camera/sensor sub-board schematic, complete 24-pin FPC pinout and power rail specifications?",
+      "Is enabling the existing GC0308 VGA mode sufficient for 640x480, or are capture pipeline and buffer changes required?"
+    ],
+    "evidence_class": "code-level verification for the StackChan esp_video path; separate virtual-device data point for GC0308 VGA on AtomS3R-CAM (esp32-camera path)",
+    "limits": [
+      "No K151 hardware; J2 continuity, rail current and thermal NOT RUN",
+      "StackChan virtual-device VGA NOT RUN: the model attaches m5_lcd_cam at fixed 320x240 and the GC0308 geometry binding is wired only for AtomS3R-CAM",
+      "No VGA build, flash, PSRAM high-water or audio-concurrency measurement",
+      "Sub-board pinout, BOM and per-rail limits remain unpublished"
+    ]
+  },
   "checks": [
     {
       "name": "Issue state and existing replies",
@@ -128,6 +143,60 @@
       "command": "n/a",
       "status": "NOT RUN",
       "detail": "No ESP-IDF build performed; esp_video V4L2 acceptance of JPEG DVP modes untested"
+    },
+    {
+      "name": "Follow-up comment state",
+      "command": "gh issue view 138 --repo m5stack/StackChan --json state,comments",
+      "status": "PASS",
+      "detail": "OPEN, 2 comments; newest is Hinrixx3026 at 2026-11-24T20:10:28Z, after the m5agent reply"
+    },
+    {
+      "name": "GC0308 VGA mode availability",
+      "command": "sed -n '48,61p' esp_cam_sensor/sensors/gc0308/Kconfig.gc0308; sed -n '39,77p' gc0308.c",
+      "status": "PASS",
+      "detail": "CONFIG_CAMERA_GC0308_DVP_YUV422_640X480_16FPS exists: 640x480@16, YUV422(UYVY), XCLK 20MHz"
+    },
+    {
+      "name": "Capture path resolution handling",
+      "command": "nl -ba main/boards/common/esp_video.cc | sed -n '178,197p;302,304p;425,442p;790,800p;960,964p'",
+      "status": "PASS",
+      "detail": "width/height from VIDIOC_G_FMT; DVP requests 1 buffer; frame copy, preview and JPEG allocate from frame dimensions/len, not a 320x240 constant"
+    },
+    {
+      "name": "VGA buffer arithmetic",
+      "command": "python3 - <<'PY' ... 640*480*2; 320*240*2; 3x ... PY",
+      "status": "PASS",
+      "detail": "VGA YUV422 frame 614,400 B; QVGA 153,600 B; StackChan peak preview path ~1.8 MB vs ~0.46 MB; Arduino 2x RGB565 VGA ~1.2 MB"
+    },
+    {
+      "name": "Official Arduino example VGA caveats",
+      "command": "nl -ba static/en/arduino/stackchan/camera.md | sed -n '46,50p;88p;92,94p'",
+      "status": "PASS",
+      "detail": "Setup calls set_framesize(QVGA) after init; pushImage uses display 320x240, so VGA would be a top-left crop; fb_count=2 in PSRAM"
+    },
+    {
+      "name": "Sub-board documentation availability",
+      "command": "grep J2/subboard_bom/review.camera-proximity in StackChan schematic facts",
+      "status": "PASS",
+      "detail": "Public 11-page set ends at J2; subboard_bom=null; only CAM_MCLK -> J2 pin 12 has a pin number; rail topology but no current/limit data"
+    },
+    {
+      "name": "GC0308 VGA virtual-device data point",
+      "command": "existing AtomS3R-CAM geometry record at m5agent/m5stack-esp-emulator ee3290428",
+      "status": "PASS",
+      "detail": "AtomS3R-CAM UIFlow2 esp32-camera path captured VGA 640x480 / 614,400 B matching host oracle; different board and capture stack from StackChan esp_video"
+    },
+    {
+      "name": "StackChan virtual-device VGA",
+      "command": "inspect hw/m5stopwatch/m5stackchan.c and patch 0118",
+      "status": "NOT RUN",
+      "detail": "m5_lcd_cam fixed at 320x240; m5sw_gc0308_bind_lcd_cam only called by m5atoms3rcam.c, so VGA cannot be expressed without changing the emulator model"
+    },
+    {
+      "name": "VGA firmware build and audio/PSRAM measurement",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "No build, flash or concurrency measurement performed"
     }
   ],
   "evidence": [
@@ -138,11 +207,16 @@
     "evidence/05-official-docs.txt",
     "evidence/06-related-threads.txt",
     "evidence/07-device-service-profile.json",
-    "evidence/08-reply.md"
+    "evidence/08-reply.md",
+    "evidence/09-followup-context.txt",
+    "evidence/10-vga-config-and-buffers.txt",
+    "evidence/11-atoms3r-cam-vga-record.txt",
+    "evidence/12-reply-followup.md"
   ],
   "notes": [
     "Reply language follows the issue (English); one comment only, no issue close, no repository change.",
+    "Second round keeps the same constraints: one follow-up comment, no close, no target-repository change.",
     "No credentials, device identifiers, MAC addresses or internal endpoints are included in this record.",
-    "The camera sub-board pinout is the blocking unknown for any adapter design."
+    "The camera sub-board pinout is the blocking unknown for any adapter design; VGA is a config change plus PSRAM/bandwidth validation, not a new capture pipeline."
   ]
 }

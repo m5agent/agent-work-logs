@@ -1,0 +1,26 @@
+Virtual-device data point for GC0308 VGA (separate from StackChan firmware path)
+Record: docs/evidence/2026-11-02-atoms3r-cam-geometry/README.md
+Repository: https://github.com/m5agent/m5stack-esp-emulator
+Commit checked: ee32904283e484968fd5c107b435ff96651f914f (2026-11-24)
+
+What was validated:
+- Device: AtomS3R-CAM, QEMU machine m5atoms3rcam, official UIFlow2 v2.5.4.
+- Path: esp32-camera camera.init(framesize=10) -> GC0308 set_framesize() -> DVP.
+- Result: VGA 640x480, 614,400 bytes, guest frame SHA-256 matched the host
+  reconstruction of the deterministic DVP waveform (`94a147ff...6fa6e412`).
+- The QEMU GC0308 model derives output geometry from the sensor window/subsample
+  registers and binds it to the LCD_CAM only for this board (patch 0118).
+
+Why this is not StackChan virtual-device validation:
+- The StackChan QEMU board (hw/m5stopwatch/m5stackchan.c) attaches m5_lcd_cam at a
+  fixed 320x240 and does not call m5sw_gc0308_bind_lcd_cam. Patch 0118 wires that
+  binding only to m5atoms3rcam.c. Therefore the StackChan profile cannot express a
+  640x480 DVP frame without changing the emulator model.
+- The AtomS3R-CAM run uses esp32-camera, not StackChan's esp_video 2.5.0 pipeline.
+  It confirms the GC0308 VGA mode and frame size, not the StackChan capture path.
+
+Local Device Service profile check (2026-11-24):
+- `stackchan` profile exists: ESP32-S3, 16 MB flash, 8 MB PSRAM, ILI9342C 320x240,
+  peripheral_status=simulated, creatable.
+- Its camera is a modelled GC0308 DVP frame source, so it cannot validate a
+  resolution-dependent StackChan buffer/bandwidth question beyond the current path.

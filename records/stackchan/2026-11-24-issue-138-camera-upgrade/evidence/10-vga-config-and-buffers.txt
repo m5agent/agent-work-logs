@@ -1,0 +1,75 @@
+VGA mode and buffer path for StackChan #138 follow-up
+Sources checked 2026-11-24. All line numbers are from the pinned revisions below.
+
+=== StackChan firmware @ 28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400 ===
+firmware/sdkconfig.defaults:58-59
+    58  CONFIG_CAMERA_GC0308=y
+    59  CONFIG_CAMERA_GC0308_DVP_YUV422_320X240_20FPS=y
+
+firmware/main/hal/board/stackchan.cc:632-675
+    InitializeCamera() builds esp_cam_ctlr_dvp_pin_config_t with CAM_CTLR_DATA_WIDTH_8,
+    xclk_io = NC, xclk_freq = 20 MHz, SCCB on the shared i2c_bus_ at 100 kHz, reset/pwdn NC.
+    It does not call VIDIOC_S_FMT with a hard-coded size; esp_video adopts the sensor default.
+
+firmware/main/hal/board/stackchan_display.cc:275-277
+    preview_image_ = lv_image_create(lv_screen_active());
+    lv_obj_set_size(preview_image_, 320, 240);
+firmware/main/hal/board/stackchan_display.cc:431-438
+    preview_image_cached_ = std::move(image);
+    lv_image_set_src(preview_image_, img_dsc);
+    if (img_dsc->header.w > 0 && img_dsc->header.h > 0) {
+        // Scale to fit width
+        lv_image_set_scale(preview_image_, 256 * width_ / img_dsc->header.w);
+    }
+
+=== xiaozhi-esp32 @ 49b4380b3faa0ceadd28a3e78aaf0f311c46c57e (v2.5.2) ===
+main/boards/common/esp_video.cc:178-197
+    VIDIOC_G_FMT is read, then setformat.fmt.pix.width/height are copied from it.
+main/boards/common/esp_video.cc:302-304
+    req.count = (MIPI CSI device) ? 2 : 1;   // DVP gets one V4L2 buffer
+main/boards/common/esp_video.cc:425-442
+    Capture() discards 3 frames, then heap_caps_malloc(buf.bytesused,
+    MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT) and copies the frame to PSRAM.
+main/boards/common/esp_video.cc:790-800
+    YUV/UYVY preview path allocates w*h*2 bytes in PSRAM and converts to RGB565.
+main/boards/common/esp_video.cc:960-964
+    JPEG encode uses frame_.width/frame_.height and frame_.len; the only 320/240
+    values are a zero-dimension fallback, not a fixed capture size.
+
+=== esp_cam_sensor 2.6.0 / esp_video 2.5.0 @ b9c428f73675bddd31ea93ff1ee3d85a617a3499 ===
+esp_cam_sensor/sensors/gc0308/Kconfig.gc0308:48-61
+    CAMERA_GC0308_DVP_YUV422_320X240_20FPS  -> 320x240@20, YUV422(UYVY)
+    CAMERA_GC0308_DVP_YUV422_640X480_16FPS -> 640x480@16, YUV422(UYVY)
+esp_cam_sensor/sensors/gc0308/gc0308.c:39-77
+    VGA table: 640x480, XCLK 20 MHz, fps 16,
+    regs gc0308_dvp_8bit_20Minput_640x480_yuv422_uyvy_16fps.
+esp_video/src/device/esp_video_dvp_device.c:30-34
+    #if CONFIG_SPIRAM
+    #define DVP_MEM_CAPS (MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM | MALLOC_CAP_CACHE_ALIGNED)
+    #else ...
+    // The DVP V4L2 buffer is allocated from PSRAM when SPIRAM is enabled.
+
+=== Buffer arithmetic ===
+VGA YUV422 frame: 640 * 480 * 2 = 614,400 bytes.
+QVGA YUV422 frame: 320 * 240 * 2 = 153,600 bytes (4x smaller).
+StackChan peak preview path at VGA: DVP buffer 614,400 + captured copy 614,400 +
+RGB565 preview 614,400 = 1,843,200 bytes (~1.8 MB PSRAM), versus ~460,800 bytes at QVGA.
+Arduino/esp32-camera RGB565 VGA: 614,400 bytes per frame; fb_count=2 -> 1,228,800 bytes.
+
+=== Official Arduino example: docs.m5stack.com/en/arduino/stackchan/camera ===
+static/en/arduino/stackchan/camera.md:46-50
+    .pixel_format = PIXFORMAT_RGB565
+    .frame_size   = FRAMESIZE_QVGA
+    .fb_count     = 2
+    .fb_location  = CAMERA_FB_IN_PSRAM
+static/en/arduino/stackchan/camera.md:88
+    Camera.sensor->set_framesize(Camera.sensor, FRAMESIZE_QVGA);
+    // This call overrides camera_config.frame_size after init; must change/remove it for VGA.
+static/en/arduino/stackchan/camera.md:92-94
+    M5.Display.pushImage(0, 0, M5.Display.width(), M5.Display.height(),
+                         (uint16_t *)Camera.fb->buf);
+    // At VGA this is a 320x240 top-left crop, not a scaled 640x480 preview.
+
+=== esp32-camera GC0308 driver ===
+sensors/gc0308.c (master, checked 2026-11-24): set_framesize() clamps framesize > FRAMESIZE_VGA
+to FRAMESIZE_VGA, so VGA is the sensor's maximum in that driver.

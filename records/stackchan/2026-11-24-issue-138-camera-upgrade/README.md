@@ -4,7 +4,8 @@
 - 结果：`REVIEW`
 - 工作类型：`issue`
 - 问题来源：https://github.com/m5stack/StackChan/issues/138
-- GitHub 回复：https://github.com/m5stack/StackChan/issues/138#issuecomment-7143018501
+- GitHub 回复（首轮）：https://github.com/m5stack/StackChan/issues/138#issuecomment-7143018501
+- GitHub 回复（第二轮）：`PENDING`
 - 源码版本：`m5stack/StackChan @ 28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400`（v1.6.2 main）
 - 依赖：`esp_video 2.5.0`、`esp_cam_sensor 2.6.0`、`esp32-camera 2.1.8`
 - 环境：macOS，源码与公开原理图/文档只读检视；无 StackChan 实机；未构建固件
@@ -21,7 +22,9 @@ FPC 引脚定义与 BOM 未公开，公开原理图止于 `J2`，无法确认任
 （800×600）反而低于 OV2640（JPEG 1600×1200）。LTR-553ALS-WA 与摄像头同属子板器件，
 换子板会一并失去，需在新板上保留。官方升级计划无公开信息，不作推断。
 
-结论层级为源码级验证（schema + firmware + 组件模式表 + 官方文档），实机与虚拟设备均未执行。
+首轮结论层级为源码级验证（schema + firmware + 组件模式表 + 官方文档），实机与虚拟设备均未执行。
+第二轮的 StackChan VGA 结论仍为 code-level verification；GC0308 VGA 模式另有 AtomS3R-CAM
+虚拟设备数据点（不同采集栈），详见下文。
 
 ## 关键证据
 
@@ -41,6 +44,26 @@ FPC 引脚定义与 BOM 未公开，公开原理图止于 `J2`，无法确认任
 - 相关线程：#77（K151 上 `0x23` 不 ACK，关闭且无维护者回复）、#70（端侧算力不足，
   改为把识别放到主机）。
 
+## 第二轮追问（2026-11-24）
+
+作者新增两个问题：能否获得子板原理图 / 完整 24-pin FPC 定义 / 电源轨规格；以及只启用
+GC0308 VGA 模式是否足够 640×480。
+
+- **子板文档**：不能获得或代为发布。公开 K151 资料是 11 页整机原理图（CoreS3 7 页 +
+  Adapter/Power/Ring/Touch 4 页），止于 `J2`，没有子板页、BOM 或 pin 1–24；公开页只给
+  信号组、AXP2101 电源拓扑（BLDO→`AVDD`/`DVDD`，ALDO→`VDDCAM_3V3`）与
+  `CAM_MCLK`→`J2` pin 12。建议作者走 M5Stack support/FAE 或代理工单，按 SKU + 批次索取。
+- **VGA**：对官方 StackChan 固件，启用 `CONFIG_CAMERA_GC0308_DVP_YUV422_640X480_16FPS=y`
+  对采集尺寸本身是必要且充分的；`esp_video` 从 `VIDIOC_G_FMT` 取尺寸，frame copy、
+  preview 与 JPEG 都动态分配，无需改 capture 代码。但需验证 PSRAM（VGA 峰值约 1.8 MB vs
+  QVGA 约 0.46 MB）、带宽/CPU（约 9.8 MB/s vs 3.1 MB/s）与单 buffer 流式行为。若走 Arduino
+  例程，还要改 `setup()` 里的 `set_framesize(..., FRAMESIZE_QVGA)`，且 `pushImage` 在
+  VGA 下只是左上角裁剪。
+- **证据等级**：StackChan 固件路径为 code-level verification；GC0308 VGA 模式另有
+  AtomS3R-CAM（`esp32-camera` 路径）的 virtual-device 数据点（640×480 / 614,400 B，
+  与 host oracle 一致）。StackChan 虚拟设备 VGA `NOT RUN`：其 `m5_lcd_cam` 固定
+  320×240，GC0308 几何绑定只接到 AtomS3R-CAM。
+
 ## 文件
 
 - `report.md`：完整分析、逐问结论与限制
@@ -52,7 +75,11 @@ FPC 引脚定义与 BOM 未公开，公开原理图止于 `J2`，无法确认任
 - `evidence/05-official-docs.txt`：官方 camera / LTR553 例程与产品规格
 - `evidence/06-related-threads.txt`：#77、#70 关键内容
 - `evidence/07-device-service-profile.json`：本机 StackChan 虚拟设备 profile 摘要
-- `evidence/08-reply.md`：GitHub 回复原文
+- `evidence/08-reply.md`：首轮 GitHub 回复原文
+- `evidence/09-followup-context.txt`：第二轮评论原文与新增问题
+- `evidence/10-vga-config-and-buffers.txt`：VGA 模式、动态 buffer、PSRAM 估算与 Arduino 例程
+- `evidence/11-atoms3r-cam-vga-record.txt`：AtomS3R-CAM 虚拟设备 VGA 数据点及 StackChan 模型限制
+- `evidence/12-reply-followup.md`：第二轮 GitHub 回复原文
 
 ## 未覆盖项
 
@@ -60,6 +87,10 @@ FPC 引脚定义与 BOM 未公开，公开原理图止于 `J2`，无法确认任
 - 虚拟设备 `NOT RUN`：本机有 StackChan profile（ESP32-S3、320×240、模拟外设），但其
   摄像头是 GC0308 DVP 帧源模型，无法表达另一颗物理传感器的引脚、供电、SCCB ID 与光学，
   跑起来只能重复确认现有通路。
+- StackChan 虚拟设备 VGA `NOT RUN`：`m5stackchan.c` 把 `m5_lcd_cam` 固定在 320×240，
+  `m5sw_gc0308_bind_lcd_cam` 只接到 AtomS3R-CAM；不改模型无法表达 640×480。
+- VGA 构建/烧录/PSRAM/音频实测 `NOT RUN`：未编译 VGA 固件，未测最大连续 PSRAM 块、
+  带宽与音频并发。
 - 构建 `NOT RUN`：未启用 OV 驱动重新编译，未验证 `esp_video` V4L2 是否接受 JPEG DVP 模式。
 - 子板原理图/BOM 未公开，J2 各脚定义来自主板网络名推断，未与实物核对。
 - LTR-553 在 K151 各批次是否贴装未有官方确认（#77 报告过 `0x23` 不 ACK）。

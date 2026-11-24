@@ -2,7 +2,8 @@
 
 ## 1. 问题与目标
 
-m5stack/StackChan#138（作者 Hinrixx3026，2026-11-24T19:57Z，OPEN，0 评论）询问能否把
+m5stack/StackChan#138（作者 Hinrixx3026，2026-11-24T19:57Z，OPEN；首轮抓取时 0 评论，
+第二轮为 2 条评论）询问能否把
 K151 的 GC0308（文档标 640×480）换成 OV2640 / OV3660 / OV5640，并问了五个问题：
 
 1. 是否存在电气与机械兼容的替换模组？
@@ -188,3 +189,79 @@ PY
 - 子板 BOM/原理图缺失：J2 各脚功能来自主板网络名，未与实物核对；不能据此给出转接板网表。
 - 批次差异：LTR-553 是否所有 K151 都贴装无官方确认。
 - 产品路线图：无公开信息，回复不代答。
+
+## 9. 2026-11-24 第二轮追问（文档索取 + VGA 模式）
+
+作者在首条回复后新增两个问题：
+
+1. 能否从 M5Stack 获得摄像头/传感子板原理图、完整 24-pin FPC 引脚定义与电源轨规格？
+2. 只启用现有 GC0308 VGA 模式是否足以得到 640×480，还是 capture pipeline 与 buffer 也要改？
+
+### 9.1 子板文档
+
+不能获得，也不能代为发布。公开的 K151 资料是 11 页整机原理图（CoreS3 7 页 +
+Adapter/Power/Ring/Touch 4 页），止于 `J2`，没有摄像头/传感子板页、BOM 或 pin 1–24
+定义。公开页只给出：
+
+- `J2` 信号组：`CAM_D2–D9`、`PCLK/VSYNC/HREF`、`RST/PWDN`、`MCLK`、`I2C_SYS`、
+  `AVDD`/`DVDD`/`VDDCAM_3V3`/GND；
+- 电源拓扑：`AVDD`/`DVDD` 来自 AXP2101 BLDO，`VDDCAM_3V3` 来自 AXP2101 ALDO，
+  `X2` 20 MHz 由 `VDDCAM_3V3` 供电；
+- 唯一带脚号的网络是 `CAM_MCLK` → `J2` pin 12。
+
+子板各轨电流预算、去耦、pin 顺序均未公开；建议作者走 M5Stack support/FAE 或代理
+工单，按 SKU + 批次索取「子板原理图 + BOM、J2 配对引脚定义、每轨电压/电流上限」。
+可能是供应商 NDA 资料，官方也可能只给连接器级信息。
+
+### 9.2 VGA 模式
+
+对官方 StackChan 固件（`esp_video` 2.5.0 + `esp_cam_sensor` 2.6.0），启用 GC0308
+VGA 模式对「采集尺寸」本身是必要且充分的：
+
+- `esp_cam_sensor` 2.6.0 已有 `640×480@16` YUV422(UYVY)、20 MHz XCLK 模式；
+- `esp_video` 从 `VIDIOC_G_FMT` 取 width/height，frame copy、preview、JPEG 都按
+  `frame_.width/height/len` 动态分配，没有 320×240 常量；
+- 因此不需要改 capture 代码，只需把 `sdkconfig.defaults:59` 的 320×240 模式换成
+  `CONFIG_CAMERA_GC0308_DVP_YUV422_640X480_16FPS=y`，并确保
+  `CONFIG_CAMERA_GC0308_DVP_DEFAULT_FMT_YUV422_640X480_16FPS=y` 生效（删除旧
+  `sdkconfig` 或停用 320 模式，避免 default-format 仍选 320×240）。
+
+但「可靠运行」还需验证：
+
+- **PSRAM**：VGA YUV422 单帧 614,400 B；DVP buffer + frame copy + RGB565 preview
+  峰值约 1.8 MB，QVGA 约 0.46 MB。8 MB 能放下，但要测 avatar/LVGL/音频/Wi-Fi
+  初始化后的最大连续空闲块。
+- **带宽/CPU**：VGA@16 约 9.8 MB/s，QVGA@20 约 3.1 MB/s；再加 640×480 YUV→RGB
+  preview 与更大 JPEG。这是可能影响音频/avatar 的部分，需在音频播放 + 动画 +
+  Wi-Fi 连着的情况下测，而不是只拍一张。
+- **流式 vs 静态**：DVP 路径当前只申请 1 个 V4L2 buffer；静态拍照没问题，连续
+  VGA 流会把采集和消费者串行化并丢帧，需要改 buffer 策略。
+- **预览**：屏幕 320×240，`SetPreviewImage` 按宽度缩放，640×480 会显示为
+  320×240，无需改代码；但要确认 LVGL 缩放和 6 秒预览缓存不会多留一份全尺寸缓冲。
+
+若作者走官方 Arduino/`esp32-camera` 例程，另有两点：
+
+- 例程 `setup()` 里的 `set_framesize(..., FRAMESIZE_QVGA)` 会覆盖
+  `camera_config.frame_size`，必须一起改/删；
+- `pushImage(0, 0, 320, 240, fb->buf)` 在 VGA 下只是左上角裁剪，不是缩放预览；
+  2 个 RGB565 VGA PSRAM buffer 约 1.2 MB，保留 `fb_count=2` 或改 JPEG。
+
+### 9.3 证据等级
+
+- StackChan 固件路径：**code-level verification**（固定 commit 的 sdkconfig、
+  board camera init、esp_video/esp_cam_sensor 源码与模式表）。
+- 传感器 VGA 数据点：**virtual-device validation**（AtomS3R-CAM，QEMU
+  `m5atoms3rcam`，`esp32-camera` 路径，VGA 640×480 / 614,400 B，与 host oracle
+  一致）；它不等同于 StackChan `esp_video` 路径。
+- StackChan 虚拟设备 VGA：`NOT RUN`。本机 `stackchan` profile 的 `m5_lcd_cam`
+  固定 320×240，且 `m5sw_gc0308_bind_lcd_cam` 只接到 AtomS3R-CAM，无法在不改
+  模型的情况下表达 VGA。
+- 实机：`NOT RUN`（无 K151）。
+- 构建/烧录/PSRAM/音频实测：`NOT RUN`。
+
+### 9.4 新增证据文件
+
+- `evidence/09-followup-context.txt`
+- `evidence/10-vga-config-and-buffers.txt`
+- `evidence/11-atoms3r-cam-vga-record.txt`
+- `evidence/12-reply-followup.md`
