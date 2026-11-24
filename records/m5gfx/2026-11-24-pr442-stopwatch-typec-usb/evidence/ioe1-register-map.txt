@@ -1,0 +1,36 @@
+M5IOE1 register semantics and pin-to-bit mapping (sources at PR head cc6d5ff
+and upstream M5Unified main).
+
+1) M5IOE1_Class (M5Unified src/utility/M5IOE1_Class.inl:12-28)
+   M5IOE1_REG_GPIO_MODE_L = 0x03   // 1 = output
+   M5IOE1_REG_GPIO_OUT_L  = 0x05   // output latch
+   M5IOE1_REG_GPIO_DRV_L  = 0x13   // 0 = push-pull, 1 = open-drain
+
+2) M5IOE1 datasheet (IO_Expander_Datasheet_EN.pdf, p.6) register table
+   0x03 GPIO_M_L   M8 M7 M6 M5 M4 M3 M2 M1   default 0x00
+   0x05 GPIO_O_L   O8 O7 O6 O5 O4 O3 O2 O1   default 0x00
+   0x13 GPIO_DRV_L DRV8 DRV7 ... DRV1        default 0xFF (open-drain)
+
+3) Pin index -> register bit (M5Unified M5IOE1_Class.hpp:19-31, :92-93)
+   enum gpio_t { gpio1 = 0, gpio2 = 1, ... gpio8 = 7, gpio9 = 8 ... }
+   _regForPin(reg_low, pin) = reg_low + (pin >> 3)
+   _bitForPin(pin)          = 1 << (pin & 7)
+   => GPIO1 (PYG1) is bit 0 of the low-byte registers 0x03/0x05/0x13.
+
+4) StopWatch wiring (C152 schematic page 4, PYB_IIC and Ext.Port&CH442E)
+   U23 M5IOE1 PYG1 -> PYB_MUX_CTR -> U26 CH442E IN (pin 1)
+   U26 commons  DB(4)/DC(6) = MUX_IO_1/MUX_IO_2 -> J5/J6 rear header
+   U26 throws   S1B/S2B/S1C/S2C (2,3,7,8) = G43_U0TXD/G44_U0RXD and USB_P/USB_N
+   Schematic note (page 4): "PYB_MUX_CTR selects U0TXD/U0RXD when low,
+   and USB_P/USB_N when high".
+   J1 Type-C D+/D- is wired straight to the same USB_P/USB_N pair
+   (page 3 TYPEC area; page 4 G19_USB_N/G20_USB_P -> R37/R38 + CMC -> USB_N/USB_P).
+
+5) AT PR HEAD the StopWatch power-on list writes
+   src/board_detect/m5/pmic_ops.hpp:94-108
+     0x23 <- 0x00
+     0x05 bit0 <- 0            (new, before drive/mode enable)
+     0x13 <- clear 0x9D        (drive push-pull for GPIO1,3,4,5,8)
+     0x03 <- set   0x9D        (mode output for GPIO1,3,4,5,8)
+     0x05 <- set   0x98        (GPIO4/5/8 high; GPIO1 stays low; GPIO3 stays low)
+   Baseline develop 92bd25c instead writes 0x05 <- set 0x99, which sets GPIO1 high.

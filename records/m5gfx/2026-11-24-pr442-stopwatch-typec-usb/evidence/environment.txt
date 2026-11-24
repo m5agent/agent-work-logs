@@ -1,0 +1,40 @@
+Environment and reproduction (recorded 2026-11-24, UTC)
+
+Host: macOS arm64, source review + local build.
+Build toolchain: ESP-IDF v6.1 (xtensa-esp-elf 14.2.0), target esp32s3,
+16 MB flash, octal PSRAM 8 MB @80 MHz, custom partition table
+(nvs 0x9000/0x6000, phy_init 0xf000/0x1000, factory 0x10000/0x400000).
+Project: minimal IDF app (main/main.cpp) that calls M5GFX::init() once,
+then reads M5IOE1 0x03/0x05/0x13 through m5gfx::i2c::readRegister8(1, 0x4F, reg)
+on the StopWatch internal bus (port 1, SDA 47, SCL 48), prints them on the
+console and draws the same values on the panel.
+
+M5GFX source used as an IDF component:
+  PR   : m5stack/M5GFX @ cc6d5ff74783f7b001725a6f758ef11ffa7231aa (PR #442 head)
+  base : m5stack/M5GFX @ 92bd25c890bb05ea057064401401843e9c9f4f25 (develop tip)
+Build-system adjustment (local copies only, not part of the PR):
+  the IDF>=6 entry of CMakeLists.txt COMPONENT_REQUIRES was given esp_psram,
+  because src/board_detect/detect_io_default.inl includes <esp_psram.h> for
+  ESP32-S3 octal PSRAM and IDF 6.1 does not expose it through esp_lcd.
+  No file under src/ was modified in either tree.
+
+Firmware images (merged flash, ESP32-S3, 0x0 bootloader):
+  PR cold      : 478784 B  sha256 49ca9f87abb9eb31ce2ea732c9d89907065fd4cfd062807353645d0d623330ba
+                 composed firmware a243b0b8a8752d0bcf0b422e486b1510054e5d66da470dff1b56c4a3b4126e6b
+  develop cold : 478768 B  sha256 62b5ceee4c4d12c9ea8cded2eec3ed98468bc939104e952f85a17eb9f183b92a
+                 composed firmware 0397c9a77fca36990314b8954bdcbc18ce343dd17b811ec65bea66665a21c9cb
+  warm variant : 472752 B  sha256 45b044be72e6953f5c7306a53c654d178b1c9acdac42e1d7c7113081e44ae06d
+                 composed firmware ebbff0370c920ad5d3e1514f811f48ac4c782cff61663cc5cf26a018a2b5da59
+                 (boot 1 forces GPIO1 high then esp_restart(); boot 2 reports the
+                 state seen before and after M5GFX init)
+
+Execution: local Device Service, device profile stopwatch (QEMU m5stopwatch,
+CO5300 466x466, M5PM1 + M5IOE1 modelled). Instrumented sessions:
+  PR cold      : b7aa93bbe0a945c4a4b8405ad97e7ceb
+  develop cold : 8cbc44aaaf054d2f863d0540a02ced9c
+  warm variant : 24e17d5662bf4c19b3dca9ec92db08a3
+
+Host tests: sh test/board_detect/run.sh in the PR tree (Apple clang),
+34 C++ test programs, 0 failures.
+
+Frame captures: 466x466 PNG from the session frame endpoint, one per build.

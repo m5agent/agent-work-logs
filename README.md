@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-24 | M5GFX | #442 StopWatch 启动时 M5IOE1 GPIO1 / Type-C USB 选择 | `PARTIAL`（虚拟设备证实 G1 高→低且首帧正常；真机 Type-C 与热复位路径 NOT RUN；host 34/34） | [查看](records/m5gfx/2026-11-24-pr442-stopwatch-typec-usb/) |
 | 2026-11-24 | ESP Emulator | 网络审查能力需求（issue #238） | `REVIEW`（11 条网络人工根因与 P0/P1 规格；实现 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-24-network-review-requirements/) |
 | 2026-11-23 | M5GFX | #440 Core2 / Tough 复位后等待 panel reload 再发 init | `REVIEW`（虚拟设备仅证 Core2 不回归；修复本身与真机 NOT RUN；host 34/34、CI 40/40 PASS） | [查看](records/m5gfx/2026-11-23-pr440-core2-panel-reload/) |
 | 2026-11-23 | ESP Emulator | Atom Lite「ATEM HD8 EMULATOR 1.01」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（启动/外设 PASS；readiness/输入属审查判定口径，非模拟器缺陷，未开 issue；真机/网络 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-23-atem-hd8-atom-lite-readiness-attribution/) |

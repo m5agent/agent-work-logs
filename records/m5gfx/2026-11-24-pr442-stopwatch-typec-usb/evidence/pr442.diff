@@ -1,0 +1,104 @@
+diff --git a/src/board_detect/m5/pmic_ops.hpp b/src/board_detect/m5/pmic_ops.hpp
+index 2daa2f3..a6b0a26 100644
+--- a/src/board_detect/m5/pmic_ops.hpp
++++ b/src/board_detect/m5/pmic_ops.hpp
+@@ -98,8 +98,11 @@ namespace pmic_ops
+     // IOE1 boots later than PM1. This power-stage wait starts a relative
+     // 500 ms deadline for new probes; an in-flight I2C call may overrun it.
+     ops::i2c_wait_ready(1, 500, 1),
+-    ops::i2c_write8(1, 0x23, 0x00), ops::i2c_bit_off(1, 0x13, 0x9D),
+-    ops::i2c_bit_on(1, 0x03, 0x9D), ops::i2c_bit_on(1, 0x05, 0x99),
++    ops::i2c_write8(1, 0x23, 0x00),
++    // G1 low keeps Type-C USB connected on StopWatch V1.1. Clear a retained high
++    // latch before enabling its push-pull output; high routes USB to the rear.
++    ops::i2c_bit_off(1, 0x05, 0x01), ops::i2c_bit_off(1, 0x13, 0x9D),
++    ops::i2c_bit_on(1, 0x03, 0x9D), ops::i2c_bit_on(1, 0x05, 0x98),
+     ops::delay_ms(10), ops::i2c_bit_off(1, 0x05, 0x18), ops::delay_ms(8),
+     ops::i2c_bit_on(1, 0x05, 0x18), ops::delay_ms(2),
+     ops::i2c_bit_off(1, 0x14, 0x02), ops::i2c_bit_on(1, 0x04, 0x02),
+diff --git a/test/board_detect/fixtures/s3.txt b/test/board_detect/fixtures/s3.txt
+index 7bf7a82..04fcc14 100644
+--- a/test/board_detect/fixtures/s3.txt
++++ b/test/board_detect/fixtures/s3.txt
+@@ -184,7 +184,7 @@ entry construct_sticks3 board_M5StickS3 0 0
+ power -1 1 100000 0 0 0 1
+ device 100000 0 110 0 1 1
+ device 100000 0 79 0 1 1
+-variant 110 0 0 0 0 0 0 0 0 0 0 [4:0,9,0,255;4:0,10,0,255;6:0,6,23,23;1:39,0;2:39;7:1,500,1;4:1,35,0,255;6:1,19,0,157;6:1,3,157,157;6:1,5,153,153;0:10;6:1,5,0,24;0:8;6:1,5,24,24;0:2;6:1,20,0,2;6:1,4,2,2;6:1,6,0,2;][][]
++variant 110 0 0 0 0 0 0 0 0 0 0 [4:0,9,0,255;4:0,10,0,255;6:0,6,23,23;1:39,0;2:39;7:1,500,1;4:1,35,0,255;6:1,5,0,1;6:1,19,0,157;6:1,3,157,157;6:1,5,152,152;0:10;6:1,5,0,24;0:8;6:1,5,24,24;0:2;6:1,20,0,2;6:1,4,2,2;6:1,6,0,2;][][]
+ reset 0 -1 0 0 0 0
+ sd -1 -1 -1 -1 -1
+ display 40 41 -1 -1 39 -1 -1
+diff --git a/test/board_detect/ops_host.cpp b/test/board_detect/ops_host.cpp
+index c9eca00..761e605 100644
+--- a/test/board_detect/ops_host.cpp
++++ b/test/board_detect/ops_host.cpp
+@@ -462,7 +462,7 @@ static void test_pm1_family_sequences()
+       pmicops::stopwatch_power_on,
+       sizeof(pmicops::stopwatch_power_on) / sizeof(pmicops::stopwatch_power_on[0]), scope);
+     assert(result.status == bdops::op_status_t::ok);
+-    assert(fake.writes.size() == 12 && fake.gpios().size() == 2 && fake.now() == 20);
++    assert(fake.writes.size() == 13 && fake.gpios().size() == 2 && fake.now() == 20);
+     assert(fake.writes[0].addr == 0x6E && fake.writes[0].reg == 0x09);
+     assert(fake.writes[3].addr == 0x4F && fake.writes[3].reg == 0x23);
+     assert(fake.writes.back().addr == 0x4F && fake.writes.back().reg == 0x06);
+@@ -487,6 +487,42 @@ static void test_pm1_family_sequences()
+   }
+ }
+ 
++// G1 selects the USB destination on StopWatch V1.1: low keeps Type-C connected.
++static void test_stopwatch_typec_usb_default()
++{
++  for (std::uint8_t initial_mode : { 0x00, 0xFF })
++    for (std::uint8_t initial_output : { 0x00, 0xFF })
++      for (std::uint8_t initial_drive : { 0x00, 0xFF })
++      {
++        fake_t fake;
++        fake.registers[{0x4F, 0x03}] = initial_mode;
++        fake.registers[{0x4F, 0x05}] = initial_output;
++        fake.registers[{0x4F, 0x13}] = initial_drive;
++        static const std::int8_t pins[] = { 39 };
++        const bdops::gpio_scope_t scope = { 49, pins, 1 };
++        const auto sequence = bdops::list(pmicops::stopwatch_power_on);
++        assert(bdops::run_ops(ports, 1, pmicops::pm1_family_devices, 2,
++                             sequence.data, sequence.size, scope).status == bdops::op_status_t::ok);
++
++        // Preload low before enabling output/drive, including a retained high latch.
++        std::uint8_t output = initial_output;
++        for (const auto& write : fake.writes)
++        {
++          if (write.addr != 0x4F) { continue; }
++          if (write.reg == 0x05) { output = write.new_value; }
++          if (write.reg == 0x03 || write.reg == 0x05 || write.reg == 0x13)
++          {
++            assert((output & 0x01) == 0);
++          }
++        }
++        assert((fake.registers[std::make_pair(0x4F, 0x03)] & 0x01) != 0);
++        assert((fake.registers[std::make_pair(0x4F, 0x13)] & 0x01) == 0);
++        // Display/TP reset and LCD power stay enabled; unrelated G2/G6/G7 stay intact.
++        assert((output & 0x98) == 0x98);
++        assert((output & 0x62) == (initial_output & 0x62));
++      }
++}
++
+ static void wait_finished(const bdops::i2c_device_t& device,
+                           std::uint32_t elapsed, bool succeeded)
+ {
+@@ -519,7 +555,7 @@ static void test_pm1_member_boot_wait()
+       assert(fake.wait_notifications == 1 && fake.wait_succeeded == success);
+       assert(fake.wait_elapsed == (success ? ready_at : 500));
+       // PM1 writes precede the wait; no IOE1 access precedes readiness.
+-      assert(fake.writes.size() == (success ? (sequence.data == pmicops::stopwatch_power_on ? 12u : 11u) : 3u));
++      assert(fake.writes.size() == (success ? (sequence.data == pmicops::stopwatch_power_on ? 13u : 11u) : 3u));
+       if (!success) { assert(result.status == bdops::op_status_t::timeout && result.failed_index == 5); }
+     }
+   }
+@@ -883,6 +919,7 @@ int main()
+   test_core2_restore_coverage();
+   test_sticks3_retry_scopes();
+   test_pm1_family_sequences();
++  test_stopwatch_typec_usb_default();
+   test_pm1_member_boot_wait();
+   test_pm1_ext_family_sequences();
+   test_paper_family_sequences();

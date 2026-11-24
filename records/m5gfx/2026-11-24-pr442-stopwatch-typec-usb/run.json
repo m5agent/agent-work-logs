@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-24",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #442 review: keep M5IOE1 GPIO1 low for StopWatch Type-C USB",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/442",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "92bd25c890bb05ea057064401401843e9c9f4f25",
+    "head_commit": "cc6d5ff74783f7b001725a6f758ef11ffa7231aa"
+  },
+  "hardware": {
+    "target": "M5Stack StopWatch C152 (ESP32-S3R8, M5PM1, M5IOE1, CH442E, CO5300 466x466)",
+    "physical_unit": "none; hardware validation NOT RUN"
+  },
+  "firmware": {
+    "pr_build_sha256": "49ca9f87abb9eb31ce2ea732c9d89907065fd4cfd062807353645d0d623330ba",
+    "baseline_build_sha256": "62b5ceee4c4d12c9ea8cded2eec3ed98468bc939104e952f85a17eb9f183b92a",
+    "warm_variant_sha256": "45b044be72e6953f5c7306a53c654d178b1c9acdac42e1d7c7113081e44ae06d",
+    "build": "ESP-IDF v6.1, target esp32s3, 16 MB flash, 8 MB octal PSRAM; M5GFX as IDF component at PR head / develop tip; probe app calls M5GFX::init() then reads M5IOE1 0x03/0x05/0x13 over port 1 (SDA 47, SCL 48)"
+  },
+  "execution": {
+    "environment": "macOS arm64 read-only source review; local ESP-IDF v6.1 build for ESP32-S3; local Device Service stopwatch profile (QEMU m5stopwatch, CO5300 466x466, M5PM1 + M5IOE1 modelled); host board_detect tests",
+    "task_id": "",
+    "session_id": "b7aa93bbe0a945c4a4b8405ad97e7ceb (PR), 8cbc44aaaf054d2f863d0540a02ced9c (develop), 24e17d5662bf4c19b3dca9ec92db08a3 (warm variant)"
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #442 OPEN, not draft, author hlym123, English title and body, 0 comments and 0 reviews before review, mergeable MERGEABLE, head cc6d5ff, base 92bd25c (= develop tip), 3 files +45/-5"
+    },
+    {
+      "id": "bit-and-pin-mapping",
+      "status": "PASS",
+      "detail": "0x03/0x05/0x13 are GPIO_M_L/GPIO_O_L/GPIO_DRV_L with O1/M1/DRV1 as bit 0 (datasheet p.6; M5Unified M5IOE1_Class constants); gpio1 = 0 and _bitForPin/_regForPin make GPIO1 bit 0; PYG1 is PYB_MUX_CTR to CH442E IN, so clearing 0x05 bit0 and dropping 0x01 from 0x99 targets the intended pin"
+    },
+    {
+      "id": "write-ordering",
+      "status": "PASS",
+      "detail": "the latch is written low before 0x13 (push-pull) and 0x03 (output enable), which is the correct order for a retained high latch; fixture s3.txt:187 and the new ops_host.cpp case encode the same order (6:1,5,0,1 before 6:1,19,0,157)"
+    },
+    {
+      "id": "no-other-writer",
+      "status": "PASS",
+      "detail": "git grep at head: pmic_ops.hpp is the only M5IOE1 writer in M5GFX and there is no other MUX_CTR reference; M5Unified's M5IOE1_Class::gpio1 writes belong to CoreMatrix (TF power) and CoreP4X (audio power), not StopWatch"
+    },
+    {
+      "id": "official-firmware-agreement",
+      "status": "PASS",
+      "detail": "M5StopWatch-UserDemo main/hal/hal_ioe.cpp:32 labels M5IOE1_PIN_1 as CH442E MUX CONTROL and :76 writes 0, so the new low default matches M5Stack's own application firmware"
+    },
+    {
+      "id": "virtual-device-cold-boot",
+      "status": "PASS",
+      "detail": "stopwatch profile: PR build reports IOE1 mode=0x9D out=0x98 drv=0x00 (GPIO1=0) and stays 0x98 over three 1 s samples; develop build reports out=0x99 (GPIO1=1); both identify board_M5StopWatch and render a 468x468 frame"
+    },
+    {
+      "id": "display-touch-regression",
+      "status": "PASS",
+      "detail": "0x03=0x9D and 0x13=0x00 in both builds, i.e. GPIO3/4/5/8 still outputs with push-pull; the 10 ms/8 ms TP_RST+OLED_RST pulse and L3B_EN are unchanged; first frame renders and the probe text is drawn on the panel"
+    },
+    {
+      "id": "host-tests",
+      "status": "PASS",
+      "detail": "sh test/board_detect/run.sh at PR head: C++ test programs: 34 passed, including the new test_stopwatch_typec_usb_default"
+    },
+    {
+      "id": "stated-mechanism-vs-schematic",
+      "status": "REVIEW",
+      "detail": "public C152 schematic VA_20251201 page 4 places CH442E commons on MUX_IO_1/2 (rear header) with the note 'PYB_MUX_CTR selects U0TXD/U0RXD when low, and USB_P/USB_N when high', and Type-C is wired straight to USB_P/N on page 3; on that revision a high G1 adds the rear header in parallel rather than disconnecting Type-C, so the V1.1 rewiring cited in the commit message needs a schematic/ECO reference"
+    },
+    {
+      "id": "rear-header-default-change",
+      "status": "REVIEW",
+      "detail": "after the change nothing in M5GFX/M5Unified drives GPIO1 high during board init, so the rear J5/J6 header defaults to UART0 instead of USB; an application can still drive it through M5.getIOExpander(0), but the previous board-level default is gone and is not mentioned in the commit message"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no physical StopWatch with an observable Type-C data path on this host; actual USB enumeration on Type-C and on the rear header was not exercised"
+    },
+    {
+      "id": "warm-restart-retained-latch",
+      "status": "NOT RUN",
+      "detail": "the warm variant forced GPIO1 high and called esp_restart(); the virtual guest printed rst:0xc (RTC_SW_CPU_RST) and then stopped before the second-stage bootloader, so the pre-init window could not be observed; this is an emulator limitation, not a PR finding"
+    },
+    {
+      "id": "usb-mux-model",
+      "status": "NOT RUN",
+      "detail": "the stopwatch virtual device models M5PM1/M5IOE1 registers but no USB PHY or CH442E routing, so only the IOE1 register state is observable; link-level behaviour on either connector is not"
+    }
+  ],
+  "evidence": [
+    "evidence/pr442.diff",
+    "evidence/serial-pr-cold.txt",
+    "evidence/serial-dev-cold.txt",
+    "evidence/serial-warm.txt",
+    "evidence/frame-pr.png",
+    "evidence/frame-develop.png",
+    "evidence/host-tests-pr.txt",
+    "evidence/ioe1-register-map.txt",
+    "evidence/C152-SCH_Stopwatch_VA_20251201.pdf",
+    "evidence/m5stopwatch-userdemo-hal_ioe.cpp",
+    "evidence/environment.txt"
+  ],
+  "notes": [
+    "PR left OPEN; exactly one English comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Build used local copies of both trees; the only build-system edit was adding esp_psram to the IDF>=6 requires of CMakeLists.txt in those copies (no src/ change).",
+    "Evidence class is virtual-device validation for the register effect plus code-level verification; hardware validation and the warm-restart path are NOT RUN."
+  ]
+}

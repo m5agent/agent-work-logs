@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-24 | M5GFX | #442 StopWatch 启动时 M5IOE1 GPIO1 / Type-C USB 选择 | `PARTIAL`（虚拟设备证实 G1 高→低且首帧正常；真机 Type-C 与热复位路径 NOT RUN；host 34/34） | [查看](m5gfx/2026-11-24-pr442-stopwatch-typec-usb/) |
 | 2026-11-23 | AIFlow | #6「Run Always」下载路径重复 `apps/...py/...py` 的虚拟设备复现与归因 | `PARTIAL`（虚拟设备复现；云端上传与实机 NOT RUN） | [查看](m5stack-github/2026-11-23-aiflow-issue-6-run-always-path/) |
 | 2026-11-21 | ESP Emulator | Atom Lite「Wifi_Rig_CW(Server)」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（非模拟器启动缺陷，未开 issue；真机 NOT RUN） | [查看](m5stack-esp-emulator/2026-11-21-atom-lite-wifi-rig-cw-attribution/) |
 | 2026-11-20 | ESP Emulator | Pelican Dash 高清与节奏复验 | PARTIAL（原生触控通过，实录速度对比经变速呈现） | [查看](esp-emulator/2026-11-20-pocketjs-tab5/followups/2026-11-20-pelican-coastal-cut/) |
