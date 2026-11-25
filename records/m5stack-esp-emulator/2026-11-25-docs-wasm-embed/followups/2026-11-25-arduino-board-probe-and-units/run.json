@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Original Arduino examples: Cardputer-Adv board probe and CoreS3 Unit data plane",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence/board-probe-and-unit-summary.json"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS and static workbench",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "cardputer-adv: display",
+      "status": "FAIL"
+    },
+    {
+      "name": "cardputer-adv: keyboard",
+      "status": "FAIL"
+    },
+    {
+      "name": "cores3: unit_relay",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "cores3: unit_ultrasonic_i2c",
+      "status": "FAIL"
+    }
+  ],
+  "evidence": [
+    "evidence/board-probe-and-unit-summary.json"
+  ]
+}
