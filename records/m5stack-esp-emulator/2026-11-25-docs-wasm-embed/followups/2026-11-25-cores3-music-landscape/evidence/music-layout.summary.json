@@ -1,0 +1,165 @@
+{
+  "scope": "Browser-WASM virtual-device validation. Compare the same ESP-IDF Music example compiled with upstream portrait and landscape choices, then review one landscape Play/Pause cycle.",
+  "project": "CoreS3 ESP-IDF BSP Music on ESP32-S3 / 320x240",
+  "docs_commit": "6ee4f2fb9dca1c671e475407cb709109a699cf1a",
+  "esp_idf": "5.4.1",
+  "esp_idf_sha": "4c2820d377d1375e787bcef612f0c32c1427d183",
+  "core_s3_bsp": "3.0.2",
+  "lvgl_locked_component": "9.6.0~1",
+  "upstream_kconfig": "https://github.com/lvgl/lvgl/blob/v9.6.0/demos/music/Kconfig#L10-L12",
+  "config_effective_changes": {
+    "LV_DEMO_MUSIC_LANDSCAPE": {
+      "portrait": false,
+      "landscape": true
+    }
+  },
+  "example_source_sha256": "a61a38e804a90431f02ce6bc176bb20755c7b1c18aa698d994a3f072691510a1",
+  "component_lock_sha256": "efebaceb665e2759ff4ed0db87a9ecae654150685fc3a29906c6ef5ea556a135",
+  "partition_sha256": "5295e8c42d6fb5f95e4e8a185932c6191d27cfc5078322475347e40e71af815a",
+  "portrait_merged_sha256": "4234dda971731a8cf70ab440e8f7c7ff2cd4d6df742c2f13cc6a108b6c833a0d",
+  "landscape_merged_sha256": "d721745fa2ab79045dc66ad45d454dd3cd24cd96e84f780c61441ff2350e466b",
+  "landscape_application_sha256": "8da1490717a9db38a700cea5f910e35d2587172ba101361e6c03256b1ef3eb5b",
+  "landscape_merged_bytes": 16777216,
+  "landscape_application_bytes": 1272752,
+  "browser": "158.0.8127.37",
+  "site_manifest_sha256": "147d8844294ee364d931e07f8d858ee2f0cbce9e1ac8b173c1f966f576d09c51",
+  "harness_sha256": "9d0607f1a18e78633a208ab378ea7edac3421783be4a7bdd26639c84048375fa",
+  "observations": {
+    "00-music-portrait": {
+      "layout": [
+        "Track title and artist clipped above the top. Genre remains visible.",
+        "The main Play icon reaches the lower screen boundary and the monitor covers part of the transport area."
+      ],
+      "image_evidence": {
+        "final": {
+          "elapsed_ms": 43499,
+          "controller_frame_sha256": "fa10bb5807dc99dcaf9caa214b8567dff307c7972d96aad20bac0ca11806d9af",
+          "size": [
+            320,
+            240
+          ],
+          "frame_sequence": 235,
+          "png_sha256": "d906ae9293087814086e2ad19a1da2a813e1ea9ac1523184a4f75cbe7f3f062b"
+        }
+      },
+      "wasm_sha256": "11c5dea1a3982562c1ccf552df8833e1987cad4cb70cbd3db4f484cd9b230555",
+      "firmware_sha256": "4234dda971731a8cf70ab440e8f7c7ff2cd4d6df742c2f13cc6a108b6c833a0d",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "profile": "cores3-wasm-vm-div8",
+      "clock_divisor": 8,
+      "frame_transport": "shared-rgb565-v1",
+      "actual_application_serial": [
+        "I (200) LVGL: Starting LVGL task",
+        "I (340) app_main: Display LVGL demo"
+      ],
+      "resets": 0,
+      "qmp_exit": 0,
+      "graceful_qmp_exit": true,
+      "iframe_removed": true,
+      "cdp_worker_targets_observed": 6,
+      "cdp_worker_targets_remaining": 0,
+      "all_workers_closed_before_context": true,
+      "runtime_error": null
+    },
+    "01-music-landscape": {
+      "layout": [
+        "Track title, artist and genre fully visible at the upper left. All five transport controls are visible.",
+        "The existing performance overlay can cover the right edge of the lower track-list handle. The right edge can crop part of the animated spectrum."
+      ],
+      "image_evidence": {
+        "final": {
+          "elapsed_ms": 40145,
+          "controller_frame_sha256": "8dae547339fd1fd82e74b7955a97deff1de85ce3c3d77fee5c50c5d42462a7f8",
+          "size": [
+            320,
+            240
+          ],
+          "frame_sequence": 246,
+          "png_sha256": "aea38e38acffd5c380a710b2ec0f3cd378425e1a0ee04db0758824c4a7a9ede7"
+        },
+        "before-play-touch": {
+          "elapsed_ms": 54010,
+          "controller_frame_sha256": "ac54bbb5cb05959ade7441e7677a0cb5c1ef925310031d2530d05e6c6ce298bd",
+          "size": [
+            320,
+            240
+          ],
+          "frame_sequence": 323,
+          "png_sha256": "277a36941692efdc8fe339a6c12fc5dfe7ec9c264af3f1252bbaf4668ae759f1"
+        },
+        "after-play-touch": {
+          "elapsed_ms": 56564,
+          "controller_frame_sha256": "ff0761b29314e9a899361b75a757a48f8cc694db64fd7b1cf7cd3f520a9fda3e",
+          "size": [
+            320,
+            240
+          ],
+          "frame_sequence": 345,
+          "png_sha256": "8edefac6362fb643a7a8615e0c1d0baee080e4e8c7f99de5ed1aa53d4ed914b4"
+        },
+        "after-pause-touch": {
+          "elapsed_ms": 59112,
+          "controller_frame_sha256": "fcd1c9db271402f5969d58abc3ea96b0efb3aab76fa5441042466539222ba83e",
+          "size": [
+            320,
+            240
+          ],
+          "frame_sequence": 362,
+          "png_sha256": "ed1d1a9589c6ecd3c13bced592469d06cac54fbeed7d709bab2c6fcec3332869"
+        }
+      },
+      "wasm_sha256": "11c5dea1a3982562c1ccf552df8833e1987cad4cb70cbd3db4f484cd9b230555",
+      "firmware_sha256": "d721745fa2ab79045dc66ad45d454dd3cd24cd96e84f780c61441ff2350e466b",
+      "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+      "profile": "cores3-wasm-vm-div8",
+      "clock_divisor": 8,
+      "frame_transport": "shared-rgb565-v1",
+      "actual_application_serial": [
+        "I (201) LVGL: Starting LVGL task",
+        "I (331) app_main: Display LVGL demo"
+      ],
+      "resets": 0,
+      "qmp_exit": 0,
+      "graceful_qmp_exit": true,
+      "iframe_removed": true,
+      "cdp_worker_targets_observed": 6,
+      "cdp_worker_targets_remaining": 0,
+      "all_workers_closed_before_context": true,
+      "runtime_error": null,
+      "play_touch": {
+        "operator_visual_observation": {
+          "before-play-touch": "Play triangle, 0:00",
+          "after-play-touch": "Pause bars, 0:01 with enlarged spectrum",
+          "after-pause-touch": "Play triangle, 0:01 with idle spectrum"
+        },
+        "input": {
+          "type": "touch",
+          "x": 77,
+          "y": 136
+        },
+        "first": {
+          "ackDown": {
+            "accepted": true,
+            "result": {}
+          },
+          "ackUp": {
+            "accepted": true,
+            "result": {}
+          }
+        },
+        "second": {
+          "ackDown": {
+            "accepted": true,
+            "result": {}
+          },
+          "ackUp": {
+            "accepted": true,
+            "result": {}
+          }
+        },
+        "same_guest_and_console_epoch": true,
+        "coverage": "LVGL playback UI state and controller touch route"
+      }
+    }
+  }
+}
