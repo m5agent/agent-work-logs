@@ -1,0 +1,90 @@
+{
+  "checks": {
+    "direct_dio1_and_rx_done": "PASS",
+    "framebuffer": "PASS",
+    "full_node_contracts": "PASS",
+    "full_source_build": "PASS",
+    "loRa1262": "PASS",
+    "loRa868": "PASS",
+    "no_peer": "PASS",
+    "normal_dom_stop_and_worker_cleanup": "PASS",
+    "original_callback": "PASS",
+    "physical_rf_docs_embed_pages": "NOT RUN",
+    "spi_rx_fifo": "PASS"
+  },
+  "date": "2026-11-25",
+  "evidence": {
+    "bytes": 18359,
+    "path": "evidence/sx1262-workbench-pairs.json",
+    "sha256": "32f1a45a7b7ffc033b50153852a3fa0be2038b562471d2333f87a197efbdacd0"
+  },
+  "execution": {
+    "browser": "Chromium 158.0.8127.37",
+    "case_schedule": "run LoRa1262 and LoRa868 sequentially",
+    "guests_per_case": 2,
+    "original_transfer": "UART0 raw-paste",
+    "reproduction": "report.md",
+    "runner": {
+      "bytes": 20306,
+      "path": "code/run-workbench-dual-lora-0046.mjs",
+      "sha256": "ccecee282d29cdcbb59e39df9097ca0fa8a1b920545fdff2f41f00282815baca"
+    },
+    "runtime": "locked all-object QEMU-WASM 0046",
+    "site_manifest_sha256": "cec271aefa1a575d8b257ea899a8af91eb8209575202fef99fb919bab37f16ac",
+    "transport": "same-origin BroadcastChannel",
+    "wasm": {
+      "bytes": 12791229,
+      "sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211"
+    }
+  },
+  "firmware": {
+    "bytes": 8388608,
+    "family": "UIFlow2 v2.5.3",
+    "input_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+    "original_examples": {
+      "lora1262-rf-rx": {
+        "bytes": 1866,
+        "path": "platform/runtime/qemu-probe/fixture/cardputer_adv_lora1262_cap_receiver_example.py",
+        "sha256": "6c3765e32fd6d2b730f164fc1aea478d150738f918f25509216325d23678abe9"
+      },
+      "lora1262-rf-tx": {
+        "bytes": 1699,
+        "path": "platform/runtime/qemu-probe/fixture/cardputer_adv_lora1262_cap_sender_example.py",
+        "sha256": "08bb6c92c945c25354dde44133711ccf51fc47320a7e079653f84351ac936f51"
+      },
+      "lora868-rf-rx": {
+        "bytes": 1811,
+        "path": "platform/runtime/qemu-probe/fixture/cardputer_adv_lora868_cap_receiver_example.py",
+        "sha256": "174c834489590531f2271229b5b5c0093ea12f1c941826b6d6873fd683778df0"
+      },
+      "lora868-rf-tx": {
+        "bytes": 1662,
+        "path": "platform/runtime/qemu-probe/fixture/cardputer_adv_lora868_cap_sender_example.py",
+        "sha256": "d5bb7f05ccab053c41e83dc6d85ea6ee9cf1e5036f91614975f07df474c3d626"
+      }
+    },
+    "source_revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6"
+  },
+  "hardware": {
+    "board": "m5cardputeradv",
+    "level": "virtual-device validation",
+    "model": "Cardputer-Adv",
+    "physical_hardware_test": "NOT RUN",
+    "soc": "ESP32-S3"
+  },
+  "kind": "issue",
+  "overall_status": "PASS",
+  "schema_version": 1,
+  "source": {
+    "emscripten": "3.1.50",
+    "emulator_release_source": "55d449e345417e4f0b9c6531108f48bdaf8a55db",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/244",
+    "lock_sha256": "4ba15619e4613bc886e796d6f6c6cacce7e2f1b9225e424a48c2aaea1aaa36cd",
+    "patch": {
+      "bytes": 13491,
+      "path": "patches/qemu-wasm-probe/0046-cardputer-adv-sx1262-cap-peer.patch",
+      "sha256": "0c7b037ed3e95102c8d588d042767a0d61591946323f21a9f87a8e02f0c90238"
+    }
+  },
+  "title": "Cardputer-Adv LoRa1262/LoRa868 Cap workbench pairs"
+}
