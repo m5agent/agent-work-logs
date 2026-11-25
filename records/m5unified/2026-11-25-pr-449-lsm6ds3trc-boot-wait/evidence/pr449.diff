@@ -1,0 +1,61 @@
+diff --git a/src/M5Unified.inl b/src/M5Unified.inl
+index 618f264..7c76520 100644
+--- a/src/M5Unified.inl
++++ b/src/M5Unified.inl
+@@ -2910,6 +2910,9 @@ static constexpr const uint8_t _pin_table_mbus[][31] = {
+     }
+     if (!M5.Imu.isEnabled() && cfg.external_imu && Ex_I2C.isEnabled())
+     {
++      // The external port may have been powered just now (Power.setExtOutput() in _begin()).
++      // IMU drivers do not wait for a sensor that is still booting (LSM6DS3TR-C: 15 ms).
++      m5gfx::delay(15);
+       port_a_used = M5.Imu.begin(&M5.Ex_I2C) || port_a_used;
+     }
+     return port_a_used;
+diff --git a/src/utility/Power_Class.inl b/src/utility/Power_Class.inl
+index 4b9e6a3..1b4a7de 100644
+--- a/src/utility/Power_Class.inl
++++ b/src/utility/Power_Class.inl
+@@ -523,9 +523,18 @@ namespace m5
+ 
+         auto& ioe1 = M5.getIOExpander(0);
+         // M5IOE1_G12 supplies the shared 3V3 rail for MBUS, TF card and sensors.
++        // M5GFX normally turns it on during board setup and waits. If the output latch
++        // and the pin level were not both high yet, wait here for the sensors on the
++        // rail (LSM6DS3TR-C boot: 15 ms).
++        const bool rail_was_on = ioe1.getWriteValue(M5IOE1_Class::gpio12)
++                              && ioe1.digitalRead(M5IOE1_Class::gpio12);
+         ioe1.setHighImpedance(M5IOE1_Class::gpio12, false);
+         ioe1.setDirection(M5IOE1_Class::gpio12, true);
+         ioe1.digitalWrite(M5IOE1_Class::gpio12, true);
++        if (!rail_was_on)
++        {
++          m5gfx::delay(15);
++        }
+ 
+         // M5IOE1_G6 is the active-low charger status input.
+         ioe1.setDirection(M5IOE1_Class::gpio6, false);
+diff --git a/src/utility/imu/LSM6DS3TRC_Class.inl b/src/utility/imu/LSM6DS3TRC_Class.inl
+index 19c1898..be33ccd 100644
+--- a/src/utility/imu/LSM6DS3TRC_Class.inl
++++ b/src/utility/imu/LSM6DS3TRC_Class.inl
+@@ -26,9 +26,18 @@ namespace m5
+     }
+     _init = false;
+ 
++    // Probe first, so that boards without this IMU do not pay for the boot wait
++    // (begin() is tried at two addresses during IMU detection). A device still in
++    // its power-on boot may not answer and is reported as absent: after powering
++    // the sensor, the caller waits 15 ms before calling begin().
++    std::uint8_t value;
++    if (!readRegister(REG_WHO_AM_I, &value, 1))
++    {
++      return imu_spec_none;
++    }
++
+     // The device loads its trimming parameters during the power-on boot phase.
+     vTaskDelay(pdMS_TO_TICKS(15) + 1);
+-    std::uint8_t value;
+     if (!readRegister(REG_WHO_AM_I, &value, 1) || value != DEVICE_ID)
+     {
+       return imu_spec_none;

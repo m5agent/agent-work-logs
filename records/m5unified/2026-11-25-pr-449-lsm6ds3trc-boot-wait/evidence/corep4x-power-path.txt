@@ -1,0 +1,42 @@
+CoreP4X rail / detection order facts used for the code-level part
+PR head 041ed8c; M5GFX develop 5873de4 (CoreP4X support)
+
+1) M5Unified::begin() runs M5GFX display init before M5Unified::_begin()
+   src/M5Unified.hpp:376-381   Display.init() / Display.init_without_reset(false)
+   src/M5Unified.hpp:459       _begin(cfg)
+   src/M5Unified.inl:1788      Power.begin()  (first statement of _begin)
+
+2) M5GFX CoreP4X power_on drives M5IOE1 G12 (pin 11, reg 0x06 bit 0x08) high
+   and then delays 150 ms:
+   src/board_detect/m5/pmic_ops.hpp:126-136
+     126  corep4x_power_on[] = {
+     128    i2c_bit_on(0, 0x06, 0x08),
+     133    i2c_bit_on(1, 0x06, 0x08),     // device[1] = ioe1_i2c_addr = 0x4F = M5IOE1
+     135    delay_ms(150),
+   src/board_detect/m5/pmic_ops.hpp:17   ioe1_i2c_addr = 0x4F
+   src/board_detect/m5/pmic_ops.hpp:25-28 pm1_family_devices[0]=0x6E, [1]=0x4F
+   M5IOE1 pin numbering: src/utility/M5IOE1_Class.hpp:20-31
+     gpio12 = 11  -> register 0x05 + (11>>3) = 0x06, bit 1<<(11&7) = 0x08
+   => In a normal CoreP4X boot the rail has been on for >= 150 ms when
+      Power.begin() reads it, so rail_was_on is true and no wait is added.
+
+3) If M5GFX did not power the rail, Power.begin() sets G12 and waits 15 ms:
+   src/utility/Power_Class.inl:524-537
+     529  const bool rail_was_on = ioe1.getWriteValue(gpio12)
+     530                        && ioe1.digitalRead(gpio12);
+     533  ioe1.digitalWrite(gpio12, true);
+     534  if (!rail_was_on) { m5gfx::delay(15); }
+
+4) IMU detection order (why only some boards reach the LSM probe):
+   src/utility/IMU_Class.inl:47      MPU6886 (0x68/0x69)
+   src/utility/IMU_Class.inl:80      BMI270  (0x68/0x69)
+   src/utility/IMU_Class.inl:139-145 LSM6DS3TR-C (0x6A then 0x6B)
+   src/utility/IMU_Class.inl:164     SH200Q
+   Boards with a working MPU6886 or BMI270 never reach the LSM probe; a Basic
+   with an old-lot SH200Q does (README I2C table: BASIC MPU6886 68h or SH200Q 6Ch).
+
+5) The changed LSM begin() still waits after a successful probe:
+   src/utility/imu/LSM6DS3TRC_Class.inl:33-41
+     33-37 early probe, returns imu_spec_none on NACK (no retry)
+     40    vTaskDelay(pdMS_TO_TICKS(15) + 1)
+     41    second WHO_AM_I read + DEVICE_ID check

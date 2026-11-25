@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.16.0)
+get_filename_component(_root "${CMAKE_CURRENT_LIST_DIR}" ABSOLUTE)
+list(APPEND EXTRA_COMPONENT_DIRS "${_root}/M5Unified")
+list(APPEND EXTRA_COMPONENT_DIRS "$ENV{M5GFX_PATH}")
+include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+project(m5u449_probe)

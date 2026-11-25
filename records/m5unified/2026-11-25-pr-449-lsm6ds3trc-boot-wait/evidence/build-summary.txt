@@ -1,0 +1,34 @@
+M5Unified PR #449 probe build summary
+
+PR head:      041ed8cb320e323ec51e94ef6b4109f0d4467bc9
+Base develop: b7eaa4b (Merge pull request #448 from TinyuZhao/develop)
+Host:         macOS arm64, ESP-IDF v6.1, CONFIG_FREERTOS_HZ=100
+
+M5GFX:
+  esp32 / esp32c6 builds: M5GFX 0.3.0 (28d4794)
+  esp32p4 build:          M5GFX develop 5873de4 (0.3.0 tag lacks board_M5UnitPoEP4X)
+
+Builds (head vs base, same M5GFX and same probe main):
+  esp32c6  head: 1148 targets, 0 "warning:" lines, app 0x5c6c0 B
+  esp32c6  base: 0 "warning:" lines
+  esp32    head: 0 "warning:" lines
+  esp32    base: 0 "warning:" lines
+  esp32p4  head: 1148 targets, 0 "warning:" lines (changed Power_Class CoreP4X branch compiles)
+  esp32p4  base: 0 "warning:" lines
+
+Probe firmware builds and app image sizes come from idf.py build logs; only the
+merged images below were imported into the Device Service.
+
+Merged images imported (kind=merged, Device Service "generic-flash" family):
+87841cbee5072bbdfb85d9b15d991c0f32c46ac9458f2d7051bef8b399692203  artifacts/basic-internal-head.bin
+26fb5d5687342c29ef17530fed72ba1de6af9dc63561b8f32af37df82a70298e  artifacts/basic-internal-base.bin
+3a01bfe7ba7c35df1cd9ac290c1a869e5454b986b256550ee5c1ef4bf23b9850  artifacts/nanoc6-internal-head.bin
+71a9a6bb204308ec5ade41e247f79f822d910906184f403f037555e163021d8e  artifacts/nanoc6-internal-base.bin
+6db5593e0d8afe09ec6e6dfd8aaf2410acdca91f4192b94517805b0d380b2437  probe-esp32-head/build/merged-ext.bin
+c5bae6232678b34de0cad76b20ac1448b145a1f0fbec5d1438ca6e81d712ddc9  probe-esp32-base/build/merged-ext.bin
+artifacts/basic-internal-base.bin 426752 bytes
+artifacts/basic-internal-head.bin 426752 bytes
+artifacts/nanoc6-internal-base.bin 444064 bytes
+artifacts/nanoc6-internal-head.bin 444096 bytes
+probe-esp32-head/build/merged-ext.bin 426800 bytes
+probe-esp32-base/build/merged-ext.bin 426800 bytes

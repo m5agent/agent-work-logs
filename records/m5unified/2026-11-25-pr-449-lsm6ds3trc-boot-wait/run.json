@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #449 review: LSM6DS3TR-C boot wait moved to the power-on site",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/449",
+    "repository": "m5stack/M5Unified",
+    "head_commit": "041ed8cb320e323ec51e94ef6b4109f0d4467bc9",
+    "base_commit": "b7eaa4b",
+    "base_ref_tip": "b7eaa4b"
+  },
+  "hardware": {},
+  "firmware": {
+    "device_profiles": [
+      "basic-v27",
+      "nanoc6"
+    ],
+    "images": [
+      "basic-internal head sha256 87841cbee5072bbdfb85d9b15d991c0f32c46ac9458f2d7051bef8b399692203",
+      "basic-internal base sha256 26fb5d5687342c29ef17530fed72ba1de6af9dc63561b8f32af37df82a70298e",
+      "nanoc6-internal head sha256 3a01bfe7ba7c35df1cd9ac290c1a869e5454b986b256550ee5c1ef4bf23b9850",
+      "nanoc6-internal base sha256 71a9a6bb204308ec5ade41e247f79f822d910906184f403f037555e163021d8e",
+      "basic external head sha256 6db5593e0d8afe09ec6e6dfd8aaf2410acdca91f4192b94517805b0d380b2437",
+      "basic external base sha256 c5bae6232678b34de0cad76b20ac1448b145a1f0fbec5d1438ca6e81d712ddc9"
+    ],
+    "runtime": "local Device Service, QEMU, merged image at 0x0/0x1000, 4 MB flash"
+  },
+  "execution": {
+    "environment": "macOS arm64; ESP-IDF v6.1 (CONFIG_FREERTOS_HZ=100); local Device Service with 36 profiles, basic-v27 (QEMU m5basic) and nanoc6 (QEMU esp32c6) used; the only ESP32-P4 profile is tab5 (BMI270), no CoreP4X",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #449 OPEN, not draft, mergeable, author ainyan03, English title/body, 0 comments and 0 reviews before review; base develop, head lsm6ds3trc_boot_wait"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "3 files +22/-1: src/M5Unified.inl +3, src/utility/Power_Class.inl +9, src/utility/imu/LSM6DS3TRC_Class.inl +10/-1; no other files"
+    },
+    {
+      "id": "mechanism",
+      "status": "PASS",
+      "detail": "removed cost is pdMS_TO_TICKS(15)+1 per probed address (2 addresses); 2 ticks at IDF 100 Hz, 16 ms at Arduino 1000 Hz => ~32 ms, matching the PR table; absent-device probe now returns before the wait"
+    },
+    {
+      "id": "virtual-basic-head",
+      "status": "PASS",
+      "detail": "basic-v27, head: M5.begin 599.606 ms, one-address LSM begin 253 us, full IMU detect 300.807 ms, imu none, I2C scan 0x48/0x75; identical in 3 sessions"
+    },
+    {
+      "id": "virtual-basic-base",
+      "status": "PASS",
+      "detail": "basic-v27, base b7eaa4b: M5.begin 639.606 ms, one-address LSM begin 19.403 ms, full IMU detect 340.807 ms; identical in 3 sessions; delta 40.0 ms = 2 x 19.4 ms wait"
+    },
+    {
+      "id": "virtual-nanoc6-head",
+      "status": "PASS",
+      "detail": "nanoc6, head: M5.begin 923.950 ms, one-address LSM begin 25.170 ms, full IMU detect 745.081 ms, no I2C device; identical in 3 sessions"
+    },
+    {
+      "id": "virtual-nanoc6-base",
+      "status": "PASS",
+      "detail": "nanoc6, base: M5.begin 953.950 ms, one-address LSM begin 44.325 ms, full IMU detect 775.081 ms; identical in 3 sessions; delta 30.0 ms end-to-end, 19.2 ms per address"
+    },
+    {
+      "id": "external-imu-path",
+      "status": "PASS",
+      "detail": "basic-v27 with internal_imu=false, external_imu=true: head 619.601 ms vs base 639.601 ms; head is 20 ms above its internal-only 599.606 ms, showing the new 15 ms wait executes, and still 20 ms faster than base"
+    },
+    {
+      "id": "builds",
+      "status": "PASS",
+      "detail": "ESP-IDF v6.1 esp32c6, esp32, esp32p4 head and base all build; esp32p4 uses M5GFX develop 5873de4; 0 'warning:' lines in all six builds"
+    },
+    {
+      "id": "corep4x-rail-sequencing",
+      "status": "PASS",
+      "detail": "M5GFX develop corep4x_power_on drives M5IOE1 0x4F reg 0x06 bit 0x08 (pin 11 = gpio12) then delay_ms(150); Display.init precedes _begin/Power.begin, so rail_was_on is true on a normal boot and the new 15 ms wait is skipped; source-level only"
+    },
+    {
+      "id": "lsm-present-path",
+      "status": "NOT RUN",
+      "detail": "no LSM6DS3TR-C in any local virtual device and no hardware; WHO_AM_I, soft reset, 70 ms gyro turn-on and sample discard were not exercised"
+    },
+    {
+      "id": "corep4x-hardware",
+      "status": "NOT RUN",
+      "detail": "no CoreP4X hardware and no CoreP4X profile (only ESP32-P4 profile is tab5 with BMI270); G12 level, latch readback and 15 ms sufficiency on the real rail were not observed"
+    },
+    {
+      "id": "arduino-build",
+      "status": "NOT RUN",
+      "detail": "only ESP-IDF builds were run; the author's Arduino CI result was not reproduced"
+    },
+    {
+      "id": "real-timing",
+      "status": "NOT RUN",
+      "detail": "QEMU absolute M5.begin times (~600/950 ms) are not hardware measurements; only head/base deltas are meaningful"
+    }
+  ],
+  "evidence": [
+    "evidence/measurements.csv",
+    "evidence/serial-key-lines.txt",
+    "evidence/serial-basic-head-1.txt",
+    "evidence/serial-basic-base-1.txt",
+    "evidence/serial-c6-head-1.txt",
+    "evidence/serial-c6-base-1.txt",
+    "evidence/serial-basic-ext-head-1.txt",
+    "evidence/serial-basic-ext-base-1.txt",
+    "evidence/build-summary.txt",
+    "evidence/device-profiles.txt",
+    "evidence/corep4x-power-path.txt",
+    "evidence/pr449.diff",
+    "evidence/pr449-status.txt",
+    "evidence/probe-main.cpp"
+  ],
+  "posted_comment": "",
+  "notes": [
+    "PR left OPEN; one English comment planned; no close, no push, no change to m5stack/M5Unified.",
+    "Primary evidence is virtual-device validation of the absent-device path on basic-v27 and nanoc6, plus code-level verification of the CoreP4X rail sequencing and P4 compilation.",
+    "The virtual boards have no LSM6DS3TR-C, so the sensor-present register path is NOT RUN; this is the main remaining gap and matches the author's own untested CoreP4X case.",
+    "Non-blocking observations: (1) when the new wait fires and the LSM is present, the driver still waits 15 ms + 1 tick, so that narrow path is ~15 ms slower than before; (2) the new waits use exactly 15 ms while the driver uses 15 ms + 1 tick, and a failed first probe is not retried.",
+    "Firmware images are recorded by SHA256 and size; binaries themselves are not committed."
+  ]
+}
