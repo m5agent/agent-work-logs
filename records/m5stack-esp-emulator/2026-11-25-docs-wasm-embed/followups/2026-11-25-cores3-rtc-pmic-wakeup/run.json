@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "744df778ef78c03e783f51f4620bae89f3b3c9f3",
+    "candidate_commit": "1e86d673400dc74b4be37da5d8d6ba71aaf44a5f",
+    "issue": 252
+  },
+  "hardware": {
+    "device": "CoreS3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "arduino_cli": "1.3.1",
+    "board_package": "3.2.5",
+    "m5unified": "0.3.0",
+    "m5gfx": "0.3.0",
+    "source_sha256": "853094e19db56c6bb4af56a60bf7a9dcca54be234ad4172451f81ffe31ece3af",
+    "original_sha256": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+    "poweroff_control_sha256": "8b0839da632ebe2461886387aeaca9e8fea6394935297f91d4292c4b5913fa37"
+  },
+  "execution": {
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "runtime_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+    "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+    "site_manifest_sha256": "a235569163256aa038e0226ddf61cb2cd269b2d05bd3de4e21e5c5c48ceb9cda",
+    "browser": "158.0.8127.37",
+    "profile": "cores3-wasm-vm-div8",
+    "date": "2026-11-25",
+    "full_platform_tests": 2562,
+    "platform_tests_skipped": 11
+  },
+  "checks": [
+    {
+      "name": "old runtime original timed wake",
+      "status": "FAIL",
+      "evidence": "evidence/wake-baseline.summary.json"
+    },
+    {
+      "name": "development candidate early repeat touch",
+      "status": "PARTIAL",
+      "evidence": "evidence/early-touch.summary.json"
+    },
+    {
+      "name": "locked runtime twice in same guest with RTC, PMIC, ROM, touch and frame",
+      "status": "PASS",
+      "evidence": "evidence/wake-two-cycle.summary.json"
+    },
+    {
+      "name": "locked runtime ordinary shutdown does not suspend or wake",
+      "status": "PASS",
+      "evidence": "evidence/power-off-control.summary.json"
+    },
+    {
+      "name": "normal cleanup on locked virtual sessions",
+      "status": "PASS"
+    },
+    {
+      "name": "native runtime, physical effects, calendar alarms, pulse interrupts and hosted release",
+      "status": "NOT RUN"
+    }
+  ]
+}

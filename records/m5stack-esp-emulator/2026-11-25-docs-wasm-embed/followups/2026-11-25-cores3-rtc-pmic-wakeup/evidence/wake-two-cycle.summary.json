@@ -1,0 +1,81 @@
+{
+  "validation": "virtual-device validation (browser WASM)",
+  "status": "PASS",
+  "case": "Original CoreS3 Arduino Wakeup, two wake cycles in the same browser guest",
+  "browser": "158.0.8127.37",
+  "firmware_sha256": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+  "wasm_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+  "site_manifest_sha256": "a235569163256aa038e0226ddf61cb2cd269b2d05bd3de4e21e5c5c48ceb9cda",
+  "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+  "profile": "cores3-wasm-vm-div8",
+  "clock_divisor": 8,
+  "native_touch_xy": [
+    170,
+    165
+  ],
+  "qemu_input_commands_accepted": 4,
+  "same_guest_and_browser_workers": true,
+  "cycles": [
+    {
+      "cycle": 1,
+      "rtc_control2_after_expiry": "0x05",
+      "pmic_power_on_cause": "rtc-irq",
+      "qmp_events": [
+        "SUSPEND",
+        "guest RESET",
+        "WAKEUP"
+      ],
+      "qmp_suspend_to_wakeup_host_ms": 5003,
+      "input_down_to_redrawn_prompt_host_ms": 13725,
+      "touch_press_release_ack_interval_ms": 668,
+      "serial_boot_markers": [
+        "ESP-ROM:esp32s3-20210327",
+        "rst:0x1 (POWERON),boot:0x4 (SPI_FLASH_BOOT)",
+        "entry 0x403c88b8"
+      ],
+      "console_epoch": [
+        0,
+        1
+      ],
+      "before_shared_frame_sequence": 30,
+      "after_shared_frame_sequence": 56,
+      "redrawn_rgb565_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd",
+      "redrawn_png_sha256": "99b09e408ff7a6cfa5408bcd324753672b3ea2a56e17831da45ccaaedd4d2de3"
+    },
+    {
+      "cycle": 2,
+      "rtc_control2_after_expiry": "0x05",
+      "pmic_power_on_cause": "rtc-irq",
+      "qmp_events": [
+        "SUSPEND",
+        "guest RESET",
+        "WAKEUP"
+      ],
+      "qmp_suspend_to_wakeup_host_ms": 5003,
+      "input_down_to_redrawn_prompt_host_ms": 13078,
+      "touch_press_release_ack_interval_ms": 666,
+      "serial_boot_markers": [
+        "ESP-ROM:esp32s3-20210327",
+        "rst:0x1 (POWERON),boot:0x4 (SPI_FLASH_BOOT)",
+        "entry 0x403c88b8"
+      ],
+      "console_epoch": [
+        1,
+        2
+      ],
+      "before_shared_frame_sequence": 56,
+      "after_shared_frame_sequence": 80,
+      "redrawn_rgb565_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd",
+      "redrawn_png_sha256": "99b09e408ff7a6cfa5408bcd324753672b3ea2a56e17831da45ccaaedd4d2de3"
+    }
+  ],
+  "cleanup": {
+    "qmp_exit_code": 0,
+    "worker_targets_observed": 6,
+    "worker_targets_remaining": 0,
+    "iframe_removed": true
+  },
+  "raw_report_sha256": "91d7c8b34cac4d7e81b25183f395686456a81977a8439e9e929a079583dc99de",
+  "raw_cycle_trace_sha256": "50fea803cb128fe22bd106349671cd51cbfe3e5658a68598a3fb7b9ad2081d7e",
+  "scope": "Untouched stock image. This records observed browser timing and virtual GPIO/I2C behavior. Physical hardware and performance were not tested."
+}

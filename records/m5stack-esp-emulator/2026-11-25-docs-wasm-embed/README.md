@@ -43,6 +43,8 @@
 
 [CoreS3 Music 横屏复验及三语文档发布](followups/2026-11-25-cores3-music-landscape/)
 
+[CoreS3 Wakeup 定时休眠、唤醒及普通关机复验](followups/2026-11-25-cores3-rtc-pmic-wakeup/)
+
 ## 试点结论
 
 两款设备可以在启用浏览器跨源隔离的文档预览中演示精选例程。CoreS3 的绘图、触摸和按键，Cardputer-Adv 的显示、键盘和 Quick Start 已有真实来宾画面或输入结果。两款基准例程在桌面 Chrome 的隔离预览中约 12–24 秒到达可操作状态。窄屏使用完整工作台时，启动按钮在内层页面顶部以下约 1,900 CSS px。建议试点提供模拟屏幕和必要的控件，在实际应用画面出现后启用输入。[逐例矩阵与交互观察](followups/2026-11-25-example-coverage/)
@@ -53,7 +55,8 @@
 | --- | --- |
 | 工作台隔离提示和 CoreS3 UIFlow2 M5UI 事件处理 | 已合入模拟器主分支，隔离预览中复验。[模拟器 PR #251](https://github.com/m5agent/m5stack-esp-emulator/pull/251) |
 | Cardputer-Adv WASM 板型探测 | 已合入模拟器主分支。重建 WASM 上复验原显示、键盘和 Quick Start。正式托管版本待更新。[模拟器 PR #256](https://github.com/m5agent/m5stack-esp-emulator/pull/256) |
-| CoreS3 ESP-IDF BSP Music 分区说明 | 已发布中、英、日三语说明。扩大应用分区的原例程进入应用，屏幕仍为黑色。[正式文档](https://docs.m5stack.com/en/esp_idf/m5cores3/bsp) |
+| CoreS3 ESP-IDF BSP 显示与 Music | WASM 显示修复已合入。Music 分区与横屏配置已发布中、英、日三语说明，浏览器通过横屏播放器触摸复验。[正式文档](https://docs.m5stack.com/en/esp_idf/m5cores3/bsp) |
+| CoreS3 来宾热复位 | WASM 修复已合入。原 UIFlow2 WDT 和软件复位恢复新控制台代次及程序执行。[模拟器 PR #259](https://github.com/m5agent/m5stack-esp-emulator/pull/259) |
 | CoreS3 UIFlow2 ADC、GPIO、WDT 和 UART 例程修正 | 在同一 WASM 路径复验，待上游合并。[UIFlow2 PR #132](https://github.com/m5stack/uiflow-micropython/pull/132) |
 
 ## 后续问题

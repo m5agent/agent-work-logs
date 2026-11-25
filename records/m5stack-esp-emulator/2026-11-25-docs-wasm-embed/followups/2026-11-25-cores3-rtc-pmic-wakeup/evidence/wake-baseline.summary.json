@@ -1,0 +1,102 @@
+{
+  "kind": "CoreS3 stock Arduino Wakeup baseline and RTC to PMIC path",
+  "validation": "virtual-device validation (browser WASM)",
+  "hardware_validation": "NOT RUN",
+  "firmware_sha256": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+  "wasm_sha256": "11c5dea1a3982562c1ccf552df8833e1987cad4cb70cbd3db4f484cd9b230555",
+  "profile": "cores3-wasm-vm-div8",
+  "clock_divisor": 8,
+  "native_touch_xy": [
+    170,
+    165
+  ],
+  "touch_down_accepted": true,
+  "touch_up_accepted": true,
+  "baseline": {
+    "site_manifest_sha256": "147d8844294ee364d931e07f8d858ee2f0cbce9e1ac8b173c1f966f576d09c51",
+    "raw_report_sha256": "14b6e103b82efe220d0c65aad5058ff924442057349e2b894e510e0d469bddc2",
+    "wake_trace_sha256": "1a76388df2c7d9c218aa87ffc151f2c955672e709090867a6e2fbf01772f7961",
+    "host_ack_interval_ms": 667,
+    "observation_from_input_ms": 45881,
+    "events": [
+      "guest SHUTDOWN"
+    ],
+    "last_frame": {
+      "sequence": 11,
+      "width": 320,
+      "height": 240,
+      "source": "qemu-display-surface-shared",
+      "source_sequence": 30,
+      "distinct_colors": 2,
+      "hash": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd"
+    },
+    "prompt_screenshot_sha256": "99b09e408ff7a6cfa5408bcd324753672b3ea2a56e17831da45ccaaedd4d2de3",
+    "cleanup": {
+      "exit_code": 0,
+      "worker_targets_observed": 6,
+      "worker_targets_remaining": 0,
+      "iframe_removed": true
+    }
+  },
+  "diagnostic_same_wasm": {
+    "site_manifest_sha256": "73feebc231eb5b9a3890f7cc8f62268a188a72905a2e66b89c3ce7aa6cdd5b42",
+    "raw_report_sha256": "b77faef7418c95910eabacdb70505e7d78e2d6537d8a2670aeb73a2e92a7afa6",
+    "wake_trace_sha256": "871c56b299aa8c8e5a82e66b67f28dc874d0f3cff033c497fa18284fd6d9c075",
+    "host_ack_interval_ms": 667,
+    "observation_from_input_ms": 889,
+    "events": [
+      "guest SHUTDOWN"
+    ],
+    "last_frame": {
+      "sequence": 12,
+      "width": 320,
+      "height": 240,
+      "source": "qemu-display-surface-shared",
+      "source_sequence": 32,
+      "distinct_colors": 2,
+      "hash": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd"
+    },
+    "prompt_screenshot_sha256": "99b09e408ff7a6cfa5408bcd324753672b3ea2a56e17831da45ccaaedd4d2de3",
+    "cleanup": {
+      "exit_code": 0,
+      "worker_targets_observed": 6,
+      "worker_targets_remaining": 0,
+      "iframe_removed": true
+    },
+    "rtc_power_writes": [
+      {
+        "chip": "PCF8563",
+        "register": "0x0F",
+        "value": "0x05"
+      },
+      {
+        "chip": "PCF8563",
+        "register": "0x0E",
+        "value": "0x82"
+      },
+      {
+        "chip": "PCF8563",
+        "register": "0x01",
+        "value": "0x09"
+      },
+      {
+        "chip": "AXP2101",
+        "register": "0x90",
+        "value": "0x3F"
+      },
+      {
+        "chip": "AXP2101",
+        "register": "0x99",
+        "value": "0x00"
+      },
+      {
+        "chip": "AXP2101",
+        "register": "0x10",
+        "value": "0x31"
+      }
+    ],
+    "trace_engine_sha256": "690665ce690090756dd3aa06f797d4ed6ba18e30e81fdaada62e48a481ae16db"
+  },
+  "finding": "Guest arms PCF8563 countdown for five 1 Hz ticks, enables timer interrupt and issues AXP2101 software power-off. Emulator exits with guest SHUTDOWN, so no wake, new ROM or refreshed frame is observed.",
+  "scope": "Exact stock firmware. The diagnostic replay enables existing read-only model logs through a private engine copy and changes no firmware or WASM bytes."
+}
