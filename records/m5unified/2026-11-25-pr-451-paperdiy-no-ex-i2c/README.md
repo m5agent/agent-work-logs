@@ -80,3 +80,8 @@
 - M5GFX #447 本身（G45/EPD OE、FPC 目录）没有评审，只用了它生成的 pin table 做一致性核对。
 - cores3 的 `CONFIG_SPIRAM=n` 是因为该 QEMU profile 不提供 PSRAM（首次带 PSRAM 的镜像在
   `octal_psram` 初始化处 abort），不影响本次结论，但属于环境差异。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5Unified/pull/451#issuecomment-7161542472>
+  （1 条英文评论，与条目语言一致；PR 仍 OPEN，未 close、未 push、未改他人仓库）
