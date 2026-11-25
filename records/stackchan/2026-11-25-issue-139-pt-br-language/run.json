@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "StackChan pt-BR (Brazilian Portuguese) language request for the AI agent",
+  "source": {
+    "issue": "https://github.com/m5stack/StackChan/issues/139",
+    "pull_request": "",
+    "repository": "https://github.com/m5stack/StackChan",
+    "base_commit": "28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400",
+    "upstream": [
+      "https://xiaozhi.me/",
+      "https://github.com/78/xiaozhi-esp32"
+    ]
+  },
+  "hardware": {
+    "device": "M5Stack StackChan K151",
+    "present": false,
+    "notes": "No physical unit used; the request concerns the Flutter app's Agent Setting page and the remote voice catalog, which a device run does not exercise"
+  },
+  "firmware": {
+    "target": "M5Stack StackChan (ESP32-S3)",
+    "build": "NOT RUN",
+    "flash": "NOT RUN",
+    "image_sha256": "",
+    "source_commit": "28b9f0c8",
+    "notes": "Firmware UI language Kconfig already provides LANGUAGE_PT_PT; locales assets are fetched from upstream xiaozhi-esp32 and are not in this repository"
+  },
+  "execution": {
+    "environment": "macOS; read-only sparse clone of app/firmware/server; local Device Service device-list query only (no session); no xiaozhi account credentials used",
+    "task_id": "",
+    "session_id": ""
+  },
+  "language_flow": {
+    "app_base_url": "https://xiaozhi.me/",
+    "catalog_endpoint": "GET api/user/tts-list",
+    "dropdown_source": "tts_voices keys",
+    "submitted_field": "language",
+    "create_endpoint": "POST api/agents",
+    "display_name_map": "app/lib/util/value_constant.dart (pt at :180); unknown keys fall back to the raw code",
+    "server_side_catalog": "server/internal/xiaozhi/xiaozhi.go reuses api/user/tts-list; server/internal/service/agent.go unions languages + tts_voices keys"
+  },
+  "checks": [
+    {
+      "name": "Issue state and existing replies",
+      "command": "gh api repos/m5stack/StackChan/issues/139",
+      "status": "PASS",
+      "detail": "OPEN, 0 comments at 2026-11-25; no prior m5agent reply"
+    },
+    {
+      "name": "Language picker source in Agent Setting",
+      "command": "sed -n '84,100p;432,449p' app/lib/view/popup/edit_agent.dart",
+      "status": "PASS",
+      "detail": "languageList is built from tts_voices keys and rendered as the picker items; selected value is the key"
+    },
+    {
+      "name": "Display-name map is not a capability list",
+      "command": "sed -n '160,205p' app/lib/util/value_constant.dart; grep -rn 'ValueConstant.languages' app/lib",
+      "status": "PASS",
+      "detail": "Only two call sites, both display-name lookups with raw-code fallback; no filtering or gating"
+    },
+    {
+      "name": "Catalog origin and agent submission path",
+      "command": "sed -n '30,36p;255,270p' app/lib/util/xiao_zhi_util.dart; sed -n '196,206p' app/lib/view/popup/edit_agent.dart",
+      "status": "PASS",
+      "detail": "App queries https://xiaozhi.me/api/user/tts-list and posts language to api/agents; token is issued by the StackChan server"
+    },
+    {
+      "name": "Server-side catalog handling",
+      "command": "sed -n '44,48p;273,281p' server/internal/xiaozhi/xiaozhi.go; sed -n '128,160p' server/internal/service/agent.go",
+      "status": "PASS",
+      "detail": "Same upstream endpoint; default-agent restore unions languages + tts_voices keys (slightly wider than the app dropdown)"
+    },
+    {
+      "name": "Firmware UI Portuguese option",
+      "command": "sed -n '79,86p' firmware/main/Kconfig.projbuild; sed -n '192,193p;243p' firmware/main/CMakeLists.txt",
+      "status": "PASS",
+      "detail": "LANGUAGE_PT_PT maps to pt-PT locales; this is device UI text, not agent ASR/TTS language"
+    },
+    {
+      "name": "Unauthenticated catalog read",
+      "command": "curl -s -m 15 -w '%{http_code}' https://xiaozhi.me/api/user/tts-list",
+      "status": "PASS",
+      "detail": "401 {\"success\":false,\"message\":\"No token provided\"}; real language keys not observable without an account token"
+    },
+    {
+      "name": "Local Device Service StackChan profile",
+      "command": "curl -s <local-device-service>/api/v1/devices",
+      "status": "PASS",
+      "detail": "stackchan profile present: simulated, ILI9342C 320x240, touch, backend_ready"
+    },
+    {
+      "name": "Virtual-device validation",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "The stackchan profile reproduces firmware runtime only; it does not run the Flutter app page or hold a xiaozhi token"
+    },
+    {
+      "name": "Hardware validation",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "No physical unit; the language catalogue is remote and account-scoped"
+    },
+    {
+      "name": "Flutter app build/run",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "No app build; UI behaviour derived from source only"
+    },
+    {
+      "name": "Portuguese TTS/ASR capability on the account",
+      "command": "n/a",
+      "status": "NOT RUN",
+      "detail": "Requires an authenticated catalogue read; not attempted without credentials"
+    }
+  ],
+  "limits": [
+    "code-level verification only; no hardware or virtual-device run",
+    "the live voice catalogue could not be read (401 without token)",
+    "no claim about when pt/pt-BR voices will be enabled or about ASR quality"
+  ],
+  "reply": {
+    "comment_url": "",
+    "language": "en",
+    "status": "PENDING"
+  }
+}
