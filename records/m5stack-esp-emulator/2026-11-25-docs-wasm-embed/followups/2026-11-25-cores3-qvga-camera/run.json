@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": 243,
+    "base_commit": "f49479080790213c76e796108b6ac5bed6adce7c",
+    "candidate_commit": "7576e35098c0226773263fc8e375d389f1860104",
+    "uiflow_example_commit": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "uiflow_source_sha256": "58f1f6361eaa2b77c8bb91e8a1d62f44db6631177806b73be1ec28731965ece8"
+  },
+  "hardware": {
+    "device": "CoreS3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "uiflow_release": "v2.5.3",
+    "trace_image_sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+    "standard_workbench_image_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49"
+  },
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+    "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce",
+    "site_manifest_sha256": "14460d70c9b834627663e8f25c69730ae26693b1e1c2498a08232a20de9d071a",
+    "browser": "Chrome 158.0.8127.37",
+    "full_platform_tests": 2565,
+    "platform_tests_skipped": 11
+  },
+  "checks": [
+    {
+      "name": "0042 official camera reproduces short QVGA frames",
+      "status": "FAIL",
+      "evidence": "evidence/controller-comparison.summary.json"
+    },
+    {
+      "name": "same exact trace firmware with paced DVP data, full RGB565 and no short-frame warning",
+      "status": "PASS",
+      "evidence": "evidence/controller-comparison.summary.json"
+    },
+    {
+      "name": "continuous successful DMA capture at every armed start in long traced window",
+      "status": "PARTIAL",
+      "evidence": "evidence/controller-comparison.summary.json"
+    },
+    {
+      "name": "locked rebuild and byte equality with traced runtime",
+      "status": "PASS",
+      "evidence": "evidence/locked-build.summary.json"
+    },
+    {
+      "name": "standard browser default firmware original camera, sustained exact display and interruption",
+      "status": "PASS",
+      "evidence": "evidence/standard-workbench.summary.json"
+    },
+    {
+      "name": "normal browser engine and pthread cleanup",
+      "status": "PASS",
+      "evidence": "evidence/standard-workbench.summary.json"
+    },
+    {
+      "name": "physical camera, native lane, other resolutions or boards, hosted release",
+      "status": "NOT RUN"
+    }
+  ]
+}

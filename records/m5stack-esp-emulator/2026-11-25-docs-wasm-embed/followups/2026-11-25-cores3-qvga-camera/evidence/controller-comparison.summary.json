@@ -1,0 +1,728 @@
+{
+  "schema_version": 1,
+  "kind": "cores3-camera-browser-qemu-diagnostic-comparison",
+  "issue": 243,
+  "evidence_level": "virtual-device validation",
+  "distribution": "Private diagnostic summary.",
+  "scope": {
+    "fidelity": "Original documented camera program using the QEMU DVP source, S3 LCD_CAM and GDMA, and the guest LCD. The generated deterministic pattern exercises data transfer and display. Physical sensor timing, incoming optics, and real-device frame rate were not tested.",
+    "c_nominal_source_timing": "30 synthetic source frames/s is a model pacing target for record arrival. The frame counts in this report are completed DMA capture attempts in their individual browser windows.",
+    "observation": "The configured dwell begins after guest source transfer. Measured guest start to requested interrupt also includes browser case bookkeeping. Each row is a separate fresh browser guest.",
+    "metric_definition": "An attempt begins at armed CAM_START with ten programmed record groups of 15360 bytes. A full-group attempt emits ten source EOFs. A nominal complete VSYNC is the modeled frame-end path after all groups. A true incomplete attempt emits fewer than ten groups. Recovery VSYNC may follow a guest STOP and is counted separately from the nominal path.",
+    "ack_limit": "Guest acknowledgments are observed as channel 1 IN success-EOF clear writes between record groups. The first baseline run filtered out MMIO, so its ack and STOP counts are unknown.",
+    "warning_limit": "Short and overflow counts are guest diagnostics observed within these windows. A silent recovery can occur without a warning or visual framebuffer difference.",
+    "source_archive_scope": "The diagnostic static sites retain the original locked 0042 archive as a baseline control. The candidate-specific C source hashes are listed separately."
+  },
+  "fixed_inputs": {
+    "documentation_revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "example_source": {
+      "repository_path": "examples/advanced/camera/cores3_example_camera_display.py",
+      "sha256": "58f1f6361eaa2b77c8bb91e8a1d62f44db6631177806b73be1ec28731965ece8",
+      "bytes": 769
+    },
+    "editor_source_sha256_after_lf_normalization": "da995cdc16d03cce8e986dd603a368ac15bdcf0534367a29b31543bfdba416b4",
+    "original_executed_firmware": {
+      "sha256": "52f38f562f6e3749357a2ed4834efd72d16870046ea052f2f31691743cb5384d",
+      "bytes": 16777216
+    },
+    "firmware_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+    "littlefs_composer_wasm_sha256": "f19358bc10b65156aadb1f02c874a1ceb0b64e63dfd1deb1b1d097491bfd6377",
+    "firmware_normalization": "none",
+    "guest_code_transfer": "UART0 raw-paste",
+    "board": "CoreS3",
+    "qemu_machine": "m5cores3",
+    "runtime_profile": "cores3-wasm-uiflow-workbench-wallclock-candidate",
+    "vm_clock_divisor": 1,
+    "one_instruction_per_translation_block": true,
+    "required_runtime_patch": {
+      "path": "patches/qemu-wasm-probe/0027-gpio-bounded-transactions.patch",
+      "sha256": "43685da86d9b959b2e769cd9cda5785a5c4039b5076f73f3b9d6033d1d161bdf"
+    },
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "qemu_browser_glue_sha256": "6bcc744fce174326a4c5639f8c2a00cef214f413ca128d383be526a90cc6876b",
+    "qemu_pthread_worker_sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d",
+    "trace_flags": [
+      "M5SW_CAMERA_TRACE=1",
+      "M5SW_GDMA_TRACE=1"
+    ],
+    "locked_0042_uninstrumented_site_manifest_sha256": "a235569163256aa038e0226ddf61cb2cd269b2d05bd3de4e21e5c5c48ceb9cda",
+    "expected_model_pattern_frame": {
+      "width": 320,
+      "height": 240,
+      "format": "RGB565",
+      "bytes": 153600,
+      "sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e"
+    }
+  },
+  "variants": {
+    "baseline": {
+      "change": "Original 0042 guest WASM with the tracing flags enabled in a private site.",
+      "build_scope": "Locked 0042 source build.",
+      "qemu_wasm": {
+        "sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+        "bytes": 12775685
+      },
+      "site_manifest": {
+        "sha256": "de510ed7ae00b5d3aefee619d02d2a8e6965bbf1e85b5bccf8c8dc0aad6e8bef",
+        "bytes": 439359
+      },
+      "runtime_manifest": {
+        "sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+        "bytes": 36746
+      },
+      "lcd_cam_source_sha256": "45e8d6e9eacd5e5a9a6f9df9d43c4bfd5495a16de4e74dab3fd67166cd5b3a61",
+      "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+      "qemu_asset_source_archive_sha256": "2623420653360d444007f551f657ce8e31b09d55b3257fd693c41e63ae78f38a",
+      "qemu_asset_source_archive_scope": "Locked 0042 baseline control."
+    },
+    "A": {
+      "change": "Schedule the first DMA record asynchronously through the existing millisecond timer, one tick after CAM_START.",
+      "build_scope": "Full guest-object rebuild with reused pinned dependencies.",
+      "qemu_wasm": {
+        "sha256": "57ec1eb20c1d2251f57d3b1dfe4a0fb5da789be3a1ed6a847201505e97ccaf1f",
+        "bytes": 12775747
+      },
+      "site_manifest": {
+        "sha256": "40ebe2c1df3e1524d0f4fc64e9e0d3e7c02de1aead8cc76f66d37857634d916f",
+        "bytes": 440099
+      },
+      "runtime_manifest": {
+        "sha256": "900d5ad4f43ad6ac205285dc33df06431782c42e21102a937317601122d8183b",
+        "bytes": 37486
+      },
+      "lcd_cam_source_sha256": "01d9d6f16715e986401debbe5d65df63e8df5a4197cdcfdd15c16b94bcb07af4",
+      "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+      "qemu_asset_source_archive_sha256": "2623420653360d444007f551f657ce8e31b09d55b3257fd693c41e63ae78f38a",
+      "qemu_asset_source_archive_scope": "Locked 0042 baseline control."
+    },
+    "B": {
+      "change": "Use full relative nanosecond deadlines for the 1 ms capture and acknowledgment retry and 10 ms idle timers.",
+      "build_scope": "Reused A compiler cache and rebuilt the LCD_CAM C translation unit before relinking.",
+      "qemu_wasm": {
+        "sha256": "ec694a3e6170eeedeedf16bdd8554fd2c42acc3e55cf5c9745c945fe9046ab36",
+        "bytes": 12775790
+      },
+      "site_manifest": {
+        "sha256": "4b9163d04d0e70165c734c180eca42e8c7c0d85357dd250fe2cab150884ce891",
+        "bytes": 440489
+      },
+      "runtime_manifest": {
+        "sha256": "2c83dcf8ed08ee9e1652a7900faff4f8975b82ae1512925cb4824139a002e508",
+        "bytes": 37877
+      },
+      "lcd_cam_source_sha256": "882fbf8788c4a584710e8a283690d885f9808eda5dc958e818781b479be760e0",
+      "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+      "qemu_asset_source_archive_sha256": "2623420653360d444007f551f657ce8e31b09d55b3257fd693c41e63ae78f38a",
+      "qemu_asset_source_archive_scope": "Locked 0042 baseline control.",
+      "incremental_parent_wasm_sha256": "57ec1eb20c1d2251f57d3b1dfe4a0fb5da789be3a1ed6a847201505e97ccaf1f"
+    },
+    "C": {
+      "change": "Pace synthetic records by the fraction of RGB frame bytes at a nominal 30 virtual source frames per second. Keep the 1 ms acknowledgment retry and the 10 ms idle cadence.",
+      "build_scope": "Reused B compiler cache and rebuilt the LCD_CAM C translation unit before relinking.",
+      "qemu_wasm": {
+        "sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+        "bytes": 12776005
+      },
+      "site_manifest": {
+        "sha256": "51be880a4a6a21985f557b8c7357d6cc5bbdcd93aed5e8a54c61588ba6974a0e",
+        "bytes": 440491
+      },
+      "runtime_manifest": {
+        "sha256": "ee9ec9a27f7ffd0789fd1a198cd93ea09ddfcee5a52c3464941d0758497e2db8",
+        "bytes": 37879
+      },
+      "lcd_cam_source_sha256": "b75a0d06ea1cd0a790892a6ece4f4e2c022336093cc7700d9aa51a9d3edf9557",
+      "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+      "qemu_asset_source_archive_sha256": "2623420653360d444007f551f657ce8e31b09d55b3257fd693c41e63ae78f38a",
+      "qemu_asset_source_archive_scope": "Locked 0042 baseline control.",
+      "incremental_parent_wasm_sha256": "ec694a3e6170eeedeedf16bdd8554fd2c42acc3e55cf5c9745c945fe9046ab36"
+    }
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "configured_dwell_ms": 12500,
+      "observed_guest_start_to_interrupt_ms": 13714,
+      "trace_filter": "LCD_CAM and camera channel GDMA; MMIO filtered out",
+      "case_status": "GUEST_ERROR_OR_WARNING",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "2261630f512aeca8eaf506a14fe8054671c308559f61be77a2479e496684fed7"
+      },
+      "qemu_wasm_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+      "site_manifest_sha256": "de510ed7ae00b5d3aefee619d02d2a8e6965bbf1e85b5bccf8c8dc0aad6e8bef",
+      "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+      "raw_report": {
+        "sha256": "0fb09f2acceaebc5cf0504dddc3bcd3809eee500365e1a8b70d2d67dcc831ba6",
+        "bytes": 5228735
+      },
+      "raw_filtered_trace": {
+        "sha256": "0482ba93be23086eaed671957fa5f5a4fe416b3842f0b4248c19c8d22793853b",
+        "bytes": 2838923
+      },
+      "metrics": {
+        "retained_trace_events": 11723,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 0,
+        "armed_source_attempts": 311,
+        "ten_source_record_groups": 293,
+        "ten_acknowledged_record_groups": null,
+        "nominal_complete_vsync": 291,
+        "nominal_complete_vsync_with_ten_guest_acks": null,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 2,
+        "true_incomplete_capture_attempts": 18,
+        "guest_stop_before_nominal_vsync": null,
+        "source_record_group_count_histogram": {
+          "2": 6,
+          "3": 3,
+          "4": 5,
+          "5": 1,
+          "7": 1,
+          "9": 2,
+          "10": 293
+        },
+        "short_frame_warnings_uart": 2,
+        "short_frame_warnings_editor": 2,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "baseline",
+      "configured_dwell_ms": 12500,
+      "observed_guest_start_to_interrupt_ms": 13618,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "GUEST_ERROR_OR_WARNING",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+      "site_manifest_sha256": "de510ed7ae00b5d3aefee619d02d2a8e6965bbf1e85b5bccf8c8dc0aad6e8bef",
+      "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+      "raw_report": {
+        "sha256": "43f7604b0bec0073b5733886ff0647a864323fbef1aa4d9429bf824e83e0b1e4",
+        "bytes": 5231621
+      },
+      "raw_filtered_trace": {
+        "sha256": "b2a062994c64a6565ca2904fd28591ec557dc9820ac4b3a8dddb398b3effacd5",
+        "bytes": 4955367
+      },
+      "metrics": {
+        "retained_trace_events": 20287,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 7491,
+        "armed_source_attempts": 380,
+        "ten_source_record_groups": 293,
+        "ten_acknowledged_record_groups": 293,
+        "nominal_complete_vsync": 288,
+        "nominal_complete_vsync_with_ten_guest_acks": 288,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 5,
+        "true_incomplete_capture_attempts": 87,
+        "guest_stop_before_nominal_vsync": 92,
+        "source_record_group_count_histogram": {
+          "2": 35,
+          "3": 19,
+          "4": 19,
+          "5": 7,
+          "6": 4,
+          "7": 1,
+          "8": 2,
+          "10": 293
+        },
+        "short_frame_warnings_uart": 28,
+        "short_frame_warnings_editor": 28,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "A",
+      "configured_dwell_ms": 12500,
+      "observed_guest_start_to_interrupt_ms": 13612,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "EXECUTED_VISIBLE_FRAME",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "57ec1eb20c1d2251f57d3b1dfe4a0fb5da789be3a1ed6a847201505e97ccaf1f",
+      "site_manifest_sha256": "40ebe2c1df3e1524d0f4fc64e9e0d3e7c02de1aead8cc76f66d37857634d916f",
+      "runtime_manifest_sha256": "900d5ad4f43ad6ac205285dc33df06431782c42e21102a937317601122d8183b",
+      "raw_report": {
+        "sha256": "849fcc7320c7fec19640fe13252fe03dd4509a8d15940d20d69ebe9886120f73",
+        "bytes": 5228506
+      },
+      "raw_filtered_trace": {
+        "sha256": "4ccc73c8eeefd3fe2b0e69c2934d095e39a40ec0681afb6bab1de89cadcd03f1",
+        "bytes": 4221576
+      },
+      "metrics": {
+        "retained_trace_events": 17289,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 6119,
+        "armed_source_attempts": 292,
+        "ten_source_record_groups": 287,
+        "ten_acknowledged_record_groups": 287,
+        "nominal_complete_vsync": 285,
+        "nominal_complete_vsync_with_ten_guest_acks": 285,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 2,
+        "true_incomplete_capture_attempts": 5,
+        "guest_stop_before_nominal_vsync": 7,
+        "source_record_group_count_histogram": {
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "10": 287
+        },
+        "short_frame_warnings_uart": 0,
+        "short_frame_warnings_editor": 0,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "A",
+      "configured_dwell_ms": 30000,
+      "observed_guest_start_to_interrupt_ms": 31162,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "EXECUTED_VISIBLE_FRAME",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "57ec1eb20c1d2251f57d3b1dfe4a0fb5da789be3a1ed6a847201505e97ccaf1f",
+      "site_manifest_sha256": "40ebe2c1df3e1524d0f4fc64e9e0d3e7c02de1aead8cc76f66d37857634d916f",
+      "runtime_manifest_sha256": "900d5ad4f43ad6ac205285dc33df06431782c42e21102a937317601122d8183b",
+      "raw_report": {
+        "sha256": "27f5cad7da035defb43c6dc7c845cc350358097d68855be42294e28693aa6283",
+        "bytes": 5228515
+      },
+      "raw_filtered_trace": {
+        "sha256": "2d9e2001200c6145fd55ba50bfd6b73bec85745b388ba84ca86b55b7d310f2de",
+        "bytes": 10371321
+      },
+      "metrics": {
+        "retained_trace_events": 42448,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 15275,
+        "armed_source_attempts": 731,
+        "ten_source_record_groups": 709,
+        "ten_acknowledged_record_groups": 709,
+        "nominal_complete_vsync": 707,
+        "nominal_complete_vsync_with_ten_guest_acks": 707,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 2,
+        "true_incomplete_capture_attempts": 22,
+        "guest_stop_before_nominal_vsync": 24,
+        "source_record_group_count_histogram": {
+          "2": 2,
+          "3": 2,
+          "4": 4,
+          "5": 3,
+          "6": 4,
+          "7": 2,
+          "8": 4,
+          "9": 1,
+          "10": 709
+        },
+        "short_frame_warnings_uart": 0,
+        "short_frame_warnings_editor": 0,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "B",
+      "configured_dwell_ms": 12500,
+      "observed_guest_start_to_interrupt_ms": 13710,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "EXECUTED_VISIBLE_FRAME",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "ec694a3e6170eeedeedf16bdd8554fd2c42acc3e55cf5c9745c945fe9046ab36",
+      "site_manifest_sha256": "4b9163d04d0e70165c734c180eca42e8c7c0d85357dd250fe2cab150884ce891",
+      "runtime_manifest_sha256": "2c83dcf8ed08ee9e1652a7900faff4f8975b82ae1512925cb4824139a002e508",
+      "raw_report": {
+        "sha256": "a4d336b8301934ddb3129a0bdc2e7d2e93b8a748097875a057c84beab12fd654",
+        "bytes": 5228531
+      },
+      "raw_filtered_trace": {
+        "sha256": "bdc3e0e8422433bd4d76ba2d14ce9bb5c04fb023f8baf8a11a09d673dfd88b0e",
+        "bytes": 4105239
+      },
+      "metrics": {
+        "retained_trace_events": 16818,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 6026,
+        "armed_source_attempts": 287,
+        "ten_source_record_groups": 285,
+        "ten_acknowledged_record_groups": 285,
+        "nominal_complete_vsync": 285,
+        "nominal_complete_vsync_with_ten_guest_acks": 285,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 0,
+        "true_incomplete_capture_attempts": 2,
+        "guest_stop_before_nominal_vsync": 2,
+        "source_record_group_count_histogram": {
+          "2": 1,
+          "5": 1,
+          "10": 285
+        },
+        "short_frame_warnings_uart": 0,
+        "short_frame_warnings_editor": 0,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "B",
+      "configured_dwell_ms": 30000,
+      "observed_guest_start_to_interrupt_ms": 31216,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "EXECUTED_VISIBLE_FRAME",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "ec694a3e6170eeedeedf16bdd8554fd2c42acc3e55cf5c9745c945fe9046ab36",
+      "site_manifest_sha256": "4b9163d04d0e70165c734c180eca42e8c7c0d85357dd250fe2cab150884ce891",
+      "runtime_manifest_sha256": "2c83dcf8ed08ee9e1652a7900faff4f8975b82ae1512925cb4824139a002e508",
+      "raw_report": {
+        "sha256": "4dfb9f1af6cbf6e0a0f9612b61455527a9540357766a8d6b49de1dcb8c3fd4f9",
+        "bytes": 5228531
+      },
+      "raw_filtered_trace": {
+        "sha256": "8e2d364f6fcd9d4ea23d2ad85c19984dbbc47b98eafaedcceefe761086405b25",
+        "bytes": 9849995
+      },
+      "metrics": {
+        "retained_trace_events": 40303,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 14613,
+        "armed_source_attempts": 696,
+        "ten_source_record_groups": 693,
+        "ten_acknowledged_record_groups": 693,
+        "nominal_complete_vsync": 693,
+        "nominal_complete_vsync_with_ten_guest_acks": 693,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 0,
+        "true_incomplete_capture_attempts": 3,
+        "guest_stop_before_nominal_vsync": 3,
+        "source_record_group_count_histogram": {
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "10": 693
+        },
+        "short_frame_warnings_uart": 0,
+        "short_frame_warnings_editor": 0,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "C",
+      "configured_dwell_ms": 12500,
+      "observed_guest_start_to_interrupt_ms": 13786,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "EXECUTED_VISIBLE_FRAME",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+      "site_manifest_sha256": "51be880a4a6a21985f557b8c7357d6cc5bbdcd93aed5e8a54c61588ba6974a0e",
+      "runtime_manifest_sha256": "ee9ec9a27f7ffd0789fd1a198cd93ea09ddfcee5a52c3464941d0758497e2db8",
+      "raw_report": {
+        "sha256": "6197c891c63cb898fe7f2a05c066c0ad10499828ed5160b1d2c789694befeaa4",
+        "bytes": 3538622
+      },
+      "raw_filtered_trace": {
+        "sha256": "b5a692f2ac1f652d9427dcc8b05a4cc81cfb0b72d47d5a889f2a56dc6d51aaf4",
+        "bytes": 3740688
+      },
+      "metrics": {
+        "retained_trace_events": 15300,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 5913,
+        "armed_source_attempts": 281,
+        "ten_source_record_groups": 281,
+        "ten_acknowledged_record_groups": 281,
+        "nominal_complete_vsync": 281,
+        "nominal_complete_vsync_with_ten_guest_acks": 281,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 0,
+        "true_incomplete_capture_attempts": 0,
+        "guest_stop_before_nominal_vsync": 0,
+        "source_record_group_count_histogram": {
+          "10": 281
+        },
+        "short_frame_warnings_uart": 0,
+        "short_frame_warnings_editor": 0,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    },
+    {
+      "variant": "C",
+      "configured_dwell_ms": 30000,
+      "observed_guest_start_to_interrupt_ms": 31176,
+      "trace_filter": "LCD_CAM, camera channel GDMA and GDMA MMIO",
+      "case_status": "EXECUTED_VISIBLE_FRAME",
+      "engine_and_runner_sha256": {
+        "engine": "cab30d63ec9e26bcdb906441094b00df6e1c5e1338acef5d34d81b1a2bfbf817",
+        "runner": "4764ca9ba64a02d3f047ab47771ebec98288348f2c74e2c9b436fb8d83265717"
+      },
+      "qemu_wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+      "site_manifest_sha256": "51be880a4a6a21985f557b8c7357d6cc5bbdcd93aed5e8a54c61588ba6974a0e",
+      "runtime_manifest_sha256": "ee9ec9a27f7ffd0789fd1a198cd93ea09ddfcee5a52c3464941d0758497e2db8",
+      "raw_report": {
+        "sha256": "bfed860a09849a2b6267e69206afc272c9321d370e1b12887205309065dead69",
+        "bytes": 5228525
+      },
+      "raw_filtered_trace": {
+        "sha256": "506cb2c26af05c35aa2ddfef0a61409475f76d3e3200cb45108639fdcb49bc4e",
+        "bytes": 8902211
+      },
+      "metrics": {
+        "retained_trace_events": 36367,
+        "dropped_trace_events": 0,
+        "retained_gdma_mmio_events": 14248,
+        "armed_source_attempts": 678,
+        "ten_source_record_groups": 677,
+        "ten_acknowledged_record_groups": 677,
+        "nominal_complete_vsync": 677,
+        "nominal_complete_vsync_with_ten_guest_acks": 677,
+        "ten_groups_without_nominal_vsync_followed_by_recovery_vsync": 0,
+        "true_incomplete_capture_attempts": 1,
+        "guest_stop_before_nominal_vsync": 1,
+        "source_record_group_count_histogram": {
+          "8": 1,
+          "10": 677
+        },
+        "short_frame_warnings_uart": 0,
+        "short_frame_warnings_editor": 0,
+        "overflow_warnings_uart": 0,
+        "overflow_warnings_editor": 0
+      },
+      "raw_rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "frame_png_sha256": "45a6b4987cf9d7bd24bd5336286368d6e90fde9b19380d36ee58e44ea1ee1df1",
+      "cleanup": {
+        "harness_checks_passed": 32,
+        "guest_exit_code": 0,
+        "graceful_guest_exit": true,
+        "pthreads_created": 5,
+        "pthreads_at_guest_exit": 0,
+        "pthreads_closed_before_iframe_removal": true,
+        "all_workers_closed_before_browser_context": true,
+        "iframe_removed": true,
+        "forced_pthread_terminations": 0,
+        "fallback_engine_terminations": 0
+      }
+    }
+  ],
+  "witnesses": {
+    "baseline_first_mmio_short_capture": {
+      "raw_filtered_trace_sha256": "b2a062994c64a6565ca2904fd28591ec557dc9820ac4b3a8dddb398b3effacd5",
+      "same_stop_recovery_warning_pattern_occurrences": 28,
+      "events": [
+        [
+          71,
+          "Bootstrap VSYNC while no GDMA channel is armed."
+        ],
+        [
+          88,
+          "First linked CAM_START. CTRL1 value 0x20803bff, ten record groups."
+        ],
+        [
+          90,
+          "First source IN_SUC_EOF."
+        ],
+        [
+          91,
+          "Guest clears channel 1 IN_SUC_EOF."
+        ],
+        [
+          93,
+          "Second source IN_SUC_EOF."
+        ],
+        [
+          94,
+          "Guest clears channel 1 IN_SUC_EOF."
+        ],
+        [
+          95,
+          "Guest disables channel 1 IN success-EOF interrupt."
+        ],
+        [
+          97,
+          "First guest IN_LINK STOP, value 0x002da544."
+        ],
+        [
+          98,
+          "Camera reports offset 30720 with eight groups remaining."
+        ],
+        [
+          99,
+          "Model issues recovery VSYNC after finding no active channel."
+        ],
+        [
+          102,
+          "Second guest IN_LINK STOP."
+        ],
+        [
+          103,
+          "Guest reports FB-SIZE: 15360 != 153600."
+        ]
+      ],
+      "claim_limit": "The first STOP precedes the recovery VSYNC. The exact guest path issuing the first STOP remains unverified by this trace."
+    },
+    "c_long_window_silent_recovery": {
+      "raw_filtered_trace_sha256": "506cb2c26af05c35aa2ddfef0a61409475f76d3e3200cb45108639fdcb49bc4e",
+      "events": [
+        [
+          25283,
+          "Armed CAM_START with ten record groups."
+        ],
+        [
+          25306,
+          "Eighth source IN_SUC_EOF."
+        ],
+        [
+          25307,
+          "Guest clears eighth success EOF."
+        ],
+        [
+          25310,
+          "Guest IN_LINK STOP, value 0x002da544."
+        ],
+        [
+          25311,
+          "Camera reports offset 122880 with two groups remaining."
+        ],
+        [
+          25312,
+          "No-channel recovery VSYNC. No short-frame or overflow output."
+        ],
+        [
+          25329,
+          "Next armed CAM_START."
+        ],
+        [
+          25359,
+          "Guest acknowledges the tenth group of the next attempt."
+        ],
+        [
+          25361,
+          "Next attempt completes 153600 bytes and emits nominal VSYNC."
+        ]
+      ]
+    }
+  },
+  "c_two_window_totals": {
+    "armed_source_attempts": 959,
+    "nominal_complete_frames_with_ten_guest_acks": 958,
+    "true_incomplete_capture_attempts": 1,
+    "short_frame_warnings_uart": 0,
+    "overflow_warnings_uart": 0
+  }
+}
