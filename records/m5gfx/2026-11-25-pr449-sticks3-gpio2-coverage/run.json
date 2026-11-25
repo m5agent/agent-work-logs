@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #449 review: StickS3 M5PM1 gpio2 function bits and board_t coverage test",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/449",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "34a5756d004a4475c48ba55dcf7725bb1fc367cd",
+    "head_commit": "5b65db1f8a7a66cbe6051c596bd1e78bcf62a4fb",
+    "commits": [
+      "5b65db1f8a7a66cbe6051c596bd1e78bcf62a4fb StickS3: clear the M5PM1 function bits of gpio2, not bit 2",
+      "3e50e3c36ef7cc3a38a6ceb0097a0cd5fac4c506 board_spec: test that every board_t value has a catalog entry and a board definition"
+    ],
+    "diff_scope": "4 files, +134/-3: pmic_ops.hpp, ops_host.cpp, fixtures/s3.txt, new board_id_coverage.test.js",
+    "related": ["https://github.com/m5stack/M5Unified/pull/453"]
+  },
+  "hardware": {},
+  "firmware": {
+    "build": "ESP-IDF v6.1, target esp32s3, 8MB flash, custom partition table (factory 3MB), probe main.cpp with fixed_board = board_M5StickS3",
+    "head_app_sha256": "0cce3364c42a93157aac72ebffceb5d72704fba7e5fcea7ce0182ba0ab1c12cb",
+    "head_merged_sha256": "5113a827c7e7096b9784edba997f3bc293387d7dc90a721aad2ac8e737278bc2",
+    "head_firmware_id": "f68b383ad345c48c4ecf4b89d4ac3655331e422cba4b01b970f8852fb38a3788",
+    "base_app_sha256": "fc18926eff6ffbc9fa8423e1341caa3ca79eb9511ed3766a3a5e7112e389181b",
+    "base_merged_sha256": "298081a284f24177b8624f111d62d62f6ba2d47dd136c1ad3dc5f9e54abd93ce",
+    "base_firmware_id": "02ec766a015da05ce1ba2dcbbb7e95034aff8b99a7e2bb5fcd309b0bc795b410"
+  },
+  "execution": {
+    "environment": "macOS arm64; local Device Service v1; profile sticks3 (qemu-esp32s3 / m5sticks3, ST7789P3 135x240, peripheral_status simulated)",
+    "device_id": "sticks3",
+    "head_session_id": "490d89a96a8d4ae7a39ab1c60daebc69",
+    "base_session_id": "d0815e50ac904db195c9442c8428f8c5",
+    "frame_sha256_both": "fa740237c238837cad63eb351d8330a482364b4bbbe0f4b35e24afb084000357"
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "OPEN, not draft, author ainyan03, English, 0 comments / 0 reviews before this review, MERGEABLE"
+    },
+    {
+      "id": "mask-layout",
+      "status": "PASS",
+      "detail": "M5PM1 GPIO_FUNC0=0x16 covers gpio0..3 with 2 bits per pin; gpio2 = bits 5:4 = mask 0x30 (M5Unified setGPIOFunction: shift=num*2, mask=0x03<<shift)"
+    },
+    {
+      "id": "in-repo-corroboration",
+      "status": "PASS",
+      "detail": "M5GFX.cpp:156/:644 write 0x16 with mask 0xC0 for GPIO3 (bits 7:6); ToughC5 and PaperDIY already use 0x30 for gpio2"
+    },
+    {
+      "id": "sequence-intent",
+      "status": "PASS",
+      "detail": "i2c_bit_off(0x16,0x30) -> gpio function 0b00, then GPIO_MODE(0x10) bit2 output, GPIO_DRV(0x13) bit2 push-pull, GPIO_OUT(0x11) bit2 high; catalog maps pmic gpio2 to dev:lcd.power"
+    },
+    {
+      "id": "synchronised-copies",
+      "status": "PASS",
+      "detail": "production sequence, ops_host legacy keep mask 0xFB->0xCF (mask = ~keep = 0x30), and fixtures/s3.txt variant entry 4->48 all updated; no fourth copy of the StickS3 0x16 write in src/extras/test"
+    },
+    {
+      "id": "host-npm-test",
+      "status": "PASS",
+      "detail": "extras/board_spec npm test -> 222 tests, 217 pass, 0 fail, 5 skipped (M5Unified checkout absent)"
+    },
+    {
+      "id": "host-spec-check",
+      "status": "PASS",
+      "detail": "npm run check -> check passed: 64 board(s), 91 resolved combination(s)"
+    },
+    {
+      "id": "host-board-detect",
+      "status": "PASS",
+      "detail": "test/board_detect/run.sh -> 34/34 C++ test programs passed"
+    },
+    {
+      "id": "snapshot-regeneration",
+      "status": "PASS",
+      "detail": "M5GFX_UPDATE_SNAPSHOTS=1 run.sh leaves git status clean, so the fixtures/s3.txt edit is exactly the generated output"
+    },
+    {
+      "id": "coverage-test-negative",
+      "status": "PASS",
+      "detail": "removing legacy_board_id -> '26 board_M5StickS3: no catalog'; duplicate enum value -> 'board_M5ProbeGhost = 26 repeats the value of another board'; removing the board_entry row -> '26 board_M5StickS3: no definition'"
+    },
+    {
+      "id": "coverage-test-chip-gap",
+      "status": "REVIEW",
+      "detail": "moving the board_entry row from esp32s3_boards[] to esp32p4_boards[] still passes; select_fixed_board() only searches the current target table. 0 catalog chip/table mismatches today, so the assertion can be added without exceptions. Non-blocking"
+    },
+    {
+      "id": "virtual-device-head",
+      "status": "PASS",
+      "detail": "fixed_init=1 board=26 display=135x240; func0_after_init=0x00 gpio2_func=0 gpio1_func=0; 135x240 frame sha256 fa740237...8357"
+    },
+    {
+      "id": "virtual-device-base",
+      "status": "PASS",
+      "detail": "same serial markers and identical frame sha256; the model's 0x16 reset value is 0x00, so this run does not discriminate the two masks"
+    },
+    {
+      "id": "upstream-ci",
+      "status": "PASS",
+      "detail": "40/40 checks pass, including 'Catalog and generated sources' (extras/board_spec npm test), 'host' and the Arduino/IDF build matrix"
+    },
+    {
+      "id": "runtime-autodetect",
+      "status": "NOT RUN",
+      "detail": "the M5GFX detector does not confirm StickS3 on the sticks3 profile (candidate=0); the probe used fixed_board, which runs the same descriptor and power ops"
+    },
+    {
+      "id": "preseeded-func0-scenario",
+      "status": "NOT RUN",
+      "detail": "guest esp_restart produced no second boot and the service POST /reset panicked in the boot path; creating any I2C master bus on port 1 before init() makes fixed startup fail (fixed=26, init=0, no power op executed) even when 0x16 is written back as 0x00"
+    },
+    {
+      "id": "hardware",
+      "status": "NOT RUN",
+      "detail": "no physical StickS3; the author's hardware readback (display starts, 0x16 reads 00 after begin) is quoted, not reproduced"
+    }
+  ],
+  "limits": [
+    "The virtual run cannot discriminate base vs head because the emulator PM1 0x16 resets to 0x00",
+    "A pre-existing non-zero 0x16 across an ESP reset could not be constructed on this profile",
+    "Autodetect path not exercised; fixed_board used",
+    "Physical consequences of the old mask on PM1 gpio1 function were not observed",
+    "PM1 register retention across a real power event is not modelled"
+  ]
+}

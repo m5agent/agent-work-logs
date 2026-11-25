@@ -1,0 +1,39 @@
+# M5Unified facts (m5stack/M5Unified develop @ 96576a1)
+
+## setGPIOFunction: 2 bits per pin, FUNC0=0x16 covers gpio0..gpio3
+  bool M5PM1_Class::setGPIOFunction(gpio_t pin, gpio_function_t function)
+  {
+    if (!is_valid_gpio(pin)
+     || (function != gpio && function != irq && function != special)) { return false; }
+    auto num = gpio_num(pin);
+    auto reg = num < 4 ? M5PM1_REG_GPIO_FUNC0 : M5PM1_REG_GPIO_FUNC1;
+    auto shift = static_cast<std::uint8_t>((num < 4 ? num : num - 4) * 2);
+    std::uint8_t mask = 0x03 << shift;
+    std::uint8_t reg_val = 0;
+    if (!readRegister(reg, &reg_val, 1)) { return false; }   // a folded read would rewrite the other pins of the register
+    reg_val = (reg_val & ~mask) | (static_cast<std::uint8_t>(function) << shift);
+    return writeRegister8(reg, reg_val);
+  }
+
+## register map
+25:  static constexpr const uint8_t M5PM1_REG_GPIO_MODE   = 0x10;
+26:  static constexpr const uint8_t M5PM1_REG_GPIO_OUT    = 0x11;
+28:  static constexpr const uint8_t M5PM1_REG_GPIO_DRV    = 0x13;
+31:  static constexpr const uint8_t M5PM1_REG_GPIO_FUNC0  = 0x16;
+32:  static constexpr const uint8_t M5PM1_REG_GPIO_FUNC1  = 0x17;
+154:    auto reg = num < 4 ? M5PM1_REG_GPIO_FUNC0 : M5PM1_REG_GPIO_FUNC1;
+167:    return mode == output ? bitOn(M5PM1_REG_GPIO_MODE, mask)
+168:                          : bitOff(M5PM1_REG_GPIO_MODE, mask);
+188:    return drive == open_drain ? bitOn(M5PM1_REG_GPIO_DRV, mask)
+189:                               : bitOff(M5PM1_REG_GPIO_DRV, mask);
+196:    return high ? bitOn(M5PM1_REG_GPIO_OUT, mask) : bitOff(M5PM1_REG_GPIO_OUT, mask);
+221:    if (!readRegister(M5PM1_REG_GPIO_OUT, &v, 1)) { return false; }
+
+## gpio_function_t (gpio = 0b00)
+    { gpio    = 0b00
+    , irq     = 0b01
+      // 0b10 is reserved in the datasheet.
+    , special = 0b11
+    };
+
+    /// PM1 GPIO pull-up/pull-down setting.

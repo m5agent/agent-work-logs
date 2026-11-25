@@ -1,0 +1,99 @@
+# PR 449 code facts (head 5b65db1, base 34a5756 = develop tip)
+
+## 1. Changed mask
+diff --git a/src/board_detect/m5/pmic_ops.hpp b/src/board_detect/m5/pmic_ops.hpp
+index 2b31023..f959b65 100644
+--- a/src/board_detect/m5/pmic_ops.hpp
++++ b/src/board_detect/m5/pmic_ops.hpp
+@@ -86,7 +86,7 @@ namespace pmic_ops
+   };
+   static constexpr ops::op_t sticks3_power_on[] = {
+     ops::i2c_write8(0, 0x09, 0x00),
+-    ops::i2c_bit_off(0, 0x16, 0x04),
++    ops::i2c_bit_off(0, 0x16, 0x30), // gpio2 function (2 bits per pin): gpio
+     ops::i2c_bit_on(0, 0x10, 0x04),
+     ops::i2c_bit_off(0, 0x13, 0x04),
+     ops::i2c_bit_on(0, 0x11, 0x04),
+
+## 2. The op helper: i2c_bit_off(dev, reg, bits) = masked write value 0, mask bits
+  constexpr op_t i2c_bit_on(std::uint8_t dev, std::uint16_t reg, std::uint8_t bits)
+  {
+    return i2c_masked8(dev, reg, bits, bits);
+  }
+
+  constexpr op_t i2c_bit_off(std::uint8_t dev, std::uint16_t reg, std::uint8_t bits)
+  {
+    return i2c_masked8(dev, reg, 0, bits);
+  }
+
+## 3. Same 0x16 with 0x30 already used by ToughC5 / PaperDIY
+89:    ops::i2c_bit_off(0, 0x16, 0x30), // gpio2 function (2 bits per pin): gpio
+117:    ops::i2c_bit_off(0, 0x16, 0x30), ops::i2c_bit_on(0, 0x10, 0x04),
+195:    ops::i2c_bit_off(0, 0x16, 0x30), ops::i2c_bit_on(0, 0x10, 0x04),
+201:    ops::i2c_bit_off(0, 0x16, 0xC3), ops::i2c_bit_on(0, 0x10, 0x09),
+
+## 4. M5GFX itself encodes the 2-bit-per-pin layout for GPIO3 (bits 7:6 = 0xC0)
+156:      lgfx::i2c::writeRegister8(_port, _addr, 0x16, 0xC0, 0x3F, _freq);
+644:      lgfx::i2c::bitOn(_port, _addr, 0x16, 0xC0, _freq);
+
+## 5. Catalog says PM1 gpio2 drives LCD power
+{
+ "gpio2": {
+  "roles": [
+   "dev:lcd.power"
+  ]
+ },
+ "gpio3": {
+  "roles": [
+   "dev:speaker.enable"
+  ]
+ },
+ "pwrkey": {
+  "roles": [
+   "dev:btn_pwr.in"
+  ]
+ }
+}
+
+## 6. Snapshot line for the StickS3 variant (reg 22 = 0x16, mask 48 = 0x30)
+26 M5StickS3 0
+power -1 1 100000 200 200 200 0
+device 100000 0 110 0 1 1
+variant 110 0 0 0 17 4 17 4 0 0 0 [4:0,9,0,255;6:0,22,0,48;6:0,16,4,4;6:0,19,0,4;6:0,17,4,4;][][]
+
+## 7. ops_host legacy copy + comment
+// 0x16 differs from the legacy sequence on purpose: the M5PM1 function
+// registers use 2 bits per pin, so gpio2 is cleared with bits 5:4 (keep 0xCF),
+// not bit 2 (keep 0xFB, which changed the function of gpio1).
+static const legacy_write_t legacy_sticks3[] = {
+  { 0x6E, 0x09, 0x00, 0x00 }, { 0x6E, 0x16, 0x00, 0xCF },
+  { 0x6E, 0x10, 0x04, 0xFF }, { 0x6E, 0x13, 0x00, 0xFB },
+  { 0x6E, 0x11, 0x04, 0xFF },
+};
+
+## 8. New coverage test
+     128 extras/board_spec/test/board_id_coverage.test.js
+test("every board_t value has a catalog entry and a board definition", async (t) => {
+  const names = parseBoardEnum(await fs.readFile(path.join(src, "lgfx/boards.hpp"), "utf8"));
+
+  const catalog = new Set();
+  const boardDir = path.join(specRoot, "boards");
+  for (const f of (await fs.readdir(boardDir)).filter((f) => f.endsWith(".json"))) {
+    const id = JSON.parse(await fs.readFile(path.join(boardDir, f), "utf8")).legacy_board_id;
+    if (id !== undefined) catalog.add(id);
+  }
+
+  const detected = new Set();
+  // A board definition is a board_desc_t whose address is listed in one of the
+  // board_entry_t <chip>_boards[] tables, which select_fixed_board() searches.
+  const detect = stripCode(await readTree(path.join(src, "board_detect/m5")));
+  const descId = new Map();
+  for (const m of detect.matchAll(/\bboard_desc_t\s+(desc_\w+)\s*=\s*\{\s*\{\s*(?:id|static_cast\s*<\s*board_id_t\s*>)\s*\(\s*lgfx::(board_\w+)\s*\)/g)) {
+    assert.ok(names.has(m[2]), `${m[1]} refers to unknown ${m[2]}`);
+    descId.set(m[1], names.get(m[2]));
+  }
+  const tables = [...detect.matchAll(/\bboard_entry_t\s+\w+_boards\s*\[\s*\]\s*=\s*\{([\s\S]*?)\n\s*\}\s*;/g)];
+  assert.ok(tables.length > 0, "no board_entry_t tables found");
+  for (const table of tables) {
+    for (const m of table[1].matchAll(/\{\s*&\s*(\w+)\s*,/g)) {
+      assert.ok(descId.has(m[1]), `cannot find the board id of ${m[1]}`);
