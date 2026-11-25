@@ -97,6 +97,9 @@
 ## 已发布回复
 
 - <https://github.com/m5stack/M5GFX/pull/449#issuecomment-7167555249>
-  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
-- 公开记录 permalink（评论引用）：`ca69af7`（`records/m5gfx/2026-11-25-pr449-sticks3-gpio2-coverage/README.md`）；
+  （第一轮，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
+- <https://github.com/m5stack/M5GFX/pull/449#issuecomment-7177037085>
+  （第二轮，英文，仅回 `0a5dca5` 与实机读数的新增内容；PR 仍 OPEN）
+- 公开记录 permalink（第一轮评论引用）：`ca69af7`；第二轮评论引用：`6c3d561`
+  （`records/m5gfx/2026-11-25-pr449-sticks3-gpio2-coverage/README.md`）；
   本条“已发布回复”为同一记录的后续提交，不改变结论。
