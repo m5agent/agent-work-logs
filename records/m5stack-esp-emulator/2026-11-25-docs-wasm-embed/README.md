@@ -14,3 +14,5 @@
 - [脱敏浏览器与固件证据](evidence/embed-and-editor-summary.json)
 
 正式文档站部署、真机、跨浏览器兼容性和完整例程矩阵属于后续验证。
+
+[UIFlow2 摄像头和 LoRa Cap 例程复现](followups/2026-11-25-uiflow-camera-and-lora/)
