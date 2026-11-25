@@ -4,6 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`issue`
 - 问题来源：https://github.com/m5stack/StackChan/issues/139
+- GitHub 回复：https://github.com/m5stack/StackChan/issues/139#issuecomment-7150663269
 - 源码版本：`m5stack/StackChan @ 28b9f0c8bd6acd81cb3c70f1a93c3e373b39d400`（main，v1.6.2）
 - 环境：macOS；只读 sparse clone（`app`/`firmware`/`server`）；本机 Device Service 设备列表只读查询；
   未使用任何 xiaozhi 账号凭据

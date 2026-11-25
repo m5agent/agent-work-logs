@@ -106,11 +106,16 @@ App 下拉不会显示它。这是客户端与服务端的一处不对称，可�
 
 ## 6. 处理方式
 
-只向原 issue 发布一条英文回复（跟随原帖语言），说明：
+只向原 issue 发布一条英文回复（跟随原帖语言）：
+https://github.com/m5stack/StackChan/issues/139#issuecomment-7150663269
 
-- 机制结论与代码位置；
-- 该请求不受 App 映射表控制，属于平台侧语音目录能力；
-- 设备界面已有 pt-PT，可作为过渡；
-- 明确写出 code-level verification 层级与未执行项。
+回复内容：
 
-issue 保持 OPEN，不关闭、不改动仓库。
+- 确认作者判断：下拉由 `tts_voices` key 驱动，`value_constant.dart` 只是显示名，加条目不会产生选项；
+- 给出数据来源、提交路径与服务端同源代码位置；
+- 说明固件 UI 的 pt-PT 是界面语言，与对话语言无关，可作为过渡；
+- 指出 App 只取 `tts_voices`、服务端合并 `languages`+`tts_voices` 的不对称，以及 `pt-BR` 独立 key
+  会先以原始 code 显示，作为后续改进点而非本次原因；
+- 明确 `code-level verification` 层级与 `NOT RUN` 项，未给时间承诺。
+
+issue 保持 OPEN，未关闭、未改动任何仓库。
