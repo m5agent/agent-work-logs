@@ -1,0 +1,13 @@
+commit 0a5dca553b40c550db89c7c4b2d7105c3a1bbd60
+Author: ainyan03 <205502311+ainyan03@users.noreply.github.com>
+Date:   Wed Nov 25 21:52:17 2026 +0000
+
+    board_spec: require the board definition in the table of its catalog chip
+    
+    select_fixed_board() only searches the table of the target chip, so a
+    definition in another chip's table leaves the board unselectable on its
+    own chip. Compare the <chip> of each board_entry_t <chip>_boards[] table
+    that registers a board with the chip in its catalog entry.
+
+ extras/board_spec/test/board_id_coverage.test.js | 33 +++++++++++++++++-------
+ 1 file changed, 24 insertions(+), 9 deletions(-)

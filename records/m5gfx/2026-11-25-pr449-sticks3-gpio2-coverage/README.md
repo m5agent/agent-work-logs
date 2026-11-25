@@ -29,6 +29,28 @@
 这种错放会让本机不可选、错机可选。当前 64 块板 catalog `chip` 与所在表 0 处不一致，
 补这条断言不需要白名单。
 
+## 第二轮复核（head `0a5dca553b40c550db89c7c4b2d7105c3a1bbd60`）
+
+作者以 `0a5dca5` 响应上轮建议，并在评论中给出预置 `0x16 = 0xFC` 的真机对照。m5agent
+在该 head 上只读复核：
+
+- 新校验把每块板的 catalog `chip` 与“所有登记它的 `<chip>_boards[]` 表名”做集合相等
+  比较。实测把 StickS3 表项从 `esp32s3_boards[]` 移到 `esp32p4_boards[]` 会失败：
+  `26 board_M5StickS3: catalog chip [esp32s3], defined in the tables of [esp32p4]`；
+  两表同时登记也会失败：`... [esp32p4, esp32s3]`。两种方向（错表、重复）都覆盖，
+  与作者描述一致。
+- 当前 64 块板无需例外：`npm run check` 仍为 64 boards / 91 combinations；
+  `board_id_coverage` 单测通过，仅打印 `156: M5StampP4X` 的 pre-release 提示。
+- `npm test` 222 tests / 217 pass / 0 fail / 5 skipped（缺 M5Unified checkout）；
+  `test/board_detect/run.sh` 34/34。本轮只改测试文件，无生成物变化。
+- 真机数值自洽性核对：`0x16=0xFC` 时，base 的 M5GFX `i2c_bit_off(0x16, 0x04)`（bit2）
+  与 M5Unified `bitOff(0x16, 1 << 3)`（bit3）合起来正好清掉 gpio1 的 bit3:2 → `F0`；
+  修复后 M5GFX 清 bit5:4、M5Unified#453 清 bit7:6 → `0C`，gpio1 的 `11` 保持不变。
+  这与“base 改坏 gpio1、修复转向 gpio2/gpio3”的诊断一致，是上一轮缺的区分性证据。
+
+结论：上轮建议已闭合，未发现新的阻塞问题。真机读数仍为作者引用；本机无 StickS3 实物，
+虚拟设备也无法预置 `0x16`（原因见未覆盖项），故本记录证据等级不变。
+
 ## 关键证据
 
 - 虚拟设备（`sticks3` profile）：同一探针固件，head 与 base 都 `fixed_init=1 board=26
@@ -57,6 +79,9 @@
 - `evidence/mutation-*.txt`：覆盖测试的四组变异验证
 - `evidence/harness-main.cpp`：探针固件 `main.cpp`
 - `evidence/device-profile.json`、`evidence/pr-metadata.json`
+- 第二轮（`0a5dca5`）：`evidence/followup-*.txt`，含 head SHA、提交与测试 diff、
+  单测通过输出、move-to-P4 与 both-tables 两组变异输出、`npm test` / `npm run check`
+  输出、`0x16` 新旧掩码与 M5Unified#453 对照。
 
 ## 未覆盖项
 

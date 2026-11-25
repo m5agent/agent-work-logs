@@ -129,6 +129,11 @@
     "Physical consequences of the old mask on PM1 gpio1 function were not observed",
     "PM1 register retention across a real power event is not modelled"
   ],
+  "followup": {
+    "head_commit": "0a5dca553b40c550db89c7c4b2d7105c3a1bbd60",
+    "status": "PASS",
+    "detail": "0a5dca5 requires each registering <chip>_boards[] table to match the catalog chip; verified pass at head, failure on move-to-P4 and on listing in both tables; npm test 222/217/0/5, check 64 boards/91 combinations, run.sh 34/34; the author's preseeded 0x16=0xFC readback (base F0, fixed 0C) is quoted and consistent with the base bit2+bit3 gpio1 defects"
+  },
   "published": {
     "comment_url": "https://github.com/m5stack/M5GFX/pull/449#issuecomment-7167555249",
     "comments": 1,
