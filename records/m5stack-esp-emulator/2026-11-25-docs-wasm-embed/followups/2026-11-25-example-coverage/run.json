@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3 and Cardputer-Adv documentation example coverage in WASM",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "arduino": "evidence/arduino/arduino-matrix.summary.json",
+    "uiflow2": "evidence/uiflow2-index.summary.json"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS with hosted HTTPS and isolated static exports",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "Arduino firmware build and browser launch",
+      "status": "PASS",
+      "count": 26
+    },
+    {
+      "name": "Arduino default browser behavior",
+      "status": "PARTIAL",
+      "pass": 4,
+      "partial": 8,
+      "fail": 14
+    },
+    {
+      "name": "ESP-IDF CoreS3 BSP visual cases",
+      "status": "FAIL",
+      "count": 4
+    },
+    {
+      "name": "UIFlow2 board-targeted Python coverage",
+      "status": "PARTIAL",
+      "attempted": 99,
+      "inventory": 208
+    },
+    {
+      "name": "Production docs iframe activation",
+      "status": "FAIL"
+    },
+    {
+      "name": "Narrow layout and isolated desktop input",
+      "status": "PARTIAL"
+    }
+  ],
+  "evidence": [
+    "evidence/arduino/arduino-matrix.summary.json",
+    "evidence/uiflow2-index.summary.json",
+    "evidence/embed-ux-summary.json"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arduino documentation WASM validation snapshot",
+  "description": "Direct official sketch builds with independently bound default-browser attempts. The prototype companion gives results for distinct library, fixture, or attachment configurations.",
+  "type": "object",
+  "required": ["schema_version", "validation", "date", "scope", "build_toolchain", "default_wasm_counts", "cases", "standalone_prototype_evidence"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "validation": {"const": "virtual-device validation"},
+    "date": {"type": "string", "format": "date"},
+    "scope": {"type": "object", "required": ["documentation_revision", "direct_example_count", "inline_sketch_count", "direct_library_example_count", "accessory_guides", "accessory_examples"]},
+    "build_toolchain": {"type": "object", "required": ["arduino_cli", "m5stack_board_package", "direct_library_versions"]},
+    "default_wasm_counts": {
+      "type": "object", "required": ["cores3", "cardputer-adv"], "additionalProperties": false,
+      "properties": {"cores3": {"$ref": "#/$defs/counts"}, "cardputer-adv": {"$ref": "#/$defs/counts"}}
+    },
+    "cases": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/case"}},
+    "standalone_prototype_evidence": {"const": "prototype-controls.summary.json"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "counts": {"type": "object", "propertyNames": {"enum": ["PASS", "PARTIAL", "FAIL", "NOT RUN"]}, "additionalProperties": {"type": "integer", "minimum": 0}},
+    "case": {
+      "type": "object",
+      "required": ["board", "case", "docs_url", "source_sha256", "build", "expected", "default_wasm", "observed", "default_attempts"],
+      "properties": {
+        "board": {"enum": ["cores3", "cardputer-adv"]},
+        "case": {"type": "string", "minLength": 1},
+        "docs_url": {"type": "string", "pattern": "^https://docs\\.m5stack\\.com/en/"},
+        "source_sha256": {"$ref": "#/$defs/hash"},
+        "build": {"const": "PASS"},
+        "binary_sha256": {"$ref": "#/$defs/hash"},
+        "binary_bytes": {"type": "integer", "minimum": 1},
+        "chip_id": {"const": 9},
+        "segment_offsets": {"const": ["0x0", "0x8000", "0xe000", "0x10000"]},
+        "expected": {"type": "string", "minLength": 1},
+        "observed": {"type": "string", "minLength": 1},
+        "default_wasm": {"enum": ["PASS", "PARTIAL", "FAIL", "NOT RUN"]},
+        "default_attempts": {"type": "array", "items": {"$ref": "#/$defs/attempt"}}
+      },
+      "allOf": [{"if": {"properties": {"default_wasm": {"enum": ["PASS", "PARTIAL", "FAIL"]}}}, "then": {"properties": {"default_attempts": {"contains": {"properties": {"guest_started": {"const": true}}, "required": ["guest_started"]}}}}}]
+    },
+    "attempt": {
+      "type": "object",
+      "required": ["attempt", "report_sha256", "guest_started", "firmware_input_sha256", "runtime_flash_sha256", "runtime_wasm_sha256", "runtime_source_commit", "runtime_profile", "accepted_inputs", "workers", "serial_and_power_markers"],
+      "properties": {
+        "attempt": {"enum": ["initial_default", "default_retry"]},
+        "report_sha256": {"$ref": "#/$defs/hash"},
+        "guest_started": {"type": "boolean"},
+        "firmware_input_sha256": {"$ref": "#/$defs/hash"},
+        "runtime_flash_sha256": {"$ref": "#/$defs/hash"},
+        "runtime_wasm_sha256": {"$ref": "#/$defs/hash"},
+        "runtime_source_commit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+        "runtime_profile": {"type": "string", "minLength": 1},
+        "accepted_inputs": {"type": "array", "items": {"type": "object", "required": ["type"]}},
+        "guest_events": {"type": "array", "items": {"type": "object", "required": ["event"]}},
+        "workers": {"type": "object"},
+        "serial_and_power_markers": {"type": "array", "items": {"type": "string"}},
+        "last_frame": {
+          "type": ["object", "null"],
+          "properties": {"rgb565_sha256": {"$ref": "#/$defs/hash"}}
+        }
+      }
+    }
+  }
+}

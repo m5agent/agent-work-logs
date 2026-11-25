@@ -1,0 +1,170 @@
+{
+  "scope": "Virtual-device validation (browser WASM). Three independent sessions on exact combined site and firmware.",
+  "runtime": {
+    "device": "cores3",
+    "board": "m5cores3",
+    "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "flash_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+    "source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "site_manifest_sha256": "2184c378192504367bb2000afb154c3420d14ef7b397dbd3de4033fe58bf6ca9"
+  },
+  "repro_sources": {
+    "guest-machine-reset": "import machine\nprint(\"M5_GUEST_SOFT_RESET_START\")\nmachine.reset()\n",
+    "guest-watchdog-expiry": "m5stack/uiflow-micropython patch 73696ca95594646f09a39e4f525b20cf5cc550e5, examples/hardware/wdt/wdt_cores3_example.py, with no touch input",
+    "controlled-host-reset": "Built-in platform/tests/test_public_uiflow_guest.mjs controlled reset lane"
+  },
+  "runs": [
+    {
+      "case": "controlled-host-reset",
+      "source_sha256": "1152d35acde94701ed9c0af881bf173a9ea42534c7014f3838dc1797e6641a40",
+      "before_console_epoch": 0,
+      "after_console_epoch": 1,
+      "old_program_cancelled": "AbortError",
+      "reset_events": [
+        {
+          "event": "RESET",
+          "reason": "host-qmp-system-reset",
+          "guest": false,
+          "consoleEpoch": 1
+        }
+      ],
+      "post_reset_serial_markers": [
+        "rst:0x1 (POWERON)",
+        "entry 0x403c8890",
+        "M5_UIFLOW_WORKBENCH_READY"
+      ],
+      "new_repl_test_started_ms_after_reset": 15071,
+      "new_repl_program_observed": true,
+      "cleanup_exit_code": 0,
+      "cdp_targets_closed": true
+    },
+    {
+      "case": "guest-machine-reset",
+      "source_sha256": "34f505e20376343b9e41bc7b915b8a1b122bdb188c0df3f184d32f5efcd42e87",
+      "before_console_epoch": 0,
+      "after_console_epoch": 2,
+      "old_program_cancelled": "AbortError",
+      "same_browser_guest_generation": true,
+      "reset_events": [
+        {
+          "event": "RESET",
+          "reason": "guest-reset",
+          "guest": true,
+          "consoleEpoch": 1
+        },
+        {
+          "event": "RESET",
+          "reason": "guest-reset",
+          "guest": true,
+          "consoleEpoch": 2
+        }
+      ],
+      "trigger_before_reset_marker_line_indexes": {
+        "M5_UIFLOW_WORKBENCH_READY": [
+          10
+        ],
+        "RTC_SW_CPU_RST": [
+          62
+        ],
+        "entry 0x403c8890": [
+          8,
+          68
+        ],
+        "mpy_machine_wdt": [],
+        "M5_GUEST_SOFT_RESET_START": [
+          59
+        ]
+      },
+      "first_to_last_reset_events_ms": 2,
+      "observation_bound_ms": 130000,
+      "post_reset_observed_ms": 131051,
+      "post_reset_serial_lines": [
+        "ESP-ROM:esp32s3-20210327",
+        "Build:Mar 27 2021",
+        "rst:0xc (RTC_SW_CPU_RST),boot:0x4 (SPI_FLASH_BOOT)",
+        "SPIWP:0xee",
+        "mode:DIO, clock div:1",
+        "load:0x3fce2820,len:0xcf8",
+        "load:0x403c8700,len:0xb34",
+        "load:0x403cb700,len:0x2d18",
+        "entry 0x403c8890"
+      ],
+      "post_reset_byte_count": 232,
+      "post_reset_ready_marker_count": 0,
+      "post_reset_state": "booting",
+      "run_button_disabled": true,
+      "same_guest_editor_resumed": false,
+      "retained_frame_sequence": {
+        "sequence": 4
+      },
+      "cleanup_exit_code": 0,
+      "cdp_targets_closed": true
+    },
+    {
+      "case": "guest-watchdog-expiry",
+      "source_sha256": "741f27a3801f312125da258aa58bfb2a3610e458c3bc6285380b7c4d9c7a813a",
+      "before_console_epoch": 0,
+      "after_console_epoch": 2,
+      "old_program_cancelled": "AbortError",
+      "same_browser_guest_generation": true,
+      "reset_events": [
+        {
+          "event": "RESET",
+          "reason": "guest-reset",
+          "guest": true,
+          "consoleEpoch": 1
+        },
+        {
+          "event": "RESET",
+          "reason": "guest-reset",
+          "guest": true,
+          "consoleEpoch": 2
+        }
+      ],
+      "trigger_before_reset_marker_line_indexes": {
+        "M5_UIFLOW_WORKBENCH_READY": [
+          10
+        ],
+        "RTC_SW_CPU_RST": [
+          97
+        ],
+        "entry 0x403c8890": [
+          8,
+          103
+        ],
+        "mpy_machine_wdt": [
+          60
+        ],
+        "M5_GUEST_SOFT_RESET_START": []
+      },
+      "first_to_last_reset_events_ms": 2,
+      "observation_bound_ms": 180000,
+      "post_reset_observed_ms": 180739,
+      "post_reset_serial_lines": [
+        "ESP-ROM:esp32s3-20210327",
+        "Build:Mar 27 2021",
+        "rst:0xc (RTC_SW_CPU_RST),boot:0x4 (SPI_FLASH_BOOT)",
+        "SPIWP:0xee",
+        "mode:DIO, clock div:1",
+        "load:0x3fce2820,len:0xcf8",
+        "load:0x403c8700,len:0xb34",
+        "load:0x403cb700,len:0x2d18",
+        "entry 0x403c8890"
+      ],
+      "post_reset_byte_count": 232,
+      "post_reset_ready_marker_count": 0,
+      "post_reset_state": "booting",
+      "run_button_disabled": true,
+      "same_guest_editor_resumed": false,
+      "retained_frame_sequence": {
+        "sequence": 28
+      },
+      "cleanup_exit_code": 0,
+      "cdp_targets_closed": true
+    }
+  ],
+  "attribution": "The failed guest reset path produced a new ROM UART stream through bootloader entry, then neither new application readiness nor a usable editor. The host QMP reset produces new readiness and actual code execution. Duplicate guest QMP reset notifications and differing ROM reset cause distinguish paths. The precise guest stall location and whether a reset-mask, interrupt, CPU or peripheral state causes it remain unestablished."
+}

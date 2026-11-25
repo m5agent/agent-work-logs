@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer-Adv browser board probe and CoreS3 reset and SDK controls",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3",
+    "board_probe_candidate": "a4acad976d3ee821820d156ebdc315e7711ceb5a"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS, source-built WASM and static site",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "Cardputer-Adv original Arduino display and actual DOM keyboard",
+      "status": "PASS"
+    },
+    {
+      "name": "ADV UIFlow2 and K132/Cores3 sample regressions",
+      "status": "PASS"
+    },
+    {
+      "name": "CoreS3 guest-initiated warm restart",
+      "status": "FAIL"
+    },
+    {
+      "name": "CoreS3 hosted QMP restart control",
+      "status": "PASS"
+    },
+    {
+      "name": "CoreS3 UIFlow2 v2.5.5 graphics and button with pinned normal clock",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/cardputer-adv-board-probe-summary.json",
+    "evidence/cores3-guest-reset-summary.json",
+    "evidence/cores3-uiflow-v255-preview-summary.json"
+  ]
+}

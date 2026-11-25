@@ -13,7 +13,7 @@
 - [结构化记录](run.json)
 - [脱敏浏览器与固件证据](evidence/embed-and-editor-summary.json)
 
-正式文档站部署、真机、跨浏览器兼容性和完整例程矩阵属于后续验证。
+逐例覆盖和演示范围见下文。正式文档托管接入、其他浏览器和真机仍待验收。
 
 [UIFlow2 摄像头和 LoRa Cap 例程复现](followups/2026-11-25-uiflow-camera-and-lora/)
 
@@ -30,3 +30,7 @@
 [CoreS3 UIFlow2 ADC、GPIO、WDT、UART 示例修复](followups/2026-11-25-uiflow-sdk-example-repairs/)
 
 [定时唤醒、RTC 和 microSD 实测](followups/2026-11-25-wakeup-and-storage/)
+
+[已盘点的例程矩阵和演示范围](followups/2026-11-25-example-coverage/)
+
+[ADV 板号探测回归、CoreS3 热复位及 v2.5.5 预览](followups/2026-11-25-board-probe-and-guest-reset/)

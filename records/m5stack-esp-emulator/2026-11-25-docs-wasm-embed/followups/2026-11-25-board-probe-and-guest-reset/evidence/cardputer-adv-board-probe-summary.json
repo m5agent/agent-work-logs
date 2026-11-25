@@ -1,0 +1,478 @@
+{
+  "kind": "Cardputer-ADV GPIO board discovery and browser regression",
+  "validation": "virtual-device validation (browser WASM)",
+  "hardware": "NOT RUN",
+  "date": "2026-11-25",
+  "project_base": "afd1c635fa702b201508a5d5d689cb67ed1243f3",
+  "candidate_source": "a4acad976d3ee821820d156ebdc315e7711ceb5a",
+  "qemu_source": "40edccac415693c5130f91c01d84176ae6008566",
+  "wasm_patch": {
+    "path": "patches/qemu-wasm-probe/0039-cardputer-adv-gpio-board-detect.patch",
+    "sha256": "006ae17f94f3f86f8571626e08c44e54bd67e1bb55905317711240a3df46a836"
+  },
+  "wasm_source_lock_sha256": "4d747910dc95b597bc54c9cdd69f688b57616f2615f3015c5800435784a07f63",
+  "emscripten": "3.1.50",
+  "full_object_rebuild": true,
+  "wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+  "baseline_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+  "public_site_manifest_sha256": "3b6a046cae3b9bcb7e47e2829784a4941e9f086d74ece8473ea32ca6af738f10",
+  "browser": "158.0.8127.37",
+  "scope": [
+    "Unmodified Arduino Display and Keyboard examples compiled with their pinned build inputs.",
+    "Browser runtime sequence, guest pixels, real UI key press/release, QMP exit, and independent DevTools cleanup.",
+    "Host I2C/SPI layer selection is specific to Cardputer-ADV. No Pages publication or physical validation."
+  ],
+  "same_firmware_comparisons": [
+    {
+      "example": "display",
+      "input_sha256": "cc1b3e5868feb075e2ec8a5e7211897e8ae1c9635f5d072442ef007273c2a968",
+      "guest_flash_sha256": "11f3a15f19b3c5fd759e34773a17f84bf5ffb7ec8e05c99d4b97e19e73241c4b",
+      "profile": "cardputer-adv-wasm-wallclock",
+      "clock_divisor": 1,
+      "before": {
+        "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "frame": {
+          "sequence": 2,
+          "width": 240,
+          "height": 135,
+          "source": "qemu-display-surface-shared",
+          "source_sequence": 6,
+          "distinct_colors": 1,
+          "hash": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "exit_code": 0,
+        "targets": 6,
+        "targets_left": 0,
+        "guest_board_error": "[error] Keyboard: Unsupported board type: 136",
+        "guest_panic": "Guru Meditation Error: Core  1 panic'ed (IntegerDivideByZero). Exception was unhandled.",
+        "guest_resets": 2
+      },
+      "after": {
+        "wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+        "frame": {
+          "sequence": 173,
+          "width": 240,
+          "height": 135,
+          "source": "qemu-display-surface-shared",
+          "source_sequence": 1002,
+          "distinct_colors": 111,
+          "hash": "30b747ed63d7fa6380efc26d479ae81608cd99e3079314d553b41dd15f32c3a8"
+        },
+        "exit_code": 0,
+        "targets": 6,
+        "targets_left": 0,
+        "guest_board_error": null,
+        "guest_panic": null,
+        "guest_resets": 0,
+        "first_nonuniform_ms": 7332,
+        "distinct_frame_pixels_sha_count": 170,
+        "inputs": [],
+        "final_png_sha256": "9efb9ca8396ff1ab07f22a2f3c33015e8a000c321fea2dedeb7430d2b670da95"
+      }
+    },
+    {
+      "example": "keyboard",
+      "input_sha256": "f7edb36bb3662506853773399467841a55bef3d3e16cc3469bc821b4ad7638bf",
+      "guest_flash_sha256": "139a18a7fb9149d947d2e3a3c92c0fd51709494bff598e3418c4b891ea4f414b",
+      "profile": "cardputer-adv-wasm-wallclock",
+      "clock_divisor": 1,
+      "before": {
+        "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "frame": {
+          "sequence": 1,
+          "width": 240,
+          "height": 135,
+          "source": "qemu-display-surface-shared",
+          "source_sequence": 6,
+          "distinct_colors": 1,
+          "hash": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        },
+        "exit_code": 0,
+        "targets": 6,
+        "targets_left": 0,
+        "guest_board_error": "[error] Keyboard: Unsupported board type: 136",
+        "guest_panic": null,
+        "guest_resets": 0
+      },
+      "after": {
+        "wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+        "frame": {
+          "sequence": 17,
+          "width": 240,
+          "height": 135,
+          "source": "qemu-display-surface-shared",
+          "source_sequence": 56,
+          "distinct_colors": 3,
+          "hash": "70964200d989b2d2b9feafb7bed2ef0487d1251003bb7ead161778d71e8029a5"
+        },
+        "exit_code": 0,
+        "targets": 6,
+        "targets_left": 0,
+        "guest_board_error": null,
+        "guest_panic": null,
+        "guest_resets": 0,
+        "first_nonuniform_ms": 5319,
+        "distinct_frame_pixels_sha_count": 12,
+        "inputs": [
+          {
+            "at": "2026-11-25T10:02:23.249Z",
+            "type": "key",
+            "key": "a",
+            "down": true,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:23.611Z",
+            "type": "key",
+            "key": "a",
+            "down": false,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:24.075Z",
+            "type": "key",
+            "key": "b",
+            "down": true,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:24.440Z",
+            "type": "key",
+            "key": "b",
+            "down": false,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:24.903Z",
+            "type": "key",
+            "key": "c",
+            "down": true,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:25.263Z",
+            "type": "key",
+            "key": "c",
+            "down": false,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:25.725Z",
+            "type": "key",
+            "key": "backspace",
+            "down": true,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:26.090Z",
+            "type": "key",
+            "key": "backspace",
+            "down": false,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:26.553Z",
+            "type": "key",
+            "key": "ret",
+            "down": true,
+            "result": {}
+          },
+          {
+            "at": "2026-11-25T10:02:26.916Z",
+            "type": "key",
+            "key": "ret",
+            "down": false,
+            "result": {}
+          }
+        ],
+        "final_png_sha256": "f82036ccca81f747b97582c0f3f2e950f686f04bddbdc535db7c5bbbe72c0a62"
+      },
+      "dom_acceptance": {
+        "status": "PASS",
+        "source_sha256": "0d44e15227f4340c4b419cc1af8b1078bbf383fc388b75959baf13512c9845e6",
+        "inputs": [
+          {
+            "id": "a",
+            "down": true
+          },
+          {
+            "id": "a",
+            "down": false
+          },
+          {
+            "id": "b",
+            "down": true
+          },
+          {
+            "id": "b",
+            "down": false
+          },
+          {
+            "id": "c",
+            "down": true
+          },
+          {
+            "id": "c",
+            "down": false
+          },
+          {
+            "id": "backspace",
+            "down": true
+          },
+          {
+            "id": "backspace",
+            "down": false
+          },
+          {
+            "id": "delete",
+            "down": true
+          },
+          {
+            "id": "delete",
+            "down": false
+          },
+          {
+            "id": "ret",
+            "down": true
+          },
+          {
+            "id": "ret",
+            "down": false
+          }
+        ],
+        "frame_states": {
+          "ready": {
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6",
+            "sha256": "e4eea5ef29d032f7961dd6905531379fc2b1d9b5926aa1874dcfc6933e3fbf7a",
+            "width": 240,
+            "height": 135,
+            "sequence": 7,
+            "source": "qemu-display-surface-shared",
+            "texturePixelsCompared": 32400
+          },
+          "a": {
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6",
+            "sha256": "9674b0f5c1a8fb2bcc5b724173b3389905a3bad75df0b7cfd02cedcc2d109170",
+            "width": 240,
+            "height": 135,
+            "sequence": 9,
+            "source": "qemu-display-surface-shared",
+            "texturePixelsCompared": 32400
+          },
+          "ab": {
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6",
+            "sha256": "f9d0763126ad2a6aff4bb0b37711da00346d28cda1a4e278c7afeacb5afc811a",
+            "width": 240,
+            "height": 135,
+            "sequence": 11,
+            "source": "qemu-display-surface-shared",
+            "texturePixelsCompared": 32400
+          },
+          "abc": {
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6",
+            "sha256": "324d168e7c93fc21934c42f384a08b4a2a48ff5939cf4b177aff67dd4d8ad9b3",
+            "width": 240,
+            "height": 135,
+            "sequence": 15,
+            "source": "qemu-display-surface-shared",
+            "texturePixelsCompared": 32400
+          },
+          "backspace": {
+            "sequence": 19,
+            "sourceSequence": 78,
+            "sha256": "324d168e7c93fc21934c42f384a08b4a2a48ff5939cf4b177aff67dd4d8ad9b3",
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6"
+          },
+          "delete": {
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6",
+            "sha256": "f9d0763126ad2a6aff4bb0b37711da00346d28cda1a4e278c7afeacb5afc811a",
+            "width": 240,
+            "height": 135,
+            "sequence": 24,
+            "source": "qemu-display-surface-shared",
+            "texturePixelsCompared": 32400
+          },
+          "enter": {
+            "sequence": 28,
+            "sourceSequence": 116,
+            "sha256": "5e18262174a1c0616a55701d34ee7867c2b037dd9f1254e6598288acfac6d89e",
+            "sessionId": "7febf03f-f09f-4327-a8c1-f5c3997a33c6"
+          }
+        },
+        "observed_display": [
+          ">",
+          "> a",
+          "> ab",
+          "> abc",
+          "> abc",
+          "> ab",
+          "ab"
+        ],
+        "observed_behavior": "Plain Backspace preserves the draft because the example only consumes KeysState.del. Delete produces the original Fn-layer delete. Enter submits the resulting text.",
+        "exit_code": 0,
+        "workers": 6,
+        "workers_left": 0,
+        "screenshots_sha256": {
+          "key-c.png": "984cb13ae945460113701172e4cfdc59f179599390f4338ab53240f11f560cb7",
+          "key-b.png": "ba1e95249f00203bd6c1901b7fc5995dc21b5c991bcc47aef722018e0a57013d",
+          "key-a.png": "2435b358f3a9449661d19fcc16bcdbec62ed071eb0f60f965afdbfed36eb233f",
+          "ready.png": "0057921ddd511836c8ad5a5efcf6ab2a9e3288fd2d0a83f7f4d8a8bb5b3e4bc4",
+          "delete-leaves-ab.png": "ba1e95249f00203bd6c1901b7fc5995dc21b5c991bcc47aef722018e0a57013d",
+          "backspace-keeps-abc.png": "984cb13ae945460113701172e4cfdc59f179599390f4338ab53240f11f560cb7",
+          "enter-submits-ab.png": "aa6f37dbfd75b6a61681fc9b54a6e6f36b9ce3a5ce260a2eb6b43ddc41f6f4f8"
+        }
+      }
+    }
+  ],
+  "regressions": [
+    {
+      "case": "adv-fixed",
+      "status": "PASS",
+      "device": "cardputer-adv",
+      "wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+      "firmware_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+      "checks": 69,
+      "checks_passed": 69,
+      "physical_driver_key_cases": [
+        "KeyA",
+        "KeyZ",
+        "KeyQ",
+        "KeyB",
+        "KeyN",
+        "KeyM",
+        "Digit1",
+        "Digit0",
+        "Enter",
+        "Space",
+        "Backspace"
+      ],
+      "exit_code": 0,
+      "workers": 6,
+      "workers_left": 0
+    },
+    {
+      "case": "k132-factory",
+      "status": "PASS",
+      "device": "cardputer",
+      "wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+      "firmware_sha256": "edcc5a24609bc298e2b20732f44bf1a39e278cb104952cbd5692a4b20c8a56ef",
+      "inputs": [
+        {
+          "id": "a",
+          "down": true
+        },
+        {
+          "id": "a",
+          "down": false
+        },
+        {
+          "id": "menu",
+          "down": true
+        },
+        {
+          "id": "menu",
+          "down": false
+        }
+      ],
+      "frames": {
+        "splash": {
+          "sessionId": "139734e5-b046-4d87-b680-7839cadb89bd",
+          "sha256": "31499c7452ea61dcae2d7023fd329746b08acd4e14754811748cdfdb8c5668ff",
+          "width": 240,
+          "height": 135,
+          "sequence": 12,
+          "source": "qemu-display-surface-shared",
+          "texturePixelsCompared": 32400
+        },
+        "launcher": {
+          "sessionId": "139734e5-b046-4d87-b680-7839cadb89bd",
+          "sha256": "0f7fd5682d60bf5ac560b0079fddbf4b7c70f5e4d1f82774988d7e1783ba2d88",
+          "width": 240,
+          "height": 135,
+          "sequence": 24,
+          "source": "qemu-display-surface-shared",
+          "texturePixelsCompared": 4640
+        },
+        "fnReleasedBefore": {
+          "sessionId": "139734e5-b046-4d87-b680-7839cadb89bd",
+          "sha256": "af4d38ab213e31e10dab5079e4659732bc6b6bb9710f3de6764cfd87aaeb408a",
+          "width": 240,
+          "height": 135,
+          "sequence": 24,
+          "source": "qemu-display-surface-shared",
+          "texturePixelsCompared": 374
+        },
+        "fnHeld": {
+          "sessionId": "139734e5-b046-4d87-b680-7839cadb89bd",
+          "sha256": "9e434b3f34e689609f5c9e0f357770458bd13bd82bdb6cebb9e98c930e6584e7",
+          "width": 240,
+          "height": 135,
+          "sequence": 34,
+          "source": "qemu-display-surface-shared",
+          "texturePixelsCompared": 374
+        },
+        "fnReleased": {
+          "sessionId": "139734e5-b046-4d87-b680-7839cadb89bd",
+          "sha256": "af4d38ab213e31e10dab5079e4659732bc6b6bb9710f3de6764cfd87aaeb408a",
+          "width": 240,
+          "height": 135,
+          "sequence": 41,
+          "source": "qemu-display-surface-shared",
+          "texturePixelsCompared": 374
+        }
+      },
+      "exit_code": 0,
+      "workers": 6,
+      "workers_left": 0
+    },
+    {
+      "case": "cores3-lvgl-pir reference touch",
+      "status": "PASS",
+      "device": "cores3",
+      "wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+      "firmware_sha256": "78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f",
+      "inputs": [
+        {
+          "at": "2026-11-25T10:05:56.735Z",
+          "type": "touch",
+          "x": 160,
+          "y": 184,
+          "down": true,
+          "result": {}
+        },
+        {
+          "at": "2026-11-25T10:05:57.385Z",
+          "type": "touch",
+          "x": 160,
+          "y": 184,
+          "down": false,
+          "result": {}
+        }
+      ],
+      "before_frame_sha256": "fe4d5e4183a858d3b9992898f7934b0ef6c0e4a68fcd51b1133f4d116850c678",
+      "after_frame_sha256": "88969b0a37c16023e2201355a45e7101a751c08dbff532f44b08ca57bc608bd6",
+      "guest_touch_callback": {
+        "clicks": 1,
+        "fixture": "cores3-wasm-lvgl-pir-v1",
+        "kind": "touch_clicked",
+        "seq": 9
+      },
+      "exit_code": 0,
+      "workers": 6,
+      "workers_left": 0
+    }
+  ],
+  "host_verification": {
+    "source_replay_and_reverse": "PASS",
+    "targeted_python_cases_passed": 37,
+    "platform_suite": {
+      "run": 2560,
+      "skipped": 11,
+      "initial_tooling_failures": 3,
+      "node22_retries_passed": 3,
+      "initial_tooling_failure_cause": "Node v26 does not support the test launcher flag --experimental-default-type=module."
+    },
+    "validators": "PASS",
+    "source_diff_and_scope": "PASS"
+  }
+}

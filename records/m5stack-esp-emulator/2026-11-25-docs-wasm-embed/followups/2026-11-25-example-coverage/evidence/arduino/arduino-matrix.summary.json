@@ -1,0 +1,1827 @@
+{
+ "schema_version": 1,
+ "validation": "virtual-device validation",
+ "date": "2026-11-25",
+ "scope": {
+  "documentation_revision": "6ee4f2fb9dca1c671e475407cb709109a699cf1a",
+  "primary_language": "en",
+  "verified_translation_routes": [
+   "en",
+   "zh_CN",
+   "ja"
+  ],
+  "direct_example_count": {
+   "cores3": 15,
+   "cardputer-adv": 11
+  },
+  "inline_sketch_count": 23,
+  "direct_library_example_count": 3,
+  "accessory_guides": {
+   "cores3": 79,
+   "cardputer-adv": 2
+  },
+  "accessory_examples": {
+   "cores3": 136,
+   "cardputer-adv": 10
+  }
+ },
+ "build_toolchain": {
+  "arduino_cli": "1.3.1",
+  "m5stack_board_package": "3.2.5",
+  "esptool": "packaged tool and pinned 5.0.dev1, byte-compare passed on the same test ELF",
+  "direct_library_versions": {
+   "M5Cardputer": "1.2.0",
+   "M5Unified": "0.3.0",
+   "M5GFX": "0.3.0",
+   "Arduino-IRremote": "4.7.1"
+  },
+  "sd_wav_source_version": "M5Unified 0.2.8 sample plus the documented CS pin and selected input file"
+ },
+ "default_wasm_counts": {
+  "cores3": {
+   "PASS": 4,
+   "PARTIAL": 6,
+   "FAIL": 5
+  },
+  "cardputer-adv": {
+   "FAIL": 9,
+   "PARTIAL": 2
+  }
+ },
+ "cases": [
+  {
+   "board": "cores3",
+   "case": "button",
+   "source_sha256": "85d455adb3297a42ca03fb1f15a70143324357b287a8bb5626baeb82743dce83",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/button",
+   "build": "PASS",
+   "binary_sha256": "3dfbaaaa1ea168074d284b40b14fc489821162fb211f568a6a52181e54dab69c",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Power click changes title to Btn PWR",
+   "default_wasm": "PASS",
+   "observed": "点击虚拟电源键后画面显示 Btn PWR。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "a127c44b59282063d24b02ef8437df62c98abe83333213485f465de722f56117",
+     "guest_started": true,
+     "firmware_input_sha256": "3dfbaaaa1ea168074d284b40b14fc489821162fb211f568a6a52181e54dab69c",
+     "runtime_flash_sha256": "3dfbaaaa1ea168074d284b40b14fc489821162fb211f568a6a52181e54dab69c",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 64965,
+     "first_nonuniform_ms": 43112,
+     "accepted_inputs": [
+      {
+       "type": "button",
+       "id": "power",
+       "down": true
+      },
+      {
+       "type": "button",
+       "id": "power",
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "95843f47f78ae420a248ef99856ca750d01d3aab3cba4d4d50a44662a93849fe",
+      "png_sha256": "f55cbe435ff257b971878c3a04e52f35d11b4c562d1194d4bb8ffa8380e08c1c"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "camera",
+   "source_sha256": "63cf08b2a66ca62d75ef516f0a41c86988451fa044d112594bd07c3efe453b33",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/camera",
+   "build": "PASS",
+   "binary_sha256": "5d61a3dbefec7bde7a8b7d29040f7e96e6374b5efd4fb702be9d3c5bbdfedb91",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Camera Init Success and QVGA RGB565 live frame",
+   "default_wasm": "PARTIAL",
+   "observed": "屏幕输出可见的相机图样。连续场景变化与外部图像输入未验证。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "45081b0d2d9f26c258a678564a10524586b30b0e901a478ee69371767968ee4f",
+     "guest_started": true,
+     "firmware_input_sha256": "5d61a3dbefec7bde7a8b7d29040f7e96e6374b5efd4fb702be9d3c5bbdfedb91",
+     "runtime_flash_sha256": "5d61a3dbefec7bde7a8b7d29040f7e96e6374b5efd4fb702be9d3c5bbdfedb91",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 29159,
+     "first_nonuniform_ms": 9407,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 5,
+      "rgb565_sha256": "864c08b6eeffccd05196c731d4d822784a778b3dca3935ebbe295c271a2b055e",
+      "png_sha256": "dc78c1189b90a32a9e03e30f4d6727d7dffbef5c620d675eb3bb94eb123c7be9"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "display",
+   "source_sha256": "76562db912438f910f1cb72abb0c2304bcc40bda38f13b8d151489fdbddb3f1d",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/display",
+   "build": "PASS",
+   "binary_sha256": "a88182dc789c1dfe7525ad7ff9a284fd201b6c55375502c895b689cd56af13d6",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Continuously drawn colored circles and text",
+   "default_wasm": "PASS",
+   "observed": "实际帧不断绘制彩色圆和文字。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "264aad09dfd20294f94c7681fbebc3048254def30891aeb34ec89267a6f38678",
+     "guest_started": true,
+     "firmware_input_sha256": "a88182dc789c1dfe7525ad7ff9a284fd201b6c55375502c895b689cd56af13d6",
+     "runtime_flash_sha256": "a88182dc789c1dfe7525ad7ff9a284fd201b6c55375502c895b689cd56af13d6",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 57465,
+     "first_nonuniform_ms": 46820,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 163,
+      "rgb565_sha256": "0fadb433f081eee953d59f5f8ad6a9b221837875cc5e423e285a5f5ff3dda32f",
+      "png_sha256": "37f3490078f67e4aea91dd525089aba8cfa91e9c0ecca783bf3b4f45f064e26a"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "imu",
+   "source_sha256": "26c949c2c7e96d39e7b430f5b1d88bedf5c3abcc2f36639c2dc636e9f22c86f6",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/imu",
+   "build": "PASS",
+   "binary_sha256": "3835dc5c8211736869c0f49762855875b09038d4aba8000516bfad9b014655ed",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "LCD and serial show accelerometer, gyro, magnetometer; inject two distinct states",
+   "default_wasm": "PARTIAL",
+   "observed": "屏幕显示加速度、陀螺仪和磁力计字段，未注入不同姿态。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "ae4bfae22e8804a4cdecef87910b91c53bead1044b1a0c33083bc2b6abac6198",
+     "guest_started": true,
+     "firmware_input_sha256": "3835dc5c8211736869c0f49762855875b09038d4aba8000516bfad9b014655ed",
+     "runtime_flash_sha256": "3835dc5c8211736869c0f49762855875b09038d4aba8000516bfad9b014655ed",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 109109,
+     "first_nonuniform_ms": 83248,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "7d84124e79c1a0aa67e745de138a727d647c27d18665127fc9de82e121cc228c",
+      "png_sha256": "2440374d6dfc9d8c742fb6753a1b5983198411d5b17aecf3110ac0b19dbbbe6e"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "ltr553",
+   "source_sha256": "0e0f1fb26f069f038449e1e535f36cddf0765c2939cee07e503040199f2d27df",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/ltr553",
+   "build": "PASS",
+   "binary_sha256": "9584d3339e863ee71b8e46ea43048bdc041028be3a0b0fb9e624185fdca40001",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "LCD and serial proximity + ambient light readings respond to two inputs",
+   "default_wasm": "PARTIAL",
+   "observed": "屏幕显示 PS 64 和 ALS 320，未改变外设输入。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "4e6190ce8c085e967d4a98d235bcb0f5d50d50ab1c0abf8a6d7e2aee85123fb7",
+     "guest_started": true,
+     "firmware_input_sha256": "9584d3339e863ee71b8e46ea43048bdc041028be3a0b0fb9e624185fdca40001",
+     "runtime_flash_sha256": "9584d3339e863ee71b8e46ea43048bdc041028be3a0b0fb9e624185fdca40001",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 94413,
+     "first_nonuniform_ms": 76191,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "a13ae4e85229d89dce3a533532bcd39889cef3f9ff9cc2b7f66d6cb958c3b138",
+      "png_sha256": "1196441bc24fda6571973fb4075633e8046fbc4ced474ddf13e0e93af0d51966"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "mic",
+   "source_sha256": "fc827b5676025599689f08f8e4975f69a72a571bea7fcd939825f855533b88a1",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/mic",
+   "build": "PASS",
+   "binary_sha256": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "REC and changing waveform, power click switches to buffer playback",
+   "default_wasm": "FAIL",
+   "observed": "应用画面在观察终点为黑屏。该次输入为触摸，例程要求的电源键触发与录放音证据仍未验证。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "454a0e686fe7f06c29cb4b7344c48b43d3c5d8abc87834f814ee40a139840933",
+     "guest_started": true,
+     "firmware_input_sha256": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+     "runtime_flash_sha256": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 122818,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [
+      {
+       "type": "touch",
+       "x": 170,
+       "y": 165,
+       "down": true
+      },
+      {
+       "type": "touch",
+       "x": 170,
+       "y": 165,
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 1,
+      "rgb565_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "png_sha256": "c08ed0ebe80d8f2b4cadf150e31b8717a8edd2abb292d39a909919689c62b78d"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "pic",
+   "source_sha256": "8a7d530772bb9dc3f10ff05cc4325492540b9558dcaff8985a33754742cbe90f",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/pic",
+   "build": "PASS",
+   "binary_sha256": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Mount FAT32; create WriteTest.txt; alternate /TestPicture01.png and /TestPicture02.png",
+   "default_wasm": "FAIL",
+   "observed": "默认配置的真实屏幕显示 SD card not detected，图片播放未完成。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "76c1bf6d2ba1c420d8d10b814b57d2fa24841beff6e3c5953af8caa604e44d63",
+     "guest_started": true,
+     "firmware_input_sha256": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+     "runtime_flash_sha256": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 31271,
+     "first_nonuniform_ms": 20666,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "d89321eaed130440fb0f97689f3248e6d008cec51770fe33c15f5d91816441c3",
+      "png_sha256": "8c05c76b2d6c700e402f4c2476584d292b247a3e9ac2abffc2ad71863b37bb8d"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "power",
+   "source_sha256": "904941e528ac9639865cfe085c6c86770a619fb3a24502bcf8b866c078b1718a",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/power",
+   "build": "PASS",
+   "binary_sha256": "7beb59232d1b21d7fb38d4c994582609df364ba918a4b443bf8fdcbd0982112c",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "On-screen charging, mV, percentage and VBus",
+   "default_wasm": "PARTIAL",
+   "observed": "屏幕显示充电状态、电池电压 4000 mV、电量 87%、VBUS 5000 mV。动态电源输入未验证。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "57eacefa09b18efe7af14986a0c8e65ec14ed57551501cc5b9a8c982802de1e6",
+     "guest_started": true,
+     "firmware_input_sha256": "7beb59232d1b21d7fb38d4c994582609df364ba918a4b443bf8fdcbd0982112c",
+     "runtime_flash_sha256": "7beb59232d1b21d7fb38d4c994582609df364ba918a4b443bf8fdcbd0982112c",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 73499,
+     "first_nonuniform_ms": 60546,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "7b0653c624411e4555d5da9b8cb503000b86812c8795b4c78ccfa2d1b59e562c",
+      "png_sha256": "c2301db590a1b86fb55f54c02ceef0c1906dc1083b4f096db483332bde414e7c"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "rtc",
+   "source_sha256": "67e51519738f70d13cbec6e932fdf98045b4ff4a63b5dab717d912b9736c6dac",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/rtc",
+   "build": "PASS",
+   "binary_sha256": "cf450835c9b8d88f815272158040afee79f0d88cf32b1f46add9bd783b8ab00d",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "RTC and NTP UTC plus local time after Wi-Fi and NTP; document placeholders require configured test network",
+   "default_wasm": "PARTIAL",
+   "observed": "原文中的凭据占位符保留，离线默认配置中屏幕保持 WiFi Connecting...，未执行已配置的 Wi-Fi、SNTP 和 RTC 时间比较。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "e48fd147560713e606a12761bda1630b12717e791457653df37f38e51bdebae5",
+     "guest_started": true,
+     "firmware_input_sha256": "cf450835c9b8d88f815272158040afee79f0d88cf32b1f46add9bd783b8ab00d",
+     "runtime_flash_sha256": "cf450835c9b8d88f815272158040afee79f0d88cf32b1f46add9bd783b8ab00d",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 57340,
+     "first_nonuniform_ms": 46618,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 7,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "dfd5a90eadba95685b024caf9efb5006ef95028e7ad0d80b4339cb43be08c0b6",
+      "png_sha256": "dd1474fcd1508232d79cb012c4cdeed7ad140c133ce7551a67a33a5e2bc607e5"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "sdcard",
+   "source_sha256": "dd780c565d411307ae9fd1cfd22473bd79b5a6a76eea47de68bb332252c81022",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/sdcard",
+   "build": "PASS",
+   "binary_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Mount FAT32; create /WriteTest.txt; alternate /cores3_test_picture01.png and /cores3_test_picture02.png",
+   "default_wasm": "FAIL",
+   "observed": "默认配置的真实屏幕显示 SD card not detected，文件读写和图片播放未完成。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "c4fc2550fa9a00b489847611b5f4d7ecc6390d6093a7379b496c36c360027ae7",
+     "guest_started": true,
+     "firmware_input_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+     "runtime_flash_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 29159,
+     "first_nonuniform_ms": 18467,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "4efdaa953ed062823a644693798793fc48d4469e7526f56e6031b890ba199844",
+      "png_sha256": "d9e0ded01d9bf2869484bceee57f2a2e0fbf368c04280601b9e31fc554542c94"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "speaker",
+   "source_sha256": "3e3a0ee8ff420069441456ad4aeebe19e0f22bc7775cd9573846251da4f7b365",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/speaker",
+   "build": "PASS",
+   "binary_sha256": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Speaker Test screen and alternating two speaker tones",
+   "default_wasm": "PARTIAL",
+   "observed": "屏幕显示 Speaker Test，默认浏览器链路未提供同会话 PCM 证据。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "8b0465559b75978a3bce87747b7c556a245689b49481e2461b171259115339c1",
+     "guest_started": true,
+     "firmware_input_sha256": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+     "runtime_flash_sha256": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 47238,
+     "first_nonuniform_ms": 31603,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "ac4304b7858b478464d4ca9c96cf45f9efc37a8f5d3d59ec91f601ab4261e361",
+      "png_sha256": "c454987f4ba0007b921ad9e43b0c1f8b8eb12c1d8e311ceac9f2c23f6c3a9be3"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "touch",
+   "source_sha256": "fbd1dc6d115e597e01f87f23f8f5bc66518adab1c2e48beac62dc3545902326f",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/touch",
+   "build": "PASS",
+   "binary_sha256": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Touch event name and coordinate change; mark point on canvas",
+   "default_wasm": "PASS",
+   "observed": "同会话触摸、拖动至新坐标、释放后刷新状态与坐标。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "03a54cd135e1fb44d1817ec30ee15291426a95da3512fcd8eb543197e917836e",
+     "guest_started": true,
+     "firmware_input_sha256": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+     "runtime_flash_sha256": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 32157,
+     "first_nonuniform_ms": 18638,
+     "accepted_inputs": [
+      {
+       "type": "touch",
+       "x": 170,
+       "y": 165,
+       "down": true
+      },
+      {
+       "type": "touch",
+       "x": 245,
+       "y": 182,
+       "down": true
+      },
+      {
+       "type": "touch",
+       "x": 245,
+       "y": 182,
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "157f032f690d4ef902b6c46d0a6943768f45eb6d6781ae7aec865d3aa2bcab36",
+      "png_sha256": "63a8fbc3cf8e6844579d1801258eaf2ed0c00782526cf4733a7e5208ae88d077"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "wakeup",
+   "source_sha256": "853094e19db56c6bb4af56a60bf7a9dcca54be234ad4172451f81ffe31ece3af",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/wakeup",
+   "build": "PASS",
+   "binary_sha256": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Touch triggers power timer sleep, guest wakes after five seconds",
+   "default_wasm": "FAIL",
+   "observed": "触摸释放后模拟 PMIC 关机并触发 guest-shutdown，继续观察 45 秒仍停止。未观察到预期的 RTC 唤醒。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "efbeef147d0a3c47a31fa8572dbf6a5ba1dd7ad6c83bf7f95352f9b910f08596",
+     "guest_started": true,
+     "firmware_input_sha256": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+     "runtime_flash_sha256": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 72113,
+     "first_nonuniform_ms": 14222,
+     "accepted_inputs": [
+      {
+       "type": "touch",
+       "x": 170,
+       "y": 165,
+       "down": true
+      },
+      {
+       "type": "touch",
+       "x": 170,
+       "y": 165,
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "guest-shutdown",
+       "guest": true
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[m5-power] model=axp2101 action=off source=reg10-bit0 virtual_ns=1406077484"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd",
+      "png_sha256": "99b09e408ff7a6cfa5408bcd324753672b3ea2a56e17831da45ccaaedd4d2de3"
+     },
+     "post_touch_observations": [
+      {
+       "sample": "before",
+       "observation_ms": 18900,
+       "status": "running",
+       "frame_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd"
+      },
+      {
+       "sample": "touch-release",
+       "observation_ms": 21096,
+       "status": "stopped",
+       "frame_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd"
+      },
+      {
+       "sample": "rtc-wake",
+       "observation_ms": 66100,
+       "status": "stopped",
+       "frame_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd"
+      },
+      {
+       "sample": "final",
+       "observation_ms": 72113,
+       "status": "stopped",
+       "frame_sha256": "6878b5ee4309422f5f0a7513053698ebbe736d26735614e9af55eb8c5010f6cd"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "wav",
+   "source_sha256": "341749ed7942ee611f123483652da13f152167ccac79bcd231c24b817b399994",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/wav",
+   "build": "PASS",
+   "binary_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Mount FAT32 and play /sample-12s.wav",
+   "default_wasm": "FAIL",
+   "observed": "屏幕显示 Card failed, or not present。默认配置无法读到 sample-12s.wav，未见 PCM 播放。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "efe3b26775412b550a05e082605d5a8195827a5798d6ceab48ec39e366db4cd4",
+     "guest_started": true,
+     "firmware_input_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+     "runtime_flash_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 19738,
+     "first_nonuniform_ms": 9169,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 2,
+      "rgb565_sha256": "4531363c65bd27dd41da55718fe9189d4114abae876eb3423c99f86ca737ddfe",
+      "png_sha256": "a13a17ebc5ba92825c10799f2676ee23b22ee7d553aa69d451e574a4e155ae10"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "battery",
+   "source_sha256": "d3293339b895c65ce97cd054d36c64dc23b9dc08960d66480db26d222668b359",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/battery",
+   "build": "PASS",
+   "binary_sha256": "ac93be27c88cb4ae19d08056a537b06469a1e2b7f6ef8af82c6739d2ff38f34b",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "On-screen battery level and voltage; charge indicator as appropriate",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，画面黑屏，未显示剩余电量。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "7eff80dc5f822e02ad38ae2261aa5f7defa4ef7fbbaf20db8a78780638148e4e",
+     "guest_started": true,
+     "firmware_input_sha256": "ac93be27c88cb4ae19d08056a537b06469a1e2b7f6ef8af82c6739d2ff38f34b",
+     "runtime_flash_sha256": "88987ce61c00b0d9e7a1e87af7bb2ce790235a4cba591c77f9e6c1f32411d055",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 77150,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "button",
+   "source_sha256": "444450396503479b748d137758cab1a70f206b882fccf06bdaac786f81ad0d81",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/button",
+   "build": "PASS",
+   "binary_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "G0 presses and releases produce Button A Pressed and Button A Released on Serial",
+   "default_wasm": "PARTIAL",
+   "observed": "按放事件被接收，UART 报板型 136。该例程通过 USB CDC 输出，未取得按放标记。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "5568fc0d8e9aad9d90ce21a8ef4804b65d8bd0a762bee2ad921cd6a546586775",
+     "guest_started": true,
+     "firmware_input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+     "runtime_flash_sha256": "54ee755a50f4187e9ddfc96efb7ea996c896e46d4b99e2945ceb3183a1aa6f50",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 85445,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [
+      {
+       "type": "button",
+       "id": "boot",
+       "down": true
+      },
+      {
+       "type": "button",
+       "id": "boot",
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "display",
+   "source_sha256": "bc6340beb03509b899c4f24c21cd685d10b58444a3d1e23a1d3de8869617b278",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/display",
+   "build": "PASS",
+   "binary_sha256": "cc1b3e5868feb075e2ec8a5e7211897e8ae1c9635f5d072442ef007273c2a968",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Continuously drawn colored circles and text",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，随后出现 IntegerDivideByZero，画面为黑屏。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "ad8621aa40214fa95ab2077206e160a242a8dac3e6a9380290e4b39d72969902",
+     "guest_started": true,
+     "firmware_input_sha256": "cc1b3e5868feb075e2ec8a5e7211897e8ae1c9635f5d072442ef007273c2a968",
+     "runtime_flash_sha256": "11f3a15f19b3c5fd759e34773a17f84bf5ffb7ec8e05c99d4b97e19e73241c4b",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 44317,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "RESET",
+       "reason": "guest-reset",
+       "guest": true
+      },
+      {
+       "event": "RESET",
+       "reason": "guest-reset",
+       "guest": true
+      },
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136",
+      "Guru Meditation Error: Core  1 panic'ed (IntegerDivideByZero). Exception was unhandled."
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "imu",
+   "source_sha256": "3ce1daa145c499f00b26569097fa82f6d0e41ce4348d820b09553f57488714b3",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/imu",
+   "build": "PASS",
+   "binary_sha256": "f933c50fcc3dca52d9fa8e256ed5ab5e7e1f5d68571f47d9cab976d16ec41b10",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "On-screen accelerometer and gyro readings respond to injection",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，画面黑屏，未显示 IMU 数据。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "16a1efbaabf877f46a355b9f80e33e167ee3f28915e5117ad442fcd3790fb39c",
+     "guest_started": true,
+     "firmware_input_sha256": "f933c50fcc3dca52d9fa8e256ed5ab5e7e1f5d68571f47d9cab976d16ec41b10",
+     "runtime_flash_sha256": "8a379cb132d28f8cb7bbd67c39aec0bf5675a62755d2397c1d7966a1ce0b287f",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 141928,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "ir_nec",
+   "source_sha256": "e77a78ffde87b2b87d8a4cad2032bcabbe66dbfd28142100281d3f7d67fff1c9",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/ir_nec",
+   "build": "PASS",
+   "binary_sha256": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "On-screen and serial rising command numbers, actual GPIO44 NEC waveform",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，画面黑屏，未验证 GPIO44 NEC 发射帧。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "8ce5e4cb7011109c549ba169c44bc1b66613b42c8366e3b8c78163f5ea395624",
+     "guest_started": true,
+     "firmware_input_sha256": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb",
+     "runtime_flash_sha256": "783873cf160c7aac32860decf6e0908ed7586b7d277340c9e926c79086a401ac",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 75563,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "keyboard",
+   "source_sha256": "cabcd52c88f3575e9cf08f7e83f8c4ba84a5bdd904eba84365a022f8af3c5a62",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/keyboard",
+   "build": "PASS",
+   "binary_sha256": "f7edb36bb3662506853773399467841a55bef3d3e16cc3469bc821b4ad7638bf",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Press keys including space, backspace, and Enter; actual typed output on LCD",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，收到键盘事件后仍为黑屏，未显示录入文字。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "bd5e3a53589730de617cf495316adbfd285553701ecf5001c88f71bb7f8563b6",
+     "guest_started": true,
+     "firmware_input_sha256": "f7edb36bb3662506853773399467841a55bef3d3e16cc3469bc821b4ad7638bf",
+     "runtime_flash_sha256": "139a18a7fb9149d947d2e3a3c92c0fd51709494bff598e3418c4b891ea4f414b",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 79808,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [
+      {
+       "type": "key",
+       "key": "a",
+       "down": true
+      },
+      {
+       "type": "key",
+       "key": "a",
+       "down": false
+      },
+      {
+       "type": "key",
+       "key": "b",
+       "down": true
+      },
+      {
+       "type": "key",
+       "key": "b",
+       "down": false
+      },
+      {
+       "type": "key",
+       "key": "c",
+       "down": true
+      },
+      {
+       "type": "key",
+       "key": "c",
+       "down": false
+      },
+      {
+       "type": "key",
+       "key": "backspace",
+       "down": true
+      },
+      {
+       "type": "key",
+       "key": "backspace",
+       "down": false
+      },
+      {
+       "type": "key",
+       "key": "ret",
+       "down": true
+      },
+      {
+       "type": "key",
+       "key": "ret",
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "mic",
+   "source_sha256": "feb2ceca623c2f6061d79dab21e9e703fc9d91dc29ab1460e8d1aed3d8c5e4e5",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/mic",
+   "build": "PASS",
+   "binary_sha256": "1076a8fbac11c2382585c77f7226648dc3753d29e8135b98502ac8462265a8a9",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "REC waveform responds to input; G0 press plays captured waveform",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，画面黑屏，未获得录音或回放证据。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "18e48d4639e13567f1a53cb115c742df73324bb94948d5e47c21467bfcf11e71",
+     "guest_started": true,
+     "firmware_input_sha256": "1076a8fbac11c2382585c77f7226648dc3753d29e8135b98502ac8462265a8a9",
+     "runtime_flash_sha256": "dd9ee2e1534e7c9dffb06fed0709e65cf0094d57281e47bee637229d5f97326d",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 81576,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [
+      {
+       "type": "button",
+       "id": "boot",
+       "down": true
+      },
+      {
+       "type": "button",
+       "id": "boot",
+       "down": false
+      }
+     ],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "sdcard",
+   "source_sha256": "51a95e2f653368471f2b193a79e75ceb53ca93619f32ee06dfce3b3836c7af0a",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/sdcard",
+   "build": "PASS",
+   "binary_sha256": "0bd2b3e56bf693661e8e04b5cbe17365d7346c2e84d03ac7abd6e36b95765132",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Mount FAT32; file/directory operations and throughput complete on LCD and Serial",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，画面黑屏，默认配置未完成可观察的存储操作。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "9adf9422ce05b8912b25d99caec52b6cf2a1ef8919692fc50b1b3550f5a8189b",
+     "guest_started": true,
+     "firmware_input_sha256": "0bd2b3e56bf693661e8e04b5cbe17365d7346c2e84d03ac7abd6e36b95765132",
+     "runtime_flash_sha256": "94437968ed137dd6426fb3caf0623104053ef34d06b2ac00a2933d75f5b81124",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 75530,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "speaker",
+   "source_sha256": "ddc3ff4d8bf7d33254d3fb6d488ec6341299b5d809644154ee1f317e3752f8bc",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/speaker",
+   "build": "PASS",
+   "binary_sha256": "1be720c9f62e086081f63ff6adf7f907e71f80dcc4816af71050cddd937300b5",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "7000 Hz then 4000 Hz tone; sample stream, no application LCD output",
+   "default_wasm": "PARTIAL",
+   "observed": "重试确认 guest 启动并报板型 136。例程没有 LCD 输出要求，未获得音频播放证据。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "8ff801e799534a7a98c30808bf9641949fa714c3df334ea9542ee13dc3475fd3",
+     "guest_started": false,
+     "firmware_input_sha256": "1be720c9f62e086081f63ff6adf7f907e71f80dcc4816af71050cddd937300b5",
+     "runtime_flash_sha256": "8704b0ca238d1aa2e5c42add42df346e4ab678d58f05b1b27b50a5c2ebc68ce4",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 76107,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [],
+     "workers": {
+      "all_closed": true,
+      "observed": 0,
+      "live": 0,
+      "acknowledged": false
+     },
+     "qemu_exit_code": null,
+     "serial_and_power_markers": [],
+     "last_frame": null
+    },
+    {
+     "attempt": "default_retry",
+     "report_sha256": "dcaa5c72bbf70fb9661933b24dae655a49e51ea15298f78f9b6c07427b6ae97d",
+     "guest_started": true,
+     "firmware_input_sha256": "1be720c9f62e086081f63ff6adf7f907e71f80dcc4816af71050cddd937300b5",
+     "runtime_flash_sha256": "8704b0ca238d1aa2e5c42add42df346e4ab678d58f05b1b27b50a5c2ebc68ce4",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 89845,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cores3",
+   "case": "quickstart-bargraph",
+   "source_sha256": "7345a7b27639534404162c11d53c0ca05fa606075c68ab6a14fee71b4a96f3b0",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cores3/program",
+   "build": "PASS",
+   "binary_sha256": "7635ebdc5bbddd6d33dc9bbeeb4d1fd9270c4971b0692595096c24b72f648d8a",
+   "binary_bytes": 16777216,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Animated multi-column bar graph",
+   "default_wasm": "PASS",
+   "observed": "实际帧连续绘制变化的彩色柱状图。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "4b5c2f18553a5beee061d66afaedb0379e9e3224608dfa7a2c8532f749ecf9f2",
+     "guest_started": true,
+     "firmware_input_sha256": "7635ebdc5bbddd6d33dc9bbeeb4d1fd9270c4971b0692595096c24b72f648d8a",
+     "runtime_flash_sha256": "7635ebdc5bbddd6d33dc9bbeeb4d1fd9270c4971b0692595096c24b72f648d8a",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cores3-wasm-vm-div8",
+     "clock_divisor": 8,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 43397,
+     "first_nonuniform_ms": 28662,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 320,
+      "height": 240,
+      "distinct_colors": 63,
+      "rgb565_sha256": "20d50d64e3880612d976dc754867809c365e0977c588d8913fda2969917eb401",
+      "png_sha256": "49358060a79bbd9a47941501d30fa93e8d67550134cd7b81c359fe7733dcf7ec"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "quickstart-display",
+   "source_sha256": "47d9e09adfd9933bb1a70ecd8ffd3c7ecf0ec955ecbaa88d0ed9c9183230e3b3",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/program",
+   "build": "PASS",
+   "binary_sha256": "0a93553358ee75cf9125b2fdf9e7671ea096be2c70bc3e4ff4945bc034835717",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Animated colors and circles from M5Cardputer library",
+   "default_wasm": "FAIL",
+   "observed": "UART 报板型 136，随后出现 IntegerDivideByZero，画面为黑屏。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "f7b847dc82c85e0db8b0dc3a5225678ac38e43e462a828f45c2ea1d323a6c7ca",
+     "guest_started": true,
+     "firmware_input_sha256": "0a93553358ee75cf9125b2fdf9e7671ea096be2c70bc3e4ff4945bc034835717",
+     "runtime_flash_sha256": "a596aaf59337b492bfb76e10cf1f391f46d92f02ce0706a2dbf75b1bc9ac57a3",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 29092,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "RESET",
+       "reason": "guest-reset",
+       "guest": true
+      },
+      {
+       "event": "RESET",
+       "reason": "guest-reset",
+       "guest": true
+      },
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 11,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8",
+      "[error] Keyboard: Unsupported board type: 136",
+      "Guru Meditation Error: Core  1 panic'ed (IntegerDivideByZero). Exception was unhandled."
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  },
+  {
+   "board": "cardputer-adv",
+   "case": "speaker-sd-wav",
+   "source_sha256": "f250f40ad7f0276e0620eb6d4bd1bed1c96bde18e070098204d8c3dfe85fd2f8",
+   "docs_url": "https://docs.m5stack.com/en/arduino/m5cardputer/speaker",
+   "build": "PASS",
+   "binary_sha256": "9c2993624b739090d852d7165f49b78300827fe916011c434bc939d63e4e7f3b",
+   "binary_bytes": 4194304,
+   "chip_id": 9,
+   "segment_offsets": [
+    "0x0",
+    "0x8000",
+    "0xe000",
+    "0x10000"
+   ],
+   "expected": "Mount FAT32 and play configured WAV file through ES8311",
+   "default_wasm": "FAIL",
+   "observed": "默认配置无可见的 WAV 文件播放结果或 PCM 证据。",
+   "default_attempts": [
+    {
+     "attempt": "initial_default",
+     "report_sha256": "b03b94e715dff78f28d3ec1c9defe627dfa27fc113c663ec181cb778fa0fdf86",
+     "guest_started": true,
+     "firmware_input_sha256": "9c2993624b739090d852d7165f49b78300827fe916011c434bc939d63e4e7f3b",
+     "runtime_flash_sha256": "e01ff724898cee25635c1473ec4ac717e24e3f5a531bdcc0cc387b92c97d652e",
+     "runtime_wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+     "runtime_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+     "runtime_profile": "cardputer-adv-wasm-wallclock",
+     "clock_divisor": 1,
+     "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+     "observation_ms": 75600,
+     "first_nonuniform_ms": null,
+     "accepted_inputs": [],
+     "guest_events": [
+      {
+       "event": "SHUTDOWN",
+       "reason": "host-qmp-quit",
+       "guest": false
+      }
+     ],
+     "workers": {
+      "all_closed": true,
+      "observed": 6,
+      "live": 0,
+      "acknowledged": true
+     },
+     "qemu_exit_code": 0,
+     "serial_and_power_markers": [
+      "entry 0x403c88b8"
+     ],
+     "last_frame": {
+      "width": 240,
+      "height": 135,
+      "distinct_colors": 1,
+      "rgb565_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "png_sha256": "1bb534b0da8c78ac02771f39e5e4e3bc838dd87299caced105a9e674dc2986db"
+     }
+    }
+   ]
+  }
+ ],
+ "standalone_prototype_evidence": "prototype-controls.summary.json"
+}
