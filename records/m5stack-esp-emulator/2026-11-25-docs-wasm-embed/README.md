@@ -93,6 +93,16 @@
 
 [Cardputer-Adv 原 Button 单线程指令计数的三次冷启动](followups/2026-11-25-cardputer-adv-button-icount/)
 
+[CoreS3 DualKmeter 标准工作台原例程、温度控件及同镜像负对照](followups/2026-11-25-cores3-dual-kmeter-workbench/)
+
+## 本轮复验结论
+
+两款设备可用选定的原例程做交互演示。CoreS3 已复验图形、触控、四个 BSP 界面、相机的虚拟画面、microSD 图片、RTC 定时唤醒和若干外设。卡载 WAV 和虚拟麦克风有浏览器数字音频输出，DualKmeter 在标准工作台有实际 I²C 温度读数。Cardputer-Adv 已复验原显示、键盘、microSD、CC1101 和两种 LoRa Cap 的双来宾收发，以及两种 GNSS 原例程的 UART2 定位。不同案例各自绑定固定固件、素材和启动配置。
+
+初次盘点覆盖 15 个 CoreS3 Arduino、11 个 Cardputer-Adv Arduino、4 个 CoreS3 ESP-IDF BSP 例程，以及明确标注板型的 208 个 UIFlow2 Python 和 2 个仅有 Blockly 工程的例程。初测时 109 个附件例程因缺数据路径未送入来宾。两份 Blockly 都已用官方编辑器生成原 Python 并实跑，DualKmeter 现已通过，ModuleLLM 仍需要 UART2 对端。[初次逐例矩阵](followups/2026-11-25-example-coverage/) · [Blockly 复验](followups/2026-11-25-cores3-blockly-source-preview/)
+
+选定基准在本地桌面 Chromium 约 12–24 秒到可交互画面。部分例程仍有专属条件。M5Switch 的可见触点使用显式 v2.5.5，CoreS3 音频需要显式启用，两份 IR 固件的严格 NEC 校验使用私有确定性配置，Button 的冷启动仍有可复现失败。正式文档嵌入、Pages 部署、其他浏览器及真机由后续独立验收。[M5UI 触点](https://github.com/m5agent/m5stack-esp-emulator/issues/273) · [原 Speaker 素材](https://github.com/m5agent/m5stack-esp-emulator/issues/271) · [ModuleLLM](https://github.com/m5agent/m5stack-esp-emulator/issues/274) · [IR 时序](https://github.com/m5agent/m5stack-esp-emulator/issues/258) · [Button](https://github.com/m5agent/m5stack-esp-emulator/issues/268) · [附件、网络及例程矩阵](https://github.com/m5agent/m5stack-esp-emulator/issues/255)
+
 ## 试点结论
 
 两款设备可以在启用浏览器跨源隔离的文档预览中演示精选例程。CoreS3 的绘图、触摸和按键，Cardputer-Adv 的显示、键盘和 Quick Start 已有真实来宾画面或输入结果。两款基准例程在桌面 Chrome 的隔离预览中约 12–24 秒到达可操作状态。窄屏使用完整工作台时，启动按钮在内层页面顶部以下约 1,900 CSS px。建议试点提供模拟屏幕和必要的控件，在实际应用画面出现后启用输入。[逐例矩阵与交互观察](followups/2026-11-25-example-coverage/)

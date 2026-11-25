@@ -1,0 +1,141 @@
+{
+  "status": "PASS",
+  "validation": "virtual-device validation (browser WASM)",
+  "identities": {
+    "source_commit": "9eefff63deb2f78933da3b592ed18049cf801f5f",
+    "parent": "552d72882e6376ef552609cf8fcb80860e43f5c1",
+    "qemu_lock_sha256": "77808855f662911c6ad9ce251d863dd21f25f5fdfcebacb9fde00f9fff723e36",
+    "corresponding_source_sha256": "62d013cd40b3c5ee0c348afb222d6ab111886424ec35930afc56ca6753b5eacf",
+    "published_firmware_bundled": false,
+    "all_qemu_objects_rebuilt": true,
+    "site_assets_verified": 2186,
+    "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "runtime_profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "site_manifest_sha256": "e5f0cf5f7fbd15581b813223293e418bfe45b556aec1a71d1192cd87f2473396",
+    "runtime_manifest_sha256": "c606f20d4df8fe66286b66a780afcff1252ef622d5f3537195be87d1ee1a8f11",
+    "wasm_sha256": "8067a6b8d599f81bfe454da0318377fcb783c8ee4198fc69d3a042c1311d2c1e",
+    "engine_sha256": "0cbf5137e14a1f1285295ec57ca68581cc05f8619647de08d9b2b4cd01deabbd",
+    "harness_sha256": "1f68eb4e69e51c9d23ffd8014e6c669f89216cd0c298af638d3115538e71ea6c",
+    "browser": "158.0.8127.37",
+    "uiflow_source": {
+      "project": "examples/module/dualkmeter/dualkmeter_cores3.m5f2",
+      "projectSha256": "f228aa58eebcb6879a7f1d0c4f527b615cf9f6552fb7286c184c36e9261a39ee",
+      "pythonSha256": "6765c65ac5e3a6219d762fe2cbc4639301714719646a79b115cc794e2b44fb37",
+      "revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6"
+    }
+  },
+  "checks": [
+    {
+      "mode": "default",
+      "harness_outcome": "DEFAULT_NEGATIVE_PASS",
+      "raw_report_sha256": "f4b990faf4eee020c46eec85356facf5275553f838a82102f1ec0571abe93936",
+      "guest_status": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 34, in <module>\r\n  File \"<stdin>\", line 26, in loop\r\n  File \"module/dual_kmeter.py\", line 51, in is_ready\r\nOSError: 259\r\n\r\n",
+      "unit_example": null,
+      "samples": [],
+      "editor_interrupt": null,
+      "dom_stop": true,
+      "qemu_exit": 0,
+      "iframe_removed": true,
+      "workers_closed": 6,
+      "workers_live": 0
+    },
+    {
+      "mode": "positive",
+      "harness_outcome": "MODEL_DATA_PASS",
+      "raw_report_sha256": "885132f1bffb59a804833d0eabf7a63c8fb07475bad5080da60fa2bcc76a46b0",
+      "guest_status": null,
+      "unit_example": "cores3-dual-kmeter",
+      "samples": [
+        {
+          "centiC": 2350,
+          "expectedText": "23.5",
+          "text": [
+            "23.5"
+          ],
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "sequence": 34,
+            "sha256": "1b3cbefeac7ed3533eaf7742778102aef33e68fdd1ec45abec1d1b5949a26d31",
+            "epoch": 0,
+            "phase": "running",
+            "output": ""
+          },
+          "model": {
+            "kind": "cores3-dual-kmeter",
+            "temperatureCentiC": 2350,
+            "transactions": 14,
+            "bytesRead": 16,
+            "bytesWritten": 7
+          },
+          "uiState": "M-Bus 温度 23.50 °C",
+          "canvasSha256": "8300f0548d8887fe736c3ac1c986d9b65d75badfd258e17ca9c7887cfd1af258"
+        },
+        {
+          "centiC": -1234,
+          "expectedText": "-12.34",
+          "text": [
+            "-12.34"
+          ],
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "sequence": 44,
+            "sha256": "ce8f766aead32ed49a29a5ef740ca5d7aa35899e8d99a8a95fe8fa91a5ef80b4",
+            "epoch": 0,
+            "phase": "running",
+            "output": ""
+          },
+          "model": {
+            "kind": "cores3-dual-kmeter",
+            "temperatureCentiC": -1234,
+            "transactions": 248,
+            "bytesRead": 310,
+            "bytesWritten": 124
+          },
+          "uiState": "M-Bus 温度 -12.34 °C",
+          "canvasSha256": "ad84a5a49f5fead1bc4220d6876cdf2ed3298b72d5d5c52fe8adb7ab4310f873"
+        },
+        {
+          "centiC": 8765,
+          "expectedText": "87.65",
+          "text": [
+            "87.65"
+          ],
+          "frame": {
+            "width": 320,
+            "height": 240,
+            "sequence": 52,
+            "sha256": "38082eff74e4cb9b44945d8ff4f7fa5b52f178df236e706fbe74afdf61005f77",
+            "epoch": 0,
+            "phase": "running",
+            "output": ""
+          },
+          "model": {
+            "kind": "cores3-dual-kmeter",
+            "temperatureCentiC": 8765,
+            "transactions": 496,
+            "bytesRead": 620,
+            "bytesWritten": 248
+          },
+          "uiState": "M-Bus 温度 87.65 °C",
+          "canvasSha256": "a1d64ac77449b42f4a0c070829727be150d02c9eae3908d97356aeda84e55677"
+        }
+      ],
+      "editor_interrupt": true,
+      "dom_stop": true,
+      "qemu_exit": 0,
+      "iframe_removed": true,
+      "workers_closed": 6,
+      "workers_live": 0
+    }
+  ],
+  "host": {
+    "python_tests": 2569,
+    "python_skipped": 11,
+    "node_contracts": "PASS",
+    "source_and_snapshot_validators": "PASS"
+  },
+  "physical_validation": "NOT RUN",
+  "pages_deployment": "NOT RUN"
+}

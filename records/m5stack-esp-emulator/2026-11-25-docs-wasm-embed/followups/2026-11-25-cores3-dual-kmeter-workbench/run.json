@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "PASS",
+  "title": "CoreS3 original DualKmeter in locked 0050 browser workbench",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/255",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "9eefff63deb2f78933da3b592ed18049cf801f5f",
+    "example": "https://uiflow-micropython.readthedocs.io/en/latest/module/dualkmeter.html"
+  },
+  "hardware": {
+    "model": "CoreS3",
+    "mode": "virtual-device validation (browser WASM)",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "source_commit": "9eefff63deb2f78933da3b592ed18049cf801f5f",
+    "parent": "552d72882e6376ef552609cf8fcb80860e43f5c1",
+    "qemu_lock_sha256": "77808855f662911c6ad9ce251d863dd21f25f5fdfcebacb9fde00f9fff723e36",
+    "corresponding_source_sha256": "62d013cd40b3c5ee0c348afb222d6ab111886424ec35930afc56ca6753b5eacf",
+    "published_firmware_bundled": false,
+    "all_qemu_objects_rebuilt": true,
+    "site_assets_verified": 2186,
+    "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "runtime_profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "site_manifest_sha256": "e5f0cf5f7fbd15581b813223293e418bfe45b556aec1a71d1192cd87f2473396",
+    "runtime_manifest_sha256": "c606f20d4df8fe66286b66a780afcff1252ef622d5f3537195be87d1ee1a8f11",
+    "wasm_sha256": "8067a6b8d599f81bfe454da0318377fcb783c8ee4198fc69d3a042c1311d2c1e",
+    "engine_sha256": "0cbf5137e14a1f1285295ec57ca68581cc05f8619647de08d9b2b4cd01deabbd",
+    "harness_sha256": "1f68eb4e69e51c9d23ffd8014e6c669f89216cd0c298af638d3115538e71ea6c",
+    "browser": "158.0.8127.37",
+    "uiflow_source": {
+      "project": "examples/module/dualkmeter/dualkmeter_cores3.m5f2",
+      "projectSha256": "f228aa58eebcb6879a7f1d0c4f527b615cf9f6552fb7286c184c36e9261a39ee",
+      "pythonSha256": "6765c65ac5e3a6219d762fe2cbc4639301714719646a79b115cc794e2b44fb37",
+      "revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6"
+    }
+  },
+  "execution": {
+    "environment": "Apple silicon macOS, Emscripten 3.1.50, Chromium 158.0.8127.37",
+    "task_id": "GitHub issue 255",
+    "session_id": "Independent default and explicit-preset guests; bounded identity and raw digests retained."
+  },
+  "checks": [
+    {
+      "layer": "transport",
+      "name": "Default same-BIN workbench leaves external module off",
+      "status": "PASS",
+      "scope": "Expected no-attachment negative; original I2C readiness raises OSError 259."
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Original Python reads three virtual I2C temperatures through dedicated standard workbench preset",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Native RGB565 readings, genuine page numeric input and editor interrupt",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "Both normal Stop and resource cleanup",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical thermocouple and deployed Pages",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/dualkmeter-workbench.summary.json"
+  ]
+}
