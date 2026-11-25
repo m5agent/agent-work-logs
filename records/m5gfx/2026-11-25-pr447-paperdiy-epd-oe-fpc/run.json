@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PASS",
+  "title": "M5GFX #447 review: PaperDIY EPD OE off G45, FPC connectors instead of a Grove port",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/447",
+    "repository": "m5stack/M5GFX",
+    "head_commit": "a5fdf82cae2ebf3385f622302a1ffe917b197fdc",
+    "base_commit": "72001da0fdd7232a8a8ac77cd84120801f879496",
+    "paired_pull_request": "https://github.com/m5stack/M5Unified/pull/451",
+    "paired_head_commit": "bf06bc4ef325a2776d23348c08f3bb6976a59e5c"
+  },
+  "hardware": {},
+  "firmware": {
+    "device_id": "paperdiy",
+    "toolchain": "ESP-IDF v6.1, esp32s3, 16 MiB flash, 8 MiB OPI PSRAM",
+    "base_artifact_sha256": "6de3b51bbd7d8bcd4c6d3c61c9bab12c1b17c1ba6f0c201f11ced0cf508e3229",
+    "base_firmware_sha256": "4aedcb74eb5059c78f7cc119f843d2b23004c6ca1c096addaf70e3dbf59d07e9",
+    "head_artifact_sha256": "6ee10a4045b7daafc8225642583dd192816e84cef460c9900b6a18ad654c29d4",
+    "head_firmware_sha256": "0187379a3d2f6d2baf513b63abdf7c28e096ab1439440543bdce7b2eebd47cf6"
+  },
+  "execution": {
+    "environment": "macOS 26.5.1 arm64; Node v26.13.1; ESP-IDF v6.1; local Device Service with paperdiy profile",
+    "sessions": [
+      {"role": "base", "session_id": "fa5ba15cd71f40bf849e4c74dbf13905", "state": "stopped", "purge": false},
+      {"role": "pr-head", "session_id": "5fb2634c1ded482c89def0a1263c85a1", "state": "stopped", "purge": false}
+    ]
+  },
+  "checks": [
+    {"id": "pr-state", "status": "PASS", "detail": "OPEN, not draft, author ainyan03, 0 comments / 0 reviews before this review, MERGEABLE, base develop 72001da0"},
+    {"id": "diff-scope", "status": "PASS", "detail": "7 files +203/-30: m5paperdiy.json, logical_terminals_12.json, regenerated editor bundle, generated pin table (inl/json), generated esp32s3_board_data.hpp, one host test"},
+    {"id": "schematic-xoe", "status": "PASS", "detail": "K159-B sheet 4 EPD1 pin 12 XOE, pin 7 VDD and pin 23 TEST all on the EPD_PWR net; G45 appears only as MCLK EXT_G45 on the FPC-I2S JP2"},
+    {"id": "pinmap-match", "status": "PASS", "detail": "official PaperDIY PinMap FPC-I2S and FPC-SPI 12+12 terminals match the PR catalog line by line, including PYG0/PYG4/PYG1 and 3V3_AU/3V3_L2"},
+    {"id": "no-grove-port", "status": "PASS", "detail": "the official PaperDIY page contains no Grove or HY2.0 reference; the removed port_a has no hardware counterpart"},
+    {"id": "negative-pin-safe", "status": "PASS", "detail": "gpio_hi/gpio_lo skip pin < 0 (common.hpp:240-241) and pinMode returns for (size_t)pin >= GPIO_NUM_MAX (common.inl:665-668); Bus_EPD uses pin_oe only in powerControl/init"},
+    {"id": "epd-pwr-sequence", "status": "PASS", "detail": "pmic_ops.hpp:192-199 enables EPD_PWR via M5PM1 GPIO2 in board power-on, so dropping the OE drive removes no required power step"},
+    {"id": "spec-check", "status": "PASS", "detail": "node cli/spec.js check -> check passed: 63 board(s), 90 resolved combination(s)"},
+    {"id": "host-tests", "status": "PASS", "detail": "npm test at head with the M5Unified#451 checkout present: 221 tests, 221 pass, 0 fail, 0 skip"},
+    {"id": "generated-reproducible", "status": "PASS", "detail": "emit-pintable, emit-wiring and npm run bundle leave git status empty at head"},
+    {"id": "cross-repo-pintable", "status": "PASS", "detail": "compare-pintable against M5Unified#451: 55 boards, 2750 values, 4 targets all equal"},
+    {"id": "virtual-device-ab", "status": "PASS", "detail": "base display_oe=45 and head display_oe=-1 both complete DRAW1/sleep/wakeup/DRAW2 on paperdiy; last-frame PNG SHA256 b2e0d506... identical, QOM panel counts identical (73 frames / 39959 latched lines)"},
+    {"id": "gdma-log-line", "status": "PASS", "detail": "one gdma-link 'lli full' error line appears identically in base and head before the first flush and does not block drawing; not attributable to this diff, not further investigated"},
+    {"id": "ci", "status": "PASS", "detail": "gh pr checks at review time: 40/40 pass (Arduino matrix, IDF 5.1.6/6.0.2, catalog and generated sources, host)"},
+    {"id": "annotation-consistency", "status": "PARTIAL", "detail": "pin 5 (conn:fpc_i2s.1) is the only newly added FPC pin without a verified block; the other ten use roles: datasheet. Non-blocking provenance nit"},
+    {"id": "hardware-validation", "status": "NOT RUN", "detail": "no physical PaperDIY was used; the author's own hardware sleep/wakeup check was not re-run"},
+    {"id": "oe-electrical", "status": "NOT RUN", "detail": "the QEMU ET047TC1 model does not model the XOE net or EPD_PWR rail, so the OE attribution rests on the schematic, not on emulation"}
+  ],
+  "evidence": [
+    "evidence/docs-pinmap.txt",
+    "evidence/schematic-nets.txt",
+    "evidence/host-checks.txt",
+    "evidence/npm-test.txt",
+    "evidence/virtual-device.txt",
+    "evidence/frames/after-wake-base.png",
+    "evidence/frames/after-wake-pr-head.png",
+    "evidence/pr-status.json",
+    "evidence/pr-checks.txt",
+    "evidence/pr447.diff",
+    "evidence/pr447-numstat.txt",
+    "code/"
+  ]
+}

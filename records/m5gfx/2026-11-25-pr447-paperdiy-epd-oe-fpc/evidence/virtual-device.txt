@@ -1,0 +1,70 @@
+# Virtual-device A/B run: PaperDIY EPD after sleep()/wakeup()
+
+Date: 2026-11-25 (UTC)
+Device Service profile: paperdiy (peripheral_status partial, display ET047TC1 540x960, 16 MiB flash, 8 MiB PSRAM)
+Runtime: qemu (same-guest board session; QEMU machine m5paperdiy)
+Toolchain: ESP-IDF v6.1, target esp32s3, CONFIG_SPIRAM_MODE_OCT=y, CONFIG_SPIRAM_SPEED_80M=y, 16 MiB flash
+
+## Images
+
+| build | source | merged artifact SHA256 | normalized firmware SHA256 |
+| --- | --- | --- | --- |
+| base | m5stack/M5GFX 72001da0fdd7232a8a8ac77cd84120801f879496 (develop) | 6de3b51bbd7d8bcd4c6d3c61c9bab12c1b17c1ba6f0c201f11ced0cf508e3229 | 4aedcb74eb5059c78f7cc119f843d2b23004c6ca1c096addaf70e3dbf59d07e9 |
+| PR head | m5stack/M5GFX a5fdf82cae2ebf3385f622302a1ffe917b197fdc | 6ee10a4045b7daafc8225642583dd192816e84cef460c9900b6a18ad654c29d4 | 0187379a3d2f6d2baf513b63abdf7c28e096ab1439440543bdce7b2eebd47cf6 |
+
+Both images run the same test program (`code/main/main.cpp`). The program prints the compile-time
+`wiring::paperdiy::display_oe` value from the generated M5GFX board data, draws a page, calls
+`display.sleep()`, waits 1 s, calls `display.wakeup()`, draws a second page and prints a marker after
+each step. The program is built once per M5GFX tree; only the M5GFX component differs.
+
+## Serial (both runs, full marker set)
+
+base:
+  PR447 BOOT
+  I (185) M5GFX: [Autodetect] board_M5PaperDIY
+  PR447 init=1 board=34 width=540 height=960 display_oe=45
+  E (235) gdma-link: gdma_link_mount_buffers(204): lli full start=0 need=1 avail=0
+  PR447 DRAW1_DONE
+  PR447 SLEEP_DONE
+  PR447 WAKE_DONE
+  PR447 DRAW2_DONE
+
+PR head:
+  PR447 BOOT
+  I (190) M5GFX: [Autodetect] board_M5PaperDIY
+  PR447 init=1 board=34 width=540 height=960 display_oe=-1
+  E (230) gdma-link: gdma_link_mount_buffers(204): lli full start=0 need=1 avail=0
+  PR447 DRAW1_DONE
+  PR447 SLEEP_DONE
+  PR447 WAKE_DONE
+  PR447 DRAW2_DONE
+
+The single `gdma-link ... lli full` error line appears in both builds at the first flush, before
+DRAW1_DONE, and does not prevent the draw or the later sleep/wakeup redraw. It is therefore not
+attributable to this diff. It was not investigated further (out of scope; IDF v6.1 is outside the
+PR's s3 CI matrix).
+
+## Frame and panel state
+
+- Last frame after DRAW2 is byte-identical for both builds:
+  SHA256 b2e0d50618711095bb5366143a4709d432020275094e2af01bb29125d124d75e, 540x960 PNG, 3599 bytes.
+  Files: evidence/frames/after-wake-base.png, evidence/frames/after-wake-pr-head.png
+- QOM panel counters are identical: scan-frames 73, latched-lines 39959.
+- The visible frame is the post-wake page ("AFTER WAKE" + test text + test rectangles).
+
+## Sessions
+
+- base session fa5ba15cd71f40bf849e4c74dbf13905: stopped, evidence ZIP SHA256
+  2a6e04cdaac4e2f980189db9cc6feb015028cfbb0449759c72921bc03e308351, purge=0 (history retained),
+  cleanup confirmed true.
+- PR-head session 5fb2634c1ded482c89def0a1263c85a1: stopped, evidence ZIP SHA256
+  0c1ea7d617d5150d81139f4b7a3f510595e3b65c4b2c93b015f4a93c7e404956, purge=0 (history retained),
+  cleanup confirmed true.
+- Raw evidence ZIPs and full serial logs remain on the review machine; only the derived excerpts,
+  frame PNGs, firmware hashes and session IDs are archived here.
+
+## Model boundary
+
+The ET047TC1 QEMU model reproduces the digital scan sequence and black/white endpoints. It does not
+model the XOE net, EPD_PWR rail, grayscale waveforms or panel optics, so this run cannot observe
+whether G45 was previously toggling the panel. That part of the review rests on the schematic.

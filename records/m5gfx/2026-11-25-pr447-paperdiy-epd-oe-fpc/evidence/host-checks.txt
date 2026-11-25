@@ -1,0 +1,24 @@
+# Host checks for M5GFX PR #447
+# Date: 2026-11-25 (UTC)
+# Node: v26.13.1
+# M5Unified comparison checkout: m5stack/M5Unified PR #451 head bf06bc4ef325a2776d23348c08f3bb6976a59e5c
+
+$ node cli/spec.js check
+check passed: 63 board(s), 90 resolved combination(s)
+
+$ node cli/spec.js compare-pintable --m5unified <M5Unified-PR451>
+M5Unified pin-table comparison passed: 55 board(s), 2750 value(s), 4 target(s)
+
+$ node cli/spec.js emit-pintable
+generated M5Unified pin tables for 55 board(s) across 4 target(s)
+$ node cli/spec.js emit-wiring
+generated M5GFX wiring for 57 board(s)
+$ git status --porcelain
+(empty)
+
+$ npm run bundle      # rebuilds dist/board_spec_editor.html
+$ git status --porcelain
+(empty)
+
+=> The committed generated pin table, generated wiring header and editor bundle are
+   byte-identical to a fresh regeneration from the PR head catalog.
