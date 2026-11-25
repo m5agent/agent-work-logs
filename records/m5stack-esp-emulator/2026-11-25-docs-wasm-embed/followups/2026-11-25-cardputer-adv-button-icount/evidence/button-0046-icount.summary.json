@@ -1,0 +1,329 @@
+{
+  "issue": 268,
+  "status": "FAIL",
+  "passes": 0,
+  "attempts": 3,
+  "kind": "cardputer-adv-private-tcg-icount-button",
+  "validation": "virtual-device validation (browser WASM)",
+  "doc": "https://docs.m5stack.com/en/arduino/m5cardputer/button",
+  "sketch_sha256": "444450396503479b748d137758cab1a70f206b882fccf06bdaac786f81ad0d81",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "site_manifest_sha256": "f9cdc2a5da88a3de49655cb7b9561140f2e5c6f4afff9c00f0abdec3f2a91bd5",
+  "runtime_manifest_sha256": "a56410a8fb99a0e65ce7a7017c3a5ceb8ce0bd832451cbc71e12317cf614a0b9",
+  "source_lock_sha256": "4ba15619e4613bc886e796d6f6c6cacce7e2f1b9225e424a48c2aaea1aaa36cd",
+  "wasm_sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211",
+  "workbench_asset_sha256": {
+    "index.html": "48b94baf6a31ec0690ac4d1a629a64e3b54d5066bddb5ee1496eb63259acda28",
+    "site-config.json": "411c791ddd4bc06d50890d81e2ad90c8a35ae1ee482aae40382e0489d3b1ff29",
+    "platform/web/public.js": "03ec9a13f6513dcaa1693797a42acef156087c49cb87ace67a0666734972e3e1",
+    "platform/web/public-qemu-engine.js": "a6733636a7ee1af6bf148297aa9b5932e2e11be6a632c1d7890d721c5fd0e42b",
+    "platform/web/public-qemu-runtime.js": "baf41ba6c9e6bd24dd4159b77d6db91a7b20975a0355ec7f9f622b6edee54ced",
+    "platform/web/public-qemu-profiles.js": "e9d67f21d385c0f2023bfe82d957111369eef6f7013bfd2b8dd7cd6db244e179",
+    "platform/web/qemu-browser-profiles.json": "9b98a85343903130c07d083231862878f4b97bad114fba179b1c878bca7c45ca"
+  },
+  "harness_sha256": "5466ce2b6eedad103ec48e498cfb9716b799f2cfc10e93fb92dece0b3d5ce44a",
+  "requested_accelerator": {
+    "kind": "tcg-icount",
+    "thread": "single",
+    "tbSizeMb": 128,
+    "icountShift": 5
+  },
+  "expected_worker_targets": 5,
+  "canonical_site_manifest_sha256": "cec271aefa1a575d8b257ea899a8af91eb8209575202fef99fb919bab37f16ac",
+  "firmware_input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+  "firmware_runtime_sha256": "54ee755a50f4187e9ddfc96efb7ea996c896e46d4b99e2945ceb3183a1aa6f50",
+  "only_staged_changes": [
+    "platform/web/qemu-browser-profiles.json",
+    "site-config.json",
+    "platform/web/site-config.json"
+  ],
+  "replay_method": "Three sequential fresh headless Chrome processes and contexts. Standard workbench local upload, ROM wait, 2.5-second settle, actual F12 keydown until CDC press or same 20-second timeout, keyup, actual release output, and teardown.",
+  "scope": "Private fixed scheduler comparison. Executable WASM, original guest firmware, GPIO board wiring, default CDC controller, and standard workbench JavaScript are byte-identical to the corresponding canonical assets.",
+  "cold_starts": [
+    {
+      "start": 1,
+      "status": "FAIL",
+      "failure": "Error: Timed out waiting for pressed while G0/F12 is held (running)",
+      "raw_report": {
+        "sha256": "e02b4f06cbef643d37f072719d1ad1bc29fd5dfa93c1a7c55517cefc57174c39",
+        "bytes": 34731
+      },
+      "screenshot": {
+        "sha256": "d3b89b02459abf1c97702b41e3d5a1abdcde10419ec2cb75369feddbed719170",
+        "bytes": 405784
+      },
+      "ready_ms": 361.82,
+      "rom_handoff_ms": 672.7,
+      "f12_hold_ms": 20048.98,
+      "observed_input": [
+        {
+          "down": true,
+          "qmp_acknowledged": true
+        },
+        {
+          "down": false,
+          "qmp_acknowledged": true
+        }
+      ],
+      "held_serial_cdc": [],
+      "final_serial_cdc": [
+        "Button A Released"
+      ],
+      "final_ui_cdc": [
+        "Button A Released"
+      ],
+      "final_uart_button": [],
+      "cdc_controller_before": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "cdc_controller_after": null,
+      "final_cdc_bytes": 270,
+      "frame": {
+        "width": 240,
+        "height": 135,
+        "sequence": 4,
+        "sourceSequence": 12
+      },
+      "worker_errors": [],
+      "reset_count": 0,
+      "cleanup": {
+        "exit_code": 0,
+        "graceful": true,
+        "iframe_removed": true,
+        "engine_workers": 1,
+        "guest_pthreads": 4,
+        "workers_observed": 5,
+        "workers_live": 0,
+        "workers_closed_observed": true
+      }
+    },
+    {
+      "start": 2,
+      "status": "FAIL",
+      "failure": "Error: Timed out waiting for pressed while G0/F12 is held (running)",
+      "raw_report": {
+        "sha256": "75c3bf9c92e93000e5d3349f12db3bae51fe87267952bf0a0520c3fde302f799",
+        "bytes": 34731
+      },
+      "screenshot": {
+        "sha256": "d3b89b02459abf1c97702b41e3d5a1abdcde10419ec2cb75369feddbed719170",
+        "bytes": 405784
+      },
+      "ready_ms": 356.87,
+      "rom_handoff_ms": 669.44,
+      "f12_hold_ms": 20096.45,
+      "observed_input": [
+        {
+          "down": true,
+          "qmp_acknowledged": true
+        },
+        {
+          "down": false,
+          "qmp_acknowledged": true
+        }
+      ],
+      "held_serial_cdc": [],
+      "final_serial_cdc": [
+        "Button A Released"
+      ],
+      "final_ui_cdc": [
+        "Button A Released"
+      ],
+      "final_uart_button": [],
+      "cdc_controller_before": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "cdc_controller_after": null,
+      "final_cdc_bytes": 270,
+      "frame": {
+        "width": 240,
+        "height": 135,
+        "sequence": 4,
+        "sourceSequence": 12
+      },
+      "worker_errors": [],
+      "reset_count": 0,
+      "cleanup": {
+        "exit_code": 0,
+        "graceful": true,
+        "iframe_removed": true,
+        "engine_workers": 1,
+        "guest_pthreads": 4,
+        "workers_observed": 5,
+        "workers_live": 0,
+        "workers_closed_observed": true
+      }
+    },
+    {
+      "start": 3,
+      "status": "FAIL",
+      "failure": "Error: Timed out waiting for pressed while G0/F12 is held (running)",
+      "raw_report": {
+        "sha256": "485f3185f9d81eb7ba9dbc81a9721e0b35e9f39e2f346ff388eafd19dd06a120",
+        "bytes": 34243
+      },
+      "screenshot": {
+        "sha256": "8819724ffb3a72a0589468b0fa7d7ba992c7ee09500ce617603e151cade8d1ad",
+        "bytes": 405801
+      },
+      "ready_ms": 382.53,
+      "rom_handoff_ms": 697.57,
+      "f12_hold_ms": 20018.91,
+      "observed_input": [
+        {
+          "down": true,
+          "qmp_acknowledged": true
+        },
+        {
+          "down": false,
+          "qmp_acknowledged": true
+        }
+      ],
+      "held_serial_cdc": [],
+      "final_serial_cdc": [
+        "Button A Released"
+      ],
+      "final_ui_cdc": [
+        "Button A Released"
+      ],
+      "final_uart_button": [],
+      "cdc_controller_before": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "cdc_controller_after": null,
+      "final_cdc_bytes": 270,
+      "frame": {
+        "width": 240,
+        "height": 135,
+        "sequence": 5,
+        "sourceSequence": 16
+      },
+      "worker_errors": [],
+      "reset_count": 0,
+      "cleanup": {
+        "exit_code": 0,
+        "graceful": true,
+        "iframe_removed": true,
+        "engine_workers": 1,
+        "guest_pthreads": 4,
+        "workers_observed": 5,
+        "workers_live": 0,
+        "workers_closed_observed": true
+      }
+    }
+  ],
+  "prior_separate_controls": [
+    {
+      "label": "prior standard default clock",
+      "passes": 3,
+      "cold_starts": [
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "9c1a4f03b823c8fe10ad5c4456a60b09d46bb78930bc3c40d5ca7fdfec8cbc0d",
+            "bytes": 34874
+          }
+        },
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "7654b840d8452ff78915e1e04d917e58cc6091f2d48b64f684e9bdec4e74ae35",
+            "bytes": 35139
+          }
+        },
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "5340b0abc51fda5f4a33a867d522abffdbd06e30b29dd57bd6b310d3e1243db8",
+            "bytes": 35515
+          }
+        },
+        {
+          "status": "FAIL",
+          "failure": "Error: Timed out waiting for pressed while G0/F12 is held (running)",
+          "raw_report": {
+            "sha256": "953a6316b1495da30f066cbc66d118b4ef8dade2d27d1588349f024f7dc0eb02",
+            "bytes": 24470
+          }
+        },
+        {
+          "status": "FAIL",
+          "failure": "Error: 浏览器 QEMU 执行线程异常停止。",
+          "raw_report": {
+            "sha256": "0961a6966d7ceafac3aff0479cc852bb01d3a28c5659d660d30b2fa72ac78978",
+            "bytes": 24278
+          }
+        }
+      ]
+    },
+    {
+      "label": "prior interleaved standard default clock",
+      "passes": 2,
+      "cold_starts": [
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "fd3e8f498498eda96af0a735e21100e619729cceb7233fe0e0c7c774f0401bb5",
+            "bytes": 35940
+          }
+        },
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "65a011c0d1beab1d62fee5b7b717f48f0bb673394e4fd4e89e9c1b1ab984427f",
+            "bytes": 36256
+          }
+        },
+        {
+          "status": "FAIL",
+          "failure": "Error: Timed out waiting for pressed while G0/F12 is held (running)",
+          "raw_report": {
+            "sha256": "a998543acea0bd1b14188a88ee48e3e217a26dea6f58fb489943482e734e441b",
+            "bytes": 25035
+          }
+        }
+      ]
+    },
+    {
+      "label": "prior interleaved one-insn-per-TB",
+      "passes": 2,
+      "cold_starts": [
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "cb635e8ec52f1495b5b782823b506a32f707c3d01a16e3915b5e26f7ae3e0baa",
+            "bytes": 39600
+          }
+        },
+        {
+          "status": "FAIL",
+          "failure": "Error: Timed out waiting for released through same guest and UI channel (running)",
+          "raw_report": {
+            "sha256": "50360508d5c86e563a1e5f504a7b8ca8ab0dbbbf4722224a5e708c8744a4317b",
+            "bytes": 36442
+          }
+        },
+        {
+          "status": "PASS",
+          "failure": null,
+          "raw_report": {
+            "sha256": "83ec15a04177876110f24d3061e1209a3def930bb42f3d6479d9a5b52cf1ff98",
+            "bytes": 40532
+          }
+        }
+      ]
+    }
+  ]
+}

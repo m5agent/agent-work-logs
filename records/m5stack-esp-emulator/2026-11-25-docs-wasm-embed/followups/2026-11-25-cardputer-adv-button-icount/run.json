@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "FAIL",
+  "title": "Cardputer-Adv Button fixed firmware single-thread icount control",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/268",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "55d449e345417e4f0b9c6531108f48bdaf8a55db"
+  },
+  "hardware": {
+    "model": "Cardputer-Adv",
+    "mode": "virtual-device validation (browser WASM)",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+    "wasm_sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211"
+  },
+  "execution": {
+    "environment": "Apple silicon macOS and Chromium 158.0.8127.37",
+    "task_id": "GitHub issue 268",
+    "session_id": "Three independent contexts; source digests in evidence."
+  },
+  "checks": [
+    {
+      "layer": "device_response",
+      "name": "Boot, two QMP G0 acknowledgments and USB release",
+      "status": "PASS",
+      "scope": "3/3"
+    },
+    {
+      "layer": "device_response",
+      "name": "Original Button A Pressed during actual hold",
+      "status": "FAIL",
+      "scope": "0/3"
+    },
+    {
+      "layer": "device_response",
+      "name": "Normal browser Worker cleanup",
+      "status": "PASS",
+      "scope": "3/3 each 5 to 0"
+    }
+  ],
+  "evidence": [
+    "evidence/button-0046-icount.summary.json"
+  ]
+}
