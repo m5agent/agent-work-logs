@@ -18,3 +18,5 @@
 [UIFlow2 摄像头和 LoRa Cap 例程复现](followups/2026-11-25-uiflow-camera-and-lora/)
 
 [Arduino 例程的机型探测和 Unit 复现](followups/2026-11-25-arduino-board-probe-and-units/)
+
+[工作台隔离与 M5UI 修复回归](followups/2026-11-25-workbench-fixes/)

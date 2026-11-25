@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Browser isolation reason and CoreS3 M5UI scheduler candidate verification",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence/uiflow-lvgl-summary.json"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS; isolated static simulator preview",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "Non-isolated iframe capability message",
+      "status": "PASS"
+    },
+    {
+      "name": "Same-origin isolated preview interactive references",
+      "status": "PASS"
+    },
+    {
+      "name": "CoreS3 exact M5UI button input and pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "Full production docs integration and deployment",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/iframe-summary.json",
+    "evidence/uiflow-lvgl-summary.json"
+  ]
+}
