@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "M5_Hardware #23 C152 StopWatch STL 缺少屏幕玻璃（模型 15.0 mm，实机与图纸 15.5 mm）",
+  "source": {
+    "issue": "https://github.com/m5stack/M5_Hardware/issues/23",
+    "pull_request": "",
+    "repository": "m5stack/M5_Hardware",
+    "base_commit": "067ddd8fa3cf17506dba4769e50237daf21359db",
+    "base_branch_commit": "18de3bb3087ea617c38642ba3eedd10dc9f17cbf",
+    "artifact_path": "Products/C152_StopWatch/Structures/StopWatch.stl",
+    "artifact_blob_sha1": "e4ff3f7febe0116d817950ee3effbeba5005dd00",
+    "artifact_sha256": "48b292c76f929acb75868cba47ccda86800fbff7cfff172161df64ff87f220d5",
+    "artifact_bytes": 853484,
+    "drawing": "https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1242/C152-StopWatch-model-size.pdf"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS host, Python 3.9 standard library only (struct/math), PDF rendered with Quick Look",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "stl_header_and_triangle_count",
+      "status": "PASS",
+      "detail": "binary STL, header 'solid 00-STOPWATCH_ASM_100', 17068 triangles, 853484 bytes = 84 + 50*17068"
+    },
+    {
+      "name": "artifact_matches_master",
+      "status": "PASS",
+      "detail": "downloaded file hashes to blob e4ff3f7f, identical to the current master blob, so the defect is live on master"
+    },
+    {
+      "name": "overall_height",
+      "status": "PASS",
+      "detail": "height axis X = 0.000..15.000; only surface above X=14.99 is the rim annulus r 24.541..24.973 (dia 49.08..49.95)"
+    },
+    {
+      "name": "plan_dimensions",
+      "status": "PASS",
+      "detail": "Y/Z bbox +/-25.973 mm = dia 51.95, matching the drawing callout"
+    },
+    {
+      "name": "display_glass_present",
+      "status": "FAIL",
+      "detail": "nothing above X=11.550 for r<=23.69; the window is open through the front case, so the glass is not modelled"
+    },
+    {
+      "name": "seat_geometry",
+      "status": "PASS",
+      "detail": "seat at X=14.300 spans r 23.700..24.530 (aperture dia 47.40, seat dia 49.06); rim bore dia 49.08"
+    },
+    {
+      "name": "reconstruct_missing_part",
+      "status": "PASS",
+      "detail": "dia 49.08 disc with bottom 14.300 and top 15.500 is 1.20 mm thick and 0.50 mm proud, reproducing the 15.5 mm height"
+    },
+    {
+      "name": "displaced_copy_group",
+      "status": "PASS",
+      "detail": "second group of 8534 triangles at X 0..15, Y +/-25.973, Z -208.329..-43.032; four parts shifted only in -Z by -69.006 / -109.600 / -189.626 / -220.703 mm"
+    },
+    {
+      "name": "drawing_dimensions",
+      "status": "PASS",
+      "detail": "rendered drawing shows 15.5, dia 51.95, 40, 25.46, 4-dia5, 2-dia4, 2-dia2.2, R1, R2; no window diameter and no 0.5 mm step"
+    },
+    {
+      "name": "physical_device_measurement",
+      "status": "NOT RUN",
+      "detail": "no C152 on hand; 15.5 mm is taken from the drawing callout, which was verified"
+    },
+    {
+      "name": "cad_rebuild_and_export",
+      "status": "NOT RUN",
+      "detail": "repository folder contains only the STL, no STEP/F3D source; modifying the upstream repo is out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/stl_analysis.py",
+    "evidence/stl_analysis_output.txt",
+    "evidence/C152-StopWatch-model-size.png",
+    "evidence/drawing-dimensions.txt"
+  ],
+  "notes": [
+    "Static mesh analysis only: this is code-level verification of a CAD asset, not hardware or virtual-device validation.",
+    "Issue #23 remains OPEN; one English reply posted by m5agent (author of #23 writes in English).",
+    "No repository changes were pushed; no issue state was changed."
+  ]
+}
