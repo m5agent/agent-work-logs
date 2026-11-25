@@ -1,0 +1,54 @@
+{
+  "checks": {
+    "candidate_init_read_register": "PASS",
+    "cleanup": "PASS",
+    "framebuffer_change": "PASS",
+    "new_release_build_and_physical_hardware": "NOT RUN",
+    "original_app_after_candidate": "PASS",
+    "original_candidate_native_screen": "PASS",
+    "stock_constructor": "FAIL",
+    "stock_unchanged_original_app": "FAIL",
+    "synthetic_card_serial_readback": "PASS"
+  },
+  "date": "2026-11-25",
+  "evidence": {
+    "bytes": 7330,
+    "path": "evidence/nfccap-131.summary.json",
+    "sha256": "0466dc9a9d2f0a21167441c705b4c835b69db8eaf062e03235900c86e38e13b5"
+  },
+  "execution": {
+    "reproduction": "report.md",
+    "runner": "code/run-nfccap-131.mjs",
+    "runtime": "locked 0046 QEMU-WASM",
+    "same_session": true,
+    "site_manifest_sha256": "cec271aefa1a575d8b257ea899a8af91eb8209575202fef99fb919bab37f16ac",
+    "wasm": {
+      "bytes": 12791229,
+      "sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211"
+    }
+  },
+  "firmware": {
+    "candidate": "same VM, exact source-derived SDK init capsule",
+    "family": "official UIFlow2 v2.5.3",
+    "sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd"
+  },
+  "hardware": {
+    "level": "virtual-device validation",
+    "model": "Cardputer-Adv and virtual CC1101 Cap ST25R3916"
+  },
+  "kind": "issue",
+  "native_screen_evidence": {
+    "bytes": 3425,
+    "path": "evidence/nfccap-131-native.summary.json",
+    "sha256": "6c04481db668bfffdf42a770c7b80db3ae0ade8da04814619948ec5e5c427941"
+  },
+  "overall_status": "PARTIAL",
+  "schema_version": 1,
+  "source": {
+    "base": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "issue": "https://github.com/m5stack/uiflow-micropython/issues/131",
+    "patch": "patches/0001-nfccap-spi-init.patch",
+    "revision": "caab06dc7b517724b5d2b41f6d84a29217407a8d"
+  },
+  "title": "NFCCap SPI constructor candidate"
+}
