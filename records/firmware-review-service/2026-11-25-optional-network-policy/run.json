@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "审查框架：可选网络未使用不再转人工",
+  "source": {
+    "issue": "",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": "7efa0b7"
+  },
+  "hardware": {},
+  "firmware": {
+    "flipped_to_verified": [
+      {"job_id": "job-4858a2e7bcb8", "name": "Hrenomysh"},
+      {"job_id": "job-37bb82f2046c", "name": "SecTrustKey v1.2.0"},
+      {"job_id": "job-de1d1429c30c", "name": "SecTrustKey v1.2.1"}
+    ],
+    "network_resolved_interaction_left": [
+      {"job_id": "job-6df3d35e88bd", "name": "玄机OS"},
+      {"job_id": "job-fc77011a18b2", "name": "CardputerDict"}
+    ],
+    "core_control": [
+      {"job_id": "job-26c58bb067d3", "name": "Monster for Cyberspace.online", "result": "E_NETWORK_NO_ACTIVITY (expected)"}
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; resident review service; native QEMU device service; review-sta userspace fixture; saved-snapshot retries submit=false; no physical hardware",
+    "task_id": "optional-network-policy-2026-11-25",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "optional network classification",
+      "status": "PASS",
+      "detail": "online pronunciation, audio cache, clock-only Wi-Fi, offline+provisioning, Wi-Fi fix"
+    },
+    {
+      "name": "core network guard",
+      "status": "PASS",
+      "detail": "web desktop, network client, social network, network radio, WiFite remain required"
+    },
+    {
+      "name": "no-activity exemption",
+      "status": "PASS",
+      "detail": "only optional + no scan/auth/DHCP events -> NOT_USED"
+    },
+    {
+      "name": "regression suite",
+      "status": "PASS",
+      "detail": "365 tests passed"
+    },
+    {
+      "name": "core network activation",
+      "status": "NOT RUN",
+      "detail": "Monster/Bruce/CardOS still manual; simulator saved-network/setup pending"
+    },
+    {
+      "name": "StopWatch exact lane",
+      "status": "NOT RUN",
+      "detail": "DHCP observed, no TCP/UDP"
+    },
+    {
+      "name": "Tab5/no-profile/interaction",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/optional-network-summary.json"
+  ],
+  "notes": [
+    "Optional network is only exempt when the guest made no Wi-Fi attempt at all; explicit failures still block.",
+    "Report network status and conclusion are normalized before the report snapshot.",
+    "No simulator code changed; no Burner submission."
+  ]
+}
