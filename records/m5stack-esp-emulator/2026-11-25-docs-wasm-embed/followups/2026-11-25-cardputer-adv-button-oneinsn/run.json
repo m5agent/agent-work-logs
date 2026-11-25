@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer-Adv Button exact-flash default/single-instruction A/B",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/268",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "55d449e345417e4f0b9c6531108f48bdaf8a55db"
+  },
+  "hardware": {
+    "model": "Cardputer-Adv",
+    "mode": "virtual-device validation",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "wasm_sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211",
+    "runtime_manifest_sha256": "a56410a8fb99a0e65ce7a7017c3a5ceb8ce0bd832451cbc71e12317cf614a0b9",
+    "source_lock_sha256": "4ba15619e4613bc886e796d6f6c6cacce7e2f1b9225e424a48c2aaea1aaa36cd",
+    "harness_sha256": "8beffaab3d6ef55c087f019e0ae2242fad85b798afd695e066e63d8cfb4f5ca8",
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "firmware_input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+    "padded_flash_sha256": "54ee755a50f4187e9ddfc96efb7ea996c896e46d4b99e2945ceb3183a1aa6f50",
+    "sketch_sha256": "444450396503479b748d137758cab1a70f206b882fccf06bdaac786f81ad0d81"
+  },
+  "execution": {
+    "environment": "Apple silicon macOS, Chromium 158.0.8127.37",
+    "task_id": "GitHub issue 268",
+    "session_id": "Six independent browser processes, bounded hashes preserved"
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "name": "Strict held then released official USB markers",
+      "status": "PARTIAL",
+      "scope": "2/3 normal and 2/3 candidate"
+    },
+    {
+      "layer": "device_response",
+      "name": "Guest and browser cleanup",
+      "status": "PASS",
+      "scope": "Six normal guest closes"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Physical hardware startup",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/one-insn-ab.summary.json"
+  ]
+}
