@@ -85,6 +85,8 @@
 
 [Cardputer-Adv 锁定 WASM 的竖屏、显示、键盘和四种旋转](followups/2026-11-25-cardputer-adv-signed-portrait-locked-0049/)
 
+[CoreS3 DualKmeter 原例程三组有符号温度及实际 I²C](followups/2026-11-25-cores3-dual-kmeter-private/)
+
 ## 试点结论
 
 两款设备可以在启用浏览器跨源隔离的文档预览中演示精选例程。CoreS3 的绘图、触摸和按键，Cardputer-Adv 的显示、键盘和 Quick Start 已有真实来宾画面或输入结果。两款基准例程在桌面 Chrome 的隔离预览中约 12–24 秒到达可操作状态。窄屏使用完整工作台时，启动按钮在内层页面顶部以下约 1,900 CSS px。建议试点提供模拟屏幕和必要的控件，在实际应用画面出现后启用输入。[逐例矩阵与交互观察](followups/2026-11-25-example-coverage/)

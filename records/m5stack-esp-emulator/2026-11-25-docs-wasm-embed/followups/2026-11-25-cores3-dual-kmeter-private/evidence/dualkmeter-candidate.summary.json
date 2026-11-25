@@ -1,0 +1,193 @@
+{
+  "validation": "virtual-device validation (browser WASM)",
+  "overall_status": "PARTIAL",
+  "scope": "Verified exact private incremental guest path. Default public preview remains missing attachment.",
+  "identities": {
+    "project": "examples/module/dualkmeter/dualkmeter_cores3.m5f2",
+    "projectSha256": "f228aa58eebcb6879a7f1d0c4f527b615cf9f6552fb7286c184c36e9261a39ee",
+    "pythonSha256": "6765c65ac5e3a6219d762fe2cbc4639301714719646a79b115cc794e2b44fb37",
+    "revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6"
+  },
+  "build": {
+    "all_objects_rebuilt": false,
+    "assets": {
+      "javascript": {
+        "bytes": 157200,
+        "path": "qemu-system-xtensa.js",
+        "sha256": "54df26b5df679651e5172ff14ee007a5ab34484edefeaa5f622fa60f5731aca6"
+      },
+      "wasm": {
+        "bytes": 12796929,
+        "path": "qemu-system-xtensa.wasm",
+        "sha256": "a6b7eacd1e5c7400e490d3a506be82b24713d84e956544b5d0b05ece89b505d1"
+      },
+      "worker": {
+        "bytes": 2776,
+        "path": "qemu-system-xtensa.worker.js",
+        "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+      }
+    },
+    "base_lock_sha256": "6ca9ff0938e76e84b659ff1a6abbd785c23842624742e5b88e86eb4384d718d1",
+    "base_manifest_sha256": "7e787044095cb32827287d968df38929816a8679a98e78888b8b9fc19d4b0d4e",
+    "base_source_archive_sha256": "cf734733dfde34bc8d7ff45539f8765a2d774dd2f7f0f6b5bde69fec4d3e4e66",
+    "base_wasm_sha256": "3110d2859c0eb8648a94c52200c6456f387379859f865c0d3f46058d50bd798f",
+    "distribution": "private incremental DualKmeter only",
+    "guest_execution": "NOT RUN",
+    "identical_reused_link_input_count": 712,
+    "patch_sha256": "e412ebb45fb7fc171f5059d57a04b443f3d014e6441297c3583cb621001dfdd1",
+    "patched_files": {
+      "hw/m5stopwatch/m5cores3.c": "98b5f3e6cfccbc077d8478d6f96e148a86f07ff045d1981d377cb87787c414f0",
+      "hw/m5stopwatch/m5sw_i2c_devs.c": "116b52ca7c2d6f5dc38ffe35338b868ba8ef3efb3213c34140d06781d0b8728c"
+    },
+    "pinned_link_sha256": "bee78d2dadbff7cac52c089c62c31de10550af08d45a28307cf316bb1a3562a4",
+    "rebuilt_objects": {
+      "libqemu-xtensa-softmmu.a.p/hw_m5stopwatch_m5cores3.c.o": {
+        "object": {
+          "bytes": 33420,
+          "sha256": "0641720dcd659f8dcb47165d13a661cfc13ce79e50259efe52b7f983f5de0168"
+        },
+        "source": "hw/m5stopwatch/m5cores3.c"
+      },
+      "libqemu-xtensa-softmmu.a.p/hw_m5stopwatch_m5sw_i2c_devs.c.o": {
+        "object": {
+          "bytes": 147976,
+          "sha256": "fc9881686151065056218ba99cc464c17035343f6954233f8efe668a4474b051"
+        },
+        "source": "hw/m5stopwatch/m5sw_i2c_devs.c"
+      }
+    },
+    "status": "PASS"
+  },
+  "site": {
+    "adapter": {
+      "bytes": 38161,
+      "sha256": "715b0a3b916afe5da5fd3204918e8dfac5b0719a1b1348fced8e1cd75c8d09a8"
+    },
+    "asset_count": 2186,
+    "engine": {
+      "bytes": 32040,
+      "sha256": "fda3b8173505fc6de911f163c05b558e844f53680456e9e52960dd3068a81fdc"
+    },
+    "guest_execution": "NOT RUN",
+    "publication_eligible": false,
+    "runtime_manifest_sha256": "fdc06cac6748d3523fc5d9f7d48cca552030cf470ab255080fe3968557d05295",
+    "site_manifest_sha256": "2c3d6730cfea3c71ba215d38e302e50e2c3fc42297bf8a4ba30a850226a6df5a",
+    "source": {
+      "base_site_sha256": "5c53116f28894a0b6210167b3aecf52abaf77e9cb385da048901ceac85211495",
+      "base_source_archive_sha256": "cf734733dfde34bc8d7ff45539f8765a2d774dd2f7f0f6b5bde69fec4d3e4e66",
+      "base_wasm_sha256": "3110d2859c0eb8648a94c52200c6456f387379859f865c0d3f46058d50bd798f",
+      "build_receipt_sha256": "bfab89fb6ed8fb9f4fe79a7d1f3ca9de445ae52892f72ad94bb9fe14eb2ab994",
+      "distribution": "private incremental, original source archive describes baseline 0049 only",
+      "fixture": {
+        "board": "cores3",
+        "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+        "id": "m127-celsius",
+        "original_python_sha256": "6765c65ac5e3a6219d762fe2cbc4639301714719646a79b115cc794e2b44fb37"
+      },
+      "patch": {
+        "path": "patches/qemu-wasm-probe/private-cores3-dual-kmeter.patch",
+        "sha256": "e412ebb45fb7fc171f5059d57a04b443f3d014e6441297c3583cb621001dfdd1"
+      }
+    },
+    "status": "PREFLIGHT_PASS",
+    "wasm_sha256": "a6b7eacd1e5c7400e490d3a506be82b24713d84e956544b5d0b05ece89b505d1"
+  },
+  "default_negative": {
+    "raw_report_sha256": "0569a2b3c23cdd3542957685a54d315a59673c8f5f5ce8623fd0c939a42d3f09",
+    "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "wasm_sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211",
+    "site_sha256": "cec271aefa1a575d8b257ea899a8af91eb8209575202fef99fb919bab37f16ac",
+    "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "guest_output": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 34, in <module>\r\n  File \"<stdin>\", line 26, in loop\r\n  File \"module/dual_kmeter.py\", line 51, in is_ready\r\nOSError: 259\r\n\r\n",
+    "exit_code": 0,
+    "workers_closed": 6
+  },
+  "candidate_guest": {
+    "status": "PASS",
+    "raw_report_sha256": "6a0acd9c6fb27d8024df4be56a60a24e0a7b840041922e8624d09e34e1c6e14e",
+    "browser": "158.0.8127.37",
+    "harness_sha256": "243e887c680807bf5a0f9768d961c9fe2be1aa106a9d18a6a30b6b90d92c3fb3",
+    "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "controller_attachment": "m127-celsius",
+    "inputs_and_outputs": [
+      {
+        "centiC": 2350,
+        "expectedText": "23.5",
+        "text": [
+          "23.5"
+        ],
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "sequence": 36,
+          "sha256": "1b3cbefeac7ed3533eaf7742778102aef33e68fdd1ec45abec1d1b5949a26d31",
+          "epoch": 0,
+          "phase": "running",
+          "output": ""
+        },
+        "model": {
+          "kind": "dual-kmeter",
+          "temperatureCentiC": 2350,
+          "transactions": 204,
+          "readBytes": 255,
+          "writtenBytes": 102
+        },
+        "canvasSha256": "8300f0548d8887fe736c3ac1c986d9b65d75badfd258e17ca9c7887cfd1af258"
+      },
+      {
+        "centiC": -1234,
+        "expectedText": "-12.34",
+        "text": [
+          "-12.34"
+        ],
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "sequence": 46,
+          "sha256": "ce8f766aead32ed49a29a5ef740ca5d7aa35899e8d99a8a95fe8fa91a5ef80b4",
+          "epoch": 0,
+          "phase": "running",
+          "output": ""
+        },
+        "model": {
+          "kind": "dual-kmeter",
+          "temperatureCentiC": -1234,
+          "transactions": 450,
+          "readBytes": 561,
+          "writtenBytes": 225
+        },
+        "canvasSha256": "ad84a5a49f5fead1bc4220d6876cdf2ed3298b72d5d5c52fe8adb7ab4310f873"
+      },
+      {
+        "centiC": 8765,
+        "expectedText": "87.65",
+        "text": [
+          "87.65"
+        ],
+        "frame": {
+          "width": 320,
+          "height": 240,
+          "sequence": 54,
+          "sha256": "38082eff74e4cb9b44945d8ff4f7fa5b52f178df236e706fbe74afdf61005f77",
+          "epoch": 0,
+          "phase": "running",
+          "output": ""
+        },
+        "model": {
+          "kind": "dual-kmeter",
+          "temperatureCentiC": 8765,
+          "transactions": 688,
+          "readBytes": 860,
+          "writtenBytes": 344
+        },
+        "canvasSha256": "a1d64ac77449b42f4a0c070829727be150d02c9eae3908d97356aeda84e55677"
+      }
+    ],
+    "editor_interrupt": true,
+    "normal_dom_stop": true,
+    "qemu_exit": 0,
+    "workers_closed": 6,
+    "workers_live": 0
+  }
+}
