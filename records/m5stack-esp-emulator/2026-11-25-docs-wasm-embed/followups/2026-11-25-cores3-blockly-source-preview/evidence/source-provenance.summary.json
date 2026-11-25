@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "status": "GENERATION_PASS",
+  "guest_validation": "NOT RUN",
+  "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/255",
+  "source_commit": "73696ca95594646f09a39e4f525b20cf5cc550e5",
+  "editor": "https://uiflow2.m5stack.com/",
+  "editor_version": "V2.5.5",
+  "projects": [
+    {
+      "path": "examples/module/dualkmeter/dualkmeter_cores3.m5f2",
+      "source_url": "https://github.com/m5stack/uiflow-micropython/blob/73696ca95594646f09a39e4f525b20cf5cc550e5/examples/module/dualkmeter/dualkmeter_cores3.m5f2",
+      "m5f2_bytes": 2294,
+      "m5f2_sha256": "f228aa58eebcb6879a7f1d0c4f527b615cf9f6552fb7286c184c36e9261a39ee",
+      "board": "cores3",
+      "project_editor_version": null,
+      "project_block_types": {
+        "basic_on_loop": 1,
+        "basic_on_setup": 1,
+        "controls_if": 1,
+        "dualkmeter_get_thermocouple_temperature": 1,
+        "dualkmeter_init": 1,
+        "dualkmeter_is_ready": 1,
+        "label_set_text": 1,
+        "system_m5_begin": 1,
+        "system_m5_update": 1
+      },
+      "project_shadow_types": {
+        "math_number": 1,
+        "text": 1
+      },
+      "loaded_block_and_shadow_types": {
+        "basic_on_loop": 1,
+        "basic_on_setup": 1,
+        "controls_if": 1,
+        "dualkmeter_get_thermocouple_temperature": 1,
+        "dualkmeter_init": 1,
+        "dualkmeter_is_ready": 1,
+        "label_set_text": 1,
+        "math_number": 1,
+        "system_m5_begin": 1,
+        "system_m5_update": 1
+      },
+      "generated_bytes": 774,
+      "generated_sha256": "6765c65ac5e3a6219d762fe2cbc4639301714719646a79b115cc794e2b44fb37",
+      "independent_offline_repeat_exact": true,
+      "syntax_ast_parse": "PASS",
+      "imports": [
+        "os",
+        "sys",
+        "io",
+        "M5",
+        "M5.*",
+        "module.DualKmeterModule",
+        "utility.print_error_msg"
+      ],
+      "observations": {
+        "reports_sha256": [
+          "129f64020edd1d04bd46a53c815888e5f805693fc4b6a227560e4fda7a42656c",
+          "2d0d94adb9524b69d64f73ef799ca86ed53f3495a980d96c79fcc3cff04bb684"
+        ],
+        "dependency": {
+          "bus": "I2C1/MBUS",
+          "model": "DualKmeterModule",
+          "address": "0x11",
+          "sda_gpio": 12,
+          "scl_gpio": 11,
+          "hz": 100000,
+          "register_reads": [
+            "0x30: 1 byte; 0 means ready",
+            "0x00: signed LE32 external temperature in hundredths Celsius"
+          ],
+          "result": "Updates label with temperature only when ready."
+        },
+        "current_attachment_admission": "MISSING"
+      }
+    },
+    {
+      "path": "examples/module/llm/llm_voice_assistant.m5f2",
+      "source_url": "https://github.com/m5stack/uiflow-micropython/blob/73696ca95594646f09a39e4f525b20cf5cc550e5/examples/module/llm/llm_voice_assistant.m5f2",
+      "m5f2_bytes": 8843,
+      "m5f2_sha256": "70a4ad44cf6ba4cb21012dbf76493165ed758ab569d7680e24f82980bda80646",
+      "board": "cores3",
+      "project_editor_version": "V2.1.9",
+      "project_block_types": {
+        "basic_on_loop": 1,
+        "basic_on_setup": 1,
+        "controls_ifelse": 1,
+        "controls_whileUntil": 1,
+        "label_set_text": 7,
+        "logic_negate": 1,
+        "module_llm_asr_data_input_callback": 1,
+        "module_llm_begin_voice_assistant": 1,
+        "module_llm_check_connection": 1,
+        "module_llm_data_input_callback": 1,
+        "module_llm_init": 1,
+        "module_llm_sys_reset": 1,
+        "module_llm_tick": 1,
+        "system_m5_begin": 1,
+        "time_sleep_second": 1,
+        "variables_get": 8
+      },
+      "project_shadow_types": {
+        "math_number": 1,
+        "module_llm_id_option": 1,
+        "module_llm_language_option": 1,
+        "module_llm_rx_option": 1,
+        "module_llm_tx_option": 1,
+        "text": 9
+      },
+      "loaded_block_and_shadow_types": {
+        "basic_on_loop": 1,
+        "basic_on_setup": 1,
+        "controls_ifelse": 1,
+        "controls_whileUntil": 1,
+        "label_set_text": 7,
+        "logic_negate": 1,
+        "math_number": 1,
+        "module_llm_asr_data_input_callback": 1,
+        "module_llm_begin_voice_assistant": 1,
+        "module_llm_check_connection": 1,
+        "module_llm_data_input_callback": 1,
+        "module_llm_id_option": 1,
+        "module_llm_init": 1,
+        "module_llm_language_option": 1,
+        "module_llm_rx_option": 1,
+        "module_llm_sys_reset": 1,
+        "module_llm_tick": 1,
+        "module_llm_tx_option": 1,
+        "system_m5_begin": 1,
+        "text": 7,
+        "time_sleep_second": 1,
+        "variables_get": 8
+      },
+      "generated_bytes": 2719,
+      "generated_sha256": "3cc6bf8a673dbda228f8fea2aea24de8448d664faa7ec73487bc54867fdac10d",
+      "independent_offline_repeat_exact": true,
+      "syntax_ast_parse": "PASS",
+      "imports": [
+        "os",
+        "sys",
+        "io",
+        "M5",
+        "M5.*",
+        "module.LlmModule",
+        "time",
+        "utility.print_error_msg"
+      ],
+      "observations": {
+        "reports_sha256": [
+          "a7dd379e79b89fd46c1d5fa61cf2386ae870c3c981c4bf3b19916deba1d46ed5",
+          "36ff29871fb45b6e9d1cddcac3c6edb1510737a25c7ebb506cdc84c71c10fdf4"
+        ],
+        "dependency": {
+          "bus": "UART2/MBUS",
+          "model": "LlmModule",
+          "tx_gpio": 17,
+          "rx_gpio": 18,
+          "baud": 115200,
+          "mode": "8N1",
+          "protocol": "StackFlow request IDs, work IDs, newline-delimited JSON responses",
+          "peer_processes": [
+            "ping",
+            "version",
+            "reset",
+            "audio setup",
+            "KWS",
+            "ASR",
+            "LLM",
+            "TTS/MeloTTS"
+          ],
+          "result": "Connection label and ASR/LLM callbacks; no onboard microphone or speaker calls in generated script."
+        },
+        "current_attachment_admission": "MISSING"
+      }
+    }
+  ],
+  "instrumentation": {
+    "sourceSHA256": "13a8d305a12e442df1c3f4207661709cf997c36ce1023377e30d9bb1791b53da",
+    "instrumentedSHA256": "11b92af360baa093b24dfb2068aa478731ba751710cb4fc765048f83771e72f9",
+    "anchor": "window.Blockly.updateCodeEditorValue_=this.updateCodeEditorValue.bind(this),",
+    "insertedAfterAnchor": "globalThis.__uiFlowReadFullPreview=this.getWorkspaceValue.bind(this),",
+    "invocation": "UIFlow2 CodeEditorService.getWorkspaceValue → CodeMakerService.makeCode"
+  },
+  "sdk_driver_sha256": {
+    "m5stack/libs/module/mbus.py": "3beff587753669d42b131bc838d6139453db03fd63020bcbf60ff9bde7ca6af9",
+    "m5stack/libs/module/dual_kmeter.py": "367061c00a2f5174e38e3b0fd4bc4c25544decb599f7f97d5412562d8271cd57",
+    "m5stack/libs/module/llm.py": "b6e7fd704dd8b6121945ba0108bfecf1e96f30b479b1f0044a9e7385d5e8be3d"
+  },
+  "assets": [
+    {
+      "url": "https://uiflow2.m5stack.com/",
+      "sha256": "c63443784943bf49e13b83e05ad126e53bd04ad690f6cc90da746555ba8b2717",
+      "bytes": 2616
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/runtime.0c170508fc7095e7.js",
+      "sha256": "812f4dfa7458a293336bb19160bf1a2e0179e7c28a4498aaeebcb01ae53947c7",
+      "bytes": 3715
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/polyfills.1082e77b3af61d04.js",
+      "sha256": "fa8f08548000e21f67f15710347907d8340b035f522d87966c713895e2e6192d",
+      "bytes": 33812
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/scripts.1e8e1078a16e61f3.js",
+      "sha256": "ed42b83b1aeec2d60c4e037e3777d22699911c2e5d8f3515840d38e93cd46713",
+      "bytes": 8726181
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/main.5ac6279df6d9a610.js",
+      "sha256": "13a8d305a12e442df1c3f4207661709cf997c36ce1023377e30d9bb1791b53da",
+      "bytes": 4205447
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/styles.1e5d34788c1aa6e7.css",
+      "sha256": "923d4e660d65cd9bc0218f87a892852209c58b5f243d6d80884ede6662ef556c",
+      "bytes": 23907
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/assets/vs/loader.js",
+      "sha256": "ba24f4b28f8c3b01d276d5b8632a4609f0da8e910c65f5e495fca1cfb71550f4",
+      "bytes": 30024
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/assets/blockly/language/en.json",
+      "sha256": "000ca2c9a480d738f5a40d43569e15e9729e2631fc1ba0247c4da58e258199d5",
+      "bytes": 68991
+    },
+    {
+      "url": "https://uiflow2.m5stack.com/assets/blockly/toolbox.xml",
+      "sha256": "4b43beb4b5f0a1e1231777420374735e235158c923213aea03d48e52b480c0c0",
+      "bytes": 1111219
+    }
+  ]
+}

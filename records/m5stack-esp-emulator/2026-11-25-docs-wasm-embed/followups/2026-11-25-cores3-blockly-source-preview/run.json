@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3 official Blockly source preview and Arc asset mismatch",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/255",
+    "pull_request": "",
+    "repository": "https://github.com/m5stack/uiflow-micropython",
+    "base_commit": "73696ca95594646f09a39e4f525b20cf5cc550e5",
+    "arc_commit": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "arc_issue": "https://github.com/m5stack/uiflow-micropython/issues/133"
+  },
+  "hardware": {
+    "target": "CoreS3",
+    "mode": "editor preflight and default-browser virtual-device negative controls",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "input_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "wasm_sha256": "210db550d50847a3d4f66d86f81c8d1cdb2ac106ebf6bac16cccc60f4da0e211"
+  },
+  "execution": {
+    "environment": "Chromium 158.0.8127.37; official UIFlow2 V2.5.5",
+    "task_id": "GitHub issue 255",
+    "session_id": "independent anonymous editor contexts; browser identifiers omitted"
+  },
+  "checks": [
+    {
+      "layer": "review",
+      "name": "Exact DualKmeter project into official full Code Preview",
+      "status": "PASS"
+    },
+    {
+      "layer": "review",
+      "name": "Exact ModuleLLM project into official full Code Preview",
+      "status": "PASS"
+    },
+    {
+      "layer": "review",
+      "name": "Original Arc assets show M5Arc event",
+      "status": "FAIL"
+    },
+    {
+      "layer": "review",
+      "name": "Current editor imports all legacy Arc-labeled blocks",
+      "status": "FAIL"
+    },
+    {
+      "layer": "device_response",
+      "name": "CoreS3 DualKmeter and ModuleLLM controller-attached browser WASM",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Same shipped Python source renders and toggles M5Switch with inverse raw touch",
+      "status": "PASS",
+      "scope": "virtual-device validation; diagnostic input route"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Ordinary visible-center input toggles same-source switch",
+      "status": "FAIL",
+      "scope": "virtual-device validation on the exact recorded profile"
+    },
+    {
+      "layer": "device_response",
+      "name": "Default WASM reads DualKmeter temperature",
+      "status": "FAIL",
+      "scope": "Actual `is_ready` produces guest OSError 259."
+    },
+    {
+      "layer": "device_response",
+      "name": "Default WASM connects ModuleLLM",
+      "status": "PARTIAL",
+      "scope": "35 seconds showed waiting screen, no peer attached."
+    }
+  ],
+  "evidence": [
+    "evidence/source-provenance.summary.json",
+    "evidence/arc-upstream.summary.json",
+    "evidence/same-source-switch.summary.json",
+    "evidence/browser-baseline.summary.json"
+  ]
+}

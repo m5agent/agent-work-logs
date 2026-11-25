@@ -19,4 +19,6 @@
 
 [0048 完整构建复测](follow-up-locked-0048.md) · [完整构建执行记录](follow-up-locked-0048.run.json) · [Speaker 资源待验收项](speaker-follow-up.md)
 
+[同一会话两轮录放与静音阶段的一次欠载](follow-up-locked-0048-mic-rerun.md)
+
 UIFlow2 Speaker 原例程的音频素材使用范围及浏览器装配单独跟踪。生产部署、文档嵌入、真机声学和其他浏览器尚未验收。[Speaker 素材 #271](https://github.com/m5agent/m5stack-esp-emulator/issues/271)
