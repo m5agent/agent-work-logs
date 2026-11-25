@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "b8f5df6a36b749f20f79d87fea0622416470dba8",
+    "candidate_commit": "5548a553f583b0697247fe1481a7378853ff3609",
+    "issue": 254
+  },
+  "hardware": {
+    "device": "CoreS3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49"
+  },
+  "execution": {
+    "level": "virtual-device validation",
+    "runtime_sha256": "42da214947ba6a0c57aff53f49732fd8bb815ea950ebf808319f1ef670db7558",
+    "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "browser": "Chrome 158.0.8127.37",
+    "date": "2026-11-25"
+  },
+  "checks": [
+    {
+      "name": "old runtime software reset",
+      "status": "FAIL"
+    },
+    {
+      "name": "old runtime official WDT",
+      "status": "FAIL"
+    },
+    {
+      "name": "same-session software reset and host control",
+      "status": "PASS"
+    },
+    {
+      "name": "official WDT fresh console and same-session execution",
+      "status": "PASS"
+    },
+    {
+      "name": "host QMP reset clears actual RTC software-stall readback",
+      "status": "PASS"
+    },
+    {
+      "name": "normal browser Worker cleanup for candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "physical, native and hosted deployment",
+      "status": "NOT RUN"
+    }
+  ]
+}

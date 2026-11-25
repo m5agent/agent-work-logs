@@ -1,0 +1,160 @@
+{
+  "kind": "Cardputer-ADV regression on locked ESP32-S3 browser reset update",
+  "validation": "virtual-device validation (browser WASM)",
+  "hardware_validation": "NOT RUN",
+  "source_commit": "5548a553f583b0697247fe1481a7378853ff3609",
+  "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+  "source_lock_sha256": "bdf144b8b3df7acda0ded90a4b0e39edde9621e0069bbc1b9c2cc2ccea14d965",
+  "emscripten": "3.1.50",
+  "all_objects_rebuilt": true,
+  "site_manifest_sha256": "a5c8cb9bd39444a8280bbca8171ff1e8e81ae4b9ffdd4bf493116eb38e6e837a",
+  "runtime_manifest_sha256": "5a713c105e21b5db39e1ce14df597091e4c0fb0d48bb8e0f60f2920c4011f301",
+  "wasm_sha256": "42da214947ba6a0c57aff53f49732fd8bb815ea950ebf808319f1ef670db7558",
+  "browser": "158.0.8127.37",
+  "profile": "cardputer-adv-wasm-wallclock",
+  "clock_divisor": 1,
+  "cases": [
+    {
+      "case": "Arduino Display original example",
+      "status": "PASS",
+      "input_sha256": "cc1b3e5868feb075e2ec8a5e7211897e8ae1c9635f5d072442ef007273c2a968",
+      "flash_sha256": "11f3a15f19b3c5fd759e34773a17f84bf5ffb7ec8e05c99d4b97e19e73241c4b",
+      "final_rgb565": {
+        "sequence": 174,
+        "width": 240,
+        "height": 135,
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 1016,
+        "distinct_colors": 125,
+        "hash": "e40b285040b7b58ed171605a1575b3db6638239a65b8793178e330aed9f63843"
+      },
+      "distinct_observed_frame_hashes": 171,
+      "unsupported_board_error": false,
+      "guest_panic": false,
+      "reset_events": 0,
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "iframe_removed": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    },
+    {
+      "case": "Arduino Keyboard original example through public DOM",
+      "status": "PASS",
+      "input_sha256": "f7edb36bb3662506853773399467841a55bef3d3e16cc3469bc821b4ad7638bf",
+      "flash_sha256": "139a18a7fb9149d947d2e3a3c92c0fd51709494bff598e3418c4b891ea4f414b",
+      "real_press_release_events": [
+        {
+          "id": "a",
+          "down": true
+        },
+        {
+          "id": "a",
+          "down": false
+        },
+        {
+          "id": "b",
+          "down": true
+        },
+        {
+          "id": "b",
+          "down": false
+        },
+        {
+          "id": "c",
+          "down": true
+        },
+        {
+          "id": "c",
+          "down": false
+        },
+        {
+          "id": "backspace",
+          "down": true
+        },
+        {
+          "id": "backspace",
+          "down": false
+        },
+        {
+          "id": "delete",
+          "down": true
+        },
+        {
+          "id": "delete",
+          "down": false
+        },
+        {
+          "id": "ret",
+          "down": true
+        },
+        {
+          "id": "ret",
+          "down": false
+        }
+      ],
+      "rgb565_frames": {
+        "ready": "e4eea5ef29d032f7961dd6905531379fc2b1d9b5926aa1874dcfc6933e3fbf7a",
+        "a": "9674b0f5c1a8fb2bcc5b724173b3389905a3bad75df0b7cfd02cedcc2d109170",
+        "ab": "f9d0763126ad2a6aff4bb0b37711da00346d28cda1a4e278c7afeacb5afc811a",
+        "abc": "324d168e7c93fc21934c42f384a08b4a2a48ff5939cf4b177aff67dd4d8ad9b3",
+        "backspace": "324d168e7c93fc21934c42f384a08b4a2a48ff5939cf4b177aff67dd4d8ad9b3",
+        "delete": "f9d0763126ad2a6aff4bb0b37711da00346d28cda1a4e278c7afeacb5afc811a",
+        "enter": "5e18262174a1c0616a55701d34ee7867c2b037dd9f1254e6598288acfac6d89e"
+      },
+      "behavior": "Typing a, b and c updates the framebuffer. Backspace reaches the controller and retains abc. Delete removes c. Enter submits ab.",
+      "unsupported_board_error": false,
+      "guest_panic": false,
+      "reset_events": 0,
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "iframe_removed": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    },
+    {
+      "case": "Prior 11-key public UIFlow2 reference driver",
+      "status": "PASS",
+      "test": {
+        "path": "platform/tests/test_public_qemu_board_guest.mjs",
+        "sha256": "95b6eda99b9ff5424c6511352e9a558e7871403da58f52a6168f3a02ccba6aa2"
+      },
+      "flash_sha256": "9ca3d53adf8bc81013a1062461961c27ae0450c1ee5e5b1ece6c21753818623b",
+      "physical_keys": [
+        "KeyA",
+        "KeyZ",
+        "KeyQ",
+        "KeyB",
+        "KeyN",
+        "KeyM",
+        "Digit1",
+        "Digit0",
+        "Enter",
+        "Space",
+        "Backspace"
+      ],
+      "guest_controller": {
+        "controller": "tca8418",
+        "address": 52,
+        "receive_mode": "official-driver-fifo-poll",
+        "width": 240,
+        "height": 135
+      },
+      "checks_passed": 69,
+      "texture_pixels_compared": 32400,
+      "device_service_requests": 0,
+      "cleanup": {
+        "graceful_qmp_exit": true,
+        "exit_code": 0,
+        "iframe_removed": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    }
+  ],
+  "scope": "Same prior Cardputer-ADV firmware paths with one browser guest at a time for keyboard input. Functional observations only. The independent public default 56-key IRQ qualification is outside this record."
+}

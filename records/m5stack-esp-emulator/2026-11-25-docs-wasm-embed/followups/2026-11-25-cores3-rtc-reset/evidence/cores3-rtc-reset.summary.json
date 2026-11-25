@@ -1,0 +1,273 @@
+{
+  "kind": "browser virtual-device validation summary",
+  "board": "CoreS3",
+  "host": "macOS Apple Silicon",
+  "omitted_fields": [
+    "local endpoints",
+    "absolute paths",
+    "run/Worker identifiers",
+    "full UART and QMP logs"
+  ],
+  "runtime": {
+    "build": "fresh full-object source build",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "emscripten": "3.1.50",
+    "lock_sha256": "bdf144b8b3df7acda0ded90a4b0e39edde9621e0069bbc1b9c2cc2ccea14d965",
+    "wasm_sha256": "42da214947ba6a0c57aff53f49732fd8bb815ea950ebf808319f1ef670db7558",
+    "corresponding_source_sha256": "7eeb7428dbeec749519d488b538759f11747694522f9612c9d764490c6788152"
+  },
+  "baseline_pc_diagnostic": {
+    "cpu1_pc": "0x403894f4",
+    "instruction": "j 0x403894f4",
+    "cpu0_rom_pc_examples": [
+      "0x40056f64",
+      "0x400450f2"
+    ],
+    "scope": "old 96c7f8ba browser runtime with a private read-only HMP trace"
+  },
+  "runs": [
+    {
+      "mode": "software baseline",
+      "status": "FAIL",
+      "report": {
+        "sha256": "60a00db9ea13b829a17a8d86cda8b721e57316c7dcd5ecc89425bcba1ba3894a",
+        "bytes": 3751674
+      },
+      "started_at": "2026-11-25T10:32:15.399Z",
+      "finished_at": "2026-11-25T10:33:14.134Z",
+      "chrome": "158.0.8127.37",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "runtime_wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "site_manifest": "9e6da5a42a497ebee33df1550c26f16b99e9eea28c5e6a1a2de6943e5814fc8a",
+      "events": [
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 1,
+          "at": "2026-11-25T10:32:32.928Z"
+        },
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 2,
+          "at": "2026-11-25T10:32:32.931Z"
+        }
+      ],
+      "old_program_cancelled": true,
+      "new_console_epoch": null,
+      "new_ready": false,
+      "same_session_uart_recovered": false,
+      "post_reset_observation_ms": null,
+      "guest_exit_code": null,
+      "graceful_exit": false,
+      "workers_observed": 6,
+      "workers_closed_before_context": true,
+      "check_count": 25,
+      "serial_markers": [
+        "RTC_SW_CPU_RST",
+        "entry 0x403c8890"
+      ],
+      "runtime_failure": "init_ffi_layout: nargs <= MAX_CALL_IARGS"
+    },
+    {
+      "mode": "WDT baseline",
+      "status": "FAIL",
+      "report": {
+        "sha256": "2d96ab2be6e980d4cb3bb92fd927be796c017af5deaeb71a8498a36fb85075e2",
+        "bytes": 5341979
+      },
+      "started_at": "2026-11-25T10:33:14.485Z",
+      "finished_at": "2026-11-25T10:34:17.608Z",
+      "chrome": "158.0.8127.37",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "runtime_wasm_sha256": "9c37ace1ef22b32ab1c640f20dc3043dfad200f2b83a104a9d6d96ecffae1372",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "site_manifest": "9e6da5a42a497ebee33df1550c26f16b99e9eea28c5e6a1a2de6943e5814fc8a",
+      "events": [
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 1,
+          "at": "2026-11-25T10:33:34.189Z"
+        },
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 2,
+          "at": "2026-11-25T10:33:34.192Z"
+        }
+      ],
+      "old_program_cancelled": true,
+      "new_console_epoch": 2,
+      "new_ready": false,
+      "same_session_uart_recovered": false,
+      "post_reset_observation_ms": 40688,
+      "guest_exit_code": 0,
+      "graceful_exit": true,
+      "workers_observed": 6,
+      "workers_closed_before_context": true,
+      "check_count": 36,
+      "serial_markers": [
+        "RTC_SW_CPU_RST",
+        "entry 0x403c8890"
+      ],
+      "guest_wdt_marker": true,
+      "program_source_sha256": "741f27a3801f312125da258aa58bfb2a3610e458c3bc6285380b7c4d9c7a813a"
+    },
+    {
+      "mode": "software then host control",
+      "status": "PASS",
+      "report": {
+        "sha256": "1db4a2e81983777193ff6a78b953a1d05fcfbab6fe94f8e32f3ea219ce5266f0",
+        "bytes": 5192220
+      },
+      "started_at": "2026-11-25T10:43:29.804Z",
+      "finished_at": "2026-11-25T10:44:16.216Z",
+      "chrome": "158.0.8127.37",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "runtime_wasm_sha256": "42da214947ba6a0c57aff53f49732fd8bb815ea950ebf808319f1ef670db7558",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "site_manifest": "a5c8cb9bd39444a8280bbca8171ff1e8e81ae4b9ffdd4bf493116eb38e6e837a",
+      "events": [
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 1,
+          "at": "2026-11-25T10:43:52.679Z"
+        },
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 2,
+          "at": "2026-11-25T10:43:52.681Z"
+        }
+      ],
+      "old_program_cancelled": true,
+      "new_console_epoch": 2,
+      "new_ready": true,
+      "same_session_uart_recovered": true,
+      "post_reset_observation_ms": null,
+      "guest_exit_code": 0,
+      "graceful_exit": true,
+      "workers_observed": 6,
+      "workers_closed_before_context": true,
+      "check_count": 71,
+      "serial_markers": [
+        "RTC_SW_CPU_RST",
+        "entry 0x403c8890",
+        "M5_UIFLOW_WORKBENCH_READY"
+      ],
+      "host_qmp_epochs": [
+        2,
+        3
+      ],
+      "host_qmp_rerun_ok": true,
+      "program_source_sha256": "7da95ca5baa3f7776a526c43056e68e234c4c6794f36c10a318a0df7f1838ac5"
+    },
+    {
+      "mode": "official WDT",
+      "status": "PASS",
+      "report": {
+        "sha256": "0e15e8cd8de354e979dd2e1618e17546d7812e5fc176c96aeaa219de9a07836d",
+        "bytes": 3649899
+      },
+      "started_at": "2026-11-25T10:43:43.192Z",
+      "finished_at": "2026-11-25T10:44:16.978Z",
+      "chrome": "158.0.8127.37",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "runtime_wasm_sha256": "42da214947ba6a0c57aff53f49732fd8bb815ea950ebf808319f1ef670db7558",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "site_manifest": "a5c8cb9bd39444a8280bbca8171ff1e8e81ae4b9ffdd4bf493116eb38e6e837a",
+      "events": [
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 1,
+          "at": "2026-11-25T10:44:03.617Z"
+        },
+        {
+          "event": "RESET",
+          "guest": true,
+          "reason": "guest-reset",
+          "consoleEpoch": 2,
+          "at": "2026-11-25T10:44:03.618Z"
+        }
+      ],
+      "old_program_cancelled": true,
+      "new_console_epoch": 2,
+      "new_ready": true,
+      "same_session_uart_recovered": true,
+      "post_reset_observation_ms": 10552,
+      "guest_exit_code": 0,
+      "graceful_exit": true,
+      "workers_observed": 6,
+      "workers_closed_before_context": true,
+      "check_count": 40,
+      "serial_markers": [
+        "RTC_SW_CPU_RST",
+        "entry 0x403c8890",
+        "M5_UIFLOW_WORKBENCH_READY"
+      ],
+      "guest_wdt_marker": true,
+      "program_source_sha256": "741f27a3801f312125da258aa58bfb2a3610e458c3bc6285380b7c4d9c7a813a"
+    },
+    {
+      "mode": "host QMP reset with PROCPU stalled",
+      "status": "PASS",
+      "report": {
+        "sha256": "2bc153bcca0e5402b7e28cc6492657e404ff850fd45659675d986db254838c7f",
+        "bytes": 5160825
+      },
+      "started_at": "2026-11-25T10:44:22.348Z",
+      "finished_at": "2026-11-25T10:44:50.357Z",
+      "chrome": "158.0.8127.37",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "runtime_wasm_sha256": "42da214947ba6a0c57aff53f49732fd8bb815ea950ebf808319f1ef670db7558",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "site_manifest": "a5c8cb9bd39444a8280bbca8171ff1e8e81ae4b9ffdd4bf493116eb38e6e837a",
+      "events": [
+        {
+          "event": "RESET",
+          "guest": false,
+          "reason": "host-qmp-system-reset",
+          "consoleEpoch": 1,
+          "at": "2026-11-25T10:44:38.013Z"
+        }
+      ],
+      "old_program_cancelled": true,
+      "new_console_epoch": 1,
+      "new_ready": true,
+      "same_session_uart_recovered": true,
+      "post_reset_observation_ms": 9043,
+      "guest_exit_code": 0,
+      "graceful_exit": true,
+      "workers_observed": 6,
+      "workers_closed_before_context": true,
+      "check_count": 46,
+      "serial_markers": [
+        "entry 0x403c8890",
+        "M5_UIFLOW_WORKBENCH_READY"
+      ],
+      "guest_rtc_stall_fields": {
+        "armed": [
+          2,
+          33
+        ],
+        "after_reset": [
+          0,
+          0
+        ],
+        "readback_validated": true
+      },
+      "program_source_sha256": "d1b8defe3cf8ae3642ab3111c4c14aa391c155f475d0cae0c64c2ad7d51d9cb6"
+    }
+  ]
+}
