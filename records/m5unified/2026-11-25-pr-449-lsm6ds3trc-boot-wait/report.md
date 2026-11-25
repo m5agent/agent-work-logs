@@ -138,4 +138,5 @@ basic-v27 上以 `internal_imu=false, external_imu=true` 构建同探针：
 
 ## 处理结果
 
-只读评审：未 push、未 close、未改 m5stack/M5Unified。发布 1 条英文评论（与条目语言一致）。
+只读评审：未 push、未 close、未改 m5stack/M5Unified。发布 1 条英文评论（与条目语言一致）：
+<https://github.com/m5stack/M5Unified/pull/449#issuecomment-7157030974>。

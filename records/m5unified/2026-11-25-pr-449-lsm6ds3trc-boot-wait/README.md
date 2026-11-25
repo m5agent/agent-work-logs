@@ -83,4 +83,5 @@ esp32 / esp32c6 同样 0 警告。
 
 ## 已发布回复
 
-- 待发布（1 条英文评论；PR 保持 OPEN，未 close、未 push、未改他人仓库）
+- <https://github.com/m5stack/M5Unified/pull/449#issuecomment-7157030974>
+  （1 条英文评论，与条目语言一致；PR 仍 OPEN，未 close、未 push、未改他人仓库）
