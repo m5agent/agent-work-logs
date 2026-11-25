@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": 253,
+    "base_commit": "176ecd7b28ed1e3b506c6d6f8b0bbc1c05293463",
+    "candidate_commit": "5a61d685e82c73f438c991e32d2acfdb4afe689a",
+    "documentation_revision": "6ee4f2fb9dca1c671e475407cb709109a699cf1a"
+  },
+  "hardware": {
+    "devices": [
+      "CoreS3",
+      "Cardputer-Adv"
+    ],
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "arduino_cli": "1.3.1",
+    "board_package": "3.2.5",
+    "cores3_sd_and_picture_libraries": {
+      "M5Unified": "0.3.0",
+      "M5GFX": "0.3.0"
+    },
+    "cardputer_adv_minimum_flash_bytes": 8388608,
+    "cardputer_adv_libraries": {
+      "M5Cardputer": "1.1.0",
+      "M5Unified": "0.2.8",
+      "M5GFX": "0.2.10"
+    },
+    "fixture_bindings": [
+      {
+        "device": "cores3",
+        "firmware_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+        "image": "cores3-example-media.img",
+        "bytes": 67108864,
+        "sha256": "93a9550a6d325ec8be0d9710eb7c079af24ba7d5ffb8c5c2db423c26e6fb1233",
+        "example": "sdcard",
+        "source_sha256": "dd780c565d411307ae9fd1cfd22473bd79b5a6a76eea47de68bb332252c81022"
+      },
+      {
+        "device": "cores3",
+        "firmware_sha256": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+        "image": "cores3-example-media.img",
+        "bytes": 67108864,
+        "sha256": "93a9550a6d325ec8be0d9710eb7c079af24ba7d5ffb8c5c2db423c26e6fb1233",
+        "example": "pic",
+        "source_sha256": "8a7d530772bb9dc3f10ff05cc4325492540b9558dcaff8985a33754742cbe90f"
+      },
+      {
+        "device": "cores3",
+        "firmware_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+        "image": "cores3-example-media.img",
+        "bytes": 67108864,
+        "sha256": "93a9550a6d325ec8be0d9710eb7c079af24ba7d5ffb8c5c2db423c26e6fb1233",
+        "example": "wav",
+        "source_sha256": "341749ed7942ee611f123483652da13f152167ccac79bcd231c24b817b399994"
+      },
+      {
+        "device": "cardputer-adv",
+        "firmware_sha256": "0b8defe81651a9c5a443320d3475df6a66219cea97bccc72007253d76537dea4",
+        "image": "cardputer-adv-sdcard-media.img",
+        "bytes": 67108864,
+        "sha256": "63b21ca1bac295ae6ea1a674886d0b120e3ae09465de8e924526a50aaaaf6432",
+        "example": "sdcard",
+        "source_sha256": "51a95e2f653368471f2b193a79e75ceb53ca93619f32ee06dfce3b3836c7af0a"
+      }
+    ]
+  },
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "browser": "Chrome 158.0.8127.37",
+    "wasm_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+    "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+    "final_positive_site_manifest_sha256": "7e784f5ec22bdba7252d664c0a8a01c2f856cccd596a2b6a863a0a15f3998840",
+    "final_default_site_manifest_sha256": "42b121f2676119abaa593592c104b1e4f55000280dfd90b529cc5cd51c38814c",
+    "full_platform_tests": 2564,
+    "platform_tests_skipped": 11
+  },
+  "checks": [
+    {
+      "name": "initial canonical workbench, raw pictures, ADV two separate runs and controls",
+      "status": "PASS",
+      "evidence": "evidence/initial-matrix.summary.json"
+    },
+    {
+      "name": "final canonical workbench SDcard, Picture and ADV plus no-card and corrupt gzip controls",
+      "status": "PASS",
+      "evidence": "evidence/final-matrix.summary.json"
+    },
+    {
+      "name": "CoreS3 same-WASM instrumented actual SPI 512-byte writes and accepted file bytes",
+      "status": "PASS",
+      "evidence": "evidence/cores3-spi-trace.summary.json"
+    },
+    {
+      "name": "same final workbench WAV opens the seeded file and reads the header and first data chunk",
+      "status": "PASS",
+      "evidence": "evidence/wav-file-read.summary.json"
+    },
+    {
+      "name": "WAV first segment reached without observed playback completion",
+      "status": "PARTIAL",
+      "evidence": "evidence/wav-file-read.summary.json"
+    },
+    {
+      "name": "Audio capture, physical media and hosted release",
+      "status": "NOT RUN"
+    }
+  ]
+}
