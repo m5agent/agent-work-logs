@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issues": [257, 258],
+    "base_commit": "a7d2af1feed7b5b21eab31d70fde417e811ecab9",
+    "candidate_commit": "a5a48eceee172be037fe7c742eeff5f529f778d5"
+  },
+  "hardware": {"device": "Cardputer-Adv", "physical_validation": "NOT RUN"},
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "profile": "cardputer-adv-wasm-wallclock",
+    "wasm_sha256": "ee110d208e358de4eeafa2583ecfbbc3f505dc0568bf85a25ca3c84a63f3cc60",
+    "runtime_manifest_sha256": "0225219404aa29c831d33123ee4ce91c0b747c451539e5646b5ad6c40d513fc0",
+    "site_manifest_sha256": "fdb0b27d0c625e9a5a8ca2cafbb7c890e2c1c2b4e02ecf5495ff279385d22b2d",
+    "full_platform_tests": 2565,
+    "platform_tests_skipped": 11
+  },
+  "checks": [
+    {"name": "locked WASM producer and unchanged C build on joined GNSS workbench", "status": "PASS", "evidence": "evidence/browser-examples.summary.json"},
+    {"name": "original IR app data through real USB Serial/JTAG CDC IN and basic LCD draw", "status": "PASS", "evidence": "evidence/browser-examples.summary.json"},
+    {"name": "original IR readable orientation/crop and NEC LEDC waveform", "status": "PARTIAL", "evidence": "evidence/browser-examples.summary.json"},
+    {"name": "original Button with CDC disabled emits actual UART0 messages after G0 input", "status": "PASS", "evidence": "evidence/browser-examples.summary.json"},
+    {"name": "default CDC original Button produces application reports", "status": "FAIL", "evidence": "evidence/browser-examples.summary.json"},
+    {"name": "normal browser Worker cleanup", "status": "PASS", "evidence": "evidence/browser-examples.summary.json"},
+    {"name": "physical USB, NEC LEDC waveform, host-to-guest USB, and hosted deployment", "status": "NOT RUN"}
+  ]
+}

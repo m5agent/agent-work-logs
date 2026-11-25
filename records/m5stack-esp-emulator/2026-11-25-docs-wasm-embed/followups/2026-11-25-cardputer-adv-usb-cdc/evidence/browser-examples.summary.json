@@ -1,0 +1,330 @@
+{
+  "kind": "Cardputer-ADV browser fixed USB Serial/JTAG transmit path",
+  "validation": "virtual-device validation (browser WASM)",
+  "issue_states": {
+    "257": "PARTIAL",
+    "258": "PARTIAL"
+  },
+  "runtime_identity": {
+    "source_base": "b075dd236af8be8f9cfbf72d7890d6907e006ec6",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "qemu_patch": {
+      "path": "patches/qemu-wasm-probe/0044-cardputer-adv-usb-serial-jtag-tx.patch",
+      "sha256": "730b55228fe499c0b64ee26cfb0bd880d99cd8a7bdc3950a125480be9fb56590"
+    },
+    "source_lock_sha256": "84845e0d7a89c75183005fa3a20c1d6f46b6e789df5b5703aaca1c5ca1a44e99",
+    "runtime_manifest_sha256": "0225219404aa29c831d33123ee4ce91c0b747c451539e5646b5ad6c40d513fc0",
+    "emscripten_version": "3.1.50",
+    "full_source_build": true,
+    "runtime_assets": {
+      "javascript": {
+        "bytes": 157200,
+        "path": "qemu-system-xtensa.js",
+        "sha256": "845b2d386ef83d4757ee0d3c9be73002d7c685e1acda8b2d19a2afa05184561d"
+      },
+      "notice": {
+        "bytes": 968,
+        "path": "NOTICE",
+        "sha256": "290273f3bf903aa43510e68a735810e0e6c54d43accc5dc16b00ffd5a0399f76"
+      },
+      "source": {
+        "bytes": 35271920,
+        "path": "corresponding-source.tar.xz",
+        "sha256": "67311b9f596d51e1994d9b1b9e89eeec05eba7c0a47b0a2ba78723bfed15d9a6"
+      },
+      "wasm": {
+        "bytes": 12780351,
+        "path": "qemu-system-xtensa.wasm",
+        "sha256": "ee110d208e358de4eeafa2583ecfbbc3f505dc0568bf85a25ca3c84a63f3cc60"
+      },
+      "worker": {
+        "bytes": 2776,
+        "path": "qemu-system-xtensa.worker.js",
+        "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+      }
+    },
+    "site_manifest_sha256": "e4cb15935a6a7de5e18efa87d04551daa699de408cafaa9745ed0f3c1da80da9",
+    "site_asset_count": 2183,
+    "required_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "firmware_bundled": false,
+    "workbench_asset_sha256": {
+      "index.html": "fa1c760703e5cd46882b402f42fc72f4c8419e716e440d4e4ffc5db4aea28f61",
+      "site-config.json": "cd05743d6d5269fa67d359e03d9b848d1d8c38492d7e0793cf0827e1cec3915b",
+      "platform/web/public.js": "0cc298eb60bb51b60772e2e07559745aa4783269eda6c27a1bec4f8e1bcb590a",
+      "platform/web/public-qemu-engine.js": "d1584cf98ac037185ace035edb525b607d7313db5457dfe4200187a791610d18",
+      "platform/web/public-qemu-runtime.js": "041e1f8a76c3d93231ca7a3495fd763cb3359b85d958dc528019f823fb900308",
+      "platform/web/public-qemu-profiles.js": "2c73cd25df32ba2f45e7533931f88d4e0e614d5405b02bc9123c59576bdd89c3",
+      "platform/web/qemu-browser-profiles.json": "15a6d1b3728725ba57eba53cd25ea4a985875598f2c1687a9e1ef6fb7868c663"
+    },
+    "execution_profile": "cardputer-adv-wasm-wallclock"
+  },
+  "cases": {
+    "button_cdc_on_panic": {
+      "status": "FAIL",
+      "firmware_input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+      "firmware_flash_sha256": "54ee755a50f4187e9ddfc96efb7ea996c896e46d4b99e2945ceb3183a1aa6f50",
+      "sketch_sha256": "444450396503479b748d137758cab1a70f206b882fccf06bdaac786f81ad0d81",
+      "observations": [
+        "G0/F12 down received by browser guest input bridge",
+        "ROM boot mirrored to USB and UART0",
+        "Stack canary watchpoint triggered (ipc1)",
+        "Button application markers missing"
+      ],
+      "usb_bytes_observed": 1211,
+      "usb_before_input": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "same_backtrace_as_historical_runtime": true,
+      "panic_call_chain": [
+        "_frxt_setup_switch",
+        "_xt_lowint1",
+        "multi_heap_malloc",
+        "esp_intr_alloc_intrstatus",
+        "gpio_isr_register_on_core_static",
+        "ipc_task"
+      ],
+      "cleanup": {
+        "graceful_exit_observed": null,
+        "exit_code": null,
+        "iframe_removed": null,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    },
+    "button_cdc_on_settled": {
+      "status": "FAIL",
+      "firmware_input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+      "firmware_flash_sha256": "54ee755a50f4187e9ddfc96efb7ea996c896e46d4b99e2945ceb3183a1aa6f50",
+      "sketch_sha256": "444450396503479b748d137758cab1a70f206b882fccf06bdaac786f81ad0d81",
+      "stimulus": {
+        "rom_entry_observed": true,
+        "settle_ms": 2500,
+        "g0_down_accepted": true,
+        "observation_timeout_ms": 20000
+      },
+      "observations": [
+        "ROM boot mirrored to USB and UART0",
+        "Button application markers missing"
+      ],
+      "panic_observed": false,
+      "usb_before_input": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "usb_bytes_observed": 251,
+      "cleanup": {
+        "graceful_exit_observed": true,
+        "exit_code": 0,
+        "iframe_removed": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    },
+    "button_cdc_off": {
+      "status": "PASS",
+      "firmware_input_sha256": "111323ee0c88f2bc512ca565b0565aafe53347482581461ad440176c260778cd",
+      "firmware_flash_sha256": "291783dcd190384c97d4164870ab66ec4cbe75211d94c6a695ac1d131be6cdea",
+      "sketch_sha256": "444450396503479b748d137758cab1a70f206b882fccf06bdaac786f81ad0d81",
+      "g0_button_edges": [
+        "down",
+        "up"
+      ],
+      "uart0_markers": [
+        "Button A Pressed",
+        "Button A Released"
+      ],
+      "usb_application_button_markers": [],
+      "usb_before": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "usb_after": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "cleanup": {
+        "graceful_exit_observed": true,
+        "exit_code": 0,
+        "iframe_removed": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    },
+    "ir_nec_original": {
+      "status": "PARTIAL",
+      "firmware_input_sha256": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb",
+      "firmware_flash_sha256": "783873cf160c7aac32860decf6e0908ed7586b7d277340c9e926c79086a401ac",
+      "sketch_sha256": "e77a78ffde87b2b87d8a4cad2032bcabbe66dbfd28142100281d3f7d67fff1c9",
+      "usb_application_markers": [
+        "Send now: address=0x1111, command=0x34, repeats=0",
+        "Send now: address=0x1111, command=0x35, repeats=0"
+      ],
+      "usb_controller": {
+        "consoleEpoch": 0,
+        "txBytes": 435,
+        "txPackets": 38
+      },
+      "native_frame_width_height": [
+        240,
+        135
+      ],
+      "nonblack_frame_count": 4,
+      "frame_readability": "rotated and clipped on inspected native snapshots",
+      "frame_sha256": [
+        "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+        "ec43975e08c33d417f6faab51b9ed6645dda3c70023133cc4ef46b7128534f19",
+        "be7012405a437c28450c49c682a320b92a46c49baa54b1216140c53c750afe8e",
+        "cb955fd26b8fefd970b6ca48e23f1b73f8cb6ff02a0d755d046b0b4daddcf3e2",
+        "2fcab05596f6fc5f367fe5b4f4fbe63df94188dec98192a64a8b120b8f03b5bc"
+      ],
+      "ir_ledc_waveform": "NOT RUN",
+      "cleanup": {
+        "graceful_exit_observed": true,
+        "exit_code": 0,
+        "iframe_removed": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0
+      }
+    }
+  },
+  "raw_evidence_refs": {
+    "button_cdc_on_panic": {
+      "relative_lab_path": "browser-button-0044-v1/report.json",
+      "sha256": "4cce05bb0a90ab51914f9f1923a320caf580534fd3c891f11f448701ecfd4db5",
+      "harness_sha256": "af76b95ffa3e7df2bfbb6ab86ef64d4151ae0597fc09f68cc989fd9f5488fa1b"
+    },
+    "button_cdc_on_settled": {
+      "relative_lab_path": "browser-button-0044-on-settled/report.json",
+      "sha256": "f8a429de9850c3437aead59ec8aa33248540eca8a996f9e9c1a68a666d63ab61",
+      "harness_sha256": "1ab9110266d1d615f611de031d984b24fd0133a7d66c6f7131cb8a38ce853482"
+    },
+    "button_cdc_off": {
+      "relative_lab_path": "browser-button-0044-off/report.json",
+      "sha256": "f7b843de9df08b987b19b228ab4cad67663c90f26ab4b83f30a610e956e62a93",
+      "harness_sha256": "1ab9110266d1d615f611de031d984b24fd0133a7d66c6f7131cb8a38ce853482"
+    },
+    "ir_nec_original": {
+      "relative_lab_path": "browser-ir-0044-original/report.json",
+      "sha256": "bf3de38b4be62a472bcf00b359edd9bc43e7e56fda5af8de595035c0f0b2a6d9",
+      "harness_sha256": "0bbb7f7506ad22a62a81898cf182f46a8451cdac30b810d050e24cf919a81d75"
+    },
+    "ir_nec_release": {
+      "relative_lab_path": "browser-ir-0044-release/report.json",
+      "sha256": "4df2388f92b260d072dc1927f46afbfe5d954df89d86794c01e361538893eea0",
+      "harness_sha256": "9ce3bc72f6eb8c8f1b5ab983f938da78021e6504618166e6878ac69e2bdfb03c"
+    },
+    "button_cdc_off_release": {
+      "relative_lab_path": "browser-button-0044-release-off/report.json",
+      "sha256": "97794faa90f3b9b6e806608140bf97dcb3048b1ba2d9dbd97610660f872dd317",
+      "harness_sha256": "1ab9110266d1d615f611de031d984b24fd0133a7d66c6f7131cb8a38ce853482"
+    }
+  },
+  "integrated_retest": {
+    "main_base": "a7d2af1feed7b5b21eab31d70fde417e811ecab9",
+    "source_commit": "a5a48eceee172be037fe7c742eeff5f529f778d5",
+    "site_manifest_sha256": "fdb0b27d0c625e9a5a8ca2cafbb7c890e2c1c2b4e02ecf5495ff279385d22b2d",
+    "wasm_sha256": "ee110d208e358de4eeafa2583ecfbbc3f505dc0568bf85a25ca3c84a63f3cc60",
+    "runtime_manifest_sha256": "0225219404aa29c831d33123ee4ce91c0b747c451539e5646b5ad6c40d513fc0",
+    "workbench_asset_sha256": {
+      "index.html": "1e213d8ae35de9394ab0a211f0ca276fa2ccc3d87b9c5b401097ae30dbf5c9fd",
+      "site-config.json": "cd05743d6d5269fa67d359e03d9b848d1d8c38492d7e0793cf0827e1cec3915b",
+      "platform/web/public.js": "72fceaf45f47ed0a31e68e45f18a34acd17f10ec8e88cd9500c996dc1482d4b5",
+      "platform/web/public-qemu-engine.js": "f09322c7008977bd6296ffc34cab5f8858056aa3790e54dee39ab9faccb4993c",
+      "platform/web/public-qemu-runtime.js": "31c63f2a218bee3cbf05f32d975627cc0670435fe488acfdfaa657204c14951b",
+      "platform/web/public-qemu-profiles.js": "c2c41c7d611c09e7eec711f6d540fa59df45e3a1aa0d26634cdaacdec8413d74",
+      "platform/web/qemu-browser-profiles.json": "15a6d1b3728725ba57eba53cd25ea4a985875598f2c1687a9e1ef6fb7868c663"
+    },
+    "ir_nec_original": {
+      "status": "PARTIAL",
+      "same_original_firmware_and_sketch": true,
+      "first_two_commands": [
+        52,
+        53
+      ],
+      "address": 4369,
+      "usb_controller": {
+        "consoleEpoch": 0,
+        "txBytes": 435,
+        "txPackets": 42
+      },
+      "native_frame_sha256": "94c04f71e8e9e774c5c91f6edf3081436a1652f700d62aa1460714c967ac0def",
+      "display": {
+        "orientation": "portrait",
+        "deviceRotationDeg": -90
+      },
+      "workbench_presentation": {
+        "orientation": "portrait",
+        "dimensions": [
+          135,
+          240
+        ],
+        "transform": "none",
+        "png_sha256": "425137fdba9b2c5d02f5f8cb43eeeaf13021f6a0c59911d12462215f1c166b91"
+      },
+      "presentation_review": "Text is upside down and clipped along the short axis in the actual workbench flat view.",
+      "nonblack_frames_observed": 3,
+      "waveform": "NOT RUN",
+      "cleanup": {
+        "exit_code": 0,
+        "graceful_exit": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0,
+        "iframe_removed": true
+      }
+    },
+    "button_cdc_off": {
+      "status": "PASS",
+      "same_original_sketch_and_reviewed_cdc_off_firmware": true,
+      "g0_button_edges": [
+        "down",
+        "up"
+      ],
+      "uart0_markers": [
+        "Button A Pressed",
+        "Button A Released"
+      ],
+      "usb_counters_before": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "usb_counters_after": {
+        "consoleEpoch": 0,
+        "txBytes": 251,
+        "txPackets": 10
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "graceful_exit": true,
+        "worker_targets_observed": 6,
+        "worker_targets_remaining": 0,
+        "iframe_removed": true
+      }
+    },
+    "platform_checks": {
+      "python_suite": {
+        "tests_run": 2565,
+        "failures": 0,
+        "skipped": 11
+      },
+      "docs_contract_suite": {
+        "tests_run": 51,
+        "failures": 0
+      },
+      "affected_node_contracts": 6,
+      "validators": [
+        "runtime_coverage",
+        "peripheral_catalog",
+        "qemu_profiles",
+        "project_snapshot",
+        "qemu_wasm_source_lock",
+        "pr_scope"
+      ]
+    }
+  }
+}
