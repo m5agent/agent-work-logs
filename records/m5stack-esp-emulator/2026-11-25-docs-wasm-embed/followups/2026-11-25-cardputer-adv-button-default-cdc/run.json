@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix-follow-up",
+  "source": {"repository": "m5agent/m5stack-esp-emulator", "issue": 257, "merge_commit": "a7fd5b3856d6937adecc3ce274d0f5c58c2b8532"},
+  "hardware": {"device": "Cardputer-Adv", "physical_validation": "NOT RUN"},
+  "firmware": {"input_sha256": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7", "configuration": "Arduino 3.2.5 default USB CDC On Boot enabled"},
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "wasm_sha256": "ee110d208e358de4eeafa2583ecfbbc3f505dc0568bf85a25ca3c84a63f3cc60",
+    "runtime_manifest_sha256": "0225219404aa29c831d33123ee4ce91c0b747c451539e5646b5ad6c40d513fc0",
+    "standard_site_manifest_sha256": "fdb0b27d0c625e9a5a8ca2cafbb7c890e2c1c2b4e02ecf5495ff279385d22b2d"
+  },
+  "checks": [
+    {"name": "three uninstrumented standard workbench sessions use exact default original and report both USB application messages", "status": "PASS", "evidence": "evidence/button-reruns.summary.json"},
+    {"name": "independent original firmware instrumented GPIO0 IN register with same USB result", "status": "PASS", "evidence": "evidence/button-reruns.summary.json"},
+    {"name": "historical app startup / silent preview", "status": "FAIL", "evidence": "../2026-11-25-cardputer-adv-usb-cdc/"},
+    {"name": "general startup stability and physical USB", "status": "NOT RUN"}
+  ]
+}
