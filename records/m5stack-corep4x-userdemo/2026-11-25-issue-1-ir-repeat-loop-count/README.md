@@ -42,3 +42,8 @@ ESP-IDF 6.1，`rmt_transmit()` 在 6.1 里把 `loop_count == 1` 归一化为 0�
 - hardware validation `NOT RUN`：唯一 P4 节点备注“已借出、勿分配”；夹具无红外接收/光电采集路径。
 - virtual-device validation `NOT RUN`：无 CoreP4X profile；Tab5 为另一块板且未建模 IR/RMT 输出。
 - 未采集出厂固件红外波形；未验证两帧在真实接收端可解码；未测量帧间隔与载波。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5CoreP4X-UserDemo/issues/1#issuecomment-7154557851>
+  （1 条，英文；issue 仍 OPEN，未 close、未 push、未改他人仓库）
