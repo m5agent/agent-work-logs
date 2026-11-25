@@ -63,3 +63,9 @@ LovyanGFX（同一改动为 lovyanGFX#1019），在本仓库不存在；建议�
 - 仅跑 CST816S（StopWatch 的 CST820）；GT911、CHSC6540、CST9217、ST7123 未运行。
 - 软 I2C 变慢（`half_us` 2 µs）未做时序测量；M5GFX 内置板触摸均走硬件 I2C。
 - 只做单次上电启动与单次点击，未做长稳、热复位或连续触摸。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/443#issuecomment-7154356366>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
+- 公开记录 permalink（评论引用）：`d891a27`；本条补充说明为同一记录的后续提交，不改变结论。
