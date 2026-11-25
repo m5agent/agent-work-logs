@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3 browser I2S audio for two pinned documentation examples",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/248",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "de987890560b0607cd227027dd2eaa8866f889aa",
+    "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "local_staging_base_commit": "a7fd5b3856d6937adecc3ce274d0f5c58c2b8532"
+  },
+  "hardware": {
+    "type": "virtual-device",
+    "board": "CoreS3",
+    "chip": "ESP32-S3",
+    "physical_acoustic_validation": "NOT RUN"
+  },
+  "firmware": {
+    "wav": {
+      "input_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+      "effective_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+      "profile": "cores3-wasm-vm-div8",
+      "clock_divisor": 8
+    },
+    "mic": {
+      "input_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "effective_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "clock_divisor": 1
+    }
+  },
+  "execution": {
+    "environment": "Isolated Chromium with source-based QEMU WASM static workbench preview",
+    "chromium": "158.0.8127.37",
+    "emscripten": "3.1.50",
+    "site_manifest_sha256": "a803f0b574e2597e7e7230612fa222c3d2f63391959cd887f6aaf63b1a9d9770",
+    "runtime_manifest_sha256": "e2786abd7b9a10880aa170d68a24f493409a45a20d20fd3a9acf55cc3553cf55",
+    "wasm_sha256": "ece9223efc171031b178e7b49b35100a5cddbf8958663fc7ab3e11a5840c0f57",
+    "patches": {
+      "private_0045_pacing_sha256": "4cb387233e51cde64bf039a7324725e48903494ac2be090e2364a47ecb4cd8ca",
+      "private_0046_stream_sha256": "fa1c5cebf9e9ec80a05203c801c739ad92b01d5a278a558da41f5a4645667e88"
+    },
+    "preview_rebuilt_translation_units": 2,
+    "local_staging_source_lock_sha256": "d7f86fe9d5dcebc86ec54846ed430e6ffbb5b5a579307317ef90dfe8ab7dbdd9"
+  },
+  "checks": [
+    {
+      "id": "paced-i2s-descriptors",
+      "level": "transport",
+      "status": "PASS"
+    },
+    {
+      "id": "signed-heap8-first-mic-preview",
+      "level": "data_behavior",
+      "status": "FAIL"
+    },
+    {
+      "id": "first-wav-preview-threshold",
+      "level": "data_behavior",
+      "status": "FAIL"
+    },
+    {
+      "id": "final-original-arduino-wav-browser-audio",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "id": "final-original-uiflow-mic-browser-audio",
+      "level": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "id": "final-guest-display-and-editor-interruption",
+      "level": "visual_or_physical",
+      "status": "PASS"
+    },
+    {
+      "id": "normal-guest-and-audio-context-cleanup",
+      "level": "transport",
+      "status": "PASS"
+    },
+    {
+      "id": "full-source-lock-preparation-on-usb-base",
+      "level": "build",
+      "status": "PASS",
+      "detail": "Source preparation and verification only."
+    },
+    {
+      "id": "full-rebuild-and-exact-run-after-rf-integration",
+      "level": "delivery",
+      "status": "NOT RUN"
+    },
+    {
+      "id": "original-uiflow-speaker-asset",
+      "level": "data_behavior",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/browser-audio.summary.json",
+      "sha256": "0a0002e49891396228459a23b22152f2178e7b1c96cc05c1363e20e7e14a7513",
+      "bytes": 6323
+    },
+    {
+      "path": "evidence/i2s-pacing.summary.json",
+      "sha256": "471b42ad12f235bea7045d83946fcf2444466ff53a742345f9e67f3957b1d304",
+      "bytes": 7495
+    }
+  ],
+  "notes": [
+    "Raw session and trace files are retained separately; the public candidate summaries omit local paths and unique session identifiers.",
+    "The standalone UIFlow2 Speaker audio asset and ROM or firmware binaries are excluded from this record."
+  ]
+}

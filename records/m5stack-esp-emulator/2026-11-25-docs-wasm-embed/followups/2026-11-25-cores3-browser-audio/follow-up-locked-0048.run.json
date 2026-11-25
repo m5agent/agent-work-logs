@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "date": "2026-11-25",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/248",
+    "executed_export_commit": "8f2cf7230455b6bf8ac46f8b66a983b772fa0d10",
+    "rebased_release_commit": "885f45c76a591b345cbf07e67fcf620050dc763a"
+  },
+  "hardware": {
+    "type": "virtual-device",
+    "board": "CoreS3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "wav": {
+      "sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+      "effective_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+      "profile": "cores3-wasm-vm-div8"
+    },
+    "mic": {
+      "sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "effective_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate"
+    }
+  },
+  "execution": {
+    "all_objects_rebuilt": true,
+    "artifact_transport": {
+      "kind": "full source build",
+      "publication_eligible": false
+    },
+    "build_recipe_sha256": "848810f1151d5fe916ba7c2220075d88bd71172c949b802d1b10be49f649d80e",
+    "corresponding_source_bytes": 35280660,
+    "corresponding_source_sha256": "3846be62915724c3693bda797cd52386b1baf1db4641b55c344a227c7bfd52ae",
+    "runtime_manifest_sha256": "e3b65a2887354fada0f49e3b769257e177b5bb800cfbc5946ee3d489653ba432",
+    "sealed_asset_count": 2187,
+    "site_manifest_sha256": "06a005130e1334bc2918d529cf6d7d802c545aae3f3801eea063175f692beaec",
+    "source_commit": "8f2cf7230455b6bf8ac46f8b66a983b772fa0d10",
+    "source_lock_sha256": "07afe8bb4894d31121c165dd7b61aa3e9f98400fe859eab081683a7afb604ddc",
+    "upstream_qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "wasm_sha256": "be385f43df0b97624f0c3a39f4cff43b16b216a63c9320c06b5f8fd30d7806fc"
+  },
+  "checks": [
+    {
+      "id": "locked_full_build",
+      "status": "PASS"
+    },
+    {
+      "id": "site_manifest_and_asset_hashes",
+      "status": "PASS"
+    },
+    {
+      "id": "original_arduino_wav",
+      "status": "PASS"
+    },
+    {
+      "id": "original_uiflow_mic",
+      "status": "PASS"
+    },
+    {
+      "id": "real_stop_and_audio_context_cleanup",
+      "status": "PASS"
+    },
+    {
+      "id": "original_uiflow_speaker_asset",
+      "status": "NOT RUN"
+    },
+    {
+      "id": "documentation_embed",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/locked-0048-browser-audio.summary.json",
+      "sha256": "e8032f8acfc142d6d410fbc35d30268126a454ac24a5940a61297fd1ed0305af",
+      "bytes": 6009
+    }
+  ],
+  "notes": [
+    "The record includes digital audio from an emulated I2S data path. The headless test does not measure physical audibility.",
+    "Earlier candidate failures are retained in the initial run and report."
+  ]
+}

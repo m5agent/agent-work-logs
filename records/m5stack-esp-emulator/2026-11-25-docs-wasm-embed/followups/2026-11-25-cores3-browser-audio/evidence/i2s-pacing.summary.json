@@ -1,0 +1,207 @@
+{
+  "status": "PASS (private incremental diagnostic)",
+  "validation": "virtual-device validation (browser WASM)",
+  "wasm_sha256": "1050be433b1fe002fef2ff2f10c3d8f9c6256a9f5e87973b1e98381668cfe6fa",
+  "patch_sha256": "4cb387233e51cde64bf039a7324725e48903494ac2be090e2364a47ecb4cd8ca",
+  "build_receipt_sha256": "bbea4d5015cb985163d6a6a999bffe242268a505b17fbbd3f06b789126c4f612",
+  "scope": "Two QEMU C units recompiled, preexisting 0043 objects reused for the remainder, plus bounded diagnostic clocks. Private sites use one WASM with TX pacing opt-in on or off.",
+  "arduino_sd_wav": {
+    "firmware_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+    "profile": "cores3-wasm-vm-div8",
+    "clock_divisor": 8,
+    "seed_sd": {
+      "sha256": "93a9550a6d325ec8be0d9710eb7c079af24ba7d5ffb8c5c2db423c26e6fb1233",
+      "bytes": 67108864,
+      "mode": "session-copy"
+    },
+    "seed_wav_sha256": "f24b12a40e74bc9f3dc0977f127d55923b7d73183445ad2a9c23f1410f65604c",
+    "actual_driver_registers": {
+      "port": 1,
+      "tx_conf": "00088064",
+      "tx_conf1": "2f3de08f",
+      "tx_clkm": "2c00004e",
+      "tx_div": "001c03ff",
+      "tx_tdm": "00010001",
+      "rate": 48000,
+      "frame_bytes": 2
+    },
+    "configured_512_byte_duration_ms": 5.333333333333333,
+    "legacy": {
+      "site_sha256": "beb6dd7a6292ab1f61440623c115e0e723e0e167e0f3eacfaf1977a4fbff775e",
+      "raw_report_sha256": "ba54d3232cc8a2a05a440c1c2ea01d54583ff7454220ec10de63322a1bc1744a",
+      "first_64_irq_edges": {
+        "qemu_realtime": {
+          "min_ms": 19.389893,
+          "median_ms": 20.23999,
+          "mean_ms": 20.298092,
+          "max_ms": 21.245118
+        },
+        "qemu_virtual": {
+          "min_ms": 2.423126,
+          "median_ms": 2.529998,
+          "mean_ms": 2.537261,
+          "max_ms": 2.65625
+        },
+        "engine_observation": {
+          "min_ms": 19.37,
+          "median_ms": 20.245,
+          "mean_ms": 20.297381,
+          "max_ms": 21.26
+        }
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "observed_worker_targets": 6,
+        "remaining_worker_targets": 0,
+        "iframe_removed": true
+      }
+    },
+    "paced": {
+      "site_sha256": "9ab1e930d5c001528cfcd1e8b457b70a5277a39acfef9f6a06ecbfaa79a6cc77",
+      "raw_report_sha256": "5f6546f8ecf0945c5bbf4a3e5186c683f481191f9e8b3e1ff3f9a848696d8941",
+      "first_64_irq_edges": {
+        "qemu_realtime": {
+          "min_ms": 4.785156,
+          "median_ms": 5.290039,
+          "mean_ms": 5.331272,
+          "max_ms": 5.935059
+        },
+        "qemu_virtual": {
+          "min_ms": 0.598145,
+          "median_ms": 0.661255,
+          "mean_ms": 0.666409,
+          "max_ms": 0.741882
+        },
+        "engine_observation": {
+          "min_ms": 4.785,
+          "median_ms": 5.29,
+          "mean_ms": 5.330952,
+          "max_ms": 5.94
+        }
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "observed_worker_targets": 6,
+        "remaining_worker_targets": 0,
+        "iframe_removed": true
+      },
+      "pcm_sha256": "6b54dad285b329f87600ca4693c0ef8a5ae04441973f85b982dd6cfc0038ffd9",
+      "pcm_bytes": 2767872,
+      "segments_matched": 24,
+      "active_sample_slots": 576000,
+      "format": "s16le 48kHz mono",
+      "minimum_correlation_per_segment": 0.9999947432097919,
+      "maximum_alignment_lag_samples": 3,
+      "trailing_silent_512_byte_blocks": 2482,
+      "observed_complete_payload_by_ms_from_runtime_running": 21916
+    },
+    "baseline_0043_full_capture_sha256": "51d335d82cf9e67193a0ea0f38a8ee480dd24e33bcb4c034beffc89f113ddb55"
+  },
+  "limits": [
+    "The first 64 actual I2S completion edges establish their distinct realtime and guest virtual clock intervals. They do not measure a public browser audio path.",
+    "All 24 waveform segments match the actual source audio. Late LCD progress lines can fall below the original guest screen. Full audio data is the completeness oracle.",
+    "Production Web Audio, hardware, and final source-locked all-object compilation were not run."
+  ],
+  "uiflow_microphone": {
+    "site_sha256": "663e17fbe152874f7a331f72e87e67b1f4752c9063f01302b7b4b60107a49094",
+    "raw_report_sha256": "6116a80a5be65f017279653a59d154aeab937201694237e65282aef043625c9f",
+    "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "source_sha256": "dc6979cf1209ead19085bb97450c91e644bbf45ae28d0d2faa702f189d7e0a8e",
+    "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+    "clock_divisor": 1,
+    "actual_driver_registers": [
+      {
+        "port": 1,
+        "tx_conf": "00088064",
+        "tx_conf1": "2f3de08f",
+        "tx_clkm": "2c00004e",
+        "tx_div": "001c03ff",
+        "tx_tdm": "00010001",
+        "rate": 48000,
+        "frame_bytes": 2
+      },
+      {
+        "port": 1,
+        "tx_conf": "00088064",
+        "tx_conf1": "2f3de08f",
+        "tx_clkm": "2c00004e",
+        "tx_div": "001c03ff",
+        "tx_tdm": "00010001",
+        "rate": 48000,
+        "frame_bytes": 2
+      }
+    ],
+    "recorded_irq_edges_before_play_group": 2,
+    "play_group_64_irq_edges": {
+      "qemu_realtime": {
+        "min_ms": 5.060058,
+        "median_ms": 5.280029,
+        "mean_ms": 5.333256,
+        "max_ms": 5.565186
+      },
+      "qemu_virtual": {
+        "min_ms": 5.060058,
+        "median_ms": 5.284912,
+        "mean_ms": 5.333256,
+        "max_ms": 5.565186
+      },
+      "engine_observation": {
+        "min_ms": 5.065,
+        "median_ms": 5.285,
+        "mean_ms": 5.333175,
+        "max_ms": 5.565
+      }
+    },
+    "capture_counters": {
+      "dmaReads": 3516,
+      "dmaBytes": 1800192,
+      "pcmWrites": 3496,
+      "pcmBytes": 1789952,
+      "rxWrites": 177,
+      "rxBytes": 90112
+    },
+    "injected_pcm_sha256": "97baea0a56c5b48504ea4b65b41148c6d55dc494d22652b3db7cedb295876efe",
+    "pcm_sha256": "789225431087e0082aa67da853cf431a54e05c4ea741d943d5c67fc441f24aa8",
+    "pcm_bytes": 1789952,
+    "actual_nonzero_512_byte_blocks": 469,
+    "tx_playback_frequency_hz": 440.3669724770642,
+    "tx_autocorrelation": 0.9999699066542418,
+    "frames": [
+      {
+        "lcd_marker": "label0",
+        "rgb565_sha256": "d900ddea8053295562e2109098d260d2edffe508efb2e48b62d236492c2b2b48",
+        "source_sequence": 28,
+        "png_sha256": "85d643afff522994ce20b9014ca7c63e6cacbd9d3669954ddacf7582d0a558eb",
+        "offset_ms": 787
+      },
+      {
+        "lcd_marker": "rec...",
+        "rgb565_sha256": "96b0b6831fad22a194d47450bd1d9d28b954df564aec36791c39995b2e0169be",
+        "source_sequence": 34,
+        "png_sha256": "8c967c2392c646ea226db722a4eb0b2618c753123ee9eb0e1cba2fbda5f5c8a9",
+        "offset_ms": 1048
+      },
+      {
+        "lcd_marker": "play...",
+        "rgb565_sha256": "5b14f64519a916b7007b97ef900e06f9c34e620d752ba78259def3010d028af4",
+        "source_sequence": 42,
+        "png_sha256": "c17ff4b588a654146ed55fb00be889eb1afe3ef5006608e3cbbcc875913ec176",
+        "offset_ms": 4676
+      },
+      {
+        "lcd_marker": "done",
+        "rgb565_sha256": "5ba3cd7455c7bba7840dd684bd59e97d8b192bfb0da63eb2f1f68d26afb34941",
+        "source_sequence": 48,
+        "png_sha256": "fc02404e27db9d7033bb0023f7b85e7782a83f6fb8d76503d5526012212ddc0a",
+        "offset_ms": 7009
+      }
+    ],
+    "same_session_editor_interrupt": true,
+    "cleanup": {
+      "exit_code": 0,
+      "remaining_worker_targets": 0,
+      "observed_worker_targets": 6,
+      "iframe_removed": true
+    }
+  }
+}
