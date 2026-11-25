@@ -13,8 +13,8 @@
   `__missing_qemu__` / `__missing_rom__`）；无 Linux ARM64 内核头文件，无法重建模块
 - 证据等级：**host-level test** + code-level verification（userspace 状态机，
   与本机 Device Service 的 `cardputer-zero` 情况见下）
-- 已发布回复：见 `run.json` 的 `source.comment`（1 条，英文；PR 仍 OPEN，
-  未 close、未 push 上游、未改他人代码）
+- 已发布回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/19#issuecomment-7176157611>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游、未改他人代码）
 
 ## 结论
 
