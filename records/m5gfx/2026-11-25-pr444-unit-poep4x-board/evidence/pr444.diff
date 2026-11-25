@@ -1,0 +1,37 @@
+diff --git a/src/M5GFX.cpp b/src/M5GFX.cpp
+index d520456c..c49198d2 100644
+--- a/src/M5GFX.cpp
++++ b/src/M5GFX.cpp
+@@ -1142,6 +1142,7 @@ namespace m5gfx
+     case board_M5Tab5:         title = "M5Tab5";         break;
+     case board_M5Tab5X:        title = "M5Tab5X";        break;
+     case board_M5UnitPoEP4:    title = "M5UnitPoEP4";    break;
++    case board_M5UnitPoEP4X:   title = "M5UnitPoEP4X";   break;
+     case board_ArduinoNessoN1: title = "ArduinoNessoN1"; break;
+     default:                   title = "M5GFX";          break;
+     }
+diff --git a/src/board_detect/m5/esp32p4.inl b/src/board_detect/m5/esp32p4.inl
+index 6cc99c23..0bb93ff9 100644
+--- a/src/board_detect/m5/esp32p4.inl
++++ b/src/board_detect/m5/esp32p4.inl
+@@ -375,6 +375,12 @@ static constexpr board_desc_t desc_unitpoep4 = {
+   no_internal_i2c(), no_options(), pins(unitpoep4_detail::gpio_pins),
+   };
+ 
++static constexpr board_desc_t desc_unitpoep4x = {
++  { static_cast<board_id_t>(lgfx::board_M5UnitPoEP4X), "M5UnitPoEP4X", 0 },
++  no_power(), no_reset(), no_shared_sd(), no_display_pins(), no_pins(),
++  no_internal_i2c(), no_options(), pins(unitpoep4_detail::gpio_pins),
++  };
++
+ class unitpoep4_detector_t final : public board_detector_t
+ {
+ public:
+@@ -424,6 +430,7 @@ static const board_entry_t esp32p4_boards[] = {
+   { &desc_tab5, construct_tab5, "board_M5Tab5", nullptr, tab5_detail::fixed_prepare },
+   { &desc_tab5x, construct_tab5, "board_M5Tab5X", nullptr, tab5_detail::fixed_prepare },
+   { &desc_unitpoep4, construct_displayless, "board_M5UnitPoEP4", nullptr },
++  { &desc_unitpoep4x, construct_displayless, "board_M5UnitPoEP4X", nullptr },
+   { &desc_stampp4, construct_displayless, "board_M5StampP4", nullptr },
+ };
+ success_log_t success_log(const board_result_t& result) { return success_log(esp32p4_boards, result); }

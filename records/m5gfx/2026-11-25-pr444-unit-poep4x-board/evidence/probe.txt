@@ -1,0 +1,12 @@
+fixed entry=0x102a744e0
+fixed id=158 name=M5UnitPoEP4X displayless=1
+in_detector_members=0
+
+Meaning:
+- entry->desc->def.id = 158 and name = M5UnitPoEP4X: select_fixed_board() finds the
+  new esp32p4_boards[] entry, so M5GFX::config.fixed_board = board_M5UnitPoEP4X is
+  an executable path (M5GFX.cpp:907-929).
+- construct == construct_displayless: no display parts are built.
+- in_detector_members = 0: no esp32p4_detectors member lists desc_unitpoep4x, so the
+  IP101-based unitpoep4_detector_t can only return desc_unitpoep4; auto-detection
+  cannot yield board_M5UnitPoEP4X.

@@ -1,0 +1,38 @@
+Environment: macOS 26.5.1 arm64, Apple clang 21.0.0 (clang-2100.1.1.101).
+Worktree /tmp/m5gfx444 at PR head f65875a; develop baseline e7cae68.
+
+Compile command (same as test/board_detect/run.sh):
+
+  c++ -std=c++11 -O2 -Wall -Wextra -Wno-unused-function \
+      -Wno-unused-parameter -pedantic \
+      '-DM5GFX_BOARD_DETECT_IO_HEADER="support/detect_io.hpp"' \
+      -include test/board_detect/support/native_devices_io.hpp \
+      -Itest/board_detect -Itest/board_detect/stubs -Isrc \
+      test/board_detect/package_p4.cpp -o /tmp/pkg_p4_444
+
+1) PR head f65875a, fixture untouched
+
+  $ /tmp/pkg_p4_444
+  [stderr] Descriptor snapshot mismatch: p4
+  Abort trap: 6
+  rc=134
+
+2) develop e7cae68 (merge-base), same command
+
+  $ /tmp/pkg_p4_dev
+  p4: 6 full descriptions match
+  P4 packages: 72 cases passed
+  rc=0
+
+3) PR head with the 7-line fixture block added
+   (generated via M5GFX_UPDATE_SNAPSHOTS=1 /tmp/pkg_p4_444; see fixture-fix.diff)
+
+  $ sh test/board_detect/run.sh
+  P4 packages: 72 cases passed
+  package_p4: passed
+  ...
+  C++ test programs: 34 passed
+  rc=0
+
+No other host test program failed. The only worktree change in step 3 is
+test/board_detect/fixtures/p4.txt (+7 lines).

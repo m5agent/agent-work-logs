@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "FAIL",
+  "title": "M5GFX #444 review: M5UnitPoEP4X descriptor, board entry and title; host fixture missing",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/444",
+    "repository": "m5stack/M5GFX",
+    "head_commit": "f65875a55b3922afaa1695be428344c6d0e92904",
+    "base_commit": "e7cae681dd5ec6707b5c174a6b75cb5061c3f3d9",
+    "base_ref_tip": "5873de4e43b727fab651b71f615246267a816720"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS 26.5.1 arm64; Apple clang 21.0.0; local C++11 host board-detection suite; local Device Service exposes 36 profiles with ESP32-P4 only as tab5, so no Unit PoE-P4/P4X virtual device",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #444 OPEN, not draft, author TinyuZhao, English title with empty body, 0 comments and 0 reviews before review, mergeable MERGEABLE"
+    },
+    {
+      "id": "head-and-merge-base",
+      "status": "PASS",
+      "detail": "head f65875a55b3922afaa1695be428344c6d0e92904, parent/merge-base e7cae681dd5ec6707b5c174a6b75cb5061c3f3d9; base branch tip 5873de4 already contains PR #443; the PR diff is 2 files, +8/-0"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "src/board_detect/m5/esp32p4.inl adds desc_unitpoep4x and its esp32p4_boards[] entry (+7); src/M5GFX.cpp adds the board_M5UnitPoEP4X title case (+1); no other files"
+    },
+    {
+      "id": "descriptor-consistency",
+      "status": "PASS",
+      "detail": "desc_unitpoep4x mirrors desc_unitpoep4: id 158, name M5UnitPoEP4X, no power/reset/shared-sd/display/internal-i2c/options, same unitpoep4_detail::gpio_pins (31,52); select_fixed_board(158) returns it with construct_displayless"
+    },
+    {
+      "id": "title-mapping",
+      "status": "PASS",
+      "detail": "src/M5GFX.cpp:1145 maps board_M5UnitPoEP4X to the string M5UnitPoEP4X; the surrounding switch style and insertion point match the existing board cases (code-level only)"
+    },
+    {
+      "id": "upstream-host-ci",
+      "status": "FAIL",
+      "detail": "GitHub Actions run 45558545815 (Board detection host tests) at head f65875a: conclusion failure; package_p4 emits 'Descriptor snapshot mismatch: p4' and aborts; C++ test programs: 1 failed / 33 passed; all other status checks SUCCESS"
+    },
+    {
+      "id": "local-repro-pr-head",
+      "status": "FAIL",
+      "detail": "local build of test/board_detect/package_p4.cpp at PR head with the repo C++11 command: 'Descriptor snapshot mismatch: p4', Abort trap 6, rc 134"
+    },
+    {
+      "id": "develop-baseline",
+      "status": "PASS",
+      "detail": "same package_p4 build at merge-base e7cae68: 'p4: 6 full descriptions match', 'P4 packages: 72 cases passed', rc 0"
+    },
+    {
+      "id": "fixture-fix",
+      "status": "PASS",
+      "detail": "regenerating test/board_detect/fixtures/p4.txt with M5GFX_UPDATE_SNAPSHOTS=1 adds exactly 7 lines for 158 M5UnitPoEP4X; the block is captured in evidence/fixture-fix.diff"
+    },
+    {
+      "id": "full-host-suite-after-fix",
+      "status": "PASS",
+      "detail": "PR head plus the 7-line fixture block: sh test/board_detect/run.sh -> package_p4 passed, C++ test programs: 34 passed, rc 0; no other change in the worktree"
+    },
+    {
+      "id": "autodetect-reachability",
+      "status": "REVIEW",
+      "detail": "no esp32p4_detectors member lists desc_unitpoep4x (probe: in_detector_members=0); unitpoep4_detector_t::members_ only contains desc_unitpoep4, so auto-detection still returns board_M5UnitPoEP4 and only config.fixed_board selects the X; author asked to confirm this is intended"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no Unit PoE-P4X hardware on this host; power-on, PHY link and firmware boot were not exercised"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "local Device Service has 36 profiles; its only ESP32-P4 profile is tab5, with no Unit PoE-P4/P4X model, so no matching virtual device could be built or booted"
+    },
+    {
+      "id": "runtime-title-and-detection",
+      "status": "NOT RUN",
+      "detail": "actual getBoardName() output and the real PoE-P4X auto-detection result were not observed on a device; only source and host-probe checks were done"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-status.txt",
+    "evidence/pr444.diff",
+    "evidence/host-failure.txt",
+    "evidence/local-repro.txt",
+    "evidence/fixture-fix.diff",
+    "evidence/probe.cpp",
+    "evidence/probe.txt",
+    "evidence/device-profiles.txt"
+  ],
+  "notes": [
+    "PR left OPEN; exactly one English comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Blocking item: test/board_detect/fixtures/p4.txt was not regenerated for the new board entry, so the upstream host job fails in package_p4.",
+    "Evidence class is host-level test plus code-level verification. Hardware and virtual-device validation are NOT RUN.",
+    "The 7-line fixture fix was verified locally on the PR head but not pushed to the contributor's branch."
+  ]
+}
