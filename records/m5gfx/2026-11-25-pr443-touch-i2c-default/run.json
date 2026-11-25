@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #443 review: default touch I2C clock 1 MHz -> 400 kHz",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/443",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "e7cae681dd5ec6707b5c174a6b75cb5061c3f3d9",
+    "head_commit": "2c6b0f01090bdfc8b3007f652dc9510cf797c37b",
+    "diff_scope": "1 file, +3/-1, src/lgfx/v1/Touch.hpp",
+    "related": ["https://github.com/lovyan03/LovyanGFX/pull/1019"]
+  },
+  "hardware": {},
+  "firmware": {
+    "build": "ESP-IDF v6.1, target esp32s3, 8MB flash + 8MB octal PSRAM, examples/Test/build_test with a shared harness main.cpp",
+    "pr_app_sha256": "f4c519305c0e77131497127711d5efaf122435701564cd6b8f1de677776bb6cb",
+    "pr_merged_sha256": "1461feaeb9412d1b870fc3a172426c216aa3e94b8912a8c087e73fd5201960f6",
+    "pr_firmware_id": "836b6f9d0fe738296687e47a92122a96be1941781f55490e5803428a29ab66d0",
+    "base_app_sha256": "8bb6e837fb80bc24abcee31791d4b53cf93a044a3ef4901fc96f1900fbb894ab",
+    "base_merged_sha256": "feee9a03627f7f507af2e578188159a9ba435bf005f86f42af19bfc679a35312",
+    "base_firmware_id": "1e27d1a2f3493031d3c6510093518c0d162246d8f05104a722df09a45de48fd0"
+  },
+  "execution": {
+    "environment": "macOS arm64; local Device Service (m5stack-device-service v1) profile stopwatch (qemu-esp32s3/m5stopwatch, CO5300 466x466, simulated); no physical hardware",
+    "device_id": "stopwatch",
+    "pr_session_id": "f1079a8812e74fd0953ad45d760bb325",
+    "base_session_id": "b89c262aa75249b38222591c58195129",
+    "input": {"kind": "touch", "x": 120, "y": 120, "settle_seconds": 0.3}
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "OPEN, not draft, author ainyan03, English, 0 comments / 0 reviews before this review, mergeable"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "Only src/lgfx/v1/Touch.hpp changes; default constant 1000000 -> 400000"
+    },
+    {
+      "id": "affected-drivers",
+      "status": "PASS",
+      "detail": "CST3530/CST816S/CST226/CST9217, CHSC6540, GT911, ST7123 use the default; FT5x06 sets 400 kHz itself; CoreS3 sets 400 kHz in Touch_M5StackCoreS3"
+    },
+    {
+      "id": "board-detect-unaffected",
+      "status": "PASS",
+      "detail": "apply_i2c_touch_desc always assigns cfg.freq = desc.freq; desc default is already 400000; runtime board_touch freq=400000 in both builds"
+    },
+    {
+      "id": "soft-i2c-side-effect",
+      "status": "PASS",
+      "detail": "soft_i2c.inl:123 gives half_us=0 at >=500 kHz and 2 us at 400 kHz; no built-in M5GFX board uses a software I2C port for touch"
+    },
+    {
+      "id": "description-scope",
+      "status": "REVIEW",
+      "detail": "CHSC6x/NS2009/TT21xxx/GSLx680/XPT2046/RA8875/STMPE610 are not in M5GFX; the list belongs to LovyanGFX #1019. Documentation-only, no code impact"
+    },
+    {
+      "id": "virtual-device-pr",
+      "status": "PASS",
+      "detail": "default_config_freq=400000, driver_default_freq=400000, touch_init=1, raw n=1 x=120 y=120, frame sha256 d2a742c8...1a8a2"
+    },
+    {
+      "id": "virtual-device-base",
+      "status": "PASS",
+      "detail": "default_config_freq=1000000, driver_default_freq=1000000, touch_init=1, raw n=1 x=120 y=120, same frame sha256"
+    },
+    {
+      "id": "host-tests",
+      "status": "PASS",
+      "detail": "bash test/board_detect/run.sh -> 34/34 C++ test programs passed"
+    },
+    {
+      "id": "upstream-ci",
+      "status": "PASS",
+      "detail": "38/38 checks pass; build-only jobs"
+    },
+    {
+      "id": "scl-timing",
+      "status": "NOT RUN",
+      "detail": "QEMU I2C model decodes commands/FIFO without SCL period; configured frequency was read back, not measured"
+    },
+    {
+      "id": "hardware",
+      "status": "NOT RUN",
+      "detail": "no physical StopWatch/GT911/CHSC6540 available"
+    }
+  ],
+  "limits": [
+    "Only CST816S/CST820 exercised; GT911, CHSC6540, CST9217, ST7123 did not run",
+    "Actual 400 kHz SCL timing not measured; no scope/logic-analyser data",
+    "Single power-on run and single tap per build; no soak, warm reset or repeated touch",
+    "Software-I2C slowdown not measured"
+  ]
+}

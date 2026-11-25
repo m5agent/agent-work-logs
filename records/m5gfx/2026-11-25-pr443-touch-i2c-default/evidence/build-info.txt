@@ -1,0 +1,50 @@
+Build and run record (identical harness in both trees)
+
+Sources (read-only copies)
+- PR head : m5stack/M5GFX 2c6b0f01090bdfc8b3007f652dc9510cf797c37b
+- base    : m5stack/M5GFX e7cae681dd5ec6707b5c174a6b75cb5061c3f3d9 (= develop tip)
+- Only source difference: src/lgfx/v1/Touch.hpp (diff in pr443.diff).
+
+Build (same command and configuration for both)
+  . ~/Documents/esp-idf-6.1/export.sh
+  cd examples/Test/build_test
+  idf.py set-target esp32s3
+  idf.py build
+  python -m esptool --chip esp32s3 merge-bin -o <out>.bin --flash-mode dio \
+    --flash-freq 80m --flash-size 8MB 0x0 bootloader/bootloader.bin \
+    0x8000 partition_table/partition-table.bin 0x10000 M5GFX-build-test.bin
+
+Artifacts
+- PR   app   sha256 f4c519305c0e77131497127711d5efaf122435701564cd6b8f1de677776bb6cb
+- PR   merged sha256 1461feaeb9412d1b870fc3a172426c216aa3e94b8912a8c087e73fd5201960f6
+        artifact_id 1461feae...1960f6, firmware_id 836b6f9d0fe738296687e47a92122a96be1941781f55490e5803428a29ab66d0
+        session f1079a8812e74fd0953ad45d760bb325
+- base app   sha256 8bb6e837fb80bc24abcee31791d4b53cf93a044a3ef4901fc96f1900fbb894ab
+- base merged sha256 feee9a03627f7f507af2e578188159a9ba435bf005f86f42af19bfc679a35312
+        artifact_id feee9a03...a35312, firmware_id 1e27d1a2f3493031d3c6510093518c0d162246d8f05104a722df09a45de48fd0
+        session b89c262aa75249b38222591c58195129
+
+Serial markers
+- PR   : default_config_freq=400000, driver_default_freq=400000, applied_freq=400000,
+         board_touch ... freq=400000, touch_init=1, raw n=1 x=120 y=120
+- base : default_config_freq=1000000, driver_default_freq=1000000, applied_freq=1000000,
+         board_touch ... freq=400000, touch_init=1, raw n=1 x=120 y=120
+
+Framebuffer
+- Both builds: 466x466 PNG sha256 d2a742c83cebbf2bdc4b6400dd5a170f43296e9aaf65bd07ecee9f200ac1a8a2
+  Content: dark fill + 9x9 green marker at the injected tap point (120,120); a top-left
+  text label is clipped in the captured frame (panel/capture origin offset), so the label
+  is not used as evidence. The green marker is the evidence that touch reached the app
+  and the drawing path works.
+
+Host tests (PR head)
+- bash test/board_detect/run.sh -> "C++ test programs: 34 passed" (evidence/host-tests-pr.txt)
+
+Upstream CI at head
+- 38/38 checks pass (build jobs only; evidence/ci-status.txt)
+
+Run sequence per build
+  POST /api/v1/artifacts (merged bin) -> POST /api/v1/firmware {kind:merged}
+  -> POST /api/v1/sessions {device_id:stopwatch} -> wait state=running
+  -> read serial -> POST /sessions/{id}/input {"kind":"touch","x":120,"y":120}
+  -> read serial + GET /sessions/{id}/frame.png?max_age_ms=0

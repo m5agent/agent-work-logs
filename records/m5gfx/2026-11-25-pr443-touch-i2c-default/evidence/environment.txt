@@ -1,0 +1,29 @@
+Environment (2026-11-25, UTC)
+
+Host: macOS arm64. No physical M5Stack hardware used.
+Toolchain: ESP-IDF v6.1 at ~/Documents/esp-idf-6.1 (xtensa-esp-elf 15.2.0).
+Build project: examples/Test/build_test (ESP-IDF CI example), target esp32s3.
+  sdkconfig additions on top of the example defaults:
+    CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+    CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+    CONFIG_SPIRAM=y / CONFIG_SPIRAM_MODE_OCT=y / CONFIG_SPIRAM_SPEED_80M=y
+    CONFIG_SPIRAM_USE_MALLOC=y
+  main/main.cpp replaced by the same harness in both trees (evidence/harness-main.cpp).
+  Merge: python -m esptool --chip esp32s3 merge-bin --flash-mode dio --flash-freq 80m
+         --flash-size 8MB 0x0 bootloader 0x8000 partition-table 0x10000 app
+
+Virtual device: local Device Service (m5stack-device-service, api_version v1) at
+http://127.0.0.1:8787, profile stopwatch (qemu-esp32s3 / m5stopwatch, CO5300 466x466,
+peripheral_status simulated, warnings empty, input+screenshot). Full profile in
+device-profile.json.
+
+Observed service-side detail: the stored merged firmware record reports flash_size
+16777216 (padded by the service) while the image header says 8 MB; the guest prints
+"Detected size(16384k) larger than the size in the binary image header(8192k)" and boots.
+
+I2C model limitation: the QEMU stopwatch I2C path decodes controller commands and FIFO
+bytes (patches/qemu-m5stack-peripherals/0001-m5stack-peripheral-models-and-data-planes.patch,
+hw/m5stopwatch/esp32s3_i2c.c hunks); no SCL period or bus timing is modelled. The same
+tap/read sequence succeeds at both 1 MHz and 400 kHz configurations, so this run cannot
+measure the electrical bus clock. Frequency claims in the record are the configured values
+read back from the driver, not measured SCL timing.

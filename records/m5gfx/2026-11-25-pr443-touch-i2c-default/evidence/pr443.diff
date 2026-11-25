@@ -1,0 +1,15 @@
+diff --git a/src/lgfx/v1/Touch.hpp b/src/lgfx/v1/Touch.hpp
+index 6725f07c..48a8463a 100644
+--- a/src/lgfx/v1/Touch.hpp
++++ b/src/lgfx/v1/Touch.hpp
+@@ -40,7 +40,9 @@ namespace lgfx
+   {
+     struct config_t
+     {
+-      uint32_t freq = 1000000;
++      // Most touch controllers are on I2C, so the default is 400 kHz (Fast-mode).
++      // Drivers for SPI controllers set their own clock in the constructor.
++      uint32_t freq = 400000;
+       uint16_t x_min = 0;
+       uint16_t x_max = 3600;
+       uint16_t y_min = 0;

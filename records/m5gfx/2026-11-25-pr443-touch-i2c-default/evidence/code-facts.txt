@@ -1,0 +1,56 @@
+M5GFX #443 code facts
+Source: PR head 2c6b0f01090bdfc8b3007f652dc9510cf797c37b, base/develop e7cae681dd5ec6707b5c174a6b75cb5061c3f3d9
+Collected 2026-11-25 (UTC) from the two local read-only trees.
+
+1. Diff scope
+   git diff e7cae68..2c6b0f0 = 1 file, +3 / -1: src/lgfx/v1/Touch.hpp only.
+   Base  : Touch.hpp:43  uint32_t freq = 1000000;
+   PR    : Touch.hpp:45  uint32_t freq = 400000;   (comment added above)
+
+2. How the value is reached
+   Touch.hpp:81  config_t config(void) const { return _cfg; }   // full copy of the driver's _cfg
+   Touch.hpp:82  void config(const config_t& config) { _cfg = config; }
+   A driver constructed with Touch_X t; then auto cfg = t.config(); keeps the value the
+   constructor left in _cfg (the new default unless the driver sets one).
+   A 'config_t cfg{}' that is filled field by field gets the new default directly.
+
+3. M5GFX touch drivers and whether they set a clock themselves (PR head)
+   - Touch_CST3530  Touch_CSTxxx.hpp:37/:39   no _cfg.freq assignment
+   - Touch_CST816S  Touch_CSTxxx.hpp:64/:77   no
+   - Touch_CST226   Touch_CSTxxx.hpp:113/:132 no
+   - Touch_CST9217  Touch_CSTxxx.hpp:169/:175 no
+   - Touch_CHSC6540 Touch_CHSC6540.hpp:28/:30 no
+   - Touch_GT911    Touch_GT911.hpp:28/:33    no
+   - Touch_ST7123   platforms/esp32p4/Touch_ST7123.hpp:28/:32 no
+   - Touch_FT5x06   Touch_FT5x06.hpp:28/:37    _cfg.freq = 400000 (already 400 kHz)
+   - Touch_sdl      host only, no I2C
+   grep for '_cfg.freq' under src/lgfx/v1/touch/ finds only Touch_FT5x06.hpp:37.
+
+4. Board detection does not depend on the default
+   board_detect/m5/construct_common.inl:250  i2c_touch_desc_t ctor: freq(400000)
+   board_detect/m5/construct_common.inl:426-441 apply_i2c_touch_desc():
+        auto cfg = target->config();
+        ...
+        cfg.freq = desc.freq;      // always assigned, no "keep" sentinel for freq
+        target->config(cfg);
+   board_detect/m5/construct_common.inl:445-447 make_i2c_touch() -> apply_i2c_touch_desc()
+   All 15 out.touch.reset() sites go through make_i2c_touch<...>() except CoreS3, which uses
+   make_default_part<Touch_M5StackCoreS3>() (esp32s3_construct.inl:736); that class sets
+   _cfg.freq = i2c_freq (src/M5GFX.cpp:503) with i2c_freq = 400000 (src/M5GFX.cpp:446).
+   Result: the board-detected clock is 400 kHz before and after this PR. Confirmed at runtime:
+   board_touch freq=400000 in both firmware builds (see serial-pr.txt / serial-base.txt).
+
+5. Software I2C side effect (PR body)
+   platforms/soft_i2c.inl:118-124 soft_i2c_set_freq():
+        ctx.half_us = (freq >= 500000) ? 0 : (500000 + freq - 1) / freq;
+   => 0 us at >=500 kHz, 2 us at 400 kHz, applied per half period (soft_i2c_half_wait).
+   In M5GFX no board touch descriptor uses a soft port: only detection_i2c_port = -1
+   (src/M5GFX.cpp:136) is negative; all touch descs use hardware I2C ports (0/1).
+   isSoftPort(): platforms/esp32/common.inl:1760 (i2c_port < 0).
+
+6. Description scope vs this repository
+   Drivers named in the PR body but absent from m5stack/M5GFX:
+   CHSC6x, NS2009, TT21xxx, GSLx680, XPT2046, RA8875, STMPE610.
+   The same change is open as lovyan03/LovyanGFX#1019, where that driver list exists.
+   No test, example or document in M5GFX asserts the previous 1 MHz touch default
+   (grep 1000000 under src/lgfx/v1/touch, src/lgfx/v1/Touch.hpp, examples, docs, test).
