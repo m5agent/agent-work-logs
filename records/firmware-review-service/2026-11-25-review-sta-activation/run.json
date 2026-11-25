@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "service_debug",
+  "overall_status": "PARTIAL",
+  "title": "review-sta 上线后的复跑：网络不再缺模型，缺的是应用没发起 Wi-Fi",
+  "source": {
+    "issue": "m5stack-esp-emulator#238",
+    "pull_request": "",
+    "repository": "firmware-review-service",
+    "base_commit": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "network_no_activity": [
+      {"job_id": "job-26c58bb067d3", "name": "Monster for Cyberspace.online"},
+      {"job_id": "job-6df3d35e88bd", "name": "玄机OS"},
+      {"job_id": "job-37bb82f2046c", "name": "SecTrustKey"},
+      {"job_id": "job-de1d1429c30c", "name": "SecTrustKey"},
+      {"job_id": "job-ba218202b8d6", "name": "Bruce CN"},
+      {"job_id": "job-92abbf2f7c63", "name": "CardOS-zh"},
+      {"job_id": "job-ce6e88172191", "name": "CardOS-zh"}
+    ],
+    "network_partial": [
+      {"job_id": "job-687de4ba2337", "name": "StopWatch Demo Plus"}
+    ],
+    "content_failed": [
+      {"job_id": "job-11c7fdcdb770", "name": "META TV IR"},
+      {"job_id": "job-eac32bc5d55f", "name": "FlipHack"},
+      {"job_id": "job-f9f8b090f06a", "name": "Adversary ADV"}
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; resident review service; native QEMU device service; review-sta userspace fixture; saved-snapshot retries submit=false; no physical hardware",
+    "task_id": "review-sta-activation-2026-11-25",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "recent manual inventory",
+      "status": "PASS",
+      "detail": "45 jobs: 11 done, 31 manual, 3 failed; network 11 (10 no-activity + 1 partial)"
+    },
+    {
+      "name": "review-sta portable backend",
+      "status": "PASS",
+      "detail": "no worker_namespace_unavailable; pcap isolation PASS; same guest"
+    },
+    {
+      "name": "network activation",
+      "status": "FAIL",
+      "detail": "7 apps made no Wi-Fi init/scan/assoc; setup=[]; saved_station=no_known_layout"
+    },
+    {
+      "name": "interaction retries",
+      "status": "FAIL",
+      "detail": "7 retried; 6 remain interaction, 1 content fail; no new PASS"
+    },
+    {
+      "name": "device mappings",
+      "status": "PARTIAL",
+      "detail": "PAPER_COLOR mapped; TIMERCAM reason added; Tab5/PaperS3/AtomLite still gaps"
+    },
+    {
+      "name": "Tab5 ELF capture",
+      "status": "NOT RUN",
+      "detail": "5 jobs screenshot_requires_matching_elf; one model gap"
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN",
+      "detail": "out of scope"
+    }
+  ],
+  "evidence": [
+    "evidence/review-sta-retry-summary.json"
+  ],
+  "notes": [
+    "review-sta backend is live; the remaining network problem is application activation, not model availability.",
+    "No new SIM_VERIFIED from 11 network retries; 7 moved to E_NETWORK_NO_ACTIVITY.",
+    "Issue #238 commented with retry results and next requirements.",
+    "No simulator code changed in this turn; review service mappings only."
+  ]
+}

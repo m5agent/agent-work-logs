@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-25 | Firmware Review Service | review-sta 复跑：网络不再缺模型，缺的是应用未发起 Wi-Fi | `PARTIAL`（11 条网络复跑 0 条转 VERIFIED；7 条 no-activity；31 条人工构成已拆分） | [查看](records/firmware-review-service/2026-11-25-review-sta-activation/) |
 | 2026-11-24 | M5GFX | #442 StopWatch 启动时 M5IOE1 GPIO1 / Type-C USB 选择 | `PARTIAL`（虚拟设备证实 G1 高→低且首帧正常；真机 Type-C 与热复位路径 NOT RUN；host 34/34） | [查看](records/m5gfx/2026-11-24-pr442-stopwatch-typec-usb/) |
 | 2026-11-24 | ESP Emulator | 网络审查能力需求（issue #238） | `REVIEW`（11 条网络人工根因与 P0/P1 规格；实现 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-24-network-review-requirements/) |
 | 2026-11-23 | M5GFX | #440 Core2 / Tough 复位后等待 panel reload 再发 init | `REVIEW`（虚拟设备仅证 Core2 不回归；修复本身与真机 NOT RUN；host 34/34、CI 40/40 PASS） | [查看](records/m5gfx/2026-11-23-pr440-core2-panel-reload/) |
