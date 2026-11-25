@@ -1,0 +1,124 @@
+6b3c1c8de2e2a96e01d3bc28b7fc1b47ea214760 2026-11-25 10:52:29 +0800
+HEAD line numbers:
+   130	    switch (request.format) {
+   131	        case ir_format_t::NEC: {
+   132	            ESP_RETURN_ON_ERROR(ensure_nec_encoder(holder, encoder), TAG, "ensure NEC encoder failed");
+   133	            ir_nec_scan_code_t scan_code{};
+   134	            scan_code.address = static_cast<uint16_t>(request.address & 0xFFFFu);
+   135	            scan_code.command = static_cast<uint16_t>(request.command & 0xFFFFu);
+   136	
+   137	            rmt_transmit_config_t config = {};
+   138	            config.loop_count = request.is_repeat ? 1 : 0;
+   139	            return rmt_transmit(channel, encoder, &scan_code, sizeof(scan_code), &config);
+   140	        }
+   141	        case ir_format_t::RC5: {
+   142	            ESP_RETURN_ON_ERROR(ensure_rc5_encoder(holder, encoder), TAG, "ensure RC5 encoder failed");
+--- CMakeLists IDF gate ---
+     1	cmake_minimum_required(VERSION 3.16)
+     2	
+     3	if(POLICY CMP0079)
+     4	    cmake_policy(SET CMP0079 NEW)
+     5	endif()
+     6	
+     7	# The vendored Wi-Fi Remote component uses this value to select its Kconfig.
+     8	set(ENV{ESP_IDF_VERSION} "6.1")
+     9	
+    10	# This project embeds every enabled audio asset in the factory application
+    11	# image. Force the list empty so an existing build cache cannot retain an older
+    12	# file-backed audio configuration.
+    13	set(OTOOL_AUDIO_EXTERNAL_FILES ""
+    14	    CACHE INTERNAL "No project-managed external audio files" FORCE)
+    15	
+    16	include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+    17	project(m5corep4x_user_demo)
+    18	
+    19	if(NOT IDF_VERSION_MAJOR EQUAL 6 OR NOT IDF_VERSION_MINOR EQUAL 1)
+    20	    message(FATAL_ERROR
+    21	        "M5CoreP4X UserDemo requires ESP-IDF 6.1; found ${IDF_VERSION} at $ENV{IDF_PATH}")
+    22	endif()
+    23	
+    24	# Required dependency fixes for the vendored components under ESP-IDF 6.1.
+    25	idf_component_get_property(esp_dsp_lib espressif__esp-dsp COMPONENT_LIB)
+--- ir_tools channel cfg ---
+   333	}
+   334	
+   335	esp_err_t ir_tools::init_tx_channel() {
+   336	    ESP_LOGI(IR_TAG, "create RMT TX channel gpio=%d res=%u", static_cast<int>(tx_gpio_), static_cast<unsigned>(resolution_hz_));
+   337	    rmt_tx_channel_config_t tx_channel_cfg = {};
+   338	    tx_channel_cfg.gpio_num          = tx_gpio_;
+   339	    tx_channel_cfg.clk_src           = RMT_CLK_SRC_DEFAULT;
+   340	    tx_channel_cfg.resolution_hz     = resolution_hz_;
+   341	    tx_channel_cfg.mem_block_symbols = 64;
+   342	    tx_channel_cfg.trans_queue_depth = 2;
+   343	    tx_channel_cfg.flags.invert_out  = true;
+   344	
+   345	    ESP_RETURN_ON_ERROR(rmt_new_tx_channel(&tx_channel_cfg, &tx_channel_), IR_TAG, "new tx channel failed");
+   346	
+   347	    rmt_carrier_config_t carrier_cfg = {};
+   348	    carrier_cfg.frequency_hz = 38000;
+   349	    carrier_cfg.duty_cycle   = 0.5f;
+   350	    esp_err_t ret = rmt_apply_carrier(tx_channel_, &carrier_cfg);
+--- nec encoder symbols ---
+   127	    auto *nec_encoder = static_cast<rmt_ir_nec_encoder_t *>(
+   128	        rmt_alloc_encoder_mem(sizeof(rmt_ir_nec_encoder_t)));
+   129	    ESP_RETURN_ON_FALSE(nec_encoder, ESP_ERR_NO_MEM, TAG, "no mem for ir nec encoder");
+   130	    *nec_encoder = {};
+   131	
+   132	    esp_err_t ret = ESP_OK;
+   133	    rmt_copy_encoder_config_t copy_encoder_config = {};
+   134	    rmt_bytes_encoder_config_t bytes_encoder_config = {};
+   135	    nec_encoder->base.encode = rmt_encode_ir_nec;
+   136	    nec_encoder->base.del = rmt_del_ir_nec_encoder;
+   137	    nec_encoder->base.reset = rmt_ir_nec_encoder_reset;
+   138	    nec_encoder->state = RMT_ENCODING_RESET;
+   139	
+   140	    ESP_GOTO_ON_ERROR(rmt_new_copy_encoder(&copy_encoder_config, &nec_encoder->copy_encoder),
+   141	                      err,
+   142	                      TAG,
+   143	                      "create copy encoder failed");
+   144	
+   145	    nec_encoder->nec_leading_symbol = {};
+   146	    nec_encoder->nec_leading_symbol.duration0 = 9000ULL * config->resolution / 1000000;
+   147	    nec_encoder->nec_leading_symbol.level0 = 1;
+   148	    nec_encoder->nec_leading_symbol.duration1 = 4500ULL * config->resolution / 1000000;
+   149	    nec_encoder->nec_leading_symbol.level1 = 0;
+   150	
+   151	    nec_encoder->nec_ending_symbol = {};
+   152	    nec_encoder->nec_ending_symbol.duration0 = 560 * config->resolution / 1000000;
+   153	    nec_encoder->nec_ending_symbol.level0 = 1;
+   154	    nec_encoder->nec_ending_symbol.duration1 = 0x7FFF;
+   155	    nec_encoder->nec_ending_symbol.level1 = 0;
+   156	
+   157	    bytes_encoder_config.bit0.duration0 = 560 * config->resolution / 1000000;
+   158	    bytes_encoder_config.bit0.level0 = 1;
+   159	    bytes_encoder_config.bit0.duration1 = 560 * config->resolution / 1000000;
+   160	    bytes_encoder_config.bit0.level1 = 0;
+   161	
+   162	    bytes_encoder_config.bit1.duration0 = 560 * config->resolution / 1000000;
+   163	    bytes_encoder_config.bit1.level0 = 1;
+   164	    bytes_encoder_config.bit1.duration1 = 1690 * config->resolution / 1000000;
+   165	    bytes_encoder_config.bit1.level1 = 0;
+--- ui window repeat assignment ---
+   270	
+   271	void update_repeat_button()
+   272	{
+   273	    set_button_text(s_ir_page.repeat_button,
+   274	                    s_ir_page.tx_repeat ? "Repeat x2" : "Repeat x1");
+   275	    set_button_colors(s_ir_page.repeat_button,
+   276	                      s_ir_page.tx_repeat ? 0xFEF3C7 : COLOR_BUTTON_BG,
+   277	                      s_ir_page.tx_repeat ? COLOR_WARNING : COLOR_TEXT);
+   278	}
+   548	        s_ir_page.tx_task_running) {
+   549	        return;
+   550	    }
+   551	
+   552	    s_ir_page.pending_tx = {};
+   553	    s_ir_page.pending_tx.format = ir_format_t::NEC;
+   554	    s_ir_page.pending_tx.address = compose_tx_address();
+   555	    s_ir_page.pending_tx.command = compose_tx_command();
+   556	    s_ir_page.pending_tx.is_repeat = s_ir_page.tx_repeat;
+   557	
+   558	    s_ir_page.tx_task_running = true;
+   559	    set_result_text("Sending NEC frame...", COLOR_WARNING);
+   560	    refresh_ir_status();
+--- changed files between cd1e1bd and HEAD in otool_ir ---

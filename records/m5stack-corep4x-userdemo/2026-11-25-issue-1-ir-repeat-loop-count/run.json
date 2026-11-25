@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "REVIEW",
+  "title": "M5CoreP4X UserDemo #1: IR 'Repeat x2' sends the NEC frame once (loop_count=1 normalized to no-loop)",
+  "source": {
+    "issue": "https://github.com/m5stack/M5CoreP4X-UserDemo/issues/1",
+    "repository": "m5stack/M5CoreP4X-UserDemo",
+    "author": "HalfSweet",
+    "language": "en",
+    "state": "OPEN",
+    "comments_before": 0,
+    "commit_referenced": "cd1e1bd",
+    "commit_checked_head": "6b3c1c8de2e2a96e01d3bc28b7fc1b47ea214760"
+  },
+  "hardware": {},
+  "firmware": {
+    "build": "not built; source-level comparison of the demo repository at cd1e1bd and HEAD 6b3c1c8",
+    "idf": "ESP-IDF 6.1.0 (enforced by CMakeLists.txt:8,19-21); local tree fff9895c82d744c7237be8847347bdd1b07c6643"
+  },
+  "execution": {
+    "environment": "macOS arm64; read-only sparse clone of m5stack/M5CoreP4X-UserDemo; local ESP-IDF 6.1 source tree; local Device Service device list (read-only); hardware test center overview (read-only, no DUT used)"
+  },
+  "checks": [
+    {
+      "id": "issue-state",
+      "status": "PASS",
+      "detail": "OPEN, author HalfSweet, English, 0 comments before this reply; no previous m5agent comment"
+    },
+    {
+      "id": "claim-loop-count",
+      "status": "PASS",
+      "detail": "ir_encoder.cpp:137-139 at HEAD and cd1e1bd sets loop_count = is_repeat ? 1 : 0 and returns rmt_transmit immediately; ui_function_irtxrx_window.cpp:556 is the only producer of is_repeat; :274 changes the label only"
+    },
+    {
+      "id": "idf-normalization",
+      "status": "PASS",
+      "detail": "ESP-IDF 6.1 rmt_tx.c:550-551 maps loop_count == 1 to 0, so x2 and x1 submit the identical single transaction"
+    },
+    {
+      "id": "idf-version-gate",
+      "status": "PASS",
+      "detail": "CMakeLists.txt:8,19-21 aborts the build unless ESP-IDF is exactly 6.1, so the 6.1 semantics always apply"
+    },
+    {
+      "id": "fix-loop-count-2-capacity",
+      "status": "PASS",
+      "detail": "NEC frame is 34 symbols (nec_encoder.cpp:127-165); TX channel mem_block_symbols=64 becomes 2 blocks x 48 = 96 symbols (rmt_tx.c:131-136), below the loop-mode memory limit checked at rmt_tx.c:665-670"
+    },
+    {
+      "id": "fix-two-transmits-queue",
+      "status": "PASS",
+      "detail": "trans_queue_depth=2 (ir_tools.cpp:344) accepts a second queued transaction; rmt_tx_wait_all_done is only needed if the UI should report completion instead of queueing"
+    },
+    {
+      "id": "rc5-path",
+      "status": "PASS",
+      "detail": "RC5 branch never sets loop_count, so it is unaffected by the switch"
+    },
+    {
+      "id": "hardware",
+      "status": "NOT RUN",
+      "detail": "the only ESP32-P4 test node is marked lent out / do not allocate; the fixture has no IR receiver or photodiode capture path"
+    },
+    {
+      "id": "virtual-device",
+      "status": "NOT RUN",
+      "detail": "Device Service lists 36 profiles and no CoreP4X; the only P4 profile is Tab5 (ESP32-P4NRW32, esp-emulator-native), a different board with no CoreP4X model and no IR/RMT coverage"
+    },
+    {
+      "id": "ir-capture",
+      "status": "NOT RUN",
+      "detail": "factory firmware IR waveform not captured; post-fix two-frame decode on a real NEC receiver not tested"
+    }
+  ],
+  "limits": [
+    "Source-level verification only; no hardware or virtual-device run",
+    "Does not measure frame gap, carrier duty or LED drive current",
+    "Does not prove a NEC receiver decodes two back-to-back frames after the fix",
+    "Design intent of 'Repeat' (two full frames vs NEC repeat code) still needs author confirmation"
+  ]
+}

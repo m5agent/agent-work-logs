@@ -1,0 +1,86 @@
+ESP-IDF tree: /Users/m5agent/Documents/esp-idf-6.1
+fff9895c82d744c7237be8847347bdd1b07c6643 change(version): Update version to 6.1.0
+
+--- version ---
+#define ESP_IDF_VERSION_MAJOR   6
+#define ESP_IDF_VERSION_MINOR   1
+#define ESP_IDF_VERSION_PATCH   0
+#define ESP_IDF_VERSION  ESP_IDF_VERSION_VAL(ESP_IDF_VERSION_MAJOR, \
+                                             ESP_IDF_VERSION_MINOR, \
+
+--- rmt_transmit normalization (rmt_tx.c) ---
+   540	            tx_chan->num_trans_inflight--;
+   541	        }
+   542	    }
+   543	    ESP_RETURN_ON_FALSE(t, ESP_ERR_INVALID_STATE, TAG, "no free transaction descriptor, please consider increasing trans_queue_depth");
+   544	
+   545	    // fill in the transaction descriptor
+   546	    memset(t, 0, sizeof(rmt_tx_trans_desc_t));
+   547	    t->encoder = encoder;
+   548	    t->payload = payload;
+   549	    t->payload_bytes = payload_bytes;
+   550	    // treat loop_count == 1 as no loop
+   551	    t->loop_count = config->loop_count == 1 ? 0 : config->loop_count;
+   552	    t->remain_loop_count = t->loop_count;
+   553	    t->flags.eot_level = config->flags.eot_level;
+   554	
+   555	    // send the transaction descriptor to queue
+   556	    if (xQueueSend(tx_chan->trans_queues[RMT_TX_QUEUE_PROGRESS], &t, 0) == pdTRUE) {
+
+--- tx channel memory allocation (rmt_tx.c) ---
+   126	        mem_block_num = 1;
+   127	        // Only the last channel has the DMA capability
+   128	        channel_scan_start = RMT_TX_CHANNEL_OFFSET_IN_GROUP + RMT_LL_GET(TX_CANDIDATES_PER_INST) - 1;
+   129	    } else {
+   130	        // one channel can occupy multiple memory blocks
+   131	        mem_block_num = config->mem_block_symbols / SOC_RMT_MEM_WORDS_PER_CHANNEL;
+   132	        if (mem_block_num * SOC_RMT_MEM_WORDS_PER_CHANNEL < config->mem_block_symbols) {
+   133	            mem_block_num++;
+   134	        }
+   135	        tx_channel->ping_pong_symbols = mem_block_num * SOC_RMT_MEM_WORDS_PER_CHANNEL / 2;
+   136	    }
+   137	    tx_channel->base.mem_block_num = mem_block_num;
+   138	
+   139	    // search free channel and then register to the group
+   140	    // memory blocks used by one channel must be continuous
+   258	        ESP_RETURN_ON_FALSE(1 << (config->intr_priority) & RMT_ALLOW_INTR_PRIORITY_MASK, ESP_ERR_INVALID_ARG, TAG, "invalid interrupt priority:%d", config->intr_priority);
+   259	    }
+   260	    ESP_RETURN_ON_FALSE(config && ret_chan && config->resolution_hz && config->trans_queue_depth, ESP_ERR_INVALID_ARG, TAG, "invalid argument");
+   261	    ESP_RETURN_ON_FALSE(GPIO_IS_VALID_OUTPUT_GPIO(config->gpio_num), ESP_ERR_INVALID_ARG, TAG, "invalid GPIO number %d", config->gpio_num);
+   262	    ESP_RETURN_ON_FALSE((config->mem_block_symbols & 0x01) == 0 && config->mem_block_symbols >= SOC_RMT_MEM_WORDS_PER_CHANNEL,
+   263	                        ESP_ERR_INVALID_ARG, TAG, "mem_block_symbols must be even and at least %d", SOC_RMT_MEM_WORDS_PER_CHANNEL);
+   264	#if SOC_RMT_SUPPORT_DMA
+   265	    if (config->flags.with_dma) {
+   266	#if CONFIG_RMT_TX_ISR_CACHE_SAFE && (!CONFIG_GDMA_ISR_HANDLER_IN_IRAM || !CONFIG_GDMA_CTRL_FUNC_IN_IRAM)
+
+--- loop memory limit check (rmt_tx.c) ---
+   660	        }
+   661	        t->flags.encoding_done = true;
+   662	        t->flags.need_eof_mark = need_eof_mark;
+   663	    }
+   664	
+   665	    // for loop transaction, the memory block should accommodate all encoded RMT symbols and an extra EOF symbol
+   666	    if (t->loop_count != 0) {
+   667	        size_t limit_symbols = tx_chan->base.mem_block_num * SOC_RMT_MEM_WORDS_PER_CHANNEL;
+   668	        if (unlikely(encoded_symbols > limit_symbols || (encoded_symbols == limit_symbols && is_mem_full && need_eof_mark))) {
+   669	            ESP_DRAM_LOGE(TAG, "encoding artifacts can't exceed hw memory block for loop transmission");
+   670	        }
+   671	    }
+   672	
+
+--- API doc (rmt_tx.h) ---
+    51	/**
+    52	 * @brief RMT transmit specific configuration
+    53	 */
+    54	typedef struct {
+    55	    int loop_count; /*!< Specify the times of transmission in a loop, -1 means transmitting in an infinite loop */
+    56	    struct {
+    57	        uint32_t eot_level : 1;         /*!< Set the output level for the "End Of Transmission" */
+    58	        uint32_t queue_nonblocking : 1; /*!< If set, when the transaction queue is full, driver will not block the thread but return directly */
+    59	    } flags;                            /*!< Transmit specific config flags */
+    60	} rmt_transmit_config_t;
+
+--- ESP32-P4 RMT caps ---
+419:#define SOC_RMT_MEM_WORDS_PER_CHANNEL         48 /*!< Each channel owns 48 words memory (1 word = 4 Bytes) */
+421:#define SOC_RMT_SUPPORT_TX_LOOP_COUNT         1  /*!< Support transmit specified number of cycles in loop mode */
+422:#define SOC_RMT_SUPPORT_TX_LOOP_AUTO_STOP     1  /*!< Hardware support of auto-stop in loop mode */
