@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "8f727c0b0d9defe6b50647425064a91288dc1b7c",
+    "candidate_commit": "35c46e112ffa7f1a52b03e8a3c5c5b84f677922d",
+    "issue": 250
+  },
+  "hardware": {
+    "device": "CoreS3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "esp_idf": "v5.4.1",
+    "cores3_bsp": "3.0.2",
+    "lvgl": "9.6.0~1",
+    "identities": "evidence/esp-idf-bsp-display.summary.json"
+  },
+  "execution": {
+    "level": "virtual-device validation",
+    "runtime_sha256": "11c5dea1a3982562c1ccf552df8833e1987cad4cb70cbd3db4f484cd9b230555",
+    "default_profile": "cores3-wasm-vm-div8",
+    "browser": "Chrome 158.0.8127.37",
+    "date": "2026-11-25"
+  },
+  "checks": [
+    {
+      "name": "old WASM original Widgets framebuffer",
+      "status": "FAIL"
+    },
+    {
+      "name": "old WASM SPI3 GDMA and empty transfer",
+      "status": "FAIL"
+    },
+    {
+      "name": "original four BSP applications display on locked WASM",
+      "status": "PASS"
+    },
+    {
+      "name": "same-session Widgets Analytics and Profile touch and frame",
+      "status": "PASS"
+    },
+    {
+      "name": "Benchmark scene progression and result table at candidate wall clock",
+      "status": "PASS"
+    },
+    {
+      "name": "original CoreS3 SD and Picture with attached FAT control",
+      "status": "PASS"
+    },
+    {
+      "name": "Cardputer-Adv reference keyboard and display",
+      "status": "PASS"
+    },
+    {
+      "name": "browser Worker cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "audio output, physical, native and hosted deployment",
+      "status": "NOT RUN"
+    }
+  ]
+}

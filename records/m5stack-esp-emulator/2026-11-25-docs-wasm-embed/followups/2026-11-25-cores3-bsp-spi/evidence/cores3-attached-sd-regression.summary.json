@@ -1,0 +1,185 @@
+{
+  "validation": "browser-WASM virtual-device validation",
+  "scope": "Private configured 64 MiB FAT attachment over the CoreS3 guest SPI controller",
+  "locked_site_manifest_sha256": "147d8844294ee364d931e07f8d858ee2f0cbce9e1ac8b173c1f966f576d09c51",
+  "private_site_manifest_sha256": "8fdd05111f6e9ea846f2eaf047d00548decce8731a04ea41245ff77074f9de99",
+  "locked_and_private_wasm_sha256": "11c5dea1a3982562c1ccf552df8833e1987cad4cb70cbd3db4f484cd9b230555",
+  "private_loader_files_sha256": {
+    "platform/web/public-qemu-runtime.js": "cd26fb6ed722c081bb1e843a1da7dd593706647b644f1b884c5cb29a802268e5",
+    "platform/web/public-qemu-engine.js": "81e99c08ef26022c304c1039090cae7d592c267fa09df3e7998ea2576bd1b2cc"
+  },
+  "sd_image_sha256": "93a9550a6d325ec8be0d9710eb7c079af24ba7d5ffb8c5c2db423c26e6fb1233",
+  "browser": "158.0.8127.37",
+  "cases": [
+    {
+      "example": "pic",
+      "status": "PASS",
+      "firmware_sha256": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+      "runtime_firmware_sha256": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+      "profile": "cores3-wasm-vm-div8",
+      "clock_divisor": 8,
+      "checks": {
+        "locked_wasm": true,
+        "exact_firmware": true,
+        "baseline_media": true,
+        "two_picture_frames_alternated": true,
+        "controller_read_commands": true,
+        "controller_confirmed_test_file_write": true,
+        "guest_stable": true,
+        "workers_cleaned_up": true
+      },
+      "picture_frames_rgb565_sha256_and_count": {
+        "47caff923dcbbde9aeb50a0abc634747f0767e4c96b6b7137e93382b712a17d7": 1,
+        "6fc470b83ddb6ba216b115b51da4bcba0714b6cf678ede96a99ea42bbdfd5d32": 2
+      },
+      "sd_protocol": {
+        "commands": {
+          "0": 1,
+          "8": 1,
+          "9": 2,
+          "13": 58,
+          "16": 1,
+          "17": 55,
+          "24": 11,
+          "41": 1,
+          "42": 1,
+          "55": 2,
+          "58": 2,
+          "59": 1
+        },
+        "wire_bytes": 35401,
+        "accepted_writes": 11,
+        "write_test_payload_accepted": true
+      },
+      "reset_count": 0,
+      "cleanup": {
+        "runtime": {
+          "gracefulExit": true,
+          "exitCode": 0,
+          "workersCreated": 5,
+          "workersAtExit": 0,
+          "disposal": {
+            "workersRemaining": 0,
+            "workersTerminatedByDispose": 0,
+            "workerCountScope": "engine-pthreads",
+            "enginePlacement": "dedicated-worker-v1",
+            "engineWorkersAtAcknowledgement": 1,
+            "ownerTerminatesAfterAcknowledgement": true,
+            "engineSelfClosesAfterAcknowledgement": false
+          },
+          "engineOwnership": {
+            "engineWorkersCreated": 1,
+            "engineOwnerLive": false,
+            "engineCloseNotificationReceived": true,
+            "engineCloseNotifications": 1,
+            "engineNormalTerminations": 1,
+            "engineFallbackTerminations": 0,
+            "enginePortTransferred": true,
+            "engineFinalizationAcknowledged": true,
+            "engineSelfCloseNotifications": 0,
+            "pthreadBroker": {
+              "created": 5,
+              "live": 0,
+              "terminations": 5,
+              "fallbackTerminations": 0
+            }
+          },
+          "engineOwnershipStage": "before-iframe-removal",
+          "explicitWorkerDisposal": true,
+          "iframeRemoved": true
+        },
+        "worker_targets": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    },
+    {
+      "example": "sdcard",
+      "status": "PASS",
+      "firmware_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+      "runtime_firmware_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+      "profile": "cores3-wasm-vm-div8",
+      "clock_divisor": 8,
+      "checks": {
+        "locked_wasm": true,
+        "exact_firmware": true,
+        "baseline_media": true,
+        "two_picture_frames_alternated": true,
+        "controller_read_commands": true,
+        "controller_confirmed_test_file_write": true,
+        "guest_stable": true,
+        "workers_cleaned_up": true
+      },
+      "picture_frames_rgb565_sha256_and_count": {
+        "47caff923dcbbde9aeb50a0abc634747f0767e4c96b6b7137e93382b712a17d7": 1,
+        "6fc470b83ddb6ba216b115b51da4bcba0714b6cf678ede96a99ea42bbdfd5d32": 2
+      },
+      "sd_protocol": {
+        "commands": {
+          "0": 1,
+          "8": 1,
+          "9": 2,
+          "13": 56,
+          "16": 1,
+          "17": 55,
+          "24": 11,
+          "41": 1,
+          "42": 1,
+          "55": 2,
+          "58": 2,
+          "59": 1
+        },
+        "wire_bytes": 35381,
+        "accepted_writes": 11,
+        "write_test_payload_accepted": true
+      },
+      "reset_count": 0,
+      "cleanup": {
+        "runtime": {
+          "gracefulExit": true,
+          "exitCode": 0,
+          "workersCreated": 5,
+          "workersAtExit": 0,
+          "disposal": {
+            "workersRemaining": 0,
+            "workersTerminatedByDispose": 0,
+            "workerCountScope": "engine-pthreads",
+            "enginePlacement": "dedicated-worker-v1",
+            "engineWorkersAtAcknowledgement": 1,
+            "ownerTerminatesAfterAcknowledgement": true,
+            "engineSelfClosesAfterAcknowledgement": false
+          },
+          "engineOwnership": {
+            "engineWorkersCreated": 1,
+            "engineOwnerLive": false,
+            "engineCloseNotificationReceived": true,
+            "engineCloseNotifications": 1,
+            "engineNormalTerminations": 1,
+            "engineFallbackTerminations": 0,
+            "enginePortTransferred": true,
+            "engineFinalizationAcknowledged": true,
+            "engineSelfCloseNotifications": 0,
+            "pthreadBroker": {
+              "created": 5,
+              "live": 0,
+              "terminations": 5,
+              "fallbackTerminations": 0
+            }
+          },
+          "engineOwnershipStage": "before-iframe-removal",
+          "explicitWorkerDisposal": true,
+          "iframeRemoved": true
+        },
+        "worker_targets": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    }
+  ]
+}
