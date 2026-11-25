@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3 UIFlow2 documentation imports and UART bytes",
+  "source": {
+    "repository": "https://github.com/m5stack/uiflow-micropython",
+    "base_commit": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "patch_commit": "73696ca95594646f09a39e4f525b20cf5cc550e5"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence/sdk-examples-before-after-summary.json"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS, browser firmware application and REPL",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "ADC and GPIO example visibility",
+      "status": "PASS"
+    },
+    {
+      "name": "Watchdog elapsed time causing guest reset",
+      "status": "PASS"
+    },
+    {
+      "name": "UART1 write input",
+      "status": "PASS"
+    },
+    {
+      "name": "UART1 receive echo",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Editor recovery after guest-initiated reset",
+      "status": "FAIL"
+    }
+  ],
+  "evidence": [
+    "evidence/sdk-examples-before-after-summary.json"
+  ]
+}

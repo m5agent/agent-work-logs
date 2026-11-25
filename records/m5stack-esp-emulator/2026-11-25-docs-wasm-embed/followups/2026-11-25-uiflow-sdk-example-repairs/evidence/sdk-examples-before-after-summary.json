@@ -1,0 +1,280 @@
+{
+  "classification": "virtual-device validation (browser WASM)",
+  "stock_docs_revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+  "patched_source_revision": "73696ca95594646f09a39e4f525b20cf5cc550e5",
+  "same_runtime_and_firmware_before_after": true,
+  "origin_scope": "Independent loopback origins relocate the glue URL in memory, producing expected per-origin glue digests. Exported source glue, runtime, startup source, incoming Flash, runtime Flash and manifest identities match.",
+  "examples": [
+    {
+      "example_path": "examples/hardware/adc/adc_cores3_example.py",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/adc.html",
+      "before": {
+        "source_sha256": "b2772fda3fb41b41203ea06654c72811f98aba59679b01f530a3ce27694fc6f4",
+        "guest_status": "GUEST_ERROR_OR_WARNING",
+        "input_marker": "complete",
+        "frame_sha256": "49812b87e86b2dd8d3ba047491638b92b420c5756d4982fca7687ab52c56bed4",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 37, in <module>\r\n  File \"<stdin>\", line 26, in setup\r\nNameError: name 'ADC' isn't defined\r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "after": {
+        "source_sha256": "09de3b0cf1c8d0ec0423e03ca90711d03e1e93129331867033767f435cc83c1a",
+        "guest_status": "EXECUTED_VISIBLE_FRAME",
+        "input_marker": "interrupted",
+        "frame_sha256": "bbd01a4fe2cca35a5e0e3c78e18171ebb88d9f379c1eb8deff914c553239eb71",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 39, in <module>\r\nKeyboardInterrupt: \r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "function_observed": "ADC Value:2048 in real guest RGB565. ADC input was the default virtual value.",
+      "wasm_identity": {
+        "deviceId": "cores3",
+        "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "firmwareSha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+        "clockDivisor": 1,
+        "uiflowWorkbench": {
+          "baseSha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+          "composerCommit": "6cb4e86540eca0d9ba62500a298385c9d863c8be",
+          "startupSources": {
+            "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+            "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+            "main.py": "12ae78c798dc3f36d2e35d5a7927e403ff46131bd3437870552fa953476c6e06"
+          }
+        }
+      },
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2"
+    },
+    {
+      "example_path": "examples/hardware/pin/pin_cores3_example.py",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/pin.html",
+      "before": {
+        "source_sha256": "78ed3bbaa7fc92910c5e242f2610c1c7140ddf28c30afc2ad6f6b2114499bed5",
+        "guest_status": "GUEST_ERROR_OR_WARNING",
+        "input_marker": "complete",
+        "frame_sha256": "6ef3f50e692b7071207560e40ba2c4b8f16da1e29710176ebd40dfaa9c9a7385",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 46, in <module>\r\n  File \"<stdin>\", line 28, in setup\r\nNameError: name 'Pin' isn't defined\r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "after": {
+        "source_sha256": "5c262ccdcd3390fb712c1ef13ab528e3b0fcb3f6489a700a7d8fe488ba2af5e4",
+        "guest_status": "EXECUTED_VISIBLE_FRAME",
+        "input_marker": "interrupted",
+        "frame_sha256": "9235ed790e716ec04c8196ef6f699ce87641147c6d7c9b7e937b9a3433a913c1",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 48, in <module>\r\n  File \"<stdin>\", line 40, in loop\r\nKeyboardInterrupt: \r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "function_observed": "Pin 6 State:0 and Pin 7 State:1 in real guest RGB565. GPIO7 used the default guest input.",
+      "wasm_identity": {
+        "deviceId": "cores3",
+        "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "firmwareSha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+        "clockDivisor": 1,
+        "uiflowWorkbench": {
+          "baseSha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+          "composerCommit": "6cb4e86540eca0d9ba62500a298385c9d863c8be",
+          "startupSources": {
+            "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+            "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+            "main.py": "12ae78c798dc3f36d2e35d5a7927e403ff46131bd3437870552fa953476c6e06"
+          }
+        }
+      },
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2"
+    },
+    {
+      "example_path": "examples/hardware/uart/cores3_echo_example.py",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/uart.html",
+      "before": {
+        "source_sha256": "1cf18858d134d28cf06f544347c2b25ccb8cf2310db741dd0c51853fc5dcf1d4",
+        "guest_status": "GUEST_ERROR_OR_WARNING",
+        "input_marker": "complete",
+        "frame_sha256": "f767204d2addf135efcf1d9fb08d9ca5b69b9589e1044c4e425783b009ebc3f7",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 44, in <module>\r\n  File \"<stdin>\", line 33, in loop\r\nTypeError: object with buffer protocol required\r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "after": {
+        "source_sha256": "04b8f0c3719b892914ba41586e02a7c6bf0d6861ef029eb4d050036ff0f5d8f2",
+        "guest_status": "EXECUTED_VISIBLE_FRAME",
+        "input_marker": "interrupted",
+        "frame_sha256": "f767204d2addf135efcf1d9fb08d9ca5b69b9589e1044c4e425783b009ebc3f7",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 44, in <module>\r\n  File \"<stdin>\", line 37, in loop\r\nKeyboardInterrupt: \r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "function_observed": "Guest reached time.sleep() in the main loop, past UART1.write. No RX peer or loopback was attached, so LCD retained label0.",
+      "wasm_identity": {
+        "deviceId": "cores3",
+        "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "firmwareSha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+        "clockDivisor": 1,
+        "uiflowWorkbench": {
+          "baseSha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+          "composerCommit": "6cb4e86540eca0d9ba62500a298385c9d863c8be",
+          "startupSources": {
+            "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+            "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+            "main.py": "12ae78c798dc3f36d2e35d5a7927e403ff46131bd3437870552fa953476c6e06"
+          }
+        }
+      },
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2"
+    },
+    {
+      "example_path": "examples/hardware/wdt/wdt_cores3_example.py",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/wdt.html",
+      "before": {
+        "source_sha256": "e4578961339a21981da2e7efc29123e59c0a20e8e0cfd57f016d260ea9230173",
+        "guest_status": "GUEST_ERROR_OR_WARNING",
+        "input_marker": "complete",
+        "frame_sha256": "561aacada05576c948c5caba4d960f68c3203c380c0334161ce0ff2dc9c6010d",
+        "guest_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 53, in <module>\r\n  File \"<stdin>\", line 35, in setup\r\nNameError: name 'WDT' isn't defined\r\n\r\n",
+        "guest_stderr": "",
+        "editor_error_name": null,
+        "machine_events": [
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        }
+      },
+      "after": {
+        "source_sha256": "741f27a3801f312125da258aa58bfb2a3610e458c3bc6285380b7c4d9c7a813a",
+        "guest_status": "RUNNER_ERROR",
+        "input_marker": "running",
+        "frame_sha256": "2e370b18b894eeb150a983aa441a737927d4efd1e59bbc207ed9afaabfb6ca71",
+        "guest_stdout": null,
+        "guest_stderr": null,
+        "editor_error_name": "AbortError",
+        "machine_events": [
+          {
+            "event": "RESET",
+            "reason": "guest-reset",
+            "guest": true,
+            "consoleEpoch": 1
+          },
+          {
+            "event": "RESET",
+            "reason": "guest-reset",
+            "guest": true,
+            "consoleEpoch": 2
+          },
+          {
+            "event": "SHUTDOWN",
+            "reason": "host-qmp-quit",
+            "guest": false
+          }
+        ],
+        "cleanup": {
+          "guest_exit_code": 0,
+          "cdp_targets_closed_before_context": true
+        },
+        "guest_watchdog_markers": [
+          ">R\u0001�\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0004E (23335) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:",
+          "E (23335) task_wdt:  - mpy_machine_wdt (CPU 0/1)"
+        ]
+      },
+      "function_observed": "Touch State:0 and WDT State: Not Feed! in actual guest display. Guest reported task_wdt for mpy_machine_wdt and emitted guest reset QMP notifications. Post-reset workbench did not regain Run within 30s.",
+      "wasm_identity": {
+        "deviceId": "cores3",
+        "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "firmwareSha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+        "clockDivisor": 1,
+        "uiflowWorkbench": {
+          "baseSha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+          "composerCommit": "6cb4e86540eca0d9ba62500a298385c9d863c8be",
+          "startupSources": {
+            "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+            "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+            "main.py": "12ae78c798dc3f36d2e35d5a7927e403ff46131bd3437870552fa953476c6e06"
+          }
+        }
+      },
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2"
+    }
+  ],
+  "independent_same_guest_after_controls": {
+    "source_sha256": "3cd1b577602e4d58bd0589d4337a760d1fc1f2c69dd98fe28c7aa89dc1394ce0",
+    "guest_stdout": "M5_ADC_GPIO6 2048\r\nM5_GPIO 1 1\r\nM5_UART1_TX_COUNT 5\r\nM5_UART1_WRITE_BYTES 7\r\nM5_UART1_RX_PENDING 0\r\n",
+    "clean_runtime_and_firmware": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "ok": true,
+    "cleanup": true
+  }
+}
