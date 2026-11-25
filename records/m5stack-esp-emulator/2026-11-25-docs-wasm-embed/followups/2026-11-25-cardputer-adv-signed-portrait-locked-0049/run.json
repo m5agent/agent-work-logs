@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer-ADV signed portrait on locked browser QEMU 0049",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/258",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "c4d4b3b376922caae1a19f4e49e78380fc6ec7da",
+    "candidate_commit": "b8d90de87113b3ea2e600213f97926193a6d785f",
+    "producer_commit": "7a74b3b9ee0c4fff3e1950f65021b7c57f392f11"
+  },
+  "hardware": {
+    "model": "Cardputer-ADV",
+    "validation": "virtual-device validation (browser WASM)",
+    "physical_hardware": "NOT RUN"
+  },
+  "firmware": {
+    "exact_paths": {
+      "ir": {
+        "bytes": 4194304,
+        "sha256": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb"
+      },
+      "keyboard": {
+        "bytes": 4194304,
+        "sha256": "f7edb36bb3662506853773399467841a55bef3d3e16cc3469bc821b4ad7638bf"
+      },
+      "display": {
+        "bytes": 4194304,
+        "sha256": "cc1b3e5868feb075e2ec8a5e7211897e8ae1c9635f5d072442ef007273c2a968"
+      },
+      "four_rotations": {
+        "bytes": 8388608,
+        "sha256": "b2d1e4c2e03c44ca0e938237f265595c2d3eeccbcc0dbe58a154f1c7ac3747cd"
+      }
+    }
+  },
+  "execution": {
+    "environment": "Apple silicon macOS Chromium 158.0.8127.37; Emscripten 3.1.50",
+    "task_id": "GitHub issue 258",
+    "session_id": "redacted; each report digest retained",
+    "release": {
+      "release_base": "c4d4b3b376922caae1a19f4e49e78380fc6ec7da",
+      "accepted_source_commit": "b8d90de87113b3ea2e600213f97926193a6d785f",
+      "exact_clean_producer_commit": "7a74b3b9ee0c4fff3e1950f65021b7c57f392f11",
+      "post_build_rebase_delta": [
+        "docs/project-backlog.md",
+        "docs/project-snapshot.md",
+        "docs/validation-ledger.md"
+      ],
+      "producer": {
+        "kind": "source-build",
+        "all_objects_rebuilt": true,
+        "emscripten": "3.1.50",
+        "wasm_sha256": "3110d2859c0eb8648a94c52200c6456f387379859f865c0d3f46058d50bd798f",
+        "wasm_bytes": 12795203,
+        "lock_sha256": "6ca9ff0938e76e84b659ff1a6abbd785c23842624742e5b88e86eb4384d718d1",
+        "runtime_manifest": {
+          "bytes": 38251,
+          "sha256": "7e787044095cb32827287d968df38929816a8679a98e78888b8b9fc19d4b0d4e"
+        },
+        "site_manifest": {
+          "bytes": 440732,
+          "sha256": "5c53116f28894a0b6210167b3aecf52abaf77e9cb385da048901ceac85211495"
+        },
+        "patch": {
+          "path": "patches/qemu-wasm-probe/0049-cardputer-adv-portrait-direction.patch",
+          "sha256": "d95f729f5cae8a38105849a4b434ed0bf7409f16d7951f49310de12da64ab916"
+        },
+        "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+        "base_path": "/showcase/",
+        "rom_bundled": false,
+        "firmware_bundled": false
+      }
+    }
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "name": "Full producer-locked 0049 QEMU and eligible static export",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Original IR signed portrait orientation",
+      "status": "PASS"
+    },
+    {
+      "layer": "transport",
+      "name": "Original IR guest USB CDC markers",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Original Display and Keyboard through normal browser controls",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Real four-rotation frame and original IRQ reader regression",
+      "status": "PASS"
+    },
+    {
+      "layer": "review",
+      "name": "Initial Keyboard launch artifact-to-checkout provenance",
+      "status": "FAIL"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "NEC strict timing observation on producer-locked 0049",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Previously observed NEC timing in private default/div8 trials",
+      "status": "FAIL"
+    }
+  ],
+  "evidence": [
+    "evidence/locked-0049-portrait.summary.json"
+  ]
+}
