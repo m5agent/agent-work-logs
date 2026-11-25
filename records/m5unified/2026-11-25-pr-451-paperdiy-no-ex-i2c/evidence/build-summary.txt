@@ -1,0 +1,23 @@
+toolchain: ESP-IDF v6.1 ; xtensa-esp-elf-gcc (crosstool-NG esp-15.2.0_20251204) 15.2.0
+M5Unified: m5stack/M5Unified @ bf06bc4ef325a2776d23348c08f3bb6976a59e5c (PR #451 head, base develop b7eaa4b)
+M5GFX:     m5stack/M5GFX @ 28d4794 (release 0.3.0 merge; the PaperDIY board descriptor with internal_i2c hw_port=-1 and the Ex_I2C code paths under test are identical to develop 72001da)
+layout:    <build-dir>/components/{M5Unified,M5GFX}, main/ app_main probe, sdkconfig.defaults
+
+build shim (build-only, no behaviour change): M5GFX CMakeLists COMPONENT_REQUIRES += esp_psram for IDF 6.1 (esp_psram.h is no longer pulled in transitively by hal)
+
+images (merged at 0x0: bootloader 0x0 / partition-table 0x8000 / app 0x10000, dio, 80 MHz, 16 MB):
+  merged_pr.bin sha256=436c76cf9e0ae11d76e2443115e270b7ef291bbeb383c2717a11cea889cf8d98 size=554256
+  merged_pr2.bin sha256=b18854ce022c0439516322a3b85b11706e244494e89c985c251ed42dae28fa58 size=554416
+  merged_noguard.bin sha256=6bc1ed8631bf9ae0427520a38d7bce9c218aed68df25ec6d951c79a83db6335c size=554416
+  merged_cores3c.bin sha256=623519f27a49d89c3ea88a7f4dc5bde263c8ef09803c29cd5db68887d709171a size=514128
+
+variants:
+  merged_pr.bin      paperdiy, PR head, default cfg (external_rtc/imu false)
+  merged_pr2.bin     paperdiy, PR head, cfg.external_rtc=true cfg.external_imu=true
+  merged_noguard.bin paperdiy, same two cfg flags, guard removed locally (test variant, not the PR)
+  merged_cores3c.bin cores3 with Grove port, PR head, same two cfg flags, CONFIG_SPIRAM=n
+
+build warnings: 0 'warning:' lines in each of the four builds
+<build-dir>/build_pr3.log:0
+<build-dir>/build_noguard.log:0
+<build-dir>/build_cores3c.log:0

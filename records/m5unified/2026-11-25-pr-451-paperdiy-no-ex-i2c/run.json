@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #451 review: PaperDIY without external I2C pins, and no Ex_I2C.begin() without a port",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/451",
+    "repository": "m5stack/M5Unified",
+    "head_commit": "bf06bc4ef325a2776d23348c08f3bb6976a59e5c",
+    "base_commit": "b7eaa4babbe0a290147a8754265b670ad397d0c2",
+    "base_ref": "develop",
+    "head_ref": "paperdiy_no_ex_i2c",
+    "commits": [
+      "b86c92708aed1d276fc36fb66a78096349e78d9d PaperDIY: no external I2C (Ex_I2C) pins",
+      "bf06bc4ef325a2776d23348c08f3bb6976a59e5c Do not begin Ex_I2C on boards without external I2C pins"
+    ],
+    "cross_reference": {
+      "pull_request": "https://github.com/m5stack/M5GFX/pull/447",
+      "head_commit": "a5fdf82cae2ebf3385f622302a1ffe917b197fdc",
+      "base_commit": "72001da0fdd7232a8a8ac77cd84120801f879496",
+      "scope_in_this_review": "generated M5Unified pin table only; the rest of #447 was not reviewed"
+    }
+  },
+  "hardware": {},
+  "firmware": {
+    "device_profiles": [
+      "paperdiy"
+    ],
+    "images": [
+      "paperdiy PR head, default cfg sha256 436c76cf9e0ae11d76e2443115e270b7ef291bbeb383c2717a11cea889cf8d98",
+      "paperdiy PR head, external_rtc/imu=true sha256 b18854ce022c0439516322a3b85b11706e244494e89c985c251ed42dae28fa58",
+      "paperdiy local no-guard variant, external_rtc/imu=true sha256 6bc1ed8631bf9ae0427520a38d7bce9c218aed68df25ec6d951c79a83db6335c",
+      "cores3 PR head, external_rtc/imu=true sha256 623519f27a49d89c3ea88a7f4dc5bde263c8ef09803c29cd5db68887d709171a"
+    ],
+    "components": {
+      "M5Unified": "bf06bc4 (PR head)",
+      "M5GFX": "28d4794 (release 0.3.0; PaperDIY board descriptor and the tested code paths are the same as develop 72001da)"
+    },
+    "runtime": "local Device Service, QEMU, merged image at 0x0/0x8000/0x10000, 16 MB flash"
+  },
+  "execution": {
+    "environment": "macOS arm64; ESP-IDF v6.1; xtensa-esp-elf 15.2.0; local Device Service with 36 profiles, paperdiy (QEMU m5paperdiy, ET047TC1 540x960, partial) and cores3 (QEMU m5cores3)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "OPEN, not draft, MERGEABLE/CLEAN, author ainyan03, English title/body, 1 file +4/-2, 0 comments and 0 reviews before review"
+    },
+    {
+      "id": "pin-table-values",
+      "status": "PASS",
+      "detail": "src/M5Unified.inl:119 splits In SCL/SDA (42/41) from EX SCL/SDA (255/255); matches M5GFX #447 generated esp32s3.inl line for board_M5PaperDIY"
+    },
+    {
+      "id": "port-selection",
+      "status": "PASS",
+      "detail": "M5Unified.inl:1608-1611: with EX pins unset, in_port stays I2C_NUM_1 (Arduino Wire1); Ex_I2C keeps port -1 because setPort() at :1636 is not reached"
+    },
+    {
+      "id": "guard-semantics",
+      "status": "PASS",
+      "detail": "I2C_Class.hpp:132 isEnabled() == _port_num >= 0, i.e. has-a-port, not has-begun, so the guard cannot skip a board that owns a port"
+    },
+    {
+      "id": "getPin-negative",
+      "status": "PASS",
+      "detail": "M5Unified.hpp:256 returns int8_t, so table value 255 reads back as -1; observed pa_sda=-1 pa_scl=-1 at runtime"
+    },
+    {
+      "id": "virtual-paperdiy-pr",
+      "status": "PASS",
+      "detail": "PR head, external_rtc/imu=true: board=34 detected, in_port=1 in_sda=41 in_scl=42, ex_enabled=0 ex_port=-1, soft port isInitialized(-1)=0, PM1 id=0x2050 readable twice, 540x960 frame drawn"
+    },
+    {
+      "id": "virtual-paperdiy-noguard",
+      "status": "PASS",
+      "detail": "same cfg with the guard removed: only difference is soft port isInitialized(-1)=1 after M5.begin(); proves Ex_I2C.begin() on port -1 reuses the pins staged by board detection on G41/G42"
+    },
+    {
+      "id": "virtual-cores3-no-regression",
+      "status": "PASS",
+      "detail": "PR head, external_rtc/imu=true on a board with Port A: ex_enabled=1 ex_port=0, isInitialized(0)=1, soft port 0; the guard does not skip boards that own a port"
+    },
+    {
+      "id": "compare-pintable",
+      "status": "PASS",
+      "detail": "M5GFX #447 head + this PR: passed, 55 boards / 2750 values / 4 targets (twice, identical); M5GFX develop + this PR: exactly 2 differences, both PaperDIY port_a_pin1/pin2"
+    },
+    {
+      "id": "builds",
+      "status": "PASS",
+      "detail": "ESP-IDF v6.1 builds for all four images, 0 warning lines; M5GFX needed a local build-only COMPONENT_REQUIRES += esp_psram shim on IDF 6.1"
+    },
+    {
+      "id": "hardware",
+      "status": "NOT RUN",
+      "detail": "no PaperDIY hardware; the author's real-device display/boot result was not reproduced"
+    },
+    {
+      "id": "electrical-pinmux-consequence",
+      "status": "NOT RUN",
+      "detail": "QEMU does not model GPIO matrix / pin muxing; PM1 stayed readable after the soft port was re-opened, so the routing damage itself is not observable in the model"
+    },
+    {
+      "id": "arduino-build-and-wire1",
+      "status": "NOT RUN",
+      "detail": "only ESP-IDF builds; port 1 == Wire1 is a source-level fact of M5GFX setPins()"
+    },
+    {
+      "id": "m5gfx-447-other-changes",
+      "status": "NOT RUN",
+      "detail": "G45/EPD OE and FPC connector catalog changes in M5GFX #447 were not reviewed"
+    }
+  ],
+  "evidence": [
+    "evidence/paperdiy_pr_externals_serial.txt",
+    "evidence/paperdiy_noguard_serial.txt",
+    "evidence/paperdiy_default_cfg_serial.txt",
+    "evidence/cores3_pr_externals_serial.txt",
+    "evidence/paperdiy_frame.png",
+    "evidence/compare-pintable.txt",
+    "evidence/build-summary.txt",
+    "evidence/device-profiles.txt",
+    "evidence/pr451.diff",
+    "evidence/pr451-status.json",
+    "evidence/probe-main.cpp"
+  ],
+  "posted_comment": "",
+  "notes": [
+    "PR left OPEN; one English comment; no close, no push, no change to m5stack/M5Unified.",
+    "Primary evidence is virtual-device validation of the pin-table effect and of the guard's effect (A/B by removing the guard locally), plus the cross-repo pin-table comparison.",
+    "The no-guard image is a local test variant, not part of the PR.",
+    "Non-blocking observation: a sketch calling M5.Ex_I2C.begin() directly on a port-less board still opens the soft port on the stale pins (ret=1 observed); pre-existing behaviour, worth a separate decision."
+  ]
+}

@@ -1,0 +1,92 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x4 (SPI_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x14f0
+load:0x403c8700,len:0xde4
+load:0x403cb700,len:0x2f58
+entry 0x403c8904
+I (13) boot: ESP-IDF v6.1 2nd stage bootloader
+I (13) boot: compile time Nov 25 2026 19:40:53
+I (13) boot: Multicore bootloader
+I (15) boot: chip revision: v0.0
+I (15) boot: efuse block revision: v0.0
+I (16) boot.esp32s3: Boot SPI Speed : 80MHz
+I (16) boot.esp32s3: SPI Mode       : SLOW READ
+I (16) boot.esp32s3: SPI Flash Size : 16MB
+I (17) boot: Enabling RNG early entropy source...
+I (20) boot: Partition Table:
+I (20) boot: ## Label            Usage          Type ST Offset   Length
+I (20) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (20) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (21) boot:  2 factory          factory app      00 00 00010000 00177000
+I (21) boot: End of partition table
+I (21) esp_image: segment 0: paddr=00010020 vaddr=3c050020 size=185d8h ( 99800) map
+I (29) esp_image: segment 1: paddr=00028600 vaddr=3fc95700 size=03b60h ( 15200) load
+I (30) esp_image: segment 2: paddr=0002c168 vaddr=40374000 size=03eb0h ( 16048) load
+I (32) esp_image: segment 3: paddr=00030020 vaddr=42000020 size=49c78h (302200) map
+I (51) esp_image: segment 4: paddr=00079ca0 vaddr=40377eb0 size=0d818h ( 55320) load
+I (55) esp_image: segment 5: paddr=000874c0 vaddr=50000000 size=00024h (    36) load
+I (56) boot: Loaded app from partition at offset 0x10000
+I (56) boot: Disabling RNG early entropy source...
+W (132) rtcinit: o_code calibration fail
+
+I (71) octal_psram: vendor id    : 0x0d (AP)
+I (71) octal_psram: dev id       : 0x02 (generation 3)
+I (71) octal_psram: density      : 0x03 (64 Mbit)
+I (72) octal_psram: good-die     : 0x01 (Pass)
+I (72) octal_psram: Latency      : 0x01 (Fixed)
+I (72) octal_psram: VCC          : 0x00 (1.8V)
+I (72) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (72) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (72) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (73) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (73) octal_psram: DriveStrength: 0x00 (1/1)
+I (73) MSPI Timing: Enter psram timing tuning
+W MSPI Timing: tuning fail, best point is fallen back to index 5
+I (75) esp_psram: Found 8MB PSRAM device
+I (75) esp_psram: Speed: 80MHz
+I (76) cpu_start: Multicore app
+I (78) esp_psram: SPI SRAM memory test OK
+I (86) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (88) cpu_start: Pro cpu start user code
+I (88) cpu_start: cpu freq: 160000000 Hz
+I (88) app_init: Application information:
+I (88) app_init: Project name:     m5u451_pr
+I (88) app_init: App version:      1
+I (88) app_init: Compile time:     Nov 25 2026 19:40:14
+I (88) app_init: ELF file SHA256:  20120541b...
+I (88) app_init: ESP-IDF:          v6.1
+I (88) efuse_init: Min chip rev:     v0.0
+I (88) efuse_init: Max chip rev:     v0.99 
+I (88) efuse_init: Chip rev:         v0.0
+I (88) heap_init: Initializing. RAM available for dynamic allocation:
+I (88) heap_init: At 3FC9AC00 len 0004EB10 (314 KiB): RAM
+I (89) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (89) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (89) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (89) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (91) spi_flash: detected chip: issi
+I (91) spi_flash: flash io: dio
+W (92) eFuse: calibration efuse version does not match, set default version to 0
+W (93) eFuse: calibration efuse version does not match, set default version to 0
+W (93) eFuse: calibration efuse version does not match, set default version to 0
+W (93) eFuse: calibration efuse version does not match, set default version to 0
+W (94) eFuse: calibration efuse version does not match, set default version to 0
+W (94) eFuse: calibration efuse version does not match, set default version to 0
+W (95) eFuse: calibration efuse version does not match, set default version to 0
+W (95) eFuse: calibration efuse version does not match, set default version to 0
+I (96) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (96) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (98) main_task: Started on CPU0
+I (98) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations
+I (98) main_task: Calling app_main()
+I (208) M5GFX: [Autodetect] board_M5PaperDIY
+E (258) gdma-link: gdma_link_mount_buffers(204): lli full start=0 need=1 avail=0
+[451] after_begin board=34 in_port=1 in_sda=41 in_scl=42 ex_enabled=0 ex_port=-1 ex_sda=-1 ex_scl=-1 pa_sda=-1 pa_scl=-1 pa_scl_alias=-1
+[451] display=540x960
+[451] pm1 before_manual_ex_begin ok=1 id=2050
+[451] manual_ex_begin ret=1
+[451] pm1 after_manual_ex_begin ok=1 id=2050
+[451] display drawn

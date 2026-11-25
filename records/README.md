@@ -18,6 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-25 | M5GFX | #447 PaperDIY EPD OE 改由 EPD_PWR 提供，两个 FPC 连接器取代 Grove 口 | `PASS`（virtual-device A/B 末帧一致；host 221/221；真机与 OE 电气 NOT RUN） | [查看](m5gfx/2026-11-25-pr447-paperdiy-epd-oe-fpc/) |
+| 2026-11-25 | M5Unified | #451 PaperDIY 取消外部 I2C，无端口不 begin Ex_I2C | `PARTIAL`（虚拟设备 A/B 与跨仓库 pin table 一致；真机 NOT RUN） | [查看](m5unified/2026-11-25-pr-451-paperdiy-no-ex-i2c/) |
 | 2026-11-24 | M5GFX | #442 StopWatch 启动时 M5IOE1 GPIO1 / Type-C USB 选择 | `PARTIAL`（虚拟设备证实 G1 高→低且首帧正常；真机 Type-C 与热复位路径 NOT RUN；host 34/34） | [查看](m5gfx/2026-11-24-pr442-stopwatch-typec-usb/) |
 | 2026-11-23 | AIFlow | #6「Run Always」下载路径重复 `apps/...py/...py` 的虚拟设备复现与归因 | `PARTIAL`（虚拟设备复现；云端上传与实机 NOT RUN） | [查看](m5stack-github/2026-11-23-aiflow-issue-6-run-always-path/) |
 | 2026-11-21 | ESP Emulator | Atom Lite「Wifi_Rig_CW(Server)」审查 `E_SIM_APP_READY_PARTIAL` 归因 | `PARTIAL`（非模拟器启动缺陷，未开 issue；真机 NOT RUN） | [查看](m5stack-esp-emulator/2026-11-21-atom-lite-wifi-rig-cw-attribution/) |
