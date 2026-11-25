@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "result": "PASS (bounded private exact controller timing)",
+  "validation": "virtual-device validation, browser WASM",
+  "board": "Cardputer-ADV",
+  "publication_eligible": false,
+  "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/258",
+  "site_manifest": {
+    "sha256": "6d9b1069a4fb3080e5927c5bf8ce2f13b09eb40980d628c0a7d5778afd32f437",
+    "bytes": 440515
+  },
+  "runtime_manifest": {
+    "sha256": "ddedb331fe64f094a85fc2e17537054dda382bdb0419077a6389d0698b9d37a9",
+    "bytes": 36310
+  },
+  "firmware_bundled": false,
+  "wasm_sha256": "3cde0df151570bad4670525d2ad453fb8adbd332fad2f23bb5a602bb0f59bb29",
+  "source_lock_sha256": "84845e0d7a89c75183005fa3a20c1d6f46b6e789df5b5703aaca1c5ca1a44e99",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "candidate_only_change": "Private Cardputer-ADV registry row, admission and existing deterministic accelerator option. The compiled QEMU/WASM, firmware and strict decoder bytes match the recorded positions of the comparison.",
+  "tcg_accelerator": {
+    "kind": "tcg-icount",
+    "thread": "single",
+    "tbSizeMb": 128,
+    "icountShift": 5
+  },
+  "cli": [
+    "-accel",
+    "tcg,thread=single,tb-size=128",
+    "-icount",
+    "shift=5,align=off,sleep=off"
+  ],
+  "strict_checker": {
+    "sha256": "27617f562129f4267b6cfe4f2769c0de6d126c2879021dea7c4afc515a5cf402",
+    "bytes": 3951
+  },
+  "tolerance_percent": 25,
+  "prior_original_trials": {
+    "summary": {
+      "sha256": "625c791e2235dee267a8bddf7932a7c9cfa357e04fa318e28b9cfbf9a79b1aff",
+      "bytes": 16062
+    },
+    "runs": [
+      {
+        "profile": "cardputer-adv-wasm-wallclock",
+        "timing": "FAIL",
+        "strict_decoded_frames": 0,
+        "host_ms": {
+          "ready": 299.0182500000001,
+          "observation_complete": 4211.084083,
+          "usb_since_start_wrapper": {
+            "0x34": 2563.0150003433228,
+            "0x35": 3809.080000400543
+          },
+          "guest_and_cleanup_complete": 6457.862499999999,
+          "usb_marker_spacing": 1246.0650000572205
+        },
+        "virtual_burst_us": [
+          82264.893,
+          83260.01
+        ]
+      },
+      {
+        "profile": "cardputer-adv-wasm-vm-div8",
+        "timing": "FAIL",
+        "strict_decoded_frames": 0,
+        "host_ms": {
+          "ready": 270.0855409999999,
+          "observation_complete": 13928.130833,
+          "usb_since_start_wrapper": {
+            "0x34": 4406.630000114441,
+            "0x35": 13082.025000095367
+          },
+          "guest_and_cleanup_complete": 16167.104208,
+          "usb_marker_spacing": 8675.394999980927
+        },
+        "virtual_burst_us": [
+          65462.493,
+          65182.496
+        ]
+      }
+    ]
+  },
+  "limits": [
+    "Production 0049 deterministic profile and timing observation NOT RUN.",
+    "Physical IR output and reception NOT RUN.",
+    "Recorded UI/USB host latency is a local observation with possible background build load."
+  ],
+  "duration_reference_us": 63280,
+  "icount_runs": [
+    {
+      "label": "original",
+      "strict_timing": "PASS",
+      "strong_device_cleanup": "PASS",
+      "input_firmware_sha256": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb",
+      "runtime_image_sha256": "783873cf160c7aac32860decf6e0908ed7586b7d277340c9e926c79086a401ac",
+      "sketch_sha256": "e77a78ffde87b2b87d8a4cad2032bcabbe66dbfd28142100281d3f7d67fff1c9",
+      "profile": "cardputer-adv-wasm-private-ir-icount",
+      "diagnostic_waveform": {
+        "sha256": "74019a130a4bccc0c733219aa427ae9f51659afcf6c73f291b60356bd505f7f0",
+        "bytes": 15517
+      },
+      "browser_report": {
+        "sha256": "cc23ea5e79e0f6eac6ac3c9d2be6a2645376eff314e93ecd380545ef1deb6353",
+        "bytes": 49669
+      },
+      "harness_sha256": "618da23a6924063d1e7f263fb9707ccf074cf9e852b5d92da262fe277ae1f436",
+      "gpio44": {
+        "epoch": 1,
+        "edge_count": 136,
+        "carrier_hz": 37987,
+        "duty": 76,
+        "period": 256,
+        "time_base": "qemu-virtual-ns",
+        "timing": [
+          {
+            "start_edge": 0,
+            "address": "0x1111",
+            "command": "0x34",
+            "virtual_burst_us": 66822.496,
+            "leader_mark_us": 9176.928,
+            "leader_space_us": 4603.808,
+            "short_mark_us_min_median_max": [
+              590.944,
+              592.224,
+              668.0
+            ],
+            "longest_off_interval_us": 1816.608
+          },
+          {
+            "start_edge": 68,
+            "address": "0x1111",
+            "command": "0x35",
+            "virtual_burst_us": 66779.68,
+            "leader_mark_us": 9178.4,
+            "leader_space_us": 4601.696,
+            "short_mark_us_min_median_max": [
+              590.944,
+              592.224,
+              668.576
+            ],
+            "longest_off_interval_us": 1815.328
+          }
+        ],
+        "virtual_mark_onset_spacing_ms": 1077.412032
+      },
+      "host_ms": {
+        "start_click_to_runtime_ready": 257.066,
+        "runtime_start_call_to_0x34": 8421.5,
+        "runtime_start_call_to_0x35": 10765.02,
+        "usb_spacing": 2343.52,
+        "measurement_complete_since_start_click": 15371.405,
+        "app_and_cleanup_complete_since_start_click": null
+      },
+      "presentation": {
+        "guest_display": {
+          "orientation": "portrait",
+          "deviceRotationDeg": 90
+        },
+        "flat_preview": {
+          "orientation": "portrait",
+          "dimensions": [
+            135,
+            240
+          ],
+          "transform": "none",
+          "png_sha256": "1aad0e372a6d81e6b667acdd7402df9edd55f4c5758f356df58e619ac834708d"
+        },
+        "nonblack_distinct_guest_frames": 4
+      },
+      "guest_usb": {
+        "consoleEpoch": 0,
+        "txBytes": 435,
+        "txPackets": 24,
+        "address": "0x1111",
+        "commands": [
+          "0x34",
+          "0x35"
+        ]
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "runtime_created_pthreads": 4,
+        "cdp_engine_and_pthreads_observed": 5,
+        "cdp_targets_remaining": 0
+      },
+      "raw_harness_status": "FAIL",
+      "raw_runner_failure": "Hard-coded six-worker expectation expired after cleanup at five observed. The native runtime and independent browser target counts confirm 4 pthreads + engine all closed."
+    },
+    {
+      "label": "landscape_doc",
+      "strict_timing": "PASS",
+      "strong_device_cleanup": "PASS",
+      "input_firmware_sha256": "ae81222c68c2e24eb3809bdb0a656763acd64cc764fccf68351945a5d7e2afdb",
+      "runtime_image_sha256": "69d9f658431420b9c5ae3975b0983464e11b57a38574c03fb717add4ab8a093f",
+      "sketch_sha256": "6d3d4ae7a3f4a2988495735ab8bd36b4e2f92324515fba15fcefd757c65b9df5",
+      "profile": "cardputer-adv-wasm-private-ir-icount",
+      "diagnostic_waveform": {
+        "sha256": "bcd7a379b43b711cb6bb02aa4c40fa5fd125d71ef6d4a83bb33af5399e32f5f2",
+        "bytes": 15517
+      },
+      "browser_report": {
+        "sha256": "c071fe4e77a46ebfa886e02a5e334ba9b399fbff64d899e5ee835effd94264c5",
+        "bytes": 40726
+      },
+      "harness_sha256": "0e7353949edf8deb858668991bd053bc0ebd905ac64bf398f00826ee21b4fe52",
+      "gpio44": {
+        "epoch": 1,
+        "edge_count": 136,
+        "carrier_hz": 37987,
+        "duty": 76,
+        "period": 256,
+        "time_base": "qemu-virtual-ns",
+        "timing": [
+          {
+            "start_edge": 0,
+            "address": "0x1111",
+            "command": "0x34",
+            "virtual_burst_us": 66695.808,
+            "leader_mark_us": 9179.904,
+            "leader_space_us": 4602.88,
+            "short_mark_us_min_median_max": [
+              590.656,
+              592.224,
+              664.672
+            ],
+            "longest_off_interval_us": 1740.736
+          },
+          {
+            "start_edge": 68,
+            "address": "0x1111",
+            "command": "0x35",
+            "virtual_burst_us": 66902.848,
+            "leader_mark_us": 9240.352,
+            "leader_space_us": 4604.384,
+            "short_mark_us_min_median_max": [
+              590.464,
+              592.224,
+              663.264
+            ],
+            "longest_off_interval_us": 1814.592
+          }
+        ],
+        "virtual_mark_onset_spacing_ms": 1079.417312
+      },
+      "host_ms": {
+        "start_click_to_runtime_ready": 348.475,
+        "runtime_start_call_to_0x34": 8388.435,
+        "runtime_start_call_to_0x35": 10753.755,
+        "usb_spacing": 2365.32,
+        "measurement_complete_since_start_click": 12676.217,
+        "app_and_cleanup_complete_since_start_click": 14921.797
+      },
+      "presentation": {
+        "guest_display": {
+          "orientation": "landscape",
+          "deviceRotationDeg": 0
+        },
+        "flat_preview": {
+          "orientation": "landscape",
+          "dimensions": [
+            240,
+            135
+          ],
+          "transform": "none",
+          "png_sha256": "9837937a8eb7f5ad5844edf7019a6ecebd7891c0e2eeccb89bf4f073c4ddbc3b"
+        },
+        "nonblack_distinct_guest_frames": 4
+      },
+      "guest_usb": {
+        "consoleEpoch": 0,
+        "txBytes": 435,
+        "txPackets": 24,
+        "address": "0x1111",
+        "commands": [
+          "0x34",
+          "0x35"
+        ]
+      },
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "runtime_created_pthreads": 4,
+        "cdp_engine_and_pthreads_observed": 5,
+        "cdp_targets_remaining": 0
+      },
+      "raw_harness_status": "OBSERVED"
+    }
+  ]
+}
