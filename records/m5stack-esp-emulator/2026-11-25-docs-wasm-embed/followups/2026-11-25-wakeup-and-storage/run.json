@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3 wakeup, RTC, and document microSD example controls",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence/wakeup-and-storage-summary.json"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS, default and isolated storage preview",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "CoreS3 timer wakeup",
+      "status": "FAIL"
+    },
+    {
+      "name": "CoreS3 mounted card picture path",
+      "status": "PASS"
+    },
+    {
+      "name": "Cardputer-Adv mounted card filesystem path",
+      "status": "PASS"
+    },
+    {
+      "name": "RTC SNTP and audible audio",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/wakeup-and-storage-summary.json"
+  ]
+}

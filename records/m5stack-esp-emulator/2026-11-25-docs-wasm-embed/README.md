@@ -28,3 +28,5 @@
 [CoreS3 ESP-IDF BSP 四个例程](followups/2026-11-25-cores3-esp-idf-bsp/)
 
 [CoreS3 UIFlow2 ADC、GPIO、WDT、UART 示例修复](followups/2026-11-25-uiflow-sdk-example-repairs/)
+
+[定时唤醒、RTC 和 microSD 实测](followups/2026-11-25-wakeup-and-storage/)
