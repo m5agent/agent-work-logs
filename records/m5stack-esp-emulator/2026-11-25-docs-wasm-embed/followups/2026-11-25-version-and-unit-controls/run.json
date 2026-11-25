@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Version-bound and peripheral-attachment controls for documentation WASM",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence"
+  },
+  "execution": {
+    "environment": "Chrome 158/macOS, isolated static simulator preview",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "Cardputer-Adv Arduino 8 MiB with pinned minimum libraries",
+      "status": "PASS"
+    },
+    {
+      "name": "CoreS3 Ultrasonic-I2C and Relay fixed attachment candidates",
+      "status": "PASS"
+    },
+    {
+      "name": "CoreS3 UIFlow2 v2.5.5 graphics",
+      "status": "PASS"
+    },
+    {
+      "name": "Cardputer-Adv UIFlow2 v2.5.5 NFCCap constructor",
+      "status": "FAIL"
+    }
+  ],
+  "evidence": [
+    "evidence/arduino-and-unit-controls-summary.json",
+    "evidence/uiflow225-version-summary.json"
+  ]
+}

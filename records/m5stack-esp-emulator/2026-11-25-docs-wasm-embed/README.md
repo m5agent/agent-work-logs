@@ -22,3 +22,5 @@
 [工作台隔离与 M5UI 修复回归](followups/2026-11-25-workbench-fixes/)
 
 [UIFlow2 素材、麦克风和 CC1101 复现](followups/2026-11-25-uiflow-editor-and-cc1101/)
+
+[UIFlow2 版本、Arduino 库和 Unit 接线对照](followups/2026-11-25-version-and-unit-controls/)
