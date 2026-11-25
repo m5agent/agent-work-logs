@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix-preview",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": 244,
+    "base_workbench_commit": "42dd0b8cfb4fc0a259cdde76e0d25a2ae47d9a1c",
+    "uiflow_examples_commit": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "preview_patch_sha256": "ac6611b1dd181489fb59e97e956cd80230100c29ae18532dce78fea47a4ce736"
+  },
+  "hardware": {"device": "Cardputer-Adv", "physical_validation": "NOT RUN"},
+  "firmware": {"uiflow_release": "v2.5.3", "workbench_image_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd"},
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM private incremental preview",
+    "wasm_sha256": "09eaaac351d65f7b85ada1ffe91b4424615ac41e9120ac59ca8a78a8b1077ab3",
+    "runtime_manifest_sha256": "3b7cbeb349f5cb889c3618cbbc7aa645f3d7edbdcdf03ae1b4dac496910e114e",
+    "site_manifest_sha256": "3b83d43534751696d06240733701768524b0244c7e58353308f9850d018e0a16",
+    "browser": "Chromium 156.0.8078.4"
+  },
+  "checks": [
+    {"name": "baseline documentation firmware times out without virtual LoRa Cap", "status": "FAIL", "evidence": "../2026-11-25-uiflow-camera-and-lora/"},
+    {"name": "original paired LoRa1262 TX RX virtual SPI FIFO, GPIO IRQ and LCD", "status": "PASS", "evidence": "evidence/lora-pair.summary.json"},
+    {"name": "original paired LoRa868 TX RX virtual SPI FIFO, GPIO IRQ and LCD", "status": "PASS", "evidence": "evidence/lora-pair.summary.json"},
+    {"name": "both negative no-peer windows and normal 12 Worker cleanup per pair", "status": "PASS", "evidence": "evidence/lora-pair.summary.json"},
+    {"name": "full locked build and standard public workbench virtual peer", "status": "NOT RUN"},
+    {"name": "physical RF, antenna, electrical timing and hosted deployment", "status": "NOT RUN"}
+  ]
+}

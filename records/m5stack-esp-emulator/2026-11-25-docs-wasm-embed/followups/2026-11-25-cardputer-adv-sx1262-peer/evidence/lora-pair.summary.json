@@ -1,0 +1,252 @@
+{
+  "status": "PASS",
+  "level": "virtual-device validation",
+  "scope": "Private incremental Cardputer-Adv SX1262 pair, original official UIFlow2 TX and RX direct browser workbench",
+  "revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+  "browser": "156.0.8078.4",
+  "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "base_site_commit": "42dd0b8cfb4fc0a259cdde76e0d25a2ae47d9a1c",
+  "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+  "private_preview": {
+    "status": "PASS",
+    "guest_execution": "NOT RUN",
+    "distribution": "private only",
+    "build_receipt": {
+      "sha256": "9c53a8ed891420323e660dbb4b53986345f96b52887dc6c1e1c6300b8de41ef7",
+      "bytes": 3507
+    },
+    "site_manifest": {
+      "sha256": "3b83d43534751696d06240733701768524b0244c7e58353308f9850d018e0a16",
+      "bytes": 439066
+    },
+    "runtime_manifest": {
+      "sha256": "3b7cbeb349f5cb889c3618cbbc7aa645f3d7edbdcdf03ae1b4dac496910e114e",
+      "bytes": 37395
+    },
+    "engine": {
+      "sha256": "836d789e26e1e9b6d440826ebd4bf52d774695a2fce2e4586d007aef711802ac",
+      "bytes": 25119
+    },
+    "final_patch": {
+      "path": "patches/qemu-wasm-probe/0098-cardputer-adv-sx1262-preview.patch",
+      "sha256": "ac6611b1dd181489fb59e97e956cd80230100c29ae18532dce78fea47a4ce736"
+    },
+    "wasm": {
+      "bytes": 12782535,
+      "path": "qemu-system-xtensa.wasm",
+      "sha256": "09eaaac351d65f7b85ada1ffe91b4424615ac41e9120ac59ca8a78a8b1077ab3"
+    }
+  },
+  "harness_sha256": "4c11893c22eef2741761e586305dcd07efab0ee4e2aaf335e67dcd1c1978fe68",
+  "payload_sha256": "336154bf67f765f8f75d16a0accee61b5ee5f6a75b2a2905703df913bd550f3e",
+  "chip_wiring": {
+    "esp32s3_gpspi": 2,
+    "sck": 40,
+    "mosi": 14,
+    "miso": 39,
+    "nss": 5,
+    "busy": 6,
+    "dio1": 4,
+    "nreset": 3
+  },
+  "cases": [
+    {
+      "example_variant": "lora1262",
+      "source_sha256": {
+        "sender": "08bb6c92c945c25354dde44133711ccf51fc47320a7e079653f84351ac936f51",
+        "receiver": "6c3765e32fd6d2b730f164fc1aea478d150738f918f25509216325d23678abe9"
+      },
+      "sender_input": [
+        "w",
+        "a",
+        "s",
+        "m",
+        "Enter"
+      ],
+      "payload": "wasm",
+      "tx_packet": {
+        "frequency_word": 910163968,
+        "irq_status": 0,
+        "commands": 32,
+        "tx_sequence": 1,
+        "busy": false,
+        "tx_hex": "7761736d",
+        "dio1": false,
+        "receiving": false,
+        "rx_sequence": 0,
+        "reset_edges": 1,
+        "rx_bytes_read": 0
+      },
+      "rx_before_peer": {
+        "state": {
+          "frequency_word": 910163968,
+          "irq_status": 0,
+          "commands": 25,
+          "tx_sequence": 0,
+          "busy": false,
+          "tx_hex": "",
+          "dio1": false,
+          "receiving": true,
+          "rx_sequence": 0,
+          "reset_edges": 1,
+          "rx_bytes_read": 0
+        },
+        "frame": {
+          "sequence": 16,
+          "width": 240,
+          "height": 135,
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        }
+      },
+      "rx_injected": {
+        "frequency_word": 910163968,
+        "irq_status": 2,
+        "commands": 25,
+        "tx_sequence": 0,
+        "busy": false,
+        "tx_hex": "",
+        "dio1": true,
+        "receiving": true,
+        "rx_sequence": 1,
+        "reset_edges": 1,
+        "rx_bytes_read": 0
+      },
+      "rx_readout": {
+        "frequency_word": 910163968,
+        "irq_status": 0,
+        "commands": 36,
+        "tx_sequence": 0,
+        "busy": false,
+        "tx_hex": "",
+        "dio1": false,
+        "receiving": true,
+        "rx_sequence": 1,
+        "reset_edges": 1,
+        "rx_bytes_read": 4
+      },
+      "rx_after_frame": {
+        "sequence": 26,
+        "width": 240,
+        "height": 135,
+        "sha256": "b459d8d700b521a212e914e0506050132bdcabe985ee46b03d6f2df032ba777e"
+      },
+      "rx_ocr": [
+        "[0:0:24] -> wasm"
+      ],
+      "tx_after_frame": {
+        "sequence": 36,
+        "width": 240,
+        "height": 135,
+        "sha256": "fdf3890abe453e529099d17f8fdd0a3029630ffd2cad12672722516cbe9ab376"
+      },
+      "both_same_guest_across_actions": true,
+      "both_normal_exit": true,
+      "workers_observed": 12,
+      "workers_remaining": 0,
+      "raw_report_sha256": "32753c5681b46ae7ad3775b77d2ff60618a5eddb59694a11b527cdbc9e72c7c2",
+      "raw_report_bytes": 27808
+    },
+    {
+      "example_variant": "lora868",
+      "source_sha256": {
+        "sender": "d5bb7f05ccab053c41e83dc6d85ea6ee9cf1e5036f91614975f07df474c3d626",
+        "receiver": "174c834489590531f2271229b5b5c0093ea12f1c941826b6d6873fd683778df0"
+      },
+      "sender_input": [
+        "w",
+        "a",
+        "s",
+        "m",
+        "Enter"
+      ],
+      "payload": "wasm",
+      "tx_packet": {
+        "frequency_word": 910163968,
+        "irq_status": 0,
+        "commands": 32,
+        "tx_sequence": 1,
+        "busy": false,
+        "tx_hex": "7761736d",
+        "dio1": false,
+        "receiving": false,
+        "rx_sequence": 0,
+        "reset_edges": 1,
+        "rx_bytes_read": 0
+      },
+      "rx_before_peer": {
+        "state": {
+          "frequency_word": 910163968,
+          "irq_status": 0,
+          "commands": 25,
+          "tx_sequence": 0,
+          "busy": false,
+          "tx_hex": "",
+          "dio1": false,
+          "receiving": true,
+          "rx_sequence": 0,
+          "reset_edges": 1,
+          "rx_bytes_read": 0
+        },
+        "frame": {
+          "sequence": 22,
+          "width": 240,
+          "height": 135,
+          "sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c"
+        }
+      },
+      "rx_injected": {
+        "frequency_word": 910163968,
+        "irq_status": 2,
+        "commands": 25,
+        "tx_sequence": 0,
+        "busy": false,
+        "tx_hex": "",
+        "dio1": true,
+        "receiving": true,
+        "rx_sequence": 1,
+        "reset_edges": 1,
+        "rx_bytes_read": 0
+      },
+      "rx_readout": {
+        "frequency_word": 910163968,
+        "irq_status": 0,
+        "commands": 36,
+        "tx_sequence": 0,
+        "busy": false,
+        "tx_hex": "",
+        "dio1": false,
+        "receiving": true,
+        "rx_sequence": 1,
+        "reset_edges": 1,
+        "rx_bytes_read": 4
+      },
+      "rx_after_frame": {
+        "sequence": 34,
+        "width": 240,
+        "height": 135,
+        "sha256": "b459d8d700b521a212e914e0506050132bdcabe985ee46b03d6f2df032ba777e"
+      },
+      "rx_ocr": [
+        "[0:0:24] -> wasm"
+      ],
+      "tx_after_frame": {
+        "sequence": 40,
+        "width": 240,
+        "height": 135,
+        "sha256": "fdf3890abe453e529099d17f8fdd0a3029630ffd2cad12672722516cbe9ab376"
+      },
+      "both_same_guest_across_actions": true,
+      "both_normal_exit": true,
+      "workers_observed": 12,
+      "workers_remaining": 0,
+      "raw_report_sha256": "3d98ea5dfab46be4fa839c5690880c0ec9d134a7003da95ef256f8c6e9d8d6bb",
+      "raw_report_bytes": 27642
+    }
+  ],
+  "limits": [
+    "Private incremental build, existing 0043 source archive applies to the baseline only.",
+    "The paired harness hands the exact TX FIFO packet to the receiver chip after real SRX and does not synthesize guest data.",
+    "Sounding, RF airtime, antenna behavior, physical link margin, deployment, and general shared-page integration are outside this result."
+  ]
+}
