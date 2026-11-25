@@ -58,3 +58,8 @@
 - 灰度、波形与面板光学：QEMU 只建模 ET047TC1 的数字扫描序列和黑白端点。
 - Arduino 目标：本机未装 arduino-cli，未复跑 Arduino 构建；上游 CI 已覆盖。
 - 未在真实浏览器打开 board_spec editor 页面；bundle 可逐字节重建已核对。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/447#issuecomment-7161573024>
+  （1 条，英文，与条目语言一致；PR 仍 OPEN，head 未变，未 close、未 push、未改他人仓库）

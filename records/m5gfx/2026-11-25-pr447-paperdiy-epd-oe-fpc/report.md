@@ -156,3 +156,9 @@ SHA256 记录在 `evidence/virtual-device.txt`。原始 ZIP 与完整串口日�
 改动是纯数据/生成物 + 一行生成常量；回滚即 revert 这一个 commit，
 `display_oe` 回到 45，`port_a` 回到 Grove 定义。与 M5Unified#451 分开回滚会重新引入
 pin table 不一致，需成对处理。
+
+## 10. 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/447#issuecomment-7161573024>
+  （英文单条回复：结论、证据等级、逐项核验、非阻塞建议、未覆盖项与记录链接；
+  PR 保持 OPEN，未 close、未 push 代码、未修改作者分支）
