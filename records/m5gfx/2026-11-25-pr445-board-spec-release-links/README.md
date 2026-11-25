@@ -71,4 +71,5 @@ M5Unified 检出是 2026-11-06 的旧快照，`compare-pintable` 只报
 
 ## 已发布回复
 
-- 见 `run.json` 的 `posted_comment`。
+- <https://github.com/m5stack/M5GFX/pull/445#issuecomment-7158093008>
+  （1 条，英文，与条目语言一致；PR 仍 OPEN，head 未变，未 close、未 push、未改他人仓库）
