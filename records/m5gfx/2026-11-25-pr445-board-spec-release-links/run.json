@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PASS",
+  "title": "M5GFX #445 review: board_spec product and schematic links for CoreMatrix, Chain Captain and PaperDIY",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/445",
+    "repository": "m5stack/M5GFX",
+    "head_commit": "f6858acb15fd80a6cc3b7344558b1d0acc9ddc9d",
+    "base_commit": "5873de4e43b727fab651b71f615246267a816720",
+    "base_ref_tip": "5873de4e43b727fab651b71f615246267a816720"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS 26.5.1 arm64; Node v22.14.0 (downloaded official arm64 build, machine had no Node); pypdf 6.21.4; local Device Service exposes 36 profiles including paperdiy (partial, ET047TC1 540x960) but no CoreMatrix or Chain Captain profile",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #445 OPEN, not draft, author ainyan03, English body, 0 comments and 0 reviews before review, mergeable MERGEABLE, base develop"
+    },
+    {
+      "id": "diff-scope",
+      "status": "PASS",
+      "detail": "5 files +28/-2, all under extras/board_spec: three boards/*.json spec.links, official_name_verified on corematrix, regenerated dist bundle, and the catalog test list"
+    },
+    {
+      "id": "schema-conformance",
+      "status": "PASS",
+      "detail": "schema/board.schema.json linkSpec allows product/schematic/verified and the verified enum includes datasheet; contribution matches the convention already used by m5airq and m5atoms3; m5atom_psram is the existing precedent for links present with an unverified official name, matching how PaperDIY is kept here"
+    },
+    {
+      "id": "link-resolution",
+      "status": "PASS",
+      "detail": "all six URLs return 200; the three docs pages return text/html and the three schematic links return application/pdf (515181 / 780319 / 681339 bytes)"
+    },
+    {
+      "id": "links-are-the-official-ones",
+      "status": "PASS",
+      "detail": "fetching each docs page shows the PR's three PDF URLs are exactly the schematics linked from those pages; h1 values are CoreMatrix, Chain Captain, PaperDIY Complete Kit; SKUs on the pages are C158, C160, K159-B"
+    },
+    {
+      "id": "bundle-reproducible",
+      "status": "PASS",
+      "detail": "npm run bundle at head rewrites dist/board_spec_editor.html and git status --porcelain is empty, so the committed bundle is byte-identical to a fresh build; each of the six new URLs appears exactly once in the bundle"
+    },
+    {
+      "id": "spec-check",
+      "status": "PASS",
+      "detail": "node cli/spec.js check -> 'check passed: 63 board(s), 90 resolved combination(s)'"
+    },
+    {
+      "id": "host-test-suite-pr-head",
+      "status": "PARTIAL",
+      "detail": "npm test at head: 221 tests, 220 pass, 1 fail; the only failure is 'M5Unified live pin tables match generated values' (case 47), caused by the local M5Unified checkout being a 2026-11-06 snapshot"
+    },
+    {
+      "id": "host-test-suite-develop-base",
+      "status": "PARTIAL",
+      "detail": "same suite at base 5873de4: 221 tests, 220 pass, 1 fail, the identical case 47; compare-pintable reports only m5stampp4xhub in_i2c_scl/sda 1/0 vs 255/255, none of the three touched boards, so the failure is pre-existing environment drift and this PR is test-neutral"
+    },
+    {
+      "id": "upstream-ci",
+      "status": "PASS",
+      "detail": "gh pr checks: 'Catalog and generated sources' SUCCESS; Arduino and ESP-IDF matrix jobs mostly SUCCESS with a handful still pending at review time; no failure"
+    },
+    {
+      "id": "schematic-revision-labels",
+      "status": "PARTIAL",
+      "detail": "CoreMatrix V0.7 is readable in the drawing text; Chain Captain V0.6 and PaperDIY K159-B are supported only by the official docs page filenames because the PDF title blocks are rotated vector text that pypdf cannot extract"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no CoreMatrix / Chain Captain / PaperDIY hardware available, and the diff contains no device-observable behavior"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "the local Device Service does expose a paperdiy profile (partial, ET047TC1 540x960), but extras/board_spec link metadata never enters the firmware runtime path, so a booted virtual device could not observe this diff; skipped by nature of the change, not for lack of a profile"
+    },
+    {
+      "id": "browser-editor-render",
+      "status": "NOT RUN",
+      "detail": "the generated editor page was not opened in a real browser; the link escaping / javascript: rejection cases inside npm test do pass"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-status.json",
+    "evidence/pr-checks.txt",
+    "evidence/pr445-source.diff",
+    "evidence/pr445-numstat.txt",
+    "evidence/host-checks.txt",
+    "evidence/npm-test-pr-head.txt",
+    "evidence/npm-test-develop-base.txt",
+    "evidence/docs-pages.txt",
+    "evidence/schematic-pdfs.txt",
+    "evidence/device-profiles-summary.json"
+  ],
+  "posted_comment": "",
+  "notes": [
+    "Verdict: no blocking issues; can be merged along the author's direction.",
+    "PR left OPEN; a single English comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Evidence class is host-level test plus live link verification. Hardware and virtual-device validation are NOT RUN because the change is catalog metadata with no runtime path."
+  ]
+}

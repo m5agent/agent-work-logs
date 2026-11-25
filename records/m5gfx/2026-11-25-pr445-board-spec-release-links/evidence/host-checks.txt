@@ -1,0 +1,56 @@
+# Host-level checks (macOS 26.5.1 arm64, Node v22.14.0, no Espressif toolchain involved)
+
+$ node --version
+v22.14.0
+
+# PR head f6858acb15fd80a6cc3b7344558b1d0acc9ddc9d
+$ node cli/spec.js check
+check passed: 63 board(s), 90 resolved combination(s)
+
+$ npm test  (tail)
+# tests 221
+# suites 0
+# pass 220
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13503.852
+
+# base 5873de4e43b727fab651b71f615246267a816720
+$ npm test  (tail)
+# tests 221
+# suites 0
+# pass 220
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14602.677292
+
+# failing test detail on both refs
+$ grep '^not ok'
+not ok 47 - M5Unified live pin tables match generated values
+not ok 47 - M5Unified live pin tables match generated values
+
+$ node cli/spec.js compare-pintable --m5unified /tmp/M5Unified
+board | pin_name | generated | actual
+--- | --- | ---: | ---:
+m5stampp4xhub | in_i2c_scl | 1 | 255
+m5stampp4xhub | in_i2c_sda | 0 | 255
+M5Unified pin-table comparison failed: 2 difference(s)
+
+# bundle reproducibility: regenerate from JSON and diff against committed bundle
+$ npm run bundle
+
+wrote dist/board_spec_editor.html
+$ git status --porcelain .
+(empty above = committed dist/board_spec_editor.html is byte-identical to a fresh build)
+
+# new URLs present in the committed bundle (exact counts)
+docs.m5stack.com/en/core/CoreMatrix -> 1
+1274/CoreMatrix_V0.7_SCH_PDF_20260609.pdf -> 1
+docs.m5stack.com/en/chain/Chain_Captain -> 1
+1295/Chain_Captain_V0.6_SCH_PDF_20261104.pdf -> 1
+docs.m5stack.com/en/core/PaperDIY_Complete_Kit -> 1
+1288/K159-B_PaperDIY_sche.pdf -> 1

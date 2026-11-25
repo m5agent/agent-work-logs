@@ -1,0 +1,86 @@
+diff --git a/extras/board_spec/boards/m5chaincaptain.json b/extras/board_spec/boards/m5chaincaptain.json
+index 586ed01..f56c370 100644
+--- a/extras/board_spec/boards/m5chaincaptain.json
++++ b/extras/board_spec/boards/m5chaincaptain.json
+@@ -22,6 +22,14 @@
+     "storage": {
+       "psram_mb": 8,
+       "psram_mode": "opi"
++    },
++    "links": {
++      "product": "https://docs.m5stack.com/en/chain/Chain_Captain",
++      "schematic": "https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1295/Chain_Captain_V0.6_SCH_PDF_20261104.pdf",
++      "verified": {
++        "product": "datasheet",
++        "schematic": "datasheet"
++      }
+     }
+   },
+   "pins": {
+diff --git a/extras/board_spec/boards/m5paperdiy.json b/extras/board_spec/boards/m5paperdiy.json
+index 4fcb8d2..8d831de 100644
+--- a/extras/board_spec/boards/m5paperdiy.json
++++ b/extras/board_spec/boards/m5paperdiy.json
+@@ -21,6 +21,14 @@
+       "psram_mode": "opi",
+       "sd": true,
+       "psram_mb": 8
++    },
++    "links": {
++      "product": "https://docs.m5stack.com/en/core/PaperDIY_Complete_Kit",
++      "schematic": "https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1288/K159-B_PaperDIY_sche.pdf",
++      "verified": {
++        "product": "datasheet",
++        "schematic": "datasheet"
++      }
+     }
+   },
+   "pins": {
+diff --git a/extras/board_spec/boards/m5stack_corematrix.json b/extras/board_spec/boards/m5stack_corematrix.json
+index 7ce94b0..a63f846 100644
+--- a/extras/board_spec/boards/m5stack_corematrix.json
++++ b/extras/board_spec/boards/m5stack_corematrix.json
+@@ -3,6 +3,7 @@
+   "id": "m5stack_corematrix",
+   "name": "M5CoreMatrix",
+   "official_name": "M5Stack CoreMatrix",
++  "official_name_verified": true,
+   "aliases": [
+     "corematrix",
+     "core matrix"
+@@ -19,6 +20,14 @@
+     },
+     "storage": {
+       "sd": true
++    },
++    "links": {
++      "product": "https://docs.m5stack.com/en/core/CoreMatrix",
++      "schematic": "https://m5stack-doc.oss-cn-shenzhen.aliyuncs.com/1274/CoreMatrix_V0.7_SCH_PDF_20260609.pdf",
++      "verified": {
++        "product": "datasheet",
++        "schematic": "datasheet"
++      }
+     }
+   },
+   "pins": {
+diff --git a/extras/board_spec/test/board_spec.test.js b/extras/board_spec/test/board_spec.test.js
+index 0686a44..d573eb0 100644
+--- a/extras/board_spec/test/board_spec.test.js
++++ b/extras/board_spec/test/board_spec.test.js
+@@ -197,6 +197,7 @@ test("only catalog names confirmed against official sources carry the verified f
+     m5papers3: "PaperS3",
+     m5stack_core2: "Core2",
+     m5stack_coreink: "CoreInk",
++    m5stack_corematrix: "CoreMatrix",
+     m5stack_corep4x: "CoreP4X",
+     m5stack_cores3: "CoreS3",
+     m5stack_cores3se: "CoreS3-SE",
+@@ -214,7 +215,7 @@ test("only catalog names confirmed against official sources carry the verified f
+     m5vameter: "VAMeter",
+   };
+   const unverified = catalogBoards.filter((item) => item.official_name_verified !== true).map((item) => item.id).sort();
+-  assert.deepEqual(unverified, ["m5atom_psram", "m5paperdiy", "m5stack", "m5stack_corematrix", "m5stack_tab5x", "m5stampc6", "m5stampp4x", "m5stampp4xhub", "m5stamps3mini", "m5station"]);
++  assert.deepEqual(unverified, ["m5atom_psram", "m5paperdiy", "m5stack", "m5stack_tab5x", "m5stampc6", "m5stampp4x", "m5stampp4xhub", "m5stamps3mini", "m5station"]);
+   const verified = catalogBoards.filter((item) => item.official_name_verified === true).map((item) => item.id).sort();
+   assert.deepEqual(verified, Object.keys(documentedProductNames).sort());
+   for (const source of catalogBoards.filter((item) => item.official_name_verified === true)) {
