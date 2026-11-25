@@ -1,0 +1,385 @@
+diff --git a/platform/tests/test_public_qemu_instance.mjs b/platform/tests/test_public_qemu_instance.mjs
+index 614fce343..24dddf3d6 100644
+--- a/platform/tests/test_public_qemu_instance.mjs
++++ b/platform/tests/test_public_qemu_instance.mjs
+@@ -2,7 +2,9 @@
+ import assert from 'node:assert/strict';
+ import {readFile} from 'node:fs/promises';
+ import vm from 'node:vm';
+-import {validateQemuProfile,validateQemuRuntimeRequirements,buildQemuArguments,buildQemuEfuse,qemuInputCommand,getQemuBrowserProfile} from '../web/public-qemu-profiles.js';
++import {validateQemuProfile,validateQemuRuntimeRequirements,buildQemuArguments,buildQemuEfuse,qemuInputCommand,getQemuBrowserProfile,
++  resolveQemuCapExample,resolveQemuFirmwareProfile,QEMU_CARDPUTER_CC1101_RUNTIME_PATCH,QEMU_CARDPUTER_CC1101_PEER_PREVIEW_PATCH,
++  qemuCc1101PeerStateQuery,validateQemuCc1101PeerState} from '../web/public-qemu-profiles.js';
+ import {readQemuServoOutputs} from '../web/public-qemu-servo.js';
+ import {readSharedQemuFrame,readQemuOnboardOutputs} from '../web/public-qemu-frame.js';
+ import {validQemuSdImage} from '../web/public-qemu-sd-media.js';
+@@ -28,6 +30,7 @@ const source=await readFile(new URL('../web/public-qemu-engine.js',import.meta.u
+ const executableSource=source.replace(/^import .+;\r?\n/gm,'');
+ const context=vm.createContext({Worker,EventTarget,MessageChannel,MessageEvent,TextEncoder,TextDecoder:BrowserTextDecoder,Uint8Array,Int8Array,Map,Set,URL:TestURL,Blob:TestBlob,ArrayBuffer,Number,JSON,Error,Promise,WebAssembly,setTimeout,clearTimeout,location:{origin},crossOriginIsolated:true,SharedArrayBuffer,crypto:globalThis.crypto,performance:globalThis.performance,
+   validateQemuProfile,validateQemuRuntimeRequirements,buildQemuArguments,buildQemuEfuse,qemuInputCommand,readSharedQemuFrame,readQemuOnboardOutputs,readQemuServoOutputs,validQemuSdImage,
++  qemuCc1101PeerStateQuery,validateQemuCc1101PeerState,
+   self:{postMessage:value=>{lifecycle.push(value.type);if(value.type==='m5-qemu-engine-finalized')context.finalizedToken=value.token;},
+     close:()=>lifecycle.push('engine-closed')},
+   addEventListener:(name,handler)=>callbacks.set(name,handler)});
+@@ -69,6 +72,8 @@ await one.onmessage({data:{id:5,op:'start',value:{}}});assert.match(one.messages
+ assert.deepEqual(JSON.parse(vm.runInContext('JSON.stringify(module.arguments)',context)),buildQemuArguments(profile));
+ assert.equal(vm.runInContext('module.ENV.M5_WASM_VM_CLOCK_DIVISOR',context),'8');
+ assert.equal(vm.runInContext('module.ENV.M5_WASM_FRAMEBUFFER',context),'0');
++assert.equal(vm.runInContext('module.ENV.M5SW_CARDPUTER_ADV_CAP_CC1101',context),undefined);
++assert.equal(vm.runInContext('module.ENV.M5SW_CARDPUTER_ADV_CAP_CC1101_PEER',context),undefined);
+ assert.equal(vm.runInContext(`module.FS.files.get('/rom/${profile.roms[0].name}').byteLength`,context),profile.roms[0].bytes);
+ assert.equal(vm.runInContext("module.FS.files.get('/efuse.bin').byteLength",context),4096);
+ assert.equal(vm.runInContext('module.ENV.M5SW_SPI_SD_IMAGE',context),'/sd-card.img');
+@@ -245,18 +250,41 @@ try {
+   const raceContext=vm.createContext({Worker,EventTarget,MessageChannel,MessageEvent,TextEncoder,TextDecoder:BrowserTextDecoder,Uint8Array,Int8Array,Map,Set,URL:TestURL,Blob:TestBlob,ArrayBuffer,Number,JSON,Error,Promise,setTimeout,clearTimeout,
+     location:{origin},crossOriginIsolated:true,SharedArrayBuffer,crypto:globalThis.crypto,performance:globalThis.performance,
+     validateQemuProfile,validateQemuRuntimeRequirements,buildQemuArguments,buildQemuEfuse,qemuInputCommand,readSharedQemuFrame,readQemuOnboardOutputs,readQemuServoOutputs,
++    qemuCc1101PeerStateQuery,validateQemuCc1101PeerState,
+     self:{postMessage:value=>raceLifecycle.push(value.type),close:()=>raceLifecycle.push('engine-closed')},
+     addEventListener:(name,handler)=>raceCallbacks.set(name,handler)});
+   vm.runInContext(executableSource,raceContext,{importModuleDynamically:vm.constants.USE_MAIN_CONTEXT_DEFAULT_LOADER});
+   const racePort={messages:[],closed:false,start(){this.started=true;},close(){this.closed=true;raceLifecycle.push('port-closed');},
+     postMessage(value){this.messages.push(value);if(value.id===302)raceLifecycle.push('dispose-ack');}};
+   raceCallbacks.get('message')({data:{type:'m5-qemu-engine-connect'},ports:[racePort]});
++  const advSHA256='b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd';
++  const adv=resolveQemuFirmwareProfile(getQemuBrowserProfile('cardputer-adv',registry),advSHA256);
++  const cap=resolveQemuCapExample(adv,'cc1101-rf-rx',advSHA256,true);
+   await racePort.onmessage({data:{id:300,op:'start',value:{javascript:new TextEncoder().encode(fakeFactory),
+-    javascriptURL:origin+'/showcase/runtime/qemu.js',worker:new Uint8Array(),profile,frameTransport:'qmp-screendump',
+-    roms:profile.roms.map(rom=>({name:rom.name,sha256:rom.sha256,bytes:new ArrayBuffer(rom.bytes)})),firmware:new ArrayBuffer(0)}}});
++    javascriptURL:origin+'/showcase/runtime/qemu.js',worker:new Uint8Array(),profile:cap,frameTransport:'qmp-screendump',
++    runtimePatches:[cap.requiredInputPatch,cap.requiredRuntimePatch,QEMU_CARDPUTER_CC1101_RUNTIME_PATCH,
++      QEMU_CARDPUTER_CC1101_PEER_PREVIEW_PATCH],
++    roms:cap.roms.map(rom=>({name:rom.name,sha256:rom.sha256,bytes:new ArrayBuffer(rom.bytes)})),firmware:new ArrayBuffer(0)}}});
+   assert.equal(racePort.messages.at(-1).id,300);assert.equal(racePort.messages.at(-1).error,undefined);
++  assert.equal(vm.runInContext('module.ENV.M5SW_CARDPUTER_ADV_CAP_CC1101',raceContext),'1');
++  assert.equal(vm.runInContext('module.ENV.M5SW_CARDPUTER_ADV_CAP_CC1101_PEER',raceContext),'1');
+   const raceCommands=()=>JSON.parse(vm.runInContext("JSON.stringify(new TextDecoder().decode(new Uint8Array(qmpInput.splice(0))).trim().split('\\n').filter(Boolean).map(line=>JSON.parse(line)))",raceContext));
+   const raceRespond=(command,value)=>vm.runInContext(`output(${JSON.stringify(JSON.stringify({return:value,id:command.id})+'\n')})`,raceContext);
++  await racePort.onmessage({data:{id:309,op:'cc1101-peer-state',value:{path:'/machine/other'}}});
++  assert.match(racePort.messages.at(-1).error,/no caller path or property/);
++  assert.equal(raceCommands().length,0);
++  const peerRead=racePort.onmessage({data:{id:310,op:'cc1101-peer-state'}});
++  const [peerQuery]=raceCommands();
++  assert.deepEqual(peerQuery.arguments,{path:'/machine/cc1101-peer',property:'state'});
++  const samplePeer={reset_epoch:1,marcstate:13,rx_armed:true,gdo0:false,tx_sequence:0,tx_fifo_hex:'',
++    rx_accepted:0,rx_interrupts:0,rx_fifo_bytes_read:0,rx_completed:0};
++  raceRespond(peerQuery,samplePeer);await peerRead;
++  assert.deepEqual(racePort.messages.at(-1).value,samplePeer);
++  const peerSend=racePort.onmessage({data:{id:311,op:'input',value:{type:'cc1101-peer-frame',frameHex:'0162'}}});
++  const [peerSet]=raceCommands();
++  assert.equal(peerSet.execute,'qom-set');
++  assert.deepEqual(peerSet.arguments,{path:'/machine/cc1101-peer',property:'rx-frame-hex',value:'0162'});
++  raceRespond(peerSet,{});await peerSend;
+   vm.runInContext(`output(${JSON.stringify(JSON.stringify({QMP:{version:{},capabilities:[]}})+'\n')})`,raceContext);
+   const raceCapability=raceCommands();assert.equal(raceCapability.length,1);assert.equal(raceCapability[0].execute,'qmp_capabilities');
+   raceRespond(raceCapability[0],{});await tick();
+diff --git a/platform/tests/test_public_qemu_profiles.mjs b/platform/tests/test_public_qemu_profiles.mjs
+index cabd29fc5..a020e4a37 100644
+--- a/platform/tests/test_public_qemu_profiles.mjs
++++ b/platform/tests/test_public_qemu_profiles.mjs
+@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
+ import {readFile} from 'node:fs/promises';
+ import {validateQemuBrowserProfiles, validateQemuProfile, getQemuBrowserProfile, validateQemuFirmware,
+   buildQemuArguments, buildQemuEfuse, advanceQemuEncoderTarget, qemuInputCommand, loadQemuBrowserProfiles, resolveQemuFirmwareProfile,
+-  qemuOnboardOutputQueries, validateQemuOnboardState, qemuRuntimeIdentity, CORE_MATRIX_STOCK_FLASH_SHA256} from '../web/public-qemu-profiles.js';
++  qemuOnboardOutputQueries, validateQemuOnboardState, qemuRuntimeIdentity, CORE_MATRIX_STOCK_FLASH_SHA256,
++  resolveQemuCapExample, validateQemuRuntimeRequirements, QEMU_CARDPUTER_CC1101_RUNTIME_PATCH, QEMU_CARDPUTER_CC1101_PEER_PREVIEW_PATCH,
++  qemuCc1101PeerStateQuery, validateQemuCc1101PeerState} from '../web/public-qemu-profiles.js';
+ import {qemuProbeVfs} from '../web/public-qemu-probe-firmware.js';
+ 
+ const s3AdcFields = [
+@@ -26,6 +28,45 @@ validateQemuBrowserProfiles(registry);
+ const sortedRegistry=JSON.parse(JSON.stringify(registry,(_key,value)=>value&&typeof value==='object'&&!Array.isArray(value)?Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b))):value));
+ validateQemuBrowserProfiles(sortedRegistry);
+ const pick = id => getQemuBrowserProfile(id, registry, {allowCandidateProfiles:true});
++const advWorkbenchSHA256='b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd';
++const capBase=resolveQemuFirmwareProfile(pick('cardputer-adv'),advWorkbenchSHA256);
++const capBasePatches=[capBase.requiredInputPatch,capBase.requiredRuntimePatch];
++assert.equal(resolveQemuCapExample(capBase,undefined,advWorkbenchSHA256),capBase);
++assert.equal(capBase.capExample,undefined,'the same ordinary ADV workbench stays bare');
++assert.doesNotThrow(()=>validateQemuRuntimeRequirements(capBase,{source:{patches:capBasePatches}}));
++for (const example of ['cc1101-rf-tx','cc1101-rf-rx']) {
++  const selected=resolveQemuCapExample(capBase,example,advWorkbenchSHA256);
++  assert.deepEqual(selected,{...capBase,capExample:example});
++  const patch=QEMU_CARDPUTER_CC1101_RUNTIME_PATCH;
++  assert.doesNotThrow(()=>validateQemuRuntimeRequirements(selected,{source:{patches:[...capBasePatches,patch]}}));
++  for (const extra of [[],[{...patch,sha256:'0'.repeat(64)}],[patch,patch]]) {
++    assert.throws(()=>validateQemuRuntimeRequirements(selected,{source:{patches:[...capBasePatches,...extra]}}),/CC1101 Cap source patch/);
++  }
++  assert.throws(()=>resolveQemuCapExample(capBase,example,'0'.repeat(64)),/reviewed original workbench BIN/);
++  assert.throws(()=>resolveQemuCapExample(pick('cores3'),example,advWorkbenchSHA256),/Invalid QEMU Cardputer-Adv Cap/);
++}
++assert.throws(()=>resolveQemuCapExample(capBase,'cc1101-nfc',advWorkbenchSHA256),/Invalid QEMU Cardputer-Adv Cap/);
++assert.throws(()=>validateQemuBrowserProfiles({...registry,profiles:[{...capBase,capExample:'cc1101-rf-rx'}]}),/must not attach a Cap/);
++const peerRx=resolveQemuCapExample(capBase,'cc1101-rf-rx',advWorkbenchSHA256,true);
++const peerTx=resolveQemuCapExample(capBase,'cc1101-rf-tx',advWorkbenchSHA256,true);
++const peerPatches=[...capBasePatches,QEMU_CARDPUTER_CC1101_RUNTIME_PATCH];
++assert.throws(()=>validateQemuRuntimeRequirements(peerRx,{source:{patches:peerPatches}}),/peer preview patch/);
++assert.doesNotThrow(()=>validateQemuRuntimeRequirements(peerRx,{source:{patches:[...peerPatches,QEMU_CARDPUTER_CC1101_PEER_PREVIEW_PATCH]}}));
++assert.throws(()=>resolveQemuCapExample(capBase,undefined,advWorkbenchSHA256,true),/requires an explicit example/);
++assert.throws(()=>qemuCc1101PeerStateQuery(capBase),/peer is not admitted/);
++assert.deepEqual(qemuCc1101PeerStateQuery(peerTx),{execute:'qom-get',arguments:{path:'/machine/cc1101-peer',property:'state'}});
++const receive={type:'cc1101-peer-frame',frameHex:'0162'};
++assert.deepEqual(qemuInputCommand(peerRx,receive),{execute:'qom-set',arguments:{path:'/machine/cc1101-peer',property:'rx-frame-hex',value:'0162'}});
++assert.throws(()=>qemuInputCommand(peerTx,receive),/peer input is not admitted/);
++for(const test of [{...receive,path:'/machine/other'},{...receive,frameHex:'0262'},{...receive,frameHex:'016g'},
++  {...receive,frameHex:'40'+'00'.repeat(64)}]) {
++  assert.throws(()=>qemuInputCommand(peerRx,test),/Invalid CC1101 peer FIFO frame/);
++}
++const peerState={reset_epoch:1,marcstate:13,rx_armed:true,gdo0:false,tx_sequence:0,tx_fifo_hex:'',
++  rx_accepted:0,rx_interrupts:0,rx_fifo_bytes_read:0,rx_completed:0};
++assert.deepEqual(validateQemuCc1101PeerState(peerState),peerState);
++assert.throws(()=>validateQemuCc1101PeerState({...peerState,rx_accepted:-1}),/Invalid QEMU CC1101 peer state/);
++assert.throws(()=>validateQemuCc1101PeerState({...peerState,tx_fifo_hex:'0262'}),/Invalid QEMU CC1101 peer state/);
+ // Board-wired physical controls must survive admission through both press and
+ // release. These are independent board expectations, not a list inferred from
+ // whichever controls happen to remain enabled in the registry under test.
+diff --git a/platform/tests/test_public_qemu_runtime.mjs b/platform/tests/test_public_qemu_runtime.mjs
+index 9e09ecd1a..a4ed856e8 100644
+--- a/platform/tests/test_public_qemu_runtime.mjs
++++ b/platform/tests/test_public_qemu_runtime.mjs
+@@ -182,6 +182,12 @@ try {
+ 
+   const invalidCard=create({sdExamples:[{...example,bytes:1024}],downloadImpl:downloadWithCard});
+   const priorFrames=frames.length;
++  const arbitraryCap=create();
++  const advCapFirmware=firmware(getQemuBrowserProfile('cardputer-adv',profiles));
++  await assert.rejects(arbitraryCap.runtime.start({device:'cardputer-adv',firmware:advCapFirmware,capExample:'cc1101-rf-tx'}),
++    /reviewed original workbench BIN/);
++  assert.equal(arbitraryCap.downloads.length,0);
++  assert.equal(frames.length,priorFrames,'an unrelated ADV upload must fail explicit Cap admission before creating a guest');
+   await assert.rejects(invalidCard.runtime.start({device:'cores3',firmware:firmware()}),/示例 microSD/);
+   assert.equal(frames.length,priorFrames,'a wrongly sized decompressed card cannot start a guest');
+   const corruptCard=create({sdExamples:[{...example,gzip_sha256:'0'.repeat(64)}],downloadImpl:async(_url,config)=>{
+diff --git a/platform/web/public-qemu-engine.js b/platform/web/public-qemu-engine.js
+index b439d44dd..0efd03e55 100644
+--- a/platform/web/public-qemu-engine.js
++++ b/platform/web/public-qemu-engine.js
+@@ -1,5 +1,5 @@
+ import {readQemuServoOutputs} from './public-qemu-servo.js';
+-import {validateQemuProfile,validateQemuRuntimeRequirements,buildQemuArguments,buildQemuEfuse,qemuInputCommand} from './public-qemu-profiles.js';
++import {validateQemuProfile,validateQemuRuntimeRequirements,buildQemuArguments,buildQemuEfuse,qemuInputCommand,qemuCc1101PeerStateQuery,validateQemuCc1101PeerState} from './public-qemu-profiles.js';
+ import {readSharedQemuFrame,readQemuOnboardOutputs} from './public-qemu-frame.js';
+ import {validQemuSdImage} from './public-qemu-sd-media.js';
+ // The engine owns Emscripten and MEMFS. The top page owns its native pthread Workers.
+@@ -186,6 +186,8 @@ async function start(config) {
+       m.FS.writeFile('/units.json',JSON.stringify(boardProfile.units));
+       if (!m.ENV) throw new Error('QEMU build must export ENV');
+       Object.assign(m.ENV, {M5_WASM_VM_CLOCK_DIVISOR:String(boardProfile.clockDivisor), M5_WASM_FRAMEBUFFER:boardProfile.display&&frameTransport==='shared-rgb565-v1'?'1':'0', M5_UNIT_CONFIG:'/units.json'});
++      if(boardProfile.capExample)m.ENV.M5SW_CARDPUTER_ADV_CAP_CC1101='1';
++      if(boardProfile.capPeer===true)m.ENV.M5SW_CARDPUTER_ADV_CAP_CC1101_PEER='1';
+       if(sdCard) {
+         m.FS.writeFile('/sd-card.img',new Uint8Array(sdCard),{canOwn:true});
+         m.ENV.M5SW_SPI_SD_IMAGE='/sd-card.img';
+@@ -279,6 +281,14 @@ async function request(op, value) {
+     previousOutputs = identity;
+     emit('device-state', state); return {observed:true};
+   }
++  if (op === 'cc1101-peer-state') {
++    if (value && Object.keys(value).length) throw new Error('QEMU CC1101 peer reads accept no caller path or property');
++    const epoch=resetEpoch;
++    const command=qemuCc1101PeerStateQuery(boardProfile);
++    const observed=await qmp(command.execute,command.arguments);
++    if(epoch!==resetEpoch||closed||disposeRequested)throw new Error('QEMU CC1101 peer session changed');
++    return validateQemuCc1101PeerState(observed);
++  }
+   if (op === 'display') {
+     // Only Cardputer's admitted native-glass presentation uses this QOM
+     // contract. E-paper and other panel types need no SPI-panel lookup.
+diff --git a/platform/web/public-qemu-profiles.js b/platform/web/public-qemu-profiles.js
+index 5d848614e..4606d9143 100644
+--- a/platform/web/public-qemu-profiles.js
++++ b/platform/web/public-qemu-profiles.js
+@@ -36,6 +36,17 @@ export const QEMU_CARDPUTER_BOOT_RUNTIME_PATCH = Object.freeze({
+   path:'patches/qemu-wasm-probe/0029-cardputer-adv-boot-button.patch',
+   sha256:'04d7a7e5b29e3e3b4729fb14520afe43e422f0df5371c9fcbbfde5644de88b85',
+ });
++export const QEMU_CARDPUTER_CC1101_RUNTIME_PATCH = Object.freeze({
++  path:'patches/qemu-m5stack-peripherals/0165-cardputer-adv-explicit-caps.patch',
++  sha256:'994b286fe515fc394520867be6c56ff5e68b5ed592bdb26f264e31e8affcfdb8',
++});
++export const QEMU_CARDPUTER_CC1101_PEER_PREVIEW_PATCH = Object.freeze({
++  path:'patches/qemu-wasm-probe/0097-cardputer-adv-cc1101-peer-preview.patch',
++  sha256:'feeae444d6f29dce4780b366759d66a727a850f22daf12012e37c31ba80381a2',
++});
++const cardputerCc1101Examples = new Set(['cc1101-rf-tx','cc1101-rf-rx']);
++const cardputerCc1101WorkbenchSHA256 = 'b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd';
++const cc1101PeerPath = '/machine/cc1101-peer';
+ const QEMU_CARDPUTER_K132_RUNTIME_PATCH = Object.freeze({
+   path:'patches/qemu-wasm-probe/0034-cardputer-k132-board.patch',
+   sha256:'6c854c75cfd248ff145a794240212a8a1de017113d9d72360b9a844181ab40af',
+@@ -102,6 +113,19 @@ export function validateQemuRuntimeRequirements(profile, manifest) {
+     check(matches.length===1&&matches[0].sha256===profile.requiredInputPatch.sha256,
+       'QEMU runtime lacks the physical input required source patch');
+   }
++  if (profile.capExample !== undefined) {
++    const patches=manifest?.source?.patches;
++    const matches=Array.isArray(patches)?patches.filter(row=>row?.path===QEMU_CARDPUTER_CC1101_RUNTIME_PATCH.path):[];
++    check(matches.length===1&&matches[0].sha256===QEMU_CARDPUTER_CC1101_RUNTIME_PATCH.sha256,
++      'QEMU runtime lacks the Cardputer-Adv CC1101 Cap source patch');
++  }
++  if (profile.capPeer === true) {
++    const patches=manifest?.source?.patches;
++    const patch=QEMU_CARDPUTER_CC1101_PEER_PREVIEW_PATCH;
++    const matches=Array.isArray(patches)?patches.filter(row=>row?.path===patch.path):[];
++    check(matches.length===1&&matches[0].sha256===patch.sha256,
++      'QEMU runtime lacks the Cardputer-Adv CC1101 peer preview patch');
++  }
+   return profile;
+ }
+ 
+@@ -287,6 +311,17 @@ export function validateQemuProfile(profile) {
+       hashes.add(variant.firmwareSHA256);
+     }
+   }
++  if (profile.capExample !== undefined) {
++    check(cardputerCc1101Examples.has(profile.capExample)
++      && profile.deviceId==='cardputer-adv' && profile.board==='m5cardputeradv'
++      && profile.firmwareVariant?.firmwareSHA256===cardputerCc1101WorkbenchSHA256
++      && profile.oneInsnPerTb===true,
++    'Invalid QEMU Cardputer-Adv Cap example binding');
++  }
++  if (profile.capPeer !== undefined) {
++    check(profile.capPeer===true&&cardputerCc1101Examples.has(profile.capExample),
++      'Invalid QEMU Cardputer-Adv CC1101 peer binding');
++  }
+   return profile;
+ }
+ 
+@@ -296,6 +331,7 @@ export function validateQemuBrowserProfiles(registry) {
+   const seen = new Set();
+   for (const profile of registry.profiles) {
+     validateQemuProfile(profile);
++    check(profile.capExample===undefined,'QEMU browser registry must not attach a Cap example by default');
+     check(!seen.has(profile.deviceId), 'Duplicate QEMU browser profile'); seen.add(profile.deviceId);
+   }
+   return registry;
+@@ -319,6 +355,7 @@ export function resolveQemuFirmwareProfile(profile, firmwareSHA256) {
+   validateQemuProfile(profile);
+   check(identity.test(firmwareSHA256), 'Invalid QEMU firmware SHA256');
+   const resolved = structuredClone(profile);
++  delete resolved.capExample; delete resolved.capPeer;
+   delete resolved.firmwareVariant;
+   delete resolved.oneInsnPerTb; delete resolved.requiredRuntimePatch;
+   if (resolved.accelerator?.icountMaxPerCpuNs !== undefined) delete resolved.accelerator.icountMaxPerCpuNs;
+@@ -334,8 +371,39 @@ export function resolveQemuFirmwareProfile(profile, firmwareSHA256) {
+   return validateQemuProfile(resolved);
+ }
+ 
++/** Select the Cap only for an explicit original RF example on its exact BIN. */
++export function resolveQemuCapExample(profile, example, firmwareInputSHA256, peer) {
++  if (example===undefined&&peer===undefined) return profile;
++  check(peer===undefined||peer===true,'Invalid QEMU Cardputer-Adv CC1101 peer option');
++  check(example!==undefined,'The QEMU CC1101 peer requires an explicit example');
++  check(firmwareInputSHA256===cardputerCc1101WorkbenchSHA256,'QEMU CC1101 Cap example requires the reviewed original workbench BIN');
++  return validateQemuProfile({...profile,capExample:example,...(peer?{capPeer:true}:{})});
++}
++
++function validCc1101PeerFrame(frame) {
++  return typeof frame==='string'&&/^(?:[0-9a-f]{2}){2,64}$/.test(frame)
++    && parseInt(frame.slice(0,2),16)===frame.length/2-1;
++}
++
++export function qemuCc1101PeerStateQuery(profile) {
++  validateQemuProfile(profile);
++  check(profile.capPeer===true,'QEMU CC1101 peer is not admitted');
++  return {execute:'qom-get',arguments:{path:cc1101PeerPath,property:'state'}};
++}
++
++export function validateQemuCc1101PeerState(state) {
++  const counters=['reset_epoch','tx_sequence','rx_accepted','rx_interrupts','rx_fifo_bytes_read','rx_completed'];
++  check(state&&Object.keys(state).length===10&&counters.every(field=>Number.isSafeInteger(state[field])&&state[field]>=0)
++    && Number.isInteger(state.marcstate)&&state.marcstate>=0&&state.marcstate<=31
++    && typeof state.rx_armed==='boolean'&&typeof state.gdo0==='boolean'
++    && (state.tx_fifo_hex===''||validCc1101PeerFrame(state.tx_fifo_hex)),
++  'Invalid QEMU CC1101 peer state');
++  return state;
++}
++
+ /** A diagnostic override cannot inherit an admitted variant's execution flags. */
+ export function clearQemuFirmwareExecutionBinding(profile) {
++  delete profile.capExample; delete profile.capPeer;
+   delete profile.firmwareVariant; delete profile.oneInsnPerTb; delete profile.requiredRuntimePatch;
+   if (profile.accelerator?.icountMaxPerCpuNs !== undefined) delete profile.accelerator.icountMaxPerCpuNs;
+   // A publisher BIN with no app-ready marker must not retain a ready identity
+@@ -421,6 +489,12 @@ export function buildQemuEfuse(profile) {
+ /** Coordinates are already in the QEMU physical frame; do not rotate twice. */
+ export function qemuInputCommand(profile, event) {
+   validateQemuProfile(profile);
++  if (event?.type==='cc1101-peer-frame') {
++    check(profile.capPeer===true&&profile.capExample==='cc1101-rf-rx','QEMU CC1101 peer input is not admitted');
++    check(Object.keys(event).length===2&&Object.hasOwn(event,'frameHex')&&validCc1101PeerFrame(event.frameHex),
++      'Invalid CC1101 peer FIFO frame');
++    return {execute:'qom-set',arguments:{path:cc1101PeerPath,property:'rx-frame-hex',value:event.frameHex}};
++  }
+   const input = profile.inputs, {width, height} = profile.display || {};
+   if (event?.type === 'reset') {
+     check(input.reset === true && event.down === true && Object.keys(event).sort().join(',') === 'down,type', 'Hardware reset is not admitted');
+diff --git a/platform/web/public-qemu-runtime.js b/platform/web/public-qemu-runtime.js
+index 3b08a919b..6534d19a2 100644
+--- a/platform/web/public-qemu-runtime.js
++++ b/platform/web/public-qemu-runtime.js
+@@ -5,7 +5,7 @@ import {downloadFirmware, sha256Buffer} from './public-firmware.js';
+ import {loadQemuSdExample} from './public-qemu-sd-media.js';
+ import {createVerifiedAssetLoader, loadVerifiedRuntimeAsset, createVerifiedModuleCompiler, compileVerifiedRuntimeModule} from './public-verified-assets.js';
+ import {sha256Bytes} from './sha256.js';
+-import {loadQemuBrowserProfiles, getQemuBrowserProfile, resolveQemuFirmwareProfile, clearQemuFirmwareExecutionBinding, validateQemuFirmware, validateQemuProfile, validateQemuRuntimeRequirements, qemuInputCommand, validateQemuOnboardState, qemuRuntimeIdentity} from './public-qemu-profiles.js';
++import {loadQemuBrowserProfiles, getQemuBrowserProfile, resolveQemuFirmwareProfile, resolveQemuCapExample, clearQemuFirmwareExecutionBinding, validateQemuFirmware, validateQemuProfile, validateQemuRuntimeRequirements, qemuInputCommand, validateQemuOnboardState, qemuRuntimeIdentity, validateQemuCc1101PeerState} from './public-qemu-profiles.js';
+ const HISTORY_KEY = 'm5-public-qemu-history-v1';
+ const EXAMPLE_SHA = '78961297e751ec9c743b4cdf89cc2c137e7e2c801dda3ead9df2ea45d59fbd3f';
+ export const QEMU_BROWSER_PROFILE = Object.freeze({deviceId:'cores3',board:'m5cores3',chip:'esp32s3',flashMb:16,
+@@ -95,7 +95,7 @@ export class PublicQemuRuntime {
+     }
+   }
+   async start(options={}) {
+-    const {device,firmware,signal,clockDivisor}=options;
++    const {device,firmware,signal,clockDivisor,capExample,capPeer}=options;
+     await this.stop();
+     const generation=++this.generation;this.uartOwner=null;this.consoleEpoch=0;this.waiters=new Map();this.serial='';this.diagnostics='';this.sequence=0;this.machineEvents=[];this.readySerialOffset=0;
+     this.inputs=[];this.lastFrame=null;this.lastDeviceState=null;this.outputSequence=0;this.exit=null;this.cleanupResult=null;this.engineDisposal=null;
+@@ -109,7 +109,7 @@ export class PublicQemuRuntime {
+     this.state('loading');
+     try {
+       active();
+-      check(Object.keys(options).every(key=>['device','firmware','signal','clockDivisor'].includes(key)),'Unsupported QEMU execution option');
++      check(Object.keys(options).every(key=>['device','firmware','signal','clockDivisor','capExample','capPeer'].includes(key)),'Unsupported QEMU execution option');
+       const deviceId=typeof device==='string'?device:device?.id;
+       const registry=this.profiles||await loadQemuBrowserProfiles({root:this.root,fetchImpl:this.fetchImpl,signal:bootAbort.signal});
+       active();
+@@ -141,9 +141,10 @@ export class PublicQemuRuntime {
+         clearQemuFirmwareExecutionBinding(profile);
+         profile.admission='candidate';profile.clockDivisor=clockDivisor;profile.profile=`${deviceId}-wasm-${clockDivisor===1?'wallclock-candidate':'vm-div8'}`;
+       }
++      profile=resolveQemuCapExample(profile,capExample,inputSHA256,capPeer);
+       validateQemuProfile(profile);
+       this.profile=profile;
+-      active();this.saved={device:deviceId,firmware:flash.slice(),clockDivisor};
++      active();this.saved={device:deviceId,firmware:flash.slice(),clockDivisor,...(capExample ? {capExample} : {}),...(capPeer ? {capPeer} : {})};
+       const sdExample=this.sdExamples===undefined?null:await loadQemuSdExample(
+         this.sdExamples,deviceId,inputSHA256,{root:this.root,signal:bootAbort.signal,loadAsset:this.loadAsset,fetchImpl:this.fetchImpl});
+       active();
+@@ -183,6 +184,8 @@ export class PublicQemuRuntime {
+         firmwareSha256:firmwareSHA256,firmwareInputSha256:inputSHA256,firmwareRuntimeSha256:firmwareSHA256,
+         normalization:{kind:inputBytes===runtimeBytes?'none':'pad-ff',inputBytes,runtimeBytes},
+         ...(sdExample ? {sdCard:sdExample.identity} : {}),
++        ...(profile.capExample ? {capExample:profile.capExample} : {}),
++        ...(profile.capPeer ? {capPeer:true} : {}),
+         firmwareVariant:profile.firmwareVariant||null,build:manifest.build,frameTransport:this.frameTransport,
+         outputTransport:profile.outputs?.kind||null,
+         controller:'same-origin-iframe-message-channel',persistentFlash:false};
+@@ -287,6 +290,14 @@ export class PublicQemuRuntime {
+   async pause(){check(this.status==='running','设备未运行。');await this.ask('pause');this.state('paused');return this.observe();}
+   async resume(){check(this.status==='paused','设备未暂停。');await this.ask('resume');this.state(this.guestReady()?'running':'booting');return this.observe();}
+   reset(){check(['running','paused','sleeping'].includes(this.status),'设备未运行。');return this.input({type:'reset',down:true});}
++  async readCc1101PeerState() {
++    check(this.profile?.capPeer&&this.status==='running'&&!this.stopping,'QEMU CC1101 peer is not running');
++    const {generation,consoleEpoch}=this;
++    const state=await this.ask('cc1101-peer-state');
++    if(this.generation!==generation||this.consoleEpoch!==consoleEpoch||this.stopping)
++      throw new DOMException('QEMU CC1101 peer session changed','AbortError');
++    return validateQemuCc1101PeerState(state);
++  }
+   async input(event){
+     // QMP accepts input while suspended, so the UI can release a held touch.
+     const touchRelease=event?.type==='touch'&&event.down===false;

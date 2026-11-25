@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer-Adv CC1101 Cap original programs on a private browser peer",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/247",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "915faa6bf9882579e10668c315a5f8e74b2491af",
+    "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "locked_baseline_patch": "0043-lcd-cam-pace-dvp-records.patch",
+    "private_preview_patch": {
+      "bytes": 11942,
+      "name": "0097-cardputer-adv-cc1101-peer-preview.patch",
+      "sha256": "feeae444d6f29dce4780b366759d66a727a850f22daf12012e37c31ba80381a2"
+    },
+    "official_examples_revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "official_examples": {
+      "rx": {
+        "url": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/cap/cc1101/cc1101_cap_rf_rx_example.py",
+        "sha256": "725c082f699a054b1b5983cdac62981b3287d24675ee3002efbd5b8058512744"
+      },
+      "tx": {
+        "url": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/cap/cc1101/cc1101_cap_rf_tx_example.py",
+        "sha256": "12d62591b8400f84dce2560601b4fe7939785ef6be1f9b574c1b419a58b2ce40"
+      }
+    },
+    "preview_c_source_digests": {
+      "hw/m5stopwatch/m5_cc1101_spi.c": {
+        "bytes": 12176,
+        "sha256": "3ce2816d782133b9ab9f60c4ef9bbd8e14af5567b9dfa95ca3de33d749b0210c"
+      },
+      "hw/m5stopwatch/m5cardputeradv.c": {
+        "bytes": 7226,
+        "sha256": "4ab07f573f1f2f5281fb2ba2b85bbf3001536edd9ceac7e1df9ab5a4a5934aa5"
+      },
+      "hw/m5stopwatch/m5stopwatch.h": {
+        "bytes": 10312,
+        "sha256": "ee027b3ab6f19f8c476cf3fee70ca3bd1a74141e9edc46792928d20aa2948256"
+      }
+    },
+    "preview_browser_source_digests": {
+      "platform/web/public-qemu-engine.js": {
+        "bytes": 21815,
+        "sha256": "5a9782eb2685ee94341ac2127c42111eb290cd4b3e85741d095f863e4592d270"
+      },
+      "platform/web/public-qemu-profiles.js": {
+        "bytes": 38346,
+        "sha256": "12cac180928fe4c397d7d5eebb34363dffc5472a46f18e6d808e0ca2ff5cf673"
+      },
+      "platform/web/public-qemu-runtime.js": {
+        "bytes": 29082,
+        "sha256": "d759b47b1f038509c996346129d3f0c03240f210df956a55077d94e63da095fa"
+      }
+    }
+  },
+  "hardware": {
+    "model": "M5Stack Cardputer-Adv",
+    "qemu_machine": "m5cardputeradv",
+    "simulated_candidate": "CC1101 Cap on SPI2, chip select GPIO5 and GDO0 GPIO15",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "official_release": "UIFlow2 v2.5.3",
+    "official_base": {
+      "name": "cardputer-adv-v2.5.3-base.bin",
+      "bytes": 8384512,
+      "sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631"
+    },
+    "executed_workbench_image": {
+      "name": "cardputer-adv-workbench-b6255f6a.bin",
+      "bytes": 8388608,
+      "sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd"
+    },
+    "composer_wasm_sha256": "f19358bc10b65156aadb1f02c874a1ceb0b64e63dfd1deb1b1d097491bfd6377",
+    "input_runtime_hashes_identical": true
+  },
+  "execution": {
+    "environment": "Two independent browser QEMU-WASM guests via headless Chromium and Playwright on macOS. Private checked static export.",
+    "evidence_level": "virtual-device validation",
+    "guest_validation": "PASS",
+    "browser_runtime_profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+    "clock_divisor": 1,
+    "one_instruction_per_translation_block": true,
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "preview_wasm": {
+      "bytes": 12780410,
+      "path": "qemu-system-xtensa.wasm",
+      "sha256": "4bcb05893348b37877858b729a85d15f72bf5734ded099b0e4c3ff1cef2cf183"
+    },
+    "preview_js_glue": {
+      "bytes": 157200,
+      "path": "qemu-system-xtensa.js",
+      "sha256": "ea135ed048bf8acce883c093e02c8be5207a2aa7676f5d45964903fbf224ec07"
+    },
+    "preview_pthread_worker": {
+      "bytes": 2776,
+      "path": "qemu-system-xtensa.worker.js",
+      "sha256": "b3da90501116a254f0518048ff154ee695aa889ce168573adaf78e13bd5d3d8d"
+    },
+    "preview_site_manifest": {
+      "bytes": 440571,
+      "sha256": "e4a03c5884e6e0c7769ad522143415f93172fff8e49edea8479f83f7fa6fe585"
+    },
+    "preview_runtime_manifest": {
+      "bytes": 37963,
+      "sha256": "ded71af1c2ea5a80f166c1d40de8d3f0bcaf9e24942e310dc3832241608ef13c"
+    },
+    "locked_baseline_wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+    "locked_baseline_site_manifest": {
+      "bytes": 439726,
+      "sha256": "14460d70c9b834627663e8f25c69730ae26693b1e1c2498a08232a20de9d071a"
+    },
+    "session_id_sha256": {
+      "rx": "2d41a700fcb74d6d2c30edc411cdcce52ac4e9d6d225c0ade7edeef68e6a177e",
+      "tx": "539ef74d4c187eae8818b244ea587c42bdfdee21ea1ae8a67f4a9e18413dabc7"
+    },
+    "actual_guest_identities_are_distinct": true,
+    "wasm_compiler": "Emscripten 3.1.50",
+    "build_jobs_upper_bound": 2,
+    "all_objects_rebuilt": false,
+    "translation_units_rebuilt": [
+      "hw/m5stopwatch/m5_cc1101_spi.c",
+      "hw/m5stopwatch/m5cardputeradv.c"
+    ],
+    "reused_link_inputs": 710,
+    "private_build_receipt": {
+      "name": "preview-receipt.json",
+      "bytes": 3520,
+      "sha256": "665c8f43aaa1be1040c3be4b94aaefcd142b9f442022f6fb6fdb7c81ea7b2f5a"
+    },
+    "private_export_receipt": {
+      "name": "peer-preview-site-receipt.json",
+      "bytes": 2511,
+      "sha256": "56ce63493718e9ae6d86d3e0ae3c4a6adf4a5e5919ced4ea08236404a8cc43db"
+    },
+    "replay_tool_digests": [
+      {
+        "name": "recompose.mjs",
+        "bytes": 2263,
+        "sha256": "4bbe9296c2e945aeb1e113ee48fbc4949547825d83a2ba1b4de4ed561b041459"
+      },
+      {
+        "name": "check-peer-model.py",
+        "bytes": 7063,
+        "sha256": "7ebc90440c8b63868b81f0b0bdf6dd430daee4caa315d862ae3f3e60a7f347ec"
+      },
+      {
+        "name": "build-peer-preview.py",
+        "bytes": 7614,
+        "sha256": "3e0715a53cd03d6140c6f2e0a4203b69a90266ba91c65a7b29267d397d743b5f"
+      },
+      {
+        "name": "stage-peer-preview.py",
+        "bytes": 5504,
+        "sha256": "b6565b2e54fc161a953edc77cb11aa6b73a48b4b830242b3096f689dccdfdf33"
+      },
+      {
+        "name": "cc1101-peer-pair.mjs",
+        "bytes": 13807,
+        "sha256": "9ed6f44c62cf7bf78a61c38285522b1b9147fbd96ded38fbe5c14ed30845fe76"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "incremental-preview-build",
+      "layer": "build",
+      "status": "PASS"
+    },
+    {
+      "name": "static-export-artifact-closure",
+      "layer": "build",
+      "status": "PASS"
+    },
+    {
+      "name": "official-source-same-guest-raw-paste",
+      "layer": "transport",
+      "status": "PASS"
+    },
+    {
+      "name": "sender-stx-and-captured-spi-fifo",
+      "layer": "transport",
+      "status": "PASS"
+    },
+    {
+      "name": "armed-receiver-gdo0-and-spi-fifo",
+      "layer": "device_response",
+      "status": "PASS"
+    },
+    {
+      "name": "no-peer-without-rx-data",
+      "layer": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "name": "same-on-device-payload-and-rx-crc",
+      "layer": "data_behavior",
+      "status": "PASS"
+    },
+    {
+      "name": "virtual-guest-frame-update",
+      "layer": "visual_or_physical",
+      "status": "PASS"
+    },
+    {
+      "name": "graceful-dual-guest-worker-cleanup",
+      "layer": "execution",
+      "status": "PASS"
+    },
+    {
+      "name": "release-lock-and-published-corresponding-source",
+      "layer": "delivery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "standard-workbench-peer-ui",
+      "layer": "delivery",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "physical-rf",
+      "layer": "visual_or_physical",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/cc1101-dual-guest-summary.json"
+  ],
+  "notes": [
+    "Private temporary patch 0097. The source archive retained in the export covers the locked 0043 control.",
+    "The host test harness transfers one frame directly between two same-run model endpoints. Workbench tab pairing and physical transmitter behavior are separate follow-ups."
+  ]
+}

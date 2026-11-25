@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "kind": "redacted-browser-cc1101-cap-dual-guest-summary",
+  "status": "PASS",
+  "evidence_level": "virtual-device validation",
+  "scope": "Private incremental WASM diagnostic across two independent Cardputer-Adv guests. Physical RF and a public workbench pairing UI were not exercised.",
+  "redaction": "Retains exact artifact/source hashes, board, profile, protocol bytes, timestamps and controller counts. Removes endpoint, host paths, session identifiers and CDP target identities. Session identifiers are represented by SHA-256.",
+  "controls": {
+    "no_peer": {
+      "configured_window_ms": 1250,
+      "receiver_state": {
+        "rx_fifo_bytes_read": 0,
+        "rx_accepted": 0,
+        "marcstate": 13,
+        "tx_sequence": 0,
+        "tx_fifo_hex": "",
+        "rx_completed": 0,
+        "rx_interrupts": 0,
+        "rx_armed": true,
+        "gdo0": false,
+        "reset_epoch": 3
+      }
+    },
+    "positive": {
+      "transmitter_after_completed_stx": {
+        "rx_fifo_bytes_read": 0,
+        "rx_accepted": 0,
+        "marcstate": 13,
+        "tx_sequence": 1,
+        "tx_fifo_hex": "144343313130312c205345513d302c2048656c6c6f",
+        "rx_completed": 0,
+        "rx_interrupts": 0,
+        "rx_armed": true,
+        "gdo0": false,
+        "reset_epoch": 3
+      },
+      "receiver_before_forwarding": {
+        "rx_fifo_bytes_read": 0,
+        "rx_accepted": 0,
+        "marcstate": 13,
+        "tx_sequence": 0,
+        "tx_fifo_hex": "",
+        "rx_completed": 0,
+        "rx_interrupts": 0,
+        "rx_armed": true,
+        "gdo0": false,
+        "reset_epoch": 3
+      },
+      "forwarded_fifo_hex": "144343313130312c205345513d302c2048656c6c6f",
+      "forwarded_fifo_sha256": "fa4c8fa4968e866d6e89712e9a471696cf4a9f2e4ee2f643f70d8ceba4ef1cf1",
+      "forwarded_fifo_bytes": 21,
+      "payload_ascii": "CC1101, SEQ=0, Hello",
+      "payload_hex": "4343313130312c205345513d302c2048656c6c6f",
+      "receiver_after_guest_fifo_reads": {
+        "rx_fifo_bytes_read": 23,
+        "rx_accepted": 1,
+        "marcstate": 1,
+        "tx_sequence": 0,
+        "tx_fifo_hex": "",
+        "rx_completed": 1,
+        "rx_interrupts": 1,
+        "rx_armed": false,
+        "gdo0": false,
+        "reset_epoch": 3
+      },
+      "modeled_status_bytes_hex": "8080"
+    }
+  },
+  "roles": {
+    "rx": {
+      "cap_example": "cc1101-rf-rx",
+      "session_id_sha256": "2d41a700fcb74d6d2c30edc411cdcce52ac4e9d6d225c0ade7edeef68e6a177e",
+      "console_epoch": 0,
+      "started_at_utc": "2026-11-25T13:18:35.966Z",
+      "stopped_at_utc": "2026-11-25T13:19:10.466Z",
+      "original_source_sha256": "725c082f699a054b1b5983cdac62981b3287d24675ee3002efbd5b8058512744",
+      "editor_source_sha256": "725c082f699a054b1b5983cdac62981b3287d24675ee3002efbd5b8058512744",
+      "original_transfer": "raw-paste",
+      "interrupted_for_same_guest_readback": true,
+      "witness_stdout": "RX_WITNESS 1 0 4343313130312c205345513d302c2048656c6c6f",
+      "no_peer_frame": {
+        "width": 240,
+        "height": 135,
+        "sequence": 15,
+        "format": "rgb565le",
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 90,
+        "source_updates": 45,
+        "sha256": "190916e4c007b9ebaa621016ce4846d66978e32219e047760cc5ec701d3c3dc2"
+      },
+      "guest_frame": {
+        "width": 240,
+        "height": 135,
+        "sequence": 16,
+        "format": "rgb565le",
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 92,
+        "source_updates": 46,
+        "sha256": "a472fd0a0b8dac90234b6be79f7a31e4b366b771cfdcd5650266a8d3a506d831"
+      },
+      "cleanup": {
+        "graceful_exit": true,
+        "exit_code": 0,
+        "pthreads_created": 5,
+        "pthreads_remaining_at_exit": 0,
+        "iframe_removed": true,
+        "fallback_worker_terminations": 0
+      }
+    },
+    "tx": {
+      "cap_example": "cc1101-rf-tx",
+      "session_id_sha256": "539ef74d4c187eae8818b244ea587c42bdfdee21ea1ae8a67f4a9e18413dabc7",
+      "console_epoch": 0,
+      "started_at_utc": "2026-11-25T13:18:42.819Z",
+      "stopped_at_utc": "2026-11-25T13:19:10.488Z",
+      "original_source_sha256": "12d62591b8400f84dce2560601b4fe7939785ef6be1f9b574c1b419a58b2ce40",
+      "editor_source_sha256": "12d62591b8400f84dce2560601b4fe7939785ef6be1f9b574c1b419a58b2ce40",
+      "original_transfer": "raw-paste",
+      "interrupted_for_same_guest_readback": true,
+      "witness_stdout": "TX_WITNESS 2 2 0",
+      "guest_frame": {
+        "width": 240,
+        "height": 135,
+        "sequence": 21,
+        "format": "rgb565le",
+        "source": "qemu-display-surface-shared",
+        "source_sequence": 126,
+        "source_updates": 63,
+        "sha256": "6b8a96bba694bb58daea8219a187e778744359e3f6510f1f6825308d5eb798e6"
+      },
+      "cleanup": {
+        "graceful_exit": true,
+        "exit_code": 0,
+        "pthreads_created": 5,
+        "pthreads_remaining_at_exit": 0,
+        "iframe_removed": true,
+        "fallback_worker_terminations": 0
+      }
+    }
+  },
+  "cleanup": {
+    "cdp_workers_observed": 12,
+    "cdp_workers_live_before_browser_context_close": 0,
+    "normal_guest_exit_both": true,
+    "page_errors": 0
+  },
+  "raw_artifact_digests": [
+    {
+      "name": "report.json",
+      "bytes": 61666,
+      "sha256": "f89029163781a516fed772d71cfc59db4ca0443fa3fa2b4883595da8623b87f7"
+    },
+    {
+      "name": "rx-negative.png",
+      "bytes": 170996,
+      "sha256": "b3de4931c3ec1eaca90491c825ee1521eb62be0b163797be2cfe16785b50f54b"
+    },
+    {
+      "name": "rx-packet.png",
+      "bytes": 171110,
+      "sha256": "bed1dd1d27b40a1b4a9059cc6868cfc33227ee2944d6bf42f57bd835e17489b9"
+    },
+    {
+      "name": "tx-packet.png",
+      "bytes": 171147,
+      "sha256": "9fc3ba26d3adc0fde5c448c8311d734de8b0901c5ed61e6cf56a200409c1dbb9"
+    }
+  ]
+}
