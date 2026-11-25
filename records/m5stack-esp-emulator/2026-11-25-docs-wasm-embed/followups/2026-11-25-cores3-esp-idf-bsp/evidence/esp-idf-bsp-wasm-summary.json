@@ -1,0 +1,232 @@
+{
+  "evidence_level": "virtual-device validation (browser WASM)",
+  "docs_url": "https://docs.m5stack.com/en/esp_idf/m5cores3/bsp",
+  "documentation_revision": "6ee4f2fb9dca1c671e475407cb709109a699cf1a",
+  "versions": {
+    "esp_idf": "v5.4.1",
+    "source_commit": "4c2820d377d1375e787bcef612f0c32c1427d183",
+    "espressif/m5stack_core_s3": "3.0.2",
+    "lvgl": "9.6.0~1"
+  },
+  "build": {
+    "defaults": {
+      "IDF_TARGET": "esp32s3",
+      "CONFIG_CODEC_I2C_BACKWARD_COMPATIBLE": "n",
+      "CONFIG_ESPTOOLPY_FLASHSIZE": "16MB"
+    },
+    "music_initial": {
+      "state": "FAIL",
+      "app_bytes_hex": "0x136ba0",
+      "partition_bytes_hex": "0x100000",
+      "reason": "Image exceeds the default factory app partition."
+    },
+    "music_control": {
+      "state": "PASS",
+      "partition_option": "Single factory app (large), no OTA",
+      "partition_bytes_hex": "0x180000",
+      "firmware_source_changed_for_recovery": false
+    }
+  },
+  "browser": [
+    {
+      "case": "idf-widgets",
+      "control": false,
+      "status": "FAIL",
+      "raw_sha256": "63f37a559604763d00f1ca2423bbf165e5ad266589554f44a6b3063a8f0cab4b",
+      "raw_bytes": 30990,
+      "session_id_sha256": "081a759ec2372ad1e81c2a14f12a12e46bb8acbe97179d51824bb938c3e9af8b",
+      "started_at": "2026-11-25T09:29:41.836Z",
+      "receipt": {
+        "profile": "cores3-wasm-vm-div8",
+        "clockDivisor": 8,
+        "firmwareInputSha256": "e542eae66097a450c20ef95a4f528697cff6f7aedcdcf26dffba5c705bdd7811",
+        "firmwareRuntimeSha256": "e542eae66097a450c20ef95a4f528697cff6f7aedcdcf26dffba5c705bdd7811",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "serial": [
+        "I (375) app_main: Display LVGL demo",
+        "I (685) main_task: Returned from app_main()"
+      ],
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+        "source": "qemu-display-surface-shared",
+        "sequence": 1
+      },
+      "frame_colors": 1,
+      "observed_ms": 120565,
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "workers": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    },
+    {
+      "case": "idf-benchmark",
+      "control": false,
+      "status": "FAIL",
+      "raw_sha256": "c1a5e36aeda31649ff47d40065f8219983d299bbe0b8505f0697dc39843d02ec",
+      "raw_bytes": 31015,
+      "session_id_sha256": "5b0dbcd3e16aa514f03483dc877ce3c76e195d466a8b8d2773da82f0338e6d71",
+      "started_at": "2026-11-25T09:39:59.085Z",
+      "receipt": {
+        "profile": "cores3-wasm-vm-div8",
+        "clockDivisor": 8,
+        "firmwareInputSha256": "d2734168b12e457ef6ef618cdb2363539d20cf83d029de27ac040202751ce982",
+        "firmwareRuntimeSha256": "d2734168b12e457ef6ef618cdb2363539d20cf83d029de27ac040202751ce982",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "serial": [
+        "I (437) app_main: Display LVGL demo",
+        "I (447) main_task: Returned from app_main()"
+      ],
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+        "source": "qemu-display-surface-shared",
+        "sequence": 1
+      },
+      "frame_colors": 1,
+      "observed_ms": 143012,
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "workers": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    },
+    {
+      "case": "idf-stress",
+      "control": false,
+      "status": "FAIL",
+      "raw_sha256": "0dba154b4506544358161eb9a6a82e3c2fe66be4dc95189c44300307cf08f28e",
+      "raw_bytes": 30970,
+      "session_id_sha256": "98f25ccf3447c96661948d11e7aea8563f2d31568cc933cad6cc0b908c295758",
+      "started_at": "2026-11-25T09:43:22.331Z",
+      "receipt": {
+        "profile": "cores3-wasm-vm-div8",
+        "clockDivisor": 8,
+        "firmwareInputSha256": "0619c45c6fb0b142f825ed7d297897fa8328e44cd362e8b39167d9c2a4746e96",
+        "firmwareRuntimeSha256": "0619c45c6fb0b142f825ed7d297897fa8328e44cd362e8b39167d9c2a4746e96",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "serial": [
+        "I (362) app_main: Display LVGL demo",
+        "I (362) main_task: Returned from app_main()"
+      ],
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+        "source": "qemu-display-surface-shared",
+        "sequence": 1
+      },
+      "frame_colors": 1,
+      "observed_ms": 120629,
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "workers": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    },
+    {
+      "case": "idf-music",
+      "control": false,
+      "status": "FAIL",
+      "raw_sha256": "bc81cea929d183df0210ce44be72baa8f1809033140120f48273dd1995ab5325",
+      "raw_bytes": 31071,
+      "session_id_sha256": "b81079f75f03d37baa2ed46c7d8ce26d50eb77a6aa991e69ac5c87992688154f",
+      "started_at": "2026-11-25T09:51:22.158Z",
+      "receipt": {
+        "profile": "cores3-wasm-vm-div8",
+        "clockDivisor": 8,
+        "firmwareInputSha256": "4234dda971731a8cf70ab440e8f7c7ff2cd4d6df742c2f13cc6a108b6c833a0d",
+        "firmwareRuntimeSha256": "4234dda971731a8cf70ab440e8f7c7ff2cd4d6df742c2f13cc6a108b6c833a0d",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "serial": [
+        "I (551) app_main: Display LVGL demo",
+        "I (781) main_task: Returned from app_main()"
+      ],
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+        "source": "qemu-display-surface-shared",
+        "sequence": 1
+      },
+      "frame_colors": 1,
+      "observed_ms": 142671,
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "workers": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    },
+    {
+      "case": "idf-widgets",
+      "control": true,
+      "status": "FAIL",
+      "raw_sha256": "523e4c16d1d80f7b45cd0db582eecc4ba2773b5011e97b3192ad79078a125c93",
+      "raw_bytes": 31052,
+      "session_id_sha256": "c4ca00a84301c78ac376c2d09779ad11f74806bf1423f73645505daefc558efe",
+      "started_at": "2026-11-25T09:53:57.779Z",
+      "receipt": {
+        "profile": "cores3-wasm-wallclock-candidate",
+        "clockDivisor": 1,
+        "firmwareInputSha256": "e542eae66097a450c20ef95a4f528697cff6f7aedcdcf26dffba5c705bdd7811",
+        "firmwareRuntimeSha256": "e542eae66097a450c20ef95a4f528697cff6f7aedcdcf26dffba5c705bdd7811",
+        "wasmSha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+        "romSha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913"
+      },
+      "serial": [
+        "I (1932) app_main: Display LVGL demo",
+        "I (4292) main_task: Returned from app_main()"
+      ],
+      "frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+        "source": "qemu-display-surface-shared",
+        "sequence": 1
+      },
+      "frame_colors": 1,
+      "observed_ms": 75546,
+      "cleanup": {
+        "exit_code": 0,
+        "iframe_removed": true,
+        "workers": {
+          "all_closed": true,
+          "observed": 6,
+          "live": 0,
+          "acknowledged": true
+        }
+      }
+    }
+  ]
+}

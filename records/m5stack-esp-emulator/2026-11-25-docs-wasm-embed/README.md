@@ -24,3 +24,5 @@
 [UIFlow2 素材、麦克风和 CC1101 复现](followups/2026-11-25-uiflow-editor-and-cc1101/)
 
 [UIFlow2 版本、Arduino 库和 Unit 接线对照](followups/2026-11-25-version-and-unit-controls/)
+
+[CoreS3 ESP-IDF BSP 四个例程](followups/2026-11-25-cores3-esp-idf-bsp/)
