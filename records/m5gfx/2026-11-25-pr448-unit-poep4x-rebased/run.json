@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PASS",
+  "title": "M5GFX #448 review: Unit PoE-P4X rebased onto develop; detector revision gate verified on host",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/448",
+    "repository": "m5stack/M5GFX",
+    "head_commit": "d8d7b959d0292ef2cf9c86f9ce5003cbc011f718",
+    "base_commit": "488d621",
+    "base_ref_tip": "488d621 (Merge pull request #447 from ainyan03/paperdiy_epd_oe_fpc)"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Apple clang; Node 26.13.1; local C++11 board-detect host harness; local Device Service exposes 36 profiles, the only ESP32-P4 profile is tab5, no Unit PoE-P4/P4X model",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #448 OPEN, not draft, author ainyan03, English body, 0 comments and 0 reviews before review; head is a single commit on top of the current develop tip"
+    },
+    {
+      "id": "rebase-integrity",
+      "status": "PASS",
+      "detail": "head d8d7b959d0292ef2cf9c86f9ce5003cbc011f718, parent 488d621 == develop tip; diff is exactly 14 files, +916/-15"
+    },
+    {
+      "id": "conflict-resolution",
+      "status": "PASS",
+      "detail": "board_spec.test.js adds m5unitpoep4x to the unverified list while m5stack_corematrix stays verified, so develop's move of corematrix to verified is not reverted"
+    },
+    {
+      "id": "catalog-entry",
+      "status": "PASS",
+      "detail": "extras/board_spec/boards/m5unitpoep4x.json has legacy_board_id 158 and the same pins/buses/connectors as m5unitpoep4.json; official_name_verified and spec.links are omitted while the product page is 404, which the unverified-list test accepts"
+    },
+    {
+      "id": "detector-membership",
+      "status": "PASS",
+      "detail": "unitpoep4_detector_t::members_ is now {148,158}, closing the #444 finding that no detector returned 158; esp32p4_detector_order.hpp and detector_probe_pins.hpp list both members"
+    },
+    {
+      "id": "revision-gate-source",
+      "status": "PASS",
+      "detail": "revision_desc() uses io::chip_revision() >= 300, the same constant and shape as tab5_family_detector_t; warn_hint_mismatch is the same attempt==0 + hint-in-family + ESP_LOGW pattern"
+    },
+    {
+      "id": "generated-files",
+      "status": "PASS",
+      "detail": "detector_order.json, detector_order_constraints.hpp, esp32p4 pin table (inl/json), esp32p4_board_data.hpp, detector_probe_pins.hpp, fixtures/p4.txt and the editor bundle are all regenerated; M5GFX_UPDATE_SNAPSHOTS=1 leaves the worktree clean"
+    },
+    {
+      "id": "catalog-check",
+      "status": "PASS",
+      "detail": "node cli/spec.js check: 64 board(s), 91 resolved combination(s)"
+    },
+    {
+      "id": "host-cpp-suite",
+      "status": "PASS",
+      "detail": "sh test/board_detect/run.sh on the PR head: C++ test programs: 34 passed"
+    },
+    {
+      "id": "node-suite",
+      "status": "PASS",
+      "detail": "M5UNIFIED_PATH pointing at M5Unified develop 6eb276a: npm test 221 passed, 0 failed, 0 skipped; without that path the pin-table case is skipped, so the pinned run is the meaningful one"
+    },
+    {
+      "id": "m5unified-pin-table",
+      "status": "PASS",
+      "detail": "compare-pintable against M5Unified develop 6eb276a: 56 board(s), 2800 value(s), 4 target(s); M5Unified#448 merged on 2026-11-25T03:07Z so there is no merge-order dependency"
+    },
+    {
+      "id": "revision-gate-host-probe",
+      "status": "PASS",
+      "detail": "code/poep4x_gate_probe.cpp with a bit-banged MDIO slave, 12 cases: revision 0/100/200/299 -> 148, 300/301/399 -> 158; hint 148 on rev 300 -> 158 with warnings=1; hint 158 on rev 0 -> 148 with warnings=1; agreeing hint warnings=0; no PHY response rejected"
+    },
+    {
+      "id": "upstream-ci",
+      "status": "PASS",
+      "detail": "gh pr checks 448: 40/40 pass, including host, Catalog and generated sources, translation unit consistency, ESP32-P4 IDF 5.4.3/6.0.2 and Arduino P4 with postv3/prev3 chip variants"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "no Unit PoE-P4/P4X hardware on this host; PHY link, power sequencing, real chip revision and M5.begin() board id were not observed"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "local Device Service has 36 profiles; the only ESP32-P4 profile is tab5 (ST7121/ST7123) and none models PoE-P4/P4X, so no matching virtual device could be created"
+    },
+    {
+      "id": "in-tree-revision-test",
+      "status": "PARTIAL",
+      "detail": "upstream still has no host test for the PoE-P4/PoE-P4X revision gate or the hint override; the reviewer probe covers it but is not part of the PR (author lists it as a follow-up)"
+    }
+  ],
+  "evidence": [
+    "evidence/pr448.diff",
+    "evidence/node_tests.log",
+    "evidence/host_cpp_tests.log",
+    "evidence/poep4x_gate_probe.log",
+    "evidence/ci_checks.log",
+    "evidence/m5unified_develop.log",
+    "evidence/device_profiles.log"
+  ],
+  "code": [
+    "code/poep4x_gate_probe.cpp",
+    "code/build_and_run.sh"
+  ],
+  "posted_comment": "",
+  "notes": [
+    "PR left OPEN; exactly one English comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Evidence class is host-level test plus code-level verification. Hardware and virtual-device validation are NOT RUN.",
+    "The only remaining gap is in-tree coverage of the revision gate, which the author already lists as a follow-up and which the reviewer probe exercises independently."
+  ]
+}
