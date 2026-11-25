@@ -1,0 +1,195 @@
+{
+  "status": "PASS",
+  "validation": "virtual-device validation",
+  "browser_version": "156.0.8078.4",
+  "entrypoint": "Sealed local Pages export; standard Start and Stop, reference firmware, exact Python in editor, actual position buttons",
+  "documentation_revision": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+  "site_manifest_sha256": "decd60adf628e1defb9d4ae27f0e64ffe75336f451c2e2ddd192cf2feacf594f",
+  "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce",
+  "runtime_wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+  "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "harness_sha256": "217c163774c2bd779401093ed0e962ca8c8b1e5a050fac1b64aea93056a57d5c",
+  "web": {
+    "platform/web/index.html": "61c78cee3b831c8c9df3246c0810300f979c86bd04e682efcd93ce0acad6a1cd",
+    "platform/web/public.js": "2528927412cb1c1b6eddbf90db7fe6289755318dc1b876b728e9664d063fc57b",
+    "platform/web/public-qemu-runtime.js": "1f550343e6e64773cc2c2103c4ef48845824aecba076e0d93f9d2d65e423686e",
+    "platform/web/public-qemu-profiles.js": "5e8e4844b1301865ed446c448990b000b86bfc3057e7322748ff4427bc97d245",
+    "platform/web/public-qemu-engine.js": "90c3c50632ca2de08583b43b26655d8aef4291f1ea104124e80ecb7da4f18806",
+    "platform/web/public-qemu-gnss-example.js": "d24ed8256c8c61b131dab9734ce11fb07369b5c34732cbc2a825d202dae9f6d1"
+  },
+  "cases": [
+    {
+      "case": "cap/lora1262/cardputer_adv_lora1262_cap_gps_example",
+      "official_source_sha256": "81674bd304f8755f1b9c94ee93d1073799c12c7dcc287000d3c7d56cf6b0e489",
+      "editor_source_sha256": "81674bd304f8755f1b9c94ee93d1073799c12c7dcc287000d3c7d56cf6b0e489",
+      "same_guest": true,
+      "status": "PASS",
+      "gps_example": "cardputer-adv-cap-gnss",
+      "serial_arguments": [
+        "pipe:/bridge/uart",
+        "file:/bridge/serial1",
+        "pipe:/bridge/gnss"
+      ],
+      "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+      "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "board": "m5cardputeradv",
+      "clock_divisor": 1,
+      "one_instruction_per_translation_block": true,
+      "before_input_frame_sha256": "a1e3e231aef864a55f9b8a4a266a23d6de424c2f968469bbb44825244907263b",
+      "cleanup": {
+        "exit_code": 0,
+        "worker_targets": 6,
+        "remaining": 0,
+        "iframe_removed": true
+      },
+      "raw_report_sha256": "3533f251f95fb9bf42ea23f4011262e9f1711cbcd00f393ed69c2309fea0e6c9",
+      "raw_report_bytes": 2231190,
+      "raw_doc_cases_sha256": "469f3bf776b0e0fe092ae11790aeb620eac42aa3da312c90fe6ad1cfaaf5265f",
+      "raw_doc_cases_bytes": 26048,
+      "fixes": [
+        {
+          "button": "browserGnssPositionA",
+          "action": "position-a",
+          "nmea_sentences": 6,
+          "uart2_bytes_consumed": 423,
+          "frame_sha256": "16430f96110a31c32add05a164035e1190bc2cddf414101808b64c7980a821fd",
+          "source_frame_sequence": 112,
+          "screen_size": [
+            240,
+            135
+          ],
+          "ocr": [
+            "48.1173",
+            "11.516667",
+            "(12, 35, 19)"
+          ]
+        },
+        {
+          "button": "browserGnssPositionB",
+          "action": "position-b",
+          "nmea_sentences": 6,
+          "uart2_bytes_consumed": 423,
+          "frame_sha256": "ca1879e1c24f3790bf66822e0760131629867a850b176e7d92a42a8d51b6d271",
+          "source_frame_sequence": 144,
+          "screen_size": [
+            240,
+            135
+          ],
+          "ocr": [
+            "-33.859",
+            "151.2099",
+            "(16, 33, 47)"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "cap/lora868/cardputer_adv_lora868_cap_gps_example",
+      "official_source_sha256": "70045eb1167ab8bdb40a47b68bd21b93402cc1cdf8915e1640db696b65802ba9",
+      "editor_source_sha256": "70045eb1167ab8bdb40a47b68bd21b93402cc1cdf8915e1640db696b65802ba9",
+      "same_guest": true,
+      "status": "PASS",
+      "gps_example": "cardputer-adv-cap-gnss",
+      "serial_arguments": [
+        "pipe:/bridge/uart",
+        "file:/bridge/serial1",
+        "pipe:/bridge/gnss"
+      ],
+      "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+      "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "board": "m5cardputeradv",
+      "clock_divisor": 1,
+      "one_instruction_per_translation_block": true,
+      "before_input_frame_sha256": "a1e3e231aef864a55f9b8a4a266a23d6de424c2f968469bbb44825244907263b",
+      "cleanup": {
+        "exit_code": 0,
+        "worker_targets": 6,
+        "remaining": 0,
+        "iframe_removed": true
+      },
+      "raw_report_sha256": "b9ad5cb7b4c2fb874cbcc5b32f635d7546f9c90546511c2624c8ee92dac662bf",
+      "raw_report_bytes": 2231172,
+      "raw_doc_cases_sha256": "938b5fa2ac463dbc4ee25bbcac9904789e0ec758f090d82027e8ae1e2251423d",
+      "raw_doc_cases_bytes": 26035,
+      "fixes": [
+        {
+          "button": "browserGnssPositionA",
+          "action": "position-a",
+          "nmea_sentences": 6,
+          "uart2_bytes_consumed": 423,
+          "frame_sha256": "16430f96110a31c32add05a164035e1190bc2cddf414101808b64c7980a821fd",
+          "source_frame_sequence": 102,
+          "screen_size": [
+            240,
+            135
+          ],
+          "ocr": [
+            "48.1173",
+            "11.516667",
+            "(12, 35, 19)"
+          ]
+        },
+        {
+          "button": "browserGnssPositionB",
+          "action": "position-b",
+          "nmea_sentences": 6,
+          "uart2_bytes_consumed": 423,
+          "frame_sha256": "ca1879e1c24f3790bf66822e0760131629867a850b176e7d92a42a8d51b6d271",
+          "source_frame_sequence": 134,
+          "screen_size": [
+            240,
+            135
+          ],
+          "ocr": [
+            "-33.859",
+            "151.2099",
+            "(16, 33, 47)"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "controllers/cardputer_adv_polling",
+      "official_source_sha256": "fd13a3cd8609d343895f66605c5f6271e4d3793a41acda7ab404a49092fd4e8a",
+      "editor_source_sha256": "fd13a3cd8609d343895f66605c5f6271e4d3793a41acda7ab404a49092fd4e8a",
+      "same_guest": true,
+      "status": "PASS",
+      "gps_example": null,
+      "serial_arguments": [
+        "pipe:/bridge/uart",
+        "file:/bridge/serial1"
+      ],
+      "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+      "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "board": "m5cardputeradv",
+      "clock_divisor": 1,
+      "one_instruction_per_translation_block": true,
+      "before_input_frame_sha256": "d043a2d604f110e5746b2875778ccc2f90f76c0e8056aa8d5dd0cca27501ed2c",
+      "cleanup": {
+        "exit_code": 0,
+        "worker_targets": 6,
+        "remaining": 0,
+        "iframe_removed": true
+      },
+      "raw_report_sha256": "aba323d0ba566ba996a45d6f57021bbe12357bd73433880789ceb7e5fc8b685a",
+      "raw_report_bytes": 2221404,
+      "raw_doc_cases_sha256": "2a5936dfdf90a2607bb8a251caac775e5514fa52135ae7d30b6d72a3a3521b49",
+      "raw_doc_cases_bytes": 23734,
+      "keyboard": {
+        "keys": [
+          "a",
+          "2"
+        ],
+        "guest_output_lines": [
+          "a",
+          "2"
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Both original programs use ESP32-S3 UART2. NMEA is fed through the controller's QEMU character device; the guest's UART FIFO and Python parser produce the screen fields.",
+    "The official ROM and UIFlow2 base responses are replayed from independently hash-matched cached bytes.",
+    "Physical GPIO electrical timing, antenna, location accuracy, hosted deployment and LoRa radio packet exchange were not evaluated in this fix."
+  ]
+}

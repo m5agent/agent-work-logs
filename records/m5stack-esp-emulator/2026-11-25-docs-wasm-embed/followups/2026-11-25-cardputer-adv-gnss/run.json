@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": 244,
+    "base_commit": "b075dd236af8be8f9cfbf72d7890d6907e006ec6",
+    "candidate_commit": "42dd0b8cfb4fc0a259cdde76e0d25a2ae47d9a1c",
+    "uiflow_example_commit": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6"
+  },
+  "hardware": {"device": "Cardputer-Adv", "physical_validation": "NOT RUN"},
+  "firmware": {
+    "uiflow_release": "v2.5.3",
+    "workbench_image_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd"
+  },
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+    "wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+    "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce",
+    "site_manifest_sha256": "decd60adf628e1defb9d4ae27f0e64ffe75336f451c2e2ddd192cf2feacf594f",
+    "browser": "Chromium 156.0.8078.4"
+  },
+  "checks": [
+    {"name": "original browser workbench, both GPS examples remain on initial display", "status": "FAIL", "evidence": "../2026-11-25-uiflow-camera-and-lora/"},
+    {"name": "original LoRa1262 GPS and LoRa868 GPS with both fixed positions, actual UART2 and LCD", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "ordinary Cardputer-Adv workbench omits GNSS and preserves original guest key input", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "all three normal browser engine and pthread cleanups", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "SX1262 radio packet exchange, physical location, native lane, and hosted deployment", "status": "NOT RUN"}
+  ]
+}
