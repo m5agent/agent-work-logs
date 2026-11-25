@@ -1,0 +1,28 @@
+# build summary
+date_utc: 2026-11-25T12:52:34Z
+idf: v6.1 (fff9895c82d744c7237be8847347bdd1b07c6643)
+compiler: xtensa-esp-elf-gcc (crosstool-NG esp-15.2.0_20251204) 15.2.0
+target: esp32s3, flash 8MB dio/80m, CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE, COMPILER_OPTIMIZATION_SIZE
+
+## pre
+app_bin_sha256:    159ee2dfa4f2955bd1776b7f34e4bed40448254e94e9e1ae8f66201e7b1e5de5
+merged_bin_sha256: c47eb6bb3e8dc31fb29ebaa9c27c815acff10a0c0304e5f8a94307a15cb54b01
+merged_size: 454080
+warning_lines: 0
+error_lines: 0
+
+## post
+app_bin_sha256:    90eaefb83332f7997b5ad878891ad53e342a3210b75de6479b4493be100791e8
+merged_bin_sha256: 16b5185a50dcce0fca5fc6701cb62c380e6fe25230e2896d77f0d05fc7f5ef0c
+merged_size: 454336
+warning_lines: 0
+error_lines: 0
+
+## build harness deviation (recorded, not part of the PR)
+- The library sources are the upstream commits listed above; only build glue was added locally:
+  * components/M5Unified/CMakeLists.txt and components/M5GFX/CMakeLists.txt were replaced by a minimal
+    idf_component_register() wrapper, because the upstream legacy register_component() cannot be
+    expanded by ESP-IDF v6.1's component_get_requirements pass (define_property is not scriptable).
+  * idf_component.yml was removed from the local copies so the registry M5GFX 0.3.0 is not fetched;
+    the sibling M5GFX checkout (28d4794, release 0.3.0) is used instead.
+  * No changes to any src/ file in either repository.

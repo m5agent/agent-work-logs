@@ -51,6 +51,8 @@
 
 [CoreS3 QVGA 摄像头 DMA 修复与原例程复验](followups/2026-11-25-cores3-qvga-camera/)
 
+[CoreS3 超声波与继电器原例程自动挂接复验](followups/2026-11-25-cores3-unit-examples/)
+
 ## 试点结论
 
 两款设备可以在启用浏览器跨源隔离的文档预览中演示精选例程。CoreS3 的绘图、触摸和按键，Cardputer-Adv 的显示、键盘和 Quick Start 已有真实来宾画面或输入结果。两款基准例程在桌面 Chrome 的隔离预览中约 12–24 秒到达可操作状态。窄屏使用完整工作台时，启动按钮在内层页面顶部以下约 1,900 CSS px。建议试点提供模拟屏幕和必要的控件，在实际应用画面出现后启用输入。[逐例矩阵与交互观察](followups/2026-11-25-example-coverage/)
@@ -63,6 +65,7 @@
 | Cardputer-Adv WASM 板型探测 | 已合入模拟器主分支。重建 WASM 上复验原显示、键盘和 Quick Start。正式托管版本待更新。[模拟器 PR #256](https://github.com/m5agent/m5stack-esp-emulator/pull/256) |
 | CoreS3 ESP-IDF BSP 显示与 Music | WASM 显示修复已合入。Music 分区与横屏配置已发布中、英、日三语说明，浏览器通过横屏播放器触摸复验。[正式文档](https://docs.m5stack.com/en/esp_idf/m5cores3/bsp) |
 | CoreS3 来宾热复位 | WASM 修复已合入。原 UIFlow2 WDT 和软件复位恢复新控制台代次及程序执行。[模拟器 PR #259](https://github.com/m5agent/m5stack-esp-emulator/pull/259) |
+| CoreS3 超声波与继电器 | 原例程在本地浏览器工作台通过自动挂接、I²C/GPIO、画面与停止验证。[复验](followups/2026-11-25-cores3-unit-examples/) |
 | CoreS3 UIFlow2 ADC、GPIO、WDT 和 UART 例程修正 | 在同一 WASM 路径复验，待上游合并。[UIFlow2 PR #132](https://github.com/m5stack/uiflow-micropython/pull/132) |
 
 ## 后续问题
@@ -71,5 +74,5 @@
 | --- | --- |
 | 正式文档 iframe 和例程配置 | [跨源隔离 #242](https://github.com/m5agent/m5stack-esp-emulator/issues/242)、[microSD 素材 #253](https://github.com/m5agent/m5stack-esp-emulator/issues/253)、[附件、网络对端与 Blockly #255](https://github.com/m5agent/m5stack-esp-emulator/issues/255) |
 | 画面和运行时 | [ADV 托管运行时更新 #245](https://github.com/m5agent/m5stack-esp-emulator/issues/245)、[CoreS3 UIFlow2 版本与裁切 #249](https://github.com/m5agent/m5stack-esp-emulator/issues/249)、[CoreS3 ESP-IDF 黑屏 #250](https://github.com/m5agent/m5stack-esp-emulator/issues/250) |
-| CoreS3 外设和电源管理 | [摄像头 #243](https://github.com/m5agent/m5stack-esp-emulator/issues/243)、[超声波与继电器 #246](https://github.com/m5agent/m5stack-esp-emulator/issues/246)、[播放器与麦克风 #248](https://github.com/m5agent/m5stack-esp-emulator/issues/248)、[定时唤醒 #252](https://github.com/m5agent/m5stack-esp-emulator/issues/252)、[WDT 与软件热复位 #254](https://github.com/m5agent/m5stack-esp-emulator/issues/254) |
+| CoreS3 外设和电源管理 | [播放器与麦克风 #248](https://github.com/m5agent/m5stack-esp-emulator/issues/248) |
 | Cardputer-Adv 外设和串口 | [LoRa 与 GNSS #244](https://github.com/m5agent/m5stack-esp-emulator/issues/244)、[CC1101 #247](https://github.com/m5agent/m5stack-esp-emulator/issues/247)、[USB CDC 按键日志 #257](https://github.com/m5agent/m5stack-esp-emulator/issues/257)、[IR NEC #258](https://github.com/m5agent/m5stack-esp-emulator/issues/258)、[上游 NFC 构造器 #131](https://github.com/m5stack/uiflow-micropython/issues/131) |

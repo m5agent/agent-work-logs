@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #452 review: a bus without pins does nothing; isEnabled() means it has pins",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/452",
+    "repository": "m5stack/M5Unified",
+    "head_commit": "17fc0aecacad235037a1e68a4f5f90c5e3860dbd",
+    "base_commit": "0ca3a4374766e1d09a92342e811bbffb2b991502",
+    "base_ref": "develop",
+    "head_ref": "i2c_bus_without_pins",
+    "commits": [
+      "17fc0aecacad235037a1e68a4f5f90c5e3860dbd I2C_Class: a bus without pins does nothing; isEnabled() means it has pins"
+    ],
+    "follows": {
+      "pull_request": "https://github.com/m5stack/M5Unified/pull/451",
+      "record": "records/m5unified/2026-11-25-pr-451-paperdiy-no-ex-i2c/"
+    }
+  },
+  "hardware": {},
+  "firmware": {
+    "device_profiles": ["paperdiy", "cardputer", "sticks3"],
+    "images": [
+      "pre (develop 0ca3a43) merged sha256 c47eb6bb3e8dc31fb29ebaa9c27c815acff10a0c0304e5f8a94307a15cb54b01",
+      "post (PR head 17fc0ae) merged sha256 16b5185a50dcce0fca5fc6701cb62c380e6fe25230e2896d77f0d05fc7f5ef0c"
+    ],
+    "components": {
+      "M5Unified": "0ca3a43 (pre) / 17fc0ae (post)",
+      "M5GFX": "28d4794 (release 0.3.0)"
+    },
+    "runtime": "local Device Service, QEMU esp32s3, merged image at 0x0/0x8000/0x10000, 8 MB header"
+  },
+  "execution": {
+    "environment": "macOS arm64; ESP-IDF v6.1 (fff9895c) with xtensa-esp-elf 15.2.0; local Device Service with 36 profiles, paperdiy (QEMU m5paperdiy, board 34), cardputer (QEMU m5cardputer, board 14), sticks3 (QEMU m5sticks3, board 26 control)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "OPEN, not draft, MERGEABLE/CLEAN, author ainyan03, English title/body, 4 files +24/-5, 0 comments and 0 reviews before review"
+    },
+    {
+      "id": "isEnabled-pins-only",
+      "status": "PASS",
+      "detail": "I2C_Class.hpp:136 isEnabled() == _pin_sda >= 0 && _pin_scl >= 0; documented in the header; negative port is still a valid software port"
+    },
+    {
+      "id": "guard-coverage",
+      "status": "PASS",
+      "detail": "14 guards at I2C_Class.inl:34..115 cover begin/release/start/restart/stop/write x2/read/writeRegister/readRegister/writeRegister8/readRegister8/bitOn/bitOff; scanID(addr) and scanID(bool*) go through start()+stop()"
+    },
+    {
+      "id": "begin-rtc-imu-switch",
+      "status": "PASS",
+      "detail": "M5Unified.inl:2886/2891/2895/2911 now use isEnabled(); the duplicated pin+port test in M5Unified.hpp:533 is gone and the three pin locals are void-cast for builds without M5Unit display headers"
+    },
+    {
+      "id": "pintable-pairing",
+      "status": "PASS",
+      "detail": "all 55 rows of _pin_table_i2c_ex_in set SDA and SCL together, so the I2C_NUM_MAX port cannot end up with valid pins"
+    },
+    {
+      "id": "virtual-paperdiy-pre",
+      "status": "PASS",
+      "detail": "board 34, In 1/41/42 enabled=1; Ex -1/-1/-1 enabled=0 but begin()=true and a 112-address scan took 107 ms: the stale soft port really ran on the internal pins"
+    },
+    {
+      "id": "virtual-paperdiy-post",
+      "status": "PASS",
+      "detail": "board 34, Ex begin()=false and scan 0 ms; In begin()=true with a 78/79 ms scan that still finds 0x6E, so the internal bus is untouched"
+    },
+    {
+      "id": "virtual-cardputer-pre",
+      "status": "PASS",
+      "detail": "board 14, In port=2 sda=-1 scl=-1 but isEnabled()=true; M5.begin probed RTC/IMU on the missing bus, begin_ms=2165, display drawn"
+    },
+    {
+      "id": "virtual-cardputer-post",
+      "status": "PASS",
+      "detail": "board 14, In isEnabled()=false, probes skipped, begin_ms=1875 (-290 ms), display drawn, Ex (2/1 on port 0) still enabled"
+    },
+    {
+      "id": "virtual-sticks3-control",
+      "status": "PASS",
+      "detail": "board 26 post: In 47/48 and Ex 9/10 both enabled and begun, In scan 3 hits, Ex scan 4 hits, Imu enabled, 1 display: no regression on a board that owns both buses"
+    },
+    {
+      "id": "virtual-bare-bus",
+      "status": "PASS",
+      "detail": "default-constructed I2C_Class (port -1, no pins): begin() true on all three pre runs and false on all three post runs"
+    },
+    {
+      "id": "builds",
+      "status": "PASS",
+      "detail": "ESP-IDF v6.1 esp32s3 builds for both revisions, 0 warnings, 0 errors; local build-only wrapper CMakeLists and no idf_component.yml, no src/ change"
+    },
+    {
+      "id": "hardware-timing-table",
+      "status": "NOT RUN",
+      "detail": "no PaperDIY/Cardputer/Stamp hardware; the author's begin_ms deltas (StampC3/C3U/S3/P4, NanoC6/H2) were not reproduced"
+    },
+    {
+      "id": "pc-sdl-build",
+      "status": "NOT RUN",
+      "detail": "not built; the SDL i2c::init() stub returning success is a source-level fact (lgfx/v1/platforms/sdl/common.hpp)"
+    },
+    {
+      "id": "pinmux-electrical-consequence",
+      "status": "NOT RUN",
+      "detail": "QEMU does not model the GPIO matrix; only the presence of I2C traffic on the stale pins is observed, not its electrical effect"
+    },
+    {
+      "id": "arduino-build",
+      "status": "NOT RUN",
+      "detail": "only ESP-IDF v6.1 was built locally; Arduino CI results were not reproduced"
+    }
+  ],
+  "evidence": [
+    "evidence/serial-paperdiy-pre.txt",
+    "evidence/serial-paperdiy-post.txt",
+    "evidence/serial-cardputer-pre.txt",
+    "evidence/serial-cardputer-post.txt",
+    "evidence/serial-sticks3-post.txt",
+    "evidence/pintable-consistency.txt",
+    "evidence/build-summary.txt",
+    "evidence/device-profiles.txt",
+    "evidence/pr452.diff",
+    "evidence/pr452-status.json"
+  ],
+  "posted_comment": "",
+  "notes": [
+    "PR left OPEN; one English comment; no close, no push, no change to m5stack/M5Unified.",
+    "Primary evidence is virtual-device A/B of the two behaviours the PR claims to fix, plus a sticks3 control for no regression.",
+    "Non-blocking observation 1: isEnabled() no longer checks the port, while _setup_i2c() writes I2C_NUM_MAX for a board without internal pins; today every pin table keeps SDA/SCL paired so the combination is unreachable.",
+    "Non-blocking observation 2: M5Unit OLED autodetection still requires cfg.unit_oled.i2c_port >= 0 (M5Unified.hpp:554), so a software-port Ex bus stays out of that path; pre-existing, not a regression of this PR.",
+    "The paperdiy image was built without PSRAM, so the panel was unavailable (displays=0); the I2C path under test does not depend on it."
+  ]
+}

@@ -1,0 +1,6 @@
+source: m5stack/M5Unified@17fc0ae src/M5Unified.inl _pin_table_i2c_ex_in
+rows: 55
+rows where In or Ex has only one of SDA/SCL unset: 0
+
+checked because isEnabled() now reads pins only: a half-unset pair would make isEnabled()
+true for the I2C_NUM_MAX port that _setup_i2c() writes for a board without an internal bus.

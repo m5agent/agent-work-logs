@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": 246,
+    "base_commit": "915faa6bf9882579e10668c315a5f8e74b2491af",
+    "candidate_commit": "bdfe07fcb0eb462565d25095edf722c2de468b98"
+  },
+  "hardware": {"device": "CoreS3", "physical_validation": "NOT RUN"},
+  "firmware": {
+    "ultrasonic_source_sha256": "195175e6a0aa276d134ec11dec8ca21d969f3a4776386a46f0bc333babf3d5a3",
+    "ultrasonic_image_sha256": "0bb888aeb6fdde9200b7f81ab15ea314d75303ed6917aea58ff2a507c195e221",
+    "relay_source_sha256": "732fd08370c764fddceedd93ba8e9b261bbfccdfe8e8a5fc8d8528b816c908e3",
+    "relay_image_sha256": "a645e2a79947a01227c69ee565545838722ef0ebd7805d15705039bddcef84ca",
+    "unrelated_display_image_sha256": "a88182dc789c1dfe7525ad7ff9a284fd201b6c55375502c895b689cd56af13d6"
+  },
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "profile": "cores3-wasm-vm-div8",
+    "wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+    "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce",
+    "site_manifest_sha256": "de967513b0275fc8f76321735d5bffb90bea6d2eb612d3879fe4dacbdcb57f98",
+    "browser": "Chrome 158.0.8127.37"
+  },
+  "checks": [
+    {"name": "old workbench ultrasonic target absent and original firmware returns fallback", "status": "FAIL", "evidence": "../2026-11-25-arduino-board-probe-and-units/"},
+    {"name": "original ultrasonic distances, real I2C and exact LCD", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "new ultrasonic instance isolated from previous distance; native ArrowRight", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "original relay touch, GPIO state and exact LCD", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "ordinary CoreS3 display without a fixture and all four Worker cleanups", "status": "PASS", "evidence": "evidence/standard-workbench.summary.json"},
+    {"name": "physical sensing, relay loads, electrical, native runtime and hosted deployment", "status": "NOT RUN"}
+  ]
+}
