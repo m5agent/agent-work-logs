@@ -1,0 +1,101 @@
+{
+  "status": "PASS (private diagnostic)",
+  "validation": "virtual-device validation (browser WASM)",
+  "entrypoint": "Actual CoreS3 browser workbench standard default firmware compose, original local .py import, Run, Interrupt and Stop.",
+  "raw_report_sha256": "6234b0801271eb4f46e2cc62540d7c8ac856e6ee3d96d6b921e48f625c955b01",
+  "site_manifest_sha256": "245b516baf2a1eb7e2817d5a3890f3817762eecae1e7b8cd669d83a5dc41e616",
+  "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce",
+  "wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+  "source_lock_sha256": "fe8824d3368543c44451ef380be11faa7484b7802815485299ebb733b1c5c85f",
+  "browser_version": "158.0.8127.37",
+  "harness_sha256": "a0949d834dfc2c31106e3df394e7c2de404c07200b842ceae77478bfa45d72ee",
+  "changed_local_asset": "platform/web/public-qemu-engine.js",
+  "private_engine_sha256": "5ff4e32fffd364867a1773da22862b1e3d0e49e9d5756cad438dd8e9e7d7a6e8",
+  "default_profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+  "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+  "official_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+  "official_base_version": "2.5.3",
+  "source": {
+    "path": "examples/hardware/mic/cores3_mic_example.py",
+    "sha256": "dc6979cf1209ead19085bb97450c91e644bbf45ae28d0d2faa702f189d7e0a8e",
+    "original_source_kept": true
+  },
+  "fixture": {
+    "sha256": "97baea0a56c5b48504ea4b65b41148c6d55dc494d22652b3db7cedb295876efe",
+    "bytes": 32000,
+    "format": "mono s16le",
+    "sample_rate_hz": 16000,
+    "tone_hz": 440
+  },
+  "i2s_audio": {
+    "port": 1,
+    "dmaReads": 1187,
+    "dmaBytes": 607744,
+    "pcmWrites": 1175,
+    "pcmBytes": 601600,
+    "rxWrites": 177,
+    "rxBytes": 90112,
+    "tx_recording_sha256": "b50a5d869e91b74ffcf16580bd3442f07879963e92a94da536b74c592980e6ff",
+    "observed_nonzero_descriptor_blocks": 469,
+    "observed_nonzero_sample_slots": 120064,
+    "observed_trailing_silent_blocks": 706,
+    "tx_format": "mono s16le",
+    "tx_rate_hz": 48000,
+    "tx_tone_hz_from_autocorrelation": 440.3669724770642,
+    "tx_autocorrelation": 0.9999699066542418
+  },
+  "guest_lcd": [
+    {
+      "lcd_text": "label0",
+      "width": 320,
+      "height": 240,
+      "rgb565_sha256": "d900ddea8053295562e2109098d260d2edffe508efb2e48b62d236492c2b2b48",
+      "source_sequence": 30,
+      "png_sha256": "85d643afff522994ce20b9014ca7c63e6cacbd9d3669954ddacf7582d0a558eb"
+    },
+    {
+      "lcd_text": "rec...",
+      "width": 320,
+      "height": 240,
+      "rgb565_sha256": "96b0b6831fad22a194d47450bd1d9d28b954df564aec36791c39995b2e0169be",
+      "source_sequence": 36,
+      "png_sha256": "8c967c2392c646ea226db722a4eb0b2618c753123ee9eb0e1cba2fbda5f5c8a9"
+    },
+    {
+      "lcd_text": "play...",
+      "width": 320,
+      "height": 240,
+      "rgb565_sha256": "5b14f64519a916b7007b97ef900e06f9c34e620d752ba78259def3010d028af4",
+      "source_sequence": 44,
+      "png_sha256": "c17ff4b588a654146ed55fb00be889eb1afe3ef5006608e3cbbcc875913ec176"
+    },
+    {
+      "lcd_text": "done",
+      "width": 320,
+      "height": 240,
+      "rgb565_sha256": "5ba3cd7455c7bba7840dd684bd59e97d8b192bfb0da63eb2f1f68d26afb34941",
+      "source_sequence": 52,
+      "png_sha256": "fc02404e27db9d7033bb0023f7b85e7782a83f6fb8d76503d5526012212ddc0a"
+    }
+  ],
+  "main_console": {
+    "same_session_and_epoch": true,
+    "same_session_guest_restart_count": 0,
+    "uart_transfer": "raw-paste",
+    "pre_interrupt_stdout": "",
+    "deliberate_interrupt_acknowledged": true,
+    "post_interrupt_stderr": ""
+  },
+  "cleanup": {
+    "exit_code": 0,
+    "remaining_worker_targets": 0,
+    "observed_worker_targets": 6,
+    "iframe_removed": true
+  },
+  "scope": [
+    "The modified private engine configures input and output through the existing I2S/GDMA data path. It does not replace guest API behavior.",
+    "The four LCD states were read from the same unmodified original program in the same guest. TX evidence contains an approximately 440 Hz stimulus component.",
+    "Boot files, pinned official firmware and ROM match the default workbench receipt. Remote network delivery, browser audible output and physical transducers are outside this run.",
+    "This run proves functional record/play/interrupt for a fixture. The official Speaker resource packaging, repeat-run behavior, runtime pacing, and production browser audio remain open."
+  ]
+}

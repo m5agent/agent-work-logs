@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "kind": "diagnosis",
+  "source": {"repository": "m5agent/m5stack-esp-emulator", "issue": 248, "baseline": "915faa6bf9882579e10668c315a5f8e74b2491af"},
+  "hardware": {"device": "CoreS3", "physical_validation": "NOT RUN"},
+  "execution": {
+    "date": "2026-11-25",
+    "level": "virtual-device validation",
+    "backend": "browser WASM",
+    "wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+    "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce"
+  },
+  "checks": [
+    {"name": "standard Arduino playback progresses past first segment", "status": "FAIL", "evidence": "evidence/arduino-wav.summary.json"},
+    {"name": "diagnostic Arduino same WASM and seed produces all source PCM via I2S TX", "status": "PASS", "evidence": "evidence/arduino-wav.summary.json"},
+    {"name": "diagnostic Arduino live playback pacing at decoded source rate", "status": "PARTIAL", "evidence": "evidence/arduino-wav.summary.json"},
+    {"name": "diagnostic original UIFlow2 Microphone actual virtual I2S RX, TX, guest LCD and editor interrupt", "status": "PASS", "evidence": "evidence/uiflow-mic.summary.json"},
+    {"name": "standard workbench audible playback, original Speaker fixture, physical audio or hosted deployment", "status": "NOT RUN"}
+  ]
+}

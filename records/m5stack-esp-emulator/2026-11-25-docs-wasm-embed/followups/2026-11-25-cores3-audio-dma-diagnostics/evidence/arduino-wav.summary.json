@@ -1,0 +1,73 @@
+{
+  "validation": "virtual-device validation (browser WASM)",
+  "scope": "Exact unaltered CoreS3 Arduino SD WAV image, same verified media and same locked WASM. Local diagnostic engine enables native completion and stages actual I2S output.",
+  "firmware_sha256": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5",
+  "wasm_sha256": "e350ed7b2f969139803befef12757178049427058a212136868d382dfe5a5f4b",
+  "runtime_manifest_sha256": "180b6070a77ef49c39ae6d38d04941186cf4fa74efd29f75c9b1a4c32a27b6ce",
+  "profile": "cores3-wasm-vm-div8",
+  "seed_sd_card": {
+    "sha256": "93a9550a6d325ec8be0d9710eb7c079af24ba7d5ffb8c5c2db423c26e6fb1233",
+    "bytes": 67108864,
+    "mode": "session-copy"
+  },
+  "seed_wav": {
+    "sha256": "f24b12a40e74bc9f3dc0977f127d55923b7d73183445ad2a9c23f1410f65604c",
+    "bytes": 384044,
+    "sample_rate_hz": 16000,
+    "channels": 1,
+    "format": "s16le",
+    "frames": 192000
+  },
+  "control": {
+    "site_manifest_sha256": "ff061ada1f630c51fd9bce83af7961a85fe7f39df666fa9a04ee853e0fc76449",
+    "raw_report_sha256": "b8ff7badd5795a5482502fd23fa89fb93e7e1ccf887fd8203d1ba1436c1e2cb5",
+    "engine_asset_sha256": "c99a2a71476b8fb05158372b98786d89f4d965bcaa6df5c7bd95b937401352d4",
+    "observation_window_s": 36,
+    "last_native_rgb565_sha256": "9dfcc2759bd633c90648268d0ca0737ff2e95accd680a8742c7cacffd7daef68",
+    "last_onscreen_marker": "Segment 1 (4.3%)",
+    "pcm_capture": "NOT RUN"
+  },
+  "diagnostic": {
+    "site_manifest_sha256": "a63dbaa904c7bf3b806b9cd43256487709fcddcc239f2d7b8d1187fb7876f649",
+    "raw_report_sha256": "2071a428b4122bf5a808e1edd0d0ffb612120aa6fac75d487042336fc9595254",
+    "engine_asset_sha256": "95ac05d8e351edcfabf240fdd40f225e127ec1b76a98a063af509280557e07e6",
+    "changed_site_asset": "platform/web/public-qemu-engine.js",
+    "elapsed_ms": 56227,
+    "last_on_screen": "Segment 6 (25.6%) and part of Segment 11",
+    "last_native_rgb565_sha256": "d0c86fd98bc8e8f46b185065841fa1c54406840115950355f298b8c0a38ae882",
+    "last_native_png_sha256": "c5db704b022290a023ba0aab96199e4deb27c683a5819d8de85257d7ec7feae0",
+    "i2s_port": 1,
+    "i2s_trace": {
+      "dmaReads": 2561,
+      "dmaBytes": 1311232,
+      "pcmWrites": 2551,
+      "pcmBytes": 1306112,
+      "rxWrites": 0,
+      "rxBytes": 0
+    },
+    "pcm_sha256": "51d335d82cf9e67193a0ea0f38a8ee480dd24e33bcb4c034beffc89f113ddb55",
+    "pcm_bytes": 1306112,
+    "pcm_sample_format": "s16le mono",
+    "pcm_sample_rate_hz": 48000,
+    "maximum_absolute_pcm_value": 254,
+    "segments": 24,
+    "regular_segment_descriptors": 96,
+    "last_segment_descriptors": 42,
+    "active_output_frames": 576000,
+    "trailing_silent_descriptors": 53,
+    "waveform_minimum_segment_correlation": 0.9999947432097919,
+    "typical_host_descriptor_interval_ms": 19.875,
+    "descriptor_payload_duration_ms_at_pcm_rate": 5.333333333333333
+  },
+  "cleanup": {
+    "exit_code": 0,
+    "observed_worker_targets": 6,
+    "remaining_worker_targets": 0,
+    "iframe_removed": true
+  },
+  "limits": [
+    "The original framebuffer does not show all late lines because they extend below the screen. The 24 matched PCM segments prove the payload traversed the actual I2S path.",
+    "PCM data is useful for diagnostic playback or export. This private runner did not attach a production Web Audio output.",
+    "Speaker and microphone issue paths and physical audio require separate evidence."
+  ]
+}
