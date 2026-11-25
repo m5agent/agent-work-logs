@@ -98,9 +98,10 @@ C 与 B 只差 M5Unified 的 base/PR，说明失败由本 PR 引入；D 说明�
 
 无代码写入、无上游改动，因此无回滚动作。评审结论仅覆盖上表 build 层与源码事实。
 
-## 拟发布回复（英文，与条目语言一致）
+## 已发布回复（英文，与条目语言一致）
 
-见 `review-comment.txt`；发布后回填 URL。
+- <https://github.com/m5stack/M5Unified/pull/448#issuecomment-7151534501>
+- 正文见 `evidence/review-comment.txt`。
 
 ## 后续
 

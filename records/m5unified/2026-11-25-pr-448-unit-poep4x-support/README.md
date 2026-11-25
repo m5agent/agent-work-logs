@@ -81,3 +81,9 @@ Display Out 挂载条件，四处都与 148 的既有实现一一对应。在 M5
 - Arduino/PlatformIO 依赖解析（`library.properties` / `library.json` 的 >=0.3.0）
   未单独跑构建；只用 ESP-IDF 组件管理器复现了同一下限问题。
 - 合并、关闭、approve、push 或修改他人仓库：`NOT RUN`（只发一条评论）。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5Unified/pull/448#issuecomment-7151534501>
+  （1 条，英文；PR 仍 OPEN，未 close、未 approve、未 push、未改他人仓库）
+- 正文见 `evidence/review-comment.txt`。

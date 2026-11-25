@@ -1,0 +1,24 @@
+URL: https://github.com/m5stack/M5Unified/pull/448#issuecomment-7151534501
+Posted: 2026-11-25 (UTC), single comment, English (PR title/body language)
+
+Thanks. I compared this with the existing `board_M5UnitPoEP4` handling and built `examples/Test/build_test` for esp32p4 against both M5GFX develop and the released M5GFX (ESP-IDF v6.1). The four additions mirror board 148 one-for-one — I2C 1/0 and 54/53, GPIO45 input and rawstate, GPIO15-17 in `_powerOff()`, and the display-out attach — and I found no copy error. Two things decide whether this becomes usable support, though:
+
+**1. Nothing sets `_board` to `board_M5UnitPoEP4X` today.** On M5GFX develop, `board_M5UnitPoEP4X = 158` exists only as an enum (`src/lgfx/boards.hpp:87`). There is no `board_desc_t` or detector for it — `src/board_detect/m5/esp32p4.inl` still describes only `board_M5UnitPoEP4` (148) — and I could not find an open M5GFX PR adding one. `M5.begin()` therefore cannot return 158, so every new branch here is reachable only through `-DBOARD_ID=158` or `cfg.fallback_board = board_M5UnitPoEP4X`. Is that the intended usage? If the unit should be recognised out of the box, the M5GFX detector needs to land as well.
+
+**2. The released M5GFX does not contain the ID, and the p4 build fails against it.** `board_M5UnitPoEP4X` is on M5GFX develop only; tag `0.3.0` lacks it, while `library.json`, `library.properties` and `idf_component.yml` all allow `M5GFX >= 0.3.0`. Building `examples/Test/build_test` for esp32p4:
+
+| M5Unified | M5GFX | result |
+|---|---|---|
+| this PR `6167c92` | develop `e7cae68` | build OK (1148 steps, app 432,080 B) |
+| this PR `6167c92` | 0.3.0 `28d4794` | 4 errors: `'board_M5UnitPoEP4X' is not a member of 'm5::board_t'` (`M5Unified.inl:146/2071/3230`, `Power_Class.inl:2424`) |
+| develop `dae3b5d` | 0.3.0 `28d4794` | build OK |
+
+The same failure appears without any local M5GFX: the IDF component manager resolves `m5stack/m5gfx 0.3.0` from the `>=0.3.0` floor and compilation stops on the same four lines. So this is not a syntax problem in the PR, but the release order matters — an M5Unified that references 158 needs an M5GFX release carrying it (and probably a raised floor), otherwise esp32p4 users of the released libraries break. CI stays green because the workflow clones M5GFX develop by branch name, so it does not cover this pairing.
+
+Minor: `examples/Basic/HowToUse/HowToUse.ino:329` still maps only `board_M5UnitPoEP4` to a name; adding the X id there keeps the board log readable.
+
+**Evidence class:** code-level verification (source comparison plus four esp32p4 builds).
+
+**Not covered:** hardware validation — no PoE-P4X unit here, so display-out attach, the GPIO45 button and the GPIO15-17 power-off behaviour were not observed. Virtual-device validation — the local Device Service has 36 profiles and none is PoE-P4/PoE-P4X (its only ESP32-P4 profile is `tab5`), so these paths cannot be exercised in QEMU. I also could not verify the copied pin assignments against documentation: `docs.m5stack.com` has no `Unit_PoE-P4X` page yet (404), so please confirm they match the P4X schematic.
+
+Work-log record (Chinese; same source and build evidence, with the same limits): https://github.com/m5agent/agent-work-logs/blob/3a297ae4309de5e983c3e638c77a440130a7d872/records/m5unified/2026-11-25-pr-448-unit-poep4x-support/README.md
