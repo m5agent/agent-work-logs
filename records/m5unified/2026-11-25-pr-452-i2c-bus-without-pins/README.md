@@ -5,7 +5,8 @@
   真实硬件计时表与 PC/SDL 构建为 `NOT RUN`）
 - 工作类型：`pr-review`
 - 条目：[m5stack/M5Unified#452](https://github.com/m5stack/M5Unified/pull/452)，
-  作者 `ainyan03`，英文，OPEN；评审前 comments / reviews 均为 0
+  作者 `ainyan03`，英文，OPEN；评审前 comments / reviews 均为 0；
+  评审评论：https://github.com/m5stack/M5Unified/pull/452#issuecomment-7163058262
 - 源码：`m5stack/M5Unified` PR head `17fc0aecacad235037a1e68a4f5f90c5e3860dbd`
   （base `0ca3a4374766e1d09a92342e811bbffb2b991502` = develop，即已合并的 #451）；
   改动 4 文件 +24/-5
