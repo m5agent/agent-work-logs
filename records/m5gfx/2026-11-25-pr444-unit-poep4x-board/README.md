@@ -59,3 +59,8 @@
   （P4 只有 `tab5`），无法构建/启动对应虚拟设备。
 - 未验证真实 PoE-P4X 上的自动识别结果与 `getBoardName()` 输出；标题映射只做了源码核对。
 - 上游 CI 其余 38 项 SUCCESS 来自 GitHub 状态汇总，未在本机逐项复跑。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/444#issuecomment-7154685783>
+  （1 条，英文，与条目语言一致；PR 仍 OPEN，未 close、未 push、未改他人仓库）
