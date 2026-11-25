@@ -10,3 +10,4 @@
 - [对照、源和复现步骤](report.md)
 - [结构化执行记录](run.json)
 - [来宾原生帧、实际 USB 及清理](evidence/landscape.summary.json)
+- [三语官网发布后回读](evidence/delivery.summary.json)
