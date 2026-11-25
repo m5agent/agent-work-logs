@@ -1,0 +1,14 @@
+--- a/modules/tca8418-1.0/tca8418_fsm.c
++++ b/modules/tca8418-1.0/tca8418_fsm.c
+@@ -137,7 +137,10 @@
+ 
+     case ST_WAIT_ACTIVE_LEAVE:
+         if (e == EV_TIMEOUT_300) {
+-            transition(me, ST_ONESHOT);
++            if (me->used)
++                consume_layer(me);
++            else
++                transition(me, ST_ONESHOT);
+         } else if (e == EV_OTHER_KEY_PRES) {
+             me->used = 1;
+         } else if (e == EV_OTHER_KEY_RELE && me->used) {

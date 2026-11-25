@@ -1,0 +1,37 @@
+== tap, fast ordinary key (press is invisible pre-fix)
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_OTHER_KEY_RELE  -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  FINAL: ONESHOT layer=1
+
+== chord (key up before modifier up)
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_OTHER_KEY_RELE  -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  FINAL: ONESHOT layer=1
+
+== plain tap/pause/one key
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  EV_OTHER_KEY_RELE  -> IDLE               layer=0
+  FINAL: IDLE layer=0
+
+== hold
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_TIMEOUT_300     -> HOLD               layer=1
+  EV_KEY_RELE        -> IDLE               layer=0
+  FINAL: IDLE layer=0
+
+== double-tap lock + unlock
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_KEY_PRES        -> LOCKED             layer=1
+  EV_KEY_RELE        -> LOCKED_WAIT_LEAVE  layer=1
+  EV_KEY_PRES        -> LOCKED_LEAVE       layer=1
+  EV_KEY_RELE        -> IDLE               layer=0
+  FINAL: IDLE layer=0
+

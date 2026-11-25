@@ -1,0 +1,154 @@
+### pre-fix main
+== tap, fast ordinary key (press is invisible pre-fix)
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_OTHER_KEY_RELE  -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  FINAL: ONESHOT layer=1
+
+== chord (key up before modifier up)
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_OTHER_KEY_RELE  -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  FINAL: ONESHOT layer=1
+
+== plain tap/pause/one key
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_TIMEOUT_300     -> ONESHOT            layer=1
+  EV_OTHER_KEY_RELE  -> IDLE               layer=0
+  FINAL: IDLE layer=0
+
+== hold
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_TIMEOUT_300     -> HOLD               layer=1
+  EV_KEY_RELE        -> IDLE               layer=0
+  FINAL: IDLE layer=0
+
+== double-tap lock + unlock
+  EV_KEY_PRES        -> ACTIVE             layer=1
+  EV_KEY_RELE        -> WAIT_ACTIVE_LEAVE  layer=1
+  EV_KEY_PRES        -> LOCKED             layer=1
+  EV_KEY_RELE        -> LOCKED_WAIT_LEAVE  layer=1
+  EV_KEY_PRES        -> LOCKED_LEAVE       layer=1
+  EV_KEY_RELE        -> IDLE               layer=0
+  FINAL: IDLE layer=0
+
+### PR head e7f7a18
+== tap Sym, key press+release inside 300ms (reported bug)
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT_ACTIVE_LEAVE  layer=1 used=1
+  EV_OTHER_KEY_RELE -> IDLE               layer=0 used=1
+  EV_TIMEOUT_300 -> IDLE               layer=0 used=1
+  FINAL: state=IDLE layer=0 used=1 pres=1 rele=1
+
+== chord in ACTIVE (key up before modifier up)
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_OTHER_KEY_PRES -> ACTIVE             layer=1 used=1
+  EV_OTHER_KEY_RELE -> ACTIVE             layer=1 used=1
+  EV_KEY_RELE    -> IDLE               layer=0 used=1
+  EV_TIMEOUT_300 -> IDLE               layer=0 used=1
+  FINAL: state=IDLE layer=0 used=1 pres=2 rele=2
+
+== chord, modifier up before key up
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_OTHER_KEY_PRES -> ACTIVE             layer=1 used=1
+  EV_KEY_RELE    -> IDLE               layer=0 used=1
+  EV_OTHER_KEY_RELE -> IDLE               layer=0 used=1
+  EV_TIMEOUT_300 -> IDLE               layer=0 used=1
+  FINAL: state=IDLE layer=0 used=1 pres=3 rele=3
+
+== plain tap, pause, one key (unchanged one-shot)
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_TIMEOUT_300 -> ONESHOT            layer=1 used=0
+  EV_OTHER_KEY_PRES -> ONESHOT            layer=1 used=0
+  EV_OTHER_KEY_RELE -> IDLE               layer=0 used=0
+  FINAL: state=IDLE layer=0 used=0 pres=4 rele=4
+
+== tap and keep waiting (one-shot armed)
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_TIMEOUT_300 -> ONESHOT            layer=1 used=0
+  FINAL: state=ONESHOT layer=1 used=0 pres=5 rele=4
+
+== hold modifier (>=300ms)
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_TIMEOUT_300 -> HOLD               layer=1 used=0
+  EV_KEY_RELE    -> IDLE               layer=0 used=0
+  FINAL: state=IDLE layer=0 used=0 pres=6 rele=5
+
+== double tap lock, then tap to unlock
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_KEY_PRES    -> LOCKED             layer=1 used=0
+  EV_KEY_RELE    -> LOCKED_WAIT_LEAVE  layer=1 used=0
+  EV_KEY_PRES    -> LOCKED_LEAVE       layer=1 used=0
+  EV_KEY_RELE    -> IDLE               layer=0 used=0
+  FINAL: state=IDLE layer=0 used=0 pres=7 rele=6
+
+== tap, key pressed and HELD past 300ms, then 2nd key
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT_ACTIVE_LEAVE  layer=1 used=1
+  EV_TIMEOUT_300 -> ONESHOT            layer=1 used=1
+  EV_OTHER_KEY_PRES -> ONESHOT            layer=1 used=1
+  EV_OTHER_KEY_RELE -> IDLE               layer=0 used=1
+  FINAL: state=IDLE layer=0 used=1 pres=8 rele=7
+
+== key already down before modifier tap (roll)
+  EV_OTHER_KEY_PRES -> IDLE               layer=0 used=0
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_TIMEOUT_300 -> ONESHOT            layer=1 used=0
+  EV_OTHER_KEY_RELE -> IDLE               layer=0 used=0
+  FINAL: state=IDLE layer=0 used=0 pres=9 rele=8
+
+== locked, ordinary key release in LOCKED_WAIT_LEAVE
+  EV_KEY_PRES    -> ACTIVE             layer=1 used=0
+  EV_KEY_RELE    -> WAIT_ACTIVE_LEAVE  layer=1 used=0
+  EV_KEY_PRES    -> LOCKED             layer=1 used=0
+  EV_KEY_RELE    -> LOCKED_WAIT_LEAVE  layer=1 used=0
+  EV_OTHER_KEY_PRES -> LOCKED_WAIT_LEAVE  layer=1 used=0
+  EV_OTHER_KEY_RELE -> LOCKED_WAIT_LEAVE  layer=1 used=0
+  FINAL: state=LOCKED_WAIT_LEAVE layer=1 used=0 pres=10 rele=8
+
+### residual case, PR head
+== tap, single key held past 300ms, then next key
+  EV_KEY_PRES      -> ACTIVE     layer=1 used=0
+  EV_KEY_RELE      -> WAIT       layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT       layer=1 used=1
+  EV_TIMEOUT_300   -> ONESHOT    layer=1 used=1
+  EV_OTHER_KEY_PRES -> ONESHOT    layer=1 used=1
+  FINAL ONESHOT layer=1
+
+== tap while pre-held key down, 2nd key, timeout, next key
+  EV_OTHER_KEY_PRES -> IDLE       layer=0 used=0
+  EV_KEY_PRES      -> ACTIVE     layer=1 used=0
+  EV_KEY_RELE      -> WAIT       layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT       layer=1 used=1
+  EV_TIMEOUT_300   -> ONESHOT    layer=1 used=1
+  EV_OTHER_KEY_PRES -> ONESHOT    layer=1 used=1
+  FINAL ONESHOT layer=1
+
+### residual case, PR head + WAIT timeout guard
+== tap, single key held past 300ms, then next key
+  EV_KEY_PRES      -> ACTIVE     layer=1 used=0
+  EV_KEY_RELE      -> WAIT       layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT       layer=1 used=1
+  EV_TIMEOUT_300   -> IDLE       layer=0 used=1
+  EV_OTHER_KEY_PRES -> IDLE       layer=0 used=1
+  FINAL IDLE layer=0
+
+== tap while pre-held key down, 2nd key, timeout, next key
+  EV_OTHER_KEY_PRES -> IDLE       layer=0 used=0
+  EV_KEY_PRES      -> ACTIVE     layer=1 used=0
+  EV_KEY_RELE      -> WAIT       layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT       layer=1 used=1
+  EV_TIMEOUT_300   -> IDLE       layer=0 used=1
+  EV_OTHER_KEY_PRES -> IDLE       layer=0 used=1
+  FINAL IDLE layer=0
+

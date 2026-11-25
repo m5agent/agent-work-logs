@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/m5stack-linux-dtoverlays #19: fast key after a Sym/Aa/Fn tap consumes the layer; reported cases fixed, one pre-existing timeout window remains",
+  "source": {
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/19",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "head_commit": "e7f7a18650977fa99971f1e82d741ba5058e7fdc",
+    "author": "prokrypt",
+    "changed_files": 2,
+    "additions": 54,
+    "deletions": 7,
+    "prior_comments": 0,
+    "prior_reviews": 0,
+    "state": "OPEN",
+    "mergeable_state": "clean",
+    "comment": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "file": "modules/tca8418-1.0/tca8418_keypad_m5stack.ko",
+    "sha256": ""
+  },
+  "execution": {
+    "environment": "macOS arm64; no Cardputer Zero hardware; local Device Service cardputer-zero profile supported=false creatable=false backend_ready=false (Linux ARM64 backend, __missing_qemu__/__missing_rom__); no Linux ARM64 kernel headers or cross toolchain for a module rebuild",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "patch_scope",
+      "status": "PASS",
+      "evidence": "2 files, +54/-7, single commit e7f7a18: EV_OTHER_KEY_PRES + per-instance used, consume_layer(), WAIT dispatch on other-key release, timer update only on state change; evidence/pr-metadata.txt"
+    },
+    {
+      "name": "bug_reproduced_on_main",
+      "status": "PASS",
+      "evidence": "host harness, pre-fix fsm: tap+fast key -> ONESHOT layer=1; chord (key up first) -> ONESHOT layer=1; evidence/host-harness-pre-fix.txt"
+    },
+    {
+      "name": "fix_fast_tap",
+      "status": "PASS",
+      "evidence": "KEY_PRES,KEY_RELE,OTHER_KEY_PRES,OTHER_KEY_RELE,TIMEOUT -> IDLE layer=0; evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "fix_chord_both_release_orders",
+      "status": "PASS",
+      "evidence": "KEY_PRES,OTHER_KEY_PRES,OTHER_KEY_RELE,KEY_RELE -> IDLE; KEY_PRES,OTHER_KEY_PRES,KEY_RELE,OTHER_KEY_RELE -> IDLE; evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "no_regression_oneshot_hold_lock_roll",
+      "status": "PASS",
+      "evidence": "plain tap/pause/single-key, tap-and-wait, hold, double-tap lock/unlock, pre-held-key roll and locked-key-release outputs identical to main; evidence/host-harness.txt"
+    },
+    {
+      "name": "residual_wait_timeout_ignores_used",
+      "status": "FAIL",
+      "evidence": "PR head: KEY_PRES,KEY_RELE,OTHER_KEY_PRES,TIMEOUT_300 -> ONESHOT layer=1, so a key held past 300 ms (or still-held sibling key gating the all-released check) re-arms the layer; same result on main, pre-existing, not a regression; evidence/host-harness-residual-pr-head.txt"
+    },
+    {
+      "name": "residual_guard_proposal",
+      "status": "PASS",
+      "evidence": "adding 'if (me->used) consume_layer(me);' to the WAIT timeout branch yields IDLE layer=0 for both residual sequences and leaves all baseline sequences identical; patches/0002; evidence/host-harness-residual-guarded.txt"
+    },
+    {
+      "name": "used_lifetime",
+      "status": "PASS",
+      "evidence": "used is cleared on ST_ACTIVE entry and the object comes from devm_kzalloc() (tca8418_keypad_m5stack.c:767), so it starts at 0 and cannot leak across activation cycles"
+    },
+    {
+      "name": "timer_cancel_same_ordered_wq",
+      "status": "REVIEW",
+      "evidence": "new tca8418_fsm_update_timer() call in the other-key-release path only fires on a state change and cancels an armed 300 ms work; keypad_data->wq is alloc_ordered_workqueue() (tca8418_keypad_m5stack.c:777), so the timeout work cannot execute concurrently with the IRQ work. Source-level reasoning only; no IRQ stress test."
+    },
+    {
+      "name": "kernel_build_w1",
+      "status": "NOT RUN",
+      "evidence": "no Linux ARM64 kernel headers or cross toolchain on this host; the author reports an out-of-tree arm64 6.18 W=1 build, not re-run here"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer Zero hardware on this host; the author's on-device result is self-reported and was not independently reproduced"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "cardputer-zero profile supported=false creatable=false backend_ready=false, missing __missing_qemu__/__missing_rom__, reason 'CardputerZero uses a separate Linux backend'; evidence/local-profile-summary.txt"
+    },
+    {
+      "name": "timing_and_irq_batching",
+      "status": "NOT RUN",
+      "evidence": "harness drives ordered events; real 300 ms timer jitter, interrupt batch ordering and cancel/expiry races are unmeasured"
+    },
+    {
+      "name": "input_led_side_effects",
+      "status": "NOT RUN",
+      "evidence": "stubbed emit_*/led_* only count calls; real input event ordering and LED state are not observed"
+    },
+    {
+      "name": "ci_build",
+      "status": "NOT RUN",
+      "evidence": "the only PR check workflow is the WeCom digest forwarder; no kernel module build job in the repository"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/host-harness.txt",
+      "description": "full harness output: pre-fix baseline, PR head baseline, residual case on PR head, residual case with the WAIT timeout guard"
+    },
+    {
+      "path": "evidence/host-harness-pr-head.txt",
+      "description": "10 baseline sequences on the PR head FSM"
+    },
+    {
+      "path": "evidence/host-harness-pre-fix.txt",
+      "description": "same sequences on the main FSM, showing the bug"
+    },
+    {
+      "path": "evidence/host-harness-residual-pr-head.txt",
+      "description": "two sequences where a held key or the all-released gate leaves used set when the 300 ms timeout fires"
+    },
+    {
+      "path": "evidence/host-harness-residual-guarded.txt",
+      "description": "same two sequences with the proposed timeout guard, ending IDLE layer=0"
+    },
+    {
+      "path": "evidence/pr-metadata.txt",
+      "description": "PR state, author, scope, base/head, commits, comments/reviews, checks"
+    },
+    {
+      "path": "evidence/pr-scope.txt",
+      "description": "diffstat for main..pr19"
+    },
+    {
+      "path": "evidence/local-profile-summary.txt",
+      "description": "redacted local Device Service cardputer-zero profile fields"
+    }
+  ],
+  "notes": [
+    "Evidence class is host-level test plus code-level verification; no virtual-device or hardware run was possible on this host.",
+    "The residual WAIT+TIMEOUT+used window is pre-existing on main and strictly narrowed by this PR; it was reported as a non-blocking observation with a one-line proposal, not as a merge blocker.",
+    "No upstream branch was pushed, no PR was closed, and no other repository was modified; one English review comment was posted."
+  ]
+}

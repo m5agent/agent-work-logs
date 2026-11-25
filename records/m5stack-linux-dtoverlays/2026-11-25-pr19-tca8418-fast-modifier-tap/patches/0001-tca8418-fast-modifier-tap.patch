@@ -1,0 +1,173 @@
+From e7f7a18650977fa99971f1e82d741ba5058e7fdc Mon Sep 17 00:00:00 2001
+From: prokrypt <prokrypt@edited.us>
+Date: Wed, 25 Nov 2026 14:09:32 -0800
+Subject: [PATCH] tca8418: a key typed right after a modifier tap consumes the
+ layer
+
+On the Cardputer Zero, a key pressed within 300ms of tapping Sym (or
+Aa/Fn) typed its symbol, but the layer then stayed on for the next key
+too. Same for a fast chord (modifier down, key, modifier up in 300ms).
+
+The key's release only reached modifiers already in ST_ONESHOT, so the
+FSM in ST_WAIT_ACTIVE_LEAVE never saw it and the 300ms timeout still
+armed a one-shot.
+
+Ordinary key presses now send EV_OTHER_KEY_PRES, which marks a modifier
+in ACTIVE or WAIT_ACTIVE_LEAVE as used. ACTIVE goes idle on its own
+release when used; WAIT_ACTIVE_LEAVE goes idle on the key's release when
+used. Keys already down before the modifier press do not count, so
+rolling off a held key into a tap still arms the one-shot and the
+double-tap lock. Hold, lock and plain one-shot are unchanged. The timer
+is only updated when a release changed state.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ modules/tca8418-1.0/tca8418_fsm.c            | 39 ++++++++++++++++++--
+ modules/tca8418-1.0/tca8418_keypad_m5stack.c | 22 +++++++++--
+ 2 files changed, 54 insertions(+), 7 deletions(-)
+
+diff --git a/modules/tca8418-1.0/tca8418_fsm.c b/modules/tca8418-1.0/tca8418_fsm.c
+index 5ff01d7..5c8e913 100644
+--- a/modules/tca8418-1.0/tca8418_fsm.c
++++ b/modules/tca8418-1.0/tca8418_fsm.c
+@@ -20,6 +20,7 @@ typedef enum {
+     EV_KEY_RELE,
+     EV_OTHER_KEY_RELE,
+     EV_TIMEOUT_300,
++    EV_OTHER_KEY_PRES,
+     EV_COUNT
+ } Event;
+ 
+@@ -29,6 +30,7 @@ typedef struct {
+     State state;       // Current state
+     /* Per-device timer counters or private data can be added here later. */
+ 	int layer_active;
++	int used;          // an ordinary key was pressed after this modifier's press (so it went through the layer)
+ 	void *ctx;
+ } tca8418_t;
+ 
+@@ -47,6 +49,7 @@ static void state_entry(tca8418_t *me, State s)
+ {
+     switch (s) {
+     case ST_ACTIVE:
++        me->used = 0;
+         enable_layer(me);
+         emit_key_pres_status(me);
+         led_ON(me);
+@@ -62,21 +65,40 @@ static void state_entry(tca8418_t *me, State s)
+     }
+ }
+ 
++static void leave_layer(tca8418_t *me)
++{
++    disable_layer(me);
++    emit_key_release_status(me);
++    led_OFF(me);
++}
++
+ static void state_exit(tca8418_t *me, State s)
+ {
+     switch (s) {
+     case ST_ONESHOT:
+     case ST_HOLD:
+     case ST_LOCKED_LEAVE:
+-        disable_layer(me);
+-        emit_key_release_status(me);
+-        led_OFF(me);
++        leave_layer(me);
+         break;
+     default:
+         break;
+     }
+ }
+ 
++/*
++ * A key pressed while the modifier was held, or within the 300ms after its
++ * release, went through the layer and used it up: go idle instead of arming a
++ * one-shot for the next key (the "Sym stays on" bug). Keys already down before
++ * the modifier was pressed do not count (used is only set by EV_OTHER_KEY_PRES).
++ * ACTIVE and WAIT_ACTIVE_LEAVE have no exit actions, so leaving them this way
++ * skips nothing.
++ */
++static void consume_layer(tca8418_t *me)
++{
++    leave_layer(me);
++    me->state = ST_IDLE;
++}
++
+ /* ================== State transition ================== */
+ static void transition(tca8418_t *me, State next)
+ {
+@@ -102,7 +124,12 @@ static void tca8418_dispatch(tca8418_t * const me, Event e)
+ 
+     case ST_ACTIVE:
+         if (e == EV_KEY_RELE) {
+-            transition(me, ST_WAIT_ACTIVE_LEAVE);
++            if (me->used)
++                consume_layer(me);
++            else
++                transition(me, ST_WAIT_ACTIVE_LEAVE);
++        } else if (e == EV_OTHER_KEY_PRES) {
++            me->used = 1;
+         } else if (e == EV_TIMEOUT_300) {
+             transition(me, ST_HOLD);
+         }
+@@ -111,6 +138,10 @@ static void tca8418_dispatch(tca8418_t * const me, Event e)
+     case ST_WAIT_ACTIVE_LEAVE:
+         if (e == EV_TIMEOUT_300) {
+             transition(me, ST_ONESHOT);
++        } else if (e == EV_OTHER_KEY_PRES) {
++            me->used = 1;
++        } else if (e == EV_OTHER_KEY_RELE && me->used) {
++            consume_layer(me);
+         } else if (e == EV_KEY_PRES) {
+             transition(me, ST_LOCKED);
+         }
+diff --git a/modules/tca8418-1.0/tca8418_keypad_m5stack.c b/modules/tca8418-1.0/tca8418_keypad_m5stack.c
+index 86ba80d..93efb30 100644
+--- a/modules/tca8418-1.0/tca8418_keypad_m5stack.c
++++ b/modules/tca8418-1.0/tca8418_keypad_m5stack.c
+@@ -461,14 +461,29 @@ static void tca8418_dispatch_other_key_release(
+ {
+ 	int i;
+ 
++	/* Ends ONESHOT, and WAIT_ACTIVE_LEAVE once a key went through the layer. */
+ 	for (i = 0; i < 3; i++) {
+-		if (keypad_data->_key[i]->fsm.state != ST_ONESHOT)
++		tca8418_t *fsm = &keypad_data->_key[i]->fsm;
++		State before = fsm->state;
++
++		if (before != ST_ONESHOT && before != ST_WAIT_ACTIVE_LEAVE)
+ 			continue;
+-		tca8418_dispatch(&keypad_data->_key[i]->fsm,
+-					 EV_OTHER_KEY_RELE);
++		tca8418_dispatch(fsm, EV_OTHER_KEY_RELE);
++		if (fsm->state != before)
++			tca8418_fsm_update_timer(keypad_data, fsm);
+ 	}
+ }
+ 
++/* An ordinary key went down: modifiers pressed before it count as used. */
++static void tca8418_dispatch_other_key_press(
++		struct tca8418_keypad *keypad_data)
++{
++	int i;
++
++	for (i = 0; i < 3; i++)
++		tca8418_dispatch(&keypad_data->_key[i]->fsm, EV_OTHER_KEY_PRES);
++}
++
+ static void tca8418_process_ordinary_key(struct tca8418_keypad *keypad_data,
+ 						u8 code, bool pressed)
+ {
+@@ -492,6 +507,7 @@ static void tca8418_process_ordinary_key(struct tca8418_keypad *keypad_data,
+ 
+ 		record->keycode = keycode;
+ 		record->pressed = true;
++		tca8418_dispatch_other_key_press(keypad_data);
+ 	} else {
+ 		if (!record->pressed)
+ 			return;
+-- 
+2.55.0
+

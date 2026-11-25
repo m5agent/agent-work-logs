@@ -1,0 +1,17 @@
+== tap, single key held past 300ms, then next key
+  EV_KEY_PRES      -> ACTIVE     layer=1 used=0
+  EV_KEY_RELE      -> WAIT       layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT       layer=1 used=1
+  EV_TIMEOUT_300   -> ONESHOT    layer=1 used=1
+  EV_OTHER_KEY_PRES -> ONESHOT    layer=1 used=1
+  FINAL ONESHOT layer=1
+
+== tap while pre-held key down, 2nd key, timeout, next key
+  EV_OTHER_KEY_PRES -> IDLE       layer=0 used=0
+  EV_KEY_PRES      -> ACTIVE     layer=1 used=0
+  EV_KEY_RELE      -> WAIT       layer=1 used=0
+  EV_OTHER_KEY_PRES -> WAIT       layer=1 used=1
+  EV_TIMEOUT_300   -> ONESHOT    layer=1 used=1
+  EV_OTHER_KEY_PRES -> ONESHOT    layer=1 used=1
+  FINAL ONESHOT layer=1
+
