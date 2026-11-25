@@ -1,0 +1,122 @@
+diff --git a/platform/web/public-qemu-engine.js b/platform/web/public-qemu-engine.js
+index 828dcd91f2606e61c678c7376af01fa4f1ecf46c..deb82e9486d50708cf5811aedd37895fb8d066c1 100644
+--- a/platform/web/public-qemu-engine.js
++++ b/platform/web/public-qemu-engine.js
+@@ -13,6 +13,9 @@ let previousOutputs, previousUnitExampleState;
+ let controllerInputs = Promise.resolve();
+ let resetEpoch = 0;
+ let panelPath;
++let signedPortrait = false;
++const portraitPatch = {path:'patches/qemu-wasm-probe/0045-cardputer-adv-portrait-direction.patch',
++  sha256:'d95f729f5cae8a38105849a4b434ed0bf7409f16d7951f49310de12da64ab916'};
+ let usbSerialJtag = false;
+ let workersCreated = 0;
+ let relocatedGlueSha256;
+@@ -159,6 +162,10 @@ async function start(config) {
+   if (disposeRequested) throw new Error('Instance disposed during start');
+   boardProfile=validateQemuProfile(config.profile);
+   validateQemuRuntimeRequirements(boardProfile,{source:{patches:config.runtimePatches}});
++  if(boardProfile.deviceId==='cardputer-adv'&&Array.isArray(config.runtimePatches)){
++    const matches=config.runtimePatches.filter(row=>row?.path===portraitPatch.path);
++    signedPortrait=matches.length===1&&matches[0].sha256===portraitPatch.sha256;
++  }
+   usbSerialJtag=qemuUsbSerialJtagAvailable(boardProfile,config.runtimePatches);
+   const sdCard=config.sdCard;
+   if(sdCard!==undefined&&(!(sdCard instanceof ArrayBuffer)||!validQemuSdImage(boardProfile.deviceId,sdCard.byteLength))) {
+@@ -349,6 +356,18 @@ async function request(op, value) {
+     if (![txBytes,txPackets].every(value=>Number.isSafeInteger(value)&&value>=0)) throw new Error('Invalid USB Serial/JTAG controller counters');
+     return {consoleEpoch,txBytes,txPackets};
+   }
++  if (op === 'ir-waveform') {
++    if (!signedPortrait || boardProfile?.deviceId !== 'cardputer-adv' ||
++      value !== undefined && (!value || typeof value !== 'object' || Array.isArray(value) || Object.keys(value).length)) {
++      throw new Error('Cardputer-ADV GPIO44 diagnostic is not admitted');
++    }
++    const epoch = resetEpoch;
++    const state=await qmp('qom-get',{path:'/machine/soc/ledc',property:'ir-waveform'});
++    if (closed || disposeRequested || epoch!==resetEpoch) throw new Error('GPIO44 observation expired');
++    if (state?.schema_version!==1 || state.gpio!==44 || state.time_base!=='qemu-virtual-ns' ||
++      !Array.isArray(state.edges) || state.edges.length>192) throw new Error('Invalid GPIO44 waveform');
++    return state;
++  }
+   if (op === 'display') {
+     // Only Cardputer's admitted native-glass presentation uses this QOM
+     // contract. E-paper and other panel types need no SPI-panel lookup.
+@@ -359,6 +378,11 @@ async function request(op, value) {
+       if (!panel) throw new Error('QEMU display panel is unavailable');
+       panelPath = `/machine/unattached/${panel.name}`;
+     }
++    if (signedPortrait) {
++      const deviceRotationDeg=await qmp('qom-get',{path:panelPath,property:'logical-portrait-rotation-deg'});
++      if (![-90,0,90].includes(deviceRotationDeg)) throw new Error('QEMU display panel returned an invalid portrait rotation');
++      return {orientation:deviceRotationDeg===0?'landscape':'portrait',deviceRotationDeg};
++    }
+     const orientation = await qmp('qom-get', {path:panelPath, property:'logical-orientation'});
+     if (!['landscape','portrait','unknown'].includes(orientation))
+       throw new Error('QEMU display panel returned an invalid orientation');
+diff --git a/platform/web/public.js b/platform/web/public.js
+index e1820c76a3056b7ec1c959b4f75ac2c76cfda75d..b8e32153f98c6e623d8cf7441dfbf9ed0787122e 100644
+--- a/platform/web/public.js
++++ b/platform/web/public.js
+@@ -897,14 +897,22 @@ function applyBrowserPresentation(value, run = state.run) {
+   const display = value?.display || null;
+   state.shell?.setDeviceRotation?.(display?.deviceRotationDeg || 0);
+   const panel = $('rawFramePanel');
+-  if (display?.orientation === 'portrait') panel.dataset.orientation = 'portrait';
+-  else delete panel.dataset.orientation;
++  const portrait=display?.orientation==='portrait';
++  const rotation=portrait?String(display.deviceRotationDeg===90?90:-90):undefined;
++  const rotationChanged=panel.dataset.portraitRotationDeg!==rotation;
++  if (portrait) {
++    panel.dataset.orientation='portrait';
++    panel.dataset.portraitRotationDeg=rotation;
++  } else {
++    delete panel.dataset.orientation;
++    delete panel.dataset.portraitRotationDeg;
++  }
+   // Orientation arrives through QMP independently of shared-frame updates.
+   // Repaint retained real pixels when static glass needs a new presentation.
+   const frame = run.controller instanceof PublicQemuRuntime ? run.controller.lastFrame : null;
+   if (frame) {
+-    const portrait=display?.orientation==='portrait',canvas=$('rawFrameCanvas');
+-    if (canvas.width!==(portrait?frame.height:frame.width)||canvas.height!==(portrait?frame.width:frame.height))
++    const canvas=$('rawFrameCanvas');
++    if (rotationChanged||canvas.width!==(portrait?frame.height:frame.width)||canvas.height!==(portrait?frame.width:frame.height))
+       applyBrowserFrame(frame,run);
+   }
+ }
+@@ -926,12 +934,13 @@ function applyBrowserFrame(frame, run) {
+     }
+     if (!portrait) context.putImageData(image, 0, 0);
+     else {
++      const clockwise=run.controller.display.deviceRotationDeg!==90;
+       const rotated = context.createImageData(frame.height, frame.width);
+       for (let y = 0; y < frame.height; y++) for (let x = 0; x < frame.width; x++) {
+         const from = (y * frame.width + x) * 4;
+-        // Match the portrait device presentation: native glass top-left
+-        // rotates clockwise into the flat-screen view.
+-        const to = (x * frame.height + frame.height - 1 - y) * 4;
++        // Canvas Y grows down, so its angle is opposite the 3D Z rotation.
++        const to = (clockwise ? x * frame.height + frame.height - 1 - y
++          : (frame.width - 1 - x) * frame.height + y) * 4;
+         rotated.data.set(image.data.subarray(from, from + 4), to);
+       }
+       context.putImageData(rotated, 0, 0);
+@@ -1724,11 +1733,13 @@ for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'])
+     if (type === 'pointerdown') canvas.setPointerCapture(event.pointerId);
+     const shownX = Math.max(0, Math.min(canvas.width - 1, Math.floor(((event.clientX - rect.left) * canvas.width) / rect.width)));
+     const shownY = Math.max(0, Math.min(canvas.height - 1, Math.floor(((event.clientY - rect.top) * canvas.height) / rect.height)));
+-    const portrait = canvas.closest('#rawFramePanel')?.dataset.orientation === 'portrait';
++    const panel = canvas.closest('#rawFramePanel');
++    const portrait = panel?.dataset.orientation === 'portrait';
++    const counterclockwise = panel?.dataset.portraitRotationDeg === '90';
++    let x=shownX,y=shownY;
++    if(portrait)[x,y]=counterclockwise?[canvas.height-1-shownY,shownX]:[shownY,canvas.width-1-shownX];
+     void deliverInput({
+-      type: 'touch',
+-      x: portrait ? shownY : shownX,
+-      y: portrait ? canvas.width - 1 - shownX : shownY,
++      type: 'touch', x, y,
+       down: ['pointerdown', 'pointermove'].includes(type),
+     });
+   });

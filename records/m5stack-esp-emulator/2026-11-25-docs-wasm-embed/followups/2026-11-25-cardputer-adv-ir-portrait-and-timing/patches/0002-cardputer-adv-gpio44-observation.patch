@@ -1,0 +1,305 @@
+Observe the Cardputer-ADV GPIO44 IR LEDC carrier envelope from
+committed low-speed controller settings and the live pin route. Keep
+a bounded, read-only QOM capture on the guest virtual clock.
+
+diff --git a/hw/misc/esp32_ledc.c b/hw/misc/esp32_ledc.c
+index 5b8fa39f16df4fc7a6a1f4128bfb54282d97de3d..4c80e2340820f3e2053eeacc2d3eeb87f97cce41 100644
+--- a/hw/misc/esp32_ledc.c
++++ b/hw/misc/esp32_ledc.c
+@@ -1,16 +1,99 @@
+ #include "qemu/osdep.h"
+ #include "../m5stopwatch/m5_unit_runtime.h"
++#include "hw/gpio/esp32_gpio.h"
+ #include "hw/sysbus.h"
+ #include "qemu/log.h"
++#include "qemu/timer.h"
+ #include "qapi/error.h"
++#include "qapi/visitor.h"
++#include "qapi/qmp/qdict.h"
++#include "qapi/qmp/qlist.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/misc/esp32_ledc.h"
++#include "esp32_ledc_ir_capture.h"
+ 
+ #define ESP32_LEDC_REGS_SIZE (A_LEDC_CONF_REG + 4)
+ 
+ static QLIST_HEAD(, Esp32LEDCState) ledc_devices =
+     QLIST_HEAD_INITIALIZER(ledc_devices);
+ 
++struct Esp32LedcIrCapture {
++    Esp32GpioPadObserver *observer;
++    Esp32GpioPadSnapshot pad;
++    Esp32LedcIrWaveform waveform;
++};
++
++static void esp32_ledc_ir_sample_pad(Esp32LedcIrCapture *capture, int64_t now)
++{
++    const Esp32GpioPadSnapshot *pad = &capture->pad;
++    /* LEDC's SIG_OUT_EN supplies the peripheral OE when OEN_SEL is clear. */
++    bool enabled = pad->mux_path == ESP32_GPIO_MUX_GPIO_MATRIX &&
++                   !pad->out_inv && !pad->open_drain && !pad->override_mask &&
++                   (pad->oen_sel ? pad->oe_known && pad->oe : !pad->oen_inv);
++    int channel = enabled ? (int)pad->out_sel - LEDC_IR_SIGNAL0 : -1;
++
++    esp32_ledc_ir_sample(&capture->waveform, channel, now);
++}
++
++static void esp32_ledc_ir_pad_changed(void *opaque,
++                                      const Esp32GpioPadEvent *event)
++{
++    Esp32LedcIrCapture *capture = opaque;
++
++    if (capture->pad.epoch != event->after.epoch) {
++        memset(&capture->waveform, 0, sizeof(capture->waveform));
++    }
++    capture->pad = event->after;
++    esp32_ledc_ir_sample_pad(capture, event->after.at_ns);
++}
++
++static void esp32_ledc_ir_waveform_get(Object *obj, Visitor *v,
++                                       const char *name, void *opaque,
++                                       Error **errp)
++{
++    const Esp32LedcIrCapture *capture = opaque;
++    const Esp32LedcIrWaveform *waveform = &capture->waveform;
++    uint64_t count = MIN(waveform->edges_written, LEDC_IR_EDGES);
++    uint64_t first = waveform->edges_written - count;
++    QDict *state = qdict_new();
++    QList *edges = qlist_new();
++
++    for (uint64_t i = first; i < waveform->edges_written; i++) {
++        const Esp32LedcIrEdge *edge = &waveform->edges[i % LEDC_IR_EDGES];
++        QDict *row = qdict_new();
++
++        qdict_put_int(row, "at_ns", edge->at_ns);
++        qdict_put_int(row, "carrier_hz", edge->carrier_hz);
++        qdict_put_int(row, "duty_count", edge->duty_count);
++        qdict_put_int(row, "period_count", edge->period_count);
++        qlist_append_obj(edges, QOBJECT(row));
++    }
++    qdict_put_int(state, "schema_version", 1);
++    qdict_put_int(state, "gpio", LEDC_IR_GPIO);
++    qdict_put_int(state, "gpio_epoch", capture->pad.epoch);
++    qdict_put_int(state, "first_edge", first);
++    qdict_put_int(state, "next_edge", waveform->edges_written);
++    qdict_put_str(state, "time_base", "qemu-virtual-ns");
++    qdict_put_obj(state, "edges", QOBJECT(edges));
++
++    QObject *result = QOBJECT(state);
++    visit_type_any(v, name, &result, errp);
++    qobject_unref(result);
++}
++
++void esp32_ledc_enable_cardputer_adv_ir(Esp32LEDCState *s)
++{
++    Esp32GpioState *gpio = esp32_gpio_get_controller(true);
++    Esp32LedcIrCapture *capture = g_new0(Esp32LedcIrCapture, 1);
++
++    assert(s->esp32s3_layout && !s->ir_capture && gpio);
++    capture->observer = esp32_gpio_observe_pad(gpio, LEDC_IR_GPIO,
++        esp32_ledc_ir_pad_changed, capture, &capture->pad, &error_fatal);
++    s->ir_capture = capture;
++    object_property_add(OBJECT(s), "ir-waveform", "any",
++                        esp32_ledc_ir_waveform_get, NULL, NULL, capture);
++}
++
+ static void ledc_observe(Esp32LEDCState *s)
+ {
+     for (unsigned channel = 0; channel < (s->esp32s3_layout ? 8 : 16); channel++) {
+@@ -103,6 +186,11 @@ static void esp32_ledc_write(void *opaque, hwaddr addr,
+                             uint64_t value, unsigned int size)
+ {
+     Esp32LEDCState *s = ESP32_LEDC(opaque);
++    if (s->ir_capture) {
++        esp32_ledc_ir_write(&s->ir_capture->waveform, addr, value);
++        esp32_ledc_ir_sample_pad(s->ir_capture,
++                                qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
++    }
+     if (s->esp32s3_layout && addr >= 0xa0 && addr < 0xc0) {
+         unsigned index = (addr - 0xa0) / 8;
+         if (addr & 4) {
+@@ -192,6 +280,11 @@ static void esp32_ledc_unrealize(DeviceState *dev)
+     Esp32LEDCState *s = ESP32_LEDC(dev);
+ 
+     QLIST_REMOVE(s, route_observer_next);
++    if (s->ir_capture) {
++        object_property_del(OBJECT(s), "ir-waveform");
++        esp32_gpio_unobserve_pad(s->ir_capture->observer);
++        g_clear_pointer(&s->ir_capture, g_free);
++    }
+ }
+ 
+ static void esp32_ledc_init(Object *obj)
+diff --git a/hw/misc/esp32_ledc_ir_capture.h b/hw/misc/esp32_ledc_ir_capture.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..135d319e8428d5277e95cb8d40ad34ead69e4e45
+--- /dev/null
++++ b/hw/misc/esp32_ledc_ir_capture.h
+@@ -0,0 +1,125 @@
++/*
++ * Read-only envelope observation for the Cardputer-ADV IR output.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++#ifndef HW_MISC_ESP32_LEDC_IR_CAPTURE_H
++#define HW_MISC_ESP32_LEDC_IR_CAPTURE_H
++
++#include <stdbool.h>
++#include <stddef.h>
++#include <stdint.h>
++
++#define LEDC_IR_GPIO 44
++#define LEDC_IR_SIGNAL0 73
++#define LEDC_IR_CHANNELS 8
++#define LEDC_IR_EDGES 192
++
++enum {
++    LEDC_IR_CHANNEL_STRIDE = 0x14,
++    LEDC_IR_DUTY = 0x08,
++    LEDC_IR_CONF1 = 0x0c,
++    LEDC_IR_TIMER0_CONF = 0xa0,
++    LEDC_IR_CLOCK_CONF = 0xd0,
++    LEDC_IR_SIG_OUT_EN = 1u << 2,
++    LEDC_IR_CHANNEL_PARA_UP = 1u << 4,
++    LEDC_IR_TIMER_PAUSE = 1u << 22,
++    LEDC_IR_TIMER_RESET = 1u << 23,
++    LEDC_IR_TIMER_PARA_UP = 1u << 25,
++};
++
++#define LEDC_IR_DUTY_START UINT32_C(0x80000000)
++
++typedef struct Esp32LedcIrChannel {
++    uint32_t requested_duty;
++    uint32_t applied_duty;
++    uint32_t conf0;
++    bool duty_start;
++} Esp32LedcIrChannel;
++
++typedef struct Esp32LedcIrEdge {
++    int64_t at_ns;
++    uint32_t carrier_hz;
++    uint32_t duty_count;
++    uint32_t period_count;
++} Esp32LedcIrEdge;
++
++typedef struct Esp32LedcIrWaveform {
++    Esp32LedcIrChannel channels[LEDC_IR_CHANNELS];
++    uint32_t timer_conf[4];
++    uint32_t clock_conf;
++    uint64_t edges_written;
++    Esp32LedcIrEdge edges[LEDC_IR_EDGES];
++} Esp32LedcIrWaveform;
++
++static void esp32_ledc_ir_write(Esp32LedcIrWaveform *s, uint32_t addr,
++                               uint32_t value)
++{
++    if (addr < LEDC_IR_TIMER0_CONF) {
++        Esp32LedcIrChannel *channel = &s->channels[addr / LEDC_IR_CHANNEL_STRIDE];
++
++        switch (addr % LEDC_IR_CHANNEL_STRIDE) {
++        case LEDC_IR_DUTY:
++            channel->requested_duty = (value & 0x7ffff) >> 4;
++            channel->duty_start = false;
++            break;
++        case LEDC_IR_CONF1:
++            channel->duty_start = (value & LEDC_IR_DUTY_START) != 0;
++            break;
++        case 0:
++            if (value & LEDC_IR_CHANNEL_PARA_UP) {
++                channel->conf0 = value;
++                if (channel->duty_start) {
++                    channel->applied_duty = channel->requested_duty;
++                } else if (!(value & LEDC_IR_SIG_OUT_EN)) {
++                    channel->applied_duty = 0;
++                }
++                channel->duty_start = false;
++            }
++            break;
++        }
++    } else if (addr < LEDC_IR_TIMER0_CONF + 4 * 8 && (addr & 7) == 0) {
++        uint32_t *timer = &s->timer_conf[(addr - LEDC_IR_TIMER0_CONF) / 8];
++        uint32_t run_mask = LEDC_IR_TIMER_PAUSE | LEDC_IR_TIMER_RESET;
++
++        *timer = (value & LEDC_IR_TIMER_PARA_UP) ? value
++                 : (*timer & ~run_mask) | (value & run_mask);
++    } else if (addr == LEDC_IR_CLOCK_CONF) {
++        s->clock_conf = value;
++    }
++}
++
++static void esp32_ledc_ir_sample(Esp32LedcIrWaveform *s, int channel,
++                                int64_t now)
++{
++    Esp32LedcIrEdge edge = { .at_ns = now };
++
++    /* The S3 HAL selects XTAL through CONF[1:0]; its enable_clock is a no-op. */
++    if (channel >= 0 && channel < LEDC_IR_CHANNELS && (s->clock_conf & 3) == 3) {
++        const Esp32LedcIrChannel *c = &s->channels[channel];
++        uint32_t timer = s->timer_conf[c->conf0 & 3];
++        unsigned resolution = timer & 15;
++        unsigned divider = (timer >> 4) & 0x3ffff;
++        unsigned period = 1u << resolution;
++
++        if (resolution && divider >= 256 && (c->conf0 & LEDC_IR_SIG_OUT_EN) &&
++            !(timer & (LEDC_IR_TIMER_PAUSE | LEDC_IR_TIMER_RESET)) &&
++            c->applied_duty > 0 && c->applied_duty < period) {
++            uint64_t clocks = (uint64_t)divider * period;
++            edge.carrier_hz = (UINT64_C(40000000) * 256 + clocks / 2) / clocks;
++            edge.duty_count = c->applied_duty;
++            edge.period_count = period;
++        }
++    }
++
++    const Esp32LedcIrEdge *previous = s->edges_written ?
++        &s->edges[(s->edges_written - 1) % LEDC_IR_EDGES] : NULL;
++    if (previous ? previous->carrier_hz == edge.carrier_hz &&
++                   previous->duty_count == edge.duty_count &&
++                   previous->period_count == edge.period_count
++                 : !edge.carrier_hz) {
++        return;
++    }
++    s->edges[s->edges_written++ % LEDC_IR_EDGES] = edge;
++}
++
++#endif /* HW_MISC_ESP32_LEDC_IR_CAPTURE_H */
+diff --git a/hw/xtensa/esp32s3.c b/hw/xtensa/esp32s3.c
+index ee5eb1488b02c13aaf6c42179bd505b5b3145d3b..be99c2c0c9ef991285a3479da6d7387606395449 100644
+--- a/hw/xtensa/esp32s3.c
++++ b/hw/xtensa/esp32s3.c
+@@ -1013,6 +1013,9 @@ static void esp32s3_machine_init(MachineState *machine)
+         m5_board_init(sys_mem, intmatrix_dev, ESP_GDMA(&ss->gdma));
+     }
+     m5_unit_runtime_init(true);
++    if (m5_board == M5_BOARD_CARDPUTER_ADV) {
++        esp32_ledc_enable_cardputer_adv_ir(&ss->ledc);
++    }
+ 
+     /* Need MMU initialized prior to ELF loading,
+      * so that ELF gets loaded into virtual addresses
+diff --git a/include/hw/misc/esp32_ledc.h b/include/hw/misc/esp32_ledc.h
+index 6d665510cc2e2a758ba0386f10ec144208aa218c..8b3186a88df200a3b44820292c8404dda63ae1ab 100644
+--- a/include/hw/misc/esp32_ledc.h
++++ b/include/hw/misc/esp32_ledc.h
+@@ -11,6 +11,8 @@
+ #define ESP32_LEDC_TIMER_CNT 8
+ #define ESP32_LEDC_CHANNEL_CNT 16
+ 
++typedef struct Esp32LedcIrCapture Esp32LedcIrCapture;
++
+ typedef struct Esp32LEDCState {
+     SysBusDevice parent_object;
+     MemoryRegion iomem;
+@@ -21,12 +23,14 @@ typedef struct Esp32LEDCState {
+     uint32_t channel_duty_reg[ESP32_LEDC_CHANNEL_CNT];
+     uint32_t conf_reg;
+     bool esp32s3_layout;
++    Esp32LedcIrCapture *ir_capture;
+     LEDState led[ESP32_LEDC_CHANNEL_CNT];
+     QLIST_ENTRY(Esp32LEDCState) route_observer_next;
+ } Esp32LEDCState;
+ 
+ /* Observe existing register state after a GPIO matrix output-route change. */
+ void esp32_ledc_gpio_route_changed(bool esp32s3_layout);
++void esp32_ledc_enable_cardputer_adv_ir(Esp32LEDCState *s);
+ 
+ REG32(LEDC_CONF_REG, 0x190)
+ 

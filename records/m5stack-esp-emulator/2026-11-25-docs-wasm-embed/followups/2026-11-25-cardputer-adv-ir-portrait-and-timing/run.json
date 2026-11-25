@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "Cardputer-ADV IR NEC signed portrait and envelope timing",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/258",
+    "pull_request": "",
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "a5a48eceee172be037fe7c742eeff5f529f778d5",
+    "example": "https://docs.m5stack.com/en/arduino/m5cardputer/ir_nec",
+    "qemu_commit": "40edccac415693c5130f91c01d84176ae6008566",
+    "qemu_source_lock_sha256": "84845e0d7a89c75183005fa3a20c1d6f46b6e789df5b5703aaca1c5ca1a44e99"
+  },
+  "hardware": {
+    "model": "Cardputer-ADV",
+    "physical_validation": "NOT RUN",
+    "mode": "virtual-device validation"
+  },
+  "firmware": {
+    "sketch_sha256": "e77a78ffde87b2b87d8a4cad2032bcabbe66dbfd28142100281d3f7d67fff1c9",
+    "input_sha256": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb",
+    "input_bytes": 4194304,
+    "padded_sha256": "783873cf160c7aac32860decf6e0908ed7586b7d277340c9e926c79086a401ac",
+    "padded_bytes": 8388608,
+    "rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+    "arduino_board_package": "m5stack:esp32@3.2.5",
+    "m5cardputer": "1.1.1",
+    "m5gfx": "0.3.0",
+    "arduino_irremote": "4.7.1"
+  },
+  "execution": {
+    "environment": "Apple silicon macOS, Emscripten 3.1.50, Chromium 158.0.8127.37",
+    "task_id": "GitHub issue 258",
+    "session_id": "redacted; execution labels and report hashes retained in evidence",
+    "executions": [
+      {
+        "execution_label": "locked-0044-original",
+        "wasm_sha256": "ee110d208e358de4eeafa2583ecfbbc3f505dc0568bf85a25ca3c84a63f3cc60",
+        "clock_divisor": 1
+      },
+      {
+        "execution_label": "private-first-observation",
+        "wasm_sha256": "3cde0df151570bad4670525d2ad453fb8adbd332fad2f23bb5a602bb0f59bb29",
+        "clock_divisor": 1
+      },
+      {
+        "execution_label": "private-a-normal",
+        "wasm_sha256": "3cde0df151570bad4670525d2ad453fb8adbd332fad2f23bb5a602bb0f59bb29",
+        "clock_divisor": 1
+      },
+      {
+        "execution_label": "private-b-div8",
+        "wasm_sha256": "3cde0df151570bad4670525d2ad453fb8adbd332fad2f23bb5a602bb0f59bb29",
+        "clock_divisor": 8
+      }
+    ]
+  },
+  "checks": [
+    {
+      "layer": "visual_or_physical",
+      "name": "Original IR flat portrait orientation",
+      "status": "PASS",
+      "scope": "private candidate, virtual display"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Original sketch text fits portrait",
+      "status": "FAIL"
+    },
+    {
+      "layer": "transport",
+      "name": "Original guest USB CDC address and commands",
+      "status": "PASS"
+    },
+    {
+      "layer": "device_response",
+      "name": "GPIO44 LEDC mark/gap and PWM register model",
+      "status": "PASS",
+      "scope": "private candidate, QOM observation"
+    },
+    {
+      "layer": "data_behavior",
+      "name": "Two complete NEC frames within timing tolerance",
+      "status": "FAIL",
+      "scope": "normal clock and explicit divider 8"
+    },
+    {
+      "layer": "device_response",
+      "name": "Guest and browser worker cleanup",
+      "status": "PASS"
+    },
+    {
+      "layer": "visual_or_physical",
+      "name": "Optical receiver, hardware waveform, RF and electrical behavior",
+      "status": "NOT RUN"
+    },
+    {
+      "layer": "build",
+      "name": "Portrait-only producer-locked WASM",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/ir-virtual-device-summary.json"
+  ],
+  "notes": [
+    "No release or deployment from this diagnostic build."
+  ]
+}
