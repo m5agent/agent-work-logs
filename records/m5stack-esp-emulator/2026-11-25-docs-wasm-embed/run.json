@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "CoreS3 and Cardputer-Adv documentation WASM iframe study",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "afd1c635fa702b201508a5d5d689cb67ed1243f3"
+  },
+  "hardware": {
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "references": "evidence/embed-and-editor-summary.json"
+  },
+  "execution": {
+    "environment": "Chrome 158.0.8127.37 on macOS, hosted HTTPS iframe negative and static-export top-level positive controls",
+    "level": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "production docs iframe isolation",
+      "status": "FAIL"
+    },
+    {
+      "name": "CoreS3 browser editor app",
+      "status": "PASS"
+    },
+    {
+      "name": "Cardputer-Adv browser editor app",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/embed-and-editor-summary.json"
+  ],
+  "notes": [
+    "The negative case stopped before loading any firmware."
+  ]
+}

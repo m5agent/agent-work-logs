@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-25 | ESP Emulator | CoreS3 / Cardputer-Adv 文档 WASM 嵌入预研 | `PARTIAL`（正式文档跨域 iframe 无共享内存；两款顶层编辑器控制组通过） | [查看](records/m5stack-esp-emulator/2026-11-25-docs-wasm-embed/) |
 | 2026-11-25 | `M5Unified` | #449 LSM6DS3TR-C 启动等待移到上电处 | `PARTIAL`（virtual-device：无 IMU 板子少 30–40 ms；CoreP4X/在位路径与真机 NOT RUN） | [查看](records/m5unified/2026-11-25-pr-449-lsm6ds3trc-boot-wait/) |
 | 2026-11-25 | Firmware Review Service | 可选网络未使用不再转人工 | `PASS`（3 条网络人工转 VERIFIED；365 项测试） | [查看](records/firmware-review-service/2026-11-25-optional-network-policy/) |
 | 2026-11-25 | Firmware Review Service | review-sta 复跑：网络不再缺模型，缺的是应用未发起 Wi-Fi | `PARTIAL`（11 条网络复跑 0 条转 VERIFIED；7 条 no-activity；31 条人工构成已拆分） | [查看](records/firmware-review-service/2026-11-25-review-sta-activation/) |
