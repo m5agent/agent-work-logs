@@ -104,3 +104,10 @@ r ≤ 23.69 内没有任何高于 11.550 的几何，说明窗口在前壳上是
 - `evidence/stl_analysis_output.txt`：脚本输出
 - `evidence/C152-StopWatch-model-size.png`：图纸渲染
 - `evidence/drawing-dimensions.txt`：图纸标注清单
+
+## 7. 已发布回复
+
+- <https://github.com/m5stack/M5_Hardware/issues/23#issuecomment-7162196759>
+
+英文单条回复，结构为 结论 → 证据等级（code-level verification）→ 逐项实测数据与修复建议 →
+NOT RUN 项 → 归档链接。条目保持 OPEN，未关闭、未 push 代码、未修改他人仓库。

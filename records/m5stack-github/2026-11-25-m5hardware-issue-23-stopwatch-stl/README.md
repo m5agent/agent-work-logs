@@ -42,3 +42,8 @@
 - C152 实机总高测量：`NOT RUN`（本机无该设备，15.5 mm 采用官方图纸标注）。
 - CAD 中重建缺失玻璃并重新导出 STL：`NOT RUN`（仓库内只有 STL，无 STEP/F3D 等参数化源文件）。
 - 其他衍生导出（STEP、3MF、打印件）是否同样缺玻璃：未检查，超出本仓库该目录范围。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5_Hardware/issues/23#issuecomment-7162196759>
+  （1 条，英文，与条目语言一致；issue 仍 OPEN，未 close、未 push、未改他人仓库）
