@@ -1,0 +1,192 @@
+{
+  "scope": "virtual-device validation, real programs in exported browser WASM workbench",
+  "method": "Run each exact Python source from its pinned revision in a newly created board-specific programming guest. Observe physical framebuffer driving the browser view and the actual raw REPL program result. Stop via the normal UI or after failure cleanup. Firmware version and compatibility conclusions are per image.",
+  "cases": [
+    {
+      "case": "cores3-display-clip",
+      "board": "cores3",
+      "exact_source": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/hardware/display/cores3_draw_test_example.py",
+      "source_sha256": "03869b2d115675642900d900a9bc9c442a75a92b99db05883948876a22cbfe3d",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/display.html",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "official_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+      "qemu_browser_profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2",
+      "receipt_source_binding": true,
+      "guest_phase": "interrupted",
+      "editor_error": null,
+      "serial_stdout": "rotation: 0\r\nw: 240h:320\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 50, in <module>\r\nKeyboardInterrupt: \r\n\r\n",
+      "serial_stderr": "",
+      "guest_frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "7ff9ad5e1bc4a7877a34854735f2c6d82d6b28589b54e275018248ff6cff122f",
+        "source_sequence": 86,
+        "colors": 164
+      },
+      "iso_browser_chrome": "158.0.8127.37",
+      "guest_cleanup": {
+        "normal_exit": true,
+        "exit_code": 0,
+        "cdp_targets_closed_before_context": true
+      },
+      "observation": "Example sets rotation 0 and requests QR at x=220, y=40, width 100; guest prints width 240 and height 320. Capture 320x240 RGB565 shows only a 20-pixel-wide clipped QR strip. Circle, lines and logo appear."
+    },
+    {
+      "case": "cores3-speaker-resource",
+      "board": "cores3",
+      "exact_source": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/hardware/speaker/cores3_speaker_example.py",
+      "source_sha256": "ec7f07036410d52e87ad801dc36b861802d28daa2d05bb320326a399fc1f7273",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/speaker.html",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "official_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+      "qemu_browser_profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2",
+      "receipt_source_binding": true,
+      "guest_phase": "complete",
+      "editor_error": null,
+      "serial_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 48, in <module>\r\n  File \"<stdin>\", line 27, in setup\r\nOSError: [Errno 2] ENOENT\r\n\r\n",
+      "serial_stderr": "",
+      "guest_frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "195c71dfced56e6adbcbdb0065c06bc783dc8a30388d7be11174ea6cdbf9ef41",
+        "source_sequence": 164,
+        "colors": 16
+      },
+      "iso_browser_chrome": "158.0.8127.37",
+      "guest_cleanup": {
+        "normal_exit": true,
+        "exit_code": 0,
+        "cdp_targets_closed_before_context": true
+      },
+      "observation": "Expected original WAV in /flash/res/audio; source repository contains the WAV (SHA-256 07f0d5ad0bac7bdca38388c52e6daf9042811c7a5cd5c36f1c383be4b236f14c). Editor script reached initial Play circle and guest emitted ENOENT. Audio content and transducer behavior were not verified."
+    },
+    {
+      "case": "cores3-mic-repeat",
+      "board": "cores3",
+      "exact_source": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/hardware/mic/cores3_mic_example.py",
+      "source_sha256": "dc6979cf1209ead19085bb97450c91e644bbf45ae28d0d2faa702f189d7e0a8e",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/hardware/mic.html",
+      "firmware_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "official_base_sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+      "qemu_browser_profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2",
+      "receipt_source_binding": false,
+      "guest_phase": "running",
+      "editor_error": "设备未响应中断，请停止或重新启动设备。",
+      "serial_stdout": null,
+      "serial_stderr": null,
+      "guest_frame": {
+        "width": 320,
+        "height": 240,
+        "sha256": "d900ddea8053295562e2109098d260d2edffe508efb2e48b62d236492c2b2b48",
+        "source_sequence": 42,
+        "colors": 16
+      },
+      "iso_browser_chrome": "158.0.8127.37",
+      "guest_cleanup": {
+        "normal_exit": true,
+        "exit_code": 0,
+        "cdp_targets_closed_before_context": true
+      },
+      "observation": "Exact guest code rendered the initial label0 and never showed its rec... / play... / done stages in a 25-second observation. The editor could not interrupt after the observation. The workbench Stop control exited QEMU normally. No WebAudio/PCM recording or hardware audio evidence."
+    },
+    {
+      "case": "adv-cc1101-rf-tx",
+      "board": "cardputer-adv",
+      "exact_source": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/cap/cc1101/cc1101_cap_rf_tx_example.py",
+      "source_sha256": "12d62591b8400f84dce2560601b4fe7939785ef6be1f9b574c1b419a58b2ce40",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/cap/cc1101.html",
+      "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+      "official_base_sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+      "qemu_browser_profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2",
+      "receipt_source_binding": true,
+      "guest_phase": "interrupted",
+      "editor_error": null,
+      "serial_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 116, in <module>\r\n  File \"<stdin>\", line 62, in setup\r\n  File \"cap/cc1101.py\", line 386, in __init__\r\n  File \"cap/cc1101.py\", line 90, in __init__\r\n  File \"driver/cc1101.py\", line 519, in begin\r\n  File \"driver/cc1101.py\", line 592, in _config_basic_settings\r\n  File \"driver/cc1101.py\", line 321, in wait_for_idle\r\nKeyboardInterrupt: \r\n\r\n",
+      "serial_stderr": "",
+      "guest_frame": {
+        "width": 240,
+        "height": 135,
+        "sha256": "fbcba301cc9c4223c992861c0823c9351bbf9e87f36cf7395975491072b0a353",
+        "source_sequence": 140,
+        "colors": 46
+      },
+      "iso_browser_chrome": "158.0.8127.37",
+      "guest_cleanup": {
+        "normal_exit": true,
+        "exit_code": 0,
+        "cdp_targets_closed_before_context": true
+      },
+      "observation": "12 second observation; actual LCD shows SEQ 0, OK 0, FAIL 0. Guest interruption hit wait_for_idle during CC1101 init, before its TX loop."
+    },
+    {
+      "case": "adv-cc1101-rf-rx",
+      "board": "cardputer-adv",
+      "exact_source": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/cap/cc1101/cc1101_cap_rf_rx_example.py",
+      "source_sha256": "725c082f699a054b1b5983cdac62981b3287d24675ee3002efbd5b8058512744",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/cap/cc1101.html",
+      "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+      "official_base_sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+      "qemu_browser_profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2",
+      "receipt_source_binding": true,
+      "guest_phase": "interrupted",
+      "editor_error": null,
+      "serial_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 127, in <module>\r\n  File \"<stdin>\", line 64, in setup\r\n  File \"cap/cc1101.py\", line 386, in __init__\r\n  File \"cap/cc1101.py\", line 90, in __init__\r\n  File \"driver/cc1101.py\", line 519, in begin\r\n  File \"driver/cc1101.py\", line 592, in _config_basic_settings\r\n  File \"driver/cc1101.py\", line 321, in wait_for_idle\r\nKeyboardInterrupt: \r\n\r\n",
+      "serial_stderr": "",
+      "guest_frame": {
+        "width": 240,
+        "height": 135,
+        "sha256": "190916e4c007b9ebaa621016ce4846d66978e32219e047760cc5ec701d3c3dc2",
+        "source_sequence": 108,
+        "colors": 31
+      },
+      "iso_browser_chrome": "158.0.8127.37",
+      "guest_cleanup": {
+        "normal_exit": true,
+        "exit_code": 0,
+        "cdp_targets_closed_before_context": true
+      },
+      "observation": "12 second observation; actual LCD shows RX 0, CRC 0, RSSI and LQI unset. Guest interruption hit wait_for_idle during CC1101 init, before its RX loop."
+    },
+    {
+      "case": "adv-nfc-cap-keyword",
+      "board": "cardputer-adv",
+      "exact_source": "https://github.com/m5stack/uiflow-micropython/blob/a61a29409f09f1f4bebae05e15c4bd6dcc4956b6/examples/cap/cc1101/cc1101_cap_nfc_read_id_example.py",
+      "source_sha256": "e0df69f68471a717ba4ec23e67945fe7ed312c4c1bd34e6651c18d147bac1c5b",
+      "docs_url": "https://uiflow-micropython.readthedocs.io/en/latest/cap/cc1101.html",
+      "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+      "official_base_sha256": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+      "qemu_browser_profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+      "wasm_sha256": "96c7f8baf1d5f2fd760c560a0827ef7305ad06a1cefb28c905d05d796dc540d8",
+      "site_manifest_sha256": "6e805e692413c7480bdb06aa41d1fc61e88ba83569a1ac61cd45d74a9ac7f3e2",
+      "receipt_source_binding": true,
+      "guest_phase": "complete",
+      "editor_error": null,
+      "serial_stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 113, in <module>\r\n  File \"<stdin>\", line 59, in setup\r\n  File \"cap/cc1101.py\", line 301, in __init__\r\nTypeError: unexpected keyword argument 'chip'\r\n\r\n",
+      "serial_stderr": "",
+      "guest_frame": {
+        "width": 240,
+        "height": 135,
+        "sha256": "6bde4f621634fd096d34d23c6b6929bf1a050f02db71bbb494174c5d0cfe6fd2",
+        "source_sequence": 314,
+        "colors": 16
+      },
+      "iso_browser_chrome": "158.0.8127.37",
+      "guest_cleanup": {
+        "normal_exit": true,
+        "exit_code": 0,
+        "cdp_targets_closed_before_context": true
+      },
+      "observation": "Actual RGB565 frame displayed TypeError unexpected keyword argument chip from NFCCap constructor. No card injection; it did not enter detect() loop."
+    }
+  ]
+}
