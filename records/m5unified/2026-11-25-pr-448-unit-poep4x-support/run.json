@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-25",
+  "kind": "pr_review",
+  "overall_status": "REVIEW",
+  "title": "M5Unified PR #448 review: add M5UnitPoEP4X support",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/448",
+    "related_pull_request": "https://github.com/m5stack/M5GFX/pull/441",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "dae3b5d04e6ad5f91ac72a89da09d427a0e20543",
+    "head_commit": "6167c9230205071433aa7ea727bb403e55b3db82",
+    "author": "TinyuZhao",
+    "state": "OPEN",
+    "language": "en"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "No Unit PoE-P4X hardware on this host; power-on, display-out, button and power-off LED behaviour were not exercised.",
+    "devices_considered": "local Device Service lists 36 profiles; none is PoE-P4 or PoE-P4X, the only ESP32-P4 profile is tab5"
+  },
+  "firmware": {
+    "builder": "ESP-IDF v6.1 @ fff9895c82d744c7237be8847347bdd1b07c6643 (riscv32-esp-elf 15.2.0)",
+    "project": "examples/Test/build_test",
+    "target": "esp32p4",
+    "m5unified_head": "6167c9230205071433aa7ea727bb403e55b3db82",
+    "m5unified_base": "dae3b5d04e6ad5f91ac72a89da09d427a0e20543",
+    "m5gfx_develop": "e7cae681dd5ec6707b5c174a6b75cb5061c3f3d9",
+    "m5gfx_release": "28d47949bdc84f30881623476f555398e2194313 (0.3.0)",
+    "artifacts": [
+      {
+        "variant": "pr+develop",
+        "size": 432080,
+        "artifact_sha256": "fa65e1a8d1bd2292caff624a9a165d0286010b7a75ec3c5d69279d4de4b7d89c"
+      },
+      {
+        "variant": "base+0.3.0",
+        "size": 430320,
+        "artifact_sha256": "1e750e753763e0d1fae06a9a5c558070337775dba46b09f146922ddfb44a1c56"
+      }
+    ]
+  },
+  "execution": {
+    "environment": "macOS arm64; local ESP-IDF v6.1; esp32p4 build of examples/Test/build_test; four dependency combinations; loopback Device Service profile inventory",
+    "task_id": "",
+    "session_id": "",
+    "verified_at_utc": "2026-11-25T02:52:30Z (PR created) .. 2026-11-25T03:5x UTC (review)"
+  },
+  "checks": [
+    {
+      "layer": "review",
+      "status": "PASS",
+      "detail": "PR #448 OPEN, not draft, author TinyuZhao, English title with empty body, 0 comments and 0 reviews before review, mergeable MERGEABLE; diff is 3 files +8 -2"
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "detail": "PoEP4X branches mirror board_M5UnitPoEP4 one-for-one: external/internal I2C pins (1/0, 54/53), GPIO45 input in _setup_pinmap, GPIO45 rawstate in update(), GPIO15-17 high in Power_Class::_powerOff(), LT8912B display-out attach condition"
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "detail": "all new switch cases sit inside #if defined (CONFIG_IDF_TARGET_ESP32P4); non-P4 targets are not affected"
+    },
+    {
+      "layer": "review",
+      "status": "FAIL",
+      "detail": "board_M5UnitPoEP4X is unreachable by autodetect: M5GFX develop has only the enum (src/lgfx/boards.hpp:87) and no board_desc_t/detector for 158 in src/board_detect/m5/esp32p4.inl, and no open M5GFX PR adds one; only BOARD_ID=158 or cfg.fallback_board reaches the new code"
+    },
+    {
+      "layer": "build",
+      "status": "PASS",
+      "detail": "PR head 6167c92 + M5GFX develop e7cae68, esp32p4: idf.py build exit 0, 1148 steps, app bin 432080 bytes"
+    },
+    {
+      "layer": "build",
+      "status": "FAIL",
+      "detail": "PR head 6167c92 + M5GFX 0.3.0 tag 28d4794, esp32p4: exit 2, four errors 'board_M5UnitPoEP4X is not a member of m5::board_t' at M5Unified.inl:146/2071/3230 and Power_Class.inl:2424"
+    },
+    {
+      "layer": "build",
+      "status": "PASS",
+      "detail": "base develop dae3b5d + M5GFX 0.3.0 tag 28d4794, esp32p4: exit 0, 0 errors, app bin 430320 bytes; isolates the failure to this PR"
+    },
+    {
+      "layer": "build",
+      "status": "FAIL",
+      "detail": "PR head 6167c92 with no local M5GFX: IDF component manager resolved m5stack/m5gfx 0.3.0 from the declared '>=0.3.0' floor and the esp32p4 build failed with the same four errors, i.e. the registry path a normal user takes is broken too"
+    },
+    {
+      "layer": "review",
+      "status": "FAIL",
+      "detail": "dependency floor mismatch: library.json, library.properties and idf_component.yml all allow M5GFX >= 0.3.0, but 158 exists only on M5GFX develop, whose version is still 0.3.0"
+    },
+    {
+      "layer": "review",
+      "status": "PASS",
+      "detail": "upstream CI at head 6167c923: 37/37 SUCCESS, but the workflow clones M5GFX by branch name (develop), so it does not cover the released-M5GFX pairing"
+    },
+    {
+      "layer": "review",
+      "status": "NOT RUN",
+      "detail": "pin map correctness (I2C 1/0 and 54/53, LED 15-17, button GPIO45) is copied from board_M5UnitPoEP4; docs.m5stack.com has no Unit_PoE-P4X page yet (HTTP 404), so the values could not be checked against published documentation"
+    },
+    {
+      "layer": "build",
+      "status": "NOT RUN",
+      "detail": "Arduino / PlatformIO library resolution for the >=0.3.0 bound was not built separately; only the ESP-IDF component-manager path reproduced the same floor problem"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "no PoE-P4X unit: display-out attach, button rawstate, power-off LED behaviour and any PoE/Ethernet behaviour were not observed"
+    }
+  ],
+  "evidence": [
+    "evidence/pr-448.json",
+    "evidence/pr-448.diff",
+    "evidence/pr-status.txt",
+    "evidence/source-facts.txt",
+    "evidence/build-matrix.txt",
+    "evidence/build-030-errors.txt",
+    "evidence/environment.txt"
+  ],
+  "notes": [
+    "PR left OPEN; exactly one English comment intended; no close, approve, push or change to m5stack/M5Unified.",
+    "Evidence class is code-level verification (source facts plus four esp32p4 builds). Hardware and virtual-device validation are NOT RUN.",
+    "The two findings were reported as questions / release-coordination items, not as an approval or rejection; merge authority stays with the maintainers."
+  ]
+}

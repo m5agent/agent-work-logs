@@ -1,0 +1,41 @@
+== PR head + M5GFX 0.3.0 (local tag checkout): compiler diagnostics
+In file included from /tmp/idfB/M5Unified/src/M5Unified.cpp:54:
+/tmp/idfB/M5Unified/src/utility/Power_Class.inl: In member function 'bool m5::Power_Class::_powerOff(bool)':
+/tmp/idfB/M5Unified/src/utility/Power_Class.inl:2424:19: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+ 2424 |     case board_t::board_M5UnitPoEP4X:
+In file included from /tmp/idfB/M5Unified/src/M5Unified.cpp:65:
+/tmp/idfB/M5Unified/src/M5Unified.inl: At global scope:
+/tmp/idfB/M5Unified/src/M5Unified.inl:146:12: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+  146 | { board_t::board_M5UnitPoEP4X , GPIO_NUM_1 ,GPIO_NUM_0  , GPIO_NUM_54,GPIO_NUM_53 },
+/tmp/idfB/M5Unified/src/M5Unified.inl: In member function 'void m5::M5Unified::_begin(const config_t&)':
+/tmp/idfB/M5Unified/src/M5Unified.inl:2071:19: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+ 2071 |     case board_t::board_M5UnitPoEP4X:
+/tmp/idfB/M5Unified/src/M5Unified.inl: In member function 'virtual void m5::M5Unified::update()':
+/tmp/idfB/M5Unified/src/M5Unified.inl:3230:19: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+ 3230 |     case board_t::board_M5UnitPoEP4X:
+   72 |   M5.Power.setExtPower(true);
+In file included from /tmp/idfB/M5Unified/src/M5Unified.hpp:61,
+  269 |     void setExtPower(bool enable, ext_port_mask_t port_mask = (ext_port_mask_t)0xFF) { setExtOutput(enable, port_mask); }
+
+== PR head + registry-resolved m5stack/m5gfx 0.3.0 (no local M5GFX): resolution and diagnostics
+21:NOTE: [1/2] m5stack/m5gfx (0.3.0)
+In file included from /tmp/idfD/M5Unified/src/M5Unified.cpp:54:
+/tmp/idfD/M5Unified/src/utility/Power_Class.inl: In member function 'bool m5::Power_Class::_powerOff(bool)':
+/tmp/idfD/M5Unified/src/utility/Power_Class.inl:2424:19: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+ 2424 |     case board_t::board_M5UnitPoEP4X:
+In file included from /tmp/idfD/M5Unified/src/M5Unified.cpp:65:
+/tmp/idfD/M5Unified/src/M5Unified.inl: At global scope:
+/tmp/idfD/M5Unified/src/M5Unified.inl:146:12: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+  146 | { board_t::board_M5UnitPoEP4X , GPIO_NUM_1 ,GPIO_NUM_0  , GPIO_NUM_54,GPIO_NUM_53 },
+/tmp/idfD/M5Unified/src/M5Unified.inl: In member function 'void m5::M5Unified::_begin(const config_t&)':
+/tmp/idfD/M5Unified/src/M5Unified.inl:2071:19: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+ 2071 |     case board_t::board_M5UnitPoEP4X:
+/tmp/idfD/M5Unified/src/M5Unified.inl: In member function 'virtual void m5::M5Unified::update()':
+/tmp/idfD/M5Unified/src/M5Unified.inl:3230:19: error: 'board_M5UnitPoEP4X' is not a member of 'm5::board_t' {aka 'lgfx::boards::board_t'}
+ 3230 |     case board_t::board_M5UnitPoEP4X:
+   72 |   M5.Power.setExtPower(true);
+In file included from /tmp/idfD/M5Unified/src/M5Unified.hpp:61,
+  269 |     void setExtPower(bool enable, ext_port_mask_t port_mask = (ext_port_mask_t)0xFF) { setExtOutput(enable, port_mask); }
+
+== base develop + M5GFX 0.3.0: no diagnostics of this kind
+0

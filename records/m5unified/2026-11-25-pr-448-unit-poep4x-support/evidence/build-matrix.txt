@@ -1,0 +1,25 @@
+# Build matrix -- M5Unified examples/Test/build_test, target esp32p4, ESP-IDF v6.1
+# command: idf.py set-target esp32p4 && idf.py build
+# Checkout dirs named M5Unified / M5GFX (ESP-IDF derives component names from them).
+
+A. PR head 6167c92 + M5GFX develop e7cae68 (M5GFX_PATH=$M5GFX)
+   exit 0, "Project build complete.", 1148 ninja steps
+   app bin 432080 bytes sha256 fa65e1a8d1bd2292caff624a9a165d0286010b7a75ec3c5d69279d4de4b7d89c
+
+B. PR head 6167c92 + M5GFX 0.3.0 tag 28d4794 (M5GFX_PATH=$M5GFX)
+   exit 2, 4 x "'board_M5UnitPoEP4X' is not a member of 'm5::board_t'"
+   M5Unified.inl:146, M5Unified.inl:2071, M5Unified.inl:3230, Power_Class.inl:2424
+
+C. base develop dae3b5d + M5GFX 0.3.0 tag 28d4794 (M5GFX_PATH=$M5GFX)
+   exit 0, "Project build complete.", 0 errors
+   app bin 430320 bytes sha256 1e750e753763e0d1fae06a9a5c558070337775dba46b09f146922ddfb44a1c56
+
+D. PR head 6167c92 + no local M5GFX (registry path a real user gets)
+   component manager resolved m5stack/m5gfx 0.3.0 from the declared ">=0.3.0" floor
+   exit 2, same 4 errors as B
+
+# log files (full, uncompressed) and hashes
+build-dev2.log db2983aa0a8571b04b22f3f1eaea3d32e39d9158c8fa619b3b2f7f5ea4a66f1b  1527 170525
+build-030b.log 3cccce14f4bc647fe4f3218b015bbcce031727622fffcc3280510d2765f65fd2  1331 159740
+build-base-030.log 659bdf8508faab1fa20be12273d7420e0f583141b178ac5d7bed83f63adbe103  1527 170383
+build-managed.log 5b31da4eb72515a8d07996e2ff27714ba6f7777f5c1ee7a7bef221b3eb0e7991  1310 157497

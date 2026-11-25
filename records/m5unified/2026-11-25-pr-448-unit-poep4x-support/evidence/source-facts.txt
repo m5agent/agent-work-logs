@@ -1,0 +1,46 @@
+== M5GFX develop: 158 present
+87:    , board_M5UnitPoEP4X = 158
+
+== M5GFX 0.3.0 tag: 158 absent
+(no match)
+
+== M5GFX develop: no detector / board_desc_t for PoEP4X (only the enum)
+$M5GFX/src/lgfx/boards.hpp:87:    , board_M5UnitPoEP4X = 158
+
+== M5GFX develop: existing PoEP4 detector and candidate entry
+372:static constexpr board_desc_t desc_unitpoep4 = {
+373:  { static_cast<board_id_t>(lgfx::board_M5UnitPoEP4), "M5UnitPoEP4", 0 },
+378:class unitpoep4_detector_t final : public board_detector_t
+381:  unitpoep4_detector_t() : board_detector_t(members_) {}
+393:      io::pin_count, desc_unitpoep4.op_gpio_pins.data, desc_unitpoep4.op_gpio_pins.size,
+403:    result->assign(&desc_unitpoep4);
+409:const board_def_t* const unitpoep4_detector_t::members_[2] = { &desc_unitpoep4.def, nullptr };
+410:static const unitpoep4_detector_t unitpoep4_detector;
+426:  { &desc_unitpoep4, construct_displayless, "board_M5UnitPoEP4", nullptr },
+
+== M5Unified PR head: all board_M5UnitPoEP4 sites
+src/M5Unified.hpp:465:       && (_board == board_t::board_M5UnitPoEP4 || _board == board_t::board_M5UnitPoEP4X)
+src/M5Unified.inl:145:{ board_t::board_M5UnitPoEP4  , GPIO_NUM_1 ,GPIO_NUM_0  , GPIO_NUM_54,GPIO_NUM_53 },
+src/M5Unified.inl:146:{ board_t::board_M5UnitPoEP4X , GPIO_NUM_1 ,GPIO_NUM_0  , GPIO_NUM_54,GPIO_NUM_53 },
+src/M5Unified.inl:2070:    case board_t::board_M5UnitPoEP4:
+src/M5Unified.inl:2071:    case board_t::board_M5UnitPoEP4X:
+src/M5Unified.inl:3229:    case board_t::board_M5UnitPoEP4:
+src/M5Unified.inl:3230:    case board_t::board_M5UnitPoEP4X:
+src/utility/Power_Class.inl:2423:    case board_t::board_M5UnitPoEP4:
+src/utility/Power_Class.inl:2424:    case board_t::board_M5UnitPoEP4X:
+
+== M5Unified PR head: example board-name mapping still only non-X
+$PR/examples/Test/build_test/managed_components/m5stack__m5gfx/src/M5GFX.cpp:1092:    case board_M5UnitPoEP4:    title = "M5UnitPoEP4";    break;
+$PR/examples/Basic/HowToUse/HowToUse.ino:329:  case m5::board_t::board_M5UnitPoEP4:      name = "UnitPoEP4";      break;
+
+== M5Unified dependency floor (all three manifests)
+15:      "name": "M5GFX",
+16-      "version": ">=0.3.0"
+17-    }
+11:depends=M5GFX (>=0.3.0)
+7:  m5stack/m5gfx:
+8-    version: ">=0.3.0"
+
+== M5GFX develop still declares version 0.3.0
+$M5GFX/library.properties:2:version=0.3.0
+$M5GFX/idf_component.yml:5:version: 0.3.0
