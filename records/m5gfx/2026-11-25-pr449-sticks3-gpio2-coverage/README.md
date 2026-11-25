@@ -68,3 +68,10 @@
 - 自动识别路径 `NOT RUN`：M5GFX 的检测器在该 profile 上不确认（`candidate=0`），
   探针改用 `fixed_board`；两条路走同一 descriptor 与同一段 power ops，但运行时自动识别未跑。
 - 旧代码“gpio1 功能被改坏”的实际后果（是否影响按键/中断）未在真机观察。
+
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/449#issuecomment-7167555249>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
+- 公开记录 permalink（评论引用）：`ca69af7`（`records/m5gfx/2026-11-25-pr449-sticks3-gpio2-coverage/README.md`）；
+  本条“已发布回复”为同一记录的后续提交，不改变结论。
