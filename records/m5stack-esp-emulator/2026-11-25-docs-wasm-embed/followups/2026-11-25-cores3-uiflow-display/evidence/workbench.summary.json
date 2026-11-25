@@ -1,0 +1,168 @@
+{
+  "status": "PASS",
+  "validation": "virtual-device validation (browser WASM)",
+  "entrypoint": "Sealed static public workbench, mode=browser. Actual Start, Load example, Run, Interrupt, Share and Stop controls.",
+  "site_manifest_sha256": "547757ec97ec2b8516c0b5bf62dc4b726f9ab17163cab70b6a44ab805a5ea2b6",
+  "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672",
+  "wasm_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+  "workbench_profiles_sha256": "96331392f1c9b39666ca550528500a091e6cef5effb6462c16750e9a18f7c83c",
+  "harness_sha256": "c74d37f0a433f102422b44ed36ad9d3b7116069c62dd4c3e5e827cf19d1b6fcf",
+  "browser_version": "158.0.8127.37",
+  "qemu_source_commit": "40edccac415693c5130f91c01d84176ae6008566",
+  "required_rom_sha256": "b5c7090cc22efce51c1323cef31ca96fcd673a5b1d1b1017e219d393f2659913",
+  "workbench_asset_sha256": {
+    "index.html": "b1d83088fafc1c96e287dd35b081666ca20693916dee7c2c9ec2a5ebbd044eac",
+    "platform/web/public.js": "4f5d6f8a2a4227abc3bda79b8d7015c85803845bb72cee0d196cf6ec8185fc34",
+    "platform/web/public-uiflow-firmware.js": "d55bee5aae6ff5aca9c2db101ea5e4a6e5a48dccd9c2bc6d8e343ff8dd3a0f39",
+    "platform/web/public-qemu-runtime.js": "9328b54fd9f83ab1935fff1876226538195a71fa28745f75f1adaadaf2c4fb99"
+  },
+  "cases": {
+    "explicit_cores3_display": {
+      "selected_reference": "CoreS3 绘图 · UIFlow2 v2.5.5",
+      "official_base": {
+        "version": "2.5.5",
+        "bytes": 16121856,
+        "sha256": "60441fe0dc16ab08865ad3cb4f83bd246a6efae61536103bd915109786bd3833",
+        "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2122962394541932546/bin/2122962394541932547.bin",
+        "transport": "exact official remote URL intercepted with pinned cache"
+      },
+      "firmware_input_sha256": "565f1de9c87e8fe12f133e64ae6e3c6d32085c46e52269b864ea1cf4604f0927",
+      "firmware_runtime_sha256": "565f1de9c87e8fe12f133e64ae6e3c6d32085c46e52269b864ea1cf4604f0927",
+      "board": "m5cores3",
+      "profile": "cores3-wasm-docs-v255-lvgl-wallclock-candidate",
+      "clock_divisor": 1,
+      "one_instruction_per_tb": true,
+      "ready_marker": "M5_UIFLOW_WORKBENCH_READY",
+      "required_runtime_patch": {
+        "path": "patches/qemu-wasm-probe/0027-gpio-bounded-transactions.patch",
+        "sha256": "43685da86d9b959b2e769cd9cda5785a5c4039b5076f73f3b9d6033d1d161bdf"
+      },
+      "startup_files": {
+        "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+        "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+        "main.py": "12ae78c798dc3f36d2e35d5a7927e403ff46131bd3437870552fa953476c6e06"
+      },
+      "application_ready": "confirmed",
+      "checks_passed": 14,
+      "cleanup": {
+        "exit_code": 0,
+        "remaining_worker_targets": 0,
+        "observed_worker_targets": 6,
+        "iframe_removed": true
+      },
+      "report_sha256": "09a26fd97b29288e69375fb96577ae93dbe3e9508b1a882e0557ff812e2eb66a",
+      "example_asset": {
+        "method": "GET",
+        "bytes": 1729,
+        "sha256": "03869b2d115675642900d900a9bc9c442a75a92b99db05883948876a22cbfe3d"
+      },
+      "editor_source_sha256": "03869b2d115675642900d900a9bc9c442a75a92b99db05883948876a22cbfe3d",
+      "uart_transfer": "raw-paste",
+      "geometry_stdout": [
+        "rotation: 0",
+        "w: 320h:240"
+      ],
+      "stderr": "",
+      "deliberate_interrupt_acknowledged": true,
+      "same_session_and_console_epoch": true,
+      "frame_before_run": {
+        "sequence": 1,
+        "source_sequence": 18
+      },
+      "native_rgb565_frame_after_run": {
+        "width": 320,
+        "height": 240,
+        "sequence": 9,
+        "source_sequence": 54,
+        "rgb565_sha256": "2f6f54251816e86932bf133b12a730cdd73970501408540ecc56ecd1da2e8aef",
+        "color_count": 164,
+        "png_sha256": "32ca2dce6dcc181c613c4a7a49a75259d14edd4d75eb4bb1239aa655c1f992c9",
+        "qr": {
+          "decoder": "macOS Vision",
+          "symbology": "QR",
+          "payload": "Hello"
+        }
+      },
+      "workbench_flat_screen_png_sha256": "ec7d6d27681422af0ed578a3d3de06419c8074fd8e81a26498e11e0bd4e2cce0",
+      "share": {
+        "parameters": {
+          "device": "cores3",
+          "sha256": "565f1de9c87e8fe12f133e64ae6e3c6d32085c46e52269b864ea1cf4604f0927",
+          "mode": "browser"
+        },
+        "reopened_manual": {
+          "reference": "cores3-display",
+          "device": "cores3",
+          "mode": "browser",
+          "firmware_sha256": "565f1de9c87e8fe12f133e64ae6e3c6d32085c46e52269b864ea1cf4604f0927",
+          "guest_iframe": false
+        },
+        "manual_reopen_autostart": false
+      }
+    },
+    "generic_cores3_default_control": {
+      "selected_reference": "本地 MicroPython 编程",
+      "official_base": {
+        "version": "2.5.3",
+        "bytes": 16121856,
+        "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264",
+        "url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000001950/2102696305989775362/bin/2102696305989775363.bin",
+        "transport": "exact official remote URL intercepted with pinned cache"
+      },
+      "firmware_input_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "firmware_runtime_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+      "board": "m5cores3",
+      "profile": "cores3-wasm-uiflow-workbench-lvgl-wallclock-candidate",
+      "clock_divisor": 1,
+      "one_instruction_per_tb": true,
+      "ready_marker": "M5_UIFLOW_WORKBENCH_READY",
+      "required_runtime_patch": {
+        "path": "patches/qemu-wasm-probe/0027-gpio-bounded-transactions.patch",
+        "sha256": "43685da86d9b959b2e769cd9cda5785a5c4039b5076f73f3b9d6033d1d161bdf"
+      },
+      "startup_files": {
+        "boot.py": "8fc4849761e7bdc252c71759006736f1e5dba98ed486bd934031ac4a08647c33",
+        "candidate_lvgl_loop.py": "0a460dbbd04838811238dd9022044f4b5e85f76629e44f8b7ba8fb057710363e",
+        "main.py": "12ae78c798dc3f36d2e35d5a7927e403ff46131bd3437870552fa953476c6e06"
+      },
+      "application_ready": "confirmed",
+      "checks_passed": 9,
+      "cleanup": {
+        "exit_code": 0,
+        "remaining_worker_targets": 0,
+        "observed_worker_targets": 6,
+        "iframe_removed": true
+      },
+      "report_sha256": "edea7b515e9f80206c983b6f8c40a437f806dad8b77a5ee47d5cb8ff98d8a9ca",
+      "example_asset_requests": 0,
+      "actual_original_editor_runs": [
+        {
+          "editor_source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout": "Hello, UIFlow!",
+          "stderr": "",
+          "uart_transfer": "raw-paste"
+        },
+        {
+          "editor_source_sha256": "93ebf6c7166ac121b8f6163c836ed1001e4ba469c47e3cfd3a90f47908ccc1db",
+          "stdout": "Hello, UIFlow!",
+          "stderr": "",
+          "uart_transfer": "raw-paste"
+        }
+      ],
+      "same_session_and_console_epoch": true
+    }
+  },
+  "preserved_first_attempt": {
+    "status": "HARNESS_FAILURE",
+    "report_sha256": "ccce1d37ddfe04e5fc60da308a503bf53eaaefa9e071787d170e0aa10893b086",
+    "guest_progress": "Exact image ready, exact source loaded, and both geometry lines returned over UART before measurement ended.",
+    "cause": "The private Playwright async frame predicate returned a false sample after being treated as a truthy Promise. Explicit awaited polling replaced the harness predicate; sealed site and firmware bytes stayed the same.",
+    "remaining_worker_targets": 0
+  },
+  "scope": [
+    "The browser request routes replayed hash-pinned cached responses at the exact official base and ROM URLs. The official base URL network check was independent.",
+    "The fresh RGB565 framebuffer matches the prior full native-pixel oracle, and macOS Vision decoded the QR payload from an image derived from those pixels. The original source draws a loop that the tester intentionally interrupted after capture.",
+    "The actual clipboard link was inspected and reopened with manual start. Automatic guest startup from an unmodified link was not exercised.",
+    "No physical hardware, public Pages deployment, real network delivery in browser, or performance SLA was evaluated."
+  ]
+}

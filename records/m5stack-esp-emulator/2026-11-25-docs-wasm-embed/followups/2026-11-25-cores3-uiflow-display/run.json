@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "bug-fix",
+  "source": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "issue": 249,
+    "base_commit": "b2bb51ffb536a1b770a304760a508a9068574732",
+    "candidate_commit": "cb18ab60da114b22f4c1f04d5c81e77ae6db9b3d",
+    "test_harness_commit": "8dc73d587d3762e64a313008729dd6a33f9b4916",
+    "uiflow_documented_source_commit": "a61a29409f09f1f4bebae05e15c4bd6dcc4956b6",
+    "uiflow_documented_source_sha256": "03869b2d115675642900d900a9bc9c442a75a92b99db05883948876a22cbfe3d"
+  },
+  "hardware": {
+    "device": "CoreS3",
+    "physical_validation": "NOT RUN"
+  },
+  "firmware": {
+    "drawing_ui_flow": "v2.5.5",
+    "default_ui_flow": "v2.5.3",
+    "drawing_sha256": "565f1de9c87e8fe12f133e64ae6e3c6d32085c46e52269b864ea1cf4604f0927",
+    "default_sha256": "b9fe8334023c1b1f95e7c51b3a63724e621a6789812083848ed3ea7eaa332d49",
+    "material": "evidence/composition.summary.json"
+  },
+  "execution": {
+    "level": "virtual-device validation",
+    "runtime": "browser WASM",
+    "date": "2026-11-25",
+    "browser": "158.0.8127.37",
+    "site_manifest_sha256": "547757ec97ec2b8516c0b5bf62dc4b726f9ab17163cab70b6a44ab805a5ea2b6",
+    "wasm_sha256": "618f471307a11e90301372b5f704afa46df1224be19feda292ba663fb6c31a62",
+    "runtime_manifest_sha256": "3189013ceac988caec6969d6b7bf8b4f62c422d26453f5a8d60cfa1478806672"
+  },
+  "checks": [
+    {
+      "name": "historical v2.5.3 render clips original CoreS3 drawing",
+      "status": "FAIL"
+    },
+    {
+      "name": "official v2.5.3 and v2.5.5 host LittleFS composition and source readback",
+      "status": "PASS",
+      "evidence": "evidence/composition.summary.json"
+    },
+    {
+      "name": "actual new reference selector, load and run including RGB565 Full QR Hello and guest interrupt",
+      "status": "PASS",
+      "evidence": "evidence/workbench.summary.json"
+    },
+    {
+      "name": "actual share and manual reopen",
+      "status": "PASS",
+      "evidence": "evidence/workbench.summary.json"
+    },
+    {
+      "name": "unchanged default v2.5.3 with two original editor runs in one browser guest",
+      "status": "PASS",
+      "evidence": "evidence/workbench.summary.json"
+    },
+    {
+      "name": "actual graceful cleanup for both subjects",
+      "status": "PASS"
+    },
+    {
+      "name": "external CDN transfer inside browser, share-link autostart, hosted release, native and hardware",
+      "status": "NOT RUN"
+    }
+  ]
+}
