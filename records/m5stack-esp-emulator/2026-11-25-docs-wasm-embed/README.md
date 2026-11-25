@@ -34,3 +34,5 @@
 [已盘点的例程矩阵和演示范围](followups/2026-11-25-example-coverage/)
 
 [ADV 板号探测回归、CoreS3 热复位及 v2.5.5 预览](followups/2026-11-25-board-probe-and-guest-reset/)
+
+[新版 WASM 的 ADV 外设和串口复测](followups/2026-11-25-adv-new-runtime-matrix/)
