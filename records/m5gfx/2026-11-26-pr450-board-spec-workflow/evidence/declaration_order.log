@@ -1,0 +1,67 @@
+# changed headers: compare declaration multiset ignoring order and comment lines
+SAME-SET  src/board_detect/m5/generated/detector_order_constraints.hpp
+SAME-SET  src/board_detect/m5/generated/esp32_d0wdq6_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32_d0wdq6_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32_pico_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c3_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c3_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c5_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c5_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c61_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c61_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c6_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32c6_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32h2_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32h2_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32p4_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32p4_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/esp32s3_board_data.hpp
+SAME-SET  src/board_detect/m5/generated/esp32s3_detector_order.hpp
+SAME-SET  src/board_detect/m5/generated/gpio_power_hold_board_ids.hpp
+DIFF-SET  src/lgfx/boards.hpp
+SAME-SET  test/board_detect/generated/detector_probe_pins.hpp
+DIFF-SET  test/board_detect/support/pin_coverage.hpp
+DIFF-SET  test/board_detect/support/snapshot.hpp
+
+# esp32p4_board_data.hpp diff
+diff --git a/src/board_detect/m5/generated/esp32p4_board_data.hpp b/src/board_detect/m5/generated/esp32p4_board_data.hpp
+index 31e6466..c82756b 100644
+--- a/src/board_detect/m5/generated/esp32p4_board_data.hpp
++++ b/src/board_detect/m5/generated/esp32p4_board_data.hpp
+@@ -1,5 +1,5 @@
+ // Generated from extras/board_spec; do not edit by hand.
+-// Regenerate in extras/board_spec: node cli/spec.js emit-wiring
++// Regenerate in extras/board_spec: npm run generate
+ // Unspecified values use target-specific unknown or sentinel values.
+ // Precedence: board value > part default > panel-class default.
+ #pragma once
+@@ -16,14 +16,6 @@ namespace corep4x {
+   constexpr std::int8_t internal_i2c_port = 1;
+ } // namespace corep4x
+ 
+-namespace unitpoep4 {
+-  constexpr detect_class_expected_t detect_class_expected = { 0x10000180000000ULL, 0x10000080000000ULL, 0x0ULL, 0x100000000ULL, 0x0ULL };
+-} // namespace unitpoep4
+-
+-namespace unitpoep4x {
+-  constexpr detect_class_expected_t detect_class_expected = { 0x10000180000000ULL, 0x10000080000000ULL, 0x0ULL, 0x100000000ULL, 0x0ULL };
+-} // namespace unitpoep4x
+-
+ namespace stampp4xhub {
+   constexpr std::int8_t internal_i2c_sda = 0;
+   constexpr std::int8_t internal_i2c_scl = 1;
+@@ -48,6 +40,14 @@ namespace tab5x {
+   constexpr std::int8_t touch_int = 23;
+ } // namespace tab5x
+ 
++namespace unitpoep4 {
++  constexpr detect_class_expected_t detect_class_expected = { 0x10000180000000ULL, 0x10000080000000ULL, 0x0ULL, 0x100000000ULL, 0x0ULL };
++} // namespace unitpoep4
++
++namespace unitpoep4x {
++  constexpr detect_class_expected_t detect_class_expected = { 0x10000180000000ULL, 0x10000080000000ULL, 0x0ULL, 0x100000000ULL, 0x0ULL };
++} // namespace unitpoep4x
++
+ namespace detection {
+   constexpr std::int8_t unconditional_pins[] = { 0, 1, 2, 3, 9, 11, 22, 23, 31, 32, 52 };
+ } // namespace detection

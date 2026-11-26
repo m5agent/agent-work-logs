@@ -1,0 +1,38 @@
+## 1. trial board files
+
+## 2. check before generate (formatter hint expected)
+boards/m5trialc6.json is not formatted
+Run "npm run generate" in extras/board_spec, then "npm run verify".
+
+## 3. npm run generate
+
+generated docs for 65 board(s)
+generated M5GFX wiring for 58 board(s)
+generated M5Unified pin tables for 56 board(s) across 4 target(s)
+
+## 4. check after generate
+check passed: 65 board(s), 92 resolved combination(s)
+
+## 5. node tests, trial board present
+ℹ tests 238
+ℹ pass 233
+ℹ fail 0
+ℹ skipped 5
+
+## 6. touched files (no targets.json, no test/* edits)
+ M src/board_detect/m5/esp32c6.inl
+ M src/lgfx/boards.hpp
+?? extras/board_spec/boards/m5trialc6.json
+
+## 7. revert trial board
+
+## 8. guard: display constructor without targets wiring_fields (m5atoms3 entry removed)
+  AssertionError [ERR_ASSERTION]: display constructors need nonempty wiring_fields describing the C++ descriptor reads
+  + actual - expected
+  
+  + [
+  +   'm5atoms3: construct_atoms3 requires nonempty wiring_fields in targets.json describing the C++ descriptor reads; inferred wiring output alone is insufficient (see README.md, Adding a board)'
+  + ]
+  - []
+
+## 9. final status (empty = clean)

@@ -1,0 +1,111 @@
+# diff --stat 28b8a5c..a092ea5 (excluding the deleted generated bundle)
+ .github/PULL_REQUEST_TEMPLATE.md                   |   9 +
+ .github/workflows/BoardSpec.yml                    |   5 +
+ extras/board_spec/.gitignore                       |   1 +
+ extras/board_spec/README.md                        | 121 +++++++++--
+ extras/board_spec/cli/spec.js                      | 127 +++++++-----
+ extras/board_spec/cli/verify.js                    |  43 ++++
+ extras/board_spec/editor/editor.js                 |   2 +-
+ extras/board_spec/editor/index.html                |   4 +-
+ extras/board_spec/lib/emit/m5gfx_board_specs.js    |   2 +-
+ extras/board_spec/lib/emit/m5gfx_board_wiring.js   |   6 +-
+ extras/board_spec/lib/emit/m5gfx_detector_order.js |   6 +-
+ .../lib/emit/m5gfx_detector_probe_pins.js          |   2 +-
+ extras/board_spec/lib/targets.js                   |  75 +++++--
+ extras/board_spec/lib/validate.js                  |   9 +-
+ extras/board_spec/package.json                     |   5 +-
+ extras/board_spec/targets.json                     | 121 +++++------
+ extras/board_spec/test/board_id_coverage.test.js   |  32 ++-
+ extras/board_spec/test/board_spec.test.js          | 227 ++++++++++++++++++---
+ extras/board_spec/test/detect_attempt.test.js      |  14 +-
+ extras/board_spec/test/detect_host_helpers.js      |   8 +
+ .../test/detect_package_candidates.test.js         |   5 +-
+ extras/board_spec/test/detector_hint_order.test.js |   5 +-
+ extras/board_spec/test/detector_order.test.js      |   3 +-
+ extras/board_spec/test/detector_probe_pins.test.js |  24 +--
+ extras/board_spec/test/fixed_board.test.js         |   7 +-
+ extras/board_spec/test/mapping_regression.test.js  |  83 ++++++++
+ extras/board_spec/test/targets.test.js             |  67 ++++++
+ .../board_spec/test/transmitter_write_only.test.js |   8 +-
+ extras/board_spec/test/verify.test.js              |  59 ++++++
+ .../m5/generated/detector_order_constraints.hpp    |   2 +-
+ .../m5/generated/esp32_d0wdq6_board_data.hpp       |   2 +-
+ .../m5/generated/esp32_d0wdq6_detector_order.hpp   |   2 +-
+ .../m5/generated/esp32_pico_detector_order.hpp     |   2 +-
+ .../m5/generated/esp32c3_board_data.hpp            |   2 +-
+ .../m5/generated/esp32c3_detector_order.hpp        |   2 +-
+ .../m5/generated/esp32c5_board_data.hpp            |   2 +-
+ .../m5/generated/esp32c5_detector_order.hpp        |   2 +-
+ .../m5/generated/esp32c61_board_data.hpp           |   2 +-
+ .../m5/generated/esp32c61_detector_order.hpp       |   2 +-
+ .../m5/generated/esp32c6_board_data.hpp            |   2 +-
+ .../m5/generated/esp32c6_detector_order.hpp        |   2 +-
+ .../m5/generated/esp32h2_board_data.hpp            |   2 +-
+ .../m5/generated/esp32h2_detector_order.hpp        |   2 +-
+ .../m5/generated/esp32p4_board_data.hpp            |  18 +-
+ .../m5/generated/esp32p4_detector_order.hpp        |   2 +-
+ .../m5/generated/esp32s3_board_data.hpp            |   2 +-
+ .../m5/generated/esp32s3_detector_order.hpp        |   2 +-
+ .../m5/generated/gpio_power_hold_board_ids.hpp     |   2 +-
+ src/lgfx/boards.hpp                                |   1 +
+ test/board_detect/README.md                        |   3 +
+ .../board_detect/generated/detector_probe_pins.hpp |   2 +-
+ test/board_detect/support/pin_coverage.hpp         |   2 +-
+ test/board_detect/support/snapshot.hpp             |  20 +-
+ 53 files changed, 905 insertions(+), 257 deletions(-)
+
+# full diff name-status
+A	.github/PULL_REQUEST_TEMPLATE.md
+M	.github/workflows/BoardSpec.yml
+M	extras/board_spec/.gitignore
+M	extras/board_spec/README.md
+M	extras/board_spec/cli/spec.js
+A	extras/board_spec/cli/verify.js
+D	extras/board_spec/dist/board_spec_editor.html
+M	extras/board_spec/editor/editor.js
+M	extras/board_spec/editor/index.html
+M	extras/board_spec/lib/emit/m5gfx_board_specs.js
+M	extras/board_spec/lib/emit/m5gfx_board_wiring.js
+M	extras/board_spec/lib/emit/m5gfx_detector_order.js
+M	extras/board_spec/lib/emit/m5gfx_detector_probe_pins.js
+M	extras/board_spec/lib/targets.js
+M	extras/board_spec/lib/validate.js
+M	extras/board_spec/package.json
+M	extras/board_spec/targets.json
+M	extras/board_spec/test/board_id_coverage.test.js
+M	extras/board_spec/test/board_spec.test.js
+M	extras/board_spec/test/detect_attempt.test.js
+M	extras/board_spec/test/detect_host_helpers.js
+M	extras/board_spec/test/detect_package_candidates.test.js
+M	extras/board_spec/test/detector_hint_order.test.js
+M	extras/board_spec/test/detector_order.test.js
+M	extras/board_spec/test/detector_probe_pins.test.js
+M	extras/board_spec/test/fixed_board.test.js
+A	extras/board_spec/test/mapping_regression.test.js
+A	extras/board_spec/test/targets.test.js
+M	extras/board_spec/test/transmitter_write_only.test.js
+A	extras/board_spec/test/verify.test.js
+M	src/board_detect/m5/generated/detector_order_constraints.hpp
+M	src/board_detect/m5/generated/esp32_d0wdq6_board_data.hpp
+M	src/board_detect/m5/generated/esp32_d0wdq6_detector_order.hpp
+M	src/board_detect/m5/generated/esp32_pico_detector_order.hpp
+M	src/board_detect/m5/generated/esp32c3_board_data.hpp
+M	src/board_detect/m5/generated/esp32c3_detector_order.hpp
+M	src/board_detect/m5/generated/esp32c5_board_data.hpp
+M	src/board_detect/m5/generated/esp32c5_detector_order.hpp
+M	src/board_detect/m5/generated/esp32c61_board_data.hpp
+M	src/board_detect/m5/generated/esp32c61_detector_order.hpp
+M	src/board_detect/m5/generated/esp32c6_board_data.hpp
+M	src/board_detect/m5/generated/esp32c6_detector_order.hpp
+M	src/board_detect/m5/generated/esp32h2_board_data.hpp
+M	src/board_detect/m5/generated/esp32h2_detector_order.hpp
+M	src/board_detect/m5/generated/esp32p4_board_data.hpp
+M	src/board_detect/m5/generated/esp32p4_detector_order.hpp
+M	src/board_detect/m5/generated/esp32s3_board_data.hpp
+M	src/board_detect/m5/generated/esp32s3_detector_order.hpp
+M	src/board_detect/m5/generated/gpio_power_hold_board_ids.hpp
+M	src/lgfx/boards.hpp
+M	test/board_detect/README.md
+M	test/board_detect/generated/detector_probe_pins.hpp
+M	test/board_detect/support/pin_coverage.hpp
+M	test/board_detect/support/snapshot.hpp

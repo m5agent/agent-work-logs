@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "kind": "pr-review",
+  "overall_status": "PASS",
+  "title": "M5GFX #450 review: board_spec generate/verify workflow, generated header order and new-board path verified on host",
+  "source": {
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/450",
+    "repository": "m5stack/M5GFX",
+    "head_commit": "a092ea5a85b047263e409448d6d33a7650b2141e",
+    "base_commit": "28b8a5c310075d6432a2096c7444dce5e5c7013f",
+    "base_ref_tip": "28b8a5c (Merge pull request #449 from ainyan03/board_id_coverage)"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64; Apple clang; Node 26.13.1; repository Node and C++ board-detect host suites; local Device Service exposes 36 profiles but the change has no runtime path, so no virtual device was created",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "id": "pr-state",
+      "status": "PASS",
+      "detail": "PR #450 OPEN, not draft, author ainyan03, English body, 0 comments and 0 reviews before review, mergeable, head a092ea5 on top of develop 28b8a5c"
+    },
+    {
+      "id": "scope",
+      "status": "PASS",
+      "detail": "diff outside the deleted 34k-line editor bundle is 49 files: board_spec tooling/tests/README, targets.json, BoardSpec CI, PR template, one boards.hpp comment; library code unchanged"
+    },
+    {
+      "id": "catalog-check",
+      "status": "PASS",
+      "detail": "node cli/spec.js check on head: 64 board(s), 91 resolved combination(s); identical on base 28b8a5c"
+    },
+    {
+      "id": "node-suite",
+      "status": "PASS",
+      "detail": "npm test on head: 238 tests, 233 passed, 0 failed, 5 skipped (M5Unified checkout absent); base: 222 tests, 217 passed, 0 failed, 5 skipped"
+    },
+    {
+      "id": "host-cpp-suite",
+      "status": "PASS",
+      "detail": "sh test/board_detect/run.sh on head and base: C++ test programs: 34 passed"
+    },
+    {
+      "id": "verify-command",
+      "status": "PASS",
+      "detail": "npm run verify on head: Catalog check passed, Node tests passed, C++ host tests passed; CXX pointing at a missing compiler fails by design; M5GFX_UPDATE_SNAPSHOTS is stripped so verify cannot update fixtures"
+    },
+    {
+      "id": "generated-order",
+      "status": "PASS",
+      "detail": "20 changed generated headers have an identical declaration multiset after dropping comment lines and sorting; only esp32p4_board_data.hpp moves the two unitpoep4* namespaces to the end, all others change only the regenerate comment"
+    },
+    {
+      "id": "generate-idempotency",
+      "status": "PASS",
+      "detail": "npm run generate on head leaves git status empty"
+    },
+    {
+      "id": "editor-untracked",
+      "status": "PASS",
+      "detail": "npm run editor writes a 859038-byte ignored dist/board_spec_editor.html; no tracked file, workflow or CI step still references the removed bundle outside its local build instructions"
+    },
+    {
+      "id": "addition-workflow",
+      "status": "PASS",
+      "detail": "trial displayless board copied from m5nanoc6 (catalog JSON + boards.hpp enum + esp32c6.inl descriptor/table entry, BID 159): generate then check passed 65 boards / 92 combinations, 238 tests 0 fail, with no targets.json or test edits"
+    },
+    {
+      "id": "display-constructor-guard",
+      "status": "PASS",
+      "detail": "removing the m5atoms3 targets entry fails with 'construct_atoms3 requires nonempty wiring_fields in targets.json describing the C++ descriptor reads', confirming non-displayless boards still need an explicit entry (README states this)"
+    },
+    {
+      "id": "failure-diagnostics",
+      "status": "PASS",
+      "detail": "missing (two at once), stale and obsolete generated files are all listed with the regenerate command and exit 1; a mutated fixture reports fixtures/c6.txt:3 expected/actual plus the M5GFX_UPDATE_SNAPSHOTS=1 command"
+    },
+    {
+      "id": "upstream-ci",
+      "status": "PASS",
+      "detail": "gh pr checks 450: 39/39 pass, including host, Catalog and generated sources, ESP32 family IDF/Arduino matrix and translation unit consistency"
+    },
+    {
+      "id": "hardware-validation",
+      "status": "NOT RUN",
+      "detail": "the change has no firmware runtime path; there is no device behaviour to observe"
+    },
+    {
+      "id": "virtual-device-validation",
+      "status": "NOT RUN",
+      "detail": "local Device Service has 36 profiles including cores3, sticks3, cardputer-adv and paperdiy, but this PR builds, flashes and runs no firmware, so a virtual device would have nothing to measure; not a missing-profile case"
+    },
+    {
+      "id": "m5unified-pin-table",
+      "status": "NOT RUN",
+      "detail": "the 5 skipped node tests need an M5Unified checkout; the same 5 are skipped on base, so the A/B comparison is unaffected"
+    }
+  ],
+  "evidence": [
+    "evidence/pr_state.log",
+    "evidence/pr450_diff_stat.log",
+    "evidence/verify.log",
+    "evidence/check_and_node_tests.log",
+    "evidence/host_cpp_tests.log",
+    "evidence/base_control.log",
+    "evidence/declaration_order.log",
+    "evidence/addition_workflow.log",
+    "evidence/snapshot_diagnostic.log",
+    "evidence/editor_and_generate.log",
+    "evidence/device_profiles_probe.log",
+    "evidence/ci_checks.log"
+  ],
+  "code": [
+    "code/addition_workflow.sh"
+  ],
+  "posted_comment": "",
+  "notes": [
+    "PR left OPEN; exactly one English comment posted; no close, no push, no change to m5stack/M5GFX.",
+    "Evidence class is host-level test plus code-level verification; hardware and virtual-device validation are NOT RUN because the change has no runtime path.",
+    "Non-blocking wording notes: the PR description says targets.json records exceptions only, but boards registered with a non-construct_displayless constructor still need nonempty wiring_fields; and generated declarations keep targets.json entry order before falling back to catalog ID order."
+  ]
+}
