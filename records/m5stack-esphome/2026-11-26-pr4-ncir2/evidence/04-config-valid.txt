@@ -1,0 +1,233 @@
+INFO ESPHome 2026.11.0-dev
+INFO Reading configuration atoms3r-ncir2-test.yaml...
+esphome:
+  name: ncir2-atoms3r-test
+  on_boot:
+    - priority: 600.0
+      then:
+        - delay: 12s
+        - number.set:
+            id: high_alarm_temp
+            value: 20.0
+        - delay: 10s
+        - switch.turn_on:
+            id: ncir2_buzzer
+        - logger.log:
+            format: TEST_MARK switch_on
+            level: DEBUG
+            tag: main
+            args: []
+        - delay: 10s
+        - light.turn_on:
+            id: ncir2_led
+            red: 0.0
+            green: 0.0
+            blue: 1.0
+            state: true
+        - logger.log:
+            format: TEST_MARK light_blue
+            level: DEBUG
+            tag: main
+            args: []
+  min_version: 2026.11.0-dev
+  build_path: build/ncir2-atoms3r-test
+  friendly_name: ''
+  platformio_options: {}
+  build_flags: []
+  environment_variables: {}
+  includes: []
+  includes_c: []
+  libraries: []
+  name_add_mac_suffix: false
+  merge_warnings: true
+  debug_scheduler: false
+  suspend_loop: false
+  areas: []
+  devices: []
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: ESP32S3
+  flash_size: 8MB
+  framework:
+    type: esp-idf
+    version: 5.5.6
+    sdkconfig_options: {}
+    log_level: ERROR
+    advanced:
+      compiler_optimization: SIZE
+      enable_idf_experimental_features: false
+      enable_lwip_assert: true
+      ignore_efuse_custom_mac: false
+      ignore_efuse_mac_crc: false
+      sram1_as_iram: false
+      enable_lwip_dhcp_server: false
+      enable_lwip_mdns_queries: true
+      enable_lwip_bridge_interface: false
+      enable_lwip_tcpip_core_locking: true
+      enable_lwip_check_thread_safety: true
+      disable_libc_locks_in_iram: true
+      disable_vfs_support_termios: true
+      disable_vfs_support_select: true
+      disable_vfs_support_dir: true
+      freertos_in_iram: false
+      ringbuf_in_iram: false
+      heap_in_iram: false
+      execute_from_psram: false
+      loop_task_stack_size: 8192
+      enable_ota_rollback: false
+      enable_ota_downgrade_protection: false
+      use_full_certificate_bundle: false
+      include_builtin_idf_components: []
+      enable_full_printf: false
+      disable_debug_stubs: true
+      disable_ocd_aware: true
+      disable_usb_serial_jtag_secondary: true
+      disable_dev_null_vfs: true
+      disable_mbedtls_peer_cert: true
+      disable_mbedtls_pkcs7: true
+      disable_mbedtls_tls: true
+      disable_mbedtls_tls_server: true
+      disable_mbedtls_tls_extras: true
+      disable_regi2c_in_iram: true
+      adc_oneshot_in_iram: false
+      disable_fatfs: true
+    components: []
+  watchdog_timeout: 5s
+  cpu_frequency: 240MHZ
+logger:
+  level: DEBUG
+  hardware_uart: UART0
+  baud_rate: 115200
+  tx_buffer_size: 512
+  deassert_rts_dtr: false
+  task_log_buffer_size: 768
+  logs: {}
+  runtime_tag_levels: false
+i2c:
+  - sda: 2
+    scl: 1
+    scan: true
+    sda_pullup_enabled: true
+    scl_pullup_enabled: true
+    frequency: 50000.0
+m5_unit_ncir2:
+  - id: ncir2
+    update_interval: 5s
+    emissivity: 0.95
+    low_alarm:
+      temperature: 10.0
+      color:
+        red: 0.0
+        green: 1.0
+        blue: 0.0
+      buzzer:
+        frequency: 2000.0
+        interval: 200ms
+        duty: 0.5
+    high_alarm:
+      temperature: 40.0
+    address: 0x5A
+sensor:
+  - platform: m5_unit_ncir2
+    temperature:
+      name: NCIR2 temperature
+      on_value:
+        - then:
+            - logger.log:
+                format: OBJECT_C=%.2f
+                args:
+                  - !lambda |-
+                    x
+                level: DEBUG
+                tag: main
+      disabled_by_default: false
+      force_update: false
+      unit_of_measurement: °C
+      accuracy_decimals: 2
+      device_class: temperature
+      state_class: measurement
+    internal_temperature:
+      name: NCIR2 chip temperature
+      on_value:
+        - then:
+            - logger.log:
+                format: CHIP_C=%.2f
+                args:
+                  - !lambda |-
+                    x
+                level: DEBUG
+                tag: main
+      disabled_by_default: false
+      force_update: false
+      unit_of_measurement: °C
+      accuracy_decimals: 1
+      device_class: temperature
+      state_class: measurement
+      entity_category: diagnostic
+binary_sensor:
+  - platform: m5_unit_ncir2
+    button:
+      name: NCIR2 button
+      on_state:
+        - then:
+            - logger.log:
+                format: BUTTON=%d
+                args:
+                  - !lambda |-
+                    x
+                level: DEBUG
+                tag: main
+      disabled_by_default: false
+light:
+  - platform: m5_unit_ncir2
+    id: ncir2_led
+    name: NCIR2 LED
+    disabled_by_default: false
+    resume_effect: false
+    gamma_correct: 2.8
+    default_transition_length: 1s
+    flash_transition_length: 0s
+output:
+  - platform: m5_unit_ncir2
+    id: ncir2_buzzer_out
+    frequency: 4000.0
+    zero_means_zero: false
+number:
+  - platform: m5_unit_ncir2
+    high_alarm_temperature:
+      id: high_alarm_temp
+      name: NCIR2 high alarm temperature
+      disabled_by_default: false
+      mode: AUTO
+      entity_category: config
+      device_class: temperature
+      unit_of_measurement: °C
+    low_alarm_temperature:
+      name: NCIR2 low alarm temperature
+      disabled_by_default: false
+      mode: AUTO
+      entity_category: config
+      device_class: temperature
+      unit_of_measurement: °C
+    buzzer_frequency:
+      name: NCIR2 buzzer frequency
+      disabled_by_default: false
+      mode: AUTO
+      device_class: frequency
+      unit_of_measurement: Hz
+    buzzer_duty:
+      name: NCIR2 buzzer duty
+      disabled_by_default: false
+      mode: AUTO
+      icon: mdi:volume-high
+      unit_of_measurement: '%'
+switch:
+  - platform: m5_unit_ncir2
+    buzzer:
+      id: ncir2_buzzer
+      name: NCIR2 buzzer
+      disabled_by_default: false
+      restore_mode: ALWAYS_OFF
+      icon: mdi:bullhorn
+
+INFO Configuration is valid!

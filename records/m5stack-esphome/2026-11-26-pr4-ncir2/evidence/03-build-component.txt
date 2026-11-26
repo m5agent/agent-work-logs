@@ -1,0 +1,75 @@
+INFO ESPHome 2026.11.0-dev
+INFO Reading configuration /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/m5_unit_ncir2.test.esp32-idf.yaml...
+WARNING Component rtttl is not known to work with the selected output type. Make sure this output supports custom frequency output method.
+INFO Generating C++ source...
+INFO Compiling app... Build path: /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf
+INFO Checking ESP-IDF 5.5.6 framework ...
+INFO Checking ESP-IDF 5.5.6 framework installation ...
+INFO Checking ESP-IDF 5.5.6 Python environment ...
+INFO Serving IDF components from the local mirror at /Users/m5agent/Library/Caches/esphome/idf/component_mirror
+INFO Build configuration is up to date
+INFO Compiling with a precompiled header (set ESPHOME_PCH_ENABLE=0 to disable)
+[0/2] Re-checking globbed directories...[0/6] cd /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build && /opt/homebrew/bin/cmake -D "IDF_SIZE_TOOL=/Users/m5agent/Library/Caches/esphome/idf/penvs/5.5.6/bin/python;-m;esp_idf_size" -D MAP_FILE=/Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/componenttestesp32idf.map -D OUTPUT_JSON= -P /Users/m5agent/Library/Caches/esphome/idf/frameworks/5.5.6/tools/cmake/run_size_tool.cmake
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Memory            ┃              ┃          ┃                ┃               ┃
+┃ Type/Section      ┃ Used [bytes] ┃ Used [%] ┃ Remain [bytes] ┃ Total [bytes] ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Flash Code        │       133256 │          │                │               │
+│    .text          │       133256 │          │                │               │
+│ Flash Data        │        46592 │          │                │               │
+│    .rodata        │        46336 │          │                │               │
+│    .appdesc       │          256 │          │                │               │
+│ IRAM              │        38059 │    29.04 │          93013 │        131072 │
+│    .text          │        37031 │    28.25 │                │               │
+│    .vectors       │         1028 │     0.78 │                │               │
+│ DRAM              │        22548 │    12.48 │         158188 │        180736 │
+│    .bss           │        13384 │     7.41 │                │               │
+│    .data          │         9004 │     4.98 │                │               │
+│    .noinit        │          160 │     0.09 │                │               │
+│ RTC SLOW          │           56 │     0.68 │           8136 │          8192 │
+│    .force_slow    │           32 │     0.39 │                │               │
+│    .rtc_slow_rese │           24 │     0.29 │                │               │
+│ rved              │              │          │                │               │
+└───────────────────┴──────────────┴──────────┴────────────────┴───────────────┘
+Total image size: 226943 bytes (.bin may be padded larger)
+reference manual due to reserved memory and application configuration. The total
+flash size available for the application is not included by default, as it
+cannot be reliably determined due to the presence of other data like the
+bootloader, partition table, and application partition size.
+[1/6] cd /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/esp-idf/esptool_py && /Users/m5agent/Library/Caches/esphome/idf/penvs/5.5.6/bin/python /Users/m5agent/Library/Caches/esphome/idf/frameworks/5.5.6/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/partition_table/partition-table.bin /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/componenttestesp32idf.bin
+componenttestesp32idf.bin binary size 0x376f0 bytes. Smallest app partition is 0x300000 bytes. 0x2c8910 bytes (93%) free.
+[2/6] Performing build step for 'bootloader'[1/1] cd /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/bootloader/esp-idf/esptool_py && /Users/m5agent/Library/Caches/esphome/idf/penvs/5.5.6/bin/python /Users/m5agent/Library/Caches/esphome/idf/frameworks/5.5.6/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/bootloader/bootloader.bin
+Bootloader binary size 0x6550 bytes. 0xab0 bytes (10%) free.
+[4/6] Completed 'bootloader'
+RAM:   [=         ]  12.5% (used 22548 bytes from 180736 bytes)
+Flash: [=         ]   7.2% (used 226943 bytes from 3145728 bytes)
+INFO Creating factory.bin...
+INFO Created: /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/firmware.factory.bin
+INFO Created: /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/firmware.ota.bin
+INFO Created: /Users/m5agent/Documents/work/esphome-pr4/tests/test_build_components/build/.esphome/build/componenttestesp32idf/build/firmware.elf
+INFO Build Info: config_hash=0x1a99921c build_time_str=2026-11-26 10:43:56 +0800
+INFO Successfully compiled program.
+Found 1 components to test
+
+================================================================================
+Analyzing components for intelligent grouping...
+================================================================================
+
+Grouping Plan:
+--------------------------------------------------------------------------------
+
+○ 1 components will be tested individually:
+  - m5_unit_ncir2
+
+================================================================================
+Summary: 1 builds total (vs 1 without grouping)
+  • 0 grouped builds (0 components)
+  • 1 individual builds (1 components)
+  • Saves 0 builds (0.0% reduction)
+================================================================================
+
+> [m5_unit_ncir2] [test] [esp32-idf]
+
+================================================================================
+Test Summary: 1 passed, 0 failed
+================================================================================

@@ -1,0 +1,85 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x4 (SPI_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x13d0
+load:0x403c8700,len:0xcb4
+load:0x403cb700,len:0x2ed0
+entry 0x403c8914
+I (15) boot: ESP-IDF v5.5.6 2nd stage bootloader
+I (17) boot: chip revision: v0.0
+I (18) boot.esp32s3: Boot SPI Speed : 80MHz
+I (18) boot.esp32s3: SPI Mode       : SLOW READ
+I (18) boot.esp32s3: SPI Flash Size : 4MB
+I (22) boot: Partition Table:
+I (22) boot: ## Label            Usage          Type ST Offset   Length
+I (22) boot:  0 otadata          OTA data         01 00 00009000 00002000
+I (23) boot:  1 phy_init         RF data          01 01 0000b000 00001000
+I (23) boot:  2 app0             OTA app          00 10 00010000 001c0000
+I (23) boot:  3 app1             OTA app          00 11 001d0000 001c0000
+I (23) boot:  4 nvs              WiFi data        01 02 00390000 00070000
+I (24) boot: No factory image, trying OTA 0
+I (24) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0b970h ( 47472) map
+I (29) esp_image: segment 1: paddr=0001b998 vaddr=3fc8eb00 size=02934h ( 10548) load
+I (30) esp_image: segment 2: paddr=0001e2d4 vaddr=40374000 size=01d44h (  7492) load
+I (31) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=25394h (152468) map
+I (40) esp_image: segment 4: paddr=000453bc vaddr=40375d44 size=08d8ch ( 36236) load
+I (43) esp_image: segment 5: paddr=0004e150 vaddr=50000000 size=00020h (    32) load
+I (44) boot: Loaded app from partition at offset 0x10000
+I (45) boot: Set actual ota_seq=1 in otadata[0]
+[I][logger:136]: Log initialized
+[I][app:073]: Running through setup()
+[I][i2c:250]: Performing bus recovery
+[E][component:311]: m5_unit_ncir2 set Error flag: Communication failed
+[E][component:204]: m5_unit_ncir2 was marked as failed
+[I][app:130]: setup() finished successfully!
+[I][app:164]: ESPHome version 2026.11.0-dev compiled on 2026-11-26 10:46:32 +0800
+[I][app:171]: ESP32 Chip: ESP32-S3 rev0.0, 2 core(s)
+[W][app:189]: Set flash_chip: issi under esp32 > framework > advanced to save IRAM
+[C][logger:220]: Logger:
+  Max Level: DEBUG
+  Initial Level: DEBUG
+[C][logger:227]:   Log Baud Rate: 115200
+  Hardware UART: UART0
+[C][logger:236]:   Task Log Buffer Size: 768 bytes
+[C][i2c:110]: I2C Bus:
+[C][i2c:111]:   SDA Pin: GPIO12
+  SCL Pin: GPIO11
+  Frequency: 50000 Hz
+[C][i2c:121]:   Recovery: bus successfully recovered
+[C][i2c:131]: Results from bus scan:
+[C][i2c:137]: Found device at address 0x10
+[C][i2c:137]: Found device at address 0x18
+[C][i2c:137]: Found device at address 0x21
+[C][i2c:137]: Found device at address 0x23
+[C][i2c:137]: Found device at address 0x32
+[C][i2c:137]: Found device at address 0x34
+[C][i2c:137]: Found device at address 0x36
+[C][i2c:137]: Found device at address 0x38
+[C][i2c:137]: Found device at address 0x40
+[C][i2c:137]: Found device at address 0x51
+[C][i2c:137]: Found device at address 0x58
+[C][i2c:137]: Found device at address 0x69
+[C][light:094]: Light 'NCIR2 LED'
+[C][light:104]:   Default Transition Length: 1.0s
+  Gamma Correct: 2.80
+[C][m5_unit_ncir2:187]: M5Stack Unit NCIR2:
+  Firmware version: 0
+[C][m5_unit_ncir2:191]:   Address: 0x5A
+[C][m5_unit_ncir2:367]:   Update Interval: 5.000s
+[C][m5_unit_ncir2:194]:   Emissivity: 0.950
+[C][m5_unit_ncir2:198]:   Low alarm: 10.00 °C
+[C][m5_unit_ncir2:198]:   High alarm: 40.00 °C
+[C][m5_unit_ncir2:017]:   Temperature 'NCIR2 temperature'
+    State Class: 'measurement'
+    Unit of Measurement: '°C'
+    Accuracy Decimals: 2
+[C][m5_unit_ncir2:173]:     Device Class: 'temperature'
+[C][m5_unit_ncir2:017]:   Internal temperature 'NCIR2 chip temperature'
+    State Class: 'measurement'
+    Unit of Measurement: '°C'
+    Accuracy Decimals: 1
+[C][m5_unit_ncir2:173]:     Device Class: 'temperature'
+[C][m5_unit_ncir2:016]:   Button 'NCIR2 button'
+[E][component:143]:   m5_unit_ncir2 is marked FAILED: Communication failed

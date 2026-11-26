@@ -1,0 +1,111 @@
+esphome:
+  name: ncir2-atoms3r-test
+  on_boot:
+    priority: 600
+    then:
+      - delay: 12s
+      - number.set:
+          id: high_alarm_temp
+          value: 20
+      - delay: 10s
+      - number.set:
+          id: high_alarm_temp
+          value: 45
+      - delay: 1s
+      - switch.turn_on: ncir2_buzzer
+      - logger.log: "TEST_MARK switch_on"
+      - delay: 10s
+      - switch.turn_off: ncir2_buzzer
+      - delay: 2s
+      - light.turn_on:
+          id: ncir2_led
+          red: 0%
+          green: 0%
+          blue: 100%
+      - logger.log: "TEST_MARK light_blue"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 8MB
+  framework:
+    type: esp-idf
+
+logger:
+  level: DEBUG
+  hardware_uart: UART0
+
+i2c:
+  sda: GPIO2
+  scl: GPIO1
+  scan: true
+
+m5_unit_ncir2:
+  id: ncir2
+  update_interval: 5s
+  emissivity: 0.95
+  low_alarm:
+    temperature: 10°C
+    color:
+      red: 0%
+      green: 100%
+      blue: 0%
+    buzzer:
+      frequency: 2000Hz
+      interval: 200ms
+      duty: 50%
+  high_alarm:
+    temperature: 40°C
+
+sensor:
+  - platform: m5_unit_ncir2
+    id: object_temp
+    temperature:
+      name: NCIR2 temperature
+      on_value:
+        - logger.log:
+            format: "OBJECT_C=%.2f"
+            args: [x]
+    internal_temperature:
+      name: NCIR2 chip temperature
+      on_value:
+        - logger.log:
+            format: "CHIP_C=%.2f"
+            args: [x]
+
+binary_sensor:
+  - platform: m5_unit_ncir2
+    button:
+      name: NCIR2 button
+      on_state:
+        - logger.log:
+            format: "BUTTON=%d"
+            args: [x]
+
+light:
+  - platform: m5_unit_ncir2
+    id: ncir2_led
+    name: NCIR2 LED
+
+output:
+  - platform: m5_unit_ncir2
+    id: ncir2_buzzer_out
+    frequency: 4000Hz
+
+number:
+  - platform: m5_unit_ncir2
+    high_alarm_temperature:
+      id: high_alarm_temp
+      name: NCIR2 high alarm temperature
+    low_alarm_temperature:
+      name: NCIR2 low alarm temperature
+    buzzer_frequency:
+      name: NCIR2 buzzer frequency
+    buzzer_duty:
+      name: NCIR2 buzzer duty
+
+switch:
+  - platform: m5_unit_ncir2
+    buzzer:
+      id: ncir2_buzzer
+      name: NCIR2 buzzer
