@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/m5stack-linux-dtoverlays #20 round 4: the 19 s gap is a journald timestamp-base artifact, not a slow restart; confirmed at code level and by arithmetic",
+  "source": {
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "head_commit": "3b6d2738d8606581cddf3f34e213e7682ad9d23d",
+    "previous_review_comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200985071",
+    "author_comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7205879787",
+    "author": "shrimpapplepro",
+    "changed_files": 2,
+    "additions": 368,
+    "deletions": 74,
+    "state": "OPEN",
+    "mergeable_state": "CLEAN"
+  },
+  "hardware": {},
+  "firmware": {
+    "file": "modules/CardputerZero/powerfail_suo.c",
+    "sha256": "58625cce5415ebd0975781eac01d9656de64700100e20a1136e9b8a31b45235b",
+    "note": "unchanged since round 3; no new commit in this round"
+  },
+  "execution": {
+    "environment": "macOS arm64; no Cardputer Zero hardware; Device Service cardputer-zero supported=false creatable=false backend_ready=false (linux-arm64 backend, __missing_qemu__/__missing_rom__); no kernel headers",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "journald_kmsg_entry_timestamp",
+      "status": "PASS",
+      "evidence": "systemd v257 server_dispatch_message_real(): comment plus event_dual_timestamp_now(); entry time is processing time, not source time"
+    },
+    {
+      "name": "journald_policy_longstanding",
+      "status": "PASS",
+      "evidence": "same policy and comment present in v252 src/journal/journald-server.c:820-836, so not a new-version behaviour"
+    },
+    {
+      "name": "kernel_time_only_in_source_fields",
+      "status": "PASS",
+      "evidence": "dev_kmsg_record() writes the kmsg usec as _SOURCE_BOOTTIME_TIMESTAMP and _SOURCE_MONOTONIC_TIMESTAMP only"
+    },
+    {
+      "name": "timestamp_arithmetic",
+      "status": "PASS",
+      "evidence": "prev base 02:13:55.558; kernel start 02:46:03.186-04.185; gap 8.43-9.43 s; driver <= 1.70 s; journal line +9.91-10.90 s"
+    },
+    {
+      "name": "no_new_commit_or_code_delta",
+      "status": "PASS",
+      "evidence": "head 3b6d273 unchanged; no new commits; mergeable=MERGEABLE; previous 32-scenario/127-check result still applies"
+    },
+    {
+      "name": "on_device_hardware",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer Zero; author timings (4.1/4.9 s, 15.7 s backstop, fsck-clean boot) not independently reproduced"
+    },
+    {
+      "name": "virtual_device",
+      "status": "NOT RUN",
+      "evidence": "cardputer-zero uses a separate Linux backend; supported=false, backend_ready=false, missing QEMU and ROM"
+    },
+    {
+      "name": "board_systemd_version",
+      "status": "NOT RUN",
+      "evidence": "no shell on the board; checked v252 and v257 sources instead of the image's journald binary"
+    },
+    {
+      "name": "reset_vs_firmware_split",
+      "status": "NOT RUN",
+      "evidence": "the 6.73-7.73 s before the kernel cannot be split between emergency_restart() and firmware boot from the pasted log"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/journald-timestamp-path.txt",
+      "description": "systemd v257 and v252 excerpts showing the entry timestamp is the processing time and the kernel time is kept in _SOURCE_* fields"
+    },
+    {
+      "path": "evidence/timestamp-arithmetic.txt",
+      "description": "derived previous-boot base, kernel start range, gap decomposition and journal offset"
+    },
+    {
+      "path": "evidence/pr-metadata.txt",
+      "description": "PR state, head, commit list and comment timeline"
+    },
+    {
+      "path": "evidence/device-service-cardputerzero.txt",
+      "description": "redacted local Device Service cardputer-zero profile and why it is not runnable"
+    }
+  ],
+  "notes": [
+    "Evidence class is code-level verification plus arithmetic on the author's log anchors; no runtime reproduction.",
+    "The 19.333 s interval decomposes into ~8.4-9.4 s of real reset/boot plus ~10-11 s of journald start delay, so it does not contradict the 1.5 s + <=200 ms restart path.",
+    "No code change is requested in this round; the only open item from the previous review is closed.",
+    "An inherent <=200 ms window remains between the last .shutdown sample and the halt; both sides agree it cannot be closed."
+  ]
+}

@@ -1,0 +1,55 @@
+# systemd journald entry timestamp for /dev/kmsg records
+# fetched 2026-11-27 from raw.githubusercontent.com (no local systemd checkout on macOS host)
+
+## v257 src/journal/journald-server.c:1200-1208 (server_dispatch_message_real)
+
+        /* Get the closest, linearized time we have for this log event from the event loop. (Note that we do
+         * not use the source time, and not even the time the event was originally seen, but instead simply
+         * the time we started processing it, as we want strictly linear ordering in what we write out.) */
+        struct dual_timestamp ts;
+        event_dual_timestamp_now(s->event, &ts);
+
+        (void) server_forward_socket(s, iovec, n, &ts, priority);
+
+
+## v252 src/journal/journald-server.c:820-836 (same policy, older tag)
+
+static void write_to_journal(Server *s, uid_t uid, struct iovec *iovec, size_t n, int priority) {
+        bool vacuumed = false, rotate = false;
+        struct dual_timestamp ts;
+        ManagedJournalFile *f;
+        int r;
+
+        assert(s);
+        assert(iovec);
+        assert(n > 0);
+
+        /* Get the closest, linearized time we have for this log event from the event loop. (Note that we do not use
+         * the source time, and not even the time the event was originally seen, but instead simply the time we started
+         * processing it, as we want strictly linear ordering in what we write out.) */
+        assert_se(sd_event_now(s->event, CLOCK_REALTIME, &ts.realtime) >= 0);
+        assert_se(sd_event_now(s->event, CLOCK_MONOTONIC, &ts.monotonic) >= 0);
+
+
+## v257 src/journal/journald-kmsg.c:250-265 (kernel's own time kept in _SOURCE_* fields only)
+
+                                j++;
+                        }
+                }
+        }
+
+        char source_boot_time[STRLEN("_SOURCE_BOOTTIME_TIMESTAMP=") + DECIMAL_STR_MAX(unsigned long long)];
+        xsprintf(source_boot_time, "_SOURCE_BOOTTIME_TIMESTAMP=%llu", usec);
+        iovec[n++] = IOVEC_MAKE_STRING(source_boot_time);
+
+        /* Historically, we stored the timestamp 'usec' as _SOURCE_MONOTONIC_TIMESTAMP, so we cannot remove
+         * the field as it is already used in other projects. This is for backward compatibility. */
+        char source_monotonic_time[STRLEN("_SOURCE_MONOTONIC_TIMESTAMP=") + DECIMAL_STR_MAX(unsigned long long)];
+        xsprintf(source_monotonic_time, "_SOURCE_MONOTONIC_TIMESTAMP=%llu", usec);
+        iovec[n++] = IOVEC_MAKE_STRING(source_monotonic_time);
+
+
+## URLs
+https://github.com/systemd/systemd/blob/v257/src/journal/journald-server.c#L1200
+https://github.com/systemd/systemd/blob/v257/src/journal/journald-kmsg.c#L250
+https://github.com/systemd/systemd/blob/v252/src/journal/journald-server.c#L820
