@@ -1,0 +1,15 @@
+PR:        m5stack/m5stack-linux-dtoverlays#20
+Title:     powerfail_suo: orderly poweroff from the power slider
+Author:    shrimpapplepro (Tu Phan)
+State:     OPEN, draft=false, mergeable=MERGEABLE, mergeStateStatus=CLEAN
+Base:      main a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4
+Head:      5623292f043f5b4617f5d035130f464281f13dd1 (single commit, 2026-11-26T16:32:58Z)
+Diff:      2 files changed, +248 / -52
+  modules/CardputerZero/powerfail_suo.c
+  modules/CardputerZero/cardputerzero-v5-overlay.dts
+Prior comments: 0   Prior reviews: 0
+Repository checks at review time: no kernel module build job for this path
+Body claims on-device validation (stock image, kernel 6.18.39+rpt-rpi-v8): switch off ->
+  apps close and power off after ~5 s; stuck service -> safety net at 15.7 s, power off at
+  20 s, SD clean on next boot; menu shutdown then slider off -> power off ~0.2 s; W=1 build
+  clean. Author states booting with the updated overlay was NOT tested.

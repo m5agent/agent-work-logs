@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/m5stack-linux-dtoverlays #20: orderly poweroff from the power slider; state machine verified at host level, DEBOUNCE(2) drop path is the one issue",
+  "source": {
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "head_commit": "5623292f043f5b4617f5d035130f464281f13dd1",
+    "author": "shrimpapplepro",
+    "changed_files": 2,
+    "additions": 248,
+    "deletions": 52,
+    "prior_comments": 0,
+    "prior_reviews": 0,
+    "state": "OPEN",
+    "mergeable_state": "CLEAN",
+    "comment": ""
+  },
+  "hardware": {},
+  "firmware": {
+    "file": "modules/CardputerZero/powerfail_suo.ko",
+    "sha256": ""
+  },
+  "execution": {
+    "environment": "macOS arm64; no Cardputer Zero hardware; Device Service cardputer-zero profile supported=false creatable=false backend_ready=false (Linux ARM64 backend, __missing_qemu__/__missing_rom__); no Linux kernel headers; docker daemon unusable (read-only containerd state dir), so no out-of-tree W=1 rebuild",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "patch_scope",
+      "status": "PASS",
+      "evidence": "2 files, +248/-52, single commit 5623292: powerfail_suo.c (M5IOE1 OFF_TIME programming, orderly_poweroff, backstop, .shutdown) and cardputerzero-v5-overlay.dts (m5stack,power-controller, power-hold-ms=20000); evidence/pr-scope.txt"
+    },
+    {
+      "name": "overlay_compiles",
+      "status": "PASS",
+      "evidence": "clang -E -nostdinc -undef -x assembler-with-cpp + dtc 1.8.1 -@ on the PR overlay: exit 0, no warnings, dtbo sha256 af5eeadd9cc9b3bb5e528059d3b9e9133845c57f9224bf958f1bcc3c0dd40423; evidence/overlay-compile.txt"
+    },
+    {
+      "name": "overlay_property_lands",
+      "status": "PASS",
+      "evidence": "decompiled dtbo: powerfail node has m5stack,power-controller = <&m5ioe1> and power-hold-ms = <0x4e20>; __local_fixups__ lists m5stack,power-controller next to disabled-gpios, i.e. the same apply-time phandle patch path; evidence/overlay-compile.txt"
+    },
+    {
+      "name": "system_state_gate",
+      "status": "PASS",
+      "evidence": "kernel_shutdown_prepare() sets system_state before device_shutdown() (reboot.c v6.12 and master), so .shutdown() sees SYSTEM_POWER_OFF on poweroff and skips on reboot; harness S8/S9/S10; evidence/kernel-api-checks.txt"
+    },
+    {
+      "name": "i2c_block_write_framing",
+      "status": "PASS",
+      "evidence": "I2C_SMBUS_I2C_BLOCK_DATA write path sets msg[0].len = len+1 with no SMBus length byte, so the wire is 0xB2, LSB, MSB matching registers 0xB2/0xB3; i2c_smbus_read_word_data assembles LE, so the read-back compare is valid; evidence/kernel-api-checks.txt"
+    },
+    {
+      "name": "shutdown_ordering_vs_sd_flush",
+      "status": "PASS",
+      "evidence": "device_shutdown() walks the device list backwards; runtime mmc/block devices are registered after boot-time platform devices, so they are shut down before the powerfail platform device and the 200 ms OFF_TIME set in .shutdown() starts after the card flush; evidence/kernel-api-checks.txt"
+    },
+    {
+      "name": "i2c_client_refcount",
+      "status": "PASS",
+      "evidence": "of_find_i2c_device_by_node() returns a referenced client (i2c-core-of.c usage puts it), released by the devm_add_action_or_reset() action powerfail_put_ioe(); no leak on probe failure"
+    },
+    {
+      "name": "probe_defaults",
+      "status": "PASS",
+      "evidence": "harness S1: no power-hold-ms -> hold_ms 20000, OFF_TIME 0xB2/0xB3 written to 20000, info log 'orderly poweroff, power hold 20000 ms'; S2: no controller -> ioe NULL, stock 2000 untouched, 'SysRq U only'; S3: phandle present but client absent -> -EPROBE_DEFER; evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "slider_off_orderly_path",
+      "status": "PASS",
+      "evidence": "harness S4: 0xB6 reads 2 then 3 -> OFF_TIME reprogrammed, orderly_poweroff(force=true) once, backlight 0, backstop delay = 16000 ms - 650 ms elapsed (fires 16.0 s after the flip); S14 backstop body emits SysRq S, 1 s, SysRq U; evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "legacy_fallback_intact",
+      "status": "PASS",
+      "evidence": "harness S7: OFF_TIME write fails at the event -> powerfail_legacy() runs SysRq U, asserts disabled-gpios and zeroes the backlight, no orderly_poweroff; evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "shutdown_and_remove",
+      "status": "PASS",
+      "evidence": "harness S8: SYSTEM_POWER_OFF + slider_off -> OFF_TIME 200 ms, backstop cancelled, disabled-gpios asserted; S9: SYSTEM_RESTART -> OFF_TIME untouched; S10: menu poweroff (slider on) -> 200 ms but disabled-gpios untouched; S11: remove -> OFF_TIME restored to 2000; evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "debounce_state_treated_as_off",
+      "status": "FAIL",
+      "evidence": "harness S5/S5b: 0xB6 = DEBOUNCE(2) on both reads -> powerfail_confirmed() returns false, event dropped, no orderly_poweroff, no backstop, OFF_TIME stays 20000 (probe value), IRQ re-enabled while irq-gpios is still low (edge-triggered). The driver's own comment defines 2 as 'slider off, 100 ms debounce'; consequence is up to 20 s of writable filesystem then a hard cut. evidence/host-harness-pr-head.txt"
+    },
+    {
+      "name": "debounce_fix_proposal",
+      "status": "PASS",
+      "evidence": "treating DEBOUNCE as confirmed and restoring OFF_TIME_STOCK on the drop path makes S5 run orderly_poweroff, S5b/S6 fall back to 2000, and leaves every other scenario unchanged; code/powerfail_suo_fixed.c, patches/0002, evidence/host-harness-proposed-fix.txt"
+    },
+    {
+      "name": "backstop_margin_vs_min_hold",
+      "status": "FAIL",
+      "evidence": "harness S12: power-hold-ms=8000 (allowed minimum) arms the backstop at 4.0 s after the flip (delay 4000-500 ms at 500 ms elapsed) while the author's own clean-shutdown log spans ~4.9 s, so SysRq S+U would fire inside a healthy shutdown; S13: 4000 is clamped to 8000. Non-blocking, default 20000 unaffected."
+    },
+    {
+      "name": "dt_property_naming",
+      "status": "REVIEW",
+      "evidence": "power-hold-ms has no vendor prefix while the sibling new property is m5stack,power-controller; and the disabled-gpios fallback keys the new behaviour on the LCD reset line, so any future overlay pointing disabled-gpios at an M5IOE1 silently gets orderly poweroff with a 20 s hold. Judgement, no runtime test."
+    },
+    {
+      "name": "kernel_build_w1",
+      "status": "NOT RUN",
+      "evidence": "no Linux kernel headers or cross toolchain on this host; the docker daemon cannot start a container (read-only containerd state dir). The author reports an arm64 6.18 W=1 clean build, not re-run here."
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer Zero hardware on this host; the author's measured 2.03 s/10.05 s power-loss timing, ~5 s shutdown, 15.7 s backstop and clean next boot are self-reported and were not independently reproduced."
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "cardputer-zero profile supported=false creatable=false backend_ready=false, missing __missing_qemu__/__missing_rom__, reason 'CardputerZero uses a separate Linux backend'; evidence/local-profile-summary.txt"
+    },
+    {
+      "name": "timing_fidelity",
+      "status": "NOT RUN",
+      "evidence": "harness msleep() only advances jiffies; no timer jitter, I2C transfer latency, workqueue concurrency or cancel_delayed_work_sync race is modelled"
+    },
+    {
+      "name": "m5ioe1_state_semantics",
+      "status": "NOT RUN",
+      "evidence": "0xB6 state values and the 'countdown re-reads OFF_TIME' behaviour come from the author's register table and measurement; no M5IOE1 datasheet or firmware source was available to confirm them"
+    },
+    {
+      "name": "new_property_boot_path",
+      "status": "NOT RUN",
+      "evidence": "the author states booting with the updated overlay was not tested; the device run used the disabled-gpios fallback, and this record only proves the dtbo shape"
+    }
+  ],
+  "evidence": [
+    {"path": "evidence/host-harness-pr-head.txt", "description": "14 scenarios on the PR-head driver, 34 checks PASS"},
+    {"path": "evidence/host-harness-proposed-fix.txt", "description": "same scenarios with DEBOUNCE counted as confirmed plus stock restore on the drop path"},
+    {"path": "evidence/overlay-compile.txt", "description": "cpp+dtc build of the PR v5 overlay: no warnings, dtbo sha256, powerfail node and __local_fixups__"},
+    {"path": "evidence/kernel-api-checks.txt", "description": "excerpts for system_state ordering, I2C block framing, device_shutdown order, of_find_i2c_device_by_node refcount"},
+    {"path": "evidence/local-profile-summary.txt", "description": "redacted local Device Service cardputer-zero profile"},
+    {"path": "evidence/pr-metadata.txt", "description": "PR state, author, scope, base/head, comments/reviews, author-claimed device results"},
+    {"path": "evidence/pr-scope.txt", "description": "diffstat main..pr20"}
+  ],
+  "notes": [
+    "Evidence class is host-level test plus code-level verification; no virtual-device or hardware run was possible on this host.",
+    "The DEBOUNCE(2) drop path is reported as a logic issue with a two-line fix, not as a merge blocker; the backstop margin and the DT property naming are non-blocking notes.",
+    "No upstream branch was pushed, no PR was closed, and no other repository was modified; one English review comment was posted."
+  ]
+}

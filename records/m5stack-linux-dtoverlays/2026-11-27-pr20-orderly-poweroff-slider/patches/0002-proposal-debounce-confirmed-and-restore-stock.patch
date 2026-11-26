@@ -1,0 +1,23 @@
+--- /tmp/km20/code/powerfail_suo.c	2026-11-27 01:32:27.649843120 +0800
++++ /tmp/km20/code/powerfail_suo_fixed.c	2026-11-27 01:32:44.217010385 +0800
+@@ -135,8 +135,8 @@
+         state = i2c_smbus_read_byte_data(data->ioe, M5IOE1_POWER_STATE);
+     }
+ 
+-    return state < 0 || state == M5IOE1_POWER_COUNTDOWN ||
+-           state == M5IOE1_POWER_CUTTING;
++    return state < 0 || state == M5IOE1_POWER_DEBOUNCE ||
++	       state == M5IOE1_POWER_COUNTDOWN || state == M5IOE1_POWER_CUTTING;
+ }
+ 
+ static void powerfail_suo_work(struct work_struct *work)
+@@ -180,6 +180,9 @@
+         dev_warn(data->dev,
+                  "powerfail gpio low, but the power switch is still on\n");
+ 
++		/* dropped event: do not leave the long hold armed */
++		powerfail_set_off_time(data, M5IOE1_OFF_TIME_STOCK);
++
+         atomic_set(&data->triggered, 0);
+         enable_irq(data->irq);
+         return;

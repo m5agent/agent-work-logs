@@ -1,0 +1,28 @@
+# overlay build check - PR head 5623292, cardputerzero-v5-overlay.dts
+# dtc Version: DTC 1.8.1
+
+$ clang -E -nostdinc -undef -x assembler-with-cpp cardputerzero-v5-overlay.dts -o v5.tmp
+exit=0 (no diagnostics)
+$ dtc -@ -I dts -O dtb -o cardputerzero-v5-overlay.dtbo v5.tmp
+exit=0 (no warnings)
+sha256 af5eeadd9cc9b3bb5e528059d3b9e9133845c57f9224bf958f1bcc3c0dd40423  cardputerzero-v5-overlay.dtbo
+
+# decompiled powerfail node of the produced dtbo
+			powerfail {
+				compatible = "cardputerzero,powerfail-suo";
+				debounce-ms = <0x1f4>;
+				interrupt-parent = <&gpio>;
+				interrupts = <0x06 0x02>;
+				irq-gpios = <&gpio>, <0x06 0x00>;
+				backlight = <&backlight_pwm>;
+				disabled-gpios = <&m5ioe1>, <0x0b 0x01>;
+				m5stack,power-controller = <&m5ioe1>;
+				power-hold-ms = <0x4e20>;
+			};
+
+# __local_fixups__ entry for the node (phandle patched when the overlay is applied)
+				powerfail {
+					backlight = <0x00>;
+					disabled-gpios = <0x00>;
+					m5stack,power-controller = <0x00>;
+				};

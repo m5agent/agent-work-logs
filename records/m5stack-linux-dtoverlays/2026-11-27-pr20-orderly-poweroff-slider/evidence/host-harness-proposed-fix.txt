@@ -1,0 +1,81 @@
+# host-level harness output - proposed fix variant (DEBOUNCE counts as confirmed + restore stock on drop)
+# generated 2026-11-26T17:33:08Z on macOS arm64, clang -std=gnu11
+# clang ... -DFIXED_BUILD -DDRIVER_SRC='"powerfail_suo_fixed.c"'
+
+== S1 probe, no power-hold-ms: default hold programmed ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe_return                               PASS  expect 0
+  off_time_reg_written                       PASS  OFF_TIME 0xB2/0xB3 = 20000
+  hold_default                               PASS  hold_ms = 20000
+== S2 probe, no power controller: legacy path only ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, SysRq U only
+  probe_return                               PASS  expect 0
+  ioe_null                                   PASS  data->ioe stays NULL
+  off_time_untouched                         PASS  stock 2000 ms untouched
+== S3 probe, phandle present but i2c client absent ==
+[probe] power controller not ready
+  probe_defer                                PASS  returns -EPROBE_DEFER
+== S4 slider off, debounce -> countdown: orderly poweroff ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[emerg] power switch off: orderly poweroff, power held for 20000 ms
+  confirmed                                  PASS  orderly_poweroff() called once
+  force_arg                                  PASS  force = true
+  off_time_reprogrammed                      PASS  OFF_TIME = 20000 at the event
+  backstop_armed                             PASS  backstop armed
+  backstop_at_16s                            PASS  delay = 16000 ms - 650 ms elapsed (fires 16.0 s after the flip)
+  backlight_off                              PASS  backlight 0 before userspace stop
+== S5 slider off but 0xB6 still reads DEBOUNCE(2) on the retry ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[emerg] power switch off: orderly poweroff, power held for 20000 ms
+  event_handled                              PASS  orderly_poweroff called for DEBOUNCE(2)
+  backstop_armed                             PASS  backstop armed
+== S5b dropped event leaves the hold armed (state ON(1)) ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[warn]  powerfail gpio low, but the power switch is still on
+  hold_restored                              PASS  OFF_TIME restored to 2000 on the drop path
+== S6 spurious edge, power state ON(1): event dropped (intended) ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[warn]  powerfail gpio low, but the power switch is still on
+  event_dropped                              PASS  no orderly_poweroff
+  hold_restored                              PASS  OFF_TIME restored to 2000 on the drop path
+== S7 cannot program OFF_TIME at the event: legacy fallback ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[err]   cannot extend the power hold: -5
+[emerg] SysRq U: emergency remount filesystems readonly
+[emerg] set backlight brightness to 0
+[emerg] assert disabled gpio low
+  legacy_sysrq                               PASS  SysRq U executed
+  legacy_disabled_gpio                       PASS  disabled-gpios asserted
+  no_orderly                                 PASS  no orderly_poweroff
+== S8 .shutdown on poweroff after slider-off: 200 ms cut ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[emerg] power switch off: orderly poweroff, power held for 20000 ms
+  short_off_time                             PASS  OFF_TIME = 200 ms
+  backstop_cancelled                         PASS  backstop cancelled
+  lcd_reset_asserted                         PASS  disabled-gpios asserted
+== S9 .shutdown on reboot: OFF_TIME untouched ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[emerg] power switch off: orderly poweroff, power held for 20000 ms
+  reboot_skips                               PASS  OFF_TIME stays 20000 on reboot
+== S10 .shutdown on menu poweroff (slider still on) ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  short_off_time                             PASS  OFF_TIME = 200 ms
+  lcd_reset_untouched                        PASS  disabled-gpios not asserted
+== S11 remove: restore stock hold ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  restored                                   PASS  OFF_TIME back to 2000
+== S12 power-hold-ms = 8000 (allowed minimum) ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 8000 ms
+[emerg] power switch off: orderly poweroff, power held for 8000 ms
+  hold_8000                                  PASS  hold_ms = 8000
+  backstop_4s                                PASS  backstop fires 4.0 s after the flip, healthy shutdown took ~4.9 s
+== S13 power-hold-ms = 4000: clamped to the minimum ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 8000 ms
+  clamped                                    PASS  hold_ms clamped to 8000
+== S14 backstop body: SysRq S, 1 s, SysRq U ==
+[info]  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[emerg] power switch off: orderly poweroff, power held for 20000 ms
+[emerg] poweroff still running near the power cut: SysRq S + U
+  sysrq_su                                   PASS  S then U
+
+PASS: 0 failure(s)
