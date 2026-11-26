@@ -6,3 +6,5 @@ Stock UIFlow2 v2.5.3 and v2.5.4 render their home screens on the original Tab5 p
 - [Run manifest](run.json)
 - [Capture hashes](evidence/functional-summary.ndjson)
 - [Reproduction entry point](code/run-launcher.sh)
+
+[USB host follow-up](usb-host.md)
