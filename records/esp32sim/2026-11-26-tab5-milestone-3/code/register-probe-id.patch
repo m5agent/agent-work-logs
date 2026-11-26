@@ -1,0 +1,12 @@
+--- sketch.ino
++++ sketch.ino
+@@ -39,7 +39,8 @@
+ }
+ 
+ static bool read_msc() {
+-    if (reg(0x40) != 0x4f54430a) return false;
++    const auto id = reg(0x40);
++    if (id != 0x4f54400a && id != 0x4f54430a) return false;
+     reg(0x0c) = reg(0x0c) | 1u << 29;
+     reg(0x08) = 1u << 5; // GAHBCFG.DMAEN
+     reg(0x400) = 1u << 23; // HCFG.DESCDMA

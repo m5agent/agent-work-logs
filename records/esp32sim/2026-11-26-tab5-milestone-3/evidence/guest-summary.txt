@@ -1,0 +1,62 @@
+Selected native virtual-device observations from the 2026-11-26 Tab5 runs.
+Addresses are redacted. Captures in run.json identify the unedited raw logs.
+
+[tab5-wake-5s]
+[emu] chip reset at t=8.767s: cause 0x5 (DEEPSLEEP)
+[script] t=3.250s Touch(360, 640, false)
+rst:0x5 (PMU_SYS_PWR_DOWN_RESET),boot:0x30f (SPI_FAST_FLASH_BOOT)
+
+[tab5-wake-min-retry]
+[emu] Tab5 power: off_cycle=1191989940 rtc_on_cycle=Some(21951536372) powered=true
+[emu] chip reset at t=60.976s: cause 0x1 (POWERON)
+[script] t=3.250s Touch(360, 640, false)
+rst:0x1 (POWERON),boot:0x30f (SPI_FAST_FLASH_BOOT)
+
+[tab5-wifi-ap]
+[c6] [emu] net: 1 DHCP leases, 0 ARP replies, 0 DNS answers, 0 NTP answers, 0 TCP refused, 0 pings, 0 frames ignored
+[c6] [emu] wifi: 29 frames sent by the station, 80 received (0 dropped: no descriptor, 24 before the receive ring was set up); AP: 97 beacons, 11 probe responses, 8 data frames from the station, state Associated
+[emu] NAT to the host network enabled (DNS via <virtual IPv4>)
+[c6] I (5069) slave_ctrl: Sta mode connected
+
+[tab5-scan-ap]
+[c6] [emu] wifi: 11 frames sent by the station, 64 received (0 dropped: no descriptor, 24 before the receive ring was set up); AP: 87 beacons, 11 probe responses, 0 data frames from the station, state Idle
+[c6] sdio: 83 commands, 543 bytes to the host, 375 from it, 0 underflows, 0 overflows
+[c6] I (4950) slave_ctrl: Received Req [0x120]
+[c6] I (4950) slave_ctrl: Wi-Fi sta scan done
+[c6] I (4951) slave_ctrl: Received Req [0x121]
+
+[tab5-sntp-ap]
+[c6] [emu] net: 1 DHCP leases, 1 ARP replies, 1 DNS answers, 1 NTP answers, 0 TCP refused, 0 pings, 0 frames ignored
+[net] NTP request -> 3973138809 s since 1900
+NTP Connected.
+RTC   UTC  :2025/11/26 (Wed)  09:40:11
+RTC   UTC  :2025/11/26 (Wed)  09:40:12
+RTC   UTC  :2025/11/26 (Wed)  09:40:13
+RTC   UTC  :2025/11/26 (Wed)  09:40:14
+
+[tab5-softap]
+[c6] [emu] wifi-sta: 'ssid' Joined, 1 joins in 1 attempts, lease <virtual IPv4>, 6 frames to the access point, 2 data frames from it
+AP started
+[c6] I (2567) slave_ctrl: softap started
+[c6] I (2625) slave_ctrl: softap started
+
+[msc-final-register-old-id]
+model.log sha256=d007c6526c449a4f01f95a8511a5458f33dd0952f288d17b302b86e963c40fea, bytes=919
+console.log sha256=623aa10c10500d9916ea43c941a6dfb10d33e016a19b3c9db9ba62271d2b0862, bytes=484
+MSC_PROBE_READY
+MSC_READ_FAILED
+
+[msc-final-register]
+[usb-hcd] addr=1 ep=1 in 13/13 bytes
+[usb-hcd] addr=1 ep=1 in 512/512 bytes
+[usb-hcd] addr=1 ep=2 out 31/31 bytes
+MSC_ENUMERATED
+MSC_READ_SECTOR_4_OK
+
+[msc-final-sdk]
+[usb-hcd] addr=1 ep=1 in 13/512 bytes
+[usb-hcd] addr=1 ep=1 in 512/512 bytes
+[usb-hcd] addr=1 ep=2 out 31/31 bytes
+MSC_ENUMERATED
+MSC_PROBE_READY
+MSC_READ_SECTOR_4_OK
