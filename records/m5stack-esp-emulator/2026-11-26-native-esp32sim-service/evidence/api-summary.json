@@ -1,0 +1,1211 @@
+{
+  "classification": "virtual-device validation",
+  "source_commit": "b95ca421d327120dd43f2b48e856d71e903508ef",
+  "esp32sim_commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+  "esp32sim_binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+  "test_cases": [
+    {
+      "case": "cores3-touch",
+      "status": "PASS",
+      "observation": "The docs example frame reported X:150 / Y:120 after input.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+      "evidence_zip_sha256": "8a3bf2b6b551b55cc9d61da13910a838c84919c6f1e6ffa49e3b252cc73da5a1",
+      "evidence_zip_bytes": 5965,
+      "inputs": [
+        {
+          "kind": "touch",
+          "x": 150,
+          "y": 120,
+          "action": "hold",
+          "seconds": 0.5,
+          "settle_seconds": 0.8
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "cd68c76646213e181e577c6d8b0bb86638bdd2fc60cd782088a3cdf416b71b59",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "01d7753ff5ad41e6ccf965657d6a4db7a0d5074c7fd8cf91fd16d7ff75a009e9",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-button",
+      "status": "PASS",
+      "observation": "The docs example displayed the power-button event after the click.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "3dfbaaaa1ea168074d284b40b14fc489821162fb211f568a6a52181e54dab69c",
+      "evidence_zip_sha256": "9f0c66a91c543c4e64527cfeef287bf377d8ebe533b6060a8570b16d7170dc7f",
+      "evidence_zip_bytes": 5946,
+      "inputs": [
+        {
+          "kind": "button",
+          "control": "power",
+          "action": "click"
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "fd8a75e4c3b483189ebcbd964a7301fb7ef90b85c1d5654f14f292c7896500cc",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "2589b22c815be3bc5d047521d895196f654e0b32f189673f2ebc0af1007e88c9",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-imu",
+      "status": "PASS",
+      "observation": "The docs example displayed accel 0.25, -0.5, 0.75 g and gyro 12.02, -21.97, 28.02 dps after injection.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "3835dc5c8211736869c0f49762855875b09038d4aba8000516bfad9b014655ed",
+      "evidence_zip_sha256": "c4b1772f0c68919aa8b09eb765517e9caf249cc15645f62b16dc9fc88bb50b64",
+      "evidence_zip_bytes": 7566,
+      "inputs": [
+        {
+          "kind": "imu",
+          "accel": [
+            0.25,
+            -0.5,
+            0.75
+          ],
+          "gyro": [
+            12,
+            -22,
+            28
+          ]
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "9cf0ca68bcc38e1552b1abb98b70db583fcf978abd0591cc1ca92a328088c354",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "1729eb4014c8dc8d268628875b2940ce9c186b85d4d067b3de11ea5edaaf5668",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-power",
+      "status": "PASS",
+      "observation": "The docs example displayed 3981 mV battery, 73 percent, charging enabled, and 5000 mV VBUS.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "7beb59232d1b21d7fb38d4c994582609df364ba918a4b443bf8fdcbd0982112c",
+      "evidence_zip_sha256": "3c72aac9b4fe94598ae3730112d2cd4bcaf3257a9471e8909195ecd31e7a7f96",
+      "evidence_zip_bytes": 6257,
+      "inputs": [
+        {
+          "kind": "battery",
+          "mv": 3981,
+          "percent": 73,
+          "charging": true,
+          "vbus": true
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "e51e458762366d9c259907502b555b16cd1ec426602c62a77d4a1e4c167ba1a3",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "44190fe86d912fdc19a61f39cc1b4c64f81f7b53e1d710f3a096b072f12962e0",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-ltr553",
+      "status": "PASS",
+      "observation": "The docs example changed from proximity 0 / ALS 0 to proximity 700 / ALS 850.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "9584d3339e863ee71b8e46ea43048bdc041028be3a0b0fb9e624185fdca40001",
+      "evidence_zip_sha256": "9c942796006d310cafc0e1d9b8744d0a2ab9ef9f4e74fafbeebb3f63a10a4290",
+      "evidence_zip_bytes": 5859,
+      "inputs": [
+        {
+          "kind": "als",
+          "ch0": 1250,
+          "ch1": 450,
+          "proximity": 700
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "234b4a3bdd00696671d44aca3985c025378de494dea8d13b51c2ca5d1de38b5f",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "819fd83d71b90b3e0243dec0d148e92b214b40571c78d5aef0e64e4dd5a586f1",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-sdcard",
+      "status": "PASS",
+      "observation": "Guest panel showed SD card detected, write success, and two files detected.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+      "evidence_zip_sha256": "938b2a504fc3a8d8334d16c5fd469a36e8194c5299e00117cbd7c164afa70ad2",
+      "evidence_zip_bytes": 7922,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "b9b6056f0eea320607ef1727ca1682cf4c0f0e6a312ad987aba532eccfbf3b4d",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "b9b6056f0eea320607ef1727ca1682cf4c0f0e6a312ad987aba532eccfbf3b4d",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-camera",
+      "status": "PASS",
+      "observation": "The guest display showed the supplied three-color PPM bands.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "5d61a3dbefec7bde7a8b7d29040f7e96e6374b5efd4fb702be9d3c5bbdfedb91",
+      "evidence_zip_sha256": "7f202aa0dc8037968d2dcfe06da1a4bcb6dde13ef3129d23c891a225ac4fe315",
+      "evidence_zip_bytes": 5632,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "5130a70c15fdf11f27f4ee8877f85a7faf930beaeb8ebff2a041d35c23ac1755",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 3
+      },
+      "after": {
+        "sha256": "5130a70c15fdf11f27f4ee8877f85a7faf930beaeb8ebff2a041d35c23ac1755",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 3
+      }
+    },
+    {
+      "case": "cores3-speaker",
+      "status": "PASS",
+      "observation": "I2S delivered 48 kHz mono nonzero PCM; dominant tone approximately 10 kHz.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+      "evidence_zip_sha256": "908fb1c4011906363b9d8334c0e402f13da5b73947c54b0d62f83e9e5118f915",
+      "evidence_zip_bytes": 6426,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "368694d97643fe8dc754566f402b53a9db4759571cac071dfbe1ed67668448f5",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "368694d97643fe8dc754566f402b53a9db4759571cac071dfbe1ed67668448f5",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "speaker": {
+        "sample_rate_hz": 48000,
+        "rms": 543.07,
+        "peak": 1009,
+        "dominant_frequency_hz": 10000.404,
+        "observed_bytes": 276582,
+        "sha256": "30df2200f36fb031e4b7c3831ce7d46c137feaafabd6177d40e98cc065b45809"
+      }
+    },
+    {
+      "case": "cores3-mic",
+      "status": "PARTIAL",
+      "observation": "Guest microphone waveform changed with a linked WAV fixture. See separate tone/silence controls.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+      "evidence_zip_sha256": "78698c6d2f2d543de703c230e519ea0902505268a67730be370d5f32071dd553",
+      "evidence_zip_bytes": 6240,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "ae25333127e686c5876f2b9cb2495e016159a6501361d8d796f6ca68729a0651",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 3
+      },
+      "after": {
+        "sha256": "7a939e5531c5a4e35b516a4b73f4727bbd846739fe780f998e91c3d3844b755e",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 3
+      }
+    },
+    {
+      "case": "cardputer-adv-button",
+      "status": "PASS",
+      "observation": "Same guest printed Button A Pressed and Button A Released for GPIO0 hold.",
+      "device": "cardputer-adv",
+      "runtime": "esp32sim",
+      "firmware_sha256": "54ee755a50f4187e9ddfc96efb7ea996c896e46d4b99e2945ceb3183a1aa6f50",
+      "evidence_zip_sha256": "0abe22548674e0dddd3c981085be712860134487f4f40f7f3a8b5037e3be54ee",
+      "evidence_zip_bytes": 5475,
+      "inputs": [
+        {
+          "kind": "button",
+          "control": "boot",
+          "action": "hold",
+          "seconds": 0.6,
+          "settle_seconds": 0.9
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "before": {
+        "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 1
+      }
+    },
+    {
+      "case": "cardputer-adv-keyboard",
+      "status": "PASS",
+      "observation": "Six physical key commands were accepted; typed b remained in the docs-example framebuffer.",
+      "device": "cardputer-adv",
+      "runtime": "esp32sim",
+      "firmware_sha256": "139a18a7fb9149d947d2e3a3c92c0fd51709494bff598e3418c4b891ea4f414b",
+      "evidence_zip_sha256": "8a23f211b97efa26986f8df6833a6f689bf9f132575dfdad9e231bec54acfaea",
+      "evidence_zip_bytes": 6608,
+      "inputs": [
+        {
+          "kind": "keyboard",
+          "key": "fn"
+        },
+        {
+          "kind": "keyboard",
+          "key": "a"
+        },
+        {
+          "kind": "keyboard",
+          "key": "del"
+        },
+        {
+          "kind": "keyboard",
+          "key": "enter"
+        },
+        {
+          "kind": "keyboard",
+          "key": "space"
+        },
+        {
+          "kind": "keyboard",
+          "key": "b"
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "before": {
+        "sha256": "4f7a6d3afa60d2dac36ddfa98aa4dbff829f556663efe10149c5a3028ee2c724",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 3
+      },
+      "after": {
+        "sha256": "1303fa76306b482f247b56289d77cfcb0e56529624677456eac2bac9a86bd20c",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 3
+      }
+    },
+    {
+      "case": "cardputer-adv-imu",
+      "status": "PASS",
+      "observation": "The docs example displayed accel 0.25, -0.5, 0.75 g and gyro 12.02, -21.97, 28.02 dps after injection.",
+      "device": "cardputer-adv",
+      "runtime": "esp32sim",
+      "firmware_sha256": "8a379cb132d28f8cb7bbd67c39aec0bf5675a62755d2397c1d7966a1ce0b287f",
+      "evidence_zip_sha256": "bc878bbea128f50c716a179159effaa42638c66bbd41dd16f1737cc237bd12f9",
+      "evidence_zip_bytes": 6516,
+      "inputs": [
+        {
+          "kind": "imu",
+          "accel": [
+            0.25,
+            -0.5,
+            0.75
+          ],
+          "gyro": [
+            12,
+            -22,
+            28
+          ]
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "before": {
+        "sha256": "dd5d91317a671a758472a924d4015ea5cf000be0dd4fba59dc02678a5bf471e9",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "bf8a234547f38f9256ae4973cdc022c9109aeba78f00ca1ccfe3bb754f07115d",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cardputer-adv-sdcard",
+      "status": "PASS",
+      "observation": "Guest read Hello World and reported 1 MiB read and written.",
+      "device": "cardputer-adv",
+      "runtime": "esp32sim",
+      "firmware_sha256": "94437968ed137dd6426fb3caf0623104053ef34d06b2ac00a2933d75f5b81124",
+      "evidence_zip_sha256": "c83c7ae4716410638726318e669b89171af29d06a34509fe1e0111ae948bfe95",
+      "evidence_zip_bytes": 8720,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "before": {
+        "sha256": "9a0a37050d3fe9b01e0027108a3d4d3dccf64f4ca00649b750064ea51f1259b5",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "9a0a37050d3fe9b01e0027108a3d4d3dccf64f4ca00649b750064ea51f1259b5",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cardputer-adv-speaker",
+      "status": "PASS",
+      "observation": "I2S delivered 48 kHz mono nonzero PCM; dominant tone approximately 7 kHz.",
+      "device": "cardputer-adv",
+      "runtime": "esp32sim",
+      "firmware_sha256": "8704b0ca238d1aa2e5c42add42df346e4ab678d58f05b1b27b50a5c2ebc68ce4",
+      "evidence_zip_sha256": "3a6d8a443a14013aed6fd19eced7fe72c4a0cda9abe9ed568b34e148f980a17c",
+      "evidence_zip_bytes": 6104,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "before": {
+        "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "877179afb0021d9147cc66ae65f30cb7c621cab992faa597c2a8eb9d8f5c99b6",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 1
+      },
+      "speaker": {
+        "sample_rate_hz": 48000,
+        "rms": 2171.575,
+        "peak": 4033,
+        "dominant_frequency_hz": 7000.404,
+        "observed_bytes": 271900,
+        "sha256": "d99d2c8102b21bf2bb98cd686ca67d18a4599d689157ce5a6e33654d37a19baf"
+      }
+    },
+    {
+      "case": "cardputer-adv-mic",
+      "status": "PARTIAL",
+      "observation": "Guest microphone waveform changed with a linked WAV fixture. See separate tone/silence controls.",
+      "device": "cardputer-adv",
+      "runtime": "esp32sim",
+      "firmware_sha256": "dd9ee2e1534e7c9dffb06fed0709e65cf0094d57281e47bee637229d5f97326d",
+      "evidence_zip_sha256": "919e56e188671c517e84eb450aa990d386be4b5f488159787931a7429d178b41",
+      "evidence_zip_bytes": 5706,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "before": {
+        "sha256": "493b01a7586170b0df187978cfbd8ae0adfd49202ba6ef8155387ed7e18d02a3",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 3
+      },
+      "after": {
+        "sha256": "00ce7fa2a9afb615a1b48eeb6cab0fbbcd81c13571427903761c2c0572079ec3",
+        "size": [
+          240,
+          135
+        ],
+        "colors": 3
+      }
+    },
+    {
+      "case": "cores3-uiflow-stock",
+      "status": "PARTIAL",
+      "observation": "UIFlow2 home rendered; the center-screen touch left this frame unchanged.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+      "evidence_zip_sha256": "202544bcbd4bb49fcb2bd2b31bde71a030f13024ed0dda7fa3deb6b6b2df56d0",
+      "evidence_zip_bytes": 21607,
+      "inputs": [
+        {
+          "kind": "touch",
+          "x": 150,
+          "y": 120,
+          "action": "hold",
+          "seconds": 0.5,
+          "settle_seconds": 0.8
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "bd8e94169be0504e47e77dfd40063af7c79e2327e6eea39b19c8b7494a9bd33b",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 577
+      },
+      "after": {
+        "sha256": "bd8e94169be0504e47e77dfd40063af7c79e2327e6eea39b19c8b7494a9bd33b",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 577
+      }
+    },
+    {
+      "case": "cores3-uiflow-settings",
+      "status": "PARTIAL",
+      "observation": "Settings touch reached the guest while the screen was still becoming ready.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+      "evidence_zip_sha256": "aee70aba162451819037569c5232188f40662cd7cfa331a2b1f1eff4984c0d51",
+      "evidence_zip_bytes": 7640,
+      "inputs": [
+        {
+          "kind": "touch",
+          "x": 35,
+          "y": 52,
+          "action": "hold",
+          "seconds": 0.35,
+          "settle_seconds": 1.1
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "017bcb47c81935275f2fff6eda352f3bd944da2a66a2a24077dc92bfc1888bd9",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 95
+      }
+    },
+    {
+      "case": "cores3-uiflow-home-touch",
+      "status": "PASS",
+      "observation": "A witnessed stock home frame and touch receipt were retained along with subsequent panel output.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "ddad233fb05925421de7a2aad1b0c18ce0e947d5820b318eaca2b1e82464ac73",
+      "evidence_zip_sha256": "4fca0bec2ef83fc288fb999989b5fc8780f80fef7a8a440297090777c099c784",
+      "evidence_zip_bytes": 21810,
+      "inputs": [
+        {
+          "kind": "touch",
+          "x": 35,
+          "y": 52,
+          "action": "hold",
+          "seconds": 0.35,
+          "settle_seconds": 1
+        }
+      ],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "49abc50bc2b6dd353d45a55dda942024dc45af0cc71047507136d3484650220a",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 539
+      },
+      "after": {
+        "sha256": "bd8e94169be0504e47e77dfd40063af7c79e2327e6eea39b19c8b7494a9bd33b",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 577
+      }
+    },
+    {
+      "case": "cores3-uiflow-live",
+      "status": "PASS",
+      "observation": "UIFlow2 UART0 source Run printed its completion marker and produced the green frame.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+      "evidence_zip_sha256": "9111cdfb61ab07746c2cf87ba5d8d2c6772d51af3b2e21641974b085bf8acc2e",
+      "evidence_zip_bytes": 11851,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before": {
+        "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "9ac6dacb88691994aad28c657b63503fc98f1cf9f643d78b6c5b8d950ff12a0f",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 1
+      }
+    },
+    {
+      "case": "cores3-uiflow-package-network",
+      "status": "PARTIAL",
+      "observation": "Open AP association succeeded; virtual gateway TCP timed out and malformed package request was rejected.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+      "evidence_zip_sha256": "c46a007b36c9c320dd2f6cd6602d49968bd21766b5db883ec2df352a491a7d34",
+      "evidence_zip_bytes": 15826,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before_package": {
+        "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 1
+      }
+    },
+    {
+      "case": "cores3-uiflow-package-network-retry",
+      "status": "PASS",
+      "observation": "Same guest associated and obtained the host fixture HTTP response, then ran the corrected file package.",
+      "device": "cores3",
+      "runtime": "esp32sim",
+      "firmware_sha256": "0ede40601c1e37b7ba32c87a3ca55e4da7a448f6cf52957f005763bc7c7c78e8",
+      "evidence_zip_sha256": "5a2395b2e4953f0cfa1b3867b4cd4f598787a9afb2773902fae1932271553201",
+      "evidence_zip_bytes": 20497,
+      "inputs": [],
+      "released": true,
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "before_package": {
+        "sha256": "57580743a08a3f4ebdf57240cbcc997002ef63b7234531f946127f1495973f43",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 1
+      },
+      "after_package": {
+        "sha256": "156528ab29d5bebd0d247e76df880f4c02f25cd7916b758f06fc8f308d66e6d0",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 1
+      },
+      "network": {
+        "rejected_namespace_status": 409,
+        "associated": true,
+        "host_fixture_request_observed": true,
+        "guest_http_marker": true,
+        "package_state": "completed"
+      }
+    },
+    {
+      "case": "stopwatch-frozen-qemu",
+      "status": "PARTIAL",
+      "observation": "Frozen QEMU produced ROM serial and a readable but blank stock frame.",
+      "device": "stopwatch",
+      "runtime": "qemu",
+      "firmware_sha256": "f268c9b118ee2476a0d2e760febbef07d780086a0fac20497ce8382797ea6675",
+      "evidence_zip_sha256": "9c25a487f2260e56a18405fb8db006be36551e508654679d0fc4362b7089fe11",
+      "evidence_zip_bytes": 10309,
+      "inputs": [],
+      "released": true,
+      "runtime_binary_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+      "before": {
+        "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+        "size": [
+          466,
+          466
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+        "size": [
+          466,
+          466
+        ],
+        "colors": 1
+      }
+    },
+    {
+      "case": "stopwatch-frozen-qemu-long",
+      "status": "PARTIAL",
+      "observation": "The longer stock control still produced a blank frame.",
+      "device": "stopwatch",
+      "runtime": "qemu",
+      "firmware_sha256": "f268c9b118ee2476a0d2e760febbef07d780086a0fac20497ce8382797ea6675",
+      "evidence_zip_sha256": "163dc06c54316ea9024f2501658486e2d8f3adb88c128a88ed3a9f4e8c9707b2",
+      "evidence_zip_bytes": 10406,
+      "inputs": [],
+      "released": true,
+      "runtime_binary_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+      "before": {
+        "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+        "size": [
+          466,
+          466
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+        "size": [
+          466,
+          466
+        ],
+        "colors": 1
+      }
+    },
+    {
+      "case": "stopwatch-frozen-qemu-program",
+      "status": "PASS",
+      "observation": "Frozen QEMU composed UIFlow2 UART source Run completed and rendered the green panel.",
+      "device": "stopwatch",
+      "runtime": "qemu",
+      "firmware_sha256": "3c6a11d790715b5a27294605f7dd709de714a7126a63e8e38e7a303210f78255",
+      "evidence_zip_sha256": "8ea01a847c942f39e466e03f7350eeeea28d32d914b5776bf173a460f8984fd4",
+      "evidence_zip_bytes": 17650,
+      "inputs": [],
+      "released": true,
+      "runtime_binary_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+      "before": {
+        "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+        "size": [
+          466,
+          466
+        ],
+        "colors": 1
+      },
+      "after": {
+        "sha256": "bed64469b04cdf62934bb843e59643b3765aa7e65397d327d4d7be36b844cb79",
+        "size": [
+          466,
+          466
+        ],
+        "colors": 2
+      }
+    },
+    {
+      "case": "cores3-frozen-qemu",
+      "status": "PASS",
+      "observation": "Explicit QEMU selection booted the same CoreS3 touch image and reproduced the touch frame change.",
+      "device": "cores3",
+      "runtime": "qemu",
+      "firmware_sha256": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+      "evidence_zip_sha256": "617b87306eac5db5e2b39d25ec7d896a74df31dc8ccc47b84c93f429b27ef84d",
+      "evidence_zip_bytes": 10934,
+      "inputs": [
+        {
+          "kind": "touch",
+          "x": 150,
+          "y": 120,
+          "action": "hold",
+          "seconds": 0.5,
+          "settle_seconds": 0.8
+        }
+      ],
+      "released": true,
+      "runtime_binary_sha256": "04abc3ba8cb115919e7faebd55425c802f4f6e40b10bc3cc422c51700add728e",
+      "before": {
+        "sha256": "cd68c76646213e181e577c6d8b0bb86638bdd2fc60cd782088a3cdf416b71b59",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      },
+      "after": {
+        "sha256": "01d7753ff5ad41e6ccf965657d6a4db7a0d5074c7fd8cf91fd16d7ff75a009e9",
+        "size": [
+          320,
+          240
+        ],
+        "colors": 2
+      }
+    }
+  ],
+  "ttl": {
+    "state": "stopped",
+    "lease_active": false,
+    "evidence_zip_sha256": "dae93f43e63b92d18210d839ad82d681507aa4e3c534370aecc19dae65d9f447"
+  },
+  "microphone_control": {
+    "cores3": {
+      "status": "PASS",
+      "cases": [
+        {
+          "case": "mic-long-tone",
+          "firmware_sha256": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+          "runtime_identity": {
+            "runtime": "esp32sim",
+            "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+            "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+            "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+            "board": "m5stack-cores3",
+            "control_protocol": 1,
+            "flash_bytes": 16777216,
+            "psram_bytes": 8388608
+          },
+          "frame_sha256": "63265a96905e7fdb8899e5f3e1a0ec5921d0c111124b00c89fa96c4643bef312",
+          "evidence_zip_sha256": "37cf868c3c31502715456c9fc7e6a5f7d40e17d08012ad7241651e1806b4447e",
+          "microphone_wav_artifact_id": "14b7d8a7f8d7e969498078bd0bd32707551a586f84d77197e27bd5c820e9c7ef"
+        },
+        {
+          "case": "mic-long-silence",
+          "firmware_sha256": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+          "runtime_identity": {
+            "runtime": "esp32sim",
+            "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+            "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+            "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+            "board": "m5stack-cores3",
+            "control_protocol": 1,
+            "flash_bytes": 16777216,
+            "psram_bytes": 8388608
+          },
+          "frame_sha256": "58c603a8efa63a621612379bd994ce90c74cfca496e26d8132cefc663d29419a",
+          "evidence_zip_sha256": "6292945ddcf4e4210c617096a033fda663a89d7648ee474db1315dd60779b6d9",
+          "microphone_wav_artifact_id": "ee7bea4232762775f8fce9b3e27e4d3948c8ac6a45a87ca769f703d6eed0b448"
+        }
+      ]
+    },
+    "cardputer-adv": {
+      "status": "PASS",
+      "cases": [
+        {
+          "case": "mic-tone",
+          "firmware_sha256": "dd9ee2e1534e7c9dffb06fed0709e65cf0094d57281e47bee637229d5f97326d",
+          "runtime_identity": {
+            "runtime": "esp32sim",
+            "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+            "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+            "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+            "board": "m5stack-cardputer-adv",
+            "control_protocol": 1,
+            "flash_bytes": 8388608,
+            "psram_bytes": 0
+          },
+          "frame_sha256": "881621b734da40f87c49c7443b7ac6415a6910742a13ad844fd815a27a4bf0c0",
+          "evidence_zip_sha256": "986b0034ea0d85ff3fc4ff23c0fc8b79d9b68ca6ec259cd338f5d560d3b4011d",
+          "microphone_wav_artifact_id": "14b7d8a7f8d7e969498078bd0bd32707551a586f84d77197e27bd5c820e9c7ef"
+        },
+        {
+          "case": "mic-silence",
+          "firmware_sha256": "dd9ee2e1534e7c9dffb06fed0709e65cf0094d57281e47bee637229d5f97326d",
+          "runtime_identity": {
+            "runtime": "esp32sim",
+            "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+            "binary_sha256": "4a44b6760f1451ea7fffa4b8c30938ba689c8495f0972cbcc121ac6558d9ea6c",
+            "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+            "board": "m5stack-cardputer-adv",
+            "control_protocol": 1,
+            "flash_bytes": 8388608,
+            "psram_bytes": 0
+          },
+          "frame_sha256": "6aedbddfab85556e94a56c3f183154d686ec5d8856d137aed81f26d8bad823eb",
+          "evidence_zip_sha256": "204828ad0b2657efdef6bc577db55dbd61f5674e4498a2cb571e64c076b8bd61",
+          "microphone_wav_artifact_id": "ee7bea4232762775f8fce9b3e27e4d3948c8ac6a45a87ca769f703d6eed0b448"
+        }
+      ]
+    }
+  },
+  "bootstrap_smoke": [
+    {
+      "case": "cardputer-adv-keyboard",
+      "firmware_sha256": "139a18a7fb9149d947d2e3a3c92c0fd51709494bff598e3418c4b891ea4f414b",
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "24f7468db4d7d0dfdacc8769ab8849d5b3afd15c42dc7dd33918413b075c938c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "zip_sha256": "bef85383c5c7c52fda2169e0b7fca7a426a864c8cea44c02c1a6770b79c32bb4"
+    },
+    {
+      "case": "cardputer-adv-speaker",
+      "firmware_sha256": "8704b0ca238d1aa2e5c42add42df346e4ab678d58f05b1b27b50a5c2ebc68ce4",
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "24f7468db4d7d0dfdacc8769ab8849d5b3afd15c42dc7dd33918413b075c938c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cardputer-adv",
+        "control_protocol": 1,
+        "flash_bytes": 8388608,
+        "psram_bytes": 0
+      },
+      "zip_sha256": "45109bad7b57ece066538913fea1d6d31af62d81176ae02d3838da0a119a11e8"
+    },
+    {
+      "case": "cores3-speaker",
+      "firmware_sha256": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "24f7468db4d7d0dfdacc8769ab8849d5b3afd15c42dc7dd33918413b075c938c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "zip_sha256": "7ee99d065b54234c22277073f53dd26a35fe84edd40dcc95cacaaab781fc32af"
+    },
+    {
+      "case": "cores3-touch",
+      "firmware_sha256": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+      "runtime_identity": {
+        "runtime": "esp32sim",
+        "commit": "e374bdff519450cb3202b02cd5f40868a6961a38",
+        "binary_sha256": "24f7468db4d7d0dfdacc8769ab8849d5b3afd15c42dc7dd33918413b075c938c",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "board": "m5stack-cores3",
+        "control_protocol": 1,
+        "flash_bytes": 16777216,
+        "psram_bytes": 8388608
+      },
+      "zip_sha256": "67e304b2b49d8afa300bfd5e5b53069440a6da300cca8adcd377833aff6f1754"
+    }
+  ]
+}

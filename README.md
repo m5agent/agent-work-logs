@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV native esp32sim Device Service | PARTIAL (same-path virtual devices and retained HTTP evidence; physical hardware NOT RUN) | [查看](records/m5stack-esp-emulator/2026-11-26-native-esp32sim-service/) |
 | 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PARTIAL（esp32sim 26/26、UIFlow2 通过，Arduino 原件仅本地） | [查看](records/m5stack-firmware-archive/2026-11-26-docs-firmware/) |
 | 2026-11-25 | ESP Emulator | CoreS3 / Cardputer-Adv 文档 WASM 嵌入预研 | `PARTIAL`（正式文档跨域 iframe 无共享内存；两款顶层编辑器控制组通过） | [查看](records/m5stack-esp-emulator/2026-11-25-docs-wasm-embed/) |
 | 2026-11-25 | M5GFX | #447 PaperDIY EPD OE 改由 EPD_PWR 提供，两个 FPC 连接器取代 Grove 口 | `PASS`（virtual-device A/B 末帧一致；host 221/221；真机与 OE 电气 NOT RUN） | [查看](records/m5gfx/2026-11-25-pr447-paperdiy-epd-oe-fpc/) |
