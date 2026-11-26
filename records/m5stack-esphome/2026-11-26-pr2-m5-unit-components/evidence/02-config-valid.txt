@@ -1,0 +1,234 @@
+INFO ESPHome 2026.11.0-dev
+INFO Reading configuration /tmp/pr2build/ev/pr-body-example-no-relation.yaml...
+WARNING Component rtttl is not known to work with the selected output type. Make sure this output supports custom frequency output method.
+esphome:
+  name: m5-units
+  devices:
+    - id: ncir2_device
+      name: NCIR2
+    - id: tof4m_device
+      name: ToF4M
+    - id: acssr_device
+      name: ACSSR
+  min_version: 2026.11.0-dev
+  build_path: build/m5-units
+  friendly_name: ''
+  platformio_options: {}
+  build_flags: []
+  environment_variables: {}
+  includes: []
+  includes_c: []
+  libraries: []
+  name_add_mac_suffix: false
+  merge_warnings: true
+  debug_scheduler: false
+  suspend_loop: false
+  areas: []
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+    version: 5.5.6
+    sdkconfig_options: {}
+    log_level: ERROR
+    advanced:
+      compiler_optimization: SIZE
+      enable_idf_experimental_features: false
+      enable_lwip_assert: true
+      ignore_efuse_custom_mac: false
+      ignore_efuse_mac_crc: false
+      sram1_as_iram: false
+      enable_lwip_dhcp_server: false
+      enable_lwip_mdns_queries: true
+      enable_lwip_bridge_interface: false
+      enable_lwip_tcpip_core_locking: true
+      enable_lwip_check_thread_safety: true
+      disable_libc_locks_in_iram: true
+      disable_vfs_support_termios: true
+      disable_vfs_support_select: true
+      disable_vfs_support_dir: true
+      freertos_in_iram: false
+      ringbuf_in_iram: false
+      heap_in_iram: false
+      execute_from_psram: false
+      loop_task_stack_size: 8192
+      enable_ota_rollback: false
+      enable_ota_downgrade_protection: false
+      use_full_certificate_bundle: false
+      include_builtin_idf_components: []
+      enable_full_printf: false
+      disable_debug_stubs: true
+      disable_ocd_aware: true
+      disable_usb_serial_jtag_secondary: true
+      disable_dev_null_vfs: true
+      disable_mbedtls_peer_cert: true
+      disable_mbedtls_pkcs7: true
+      disable_mbedtls_tls: true
+      disable_mbedtls_tls_server: true
+      disable_mbedtls_tls_extras: true
+      disable_regi2c_in_iram: true
+      adc_oneshot_in_iram: false
+      disable_fatfs: true
+    components: []
+  flash_size: 4MB
+  watchdog_timeout: 5s
+  variant: ESP32S3
+  cpu_frequency: 240MHZ
+logger:
+  level: DEBUG
+  baud_rate: 115200
+  tx_buffer_size: 512
+  deassert_rts_dtr: false
+  task_log_buffer_size: 768
+  hardware_uart: USB_SERIAL_JTAG
+  logs: {}
+  runtime_tag_levels: false
+i2c:
+  - id: port_a
+    sda: 2
+    scl: 1
+    sda_pullup_enabled: true
+    scl_pullup_enabled: true
+    frequency: 50000.0
+    scan: true
+tca9548a:
+  - address: 0x70
+    i2c_id: port_a
+    channels:
+      - bus_id: pahub_ch0
+        channel: 0
+      - bus_id: pahub_ch1
+        channel: 1
+      - bus_id: pahub_ch2
+        channel: 2
+m5_unit_ncir2:
+  - id: ncir2
+    i2c_id: pahub_ch0
+    update_interval: 5s
+    emissivity: 0.95
+    address: 0x5A
+m5_unit_acssr:
+  - id: acssr
+    i2c_id: pahub_ch2
+    update_interval: 10s
+    address: 0x50
+sensor:
+  - platform: m5_unit_ncir2
+    temperature:
+      name: Temperature
+      device_id: ncir2_device
+      disabled_by_default: false
+      force_update: false
+      unit_of_measurement: °C
+      accuracy_decimals: 2
+      device_class: temperature
+      state_class: measurement
+    internal_temperature:
+      name: Chip temperature
+      device_id: ncir2_device
+      disabled_by_default: false
+      force_update: false
+      unit_of_measurement: °C
+      accuracy_decimals: 1
+      device_class: temperature
+      state_class: measurement
+      entity_category: diagnostic
+  - platform: vl53l1x
+    i2c_id: pahub_ch1
+    name: Distance
+    device_id: tof4m_device
+    update_interval: 1s
+    disabled_by_default: false
+    force_update: false
+    unit_of_measurement: m
+    icon: mdi:arrow-expand-vertical
+    accuracy_decimals: 3
+    state_class: measurement
+    distance_mode: long
+    timing_budget: 50ms
+    signal_rate_limit: 1.0
+    roi_width: 16
+    roi_height: 16
+    offset: 0
+    address: 0x29
+binary_sensor:
+  - platform: m5_unit_ncir2
+    button:
+      name: Button
+      device_id: ncir2_device
+      disabled_by_default: false
+light:
+  - platform: m5_unit_ncir2
+    name: LED
+    device_id: ncir2_device
+    disabled_by_default: false
+    resume_effect: false
+    gamma_correct: 2.8
+    default_transition_length: 1s
+    flash_transition_length: 0s
+  - platform: m5_unit_acssr
+    name: LED
+    device_id: acssr_device
+    disabled_by_default: false
+    resume_effect: false
+    gamma_correct: 2.8
+    default_transition_length: 1s
+    flash_transition_length: 0s
+output:
+  - platform: m5_unit_ncir2
+    id: ncir2_buzzer
+    zero_means_zero: false
+    frequency: 4000.0
+rtttl:
+  - output: ncir2_buzzer
+    gain: 0.6
+number:
+  - platform: m5_unit_ncir2
+    high_alarm_temperature:
+      name: High alarm temperature
+      device_id: ncir2_device
+      disabled_by_default: false
+      mode: AUTO
+      entity_category: config
+      device_class: temperature
+      unit_of_measurement: °C
+    high_alarm_frequency:
+      name: High alarm frequency
+      device_id: ncir2_device
+      disabled_by_default: false
+      mode: AUTO
+      entity_category: config
+      device_class: frequency
+      unit_of_measurement: Hz
+    buzzer_frequency:
+      name: Buzzer frequency
+      device_id: ncir2_device
+      disabled_by_default: false
+      mode: AUTO
+      device_class: frequency
+      unit_of_measurement: Hz
+    buzzer_duty:
+      name: Buzzer duty
+      device_id: ncir2_device
+      disabled_by_default: false
+      mode: AUTO
+      icon: mdi:volume-high
+      unit_of_measurement: '%'
+switch:
+  - platform: m5_unit_ncir2
+    buzzer:
+      name: Buzzer
+      device_id: ncir2_device
+      disabled_by_default: false
+      restore_mode: ALWAYS_OFF
+      icon: mdi:bullhorn
+  - platform: m5_unit_acssr
+    relay:
+      name: Relay
+      device_id: acssr_device
+      restore_mode: RESTORE_DEFAULT_OFF
+      disabled_by_default: false
+      icon: mdi:electric-switch
+
+INFO Configuration is valid!
+EXIT=0

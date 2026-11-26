@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "kind": "pr_review",
+  "overall_status": "REVIEW",
+  "title": "m5stack/esphome#2 [m5_unit] Add ESPHome integration for Unit ToF4M, NCIR2 and ACSSR/DCSSR",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/esphome/pull/2",
+    "repository": "m5stack/esphome",
+    "base_commit": "6c84e04afe0985a73c705094f88b4f773ed4b6e9",
+    "head_commit": "e8acee5ca547f83e2311f97e8140ef2f6d2da239",
+    "base_branch": "m5-dev"
+  },
+  "hardware": {},
+  "firmware": {
+    "factory_bin_sha256": "df05bb829524901d7d7c538bca4a32225c484f090c0af842fb1b522c790a7d6f",
+    "app_bin_sha256": "338791b8df999eb2e1f5bf16afe43fde8662678476a974c1ffa7295c6513be13",
+    "target": "esp32-s3 (esp32-idf, ESP-IDF 5.5.6)",
+    "board": "esp32-s3-devkitc-1 / m5stack-cores3"
+  },
+  "execution": {
+    "environment": "macOS arm64; CPython 3.13 venv with repository requirements (ESPHome 2026.11.0-dev); local Device Service cores3 profile (QEMU, 16 MB flash)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "PR body example config validation",
+      "command": "esphome config (PR body YAML, with relation: via)",
+      "result": "FAIL",
+      "detail": "[relation] is an invalid option for [devices]; m5-dev DEVICE_SCHEMA has id/name/area_id only"
+    },
+    {
+      "name": "PR body example config validation without relation",
+      "command": "esphome config (PR body YAML, relation removed)",
+      "result": "PASS",
+      "detail": "Configuration is valid!"
+    },
+    {
+      "name": "component build (grouped esp32-idf)",
+      "command": "script/test_build_components.py -c m5_unit_ncir2,m5_unit_acssr,vl53l1x -t esp32-idf",
+      "result": "PASS",
+      "detail": "Test Summary: 1 passed, 0 failed"
+    },
+    {
+      "name": "full compile of PR example",
+      "command": "esphome compile (esp32-s3-devkitc-1 and m5stack-cores3)",
+      "result": "PASS",
+      "detail": "Successfully compiled program; 260823 bytes app on cores3 (3.2% of 8 MB partition)"
+    },
+    {
+      "name": "host unit tests",
+      "command": "script/cpp_unit_test.py m5_unit_ncir2 m5_unit_acssr vl53l1x",
+      "result": "PASS",
+      "detail": "31 tests from 8 suites, all passed"
+    },
+    {
+      "name": "review probe: late unit after failed setup",
+      "command": "host gtest probe LateUnitAfterFailedSetup",
+      "result": "PASS",
+      "detail": "component stays failed after the unit answers later; no recovery path"
+    },
+    {
+      "name": "review probe: YAML settings not saved",
+      "command": "host gtest probe YamlSettingsAreNotSavedToFlash",
+      "result": "PASS",
+      "detail": "0x22 written with 4000, 0x80 (save) never written"
+    },
+    {
+      "name": "virtual device boot (cores3, QEMU)",
+      "command": "Device Service cores3 session with the compiled factory image",
+      "result": "PARTIAL",
+      "detail": "setup() finished successfully; no PaHub/Unit model, so components only reach failure paths (m5_unit_ncir2 FAILED, acssr warning+retry, vl53l1x boot timeout)"
+    },
+    {
+      "name": "vendor protocol cross-check",
+      "command": "M5Unit-NCIR2 / M5Unit-NCIR2-Internal-FW / M5Unit-ACSSR / M5Unit-ACSSR-Internal-FW sources",
+      "result": "PASS",
+      "detail": "addresses, register map, field sizes and boot timing match the component implementation"
+    },
+    {
+      "name": "vl53l1x cherry-pick identity",
+      "command": "git hash-object vs upstream commit 41c3bbff blob shas",
+      "result": "PASS",
+      "detail": "all five files plus test fixtures identical to upstream"
+    }
+  ],
+  "evidence": [
+    "evidence/01-config-relation-fail.txt",
+    "evidence/02-config-valid.txt",
+    "evidence/03-host-unit-tests.txt",
+    "evidence/04-review-probe.txt",
+    "evidence/05b-cores3-qemu-serial-plain.log",
+    "evidence/06-build-summary.txt",
+    "evidence/pr-body-example.yaml",
+    "evidence/probe_review.cpp"
+  ],
+  "notes": [
+    "No physical hardware and no Unit model: unit behaviour (sensor readings, alarm, buzzer, relay under load, Modbus) is NOT RUN.",
+    "Virtual-device evidence covers boot and error handling only; tca9548a and the three units are not modelled.",
+    "Review only: no push, no branch change, PR left open."
+  ]
+}
