@@ -8,3 +8,5 @@ Stock UIFlow2 v2.5.3 and v2.5.4 render their home screens on the original Tab5 p
 - [Reproduction entry point](code/run-launcher.sh)
 
 [USB host follow-up](usb-host.md)
+
+[Final board and audio results](board-peripherals.md)

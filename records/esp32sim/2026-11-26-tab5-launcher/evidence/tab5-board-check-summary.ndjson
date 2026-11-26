@@ -1,0 +1,25 @@
+{"case": "touch button", "status": "PASS", "evidence": "GT911 press and release redraw the button"}
+{"case": "touch multi ST7123", "status": "PASS", "evidence": "final-st-multi: Point 1 X:0160 Y:0400, Point 2 X:0540 Y:0880"}
+{"case": "touch multi GT911", "status": "PASS", "evidence": "tab5-multi: Point 1 X:0160 Y:0400, Point 2 X:0540 Y:0880"}
+{"case": "BMI270", "status": "PASS", "evidence": "tab5-imu: Acc X = 0.50, Acc Y = -0.25, Gyr X = 125.00"}
+{"case": "microphone and replay", "status": "PASS", "evidence": "recording reacts to the input and reproduces 733 Hz on touch playback"}
+{"case": "speaker original build", "status": "FAIL", "evidence": "original ##include fails compilation"}
+{"case": "speaker corrected", "status": "PASS", "evidence": "five ordered speaker tones from 10 kHz to 2 kHz through codec-gated 48 kHz PCM"}
+{"case": "battery and charging", "status": "PASS", "evidence": "tab5-power: Bat Charging: Yes, Bat Voltage: 7980mv, Bat Level: 86"}
+{"case": "RTC local", "status": "PASS", "evidence": "RTC found and time advanced from the written date"}
+{"case": "RTC SNTP", "status": "FAIL", "evidence": "tab5-sntp-ap: absent expected text ('RTC found', 'RTC UTC')"}
+{"case": "wakeup five seconds", "status": "FAIL", "evidence": "no guest reboot after sleep gesture"}
+{"case": "wakeup next minute", "status": "FAIL", "evidence": "no guest reboot after sleep gesture"}
+{"case": "microSD", "status": "PASS", "evidence": "SPI SD mount, exact WriteTest.txt bytes, and two full-frame PNGs"}
+{"case": "microSD native SDMMC", "status": "PASS", "evidence": "same SPI-written card, read through SDMMC with 6864 controller bytes"}
+{"case": "Wi-Fi station", "status": "FAIL", "evidence": "tab5-wifi-ap: absent expected text ('Connected to', 'IP address')"}
+{"case": "Wi-Fi scan", "status": "FAIL", "evidence": "tab5-scan-ap: absent expected text ('Scan done',)"}
+{"case": "expander PA and USB rails", "status": "PASS", "evidence": "guest M5Unified power API observes both, USB only, and neither"}
+{"case": "antenna select", "status": "PASS", "evidence": "firmware selects internal antenna through expander P0"}
+{"case": "UIFlow2 2.5.3 stock", "status": "PASS", "evidence": "stock home and ADC control after touch"}
+{"case": "UIFlow2 2.5.3 REPL", "status": "PASS", "evidence": "exact full framebuffer and down/up; ILI9881C ID 98 81 0c"}
+{"case": "UIFlow2 2.5.4 stock", "status": "PASS", "evidence": "stock home and ADC control after touch"}
+{"case": "UIFlow2 2.5.4 REPL", "status": "PASS", "evidence": "exact full framebuffer and down/up"}
+{"case": "Maker Fighter HID", "status": "PASS", "evidence": "HID enumeration, interrupt transfers and application menu change"}
+{"case": "MSC register probe", "status": "PASS", "evidence": "MSC descriptor enumeration, READ(10), sector and command status"}
+{"case": "MSC SDK probe", "status": "FAIL", "evidence": "SDK host installation did not return"}
