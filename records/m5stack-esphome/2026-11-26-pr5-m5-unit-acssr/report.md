@@ -35,7 +35,7 @@ PR #5 将原先包含在 #2 中的 ACSSR/DCSSR 部分拆出，新增 `m5_unit_ac
 
 Unit 固件 `initial_control()` 先闪灯、`vTaskDelay(3000)`，再把继电器置 0，之后
 才 `i2c_slave_init()`（`main/acssr.c:133-154`，`:192`）。组件在 `setup()` 失败后
-以 1 s 间隔重试 10 次，然后转为 10 s 的 `update()` 周期继续探测；这与 3 s 上电
+以 1 s 间隔重试 10 次，然后转为默认 10 s（probe 使用 5 s）的 `update()` 周期继续探测；这与 3 s 上电
 窗口一致。
 
 ### 2.3 restore_mode 与反转
