@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/m5stack-linux-dtoverlays #20 round 3: 3b6d273 covers a stuck-poweroff flip-back with a 200 ms poll and bounds irq-gpios read errors; host-level matrix passes, no residual code path found",
+  "source": {
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "head_commit": "3b6d2738d8606581cddf3f34e213e7682ad9d23d",
+    "previous_review_comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200515708",
+    "author_comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200881588",
+    "author": "shrimpapplepro",
+    "changed_files": 2,
+    "additions": 368,
+    "deletions": 74,
+    "state": "OPEN",
+    "mergeable_state": "CLEAN"
+  },
+  "hardware": {},
+  "firmware": {
+    "file": "modules/CardputerZero/powerfail_suo.c",
+    "sha256": "58625cce5415ebd0975781eac01d9656de64700100e20a1136e9b8a31b45235b"
+  },
+  "execution": {
+    "environment": "macOS arm64; no Cardputer Zero hardware; Device Service cardputer-zero profile supported=false creatable=false backend_ready=false (__missing_qemu__/__missing_rom__); no Linux kernel headers; docker daemon unusable (read-only containerd state dir)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "backstop_polls_after_remount",
+      "status": "PASS",
+      "evidence": "T28: S at 17000, U queued, 1.5 s wait -> first poll 19500, then 200 ms cadence (19900); one S+U only"
+    },
+    {
+      "name": "flip_before_backstop_restarts",
+      "status": "PASS",
+      "evidence": "T25: flip at 8000 during a hung poweroff -> S+U at 17000, emergency_restart() at 19500"
+    },
+    {
+      "name": "flip_after_backstop_restarts",
+      "status": "PASS",
+      "evidence": "T26: flip at 19000 after S+U -> restart at the 19500 poll, S+U not repeated"
+    },
+    {
+      "name": "flip_between_polls_restarts",
+      "status": "PASS",
+      "evidence": "T27: flip at 19600, poll at 19500 saw low -> restart at 19700"
+    },
+    {
+      "name": "no_flip_no_restart",
+      "status": "PASS",
+      "evidence": "T28: polls until the chip cuts at the end of the hold, restart_calls == 0, no READY write"
+    },
+    {
+      "name": "shutdown_stops_the_poll_chain",
+      "status": "PASS",
+      "evidence": "T29: .shutdown during the poll loop cancels the backstop, 200 ms cut, LCD reset, no later re-arm"
+    },
+    {
+      "name": "gpio_read_errors_bounded",
+      "status": "PASS",
+      "evidence": "T19: 10 failed reads from 1500 to 2400, 11th at 2500 decides from 0xB6=3 -> orderly, OFF_TIME 20000, backstop 17000"
+    },
+    {
+      "name": "gpio_error_and_state_error",
+      "status": "PASS",
+      "evidence": "T31: both unreadable -> orderly after the retry bound at 2500"
+    },
+    {
+      "name": "gpio_error_state_debounce_waits",
+      "status": "PASS",
+      "evidence": "T30: 0xB6 stays 2 -> keeps waiting, no orderly, no backstop"
+    },
+    {
+      "name": "gpio_error_counter_resets",
+      "status": "PASS",
+      "evidence": "T32: two failures then a good read -> orderly at 1800, gpio_errors == 0"
+    },
+    {
+      "name": "legacy_path_unchanged",
+      "status": "PASS",
+      "evidence": "T2/T3: no m5stack,power-controller -> SysRq U only, no fallback via disabled-gpios"
+    },
+    {
+      "name": "hold_and_shutdown_matrix_unchanged",
+      "status": "PASS",
+      "evidence": "T1/T5/T8-T14/T18/T23/T24 all unchanged from the second round"
+    },
+    {
+      "name": "on_device_hardware",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer Zero; author logs not independently reproduced"
+    },
+    {
+      "name": "virtual_device",
+      "status": "NOT RUN",
+      "evidence": "local cardputer-zero profile backend_ready=false, missing QEMU and ROM"
+    },
+    {
+      "name": "kernel_W1_build",
+      "status": "NOT RUN",
+      "evidence": "no kernel headers on this host"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/host-harness-head.txt",
+      "description": "32 scenarios / 127 checks on the unchanged 3b6d273 source, all PASS"
+    },
+    {
+      "path": "evidence/stuck-and-gpio-scenarios.txt",
+      "description": "T25-T32: stuck-poweroff restart polling and bounded irq-gpios read errors"
+    },
+    {
+      "path": "evidence/diff-ff4cd84-3b6d273.diff",
+      "description": "the only source change in this round (+43/-9 in powerfail_suo.c)"
+    },
+    {
+      "path": "evidence/pr-metadata.txt",
+      "description": "PR state, head, scope and commit list"
+    },
+    {
+      "path": "evidence/local-profile-summary.txt",
+      "description": "redacted local Device Service cardputer-zero profile"
+    }
+  ],
+  "notes": [
+    "Evidence class is host-level test plus code-level verification; no virtual-device or hardware run was possible on this host.",
+    "The driver source is compiled unchanged; time and delayed work are simulated by the harness, so absolute timings are model timings.",
+    "Both residual points from the second round are closed in code and exercised in the harness; no new residual path was found.",
+    "Open question for the author: the pasted log shows the next boot ~19 s after the S+U remount line, while the new poll should restart ~1.7 s later; asked for journalctl -b -1 -o short-monotonic.",
+    "An inherent <=200 ms window remains between the last .shutdown sample and the halt; not a code request."
+  ]
+}

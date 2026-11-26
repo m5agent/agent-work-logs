@@ -1,0 +1,296 @@
+== T25 flip back on while the poweroff is hung: backstop restarts ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t=  8000] ---- slider ON (irq-gpios high)
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ARM  backstop delay=1500 due=19500
+[t= 19500] emerg power switch back on, poweroff stuck: restarting
+  S + U once, 4 s before the cut                             PASS
+  restart once                                               PASS
+  restart at the first 200 ms poll (19500)                   PASS
+== T26 flip back on after S + U: the next poll restarts ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ARM  backstop delay=1500 due=19500
+[t= 19000] ---- slider ON (irq-gpios high)
+[t= 19500] emerg power switch back on, poweroff stuck: restarting
+  S + U still ran exactly once                               PASS
+  restart once at the next poll (19500)                      PASS
+== T27 flip back on between two polls: restart at the following poll ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ARM  backstop delay=1500 due=19500
+[t= 19500] ARM  backstop delay=200 due=19700
+[t= 19600] ---- slider ON (irq-gpios high)
+[t= 19700] emerg power switch back on, poweroff stuck: restarting
+  restart once at 19700                                      PASS
+  still one S + U                                            PASS
+== T28 hung poweroff, no flip: polls until the cut, no restart ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ARM  backstop delay=1500 due=19500
+  first fixed poll 1.5 s after the remount (due 19500)       PASS
+[t= 19500] ARM  backstop delay=200 due=19700
+[t= 19700] ARM  backstop delay=200 due=19900
+  then 200 ms cadence, no restart (due 19900)                PASS
+[t= 19900] ARM  backstop delay=200 due=20100
+[t= 20100] ARM  backstop delay=200 due=20300
+[t= 20300] ARM  backstop delay=200 due=20500
+[t= 20500] ARM  backstop delay=200 due=20700
+[t= 20700] ARM  backstop delay=200 due=20900
+[t= 20900] ARM  backstop delay=200 due=21100
+[t= 21100] ARM  backstop delay=200 due=21300
+[t= 21300] ARM  backstop delay=200 due=21500
+[t= 21500] ARM  backstop delay=200 due=21700
+[t= 21700] ARM  backstop delay=200 due=21900
+[t= 21900] ARM  backstop delay=200 due=22100
+[t= 22100] ARM  backstop delay=200 due=22300
+[t= 22300] ARM  backstop delay=200 due=22500
+[t= 22500] ARM  backstop delay=200 due=22700
+[t= 22700] ARM  backstop delay=200 due=22900
+[t= 22900] ARM  backstop delay=200 due=23100
+[t= 23100] ARM  backstop delay=200 due=23300
+[t= 23300] ARM  backstop delay=200 due=23500
+[t= 23500] ARM  backstop delay=200 due=23700
+[t= 23700] ARM  backstop delay=200 due=23900
+[t= 23900] ARM  backstop delay=200 due=24100
+[t= 24100] ARM  backstop delay=200 due=24300
+[t= 24300] ARM  backstop delay=200 due=24500
+[t= 24500] ARM  backstop delay=200 due=24700
+[t= 24700] ARM  backstop delay=200 due=24900
+[t= 24900] ARM  backstop delay=200 due=25100
+[t= 25100] ARM  backstop delay=200 due=25300
+[t= 25300] ARM  backstop delay=200 due=25500
+[t= 25500] ARM  backstop delay=200 due=25700
+[t= 25700] ARM  backstop delay=200 due=25900
+[t= 25900] ARM  backstop delay=200 due=26100
+[t= 26100] ARM  backstop delay=200 due=26300
+[t= 26300] ARM  backstop delay=200 due=26500
+[t= 26500] ARM  backstop delay=200 due=26700
+[t= 26700] ARM  backstop delay=200 due=26900
+[t= 26900] ARM  backstop delay=200 due=27100
+[t= 27100] ARM  backstop delay=200 due=27300
+[t= 27300] ARM  backstop delay=200 due=27500
+[t= 27500] ARM  backstop delay=200 due=27700
+[t= 27700] ARM  backstop delay=200 due=27900
+[t= 27900] ARM  backstop delay=200 due=28100
+[t= 28100] ARM  backstop delay=200 due=28300
+[t= 28300] ARM  backstop delay=200 due=28500
+[t= 28500] ARM  backstop delay=200 due=28700
+[t= 28700] ARM  backstop delay=200 due=28900
+[t= 28900] ARM  backstop delay=200 due=29100
+[t= 29100] ARM  backstop delay=200 due=29300
+[t= 29300] ARM  backstop delay=200 due=29500
+[t= 29500] ARM  backstop delay=200 due=29700
+[t= 29700] ARM  backstop delay=200 due=29900
+[t= 29900] ARM  backstop delay=200 due=30100
+[t= 30100] ARM  backstop delay=200 due=30300
+[t= 30300] ARM  backstop delay=200 due=30500
+[t= 30500] ARM  backstop delay=200 due=30700
+[t= 30700] ARM  backstop delay=200 due=30900
+[t= 30900] ARM  backstop delay=200 due=31100
+[t= 31100] ARM  backstop delay=200 due=31300
+[t= 31300] ARM  backstop delay=200 due=31500
+[t= 31500] ARM  backstop delay=200 due=31700
+[t= 31700] ARM  backstop delay=200 due=31900
+[t= 31900] ARM  backstop delay=200 due=32100
+[t= 32100] ARM  backstop delay=200 due=32300
+[t= 32300] ARM  backstop delay=200 due=32500
+[t= 32500] ARM  backstop delay=200 due=32700
+[t= 32700] ARM  backstop delay=200 due=32900
+[t= 32900] ARM  backstop delay=200 due=33100
+[t= 33100] ARM  backstop delay=200 due=33300
+[t= 33300] ARM  backstop delay=200 due=33500
+[t= 33500] ARM  backstop delay=200 due=33700
+[t= 33700] ARM  backstop delay=200 due=33900
+[t= 33900] ARM  backstop delay=200 due=34100
+[t= 34100] ARM  backstop delay=200 due=34300
+[t= 34300] ARM  backstop delay=200 due=34500
+[t= 34500] ARM  backstop delay=200 due=34700
+[t= 34700] ARM  backstop delay=200 due=34900
+[t= 34900] ARM  backstop delay=200 due=35100
+[t= 35100] ARM  backstop delay=200 due=35300
+[t= 35300] ARM  backstop delay=200 due=35500
+[t= 35500] ARM  backstop delay=200 due=35700
+[t= 35700] ARM  backstop delay=200 due=35900
+[t= 35900] ARM  backstop delay=200 due=36100
+[t= 36100] ARM  backstop delay=200 due=36300
+[t= 36300] ARM  backstop delay=200 due=36500
+[t= 36500] ARM  backstop delay=200 due=36700
+[t= 36700] ARM  backstop delay=200 due=36900
+[t= 36900] ARM  backstop delay=200 due=37100
+[t= 37100] ARM  backstop delay=200 due=37300
+[t= 37300] ARM  backstop delay=200 due=37500
+[t= 37500] ARM  backstop delay=200 due=37700
+[t= 37700] ARM  backstop delay=200 due=37900
+[t= 37900] ARM  backstop delay=200 due=38100
+[t= 38100] ARM  backstop delay=200 due=38300
+[t= 38300] ARM  backstop delay=200 due=38500
+[t= 38500] ARM  backstop delay=200 due=38700
+[t= 38700] ARM  backstop delay=200 due=38900
+[t= 38900] ARM  backstop delay=200 due=39100
+[t= 39100] ARM  backstop delay=200 due=39300
+[t= 39300] ARM  backstop delay=200 due=39500
+[t= 39500] ARM  backstop delay=200 due=39700
+[t= 39700] ARM  backstop delay=200 due=39900
+[t= 39900] ARM  backstop delay=200 due=40100
+  no restart with the slider off                             PASS
+  S + U only once                                            PASS
+  chip cut and went to OFF (slider still off)                PASS
+  no READY restore                                           PASS
+== T29 .shutdown during the stuck polls: cancel and cut at 200 ms ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ARM  backstop delay=1500 due=19500
+[t= 19500] ARM  backstop delay=200 due=19700
+[t= 19700] ARM  backstop delay=200 due=19900
+[t= 19700] CANCEL backstop (was due 19900)
+[t= 19700] I2C  0xB2 <- 200
+  backstop cancelled                                         PASS
+  no restart                                                 PASS
+  OFF_TIME 200 ms                                            PASS
+  disabled-gpios asserted                                    PASS
+  no poll re-arms after the cancel                           PASS
+== T30 gpio unreadable and 0xB6 still DEBOUNCE: keeps waiting ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] err   failed to read powerfail gpio: -5
+[t=  1500] warn  powerfail gpio low, gpio unreadable: waiting
+[t=  1500] ARM  check    delay=100 due=1600
+[t=  1600] err   failed to read powerfail gpio: -5
+[t=  1600] ARM  check    delay=100 due=1700
+[t=  1700] err   failed to read powerfail gpio: -5
+[t=  1700] ARM  check    delay=100 due=1800
+[t=  1800] err   failed to read powerfail gpio: -5
+[t=  1800] ARM  check    delay=100 due=1900
+[t=  1900] err   failed to read powerfail gpio: -5
+[t=  1900] ARM  check    delay=100 due=2000
+[t=  2000] err   failed to read powerfail gpio: -5
+[t=  2000] ARM  check    delay=100 due=2100
+[t=  2100] err   failed to read powerfail gpio: -5
+[t=  2100] ARM  check    delay=100 due=2200
+[t=  2200] err   failed to read powerfail gpio: -5
+[t=  2200] ARM  check    delay=100 due=2300
+[t=  2300] err   failed to read powerfail gpio: -5
+[t=  2300] ARM  check    delay=100 due=2400
+[t=  2400] err   failed to read powerfail gpio: -5
+[t=  2400] ARM  check    delay=100 due=2500
+[t=  2500] err   failed to read powerfail gpio: -5
+[t=  2500] ARM  check    delay=100 due=2600
+[t=  2600] err   failed to read powerfail gpio: -5
+[t=  2600] ARM  check    delay=100 due=2700
+[t=  2700] err   failed to read powerfail gpio: -5
+[t=  2700] ARM  check    delay=100 due=2800
+[t=  2800] err   failed to read powerfail gpio: -5
+[t=  2800] ARM  check    delay=100 due=2900
+[t=  2900] err   failed to read powerfail gpio: -5
+[t=  2900] ARM  check    delay=100 due=3000
+[t=  3000] err   failed to read powerfail gpio: -5
+[t=  3000] ARM  check    delay=100 due=3100
+[t=  3100] err   failed to read powerfail gpio: -5
+[t=  3100] ARM  check    delay=100 due=3200
+[t=  3200] err   failed to read powerfail gpio: -5
+[t=  3200] ARM  check    delay=100 due=3300
+[t=  3300] err   failed to read powerfail gpio: -5
+[t=  3300] ARM  check    delay=100 due=3400
+[t=  3400] err   failed to read powerfail gpio: -5
+[t=  3400] ARM  check    delay=100 due=3500
+[t=  3500] err   failed to read powerfail gpio: -5
+[t=  3500] ARM  check    delay=100 due=3600
+[t=  3600] err   failed to read powerfail gpio: -5
+[t=  3600] ARM  check    delay=100 due=3700
+[t=  3700] err   failed to read powerfail gpio: -5
+[t=  3700] ARM  check    delay=100 due=3800
+[t=  3800] err   failed to read powerfail gpio: -5
+[t=  3800] ARM  check    delay=100 due=3900
+[t=  3900] err   failed to read powerfail gpio: -5
+[t=  3900] ARM  check    delay=100 due=4000
+[t=  4000] err   failed to read powerfail gpio: -5
+[t=  4000] ARM  check    delay=100 due=4100
+  no orderly_poweroff without a cut state                    PASS
+  no backstop                                                PASS
+  check still re-arming past the retry bound                 PASS
+== T31 gpio and 0xB6 both unreadable: orderly from the bound ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] err   failed to read powerfail gpio: -5
+[t=  1500] warn  powerfail gpio low, gpio unreadable: waiting
+[t=  1500] ARM  check    delay=100 due=1600
+[t=  1600] err   failed to read powerfail gpio: -5
+[t=  1600] ARM  check    delay=100 due=1700
+[t=  1700] err   failed to read powerfail gpio: -5
+[t=  1700] ARM  check    delay=100 due=1800
+[t=  1800] err   failed to read powerfail gpio: -5
+[t=  1800] ARM  check    delay=100 due=1900
+[t=  1900] err   failed to read powerfail gpio: -5
+[t=  1900] ARM  check    delay=100 due=2000
+[t=  2000] err   failed to read powerfail gpio: -5
+[t=  2000] ARM  check    delay=100 due=2100
+[t=  2100] err   failed to read powerfail gpio: -5
+[t=  2100] ARM  check    delay=100 due=2200
+[t=  2200] err   failed to read powerfail gpio: -5
+[t=  2200] ARM  check    delay=100 due=2300
+[t=  2300] err   failed to read powerfail gpio: -5
+[t=  2300] ARM  check    delay=100 due=2400
+[t=  2400] err   failed to read powerfail gpio: -5
+[t=  2400] ARM  check    delay=100 due=2500
+[t=  2500] err   failed to read powerfail gpio: -5
+[t=  2500] I2C  0xB2 <- 20000
+[t=  2500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  2500] ARM  backstop delay=14500 due=17000
+  orderly_poweroff once after the retry bound                PASS
+  backstop armed                                             PASS
+== T32 gpio recovers inside the retry budget: normal orderly path ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] err   failed to read powerfail gpio: -5
+[t=  1500] warn  powerfail gpio low, gpio unreadable: waiting
+[t=  1500] ARM  check    delay=100 due=1600
+[t=  1600] err   failed to read powerfail gpio: -5
+[t=  1600] ARM  check    delay=100 due=1700
+[t=  1700] err   failed to read powerfail gpio: -5
+[t=  1700] ARM  check    delay=100 due=1800
+[t=  1800] I2C  0xB2 <- 20000
+[t=  1800] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1800] ARM  backstop delay=15200 due=17000
+  orderly_poweroff at the next 100 ms recheck                PASS
+  counter reset after the good read                          PASS
+
+PASS: 127 checks, 0 failure(s)
