@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "title": "CoreS3 Arduino docs and UIFlow2 native simulator acceptance",
+  "source": {
+    "repository": "esp32sim fork of github.com/mikroverk/esp32sim",
+    "base_commit": "5d620c21acb2becb473746d0dbb8bcc57f2dc7ac",
+    "branch": "m5/cores3-fixes",
+    "head": "38e63ef312558a7da6bc2591de8e674c75c7a59e",
+    "commits": [
+      "7925e0bfdc8f393d9c0bbc5604dd2806f6da38ab",
+      "194555d6ae5467a0fb5f7f1ff5ff6ebd9ac0ba98",
+      "38e63ef312558a7da6bc2591de8e674c75c7a59e"
+    ]
+  },
+  "hardware": {
+    "physical": "NOT RUN",
+    "model": "m5stack-cores3",
+    "chip": "ESP32-S3"
+  },
+  "firmware": {
+    "arduino_core": "3.2.5",
+    "idf_sdk": "idf-release_v5.4-858a988d-v1",
+    "M5Unified": "0.3.0",
+    "M5GFX": "0.3.0",
+    "core_compile_definitions": {
+      "ARDUINO_USB_MODE": 1,
+      "ARDUINO_USB_CDC_ON_BOOT": 1,
+      "CORE_DEBUG_LEVEL": 0
+    },
+    "sha256": {
+      "button.ino.merged.bin": "3dfbaaaa1ea168074d284b40b14fc489821162fb211f568a6a52181e54dab69c",
+      "camera.ino.merged.bin": "5d61a3dbefec7bde7a8b7d29040f7e96e6374b5efd4fb702be9d3c5bbdfedb91",
+      "display.ino.merged.bin": "a88182dc789c1dfe7525ad7ff9a284fd201b6c55375502c895b689cd56af13d6",
+      "imu.ino.merged.bin": "3835dc5c8211736869c0f49762855875b09038d4aba8000516bfad9b014655ed",
+      "ltr553.ino.merged.bin": "9584d3339e863ee71b8e46ea43048bdc041028be3a0b0fb9e624185fdca40001",
+      "mic.ino.merged.bin": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+      "pic.ino.merged.bin": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+      "power.ino.merged.bin": "7beb59232d1b21d7fb38d4c994582609df364ba918a4b443bf8fdcbd0982112c",
+      "quickstart_bargraph.ino.merged.bin": "7635ebdc5bbddd6d33dc9bbeeb4d1fd9270c4971b0692595096c24b72f648d8a",
+      "rtc.ino.merged.bin": "cf450835c9b8d88f815272158040afee79f0d88cf32b1f46add9bd783b8ab00d",
+      "sdcard.ino.merged.bin": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+      "speaker.ino.merged.bin": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+      "touch.ino.merged.bin": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+      "wakeup.ino.merged.bin": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+      "wav.ino.merged.bin": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5"
+    },
+    "uiflow2": {
+      "version": "2.5.3",
+      "sha256": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264"
+    },
+    "docs_revision": "6ee4f2fb9dca1c671e475407cb709109a699cf1a"
+  },
+  "execution": {
+    "environment": "macOS arm64, Rust 1.100.0 release native JIT, mask ROM, virtual-device validation",
+    "runtime_sha256": "18c7020b602f2a8785742de16bf39ab3b025083c8aa7c280d82bcfa44b1ad72f",
+    "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+    "fixtures_sha256": {
+      "button.txt": "0d158e9c8cb9ad3983d0dc64026cc35ce42fa403dd4aec9dde54d72bc96bb379",
+      "imu.txt": "0913242e8cb96afc52356b3391de775e725722abf78efd9d288318f573fddba2",
+      "ltr553.txt": "ac5f76159581d16efbee2942074de0e7a6d3150bb001e93dd14b242b7253ffa9",
+      "mic.txt": "7a9cad089012eb69bf88452fcaf09da1e25f7f3d8ad99ef2ca5a5156acfa017c",
+      "power.txt": "730c1b8195b3b694e1bf49a5b28fbef7d2f47f0fa77ec03c43406dda3e4e74fb",
+      "touch.txt": "f34352b34aa56954e620ce3b6df3f573ca6c40619e3d07fdeed19eaee38bf0c7",
+      "wakeup.txt": "7a9cad089012eb69bf88452fcaf09da1e25f7f3d8ad99ef2ca5a5156acfa017c",
+      "camera-before-input.bmp": "7bcb9edf6452bf46108ad660ec7edf3b9cd9dcf93f8f11c9191b2ab90f4c1ed0",
+      "camera-input.bmp": "baee95038ecbc81aaed02d91726923b3ebcb22230e572aebced423b2305274b1",
+      "mic-input.wav": "55dc06fbe30596d35016860f9c95a2c621332655bc7218154bcefc271a2b999f",
+      "seed.img": "1919da05ef7d8a5a2fe1c72bd53a4adddcbfd4725c3190f3b9737658e4007ee6"
+    },
+    "uiflow2_script_sha256": {
+      "host-final.txt": "bd21b98011da8afa8d25f58927ed207745f5f84059443803713cbfe47d652fc4",
+      "tap.txt": "4f138d88f2087dfe9063ebe93a404c177ccf69bf097b23dd3936cbade2be05ba"
+    },
+    "tested_capture_sha256": {
+      "button-before.png": "2a1d83a5918f060852e70b1becb33a1e01ac4cfd1c02f4abefbad401bc83cf75",
+      "button.png": "a1e6764d39689d213ac0075a4ef73a821ba147973b233e00be512574228baa61",
+      "camera-before.png": "abab8bf6de0902d98eb704d08072fbd3f24e50f4ba77078d5802bd2a02733d1c",
+      "camera.png": "4c78472156f7ae4e80fda4ee7d4cd084b7d2c9ea5cbbab1b81ad61c5887373c7",
+      "display-before.png": "d742aa37fda07ce8333fb0f53d97490dc2dde729b19951a462eae50b1960f234",
+      "display.png": "db56a74ce212d0dc221b667d9a7a938ef09eb6feea741f4ab13830887baaee11",
+      "imu-before.png": "50b7f17012f1aaba56d8ac27ca729b2927e5fffac6f4460c0d20ac3194397508",
+      "imu.png": "6099b307534984b6ba888e62606917e615fd2a75bae9431c7b827e5800b6f87b",
+      "ltr553-before.png": "c333fd084ea19c56a82f0bb9a1ebb7e111ccd463c13c6afaede3140f36ff3346",
+      "ltr553.png": "c6b29f7cc90ccc84ba5ae1f6281a18406f7fc84007a7e204e6f5402ab46bc960",
+      "mic-before.png": "9aa80c841aa53a63e463a3400422b7938ab306f59c9a018d1e022e2eebc0414b",
+      "mic.png": "1f353ec909e472c9495ee0703bac40e7328c5a6d717710f1cd4cddf1dca226b7",
+      "pic-before.png": "ded880037f1bcd4ddf40332b2519edffd62cae587901bf65cc800abe3413149c",
+      "pic.png": "208d7ccb00e51a28f332a4be300d72fe01bb555326271456c8f268f458649352",
+      "power-before.png": "6733ffac25b9b321d309a3eb8462509b65b4cab9da0016b5dca9954da9c76649",
+      "power.png": "1a4f5e552f645170662d7b6708bf639c02816f5094b746ebe43d40891147441f",
+      "quickstart-bargraph-before.png": "9bd30d5dba1ab837f47a3f622af4a7c5f9e6f3628ce24fee3e0ceab009100b8a",
+      "quickstart-bargraph.png": "a6ec8dd2f120ea2b175334b1f300ee4915f8f2e934d664caa88ed06e80490a20",
+      "rtc-before.png": "df0f01b4667fac73cec106ed67a2d3504fba00e3e9dca141540b9ff4d74a110d",
+      "rtc.png": "236205e772380705704cb84fea76996836fa02431ca6b3c1fe81a432b48626d3",
+      "sdcard-before.png": "ded880037f1bcd4ddf40332b2519edffd62cae587901bf65cc800abe3413149c",
+      "sdcard.png": "208d7ccb00e51a28f332a4be300d72fe01bb555326271456c8f268f458649352",
+      "speaker.png": "1345c5eaffe1d9561c678cf294843ab45d657434d485d294f5247ac2350e7eea",
+      "touch-before.png": "52120b9dcd79b1748c84641303eaf09605b30263149007598dc0061c80ae8869",
+      "touch.png": "9810b2becc2c9532945b01560b234ec4fb5cf1c6b5f29261aaa1288b8e3e9437",
+      "wakeup-before.png": "6459562cf8e7ecb546a07fe0bc74d0fa575dca514f1cb1f5a8be86a1336bf7cd",
+      "wakeup.png": "6153dc9b6a871ec0d23f6184dc3067f46b599627a41cb35bc43dcbb5fb747c4e",
+      "wav.png": "f8d17286e18a6d8260b0c3601a0ee6fa76ad811287cf8dc4e23ca4abdb835454"
+    },
+    "uiflow2_capture_sha256": {
+      "cdc.png": "d7dc0484987ca872b2c471b21304ba7233f2efa284013b9052bb56054cf63414",
+      "home.png": "fcb1702b90b92e2378df94f516fab26d213988b9f4b45e3306221bbe95b885a7",
+      "tap.png": "1862833cfecda8fd2819e1374cdbd07f7b85fedff75bc959722c3aee6ad9ba0b"
+    }
+  },
+  "checks": [
+    {
+      "case": "display",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "multicolored circles and rectangles change"
+    },
+    {
+      "case": "quickstart-bargraph",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "colored columns and white peaks animate"
+    },
+    {
+      "case": "touch",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "flick/release, coordinates and green point"
+    },
+    {
+      "case": "button",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "250 ms key press displays Btn PWR"
+    },
+    {
+      "case": "power",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "battery 4123→3678 mV, 87→42%, VBUS 5000→0 mV"
+    },
+    {
+      "case": "imu",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "two injected vectors on LCD (HWCDC uninitialized by sketch)"
+    },
+    {
+      "case": "ltr553",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "PS 321→1456, ALS 260→1440 (HWCDC uninitialized by sketch)"
+    },
+    {
+      "case": "rtc",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "associated AP, NTP reply, RTC/system/local time advance"
+    },
+    {
+      "case": "speaker",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "vertical title and 3× each of 10 kHz / 4 kHz"
+    },
+    {
+      "case": "mic",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "REC waveform → PLAY, 733.09 Hz, RMS 946.8"
+    },
+    {
+      "case": "camera",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "two asymmetric mirrored RGB565 fixtures, zero dropped frames"
+    },
+    {
+      "case": "wakeup",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "black asleep, RTC expiration, PMIC restart and restored UI"
+    },
+    {
+      "case": "sdcard",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "FAT32 WriteTest.txt matches and both PNGs render byte-for-byte"
+    },
+    {
+      "case": "pic",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "FAT32 WriteTest.txt matches and both PNGs render byte-for-byte"
+    },
+    {
+      "case": "wav",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "evidence": "SD reads, 12 s of 440/660 Hz audio and USB completion marker"
+    },
+    {
+      "case": "UIFlow2 v2.5.3",
+      "status": "PASS",
+      "layer": "device_response",
+      "touch_changed_pixels": 50425,
+      "usb_setup": 18,
+      "repl_result": 2,
+      "red_pixels": 76800,
+      "usb_stalls": 0,
+      "usb_data_pid_errors": 0,
+      "usb_dma_faults": 0,
+      "usb_fifo_size_errors": 0
+    },
+    {
+      "case": "mirror write bounds on base",
+      "status": "FAIL",
+      "layer": "data_behavior",
+      "expected_writes": 1,
+      "actual_writes": 4
+    },
+    {
+      "case": "mirror write bounds with fix",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "expected_writes": 1,
+      "actual_writes": 1
+    },
+    {
+      "case": "pinned rerun",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "byte_identical_media_files": 37
+    },
+    {
+      "case": "checker corrupt-artifact controls",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "controls_rejected": 5
+    },
+    {
+      "case": "esp-periph, esp-soc, esp32s3 library regressions",
+      "status": "PASS",
+      "layer": "build",
+      "test_count": 560
+    },
+    {
+      "case": "esp32s3 integration",
+      "status": "PASS",
+      "layer": "build",
+      "ignored": 1
+    },
+    {
+      "case": "physical CoreS3",
+      "status": "NOT RUN",
+      "layer": "visual_or_physical"
+    },
+    {
+      "case": "browser-WASM guest execution",
+      "status": "NOT RUN",
+      "layer": "device_response"
+    },
+    {
+      "case": "remote publication",
+      "status": "NOT RUN",
+      "layer": "delivery",
+      "reason": "Local-only task"
+    },
+    {
+      "case": "hello and Pocket Tank A/B",
+      "status": "PASS",
+      "layer": "data_behavior",
+      "note": "Three alternating pairs, exact instructions and console SHA-256. Pocket Tank covers 4 emulated seconds."
+    },
+    {
+      "case": "Clippy native and wasm32, -D warnings",
+      "status": "PASS",
+      "layer": "build",
+      "note": "Cargo emitted one manifest unused-dependency advisory on native targets."
+    },
+    {
+      "case": "QEMU speaker artifact coordinate cross-check",
+      "status": "PASS",
+      "layer": "visual_or_physical",
+      "transformed_green_pixels": 1003,
+      "mismatched_pixels": 0
+    },
+    {
+      "case": "full native Rust workspace suite",
+      "status": "PASS",
+      "layer": "build",
+      "passed": 1948,
+      "filtered": 34,
+      "goldens": 48
+    }
+  ],
+  "evidence": [
+    "evidence/verdicts.md",
+    "evidence/checker-controls.txt",
+    "evidence/bench-summary.json",
+    "evidence/uiflow-summary.txt"
+  ],
+  "notes": [
+    "Only the WAV sketch initializes HWCDC. No sketch-level USB log is required from callers that omit Serial.begin().",
+    "The first repeat was interrupted when the runner was revised while Bash was still reading it. The subsequent pinned run completed with identical verdicts and media."
+  ]
+}

@@ -53,6 +53,9 @@
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV esp32sim 浏览器接入 | PARTIAL（跨域虚拟设备通过，正式托管未执行） | [查看](records/m5stack-esp-emulator/2026-11-26-esp32sim-browser/) |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV native esp32sim Device Service | PARTIAL (same-path virtual devices and retained HTTP evidence; physical hardware NOT RUN) | [查看](records/m5stack-esp-emulator/2026-11-26-native-esp32sim-service/) |
 | 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PASS（26 个 Arduino 镜像已公开且经 esp32sim 复测） | [查看](records/m5stack-firmware-archive/2026-11-26-docs-firmware/) |
+| 2026-11-26 | ESPHome | #128 Voice Pyramid 灯组件在 2026.11.1 编译失败（`get_view_internal` 已移除） | `PARTIAL`（2026.11.1 复现、2026.10.0 对照通过、参考补丁两端构建通过；实机与虚拟设备 NOT RUN） | [查看](records/m5stack-github/2026-11-26-esphome-yaml-128-voice-pyramid-2026.11/) |
+| 2026-11-26 | esp32sim | Tab5 DSI 显示、触摸与 SDIO | `PARTIAL`（原版触摸例程与 UIFlow2 REPL 通过） | [查看](records/esp32sim/2026-11-26-tab5-display-touch/) |
+| 2026-11-26 | esp32sim | CoreS3 文档例程和面板边界修复 | `PASS`（虚拟设备例程 15/15、UIFlow2 回归通过） | [查看](records/esp32sim/2026-11-26-cores3-docs-verdicts/) |
 | 2026-11-25 | ESP Emulator | CoreS3 / Cardputer-Adv 文档 WASM 嵌入预研 | `PARTIAL`（正式文档跨域 iframe 无共享内存；两款顶层编辑器控制组通过） | [查看](records/m5stack-esp-emulator/2026-11-25-docs-wasm-embed/) |
 | 2026-11-25 | M5GFX | #447 PaperDIY EPD OE 改由 EPD_PWR 提供，两个 FPC 连接器取代 Grove 口 | `PASS`（virtual-device A/B 末帧一致；host 221/221；真机与 OE 电气 NOT RUN） | [查看](records/m5gfx/2026-11-25-pr447-paperdiy-epd-oe-fpc/) |
 | 2026-11-25 | `M5Unified` | #451 PaperDIY 取消外部 I2C，无端口不 begin Ex_I2C | `PARTIAL`（virtual-device：pin table 与护栏 A/B 均实测；真机与引脚复用电气后果 NOT RUN） | [查看](records/m5unified/2026-11-25-pr-451-paperdiy-no-ex-i2c/) |

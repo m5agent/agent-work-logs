@@ -1,0 +1,50 @@
+esphome:
+  name: pyramid128rt
+  on_boot:
+    priority: -100
+    then:
+      - light.turn_on:
+          id: pyramid_rgb1
+          red: 100%
+          green: 0%
+          blue: 0%
+          brightness: 100%
+  friendly_name: pyramid128fix
+  min_version: 2026.10.0
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+logger:
+  level: VERY_VERBOSE
+
+i2c:
+  - id: ext_bus
+    sda: GPIO38
+    scl: GPIO39
+    frequency: 400kHz
+
+external_components:
+  - source:
+      type: local
+      path: components
+    components: [m5_voice_pyramid_kit]
+
+m5_voice_pyramid_kit:
+  id: pyramid
+  i2c_id: ext_bus
+  address: 0x1A
+  update_interval: 30ms
+  swipe_timeout: 500ms
+
+light:
+  - platform: m5_voice_pyramid_kit
+    id: pyramid_rgb1
+    m5_voice_pyramid_kit_id: pyramid
+    channel: 1
+    name: "Pyramid RGB 1"
+    restore_mode: RESTORE_DEFAULT_OFF
+    default_transition_length: 0s
+    gamma_correct: 1.0

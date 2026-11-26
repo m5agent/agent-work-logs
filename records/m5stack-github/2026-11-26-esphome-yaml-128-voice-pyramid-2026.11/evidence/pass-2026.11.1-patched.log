@@ -1,0 +1,51 @@
+INFO ESPHome 2026.11.1
+INFO Reading configuration pyramid-light.yaml...
+INFO Generating C++ source...
+INFO Compiling app... Build path: /tmp/esphome-data-2611b/build/pyramid128fix
+INFO Checking ESP-IDF 5.5.6 framework ...
+INFO Checking ESP-IDF 5.5.6 framework installation ...
+INFO Checking ESP-IDF 5.5.6 Python environment ...
+INFO Serving IDF components from the local mirror at /Users/m5agent/Library/Caches/esphome/idf/component_mirror
+INFO Build configuration is up to date
+INFO Compiling with a precompiled header (set ESPHOME_PCH_ENABLE=0 to disable)
+[0/2] Re-checking globbed directories...[0/6] cd /private/tmp/esphome-data-2611b/build/pyramid128fix/build && /opt/homebrew/bin/cmake -D "IDF_SIZE_TOOL=/Users/m5agent/Library/Caches/esphome/idf/penvs/5.5.6/bin/python;-m;esp_idf_size" -D MAP_FILE=/private/tmp/esphome-data-2611b/build/pyramid128fix/build/pyramid128fix.map -D OUTPUT_JSON= -P /Users/m5agent/Library/Caches/esphome/idf/frameworks/5.5.6/tools/cmake/run_size_tool.cmake
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Memory            ┃              ┃          ┃                ┃               ┃
+┃ Type/Section      ┃ Used [bytes] ┃ Used [%] ┃ Remain [bytes] ┃ Total [bytes] ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Flash Code        │       147952 │          │                │               │
+│    .text          │       147952 │          │                │               │
+│ DIRAM             │        50763 │    14.85 │         290997 │        341760 │
+│    .text          │        27415 │     8.02 │                │               │
+│    .bss           │        12752 │     3.73 │                │               │
+│    .data          │        10436 │     3.05 │                │               │
+│    .noinit        │          160 │     0.05 │                │               │
+│ Flash Data        │        46048 │          │                │               │
+│    .rodata        │        45792 │          │                │               │
+│    .appdesc       │          256 │          │                │               │
+│ IRAM              │        16384 │    100.0 │              0 │         16384 │
+│    .text          │        15356 │    93.73 │                │               │
+│    .vectors       │         1028 │     6.27 │                │               │
+│ RTC SLOW          │           32 │     0.39 │           8160 │          8192 │
+│    .force_slow    │           32 │     0.39 │                │               │
+│ RTC FAST          │           24 │     0.29 │           8168 │          8192 │
+│    .rtc_reserved  │           24 │     0.29 │                │               │
+└───────────────────┴──────────────┴──────────┴────────────────┴───────────────┘
+Total image size: 248267 bytes (.bin may be padded larger)
+reference manual due to reserved memory and application configuration. The total
+flash size available for the application is not included by default, as it 
+cannot be reliably determined due to the presence of other data like the 
+bootloader, partition table, and application partition size.
+[1/6] cd /private/tmp/esphome-data-2611b/build/pyramid128fix/build/esp-idf/esptool_py && /Users/m5agent/Library/Caches/esphome/idf/penvs/5.5.6/bin/python /Users/m5agent/Library/Caches/esphome/idf/frameworks/5.5.6/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /private/tmp/esphome-data-2611b/build/pyramid128fix/build/partition_table/partition-table.bin /private/tmp/esphome-data-2611b/build/pyramid128fix/build/pyramid128fix.bin
+pyramid128fix.bin binary size 0x3ca40 bytes. Smallest app partition is 0x1c0000 bytes. 0x1835c0 bytes (86%) free.
+[2/6] Performing build step for 'bootloader'[1/1] cd /private/tmp/esphome-data-2611b/build/pyramid128fix/build/bootloader/esp-idf/esptool_py && /Users/m5agent/Library/Caches/esphome/idf/penvs/5.5.6/bin/python /Users/m5agent/Library/Caches/esphome/idf/frameworks/5.5.6/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /private/tmp/esphome-data-2611b/build/pyramid128fix/build/bootloader/bootloader.bin
+Bootloader binary size 0x4fc0 bytes. 0x3040 bytes (38%) free.
+[4/6] Completed 'bootloader'
+RAM:   [=         ]  14.9% (used 50763 bytes from 341760 bytes)
+Flash: [=         ]  13.5% (used 248267 bytes from 1835008 bytes)
+INFO Creating factory.bin...
+INFO Created: /tmp/esphome-data-2611b/build/pyramid128fix/build/firmware.factory.bin
+INFO Created: /tmp/esphome-data-2611b/build/pyramid128fix/build/firmware.ota.bin
+INFO Created: /tmp/esphome-data-2611b/build/pyramid128fix/build/firmware.elf
+INFO Build Info: config_hash=0x3456c696 build_time_str=2026-11-26 20:11:18 +0800
+INFO Successfully compiled program.

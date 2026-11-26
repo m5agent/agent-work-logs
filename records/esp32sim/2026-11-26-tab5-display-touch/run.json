@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base": "76e8b35710d1879e073f73c4a03bd11b216fb95f",
+    "head": "b91f252c717d75657111bcf5d5256a8d36b51be0",
+    "branch": "m5/tab5",
+    "docs_commit": "7219cc9286c39b463da84053deee40bc234625db"
+  },
+  "hardware": {
+    "execution": "virtual-device validation",
+    "chip": "ESP32-P4 rev 0",
+    "board_profiles": [
+      "m5stack-tab5",
+      "m5stack-tab5-st7123"
+    ],
+    "flash_mib": 16,
+    "psram_mib": 32,
+    "host": "macOS arm64"
+  },
+  "firmware": {
+    "arduino": {
+      "fqbn": "m5stack:esp32:m5stack_tab5",
+      "core": "3.2.5",
+      "libraries": "M5GFX 0.3.0, M5Unified 0.3.0",
+      "compile_manifest": "evidence/arduino-build-summary.ndjson"
+    },
+    "assets": {
+      "uiflow2-v2.5.3.bin": {
+        "sha256": "787d5e3c282bc3d200be941a48d7b7ff24acdbe0d9e682a2cfc14796b392feec",
+        "bytes": 16121856
+      },
+      "uiflow2-v2.5.4.bin": {
+        "sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+        "bytes": 16121856
+      },
+      "maker-fighter-1.4.bin": {
+        "sha256": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+        "bytes": 6518928
+      },
+      "c6-network-adapter-v2.12.6.bin": {
+        "sha256": "38669a215f8b290ec53bbbaeda154a77c8ab276c5deeb6beb85248e95986d554",
+        "bytes": 1274368
+      }
+    }
+  },
+  "execution": {
+    "date": "2026-11-26",
+    "inputs": "code/run_all_tab5.sh",
+    "runtime_release_overrides": {
+      "lto": false,
+      "codegen_units": 8
+    },
+    "cases": {
+      "final-gt-idle": {
+        "firmware_sha256": "febee8f025c1af01f80142af7632850a8eb15b583b2ce3121ad31f594e54fe82",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "7fb7543a6297e1f348ef755945ff8adddd00c68c4700a0718ab356f1c7209aa0",
+        "scans": 154,
+        "dbi_reads": 0,
+        "result": "PASS"
+      },
+      "final-gt-press": {
+        "firmware_sha256": "febee8f025c1af01f80142af7632850a8eb15b583b2ce3121ad31f594e54fe82",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "94e3b87d2f0608074c24d7856373a59256c6857d289c1e665519335aae4e26c8",
+        "scans": 136,
+        "dbi_reads": 0,
+        "result": "PASS"
+      },
+      "final-gt-release": {
+        "firmware_sha256": "febee8f025c1af01f80142af7632850a8eb15b583b2ce3121ad31f594e54fe82",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "7fb7543a6297e1f348ef755945ff8adddd00c68c4700a0718ab356f1c7209aa0",
+        "scans": 154,
+        "dbi_reads": 0,
+        "result": "PASS"
+      },
+      "final-st-multi": {
+        "firmware_sha256": "5200c13810ea33fe837f8e607100fb0c6d6cfb998e2d3d7692f279f3fd827cb7",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "413c4937662d33e76c9b90ec7037d7423fa8ac0a5f46b9343ca505b505048fa3",
+        "scans": 136,
+        "dbi_reads": 0,
+        "result": "PASS"
+      },
+      "final-253-release": {
+        "firmware_sha256": "787d5e3c282bc3d200be941a48d7b7ff24acdbe0d9e682a2cfc14796b392feec",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "a09a3f5fec66416d4d65db18b07f73b8989325e25c25b460107b8d4248c37ed4",
+        "scans": 401,
+        "dbi_reads": 4,
+        "result": "PASS"
+      },
+      "final-254-release": {
+        "firmware_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "a09a3f5fec66416d4d65db18b07f73b8989325e25c25b460107b8d4248c37ed4",
+        "scans": 405,
+        "dbi_reads": 0,
+        "result": "PASS"
+      },
+      "final-254-c6": {
+        "firmware_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "0f24e9cbd9e76908793e30f25344ad68e8cc4baedef663325fa24eafd1b14a67",
+        "scans": 453,
+        "dbi_reads": 0,
+        "result": "PARTIAL"
+      },
+      "final-maker": {
+        "firmware_sha256": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+        "runtime_sha256": "580f3fa07ceba3c7d6e3b605f8c3a4b6654d7e5d55827b857cb90a4b652c77a3",
+        "rom_sha256": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+        "frame_sha256": "22e183007499ba98365b9b6ef150ab424acc92f619c2050cbc0c0c3a20987a53",
+        "scans": 7,
+        "dbi_reads": 0,
+        "result": "FAIL"
+      }
+    },
+    "c6": {
+      "window_s": 8,
+      "sdio_commands": 67,
+      "bytes_to_host": 352,
+      "bytes_from_host": 237,
+      "underflows": 0,
+      "overflows": 0,
+      "launcher": "white",
+      "serial": "WiFi initialized",
+      "rom_sha256": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551",
+      "stock_adapter_version": "2.12.6"
+    },
+    "source_publication": "m5/tab5 i.e. the authorized fork branch",
+    "archive_publication": "local commit under the task push scope",
+    "rustc": "1.100.0 (0ef1bc386 2026-11-09)",
+    "source_equivalence": "The measured build preceded a docs update and removal of an extra trailing blank line."
+  },
+  "checks": {
+    "release_library_tests": {
+      "result": "PASS",
+      "passed": 614
+    },
+    "p4_s3_release_suites": "PASS",
+    "p4_usb_msc_goldens": "PASS",
+    "native_clippy": "PASS",
+    "wasm_clippy": "PASS",
+    "physical_hardware": "NOT RUN",
+    "browser_wasm_runtime": "NOT RUN",
+    "audio_and_other_board_peripherals": "NOT RUN",
+    "instruction_count_and_console_comparison": {
+      "result": "PASS",
+      "runs_per_revision": 3,
+      "evidence": "evidence/bench-summary.ndjson"
+    }
+  }
+}

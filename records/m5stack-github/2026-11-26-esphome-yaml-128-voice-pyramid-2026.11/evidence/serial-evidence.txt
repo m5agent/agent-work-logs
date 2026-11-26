@@ -1,0 +1,24 @@
+# Virtual-device attempt (NOT RUN for accessor readback)
+# Firmware: /tmp/esphome-data-rt2/build/pyramid128rt/build/firmware.factory.bin
+#   sha256 a2e8d1786725307266664a14d98edc14b38750a1c54875fd9729846f633c45ea
+#   built with ESPHome 2026.11.1 + patched component, logger VERY_VERBOSE,
+#   on_boot light.turn_on pyramid_rgb1 red 100%, board esp32-s3-devkitc-1
+
+## Session 1: device_id=atoms3r, runtime=qemu, ready_marker="setup() finished successfully"
+# session 8f6c0436901947c28f0c5d91e806a7ff -> failed: timed out waiting for serial marker
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x4 (SPI_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x1410
+load:0x403c8700,len:0xc7c
+load:0x403cb700,len:0x2edc
+entry 0x403c8910
+# (nothing further on UART0; 226 bytes total)
+
+## Session 2: device_id=atoms3r, no ready_marker, 30 s observation
+# session 042ce01fa33e4e689d655eb2b0c14fde -> running, same 226-byte ROM/bootloader banner only
+
+## Session 3: device_id=cores3, same firmware re-imported for that profile
+# session 58ee539ddba14cd08353731174635b4d -> same 226-byte banner only

@@ -1,0 +1,21 @@
+# ESPHome 2026.11.1 voice-pyramid light build matrix
+# host: macOS arm64, date: 2026-11-26T12:17:37Z
+
+## Toolchain
+Version: 2026.11.1
+Version: 2026.10.0
+idf: 5.5.6
+
+## Component source
+m5stack/esphome@feat-voice-pyramid head 61b5ecbbef5b862824f6cec75b6a14b6561a7dca (2026-10-23)
+
+## Builds (board esp32-s3-devkitc-1, esp-idf, minimal light-only config)
+2026.10.0 unpatched  PASS  pyramid128.bin  82dabb1a6a18083d1ef8b0df3c16ca87d9081411b24dcf35b6bc29a73609fafa
+2026.11.1 unpatched  FAIL (compile error)
+2026.11.1 patched    PASS  pyramid128fix.bin  8095d05f5724b911037ed87d70ae5d3728998c5c324321c1d049e5d8207f3d5c
+2026.10.0 patched    PASS  pyramid128fix.bin  9bb99718748da8668bb45eb710fb86f0435c8552ff3c43df8a94d13121e96d42
+
+## Generated ESPHOME_VERSION per build
+/tmp/esphome-data-2610b/build/pyramid128: #define ESPHOME_VERSION "2026.10.0"
+/tmp/esphome-data-2611b/build/pyramid128fix: #define ESPHOME_VERSION "2026.11.1"
+/tmp/esphome-data-2610c/build/pyramid128fix: #define ESPHOME_VERSION "2026.10.0"
