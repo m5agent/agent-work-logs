@@ -7,6 +7,7 @@
   「powerfail_suo: orderly poweroff from the power slider」，作者 shrimpapplepro，英文，OPEN
 - 新评论：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200264330>
   （2026-11-26T18:16:36Z，作者称四项全部处理于 `ff4cd84`，并要求补跑两个场景）
+- 已发布回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200515708>
 - 源码：head `ff4cd84474787ea24a00b65d83b5b50e4a51c1c9`，
   base `a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4`；自 base 起 2 文件 `+333/-73`，
   本提交 `+161/-97`
