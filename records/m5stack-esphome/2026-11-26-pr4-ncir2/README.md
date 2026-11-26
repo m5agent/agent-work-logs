@@ -4,6 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`pr_review`
 - 问题来源：https://github.com/m5stack/esphome/pull/4
+- 已发布回复：https://github.com/m5stack/esphome/pull/4#issuecomment-7181211097
 - 源码版本：`m5stack/esphome @ 269124e77bbcd2a128f799ed5fcb31e8a1fbc5de`（PR head），base `m5-dev @ 6c84e04afe0985a73c705094f88b4f773ed4b6e9`
 - 环境：macOS arm64；CPython 3.13 + 仓库 requirements（ESPHome 2026.11.0-dev）；ESP-IDF 5.5.6；本机 Device Service 1.102.0（`atoms3r` profile + NCIR2 Unit 模型，`cores3` profile 无 Unit）
 
