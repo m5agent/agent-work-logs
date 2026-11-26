@@ -53,4 +53,3 @@
 
 - 唯一一条英文回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7205940522>
 - 结论：19 s 是 journald 时间基准差，不是慢重启；无需改代码，上一轮唯一存疑点关闭。
-- 公开记录 permalink：<https://github.com/m5agent/agent-work-logs/blob/c050d7913f92c2763c042d4642b74123f3da9d81/records/m5stack-linux-dtoverlays/2026-11-27-pr20-journal-timebase/README.md>
