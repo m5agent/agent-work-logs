@@ -12,6 +12,19 @@ The host provisions a Cargo-locked simulator build from the published service-co
 4. Read frame PNG with `max_age_ms=0`, capture serial and any audio metrics, and fetch the evidence ZIP before stopping with `purge=0`. PCM uses the native captured sample rate. Verify ZIP members against the manifest's SHA-256 and length. Terminal sessions must release the worker lease with history retained.
 5. Repeat the explicit `runtime=qemu` CoreS3 control and run StopWatch UIFlow2 with the pinned freeze rollout and host-image Flash provisioning.
 
+## Final verification
+
+The Python 3.12 platform suite ran 2,580 tests across four shards with 11 skips,
+zero failures and zero errors. Coverage, peripheral catalog, profiles and project
+snapshot validators passed. Rust web tests passed 12 cases and native Clippy
+passed for the two modified crates.
+
+The UIFlow2 v2.5.3 touch probe injected panel coordinates (137, 101) through
+HTTP after its guest-ready marker. With guest rotation 1, UIFlow2 reported
+both logical and raw coordinates (137, 101). The earlier rotation-0 run
+reported logical coordinates (138, 137). Both runs completed the guest
+program and retained their ZIPs before releasing the lease.
+
 ## Observed results
 
 | Path | Result | Observation |
