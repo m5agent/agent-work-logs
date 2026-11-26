@@ -14,7 +14,8 @@
   因此没有重建模块
 - 证据等级：**host-level test**（stub 头文件编译驱动真实源码 + 模拟 M5IOE1 寄存器/时间）
   \+ code-level verification（overlay 编译、内核 API 逐条核对）
-- 已发布回复：待填
+- 已发布回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7199260631>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push 上游、未改他人代码）
 
 ## 结论
 
@@ -34,7 +35,7 @@
 
 ## 关键证据
 
-- 构建/运行：`code/build.sh` 编译驱动真实源码（stub 内核头）+ 模拟 M5IOE1，14 场景全过；
+- 构建/运行：`code/build.sh` 编译驱动真实源码（stub 内核头）+ 模拟 M5IOE1，15 场景全过；
   基线 `evidence/host-harness-pr-head.txt`，建议修复 `evidence/host-harness-proposed-fix.txt`
 - overlay：`dtc 1.8.1` 编译 PR 版 v5 overlay 无 warning，dtbo 内含
   `m5stack,power-controller` 与 `power-hold-ms = <0x4e20>`，`evidence/overlay-compile.txt`

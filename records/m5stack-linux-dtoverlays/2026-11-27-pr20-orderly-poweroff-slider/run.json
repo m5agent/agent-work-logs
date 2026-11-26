@@ -18,7 +18,7 @@
     "prior_reviews": 0,
     "state": "OPEN",
     "mergeable_state": "CLEAN",
-    "comment": ""
+    "comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7199260631"
   },
   "hardware": {},
   "firmware": {
@@ -138,13 +138,34 @@
     }
   ],
   "evidence": [
-    {"path": "evidence/host-harness-pr-head.txt", "description": "14 scenarios on the PR-head driver, 34 checks PASS"},
-    {"path": "evidence/host-harness-proposed-fix.txt", "description": "same scenarios with DEBOUNCE counted as confirmed plus stock restore on the drop path"},
-    {"path": "evidence/overlay-compile.txt", "description": "cpp+dtc build of the PR v5 overlay: no warnings, dtbo sha256, powerfail node and __local_fixups__"},
-    {"path": "evidence/kernel-api-checks.txt", "description": "excerpts for system_state ordering, I2C block framing, device_shutdown order, of_find_i2c_device_by_node refcount"},
-    {"path": "evidence/local-profile-summary.txt", "description": "redacted local Device Service cardputer-zero profile"},
-    {"path": "evidence/pr-metadata.txt", "description": "PR state, author, scope, base/head, comments/reviews, author-claimed device results"},
-    {"path": "evidence/pr-scope.txt", "description": "diffstat main..pr20"}
+    {
+      "path": "evidence/host-harness-pr-head.txt",
+      "description": "15 scenarios (S1-S14 plus S5b) on the PR-head driver, all checks PASS"
+    },
+    {
+      "path": "evidence/host-harness-proposed-fix.txt",
+      "description": "same scenarios with DEBOUNCE counted as confirmed plus stock restore on the drop path"
+    },
+    {
+      "path": "evidence/overlay-compile.txt",
+      "description": "cpp+dtc build of the PR v5 overlay: no warnings, dtbo sha256, powerfail node and __local_fixups__"
+    },
+    {
+      "path": "evidence/kernel-api-checks.txt",
+      "description": "excerpts for system_state ordering, I2C block framing, device_shutdown order, of_find_i2c_device_by_node refcount"
+    },
+    {
+      "path": "evidence/local-profile-summary.txt",
+      "description": "redacted local Device Service cardputer-zero profile"
+    },
+    {
+      "path": "evidence/pr-metadata.txt",
+      "description": "PR state, author, scope, base/head, comments/reviews, author-claimed device results"
+    },
+    {
+      "path": "evidence/pr-scope.txt",
+      "description": "diffstat main..pr20"
+    }
   ],
   "notes": [
     "Evidence class is host-level test plus code-level verification; no virtual-device or hardware run was possible on this host.",

@@ -56,7 +56,7 @@ PR #20 的做法：
 `code/` 下用 stub 内核头文件直接编译驱动真实源码（`harness.c` include `powerfail_suo.c`），
 配一个模拟 M5IOE1 寄存器文件、可编程 `0xB6` 读数序列、模拟 jiffies（`msleep` 只推进时间）、
 记录 `schedule_delayed_work` 延迟与 `orderly_poweroff`/`handle_sysrq` 调用。
-14 个场景（probe 默认/legacy/defer、拨杆断开、DEBOUNCE 重读、误触发、写 `OFF_TIME` 失败、
+15 个场景（probe 默认/legacy/defer、拨杆断开、DEBOUNCE 重读、丢弃分支、误触发、写 `OFF_TIME` 失败、
 `.shutdown` poweroff/reboot/menu、`remove` 还原、`power-hold-ms=8000`/4000、backstop 正文），
 基线版与建议修复版各跑一遍，全部断言通过：
 
