@@ -7,7 +7,8 @@ PR #5 将原先包含在 #2 中的 ACSSR/DCSSR 部分拆出，新增 `m5_unit_ac
 作者说明 Unit DCSSR 与 ACSSR 运行同一套固件，因此一个组件覆盖两款产品；PR 正文
 声明已在 CoreS3 + PaHub 上实测。
 
-本轮工作为只读评审：不关闭 PR、不 push、不修改作者仓库，只发一条英文回复。
+本轮工作为只读评审：不关闭 PR、不 push、不修改作者仓库，只发一条英文回复
+（<https://github.com/m5stack/esphome/pull/5#issuecomment-7181243369>）。
 
 - PR head：`d67c91f656fba5333b5f67d237200c244769342b`
 - Base：`m5-dev @ 6c84e04afe0985a73c705094f88b4f773ed4b6e9`

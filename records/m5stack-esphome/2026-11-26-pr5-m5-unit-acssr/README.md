@@ -4,6 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`pr_review`
 - 问题来源：<https://github.com/m5stack/esphome/pull/5>
+- 已发布回复：<https://github.com/m5stack/esphome/pull/5#issuecomment-7181243369>
 - 源码版本：`m5stack/esphome @ d67c91f656fba5333b5f67d237200c244769342b`（PR head），base `m5-dev @ 6c84e04afe0985a73c705094f88b4f773ed4b6e9`
 - 环境：macOS arm64；CPython 3.13 + 仓库 requirements（ESPHome 2026.11.0-dev）；ESP-IDF 5.5.6；本机 Device Service 的 `cores3` QEMU profile 与 `dcssr` Unit 模型（PORT.A，0x50）
 
@@ -36,6 +37,7 @@ PR 的寄存器映射、组件构建、host 单测与虚拟 CoreS3 + DCSSR 数�
 ## 文件
 
 - `report.md`：完整评审报告、命令与边界
+- 已发布回复：<https://github.com/m5stack/esphome/pull/5#issuecomment-7181243369>
 - `run.json`：结构化记录
 - `evidence/`：PR 元数据、协议核对、host 单测、组件构建、配置校验、两份串口日志、
   Unit QOM、probe YAML、模型缺口说明
