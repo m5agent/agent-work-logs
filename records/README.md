@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-26 | ESPHome | #3 Unit ToF4M 的 `vl53l1x` 组件 cherry-pick：构建与配置通过，虚拟 CoreS3 上组件路径可用（模型缺口需补桥） | `REVIEW`（esp32-idf/esp8266-ard 构建通过；实机、PaHub、光学与 medium 模式 NOT RUN） | [查看](m5stack-esphome/2026-11-26-pr3-vl53l1x-tof4m/) |
 | 2026-11-25 | M5GFX | #447 PaperDIY EPD OE 改由 EPD_PWR 提供，两个 FPC 连接器取代 Grove 口 | `PASS`（virtual-device A/B 末帧一致；host 221/221；真机与 OE 电气 NOT RUN） | [查看](m5gfx/2026-11-25-pr447-paperdiy-epd-oe-fpc/) |
 | 2026-11-25 | M5Unified | #452 无引脚的 I2C 总线不再动作，isEnabled() 改为看引脚 | `PARTIAL`（虚拟设备 A/B 复现两处问题均被消除，sticks3 对照无回退；真机计时与 PC/SDL 构建 NOT RUN） | [查看](m5unified/2026-11-25-pr-452-i2c-bus-without-pins/) |
 | 2026-11-25 | M5Unified | #451 PaperDIY 取消外部 I2C，无端口不 begin Ex_I2C | `PARTIAL`（虚拟设备 A/B 与跨仓库 pin table 一致；真机 NOT RUN） | [查看](m5unified/2026-11-25-pr-451-paperdiy-no-ex-i2c/) |

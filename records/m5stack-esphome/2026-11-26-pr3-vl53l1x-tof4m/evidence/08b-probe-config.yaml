@@ -1,0 +1,56 @@
+esphome:
+  name: tof4m-probe
+  friendly_name: ToF4M Probe
+  on_boot:
+    priority: 800
+    then:
+      - lambda: |-
+          // The virtual VL53L1X model does not implement FIRMWARE__SYSTEM_STATUS (0x00E5).
+          // Pre-stage its boot-complete bit over I2C so the ULD handshake can proceed.
+          const uint8_t seed[3] = {0x00, 0xE5, 0x01};
+          auto err = id(i2c_bus).write(0x29, seed, 3);
+          ESP_LOGI("tof4m_probe", "boot-status pre-stage err=%d", (int) err);
+
+esp32:
+  board: esp32-s3-devkitc-1
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+
+logger:
+  level: DEBUG
+  baud_rate: 115200
+  hardware_uart: UART0
+
+i2c:
+  id: i2c_bus
+  sda: GPIO2
+  scl: GPIO1
+  frequency: 100kHz
+  scan: true
+
+sensor:
+  - platform: vl53l1x
+    id: tof4m_distance
+    name: ToF4M Distance
+    address: 0x29
+    distance_mode: long
+    timing_budget: 50ms
+    update_interval: 1s
+
+interval:
+  - interval: 100ms
+    then:
+      - lambda: |-
+          // The virtual model only implements continuous start (0x40), not the single-shot
+          // start (0x10) the ULD uses. Re-trigger continuous mode so data-ready can rise.
+          const uint8_t start[3] = {0x00, 0x87, 0x40};
+          id(i2c_bus).write(0x29, start, 3);
+  - interval: 2s
+    then:
+      - lambda: |-
+          if (!isnan(id(tof4m_distance).state)) {
+            ESP_LOGI("tof4m_probe", "DIST_MM=%d", (int) lroundf(id(tof4m_distance).state * 1000.0f));
+          } else {
+            ESP_LOGI("tof4m_probe", "DIST_NAN");
+          }

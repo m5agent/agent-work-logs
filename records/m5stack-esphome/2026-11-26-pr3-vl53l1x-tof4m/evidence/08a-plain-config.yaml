@@ -1,0 +1,27 @@
+esphome:
+  name: tof4m-plain
+
+esp32:
+  board: m5stack-cores3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+
+logger:
+  level: DEBUG
+  baud_rate: 115200
+  hardware_uart: UART0
+
+i2c:
+  sda: GPIO2
+  scl: GPIO1
+  frequency: 100kHz
+  scan: true
+
+sensor:
+  - platform: vl53l1x
+    name: ToF4M Distance
+    address: 0x29
+    distance_mode: long
+    timing_budget: 50ms
+    update_interval: 1s

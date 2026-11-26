@@ -1,0 +1,65 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x4 (SPI_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x13d0
+load:0x403c8700,len:0xcb4
+load:0x403cb700,len:0x2ed0
+entry 0x403c8914
+I (16) boot: ESP-IDF v5.5.6 2nd stage bootloader
+I (19) boot: chip revision: v0.0
+I (20) boot.esp32s3: Boot SPI Speed : 80MHz
+I (20) boot.esp32s3: SPI Mode       : SLOW READ
+I (20) boot.esp32s3: SPI Flash Size : 16MB
+I (24) boot: Partition Table:
+I (24) boot: ## Label            Usage          Type ST Offset   Length
+I (24) boot:  0 otadata          OTA data         01 00 00009000 00002000
+I (24) boot:  1 phy_init         RF data          01 01 0000b000 00001000
+I (24) boot:  2 app0             OTA app          00 10 00010000 007c0000
+I (25) boot:  3 app1             OTA app          00 11 007d0000 007c0000
+I (25) boot:  4 nvs              WiFi data        01 02 00f90000 00070000
+I (26) boot: No factory image, trying OTA 0
+I (26) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0b300h ( 45824) map
+I (31) esp_image: segment 1: paddr=0001b328 vaddr=3fc8eb00 size=02934h ( 10548) load
+I (35) esp_image: segment 2: paddr=0001dc64 vaddr=40374000 size=023b4h (  9140) load
+I (36) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=22e9ch (143004) map
+I (47) esp_image: segment 4: paddr=00042ec4 vaddr=403763b4 size=0871ch ( 34588) load
+I (49) esp_image: segment 5: paddr=0004b5e8 vaddr=50000000 size=00020h (    32) load
+I (50) boot: Loaded app from partition at offset 0x10000
+I (51) boot: Set actual ota_seq=1 in otadata[0]
+[0;32m[I][logger:136]: Log initialized[0m
+[0;32m[I][app:073]: Running through setup()[0m
+[0;32m[I][i2c:250]: Performing bus recovery[0m
+[1;31m[E][component:311]: vl53l1x.sensor set Error flag: Boot timeout[0m
+[1;31m[E][component:204]: vl53l1x.sensor was marked as failed[0m
+[0;35m[C][component:164]: Setup vl53l1x.sensor took 163ms[0m
+[0;32m[I][app:130]: setup() finished successfully![0m
+[0;32m[I][app:164]: ESPHome version 2026.11.0-dev compiled on 2026-11-26 10:56:36 +0800[0m
+[0;32m[I][app:171]: ESP32 Chip: ESP32-S3 rev0.0, 2 core(s)[0m
+[0;33m[W][app:189]: Set flash_chip: issi under esp32 > framework > advanced to save IRAM[0m
+[0;35m[C][logger:220]: Logger:
+  Max Level: DEBUG
+  Initial Level: DEBUG[0m
+[0;35m[C][logger:227]:   Log Baud Rate: 115200
+  Hardware UART: UART0[0m
+[0;35m[C][logger:236]:   Task Log Buffer Size: 768 bytes[0m
+[0;35m[C][i2c:110]: I2C Bus:[0m
+[0;35m[C][i2c:111]:   SDA Pin: GPIO2
+  SCL Pin: GPIO1
+  Frequency: 100000 Hz[0m
+[0;35m[C][i2c:121]:   Recovery: bus successfully recovered[0m
+[0;35m[C][i2c:131]: Results from bus scan:[0m
+[0;35m[C][i2c:137]: Found device at address 0x29[0m
+[0;35m[C][vl53l1x:017]: VL53L1X 'ToF4M Distance'
+  State Class: 'measurement'
+  Unit of Measurement: 'm'
+  Accuracy Decimals: 3[0m
+[0;35m[C][vl53l1x:164]:   Icon: 'mdi:arrow-expand-vertical'[0m
+[0;35m[C][vl53l1x:367]:   Update Interval: 1.000s[0m
+[0;35m[C][vl53l1x:401]:   Address: 0x29[0m
+[0;35m[C][vl53l1x:403]:   Distance Mode: long
+  Timing Budget: 50 ms
+  ROI: 16x16
+  Offset: 0 mm[0m
+[1;31m[E][component:143]:   vl53l1x.sensor is marked FAILED: Boot timeout[0m

@@ -1,0 +1,105 @@
+{
+ "schema_version": 1,
+ "date": "2026-11-26",
+ "kind": "pr_review",
+ "overall_status": "REVIEW",
+ "title": "m5stack/esphome#3 [vl53l1x] Add support for the Unit ToF4M",
+ "source": {
+  "issue": "",
+  "pull_request": "https://github.com/m5stack/esphome/pull/3",
+  "repository": "m5stack/esphome",
+  "base_commit": "6c84e04afe0985a73c705094f88b4f773ed4b6e9",
+  "head_commit": "80e8eb6ca6d3f49b6054ea322383d0730f8c4443",
+  "base_branch": "m5-dev"
+ },
+ "hardware": {},
+ "firmware": {
+  "plain_factory_bin_sha256": "bf1813053a64a0f1dc173d03670fcd7a685e06be7f00b538b5d0f817e470ee6e",
+  "plain_flashed_artifact_sha256": "b56dc1b17e341e560b720c71450d689d84a051bb72a2857d623770d77d9b393c",
+  "probe_factory_bin_sha256": "f2d75d079fdb7ae6a8d157f72c2fe0b1c29b0d1783f4e201dffc629bcf703406",
+  "probe_flashed_artifact_sha256": "642fa11f35047872eb0d9082dfed79c35d7c5eb062fa68fa7b9975708a154c50",
+  "target": "esp32-s3 (esp32-idf, ESP-IDF 5.5.6)",
+  "board": "m5stack-cores3 (16 MiB flash)"
+ },
+ "execution": {
+  "environment": "macOS arm64; CPython 3.12.14; PR worktree installed editable (ESPHome 2026.11.0-dev); local Device Service cores3 profile, Unit ToF4M on port-a",
+  "session_refs": [
+   "b201ef453decac89",
+   "7dc7bf29702f9674"
+  ],
+  "task_id": ""
+ },
+ "checks": [
+  {
+   "name": "cherry-pick identity",
+   "command": "git hash-object vs upstream 41c3bbff contents",
+   "result": "PASS",
+   "detail": "5 component files + 3 test fixtures byte-identical; differences vs current esphome/dev are later upstream refactors"
+  },
+  {
+   "name": "component build (esp32-idf)",
+   "command": "script/test_build_components.py -c vl53l1x -t esp32-idf",
+   "result": "PASS",
+   "detail": "1 passed / 0 failed"
+  },
+  {
+   "name": "component build (esp8266-ard)",
+   "command": "script/test_build_components.py -c vl53l1x -t esp8266-ard",
+   "result": "PASS",
+   "detail": "1 passed / 0 failed"
+  },
+  {
+   "name": "CoreS3 config validate + compile",
+   "command": "esphome config / esphome compile (m5stack-cores3, 16MB, 0x29, long/50ms)",
+   "result": "PASS",
+   "detail": "configuration valid; firmware.factory.bin 308784 bytes"
+  },
+  {
+   "name": "schema edge cases",
+   "command": "esphome config on 6 fixtures",
+   "result": "PASS",
+   "detail": "non-0x29 without enable_pin, medium+15ms, 16x16 ROI center 150 and duplicate address rejected; two-sensor fixture accepted"
+  },
+  {
+   "name": "virtual device boot (unmodified PR firmware)",
+   "command": "cores3 session + tof4m on port-a, serial UART0",
+   "result": "PASS",
+   "detail": "boot to setup() finished; I2C scan finds 0x29; component marks FAILED 'Boot timeout' because the model lacks 0x00E5"
+  },
+  {
+   "name": "virtual device data plane (model gaps bridged)",
+   "command": "probe firmware: seed 0x00E5=1 on boot, retrigger 0x0087=0x40 every 100ms",
+   "result": "PASS",
+   "detail": "12x DIST_MM=1000 then 29x DIST_MM=2500 after unit-input; unit side range-status 9, timing-budget 50, clear-writes 83"
+  },
+  {
+   "name": "physical ToF4M",
+   "command": "",
+   "result": "NOT RUN",
+   "detail": "no physical unit; range/optics/laser safety and PaHub path not exercised"
+  }
+ ],
+ "evidence": [
+  "evidence/01-identity.txt",
+  "evidence/02-component-builds.txt",
+  "evidence/03-config-validation.txt",
+  "evidence/04-plain-serial.log",
+  "evidence/05-plain-units-summary.json",
+  "evidence/06-probe-serial.log",
+  "evidence/07-probe-units-summary.json",
+  "evidence/08a-plain-config.yaml",
+  "evidence/08b-probe-config.yaml",
+  "evidence/09-firmware.txt"
+ ],
+ "model_gaps": [
+  "virtual VL53L1X does not implement FIRMWARE__SYSTEM_STATUS (0x00E5); boot poll always reads 0",
+  "SYSTEM_MODE_START (0x0087) only handles 0x40/0x00; single-shot 0x10 is ignored, and the default-config write clears vl_ready",
+  "timing-budget writes 0x005E/0x0061 are observation-only; timing-budget-ms stays at 50"
+ ],
+ "notes": [
+  "Review only: PR left open, no push to the PR branch, one English comment.",
+  "Virtual-device data-plane result is only reachable with two explicit bus-level workarounds; it is not a model-native PASS and not hardware.",
+  "No blocking defect found; the remaining ask is the exact YAML and a serial log for the 'tested on CoreS3 through a PaHub' claim.",
+  "Session IDs are redacted to short hashes in evidence; raw serial text is unmodified."
+ ]
+}
