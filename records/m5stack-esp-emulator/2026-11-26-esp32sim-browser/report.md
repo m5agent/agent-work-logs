@@ -28,3 +28,12 @@ CoreS3 Touch rendered coordinates (113, 95) from a transformed model touch. The 
 Earlier screenshot waits expired on three attempts after guest output was observed. The runnable capture probe now avoids waiting for a static element during continuous updates. Those records remain separate from passing reruns. The summary omits URLs, console payloads, identifiers and raw screenshot bytes, and retains source transcript hashes and byte counts.
 
 The QEMU-WASM engine menu reached the isolated workbench. QEMU guest regression, hosted rollout, physical hardware and the complete browser firmware matrix remain outside this local run. Browser networking, external Unit attachment and persistent Flash were outside this integration.
+
+## Stock reference follow-up
+
+The direct reference download reached a visible CoreS3 UIFlow2 v2.5.3 screen.
+The ADV v2.5.3 reference passed SHA admission and produced black frames. An independent
+native check on the identical ADV input logged an uninitialized I²C port and observed zero
+SPI3 LCD bytes in six virtual seconds. The workbench and ADV device page now show this
+limitation when using esp32sim.
+[Evidence and exact hashes](evidence/stock-reference-followup-summary.json)
