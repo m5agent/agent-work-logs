@@ -4,7 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`pr_review`
 - 问题来源：https://github.com/m5stack/esphome/pull/3
-- 已发布回复：待补
+- 已发布回复：https://github.com/m5stack/esphome/pull/3#issuecomment-7181290860
 - 源码版本：`m5stack/esphome @ 80e8eb6ca6d3f49b6054ea322383d0730f8c4443`（PR head），base `m5-dev @ 6c84e04afe0985a73c705094f88b4f773ed4b6e9`
 - 环境：macOS arm64；CPython 3.12 + PR 工作树（ESPHome 2026.11.0-dev）；ESP-IDF 5.5.6；本机 Device Service 的 `cores3` profile（16 MiB flash，带 Unit ToF4M 模型，`port-a`）
 
