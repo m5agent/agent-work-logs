@@ -4,6 +4,7 @@
 - 结果：`REVIEW`
 - 工作类型：`pr_review`
 - 问题来源：https://github.com/m5stack/esphome/pull/2
+- 已发布回复：https://github.com/m5stack/esphome/pull/2#issuecomment-7180947997
 - 源码版本：`m5stack/esphome @ e8acee5ca547f83e2311f97e8140ef2f6d2da239`（PR head），base `m5-dev @ 6c84e04afe0985a73c705094f88b4f773ed4b6e9`
 - 环境：macOS arm64；CPython 3.13 + 仓库 requirements（ESPHome 2026.11.0-dev）；交叉构建工具链 esp32-idf / ESP-IDF 5.5.6；本机 Device Service 的 `cores3` profile（QEMU，16 MB flash，无 PaHub 与 Unit 模型）
 
