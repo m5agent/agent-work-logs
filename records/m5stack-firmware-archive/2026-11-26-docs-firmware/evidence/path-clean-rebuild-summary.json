@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-26",
+  "validation_label": "virtual-device validation",
+  "simulator_commit": "76e8b35710d1879e073f73c4a03bd11b216fb95f",
+  "runtime_sha256": "05a148bee99d3fccc4ff3969296ccf547fea03f2d5f7b9f2d86391060b2b6d9a",
+  "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+  "boards": {
+    "cores3": {
+      "passed": 15,
+      "total": 15,
+      "artifact_bytes": {
+        ".bin": 9245840,
+        ".merged.bin": 251658240,
+        ".bootloader.bin": 301680,
+        ".partitions.bin": 46080,
+        ".elf": 191631580
+      },
+      "capture_comparison": {
+        ".png_total": 28,
+        ".png_changed": 4,
+        ".wav_total": 3
+      },
+      "checker_report": "evidence/cores3/path-clean-verdicts.md"
+    },
+    "cardputer-adv": {
+      "passed": 11,
+      "total": 11,
+      "artifact_bytes": {
+        ".bin": 6287824,
+        ".merged.bin": 46137344,
+        ".bootloader.bin": 221232,
+        ".partitions.bin": 33792,
+        ".elf": 141216052
+      },
+      "capture_comparison": {
+        ".png_total": 22,
+        ".png_changed": 4,
+        ".wav_total": 4,
+        ".wav_changed": 1
+      },
+      "checker_report": "evidence/cardputer-adv/path-clean-verdicts.md"
+    }
+  },
+  "shared_boot_app0_bytes": 8192,
+  "rebuild_comparison": {
+    "artifacts_compared": 130,
+    "sha256_mismatches": 0,
+    "output_directories": 2
+  },
+  "path_scan": [
+    "Scanned 131 files with strings -a. Private path or identity matches: 0.",
+    "Espressif prefix /IDF/components/ (7928 strings)",
+    "Espressif prefix /builds/idf/crosstool-NG/ (4111 strings)",
+    "Espressif prefix /home/runner/.espressif/tools/xtensa-esp-elf/ (22559 strings)",
+    "Espressif prefix /home/runner/work/esp32-arduino-lib-builder/ (53720 strings)"
+  ],
+  "capture_changes": {
+    "cores3/display": {
+      "original_observation": "multicolored circles and rectangles change",
+      "rebuilt_observation": "multicolored circles and rectangles change",
+      "changed_capture_hashes": [
+        "display.png",
+        "display-before.png"
+      ]
+    },
+    "cardputer-adv/display": {
+      "original_observation": "colored circles and rectangles change from 3 to 8 s",
+      "rebuilt_observation": "colored circles and rectangles change from 3 to 8 s",
+      "changed_capture_hashes": [
+        "display-before.png",
+        "display.png"
+      ]
+    },
+    "cores3/quickstart-bargraph": {
+      "original_observation": "colored columns and white peaks animate",
+      "rebuilt_observation": "colored columns and white peaks animate",
+      "changed_capture_hashes": [
+        "quickstart-bargraph.png",
+        "quickstart-bargraph-before.png"
+      ]
+    },
+    "cardputer-adv/quickstart-display": {
+      "original_observation": "colored circles and rectangles change from 3 to 8 s",
+      "rebuilt_observation": "colored circles and rectangles change from 3 to 8 s",
+      "changed_capture_hashes": [
+        "quickstart-display-before.png",
+        "quickstart-display.png"
+      ]
+    },
+    "cardputer-adv/speaker-sd-wav": {
+      "original_observation": "SPI SD source and I2S1 capture agree for all 12 alternating 440/660 Hz seconds",
+      "rebuilt_observation": "SPI SD source and I2S1 capture agree for all 12 alternating 440/660 Hz seconds",
+      "changed_capture_hashes": [
+        "speaker-sd-wav.wav"
+      ],
+      "pcm_comparison": {
+        "sample_rate_hz": 48000,
+        "original_frames": 617961,
+        "rebuilt_frames": 617962,
+        "common_prefix_identical": true,
+        "additional_trailing_samples": 1
+      }
+    }
+  }
+}

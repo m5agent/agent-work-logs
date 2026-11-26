@@ -51,5 +51,54 @@
   ],
   "evidence": [
     "evidence/case-summary.json"
+  ],
+  "followup_executions": [
+    {
+      "date": "2026-11-26",
+      "status": "PASS",
+      "source": {
+        "repository": "https://github.com/m5agent/m5stack-firmware-archive",
+        "base_commit": "af2bfffb8063a69dda3f0a5c92bde9331c019960",
+        "commit": "829cfe6bc14cbdff40b1f4980a5e1ea4f130f66c"
+      },
+      "validation": "virtual-device validation",
+      "checks": [
+        {
+          "name": "CoreS3 native matrix",
+          "status": "PASS",
+          "passed": 15,
+          "total": 15
+        },
+        {
+          "name": "Cardputer-Adv native matrix",
+          "status": "PASS",
+          "passed": 11,
+          "total": 11
+        },
+        {
+          "name": "two independent build directories",
+          "status": "PASS",
+          "files": 130
+        },
+        {
+          "name": "strings path scan",
+          "status": "PASS",
+          "files": 131
+        },
+        {
+          "name": "GitHub clone and LFS readback",
+          "status": "PASS"
+        },
+        {
+          "name": "physical hardware validation",
+          "status": "NOT RUN"
+        }
+      ],
+      "evidence": [
+        "path-clean-rebuild.md",
+        "evidence/path-clean-rebuild-summary.json",
+        "evidence/path-clean-rebuild-cases.json"
+      ]
+    }
   ]
 }

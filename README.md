@@ -50,7 +50,7 @@
 | --- | --- | --- | --- | --- |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV esp32sim 浏览器接入 | PARTIAL（跨域虚拟设备通过，正式托管未执行） | [查看](records/m5stack-esp-emulator/2026-11-26-esp32sim-browser/) |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV native esp32sim Device Service | PARTIAL (same-path virtual devices and retained HTTP evidence; physical hardware NOT RUN) | [查看](records/m5stack-esp-emulator/2026-11-26-native-esp32sim-service/) |
-| 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PARTIAL（esp32sim 26/26、UIFlow2 通过，Arduino 原件仅本地） | [查看](records/m5stack-firmware-archive/2026-11-26-docs-firmware/) |
+| 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PASS（26 个 Arduino 镜像已公开且经 esp32sim 复测） | [查看](records/m5stack-firmware-archive/2026-11-26-docs-firmware/) |
 | 2026-11-25 | ESP Emulator | CoreS3 / Cardputer-Adv 文档 WASM 嵌入预研 | `PARTIAL`（正式文档跨域 iframe 无共享内存；两款顶层编辑器控制组通过） | [查看](records/m5stack-esp-emulator/2026-11-25-docs-wasm-embed/) |
 | 2026-11-25 | M5GFX | #447 PaperDIY EPD OE 改由 EPD_PWR 提供，两个 FPC 连接器取代 Grove 口 | `PASS`（virtual-device A/B 末帧一致；host 221/221；真机与 OE 电气 NOT RUN） | [查看](records/m5gfx/2026-11-25-pr447-paperdiy-epd-oe-fpc/) |
 | 2026-11-25 | `M5Unified` | #451 PaperDIY 取消外部 I2C，无端口不 begin Ex_I2C | `PARTIAL`（virtual-device：pin table 与护栏 A/B 均实测；真机与引脚复用电气后果 NOT RUN） | [查看](records/m5unified/2026-11-25-pr-451-paperdiy-no-ex-i2c/) |

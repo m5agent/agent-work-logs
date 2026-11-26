@@ -8,3 +8,11 @@
 - [验证报告](report.md)
 - [运行记录](run.json)
 - [逐项 SHA-256 与结果](evidence/case-summary.json)
+
+## 后续复测
+
+去除私有编译路径后重建并发布了 26 个 Arduino 例程的 BIN 和 ELF。CoreS3 15/15，Cardputer-Adv 11/11，GitHub 新克隆与 LFS 回读通过。
+
+- [固定版本归档](https://github.com/m5agent/m5stack-firmware-archive/tree/829cfe6bc14cbdff40b1f4980a5e1ea4f130f66c)
+- [本次重建和复测报告](path-clean-rebuild.md)
+- [逐项新旧镜像散列](evidence/path-clean-rebuild-cases.json)
