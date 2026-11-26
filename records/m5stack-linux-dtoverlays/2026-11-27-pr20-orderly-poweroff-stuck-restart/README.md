@@ -4,7 +4,7 @@
 - 结果：`PARTIAL`（两项修复在 host-level harness 上通过；实机与虚拟设备未跑）
 - 工作类型：`pr_review`
 - 问题来源：[PR #20 作者新评论](https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200881588)（2026-11-26T18:48:53Z）
-- 已发布回复：（见下方「发布」）
+- 已发布回复：[PR #20 comment 7200985071](https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200985071)（1 条英文；PR 保持 OPEN，未 push 上游）
 - 源码版本：`m5stack/m5stack-linux-dtoverlays` @ `3b6d2738d8606581cddf3f34e213e7682ad9d23d`
 - 环境：macOS arm64；无 Cardputer Zero；Device Service `cardputer-zero` 不可创建；无内核头文件
 
