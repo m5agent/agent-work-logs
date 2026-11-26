@@ -6,7 +6,7 @@
 - 问题来源：[PR #20 作者新评论](https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7205879787)（2026-11-26T23:48:34Z）
 - 源码版本：`m5stack/m5stack-linux-dtoverlays` @ `3b6d2738d8606581cddf3f34e213e7682ad9d23d`（与上一轮相同，无新提交）
 - 环境：macOS arm64；无 Cardputer Zero；Device Service `cardputer-zero` 不可运行（`supported=false`、`backend_ready=false`）
-- 已发布回复：待补（见文末）
+- 已发布回复：[PR #20 comment 7205940522](https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7205940522)（1 条英文；PR 保持 OPEN，未 push 上游）
 
 ## 结论
 
@@ -48,3 +48,9 @@
 - 板端 systemd 版本 `NOT RUN`：未读取实机 `systemd --version`；只核对了 v252 与 v257 两代源码行为一致
 - 复位/固件阶段耗时 `NOT RUN`：8.4–9.4 s 中 6.7–7.7 s 无法从现有日志进一步拆分（复位本身 vs 固件引导）
 - RTC 整秒粒度带来 ±1 s 不确定度；作者“8.5–9.5 s”与本记录“8.43–9.43 s”的差异来自取整
+
+## 2026-11-27 回复
+
+- 唯一一条英文回复：<https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7205940522>
+- 结论：19 s 是 journald 时间基准差，不是慢重启；无需改代码，上一轮唯一存疑点关闭。
+- 公开记录 permalink：<https://github.com/m5agent/agent-work-logs/blob/c050d7913f92c2763c042d4642b74123f3da9d81/records/m5stack-linux-dtoverlays/2026-11-27-pr20-journal-timebase/README.md>
