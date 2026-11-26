@@ -1,0 +1,129 @@
+INFO ESPHome 2026.11.0-dev
+INFO Reading configuration ../acssr-pr5.yaml...
+esphome:
+  name: acssr-pr5
+  min_version: 2026.11.0-dev
+  build_path: build/acssr-pr5
+  friendly_name: ''
+  platformio_options: {}
+  build_flags: []
+  environment_variables: {}
+  includes: []
+  includes_c: []
+  libraries: []
+  name_add_mac_suffix: false
+  merge_warnings: true
+  debug_scheduler: false
+  suspend_loop: false
+  areas: []
+  devices: []
+esp32:
+  board: m5stack-cores3
+  framework:
+    type: esp-idf
+    version: 5.5.6
+    sdkconfig_options: {}
+    log_level: ERROR
+    advanced:
+      compiler_optimization: SIZE
+      enable_idf_experimental_features: false
+      enable_lwip_assert: true
+      ignore_efuse_custom_mac: false
+      ignore_efuse_mac_crc: false
+      sram1_as_iram: false
+      enable_lwip_dhcp_server: false
+      enable_lwip_mdns_queries: true
+      enable_lwip_bridge_interface: false
+      enable_lwip_tcpip_core_locking: true
+      enable_lwip_check_thread_safety: true
+      disable_libc_locks_in_iram: true
+      disable_vfs_support_termios: true
+      disable_vfs_support_select: true
+      disable_vfs_support_dir: true
+      freertos_in_iram: false
+      ringbuf_in_iram: false
+      heap_in_iram: false
+      execute_from_psram: false
+      loop_task_stack_size: 8192
+      enable_ota_rollback: false
+      enable_ota_downgrade_protection: false
+      use_full_certificate_bundle: false
+      include_builtin_idf_components: []
+      enable_full_printf: false
+      disable_debug_stubs: true
+      disable_ocd_aware: true
+      disable_usb_serial_jtag_secondary: true
+      disable_dev_null_vfs: true
+      disable_mbedtls_peer_cert: true
+      disable_mbedtls_pkcs7: true
+      disable_mbedtls_tls: true
+      disable_mbedtls_tls_server: true
+      disable_mbedtls_tls_extras: true
+      disable_regi2c_in_iram: true
+      adc_oneshot_in_iram: false
+      disable_fatfs: true
+    components: []
+  flash_size: 4MB
+  watchdog_timeout: 5s
+  variant: ESP32S3
+  cpu_frequency: 240MHZ
+logger:
+  level: VERBOSE
+  hardware_uart: UART0
+  baud_rate: 115200
+  tx_buffer_size: 512
+  deassert_rts_dtr: false
+  task_log_buffer_size: 768
+  logs: {}
+  runtime_tag_levels: false
+i2c:
+  - sda: 2
+    scl: 1
+    sda_pullup_enabled: true
+    scl_pullup_enabled: true
+    frequency: 50000.0
+    scan: true
+m5_unit_acssr:
+  - id: acssr
+    update_interval: 5s
+    address: 0x50
+switch:
+  - platform: m5_unit_acssr
+    relay:
+      name: ACSSR relay
+      id: relay
+      restore_mode: DISABLED
+      disabled_by_default: false
+      icon: mdi:electric-switch
+light:
+  - platform: m5_unit_acssr
+    name: ACSSR LED
+    id: led
+    gamma_correct: 1.0
+    disabled_by_default: false
+    resume_effect: false
+    default_transition_length: 1s
+    flash_transition_length: 0s
+interval:
+  - interval: 20s
+    then:
+      - switch.turn_on:
+          id: relay
+    startup_delay: 0s
+  - interval: 24s
+    then:
+      - light.turn_on:
+          id: led
+          brightness: 1.0
+          red: 1.0
+          green: 0.5
+          blue: 0.0
+          state: true
+    startup_delay: 0s
+  - interval: 28s
+    then:
+      - switch.turn_off:
+          id: relay
+    startup_delay: 0s
+
+INFO Configuration is valid!

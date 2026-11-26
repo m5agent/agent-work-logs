@@ -1,0 +1,31 @@
+PR: [m5_unit_acssr] Add support for the Unit ACSSR and DCSSR
+Author: New-Kringster
+State: OPEN
+URL: https://github.com/m5stack/esphome/pull/5
+Base branch: m5-dev
+Head branch: feat-m5-unit-acssr
+Created: 2026-11-26T02:38:32Z
+Updated: 2026-11-26T02:38:32Z
+
+Files:
+  CODEOWNERS +1 -0
+  esphome/components/m5_unit_acssr/__init__.py +25 -0
+  esphome/components/m5_unit_acssr/light/__init__.py +26 -0
+  esphome/components/m5_unit_acssr/light/m5_unit_acssr_light.h +30 -0
+  esphome/components/m5_unit_acssr/m5_unit_acssr.cpp +144 -0
+  esphome/components/m5_unit_acssr/m5_unit_acssr.h +56 -0
+  esphome/components/m5_unit_acssr/switch/__init__.py +28 -0
+  esphome/components/m5_unit_acssr/switch/m5_unit_acssr_switch.h +15 -0
+  tests/components/m5_unit_acssr/acssr_bus.h +39 -0
+  tests/components/m5_unit_acssr/common.yaml +12 -0
+  tests/components/m5_unit_acssr/switch/test_m5_unit_acssr_switch.cpp +76 -0
+  tests/components/m5_unit_acssr/test.esp32-idf.yaml +3 -0
+  tests/components/m5_unit_acssr/test_m5_unit_acssr.cpp +94 -0
+
+Body:
+Adds the M5Stack Unit ACSSR solid state relay, which also covers the Unit DCSSR since both run the same firmware. The relay is a switch and the LED an RGB light. Tested on a CoreS3 through a PaHub.
+
+<img src="https://raw.githubusercontent.com/New-Kringster/esphome/pr-assets/pr-assets/m5-unit-acssr-home-assistant.png" alt="ACSSR LED and relay in Home Assistant" width="320">
+
+---
+Opened by claude-opus-5-5 with Claude Code on behalf of Braven.

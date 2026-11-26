@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "kind": "pr_review",
+  "overall_status": "REVIEW",
+  "title": "m5stack/esphome#5 [m5_unit_acssr] Add support for the Unit ACSSR and DCSSR",
+  "source": {
+    "issue": "",
+    "pull_request": "https://github.com/m5stack/esphome/pull/5",
+    "repository": "m5stack/esphome",
+    "base_commit": "6c84e04afe0985a73c705094f88b4f773ed4b6e9",
+    "base_branch": "m5-dev",
+    "head_commit": "d67c91f656fba5333b5f67d237200c244769342b"
+  },
+  "hardware": {},
+  "firmware": {
+    "board": "m5stack-cores3",
+    "target": "esp32s3 (esp32-idf, ESP-IDF 5.5.6)",
+    "factory_bin_sha256": "33255cfcbb3f389e3474c05c5768021ba70c6068b671e820f00442f7a1bae36b",
+    "composed_firmware_sha256": "dc08a5b0c54517c222592b12925f5653b28aa5e08000bd1c0120db7ef45100d8",
+    "component_test_config": "tests/components/m5_unit_acssr/test.esp32-idf.yaml"
+  },
+  "execution": {
+    "environment": "macOS arm64; CPython 3.13 venv with repository requirements (ESPHome 2026.11.0-dev); ESP-IDF 5.5.6; local Device Service cores3 QEMU profile with the dcssr Unit model on PORT.A",
+    "task_id": "",
+    "session_id": [
+      "8b79463b8e1140ea83f4d59dd6723b51",
+      "cd1722e88bf84ae282fc29b6435f3c55"
+    ]
+  },
+  "checks": [
+    {
+      "name": "vendor protocol cross-check",
+      "command": "M5Unit-ACSSR@2996144 and M5Unit-ACSSR-Internal-FW@45e6298 sources",
+      "result": "PASS",
+      "detail": "0x50/0x00/0x10/0xFE, transfer split, 3 s boot delay and relay-off initial state match the component"
+    },
+    {
+      "name": "host unit tests",
+      "command": "script/cpp_unit_test.py m5_unit_acssr",
+      "result": "PASS",
+      "detail": "11 tests from 2 suites passed"
+    },
+    {
+      "name": "component build (esp32-idf)",
+      "command": "script/test_build_components.py -c m5_unit_acssr -t esp32-idf",
+      "result": "PASS",
+      "detail": "1 passed, 0 failed"
+    },
+    {
+      "name": "config validation",
+      "command": "python -m esphome config (CoreS3 probe)",
+      "result": "PASS",
+      "detail": "Configuration is valid; default address 0x50, switch ALWAYS_OFF, light gamma 2.8"
+    },
+    {
+      "name": "virtual-device relay/LED data plane",
+      "command": "QEMU CoreS3 session + dcssr on PORT.A",
+      "result": "PASS",
+      "detail": "QOM relay-level true->false with relay-transitions=2 and led-rgb=0xFF8000; UART0 setup finished and Firmware version 1"
+    },
+    {
+      "name": "no-unit reconnect path",
+      "command": "QEMU CoreS3 session without units",
+      "result": "PASS",
+      "detail": "after the retry window one 'not answering at 0x50' warning; update() kept probing 0x50"
+    },
+    {
+      "name": "restart-recovery fairness",
+      "command": "same virtual run",
+      "result": "PARTIAL",
+      "detail": "QEMU DCSSR model does not reflect 0x10 LED readback, causing repeated restore warnings; real FW shadow readback is not exercised"
+    },
+    {
+      "name": "hardware validation",
+      "command": "not available",
+      "result": "NOT RUN",
+      "detail": "no ACSSR/DCSSR unit; contacts, load, isolation, LED optics and the real 3 s power-up window unverified"
+    },
+    {
+      "name": "Button / Modbus mode and 0x20 address change",
+      "command": "not available",
+      "result": "NOT RUN",
+      "detail": "out of scope for the I2C attachment and not implemented"
+    }
+  ],
+  "evidence": [
+    "evidence/01-pr-metadata.txt",
+    "evidence/02-vendor-protocol.md",
+    "evidence/03-host-unit-tests.log",
+    "evidence/04-component-build.log",
+    "evidence/05-config-valid.log",
+    "evidence/06-cores3-dcssr-serial.log",
+    "evidence/07-cores3-dcssr-units.json",
+    "evidence/08-cores3-dcssr-probe.yaml",
+    "evidence/09-cores3-no-unit-serial.log",
+    "evidence/10-cores3-no-unit.json",
+    "evidence/11-model-gap.md"
+  ],
+  "notes": [
+    "The DCSSR QEMU model is an I2C register/transaction observer, not a mains switch model; no electrical or contact claim is made.",
+    "The relay readback is the unit firmware shadow byte, not contact feedback."
+  ]
+}

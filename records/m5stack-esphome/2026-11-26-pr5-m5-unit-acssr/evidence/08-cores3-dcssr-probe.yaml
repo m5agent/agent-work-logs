@@ -1,0 +1,42 @@
+esphome:
+  name: acssr-pr5
+esp32:
+  board: m5stack-cores3
+  framework:
+    type: esp-idf
+logger:
+  level: VERBOSE
+  hardware_uart: UART0
+  baud_rate: 115200
+i2c:
+  sda: 2
+  scl: 1
+m5_unit_acssr:
+  id: acssr
+  update_interval: 5s
+switch:
+  - platform: m5_unit_acssr
+    relay:
+      name: ACSSR relay
+      id: relay
+      restore_mode: DISABLED
+light:
+  - platform: m5_unit_acssr
+    name: ACSSR LED
+    id: led
+    gamma_correct: 1.0
+interval:
+  - interval: 20s
+    then:
+      - switch.turn_on: relay
+  - interval: 24s
+    then:
+      - light.turn_on:
+          id: led
+          brightness: 100%
+          red: 100%
+          green: 50%
+          blue: 0%
+  - interval: 28s
+    then:
+      - switch.turn_off: relay
