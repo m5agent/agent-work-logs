@@ -1,0 +1,390 @@
+# Host harness on PR head ff4cd84 (unchanged driver source)
+# build: code/build.sh; clang -std=gnu11 -O1 -Wall -Wextra; stubs in code/stub
+# time: 1 jiffy = 1 ms; M5IOE1 model follows the documented state machine
+# 26 scenarios / 109 checks
+
+== T1 probe: m5stack,power-controller + default hold ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+  hold_ms = 20000                                            PASS
+  OFF_TIME 0xB2/0xB3 = 20000                                 PASS
+== T2 no power controller: legacy SysRq U only ==
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, SysRq U only
+  probe returns 0                                            PASS
+  ioe stays NULL                                             PASS
+  stock OFF_TIME 2000 untouched                              PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] emerg SysRq U: emergency remount filesystems readonly
+[t=  1500] emerg set backlight brightness to 0
+  SysRq U fired                                              PASS
+  no orderly_poweroff                                        PASS
+  no backstop                                                PASS
+  IRQ left disabled (one-shot)                               PASS
+== T3 no power-controller but disabled-gpios is the M5IOE1: no fallback ==
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, SysRq U only
+  probe returns 0                                            PASS
+  new path not entered                                       PASS
+  stock OFF_TIME 2000 untouched                              PASS
+== T4 phandle present, i2c client absent: -EPROBE_DEFER ==
+[t=     0] probe power controller not ready
+  probe returns -EPROBE_DEFER                                PASS
+== T5 slider off, countdown confirmed: orderly poweroff ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  one orderly_poweroff(force=true)                           PASS
+  OFF_TIME rewritten to 20000                                PASS
+  backlight off                                              PASS
+  slider_off latched                                         PASS
+  backstop due 17000 (flip 1000 + 20000 - 4000)              PASS
+  IRQ still disabled while low                               PASS
+[t=  1500] CANCEL backstop (was due 17000)
+[t=  1500] I2C  0xB2 <- 200
+  poweroff cuts at 200 ms                                    PASS
+  backstop cancelled at shutdown                             PASS
+  disabled-gpios asserted                                    PASS
+  no restart                                                 PASS
+== T6 debounce outlasts the 500 ms check: recheck, then orderly ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] warn  powerfail gpio low, power switch debouncing: waiting
+[t=  1500] ARM  check    delay=100 due=1600
+[t=  1600] ARM  check    delay=100 due=1700
+  no decision while 0xB6 reads DEBOUNCE(2)                   PASS
+  IRQ not re-enabled while the line is low                   PASS
+  check re-armed for +100 ms                                 PASS
+[t=  1700] ARM  check    delay=100 due=1800
+  still DEBOUNCE(2) at 1700: another recheck                 PASS
+[t=  1800] I2C  0xB2 <- 20000
+[t=  1800] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1800] ARM  backstop delay=15900 due=17700
+  orderly_poweroff once at 1800                              PASS
+  backstop due 17700 (last ON/DEBOUNCE read 1700 + 16000)    PASS
+  real chip cut 21750, backstop 4.05 s earlier               PASS
+== T7 line goes high during the countdown: no poweroff, READY restored ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+  chip countdown started, READY cleared                      PASS
+[t=  1300] ---- slider ON (irq-gpios high)
+[t=  1500] warn  powerfail irq occurred, but gpio is inactive, val=1
+[t=  1500] ARM  ready    delay=0 due=1500
+[t=  1500] ARM  ready    delay=500 due=2000
+  no orderly_poweroff                                        PASS
+  no backstop                                                PASS
+  IRQ re-enabled because the line is high                    PASS
+  ready work armed                                           PASS
+[t=  2000] ARM  ready    delay=500 due=2500
+[t=  2500] ARM  ready    delay=500 due=3000
+[t=  3000] ARM  ready    delay=500 due=3500
+[t=  3500] ARM  ready    delay=500 due=4000
+[t=  4000] ARM  ready    delay=500 due=4500
+[t=  4500] ARM  ready    delay=500 due=5000
+[t=  5000] ARM  ready    delay=500 due=5500
+[t=  5500] ARM  ready    delay=500 due=6000
+[t=  6000] ARM  ready    delay=500 due=6500
+[t=  6500] ARM  ready    delay=500 due=7000
+[t=  7000] ARM  ready    delay=500 due=7500
+[t=  7500] ARM  ready    delay=500 due=8000
+[t=  8000] ARM  ready    delay=500 due=8500
+[t=  8500] ARM  ready    delay=500 due=9000
+[t=  9000] ARM  ready    delay=500 due=9500
+[t=  9500] ARM  ready    delay=500 due=10000
+[t= 10000] ARM  ready    delay=500 due=10500
+[t= 10500] ARM  ready    delay=500 due=11000
+[t= 11000] ARM  ready    delay=500 due=11500
+[t= 11500] ARM  ready    delay=500 due=12000
+[t= 12000] ARM  ready    delay=500 due=12500
+[t= 12500] ARM  ready    delay=500 due=13000
+[t= 13000] ARM  ready    delay=500 due=13500
+[t= 13500] ARM  ready    delay=500 due=14000
+[t= 14000] ARM  ready    delay=500 due=14500
+[t= 14500] ARM  ready    delay=500 due=15000
+[t= 15000] ARM  ready    delay=500 due=15500
+[t= 15500] ARM  ready    delay=500 due=16000
+[t= 16000] ARM  ready    delay=500 due=16500
+[t= 16500] ARM  ready    delay=500 due=17000
+[t= 17000] ARM  ready    delay=500 due=17500
+[t= 17500] ARM  ready    delay=500 due=18000
+[t= 18000] ARM  ready    delay=500 due=18500
+[t= 18500] ARM  ready    delay=500 due=19000
+[t= 19000] ARM  ready    delay=500 due=19500
+[t= 19500] ARM  ready    delay=500 due=20000
+[t= 20000] ARM  ready    delay=500 due=20500
+[t= 20500] ARM  ready    delay=500 due=21000
+[t= 21000] ARM  ready    delay=500 due=21500
+  no READY write while the countdown still runs              PASS
+  chip still counting at 21000                               PASS
+[t= 21500] I2C  0xB0 <- 1 (READY)
+  READY written once at 21500, after 0xB6 reads ON           PASS
+  no poweroff / no restart                                   PASS
+  hold stays 20000                                           PASS
+== T8 slider high at .shutdown after a slider-off: emergency restart ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t=  1500] ---- slider ON (irq-gpios high)
+[t=  3000] CANCEL backstop (was due 17000)
+[t=  3000] emerg power switch back on: restarting
+  emergency_restart() called once                            PASS
+  200 ms cut NOT programmed                                  PASS
+  disabled-gpios NOT asserted                                PASS
+  backstop cancelled first                                   PASS
+== T9 slider low at .shutdown after a slider-off: no restart, 200 ms ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t=  1500] CANCEL backstop (was due 17000)
+[t=  1500] I2C  0xB2 <- 200
+  no restart                                                 PASS
+  OFF_TIME 200 ms                                            PASS
+  disabled-gpios asserted                                    PASS
+== T10 menu poweroff (slider still on): 200 ms, no restart ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=     0] I2C  0xB2 <- 200
+  OFF_TIME 200 ms                                            PASS
+  no restart                                                 PASS
+  disabled-gpios untouched                                   PASS
+== T11 .shutdown on reboot: OFF_TIME untouched ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t=  1500] CANCEL backstop (was due 17000)
+  OFF_TIME stays 20000                                       PASS
+  no restart                                                 PASS
+  backstop cancelled                                         PASS
+== T12 hold 12000: backstop no earlier than 8 s ==
+[t=     0] I2C  0xB2 <- 12000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 12000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 12000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 12000 ms
+[t=  1500] ARM  backstop delay=7500 due=9000
+  hold_ms = 12000                                            PASS
+  OFF_TIME 12000                                             PASS
+  backstop due 9000 (8 s after the flip)                     PASS
+  real cut 13000, backstop 4 s earlier                       PASS
+== T13 hold clamping ==
+[t=     0] I2C  0xB2 <- 12000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 12000 ms
+  4000 -> 12000                                              PASS
+[t=     0] I2C  0xB2 <- 12000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 12000 ms
+  8000 -> 12000                                              PASS
+[t=     0] I2C  0xB2 <- 60000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 60000 ms
+  70000 -> 60000                                             PASS
+== T14 unprefixed power-hold-ms is ignored (renamed property) ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  hold_ms = 20000 default                                    PASS
+  OFF_TIME 20000                                             PASS
+== T15 backstop body: SysRq S, 1 s, SysRq U ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+  S then U                                                   PASS
+== T16 OFF_TIME write fails at the event: legacy path ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] err   cannot extend the power hold: -5
+[t=  1500] emerg SysRq U: emergency remount filesystems readonly
+[t=  1500] emerg set backlight brightness to 0
+[t=  1500] emerg assert disabled gpio low
+  SysRq U                                                    PASS
+  no orderly_poweroff                                        PASS
+  disabled-gpios asserted                                    PASS
+  backlight off                                              PASS
+  no backstop                                                PASS
+== T17 OFF_TIME write fails at probe: legacy from then on ==
+[t=     0] warn  cannot set the power hold (-5), using SysRq U only
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, SysRq U only
+  ioe dropped to NULL                                        PASS
+  stock OFF_TIME 2000 untouched                              PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] emerg SysRq U: emergency remount filesystems readonly
+[t=  1500] emerg set backlight brightness to 0
+[t=  1500] emerg assert disabled gpio low
+  SysRq U on the flip                                        PASS
+  no orderly_poweroff                                        PASS
+== T18 remove: restore 2000 only when no slider-off is latched ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=     0] I2C  0xB2 <- 2000
+  OFF_TIME back to 2000                                      PASS
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+[t=  1500] CANCEL backstop (was due 17000)
+  after a slider-off the hold is left alone                  PASS
+== T19 irq-gpios unreadable: recheck forever (residual path) ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] err   failed to read powerfail gpio: -5
+[t=  1500] warn  powerfail gpio low, gpio unreadable: waiting
+[t=  1500] ARM  check    delay=100 due=1600
+[t=  1600] err   failed to read powerfail gpio: -5
+[t=  1600] ARM  check    delay=100 due=1700
+[t=  1700] err   failed to read powerfail gpio: -5
+[t=  1700] ARM  check    delay=100 due=1800
+[t=  1800] err   failed to read powerfail gpio: -5
+[t=  1800] ARM  check    delay=100 due=1900
+[t=  1900] err   failed to read powerfail gpio: -5
+[t=  1900] ARM  check    delay=100 due=2000
+[t=  2000] err   failed to read powerfail gpio: -5
+[t=  2000] ARM  check    delay=100 due=2100
+[t=  2100] err   failed to read powerfail gpio: -5
+[t=  2100] ARM  check    delay=100 due=2200
+[t=  2200] err   failed to read powerfail gpio: -5
+[t=  2200] ARM  check    delay=100 due=2300
+[t=  2300] err   failed to read powerfail gpio: -5
+[t=  2300] ARM  check    delay=100 due=2400
+[t=  2400] err   failed to read powerfail gpio: -5
+[t=  2400] ARM  check    delay=100 due=2500
+[t=  2500] err   failed to read powerfail gpio: -5
+[t=  2500] ARM  check    delay=100 due=2600
+[t=  2600] err   failed to read powerfail gpio: -5
+[t=  2600] ARM  check    delay=100 due=2700
+[t=  2700] err   failed to read powerfail gpio: -5
+[t=  2700] ARM  check    delay=100 due=2800
+[t=  2800] err   failed to read powerfail gpio: -5
+[t=  2800] ARM  check    delay=100 due=2900
+[t=  2900] err   failed to read powerfail gpio: -5
+[t=  2900] ARM  check    delay=100 due=3000
+[t=  3000] err   failed to read powerfail gpio: -5
+[t=  3000] ARM  check    delay=100 due=3100
+  no orderly_poweroff                                        PASS
+  no backstop                                                PASS
+  IRQ stays disabled                                         PASS
+  OFF_TIME left at 20000                                     PASS
+  check still re-arming                                      PASS
+== T20 spurious falling edge with the slider on: no poweroff, READY untouched ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] warn  powerfail irq occurred, but gpio is inactive, val=1
+[t=  1500] ARM  ready    delay=0 due=1500
+  no orderly_poweroff                                        PASS
+  IRQ re-enabled                                             PASS
+  READY not rewritten (already 1)                            PASS
+== T21 quick flick back on inside the debounce: no poweroff, no READY write ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1050] ---- slider ON (irq-gpios high)
+[t=  1500] warn  powerfail irq occurred, but gpio is inactive, val=1
+[t=  1500] ARM  ready    delay=0 due=1500
+  no orderly_poweroff                                        PASS
+  IRQ re-enabled                                             PASS
+  READY was never cleared, so no write                       PASS
+== T22 state read fails at the check: treated as confirmed ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly_poweroff once                                      PASS
+  OFF_TIME 20000                                             PASS
+== T23 .shutdown without a power controller leaves the chip alone ==
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, SysRq U only
+  OFF_TIME stays 2000                                        PASS
+  no restart                                                 PASS
+== T24 flip back on, IRQ re-armed, second switch-off still works ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1300] ---- slider ON (irq-gpios high)
+[t=  1500] warn  powerfail irq occurred, but gpio is inactive, val=1
+[t=  1500] ARM  ready    delay=0 due=1500
+[t=  1500] ARM  ready    delay=500 due=2000
+  first switch-off produced no poweroff                      PASS
+  IRQ re-armed                                               PASS
+[t=  3000] ---- slider OFF (irq-gpios low)
+[t=  3000] ARM  check    delay=500 due=3500
+[t=  2000] ARM  ready    delay=500 due=2500
+[t=  2500] ARM  ready    delay=500 due=3000
+[t=  3000] ARM  ready    delay=500 due=3500
+[t=  3500] I2C  0xB2 <- 20000
+[t=  3500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  3500] ARM  backstop delay=15500 due=19000
+[t=  3500] ARM  ready    delay=500 due=4000
+  second switch-off runs orderly_poweroff                    PASS
+  backstop due 19000                                         PASS
+== T25 flip back on while the poweroff is hung: no restart point ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t=  8000] ---- slider ON (irq-gpios high)
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+  no .shutdown means no restart                              PASS
+  backstop ran SysRq S + U                                   PASS
+  chip is back at ON, slider holds the boost                 PASS
+  no READY restore (ready work never armed)                  PASS
+== T26 flip back after the backstop: still no restart path ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ---- slider ON (irq-gpios high)
+  no restart even with the proposal                          PASS
+  S + U still ran                                            PASS
+  chip back at ON, slider holds the boost                    PASS
+  no READY restore                                           PASS
+
+PASS: 109 checks, 0 failure(s)

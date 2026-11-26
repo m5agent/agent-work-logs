@@ -1,0 +1,35 @@
+# T25 with the backstop-restart proposal applied (code/powerfail_suo_proposed.c)
+== T25 flip back on while the poweroff is hung: no restart point ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t=  8000] ---- slider ON (irq-gpios high)
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] emerg power switch back on: restarting
+  backstop restarts once the line is high                    PASS
+  S + U before the restart                                   PASS
+  restart after the RO remount, jiffies 18000                PASS
+== T26 flip back after the backstop: still no restart path ==
+# T26 is unchanged by the proposal: the single backstop sample has already passed
+== T26 flip back after the backstop: still no restart path ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ---- slider ON (irq-gpios high)
+  no restart even with the proposal                          PASS
+  S + U still ran                                            PASS
+  chip back at ON, slider holds the boost                    PASS
+  no READY restore                                           PASS
+
+PASS: 108 checks, 0 failure(s)

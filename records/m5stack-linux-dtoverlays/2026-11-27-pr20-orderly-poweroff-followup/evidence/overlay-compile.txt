@@ -1,0 +1,76 @@
+# overlay build check - PR head ff4cd84, cardputerzero-v5-overlay.dts
+# host: macOS arm64; dtc 1.8.1; clang version
+
+## head dtbo
+$ clang -E -nostdinc -undef -x assembler-with-cpp cardputerzero-v5-overlay.dts -o v5.tmp
+exit=0 (no diagnostics)
+$ dtc -@ -I dts -O dtb -o cardputerzero-v5-overlay.dtbo v5.tmp
+exit=0 (no warnings)
+33309ef4e3278ac76b44cdc97c106f9b2b410ecbce0262689a3a2fae83a8779e  <tmp>/head.dtbo
+
+## decompiled powerfail node (head)
+			powerfail {
+				compatible = "cardputerzero,powerfail-suo";
+				debounce-ms = <0x1f4>;
+				interrupt-parent = <&gpio>;
+				interrupts = <0x06 0x02>;
+				irq-gpios = <&gpio>, <0x06 0x00>;
+				backlight = <&backlight_pwm>;
+				disabled-gpios = <&m5ioe1>, <0x0b 0x01>;
+				m5stack,power-controller = <&m5ioe1>;
+				m5stack,power-hold-ms = <0x4e20>;
+			};
+				powerfail {
+					backlight = <0x00>;
+					disabled-gpios = <0x00>;
+
+## __local_fixups__ entry
+				powerfail {
+					backlight = <0x00>;
+					disabled-gpios = <0x00>;
+					m5stack,power-controller = <0x00>;
+				};
+
+## base a3fd3e8 -> head semantic diff (decompiled)
+# exactly the two new properties plus the local-fixup slot; no other change
+--- <tmp>/a3fd3e8.dec.dts	2026-11-27 02:25:20.039823370 +0800
++++ <tmp>/ff4cd84.dec.dts	2026-11-27 02:25:20.095613650 +0800
+@@ -134,6 +134,8 @@
+ 				irq-gpios = <&gpio>, <0x06 0x00>;
+ 				backlight = <&backlight_pwm>;
+ 				disabled-gpios = <&m5ioe1>, <0x0b 0x01>;
++				m5stack,power-controller = <&m5ioe1>;
++				m5stack,power-hold-ms = <0x4e20>;
+ 			};
+ 
+ 			es8390_mclk: es8390_mclk {
+@@ -356,6 +358,7 @@
+ 				powerfail {
+ 					backlight = <0x00>;
+ 					disabled-gpios = <0x00>;
++					m5stack,power-controller = <0x00>;
+ 				};
+ 
+ 				backlight {
+
+## 5623292 -> ff4cd84 semantic diff
+--- <tmp>/5623292.dec.dts	2026-11-27 02:25:20.067393529 +0800
++++ <tmp>/ff4cd84.dec.dts	2026-11-27 02:25:20.095613650 +0800
+@@ -135,7 +135,7 @@
+ 				backlight = <&backlight_pwm>;
+ 				disabled-gpios = <&m5ioe1>, <0x0b 0x01>;
+ 				m5stack,power-controller = <&m5ioe1>;
+-				power-hold-ms = <0x4e20>;
++				m5stack,power-hold-ms = <0x4e20>;
+ 			};
+ 
+ 			es8390_mclk: es8390_mclk {
+
+## checked-in stock/reference dtbo (for the byte-identity claim)
+# firmware/CardputerZero/overlays/cardputerzero-overlay.dtbo sha256:
+e4425fee60a88c6cfcb7606b35a42fa11627d1f1933c031b8cee54e4d31fcdf5  <repo>/firmware/CardputerZero/overlays/cardputerzero-overlay.dtbo
+# it decompiles to a different overlay: no cardputerzero,powerfail-suo node,
+# 303 lines vs 409 for the a3fd3e8 v5 overlay, so it is an older build.
+# => 'base overlay compiles byte-identical to the installed stock dtbo' is NOT
+#    independently reproducible from the repository; only the source-level
+#    base->head diff above is.

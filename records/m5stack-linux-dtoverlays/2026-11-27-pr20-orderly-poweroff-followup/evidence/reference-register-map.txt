@@ -1,0 +1,119 @@
+# M5IOE1 register-map cross-check
+# Source: prokrypt/CardputerZero-Open-IOE1 (the reference named in the PR body),
+#         main @ 4369350e13ba29087b98f39169e57d31e9629e33 (2026-11-19),
+#         README.md blob d10a4e35b7d2ef65234f044a779d6304968f873f
+# https://github.com/prokrypt/CardputerZero-Open-IOE1/blob/4369350e13ba29087b98f39169e57d31e9629e33/README.md
+# https://github.com/prokrypt/CardputerZero-Open-IOE1/blob/4369350e13ba29087b98f39169e57d31e9629e33/firmware/main.c
+# This is a third-party reimplementation that states stock parity, not the stock
+# binary; it is used to confirm the semantics the first review could not check.
+
+## Power path (README, 'Chip and pins')
+65-always on, ~0.5 s until configured).
+66-
+67:**Power path (schematic V0.6.1 p4):** the boost that powers the Pi is enabled by a diode-OR of the switch
+68-(`SW_EN`) and `PYG14_PWR_EN` (PB7), with a 10k pull-down. So with the switch on the Pi is powered whatever the PY32
+69-does; PB7 only holds power after the switch goes off (the OFF_TIME countdown). IO5 sense = `SW_EN` / 2 (~1.8 V).
+--
+144-
+145-After any PY32 reset (cold start, watchdog, 0x29, reflash) PB7 floats until the first power pass. Harmless with the
+146:switch on (diode-OR). **If the switch is off when the app starts, PB7 is never raised**: a reset or reflash during
+147-the OFF_TIME countdown cuts power at once. Never reflash or reset the PY32 with the switch off.
+148-
+
+## Register map rows (README)
+121:| 0xB0 | READY | bit0. 0: boot LED walk, host LED modes not shown. The switch-off countdown clears it |
+123:| 0xB2/B3 | OFF_TIME | ms, min 200 (clamped per write: write both bytes in one transaction), default 2000 |
+125:| 0xB6 | power state | 0 off, 1 on, 2 off-debounce, 3 countdown, 4 cutting (read-only) |
+
+## Power state machine (README)
+## Power state machine
+
+Every 50 ms while 0xB1 = 1:
+
+- 0 off: switch sense above 0xB4 -> PWR_EN high; first time also PWM4 on and PWM_FREQ = 20000 -> 1. With READY = 0
+  the boot walk runs: Aa -> Fn -> Sym, 300 ms each.
+- 1 on: below threshold -> 2.
+- 2: back above within 100 ms -> 1. Else -> 3.
+- 3: READY := 0, shutdown walk Sym -> Fn -> Aa. After OFF_TIME (re-read live, so lowering it ends the wait) -> 4.
+  Flipping the switch back on does not cancel.
+- 4: PWR_EN low; after 100 ms -> 0. If the switch is on by then, power comes straight back (flip-back = power cycle).
+
+After any PY32 reset (cold start, watchdog, 0x29, reflash) PB7 floats until the first power pass. Harmless with the
+
+## firmware/main.c: state machine
+// --- power state machine (every 50 ms): 0 off, 1 on, 2 off-debounce, 3 countdown, 4 cutting
+static uint32_t t_state;
+static void pwr(int on) { pin_set(IO_PWR, on); pin_mode(IO_PWR, 1); PORT[IO_PWR]->OTYPER &= ~(1u << PIN[IO_PWR]); }
+static int pwr_mode_out(void) { return (PORT[IO_PWR]->MODER >> 14 & 3) == 1; }
+static int pwr_high(void) { return pwr_mode_out() && PORT[IO_PWR]->ODR >> 7 & 1; }
+
+static void power_poll(void) {
+    int r = adc_raw(2);
+    if (r >= 0) sw_mv = to_mv(r);               // timeout: keep the last reading
+    int on = sw_mv > thresh;
+    if (!lock) return;
+    uint32_t now = tick;
+    switch (state) {
+    case 0:
+        if (!on) { pwr(0); break; }
+        pwr(1);
+        if (!poweron_done) {                    // fade.S: PWM4 on at duty 0 (stock 0x8800); the splash fades it up
+            poweron_done = 1;
+            pwm4 = 0x8000; pwm_freq = 20000; g_drv = 0x1dff;
+            f_pwm = 1; f_gpio = 1;
+        }
+        state = 1;
+        break;
+    case 1: if (!on) { state = 2; t_state = now; } break;
+    case 2:
+        if (on) state = 1;
+        else if (now - t_state >= 100) { state = 3; t_state = now; ready = 0; }
+        break;
+    case 3:                                     // flipping back on does not cancel (stock); OFF_TIME read live
+        if (now - t_state >= off_time) { pwr(0); state = 4; t_state = now; }
+        break;
+    case 4: if (now - t_state >= 100) state = 0; break;
+    }
+}
+
+static uint32_t walk_t0;
+static void per_ms(uint32_t ms) {
+    if (f_lock) { f_lock = 0; state = 0; }
+    if (ms % 50 == 0) power_poll();
+    if (ms % 1000 == 0) vref();
+    uint8_t w = ready ? 0 : (state == 1 || state == 2) ? 1 : state == 3 ? 2 : 0;   // boot / shutdown walk
+    if (w != walk) { walk = w; walk_t0 = ms; }
+    unsigned step = (ms - walk_t0) / 300 % 3;   // Aa -> Fn -> Sym, 300 ms each; shutdown the other way
+    for (int i = 0; i < 3; i++) led_tick(i, walk == 1 ? step : 2 - step);
+
+## firmware/main.c: 0xB0 read/write and 0xB2 read/write
+    R16(0x21, pwm4)
+    case 0x23: return iic_cfg;
+    R16(0x25, pwm_freq)
+    R16(0x27, ref_mv)
+    case 0xb0: return ready;
+    case 0xb1: return lock;
+    R16(0xb2, off_time)
+    R16(0xb4, thresh)
+    case 0xb6: return state;
+    case 0xb8: return hwid;
+    case 0xb9: return status();
+    W16(0x25, pwm_freq, f_pwm = 1)
+    case 0x29:
+        if (v == 0x3a) { SCB_AIRCR = 0x05fa0004; __asm volatile("dsb"); for (;;) ; }
+        break;
+    case 0xb0: ready = v & 1; break;
+    case 0xb1:
+        if ((v & 1) == lock) break;
+        if (lock) {                             // hand PB7 to the host as it is now (stock): output high stays high
+            uint16_t b = 1u << IO_PWR;
+            g_mode = pwr_mode_out() ? g_mode | b : g_mode & ~b;
+            g_out = GPIOB->ODR >> 7 & 1 ? g_out | b : g_out & ~b;
+            g_drv &= ~b;
+        }
+        lock = v & 1; f_lock = 1;
+        break;
+    case 0xb2: case 0xb3: t = set8(off_time, a - 0xb2, v); off_time = t < 200 ? 200 : t; break;   // clamp per byte
+    case 0xb4: case 0xb5: t = set8(thresh, a - 0xb4, v); thresh = t > 3300 ? 3300 : t; break;
+    case 0xbd: case 0xbe: case 0xbf: if (v <= 3) led_mode[a - 0xbd] = v; break;
+    case 0xfd: if (v == 0x1a) f_iap = 1; break;

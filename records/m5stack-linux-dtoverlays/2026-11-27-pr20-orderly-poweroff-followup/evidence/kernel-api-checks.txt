@@ -1,0 +1,34 @@
+# Kernel API checks for the new .shutdown path (added in ff4cd84)
+# Source: raspberrypi/linux rpi-6.12.y, fetched 2026-11-26
+
+## emergency_restart() is exported to modules and is safe outside IRQ context
+ *	emergency_restart - reboot the system
+ *
+ *	Without shutting down any hardware or taking any locks
+ *	reboot the system.  This is called when we know we are in
+ *	trouble so this is our best effort to reboot.  This is
+ *	safe to call in interrupt context.
+ */
+void emergency_restart(void)
+{
+	kmsg_dump(KMSG_DUMP_EMERG);
+	system_state = SYSTEM_RESTART;
+
+	/*
+	 * NBCON kthreads won't be flushed and stopped properly in
+	 * the emergency restart. Move them to the atomic mode.
+	 */
+	nbcon_cpu_emergency_enter();
+	printk_trigger_flush();
+
+	machine_emergency_restart();
+}
+EXPORT_SYMBOL_GPL(emergency_restart);
+
+
+## declaration available via <linux/reboot.h>
+196:extern void emergency_restart(void);
+
+## system_state / device_shutdown ordering and I2C framing
+# unchanged from the first-round review; see
+# records/m5stack-linux-dtoverlays/2026-11-27-pr20-orderly-poweroff-slider/evidence/kernel-api-checks.txt

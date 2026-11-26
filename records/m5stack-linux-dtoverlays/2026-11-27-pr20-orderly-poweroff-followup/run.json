@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "m5stack/m5stack-linux-dtoverlays #20 round 2: ff4cd84 fixes the DEBOUNCE drop path, restores READY after a flip-back and restarts at .shutdown; host-level matrix passes, two non-blocking residuals",
+  "source": {
+    "pull_request": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20",
+    "repository": "m5stack/m5stack-linux-dtoverlays",
+    "base_branch": "main",
+    "base_commit": "a3fd3e83c0247e16e194e7e40f7fc1f5be933dd4",
+    "head_commit": "ff4cd84474787ea24a00b65d83b5b50e4a51c1c9",
+    "previous_review_comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7199260631",
+    "author_comment": "https://github.com/m5stack/m5stack-linux-dtoverlays/pull/20#issuecomment-7200264330",
+    "author": "shrimpapplepro",
+    "changed_files": 2,
+    "additions": 333,
+    "deletions": 73,
+    "state": "OPEN",
+    "mergeable_state": "CLEAN"
+  },
+  "hardware": {},
+  "firmware": {
+    "file": "modules/CardputerZero/powerfail_suo.ko",
+    "sha256": ""
+  },
+  "execution": {
+    "environment": "macOS arm64; no Cardputer Zero hardware; Device Service cardputer-zero profile supported=false creatable=false backend_ready=false (__missing_qemu__/__missing_rom__); no Linux kernel headers; docker daemon still unusable (read-only containerd state dir)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "probe_defaults",
+      "status": "PASS",
+      "evidence": "T1: no m5stack,power-hold-ms -> hold_ms 20000, 0xB2/0xB3 = 20000; prefixed property read, legacy unprefixed property ignored (T14)"
+    },
+    {
+      "name": "debounce_recheck",
+      "status": "PASS",
+      "evidence": "T6: with a 700 ms debounce, 0xB6 reads 2 at the 1500/1600/1700 checks; the check re-arms every 100 ms and only calls orderly_poweroff once 0xB6 reads 3 (at 1800); no decision while the state is 2"
+    },
+    {
+      "name": "irq_not_rearmed_while_low",
+      "status": "PASS",
+      "evidence": "T6/T7/T24: enable_irq count is 0 for the whole low period; it becomes 1 only after the line reads high; a later switch-off still fires the IRQ"
+    },
+    {
+      "name": "flipback_during_countdown",
+      "status": "PASS",
+      "evidence": "T7 (requested scenario): line high at 1300 while the chip is counting down -> no orderly_poweroff, no backstop, IRQ re-armed; ready work sees 0xB6=3 and polls, then writes 0xB0=1 once at 21500 when 0xB6 reads 1; no write before that"
+    },
+    {
+      "name": "shutdown_restart_when_slider_on",
+      "status": "PASS",
+      "evidence": "T8 (requested scenario): slider_off latched then line high -> powerfail_suo_shutdown() calls emergency_restart(), cancels the backstop, does NOT program 200 ms and does NOT assert disabled-gpios"
+    },
+    {
+      "name": "shutdown_other_paths",
+      "status": "PASS",
+      "evidence": "T9 slider low after a slider-off -> 200 ms + disabled-gpios; T10 menu poweroff -> 200 ms, no restart, LCD reset untouched; T11 reboot -> OFF_TIME untouched; T23 no power controller -> chip untouched"
+    },
+    {
+      "name": "backstop_min_hold",
+      "status": "PASS",
+      "evidence": "T12: hold_ms 12000 -> backstop due 9000 for a 1000 flip, i.e. 8 s after the flip and 4 s before the real cut; T6: backstop due 17700 vs real cut 21750 (4.05 s margin)"
+    },
+    {
+      "name": "hold_clamp",
+      "status": "PASS",
+      "evidence": "T13: 4000 and 8000 clamp to 12000, 70000 clamps to 60000"
+    },
+    {
+      "name": "fallback_removed",
+      "status": "PASS",
+      "evidence": "T3: disabled-gpios pointing at the M5IOE1 without m5stack,power-controller leaves data->ioe NULL and the stock 2000 ms hold; T16/T17 OFF_TIME failure still takes the SysRq U + LCD reset path"
+    },
+    {
+      "name": "state_semantics_reading",
+      "status": "PASS",
+      "evidence": "T20 spurious edge with the slider on -> no poweroff, READY untouched; T21 flick back inside the debounce -> no poweroff, READY never cleared; T22 0xB6 read error -> orderly_poweroff"
+    },
+    {
+      "name": "remove_refcount",
+      "status": "PASS",
+      "evidence": "T18: remove restores 2000 when slider_off is clear and leaves the hold alone after a slider-off; the devm action still owns the i2c client reference on the probe-failure paths (devm_add_action_or_reset with data->ioe=NULL afterwards)"
+    },
+    {
+      "name": "hung_poweroff_flipback_gap",
+      "status": "FAIL",
+      "evidence": "T25/T26: slider_off latched, orderly_poweroff at 1500, userspace never reaches .shutdown, line high at 8000 or at 18000 -> emergency_restart() is never called: the backstop only runs SysRq S+U once, the chip returns to state 1 with SW_EN holding the boost, and READY is not restored; the board stays in a half-shutdown with read-only filesystems. A backstop-side line check covers flips before hold-4 s (T25, proposed patch) but a flip after that (T26) still has no path; a periodic poll armed in powerfail_orderly() until the cut would close the whole window. Non-blocking"
+    },
+    {
+      "name": "gpio_error_unbounded",
+      "status": "FAIL",
+      "evidence": "T19: gpiod_get_raw_value_cansleep() error -> powerfail_recheck() every 100 ms forever; no orderly_poweroff, no backstop, IRQ stays disabled, OFF_TIME left at 20000. Only reachable on a GPIO get failure (not realistic for the SoC GPIO); a bounded retry would close it"
+    },
+    {
+      "name": "proposed_backstop_restart",
+      "status": "PASS",
+      "evidence": "patches/0001 applied in powerfail_suo_proposed.c: after S+U the backstop checks the line and calls emergency_restart() when slider_off && slider_on; harness_proposed passes T25, leaves T26 unchanged and the other 24 scenarios unchanged (108 checks); partial fix only, not pushed to upstream"
+    },
+    {
+      "name": "overlay_property_rename",
+      "status": "PASS",
+      "evidence": "dtc 1.8.1 rebuild of the head overlay: exit 0, no warnings, dtbo sha256 33309ef4e3278ac76b44cdc97c106f9b2b410ecbce0262689a3a2fae83a8779e; decompiled a3fd3e8 -> ff4cd84 diff is exactly m5stack,power-controller + m5stack,power-hold-ms (plus its local fixup); 5623292 -> ff4cd84 is exactly the property rename; evidence/overlay-compile.txt"
+    },
+    {
+      "name": "emergency_restart_exported",
+      "status": "PASS",
+      "evidence": "rpi-6.12.y kernel/reboot.c: emergency_restart() sets system_state=SYSTEM_RESTART, takes no locks, is documented safe outside IRQ context and is EXPORT_SYMBOL_GPL; declared in include/linux/reboot.h"
+    },
+    {
+      "name": "reference_register_semantics",
+      "status": "PASS",
+      "evidence": "Open-IOE1 @4369350 README + firmware/main.c: 0xB6 0-4, state 2 max 100 ms, state 3 re-reads OFF_TIME live and clears READY, 0xB0 is host-writable, OFF_TIME min 200 applied per write (both bytes), boost is diode-OR of SW_EN and PB7; caveat: third-party reimplementation, not the stock binary"
+    },
+    {
+      "name": "hardware_validation",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer Zero hardware; the author's 4.1 s/4.9 s shutdown, 15.7 s backstop and clean next boot are self-reported and were not reproduced"
+    },
+    {
+      "name": "virtual_device_validation",
+      "status": "NOT RUN",
+      "evidence": "cardputer-zero profile supported=false creatable=false backend_ready=false, missing __missing_qemu__/__missing_rom__; evidence/local-profile-summary.txt"
+    },
+    {
+      "name": "kernel_build_w1",
+      "status": "NOT RUN",
+      "evidence": "no kernel headers or cross toolchain; docker daemon unusable (read-only containerd state dir). The author reports W=1 clean, not re-run here"
+    },
+    {
+      "name": "timing_fidelity",
+      "status": "NOT RUN",
+      "evidence": "1 jiffy = 1 ms; no I2C transfer latency, workqueue concurrency, or cancel_delayed_work_sync race; the M5IOE1 model quantizes its state machine to a 50 ms poll"
+    },
+    {
+      "name": "stock_dtbo_byte_identity",
+      "status": "NOT RUN",
+      "evidence": "the checked-in firmware/CardputerZero/overlays/cardputerzero-overlay.dtbo (sha256 e4425fee...) decompiles without a powerfail node, so it is an older build and the author's 'byte-identical to the installed stock dtbo' claim cannot be checked from the repository; only the source-level base->head diff was checked"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/host-harness-head.txt",
+      "description": "26 scenarios / 109 checks on the unchanged head source, all PASS"
+    },
+    {
+      "path": "evidence/host-harness-proposed.txt",
+      "description": "same harness with the backstop-restart proposal, 108 checks, all PASS"
+    },
+    {
+      "path": "evidence/requested-scenarios.txt",
+      "description": "T7 (line high during the countdown + READY restore), T8 (slider high at .shutdown), T25/T26 (flip back during a hung poweroff, before and after the backstop)"
+    },
+    {
+      "path": "evidence/reference-register-map.txt",
+      "description": "0xB0/0xB2/0xB6 rows, the power state machine and the SW_EN/PB7 diode-OR from the Open-IOE1 reference at 4369350"
+    },
+    {
+      "path": "evidence/overlay-compile.txt",
+      "description": "head dtbo build/hash, powerfail node, local fixup and base->head semantic diff"
+    },
+    {
+      "path": "evidence/kernel-api-checks.txt",
+      "description": "emergency_restart() body and GPL export, declaration"
+    },
+    {
+      "path": "evidence/local-profile-summary.txt",
+      "description": "redacted local Device Service cardputer-zero profile"
+    },
+    {
+      "path": "evidence/pr-metadata.txt",
+      "description": "PR state, head, scope and comment inventory at the second round"
+    }
+  ],
+  "notes": [
+    "Evidence class is host-level test plus code-level verification; no virtual-device or hardware run was possible on this host.",
+    "All four review points from the first round are fixed as described; the two requested scenarios pass with the expected timings.",
+    "Two non-blocking residuals: no restart point if a flip-back happens during a hung poweroff (T25/T26; the backstop sample only covers flips before hold-4 s), and an unbounded 100 ms recheck when the irq-gpios read fails (T19).",
+    "A partial proposal patch for the backstop restart is included and tested locally but was not pushed upstream.",
+    "No upstream branch was pushed, no PR was closed, and no other repository was modified; one English reply comment was posted."
+  ]
+}

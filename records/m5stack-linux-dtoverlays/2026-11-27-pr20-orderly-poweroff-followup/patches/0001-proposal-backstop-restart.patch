@@ -1,0 +1,21 @@
+--- a/modules/CardputerZero/powerfail_suo.c
++++ b/modules/CardputerZero/powerfail_suo.c
+@@ -127,6 +127,18 @@
+     handle_sysrq('s');
+     msleep(1000);
+     handle_sysrq('u');
++
++    /*
++     * Proposal: the slider started this poweroff and is back on, so the
++     * M5IOE1 cannot cut the power (SW_EN holds the boost). Linux is not
++     * coming back on its own either; restart now that the filesystems are
++     * read-only instead of leaving the board in a half-shutdown.
++     */
++    if (atomic_read(&data->slider_off) &&
++        gpiod_get_raw_value_cansleep(data->gpiod) > 0) {
++        dev_emerg(data->dev, "power switch back on: restarting\n");
++        emergency_restart();
++    }
+ }
+ 
+ /*

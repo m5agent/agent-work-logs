@@ -1,0 +1,117 @@
+# T7 - the requested 'line goes high during the countdown' sequence
+# (head ff4cd84, simulated clock in ms)
+== T7 line goes high during the countdown: no poweroff, READY restored ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+  chip countdown started, READY cleared                      PASS
+[t=  1300] ---- slider ON (irq-gpios high)
+[t=  1500] warn  powerfail irq occurred, but gpio is inactive, val=1
+[t=  1500] ARM  ready    delay=0 due=1500
+[t=  1500] ARM  ready    delay=500 due=2000
+  no orderly_poweroff                                        PASS
+  no backstop                                                PASS
+  IRQ re-enabled because the line is high                    PASS
+  ready work armed                                           PASS
+[t=  2000] ARM  ready    delay=500 due=2500
+[t=  2500] ARM  ready    delay=500 due=3000
+[t=  3000] ARM  ready    delay=500 due=3500
+[t=  3500] ARM  ready    delay=500 due=4000
+[t=  4000] ARM  ready    delay=500 due=4500
+[t=  4500] ARM  ready    delay=500 due=5000
+[t=  5000] ARM  ready    delay=500 due=5500
+[t=  5500] ARM  ready    delay=500 due=6000
+[t=  6000] ARM  ready    delay=500 due=6500
+[t=  6500] ARM  ready    delay=500 due=7000
+[t=  7000] ARM  ready    delay=500 due=7500
+[t=  7500] ARM  ready    delay=500 due=8000
+[t=  8000] ARM  ready    delay=500 due=8500
+[t=  8500] ARM  ready    delay=500 due=9000
+[t=  9000] ARM  ready    delay=500 due=9500
+[t=  9500] ARM  ready    delay=500 due=10000
+[t= 10000] ARM  ready    delay=500 due=10500
+[t= 10500] ARM  ready    delay=500 due=11000
+[t= 11000] ARM  ready    delay=500 due=11500
+[t= 11500] ARM  ready    delay=500 due=12000
+[t= 12000] ARM  ready    delay=500 due=12500
+[t= 12500] ARM  ready    delay=500 due=13000
+[t= 13000] ARM  ready    delay=500 due=13500
+[t= 13500] ARM  ready    delay=500 due=14000
+[t= 14000] ARM  ready    delay=500 due=14500
+[t= 14500] ARM  ready    delay=500 due=15000
+[t= 15000] ARM  ready    delay=500 due=15500
+[t= 15500] ARM  ready    delay=500 due=16000
+[t= 16000] ARM  ready    delay=500 due=16500
+[t= 16500] ARM  ready    delay=500 due=17000
+[t= 17000] ARM  ready    delay=500 due=17500
+[t= 17500] ARM  ready    delay=500 due=18000
+[t= 18000] ARM  ready    delay=500 due=18500
+[t= 18500] ARM  ready    delay=500 due=19000
+[t= 19000] ARM  ready    delay=500 due=19500
+[t= 19500] ARM  ready    delay=500 due=20000
+[t= 20000] ARM  ready    delay=500 due=20500
+[t= 20500] ARM  ready    delay=500 due=21000
+[t= 21000] ARM  ready    delay=500 due=21500
+  no READY write while the countdown still runs              PASS
+  chip still counting at 21000                               PASS
+[t= 21500] I2C  0xB0 <- 1 (READY)
+  READY written once at 21500, after 0xB6 reads ON           PASS
+  no poweroff / no restart                                   PASS
+  hold stays 20000                                           PASS
+== T8 slider high at .shutdown after a slider-off: emergency restart ==
+
+# T8 - the requested 'slider high at .shutdown after a slider-off' sequence
+== T8 slider high at .shutdown after a slider-off: emergency restart ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+  probe returns 0                                            PASS
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t=  1500] ---- slider ON (irq-gpios high)
+[t=  3000] CANCEL backstop (was due 17000)
+[t=  3000] emerg power switch back on: restarting
+  emergency_restart() called once                            PASS
+  200 ms cut NOT programmed                                  PASS
+  disabled-gpios NOT asserted                                PASS
+  backstop cancelled first                                   PASS
+== T9 slider low at .shutdown after a slider-off: no restart, 200 ms ==
+
+# T25/T26 - flip back during a poweroff that never reaches .shutdown
+== T25 flip back on while the poweroff is hung: no restart point ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t=  8000] ---- slider ON (irq-gpios high)
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+  no .shutdown means no restart                              PASS
+  backstop ran SysRq S + U                                   PASS
+  chip is back at ON, slider holds the boost                 PASS
+  no READY restore (ready work never armed)                  PASS
+== T26 flip back after the backstop: still no restart path ==
+[t=     0] I2C  0xB2 <- 20000
+[t=     0] info  powerfail-suo driver probed, irq=185, debounce=500 ms, orderly poweroff, power hold 20000 ms
+[t=  1000] ---- slider OFF (irq-gpios low)
+[t=  1000] ARM  check    delay=500 due=1500
+[t=  1500] I2C  0xB2 <- 20000
+[t=  1500] emerg power switch off: orderly poweroff, power held for 20000 ms
+[t=  1500] ARM  backstop delay=15500 due=17000
+  orderly poweroff started                                   PASS
+[t= 17000] emerg poweroff still running near the power cut: SysRq S + U
+[t= 18000] ---- slider ON (irq-gpios high)
+  no restart even with the proposal                          PASS
+  S + U still ran                                            PASS
+  chip back at ON, slider holds the boost                    PASS
+  no READY restore                                           PASS
+
+PASS: 109 checks, 0 failure(s)
