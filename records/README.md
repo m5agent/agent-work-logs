@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV esp32sim 浏览器接入 | PARTIAL（跨域虚拟设备通过，正式托管未执行） | [查看](m5stack-esp-emulator/2026-11-26-esp32sim-browser/) |
 | 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PARTIAL（esp32sim 26/26、UIFlow2 通过，Arduino 原件仅本地） | [查看](m5stack-firmware-archive/2026-11-26-docs-firmware/) |
 | 2026-11-26 | M5GFX | #450 board_spec 以 `generate`/`verify` 简化新增板卡，生成头文件仅顺序变化 | `PASS`（host Node 238 项 0 失败、C++ 34/34、trial 板无需改 targets/测试、CI 39/39；硬件与虚拟设备 NOT RUN） | [查看](m5gfx/2026-11-26-pr450-board-spec-workflow/) |
 | 2026-11-26 | ESPHome | #3 Unit ToF4M 的 `vl53l1x` 组件 cherry-pick：构建与配置通过，虚拟 CoreS3 上组件路径可用（模型缺口需补桥） | `REVIEW`（esp32-idf/esp8266-ard 构建通过；实机、PaHub、光学与 medium 模式 NOT RUN） | [查看](m5stack-esphome/2026-11-26-pr3-vl53l1x-tof4m/) |

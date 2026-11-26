@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV esp32sim 浏览器接入 | PARTIAL（跨域虚拟设备通过，正式托管未执行） | [查看](records/m5stack-esp-emulator/2026-11-26-esp32sim-browser/) |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV native esp32sim Device Service | PARTIAL (same-path virtual devices and retained HTTP evidence; physical hardware NOT RUN) | [查看](records/m5stack-esp-emulator/2026-11-26-native-esp32sim-service/) |
 | 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PARTIAL（esp32sim 26/26、UIFlow2 通过，Arduino 原件仅本地） | [查看](records/m5stack-firmware-archive/2026-11-26-docs-firmware/) |
 | 2026-11-25 | ESP Emulator | CoreS3 / Cardputer-Adv 文档 WASM 嵌入预研 | `PARTIAL`（正式文档跨域 iframe 无共享内存；两款顶层编辑器控制组通过） | [查看](records/m5stack-esp-emulator/2026-11-25-docs-wasm-embed/) |
