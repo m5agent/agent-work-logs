@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-26 | esp32sim | Tab5 stock UIFlow2 launcher and touch | PASS（GT911 / ILI9881C 虚拟设备） | [查看](records/esp32sim/2026-11-26-tab5-launcher/) |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV esp32sim 浏览器接入 | PARTIAL（跨域虚拟设备通过，正式托管未执行） | [查看](records/m5stack-esp-emulator/2026-11-26-esp32sim-browser/) |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV native esp32sim Device Service | PARTIAL (same-path virtual devices and retained HTTP evidence; physical hardware NOT RUN) | [查看](records/m5stack-esp-emulator/2026-11-26-native-esp32sim-service/) |
 | 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PASS（26 个 Arduino 镜像已公开且经 esp32sim 复测） | [查看](records/m5stack-firmware-archive/2026-11-26-docs-firmware/) |

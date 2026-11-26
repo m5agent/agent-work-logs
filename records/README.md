@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-26 | esp32sim | Tab5 stock UIFlow2 launcher and touch | PASS（GT911 / ILI9881C 虚拟设备） | [查看](esp32sim/2026-11-26-tab5-launcher/) |
 | 2026-11-26 | ESP Emulator | CoreS3 / Cardputer-ADV esp32sim 浏览器接入 | PARTIAL（跨域虚拟设备通过，正式托管未执行） | [查看](m5stack-esp-emulator/2026-11-26-esp32sim-browser/) |
 | 2026-11-26 | M5Stack 固件归档 | CoreS3 与 Cardputer-Adv 文档固件及复测工具 | PASS（26 个 Arduino 镜像已公开且经 esp32sim 复测） | [查看](m5stack-firmware-archive/2026-11-26-docs-firmware/) |
 | 2026-11-26 | M5GFX | #450 board_spec 以 `generate`/`verify` 简化新增板卡，生成头文件仅顺序变化 | `PASS`（host Node 238 项 0 失败、C++ 34/34、trial 板无需改 targets/测试、CI 39/39；硬件与虚拟设备 NOT RUN） | [查看](m5gfx/2026-11-26-pr450-board-spec-workflow/) |
