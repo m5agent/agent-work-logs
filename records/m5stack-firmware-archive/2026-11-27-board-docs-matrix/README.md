@@ -18,3 +18,5 @@
 - [178 images verified at a publication checkpoint](followups/2026-11-27-178-images/README.md)
 
 - [249 images verified at a publication checkpoint](followups/2026-11-27-249-images/README.md)
+
+- [358 images verified in the final GitHub readback](followups/2026-11-27-final-publication/README.md)
