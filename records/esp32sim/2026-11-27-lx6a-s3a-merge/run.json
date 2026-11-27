@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "branch": "m5/batch-lx6a",
+    "commit": "8e17dcd553fbd59b2dc9034cb5bd8eecb0884302",
+    "merged_commit": "8e82ee95f07710595d8a34c3858a99807193e690"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "stock_images": {
+      "atomu": "affa252d21f223bbe21cf1767604d345df97b2cb8dd62bc76993588d9bd9eda7",
+      "atom-echo": "8bae873945e85eff496670b9fbddcf7b5fecf31c99eba786fc15cce8c8e89472",
+      "atom-lite": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0"
+    },
+    "release_source": "e437118892520ba987c2d930a2428db1cab65ab1",
+    "s3_regression_archive_commit": "829cfe6bc14cbdff40b1f4980a5e1ea4f130f66c"
+  },
+  "execution": {
+    "runtime_sha256": "8481af9246d07e39d360de177edf6fa2b83480de28f94a6c9bb3f0992033cd11",
+    "environment": "native AArch64 macOS with release LTO disabled",
+    "gate_evidence": "evidence/merge-gate-summary.json",
+    "startup_evidence": "evidence/startup-summary.json"
+  },
+  "checks": {
+    "workspace": {
+      "passed": 1978,
+      "failed": 7,
+      "ignored": 0,
+      "filtered": 34,
+      "cases_failed": [
+        "hello_world_p4_rev3_smp",
+        "hello_world_p4_smp",
+        "hosted_p4",
+        "hosted_p4_rev3",
+        "hosted_rawtp_rx",
+        "hosted_rawtp_tx",
+        "wifi_sta_is_refused_where_it_does_not_work_yet"
+      ],
+      "log_sha256": "d7756614fee777ac60948ca5ae151dab056fe1c8126a3f4624f8209a75bf3fc9",
+      "suites": 151,
+      "known_p4_only": true
+    },
+    "clippy": {
+      "native": "PASS",
+      "wasm": "PASS"
+    },
+    "case_counts_before_firmware_diagnosis": {
+      "classic_atom": {
+        "PASS": 28,
+        "FAIL": 2,
+        "DOCS-DEFECT": 3
+      },
+      "atom_s3": {
+        "DOCS-DEFECT": 5,
+        "PASS": 39
+      }
+    },
+    "cores3": [
+      15,
+      15
+    ],
+    "cardputer_adv": [
+      11,
+      11
+    ],
+    "startup": {
+      "atomu": "FAIL",
+      "atom-echo": "FAIL",
+      "atom-lite-control": "PASS"
+    }
+  }
+}
