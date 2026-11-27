@@ -8,3 +8,4 @@
 - [Expanded matrix and per-device table](followups/expanded-matrix/README.md)
 - [Controller and media readbacks](followups/controller-media/README.md)
 - [Firmware archive and LFS readback](followups/firmware-archive/README.md)
+- [Prepared Pages release, live readback and per-device admissions](followups/pages/README.md)
