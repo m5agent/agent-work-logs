@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "overall_status": "PASS",
+  "date": "2026-11-27",
+  "title": "Deterministic SX1262 and CC1101 peer delivery",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "branch": "m5/fix-radio-peer-sync",
+    "base_commit": "9ac09fb79cefe4a2cb6f911172ffa6cbdfbd784a",
+    "commit": "239d2bfa7c5dc91ca36ec82bda4fb2fe6a82ba49"
+  },
+  "hardware": {},
+  "firmware": {
+    "uiflow253.bin": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+    "firmware/papermono/lora-1/sketch.merged.bin": "c80930408643fde59a8bc7b7f9f3bdfaafe6881966eff197db4037e04062b2ef",
+    "firmware/papermono/lora-2/sketch.merged.bin": "b271c68ab780c9ec386a84d21cab5c807d48c98bc2fb379754a5a3f4485c7497",
+    "firmware/nesso-n1/lora-1/sketch.merged.bin": "9f1c21052bf82232c937a781a882feaedc5bacd9606e11a77d2a77d402ec2256",
+    "firmware/nesso-n1/lora-2/sketch.merged.bin": "5e1a635e2e438201285ea1b659325ac2602cfb649c23b04199f38f37e8a5e8b6"
+  },
+  "execution": {
+    "environment": "Native arm64 macOS virtual-device validation",
+    "toolchain": "Rust 1.100.0",
+    "cpu_count": 10,
+    "runtime_sha256": {
+      "esp32sim": "3a54b111a1effa583aae674b8792b4dbba964a887f2b29a11b1665a503637059",
+      "esp32sim-p4": "20d4bce6c5ca18ed71db4964b923d32a2da9c8f92f72db2291640b6a5ac31c8e"
+    },
+    "loaded_cpu_workers": 10,
+    "fixture_sha256_by_relative_path": {
+      "roms/esp32s3_rev0_rom.elf": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "roms/esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551",
+      "uiflow253.bin": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+      "mono-seed.img": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+      "code/cdc-doc.py": "599bbe2ee340e0d8dbe2d8bf0053b8d172e5998290a8f3a5129f6220fec98a82",
+      "firmware/papermono/lora-1/sketch.merged.bin": "c80930408643fde59a8bc7b7f9f3bdfaafe6881966eff197db4037e04062b2ef",
+      "firmware/papermono/lora-2/sketch.merged.bin": "b271c68ab780c9ec386a84d21cab5c807d48c98bc2fb379754a5a3f4485c7497",
+      "firmware/nesso-n1/lora-1/sketch.merged.bin": "9f1c21052bf82232c937a781a882feaedc5bacd9606e11a77d2a77d402ec2256",
+      "firmware/nesso-n1/lora-2/sketch.merged.bin": "5e1a635e2e438201285ea1b659325ac2602cfb649c23b04199f38f37e8a5e8b6",
+      "adv-docs/cardputer_adv_lora1262_cap_receiver_example/source.py": "6c3765e32fd6d2b730f164fc1aea478d150738f918f25509216325d23678abe9",
+      "adv-docs/cardputer_adv_lora1262_cap_sender_example/source.py": "08bb6c92c945c25354dde44133711ccf51fc47320a7e079653f84351ac936f51",
+      "adv-docs/cardputer_adv_lora868_cap_receiver_example/source.py": "174c834489590531f2271229b5b5c0093ea12f1c941826b6d6873fd683778df0",
+      "adv-docs/cardputer_adv_lora868_cap_sender_example/source.py": "d5bb7f05ccab053c41e83dc6d85ea6ee9cf1e5036f91614975f07df474c3d626",
+      "cc1101/cc1101_cap_rf_rx_example.py": "725c082f699a054b1b5983cdac62981b3287d24675ee3002efbd5b8058512744",
+      "cc1101/cc1101_cap_rf_tx_example.py": "12d62591b8400f84dce2560601b4fe7939785ef6be1f9b574c1b419a58b2ce40"
+    }
+  },
+  "checks": [
+    {
+      "name": "LoRa repeated count and ordered payload digest",
+      "status": "PASS"
+    },
+    {
+      "name": "Isolated controls",
+      "status": "PASS"
+    },
+    {
+      "name": "CC1101 full packet window",
+      "status": "PASS"
+    },
+    {
+      "name": "C6 Thread and Zigbee reproducibility",
+      "status": "PASS"
+    },
+    {
+      "name": "workspace",
+      "status": "PASS"
+    },
+    {
+      "name": "clippy-native-final",
+      "status": "PASS"
+    },
+    {
+      "name": "clippy-wasm-final",
+      "status": "PASS"
+    },
+    {
+      "name": "cores3",
+      "status": "PASS"
+    },
+    {
+      "name": "adv",
+      "status": "PASS"
+    },
+    {
+      "name": "tab5",
+      "status": "PASS"
+    },
+    {
+      "name": "sentinels",
+      "status": "PASS"
+    },
+    {
+      "name": "privacy",
+      "status": "PASS"
+    },
+    {
+      "name": "c6_802154",
+      "status": "PASS"
+    },
+    {
+      "name": "Physical RF",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "Browser peer transport",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/c6-summary.json",
+    "evidence/controls-summary.json",
+    "evidence/regression-summary.json",
+    "evidence/trials-summary.json"
+  ]
+}

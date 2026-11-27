@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | Deterministic SX1262 and CC1101 peer delivery | PASS (native virtual-device validation) | [查看](esp32sim/2026-11-27-radio-peer-synchronization/) |
 | 2026-11-27 | esp32sim | LX6-B Stick integration and complete device matrix | PARTIAL (known LoRa loopback flake) | [查看](esp32sim/2026-11-27-lx6b-integration/) |
 | 2026-11-27 | esp32sim | Repeated SX1262 UDP loopback comparison | PARTIAL (virtual-device loopback) | [查看](esp32sim/2026-11-27-lora-loopback-repeat/) |
 | 2026-11-27 | esp32sim | C6-A NanoC6 and Nesso N1 integration | PASS (virtual-device regression gate) | [查看](esp32sim/2026-11-27-c6a-integration/) |
