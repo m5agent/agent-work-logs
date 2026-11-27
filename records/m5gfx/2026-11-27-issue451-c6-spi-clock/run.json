@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #451 C6: Arduino SPI runs at twice the requested clock after M5GFX init",
+  "source": {
+    "issue": "https://github.com/m5stack/M5GFX/issues/451",
+    "pull_request": "",
+    "repository": "m5stack/M5GFX",
+    "base_commit": "603092aab60e32fadd1d73abd472068a35e189e8"
+  },
+  "hardware": {},
+  "firmware": {
+    "kind": "arduino-merged",
+    "sha256": "df4a4e087708588204c3da5ef99ee290c54a14dfe894d0a991afe4347b1f62c1",
+    "size": 16777216,
+    "toolchain": "arduino-cli 1.6.0 / esp32:esp32 3.3.13",
+    "library": "M5GFX @ 603092aab60e32fadd1d73abd472068a35e189e8"
+  },
+  "execution": {
+    "environment": "macOS arm64; Device Service nesso-n1 profile, runtime=esp32sim (ESP32-C6, ST7789/SPI2)",
+    "task_id": "",
+    "session_id": ""
+  },
+  "checks": [
+    {
+      "name": "Arduino-only SPI 8 MHz baseline",
+      "status": "PASS",
+      "observed": "PCR sel=0 (XTAL), divider 5, derived SCLK 8 MHz"
+    },
+    {
+      "name": "PCR SPI2 mux after lgfx Bus_SPI init",
+      "status": "PASS",
+      "observed": "PCR_SPI2_CLKM_CONF=0x00500000, sel=1 (PLL_F80M)"
+    },
+    {
+      "name": "Arduino 8 MHz after M5GFX init",
+      "status": "PASS",
+      "observed": "sel=1, divider 5, derived SCLK 16 MHz (2x requested)"
+    },
+    {
+      "name": "Arduino 2 MHz after M5GFX init",
+      "status": "PASS",
+      "observed": "sel=1, divider 20, derived SCLK 4 MHz (2x requested)"
+    },
+    {
+      "name": "SCLK pin waveform",
+      "status": "NOT RUN",
+      "observed": "esp32sim GP-SPI does not model SPI clock frequency"
+    },
+    {
+      "name": "Hardware reproduction on C6",
+      "status": "NOT RUN",
+      "observed": "no ESP32-C6 hardware available on this host"
+    },
+    {
+      "name": "C5 / C61 / H2 / P4 runtime",
+      "status": "NOT RUN",
+      "observed": "IDF 5.5.5 source comparison only"
+    }
+  ],
+  "evidence": [
+    "evidence/serial-esp32sim.txt",
+    "evidence/build.log",
+    "evidence/registers.md"
+  ],
+  "notes": [
+    "SCLK is derived from the C6 clock mux and divider registers, not measured.",
+    "Reported hardware symptom (SX1262 read failure at 8 MHz) not re-verified.",
+    "Fix proposal not implemented; M5GFX read clock would drop to 13.33 MHz if the mux is restored."
+  ]
+}
