@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | S3-D PaperDIY and PaperS3 integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-s3d-integration/) |
 | 2026-11-27 | esp32sim | S3-C fork integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-s3c-integration/) |
 | 2026-11-27 | esp32sim | LX6-B classic Stick boards | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-lx6b-stick/) |
 | 2026-11-27 | esp32sim | S3-B fork integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-s3b-integration/) |
