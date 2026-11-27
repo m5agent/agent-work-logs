@@ -1,0 +1,1725 @@
+{
+  "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+  "base": "8e17dcd553fbd59b2dc9034cb5bd8eecb0884302",
+  "validation": "native virtual-device",
+  "docs_revision": "7219cc9286c39b463da84053deee40bc234625db",
+  "catalog_revision": "74ee6cb006105fe8553eb83071e23ae3361a57f1",
+  "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+  "runtimes": {
+    "83da911342fbf1f4392c6a6a692fdb37b79aab11": "edce6832742f92a821ddfe33ffa2a0a1ea0c933ddc0a509a721ec37f48be29e0",
+    "717269ce447d2722faa84e6fdc5e97660981c26e": "6d61387adde54859903946a6dd9dc13765324663cfe09f79b8f8d35bafcc1dc4",
+    "506a08eb4d50def9133896fe7d6d99b5a629cda0": "e10dedde9ff0bd5ff6d215a3ee830bbde604a374c634e3598d216cedd7dbaf4a",
+    "f528744221077c59a7ba6a5eeb146ec7bda90ff5": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d"
+  },
+  "docs_counts": {
+    "PASS": 83,
+    "FAIL": 2,
+    "DOCS-DEFECT": 7
+  },
+  "devices": {
+    "stickc": {
+      "axp192_m5stickc-1": {
+        "status": "PASS",
+        "reason": "Two simulated battery levels changed the documented display versus default",
+        "frame": [
+          80,
+          160,
+          1219,
+          "0473f209"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "62abe7c1a4643b924bf6469fcaaf98a01a0063561416b79d60b4d7e0e4fa66a4",
+        "exit": 0,
+        "script_sha256": {
+          "axp192_m5stickc-1": "693c492061ac4c5cf167945e0627679b5948e6e6d0c5cf507391770238c0822f",
+          "axp192_m5stickc-1-first": "b01ac39bd67e747cc5d395e065469fa851b2aad5247719c6182e822f99d415b8"
+        }
+      },
+      "axp192_m5stickc-2": {
+        "status": "PASS",
+        "reason": "M5.begin addressed AXP192 and enabled the panel rails and backlight",
+        "frame": [
+          80,
+          160,
+          0,
+          "58a2b0f8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "3c0437148504055ffe11bbffddfa7d1104d747027d3ebbac7e3dc9b1425d66f4",
+        "exit": 0
+      },
+      "axp192_m5stickc-3": {
+        "status": "PASS",
+        "reason": "AXP192 shutdown removed panel power after an active frame",
+        "frame": [
+          80,
+          160,
+          0,
+          "58a2b0f8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "e8551a16821bac25ca7f86312cab9a7917f4e9cfd95e0894c1c8396f9860a058",
+        "exit": 0,
+        "script_sha256": {
+          "axp192_m5stickc-3-restart": "cde1f4bfadb28b535cdf536c22814badfaf03efcbf499843efc8db4776e2a3d1"
+        }
+      },
+      "axp192_m5stickc-4": {
+        "status": "PASS",
+        "reason": "AXP192 LDO2 brightness followed the guest ramp",
+        "frame": [
+          80,
+          160,
+          179,
+          "5ca7b52c"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "95a633e17fc1d78cd3284d3f342062501d5b964a8c3fedf4ac3df7482617eab6",
+        "exit": 0
+      },
+      "axp192_m5stickc-5": {
+        "status": "PASS",
+        "reason": "Guest ScreenSwitch changed the visible backlight across the two checkpoints",
+        "frame": [
+          80,
+          160,
+          0,
+          "58a2b0f8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "95fd553ae2bc19f2d55174d95d0778a2eff92f769e643c53390bb6030ff304fb",
+        "exit": 0
+      },
+      "button-1": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          237,
+          "c961d988"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "c150f847948b2c253c3933b0bf181bf0d44b44ed98c0fe3fd65edd983b0284f5",
+        "exit": 0,
+        "script_sha256": {
+          "button-1": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-1-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-2": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          283,
+          "f4ea7e17"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "5f02d5723562aba40e5e2de46297ecaff0a7b51861f3e0d89fc34095b7cc07c0",
+        "exit": 0,
+        "script_sha256": {
+          "button-2": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-2-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-3": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          261,
+          "9630157a"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "002cc4d1c785f570cf3b256818de6e07c0e3cdcae55b6f50b7c01783b448ce6a",
+        "exit": 0,
+        "script_sha256": {
+          "button-3": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-3-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-4": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          470,
+          "6b043693"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "b3da4f24e4a78d5f5f9a37cb54277a4e2be9b2ad86585e4438c472c4e15f684a",
+        "exit": 0,
+        "script_sha256": {
+          "button-4": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-4-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-5": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          739,
+          "13badb7e"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "56378790154b34df9e9ab2f90198f7d1057d2722c6ece60ed09c3e0639c336dd",
+        "exit": 0,
+        "script_sha256": {
+          "button-5": "ed4d4e74be00b9e3c42901eda77bb19956d206612252fc044467e13adbbead35"
+        }
+      },
+      "button-6": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          2000,
+          "9feb0946"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "87df458ce478e8f7794a05a6bce715579abee719d955cbc3367199c3fe8085aa",
+        "exit": 0,
+        "script_sha256": {
+          "button-6": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-6-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-7": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          211,
+          "49ded953"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "57a7a079c5e35d8b11be49766a4c1a00b9791c57dab063aea1b931586c723681",
+        "exit": 0,
+        "script_sha256": {
+          "button-7": "36f1b6610d3d5bcbbd0ffb7f59f6e0648f90090e32066fac8feb8a2362223e10"
+        }
+      },
+      "button-8": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          488,
+          "4eaae4ec"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "919935a93ea4820d9f6972c408eb293c83ad9d6698212db5423ceaf7faa590ef",
+        "exit": 0,
+        "script_sha256": {
+          "button-8": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-8-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-9": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          80,
+          160,
+          301,
+          "51f0834b"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "b3d5e9f56cdc29d6c95e72b537b583ffbf0ca5ed743bd3d8a4bc1f49760b6541",
+        "exit": 0,
+        "script_sha256": {
+          "button-9": "fcf895f4482033ca398c622a33eda6e45b4fe9cabf7d81f9e4941425214c2d58"
+        }
+      },
+      "imu-1": {
+        "status": "PASS",
+        "reason": "Legacy sensor initialization returned success on UART",
+        "frame": [
+          80,
+          160,
+          0,
+          "58a2b0f8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "9ca3e46e7c226122aadf6da3db9ba096c31597c0c964d75e4282baf05dc28a05",
+        "firmware_sha256": "0b7c507d8ff9106bd55d5a75587031367af714ded24f71c715c6788d9a7bc05d",
+        "exit": 0
+      },
+      "imu-2": {
+        "status": "PASS",
+        "reason": "Distinct injected sensor inputs changed the application display versus idle",
+        "frame": [
+          80,
+          160,
+          306,
+          "d4ea0cd6"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "3f6b09d6f83ad5e3f82e03487d70a6f3d790e1ca0f760a4a7d773f664043d26f",
+        "exit": 0,
+        "script_sha256": {
+          "imu-2": "0f7ed243fb9dd4fb6598f0ed49aa2ee159ee7f873126d4d43b837ed6decfee7b",
+          "imu-2-first": "36cea1e613a257996bd3d8834d06a61999902bb423e603afc43c7b51b16fae57"
+        }
+      },
+      "imu-3": {
+        "status": "PASS",
+        "reason": "Distinct injected sensor inputs changed the application display versus idle",
+        "frame": [
+          80,
+          160,
+          247,
+          "2c1d427f"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "7b3c5a1b585ee22264c9980bdb20cebf274d8fdfeba9e640e9d31db3371c6dd2",
+        "exit": 0,
+        "script_sha256": {
+          "imu-3": "0f7ed243fb9dd4fb6598f0ed49aa2ee159ee7f873126d4d43b837ed6decfee7b",
+          "imu-3-first": "36cea1e613a257996bd3d8834d06a61999902bb423e603afc43c7b51b16fae57"
+        }
+      },
+      "imu-4": {
+        "status": "PASS",
+        "reason": "Distinct injected sensor inputs changed the application display versus idle",
+        "frame": [
+          80,
+          160,
+          237,
+          "3e911e5b"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "8e4b1e1c3c497e8f3661cf5a7280d5c3ffba1f952794ef5ee385fda90a127505",
+        "exit": 0,
+        "script_sha256": {
+          "imu-4": "0f7ed243fb9dd4fb6598f0ed49aa2ee159ee7f873126d4d43b837ed6decfee7b",
+          "imu-4-first": "36cea1e613a257996bd3d8834d06a61999902bb423e603afc43c7b51b16fae57"
+        }
+      },
+      "imu-5": {
+        "status": "FAIL",
+        "reason": "M5StickC 0.3.0 MPU6886.cpp:208–212 reads from 0x41 and interprets bytes 6–7 instead of bytes 0–1",
+        "frame": [
+          80,
+          160,
+          228,
+          "7bf5d411"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "e9eb9003eeb49d9ef67d799d6244fec0d7afe4ced0f4e5f0e59543e7e160c5ee",
+        "exit": 0,
+        "script_sha256": {
+          "imu-5": "1c897d6c685eecb0da8eb60f4a3323ee7ae66d48c82c1a213b44b2a87d6803ae",
+          "imu-5-first": "acab9b9875f5be58fe3594230504d6898d69613eda268ee4e36868ebd0c17fc4"
+        }
+      },
+      "lcd_m5stickc-1": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          12800,
+          "6c648fe0"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "9a521939aeeb4b88c89585fa1038dc72568e4e702b46b0eeccec8f02773e351d",
+        "exit": 0
+      },
+      "lcd_m5stickc-2": {
+        "status": "PASS",
+        "reason": "The 22-character red-on-white text matches its glyph counts and wrap",
+        "frame": [
+          80,
+          160,
+          1056,
+          "5e896154"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "fca5e0baa17c64644baddfe5a3275cb3d979a3d64719dfc73c2d4c693b55e9c0",
+        "exit": 0
+      },
+      "lcd_m5stickc-3": {
+        "status": "PASS",
+        "reason": "Default-font glyph counts and the documented cursor placement match",
+        "frame": [
+          80,
+          160,
+          103,
+          "1c84091c"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "04a17a8f44ccfb06654fbb96723c165af1f2730e811d8e720e76c35aa7bcbd69",
+        "exit": 0
+      },
+      "lcd_m5stickc-4": {
+        "status": "PASS",
+        "reason": "Default-font glyph counts and the documented cursor placement match",
+        "frame": [
+          80,
+          160,
+          169,
+          "a053d439"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "64d958579d303770542ba6ebd363abe7332c8a967caf213c90b47799b507dfa4",
+        "exit": 0
+      },
+      "lcd_m5stickc-5": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          1,
+          "0dfd548f"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "5063c3addace44f63a3719ac50b909630241cec5f8acf2e61788afa10176b115",
+        "exit": 0
+      },
+      "lcd_m5stickc-6": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          13,
+          "ca5f451b"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "2e20e12f29b6718acd4f70e4f90e426302807ff8f8f278b20b1a910ce247515d",
+        "exit": 0
+      },
+      "lcd_m5stickc-7": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          181,
+          "d213684d"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "dfa74ce39612c81ab04a79c29f99f1cdacd9274f1e3a165c629341186a8d1e90",
+        "exit": 0
+      },
+      "lcd_m5stickc-8": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          1194,
+          "25a65894"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "ac3c3d8cf7d8ea3ed96a769a2653f55b1b8716db0acd02f938cf8571faf8532f",
+        "exit": 0
+      },
+      "lcd_m5stickc-9": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          76,
+          "deb47030"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "15f0391f2b261f67e739588851ced896105b030251d73cfcb9d23128302b5337",
+        "exit": 0
+      },
+      "lcd_m5stickc-10": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          200,
+          "6ed67251"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "1366a2472d5c1313fb2a601228d187ed0e17d8c8a61830126daeaf4582ff695b",
+        "exit": 0
+      },
+      "lcd_m5stickc-11": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          80,
+          160,
+          180,
+          "4e645375"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "14bb2207f75e8deb927ca34d02e43e1585e7b31cb8d9aba411bd85aabca7feb0",
+        "exit": 0
+      },
+      "mic": {
+        "status": "PASS",
+        "reason": "Both PCM tones changed the guest waveform relative to silence",
+        "frame": [
+          80,
+          160,
+          12557,
+          "95f5dd26"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "48b815dbca7c3b5cc40560724d9d4a520e5cc32fc38946ce69204dbd1e0357ac",
+        "exit": 0
+      },
+      "pwm-1": {
+        "status": "DOCS-DEFECT",
+        "reason": "LEDC 2.x functions removed by the pinned Arduino-ESP32 3.x package",
+        "file": "static/en/arduino/m5stickc/pwm.md:31,35"
+      },
+      "pwm-2": {
+        "status": "DOCS-DEFECT",
+        "reason": "LEDC 2.x functions removed by the pinned Arduino-ESP32 3.x package",
+        "file": "static/en/arduino/m5stickc/pwm.md:63–64"
+      },
+      "rtc-1": {
+        "status": "PASS",
+        "reason": "Guest RTC write changed the BCD calendar and virtual time advanced",
+        "frame": [
+          80,
+          160,
+          0,
+          "58a2b0f8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "ded3fde9e6bc00adf618e358462f0389088d2892b7e75a588a81454871ca7929",
+        "exit": 0
+      },
+      "rtc-2": {
+        "status": "PASS",
+        "reason": "Guest RTC write changed the BCD calendar and virtual time advanced",
+        "frame": [
+          80,
+          160,
+          378,
+          "f8b4c625"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "bd136ff9ef068e4a4b8aa28127ee59ee7ba4cf37218f68e9cb4fc02ef19108f0",
+        "exit": 0
+      },
+      "rtc-3": {
+        "status": "PASS",
+        "reason": "Guest RTC write changed the BCD calendar and virtual time advanced",
+        "frame": [
+          80,
+          160,
+          0,
+          "58a2b0f8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "1c99d741b562331b96791dc26de0040331d91275440a36e7adb3aac8b07533e3",
+        "exit": 0
+      },
+      "rtc-4": {
+        "status": "PASS",
+        "reason": "Guest RTC write changed the BCD calendar and virtual time advanced",
+        "frame": [
+          80,
+          160,
+          563,
+          "d938eb90"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "0550554cb2b60c693c4db55c44532673911f9a354ac00130182c3b8f70a65a5a",
+        "exit": 0
+      },
+      "sh200q_m5stickc-1": {
+        "status": "DOCS-DEFECT",
+        "reason": "M5StickC 0.3.0 IMU does not expose I2C_Read_NBytes",
+        "file": "static/en/arduino/m5stickc/sh200q_m5stickc.md:23"
+      },
+      "sh200q_m5stickc-2": {
+        "status": "DOCS-DEFECT",
+        "reason": "getGyroData accepts float pointers, example passes int16_t pointers",
+        "file": "static/en/arduino/m5stickc/sh200q_m5stickc.md:37,50"
+      },
+      "sh200q_m5stickc-3": {
+        "status": "DOCS-DEFECT",
+        "reason": "getAccelData accepts float pointers, example passes int16_t pointers",
+        "file": "static/en/arduino/m5stickc/sh200q_m5stickc.md:68,81"
+      },
+      "spm1423_m5stickc": {
+        "status": "PASS",
+        "reason": "Both PCM tones changed the guest waveform relative to silence",
+        "frame": [
+          80,
+          160,
+          12557,
+          "9ff79229"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "48b815dbca7c3b5cc40560724d9d4a520e5cc32fc38946ce69204dbd1e0357ac",
+        "exit": 0
+      },
+      "system_m5stickc-1": {
+        "status": "DOCS-DEFECT",
+        "reason": "standalone sketch omits Arduino loop()",
+        "file": "static/en/arduino/m5stickc/system_m5stickc.md:51–56"
+      },
+      "system_m5stickc-2": {
+        "status": "PASS",
+        "reason": "System function displayed the BM8563 clock and its time advanced",
+        "frame": [
+          80,
+          160,
+          1032,
+          "6e6b2e2e"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "1c53bcb79b7b0875669fa0aee1f8ab6e35cb42e3ff1933feb57600b08dc325f2",
+        "exit": 0
+      },
+      "quickstart-helloworld": {
+        "status": "PASS",
+        "reason": "The Hello World glyphs occupy the expected region seen in the product photograph",
+        "frame": [
+          80,
+          160,
+          127,
+          "afb49adb"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "9f0e042130f8a3f37767395185b83fdb159c97a0e587f0b6aa701cfa3ad0f944",
+        "exit": 0
+      },
+      "stock": {
+        "status": "PASS",
+        "reason": "Stock menu changed after input; UART REPL read both buttons",
+        "input_frame_changed": true,
+        "uart_repl": true,
+        "buttons": {
+          "A": [
+            "1",
+            "0",
+            "1"
+          ],
+          "B": [
+            "1",
+            "0",
+            "1"
+          ]
+        },
+        "frame": [
+          80,
+          160,
+          7983,
+          "bcada87c"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "9a2cd6e465488a8575e58eabfc27969b17ddcdab6bc2820c583c8476522d5e6f",
+        "firmware_sha256": "2463fc362f6acfacccb678a2c40aeb733e470ca793ec4a100d2e077baa641f03",
+        "exit": 0,
+        "script_sha256": {
+          "stock-button": "0e66f8c3ee2f607cecede801a879cc3b6f6b5f0b75ef46d8abbadd394d95f78b",
+          "stock-repl": "7a0f60319a3be6deb3b345a23a055efd8aa727eaf74e4c0c2c2b6673c53ce2ac"
+        }
+      }
+    },
+    "stickc-plus": {
+      "button-1": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          237,
+          "4f211740"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "888dea34801a605063e9e99732f5a0127a1bca87ee70f5994c62acadf7c1fc4f",
+        "exit": 0,
+        "script_sha256": {
+          "button-1": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-1-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-2": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          283,
+          "796106b8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "e99974a1cd92896c0f27a1c72cfb0bc860aecd4f5e61728b5f5e215259fd6a76",
+        "exit": 0,
+        "script_sha256": {
+          "button-2": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-2-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-3": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          261,
+          "d0c50962"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "2ff6cf327405c27e3e7fef9fee0949b0e78d295e3065708b19bd4b62cafa174d",
+        "exit": 0,
+        "script_sha256": {
+          "button-3": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-3-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-4": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          470,
+          "2141bf94"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "83b15ce95278ec5f46e4846c84e30078274b53f0075150febc0ee2e82d9fb19c",
+        "exit": 0,
+        "script_sha256": {
+          "button-4": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-4-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-5": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          739,
+          "0cd7d759"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "a7250b1e2b22a2359cc43cd643c7616dc17a05e8ce5f8326848a483a68c0880c",
+        "exit": 0,
+        "script_sha256": {
+          "button-5": "ed4d4e74be00b9e3c42901eda77bb19956d206612252fc044467e13adbbead35"
+        }
+      },
+      "button-6": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          5720,
+          "cdb8bae1"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "96ae6add94683a15af10045e550e4566e24c1036d1776a51af2a9eee973c6d2f",
+        "exit": 0,
+        "script_sha256": {
+          "button-6": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-6-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-7": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          211,
+          "29730ce2"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "5ab4a468a4cdacdaee57c5951f8b965ddb8bb80bfec743dc75e5554100166666",
+        "exit": 0,
+        "script_sha256": {
+          "button-7": "36f1b6610d3d5bcbbd0ffb7f59f6e0648f90090e32066fac8feb8a2362223e10"
+        }
+      },
+      "button-8": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          488,
+          "8d3a1048"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "192fcc2669ce61464e6e981e17997a2550d10725e8a7fd5d4ca68f1047757390",
+        "exit": 0,
+        "script_sha256": {
+          "button-8": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b",
+          "button-8-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "button-9": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          301,
+          "eec56209"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "34d7fa4920d7cc28e66a089376c01933980691c04a0c9e13e0426d25c0c65467",
+        "exit": 0,
+        "script_sha256": {
+          "button-9": "fcf895f4482033ca398c622a33eda6e45b4fe9cabf7d81f9e4941425214c2d58"
+        }
+      },
+      "buzzer": {
+        "status": "FAIL",
+        "reason": "M5StickCPlus 0.1.1 Speaker.cpp:14,31 attaches GPIO2 at 0 Hz and calls the pin API with channel 0",
+        "frame": [
+          135,
+          240,
+          0,
+          "fae23ff0"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "892df1588bc1e7b9b2830ecdd728ae5f33f794dc3e2728d74954d2e206be7d4b",
+        "exit": 0
+      },
+      "display-1": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          32400,
+          "169842c2"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "d12af2354876377a3047282ce27680d58095415fcac73e0156762b47212b04c8",
+        "exit": 0
+      },
+      "display-2": {
+        "status": "PASS",
+        "reason": "The 22-character red-on-white text matches its glyph counts and wrap",
+        "frame": [
+          135,
+          240,
+          1056,
+          "9d60731d"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "9fc8f3567f62a2dbc4a2de298e91b121535df89d4cea8b3a52350bba09126b0a",
+        "exit": 0
+      },
+      "display-3": {
+        "status": "PASS",
+        "reason": "Default-font glyph counts and the documented cursor placement match",
+        "frame": [
+          135,
+          240,
+          103,
+          "c9885213"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "fd8837bac9ab53bce5d5fb5f7ed853075e60ade4c9743c58161c9df65985c47b",
+        "exit": 0
+      },
+      "display-4": {
+        "status": "PASS",
+        "reason": "Default-font glyph counts and the documented cursor placement match",
+        "frame": [
+          135,
+          240,
+          169,
+          "e489d84c"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "d45c1e56b89df6084ca9fc43af45dfc4c108fa9303a88512fd42daad6eee23ce",
+        "exit": 0
+      },
+      "display-5": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          1,
+          "11593d20"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "282561b7681766c8f0c71eb9b40ba0fb04fb1186c78215704f43736888024e5e",
+        "exit": 0
+      },
+      "display-6": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          13,
+          "3687985a"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "968032a976a6ab34d1fe84fbc725b4a13d139599a5c911f5c4bc71a28f7daf68",
+        "exit": 0
+      },
+      "display-7": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          181,
+          "300bf109"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "849e744121255d6a9f7856c40986f56b39482797c5300f21469758692ba4375a",
+        "exit": 0
+      },
+      "display-8": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          1194,
+          "c4f9ae31"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "f1ba0b496701350b9a4426070bff4e8a96bfde573eca0e95ab02ed44afd7894a",
+        "exit": 0
+      },
+      "display-9": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          76,
+          "70d7ddb6"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "c219690b582a16cf551e2ec801452c65cfbf4bc3ec3fde1295578d204a287cf9",
+        "exit": 0
+      },
+      "display-10": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          200,
+          "d20f951a"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "b8a766a3b6cc6fa57c164debf92ca145c61f772b8515c9845c6872c14657b000",
+        "exit": 0
+      },
+      "display-11": {
+        "status": "PASS",
+        "reason": "Visible pixel count or fill color matches the sketch operation",
+        "frame": [
+          135,
+          240,
+          180,
+          "437846bc"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "a3118e2fa919326ae07f005d488e80a08116da235eb6d3f91a2799e6e0b17038",
+        "exit": 0
+      },
+      "imu": {
+        "status": "PASS",
+        "reason": "Distinct injected sensor inputs changed the application display versus idle",
+        "frame": [
+          135,
+          240,
+          1141,
+          "3f6d14d5"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "eb6a7f425b7549e11c9c02f2cb2c453a1fb942f4a07e5b2a12c0fd2bbec303db",
+        "firmware_sha256": "7cd2b87fee0ef84064440dae694cf2a0fa7af0817059e90a1dba67cff7e07c0c",
+        "exit": 0,
+        "script_sha256": {
+          "imu": "0f7ed243fb9dd4fb6598f0ed49aa2ee159ee7f873126d4d43b837ed6decfee7b",
+          "imu-first": "36cea1e613a257996bd3d8834d06a61999902bb423e603afc43c7b51b16fae57"
+        }
+      },
+      "mic": {
+        "status": "PASS",
+        "reason": "Both PCM tones changed the guest waveform relative to silence",
+        "frame": [
+          135,
+          240,
+          32157,
+          "8f3e80db"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "cafb6ee55228503e6fcdb176de0dcb4630d3bc92531babe45099611f430604af",
+        "exit": 0
+      },
+      "power-1": {
+        "status": "PASS",
+        "reason": "Two simulated battery levels changed the documented display versus default",
+        "frame": [
+          135,
+          240,
+          1219,
+          "7e9510a7"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "64c8255d142167fced09df1d287f26f7744924e1e3dc225bcbaf47ddb0bc1cbd",
+        "exit": 0,
+        "script_sha256": {
+          "power-1": "693c492061ac4c5cf167945e0627679b5948e6e6d0c5cf507391770238c0822f",
+          "power-1-first": "b01ac39bd67e747cc5d395e065469fa851b2aad5247719c6182e822f99d415b8"
+        }
+      },
+      "power-2": {
+        "status": "PASS",
+        "reason": "M5.begin addressed AXP192 and enabled the panel rails and backlight",
+        "frame": [
+          135,
+          240,
+          0,
+          "fae23ff0"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "091c5aafad0a5c4da5fd8e1f632dfebbc2b1370b013da3beb49ea96947a9c159",
+        "exit": 0
+      },
+      "power-3": {
+        "status": "PASS",
+        "reason": "AXP192 shutdown removed panel power after an active frame",
+        "frame": [
+          135,
+          240,
+          0,
+          "fae23ff0"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "e739748b9774bc75318f3b727aba0ce1b057aca5617d8e979b4f63bb6dec5324",
+        "exit": 0,
+        "script_sha256": {
+          "power-3-restart": "cde1f4bfadb28b535cdf536c22814badfaf03efcbf499843efc8db4776e2a3d1"
+        }
+      },
+      "power-4": {
+        "status": "PASS",
+        "reason": "AXP192 LDO2 brightness followed the guest ramp",
+        "frame": [
+          135,
+          240,
+          179,
+          "2fed8d55"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "51b933338c0a917750102653ffd571fdc8c1d2b7f08fcf766c943a8fcaa1b8c6",
+        "exit": 0
+      },
+      "power-5": {
+        "status": "PASS",
+        "reason": "Guest ScreenSwitch changed the visible backlight across the two checkpoints",
+        "frame": [
+          135,
+          240,
+          0,
+          "fae23ff0"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "0a87807d9c41e40d93cdef25205fed3ad1f7c515a4656a2ffc86476e84e78ad2",
+        "exit": 0
+      },
+      "quickstart-display": {
+        "status": "PASS",
+        "reason": "The color-fill sequence advances to the documented Display Test lettering",
+        "frame": [
+          135,
+          240,
+          32400,
+          "1d67dcb5"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "7c66d997cd0976b3a0f24e3ca84dc815bc8e3c2f40a1fa6cc7ac0d0d70aa558c",
+        "exit": 0
+      },
+      "stock": {
+        "status": "PASS",
+        "reason": "Stock menu changed after input; UART REPL read both buttons",
+        "input_frame_changed": true,
+        "uart_repl": true,
+        "buttons": {
+          "A": [
+            "1",
+            "0",
+            "1"
+          ],
+          "B": [
+            "1",
+            "0",
+            "1"
+          ]
+        },
+        "frame": [
+          135,
+          240,
+          31021,
+          "6f764c14"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "00c5f9713586c4b8c7d2a0ed19b1dedc9f42819c554989fd5e1025f479fc992c",
+        "firmware_sha256": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+        "exit": 0,
+        "script_sha256": {
+          "stock-button": "0e66f8c3ee2f607cecede801a879cc3b6f6b5f0b75ef46d8abbadd394d95f78b",
+          "stock-repl": "7a0f60319a3be6deb3b345a23a055efd8aa727eaf74e4c0c2c2b6673c53ce2ac"
+        }
+      }
+    },
+    "stickc-plus-se": {
+      "battery": {
+        "status": "PASS",
+        "reason": "Two simulated battery levels changed the documented display versus default",
+        "frame": [
+          135,
+          240,
+          1916,
+          "c9dd8e4a"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "76c34229b01a81e4401b7f3251e98cc86e818e375fdab8d2aced53660e5e1849",
+        "exit": 0,
+        "script_sha256": {
+          "battery": "693c492061ac4c5cf167945e0627679b5948e6e6d0c5cf507391770238c0822f",
+          "battery-first": "b01ac39bd67e747cc5d395e065469fa851b2aad5247719c6182e822f99d415b8"
+        }
+      },
+      "button": {
+        "status": "PASS",
+        "reason": "Scripted GPIO input changed the documented button display versus idle",
+        "frame": [
+          135,
+          240,
+          1032,
+          "2fede38f"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "4241d8be2461d6444c60d5cca6263417a303af6e9d0bda63ec26ce132b0b8612",
+        "exit": 0,
+        "script_sha256": {
+          "button": "fb3c759b1539d6eeafe2ca9ceb666cf17c659bca5b9889bf2597cd71525b3c60",
+          "button-held": "7dcd91f40f460a026be3dc216b04c7ce2c8cee4f31f98f0ff7abcbb46b88d03b"
+        }
+      },
+      "display": {
+        "status": "PASS",
+        "reason": "Native frame shows the expected 20×20 rectangles and circles at distinct checkpoints",
+        "frame": [
+          135,
+          240,
+          32400,
+          "b74986ae"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "ec4b2bae22a0bc8516d9deba500b09a171d8e17c4a9a31df5841234ef3b1d730",
+        "exit": 0
+      },
+      "ir_nec": {
+        "status": "PASS",
+        "reason": "Decoded two expected NEC commands from the active-low GPIO9 PWM envelope",
+        "frame": [
+          135,
+          240,
+          1969,
+          "3d8c5a5a"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "d73af24be9df6bde3c56db6fb1b3dc6081ee8aa092756dbcf939d2f632dcf65d",
+        "exit": 0
+      },
+      "mic": {
+        "status": "PASS",
+        "reason": "Distinct tone and silence frames; routed replay bursts (Hz, ms) [(738.1, 989.0)]",
+        "frame": [
+          135,
+          240,
+          6233,
+          "a5a45e24"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "8e85f5f98100e55722fc419d760b3e76fac85127a12f78be3790990cb1319e1b",
+        "exit": 0,
+        "script_sha256": {
+          "mic-playback": "797b8da0de6acf9fb0ef394bf56ae0424de695560346d8de7454a2e15e66008d"
+        }
+      },
+      "speaker": {
+        "status": "PASS",
+        "reason": "Routed I2S piezo bursts (Hz, ms) [(7000.2, 99.9), (4000.0, 199.8), (7000.2, 95.9), (4000.0, 199.8), (6999.8, 97.1), (4000.0, 128.0)]",
+        "frame": [
+          135,
+          240,
+          373,
+          "f9ca3772"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "3e16d4b062dd0103e0d43442e5706c61b3c9885719ccd5f065cc3726ef414f8a",
+        "exit": 0
+      },
+      "wakeup": {
+        "status": "PASS",
+        "reason": "Timed wake reset followed scripted button input and idle showed one boot",
+        "frame": [
+          135,
+          240,
+          3997,
+          "182770fd"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "556cb44bd5a938b1381d7d3b10846cd8b8cd93da0e498c6bd4c3bc6114534008",
+        "firmware_sha256": "921ada10019f9e4c9990352d5edd0a94f191e77be3460cb8616c605e293fe0a8",
+        "exit": 0,
+        "script_sha256": {
+          "wakeup": "ca31b8547c0788d18ebedb62ba6f6fb4c2184e12195e2f8d667beecdab88d231"
+        }
+      },
+      "quickstart-scrollgraph": {
+        "status": "PASS",
+        "reason": "Six plotted colors and grid span the native display and advance across checkpoints",
+        "frame": [
+          135,
+          240,
+          1851,
+          "b5e3572c"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "9b7bebf1eed5f422f22e513825da33c5b9ac8ca66ddc570bd8b06b078736e29a",
+        "exit": 0
+      },
+      "stock": {
+        "status": "PASS",
+        "reason": "Stock menu changed after input; UART REPL read both buttons",
+        "input_frame_changed": true,
+        "uart_repl": true,
+        "buttons": {
+          "A": [
+            "1",
+            "0",
+            "1"
+          ],
+          "B": [
+            "1",
+            "0",
+            "1"
+          ]
+        },
+        "frame": [
+          135,
+          240,
+          31022,
+          "685e6dab"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "8fe7880cf7ef9fbade80d65ae3b514523308d37e4f299fc4001f766827704d36",
+        "firmware_sha256": "0c7055bb8e64afe1d8fa4fd4bdc0961ca0d6366351aca5d6c83eaaf72155ee88",
+        "exit": 0,
+        "script_sha256": {
+          "stock-button": "0e66f8c3ee2f607cecede801a879cc3b6f6b5f0b75ef46d8abbadd394d95f78b",
+          "stock-repl": "7a0f60319a3be6deb3b345a23a055efd8aa727eaf74e4c0c2c2b6673c53ce2ac"
+        }
+      }
+    },
+    "stickc-plus2": {
+      "battery": {
+        "status": "PASS",
+        "reason": "Two simulated battery levels changed the documented display versus default",
+        "frame": [
+          135,
+          240,
+          1046,
+          "4ed97b18"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "a9fcbe8608c541b9de39399e6d535c0e097752201e041cacc1f87ae9b0a7a09a",
+        "exit": 0,
+        "script_sha256": {
+          "battery": "936e7e4ddb962e73f79884e430cfb008bec7f6d7a95d06c05c99706956544e64",
+          "battery-first": "84a269d99645b8c108b25bda6b89294eb73ebf6ac33ef01e362d7a42041d0c2c"
+        }
+      },
+      "button": {
+        "status": "DOCS-DEFECT",
+        "reason": "M5StickCPlus2 1.0.1 exposes BtnC, example calls BtnPWR",
+        "file": "static/en/arduino/m5stickc_plus2/button.md:33,36"
+      },
+      "buzzer": {
+        "status": "PASS",
+        "reason": "Routed I2S piezo bursts (Hz, ms) [(10000.4, 99.9), (4000.0, 19.8), (10000.4, 99.9), (4000.0, 16.2), (10000.4, 99.9), (4013.6, 18.4)]",
+        "frame": [
+          135,
+          240,
+          868,
+          "f5f70cd7"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "5582c83519a02dd7af8034b966065256cf90244129437c09bf0bd82cee66e6de",
+        "exit": 0
+      },
+      "display": {
+        "status": "PASS",
+        "reason": "Native frame shows the expected 20×20 rectangles and circles at distinct checkpoints",
+        "frame": [
+          135,
+          240,
+          32400,
+          "dfa326ea"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "499ff2c14be1e2cc6424f4855bcec2ce01de37dca2c9b08efd796611b5b4fb4f",
+        "exit": 0
+      },
+      "imu": {
+        "status": "PASS",
+        "reason": "UART reports both injected accelerometer vectors and the idle control ran",
+        "frame": [
+          135,
+          240,
+          1861,
+          "ab003362"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+        "firmware_sha256": "abfb648a8e8493df181e049ce8d8f547bd1b211d29c0740fd4df329924778ddf",
+        "exit": 0,
+        "script_sha256": {
+          "imu": "0f7ed243fb9dd4fb6598f0ed49aa2ee159ee7f873126d4d43b837ed6decfee7b",
+          "imu-first": "36cea1e613a257996bd3d8834d06a61999902bb423e603afc43c7b51b16fae57"
+        }
+      },
+      "ir_nec": {
+        "status": "PASS",
+        "reason": "Decoded GPIO19 NEC codes cb341111, ca351111, c9361111, c8371111, c7381111",
+        "frame": [
+          135,
+          240,
+          2848,
+          "bc0056a8"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "c5648898ff9354b5c618d7bcb7b2f8454a786af134177ce985a04ed834cec055",
+        "exit": 0
+      },
+      "led": {
+        "status": "PASS",
+        "reason": "G19 SET/CLR edges observed through the GPIO controller",
+        "frame": [
+          135,
+          240,
+          762,
+          "4f757d51"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "bc93ea3cf0931072c3d03a296cabc8a51c398be21296e0ac5285396392f40e34",
+        "exit": 0
+      },
+      "mic": {
+        "status": "PASS",
+        "reason": "Distinct tone and silence frames; routed replay bursts (Hz, ms) [(732.9, 1049.2)]",
+        "frame": [
+          135,
+          240,
+          2774,
+          "df8a0fab"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "fb7b241abbb1168d8f97286b4f5ab1ad0c37a7efb9c9205f18e443547d095791",
+        "exit": 0,
+        "script_sha256": {
+          "mic-playback": "797b8da0de6acf9fb0ef394bf56ae0424de695560346d8de7454a2e15e66008d"
+        }
+      },
+      "rtc": {
+        "status": "PASS",
+        "reason": "Virtual Wi-Fi/SNTP populated the hardware RTC",
+        "frame": [
+          135,
+          240,
+          1392,
+          "92790915"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "b7c2850ec9a3d3be1a46722261207e46ceba6976991e9cc78f56eaa1b25ea055",
+        "exit": 0
+      },
+      "wakeup": {
+        "status": "PASS",
+        "reason": "Timed wake reset followed scripted button input and idle showed one boot",
+        "frame": [
+          135,
+          240,
+          1106,
+          "990cf002"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "556cb44bd5a938b1381d7d3b10846cd8b8cd93da0e498c6bd4c3bc6114534008",
+        "firmware_sha256": "83c12e633a21f5bf55a2dc8ae8933d1103312e4fa00dca190116544154d693a3",
+        "exit": 0,
+        "script_sha256": {
+          "wakeup": "ca31b8547c0788d18ebedb62ba6f6fb4c2184e12195e2f8d667beecdab88d231"
+        }
+      },
+      "quickstart-display": {
+        "status": "PASS",
+        "reason": "Native frame shows the expected 20×20 rectangles and circles at distinct checkpoints",
+        "frame": [
+          135,
+          240,
+          32400,
+          "dfa326ea"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "firmware_sha256": "b660a3cf47a64ed3e5506e164f4ca8f1b431c3f77c79693b1c9e5a074b3fba35",
+        "exit": 0
+      },
+      "stock": {
+        "status": "PASS",
+        "reason": "Stock menu changed after input; UART REPL read both buttons",
+        "input_frame_changed": true,
+        "uart_repl": true,
+        "buttons": {
+          "A": [
+            "1",
+            "0",
+            "1"
+          ],
+          "B": [
+            "1",
+            "0",
+            "1"
+          ]
+        },
+        "frame": [
+          135,
+          240,
+          31106,
+          "7f594e68"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "3759c7a35ed8e4dcfee2d4128ccbb5fbaab8095086a047d673823463a923e8eb",
+        "firmware_sha256": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+        "exit": 0,
+        "script_sha256": {
+          "stock-button": "a2729a0c95bba3ea4177b12271c3a5fcaf406b6c4a3f87f96ce33bac38f61ea8",
+          "stock-repl": "7a0f60319a3be6deb3b345a23a055efd8aa727eaf74e4c0c2c2b6673c53ce2ac"
+        }
+      }
+    },
+    "m5stick": {
+      "factory": {
+        "status": "FAIL",
+        "reason": "Factory app reports MPU9250 probe FF and the visible OLED stays blank",
+        "guest_boot": true,
+        "frame": [
+          64,
+          128,
+          0,
+          "db13c854"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "5e572502601865c6d450530e43b3606e379146f0d95153b3306f05d316ab3e67",
+        "firmware_sha256": "84228dfb6f0dd9b84b63c33f93a53545d8d43658893f432e3eaf4313923bffca",
+        "exit": 0
+      },
+      "probe": {
+        "status": "PASS",
+        "reason": "Controller probes check sensor input readback and native framebuffer",
+        "frame": [
+          64,
+          128,
+          128,
+          "78746a81"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "da2c8f1f397073dac0bc07066716f2d031b3db16cb40b7fd740f49b31fd45687",
+        "firmware_sha256": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0",
+        "exit": 0,
+        "script_sha256": {
+          "probe": "9ab1f892116ae6f2a8dcb08920fbcc4dd6dcfb9fca7ac2b4318ebef63192f019"
+        }
+      }
+    },
+    "stickt2": {
+      "factory": {
+        "status": "FAIL",
+        "reason": "Factory app renders its splash and prints error=2 without a complete VoSPI frame",
+        "guest_boot": true,
+        "frame": [
+          135,
+          240,
+          31249,
+          "1be87970"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "00b81fe94683b5c35cb506de86311490b5b7152aef410c7421c01a5dd19a33a3",
+        "firmware_sha256": "bb33ffd41f9c6f9235b2fb44eac893b7ce6f70879f48eed9cb1ff75ef9419cd7",
+        "exit": 0
+      },
+      "probe": {
+        "status": "PASS",
+        "reason": "Controller probes check sensor input readback and native framebuffer",
+        "frame": [
+          135,
+          240,
+          16200,
+          "f63c63b5"
+        ],
+        "runtime": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "console_sha256": "1af4526ec64b31098a6adf2894479e1294b38e8b10a0cd5c2b16c9e178016f05",
+        "firmware_sha256": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0",
+        "exit": 0,
+        "script_sha256": {
+          "probe": "3cc6317b2381aa08de80a5a35ac56f531c7703730294797224de23fff3444bf2"
+        }
+      }
+    }
+  },
+  "regressions": {
+    "cores3": {
+      "status": "PASS",
+      "passed": 15,
+      "total": 15,
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "e82c58e23ea124db720a6334227485627ef5dc923e694364912af1040deced74"
+    },
+    "adv": {
+      "status": "PASS",
+      "passed": 11,
+      "total": 11,
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "6cce1b992f902a97e50ccc103dc5d8199685c70020b765241a9fcd4be15c8848"
+    },
+    "atom-lite": {
+      "counts": {
+        "PASS": 7
+      },
+      "exceptions": {},
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "0d7730b8e8f0bc419341b8e33551a4033cc4326eec6c364500dadb495e325004"
+    },
+    "atom-matrix": {
+      "counts": {
+        "PASS": 8
+      },
+      "exceptions": {},
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "f8a7f5c4b90f804b7b63233376d140b7fa7a84e09aa7103c11685a0513a26e1f"
+    },
+    "atom-matrix-v11": {
+      "counts": {
+        "PASS": 8
+      },
+      "exceptions": {},
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "f8a7f5c4b90f804b7b63233376d140b7fa7a84e09aa7103c11685a0513a26e1f"
+    },
+    "atomu": {
+      "counts": {
+        "PASS": 2,
+        "FAIL": 1
+      },
+      "exceptions": {
+        "stock-startup": "FAIL"
+      },
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "4753ef8339057f7107463cde83659ff2c40483b87f1a670c13083c3caee250d0"
+    },
+    "atom-echo": {
+      "counts": {
+        "DOCS-DEFECT": 3,
+        "PASS": 3,
+        "FAIL": 1
+      },
+      "exceptions": {
+        "quickstart-echorest": "DOCS-DEFECT",
+        "quickstart-playmusic": "DOCS-DEFECT",
+        "quickstart-recordplay": "DOCS-DEFECT",
+        "stock-startup": "FAIL"
+      },
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "fa0d4427e8a787652bc98b95279a3c76b5d48a7e25b0ae9465c8ebf0ec944622"
+    },
+    "basic-v27": {
+      "status": "PASS",
+      "counts": {
+        "PASS": 9,
+        "DOCS-DEFECT": 1
+      },
+      "exceptions": {
+        "imu": {
+          "status": "DOCS-DEFECT",
+          "reason": "Fixture assignment points Basic at m5core/imu.md line 9, which targets Gray. K001-V27 Basic has no onboard IMU."
+        }
+      },
+      "source": "506a08eb4d50def9133896fe7d6d99b5a629cda0",
+      "runtime_sha256": "e10dedde9ff0bd5ff6d215a3ee830bbde604a374c634e3598d216cedd7dbaf4a",
+      "log_sha256": "4665dba10ae03d0b2ad3bf7778067d788d775ebbb15a0c3e80c6a4235be95feb"
+    },
+    "core2": {
+      "status": "FAIL",
+      "counts": {
+        "PASS": 14,
+        "FAIL": 1
+      },
+      "exceptions": {
+        "microsd": {
+          "status": "FAIL",
+          "reason": "missing differentiated decoded images or no-card state"
+        }
+      },
+      "source": "506a08eb4d50def9133896fe7d6d99b5a629cda0",
+      "runtime_sha256": "e10dedde9ff0bd5ff6d215a3ee830bbde604a374c634e3598d216cedd7dbaf4a",
+      "log_sha256": "b7df9f836668ebb919455f01b90d3c784db160accd51b5bae864d8ca354e011c"
+    },
+    "core2-microsd-retest": {
+      "status": "PASS",
+      "check": {
+        "status": "PASS",
+        "reason": "Two guest-decoded images, missing-card control and exact persisted WriteTest.txt"
+      },
+      "input_sha256": {
+        "simulator": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+        "rom": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+        "sd_seed": "bcaef04c9c52d21282a30ae56a5f096d6df8c0b698e1c0dd77d7c66c31747b00",
+        "stock": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+      },
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5"
+    },
+    "core2-power-stock": {
+      "status": "PASS",
+      "checks": {
+        "battery": {
+          "status": "PASS",
+          "reason": "Baseline and both injected states produced distinct LCD values"
+        },
+        "stock": {
+          "status": "PASS",
+          "reason": "Stock UIFlow2 home screen and UART0 input round-trip"
+        }
+      },
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d"
+    },
+    "core2-axp192-power-stock": {
+      "status": "PASS",
+      "checks": {
+        "battery": {
+          "status": "PASS",
+          "reason": "Original battery guest showed three frames with signed battery current, voltage and idle",
+          "firmware_sha256": "6ce2438971d943187d1b7479030dbe4a30e2a529a873cd4eb25abb63891b7bdb",
+          "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+          "cases": {
+            "low": {
+              "frame_sha256": "f1083cb231d14019d352c7b26acf3579c2c7c388f7490b61d620b32d9e2a6414",
+              "script_sha256": "f092861c615f591d98b39cedde0255a70c0148e5ac3c847c18ee40794adde445",
+              "axp192_reads": 24,
+              "inputs_accepted": true
+            },
+            "high": {
+              "frame_sha256": "20fa0f344b553b9ccf08dd902af64be5cfe4b8787dd4b3fe7713202296b6ca76",
+              "script_sha256": "49f7621effd29d232a63ce87d089f59ad5b1ff5951a60a43ee971aefe5d6aac2",
+              "axp192_reads": 23,
+              "inputs_accepted": true
+            },
+            "idle": {
+              "frame_sha256": "39157f7e8316f8ff52d76af613984e5665830fae2b1efb803e820bd353359fc8",
+              "script_sha256": null,
+              "axp192_reads": 24,
+              "inputs_accepted": true
+            }
+          }
+        },
+        "stock": {
+          "status": "PASS",
+          "reason": "Stock UIFlow2 home screen and UART0 input round-trip"
+        }
+      },
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "earlier_battery_attempt": {
+        "status": "FAIL",
+        "reason": "battery-1 did not complete"
+      }
+    },
+    "cargo": {
+      "passed": 1996,
+      "failed": 7,
+      "ignored": 0,
+      "filtered": 34,
+      "status": "FAIL",
+      "completed": true,
+      "cases_failed": [
+        "hello_world_p4_rev3_smp",
+        "hello_world_p4_smp",
+        "hosted_p4",
+        "hosted_p4_rev3",
+        "hosted_rawtp_rx",
+        "hosted_rawtp_tx",
+        "wifi_sta_is_refused_where_it_does_not_work_yet"
+      ],
+      "baseline_matching_failures": true,
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "f1255e8545df27f652de1e809fea40bcb765f34a7e010e0f416cb8c10982d532"
+    },
+    "clippy": {
+      "native": "PASS",
+      "wasm": "PASS",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "native_log_sha256": "6e75f306a2ec83a28eb5297e555757c8fe5714cc65790e3bf4ed72305c1e2033",
+      "wasm_log_sha256": "3773849b28d31f6aaf6d1c7f52d48b01ca25bfe782d37ec38efae32c170ba8d9"
+    },
+    "sentinels": {
+      "classic": {
+        "instructions": [
+          4342917,
+          431305
+        ],
+        "uart_sha256": "43f67dea61a3cf13efca1f6b1c2959438764645dd4f036ff68942cec624ef70f",
+        "uart_matches_baseline": true
+      },
+      "s3": {
+        "instructions": [
+          2658432,
+          1084186
+        ],
+        "uart_sha256": "3426f46bac028d6e950d15d1ae5ce3e889439aeeabee95f8e777bc62a9c80fff",
+        "uart_matches_baseline": true
+      }
+    }
+  },
+  "receivers": {
+    "stickc": "PASS",
+    "stickc-plus": "PASS",
+    "stickc-plus-se": "PASS",
+    "stickc-plus2": "PASS",
+    "stickt2": "PASS"
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "LX6-B classic Stick board ports",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "branch": "m5/batch-lx6b",
+    "commit": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+    "base_commit": "8e17dcd553fbd59b2dc9034cb5bd8eecb0884302",
+    "lx6c_merge_parent": "ab04ce3dbeadd6ef3aaf13e8ff7d6fe29644c037"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "boards": [
+      "stickc",
+      "stickc-plus",
+      "stickc-plus-se",
+      "stickc-plus2",
+      "m5stick",
+      "stickt2"
+    ]
+  },
+  "firmware": {
+    "docs_commit": "7219cc9286c39b463da84053deee40bc234625db",
+    "catalog_commit": "74ee6cb006105fe8553eb83071e23ae3361a57f1",
+    "evidence": "evidence/matrix-summary.json"
+  },
+  "execution": {
+    "environment": "native ESP32 CLI",
+    "runtime_commit": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+    "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+    "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31"
+  },
+  "checks": [
+    {
+      "name": "payload_and_guest_execution",
+      "status": "PARTIAL",
+      "counts": {
+        "PASS": 83,
+        "FAIL": 2,
+        "DOCS-DEFECT": 7
+      }
+    },
+    {
+      "name": "stock_uiflow2",
+      "status": "PASS",
+      "boards": [
+        "stickc",
+        "stickc-plus",
+        "stickc-plus-se",
+        "stickc-plus2"
+      ]
+    },
+    {
+      "name": "factory_firmware",
+      "status": "FAIL",
+      "boards": [
+        "m5stick",
+        "stickt2"
+      ]
+    },
+    {
+      "name": "factory_board_controller_probes",
+      "status": "PASS",
+      "boards": [
+        "m5stick",
+        "stickt2"
+      ]
+    },
+    {
+      "name": "physical_hardware",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "workspace",
+      "status": "FAIL",
+      "details": {
+        "passed": 1996,
+        "failed": 7,
+        "ignored": 0,
+        "filtered": 34,
+        "status": "FAIL",
+        "completed": true,
+        "cases_failed": [
+          "hello_world_p4_rev3_smp",
+          "hello_world_p4_smp",
+          "hosted_p4",
+          "hosted_p4_rev3",
+          "hosted_rawtp_rx",
+          "hosted_rawtp_tx",
+          "wifi_sta_is_refused_where_it_does_not_work_yet"
+        ],
+        "baseline_matching_failures": true,
+        "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+        "log_sha256": "f1255e8545df27f652de1e809fea40bcb765f34a7e010e0f416cb8c10982d532"
+      }
+    },
+    {
+      "name": "shared_receivers",
+      "status": "PASS",
+      "boards": {
+        "stickc": "PASS",
+        "stickc-plus": "PASS",
+        "stickc-plus-se": "PASS",
+        "stickc-plus2": "PASS",
+        "stickt2": "PASS"
+      }
+    },
+    {
+      "name": "cores3",
+      "status": "PASS",
+      "passed": 15,
+      "total": 15,
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "e82c58e23ea124db720a6334227485627ef5dc923e694364912af1040deced74"
+    },
+    {
+      "name": "adv",
+      "status": "PASS",
+      "passed": 11,
+      "total": 11,
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "6cce1b992f902a97e50ccc103dc5d8199685c70020b765241a9fcd4be15c8848"
+    },
+    {
+      "name": "atom-lite",
+      "counts": {
+        "PASS": 7
+      },
+      "exceptions": {},
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "0d7730b8e8f0bc419341b8e33551a4033cc4326eec6c364500dadb495e325004"
+    },
+    {
+      "name": "atom-matrix",
+      "counts": {
+        "PASS": 8
+      },
+      "exceptions": {},
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "f8a7f5c4b90f804b7b63233376d140b7fa7a84e09aa7103c11685a0513a26e1f"
+    },
+    {
+      "name": "atom-matrix-v11",
+      "counts": {
+        "PASS": 8
+      },
+      "exceptions": {},
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "f8a7f5c4b90f804b7b63233376d140b7fa7a84e09aa7103c11685a0513a26e1f"
+    },
+    {
+      "name": "atomu",
+      "counts": {
+        "PASS": 2,
+        "FAIL": 1
+      },
+      "exceptions": {
+        "stock-startup": "FAIL"
+      },
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "4753ef8339057f7107463cde83659ff2c40483b87f1a670c13083c3caee250d0"
+    },
+    {
+      "name": "atom-echo",
+      "counts": {
+        "DOCS-DEFECT": 3,
+        "PASS": 3,
+        "FAIL": 1
+      },
+      "exceptions": {
+        "quickstart-echorest": "DOCS-DEFECT",
+        "quickstart-playmusic": "DOCS-DEFECT",
+        "quickstart-recordplay": "DOCS-DEFECT",
+        "stock-startup": "FAIL"
+      },
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "log_sha256": "fa0d4427e8a787652bc98b95279a3c76b5d48a7e25b0ae9465c8ebf0ec944622"
+    },
+    {
+      "name": "basic-v27",
+      "status": "PASS",
+      "counts": {
+        "PASS": 9,
+        "DOCS-DEFECT": 1
+      },
+      "exceptions": {
+        "imu": {
+          "status": "DOCS-DEFECT",
+          "reason": "Fixture assignment points Basic at m5core/imu.md line 9, which targets Gray. K001-V27 Basic has no onboard IMU."
+        }
+      },
+      "source": "506a08eb4d50def9133896fe7d6d99b5a629cda0",
+      "runtime_sha256": "e10dedde9ff0bd5ff6d215a3ee830bbde604a374c634e3598d216cedd7dbaf4a",
+      "log_sha256": "4665dba10ae03d0b2ad3bf7778067d788d775ebbb15a0c3e80c6a4235be95feb"
+    },
+    {
+      "name": "core2",
+      "status": "FAIL",
+      "counts": {
+        "PASS": 14,
+        "FAIL": 1
+      },
+      "exceptions": {
+        "microsd": {
+          "status": "FAIL",
+          "reason": "missing differentiated decoded images or no-card state"
+        }
+      },
+      "source": "506a08eb4d50def9133896fe7d6d99b5a629cda0",
+      "runtime_sha256": "e10dedde9ff0bd5ff6d215a3ee830bbde604a374c634e3598d216cedd7dbaf4a",
+      "log_sha256": "b7df9f836668ebb919455f01b90d3c784db160accd51b5bae864d8ca354e011c"
+    },
+    {
+      "name": "core2-microsd-retest",
+      "status": "PASS",
+      "check": {
+        "status": "PASS",
+        "reason": "Two guest-decoded images, missing-card control and exact persisted WriteTest.txt"
+      },
+      "input_sha256": {
+        "simulator": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+        "rom": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+        "sd_seed": "bcaef04c9c52d21282a30ae56a5f096d6df8c0b698e1c0dd77d7c66c31747b00",
+        "stock": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4"
+      },
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5"
+    },
+    {
+      "name": "core2-power-stock",
+      "status": "PASS",
+      "checks": {
+        "battery": {
+          "status": "PASS",
+          "reason": "Baseline and both injected states produced distinct LCD values"
+        },
+        "stock": {
+          "status": "PASS",
+          "reason": "Stock UIFlow2 home screen and UART0 input round-trip"
+        }
+      },
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d"
+    },
+    {
+      "name": "core2-axp192-power-stock",
+      "status": "PASS",
+      "checks": {
+        "battery": {
+          "status": "PASS",
+          "reason": "Original battery guest showed three frames with signed battery current, voltage and idle",
+          "firmware_sha256": "6ce2438971d943187d1b7479030dbe4a30e2a529a873cd4eb25abb63891b7bdb",
+          "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+          "cases": {
+            "low": {
+              "frame_sha256": "f1083cb231d14019d352c7b26acf3579c2c7c388f7490b61d620b32d9e2a6414",
+              "script_sha256": "f092861c615f591d98b39cedde0255a70c0148e5ac3c847c18ee40794adde445",
+              "axp192_reads": 24,
+              "inputs_accepted": true
+            },
+            "high": {
+              "frame_sha256": "20fa0f344b553b9ccf08dd902af64be5cfe4b8787dd4b3fe7713202296b6ca76",
+              "script_sha256": "49f7621effd29d232a63ce87d089f59ad5b1ff5951a60a43ee971aefe5d6aac2",
+              "axp192_reads": 23,
+              "inputs_accepted": true
+            },
+            "idle": {
+              "frame_sha256": "39157f7e8316f8ff52d76af613984e5665830fae2b1efb803e820bd353359fc8",
+              "script_sha256": null,
+              "axp192_reads": 24,
+              "inputs_accepted": true
+            }
+          }
+        },
+        "stock": {
+          "status": "PASS",
+          "reason": "Stock UIFlow2 home screen and UART0 input round-trip"
+        }
+      },
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "runtime_sha256": "26793309f4a823fb49d83710661fa201e2878af28017bcf915adb9c6dae9c01d",
+      "earlier_battery_attempt": {
+        "status": "FAIL",
+        "reason": "battery-1 did not complete"
+      }
+    },
+    {
+      "name": "clippy",
+      "native": "PASS",
+      "wasm": "PASS",
+      "source": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+      "native_log_sha256": "6e75f306a2ec83a28eb5297e555757c8fe5714cc65790e3bf4ed72305c1e2033",
+      "wasm_log_sha256": "3773849b28d31f6aaf6d1c7f52d48b01ca25bfe782d37ec38efae32c170ba8d9"
+    },
+    {
+      "name": "sentinels",
+      "classic": {
+        "instructions": [
+          4342917,
+          431305
+        ],
+        "uart_sha256": "43f67dea61a3cf13efca1f6b1c2959438764645dd4f036ff68942cec624ef70f",
+        "uart_matches_baseline": true
+      },
+      "s3": {
+        "instructions": [
+          2658432,
+          1084186
+        ],
+        "uart_sha256": "3426f46bac028d6e950d15d1ae5ce3e889439aeeabee95f8e777bc62a9c80fff",
+        "uart_matches_baseline": true
+      }
+    }
+  ],
+  "evidence": [
+    "evidence/matrix-summary.json",
+    "evidence/receiver-summary.json"
+  ],
+  "notes": [
+    "Pins and guest firmware drive the simulated controllers.",
+    "Host paths and raw logs are omitted."
+  ]
+}
