@@ -52,7 +52,7 @@ Home uses the first complete captured UI with its expected layout, excluding an 
 
 ## Reproduction
 
-Build the two pinned revisions with Rust 1.100.0 and the same release profile. The measured binaries used `CARGO_PROFILE_RELEASE_LTO=off CARGO_PROFILE_RELEASE_CODEGEN_UNITS=8 CARGO_PROFILE_RELEASE_DEBUG=0`.
+Build the two pinned revisions with Rust 1.100.0 and the same release profile. The original stock timing pair used the default fat-LTO release build as its baseline and an LTO-disabled release build as its candidate. This corrects the initial claim that both binaries used the same profile. The historical wall timings describe those exact binaries under differing host load. The [service-parity merge follow-up](followups/2026-11-27-service-parity-merge/report.md) rebuilds both sides with matching compiler flags for the Tab5 comparison.
 
 - Core2 CLI — `esp32sim --chip esp32 --board m5stack-core2 --boot rom --flash-image "$FW" --max-seconds 2.7 --no-dump --tft-png "$PNG"`. Use five guest seconds for the historical standalone baseline/pilot comparison.
 - Tab5 DSI — `esp32sim --chip p4 --board m5stack-tab5-dsi-only --boot rom --flash-image "$FW" --debug dsi --max-seconds 2.7 --no-dump`. Use `m5stack-tab5` for the attached-touch control.

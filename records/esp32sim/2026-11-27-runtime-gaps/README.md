@@ -12,5 +12,6 @@ The Classic Core scheduling change reduced Core2 stock UIFlow2 boot time while p
 - [Report and reproduction](report.md)
 - [Source, firmware and check manifest](run.json)
 - [Trace and measurement summaries](evidence/)
+- [Service-parity merge gate and matched-profile Tab5 timing](followups/2026-11-27-service-parity-merge/)
 
 Remaining edges include the original QEMU browser trap reproductions, original Maker Fighter MSC activity, C6 simultaneous Wi-Fi and 802.15.4, and full batch regression acceptance. Physical hardware was not run.
