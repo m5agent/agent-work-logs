@@ -12,3 +12,5 @@ The browser lane uses the same board silicon identity as native for AtomS3R and 
 [Report](report.md) · [Machine-readable receipts](run.json) · [Evidence](evidence/)
 
 [Paired fixture comparison and default decisions](followups/2026-11-27-browser-backend-comparison/)
+
+[Memory, 16 MiB Flash and VoiceS3R microphone](followups/2026-11-27-classic-memory-flash-voice/)

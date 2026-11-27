@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "source": {
+    "pr": "https://github.com/m5agent/m5stack-esp-emulator/pull/290",
+    "head": "457f184d5683244079433fa754686b3741dbeb78"
+  },
+  "hardware": {
+    "validation": "NOT RUN"
+  },
+  "firmware": {
+    "basic-v27-16mb": "f3ed246d70eab8dba118285bece0357ec18360d3395a012c6de487205303d749",
+    "classic-psram-2mb": "9c51a6e3fc3594566b4b2d4547a4b6931ff3d7b7a4dafa2c195956b3ddbc7be3",
+    "classic-psram-8mb": "dd43cdbbdf059aa674202cbdf759e2c158790605b513bf3988b0205ff1d9c866",
+    "voices3r-mic": "e0dab52e82697fd75089140349f1a879e75c155e93fd56b8c0ec22f5acc2494a",
+    "atomu": "cb7243b673588f94385a86edae198d7d20d4a9d99ac753d1ac5d40b92f6b80e7",
+    "atom-echo": "fb88670b2d01525658648cbae5c990b0cda52d2f0016de75312fb55fb8c09cbc",
+    "cardputer": "2a086148973b22f6c7f289536c977e1e7968e17f7f02717c552088269ed3ac55",
+    "sticks3": "a8a88bf4fd2736d4bfd2f4c629b4040c0d38ca8d1ec54156dd74b34cd5a38632",
+    "core2": "5d252ee60ce0f6a481b13ccdf6f911ac0c41687b888ef273dc7c455e62a5b2c2",
+    "atom-matrix": "f028cf0bca868f48b9ae9b5e5c524c6c0fa3ef8d5d19b4e75ab829a78ecbd88b",
+    "atom-matrix-v11": "bd39432078335b768b2fa1c6a6df7445a4e525a09fea5ed37061773b5d44d23e"
+  },
+  "execution": {
+    "kind": "browser-WASM virtual-device validation"
+  },
+  "checks": [
+    {
+      "batch": "variant-tests",
+      "board": "basic-v27-16mb",
+      "status": "PASS"
+    },
+    {
+      "batch": "variant-tests",
+      "board": "classic-psram-2mb",
+      "status": "FAIL"
+    },
+    {
+      "batch": "variant-tests",
+      "board": "classic-psram-8mb",
+      "status": "PASS"
+    },
+    {
+      "batch": "variant-tests",
+      "board": "voices3r-mic",
+      "status": "FAIL"
+    },
+    {
+      "batch": "variant-retest",
+      "board": "classic-psram-2mb",
+      "status": "PASS"
+    },
+    {
+      "batch": "variant-retest",
+      "board": "classic-psram-8mb",
+      "status": "PASS"
+    },
+    {
+      "batch": "variant-retest",
+      "board": "voices3r-mic",
+      "status": "PASS"
+    },
+    {
+      "batch": "alternate-guests",
+      "board": "atomu",
+      "status": "FAIL"
+    },
+    {
+      "batch": "alternate-guests",
+      "board": "atom-echo",
+      "status": "FAIL"
+    },
+    {
+      "batch": "defaults",
+      "board": "cardputer",
+      "status": "PASS"
+    },
+    {
+      "batch": "defaults",
+      "board": "sticks3",
+      "status": "PASS"
+    },
+    {
+      "batch": "defaults",
+      "board": "core2",
+      "status": "PASS"
+    },
+    {
+      "batch": "defaults",
+      "board": "atom-matrix",
+      "status": "PASS"
+    },
+    {
+      "batch": "defaults",
+      "board": "atom-matrix-v11",
+      "status": "PASS"
+    }
+  ]
+}

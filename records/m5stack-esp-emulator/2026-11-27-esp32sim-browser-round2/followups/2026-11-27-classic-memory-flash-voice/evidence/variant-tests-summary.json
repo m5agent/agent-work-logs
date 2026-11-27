@@ -1,0 +1,62 @@
+{
+  "report_sha256": "4a556ea1a1bd30eb6a54f93178a1409017a9d814cdd4763146d6cfebb0d545f9",
+  "report_bytes": 18211,
+  "manifest_sha256": "b169ba401ef6100c549259853826646d319d490b4c1df097fe2eba35e0eb2452",
+  "chrome": "158.0.8127.37",
+  "wasm_sha256": "22d0c282620a176ac87bb026919a4c28551b1a3034db269bef95b8fa61aca1aa",
+  "cases": [
+    {
+      "id": "basic-v27-16mb",
+      "status": "PASS",
+      "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+      "flash_sha256": "f3ed246d70eab8dba118285bece0357ec18360d3395a012c6de487205303d749",
+      "markers": [],
+      "worker_count_before": 1,
+      "worker_count_after": 0,
+      "guest_time_s": 3.86,
+      "boot_ms": 9049
+    },
+    {
+      "id": "classic-psram-2mb",
+      "status": "FAIL",
+      "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+      "flash_sha256": "a790fe35e82206c9da7a35610d6549ef806fb505674588ec60843f71da543311",
+      "markers": [
+        "16 MiB Flash header exceeded the 8 MiB StickC Plus2 profile. No guest was created."
+      ],
+      "worker_count_before": 0,
+      "worker_count_after": 0,
+      "guest_time_s": null,
+      "boot_ms": null
+    },
+    {
+      "id": "classic-psram-8mb",
+      "status": "PASS",
+      "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+      "flash_sha256": "dd43cdbbdf059aa674202cbdf759e2c158790605b513bf3988b0205ff1d9c866",
+      "markers": [
+        "LX6 flash bytes=16777216 last_word=25f04adb OK",
+        "LX6 PSRAM physical=8388608 heap=4161536",
+        "LX6 HIMEM capacity=4227072 pages=127,128,255 OK",
+        "LX6 memory PASS"
+      ],
+      "worker_count_before": 1,
+      "worker_count_after": 0,
+      "guest_time_s": 0.78,
+      "boot_ms": 4736
+    },
+    {
+      "id": "voices3r-mic",
+      "status": "FAIL",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "flash_sha256": "031c6d400c152f0b8465d4d03e726b74991a8b42710c124bf80b60f2f9b13c41",
+      "markers": [
+        "Original boot script reported ESP_ERR_INVALID_STATE before main.py."
+      ],
+      "worker_count_before": 1,
+      "worker_count_after": 0,
+      "guest_time_s": 92.1,
+      "boot_ms": null
+    }
+  ]
+}
