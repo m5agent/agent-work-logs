@@ -18,3 +18,5 @@ The browser lane uses the same board silicon identity as native for AtomS3R and 
 [Per-device runtime-gaps and Pages evidence](followups/2026-11-27-runtime-gaps-and-pages/)
 
 [StackChan controller pulse and hosted retry](followups/2026-11-27-pages-stackchan-controller-hold/)
+
+[Publication gate attempts and live readback](followups/2026-11-28-publication-gate-blockers/)
