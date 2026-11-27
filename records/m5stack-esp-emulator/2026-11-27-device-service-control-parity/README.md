@@ -27,3 +27,4 @@ Physical devices and complete reviewer jobs were NOT RUN in this milestone.
 
 - [Merged-pin per-device documentation observations](per-device-merged-oracles.md)
 - [AtomU and Atom Echo candidate defaults and PaperColor readiness](classic-defaults-and-panel-readiness.md)
+- [Expanded per-device defaults and qualified consumer paths](expanded-paired-qualifications.md)
