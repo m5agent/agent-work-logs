@@ -51,7 +51,7 @@
 | 2026-11-27 | esp32sim | S3-D e-paper boards | PARTIAL (PaperDIY milestone and four stock USB-CDC REPLs) | [查看](records/esp32sim/2026-11-27-s3d-epaper/) |
 | 2026-11-27 | esp32sim | ESP32-S3 small display ports | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-s3b-small-displays/) |
 | 2026-11-27 | esp32sim | NanoC6 and Nesso N1 native replay | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-c6a-board-replay/) |
-| 2026-11-27 | esp32sim | StamPLC and StackChan S3-C boards | PARTIAL (native virtual-device validation, four-byte and seven-byte NFC reader) | [查看](records/esp32sim/2026-11-27-s3c-stamplc-stackchan/) |
+| 2026-11-27 | esp32sim | StamPLC and StackChan S3-C boards | PASS on runnable cases (37 Arduino, both stock images, two docs defects) | [查看](records/esp32sim/2026-11-27-s3c-stamplc-stackchan/) |
 | 2026-11-27 | esp32sim | AtomS3 native board profiles | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-atom-s3-batch/) |
 | 2026-11-27 | esp32sim | LX6-A/S3-A merge and AtomU/Echo launcher diagnosis | PARTIAL（虚拟设备） | [查看](records/esp32sim/2026-11-27-lx6a-s3a-merge/) |
 | 2026-11-27 | esp32sim | Classic Atom family and shared ESP32 controllers | PARTIAL（虚拟设备） | [查看](records/esp32sim/2026-11-27-lx6-atoms/) |

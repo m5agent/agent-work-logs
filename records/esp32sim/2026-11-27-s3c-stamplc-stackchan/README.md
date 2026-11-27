@@ -12,3 +12,5 @@ Two board profiles and a shared set of controller-backed peripheral models. The 
 - [Source, firmware and execution identities](run.json)
 - [Instruction counts](evidence/instruction-counts.summary.json)
 - [Follow-up attempts](evidence/followup-attempts.summary.json)
+
+- [Completion replay](followups/2026-11-27-completion/) covers 37 Arduino passes, two documentation defects, both stock images and 1,985 workspace tests.
