@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | S3-B fork integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-s3b-integration/) |
 | 2026-11-27 | esp32sim | Classic Core family firmware replay | PASS (virtual-device validation) | [查看](records/esp32sim/2026-11-27-classic-core-lx6c/) |
 | 2026-11-27 | esp32sim | S3-D e-paper boards | PARTIAL (PaperDIY milestone and four stock USB-CDC REPLs) | [查看](records/esp32sim/2026-11-27-s3d-epaper/) |
 | 2026-11-27 | esp32sim | ESP32-S3 small display ports | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-s3b-small-displays/) |

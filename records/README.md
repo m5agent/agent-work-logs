@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | S3-B fork integration | PASS (virtual-device regression gate) | [查看](esp32sim/2026-11-27-s3b-integration/) |
 | 2026-11-27 | ESP Emulator | esp32sim release qualification | PARTIAL (native and browser virtual devices) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-release/) |
 | 2026-11-26 | esp32sim | Tab5 milestone 3 wake, Wi-Fi and USB Host SDK | PARTIAL（25 项虚拟设备通过，2 项无独立例程） | [查看](esp32sim/2026-11-26-tab5-milestone-3/) |
 | 2026-11-26 | esp32sim | Tab5 stock UIFlow2 launcher and touch | PASS（GT911 / ILI9881C 虚拟设备） | [查看](esp32sim/2026-11-26-tab5-launcher/) |
