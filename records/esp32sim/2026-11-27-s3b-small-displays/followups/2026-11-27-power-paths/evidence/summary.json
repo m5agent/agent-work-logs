@@ -1,0 +1,237 @@
+{
+  "validation": "virtual-device validation",
+  "runtime_sha256": "17ed47a116d355ebbf64f14521526356bccb30ac8bb0f0fd328ed70dd4a50cc5",
+  "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+  "cases": [
+    {
+      "virtual_seconds": 17.0,
+      "board": "sticks3",
+      "case": "m5pm1-1",
+      "verdict": "DOCS-DEFECT",
+      "locus": "m5pm1_1.ino:16",
+      "detail": "m5pm1_1.ino:16 assigns Wire/I2C0 to GPIO47/48. M5.update polls PM1 through M5GFX I2C1, which rewrites the same GPIO output selectors. The later Wire operation fails after the I2C1 remap.",
+      "markers": [
+        "[fn] i=569850641 t=3.0070s c1 _ZN4lgfx2v13i2cL7set_pinE10i2c_port_t10gpio_num_tS3_(a2=0x1 a3=0x2f a4=0x30) ret=0x4201a1fc",
+        "[fn] i=571581651 t=4.0090s c1 i2c_master_transmit(a2=0x3c090fb8 a3=0x3fca64d0 a4=0x5) ret=0x4201fff4",
+        "[i2c0] transfer without a bidirectional pin route",
+        "[peek after run]",
+        "60004610: 0000005c",
+        "60004614: 0000005b",
+        "PM1 initialization successful"
+      ],
+      "merged_firmware_sha256": "417965c209f6c3200c6103718465479e6a78e7b95c485657ce351dddf433d0d0",
+      "elf_sha256": "b524cd227849330a3adc23f114b34603fb8e8a60fb1c03cc6dd195b73429d3fe",
+      "serial_sha256": "8a593d9c6f9ec8692746ed85364073d3619502c518ac98f7bc1d216a7c17a361",
+      "trace_sha256": "9d3259cc74f0aa1ce26f634ea33c7bc29c6029f2eb91448475377e1822898932",
+      "frame_sha256": "ec4be272807ceb6ba64ca0a32a16e5938c53633f637078b745c5008d81fb6d5e"
+    },
+    {
+      "virtual_seconds": 14.0,
+      "board": "sticks3",
+      "case": "m5pm1-2",
+      "verdict": "DOCS-DEFECT",
+      "locus": "m5pm1_2.ino:18",
+      "detail": "m5pm1_2.ino:18 assigns Wire/I2C0 to GPIO47/48. M5.update polls PM1 through M5GFX I2C1, which rewrites the same GPIO output selectors. The later Wire operation fails after the I2C1 remap.",
+      "markers": [
+        "[fn] i=353929409 t=3.0090s c1 _ZN4lgfx2v13i2cL7set_pinE10i2c_port_t10gpio_num_tS3_(a2=0x1 a3=0x2f a4=0x30) ret=0x4201a5e0",
+        "[fn] i=354058889 t=3.0095s c1 i2c_master_transmit(a2=0x3c090fe8 a3=0x3fca6760 a4=0x1) ret=0x420225c0",
+        "[i2c0] transfer without a bidirectional pin route",
+        "[peek after run]",
+        "60004610: 0000005c",
+        "60004614: 0000005b",
+        "PM1 initialization successful"
+      ],
+      "merged_firmware_sha256": "e90e0ee2dea236843285251ff9f462653adc5c5db382c4f0970adfde495610ba",
+      "elf_sha256": "c7702eee8a071cbe05c4afc25ac2511dcf11aedda8534920cad729358a3fe236",
+      "serial_sha256": "b5ebe83451fa5afab527d1c2206e1bc6f635bc02a63cd985f86fe0a7c2b44d9b",
+      "trace_sha256": "81c849b1528f241e9349021348c07b22c109cde88f95a8df15d880312a04150e",
+      "frame_sha256": "b014c10c41bb7b506efaab3abdfa06970396fe461101f3adce3666d55e50470c"
+    },
+    {
+      "virtual_seconds": 14.0,
+      "board": "sticks3",
+      "case": "m5pm1-3",
+      "verdict": "DOCS-DEFECT",
+      "locus": "m5pm1_3.ino:19",
+      "detail": "m5pm1_3.ino:19 assigns Wire/I2C0 to GPIO47/48. M5.update polls PM1 through M5GFX I2C1, which rewrites the same GPIO output selectors. The later Wire operation fails after the I2C1 remap.",
+      "markers": [
+        "[fn] i=348218500 t=3.0090s c1 _ZN4lgfx2v13i2cL7set_pinE10i2c_port_t10gpio_num_tS3_(a2=0x1 a3=0x2f a4=0x30) ret=0x4201a65c",
+        "[fn] i=348458531 t=3.0100s c1 i2c_master_transmit(a2=0x3c090fb8 a3=0x3fca6aa8 a4=0x2) ret=0x42022888",
+        "[i2c0] transfer without a bidirectional pin route",
+        "[peek after run]",
+        "60004610: 0000005c",
+        "60004614: 0000005b",
+        "PM1 initialization successful"
+      ],
+      "merged_firmware_sha256": "749f2416fc47b9fe26f07cfedc278ce8dd8def1bf32a466fd9f5a6e4a8419cf8",
+      "elf_sha256": "0644861ce62f2bbb4c277e476cbc6ac8e0c09f3f9f2e7878b2530ca040f561f1",
+      "serial_sha256": "482a5a2cfcef9f56767b55a6c1de958ddd6482a796a65c2990466e6ad18f2f0d",
+      "trace_sha256": "591758fe87bb8e333033e2f0b5e319f4e4793631365fd1869da57d38253da356",
+      "frame_sha256": "21dcef3c90970cad3bac0c948d573f46a45d2d4929075dea87e18b9d86a4f12c"
+    },
+    {
+      "virtual_seconds": 9.0,
+      "board": "sticks3",
+      "case": "wakeup-1",
+      "verdict": "DOCS-DEFECT",
+      "locus": "wakeup_1.ino:18",
+      "detail": "wakeup_1.ino:18 calls timerSleep(5). The pinned library arms the ESP RTC timer then cuts the ESP's supply through PM1 before entering deep sleep. No PM1 timer was armed.",
+      "markers": [
+        "[fn] i=626444826 t=3.0100s c1 esp_sleep_enable_timer_wakeup(a2=0x4c4b40 a3=0x0 a4=0x3fca6e84) ret=0x42007d16",
+        "[fn] i=626445931 t=3.0100s c1 _ZN2m511M5PM1_Class8powerOffEv(a2=0x3fc9b308 a3=0x1 a4=0x60120) ret=0x42007b91",
+        "[i2c] start addr 0x6e read=false",
+        "[i2c]   write 0x0c",
+        "[i2c]   write 0xa1",
+        "[sticks3] RAMWR=0 pixels=0 lcd_rail=false powered=false timer_wakes=0 RMT46_frames=0 RMT46_active_low=0 last_nec=None gpio_i2c=19"
+      ],
+      "merged_firmware_sha256": "d0d03b2ea4ddf6f6e32d76ebd96312272a2b62ea957de5e9031fa105a7ca0074",
+      "elf_sha256": "c3704256f89df4daa13e1d5bbc13311a5d5abf1637d63994ef2168fa816b4d11",
+      "serial_sha256": "8cf40a5783da8b916df67e37dae7314cb6492ca8145d5a945bbded32cedb7ca0",
+      "trace_sha256": "90eb7162f79fa7fb69e72abf4cc9695f471d7049efa9aa4d09f536d1bce00652",
+      "frame_sha256": "a37275fcc7984d24db6567d77ff9b1fbb6ffaed1756b45b6b825d4a01d7de358"
+    },
+    {
+      "virtual_seconds": 5.2,
+      "board": "sticks3",
+      "case": "wakeup-2",
+      "verdict": "DOCS-DEFECT",
+      "locus": "wakeup_2.ino:16",
+      "detail": "wakeup_2.ino:16 assigns Wire/I2C0 to GPIO47/48. M5.update polls PM1 through M5GFX I2C1, which rewrites the same GPIO output selectors. The later Wire operation fails after the I2C1 remap.",
+      "markers": [
+        "[fn] i=569604183 t=3.0060s c1 _ZN4lgfx2v13i2cL7set_pinE10i2c_port_t10gpio_num_tS3_(a2=0x1 a3=0x2f a4=0x30) ret=0x4201a18c",
+        "[fn] i=571570898 t=4.0090s c1 i2c_master_transmit(a2=0x3c090fb8 a3=0x3fca64d0 a4=0x5) ret=0x4201ff84",
+        "[i2c0] transfer without a bidirectional pin route",
+        "[peek after run]",
+        "60004610: 0000005c",
+        "60004614: 0000005b",
+        "PM1 initialization successful"
+      ],
+      "merged_firmware_sha256": "e81fe36a2668548ae3a1dcae6f09b6d2d21bc7ab0d02300689e47e9ff587f233",
+      "elf_sha256": "8df72a2855297dba7bce180dea00e494c81bc8f333bf9707761344bc54b37853",
+      "serial_sha256": "8a593d9c6f9ec8692746ed85364073d3619502c518ac98f7bc1d216a7c17a361",
+      "trace_sha256": "90cc61aec4fc243de7ff30e6c0a469a744ba86716f876d1083b799dcf4b5c6c9",
+      "frame_sha256": "e653aa133ac614c01a3adf344e4988bdd00fc7e8f83258441cee89730aa1437e"
+    },
+    {
+      "virtual_seconds": 13.0,
+      "board": "stopwatch",
+      "case": "m5pm1_m5ioe1-6",
+      "verdict": "DOCS-DEFECT",
+      "locus": "m5pm1_m5ioe1_6.ino:107–113",
+      "detail": "m5pm1_m5ioe1_6.ino:75–78 and :107–113 call tone() and begin() after turning off the amplifier or audio rail. The traced enable callback restores both before the 10 kHz PCM reaches the speaker. Connector selection and motor duty passed.",
+      "markers": [
+        "[fn] i=132571114 t=4.9197s c1 _ZN2m59M5Unified29_speaker_enabled_cb_stopwatchEPvb(a2=0x3fc99f48 a3=0x1 a4=0x3) ret=0x42008e50",
+        "IOE1 0x05 <- 0x9d",
+        "IOE1 0x05 <- 0x9d",
+        "[fn] i=160060282 t=10.2110s c1 _ZN2m59M5Unified29_speaker_enabled_cb_stopwatchEPvb(a2=0x3fc99f48 a3=0x1 a4=0x1) ret=0x42008e50",
+        "IOE1 0x05 <- 0x9d",
+        "IOE1 0x05 <- 0x9d",
+        "IOE1 0x06 <- 0x03",
+        "[fn] i=164776508 t=11.2320s c1 _ZN2m59M5Unified29_speaker_enabled_cb_stopwatchEPvb(a2=0x3fc99f48 a3=0x1 a4=0x1) ret=0x42008e50",
+        "IOE1 0x05 <- 0x9d",
+        "IOE1 0x06 <- 0x03",
+        "[emu] i2s frames out: 354275 (i2s0 @ 44100 Hz) 0 (i2s1 @ 44100 Hz)",
+        "[stopwatch] power_off_requested=false timer_wakes=0 oled_transitions=3 vibration_duties={2047} ext_uart=true ext_usb=true gpio_i2c=38"
+      ],
+      "merged_firmware_sha256": "d9a67b9fb4db34352e27b1379446f1707f71b830b46e244ff9e88f06e01765fb",
+      "elf_sha256": "9f6e29ee49b26f814feb74abccb0ce9a48c8623035e945fbe283d410b4648fb7",
+      "serial_sha256": "7cfec9f6159270427cb880b21da57eeee0e3264b807b3734c8be58485933f302",
+      "trace_sha256": "dbb2ea1e4c8633691201f3593b07c32d4b9b6bf182c13ba840c7278c15b605e7",
+      "frame_sha256": "97d72482fb9fcac7d3005b615d46364dbf39b50ab02d778f4abfa5e8e4319832",
+      "speaker_wav_sha256": "6f0bc6b0de69edd7ebc739334cca8096037e41e476e0a5b6bd0ade906de9169f"
+    }
+  ],
+  "stopwatch_rechecks": {
+    "mic": {
+      "status": "PASS",
+      "detail": "733 Hz and 997 Hz both reach the speaker and the silent control stays quiet"
+    },
+    "speaker": {
+      "status": "PASS",
+      "detail": "I2S output contains 10000 Hz and 4000 Hz tones"
+    },
+    "UIFlow2": {
+      "status": "PASS",
+      "detail": "home frame, input-driven state change, and USB REPL arithmetic result"
+    }
+  },
+  "instruction_sentinels": [
+    "hello: core0 2949740 + core1 1344986 insns; identical serial; user medians 0.08s base and 0.08s head; {'base': [0.08, 0.07, 0.08], 'head': [0.08, 0.08, 0.07]}",
+    "c3-hello: 480000000 insns; identical serial; user medians 0.79s base and 0.78s head; {'base': [0.79, 0.77, 0.79], 'head': [0.77, 0.8, 0.78]}",
+    "c6-hello: 480000000 insns; identical serial; user medians 0.31s base and 0.31s head; {'base': [0.31, 0.29, 0.32], 'head': [0.33, 0.31, 0.3]}",
+    "pocket-tank: core0 398137986 + core1 597396789 insns; identical serial; user medians 7.68s base and 7.49s head; {'base': [7.23, 7.76, 7.68], 'head': [7.45, 7.83, 7.49]}"
+  ],
+  "audio_power_probe": {
+    "stock_firmware_version": "2.5.5",
+    "stock_sha256": "2d97255a3f1429234606a5e7e68cbe16f5856068c310043979e9eb6c10507513",
+    "wav_format": "mono PCM16 at 44100 Hz",
+    "controls": [
+      {
+        "mode": "hold",
+        "wave_sha256": "15182901be7ca97980c8cb4ec6b8fbfe5927d6685d4e76d009969b65b385df87",
+        "script_sha256": "3592106a8998d68de05261b27ddc6fe0dc8f8a2e8a7f2838d92b52a8ddbbcb28",
+        "serial_sha256": "86cc564dd8f2c26057dfbfdb2bde68148c1e96c2c83f323f065baf4d3346971e",
+        "diagnostics_sha256": "5a84687fd206e4b48451d06546b8016318611501f8f1677c801f32eb7861d070",
+        "markers": [
+          "RAIL_PROBE_READY b'\\x9d' True",
+          "RAIL_PROBE_DURING b'\\x9d' b'\\x02' True"
+        ],
+        "i2s0_frames": 418287,
+        "windows": [
+          {
+            "start_seconds": 7.3,
+            "end_seconds": 7.6,
+            "pcm_rms": 14356.11,
+            "frequency_hz": 700.0
+          },
+          {
+            "start_seconds": 8.0,
+            "end_seconds": 9.1,
+            "pcm_rms": 14357.02,
+            "frequency_hz": 700.0
+          }
+        ],
+        "usb_schedule": [
+          "attach",
+          "cdc 3000",
+          "cdc 3000 \u0003",
+          "cdc 1000 import M5, time; from hardware import I2C, Pin; M5.Speaker.begin(); M5.Speaker.setVolumePercentage(0.8); p=I2C(1,sda=Pin(47),scl=Pin(48),freq=100000); print(\"RAIL_PROBE_READY\",p.readfrom_mem(0x4f,5,1),0x18 in p.scan())",
+          "cdc 1000 on=p.readfrom_mem(0x4f,5,1)[0]; M5.Speaker.tone(700,2000); time.sleep_ms(500); p.writeto_mem(0x4f,5,bytes([on])); print(\"RAIL_PROBE_DURING\",p.readfrom_mem(0x4f,5,1),p.readfrom_mem(0x4f,6,1),0x18 in p.scan()); time.sleep_ms(1750); M5.Speaker.end(); print(\"RAIL_PROBE_DONE\")"
+        ]
+      },
+      {
+        "mode": "cut",
+        "wave_sha256": "53fc359cd2a8f63eb3af580663fd9ae616a03795b3a4fe194d6a13af2d416db3",
+        "script_sha256": "6450c10fff497250088f663678cb4504c7cf1e8558d090e9467d3457111fe0d8",
+        "serial_sha256": "288a329f6e2c2cb80c54429c6e3d38622b409a32d1374f74a876f7bffbe49fbb",
+        "diagnostics_sha256": "940f9d98ef146d92daa3a7f6d2cf0babdfd200071c0486efcd9495ac025021f6",
+        "markers": [
+          "RAIL_PROBE_READY b'\\x9d' True",
+          "RAIL_PROBE_DURING b'\\x99' b'\\x02' False"
+        ],
+        "i2s0_frames": 418462,
+        "windows": [
+          {
+            "start_seconds": 7.3,
+            "end_seconds": 7.6,
+            "pcm_rms": 14356.11,
+            "frequency_hz": 700.0
+          },
+          {
+            "start_seconds": 8.0,
+            "end_seconds": 9.1,
+            "pcm_rms": 0.0,
+            "frequency_hz": 0.0
+          }
+        ],
+        "usb_schedule": [
+          "attach",
+          "cdc 3000",
+          "cdc 3000 \u0003",
+          "cdc 1000 import M5, time; from hardware import I2C, Pin; M5.Speaker.begin(); M5.Speaker.setVolumePercentage(0.8); p=I2C(1,sda=Pin(47),scl=Pin(48),freq=100000); print(\"RAIL_PROBE_READY\",p.readfrom_mem(0x4f,5,1),0x18 in p.scan())",
+          "cdc 1000 on=p.readfrom_mem(0x4f,5,1)[0]; M5.Speaker.tone(700,2000); time.sleep_ms(500); p.writeto_mem(0x4f,5,bytes([on & ~4])); print(\"RAIL_PROBE_DURING\",p.readfrom_mem(0x4f,5,1),p.readfrom_mem(0x4f,6,1),0x18 in p.scan()); time.sleep_ms(1750); M5.Speaker.end(); print(\"RAIL_PROBE_DONE\")"
+        ]
+      }
+    ]
+  }
+}

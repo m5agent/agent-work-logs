@@ -15,5 +15,6 @@ The native esp32sim port covers the original Cardputer, Dial, StickS3 and StopWa
 - [Validation and replay](report.md)
 - [Machine-readable result](run.json)
 - [Hashes and individual verdicts](evidence/case-summary.json)
+- [Follow-up on StickS3 wake and StopWatch audio power](followups/2026-11-27-power-paths/README.md)
 
 The matrices cover digital behavior in a virtual device. RF, battery characteristics, motor mechanics and IR optical behavior were outside this execution.

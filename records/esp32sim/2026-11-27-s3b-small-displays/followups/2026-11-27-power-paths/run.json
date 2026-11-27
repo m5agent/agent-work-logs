@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "5d615777f09b731e1b14280bbb0f5bba4d3c2780",
+    "head_commit": "8f9583e6cceffdea23a2953757a94320f4463fd9",
+    "branch": "m5/batch-s3b",
+    "runtime_source_commit": "1797e19470cef663afb548245f76cafe2db040cd"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "simulator": "Native esp32sim ESP32-S3"
+  },
+  "firmware": {
+    "documentation_commit": "7219cc9286c39b463da84053deee40bc234625db",
+    "board_package": "m5stack:esp32@3.2.5",
+    "M5Unified_commit": "96576a14247ddc935149145aa6b51943464120f1",
+    "M5GFX_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "M5PM1_commit": "be9a5456c007c333e7ac963f33bfde1ffa5d82ee"
+  },
+  "execution": {
+    "environment": "macOS arm64",
+    "runtime_sha256": "17ed47a116d355ebbf64f14521526356bccb30ac8bb0f0fd328ed70dd4a50cc5",
+    "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd"
+  },
+  "checks": [
+    {
+      "check": "pinned Arduino examples",
+      "docs_defects": 6,
+      "evidence": "evidence/summary.json"
+    },
+    {
+      "check": "StopWatch stock rail hold and cut",
+      "status": "PASS"
+    },
+    {
+      "check": "CoreS3 Arduino regression",
+      "status": "PASS",
+      "passed": 15,
+      "total": 15
+    },
+    {
+      "check": "Cardputer-ADV Arduino regression",
+      "status": "PASS",
+      "passed": 11,
+      "total": 11
+    },
+    {
+      "check": "release workspace tests",
+      "passed": 1977,
+      "failed": 6,
+      "baseline_p4_golden_failures": 6,
+      "log_sha256": "ef7674e6da9aadb3a5ae66e5deef49c6668315146ebf5d4667c779139ddb063f",
+      "baseline_evidence_sha256": "c81af28c7677370e9aa31a1797cd896705c2a40858bcc53630877a1c8f6edeb7"
+    },
+    {
+      "check": "native and wasm Clippy",
+      "status": "PASS"
+    },
+    {
+      "check": "physical board",
+      "status": "NOT RUN",
+      "reason": "Native virtual-device replay and schematic inference"
+    }
+  ]
+}
