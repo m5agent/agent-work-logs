@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "esp32sim release qualification",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "54bf88b7aa65b60d9cc98cb8ab6beecd70d18150",
+    "candidate_commit": "f7167897e89e2ff79a3d56eca6351c28b96ec6c9",
+    "fork_commit": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489"
+  },
+  "hardware": {},
+  "firmware": {
+    "identity_source": "evidence/native-summary.json and evidence/browser-summary.json"
+  },
+  "execution": {
+    "environment": "macOS arm64, Python 3.12, Rust stable native and Rust 1.99.1 WASM, Chrome",
+    "validation_type": "virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "same-firmware Tab5 comparison",
+      "status": "PASS",
+      "details": "UIFlow2 ST7123 equals legacy observed path. Maker Fighter GT911 reaches gamepad menu where esp-emu timed out."
+    },
+    {
+      "name": "Direct documentation CLI matrix",
+      "status": "PARTIAL",
+      "details": "CoreS3 15/15, ADV 11/11, Tab5 25 PASS, 1 DOCS-DEFECT, 2 NOT RUN."
+    },
+    {
+      "name": "Browser WASM mixed export",
+      "status": "PASS",
+      "details": "Seven admitted CoreS3/ADV scenarios and no workers left after Stop."
+    },
+    {
+      "name": "Rust workspace",
+      "status": "FAIL",
+      "details": "1969 passed; seven exact pre-existing baseline mismatches reproduced. Library targets 1190 PASS."
+    },
+    {
+      "name": "Full Tab5 HTTP parity and Tab5 WASM",
+      "status": "NOT RUN",
+      "details": "Legacy DSI admission is per firmware SHA. Public WASM export and worker carry S3 admission only."
+    },
+    {
+      "name": "Physical hardware",
+      "status": "NOT RUN",
+      "details": "This qualification uses virtual devices."
+    },
+    {
+      "name": "Hosted release",
+      "status": "NOT RUN",
+      "details": "Qualification record before publication."
+    }
+  ],
+  "evidence": [
+    "evidence/native-summary.json",
+    "evidence/browser-summary.json",
+    "evidence/tab5-cli-summary.json"
+  ],
+  "notes": []
+}
