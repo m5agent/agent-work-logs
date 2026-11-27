@@ -79,3 +79,18 @@ omitted. The corrected official preview was dispatched from the merged fix.
 [Stock runner correction](https://github.com/m5agent/m5stack-esp-emulator/pull/281)
 · [Corrected preview](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45930498931)
 · [Evidence summary](evidence/pages-preview-summary.json)
+
+The corrected preview passed all seven esp32sim guests and the separate
+CoreMatrix stock gate. Its serial QEMU matrix passed 44 cases, failed one
+and left 27 NOT RUN after fail-fast. PaperDIY received its QMP system-reset
+event and printed the next ROM boot markers. The engine Worker then stopped
+before UIFlow readiness. The report records fallback cleanup and shows no
+captured guest panic or specific engine exception. The cause is unconfirmed.
+[Hosted failure](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45930498931)
+
+The separate local mixed-export gate passed 72/72. The PaperDIY case used
+the same Chrome version, QEMU Xtensa WASM, profile, ROM and normalized Flash,
+with hardware ANGLE on the local M4 instead of the hosted paravirtual renderer.
+The prior failure remains recorded. A repeat preview on the same main commit
+was started to check reproducibility. [Comparison summary](evidence/pages-paperdiy-summary.json)
+· [Repeat workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45939599561)

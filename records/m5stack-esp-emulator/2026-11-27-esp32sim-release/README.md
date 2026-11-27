@@ -10,3 +10,4 @@ All guest results are virtual-device validation.
 - [Browser guest summary](evidence/browser-summary.json)
 - [Tab5 CLI case summary](evidence/tab5-cli-summary.json)
 - [Hosted preview and stock guest follow-up](evidence/pages-preview-summary.json)
+- [Hosted PaperDIY reset failure and local comparison](evidence/pages-paperdiy-summary.json)
