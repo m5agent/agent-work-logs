@@ -10,3 +10,5 @@
 The browser lane uses the same board silicon identity as native for AtomS3R and Nesso N1. The classic WASM factory now retains the native 2 and 8 MiB PSRAM configurations. The guest checks exercise display, button, matrix, camera, speaker, microphone and touch paths.
 
 [Report](report.md) · [Machine-readable receipts](run.json) · [Evidence](evidence/)
+
+[Paired fixture comparison and default decisions](followups/2026-11-27-browser-backend-comparison/)
