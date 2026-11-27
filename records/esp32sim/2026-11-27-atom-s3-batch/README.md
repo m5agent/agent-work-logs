@@ -12,3 +12,15 @@ idle control and exited normally.
 - [Replay and observed results](report.md)
 - [Run manifest](run.json)
 - [Per-image hashes and checker outputs](evidence/milestone-summary.json)
+
+## Batch follow-up
+
+22 of 25 Arduino cases passed. Three cases expose documentation defects
+in the original AtomS3 serial examples. All seven factory UIFlow2 catalog
+images passed stock console and input validation. The follow-up records
+both native regression matrices, source and binary identities, and the
+remaining model limits.
+
+- [Full batch report](batch-follow-up.md)
+- [Replay summaries](evidence/atom-s3-replays-summary.json)
+- [Regression summary](evidence/atom-s3-regression-summary.json)
