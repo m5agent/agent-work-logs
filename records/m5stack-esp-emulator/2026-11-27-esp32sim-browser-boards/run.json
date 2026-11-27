@@ -7,7 +7,11 @@
   "source": {
     "repository": "https://github.com/m5agent/m5stack-esp-emulator",
     "base_commit": "16faae71c3ee67f5158431dbe78c27e726e67d3d",
-    "head_commit": "4ccdaa900ec512bab3b3b1cc618c4513f85cd7bc"
+    "head_commit": "4ccdaa900ec512bab3b3b1cc618c4513f85cd7bc",
+    "pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/286",
+    "merge_commit": "dd6265db416384d791b0e107509c1372266d2b4f",
+    "policy_pull_request": "https://github.com/m5agent/m5stack-esp-emulator/pull/289",
+    "policy_merge_commit": "4462bf8f095bb051a00863f59321ee3052f36f0b"
   },
   "hardware": {
     "status": "NOT RUN"
@@ -57,15 +61,93 @@
       "indexed_bytes": 312617906
     },
     {
+      "name": "QEMU-WASM full local retry and supplementary gates",
+      "status": "PASS",
+      "pass": 72,
+      "fail": 0,
+      "not_run": 0,
+      "stock_corematrix": "PASS",
+      "synthetic_canvas_controls": 5
+    },
+    {
+      "name": "standard hosted Pages QEMU-WASM",
+      "status": "FAIL",
+      "pass": 6,
+      "fail": 1,
+      "not_run": 65,
+      "first_failure": "Cardputer-ADV Digit9 missing pressed snapshot after trusted DOM and acknowledged QMP edges",
+      "workflow": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45983748433",
+      "ui_04": "open"
+    },
+    {
+      "name": "Python 3.12 platform suite at release merge",
+      "status": "PASS",
+      "total": 2585,
+      "skipped": 11,
+      "log_sha256": "5f5208e3473e03af8a364f0d6aae1da7517c6b58da5454c6c0bfc0a47e7f9de1"
+    },
+    {
+      "name": "Node browser contracts",
+      "status": "PASS",
+      "node": "20.20.2"
+    },
+    {
+      "name": "validators and PR scope",
+      "status": "PASS",
+      "validators": [
+        "runtime_coverage",
+        "peripheral_catalog",
+        "qemu_profiles",
+        "project_snapshot",
+        "check_pr_scope"
+      ]
+    },
+    {
       "name": "public Pages guest",
-      "status": "NOT RUN",
-      "reason": "Release gates pending as of this evidence checkpoint"
+      "status": "PASS",
+      "distinct_devices": 15,
+      "attempts": 20,
+      "earlier_failed_attempts": 5,
+      "new_profiles": 14,
+      "workers_before_stop_each": 1,
+      "workers_after_stop_each": 0,
+      "stock_nano_c6_control": "PASS"
+    },
+    {
+      "name": "public Pages engine defaults",
+      "status": "PASS",
+      "distinct_devices": 17
     }
   ],
   "evidence": [
-    "evidence/local-browser-summary.json"
+    "evidence/local-browser-summary.json",
+    "evidence/excluded-candidate-summary.json",
+    "evidence/hosted-qemu-summary.json",
+    "evidence/local-release-gates-summary.json",
+    "evidence/live-browser-summary.json",
+    "evidence/live-nanoc6-stock-summary.json",
+    "evidence/live-browser-defaults.json",
+    "evidence/live-asset-readback.json"
   ],
   "notes": [
     "Physical hardware and native-service lanes are outside these runs."
-  ]
+  ],
+  "publication": {
+    "strategy": "reviewed prepared export",
+    "release": "https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-20261127-dd6265db",
+    "tag": "pages-20261127-dd6265db",
+    "workflow": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45996161237",
+    "site": "https://m5agent.github.io/m5stack-esp-emulator/",
+    "manifest_sha256": "38cf12dcfdb8d9cdc3ecab92d7fa3cc568cf75a652a9048033031d738cadf1dd",
+    "archive_sha256": "26f0a6f386938dff065328af9830b6fe75130ac6bddd3a9327d99b13b11932d0",
+    "archive_bytes": 189639512,
+    "github_archive_readback": "PASS",
+    "live_asset_readback": {
+      "manifest_sha256": "38cf12dcfdb8d9cdc3ecab92d7fa3cc568cf75a652a9048033031d738cadf1dd",
+      "live_assets_checked": 2209,
+      "live_bytes_checked": 312617906,
+      "retries": 2,
+      "result": "PASS"
+    }
+  }
 }

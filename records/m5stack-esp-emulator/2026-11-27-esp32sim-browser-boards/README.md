@@ -18,3 +18,14 @@ zero after Stop before it closed the context.
 
 This record covers browser-WASM. Hardware and Device Service are outside the
 execution in this record. The hosted issue and remaining boards are open.
+
+[Prepared Pages release](https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-20261127-dd6265db) is live.
+Its manifest SHA-256 is `38cf12dcfdb8d9cdc3ecab92d7fa3cc568cf75a652a9048033031d738cadf1dd`.
+All 2,209 indexed live assets matched. Chrome passed the 14 new
+guest profiles and the existing Cardputer K132 against this deployment.
+
+- [Live guest, firmware, controls, frames and teardown evidence](evidence/live-browser-summary.json)
+- [HTTPS asset readback](evidence/live-asset-readback.json)
+- [Local 72-case QEMU-WASM retry and supplementary gates](evidence/local-release-gates-summary.json)
+- [Hosted UI-04 failure](evidence/hosted-qemu-summary.json)
+- [Withheld device probes](evidence/excluded-candidate-summary.json)

@@ -1,0 +1,103 @@
+{
+  "hosted_workflow": "https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45983748433",
+  "source": "dd6265db416384d791b0e107509c1372266d2b4f",
+  "status": "FAIL",
+  "qemu_cases": {
+    "pass": 6,
+    "fail": 1,
+    "not_run": 65
+  },
+  "profile": "cardputer-adv-wasm-uiflow-workbench-wallclock-oneinsn-candidate",
+  "firmware_sha256": "b6255f6af5ad10236380eae09a76b44ca174b5c4de391aef16413bdc590952bd",
+  "wasm_sha256": "8067a6b8d599f81bfe454da0318377fcb783c8ee4198fc69d3a042c1311d2c1e",
+  "browser": "158.0.8127.37",
+  "physical_key": "9",
+  "observed_wall_hold_ms": 264.1805000000022,
+  "trusted_edges": [
+    {
+      "type": "keydown",
+      "code": "Digit9",
+      "trusted": true
+    },
+    {
+      "type": "keyup",
+      "code": "Digit9",
+      "trusted": true
+    }
+  ],
+  "qmp_inputs": [
+    {
+      "event": {
+        "type": "button",
+        "id": "9",
+        "down": true
+      },
+      "accepted": true
+    },
+    {
+      "event": {
+        "type": "button",
+        "id": "9",
+        "down": false
+      },
+      "accepted": true
+    }
+  ],
+  "guest_callback_and_state": [
+    {
+      "callback_count": 19,
+      "seq": 75,
+      "codes": [
+        57
+      ],
+      "guest_ms": 41682,
+      "kind": "callback"
+    },
+    {
+      "seq": 76,
+      "pressed": [],
+      "kind": "heartbeat",
+      "callback_count": 19,
+      "guest_ms": 41937
+    },
+    {
+      "seq": 77,
+      "pressed": [],
+      "kind": "heartbeat",
+      "callback_count": 19,
+      "guest_ms": 42962
+    },
+    {
+      "seq": 78,
+      "pressed": [],
+      "kind": "heartbeat",
+      "callback_count": 19,
+      "guest_ms": 43993
+    },
+    {
+      "seq": 104,
+      "pressed": [],
+      "kind": "heartbeat",
+      "callback_count": 19,
+      "guest_ms": 70267
+    },
+    {
+      "seq": 105,
+      "pressed": [],
+      "kind": "heartbeat",
+      "callback_count": 19,
+      "guest_ms": 71278
+    }
+  ],
+  "normal_cleanup": [
+    "normal-qmp-quit-and-worker-cleanup",
+    "actual-workers-closed-before-browser-context",
+    "actual-top-page-engine-and-pthread-siblings"
+  ],
+  "hosted_esp32sim_fixed_case_count": 13,
+  "hosted_esp32sim_wasm_sha256": "4c61df24a2028d4d56f66c6aea599848eb5be6ad15c70a181130f6dcc257cce8",
+  "raw_report_sha256": "7a9d791b25e6a7da8706defcf23dde3198f634adaf640f7a16904a754e31dacd",
+  "raw_report_bytes": 3454799,
+  "diagnosis": "Callback returned keycode 57. The public state oracle never observed the press. QMP and DOM confirmed both edges. No FIFO or GPIO11 trace establishes the cause of the remaining guest-observation loss.",
+  "redactions": "Internal paths, nonce, raw logs and CDP target IDs omitted."
+}

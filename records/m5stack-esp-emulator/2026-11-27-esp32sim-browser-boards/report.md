@@ -119,3 +119,62 @@ Core 1 raised LoadStorePIFAddrError before application readiness. There were
 62 remaining cases. The isolated retry passed 65 checks on the same export,
 including reset, guest framebuffer and normal Worker cleanup. The original
 failure and the isolated retry have separate identities in run.json.
+
+The full serial retry completed 72 of 72 cases with zero failures on the same
+manifest. A separate stock CoreMatrix run verified a 16 × 16 guest display,
+real board input, USB REPL and engine and pthread disposal. Five Canvas
+controls passed separately. [Local gate summaries](evidence/local-release-gates-summary.json)
+
+## Hosted gate on the release source
+
+The [standard workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45983748433)
+had six QEMU-WASM passes before the Cardputer-ADV keyboard gate failed.
+The trusted Digit9 press and release reached QMP, both edges were
+acknowledged, and the guest callback produced code 57. The public guest
+state skipped the pressed observation. Cleanup passed. The prior Q run
+stalled after observing press. The two runs keep UI-04 open pending
+controller-level FIFO and IRQ evidence on the exact guest. The successful
+72-case local retry establishes prepared-export eligibility.
+[Hosted failure summary](evidence/hosted-qemu-summary.json)
+
+## Prepared Pages release and HTTPS readback
+
+[PR #286](https://github.com/m5agent/m5stack-esp-emulator/pull/286) merged as
+`dd6265db416384d791b0e107509c1372266d2b4f`. Both CI jobs passed.
+[PR #289](https://github.com/m5agent/m5stack-esp-emulator/pull/289) aligned standard and prepared ROM policy.
+The completed Python 3.12 suite at the release commit ran 2,585 tests with
+11 skips. Node contracts, four validators and PR scope passed.
+
+[Release pages-20261127-dd6265db](https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-20261127-dd6265db)
+contains the 189,639,512-byte prepared archive with SHA-256
+`26f0a6f386938dff065328af9830b6fe75130ac6bddd3a9327d99b13b11932d0`. The downloaded archive matched
+the locally audited closed set byte for byte. The .nojekyll file, ROM licenses,
+notices and corresponding source packages were included in the asset audit.
+
+The [prepared workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45996161237) deployed
+the archive to [public Pages](https://m5agent.github.io/m5stack-esp-emulator/). The HTTPS manifest matched
+`38cf12dcfdb8d9cdc3ecab92d7fa3cc568cf75a652a9048033031d738cadf1dd` and all 2,209 indexed assets
+matched their declared size and SHA-256 (312,617,906 bytes).
+[HTTPS asset readback](evidence/live-asset-readback.json)
+
+The live Chrome workbench passed all 15 guest cases. This covers all
+14 new profiles and the existing Cardputer K132. Actual guest output,
+the applied controller events, firmware and ROM identities, and CDP Worker
+counts are in the report. Each passing case had one dedicated Worker
+before Stop and zero before the browser context closed. The stock NanoC6
+separate control reached its UIFlow2 REPL and produced both RGB values.
+All 17 engine defaults matched the local and public board selections.
+[Live guest results](evidence/live-browser-summary.json) ·
+[NanoC6 stock control](evidence/live-nanoc6-stock-summary.json) ·
+[Live engine defaults](evidence/live-browser-defaults.json)
+
+Earlier live attempts remain in the per-device report. The distinct-device
+result includes their successful retries with a longer pre-boot startup
+budget. The retries preserved the firmware identity, input, display and
+Worker-teardown assertions.
+
+- atoms3-lite had 0 Workers observed before Stop in the failed attempt. The harness reported `page.waitForFunction: Timeout 30000ms exceeded.`.
+- stackchan had 0 Workers observed before Stop in the failed attempt. The harness reported `page.waitForFunction: Timeout 30000ms exceeded.`.
+- paperdiy had 0 Workers observed before Stop in the failed attempt. The harness reported `page.waitForFunction: Timeout 30000ms exceeded.`.
+- papermono had 0 Workers observed before Stop in the failed attempt. The harness reported `page.waitForFunction: Timeout 30000ms exceeded.`.
+- papers3 had 0 Workers observed before Stop in the failed attempt. The harness reported `page.waitForFunction: Timeout 30000ms exceeded.`.
