@@ -1,0 +1,3111 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "S3-D e-paper board matrix follow-up",
+  "date": "2026-11-27",
+  "source": {
+    "repository": "m5agent/esp32sim",
+    "branch": "m5/batch-s3d",
+    "head_commit": "483a83cfdeda7b2a962eedf86c4010bae86f4252",
+    "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+    "milestones": {
+      "paperdiy": "4e3ad5278436c00750b4846af3888096099936c7",
+      "papers3": "d6c4326f934887a2460d3c09379586dfc6568a08"
+    }
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "boards": [
+      "paperdiy",
+      "papers3",
+      "papermono",
+      "papercolor"
+    ]
+  },
+  "firmware": {
+    "docs_commit": "7219cc9286c39b463da84053deee40bc234625db",
+    "m5gfx_commit": "28d47949bdc84f30881623476f555398e2194313",
+    "m5unified_commit": "96576a14247ddc935149145aa6b51943464120f1",
+    "matrix_board_package": "m5stack:esp32@3.2.5",
+    "detection_board_package": "m5stack:esp32@3.3.10"
+  },
+  "execution": {
+    "environment": "macOS arm64, native release simulator and ESP32-S3 mask ROM",
+    "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+    "host_timeouts_in_selected_matrix": 0,
+    "scope": "native simulator, stock USB CDC and physical GPIO/bus models"
+  },
+  "checks": {
+    "paperdiy": {
+      "button": {
+        "case": "button",
+        "verdict": "PASS",
+        "reason": "Each action changed the frame relative to the no-input control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 24.308,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "2e299dd63a3959da7f4e0dd0aa1e6127fa9e7710998a88d774ad115eeabf3362",
+            "log_sha256": "2aec435ea169ad6677b321511f2bcf5d80a15cd9d48284c752d596cfd3a4d9d8",
+            "png_sha256": "93dc4ca85fdec52ab183db27909af37d7502a4b657ce0a521799dea217d88fa1",
+            "capture_sha256": {
+              "button.txt": "fedafe8e721e97c863c75e181e9b6591df16ec0125a70d8448075b0b2eb5227e"
+            },
+            "guest_million_instructions_per_wall_second": 25.8
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 8.015,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "2e299dd63a3959da7f4e0dd0aa1e6127fa9e7710998a88d774ad115eeabf3362",
+            "log_sha256": "f364a67c5530f0f40ad8e5b22fa89eebe0336a78f985d7c219310f347a5dd138",
+            "png_sha256": "04218896a97de75e982f09069f0f0430007f29653930393303d6a435f4deb9a4",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 39.4
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 18.203,
+            "guest_limit_seconds": 5.5,
+            "firmware_sha256": "2e299dd63a3959da7f4e0dd0aa1e6127fa9e7710998a88d774ad115eeabf3362",
+            "log_sha256": "383e0ccd18559041d9bdb7da2fd08516eb16b4de119531a7042379ed25c7687f",
+            "png_sha256": "a8a72dc9f1ad3390543fd9da64f007fc2d32b1a6f099f478755690ef399338f4",
+            "capture_sha256": {
+              "button-first.txt": "fedafe8e721e97c863c75e181e9b6591df16ec0125a70d8448075b0b2eb5227e"
+            },
+            "guest_million_instructions_per_wall_second": 21.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "8d7e9b5ef1ef4277db018cbdebabdd1a875239eac95984a61208800fd277e3fe"
+      },
+      "display-1": {
+        "case": "display-1",
+        "verdict": "PASS",
+        "reason": "Completed grayscale frame with expected swatch ordering",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 11.028,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "0a12f73cb2522f0dab3e4cef106cfbf98f832cf20885c4ba6848f8baee492859",
+            "log_sha256": "3d3a1da0fc74f355b3b8ac3ce263cd291ce46c1e266fa8fc8fb4f7fa663603e7",
+            "png_sha256": "618f70fdeb8ca0db49a0614e172c0c810f6079d16691e58c31e64939ca7174d2",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 26.3
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 1.791,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "0a12f73cb2522f0dab3e4cef106cfbf98f832cf20885c4ba6848f8baee492859",
+            "log_sha256": "01123b258fc9aa5cc820d3a6660da77be8f017d8762278002e279069d8627f87",
+            "png_sha256": "ec07d5ad0b51bc1cd02d64fcba856a77b363b9d39c25e8504a3ff69e3b234c22",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 31.5
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "ac8afb34e5744b9a0cfe3481dfb3f0ac05e11d74a84b712372ecf21145d90bc9"
+      },
+      "display-2": {
+        "case": "display-2",
+        "verdict": "PASS",
+        "reason": "Each action changed the frame relative to the no-input control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 16.894,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "90b4f27553cd7f05a26fe313129f3930f7f317c4add9e67af398c03069f10601",
+            "log_sha256": "8a02186ddf1ddb1f0ee5a15663697cf220cd977947574d8cf5c9b5d156db4bdf",
+            "png_sha256": "233fa58e02b88d0dd56c03b5b7cdb27bec06fb1643afa1e0b83f0138ff486bed",
+            "capture_sha256": {
+              "display-2.txt": "b37a451abf070bb66491cfa71db54148cb7b912569035e4002d7c7aa62df9ed5"
+            },
+            "guest_million_instructions_per_wall_second": 33.3
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 12.144,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "90b4f27553cd7f05a26fe313129f3930f7f317c4add9e67af398c03069f10601",
+            "log_sha256": "943d8b8bb9dbd2e343400d4bb65648a2a87ea2d2b460a21ef1d05e773561fdf9",
+            "png_sha256": "767842f53bde7826a6e1933feb9a09a6750336d8f6d029e4fdbf4cc86262c063",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 25.8
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 1.502,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "90b4f27553cd7f05a26fe313129f3930f7f317c4add9e67af398c03069f10601",
+            "log_sha256": "2c07022435f123b0c5bee6e44bac13b147477cd6a3cdce09d1f9373274826466",
+            "png_sha256": "ec07d5ad0b51bc1cd02d64fcba856a77b363b9d39c25e8504a3ff69e3b234c22",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 39.4
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 11.443,
+            "guest_limit_seconds": 6,
+            "firmware_sha256": "90b4f27553cd7f05a26fe313129f3930f7f317c4add9e67af398c03069f10601",
+            "log_sha256": "7aa6a7b8b75c1ba3c199fd128cf873cf77c9e3a4762c62022b0fccc04935556d",
+            "png_sha256": "28b54be05f0ae095383f1b8c12d1ec5f4d63c091eeea4ba9883798a35cbe14e1",
+            "capture_sha256": {
+              "display-2-first.txt": "b37a451abf070bb66491cfa71db54148cb7b912569035e4002d7c7aa62df9ed5"
+            },
+            "guest_million_instructions_per_wall_second": 27.5
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "6d2f3d783d22ba4d9430af0a942341158f2faf801d91b33fd3f056a0738930f8"
+      },
+      "m5pm1": {
+        "case": "m5pm1",
+        "verdict": "PASS",
+        "reason": "Timed restart and shutdown observed against a running control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 43.205,
+            "guest_limit_seconds": 18,
+            "firmware_sha256": "121d67d7f6fe57a0a19b2d378900f072f37c33f3281ddddeeda66989ac061f31",
+            "log_sha256": "ff506f819bdc8bfcfea7cfb69455802473b5c630510053539f5aa7e89bd519c5",
+            "png_sha256": "f2307e60538ddc55abf19a24b6bd7498eb7963230e6e4fba5e493bcff70269a7",
+            "capture_sha256": {
+              "m5pm1.txt": "dc6d1623d88aaf02d2ccd71e4aec2aad318444ac01eb0f120045548e85e6faba"
+            },
+            "guest_million_instructions_per_wall_second": 35.0
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 22.069,
+            "guest_limit_seconds": 18,
+            "firmware_sha256": "121d67d7f6fe57a0a19b2d378900f072f37c33f3281ddddeeda66989ac061f31",
+            "log_sha256": "05f0a674ca4d0de7653848f00a2c2e66e77ecc6db1e23e34dc34db2f59d9c864",
+            "png_sha256": "0e5fa4db8c85484b7006ddab3fbcbc2e7036e27c950c98356b014c193e1d1b25",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 24.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "9f846502014f587fb677ae27fdc744998bb1d69a628039af58b6496e3b553a8f"
+      },
+      "microsd": {
+        "case": "microsd",
+        "verdict": "PASS",
+        "reason": "Guest rendered SD media while the no-card control did not",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 18.073,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "9add8456e09a19fc2b5b89013b7d5f4c1c95d4aba94fc8822c6223a4bba89002",
+            "log_sha256": "dd64fd8aa9403eb8879e40fe586ff356ef6bbe52f3ce0b00fa22808880069984",
+            "png_sha256": "9987f4ae8c76e08cae7b1aab00ed2f8611980048cad26e933ec3cd995e6e35bf",
+            "capture_sha256": {
+              "microsd.txt": "222c96186e383150fb3465ab284f22c03ffd3a6bcc11d196bd7dc2c715525d8f",
+              "microsd.img": "285c4936df85396ec3e9d90e87f56fb914d4e38a1c48465eb837618e046ba5e2"
+            },
+            "guest_million_instructions_per_wall_second": 40.0
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 17.447,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "9add8456e09a19fc2b5b89013b7d5f4c1c95d4aba94fc8822c6223a4bba89002",
+            "log_sha256": "77dab9c590d3a0f3608bcb7f9179b7ca402019e5f1f8ea4fadc04b9ac6e7538d",
+            "png_sha256": "a2111288c020bc4e9e00378aa01903ca3328ca6b4b260d6fdffa329eabd8d0a5",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 22.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "b48466b8ccdd4e0adcbc148b48e4c8b38a96c92ec52b31e1575f79a61a40b47d"
+      },
+      "quickstart-longtextscroll": {
+        "case": "quickstart-longtextscroll",
+        "verdict": "PASS",
+        "reason": "Two completed nonuniform frames show the scroll changing",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 140.163,
+            "guest_limit_seconds": 10,
+            "firmware_sha256": "cbfbb5fe7a2c8f86a4e7d57b36ee1104b7cbdc2afcef228cb4738cddcd4eb892",
+            "log_sha256": "ba362718be18306ea262020b452096ea54b8aadca39256a11153a72bc3b90edf",
+            "png_sha256": "50d6323c8bbaa7532737ae4355fb70294ffbad5baa742e36efe5e419690412ac",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 27.5
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 1.791,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "cbfbb5fe7a2c8f86a4e7d57b36ee1104b7cbdc2afcef228cb4738cddcd4eb892",
+            "log_sha256": "154326b2477c093fb9a3fe314c5344e7804db24aa3a7c4930891e3a298fd0462",
+            "png_sha256": "ec07d5ad0b51bc1cd02d64fcba856a77b363b9d39c25e8504a3ff69e3b234c22",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 35.9
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 90.758,
+            "guest_limit_seconds": 7,
+            "firmware_sha256": "cbfbb5fe7a2c8f86a4e7d57b36ee1104b7cbdc2afcef228cb4738cddcd4eb892",
+            "log_sha256": "e397a7d056f2c86086d9d47b620af05431af26f7f332df377e9269dfa45ad8f7",
+            "png_sha256": "d016d0d29c793f3c5b8aa990755f205b044c0dcd9abe2397d6a42feb0b00a561",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 29.4
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "3ea1e170e343218e5e960c139600454d0cf14bc7f948567dd9725605c85d5395"
+      }
+    },
+    "papers3": {
+      "battery": {
+        "case": "battery",
+        "verdict": "PASS",
+        "reason": "3500 and 4200 mV, 4000 mV control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 43.819,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "6e24e7e65d087f706209309a6299a6398aa870d0dfccbb3db86c9936c807c00c",
+            "log_sha256": "9e9aa96bace882af16747bb9f6e72682d286ccc14c36ff4179ccfb8b9db70974",
+            "png_sha256": "9862a2951eb1133c47c33159a5aca5fda04e56219f3c754fb4fa70d586891cf8",
+            "capture_sha256": {
+              "battery.txt": "e50cb4d00cefd9bf2dab770cde92d32b70a5de715e8c5674a10051f9f4145af6"
+            },
+            "guest_million_instructions_per_wall_second": 29.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 38.392,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "6e24e7e65d087f706209309a6299a6398aa870d0dfccbb3db86c9936c807c00c",
+            "log_sha256": "a97302964ad0e0309a90c3a1cb907fa58d5303aaa311353ab307dfa4749f0b04",
+            "png_sha256": "2d218737e62880d664f1c7ace83f54bc0a5bc75970c94f0821bdc1ec642636a3",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 31.9
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 10.829,
+            "guest_limit_seconds": 8.8,
+            "firmware_sha256": "6e24e7e65d087f706209309a6299a6398aa870d0dfccbb3db86c9936c807c00c",
+            "log_sha256": "3658ce531075f1d3cad16f1590aa4c31a92665d6fea3f7b08ea3f8bc97a88b7f",
+            "png_sha256": "eadcdd88aa75ce367ebba6b9fcf4185aae23ee0add01345db593770504959235",
+            "capture_sha256": {
+              "battery-first.txt": "e50cb4d00cefd9bf2dab770cde92d32b70a5de715e8c5674a10051f9f4145af6"
+            },
+            "guest_million_instructions_per_wall_second": 91.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "cc50a964611fa8d78aa65108a89b07a0f51e33268381000f3387cd0cc62ed175"
+      },
+      "buzzer-1": {
+        "case": "buzzer-1",
+        "verdict": "PASS",
+        "reason": "PCM contains 8 ordered tones and 2 silent gaps",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 29.319,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "a3fdcea2cc699ed7f2b3e8175081f409991c920df4a6c552e51061841df67548",
+            "log_sha256": "f3ae803b79431046d2ad95f04b5ddaea73ce18a2af7a08f525a34725e54f3814",
+            "png_sha256": "512a4d1397595872645c06f68cc6b1a2c502e4dd253c56908c58739c834a655f",
+            "capture_sha256": {
+              "buzzer-1.wav": "74511b1bf4438f5a4b90055ea7e993595072094ca98300123d5be82ccb8dd7b6"
+            },
+            "guest_million_instructions_per_wall_second": 28.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "d193729d61850fc398c5129c1906693d27f8f9569baa3cc6908ee13ab7749351"
+      },
+      "buzzer-2": {
+        "case": "buzzer-2",
+        "verdict": "PASS",
+        "reason": "PCM contains 6 ordered tones and 2 silent gaps",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 21.253,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "bd5599be032d3a29aa69960e6634b6c46a4d1ab69659dc05db0ea4e622b92586",
+            "log_sha256": "d145794aaa4ccbcda0d6119157af19395b0bb362409bac1654d3300eb6f6d60f",
+            "png_sha256": "99d5831e11dbdf17fb02c4449337e1e9c63f379efcad61474a0ff8ff6539a4da",
+            "capture_sha256": {
+              "buzzer-2.wav": "22b9c93f467cfec4a790e703d426960e34ef6ef0bd0f1586cd41f38bb2ad22ba"
+            },
+            "guest_million_instructions_per_wall_second": 37.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "d1ef6923f8b40bd38d3220ec8028954e5df83a47cc1ed590c9983fd3db1b61a4"
+      },
+      "imu": {
+        "case": "imu",
+        "verdict": "PASS",
+        "reason": "Two injected IMU states and the stationary control match the axis readouts",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 73.354,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "a825bd2ec14cbf371649ece02c7440079542adf0b88904af1fc588b540966ee1",
+            "log_sha256": "2df73a5c71d26410215319d1bf942e80bbff8192de2220cfec8553f04c337717",
+            "png_sha256": "c3395637ed608f8355dd81beb0b0239d552790c0a4f54a7a47dd404addb0c80f",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 30.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 55.743,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "a825bd2ec14cbf371649ece02c7440079542adf0b88904af1fc588b540966ee1",
+            "log_sha256": "027f3b20e844b51a252e16c60c957fb4971b383f054d8532fbafa8fd840e3b33",
+            "png_sha256": "088e522004686b0407cac92ba2e4edd366350d8eaf56e4ed9293e71e301b1628",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 39.9
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 16.924,
+            "guest_limit_seconds": 6,
+            "firmware_sha256": "a825bd2ec14cbf371649ece02c7440079542adf0b88904af1fc588b540966ee1",
+            "log_sha256": "e693648c50309e21ed94d7efc238a7c64844eb5b839328da31c88d5073c9cfcd",
+            "png_sha256": "305c79b2d824e2cedbec4686d7d61b63461d5b721e39a9960726db1cef20cde3",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 78.4
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "500adf28db03c14f1a396c033aa5771efd7a15c36c8d1937da6d774323c8fe55"
+      },
+      "rtc": {
+        "case": "rtc",
+        "verdict": "PASS",
+        "reason": "Sandbox NTP, BM8563 calendar progression, and a changed clock screen",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 98.319,
+            "guest_limit_seconds": 12,
+            "firmware_sha256": "2eafc2ba54fd1f93e09991e875bf2e3726c8e004611bfc76d4ae3485db63779c",
+            "log_sha256": "2d43bd04328e8c33ff3df0aab8b3793d9a8c242ee2573c67142f82ce26e5e033",
+            "png_sha256": "32975e16924add647131c80a1008db5324b4b7a92fcdc8e87cacfee1708c1b40",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 23.1
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 13.088,
+            "guest_limit_seconds": 8,
+            "firmware_sha256": "2eafc2ba54fd1f93e09991e875bf2e3726c8e004611bfc76d4ae3485db63779c",
+            "log_sha256": "d4478eae04e883f58fe1014f78d7046b7299a4536bc0097c40e979bf2f1cff9d",
+            "png_sha256": "104b19f0b4e5922b6acd7860e2b2c8af37629c9e5491ac4541c3aa04292d294b",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 50.4
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "c4f9fd2e2bf700d5265bc2d6d539cbdd349948b8f466da0700ae6e9a5b450636"
+      },
+      "sdcard": {
+        "case": "sdcard",
+        "verdict": "PASS",
+        "reason": "Two seeded PNGs displayed and the exact WriteTest.txt bytes persisted",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 79.254,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "db480ab7675db2432c4131a2cbd68db0895c9772759b3f36197b4b6e24c56d21",
+            "log_sha256": "87d54f596e122de8082ebf3fe0c737252818fb3fc537e703dd1c72de2364c75c",
+            "png_sha256": "df86305bb131aca1d69b7eba18ffc88021af097a1bb5ae3469ac84915da0d48f",
+            "capture_sha256": {
+              "sdcard.img": "5e18a6ff9e43389e912cbcf7f9dfe48a1715114a50672393a1060aa00087f746"
+            },
+            "guest_million_instructions_per_wall_second": 24.2
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 69.17,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "db480ab7675db2432c4131a2cbd68db0895c9772759b3f36197b4b6e24c56d21",
+            "log_sha256": "1422deef6c51142ee2dfe84a871f73c9126ab3b9a72b213ba3e1a25d5f077650",
+            "png_sha256": "eddd2d1e215878933fb97bddc19887b880880a58b15f8027cad35853f6405d4b",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 46.7
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 24.79,
+            "guest_limit_seconds": 12,
+            "firmware_sha256": "db480ab7675db2432c4131a2cbd68db0895c9772759b3f36197b4b6e24c56d21",
+            "log_sha256": "b2e4225ee23381605bc34768147462f82dca3037acab10c876a58851bb2e168e",
+            "png_sha256": "392f9e88fdc4f3269406ef90c0deba7ce208ee88716413d62cdad737d6d7f04a",
+            "capture_sha256": {
+              "sdcard-first.img": "5e18a6ff9e43389e912cbcf7f9dfe48a1715114a50672393a1060aa00087f746"
+            },
+            "guest_million_instructions_per_wall_second": 72.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "53dc168b87ad1015de4e60ea3e38cd226aca6b8592cf12fd686abbb37cb253f9"
+      },
+      "touch": {
+        "case": "touch",
+        "verdict": "PASS",
+        "reason": "Guest reported two points and silent no-input control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 115.945,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "ca35f8c5e512f8cbc02b91a8eb760adb475bbe240ae84e6dc87f892145f2bcfc",
+            "log_sha256": "309ec6dc8d65d450789d0e6820608441cf55aaa5d3d0da43c2c09a6105f20753",
+            "png_sha256": "3f989092d99544c4add1b0270326255b564b25938aca76d3e57d2351725703a8",
+            "capture_sha256": {
+              "touch.txt": "deceeb413aed913d3857efd3b05fbd0aa186aa41c270212783f9110d9b6ee272"
+            },
+            "guest_million_instructions_per_wall_second": 30.8
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 43.522,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "ca35f8c5e512f8cbc02b91a8eb760adb475bbe240ae84e6dc87f892145f2bcfc",
+            "log_sha256": "8d08d678270a60dbb8474317bc61348cdfdbd3ef7ae7c9f50b5dd4405e56c1c2",
+            "png_sha256": "4c369c2ba250897a1ea4ac2d05c13634fc3405e64d9ea7fc839c92ee20da7c85",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 76.2
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "ba717175901ae6edda2b64e41e85b94ac93ac50ea86de7160632904ec7100061"
+      },
+      "wakeup": {
+        "case": "wakeup",
+        "verdict": "PASS",
+        "reason": "Original loop resumed after 5.000 s of RTC timer sleep",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 133.928,
+            "guest_limit_seconds": 13.5,
+            "firmware_sha256": "d2ccb863906c939241b2c252c2dc15226afe3e6d753a5a509aa01a33fb2e3fcf",
+            "log_sha256": "46542d0629e2eb5b880d0fdc3ffd1a06543c87742f6f8719a60415dc0993d7ed",
+            "png_sha256": "bfeb78c2b8fa6376dfe3039f661ba761041c72f516088183f0b9e26865f11c68",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 23.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "41697f5c39373dc4a07c0a95824efa5c31367de2a79a5a8f706acd3b6d41fbc7"
+      },
+      "quickstart-bargraph": {
+        "case": "quickstart-bargraph",
+        "verdict": "PASS",
+        "reason": "White markers and quantized bars animate over a black background",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 158.678,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "199ff066fba82c0ca453f86dcc90c5dfbf2d3b5706e0da2ff5b4c3cd3e6a7a92",
+            "log_sha256": "2e7e8d90656603efb487b706505052a547c5eff36a5861532b42e0cc60695e9d",
+            "png_sha256": "101984c4e30025fb5d52e977734e8636ebe7944b4c8e029ea63b3338035feba9",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 30.1
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 0.256,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "199ff066fba82c0ca453f86dcc90c5dfbf2d3b5706e0da2ff5b4c3cd3e6a7a92",
+            "log_sha256": "adedb10804505762e2a499321c5aed50c4d55f46e5b64058a59b45cc4d5f1705",
+            "png_sha256": "ec07d5ad0b51bc1cd02d64fcba856a77b363b9d39c25e8504a3ff69e3b234c22",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 114.0
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 26.415,
+            "guest_limit_seconds": 7,
+            "firmware_sha256": "199ff066fba82c0ca453f86dcc90c5dfbf2d3b5706e0da2ff5b4c3cd3e6a7a92",
+            "log_sha256": "837a440b848f0c6f3e8c01552579bbe8cbe22d570f09cbc996c84ca2365f9a11",
+            "png_sha256": "92f1150d7884118daaabed416ce4587e3884c4c3bd5d810bf1b29c0ffbf6dabf",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 96.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "7345a7b27639534404162c11d53c0ca05fa606075c68ab6a14fee71b4a96f3b0"
+      }
+    },
+    "papermono": {
+      "battery": {
+        "case": "battery",
+        "verdict": "PASS",
+        "reason": "PM1 read 3678/4200 mV vs 3900 mV baseline; gated IP2315 reported charging with VIN",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 15.675,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "04479a058a8ac2511f2262218f0278262f06e8d26701401dc31d932e89915183",
+            "log_sha256": "55ddc21807f19697547559a37a45e1012bf681f108d0305cc85bf42467692332",
+            "png_sha256": "12162a139bb2f479d592acc30281b277870afc74023da78f44a86cc50eb4cb93",
+            "capture_sha256": {
+              "battery.txt": "b6cdd1387399001558331bfa65e15c1135ee4509a0702a69f1ff8b156cfa0f45"
+            },
+            "guest_million_instructions_per_wall_second": 28.9
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 9.174,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "04479a058a8ac2511f2262218f0278262f06e8d26701401dc31d932e89915183",
+            "log_sha256": "d4bce1485a2bda9707c5c60bdab15c959ba29dc21525182e3ea3e5c7e2ff3854",
+            "png_sha256": "781b228d1e05b4e4cdada6eaea4aa8342b758780cfe5851c905dbc9aa44035bc",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 43.4
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 14.34,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "04479a058a8ac2511f2262218f0278262f06e8d26701401dc31d932e89915183",
+            "log_sha256": "f20f6dd1f85f276f96ca05f69a1ca412138062c56eb744d97941a65bbc84d667",
+            "png_sha256": "7fbb884b2819b6d249755ad9fb22cd8fa78b61d5a8c13f52aed975cd842bc011",
+            "capture_sha256": {
+              "battery-first.txt": "92e4bf82f04c1dd32a09370270ce206b4210adeab68bae2d16602ac92464457f"
+            },
+            "guest_million_instructions_per_wall_second": 27.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "52d5689bef73d631f0588de14df279793dea361f8dc5715210268a2849f75971"
+      },
+      "button": {
+        "case": "button",
+        "verdict": "PASS",
+        "reason": "BtnA and BtnB changed the visible status relative to the idle prompt",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 18.015,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "d38aed26734f2fa6fef09ad7b32d8b8601bcab8bdf5bff5008549115e7791a46",
+            "log_sha256": "5e3d83f7261aa5cb939c3975af3e9cadabf5282c15b47a85fa4c7897c73e02bd",
+            "png_sha256": "638f04495eed90efdf98c5c34d2707e5720479a100ce17dedd401ebde7fef155",
+            "capture_sha256": {
+              "button.txt": "fedafe8e721e97c863c75e181e9b6591df16ec0125a70d8448075b0b2eb5227e"
+            },
+            "guest_million_instructions_per_wall_second": 30.6
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 6.894,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "d38aed26734f2fa6fef09ad7b32d8b8601bcab8bdf5bff5008549115e7791a46",
+            "log_sha256": "cc357e5e4c78f91a42d7e9d144b24078ac33c2b08839168917007070a9fae572",
+            "png_sha256": "36edcae6ad4c0944dfac3af5e6160e2c3f3a62a06e4018e221cab24a3116a4b9",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 42.1
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 9.714,
+            "guest_limit_seconds": 6.5,
+            "firmware_sha256": "d38aed26734f2fa6fef09ad7b32d8b8601bcab8bdf5bff5008549115e7791a46",
+            "log_sha256": "268eae3c6ab61e20d861ee7072a43193aac6087656afd91c1aa2d32a887b3cc6",
+            "png_sha256": "1feca982985329c715221800b86e287cf387dbd07b14356f4091108d940b1911",
+            "capture_sha256": {
+              "button-first.txt": "fedafe8e721e97c863c75e181e9b6591df16ec0125a70d8448075b0b2eb5227e"
+            },
+            "guest_million_instructions_per_wall_second": 34.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "9a3bd4c2dbf0627e42737195ff13eceea7346f49c46a65c9dda774fd95cdfb14"
+      },
+      "buzzer": {
+        "case": "buzzer",
+        "verdict": "PASS",
+        "reason": "PCM contains 3 ordered tones and 2 silent gaps",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 19.874,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "0b21e41374ea0a5b269c3978486697ba67359cd671c57239b7c18c4e6a15374d",
+            "log_sha256": "0e37c2f9a2269aa27c515d8923577b341fde3ddf34173fe4507810cfd7bccab9",
+            "png_sha256": "0bbd4a6fe5b820fe90add20da83a6b547dba2f68604a395a65d0a5945415761d",
+            "capture_sha256": {
+              "buzzer.wav": "e3ccf800aad6c05ae754976ff60d75eafae1532f31eca5a860b6657444b1392d"
+            },
+            "guest_million_instructions_per_wall_second": 23.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "241f1e10573d47146e840ede56f200307c030ce318752631f7f652741e64e666"
+      },
+      "display-1": {
+        "case": "display-1",
+        "verdict": "PASS",
+        "reason": "Four quantized levels and white early control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 7.466,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "a964f83a7a48a0357b360714099b6d77519373ceb3fff39d8f5f297ccf8440df",
+            "log_sha256": "124f0680808dc40fb6a9c931b615fc06262c6d9c9a6793e1a9c897ae2883743a",
+            "png_sha256": "d85bf21614deeb008e5aa6a596ebf36dc6234b0102ed5e636f00eda96f0e2e62",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 31.6
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 0.243,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "a964f83a7a48a0357b360714099b6d77519373ceb3fff39d8f5f297ccf8440df",
+            "log_sha256": "88543de2623a51bbf95c325161ec051a7874eb4e8982e9f84cb8d29978f14224",
+            "png_sha256": "d4589d75cae5dd4ba58e3452c4a08a0e96c1c2954fe83070dd8284b8c27e8f0c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 129.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "7c3296d06c322b70ff58b2cdb3072a0d0bfea34d3e801b3a2e05bc5073832297"
+      },
+      "display-2": {
+        "case": "display-2",
+        "verdict": "PASS",
+        "reason": "Two touch-selected display modes yielded completed frames distinct from idle",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 16.716,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "186bfe5ede09593832bc8587b423b698f0ee3b577ba3711a9f8a380e85b7b7b7",
+            "log_sha256": "7e8087d505c73a659fb8a2b0e05e703e2dcf274a1f7a404c429b8744b9dd8605",
+            "png_sha256": "52bf0fc355cf6234f2b1e5b04ad69369e9bed09669d4921d9a9bfe03e9d883ef",
+            "capture_sha256": {
+              "display-2.txt": "cd6802c66c940d1dd78e2be6d45c947923eff18eb34699b63e6f92bedf282367"
+            },
+            "guest_million_instructions_per_wall_second": 39.8
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 12.283,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "186bfe5ede09593832bc8587b423b698f0ee3b577ba3711a9f8a380e85b7b7b7",
+            "log_sha256": "7004b0ce15fcfd430dce23074d1eaabc796ef972304ee64acaf1e955e59c8790",
+            "png_sha256": "abc2cb4e96eec53dbbf3961c6600ce2f53bcbc5af75a4d6bb65b30724ec27e8b",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 37.8
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 0.189,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "186bfe5ede09593832bc8587b423b698f0ee3b577ba3711a9f8a380e85b7b7b7",
+            "log_sha256": "76da5843edc1773671e9ee6c53e13020d917dba2e40c78576c62aa5fdc583adf",
+            "png_sha256": "d4589d75cae5dd4ba58e3452c4a08a0e96c1c2954fe83070dd8284b8c27e8f0c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 147.6
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 11.386,
+            "guest_limit_seconds": 6.5,
+            "firmware_sha256": "186bfe5ede09593832bc8587b423b698f0ee3b577ba3711a9f8a380e85b7b7b7",
+            "log_sha256": "cd80c9bb42ccaebaf2d43b8a8ac94b9f1ef6a18d25869085af363910e2bd642a",
+            "png_sha256": "61cd7c3aaeadcd7a9aac625e76902c7201fc7b24852f95093225aa58cec37bbf",
+            "capture_sha256": {
+              "display-2-first.txt": "cd6802c66c940d1dd78e2be6d45c947923eff18eb34699b63e6f92bedf282367"
+            },
+            "guest_million_instructions_per_wall_second": 34.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "688fa34937636cd720a1469d1125bbe7c0a2073ab5e9f5d0461b71f98f0796c9"
+      },
+      "imu": {
+        "case": "imu",
+        "verdict": "PASS",
+        "reason": "Both inputs changed the visible measurement relative to the control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 16.79,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "e739badce88a8a18fe791f51d34597494e5673a5985cb94a765fe8b4afc9ffed",
+            "log_sha256": "be5181166eb047bf1a849a18fcafbec3305e1c1ba8fb89f79debf33cfa43b98c",
+            "png_sha256": "5c0fd03721880169b5f8715ad163dcb9705534193da1a48c493fd1123453c120",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 44.1
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 14.347,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "e739badce88a8a18fe791f51d34597494e5673a5985cb94a765fe8b4afc9ffed",
+            "log_sha256": "6f862c3559bad20bc141448537738c449cd3090c7d23a5927c668a7fb7cc079b",
+            "png_sha256": "bea0c3c7fb9e733bfb867536d40e5a0e97e59e2f67355b091e175a9c68cf99bc",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 51.4
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 10.139,
+            "guest_limit_seconds": 6,
+            "firmware_sha256": "e739badce88a8a18fe791f51d34597494e5673a5985cb94a765fe8b4afc9ffed",
+            "log_sha256": "b8b0767f74936fba5a78f2c7e865bc105325e4dc377cc691159a80c4109097a5",
+            "png_sha256": "4456f5e98cb1fe8008d879007a10724e1e2974d9b2afd6c7e7f8b780c56749ca",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 38.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "906baa7cb18fc9451451aca6295f508fc168c12f4d6232fa5fcd75f6e914aa6f"
+      },
+      "lora-1": {
+        "case": "lora-1",
+        "verdict": "PASS",
+        "reason": "SX1262 peer read 4 exact payloads; disconnected control read none",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 10.323,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "c80930408643fde59a8bc7b7f9f3bdfaafe6881966eff197db4037e04062b2ef",
+            "log_sha256": "1ac4d545474b64897ed90b6c283f42b6f37e265fed34abd5a31ad23962823379",
+            "png_sha256": "d49256cf2247cbafe76e6b06fcd440282421560d525b5c1383f570ff9f6caf62",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 45.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "29e58e7ca109064c3c657cdeec3de9fb1f723731dd6ed8cfa5ed2169ea6a3d9e"
+      },
+      "lora-2": {
+        "case": "lora-2",
+        "verdict": "PASS",
+        "reason": "SX1262 peer read 4 exact payloads; disconnected control read none",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 16.058,
+            "guest_limit_seconds": 43,
+            "firmware_sha256": "b271c68ab780c9ec386a84d21cab5c807d48c98bc2fb379754a5a3f4485c7497",
+            "log_sha256": "4d4573266c746e07b411eb31b4a7fe5facd70a7dc53453300d772d70ead7e2bf",
+            "png_sha256": "40e96cd693446b807638cbd5c912cce3d4bf12ede14edf2c6e27782e5d74f13d",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 36.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 6.536,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "b271c68ab780c9ec386a84d21cab5c807d48c98bc2fb379754a5a3f4485c7497",
+            "log_sha256": "7e6b4d14cd719a0e5f3abc53cd198134c16ce183288b4006d03b64c6424e2d04",
+            "png_sha256": "e7c0dcf5140cb35af62e4b8bb315f240e0a15bd7cdd24e35f0b183c12e9c2ce6",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 38.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "dfb5f39477d40507baeb810d9dce5ee6b31fc396bc988e0e0fb5bacab38ce38a"
+      },
+      "m5pm1_m5ioe1-1": {
+        "case": "m5pm1_m5ioe1-1",
+        "verdict": "PASS",
+        "reason": "PM1 timer arm produced a power-on reset and a running guest",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 123.885,
+            "guest_limit_seconds": 34,
+            "firmware_sha256": "63a479f48ef15fcc1d64b8f8237b2ab439d558de18ccd46319694fce31237862",
+            "log_sha256": "9a64c32624b4cb7c3aa5c78bd3e4ce1dca37917c795679c056b52b1e07e75bc9",
+            "png_sha256": "08c8819343816cd71a35c8eb7d2e979eebacb200664d547513e039333dc5a152",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-1.txt": "3546b3b4e51741e2805f83ae1ac7384bbdb54033db0f8567f6262d4618c6e7bc"
+            },
+            "guest_million_instructions_per_wall_second": 30.4
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 121.636,
+            "guest_limit_seconds": 34,
+            "firmware_sha256": "63a479f48ef15fcc1d64b8f8237b2ab439d558de18ccd46319694fce31237862",
+            "log_sha256": "aee1a80c776078cf079d43035c2156925449024bc0f78573f8e5a4e07a1f5e39",
+            "png_sha256": "601573cabd7545cf7c87e36946fc2f6045b36df0c155e3a3b4bfb0ad0c51b0f9",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 65.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "ffe6adc5d071293e217c30c791fcfc43f5306cf946ddda47d3fe2644124333c3"
+      },
+      "m5pm1_m5ioe1-2": {
+        "case": "m5pm1_m5ioe1-2",
+        "verdict": "PASS",
+        "reason": "Wake source restored the simulated power rail and restarted the guest",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 123.563,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "479caa1b3751277c4c4fdc6285e02867ddbb22bbe5f6b38ef159c47af249d6c2",
+            "log_sha256": "8803f505214e6b4d876c5fe10e509113f47747ddb22386f82916ff7ad139672d",
+            "png_sha256": "fa9907b5c7fbd53d5b40ada2d35ce55277da2b065d40faa119c719285f098b7e",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-2.txt": "846ba440e087beea2d74bb742767582036c022aaf40905363cad90b4967fc966"
+            },
+            "guest_million_instructions_per_wall_second": 30.7
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 9.931,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "479caa1b3751277c4c4fdc6285e02867ddbb22bbe5f6b38ef159c47af249d6c2",
+            "log_sha256": "17144f9a76f62afebd9e51683453e3d8d86398e4cf863046de0cbb42c83b7b26",
+            "png_sha256": "f17fc5f7bb5af4a544dfb77954d576af330108acd3997f7c38173d2da667dc80",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-2-control.txt": "37fb77f0eec159818c66e98a4817d81573a14ef47944164fa9a27265c199d97f"
+            },
+            "guest_million_instructions_per_wall_second": 51.7
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 30.694,
+            "guest_limit_seconds": 12,
+            "firmware_sha256": "479caa1b3751277c4c4fdc6285e02867ddbb22bbe5f6b38ef159c47af249d6c2",
+            "log_sha256": "ce7bbe2649328c03e6a775696c763239a5a8ca5cdc60ea49c4b19605ed9e6631",
+            "png_sha256": "fa9907b5c7fbd53d5b40ada2d35ce55277da2b065d40faa119c719285f098b7e",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-2-first.txt": "a0348786ec556fedb50c1f5321d8fcbbe75322c2bd001f1047eb5a37048ee192"
+            },
+            "guest_million_instructions_per_wall_second": 37.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "57369e25a712ee730e200bd1e3617d676f405e99328cab6e7fe5eb9d167e10e7"
+      },
+      "m5pm1_m5ioe1-3": {
+        "case": "m5pm1_m5ioe1-3",
+        "verdict": "PASS",
+        "reason": "PM1 IRQ and the guest wake status matched the input",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 169.052,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "3643e57edf1d2537e6014c599204352d819849c4ca51c73b3048c50038c43365",
+            "log_sha256": "4cb425025d3508917f502438491538c1c97d0b0392d24425757b199d20f98e55",
+            "png_sha256": "14ae5fbc5789e70d7650d3568c8f8f6f7400c9184e26c20a463791cb0912e919",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-3.txt": "846ba440e087beea2d74bb742767582036c022aaf40905363cad90b4967fc966",
+              "m5pm1_m5ioe1-3.vcd": "544f0e40df8770767e6cc18c3c4068da4dd9c5ed6044aa1f212d5d8ef1997f9d"
+            },
+            "guest_million_instructions_per_wall_second": 28.0
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 79.762,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "3643e57edf1d2537e6014c599204352d819849c4ca51c73b3048c50038c43365",
+            "log_sha256": "76740da3a34a8167ce5445c33d4ba7c007d153cc2a57146758819a44ab9440c0",
+            "png_sha256": "ec4b25a4e4e1626740816d431334aea76668e5f0812d7dd3c3ea7268a0dc347f",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-3-control.txt": "37fb77f0eec159818c66e98a4817d81573a14ef47944164fa9a27265c199d97f",
+              "m5pm1_m5ioe1-3-control.vcd": "95a1bd6e60cdeeea4a111a04ada6f94c031e79fa3868f5dacafd3050e29906be"
+            },
+            "guest_million_instructions_per_wall_second": 60.2
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 52.021,
+            "guest_limit_seconds": 12,
+            "firmware_sha256": "3643e57edf1d2537e6014c599204352d819849c4ca51c73b3048c50038c43365",
+            "log_sha256": "ce9641e2ac364e95d17d1ad8291b09349bf178fa3709cd7d024a4439425eb302",
+            "png_sha256": "14ae5fbc5789e70d7650d3568c8f8f6f7400c9184e26c20a463791cb0912e919",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-3-first.txt": "a0348786ec556fedb50c1f5321d8fcbbe75322c2bd001f1047eb5a37048ee192",
+              "m5pm1_m5ioe1-3-first.vcd": "8cc771b8ca394c672ad3793a42ae307afbb151840983591193e01c084a47c940"
+            },
+            "guest_million_instructions_per_wall_second": 40.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "d0b7dc6672c306b13338e76a2b8ed89f3fb8dc86bb16a724ebcaec04bb591017"
+      },
+      "m5pm1_m5ioe1-4": {
+        "case": "m5pm1_m5ioe1-4",
+        "verdict": "PASS",
+        "reason": "Wake source restored the simulated power rail and restarted the guest",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 124.185,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "0e8cae8f0e87b5bfaf23b3337418150c70bacd533fc4b270bcf786a6aae38c93",
+            "log_sha256": "41f1196e84a6d77f91667dbac3b67e7abc0de2dac4d371105c88c701431da7c5",
+            "png_sha256": "5a7f5047dd485118857efdbe37d3040daee44531a26f1e83001a6cc3042a7c41",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-4.txt": "37fb77f0eec159818c66e98a4817d81573a14ef47944164fa9a27265c199d97f"
+            },
+            "guest_million_instructions_per_wall_second": 30.9
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 77.715,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "0e8cae8f0e87b5bfaf23b3337418150c70bacd533fc4b270bcf786a6aae38c93",
+            "log_sha256": "9029a464548ffc7460196debfea5aa54f92b14aeefb50d3a33697dfdfbe89aa4",
+            "png_sha256": "5a7f5047dd485118857efdbe37d3040daee44531a26f1e83001a6cc3042a7c41",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 67.5
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "a6e9ce737c5c680f1fc23d71b6c3695fc9f26f968900891e9dc3443de11828d5"
+      },
+      "m5pm1_m5ioe1-5": {
+        "case": "m5pm1_m5ioe1-5",
+        "verdict": "PASS",
+        "reason": "PM1 IRQ and the guest wake status matched the input",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 161.378,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "b256949827214f4da9a12ea243f17ecb64e4c180b914dc20936faee07a7177c3",
+            "log_sha256": "f4973e79ae22fd185e93e5302d932a06da5c149b4b79935ed9908a6587b5b235",
+            "png_sha256": "678d43a9bbfe7c91825fc38b5b9af4e39ece6922a2a8b0932d3c807f470f2704",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-5.txt": "37fb77f0eec159818c66e98a4817d81573a14ef47944164fa9a27265c199d97f",
+              "m5pm1_m5ioe1-5.vcd": "7456c96895e00d20d3267527cde85cd8faca41b0a276694072a1d48457041361"
+            },
+            "guest_million_instructions_per_wall_second": 29.8
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 53.497,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "b256949827214f4da9a12ea243f17ecb64e4c180b914dc20936faee07a7177c3",
+            "log_sha256": "aa2a4b61f891f33f39bf7c1717a11522f88a2679b930c09ce4d4b18cbc03e4ab",
+            "png_sha256": "b005d9cf8b59d05d901d33c84caeabff0b46193625e2fb85bdea04403f9f4738",
+            "capture_sha256": {
+              "m5pm1_m5ioe1-5-control.vcd": "b82087c2178d57d28f8dc9568f6d80d1343170f7f1b239ce9301fdc11948c950"
+            },
+            "guest_million_instructions_per_wall_second": 96.4
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "2731057a20a1a34d416e87b1b2e6f3792f9d13411a49bf6900d1adb7a6c8dbeb"
+      },
+      "m5pm1_m5ioe1-6": {
+        "case": "m5pm1_m5ioe1-6",
+        "verdict": "PASS",
+        "reason": "IOE1 W initialized, PM1 LoRa rail enabled, antenna/reset/NFC/LED latches toggled",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 27.157,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "b1b3e4a304c786e78df293b3c96f59e82aa3b6c720bc8b2234b08535f3965a1f",
+            "log_sha256": "debce300d1775e666527581638c33b82e4d9ae8c9f832ca800c1f93c25132ff1",
+            "png_sha256": "7c2dd15553860125ee872917e8039907aa0f3bc927bdca03f3b7e8816524237a",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 34.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 10.792,
+            "guest_limit_seconds": 23,
+            "firmware_sha256": "b1b3e4a304c786e78df293b3c96f59e82aa3b6c720bc8b2234b08535f3965a1f",
+            "log_sha256": "39300d618a11eb485cf8f6ea87ea593f16f48112bb2db0b9ddb9bc637033cd0c",
+            "png_sha256": "7c2dd15553860125ee872917e8039907aa0f3bc927bdca03f3b7e8816524237a",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 87.2
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "71d4db3cdfe6bec6eff978deadb0a9a4ba7b2f288d8e64bdb2f3d91738649f9a"
+      },
+      "mic": {
+        "case": "mic",
+        "verdict": "PASS",
+        "reason": "Guest microphone RMS tracks both input amplitudes and silence ([1138.7, 4562.3, 0.0])",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 32.001,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "045ad575eb00b9cd6d929c9d17746d2474611f80bfb3683ffc9100aaa151d348",
+            "log_sha256": "b2af3d86e9c9ab5c9c0e30b48a20a3440aabc94402f090f80e263d11e8c99215",
+            "png_sha256": "1fd8d7222b80fb685d1531cfe6368d2a3ab0497caacd8663ce29e9ff449ee129",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 34.3
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 11.229,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "045ad575eb00b9cd6d929c9d17746d2474611f80bfb3683ffc9100aaa151d348",
+            "log_sha256": "3d0e7d4aa50a11561387178aa39f0e63f194617778c528ba231c8f387e77bdbf",
+            "png_sha256": "2ca94868030c0a6730ac2e7d36958dfd68302ba9b3b8d5fd2d7370453911c5c4",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 90.0
+          },
+          {
+            "kind": "second",
+            "exit": 0,
+            "wall_seconds": 28.725,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "045ad575eb00b9cd6d929c9d17746d2474611f80bfb3683ffc9100aaa151d348",
+            "log_sha256": "c97e079b95808d44c867ceb019eec0cd9384eb9865543beaad83bbb35520332f",
+            "png_sha256": "27cbbaec0f29fc3a54b99de98ab218b4ee6152bc3b24870236dd266dae6cfe24",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 41.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "ad6b9a50563fd738ce018746c2f8faf69a02ec539c1c95997727c432a5cd290f"
+      },
+      "microsd": {
+        "case": "microsd",
+        "verdict": "PASS",
+        "reason": "SDMMC reads produced the seeded JPEG bars; no-card control stayed on its status screen",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 7.937,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "31347ec96d66664274e1acb84b221b8a17fc7f508ecb5052ed7a61cfbdc4c99b",
+            "log_sha256": "1f1763a3330a1a18b8705c7005e3a9cdfbdcab6d585235bbf66c5a9856b111ff",
+            "png_sha256": "c0072250eeb1394b6aaa7e5f533520a784957877e585a6176eb9f144f3d8ee71",
+            "capture_sha256": {
+              "microsd.txt": "222c96186e383150fb3465ab284f22c03ffd3a6bcc11d196bd7dc2c715525d8f",
+              "microsd.img": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea"
+            },
+            "guest_million_instructions_per_wall_second": 34.2
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 2.258,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "31347ec96d66664274e1acb84b221b8a17fc7f508ecb5052ed7a61cfbdc4c99b",
+            "log_sha256": "5fd3ac9e2d05f4fc89d8b446295c76321f492e966249eb6881595713da264a6d",
+            "png_sha256": "9f1200aa83f9b63d877ee088e4fe400e4ed616c563701ed2077ad737f90493ec",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 93.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "00b104d53412bf9775b760172349fbd78fe1486bdf3c7042a9aa94fb1f34c260"
+      },
+      "nfc-1": {
+        "case": "nfc-1",
+        "verdict": "PASS",
+        "reason": "Guest read both programmed UIDs through ST25R3916 IRQ/FIFO and displayed the results",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 40.646,
+            "guest_limit_seconds": 16,
+            "firmware_sha256": "b3cb7d0f5e48684271272b327fa5db849b754be89ecd47e450a51137944bd4b5",
+            "log_sha256": "00cf26e65264bb7fe4384a06b7963611db0165d1f2f7088c7ee92c44502c6b0e",
+            "png_sha256": "4fa5d7fc5824fe4f32c696b0c507ef7d61a003288c60eba6b60457a14e3b28b6",
+            "capture_sha256": {
+              "nfc-1.txt": "9764659ba21561c3b47025cb99d9b611bd6b4dfc5b98543e4ff25943afa0dccb",
+              "nfc-1.vcd": "99ce6e0ed522b72e5d82f012714a032ccd4190593c8f240ab7472a050a067d78"
+            },
+            "guest_million_instructions_per_wall_second": 30.9
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 20.669,
+            "guest_limit_seconds": 16,
+            "firmware_sha256": "b3cb7d0f5e48684271272b327fa5db849b754be89ecd47e450a51137944bd4b5",
+            "log_sha256": "0188abc7f9831e7c936a172289edc3a007903b506dd12e35d180c9be239fe628",
+            "png_sha256": "8ae3645534c56a293f60a1650e69ecdd5e4c886687f1b105610f8da93d5fd710",
+            "capture_sha256": {
+              "nfc-1-control.vcd": "184e673d956b86c8565c2a2503eca1a0bd7fa9683219ccfa1a1dd9a7c1e70624"
+            },
+            "guest_million_instructions_per_wall_second": 102.5
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 34.837,
+            "guest_limit_seconds": 16,
+            "firmware_sha256": "b3cb7d0f5e48684271272b327fa5db849b754be89ecd47e450a51137944bd4b5",
+            "log_sha256": "4e27733b7a318aedf28745c2a0f9653c5dca6995a43e6045455aa79284840518",
+            "png_sha256": "d17f8f3cd9b60ba4b2b4c6c1441590f6edace186c4428893b24baf6799028255",
+            "capture_sha256": {
+              "nfc-1-first.txt": "97ca0825c09df253840a142185e13aaeddcd8e4804e22f088f38d3fc04aee32c",
+              "nfc-1-first.vcd": "70d5f719126d8639ce0fc5c85d4be24d419a839f2f614ab8b25fda3aec3f4863"
+            },
+            "guest_million_instructions_per_wall_second": 36.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "1dd28d5e6578149b9686dc061e5ce87f54f2c615471d42c5806c67ce15a8a427"
+      },
+      "nfc-2": {
+        "case": "nfc-2",
+        "verdict": "PASS",
+        "reason": "Guest read both programmed UIDs through ST25R3916 IRQ/FIFO and displayed the results",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 52.638,
+            "guest_limit_seconds": 25,
+            "firmware_sha256": "b12a7972d9875c55bc1f670b836747193890964009399aaf608b0dc595469ece",
+            "log_sha256": "31557468f321ad418f2dfa5bf41d25dcb4eb0f371ea66c4596df14c24e16e323",
+            "png_sha256": "3d7e9f8690984285ddb3316b6fcb09592b742bd15b2412d5525b22f47b5701c5",
+            "capture_sha256": {
+              "nfc-2.txt": "a7cc47b359b687b4edfc741e3b1a66d3eb8116b0e2f90c5c2d9064181622e2b9",
+              "nfc-2.vcd": "d4c2c86efd3e6fd4e442dddedabd077663a8d478646a459af07243b89951cc9e"
+            },
+            "guest_million_instructions_per_wall_second": 33.0
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 14.682,
+            "guest_limit_seconds": 25,
+            "firmware_sha256": "b12a7972d9875c55bc1f670b836747193890964009399aaf608b0dc595469ece",
+            "log_sha256": "0f81bad1e9be2818ce38825f700e5b0a99caf45b200ca8afc1ad7962f860c412",
+            "png_sha256": "32afc6135a8bc7166637fb8ab17960401b836621dfed594191a5cffb1f299448",
+            "capture_sha256": {
+              "nfc-2-control.txt": "045e0e269efc75b402964991e953eae5fcd95e53e5c9c93ca45850b2bf82d495",
+              "nfc-2-control.vcd": "9da0ade84477cc88d5e9de33f8383857f98e0fd994f5081fb5feda45cdb0c978"
+            },
+            "guest_million_instructions_per_wall_second": 116.1
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 40.544,
+            "guest_limit_seconds": 25,
+            "firmware_sha256": "b12a7972d9875c55bc1f670b836747193890964009399aaf608b0dc595469ece",
+            "log_sha256": "c8460a0ad4b841d4348c8953573d2fbefbc235206cd6fed4a0a148a44163d31b",
+            "png_sha256": "cb67f099856d97bdde3229bf424f1e850b636f451b498ed62cb47173a71941f9",
+            "capture_sha256": {
+              "nfc-2-first.txt": "1884a6a1783ea1013f6e6cba47f3e937b380785018341312c169136077d816a4",
+              "nfc-2-first.vcd": "09b70293abe3109ae983b1c6cf41cbef4b5f9c90a8c3a799f5ab78799ed62c23"
+            },
+            "guest_million_instructions_per_wall_second": 42.8
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "6525ff2623e35f6b507ccabc353620066ed181261469781d532a94f9182be7e0"
+      },
+      "nfc-3": {
+        "case": "nfc-3",
+        "verdict": "PASS",
+        "reason": "Guest wrote and read exact URI and text records on both tags through ST25R3916",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": null,
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 69.066,
+            "guest_limit_seconds": 43,
+            "firmware_sha256": "8c8864f830f20e183b5923058ecb9a3c35019ec7bb61edb507746f26a4917972",
+            "log_sha256": "cd2424605bb9da427a096f66a6bc643eb9336c3614b1e1418b582bc9f563b9c6",
+            "png_sha256": "e4b6b369855d5e3261745d7c20de4b92c57e7f7ba290194b326fe7122dc6b76d",
+            "capture_sha256": {
+              "nfc-3.txt": "3ea110e8e15a2e9a47ef47082d82e9c12929ec84d33f9b531bb6cf91b2dc6e29",
+              "nfc-3.vcd": "cdd60440dad3e81a62248c3c7f4db063f7c0621f4009883b3da7af90b6c6eca2"
+            },
+            "guest_million_instructions_per_wall_second": 33.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 64.518,
+            "guest_limit_seconds": 43,
+            "firmware_sha256": "8c8864f830f20e183b5923058ecb9a3c35019ec7bb61edb507746f26a4917972",
+            "log_sha256": "36240e6c23d7f6be06368a4740e30132a331a433e82dd9be774c4b876d33e05a",
+            "png_sha256": "1edbb416f82f5f80f326f16dcbaa745c023498349e5e7beebcebd82e048ca6c7",
+            "capture_sha256": {
+              "nfc-3-control.txt": "928dc9994a466ad272fa7033adb96b61edb13a46c14181c6601537650055be62",
+              "nfc-3-control.vcd": "1cef1d7d9cb051af1a5e8557f596e951e9db1f1bf3a38954526618da200c3229"
+            },
+            "guest_million_instructions_per_wall_second": 33.8
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 62.582,
+            "guest_limit_seconds": 43,
+            "firmware_sha256": "8c8864f830f20e183b5923058ecb9a3c35019ec7bb61edb507746f26a4917972",
+            "log_sha256": "e80c186df8582f8f9284116308bd2d1045a2ad69ae82ed22c70a4f0047a21679",
+            "png_sha256": "e4b6b369855d5e3261745d7c20de4b92c57e7f7ba290194b326fe7122dc6b76d",
+            "capture_sha256": {
+              "nfc-3-first.txt": "79a0f9ffb49562f546f5e1ef5dd7831743b392c8ab42c5d2bafe5ccbb4dae883",
+              "nfc-3-first.vcd": "cdd60440dad3e81a62248c3c7f4db063f7c0621f4009883b3da7af90b6c6eca2"
+            },
+            "guest_million_instructions_per_wall_second": 36.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "a92a788ad2d0cbcc04c3daac3de5b063dd8f0ce7adc9394d5e7642f61ac0044f"
+      },
+      "nfc-4": {
+        "case": "nfc-4",
+        "verdict": "DOCS-DEFECT",
+        "reason": "nfc_4.ino calls units.begin() before enabling NFC power through IOE1 GPIO4",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 52.937,
+            "guest_limit_seconds": 9,
+            "firmware_sha256": "12779aaa456094944c1d9fa3aaf614ec410903cfdd2cf539c328e00df2ca8e9d",
+            "log_sha256": "163aa532559fd83b7d7c14135f9ff5018f901158376e62d68e80831c87ea3b0a",
+            "png_sha256": "99f3c2382b84d61cfa2ef39ba239feaca264713c368ad1a40dbf0d6e57e6b26c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 37.8
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 14.642,
+            "guest_limit_seconds": 9,
+            "firmware_sha256": "12779aaa456094944c1d9fa3aaf614ec410903cfdd2cf539c328e00df2ca8e9d",
+            "log_sha256": "d40bb2e9bab36b169250ca595459ac132ca03bd282893ee427ae0ec9c16edeed",
+            "png_sha256": "99f3c2382b84d61cfa2ef39ba239feaca264713c368ad1a40dbf0d6e57e6b26c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 137.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "d94d8b3dc5ae017e66c8d43bb2b087f5356d3eb76d5289c61fcbf270fde78b0f"
+      },
+      "rgb_led": {
+        "case": "rgb_led",
+        "verdict": "PASS",
+        "reason": "The installed LED channels followed the documented sequence",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 4.039,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "d0b564e7b64a6a62471883e436f942713a72ff7803ec92bc187c8ad6608d2bad",
+            "log_sha256": "13379470684d3b5241e0cf9e094baf0412ce1fcf1747462930c21300df679712",
+            "png_sha256": "d4589d75cae5dd4ba58e3452c4a08a0e96c1c2954fe83070dd8284b8c27e8f0c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 29.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "573999f8ff577ca45f017aa5e8fc3dd9bc559bf29fc2dd77a39715a916ec06ce"
+      },
+      "rtc-1": {
+        "case": "rtc-1",
+        "verdict": "PASS",
+        "reason": "Guest set August 18, 2026, read the advancing RX8130 time and rendered it",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 7.315,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "b91c16b689431545921a2ee6e091d96c433ae4a2010746a5555db4c231b77f55",
+            "log_sha256": "79123ab73162271855aa0be7858ad7bd7fb5009511ce17b29646789c10c9b876",
+            "png_sha256": "f0cf21443986df0de24a4a772d5f9b04d49aee35d577e788877c0cb054a8aa61",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 37.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "5b2409c60bfd807107ae950ff2594a7cae96179f7f43363e41481d9b1aa14886"
+      },
+      "rtc-2": {
+        "case": "rtc-2",
+        "verdict": "PASS",
+        "reason": "NTP synchronized RTC, guest read back advancing time, and idle control stayed offline",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 22.574,
+            "guest_limit_seconds": 25,
+            "firmware_sha256": "3d6f86644ff70eb9c0b0d7346b42a5732f1d095523c7e98794526fcc1efc2b24",
+            "log_sha256": "0dc8625feaf4759babed5baf26efec37cc2c0052d4a115ae7c0b21887dc09c01",
+            "png_sha256": "c16aad24a6d360ca6df242d47f1372dd0656d13376929ff8f1eba842a53c2f50",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 18.6
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 1.669,
+            "guest_limit_seconds": 8,
+            "firmware_sha256": "3d6f86644ff70eb9c0b0d7346b42a5732f1d095523c7e98794526fcc1efc2b24",
+            "log_sha256": "f3b12cf8ab47693fc2c874dc16157bf9946b86ab8d9bb4d91c9baeeda1855c59",
+            "png_sha256": "9756d1352daae7721a6ac0ff571785da48e38027b95c72f19c87f03b6fd3aeda",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 134.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "f9fa0bb79480878ac33128a8be6f77de7aa7e255dfd1e74815cb0e5043b2099d"
+      },
+      "touch": {
+        "case": "touch",
+        "verdict": "PASS",
+        "reason": "Touch markers at (60,120) and (190,320), then the untouched frame after both releases",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 13.451,
+            "guest_limit_seconds": 17,
+            "firmware_sha256": "142c95436677df6fb9b28c6baab48283592156a775b3c6df0656b37291fb134d",
+            "log_sha256": "42c5d786fec826b9c5c04705642c1e68759d1b57dd65362eb9007d3055820ba8",
+            "png_sha256": "30b6dfb6c68f9ef443bc6554469b35e1ad5af3708a343f0c630ca07780ee6793",
+            "capture_sha256": {
+              "touch.txt": "20d5ec832eb8f6a08d1635b1a6a46ee9e9a5a2ecc1ef7a4efe1d0571138ac726"
+            },
+            "guest_million_instructions_per_wall_second": 42.6
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 2.106,
+            "guest_limit_seconds": 17,
+            "firmware_sha256": "142c95436677df6fb9b28c6baab48283592156a775b3c6df0656b37291fb134d",
+            "log_sha256": "02be2244a57ec1208e71d42dd38d85c3452e854128f9c12ab412bf6cf93cea86",
+            "png_sha256": "30b6dfb6c68f9ef443bc6554469b35e1ad5af3708a343f0c630ca07780ee6793",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 136.5
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 5.261,
+            "guest_limit_seconds": 11,
+            "firmware_sha256": "142c95436677df6fb9b28c6baab48283592156a775b3c6df0656b37291fb134d",
+            "log_sha256": "5e4960ce08e38f67406d556527f7d6bdb71a72e8a4b65cf8a12ad3293112cfdf",
+            "png_sha256": "58df5b1655cd57b354c5f969be357a56d5ea15e4683dfbce56daf0f8b9e82b91",
+            "capture_sha256": {
+              "touch-first.txt": "5f011561dae47bf1fb1268d62894feb92f69f7a436dab2ae083d62944f723c55"
+            },
+            "guest_million_instructions_per_wall_second": 60.6
+          },
+          {
+            "kind": "second",
+            "exit": 0,
+            "wall_seconds": 7.625,
+            "guest_limit_seconds": 11,
+            "firmware_sha256": "142c95436677df6fb9b28c6baab48283592156a775b3c6df0656b37291fb134d",
+            "log_sha256": "a3485a71a3131e0d71b638740a5beb620debe78ba2c701bf5ea03ceb94c0e32c",
+            "png_sha256": "b40cd28ecc6fb1d25a1f73d9ecf031e1ebecd216c7f6d817452280dafa7705b7",
+            "capture_sha256": {
+              "touch-second.txt": "9af79c36f80b3c0e2706aa0d75e80d8b0a90384e76c475b96a88b0932b9b9f54"
+            },
+            "guest_million_instructions_per_wall_second": 41.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "787d75e4e338aa36d299f58635bb83f2badbbff720be771cb62dd71425e37ed8"
+      },
+      "wakeup": {
+        "case": "wakeup",
+        "verdict": "PASS",
+        "reason": "Button A resumed from light sleep and Button B rebooted from deep sleep, both after five seconds",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 26.806,
+            "guest_limit_seconds": 32,
+            "firmware_sha256": "bfbd5e881892ed670b5ba84b5ec436cb0a78d931016dfb47d1a2701686b625dd",
+            "log_sha256": "a8fe2a2d97c3cddc92401f20b94a612cfe6956c7d1aa6fddfd536eaf92b6223d",
+            "png_sha256": "6454e736a2698a8e0c66b2847ad94d72c10d3f5b68b6ba5d7d36ea060f8bff06",
+            "capture_sha256": {
+              "wakeup.txt": "a0159993b45fbebcd7f52ab68ebbc0d813ddaa2e4a4ae6037152ba7cda1991f3"
+            },
+            "guest_million_instructions_per_wall_second": 39.2
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 17.539,
+            "guest_limit_seconds": 32,
+            "firmware_sha256": "bfbd5e881892ed670b5ba84b5ec436cb0a78d931016dfb47d1a2701686b625dd",
+            "log_sha256": "b674548bc820ff0bbd8f24817bbd4bfe9818270c6772a231baf241fda97cbc7b",
+            "png_sha256": "f2d5d99f0ad260c2703a40ac953ee31e0763a807d13ab87e573c60df58b30b8b",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 41.7
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 26.203,
+            "guest_limit_seconds": 25,
+            "firmware_sha256": "bfbd5e881892ed670b5ba84b5ec436cb0a78d931016dfb47d1a2701686b625dd",
+            "log_sha256": "69dcdcc7db6f6ebf2a9fb77976524b7f228200d2c1ff4077b595cc459fd03ba1",
+            "png_sha256": "b87a98a7268bf82314745567ddd72688a012fe3ffcd81bebfc66946083a24cc5",
+            "capture_sha256": {
+              "wakeup-first.txt": "9ea69f96cb9f0d0cd02d05c8a103446406962399543bcacdc5a10b1da8b99f84"
+            },
+            "guest_million_instructions_per_wall_second": 43.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "6b32ab286dd13aed43eaf821c09f22c214e5cea5c33c3601f8e2008adcfe6332"
+      },
+      "quickstart-bargraph": {
+        "case": "quickstart-bargraph",
+        "verdict": "PASS",
+        "reason": "White markers and quantized bars animate over a black background",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 18.681,
+            "guest_limit_seconds": 13,
+            "firmware_sha256": "523fe5f2743dcd8386094ca47928a1c493dbd9c773d46335202c2279c399b653",
+            "log_sha256": "0530057e91dc1b404fd60dd09cfd916a410c215a80dab0e158b0bc9d85e36691",
+            "png_sha256": "413a070485f89b2fea15a2b53daf305696b23749e34c351cb06a1ec0ed6acb44",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 44.8
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 0.194,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "523fe5f2743dcd8386094ca47928a1c493dbd9c773d46335202c2279c399b653",
+            "log_sha256": "92a2d9b54407c84da2b39bdffa2233fbc726979af8a5b39a5f74b52fa6a33ee8",
+            "png_sha256": "d4589d75cae5dd4ba58e3452c4a08a0e96c1c2954fe83070dd8284b8c27e8f0c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 143.2
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 10.899,
+            "guest_limit_seconds": 7,
+            "firmware_sha256": "523fe5f2743dcd8386094ca47928a1c493dbd9c773d46335202c2279c399b653",
+            "log_sha256": "f79b3fb2c963d6f69657e86a48866c544192cd3324c8a5357321759a2128b51b",
+            "png_sha256": "8b774045dc7ceac92f8d8e4d3962a63bf81779a5a0a360860140347a6d3f6b06",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 41.8
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "7345a7b27639534404162c11d53c0ca05fa606075c68ab6a14fee71b4a96f3b0"
+      }
+    },
+    "papercolor": {
+      "battery": {
+        "case": "battery",
+        "verdict": "PASS",
+        "reason": "Guest reported 3678 mV unplugged and 4200 mV plugged against baseline",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 52.206,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "949a5eb24a523c353dc312b053d1784552e4afb77e6a49ce50ed90b78669f5ef",
+            "log_sha256": "89e0f91ccd1f844657ab083e5bcc61c1d75c6c6a746237516d6645267767eda1",
+            "png_sha256": "c07510ece6305f83594df645587ab2e65a4cc613fad650c768e342939f0c1a9d",
+            "capture_sha256": {
+              "battery.txt": "50ccce002083537e0b03b70bc6fb92fe31606b33bf16d930ec902c829a0a8c75"
+            },
+            "guest_million_instructions_per_wall_second": 37.3
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 55.133,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "949a5eb24a523c353dc312b053d1784552e4afb77e6a49ce50ed90b78669f5ef",
+            "log_sha256": "558c414708443f475c8564d01ea7a46ccb6e3e62c562ee8bdf1f6cc05f610641",
+            "png_sha256": "6aacb26634f8e3ffc4d89a029dd354bf1f2507066191fc004c8302f805d50e36",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 32.9
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "f8816a764b5b07bbc7aee63b1a65b88988ba6230f56f99627bcb86a17787c075"
+      },
+      "button": {
+        "case": "button",
+        "verdict": "PASS",
+        "reason": "Guest reported three injected buttons and no control presses",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 25.174,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "cadf01adda0d9674798f1dcaf5a90bbbb73b04bf17439b72c3705bc2bab36283",
+            "log_sha256": "12eba40a5e90d6887b27ba271048f144a3a1421310133e80c9d12302e2000c1c",
+            "png_sha256": "f0a90c47c58ee0b7a0283d890d39b890b3ecc735cb067c8434d91066f8130c7e",
+            "capture_sha256": {
+              "button.txt": "8ef22cbef5b1b7ec69b91a373bfd9c67ab0431afe53d3fa612c7c869cfc86f9c"
+            },
+            "guest_million_instructions_per_wall_second": 25.2
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 20.049,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "cadf01adda0d9674798f1dcaf5a90bbbb73b04bf17439b72c3705bc2bab36283",
+            "log_sha256": "ef3afa04bef4bf45aa2e302182d08919744f5244869eeb2b16339e28a3fae4ac",
+            "png_sha256": "f0a90c47c58ee0b7a0283d890d39b890b3ecc735cb067c8434d91066f8130c7e",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 28.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "c6671e64341c439c53cdbad4e1be073922e35dd6fee4f2b10f6d35502abd2d8c"
+      },
+      "display": {
+        "case": "display",
+        "verdict": "PASS",
+        "reason": "All six colors after refresh and white early control",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 14.031,
+            "guest_limit_seconds": 40,
+            "firmware_sha256": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+            "log_sha256": "1a850507dbecb9b3a4cf19bdd458404d6c434f395b5059a446a86532b4cd80ca",
+            "png_sha256": "3224949affa6258243ff792d324d66bb9e874f8e1e01eda4c3283bc6bcc8cbb1",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 19.3
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 1.562,
+            "guest_limit_seconds": 8,
+            "firmware_sha256": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+            "log_sha256": "7767b31011fb168206abf355ba0481cec026e2749bdaeaac7cd3f9fca47295ad",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 60.0
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "afa258df21c99f837c04986970ee8ffd3a32c052813f10ce3c0a6a1ad6ee525b"
+      },
+      "ir_nec": {
+        "case": "ir_nec",
+        "verdict": "DOCS-DEFECT",
+        "reason": "IRremote send feedback drives the built-in RGB LED alias on the same GPIO48",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 56.133,
+            "guest_limit_seconds": 68,
+            "firmware_sha256": "5fc987dc296c6f48ec879ad8ff8f46ed467ac6b54f0a24fbf1a1f26b682b8d89",
+            "log_sha256": "f969981185ac55b47dbc4bf38d8a7b99a16bec7b60f46a33f121659ea44fcd41",
+            "png_sha256": "f1e3195b032f853ddb999339565acc3c05abc196f97dd68cefc5c8805fe18338",
+            "capture_sha256": {
+              "ir_nec.vcd": "d7dc41dc0af1cb9657331b6747c36f18bf2a562df2f0661b6ff6d21abf9f2da7"
+            },
+            "guest_million_instructions_per_wall_second": 26.4
+          },
+          {
+            "kind": "early",
+            "exit": 0,
+            "wall_seconds": 0.3,
+            "guest_limit_seconds": 0.25,
+            "firmware_sha256": "5fc987dc296c6f48ec879ad8ff8f46ed467ac6b54f0a24fbf1a1f26b682b8d89",
+            "log_sha256": "ba1de9c8ac3daf44710d2fdade4cea716c0bea93f904da38ba02b693b555e9cf",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {
+              "ir_nec-early.vcd": "803d8c7af3e317c04cf3701d181075391e281817b5864aad8d63ead485c41464"
+            },
+            "guest_million_instructions_per_wall_second": 80.9
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "1eca86b0a89284791877e84eba536782fb138930c695fdc52f810ced0ed44ef9"
+      },
+      "m5pm1-1": {
+        "case": "m5pm1-1",
+        "verdict": "PASS",
+        "reason": "PM1 timer arm produced a power-on reset and a running guest",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 22.421,
+            "guest_limit_seconds": 75,
+            "firmware_sha256": "2e3cadc8f84366389f997523671ab406523b7241b493ca91e1d307ec6c413f19",
+            "log_sha256": "57bdfba8dc06d762aa0d0e0370fe5c75bee961c3b57bad7f182c6296f31becb5",
+            "png_sha256": "a67a064693d379f18d1d418ab0ab17d80d76a2132603fbd875e241b9ea744db1",
+            "capture_sha256": {
+              "m5pm1-1.txt": "8ef22cbef5b1b7ec69b91a373bfd9c67ab0431afe53d3fa612c7c869cfc86f9c"
+            },
+            "guest_million_instructions_per_wall_second": 41.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 27.346,
+            "guest_limit_seconds": 75,
+            "firmware_sha256": "2e3cadc8f84366389f997523671ab406523b7241b493ca91e1d307ec6c413f19",
+            "log_sha256": "85b0f6743de9ce56699ec140ca5c940e91ffec94154837467249579921e34198",
+            "png_sha256": "a67a064693d379f18d1d418ab0ab17d80d76a2132603fbd875e241b9ea744db1",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 32.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "6cbe027198c3ca658c477caec2313be5e5d5f5e1ff2ef8385dbcc4f6d48cf629"
+      },
+      "m5pm1-2": {
+        "case": "m5pm1-2",
+        "verdict": "PASS",
+        "reason": "Wake source restored the simulated power rail and restarted the guest",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 595.317,
+            "guest_limit_seconds": 112,
+            "firmware_sha256": "349640e3e0bf72f481a067a9d65f9c91543c93365097a3efeed3d9f7cabbaf0b",
+            "log_sha256": "2a6ef1fed89162c082887db14b291f48c11975bc2422981d13a2e921680d9d8d",
+            "png_sha256": "21b1ff8b47ba4e184748af2b2d7c8adf5b75ee22493e2c71396c8b1ac1c9b28b",
+            "capture_sha256": {
+              "m5pm1-2.txt": "5470f09c1b9954bf06b6fbf9932d9f2f6b624a390b3c2302a10e6ea0e6fa9a43",
+              "m5pm1-2.vcd": "a8e241fec6d4a192670014fcf1ed3b535354ec11b1167e7ab6d9931e63c3f12a"
+            },
+            "guest_million_instructions_per_wall_second": 43.2
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 579.747,
+            "guest_limit_seconds": 112,
+            "firmware_sha256": "349640e3e0bf72f481a067a9d65f9c91543c93365097a3efeed3d9f7cabbaf0b",
+            "log_sha256": "311ea7695922429596b6b441def1333f75f3120b148f2b2a6d0c2257f1f05131",
+            "png_sha256": "21b1ff8b47ba4e184748af2b2d7c8adf5b75ee22493e2c71396c8b1ac1c9b28b",
+            "capture_sha256": {
+              "m5pm1-2-control.vcd": "47bbfb4d037fdf8de5a30b427634ffac0fa13a5ea8cae1daa12e2c413c074659"
+            },
+            "guest_million_instructions_per_wall_second": 46.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "36332281ed38471186f63f212160efa5e5c9a203d8b0d11124139d5d4872c823"
+      },
+      "mic": {
+        "case": "mic",
+        "verdict": "PASS",
+        "reason": "Both injected frequencies survive microphone recording and playback",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 124.198,
+            "guest_limit_seconds": 100,
+            "firmware_sha256": "83a868a75273aa3193fab5bdc664ee81f10bcc68d1283426356efb9b9d2bd71e",
+            "log_sha256": "1cae0142ff9fcbf4286e6005c3a664256940bb791bfeda9b9fa5af3f47f68180",
+            "png_sha256": "4633b552273700c90513a72d576aa32679061e982e68d8d2ecc4b938e88cdf7d",
+            "capture_sha256": {
+              "mic.txt": "621c9838ac7657c6748015e2de2b6ff9da0dcc9d8d82f21f75de30f1fdf7bcca",
+              "mic.wav": "5f16cf2a4c0a7911342a6743affe66df4a50105697f8814159ee3e21a3e5fc76"
+            },
+            "guest_million_instructions_per_wall_second": 22.0
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 90.719,
+            "guest_limit_seconds": 100,
+            "firmware_sha256": "83a868a75273aa3193fab5bdc664ee81f10bcc68d1283426356efb9b9d2bd71e",
+            "log_sha256": "6c873edc410010c50b3714747f042e4ea7afa346f7c53cb4de40730e6d58d4a0",
+            "png_sha256": "4633b552273700c90513a72d576aa32679061e982e68d8d2ecc4b938e88cdf7d",
+            "capture_sha256": {
+              "mic-control.txt": "621c9838ac7657c6748015e2de2b6ff9da0dcc9d8d82f21f75de30f1fdf7bcca",
+              "mic-control.wav": "45a75f5debd4214f6125f009cb3d9f2c1607d88820dfa16826755b09d2dc90c3"
+            },
+            "guest_million_instructions_per_wall_second": 30.1
+          },
+          {
+            "kind": "second",
+            "exit": 0,
+            "wall_seconds": 40.998,
+            "guest_limit_seconds": 100,
+            "firmware_sha256": "83a868a75273aa3193fab5bdc664ee81f10bcc68d1283426356efb9b9d2bd71e",
+            "log_sha256": "9e165435043fc44a62474acc9b45b59e7d811c648d71f838b2968f0b828a7244",
+            "png_sha256": "4633b552273700c90513a72d576aa32679061e982e68d8d2ecc4b938e88cdf7d",
+            "capture_sha256": {
+              "mic-second.txt": "621c9838ac7657c6748015e2de2b6ff9da0dcc9d8d82f21f75de30f1fdf7bcca",
+              "mic-second.wav": "44f1b48afd65def0ee835bb4e00fffef6b119a56999babdbc5fc7d31e8332277"
+            },
+            "guest_million_instructions_per_wall_second": 66.7
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "c395e1cbec5b90282c60f1090a7f3d211ae9a1e0d961a6e1ac364b3773771056"
+      },
+      "microsd": {
+        "case": "microsd",
+        "verdict": "PASS",
+        "reason": "Guest rendered SD media while the no-card control did not",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 30.054,
+            "guest_limit_seconds": 130,
+            "firmware_sha256": "3158b2e5a2b1b28b3424d053a77c4195ee38a8a67f62d78fa9452c890b08223f",
+            "log_sha256": "7d6f8ca04e54289052fe7f301af9a2f06361335c7536f6332a2613ae8c78a16a",
+            "png_sha256": "97a3d6b1efc152a4401f55e6985ad0e2db1c2a1c6014ac861a8c7079e097f78e",
+            "capture_sha256": {
+              "microsd.txt": "222c96186e383150fb3465ab284f22c03ffd3a6bcc11d196bd7dc2c715525d8f",
+              "microsd.img": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46"
+            },
+            "guest_million_instructions_per_wall_second": 21.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 13.832,
+            "guest_limit_seconds": 130,
+            "firmware_sha256": "3158b2e5a2b1b28b3424d053a77c4195ee38a8a67f62d78fa9452c890b08223f",
+            "log_sha256": "fae7ea1477cddba9f865b4aa3bc64838a1c22aa04498c0e8533c8b303e53acd6",
+            "png_sha256": "c70aeb0d4a1e6f1d4995bd48a7291ef12bc310fc5251055c423457d84e74b7ca",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 34.0
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 8.163,
+            "guest_limit_seconds": 65,
+            "firmware_sha256": "3158b2e5a2b1b28b3424d053a77c4195ee38a8a67f62d78fa9452c890b08223f",
+            "log_sha256": "d60f888fdb6d94fba5a522dacfdd0e17b01f3c9fba51099912b7d09ce28e79c0",
+            "png_sha256": "0bac7f86070370d64ae152e263bcfb3f36d9e31644b900d5119b4101ff7ec078",
+            "capture_sha256": {
+              "microsd-first.txt": "222c96186e383150fb3465ab284f22c03ffd3a6bcc11d196bd7dc2c715525d8f",
+              "microsd-first.img": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46"
+            },
+            "guest_million_instructions_per_wall_second": 45.2
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "14f4d7234512b1df568ae3d946a35ba22c2a967b66ea2ec26186299fd94b0f0d"
+      },
+      "program": {
+        "case": "program",
+        "verdict": "PASS",
+        "reason": "Completed frame matches the six-band PAPER COLOR quickstart artwork",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 11.37,
+            "guest_limit_seconds": 40,
+            "firmware_sha256": "a9257f684db83eecdc74135896bc0d74f675c459baf942bf4740114f27fe98a1",
+            "log_sha256": "4bbbabe066a8d5e4eb2e21130b2fdb1a4d078483ace4ae74519271f10621454a",
+            "png_sha256": "274ee3e9e4be92eb1f0e99533f45716906cf7a2f69925a4cf65a78f549f7e39d",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 33.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "8a4c38f4bdf5f73323ba5939444a6c86daa96de7c963588576ceaaab37e7a252"
+      },
+      "rgb_led": {
+        "case": "rgb_led",
+        "verdict": "PASS",
+        "reason": "The installed LED channels followed the documented sequence",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 13.358,
+            "guest_limit_seconds": 40,
+            "firmware_sha256": "81003980f0a394272b6ee535f66400d8a4758d51b1c17110870d09140d0a6966",
+            "log_sha256": "2aadb04e1c127bd10ca0b215d69e508cc819d6b4d92635d48c05cd6660871a35",
+            "png_sha256": "30f35f0f183ed45e823ecc08bd5789f5c1234ce6f46621ed9e8e5b916dcf0a7f",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 24.5
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "88325c55fee2a012fcd50eade3c76caac5dec6bd40c5eaa9a5b9516c17e6562b"
+      },
+      "rtc-1": {
+        "case": "rtc-1",
+        "verdict": "PASS",
+        "reason": "Guest set the calendar and observed it ticking",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 25.877,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "3316ac0f7b1360cc386202a2152f08badda5690461ffb5c7aa3fcd13954f65f5",
+            "log_sha256": "4502d2110dd58037939783dfc468903f0fcec0a01789c5e8f5c3b62577666bf8",
+            "png_sha256": "f8009c72ca6a7ae955f80a666552cfbae823bf7a5140dc9f71432228eaf8112c",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 16.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "3f66ee248d5afeeb4645ec871236471e6ada432438d7d906cadf950862b56f15"
+      },
+      "rtc-2": {
+        "case": "rtc-2",
+        "verdict": "PASS",
+        "reason": "NTP synchronized RTC, guest read back advancing time, and idle control stayed offline",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 63.916,
+            "guest_limit_seconds": 90,
+            "firmware_sha256": "9f4fb99c2100ef81be18651561093e155bf01ecdd4a0f3780094f9c1895fb8fd",
+            "log_sha256": "b10bef9270dd928b3e58d2c7df5532eef7b0955e251724e5fde5ebb69f9debfd",
+            "png_sha256": "642ce8c509a0172e8655ce55b5620edb3dbb8028a428b3582576f9281a6017a2",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 7.2
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 2.01,
+            "guest_limit_seconds": 8,
+            "firmware_sha256": "9f4fb99c2100ef81be18651561093e155bf01ecdd4a0f3780094f9c1895fb8fd",
+            "log_sha256": "83b7904fdb98e6435dc4cb42400c9d2ed0a44018d750c7513c41eb76430e1416",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 52.4
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "4984758b99652cee5bced04832a3c02e762d89aec15cc9edec47b8068e8704a6"
+      },
+      "sht40": {
+        "case": "sht40",
+        "verdict": "DOCS-DEFECT",
+        "reason": "sht40.ino uses Wire on the same pins M5.update() routes to the internal controller",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 7.857,
+            "guest_limit_seconds": 34,
+            "firmware_sha256": "d88ee92b394b0a0256c882dc7c5463d5fc4eba641186213141a7058c64ecdf8f",
+            "log_sha256": "631014e260e68235bd58e0793c22f00ad6c9d86b771394bd9bfb3e6b263659e5",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {
+              "sht40.txt": "ca4ca583938942965c496be510c066badd4fafd52247d5c1ff8ae88f5559700b"
+            },
+            "guest_million_instructions_per_wall_second": 20.7
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 4.932,
+            "guest_limit_seconds": 34,
+            "firmware_sha256": "d88ee92b394b0a0256c882dc7c5463d5fc4eba641186213141a7058c64ecdf8f",
+            "log_sha256": "df42a6f709d968196977e0e1d8432c247f86a3208f4c25eca6e4301e7424e230",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 33.0
+          },
+          {
+            "kind": "first",
+            "exit": 0,
+            "wall_seconds": 3.234,
+            "guest_limit_seconds": 34,
+            "firmware_sha256": "d88ee92b394b0a0256c882dc7c5463d5fc4eba641186213141a7058c64ecdf8f",
+            "log_sha256": "3547a4c7a5fc8028672b2539f461282fc3dcb5c856a047c0dbf5d1f25d89d5fa",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {
+              "sht40-first.txt": "b40b52127c36a6f365ac5fbdbabb004f2d8406edff8b8840e2d42e7e5ccd4282"
+            },
+            "guest_million_instructions_per_wall_second": 50.2
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "0880592191f198bd6ee37223841765599b6ec0c6b182ff0eec0671b17453fac8"
+      },
+      "speaker": {
+        "case": "speaker",
+        "verdict": "PASS",
+        "reason": "PCM contains 3 ordered tones and 2 silent gaps",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 36.88,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "f2f20597a4ffe71e41258ad907756dc66e50d612d09943e9d5ab5d71f562b478",
+            "log_sha256": "cbb7e1d102937f0449c3c3da4092a6305371c03d7181aceabecac437b37ed919",
+            "png_sha256": "2e4917ff807ad8580848cbb9e40eff49e0ff69ec34ffa6f3a12b1c9df4b41485",
+            "capture_sha256": {
+              "speaker.wav": "a56cba98ba358995105eabf63e7f3abf7bc9dd71ae65e1b7568fcd967b9bf94b"
+            },
+            "guest_million_instructions_per_wall_second": 28.6
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "abfb05a6fbd36d09dbef10ebb64a6a8c8de549918238862883cc3decdb58461e"
+      },
+      "wakeup-1": {
+        "case": "wakeup-1",
+        "verdict": "PASS",
+        "reason": "Button A armed the timer and the device restarted five seconds later",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 60.117,
+            "guest_limit_seconds": 95,
+            "firmware_sha256": "74d962912e352e1cedddbd2230681a066b5657185d5d382127dcdf0337429f99",
+            "log_sha256": "46e418a799387a51b1a4b53eefdbaaea7afb4fa980a2e09a11a7f43c011d20b6",
+            "png_sha256": "c8f3d92bb2e3948cfe27792c1a2ab4c97d44e55c1c37691a89869597b5d9989a",
+            "capture_sha256": {
+              "wakeup-1.txt": "5470f09c1b9954bf06b6fbf9932d9f2f6b624a390b3c2302a10e6ea0e6fa9a43"
+            },
+            "guest_million_instructions_per_wall_second": 28.5
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 2.755,
+            "guest_limit_seconds": 4,
+            "firmware_sha256": "74d962912e352e1cedddbd2230681a066b5657185d5d382127dcdf0337429f99",
+            "log_sha256": "62296c56e3013574a2c38bbe8de3af1bb8793cba5335f2b11aaa539458b3a187",
+            "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 95.1
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "08df0301886dceb773551da682fdbbfeaf79d144645f1b495dd13b1e4a5f91f7"
+      },
+      "wakeup-2": {
+        "case": "wakeup-2",
+        "verdict": "PASS",
+        "reason": "PM1 timer arm produced a power-on reset and a running guest",
+        "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+        "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "sd_fixture_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+        "runs": [
+          {
+            "kind": "input",
+            "exit": 0,
+            "wall_seconds": 25.465,
+            "guest_limit_seconds": 60,
+            "firmware_sha256": "4b3b949d2b2e0d1d990c57f0ee0d991fe67d4c6b6dc6e393499f96caafc3cb50",
+            "log_sha256": "5428f03f96783e69d828c286e675e2fb5076cf05b66f8e56a4c3d5f70ffebc11",
+            "png_sha256": "38c43b128db3a44bd52226acbff825393f1d6acdb91db1f7dca860f2c898f543",
+            "capture_sha256": {
+              "wakeup-2.txt": "8ef22cbef5b1b7ec69b91a373bfd9c67ab0431afe53d3fa612c7c869cfc86f9c"
+            },
+            "guest_million_instructions_per_wall_second": 34.7
+          },
+          {
+            "kind": "control",
+            "exit": 0,
+            "wall_seconds": 14.194,
+            "guest_limit_seconds": 60,
+            "firmware_sha256": "4b3b949d2b2e0d1d990c57f0ee0d991fe67d4c6b6dc6e393499f96caafc3cb50",
+            "log_sha256": "3a74899039aaf15f748acbcc31786e532778b8ac90f4743e8d149c6bb3259971",
+            "png_sha256": "38c43b128db3a44bd52226acbff825393f1d6acdb91db1f7dca860f2c898f543",
+            "capture_sha256": {},
+            "guest_million_instructions_per_wall_second": 53.3
+          }
+        ],
+        "fqbn": "m5stack:esp32:m5stack_papers3",
+        "sketch_sha256": "805818aa62b7a9286760d4a9985b76793426edc7e6d75921dd23abf0d7e06334"
+      }
+    }
+  },
+  "summary": {
+    "paperdiy": {
+      "PASS": 6
+    },
+    "papers3": {
+      "PASS": 9
+    },
+    "papermono": {
+      "PASS": 25,
+      "DOCS-DEFECT": 1
+    },
+    "papercolor": {
+      "PASS": 14,
+      "DOCS-DEFECT": 2
+    }
+  },
+  "stock": {
+    "paperdiy": {
+      "version": "2.5.4",
+      "case": "stock",
+      "verdict": "PASS",
+      "reason": "Stock home screen, USB CDC arithmetic, and board input with a quiet control",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 62.329,
+          "guest_limit_seconds": 24,
+          "firmware_sha256": "35a4f99833d334c93986806b9403f81172e9068e3b63ef5a8ef2d20cf281eb18",
+          "log_sha256": "7fffcb3f38bb4bc77f25b4a597059145e953eff0049d5e2a0bd9cd1a74c835da",
+          "png_sha256": "247b8a62f36c0da282743033fc98930b636240deeabdb910c1f47aa6fb47a600",
+          "capture_sha256": {
+            "stock.txt": "cd1872d58c3e0f672e2ecb0ba539381bed23c464b54c9fffce557240ef59bf8f",
+            "stock-usb.txt": "5ae6fc45fed2dd4b560af999e19295ad478404436b281b83e26a5b86a3216626"
+          },
+          "guest_million_instructions_per_wall_second": 28.3
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 63.42,
+          "guest_limit_seconds": 24,
+          "firmware_sha256": "35a4f99833d334c93986806b9403f81172e9068e3b63ef5a8ef2d20cf281eb18",
+          "log_sha256": "c5c72c0fd17b8f254755072ef55242083c124275d35e5d9aac42a586b7c650a6",
+          "png_sha256": "247b8a62f36c0da282743033fc98930b636240deeabdb910c1f47aa6fb47a600",
+          "capture_sha256": {
+            "stock-control-usb.txt": "5ae6fc45fed2dd4b560af999e19295ad478404436b281b83e26a5b86a3216626"
+          },
+          "guest_million_instructions_per_wall_second": 27.8
+        }
+      ]
+    },
+    "papers3": {
+      "version": "2.5.4",
+      "case": "stock",
+      "verdict": "PASS",
+      "reason": "Stock home screen, USB CDC arithmetic, and board input with a quiet control",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 39.021,
+          "guest_limit_seconds": 24,
+          "firmware_sha256": "87567896973fa61c281fdf3f0e2031f280de1df8d59ac0942302de288096a1fb",
+          "log_sha256": "ceb73d8620bef610afb19d49c02e29babaaebd02c5c2ece7c54e39b98c943974",
+          "png_sha256": "57c8027221a2f8af72030d996a30c4128c763919676bef2c8ab5f3c73635e59b",
+          "capture_sha256": {
+            "stock.txt": "e2ec88be85fd1fe2d768d74c188a6a2c74d9e9fcbdbd7f2f5b67c604bcfdd98d",
+            "stock-usb.txt": "88241f4720312cafb621523e4ab7a11003c479e6c484507debf1cdd7b061f589"
+          },
+          "guest_million_instructions_per_wall_second": 58.7
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 38.585,
+          "guest_limit_seconds": 24,
+          "firmware_sha256": "87567896973fa61c281fdf3f0e2031f280de1df8d59ac0942302de288096a1fb",
+          "log_sha256": "0b521be76acc1ea4ec7ca079643d55d460a152a165f54dad12e09b2082ff98c7",
+          "png_sha256": "57c8027221a2f8af72030d996a30c4128c763919676bef2c8ab5f3c73635e59b",
+          "capture_sha256": {
+            "stock-control-usb.txt": "88241f4720312cafb621523e4ab7a11003c479e6c484507debf1cdd7b061f589"
+          },
+          "guest_million_instructions_per_wall_second": 59.2
+        }
+      ]
+    },
+    "papermono": {
+      "version": "2.5.3",
+      "case": "stock",
+      "verdict": "PASS",
+      "reason": "Stock home screen, USB CDC arithmetic, and board input with a quiet control",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 40.258,
+          "guest_limit_seconds": 24,
+          "firmware_sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05",
+          "log_sha256": "c4e87d2dc10d5759d1d9514f7af0bd94facb10de0397cf1e6fa8d43dd7c900c6",
+          "png_sha256": "340e1e7d7213278704c52733b2d85d42cdc53b0e9b419f72b6ecd125d72772ce",
+          "capture_sha256": {
+            "stock.txt": "e2ec88be85fd1fe2d768d74c188a6a2c74d9e9fcbdbd7f2f5b67c604bcfdd98d",
+            "stock-usb.txt": "88241f4720312cafb621523e4ab7a11003c479e6c484507debf1cdd7b061f589"
+          },
+          "guest_million_instructions_per_wall_second": 33.2
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 40.355,
+          "guest_limit_seconds": 24,
+          "firmware_sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05",
+          "log_sha256": "ce5e15fc9eb1ea28256d1a874658fd93258ca29211ead83b3898f8bf26010945",
+          "png_sha256": "340e1e7d7213278704c52733b2d85d42cdc53b0e9b419f72b6ecd125d72772ce",
+          "capture_sha256": {
+            "stock-control-usb.txt": "88241f4720312cafb621523e4ab7a11003c479e6c484507debf1cdd7b061f589"
+          },
+          "guest_million_instructions_per_wall_second": 32.9
+        }
+      ]
+    },
+    "papercolor": {
+      "version": "2.5.3",
+      "case": "stock",
+      "verdict": "PASS",
+      "reason": "Stock home screen, USB CDC arithmetic, and board input with a quiet control",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 58.98,
+          "guest_limit_seconds": 100,
+          "firmware_sha256": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816",
+          "log_sha256": "5b6a14376484021ac92d9b4ced71e60eae4f511be788434d24785358f9b5ef72",
+          "png_sha256": "1ef610dff2c1ce7b70c3830cf049d6fdb71512129a2eb17e73378d3bad386e2d",
+          "capture_sha256": {
+            "stock.txt": "aca46f43ec1710a26b126fd483353b1938f6f75580b1774ede4e5997553441b5",
+            "stock-usb.txt": "46fe53b1460abf733c1fd64a13774f9cdc388d09d9067a390cd6d5d0ec5e5836"
+          },
+          "guest_million_instructions_per_wall_second": 25.7
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 59.035,
+          "guest_limit_seconds": 100,
+          "firmware_sha256": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816",
+          "log_sha256": "d3d608887db34368e793d2a7f42c26bb55533e2c46ec547f50dd1322c0352f90",
+          "png_sha256": "1ef610dff2c1ce7b70c3830cf049d6fdb71512129a2eb17e73378d3bad386e2d",
+          "capture_sha256": {
+            "stock-control-usb.txt": "46fe53b1460abf733c1fd64a13774f9cdc388d09d9067a390cd6d5d0ec5e5836"
+          },
+          "guest_million_instructions_per_wall_second": 25.7
+        }
+      ]
+    }
+  },
+  "detection": {
+    "paperdiy": {
+      "fqbn": "m5stack:esp32:m5stack_paperdiy",
+      "firmware_sha256": "30c5457f266c92da3401325483723d667f5c3d2114adc6f0f91c32be3cb3dad6",
+      "elf_sha256": "286ca6fb0b65c75cd04b0a8bdeccc0fe05314e6ae54e27723a9370ec5be7e6b1",
+      "log_sha256": "4c437e1e5b0667b1ba1341a99cbd07bd32129f58da001fff5934babac36d5a68",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48"
+    },
+    "papers3": {
+      "fqbn": "m5stack:esp32:m5stack_papers3",
+      "firmware_sha256": "3c0fb47a67006c5e592b38314132b02558661595f588451693256395eab43ac3",
+      "elf_sha256": "d27e703ffbd32b19efed73053f29ac4bcca435ae7e794c6d4ce1ac387a865db5",
+      "log_sha256": "04ebde7bbe0f6f82fc725fa247c2449ae3a99af442b3649ac628af26fd64fea0",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48"
+    },
+    "papermono": {
+      "fqbn": "m5stack:esp32:m5stack_papermono",
+      "firmware_sha256": "1f2df40667a08b4b27f40a9d94c67d146281f7de0aa7402b557cec69123c2494",
+      "elf_sha256": "fe35f226cba7c01c0955e2d93371a03a8e9a8dac0077bc86a715a5fc119edb79",
+      "log_sha256": "050eb4ae4b534b93a944180b947e2437af8f59c77c2ff0d97b09ff7a2e39e036",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48"
+    },
+    "papercolor": {
+      "fqbn": "m5stack:esp32:m5stack_papercolor",
+      "firmware_sha256": "cb5ba7ac7fd2325080d01e877443310a8b231923ddba1f94817a00b1eacd23d6",
+      "elf_sha256": "43c28b6f21427534e68168679c441fdcdbb559b98ea6fc519b09f32671ad42c3",
+      "log_sha256": "bcf8b52ab83975e5930a280b6d6e04a7fb7b0150825563d7aebe2b24758f743f",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48"
+    }
+  },
+  "device_service_transport": {
+    "paperdiy": {
+      "startup_frame": {
+        "size": [
+          540,
+          960
+        ],
+        "colors": 1,
+        "sha256": "c99f399ab6e3e701b2c062079611a5475a4b2d4d389b88526e9eb27c2309c41f"
+      },
+      "home_frame": {
+        "size": [
+          540,
+          960
+        ],
+        "colors": 2,
+        "sha256": "153c995e7c3e383acfca6c16ad48e23c9ad204171040a678ad687d5ea3a2dcd5"
+      },
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "exit": 0,
+      "firmware_sha256": "35a4f99833d334c93986806b9403f81172e9068e3b63ef5a8ef2d20cf281eb18"
+    },
+    "papers3": {
+      "startup_frame": {
+        "size": [
+          540,
+          960
+        ],
+        "colors": 1,
+        "sha256": "c99f399ab6e3e701b2c062079611a5475a4b2d4d389b88526e9eb27c2309c41f"
+      },
+      "home_frame": {
+        "size": [
+          540,
+          960
+        ],
+        "colors": 14,
+        "sha256": "2b61c32d843297b7b79db1c2fca9f06f1444ebbdeb28e33160db1ea372b9a00c"
+      },
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "exit": 0,
+      "firmware_sha256": "87567896973fa61c281fdf3f0e2031f280de1df8d59ac0942302de288096a1fb"
+    },
+    "papermono": {
+      "startup_frame": {
+        "size": [
+          480,
+          800
+        ],
+        "colors": 1,
+        "sha256": "d734cba5a1c20b1822d70d4e2d2bc45e59c2f65917c099bff722b987d087e24f"
+      },
+      "home_frame": {
+        "size": [
+          480,
+          800
+        ],
+        "colors": 4,
+        "sha256": "f0a0fd3b738de6a5099c5c4134d19ceb89873d951aa601ebf339190d0edc881c"
+      },
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "exit": 0,
+      "firmware_sha256": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05"
+    },
+    "papercolor": {
+      "startup_frame": {
+        "size": [
+          400,
+          600
+        ],
+        "colors": 1,
+        "sha256": "fd3df91fd84ccf152312658b574cb0215e3bca334105a24ecc48f7f4f0a92261"
+      },
+      "home_frame": {
+        "size": [
+          400,
+          600
+        ],
+        "colors": 6,
+        "sha256": "4a5c19c7be49fb533de94b9b3fc35132434c099f72fa430283bf70b21daf8bb7"
+      },
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "exit": 0,
+      "firmware_sha256": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816"
+    }
+  },
+  "diagnostics": {
+    "official-ir-final": {
+      "case": "ir_nec",
+      "verdict": "DOCS-DEFECT",
+      "reason": "IRremote send feedback drives the built-in RGB LED alias on the same GPIO48",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 37.894,
+          "guest_limit_seconds": 68,
+          "firmware_sha256": "1bfb232c5a6909d219d9c6271a1855c9e76e6090837319cf4c9030bb71fe5ea2",
+          "log_sha256": "d0ff847ded9aaed84260cf23b2a4aa4e56a84fddfed8f3a63aa04fc9d2c77803",
+          "png_sha256": "f1e3195b032f853ddb999339565acc3c05abc196f97dd68cefc5c8805fe18338",
+          "capture_sha256": {
+            "ir_nec.vcd": "d01f932755f8fd3e9fe371bfcfe49d71e45850db8b19db6e88d12ba3f121d232"
+          },
+          "guest_million_instructions_per_wall_second": 41.0
+        },
+        {
+          "kind": "early",
+          "exit": 0,
+          "wall_seconds": 2.092,
+          "guest_limit_seconds": 0.25,
+          "firmware_sha256": "1bfb232c5a6909d219d9c6271a1855c9e76e6090837319cf4c9030bb71fe5ea2",
+          "log_sha256": "90d24ece9da6e4bf9c8f4800eedfdc6ea02a16bccb1def7c21a66e24d2a39335",
+          "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+          "capture_sha256": {
+            "ir_nec-early.vcd": "21f9ca29118b5ad4b39c4b8b6f1973c6cc15511bab7f4b8f4867aef5471e0193"
+          },
+          "guest_million_instructions_per_wall_second": 74.1
+        }
+      ]
+    },
+    "official-ir-corrected": {
+      "case": "ir_nec",
+      "verdict": "PASS",
+      "reason": "GPIO48 carries NEC extended address 0x1111 and commands 0x34/0x35",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 56.726,
+          "guest_limit_seconds": 68,
+          "firmware_sha256": "a9864ad756730ae7b5d7c901e46194bfc1218a8fd76de9611f3712ec2159d82c",
+          "log_sha256": "83dd06868bbe4d39b89fa4f6eab04c27191fc2f7c849b356c742575b517d97cd",
+          "png_sha256": "f1e3195b032f853ddb999339565acc3c05abc196f97dd68cefc5c8805fe18338",
+          "capture_sha256": {
+            "ir_nec.vcd": "4dc65ef12feec2fd687ebd45ba490e496cd83ccd88c4f726e188e3e85be41a24"
+          },
+          "guest_million_instructions_per_wall_second": 25.5
+        },
+        {
+          "kind": "early",
+          "exit": 0,
+          "wall_seconds": 1.487,
+          "guest_limit_seconds": 0.25,
+          "firmware_sha256": "a9864ad756730ae7b5d7c901e46194bfc1218a8fd76de9611f3712ec2159d82c",
+          "log_sha256": "47393a372d60d28ed89854bcc2e0ffbd4888cb5ca090e9ee987660d7f3f9f993",
+          "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+          "capture_sha256": {
+            "ir_nec-early.vcd": "f673a31366a13dff0f04c00fb96e9bcdc815cfa8720a6b3395347302e0673046"
+          },
+          "guest_million_instructions_per_wall_second": 21.4
+        }
+      ]
+    },
+    "official-sht-original": {
+      "case": "sht40",
+      "verdict": "DOCS-DEFECT",
+      "reason": "sht40.ino uses Wire on the same pins M5.update() routes to the internal controller",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 9.662,
+          "guest_limit_seconds": 34,
+          "firmware_sha256": "8093774a9883268381734e36a4b6cf008fd5a8c135d1deed9f0a519e612ffc7b",
+          "log_sha256": "9fe36bf404e592f958fddb9a6b7ba7694c814ca2027a6caedcd04cac762d7e07",
+          "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+          "capture_sha256": {
+            "sht40.txt": "ca4ca583938942965c496be510c066badd4fafd52247d5c1ff8ae88f5559700b"
+          },
+          "guest_million_instructions_per_wall_second": 19.1
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 9.634,
+          "guest_limit_seconds": 34,
+          "firmware_sha256": "8093774a9883268381734e36a4b6cf008fd5a8c135d1deed9f0a519e612ffc7b",
+          "log_sha256": "30bca9e4c275bce3f782aaa8f13de9270f7e8eafdcbbb42246b005081b6733cb",
+          "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 19.2
+        },
+        {
+          "kind": "first",
+          "exit": 0,
+          "wall_seconds": 6.462,
+          "guest_limit_seconds": 34,
+          "firmware_sha256": "8093774a9883268381734e36a4b6cf008fd5a8c135d1deed9f0a519e612ffc7b",
+          "log_sha256": "f5a0f72e120ca31056955865976e6f592a9824ccc4e859ef576dfc067f9713c9",
+          "png_sha256": "7fdca07b47b8bff976da3cda788053ba1422c408d71ef104d91ae190465f7a45",
+          "capture_sha256": {
+            "sht40-first.txt": "b40b52127c36a6f365ac5fbdbabb004f2d8406edff8b8840e2d42e7e5ccd4282"
+          },
+          "guest_million_instructions_per_wall_second": 25.1
+        }
+      ]
+    },
+    "official-sht-corrected": {
+      "case": "sht40",
+      "verdict": "PASS",
+      "reason": "CRC-backed measurements and distinct completed frames [(18.0, 35.0), (32.0, 71.0), (23.0, 45.0)]",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 10.657,
+          "guest_limit_seconds": 34,
+          "firmware_sha256": "17a5dfbe344f0aa6398849a4b9fbd9731e9c19ab0d44ac72fecf7baba0a267c5",
+          "log_sha256": "df056404f39c96fb62a09eef98adcd059d32ebd7361ec0179c3a171d19678f35",
+          "png_sha256": "e05c5b189349d70e74db9a79c560aec8f615da09bb50c8e0991d4195396f18f4",
+          "capture_sha256": {
+            "sht40.txt": "ca4ca583938942965c496be510c066badd4fafd52247d5c1ff8ae88f5559700b"
+          },
+          "guest_million_instructions_per_wall_second": 34.3
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 10.924,
+          "guest_limit_seconds": 34,
+          "firmware_sha256": "17a5dfbe344f0aa6398849a4b9fbd9731e9c19ab0d44ac72fecf7baba0a267c5",
+          "log_sha256": "787bd524713ecc0930e5a222581328b73e52e707012993226b9789093f12e7eb",
+          "png_sha256": "e8bf90d25cf52e68789189d4b6f573f5499e28344970ce6afa50b394aa8e72c5",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 33.2
+        },
+        {
+          "kind": "first",
+          "exit": 0,
+          "wall_seconds": 10.202,
+          "guest_limit_seconds": 34,
+          "firmware_sha256": "17a5dfbe344f0aa6398849a4b9fbd9731e9c19ab0d44ac72fecf7baba0a267c5",
+          "log_sha256": "102b4da2588767a6023bf2754d1920323d6c07c07412c734b27ed58981903bfd",
+          "png_sha256": "a2ba5fd3abe7119e46e41b48b622e3a722f234d1e696dcc3e5e251251f1feef2",
+          "capture_sha256": {
+            "sht40-first.txt": "b40b52127c36a6f365ac5fbdbabb004f2d8406edff8b8840e2d42e7e5ccd4282"
+          },
+          "guest_million_instructions_per_wall_second": 33.7
+        }
+      ]
+    },
+    "official-nfc-powered-run": {
+      "case": "nfc-4",
+      "verdict": "NOT RUN",
+      "reason": "No virtual reader fixture for target-mode activation and NDEF readback",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 53.779,
+          "guest_limit_seconds": 9,
+          "firmware_sha256": "bdd00ce970a8f78865a2f3d8a4b2352cfdb58f0bdce6cb60eaa5a6c57dfe3fed",
+          "log_sha256": "fcf86d61cc968b0218596c7d86b89e5ae4df536536c1437e5b1e3abcfa8fca47",
+          "png_sha256": "7a740f003193f076917dbbcc2125b623c8de532e2f69fbd2abdfb69435c8f7b8",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 37.9
+        },
+        {
+          "kind": "control",
+          "exit": 0,
+          "wall_seconds": 53.448,
+          "guest_limit_seconds": 9,
+          "firmware_sha256": "bdd00ce970a8f78865a2f3d8a4b2352cfdb58f0bdce6cb60eaa5a6c57dfe3fed",
+          "log_sha256": "5246b1528b750bde9d6cf6ca29de24cadce1e9a2bffc4afba5a1f4b1eecdd2ba",
+          "png_sha256": "7a740f003193f076917dbbcc2125b623c8de532e2f69fbd2abdfb69435c8f7b8",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 38.2
+        }
+      ]
+    },
+    "official-s3-app": {
+      "case": "quickstart-bargraph",
+      "verdict": "PASS",
+      "reason": "White markers and quantized bars animate over a black background",
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+      "sd_fixture_sha256": null,
+      "runs": [
+        {
+          "kind": "input",
+          "exit": 0,
+          "wall_seconds": 112.5,
+          "guest_limit_seconds": 13,
+          "firmware_sha256": "3c0fb47a67006c5e592b38314132b02558661595f588451693256395eab43ac3",
+          "log_sha256": "7b259d0768709513bdca00b69d13bcd6e65ae2dea560e213959fe2807096f2a2",
+          "png_sha256": "db03f39907b3bb8834da377f95bba7eafe6352add8aff39af36cbb7817bbabe5",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 43.7
+        },
+        {
+          "kind": "early",
+          "exit": 0,
+          "wall_seconds": 1.006,
+          "guest_limit_seconds": 0.25,
+          "firmware_sha256": "3c0fb47a67006c5e592b38314132b02558661595f588451693256395eab43ac3",
+          "log_sha256": "6035577a260cc1e354ab8e14a29bb313e149364074d88c84cc148480df7fd743",
+          "png_sha256": "ec07d5ad0b51bc1cd02d64fcba856a77b363b9d39c25e8504a3ff69e3b234c22",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 41.5
+        },
+        {
+          "kind": "first",
+          "exit": 0,
+          "wall_seconds": 69.777,
+          "guest_limit_seconds": 7,
+          "firmware_sha256": "3c0fb47a67006c5e592b38314132b02558661595f588451693256395eab43ac3",
+          "log_sha256": "dde39518dd2b5bcfa6f94f2b2dd04ec1763ca1e53fd286038aaeb8c65f6aafe7",
+          "png_sha256": "9fa5f7ec07a9cad77eaafc3574d47600ad88ccf9a23a695afeb7d98823b15bb9",
+          "capture_sha256": {},
+          "guest_million_instructions_per_wall_second": 37.2
+        }
+      ]
+    },
+    "ir_completed_command_frame": {
+      "runtime_commit": "751a0331dd16395330cea265c9ce40ae2008da48",
+      "runtime_sha256": "4b00128646f6449092bec95b57b64bcef7d823c8cb76c8f194b47031f55707ee",
+      "firmware_sha256": "a9864ad756730ae7b5d7c901e46194bfc1218a8fd76de9611f3712ec2159d82c",
+      "guest_seconds": 84,
+      "completed_refreshes": 2,
+      "visible_command": "0x35",
+      "log_sha256": "77b666dee27cb8fcf5dbea149e7a09049577a3742ce450c12e7b3c66476ac98c",
+      "png_sha256": "dba017ec3e7603001a6301a27d904d91a68e43e95d964dd6615d05523425a936"
+    }
+  },
+  "regressions": {
+    "CoreS3": {
+      "passing": 15,
+      "total": 15,
+      "verdicts_sha256": "e82c58e23ea124db720a6334227485627ef5dc923e694364912af1040deced74",
+      "firmware_sha256": {
+        "display": "a88182dc789c1dfe7525ad7ff9a284fd201b6c55375502c895b689cd56af13d6",
+        "quickstart-bargraph": "7635ebdc5bbddd6d33dc9bbeeb4d1fd9270c4971b0692595096c24b72f648d8a",
+        "touch": "3cec5642f681dc0525c7e6cdbada7189f0ee52f9a95b68b19055571664222606",
+        "button": "3dfbaaaa1ea168074d284b40b14fc489821162fb211f568a6a52181e54dab69c",
+        "power": "7beb59232d1b21d7fb38d4c994582609df364ba918a4b443bf8fdcbd0982112c",
+        "imu": "3835dc5c8211736869c0f49762855875b09038d4aba8000516bfad9b014655ed",
+        "ltr553": "9584d3339e863ee71b8e46ea43048bdc041028be3a0b0fb9e624185fdca40001",
+        "rtc": "cf450835c9b8d88f815272158040afee79f0d88cf32b1f46add9bd783b8ab00d",
+        "speaker": "035d6b0e085b03024f8a10daa46595874113e5e7aa65bb1977526e03bbff1d5c",
+        "mic": "ced692208d6b9b778aba1624404f461cbfad1709cee82238d2bcd7abc368a1ae",
+        "camera": "5d61a3dbefec7bde7a8b7d29040f7e96e6374b5efd4fb702be9d3c5bbdfedb91",
+        "wakeup": "2ddff71f4ceca5e79b709ba823b8ecf0828f2016a85e512df779e526e7a9f295",
+        "sdcard": "c97c3efde1aab234c4041d118b13eb9d4b506fd2158181e495ab4e8c8f9190b0",
+        "pic": "f19a304c51f4f88c14c6b8157c06012357548cfd4b691ccef0d7babe7ccbbbe2",
+        "wav": "22eb0ffce846a6175de97e2c2f82c02bbef092724874b317297cf5c95751bff5"
+      }
+    },
+    "ADV": {
+      "passing": 11,
+      "total": 11,
+      "verdicts_sha256": "6cce1b992f902a97e50ccc103dc5d8199685c70020b765241a9fcd4be15c8848",
+      "firmware_sha256": {
+        "display": "cc1b3e5868feb075e2ec8a5e7211897e8ae1c9635f5d072442ef007273c2a968",
+        "quickstart-display": "0a93553358ee75cf9125b2fdf9e7671ea096be2c70bc3e4ff4945bc034835717",
+        "keyboard": "f7edb36bb3662506853773399467841a55bef3d3e16cc3469bc821b4ad7638bf",
+        "button": "07ebcecd82c9a64aad457f5e30eac140bfd24db8006506ea6f04489a860dc0e7",
+        "ir_nec": "0969326c036e7a88168dcf9dae65de20b71ee501e2ecc1074c86819d10c240fb",
+        "battery": "ac93be27c88cb4ae19d08056a537b06469a1e2b7f6ef8af82c6739d2ff38f34b",
+        "imu": "f933c50fcc3dca52d9fa8e256ed5ab5e7e1f5d68571f47d9cab976d16ec41b10",
+        "speaker": "1be720c9f62e086081f63ff6adf7f907e71f80dcc4816af71050cddd937300b5",
+        "mic": "1076a8fbac11c2382585c77f7226648dc3753d29e8135b98502ac8462265a8a9",
+        "sdcard": "0bd2b3e56bf693661e8e04b5cbe17365d7346c2e84d03ac7abd6e36b95765132",
+        "speaker-sd-wav": "9c2993624b739090d852d7165f49b78300827fe916011c434bc939d63e4e7f3b"
+      }
+    },
+    "workspace": {
+      "passed": 1901,
+      "failed": 1,
+      "ignored": 117,
+      "log_sha256": "0c78da847750f6f4ce76df92acb3a437b74a4f6adcd964974b871570c7729a4a",
+      "baseline_failure": "wifi_sta_is_refused_where_it_does_not_work_yet"
+    },
+    "clippy": {
+      "native": {
+        "verdict": "PASS",
+        "log_sha256": "57d1765fb9583cbef33b8603477310a7ac430abed887ec6ac67556f0c5b4ecee"
+      },
+      "wasm": {
+        "verdict": "PASS",
+        "log_sha256": "4e1285d0768c746f74a754e5eaf8ebfea4f9c7a272cdc26428ce2edc153baec7"
+      }
+    }
+  },
+  "instruction_sentinels": {
+    "baseline_sha256": "5bce2159e9c3008d001f2db1a37caa41e7cb2ae1a267c76377779a02d44df5bb",
+    "candidate_sha256": "a20e2873208ac9a460a35e9ecafe6d8301d779cd26ee12160867faa791de40f9",
+    "candidate_commit": "e19f894415a2ead90c9cb3ebcbee8c662aad02b9",
+    "cases": [
+      {
+        "case": "s3-hello",
+        "runs": [
+          {
+            "side": 0,
+            "user_seconds": 0.04,
+            "instructions": "core0 2804086 + core1 1214586",
+            "console_sha256": "7a88d586fc6d7ceab2d33c0470d89fb1334c6937d11182c9b396dbd3a9eca24d"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.05,
+            "instructions": "core0 2804086 + core1 1214586",
+            "console_sha256": "7a88d586fc6d7ceab2d33c0470d89fb1334c6937d11182c9b396dbd3a9eca24d"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.05,
+            "instructions": "core0 2804086 + core1 1214586",
+            "console_sha256": "7a88d586fc6d7ceab2d33c0470d89fb1334c6937d11182c9b396dbd3a9eca24d"
+          },
+          {
+            "side": 0,
+            "user_seconds": 0.04,
+            "instructions": "core0 2804086 + core1 1214586",
+            "console_sha256": "7a88d586fc6d7ceab2d33c0470d89fb1334c6937d11182c9b396dbd3a9eca24d"
+          },
+          {
+            "side": 0,
+            "user_seconds": 0.05,
+            "instructions": "core0 2804086 + core1 1214586",
+            "console_sha256": "7a88d586fc6d7ceab2d33c0470d89fb1334c6937d11182c9b396dbd3a9eca24d"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.05,
+            "instructions": "core0 2804086 + core1 1214586",
+            "console_sha256": "7a88d586fc6d7ceab2d33c0470d89fb1334c6937d11182c9b396dbd3a9eca24d"
+          }
+        ],
+        "median": [
+          0.04,
+          0.05
+        ]
+      },
+      {
+        "case": "c3-hello",
+        "runs": [
+          {
+            "side": 0,
+            "user_seconds": 0.31,
+            "instructions": "320000000",
+            "console_sha256": "e9fe8e3307fa9fef4d7f4ee63380abb2b8bd5c1c00b9a385fc404a83b27b6b8f"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.55,
+            "instructions": "320000000",
+            "console_sha256": "e9fe8e3307fa9fef4d7f4ee63380abb2b8bd5c1c00b9a385fc404a83b27b6b8f"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.52,
+            "instructions": "320000000",
+            "console_sha256": "e9fe8e3307fa9fef4d7f4ee63380abb2b8bd5c1c00b9a385fc404a83b27b6b8f"
+          },
+          {
+            "side": 0,
+            "user_seconds": 0.32,
+            "instructions": "320000000",
+            "console_sha256": "e9fe8e3307fa9fef4d7f4ee63380abb2b8bd5c1c00b9a385fc404a83b27b6b8f"
+          },
+          {
+            "side": 0,
+            "user_seconds": 0.33,
+            "instructions": "320000000",
+            "console_sha256": "e9fe8e3307fa9fef4d7f4ee63380abb2b8bd5c1c00b9a385fc404a83b27b6b8f"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.57,
+            "instructions": "320000000",
+            "console_sha256": "e9fe8e3307fa9fef4d7f4ee63380abb2b8bd5c1c00b9a385fc404a83b27b6b8f"
+          }
+        ],
+        "median": [
+          0.32,
+          0.55
+        ]
+      },
+      {
+        "case": "c6-hello",
+        "runs": [
+          {
+            "side": 0,
+            "user_seconds": 0.2,
+            "instructions": "320000000",
+            "console_sha256": "48c6c7b6ed6976de2bbda07c25dc7bcae426f1726ab3fe198eeaf69197be76b0"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.22,
+            "instructions": "320000000",
+            "console_sha256": "48c6c7b6ed6976de2bbda07c25dc7bcae426f1726ab3fe198eeaf69197be76b0"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.23,
+            "instructions": "320000000",
+            "console_sha256": "48c6c7b6ed6976de2bbda07c25dc7bcae426f1726ab3fe198eeaf69197be76b0"
+          },
+          {
+            "side": 0,
+            "user_seconds": 0.17,
+            "instructions": "320000000",
+            "console_sha256": "48c6c7b6ed6976de2bbda07c25dc7bcae426f1726ab3fe198eeaf69197be76b0"
+          },
+          {
+            "side": 0,
+            "user_seconds": 0.19,
+            "instructions": "320000000",
+            "console_sha256": "48c6c7b6ed6976de2bbda07c25dc7bcae426f1726ab3fe198eeaf69197be76b0"
+          },
+          {
+            "side": 1,
+            "user_seconds": 0.23,
+            "instructions": "320000000",
+            "console_sha256": "48c6c7b6ed6976de2bbda07c25dc7bcae426f1726ab3fe198eeaf69197be76b0"
+          }
+        ],
+        "median": [
+          0.19,
+          0.23
+        ]
+      }
+    ]
+  }
+}

@@ -27,3 +27,5 @@ Implemented four board models and validated guest-visible completion of ET047TC1
 ## Remaining acceptance
 
 PaperDIY passed its six Arduino checks, USB-CDC REPL and independent stock button readback. The remaining boards need their outstanding peripheral and timing cases.
+
+Follow-up checks for all four boards are in [followup-report.md](followup-report.md), with exact execution hashes in [followup-run.json](followup-run.json).
