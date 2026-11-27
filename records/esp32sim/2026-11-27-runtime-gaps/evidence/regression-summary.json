@@ -1,0 +1,836 @@
+{
+  "workspace": {
+    "passed": 2041,
+    "failed": 0,
+    "ignored": 0,
+    "filtered out": 34
+  },
+  "workspace_exit": 0,
+  "clippy_native_exit": 0,
+  "clippy_wasm_exit": 0,
+  "suites": {
+    "cores3": {
+      "summary": "15/15 passed",
+      "binary": "final-sim"
+    },
+    "adv": {
+      "summary": "11/11 passed",
+      "binary": "final-sim"
+    },
+    "tab5": [
+      {
+        "case": "touch button",
+        "status": "PASS",
+        "evidence": "GT911 press and release redraw the button"
+      },
+      {
+        "case": "touch multi ST7123",
+        "status": "PASS",
+        "evidence": "final-st-multi: Point 1 X:0160 Y:0400, Point 2 X:0540 Y:0880"
+      },
+      {
+        "case": "touch multi GT911",
+        "status": "PASS",
+        "evidence": "tab5-multi: Point 1 X:0160 Y:0400, Point 2 X:0540 Y:0880"
+      },
+      {
+        "case": "BMI270",
+        "status": "PASS",
+        "evidence": "tab5-imu: Acc X = 0.50, Acc Y = -0.25, Gyr X = 125.00"
+      },
+      {
+        "case": "microphone and replay",
+        "status": "PASS",
+        "evidence": "recording reacts to the input and reproduces 733 Hz on touch playback"
+      },
+      {
+        "case": "speaker original build",
+        "status": "DOCS-DEFECT",
+        "evidence": "static/en/arduino/m5tab5/speaker.md:15 starts with ##include"
+      },
+      {
+        "case": "speaker corrected",
+        "status": "PASS",
+        "evidence": "five ordered speaker tones from 10 kHz to 2 kHz through codec-gated 48 kHz PCM"
+      },
+      {
+        "case": "battery and charging",
+        "status": "PASS",
+        "evidence": "tab5-power: Bat Charging: Yes, Bat Voltage: 7980mv, Bat Level: 86"
+      },
+      {
+        "case": "RTC local",
+        "status": "PASS",
+        "evidence": "RTC found and time advanced from the written date"
+      },
+      {
+        "case": "RTC SNTP",
+        "status": "PASS",
+        "evidence": "virtual NTP synchronized the RX8130, and P4 read back advancing seconds"
+      },
+      {
+        "case": "wakeup five seconds",
+        "status": "PASS",
+        "evidence": "reset 0x5 at 8.767 s and the original prompt redrew"
+      },
+      {
+        "case": "wakeup next minute",
+        "status": "PASS",
+        "evidence": "reset 0x1 at 60.976 s and the original prompt redrew"
+      },
+      {
+        "case": "microSD",
+        "status": "PASS",
+        "evidence": "SPI SD mount, exact WriteTest.txt bytes, and two full-frame PNGs"
+      },
+      {
+        "case": "microSD native SDMMC",
+        "status": "PASS",
+        "evidence": "same SPI-written card, read through SDMMC with 3792 controller bytes"
+      },
+      {
+        "case": "Wi-Fi station",
+        "status": "PASS",
+        "evidence": "P4 shows the DHCP lease after C6 WPA2 association over SDIO"
+      },
+      {
+        "case": "Wi-Fi scan",
+        "status": "PASS",
+        "evidence": "C6 scan results reached the Tab5 application screen"
+      },
+      {
+        "case": "Wi-Fi SoftAP",
+        "status": "PASS",
+        "evidence": "AP-only copy started on C6 and served a virtual station via the P4 DHCP server"
+      },
+      {
+        "case": "RS485 docs sketch",
+        "status": "NOT RUN",
+        "evidence": "no RS485 sketch in the pinned Tab5 Arduino docs"
+      },
+      {
+        "case": "UIFlow2 Tab5 docs sketch",
+        "status": "NOT RUN",
+        "evidence": "Tab5/program.md covers IDE operation and links shared API examples"
+      },
+      {
+        "case": "expander PA and USB rails",
+        "status": "PASS",
+        "evidence": "guest M5Unified power API observes both, USB only, and neither"
+      },
+      {
+        "case": "antenna select",
+        "status": "PASS",
+        "evidence": "firmware selects internal antenna through expander P0"
+      },
+      {
+        "case": "UIFlow2 2.5.3 stock",
+        "status": "PASS",
+        "evidence": "stock home and ADC control after touch"
+      },
+      {
+        "case": "UIFlow2 2.5.3 REPL",
+        "status": "PASS",
+        "evidence": "exact full framebuffer and down/up; ILI9881C ID 98 81 0c"
+      },
+      {
+        "case": "UIFlow2 2.5.4 stock",
+        "status": "PASS",
+        "evidence": "stock home and ADC control after touch"
+      },
+      {
+        "case": "UIFlow2 2.5.4 REPL",
+        "status": "PASS",
+        "evidence": "exact full framebuffer and down/up"
+      },
+      {
+        "case": "Maker Fighter HID",
+        "status": "PASS",
+        "evidence": "HID enumeration, interrupt transfers and application menu change"
+      },
+      {
+        "case": "MSC register probe",
+        "status": "PASS",
+        "evidence": "MSC descriptor enumeration, READ(10), sector and command status"
+      },
+      {
+        "case": "MSC SDK probe",
+        "status": "PASS",
+        "evidence": "SDK host stack enumerated and read sector 4 through full-speed MSC"
+      }
+    ]
+  },
+  "batches": {
+    "adv-cap-lora.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "adv-cap.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echo-2.5.1.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echo-2.5.2.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echo-2.5.3.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echo-2.5.4.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echo-2.5.5.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echo.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-echos3r.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 6,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-lite.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-matrix-v11.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atom-matrix.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3-gc9107.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 4,
+        "FAIL": 2,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3-lite.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 3,
+        "FAIL": 1,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 4,
+        "FAIL": 2,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3r-cam.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 2,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3r-gc9107.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 6,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3r-m12.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 2,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3r.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 6,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atoms3u.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 6,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atomu-2.5.3.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atomu-2.5.4.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atomu-2.5.5.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "atomu.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "c6a.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "lx6a.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "lx6b.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "lx6c.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "m5stick.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "papercolor.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 14,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 2
+      }
+    },
+    "paperdiy.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 6,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "papermono.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 25,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 1
+      }
+    },
+    "papers3.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 9,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "s3a.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "s3b-replay/cardputer.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 11,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "s3b-replay/dial.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 11,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "s3b-replay/sticks3.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 11,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 5
+      }
+    },
+    "s3b-replay/stopwatch.status": {
+      "exit": 1,
+      "verdict_prefix_counts": {
+        "PASS": 18,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 1
+      }
+    },
+    "s3c.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stackchan.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stamplc.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stickc-plus-se.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stickc-plus.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stickc-plus2.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stickc.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    },
+    "stickt2.status": {
+      "exit": 0,
+      "verdict_prefix_counts": {
+        "PASS": 0,
+        "FAIL": 0,
+        "PARTIAL": 0,
+        "REVIEW": 0,
+        "NOT RUN": 0,
+        "DOCS-DEFECT": 0
+      }
+    }
+  },
+  "radio_pairs": [
+    {
+      "lane": "paper",
+      "status": "PASS",
+      "tx": 4,
+      "count": 4,
+      "payload_sha256": "8a8b7fd024718d08b70be7ba862207ec6d6d49bb0838dd1ae11a2419a02cec68",
+      "wall_s": 26.632
+    },
+    {
+      "lane": "nesso-isolated",
+      "status": "PASS",
+      "tx": 14,
+      "count": 0,
+      "payload_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "wall_s": 34.963
+    },
+    {
+      "lane": "nesso",
+      "status": "PASS",
+      "tx": 14,
+      "count": 14,
+      "payload_sha256": "4e3c3963d3e82235d901ea7194ec17c8c122f579b6bcd7b37df95d32661e46ff",
+      "wall_s": 38.655
+    },
+    {
+      "lane": "lora1262-isolated",
+      "status": "PASS",
+      "tx": 1,
+      "count": 0,
+      "payload_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "wall_s": 72.14
+    },
+    {
+      "lane": "lora1262",
+      "status": "PASS",
+      "tx": 1,
+      "count": 1,
+      "payload_sha256": "867fd5bb6b39d818ab2bd831b9c256f8e0d9dd5f0bf7742e0b9b6521059ab334",
+      "wall_s": 100.28
+    },
+    {
+      "lane": "lora868-isolated",
+      "status": "PASS",
+      "tx": 1,
+      "count": 0,
+      "payload_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "wall_s": 75.44
+    },
+    {
+      "lane": "lora868",
+      "status": "PASS",
+      "tx": 1,
+      "count": 1,
+      "payload_sha256": "867fd5bb6b39d818ab2bd831b9c256f8e0d9dd5f0bf7742e0b9b6521059ab334",
+      "wall_s": 98.751
+    },
+    {
+      "lane": "cc1101",
+      "status": "PASS",
+      "tx": 7,
+      "count": 7,
+      "payload_sha256": "773da74344a5610dce5fadf12a9c03f8e0f4ed70667fb7ba997c39ce5ac4872c",
+      "wall_s": 115.699
+    },
+    {
+      "lane": "cc1101-isolated",
+      "status": "PASS",
+      "tx": 7,
+      "count": 0,
+      "payload_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "wall_s": 92.978
+    }
+  ],
+  "s3_baseline_controls": {
+    "atoms3-lite": [
+      "FAIL button guest press/release 0/0, idle events=False"
+    ],
+    "atoms3": [
+      "FAIL imu still, vector A and vector B guest values [(), (), ()]"
+    ],
+    "atoms3-gc9107": [
+      "FAIL imu still, vector A and vector B guest values [(), (), ()]"
+    ],
+    "atoms3-button": [
+      "FAIL button guest press/release 0/0, idle events=False"
+    ],
+    "atoms3-gc9107-button": [
+      "FAIL button guest press/release 0/0, idle events=False"
+    ]
+  },
+  "tab5_initial_suite_failure": "Rebuilt SDK image 3a742af6 stalled after three USB setup transfers; the reference image 1d404ac8 subsequently passed on the same candidate.",
+  "tab5_sdk_reference_firmware_sha256": "1d404ac87703a9647fe38735211c031675f04096d4ef3faa0a20f08ba3d80b50",
+  "c6_docs": {
+    "nanoc6": {
+      "button": "PASS",
+      "ir_nec": "PASS",
+      "led": "PASS",
+      "program": "PASS",
+      "thread-1": "PASS",
+      "thread-2": "PASS",
+      "thread-3": "PASS",
+      "thread-4": "PASS",
+      "thread-5": "PASS",
+      "thread-6": "PASS",
+      "zigbee-1": "PASS",
+      "zigbee-2": "PASS",
+      "zigbee-3": "PASS",
+      "zigbee-4": "PASS",
+      "zigbee-5": "PASS",
+      "stock": "PASS"
+    },
+    "nesso-n1": {
+      "button": "PASS",
+      "buzzer": "PASS",
+      "display": "PASS",
+      "imu": "PASS",
+      "ir_nec": "PASS",
+      "led": "PASS",
+      "lora-1": "PASS",
+      "lora-2": "PASS",
+      "power-2": "PASS",
+      "quickstart-bargraph": "PASS",
+      "touch": "PASS",
+      "stock": "PASS",
+      "power-1": "DOCS-DEFECT"
+    }
+  },
+  "c6_peer_markers": [
+    "C6 peer fixture env-no-unit verified",
+    "C6 peer fixture nano-stock-env verified",
+    "C6 peer fixture nano-stock-repl verified",
+    "C6 peer fixture nano-stock-uart0 verified",
+    "C6 peer fixture thread-isolated verified",
+    "C6 peer fixture thread-peer verified",
+    "C6 peer fixture thread-scan verified",
+    "C6 peer fixture zigbee-peer verified",
+    "C6 peer fixture zigbee-recovery verified",
+    "C6 peer fixture zigbee-scan verified",
+    "C6 peer fixture zigbee-temp verified",
+    "C6 peer fixture nesso-stock-repl verified"
+  ],
+  "sentinels": [
+    "hello: core0 720000000 + core1 0 insns; identical serial; user medians 13.86s base and 15.05s head; {'base': [13.5, 13.86, 14.18], 'head': [15.05, 16.26, 15.0]}",
+    "c3-hello: 480000000 insns; identical serial; user medians 8.69s base and 10.15s head; {'base': [8.32, 8.69, 9.25], 'head': [9.86, 10.15, 10.47]}",
+    "c6-hello: 480000000 insns; identical serial; user medians 8.60s base and 9.78s head; {'base': [8.56, 8.6, 8.84], 'head': [9.78, 10.71, 9.75]}",
+    "pocket-tank: core0 720000000 + core1 0 insns; identical serial; user medians 14.05s base and 15.44s head; {'base': [14.04, 14.05, 14.17], 'head': [15.44, 14.93, 15.55]}"
+  ],
+  "wasm_abi_successes": [
+    "ok   wasm JIT handoff: shared-memory block committed at a scheduler boundary",
+    "ok   stamplc: board m5stack-stamplc, 229.3 M insns in 42.5 s wall (5.4 Minsn/s), 24 console lines, 9 binary frames",
+    "ok   cardputer-adv: board m5stack-cardputer-adv, 267.8 M insns in 13.9 s wall (19.3 Minsn/s), 23 console lines, 377 binary frames",
+    "ok   atoms3-lite: board m5stack-atoms3-lite, 292.1 M insns in 9.9 s wall (29.6 Minsn/s), 23 console lines, 0 binary frames",
+    "ok   stamplc: board m5stack-stamplc, 229.3 M insns in 35.5 s wall (6.5 Minsn/s), 24 console lines, 9 binary frames",
+    "ok   cardputer-adv: board m5stack-cardputer-adv, 267.8 M insns in 18.1 s wall (14.8 Minsn/s), 23 console lines, 377 binary frames",
+    "ok   atoms3-lite: board m5stack-atoms3-lite, 292.1 M insns in 12.3 s wall (23.8 Minsn/s), 23 console lines, 0 binary frames"
+  ],
+  "wasm_initial_missing_markers": [
+    "FAIL stamplc: console never showed \"V2.5.3\"; got 757 bytes",
+    "FAIL cardputer-adv: console never showed \"V2.5.3\"; got 672 bytes",
+    "FAIL atoms3-lite: console never showed \"V2.5.3\"; got 674 bytes",
+    "FAIL stamplc: console never showed \"V2.5.3\"; got 757 bytes",
+    "FAIL cardputer-adv: console never showed \"V2.5.3\"; got 672 bytes",
+    "FAIL atoms3-lite: console never showed \"V2.5.3\"; got 674 bytes"
+  ]
+}

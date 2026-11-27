@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | Runtime benchmark follow-up | PARTIAL (native Device Service, CLI and WASM ABI virtual-device validation) | [查看](records/esp32sim/2026-11-27-runtime-gaps/) |
 | 2026-11-27 | esp32sim | Device Service runtime parity and compatibility fixtures | PARTIAL (native virtual-device validation) | [查看](records/esp32sim/2026-11-27-device-service-parity/) |
 | 2026-11-27 | ESP Emulator | Native Device Service control parity | PARTIAL (virtual-device validation) | [查看](records/m5stack-esp-emulator/2026-11-27-device-service-control-parity/) |
 | 2026-11-27 | ESP Emulator | esp32sim 与封存后端同固件对照 | PARTIAL (virtual-device validation) | [查看](records/m5stack-esp-emulator/2026-11-27-esp32sim-backend-benchmark/) |

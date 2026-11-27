@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "esp32sim benchmark runtime follow-up",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "branch": "m5/fix-runtime-gaps",
+    "base_commit": "4e257b6be8ee0ed706c2e509d8f31ef7472a424b",
+    "head_commit": "2fba23b0305cc96a3bd9b9ccb78d0f3ed50523d8",
+    "runtime_source": "69f769fe75972d619b62bf818a23280ffbe2c331",
+    "benchmark": "https://github.com/m5agent/m5stack-esp-emulator/pull/288"
+  },
+  "hardware": {},
+  "firmware": {
+    "performance_manifest": "evidence/performance-summary.json",
+    "tab5_254_sha256": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+    "maker_fighter_14_sha256": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+    "msc_sector_guest_sha256": "073ba2e089f2536356f35df89eff5d36b9934a36ee707c347a0e8eb65227c406",
+    "original_meshtastic_landscape_sha256": "ef8249ac7930fa51ac5bf03cea52d8de9a59dcbaf2130663ca0d5087a8053744",
+    "zigbee_light_sha256": "a736daf26ca51983bf6a9bd30dd79c3148631291edf50acea1b8f29600183504",
+    "zigbee_coordinator_sha256": "23b8789a0725ef957488dd53c5b611fe343137a713bb5111d92adaa851f80f87",
+    "c6_reset_probe_app_sha256": "cdc543ddcc84ede7d3edf4dbd33fbbeebdedac9b357360d042e555b26a6deb83",
+    "c6_reset_probe_bootloader_sha256": "bc578f0cb2e15c149a63f8518a74c5af5f43cf190ece64b94fd7a3ed9ce8bd99",
+    "c6_reset_probe_partitions_sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "execution": {
+    "environment": "macOS AArch64. Native virtual-device validation and Node.js WASM ABI. Rust 1.100.0.",
+    "baseline_native_sha256": "e92ed8a1db04a54ea4c3133fecca4b8586f26abd631f94e8e8a7251e9a0bd616",
+    "final_native_sha256": "499640e7f447a640ff1441d73647b72afad9e797ec8fcc096edb1ac584e3dbbd",
+    "core2_batch_pilot_sha256": "9b0a54eb1c053a74736ff771ecaba3d0972d78b16e47a1b679a8f58026f27a33",
+    "wasm_sha256": "dd923c53a8e7ee68d2780b482973410ebb6a123612ab2292f833ffb3498b285c"
+  },
+  "checks": [
+    {
+      "item": "Core2 stock home",
+      "status": "PASS"
+    },
+    {
+      "item": "Core2 stock home within 8 wall seconds on standard release Device Service",
+      "status": "PASS"
+    },
+    {
+      "item": "Core2 quantitative complete-home latency parity with QEMU",
+      "status": "PARTIAL",
+      "reason": "No QEMU home frame appeared in three 24-second same-image sessions."
+    },
+    {
+      "item": "Pacing and deterministic work identity on selected inputs",
+      "status": "PASS"
+    },
+    {
+      "item": "Tab5 exact DSI read from disconnected-touch variant",
+      "status": "PASS"
+    },
+    {
+      "item": "Tab5 host MSC LBA 4 and input-image oracle",
+      "status": "PASS"
+    },
+    {
+      "item": "Maker Fighter application MSC read",
+      "status": "NOT RUN"
+    },
+    {
+      "item": "C6 guest-triggered software reset reasons and flash persistence",
+      "status": "PASS"
+    },
+    {
+      "item": "Original Meshtastic software reset",
+      "status": "NOT RUN"
+    },
+    {
+      "item": "C6 original Zigbee light leave and rejoin",
+      "status": "PASS"
+    },
+    {
+      "item": "C6 simultaneous STA and 802.15.4 operation",
+      "status": "NOT RUN"
+    },
+    {
+      "item": "S3 native repeated reset/alarm/MMIO reproduction",
+      "status": "PASS"
+    },
+    {
+      "item": "Original QEMU workbench traps",
+      "status": "NOT RUN"
+    },
+    {
+      "item": "Physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/controller-summary.json",
+    "evidence/performance-summary.json",
+    "evidence/regression-summary.json"
+  ]
+}
