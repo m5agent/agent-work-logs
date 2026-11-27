@@ -41,3 +41,9 @@ explicit QEMU for its QOM, Flash and storage fields. Tab5 keeps its old
 reviewer's explicit QEMU/esp-emu, DSI, SDMMC and audio rules. M5Stick and
 StickT2 have no reviewer QEMU admission. CardputerZero has the external
 Linux path.
+
+The [36-row catalog/capability matrix](evidence/device-api-compatibility.json)
+records the advertised default, frame/input/QOM/storage flags, reviewer
+QEMU readiness, review STA and every advertised network profile per board.
+[Executed review cases](rollout.md#reviewer-fixture-outcomes) record the
+functional checks and partial outcomes separately from capability reads.

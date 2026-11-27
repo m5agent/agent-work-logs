@@ -1,0 +1,231 @@
+{
+  "rollout": {
+    "status": "LIVE",
+    "release_id": "581073040c202821f54a4a00fd2823d6fd8fa520-esp32sim-parity-20261127",
+    "source_commit": "581073040c202821f54a4a00fd2823d6fd8fa520",
+    "browser_manifest_sha256": "068ea4f3bff7ed8317b4c0f043ff09035b4bb2c908bd01a394bc6b4e29b0e5a3",
+    "applied_at": "2026-11-27T10:58:42.551430+00:00",
+    "review_worker_applied_at": "2026-11-27T10:58:53.237458+00:00"
+  },
+  "ci": {
+    "head": "1e7822c44a5a52abb9cef1283b5f83e262f18da2",
+    "checks_passed": 2,
+    "local_platform_tests": 2588,
+    "skipped": 11
+  },
+  "browser_guest": [
+    {
+      "device": "atoms3-lite",
+      "status": "PASS",
+      "workers_before_stop": 1,
+      "workers_after_stop": 0,
+      "firmware_sha256": "ad515fce316589d186fbcfb53b409787936f052748323db4b793ef3bc640fa36"
+    },
+    {
+      "device": "stickc",
+      "status": "PASS",
+      "workers_before_stop": 1,
+      "workers_after_stop": 0,
+      "firmware_sha256": "ece54cdc3ba937dbe3e8b30185432d604312b4c4d9961167cf24f08d65902b15"
+    },
+    {
+      "device": "nanoc6",
+      "status": "PASS",
+      "workers_before_stop": 1,
+      "workers_after_stop": 0,
+      "firmware_sha256": "d1246ce3912d47bcb92ffc525aac853eea44754fd281ae5eac51893f70f4d8d5"
+    }
+  ],
+  "reviewer_jobs": [
+    {
+      "type": "Dial encoder",
+      "status": "done",
+      "lane": "SIM_VERIFIED",
+      "error_code": null,
+      "declared_sha256": "932f968f47e4df6d86f2173f0a3309dc2c4b3f6d9a268eabcbadbe800e9f9475"
+    },
+    {
+      "type": "Cardputer SD read",
+      "status": "done",
+      "lane": "SIM_VERIFIED",
+      "error_code": null,
+      "declared_sha256": "c8525e5a00f84f633b180ffffd2643dbba1d5e72107b58ec37b020e1336e117c",
+      "observed": {
+        "status": "PASS",
+        "reason": "sd_read_blocks_observed"
+      },
+      "evidence_sha256": "245ae93ed808857d5c60b0d3c6f37760118cd73bc78f18579a2c135290be6e41"
+    },
+    {
+      "type": "PaperS3 SD write",
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_SIM_SD_WRITE_PARTIAL",
+      "declared_sha256": "d6733a0ca378f95335fa5fba4d4d992fb1dd97c17557b20e9aebfca08ba6d624",
+      "observed": {
+        "status": "PARTIAL"
+      },
+      "evidence_sha256": "02d1494533602f1c1784a344163062935dc80abd02e80f008eb51b991a15bef0"
+    },
+    {
+      "type": "Tab5 frame",
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_INTERACTION_CLAIM_PARTIAL",
+      "declared_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3"
+    },
+    {
+      "type": "Tab5 crash diagnostics",
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_INTERACTION_CLAIM_PARTIAL",
+      "declared_sha256": "4f3bb118a5570a6ba885a234fce55b66e28ef26091cfe4f3f2e4c33711471ea3",
+      "observed": {
+        "status": "no_evidence"
+      },
+      "evidence_sha256": "f9900a091b314d0c44399788a6bf113dea50c03a20ed35c68904ac630c0f8382"
+    },
+    {
+      "type": "Tab5 speaker legacy baseline",
+      "status": "done",
+      "lane": "SIM_VERIFIED",
+      "error_code": null,
+      "declared_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+      "observed": {
+        "status": "PASS",
+        "reason": "tab5_audio_after_verified_tap",
+        "playback": {
+          "bytes": 192000,
+          "sha256": "1fd32ba05a04afd7d9ca4a2b932993b355cc8c86ee1d39182ec3279b3927233f",
+          "channel_rms": [
+            3849.472,
+            4750.219
+          ]
+        }
+      },
+      "evidence_sha256": "fb53018f0f2fae1304de7cd22d676515584ca4a65c6f2facb3736831586b5195"
+    },
+    {
+      "type": "Tab5 speaker merged concurrent with SD",
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_TAB5_SPEAKER_PARTIAL",
+      "declared_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+      "observed": {
+        "status": "PARTIAL",
+        "reason": "tab5_audio_window_unavailable"
+      },
+      "evidence_sha256": "5cbf2ebf95907e59a05155218f9f8584de545215e845b3ea9291bf361239decc"
+    },
+    {
+      "type": "Tab5 speaker merged standalone",
+      "status": "done",
+      "lane": "SIM_VERIFIED",
+      "error_code": null,
+      "declared_sha256": "2d30fa8918bac1e8d09b59eb2fc72ea40500d097efa4812e241ac875ee86e781",
+      "observed": {
+        "status": "PASS",
+        "reason": "tab5_audio_after_verified_tap",
+        "playback": {
+          "bytes": 192000,
+          "sha256": "d9919a102986b4913cf8b91da4bf8e4d989367b9053ad4bea5bc918cfb0cb7f9",
+          "channel_rms": [
+            3713.65,
+            4601.958
+          ]
+        }
+      },
+      "evidence_sha256": "491c3863150d6211e781166270b3d692eea40b3843c878229402e2dfb6dea7a8"
+    },
+    {
+      "type": "StickS3 provisioning",
+      "status": "manual_review",
+      "lane": "SIM_PARTIAL",
+      "error_code": "E_NETWORK_PARTIAL",
+      "declared_sha256": "5c7c0b74a49cef246d11d907c87f97029c238c5f5441ab29585432120e260cd6",
+      "observed": {
+        "status": "PASS"
+      },
+      "evidence_sha256": "f73998b386586ce9021cafa8b1bfa8e7c47c1e798f800f48975bd7c258605142"
+    },
+    {
+      "type": "Core2 review STA",
+      "status": "done",
+      "lane": "SIM_VERIFIED",
+      "error_code": null,
+      "declared_sha256": "6158bdd7477502a43e3748f4d3b4e21aaf51365e8af995345fd33f375e1fa947",
+      "observed": {
+        "status": "PASS",
+        "reason": null,
+        "assertions": [
+          {
+            "type": "dhcp_lease",
+            "status": "PASS"
+          }
+        ]
+      },
+      "evidence_sha256": "176eb0f84e509f57c8c18c6a45d7417588cdf9f2c2ed94aa0d1dd76ca9ea9d15"
+    },
+    {
+      "type": "CoreS3 Joystick Unit",
+      "status": "done",
+      "lane": "SIM_VERIFIED",
+      "error_code": null,
+      "declared_sha256": "772b2b529b370f9eec5115154bd42103e2c096e201ed72916e56b57085d0534f"
+    }
+  ],
+  "papercolor_extended": [
+    {
+      "runtime": "esp32sim",
+      "trial": 1,
+      "status": "PASS",
+      "firmware_sha256": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+      "bundle_sha256": "770aaddd1bf559ddef490efac6d3a4042911596798978ffd98c2d99ad1d3969c",
+      "first_six_color_sample_seconds": 16.9,
+      "stop_state": "stopped"
+    },
+    {
+      "runtime": "esp32sim",
+      "trial": 2,
+      "status": "PASS",
+      "firmware_sha256": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+      "bundle_sha256": "a2c4049eb3cb726ef993e44bc6b7fc44b02ef009a71196b62ead7c5a4c90750b",
+      "first_six_color_sample_seconds": 16.86,
+      "stop_state": "stopped"
+    },
+    {
+      "runtime": "qemu",
+      "trial": 1,
+      "status": "PASS",
+      "firmware_sha256": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+      "bundle_sha256": "60b9d05f1adad302b1e38c36eee479a3e246b1cc6e679e27e217830d8f32ea6f",
+      "first_six_color_sample_seconds": 2.02,
+      "stop_state": "stopped"
+    },
+    {
+      "runtime": "qemu",
+      "trial": 2,
+      "status": "PASS",
+      "firmware_sha256": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+      "bundle_sha256": "46275ae2b87085de2c598267de1d2a5de197d951aa0c2276a3cb113bf2da2014",
+      "first_six_color_sample_seconds": 2.02,
+      "stop_state": "stopped"
+    }
+  ],
+  "reviewer_smoke": {
+    "status": "done",
+    "lane": "SIM_VERIFIED",
+    "error_code": null,
+    "declared_sha256": "b513f3112a6831e075d638aac49fe1c16dd629745f024b897b4d2bf5677d496c",
+    "duration_ms": 69594,
+    "submit_requested": 0,
+    "finished_at": "2026-11-27T11:00:08.123916+00:00",
+    "evidence": {
+      "wait.json": "242d35791ec6d6b2530732089640c27c9b2fa1f10ecea1fcfe6e102fe32c3c9f",
+      "session.json": "8375ecb55379c66b86b3c5be4654d0a6e690c084718dec85f9a4a5655eeaf702",
+      "evidence.zip": "e4b2b0e96e33c50ce3dcca4a33be5709458b233a8f6d2de4149bea1739930277",
+      "review-report.json": "4f0b311762dc9950cbbe2525dd2ade39a5f8eb73e9a28787a7c143db95397ebf",
+      "frame.png": "939281a996d127805a27d14f6c6a0c0bd9cc41ec58b3eae7d1f8f6df2acc7b30"
+    }
+  }
+}

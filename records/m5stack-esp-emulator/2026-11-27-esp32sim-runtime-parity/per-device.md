@@ -26,7 +26,7 @@ Virtual-device validation through Device Service. Counts cover the adapted Ardui
 | m5stick | — | — | esp32sim | No QEMU Service lease. Two omitted-runtime factory runs read MPU9250 ID 0x71. Factory UI remains partial. |
 | nanoc6 | 1 / 0 / 0 | 1 / 0 / 0 | QEMU | Full docs, stock and peripheral fixture oracle coverage is pending. |
 | nesso-n1 | 1 / 0 / 0 | 0 / 1 / 0 | QEMU | Full docs, stock and peripheral fixture oracle coverage is pending. |
-| papercolor | 0 / 2 / 0 | 1 / 1 / 0 | QEMU | Full docs, stock and peripheral fixture oracle coverage is pending. |
+| papercolor | 0 / 2 / 0 | 1 / 1 / 0 | QEMU | Arduino `display` missed the initial 16 s window. On extension both passed twice; esp32sim reached six colors about 15 s after QEMU. |
 | paperdiy | 1 / 1 / 0 | 0 / 2 / 0 | QEMU | Full docs, stock and peripheral fixture oracle coverage is pending. |
 | papermono | 1 / 1 / 0 | 2 / 0 / 0 | QEMU | UIFlow2 device matrix. Hold (240,650) for 1 s. QEMU changed the frame and produced black at (440,30). esp32sim stayed white at that pixel. |
 | papers3 | 0 / 1 / 0 | 0 / 1 / 0 | QEMU | Full docs, stock and peripheral fixture oracle coverage is pending. |

@@ -17,3 +17,6 @@ fixtures and stock/factory applications. Full catalog behavior remains open.
 - [Report and reproduction](report.md)
 - [Structured run](run.json)
 - [Case and radio evidence](evidence/virtual-device-summary.json)
+- [Merged rollout and reviewer smoke](rollout.md)
+- [Arduino case inventory and unrun comparisons](case-inventory.md)
+- [Per-device API readback](evidence/device-api-compatibility.json)
