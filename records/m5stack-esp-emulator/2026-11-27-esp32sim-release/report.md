@@ -108,3 +108,17 @@ plus normal guest stop and zero live Workers. The earlier PaperDIY Worker
 stop was not reproduced in two exact local replays. The reports omit raw
 serial, browser target IDs and filesystem paths.
 [Input evidence](evidence/pages-atom-matrix-summary.json)
+
+The next hosted preview failed on Atom Matrix editor during the long UTF-8
+guest input with `QMP qom-get timed out`. No hosted matrix case finished
+successfully, and the remaining 71 cases were NOT RUN. The earlier two
+hosted failures remain in the record. [Third hosted failure](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45941756439)
+
+The selected emergency export already passed the complete serial 72-case
+browser gate and the separate original-firmware CoreMatrix stock check.
+The alternate CI-built C61 export failed a local CoreS3 boot check and is
+excluded from the package. The selected export's S3 ROM ELF, source and
+license record, ROM_LICENSE and NOTICE are byte-identical to the standard
+mixed export. The only packaged ROM is the pinned Apache-2.0 Espressif
+esp-rom-elfs 20260528 S3 ELF. Its hash is in the qualification summary.
+[Prepared qualification](evidence/pages-prepared-qualification-summary.json)
