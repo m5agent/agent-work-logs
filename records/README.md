@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | m5stack-firmware-archive | Board documentation firmware rebuild and replay | PARTIAL (native virtual-device validation) | [查看](m5stack-firmware-archive/2026-11-27-board-docs-matrix/) |
 | 2026-11-27 | ESP Emulator | esp32sim browser board qualification | PARTIAL (browser virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-browser-boards/) |
 | 2026-11-27 | esp32sim | Deterministic SX1262 and CC1101 peer delivery | PASS (native virtual-device validation) | [查看](esp32sim/2026-11-27-radio-peer-synchronization/) |
 | 2026-11-27 | esp32sim | LX6-B Stick integration and complete device matrix | PARTIAL (known LoRa loopback flake) | [查看](esp32sim/2026-11-27-lx6b-integration/) |
