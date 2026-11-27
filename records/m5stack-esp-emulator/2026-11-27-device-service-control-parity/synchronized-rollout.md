@@ -102,3 +102,8 @@ The active release and its two immediate rollback releases are verified.
 Two additional directories are referenced by other running services. A third
 supplies QEMU and Python assets to the older retained rollback configuration.
 These references prevent removal of those three resident directories.
+
+Cleanup removed 32 task-owned, archived candidate directories with 9.55 GiB
+of measured allocation. The data volume reported 67% used afterward. All
+three live surfaces passed another source and health readback at
+2026-11-27 14:24:55.403420 UTC.
