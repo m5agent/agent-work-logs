@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Device Service parity in esp32sim",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "4e257b6be8ee0ed706c2e509d8f31ef7472a424b",
+    "commit": "9eeb9a61e64cd3d3de6e4262fac13b8a3dc2f34d",
+    "branch": "m5/fix-service-parity",
+    "regression_commit": "a6216b68abda3af76f6f491f940fbf0e4e8a42f7"
+  },
+  "hardware": {},
+  "firmware": {
+    "stopwatch": "849218bf48b64cef865f5a4f5fa61a16159bc1ede2fde944cec5ecce049f4437",
+    "papercolor": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186"
+  },
+  "execution": {
+    "validation": "native virtual-device validation",
+    "host": "macOS arm64",
+    "workspace_test": "cargo test --release --workspace --no-fail-fast --locked -j 3 -- --include-ignored --skip external_",
+    "native_lint": "cargo clippy --workspace --all-targets -- -D warnings",
+    "wasm_lint": "cargo clippy --release --target wasm32-unknown-unknown -p esp32sim-wasm --features jit-tests -- -D warnings"
+  },
+  "checks": [
+    {
+      "name": "StopWatch visible aperture",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperMono hold after startup, including FT5x06 reads and SSD1677 redraw",
+      "status": "PASS"
+    },
+    {
+      "name": "PaperMono hold before touch polling starts",
+      "status": "FAIL"
+    },
+    {
+      "name": "PaperColor guest and wall refresh timing",
+      "status": "PASS"
+    },
+    {
+      "name": "Running and final Flash snapshot after guest NVS write",
+      "status": "PASS"
+    },
+    {
+      "name": "State sampling, controller strings and guest-time checkpoints",
+      "status": "PASS"
+    },
+    {
+      "name": "SPI SD media ejection, detection and scoped read counts",
+      "status": "PASS"
+    },
+    {
+      "name": "Direct-radio isolated STA, diagnostic mode, SoftAP and faults",
+      "status": "PASS"
+    },
+    {
+      "name": "Tab5 hosted live Wi-Fi fault control",
+      "status": "NOT RUN",
+      "reason": "control socket only addresses direct modeled Wi-Fi links"
+    },
+    {
+      "name": "AtomS3R camera stream via native socket alias",
+      "status": "PASS"
+    },
+    {
+      "name": "CoreS3 and ADV",
+      "status": "PASS"
+    },
+    {
+      "name": "Tab5 matrix with rebuilt and preserved probe variants",
+      "status": "PASS",
+      "passed": 25,
+      "docs_defects": 1,
+      "no_fixture": 2
+    },
+    {
+      "name": "Four sentinels and nine radio pairs",
+      "status": "PASS"
+    },
+    {
+      "name": "Workspace on the 441330fb milestone",
+      "status": "PASS",
+      "passed": 2041,
+      "failed": 0,
+      "external_fixtures_filtered": 34
+    },
+    {
+      "name": "Native and WASM Clippy on the 9eeb9a61 milestone",
+      "status": "PASS"
+    },
+    {
+      "name": "AtomS3R-CAM and M12 SCCB IDs with documented power-on sequence",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact legacy camera pre-power SCCB probe and M12 scan address list",
+      "status": "FAIL",
+      "reason": "the legacy fixtures assume an active camera and unrelated bus responders"
+    },
+    {
+      "name": "Classic Grove TMP105 positive and negative controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Basic IP5306 reserved bits and no-cell charging status",
+      "status": "PASS"
+    },
+    {
+      "name": "Paper docs, stock and BUSY checks",
+      "status": "PASS",
+      "docs_defects": 3
+    },
+    {
+      "name": "S3-C and C6-A docs, stock and peer checks",
+      "status": "PASS",
+      "docs_defects": 3
+    },
+    {
+      "name": "LX6 Stick and Core runnable cases and receiver tests",
+      "status": "PASS"
+    },
+    {
+      "name": "M5Stick factory and IP5306 probe on 9eeb9a61",
+      "status": "PASS"
+    },
+    {
+      "name": "Follow-up instruction counts and serial sentinels",
+      "status": "PASS"
+    },
+    {
+      "name": "Workspace on the 9eeb9a61 milestone",
+      "status": "PASS",
+      "passed": 2044,
+      "failed": 0,
+      "external_fixtures_filtered": 34
+    }
+  ],
+  "evidence": [
+    "evidence/summary.json"
+  ]
+}
