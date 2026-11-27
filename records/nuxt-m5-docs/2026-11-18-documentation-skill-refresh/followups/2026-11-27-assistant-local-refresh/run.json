@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "delivery",
+  "overall_status": "PASS",
+  "title": "M5Stack 文档 Skill 语料更新与分发",
+  "source": {
+    "repository": "nuxt-m5-docs",
+    "base_commit": "07d8f1c8f27acfb8a6df551cc08aa0e1187b29a4"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS host, aarch64 Linux virtual machine, and download readback",
+    "earlier_work_record_revision": "395169aaa62e88d34d986fad4716067e37959b61"
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "target": "重复构建得到相同 ZIP，4,409 个文件 CRC 校验通过，20 项回归测试通过"
+    },
+    {
+      "layer": "device_response",
+      "status": "PASS",
+      "target": "ARM64 Linux 虚拟机执行打包后的查找与 SKU 入口，读取全部 6,425 篇正文并校验 2,029 篇合并正文偏移"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PASS",
+      "target": "宿主端语料与冻结输入核对，通过三语查询样本、9 项 SKU 和已过滤路径的拒绝检查"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "target": "Skill Hub 分发包 4,409 份路径及字节经独立下载回读一致"
+    },
+    {
+      "layer": "delivery",
+      "status": "NOT RUN",
+      "target": "本机安装切换与终端客户端安装验收"
+    }
+  ],
+  "evidence": [
+    "evidence/skill-build-summary.json",
+    "evidence/skill-distribution-summary.json"
+  ]
+}
