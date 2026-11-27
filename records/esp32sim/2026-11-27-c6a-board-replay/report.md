@@ -195,3 +195,28 @@ behavior. RF, physical buzzer acoustics, charger electrical behavior
 and BLE have no validation in this batch. Use the recorded base commit
 to select the pre-port implementation or revert the batch commits
 together to remove the two board profiles and their shared changes.
+
+
+## S3-A merge follow-up
+
+C6-A merged the AtomS3 integration tree at `8e82ee95` and retained
+both sets of board entries in the CLI. The tested and published
+merge milestone is `5931cbe73c67ca5883bb99edae885ef165c18bfd`.
+
+- CoreS3 passed 15/15 and Cardputer-ADV passed 11/11.
+- The ADV LoRa1262 and LoRa868 CAP peers delivered the expected payload.
+  Both sender and receiver framebuffers matched the earlier reference.
+  The initial receivers hit the host deadline under concurrent load.
+  A longer deadline allowed the unchanged peer cases to finish.
+- All nine AtomS3 profile stock checks passed. Arduino checks reported
+  30 passes and five failures. The exact S3-A runtime reproduced the
+  button failures on AtomS3 Lite and both AtomS3 display variants, and
+  the IMU failures on both AtomS3 display variants.
+- Nesso repeated all 11 runnable Arduino passes and the stock USB REPL
+  checks. The power-1 compile defect persisted.
+- Native and WASM Clippy, 136 C6 crate tests and the C6 instruction-count
+  sentinel passed. Workspace tests reported 1,979 passes and the same
+  seven P4 assertions documented above.
+
+[Published milestone](https://github.com/m5agent/esp32sim/tree/5931cbe73c67ca5883bb99edae885ef165c18bfd)
+[Merge gate evidence](evidence/merge-s3a-summary.json)

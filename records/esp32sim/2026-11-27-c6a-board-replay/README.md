@@ -20,3 +20,5 @@ The runs used the native ESP32-C6 CLI on macOS arm64. Physical
 measurements and the ELF-backed BLE path were outside the executed
 matrix. The fork contains the patches and replay code. The record
 contains the derived summaries and hashes of raw artifacts.
+
+[S3-A merge and combined regression](evidence/merge-s3a-summary.json)
