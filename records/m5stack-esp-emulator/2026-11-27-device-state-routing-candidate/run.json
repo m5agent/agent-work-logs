@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Board-state compatibility and routing qualification",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3ec64361ca9094fff773f32614e5ed13e8fe54a2",
+    "commit": "c6cd576f1a5dfd40a193acb75dbd908cbe9613a4",
+    "fork_commit": "e929d5b2ca7a1f2475d60ee0626b30ab6ed986d7",
+    "reviewer_commit": "d0d51f84d2933807ffbac35f1a0060e60e9b6be8"
+  },
+  "hardware": {},
+  "firmware": {
+    "digests": "See per-run evidence summaries."
+  },
+  "execution": {
+    "environment": "macOS arm64, isolated native Device Service and CLI virtual devices",
+    "trials_per_backend": 2
+  },
+  "checks": [
+    {
+      "name": "board-state read shape and retained cleanup",
+      "status": "PASS",
+      "trials": 38,
+      "boards": 19
+    },
+    {
+      "name": "C6 restricted STA and SoftAP",
+      "status": "PASS",
+      "trials": 8
+    },
+    {
+      "name": "legacy UART HCI routing and diagnostics",
+      "status": "PARTIAL",
+      "attempted_routes": 4
+    },
+    {
+      "name": "launcher and ADC touch",
+      "status": "PASS",
+      "esp32sim": 8,
+      "qemu": 4,
+      "trials_per_runtime": 8
+    },
+    {
+      "name": "shared oracle",
+      "status": "PASS",
+      "esp32sim_passes": 112,
+      "qemu_passes": 92,
+      "per_runtime": 112
+    },
+    {
+      "name": "guest fixture and reviewer parity",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "fork workspace tests and Clippy",
+      "status": "PASS",
+      "workspace_passed": 2047
+    },
+    {
+      "name": "batch and radio peer gate",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "Python 3.12 platform suite, validators and PR scope",
+      "status": "PASS",
+      "tests": 2596,
+      "skipped": 9
+    },
+    {
+      "name": "production rollout",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/c6-network-summary.json",
+      "sha256": "588ade5ff14d0255320014e30e0a8aae7ed28f7e0a7ca71a0f3f960d15e1094c"
+    },
+    {
+      "path": "evidence/device-state-summary.json",
+      "sha256": "36aee89afcb35aed00ba48dc354965820edd7ae53be5259e5ac57a773c19072f"
+    },
+    {
+      "path": "evidence/oracle-esp32sim-1-summary.json",
+      "sha256": "9cb4679625dcc1bf9f9ea3a9881608d87c7c8a49e9e290f97450142322a5c9e0"
+    },
+    {
+      "path": "evidence/oracle-esp32sim-2-summary.json",
+      "sha256": "53556a626d5715ecf38201d8e3386313d613b081de3975def12a1b6fb0f92a4a"
+    },
+    {
+      "path": "evidence/oracle-qemu-1-summary.json",
+      "sha256": "ac50964c2649acd2fed60a74dcd99bcb9d5c2189b58653c857935bf43ea53131"
+    },
+    {
+      "path": "evidence/oracle-qemu-2-summary.json",
+      "sha256": "78882276215f7cdf06b2b54f4f6c3751c13c915b1b83d3cb3a945a074dd6a017"
+    },
+    {
+      "path": "evidence/reviewer-summary.json",
+      "sha256": "96679459c2348dfb455387ff0e729c70937b2ef95a46e2626e73af36923789e1"
+    },
+    {
+      "path": "evidence/state-fixture-summary.json",
+      "sha256": "9464bb993391455d5bc3eeec8d4195ca942063bb8289ef92cd7ef24c10aa35cc"
+    },
+    {
+      "path": "evidence/tab5-summary.json",
+      "sha256": "291b63f8af4e78d449a228fcced5979875d3967d2c5bffafc87712cc82dd3e7b"
+    }
+  ]
+}
