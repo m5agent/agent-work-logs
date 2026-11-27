@@ -6,3 +6,4 @@
 - [Run manifest](run.json) · [Native receipts in the run manifest](run.json) · [Browser evidence](evidence/browser-summary.json)
 
 - [Expanded matrix and per-device table](followups/expanded-matrix/README.md)
+- [Controller and media readbacks](followups/controller-media/README.md)
