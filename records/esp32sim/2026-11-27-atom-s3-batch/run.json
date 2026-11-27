@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "report",
+  "overall_status": "PARTIAL",
+  "title": "AtomS3 native simulator batch",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489",
+    "tested_commit": "7fb2f24d7a20c0597cdf61e3fd06bf92e6e2ed07",
+    "published_milestone": "de2292fc48d35a8418c398bc7cae003e3796db78"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "arduino_package": "m5stack:esp32@3.2.5",
+    "docs_commit": "7219cc9286c39b463da84053deee40bc234625db",
+    "stock": "UIFlow2 v2.5.4"
+  },
+  "execution": {
+    "environment": "native ESP32-S3 CLI on macOS arm64",
+    "profile": "optimized, LTO disabled, debug info disabled"
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "target": "atoms3u",
+      "status": "PASS",
+      "detail": "5 Arduino cases and stock USB CDC with button transitions"
+    },
+    {
+      "layer": "data_behavior",
+      "target": "atom-echos3r",
+      "status": "PASS",
+      "detail": "5 Arduino cases and stock USB CDC with button transitions"
+    }
+  ],
+  "evidence": [
+    "evidence/milestone-summary.json"
+  ],
+  "notes": [
+    "Other boards and exact final-head regression are still in validation."
+  ]
+}
