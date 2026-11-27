@@ -22,3 +22,5 @@ The catalog migration and resident rollout are pending.
 - [Additional checked-in UIFlow2 fixture trials](evidence/ui-matrix-summary.json)
 
 Physical devices and complete reviewer jobs were NOT RUN in this milestone.
+
+- [Merged milestone follow-up](follow-up-milestone.md)
