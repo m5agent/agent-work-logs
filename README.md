@@ -54,6 +54,7 @@
 | 2026-11-27 | esp32sim | NanoC6 and Nesso N1 native replay | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-c6a-board-replay/) |
 | 2026-11-27 | esp32sim | StamPLC and StackChan S3-C boards | PASS on runnable cases (37 Arduino, both stock images, two docs defects) | [查看](records/esp32sim/2026-11-27-s3c-stamplc-stackchan/) |
 | 2026-11-27 | esp32sim | AtomS3 native board profiles | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-atom-s3-batch/) |
+| 2026-11-27 | esp32sim | LX6-A shared receivers and alternate stock startup | PARTIAL（虚拟设备） | [查看](records/esp32sim/2026-11-27-lx6a-stock-receivers/) |
 | 2026-11-27 | esp32sim | LX6-A/S3-A merge and AtomU/Echo launcher diagnosis | PARTIAL（虚拟设备） | [查看](records/esp32sim/2026-11-27-lx6a-s3a-merge/) |
 | 2026-11-27 | esp32sim | Classic Atom family and shared ESP32 controllers | PARTIAL（虚拟设备） | [查看](records/esp32sim/2026-11-27-lx6-atoms/) |
 | 2026-11-27 | esp32sim | Classic ESP32 exact PSRAM, HIMEM and Flash | PASS（原生虚拟设备） | [查看](records/esp32sim/2026-11-27-lx6-memory/) |

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "branch": "m5/batch-lx6a",
+    "commit": "082938f4333f0fcbb1f16dca0cf3146f3e226ba3",
+    "continuous_dac_lx6c_source": "cc89f1adea1ee1922b4ecd99608382cacd4fbb9b",
+    "clean_merge_tree_checks": {
+      "lx6b": "1a6a8bae16d50b2ddf4da52f8df2c2acd1504089",
+      "lx6c": "ab04ce3dbeadd6ef3aaf13e8ff7d6fe29644c037"
+    }
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "controller_guest": {
+      "bootloader/bootloader.bin": "fdb9d76661f63b17e5692cb55dbc5c1d053381fe12f2c2819064332731b0cfee",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "lx6_receivers.bin": "27c8b45fdfcca513df33572704909adc8aa8f7041af6d0f5f5fa6ee41b394d78"
+    },
+    "atom_u_catalog_image_sha256": "59e1236f6c47140270fa485ece305a7a8c36a4fbda96d59f2359c75219ab5497"
+  },
+  "execution": {
+    "runtime_sha256": "7de6caeae06a2e77a0b66e4466ebef5aae1abb70698e70472fa682428ee8357c",
+    "dac_runtime_sha256": "33fa5f6940d278da5afa1e64a1d751a759c8e2e77ed2c8b12375a851cc93c40b",
+    "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+    "environment": "native AArch64 macOS, release LTO disabled"
+  },
+  "checks": {
+    "workspace": {
+      "passed": 1982,
+      "failed": 7,
+      "ignored": 0,
+      "filtered": 34,
+      "failed_cases": [
+        "hello_world_p4_rev3_smp",
+        "hello_world_p4_smp",
+        "hosted_p4",
+        "hosted_p4_rev3",
+        "hosted_rawtp_rx",
+        "hosted_rawtp_tx",
+        "wifi_sta_is_refused_where_it_does_not_work_yet"
+      ],
+      "log_sha256": "9f40da60ad87dfb13a104c49294ec52b6e79664a87b411488af7567fc7807eef"
+    },
+    "cores3": "15/15 PASS",
+    "cardputer_adv": "11/11 PASS",
+    "atom_s3": "39 PASS, 5 inherited DOCS-DEFECT",
+    "clippy": "native and wasm32 PASS",
+    "new_guest_cases": {
+      "rmt": {
+        "packets": [
+          "aa55ff00",
+          "a956fe01"
+        ],
+        "idle": "no frame"
+      },
+      "raw_pdm": {
+        "low_high_mixed": [
+          [
+            2312,
+            1783,
+            1
+          ],
+          [
+            0,
+            4096,
+            0
+          ],
+          [
+            3658,
+            437,
+            1
+          ],
+          [
+            1895,
+            2200,
+            1
+          ],
+          [
+            0,
+            4096,
+            0
+          ]
+        ],
+        "idle_words": 20480,
+        "gpio_trace_sha256": "bb93026660fbdba5c84268b001b21a951d3c9bf7b43749a08e1bd85a48537e45"
+      },
+      "dac": {
+        "sample_rate": 32000,
+        "rising_edges": 110,
+        "frequency_hz": 500.0,
+        "values": [
+          -24576,
+          24576
+        ],
+        "sha256": "0a6f2dc60f283fe2a1251a0165ffb99c0bdd2d445bb6b12af6c78383fa4ace9e"
+      }
+    },
+    "dac_controller": "2/2 PASS",
+    "atom_u_catalog_v0_1": "PASS",
+    "alternate_echo_stock_startup": "FAIL"
+  }
+}
