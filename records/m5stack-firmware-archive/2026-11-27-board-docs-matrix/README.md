@@ -10,3 +10,7 @@
 [Archive at the recorded commit](https://github.com/m5agent/m5stack-firmware-archive/tree/0bbb597ad7686068d8fab52dacafafdbab98af75) · [Report](report.md) ·
 [Execution record](run.json) · [Case summary](evidence/case-summary.json) ·
 [GitHub readback](evidence/readback-summary.json)
+
+## Follow-up verification
+
+- [101 images verified at a publication checkpoint](followups/2026-11-27-101-images/README.md)
