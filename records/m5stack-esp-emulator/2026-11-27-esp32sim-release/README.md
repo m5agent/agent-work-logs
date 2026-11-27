@@ -11,3 +11,4 @@ All guest results are virtual-device validation.
 - [Tab5 CLI case summary](evidence/tab5-cli-summary.json)
 - [Hosted preview and stock guest follow-up](evidence/pages-preview-summary.json)
 - [Hosted PaperDIY reset failure and local comparison](evidence/pages-paperdiy-summary.json)
+- [Hosted Atom Matrix input failure and local correction](evidence/pages-atom-matrix-summary.json)

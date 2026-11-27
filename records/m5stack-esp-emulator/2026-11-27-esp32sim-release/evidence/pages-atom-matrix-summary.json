@@ -1,0 +1,78 @@
+{
+  "validation": "virtual-device validation",
+  "common_identity": {
+    "wasmSha256": "8067a6b8d599f81bfe454da0318377fcb783c8ee4198fc69d3a042c1311d2c1e",
+    "firmwareSha256": "f553ad2c9d84e22591d8da8d32a7517c9e378eb5439214a9e0b2075bf31844ed",
+    "romSha256": "9115bbcd03da9f54d3baca5ad94d588a43da54ed332347137ba3dc9010df258b",
+    "board": "m5atommatrix",
+    "profile": "atom-matrix-wasm-deterministic-icount"
+  },
+  "hosted": {
+    "workflow_run": 45939599561,
+    "aggregate": {
+      "passed": 1,
+      "failed": 1,
+      "not_run": 70
+    },
+    "status": "FAIL",
+    "observed_qmp_edges": [
+      [
+        "a",
+        true
+      ],
+      [
+        "a",
+        false
+      ]
+    ],
+    "failure": "The guest produced released heartbeats but did not observe the short physical press.",
+    "raw_report_sha256": "87fe7644d2ae5be575d247c015b8faaa4f442aec373a431ed4e26b535313acfe"
+  },
+  "local": {
+    "status": "PASS",
+    "checks": 10,
+    "input_cases": [
+      {
+        "method": "keyboard",
+        "requested_hold_ms": 50,
+        "observed_hold_ms": 115.49283300000388,
+        "pressed": {
+          "kind": "state",
+          "button": "button",
+          "pressed": true,
+          "seq": 2,
+          "guest_ms": 1440
+        },
+        "released": {
+          "kind": "state",
+          "button": "button",
+          "pressed": false,
+          "seq": 4,
+          "guest_ms": 1488
+        }
+      },
+      {
+        "method": "pointer",
+        "requested_hold_ms": 50,
+        "observed_hold_ms": 112.11262500000157,
+        "pressed": {
+          "kind": "state",
+          "button": "button",
+          "pressed": true,
+          "seq": 8,
+          "guest_ms": 2429
+        },
+        "released": {
+          "kind": "state",
+          "button": "button",
+          "pressed": false,
+          "seq": 10,
+          "guest_ms": 2476
+        }
+      }
+    ],
+    "remaining_workers": 0,
+    "graceful_guest_exit": true,
+    "raw_report_sha256": "c9a817610b7160fc3ff1ac6582b59accd5c7502939a592a1c5870086f842cc2c"
+  }
+}

@@ -94,3 +94,17 @@ with hardware ANGLE on the local M4 instead of the hosted paravirtual renderer.
 The prior failure remains recorded. A repeat preview on the same main commit
 was started to check reproducibility. [Comparison summary](evidence/pages-paperdiy-summary.json)
 · [Repeat workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45939599561)
+
+The repeated hosted preview passed the Atom Matrix editor and failed its
+input case. QEMU received both host button edges, and the original guest
+button observer produced released heartbeats without sampling a press.
+The remaining 70 cases were NOT RUN. [Hosted failure](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45939599561)
+
+The test now holds the real Atom Matrix keyboard or pointer input until
+the guest observes the press, with a bounded observation timeout, then
+releases the input and verifies both edges. A local replay used the same
+WASM and Flash with a 50 ms minimum hold. Keyboard and pointer each passed,
+plus normal guest stop and zero live Workers. The earlier PaperDIY Worker
+stop was not reproduced in two exact local replays. The reports omit raw
+serial, browser target IDs and filesystem paths.
+[Input evidence](evidence/pages-atom-matrix-summary.json)
