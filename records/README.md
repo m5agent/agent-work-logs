@@ -20,6 +20,7 @@
 | --- | --- | --- | --- | --- |
 | 2026-11-27 | esp32sim | S3-D PaperDIY and PaperS3 integration | PASS (virtual-device regression gate) | [查看](esp32sim/2026-11-27-s3d-integration/) |
 | 2026-11-27 | esp32sim | S3-C fork integration | PASS (virtual-device regression gate) | [查看](esp32sim/2026-11-27-s3c-integration/) |
+| 2026-11-27 | esp32sim | LX6-B original factory firmware follow-up | PARTIAL (both factory UI gates PASS) | [查看](esp32sim/2026-11-27-lx6b-factory-followup/) |
 | 2026-11-27 | esp32sim | LX6-B classic Stick boards | PARTIAL (virtual-device validation) | [查看](esp32sim/2026-11-27-lx6b-stick/) |
 | 2026-11-27 | esp32sim | S3-B fork integration | PASS (virtual-device regression gate) | [查看](esp32sim/2026-11-27-s3b-integration/) |
 | 2026-11-27 | ESP Emulator | esp32sim release qualification | PARTIAL (native and browser virtual devices) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-release/) |

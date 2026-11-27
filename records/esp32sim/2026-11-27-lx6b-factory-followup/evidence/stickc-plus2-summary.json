@@ -1,0 +1,811 @@
+{
+ "identity": {
+  "source": "63f25e3147f84379d3fdd2dd076f3128d5b34d14",
+  "dirty": false,
+  "runtime_source": "63f25e3147f84379d3fdd2dd076f3128d5b34d14",
+  "binary_sha256": "92dbedd60ed493c439b4482908db7fea22c228d3e985b8f8ab523145fbb7d85a",
+  "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+  "docs_revision": "7219cc9286c39b463da84053deee40bc234625db"
+ },
+ "board": "m5stack-stickc-plus2",
+ "verdicts": {
+  "battery": {
+   "status": "PASS",
+   "reason": "Two simulated battery levels changed the documented display versus default",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 1046,
+    "bounds": [
+     96,
+     11,
+     112,
+     206
+    ],
+    "colors": 2,
+    "palette": [
+     [
+      "000000",
+      31354
+     ],
+     [
+      "009100",
+      1046
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      96,
+      11,
+      112,
+      206
+     ]
+    },
+    "crc32": "4ed97b18"
+   }
+  },
+  "button": {
+   "status": "DOCS-DEFECT",
+   "reason": "M5StickCPlus2 1.0.1 exposes BtnC, example calls BtnPWR",
+   "file": "static/en/arduino/m5stickc_plus2/button.md:33,36"
+  },
+  "buzzer": {
+   "status": "PASS",
+   "reason": "Routed I2S piezo bursts (Hz, ms) [(10000.4, 99.9), (4000.0, 19.8), (10000.4, 99.9), (4000.0, 16.2), (10000.4, 99.9), (4013.6, 18.4)]",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 868,
+    "bounds": [
+     59,
+     34,
+     77,
+     204
+    ],
+    "colors": 2,
+    "palette": [
+     [
+      "000000",
+      31532
+     ],
+     [
+      "009100",
+      868
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      59,
+      34,
+      77,
+      204
+     ]
+    },
+    "crc32": "f5f70cd7"
+   }
+  },
+  "display": {
+   "status": "PASS",
+   "reason": "Native frame shows the expected 20×20 rectangles and circles at distinct checkpoints",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 32400,
+    "bounds": [
+     0,
+     0,
+     134,
+     239
+    ],
+    "colors": 300,
+    "palette": [
+     [
+      "528510",
+      400
+     ],
+     [
+      "08756a",
+      400
+     ],
+     [
+      "206d83",
+      400
+     ],
+     [
+      "4a7110",
+      400
+     ],
+     [
+      "290000",
+      400
+     ]
+    ],
+    "regions": {
+     "528510": [
+      47,
+      60,
+      66,
+      79
+     ],
+     "08756a": [
+      42,
+      91,
+      61,
+      110
+     ],
+     "206d83": [
+      64,
+      124,
+      83,
+      143
+     ],
+     "4a7110": [
+      92,
+      125,
+      111,
+      144
+     ],
+     "290000": [
+      23,
+      145,
+      42,
+      164
+     ]
+    },
+    "crc32": "dfa326ea"
+   }
+  },
+  "imu": {
+   "status": "PASS",
+   "reason": "UART reports both injected accelerometer vectors and the idle control ran",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 1861,
+    "bounds": [
+     46,
+     0,
+     102,
+     152
+    ],
+    "colors": 2,
+    "palette": [
+     [
+      "000000",
+      30539
+     ],
+     [
+      "009100",
+      1861
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      46,
+      0,
+      102,
+      152
+     ]
+    },
+    "crc32": "ab003362"
+   }
+  },
+  "ir_nec": {
+   "status": "PASS",
+   "reason": "Decoded GPIO19 NEC codes cb341111, ca351111, c9361111, c8371111, c7381111",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 2848,
+    "bounds": [
+     19,
+     24,
+     115,
+     207
+    ],
+    "colors": 3,
+    "palette": [
+     [
+      "000000",
+      29552
+     ],
+     [
+      "009100",
+      2627
+     ],
+     [
+      "8b9100",
+      221
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      19,
+      31,
+      115,
+      207
+     ],
+     "8b9100": [
+      21,
+      24,
+      37,
+      40
+     ]
+    },
+    "crc32": "bc0056a8"
+   }
+  },
+  "led": {
+   "status": "PASS",
+   "reason": "G19 SET/CLR edges observed through the GPIO controller",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 762,
+    "bounds": [
+     59,
+     41,
+     75,
+     198
+    ],
+    "colors": 2,
+    "palette": [
+     [
+      "000000",
+      31638
+     ],
+     [
+      "009100",
+      762
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      59,
+      41,
+      75,
+      198
+     ]
+    },
+    "crc32": "4f757d51"
+   }
+  },
+  "mic": {
+   "status": "PASS",
+   "reason": "Distinct tone and silence frames; routed replay bursts (Hz, ms) [(732.9, 1049.2)]",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 2774,
+    "bounds": [
+     0,
+     13,
+     134,
+     225
+    ],
+    "colors": 3,
+    "palette": [
+     [
+      "000000",
+      29626
+     ],
+     [
+      "8b918b",
+      2553
+     ],
+     [
+      "8b0000",
+      221
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "8b918b": [
+      0,
+      13,
+      134,
+      225
+     ],
+     "8b0000": [
+      111,
+      62,
+      127,
+      78
+     ]
+    },
+    "crc32": "df8a0fab"
+   }
+  },
+  "rtc": {
+   "status": "PASS",
+   "reason": "Virtual Wi-Fi/SNTP populated the hardware RTC",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 1392,
+    "bounds": [
+     88,
+     0,
+     134,
+     226
+    ],
+    "colors": 2,
+    "palette": [
+     [
+      "000000",
+      31008
+     ],
+     [
+      "009100",
+      1392
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      88,
+      0,
+      134,
+      226
+     ]
+    },
+    "crc32": "92790915"
+   }
+  },
+  "wakeup": {
+   "status": "PASS",
+   "reason": "Timed wake reset followed scripted button input and idle showed one boot",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 1106,
+    "bounds": [
+     53,
+     21,
+     77,
+     217
+    ],
+    "colors": 2,
+    "palette": [
+     [
+      "000000",
+      31294
+     ],
+     [
+      "009100",
+      1106
+     ]
+    ],
+    "regions": {
+     "000000": [
+      0,
+      0,
+      134,
+      239
+     ],
+     "009100": [
+      53,
+      21,
+      77,
+      217
+     ]
+    },
+    "crc32": "990cf002"
+   }
+  },
+  "quickstart-display": {
+   "status": "PASS",
+   "reason": "Native frame shows the expected 20×20 rectangles and circles at distinct checkpoints",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 32400,
+    "bounds": [
+     0,
+     0,
+     134,
+     239
+    ],
+    "colors": 300,
+    "palette": [
+     [
+      "528510",
+      400
+     ],
+     [
+      "08756a",
+      400
+     ],
+     [
+      "206d83",
+      400
+     ],
+     [
+      "4a7110",
+      400
+     ],
+     [
+      "290000",
+      400
+     ]
+    ],
+    "regions": {
+     "528510": [
+      47,
+      60,
+      66,
+      79
+     ],
+     "08756a": [
+      42,
+      91,
+      61,
+      110
+     ],
+     "206d83": [
+      64,
+      124,
+      83,
+      143
+     ],
+     "4a7110": [
+      92,
+      125,
+      111,
+      144
+     ],
+     "290000": [
+      23,
+      145,
+      42,
+      164
+     ]
+    },
+    "crc32": "dfa326ea"
+   }
+  },
+  "stock": {
+   "status": "PASS",
+   "reason": "Stock menu changed after input; UART REPL read both buttons",
+   "frame": {
+    "w": 135,
+    "h": 240,
+    "lit": 31106,
+    "bounds": [
+     0,
+     0,
+     134,
+     239
+    ],
+    "colors": 502,
+    "palette": [
+     [
+      "187518",
+      5201
+     ],
+     [
+      "8b8d8b",
+      3741
+     ],
+     [
+      "8b7500",
+      2624
+     ],
+     [
+      "737573",
+      2535
+     ],
+     [
+      "8b898b",
+      1781
+     ]
+    ],
+    "regions": {
+     "187518": [
+      9,
+      33,
+      114,
+      173
+     ],
+     "8b8d8b": [
+      0,
+      28,
+      134,
+      239
+     ],
+     "8b7500": [
+      35,
+      95,
+      123,
+      141
+     ],
+     "737573": [
+      0,
+      0,
+      134,
+      206
+     ],
+     "8b898b": [
+      0,
+      28,
+      134,
+      239
+     ]
+    },
+    "crc32": "7f594e68"
+   },
+   "input_frame_changed": true,
+   "uart_repl": true,
+   "buttons": {
+    "A": [
+     "1",
+     "0",
+     "1"
+    ],
+    "B": [
+     "1",
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ "captures": {
+  "battery-first": {
+   "firmware_sha256": "a9fcbe8608c541b9de39399e6d535c0e097752201e041cacc1f87ae9b0a7a09a",
+   "seconds": 1.45,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "01d77cedecf2f412ce5694d6a35b1fdf00c24bd2d0de075c5480c8cace33523f",
+   "frame_sha256": "815644d392c60213e059606315b398c23cb3422b61107d97c9e1a05cbe5f15ff",
+   "script_sha256": "84a269d99645b8c108b25bda6b89294eb73ebf6ac33ef01e362d7a42041d0c2c"
+  },
+  "battery-idle": {
+   "firmware_sha256": "a9fcbe8608c541b9de39399e6d535c0e097752201e041cacc1f87ae9b0a7a09a",
+   "seconds": 1.45,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "5591539185d5dd9ccd137623bb97b881eeeed7cfb242096adc80cbee3fef6805",
+   "frame_sha256": "644f72e92ada80216e21632ff872dc15fe87cd46d526d7da8f523fd743c7fd3d",
+   "script_sha256": null
+  },
+  "battery": {
+   "firmware_sha256": "a9fcbe8608c541b9de39399e6d535c0e097752201e041cacc1f87ae9b0a7a09a",
+   "seconds": 1.45,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "9036bccd9faa3bdcbe5bd335ac2dc3f2e169b152ea61f872860536bde3006d4a",
+   "frame_sha256": "854d389d1aa634429ede923865b1d7309cb7f2fa848bfd7d8ba76b22384e7337",
+   "script_sha256": "936e7e4ddb962e73f79884e430cfb008bec7f6d7a95d06c05c99706956544e64"
+  },
+  "buzzer": {
+   "firmware_sha256": "5582c83519a02dd7af8034b966065256cf90244129437c09bf0bd82cee66e6de",
+   "seconds": 5.5,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "5cc4c843a916326eabde4263ff283f511db5614bd7bf3b787ebb3400d3abf718",
+   "frame_sha256": "872381f267d9f252afdcb57961242459337e9c061737daad69aed9e573e68db6",
+   "script_sha256": null
+  },
+  "display-first": {
+   "firmware_sha256": "499ff2c14be1e2cc6424f4855bcec2ce01de37dca2c9b08efd796611b5b4fb4f",
+   "seconds": 0.55,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "d98e044152379e925bf784c6154a6ba393924ba614f9f2df72846ca8609727dc",
+   "frame_sha256": "0d9fd128a2fd4cf23f2bdc83cc03e1a1d8fc7261c6f9fb4d86f8c9febb0594ba",
+   "script_sha256": null
+  },
+  "display": {
+   "firmware_sha256": "499ff2c14be1e2cc6424f4855bcec2ce01de37dca2c9b08efd796611b5b4fb4f",
+   "seconds": 1.1,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "c3f15ac4bbf5eee53716badc27cbecfc41d7428bc013dbcb0cd9f8412e3d7f8e",
+   "frame_sha256": "896e6ce03665347665795bd568f4adb7d8a82de2e7abd25d9927fcd4dab9c2b5",
+   "script_sha256": null
+  },
+  "imu-first": {
+   "firmware_sha256": "abfb648a8e8493df181e049ce8d8f547bd1b211d29c0740fd4df329924778ddf",
+   "seconds": 1.9,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "d53f4ad855744568cb741a92a89954da5961e69c33d89227fd8533cabad31ca9",
+   "frame_sha256": "b29fe3f4d2bfe848fbeb9add5331a233aab05adf0551c437b9ce5d50cb2f8b28",
+   "script_sha256": "36cea1e613a257996bd3d8834d06a61999902bb423e603afc43c7b51b16fae57"
+  },
+  "imu-idle": {
+   "firmware_sha256": "abfb648a8e8493df181e049ce8d8f547bd1b211d29c0740fd4df329924778ddf",
+   "seconds": 3.45,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "27ca73c781577bd45c1aa322d420a8c89deadefc7fc8225472dc02d6e1b1582b",
+   "frame_sha256": "a748f4f6b0c0c65b7bbe510953cbc9c4d22a13372336a8ed3f4a969e86ab725e",
+   "script_sha256": null
+  },
+  "imu": {
+   "firmware_sha256": "abfb648a8e8493df181e049ce8d8f547bd1b211d29c0740fd4df329924778ddf",
+   "seconds": 3.45,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "0a56c311ab148fd9a4f054f670332c0fd7919e5caea9044758ecdc8fa7ced2ff",
+   "frame_sha256": "12191b37633a97bbd55b8cfb64e5b6692fa71cfc5133631a0bd16216ce802a40",
+   "script_sha256": "0f7ed243fb9dd4fb6598f0ed49aa2ee159ee7f873126d4d43b837ed6decfee7b"
+  },
+  "ir_nec": {
+   "firmware_sha256": "c5648898ff9354b5c618d7bcb7b2f8454a786af134177ce985a04ed834cec055",
+   "seconds": 5.5,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "e5d32a3eb7efc4ece28f743887df6e333d3f4a0abfe08873975a7dcf5860f123",
+   "frame_sha256": "d52a06ee01dc4c2c160eee8b8e4093d64d5c7fa2c1ccdff64f6eba341a75147c",
+   "script_sha256": null
+  },
+  "led": {
+   "firmware_sha256": "bc93ea3cf0931072c3d03a296cabc8a51c398be21296e0ac5285396392f40e34",
+   "seconds": 5.5,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "7f0a25f5e66a26feaa38b22942d0962a6f6e6b214389889c4daa41c9c10db2e5",
+   "frame_sha256": "b7786c92d82c3d3e86d120b8a4ecdef2f388a598ed5742e9b359683bb22ec37f",
+   "script_sha256": null
+  },
+  "mic-idle": {
+   "firmware_sha256": "fb7b241abbb1168d8f97286b4f5ab1ad0c37a7efb9c9205f18e443547d095791",
+   "seconds": 2.7,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "a2ded51bf6547008b4f07abf1e1ab2b681a69bb42c89f1fc40a0f0bb38e3559d",
+   "frame_sha256": "2463a035409c39a2f1c31f5417e8f2861a9bd6f1e0c41a426deb2ce806392690",
+   "script_sha256": null
+  },
+  "mic-playback": {
+   "firmware_sha256": "fb7b241abbb1168d8f97286b4f5ab1ad0c37a7efb9c9205f18e443547d095791",
+   "seconds": 4.2,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "644e0a4568acb51165fd78f916c0fef2ebe61ba34a44f1e8706b260d025094af",
+   "frame_sha256": "4bff56788013e99339d923084e1e93bd1fde85b97e2e7687a0cc0fb1307ef542",
+   "script_sha256": "797b8da0de6acf9fb0ef394bf56ae0424de695560346d8de7454a2e15e66008d"
+  },
+  "mic-second": {
+   "firmware_sha256": "fb7b241abbb1168d8f97286b4f5ab1ad0c37a7efb9c9205f18e443547d095791",
+   "seconds": 2.7,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "4dbdd94aa2cb6d7dc6a3e45dbca4e10d9f42b2431e608f96254a7dbfbd30f796",
+   "frame_sha256": "17613c9d1c0964457d602ca6b80cc3937dcfd61288d80a4953a49c952f1cff0d",
+   "script_sha256": null
+  },
+  "mic": {
+   "firmware_sha256": "fb7b241abbb1168d8f97286b4f5ab1ad0c37a7efb9c9205f18e443547d095791",
+   "seconds": 2.7,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "138be74b0ddabc38d3140ba20aac30dd12729cb849170a7c08c669c5ccf47e6a",
+   "frame_sha256": "6579457c844acda04457f10ff8dc543ede89b378bbfd2742ff89c32b0cbefa2e",
+   "script_sha256": null
+  },
+  "quickstart-display-first": {
+   "firmware_sha256": "b660a3cf47a64ed3e5506e164f4ca8f1b431c3f77c79693b1c9e5a074b3fba35",
+   "seconds": 0.55,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "188b7917d16b52256552ae9c5242f56340e2a5818f6bb30377cd798180520b10",
+   "frame_sha256": "0d9fd128a2fd4cf23f2bdc83cc03e1a1d8fc7261c6f9fb4d86f8c9febb0594ba",
+   "script_sha256": null
+  },
+  "quickstart-display": {
+   "firmware_sha256": "b660a3cf47a64ed3e5506e164f4ca8f1b431c3f77c79693b1c9e5a074b3fba35",
+   "seconds": 1.1,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "1d65c989af27d4f5b24093070b8316dfd8c8c32e941bb633e11b10333fd28113",
+   "frame_sha256": "896e6ce03665347665795bd568f4adb7d8a82de2e7abd25d9927fcd4dab9c2b5",
+   "script_sha256": null
+  },
+  "rtc-idle": {
+   "firmware_sha256": "b7c2850ec9a3d3be1a46722261207e46ceba6976991e9cc78f56eaa1b25ea055",
+   "seconds": 4.8,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "a89716ed881b57eca469a58ea889cfc939661d9db08fa17f0cc8e5bbafbd07e3",
+   "frame_sha256": "b8a136f21453f9fcb4bef3cda605f8ae2aa81c53430f25a20bc8d0a1c5e820e2",
+   "script_sha256": null
+  },
+  "rtc": {
+   "firmware_sha256": "b7c2850ec9a3d3be1a46722261207e46ceba6976991e9cc78f56eaa1b25ea055",
+   "seconds": 10.0,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "1f7cfbe985b4b7a1e133815a1774a7c9cf03a861911e1eeec3e3a8b152b45670",
+   "frame_sha256": "50a9d8c9c42448179e97521fd53afabf48d00502f4f15ebd0498418cd36817e0",
+   "script_sha256": null
+  },
+  "stock-button": {
+   "firmware_sha256": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+   "seconds": 5.0,
+   "exit": 0,
+   "serial_sha256": "3759c7a35ed8e4dcfee2d4128ccbb5fbaab8095086a047d673823463a923e8eb",
+   "diagnostic_sha256": "b8cd6eb527354c151337fc54ac5e79667eeeedd79487294564c7ed8925a58620",
+   "frame_sha256": "779163c97d9e160ae3aab8baeea7a8f3b1f2bce407ddb6018aa7ad7c8076e779",
+   "script_sha256": "a2729a0c95bba3ea4177b12271c3a5fcaf406b6c4a3f87f96ce33bac38f61ea8"
+  },
+  "stock-repl": {
+   "firmware_sha256": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+   "seconds": 8.0,
+   "exit": 0,
+   "serial_sha256": "d5d45679c28fea5fd401401c62cbe0897d1f0d8963cc427c620da4e80f7949af",
+   "diagnostic_sha256": "cd712a0c29b9d11995f2e88656c0068a1b692053da8ca90dadb0b204ea2ffb85",
+   "frame_sha256": "370724cf37c233ba648e3cf62b6e4d4cf1ee03b1bb4065efcd537435da769a81",
+   "script_sha256": "7a0f60319a3be6deb3b345a23a055efd8aa727eaf74e4c0c2c2b6673c53ce2ac"
+  },
+  "stock": {
+   "firmware_sha256": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+   "seconds": 5.0,
+   "exit": 0,
+   "serial_sha256": "3759c7a35ed8e4dcfee2d4128ccbb5fbaab8095086a047d673823463a923e8eb",
+   "diagnostic_sha256": "688e7361efa0204dc25e8e91d5f095395454f97d2a2eba6495abfcf11db39ebe",
+   "frame_sha256": "370724cf37c233ba648e3cf62b6e4d4cf1ee03b1bb4065efcd537435da769a81",
+   "script_sha256": null
+  },
+  "wakeup-idle": {
+   "firmware_sha256": "83c12e633a21f5bf55a2dc8ae8933d1103312e4fa00dca190116544154d693a3",
+   "seconds": 9.0,
+   "exit": 0,
+   "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+   "diagnostic_sha256": "574d902a885a8245de3f0f6cfc099f4716fddb9a1f877d64e7de71c7b22b681b",
+   "frame_sha256": "e4ca95f42a78a79c7b61f0203ebe44deeb4b9df1c77bf8b587fdfa44261afde1",
+   "script_sha256": null
+  },
+  "wakeup": {
+   "firmware_sha256": "83c12e633a21f5bf55a2dc8ae8933d1103312e4fa00dca190116544154d693a3",
+   "seconds": 9.0,
+   "exit": 0,
+   "serial_sha256": "556cb44bd5a938b1381d7d3b10846cd8b8cd93da0e498c6bd4c3bc6114534008",
+   "diagnostic_sha256": "d76d4c13f8c8db0b8adfb780e16d590d1567f7ff9c0f0b1bf9c6dc16150cb29f",
+   "frame_sha256": "e4ca95f42a78a79c7b61f0203ebe44deeb4b9df1c77bf8b587fdfa44261afde1",
+   "script_sha256": "ca31b8547c0788d18ebedb62ba6f6fb4c2184e12195e2f8d667beecdab88d231"
+  }
+ }
+}

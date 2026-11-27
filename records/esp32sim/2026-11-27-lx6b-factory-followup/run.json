@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "LX6-B original factory firmware and pinned library follow-up",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "f528744221077c59a7ba6a5eeb146ec7bda90ff5",
+    "commit": "63f25e3147f84379d3fdd2dd076f3128d5b34d14",
+    "batch_base": "8e17dcd553fbd59b2dc9034cb5bd8eecb0884302",
+    "branch": "m5/batch-lx6b",
+    "previous_record": "https://github.com/m5agent/agent-work-logs/tree/a165414a20db7abb9b9eaa54f6ebe793a2d4e82f/records/esp32sim/2026-11-27-lx6b-stick"
+  },
+  "hardware": {
+    "mode": "virtual-device validation",
+    "physical_validation": "NOT RUN",
+    "boards": [
+      "stickc",
+      "stickc-plus",
+      "stickc-plus-se",
+      "stickc-plus2",
+      "m5stick",
+      "stickt2"
+    ]
+  },
+  "firmware": {
+    "docs_revision": "7219cc9286c39b463da84053deee40bc234625db",
+    "classic_rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+    "catalog": {
+      "stickc": "2463fc362f6acfacccb678a2c40aeb733e470ca793ec4a100d2e077baa641f03",
+      "stickc-plus": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2",
+      "stickc-plus-se": "0c7055bb8e64afe1d8fa4fd4bdc0961ca0d6366351aca5d6c83eaaf72155ee88",
+      "stickc-plus2": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+      "m5stick": "84228dfb6f0dd9b84b63c33f93a53545d8d43658893f432e3eaf4313923bffca",
+      "stickt2": "bb33ffd41f9c6f9235b2fb44eac893b7ce6f70879f48eed9cb1ff75ef9419cd7"
+    }
+  },
+  "execution": {
+    "environment": "native aarch64-apple-darwin esp32sim, ROM boot",
+    "runtime_sha256": "92dbedd60ed493c439b4482908db7fea22c228d3e985b8f8ab523145fbb7d85a",
+    "source_dirty": false
+  },
+  "checks": [
+    {
+      "name": "Arduino matrix",
+      "counts": {
+        "PASS": 83,
+        "LIBRARY-DEFECT": 2,
+        "DOCS-DEFECT": 7
+      }
+    },
+    {
+      "name": "factory M5Stick UI",
+      "status": "PASS"
+    },
+    {
+      "name": "factory StickT2 thermal UI",
+      "status": "PASS"
+    },
+    {
+      "name": "StickT2 numerical readout",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "workspace regression",
+      "passed": 1997,
+      "failed": 7
+    }
+  ],
+  "evidence": [
+    "evidence/stickc-summary.json",
+    "evidence/stickc-plus-summary.json",
+    "evidence/stickc-plus-se-summary.json",
+    "evidence/stickc-plus2-summary.json",
+    "evidence/m5stick-summary.json",
+    "evidence/stickt2-summary.json",
+    "evidence/regression-summary.json"
+  ]
+}
