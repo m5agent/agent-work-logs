@@ -108,6 +108,7 @@ The CoreS3 and Cardputer-ADV archived regression input revision was `829cfe6bc14
 
 ## Limits
 
+The Dial touch receipt was replaced after a fresh replay with the fixed source SHA. The original record used a source label captured while a concurrent build was running.
 The Dial stock guest read idle, pressed and released levels from the rotary button while connected over USB. Its offline menu frame stayed unchanged during the control sequence.
 
 StickS3 reports over the GPIO13 interrupt path. The four Wire-based sketches reassign the same port pins to I2C0 after M5Unified initializes I2C1. The Stock UIFlow2 path used the normal shared-board transport.
