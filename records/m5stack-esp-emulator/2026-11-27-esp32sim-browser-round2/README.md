@@ -16,3 +16,5 @@ The browser lane uses the same board silicon identity as native for AtomS3R and 
 [Memory, 16 MiB Flash and VoiceS3R microphone](followups/2026-11-27-classic-memory-flash-voice/)
 
 [Per-device runtime-gaps and Pages evidence](followups/2026-11-27-runtime-gaps-and-pages/)
+
+[StackChan controller pulse and hosted retry](followups/2026-11-27-pages-stackchan-controller-hold/)
