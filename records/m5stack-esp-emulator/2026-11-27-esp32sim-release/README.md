@@ -13,3 +13,4 @@ All guest results are virtual-device validation.
 - [Hosted PaperDIY reset failure and local comparison](evidence/pages-paperdiy-summary.json)
 - [Hosted Atom Matrix input failure and local correction](evidence/pages-atom-matrix-summary.json)
 - [Exact prepared export qualification](evidence/pages-prepared-qualification-summary.json)
+- [Published Pages and HTTPS guest readback](evidence/pages-release-summary.json)

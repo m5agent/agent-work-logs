@@ -122,3 +122,29 @@ license record, ROM_LICENSE and NOTICE are byte-identical to the standard
 mixed export. The only packaged ROM is the pinned Apache-2.0 Espressif
 esp-rom-elfs 20260528 S3 ELF. Its hash is in the qualification summary.
 [Prepared qualification](evidence/pages-prepared-qualification-summary.json)
+
+## Prepared Pages deployment and live readback
+
+The prepared workflow published `pages-20261127-0251abb0` from
+`0251abb0d2586e4ca61825cc6eb65f4cb5902828`. The exact archive was downloaded and verified before
+deployment. It retains the single approved ESP32-S3 mask ROM ELF from
+Espressif esp-rom-elfs 20260528, license Apache-2.0. The ROM digest is
+`c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd`. The release archive digest is
+`f982d16e4d726f6383d1c4d7facf6326a391ec68f3f18deb77e0b26cae79567e`.
+[Release](https://github.com/m5agent/m5stack-esp-emulator/releases/tag/pages-20261127-0251abb0) · [Workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45944993636)
+
+HTTPS readback matched the qualified manifest
+`f55e7c996e0ca2707c72d2b9b7478e6961563a198b61f031e1913d8a19cac914` and all 2206 assets.
+The public workbench passed seven actual guest checks across CoreS3 and
+Cardputer-ADV, including input and both stock UIFlow2 launchers. Each
+passing esp32sim session had one DedicatedWorker before Stop and zero after.
+The first live test's Cardputer-ADV Start timeouts and the replay are
+preserved separately. The replay waits for the enabled Start control on a
+cold HTTPS visit.
+Tab5 browser execution and physical hardware are NOT RUN. The three
+hosted QEMU-WASM failures and the separate local failure remain recorded.
+A subsequent hosted preview passed both Atom Matrix cases. It then failed
+in the frozen QEMU-WASM Cardputer-ADV keyboard lane while waiting for the
+original guest Q-key IRQ. The 65 later cases were NOT RUN.
+[Subsequent hosted preview](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45942728417)
+[Live workbench](https://m5agent.github.io/m5stack-esp-emulator/) · [Readback summary](evidence/pages-release-summary.json)
