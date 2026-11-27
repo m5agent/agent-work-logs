@@ -24,3 +24,6 @@ The catalog migration and resident rollout are pending.
 Physical devices and complete reviewer jobs were NOT RUN in this milestone.
 
 - [Merged milestone follow-up](follow-up-milestone.md)
+
+- [Merged-pin per-device documentation observations](per-device-merged-oracles.md)
+- [AtomU and Atom Echo candidate defaults and PaperColor readiness](classic-defaults-and-panel-readiness.md)
