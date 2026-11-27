@@ -29,3 +29,4 @@ Physical devices and complete reviewer jobs were NOT RUN in this milestone.
 - [AtomU and Atom Echo candidate defaults and PaperColor readiness](classic-defaults-and-panel-readiness.md)
 - [Expanded per-device defaults and qualified consumer paths](expanded-paired-qualifications.md)
 - [Final pin and per-device paired documentation matrix](final-pin-doc-matrix.md)
+- [Remaining exact consumer gaps and StickC Plus SE](default-routing-follow-up.md)
