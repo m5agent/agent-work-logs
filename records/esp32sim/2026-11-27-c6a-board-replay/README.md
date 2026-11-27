@@ -2,7 +2,7 @@
 
 2026-11-27 · PARTIAL · code change · virtual-device validation
 
-NanoC6 passed nine of 15 compiled Arduino cases. Thread discovery and
+The initial NanoC6 replay passed nine of 15 compiled Arduino cases. Thread discovery and
 Zigbee network scanning worked. Thread attachment and Zigbee join and
 binding remained open. Nesso N1 passed all 11 compiled Arduino cases,
 including the paired LoRa replay. The twelfth Arduino example has a
@@ -22,3 +22,8 @@ matrix. The fork contains the patches and replay code. The record
 contains the derived summaries and hashes of raw artifacts.
 
 [S3-A merge and combined regression](evidence/merge-s3a-summary.json)
+
+The later radio replay passed all 15 NanoC6 Arduino cases. It also
+reproduced Zigbee rejoin and LED control after a reset. Nesso again
+passed all 11 runnable cases and the stock console checks.
+[Radio and ENV-III evidence](evidence/radio-followup-summary.json)

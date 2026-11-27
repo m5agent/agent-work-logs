@@ -220,3 +220,71 @@ merge milestone is `5931cbe73c67ca5883bb99edae885ef165c18bfd`.
 
 [Published milestone](https://github.com/m5agent/esp32sim/tree/5931cbe73c67ca5883bb99edae885ef165c18bfd)
 [Merge gate evidence](evidence/merge-s3a-summary.json)
+
+## NanoC6 radio and ENV-III follow-up
+
+All 15 original NanoC6 Arduino cases passed on the native C6 runtime.
+Stock USB-Serial-JTAG passed, as did UART0 RX and TX. The records include
+the original failed replays and the later passing captures.
+
+| Case | Result | Observation |
+| --- | --- | --- |
+| button | PASS | GPIO9 press, hold and release. Idle control stayed quiet. |
+| ir_nec | PASS | Eight decoded NEC frames with distinct commands. |
+| led | PASS | Eight transitions on the blue LED. |
+| program | PASS | Distinct green and blue RGB frames. |
+| thread-1 | PASS | The guest formed a Leader. |
+| thread-2 | PASS | The Leader sent the original IPv6 UDP payload. |
+| thread-3 | PASS | The receiver attached as Child and received the payload. |
+| thread-4 | PASS | Active discovery found the peer PAN. |
+| thread-5 | PASS | CLI version and disabled state returned. |
+| thread-6 | PASS | CLI reported Leader. |
+| zigbee-1 | PASS | The coordinator bound the sensor and received 23.75, 31.49 and 27.25 °C. |
+| zigbee-2 | PASS | The Grove SHT30 ACKed its address, measured the scripted samples and reported them through Zigbee. |
+| zigbee-3 | PASS | Scanner found the open coordinator. |
+| zigbee-4 | PASS | The coordinator bound the end device and sent On/Off commands from GPIO9 input. |
+| zigbee-5 | PASS | The end device joined and changed its blue GPIO7 LED in response to the commands. |
+| Zigbee reset and rejoin | PASS | Reset at 20.000 s, then traced the original rejoin send and response at 21.3069 and 21.3147 s. Bound commands changed the LED again after reboot. |
+| BLE | NOT RUN | A matching firmware and NimBLE transport fixture remains unavailable. |
+
+Thread attach needed the MAC transmit CCM* offload. The earlier pair
+exchanged legacy ACKs without pending bits and stayed Detached. The
+fixed pair still emitted no pending ACKs, and the Child received the
+Leader's `Hello,M5Stack` payload. The isolation control received zero
+application payloads.
+
+The initial Zigbee pair repeated association and data requests while
+the simulated ACK always cleared Frame Pending. The C6 model now
+reads the bit that the receiver's driver writes during RX_DONE before
+the ACK is sent. The new capture contains the association Data Request
+ACK with Frame Pending set. It proceeded through association, binding
+and completed application data traffic. The pinned Zigbee pair used
+NWK security and did not request MAC encrypt-offload during association.
+
+Version-2 enhanced ACK DMA and full-frame timing passed controller
+tests. The Arduino peer captures used legacy ACK frames. The key and
+nonce registers were checked against an independent AES-CCM result
+using a synthetic vector.
+[ESP-IDF radio port](https://github.com/espressif/esp-idf/blob/v5.5.4/components/openthread/src/port/esp_openthread_radio.c)
+[ESP-IDF low-level MAC operations](https://github.com/espressif/esp-idf/blob/v5.5.4/components/esp_hal_ieee802154/include/hal/ieee802154_common_ll.h)
+
+The optional `m5stack-nanoc6-enviii` profile connects the two Grove
+devices to I2C0. The stock guest read SHT30 at 0x44 and QMP6988 at 0x70
+with GPIO2 SDA and GPIO1 SCL. The absent-unit control still reached the
+SHT30 NACK path. Two SHT30 conversions yielded distinct raw values,
+with the CRC bytes seen by the stock guest. QMP6988 returned chip ID
+0x5c and the nominal pressure and temperature registers.
+[Unit ENV-III](https://docs.m5stack.com/en/unit/Unit_ENV-III)
+
+The Nesso matrix again passed all 11 compiled cases and stock v2.5.3.
+The `power-1` compile defect remains at `power_1.ino:28`.
+Physical hardware was NOT RUN.
+
+The final Cargo workspace run had 1,984 passes and the same seven
+P4 assertion failures. The C6 crate passed 140 tests. CoreS3
+passed 15/15 and Cardputer-ADV passed 11/11 again. Both Clippy
+lanes and the C6 sentinel passed. The native executable was built
+at `cfad4ca57ff049b9cdbfe1fb93e787cd0dc54041`, with the final replay tools and
+source published at `c674554bde3ce65a1cbc7ac6d9237eab1b8e0f0f`.
+[Radio follow-up source](https://github.com/m5agent/esp32sim/tree/c674554bde3ce65a1cbc7ac6d9237eab1b8e0f0f)
+[Final validation evidence](evidence/radio-followup-summary.json)
