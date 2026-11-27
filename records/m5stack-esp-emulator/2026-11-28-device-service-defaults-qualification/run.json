@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "title": "Device Service default migration qualification",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "3ec64361ca9094fff773f32614e5ed13e8fe54a2",
+    "service_commit": "872c92e18408696c1a12f4c5a9ed5db119f18adf",
+    "fork_commit": "4245d96b1cf3fae5c2360a87cd6b716bc1c94c9d"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "identity_source": "evidence/shared-oracle-summary.json"
+  },
+  "execution": {
+    "environment": "isolated macOS arm64 native Device Service; saved snapshot reviewer",
+    "reviewer_map_enabled": true,
+    "submission_enabled": false,
+    "resident_cutover": "NOT RUN"
+  },
+  "checks": [
+    {
+      "name": "shared_oracle",
+      "status": "PASS",
+      "esp32sim": [
+        56,
+        56
+      ],
+      "qemu": [
+        47,
+        47
+      ],
+      "total_each_trial": 56,
+      "leases_stopped": 224
+    },
+    {
+      "name": "paired_fixtures",
+      "status": "PARTIAL",
+      "evidence": "evidence/paired-fixture-summary.json"
+    },
+    {
+      "name": "tab5_stereo_endpoints",
+      "status": "PASS",
+      "evidence": "evidence/tab5-summary.json"
+    },
+    {
+      "name": "tab5_standalone_gate",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "reviewer_parity",
+      "status": "PARTIAL",
+      "evidence": "evidence/reviewer-summary.json"
+    },
+    {
+      "name": "release_and_rollout",
+      "status": "NOT RUN"
+    },
+    {
+      "name": "papercolor_and_papermono_paired",
+      "status": "PASS",
+      "trials_per_runtime_per_board": 2
+    },
+    {
+      "name": "four_board_watcher_endpoints",
+      "status": "PASS",
+      "sessions": 16,
+      "evidence": "evidence/watcher-summary.json"
+    },
+    {
+      "name": "radio_pairs",
+      "status": "PASS",
+      "evidence": "evidence/radio-summary.json"
+    },
+    {
+      "name": "fork_workspace_tests",
+      "status": "PASS",
+      "tests": 2047,
+      "skipped_by_filters": 34
+    },
+    {
+      "name": "service_py312_platform",
+      "status": "PASS",
+      "tests": 2596,
+      "skipped": 9
+    },
+    {
+      "name": "paper_display_reviewer_parity",
+      "status": "PASS",
+      "boards": [
+        "papercolor",
+        "papermono"
+      ],
+      "verdict": "SIM_VERIFIED",
+      "runtimes": [
+        "qemu",
+        "esp32sim"
+      ]
+    }
+  ],
+  "evidence": [
+    "evidence/board-state-summary.json",
+    "evidence/c6-network-summary.json",
+    "evidence/gate-summary.json",
+    "evidence/paired-fixture-summary.json",
+    "evidence/radio-summary.json",
+    "evidence/reviewer-summary.json",
+    "evidence/shared-oracle-summary.json",
+    "evidence/tab5-summary.json",
+    "evidence/watcher-summary.json"
+  ]
+}

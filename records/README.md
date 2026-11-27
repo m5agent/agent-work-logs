@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-28 | ESP Emulator | Device Service default migration qualification | PARTIAL (virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-28-device-service-defaults-qualification/) |
 | 2026-11-27 | ESP Emulator | Device Service board state and routing candidate | PARTIAL (virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-device-state-routing-candidate/) |
 | 2026-11-27 | ESP Emulator | esp32sim browser WASM board parity | PARTIAL (browser-WASM virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-browser-round2/) |
 | 2026-11-27 | esp32sim | Runtime benchmark follow-up | PARTIAL (native Device Service, CLI and WASM ABI virtual-device validation) | [查看](esp32sim/2026-11-27-runtime-gaps/) |
