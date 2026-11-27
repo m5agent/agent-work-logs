@@ -1,0 +1,758 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-27",
+  "overall_status": "PARTIAL",
+  "title": "LX6-B Stick integration and complete device matrix",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "ef799a1332bfc98ce63077ee9efc814f1fa3f83c",
+    "batch_commit": "63f25e3147f84379d3fdd2dd076f3128d5b34d14",
+    "merge_commit": "9ac09fb79cefe4a2cb6f911172ffa6cbdfbd784a",
+    "tag": "m5-milestone-lx6b-20261127",
+    "final_tag": "m5-milestone-all-devices-20261127",
+    "lora_comparison": "https://github.com/m5agent/agent-work-logs/tree/5c229671cd38068499b025c1841d8f2d0fa1ea71/records/esp32sim/2026-11-27-lora-loopback-repeat"
+  },
+  "hardware": {},
+  "firmware": {
+    "stamplc": {
+      "button-control": "b72054c97509b1de31dfdaed1f72753fd5534fb69eb6b85714d3d1945f6b8112",
+      "button": "b72054c97509b1de31dfdaed1f72753fd5534fb69eb6b85714d3d1945f6b8112",
+      "buzzer": "dba2154911e9261dee4a9b48aaf8d257e614ed31842afecd17fb61ad7d3c1946",
+      "can": "0861254ddd2ec68e58e8049e146228602a6d309192e13a42b30879fe304d155d",
+      "input_output-1": "d2d1ad1ca7acc2ecd096809970a30aea46af6a6a0d6cf35cb79f04449280d621",
+      "input_output-2-control": "45ade951222d33db671e30e4d99bc6b051203c46446875427057ccb4e7ecede9",
+      "input_output-2": "45ade951222d33db671e30e4d99bc6b051203c46446875427057ccb4e7ecede9",
+      "modbus-1-control": "587f4fb58d9ed3cfa7936f74f2ef6ffd1e6c9f08873fe0627a6b786bfa9b0e7e",
+      "modbus-1": "587f4fb58d9ed3cfa7936f74f2ef6ffd1e6c9f08873fe0627a6b786bfa9b0e7e",
+      "modbus-2": "1b9f2e62d818d52987ee01f26747596fff5e4b7843b5c742e9b2d57af928aa24",
+      "quickstart-display": "0d3fa0f3f6790ec230079d8a82f0e45844df29f3de98be347bb9d4be775a38a5",
+      "rgb_led": "aec74bb14c42b1f5b5bc401143f57be82c17f5e05c81a35dcf7caf0474dbd060",
+      "rtc": "ad3c6c5487d6f077961fad2df8ad46fc33492be15b4f84d3713bcfab1b04d4f8",
+      "sd_card-control": "2866f456591b315fa114ad0320a68a7407a41cbba2b1fa78ce1ecc61b080055c",
+      "sd_card": "2866f456591b315fa114ad0320a68a7407a41cbba2b1fa78ce1ecc61b080055c",
+      "sensor-control": "0bf9f0c4a8f74f9b894b8c1dd14d2222061e006e79f37a8891da49ab72cef75e",
+      "sensor": "0bf9f0c4a8f74f9b894b8c1dd14d2222061e006e79f37a8891da49ab72cef75e",
+      "stock": "ab684b9d79d5fc5527be9450c18bee46171ae1b93716492be8aeeede50511470"
+    },
+    "stackchan": {
+      "battery-alternate": "dfb1ea5f77428dc9fc3923cabd5f2120768f218d7bf6fa6b330b27a93c8b10dc",
+      "battery-control": "dfb1ea5f77428dc9fc3923cabd5f2120768f218d7bf6fa6b330b27a93c8b10dc",
+      "battery": "dfb1ea5f77428dc9fc3923cabd5f2120768f218d7bf6fa6b330b27a93c8b10dc",
+      "button-control": "629f38f0099ad8a048d8258c352c180f586e9be0f20cb0f5cdd47e3d157e88b0",
+      "button": "629f38f0099ad8a048d8258c352c180f586e9be0f20cb0f5cdd47e3d157e88b0",
+      "camera-alternate": "1c8135dc04034797d774ba83f6f412ab0f8392a6c71f1d9a0666d7f76c6b3144",
+      "camera": "1c8135dc04034797d774ba83f6f412ab0f8392a6c71f1d9a0666d7f76c6b3144",
+      "display": "08207782837f37b1a2f5441bae56cd2f3c616631bfb3463d2604fe837a69ccd2",
+      "imu-alternate": "c78f1c0f9caa66c096c744bd6e995c68d2767d700d80eaf0a55bca82f50441ab",
+      "imu-control": "c78f1c0f9caa66c096c744bd6e995c68d2767d700d80eaf0a55bca82f50441ab",
+      "imu": "c78f1c0f9caa66c096c744bd6e995c68d2767d700d80eaf0a55bca82f50441ab",
+      "ir_nec": "bf86d0dfcd44d183861808e9d9c7a6620798d3b8e727e3e2a6c27a0071b725f7",
+      "ltr553-alternate": "a4c29eeca65e774c517358a73a5227d5453794013f9ec18444234193f9b851ec",
+      "ltr553-control": "a4c29eeca65e774c517358a73a5227d5453794013f9ec18444234193f9b851ec",
+      "ltr553": "a4c29eeca65e774c517358a73a5227d5453794013f9ec18444234193f9b851ec",
+      "mic-alternate": "0a54dee47b884d943c8bf602fac27d75580024c48a62ef6c02d7339d21756512",
+      "mic-control": "0a54dee47b884d943c8bf602fac27d75580024c48a62ef6c02d7339d21756512",
+      "mic": "0a54dee47b884d943c8bf602fac27d75580024c48a62ef6c02d7339d21756512",
+      "nfc-1-control": "e5186f23b5ee44c340515d69d351c8780cc250e9ebe61c100558e95b6d20e4f4",
+      "nfc-1": "e5186f23b5ee44c340515d69d351c8780cc250e9ebe61c100558e95b6d20e4f4",
+      "nfc-2": "641734b97cce0d940ee98bd7247c2e14dee6039c6ea21688a1da4e2122f4b3c3",
+      "nfc-3-control": "62316a840164093954a168550efff4669c79dd0009b4819da63b6c097985cca7",
+      "nfc-3": "62316a840164093954a168550efff4669c79dd0009b4819da63b6c097985cca7",
+      "nfc-4-control": "b3dbc78ff658eea7687130e85f5e60f79aaf384d76959e894afd73c0b25f40bc",
+      "nfc-4": "b3dbc78ff658eea7687130e85f5e60f79aaf384d76959e894afd73c0b25f40bc",
+      "nfc-5": "9eca708b13db6e8126c51b2413386c05bb1aa0b87aa2989ad82ab4faac8758b3",
+      "nfc-6-control": "5f54137633a83b2512481d94566d9cdfb02b6586f46cb6a886ae2f2abbeec6e7",
+      "nfc-6": "5f54137633a83b2512481d94566d9cdfb02b6586f46cb6a886ae2f2abbeec6e7",
+      "pic-control": "8ebbd4137dd74d7148ed598fe5007e3e3a18cb580364e9eeea3ee7db9caba91e",
+      "pic": "8ebbd4137dd74d7148ed598fe5007e3e3a18cb580364e9eeea3ee7db9caba91e",
+      "quickstart-rgb": "437f10330d4e7590e32556a35495537c1292ce5da73ccfc4a141ca4c3968d814",
+      "rgb": "0a5e7d65a0be9a7ab08b7b7a81c96dee3a6b0a207afbf4b9a743511fa8aef854",
+      "rtc": "c87fa8b1d1615297d362a17c3b29e33973540495950cc60f9b3af97a4cb41542",
+      "sdcard-control": "b1cf969db7586d05ed5dee4e2177c7a08e05b766ad9bcbe6d4aef84528baa87f",
+      "sdcard": "b1cf969db7586d05ed5dee4e2177c7a08e05b766ad9bcbe6d4aef84528baa87f",
+      "servo-1": "1e680b232c6a99aac344340a3064ebdb78d7c02af51447298a9bb6f0bf5bbde8",
+      "servo-2-control": "e8dad195cc59598722b1f8fbb6517b4f93b5c3d3a89eeb950bfbaf8564a7d968",
+      "servo-2": "e8dad195cc59598722b1f8fbb6517b4f93b5c3d3a89eeb950bfbaf8564a7d968",
+      "speaker": "11238ba9c7acb410c18eceed6d7c8057c3bef5aeb5c4946853397a75a1affa08",
+      "stock": "9e6e8066ee317691556c4758911a0345ed4e62398f461b364bb90a147c6db5f9",
+      "touch-alternate": "2deea8fdd92a8565c5f785d5746a73aa21cb0b51a9857efce261e306462e22da",
+      "touch-control": "2deea8fdd92a8565c5f785d5746a73aa21cb0b51a9857efce261e306462e22da",
+      "touch": "2deea8fdd92a8565c5f785d5746a73aa21cb0b51a9857efce261e306462e22da",
+      "touchsensor-alternate": "27830904d7fd72a8495d6c46ca4eccf65274a846678c31c69956d54b389867a3",
+      "touchsensor-control": "27830904d7fd72a8495d6c46ca4eccf65274a846678c31c69956d54b389867a3",
+      "touchsensor": "27830904d7fd72a8495d6c46ca4eccf65274a846678c31c69956d54b389867a3",
+      "wakeup-control": "9656bf138503f0c0061a5ee07554f651329fad7b6e82abe700f87df0d8f934b4",
+      "wakeup-sleep": "9656bf138503f0c0061a5ee07554f651329fad7b6e82abe700f87df0d8f934b4",
+      "wakeup": "9656bf138503f0c0061a5ee07554f651329fad7b6e82abe700f87df0d8f934b4",
+      "wav": "863b78c35e9a593bd6bc8e1e5e3a8a0f6f4fd29862b2f0dd6a6fda82a3cd3d8f"
+    },
+    "atoms3-lite": {
+      "button-still": "ca4c4bb40230b93d40e69cae0410d1ecffc46a695d2e1f214db23ff6d6cdba40",
+      "button": "ca4c4bb40230b93d40e69cae0410d1ecffc46a695d2e1f214db23ff6d6cdba40",
+      "ir_nec": "108348bb1f41d7232ee17f53e0308193cbc849c470d11d16ac836ae23e6dc573",
+      "lite_led": "3beffc00b5b0f8a7de0799796d3c0091c376952542d0e0a02b934a97e1edc94b",
+      "stock": "338baf7f16703b26fff78619d32e593d8ca4f1934bdad63e3c95eef862f3133c"
+    },
+    "atoms3": {
+      "button-still": "ca4c4bb40230b93d40e69cae0410d1ecffc46a695d2e1f214db23ff6d6cdba40",
+      "button": "ca4c4bb40230b93d40e69cae0410d1ecffc46a695d2e1f214db23ff6d6cdba40",
+      "display": "15b045c3325736e0c4c846a0bdc77615ded7318cac0f13004772049f0d0fc51c",
+      "imu-a": "e1649267d95c5772169cbc10833cd59e7f1eb674014b34336eb19da33ec451e3",
+      "imu-b": "e1649267d95c5772169cbc10833cd59e7f1eb674014b34336eb19da33ec451e3",
+      "imu-still": "e1649267d95c5772169cbc10833cd59e7f1eb674014b34336eb19da33ec451e3",
+      "ir_nec": "108348bb1f41d7232ee17f53e0308193cbc849c470d11d16ac836ae23e6dc573",
+      "quickstart-display": "b1f7c15fd5c0a83424f2e483dc1bdbeb3b0efe150c2f69a9f308ffc1bf90d085",
+      "stock": "fb294c9780cfc3766fd489e164a1a04dddf54cb989adb113d098fe10cbc52075"
+    },
+    "atoms3-gc9107": {
+      "button-still": "ca4c4bb40230b93d40e69cae0410d1ecffc46a695d2e1f214db23ff6d6cdba40",
+      "button": "ca4c4bb40230b93d40e69cae0410d1ecffc46a695d2e1f214db23ff6d6cdba40",
+      "display": "15b045c3325736e0c4c846a0bdc77615ded7318cac0f13004772049f0d0fc51c",
+      "imu-a": "e1649267d95c5772169cbc10833cd59e7f1eb674014b34336eb19da33ec451e3",
+      "imu-b": "e1649267d95c5772169cbc10833cd59e7f1eb674014b34336eb19da33ec451e3",
+      "imu-still": "e1649267d95c5772169cbc10833cd59e7f1eb674014b34336eb19da33ec451e3",
+      "ir_nec": "108348bb1f41d7232ee17f53e0308193cbc849c470d11d16ac836ae23e6dc573",
+      "quickstart-display": "b1f7c15fd5c0a83424f2e483dc1bdbeb3b0efe150c2f69a9f308ffc1bf90d085",
+      "stock": "fb294c9780cfc3766fd489e164a1a04dddf54cb989adb113d098fe10cbc52075"
+    },
+    "atoms3r": {
+      "button-still": "3177d7dde93ef6560bed80b253d54ee130175bd1c0f3d310a4837156724af196",
+      "button": "3177d7dde93ef6560bed80b253d54ee130175bd1c0f3d310a4837156724af196",
+      "display": "0f80473d0ba32ffcc2727597e55fdf74c3c1febce3b30407b41c6567a2b62d9b",
+      "imu-a": "031f0e1740dc1c0d8b4f98cf0c82ef40efd6b8982940e15035976eb8c5ebe596",
+      "imu-b": "031f0e1740dc1c0d8b4f98cf0c82ef40efd6b8982940e15035976eb8c5ebe596",
+      "imu-still": "031f0e1740dc1c0d8b4f98cf0c82ef40efd6b8982940e15035976eb8c5ebe596",
+      "ir_nec": "b1a41a510c2d0bafc148c6dcc1f3fc745b7eee70768d079d3bf5ef8d8120ee31",
+      "quickstart-bargraph": "1ec85316ebfb66f4c239e04e22871d4c975b30c9fee378c0052078dd7f9aede4",
+      "stock": "91c0f97c904271d4c47d240165fbf5589d44aa0d753ca17d685bfdce5bff199a"
+    },
+    "atoms3r-gc9107": {
+      "button-still": "3177d7dde93ef6560bed80b253d54ee130175bd1c0f3d310a4837156724af196",
+      "button": "3177d7dde93ef6560bed80b253d54ee130175bd1c0f3d310a4837156724af196",
+      "display": "0f80473d0ba32ffcc2727597e55fdf74c3c1febce3b30407b41c6567a2b62d9b",
+      "imu-a": "031f0e1740dc1c0d8b4f98cf0c82ef40efd6b8982940e15035976eb8c5ebe596",
+      "imu-b": "031f0e1740dc1c0d8b4f98cf0c82ef40efd6b8982940e15035976eb8c5ebe596",
+      "imu-still": "031f0e1740dc1c0d8b4f98cf0c82ef40efd6b8982940e15035976eb8c5ebe596",
+      "ir_nec": "b1a41a510c2d0bafc148c6dcc1f3fc745b7eee70768d079d3bf5ef8d8120ee31",
+      "quickstart-bargraph": "1ec85316ebfb66f4c239e04e22871d4c975b30c9fee378c0052078dd7f9aede4",
+      "stock": "91c0f97c904271d4c47d240165fbf5589d44aa0d753ca17d685bfdce5bff199a"
+    },
+    "atoms3u": {
+      "button-still": "ac6aa752d50755e9498bbd2924050bfc5ca0fe5d6453cf4664d57ba1ba850669",
+      "button": "ac6aa752d50755e9498bbd2924050bfc5ca0fe5d6453cf4664d57ba1ba850669",
+      "ir_nec": "9763c086cc59e21dc2043c540d75f40df93cd4c8e5c577f652d70c1445cf2a56",
+      "mic-a": "2648a861e3b41ad41e91075565550298bcc7560502b8a10c590edf7a7e7f5141",
+      "mic-b": "2648a861e3b41ad41e91075565550298bcc7560502b8a10c590edf7a7e7f5141",
+      "mic-still": "2648a861e3b41ad41e91075565550298bcc7560502b8a10c590edf7a7e7f5141",
+      "program": "7e8112161f4ef85de839a3429a18943d6c13c35294c139ff1d5f6ba2a04cc497",
+      "rgb_led": "62a7ed2b137e19a7d451f69173a88165e513efee719006de8ea049e739c462a9",
+      "stock": "7b8742931a2f88015a3419ba7aee22dfa56abd2c17c742426289a890f715ce1a"
+    },
+    "atom-echos3r": {
+      "button-still": "7e8c9001c959616fb7e1c3807a21c8e7eb9f81de4096c9473620f8e51f52861b",
+      "button": "7e8c9001c959616fb7e1c3807a21c8e7eb9f81de4096c9473620f8e51f52861b",
+      "ir": "66775036416418e857f6c713153807306f53a6373b528b8f25d25e3bd5bad31b",
+      "mic-a": "126e3b596faf146933aef7ffa387b47f8a6702670c3210e8701c9f41272bb831",
+      "mic-b": "126e3b596faf146933aef7ffa387b47f8a6702670c3210e8701c9f41272bb831",
+      "mic-still": "126e3b596faf146933aef7ffa387b47f8a6702670c3210e8701c9f41272bb831",
+      "program": "1bafe388731abef4997004085226dfc916a1c47f643308725ed5e9ad88156a89",
+      "speaker": "8c8cf84ea3e36545b4f0705672a163eeb0d23134a38e4f482224aa57cdf3bc8a",
+      "stock": "9348083af8a30e23bd832822eb81c8af86de8ef0e3f683fbc6c801d78bd6cd7b"
+    },
+    "atoms3r-cam": {
+      "quickstart-camera-a": "fb09d32de0bc4f022574e20f88f4fd441f12af83285898deec71203aea5b60df",
+      "quickstart-camera-b": "fb09d32de0bc4f022574e20f88f4fd441f12af83285898deec71203aea5b60df",
+      "quickstart-camera-still": "fb09d32de0bc4f022574e20f88f4fd441f12af83285898deec71203aea5b60df",
+      "stock": "1b29cc3d838834b3a4713130010815f952cff58619001c76183dd0b0a588f2c1"
+    },
+    "atoms3r-m12": {
+      "quickstart-camera-a": "d8c03170ac1cb5bb85798130070420284b30b8438889f4581583169e08f2495f",
+      "quickstart-camera-b": "d8c03170ac1cb5bb85798130070420284b30b8438889f4581583169e08f2495f",
+      "quickstart-camera-still": "d8c03170ac1cb5bb85798130070420284b30b8438889f4581583169e08f2495f",
+      "stock": "1b29cc3d838834b3a4713130010815f952cff58619001c76183dd0b0a588f2c1"
+    },
+    "tab5": {
+      "final-253-release": "787d5e3c282bc3d200be941a48d7b7ff24acdbe0d9e682a2cfc14796b392feec",
+      "final-254-release": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "final-gt-idle": "febee8f025c1af01f80142af7632850a8eb15b583b2ce3121ad31f594e54fe82",
+      "final-gt-press": "febee8f025c1af01f80142af7632850a8eb15b583b2ce3121ad31f594e54fe82",
+      "final-gt-release": "febee8f025c1af01f80142af7632850a8eb15b583b2ce3121ad31f594e54fe82",
+      "final-st-multi": "5200c13810ea33fe837f8e607100fb0c6d6cfb998e2d3d7692f279f3fd827cb7",
+      "maker-final-gamepad": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+      "maker-final-idle": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+      "maker-final-prompt68": "d96962362b262bcc4e5abcf6a720a2de1a53f0869c87916fd3f798eb845e08b6",
+      "mic-final-play": "6c8b0680ac655020ef900d3ec93d4c577c35566aff3034ce364ef4e2e9eefe76",
+      "mic-final-silence": "6c8b0680ac655020ef900d3ec93d4c577c35566aff3034ce364ef4e2e9eefe76",
+      "mic-final-tone": "6c8b0680ac655020ef900d3ec93d4c577c35566aff3034ce364ef4e2e9eefe76",
+      "msc-final-register": "899936c666e47c80151cd9a37ce1de38cda772730a156d9513c8f109f04eb1c0",
+      "msc-final-sdk": "cafdd3b8eac77a9d552266c3678f652f3058090b2e72ef740d3ccff156c9bcd4",
+      "speaker-final-full": "16371262cf0778e3bf7ca9fdf739e75e396d194cf16a06ed7ae97ab9ee95511d",
+      "stock-final-253-adc": "787d5e3c282bc3d200be941a48d7b7ff24acdbe0d9e682a2cfc14796b392feec",
+      "stock-final-253-home": "787d5e3c282bc3d200be941a48d7b7ff24acdbe0d9e682a2cfc14796b392feec",
+      "stock-final-254-adc": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "stock-final-254-home": "94b6b43c02a95cfac1e7c70a6166ad669f308d0d16389c272de5ca7c2d45ef37",
+      "tab5-antenna": "dd6ded2e6e7795ab6aed3158afa939403a43bc72881602af705b9bb2b96328b9",
+      "tab5-imu": "db07b7600ac15c653d954e7619475e7b592f1fc250e64a423addb3881d0da3df",
+      "tab5-multi": "5200c13810ea33fe837f8e607100fb0c6d6cfb998e2d3d7692f279f3fd827cb7",
+      "tab5-power": "c8f2a196f8c87c36ff8707d08b2189ce992d638688bc9bb25c8a4f0366abe3a6",
+      "tab5-rail-output": "b828d732c85d95a9372ff7e552c8be8447fcbff4e776a40f2fa1eb55806a0089",
+      "tab5-rtc": "39e7697733b5681359667b4d1b39502b80093d9305cbff81f355dcad5eaec299",
+      "tab5-scan-ap": "b558020fff16675cafc8deb70948c049bf29b94a4328c4b00b6753d3527c6397",
+      "tab5-sd": "36a9e3d299ee4f737502dffaa4eea3649152728d08232a0e1ea2a652f46e9325",
+      "tab5-sd-render": "36a9e3d299ee4f737502dffaa4eea3649152728d08232a0e1ea2a652f46e9325",
+      "tab5-sd-render-second": "36a9e3d299ee4f737502dffaa4eea3649152728d08232a0e1ea2a652f46e9325",
+      "tab5-sdmmc": "de6b0dc1b6b648e31f7cf5c5dc1e85778f2c42ef784219763ce3704a8c6733ad",
+      "tab5-sntp-ap": "3ee730cd2a52cde76e793ab92d107123ad126fa68bb0b73cf9215386e5988b45",
+      "tab5-softap": "de47291086c7340b0391872cae88049deb045067ff8d41ad38b7174ace6a1b41",
+      "tab5-wake-5s": "03fdb8d56fb9e5d904d56153d2925072e80581f32deb9c0cc69e8d9c339a8aa7",
+      "tab5-wake-min-retry": "693bdaaf0fb129238fe22a7e621de2d7e9ff6991dc036a415c8386d9aafe9778",
+      "tab5-wifi-ap": "3d73773427725f3b0f69f730e317b98c650ed5879bf5ccd59ab972ea28b0fdf1"
+    },
+    "adv-cap-compatible": {
+      "firmware": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+      "input": "eb7850d8436644246ffd273fad015901002e21ec77f0adc9608f3b303d3016aa"
+    },
+    "adv-cap-compatible-seven": {
+      "firmware": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+      "input": "6d33e4b5b258fdcde6ce0034e7474d41b107bbcfba825e2a2159228dfa0ad784"
+    },
+    "cores3": {
+      "button": "58ea9e954d59f110737b02c776bfd290fe03f0e3d6dd51fc6a07607fcc16eb98",
+      "camera": "9ed07790339a940c71e7b312404340d05777e7c0b2a99d7430d2eb8626565ec8",
+      "display": "44c7912db911b32efb994e43bbb4ff7164265111e6c5efcfa8867bd86e2ff4c8",
+      "imu": "c56bf2ca6e37edfb2e1c1e02002a5a07d9ff0a301b8fbf9264f1819053bfefba",
+      "ltr553": "1a80525f57bc3d5f5b0d89476b8e5e5cb7e1b756af0387a2f19337aa0b72fa47",
+      "mic": "5de68729e19eb8d0b241bb68792e38f06cc8265fcc719f079da9c9e95e07e4e0",
+      "pic": "481694418ae5015b154de8d0f9641e6660a5965935fb9b9ec82baaa0975e1f12",
+      "power": "ac19c6fb345ee441bd9c6b25f313bf190928af5b9e74649a721cc9945ac33a2b",
+      "quickstart-bargraph": "5812186674963e0ba558e0ee8f65941cce49a7ab1b05a23c2b12046a5c7a1e58",
+      "rtc": "70e500981e57fef904e8c941865fffee9d2dcf0045fa4a9255acaa516f0d68c0",
+      "sdcard": "2a73d631e383ab932e38d2db43d100ca05fbb5023944cb184194fe1046d56f1b",
+      "speaker": "980f87ff390738e8b50c8819bf4050b8dc18c7d8a6edbe6936ea9ec70f245c78",
+      "touch": "a3b1a46231ade128d44c0f1394febcadcb236d86d68ab67008fc19ab4be48c27",
+      "wakeup": "758e03ff538f8b09780995ba1e5bbfde19d8ba2f82d4fc37c13a3ff9c3734999",
+      "wav": "e8f36a06ed036feec277119ecebb10e2443772a9c910323457ee2ea63c2a8d95",
+      "stock": "1324f12d3ddd5392f47a9eff537f9ce0b01a8e6e36d829b6bd22cdf82d2c1264"
+    },
+    "adv": {
+      "battery": "ddcc555063a83c065b64abfcc720966d4f2117e44eb8a5403ec6a255530494e9",
+      "button": "00bd60f455a211d68b397e7008ff3c212acb420a0869e2deea5ee6d8ee601e2e",
+      "display": "67bbe34e0e965f6d0491668d45b8007f153ba80be6ab3f8ec2e31e0223ee7972",
+      "imu": "33639787c387413681e3b2837e115c727d53b7d58fe7fd3796f2e61b8afdc1a4",
+      "ir_nec": "303e9c9c65c38332db862737b4ba78d8e0c35176c1dfd0f8e447c8dc40c39ae4",
+      "keyboard": "ff5b8b152ba201852ded8684ca517bdf63ea155961ff99e9ff19fad11f4fcf78",
+      "mic": "9a1e1a36dd4499d992254824e85a956229874c0a279146c43e599657d829bcd5",
+      "quickstart-display": "db48605950abbd5423b62d36712dff9ccbe7db9f4997b9a88a6cf8c87111899e",
+      "sdcard": "33ee9fc3513bc4e46cc5231b460ddca3e0966fbaa5874ceb8ec506a67fab8aaf",
+      "speaker-sd-wav": "b0b39a6f07f6c03027642c5876877d2a2e5546a86db92c8607ba93f75e8e1241",
+      "speaker": "1a40ab54d783e5850d09bcfa10e182f8ac43662bf4fa059b75810815f4bf93c1",
+      "stock": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631"
+    },
+    "cardputer": {
+      "battery": "2d99427292ed47ff5104779d783be6ccf09a50ed1a2f472e13993d44cd80185e",
+      "button": "c58804fac2c50f9d40a2d4b90e3c338c5fc67b29e870287f3f54f5a352062c94",
+      "display": "9e7fac31667083a23ac753fcd09fd954c4c1b8cdad7546b3f61307eed1effb8a",
+      "ir_nec": "13a8bd0998665d96d07bb703704c53db584782bdbcd6a8172c23b764f43bcbea",
+      "keyboard": "d22bbdd88cbd0b0ec8120dc0bbc9df9ba27f1542b7fba716098dc3e664a6d072",
+      "mic": "9036343eeed18d4f7042fd3c604bac86e0ee8583c4a10b35130c544c57c49251",
+      "quickstart-display": "c5a4d892ed9fa3509b01c5e172d6019bc6d347e011123ed5f9ae5dd6c1956bbf",
+      "sdcard": "c8525e5a00f84f633b180ffffd2643dbba1d5e72107b58ec37b020e1336e117c",
+      "speaker-sd-wav": "c033dd16ac1eb79ca331440082ab94b09a9c5ec2c480281d268ea6e6da65b3f7",
+      "speaker": "3925c2c1b3434e405c4021185d32eb047bb64b0f848a4fdbc81f1316cf27b8ba",
+      "stock": "d9e1287eccb641863e7b1cc7cf057733592403d65aeec2d4b1fa4cb3e8b1b309"
+    },
+    "dial": {
+      "button": "98ceea1e60eb19b969712bb226ebe13733cbcb7d6a4992a26bcc9fe69dbb2f9d",
+      "buzzer": "f648e15e4ce0fa84244ac20c7dec771eeb34a77b84a4ab9cb710b9e217a82233",
+      "display": "df4b515a73a73ce1ab481f213c793d3e8d4a08b0ec7cb875da2ca93a8c5a1e6f",
+      "encoder": "932f968f47e4df6d86f2173f0a3309dc2c4b3f6d9a268eabcbadbe800e9f9475",
+      "quickstart-display": "4e9910603a7fee9357278f1f0fc89eff62ba5eef20f6d5a5b9dffa9528a40aa7",
+      "rfid-1": "463a5d03f52ecbe02dcc54e511a21b020fa65512b2efd2ed3c1f31f4189a12b9",
+      "rfid-2": "ab62b0f0b3667336d918bbd159e5428f1e7fa8e768282e149516bed4a219e294",
+      "rtc": "73b7bbc278888eec911d20b0fd99fc177474aa89ee5a2bf2b1a1c39f708bab42",
+      "touch": "8a7136d47e9f569684ccd85e190f031535008cb990b33cd6baa2825ef07a9022",
+      "wakeup": "0e484d4ac32570d7fa07cde7a07927941f531a1c49addb4091b3c9f3068e99c9",
+      "stock": "6a0187dad13c491129e9228ca36b9e04adb46ebf9d8d51fca8eca5f9b7332a53"
+    },
+    "sticks3": {
+      "battery": "98e6059b5eea7075c99d0ee243592fd044087b891cbb15214d75928e9d63fde4",
+      "button": "da1d97a86e8516200dcf45b6183b6b223ab3d6bc8c78c99a8cda1d7fc54c01ce",
+      "display": "7a2f4b49f03e030d07e8dcfb0c221eea6ee57e2e5794db3a9dfcd2702912c52e",
+      "imu": "c4175725426ce86fb97c89458a907492bc741d28934fa7375673d9fe07a41813",
+      "ir_nec-1": "0f543c5315f54b86d04733043b9ad9be99b14c816e1e2320e8db9b7c704d74cd",
+      "ir_nec-2": "385c5b6c54bb8f865d8ec39473b7b867c6c32d4ba8dd706cff44caa53e1bd86f",
+      "ir_nec-3": "ddfeac09a2144a94ebd6dc17d3341f47d03b9d79f697ee4fd43c820c7972f39b",
+      "m5pm1-1": "417965c209f6c3200c6103718465479e6a78e7b95c485657ce351dddf433d0d0",
+      "m5pm1-2": "e90e0ee2dea236843285251ff9f462653adc5c5db382c4f0970adfde495610ba",
+      "m5pm1-3": "749f2416fc47b9fe26f07cfedc278ce8dd8def1bf32a466fd9f5a6e4a8419cf8",
+      "mic": "0c0037fe136f20962828e88c417ba5507ea28edd4ec34a9c69cde34aeb7c3c53",
+      "quickstart-scrollgraph": "0ee9053609a6bed133f77944a2890dd790ba21516de5c05aa2e080fb4e3d3bc8",
+      "speaker": "f77f6d220413ac3600c032219c9b1659932cd25456838f526a8254bed98885cb",
+      "wakeup-1": "d0d03b2ea4ddf6f6e32d76ebd96312272a2b62ea957de5e9031fa105a7ca0074",
+      "wakeup-2": "e81fe36a2668548ae3a1dcae6f09b6d2d21bc7ab0d02300689e47e9ff587f233",
+      "stock": "b6e024fe156b7d4d418b2d3674b94687d7d66fb88dcd7e4b2c8c3672b8b162eb"
+    },
+    "stopwatch": {
+      "battery": "31a4268b7d826858ab8cfc54843c45e93a3b2681798c8c278e70b0d04c6725e7",
+      "button": "e1214647179c912de438240a66e01b7b7c90986e75217f3d94fc29fc78f66b45",
+      "display": "7779575565041730a0120b1a57a0969020b2c3d96362312a7211c38a776f8ec6",
+      "imu": "2b45dd116a41dd4d11eb3a97028fa4b04c20b537943e9be496ffacebdd59ff69",
+      "m5pm1_m5ioe1-1": "ac93b4dfa409d3d4d2f8ca9f39070107f8f649995f0aa9d99ae11b905b828520",
+      "m5pm1_m5ioe1-2": "c924d9b958f90252628344c0ccdda8bf1fed3b08427492c5700b8bab2852d3fc",
+      "m5pm1_m5ioe1-3": "2933d4861bd8cdeb47a6c4dad282a3c5c7674b59fa98099cd993c16b3ff789f0",
+      "m5pm1_m5ioe1-4": "a4f4e4e909306925bac5eeb2c3433fdb1bbf672c95900ce18654e3c2527888a9",
+      "m5pm1_m5ioe1-5": "0a4d70c47e3971a30dee80f38be1027bbfbf9cc2aebd27dfa5b806d5f9f1ef24",
+      "m5pm1_m5ioe1-6": "d9a67b9fb4db34352e27b1379446f1707f71b830b46e244ff9e88f06e01765fb",
+      "mic": "fec38afa5ceda6cb9b66a4a8366401533af100fcaebaaf11599edd91df7a66ac",
+      "quickstart-bargraph": "0165609f74eae7a94a4edaedebb9d4a487e593c73df92815cc986a757b051ec9",
+      "rtc-1": "91b3d451e2e14ec7ef2db1ee6748bf954b47813616c5653c3cfc379b1456117b",
+      "rtc-2": "d2ccb4a6d5f948291936771b1996431aa88f030b87f6fa9f227ce6efafcbf179",
+      "speaker": "5b54543b8679945f1ecd4a6211009127cd017e5bd19adc8f1fe90ff3bb78281b",
+      "touch-1": "41a73ab0baf4b62b78288b08799274804535ae849296cc4f2470d26fdc0150cd",
+      "touch-2": "0faa8092da14a7c8e201f7d6318ef2601e8647a271df57ebdc28e5b0b4b2fd0f",
+      "vibration": "8c835bb6b5ab980799ff7d37ab91a6bb8a96edabd07b1fb5230a5b6317f1efd3",
+      "stock": "2d97255a3f1429234606a5e7e68cbe16f5856068c310043979e9eb6c10507513"
+    },
+    "paperdiy": {
+      "button": "2e299dd63a3959da7f4e0dd0aa1e6127fa9e7710998a88d774ad115eeabf3362",
+      "display-1": "0a12f73cb2522f0dab3e4cef106cfbf98f832cf20885c4ba6848f8baee492859",
+      "display-2": "90b4f27553cd7f05a26fe313129f3930f7f317c4add9e67af398c03069f10601",
+      "m5pm1": "121d67d7f6fe57a0a19b2d378900f072f37c33f3281ddddeeda66989ac061f31",
+      "microsd": "9add8456e09a19fc2b5b89013b7d5f4c1c95d4aba94fc8822c6223a4bba89002",
+      "quickstart-longtextscroll": "cbfbb5fe7a2c8f86a4e7d57b36ee1104b7cbdc2afcef228cb4738cddcd4eb892",
+      "stock": "35a4f99833d334c93986806b9403f81172e9068e3b63ef5a8ef2d20cf281eb18"
+    },
+    "papers3": {
+      "battery": "6e24e7e65d087f706209309a6299a6398aa870d0dfccbb3db86c9936c807c00c",
+      "buzzer-1": "a3fdcea2cc699ed7f2b3e8175081f409991c920df4a6c552e51061841df67548",
+      "buzzer-2": "bd5599be032d3a29aa69960e6634b6c46a4d1ab69659dc05db0ea4e622b92586",
+      "imu": "a825bd2ec14cbf371649ece02c7440079542adf0b88904af1fc588b540966ee1",
+      "rtc": "2eafc2ba54fd1f93e09991e875bf2e3726c8e004611bfc76d4ae3485db63779c",
+      "sdcard": "db480ab7675db2432c4131a2cbd68db0895c9772759b3f36197b4b6e24c56d21",
+      "touch": "ca35f8c5e512f8cbc02b91a8eb760adb475bbe240ae84e6dc87f892145f2bcfc",
+      "wakeup": "d2ccb863906c939241b2c252c2dc15226afe3e6d753a5a509aa01a33fb2e3fcf",
+      "quickstart-bargraph": "199ff066fba82c0ca453f86dcc90c5dfbf2d3b5706e0da2ff5b4c3cd3e6a7a92",
+      "stock": "87567896973fa61c281fdf3f0e2031f280de1df8d59ac0942302de288096a1fb"
+    },
+    "papermono": {
+      "battery": "04479a058a8ac2511f2262218f0278262f06e8d26701401dc31d932e89915183",
+      "button": "d38aed26734f2fa6fef09ad7b32d8b8601bcab8bdf5bff5008549115e7791a46",
+      "buzzer": "0b21e41374ea0a5b269c3978486697ba67359cd671c57239b7c18c4e6a15374d",
+      "display-1": "a964f83a7a48a0357b360714099b6d77519373ceb3fff39d8f5f297ccf8440df",
+      "display-2": "186bfe5ede09593832bc8587b423b698f0ee3b577ba3711a9f8a380e85b7b7b7",
+      "imu": "e739badce88a8a18fe791f51d34597494e5673a5985cb94a765fe8b4afc9ffed",
+      "m5pm1_m5ioe1-1": "63a479f48ef15fcc1d64b8f8237b2ab439d558de18ccd46319694fce31237862",
+      "m5pm1_m5ioe1-2": "479caa1b3751277c4c4fdc6285e02867ddbb22bbe5f6b38ef159c47af249d6c2",
+      "m5pm1_m5ioe1-3": "3643e57edf1d2537e6014c599204352d819849c4ca51c73b3048c50038c43365",
+      "m5pm1_m5ioe1-4": "0e8cae8f0e87b5bfaf23b3337418150c70bacd533fc4b270bcf786a6aae38c93",
+      "m5pm1_m5ioe1-5": "b256949827214f4da9a12ea243f17ecb64e4c180b914dc20936faee07a7177c3",
+      "m5pm1_m5ioe1-6": "b1b3e4a304c786e78df293b3c96f59e82aa3b6c720bc8b2234b08535f3965a1f",
+      "mic": "045ad575eb00b9cd6d929c9d17746d2474611f80bfb3683ffc9100aaa151d348",
+      "microsd": "31347ec96d66664274e1acb84b221b8a17fc7f508ecb5052ed7a61cfbdc4c99b",
+      "nfc-1": "b3cb7d0f5e48684271272b327fa5db849b754be89ecd47e450a51137944bd4b5",
+      "nfc-2": "b12a7972d9875c55bc1f670b836747193890964009399aaf608b0dc595469ece",
+      "nfc-3": "8c8864f830f20e183b5923058ecb9a3c35019ec7bb61edb507746f26a4917972",
+      "nfc-4": "12779aaa456094944c1d9fa3aaf614ec410903cfdd2cf539c328e00df2ca8e9d",
+      "rgb_led": "d0b564e7b64a6a62471883e436f942713a72ff7803ec92bc187c8ad6608d2bad",
+      "rtc-1": "b91c16b689431545921a2ee6e091d96c433ae4a2010746a5555db4c231b77f55",
+      "rtc-2": "3d6f86644ff70eb9c0b0d7346b42a5732f1d095523c7e98794526fcc1efc2b24",
+      "touch": "142c95436677df6fb9b28c6baab48283592156a775b3c6df0656b37291fb134d",
+      "wakeup": "bfbd5e881892ed670b5ba84b5ec436cb0a78d931016dfb47d1a2701686b625dd",
+      "quickstart-bargraph": "523fe5f2743dcd8386094ca47928a1c493dbd9c773d46335202c2279c399b653",
+      "lora-1": "c80930408643fde59a8bc7b7f9f3bdfaafe6881966eff197db4037e04062b2ef",
+      "lora-2": "b271c68ab780c9ec386a84d21cab5c807d48c98bc2fb379754a5a3f4485c7497",
+      "stock": "f3da049b65b5a3899d3484594e3bede92a0928e5217fa260925951a777447b05"
+    },
+    "papercolor": {
+      "battery": "949a5eb24a523c353dc312b053d1784552e4afb77e6a49ce50ed90b78669f5ef",
+      "button": "cadf01adda0d9674798f1dcaf5a90bbbb73b04bf17439b72c3705bc2bab36283",
+      "display": "f55aacea7586dab6cf67e9d4cb0205a6eb1417e99f257c9988d0cb8bb056e186",
+      "ir_nec": "5fc987dc296c6f48ec879ad8ff8f46ed467ac6b54f0a24fbf1a1f26b682b8d89",
+      "m5pm1-1": "2e3cadc8f84366389f997523671ab406523b7241b493ca91e1d307ec6c413f19",
+      "m5pm1-2": "349640e3e0bf72f481a067a9d65f9c91543c93365097a3efeed3d9f7cabbaf0b",
+      "mic": "83a868a75273aa3193fab5bdc664ee81f10bcc68d1283426356efb9b9d2bd71e",
+      "microsd": "3158b2e5a2b1b28b3424d053a77c4195ee38a8a67f62d78fa9452c890b08223f",
+      "program": "a9257f684db83eecdc74135896bc0d74f675c459baf942bf4740114f27fe98a1",
+      "rgb_led": "81003980f0a394272b6ee535f66400d8a4758d51b1c17110870d09140d0a6966",
+      "rtc-1": "3316ac0f7b1360cc386202a2152f08badda5690461ffb5c7aa3fcd13954f65f5",
+      "rtc-2": "9f4fb99c2100ef81be18651561093e155bf01ecdd4a0f3780094f9c1895fb8fd",
+      "sht40": "d88ee92b394b0a0256c882dc7c5463d5fc4eba641186213141a7058c64ecdf8f",
+      "speaker": "f2f20597a4ffe71e41258ad907756dc66e50d612d09943e9d5ab5d71f562b478",
+      "wakeup-1": "74d962912e352e1cedddbd2230681a066b5657185d5d382127dcdf0337429f99",
+      "wakeup-2": "4b3b949d2b2e0d1d990c57f0ee0d991fe67d4c6b6dc6e393499f96caafc3cb50",
+      "stock": "166dbd7cfccda4ade1b2284774176955776d24a6fb08434b7ef1d8fca5897816"
+    },
+    "atom-echo": {
+      "stock": "8bae873945e85eff496670b9fbddcf7b5fecf31c99eba786fc15cce8c8e89472"
+    },
+    "atom-echo-2.5.1": {
+      "stock": "53b4d9a7f808c0edac7fc079aac5eb16b792855fa30c96405db87f8273bad463"
+    },
+    "atom-echo-2.5.2": {
+      "stock": "bf70e3202906608ebd2de8f743ceb5bcc694bb0a0a414bcfd919f0e883b93046"
+    },
+    "atom-echo-2.5.3": {
+      "stock": "e4ec572435b5d455aeb6d083cf1a65d7a59abd040eb6e44207bb351b95b0b8fb"
+    },
+    "atom-echo-2.5.4": {
+      "stock": "8bae873945e85eff496670b9fbddcf7b5fecf31c99eba786fc15cce8c8e89472"
+    },
+    "atom-echo-2.5.5": {
+      "stock": "974ceda3d692f6c88bf8417ba6dc6c4692e5218b9d9f98952a44cf605498b7cd"
+    },
+    "atom-lite": {
+      "stock": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0",
+      "button": "b07b7c8728d9c06c37ecc401858a8ad113a30995a52502b5c9b40c97ba19937e",
+      "quickstart-logoutput": "2203630d66d7c866c1f1681d08e567094685f5a839005a9f59a84492a480bd49",
+      "ir_nec": "c975fad25c1c9dc1f1a6a86bffeb6413718ba37dd289b24425011f9701cae73b",
+      "rgb": "b76ed7027fa1c4f4b11628d8ecabbacc6c1c210385e76d62f1148a82c25b7b2c",
+      "imu": "d953190ecd176b1e93a8164c16c4037fe548d96c68bd002ac408095b8b3e3618"
+    },
+    "atom-matrix": {
+      "stock": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+      "button": "c283254c6ad8c555551e05ac438c50cfbcffca69df01d7e47157d042d4f6e324",
+      "quickstart-logoutput": "6316fe4627c432f2c8cba86e870e2c936a9323959f53fb2900553564d1949bd1",
+      "ir_nec": "a505ceed7f46587a1b1ea0a812aaf00aa6d6157e3b7538a557f3d63a10ba3dc9",
+      "rgb": "a278168aa14afdff6258bb37d24a883a86693dfde1ec9246253c492af0ab78a3",
+      "imu": "5a32d162bdbcb0e2ac145a8248526b971c0f42ec12ba8beb9dc76a830b7c68ff"
+    },
+    "atom-matrix-v11": {
+      "stock": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+      "button": "633f225df064654ce3ace93a340c0b7119c43f54f9604eca303cce74bdd95561",
+      "quickstart-logoutput": "d50a51243fc69fd69c7bdbde095a786cc9831fb2c2a2ec4586e7d7c21b9c8a87",
+      "ir_nec": "7ed63cd866244b28070aac44d54e52e85347e438954ba3d36de863630bc8f501",
+      "rgb": "832797b24f155fdac3d47d24de0aae74b09932d51417ef3593743331bda2740f",
+      "imu": "18af09cf8e05d9a288c6870d780fb15fa0c1cb0b94470f71c03f3c8f20b3dfb2"
+    },
+    "atomu": {
+      "stock": "59e1236f6c47140270fa485ece305a7a8c36a4fbda96d59f2359c75219ab5497"
+    },
+    "atomu-2.5.3": {
+      "stock": "fe89f399896d4fa4fc1e9198acf2d8a2ade1d91f2787610ad97cac8b17247587"
+    },
+    "atomu-2.5.4": {
+      "stock": "affa252d21f223bbe21cf1767604d345df97b2cb8dd62bc76993588d9bd9eda7"
+    },
+    "atomu-2.5.5": {
+      "stock": "300e47d2afd672d3ed9212c2f0fe5d16667fb1b85b175ebb736c80b5fbf5e8a4"
+    },
+    "lx6-rmt": {
+      "bootloader/bootloader.bin": "fdb9d76661f63b17e5692cb55dbc5c1d053381fe12f2c2819064332731b0cfee",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "lx6_receivers.bin": "27c8b45fdfcca513df33572704909adc8aa8f7041af6d0f5f5fa6ee41b394d78"
+    },
+    "lx6-pdm": {
+      "bootloader/bootloader.bin": "fdb9d76661f63b17e5692cb55dbc5c1d053381fe12f2c2819064332731b0cfee",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "lx6_receivers.bin": "27c8b45fdfcca513df33572704909adc8aa8f7041af6d0f5f5fa6ee41b394d78"
+    },
+    "basic-v27": {
+      "display": "c00432ea9f89c805d67fecd7e073d7699cb04836f2cf50f4f5feea2e7f1a70b5",
+      "button": "4a307c970d9d92cee5cd5df11de777dbfba2a551dbe27735d13bc82809261c64",
+      "battery": "5c21f61ea9861cd3c0dc2ee26ce447b95375ca896880cf44e580d95b99cf00f6",
+      "imu": "c9bdd49e6050217f7673b4309eec57c14085c44b6b316f2b7dc8c41165ca1f7c",
+      "speaker": "6b803b7d19abe9b8cd324a8e8cc6a06ee0676deed06939882e968074edd00fca",
+      "quickstart-longtextscroll": "eade3623b1942b8ba5feb0d1500a592f01b5b5ffb5263f37163ec68b2468d475",
+      "microsd": "a4d33fb3e22c96cec69a895785273b67183e1cde7b24bdd24f96f5539ae06db6",
+      "wav": "1da096d51257c6be8c700ecb965e0352c54ef55e4634eb3a66bc7837cbf25ce3",
+      "wakeup": "cb1101f8808ae4de9ffbf94519fff68c9dc73b2738019a514dc492fb220c2e9a",
+      "stock": "613a802da0f496d339a4120c0322c0c7ec1db3d81474b4329077f8b233d4dccb",
+      "sd_seed": "873bc761f52c17b6a835685aa0d3df5fa2ab6d123f0fcec479bd3c038b714234"
+    },
+    "core2-axp2101": {
+      "display": "512c31d97de9e996007552849a4920bb20cc2d2a1e7b1289e080cad122a3f094",
+      "button": "a2b7bee81b230cfc33d204ac984487281c03c47c05099581d49f4c9dcbbd0f1d",
+      "battery": "6ce2438971d943187d1b7479030dbe4a30e2a529a873cd4eb25abb63891b7bdb",
+      "imu": "7af958e95d59d5c84a0e70ccf5581e92277587adf4eb839c51c4fee92a541748",
+      "touch-1": "abb9ba419f521d32d991d0d3a0deedaa1804ffad9b0ea9d0823a2f733ecd8a70",
+      "touch-2": "001faa30aa3d8131ded34fe9c7c91b0f38f14d009834860c13a0a84295edcecf",
+      "rgb_led": "22c145f3bc7e2eb6fa208baf056a616fe2ea5aa7fb5f54abc8579dfec6fb8be7",
+      "vibration": "6ed4d08bff281776bbfd56d58b4bdfb2a138611d272addb118e69ee1b18d0bc3",
+      "rtc": "55203749da1c30859fd028aca5c0757dca20c658d03fdcf164c6f24813cfcad5",
+      "mic": "95ed59a22eee4cbb6e83c3505a2cfac3cfdf05948718ba1016ceb80d00e90833",
+      "quickstart-scrollgraph": "07412636972280e9d75e00ac4a3866dcea7ec5866967d689389b8adb3a5ffb3c",
+      "microsd": "8eed68bb6a82813025dd333cd8d10f54f09fa3de70a88d800751c96a7b194660",
+      "wav": "353e72bd9bf18ca27cbd09e1ef403ce74a9d4e16265e021fd3a364e8e4cf0bab",
+      "wakeup": "e7758f6852e12470e261110d3c69ef2ccc37bfd654f77f6dd6f5105cdb097390",
+      "stock": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+      "sd_seed": "bcaef04c9c52d21282a30ae56a5f096d6df8c0b698e1c0dd77d7c66c31747b00"
+    },
+    "core2-axp192": {
+      "display": "512c31d97de9e996007552849a4920bb20cc2d2a1e7b1289e080cad122a3f094",
+      "button": "a2b7bee81b230cfc33d204ac984487281c03c47c05099581d49f4c9dcbbd0f1d",
+      "battery": "6ce2438971d943187d1b7479030dbe4a30e2a529a873cd4eb25abb63891b7bdb",
+      "imu": "7af958e95d59d5c84a0e70ccf5581e92277587adf4eb839c51c4fee92a541748",
+      "touch-1": "abb9ba419f521d32d991d0d3a0deedaa1804ffad9b0ea9d0823a2f733ecd8a70",
+      "touch-2": "001faa30aa3d8131ded34fe9c7c91b0f38f14d009834860c13a0a84295edcecf",
+      "rgb_led": "22c145f3bc7e2eb6fa208baf056a616fe2ea5aa7fb5f54abc8579dfec6fb8be7",
+      "vibration": "6ed4d08bff281776bbfd56d58b4bdfb2a138611d272addb118e69ee1b18d0bc3",
+      "rtc": "55203749da1c30859fd028aca5c0757dca20c658d03fdcf164c6f24813cfcad5",
+      "mic": "95ed59a22eee4cbb6e83c3505a2cfac3cfdf05948718ba1016ceb80d00e90833",
+      "quickstart-scrollgraph": "07412636972280e9d75e00ac4a3866dcea7ec5866967d689389b8adb3a5ffb3c",
+      "microsd": "8eed68bb6a82813025dd333cd8d10f54f09fa3de70a88d800751c96a7b194660",
+      "wav": "353e72bd9bf18ca27cbd09e1ef403ce74a9d4e16265e021fd3a364e8e4cf0bab",
+      "wakeup": "e7758f6852e12470e261110d3c69ef2ccc37bfd654f77f6dd6f5105cdb097390",
+      "stock": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+      "sd_seed": "bcaef04c9c52d21282a30ae56a5f096d6df8c0b698e1c0dd77d7c66c31747b00"
+    },
+    "lx6-dac": {
+      "bootloader/bootloader.bin": "fdb9d76661f63b17e5692cb55dbc5c1d053381fe12f2c2819064332731b0cfee",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "lx6_receivers.bin": "27c8b45fdfcca513df33572704909adc8aa8f7041af6d0f5f5fa6ee41b394d78"
+    },
+    "nanoc6": {
+      "button": "d1246ce3912d47bcb92ffc525aac853eea44754fd281ae5eac51893f70f4d8d5",
+      "ir_nec": "40d0c54116512409ede2456ba68e439b7326a7ec674830da45fc5a0ab148b27c",
+      "led": "f0178e3964ab0663521330fa2837e86bb06bd98874266231184cfa096728d942",
+      "program": "aef0eb81f123816bd24a714f0832117201925c176bf22a941dfe20cb295b8bae",
+      "thread-1": "c374dae02da13cb15cbb15e58e39438b14ee5f60ac928d1eaac373a8ea85df01",
+      "thread-2": "9884a7e391756606d889140e64c5ea961082b2007107517c180f98bad746e8fe",
+      "thread-3": "65e659e8b3d10ae07bec05f5b334d63f9396417115c28fd5630e20e49931ae26",
+      "thread-4": "0b5195a1dee2419e8119bdf87f1e041288e0e67c92db731355a1c5223c929515",
+      "thread-5": "58f218c4eb04c4a89f4760259aa9db2a2bc8fa680791c723f48ab1891a6952f1",
+      "thread-6": "bdc3967edaea1c1bc3650929c17ecd885fee58d4cde0b2af81372b395bfd9ee1",
+      "zigbee-1": "ba3097debdd622472d395634b69250f1cff3ff62e78c10390a7ba1ef16196e19",
+      "zigbee-2": "4da94740068dd5f84ff0cfc18d5bcead00dcfa5e40455c775efbcbb850d05450",
+      "zigbee-3": "76a73c06b93460db55fe1589b6c1f9d79a0eebbcdbd2567cbf9ed231f242d97b",
+      "zigbee-4": "36f9f688af953b79e046e99a7468b6274023ea97ebcf721ecac3993b2632500e",
+      "zigbee-5": "5478aaf597913668bb0182f80a5a6b28617f6469961765f6c0df5fb3601cb191",
+      "button-control": "d1246ce3912d47bcb92ffc525aac853eea44754fd281ae5eac51893f70f4d8d5",
+      "program-other": "aef0eb81f123816bd24a714f0832117201925c176bf22a941dfe20cb295b8bae",
+      "stock": "f6efc24d96f7b9a97684e63f764ef44b4357556d9b07dec4c1c67eb3d9153ecf"
+    },
+    "nesso-n1": {
+      "button": "9800e8cd64c9378a39aa8d8867a6f4a96a9a4a1fbb9cd61fdd8099ceb2c45489",
+      "buzzer": "9025b50eece3e0791d837d4759e35b35142f0688b7c4f6e7677d82cef6c17e2b",
+      "display": "8f15b23f4334820ffad1315fd96318f32ea08bc4f2836b78bac0716e49be1b9c",
+      "imu": "b4f673bf315678f8b93cf55d96066d12e64666e7384aa6c7e7bec353d245bb08",
+      "ir_nec": "fad0ed35fe7773448a48173ea2d20e6d5e7a1fa2663bc181f665330e9bcff9c2",
+      "led": "6577e65e2055caee107f49d2ed2e5fb10c10e7c448379ed708c6057d4b3b4020",
+      "lora-1": "9f1c21052bf82232c937a781a882feaedc5bacd9606e11a77d2a77d402ec2256",
+      "lora-2": "5e1a635e2e438201285ea1b659325ac2602cfb649c23b04199f38f37e8a5e8b6",
+      "power-2": "ca34e23ea8807af9e998c31a4e0c0c65fb706696d9df35f8d37c6462440b1015",
+      "quickstart-bargraph": "e2f1987faf1c36754437a5365dd121e52f47050d8c4bd3c318042bbe11e103b8",
+      "touch": "02ec0fb459709d7dc3dd778c514bbff0f0224ddbfe7ec21758a8156e22d90e09",
+      "button-control": "9800e8cd64c9378a39aa8d8867a6f4a96a9a4a1fbb9cd61fdd8099ceb2c45489",
+      "touch-control": "02ec0fb459709d7dc3dd778c514bbff0f0224ddbfe7ec21758a8156e22d90e09",
+      "imu-control": "b4f673bf315678f8b93cf55d96066d12e64666e7384aa6c7e7bec353d245bb08",
+      "imu-motion": "b4f673bf315678f8b93cf55d96066d12e64666e7384aa6c7e7bec353d245bb08",
+      "imu-motion-first": "b4f673bf315678f8b93cf55d96066d12e64666e7384aa6c7e7bec353d245bb08",
+      "touch-first": "02ec0fb459709d7dc3dd778c514bbff0f0224ddbfe7ec21758a8156e22d90e09",
+      "power-other": "ca34e23ea8807af9e998c31a4e0c0c65fb706696d9df35f8d37c6462440b1015",
+      "stock": "49c4a9a669a2bde5b95416fa19ab8e01fc6bdec6a81bb80f2a0fc07480e1444b"
+    },
+    "nanoc6-peers/env-no-unit": [
+      "4da94740068dd5f84ff0cfc18d5bcead00dcfa5e40455c775efbcbb850d05450"
+    ],
+    "nanoc6-peers/nano-stock-env": [
+      "f6efc24d96f7b9a97684e63f764ef44b4357556d9b07dec4c1c67eb3d9153ecf"
+    ],
+    "nanoc6-peers/nano-stock-repl": [
+      "f6efc24d96f7b9a97684e63f764ef44b4357556d9b07dec4c1c67eb3d9153ecf"
+    ],
+    "nanoc6-peers/nano-stock-uart0": [
+      "f6efc24d96f7b9a97684e63f764ef44b4357556d9b07dec4c1c67eb3d9153ecf"
+    ],
+    "nanoc6-peers/thread-isolated": [
+      "9884a7e391756606d889140e64c5ea961082b2007107517c180f98bad746e8fe",
+      "65e659e8b3d10ae07bec05f5b334d63f9396417115c28fd5630e20e49931ae26"
+    ],
+    "nanoc6-peers/thread-peer": [
+      "9884a7e391756606d889140e64c5ea961082b2007107517c180f98bad746e8fe",
+      "65e659e8b3d10ae07bec05f5b334d63f9396417115c28fd5630e20e49931ae26"
+    ],
+    "nanoc6-peers/thread-scan": [
+      "9884a7e391756606d889140e64c5ea961082b2007107517c180f98bad746e8fe",
+      "0b5195a1dee2419e8119bdf87f1e041288e0e67c92db731355a1c5223c929515"
+    ],
+    "nanoc6-peers/zigbee-peer": [
+      "36f9f688af953b79e046e99a7468b6274023ea97ebcf721ecac3993b2632500e",
+      "5478aaf597913668bb0182f80a5a6b28617f6469961765f6c0df5fb3601cb191"
+    ],
+    "nanoc6-peers/zigbee-recovery": [
+      "36f9f688af953b79e046e99a7468b6274023ea97ebcf721ecac3993b2632500e",
+      "5478aaf597913668bb0182f80a5a6b28617f6469961765f6c0df5fb3601cb191"
+    ],
+    "nanoc6-peers/zigbee-scan": [
+      "36f9f688af953b79e046e99a7468b6274023ea97ebcf721ecac3993b2632500e",
+      "76a73c06b93460db55fe1589b6c1f9d79a0eebbcdbd2567cbf9ed231f242d97b"
+    ],
+    "nanoc6-peers/zigbee-temp": [
+      "ba3097debdd622472d395634b69250f1cff3ff62e78c10390a7ba1ef16196e19",
+      "4da94740068dd5f84ff0cfc18d5bcead00dcfa5e40455c775efbcbb850d05450"
+    ],
+    "nesso-peers/nesso-stock-repl": [
+      "49c4a9a669a2bde5b95416fa19ab8e01fc6bdec6a81bb80f2a0fc07480e1444b"
+    ],
+    "nesso-peers/lora-isolated": {
+      "lora-2": "5e1a635e2e438201285ea1b659325ac2602cfb649c23b04199f38f37e8a5e8b6",
+      "lora-1": "9f1c21052bf82232c937a781a882feaedc5bacd9606e11a77d2a77d402ec2256"
+    },
+    "nesso-peers/lora-peer": {
+      "lora-2": "5e1a635e2e438201285ea1b659325ac2602cfb649c23b04199f38f37e8a5e8b6",
+      "lora-1": "9f1c21052bf82232c937a781a882feaedc5bacd9606e11a77d2a77d402ec2256"
+    },
+    "lx6b-receivers": {
+      "bootloader/bootloader.bin": "53b36c2d76c055ba8829e9feba5f596e7e0086b0760ecdaa9edbdf72a9d59a0b",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "lx6_receivers.bin": "b176d72572949cb6e3b2abe7a06c76ba47b1520ea6db2d2605e352b1e2f5cdd3"
+    },
+    "stickc": {
+      "axp192_m5stickc-1-first": "62abe7c1a4643b924bf6469fcaaf98a01a0063561416b79d60b4d7e0e4fa66a4",
+      "axp192_m5stickc-2": "3c0437148504055ffe11bbffddfa7d1104d747027d3ebbac7e3dc9b1425d66f4",
+      "axp192_m5stickc-3-first": "e8551a16821bac25ca7f86312cab9a7917f4e9cfd95e0894c1c8396f9860a058",
+      "axp192_m5stickc-4": "95a633e17fc1d78cd3284d3f342062501d5b964a8c3fedf4ac3df7482617eab6",
+      "axp192_m5stickc-5-first": "95fd553ae2bc19f2d55174d95d0778a2eff92f769e643c53390bb6030ff304fb",
+      "button-1-held": "c150f847948b2c253c3933b0bf181bf0d44b44ed98c0fe3fd65edd983b0284f5",
+      "button-2-held": "5f02d5723562aba40e5e2de46297ecaff0a7b51861f3e0d89fc34095b7cc07c0",
+      "button-3-held": "002cc4d1c785f570cf3b256818de6e07c0e3cdcae55b6f50b7c01783b448ce6a",
+      "button-4-held": "b3da4f24e4a78d5f5f9a37cb54277a4e2be9b2ad86585e4438c472c4e15f684a",
+      "button-5-idle": "56378790154b34df9e9ab2f90198f7d1057d2722c6ece60ed09c3e0639c336dd",
+      "button-6-held": "87df458ce478e8f7794a05a6bce715579abee719d955cbc3367199c3fe8085aa",
+      "button-7-idle": "57a7a079c5e35d8b11be49766a4c1a00b9791c57dab063aea1b931586c723681",
+      "button-8-held": "919935a93ea4820d9f6972c408eb293c83ad9d6698212db5423ceaf7faa590ef",
+      "button-9-idle": "b3d5e9f56cdc29d6c95e72b537b583ffbf0ca5ed743bd3d8a4bc1f49760b6541",
+      "imu-1": "0b7c507d8ff9106bd55d5a75587031367af714ded24f71c715c6788d9a7bc05d",
+      "imu-2-first": "3f6b09d6f83ad5e3f82e03487d70a6f3d790e1ca0f760a4a7d773f664043d26f",
+      "imu-3-first": "7b3c5a1b585ee22264c9980bdb20cebf274d8fdfeba9e640e9d31db3371c6dd2",
+      "imu-4-first": "8e4b1e1c3c497e8f3661cf5a7280d5c3ffba1f952794ef5ee385fda90a127505",
+      "imu-5-first": "e9eb9003eeb49d9ef67d799d6244fec0d7afe4ced0f4e5f0e59543e7e160c5ee",
+      "lcd_m5stickc-1": "9a521939aeeb4b88c89585fa1038dc72568e4e702b46b0eeccec8f02773e351d",
+      "lcd_m5stickc-10": "1366a2472d5c1313fb2a601228d187ed0e17d8c8a61830126daeaf4582ff695b",
+      "lcd_m5stickc-11": "14bb2207f75e8deb927ca34d02e43e1585e7b31cb8d9aba411bd85aabca7feb0",
+      "lcd_m5stickc-2": "fca5e0baa17c64644baddfe5a3275cb3d979a3d64719dfc73c2d4c693b55e9c0",
+      "lcd_m5stickc-3": "04a17a8f44ccfb06654fbb96723c165af1f2730e811d8e720e76c35aa7bcbd69",
+      "lcd_m5stickc-4": "64d958579d303770542ba6ebd363abe7332c8a967caf213c90b47799b507dfa4",
+      "lcd_m5stickc-5": "5063c3addace44f63a3719ac50b909630241cec5f8acf2e61788afa10176b115",
+      "lcd_m5stickc-6": "2e20e12f29b6718acd4f70e4f90e426302807ff8f8f278b20b1a910ce247515d",
+      "lcd_m5stickc-7": "dfa74ce39612c81ab04a79c29f99f1cdacd9274f1e3a165c629341186a8d1e90",
+      "lcd_m5stickc-8": "ac3c3d8cf7d8ea3ed96a769a2653f55b1b8716db0acd02f938cf8571faf8532f",
+      "lcd_m5stickc-9": "15f0391f2b261f67e739588851ced896105b030251d73cfcb9d23128302b5337",
+      "mic-idle": "48b815dbca7c3b5cc40560724d9d4a520e5cc32fc38946ce69204dbd1e0357ac",
+      "quickstart-helloworld": "9f0e042130f8a3f37767395185b83fdb159c97a0e587f0b6aa701cfa3ad0f944",
+      "rtc-1-first": "ded3fde9e6bc00adf618e358462f0389088d2892b7e75a588a81454871ca7929",
+      "rtc-2-first": "bd136ff9ef068e4a4b8aa28127ee59ee7ba4cf37218f68e9cb4fc02ef19108f0",
+      "rtc-3-first": "1c99d741b562331b96791dc26de0040331d91275440a36e7adb3aac8b07533e3",
+      "rtc-4-first": "0550554cb2b60c693c4db55c44532673911f9a354ac00130182c3b8f70a65a5a",
+      "stock-button": "2463fc362f6acfacccb678a2c40aeb733e470ca793ec4a100d2e077baa641f03",
+      "system_m5stickc-2-first": "1c53bcb79b7b0875669fa0aee1f8ab6e35cb42e3ff1933feb57600b08dc325f2"
+    },
+    "stickc-plus": {
+      "button-1-held": "888dea34801a605063e9e99732f5a0127a1bca87ee70f5994c62acadf7c1fc4f",
+      "button-2-held": "e99974a1cd92896c0f27a1c72cfb0bc860aecd4f5e61728b5f5e215259fd6a76",
+      "button-3-held": "2ff6cf327405c27e3e7fef9fee0949b0e78d295e3065708b19bd4b62cafa174d",
+      "button-4-held": "83b15ce95278ec5f46e4846c84e30078274b53f0075150febc0ee2e82d9fb19c",
+      "button-5-idle": "a7250b1e2b22a2359cc43cd643c7616dc17a05e8ce5f8326848a483a68c0880c",
+      "button-6-held": "96ae6add94683a15af10045e550e4566e24c1036d1776a51af2a9eee973c6d2f",
+      "button-7-idle": "5ab4a468a4cdacdaee57c5951f8b965ddb8bb80bfec743dc75e5554100166666",
+      "button-8-held": "192fcc2669ce61464e6e981e17997a2550d10725e8a7fd5d4ca68f1047757390",
+      "button-9-idle": "34d7fa4920d7cc28e66a089376c01933980691c04a0c9e13e0426d25c0c65467",
+      "buzzer": "892df1588bc1e7b9b2830ecdd728ae5f33f794dc3e2728d74954d2e206be7d4b",
+      "display-1": "d12af2354876377a3047282ce27680d58095415fcac73e0156762b47212b04c8",
+      "display-10": "b8a766a3b6cc6fa57c164debf92ca145c61f772b8515c9845c6872c14657b000",
+      "display-11": "a3118e2fa919326ae07f005d488e80a08116da235eb6d3f91a2799e6e0b17038",
+      "display-2": "9fc8f3567f62a2dbc4a2de298e91b121535df89d4cea8b3a52350bba09126b0a",
+      "display-3": "fd8837bac9ab53bce5d5fb5f7ed853075e60ade4c9743c58161c9df65985c47b",
+      "display-4": "d45c1e56b89df6084ca9fc43af45dfc4c108fa9303a88512fd42daad6eee23ce",
+      "display-5": "282561b7681766c8f0c71eb9b40ba0fb04fb1186c78215704f43736888024e5e",
+      "display-6": "968032a976a6ab34d1fe84fbc725b4a13d139599a5c911f5c4bc71a28f7daf68",
+      "display-7": "849e744121255d6a9f7856c40986f56b39482797c5300f21469758692ba4375a",
+      "display-8": "f1ba0b496701350b9a4426070bff4e8a96bfde573eca0e95ab02ed44afd7894a",
+      "display-9": "c219690b582a16cf551e2ec801452c65cfbf4bc3ec3fde1295578d204a287cf9",
+      "imu-first": "7cd2b87fee0ef84064440dae694cf2a0fa7af0817059e90a1dba67cff7e07c0c",
+      "mic-idle": "cafb6ee55228503e6fcdb176de0dcb4630d3bc92531babe45099611f430604af",
+      "power-1-first": "64c8255d142167fced09df1d287f26f7744924e1e3dc225bcbaf47ddb0bc1cbd",
+      "power-2": "091c5aafad0a5c4da5fd8e1f632dfebbc2b1370b013da3beb49ea96947a9c159",
+      "power-3-first": "e739748b9774bc75318f3b727aba0ce1b057aca5617d8e979b4f63bb6dec5324",
+      "power-4": "51b933338c0a917750102653ffd571fdc8c1d2b7f08fcf766c943a8fcaa1b8c6",
+      "power-5-first": "0a87807d9c41e40d93cdef25205fed3ad1f7c515a4656a2ffc86476e84e78ad2",
+      "quickstart-display-text": "7c66d997cd0976b3a0f24e3ca84dc815bc8e3c2f40a1fa6cc7ac0d0d70aa558c",
+      "stock-button": "6e82447cc87695703dc973a3d2bac00e34619bd5d011970df19f548923241cb2"
+    },
+    "stickc-plus-se": {
+      "battery-first": "76c34229b01a81e4401b7f3251e98cc86e818e375fdab8d2aced53660e5e1849",
+      "button-held": "4241d8be2461d6444c60d5cca6263417a303af6e9d0bda63ec26ce132b0b8612",
+      "display-first": "ec4b2bae22a0bc8516d9deba500b09a171d8e17c4a9a31df5841234ef3b1d730",
+      "ir_nec": "d73af24be9df6bde3c56db6fb1b3dc6081ee8aa092756dbcf939d2f632dcf65d",
+      "mic-idle": "8e85f5f98100e55722fc419d760b3e76fac85127a12f78be3790990cb1319e1b",
+      "quickstart-scrollgraph-first": "9b7bebf1eed5f422f22e513825da33c5b9ac8ca66ddc570bd8b06b078736e29a",
+      "speaker": "3e16d4b062dd0103e0d43442e5706c61b3c9885719ccd5f065cc3726ef414f8a",
+      "stock-button": "0c7055bb8e64afe1d8fa4fd4bdc0961ca0d6366351aca5d6c83eaaf72155ee88",
+      "wakeup-idle": "921ada10019f9e4c9990352d5edd0a94f191e77be3460cb8616c605e293fe0a8"
+    },
+    "stickc-plus2": {
+      "battery-first": "a9fcbe8608c541b9de39399e6d535c0e097752201e041cacc1f87ae9b0a7a09a",
+      "buzzer": "5582c83519a02dd7af8034b966065256cf90244129437c09bf0bd82cee66e6de",
+      "display-first": "499ff2c14be1e2cc6424f4855bcec2ce01de37dca2c9b08efd796611b5b4fb4f",
+      "imu-first": "abfb648a8e8493df181e049ce8d8f547bd1b211d29c0740fd4df329924778ddf",
+      "ir_nec": "c5648898ff9354b5c618d7bcb7b2f8454a786af134177ce985a04ed834cec055",
+      "led": "bc93ea3cf0931072c3d03a296cabc8a51c398be21296e0ac5285396392f40e34",
+      "mic-idle": "fb7b241abbb1168d8f97286b4f5ab1ad0c37a7efb9c9205f18e443547d095791",
+      "quickstart-display-first": "b660a3cf47a64ed3e5506e164f4ca8f1b431c3f77c79693b1c9e5a074b3fba35",
+      "rtc-idle": "b7c2850ec9a3d3be1a46722261207e46ceba6976991e9cc78f56eaa1b25ea055",
+      "stock-button": "712fd8ca7d232ca84b1214610b7b7933bca4f19233258736d0db33147b4342dc",
+      "wakeup-idle": "83c12e633a21f5bf55a2dc8ae8933d1103312e4fa00dca190116544154d693a3"
+    },
+    "m5stick": {
+      "factory-idle": "84228dfb6f0dd9b84b63c33f93a53545d8d43658893f432e3eaf4313923bffca",
+      "probe": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0"
+    },
+    "stickt2": {
+      "factory-button": "bb33ffd41f9c6f9235b2fb44eac893b7ce6f70879f48eed9cb1ff75ef9419cd7",
+      "probe": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0"
+    }
+  },
+  "media_inputs": {
+    "paperdiy": {
+      "sd_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+      "mic_sha256": "55dc06fbe30596d35016860f9c95a2c621332655bc7218154bcefc271a2b999f"
+    },
+    "papers3": {
+      "sd_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46",
+      "mic_sha256": "55dc06fbe30596d35016860f9c95a2c621332655bc7218154bcefc271a2b999f"
+    },
+    "papermono": {
+      "sd_sha256": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea"
+    },
+    "papercolor": {
+      "sd_sha256": "59c4acc036d6e16b1c9153ebdb55669395b16edf02dc77ce01dc0af2144f9d46"
+    }
+  },
+  "execution": {
+    "environment": "Native arm64 macOS virtual-device validation",
+    "recorded_at": "2026-11-27T08:39:06.204370+00:00",
+    "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+    "binary_sha256": {
+      "esp32sim": "91f5732aa140d270fb0175404c68110a6dd510998813df1e68fdd60e2ce2758b",
+      "esp32sim-p4": "2715ff0fccdd2762e556b3185bebf85fdb8756f257ec4adcb427f6db21b01290"
+    }
+  },
+  "checks": [
+    {
+      "layer": "build",
+      "status": "PASS",
+      "detail": "Native release CLI and native/WASM Clippy"
+    },
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "detail": "Cumulative virtual-device gate completed with measured intermittent LoRa receive exceptions"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "Physical hardware and browser guests are outside this native integration gate"
+    },
+    {
+      "layer": "delivery",
+      "status": "PASS",
+      "detail": "Fork branch and milestone tags read back from remote"
+    }
+  ],
+  "evidence": [
+    "evidence/gate-summary.json",
+    "evidence/instruction-sentinels-summary.txt",
+    "docs-defects.md"
+  ]
+}
