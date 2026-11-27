@@ -16,8 +16,8 @@ idle control and exited normally.
 ## Batch follow-up
 
 22 of 25 Arduino cases passed. Three cases expose documentation defects
-in the original AtomS3 serial examples. All seven factory UIFlow2 catalog
-images passed stock console and input validation. The follow-up records
+in the original AtomS3 serial examples. All seven boards passed stock UIFlow2 console
+and input validation. CAM and M12 share the same catalog image. The follow-up records
 both native regression matrices, source and binary identities, and the
 remaining model limits.
 
