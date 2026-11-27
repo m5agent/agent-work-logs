@@ -59,3 +59,20 @@ An isolated Core2 UART-REPL lease used the same stock base with the
 service-generated bootstrap. The original Home/Settings test used the
 unmodified stock image. Each assertion was measured in its own lease and
 bound to its firmware and runtime identity. Physical devices were NOT RUN.
+
+## Corrected reviewer saved-snapshot run
+
+The Dial fixture supplied the same encoder options without treating the
+semantic rotary action as a raw key name. The prior combined request had
+added a second unrelated raw key probe. The Cardputer job retained the same
+SD image and minimum completed-block threshold.
+
+| Saved-snapshot job | Flag off | Flag on |
+| --- | --- | --- |
+| Dial encoder | QEMU, SIM_VERIFIED | esp32sim, SIM_VERIFIED |
+| Cardputer SD read | QEMU, SIM_VERIFIED | esp32sim, SIM_VERIFIED |
+
+All four jobs reported submission disabled. The Dial job observed three
+delivered detents and 12 GPIO transitions. The isolated reviewer suite passed
+369 tests. The default-off reviewer change is staged separately from the
+Device Service source. This execution did not update resident services.
