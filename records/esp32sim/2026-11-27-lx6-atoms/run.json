@@ -1,0 +1,1007 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "branch": "m5/batch-lx6a",
+    "commit": "03b35b0f3f5880e4b00d1967c90e8e2c6f98241a",
+    "compiled_source_commit": "201a52f0bbd86e42d500ae061296afb43db7d99b",
+    "fixture_commit": "2654a8f30c212608724a079cd6d69ee715275746",
+    "arduino_docs_commit": "7219cc9286c39b463da84053deee40bc234625db"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "models": [
+      "atom-lite",
+      "atom-matrix",
+      "atom-matrix-v11",
+      "atomu",
+      "atom-echo"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "boards": {
+      "atom-lite": {
+        "cli": "m5stack-atom-lite",
+        "firmware": {
+          "stock": "8d13d287e18c56a8a27e5bf1617dca81a1c6d847dc302f034f09854753c184d0",
+          "button": "b07b7c8728d9c06c37ecc401858a8ad113a30995a52502b5c9b40c97ba19937e",
+          "quickstart-logoutput": "2203630d66d7c866c1f1681d08e567094685f5a839005a9f59a84492a480bd49",
+          "ir_nec": "c975fad25c1c9dc1f1a6a86bffeb6413718ba37dd289b24425011f9701cae73b",
+          "rgb": "b76ed7027fa1c4f4b11628d8ecabbacc6c1c210385e76d62f1148a82c25b7b2c",
+          "imu": "d953190ecd176b1e93a8164c16c4037fe548d96c68bd002ac408095b8b3e3618"
+        },
+        "cases": {
+          "button": {
+            "status": "PASS",
+            "evidence": "two GPIO39 pulses and idle control"
+          },
+          "rgb": {
+            "status": "PASS",
+            "evidence": {
+              "red": true,
+              "green": true,
+              "blue": true
+            }
+          },
+          "ir_nec": {
+            "status": "PASS",
+            "evidence": {
+              "gpio12_frames": [
+                "aa55ff00",
+                "a956fe01"
+              ]
+            }
+          },
+          "quickstart-logoutput": {
+            "status": "PASS",
+            "evidence": "UART0 loop log counts"
+          },
+          "imu": {
+            "status": "PASS",
+            "evidence": "Matrix-only example; Lite serves as the no-IMU control."
+          },
+          "stock-repl": {
+            "status": "PASS",
+            "evidence": {
+              "board": [
+                "128"
+              ],
+              "button": [
+                "0",
+                "1",
+                "0"
+              ],
+              "rgb": true
+            }
+          },
+          "stock-startup": {
+            "status": "PASS",
+            "evidence": "ROM to stock MicroPython prompt"
+          }
+        },
+        "receipts": {
+          "button-idle": {
+            "return_code": 0,
+            "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+            "simulator_log_sha256": "e322881b80bbb7819d3c5fdcd5b63a5616fe7b5ec40c3d73d3bf5b81d87e2e74"
+          },
+          "button": {
+            "return_code": 0,
+            "serial_sha256": "bd83e9d1cdb385bc11723817637494b469e913cc29e6bcdd534b85d5875088eb",
+            "simulator_log_sha256": "5b301b45ac017ae58ae32f1b6e5e5b11f92c68023e6ef965c3aeaa5864a3a23e"
+          },
+          "imu": {
+            "return_code": 0,
+            "serial_sha256": "0dd4d81e03420d9c50cbfc22579b760dc3cda3583c1ce8f0d2747e8828f63df5",
+            "simulator_log_sha256": "62318ea641969801929de37e631ec43fa5f63d5b1194cdae7fac258f577d95fb"
+          },
+          "ir_nec": {
+            "return_code": 0,
+            "serial_sha256": "9c87466108bccd986b18431cd6a334fb8972a0c67ac7829d3a9194c14c79b510",
+            "simulator_log_sha256": "f05b53f206799a260477393ef33860204bf4500f49001dab70bb2c701202486a"
+          },
+          "quickstart-logoutput": {
+            "return_code": 0,
+            "serial_sha256": "b57a209ab568a82f8003ac5708f03d6b3a6dcf1fa5bcea8977627fe159ace0f1",
+            "simulator_log_sha256": "57282f1d247cd0134ee323abca959c1a12cd4a5e4c0712e749556e7665aa29da"
+          },
+          "rgb-blue": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "b1e23798377ca9e16efb0ca0c6afbe57626ec5ab1e7b16d202efe92ca96acda8"
+          },
+          "rgb-green": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "d46efd56baaa9ece6d398fb31a782bd2e386132b926d607c893c322e5127055c"
+          },
+          "rgb-red": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "8fe60e770d6810c90b80f54bafadfe40e1792ab6f7b9f4d3e3f006c00aea65ca"
+          },
+          "stock": {
+            "return_code": 0,
+            "serial_sha256": "b0b13df55df3da09ef36ccedc8dd53069bb53b40f8a3e98fc1477c62d70896e9",
+            "simulator_log_sha256": "7b13cc9cae070f035569c08d9c8212d860de53ec2fca0e4ca762686cd352e347"
+          },
+          "button.script": "0dfdd59d0090222f36ad15a72221fc6c6c6b5a27771200f392c78197831d7cce",
+          "stock.script": "9fb064a1d43239c9d82f336ff5e7a0bba5521a92cecf4416bca22080e349156d"
+        }
+      },
+      "atom-matrix": {
+        "cli": "m5stack-atom-matrix",
+        "firmware": {
+          "stock": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+          "button": "c283254c6ad8c555551e05ac438c50cfbcffca69df01d7e47157d042d4f6e324",
+          "quickstart-logoutput": "6316fe4627c432f2c8cba86e870e2c936a9323959f53fb2900553564d1949bd1",
+          "ir_nec": "a505ceed7f46587a1b1ea0a812aaf00aa6d6157e3b7538a557f3d63a10ba3dc9",
+          "rgb": "a278168aa14afdff6258bb37d24a883a86693dfde1ec9246253c492af0ab78a3",
+          "imu": "5a32d162bdbcb0e2ac145a8248526b971c0f42ec12ba8beb9dc76a830b7c68ff"
+        },
+        "cases": {
+          "button": {
+            "status": "PASS",
+            "evidence": "two GPIO39 pulses and idle control"
+          },
+          "rgb": {
+            "status": "PASS",
+            "evidence": {
+              "red": true,
+              "green": true,
+              "blue": true
+            }
+          },
+          "ir_nec": {
+            "status": "PASS",
+            "evidence": {
+              "gpio12_frames": [
+                "aa55ff00",
+                "a956fe01"
+              ]
+            }
+          },
+          "quickstart-logoutput": {
+            "status": "PASS",
+            "evidence": "UART0 loop log counts"
+          },
+          "imu": {
+            "status": "PASS",
+            "evidence": {
+              "samples": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.5,
+                  -0.25,
+                  1.0,
+                  125.0,
+                  -49.99,
+                  25.02
+                ],
+                [
+                  -0.75,
+                  0.38,
+                  0.25,
+                  -99.98,
+                  80.02,
+                  -30.03
+                ],
+                [
+                  -0.75,
+                  0.38,
+                  0.25,
+                  -99.98,
+                  80.02,
+                  -30.03
+                ]
+              ],
+              "idle_samples": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          },
+          "stock-repl": {
+            "status": "PASS",
+            "evidence": {
+              "board": [
+                "141"
+              ],
+              "button": [
+                "0",
+                "1",
+                "0"
+              ],
+              "rgb": true
+            }
+          },
+          "stock-startup": {
+            "status": "PASS",
+            "evidence": "ROM to stock MicroPython prompt"
+          },
+          "stock-layout": {
+            "status": "PASS",
+            "evidence": {
+              "8": [
+                255,
+                0,
+                0
+              ],
+              "20": [
+                0,
+                0,
+                255
+              ]
+            }
+          }
+        },
+        "receipts": {
+          "button-idle": {
+            "return_code": 0,
+            "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+            "simulator_log_sha256": "ad6f66b16a33934d4af44ad39344be64f01dedd763cc7671e78f1b97f8d4d8f6"
+          },
+          "button": {
+            "return_code": 0,
+            "serial_sha256": "bd83e9d1cdb385bc11723817637494b469e913cc29e6bcdd534b85d5875088eb",
+            "simulator_log_sha256": "81494c14e8f471a81caea7d99e9d173bea15a37e05e8584d304ed780514d0515"
+          },
+          "imu-idle": {
+            "return_code": 0,
+            "serial_sha256": "7e70b7ab90f746d8c8b6f9c62532cb9fb925ec00955e9440b1cdf4a46787db2b",
+            "simulator_log_sha256": "6047b12e15ecaf69003e3db5ce38f91db6ac8a0240911b93cb210128fc83fbcd"
+          },
+          "imu": {
+            "return_code": 0,
+            "serial_sha256": "9aaf7593da4d0f3edb34d4f1f6c6b26e954fe8482e521753a6274362838a99f7",
+            "simulator_log_sha256": "84f911a9b3b237466c31856585cb87fc7e1e96168eb1183fcdd4f6c18fb2e96f"
+          },
+          "ir_nec": {
+            "return_code": 0,
+            "serial_sha256": "9c87466108bccd986b18431cd6a334fb8972a0c67ac7829d3a9194c14c79b510",
+            "simulator_log_sha256": "5a81c7e9e4d1159d2b032d54091dbbc08d3fe783a942cd46328c203656b74253"
+          },
+          "quickstart-logoutput": {
+            "return_code": 0,
+            "serial_sha256": "3f797b272beef40bb833c4d916e7431906a0eb328120c6b489e368f4e2260138",
+            "simulator_log_sha256": "974dbd2cb926da24d52371efc54c013b5f0e9769ff0bd06ecded1ca57805c0f9"
+          },
+          "rgb-blue": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "fa00ab1c959b7095ca247102aae984dc65940b2f4db26792a2d6914566fae676"
+          },
+          "rgb-green": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "8c3f1fb20c53f1fba236ec702979092e4d07b2e8a7d2741967fff73f9b5b6751"
+          },
+          "rgb-red": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "b88dd3107d35cc30632b13d98c5e4b61a5b2122562e3aae5118c2d0143312688"
+          },
+          "stock-layout": {
+            "return_code": 0,
+            "serial_sha256": "83e85651a9f72c8bcf83aa9568c26ab1e8042f56c6615bd409a57e8497d6d967",
+            "simulator_log_sha256": "704ac7f8344d4010c2dbb6e439265c82acb0c2e1abdaf8141016ac08ce425eb6"
+          },
+          "stock": {
+            "return_code": 0,
+            "serial_sha256": "6639d3c07dfd2df3171230668e0c68337d27876edc29560a85c991b59cadb2a7",
+            "simulator_log_sha256": "2862522012e42a0363aa8fb581919906c6e3db46845df8c64958e8c17b8c7cb6"
+          },
+          "button.script": "0dfdd59d0090222f36ad15a72221fc6c6c6b5a27771200f392c78197831d7cce",
+          "imu.script": "26b4ec379dc4f46a7ffdf80ce6ca7e12100ed0d840e09b08bd8cac3b61298f78",
+          "stock.script": "9fb064a1d43239c9d82f336ff5e7a0bba5521a92cecf4416bca22080e349156d",
+          "layout.script": "0fe55983f660fdc08b50b813d995b9c1cc12dd9533c73b95d8038766c9be2ff3",
+          "stock-layout.png": "13333c34d806a2406d37933343d2d8736a04d4649eb17ce5484a43ff6f954fa9"
+        }
+      },
+      "atom-matrix-v11": {
+        "cli": "m5stack-atom-matrix-v11",
+        "firmware": {
+          "stock": "1591382c9b46f10549faa0053b4036aa55f5c8131867b2f039d2650982e7886d",
+          "button": "633f225df064654ce3ace93a340c0b7119c43f54f9604eca303cce74bdd95561",
+          "quickstart-logoutput": "d50a51243fc69fd69c7bdbde095a786cc9831fb2c2a2ec4586e7d7c21b9c8a87",
+          "ir_nec": "7ed63cd866244b28070aac44d54e52e85347e438954ba3d36de863630bc8f501",
+          "rgb": "832797b24f155fdac3d47d24de0aae74b09932d51417ef3593743331bda2740f",
+          "imu": "18af09cf8e05d9a288c6870d780fb15fa0c1cb0b94470f71c03f3c8f20b3dfb2"
+        },
+        "cases": {
+          "button": {
+            "status": "PASS",
+            "evidence": "two GPIO39 pulses and idle control"
+          },
+          "rgb": {
+            "status": "PASS",
+            "evidence": {
+              "red": true,
+              "green": true,
+              "blue": true
+            }
+          },
+          "ir_nec": {
+            "status": "PASS",
+            "evidence": {
+              "gpio12_frames": [
+                "aa55ff00",
+                "a956fe01"
+              ]
+            }
+          },
+          "quickstart-logoutput": {
+            "status": "PASS",
+            "evidence": "UART0 loop log counts"
+          },
+          "imu": {
+            "status": "PASS",
+            "evidence": {
+              "samples": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.5,
+                  -0.25,
+                  1.0,
+                  125.0,
+                  -49.99,
+                  25.02
+                ],
+                [
+                  -0.75,
+                  0.38,
+                  0.25,
+                  -99.98,
+                  80.02,
+                  -30.03
+                ],
+                [
+                  -0.75,
+                  0.38,
+                  0.25,
+                  -99.98,
+                  80.02,
+                  -30.03
+                ]
+              ],
+              "idle_samples": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  -1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              ]
+            }
+          },
+          "stock-repl": {
+            "status": "PASS",
+            "evidence": {
+              "board": [
+                "141"
+              ],
+              "button": [
+                "0",
+                "1",
+                "0"
+              ],
+              "rgb": true
+            }
+          },
+          "stock-startup": {
+            "status": "PASS",
+            "evidence": "ROM to stock MicroPython prompt"
+          },
+          "stock-layout": {
+            "status": "PASS",
+            "evidence": {
+              "8": [
+                255,
+                0,
+                0
+              ],
+              "20": [
+                0,
+                0,
+                255
+              ]
+            }
+          }
+        },
+        "receipts": {
+          "button-idle": {
+            "return_code": 0,
+            "serial_sha256": "51c0b73ce5584cf316e32b43399f8d296f7095401808e4fa6237a89c56edf2a9",
+            "simulator_log_sha256": "0dd0224c42285259fa8eb08ab757ed95f36d72f7a447721f54abd1af869d51c3"
+          },
+          "button": {
+            "return_code": 0,
+            "serial_sha256": "bd83e9d1cdb385bc11723817637494b469e913cc29e6bcdd534b85d5875088eb",
+            "simulator_log_sha256": "951bba9b21be3e18a132077548c6e83a8df3ef7f1738eaa939691170c67cbb8f"
+          },
+          "imu-idle": {
+            "return_code": 0,
+            "serial_sha256": "7e70b7ab90f746d8c8b6f9c62532cb9fb925ec00955e9440b1cdf4a46787db2b",
+            "simulator_log_sha256": "76f33138ed6811d3146251931fca97fa36aea4d6d7824fef1ece2fbc2e0de6fa"
+          },
+          "imu": {
+            "return_code": 0,
+            "serial_sha256": "9aaf7593da4d0f3edb34d4f1f6c6b26e954fe8482e521753a6274362838a99f7",
+            "simulator_log_sha256": "6ced13e61c02445c5dc8b9314c870762089297a1558b37c3d86572a3f0ca4e35"
+          },
+          "ir_nec": {
+            "return_code": 0,
+            "serial_sha256": "9c87466108bccd986b18431cd6a334fb8972a0c67ac7829d3a9194c14c79b510",
+            "simulator_log_sha256": "3391becb9b97f3e3b82cff1045ef0da2ca08e2cc9c67e9f2e324f07fb6fe755b"
+          },
+          "quickstart-logoutput": {
+            "return_code": 0,
+            "serial_sha256": "075ddb861b41581cdcce1e8862cd1890f0353fbd4a6a97b50a9c6e99631129de",
+            "simulator_log_sha256": "16ca3f369ba4200847a3066280257d7c9e81aef6bbc4484f6f6c248448e7cc76"
+          },
+          "rgb-blue": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "1786cbbc21c26ce6c8c6efab73d52ae43770ae618e5e664781bd131f0f95e1be"
+          },
+          "rgb-green": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "decbc65db9ef8b2d96465a1984a15139a4695b488886974933d48c468ec808aa"
+          },
+          "rgb-red": {
+            "return_code": 0,
+            "serial_sha256": "26d8aea8d78dcc4c1cb9feb5b211dbb300329b9cd8a19ba8405eed81ac26c451",
+            "simulator_log_sha256": "4bc82801e607b8cb10a262040358557e9471459be7cd284e00463fc6673cd939"
+          },
+          "stock-layout": {
+            "return_code": 0,
+            "serial_sha256": "cd296eba8d3d249cd50b981973a4c5be16c658f12b2e18ca5d15999ed32885bb",
+            "simulator_log_sha256": "db240cfb58127d6fc52335b34ef9b346c1ce486c001f972430978dfb5e8c780e"
+          },
+          "stock": {
+            "return_code": 0,
+            "serial_sha256": "dd192f7c0162a83f8ebe385a64ea0cc9e0eb87a287635ef03a321852c20ff8d0",
+            "simulator_log_sha256": "a984b48438ccd23aa5e02c8ca16825883395fd00e5ee3e0f2616e1e180ed1c54"
+          },
+          "button.script": "0dfdd59d0090222f36ad15a72221fc6c6c6b5a27771200f392c78197831d7cce",
+          "imu.script": "26b4ec379dc4f46a7ffdf80ce6ca7e12100ed0d840e09b08bd8cac3b61298f78",
+          "stock.script": "9fb064a1d43239c9d82f336ff5e7a0bba5521a92cecf4416bca22080e349156d",
+          "layout.script": "0fe55983f660fdc08b50b813d995b9c1cc12dd9533c73b95d8038766c9be2ff3",
+          "stock-layout.png": "13333c34d806a2406d37933343d2d8736a04d4649eb17ce5484a43ff6f954fa9"
+        }
+      },
+      "atomu": {
+        "cli": "m5stack-atomu",
+        "firmware": {
+          "stock": "affa252d21f223bbe21cf1767604d345df97b2cb8dd62bc76993588d9bd9eda7"
+        },
+        "cases": {
+          "stock-repl": {
+            "status": "PASS",
+            "evidence": {
+              "board": [
+                "130"
+              ],
+              "button": [
+                "0",
+                "1",
+                "0"
+              ],
+              "rgb": true
+            }
+          },
+          "stock-startup": {
+            "status": "FAIL",
+            "evidence": "ROM to stock MicroPython prompt"
+          },
+          "stock-mic": {
+            "status": "PASS",
+            "evidence": {
+              "silent": [
+                0,
+                0,
+                0
+              ],
+              "733": [
+                0,
+                3119,
+                402662
+              ],
+              "1234": [
+                0,
+                3134,
+                400591
+              ]
+            }
+          }
+        },
+        "receipts": {
+          "audio-1234": {
+            "return_code": 0,
+            "serial_sha256": "8834b4ac49d68b7c5dda97aab37d611df2d0bdf40ba57df7bd3f4e3133b6806d",
+            "simulator_log_sha256": "3b927485fe82ff36107d06fe44013fffd659b2a5b2839a4301ff7170bdde0a67"
+          },
+          "audio-733": {
+            "return_code": 0,
+            "serial_sha256": "84a76d960678ab8a3726f7d21fcfa64445eb649090d39b2c5425c105a160f1b8",
+            "simulator_log_sha256": "d37220d69129cb960584f5169ad0fe8fbce5c449b6c8b93a745de357bd7fc9d1"
+          },
+          "audio-silent": {
+            "return_code": 0,
+            "serial_sha256": "0868740f12a1e88ba3492a80247d28b99ad4321806fcd3702d2a54863f2f673f",
+            "simulator_log_sha256": "3fae177416009aee81f634db5fcb8b52866f46ee1abccbadf01559d9da9dd86b"
+          },
+          "stock": {
+            "return_code": 0,
+            "serial_sha256": "6b868c34df2371e0694c00c5cc41d77afb64f957856eb5ded13e0f92f2479d66",
+            "simulator_log_sha256": "1edb7be1085811e68b9d6fd924bf90f6904cd906f33d09b9728120b292b1ce58"
+          },
+          "stock.script": "9fb064a1d43239c9d82f336ff5e7a0bba5521a92cecf4416bca22080e349156d",
+          "audio.script": "aa008c95126aff4c8a529413772c484d1f49751ff668151ee1e0f635d55de8f1",
+          "audio-733.wav": "8b8fbafe8679076454429756fa72f11d5f442c87381cc6a4285451d826a9e629"
+        }
+      },
+      "atom-echo": {
+        "cli": "m5stack-atom-echo",
+        "firmware": {
+          "stock": "8bae873945e85eff496670b9fbddcf7b5fecf31c99eba786fc15cce8c8e89472"
+        },
+        "cases": {
+          "quickstart-echorest": {
+            "status": "DOCS-DEFECT",
+            "evidence": "BaiduRest.cpp:175: WiFiClient declaration missing"
+          },
+          "quickstart-playmusic": {
+            "status": "DOCS-DEFECT",
+            "evidence": "LED_DisPlay.h:62: boolean declaration missing"
+          },
+          "quickstart-recordplay": {
+            "status": "DOCS-DEFECT",
+            "evidence": "LED_DisPlay.h:62: boolean declaration missing"
+          },
+          "stock-repl": {
+            "status": "PASS",
+            "evidence": {
+              "board": [
+                "142"
+              ],
+              "button": [
+                "0",
+                "1",
+                "0"
+              ],
+              "rgb": true
+            }
+          },
+          "stock-startup": {
+            "status": "FAIL",
+            "evidence": "ROM to stock MicroPython prompt"
+          },
+          "stock-mic": {
+            "status": "PASS",
+            "evidence": {
+              "silent": [
+                0,
+                0,
+                0
+              ],
+              "733": [
+                0,
+                3119,
+                402662
+              ],
+              "1234": [
+                0,
+                3134,
+                400591
+              ]
+            }
+          },
+          "stock-speaker": {
+            "status": "PASS",
+            "evidence": {
+              "samples": 38342,
+              "nonzero": 19168,
+              "rate": 48000,
+              "measured_hz": 440.042
+            }
+          }
+        },
+        "receipts": {
+          "audio-1234": {
+            "return_code": 0,
+            "serial_sha256": "fbf794fc7b8a5590bfde45fadd59d68230fb044b4375d7caba50b9e1fd453eab",
+            "simulator_log_sha256": "80bb435b6a3a4ed2641d8fec39ae45f0172eee2de4d57ae5af6b61b675664fc6"
+          },
+          "audio-733": {
+            "return_code": 0,
+            "serial_sha256": "ba00d7126b15104131d31d2965d5e3587e0e8337fe22e1a7dd61f8632a03ddf1",
+            "simulator_log_sha256": "906d193894152c23c7db5876fbddfc6e752df7b4fb752f200914fea4a62579f1"
+          },
+          "audio-silent": {
+            "return_code": 0,
+            "serial_sha256": "37213adbde999a59413cf8417198e86862c4002a64cba4b9b08570497a92659e",
+            "simulator_log_sha256": "e92b50e1f7e2417c6ed3628ca1dd31d964fd07c174b9c871187d6b4e614006f9"
+          },
+          "stock": {
+            "return_code": 0,
+            "serial_sha256": "3501970624b05bf1ee65de057cec505b4058a7db47b606f34c9a228fe978888d",
+            "simulator_log_sha256": "93f07b30c0b4a60a54808b3cd754bb8fbd0557a5d12a6eca2ee5c2968ec8af32"
+          },
+          "stock.script": "9fb064a1d43239c9d82f336ff5e7a0bba5521a92cecf4416bca22080e349156d",
+          "audio.script": "84a7681082baab5707d23b5167cc42c15eccd769bf739e5eee30510577f2eecc",
+          "audio-733.wav": "360883370757d932f08223be9a8229d2c46eddf0ea9745bee97714923f886b0b"
+        }
+      }
+    },
+    "controls": {
+      "bootloader/bootloader.bin": "a6354333c26d9d170ca1698b8e3193354d31613759a8566b32dff680757c8772",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "lx6_controls.bin": "b7926c3d0f3bb907f81d18e813193410ac60c23e5b2e1face1417bf5cb0bfe95"
+    }
+  },
+  "execution": {
+    "runtime_sha256": "7472af7951df6290b1a35fd42325d20e8f41f29a3470a814ff7fdf54dc74f4a7",
+    "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+    "build": "native release, LTO disabled",
+    "core_regression_firmware_archive_revision": "829cfe6bc14cbdff40b1f4980a5e1ea4f130f66c",
+    "instruction_sentinels": {
+      "s3-hello": {
+        "firmware": {
+          "hello-bootloader.bin": "7efecb4df4463ece11ab286068a505ecd174f66fd4aacc53d887fcb9c18f0579",
+          "hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+          "hello_world.bin": "d9142e72453e8b71f6903f4dd869a4ee09c34d94cfafcb4f4309f8d2bf9040c9"
+        },
+        "rom_sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+        "runs": {
+          "esp32sim-baseline": {
+            "core_insns": [
+              2658432,
+              1084186
+            ],
+            "runtime_sha256": "c91c02e0f0aff72daa99a1989c2f844191143f5e1f6d4ad180d62c41dd182fe6"
+          },
+          "esp32sim-201a52f0": {
+            "core_insns": [
+              2658432,
+              1084186
+            ],
+            "runtime_sha256": "7472af7951df6290b1a35fd42325d20e8f41f29a3470a814ff7fdf54dc74f4a7"
+          }
+        }
+      },
+      "classic-hello": {
+        "firmware": {
+          "classic-hello-bootloader.bin": "faa4ac0961a9ec6c02d865c874c82bfe0a01225491b89d54fe4b7393f712be2a",
+          "classic-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+          "classic-hello_world.bin": "fa4307fe9545e6599155ac38ad61205946b3f56e92890ad10a69c1592e120cdd"
+        },
+        "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+        "runs": {
+          "esp32sim-baseline": {
+            "core_insns": [
+              4342917,
+              431305
+            ],
+            "runtime_sha256": "c91c02e0f0aff72daa99a1989c2f844191143f5e1f6d4ad180d62c41dd182fe6"
+          },
+          "esp32sim-201a52f0": {
+            "core_insns": [
+              4342917,
+              431305
+            ],
+            "runtime_sha256": "7472af7951df6290b1a35fd42325d20e8f41f29a3470a814ff7fdf54dc74f4a7"
+          }
+        }
+      }
+    },
+    "controls_serial_sha256": "4bcbcb8764aa40f7a4a0312af9f483c62b620b1bf2c506a94824a36f9162826e",
+    "controls_vcd_sha256": "9fc3b0d925579b9eba3c0ce7419edb9265acd6c0e8c851b76c27a9f396239c29",
+    "bridge_transcript_sha256": "a5c276053f40095a8e434816007975f3a051aa832089ce8117e76b5de7a14076",
+    "bridge_firmware_sha256": "2203630d66d7c866c1f1681d08e567094685f5a839005a9f59a84492a480bd49"
+  },
+  "checks": {
+    "boards": {
+      "atom-lite": {
+        "button": "PASS",
+        "rgb": "PASS",
+        "ir_nec": "PASS",
+        "quickstart-logoutput": "PASS",
+        "imu": "PASS",
+        "stock-repl": "PASS",
+        "stock-startup": "PASS"
+      },
+      "atom-matrix": {
+        "button": "PASS",
+        "rgb": "PASS",
+        "ir_nec": "PASS",
+        "quickstart-logoutput": "PASS",
+        "imu": "PASS",
+        "stock-repl": "PASS",
+        "stock-startup": "PASS",
+        "stock-layout": "PASS"
+      },
+      "atom-matrix-v11": {
+        "button": "PASS",
+        "rgb": "PASS",
+        "ir_nec": "PASS",
+        "quickstart-logoutput": "PASS",
+        "imu": "PASS",
+        "stock-repl": "PASS",
+        "stock-startup": "PASS",
+        "stock-layout": "PASS"
+      },
+      "atomu": {
+        "stock-repl": "PASS",
+        "stock-startup": "FAIL",
+        "stock-mic": "PASS"
+      },
+      "atom-echo": {
+        "quickstart-echorest": "DOCS-DEFECT",
+        "quickstart-playmusic": "DOCS-DEFECT",
+        "quickstart-recordplay": "DOCS-DEFECT",
+        "stock-repl": "PASS",
+        "stock-startup": "FAIL",
+        "stock-mic": "PASS",
+        "stock-speaker": "PASS"
+      }
+    },
+    "shared": {
+      "UART0 baud": "PASS",
+      "strap reset sequence": "PASS",
+      "RMT WS2812 and NEC TX": "PASS",
+      "LEDC duty": "PASS",
+      "GPIO25 DAC": "PASS",
+      "RTC timer and retention": "PASS",
+      "PDM-to-PCM DMA": "PASS",
+      "SPI SD select and MISO arbitration": "PASS",
+      "physical measurements": "NOT RUN"
+    },
+    "workspace": {
+      "passed": 1975,
+      "failed": 7,
+      "ignored": 0,
+      "filtered": 34,
+      "suites": 151,
+      "status": "FAIL",
+      "log_sha256": "700cd76e74d426b226d56e73c607b6ea247983bdd128a3188724efcceb2f808e",
+      "command": "cargo test --release --workspace --no-fail-fast -j 3 -- --include-ignored --skip external_",
+      "previous_attempt": {
+        "status": "FAIL",
+        "test": "cosim",
+        "failed": 10,
+        "cause": "P4 hosted firmware fixtures were absent",
+        "log_sha256": "a05c9bcfba475a3278616dbebd50e227643573af3dc1d780c57000c3447901a6"
+      },
+      "failed_cases": [
+        "hosted_p4",
+        "hosted_p4_rev3",
+        "hello_world_p4_rev3_smp",
+        "hello_world_p4_smp",
+        "hosted_rawtp_rx",
+        "hosted_rawtp_tx",
+        "wifi_sta_is_refused_where_it_does_not_work_yet"
+      ],
+      "p4_comparison_base": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489",
+      "p4_comparison_base_binary_sha256": "c91c02e0f0aff72daa99a1989c2f844191143f5e1f6d4ad180d62c41dd182fe6",
+      "p4_comparison": {
+        "p4-hosted-station": {
+          "baseline": {
+            "core_insns": [
+              1440000000,
+              1434807456
+            ],
+            "serial_sha256": "1aa6b8126362c22a2705b356110a7a8b968833fd3c8e5d339fcc39eebede798d",
+            "simulator_log_sha256": "8a3daac617816830a491959ce178f179fe615bcbe6c5f7ad41b24c9cc07e37c7"
+          },
+          "201a52f0": {
+            "core_insns": [
+              1440000000,
+              1434807456
+            ],
+            "serial_sha256": "1aa6b8126362c22a2705b356110a7a8b968833fd3c8e5d339fcc39eebede798d",
+            "simulator_log_sha256": "a169604ffd657d99ddd2b8fb2c51bda46f63d32e8a95e3141643c5fae6b301a5"
+          }
+        },
+        "p4-hosted-rev3-station": {
+          "baseline": {
+            "core_insns": [
+              1440000000,
+              1434725360
+            ],
+            "serial_sha256": "7347ebf4a1142fe2c025ca8c4d8db686d3bcfa2be4da6d0342af67f64e820013",
+            "simulator_log_sha256": "1b7dec5b4204a734f73a3081ac18edaa71bfe1fc1e5593416d23dd1e868fbcac"
+          },
+          "201a52f0": {
+            "core_insns": [
+              1440000000,
+              1434725360
+            ],
+            "serial_sha256": "7347ebf4a1142fe2c025ca8c4d8db686d3bcfa2be4da6d0342af67f64e820013",
+            "simulator_log_sha256": "65614488535c3d5274e1d44fdbae7b4b930a15df2ac0d952fb88e92cfd067bbe"
+          }
+        },
+        "p4-hello-smp": {
+          "baseline": {
+            "core_insns": [
+              4320000000,
+              4315426314
+            ],
+            "serial_sha256": "2038cb68d9a3b6610aad61a276d091dcbca5badebe00d1343a1f6f59efeedf6f",
+            "simulator_log_sha256": "d463a5fe429c7e0ff5940d0e00bf6b53e7e4307589f97b573c9271fe1e27b592"
+          },
+          "201a52f0": {
+            "core_insns": [
+              4320000000,
+              4315426314
+            ],
+            "serial_sha256": "2038cb68d9a3b6610aad61a276d091dcbca5badebe00d1343a1f6f59efeedf6f",
+            "simulator_log_sha256": "047915c6054305b1355bd00b37357c6526afe6dcca28493fbfb1e562ac700855"
+          }
+        },
+        "p4-hello-rev3-smp": {
+          "baseline": {
+            "core_insns": [
+              4320000000,
+              4315277645
+            ],
+            "serial_sha256": "60beada6194767d34ade6d9b0a0f8594ec5c8df6801c20580696cac044012f8e",
+            "simulator_log_sha256": "7162d82bd7b775fd5cb30df787bea46f30bd032fba663a6143dc5b9c94c9347f"
+          },
+          "201a52f0": {
+            "core_insns": [
+              4320000000,
+              4315277645
+            ],
+            "serial_sha256": "60beada6194767d34ade6d9b0a0f8594ec5c8df6801c20580696cac044012f8e",
+            "simulator_log_sha256": "9a19227a93ea49788f95a55b4879bf3b196c861a8cd4b590f958edaeb10942a3"
+          }
+        },
+        "p4-hosted-rawtp-rx": {
+          "baseline": {
+            "core_insns": [
+              3600000000,
+              3594798272
+            ],
+            "serial_sha256": "5b51ba3aca27e355d8db294f3a546c595b4de3940c04f864ad15ab32eb4a74b3",
+            "simulator_log_sha256": "f4caf7088fae16bdd689c3f4e147a12f1ef8cc08c875e8174ff1a1872388f4d8"
+          }
+        },
+        "p4-hosted-rawtp-tx": {
+          "baseline": {
+            "core_insns": [
+              3600000000,
+              3594798272
+            ],
+            "serial_sha256": "dafee76a653fe710e11a6c239659d116dc2a7c4773dcbc3dba2f8ac816548471",
+            "simulator_log_sha256": "c0af321f8a975d413ab84156721ceb85923978c8d0311ac9a8392810fe70ea15"
+          }
+        }
+      },
+      "p4_wifi_sta_comparison": {
+        "exit_status": 2,
+        "identical_stderr_sha256": "dfa8352245631f463ce5754a0489cbca66b895065eea47117b4503673019f0a1",
+        "diagnostic": "P4 needs a WiFi co-processor (--coproc)"
+      }
+    },
+    "regressions": {
+      "cores3": {
+        "passed": 15,
+        "total": 15,
+        "status": "PASS",
+        "log_sha256": "e82c58e23ea124db720a6334227485627ef5dc923e694364912af1040deced74",
+        "firmware": {
+          "button": "58ea9e954d59f110737b02c776bfd290fe03f0e3d6dd51fc6a07607fcc16eb98",
+          "camera": "9ed07790339a940c71e7b312404340d05777e7c0b2a99d7430d2eb8626565ec8",
+          "display": "44c7912db911b32efb994e43bbb4ff7164265111e6c5efcfa8867bd86e2ff4c8",
+          "imu": "c56bf2ca6e37edfb2e1c1e02002a5a07d9ff0a301b8fbf9264f1819053bfefba",
+          "ltr553": "1a80525f57bc3d5f5b0d89476b8e5e5cb7e1b756af0387a2f19337aa0b72fa47",
+          "mic": "5de68729e19eb8d0b241bb68792e38f06cc8265fcc719f079da9c9e95e07e4e0",
+          "pic": "481694418ae5015b154de8d0f9641e6660a5965935fb9b9ec82baaa0975e1f12",
+          "power": "ac19c6fb345ee441bd9c6b25f313bf190928af5b9e74649a721cc9945ac33a2b",
+          "quickstart-bargraph": "5812186674963e0ba558e0ee8f65941cce49a7ab1b05a23c2b12046a5c7a1e58",
+          "rtc": "70e500981e57fef904e8c941865fffee9d2dcf0045fa4a9255acaa516f0d68c0",
+          "sdcard": "2a73d631e383ab932e38d2db43d100ca05fbb5023944cb184194fe1046d56f1b",
+          "speaker": "980f87ff390738e8b50c8819bf4050b8dc18c7d8a6edbe6936ea9ec70f245c78",
+          "touch": "a3b1a46231ade128d44c0f1394febcadcb236d86d68ab67008fc19ab4be48c27",
+          "wakeup": "758e03ff538f8b09780995ba1e5bbfde19d8ba2f82d4fc37c13a3ff9c3734999",
+          "wav": "e8f36a06ed036feec277119ecebb10e2443772a9c910323457ee2ea63c2a8d95"
+        }
+      },
+      "adv": {
+        "passed": 11,
+        "total": 11,
+        "status": "PASS",
+        "log_sha256": "6cce1b992f902a97e50ccc103dc5d8199685c70020b765241a9fcd4be15c8848",
+        "firmware": {
+          "battery": "ddcc555063a83c065b64abfcc720966d4f2117e44eb8a5403ec6a255530494e9",
+          "button": "00bd60f455a211d68b397e7008ff3c212acb420a0869e2deea5ee6d8ee601e2e",
+          "display": "67bbe34e0e965f6d0491668d45b8007f153ba80be6ab3f8ec2e31e0223ee7972",
+          "imu": "33639787c387413681e3b2837e115c727d53b7d58fe7fd3796f2e61b8afdc1a4",
+          "ir_nec": "303e9c9c65c38332db862737b4ba78d8e0c35176c1dfd0f8e447c8dc40c39ae4",
+          "keyboard": "ff5b8b152ba201852ded8684ca517bdf63ea155961ff99e9ff19fad11f4fcf78",
+          "mic": "9a1e1a36dd4499d992254824e85a956229874c0a279146c43e599657d829bcd5",
+          "quickstart-display": "db48605950abbd5423b62d36712dff9ccbe7db9f4997b9a88a6cf8c87111899e",
+          "sdcard": "33ee9fc3513bc4e46cc5231b460ddca3e0966fbaa5874ceb8ec506a67fab8aaf",
+          "speaker-sd-wav": "b0b39a6f07f6c03027642c5876877d2a2e5546a86db92c8607ba93f75e8e1241",
+          "speaker": "1a40ab54d783e5850d09bcfa10e182f8ac43662bf4fa059b75810815f4bf93c1"
+        }
+      }
+    },
+    "clippy_native": "PASS",
+    "clippy_wasm": "PASS"
+  }
+}
