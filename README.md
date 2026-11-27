@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | ESP32-S3 small display ports | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-s3b-small-displays/) |
 | 2026-11-27 | esp32sim | NanoC6 and Nesso N1 native replay | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-c6a-board-replay/) |
 | 2026-11-27 | esp32sim | StamPLC and StackChan S3-C boards | PARTIAL (native virtual-device validation, four-byte and seven-byte NFC reader) | [查看](records/esp32sim/2026-11-27-s3c-stamplc-stackchan/) |
 | 2026-11-27 | esp32sim | AtomS3 native board profiles | PARTIAL (virtual-device validation) | [查看](records/esp32sim/2026-11-27-atom-s3-batch/) |
