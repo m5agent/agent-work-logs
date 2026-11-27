@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "code_change",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "commit": "bd2dcb7e14d25baede0946a5205ced6b2c123be3",
+    "base": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "model": "classic ESP32 bare module, ECO3 mask ROM"
+  },
+  "firmware": {
+    "sdk": "ESP-IDF v6.1",
+    "runs": {
+      "2m": {
+        "psram_mib": 2,
+        "firmware": {
+          "bootloader/bootloader.bin": "ad6242511cd5b9c350aa2711ab1433a9fe538d80182b03f18d9d76f29985db40",
+          "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+          "lx6_memory.bin": "6fe072488d6d8847210b4cc2503cbb8e78cdff3228259bd69245cfe50e7128a6"
+        },
+        "markers": [
+          "LX6 flash bytes=16777216 last_word=25f04adb OK",
+          "LX6 PSRAM physical=2097152 heap=2097152",
+          "LX6 PSRAM allocation=2064384 boundary readback OK",
+          "LX6 memory PASS"
+        ],
+        "log_sha256": "cf78af4c680cb653fb96bdd8c4c12f412afaf2c0e9428a9124733b6fb03743e4"
+      },
+      "8m": {
+        "psram_mib": 8,
+        "firmware": {
+          "bootloader/bootloader.bin": "ae45b613e4dafcbcd10bf00e5edaf38d561d0e2adb178999ea22c9d876037bb1",
+          "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+          "lx6_memory.bin": "f6e23ecf8c48a6bb41352bc3d1543d97978860484627278ec1988ea6ffde7493"
+        },
+        "markers": [
+          "LX6 flash bytes=16777216 last_word=25f04adb OK",
+          "LX6 PSRAM physical=8388608 heap=4161536",
+          "LX6 HIMEM capacity=4227072 pages=127,128,255 OK",
+          "LX6 memory PASS"
+        ],
+        "log_sha256": "e0189bfdc084e0faf0f56ef72bac07f1f5fae00faa63390cdc4cd9ff33d3060b"
+      },
+      "4m-control": {
+        "psram_mib": 4,
+        "firmware": {
+          "bootloader/bootloader.bin": "ae45b613e4dafcbcd10bf00e5edaf38d561d0e2adb178999ea22c9d876037bb1",
+          "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+          "lx6_memory.bin": "f6e23ecf8c48a6bb41352bc3d1543d97978860484627278ec1988ea6ffde7493"
+        },
+        "markers": [
+          "LX6 flash bytes=16777216 last_word=25f04adb OK",
+          "LX6 PSRAM physical=4194304 heap=4161536"
+        ],
+        "log_sha256": "d0ed6c53d7366a071f034d3d2e05d7e59fc0b61d58c8f432b00dfec2b8a61e5c"
+      },
+      "2m-first": {
+        "psram_mib": 2,
+        "log_sha256": "3155d8b7ecabe22fcf56bcd09c9869c2a0009f85185121ad0bebf3f5c7053afc",
+        "status": "FAIL",
+        "reason": "The initial fixture assumed the heap was as large as the device even with eight MMU slots reserved."
+      }
+    }
+  },
+  "execution": {
+    "runtime_sha256": "0f3f9582d0e30a1fd70fe4c9612f3cf39d63fe7fc67bf0a38e46ca241ac9d510",
+    "rom_sha256": "920b70635440517866aab2230964a570d2cf2b676658d93c52fbac108c1cca31",
+    "flash_mib": 16,
+    "cpus": 2,
+    "recipe": "https://github.com/m5agent/esp32sim/blob/bd2dcb7e14d25baede0946a5205ced6b2c123be3/docs/fixtures/lx6-memory/README.md"
+  },
+  "checks": [
+    {
+      "name": "2 MiB allocation boundary",
+      "result": "PASS"
+    },
+    {
+      "name": "8 MiB HIMEM pages 127, 128, 255",
+      "result": "PASS"
+    },
+    {
+      "name": "4 MiB negative control",
+      "result": "PASS"
+    },
+    {
+      "name": "16 MiB flash last word erase, write and read",
+      "result": "PASS"
+    },
+    {
+      "name": "physical boards and browser capacities",
+      "result": "NOT RUN"
+    }
+  ]
+}
