@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "report",
+  "overall_status": "PASS",
+  "title": "Classic Core family firmware replay",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "8e17dcd553fbd59b2dc9034cb5bd8eecb0884302",
+    "commit": "ab04ce3dbeadd6ef3aaf13e8ff7d6fe29644c037",
+    "branch": "m5/batch-lx6c"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "boards": [
+      "m5stack-basic-v27",
+      "m5stack-core2",
+      "m5stack-core2-axp192"
+    ]
+  },
+  "firmware": {
+    "arduino_docs_commit": "7219cc9286c39b463da84053deee40bc234625db",
+    "stock": {
+      "basic-v27": {
+        "version": "2.5.4",
+        "sha256": "613a802da0f496d339a4120c0322c0c7ec1db3d81474b4329077f8b233d4dccb",
+        "flash_mib": 4,
+        "catalog_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000000786/2116030764468178946/bin/2116030764468178947.bin"
+      },
+      "core2": {
+        "version": "2.5.3",
+        "sha256": "b228c0e2d877e77a8a352e917ed84f4da8ea92d15b25e28f431a2999620fe3c4",
+        "flash_mib": 16,
+        "catalog_url": "https://m5burner-cdn.m5stack.com/community/1/1897200000000003470/2098280227356758018/bin/2098280227356758019.bin"
+      }
+    }
+  },
+  "execution": {
+    "environment": "native esp32sim, mask ROM and UART0",
+    "rustc": "rustc 1.100.0 (0ef1bc386 2026-11-09)"
+  },
+  "checks": {
+    "basic-v27": {
+      "display": {
+        "status": "PASS",
+        "reason": "320×240 framebuffer contains the filled background and visible color primitives"
+      },
+      "button": {
+        "status": "PASS",
+        "reason": "UART0 reports the three independent button edges and no idle or release edge"
+      },
+      "battery": {
+        "status": "PASS",
+        "reason": "Baseline and both injected states produced distinct LCD values"
+      },
+      "imu": {
+        "status": "DOCS-DEFECT",
+        "reason": "Fixture assignment points Basic at m5core/imu.md line 9, which targets Gray. K001-V27 Basic has no onboard IMU."
+      },
+      "microsd": {
+        "status": "PASS",
+        "reason": "Two guest-decoded images, missing-card control and exact persisted WriteTest.txt"
+      },
+      "quickstart-longtextscroll": {
+        "status": "PASS",
+        "reason": "Two different 320×240 LCD frames during scrolling"
+      },
+      "wav": {
+        "status": "PASS",
+        "reason": "PCM capture at 96000 Hz contains the required tone(s) and the guest reached playback completion"
+      },
+      "speaker": {
+        "status": "PASS",
+        "reason": "PCM capture at 96000 Hz contains the required tone(s)"
+      },
+      "wakeup": {
+        "status": "PASS",
+        "reason": "Button input followed by deep-sleep reset and boot"
+      },
+      "stock": {
+        "status": "PASS",
+        "reason": "Stock UIFlow2 home screen and UART0 input round-trip"
+      }
+    },
+    "core2": {
+      "display": {
+        "status": "PASS",
+        "reason": "320×240 framebuffer contains the filled background and visible color primitives"
+      },
+      "button": {
+        "status": "PASS",
+        "reason": "Distinct input states and release observed in the guest frame"
+      },
+      "touch-1": {
+        "status": "PASS",
+        "reason": "Distinct input states and release observed in the guest frame"
+      },
+      "touch-2": {
+        "status": "PASS",
+        "reason": "Distinct input states and release observed in the guest frame"
+      },
+      "battery": {
+        "status": "PASS",
+        "reason": "Baseline and both injected states produced distinct LCD values"
+      },
+      "imu": {
+        "status": "PASS",
+        "reason": "Baseline and both injected states produced distinct LCD values"
+      },
+      "microsd": {
+        "status": "PASS",
+        "reason": "Two guest-decoded images, missing-card control and exact persisted WriteTest.txt"
+      },
+      "quickstart-scrollgraph": {
+        "status": "PASS",
+        "reason": "Two different 320×240 LCD frames during scrolling"
+      },
+      "wav": {
+        "status": "PASS",
+        "reason": "PCM capture at 48000 Hz contains the required tone(s) and the guest reached playback completion"
+      },
+      "wakeup": {
+        "status": "PASS",
+        "reason": "Button input followed by deep-sleep reset and boot"
+      },
+      "rgb_led": {
+        "status": "PASS",
+        "reason": "RMT drives ten uniform pixels in red, green and blue order"
+      },
+      "rtc": {
+        "status": "PASS",
+        "reason": "Guest identifies RTC, writes from sandboxed NTP and reads successive wall-clock values"
+      },
+      "vibration": {
+        "status": "PASS",
+        "reason": "9 DLDO1 rail transitions, 600–3300 mV commanded"
+      },
+      "mic": {
+        "status": "PASS",
+        "reason": "On-card WAV contains silence then the two separately injected PDM-to-PCM tones"
+      },
+      "stock": {
+        "status": "PASS",
+        "reason": "Stock UIFlow2 home screen and UART0 input round-trip"
+      }
+    }
+  },
+  "evidence": [
+    {
+      "file": "evidence/matrix-summary.json",
+      "sha256": "9156f0b86f4451dcafd2ca4385b47c48afb921d75a196cbb25a91c6da5fdc3c3"
+    },
+    {
+      "file": "evidence/regression-summary.json",
+      "sha256": "29463cf22521ec9f4bda779ed509437b8d58b1f935108d2edaba8351506cc3ec"
+    }
+  ],
+  "regression_status": "PARTIAL"
+}
