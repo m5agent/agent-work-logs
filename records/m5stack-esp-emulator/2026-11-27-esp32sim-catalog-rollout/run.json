@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "report",
+  "title": "esp32sim catalog rollout qualification",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/m5stack-esp-emulator",
+    "base_commit": "372a575a3f58d1921a3c1f2981ae05638dbfc0dd",
+    "runtime_commit": "4e257b6be8ee0ed706c2e509d8f31ef7472a424b",
+    "commit": "ea67a72949ddc7719010fdb544394fc5feb4c809"
+  },
+  "hardware": {},
+  "firmware": {},
+  "execution": {
+    "environment": "macOS arm64/Python 3.12.14; virtual-device validation"
+  },
+  "checks": [
+    {
+      "name": "esp32sim stock service startup and cleanup",
+      "status": "PASS",
+      "count": 35
+    },
+    {
+      "name": "same-firmware application parity and deterministic repeats",
+      "status": "PARTIAL"
+    },
+    {
+      "name": "exported esp32sim browser guests",
+      "status": "PASS",
+      "count": 9
+    },
+    {
+      "name": "physical hardware",
+      "status": "NOT RUN"
+    }
+  ],
+  "evidence": [
+    "evidence/stock-01-summary.json",
+    "evidence/stock-02-summary.json",
+    "evidence/stock-03-summary.json",
+    "evidence/checked-in-matrix-fixtures-01-summary.json",
+    "evidence/checked-in-matrix-fixtures-02-summary.json",
+    "evidence/checked-in-matrix-fixtures-03-summary.json",
+    "evidence/browser-summary.json"
+  ]
+}

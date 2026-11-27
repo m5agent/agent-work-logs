@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | ESP Emulator | esp32sim catalog rollout qualification | PARTIAL (virtual-device validation) | [查看](records/m5stack-esp-emulator/2026-11-27-esp32sim-catalog-rollout/) |
 | 2026-11-27 | esp32sim | Deterministic SX1262 and CC1101 peer delivery | PASS (native virtual-device validation) | [查看](records/esp32sim/2026-11-27-radio-peer-synchronization/) |
 | 2026-11-27 | esp32sim | LX6-B Stick integration and complete device matrix | PARTIAL (known LoRa loopback flake) | [查看](records/esp32sim/2026-11-27-lx6b-integration/) |
 | 2026-11-27 | esp32sim | Repeated SX1262 UDP loopback comparison | PARTIAL (virtual-device loopback) | [查看](records/esp32sim/2026-11-27-lora-loopback-repeat/) |
