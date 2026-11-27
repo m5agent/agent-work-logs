@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | esp32sim | LX6-C Basic and Core2 integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-lx6c-integration/) |
 | 2026-11-27 | esp32sim | S3-D complete e-paper integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-s3d-complete-integration/) |
 | 2026-11-27 | esp32sim | LX6-A classic Atom integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-lx6a-integration/) |
 | 2026-11-27 | esp32sim | S3-D PaperDIY and PaperS3 integration | PASS (virtual-device regression gate) | [查看](records/esp32sim/2026-11-27-s3d-integration/) |
