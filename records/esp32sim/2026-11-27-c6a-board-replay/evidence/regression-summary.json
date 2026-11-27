@@ -1,0 +1,835 @@
+{
+  "sentinel-initial": {
+    "baseline": {
+      "binary": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+      "exit": 0,
+      "hello": true,
+      "summary": "[emu] stop: Halted \u2014 800000000 insns in 6.1s wall = 130.2 Minsn/s; emulated 5.000s (800000000 cycles); 0 exceptions, 505 interrupts"
+    },
+    "c562": {
+      "binary": "e43a45d628de4c1ac4c10abd999521f9c97ff4c7ac872d4ff9802c1d973c570d",
+      "exit": 0,
+      "hello": true,
+      "summary": "[emu] stop: Halted \u2014 800000000 insns in 5.7s wall = 140.1 Minsn/s; emulated 5.000s (800000000 cycles); 0 exceptions, 505 interrupts"
+    },
+    "firmware": {
+      "c6-hello-bootloader.bin": "88fd358b406ebc874cda1f4d14c1fd50d37cd064a1826192ee275ce67741ff75",
+      "c6-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "c6-hello_world.bin": "e302a3769d3122759ea85ed6caff857da36f558f83f9bf0eb652276657de0131"
+    }
+  },
+  "sentinel-final": {
+    "baseline_commit": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489",
+    "candidate_commit": "36d639c3e17aa964d05a325ac8bac75837de71f2",
+    "firmware_sha256": {
+      "c6-hello-bootloader.bin": "88fd358b406ebc874cda1f4d14c1fd50d37cd064a1826192ee275ce67741ff75",
+      "c6-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "c6-hello_world.bin": "e302a3769d3122759ea85ed6caff857da36f558f83f9bf0eb652276657de0131"
+    },
+    "rom_sha256": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551",
+    "baseline": {
+      "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+      "exit": 0,
+      "hello": true,
+      "summary": "[emu] stop: Halted \u2014 800000000 insns in 3.7s wall = 216.6 Minsn/s; emulated 5.000s (800000000 cycles); 0 exceptions, 505 interrupts"
+    },
+    "candidate": {
+      "binary_sha256": "ecb633ce6c67b03bb85aed104e7d1438bb722c53b50cce6fda42808f6993b71f",
+      "exit": 0,
+      "hello": true,
+      "summary": "[emu] stop: Halted \u2014 800000000 insns in 4.2s wall = 191.2 Minsn/s; emulated 5.000s (800000000 cycles); 0 exceptions, 505 interrupts"
+    }
+  },
+  "regress-cores3": {
+    "verdicts": {
+      "display": "PASS",
+      "quickstart-bargraph": "PASS",
+      "touch": "PASS",
+      "button": "PASS",
+      "power": "PASS",
+      "imu": "PASS",
+      "ltr553": "PASS",
+      "rtc": "PASS",
+      "speaker": "PASS",
+      "mic": "PASS",
+      "camera": "PASS",
+      "wakeup": "PASS",
+      "sdcard": "PASS",
+      "pic": "PASS",
+      "wav": "PASS"
+    },
+    "inputs": [
+      {
+        "artifact": "esp32sim",
+        "sha256": "f37746f5e757aad8ef331cdeb81075d77256d2119945f561657c3cfdccf84c11"
+      },
+      {
+        "artifact": "esp32s3_rev0_rom.elf",
+        "sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd"
+      },
+      {
+        "artifact": "button/button.ino.merged.bin",
+        "sha256": "58ea9e954d59f110737b02c776bfd290fe03f0e3d6dd51fc6a07607fcc16eb98"
+      },
+      {
+        "artifact": "camera/camera.ino.merged.bin",
+        "sha256": "9ed07790339a940c71e7b312404340d05777e7c0b2a99d7430d2eb8626565ec8"
+      },
+      {
+        "artifact": "display/display.ino.merged.bin",
+        "sha256": "44c7912db911b32efb994e43bbb4ff7164265111e6c5efcfa8867bd86e2ff4c8"
+      },
+      {
+        "artifact": "imu/imu.ino.merged.bin",
+        "sha256": "c56bf2ca6e37edfb2e1c1e02002a5a07d9ff0a301b8fbf9264f1819053bfefba"
+      },
+      {
+        "artifact": "ltr553/ltr553.ino.merged.bin",
+        "sha256": "1a80525f57bc3d5f5b0d89476b8e5e5cb7e1b756af0387a2f19337aa0b72fa47"
+      },
+      {
+        "artifact": "mic/mic.ino.merged.bin",
+        "sha256": "5de68729e19eb8d0b241bb68792e38f06cc8265fcc719f079da9c9e95e07e4e0"
+      },
+      {
+        "artifact": "pic/pic.ino.merged.bin",
+        "sha256": "481694418ae5015b154de8d0f9641e6660a5965935fb9b9ec82baaa0975e1f12"
+      },
+      {
+        "artifact": "power/power.ino.merged.bin",
+        "sha256": "ac19c6fb345ee441bd9c6b25f313bf190928af5b9e74649a721cc9945ac33a2b"
+      },
+      {
+        "artifact": "quickstart-bargraph/quickstart_bargraph.ino.merged.bin",
+        "sha256": "5812186674963e0ba558e0ee8f65941cce49a7ab1b05a23c2b12046a5c7a1e58"
+      },
+      {
+        "artifact": "rtc/rtc.ino.merged.bin",
+        "sha256": "70e500981e57fef904e8c941865fffee9d2dcf0045fa4a9255acaa516f0d68c0"
+      },
+      {
+        "artifact": "sdcard/sdcard.ino.merged.bin",
+        "sha256": "2a73d631e383ab932e38d2db43d100ca05fbb5023944cb184194fe1046d56f1b"
+      },
+      {
+        "artifact": "speaker/speaker.ino.merged.bin",
+        "sha256": "980f87ff390738e8b50c8819bf4050b8dc18c7d8a6edbe6936ea9ec70f245c78"
+      },
+      {
+        "artifact": "touch/touch.ino.merged.bin",
+        "sha256": "a3b1a46231ade128d44c0f1394febcadcb236d86d68ab67008fc19ab4be48c27"
+      },
+      {
+        "artifact": "wakeup/wakeup.ino.merged.bin",
+        "sha256": "758e03ff538f8b09780995ba1e5bbfde19d8ba2f82d4fc37c13a3ff9c3734999"
+      },
+      {
+        "artifact": "wav/wav.ino.merged.bin",
+        "sha256": "e8f36a06ed036feec277119ecebb10e2443772a9c910323457ee2ea63c2a8d95"
+      },
+      {
+        "artifact": "button.txt",
+        "sha256": "0d158e9c8cb9ad3983d0dc64026cc35ce42fa403dd4aec9dde54d72bc96bb379"
+      },
+      {
+        "artifact": "imu.txt",
+        "sha256": "0913242e8cb96afc52356b3391de775e725722abf78efd9d288318f573fddba2"
+      },
+      {
+        "artifact": "ltr553.txt",
+        "sha256": "ac5f76159581d16efbee2942074de0e7a6d3150bb001e93dd14b242b7253ffa9"
+      },
+      {
+        "artifact": "mic.txt",
+        "sha256": "7a9cad089012eb69bf88452fcaf09da1e25f7f3d8ad99ef2ca5a5156acfa017c"
+      },
+      {
+        "artifact": "power.txt",
+        "sha256": "730c1b8195b3b694e1bf49a5b28fbef7d2f47f0fa77ec03c43406dda3e4e74fb"
+      },
+      {
+        "artifact": "touch.txt",
+        "sha256": "f34352b34aa56954e620ce3b6df3f573ca6c40619e3d07fdeed19eaee38bf0c7"
+      },
+      {
+        "artifact": "wakeup.txt",
+        "sha256": "7a9cad089012eb69bf88452fcaf09da1e25f7f3d8ad99ef2ca5a5156acfa017c"
+      },
+      {
+        "artifact": "camera-before-input.bmp",
+        "sha256": "7bcb9edf6452bf46108ad660ec7edf3b9cd9dcf93f8f11c9191b2ab90f4c1ed0"
+      },
+      {
+        "artifact": "camera-input.bmp",
+        "sha256": "baee95038ecbc81aaed02d91726923b3ebcb22230e572aebced423b2305274b1"
+      },
+      {
+        "artifact": "mic-input.wav",
+        "sha256": "55dc06fbe30596d35016860f9c95a2c621332655bc7218154bcefc271a2b999f"
+      },
+      {
+        "artifact": "sd-seed.img",
+        "sha256": "1919da05ef7d8a5a2fe1c72bd53a4adddcbfd4725c3190f3b9737658e4007ee6"
+      }
+    ],
+    "passed": 15,
+    "total": 15,
+    "log_sha256": "e82c58e23ea124db720a6334227485627ef5dc923e694364912af1040deced74"
+  },
+  "regress-adv": {
+    "verdicts": {
+      "display": "PASS",
+      "quickstart-display": "PASS",
+      "keyboard": "PASS",
+      "button": "PASS",
+      "ir_nec": "PASS",
+      "battery": "PASS",
+      "imu": "PASS",
+      "speaker": "PASS",
+      "mic": "PASS",
+      "sdcard": "PASS",
+      "speaker-sd-wav": "PASS"
+    },
+    "inputs": [
+      {
+        "artifact": "esp32sim",
+        "sha256": "f37746f5e757aad8ef331cdeb81075d77256d2119945f561657c3cfdccf84c11"
+      },
+      {
+        "artifact": "esp32s3_rev0_rom.elf",
+        "sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd"
+      },
+      {
+        "artifact": "battery/battery.ino.merged.bin",
+        "sha256": "ddcc555063a83c065b64abfcc720966d4f2117e44eb8a5403ec6a255530494e9"
+      },
+      {
+        "artifact": "button/button.ino.merged.bin",
+        "sha256": "00bd60f455a211d68b397e7008ff3c212acb420a0869e2deea5ee6d8ee601e2e"
+      },
+      {
+        "artifact": "display/display.ino.merged.bin",
+        "sha256": "67bbe34e0e965f6d0491668d45b8007f153ba80be6ab3f8ec2e31e0223ee7972"
+      },
+      {
+        "artifact": "imu/imu.ino.merged.bin",
+        "sha256": "33639787c387413681e3b2837e115c727d53b7d58fe7fd3796f2e61b8afdc1a4"
+      },
+      {
+        "artifact": "ir_nec/ir_nec.ino.merged.bin",
+        "sha256": "303e9c9c65c38332db862737b4ba78d8e0c35176c1dfd0f8e447c8dc40c39ae4"
+      },
+      {
+        "artifact": "keyboard/keyboard.ino.merged.bin",
+        "sha256": "ff5b8b152ba201852ded8684ca517bdf63ea155961ff99e9ff19fad11f4fcf78"
+      },
+      {
+        "artifact": "mic/mic.ino.merged.bin",
+        "sha256": "9a1e1a36dd4499d992254824e85a956229874c0a279146c43e599657d829bcd5"
+      },
+      {
+        "artifact": "quickstart-display/quickstart_display.ino.merged.bin",
+        "sha256": "db48605950abbd5423b62d36712dff9ccbe7db9f4997b9a88a6cf8c87111899e"
+      },
+      {
+        "artifact": "sdcard/sdcard.ino.merged.bin",
+        "sha256": "33ee9fc3513bc4e46cc5231b460ddca3e0966fbaa5874ceb8ec506a67fab8aaf"
+      },
+      {
+        "artifact": "speaker-sd-wav/speaker_sd_wav.ino.merged.bin",
+        "sha256": "b0b39a6f07f6c03027642c5876877d2a2e5546a86db92c8607ba93f75e8e1241"
+      },
+      {
+        "artifact": "speaker/speaker.ino.merged.bin",
+        "sha256": "1a40ab54d783e5850d09bcfa10e182f8ac43662bf4fa059b75810815f4bf93c1"
+      },
+      {
+        "artifact": "battery.txt",
+        "sha256": "152abebdcbb31a9b09eb318e0ba2f8d26b7e2ddfa0164be72cf728976a49be1f"
+      },
+      {
+        "artifact": "button.txt",
+        "sha256": "00d57383b0fa374474813b6a8428b7c370678bcd4bb97e057aa05b75e2b29f3e"
+      },
+      {
+        "artifact": "imu.txt",
+        "sha256": "e380b9525d8d721723d1c06f57b639f4921ad00bd6b8762b1494f5bc3b8d0616"
+      },
+      {
+        "artifact": "keyboard-chord.txt",
+        "sha256": "565cd490a59f037e6f00647cc8ff78467c32ad60491f6b2585407dd8c77782a5"
+      },
+      {
+        "artifact": "keyboard.txt",
+        "sha256": "9ff7628e065974557705160931fffa92f88c64644b2dadcb8c8aa17ac59deb23"
+      },
+      {
+        "artifact": "mic.txt",
+        "sha256": "f42bb9a6a2702a428c3beb72fdfeb4236f26f19cfc23aeb659e0153ee9b7cc78"
+      },
+      {
+        "artifact": "mic-input.wav",
+        "sha256": "8edb149078893052dafb83d800871c514884108a8e3ddcdb3bb96c5868ccef94"
+      },
+      {
+        "artifact": "mic-silence.wav",
+        "sha256": "e14266a9eec75466039ea69e3a1f3e77ae327713a50c5efb25c0e2c793317f0e"
+      },
+      {
+        "artifact": "sd-seed.img",
+        "sha256": "1919da05ef7d8a5a2fe1c72bd53a4adddcbfd4725c3190f3b9737658e4007ee6"
+      }
+    ],
+    "passed": 11,
+    "total": 11,
+    "log_sha256": "6cce1b992f902a97e50ccc103dc5d8199685c70020b765241a9fcd4be15c8848"
+  },
+  "regress-cores3-final": {
+    "verdicts": {
+      "display": "PASS",
+      "quickstart-bargraph": "PASS",
+      "touch": "PASS",
+      "button": "PASS",
+      "power": "PASS",
+      "imu": "PASS",
+      "ltr553": "PASS",
+      "rtc": "PASS",
+      "speaker": "PASS",
+      "mic": "PASS",
+      "camera": "PASS",
+      "wakeup": "PASS",
+      "sdcard": "PASS",
+      "pic": "PASS",
+      "wav": "PASS"
+    },
+    "inputs": [
+      {
+        "artifact": "esp32sim",
+        "sha256": "1f98234e6a04922ca66486451547cefe5b58b4ddf8db5c6e3612d20bebab9330"
+      },
+      {
+        "artifact": "esp32s3_rev0_rom.elf",
+        "sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd"
+      },
+      {
+        "artifact": "button/button.ino.merged.bin",
+        "sha256": "58ea9e954d59f110737b02c776bfd290fe03f0e3d6dd51fc6a07607fcc16eb98"
+      },
+      {
+        "artifact": "camera/camera.ino.merged.bin",
+        "sha256": "9ed07790339a940c71e7b312404340d05777e7c0b2a99d7430d2eb8626565ec8"
+      },
+      {
+        "artifact": "display/display.ino.merged.bin",
+        "sha256": "44c7912db911b32efb994e43bbb4ff7164265111e6c5efcfa8867bd86e2ff4c8"
+      },
+      {
+        "artifact": "imu/imu.ino.merged.bin",
+        "sha256": "c56bf2ca6e37edfb2e1c1e02002a5a07d9ff0a301b8fbf9264f1819053bfefba"
+      },
+      {
+        "artifact": "ltr553/ltr553.ino.merged.bin",
+        "sha256": "1a80525f57bc3d5f5b0d89476b8e5e5cb7e1b756af0387a2f19337aa0b72fa47"
+      },
+      {
+        "artifact": "mic/mic.ino.merged.bin",
+        "sha256": "5de68729e19eb8d0b241bb68792e38f06cc8265fcc719f079da9c9e95e07e4e0"
+      },
+      {
+        "artifact": "pic/pic.ino.merged.bin",
+        "sha256": "481694418ae5015b154de8d0f9641e6660a5965935fb9b9ec82baaa0975e1f12"
+      },
+      {
+        "artifact": "power/power.ino.merged.bin",
+        "sha256": "ac19c6fb345ee441bd9c6b25f313bf190928af5b9e74649a721cc9945ac33a2b"
+      },
+      {
+        "artifact": "quickstart-bargraph/quickstart_bargraph.ino.merged.bin",
+        "sha256": "5812186674963e0ba558e0ee8f65941cce49a7ab1b05a23c2b12046a5c7a1e58"
+      },
+      {
+        "artifact": "rtc/rtc.ino.merged.bin",
+        "sha256": "70e500981e57fef904e8c941865fffee9d2dcf0045fa4a9255acaa516f0d68c0"
+      },
+      {
+        "artifact": "sdcard/sdcard.ino.merged.bin",
+        "sha256": "2a73d631e383ab932e38d2db43d100ca05fbb5023944cb184194fe1046d56f1b"
+      },
+      {
+        "artifact": "speaker/speaker.ino.merged.bin",
+        "sha256": "980f87ff390738e8b50c8819bf4050b8dc18c7d8a6edbe6936ea9ec70f245c78"
+      },
+      {
+        "artifact": "touch/touch.ino.merged.bin",
+        "sha256": "a3b1a46231ade128d44c0f1394febcadcb236d86d68ab67008fc19ab4be48c27"
+      },
+      {
+        "artifact": "wakeup/wakeup.ino.merged.bin",
+        "sha256": "758e03ff538f8b09780995ba1e5bbfde19d8ba2f82d4fc37c13a3ff9c3734999"
+      },
+      {
+        "artifact": "wav/wav.ino.merged.bin",
+        "sha256": "e8f36a06ed036feec277119ecebb10e2443772a9c910323457ee2ea63c2a8d95"
+      },
+      {
+        "artifact": "button.txt",
+        "sha256": "0d158e9c8cb9ad3983d0dc64026cc35ce42fa403dd4aec9dde54d72bc96bb379"
+      },
+      {
+        "artifact": "imu.txt",
+        "sha256": "0913242e8cb96afc52356b3391de775e725722abf78efd9d288318f573fddba2"
+      },
+      {
+        "artifact": "ltr553.txt",
+        "sha256": "ac5f76159581d16efbee2942074de0e7a6d3150bb001e93dd14b242b7253ffa9"
+      },
+      {
+        "artifact": "mic.txt",
+        "sha256": "7a9cad089012eb69bf88452fcaf09da1e25f7f3d8ad99ef2ca5a5156acfa017c"
+      },
+      {
+        "artifact": "power.txt",
+        "sha256": "730c1b8195b3b694e1bf49a5b28fbef7d2f47f0fa77ec03c43406dda3e4e74fb"
+      },
+      {
+        "artifact": "touch.txt",
+        "sha256": "f34352b34aa56954e620ce3b6df3f573ca6c40619e3d07fdeed19eaee38bf0c7"
+      },
+      {
+        "artifact": "wakeup.txt",
+        "sha256": "7a9cad089012eb69bf88452fcaf09da1e25f7f3d8ad99ef2ca5a5156acfa017c"
+      },
+      {
+        "artifact": "camera-before-input.bmp",
+        "sha256": "7bcb9edf6452bf46108ad660ec7edf3b9cd9dcf93f8f11c9191b2ab90f4c1ed0"
+      },
+      {
+        "artifact": "camera-input.bmp",
+        "sha256": "baee95038ecbc81aaed02d91726923b3ebcb22230e572aebced423b2305274b1"
+      },
+      {
+        "artifact": "mic-input.wav",
+        "sha256": "55dc06fbe30596d35016860f9c95a2c621332655bc7218154bcefc271a2b999f"
+      },
+      {
+        "artifact": "sd-seed.img",
+        "sha256": "1919da05ef7d8a5a2fe1c72bd53a4adddcbfd4725c3190f3b9737658e4007ee6"
+      }
+    ],
+    "passed": 15,
+    "total": 15,
+    "log_sha256": "e82c58e23ea124db720a6334227485627ef5dc923e694364912af1040deced74"
+  },
+  "regress-adv-final": {
+    "verdicts": {
+      "display": "PASS",
+      "quickstart-display": "PASS",
+      "keyboard": "PASS",
+      "button": "PASS",
+      "ir_nec": "PASS",
+      "battery": "PASS",
+      "imu": "PASS",
+      "speaker": "PASS",
+      "mic": "PASS",
+      "sdcard": "PASS",
+      "speaker-sd-wav": "PASS"
+    },
+    "inputs": [
+      {
+        "artifact": "esp32sim",
+        "sha256": "1f98234e6a04922ca66486451547cefe5b58b4ddf8db5c6e3612d20bebab9330"
+      },
+      {
+        "artifact": "esp32s3_rev0_rom.elf",
+        "sha256": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd"
+      },
+      {
+        "artifact": "battery/battery.ino.merged.bin",
+        "sha256": "ddcc555063a83c065b64abfcc720966d4f2117e44eb8a5403ec6a255530494e9"
+      },
+      {
+        "artifact": "button/button.ino.merged.bin",
+        "sha256": "00bd60f455a211d68b397e7008ff3c212acb420a0869e2deea5ee6d8ee601e2e"
+      },
+      {
+        "artifact": "display/display.ino.merged.bin",
+        "sha256": "67bbe34e0e965f6d0491668d45b8007f153ba80be6ab3f8ec2e31e0223ee7972"
+      },
+      {
+        "artifact": "imu/imu.ino.merged.bin",
+        "sha256": "33639787c387413681e3b2837e115c727d53b7d58fe7fd3796f2e61b8afdc1a4"
+      },
+      {
+        "artifact": "ir_nec/ir_nec.ino.merged.bin",
+        "sha256": "303e9c9c65c38332db862737b4ba78d8e0c35176c1dfd0f8e447c8dc40c39ae4"
+      },
+      {
+        "artifact": "keyboard/keyboard.ino.merged.bin",
+        "sha256": "ff5b8b152ba201852ded8684ca517bdf63ea155961ff99e9ff19fad11f4fcf78"
+      },
+      {
+        "artifact": "mic/mic.ino.merged.bin",
+        "sha256": "9a1e1a36dd4499d992254824e85a956229874c0a279146c43e599657d829bcd5"
+      },
+      {
+        "artifact": "quickstart-display/quickstart_display.ino.merged.bin",
+        "sha256": "db48605950abbd5423b62d36712dff9ccbe7db9f4997b9a88a6cf8c87111899e"
+      },
+      {
+        "artifact": "sdcard/sdcard.ino.merged.bin",
+        "sha256": "33ee9fc3513bc4e46cc5231b460ddca3e0966fbaa5874ceb8ec506a67fab8aaf"
+      },
+      {
+        "artifact": "speaker-sd-wav/speaker_sd_wav.ino.merged.bin",
+        "sha256": "b0b39a6f07f6c03027642c5876877d2a2e5546a86db92c8607ba93f75e8e1241"
+      },
+      {
+        "artifact": "speaker/speaker.ino.merged.bin",
+        "sha256": "1a40ab54d783e5850d09bcfa10e182f8ac43662bf4fa059b75810815f4bf93c1"
+      },
+      {
+        "artifact": "battery.txt",
+        "sha256": "152abebdcbb31a9b09eb318e0ba2f8d26b7e2ddfa0164be72cf728976a49be1f"
+      },
+      {
+        "artifact": "button.txt",
+        "sha256": "00d57383b0fa374474813b6a8428b7c370678bcd4bb97e057aa05b75e2b29f3e"
+      },
+      {
+        "artifact": "imu.txt",
+        "sha256": "e380b9525d8d721723d1c06f57b639f4921ad00bd6b8762b1494f5bc3b8d0616"
+      },
+      {
+        "artifact": "keyboard-chord.txt",
+        "sha256": "565cd490a59f037e6f00647cc8ff78467c32ad60491f6b2585407dd8c77782a5"
+      },
+      {
+        "artifact": "keyboard.txt",
+        "sha256": "9ff7628e065974557705160931fffa92f88c64644b2dadcb8c8aa17ac59deb23"
+      },
+      {
+        "artifact": "mic.txt",
+        "sha256": "f42bb9a6a2702a428c3beb72fdfeb4236f26f19cfc23aeb659e0153ee9b7cc78"
+      },
+      {
+        "artifact": "mic-input.wav",
+        "sha256": "8edb149078893052dafb83d800871c514884108a8e3ddcdb3bb96c5868ccef94"
+      },
+      {
+        "artifact": "mic-silence.wav",
+        "sha256": "e14266a9eec75466039ea69e3a1f3e77ae327713a50c5efb25c0e2c793317f0e"
+      },
+      {
+        "artifact": "sd-seed.img",
+        "sha256": "1919da05ef7d8a5a2fe1c72bd53a4adddcbfd4725c3190f3b9737658e4007ee6"
+      }
+    ],
+    "passed": 11,
+    "total": 11,
+    "log_sha256": "6cce1b992f902a97e50ccc103dc5d8199685c70020b765241a9fcd4be15c8848"
+  },
+  "c6-tests-final2": {
+    "counts": {
+      "passed": 136,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 2
+    },
+    "log_sha256": "9d5f6286e68ded09f35fbf5a5b75d85bef51c1a3435d92c84e969b78d087b2cb",
+    "finish": [
+      "    Finished `release` profile [optimized + debuginfo] target(s) in 38.59s"
+    ]
+  },
+  "workspace-tests-final": {
+    "counts": {
+      "passed": 1641,
+      "failed": 10,
+      "ignored": 0,
+      "filtered": 22
+    },
+    "log_sha256": "9c6a14fc478e443b9c8fd70ed714565b1cdfde6f61527f51179cee216c4bec16",
+    "finish": [
+      "    Finished `release` profile [optimized + debuginfo] target(s) in 10m 28s"
+    ],
+    "note": "First attempt stopped in co-simulation due to missing pinned P4 assets."
+  },
+  "workspace-tests-replay": {
+    "counts": {
+      "passed": 1976,
+      "failed": 7,
+      "ignored": 0,
+      "filtered": 34
+    },
+    "log_sha256": "12a6ceb88690e659b33be2fe0d9d22c90141041ee9d925bfcec36b14fbeafda7",
+    "finish": [
+      "    Finished `release` profile [optimized + debuginfo] target(s) in 0.10s"
+    ],
+    "note": "Replayed with all 30 pinned P4 images and the pinned MicroPython image."
+  },
+  "clippy-native-final": {
+    "counts": {},
+    "log_sha256": "ea43aea2f13d6a8005d0c4345957495260c99b52709614af5e08b16839a40886",
+    "finish": [
+      "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 53.51s"
+    ]
+  },
+  "clippy-wasm-ci-final": {
+    "counts": {},
+    "log_sha256": "6f6d5ab74f639b5f787fab2b38965c21dc746353d1599ad9936c04da6fdd73b7",
+    "finish": [
+      "    Finished `release` profile [optimized + debuginfo] target(s) in 29.23s"
+    ]
+  },
+  "p4-base-comparison": {
+    "base_commit": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489",
+    "candidate_commit": "36d639c3e17aa964d05a325ac8bac75837de71f2",
+    "functional": {
+      "hosted-p4": {
+        "base": {
+          "exit": 0,
+          "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hosted-bootloader.bin": "0afa47b7d81bac1e57ba261abfb8a9f622c555da56319434ad8b0f346f7cb062",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-station.bin": "b0e99c2150ba445d07b5a5f7cbe4ccd3e1e30b39075e3c93bcf736d74271f1e1",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-slave.bin": "7192ec47329c8f3d91e30f5f1da4ba9ee89a86cf1a363f27531c316f971cf44a",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "1aa6b8126362c22a2705b356110a7a8b968833fd3c8e5d339fcc39eebede798d",
+          "expected_serial_sha256": "1aa6b8126362c22a2705b356110a7a8b968833fd3c8e5d339fcc39eebede798d",
+          "instruction_count": 2874807456,
+          "expected_instruction_count": 2874807456,
+          "wifi_dhcp_marker": true
+        },
+        "candidate": {
+          "exit": 0,
+          "binary_sha256": "bb97faaaeb9222685fa421ead295624e47619b025a8a874983b372d9dfccb33e",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hosted-bootloader.bin": "0afa47b7d81bac1e57ba261abfb8a9f622c555da56319434ad8b0f346f7cb062",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-station.bin": "b0e99c2150ba445d07b5a5f7cbe4ccd3e1e30b39075e3c93bcf736d74271f1e1",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-slave.bin": "7192ec47329c8f3d91e30f5f1da4ba9ee89a86cf1a363f27531c316f971cf44a",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "1aa6b8126362c22a2705b356110a7a8b968833fd3c8e5d339fcc39eebede798d",
+          "expected_serial_sha256": "1aa6b8126362c22a2705b356110a7a8b968833fd3c8e5d339fcc39eebede798d",
+          "instruction_count": 2874807456,
+          "expected_instruction_count": 2874807456,
+          "wifi_dhcp_marker": true
+        }
+      },
+      "hosted-p4-rev3": {
+        "base": {
+          "exit": 0,
+          "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev300_rom.elf": "90e723f71fe4701adee7e40bfab6971d8ecf5e356f4d5a81e77743248abc3a97",
+            "p4-hosted-rev3-bootloader.bin": "42d99a6f7470a7324077cf29de6dd5012aa2d4fbfd0f2ee0a55ba376981b86ed",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-rev3-station.bin": "0a99eb9dbcf11a9b22740b4d524e44b022e327adbe737fd82390353200a11367",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-slave.bin": "7192ec47329c8f3d91e30f5f1da4ba9ee89a86cf1a363f27531c316f971cf44a",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "7347ebf4a1142fe2c025ca8c4d8db686d3bcfa2be4da6d0342af67f64e820013",
+          "expected_serial_sha256": "7347ebf4a1142fe2c025ca8c4d8db686d3bcfa2be4da6d0342af67f64e820013",
+          "instruction_count": 2874725360,
+          "expected_instruction_count": 2874725360,
+          "wifi_dhcp_marker": true
+        },
+        "candidate": {
+          "exit": 0,
+          "binary_sha256": "bb97faaaeb9222685fa421ead295624e47619b025a8a874983b372d9dfccb33e",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev300_rom.elf": "90e723f71fe4701adee7e40bfab6971d8ecf5e356f4d5a81e77743248abc3a97",
+            "p4-hosted-rev3-bootloader.bin": "42d99a6f7470a7324077cf29de6dd5012aa2d4fbfd0f2ee0a55ba376981b86ed",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-rev3-station.bin": "0a99eb9dbcf11a9b22740b4d524e44b022e327adbe737fd82390353200a11367",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-slave.bin": "7192ec47329c8f3d91e30f5f1da4ba9ee89a86cf1a363f27531c316f971cf44a",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "7347ebf4a1142fe2c025ca8c4d8db686d3bcfa2be4da6d0342af67f64e820013",
+          "expected_serial_sha256": "7347ebf4a1142fe2c025ca8c4d8db686d3bcfa2be4da6d0342af67f64e820013",
+          "instruction_count": 2874725360,
+          "expected_instruction_count": 2874725360,
+          "wifi_dhcp_marker": true
+        }
+      },
+      "hello-p4-smp": {
+        "base": {
+          "exit": 0,
+          "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hello-smp-bootloader.bin": "fc8698c1520e0d6469861e917d84568c94d17721faa93937896ae427e8f91717",
+            "p4-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hello-smp_world.bin": "9476bccf819114fe30ad55dde4d0917e7f5213df34ec6f159b81c4a84e053f8b"
+          },
+          "hello_count": 2,
+          "serial_sha256": "2038cb68d9a3b6610aad61a276d091dcbca5badebe00d1343a1f6f59efeedf6f",
+          "expected_serial_sha256": "2038cb68d9a3b6610aad61a276d091dcbca5badebe00d1343a1f6f59efeedf6f",
+          "instruction_count": 8635426314,
+          "expected_instruction_count": 8635427018,
+          "wifi_dhcp_marker": false
+        },
+        "candidate": {
+          "exit": 0,
+          "binary_sha256": "bb97faaaeb9222685fa421ead295624e47619b025a8a874983b372d9dfccb33e",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hello-smp-bootloader.bin": "fc8698c1520e0d6469861e917d84568c94d17721faa93937896ae427e8f91717",
+            "p4-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hello-smp_world.bin": "9476bccf819114fe30ad55dde4d0917e7f5213df34ec6f159b81c4a84e053f8b"
+          },
+          "hello_count": 2,
+          "serial_sha256": "2038cb68d9a3b6610aad61a276d091dcbca5badebe00d1343a1f6f59efeedf6f",
+          "expected_serial_sha256": "2038cb68d9a3b6610aad61a276d091dcbca5badebe00d1343a1f6f59efeedf6f",
+          "instruction_count": 8635426314,
+          "expected_instruction_count": 8635427018,
+          "wifi_dhcp_marker": false
+        }
+      },
+      "hello-p4-rev3-smp": {
+        "base": {
+          "exit": 0,
+          "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev300_rom.elf": "90e723f71fe4701adee7e40bfab6971d8ecf5e356f4d5a81e77743248abc3a97",
+            "p4-hello-rev3-smp-bootloader.bin": "bc55f5ab96558d37ac399306e84675a61c27733a15a2eeb7c2c3d2376f5fd823",
+            "p4-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hello-rev3-smp_world.bin": "ec158a81669da5bf149e75ea008f96cdd7eca73c7e86b7ea13fc5dcf7be78879"
+          },
+          "hello_count": 2,
+          "serial_sha256": "60beada6194767d34ade6d9b0a0f8594ec5c8df6801c20580696cac044012f8e",
+          "expected_serial_sha256": "60beada6194767d34ade6d9b0a0f8594ec5c8df6801c20580696cac044012f8e",
+          "instruction_count": 8635277645,
+          "expected_instruction_count": 8635278285,
+          "wifi_dhcp_marker": false
+        },
+        "candidate": {
+          "exit": 0,
+          "binary_sha256": "bb97faaaeb9222685fa421ead295624e47619b025a8a874983b372d9dfccb33e",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev300_rom.elf": "90e723f71fe4701adee7e40bfab6971d8ecf5e356f4d5a81e77743248abc3a97",
+            "p4-hello-rev3-smp-bootloader.bin": "bc55f5ab96558d37ac399306e84675a61c27733a15a2eeb7c2c3d2376f5fd823",
+            "p4-hello-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hello-rev3-smp_world.bin": "ec158a81669da5bf149e75ea008f96cdd7eca73c7e86b7ea13fc5dcf7be78879"
+          },
+          "hello_count": 2,
+          "serial_sha256": "60beada6194767d34ade6d9b0a0f8594ec5c8df6801c20580696cac044012f8e",
+          "expected_serial_sha256": "60beada6194767d34ade6d9b0a0f8594ec5c8df6801c20580696cac044012f8e",
+          "instruction_count": 8635277645,
+          "expected_instruction_count": 8635278285,
+          "wifi_dhcp_marker": false
+        }
+      },
+      "hosted-rawtp-rx": {
+        "base": {
+          "exit": 0,
+          "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hosted-bootloader.bin": "0afa47b7d81bac1e57ba261abfb8a9f622c555da56319434ad8b0f346f7cb062",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-rawtp-rx.bin": "ca8efaf3d8ea2d5f67b2dd48171a75ad883ef4ecb46c9c92f1a6c5f51a180ac6",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-rawtp-slave.bin": "3b0dd12a47b69cec91e20a2264393824de0bf9238c01d690f1233ed38535bf2c",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "5b51ba3aca27e355d8db294f3a546c595b4de3940c04f864ad15ab32eb4a74b3",
+          "expected_serial_sha256": "5b51ba3aca27e355d8db294f3a546c595b4de3940c04f864ad15ab32eb4a74b3",
+          "instruction_count": 7194798272,
+          "expected_instruction_count": 7194798272,
+          "wifi_dhcp_marker": true
+        },
+        "candidate": {
+          "exit": 0,
+          "binary_sha256": "bb97faaaeb9222685fa421ead295624e47619b025a8a874983b372d9dfccb33e",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hosted-bootloader.bin": "0afa47b7d81bac1e57ba261abfb8a9f622c555da56319434ad8b0f346f7cb062",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-rawtp-rx.bin": "ca8efaf3d8ea2d5f67b2dd48171a75ad883ef4ecb46c9c92f1a6c5f51a180ac6",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-rawtp-slave.bin": "3b0dd12a47b69cec91e20a2264393824de0bf9238c01d690f1233ed38535bf2c",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "5b51ba3aca27e355d8db294f3a546c595b4de3940c04f864ad15ab32eb4a74b3",
+          "expected_serial_sha256": "5b51ba3aca27e355d8db294f3a546c595b4de3940c04f864ad15ab32eb4a74b3",
+          "instruction_count": 7194798272,
+          "expected_instruction_count": 7194798272,
+          "wifi_dhcp_marker": true
+        }
+      },
+      "hosted-rawtp-tx": {
+        "base": {
+          "exit": 0,
+          "binary_sha256": "77a80eab30fa4839be304e1257311c952289665f1e6489a0be99ecb94032ac77",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hosted-bootloader.bin": "0afa47b7d81bac1e57ba261abfb8a9f622c555da56319434ad8b0f346f7cb062",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-rawtp-tx.bin": "8c5a3bcf2fc99d982119697e35ff7e3903805589489e69221ab828cdfd1d820e",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-rawtp-slave.bin": "3b0dd12a47b69cec91e20a2264393824de0bf9238c01d690f1233ed38535bf2c",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "dafee76a653fe710e11a6c239659d116dc2a7c4773dcbc3dba2f8ac816548471",
+          "expected_serial_sha256": "dafee76a653fe710e11a6c239659d116dc2a7c4773dcbc3dba2f8ac816548471",
+          "instruction_count": 7194798272,
+          "expected_instruction_count": 7194798272,
+          "wifi_dhcp_marker": true
+        },
+        "candidate": {
+          "exit": 0,
+          "binary_sha256": "bb97faaaeb9222685fa421ead295624e47619b025a8a874983b372d9dfccb33e",
+          "rom_and_firmware_sha256": {
+            "esp32p4_rev0_rom.elf": "948f2c7d108d04a9c3a982f9c1c498fb17f2c4a68abc51f87782592034d7ce44",
+            "p4-hosted-bootloader.bin": "0afa47b7d81bac1e57ba261abfb8a9f622c555da56319434ad8b0f346f7cb062",
+            "p4-hosted-ptable.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+            "p4-hosted-rawtp-tx.bin": "8c5a3bcf2fc99d982119697e35ff7e3903805589489e69221ab828cdfd1d820e",
+            "c6-hosted-bootloader.bin": "42ae8347814c4e2ac477caede2797d798261ef253c114dffc344068783f9d643",
+            "c6-hosted-ptable.bin": "dbbebb5ee220599f4b12fb5c43c01c38b59b2720b5df0d14f7d1b857f6524c92",
+            "c6-hosted-rawtp-slave.bin": "3b0dd12a47b69cec91e20a2264393824de0bf9238c01d690f1233ed38535bf2c",
+            "c6-hosted-otadata.bin": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551"
+          },
+          "hello_count": 0,
+          "serial_sha256": "dafee76a653fe710e11a6c239659d116dc2a7c4773dcbc3dba2f8ac816548471",
+          "expected_serial_sha256": "dafee76a653fe710e11a6c239659d116dc2a7c4773dcbc3dba2f8ac816548471",
+          "instruction_count": 7194798272,
+          "expected_instruction_count": 7194798272,
+          "wifi_dhcp_marker": true
+        }
+      }
+    },
+    "hosted_report_first_difference": "Both base and candidate print D0-D3 [14, 15, 16, 17] instead of D0-D3 14-17",
+    "wifi_sta_message": "Both base and candidate require a P4 WiFi co-processor; the test expects the older wording."
+  }
+}

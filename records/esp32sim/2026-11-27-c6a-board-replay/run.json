@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "code_change",
+  "overall_status": "PARTIAL",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "3e90d09bd31b5658d8dd2b6fc5d820da5f293489",
+    "runtime_source_commit": "36d639c3e17aa964d05a325ac8bac75837de71f2",
+    "candidate_commit": "c2734200d15670eecd990386f89d0883528dd2f1",
+    "published_commit": "c2734200d15670eecd990386f89d0883528dd2f1",
+    "branch": "m5/batch-c6a"
+  },
+  "hardware": {
+    "validation": "virtual-device validation",
+    "profiles": [
+      "m5stack-nanoc6",
+      "arduino-nesso-n1"
+    ],
+    "physical": "NOT RUN"
+  },
+  "firmware": {
+    "docs_commit": "7219cc9286c39b463da84053deee40bc234625db",
+    "board_package": "m5stack:esp32@3.2.5",
+    "stock": "UIFlow2 v2.5.3",
+    "regression_archive_commit": "829cfe6bc14cbdff40b1f4980a5e1ea4f130f66c"
+  },
+  "execution": {
+    "environment": "Native CLI on macOS arm64",
+    "profile": "optimized, LTO disabled, 16 codegen units",
+    "stock_console": "USB-Serial-JTAG guest REPL plus UART0 data probe on NanoC6",
+    "port_lifecycle": "Replay owns and closes all guest processes and UDP sockets"
+  },
+  "checks": [
+    {
+      "layer": "compiled-docs",
+      "target": "m5stack-nanoc6",
+      "status": "PARTIAL",
+      "cases": {
+        "button": "PASS",
+        "ir_nec": "PASS",
+        "led": "PASS",
+        "program": "PASS",
+        "thread-1": "PASS",
+        "thread-2": "FAIL",
+        "thread-3": "FAIL",
+        "thread-4": "PASS",
+        "thread-5": "PASS",
+        "thread-6": "PASS",
+        "zigbee-1": "FAIL",
+        "zigbee-2": "FAIL",
+        "zigbee-3": "PASS",
+        "zigbee-4": "FAIL",
+        "zigbee-5": "FAIL",
+        "stock": "PASS"
+      }
+    },
+    {
+      "layer": "compiled-docs",
+      "target": "arduino-nesso-n1",
+      "status": "PASS",
+      "cases": {
+        "button": "PASS",
+        "buzzer": "PASS",
+        "display": "PASS",
+        "imu": "PASS",
+        "ir_nec": "PASS",
+        "led": "PASS",
+        "lora-1": "PASS",
+        "lora-2": "PASS",
+        "power-2": "PASS",
+        "quickstart-bargraph": "PASS",
+        "touch": "PASS",
+        "stock": "PASS",
+        "power-1": "DOCS-DEFECT"
+      }
+    },
+    {
+      "layer": "stock",
+      "target": "NanoC6 and Nesso N1",
+      "status": "PASS"
+    },
+    {
+      "layer": "BLE",
+      "target": "m5stack-nanoc6",
+      "status": "NOT RUN",
+      "detail": "Matching ELF and transport fixture unavailable"
+    },
+    {
+      "layer": "regression",
+      "target": "CoreS3 Arduino docs",
+      "status": "PASS",
+      "passed": 15,
+      "total": 15
+    },
+    {
+      "layer": "regression",
+      "target": "Cardputer-ADV Arduino docs",
+      "status": "PASS",
+      "passed": 11,
+      "total": 11
+    },
+    {
+      "layer": "regression",
+      "target": "C6 crate",
+      "status": "PASS",
+      "passed": 136
+    },
+    {
+      "layer": "regression",
+      "target": "C6 five-second ROM sentinel",
+      "status": "PASS"
+    },
+    {
+      "layer": "regression",
+      "target": "Workspace Cargo tests",
+      "status": "FAIL",
+      "passed": 1976,
+      "failed": 7,
+      "filtered_external": 34,
+      "detail": "All seven observed assertions reproduced against the base runtime."
+    },
+    {
+      "layer": "lint",
+      "target": "Native and WASM Clippy CI commands",
+      "status": "PASS"
+    }
+  ],
+  "evidence": [
+    "evidence/nano-summary.json",
+    "evidence/nesso-summary.json",
+    "evidence/regression-summary.json"
+  ]
+}
