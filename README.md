@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | ESP Emulator | StickADV 0.2 merged 版本 `usb_dwc_hal_init` 断言归因（#278 补充） | `REVIEW`（virtual-device validation；cardputer-adv 缺 USB OTG 模型，未重复开单；真机 NOT RUN） | [查看](records/m5stack-esp-emulator/2026-11-27-stickadv-merged-usb-otg/) |
 | 2026-11-27 | m5stack-firmware-archive | Board documentation firmware rebuild and replay | PARTIAL (native virtual-device validation) | [查看](records/m5stack-firmware-archive/2026-11-27-board-docs-matrix/) |
 | 2026-11-27 | ESP Emulator | esp32sim browser board qualification | PARTIAL (browser virtual-device validation) | [查看](records/m5stack-esp-emulator/2026-11-27-esp32sim-browser-boards/) |
 | 2026-11-27 | nuxt-m5-docs | M5Stack 文档 Skill 语料刷新 | PASS（Linux 虚拟机查询、正文核对和分发包回读） | [查看](records/nuxt-m5-docs/2026-11-18-documentation-skill-refresh/followups/2026-11-27-assistant-local-refresh/) |

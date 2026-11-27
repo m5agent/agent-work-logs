@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "record": "2026-11-27-stickadv-merged-usb-otg",
+  "job_id": "job-280d20633f28",
+  "generated_at": "2026-11-27T10:49:15Z",
+  "firmware": {
+    "name": "StickADV",
+    "version": "0.2",
+    "m5burner_version_id": "2126265789181636610",
+    "file_name": "stickadv-merged.bin",
+    "bytes": 931888,
+    "sha256": "d50916a5cb3edac0be6dd4eac965856179de90c35fa4c4988bf17c9fa9eca105",
+    "declared_size_matches": true,
+    "declared_sha256_matches": true,
+    "device_code": "CARDPUTER_ADV",
+    "version_note": "Fixed firmware to be merged binary / standalone flash version."
+  },
+  "composed_image": {
+    "bytes": 8388608,
+    "sha256": "1ed2344e7bd749ebe0af1a1a22c62396054fff151a4f9970fcf253146c1e09c3",
+    "source_artifact_sha256": "d50916a5cb3edac0be6dd4eac965856179de90c35fa4c4988bf17c9fa9eca105",
+    "source_format": "merged"
+  },
+  "session": {
+    "session_id": "bd0b2440d22140a0816f4062e7fe944a",
+    "device_id": "cardputer-adv",
+    "runtime": "qemu",
+    "state": "running",
+    "flash_transport": "esp-emu-esptool",
+    "flash_chip": "esp32s3",
+    "flash_size": 8388608,
+    "flash_verified": true,
+    "flash_session_isolated_copy": true,
+    "serial_bytes": 876,
+    "serial_channels": ["console"]
+  },
+  "crash": {
+    "kind": "panic",
+    "source": "device_service",
+    "reason": "usb_dwc_hal_init IDF/components/hal/usb_dwc_hal.c:129 (core_id == CORE_REG_GSNPSID)",
+    "panic_count": 1,
+    "reboot_requests": 1,
+    "task_watchdog_reports": 0,
+    "core_dump_status": "not_observed",
+    "backend_illegal_instruction": false,
+    "elf_status": "not_uploaded",
+    "symbolization_eligible": false,
+    "core_unassigned_backtrace_pcs": [
+      "0x4037816e",
+      "0x4037fdbd",
+      "0x40386ea1",
+      "0x4205dfe1",
+      "0x4204d843",
+      "0x4204ea25",
+      "0x4204a6ea",
+      "0x42009a35",
+      "0x4200586c",
+      "0x420063d8",
+      "0x42031b42"
+    ]
+  },
+  "image_analysis": {
+    "valid": true,
+    "errors": [],
+    "declared_flash_size": 8388608,
+    "bootloader": {
+      "offset": 0,
+      "valid": true,
+      "chip": "esp32s3",
+      "flash_size_code": 3,
+      "image_end": 15056
+    },
+    "partition_table": {
+      "offset": 32768,
+      "valid": true,
+      "partition_count": 6,
+      "md5": "467eb896e29d1aa938c557f4cdfc4c5b",
+      "partitions_end": 8388608
+    },
+    "app0": {
+      "offset": 65536,
+      "valid": true,
+      "image_end": 931848,
+      "label": "app0"
+    },
+    "app1": {
+      "present": false,
+      "reason": "invalid image magic 0xff, expected 0xe9"
+    },
+    "filesystems": [
+      {
+        "label": "spiffs",
+        "status": "UNFORMATTED",
+        "note": "SPIFFS partition appears erased or zero-filled"
+      }
+    ],
+    "app_descriptor": {
+      "idf_version": "v4.4.7-dirty",
+      "project_name": "arduino-lib-builder",
+      "elf_sha256": "f6195ae7a3b1ce681000733e47bf4502b7b8c062e5fc976dcb2a9b1479b24055"
+    }
+  },
+  "runtime_observations": {
+    "qemu_stderr_bytes": 24,
+    "qemu_stderr_sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483",
+    "qemu_stderr_text": "Adding SPI flash device",
+    "qom_diff": {
+      "supported": false,
+      "reason": "device does not advertise qom"
+    },
+    "wait": {
+      "ready": false,
+      "error": "simulator HTTP 408 ready_timeout: application did not satisfy the requested readiness conditions",
+      "phase": "application_readiness",
+      "session_state": "running"
+    }
+  },
+  "binary_readonly_checks": {
+    "symbols": {
+      "usb_dwc_hal_init": 159506,
+      "usb_dwc_hal_chan": 145449,
+      "usb_dwc_hal_port_periodic_enable": 145169,
+      "GSNPSID": 158972
+    },
+    "core_reg_gsnpsid_0x4f54400a_count": 1,
+    "alternate_0x4f54280a_count": 0
+  },
+  "emulator_code_check": {
+    "repository": "m5agent/m5stack-esp-emulator",
+    "commit": "74ee6cb00",
+    "patch": "patches/qemu-m5stack-peripherals/0180-papercolor-usb-otg.patch",
+    "usb_otg_instantiation_condition": "m5_board == M5_BOARD_STICKS3 || m5_board == M5_BOARD_PAPERCOLOR",
+    "cardputer_adv_included": false,
+    "note": "m5cardputeradv does not map 0x60080000 to a DWC model, so GSNPSID reads 0"
+  },
+  "duplicate_check": {
+    "matched_issue": 278,
+    "matched_issue_url": "https://github.com/m5agent/m5stack-esp-emulator/issues/278",
+    "matched_issue_title": "[Cardputer-ADV][ESP32-S3][USB] StickADV .2 启动即断言 usb_dwc_hal_init：m5cardputeradv 未实例化 usb-otg，GSNPSID 读回 0",
+    "other_candidates": [226, 202, 220, 217],
+    "action": "comment_only_no_duplicate_issue",
+    "comment_url": "https://github.com/m5agent/m5stack-esp-emulator/issues/278#issuecomment-7216337434"
+  },
+  "comparison_with_issue_278_sample": {
+    "app_only_bin_bytes": 866048,
+    "app_only_bin_sha256": "f3bdfd50fc651560c433fc606b34c7aa0b144b3fa80c33f753a56a06eec4a351",
+    "same_assertion_line": true,
+    "same_first_three_backtrace_pcs": true,
+    "app_only_elf_sha256_prefix": "88d58c08",
+    "merged_elf_sha256_prefix": "f6195ae7",
+    "application_pc_shift_note": "rebuild shifted application PCs by a small offset"
+  },
+  "evidence_levels": {
+    "virtual_device_validation": "PASS",
+    "code_level_verification": "PASS",
+    "hardware_validation": "NOT RUN"
+  },
+  "not_run": [
+    "physical Cardputer-ADV USB host enumeration (requires powered 5V hub/dongle)",
+    "USB PHY/electrical and host-mode endpoint transfer",
+    "application behavior after the panic",
+    "backtrace symbolization (no matched ELF)",
+    "issue 278 fix and regression acceptance"
+  ],
+  "evidence_files": {
+    "serial.log": {
+      "bytes": 876,
+      "sha256": "d9ccf0f22237702177c4fdae8ab00aaafd76d5959922a81c55bab529e650e868"
+    },
+    "qemu.stderr": {
+      "bytes": 24,
+      "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+    }
+  }
+}

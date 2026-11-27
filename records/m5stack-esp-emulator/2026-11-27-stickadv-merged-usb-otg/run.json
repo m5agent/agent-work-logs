@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-27",
+  "kind": "firmware_review_attribution",
+  "overall_status": "REVIEW",
+  "title": "StickADV 0.2 merged 版本在 Cardputer-ADV 上的 usb_dwc_hal_init 断言归因（issue #278 补充）",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/278",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "74ee6cb00"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "StickADV",
+    "version": "0.2",
+    "m5burner_version_id": "2126265789181636610",
+    "file_name": "stickadv-merged.bin",
+    "bytes": 931888,
+    "sha256": "d50916a5cb3edac0be6dd4eac965856179de90c35fa4c4988bf17c9fa9eca105",
+    "device_id": "cardputer-adv",
+    "device_code": "CARDPUTER_ADV",
+    "runtime": "qemu",
+    "composed_image_sha256": "1ed2344e7bd749ebe0af1a1a22c62396054fff151a4f9970fcf253146c1e09c3"
+  },
+  "execution": {
+    "environment": "macOS arm64; read-only attribution of an existing firmware-review job; Device Service native QEMU (m5cardputeradv)",
+    "task_id": "job-280d20633f28",
+    "session_id": "bd0b2440d22140a0816f4062e7fe944a",
+    "review_lane": "SIM_PARTIAL",
+    "review_status": "manual_review",
+    "error_code": "E_SIM_APP_CRASH"
+  },
+  "checks": [
+    {
+      "name": "firmware_identity",
+      "level": "artifact",
+      "status": "PASS",
+      "detail": "931888 bytes and SHA-256 match the declared artifact"
+    },
+    {
+      "name": "image_and_partition_parse",
+      "level": "artifact",
+      "status": "PASS",
+      "detail": "8 MiB merged image; bootloader, partition table and app0 valid; app1 empty; partitions fit"
+    },
+    {
+      "name": "virtual_flash",
+      "level": "transport",
+      "status": "PASS",
+      "detail": "esp-emu-esptool flash verified, session-isolated copy"
+    },
+    {
+      "name": "guest_boot_and_application",
+      "level": "device_response",
+      "status": "FAIL",
+      "detail": "panic at usb_dwc_hal_init GSNPSID assertion before any IDF banner"
+    },
+    {
+      "name": "usb_otg_model_presence",
+      "level": "model",
+      "status": "FAIL",
+      "detail": "m5cardputeradv does not instantiate esp32s3.usb-otg; 0180 patch gates it to STICKS3/PAPERCOLOR"
+    },
+    {
+      "name": "qemu_host_abort",
+      "level": "host",
+      "status": "PASS",
+      "detail": "qemu.stderr only 'Adding SPI flash device'; no host assertion or illegal instruction"
+    },
+    {
+      "name": "duplicate_issue_check",
+      "level": "review",
+      "status": "PASS",
+      "detail": "matched open issue 278; no new issue created"
+    },
+    {
+      "name": "issue_evidence_comment",
+      "level": "delivery",
+      "status": "PASS",
+      "detail": "comment posted at issue 278 (comment id 7216337434)"
+    },
+    {
+      "name": "backtrace_symbolization",
+      "level": "review",
+      "status": "NOT RUN",
+      "detail": "no matched ELF; function names unresolved"
+    },
+    {
+      "name": "physical_usb_host_enumeration",
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "requires powered 5 V hub/dongle on real Cardputer-ADV"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/summary.json",
+      "bytes": 5824,
+      "sha256": "71a7d22652d3a8525ba042f7e57025b04a5b25d17bff4908ff4220366c7ad4c9",
+      "note": "derived summary; hashes of raw evidence listed inside"
+    },
+    {
+      "path": "evidence/serial.log",
+      "bytes": 876,
+      "sha256": "d9ccf0f22237702177c4fdae8ab00aaafd76d5959922a81c55bab529e650e868"
+    },
+    {
+      "path": "evidence/qemu.stderr",
+      "bytes": 24,
+      "sha256": "8a98b05296cf940ed865ea8f677fbd5b417a399293cf1cdf4c6af8302b1bf483"
+    }
+  ],
+  "notes": [
+    "Root cause is the missing board-level DWC2/USB-OTG model for Cardputer-ADV, not the firmware or the merged packaging.",
+    "The same assertion and the first three backtrace PCs match the app-only sample already tracked in issue 278.",
+    "No emulator code was changed, nothing was pushed to the emulator repository, and no issue was closed.",
+    "This round's qom-diff reported 'device does not advertise qom' and was not used as evidence."
+  ]
+}
