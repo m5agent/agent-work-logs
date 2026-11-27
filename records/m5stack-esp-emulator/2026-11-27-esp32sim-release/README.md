@@ -9,3 +9,4 @@ All guest results are virtual-device validation.
 - [Native session summary](evidence/native-summary.json)
 - [Browser guest summary](evidence/browser-summary.json)
 - [Tab5 CLI case summary](evidence/tab5-cli-summary.json)
+- [Hosted preview and stock guest follow-up](evidence/pages-preview-summary.json)

@@ -54,3 +54,28 @@ Full Tab5 cross-backend HTTP parity beyond the named cases is NOT RUN.
 The frozen backend needs per-firmware configuration for its DSI path.
 Other Tab5 sessions continue to select the previous runtime. Physical
 hardware measurements and hosted delivery are outside this initial receipt.
+
+## Hosted preview follow-up
+
+The initial official workflow produced both pinned QEMU source artifacts.
+The preview was cancelled once the raw GitHub route for its Arduino fixtures
+was found to return Git LFS pointers. The fixture correction pins downloaded
+media by SHA-256. [Initial workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45925805446)
+· [Fixture correction](https://github.com/m5agent/m5stack-esp-emulator/pull/280)
+
+The next official preview passed all seven esp32sim guest cases, each with
+one DedicatedWorker before Stop and zero after. Its separate CoreMatrix stock
+runner failed the isolation assertion before any guest boot. The remaining
+aggregate gate was NOT RUN in that workflow. The runner opened the mixed
+site's default engine while waiting for QEMU's isolation condition.
+[Second workflow](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45928863733)
+
+After adding explicit QEMU selection to the runner, a local browser replay
+used the identical pinned CI-built C61 WASM and original UIFlow2 v2.5.4 Flash.
+It verified the stock missing-SSID framebuffer, USB raw REPL, nine input
+edges and graceful Worker cleanup. Controller inputs and framebuffer hashes
+are included in the summary. The browser target and session identifiers are
+omitted. The corrected official preview was dispatched from the merged fix.
+[Stock runner correction](https://github.com/m5agent/m5stack-esp-emulator/pull/281)
+· [Corrected preview](https://github.com/m5agent/m5stack-esp-emulator/actions/runs/45930498931)
+· [Evidence summary](evidence/pages-preview-summary.json)
