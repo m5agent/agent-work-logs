@@ -18,6 +18,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
+| 2026-11-27 | ESP Emulator | esp32sim 与封存后端同固件对照 | PARTIAL (virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-backend-benchmark/) |
 | 2026-11-27 | ESP Emulator | StickADV 0.2 merged 版本 `usb_dwc_hal_init` 断言归因（#278 补充） | `REVIEW`（virtual-device validation；cardputer-adv 缺 USB OTG 模型，未重复开单；真机 NOT RUN） | [查看](m5stack-esp-emulator/2026-11-27-stickadv-merged-usb-otg/) |
 | 2026-11-27 | m5stack-firmware-archive | Board documentation firmware rebuild and replay | PARTIAL (native virtual-device validation) | [查看](m5stack-firmware-archive/2026-11-27-board-docs-matrix/) |
 | 2026-11-27 | ESP Emulator | esp32sim browser board qualification | PARTIAL (browser virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-browser-boards/) |
