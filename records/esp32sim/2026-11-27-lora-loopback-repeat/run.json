@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "report",
+  "date": "2026-11-27",
+  "overall_status": "PARTIAL",
+  "title": "Repeated SX1262 UDP loopback comparison",
+  "source": {
+    "repository": "https://github.com/m5agent/esp32sim",
+    "base_commit": "ef799a1332bfc98ce63077ee9efc814f1fa3f83c",
+    "candidate_commit": "9ac09fb79cefe4a2cb6f911172ffa6cbdfbd784a"
+  },
+  "hardware": {},
+  "firmware": {
+    "fixture/run-nesso-n1-lora.py": "489f324582ff1b12b69f26bbfb41d07301b5d84734256a982c1b976150ae2680",
+    "fixture/run-papermono-docs.sh": "e58441e873e48e16442b2d69a406ec03a9b09402923f7433dbb45b2b475a6f1f",
+    "fixture/run-paper-docs.py": "e072621b448083fce9d00ed705c2a095a2de092d9f56b1b6c31e6405a0e312ea",
+    "fixture/check-paper-docs.py": "35c935818e4b6b00e266a6cb2dd43e3bd01c71bf1d0e8634897b6d081b567b35",
+    "fixture/run-docs.py": "cb25765aef582f7900205128f9e2a72699fccc7c0f3f9078bb5e196addc521a1",
+    "fixture/cdc-doc.py": "599bbe2ee340e0d8dbe2d8bf0053b8d172e5998290a8f3a5129f6220fec98a82",
+    "fixture/mono-seed.img": "30e8fcb56ada9282944d404fd6929a2f8a2cd112a7b795b8cecd68747507fcea",
+    "rom/esp32s3_rev0_rom.elf": "c0ce0f338d1de1bdc6efbef1591779a2a42c1ab7d759d3c6ae8ae63a7dd34cfd",
+    "rom/esp32c6_rev0_rom.elf": "788e1d38724aeb8fd974fa10c4a7b089c02627d35342ce84b9e0b12b239f3551",
+    "firmware/nesso-n1/lora-1/sketch.merged.bin": "9f1c21052bf82232c937a781a882feaedc5bacd9606e11a77d2a77d402ec2256",
+    "firmware/nesso-n1/lora-2/sketch.merged.bin": "5e1a635e2e438201285ea1b659325ac2602cfb649c23b04199f38f37e8a5e8b6",
+    "firmware/papermono/lora-1/sketch.merged.bin": "c80930408643fde59a8bc7b7f9f3bdfaafe6881966eff197db4037e04062b2ef",
+    "firmware/papermono/lora-2/sketch.merged.bin": "b271c68ab780c9ec386a84d21cab5c807d48c98bc2fb379754a5a3f4485c7497",
+    "fixture/uiflow253.bin": "38b308769e35fe3393bde711e67d27403c32166cf62c10951c19d684fdb38631",
+    "adv/cardputer_adv_lora1262_cap_sender_example/source.py": "08bb6c92c945c25354dde44133711ccf51fc47320a7e079653f84351ac936f51",
+    "adv/cardputer_adv_lora1262_cap_receiver_example/source.py": "6c3765e32fd6d2b730f164fc1aea478d150738f918f25509216325d23678abe9",
+    "adv/cardputer_adv_lora868_cap_sender_example/source.py": "d5bb7f05ccab053c41e83dc6d85ea6ee9cf1e5036f91614975f07df474c3d626",
+    "adv/cardputer_adv_lora868_cap_receiver_example/source.py": "174c834489590531f2271229b5b5c0093ea12f1c941826b6d6873fd683778df0"
+  },
+  "execution": {
+    "environment": "Native arm64 macOS virtual-device validation",
+    "runtime_builds": {
+      "ef799a13": {
+        "commit": "ef799a1332bfc98ce63077ee9efc814f1fa3f83c",
+        "runtime_sha256": "d13c0dd39f40e3b688afc8928489b6c637e2dd7e5d4f2d8108b249ebee3b7c03"
+      },
+      "9ac09fb7": {
+        "commit": "9ac09fb79cefe4a2cb6f911172ffa6cbdfbd784a",
+        "runtime_sha256": "91f5732aa140d270fb0175404c68110a6dd510998813df1e68fdd60e2ce2758b"
+      }
+    },
+    "rounds_per_build": 10,
+    "schedule": "Five lanes run together within each revision block. Parent first on odd rounds, candidate first on even rounds."
+  },
+  "checks": [
+    {
+      "layer": "data_behavior",
+      "status": "PARTIAL",
+      "detail": "Eighty paired LoRa trials and twenty Nesso isolated controls"
+    },
+    {
+      "layer": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "Standalone virtual-device experiment with no physical RF measurement"
+    }
+  ],
+  "evidence": [
+    "evidence/trials.json",
+    "evidence/summary.json",
+    "evidence/startup-controls.json",
+    "evidence/horizon-controls.json"
+  ]
+}
