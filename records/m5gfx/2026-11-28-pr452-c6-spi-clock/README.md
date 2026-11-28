@@ -54,6 +54,12 @@ PR 描述里的 IDF 行为与源码核对一致：IDF 5.5.5 在 C6/C61 的
 - `evidence/frame-base-display.png`、`frame-head-display.png`：135×240 画面（同一 SHA256）
 - `evidence/sketches/`：两份复现 sketch 与会话采集脚本
 
+## 已发布回复
+
+- <https://github.com/m5stack/M5GFX/pull/452#issuecomment-7235935941>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
+- 公开记录 permalink（评论引用）：`523cac9`
+
 ## 未覆盖项
 
 - `hardware validation`：`NOT RUN`；SCLK 波形未测量，`esp32sim` 不建模 SPI 频率，

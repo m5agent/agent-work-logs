@@ -134,4 +134,6 @@ Nesso N1 `readRect` 性能敏感的使用，可单独评估。
 
 ## 8. 已发布回复
 
-- 待补：评审评论 permalink。
+- <https://github.com/m5stack/M5GFX/pull/452#issuecomment-7235935941>
+  （1 条，英文；PR 仍 OPEN，未 close、未 push、未改他人仓库）
+- 公开记录 permalink（评论引用）：`523cac9`；本条补充说明为同一记录的后续提交，不改变结论。
