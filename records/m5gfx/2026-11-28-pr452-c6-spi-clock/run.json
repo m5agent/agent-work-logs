@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "kind": "pr-review",
+  "overall_status": "PARTIAL",
+  "title": "M5GFX #452: restore the Arduino SPI clock source after the ESP-IDF master init (C6 SPI2)",
+  "source": {
+    "repository": "m5stack/M5GFX",
+    "pull_request": "https://github.com/m5stack/M5GFX/pull/452",
+    "issue": "https://github.com/m5stack/M5GFX/issues/451",
+    "base_commit": "603092aab60e32fadd1d73abd472068a35e189e8",
+    "head_commit": "e1666e9c175725b426a7aef9e4b17622f1d9813a"
+  },
+  "hardware": {
+    "status": "NOT RUN",
+    "reason": "No ESP32-C6 hardware on this host; physical SCLK not measured."
+  },
+  "firmware": {
+    "kind": "arduino-merged",
+    "toolchain": "arduino-cli 1.6.0 / esp32:esp32 3.3.13 (ESP-IDF 5.5.5)",
+    "library_base": "M5GFX 603092aab60e32fadd1d73abd472068a35e189e8",
+    "library_head": "M5GFX e1666e9c175725b426a7aef9e4b17622f1d9813a",
+    "images": {
+      "base_spi_sha256": "ff32f67c45c9e2f0b149176733ed637c9ce2d601325425320d36d960a520e52d",
+      "head_spi_sha256": "15efc883d05835e495753f8bf9d82c7e957db1a9f33dd7ffc13e2dd1fe692551",
+      "base_display_sha256": "a39fba4485f93110a11cdc1bd1e3e20132c851ba24ad75ecf88cb49759704b16",
+      "head_display_sha256": "e1b53b82502fb38324fcbd5bf22b7aaf2679b33dd7179f8b0e9958f1657de190"
+    }
+  },
+  "execution": {
+    "environment": "macOS arm64; local Device Service nesso-n1 profile, runtime=esp32sim (ESP32-C6 / ST7789 135x240 / SPI2 / 16 MB flash)",
+    "runtime_commit": "9c0447e8e38d0bafc2f124e6e8b8cc5994d30eee",
+    "runtime_binary_sha256": "f87e8de04a6a631e8ea551b3512ae719ccc8fffcf9f76b18ba020220c149bf91",
+    "sessions": {
+      "base_spi": "101c5c9e62204341aecb34222fedeb54",
+      "head_spi": "6faefc8ae6b74c43abffd2a649e22c0e",
+      "base_display": "e2424d33dccf487cbe2ba6572802263f",
+      "head_display": "bf08d603775f4d76b4bbeedd604e6bb7"
+    }
+  },
+  "checks": [
+    {
+      "name": "Code-level: IDF 5.5.5 call chain and per-target mux write",
+      "status": "PASS",
+      "observed": "spi_bus_add_device -> spi_master_init_driver -> spi_hal_init -> spi_ll_master_init; C6/C61 write sel=1, H2 writes 0, C5 does not write; restore point after add_device covers it."
+    },
+    {
+      "name": "Arduino-only 8 MHz baseline",
+      "status": "PASS",
+      "observed": "sel=0 (XTAL 40 MHz), divider 5, derived SCLK 8 MHz on both trees."
+    },
+    {
+      "name": "base 603092a: SPI2 mux after M5GFX bus init",
+      "status": "PASS",
+      "observed": "PCR_SPI2_CLKM_CONF=0x00500000, sel=1 (PLL_F80M), derived Arduino 8 MHz becomes 16 MHz and 2 MHz becomes 4 MHz."
+    },
+    {
+      "name": "head e1666e9: SPI2 mux after M5GFX bus init",
+      "status": "PASS",
+      "observed": "PCR_SPI2_CLKM_CONF=0x00400000, sel=0 (XTAL), derived Arduino 8 MHz stays 8 MHz and 2 MHz stays 2 MHz; repeat run identical."
+    },
+    {
+      "name": "head: Nesso N1 ST7789 panel init and full-screen write",
+      "status": "PASS",
+      "observed": "display_init=1, 135x240, 40 MHz write clock (clk_equ_sysclk=1), frame PNG b9db9630... identical to base."
+    },
+    {
+      "name": "base vs head display frame",
+      "status": "PASS",
+      "observed": "Both 135x240 PNGs have sha256 b9db9630a017ab699f880893ff9946441345460389532682b9013c8ad40ff258."
+    },
+    {
+      "name": "Build: Nesso N1 (3.3.13)",
+      "status": "PASS",
+      "observed": "Four 16,777,216-byte merged images built; Device Service flash.verified=true; --warnings all on head produced no new warnings."
+    },
+    {
+      "name": "Build-only: esp32c5 and esp32h2 (3.3.13)",
+      "status": "PASS",
+      "observed": "Both targets compiled successfully (PCR div-num and SEL-only macro paths)."
+    },
+    {
+      "name": "readRect readback on virtual Nesso N1",
+      "status": "NOT RUN",
+      "observed": "esp32sim Nesso N1 model implements RDDID (0x04) only, not RAMRD (0x2E); read back returns 0xFFFF on both trees."
+    },
+    {
+      "name": "C61 build",
+      "status": "NOT RUN",
+      "observed": "Local esp32:esp32 3.3.13 has no C61 target; PR CI esp32c61 (IDF 5.5.2) is SUCCESS."
+    },
+    {
+      "name": "C5 / C61 / H2 runtime",
+      "status": "NOT RUN",
+      "observed": "No matching creatable device profile on this host."
+    },
+    {
+      "name": "SCLK pin waveform",
+      "status": "NOT RUN",
+      "observed": "esp32sim does not model GP-SPI clock frequency; SCLK values are derived from the mux and divider registers."
+    },
+    {
+      "name": "Hardware validation on C6",
+      "status": "NOT RUN",
+      "observed": "No ESP32-C6 hardware available."
+    },
+    {
+      "name": "Arduino 4.0 / IDF 6.x runtime",
+      "status": "NOT RUN",
+      "observed": "Source comparison only; local core is 3.3.13. PR CI Arduino 4.0.0 / IDF 6.0.2 build is SUCCESS."
+    }
+  ],
+  "evidence": [
+    "evidence/pr452.diff",
+    "evidence/pr-metadata.json",
+    "evidence/device-profile-summary.json",
+    "evidence/session-summary.json",
+    "evidence/build-summary.txt",
+    "evidence/register-derivation.md",
+    "evidence/serial-base-spi.txt",
+    "evidence/serial-head-spi.txt",
+    "evidence/serial-base-display.txt",
+    "evidence/serial-head-display.txt",
+    "evidence/frame-base-display.png",
+    "evidence/frame-head-display.png",
+    "evidence/sketches/nesso_spi_repro.ino",
+    "evidence/sketches/nesso_display_repro.ino",
+    "evidence/sketches/run_case.py"
+  ],
+  "notes": [
+    "Virtual-device validation: SCLK is derived from PCR mux and SPI2 divider registers, not measured on a pin.",
+    "Display path uses M5GFX's own Nesso N1 bus/panel parameters; IOE 0x44 LCD_READY/BACKLIGHT is enabled in the sketch because the board model gates panel commands on it.",
+    "PR CI includes esp32c61 (IDF 5.5.2) and Arduino 4.0.0 / IDF 6.0.2 targets; local runs cover C6 only.",
+    "No blocking issue found. Read clock changes from 16 MHz to 13.3 MHz and use_lock=false caps writes above 40 MHz; both are documented in the PR body."
+  ]
+}

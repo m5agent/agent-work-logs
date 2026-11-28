@@ -1,0 +1,41 @@
+# 构建记录
+
+## 工具链
+
+- macOS arm64
+- `arduino-cli 1.6.0`（Homebrew）
+- `esp32:esp32 3.3.13`（Arduino-ESP32 3.3.13 / ESP-IDF 5.5.5）
+- 两个只读库树：
+  - base：`m5stack/M5GFX` `603092aab60e32fadd1d73abd472068a35e189e8`（develop，PR base）
+  - head：`m5stack/M5GFX` `e1666e9c175725b426a7aef9e4b17622f1d9813a`（PR head）
+
+## 命令（路径已替换为占位符）
+
+```
+arduino-cli compile --fqbn esp32:esp32:arduino_nesso_n1 \
+  --library <M5GFX-tree> --output-dir <out> <sketch-dir>
+```
+
+## 结果
+
+| 树 | sketch | 结果 | 合并镜像大小 | 合并镜像 SHA256 |
+| --- | --- | --- | --- | --- |
+| base | `nesso_spi_repro` | 成功 | 16,777,216 | `ff32f67c45c9e2f0b149176733ed637c9ce2d601325425320d36d960a520e52d` |
+| head | `nesso_spi_repro` | 成功 | 16,777,216 | `15efc883d05835e495753f8bf9d82c7e957db1a9f33dd7ffc13e2dd1fe692551` |
+| base | `nesso_display_repro` | 成功 | 16,777,216 | `a39fba4485f93110a11cdc1bd1e3e20132c851ba24ad75ecf88cb49759704b16` |
+| head | `nesso_display_repro` | 成功 | 16,777,216 | `e1b53b82502fb38324fcbd5bf22b7aaf2679b33dd7179f8b0e9958f1657de190` |
+
+构建后均被 Device Service 以 `direct-complete-flash-image` 写入并通过 `flash.verified=true`、
+`bootloader_chip=esp32c6`、app 分区 `app0 @ 0x10000`。
+
+## 额外编译覆盖（build-only）
+
+| 目标 | 结果 | 合并镜像 SHA256 |
+| --- | --- | --- |
+| `esp32:esp32:esp32c5`（3.3.13） | 成功，4,194,304 字节 | `cde63198e66153ef99f88211ef0f7e0d46fea35becad5cc296de8b5b06b220c4` |
+| `esp32:esp32:esp32h2`（3.3.13） | 成功，4,194,304 字节 | `4d1ba68e71334ab10a8d60d1945068b7bfd554ab2b84302821c8162448bfd0ce` |
+
+- 用 `--warnings all` 重编 `nesso_spi_repro`（head）无编译警告/错误。
+- PR 的 CI（39 项）全部 SUCCESS，含 Arduino 2.0.17 / 3.1.3 / 3.3.13 / 4.0.0 与
+  ESP-IDF 5.1.6 / 5.4.3 / 5.5.2 / 6.0.2，包含 `esp32c61 (IDF 5.5.2)`。
+- 本机 3.3.13 没有 C61 目标，未做本地 C61 构建；C5/H2 没有对应虚拟设备，未运行。
