@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "kind": "issue",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #456: Cardputer ADV GPIO46 stays output-enabled after begin()",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unified/issues/456",
+    "pull_request": "",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "96576a14247ddc935149145aa6b51943464120f1"
+  },
+  "hardware": {},
+  "firmware": {
+    "m5unified": "0.3.0 @ 96576a14247ddc935149145aa6b51943464120f1",
+    "m5gfx": "0.3.0 @ 28d47949bdc84f30881623476f555398e2194313",
+    "arduino_esp32": "3.3.13",
+    "arduino_cli": "1.6.0",
+    "fqbn": "esp32:esp32:m5stack_cardputer",
+    "sketch_sha256": "a5d55fec62bbef981c54936c297782ea1d521d40a9082c31cbb93274744e6c22",
+    "merged_bin_before_sha256": "977d75545a4a91b1bf87faa00dada126b4cbf659a4144597785abe714d7caecc",
+    "merged_bin_after_sha256": "d3a251e0404ab2f5ab2bf71e30140240a9bbee0812c78ac27ba48164331f794d"
+  },
+  "execution": {
+    "environment": "local Device Service, esp32sim runtime",
+    "task_id": "",
+    "session_id": "",
+    "sessions": [
+      {
+        "role": "cardputer-adv prefix",
+        "session_id": "275ecb4d550c4552a05088cd98b2ce4a"
+      },
+      {
+        "role": "cardputer prefix",
+        "session_id": "447ac9826e9649d8829cbd887c596403"
+      },
+      {
+        "role": "papermono prefix",
+        "session_id": "246add9204d349d48b33954be2fdbb3c"
+      },
+      {
+        "role": "cardputer-adv fixed",
+        "session_id": "c54aba84b6464249ac7b4ca2e9896610"
+      },
+      {
+        "role": "cardputer fixed",
+        "session_id": "c280a53af1e2442cb0b0b4094b447fc2"
+      },
+      {
+        "role": "papermono fixed",
+        "session_id": "48b596448b8841f484811011ac0d2e5b"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "adv-prefix-after-begin-gpio46-output",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=24, EN1=0000487e, OUT1=00004026, en46=1, out46=1"
+    },
+    {
+      "name": "adv-prefix-after-mic-begin-gpio46-output",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=24, EN1=00004a7e, OUT1=00004026, en46=1, out46=1"
+    },
+    {
+      "name": "cardputer-prefix-after-begin-gpio46-output",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=14, EN1=0000487e, OUT1=00004026, en46=1, out46=1"
+    },
+    {
+      "name": "papermono-prefix-after-begin-gpio46-output",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=29, EN1=0001c800, OUT1=0001c000, en46=1, out46=1"
+    },
+    {
+      "name": "adv-fixed-after-begin-gpio46-input",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=24, EN1=0000087e, OUT1=00000026, en46=0, out46=0"
+    },
+    {
+      "name": "cardputer-fixed-after-begin-gpio46-input",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=14, EN1=0000087e, OUT1=00000026, en46=0, out46=0"
+    },
+    {
+      "name": "papermono-fixed-after-begin-gpio46-input",
+      "level": "device_response",
+      "status": "PASS",
+      "evidence": "board=29, EN1=00018800, OUT1=00018000, en46=0, out46=0"
+    },
+    {
+      "name": "constant-mic-pcm-symptom",
+      "level": "data_behavior",
+      "status": "NOT RUN",
+      "evidence": "GPIO model does not model opposing output drivers; no audio fixture injected"
+    },
+    {
+      "name": "hardware-cardputer-adv",
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "evidence": "no Cardputer ADV in the hardware test center"
+    }
+  ],
+  "evidence": [
+    "evidence/adv-prefix-serial-console.log",
+    "evidence/cardputer-prefix-serial-console.log",
+    "evidence/papermono-prefix-serial-console.log",
+    "evidence/adv-fixed-serial-console.log",
+    "evidence/cardputer-fixed-serial-console.log",
+    "evidence/papermono-fixed-serial-console.log",
+    "patches/0001-restore-gpio46-on-cardputer-papermono.patch",
+    "code/m5u456/m5u456.ino"
+  ],
+  "notes": [
+    "The emulator GPIO model explicitly does not model electrical contention between an enabled output and an external driver.",
+    "M5Unified PR #345 intentionally omitted Cardputer and PaperMono based on the assumption that the mic path reconfigures the pin; ESP-IDF only enables the input and never clears output enable.",
+    "No upstream code was pushed; the patch is local to this record."
+  ]
+}
