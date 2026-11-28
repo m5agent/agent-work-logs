@@ -48,6 +48,7 @@
 
 | 日期 | 对象 | 主题 | 结果 | 链接 |
 | --- | --- | --- | --- | --- |
+| 2026-11-28 | StackChan | #140 AI.AGENT 语音播放可选试验（WebSocket + 80 ms I2S） | `PARTIAL`（两种配置构建与虚拟设备 codec 初始化通过；语音质量、WebSocket/MQTT 运行时与实机 NOT RUN） | [查看](records/m5stack-stackchan/2026-11-28-pr140-ai-audio-trial/) |
 | 2026-11-28 | ESP Emulator | Device Service default migration qualification | PARTIAL (virtual-device validation) | [查看](records/m5stack-esp-emulator/2026-11-28-device-service-defaults-qualification/) |
 | 2026-11-27 | M5GFX | #451 C6 上 M5GFX 初始化后 Arduino SPI 以 2 倍请求时钟运行 | `PARTIAL`（virtual-device validation：寄存器级因果链复现，8→16 MHz / 2→4 MHz 由分频换算；SCLK 波形与真机 NOT RUN） | [查看](records/m5gfx/2026-11-27-issue451-c6-spi-clock/) |
 | 2026-11-27 | ESP Emulator | Device Service board state and routing candidate | PARTIAL (virtual-device validation) | [查看](records/m5stack-esp-emulator/2026-11-27-device-state-routing-candidate/) |

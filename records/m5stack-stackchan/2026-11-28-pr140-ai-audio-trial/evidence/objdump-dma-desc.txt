@@ -1,0 +1,37 @@
+# CoreS3AudioCodec::CreateDuplexChannels, dma_desc_num initializer
+# xtensa-esp32s3-elf-objdump -d on cores3_audio_codec.cc.obj (ESP-IDF v6.1)
+# The i2s_chan_config_t dma_desc_num field is stored at stack offset 172.
+
+=== build-off (option off: AUDIO_CODEC_DMA_DESC_NUM = 6)
+  48:	10c192        	addi	a9, a1, 16
+  4b:	94a082        	movi	a8, 148
+  4e:	a98a      	add.n	a10, a9, a8
+  50:	0c2c      	movi.n	a12, 32
+  52:	0b0c      	movi.n	a11, 0
+  54:	000081        	l32r	a8, fffc0054 <.LC23+0xfffbffc2>
+  57:	0008e0        	callx8	a8
+  5a:	630c      	movi.n	a3, 6
+  5c:	f0a092        	movi	a9, 240
+  5f:	170c      	movi.n	a7, 1
+  61:	c28b      	addi.n	a12, a2, 8
+  63:	b24b      	addi.n	a11, a2, 4
+  65:	2b6132        	s32i	a3, a1, 172
+  68:	2c6192        	s32i	a9, a1, 176
+  6b:	b44172        	s8i	a7, a1, 180
+
+=== build-on (option on: literal 8)
+  3a:	1159      	s32i.n	a5, a1, 4
+  3c:	0149      	s32i.n	a4, a1, 0
+  3e:	000081        	l32r	a8, fffc0040 <.LC23+0xfffbffae>
+  41:	0008e0        	callx8	a8
+  44:	10c192        	addi	a9, a1, 16
+  47:	94a082        	movi	a8, 148
+  4a:	a98a      	add.n	a10, a9, a8
+  4c:	0c2c      	movi.n	a12, 32
+  4e:	0b0c      	movi.n	a11, 0
+  50:	000081        	l32r	a8, fffc0050 <.LC23+0xfffbffbe>
+  53:	0008e0        	callx8	a8
+  56:	890c      	movi.n	a9, 8
+  58:	2b6192        	s32i	a9, a1, 172
+  5b:	170c      	movi.n	a7, 1
+  5d:	f0a092        	movi	a9, 240

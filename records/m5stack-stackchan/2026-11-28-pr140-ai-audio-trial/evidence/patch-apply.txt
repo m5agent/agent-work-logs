@@ -1,0 +1,35 @@
+# Patch applicability to the pinned xiaozhi-esp32 revision (2026-11-28)
+# PR head: 30820d66dfebe8d73e8cb38d05f43e85330dcb43 (m5stack/StackChan PR #140)
+# xiaozhi-esp32 pin: 49b4380b3faa0ceadd28a3e78aaf0f311c46c57e (tag v2.5.2)
+# firmware/patches/xiaozhi-esp32.patch sha256:
+#   18a4ce579262fb83a0bc7a1cd0077ac07deadee75771c8d0beb7b2eec1be9332
+
+$ git clone --depth 1 --branch v2.5.2 https://github.com/78/xiaozhi-esp32.git <work>/xz-idem
+$ cd <work>/xz-idem
+$ git apply --check <pr>/firmware/patches/xiaozhi-esp32.patch
+first_check=0
+$ git apply <pr>/firmware/patches/xiaozhi-esp32.patch
+apply=0
+$ git apply --check <pr>/firmware/patches/xiaozhi-esp32.patch
+second_check=1        # expected: patch is already applied
+$ git apply --reverse --check <pr>/firmware/patches/xiaozhi-esp32.patch
+reverse_check=0
+
+# Full fetch path used for the builds:
+$ python3 fetch_repos.py
+Applied patch <work>/firmware/patches/xiaozhi-esp32.patch to <work>/firmware/xiaozhi-esp32
+fetch_exit=0
+
+# Diffstat of the applied patch on a clean v2.5.2 checkout:
+ main/application.cc                               |  50 +++----
+ main/application.h                                |   1 -
+ main/boards/common/esp_video.cc                   | 163 +++++++++++++++-------
+ main/boards/common/esp_video.h                    |   7 +-
+ main/boards/common/i2c_device.cc                  |   4 +
+ main/boards/common/i2c_device.h                   |   1 +
+ main/boards/common/wifi_board.h                   |   2 +-
+ main/boards/m5stack/core-s3/cores3_audio_codec.cc |  46 ++++--
+ main/boards/m5stack/core-s3/cores3_audio_codec.h  |   5 +-
+ main/ota.cc                                       |  13 +-
+ main/ota.h                                        |   8 +-
+ 11 files changed, 190 insertions(+), 110 deletions(-)

@@ -1,0 +1,43 @@
+# StackChan 1.6.2 + PR #140: two-configuration build (2026-11-28)
+# Host: macOS arm64. Toolchain: ESP-IDF v6.1 (ESP-IDF v6.1).
+# Target pin: firmware/sdkconfig.defaults, CONFIG_BOARD_TYPE_M5STACK_STACK_CHAN=y,
+# CONFIG_IDF_TARGET=esp32s3, 16 MB flash, 8 MB PSRAM.
+
+## Dependency fetch
+$ python3 fetch_repos.py
+fetch_exit=0
+xiaozhi-esp32 checkout: 49b4380b3faa0ceadd28a3e78aaf0f311c46c57e (v2.5.2), patch applied
+
+## Default build (option off)
+$ idf.py -B build-off build
+build_off_exit=0
+Project build complete.
+App image: build-off/stack-chan.bin, 3777808 bytes
+  sha256 7e761627c72a269e8817f412f47a287b4f15572bba68d1fc788fbe83ac88f682
+Bootloader: 24208 bytes
+Merged 16 MB image sha256:
+  22295b2e900a3b0726a3fd9ce09e9d3cc5801095976c7827cd73b6e977a34796
+
+## Trial build (option on)
+$ printf 'CONFIG_STACKCHAN_AI_AUDIO_TRIAL=y\n' > sdkconfig.defaults.local
+$ rm -f sdkconfig && idf.py -B build-on build
+build_on_exit=0
+$ grep STACKCHAN_AI_AUDIO_TRIAL sdkconfig
+CONFIG_STACKCHAN_AI_AUDIO_TRIAL=y
+build-on/config/sdkconfig.h:404:#define CONFIG_STACKCHAN_AI_AUDIO_TRIAL 1
+build-off/config/sdkconfig.h: (no such define)
+App image: build-on/stack-chan.bin, 3777808 bytes
+  sha256 1bda0b3a98ce4e2a5e44786a87cec6bca0ac2291465280f5e4a45c9d7dcede68
+Merged 16 MB image sha256:
+  251eb220f85923def4a82f89f29abf864345bda4619c02c53fb1c6217c0df487
+
+## Static footprint (idf_size.py)
+Both configurations: Flash Code 2676904; Flash Data 932732;
+DIRAM 207868 / 341760 (60.82%); identical section sizes.
+The additional descriptor buffers are runtime internal DMA allocations,
+so they do not appear in the static map.
+
+## Generated code check (dma_desc_num field in i2s_chan_config_t)
+build-off: movi.n a3, 6 ; s32i a3, a1, 172
+build-on : movi.n a9, 8 ; s32i a9, a1, 172
+See objdump-dma-desc.txt.
