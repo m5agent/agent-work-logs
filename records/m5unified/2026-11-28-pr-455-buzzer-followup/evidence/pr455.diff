@@ -1,0 +1,29 @@
+diff --git a/examples/Test/build_test/main/main.cpp b/examples/Test/build_test/main/main.cpp
+index d96daee..c8dc33c 100644
+--- a/examples/Test/build_test/main/main.cpp
++++ b/examples/Test/build_test/main/main.cpp
+@@ -30,7 +30,7 @@ static void test_buzzer(void)
+ {
+   if (!M5.Buzzer.isEnabled()) { return; }
+   M5.Buzzer.tone(2000, 50);
+-  while (M5.Buzzer.isPlaying()) { M5.update(); M5.delay(1); }
++  for (int i = 0; i < 200 && M5.Buzzer.isPlaying(); ++i) { M5.update(); M5.delay(1); }
+   M5.Buzzer.tone(1000);
+   M5.Buzzer.stop();
+ }
+diff --git a/src/utility/Buzzer_Class.hpp b/src/utility/Buzzer_Class.hpp
+index 35c75b8..2966f8b 100644
+--- a/src/utility/Buzzer_Class.hpp
++++ b/src/utility/Buzzer_Class.hpp
+@@ -45,8 +45,9 @@ namespace m5
+     /// stop(). On CoreMatrix a finite tone stays true until M5.update() stops it.
+     bool isPlaying() const;
+ 
+-    /// Whether this board has a Buzzer output: CoreMatrix PWM, or the Speaker
+-    /// output configured by M5.begin() (following later Speaker settings).
++    /// Whether this board has a Buzzer output: the Speaker output configured by
++    /// M5.begin() (following later Speaker settings). CoreMatrix always uses its
++    /// PWM buzzer, even when a Speaker output is configured.
+     bool isEnabled() const;
+ 
+   private:

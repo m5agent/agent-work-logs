@@ -1,0 +1,19 @@
+# ESP-IDF 6.1 esp32c61 build of examples/Test/build_test (PR #455 head b05f46e)
+
+- Date: 2026-11-28 (UTC)
+- Source: m5stack/M5Unified @ b05f46ecaa8913ed4f067e5f5e435189b928d568
+- M5GFX: m5stack/M5GFX develop @ 603092aab60e32fadd1d73abd472068a35e189e8 (0.3.0)
+- Toolchain: ESP-IDF 6.1, target esp32c61
+- Command (from examples/Test/build_test):
+    idf.py set-target esp32c61
+    idf.py build
+  M5GFX_PATH points at the M5GFX component checkout.
+- Result: PASS
+- Artifact: build/M5Unified-build-test.bin, 361104 bytes (0x58290)
+  SHA-256 f8bafe352cc5feffdf27b36d06388b3964d836ab33fc84bcd70bfd3b82377a87
+- Config observed in sdkconfig:
+    CONFIG_IDF_TARGET="esp32c61"
+    CONFIG_FREERTOS_HZ=100
+- CI equivalent: GitHub Actions job "esp32c61 (IDF 6.1)" = pass
+- Note: the build test is compiled but not executed by CI; runtime evidence for the
+  Speaker backend comes from the cardputer-adv virtual device (see report.md).

@@ -18,8 +18,8 @@
 
 | 日期 | 对象 | 主题 | 结果 | 记录 |
 | --- | --- | --- | --- | --- |
-| 2026-11-27 | M5GFX | #451 C6 上 M5GFX 初始化后 Arduino SPI 以 2 倍请求时钟运行 | `PARTIAL`（virtual-device validation：寄存器级因果链复现，8→16 MHz / 2→4 MHz 由分频换算；SCLK 波形与真机 NOT RUN） | [查看](m5gfx/2026-11-27-issue451-c6-spi-clock/) |
 | 2026-11-28 | ESP Emulator | Device Service default migration qualification | PARTIAL (virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-28-device-service-defaults-qualification/) |
+| 2026-11-27 | M5GFX | #451 C6 上 M5GFX 初始化后 Arduino SPI 以 2 倍请求时钟运行 | `PARTIAL`（virtual-device validation：寄存器级因果链复现，8→16 MHz / 2→4 MHz 由分频换算；SCLK 波形与真机 NOT RUN） | [查看](m5gfx/2026-11-27-issue451-c6-spi-clock/) |
 | 2026-11-27 | ESP Emulator | Device Service board state and routing candidate | PARTIAL (virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-device-state-routing-candidate/) |
 | 2026-11-27 | ESP Emulator | esp32sim browser WASM board parity | PARTIAL (browser-WASM virtual-device validation) | [查看](m5stack-esp-emulator/2026-11-27-esp32sim-browser-round2/) |
 | 2026-11-27 | esp32sim | Runtime benchmark follow-up | PARTIAL (native Device Service, CLI and WASM ABI virtual-device validation) | [查看](esp32sim/2026-11-27-runtime-gaps/) |

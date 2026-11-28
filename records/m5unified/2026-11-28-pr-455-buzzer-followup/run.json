@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "kind": "pr_review",
+  "overall_status": "PARTIAL",
+  "title": "M5Unified #455: clarify Buzzer isEnabled() and bound the build test wait",
+  "source": {
+    "issue": "https://github.com/m5stack/M5Unified/pull/455",
+    "pull_request": "https://github.com/m5stack/M5Unified/pull/455",
+    "repository": "m5stack/M5Unified",
+    "base_commit": "48799c2a56a6252bb51adf94782658563c25393b",
+    "head_commit": "b05f46ecaa8913ed4f067e5f5e435189b928d568"
+  },
+  "hardware": {},
+  "firmware": {
+    "m5gfx_commit": "603092aab60e32fadd1d73abd472068a35e189e8",
+    "m5gfx_version": "0.3.0",
+    "idf_probe_image_sha256": "877270010ede25464d93d2e833af11e39e63c161e349357625b204839c80eb77",
+    "instrumented_build_test_image_sha256": "fb3b724604f00d156cf7b764b4b4c56a94a11c0d7d2b1b950c737b6e4067b7a1"
+  },
+  "execution": {
+    "environment": "macOS arm64; ESP-IDF 6.1 (esp32c61 + esp32s3); arduino-cli 1.6.0 with esp32:esp32 3.3.13; Device Service cardputer-adv profile",
+    "session_id": "35ddf89cad004795b5f48b7ff88c5caf"
+  },
+  "checks": [
+    {
+      "name": "idf_esp32c61_build_test_build",
+      "status": "PASS",
+      "detail": "examples/Test/build_test built for esp32c61 with ESP-IDF 6.1; app 0x58290 bytes; CONFIG_FREERTOS_HZ=100"
+    },
+    {
+      "name": "github_ci",
+      "status": "PASS",
+      "detail": "37/37 checks pass, including esp32c61 (IDF 6.1), Arduino 3.0.7/3.2.1/3.3.13/4.0.0 matrix and SourceCheck"
+    },
+    {
+      "name": "virtual_device_bounded_loop",
+      "status": "PASS",
+      "detail": "IDF probe on cardputer-adv: loop_i=200 dt_ms=0 playing=1, delay20_ms=0; bound exits without hang, tone still playing"
+    },
+    {
+      "name": "virtual_device_build_test_body",
+      "status": "PASS",
+      "detail": "instrumented build_test copy on cardputer-adv: before/after test_buzzer and all steps reach P455 DONE, board=24 buzzer=1"
+    },
+    {
+      "name": "corematrix_pwm_runtime",
+      "status": "NOT RUN",
+      "detail": "no C61/CoreMatrix profile in the local Device Service"
+    },
+    {
+      "name": "physical_buzzer_audio",
+      "status": "NOT RUN",
+      "detail": "no hardware validation in this review"
+    },
+    {
+      "name": "stock_build_test_serial_output",
+      "status": "NOT RUN",
+      "detail": "stock example logs only via M5_LOGI at the end; no visible serial line in the capture window, so the instrumented copy is used instead"
+    }
+  ],
+  "evidence": [
+    "evidence/pr455.diff",
+    "evidence/c61-build.txt",
+    "evidence/idf-probe-serial.txt",
+    "evidence/build-test-probe-serial.txt",
+    "evidence/ci.txt"
+  ],
+  "notes": [
+    "Non-blocking: under ESP-IDF CONFIG_FREERTOS_HZ=100, M5.delay(1) is vTaskDelay(0), so the wait is 200 update() calls rather than about 200 ms; a 50 ms tone is still playing when the loop exits.",
+    "isEnabled() comment verified against the C61 attach path and tone() ordering: accurate.",
+    "The 200-iteration bound covers the case where both stop writes fail and _ioe1_playing would otherwise stay true forever."
+  ]
+}
