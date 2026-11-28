@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "kind": "firmware_review_attribution",
+  "overall_status": "REVIEW",
+  "title": "Star Touchpad 0.9.10 在 StopWatch 上 60 s 全黑帧归因（issue #293 补充复现）",
+  "source": {
+    "issue": "https://github.com/m5agent/m5stack-esp-emulator/issues/293",
+    "pull_request": "",
+    "repository": "m5agent/m5stack-esp-emulator",
+    "base_commit": "74ee6cb00"
+  },
+  "hardware": {},
+  "firmware": {
+    "name": "Star Touchpad",
+    "version": "0.9.10",
+    "m5burner_version_id": "2126610489361084417",
+    "file_name": "Star-Touchpad-0.9.10-m5burner.bin",
+    "bytes": 1320608,
+    "sha256": "23b62091f0eb8ebc6dd6604284310fb69b2fb11d5a5238e2c14b0d504eb0a036",
+    "device_id": "stopwatch",
+    "device_code": "STOPWATCH",
+    "runtime": "qemu",
+    "composed_image_sha256": "921b12b686d99c1eaed44047be4e287e9c49a865d5a94fec2f54d7ec511645e9"
+  },
+  "execution": {
+    "environment": "macOS arm64; read-only attribution of an existing firmware-review job; Device Service native QEMU (stopwatch)",
+    "task_id": "job-58f87aaff47d",
+    "session_id": "3a1a39720bb840f4b5637306820917be",
+    "review_lane": "SIM_PARTIAL",
+    "review_status": "manual_review",
+    "error_code": "E_NO_FRAME",
+    "observation_seconds": 60.1528
+  },
+  "checks": [
+    {
+      "name": "firmware_identity",
+      "level": "artifact",
+      "status": "PASS",
+      "detail": "1320608 bytes and SHA-256 23b62091… match the declared artifact"
+    },
+    {
+      "name": "image_and_partition_parse",
+      "level": "artifact",
+      "status": "PASS",
+      "detail": "16 MiB merged image; bootloader, partition table and ota_0 valid; ota_1 empty; partitions fit; no secure boot"
+    },
+    {
+      "name": "virtual_flash",
+      "level": "transport",
+      "status": "PASS",
+      "detail": "session-isolated cache transport, flash verified; 0 changed bytes after the 60 s window"
+    },
+    {
+      "name": "guest_boot_and_application",
+      "level": "device_response",
+      "status": "PARTIAL",
+      "detail": "session running for 60.15 s but serial frozen at 226 B ending at entry 0x403c8920; no IDF banner, no app log"
+    },
+    {
+      "name": "frame_readiness",
+      "level": "visual_or_physical",
+      "status": "FAIL",
+      "detail": "12 samples over 60 s all 711 B 466x466 black PNG sha256 ec5a0018…; ready_timeout"
+    },
+    {
+      "name": "guest_crash_or_reset",
+      "level": "device_response",
+      "status": "PASS",
+      "detail": "no_evidence: panic 0, reboot 0, watchdog 0, no core dump, application_load_count 0"
+    },
+    {
+      "name": "qemu_host_abort",
+      "level": "host",
+      "status": "PASS",
+      "detail": "qemu stderr only 'Adding SPI flash device'; no assertion or illegal instruction"
+    },
+    {
+      "name": "input_path_reached",
+      "level": "device_response",
+      "status": "FAIL",
+      "detail": "5 inputs accepted, 0 frame changes; guest never reached UI input handling"
+    },
+    {
+      "name": "board_components_present",
+      "level": "model",
+      "status": "PASS",
+      "detail": "PM1, IOE and BMI270 present with values; panel framebuffer readable"
+    },
+    {
+      "name": "ble_rwip_register_model",
+      "level": "model",
+      "status": "FAIL",
+      "detail": "0x60042000 RWIP handshake outside the 0x6002f000..0x60037fff PHY stub and not covered by patch 0015; reads 0"
+    },
+    {
+      "name": "independent_reproduction",
+      "level": "review",
+      "status": "PASS",
+      "detail": "prior job-a709b2ca44b7 produced byte-identical serial 20ffb092… and frame ec5a0018… under a different M5Burner version record"
+    },
+    {
+      "name": "duplicate_issue_check",
+      "level": "review",
+      "status": "PASS",
+      "detail": "searches for Star Touchpad / 0x60042000 / E_NO_FRAME stopwatch matched only open issue 293; no new issue created"
+    },
+    {
+      "name": "cpu_pc_sampling",
+      "level": "review",
+      "status": "NOT RUN",
+      "detail": "this job's evidence carries no CPU PC samples; 0x60042000 loop location inherited from issue 293"
+    },
+    {
+      "name": "elf_symbolization",
+      "level": "review",
+      "status": "NOT RUN",
+      "detail": "no ELF uploaded with the review job"
+    },
+    {
+      "name": "physical_stopwatch_ble",
+      "level": "visual_or_physical",
+      "status": "NOT RUN",
+      "detail": "real StopWatch boot, BLE pairing and HID data plane not exercised"
+    },
+    {
+      "name": "model_fix_and_regression",
+      "level": "delivery",
+      "status": "NOT RUN",
+      "detail": "no emulator code changed, nothing pushed to the emulator repository, no issue closed"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/summary.json",
+      "bytes": 4204,
+      "sha256": "d380ac0823d0c863b8c6de23f8ce89477a0e3ddaa16e652f9d48513c89026891",
+      "note": "derived summary; sanitized device MAC, pid, worker id, host paths and endpoints"
+    },
+    {
+      "path": "evidence/serial.log",
+      "bytes": 226,
+      "sha256": "20ffb092379320c9fe701d3c27d48cb07ea7a9c7e66b94ec8a7a4038123ac3e8"
+    },
+    {
+      "path": "evidence/black-frame.png",
+      "bytes": 711,
+      "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81"
+    },
+    {
+      "path": "evidence/emulator-failure.json",
+      "bytes": 296,
+      "sha256": "607ae9ca808978ee2e80f93f137034726c30f535e7f987ddbe28b5339f3c2607"
+    }
+  ],
+  "notes": [
+    "Failure is attributed to the missing BLE RWIP handshake model for StopWatch, not to the firmware or the merged image.",
+    "The same BIN was submitted under a second M5Burner version record and reproduced byte-identical serial and frame hashes.",
+    "Issue 293 already tracks this exact firmware SHA; this round only adds independently reproduced evidence.",
+    "QEMU backend has been frozen since 2026-11-26 and accepts blocking fixes only; this is a boot-blocking gap.",
+    "No emulator code was changed, nothing was pushed to the emulator repository, and no issue was closed."
+  ]
+}

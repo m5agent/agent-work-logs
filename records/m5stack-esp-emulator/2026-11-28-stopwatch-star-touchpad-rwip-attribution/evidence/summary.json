@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "source": {
+    "derived_from": "internal firmware-review job evidence directory",
+    "task_id": "job-58f87aaff47d",
+    "session_id": "3a1a39720bb840f4b5637306820917be",
+    "sanitization": "removed device MAC, runtime pid, worker id, host paths and internal endpoints; all behavior fields kept"
+  },
+  "firmware": {
+    "name": "Star Touchpad",
+    "version": "0.9.10",
+    "m5burner_version_id": "2126610489361084417",
+    "file_name": "Star-Touchpad-0.9.10-m5burner.bin",
+    "bytes": 1320608,
+    "sha256": "23b62091f0eb8ebc6dd6604284310fb69b2fb11d5a5238e2c14b0d504eb0a036",
+    "composed_image_sha256": "921b12b686d99c1eaed44047be4e287e9c49a865d5a94fec2f54d7ec511645e9",
+    "app_descriptor": {
+      "project_name": "StopWatch-ZeroTouchpad",
+      "version": "0.9.10",
+      "idf_version": "v5.5.4"
+    }
+  },
+  "device": {
+    "device_id": "stopwatch",
+    "sku": "C152",
+    "chip": "ESP32-S3R8",
+    "flash_bytes": 16777216,
+    "display": "CO5300 466x466 circle"
+  },
+  "review": {
+    "lane": "SIM_PARTIAL",
+    "status": "manual_review",
+    "error_code": "E_NO_FRAME",
+    "runtime": "qemu",
+    "observation_seconds": 60.1528,
+    "final_session_state": "running",
+    "readiness": {
+      "ready": false,
+      "phase": "application_readiness",
+      "error": "ready_timeout (HTTP 408)"
+    },
+    "execution_plan": {
+      "touch_required": false,
+      "button_required": true,
+      "required_buttons": ["a", "b"]
+    },
+    "image_checks": {
+      "bootloader_valid": true,
+      "partition_table_valid": true,
+      "ota_0_valid": true,
+      "ota_1_present": false,
+      "partitions_fit": true,
+      "secure_boot_v2": "not-found",
+      "static_findings": 0
+    },
+    "serial": {
+      "bytes": 226,
+      "sha256": "20ffb092379320c9fe701d3c27d48cb07ea7a9c7e66b94ec8a7a4038123ac3e8",
+      "last_line": "entry 0x403c8920",
+      "idf_banner": false,
+      "frozen_across_window": true
+    },
+    "frame": {
+      "bytes": 711,
+      "width": 466,
+      "height": 466,
+      "sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+      "samples": 12,
+      "changed": false
+    },
+    "crash_diagnostics": {
+      "status": "no_evidence",
+      "panic_count": 0,
+      "reboot_requests": 0,
+      "rom_banners": 1,
+      "idf_banners": 0,
+      "application_load_count": 0,
+      "task_watchdog_reports": 0,
+      "core_dump": "not_observed"
+    },
+    "qemu_stderr": "Adding SPI flash device",
+    "qom_diff": {
+      "changed": {
+        "rx8130/children/unix-time/value": {
+          "delta_seconds": 71
+        }
+      },
+      "added": 0,
+      "removed": 0
+    },
+    "flash_diff": {
+      "size": 16777216,
+      "changed_bytes": 0,
+      "ranges": []
+    },
+    "interactions": {
+      "accepted": 5,
+      "changed": 0,
+      "items": ["touch tap", "drag", "key a", "key b", "hold a 2.0 s"],
+      "touch_status": "PARTIAL",
+      "button_status": "PARTIAL",
+      "semantic_verification": "NOT RUN"
+    }
+  },
+  "prior_run": {
+    "task_id": "job-a709b2ca44b7",
+    "m5burner_version_id": "2126606902513938434",
+    "firmware_sha256": "23b62091f0eb8ebc6dd6604284310fb69b2fb11d5a5238e2c14b0d504eb0a036",
+    "serial_sha256": "20ffb092379320c9fe701d3c27d48cb07ea7a9c7e66b94ec8a7a4038123ac3e8",
+    "frame_sha256": "ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81",
+    "error_code": "E_NO_FRAME",
+    "byte_identical_serial_and_frame": true
+  },
+  "attribution": {
+    "class": "simulator_runtime_model_gap",
+    "stage": "guest application early boot, BLE RWIP controller handshake",
+    "suspected_register": "0x60042000",
+    "suspected_poll_pc": "0x4207cf33",
+    "source_issue": 293,
+    "reproduced_independently": true,
+    "new_issue_created": false,
+    "evidence_grade": [
+      "virtual-device validation",
+      "code-level verification"
+    ]
+  },
+  "limits": [
+    "no CPU PC sampling in this job (crash-diagnostics carries no cpus array)",
+    "no matched ELF, so no symbolization",
+    "physical StopWatch and BLE HID data plane NOT RUN",
+    "esp32sim same-BIN comparison NOT RUN in this round (documented previously in issue 293)",
+    "model fix and post-fix regression NOT RUN"
+  ]
+}
