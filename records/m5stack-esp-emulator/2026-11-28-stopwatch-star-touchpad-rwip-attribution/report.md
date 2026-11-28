@@ -67,7 +67,7 @@
 | --- | --- | --- |
 | 镜像/分区解析 | 排除 | bootloader/分区表/app 均 valid；flash 契约匹配；无 secure boot 干扰 |
 | QEMU 主机断言/abort | 排除 | QEMU stderr 无异常；会话持续 `running`；进程未退出 |
-| 启动竞态 | 排除 | 12 次采样跨 60 s，串口与帧哈希均不变；RTC 前进 71 s |
+| 启动竞态 | 排除 | 13 次采样跨 60 s，串口与帧哈希均不变；RTC 前进 71 s |
 | 固件自身崩溃/复位 | 排除 | panic 0、reboot 0、watchdog 0、无 core dump、flash 未写 |
 | 板级外设缺失（PM1/IOE/BMI270/面板） | 排除 | device-state 中 PM1、IOE、BMI270 均在位有值；面板 466×466 可取帧 |
 | 模型/外设寄存器缺失（BLE RWIP 握手） | **命中** | 串口停在应用早期、无帧；#293 已用 QMP 定位 CPU0 在 `0x60042000` 轮询 bit15，该地址未建模、读回 0 |

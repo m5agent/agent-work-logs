@@ -14,7 +14,7 @@
 
 - guest 已越过 ROM 与二级 bootloader，会话 60.15 s 内始终 `state=running`，没有 panic、
   没有重启、没有 core dump；QEMU stderr 只有 `Adding SPI flash device`，没有 host 断言；
-- 但串口固定 226 B，止于 `entry 0x403c8920`，没有 IDF banner、没有应用日志；12 次采样
+- 但串口固定 226 B，止于 `entry 0x403c8920`，没有 IDF banner、没有应用日志；13 次采样
   帧始终是 711 B 的单色黑帧（SHA-256 前缀 `ec5a0018…`）；
 - 同一 BIN 的上一轮审查（`job-a709b2ca44b7`，不同 M5Burner 版本记录）产生**逐字节相同**的
   串口（`20ffb092…`）与帧（`ec5a0018…`）；issue #293 已在该固件上用 QMP 采样定位到
@@ -39,7 +39,7 @@
 - 串口：226 B，SHA-256 `20ffb092379320c9fe701d3c27d48cb07ea7a9c7e66b94ec8a7a4038123ac3e8`，
   末行 `entry 0x403c8920`；从首个采样（0.15 s）到 60 s 偏移未再增长。
 - 帧：466×466 RGB PNG，711 B，SHA-256
-  `ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81`，12 次采样不变。
+  `ec5a0018ce3a1ba0992c306981d1c78f2b8c1d9520cac96dbde1db141fbf2a81`，13 次采样不变。
 - crash-diagnostics：`status=no_evidence`，panic 计数 0、重启请求 0、IDF banner 0、
   application load 0、无 core dump。
 - QOM diff：仅 `rx8130/children/unix-time/value` 前进 71 s（板级 RTC 存活），无设备增删。
